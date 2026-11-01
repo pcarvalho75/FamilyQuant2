@@ -20,6 +20,7 @@ public partial class MainWindow
 
         public string CurrentContextHelp()
         {
+            if (owner.IsQuantifyVisible) return owner.QuantifyHelpText();
             // The home screen is the hub, not a step of the sequence. It names the project so the through
             // line is stated even here, where none is open.
             if (owner.home != null)
@@ -104,6 +105,16 @@ public partial class MainWindow
 
         public void MenuItemHowToRead_Click(object sender, RoutedEventArgs e)
         {
+            if (owner.IsQuantifyVisible)
+            {
+                TextReportWindow.Show("Quantify: inputs and results", owner.QuantifyHelpText(), owner);
+                return;
+            }
+            if (owner.usearch != null)
+            {
+                owner.usearch.ShowHelp();
+                return;
+            }
             // Two workflows, two pages. Neither page's text applies to the other's screen, so the menu
             // shows the one belonging to what is actually on display.
             if (owner.dnc != null)
