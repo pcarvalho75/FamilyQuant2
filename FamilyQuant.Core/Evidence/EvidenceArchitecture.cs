@@ -14,6 +14,10 @@ namespace FamilyQuant.Evidence
         public IReadOnlyList<string> Domains { get; init; } = Array.Empty<string>();
         public IReadOnlyList<int> ProteinIndices { get; init; } = Array.Empty<int>();
         public int ReviewedProteins { get; init; }
+
+        /// <summary>Members with no domain call placed here because their length and cysteines fall inside
+        /// the ranges of this combination's complete reviewed members, and of no other combination's.</summary>
+        public IReadOnlyList<int> InferredProteinIndices { get; init; } = Array.Empty<int>();
     }
 
     public sealed class EvidenceArchitectureProposal
@@ -33,8 +37,15 @@ namespace FamilyQuant.Evidence
 
     public static class EvidenceArchitecture
     {
+        /// <summary>
+        /// The architecture groups of each proposed family. A complete member with no domain call joins the one
+        /// domain combination whose complete reviewed members (the file's and the panel's, at least
+        /// <paramref name="minimumMembers"/>) span its length and its cysteine count; when none or several do,
+        /// it stays among the members with no domain calls. A fragment is never placed this way: being short is
+        /// what a fragment is.
+        /// </summary>
         public static IReadOnlyList<EvidenceArchitectureProposal> Suggest(IReadOnlyList<FastaItemExtended> proteins,
-            EvidenceProposal proposal)
+            EvidenceProposal proposal, ReferencePanel? panel = null, int minimumMembers = CoherenceCheck.DefaultMinimumMembers)
         {
             ArgumentNullException.ThrowIfNull(proteins);
             ArgumentNullException.ThrowIfNull(proposal);
@@ -60,16 +71,32 @@ namespace FamilyQuant.Evidence
                             .Select(d => d.Name).Distinct(StringComparer.Ordinal));
                     }
                 }
+                var ranges = LearnRanges(family.Key, proteins, panel, minimumMembers, domainNames);
+                var inferred = new HashSet<int>();
+                string KeyOf(int index)
+                {
+                    FastaItemExtended protein = proteins[index];
+                    string own = JsonSerializer.Serialize(Domains(protein.Evidence));
+                    if (Domains(protein.Evidence).Length > 0 || protein.Evidence?.Fragment != false || !MotifCheck.IsComplete(protein))
+                        return own;
+                    int length = (protein.Sequence ?? string.Empty).Length, cysteines = CoherenceCheck.Cysteines(protein.Sequence ?? string.Empty);
+                    List<string> fits = ranges.Where(r => length >= r.Value.MinLength && length <= r.Value.MaxLength
+                        && cysteines >= r.Value.MinCysteines && cysteines <= r.Value.MaxCysteines).Select(r => r.Key).ToList();
+                    if (fits.Count != 1) return own;
+                    inferred.Add(index);
+                    return fits[0];
+                }
                 // Cross-references give domain presence, so the stable key describes a combination.
                 // No positional order is inferred from the provider's list order.
-                var combinations = members.GroupBy(i => JsonSerializer.Serialize(Domains(proteins[i].Evidence)), StringComparer.Ordinal)
+                var combinations = members.GroupBy(KeyOf, StringComparer.Ordinal)
                     .OrderBy(g => g.Key, StringComparer.Ordinal).ToList();
-                string DomainName(string domain) => domainNames[domain].GroupBy(n => n, StringComparer.Ordinal)
+                string DomainName(string domain) => (domainNames.TryGetValue(domain, out List<string>? known) ? known : new List<string>())
+                    .GroupBy(n => n, StringComparer.Ordinal)
                     .OrderByDescending(g => g.Count()).ThenBy(g => g.Key, StringComparer.Ordinal)
                     .Select(g => g.Key).FirstOrDefault() ?? domain;
                 var groupNames = combinations.ToDictionary(g => g.Key, g =>
                 {
-                    string[] domains = Domains(proteins[g.First()].Evidence);
+                    string[] domains = DomainsOfKey(g.Key);
                     return domains.Length == 0 ? family.Key + " (no domain calls)" : string.Join(" + ", domains.Select(DomainName));
                 }, StringComparer.Ordinal);
                 var ambiguousNames = groupNames.Values.GroupBy(n => n, StringComparer.OrdinalIgnoreCase)
@@ -86,7 +113,7 @@ namespace FamilyQuant.Evidence
                 }
                 List<EvidenceArchitectureGroup> groups = combinations.Select(group =>
                     {
-                        string[] domains = Domains(proteins[group.First()].Evidence);
+                        string[] domains = DomainsOfKey(group.Key);
                         string dominant = domains.OrderByDescending(d => reviewedSupport.GetValueOrDefault(d))
                             .ThenByDescending(d => allSupport.GetValueOrDefault(d)).ThenBy(d => d, StringComparer.Ordinal).FirstOrDefault() ?? string.Empty;
                         return new EvidenceArchitectureGroup
@@ -94,6 +121,7 @@ namespace FamilyQuant.Evidence
                             Key = group.Key, SuggestedName = groupNames[group.Key], DominantDomainAccession = dominant,
                             Domains = domains, ProteinIndices = group.ToArray(),
                             ReviewedProteins = group.Count(i => proteins[i].Evidence?.Reviewed == true),
+                            InferredProteinIndices = group.Where(inferred.Contains).ToArray(),
                         };
                     }).ToList();
                 result.Add(new EvidenceArchitectureProposal
@@ -102,6 +130,46 @@ namespace FamilyQuant.Evidence
                 });
             }
             return result;
+        }
+
+        private static string[] DomainsOfKey(string key) => JsonSerializer.Deserialize<string[]>(key) ?? Array.Empty<string>();
+
+        /// <summary>Length and cysteine ranges of each domain combination among the family's complete reviewed
+        /// members (the file's targets and the panel's entries, each accession once), for combinations with at
+        /// least <paramref name="minimumMembers"/> such members. Their domain names are added to
+        /// <paramref name="names"/>, so a combination only the panel shows can still be named.</summary>
+        private static Dictionary<string, (int MinLength, int MaxLength, int MinCysteines, int MaxCysteines)> LearnRanges(
+            string family, IReadOnlyList<FastaItemExtended> proteins, ReferencePanel? panel, int minimumMembers,
+            Dictionary<string, List<string>> names)
+        {
+            var reviewed = new List<(string Sequence, ProteinEvidence Evidence)>();
+            var seen = new HashSet<string>(StringComparer.Ordinal);
+            foreach (FastaItemExtended protein in proteins)
+            {
+                if (NearestReviewed.IsDecoy(protein) || protein.Evidence?.Reviewed != true || string.IsNullOrEmpty(protein.Sequence)) continue;
+                if ((protein.SequenceIdentifier ?? string.Empty).StartsWith(SequenceLabels.ContaminantPrefix, StringComparison.Ordinal)) continue;
+                if (seen.Add(NearestReviewed.EntryAccession(protein.SequenceIdentifier))) reviewed.Add((protein.Sequence, protein.Evidence));
+            }
+            foreach (PanelEntry entry in panel?.Entries ?? new List<PanelEntry>())
+                if (entry.Sequence.Length > 0 && seen.Add(entry.Accession)) reviewed.Add((entry.Sequence, entry.Evidence));
+
+            var ranges = new Dictionary<string, (int, int, int, int)>(StringComparer.Ordinal);
+            foreach (var combination in reviewed
+                .Where(m => m.Evidence.Fragment == false && Domains(m.Evidence).Length > 0
+                    && ReferencePanelFetcher.FamiliesOf(m.Evidence).Contains(family, StringComparer.OrdinalIgnoreCase))
+                .GroupBy(m => JsonSerializer.Serialize(Domains(m.Evidence)), StringComparer.Ordinal)
+                .OrderBy(g => g.Key, StringComparer.Ordinal))
+            {
+                if (combination.Count() < minimumMembers) continue;
+                ranges[combination.Key] = (combination.Min(m => m.Sequence.Length), combination.Max(m => m.Sequence.Length),
+                    combination.Min(m => CoherenceCheck.Cysteines(m.Sequence)), combination.Max(m => CoherenceCheck.Cysteines(m.Sequence)));
+                foreach (EvidenceDomain domain in combination.SelectMany(m => m.Evidence.Pfam).Where(d => !string.IsNullOrWhiteSpace(d.Name)))
+                {
+                    if (!names.TryGetValue(domain.Accession, out List<string>? list)) names[domain.Accession] = list = new List<string>();
+                    if (list.Count == 0) list.Add(domain.Name);
+                }
+            }
+            return ranges;
         }
 
         private static string[] Domains(ProteinEvidence? evidence) => evidence?.Pfam == null ? Array.Empty<string>()

@@ -183,9 +183,23 @@ namespace FamilyQuant.Tests
                 return failed == 0 ? 0 : 1;
             }
 
+            if (args.Contains(ReferencePanelCheck.RefreshArgument))
+            {
+                ReferencePanelCheck.Refresh(args, Check);
+                Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
+                return failed == 0 ? 0 : 1;
+            }
+
             if (args.Contains(ReferencePanelCheck.Argument))
             {
                 ReferencePanelCheck.Run(args, Check);
+                Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
+                return failed == 0 ? 0 : 1;
+            }
+
+            if (args.Contains(EvidenceOperationsCheck.Argument))
+            {
+                EvidenceOperationsCheck.Run(args, Check);
                 Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
                 return failed == 0 ? 0 : 1;
             }
@@ -698,9 +712,11 @@ namespace FamilyQuant.Tests
             Section("Nearest reviewed protein and the outside panel - never itself, gated, deterministic, offline");
             NearestReviewedTests(workDir);
             ReferencePanelTests(workDir);
+            EvidenceOperationTests();
 
             Section("Coherence check - what the reviewed members of a family ever show");
             CoherenceCheckTests();
+            E16RuleTests();
 
             Section("Motif check - the user's patterns counted per family on complete entries");
             MotifCheckTests(workDir);

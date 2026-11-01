@@ -50,6 +50,19 @@ namespace FamilyQuant.Tests
                     EvidenceClassifier.Propose(items, new EvidenceClassificationOptions { ScopeTerms = scope },
                         search.ByQuery(), NearestReviewed.ReferenceEvidence(file)),
                     items, CoherenceCheck.Learn(file));
+                // E6's split with Ana's default (A4): the disintegrin group of the SVMP family is kept apart.
+                IReadOnlyList<EvidenceArchitectureProposal> architecture = EvidenceArchitecture.Suggest(items, proposal, file.EvidenceSource?.ReferencePanel);
+                var inferredByGroup = architecture.SelectMany(a => a.Groups.Where(g => g.InferredProteinIndices.Count > 0)
+                        .Select(g => (Name: a.Family + ": " + g.SuggestedName, Count: g.InferredProteinIndices.Count)))
+                    .OrderBy(x => x.Name, StringComparer.Ordinal).ToDictionary(x => x.Name, x => x.Count);
+                var tiers = proposal.Proteins.GroupBy(p => p.Tier.ToString() + (p.Family.Length > 0 && !p.SuggestedSelected ? ", flagged" : ""))
+                    .OrderBy(g => g.Key, StringComparer.Ordinal).ToDictionary(g => g.Key, g => g.Count());
+                var disintegrinSplit = architecture
+                    .Where(a => string.Equals(a.Family, PythonLabel["SVMP"], StringComparison.OrdinalIgnoreCase))
+                    .SelectMany(a => a.Groups).Where(g => g.SuggestedName == "Disintegrin")
+                    .SelectMany(g => g.ProteinIndices).ToHashSet();
+                string Placed(EvidenceProteinProposal p) => p.Family.Length == 0 || !p.SuggestedSelected ? ""
+                    : disintegrinSplit.Contains(p.ProteinIndex) ? PythonLabel["Disintegrin"] : p.Family;
                 var leftOut = LeftOutList.Build(items, proposal).GroupBy(r => r.Identifier, StringComparer.Ordinal)
                     .ToDictionary(g => g.Key, g => string.Join(" | ", g.Select(r => r.Family + " by " + r.MarkerName)), StringComparer.Ordinal);
                 var python = File.ReadLines(classes).Skip(1).Where(l => l.Length > 0).Select(l => l.Split('\t'))
@@ -66,7 +79,7 @@ namespace FamilyQuant.Tests
                     FastaItemExtended item = items[p.ProteinIndex];
                     python.TryGetValue(p.Identifier, out var py);
                     string theirs = py.Label == null ? "" : PythonLabel[py.Label];
-                    string mine = p.Family.Length > 0 && p.SuggestedSelected ? p.Family : "";
+                    string mine = Placed(p);
                     bool inScopeOfComparison = theirs.Length > 0 || pythonFamilies.Contains(p.Family);
                     if (!inScopeOfComparison) continue;
                     bool reviewed = item.Evidence?.Reviewed == true;
@@ -84,7 +97,7 @@ namespace FamilyQuant.Tests
                     NearestNeighbour? nb = p.Neighbour;
                     ProteinEvidence? nbEvidence = nb == null ? null : referenceEvidence(nb);
                     bool? nbInScope = nbEvidence == null ? null : EvidenceClassifier.IsInScope(nbEvidence, scope);
-                    string verdict = Verdict(p, py.Label, item, kind);
+                    string verdict = Verdict(p, py.Label, item, kind, disintegrinSplit.Contains(p.ProteinIndex), nbInScope);
                     verdicts[verdict] = verdicts.TryGetValue(verdict, out int v) ? v + 1 : 1;
                     rows.Add(new[]
                     {
@@ -101,8 +114,7 @@ namespace FamilyQuant.Tests
                 var csv = new StringBuilder("Verdict,Locus,Kind,PythonClass,PythonWhy,ProgramFamily,ProgramTier,ProgramTicked,Reviewed,ProgramReason,ProgramFlags,Neighbour,NeighbourInScope,LeftOutUnder,Name,Length\r\n");
                 foreach (string[] r in rows) csv.Append(string.Join(",", r.Select(Field))).Append("\r\n");
                 File.WriteAllText(Path.Combine(outDir, "e14-disagreements.csv"), csv.ToString());
-                // The 256 reviewed SVMP and disintegrin entries of classes.tsv, with E6's default split emulated:
-                // a member of the SVMP family whose only domain is the disintegrin domain is offered apart.
+                // The 256 reviewed SVMP and disintegrin entries of classes.tsv, with E6's split as above.
                 var byId = items.ToDictionary(i => i.SequenceIdentifier, StringComparer.Ordinal);
                 var rowByLocus = rows.ToDictionary(r => r[1], StringComparer.Ordinal);
                 var reviewedVenom = File.ReadLines(svmpClasses).Skip(1).Where(l => l.Length > 0).Select(l => l.Split('\t'))
@@ -111,11 +123,9 @@ namespace FamilyQuant.Tests
                 foreach (var (locus, pyClass) in reviewedVenom)
                 {
                     EvidenceProteinProposal p = proposal.Proteins.Single(x => x.Identifier == locus);
-                    string family = p.Family.Length > 0 && p.SuggestedSelected ? p.Family : "";
-                    var domains = byId[locus].Evidence?.Pfam.Select(d => d.Name).Distinct().ToList() ?? new List<string>();
-                    string programClass = string.Equals(family, PythonLabel["Disintegrin"], StringComparison.OrdinalIgnoreCase)
-                            || string.Equals(family, PythonLabel["SVMP"], StringComparison.OrdinalIgnoreCase) && domains.Count == 1 && domains[0] == "Disintegrin"
-                        ? "Disintegrin" : string.Equals(family, PythonLabel["SVMP"], StringComparison.OrdinalIgnoreCase) ? "SVMP" : family.Length == 0 ? "(none)" : family;
+                    string family = Placed(p);
+                    string programClass = string.Equals(family, PythonLabel["Disintegrin"], StringComparison.OrdinalIgnoreCase) ? "Disintegrin"
+                        : string.Equals(family, PythonLabel["SVMP"], StringComparison.OrdinalIgnoreCase) ? "SVMP" : family.Length == 0 ? "(none)" : family;
                     string outcome = programClass == pyClass ? "consistent"
                         : "differs, verdict " + (rowByLocus.TryGetValue(locus, out string[]? row) ? row[0] : "MISSING");
                     venomOutcome[pyClass + ": " + outcome] = venomOutcome.TryGetValue(pyClass + ": " + outcome, out int k) ? k + 1 : 1;
@@ -125,6 +135,8 @@ namespace FamilyQuant.Tests
                 {
                     input, scope, disagreements = rows.Count, reviewedWithPythonClass = reviewedPython, reviewedAgree,
                     reviewedVenomEntries = reviewedVenom.Count, reviewedVenomWithE6DefaultSplit = venomOutcome, verdicts,
+                    membersPlacedByLengthAndCysteines = inferredByGroup, proposalTiers = tiers,
+                    neighbourSearchReferences = search.References,
                     byKind = tally.OrderByDescending(t => t.Value).ThenBy(t => t.Key, StringComparer.Ordinal).ToDictionary(t => t.Key, t => t.Value),
                 }, new JsonSerializerOptions { WriteIndented = true });
                 File.WriteAllText(Path.Combine(outDir, "e14-disagreements.json"), reportText);
@@ -139,7 +151,8 @@ namespace FamilyQuant.Tests
         private const string Unjudged = "UNJUDGED";
 
         /// <summary>The verdict a disagreement falls under; the verdicts are written in docs/SCIENCE-GATE.md.</summary>
-        private static string Verdict(EvidenceProteinProposal p, string? pythonClass, FastaItemExtended item, string kind)
+        private static string Verdict(EvidenceProteinProposal p, string? pythonClass, FastaItemExtended item, string kind, bool splitApart,
+            bool? neighbourInScope)
         {
             string flags = string.Join(" ", p.Flags.Select(f => f.Code));
             var domains = item.Evidence?.Pfam.Select(d => d.Name).Distinct().ToList() ?? new List<string>();
@@ -147,12 +160,12 @@ namespace FamilyQuant.Tests
             if (programOnly && item.SequenceIdentifier.StartsWith(SequenceLabels.ContaminantPrefix, StringComparison.Ordinal)) return "V07";
             if (flags.Contains("multiple_source_families", StringComparison.Ordinal)) return "V03";
             if (pythonClass == "Disintegrin" && string.Equals(p.Family, PythonLabel["SVMP"], StringComparison.OrdinalIgnoreCase))
-                return domains.Count == 1 && domains[0] == "Disintegrin" ? "V01" : domains.Count == 0 ? "V02" : Unjudged;
+                return splitApart ? "V01" : domains.Count == 0 ? "V02" : Unjudged;
             if (pythonClass == "Disintegrin" && p.Family.Length == 0 && flags.Contains("neighbour_refused", StringComparison.Ordinal)) return "V02";
             if (p.Family.Length > 0 && !p.SuggestedSelected && flags.Contains("coherence.", StringComparison.Ordinal)) return "V04";
             if (p.Family.Length == 0 && flags.Contains("domain_compatibility", StringComparison.Ordinal)) return "V05";
             if (pythonClass == "SVMP" && p.Family.Length == 0 && flags.Length == 0) return "V06";
-            if (programOnly && p.Tier == EvidenceTier.UnannotatedNeighbour) return "V08";
+            if (programOnly && p.Tier == EvidenceTier.UnannotatedNeighbour) return neighbourInScope == true ? "V11" : "V08";
             if (programOnly && p.Tier == EvidenceTier.LearnedMarker) return "V09";
             if (pythonClass == "SVMP" && string.Equals(p.Family, PythonLabel["Disintegrin"], StringComparison.OrdinalIgnoreCase)) return "V10";
             return Unjudged;
