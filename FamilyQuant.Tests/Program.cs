@@ -140,7 +140,7 @@ namespace FamilyQuant.Tests
             string workDir = Path.Combine(Path.GetTempPath(), "FamilyQuant.Tests");
             Directory.CreateDirectory(workDir);
 
-            if (args.Contains(EvidenceClassifierCheck.Argument))
+            if (args.Contains(EvidenceClassifierCheck.Argument) || args.Contains(EvidenceClassifierCheck.ArchitectureArgument))
             {
                 EvidenceClassifierCheck.Run(args, Check);
                 Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
@@ -164,6 +164,13 @@ namespace FamilyQuant.Tests
             if (args.Contains(ReferencePanelCheck.Argument))
             {
                 ReferencePanelCheck.Run(args, Check);
+                Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
+                return failed == 0 ? 0 : 1;
+            }
+
+            if (args.Contains(ScienceGateListRun.Argument))
+            {
+                ScienceGateListRun.Run(args, Check);
                 Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
                 return failed == 0 ? 0 : 1;
             }
@@ -662,6 +669,7 @@ namespace FamilyQuant.Tests
             EvidenceStorageTests(workDir);
             EvidenceFetchTests();
             EvidenceClassifierTests();
+            EvidenceArchitectureTests();
 
             Section("Nearest reviewed protein and the outside panel - never itself, gated, deterministic, offline");
             NearestReviewedTests(workDir);
