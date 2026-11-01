@@ -8,7 +8,7 @@ FamilyQuant is a Windows-only WPF desktop app (.NET 10) for **protein-family clu
 
 ## Build & run
 
-Two projects in one solution. Build and run from the **repo root**, where `FamilyQuant2.sln` lives:
+Three projects in one solution: the WPF-free Core library, the App executable and the console Tests. Build and run from the **repo root**, where `FamilyQuant2.sln` lives:
 
 - `dotnet build FamilyQuant2.sln -c Release`
 - `dotnet run --project FamilyQuant/FamilyQuant.App.csproj`
@@ -26,7 +26,7 @@ Two projects in one solution. Build and run from the **repo root**, where `Famil
 
 Notes:
 
-- **Windows-only**: both projects target `net10.0-windows7.0` with `UseWPF`. Will not build or run on Linux/macOS.
+- **Windows-only**: the solution targets `net10.0-windows7.0`; App and Tests use WPF, Core does not. Will not build or run on Linux/macOS.
 - **Tests are a console executable, not a `dotnet test` suite.** `FamilyQuant.Tests` has `OutputType=Exe` and no xUnit/NUnit/MSTest package, so `dotnet test` finds nothing to run. Run it directly:
   - `dotnet run --project FamilyQuant.Tests -c Release --no-build` for the quick pass (no real data, every section that needs a file skips).
   - **The four positional arguments, in order:** `[0]` a `.plp` project, `[1]` a protein database (`.fasta` or `.T-R`), `[2]` the de novo export root (PEAKS and/or DeepNovo), `[3]` the directory holding the real `.sepr2` / `.xic2` / `.raw` files. All four are optional and **positional**, so a missing one must still occupy its slot.
@@ -36,8 +36,8 @@ Notes:
   - The runner prints `PASS`/`FAIL`/`SKIP` per check and returns a non-zero exit code if anything failed.
   - It is marked `IsPublishable=false`, so it never reaches a ClickOnce payload.
   - Set `FAMILYQUANT_USEARCH` to a `usearch.exe` you control if the bundled one cannot be executed (AppLocker / antivirus blocking user-writable folders).
-- Depends on **vendored binary DLLs** in `FamilyQuant/DLLs/` (referenced by `HintPath`, no source in this repo): `PatternTools.dll` (refreshed 2026-08-16 from PL51 at `5a58727`), `SeproPckg2.dll`, `MAligner.dll`, plus PatternTools' own companions (`CSMSL.dll`, `alglibnet2.dll`, the Agilent `Base*.dll` set). They come from the wider PatternLab toolchain (the `PL51` repository); treat them as opaque externals. `XQuant2.dll` was REMOVED on 2026-08-16: the copy was 19 months stale and nothing referenced it; XIC extraction calls PatternTools directly (`FamilyQuant/DeNovo/DeNovoXicExtractor.cs`), and RAW reading is supplied by the four `ThermoFisher.CommonCore.*` NuGet packages. The bundled `usearch11.0.667_win32.exe` sits in the same folder.
-  - `FamilyQuant.Tests` names `PatternTools.dll` again in its own `csproj`: `HintPath` references do **not** flow through a `ProjectReference`.
+- Depends on **vendored binary DLLs** in `FamilyQuant/DLLs/` (referenced by `HintPath`, no source in this repo): `PatternTools.dll` (refreshed 2026-08-16 from PL51 at `5a58727`), `SeproPckg2.dll`, `MAligner.dll`, plus PatternTools' own companions (`CSMSL.dll`, `alglibnet2.dll`, the Agilent `Base*.dll` set). They come from the wider PatternLab toolchain (the `PL51` repository); treat them as opaque externals. `XQuant2.dll` was REMOVED on 2026-08-16: the copy was 19 months stale and nothing referenced it; XIC extraction calls PatternTools directly (`FamilyQuant.Core/DeNovo/DeNovoXicExtractor.cs`), and RAW reading is supplied by the four `ThermoFisher.CommonCore.*` NuGet packages. The bundled `usearch11.0.667_win32.exe` sits in the same folder.
+  - `FamilyQuant.Core` and `FamilyQuant.Tests` name the vendor types they use directly: `HintPath` references do **not** flow through a `ProjectReference`.
 - NuGet deps: `Extended.Wpf.Toolkit` (the `xctk:` up-down controls), `LiteDB`, `Newtonsoft.Json`. Serialization of the `.fcf` actually uses `System.Text.Json`, not Newtonsoft.
 
 ## Keeping the vendored DLLs current
@@ -103,7 +103,7 @@ Family-grouping quality is scored by a decoy-mixing FDR: a cluster is "wrong" if
 
 `GroupingScore.MixedFamilies` names WHICH families mix (smallest first, each target with its residue count), `IdentityScanRow.MixedFamiliesSection` lists them per identity in the scan report, and `DivideAndConquerDetailed` returns the failing probe just below the answer so the panel can say why the search stopped. This matters with the exhaustive pass: on the Bjararaca T-R it answers 73% (fast-only answers 24%), and the only family mixing at 72% is the 11-residue bradykinin-potentiating peptides, which are nearly palindromic and align to their own reversed decoys (BPP 11d: 75% identity over 8 of 11 residues). The suite pins that on a BPP fixture.
 
-## The de novo engine (`FamilyQuant/DeNovo/`, `FamilyQuant/Homology/`)
+## The de novo engine (`FamilyQuant.Core/DeNovo/`, `FamilyQuant.Core/Homology/`)
 
 A second workflow, independent of the family one. Everything here is free of WPF, so it is driven headless by the suite; `DeNovoControl` is the only part that touches controls.
 
@@ -189,3 +189,5 @@ Break any of these and the numbers stay plausible, which is the whole problem.
 - **Tooltips are one or two plain sentences** (users, 2026-10-25: "too long and complicated"): what the control does, the usual value, and "Disabled until ..." when it can be disabled; the detail belongs in `HelpContent`. `App.xaml`'s implicit `ToolTip` style wraps string tooltips at 520 px. The suite still requires a tooltip of at least six words on every control, and pins a few phrases ("Disabled until", "Layer 2", "two rows", "1920").
 - `Nullable` is enabled, but CS8603 (possible null reference return) is suppressed repo-wide via `.editorconfig`.
 - The ClickOnce publish profile `FamilyQuant/Properties/PublishProfiles/ClickOnceProfile.pubxml` is **force-added** to git even though `.gitignore` excludes `*.pubxml`. It pins the target framework, so an un-tracked copy is how a profile survives a framework migration still carrying the old pins. Do not remove it from the index.
+
+Core boundary check: `FamilyQuant.Tests.exe --test-core-boundary` verifies engine ownership, WPF-free assembly references, library identity and the embedded resource namespace. The ordinary suite runs it too.
