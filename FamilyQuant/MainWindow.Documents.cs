@@ -98,7 +98,9 @@ public partial class MainWindow
                 Title = "Save the current families as a Family Cluster File"
             };
 
+            owner.PrepareFileDialog(sfd);
             if (sfd.ShowDialog() != true) return;
+            owner.RememberFolder(sfd.FileName);
 
             try
             {
@@ -299,7 +301,9 @@ public partial class MainWindow
                 Title = "Choose a TRUSTED SEPro result package (legacy unsafe deserialization)"
             };
 
+            owner.PrepareFileDialog(ofd);
             if (ofd.ShowDialog() != true) return;
+            owner.RememberFolder(ofd.FileName);
 
             try
             {

@@ -16,7 +16,9 @@ public partial class MainWindow
     private void InitializeShellCommands()
     {
         shellSettingsPath = ShellSettingsPathOverride ?? Path.Combine(ApplicationPaths.LocalDataDirectory, "shell.json");
-        shellState = ShellSessionState.Load(shellSettingsPath);
+        persistShellSettings = ShellSettingsPathOverride != null ||
+            System.Reflection.Assembly.GetEntryAssembly() == typeof(MainWindow).Assembly;
+        shellState = persistShellSettings ? ShellSessionState.Load(shellSettingsPath) : new();
         void Bind(RoutedCommand command, Action run, Func<bool>? allowed = null) =>
             CommandBindings.Add(new CommandBinding(command, (_, e) => { run(); e.Handled = true; },
                 (_, e) => { e.CanExecute = allowed?.Invoke() ?? true; e.Handled = true; }));
@@ -114,7 +116,10 @@ public partial class MainWindow
                 "FamilyQuant project (*.fqproj)|*.fqproj|Family Cluster File (*.fcf)|*.fcf",
             Title = "Open a project or Family Cluster File"
         };
-        return dialog.ShowDialog(this) == true ? dialog.FileName : null;
+        PrepareFileDialog(dialog);
+        if (dialog.ShowDialog(this) != true) return null;
+        RememberFolder(dialog.FileName);
+        return dialog.FileName;
     }
 
     private string? ChooseSaveProjectPath(bool saveAs)
@@ -128,7 +133,10 @@ public partial class MainWindow
             Title = "Save project as", FileName = string.IsNullOrWhiteSpace(lastFcfPath) ? "project.fqproj"
                 : Path.GetFileNameWithoutExtension(lastFcfPath) + ".fqproj"
         };
-        return dialog.ShowDialog(this) == true ? dialog.FileName : null;
+        PrepareFileDialog(dialog);
+        if (dialog.ShowDialog(this) != true) return null;
+        RememberFolder(dialog.FileName);
+        return dialog.FileName;
     }
 
     private void ReportShellMessage(string message, string title, MessageBoxImage image)
