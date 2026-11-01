@@ -59,6 +59,7 @@ namespace FamilyQuant.Tests
                 Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
                 return failed == 0 ? 0 : 1;
             }
+            if (LogoAssets.IsRequested(args)) return LogoAssets.Run(args);
             if (args.Contains("--test-inputs", StringComparer.Ordinal))
             {
                 RealDataInputTests();
@@ -102,6 +103,7 @@ namespace FamilyQuant.Tests
             if (args.Length == 2 && args[0] == "--shell-save-screens") return ShellSaveScreens(args[1]);
             if (args.Length == 2 && args[0] == "--shell-window-screens") return ShellWindowPreferenceScreens(args[1]);
             if (args.Length == 2 && args[0] == "--build-family-screens") return BuildFamiliesScreens(args[1]);
+            if (args.Length == 2 && args[0] == "--quantify-screens") return QuantifyScreens(args[1]);
 
             // PowerShell 5.1 silently DROPS empty "" arguments to native executables, which shifted
             // the data directories into the wrong positions and turned every real-data section into a
@@ -111,6 +113,13 @@ namespace FamilyQuant.Tests
 
             string workDir = Path.Combine(Path.GetTempPath(), "FamilyQuant.Tests");
             Directory.CreateDirectory(workDir);
+
+            if (args.Contains(EvidenceClassifierCheck.Argument))
+            {
+                EvidenceClassifierCheck.Run(args, Check);
+                Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
+                return failed == 0 ? 0 : 1;
+            }
 
             if (args.Contains(EvidenceFetchCheck.Argument) || args.Contains(EvidenceFetchCheck.VerifyArgument))
             {
@@ -424,6 +433,7 @@ namespace FamilyQuant.Tests
 
             Section("Word-based reclustering invariants");
             WordClusterTests();
+            QuantifyViewModelTests(workDir);
 
             Section("Database parsing and the decoy tag");
             DatabaseTests(workDir);
@@ -578,9 +588,11 @@ namespace FamilyQuant.Tests
             ProteinDomainsTests(workDir);
             EvidenceStorageTests(workDir);
             EvidenceFetchTests();
+            EvidenceClassifierTests();
 
-            Section("Nearest reviewed protein - never itself, gated, deterministic and memoised");
+            Section("Nearest reviewed protein and the outside panel - never itself, gated, deterministic, offline");
             NearestReviewedTests(workDir);
+            ReferencePanelTests(workDir);
 
             Section("Batch edit - one User ID and annotation for many selected rows");
             BatchCurationTests();
@@ -629,6 +641,7 @@ namespace FamilyQuant.Tests
             AppearanceDirectionTests();
             LegacySurfaceContrastTests();
             ShellStatusBridgeTests();
+            LogoResourceTests(workDir);
             ThemePreferenceTests(workDir);
 
             Section("Feature ledger - frozen source inventory and explicit preservation checks");
