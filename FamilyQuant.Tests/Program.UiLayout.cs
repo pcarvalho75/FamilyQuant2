@@ -472,17 +472,14 @@ namespace FamilyQuant.Tests
             }
             CheckTooltipCoverage("AnalyticsControl", analytics);
 
-            // A count as well as the sweep, for the same reason as the menu count below: a control added
-            // without a tooltip fails above, but a control REMOVED would pass everything in silence. Six
-            // chrome controls - export peptides, export summary, save screen figures, save talk plots,
-            // the TopN list and the percent-label switch - plus the five list entries the TopN selector offers.
+            // Four chrome controls: export choice/action, TopN and percent. Export kinds stay pinned in the view-model check.
             var analyticsControls = WalkTree(analytics).OfType<FrameworkElement>()
                 .Where(e => e.TemplatedParent == null)
                 .Where(e => e is Button || e is CheckBox || e is ComboBox || e is TextBox || e is Label)
                 .ToList();
 
-            Check("the analytics screen offers exactly its six chrome controls",
-                analyticsControls.Count == 6,
+            Check("the Results screen offers its four consolidated chrome controls",
+                analyticsControls.Count == 4,
                 string.Join(", ", analyticsControls.Select(Describe)));
 
             var topN = UiField<ComboBox>(analytics, "ComboBoxFamilyTopN")!;
