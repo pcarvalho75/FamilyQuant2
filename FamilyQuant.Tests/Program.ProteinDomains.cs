@@ -41,14 +41,24 @@ namespace FamilyQuant.Tests
                 && first.Groups.Any(g => g.Domains.SequenceEqual(new[] { "binding" }) && g.SuggestedName == "Binding domain"));
             Check("a shared architecture stays whole under the same grouping code",
                 suggested.FirstOrDefault(p => p.Family == "Second family") is { CanSplit: false } second && second.Groups.Count == 1);
-            Check("the dominant domain is learned from reviewed family members",
-                first?.Groups.FirstOrDefault(g => g.Domains.Count == 2)?.DominantDomainAccession == "catalytic");
+            Check("architecture names distinguish every combination within a family",
+                first != null && first.Groups.Select(g => g.SuggestedName).Distinct(StringComparer.OrdinalIgnoreCase).Count() == first.Groups.Count);
+            Check("a multi-domain name describes the domains that separate it from the free-domain groups",
+                first?.Groups.FirstOrDefault(g => g.Domains.Count == 2) is { } combined
+                && combined.SuggestedName.Contains("Binding domain", StringComparison.Ordinal)
+                && combined.SuggestedName.Contains("Catalytic domain", StringComparison.Ordinal));
             Check("architecture suggestions change no stored protein or family value",
                 new FamilyClusterFile { MyExtendedFastaItems = proteins }.ToJsonText() == before);
             proteins[0].Evidence!.Pfam.Reverse();
             var reversed = Evidence.EvidenceArchitecture.Suggest(proteins, Evidence.EvidenceClassifier.Propose(proteins, options));
             Check("domain input order does not change the combination key",
                 first != null && reversed.First(p => p.Family == "First family").Groups.Select(g => g.Key).SequenceEqual(first.Groups.Select(g => g.Key)));
+            proteins.Add(ArchitectureItem("P00006", "Second family", true, ("different", "Other domain")));
+            var colliding = Evidence.EvidenceArchitecture.Suggest(proteins, Evidence.EvidenceClassifier.Propose(proteins, options))
+                .Single(p => p.Family == "Second family");
+            Check("identical provider domain names are disambiguated from their accessions",
+                colliding.Groups.Select(g => g.SuggestedName).Distinct(StringComparer.OrdinalIgnoreCase).Count() == 2
+                && colliding.Groups.All(g => g.SuggestedName.Contains(g.Domains.Single(), StringComparison.Ordinal)));
             if (first != null)
             {
                 Evidence.EvidenceArchitectureGroup binding = first.Groups.Single(g => g.Domains.SequenceEqual(new[] { "binding" }));

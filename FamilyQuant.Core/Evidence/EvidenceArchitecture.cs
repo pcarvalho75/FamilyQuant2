@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text.Json;
 
@@ -61,18 +62,36 @@ namespace FamilyQuant.Evidence
                 }
                 // Cross-references give domain presence, so the stable key describes a combination.
                 // No positional order is inferred from the provider's list order.
-                List<EvidenceArchitectureGroup> groups = members.GroupBy(i => JsonSerializer.Serialize(Domains(proteins[i].Evidence)), StringComparer.Ordinal)
-                    .OrderBy(g => g.Key, StringComparer.Ordinal).Select(group =>
+                var combinations = members.GroupBy(i => JsonSerializer.Serialize(Domains(proteins[i].Evidence)), StringComparer.Ordinal)
+                    .OrderBy(g => g.Key, StringComparer.Ordinal).ToList();
+                string DomainName(string domain) => domainNames[domain].GroupBy(n => n, StringComparer.Ordinal)
+                    .OrderByDescending(g => g.Count()).ThenBy(g => g.Key, StringComparer.Ordinal)
+                    .Select(g => g.Key).FirstOrDefault() ?? domain;
+                var groupNames = combinations.ToDictionary(g => g.Key, g =>
+                {
+                    string[] domains = Domains(proteins[g.First()].Evidence);
+                    return domains.Length == 0 ? family.Key + " (no domain calls)" : string.Join(" + ", domains.Select(DomainName));
+                }, StringComparer.Ordinal);
+                var ambiguousNames = groupNames.Values.GroupBy(n => n, StringComparer.OrdinalIgnoreCase)
+                    .Where(g => g.Count() > 1).Select(g => g.Key).ToHashSet(StringComparer.OrdinalIgnoreCase);
+                var usedNames = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+                foreach (var group in combinations)
+                {
+                    string name = groupNames[group.Key];
+                    if (ambiguousNames.Contains(name)) name += " [" + group.Key + "]";
+                    string unique = name;
+                    int suffix = 2;
+                    while (!usedNames.Add(unique)) unique = name + " (" + (suffix++).ToString(CultureInfo.InvariantCulture) + ")";
+                    groupNames[group.Key] = unique;
+                }
+                List<EvidenceArchitectureGroup> groups = combinations.Select(group =>
                     {
                         string[] domains = Domains(proteins[group.First()].Evidence);
                         string dominant = domains.OrderByDescending(d => reviewedSupport.GetValueOrDefault(d))
                             .ThenByDescending(d => allSupport.GetValueOrDefault(d)).ThenBy(d => d, StringComparer.Ordinal).FirstOrDefault() ?? string.Empty;
-                        string name = dominant.Length == 0 ? family.Key + " (no domain calls)"
-                            : domainNames[dominant].GroupBy(n => n, StringComparer.Ordinal).OrderByDescending(g => g.Count())
-                                .ThenBy(g => g.Key, StringComparer.Ordinal).Select(g => g.Key).FirstOrDefault() ?? dominant;
                         return new EvidenceArchitectureGroup
                         {
-                            Key = group.Key, SuggestedName = name, DominantDomainAccession = dominant,
+                            Key = group.Key, SuggestedName = groupNames[group.Key], DominantDomainAccession = dominant,
                             Domains = domains, ProteinIndices = group.ToArray(),
                             ReviewedProteins = group.Count(i => proteins[i].Evidence?.Reviewed == true),
                         };

@@ -95,11 +95,16 @@ namespace FamilyQuant.Tests
                 if (architectureMode)
                 {
                     architecture = EvidenceArchitecture.Suggest(file.MyExtendedFastaItems, proposal);
-                    var primary = architecture.FirstOrDefault(a => a.Family.IndexOf("metalloproteinase", StringComparison.OrdinalIgnoreCase) >= 0);
+                    var primary = architecture.Where(a => a.Family.IndexOf("metalloproteinase", StringComparison.OrdinalIgnoreCase) >= 0).ToList();
                     check("native architecture offers a free binding-domain group apart from multi-domain members",
-                        primary?.CanSplit == true && primary.Groups.Any(g => g.Domains.Count == 1
+                        primary.Any(a => a.CanSplit && a.Groups.Any(g => g.Domains.Count == 1
                             && g.SuggestedName.Equals("Disintegrin", StringComparison.OrdinalIgnoreCase))
-                        && primary.Groups.Any(g => g.Domains.Count > 1), null);
+                        && a.Groups.Any(g => g.Domains.Count > 1)), null);
+                    check("every native family offers distinct names for its domain combinations",
+                        architecture.All(a => a.Groups.Select(g => g.SuggestedName).Distinct(StringComparer.OrdinalIgnoreCase).Count() == a.Groups.Count), null);
+                    check("native multi-domain names distinguish them from free binding domains",
+                        primary.SelectMany(a => a.Groups).Where(g => g.Domains.Count > 1)
+                            .All(g => !g.SuggestedName.Equals("Disintegrin", StringComparison.OrdinalIgnoreCase)), null);
                     var second = architecture.FirstOrDefault(a => a.Family.Equals("phospholipase A2 family", StringComparison.OrdinalIgnoreCase));
                     check("the same architecture code evaluates a second source family", second != null && second.Groups.Count > 0, null);
                     string firstArchitecture = JsonSerializer.Serialize(architecture);
