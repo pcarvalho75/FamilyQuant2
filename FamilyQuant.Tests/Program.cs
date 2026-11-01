@@ -564,6 +564,7 @@ namespace FamilyQuant.Tests
             Section("Appearance directions - theme changes preserve curation and input surfaces");
             AppearanceDirectionTests();
             LegacySurfaceContrastTests();
+            ThemePreferenceTests(workDir);
 
             Section("Feature ledger - frozen source inventory and explicit preservation checks");
             FeatureLedgerTests();

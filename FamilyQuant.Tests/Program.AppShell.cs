@@ -253,6 +253,10 @@ namespace FamilyQuant.Tests
         }
         private static void AppearanceDirectionTests()
         {
+            string ProfileMarker() => File.Exists(ThemeSettings.DefaultPath)
+                ? File.GetLastWriteTimeUtc(ThemeSettings.DefaultPath).Ticks.ToString(CultureInfo.InvariantCulture)
+                    + "|" + File.ReadAllText(ThemeSettings.DefaultPath) : "missing";
+            string profileBefore = ProfileMarker();
             const BindingFlags any = BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic;
             var file = new FamilyClusterFile
             {
@@ -278,20 +282,35 @@ namespace FamilyQuant.Tests
             var host = (Grid)typeof(MainWindow).GetField("GridApp", any)!.GetValue(main)!;
             host.Children.Clear();
             host.Children.Add(control);
+            var accentCheck = new CheckBox { IsChecked = true, Content = "Accent check" };
+            host.Children.Add(accentCheck);
             main.Show();
             try
             {
-                Check("File is the first menu and both appearance choices remain reachable",
+                Check("File is the first menu and all three appearance choices remain reachable",
                     ((MenuItem)AppearanceWalk(main).OfType<Menu>().First().Items[0]).Header as string == "File"
-                    && main.FindName("MenuThemeLight") is MenuItem && main.FindName("MenuThemeDark") is MenuItem, null);
-                foreach (AppTheme theme in new[] { AppTheme.Dark, AppTheme.Light })
+                    && main.FindName("MenuThemeLight") is MenuItem && main.FindName("MenuThemeDark") is MenuItem
+                    && main.FindName("MenuThemeSystem") is MenuItem, null);
+                foreach (AppTheme theme in new[] { AppTheme.Dark, AppTheme.Light, AppTheme.System })
                 {
-                    string handler = theme == AppTheme.Dark ? "MenuThemeDark_Click" : "MenuThemeLight_Click";
+                    string handler = theme == AppTheme.System ? "MenuThemeSystem_Click"
+                        : theme == AppTheme.Dark ? "MenuThemeDark_Click" : "MenuThemeLight_Click";
                     typeof(MainWindow).GetMethod(handler, any)!.Invoke(main, new object[] { main, new RoutedEventArgs() });
                     AppearancePump();
                     main.UpdateLayout();
+#pragma warning disable WPF0001 // Verify the experimental API under the same local suppression as the app.
+                    Check(theme + " uses the matching built-in Fluent ThemeMode",
+                        Application.Current.ThemeMode == (theme == AppTheme.System ? ThemeMode.System
+                            : theme == AppTheme.Dark ? ThemeMode.Dark : ThemeMode.Light));
+#pragma warning restore WPF0001
                     var input = (TextBox)control.FindName("TextBoxSearch");
                     var token = (SolidColorBrush)Application.Current.FindResource("InputBrush");
+                    var selectedMark = AppearanceWalk(accentCheck).OfType<Border>()
+                        .FirstOrDefault(b => b.Name == "ControlBorderIconPresenter");
+                    var accent = (SolidColorBrush)Application.Current.FindResource("AccentBrush");
+                    Check(theme + " Fluent selection uses the same accent as the primary action",
+                        (selectedMark?.Background as SolidColorBrush)?.Color == accent.Color,
+                        selectedMark?.Background?.ToString() ?? "missing selection mark");
                     var numeric = (DependencyObject)control.FindName("DecimalUpDownWordReCluster");
                     TextBox numericText = AppearanceWalk(numeric).OfType<TextBox>().First();
                     Check(theme + " inputs and the numeric editor use the same surface family",
@@ -302,8 +321,10 @@ namespace FamilyQuant.Tests
                         && Snapshot() == before, null);
                     var light = (MenuItem)main.FindName("MenuThemeLight");
                     var dark = (MenuItem)main.FindName("MenuThemeDark");
+                    var system = (MenuItem)main.FindName("MenuThemeSystem");
                     Check(theme + " is the sole checked appearance choice",
-                        light.IsChecked == (theme == AppTheme.Light) && dark.IsChecked == (theme == AppTheme.Dark), null);
+                        light.IsChecked == (theme == AppTheme.Light) && dark.IsChecked == (theme == AppTheme.Dark)
+                        && system.IsChecked == (theme == AppTheme.System), null);
                 }
                 var table = (DataGrid)control.FindName("DataGridResultGrid");
                 Check("appearance keeps curation row and column virtualization enabled",
@@ -313,8 +334,33 @@ namespace FamilyQuant.Tests
                 Check("Help retains the explanation moved from the curation panel",
                     help.Contains("Shared peptides applies to both columns", StringComparison.Ordinal)
                     && help.Contains("Full XIC share of to the Full XIC column", StringComparison.Ordinal), null);
+                Check("hosted theme switching never writes the user's appearance preference",
+                    ProfileMarker() == profileBefore);
             }
-            finally { main.Close(); ThemeManager.Apply(AppTheme.Light); }
+            finally { main.Close(); ThemeManager.Apply(AppTheme.Dark); }
+        }
+
+        private static void ThemePreferenceTests(string workDir)
+        {
+            string path = Path.Combine(workDir, "appearance-settings.json");
+            File.Delete(path);
+            Check("a new profile starts with the selected dark direction", ThemeSettings.Load(path) == AppTheme.Dark);
+            foreach (AppTheme theme in Enum.GetValues<AppTheme>())
+                Check(theme + " preference survives a new settings read",
+                    ThemeSettings.Save(path, theme) && ThemeSettings.Load(path) == theme);
+            File.WriteAllText(path, "{ broken");
+            Check("a damaged preference file falls back to Dark", ThemeSettings.Load(path) == AppTheme.Dark);
+            File.WriteAllText(path, "[]");
+            Check("a valid JSON value with the wrong shape falls back to Dark", ThemeSettings.Load(path) == AppTheme.Dark);
+            File.WriteAllText(path, "{\"Theme\":\"future-value\"}");
+            Check("an unknown preference falls back to Dark", ThemeSettings.Load(path) == AppTheme.Dark);
+            Check("System resolves both Windows app appearances; explicit choices stay fixed",
+                ThemeManager.Resolve(AppTheme.System, true) == AppTheme.Light
+                && ThemeManager.Resolve(AppTheme.System, false) == AppTheme.Dark
+                && ThemeManager.Resolve(AppTheme.Light, false) == AppTheme.Light
+                && ThemeManager.Resolve(AppTheme.Dark, true) == AppTheme.Dark);
+            Check("appearance settings belong to the separate 2.0 profile",
+                Path.GetFileName(Path.GetDirectoryName(ThemeSettings.DefaultPath)) == ApplicationPaths.DataFolderName);
         }
 
         private static void LegacySurfaceContrastTests()
