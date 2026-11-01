@@ -32,32 +32,33 @@ namespace FamilyQuant
             sb.AppendLine();
 
             sb.AppendLine("HOW QUANTITATION WORKS");
-            sb.AppendLine("Two sources: the Full XIC column comes from Compute / update full XIC; Layer 2");
-            sb.AppendLine("is optional, for a PatternLab .plp (the 'Share of signal' column).");
+            sb.AppendLine("Two sources: the Full XIC column comes from Analysis > Compute full XIC (Quantify).");
+            sb.AppendLine("The optional PatternLab .plp supplies the 'Share of signal' column.");
             sb.AppendLine("Shared peptides applies to both columns; Report XIC as and Recalculate apply");
             sb.AppendLine("to the .plp column, Full XIC share of to the Full XIC column.");
-            sb.AppendLine("The two lists answer different questions, and the status line at the top");
+            sb.AppendLine("The two lists answer different questions, and the bottom status line");
             sb.AppendLine("always says which one is on screen.");
             sb.AppendLine();
 
             sb.AppendLine("THE ORDER OF WORK");
             sb.AppendLine("-----------------");
-            sb.AppendLine("1. Run USearch on a FASTA or target-decoy (.T-R) database. That writes a Family");
+            sb.AppendLine("1. File > New from database opens Build. Choose database, then Build families on");
+            sb.AppendLine("   a FASTA or target-decoy (.T-R) database. That writes a Family");
             sb.AppendLine("   Cluster File (.fcf) next to the database: proteins grouped into families.");
-            sb.AppendLine("2. File -> Load Family Cluster File opens that .fcf. You are now in Layer 1 and");
+            sb.AppendLine("2. File > Open opens that .fcf in Families, where you");
             sb.AppendLine("   can merge families further by description words or by keyword.");
-            sb.AppendLine("3. Layer 2: load the PatternLab project (.plp) that holds the quantitation. It");
+            sb.AppendLine("3. In Families, load the PatternLab project (.plp) that holds the quantitation. It");
             sb.AppendLine("   must have been exported at PEPTIDE level - a protein-level export has nothing");
             sb.AppendLine("   this program can attribute to a family.");
-            sb.AppendLine("4. Layer 3: choose what the percentage is OF, choose what to do with shared");
+            sb.AppendLine("4. In Families, choose what the percentage is OF, choose what to do with shared");
             sb.AppendLine("   peptides, then press Recalculate.");
-            sb.AppendLine("5. Export to CSV, and/or File -> Reanotate Sepro to stamp the family numbers back");
+            sb.AppendLine("5. File > Export writes CSV; Analysis > Reannotate SEPro stamps the family numbers back");
             sb.AppendLine("   into a SEPro result package.");
             sb.AppendLine();
             sb.AppendLine("The families and the quantitation you keep live in one FamilyQuant project file, a");
-            sb.AppendLine(".fqproj, written by File -> Save project. Beyond the share above, File -> Compute /");
-            sb.AppendLine("update full XIC measures each peptide's full isotope envelope straight from the RAW");
-            sb.AppendLine("and stores it in that project, and the Analytics screen then reads the recovery");
+            sb.AppendLine(".fqproj, written by File > Save. Beyond the share above, Analysis > Compute full XIC");
+            sb.AppendLine("opens Quantify, which measures each peptide's full isotope envelope straight from the RAW");
+            sb.AppendLine("and stores it in that project, and the Results screen then reads the recovery");
             sb.AppendLine("from it. An old Family Cluster File (.fcf) still opens, with the quantitation empty");
             sb.AppendLine("until it is computed.");
             sb.AppendLine();
@@ -75,7 +76,7 @@ namespace FamilyQuant
             if (profile == null)
             {
                 sb.AppendLine("No project is loaded, so the program cannot yet say which denominators this");
-                sb.AppendLine("data supports. Load one in Layer 2: the modes it cannot supply are greyed out,");
+                sb.AppendLine("data supports. Load its quantitation in Families: unsupported modes are greyed out,");
                 sb.AppendLine("each with the reason in its tooltip.");
             }
             else
@@ -153,7 +154,7 @@ namespace FamilyQuant
             sb.AppendLine("against the seed of a family it did not quite match. That leaves biological holes,");
             sb.AppendLine("full-length homologues split apart.");
             sb.AppendLine();
-            sb.AppendLine("The \"Exhaustive clustering\" checkbox (on by default) closes them. After the first");
+            sb.AppendLine("The \"Exhaustive second pass\" checkbox (on by default) closes them. After the first");
             sb.AppendLine("pass it aligns EVERY pair of proteins in full and merges two families whenever the");
             sb.AppendLine("proteins reach your identity over most of the LONGER sequence. Proteins that share");
             sb.AppendLine("only a short motif fail that coverage test and are correctly kept apart, so an");
@@ -174,7 +175,7 @@ namespace FamilyQuant
 
             sb.AppendLine("CURATING BY HAND: UNDO, SUPER CLUSTER OPTIONS, SEARCH-SCOPED RECLUSTERING");
             sb.AppendLine("------------------------------------------------------------------------");
-            sb.AppendLine("Undo steps back through the changes you make in Layer 1, one at a time, without");
+            sb.AppendLine("Undo steps back through the changes you make in Families, one at a time, without");
             sb.AppendLine("reloading the file. It reverses a Recluster by Words, a Create Super Cluster, a");
             sb.AppendLine("User ID number you changed, or a lock you removed, putting the family numbers and");
             sb.AppendLine("the locks back exactly as they were just before. It remembers the last 50 steps of");
@@ -271,7 +272,7 @@ namespace FamilyQuant
             sb.AppendLine("                 regrouped, the User column recalculated, and it is the number");
             sb.AppendLine("                 written back by Reanotate Sepro.");
             sb.AppendLine("User Annotation  free text, saved in the .fcf and exported. It also NAMES the family");
-            sb.AppendLine("                 in the Full XIC composition CSV, the Analytics chart and the");
+            sb.AppendLine("                 in the Full XIC composition CSV, the Results chart and the");
             sb.AppendLine("                 evidence pack. A family without one is named by the protein name");
             sb.AppendLine("                 most of its members share (read before \"OS=\", \"(Fragment)\"");
             sb.AppendLine("                 ignored); a tie goes to the first member in the table's order.");
@@ -351,7 +352,7 @@ namespace FamilyQuant
             sb.AppendLine();
             sb.AppendLine("Nothing on this screen interrupts you with a dialog. A parameter it cannot");
             sb.AppendLine("accept, a folder with no export in it, a file that will not open: all of them");
-            sb.AppendLine("are reported in the yellow line at the bottom, and the previous value or the");
+            sb.AppendLine("are reported in the bottom status line, and the previous value or the");
             sb.AppendLine("previous result is left in force.");
             sb.AppendLine();
 
@@ -365,14 +366,14 @@ namespace FamilyQuant
             sb.AppendLine("agreements as a review queue.");
             sb.AppendLine("That queue is the one thing only this screen produces.");
             sb.AppendLine();
-            sb.AppendLine("The precursors you keep here are then measured by the main Compute / update full");
-            sb.AppendLine("XIC step and reported by Analytics, through the .fqproj project, which is why the");
+            sb.AppendLine("The precursors you keep here are measured by Analysis > Compute full XIC (Quantify)");
+            sb.AppendLine("and reported by Results, through the .fqproj project, which is why the");
             sb.AppendLine("de novo set no longer has to carry the whole story on its own.");
             sb.AppendLine();
-            sb.AppendLine("The collapsed \"Standalone run (advanced)\" section holds three more computations,");
-            sb.AppendLine("Extract areas, Attribute to families and Partition ion current. They are the SAME");
-            sb.AppendLine("computations the main Compute full XIC and Analytics screens now run; they are kept");
-            sb.AppendLine("here only for a de-novo-only run that has no project. Attribute to families reads");
+            sb.AppendLine("The standalone calculations are Extract areas, Attribute to families and");
+            sb.AppendLine("Partition ion current. Their calculation rules are shared with Quantify and Results.");
+            sb.AppendLine("In 2.0, use Quantify for extraction and Results for the ion-current reading.");
+            sb.AppendLine("Family attribution remains available without a saved project. Attribute to families reads");
             sb.AppendLine("peptides, not chromatograms, so it can run straight after step 1; Extract areas and");
             sb.AppendLine("Partition ion current follow the reconciliation.");
             sb.AppendLine();

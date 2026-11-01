@@ -122,6 +122,7 @@ namespace FamilyQuant.Tests
                 ShellWindowPreferenceTests(shellWork);
                 BuildFamiliesScreenTests(shellWork);
                 QuantifyShellTests(shellWork);
+                SecondaryWindowTests(shellWork);
                 LegacySurfaceContrastTests();
                 AppVersionTests();
                 Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
@@ -139,6 +140,10 @@ namespace FamilyQuant.Tests
             if (args.Length == 2 && args[0] == "--build-family-screens") return BuildFamiliesScreens(args[1]);
             if (args.Length == 2 && args[0] == "--quantify-screens") return QuantifyScreens(args[1]);
             if (args.Length == 2 && args[0] == "--quantify-shell-screens") return QuantifyShellScreens(args[1]);
+            if (args.Length == 2 && args[0] == "--quantify-screens") return QuantifyScreens(args[1]);
+            if (args.Length is 2 or 3 && args[0] == "--results-screens") return ResultsScreens(args[1], args.Length == 3 ? args[2] : null);
+            if (args.Length == 2 && args[0] == "--shell-window-screens") return ShellWindowPreferenceScreens(args[1]);
+            if (args.Length == 2 && args[0] == "--secondary-screens") return SecondaryWindowScreens(args[1]);
 
             // PowerShell 5.1 silently DROPS empty "" arguments to native executables, which shifted
             // the data directories into the wrong positions and turned every real-data section into a
@@ -765,6 +770,7 @@ namespace FamilyQuant.Tests
             ShellWindowPreferenceTests(workDir);
             BuildFamiliesScreenTests(workDir);
             QuantifyShellTests(workDir);
+            SecondaryWindowTests(workDir);
 
             Console.WriteLine();
             Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
