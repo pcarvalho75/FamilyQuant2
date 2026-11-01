@@ -195,7 +195,7 @@ public partial class MainWindow
             {
                 MessageBox.Show(
                     "There is no project on screen to compute quantitation for.\n\n" +
-                    "Next step: open a project or a Family Cluster File with File · Load first.",
+                    "Next step: open a project or a Family Cluster File with File > Open first.",
                     "Load a project first", MessageBoxButton.OK, MessageBoxImage.Information);
                 return;
             }
@@ -250,7 +250,7 @@ public partial class MainWindow
                     (string.IsNullOrWhiteSpace(window.SpectrumComparisonCsvError)
                         ? string.Empty
                         : window.SpectrumComparisonCsvError + "\n\n") +
-                     "Next step: File · Save project (.fqproj) to persist the quant rows and the complete " +
+                     "Next step: File > Save (.fqproj) to persist the quant rows and the complete " +
                     "spectrum evidence table inside the project. The project itself has not been saved yet.",
                     "Quantitation computed", MessageBoxButton.OK, MessageBoxImage.Information);
             }
