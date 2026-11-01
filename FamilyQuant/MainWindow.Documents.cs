@@ -72,7 +72,7 @@ public partial class MainWindow
                     "Reason given by the program: " + ex.Message + "\n\n" +
                     "Next step: check that this really is a .fqproj or a .fcf written by FamilyQuant and " +
                     "that it is not open in another program. If it was interrupted while being saved it " +
-                    "will have to be generated again from the database with \"Run USearch\".",
+                    "will have to be generated again from the database with File > New from database.",
                     "Could not open the file", MessageBoxImage.Error);
                 return false;
             }
@@ -86,8 +86,8 @@ public partial class MainWindow
             {
                 MessageBox.Show(
                     "Nothing was saved: there are no families on screen to save.\n\n" +
-                    "Next step: open a Family Cluster File with File · Load Family Cluster File, or build " +
-                    "one from a database with Run USearch.",
+                    "Next step: open a Family Cluster File with File > Open, or build " +
+                    "one with File > New from database.",
                     "Nothing to save", MessageBoxButton.OK, MessageBoxImage.Information);
                 return;
             }
@@ -137,8 +137,8 @@ public partial class MainWindow
             {
                 MessageBox.Show(
                     "Nothing was saved: there is no project on screen to save.\n\n" +
-                    "Next step: open a project or a Family Cluster File with File · Load, or build one " +
-                    "from a database with Run USearch.",
+                    "Next step: open a project or a Family Cluster File with File > Open, or build one " +
+                    "with File > New from database.",
                     "Nothing to save", MessageBoxButton.OK, MessageBoxImage.Information);
                 return;
             }
@@ -257,8 +257,8 @@ public partial class MainWindow
             {
                 MessageBox.Show(
                     "There is no spectrum comparison table to show yet.\n\n" +
-                    "Next step: load a .fqproj that contains full quantitation, or run File · Compute / " +
-                    "update full XIC first.",
+                    "Next step: load a .fqproj that contains full quantitation, or run Analysis > Compute " +
+                    "full XIC first.",
                     "No spectrum table yet", MessageBoxButton.OK, MessageBoxImage.Information);
                 return;
             }
@@ -290,7 +290,7 @@ public partial class MainWindow
                 MessageBox.Show(
                     "Nothing was reannotated: there are no families on screen to write into a SEPro " +
                     "package.\n\n" +
-                    "Next step: open a Family Cluster File with File · Load Family Cluster File first.",
+                    "Next step: open a Family Cluster File with File > Open first.",
                     "Load the families first", MessageBoxButton.OK, MessageBoxImage.Information);
                 return;
             }
@@ -321,7 +321,7 @@ public partial class MainWindow
                         "from, so they have no family number to receive.\n\n" +
                         "This normally means the search and the clustering used different FASTA files, or " +
                         "different versions of the same one.\n\n" +
-                        "Next step: recluster the exact database the SEPro search used, with Run USearch, " +
+                        "Next step: recluster the exact database the SEPro search used, with File > New from database, " +
                         "and try again.\n\n" +
                         "Examples of the missing identifiers: " +
                         string.Join(", ", missing.Take(10)) + (missing.Count > 10 ? ", ..." : ""),
