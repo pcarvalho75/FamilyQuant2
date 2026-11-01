@@ -1,98 +1,61 @@
 <UserControl x:Class="FamilyQuant.AnalyticsControl"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:local="clr-namespace:FamilyQuant"
-             mc:Ignorable="d"
-             d:DesignHeight="700" d:DesignWidth="1024"
-             Background="{StaticResource PanelDarkBrush}">
-    <Grid Margin="12">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-
-        <!-- The command bar: the two CSV exports and the figure export, always visible, disabled until
-             there is a table to write. -->
-        <Grid Grid.Row="0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="Auto"/>
-            </Grid.ColumnDefinitions>
-
-            <TextBlock Grid.Column="0" Text="Analytics" FontSize="18" FontWeight="Bold"
-                       Foreground="{StaticResource TextOnDarkBrush}" VerticalAlignment="Center"/>
-
-            <StackPanel Grid.Column="1" Orientation="Horizontal">
-                <Button x:Name="ButtonExportPeptides" Content="Export peptide table (CSV)"
-                        Margin="0,0,8,0" Padding="12,5" Background="{StaticResource AccentBrush}"
-                        Foreground="White" Click="ButtonExportPeptides_Click"
-                        ToolTip="Saves the per-peptide table behind these graphs as a CSV: run, sequence, charge, mass, isotope areas, envelope and family, one row per peptide and charge in each run. Decimals always use a dot."/>
-
-                <Button x:Name="ButtonExportSummary" Content="Export summary (CSV)"
-                        Margin="0,0,8,0" Padding="12,5" Background="{StaticResource PanelLightBrush}"
-                        Foreground="White" Click="ButtonExportSummary_Click"
-                        ToolTip="Saves the per-run summary as a CSV: TIC, identified and de novo peptide counts and envelopes, and the share of the total ion current each recovers. Decimals always use a dot."/>
-
-                <Button x:Name="ButtonSaveFigures" Content="Save figures (PNG)"
-                        Margin="0,0,8,0" Padding="12,5" Background="{StaticResource PanelLightBrush}"
-                        Foreground="White" Click="ButtonSaveFigures_Click"
-                        ToolTip="Saves every graph on this screen as a PNG, 1920 by 1080 pixels on a light background for slides, into a folder you choose. Files of the same name there are overwritten."/>
-
-                <Button x:Name="ButtonSavePresentationFigures" Content="Save presentation evidence pack"
-                        Padding="12,5" Background="{StaticResource AccentBrush}"
-                        Foreground="White" Click="ButtonSavePresentationFigures_Click"
-                        ToolTip="Saves the full presentation package: every figure at 1920×1080, the exact numbers behind each (CSV and JSON) and a README of the cutoffs used. If a required study is missing it writes nothing and names it."/>
-            </StackPanel>
-        </Grid>
-
-        <!-- The family chart's own controls. They redraw one chart and read no data again. -->
-        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,10,0,0">
-            <TextBlock Text="Family chart:" VerticalAlignment="Center" FontSize="12"
-                       Foreground="{StaticResource MutedTextBrush}" Margin="0,0,8,0"/>
-
-            <ComboBox x:Name="ComboBoxFamilyTopN" Width="150" VerticalAlignment="Center"
-                      SelectionChanged="ComboBoxFamilyTopN_SelectionChanged"
-                      ToolTip="How many families get their own bar in the family chart, largest first. The rest are combined into one &quot;other families&quot; bar, so no family is left out.">
-                <ComboBoxItem Content="Top 10 families" Tag="10"
-                              ToolTip="Ten bars plus one bar for the rest. Best for a slide seen from the back of a room."/>
-                <ComboBoxItem Content="Top 15 families" Tag="15" IsSelected="True"
-                              ToolTip="Fifteen bars plus one bar for the rest. The default; it fits a slide well."/>
-                <ComboBoxItem Content="Top 20 families" Tag="20"
-                              ToolTip="Twenty bars plus one bar for the rest, for a figure read on paper."/>
-                <ComboBoxItem Content="Top 30 families" Tag="30"
-                              ToolTip="Thirty bars plus one bar for the rest. Bars get thin on a projector."/>
-                <ComboBoxItem Content="All families" Tag="0"
-                              ToolTip="Every family gets its own bar. Complete, but hard to read with more than a few dozen families."/>
-            </ComboBox>
-
-            <CheckBox x:Name="CheckBoxFamilyPercent" Content="label as percent of total"
-                      VerticalAlignment="Center" Margin="14,0,0,0"
-                      Foreground="{StaticResource TextOnDarkBrush}"
-                      Checked="CheckBoxFamilyPercent_Changed" Unchecked="CheckBoxFamilyPercent_Changed"
-                      ToolTip="Labels each bar with its percent of the total measured signal instead of the raw value. A peptide shared by two families counts in both, so the percents can add up to more than 100%."/>
-        </StackPanel>
-
-        <!-- The recovery numbers in words, and where they came from. Blank in the empty state. -->
-        <TextBlock x:Name="TextBlockStatus" Grid.Row="2" TextWrapping="Wrap" Margin="0,10,0,8"
-                   FontSize="12" Foreground="{StaticResource MutedTextBrush}"/>
-
-        <!-- The empty state: shown when no quantitation has been computed, so the screen explains itself
-             instead of drawing five blank axes. -->
-        <Border x:Name="BorderEmpty" Grid.Row="3" Background="{StaticResource PanelMidBrush}"
-                CornerRadius="6" Padding="24" VerticalAlignment="Top" Margin="0,8,0,0"
-                Visibility="Collapsed">
-            <TextBlock x:Name="TextBlockEmpty" TextWrapping="Wrap" FontSize="13"
-                       Foreground="{StaticResource TextOnDarkBrush}"/>
-        </Border>
-
-        <!-- The five graphs, stacked, scrolling vertically so a tall stack is never clipped. -->
-        <ScrollViewer x:Name="ScrollAnalytics" Grid.Row="3" VerticalScrollBarVisibility="Auto"
-                      HorizontalScrollBarVisibility="Disabled" Margin="0,8,0,0">
-            <StackPanel x:Name="PanelCharts"/>
-        </ScrollViewer>
-    </Grid>
+ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+ Background="{DynamicResource CanvasBrush}" Foreground="{DynamicResource TextBrush}">
+ <UserControl.Resources><BooleanToVisibilityConverter x:Key="VisibleWhenTrue"/></UserControl.Resources>
+ <Grid Margin="24">
+  <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="*"/></Grid.RowDefinitions>
+  <DockPanel>
+   <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
+    <ComboBox x:Name="ComboBoxExportKind" Width="210" SelectedIndex="0" SelectionChanged="ExportChoiceChanged"
+     ToolTip="Choose which stored result or figures to export.">
+     <ComboBoxItem Content="Run summary (CSV)" ToolTip="Per-run TIC, peptide counts, envelopes and recovery shares in invariant decimal format." Tag="Summary"/>
+     <ComboBoxItem Content="Peptide table (CSV)" ToolTip="Per-peptide run, sequence, charge, mass, isotope areas, envelope and family assignments." Tag="Peptides"/>
+     <ComboBoxItem Content="Screen figures (PNG)" ToolTip="Every screen graph at 1920 by 1080 pixels in the Light palette." Tag="Figures"/>
+     <ComboBoxItem Content="Presentation evidence pack" ToolTip="Complete figures, exact CSV and JSON numbers and cutoff README. Required studies must be present." Tag="EvidencePack"/>
+    </ComboBox>
+    <Button x:Name="ButtonExport" Content="Export" Style="{DynamicResource PrimaryButton}" Click="ExportClicked"
+     ToolTip="Save the selected result in CSV or PNG format with invariant decimals. Figures use 1920 by 1080 pixels in the Light palette."/>
+   </StackPanel>
+   <TextBlock Text="Results" FontSize="{DynamicResource TitleSize}" FontWeight="SemiBold" VerticalAlignment="Center"/>
+  </DockPanel>
+  <ItemsControl Grid.Row="1" ItemsSource="{Binding Cards}" Margin="0,18,0,10">
+   <ItemsControl.ItemsPanel><ItemsPanelTemplate><UniformGrid Columns="3"/></ItemsPanelTemplate></ItemsControl.ItemsPanel>
+   <ItemsControl.ItemTemplate><DataTemplate>
+    <Border Background="{DynamicResource SurfaceBrush}" Padding="16" CornerRadius="6" Margin="0,0,10,0">
+     <StackPanel><TextBlock Text="{Binding Title}" Foreground="{DynamicResource MutedBrush}"/>
+      <TextBlock Text="{Binding Value}" FontSize="24" FontWeight="SemiBold" Margin="0,6,0,0"/>
+      <TextBlock Text="{Binding Detail}" TextWrapping="Wrap" Margin="0,6,0,0" FontSize="{DynamicResource CaptionSize}"/>
+     </StackPanel>
+    </Border>
+   </DataTemplate></ItemsControl.ItemTemplate>
+  </ItemsControl>
+  <WrapPanel Grid.Row="2" Margin="0,0,0,10">
+   <TextBlock Text="Family chart" VerticalAlignment="Center" Margin="0,0,10,0"/>
+   <ComboBox x:Name="ComboBoxFamilyTopN" Width="160" SelectionChanged="ChartChoiceChanged"
+    ToolTip="Show the largest families and combine every remaining family in one bar.">
+    <ComboBoxItem Content="Top 10 families" ToolTip="Ten families plus one bar for the rest. Suits presentation slides." Tag="10"/>
+    <ComboBoxItem Content="Top 15 families" ToolTip="Fifteen families plus one bar for the rest. This is the default." Tag="15" IsSelected="True"/>
+    <ComboBoxItem Content="Top 20 families" ToolTip="Twenty families plus one bar for the rest. Suits a paper figure." Tag="20"/>
+    <ComboBoxItem Content="Top 30 families" ToolTip="Thirty families plus one bar for the rest. Labels need more screen space." Tag="30"/>
+    <ComboBoxItem Content="All families" ToolTip="Every family retains its own bar. Scrolling may be needed for a large grouping." Tag="0"/>
+   </ComboBox>
+   <CheckBox x:Name="CheckBoxFamilyPercent" Content="Percent of measured signal" Margin="16,0,0,0" VerticalAlignment="Center"
+    Checked="ChartChoiceChanged" Unchecked="ChartChoiceChanged"
+    ToolTip="Divide by the measured signal. Count-in-every-family bars can overlap and their percentages must not be summed."/>
+  </WrapPanel>
+  <ScrollViewer x:Name="ScrollAnalytics" Grid.Row="3" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+   <StackPanel>
+    <TextBlock x:Name="TextBlockStatus" TextWrapping="Wrap" Margin="0,0,0,8"/>
+    <Border x:Name="BorderEmpty" Background="{DynamicResource SurfaceBrush}" Padding="24" CornerRadius="6">
+     <TextBlock x:Name="TextBlockEmpty" Text="{Binding EmptyMessage}" TextWrapping="Wrap"/>
+    </Border>
+    <Expander Header="Numbers, provenance and method details" Visibility="{Binding HasData, Converter={StaticResource VisibleWhenTrue}}"
+     ToolTip="Every fact previously in the Analytics summary remains here, including denominators, source cutoffs and counting grains.">
+     <TextBlock x:Name="TextBlockDetails" TextWrapping="Wrap" Margin="12"/>
+    </Expander>
+    <StackPanel x:Name="PanelCharts" Margin="0,12,0,0"/>
+   </StackPanel>
+  </ScrollViewer>
+ </Grid>
 </UserControl>
