@@ -46,7 +46,7 @@ namespace FamilyQuant.Homology
 
         /// <summary>FamilyQuant's decoy prefix (see CLAUDE.md and FamilyFilter). PepExplorer's own
         /// interface default is the shorter "Reverse" (MainControl.xaml:176).</summary>
-        public const string DefaultDecoyLabel = "Reverse_";
+        public const string DefaultDecoyLabel = SequenceLabels.DecoyPrefix;
 
         /// <summary>Fraction of the query's residues that must be identical to some window of the
         /// protein before that protein is scored at all. The prefilter of ProgramEngine.cs:225-229.</summary>

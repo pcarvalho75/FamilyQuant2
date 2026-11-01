@@ -46,19 +46,19 @@ namespace FamilyQuant.Tests
             };
 
             fcf.SetLookupDictionary(plp);
-            fcf.AttributeXICToGroups(plp, GroupingType.USearch);
+            fcf.AttributeXICToGroups(plp, NormalizationMode.IdentifiedSignal, SharedPeptidePolicy.FamilyUnique);
 
             Check("XIC is zeroed rather than left showing the previous project's numbers",
-                fcf.MyExtendedFastaItems.All(i => i.XIC == 0));
+                fcf.MyExtendedFastaItems.All(i => i.XICUser == 0));
 
             fcf.MyExtendedFastaItems.ForEach(i => i.XICUser = 0.5);
-            fcf.AttributeXICToGroups(plp, GroupingType.User, NormalizationMode.IdentifiedSignal);
+            fcf.AttributeXICToGroups(plp, NormalizationMode.IdentifiedSignal, SharedPeptidePolicy.FamilyUnique);
             Check("the User column is zeroed too", fcf.MyExtendedFastaItems.All(i => i.XICUser == 0));
 
             var other = new PatternLabProject(new FileInfo(plpPath));
-            fcf.AttributeXICToGroups(other, GroupingType.USearch);
+            fcf.AttributeXICToGroups(other, NormalizationMode.IdentifiedSignal, SharedPeptidePolicy.FamilyUnique);
             Check("handing in a different project rebuilds the lookups instead of reusing the cache",
-                fcf.MyExtendedFastaItems.All(i => i.XIC == 0));
+                fcf.MyExtendedFastaItems.All(i => i.XICUser == 0));
 
             // --- how the project was exported, read from the values rather than from a flag ---
             var profile = QuantitationProfile.Describe(plp);
@@ -99,14 +99,14 @@ namespace FamilyQuant.Tests
                 };
 
                 real.SetLookupDictionary(plp);
-                real.AttributeXICToGroups(plp, GroupingType.USearch);
+                real.AttributeXICToGroups(plp, NormalizationMode.IdentifiedSignal, SharedPeptidePolicy.FamilyUnique);
 
-                double sum = real.GroupedFastaItems.Sum(g => g.First().XIC);
+                double sum = real.GroupedFastaItems.Sum(g => g.First().XICUser);
                 Check("identified-signal mode adds up to 1", Math.Abs(sum - 1.0) < 1e-9, sum.ToString("R"));
-                Check("no family gets a negative share", real.MyExtendedFastaItems.All(i => i.XIC >= 0));
+                Check("no family gets a negative share", real.MyExtendedFastaItems.All(i => i.XICUser >= 0));
                 Check("no family exceeds 100% of the identified signal",
-                    real.MyExtendedFastaItems.All(i => i.XIC <= 1.0),
-                    real.MyExtendedFastaItems.Max(i => i.XIC).ToString("R"));
+                    real.MyExtendedFastaItems.All(i => i.XICUser <= 1.0),
+                    real.MyExtendedFastaItems.Max(i => i.XICUser).ToString("R"));
 
                 if (profile.CanReportTotalChromatogram)
                 {
@@ -125,17 +125,17 @@ namespace FamilyQuant.Tests
 
                     double identifiedFraction = profile.IdentifiedFractionOfTic;
 
-                    wide.AttributeXICToGroups(plp, GroupingType.USearch,
+                    wide.AttributeXICToGroups(plp,
                         NormalizationMode.TotalChromatogram, SharedPeptidePolicy.FamilyUnique);
-                    double uniqueSum = wide.GroupedFastaItems.Sum(g => g.First().XIC);
+                    double uniqueSum = wide.GroupedFastaItems.Sum(g => g.First().XICUser);
 
-                    wide.AttributeXICToGroups(plp, GroupingType.USearch,
+                    wide.AttributeXICToGroups(plp,
                         NormalizationMode.TotalChromatogram, SharedPeptidePolicy.SplitEqually);
-                    double splitSum = wide.GroupedFastaItems.Sum(g => g.First().XIC);
+                    double splitSum = wide.GroupedFastaItems.Sum(g => g.First().XICUser);
 
-                    wide.AttributeXICToGroups(plp, GroupingType.USearch,
+                    wide.AttributeXICToGroups(plp,
                         NormalizationMode.TotalChromatogram, SharedPeptidePolicy.CountInEveryFamily);
-                    double overlapSum = wide.GroupedFastaItems.Sum(g => g.First().XIC);
+                    double overlapSum = wide.GroupedFastaItems.Sum(g => g.First().XICUser);
 
                     Console.WriteLine($"        identified {identifiedFraction:P2} · unique {uniqueSum:P2} · " +
                                       $"split {splitSum:P2} · overlapping {overlapSum:P2}");
@@ -150,9 +150,9 @@ namespace FamilyQuant.Tests
                     Check("counting a peptide in every family overlaps, hence the warning on that option",
                         overlapSum >= splitSum - 1e-12);
                     Check("no family alone exceeds the whole chromatogram",
-                        wide.MyExtendedFastaItems.All(i => i.XIC >= 0 && i.XIC <= 1.0));
+                        wide.MyExtendedFastaItems.All(i => i.XICUser >= 0 && i.XICUser <= 1.0));
 
-                    real.AttributeXICToGroups(plp, GroupingType.USearch, NormalizationMode.TotalChromatogram);
+                    real.AttributeXICToGroups(plp, NormalizationMode.TotalChromatogram, SharedPeptidePolicy.FamilyUnique);
                     Check("the two modes rank the families the same way",
                         SameRanking(real, plp), "ranking changed between modes");
                 }
@@ -182,11 +182,11 @@ namespace FamilyQuant.Tests
         /// </summary>
         private static bool SameRanking(FamilyClusterFile fcf, PatternLabProject plp)
         {
-            fcf.AttributeXICToGroups(plp, GroupingType.USearch, NormalizationMode.IdentifiedSignal);
-            var byIdentified = fcf.GroupedFastaItems.OrderByDescending(g => g.First().XIC).Select(g => g.Key).ToList();
+            fcf.AttributeXICToGroups(plp, NormalizationMode.IdentifiedSignal, SharedPeptidePolicy.FamilyUnique);
+            var byIdentified = fcf.GroupedFastaItems.OrderByDescending(g => g.First().XICUser).Select(g => g.Key).ToList();
 
-            fcf.AttributeXICToGroups(plp, GroupingType.USearch, NormalizationMode.TotalChromatogram);
-            var byChromatogram = fcf.GroupedFastaItems.OrderByDescending(g => g.First().XIC).Select(g => g.Key).ToList();
+            fcf.AttributeXICToGroups(plp, NormalizationMode.TotalChromatogram, SharedPeptidePolicy.FamilyUnique);
+            var byChromatogram = fcf.GroupedFastaItems.OrderByDescending(g => g.First().XICUser).Select(g => g.Key).ToList();
 
             return byIdentified.SequenceEqual(byChromatogram);
         }
@@ -377,10 +377,10 @@ namespace FamilyQuant.Tests
                     }
                 };
                 family.SetLookupDictionary(plp);
-                family.AttributeXICToGroups(plp, GroupingType.USearch,
+                family.AttributeXICToGroups(plp,
                     NormalizationMode.TotalChromatogram, SharedPeptidePolicy.FamilyUnique);
 
-                double share = family.MyExtendedFastaItems[0].XIC;
+                double share = family.MyExtendedFastaItems[0].XICUser;
                 Check($"a {label} export reports the same 25% share of the chromatogram",
                     Math.Abs(share - 0.25) < 1e-12, share.ToString("R"));
             }
@@ -398,10 +398,10 @@ namespace FamilyQuant.Tests
                     }
                 };
                 family.SetLookupDictionary(plp);
-                family.AttributeXICToGroups(plp, GroupingType.USearch,
+                family.AttributeXICToGroups(plp,
                     NormalizationMode.IdentifiedPeptideSignal, SharedPeptidePolicy.FamilyUnique);
 
-                double share = family.MyExtendedFastaItems[0].XIC;
+                double share = family.MyExtendedFastaItems[0].XICUser;
                 Check($"a {label} export reports 100% of the extracted peptide signal",
                     Math.Abs(share - 1.0) < 1e-12, share.ToString("R"));
             }

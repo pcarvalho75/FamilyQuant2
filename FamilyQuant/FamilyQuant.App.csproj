@@ -2,15 +2,19 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
+    <AssemblyName>FamilyQuant2</AssemblyName>
+    <RootNamespace>FamilyQuant</RootNamespace>
+    <Title>FamilyQuant 2.0</Title>
+    <Product>FamilyQuant2</Product>
     <TargetFramework>net10.0-windows7.0</TargetFramework>
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
     <!-- SeproPckg2.ResultPackage.Load deserialises .sepr2 with BinaryFormatter, which .NET
          disables by default; without this the de novo reconciliation cannot read the PSM list. -->
     <EnableUnsafeBinaryFormatterSerialization>true</EnableUnsafeBinaryFormatterSerialization>
-    <Version>1.5.0.0</Version>
-    <AssemblyVersion>1.5.0.0</AssemblyVersion>
-    <FileVersion>1.5.0.0</FileVersion>
+    <Version>2.0.0.0</Version>
+    <AssemblyVersion>2.0.0.0</AssemblyVersion>
+    <FileVersion>2.0.0.0</FileVersion>
   </PropertyGroup>
 
   <ItemGroup>

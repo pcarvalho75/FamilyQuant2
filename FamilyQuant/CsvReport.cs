@@ -30,7 +30,7 @@ namespace FamilyQuant
                 "User Annotation",
                 "Locus",
                 "Residue mass (Da)",
-                mode.CsvHeader(GroupingType.User),
+                mode.CsvHeader(),
                 fullXicHeader ?? NoFullXicHeader,
                 "Description"
             };
