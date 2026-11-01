@@ -14,6 +14,7 @@
         <Setter Property="theme:NumericPalette.Enabled" Value="True"/>
     </Style>
     <Style TargetType="Window">
+        <Setter Property="Icon" Value="{DynamicResource AppWindowIcon}"/>
         <Setter Property="FontFamily" Value="{DynamicResource UiFont}"/>
         <Setter Property="FontSize" Value="{DynamicResource CaptionSize}"/>
         <Setter Property="Background" Value="{DynamicResource CanvasBrush}"/>

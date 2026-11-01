@@ -77,10 +77,10 @@ public partial class MainWindow
         home?.SetLastResult(shellState.LastResultProject, loadedQuant.Count > 0);
     }
 
-    private void ShowLastResult()
+    private async void ShowLastResult()
     {
         if (cgc != null && loadedQuant.Count > 0) MenuItemAnalytics_Click(this, new System.Windows.RoutedEventArgs());
-        else if (shellState.LastResultProject is string path && OpenProjectPath(path))
+        else if (shellState.LastResultProject is string path && await OpenProjectSafelyAsync(path))
             MenuItemAnalytics_Click(this, new System.Windows.RoutedEventArgs());
     }
 }

@@ -59,6 +59,7 @@ namespace FamilyQuant.Tests
                 Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
                 return failed == 0 ? 0 : 1;
             }
+            if (LogoAssets.IsRequested(args)) return LogoAssets.Run(args);
             if (args.Contains("--test-inputs", StringComparer.Ordinal))
             {
                 RealDataInputTests();
@@ -88,12 +89,16 @@ namespace FamilyQuant.Tests
                 HomeStartTests(shellWork);
                 ShellNavigationTests(shellWork);
                 ShellProjectOperationTests(shellWork);
+                ShellSavingTests(shellWork);
                 AppVersionTests();
                 Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
                 return failed == 0 ? 0 : 1;
             }
             if (args.Length == 2 && args[0] == "--shell-menu-screens") return ShellMenuScreens(args[1]);
             if (args.Length == 2 && args[0] == "--start-page-screens") return HomeStartScreens(args[1]);
+            if (args.Length == 3 && args[0] == "--shell-save-smoke") return ShellSaveSmoke(args[1], args[2]);
+            if (args.Length == 2 && args[0] == "--shell-save-screens") return ShellSaveScreens(args[1]);
+            if (args.Length == 2 && args[0] == "--quantify-screens") return QuantifyScreens(args[1]);
 
             // PowerShell 5.1 silently DROPS empty "" arguments to native executables, which shifted
             // the data directories into the wrong positions and turned every real-data section into a
@@ -465,6 +470,7 @@ namespace FamilyQuant.Tests
 
             Section("Word-based reclustering invariants");
             WordClusterTests();
+            QuantifyViewModelTests(workDir);
 
             Section("Database parsing and the decoy tag");
             DatabaseTests(workDir);
@@ -684,6 +690,7 @@ namespace FamilyQuant.Tests
             AppearanceDirectionTests();
             LegacySurfaceContrastTests();
             ShellStatusBridgeTests();
+            LogoResourceTests(workDir);
             ThemePreferenceTests(workDir);
 
             Section("Feature ledger - frozen source inventory and explicit preservation checks");
@@ -695,6 +702,7 @@ namespace FamilyQuant.Tests
             HomeStartTests(workDir);
             ShellNavigationTests(workDir);
             ShellProjectOperationTests(workDir);
+            ShellSavingTests(workDir);
 
             Console.WriteLine();
             Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");

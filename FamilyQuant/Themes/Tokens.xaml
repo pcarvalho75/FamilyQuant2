@@ -19,6 +19,9 @@
     <SolidColorBrush x:Key="ErrorBrush" Color="#FF99A4"/>
     <SolidColorBrush x:Key="OverlayBrush" Color="#99000000"/>
     <SolidColorBrush x:Key="ClearBrush" Color="#00000000"/>
+    <SolidColorBrush x:Key="LogoTileBrush" Color="#284E5B"/>
+    <SolidColorBrush x:Key="LogoBarBrush" Color="#E8E8E8"/>
+    <SolidColorBrush x:Key="LogoMarkBrush" Color="#49CCD6"/>
     <!-- Unrebuilt views retain their original surface family until their replacement is ready. -->
     <SolidColorBrush x:Key="PanelDarkBrush" Color="#333949"/>
     <SolidColorBrush x:Key="PanelMidBrush" Color="#444B58"/>

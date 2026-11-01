@@ -1,9 +1,10 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <AssemblyName>FamilyQuant2</AssemblyName>
     <RootNamespace>FamilyQuant</RootNamespace>
+    <ApplicationIcon>Assets\Brand\FamilyQuant.ico</ApplicationIcon>
     <Title>FamilyQuant 2.0</Title>
     <Product>FamilyQuant2</Product>
     <TargetFramework>net10.0-windows7.0</TargetFramework>
@@ -22,7 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="images\FamilyQuant.png" />
+    <None Remove="Assets\Brand\FamilyQuant.ico" />
   </ItemGroup>
 
   <ItemGroup>
@@ -75,7 +76,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="images\FamilyQuant.png">
+    <Resource Include="Assets\Brand\FamilyQuant.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>
