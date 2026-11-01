@@ -26,6 +26,13 @@ namespace FamilyQuant
         public static (int before, int after) RemoveRedundancy(FileInfo input, double identityPercent, string outputFile,
             OperationContext? operation = null)
         {
+            var result = RemoveRedundancyDetailed(input, identityPercent, outputFile, operation);
+            return (result.Before, result.After);
+        }
+
+        public static RedundancyResult RemoveRedundancyDetailed(FileInfo input, double identityPercent, string outputFile,
+            OperationContext? operation = null)
+        {
             operation?.Report("redundancy", "Reading protein sequences");
             var fp = new FastaFileParser() { PreserveHead = true };
             using (var reader = new StreamReader(input.FullName))
@@ -56,7 +63,7 @@ namespace FamilyQuant
 
             operation?.Report("redundancy", "Preparing nonredundant sequences", fp.MyItems.Count, before);
             WriteFasta(outputFile, fp.MyItems, operation);
-            return (before, fp.MyItems.Count);
+            return new RedundancyResult(before, fp.MyItems.Count, outputFile, identityPercent);
         }
 
         /// <summary>
