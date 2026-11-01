@@ -825,14 +825,9 @@ namespace FamilyQuant.Tests
 
             var topLevel = WalkTree(main).OfType<Menu>().First().Items.Cast<MenuItem>()
                 .Select(m => m.Header as string).ToList();
-            // File leads and View exposes both directions; S1 consolidates the remaining navigation.
-            Check("File leads and View offers appearance before the de novo, Analytics and Help commands",
-                topLevel[0] == "File"
-                && topLevel.IndexOf("Run USearch") == topLevel.IndexOf("Home") + 1
-                && topLevel.IndexOf("View") == topLevel.IndexOf("Run USearch") + 1
-                && topLevel.IndexOf("De Novo evidence") == topLevel.IndexOf("View") + 1
-                && topLevel.IndexOf("Analytics") == topLevel.IndexOf("De Novo evidence") + 1
-                && topLevel.IndexOf("Help") == topLevel.IndexOf("Analytics") + 1,
+            Check("File leads the standard menu order and Analysis contains de novo evidence",
+                topLevel.SequenceEqual(new[] { "File", "Edit", "View", "Analysis", "Help" })
+                && deNovoItem.Parent is MenuItem analysisMenu && analysisMenu.Header as string == "Analysis",
                 string.Join(" | ", topLevel));
 
             typeof(MainWindow).GetMethod("MenuItemDeNovo_Click", BindingFlags.Instance | BindingFlags.NonPublic)!

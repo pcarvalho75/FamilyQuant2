@@ -57,6 +57,7 @@ namespace FamilyQuant.Tests
                 EnsureApplication();
                 StandardMenuTests(shellWork);
                 OpenProjectNavigationTests(shellWork);
+                DeNovoScreenNavigationTests();
                 AppVersionTests();
                 Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
                 return failed == 0 ? 0 : 1;
