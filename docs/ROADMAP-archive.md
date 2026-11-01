@@ -29,6 +29,7 @@ Finished steps, moved here from docs/ROADMAP.md. The board shows them as green.
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
 | E1 | Evidence model and storage: per protein reviewed, UniProt family and subfamily, keywords, tissue, Pfam accession and name, PANTHER, transmembrane count, fragment flag; file level source and release. Stored in the file; old files still load | M | 3 | 🟢 | E2, E3 | Round trip test offline; old `.fcf` opens unchanged; size growth measured on Ana's file | EV | working | 10% | 0% | T+3 |
 | E2 | Fetch Evidence replaces Fetch Domains: same all-or-nothing batches and retries, more fields, progress and cancel. Domains column unchanged | M | 3 | E1 | E3, E5 | Live on Ana's file: asked 31,775, found 31,775, every field count agrees with `viperidae_rich.tsv`; canned tests for a refused batch and a missing entry | EV | not started | 0% | 0% | T+3 |
+| E3 | Nearest reviewed protein inside the app: `usearch_global` of all targets against the reviewed ones, id at least 50%, alignment at least 70% of the query, never the protein itself (accession compared), deterministic ties, memoised, stored as evidence | M | 3 | E2 | E4, E5 | Best hit agrees with `vs_revtox2.tsv` on all pairs or each difference explained; two runs byte-identical | AS | OP | 0% | 0% | T+3 |
 
 ### W2 Ana's result, through the software
 
