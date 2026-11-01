@@ -77,14 +77,14 @@ namespace FamilyQuant.Evidence
     }
 
     /// <summary>
-    /// The nearest reviewed protein of every target: a <c>usearch_global</c> of the targets against the
-    /// reviewed proteins with no accept or reject limit, gated on identity and on the share of the query
-    /// the alignment spans. A protein is never its own neighbour: entries are compared by accession, isoforms folded,
+    /// The nearest reviewed protein of every target: every target aligned with every reviewed protein
+    /// (<see cref="USearchTools.SearchGlobal"/>), gated on identity and on the share of the query the
+    /// alignment spans. A protein is never its own neighbour: entries are compared by accession, isoforms folded,
     /// so a duplicate entry or an isoform of the same protein cannot lend it its own label.
     /// </summary>
     public static class NearestReviewed
     {
-        public const string Method = "USEARCH usearch_global, no accept or reject limit, best hit by identity, never the same entry";
+        public const string Method = "USEARCH search_global, every pair aligned, best hit by identity, never the same entry";
         public const double DefaultMinIdentityPercent = 50.0;
         public const int DefaultMinQueryAlignedPercent = 70;
         private const double IdentityEpsilon = 1e-9;
@@ -290,17 +290,18 @@ namespace FamilyQuant.Evidence
                 WriteFasta(queryFasta, 'q', queries.Select(q => q.Sequence));
                 WriteFasta(referenceFasta, 'r', references.Select(r => r.Sequence));
                 Interlocked.Increment(ref searchRuns);
-                List<USearchTools.PairwiseEdge> edges =
-                    USearchTools.SearchGlobal(queryFasta, referenceFasta, minIdentityPercent / 100.0);
-
+                // Only hits past the gate and on another entry are kept, so a query with hundreds of
+                // short fragment hits does not hold them all in memory.
                 var hitsByQuery = new Dictionary<int, List<(NeighbourReference, double, int, int, int)>>();
-                foreach (USearchTools.PairwiseEdge edge in edges)
+                USearchTools.SearchGlobal(queryFasta, referenceFasta, minIdentityPercent / 100.0, edge =>
                 {
                     int q = LabelIndex(edge.QueryId, 'q', queries.Count);
                     int r = LabelIndex(edge.TargetId, 'r', references.Count);
+                    if (!PassesGate(edge.IdentityPercent, edge.AlignmentLength, edge.QueryLength,
+                            minIdentityPercent, minQueryAlignedPercent)) return;
                     if (!hitsByQuery.TryGetValue(q, out var list)) hitsByQuery[q] = list = new();
                     list.Add((references[r], edge.IdentityPercent, edge.AlignmentLength, edge.QueryLength, edge.TargetLength));
-                }
+                });
 
                 var found = new List<NearestNeighbour>();
                 for (int q = 0; q < queries.Count; q++)
