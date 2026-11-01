@@ -45,7 +45,7 @@
              purpose: the numbers are meaningless without it, so it must not be something
              you can tab away from.
              ============================================================================ -->
-        <Border Grid.Row="0" Background="{DynamicResource SubtleBrush}" BorderBrush="{DynamicResource EdgeBrush}" BorderThickness="0,0,0,1" Padding="10,6">
+        <Border x:Name="BorderCurationStatus" Grid.Row="0" Background="{DynamicResource SubtleBrush}" BorderBrush="{DynamicResource EdgeBrush}" BorderThickness="0,0,0,1" Padding="10,6">
             <DockPanel LastChildFill="True">
                 <Button x:Name="ButtonHelp" DockPanel.Dock="Right" Content="?  How to read these numbers"
                         Click="ButtonHelp_Click" Margin="10,0,0,0" Padding="10,4" FontWeight="Normal"
