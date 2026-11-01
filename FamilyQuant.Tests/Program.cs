@@ -530,6 +530,9 @@ namespace FamilyQuant.Tests
             Section("Screen harness - complete capture matrix and exact viewport pixels");
             ScreenHarness.Verify(Check, workDir);
 
+            Section("Appearance directions - theme changes preserve curation and input surfaces");
+            AppearanceDirectionTests();
+
             Console.WriteLine();
             Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
             return failed == 0 ? 0 : 1;

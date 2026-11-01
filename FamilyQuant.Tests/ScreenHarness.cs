@@ -79,9 +79,7 @@ namespace FamilyQuant.Tests
                 {
                     // Exercise the actual Fluent base without removing or replacing product styles.
                     // V2 will remove the legacy templates from the application itself.
-#pragma warning disable WPF0001 // ThemeMode is experimental in .NET 10 WPF.
-                    app.ThemeMode = theme == "dark" ? ThemeMode.Dark : ThemeMode.Light;
-#pragma warning restore WPF0001
+                    Themes.ThemeManager.Apply(theme == "dark" ? Themes.AppTheme.Dark : Themes.AppTheme.Light);
                     CaptureTheme(theme, source, project.fcf, project.quant, project.manifest, output, captures,
                         fcfPath ?? "synthetic fixture.fcf", projectPath ?? "synthetic fixture.fqproj");
                 }
