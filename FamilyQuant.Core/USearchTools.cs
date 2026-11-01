@@ -457,6 +457,37 @@ namespace FamilyQuant
             }
         }
 
+        /// <summary>
+        /// Every hit of every query against a database at or above <paramref name="minIdentity"/> (a
+        /// fraction), from <c>usearch -usearch_global</c> with no accept or reject limit, so no hit is lost
+        /// to the order USEARCH tries targets in. It still aligns only targets sharing at least one word
+        /// with the query, so a pair with no identical five-residue stretch is never reported. Labels come
+        /// back as written in the two FASTA files, up to the first space. A failure throws; nothing is
+        /// memoised here.
+        /// </summary>
+        public static List<PairwiseEdge> SearchGlobal(string queryFasta, string databaseFasta, double minIdentity)
+        {
+            string usearchExe = GetUSearchPath();
+            string tempDir = ApplicationPaths.ScratchDirectory;
+            Directory.CreateDirectory(tempDir);
+            string tsvFile = Path.Combine(tempDir, "global_" + Guid.NewGuid().ToString("N") + ".tsv");
+            string arguments = $"-usearch_global \"{queryFasta}\" -db \"{databaseFasta}\" " +
+                               $"-id {minIdentity.ToString("0.######", CultureInfo.InvariantCulture)} " +
+                               $"-maxaccepts 0 -maxrejects 0 -userout \"{tsvFile}\" " +
+                               "-userfields query+target+id+alnlen+ql+tl";
+            try
+            {
+                RunUSearch(usearchExe, arguments, tempDir);
+                if (!File.Exists(tsvFile))
+                    throw new InvalidOperationException("USEARCH finished without writing its hit table.");
+                return ParsePairwiseEdges(tsvFile);
+            }
+            finally
+            {
+                TryDelete(tsvFile);
+            }
+        }
+
         private static List<PairwiseEdge> ParsePairwiseEdges(string tsvFile)
         {
             var edges = new List<PairwiseEdge>();
