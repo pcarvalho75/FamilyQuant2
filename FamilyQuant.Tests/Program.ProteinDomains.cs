@@ -23,6 +23,7 @@ namespace FamilyQuant.Tests
     {
         private static void EvidenceArchitectureTests()
         {
+            EvidenceApplyTests();
             var proteins = new List<FastaItemExtended>
             {
                 ArchitectureItem("P00001", "First family", true, ("catalytic", "Catalytic domain"), ("binding", "Binding domain")),
@@ -91,6 +92,160 @@ namespace FamilyQuant.Tests
                         Pfam = domains.Select(d => new Evidence.EvidenceDomain { Accession = d.Id, Name = d.Name }).ToList(),
                     },
                 };
+        }
+        private static void EvidenceApplyTests()
+        {
+            Verify("evidence apply allocates beyond every protein number and orphan lock", () =>
+            {
+                var (file, proposal, selection) = Fixture();
+                var result = Evidence.EvidenceApply.Apply(file, proposal, selection, "fixture version");
+                return result.Changed && result.Undo != null && result.Recipe.Assignments.All(a => a.FamilyId > 900)
+                    && file.MyExtendedFastaItems.Take(4).All(p => file.LockedUserIds.Contains(p.UserID));
+            });
+            Verify("evidence apply preserves decoys, unassigned rows, automatic IDs, source and numeric values", () =>
+            {
+                var (file, proposal, selection) = Fixture();
+                string untouched = JsonSerializer.Serialize(file.MyExtendedFastaItems.Skip(4));
+                var searches = file.MyExtendedFastaItems.Select(p => p.USearchID).ToArray();
+                var numbers = file.MyExtendedFastaItems.Select(p => (p.XIC, p.XICUser, p.FullXicShare)).ToArray();
+                Evidence.EvidenceApply.Apply(file, proposal, selection, "fixture version");
+                return JsonSerializer.Serialize(file.MyExtendedFastaItems.Skip(4)) == untouched
+                    && searches.SequenceEqual(file.MyExtendedFastaItems.Select(p => p.USearchID))
+                    && numbers.SequenceEqual(file.MyExtendedFastaItems.Select(p => (p.XIC, p.XICUser, p.FullXicShare)))
+                    && file.SourceSha256 == "fixture source" && file.LockedUserIds.Contains(900);
+            });
+            Verify("evidence apply uses edited names, chosen splits and a single-protein override", () =>
+            {
+                var (file, proposal, selection) = Fixture();
+                Evidence.EvidenceApply.Apply(file, proposal, selection, "fixture version");
+                return file.MyExtendedFastaItems[0].UserID == file.MyExtendedFastaItems[2].UserID
+                    && file.MyExtendedFastaItems[1].UserID != file.MyExtendedFastaItems[0].UserID
+                    && file.MyExtendedFastaItems[0].UserAnnotation == "Edited family"
+                    && file.MyExtendedFastaItems[1].UserAnnotation == "Free binding"
+                    && file.MyExtendedFastaItems[3].UserAnnotation == "Pinned member";
+            });
+            Verify("applying the same selection and recipe twice changes no bytes and adds no undo", () =>
+            {
+                var (file, proposal, selection) = Fixture();
+                var first = Evidence.EvidenceApply.Apply(file, proposal, selection, "fixture version");
+                string applied = file.ToJsonText();
+                var second = Evidence.EvidenceApply.Apply(file, proposal, selection, "fixture version");
+                var third = Evidence.EvidenceApply.ApplyRecipe(file, first.Recipe);
+                return !second.Changed && second.Undo == null && !third.Changed && third.Undo == null && applied == file.ToJsonText();
+            });
+            Verify("one evidence undo restores grouping, annotations, locks, flags and the previous recipe", () =>
+            {
+                var (file, proposal, selection) = Fixture();
+                file.EvidenceRecipe = new Evidence.EvidenceRecipe { ProgramVersion = "earlier recipe" };
+                string before = file.ToJsonText();
+                var result = Evidence.EvidenceApply.Apply(file, proposal, selection, "fixture version");
+                result.Undo!.Restore(file);
+                return before == file.ToJsonText();
+            });
+            Verify("the complete evidence recipe survives reopen and replays on its source", () =>
+            {
+                var (file, proposal, selection) = Fixture();
+                string original = file.ToJsonText();
+                Evidence.EvidenceApply.Apply(file, proposal, selection, "fixture version");
+                string applied = file.ToJsonText();
+                string project = Path.Combine(Path.GetTempPath(), "e11-recipe-" + Guid.NewGuid().ToString("N") + ".fqproj");
+                FamilyClusterFile reopened;
+                try
+                {
+                    ProjectStore.WriteFqproj(project, file, new List<QuantRow>(), new QuantManifest());
+                    reopened = ProjectStore.ReadFqproj(project).fcf;
+                }
+                finally { if (File.Exists(project)) File.Delete(project); }
+                var recipe = reopened.EvidenceRecipe!;
+                var source = FamilyClusterFile.FromJsonText(original);
+                Evidence.EvidenceApply.ApplyRecipe(source, recipe);
+                return source.ToJsonText() == applied && recipe.Options.MarkerVoteFraction == 0.8
+                    && recipe.Options.ScopeTerms.SequenceEqual(new[] { "selected" })
+                    && recipe.SelectedProteinIndices.SequenceEqual(new[] { 0, 1, 2, 3 })
+                    && recipe.Families.Any(f => f.Selected && f.Name == "Edited family")
+                    && recipe.ArchitectureChoices.Count == 1 && recipe.ProteinOverrides.Count == 1
+                    && recipe.ProgramVersion == "fixture version" && recipe.EvidenceRelease == "fixture release";
+            });
+            Verify("stale evidence selection is rejected without a partial write", () =>
+            {
+                var (file, proposal, selection) = Fixture();
+                file.MyExtendedFastaItems[0].Sequence += "A";
+                string before = file.ToJsonText();
+                return Throws<InvalidOperationException>(() => Evidence.EvidenceApply.Apply(file, proposal, selection, "fixture version"))
+                    && file.ToJsonText() == before;
+            });
+            Verify("locked selected proteins are refused without changing another selection", () =>
+            {
+                var (file, proposal, selection) = Fixture();
+                file.LockedUserIds.Add(file.MyExtendedFastaItems[3].UserID);
+                string before = file.ToJsonText();
+                return Throws<InvalidOperationException>(() => Evidence.EvidenceApply.Apply(file, proposal, selection, "fixture version"))
+                    && file.ToJsonText() == before;
+            });
+            Verify("unassigned or decoy selections cannot be promoted by apply", () =>
+            {
+                var (file, proposal, _) = Fixture();
+                string before = file.ToJsonText();
+                return new[] { 4, 5 }.All(index => Throws<ArgumentException>(() => Evidence.EvidenceApply.Apply(file, proposal,
+                    new Evidence.EvidenceApplySelection { SourceFingerprint = proposal.SourceFingerprint, SelectedProteinIndices = new[] { 0, index } }, "fixture version")))
+                    && file.ToJsonText() == before;
+            });
+            Verify("exhausted family numbers fail before any assignment is changed", () =>
+            {
+                var (file, proposal, selection) = Fixture();
+                file.LockedUserIds.Add(int.MaxValue);
+                string before = file.ToJsonText();
+                return Throws<InvalidOperationException>(() => Evidence.EvidenceApply.Apply(file, proposal, selection, "fixture version"))
+                    && file.ToJsonText() == before;
+            });
+            Verify("a changed post-apply grouping cannot masquerade as an idempotent replay", () =>
+            {
+                var (file, proposal, selection) = Fixture();
+                var result = Evidence.EvidenceApply.Apply(file, proposal, selection, "fixture version");
+                file.MyExtendedFastaItems[0].UserAnnotation = "later edit";
+                string before = file.ToJsonText();
+                return Throws<InvalidOperationException>(() => Evidence.EvidenceApply.ApplyRecipe(file, result.Recipe))
+                    && file.ToJsonText() == before;
+            });
+
+            static (FamilyClusterFile, Evidence.EvidenceProposal, Evidence.EvidenceApplySelection) Fixture()
+            {
+                var rows = Enumerable.Range(0, 6).Select(i => new FastaItemExtended
+                {
+                    SequenceIdentifier = i == 5 ? "Reverse_fixture" : "sp|P" + i.ToString("D5", CultureInfo.InvariantCulture) + "|FIXTURE",
+                    Sequence = "ACDEFGHIK", UserID = 10 + i, USearchID = i == 5 ? 800 : 20 + i,
+                    UserAnnotation = "previous " + i.ToString(CultureInfo.InvariantCulture), XIC = i + 0.25, XICUser = i + 0.5, FullXicShare = i / 10.0,
+                    Evidence = i >= 4 ? null : new Evidence.ProteinEvidence
+                    {
+                        Family = i == 3 ? "Second family" : "First family", Reviewed = true, Keywords = new List<string> { "selected" },
+                        Pfam = new List<Evidence.EvidenceDomain>
+                        {
+                            new Evidence.EvidenceDomain { Accession = i == 1 ? "binding" : "catalytic", Name = i == 1 ? "Binding" : "Catalytic" },
+                        },
+                    },
+                }).ToList();
+                var file = new FamilyClusterFile
+                {
+                    MyExtendedFastaItems = rows, LockedUserIds = new HashSet<int> { 900 }, SourceSha256 = "fixture source",
+                    WordSimilarity = 0.7, IsKeywordSuperCluster = true,
+                    EvidenceSource = new Evidence.EvidenceProvenance { Provider = "fixture provider", Release = "fixture release" },
+                };
+                var proposal = Evidence.EvidenceClassifier.Propose(rows, new Evidence.EvidenceClassificationOptions { ScopeTerms = new[] { "selected" } });
+                var group = Evidence.EvidenceArchitecture.Suggest(rows, proposal).Single(a => a.Family == "First family").Groups
+                    .Single(g => g.Domains.SequenceEqual(new[] { "binding" }));
+                return (file, proposal, new Evidence.EvidenceApplySelection
+                {
+                    SourceFingerprint = proposal.SourceFingerprint, SelectedProteinIndices = new[] { 0, 1, 2, 3 },
+                    FamilyNames = new Dictionary<string, string> { ["First family"] = "Edited family" },
+                    ArchitectureChoices = new[] { new Evidence.EvidenceArchitectureChoice { Family = "First family", ArchitectureKey = group.Key, Name = "Free binding", Split = true } },
+                    ProteinOverrides = new[] { new Evidence.EvidenceProteinOverride { ProteinIndex = 3, Family = "Second family", Name = "Pinned member" } },
+                });
+            }
+            static void Verify(string name, Func<bool> verify)
+            {
+                try { Check(name, verify()); }
+                catch (Exception ex) { Check(name, false, ex.GetBaseException().Message); }
+            }
         }
         private static void EvidenceClassifierTests()
         {
