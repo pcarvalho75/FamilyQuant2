@@ -19,10 +19,11 @@ public partial class ComputeXicWindow : Window
     public int IsotopeCount => ViewModel.IsotopeCount;
     public int MinPointsForQuant => ViewModel.MinPointsForQuant;
 
-    public ComputeXicWindow(string appVersion, QuantManifest? existingManifest = null, FamilyClusterFile? familyCuration = null)
+    public ComputeXicWindow(string appVersion, QuantManifest? existingManifest = null, FamilyClusterFile? familyCuration = null,
+        DeNovoFilterViewModel? filters = null)
     {
         InitializeComponent();
-        Screen = new QuantifyControl(new ComputeXicViewModel(appVersion, existingManifest, familyCuration));
+        Screen = new QuantifyControl(new ComputeXicViewModel(appVersion, existingManifest, familyCuration, filters));
         ScreenHost.Content = Screen;
         Closing += (_, e) => { if (ViewModel.IsBusy) { e.Cancel = true; ViewModel.CancelCommand.Execute(null); } };
     }
