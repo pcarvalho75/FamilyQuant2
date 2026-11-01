@@ -21,6 +21,77 @@ namespace FamilyQuant.Tests
 {
     internal static partial class Program
     {
+        private static void EvidenceArchitectureTests()
+        {
+            var proteins = new List<FastaItemExtended>
+            {
+                ArchitectureItem("P00001", "First family", true, ("catalytic", "Catalytic domain"), ("binding", "Binding domain")),
+                ArchitectureItem("P00002", "First family", true, ("catalytic", "Catalytic domain")),
+                ArchitectureItem("P00003", "First family", false, ("binding", "Binding domain")),
+                ArchitectureItem("P00004", "Second family", true, ("other", "Other domain")),
+                ArchitectureItem("P00005", "Second family", false, ("other", "Other domain")),
+            };
+            var options = new Evidence.EvidenceClassificationOptions { ScopeTerms = new[] { "selected" } };
+            var proposal = Evidence.EvidenceClassifier.Propose(proteins, options);
+            string before = new FamilyClusterFile { MyExtendedFastaItems = proteins }.ToJsonText();
+            var suggested = Evidence.EvidenceArchitecture.Suggest(proteins, proposal);
+            var first = suggested.FirstOrDefault(p => p.Family == "First family");
+            Check("architecture groups distinguish a free domain from a multi-domain protein without a code rule",
+                first?.CanSplit == true && first.Groups.Count == 3
+                && first.Groups.Any(g => g.Domains.SequenceEqual(new[] { "binding" }) && g.SuggestedName == "Binding domain"));
+            Check("a shared architecture stays whole under the same grouping code",
+                suggested.FirstOrDefault(p => p.Family == "Second family") is { CanSplit: false } second && second.Groups.Count == 1);
+            Check("architecture names distinguish every combination within a family",
+                first != null && first.Groups.Select(g => g.SuggestedName).Distinct(StringComparer.OrdinalIgnoreCase).Count() == first.Groups.Count);
+            Check("a multi-domain name describes the domains that separate it from the free-domain groups",
+                first?.Groups.FirstOrDefault(g => g.Domains.Count == 2) is { } combined
+                && combined.SuggestedName.Contains("Binding domain", StringComparison.Ordinal)
+                && combined.SuggestedName.Contains("Catalytic domain", StringComparison.Ordinal));
+            Check("architecture suggestions change no stored protein or family value",
+                new FamilyClusterFile { MyExtendedFastaItems = proteins }.ToJsonText() == before);
+            proteins[0].Evidence!.Pfam.Reverse();
+            var reversed = Evidence.EvidenceArchitecture.Suggest(proteins, Evidence.EvidenceClassifier.Propose(proteins, options));
+            Check("domain input order does not change the combination key",
+                first != null && reversed.First(p => p.Family == "First family").Groups.Select(g => g.Key).SequenceEqual(first.Groups.Select(g => g.Key)));
+            proteins.Add(ArchitectureItem("P00006", "Second family", true, ("different", "Other domain")));
+            var colliding = Evidence.EvidenceArchitecture.Suggest(proteins, Evidence.EvidenceClassifier.Propose(proteins, options))
+                .Single(p => p.Family == "Second family");
+            Check("identical provider domain names are disambiguated from their accessions",
+                colliding.Groups.Select(g => g.SuggestedName).Distinct(StringComparer.OrdinalIgnoreCase).Count() == 2
+                && colliding.Groups.All(g => g.SuggestedName.Contains(g.Domains.Single(), StringComparison.Ordinal)));
+            if (first != null)
+            {
+                Evidence.EvidenceArchitectureGroup binding = first.Groups.Single(g => g.Domains.SequenceEqual(new[] { "binding" }));
+                var stored = new FamilyClusterFile
+                {
+                    MyExtendedFastaItems = proteins,
+                    EvidenceRecipe = new Evidence.EvidenceRecipe
+                    {
+                        ArchitectureChoices = new List<Evidence.EvidenceArchitectureChoice>
+                        {
+                            new Evidence.EvidenceArchitectureChoice
+                            {
+                                Family = first.Family, ArchitectureKey = binding.Key, Name = binding.SuggestedName, Split = true,
+                            },
+                        },
+                    },
+                };
+                var reopenedChoice = FamilyClusterFile.FromJsonText(stored.ToJsonText()).EvidenceRecipe!.ArchitectureChoices.Single();
+                Check("the user's split and learned name are stored in the project recipe",
+                    reopenedChoice.Split && reopenedChoice.ArchitectureKey == binding.Key && reopenedChoice.Name == "Binding domain");
+            }
+
+            static FastaItemExtended ArchitectureItem(string accession, string family, bool reviewed, params (string Id, string Name)[] domains) =>
+                new FastaItemExtended
+                {
+                    SequenceIdentifier = "sp|" + accession + "|TEST", Sequence = "ACDEFGHIK", UserID = 31, USearchID = 31,
+                    Evidence = new Evidence.ProteinEvidence
+                    {
+                        Accession = accession, Family = family, Reviewed = reviewed, Keywords = new List<string> { "selected" },
+                        Pfam = domains.Select(d => new Evidence.EvidenceDomain { Accession = d.Id, Name = d.Name }).ToList(),
+                    },
+                };
+        }
         private static void EvidenceClassifierTests()
         {
             string[] suppliedNames = { "Alpha family", "Beta family", "unseen example family" };
