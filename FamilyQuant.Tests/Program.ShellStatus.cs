@@ -71,13 +71,20 @@ internal static partial class Program
                 var curation = ((Grid)main.FindName("GridApp")).Children.OfType<ClusterGenerationControl>().Single();
                 Check("the shell enables curation's status seam", (bool)typeof(ClusterGenerationControl)
                     .GetProperty("UseShellStatusBar")!.GetValue(curation)!);
-                var legacy = curation.FindName("TextBlockStatusLine") as TextBlock;
-                if (legacy != null)
-                {
-                    legacy.Text = "controlled status fixture";
-                    PumpDispatcher();
-                    Check("curation changes reach the shell verbatim", guide.Text.Contains("controlled status fixture"), guide.Text);
-                }
+                string initialStatus = curation.ShellStatusText;
+                PumpDispatcher();
+                Check("the shell displays curation's authoritative concise summary",
+                    guide.Text.EndsWith(initialStatus, StringComparison.Ordinal), guide.Text);
+                // Match the producer's fixture: commit a displayed calculation mode, then refresh.
+                // Changing a legacy TextBlock alone is not a change to the status contract.
+                typeof(ClusterGenerationControl).GetProperty("DisplayedMode", any)!
+                    .SetValue(curation, NormalizationMode.IdentifiedSignal);
+                typeof(ClusterGenerationControl).GetMethod("UpdateStatusLine", any)!.Invoke(curation, null);
+                PumpDispatcher();
+                string changedStatus = curation.ShellStatusText;
+                Check("curation status transitions reach the shell verbatim", changedStatus != initialStatus
+                    && guide.Text.EndsWith(changedStatus, StringComparison.Ordinal), guide.Text);
+                Check("curation status facts remain available in shell Help", main.StatusModel.ContextHelp.Contains(changedStatus));
             }
         }
         finally { main.Close(); MainWindow.ShellSettingsPathOverride = originalSettings; }

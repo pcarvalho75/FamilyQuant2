@@ -23,6 +23,19 @@ namespace FamilyQuant
     public partial class ClusterGenerationControl : UserControl
     {
         public FamilyClusterFile fcf { get; private set; }
+        private string lastShellStatus = string.Empty;
+
+        public string ShellStatusText => DisplayedMode == null
+            ? (HasFullXic ? "Family curation. Full XIC available." : "Family curation. No calculated shares.")
+            : TextBlockStatusLine.Text.Replace("showing: ", string.Empty, StringComparison.Ordinal);
+
+        public event EventHandler? ShellStatusChanged;
+
+        public bool UseShellStatusBar
+        {
+            get => BorderCurationStatus.Visibility == Visibility.Collapsed;
+            set => BorderCurationStatus.Visibility = value ? Visibility.Collapsed : Visibility.Visible;
+        }
         private PatternLabProject? CurrentPLP { get; set; }
 
         /// <summary>
@@ -1128,6 +1141,12 @@ namespace FamilyQuant
                 DisplayedSharedPolicy,
                 ReportView.QuantifiedFamilies(fcf.MyExtendedFastaItems),
                 FamilyFilter.CountFamilies(fcf.MyExtendedFastaItems));
+            string current = ShellStatusText;
+            if (!string.Equals(lastShellStatus, current, StringComparison.Ordinal))
+            {
+                lastShellStatus = current;
+                ShellStatusChanged?.Invoke(this, EventArgs.Empty);
+            }
         }
 
         /// <summary>
