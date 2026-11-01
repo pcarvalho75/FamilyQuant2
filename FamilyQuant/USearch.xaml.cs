@@ -1,4 +1,4 @@
-﻿using Microsoft.Win32;
+using Microsoft.Win32;
 using PatternTools.FastaTools;
 using System;
 using System.Collections.Generic;
@@ -141,7 +141,9 @@ namespace FamilyQuant
                 Title = "Choose the protein database to group into families"
             };
 
+            (Window.GetWindow(this) as MainWindow)?.PrepareFileDialog(ofd);
             if (ofd.ShowDialog() != true) return;
+            (Window.GetWindow(this) as MainWindow)?.RememberFolder(ofd.FileName);
 
             int identity = IntegerUpDownIdentity.Value ?? 85;
             string inputFile = ofd.FileName;
@@ -259,7 +261,9 @@ namespace FamilyQuant
                 Title = "Choose the target-decoy database to search over"
             };
 
+            (Window.GetWindow(this) as MainWindow)?.PrepareFileDialog(ofd);
             if (ofd.ShowDialog() != true) return;
+            (Window.GetWindow(this) as MainWindow)?.RememberFolder(ofd.FileName);
 
             string inputFile = ofd.FileName;
             double acceptableScore = (double)(DecimalUpDownMaxFDR.Value ?? 0m);
@@ -325,7 +329,9 @@ namespace FamilyQuant
                 Title = "Choose the database to scan across identities"
             };
 
+            (Window.GetWindow(this) as MainWindow)?.PrepareFileDialog(ofd);
             if (ofd.ShowDialog() != true) return;
+            (Window.GetWindow(this) as MainWindow)?.RememberFolder(ofd.FileName);
 
             string inputFile = ofd.FileName;
             bool exhaustive = CheckBoxExhaustiveClustering.IsChecked == true;
@@ -376,7 +382,9 @@ namespace FamilyQuant
                 Filter = "FASTA (*.fasta;*.fa;*.fas)|*.fasta;*.fa;*.fas|All files (*.*)|*.*",
                 Title = "Choose the FASTA to remove redundant sequences from"
             };
+            (Window.GetWindow(this) as MainWindow)?.PrepareFileDialog(ofd);
             if (ofd.ShowDialog() != true) return;
+            (Window.GetWindow(this) as MainWindow)?.RememberFolder(ofd.FileName);
 
             string inputFile = ofd.FileName;
             double identity = (double)(IntegerUpDownRedundancyIdentity.Value ?? 100);

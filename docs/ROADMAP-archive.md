@@ -56,6 +56,7 @@ Finished steps, moved here from docs/ROADMAP.md. The board shows them as green.
 | S4 | Start page: open, new, recent projects, last result; fixes the white disabled cards | M | 3 | S1 | S2, V3 | Disabled state readable in both themes; recents survive restart | LK | SH | 0% | 0% | T+17 |
 | S2 | Left navigation rail in place of the Home card grid: Families, Quantify, Results, De novo, with state marks. `MainWindow` becomes a thin shell over a view model | H | 4 | S1, S4 | C1, C6, C8, C9, C10 | Every screen reachable by keyboard; disabled steps readable with the reason | LK | SH | 0% | 0% | T+4 |
 | S5 | One Save: `.fqproj` is the file, `.fcf` stays as Export and still opens. Unsaved mark, prompt on close. Ana's file goes from 70 MB to about 16 MB | H | 4 | S1, E12, X7 | R2 | Old `.fcf` opens; project round trip byte-equal in curation; a curation-only project opens with no quant | LK | SH | 0% | 0% | T+35 |
+| S7 | Window size and last folder remembered; drag a file to open | L | 1 | S1 | R2 | Survives restart | LK | SH | 0% | 0% | T+7 |
 
 ### W5 Screens: each rebuilt as a thin view over a tested view model
 
@@ -63,6 +64,7 @@ Finished steps, moved here from docs/ROADMAP.md. The board shows them as green.
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
 | P2 | Retire the De Novo sections Extract areas and Partition ion current in 2.0 (Paulo) | L | 0 | 🟢 | C11 | Decided | Paulo | done | 100% | 100% | done |
 | C8 | Quantify screen instead of the Compute dialog; one run summary | M | 3 | S2 | C10, V3, C13 | Same inputs, same outputs; golden equal; run summary kept | EV | RS | 0% | 0% | T+3 |
+| C9 | Results screen: Analytics paragraph becomes short summary cards with details on demand; one primary export | M | 4 | S2 | V6, V3, X9, C13 | Every fact in the paragraph still reachable; golden equal | EV | RS | 0% | 0% | T+4 |
 
 ### W6 Core rewrite: copy what is good, rewrite what is better
 
