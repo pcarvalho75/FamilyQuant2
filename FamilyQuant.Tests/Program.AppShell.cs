@@ -1,3 +1,4 @@
+using FamilyQuant.Themes;
 using FamilyQuant.DeNovo;
 using PatternTools.PLP;
 using System;
@@ -186,6 +187,86 @@ namespace FamilyQuant.Tests
             Check("the de novo review keeps the open project and its computed quant, and Save stays live",
                 app.Children[0] is DeNovoControl && ReferenceEquals(Get("cgc"), project)
                 && ReferenceEquals(Get("loadedQuant"), computed) && saveProject.IsEnabled && !compute.IsEnabled);
+        }
+        private static void AppearanceDirectionTests()
+        {
+            const BindingFlags any = BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic;
+            var file = new FamilyClusterFile
+            {
+                MyExtendedFastaItems = Enumerable.Range(1, 100).Select(i => new FastaItemExtended
+                {
+                    SequenceIdentifier = "appearance_" + i, Description = "Example test protein " + i,
+                    Sequence = "MKAWLLVLGLVALSECQEEHRSPHIVATSKMTWDFYGDSLQIVFR",
+                    UserID = i % 4, USearchID = i % 4, UserAnnotation = i % 2 == 0 ? "a note" : ""
+                }).ToList(),
+                LockedUserIds = new HashSet<int> { 1 }
+            };
+            string Snapshot() => string.Join("|", file.MyExtendedFastaItems.OrderBy(i => i.SequenceIdentifier, StringComparer.Ordinal).Select(i =>
+                i.SequenceIdentifier + ":" + i.UserID + ":" + i.USearchID + ":" + i.UserAnnotation))
+                + string.Join(",", file.LockedUserIds.OrderBy(i => i));
+            string before = Snapshot();
+            var main = new MainWindow
+            {
+                Width = 1024, Height = 768, Left = -30000, Top = -30000,
+                WindowStartupLocation = WindowStartupLocation.Manual, ShowActivated = false,
+                ShowInTaskbar = false, WindowStyle = WindowStyle.None, ResizeMode = ResizeMode.NoResize
+            };
+            var control = new ClusterGenerationControl(file);
+            var host = (Grid)typeof(MainWindow).GetField("GridApp", any)!.GetValue(main)!;
+            host.Children.Clear();
+            host.Children.Add(control);
+            main.Show();
+            try
+            {
+                Check("File is the first menu and both appearance choices remain reachable",
+                    ((MenuItem)AppearanceWalk(main).OfType<Menu>().First().Items[0]).Header as string == "File"
+                    && main.FindName("MenuThemeLight") is MenuItem && main.FindName("MenuThemeDark") is MenuItem, null);
+                foreach (AppTheme theme in new[] { AppTheme.Dark, AppTheme.Light })
+                {
+                    string handler = theme == AppTheme.Dark ? "MenuThemeDark_Click" : "MenuThemeLight_Click";
+                    typeof(MainWindow).GetMethod(handler, any)!.Invoke(main, new object[] { main, new RoutedEventArgs() });
+                    AppearancePump();
+                    main.UpdateLayout();
+                    var input = (TextBox)control.FindName("TextBoxSearch");
+                    var token = (SolidColorBrush)Application.Current.FindResource("InputBrush");
+                    var numeric = (DependencyObject)control.FindName("DecimalUpDownWordReCluster");
+                    TextBox numericText = AppearanceWalk(numeric).OfType<TextBox>().First();
+                    Check(theme + " inputs and the numeric editor use the same surface family",
+                        (input.Background as SolidColorBrush)?.Color == token.Color
+                        && (numericText.Background as SolidColorBrush)?.Color == token.Color, null);
+                    Check(theme + " changes appearance without replacing or mutating the curation",
+                        ReferenceEquals(control.fcf, file) && ReferenceEquals(host.Children[0], control)
+                        && Snapshot() == before, null);
+                    var light = (MenuItem)main.FindName("MenuThemeLight");
+                    var dark = (MenuItem)main.FindName("MenuThemeDark");
+                    Check(theme + " is the sole checked appearance choice",
+                        light.IsChecked == (theme == AppTheme.Light) && dark.IsChecked == (theme == AppTheme.Dark), null);
+                }
+                var table = (DataGrid)control.FindName("DataGridResultGrid");
+                Check("appearance keeps curation row and column virtualization enabled",
+                    table.EnableRowVirtualization && table.EnableColumnVirtualization
+                    && VirtualizingPanel.GetVirtualizationMode(table) == VirtualizationMode.Recycling, null);
+                string help = HelpContent.Build(null, NormalizationMode.IdentifiedSignal, SharedPeptidePolicy.FamilyUnique);
+                Check("Help retains the explanation moved from the curation panel",
+                    help.Contains("Shared peptides applies to both columns", StringComparison.Ordinal)
+                    && help.Contains("Full XIC share of to the Full XIC column", StringComparison.Ordinal), null);
+            }
+            finally { main.Close(); ThemeManager.Apply(AppTheme.Light); }
+        }
+
+        private static void AppearancePump()
+        {
+            var frame = new DispatcherFrame();
+            Dispatcher.CurrentDispatcher.BeginInvoke(DispatcherPriority.ApplicationIdle,
+                new Action(() => frame.Continue = false));
+            Dispatcher.PushFrame(frame);
+        }
+
+        private static IEnumerable<DependencyObject> AppearanceWalk(DependencyObject root)
+        {
+            yield return root;
+            for (int i = 0; i < VisualTreeHelper.GetChildrenCount(root); i++)
+                foreach (var child in AppearanceWalk(VisualTreeHelper.GetChild(root, i))) yield return child;
         }
     }
 }

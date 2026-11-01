@@ -825,15 +825,12 @@ namespace FamilyQuant.Tests
 
             var topLevel = WalkTree(main).OfType<Menu>().First().Items.Cast<MenuItem>()
                 .Select(m => m.Header as string).ToList();
-            // Q7 reordered the bar into pipeline order: Home, Run USearch (step 1), File (steps 2 and 3),
-            // De Novo (the optional side-branch, drawn between the family steps and Analytics), Analytics
-            // (step 4), Help. The de novo screen is therefore after File now, not directly after Run
-            // USearch as before, which is the whole point of anchoring it to the flow.
-            Check("Home leads, and the de novo side-branch sits after File, with Analytics then Help following it",
-                topLevel[0] == "Home"
+            // File leads and View exposes both directions; S1 consolidates the remaining navigation.
+            Check("File leads and View offers appearance before the de novo, Analytics and Help commands",
+                topLevel[0] == "File"
                 && topLevel.IndexOf("Run USearch") == topLevel.IndexOf("Home") + 1
-                && topLevel.IndexOf("File") == topLevel.IndexOf("Run USearch") + 1
-                && topLevel.IndexOf("De Novo evidence") == topLevel.IndexOf("File") + 1
+                && topLevel.IndexOf("View") == topLevel.IndexOf("Run USearch") + 1
+                && topLevel.IndexOf("De Novo evidence") == topLevel.IndexOf("View") + 1
                 && topLevel.IndexOf("Analytics") == topLevel.IndexOf("De Novo evidence") + 1
                 && topLevel.IndexOf("Help") == topLevel.IndexOf("Analytics") + 1,
                 string.Join(" | ", topLevel));

@@ -31,6 +31,15 @@ namespace FamilyQuant
             sb.AppendLine("=========================");
             sb.AppendLine();
 
+            sb.AppendLine("HOW QUANTITATION WORKS");
+            sb.AppendLine("Two sources: the Full XIC column comes from Compute / update full XIC; Layer 2");
+            sb.AppendLine("is optional, for a PatternLab .plp (the 'Share of signal' column).");
+            sb.AppendLine("Shared peptides applies to both columns; Report XIC as and Recalculate apply");
+            sb.AppendLine("to the .plp column, Full XIC share of to the Full XIC column.");
+            sb.AppendLine("The two lists answer different questions, and the status line at the top");
+            sb.AppendLine("always says which one is on screen.");
+            sb.AppendLine();
+
             sb.AppendLine("THE ORDER OF WORK");
             sb.AppendLine("-----------------");
             sb.AppendLine("1. Run USearch on a FASTA or target-decoy (.T-R) database. That writes a Family");
