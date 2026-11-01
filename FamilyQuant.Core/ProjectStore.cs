@@ -1,3 +1,4 @@
+using FamilyQuant.Operations;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -651,8 +652,9 @@ namespace FamilyQuant
         /// project intact rather than a truncated one.
         /// </summary>
         public static void WriteFqproj(string path, FamilyClusterFile fcf,
-            IEnumerable<QuantRow> quantRows, QuantManifest manifest)
+            IEnumerable<QuantRow> quantRows, QuantManifest manifest, OperationContext? operation = null)
         {
+            operation?.Report("project-save", "Preparing project output");
             if (path == null) throw new ArgumentNullException(nameof(path));
             if (fcf == null) throw new ArgumentNullException(nameof(fcf));
             if (manifest == null) throw new ArgumentNullException(nameof(manifest));
@@ -687,31 +689,45 @@ namespace FamilyQuant
                     "SpectrumComparisonRows contains a null row. The project was not written because " +
                     "counting that row while omitting it from the sidecar would create an unreadable project.");
 
-            // A project re-saved by this build uses the version-2 layout even when it was opened from a
-            // version-1 container. The in-memory model remains unchanged; only its on-disk placement is
-            // migrated from the embedded manifest property to the streamed sidecar entry below.
-            if (manifest.FormatVersion <= CurrentFormatVersion)
-                manifest.FormatVersion = CurrentFormatVersion;
-            manifest.SpectrumComparisonRowCount = spectrumRows.Count;
-
+            int previousFormatVersion = manifest.FormatVersion;
+            int? previousSpectrumCount = manifest.SpectrumComparisonRowCount;
             string? folder = Path.GetDirectoryName(path);
             if (!string.IsNullOrEmpty(folder)) Directory.CreateDirectory(folder);
-
-            string temp = path + ".tmp";
-
-            // A ZIP being built holds an open write handle; dispose it before the move, so the temporary
-            // file is complete on disk when it replaces the target.
-            using (var fileStream = new FileStream(temp, FileMode.Create, FileAccess.Write, FileShare.None))
-            using (var zip = new ZipArchive(fileStream, ZipArchiveMode.Create))
+            string temp = path + "." + Guid.NewGuid().ToString("N") + ".tmp";
+            try
             {
-                WriteTextEntry(zip, CurationEntryName, fcf.ToJsonText(), CompressionLevel.Optimal);
-                WriteQuantEntry(zip, rows);
-                if (spectrumRows.Count > 0) WriteSpectrumComparisonEntry(zip, spectrumRows);
-                WriteTextEntry(zip, ManifestEntryName,
-                    JsonSerializer.Serialize(manifest, ManifestJsonOptions), CompressionLevel.Optimal);
-            }
+                if (manifest.FormatVersion <= CurrentFormatVersion) manifest.FormatVersion = CurrentFormatVersion;
+                manifest.SpectrumComparisonRowCount = spectrumRows.Count;
+                // A ZIP being built holds an open write handle; dispose it before the move, so the temporary
+                // file is complete on disk when it replaces the target.
+                using (var fileStream = new FileStream(temp, FileMode.Create, FileAccess.Write, FileShare.None))
+                using (var zip = new ZipArchive(fileStream, ZipArchiveMode.Create))
+                {
+                    WriteTextEntry(zip, CurationEntryName, fcf.ToJsonText(), CompressionLevel.Optimal, operation);
+                    WriteQuantEntry(zip, rows, operation);
+                    if (spectrumRows.Count > 0) WriteSpectrumComparisonEntry(zip, spectrumRows, operation);
+                    WriteTextEntry(zip, ManifestEntryName,
+                        JsonSerializer.Serialize(manifest, ManifestJsonOptions), CompressionLevel.Optimal, operation);
+                }
 
-            File.Move(temp, path, overwrite: true);
+                operation?.Report("project-save", "Publishing project output", 1, 1);
+                void Publish() => File.Move(temp, path, overwrite: true);
+                if (operation == null) Publish();
+                else operation.Commit(Publish);
+            }
+            catch
+            {
+                if (operation != null)
+                {
+                    manifest.FormatVersion = previousFormatVersion;
+                    manifest.SpectrumComparisonRowCount = previousSpectrumCount;
+                }
+                throw;
+            }
+            finally
+            {
+                try { if (File.Exists(temp)) File.Delete(temp); } catch { }
+            }
         }
 
         /// <summary>
@@ -720,19 +736,20 @@ namespace FamilyQuant
         /// A container missing an entry, or carrying a format version this build does not understand, is
         /// refused rather than half-read.
         /// </summary>
-        public static (FamilyClusterFile fcf, List<QuantRow> quant, QuantManifest manifest) ReadFqproj(string path)
+        public static (FamilyClusterFile fcf, List<QuantRow> quant, QuantManifest manifest) ReadFqproj(string path, OperationContext? operation = null)
         {
+            operation?.Report("project-read", "Opening project input");
             if (path == null) throw new ArgumentNullException(nameof(path));
 
             using var fileStream = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Read);
             using var zip = new ZipArchive(fileStream, ZipArchiveMode.Read);
 
-            string curationText = ReadTextEntry(zip, CurationEntryName)
+            string curationText = ReadTextEntry(zip, CurationEntryName, operation)
                 ?? throw new InvalidDataException(
                     "\"" + path + "\" is not a valid FamilyQuant project: its " + CurationEntryName +
                     " entry is missing.");
 
-            string manifestText = ReadTextEntry(zip, ManifestEntryName)
+            string manifestText = ReadTextEntry(zip, ManifestEntryName, operation)
                 ?? throw new InvalidDataException(
                     "\"" + path + "\" is not a valid FamilyQuant project: its " + ManifestEntryName +
                     " entry is missing.");
@@ -768,14 +785,14 @@ namespace FamilyQuant
                     "XIC with the current FamilyQuant build; raw shared scans cannot be used as the " +
                     "sequence-agreement denominator.");
 
-            List<QuantRow> quant = ReadQuantEntry(zip);
+            List<QuantRow> quant = ReadQuantEntry(zip, operation);
 
             // Version 2 stores this very large table outside manifest.json and records its exact row
             // count. Without that manifest metadata a missing sidecar was indistinguishable from a
             // legitimately empty table; a project could therefore lose its scientific evidence and
             // still open silently. Version 1 remains compatible with its embedded collection, and a
             // transitional v1 sidecar (if present) still takes precedence.
-            List<DeNovo.SpectrumComparisonRow>? spectrumRows = ReadSpectrumComparisonEntry(zip);
+            List<DeNovo.SpectrumComparisonRow>? spectrumRows = ReadSpectrumComparisonEntry(zip, operation);
             if (manifest.FormatVersion >= 2)
             {
                 if (!manifest.SpectrumComparisonRowCount.HasValue)
@@ -814,6 +831,7 @@ namespace FamilyQuant
                 else manifest.SpectrumComparisonRows ??= new List<DeNovo.SpectrumComparisonRow>();
             }
 
+            operation?.ThrowIfCancellationRequested();
             return (fcf, quant, manifest);
         }
 
@@ -825,16 +843,18 @@ namespace FamilyQuant
 
         // ----------------------------------------------------------------- entries
 
-        private static void WriteTextEntry(ZipArchive zip, string name, string content, CompressionLevel level)
+        private static void WriteTextEntry(ZipArchive zip, string name, string content, CompressionLevel level, OperationContext? operation = null)
         {
+            operation?.ThrowIfCancellationRequested();
             ZipArchiveEntry entry = zip.CreateEntry(name, level);
             using Stream stream = entry.Open();
             using var writer = new StreamWriter(stream, new UTF8Encoding(false));
             writer.Write(content);
         }
 
-        private static string? ReadTextEntry(ZipArchive zip, string name)
+        private static string? ReadTextEntry(ZipArchive zip, string name, OperationContext? operation = null)
         {
+            operation?.ThrowIfCancellationRequested();
             ZipArchiveEntry? entry = zip.GetEntry(name);
             if (entry == null) return null;
 
@@ -850,8 +870,9 @@ namespace FamilyQuant
         /// without making the extracted entry directly useful.
         /// </summary>
         private static void WriteSpectrumComparisonEntry(ZipArchive zip,
-            IEnumerable<DeNovo.SpectrumComparisonRow> rows)
+            IEnumerable<DeNovo.SpectrumComparisonRow> rows, OperationContext? operation = null)
         {
+            operation?.ThrowIfCancellationRequested();
             ZipArchiveEntry entry = zip.CreateEntry(SpectrumComparisonEntryName,
                 CompressionLevel.NoCompression);
             using Stream stream = entry.Open();
@@ -860,6 +881,7 @@ namespace FamilyQuant
 
             foreach (DeNovo.SpectrumComparisonRow row in rows)
             {
+                operation?.ThrowIfCancellationRequested();
                 if (row == null) continue;
                 writer.Write(JsonSerializer.Serialize(row, SpectrumComparisonJsonOptions));
                 writer.Write('\n');
@@ -872,8 +894,9 @@ namespace FamilyQuant
         /// list means the sidecar existed and was empty. Malformed rows are rejected with their physical
         /// line number rather than silently producing an incomplete scientific table.
         /// </summary>
-        private static List<DeNovo.SpectrumComparisonRow>? ReadSpectrumComparisonEntry(ZipArchive zip)
+        private static List<DeNovo.SpectrumComparisonRow>? ReadSpectrumComparisonEntry(ZipArchive zip, OperationContext? operation = null)
         {
+            operation?.ThrowIfCancellationRequested();
             ZipArchiveEntry? entry = zip.GetEntry(SpectrumComparisonEntryName);
             if (entry == null) return null;
 
@@ -886,6 +909,7 @@ namespace FamilyQuant
             int lineNumber = 0;
             while ((line = reader.ReadLine()) != null)
             {
+                operation?.ThrowIfCancellationRequested();
                 lineNumber++;
                 if (string.IsNullOrWhiteSpace(line)) continue;
 
@@ -915,8 +939,9 @@ namespace FamilyQuant
         /// quant.tsv.gz gets a file pandas reads directly, and double-compressing it would only cost CPU
         /// for no gain. InvariantCulture throughout, doubles in round-trippable "R" form.
         /// </summary>
-        private static void WriteQuantEntry(ZipArchive zip, List<QuantRow> rows)
+        private static void WriteQuantEntry(ZipArchive zip, List<QuantRow> rows, OperationContext? operation = null)
         {
+            operation?.ThrowIfCancellationRequested();
             ZipArchiveEntry entry = zip.CreateEntry(QuantEntryName, CompressionLevel.NoCompression);
             using Stream stream = entry.Open();
             using var gzip = new GZipStream(stream, CompressionMode.Compress);
@@ -927,6 +952,7 @@ namespace FamilyQuant
 
             foreach (QuantRow r in rows)
             {
+                operation?.ThrowIfCancellationRequested();
                 writer.Write(TsvField(r.Side)); writer.Write('\t');
                 writer.Write(TsvField(r.Run)); writer.Write('\t');
                 writer.Write(r.Scan.ToString(CultureInfo.InvariantCulture)); writer.Write('\t');
@@ -956,8 +982,9 @@ namespace FamilyQuant
             }
         }
 
-        private static List<QuantRow> ReadQuantEntry(ZipArchive zip)
+        private static List<QuantRow> ReadQuantEntry(ZipArchive zip, OperationContext? operation = null)
         {
+            operation?.ThrowIfCancellationRequested();
             var rows = new List<QuantRow>();
 
             ZipArchiveEntry? entry = zip.GetEntry(QuantEntryName);
@@ -1008,6 +1035,7 @@ namespace FamilyQuant
             string? line;
             while ((line = reader.ReadLine()) != null)
             {
+                operation?.ThrowIfCancellationRequested();
                 if (line.Length == 0) continue;
 
                 string[] f = line.Split('\t');

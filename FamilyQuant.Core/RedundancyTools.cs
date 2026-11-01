@@ -1,4 +1,5 @@
 using MAligner;
+using FamilyQuant.Operations;
 using PatternTools.FastaTools;
 using System;
 using System.Collections.Generic;
@@ -22,8 +23,10 @@ namespace FamilyQuant
         /// to MAligner's alignment-based identity and then restores the original order (so it is correct
         /// even with an older MAligner build that reorders internally). Returns (countBefore, countAfter).
         /// </summary>
-        public static (int before, int after) RemoveRedundancy(FileInfo input, double identityPercent, string outputFile)
+        public static (int before, int after) RemoveRedundancy(FileInfo input, double identityPercent, string outputFile,
+            OperationContext? operation = null)
         {
+            operation?.Report("redundancy", "Reading protein sequences");
             var fp = new FastaFileParser() { PreserveHead = true };
             using (var reader = new StreamReader(input.FullName))
             {
@@ -38,7 +41,7 @@ namespace FamilyQuant
 
             if (identityPercent >= 100.0)
             {
-                var eliminate = FindSubsetSequences(fp.MyItems);
+                var eliminate = FindSubsetSequences(fp.MyItems, operation);
                 fp.MyItems = originalOrder.Where(a => !eliminate.Contains(a)).ToList();
             }
             else
@@ -46,11 +49,13 @@ namespace FamilyQuant
                 // Alignment-based identity lives in MAligner. It reorders MyItems internally by length,
                 // so we recover the survivors and re-emit them in the original order.
                 new Compress().CompressByIdentity(fp, identityPercent / 100.0);
+                operation?.ThrowIfCancellationRequested();
                 var survivors = new HashSet<FastaItem>(fp.MyItems);
                 fp.MyItems = originalOrder.Where(a => survivors.Contains(a)).ToList();
             }
 
-            WriteFasta(outputFile, fp.MyItems);
+            operation?.Report("redundancy", "Preparing nonredundant sequences", fp.MyItems.Count, before);
+            WriteFasta(outputFile, fp.MyItems, operation);
             return (before, fp.MyItems.Count);
         }
 
@@ -61,15 +66,17 @@ namespace FamilyQuant
         /// original order. The surviving superset gets the dropped entry's identifier appended to its
         /// description, matching PatternLab's FastaDBGenerator behaviour.
         /// </summary>
-        private static HashSet<FastaItem> FindSubsetSequences(List<FastaItem> items)
+        private static HashSet<FastaItem> FindSubsetSequences(List<FastaItem> items, OperationContext? operation)
         {
             var byLength = items.OrderBy(a => a.Sequence.Length).ToList();
             var eliminate = new HashSet<FastaItem>();
 
             for (int i = 0; i < byLength.Count; i++)
             {
+                operation?.Report("redundancy", "Comparing sequence subsets", i, byLength.Count);
                 for (int j = i + 1; j < byLength.Count; j++)
                 {
+                    operation?.ThrowIfCancellationRequested();
                     if (byLength[j].Sequence.Contains(byLength[i].Sequence))
                     {
                         eliminate.Add(byLength[i]);
@@ -83,22 +90,35 @@ namespace FamilyQuant
             return eliminate;
         }
 
-        private static void WriteFasta(string outputFile, List<FastaItem> items)
+        private static void WriteFasta(string outputFile, List<FastaItem> items, OperationContext? operation)
         {
-            using (var sw = new StreamWriter(outputFile))
+            string temp = outputFile + "." + Guid.NewGuid().ToString("N") + ".tmp";
+            try
             {
-                foreach (var it in items)
+                using (var sw = new StreamWriter(temp))
                 {
-                    sw.WriteLine(string.IsNullOrEmpty(it.Description)
-                        ? ">" + it.SequenceIdentifier
-                        : ">" + it.SequenceIdentifier + " " + it.Description);
-
-                    string seq = it.Sequence;
-                    for (int k = 0; k < seq.Length; k += 60)
+                    foreach (var it in items)
                     {
-                        sw.WriteLine(seq.Substring(k, Math.Min(60, seq.Length - k)));
+                        operation?.ThrowIfCancellationRequested();
+                        sw.WriteLine(string.IsNullOrEmpty(it.Description)
+                            ? ">" + it.SequenceIdentifier
+                            : ">" + it.SequenceIdentifier + " " + it.Description);
+
+                        string seq = it.Sequence;
+                        for (int k = 0; k < seq.Length; k += 60)
+                        {
+                            sw.WriteLine(seq.Substring(k, Math.Min(60, seq.Length - k)));
+                        }
                     }
                 }
+                operation?.Report("redundancy", "Publishing nonredundant sequences", items.Count, items.Count);
+                void Publish() => File.Move(temp, outputFile, overwrite: true);
+                if (operation == null) Publish();
+                else operation.Commit(Publish);
+            }
+            finally
+            {
+                try { if (File.Exists(temp)) File.Delete(temp); } catch { }
             }
         }
     }

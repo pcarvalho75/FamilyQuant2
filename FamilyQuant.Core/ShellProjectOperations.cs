@@ -1,4 +1,5 @@
 using FamilyQuant.DeNovo;
+using FamilyQuant.Operations;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -43,10 +44,10 @@ public static class ShellProjectOperations
         }
     }
 
-    public static ShellProjectContent Read(string path)
+    public static ShellProjectContent Read(string path, OperationContext? operation = null)
     {
-        if (!ProjectStore.IsProjectPath(path)) return new(FamilyClusterFile.Load(path), new(), null);
-        var (curation, rows, manifest) = ProjectStore.ReadFqproj(path);
+        if (!ProjectStore.IsProjectPath(path)) return new(FamilyClusterFile.Load(path, operation), new(), null);
+        var (curation, rows, manifest) = ProjectStore.ReadFqproj(path, operation);
         return new(curation, rows, manifest);
     }
 
