@@ -1170,6 +1170,26 @@ namespace FamilyQuant.Tests
 
         private static void UiChartPaletteTests(string workDir)
         {
+            var exportBrushes = typeof(ChartPalette).GetProperties(BindingFlags.Instance | BindingFlags.Public)
+                .Where(p => p.PropertyType == typeof(Brush)).ToArray();
+            ChartPalette MutatedExport(string property)
+            {
+                var clone = (ChartPalette)typeof(object).GetMethod("MemberwiseClone", BindingFlags.Instance | BindingFlags.NonPublic)!
+                    .Invoke(ChartPalette.Light, null)!;
+                var target = typeof(ChartPalette).GetProperty(property)!;
+                Color original = ChartPalette.ColorOf((Brush)target.GetValue(clone)!);
+                target.SetValue(clone, new SolidColorBrush(Color.FromArgb(original.A, (byte)(original.R ^ 1), original.G, original.B)));
+                return clone;
+            }
+            Check("every Light export brush and mass band retains its exact pinned colour",
+                PinnedLightPaletteMatches(ChartPalette.Light));
+            Check("the export guard detects a one-channel mutation of every brush",
+                exportBrushes.All(p => !PinnedLightPaletteMatches(MutatedExport(p.Name))));
+            var mutatedBands = (ChartPalette)typeof(object).GetMethod("MemberwiseClone", BindingFlags.Instance | BindingFlags.NonPublic)!
+                .Invoke(ChartPalette.Light, null)!;
+            var bands = ChartPalette.Light.MassBands.ToArray(); bands[0] = ChartPalette.Light.Mixing;
+            typeof(ChartPalette).GetProperty(nameof(ChartPalette.MassBands))!.SetValue(mutatedBands, bands);
+            Check("the export guard also detects a changed mass-band entry", !PinnedLightPaletteMatches(mutatedBands));
             var rows = new List<IdentityScanRow>
             {
                 new() { Identity = 90, Groups = 500, TargetGroups = 260, MixedGroups = 0, Score = 0 },
@@ -1199,7 +1219,7 @@ namespace FamilyQuant.Tests
                     Check(theme + " UI chart text and scan curves remain readable",
                         ChartPalette.ContrastRatio(ui.Ink, ui.Backdrop) >= 4.5 && ChartPalette.ContrastRatio(ui.Muted, ui.Backdrop) >= 4.5
                         && new[] { ui.Families, ui.Mixing, ui.Floor }.All(b => ChartPalette.ContrastRatio(b, ui.Backdrop) >= 3));
-                    Check(theme + " UI palette snapshots are frozen and leave exported Light PNG bytes unchanged",
+                    Check(theme + " UI snapshots are frozen and exporting them still selects the explicit Light palette",
                         typeof(ChartPalette).GetProperties().Where(p => p.PropertyType == typeof(Brush)).All(p => ((Brush)p.GetValue(ui)!).IsFrozen)
                         && ui.MassBands.All(b => b.IsFrozen) && before.SequenceEqual(Export(ui)));
                     var chart = new IdentityScanChart(rows, 70, ui);
@@ -1215,6 +1235,26 @@ namespace FamilyQuant.Tests
                 FamilyQuant.Themes.ThemeManager.ThemeChanged -= handler;
                 FamilyQuant.Themes.ThemeManager.Apply(FamilyQuant.Themes.AppTheme.Dark);
             }
+        }
+
+        private static bool PinnedLightPaletteMatches(ChartPalette palette)
+        {
+            var expected = new Dictionary<string, string>(StringComparer.Ordinal)
+            {
+                ["Backdrop"] = "#FFFBFAF7", ["Ink"] = "#FF16181E", ["Muted"] = "#FF565C68",
+                ["Grid"] = "#FFDDDDE3", ["Panel"] = "#FFEEEFED", ["Axis"] = "#FF565C68", ["SegmentLabel"] = "#FFFFFFFF",
+                ["Identified"] = "#FF10428C", ["DeNovo"] = "#FF1F8F5A", ["Quantified"] = "#FF0F6B84",
+                ["NotQuantified"] = "#FF7B2D9E", ["PeptideLikeUnidentified"] = "#FFA85F13", ["Remainder"] = "#FF5F6675",
+                ["Detected"] = "#FF8A5A12", ["DetectedMultiplyCharged"] = "#FF8A5A12", ["DetectedSinglyCharged"] = "#FF8C7C5C",
+                ["Tic"] = "#FF7B8394", ["Families"] = "#FF10428C", ["Mixing"] = "#FFC2410C", ["Floor"] = "#FF1F8F5A",
+                ["NotAFamily"] = "#FFA85F13", ["Found"] = "#FF10428C", ["OfTic"] = "#FF1F8F5A"
+            };
+            var actual = typeof(ChartPalette).GetProperties(BindingFlags.Instance | BindingFlags.Public)
+                .Where(p => p.PropertyType == typeof(Brush)).ToDictionary(p => p.Name,
+                    p => ChartPalette.ColorOf((Brush)p.GetValue(palette)!).ToString(CultureInfo.InvariantCulture), StringComparer.Ordinal);
+            return actual.Count == expected.Count && expected.All(e => actual.GetValueOrDefault(e.Key) == e.Value)
+                && palette.MassBands.Select(b => ChartPalette.ColorOf(b).ToString(CultureInfo.InvariantCulture))
+                    .SequenceEqual(new[] { "#FF10428C", "#FF1F8F5A", "#FFC2410C" });
         }
 
         /// <summary>

@@ -38,6 +38,8 @@ Finished steps, moved here from docs/ROADMAP.md. The board shows them as green.
 | E10 | Left-out list: proteins carrying a family's learned marker domain that were not assigned, with why | M | 2 | E5 | E13, C4 | Agrees with the 359 of `fora_com_dominio_de_veneno.csv` or differences explained, with no domain table in code | AS | OP | 0% | 0% | T+13 |
 | E6 | Architecture split, general: inside a family, group proteins by domain architecture learned from the data, offer each group as a split with a name from its dominant domain. SVMP against free disintegrin becomes one user choice, stored in the recipe. No domain code in the rule | H | 4 | E5 | E11, E14, C4 | On Ana's file the split separates free disintegrins with no literal; `Disintegrin` count within the differences E14 explains; a second family splits or stays whole by the same code | EV | not started | 0% | 0% | T+4 |
 | E14 | Science gate: the whole rule against the frozen Python classes, as a checker only. Every disagreement listed and judged on biology and literature. The rule is never tuned to copy Python; a real error found in Python is recorded as one | VH | 5 | E4, E6, E7, E9, C4 | A1, E15, E16 | Every difference has a written verdict approved by GR; the 256 reviewed entries are carried by E16 | EV | OP | 0% | 0% | T+17 |
+| E11 | Apply: new numbers past every number in use, annotations, locks, decoys and unassigned proteins untouched, one undo step. Writes a recipe into the project (scope, thresholds, ticked families, names, splits, single-protein overrides, release, program version) | H | 4 | E5, E6, F5 | E12, E13, A1, C4 | Applying the recipe twice gives byte-identical assignments; undo restores everything; recipe survives save and reopen | EV | not started | 0% | 0% | T+4 |
+| E15 | Method written up: Help page, `SCIENTIFIC_METHOD.md`, what is new compared with word and keyword grouping | L | 2 | E14 | R1 | Help opens; every number in it comes from the validation report | EV | OP | 0% | 0% | T+4 |
 
 ### W2 Ana's result, through the software
 
@@ -75,6 +77,7 @@ Finished steps, moved here from docs/ROADMAP.md. The board shows them as green.
 | C8 | Quantify screen instead of the Compute dialog; one run summary | M | 3 | S2 | C10, V3, C13 | Same inputs, same outputs; golden equal; run summary kept | EV | RS | 0% | 0% | T+3 |
 | C9 | Results screen: Analytics paragraph becomes short summary cards with details on demand; one primary export | M | 4 | S2 | V6, V3, X9, C13 | Every fact in the paragraph still reachable; golden equal | EV | RS | 0% | 0% | T+4 |
 | C6 | Build families screen: one flow, one explanation line, button labels that say what they do ("Input a FASTA file" and "Run USearch" go); Remove Redundancy kept | M | 3 | S2, X3 | C7, V3 | All ledger rows kept; renders pass | AS | SH | 0% | 0% | T+6 |
+| C10 | De novo uses the filters Compute uses, so the screen can no longer disagree with the run. `DeNovoControl` (2,329 lines) replaced by a view model and a thin view | H | 5 | C8 | C11, V3 | One source of filters; test proves it; ledger rows checked | EV | RS | 0% | 0% | T+5 |
 
 ### W6 Core rewrite: copy what is good, rewrite what is better
 
@@ -84,4 +87,5 @@ Finished steps, moved here from docs/ROADMAP.md. The board shows them as green.
 | X4 | Word and keyword grouping: `WordCluster` rewritten around one matcher, keeping every rule the suite pins | H | 3 | F5, F6 | R3 | Same merges on real files; `SearchTerms` and phrases pinned | AS | RS | 0% | 0% | T+3 |
 | X8 | Charts: one shared base for the 8 chart classes, so axes, labels and PNG export are written once | H | 4 | F6, V2 | V6, X9 | Exported PNGs unchanged; line count reported | AS | RS | 0% | 0% | T+7 |
 | X10 | One path for errors, progress and cancel in Core; no message box below the App layer | M | 3 | F6 | X3, X5, S6 | A suite check fails on `MessageBox` in Core; each long operation cancels cleanly | AS | not started | 0% | 0% | T+3 |
+| X3 | Clustering: `USearchTools` and `RedundancyTools` with clear result types, cancel and progress | H | 3 | X2, X10 | C6 | Same families frozen against current: Bjararaca exhaustive, Viperidae fast at identity 85 (exhaustive is about 2 billion pairs, ruled out on 2026-11-01); memo and gate tests kept | AS | not started | 0% | 0% | T+3 |
 
