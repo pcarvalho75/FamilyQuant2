@@ -307,6 +307,7 @@ namespace FamilyQuant
             DataGridTextColumn inFamily = AddColumn(table, "In family", 76, nameof(SuperClusterPreviewProtein.FamilyKeywords),
                 "How many proteins of its family carry a keyword: 2 of 11 means the family is here because of those 2.");
             inFamily.SortMemberPath = nameof(SuperClusterPreviewProtein.FamilyCarriers);
+            Themes.TableAppearance.SetNumeric(inFamily, true);
             return table;
         }
 

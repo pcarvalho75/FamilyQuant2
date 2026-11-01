@@ -137,6 +137,8 @@
     <Thickness x:Key="ControlPadding">12,6</Thickness>
     <Thickness x:Key="ControlMargin">4</Thickness>
     <Thickness x:Key="SectionPadding">12</Thickness>
+    <Thickness x:Key="TableHeaderPadding">10,8</Thickness>
+    <Thickness x:Key="TableCellPadding">8,4</Thickness>
     <Thickness x:Key="PanelPadding">16</Thickness>
     <Thickness x:Key="PanelMargin">0,0,0,12</Thickness>
     <CornerRadius x:Key="ControlRadius">4</CornerRadius>

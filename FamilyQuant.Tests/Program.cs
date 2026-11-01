@@ -622,6 +622,7 @@ namespace FamilyQuant.Tests
             ShellStatusBridgeTests();
             LogoResourceTests(workDir);
             TypographyRulesTests();
+            TableAppearanceTests();
             ThemePreferenceTests(workDir);
 
             Section("Feature ledger - frozen source inventory and explicit preservation checks");

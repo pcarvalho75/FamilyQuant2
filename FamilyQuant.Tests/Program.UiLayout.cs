@@ -55,6 +55,65 @@ namespace FamilyQuant.Tests
             FamilyQuant.Themes.ThemeManager.Apply(FamilyQuant.Themes.AppTheme.Dark);
         }
 
+        private sealed class TableStyleFixture
+        {
+            public int Number { get; set; }
+            public string Description { get; set; } = "";
+            public bool Flag { get; set; }
+        }
+
+        private static void TableAppearanceTests()
+        {
+            var rows = Enumerable.Range(1, 5000).Select(i => new TableStyleFixture
+                { Number = i, Description = new string('M', 100) + i, Flag = i == 1 }).ToList();
+            var grid = new DataGrid { AutoGenerateColumns = false, CanUserAddRows = false };
+            grid.Columns.Add(new DataGridTextColumn { Header = "Number", Binding = new System.Windows.Data.Binding("Number"), Width = 100 });
+            grid.Columns.Add(new DataGridTextColumn { Header = "Description", Binding = new System.Windows.Data.Binding("Description"), Width = 240 });
+            var flags = new Style(typeof(DataGridRow));
+            var flag = new DataTrigger { Binding = new System.Windows.Data.Binding("Flag"), Value = true };
+            flag.Setters.Add(new Setter(Control.ForegroundProperty, new DynamicResourceExtension("ErrorBrush")));
+            flags.Triggers.Add(flag); grid.RowStyle = flags;
+            var window = new Window { Content = grid, Width = 640, Height = 360, Left = -30000, Top = -30000,
+                WindowStartupLocation = WindowStartupLocation.Manual, ShowActivated = false, ShowInTaskbar = false };
+            window.Show();
+            try
+            {
+                // Imports fill already-visible grids, so numeric inference must also follow a later source.
+                grid.ItemsSource = rows;
+                PumpDispatcher(); window.UpdateLayout();
+                foreach (var theme in new[] { FamilyQuant.Themes.AppTheme.Dark, FamilyQuant.Themes.AppTheme.Light })
+                {
+                    FamilyQuant.Themes.ThemeManager.Apply(theme); PumpDispatcher(); window.UpdateLayout();
+                    var number = grid.Columns[0].GetCellContent(rows[0]) as TextBlock;
+                    var description = grid.Columns[1].GetCellContent(rows[0]) as TextBlock;
+                    Check(theme + " table numbers align right and truncated text remains available in a tooltip",
+                        number?.TextAlignment == TextAlignment.Right && description?.TextTrimming == TextTrimming.CharacterEllipsis
+                        && description.ToolTip as string == rows[0].Description);
+                    grid.SelectedItem = rows[0]; PumpDispatcher(); window.UpdateLayout();
+                    var row = grid.ItemContainerGenerator.ContainerFromIndex(0) as DataGridRow;
+                    Check(theme + " selection uses tokens and retains the existing status flag",
+                        (row?.Background as SolidColorBrush)?.Color == ((SolidColorBrush)Application.Current.FindResource("SelectionBrush")).Color
+                        && (row?.Foreground as SolidColorBrush)?.Color == ((SolidColorBrush)Application.Current.FindResource("ErrorBrush")).Color,
+                        "selected=" + row?.IsSelected + "; background=" + row?.Background + "; foreground=" + row?.Foreground);
+                }
+                var replacement = new Style(typeof(System.Windows.Controls.Primitives.DataGridColumnHeader));
+                replacement.Setters.Add(new Setter(FrameworkElement.ToolTipProperty, "Updated column fact remains reachable after import."));
+                grid.Columns[0].HeaderStyle = replacement; PumpDispatcher(); window.UpdateLayout();
+                var header = WalkTree(grid).OfType<System.Windows.Controls.Primitives.DataGridColumnHeader>()
+                    .FirstOrDefault(h => h.Column == grid.Columns[0]);
+                Check("headers remain themed and keep replaced tooltip facts",
+                    header?.ToolTip as string == "Updated column fact remains reachable after import."
+                    && (header.Background as SolidColorBrush)?.Color == ((SolidColorBrush)Application.Current.FindResource("SubtleBrush")).Color);
+                int realized = WalkTree(grid).OfType<DataGridRow>().Count();
+                Check("large tables keep recycling virtualization and do not alter source values",
+                    grid.EnableRowVirtualization && grid.EnableColumnVirtualization
+                    && VirtualizingPanel.GetVirtualizationMode(grid) == VirtualizationMode.Recycling
+                    && realized < 100 && rows.Select(r => r.Number).SequenceEqual(Enumerable.Range(1, 5000)),
+                    realized.ToString(CultureInfo.InvariantCulture) + " realized rows");
+            }
+            finally { window.Close(); FamilyQuant.Themes.ThemeManager.Apply(FamilyQuant.Themes.AppTheme.Dark); }
+        }
+
         /// <summary>
         /// Runs everything already queued on this thread's dispatcher, then returns.
         ///
