@@ -73,6 +73,14 @@ namespace FamilyQuant.Tests
             string workDir = Path.Combine(Path.GetTempPath(), "FamilyQuant.Tests");
             Directory.CreateDirectory(workDir);
 
+            if (GoldenNumbers.IsRequested(args))
+            {
+                EnsureApplication();
+                GoldenNumbers.Run(args, Check);
+                Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
+                return failed == 0 ? 0 : 1;
+            }
+
             // The conference-talk deliverable, GATED on its own flag and on nothing else, so a normal run
             // (with or without the four data paths) never reaches it. It is an OWN-LANE runner rather than
             // one more section: it re-extracts three 3 GB acquisitions at the 6-isotope ceiling, which is
@@ -409,6 +417,7 @@ namespace FamilyQuant.Tests
 
             Section("Project store (Q2) - .fqproj container round trip, migration and structure");
             ProjectStoreTests(workDir);
+            GoldenNumberGuardTests();
 
             Section("Talk export routing - one override root for heavy and fast lanes");
             TalkOutputRootTests(workDir);

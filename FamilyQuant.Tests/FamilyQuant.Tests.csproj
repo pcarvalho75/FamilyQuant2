@@ -16,6 +16,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\FamilyQuant\FamilyQuant.csproj" />
+    <Compile Remove="ReferenceGoldenHost/**/*.cs" />
   </ItemGroup>
 
   <!-- HintPath references do not flow through a ProjectReference, so PatternTools is named again here. -->
