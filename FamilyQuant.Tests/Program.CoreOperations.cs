@@ -11,6 +11,7 @@ namespace FamilyQuant.Tests
     {
         private static void CoreOperationTests(string workDir)
         {
+            CoreMessageBoxTests();
             var reports = new List<OperationProgress>();
             var progress = new InlineOperationProgress(reports.Add);
             var success = CoreOperation.Run("fixture", context =>
@@ -71,6 +72,7 @@ namespace FamilyQuant.Tests
             var asyncFailure = CoreOperation.RunAsync<int>("fixture", _ => Task.FromException<int>(cause))
                 .GetAwaiter().GetResult();
             Check("async work uses the same failure contract", asyncFailure.Status == OperationStatus.Failed && asyncFailure.Failure?.Cause == cause);
+            LongOperationCancellationTests(workDir);
         }
 
         private sealed class InlineOperationProgress : IProgress<OperationProgress>

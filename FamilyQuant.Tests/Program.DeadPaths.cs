@@ -19,7 +19,8 @@ namespace FamilyQuant.Tests
             MethodInfo[] attribution = typeof(FamilyClusterFile).GetMethods()
                 .Where(m => m.Name == "AttributeXICToGroups").ToArray();
             Check("quantitation has one explicit source, denominator and shared-peptide contract",
-                attribution.Length == 1 && attribution[0].GetParameters().Length == 3);
+                attribution.Length == 1 && attribution[0].GetParameters().Length == 4 &&
+                attribution[0].GetParameters()[3].IsOptional);
             Check("internal group-XIC implementation has no unused public overloads",
                 !typeof(FamilyClusterFile).GetMethods().Any(m => m.Name == "GetGroupXIC"));
             CuratedAttributionTests();

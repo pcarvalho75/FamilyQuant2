@@ -1,4 +1,5 @@
 using PatternTools.PLP;
+using FamilyQuant.Operations;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -44,11 +45,11 @@ namespace FamilyQuant
         /// Rebuilds the lookups if this is not the project they were built from, so a stale cache can
         /// never survive a change of PLP.
         /// </summary>
-        private void EnsureLookupsFor(PatternLabProject MyPLP)
+        private void EnsureLookupsFor(PatternLabProject MyPLP, OperationContext? operation = null)
         {
             if (!ReferenceEquals(LookupSource, MyPLP))
             {
-                SetLookupDictionary(MyPLP);
+                SetLookupDictionary(MyPLP, operation);
             }
         }
 
@@ -97,8 +98,9 @@ namespace FamilyQuant
         /// Builds the protein -> peptides map and the peptide -> index-id map for a freshly loaded PLP,
         /// and drops any memoised XIC values from a previous project.
         /// </summary>
-        public void SetLookupDictionary(PatternLabProject MyPLP)
+        public void SetLookupDictionary(PatternLabProject MyPLP, OperationContext? operation = null)
         {
+            operation?.ThrowIfCancellationRequested();
             Console.WriteLine("=== Setting up lookup dictionaries ===");
 
             ProteinPeptideDictionary = new Dictionary<string, List<string>>();
@@ -106,7 +108,7 @@ namespace FamilyQuant
             PeptideXicTotals = new Dictionary<int, double>();
             PeptideRescaledTotals = new Dictionary<int, double>();
             RescaledTotalsTag = null;
-            LookupSource = MyPLP;
+            LookupSource = null;
 
             Console.WriteLine($"PLP has {MyPLP.MyIndex.TheIndexes.Count} index entries");
 
@@ -114,6 +116,7 @@ namespace FamilyQuant
 
             foreach (var item in MyPLP.MyIndex.TheIndexes)
             {
+                operation?.ThrowIfCancellationRequested();
                 string[] locci;
 
                 if (item.Description.Contains("Mappable proteins : "))
@@ -150,6 +153,7 @@ namespace FamilyQuant
                 }
             }
 
+            LookupSource = MyPLP;
             Console.WriteLine($"ProteinPeptideDictionary created with {ProteinPeptideDictionary.Count} proteins");
             Console.WriteLine($"PeptideIndexIds created with {PeptideIndexIds.Count} peptides");
 
@@ -174,9 +178,10 @@ namespace FamilyQuant
         /// well past 100% of the chromatogram. Only the additive policies may be read as a composition.
         /// </summary>
         public void AttributeXICToGroups(FamilyClusterFile document, PatternLabProject MyPLP,
-                                         NormalizationMode mode, SharedPeptidePolicy sharedPolicy)
+                                         NormalizationMode mode, SharedPeptidePolicy sharedPolicy, OperationContext? operation = null)
         {
-            EnsureLookupsFor(MyPLP);
+            operation?.Report("attribution", "Preparing family signal");
+            EnsureLookupsFor(MyPLP, operation);
 
             // PHASE 4. A mode that names a denominator may need the file's values re-expressed under it.
             //
@@ -204,11 +209,14 @@ namespace FamilyQuant
             var groupXICs = new Dictionary<int, double>();
             double totalXIC = 0;
 
+            int completed = 0;
             foreach (var group in groupedItems)
             {
+                operation?.ThrowIfCancellationRequested();
                 double groupXIC = GetGroupXIC(group, MyPLP, familiesPerPeptide, sharedPolicy, plan);
                 groupXICs[group.Key] = groupXIC;
                 totalXIC += groupXIC;
+                operation?.Report("attribution", "Calculated family signal", ++completed, groupedItems.Count);
             }
 
             if (totalXIC <= 0)
@@ -232,22 +240,27 @@ namespace FamilyQuant
             // Second pass: normalize and assign. A zero total means nothing matched (a protein-level PLP,
             // or a database unrelated to the project); zero the column instead of leaving the previous
             // project's abundances in place, which then got saved into the .fcf as if they were current.
-            foreach (var group in groupedItems)
+            void Publish()
             {
-                double value;
-
-                if (totalXIC <= 0)
-                    value = 0;
-                else if (denominatorMode)
-                    value = groupXICs[group.Key] / runs;
-                else
-                    value = groupXICs[group.Key] / totalXIC;
-
-                foreach (FastaItemExtended item in group)
+                foreach (var group in groupedItems)
                 {
-                    item.XICUser = value;
+                    double value;
+
+                    if (totalXIC <= 0)
+                        value = 0;
+                    else if (denominatorMode)
+                        value = groupXICs[group.Key] / runs;
+                    else
+                        value = groupXICs[group.Key] / totalXIC;
+
+                    foreach (FastaItemExtended item in group)
+                    {
+                        item.XICUser = value;
+                    }
                 }
             }
+            if (operation == null) Publish();
+            else operation.Commit(Publish);
         }
 
         /// <summary>

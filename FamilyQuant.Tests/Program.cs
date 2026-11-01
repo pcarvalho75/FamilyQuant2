@@ -40,6 +40,13 @@ namespace FamilyQuant.Tests
         [STAThread]   // required: the UI smoke section constructs WPF controls
         private static int Main(string[] args)
         {
+            if (args.Length == 2 && args[0] == "--operation-native-wait")
+            {
+                File.WriteAllText(args[1] + ".tmp", Environment.ProcessId.ToString(CultureInfo.InvariantCulture));
+                File.Move(args[1] + ".tmp", args[1]);
+                Thread.Sleep(TimeSpan.FromMinutes(2));
+                return 0;
+            }
             if (args.Contains("--test-operations", StringComparer.Ordinal))
             {
                 string operationWorkDir = Path.Combine(Path.GetTempPath(), "FamilyQuant.Tests");

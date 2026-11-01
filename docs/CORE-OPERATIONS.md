@@ -46,11 +46,41 @@ produce a failure, so the action must provide its own atomic I/O semantics.
 
 ## Adoption
 
-This first X10 commit publishes the common contract and tests. Long-operation
-wiring is the next X10 commit; this contract alone does not make an existing
-synchronous API interruptible. Evidence fetching already has its own published
+The contract commit is `90d1a05`. The wiring commit adds an optional final
+`OperationContext` parameter to these existing APIs:
+
+| Area | API |
+|---|---|
+| Clustering/alignment | `USearchTools.Align`, `GenerateFCF`, `CountSequences` and its exhaustive pass |
+| Identity selection | `FamilyClusterFile.ScanIdentities`, `DivideAndConquer` and detailed result |
+| Curation files | `FamilyClusterFile.Load`, `Save`, `SetLookupDictionary`, `AttributeXICToGroups` |
+| Redundancy | `RedundancyTools.RemoveRedundancy` |
+| Homology | `HomologyDatabase.Build`, `HomologyMapper.Search` and `SearchOne` |
+| Project files | `ProjectStore.ReadFqproj`, `WriteFqproj` and `ShellProjectOperations.Read` |
+
+Existing callers retain their argument defaults. Cancellation during native work
+stops the owned process tree; cancellation never becomes an exhaustive-pass
+fallback. Failed/cancelled memo entries are removed. Save/redundancy output uses
+a unique temporary file and one final replacement. Cancelled project writes also
+restore the manifest fields prepared for writing. Attribution publishes displayed
+shares only after all family totals are prepared.
+
+Opaque vendor calls and synchronous JSON serialization are cancellation
+boundaries: a request is observed before/after them, not by aborting their thread.
+No partial result from those calls is attached or published after cancellation.
+
+Per orchestrator M24, further adoption belongs to FQEvidence for compute during
+X5, FQResults for WordCluster, and FQOpus for its global method. Their adoption
+does not hold this X10 plumbing open. Evidence fetching already has a published
 token/progress seam, which its owner can adapt. FQShell owns the S6 App consumer.
 
 The focused test command is `FamilyQuant.Tests.exe --test-operations`. Use a
 worktree-specific TEMP directory, as the quick-suite launcher does. The regular
 quick suite runs the same contract checks.
+
+Wiring verification: clean Release build; 28 focused checks pass, including a
+controlled running native process, cancellation before final save replacement,
+manifest restoration, and no partial homology/attribution result. The quick suite
+passes 1906 checks with zero failures and 17 skips. The stored-project golden
+comparison passes all four byte checks against frozen 1.5.0.6. The Opus-owned
+global-search method body is unchanged.

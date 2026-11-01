@@ -1,4 +1,5 @@
 using System;
+using FamilyQuant.Operations;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -65,8 +66,9 @@ namespace FamilyQuant
         /// each one, so a threshold can be chosen from the whole curve instead of a single optimiser
         /// answer. Runs USEARCH once per step, from the strictest identity down to the loosest.
         /// </summary>
-        public static List<IdentityScanRow> ScanIdentities(string fileName, int from = 95, int to = 10, int step = 5, string decoyTag = SequenceLabels.DecoyPrefix, bool exhaustive = true)
+        public static List<IdentityScanRow> ScanIdentities(string fileName, int from = 95, int to = 10, int step = 5, string decoyTag = SequenceLabels.DecoyPrefix, bool exhaustive = true, OperationContext? operation = null)
         {
+            operation?.ThrowIfCancellationRequested();
             if (step <= 0) throw new ArgumentOutOfRangeException(nameof(step), "Step must be positive.");
             if (from < to) throw new ArgumentException("'from' must be greater than or equal to 'to'.", nameof(from));
 
@@ -79,7 +81,8 @@ namespace FamilyQuant
 
             for (int identity = from; identity >= to; identity -= step)
             {
-                FamilyClusterFile clustered = USearchTools.GenerateFCF(fi, identity, exhaustive);
+                operation?.Report("identity-scan", "Clustering at " + identity + "% identity");
+                FamilyClusterFile clustered = USearchTools.GenerateFCF(fi, identity, exhaustive, operation);
                 GroupingScore score = clustered.CalculateGroupingScore(decoyTag);
                 int nonContaminantTargets = clustered.GroupedFastaItems.Count(g => g.Any(i =>
                     !(i.SequenceIdentifier ?? string.Empty).StartsWith(decoyTag, StringComparison.Ordinal)
@@ -122,9 +125,9 @@ namespace FamilyQuant
         /// then not a single upper interval and the bisection can settle on either edge. At the default
         /// of 0 the predicate reduces to "no mixed family at all", which has no such hole.
         /// </summary>
-        public static double DivideAndConquer(string fileName, double acceptableScore = 0.0, string decoyTag = SequenceLabels.DecoyPrefix, bool exhaustive = true)
+        public static double DivideAndConquer(string fileName, double acceptableScore = 0.0, string decoyTag = SequenceLabels.DecoyPrefix, bool exhaustive = true, OperationContext? operation = null)
         {
-            return DivideAndConquerDetailed(fileName, acceptableScore, decoyTag, exhaustive).Identity;
+            return DivideAndConquerDetailed(fileName, acceptableScore, decoyTag, exhaustive, operation).Identity;
         }
 
         /// <summary>
@@ -132,8 +135,9 @@ namespace FamilyQuant
         /// the families that mix there are WHY the search stopped where it did. One short peptide matching
         /// its own reversed decoy can set the floor on its own, and a bare number cannot show that.
         /// </summary>
-        public static DivideAndConquerResult DivideAndConquerDetailed(string fileName, double acceptableScore = 0.0, string decoyTag = SequenceLabels.DecoyPrefix, bool exhaustive = true)
+        public static DivideAndConquerResult DivideAndConquerDetailed(string fileName, double acceptableScore = 0.0, string decoyTag = SequenceLabels.DecoyPrefix, bool exhaustive = true, OperationContext? operation = null)
         {
+            operation?.ThrowIfCancellationRequested();
             var fi = new FileInfo(fileName);
 
             int lo = 0;     // assumed to FAIL the constraint (loosest clustering)
@@ -143,7 +147,7 @@ namespace FamilyQuant
             // the unprobed 0) can be handed back without another USEARCH run.
             var failed = new Dictionary<int, GroupingScore>();
 
-            GroupingScore strictest = Probe(fi, hi, decoyTag, exhaustive);
+            GroupingScore strictest = Probe(fi, hi, decoyTag, exhaustive, operation);
 
             // A database with no decoys scores 0 at EVERY identity, so the search would walk all the way
             // down to 1% and report it as "no mixing found". That is a missing measurement, not a result.
@@ -169,7 +173,7 @@ namespace FamilyQuant
             while (hi - lo > 1)
             {
                 int mid = (lo + hi) / 2;
-                GroupingScore probe = Probe(fi, mid, decoyTag, exhaustive);
+                GroupingScore probe = Probe(fi, mid, decoyTag, exhaustive, operation);
 
                 if (probe.Score <= acceptableScore)
                     hi = mid;   // satisfied: try to go lower (fewer groups)
@@ -191,9 +195,10 @@ namespace FamilyQuant
             };
         }
 
-        private static GroupingScore Probe(FileInfo fi, int identity, string decoyTag, bool exhaustive = true)
+        private static GroupingScore Probe(FileInfo fi, int identity, string decoyTag, bool exhaustive = true, OperationContext? operation = null)
         {
-            GroupingScore score = USearchTools.GenerateFCF(fi, identity, exhaustive).CalculateGroupingScore(decoyTag);
+            operation?.Report("identity-search", "Clustering at " + identity + "% identity");
+            GroupingScore score = USearchTools.GenerateFCF(fi, identity, exhaustive, operation).CalculateGroupingScore(decoyTag);
 
             Console.WriteLine(
                 "Identity {0}% -> {1} groups ({2} with targets, {3} mixed), score {4:P2} (of target families {5:P2})",
