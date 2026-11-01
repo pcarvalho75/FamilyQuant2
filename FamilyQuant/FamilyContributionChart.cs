@@ -248,14 +248,13 @@ namespace FamilyQuant
     /// decides what the numbers say - the raw envelope signal, or each bar's share of the measurement.
     /// Drawn with OnRender for the same reason as the other charts, and renders headless.
     /// </summary>
-    public class FamilyContributionChart : FrameworkElement, IPalettedChart
+    public class FamilyContributionChart : ChartDrawingBase, IPalettedChart
     {
         private readonly List<FamilyContributionBar> bars;
         private readonly bool asPercent;
         private readonly double measuredTotal;
         private readonly double identityThreshold;
 
-        private ChartPalette palette = ChartPalette.Dark;
 
         private const double NameGutter = 300;
         private const double ValueGutter = 104;
@@ -309,17 +308,6 @@ namespace FamilyQuant
                       "\"other families\" bar, so nothing is dropped.";
         }
 
-        /// <inheritdoc/>
-        public ChartPalette Palette
-        {
-            get => palette;
-            set
-            {
-                palette = value ?? ChartPalette.Dark;
-                InvalidateVisual();
-            }
-        }
-
         /// <summary>The folded bars this chart draws, in drawing order, as the tests read them.</summary>
         public IReadOnlyList<FamilyContributionBar> Bars => bars;
 
@@ -364,11 +352,6 @@ namespace FamilyQuant
         public IReadOnlyList<FamilyContributionBar> BarsAtHeight(double height) =>
             FamilyContributionPlot.FitToHeight(bars, FamilyContributionPlot.BarCapacity(height));
 
-        private static FormattedText Text(string s, Brush brush, double size, bool bold = false) =>
-            new FormattedText(s, CultureInfo.CurrentCulture, FlowDirection.LeftToRight,
-                new Typeface(new FontFamily("Segoe UI"), FontStyles.Normal,
-                             bold ? FontWeights.Bold : FontWeights.Normal, FontStretches.Normal),
-                size, brush, 96);
 
         /// <summary>Text that is cut with an ellipsis rather than allowed to run into the bars. The
         /// layout system's own trimming, so no character count has to guess at the font's metrics.</summary>
@@ -399,7 +382,7 @@ namespace FamilyQuant
             ChartPalette pal = palette;
             Brush Backdrop = pal.Backdrop, Ink = pal.Ink, Muted = pal.Muted;
 
-            dc.DrawRectangle(Backdrop, null, new Rect(0, 0, ActualWidth, ActualHeight));
+            DrawBackdrop(dc, Backdrop);
 
             var head = Text(Heading, Ink, 13, bold: true);
             head.MaxTextWidth = Math.Max(1, Math.Max(200, ActualWidth - 28));

@@ -22,11 +22,10 @@ namespace FamilyQuant
     ///
     /// Drawn with OnRender for the same reason as the other charts, and renders headless.
     /// </summary>
-    public class RecoveryChart : FrameworkElement, IPalettedChart
+    public class RecoveryChart : ChartDrawingBase, IPalettedChart
     {
         private readonly List<NativeRunFraction> rows;
 
-        private ChartPalette palette = ChartPalette.Dark;
 
         // The gutters are FLOORS and CEILINGS, not fixed widths. A fixed 150 DIP left gutter cut every
         // acquisition name in half at projector size, which left the three runs of a triplicate looking
@@ -75,22 +74,6 @@ namespace FamilyQuant
                       "biological classes.";
         }
 
-        /// <inheritdoc/>
-        public ChartPalette Palette
-        {
-            get => palette;
-            set
-            {
-                palette = value ?? ChartPalette.Dark;
-                InvalidateVisual();
-            }
-        }
-
-        private static FormattedText Text(string s, Brush brush, double size, bool bold = false) =>
-            new FormattedText(s, CultureInfo.CurrentCulture, FlowDirection.LeftToRight,
-                new Typeface(new FontFamily("Segoe UI"), FontStyles.Normal,
-                             bold ? FontWeights.Bold : FontWeights.Normal, FontStretches.Normal),
-                size, brush, 96);
 
         private static string Pct(double frac) =>
             (frac * 100.0).ToString("F1", CultureInfo.CurrentCulture) + "%";
@@ -102,7 +85,7 @@ namespace FamilyQuant
             ChartPalette pal = palette;
             Brush Backdrop = pal.Backdrop, Ink = pal.Ink, Muted = pal.Muted;
 
-            dc.DrawRectangle(Backdrop, null, new Rect(0, 0, ActualWidth, ActualHeight));
+            DrawBackdrop(dc, Backdrop);
 
             var head = Text("Recovery of the total ion current", Ink, 13, bold: true);
             dc.DrawText(head, new Point(14, 10));
@@ -111,9 +94,7 @@ namespace FamilyQuant
             {
                 if (rows.Count == 0 && ActualWidth >= 200)
                 {
-                    var none = Text("Nothing to show: compute the full XIC so the runs have a TIC to divide by.",
-                                    Muted, 12);
-                    dc.DrawText(none, new Point(14, 60));
+                    DrawEmpty(dc, "Nothing to show: compute the full XIC so the runs have a TIC to divide by.", Muted, new Point(14, 60));
                 }
                 return;
             }
