@@ -24,6 +24,7 @@ namespace FamilyQuant
             {
                 Themes.ThemeManager.Initialize();
                 MainWindow = new MainWindow();
+                MainWindow.SetResourceReference(Window.IconProperty, "AppWindowIcon");
                 MainWindow.Show();
             }
         }
