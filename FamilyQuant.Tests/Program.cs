@@ -621,6 +621,7 @@ namespace FamilyQuant.Tests
             LegacySurfaceContrastTests();
             ShellStatusBridgeTests();
             LogoResourceTests(workDir);
+            TypographyRulesTests();
             ThemePreferenceTests(workDir);
 
             Section("Feature ledger - frozen source inventory and explicit preservation checks");

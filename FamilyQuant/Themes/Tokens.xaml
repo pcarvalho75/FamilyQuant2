@@ -130,7 +130,13 @@
     <sys:Double x:Key="CaptionSize">12</sys:Double>
     <sys:Double x:Key="TitleSize">20</sys:Double>
     <sys:Double x:Key="SectionSize">14</sys:Double>
+    <sys:Double x:Key="TitleLineHeight">26</sys:Double>
+    <sys:Double x:Key="SectionLineHeight">20</sys:Double>
+    <sys:Double x:Key="BodyLineHeight">18</sys:Double>
+    <sys:Double x:Key="CaptionLineHeight">16</sys:Double>
     <Thickness x:Key="ControlPadding">12,6</Thickness>
+    <Thickness x:Key="ControlMargin">4</Thickness>
+    <Thickness x:Key="SectionPadding">12</Thickness>
     <Thickness x:Key="PanelPadding">16</Thickness>
     <Thickness x:Key="PanelMargin">0,0,0,12</Thickness>
     <CornerRadius x:Key="ControlRadius">4</CornerRadius>

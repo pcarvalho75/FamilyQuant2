@@ -21,6 +21,39 @@ namespace FamilyQuant.Tests
 {
     internal static partial class Program
     {
+        private static void TypographyRulesTests()
+        {
+            foreach (var mode in new[] { FamilyQuant.Themes.AppTheme.Dark, FamilyQuant.Themes.AppTheme.Light })
+            {
+                FamilyQuant.Themes.ThemeManager.Apply(mode);
+                TextBlock Role(string key) => new TextBlock { Text = "Readable text", Style = (Style)Application.Current.FindResource(key) };
+                var title = Role("PageTitle"); var section = Role("SectionTitle");
+                var body = Role("BodyText"); var caption = Role("CaptionText");
+                Check(mode + " shared text roles have a readable hierarchy and line spacing",
+                    title.FontSize > section.FontSize && section.FontSize > body.FontSize && body.FontSize > caption.FontSize
+                    && new[] { title, section, body, caption }.All(t => t.LineHeight >= t.FontSize));
+                var primary = new Button { Style = (Style)Application.Current.FindResource("PrimaryButton") };
+                var quiet = new Button { Style = (Style)Application.Current.FindResource(typeof(Button)) };
+                Check(mode + " primary and quiet actions share the token spacing",
+                    primary.Margin == (Thickness)Application.Current.FindResource("ControlMargin")
+                    && quiet.Margin == primary.Margin && primary.Padding == quiet.Padding);
+            }
+            var file = new FamilyClusterFile { MyExtendedFastaItems = new List<FastaItemExtended>
+            {
+                new FastaItemExtended { SequenceIdentifier = "type_fixture", Sequence = "PEPTIDEK", Description = "Example protein", UserID = 1, USearchID = 1 }
+            } };
+            var control = new ClusterGenerationControl(file);
+            Check("curation command labels use sentence case while retaining their commands",
+                UiField<Button>(control, "ButtonAlignSelected")!.Content as string == "Align selected"
+                && UiField<Button>(control, "ButtonWordCluster")!.Content as string == "Recluster by words"
+                && UiField<Button>(control, "ButtonFetchDomains")!.Content as string == "Fetch evidence");
+            control.Measure(new Size(1366, 820)); control.Arrange(new Rect(0, 0, 1366, 820));
+            var primaryStyle = (Style)Application.Current.FindResource("PrimaryButton");
+            var groups = WalkTree(control).OfType<GroupBox>().ToList();
+            Check("each curation panel has at most one primary action",
+                groups.Count > 0 && groups.All(g => WalkTree(g).OfType<Button>().Count(b => ReferenceEquals(b.Style, primaryStyle)) <= 1));
+            FamilyQuant.Themes.ThemeManager.Apply(FamilyQuant.Themes.AppTheme.Dark);
+        }
 
         /// <summary>
         /// Runs everything already queued on this thread's dispatcher, then returns.

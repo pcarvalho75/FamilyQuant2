@@ -176,6 +176,7 @@ namespace FamilyQuant
             createButton = new Button
             {
                 Content = "Create super cluster",
+                Style = Application.Current.TryFindResource("PrimaryButton") as Style,
                 Padding = new Thickness(12, 5, 12, 5),
                 ToolTip = "Gathers the ticked proteins into one family, and Undo steps it back. Disabled while there is nothing to change.",
             };

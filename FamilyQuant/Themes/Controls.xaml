@@ -24,7 +24,7 @@
         <Setter Property="FontFamily" Value="{DynamicResource UiFont}"/>
         <Setter Property="FontSize" Value="{DynamicResource BodySize}"/>
         <Setter Property="Padding" Value="{DynamicResource ControlPadding}"/>
-        <Setter Property="Margin" Value="4"/>
+        <Setter Property="Margin" Value="{DynamicResource ControlMargin}"/>
         <Setter Property="Background" Value="{DynamicResource SubtleBrush}"/>
         <Setter Property="Foreground" Value="{DynamicResource TextBrush}"/>
         <Setter Property="BorderBrush" Value="{DynamicResource EdgeBrush}"/>
@@ -35,7 +35,7 @@
         <Setter Property="FontFamily" Value="{DynamicResource UiFont}"/>
         <Setter Property="FontSize" Value="{DynamicResource BodySize}"/>
         <Setter Property="Padding" Value="{DynamicResource ControlPadding}"/>
-        <Setter Property="Margin" Value="4"/>
+        <Setter Property="Margin" Value="{DynamicResource ControlMargin}"/>
         <Setter Property="ToolTipService.ShowOnDisabled" Value="True"/>
         <Setter Property="ToolTipService.ShowDuration" Value="60000"/>
         <Setter Property="Background" Value="{DynamicResource AccentBrush}"/>
@@ -76,7 +76,7 @@
         <Setter Property="Background" Value="{DynamicResource SurfaceBrush}"/>
         <Setter Property="Foreground" Value="{DynamicResource TextBrush}"/>
         <Setter Property="BorderThickness" Value="0"/>
-        <Setter Property="Padding" Value="12"/>
+        <Setter Property="Padding" Value="{DynamicResource SectionPadding}"/>
         <Setter Property="FontSize" Value="{DynamicResource CaptionSize}"/>
         <Setter Property="HeaderTemplate">
             <Setter.Value>
