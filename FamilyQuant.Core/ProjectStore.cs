@@ -658,6 +658,8 @@ namespace FamilyQuant
             if (path == null) throw new ArgumentNullException(nameof(path));
             if (fcf == null) throw new ArgumentNullException(nameof(fcf));
             if (manifest == null) throw new ArgumentNullException(nameof(manifest));
+            fcf.LastSaveCheck = null;
+            var expectedCuration = Evidence.SavedFileCheck.Capture(fcf);
 
             if (manifest.FormatVersion > CurrentFormatVersion)
                 throw new InvalidDataException(
@@ -710,6 +712,8 @@ namespace FamilyQuant
                         JsonSerializer.Serialize(manifest, ManifestJsonOptions), CompressionLevel.Optimal, operation);
                 }
 
+                fcf.LastSaveCheck = Evidence.SavedFileCheck.Verify(expectedCuration, temp, project: true, operation);
+                Evidence.SavedFileCheck.RequirePassed(fcf.LastSaveCheck);
                 operation?.Report("project-save", "Publishing project output", 1, 1);
                 void Publish() => File.Move(temp, path, overwrite: true);
                 if (operation == null) Publish();
