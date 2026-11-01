@@ -73,6 +73,8 @@ namespace FamilyQuant.Tests
                 ShellStatusTests(shellWork);
                 ShellStatusBridgeTests();
                 HomeStartTests(shellWork);
+                ShellNavigationTests(shellWork);
+                ShellProjectOperationTests(shellWork);
                 AppVersionTests();
                 Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
                 return failed == 0 ? 0 : 1;
@@ -616,6 +618,8 @@ namespace FamilyQuant.Tests
             StandardMenuTests(workDir);
             ShellStatusTests(workDir);
             HomeStartTests(workDir);
+            ShellNavigationTests(workDir);
+            ShellProjectOperationTests(workDir);
 
             Console.WriteLine();
             Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");

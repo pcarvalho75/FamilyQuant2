@@ -192,6 +192,8 @@ internal static partial class Program
             MainWindow.SelectSaveProjectPathOverride = () => throw new InvalidOperationException("Save must reuse its existing project path.");
             Save(false);
             Check("Save reuses the existing project path", Field<string>("lastFcfPath") == Path.GetFullPath(firstSave));
+            Check("save completion restores shell navigation readiness", !main.NavigationModel.IsBusy
+                && main.NavigationModel.CanNavigate(ShellDestination.Results));
             MainWindow.SelectSaveProjectPathOverride = () => secondSave;
             Save(true);
             Check("Save as chooses another project path and preserves the first file", File.Exists(firstSave) && File.Exists(secondSave)
