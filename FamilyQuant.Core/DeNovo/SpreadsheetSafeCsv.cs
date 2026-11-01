@@ -9,7 +9,7 @@ namespace FamilyQuant.DeNovo
     /// formula. Prefixing such text with an apostrophe makes it literal, while invariant signed numeric
     /// values remain numeric so scientific tables do not turn negative measurements into text.
     /// </summary>
-    internal static class SpreadsheetSafeCsv
+    public static class SpreadsheetSafeCsv
     {
         public static string Encode(string? value, bool alwaysQuote = false)
         {

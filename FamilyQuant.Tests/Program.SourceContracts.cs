@@ -11,6 +11,7 @@ namespace FamilyQuant.Tests
     {
         private static void PrefixDefinitionTests()
         {
+            CoreBoundaryTests();
             Check("the prefix guard rejects a planted decoy literal",
                 PrefixLiterals("string tag = \"Reverse_\";").Count == 1);
             Check("the prefix guard rejects a planted contaminant prefix or marker",
@@ -55,6 +56,24 @@ namespace FamilyQuant.Tests
             }
             Check("prefix literals occur only in SequenceLabels",
                 violations.Count == 0, string.Join(", ", violations));
+        }
+
+        private static void CoreBoundaryTests()
+        {
+            var engine = typeof(FamilyClusterFile).Assembly;
+            Check("the headless engines are owned by FamilyQuant.Core",
+                new[] { typeof(FamilyClusterFile), typeof(USearchTools), typeof(WordCluster),
+                        typeof(ProjectStore), typeof(Homology.HomologyMapper), typeof(DeNovo.NativeQuantFractions) }
+                    .All(t => t.Assembly.GetName().Name == "FamilyQuant.Core"));
+            Check("Core has no WPF assembly references",
+                !engine.GetReferencedAssemblies().Any(a =>
+                    a.Name is "PresentationFramework" or "PresentationCore" or "WindowsBase" or "System.Xaml" ||
+                    (a.Name?.StartsWith("Xceed.Wpf", StringComparison.Ordinal) ?? false)));
+            Check("Core is a library without application or window types",
+                engine.EntryPoint == null && engine.GetType("FamilyQuant.MainWindow") == null &&
+                engine.GetType("FamilyQuant.AppVersionInfo") == null);
+            Check("the embedded USEARCH payload keeps its resource namespace beside the engine",
+                typeof(USearchTools).Assembly.GetManifestResourceNames().Contains("FamilyQuant.MyResources.resources"));
         }
 
         private static bool ContainsPrefix(string literal) =>

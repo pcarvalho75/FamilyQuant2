@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:core="clr-namespace:FamilyQuant;assembly=FamilyQuant.Core"
              xmlns:local="clr-namespace:FamilyQuant" xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
              mc:Ignorable="d"
              d:DesignHeight="450" d:DesignWidth="800"
@@ -18,9 +19,9 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <Border Grid.Row="0" Grid.ColumnSpan="2" Background="#2A303E" BorderBrush="#4A5568" BorderThickness="1"
+        <Border x:Name="BorderUSearchStatus" Grid.Row="0" Grid.ColumnSpan="2" Background="{DynamicResource SubtleBrush}"
                 CornerRadius="3" Padding="10,6" Margin="5,0,5,6">
-            <TextBlock x:Name="TextBlockUSearchState" TextWrapping="Wrap" Foreground="#FFD700" FontSize="12"
+            <TextBlock x:Name="TextBlockUSearchState" TextWrapping="NoWrap" TextTrimming="CharacterEllipsis" Foreground="{DynamicResource MutedBrush}" FontSize="12"
                        Text="Step 1 of 4 · Pick a protein database and press &quot;Input a FASTA file&quot;. That writes a Family Cluster File (.fcf) beside it, which you then open with File · Load Family Cluster File."
                        ToolTip="Where you are in this panel and what to do next. It updates once a Family Cluster File is made."/>
         </Border>
@@ -50,7 +51,7 @@
                 <Button x:Name="ButtonCalculateFDR" Content="Calculate FDR" Click="ButtonCalculateFDR_Click"
                         IsEnabled="False" HorizontalAlignment="Left" Margin="4"
                         Background="{StaticResource PanelLightBrush}"
-                        ToolTip="{x:Static local:IdentifierText.CalculateFdrToolTip}"/>
+                        ToolTip="{x:Static core:IdentifierText.CalculateFdrToolTip}"/>
             </StackPanel>
         </GroupBox>
 
