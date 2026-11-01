@@ -191,10 +191,15 @@ Where the Python broke rule 2 and the program must not: the 27-row family table,
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
 | R1 | 2.0 preview 1: evidence engine and review window, for Ana's file; installs beside 1.5 | M | 1 | E15, C4, N1 | A1 | Full suite, golden, publish rehearsal, release notes | Orchestrator | not started | 0% | 0% | T+44 |
-| R2 | 2.0 preview 2: new look and shell | M | 1 | C2, C5, C7, S5, S6, S7, C14 | R3 | Same, plus Paulo's sign-off on renders | Orchestrator | not started | 0% | 0% | T+77 |
+| H1 | Cooldown at the middle, by the `halt-team-for-regroup` skill. It starts when preview 1 (R1) is merged, or at 40 of 80 steps, whichever comes first. Everyone finishes the step in hand and stops, all branches merge, housekeeping, duplicate-code review, the roadmap is readjusted from measured speed. The team comes back only on Paulo's word | H | 2 | R1 | R2, R3 | All worker branches merged; full suite and golden green; ledger status reported; roadmap version 3 written; Paulo signs off | Orchestrator | not started | 0% | 0% | T+46 |
+| R2 | 2.0 preview 2: new look and shell | M | 1 | H1, C2, C5, C7, S5, S6, S7, C14 | R3 | Same, plus Paulo's sign-off on renders | Orchestrator | not started | 0% | 0% | T+77 |
 | R3 | 2.0 release candidate: rewrite finished, every ledger row closed | M | 1 | R2, X4, X5, X6, X9, X11, X12, X13 | R4 | Same, plus the ledger check | Orchestrator | not started | 0% | 0% | T+81 |
 | R4 | Final adversarial pass on the whole product | H | 3 | R3 | R5 | GR's verdict; all findings closed | GR | not started | 0% | 0% | T+84 |
 | R5 | FamilyQuant 2.0 final, then the archive of this roadmap | L | 1 | R4 | Done | Paulo publishes | Orchestrator | not started | 0% | 0% | T+85 |
+
+## Cooldown
+
+One cooldown sits in the middle of the project (H1). Work does not wait for it: every worker keeps taking its next step until it starts, so nobody sits idle beforehand.
 
 ## Critical path
 
