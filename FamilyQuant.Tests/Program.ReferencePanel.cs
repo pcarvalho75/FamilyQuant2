@@ -99,8 +99,9 @@ namespace FamilyQuant.Tests
             Check("panel families are parsed as the file's are: two memberships leave no single family",
                 two.Evidence.Family == "" && two.Evidence.FamilyMemberships?.Count == 2
                 && panel.Entries.Single(e => e.Accession == "P20002").Evidence.Subfamily == "Beta subfamily");
-            Check("a panel entry keeps its domains and drops the prose",
-                two.Evidence.Pfam.Single().Name == "Testdomain" && two.Evidence.TissueSpecificity.Count == 0
+            Check("a panel entry keeps its domains and its tissue, and drops the family text",
+                two.Evidence.Pfam.Single().Name == "Testdomain"
+                && two.Evidence.TissueSpecificity.SequenceEqual(new[] { "A long paragraph of prose." })
                 && two.Evidence.SimilarityAnnotations == null && two.Sequence.Length == 170);
 
             List<NeighbourReference> references = NearestReviewed.References(file, scope);
