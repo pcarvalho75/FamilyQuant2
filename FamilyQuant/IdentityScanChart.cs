@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -87,12 +87,11 @@ namespace FamilyQuant
     /// Drawn here rather than with a charting package because the application ships no such dependency,
     /// and OnRender redraws on resize for free.
     /// </summary>
-    public class IdentityScanChart : FrameworkElement, IPalettedChart
+    public class IdentityScanChart : ChartDrawingBase, IPalettedChart
     {
         private readonly List<IdentityScanRow> rows;
         private readonly int? currentIdentity;
 
-        private ChartPalette palette = ChartPalette.Dark;
 
         /// <param name="palette">The colours to paint in, or null for the screen palette. The exporter
         /// swaps it for the light one when a figure is written for a slide.</param>
@@ -106,24 +105,6 @@ namespace FamilyQuant
             Margin = new Thickness(0);
         }
 
-        /// <inheritdoc/>
-        public ChartPalette Palette
-        {
-            get => palette;
-            set
-            {
-                palette = value ?? ChartPalette.Dark;
-                InvalidateVisual();
-            }
-        }
-
-        private static FormattedText Text(string s, Brush brush, double size, bool bold = false)
-        {
-            return new FormattedText(s, CultureInfo.CurrentCulture, FlowDirection.LeftToRight,
-                new Typeface(new FontFamily("Segoe UI"), FontStyles.Normal,
-                             bold ? FontWeights.Bold : FontWeights.Normal, FontStretches.Normal),
-                size, brush, 96);
-        }
 
         protected override void OnRender(DrawingContext dc)
         {
@@ -135,7 +116,7 @@ namespace FamilyQuant
 
             // Its own backdrop, so the ink is legible wherever the control is hosted and a render to a
             // bitmap shows what the window shows instead of text on transparency.
-            dc.DrawRectangle(Backdrop, null, new Rect(0, 0, ActualWidth, ActualHeight));
+            DrawBackdrop(dc, Backdrop);
 
             if (rows.Count == 0 || ActualWidth < 120 || ActualHeight < 120) return;
 
@@ -166,8 +147,7 @@ namespace FamilyQuant
                 }
             }
 
-            dc.DrawLine(axisPen, new Point(plot.Left, plot.Top), new Point(plot.Left, plot.Bottom));
-            dc.DrawLine(axisPen, new Point(plot.Left, plot.Bottom), new Point(plot.Right, plot.Bottom));
+            DrawAxes(dc, plot, axisPen);
 
             // ---- identity ticks along the bottom, thinned so they never collide
             var xs = IdentityScanPlot.Map(rows, plot, r => 0);

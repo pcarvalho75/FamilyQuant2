@@ -51,6 +51,8 @@ namespace FamilyQuant.Tests
                 Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
                 return failed == 0 ? 0 : 1;
             }
+            if (args.Length > 0 && args[0] == WordGroupingSnapshot.Argument) return WordGroupingSnapshot.Run(args);
+            if (args.Length > 0 && args[0] == ChartExportSnapshot.Argument) return ChartExportSnapshot.Run(args);
             if (args.Contains("--test-core-boundary", StringComparer.Ordinal))
             {
                 CoreBoundaryTests();
