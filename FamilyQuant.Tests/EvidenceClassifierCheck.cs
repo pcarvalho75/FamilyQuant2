@@ -3,6 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
 using System.Text.Json;
 using TextFieldParser = Microsoft.VisualBasic.FileIO.TextFieldParser;
 
@@ -11,12 +13,16 @@ namespace FamilyQuant.Tests
     internal static class EvidenceClassifierCheck
     {
         internal const string Argument = "--evidence-classifier-check";
+        internal const string ArchitectureArgument = "--evidence-architecture-check";
+        internal const string ApplyArgument = "--evidence-apply-check";
 
         internal static void Run(string[] args, Action<string, bool, string?> check)
         {
             try
             {
-                int flag = Array.IndexOf(args, Argument);
+                bool architectureMode = args.Contains(ArchitectureArgument);
+                bool applyMode = args.Contains(ApplyArgument);
+                int flag = Array.IndexOf(args, applyMode ? ApplyArgument : architectureMode ? ArchitectureArgument : Argument);
                 string input = At(1, "D:/FamilyQuant-data/out-evidence/ana-neighbours.fcf");
                 string output = At(2, "D:/FamilyQuant-data/out-evidence/e5-classifier-report.json");
                 string[] scope = At(3, "Toxin;venom gland").Split(';', StringSplitOptions.RemoveEmptyEntries);
@@ -89,6 +95,65 @@ namespace FamilyQuant.Tests
                         flagged = exclusions.Select(p => new { p!.Identifier, tier = p.Tier.ToString(), p.Reason, p.Neighbour, p.Flags }).ToList(),
                     });
                 }
+                IReadOnlyList<EvidenceArchitectureProposal>? architecture = null;
+                if (architectureMode)
+                {
+                    architecture = EvidenceArchitecture.Suggest(file.MyExtendedFastaItems, proposal);
+                    var primary = architecture.Where(a => a.Family.IndexOf("metalloproteinase", StringComparison.OrdinalIgnoreCase) >= 0).ToList();
+                    check("native architecture offers a free binding-domain group apart from multi-domain members",
+                        primary.Any(a => a.CanSplit && a.Groups.Any(g => g.Domains.Count == 1
+                            && g.SuggestedName.Equals("Disintegrin", StringComparison.OrdinalIgnoreCase))
+                        && a.Groups.Any(g => g.Domains.Count > 1)), null);
+                    check("every native family offers distinct names for its domain combinations",
+                        architecture.All(a => a.Groups.Select(g => g.SuggestedName).Distinct(StringComparer.OrdinalIgnoreCase).Count() == a.Groups.Count), null);
+                    check("native multi-domain names distinguish them from free binding domains",
+                        primary.SelectMany(a => a.Groups).Where(g => g.Domains.Count > 1)
+                            .All(g => !g.SuggestedName.Equals("Disintegrin", StringComparison.OrdinalIgnoreCase)), null);
+                    var second = architecture.FirstOrDefault(a => a.Family.Equals("phospholipase A2 family", StringComparison.OrdinalIgnoreCase));
+                    check("the same architecture code evaluates a second source family", second != null && second.Groups.Count > 0, null);
+                    string firstArchitecture = JsonSerializer.Serialize(architecture);
+                    check("native architecture suggestions are reproducible and preserve the source",
+                        firstArchitecture == JsonSerializer.Serialize(EvidenceArchitecture.Suggest(file.MyExtendedFastaItems, proposal))
+                        && before == EvidenceClassifier.Fingerprint(file.MyExtendedFastaItems), null);
+                }
+                object? applyReport = null;
+                if (applyMode)
+                {
+                    int[] selected = proposal.Proteins.Where(p => p.SuggestedSelected
+                        && !file.LockedUserIds.Contains(file.MyExtendedFastaItems[p.ProteinIndex].UserID)).Select(p => p.ProteinIndex).ToArray();
+                    var selection = new EvidenceApplySelection { SourceFingerprint = proposal.SourceFingerprint, SelectedProteinIndices = selected };
+                    string originalDigest = Digest(file);
+                    string invariant = Invariants(file);
+                    var unselected = file.MyExtendedFastaItems.Select((p, i) => (p, i)).Where(r => !selected.Contains(r.i))
+                        .ToDictionary(r => r.i, r => JsonSerializer.Serialize(r.p));
+                    var applied = EvidenceApply.Apply(file, proposal, selection, AppVersionInfo.Current());
+                    string appliedDigest = Digest(file);
+                    check("native apply preserves sequences, automatic IDs, quantitative values and evidence",
+                        Invariants(file) == invariant && unselected.All(p => JsonSerializer.Serialize(file.MyExtendedFastaItems[p.Key]) == p.Value), null);
+                    check("native apply gives every selected protein its chosen annotation and a locked number",
+                        applied.Recipe.Assignments.Count == selected.Length && applied.Recipe.Assignments.All(a =>
+                            file.MyExtendedFastaItems[a.ProteinIndex].UserID == a.FamilyId
+                            && file.MyExtendedFastaItems[a.ProteinIndex].UserAnnotation == a.Name && file.LockedUserIds.Contains(a.FamilyId)), null);
+                    var repeated = EvidenceApply.Apply(file, proposal, selection, applied.Recipe.ProgramVersion);
+                    check("native repeated apply is byte-identical and creates no undo", !repeated.Changed && repeated.Undo == null && Digest(file) == appliedDigest, null);
+                    string savedPath = Path.ChangeExtension(output, ".applied.fcf");
+                    if (Path.GetFullPath(input).Equals(Path.GetFullPath(savedPath), StringComparison.OrdinalIgnoreCase))
+                        throw new InvalidDataException("The saved test copy must differ from its input.");
+                    file.Save(savedPath);
+                    var reopened = FamilyClusterFile.Load(savedPath);
+                    check("native applied copy reopens with its exact recipe and assignments", Digest(reopened) == appliedDigest, null);
+                    var replayed = EvidenceApply.ApplyRecipe(reopened, reopened.EvidenceRecipe!);
+                    check("native recipe replay after reopening changes no bytes", !replayed.Changed && Digest(reopened) == appliedDigest, null);
+                    applied.Undo!.Restore(file);
+                    check("one native evidence undo restores the complete original curation", Digest(file) == originalDigest, null);
+                    EvidenceApply.ApplyRecipe(file, applied.Recipe);
+                    check("native saved recipe reproduces the same applied curation on its source", Digest(file) == appliedDigest, null);
+                    applyReport = new { selected = selected.Length, families = applied.Recipe.Assignments.Select(a => a.FamilyId).Distinct().Count(), savedPath, originalDigest, appliedDigest };
+
+                    static string Digest(FamilyClusterFile value) => Convert.ToHexString(SHA256.HashData(Encoding.UTF8.GetBytes(value.ToJsonText())));
+                    static string Invariants(FamilyClusterFile value) => Convert.ToHexString(SHA256.HashData(JsonSerializer.SerializeToUtf8Bytes(
+                        value.MyExtendedFastaItems.Select(p => new { p.SequenceIdentifier, p.Sequence, p.Description, p.USearchID, p.XIC, p.XICUser, p.FullXicShare, p.Domains, p.Evidence }))));
+                }
                 Directory.CreateDirectory(Path.GetDirectoryName(Path.GetFullPath(output))!);
                 File.WriteAllText(output, JsonSerializer.Serialize(new
                 {
@@ -98,6 +163,8 @@ namespace FamilyQuant.Tests
                     proposal.Families, proposal.Markers,
                     proteins = proposal.Proteins,
                     recoveryComparison = recovery,
+                    architecture,
+                    applyReport,
                     sourceGuardViolations = violations,
                 }, new JsonSerializerOptions { WriteIndented = true }));
                 Console.WriteLine("Classification report: " + output);

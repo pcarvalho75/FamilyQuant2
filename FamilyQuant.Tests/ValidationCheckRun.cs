@@ -28,7 +28,7 @@ namespace FamilyQuant.Tests
                 int flag = Array.IndexOf(args, Argument);
                 string At(int offset, string fallback) =>
                     args.Length > flag + offset && args[flag + offset].Length > 0 ? args[flag + offset] : fallback;
-                string input = At(1, "D:/FamilyQuant-data/out-opus/e4-ana-panel.fcf");
+                string input = At(1, "D:/FamilyQuant-data/out-opus/e4-ana-panel-neighbours.fcf");
                 string baseline = At(2, "D:/FamilyQuant-data/baseline/vs_revtox2.tsv");
                 string frozen = At(3, "D:/FamilyQuant-data/baseline/viperidae_rich.tsv");
                 string outDir = At(4, "D:/FamilyQuant-data/out-opus");
@@ -106,6 +106,21 @@ namespace FamilyQuant.Tests
                     ValidationReport.ScoreRoute("recluster 0.80, words", RouteFamily, ValidationReport.ReclusterRoute(file.MyExtendedFastaItems, 0.80, Keywords, ""), file.MyExtendedFastaItems),
                     ValidationReport.ScoreRoute("recluster 0.80, words with exclude", RouteFamily, ValidationReport.ReclusterRoute(file.MyExtendedFastaItems, 0.80, Keywords, Exclude), file.MyExtendedFastaItems),
                 };
+                // The evidence route: E5's proposal from the stored search, then with E7's coherence flags,
+                // where only the unflagged (ticked by default) proteins join.
+                NeighbourSearch? stored = file.EvidenceSource?.NearestReviewed;
+                if (stored != null)
+                {
+                    EvidenceProposal proposal = EvidenceClassifier.Propose(file.MyExtendedFastaItems,
+                        new EvidenceClassificationOptions { ScopeTerms = new[] { ScopeKeyword, ScopeTissue } },
+                        stored.ByQuery(), NearestReviewed.ReferenceEvidence(file));
+                    EvidenceProposal flagged = CoherenceCheck.Flag(proposal, file.MyExtendedFastaItems, CoherenceCheck.Learn(file));
+                    List<FastaItemExtended> Members(EvidenceProposal p, bool tickedOnly) => p.Proteins
+                        .Where(r => string.Equals(r.Family, RouteFamily, StringComparison.OrdinalIgnoreCase) && (!tickedOnly || r.SuggestedSelected))
+                        .Select(r => file.MyExtendedFastaItems[r.ProteinIndex]).ToList();
+                    routes.Add(ValidationReport.ScoreRoute("evidence (E5)", RouteFamily, Members(proposal, false), file.MyExtendedFastaItems));
+                    routes.Add(ValidationReport.ScoreRoute("evidence, ticked after E5 and E7 flags", RouteFamily, Members(flagged, true), file.MyExtendedFastaItems));
+                }
                 File.WriteAllText(Path.Combine(outDir, "e9-routes.csv"), ValidationReport.BuildRouteCsv(routes));
 
                 int unexplained = reasons.Where(r => r.Key.StartsWith("UNEXPLAINED", StringComparison.Ordinal)).Sum(r => r.Value);

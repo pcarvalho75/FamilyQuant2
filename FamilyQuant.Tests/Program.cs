@@ -127,6 +127,9 @@ namespace FamilyQuant.Tests
                 ShellProjectOperationTests(shellWork);
                 ShellSavingTests(shellWork);
                 ShellWindowPreferenceTests(shellWork);
+                BuildFamiliesScreenTests(shellWork);
+                QuantifyShellTests(shellWork);
+                LegacySurfaceContrastTests();
                 AppVersionTests();
                 Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
                 return failed == 0 ? 0 : 1;
@@ -138,6 +141,10 @@ namespace FamilyQuant.Tests
             if (args.Length == 2 && args[0] == "--quantify-screens") return QuantifyScreens(args[1]);
             if (args.Length is 2 or 3 && args[0] == "--results-screens") return ResultsScreens(args[1], args.Length == 3 ? args[2] : null);
             if (args.Length == 2 && args[0] == "--shell-window-screens") return ShellWindowPreferenceScreens(args[1]);
+            if (args.Length == 2 && args[0] == "--shell-window-screens") return ShellWindowPreferenceScreens(args[1]);
+            if (args.Length == 2 && args[0] == "--build-family-screens") return BuildFamiliesScreens(args[1]);
+            if (args.Length == 2 && args[0] == "--quantify-screens") return QuantifyScreens(args[1]);
+            if (args.Length == 2 && args[0] == "--quantify-shell-screens") return QuantifyShellScreens(args[1]);
 
             // PowerShell 5.1 silently DROPS empty "" arguments to native executables, which shifted
             // the data directories into the wrong positions and turned every real-data section into a
@@ -148,7 +155,8 @@ namespace FamilyQuant.Tests
             string workDir = Path.Combine(Path.GetTempPath(), "FamilyQuant.Tests");
             Directory.CreateDirectory(workDir);
 
-            if (args.Contains(EvidenceClassifierCheck.Argument))
+            if (args.Contains(EvidenceClassifierCheck.Argument) || args.Contains(EvidenceClassifierCheck.ArchitectureArgument)
+                || args.Contains(EvidenceClassifierCheck.ApplyArgument))
             {
                 EvidenceClassifierCheck.Run(args, Check);
                 Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
@@ -172,6 +180,13 @@ namespace FamilyQuant.Tests
             if (args.Contains(ReferencePanelCheck.Argument))
             {
                 ReferencePanelCheck.Run(args, Check);
+                Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
+                return failed == 0 ? 0 : 1;
+            }
+
+            if (args.Contains(ScienceGateListRun.Argument))
+            {
+                ScienceGateListRun.Run(args, Check);
                 Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
                 return failed == 0 ? 0 : 1;
             }
@@ -671,6 +686,7 @@ namespace FamilyQuant.Tests
             EvidenceStorageTests(workDir);
             EvidenceFetchTests();
             EvidenceClassifierTests();
+            EvidenceArchitectureTests();
 
             Section("Nearest reviewed protein and the outside panel - never itself, gated, deterministic, offline");
             NearestReviewedTests(workDir);
@@ -684,6 +700,8 @@ namespace FamilyQuant.Tests
 
             Section("Validation report - leave-one-out on reviewed proteins and the routes against their labels");
             ValidationReportTests();
+            EnsureApplication();
+            EvidenceHelpTests();
 
             Section("Left-out list - marker carriers kept out of the marker's family, with why");
             LeftOutListTests();
@@ -736,6 +754,8 @@ namespace FamilyQuant.Tests
             LegacySurfaceContrastTests();
             ShellStatusBridgeTests();
             LogoResourceTests(workDir);
+            TypographyRulesTests();
+            TableAppearanceTests();
             ThemePreferenceTests(workDir);
 
             Section("Feature ledger - frozen source inventory and explicit preservation checks");
@@ -749,6 +769,8 @@ namespace FamilyQuant.Tests
             ShellProjectOperationTests(workDir);
             ShellSavingTests(workDir);
             ShellWindowPreferenceTests(workDir);
+            BuildFamiliesScreenTests(workDir);
+            QuantifyShellTests(workDir);
 
             Console.WriteLine();
             Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");

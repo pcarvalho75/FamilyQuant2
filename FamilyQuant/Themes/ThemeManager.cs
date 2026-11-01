@@ -14,6 +14,7 @@ namespace FamilyQuant.Themes
     {
         public static AppTheme Current { get; private set; } = AppTheme.Dark;
         public static AppTheme Effective { get; private set; } = AppTheme.Dark;
+        public static event EventHandler? ThemeChanged;
         private static bool initialized;
 
         /// <summary>Only real app startup enables profile writes; render and test hosts never call this.</summary>
@@ -50,6 +51,7 @@ namespace FamilyQuant.Themes
             Current = theme;
             Effective = effective;
             if (savePreference && initialized) ThemeSettings.Save(ThemeSettings.DefaultPath, theme);
+            ThemeChanged?.Invoke(null, EventArgs.Empty);
         }
 
         private static bool SystemUsesLight()

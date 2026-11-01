@@ -25,9 +25,7 @@
             <Setter Property="Foreground" Value="{DynamicResource TextBrush}"/>
         </Style>
 
-        <Style x:Key="LayerTitle" TargetType="TextBlock">
-            <Setter Property="Foreground" Value="{DynamicResource TextBrush}"/>
-            <Setter Property="FontWeight" Value="Bold"/>
+        <Style x:Key="LayerTitle" TargetType="TextBlock" BasedOn="{StaticResource SectionTitle}">
             <Setter Property="VerticalAlignment" Value="Center"/>
         </Style>
 
@@ -77,7 +75,7 @@
                         <GroupBox Margin="5" Background="{DynamicResource SurfaceBrush}" Foreground="{DynamicResource TextBrush}" Padding="5">
                             <GroupBox.Header>
                                 <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="Layer 1: Protein Family Clustering" Style="{StaticResource LayerTitle}"/>
+                                    <TextBlock Text="Layer 1: Protein family clustering" Style="{StaticResource LayerTitle}"/>
                                     <Border x:Name="BadgeLayer1" Style="{StaticResource LayerBadge}" Background="{DynamicResource ClearBrush}">
                                         <TextBlock x:Name="TextBlockLayer1State" Style="{StaticResource LayerBadgeText}" Text="READY"/>
                                     </Border>
@@ -121,12 +119,12 @@
                                            ToolTip="How the families were built: 'none' means by sequence identity only, a number is the threshold of the last Recluster by Words, and 'keywords' means a keyword merge."
                                            Foreground="{DynamicResource TextBrush}" FontWeight="Bold" FontSize="14" VerticalAlignment="Center"/>
 
-                                    <Button x:Name="ButtonAlignSelected" Margin="15,0,0,0" Content="Align Selected"
+                                    <Button x:Name="ButtonAlignSelected" Margin="15,0,0,0" Content="Align selected"
                                             Click="ButtonAlignSelected_Click" IsEnabled="False"
                                             ToolTip="Aligns the selected proteins and opens the alignment in a new window, to check that a family's members really are homologous. Disabled until at least two rows are selected in the Data Browser tab."
                                             Background="{DynamicResource SubtleBrush}" Foreground="{DynamicResource TextBrush}" Padding="10,5"/>
 
-                                    <Button x:Name="ButtonFetchDomains" Margin="15,0,0,0" Content="Fetch Domains"
+                                    <Button x:Name="ButtonFetchDomains" Margin="15,0,0,0" Content="Fetch evidence"
                                             Click="ButtonFetchDomains_Click"
                                             ToolTip="Asks UniProt for each protein's Pfam domains, which needs the internet once. They fill the Domains column, the Search box finds them, the super cluster preview can choose by them, and saving keeps them in the file. Family numbers do not change."
                                             Background="{DynamicResource SubtleBrush}" Foreground="{DynamicResource TextBrush}" Padding="10,5"/>
@@ -150,7 +148,7 @@
                                                      ToolTip="Words to ignore when comparing descriptions, separated by commas or spaces, for example: protein, domain, fragment. Use it when a common word pulls unrelated families together; it also applies to Create Super Cluster."
                                                      Background="{DynamicResource InputBrush}" Foreground="{DynamicResource TextBrush}" Margin="5" VerticalAlignment="Center"/>
 
-                                            <Button x:Name="ButtonWordCluster" Margin="15,0,5,0" Content="Recluster by Words"
+                                            <Button x:Name="ButtonWordCluster" Margin="15,0,5,0" Content="Recluster by words"
                                                     Click="ButtonWordCluster_Click"
                                                     ToolTip="Merges families whose descriptions are at least as similar as the Similarity value. Family numbers change and percentages are recalculated; press Undo to step it back."
                                                     Background="{DynamicResource SubtleBrush}" Foreground="{DynamicResource TextBrush}" Padding="10,5"/>
@@ -188,7 +186,7 @@
                                                      Background="{DynamicResource InputBrush}" Foreground="{DynamicResource TextBrush}" Margin="5" VerticalAlignment="Center"/>
 </StackPanel>
 
-                                            <Button Content="Create Super Cluster" Margin="15,0,0,0" x:Name="ButtonSuperCluster" Style="{DynamicResource PrimaryButton}"
+                                            <Button Content="Create super cluster" Margin="15,0,0,0" x:Name="ButtonSuperCluster" Style="{DynamicResource PrimaryButton}"
                                                     Click="ButtonSuperCluster_Click" IsEnabled="False"
                                                     ToolTip="Shows every protein that would join, each with a tick, before anything changes, then gathers the ticked ones into one family, and Undo steps it back. Disabled until you type a keyword in the box to the left." Padding="10,5"/>
                                         </WrapPanel>
@@ -257,7 +255,7 @@
                         <GroupBox Margin="5" Background="{DynamicResource SurfaceBrush}" Foreground="{DynamicResource TextBrush}" Padding="5">
                             <GroupBox.Header>
                                 <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="Layer 2: PatternLab Quantitation (.plp, optional)" Style="{StaticResource LayerTitle}"/>
+                                    <TextBlock Text="Layer 2: PatternLab quantitation (.plp, optional)" Style="{StaticResource LayerTitle}"/>
                                     <Border x:Name="BadgeLayer2" Style="{StaticResource LayerBadge}" Background="{DynamicResource ClearBrush}">
                                         <TextBlock x:Name="TextBlockLayer2State" Style="{StaticResource LayerBadgeText}" Text="PENDING"/>
                                     </Border>
@@ -283,7 +281,7 @@
                         <GroupBox Margin="5" Background="{DynamicResource SurfaceBrush}" Foreground="{DynamicResource TextBrush}" Padding="5">
                             <GroupBox.Header>
                                 <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="Layer 3: Quantitation Calculation Options" Style="{StaticResource LayerTitle}"/>
+                                    <TextBlock Text="Layer 3: Quantitation calculation options" Style="{StaticResource LayerTitle}"/>
                                     <Border x:Name="BadgeLayer3" Style="{StaticResource LayerBadge}" Background="{DynamicResource ClearBrush}">
                                         <TextBlock x:Name="TextBlockLayer3State" Style="{StaticResource LayerBadgeText}" Text="BLOCKED"/>
                                     </Border>
@@ -391,7 +389,7 @@
                         <GroupBox Margin="5" Background="{DynamicResource SurfaceBrush}" Foreground="{DynamicResource TextBrush}" Padding="5">
                             <GroupBox.Header>
                                 <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="Display and Export Options" Style="{StaticResource LayerTitle}"/>
+                                    <TextBlock Text="Display and export options" Style="{StaticResource LayerTitle}"/>
                                     <Border x:Name="BadgeExport" Style="{StaticResource LayerBadge}" Background="{DynamicResource ClearBrush}">
                                         <TextBlock x:Name="TextBlockExportState" Style="{StaticResource LayerBadgeText}" Text="READY"/>
                                     </Border>

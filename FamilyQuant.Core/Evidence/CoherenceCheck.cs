@@ -168,6 +168,34 @@ namespace FamilyQuant.Evidence
             profiles.TryGetValue(family, out FamilyProfile? profile)
                 ? Check(profile, protein, minimumMembers) : new List<CoherenceFlag>();
 
+        /// <summary>
+        /// The proposal with each assigned protein checked against its family's profile: every coherence
+        /// flag is added to the protein's flags, so it is no longer suggested and starts unticked. Nothing
+        /// else changes; an unassigned protein, or a family with no learned profile, is left as it was.
+        /// </summary>
+        public static EvidenceProposal Flag(EvidenceProposal proposal, IReadOnlyList<FastaItemExtended> proteins,
+            IReadOnlyDictionary<string, FamilyProfile> profiles, int minimumMembers = DefaultMinimumMembers)
+        {
+            var rows = proposal.Proteins.Select(row =>
+            {
+                if (row.Family.Length == 0 || row.ProteinIndex < 0 || row.ProteinIndex >= proteins.Count) return row;
+                List<CoherenceFlag> found = Check(profiles, row.Family, proteins[row.ProteinIndex], minimumMembers);
+                if (found.Count == 0) return row;
+                return new EvidenceProteinProposal
+                {
+                    ProteinIndex = row.ProteinIndex, Identifier = row.Identifier, PreviousFamilyId = row.PreviousFamilyId,
+                    Family = row.Family, Tier = row.Tier, Reason = row.Reason, HasScopeAnnotation = row.HasScopeAnnotation,
+                    Neighbour = row.Neighbour,
+                    Flags = row.Flags.Concat(found.Select(f => new EvidenceFlag { Code = f.Code, Message = f.Message })).ToArray(),
+                };
+            }).ToArray();
+            return new EvidenceProposal
+            {
+                SourceFingerprint = proposal.SourceFingerprint, Options = proposal.Options, Proteins = rows,
+                Families = proposal.Families, Markers = proposal.Markers,
+            };
+        }
+
         public static int Cysteines(string sequence) => sequence.Count(c => c == 'C' || c == 'c');
 
         private static bool DescribedAsFragment(string? description) =>
