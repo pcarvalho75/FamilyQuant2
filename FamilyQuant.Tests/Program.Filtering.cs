@@ -26,6 +26,8 @@ namespace FamilyQuant.Tests
 
         private static void FilterTests()
         {
+            PrefixDefinitionTests();
+
             var items = new List<FastaItemExtended>
             {
                 new FastaItemExtended { SequenceIdentifier = "sp|A|X", Description = "Snake venom metalloproteinase", USearchID = 0, UserID = 0, XIC = 0.4, XICUser = 0.4 },

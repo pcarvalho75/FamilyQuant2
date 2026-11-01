@@ -69,7 +69,7 @@ namespace FamilyQuant
         {
             string usearchExe = GetUSearchPath();
 
-            string tempDir = Path.Combine(Path.GetTempPath(), "FamilyQuant");
+            string tempDir = ApplicationPaths.ScratchDirectory;
             Directory.CreateDirectory(tempDir);
 
             // Unique filenames so a leftover/locked file from a previous (possibly crashed) run can't
@@ -125,9 +125,7 @@ namespace FamilyQuant
             byte[] payload = MyResources.usearch11_0_667_win32;
 
             // Extract to a stable per-user folder rather than %TEMP% (which can be cleaned mid-session).
-            string dir = Path.Combine(
-                Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-                "FamilyQuant");
+            string dir = ApplicationPaths.LocalDataDirectory;
             Directory.CreateDirectory(dir);
 
             string usearchPath = Path.Combine(dir, "usearch11.0.667_win32.exe");

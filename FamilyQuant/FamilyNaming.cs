@@ -78,8 +78,6 @@ namespace FamilyQuant
         private static readonly Regex UniProtAccession = new Regex(
             @"^([OPQ][0-9][A-Z0-9]{3}[0-9]|[A-NR-Z][0-9]([A-Z][A-Z0-9]{2}[0-9]){1,2})(-\d+)?$", RegexOptions.Compiled);
 
-        private const string ContaminantLabel = "contaminant_";
-
         /// <summary>The code a protein is looked up by: P31982 from "sp|P31982|VM2I_CROCC", and P05784 from
         /// "contaminant_P05784|K1C18_MOUSE". An identifier holding no UniProt accession comes back whole,
         /// because it is still the code of its own database. A decoy exists in no database and has none.</summary>
@@ -90,8 +88,8 @@ namespace FamilyQuant
 
             foreach (string field in id.Split('|'))
             {
-                string code = field.StartsWith(ContaminantLabel, StringComparison.Ordinal)
-                    ? field.Substring(ContaminantLabel.Length) : field;
+                string code = field.StartsWith(SequenceLabels.ContaminantPrefix, StringComparison.Ordinal)
+                    ? field.Substring(SequenceLabels.ContaminantPrefix.Length) : field;
                 if (UniProtAccession.IsMatch(code)) return code;
             }
             return id;

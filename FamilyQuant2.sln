@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32602.215
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FamilyQuant", "FamilyQuant\FamilyQuant.csproj", "{838EECD9-5022-4CF7-A54B-898A2E5F7F20}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FamilyQuant.App", "FamilyQuant\FamilyQuant.App.csproj", "{838EECD9-5022-4CF7-A54B-898A2E5F7F20}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FamilyQuant.Tests", "FamilyQuant.Tests\FamilyQuant.Tests.csproj", "{4C1D8E7A-6B93-4A2E-9F31-2D5A7C0E8B14}"
 EndProject

@@ -742,7 +742,7 @@ namespace FamilyQuant.Tests
             // The headings change with the reporting mode, so the layout has to survive the LONGEST of
             // them and not just the placeholder that is there before anything is calculated.
             string longestHeading = Enum.GetValues<NormalizationMode>()
-                .Select(m => m.ColumnHeader(GroupingType.User))
+                .Select(m => m.ColumnHeader())
                 .OrderByDescending(h => h.Length)
                 .First();
 

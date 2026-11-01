@@ -50,7 +50,7 @@
                 <Button x:Name="ButtonCalculateFDR" Content="Calculate FDR" Click="ButtonCalculateFDR_Click"
                         IsEnabled="False" HorizontalAlignment="Left" Margin="4"
                         Background="{StaticResource PanelLightBrush}"
-                        ToolTip="Shows the fraction of families that mix real and decoy (Reverse_) sequences; zero is what you want. Needs a target-decoy (.T-R) database. Disabled until a Family Cluster File is generated above."/>
+                        ToolTip="{x:Static local:IdentifierText.CalculateFdrToolTip}"/>
             </StackPanel>
         </GroupBox>
 

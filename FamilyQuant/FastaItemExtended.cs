@@ -17,6 +17,9 @@ namespace FamilyQuant
         /// empty until they are fetched, and for a protein too short for Pfam to call.</summary>
         public string Domains { get; set; } = string.Empty;
 
+        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull)]
+        public Evidence.ProteinEvidence? Evidence { get; set; }
+
         public double XIC { get; set; }
 
         public double XICUser { get; set; }

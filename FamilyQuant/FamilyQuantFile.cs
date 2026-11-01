@@ -81,6 +81,9 @@ namespace FamilyQuant
         /// Annotation changes between releases, so the file records which one its domains are.</summary>
         public string DomainSource { get; set; } = string.Empty;
 
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public Evidence.EvidenceProvenance? EvidenceSource { get; set; }
+
         public List<FastaItemExtended> MyExtendedFastaItems { get; set; } = new List<FastaItemExtended>();
 
         /// <summary>How the current grouping was produced, for display.</summary>
@@ -236,16 +239,6 @@ namespace FamilyQuant
             }
         }
 
-        public void AttributeXICToGroups(PatternLabProject MyPLP, GroupingType groupingType)
-        {
-            AttributeXICToGroups(MyPLP, groupingType, NormalizationMode.IdentifiedSignal, SharedPeptidePolicy.FamilyUnique);
-        }
-
-        public void AttributeXICToGroups(PatternLabProject MyPLP, GroupingType groupingType, NormalizationMode mode)
-        {
-            AttributeXICToGroups(MyPLP, groupingType, mode, SharedPeptidePolicy.FamilyUnique);
-        }
-
         /// <summary>
         /// Fills the XIC column for every family.
         ///
@@ -260,7 +253,7 @@ namespace FamilyQuant
         /// makes the families overlap, and on a redundant venom database that pushes the column's total
         /// well past 100% of the chromatogram. Only the additive policies may be read as a composition.
         /// </summary>
-        public void AttributeXICToGroups(PatternLabProject MyPLP, GroupingType groupingType,
+        public void AttributeXICToGroups(PatternLabProject MyPLP,
                                          NormalizationMode mode, SharedPeptidePolicy sharedPolicy)
         {
             EnsureLookupsFor(MyPLP);
@@ -283,13 +276,7 @@ namespace FamilyQuant
                 if (!plan.IsAvailable || !plan.RequiresRescaling) plan = null;
             }
 
-            var groupedItems = groupingType == GroupingType.USearch
-                ? (from mf in MyExtendedFastaItems
-                   group mf by mf.USearchID into thegroups
-                   select thegroups).ToList()
-                : (from mf in MyExtendedFastaItems
-                   group mf by mf.UserID into thegroups
-                   select thegroups).ToList();
+            var groupedItems = GroupedFastaItems;
 
             var familiesPerPeptide = CountFamiliesPerPeptide(groupedItems);
 
@@ -338,35 +325,17 @@ namespace FamilyQuant
 
                 foreach (FastaItemExtended item in group)
                 {
-                    if (groupingType == GroupingType.USearch)
-                        item.XIC = value;
-                    else
-                        item.XICUser = value;
+                    item.XICUser = value;
                 }
             }
-        }
-
-        public double GetGroupXIC(IGrouping<int, FastaItemExtended> theGroup, PatternLabProject MyPLP)
-        {
-            return GetGroupXIC(theGroup, MyPLP, null, SharedPeptidePolicy.CountInEveryFamily);
         }
 
         /// <summary>
         /// Total quantitation of one family. <paramref name="familiesPerPeptide"/> is required by every
         /// policy except <see cref="SharedPeptidePolicy.CountInEveryFamily"/>, which needs no weighting.
+        /// A non-null <paramref name="plan"/> re-expresses each run under its requested denominator.
         /// </summary>
-        public double GetGroupXIC(IGrouping<int, FastaItemExtended> theGroup, PatternLabProject MyPLP,
-                                  Dictionary<string, int>? familiesPerPeptide, SharedPeptidePolicy sharedPolicy)
-        {
-            return GetGroupXIC(theGroup, MyPLP, familiesPerPeptide, sharedPolicy, null);
-        }
-
-        /// <summary>
-        /// As above, with an optional <paramref name="plan"/> that re-expresses each run's values under a
-        /// different denominator before they are summed (Phase 4). A null plan means "use the file's own
-        /// values", which is the pre-Phase-4 behaviour exactly.
-        /// </summary>
-        public double GetGroupXIC(IGrouping<int, FastaItemExtended> theGroup, PatternLabProject MyPLP,
+        private double GetGroupXIC(IGrouping<int, FastaItemExtended> theGroup, PatternLabProject MyPLP,
                                   Dictionary<string, int>? familiesPerPeptide, SharedPeptidePolicy sharedPolicy,
                                   NormalizationPlan? plan)
         {
@@ -537,7 +506,7 @@ namespace FamilyQuant
         /// <summary>
         /// Splits the current families into target-only, decoy-only and mixed.
         /// </summary>
-        public GroupingScore CalculateGroupingScore(string decoyTag = "Reverse_")
+        public GroupingScore CalculateGroupingScore(string decoyTag = SequenceLabels.DecoyPrefix)
         {
             var score = new GroupingScore();
 
@@ -578,7 +547,7 @@ namespace FamilyQuant
         /// alignments are no better than noise. Fusions of two unrelated TARGET families are invisible
         /// to it. Treat it as a floor ("do not cluster below this identity"), never as a budget to spend.
         /// </summary>
-        public double CalculateFDR(string decoyTag = "Reverse_")
+        public double CalculateFDR(string decoyTag = SequenceLabels.DecoyPrefix)
         {
             GroupingScore score = CalculateGroupingScore(decoyTag);
 
@@ -592,7 +561,7 @@ namespace FamilyQuant
         /// each one, so a threshold can be chosen from the whole curve instead of a single optimiser
         /// answer. Runs USEARCH once per step, from the strictest identity down to the loosest.
         /// </summary>
-        public static List<IdentityScanRow> ScanIdentities(string fileName, int from = 95, int to = 10, int step = 5, string decoyTag = "Reverse_", bool exhaustive = true)
+        public static List<IdentityScanRow> ScanIdentities(string fileName, int from = 95, int to = 10, int step = 5, string decoyTag = SequenceLabels.DecoyPrefix, bool exhaustive = true)
         {
             if (step <= 0) throw new ArgumentOutOfRangeException(nameof(step), "Step must be positive.");
             if (from < to) throw new ArgumentException("'from' must be greater than or equal to 'to'.", nameof(from));
@@ -610,7 +579,7 @@ namespace FamilyQuant
                 GroupingScore score = clustered.CalculateGroupingScore(decoyTag);
                 int nonContaminantTargets = clustered.GroupedFastaItems.Count(g => g.Any(i =>
                     !(i.SequenceIdentifier ?? string.Empty).StartsWith(decoyTag, StringComparison.Ordinal)
-                    && !(i.SequenceIdentifier ?? string.Empty).StartsWith("contaminant_", StringComparison.OrdinalIgnoreCase)));
+                    && !(i.SequenceIdentifier ?? string.Empty).StartsWith(SequenceLabels.ContaminantPrefix, StringComparison.OrdinalIgnoreCase)));
 
                 rows.Add(new IdentityScanRow()
                 {
@@ -649,7 +618,7 @@ namespace FamilyQuant
         /// then not a single upper interval and the bisection can settle on either edge. At the default
         /// of 0 the predicate reduces to "no mixed family at all", which has no such hole.
         /// </summary>
-        public static double DivideAndConquer(string fileName, double acceptableScore = 0.0, string decoyTag = "Reverse_", bool exhaustive = true)
+        public static double DivideAndConquer(string fileName, double acceptableScore = 0.0, string decoyTag = SequenceLabels.DecoyPrefix, bool exhaustive = true)
         {
             return DivideAndConquerDetailed(fileName, acceptableScore, decoyTag, exhaustive).Identity;
         }
@@ -659,7 +628,7 @@ namespace FamilyQuant
         /// the families that mix there are WHY the search stopped where it did. One short peptide matching
         /// its own reversed decoy can set the floor on its own, and a bare number cannot show that.
         /// </summary>
-        public static DivideAndConquerResult DivideAndConquerDetailed(string fileName, double acceptableScore = 0.0, string decoyTag = "Reverse_", bool exhaustive = true)
+        public static DivideAndConquerResult DivideAndConquerDetailed(string fileName, double acceptableScore = 0.0, string decoyTag = SequenceLabels.DecoyPrefix, bool exhaustive = true)
         {
             var fi = new FileInfo(fileName);
 
