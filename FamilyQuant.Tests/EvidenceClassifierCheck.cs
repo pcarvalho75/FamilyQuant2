@@ -15,14 +15,16 @@ namespace FamilyQuant.Tests
         internal const string Argument = "--evidence-classifier-check";
         internal const string ArchitectureArgument = "--evidence-architecture-check";
         internal const string ApplyArgument = "--evidence-apply-check";
+        internal const string SessionApplyArgument = "--evidence-session-apply-check";
 
         internal static void Run(string[] args, Action<string, bool, string?> check)
         {
             try
             {
                 bool architectureMode = args.Contains(ArchitectureArgument);
-                bool applyMode = args.Contains(ApplyArgument);
-                int flag = Array.IndexOf(args, applyMode ? ApplyArgument : architectureMode ? ArchitectureArgument : Argument);
+                bool sessionMode = args.Contains(SessionApplyArgument);
+                bool applyMode = sessionMode || args.Contains(ApplyArgument);
+                int flag = Array.IndexOf(args, sessionMode ? SessionApplyArgument : applyMode ? ApplyArgument : architectureMode ? ArchitectureArgument : Argument);
                 string input = At(1, "D:/FamilyQuant-data/out-evidence/ana-neighbours.fcf");
                 string output = At(2, "D:/FamilyQuant-data/out-evidence/e5-classifier-report.json");
                 string[] scope = At(3, "Toxin;venom gland").Split(';', StringSplitOptions.RemoveEmptyEntries);
@@ -42,6 +44,9 @@ namespace FamilyQuant.Tests
                     throw new InvalidDataException("The stored neighbour search does not match the current proteins and reviewed labels.");
                 if (search.MinIdentityPercent > 60 || search.MinQueryAlignedPercent > 70)
                     throw new InvalidDataException("The stored search omits hits needed by the classification thresholds.");
+                var sessionReferences = new[] { scopedReferences, exactKeywordReferences, NearestReviewed.ReviewedReferences(file) }
+                    .First(r => NearestReviewed.IsCurrent(search, NearestReviewed.Targets(file), r));
+                if (sessionMode) file.EvidenceSource!.NearestReviewed = null;
                 string before = EvidenceClassifier.Fingerprint(file.MyExtendedFastaItems);
                 var options = new EvidenceClassificationOptions { ScopeTerms = scope };
                 EvidenceProposal proposal = EvidenceClassifier.Propose(file.MyExtendedFastaItems, options,
@@ -121,12 +126,20 @@ namespace FamilyQuant.Tests
                 {
                     int[] selected = proposal.Proteins.Where(p => p.SuggestedSelected
                         && !file.LockedUserIds.Contains(file.MyExtendedFastaItems[p.ProteinIndex].UserID)).Select(p => p.ProteinIndex).ToArray();
-                    var selection = new EvidenceApplySelection { SourceFingerprint = proposal.SourceFingerprint, SelectedProteinIndices = selected };
+                    var selection = new EvidenceApplySelection
+                    {
+                        SourceFingerprint = proposal.SourceFingerprint, SelectedProteinIndices = selected,
+                        SessionSearch = sessionMode ? search : null, SessionReferences = sessionMode ? sessionReferences : null,
+                        CheckedMotifs = sessionMode ? new[] { new MotifPattern { Name = "native fixture motif", Pattern = "." } } : null,
+                    };
                     string originalDigest = Digest(file);
                     string invariant = Invariants(file);
                     var unselected = file.MyExtendedFastaItems.Select((p, i) => (p, i)).Where(r => !selected.Contains(r.i))
                         .ToDictionary(r => r.i, r => JsonSerializer.Serialize(r.p));
                     var applied = EvidenceApply.Apply(file, proposal, selection, AppVersionInfo.Current());
+                    if (sessionMode) check("native session search and checked motifs attach with the confirmed recipe",
+                        JsonSerializer.Serialize(file.EvidenceSource?.NearestReviewed) == JsonSerializer.Serialize(search)
+                        && file.Motifs?.Single().Name == "native fixture motif" && applied.Recipe.CheckedMotifResults?.Count == 1, null);
                     string appliedDigest = Digest(file);
                     check("native apply preserves sequences, automatic IDs, quantitative values and evidence",
                         Invariants(file) == invariant && unselected.All(p => JsonSerializer.Serialize(file.MyExtendedFastaItems[p.Key]) == p.Value), null);

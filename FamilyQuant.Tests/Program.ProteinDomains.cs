@@ -95,6 +95,7 @@ namespace FamilyQuant.Tests
         }
         private static void EvidenceApplyTests()
         {
+            EvidenceSessionApplyTests();
             SavedFileCheckTests();
             Verify("evidence apply allocates beyond every protein number and orphan lock", () =>
             {
@@ -247,6 +248,154 @@ namespace FamilyQuant.Tests
                 try { Check(name, verify()); }
                 catch (Exception ex) { Check(name, false, ex.GetBaseException().Message); }
             }
+        }
+        private static void EvidenceSessionApplyTests()
+        {
+            Verify("session search and checked motifs attach only through confirmed evidence apply", () =>
+            {
+                var (file, proposal, selection) = Fixture();
+                var result = Evidence.EvidenceApply.Apply(file, proposal, selection, "fixture version");
+                return JsonSerializer.Serialize(file.EvidenceSource?.NearestReviewed) == JsonSerializer.Serialize(selection.SessionSearch)
+                    && file.Motifs?.Single().Name == "checked motif" && result.Recipe.IncludesSessionEvidence
+                    && result.Recipe.SessionSearch != null && result.Recipe.CheckedMotifResults?.Single().Families.Sum(f => f.Carriers) == 3;
+            });
+            Verify("one undo restores prior session provenance and motifs, including absent metadata", () =>
+            {
+                return new[] { false, true }.All(prior =>
+                {
+                    var (file, proposal, selection) = Fixture(prior);
+                    string before = file.ToJsonText();
+                    var result = Evidence.EvidenceApply.Apply(file, proposal, selection, "fixture version");
+                    result.Undo!.Restore(file);
+                    return before == file.ToJsonText();
+                });
+            });
+            Verify("session evidence is cloned away from editable preview objects", () =>
+            {
+                var (file, proposal, selection) = Fixture();
+                var result = Evidence.EvidenceApply.Apply(file, proposal, selection, "fixture version");
+                string before = file.ToJsonText();
+                selection.SessionSearch!.Neighbours.Clear();
+                selection.CheckedMotifs![0].Pattern = "changed";
+                result.Recipe.SessionSearch!.Neighbours.Clear();
+                return before == file.ToJsonText();
+            });
+            Verify("session recipe survives reopen and reproduces both metadata and assignments", () =>
+            {
+                var (file, proposal, selection) = Fixture(prior: false);
+                string before = file.ToJsonText();
+                var result = Evidence.EvidenceApply.Apply(file, proposal, selection, "fixture version");
+                string applied = file.ToJsonText();
+                var repeat = Evidence.EvidenceApply.Apply(file, proposal, selection, "fixture version");
+                var reopened = FamilyClusterFile.FromJsonText(applied);
+                var source = FamilyClusterFile.FromJsonText(before);
+                Evidence.EvidenceApply.ApplyRecipe(source, reopened.EvidenceRecipe!);
+                return !repeat.Changed && source.ToJsonText() == applied && file.ToJsonText() == applied;
+            });
+            Verify("a stale session search cannot be attached or partially applied", () =>
+            {
+                var (file, proposal, selection) = Fixture();
+                var search = selection.SessionSearch!;
+                var stale = new Evidence.NeighbourSearch
+                {
+                    QuerySha256 = "stale", ReferenceSha256 = search.ReferenceSha256, Queries = search.Queries, References = search.References,
+                    MinIdentityPercent = search.MinIdentityPercent, MinQueryAlignedPercent = search.MinQueryAlignedPercent, Neighbours = search.Neighbours,
+                };
+                string before = file.ToJsonText();
+                return Throws<InvalidOperationException>(() => Evidence.EvidenceApply.Apply(file, proposal, Copy(selection, search: stale), "fixture version"))
+                    && before == file.ToJsonText();
+            });
+            Verify("a session reference outside the current reviewed data is refused", () =>
+            {
+                var (file, proposal, selection) = Fixture();
+                var changed = selection.SessionReferences!.Select(r => new Evidence.NeighbourReference
+                {
+                    Accession = r.Accession, Identifier = r.Identifier, Family = r.Family, Sequence = r.Sequence + "A",
+                }).ToArray();
+                string before = file.ToJsonText();
+                return Throws<InvalidOperationException>(() => Evidence.EvidenceApply.Apply(file, proposal,
+                    Copy(selection, references: changed), "fixture version")) && before == file.ToJsonText();
+            });
+            Verify("an invalid checked motif fails before a session search or grouping is attached", () =>
+            {
+                var (file, proposal, selection) = Fixture();
+                string before = file.ToJsonText();
+                return Throws<ArgumentException>(() => Evidence.EvidenceApply.Apply(file, proposal,
+                    Copy(selection, motifs: new[] { new Evidence.MotifPattern { Name = "invalid", Pattern = "[" } }), "fixture version"))
+                    && before == file.ToJsonText();
+            });
+            Verify("cancel before apply or at publication leaves all session evidence and curation untouched", () =>
+            {
+                return new[] { false, true }.All(during =>
+                {
+                    var (file, proposal, selection) = Fixture();
+                    string before = file.ToJsonText();
+                    using var cancelled = new CancellationTokenSource();
+                    if (!during) cancelled.Cancel();
+                    var progress = new InlineOperationProgress(p => { if (p.Stage == "evidence-apply" && p.Completed == 1) cancelled.Cancel(); });
+                    return Throws<OperationCanceledException>(() => Evidence.EvidenceApply.Apply(file, proposal, selection, "fixture version",
+                        new Operations.OperationContext(cancelled.Token, progress))) && before == file.ToJsonText();
+                });
+            });
+            Verify("editing attached motifs invalidates a session recipe replay", () =>
+            {
+                var (file, proposal, selection) = Fixture();
+                var result = Evidence.EvidenceApply.Apply(file, proposal, selection, "fixture version");
+                file.Motifs![0].Pattern = "changed";
+                string before = file.ToJsonText();
+                return Throws<InvalidOperationException>(() => Evidence.EvidenceApply.ApplyRecipe(file, result.Recipe)) && before == file.ToJsonText();
+            });
+
+            static (FamilyClusterFile, Evidence.EvidenceProposal, Evidence.EvidenceApplySelection) Fixture(bool prior = true)
+            {
+                string sequence = NearestBase(80, 199);
+                var file = new FamilyClusterFile
+                {
+                    MyExtendedFastaItems = new List<FastaItemExtended>
+                    {
+                        NearestItem("sp|P00001|A", sequence, true, "Alpha family"),
+                        NearestItem("sp|P00002|B", NearestBase(80, 999), true, "Beta family"),
+                        NearestItem("tr|P00003|Q", NearestMutate(sequence, 10), false),
+                    },
+                    EvidenceSource = prior ? new Evidence.EvidenceProvenance { Provider = "prior provider", Release = "prior release" } : null,
+                    Motifs = prior ? new List<Evidence.MotifPattern> { new Evidence.MotifPattern { Name = "prior motif", Pattern = "C" } } : null,
+                };
+                foreach (var protein in file.MyExtendedFastaItems) protein.Evidence!.Keywords.Add("selected");
+                var references = Evidence.NearestReviewed.References(file);
+                var search = Evidence.NearestReviewed.Search(Evidence.NearestReviewed.Targets(file), references);
+                var proposal = Evidence.EvidenceClassifier.Propose(file.MyExtendedFastaItems,
+                    new Evidence.EvidenceClassificationOptions { ScopeTerms = new[] { "selected" } }, search.ByQuery(), Evidence.NearestReviewed.ReferenceEvidence(file));
+                return (file, proposal, new Evidence.EvidenceApplySelection
+                {
+                    SourceFingerprint = proposal.SourceFingerprint, SelectedProteinIndices = proposal.Proteins.Where(p => p.SuggestedSelected).Select(p => p.ProteinIndex).ToArray(),
+                    SessionSearch = search, SessionReferences = references,
+                    CheckedMotifs = new[] { new Evidence.MotifPattern { Name = "checked motif", Pattern = "." } },
+                });
+            }
+            static Evidence.EvidenceApplySelection Copy(Evidence.EvidenceApplySelection source, Evidence.NeighbourSearch? search = null,
+                IReadOnlyList<Evidence.NeighbourReference>? references = null, IReadOnlyList<Evidence.MotifPattern>? motifs = null) => new()
+            {
+                SourceFingerprint = source.SourceFingerprint, SelectedProteinIndices = source.SelectedProteinIndices,
+                SessionSearch = search ?? source.SessionSearch, SessionReferences = references ?? source.SessionReferences, CheckedMotifs = motifs ?? source.CheckedMotifs,
+            };
+            static void Verify(string name, Func<bool> run)
+            {
+                try { Check(name, run()); }
+                catch (Exception ex) { Check(name, false, ex.GetBaseException().Message); }
+            }
+        }
+        private static int EvidenceRecipeReplayCheck(string input)
+        {
+            try
+            {
+                FamilyClusterFile file = FamilyClusterFile.Load(input);
+                string before = file.ToJsonText();
+                var result = Evidence.EvidenceApply.ApplyRecipe(file, file.EvidenceRecipe ?? throw new InvalidDataException("The input has no recipe."));
+                Check("the stored recipe checkpoint remains an exact idempotent replay", !result.Changed && result.Undo == null && file.ToJsonText() == before);
+            }
+            catch (Exception ex) { Check("the stored recipe checkpoint remains an exact idempotent replay", false, ex.GetBaseException().Message); }
+            Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
+            return failed == 0 ? 0 : 1;
         }
         private static void SavedFileCheckTests()
         {

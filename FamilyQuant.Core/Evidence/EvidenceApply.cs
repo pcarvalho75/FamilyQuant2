@@ -21,6 +21,9 @@ namespace FamilyQuant.Evidence
         public IReadOnlyDictionary<string, string> FamilyNames { get; init; } = new Dictionary<string, string>();
         public IReadOnlyList<EvidenceArchitectureChoice> ArchitectureChoices { get; init; } = Array.Empty<EvidenceArchitectureChoice>();
         public IReadOnlyList<EvidenceProteinOverride> ProteinOverrides { get; init; } = Array.Empty<EvidenceProteinOverride>();
+        public NeighbourSearch? SessionSearch { get; init; }
+        public IReadOnlyList<NeighbourReference>? SessionReferences { get; init; }
+        public IReadOnlyList<MotifPattern>? CheckedMotifs { get; init; }
     }
 
     public sealed class EvidenceFamilyChoice
@@ -60,6 +63,16 @@ namespace FamilyQuant.Evidence
         public string EvidenceRelease { get; set; } = string.Empty;
         public List<string> EvidenceReleases { get; set; } = new List<string>();
         public string ProgramVersion { get; set; } = string.Empty;
+        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]
+        public bool IncludesSessionEvidence { get; set; }
+        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull)]
+        public NeighbourSearch? SessionSearch { get; set; }
+        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull)]
+        public List<NeighbourReference>? SessionReferences { get; set; }
+        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull)]
+        public List<MotifPattern>? CheckedMotifs { get; set; }
+        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull)]
+        public List<MotifResult>? CheckedMotifResults { get; set; }
     }
 
     public sealed class EvidenceApplyResult
@@ -69,14 +82,19 @@ namespace FamilyQuant.Evidence
         public GroupingSnapshot? Undo { get; init; }
     }
 
-    public static class EvidenceApply
+    public static partial class EvidenceApply
     {
         public static EvidenceApplyResult Apply(FamilyClusterFile file, EvidenceProposal proposal,
-            EvidenceApplySelection selection, string programVersion)
+            EvidenceApplySelection selection, string programVersion, Operations.OperationContext? operation = null)
         {
             ArgumentNullException.ThrowIfNull(file);
             ArgumentNullException.ThrowIfNull(proposal);
             ArgumentNullException.ThrowIfNull(selection);
+            operation?.Report("evidence-apply", "Validating evidence choices");
+            selection = Clone(selection);
+            if (selection.SessionSearch == null && selection.SessionReferences != null)
+                throw new ArgumentException("Session references require a session search.", nameof(selection));
+            bool sessionInput = selection.SessionSearch != null || selection.CheckedMotifs != null;
             if (string.IsNullOrWhiteSpace(programVersion)) throw new ArgumentException("Supply the running program version.", nameof(programVersion));
             if (selection.SourceFingerprint != proposal.SourceFingerprint)
                 throw new InvalidOperationException("The selection does not belong to this evidence proposal.");
@@ -88,13 +106,18 @@ namespace FamilyQuant.Evidence
                 Names = selection.FamilyNames.OrderBy(p => p.Key, StringComparer.Ordinal),
                 Splits = selection.ArchitectureChoices.OrderBy(c => c.Family, StringComparer.Ordinal).ThenBy(c => c.ArchitectureKey, StringComparer.Ordinal),
                 Overrides = selection.ProteinOverrides.OrderBy(o => o.ProteinIndex), programVersion,
-                file.EvidenceSource?.Provider, file.EvidenceSource?.Release,
+                Provider = sessionInput ? file.EvidenceSource?.Provider ?? string.Empty : file.EvidenceSource?.Provider,
+                Release = sessionInput ? file.EvidenceSource?.Release ?? string.Empty : file.EvidenceSource?.Release,
             });
+            if (sessionInput) request = Hash(new { Request = request, selection.SessionSearch, selection.SessionReferences, selection.CheckedMotifs });
             if (file.EvidenceRecipe?.RequestFingerprint == request
-                && file.EvidenceRecipe.AppliedStateFingerprint == StateFingerprint(file))
+                && file.EvidenceRecipe.AppliedStateFingerprint == StateFingerprint(file, session: file.EvidenceRecipe))
                 return new EvidenceApplyResult { Recipe = Clone(file.EvidenceRecipe) };
             if (EvidenceClassifier.Fingerprint(file.MyExtendedFastaItems) != proposal.SourceFingerprint)
                 throw new InvalidOperationException("The evidence proposal no longer matches the current proteins.");
+            string initialState = StateFingerprint(file);
+            string initialMotifs = Hash(file.Motifs);
+            PreparedSession session = PrepareSession(file, proposal, selection, operation);
 
             var selected = selection.SelectedProteinIndices.ToHashSet();
             if (selected.Count == 0 || selected.Count != selection.SelectedProteinIndices.Count)
@@ -176,7 +199,7 @@ namespace FamilyQuant.Evidence
             }
             var recipe = new EvidenceRecipe
             {
-                SourceFingerprint = proposal.SourceFingerprint, SourceStateFingerprint = StateFingerprint(file),
+                SourceFingerprint = proposal.SourceFingerprint,
                 SourceSha256 = file.SourceSha256, RequestFingerprint = request, Options = Clone(proposal.Options),
                 SelectedProteinIndices = selected.OrderBy(i => i).ToList(),
                 Families = familyNames.OrderBy(p => p.Key, StringComparer.Ordinal).Select(p => new EvidenceFamilyChoice
@@ -189,19 +212,25 @@ namespace FamilyQuant.Evidence
                 EvidenceReleases = file.MyExtendedFastaItems.Select(p => p.Evidence?.Source?.Release).Append(file.EvidenceSource?.Release)
                     .Where(r => !string.IsNullOrEmpty(r)).Select(r => r!).Distinct(StringComparer.Ordinal).OrderBy(r => r, StringComparer.Ordinal).ToList(),
                 ProgramVersion = programVersion,
+                IncludesSessionEvidence = sessionInput, SessionSearch = session.Search, SessionReferences = session.References,
+                CheckedMotifs = session.Motifs, CheckedMotifResults = session.Results,
             };
             foreach (var family in assignments.Where(a => !familyNames.ContainsKey(a.Family)).GroupBy(a => a.Family, StringComparer.Ordinal))
                 recipe.Families.Add(new EvidenceFamilyChoice { Family = family.Key, Name = family.First().Name, Selected = true });
-            recipe.AppliedStateFingerprint = StateFingerprint(file, assignments);
-            return Commit(file, recipe);
+            if (initialState != StateFingerprint(file) || initialMotifs != Hash(file.Motifs))
+                throw new InvalidOperationException("The curation changed while the evidence choices were validated.");
+            recipe.SourceStateFingerprint = StateFingerprint(file, session: recipe);
+            recipe.AppliedStateFingerprint = StateFingerprint(file, assignments, recipe, projectSession: true);
+            return Commit(file, recipe, operation);
         }
 
-        public static EvidenceApplyResult ApplyRecipe(FamilyClusterFile file, EvidenceRecipe recipe)
+        public static EvidenceApplyResult ApplyRecipe(FamilyClusterFile file, EvidenceRecipe recipe, Operations.OperationContext? operation = null)
         {
             ArgumentNullException.ThrowIfNull(file);
             ArgumentNullException.ThrowIfNull(recipe);
+            operation?.Report("evidence-apply", "Validating the saved evidence recipe");
             recipe = Clone(recipe);
-            string state = StateFingerprint(file);
+            string state = StateFingerprint(file, session: recipe);
             if (state == recipe.AppliedStateFingerprint && file.EvidenceRecipe != null
                 && JsonSerializer.Serialize(file.EvidenceRecipe) == JsonSerializer.Serialize(recipe))
                 return new EvidenceApplyResult { Recipe = recipe };
@@ -225,31 +254,47 @@ namespace FamilyQuant.Evidence
             }
             if (recipe.Assignments.GroupBy(a => a.FamilyId).Any(g => g.Select(a => (a.GroupKey, a.Name)).Distinct().Count() != 1)
                 || recipe.Assignments.GroupBy(a => a.GroupKey, StringComparer.Ordinal).Any(g => g.Select(a => a.FamilyId).Distinct().Count() != 1)
-                || StateFingerprint(file, recipe.Assignments) != recipe.AppliedStateFingerprint)
+                || StateFingerprint(file, recipe.Assignments, recipe, projectSession: true) != recipe.AppliedStateFingerprint)
                 throw new ArgumentException("The recipe's resulting grouping does not match its recorded state.", nameof(recipe));
-            return Commit(file, recipe);
+            ValidateSearch(file, recipe.SessionSearch, recipe.SessionReferences, recipe.Options, operation);
+            foreach (MotifPattern motif in recipe.CheckedMotifs ?? new List<MotifPattern>()) MotifCheck.Compile(motif.Pattern);
+            return Commit(file, recipe, operation);
         }
 
-        private static EvidenceApplyResult Commit(FamilyClusterFile file, EvidenceRecipe recipe)
+        private static EvidenceApplyResult Commit(FamilyClusterFile file, EvidenceRecipe recipe, Operations.OperationContext? operation)
         {
             EvidenceRecipe stored = Clone(recipe);
             EvidenceRecipe returned = Clone(recipe);
+            EvidenceProvenance? source = SessionSource(file, stored.SessionSearch);
+            List<MotifPattern>? motifs = stored.CheckedMotifs == null ? file.Motifs : Clone(stored.CheckedMotifs);
             GroupingSnapshot undo = GroupingSnapshot.CaptureEvidence(file);
-            foreach (EvidenceAssignment assignment in stored.Assignments)
+            operation?.Report("evidence-apply", "Publishing the reviewed evidence choices", 1, 1);
+            void Publish()
             {
-                FastaItemExtended protein = file.MyExtendedFastaItems[assignment.ProteinIndex];
-                protein.UserID = assignment.FamilyId;
-                protein.UserAnnotation = assignment.Name;
-                file.LockedUserIds.Add(assignment.FamilyId);
+                if (StateFingerprint(file, session: stored) != stored.SourceStateFingerprint)
+                    throw new InvalidOperationException("The curation changed while the evidence transaction was prepared.");
+                operation?.ThrowIfCancellationRequested();
+                foreach (EvidenceAssignment assignment in stored.Assignments)
+                {
+                    FastaItemExtended protein = file.MyExtendedFastaItems[assignment.ProteinIndex];
+                    protein.UserID = assignment.FamilyId;
+                    protein.UserAnnotation = assignment.Name;
+                    file.LockedUserIds.Add(assignment.FamilyId);
+                }
+                file.EvidenceSource = source;
+                file.Motifs = motifs;
+                file.EvidenceRecipe = stored;
             }
-            file.EvidenceRecipe = stored;
+            if (operation == null) Publish();
+            else operation.Commit(Publish);
             return new EvidenceApplyResult { Changed = true, Recipe = returned, Undo = undo };
         }
 
         private static int MaximumId(FamilyClusterFile file) => file.MyExtendedFastaItems.Select(p => Math.Max(p.UserID, p.USearchID))
             .Concat(file.LockedUserIds).Append(0).Max();
 
-        private static string StateFingerprint(FamilyClusterFile file, IReadOnlyList<EvidenceAssignment>? assignments = null)
+        private static string StateFingerprint(FamilyClusterFile file, IReadOnlyList<EvidenceAssignment>? assignments = null,
+            EvidenceRecipe? session = null, bool projectSession = false)
         {
             var rows = file.MyExtendedFastaItems.ToList();
             var locks = new HashSet<int>(file.LockedUserIds);
@@ -266,12 +311,18 @@ namespace FamilyQuant.Evidence
                     locks.Add(assignment.FamilyId);
                 }
             }
-            return Hash(new
+            string curation = Hash(new
             {
                 Proteins = EvidenceClassifier.Fingerprint(rows), file.SourceSha256, file.SourceSequenceCount,
                 file.WordSimilarity, file.IsKeywordSuperCluster, Locks = locks.OrderBy(i => i),
-                file.DomainSource, file.EvidenceSource,
+                file.DomainSource, EvidenceSource = projectSession ? SessionSource(file, session?.SessionSearch) : file.EvidenceSource,
             });
+            // Keep earlier recipes' state hashes unchanged when they have no session evidence.
+            return session?.IncludesSessionEvidence == true ? Hash(new
+            {
+                Curation = curation, Motifs = projectSession ? session.CheckedMotifs ?? file.Motifs : file.Motifs,
+                Session = Hash(new { session.SessionSearch, session.SessionReferences, session.CheckedMotifs, session.CheckedMotifResults }),
+            }) : curation;
         }
 
         private static string GroupKey(params string[] parts) => JsonSerializer.Serialize(parts);
