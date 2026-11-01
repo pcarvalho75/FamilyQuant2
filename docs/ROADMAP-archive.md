@@ -59,3 +59,10 @@ Finished steps, moved here from docs/ROADMAP.md. The board shows them as green.
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
 | P2 | Retire the De Novo sections Extract areas and Partition ion current in 2.0 (Paulo) | L | 0 | 🟢 | C11 | Decided | Paulo | done | 100% | 100% | done |
+
+### W6 Core rewrite: copy what is good, rewrite what is better
+
+| ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
+|---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
+| X2 | Family document: split `FamilyQuantFile` (733 lines) into document, target-decoy score and PatternLab attribution. `XIC` legacy field read on load only | H | 4 | F6 | X3, X7 | Every old `.fcf` opens; golden equal; lines reported | AS | not started | 0% | 0% | T+4 |
+
