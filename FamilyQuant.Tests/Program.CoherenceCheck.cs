@@ -122,6 +122,38 @@ namespace FamilyQuant.Tests
             Check("the same profile and protein always give the same flags",
                 System.Text.Json.JsonSerializer.Serialize(CoherenceCheck.Check(alpha, CoherenceProtein("tr|A0A302|X", 130, 12, false, 2, "PF00009")))
                 == System.Text.Json.JsonSerializer.Serialize(flags));
+
+            var proposed = new List<FastaItemExtended>
+            {
+                CoherenceProtein("tr|A0A310|X", 104, 7, false, 0, "PF00001"),
+                CoherenceProtein("tr|A0A311|X", 130, 7, false, 0, "PF00001"),
+                CoherenceProtein("tr|A0A312|X", 130, 7, false, 0, "PF00001"),
+            };
+            var proposal = new EvidenceProposal
+            {
+                SourceFingerprint = "fingerprint",
+                Proteins = new[]
+                {
+                    new EvidenceProteinProposal { ProteinIndex = 0, Identifier = "tr|A0A310|X", Family = "Alpha family", Tier = EvidenceTier.UniProtFamily, Reason = "r0" },
+                    new EvidenceProteinProposal { ProteinIndex = 1, Identifier = "tr|A0A311|X", Family = "alpha family", Tier = EvidenceTier.LearnedMarker, Reason = "r1",
+                        PreviousFamilyId = 7, HasScopeAnnotation = true, Neighbour = new NearestNeighbour { Query = "tr|A0A311|X", Accession = "P1" },
+                        Flags = new[] { new EvidenceFlag { Code = "earlier", Message = "kept" } } },
+                    new EvidenceProteinProposal { ProteinIndex = 2, Identifier = "tr|A0A312|X", Family = "", Tier = EvidenceTier.Unassigned, Reason = "r2" },
+                },
+            };
+            EvidenceProposal flagged = CoherenceCheck.Flag(proposal, proposed, profiles);
+            Check("an assigned protein outside its family's ranges gains the coherence flag after its own and starts unticked",
+                flagged.Proteins[1].Flags.Select(f => f.Code).SequenceEqual(new[] { "earlier", CoherenceCheck.LengthAbove })
+                && !flagged.Proteins[1].SuggestedSelected && flagged.Proteins[0].SuggestedSelected,
+                string.Join(",", flagged.Proteins[1].Flags.Select(f => f.Code)));
+            Check("an unassigned protein and a coherent one are left exactly as they were",
+                ReferenceEquals(flagged.Proteins[0], proposal.Proteins[0]) && ReferenceEquals(flagged.Proteins[2], proposal.Proteins[2])
+                && flagged.SourceFingerprint == "fingerprint" && ReferenceEquals(flagged.Markers, proposal.Markers));
+            var changed = typeof(EvidenceProteinProposal).GetProperties()
+                .Where(p => p.CanWrite && p.Name != nameof(EvidenceProteinProposal.Flags)
+                    && !Equals(p.GetValue(flagged.Proteins[1]), p.GetValue(proposal.Proteins[1]))).Select(p => p.Name).ToList();
+            Check("flagging copies every other property of the proposal row, so none is lost when the type grows",
+                changed.Count == 0, string.Join(",", changed));
         }
     }
 }

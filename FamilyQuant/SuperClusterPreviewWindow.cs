@@ -156,7 +156,7 @@ namespace FamilyQuant
 
             noDomains = new TextBlock
             {
-                Text = "No domains in this file yet: press Fetch Domains in the main window.",
+                Text = "No domains in this file yet: press Fetch evidence in the main window.",
                 Foreground = Muted,
                 VerticalAlignment = VerticalAlignment.Center,
                 Margin = new Thickness(14, 0, 0, 0),
@@ -176,6 +176,7 @@ namespace FamilyQuant
             createButton = new Button
             {
                 Content = "Create super cluster",
+                Style = Application.Current.TryFindResource("PrimaryButton") as Style,
                 Padding = new Thickness(12, 5, 12, 5),
                 ToolTip = "Gathers the ticked proteins into one family, and Undo steps it back. Disabled while there is nothing to change.",
             };
@@ -306,6 +307,7 @@ namespace FamilyQuant
             DataGridTextColumn inFamily = AddColumn(table, "In family", 76, nameof(SuperClusterPreviewProtein.FamilyKeywords),
                 "How many proteins of its family carry a keyword: 2 of 11 means the family is here because of those 2.");
             inFamily.SortMemberPath = nameof(SuperClusterPreviewProtein.FamilyCarriers);
+            Themes.TableAppearance.SetNumeric(inFamily, true);
             return table;
         }
 

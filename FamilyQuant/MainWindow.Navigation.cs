@@ -47,7 +47,7 @@ public partial class MainWindow
     private void NavigationStart_Click(object sender, RoutedEventArgs e) => ShowHome();
     private void RefreshNavigationState()
     {
-        NavigationModel.UpdateProjectState(cgc != null, saveInProgress || analyticsInProgress);
+        NavigationModel.UpdateProjectState(cgc != null, saveInProgress || analyticsInProgress || IsQuantifyBusy);
         NavigationModel.SetDocument(cgc?.fcf, lastFcfPath, loadedQuant.Count > 0);
         CommandManager.InvalidateRequerySuggested();
     }

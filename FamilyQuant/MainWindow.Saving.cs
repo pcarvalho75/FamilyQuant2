@@ -74,7 +74,7 @@ public partial class MainWindow
 
     private async Task<bool> ConfirmCanReplaceAsync()
     {
-        if (leavePromptRunning || saveInProgress) return false;
+        if (leavePromptRunning || saveInProgress || IsQuantifyBusy) return false;
         if (cgc == null || !DocumentState.CheckForChanges(cgc.fcf)) return true;
         leavePromptRunning = true;
         try
@@ -99,6 +99,13 @@ public partial class MainWindow
 
     private async void WindowClosing(object? sender, CancelEventArgs args)
     {
+        if (IsQuantifyBusy)
+        {
+            args.Cancel = true;
+            quantify!.ViewModel.CancelCommand.Execute(null);
+            StatusModel.ShowMessage("Cancelling Quantify. Close again after the current phase finishes.");
+            return;
+        }
         if (approvedClose || PresentationSource.FromVisual(this) == null && UnsavedProjectChoiceOverride == null) return;
         Task<bool> decision = ConfirmCanReplaceAsync();
         if (decision.IsCompletedSuccessfully)

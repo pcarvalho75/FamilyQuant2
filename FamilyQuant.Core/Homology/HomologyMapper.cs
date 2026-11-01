@@ -1,3 +1,5 @@
+using FamilyQuant.Operations;
+using System.Threading;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -45,8 +47,9 @@ namespace FamilyQuant.Homology
         /// first seen.
         /// </summary>
         public static List<HomologyResult> Search(IEnumerable<string> peptides, HomologyDatabase database,
-            HomologyOptions? options = null)
+            HomologyOptions? options = null, OperationContext? operation = null)
         {
+            operation?.ThrowIfCancellationRequested();
             if (peptides == null)
             {
                 throw new ArgumentNullException(nameof(peptides));
@@ -81,6 +84,7 @@ namespace FamilyQuant.Homology
 
             foreach (string peptide in peptides)
             {
+                operation?.ThrowIfCancellationRequested();
                 if (HomologyScorer.TryNormalizeQuery(peptide, out string normalized, out string rejection))
                 {
                     if (seenAccepted.Add(normalized))
@@ -100,14 +104,19 @@ namespace FamilyQuant.Homology
             // the output order is the input order whatever the scheduler does. Scoring one peptide in
             // parallel would also have to merge partial argmaxes, and the merge is where a tie-break
             // silently becomes non-deterministic.
-            Parallel.For(0, queries.Count, i =>
+            int completed = 0;
+            object progressGate = new object();
+            var parallelOptions = new ParallelOptions { CancellationToken = operation?.CancellationToken ?? CancellationToken.None };
+            Parallel.For(0, queries.Count, parallelOptions, i =>
             {
                 (string Raw, string Normalized, string? Rejection) query = queries[i];
 
                 results[i] = query.Rejection != null
                     ? new HomologyResult(query.Raw, string.Empty, query.Rejection,
                         Array.Empty<HomologyHit>(), false, false, 0, false)
-                    : SearchNormalized(query.Raw, query.Normalized, database, opts);
+                    : SearchNormalized(query.Raw, query.Normalized, database, opts, operation);
+                if (operation != null)
+                    lock (progressGate) operation.Report("homology", "Searched peptide queries", ++completed, queries.Count);
             });
 
             return new List<HomologyResult>(results);
@@ -116,15 +125,16 @@ namespace FamilyQuant.Homology
         /// <summary>Searches a single query. Convenience for callers with one sequence in hand; the
         /// normalisation and the rejection path are identical to <see cref="Search"/>.</summary>
         public static HomologyResult SearchOne(string peptide, HomologyDatabase database,
-            HomologyOptions? options = null)
+            HomologyOptions? options = null, OperationContext? operation = null)
         {
-            List<HomologyResult> results = Search(new[] { peptide }, database, options);
+            List<HomologyResult> results = Search(new[] { peptide }, database, options, operation);
             return results[0];
         }
 
         private static HomologyResult SearchNormalized(string raw, string peptide, HomologyDatabase database,
-            HomologyOptions options)
+            HomologyOptions options, OperationContext? operation)
         {
+            operation?.ThrowIfCancellationRequested();
             bool useIndex = ShouldUseSeedIndex(peptide, database, options);
 
             IReadOnlyList<int> candidates = useIndex
@@ -137,6 +147,7 @@ namespace FamilyQuant.Homology
 
             foreach (int index in candidates)
             {
+                operation?.ThrowIfCancellationRequested();
                 HomologyProtein protein = database.Proteins[index];
 
                 // The identity prefilter of ProgramEngine.cs:225-229. A protein shorter than the

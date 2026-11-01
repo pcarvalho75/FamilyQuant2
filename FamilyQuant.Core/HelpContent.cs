@@ -209,7 +209,7 @@ namespace FamilyQuant
             sb.AppendLine("The keywords and exclude words can be edited there and everything follows as you");
             sb.AppendLine("type. If the Search box hides families that match, one tick brings them in.");
             sb.AppendLine();
-            sb.AppendLine("Fetch Domains asks UniProt once for each protein's Pfam domains and saving keeps them");
+            sb.AppendLine("Fetch evidence asks UniProt once for each protein's Pfam domains and saving keeps them");
             sb.AppendLine("in the file, with the UniProt release. They fill the Domains column, the Search box");
             sb.AppendLine("finds them, and in the preview Keep domains unticks the proteins with none of the");
             sb.AppendLine("domains you name: Reprolysin keeps those with the metalloproteinase domain whatever");
