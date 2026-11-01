@@ -26,6 +26,14 @@ namespace FamilyQuant
         /// the user could start Divide &amp; Conquer on top of a running identity scan.
         /// </summary>
         private bool busy;
+        public string ShellStatusText => busy ? "Running USEARCH" : fcf == null ? "Ready to build" : "Families written";
+        public string ShellHelpText => TextBlockUSearchState.Text;
+        public event EventHandler? ShellStatusChanged;
+        public bool UseShellStatusBar
+        {
+            get => BorderUSearchStatus.Visibility == Visibility.Collapsed;
+            set => BorderUSearchStatus.Visibility = value ? Visibility.Collapsed : Visibility.Visible;
+        }
 
         public USearchLib()
         {
@@ -54,6 +62,7 @@ namespace FamilyQuant
 
             TextBlockUSearchState.Text = "Working · " + what + " This runs USEARCH and cannot be interrupted; " +
                                          "the buttons come back when it finishes.";
+            ShellStatusChanged?.Invoke(this, EventArgs.Empty);
             return true;
         }
 
@@ -82,6 +91,7 @@ namespace FamilyQuant
                 : "Step 1 done · A Family Cluster File has been written. You can check the clustering with " +
                   "\"Calculate FDR\", or go straight to File · Load Family Cluster File to attach " +
                   "quantitation to these families.";
+            ShellStatusChanged?.Invoke(this, EventArgs.Empty);
         }
 
         /// <summary>
@@ -382,6 +392,7 @@ namespace FamilyQuant
             Mouse.OverrideCursor = Cursors.Wait;
             TextBlockUSearchState.Text = "Working · removing redundant sequences from " + Path.GetFileName(inputFile) +
                                          ". The original order and headers are kept; the buttons come back when it finishes.";
+            ShellStatusChanged?.Invoke(this, EventArgs.Empty);
 
             try
             {
