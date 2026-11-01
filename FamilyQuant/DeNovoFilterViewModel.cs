@@ -18,6 +18,16 @@ public sealed class DeNovoFilterViewModel : ScreenViewModel
     public string StretchFloor { get => floor; set => Set(ref floor, value); }
     public bool UsesPeaks => ModeTag is "peaks-only" or "peaks-all" or "union-only-deepnovo" or "union-all-deepnovo";
     public bool UsesDeepNovo => ModeTag is "deepnovo" or "union-only-deepnovo" or "union-all-deepnovo";
+    public IReadOnlyList<DeNovoSource> Sources
+    {
+        get
+        {
+            var sources = new List<DeNovoSource>();
+            if (UsesPeaks) sources.Add(ModeTag is "peaks-all" or "union-all-deepnovo" ? DeNovoSource.DeNovoAll : DeNovoSource.DenovoOnly);
+            if (UsesDeepNovo) sources.Add(DeNovoSource.DeepNovo);
+            return sources;
+        }
+    }
 
     public DeNovoFilterViewModel(QuantManifest? manifest = null)
     {
@@ -65,10 +75,8 @@ public sealed class DeNovoFilterViewModel : ScreenViewModel
         { error = "DeepNovo minimum SCORE must be a number from 0 to 100."; return false; }
         criteria = new() { MinLength = min, MinAverageLocalConfidence = UsesPeaks ? alc : score,
             StretchLength = need, StretchFloor = (int)Math.Round(local, MidpointRounding.AwayFromZero) };
-        var selected = new List<DeNovoSourceSelection>();
-        if (UsesPeaks) selected.Add(new(ModeTag is "peaks-all" or "union-all-deepnovo"
-            ? DeNovoSource.DeNovoAll : DeNovoSource.DenovoOnly, alc, 0));
-        if (UsesDeepNovo) selected.Add(new(DeNovoSource.DeepNovo, score, selected.Count));
+        var selected = Sources.Select((source, priority) =>
+            new DeNovoSourceSelection(source, source == DeNovoSource.DeepNovo ? score : alc, priority)).ToList();
         selections = selected;
         return true;
     }

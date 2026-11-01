@@ -51,10 +51,10 @@ The contract commit is `90d1a05`. The wiring commit adds an optional final
 
 | Area | API |
 |---|---|
-| Clustering/alignment | `USearchTools.Align`, `GenerateFCF`, `CountSequences` and its exhaustive pass |
+| Clustering/alignment | `USearchTools.Align`, `Cluster`, `GenerateFCF`, `CountSequences` and its exhaustive pass |
 | Identity selection | `FamilyClusterFile.ScanIdentities`, `DivideAndConquer` and detailed result |
 | Curation files | `FamilyClusterFile.Load`, `Save`, `SetLookupDictionary`, `AttributeXICToGroups` |
-| Redundancy | `RedundancyTools.RemoveRedundancy` |
+| Redundancy | `RedundancyTools.RemoveRedundancyDetailed` and its compatibility facade `RemoveRedundancy` |
 | Homology | `HomologyDatabase.Build`, `HomologyMapper.Search` and `SearchOne` |
 | Project files | `ProjectStore.ReadFqproj`, `WriteFqproj` and `ShellProjectOperations.Read` |
 

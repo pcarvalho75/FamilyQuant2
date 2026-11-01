@@ -18,7 +18,7 @@ namespace FamilyQuant
     /// This type is pure - it touches no control and no disk - so the whole undo mechanism can be
     /// exercised headless.
     /// </summary>
-    public sealed class GroupingSnapshot
+    public sealed partial class GroupingSnapshot
     {
         // Keyed by SequenceIdentifier, which is the protein's stable identity across a reclustering (the
         // family ids move, the identifier does not). A repeated identifier keeps its last value, matching
@@ -80,6 +80,7 @@ namespace FamilyQuant
         /// </summary>
         public void Restore(FamilyClusterFile fcf)
         {
+            if (RestoreEvidence(fcf)) return;
             foreach (var item in fcf.MyExtendedFastaItems)
             {
                 if (ids.TryGetValue(item.SequenceIdentifier, out var snap))

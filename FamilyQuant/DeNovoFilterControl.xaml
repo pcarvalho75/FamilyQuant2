@@ -25,11 +25,11 @@
   <Expander Grid.Row="3" Grid.ColumnSpan="2" Header="Length and local confidence" Margin="0,8,0,0"
    ToolTip="These length and consecutive-residue filters are shared by Quantify and De novo.">
    <WrapPanel Margin="0,8,0,0">
-    <Label Content="Minimum length" ToolTip="Minimum accepted peptide length in residues, from 1 to 100."/><TextBox Width="54" Text="{Binding MinimumLength, UpdateSourceTrigger=PropertyChanged}"
+    <Label Content="Minimum length" ToolTip="Minimum accepted peptide length in residues, from 1 to 100."/><TextBox Width="54" Margin="{DynamicResource ControlPadding}" Text="{Binding MinimumLength, UpdateSourceTrigger=PropertyChanged}"
      ToolTip="Minimum peptide length in residues, from 1 to 100. Default 7."/>
-    <Label Content="Consecutive residues" ToolTip="Number of consecutive residues required above the local confidence floor."/><TextBox Width="54" Text="{Binding StretchLength, UpdateSourceTrigger=PropertyChanged}"
+    <Label Content="Consecutive residues" ToolTip="Number of consecutive residues required above the local confidence floor."/><TextBox Width="54" Margin="{DynamicResource ControlPadding}" Text="{Binding StretchLength, UpdateSourceTrigger=PropertyChanged}"
      ToolTip="Required consecutive residues above the local confidence floor, from 1 to 100. Default 5."/>
-    <Label Content="At least (%)" ToolTip="Minimum local confidence of each residue in the requested stretch."/><TextBox Width="54" Text="{Binding StretchFloor, UpdateSourceTrigger=PropertyChanged}"
+    <Label Content="At least (%)" ToolTip="Minimum local confidence of each residue in the requested stretch."/><TextBox Width="54" Margin="{DynamicResource ControlPadding}" Text="{Binding StretchFloor, UpdateSourceTrigger=PropertyChanged}"
      ToolTip="Local confidence floor from 0 to 100. Rounded to the nearest whole number. Default 90."/>
    </WrapPanel>
   </Expander>

@@ -188,6 +188,9 @@ namespace FamilyQuant
         /// starting it rather than capping it here.
         /// </summary>
         public static FamilyClusterFile GenerateFCF(FileInfo fi, int identity, bool exhaustive = true, OperationContext? operation = null)
+            => Cluster(fi, identity, exhaustive, operation).Document;
+
+        public static ClusteringResult Cluster(FileInfo fi, int identity, bool exhaustive = true, OperationContext? operation = null)
         {
             operation?.ThrowIfCancellationRequested();
             string usearchExe = GetUSearchPath();
@@ -228,19 +231,21 @@ namespace FamilyQuant
 
                 List<FastaItemExtended> fastaItemsExtended = ParseClusterFile(ucFile, ffp.MyItems, operation);
 
-                if (exhaustive)
-                {
+                bool usedExhaustive = exhaustive &&
                     ApplyExhaustiveSecondPass(fi, usearchExe, fastaItemsExtended, identity, operation);
-                }
+                IReadOnlyList<string> warnings = exhaustive && !usedExhaustive
+                    ? new[] { "The exhaustive pass produced no alignments; families use the fast first pass." }
+                    : Array.Empty<string>();
 
-                return new FamilyClusterFile()
+                var document = new FamilyClusterFile()
                 {
                     ClusteringIdentity = identity,
                     SourceSha256 = FileFingerprint.Sha256(fi.FullName),
                     SourceSequenceCount = ffp.MyItems.Count,
-                    ClusteringMethod = exhaustive ? ExhaustiveClusteringMethod : FastClusteringMethod,
+                    ClusteringMethod = usedExhaustive ? ExhaustiveClusteringMethod : FastClusteringMethod,
                     MyExtendedFastaItems = fastaItemsExtended
                 };
+                return new ClusteringResult(document, exhaustive, usedExhaustive, warnings);
             }
             finally
             {
@@ -356,7 +361,7 @@ namespace FamilyQuant
         /// If the all-pairs alignment fails or produces nothing, this leaves the fast-only grouping
         /// untouched rather than throwing: the caller still gets a usable Family Cluster File.
         /// </summary>
-        private static void ApplyExhaustiveSecondPass(
+        private static bool ApplyExhaustiveSecondPass(
             FileInfo fi, string usearchExe, List<FastaItemExtended> items, int identity, OperationContext? operation)
         {
             List<PairwiseEdge>? edges = GetOrAlignPairwiseEdges(fi, usearchExe, operation);
@@ -367,7 +372,7 @@ namespace FamilyQuant
                 // the caller believe it got the refined clustering.
                 Console.WriteLine("Exhaustive clustering pass produced no pairwise alignments for " +
                     fi.Name + "; kept the fast first-pass clustering for this run.");
-                return;
+                return false;
             }
 
             var firstPass = new Dictionary<string, int>(items.Count, StringComparer.Ordinal);
@@ -383,6 +388,7 @@ namespace FamilyQuant
             }
 
             items.Sort((a, b) => a.USearchID.CompareTo(b.USearchID));
+            return true;
         }
 
         /// <summary>

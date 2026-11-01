@@ -13,7 +13,7 @@ public partial class MainWindow
     {
         if (cgc == null || loadedCuration == null) return;
         var model = QuantifyViewModelFactoryOverride?.Invoke(loadedManifest, loadedCuration)
-            ?? new ComputeXicViewModel(AppVersion(), loadedManifest, loadedCuration);
+            ?? new ComputeXicViewModel(AppVersion(), loadedManifest, loadedCuration, SharedDeNovoFilters());
         var control = new QuantifyControl(model);
         ClusterGenerationControl? heldProject = cgc;
         FamilyClusterFile? heldCuration = loadedCuration;
