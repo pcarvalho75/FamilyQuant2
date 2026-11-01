@@ -196,10 +196,14 @@ namespace FamilyQuant
             // FromJsonText would reject, losing all curation. Mirrors ProjectStore.WriteFqproj. The shared
             // options keep a .fcf and a .fqproj's curation.json byte-identical for the same file.
             operation?.Report("save", "Preparing the family document");
+            LastSaveCheck = null;
+            var expected = Evidence.SavedFileCheck.Capture(this);
             string temp = fileName + "." + Guid.NewGuid().ToString("N") + ".tmp";
             try
             {
                 File.WriteAllText(temp, ToJsonText());
+                LastSaveCheck = Evidence.SavedFileCheck.Verify(expected, temp, project: false, operation);
+                Evidence.SavedFileCheck.RequirePassed(LastSaveCheck);
                 operation?.Report("save", "Publishing the family document", 1, 1);
                 void Publish() => File.Move(temp, fileName, overwrite: true);
                 if (operation == null) Publish();
