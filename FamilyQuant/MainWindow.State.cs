@@ -10,12 +10,15 @@ namespace FamilyQuant;
 public sealed class ShellSessionState
 {
     public List<string> RecentProjects { get; set; } = new();
+    public string? LastResultProject { get; set; }
 
-    public void Remember(string path)
+    public void Remember(string path, bool hasStoredResults = false)
     {
         string full = Path.GetFullPath(path);
         RecentProjects = RecentProjects.Where(p => !string.Equals(p, full, StringComparison.OrdinalIgnoreCase))
             .Prepend(full).Take(10).ToList();
+        if (hasStoredResults) LastResultProject = full;
+        else if (string.Equals(LastResultProject, full, StringComparison.OrdinalIgnoreCase)) LastResultProject = null;
     }
 
     public static ShellSessionState Load(string path)
@@ -25,6 +28,7 @@ public sealed class ShellSessionState
             var state = JsonSerializer.Deserialize<ShellSessionState>(File.ReadAllText(path)) ?? new();
             state.RecentProjects = (state.RecentProjects ?? new()).Where(p => !string.IsNullOrWhiteSpace(p))
                 .Where(p => Path.IsPathFullyQualified(p)).Distinct(StringComparer.OrdinalIgnoreCase).Take(10).ToList();
+            if (!Path.IsPathFullyQualified(state.LastResultProject ?? "")) state.LastResultProject = null;
             return state;
         }
         catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or JsonException or ArgumentException)
@@ -65,9 +69,18 @@ public partial class MainWindow
 
     private void RememberProject(string path)
     {
-        shellState.Remember(path);
+        shellState.Remember(path, loadedQuant.Count > 0);
         string? error = shellState.Save(shellSettingsPath);
         if (error != null) StatusModel.ShowMessage(error);
         RefreshRecentMenu();
+        home?.SetRecentProjects(shellState.RecentProjects);
+        home?.SetLastResult(shellState.LastResultProject, loadedQuant.Count > 0);
+    }
+
+    private void ShowLastResult()
+    {
+        if (cgc != null && loadedQuant.Count > 0) MenuItemAnalytics_Click(this, new System.Windows.RoutedEventArgs());
+        else if (shellState.LastResultProject is string path && OpenProjectPath(path))
+            MenuItemAnalytics_Click(this, new System.Windows.RoutedEventArgs());
     }
 }

@@ -15,8 +15,7 @@ public partial class MainWindow
 
     private void InitializeShellCommands()
     {
-        shellSettingsPath = ShellSettingsPathOverride ?? Path.Combine(
-            Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "FamilyQuant2", "shell.json");
+        shellSettingsPath = ShellSettingsPathOverride ?? Path.Combine(ApplicationPaths.LocalDataDirectory, "shell.json");
         shellState = ShellSessionState.Load(shellSettingsPath);
         void Bind(RoutedCommand command, Action run, Func<bool>? allowed = null) =>
             CommandBindings.Add(new CommandBinding(command, (_, e) => { run(); e.Handled = true; },

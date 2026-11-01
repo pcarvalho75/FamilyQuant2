@@ -131,6 +131,9 @@ namespace FamilyQuant
             MenuItemReanotateSEPro.IsEnabled = cgc != null;
 
             home = new HomeControl();
+            home.OpenRequested += () => MenuItemCluster_Click(this, new RoutedEventArgs());
+            home.OpenPathRequested += path => OpenProjectPath(path);
+            home.LastResultRequested += ShowLastResult;
             home.BuildFamiliesRequested += () => MenuRunUSearch_Click(this, new RoutedEventArgs());
             home.CurateRequested += ShowCurationOrOpen;
             home.ComputeXicRequested += () => MenuItemComputeXic_Click(this, new RoutedEventArgs());
@@ -140,6 +143,8 @@ namespace FamilyQuant
             // The card state is the honest project state: with a project open, Compute and Analytics are
             // live; with none, they stay dark until step 2 opens one.
             home.SetProjectState(cgc != null, cgc != null ? ProjectStatusText() : "No project open.");
+            home.SetRecentProjects(shellState.RecentProjects);
+            home.SetLastResult(shellState.LastResultProject, cgc != null && loadedQuant.Count > 0);
 
             GridApp.Children.Add(home);
 

@@ -1,169 +1,85 @@
 <UserControl x:Class="FamilyQuant.HomeControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:local="clr-namespace:FamilyQuant"
-             mc:Ignorable="d"
-             d:DesignHeight="600" d:DesignWidth="1024">
-    <UserControl.Resources>
-
-        <!-- A step card is a Button so the whole tile is one click target, keyboard-focusable, and swept
-             for a tooltip like every other command. The number, the title and the one-line description are
-             its content; the width is fixed and the description wraps, so a long line grows the card
-             downwards rather than being clipped on a narrow window. -->
-        <Style x:Key="StepCard" TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
-            <Setter Property="Width" Value="228"/>
-            <Setter Property="Margin" Value="8"/>
-            <Setter Property="Padding" Value="0"/>
-            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-            <Setter Property="VerticalContentAlignment" Value="Top"/>
-            <Setter Property="Background" Value="{DynamicResource SurfaceBrush}"/>
-        </Style>
-
-        <Style x:Key="StepNumber" TargetType="TextBlock">
-            <Setter Property="Foreground" Value="{DynamicResource TextBrush}"/>
-            <Setter Property="FontSize" Value="22"/>
-            <Setter Property="FontWeight" Value="Bold"/>
-            <Setter Property="VerticalAlignment" Value="Center"/>
-            <Setter Property="Margin" Value="0,0,10,0"/>
-        </Style>
-
-        <Style x:Key="StepTitle" TargetType="TextBlock">
-            <Setter Property="Foreground" Value="{DynamicResource TextBrush}"/>
-            <Setter Property="FontSize" Value="15"/>
-            <Setter Property="FontWeight" Value="Bold"/>
-            <Setter Property="TextWrapping" Value="Wrap"/>
-            <Setter Property="VerticalAlignment" Value="Center"/>
-        </Style>
-
-        <Style x:Key="StepBody" TargetType="TextBlock">
-            <Setter Property="Foreground" Value="{DynamicResource MutedBrush}"/>
-            <Setter Property="FontSize" Value="12"/>
-            <Setter Property="TextWrapping" Value="Wrap"/>
-            <Setter Property="Margin" Value="0,8,0,0"/>
-        </Style>
-
-    </UserControl.Resources>
-
-    <!-- Wide content scrolls rather than clips: on a short window the four cards plus the side branch
-         are taller than the pane, so the whole thing sits in a vertical scroll. -->
-    <ScrollViewer Background="{DynamicResource CanvasBrush}"
-                  VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
-        <StackPanel Margin="24,20,24,24" MaxWidth="1100" HorizontalAlignment="Left">
-
-            <TextBlock Text="FamilyQuant" Foreground="{DynamicResource TextBrush}"
-                       FontSize="26" FontWeight="Bold"/>
-            <TextBlock Text="One project, four steps. Build the families, curate them, measure the full XIC from the RAW, then read the recovery. Everything you keep lives in a single .fqproj project."
-                       Foreground="{DynamicResource MutedBrush}" FontSize="13" TextWrapping="Wrap"
-                       Margin="0,6,0,0" MaxWidth="760" HorizontalAlignment="Left"
-                       ToolTip="FamilyQuant groups a protein database into families, lets you curate them, measures every peptide's full isotope envelope from the RAW files and reports how much of each run is recovered. All of it is saved in one .fqproj project."/>
-
-            <!-- The project line is the through-line: it names the .fqproj currently open, or says none is,
-                 and it is the same fact the persistent banner above the screen carries. -->
-            <Border Background="{DynamicResource SurfaceBrush}" CornerRadius="4" Padding="12,8" Margin="0,16,0,0"
-                    HorizontalAlignment="Left">
-                <TextBlock x:Name="TextBlockHomeProject" Foreground="{DynamicResource TextBrush}" FontSize="13"
-                           TextWrapping="Wrap" MaxWidth="900"
-                           Text="No project open."
-                           ToolTip="The project (.fqproj) you are working in, and whether its full XIC has been computed. The same information is shown in the banner at the top of the window."/>
-            </Border>
-
-            <TextBlock Text="The flow" Foreground="{DynamicResource TextBrush}" FontSize="16"
-                       FontWeight="Bold" Margin="0,22,0,0"/>
-
-            <!-- The four steps, in order. They wrap on a narrow window rather than being pushed off the
-                 edge. Steps 3 and 4 open disabled and are lit by opening a project in step 2, exactly the
-                 condition the matching File-menu commands use, so the home and the menu never disagree. -->
-            <WrapPanel Margin="0,8,0,0">
-
-                <Button x:Name="ButtonHomeBuild" Style="{StaticResource StepCard}" Click="ButtonHomeBuild_Click"
-                        ToolTip="Step 1: build the families. Opens Run USearch, which groups a FASTA or target-decoy (.T-R) database into protein families by sequence identity. Skip it if you already have a .fcf or .fqproj.">
-                    <Border Padding="14">
-                        <StackPanel>
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="1" Style="{StaticResource StepNumber}"/>
-                                <TextBlock Text="Build families" Style="{StaticResource StepTitle}"/>
-                            </StackPanel>
-                            <TextBlock Style="{StaticResource StepBody}"
-                                       Text="Cluster a FASTA or target-decoy database into protein families with Run USearch. Once per database."/>
-                        </StackPanel>
-                    </Border>
-                </Button>
-
-                <Button x:Name="ButtonHomeCurate" Style="{StaticResource StepCard}" Click="ButtonHomeCurate_Click"
-                        ToolTip="Step 2: curate the families. Returns to the open project, or opens a .fqproj or .fcf, where you can merge families, edit User IDs and lock families. Opening a project enables steps 3 and 4.">
-                    <Border Padding="14">
-                        <StackPanel>
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="2" Style="{StaticResource StepNumber}"/>
-                                <TextBlock Text="Curate families" Style="{StaticResource StepTitle}"/>
-                            </StackPanel>
-                            <TextBlock Style="{StaticResource StepBody}"
-                                       Text="Return to the open project, or open a .fqproj or .fcf, and merge, rename or lock families by hand."/>
-                        </StackPanel>
-                    </Border>
-                </Button>
-
-                <Button x:Name="ButtonHomeCompute" Style="{StaticResource StepCard}" Click="ButtonHomeCompute_Click"
-                        ToolTip="Step 3: compute the full XIC. Measures every identified peptide and kept de novo precursor from the RAW files and stores the result in the open project; Save afterwards to keep it. Disabled until a project is open.">
-                    <Border Padding="14">
-                        <StackPanel>
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="3" Style="{StaticResource StepNumber}"/>
-                                <TextBlock Text="Compute full XIC" Style="{StaticResource StepTitle}"/>
-                            </StackPanel>
-                            <TextBlock Style="{StaticResource StepBody}"
-                                       Text="Measure every peptide's full isotope envelope from the RAW and store it in the project. Needs a project open."/>
-                        </StackPanel>
-                    </Border>
-                </Button>
-
-                <Button x:Name="ButtonHomeAnalytics" Style="{StaticResource StepCard}" Click="ButtonHomeAnalytics_Click"
-                        ToolTip="Step 4: analytics and report. Draws the recovery figures from the project's stored full XIC, with CSV and PNG export. It reads no RAW file and changes no family. Disabled until a project is open.">
-                    <Border Padding="14">
-                        <StackPanel>
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="4" Style="{StaticResource StepNumber}"/>
-                                <TextBlock Text="Analytics / report" Style="{StaticResource StepTitle}"/>
-                            </StackPanel>
-                            <TextBlock Style="{StaticResource StepBody}"
-                                       Text="Read the recovery figures for the paper and the talk from the stored quant. Needs a project open."/>
-                        </StackPanel>
-                    </Border>
-                </Button>
-
+             Background="{DynamicResource CanvasBrush}" FontFamily="{DynamicResource UiFont}"
+             FontSize="{DynamicResource BodySize}">
+    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+        <StackPanel Margin="24" MaxWidth="1160" HorizontalAlignment="Stretch">
+            <DockPanel Margin="0,0,0,20">
+                <Image Source="{DynamicResource StartPageLogo}" Width="52" Height="52" Margin="0,0,16,0" Stretch="Uniform">
+                    <Image.Style>
+                        <Style TargetType="Image">
+                            <Style.Triggers>
+                                <Trigger Property="Source" Value="{x:Null}"><Setter Property="Visibility" Value="Collapsed"/></Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Image.Style>
+                </Image>
+                <StackPanel>
+                    <TextBlock Text="FamilyQuant" FontSize="{DynamicResource TitleSize}" FontWeight="SemiBold" Foreground="{DynamicResource TextBrush}"/>
+                    <TextBlock Text="Open a project or start from a protein database." Margin="0,6,0,0" Foreground="{DynamicResource MutedBrush}"/>
+                </StackPanel>
+            </DockPanel>
+            <WrapPanel Margin="0,0,0,24">
+                <Button x:Name="ButtonHomeOpen" Content="Open project" Click="ButtonHomeOpen_Click" Style="{DynamicResource PrimaryButton}" Margin="0,0,10,0"
+                        ToolTip="Opens a FamilyQuant project or an older Family Cluster File. Your existing files stay available."/>
+                <Button x:Name="ButtonHomeBuild" Content="New from database" Click="ButtonHomeBuild_Click"
+                        ToolTip="Builds protein families from a FASTA or target-decoy database. Opens the same Build families screen as File > New from database."/>
             </WrapPanel>
-
-            <!-- The side branch. It is drawn off to the side of steps 2 to 3 and labelled optional, because
-                 it feeds the compute in step 3 rather than being a fifth stage of its own. -->
-            <TextBlock Text="Optional side-branch" Foreground="{DynamicResource TextBrush}" FontSize="16"
-                       FontWeight="Bold" Margin="0,24,0,0"/>
-
-            <StackPanel Orientation="Horizontal" Margin="40,8,0,0">
-                <TextBlock Text="↳ inspect only" Foreground="{DynamicResource MutedBrush}" FontSize="12"
-                           VerticalAlignment="Center" Margin="0,0,4,0"/>
-
-                <Button x:Name="ButtonHomeDeNovo" Style="{StaticResource StepCard}" Click="ButtonHomeDeNovo_Click"
-                        ToolTip="Optional: inspect PEAKS or DeepNovo calls, filter them and compare them with PatternLab in a review queue. Not needed for quantitation: step 3 reads the de novo folder itself, and nothing here changes its numbers.">
-                    <Border Padding="14">
-                        <StackPanel>
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="＋" Style="{StaticResource StepNumber}"/>
-                                <TextBlock Text="De novo review" Style="{StaticResource StepTitle}"/>
-                            </StackPanel>
-                            <TextBlock Style="{StaticResource StepBody}"
-                                       Text="Inspect PEAKS or DeepNovo calls: filters, comparison with PatternLab, review queue. Step 3 quantifies de novo on its own."/>
-                        </StackPanel>
-                    </Border>
-                </Button>
-            </StackPanel>
-
-            <TextBlock Foreground="{DynamicResource MutedBrush}" FontSize="12" TextWrapping="Wrap"
-                       Margin="0,24,0,0" MaxWidth="900" HorizontalAlignment="Left"
-                       Text="Every command here is also on the menu bar above, in this same order. The banner under the menu always says which stage you are in and which project is open."
-                       ToolTip="The menu bar has the same commands in the same order. The banner under the menu always shows the current step and the open project."/>
-
+            <Border Background="{DynamicResource SurfaceBrush}" Padding="16" Margin="0,0,0,18">
+                <StackPanel>
+                    <TextBlock Text="Current project" Foreground="{DynamicResource TextBrush}" FontWeight="SemiBold"/>
+                    <TextBlock x:Name="TextBlockHomeProject" Margin="0,8,0,0" TextTrimming="CharacterEllipsis" TextWrapping="NoWrap" Foreground="{DynamicResource MutedBrush}"
+                               ToolTip="Names the open project and its stored quantitation. Help contains the full workflow and status details."/>
+                    <WrapPanel Margin="0,12,0,0">
+                        <Button x:Name="ButtonHomeCurate" Content="Families" Click="ButtonHomeCurate_Click" Margin="0,0,8,0"
+                                ToolTip="Returns to the open family's curation, or opens a file when none is loaded. Existing edits stay in memory."/>
+                        <Button x:Name="ButtonHomeCompute" Click="ButtonHomeCompute_Click" Margin="0,0,8,0" IsEnabled="False"
+                                ToolTip="Computes full XIC for the open project using the same command as Analysis > Compute full XIC. Disabled until a project is open.">
+                            <TextBlock Text="Quantify" Foreground="{DynamicResource MutedBrush}"/>
+                        </Button>
+                        <Button x:Name="ButtonHomeAnalytics" Click="ButtonHomeAnalytics_Click" Margin="0,0,8,0" IsEnabled="False"
+                                ToolTip="Shows the open project's stored results without recomputing them. Disabled until a project is open.">
+                            <TextBlock Text="Results" Foreground="{DynamicResource MutedBrush}"/>
+                        </Button>
+                        <Button x:Name="ButtonHomeDeNovo" Content="De novo evidence" Click="ButtonHomeDeNovo_Click"
+                                ToolTip="Opens the optional de novo inspection workflow. Its filters and review do not change the open project's families or quantitation."/>
+                    </WrapPanel>
+                    <TextBlock x:Name="TextBlockProjectReason" Margin="0,8,0,0" Foreground="{DynamicResource MutedBrush}" FontSize="{DynamicResource CaptionSize}"/>
+                </StackPanel>
+            </Border>
+            <Grid>
+                <Grid.ColumnDefinitions><ColumnDefinition Width="2*"/><ColumnDefinition Width="18"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+                <Border Grid.Column="0" Background="{DynamicResource SurfaceBrush}" Padding="16" MinWidth="290">
+                    <StackPanel>
+                        <TextBlock Text="Recent projects" FontWeight="SemiBold" Foreground="{DynamicResource TextBrush}" Margin="0,0,0,10"/>
+                        <TextBlock x:Name="TextBlockNoRecents" Text="No recent projects yet." Foreground="{DynamicResource MutedBrush}"/>
+                        <ItemsControl x:Name="RecentProjectsList">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Button Click="RecentProject_Click" IsEnabled="{Binding Exists}" ToolTip="{Binding ToolTip}" HorizontalContentAlignment="Stretch" Margin="0,0,0,6">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+                                            <TextBlock Text="{Binding Name}" TextTrimming="CharacterEllipsis" Foreground="{DynamicResource TextBrush}"/>
+                                            <TextBlock Grid.Column="1" Text="{Binding Availability}" Foreground="{DynamicResource MutedBrush}" Margin="10,0,0,0" FontSize="{DynamicResource CaptionSize}"/>
+                                        </Grid>
+                                    </Button>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </StackPanel>
+                </Border>
+                <Border Grid.Column="2" Background="{DynamicResource SurfaceBrush}" Padding="16" MinWidth="190">
+                    <StackPanel>
+                        <TextBlock Text="Last result" Foreground="{DynamicResource TextBrush}" FontWeight="SemiBold"/>
+                        <TextBlock x:Name="TextBlockLastResult" Text="No saved result yet." Foreground="{DynamicResource MutedBrush}" TextWrapping="Wrap" Margin="0,10,0,12"/>
+                        <Button x:Name="ButtonHomeLastResult" Click="ButtonHomeLastResult_Click" IsEnabled="False" HorizontalAlignment="Left"
+                                ToolTip="Opens the latest known saved result, or the stored results in this session. Disabled until a result is available.">
+                            <TextBlock Text="Open last result" Foreground="{DynamicResource MutedBrush}"/>
+                        </Button>
+                    </StackPanel>
+                </Border>
+            </Grid>
         </StackPanel>
     </ScrollViewer>
 </UserControl>
