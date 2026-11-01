@@ -87,22 +87,21 @@ internal static partial class Program
         string? oldSettings = MainWindow.ShellSettingsPathOverride;
         var oldCompute = MainWindow.ComputeDialogOverride;
         MainWindow.ShellSettingsPathOverride = Path.Combine(workDir, "filter-host-settings.json");
-        DeNovoFilterViewModel? selected = null;
-        MainWindow.ComputeDialogOverride = window =>
-        {
-            selected = window.ViewModel.Filters;
-            selected.ModeTag = "union-all-deepnovo";
-            selected.PeaksMinimumAlc = "83.25";
-            selected.DeepNovoMinimumScore = "71.5";
-            selected.MinimumLength = "9";
-            return false;
-        };
+        var oldFactory = MainWindow.QuantifyViewModelFactoryOverride;
+        MainWindow.ComputeDialogOverride = null;
+        MainWindow.QuantifyViewModelFactoryOverride = null;
         var main = new MainWindow();
         try
         {
             bool opened = main.OpenProjectPath(path);
-            typeof(MainWindow).GetMethod("PresentCompute", BindingFlags.Instance | BindingFlags.NonPublic)!.Invoke(main, null);
-            typeof(MainWindow).GetMethod("PresentDeNovo", BindingFlags.Instance | BindingFlags.NonPublic)!.Invoke(main, null);
+            MainWindow.NavigateShellCommand.Execute(ShellDestination.Quantify, main);
+            var quant = UiField<System.Windows.Controls.Grid>(main, "GridApp")!.Children.OfType<QuantifyControl>().Single();
+            var selected = quant.ViewModel.Filters;
+            selected.ModeTag = "union-all-deepnovo";
+            selected.PeaksMinimumAlc = "83.25";
+            selected.DeepNovoMinimumScore = "71.5";
+            selected.MinimumLength = "9";
+            MainWindow.NavigateShellCommand.Execute(ShellDestination.DeNovo, main);
             var deNovo = UiField<DeNovoControl>(main, "dnc")!;
             Check("shell navigation passes the identical Quantify filter state to De novo", opened
                 && selected != null && ReferenceEquals(selected, deNovo.ViewModel.Filters)
@@ -110,6 +109,7 @@ internal static partial class Program
                 && deNovo.ViewModel.Filters.ModeTag == "union-all-deepnovo"
                 && deNovo.ViewModel.Filters.DeepNovoMinimumScore == "71.5");
         }
-        finally { main.Close(); MainWindow.ComputeDialogOverride = oldCompute; MainWindow.ShellSettingsPathOverride = oldSettings; }
+        finally { main.Close(); MainWindow.ComputeDialogOverride = oldCompute; MainWindow.QuantifyViewModelFactoryOverride = oldFactory;
+            MainWindow.ShellSettingsPathOverride = oldSettings; }
     }
 }
