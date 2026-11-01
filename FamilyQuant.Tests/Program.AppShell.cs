@@ -34,7 +34,7 @@ namespace FamilyQuant.Tests
             Check("2.0 has its own executable assembly identity",
                 typeof(AppVersionInfo).Assembly.GetName().Name == "FamilyQuant2");
             Check("the resource namespace stays compatible after the project rename",
-                typeof(AppVersionInfo).Assembly.GetManifestResourceNames()
+                typeof(USearchTools).Assembly.GetManifestResourceNames()
                     .Contains("FamilyQuant.MyResources.resources"));
             Check("2.0 has a local data folder separate from 1.x",
                 ApplicationPaths.LocalDataDirectory == Path.Combine(
@@ -388,6 +388,38 @@ namespace FamilyQuant.Tests
                 }
             }
             finally { ThemeManager.Apply(saved); }
+        }
+
+        private static void ShellStatusBridgeTests()
+        {
+            var file = new FamilyClusterFile { MyExtendedFastaItems = new List<FastaItemExtended>
+            {
+                new FastaItemExtended { SequenceIdentifier = "shell_status", Description = "Status fixture",
+                    Sequence = "MKAWLLVLGLVALSECQEEHRSPHIVATSKMTWDFYGDSLQIVFR", UserID = 7, USearchID = 7 }
+            } };
+            var control = new ClusterGenerationControl(file);
+            var banner = (Border)control.FindName("BorderCurationStatus");
+            Check("standalone curation retains its inline status by default",
+                !control.UseShellStatusBar && banner.Visibility == Visibility.Visible);
+            control.UseShellStatusBar = true;
+            Check("the shell can hide the inline status while reading a short nonempty summary",
+                banner.Visibility == Visibility.Collapsed && control.ShellStatusText.Length > 0
+                && control.ShellStatusText.Length < 180);
+            int changed = 0;
+            control.ShellStatusChanged += (_, _) => changed++;
+            const BindingFlags flags = BindingFlags.Instance | BindingFlags.NonPublic;
+            typeof(ClusterGenerationControl).GetProperty("DisplayedMode", flags)!.SetValue(control, NormalizationMode.IdentifiedSignal);
+            var refresh = typeof(ClusterGenerationControl).GetMethod("UpdateStatusLine", flags)!;
+            string before = control.ShellStatusText;
+            refresh.Invoke(control, null);
+            int afterChange = changed;
+            refresh.Invoke(control, null);
+            Check("the shell status event fires once for changed text and stays quiet for identical text",
+                changed == 1 && afterChange == 1 && before != control.ShellStatusText);
+            control.UseShellStatusBar = false;
+            Check("returning to standalone restores the banner without changing family numbers",
+                banner.Visibility == Visibility.Visible && file.MyExtendedFastaItems[0].UserID == 7
+                && file.MyExtendedFastaItems[0].USearchID == 7);
         }
 
         private static void AppearancePump()

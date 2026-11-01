@@ -1,0 +1,271 @@
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Net.Http;
+using System.Text.Json;
+using System.Text.RegularExpressions;
+using System.Threading;
+using System.Threading.Tasks;
+
+namespace FamilyQuant.Evidence
+{
+    public sealed class FetchProgress
+    {
+        public int CompletedBatches { get; init; }
+        public int TotalBatches { get; init; }
+        public int Asked { get; init; }
+        public int Found { get; init; }
+    }
+
+    public sealed class EvidenceFetchResult
+    {
+        public int Asked { get; internal set; }
+        public int Found { get; internal set; }
+        public int WithDomains { get; internal set; }
+        public int Missing => Asked - Found;
+        public EvidenceProvenance Provenance { get; internal set; } = new EvidenceProvenance();
+        public string Source => Provenance.Provider + (Provenance.Release.Length == 0 ? "" : " " + Provenance.Release);
+    }
+
+    public static class EvidenceFetcher
+    {
+        private const string Endpoint = "https://rest.uniprot.org/uniprotkb/accessions?format=json&size=500&fields="
+            + "accession,reviewed,protein_families,keyword,cc_tissue_specificity,xref_pfam,xref_panther,ft_transmem,fragment&accessions=";
+        private const int Attempts = 3;
+        private static readonly Regex MembershipStart = new Regex(@"\bbelongs\s+to\s+(?:the\s+)?",
+            RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.CultureInvariant);
+        private static readonly Regex HierarchyBreak = new Regex(@"(?<=family)[.;,]\s*",
+            RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.CultureInvariant);
+
+        public static Dictionary<string, ProteinEvidence> Parse(string json)
+        {
+            using JsonDocument document = JsonDocument.Parse(json);
+            var entries = new Dictionary<string, ProteinEvidence>(StringComparer.Ordinal);
+            try
+            {
+                foreach (JsonElement item in document.RootElement.GetProperty("results").EnumerateArray())
+                {
+                    ProteinEvidence evidence = ReadEntry(item);
+                    entries.Add(evidence.Accession, evidence);
+                    if (item.TryGetProperty("secondaryAccessions", out JsonElement secondary))
+                        foreach (JsonElement alias in secondary.EnumerateArray())
+                            entries.TryAdd(alias.GetString() ?? string.Empty, evidence);
+                }
+            }
+            catch (Exception ex) when (ex is KeyNotFoundException || ex is InvalidOperationException || ex is ArgumentException)
+            {
+                throw new JsonException("The reply was not a valid UniProt evidence list.", ex);
+            }
+            return entries;
+        }
+
+        public static string DomainNames(ProteinEvidence evidence) => string.Join(ProteinDomains.Separator,
+            evidence.Pfam.Select(d => d.Name.Length == 0 ? d.Accession : d.Name));
+
+        private static ProteinEvidence ReadEntry(JsonElement item)
+        {
+            string accession = item.GetProperty("primaryAccession").GetString() ?? string.Empty;
+            if (accession.Length == 0) throw new JsonException("An evidence entry has no accession.");
+            var evidence = new ProteinEvidence { Accession = accession, TransmembraneCount = 0, Fragment = false };
+            if (item.TryGetProperty("entryType", out JsonElement entryType))
+                evidence.Reviewed = entryType.GetString() switch
+                {
+                    "UniProtKB reviewed (Swiss-Prot)" => true,
+                    "UniProtKB unreviewed (TrEMBL)" => false,
+                    _ => null,
+                };
+            if (item.TryGetProperty("proteinDescription", out JsonElement description)
+                && description.TryGetProperty("flag", out JsonElement flag))
+                evidence.Fragment = (flag.GetString() ?? string.Empty).IndexOf("fragment", StringComparison.OrdinalIgnoreCase) >= 0;
+            if (item.TryGetProperty("keywords", out JsonElement keywords))
+                evidence.Keywords = keywords.EnumerateArray().Select(k => k.GetProperty("name").GetString() ?? string.Empty)
+                    .Where(k => k.Length > 0).Distinct(StringComparer.Ordinal).ToList();
+            if (item.TryGetProperty("features", out JsonElement features))
+                evidence.TransmembraneCount = features.EnumerateArray()
+                    .Count(f => f.GetProperty("type").GetString() == "Transmembrane");
+            if (item.TryGetProperty("comments", out JsonElement comments))
+            {
+                var familyTexts = new List<string>();
+                foreach (JsonElement comment in comments.EnumerateArray())
+                {
+                    string? type = comment.GetProperty("commentType").GetString();
+                    if (type != "SIMILARITY" && type != "TISSUE SPECIFICITY") continue;
+                    if (!comment.TryGetProperty("texts", out JsonElement texts)) continue;
+                    var values = texts.EnumerateArray().Select(t => t.GetProperty("value").GetString() ?? string.Empty)
+                        .Where(t => t.Length > 0);
+                    if (type == "SIMILARITY") familyTexts.AddRange(values);
+                    else evidence.TissueSpecificity.AddRange(values);
+                }
+                ApplyFamilyAnnotations(evidence, familyTexts);
+            }
+            if (item.TryGetProperty("uniProtKBCrossReferences", out JsonElement references))
+                foreach (JsonElement reference in references.EnumerateArray())
+                {
+                    string? database = reference.GetProperty("database").GetString();
+                    if (database != "Pfam" && database != "PANTHER") continue;
+                    var domain = new EvidenceDomain { Accession = reference.GetProperty("id").GetString() ?? string.Empty };
+                    if (reference.TryGetProperty("properties", out JsonElement properties))
+                        domain.Name = properties.EnumerateArray().Where(p => p.GetProperty("key").GetString() == "EntryName")
+                            .Select(p => p.GetProperty("value").GetString()).FirstOrDefault() ?? string.Empty;
+                    (database == "Pfam" ? evidence.Pfam : evidence.Panther).Add(domain);
+                }
+            return evidence;
+        }
+
+        private static void ApplyFamilyAnnotations(ProteinEvidence evidence, List<string> annotations)
+        {
+            evidence.SimilarityAnnotations = annotations.Count == 0 ? null : annotations;
+            var memberships = new List<EvidenceFamilyMembership>();
+            foreach (string annotation in annotations)
+            {
+                MatchCollection starts = MembershipStart.Matches(annotation);
+                for (int i = 0; i < starts.Count; i++)
+                {
+                    int begin = starts[i].Index + starts[i].Length;
+                    int end = i + 1 < starts.Count ? starts[i + 1].Index : annotation.Length;
+                    List<string> hierarchy = HierarchyBreak.Split(annotation.Substring(begin, end - begin))
+                        .Select(s => s.Trim().TrimEnd('.', ';', ',').Trim()).Where(IsRanked).ToList();
+                    if (hierarchy.Count == 0) continue;
+                    memberships.Add(new EvidenceFamilyMembership
+                    {
+                        Family = hierarchy.LastOrDefault(h => h.EndsWith(" family", StringComparison.OrdinalIgnoreCase)) ?? hierarchy[0],
+                        Subfamily = hierarchy.FirstOrDefault(h => h.EndsWith(" subfamily", StringComparison.OrdinalIgnoreCase)) ?? string.Empty,
+                        Hierarchy = string.Join(", ", hierarchy),
+                        Context = annotation.Substring(0, starts[i].Index).Trim().TrimEnd(';').Trim(),
+                    });
+                }
+            }
+            evidence.FamilyMemberships = memberships.Count == 0 ? null : memberships;
+            evidence.FamilyAnnotation = string.Join("; ", memberships.Select(m => m.Hierarchy));
+            List<string> families = memberships.Select(m => m.Family).Distinct(StringComparer.OrdinalIgnoreCase).ToList();
+            if (families.Count == 1)
+            {
+                evidence.Family = families[0];
+                List<string> subfamilies = memberships.Select(m => m.Subfamily).Where(s => s.Length > 0)
+                    .Distinct(StringComparer.OrdinalIgnoreCase).ToList();
+                if (subfamilies.Count == 1) evidence.Subfamily = subfamilies[0];
+            }
+
+            static bool IsRanked(string value)
+            {
+                int space = value.LastIndexOf(' ');
+                return space >= 0 && value.Substring(space + 1).EndsWith("family", StringComparison.OrdinalIgnoreCase);
+            }
+        }
+
+        public static async Task<EvidenceFetchResult> FetchAsync(FamilyClusterFile file,
+            HttpMessageHandler? handler = null, IProgress<FetchProgress>? progress = null,
+            CancellationToken cancellationToken = default)
+        {
+            if (file == null) throw new ArgumentNullException(nameof(file));
+            var originals = file.MyExtendedFastaItems.Select(i =>
+                (Item: i, Identifier: i.SequenceIdentifier, Domains: i.Domains, Evidence: i.Evidence)).ToArray();
+            List<List<string>> batches = ProteinDomains.Batches(originals.Select(i => i.Item));
+            if (batches.Count == 0) return new EvidenceFetchResult
+            {
+                Provenance = file.EvidenceSource ?? new EvidenceProvenance { Provider = "UniProt" },
+            };
+            var found = new Dictionary<string, ProteinEvidence>(StringComparer.Ordinal);
+            var result = new EvidenceFetchResult { Asked = batches.Sum(b => b.Count) };
+            string? release = null;
+            string originalDomainSource = file.DomainSource;
+            EvidenceProvenance? originalEvidenceSource = file.EvidenceSource;
+            using HttpClient client = handler == null ? new HttpClient() : new HttpClient(handler, disposeHandler: false);
+            client.Timeout = TimeSpan.FromSeconds(100);
+            client.DefaultRequestHeaders.UserAgent.ParseAdd("FamilyQuant");
+            Report(0);
+            for (int index = 0; index < batches.Count; index++)
+            {
+                cancellationToken.ThrowIfCancellationRequested();
+                List<string> batch = batches[index];
+                using HttpResponseMessage response = await GetWithRetry(client, Endpoint + string.Join(",", batch), cancellationToken)
+                    .ConfigureAwait(false);
+                Dictionary<string, ProteinEvidence> parsed = Parse(await response.Content.ReadAsStringAsync(cancellationToken).ConfigureAwait(false));
+                int matched = 0;
+                foreach (string accession in batch)
+                    if (parsed.TryGetValue(accession, out ProteinEvidence? evidence))
+                    {
+                        if (evidence.Reviewed == null)
+                            throw new InvalidDataException("UniProt omitted the requested review status. No evidence was applied.");
+                        found.Add(accession, evidence);
+                        matched++;
+                    }
+                if (matched == 0) throw new InvalidDataException("UniProt answered about none of the accessions in a requested batch.");
+                string currentRelease = response.Headers.TryGetValues("x-uniprot-release", out IEnumerable<string>? values)
+                    ? values.FirstOrDefault() ?? string.Empty : string.Empty;
+                if (currentRelease.Length == 0)
+                    throw new InvalidDataException("UniProt omitted its release. No evidence was applied.");
+                if (release != null && release != currentRelease)
+                    throw new InvalidDataException("The UniProt release changed between batches. No evidence was applied.");
+                release = currentRelease;
+                Report(index + 1);
+            }
+            result.Found = found.Count;
+            result.WithDomains = found.Values.Count(e => e.Pfam.Count > 0);
+            result.Provenance = new EvidenceProvenance
+            {
+                Provider = "UniProt", Release = release ?? string.Empty, RetrievedAtUtc = DateTimeOffset.UtcNow,
+                UnresolvedAccessions = result.Missing == 0 ? null : batches.SelectMany(b => b).Where(a => !found.ContainsKey(a)).ToList(),
+            };
+            var source = new EvidenceRecordSource
+            {
+                Provider = result.Provenance.Provider, Release = result.Provenance.Release,
+                RetrievedAtUtc = result.Provenance.RetrievedAtUtc.Value,
+            };
+            foreach (ProteinEvidence evidence in found.Values) evidence.Source = source;
+            var staged = originals.Select(i => (i.Item, Accession: FamilyNaming.Accession(i.Identifier).Split('-')[0]))
+                .Where(i => found.ContainsKey(i.Accession))
+                .Select(i => (i.Item, Evidence: found[i.Accession], Domains: DomainNames(found[i.Accession]))).ToArray();
+
+            cancellationToken.ThrowIfCancellationRequested();
+            if (file.MyExtendedFastaItems.Count != originals.Length || file.DomainSource != originalDomainSource
+                || !ReferenceEquals(file.EvidenceSource, originalEvidenceSource))
+                throw new InvalidDataException("The file changed while its evidence was being fetched. No evidence was applied.");
+            for (int i = 0; i < originals.Length; i++)
+                if (!ReferenceEquals(file.MyExtendedFastaItems[i], originals[i].Item)
+                    || originals[i].Item.SequenceIdentifier != originals[i].Identifier
+                    || originals[i].Item.Domains != originals[i].Domains
+                    || !ReferenceEquals(originals[i].Item.Evidence, originals[i].Evidence))
+                    throw new InvalidDataException("A protein changed while evidence was being fetched. No evidence was applied.");
+            cancellationToken.ThrowIfCancellationRequested();
+            foreach (var value in staged)
+            {
+                value.Item.Evidence = value.Evidence;
+                value.Item.Domains = value.Domains;
+            }
+            file.EvidenceSource = result.Provenance;
+            file.DomainSource = result.Source;
+            return result;
+
+            void Report(int completed) => progress?.Report(new FetchProgress
+            {
+                CompletedBatches = completed, TotalBatches = batches.Count, Asked = result.Asked, Found = found.Count,
+            });
+        }
+
+        private static async Task<HttpResponseMessage> GetWithRetry(HttpClient client, string url, CancellationToken cancellationToken)
+        {
+            for (int attempt = 1; ; attempt++)
+            {
+                HttpResponseMessage? response = null;
+                try { response = await client.GetAsync(url, cancellationToken).ConfigureAwait(false); }
+                catch (HttpRequestException) when (attempt < Attempts) { }
+                catch (TaskCanceledException) when (attempt < Attempts && !cancellationToken.IsCancellationRequested) { }
+                if (response != null)
+                {
+                    if (response.IsSuccessStatusCode) return response;
+                    int status = (int)response.StatusCode;
+                    if (attempt == Attempts || (status != 429 && status < 500))
+                    {
+                        response.Dispose();
+                        throw new HttpRequestException("UniProt refused the evidence batch (HTTP "
+                            + status.ToString(System.Globalization.CultureInfo.InvariantCulture) + ").", null, response.StatusCode);
+                    }
+                    response.Dispose();
+                }
+                await Task.Delay(TimeSpan.FromSeconds(attempt), cancellationToken).ConfigureAwait(false);
+            }
+        }
+    }
+}
