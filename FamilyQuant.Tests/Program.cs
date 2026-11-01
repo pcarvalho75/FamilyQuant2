@@ -40,6 +40,15 @@ namespace FamilyQuant.Tests
         [STAThread]   // required: the UI smoke section constructs WPF controls
         private static int Main(string[] args)
         {
+            if (args.Length > 0 && (args[0] == ClusteringSnapshot.Argument || args[0] == ClusteringSnapshot.ExportArgument || args[0] == ClusteringSnapshot.VerifyExportArgument))
+                return ClusteringSnapshot.Run(args);
+            if (args.Contains("--test-clustering-results", StringComparer.Ordinal))
+            {
+                string clusteringWorkDir = Path.Combine(Path.GetTempPath(), "FamilyQuant.Tests");
+                ClusteringResultTests(clusteringWorkDir);
+                Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
+                return failed == 0 ? 0 : 1;
+            }
             if (args.Length == 2 && args[0] == "--operation-native-wait")
             {
                 File.WriteAllText(args[1] + ".tmp", Environment.ProcessId.ToString(CultureInfo.InvariantCulture));
@@ -529,6 +538,7 @@ namespace FamilyQuant.Tests
 
             Section("Redundancy removal - order kept, subsets dropped");
             RedundancyTests(workDir);
+            ClusteringResultTests(workDir);
 
             Section("De novo evidence - source-aware reader, filters, reconciliation");
             DeNovoTests(workDir);
@@ -687,6 +697,8 @@ namespace FamilyQuant.Tests
 
             Section("Validation report - leave-one-out on reviewed proteins and the routes against their labels");
             ValidationReportTests();
+            EnsureApplication();
+            EvidenceHelpTests();
 
             Section("Left-out list - marker carriers kept out of the marker's family, with why");
             LeftOutListTests();
