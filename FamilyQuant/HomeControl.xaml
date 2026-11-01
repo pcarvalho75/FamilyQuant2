@@ -12,17 +12,17 @@
              for a tooltip like every other command. The number, the title and the one-line description are
              its content; the width is fixed and the description wraps, so a long line grows the card
              downwards rather than being clipped on a narrow window. -->
-        <Style x:Key="StepCard" TargetType="Button">
+        <Style x:Key="StepCard" TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
             <Setter Property="Width" Value="228"/>
             <Setter Property="Margin" Value="8"/>
             <Setter Property="Padding" Value="0"/>
             <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
             <Setter Property="VerticalContentAlignment" Value="Top"/>
-            <Setter Property="Background" Value="{StaticResource PanelMidBrush}"/>
+            <Setter Property="Background" Value="{DynamicResource SurfaceBrush}"/>
         </Style>
 
         <Style x:Key="StepNumber" TargetType="TextBlock">
-            <Setter Property="Foreground" Value="{StaticResource GoldBrush}"/>
+            <Setter Property="Foreground" Value="{DynamicResource TextBrush}"/>
             <Setter Property="FontSize" Value="22"/>
             <Setter Property="FontWeight" Value="Bold"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
@@ -30,7 +30,7 @@
         </Style>
 
         <Style x:Key="StepTitle" TargetType="TextBlock">
-            <Setter Property="Foreground" Value="{StaticResource TextOnDarkBrush}"/>
+            <Setter Property="Foreground" Value="{DynamicResource TextBrush}"/>
             <Setter Property="FontSize" Value="15"/>
             <Setter Property="FontWeight" Value="Bold"/>
             <Setter Property="TextWrapping" Value="Wrap"/>
@@ -38,7 +38,7 @@
         </Style>
 
         <Style x:Key="StepBody" TargetType="TextBlock">
-            <Setter Property="Foreground" Value="{StaticResource MutedTextBrush}"/>
+            <Setter Property="Foreground" Value="{DynamicResource MutedBrush}"/>
             <Setter Property="FontSize" Value="12"/>
             <Setter Property="TextWrapping" Value="Wrap"/>
             <Setter Property="Margin" Value="0,8,0,0"/>
@@ -48,28 +48,28 @@
 
     <!-- Wide content scrolls rather than clips: on a short window the four cards plus the side branch
          are taller than the pane, so the whole thing sits in a vertical scroll. -->
-    <ScrollViewer Background="{StaticResource PanelDarkBrush}"
+    <ScrollViewer Background="{DynamicResource CanvasBrush}"
                   VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
         <StackPanel Margin="24,20,24,24" MaxWidth="1100" HorizontalAlignment="Left">
 
-            <TextBlock Text="FamilyQuant" Foreground="{StaticResource TextOnDarkBrush}"
+            <TextBlock Text="FamilyQuant" Foreground="{DynamicResource TextBrush}"
                        FontSize="26" FontWeight="Bold"/>
             <TextBlock Text="One project, four steps. Build the families, curate them, measure the full XIC from the RAW, then read the recovery. Everything you keep lives in a single .fqproj project."
-                       Foreground="{StaticResource MutedTextBrush}" FontSize="13" TextWrapping="Wrap"
+                       Foreground="{DynamicResource MutedBrush}" FontSize="13" TextWrapping="Wrap"
                        Margin="0,6,0,0" MaxWidth="760" HorizontalAlignment="Left"
                        ToolTip="FamilyQuant groups a protein database into families, lets you curate them, measures every peptide's full isotope envelope from the RAW files and reports how much of each run is recovered. All of it is saved in one .fqproj project."/>
 
             <!-- The project line is the through-line: it names the .fqproj currently open, or says none is,
                  and it is the same fact the persistent banner above the screen carries. -->
-            <Border Background="{StaticResource PanelMidBrush}" CornerRadius="4" Padding="12,8" Margin="0,16,0,0"
+            <Border Background="{DynamicResource SurfaceBrush}" CornerRadius="4" Padding="12,8" Margin="0,16,0,0"
                     HorizontalAlignment="Left">
-                <TextBlock x:Name="TextBlockHomeProject" Foreground="{StaticResource GoldBrush}" FontSize="13"
+                <TextBlock x:Name="TextBlockHomeProject" Foreground="{DynamicResource TextBrush}" FontSize="13"
                            TextWrapping="Wrap" MaxWidth="900"
                            Text="No project open."
                            ToolTip="The project (.fqproj) you are working in, and whether its full XIC has been computed. The same information is shown in the banner at the top of the window."/>
             </Border>
 
-            <TextBlock Text="The flow" Foreground="{StaticResource TextOnDarkBrush}" FontSize="16"
+            <TextBlock Text="The flow" Foreground="{DynamicResource TextBrush}" FontSize="16"
                        FontWeight="Bold" Margin="0,22,0,0"/>
 
             <!-- The four steps, in order. They wrap on a narrow window rather than being pushed off the
@@ -137,11 +137,11 @@
 
             <!-- The side branch. It is drawn off to the side of steps 2 to 3 and labelled optional, because
                  it feeds the compute in step 3 rather than being a fifth stage of its own. -->
-            <TextBlock Text="Optional side-branch" Foreground="{StaticResource TextOnDarkBrush}" FontSize="16"
+            <TextBlock Text="Optional side-branch" Foreground="{DynamicResource TextBrush}" FontSize="16"
                        FontWeight="Bold" Margin="0,24,0,0"/>
 
             <StackPanel Orientation="Horizontal" Margin="40,8,0,0">
-                <TextBlock Text="↳ inspect only" Foreground="{StaticResource MutedTextBrush}" FontSize="12"
+                <TextBlock Text="↳ inspect only" Foreground="{DynamicResource MutedBrush}" FontSize="12"
                            VerticalAlignment="Center" Margin="0,0,4,0"/>
 
                 <Button x:Name="ButtonHomeDeNovo" Style="{StaticResource StepCard}" Click="ButtonHomeDeNovo_Click"
@@ -159,7 +159,7 @@
                 </Button>
             </StackPanel>
 
-            <TextBlock Foreground="{StaticResource MutedTextBrush}" FontSize="12" TextWrapping="Wrap"
+            <TextBlock Foreground="{DynamicResource MutedBrush}" FontSize="12" TextWrapping="Wrap"
                        Margin="0,24,0,0" MaxWidth="900" HorizontalAlignment="Left"
                        Text="Every command here is also on the menu bar above, in this same order. The banner under the menu always says which stage you are in and which project is open."
                        ToolTip="The menu bar has the same commands in the same order. The banner under the menu always shows the current step and the open project."/>

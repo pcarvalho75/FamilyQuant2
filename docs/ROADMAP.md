@@ -19,7 +19,7 @@ Finished rows leave this file at the next refresh and go to `docs/ROADMAP-archiv
 3. **No function is lost.** The feature ledger (N3) lists everything 1.5.0.6 does. It is the contract: a release cannot pass with a row open, and only Paulo can drop a row.
 4. **Numbers stay equal to 1.5.0.6 unless a step says otherwise.** Any module may be rewritten. The golden check (F2) must stay byte-identical against the frozen reference. A step that means to change a number says so in its row, shows before and after on real data, and passes a science review.
 5. **Copy what is good, rewrite what is better.** Every file is read as it moves. Simpler, faster or clearer code replaces it when the tests pin the behaviour first. Rewriting for its own sake is not a goal.
-6. **1.5 stays available.** 2.0 is a separate project that installs beside 1.5 and never touches it. 2.0 opens every old file, and it can export a `.fcf` that 1.5 opens, so Ana can go back at any moment. Old repository: `pcarvalho75/FamilyQuant`, frozen as the 1.x reference.
+6. **1.5 stays available.** 2.0 is a separate project that installs beside 1.5 and never touches it. 2.0 opens every old file, and it can export a `.fcf` that 1.5 opens, so Ana can go back at any moment. Old repository: `pcarvalho75/FamilyQuant`, frozen as the 1.x reference. The 2.0 repository `pcarvalho75/FamilyQuant2` is private, like the old one, and stays private: it carries third-party binaries, collaborator names and working notes.
 7. **Deployable at every merge.** One step per commit, with its test. Paulo publishes and pushes; nobody else pushes.
 8. **A step counts as done only after the reviewer approves it** and it is merged and green.
 9. **The deck stays untouched:** `BrProt_FamilyQuant_FourPart_Source_Decomposition.pptx` and its sources, until Paulo says otherwise.
@@ -27,13 +27,14 @@ Finished rows leave this file at the next refresh and go to `docs/ROADMAP-archiv
 
 ## The team
 
-This team is exclusive to FamilyQuant: three Sol workers and two reviewers, Grok and Gemini, sharing no workers, folders or tools with Project Orion.
+This team is exclusive to FamilyQuant: four Sol workers and two reviewers, Grok and Gemini, sharing no workers, folders or tools with Project Orion.
 
 | Name | Engine | Role | Worktree | Branch |
 |---|---|---|---|---|
 | Orchestrator | Claude, main session | Assigns, merges, runs gates, keeps this file true. Writes no product code. | | master |
-| FQEvidence (EV) | Sol 6.1 xhigh | Golden check, evidence model, fetch, classifier, apply, Ana's file, then quantitation and project rewrite | `D:/FamilyQuant-wt/evidence` | `fq/evidence` |
-| FQLook (LK) | Sol 6.1 xhigh | Look, shell, curation and review screens | `D:/FamilyQuant-wt/look` | `fq/look` |
+| FQEvidence (EV) | Sol 6.1 xhigh | Golden check, evidence model, fetch, classifier, apply, Ana's file, then the quantitation and project rewrite | `D:/FamilyQuant-wt/evidence` | `fq/evidence` |
+| FQLook (LK) | Sol 6.1 xhigh | Look, curation and review screens | `D:/FamilyQuant-wt/look` | `fq/look` |
+| FQShell (SH) | Sol 6.1 xhigh | Feature ledger, shell, and the Build, Quantify, Results, De novo and secondary screens | `D:/FamilyQuant-wt/shell` | `fq/shell` |
 | FQAssay (AS) | Sol 6.1 xhigh | New project, ledger, architecture, neighbour search, coherence, validation, then core rewrite | `D:/FamilyQuant-wt/assay` | `fq/assay` |
 | FQReview (GR) | Grok 4.7 xhigh | Reviews steps in turn with FQArgon, code and science. Never edits product code. | `D:/FamilyQuant-wt/review` | detached |
 | FQArgon (AR) | Gemini 4 Argon high | Reviews steps in turn with FQReview, code and science. Never edits product code. | `D:/FamilyQuant-wt/argon` | detached |
@@ -75,7 +76,7 @@ The rules:
 
 ## Workstreams
 
-Columns: Diff = L, M, H, VH. Hrs = worker hours, my estimate; the first steps ran several times faster than estimated. Blocked by: 🟢 = open now. ETA = hours after launch in that worker's queue, a rough estimate and never a promise. Prog = my estimate of work done. Cred = counted only after approval and merge. EV, LK, AS, GR and AR are the workers above.
+Columns: Diff = L, M, H, VH. Hrs = worker hours, my estimate; the first steps ran several times faster than estimated. Blocked by: 🟢 = open now. ETA = hours after launch in that worker's queue, a rough estimate and never a promise. Prog = my estimate of work done. Cred = counted only after approval and merge. EV, LK, AS, SH, GR and AR are the workers above.
 
 ### W0 Foundation and the new project
 
@@ -83,10 +84,10 @@ Columns: Diff = L, M, H, VH. Hrs = worker hours, my estimate; the first steps ra
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
 | N2 | Frozen reference: 1.5.0.6 built from `e9b7306` and kept read only in `D:/FamilyQuant-data/reference-1.5.0.6`; the old repository tagged and left as the 1.x archive | L | 1 | 🟢 | F2, N3 | Reference runs; old repository back at its pushed state | Orchestrator | working | 90% | 0% | T+1 |
 | F2 | Golden numbers guard: `--golden` exports family CSV, composition CSV, analytics summary and evidence-pack numbers from one stored project and compares them byte for byte with a snapshot made by the frozen 1.5.0.6 | M | 3 | N2 | Every later merge | Passes on master; a deliberate one-share mutation turns it red; snapshot made by the reference build | EV | waiting: review | 90% | 0% | T+4 |
-| N1 | New project identity: solution and projects renamed, assembly `FamilyQuant2`, ClickOnce identity, install address and local data folder of its own, version 2.0.0.0, title "FamilyQuant 2.0" | M | 2 | 🟢 | F6, R1 | 1.5.0.6 and 2.0 install side by side on one Windows profile, each opens, and updating one leaves the other alone | AS | not started | 0% | 0% | T+2 |
+| N1 | New project identity: solution and projects renamed, assembly `FamilyQuant2`, ClickOnce identity, install address `http://patternlabforproteomics.org/familyquant2/` and local data folder of its own, version 2.0.0.0, title "FamilyQuant 2.0". Automatic updates stay ClickOnce, checked at start, as in 1.5 | M | 2 | 🟢 | F6, R1 | 1.5.0.6 and 2.0 install side by side on one Windows profile, each opens, and updating one leaves the other alone | AS | not started | 0% | 0% | T+2 |
 | F4 | One definition of the decoy prefix (`Reverse_`, 13 sites in 7 files) and the contaminant prefix (6 sites). A same-value constant in `PresentationFigures.cs` is in scope; deck assets are not | L | 1 | 🟢 | E1 | Suite check fails on a literal outside the one class; golden equal | AS | not started | 0% | 0% | T+3 |
 | F5 | Remove dead paths: `GroupByKeywords` (no screen calls it, 22 checks move to `MatchKeywords`), overloads kept for older callers, `GroupingType` where the product only ever passes User | M | 3 | 🟢 | E11, X4 | Same rule pinned by the moved checks; golden equal | AS | not started | 0% | 0% | T+6 |
-| N3 | Feature ledger `docs/FEATURE-LEDGER.md`: every menu command, button, option, column, export, file format, shortcut, tooltip fact and help page of 1.5.0.6, each KEEP or IMPROVE, generated by a scan so nothing depends on memory. A suite check ties each row to a test or a render | H | 4 | N2 | F6, every screen, R3 | Scan count equals the rows; each row names how it is checked; only Paulo can mark DROP | AS | not started | 0% | 0% | T+10 |
+| N3 | Feature ledger `docs/FEATURE-LEDGER.md`: every menu command, button, option, column, export, file format, shortcut, tooltip fact and help page of 1.5.0.6, each KEEP or IMPROVE, generated by a scan so nothing depends on memory. A suite check ties each row to a test or a render | H | 4 | N2 | F6, every screen, R3 | Scan count equals the rows; each row names how it is checked; only Paulo can mark DROP | AS | SH | 0% | 0% | T+10 |
 | N4 | Architecture plan `docs/ARCHITECTURE.md`: target layout, what is copied and what is rewritten for each file, view model pattern, shared chart base, error and progress path, a line budget per screen | H | 3 | N3 | F6, X2 to X13 | Every source file listed with its destination; GR approves | AS | not started | 0% | 0% | T+13 |
 | F6 | Solution layout: create `FamilyQuant.Core`, move the 69 WPF-free files, no behaviour change. Done early because every lane sits on it | H | 3 | N1, N4, F4, F5 | E5, X2 to X8, C1 | Quick and full suite counts unchanged; golden equal; Core has no WPF reference | AS | not started | 0% | 0% | T+16 |
 
@@ -141,13 +142,13 @@ Where the Python broke rule 2 and the program must not: the 27-row family table,
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| S1 | Menu in standard order: File (New from database, Open, Save, Save as, Export, Recent, Exit), Edit (Undo, Copy), View (theme, hide decoys, hide contaminants), Analysis (Compute, Results, De novo, Reannotate SEPro), Help. Ctrl+N, O, S, Z, F, F1 | M | 3 | V5, N3 | S2, S3, S5, C4 | File is first; each ledger command reachable; shortcut tests; "Reanotate" typo gone | LK | not started | 0% | 0% | T+18 |
-| S2 | Left navigation rail in place of the Home card grid: Families, Quantify, Results, De novo, with state marks. `MainWindow` becomes a thin shell over a view model | H | 4 | S1, S4 | C1, C6, C8, C9, C10 | Every screen reachable by keyboard; disabled steps readable with the reason | LK | not started | 0% | 0% | T+53 |
-| S3 | Replace both yellow banners and the "showing" line with one quiet status bar; long text goes to Help | M | 2 | S1 | S2 | No banner over one line at the smallest size; no fact lost, each moved to Help | LK | not started | 0% | 0% | T+46 |
-| S4 | Start page: open, new, recent projects, last result; fixes the white disabled cards | M | 3 | S1 | S2, V3 | Disabled state readable in both themes; recents survive restart | LK | not started | 0% | 0% | T+49 |
-| S5 | One Save: `.fqproj` is the file, `.fcf` stays as Export and still opens. Unsaved mark, prompt on close. Ana's file goes from 70 MB to about 16 MB | H | 4 | S1, E12, X7 | R2 | Old `.fcf` opens; project round trip byte-equal in curation; a curation-only project opens with no quant | LK | not started | 0% | 0% | T+57 |
-| S6 | One busy overlay with progress and Cancel for every long operation, on the path from X10 | M | 3 | S2, X10 | C8, R2 | Cancel leaves the file as it was; suite covers each operation | LK | not started | 0% | 0% | T+60 |
-| S7 | Window size and last folder remembered; drag a file to open | L | 1 | S1 | R2 | Survives restart | LK | not started | 0% | 0% | T+61 |
+| S1 | Menu in standard order: File (New from database, Open, Save, Save as, Export, Recent, Exit), Edit (Undo, Copy), View (theme, hide decoys, hide contaminants), Analysis (Compute, Results, De novo, Reannotate SEPro), Help. Ctrl+N, O, S, Z, F, F1 | M | 3 | V5, N3 | S2, S3, S5, C4 | File is first; each ledger command reachable; shortcut tests; "Reanotate" typo gone | LK | SH | 0% | 0% | T+18 |
+| S2 | Left navigation rail in place of the Home card grid: Families, Quantify, Results, De novo, with state marks. `MainWindow` becomes a thin shell over a view model | H | 4 | S1, S4 | C1, C6, C8, C9, C10 | Every screen reachable by keyboard; disabled steps readable with the reason | LK | SH | 0% | 0% | T+53 |
+| S3 | Replace both yellow banners and the "showing" line with one quiet status bar; long text goes to Help | M | 2 | S1 | S2 | No banner over one line at the smallest size; no fact lost, each moved to Help | LK | SH | 0% | 0% | T+46 |
+| S4 | Start page: open, new, recent projects, last result; fixes the white disabled cards | M | 3 | S1 | S2, V3 | Disabled state readable in both themes; recents survive restart | LK | SH | 0% | 0% | T+49 |
+| S5 | One Save: `.fqproj` is the file, `.fcf` stays as Export and still opens. Unsaved mark, prompt on close. Ana's file goes from 70 MB to about 16 MB | H | 4 | S1, E12, X7 | R2 | Old `.fcf` opens; project round trip byte-equal in curation; a curation-only project opens with no quant | LK | SH | 0% | 0% | T+57 |
+| S6 | One busy overlay with progress and Cancel for every long operation, on the path from X10 | M | 3 | S2, X10 | C8, R2 | Cancel leaves the file as it was; suite covers each operation | LK | SH | 0% | 0% | T+60 |
+| S7 | Window size and last folder remembered; drag a file to open | L | 1 | S1 | R2 | Survives restart | LK | SH | 0% | 0% | T+61 |
 
 ### W5 Screens: each rebuilt as a thin view over a tested view model
 
@@ -158,13 +159,13 @@ Where the Python broke rule 2 and the program must not: the 27-row family table,
 | C1 | Curation rebuilt: table always in view, actions in a side panel, no Controls and Data Browser tabs, no "Layer" words. USearch ID column hidden by default, data kept. Decoys hidden by default; Locus shows the accession. `ClusterGenerationControl` (1,978 lines) replaced by a view model and a thin view | VH | 7 | C3, V4, F6 | C2, C5, V3 | Pressing any action shows its result without changing view; every ledger row of the screen checked; golden equal | LK | not started | 0% | 0% | T+39 |
 | C2 | Family view: a table of families (name, proteins, shares, lock) with the proteins of the selected family beside it | H | 5 | C1 | R2 | Selection, edit, lock and undo work on both tables; 39,996 families smooth | LK | not started | 0% | 0% | T+44 |
 | C5 | Quantitation panel: Layers 2 and 3 merged; Full XIC first, PatternLab as a secondary source, options shown only when they apply | M | 3 | C1, S2 | V3, C13 | Every option kept; golden equal | LK | not started | 0% | 0% | T+64 |
-| C6 | Build families screen: one flow, one explanation line, button labels that say what they do ("Input a FASTA file" and "Run USearch" go); Remove Redundancy kept | M | 3 | S2, X3 | C7, V3 | All ledger rows kept; renders pass | AS | not started | 0% | 0% | T+56 |
-| C7 | One "find best identity" flow, if the check passes: first prove Scan gives Divide and Conquer's answer on the Bjararaca and Viperidae files, otherwise both stay | M | 2 | C6 | R2 | Equivalence measured and written down; `FDR` still reported | AS | not started | 0% | 0% | T+58 |
-| C8 | Quantify screen instead of the Compute dialog; one run summary | M | 3 | S2 | C10, V3, C13 | Same inputs, same outputs; golden equal; run summary kept | EV | not started | 0% | 0% | T+56 |
-| C9 | Results screen: Analytics paragraph becomes short summary cards with details on demand; one primary export | M | 4 | S2 | V6, V3, X9, C13 | Every fact in the paragraph still reachable; golden equal | EV | not started | 0% | 0% | T+60 |
-| C10 | De novo uses the filters Compute uses, so the screen can no longer disagree with the run. `DeNovoControl` (2,329 lines) replaced by a view model and a thin view | H | 5 | C8 | C11, V3 | One source of filters; test proves it; ledger rows checked | EV | not started | 0% | 0% | T+65 |
-| C11 | Retire Extract areas and Partition ion current from the De novo screen (superseded by Full XIC, and a second recovery on another basis). Homology CSV moves to Results. Only if Ana and Richard do not use them | M | 2 | C10, P2 | X11 | Answer recorded; ledger updated by Paulo's word; homology CSV still exported | EV | not started | 0% | 0% | T+67 |
-| C12 | Secondary windows rebuilt: Lock manager, Spectrum table, Identity scan, Text report, Help | M | 4 | V4 | V3, C14 | All render clean in both themes | AS | not started | 0% | 0% | T+62 |
+| C6 | Build families screen: one flow, one explanation line, button labels that say what they do ("Input a FASTA file" and "Run USearch" go); Remove Redundancy kept | M | 3 | S2, X3 | C7, V3 | All ledger rows kept; renders pass | AS | SH | 0% | 0% | T+56 |
+| C7 | One "find best identity" flow, if the check passes: first prove Scan gives Divide and Conquer's answer on the Bjararaca and Viperidae files, otherwise both stay | M | 2 | C6 | R2 | Equivalence measured and written down; `FDR` still reported | AS | SH | 0% | 0% | T+58 |
+| C8 | Quantify screen instead of the Compute dialog; one run summary | M | 3 | S2 | C10, V3, C13 | Same inputs, same outputs; golden equal; run summary kept | EV | SH | 0% | 0% | T+56 |
+| C9 | Results screen: Analytics paragraph becomes short summary cards with details on demand; one primary export | M | 4 | S2 | V6, V3, X9, C13 | Every fact in the paragraph still reachable; golden equal | EV | SH | 0% | 0% | T+60 |
+| C10 | De novo uses the filters Compute uses, so the screen can no longer disagree with the run. `DeNovoControl` (2,329 lines) replaced by a view model and a thin view | H | 5 | C8 | C11, V3 | One source of filters; test proves it; ledger rows checked | EV | SH | 0% | 0% | T+65 |
+| C11 | Retire Extract areas and Partition ion current from the De novo screen (superseded by Full XIC, and a second recovery on another basis). Homology CSV moves to Results. Only if Ana and Richard do not use them | M | 2 | C10, P2 | X11 | Answer recorded; ledger updated by Paulo's word; homology CSV still exported | EV | SH | 0% | 0% | T+67 |
+| C12 | Secondary windows rebuilt: Lock manager, Spectrum table, Identity scan, Text report, Help | M | 4 | V4 | V3, C14 | All render clean in both themes | AS | SH | 0% | 0% | T+62 |
 | C13 | Wording pass: labels, tooltips (one or two sentences) and Help match the new screens | M | 3 | C1, C5, C6, C8, C9 | C14 | Suite's tooltip checks green; no old screen named anywhere | LK | not started | 0% | 0% | T+74 |
 | C14 | Finish: 100, 125 and 150% scaling, smallest window, Tab order, focus visible, both themes | M | 2 | C13, V3, V6, P1 | R2 | Harness renders at each scale; Paulo's final look sign-off | LK | not started | 0% | 0% | T+76 |
 
@@ -182,7 +183,7 @@ Where the Python broke rule 2 and the program must not: the 27-row family table,
 | X9 | Paper and talk figures (`PresentationFigures`, `PresentationEvidencePack`, 3,703 lines) move to `FamilyQuant.Reports`, a separate tool reading a `.fqproj` | H | 4 | C9, X8 | R3 | Same evidence pack, byte for byte, from the tool; not in the ClickOnce payload | EV | not started | 0% | 0% | T+80 |
 | X10 | One path for errors, progress and cancel in Core; no message box below the App layer | M | 3 | F6 | X3, X5, S6 | A suite check fails on `MessageBox` in Core; each long operation cancels cleanly | AS | not started | 0% | 0% | T+40 |
 | X11 | Dependencies: `Extended.Wpf.Toolkit` (6 uses), `Newtonsoft.Json` (3 files, the rest is `System.Text.Json`), `OpenMcdf` (no reference in this repo), `LiteDB` (after C11). Each goes only if a real RAW and `.xic2` still open | M | 3 | C11, C12 | R3 | Publish rehearsal runs; real files open | AS | not started | 0% | 0% | T+70 |
-| X12 | Improvements found on the way, listed in `docs/IMPROVEMENTS.md` with before and after. Known candidates: the fast clustering pass has no coverage gate (20.1% of its joins, 2,329 of 11,584, fail the second pass's gate); the decoy mixing score cannot see over-merging. Anything that changes a number goes to Paulo first | H | 4 | X3, X4, X5 | R3 | Each change measured on real data; science review; golden snapshot updated only by Paulo's word | AS | not started | 0% | 0% | T+77 |
+| X12 | Improvements found on the way, listed in `docs/IMPROVEMENTS.md` with before and after. Known candidates: the fast clustering pass has no coverage gate (20.1% of its joins, 2,329 of 11,584, fail the second pass's gate); the decoy mixing score cannot see over-merging; whether the embedded USEARCH 11 binary can be replaced by open-source VSEARCH, because the USEARCH licence restricts sharing copies and a swap may change families. Anything that changes a number goes to Paulo first | H | 4 | X3, X4, X5 | R3 | Each change measured on real data; science review; golden snapshot updated only by Paulo's word | AS | not started | 0% | 0% | T+77 |
 | X13 | Documents: `CLAUDE.md` from 50 KB to a working guide, history to `docs/HISTORY.md`, talk documents out of the root, release notes for 2.0 | L | 2 | X12 | R3 | No fact lost, no line over 300 characters | AS | not started | 0% | 0% | T+79 |
 
 ### W7 Releases (Paulo publishes each one)
@@ -190,10 +191,15 @@ Where the Python broke rule 2 and the program must not: the 27-row family table,
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
 | R1 | 2.0 preview 1: evidence engine and review window, for Ana's file; installs beside 1.5 | M | 1 | E15, C4, N1 | A1 | Full suite, golden, publish rehearsal, release notes | Orchestrator | not started | 0% | 0% | T+44 |
-| R2 | 2.0 preview 2: new look and shell | M | 1 | C2, C5, C7, S5, S6, S7, C14 | R3 | Same, plus Paulo's sign-off on renders | Orchestrator | not started | 0% | 0% | T+77 |
+| H1 | Cooldown at the middle, by the `halt-team-for-regroup` skill. It starts when preview 1 (R1) is merged, or at 40 of 80 steps, whichever comes first. Everyone finishes the step in hand and stops, all branches merge, housekeeping, duplicate-code review, the roadmap is readjusted from measured speed. The team comes back only on Paulo's word | H | 2 | R1 | R2, R3 | All worker branches merged; full suite and golden green; ledger status reported; roadmap version 3 written; Paulo signs off | Orchestrator | not started | 0% | 0% | T+46 |
+| R2 | 2.0 preview 2: new look and shell | M | 1 | H1, C2, C5, C7, S5, S6, S7, C14 | R3 | Same, plus Paulo's sign-off on renders | Orchestrator | not started | 0% | 0% | T+77 |
 | R3 | 2.0 release candidate: rewrite finished, every ledger row closed | M | 1 | R2, X4, X5, X6, X9, X11, X12, X13 | R4 | Same, plus the ledger check | Orchestrator | not started | 0% | 0% | T+81 |
 | R4 | Final adversarial pass on the whole product | H | 3 | R3 | R5 | GR's verdict; all findings closed | GR | not started | 0% | 0% | T+84 |
 | R5 | FamilyQuant 2.0 final, then the archive of this roadmap | L | 1 | R4 | Done | Paulo publishes | Orchestrator | not started | 0% | 0% | T+85 |
+
+## Cooldown
+
+One cooldown sits in the middle of the project (H1). Work does not wait for it: every worker keeps taking its next step until it starts, so nobody sits idle beforehand.
 
 ## Critical path
 
@@ -203,11 +209,9 @@ F4, F5, N1, N3, N4, F6 for the structure. E1, E2, E3, E5, then both E6 and C4 (C
 
 | ID | Decision | Default if no answer | Needed by |
 |---|---|---|---|
-| P1 | Light or dark as the default look (V1) | Work continues on my recommendation; the other stays as a View option | Before C14 |
+| P1 | Light or dark as the default look: Paulo chose dark, 2026-11-01; light stays as a View option | Decided | Before C14 |
 | P2 | Do Ana and Richard use the De Novo sections Extract areas and Partition ion current? | They stay until someone says they can go | Before C11 |
 | P3 | Hold the Python-made draft to Ana (A0) | Held | Now |
-| P4 | Install address for 2.0 | `http://patternlabforproteomics.org/familyquant2/`, separate from 1.5 | Before R1 |
-| P5 | Create a GitHub repository for FamilyQuant 2.0? | It stays local until Paulo says so; he pushes | Before R1 |
 
 ## Risks and triggers
 

@@ -1,11 +1,11 @@
-﻿<UserControl x:Class="FamilyQuant.ClusterGenerationControl"
+<UserControl x:Class="FamilyQuant.ClusterGenerationControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:FamilyQuant"
              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
-             mc:Ignorable="d"
+             mc:Ignorable="d" FontSize="{DynamicResource BodySize}"
              d:DesignHeight="450" d:DesignWidth="1024">
     <UserControl.Resources>
 
@@ -21,18 +21,18 @@
         <Style x:Key="LayerBadgeText" TargetType="TextBlock">
             <Setter Property="FontSize" Value="10"/>
             <Setter Property="FontWeight" Value="Bold"/>
-            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Foreground" Value="{DynamicResource TextBrush}"/>
         </Style>
 
         <Style x:Key="LayerTitle" TargetType="TextBlock">
-            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Foreground" Value="{DynamicResource TextBrush}"/>
             <Setter Property="FontWeight" Value="Bold"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
         </Style>
 
     </UserControl.Resources>
 
-    <Grid Background="#333949">
+    <Grid Background="{DynamicResource CanvasBrush}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
@@ -45,24 +45,24 @@
              purpose: the numbers are meaningless without it, so it must not be something
              you can tab away from.
              ============================================================================ -->
-        <Border Grid.Row="0" Background="#2A303E" BorderBrush="#4A5568" BorderThickness="0,0,0,1" Padding="10,6">
+        <Border Grid.Row="0" Background="{DynamicResource SubtleBrush}" BorderBrush="{DynamicResource EdgeBrush}" BorderThickness="0,0,0,1" Padding="10,6">
             <DockPanel LastChildFill="True">
                 <Button x:Name="ButtonHelp" DockPanel.Dock="Right" Content="?  How to read these numbers"
                         Click="ButtonHelp_Click" Margin="10,0,0,0" Padding="10,4" FontWeight="Normal"
-                        Background="#4A5568"
+                        Background="{DynamicResource EdgeBrush}"
                         ToolTip="Opens a page that explains every number on this screen. Read it the first time, and whenever a number does not look as you expected."/>
 
-                <TextBlock x:Name="TextBlockStatusLine" TextWrapping="Wrap" VerticalAlignment="Center"
-                           Foreground="#FFD700" FontSize="12"
+                <TextBlock x:Name="TextBlockStatusLine" TextWrapping="NoWrap" TextTrimming="CharacterEllipsis" VerticalAlignment="Center"
+                           Foreground="{DynamicResource TextBrush}" FontSize="12"
                            Text="showing: family clustering only · no quantitation loaded"
                            ToolTip="What the share column currently shows: its denominator, how shared peptides were treated, and how many families got a value. It changes only when you press Recalculate."/>
             </DockPanel>
         </Border>
 
-        <TabControl Grid.Row="1" Margin="5" Background="#333949">
+        <TabControl Grid.Row="1" Margin="5" Background="{DynamicResource CanvasBrush}">
 
             <!-- Tab 1: Controls -->
-            <TabItem Header="⚙️ Controls" >
+            <TabItem Header="Controls" >
                 <!-- Horizontal scrolling is DISABLED on purpose. It makes the panel be measured against
                      the width actually on screen, so the WrapPanels wrap and the explanatory text below
                      the two lists wraps inside its own column. Allowing horizontal scroll would measure
@@ -73,11 +73,11 @@
                     <StackPanel Margin="10">
 
                         <!-- Layer 1: Clustering Operations -->
-                        <GroupBox Margin="5" Background="#444B58" Foreground="White" Padding="5">
+                        <GroupBox Margin="5" Background="{DynamicResource SurfaceBrush}" Foreground="{DynamicResource TextBrush}" Padding="5">
                             <GroupBox.Header>
                                 <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="⚙️ Layer 1: Protein Family Clustering" Style="{StaticResource LayerTitle}"/>
-                                    <Border x:Name="BadgeLayer1" Style="{StaticResource LayerBadge}" Background="#2F855A">
+                                    <TextBlock Text="Layer 1: Protein Family Clustering" Style="{StaticResource LayerTitle}"/>
+                                    <Border x:Name="BadgeLayer1" Style="{StaticResource LayerBadge}" Background="{DynamicResource ClearBrush}">
                                         <TextBlock x:Name="TextBlockLayer1State" Style="{StaticResource LayerBadgeText}" Text="READY"/>
                                     </Border>
                                 </StackPanel>
@@ -92,99 +92,104 @@
                                 </Grid.RowDefinitions>
 
                                 <!-- USearch Controls -->
-                                <WrapPanel Grid.Row="0" HorizontalAlignment="Center" Margin="5">
+                                <WrapPanel Grid.Row="0" HorizontalAlignment="Left" Margin="5">
                                     <Label Content="Search:"
                                            ToolTip="Filters the table by locus, description or domain. Separate several terms with commas; a row is shown when it has ANY of them."
-                                           Foreground="White" VerticalAlignment="Center"/>
+                                           Foreground="{DynamicResource TextBrush}" VerticalAlignment="Center"/>
                                     <TextBox Width="200" x:Name="TextBoxSearch" KeyUp="TextBoxSearch_KeyUp"
                                              ToolTip="Type part of a locus, description or domain. Separate several terms with commas, for example: metalloprotease, SVMP; a row is shown when it has ANY of them. Filtering never changes a percentage."
-                                             Background="White" Foreground="Black" Margin="5" VerticalAlignment="Center"/>
+                                             Background="{DynamicResource InputBrush}" Foreground="{DynamicResource TextBrush}" Margin="5" VerticalAlignment="Center"/>
 
-                                    <Separator Width="20" Background="Transparent"/>
+                                    <Separator Width="20" Background="{DynamicResource ClearBrush}"/>
 
-                                    <Label Content="Families:" Foreground="White" VerticalAlignment="Center"
+                                    <Label Content="Families:" Foreground="{DynamicResource TextBrush}" VerticalAlignment="Center"
                                            ToolTip="How many protein families there are: visible after the filters, and in the whole file."/>
                                     <Label x:Name="LabelNumberOfGroups" Content="?"
                                            ToolTip="Left: families among the rows shown. Right: families in the whole file. They differ while a filter, such as Hide Reverse, is on."
-                                           Foreground="#FFD700" FontWeight="Bold" FontSize="14" VerticalAlignment="Center"/>
+                                           Foreground="{DynamicResource TextBrush}" FontWeight="Bold" FontSize="14" VerticalAlignment="Center"/>
 
-                                    <Label Content="Identity:" Foreground="White" Margin="10,0,0,0" VerticalAlignment="Center"
+                                    <Label Content="Identity:" Foreground="{DynamicResource TextBrush}" Margin="10,0,0,0" VerticalAlignment="Center"
                                            ToolTip="The sequence-identity threshold USearch used to build these families."/>
                                     <Label x:Name="LabelClusterThreshold" Content="?"
                                            ToolTip="The USearch identity threshold this file was built at. Higher gives more, smaller families. To change it, run USearch again and generate a new .fcf."
-                                           Foreground="#FFD700" FontWeight="Bold" FontSize="14" VerticalAlignment="Center"/>
+                                           Foreground="{DynamicResource TextBrush}" FontWeight="Bold" FontSize="14" VerticalAlignment="Center"/>
 
-                                    <Label Content="Word similarity:" Foreground="White" Margin="10,0,0,0" VerticalAlignment="Center"
+                                    <Label Content="Word similarity:" Foreground="{DynamicResource TextBrush}" Margin="10,0,0,0" VerticalAlignment="Center"
                                            ToolTip="Whether these families were merged further by their description words, and at what threshold."/>
                                     <Label x:Name="LabelWordSimilarity" Content="none"
                                            ToolTip="How the families were built: 'none' means by sequence identity only, a number is the threshold of the last Recluster by Words, and 'keywords' means a keyword merge."
-                                           Foreground="#FFD700" FontWeight="Bold" FontSize="14" VerticalAlignment="Center"/>
+                                           Foreground="{DynamicResource TextBrush}" FontWeight="Bold" FontSize="14" VerticalAlignment="Center"/>
 
                                     <Button x:Name="ButtonAlignSelected" Margin="15,0,0,0" Content="Align Selected"
                                             Click="ButtonAlignSelected_Click" IsEnabled="False"
                                             ToolTip="Aligns the selected proteins and opens the alignment in a new window, to check that a family's members really are homologous. Disabled until at least two rows are selected in the Data Browser tab."
-                                            Background="#61AEEE" Foreground="White" Padding="10,5"/>
+                                            Background="{DynamicResource SubtleBrush}" Foreground="{DynamicResource TextBrush}" Padding="10,5"/>
 
                                     <Button x:Name="ButtonFetchDomains" Margin="15,0,0,0" Content="Fetch Domains"
                                             Click="ButtonFetchDomains_Click"
                                             ToolTip="Asks UniProt for each protein's Pfam domains, which needs the internet once. They fill the Domains column, the Search box finds them, the super cluster preview can choose by them, and saving keeps them in the file. Family numbers do not change."
-                                            Background="#61AEEE" Foreground="White" Padding="10,5"/>
+                                            Background="{DynamicResource SubtleBrush}" Foreground="{DynamicResource TextBrush}" Padding="10,5"/>
                                 </WrapPanel>
 
                                 <!-- Word Reclustering Controls -->
-                                <GroupBox Header="Word-Based Reclustering" Grid.Row="1" Margin="5,5,5,0" Background="#555C68" Foreground="White">
+                                <GroupBox Header="Word-Based Reclustering" Grid.Row="1" Margin="5,5,5,0" Background="{DynamicResource SubtleBrush}" Foreground="{DynamicResource TextBrush}">
                                     <StackPanel>
-                                        <WrapPanel HorizontalAlignment="Center" Margin="5">
+                                        <WrapPanel HorizontalAlignment="Left" Margin="5">
                                             <Label Content="Similarity:"
                                                    ToolTip="How alike two families' descriptions must be before they are merged into one."
-                                                   Foreground="White" VerticalAlignment="Center"/>
+                                                   Foreground="{DynamicResource TextBrush}" VerticalAlignment="Center"/>
                                             <xctk:DecimalUpDown x:Name="DecimalUpDownWordReCluster" Value="0.95"
                                                                 Increment="0.01" Maximum="1" Minimum="0.10"
                                                                 ToolTip="Families whose description words score at or above this value are merged (0.10 to 1.00). Default 0.95 merges only near-identical wording; lower it towards 0.90 to gather related families."
-                                                                Background="White" Foreground="Black" Width="60" Margin="5" VerticalAlignment="Center"/>
+                                                                Background="{DynamicResource InputBrush}" Foreground="{DynamicResource TextBrush}" Width="60" Margin="5" VerticalAlignment="Center"/>
 
-                                            <Label Content="Exclude Words:" Foreground="White" Margin="15,0,5,0" VerticalAlignment="Center"
+                                            <Label Content="Exclude Words:" Foreground="{DynamicResource TextBrush}" Margin="15,0,5,0" VerticalAlignment="Center"
                                                    ToolTip="Words to ignore when comparing descriptions."/>
                                             <TextBox x:Name="TextBoxWordsToBeExcluded" Width="200"
                                                      ToolTip="Words to ignore when comparing descriptions, separated by commas or spaces, for example: protein, domain, fragment. Use it when a common word pulls unrelated families together; it also applies to Create Super Cluster."
-                                                     Background="White" Foreground="Black" Margin="5" VerticalAlignment="Center"/>
+                                                     Background="{DynamicResource InputBrush}" Foreground="{DynamicResource TextBrush}" Margin="5" VerticalAlignment="Center"/>
 
                                             <Button x:Name="ButtonWordCluster" Margin="15,0,5,0" Content="Recluster by Words"
                                                     Click="ButtonWordCluster_Click"
                                                     ToolTip="Merges families whose descriptions are at least as similar as the Similarity value. Family numbers change and percentages are recalculated; press Undo to step it back."
-                                                    Background="#61AEEE" Foreground="White" Padding="10,5"/>
+                                                    Background="{DynamicResource SubtleBrush}" Foreground="{DynamicResource TextBrush}" Padding="10,5"/>
                                         </WrapPanel>
 
-                                        <WrapPanel HorizontalAlignment="Center" Margin="5">
-                                            <Label Content="Super Cluster Keywords:"
+                                        <WrapPanel HorizontalAlignment="Left" Margin="5">
+                                            <StackPanel Orientation="Horizontal">
+<Label Content="Super Cluster Keywords:"
                                                    ToolTip="Keywords that define one deliberately large family."
-                                                   Foreground="White" VerticalAlignment="Center"/>
+                                                   Foreground="{DynamicResource TextBrush}" VerticalAlignment="Center"/>
                                             <TextBox x:Name="TextBoxSuperClusterWording" Width="300"
                                                      TextChanged="TextBoxSuperClusterWording_TextChanged"
                                                      ToolTip="Keywords separated by commas or spaces, for example: metalloproteinase, SVMP; the proteins of matching families are listed, and the ones you keep become one family. Words in quotes are a phrase that must appear together in that order: &quot;ribosomal subunit&quot;, &quot;ribosomal protein&quot; with 'match any word' gathers either."
-                                                     Background="White" Foreground="Black" Margin="5" VerticalAlignment="Center"/>
+                                                     Background="{DynamicResource InputBrush}" Foreground="{DynamicResource TextBrush}" Margin="5" VerticalAlignment="Center"/>
+</StackPanel>
 
-                                            <Label Content="Match:" Foreground="White" Margin="10,0,5,0" VerticalAlignment="Center"
+                                            <StackPanel Orientation="Horizontal">
+<Label Content="Match:" Foreground="{DynamicResource TextBrush}" Margin="10,0,5,0" VerticalAlignment="Center"
                                                    ToolTip="Whether one protein's description must contain ALL the keywords or just ANY one of them for its family to be offered."/>
-                                            <ComboBox x:Name="ComboBoxSuperClusterMatch" Width="130" Margin="5" VerticalAlignment="Center"
-                                                      Background="White" Foreground="Black"
+                                            <ComboBox x:Name="ComboBoxSuperClusterMatch" Width="165" Margin="5" VerticalAlignment="Center"
+                                                      Background="{DynamicResource InputBrush}" Foreground="{DynamicResource TextBrush}"
                                                       ToolTip="'match all words' offers a family only if one of its descriptions has every keyword; 'match any word' offers it if one has at least one keyword. A single keyword works the same either way. Default: match all words.">
                                                 <ComboBoxItem x:Name="SuperMatchAll" IsSelected="True" Content="match all words"
                                                               ToolTip="A family is offered only if one of its descriptions contains EVERY keyword."/>
                                                 <ComboBoxItem x:Name="SuperMatchAny" Content="match any word"
                                                               ToolTip="A family is offered if one of its descriptions contains AT LEAST ONE of the keywords."/>
                                             </ComboBox>
+</StackPanel>
 
-                                            <Label Content="Exclude Words:" Foreground="White" Margin="10,0,5,0" VerticalAlignment="Center"
+                                            <StackPanel Orientation="Horizontal">
+<Label Content="Exclude Words:" Foreground="{DynamicResource TextBrush}" Margin="10,0,5,0" VerticalAlignment="Center"
                                                    ToolTip="Words that keep a protein OUT of the super cluster even when its family matches."/>
                                             <TextBox x:Name="TextBoxSuperClusterExclude" Width="180"
                                                      ToolTip="Whole words that keep a protein out of the super cluster, separated by commas or spaces, for example: inhibitor, matrix. The rest of its family still joins. Use it to gather 'phospholipase' while leaving out 'phospholipase inhibitor'."
-                                                     Background="White" Foreground="Black" Margin="5" VerticalAlignment="Center"/>
+                                                     Background="{DynamicResource InputBrush}" Foreground="{DynamicResource TextBrush}" Margin="5" VerticalAlignment="Center"/>
+</StackPanel>
 
-                                            <Button Content="Create Super Cluster" Margin="15,0,0,0" x:Name="ButtonSuperCluster"
+                                            <Button Content="Create Super Cluster" Margin="15,0,0,0" x:Name="ButtonSuperCluster" Style="{DynamicResource PrimaryButton}"
                                                     Click="ButtonSuperCluster_Click" IsEnabled="False"
-                                                    ToolTip="Shows every protein that would join, each with a tick, before anything changes, then gathers the ticked ones into one family, and Undo steps it back. Disabled until you type a keyword in the box to the left."
-                                                    Background="#61AEEE" Foreground="White" Padding="10,5"/>
+                                                    ToolTip="Shows every protein that would join, each with a tick, before anything changes, then gathers the ticked ones into one family, and Undo steps it back. Disabled until you type a keyword in the box to the left." Padding="10,5"/>
                                         </WrapPanel>
                                     </StackPanel>
                                 </GroupBox>
@@ -202,84 +207,83 @@
                                      out of a family, or gathering a whole class (the cellular proteins
                                      of a venom database) into one labelled family. -->
                                 <WrapPanel Grid.Row="2" HorizontalAlignment="Center" Margin="5,8,5,0">
-                                    <Label Content="Selected rows:" Foreground="White" VerticalAlignment="Center"
+                                    <Label Content="Selected rows:" Foreground="{DynamicResource TextBrush}" VerticalAlignment="Center"
                                            ToolTip="Changes every row you have selected in the table at once, instead of one row at a time."/>
-                                    <Label Content="User ID" Foreground="White" Margin="5,0,0,0" VerticalAlignment="Center"
+                                    <Label Content="User ID" Foreground="{DynamicResource TextBrush}" Margin="5,0,0,0" VerticalAlignment="Center"
                                            ToolTip="The family number to give every selected row."/>
                                     <TextBox x:Name="TextBoxBatchUserId" Width="70"
                                              ToolTip="A family number for every selected row; leave it empty to keep their numbers. An existing number joins that family, an unused one makes a new family. The family they join, and any family they leave that still has members, is locked against reclustering."
-                                             Background="White" Foreground="Black" Margin="5" VerticalAlignment="Center"/>
-                                    <Label Content="Annotation" Foreground="White" Margin="5,0,0,0" VerticalAlignment="Center"
+                                             Background="{DynamicResource InputBrush}" Foreground="{DynamicResource TextBrush}" Margin="5" VerticalAlignment="Center"/>
+                                    <Label Content="Annotation" Foreground="{DynamicResource TextBrush}" Margin="5,0,0,0" VerticalAlignment="Center"
                                            ToolTip="The text to write into the User Annotation column of every selected row."/>
                                     <TextBox x:Name="TextBoxBatchAnnotation" Width="160"
                                              ToolTip="Text for the User Annotation column of every selected row, for example: cellular proteins. Leave it empty to keep their annotations; annotations are exported with the CSV."
-                                             Background="White" Foreground="Black" Margin="5" VerticalAlignment="Center"/>
+                                             Background="{DynamicResource InputBrush}" Foreground="{DynamicResource TextBrush}" Margin="5" VerticalAlignment="Center"/>
                                     <Button x:Name="ButtonApplyToSelected" Margin="10,0,0,0" Content="Apply to selected rows"
                                             Click="ButtonApplyToSelected_Click"
                                             ToolTip="Gives every selected row the User ID and/or annotation typed to the left. Select with Ctrl+click or Shift+click, or Ctrl+A for all visible rows; Undo steps it back."
-                                            Background="#61AEEE" Foreground="White" Padding="10,5"/>
+                                            Background="{DynamicResource SubtleBrush}" Foreground="{DynamicResource TextBrush}" Padding="10,5"/>
                                     <TextBlock x:Name="TextBlockBatchStatus" Margin="10,0,0,0" MaxWidth="420" TextWrapping="Wrap"
                                                Foreground="#A8A49A" VerticalAlignment="Center"
                                                ToolTip="What the last 'Apply to selected rows' did, or why it did nothing."/>
                                 </WrapPanel>
 
                                 <WrapPanel Grid.Row="3" HorizontalAlignment="Center" Margin="5,8,5,0">
-                                    <Label Content="Curation locks:" Foreground="White" VerticalAlignment="Center"
+                                    <Label Content="Curation locks:" Foreground="{DynamicResource TextBrush}" VerticalAlignment="Center"
                                            ToolTip="How many families are protected from automatic reclustering. A locked family is never merged by Recluster by Words or Create Super Cluster."/>
                                     <Label x:Name="LabelLockCount" Content="No families locked"
                                            ToolTip="The number of locked families in this file, including numbers a later merge took out of use. It shows what the next reclustering will refuse to merge."
-                                           Foreground="#FFD700" FontWeight="Bold" FontSize="14" VerticalAlignment="Center"/>
+                                           Foreground="{DynamicResource TextBrush}" FontWeight="Bold" FontSize="14" VerticalAlignment="Center"/>
 
                                     <Button x:Name="ButtonManageLocks" Margin="15,0,0,0" Content="Manage locks..."
                                             Click="ButtonManageLocks_Click" IsEnabled="False"
                                             ToolTip="Opens the list of locked families, where you can read and remove locks. A removal reaches the disk only when you save the Family Cluster File. Disabled while no family is locked."
-                                            Background="#61AEEE" Foreground="White" Padding="10,5"/>
+                                            Background="{DynamicResource SubtleBrush}" Foreground="{DynamicResource TextBrush}" Padding="10,5"/>
 
                                     <!-- Undo steps back through the curation operations of this session (a
                                          Recluster by Words, a Create Super Cluster, a User ID edit that
                                          changed a number, a lock removal). It works on the open file only and
                                          needs no reload. Enabled only while there is a step to take back. -->
-                                    <Button x:Name="ButtonUndo" Margin="15,0,0,0" Content="↶ Undo"
+                                    <Button x:Name="ButtonUndo" Margin="15,0,0,0" Content="Undo"
                                             Click="ButtonUndo_Click" IsEnabled="False"
                                             ToolTip="Undoes the last curation change, such as a merge, a User ID edit or a lock removal, up to 50 steps in this session. Disabled until there is a change to undo."
-                                            Background="#61AEEE" Foreground="White" Padding="10,5"/>
+                                            Background="{DynamicResource SubtleBrush}" Foreground="{DynamicResource TextBrush}" Padding="10,5"/>
                                 </WrapPanel>
                             </Grid>
                         </GroupBox>
 
                         <!-- Layer 2: Quantitation Loading -->
-                        <GroupBox Margin="5" Background="#444B58" Foreground="White" Padding="5">
+                        <GroupBox Margin="5" Background="{DynamicResource SurfaceBrush}" Foreground="{DynamicResource TextBrush}" Padding="5">
                             <GroupBox.Header>
                                 <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="📊 Layer 2: PatternLab Quantitation (.plp, optional)" Style="{StaticResource LayerTitle}"/>
-                                    <Border x:Name="BadgeLayer2" Style="{StaticResource LayerBadge}" Background="#B7791F">
+                                    <TextBlock Text="Layer 2: PatternLab Quantitation (.plp, optional)" Style="{StaticResource LayerTitle}"/>
+                                    <Border x:Name="BadgeLayer2" Style="{StaticResource LayerBadge}" Background="{DynamicResource ClearBrush}">
                                         <TextBlock x:Name="TextBlockLayer2State" Style="{StaticResource LayerBadgeText}" Text="PENDING"/>
                                     </Border>
                                 </StackPanel>
                             </GroupBox.Header>
 
-                            <WrapPanel HorizontalAlignment="Center" Margin="5">
-                                <Button x:Name="ButtonLoadQuantData" Content="Load PLP File"
+                            <WrapPanel HorizontalAlignment="Left" Margin="5">
+                                <Button x:Name="ButtonLoadQuantData" Style="{DynamicResource PrimaryButton}" Content="Load PLP File"
                                         Click="ButtonLoadQuantData_Click"
-                                        ToolTip="Loads a PatternLab project (.plp) to fill the share column for these families. It must be exported at PEPTIDE level; a protein-level export makes every row read 0."
-                                        Background="#61AEEE" Foreground="White" FontWeight="SemiBold" Padding="15,8" FontSize="13"/>
+                                        ToolTip="Loads a PatternLab project (.plp) to fill the share column for these families. It must be exported at PEPTIDE level; a protein-level export makes every row read 0." FontWeight="SemiBold" Padding="15,8" FontSize="13"/>
 
                                 <StackPanel Orientation="Horizontal" Margin="20,0,0,0" VerticalAlignment="Center">
-                                    <TextBlock Text="Status:" Foreground="White" FontWeight="SemiBold" Margin="0,0,8,0"
+                                    <TextBlock Text="Status:" Foreground="{DynamicResource TextBrush}" FontWeight="SemiBold" Margin="0,0,8,0"
                                                ToolTip="Which quantitation project is loaded, if any."/>
                                     <TextBlock x:Name="TextBlockPLPStatus" Text="No quantitation loaded"
-                                               Foreground="#FFB6C1" FontStyle="Italic" TextWrapping="Wrap" MaxWidth="420"
+                                               Foreground="{DynamicResource MutedBrush}" FontStyle="Italic" TextWrapping="Wrap" MaxWidth="420"
                                                ToolTip="The name of the loaded PatternLab project. Until one is loaded, the share column stays empty."/>
                                 </StackPanel>
                             </WrapPanel>
                         </GroupBox>
 
                         <!-- Layer 3: Quantitation Calculation -->
-                        <GroupBox Margin="5" Background="#444B58" Foreground="White" Padding="5">
+                        <GroupBox Margin="5" Background="{DynamicResource SurfaceBrush}" Foreground="{DynamicResource TextBrush}" Padding="5">
                             <GroupBox.Header>
                                 <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="🧮 Layer 3: Quantitation Calculation Options" Style="{StaticResource LayerTitle}"/>
-                                    <Border x:Name="BadgeLayer3" Style="{StaticResource LayerBadge}" Background="#9B2C2C">
+                                    <TextBlock Text="Layer 3: Quantitation Calculation Options" Style="{StaticResource LayerTitle}"/>
+                                    <Border x:Name="BadgeLayer3" Style="{StaticResource LayerBadge}" Background="{DynamicResource ClearBrush}">
                                         <TextBlock x:Name="TextBlockLayer3State" Style="{StaticResource LayerBadgeText}" Text="BLOCKED"/>
                                     </Border>
                                 </StackPanel>
@@ -302,7 +306,7 @@
                                                 <ColumnDefinition Width="Auto"/>
                                                 <ColumnDefinition Width="*"/>
                                             </Grid.ColumnDefinitions>
-                                            <Label Grid.Column="0" Content="Shared peptides:" Foreground="White" FontWeight="SemiBold" VerticalAlignment="Center"
+                                            <Label Grid.Column="0" Content="Shared peptides:" Foreground="{DynamicResource TextBrush}" FontWeight="SemiBold" VerticalAlignment="Center"
                                                    ToolTip="What to do with a peptide that belongs to more than one family."/>
                                             <ComboBox Grid.Column="1" x:Name="ComboBoxSharedPeptides" Margin="6,0" MaxWidth="380"
                                                       HorizontalAlignment="Left" MinWidth="200"
@@ -319,7 +323,7 @@
                                                 <ColumnDefinition Width="Auto"/>
                                                 <ColumnDefinition Width="*"/>
                                             </Grid.ColumnDefinitions>
-                                            <Label Grid.Column="0" Content="Report XIC as:" Foreground="White" FontWeight="SemiBold" VerticalAlignment="Center"
+                                            <Label Grid.Column="0" Content="Report XIC as:" Foreground="{DynamicResource TextBrush}" FontWeight="SemiBold" VerticalAlignment="Center"
                                                    ToolTip="What the numbers in the share column are a percentage OF."/>
                                             <ComboBox Grid.Column="1" x:Name="ComboBoxNormalization" Margin="6,0" MaxWidth="380"
                                                       HorizontalAlignment="Left" MinWidth="200"
@@ -344,7 +348,7 @@
                                                 <ColumnDefinition Width="Auto"/>
                                                 <ColumnDefinition Width="*"/>
                                             </Grid.ColumnDefinitions>
-                                            <Label Grid.Column="0" Content="Full XIC share of:" Foreground="White" FontWeight="SemiBold" VerticalAlignment="Center"
+                                            <Label Grid.Column="0" Content="Full XIC share of:" Foreground="{DynamicResource TextBrush}" FontWeight="SemiBold" VerticalAlignment="Center"
                                                    ToolTip="What the Full XIC share column is a percentage OF."/>
                                             <ComboBox Grid.Column="1" x:Name="ComboBoxFullXicBasis" Margin="6,0" MaxWidth="380"
                                                       HorizontalAlignment="Left" MinWidth="200" VerticalAlignment="Center"
@@ -358,83 +362,68 @@
                                         </Grid>
 
                                         <TextBlock x:Name="TextBlockFullXicSummary" TextWrapping="Wrap" Margin="6,8,6,0"
-                                                   Foreground="#AAAAAA" FontSize="11" HorizontalAlignment="Stretch"
+                                                   Foreground="{DynamicResource MutedBrush}" FontSize="11" HorizontalAlignment="Stretch"
                                                    ToolTip="What the Full XIC column adds up to: the families, the peptides shared between families, and the peptides with no family."
                                                    Text="No full XIC computed for this project yet: run File · Compute / update full XIC to fill the Full XIC share column."/>
 
                                         <TextBlock x:Name="TextBlockQuantProfile" TextWrapping="Wrap" Margin="6,10,6,0"
-                                                   Foreground="#AAAAAA" FontSize="11" HorizontalAlignment="Stretch"
+                                                   Foreground="{DynamicResource MutedBrush}" FontSize="11" HorizontalAlignment="Stretch"
                                                    ToolTip="What the loaded project says about its own quantitation: the divisor it used, and which reporting modes it can therefore support."
                                                    Text="Load a project in Layer 2 to see how it was exported."/>
                                     </StackPanel>
 
                                     <Button Grid.Column="1"
-                                            x:Name="ButtonRecalculateQuantitation"
-                                            Content="⟳ Recalculate"
+                                            x:Name="ButtonRecalculateQuantitation" Style="{DynamicResource PrimaryButton}"
+                                            Content="Recalculate"
                                             Margin="20,5,5,5"
                                             VerticalAlignment="Top"
                                             Click="ButtonRecalculateQuantitation_Click"
                                             IsEnabled="False"
-                                            ToolTip="Applies the two choices on the left to the share column; the button changes colour when the table is out of date. Disabled until a PatternLab project is loaded in Layer 2."
-                                            Background="#FF8C00"
-                                            Foreground="White"
+                                            ToolTip="Applies the two choices on the left to the share column; the status mark says when the table is out of date. Disabled until a PatternLab project is loaded in Layer 2."
                                             FontWeight="SemiBold"
                                             Padding="15,8"/>
                                 </Grid>
-
-                                <Border Background="#3A4150" CornerRadius="3" Margin="10,5,10,5" Padding="10">
-                                    <TextBlock TextWrapping="Wrap" Foreground="#CCCCCC" FontSize="11">
-                                        <Run Text="ℹ️  How quantitation works:" FontWeight="Bold"/>
-                                        <LineBreak/>
-                                        <Run Text="• Two sources: the Full XIC column comes from Compute / update full XIC; Layer 2 is optional, for a PatternLab .plp (the 'Share of signal' column)"/>
-                                        <LineBreak/>
-                                        <Run Text="• Shared peptides applies to both columns; Report XIC as and Recalculate apply to the .plp column, Full XIC share of to the Full XIC column"/>
-                                        <LineBreak/>
-                                        <Run Text="• The two lists answer different questions, and the status line at the top always says which one is on screen"/>
-                                    </TextBlock>
-                                </Border>
                             </StackPanel>
                         </GroupBox>
 
                         <!-- Display and Export -->
-                        <GroupBox Margin="5" Background="#444B58" Foreground="White" Padding="5">
+                        <GroupBox Margin="5" Background="{DynamicResource SurfaceBrush}" Foreground="{DynamicResource TextBrush}" Padding="5">
                             <GroupBox.Header>
                                 <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="👁️ Display and Export Options" Style="{StaticResource LayerTitle}"/>
-                                    <Border x:Name="BadgeExport" Style="{StaticResource LayerBadge}" Background="#2F855A">
+                                    <TextBlock Text="Display and Export Options" Style="{StaticResource LayerTitle}"/>
+                                    <Border x:Name="BadgeExport" Style="{StaticResource LayerBadge}" Background="{DynamicResource ClearBrush}">
                                         <TextBlock x:Name="TextBlockExportState" Style="{StaticResource LayerBadgeText}" Text="READY"/>
                                     </Border>
                                 </StackPanel>
                             </GroupBox.Header>
 
-                            <WrapPanel HorizontalAlignment="Center" Margin="5">
+                            <WrapPanel HorizontalAlignment="Left" Margin="5">
                                 <CheckBox x:Name="CheckBoxShowXICOnly" Content="Show Only XIC &gt; 0"
-                                          Margin="10,5" Foreground="White" VerticalAlignment="Center"
+                                          Margin="10,5" Foreground="{DynamicResource TextBrush}" VerticalAlignment="Center"
                                           Checked="CheckBoxShowXICOnly_CheckedChanged"
                                           Unchecked="CheckBoxShowXICOnly_CheckedChanged"
                                           ToolTip="Hides families with no quantitation, so only the families your project measured are shown. Percentages do not change. Off by default."/>
 
                                 <CheckBox x:Name="CheckBoxExcludeContaminants" Content="Hide Contaminants"
-                                          Margin="10,5" Foreground="White" VerticalAlignment="Center"
+                                          Margin="10,5" Foreground="{DynamicResource TextBrush}" VerticalAlignment="Center"
                                           Checked="CheckBoxShowXICOnly_CheckedChanged"
                                           Unchecked="CheckBoxShowXICOnly_CheckedChanged"
                                           ToolTip="Hides entries whose identifier contains 'contaminant' (keratins, trypsin, serum proteins) from the table and the CSV. Percentages do not change, so in '% of identified signal' the visible ones no longer add up to 100%."/>
 
                                 <CheckBox x:Name="CheckBoxExcludeReverse" Content="Hide Reverse (decoys)"
-                                          Margin="10,5" Foreground="White" VerticalAlignment="Center"
+                                          Margin="10,5" Foreground="{DynamicResource TextBrush}" VerticalAlignment="Center"
                                           Checked="CheckBoxExcludeReverse_CheckedChanged"
                                           Unchecked="CheckBoxExcludeReverse_CheckedChanged"
                                           ToolTip="Hides decoys, whose identifier starts with 'Reverse_', from the table and the CSV. Nothing is deleted and no percentage moves; keep them visible while judging the clustering."/>
 
-                                <Button x:Name="ButtonSaveReport" Margin="15,5,5,5" Click="ButtonSaveReport_Click"
-                                        Content="💾 Export to CSV"
-                                        ToolTip="Writes the visible rows, with the table's columns, to a CSV file; shares are fractions from 0 to 1 with a dot as decimal point. Disabled while every row is hidden by a filter."
-                                        Background="#61AEEE" Foreground="White" Padding="15,8" FontWeight="SemiBold"/>
+                                <Button x:Name="ButtonSaveReport" Style="{DynamicResource PrimaryButton}" Margin="15,5,5,5" Click="ButtonSaveReport_Click"
+                                        Content="Export to CSV"
+                                        ToolTip="Writes the visible rows, with the table's columns, to a CSV file; shares are fractions from 0 to 1 with a dot as decimal point. Disabled while every row is hidden by a filter." Padding="15,8" FontWeight="SemiBold"/>
 
                                 <Button x:Name="ButtonExportComposition" Margin="5,5,5,5" Click="ButtonExportComposition_Click"
-                                        Content="🥧 Export family composition (CSV)" IsEnabled="False"
+                                        Content="Export family composition (CSV)" IsEnabled="False"
                                         ToolTip="Writes the Full XIC family composition to a CSV: one row per family, plus the unattributed peptides and, with 'Family-unique only', the shared ones. Disabled until the project has a full XIC (File · Compute / update full XIC)."
-                                        Background="#61AEEE" Foreground="White" Padding="15,8" FontWeight="SemiBold"/>
+                                        Background="{DynamicResource SubtleBrush}" Foreground="{DynamicResource TextBrush}" Padding="15,8" FontWeight="SemiBold"/>
                             </WrapPanel>
                         </GroupBox>
                     </StackPanel>
@@ -442,7 +431,7 @@
             </TabItem>
 
             <!-- Tab 2: Data Browser -->
-            <TabItem Header="📋 Data Browser">
+            <TabItem Header="Data Browser">
                 <!-- The new-item placeholder row is disabled on purpose: FastaItemExtended has a
                      parameterless constructor, so the placeholder was editable and typing into it
                      created a blank protein in the FILTERED copy of the list - exportable to CSV,
@@ -452,16 +441,16 @@
                           CellEditEnding="DataGridResultGrid_CellEditEnding"
                           SelectionChanged="DataGridResultGrid_SelectionChanged"
                           Sorting="DataGridResultGrid_Sorting"
-                          AlternatingRowBackground="#F0F0F0" GridLinesVisibility="Horizontal" Margin="5">
+                          AlternatingRowBackground="{DynamicResource SubtleBrush}" GridLinesVisibility="None" Margin="5">
                     <DataGrid.Columns>
                         <DataGridTextColumn x:Name="ColumnUSearchId" CanUserReorder="True" IsReadOnly="True" CanUserResize="True" CanUserSort="True"
-                                            Header="USearch ID" Width="90" Binding="{Binding Path=USearchID}" />
+                                            Header="USearch ID" Width="90" MinWidth="90" Binding="{Binding Path=USearchID}" />
                         <DataGridTextColumn x:Name="ColumnUserId" CanUserReorder="True" CanUserResize="True" CanUserSort="True"
-                                            Header="User ID" Width="80" Binding="{Binding Path=UserID, Mode=TwoWay}" />
+                                            Header="User ID" Width="80" MinWidth="80" Binding="{Binding Path=UserID, Mode=TwoWay}" />
                         <DataGridTextColumn x:Name="ColumnUserAnnotation" CanUserReorder="True" CanUserResize="True" CanUserSort="True"
-                                            Header="User Annotation" Width="150" Binding="{Binding Path=UserAnnotation, Mode=TwoWay}"/>
+                                            Header="User Annotation" Width="150" MinWidth="150" Binding="{Binding Path=UserAnnotation, Mode=TwoWay}"/>
                         <DataGridTextColumn x:Name="ColumnLocus" CanUserReorder="True" IsReadOnly="True" CanUserResize="True" CanUserSort="True"
-                                            Header="Locus" Width="120" Binding="{Binding Path=SequenceIdentifier}"/>
+                                            Header="Locus" Width="120" MinWidth="120" Binding="{Binding Path=SequenceIdentifier}"/>
                         <!-- The share heading names the denominator in use, so its text changes with the
                              reporting mode and is far wider than the numbers below. Every heading in this
                              grid wraps (see ApplyColumnHeaderTooltips), so a fixed width is safe and,
@@ -473,29 +462,29 @@
                              USearch ID column above shows the last automatic grouping, which equals the
                              User ID column except where a family was renumbered by hand. -->
                         <DataGridTextColumn x:Name="ColumnMass" CanUserReorder="True" IsReadOnly="True" CanUserResize="True" CanUserSort="True"
-                                            Header="Residue mass (Da)" Width="110" Binding="{Binding Path=MonoisotopicMass, StringFormat=N3}"/>
+                                            Header="Residue mass (Da)" Width="110" MinWidth="110" Binding="{Binding Path=MonoisotopicMass, StringFormat=N3}"/>
                         <DataGridTextColumn x:Name="ColumnXicUser" CanUserReorder="True" IsReadOnly="True" CanUserResize="True" CanUserSort="True"
-                                            Header="Share of signal" Width="170" Binding="{Binding Path=XICUser, StringFormat=P3}"/>
+                                            Header="Share of signal" Width="170" MinWidth="170" Binding="{Binding Path=XICUser, StringFormat=P3}"/>
                         <DataGridTextColumn x:Name="ColumnFullXic" CanUserReorder="True" IsReadOnly="True" CanUserResize="True" CanUserSort="True"
                                             SortMemberPath="FullXicShare"
-                                            Header="Full XIC share" Width="170" Binding="{Binding Path=FullXicShare, StringFormat=P3}"/>
+                                            Header="Full XIC share" Width="170" MinWidth="170" Binding="{Binding Path=FullXicShare, StringFormat=P3}"/>
                         <DataGridTextColumn x:Name="ColumnDescription" CanUserReorder="True" IsReadOnly="True" CanUserResize="True" CanUserSort="True"
                                             Header="Description" Width="*" MinWidth="120" Binding="{Binding Path=Description}"/>
                         <DataGridTextColumn x:Name="ColumnDomains" CanUserReorder="True" IsReadOnly="True" CanUserResize="True" CanUserSort="True"
-                                            Header="Domains" Width="170" Binding="{Binding Path=Domains}"/>
+                                            Header="Domains" Width="170" MinWidth="170" Binding="{Binding Path=Domains}"/>
                     </DataGrid.Columns>
                 </DataGrid>
             </TabItem>
         </TabControl>
 
         <!-- Wait Screen Overlay -->
-        <Grid x:Name="WaitScreen" Grid.Row="0" Grid.RowSpan="2" Background="#AA000000" Visibility="Collapsed">
-            <Border Background="#2D3748" CornerRadius="10" Padding="30" HorizontalAlignment="Center" VerticalAlignment="Center"
-                    BorderBrush="#4A5568" BorderThickness="2">
+        <Grid x:Name="WaitScreen" Grid.Row="0" Grid.RowSpan="2" Background="{DynamicResource OverlayBrush}" Visibility="Collapsed">
+            <Border Background="{DynamicResource SurfaceBrush}" CornerRadius="10" Padding="30" HorizontalAlignment="Center" VerticalAlignment="Center"
+                    BorderBrush="{DynamicResource EdgeBrush}" BorderThickness="2">
                 <StackPanel>
-                    <TextBlock Text="⏳ Processing..." Foreground="White" FontSize="24" FontWeight="Bold" HorizontalAlignment="Center"/>
+                    <TextBlock Text="Processing..." Foreground="{DynamicResource TextBrush}" FontSize="24" FontWeight="Bold" HorizontalAlignment="Center"/>
                     <ProgressBar IsIndeterminate="True" Width="300" Height="20" Margin="0,15,0,10"/>
-                    <TextBlock x:Name="WaitScreenMessage" Text="Please wait..." Foreground="#CBD5E0" FontSize="14"
+                    <TextBlock x:Name="WaitScreenMessage" Text="Please wait..." Foreground="{DynamicResource MutedBrush}" FontSize="14"
                                HorizontalAlignment="Center" TextAlignment="Center" TextWrapping="Wrap" MaxWidth="300"/>
                 </StackPanel>
             </Border>
