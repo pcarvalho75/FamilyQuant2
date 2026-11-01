@@ -1,3 +1,4 @@
+using FamilyQuant.Operations;
 using PatternTools.FastaTools;
 using System;
 using System.Collections.Generic;
@@ -90,8 +91,9 @@ namespace FamilyQuant.Homology
         /// <see cref="FastaItem"/>, so the same call serves the curated family file.
         /// </summary>
         public static HomologyDatabase Build(IEnumerable<FastaItem> items,
-            int seedLength = HomologyOptions.DefaultSeedLength, bool buildSeedIndex = true)
+            int seedLength = HomologyOptions.DefaultSeedLength, bool buildSeedIndex = true, OperationContext? operation = null)
         {
+            operation?.ThrowIfCancellationRequested();
             if (items == null)
             {
                 throw new ArgumentNullException(nameof(items));
@@ -101,6 +103,7 @@ namespace FamilyQuant.Homology
 
             foreach (FastaItem item in items)
             {
+                operation?.ThrowIfCancellationRequested();
                 if (item == null)
                 {
                     continue;
@@ -109,14 +112,15 @@ namespace FamilyQuant.Homology
                 entries.Add((item.SequenceIdentifier, item.Sequence));
             }
 
-            return Build(entries, seedLength, buildSeedIndex);
+            return Build(entries, seedLength, buildSeedIndex, operation);
         }
 
         /// <summary>Builds from bare (identifier, sequence) pairs, so the core can be exercised
         /// without a FASTA file.</summary>
         public static HomologyDatabase Build(IEnumerable<(string Id, string Sequence)> entries,
-            int seedLength = HomologyOptions.DefaultSeedLength, bool buildSeedIndex = true)
+            int seedLength = HomologyOptions.DefaultSeedLength, bool buildSeedIndex = true, OperationContext? operation = null)
         {
+            operation?.ThrowIfCancellationRequested();
             if (entries == null)
             {
                 throw new ArgumentNullException(nameof(entries));
@@ -134,6 +138,7 @@ namespace FamilyQuant.Homology
 
             foreach ((string Id, string Sequence) entry in entries)
             {
+                operation?.ThrowIfCancellationRequested();
                 if (string.IsNullOrWhiteSpace(entry.Sequence))
                 {
                     skipped++;
@@ -153,22 +158,24 @@ namespace FamilyQuant.Homology
                 parsed.Add(new HomologyProtein(entry.Id, entry.Sequence.Trim().ToUpperInvariant()));
             }
 
-            Dictionary<uint, List<int>>? index = buildSeedIndex ? BuildSeedIndex(parsed, seedLength) : null;
+            Dictionary<uint, List<int>>? index = buildSeedIndex ? BuildSeedIndex(parsed, seedLength, operation) : null;
 
             return new HomologyDatabase(parsed, index, seedLength, skipped);
         }
 
-        private static Dictionary<uint, List<int>> BuildSeedIndex(List<HomologyProtein> proteins, int seedLength)
+        private static Dictionary<uint, List<int>> BuildSeedIndex(List<HomologyProtein> proteins, int seedLength, OperationContext? operation)
         {
             Dictionary<uint, List<int>> index = new Dictionary<uint, List<int>>();
 
             for (int p = 0; p < proteins.Count; p++)
             {
+                operation?.ThrowIfCancellationRequested();
                 string sequence = proteins[p].Sequence;
                 int last = sequence.Length - seedLength;
 
                 for (int offset = 0; offset <= last; offset++)
                 {
+                    operation?.ThrowIfCancellationRequested();
                     uint seed = Pack(sequence, offset, seedLength);
 
                     if (!index.TryGetValue(seed, out List<int>? bucket))
