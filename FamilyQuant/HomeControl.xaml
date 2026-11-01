@@ -31,7 +31,7 @@
                     <TextBlock Text="Current project" Foreground="{DynamicResource TextBrush}" FontWeight="SemiBold"/>
                     <TextBlock x:Name="TextBlockHomeProject" Margin="0,8,0,0" TextTrimming="CharacterEllipsis" TextWrapping="NoWrap" Foreground="{DynamicResource MutedBrush}"
                                ToolTip="Names the open project and its stored quantitation. Help contains the full workflow and status details."/>
-                    <WrapPanel Margin="0,12,0,0">
+                    <WrapPanel x:Name="HomeProjectActions" Margin="0,12,0,0">
                         <Button x:Name="ButtonHomeCurate" Content="Families" Click="ButtonHomeCurate_Click" Margin="0,0,8,0"
                                 ToolTip="Returns to the open family's curation, or opens a file when none is loaded. Existing edits stay in memory."/>
                         <Button x:Name="ButtonHomeCompute" Click="ButtonHomeCompute_Click" Margin="0,0,8,0" IsEnabled="False"

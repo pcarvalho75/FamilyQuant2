@@ -29,6 +29,7 @@ Finished steps, moved here from docs/ROADMAP.md. The board shows them as green.
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
 | E1 | Evidence model and storage: per protein reviewed, UniProt family and subfamily, keywords, tissue, Pfam accession and name, PANTHER, transmembrane count, fragment flag; file level source and release. Stored in the file; old files still load | M | 3 | 🟢 | E2, E3 | Round trip test offline; old `.fcf` opens unchanged; size growth measured on Ana's file | EV | working | 10% | 0% | T+3 |
 | E2 | Fetch Evidence replaces Fetch Domains: same all-or-nothing batches and retries, more fields, progress and cancel. Domains column unchanged | M | 3 | E1 | E3, E5 | Live on Ana's file: asked 31,775, found 31,775, every field count agrees with `viperidae_rich.tsv`; canned tests for a refused batch and a missing entry | EV | not started | 0% | 0% | T+3 |
+| E3 | Nearest reviewed protein inside the app: `usearch_global` of all targets against the reviewed ones, id at least 50%, alignment at least 70% of the query, never the protein itself (accession compared), deterministic ties, memoised, stored as evidence | M | 3 | E2 | E4, E5 | Best hit agrees with `vs_revtox2.tsv` on all pairs or each difference explained; two runs byte-identical | AS | OP | 0% | 0% | T+3 |
 
 ### W2 Ana's result, through the software
 
@@ -51,9 +52,17 @@ Finished steps, moved here from docs/ROADMAP.md. The board shows them as green.
 | S1 | Menu in standard order: File (New from database, Open, Save, Save as, Export, Recent, Exit), Edit (Undo, Copy), View (theme, hide decoys, hide contaminants), Analysis (Compute, Results, De novo, Reannotate SEPro), Help. Ctrl+N, O, S, Z, F, F1 | M | 3 | V5, N3 | S2, S3, S5, C4 | File is first; each ledger command reachable; shortcut tests; "Reanotate" typo gone | LK | SH | 0% | 0% | T+12 |
 | S3 | Replace both yellow banners and the "showing" line with one quiet status bar; long text goes to Help | M | 2 | S1 | S2 | No banner over one line at the smallest size; no fact lost, each moved to Help | LK | SH | 0% | 0% | T+14 |
 | S4 | Start page: open, new, recent projects, last result; fixes the white disabled cards | M | 3 | S1 | S2, V3 | Disabled state readable in both themes; recents survive restart | LK | SH | 0% | 0% | T+17 |
+| S2 | Left navigation rail in place of the Home card grid: Families, Quantify, Results, De novo, with state marks. `MainWindow` becomes a thin shell over a view model | H | 4 | S1, S4 | C1, C6, C8, C9, C10 | Every screen reachable by keyboard; disabled steps readable with the reason | LK | SH | 0% | 0% | T+4 |
 
 ### W5 Screens: each rebuilt as a thin view over a tested view model
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
 | P2 | Retire the De Novo sections Extract areas and Partition ion current in 2.0 (Paulo) | L | 0 | 🟢 | C11 | Decided | Paulo | done | 100% | 100% | done |
+
+### W6 Core rewrite: copy what is good, rewrite what is better
+
+| ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
+|---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
+| X2 | Family document: split `FamilyQuantFile` (733 lines) into document, target-decoy score and PatternLab attribution. `XIC` legacy field read on load only | H | 4 | F6 | X3, X7 | Every old `.fcf` opens; golden equal; lines reported | AS | not started | 0% | 0% | T+4 |
+
