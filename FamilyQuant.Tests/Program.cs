@@ -73,6 +73,13 @@ namespace FamilyQuant.Tests
                 return failed == 0 ? 0 : 1;
             }
 
+            if (args.Contains(NearestReviewedCheck.Argument))
+            {
+                NearestReviewedCheck.Run(args, Check);
+                Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
+                return failed == 0 ? 0 : 1;
+            }
+
             if (GoldenNumbers.IsRequested(args))
             {
                 EnsureApplication();

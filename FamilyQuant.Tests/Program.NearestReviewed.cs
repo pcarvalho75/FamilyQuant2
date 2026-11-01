@@ -24,8 +24,7 @@ namespace FamilyQuant.Tests
         }
 
         /// <summary>The sequence with <paramref name="run"/> residues changed in every <paramref name="step"/>,
-        /// so its identity to the original is (1 - run/step) with no gap. The unchanged stretches stay
-        /// longer than USEARCH's five-residue word, which it needs to consider a pair at all.</summary>
+        /// so its identity to the original is (1 - run/step) with no gap.</summary>
         private static string NearestMutate(string sequence, int step, int run = 1, int offset = 0)
         {
             char[] residues = sequence.ToCharArray();
@@ -71,13 +70,15 @@ namespace FamilyQuant.Tests
                 NearestItem("sp|P10006|BETA_TEST", tieSource, true, "Beta family"),
                 NearestItem("sp|P10005|ALPHT_TEST", tieSource, true, "Alpha family"),
                 NearestItem("tr|A0A004|A0A004_TEST", NearestMutate(tieSource, 6), false),
+                NearestItem("tr|A0A005|A0A005_TEST", NearestBase(150, 59), false),
+                NearestItem("sp|P10007|NOWORD_TEST", NearestMutate(NearestBase(150, 59), 5), true, "Epsilon family"),
                 NearestItem("Reverse_sp|P10001|ALPHA_TEST", a, null),
             });
 
             List<FastaItemExtended> targets = NearestReviewed.Targets(file);
             List<NeighbourReference> references = NearestReviewed.ReviewedReferences(file);
             Check("the reviewed references are the reviewed targets, the decoy excluded",
-                references.Count == 6 && targets.Count == 10, references.Count + " references, " + targets.Count + " targets");
+                references.Count == 7 && targets.Count == 12, references.Count + " references, " + targets.Count + " targets");
 
             NearestReviewed.ForgetMemo();
             long runsBefore = NearestReviewed.SearchRunCount;
@@ -116,7 +117,11 @@ namespace FamilyQuant.Tests
                 Of("sp|P10004-2|ISO_TEST")?.Accession + " / " + Of("sp|P10004|ISO_TEST")?.Accession);
             Check("an unrelated protein has no neighbour",
                 Of("tr|A0A003|A0A003_TEST") == null, Of("tr|A0A003|A0A003_TEST")?.Accession);
-            Check("the decoy is never searched", first.Queries == 10 && Of("Reverse_sp|P10001|ALPHA_TEST") == null,
+            Check("a reference sharing no five-residue stretch with the query is still aligned (80%)",
+                Of("tr|A0A005|A0A005_TEST")?.Accession == "P10007"
+                && Math.Abs(Of("tr|A0A005|A0A005_TEST")!.IdentityPercent - 80.0) < 0.6,
+                Of("tr|A0A005|A0A005_TEST")?.Accession);
+            Check("the decoy is never searched", first.Queries == 12 && Of("Reverse_sp|P10001|ALPHA_TEST") == null,
                 first.Queries.ToString());
             NearestNeighbour? tie = Of("tr|A0A004|A0A004_TEST");
             Check("a tie across families is settled by accession and the other family is reported",
