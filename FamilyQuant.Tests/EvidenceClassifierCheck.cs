@@ -11,12 +11,14 @@ namespace FamilyQuant.Tests
     internal static class EvidenceClassifierCheck
     {
         internal const string Argument = "--evidence-classifier-check";
+        internal const string ArchitectureArgument = "--evidence-architecture-check";
 
         internal static void Run(string[] args, Action<string, bool, string?> check)
         {
             try
             {
-                int flag = Array.IndexOf(args, Argument);
+                bool architectureMode = args.Contains(ArchitectureArgument);
+                int flag = Array.IndexOf(args, architectureMode ? ArchitectureArgument : Argument);
                 string input = At(1, "D:/FamilyQuant-data/out-evidence/ana-neighbours.fcf");
                 string output = At(2, "D:/FamilyQuant-data/out-evidence/e5-classifier-report.json");
                 string[] scope = At(3, "Toxin;venom gland").Split(';', StringSplitOptions.RemoveEmptyEntries);
@@ -89,6 +91,27 @@ namespace FamilyQuant.Tests
                         flagged = exclusions.Select(p => new { p!.Identifier, tier = p.Tier.ToString(), p.Reason, p.Neighbour, p.Flags }).ToList(),
                     });
                 }
+                IReadOnlyList<EvidenceArchitectureProposal>? architecture = null;
+                if (architectureMode)
+                {
+                    architecture = EvidenceArchitecture.Suggest(file.MyExtendedFastaItems, proposal);
+                    var primary = architecture.Where(a => a.Family.IndexOf("metalloproteinase", StringComparison.OrdinalIgnoreCase) >= 0).ToList();
+                    check("native architecture offers a free binding-domain group apart from multi-domain members",
+                        primary.Any(a => a.CanSplit && a.Groups.Any(g => g.Domains.Count == 1
+                            && g.SuggestedName.Equals("Disintegrin", StringComparison.OrdinalIgnoreCase))
+                        && a.Groups.Any(g => g.Domains.Count > 1)), null);
+                    check("every native family offers distinct names for its domain combinations",
+                        architecture.All(a => a.Groups.Select(g => g.SuggestedName).Distinct(StringComparer.OrdinalIgnoreCase).Count() == a.Groups.Count), null);
+                    check("native multi-domain names distinguish them from free binding domains",
+                        primary.SelectMany(a => a.Groups).Where(g => g.Domains.Count > 1)
+                            .All(g => !g.SuggestedName.Equals("Disintegrin", StringComparison.OrdinalIgnoreCase)), null);
+                    var second = architecture.FirstOrDefault(a => a.Family.Equals("phospholipase A2 family", StringComparison.OrdinalIgnoreCase));
+                    check("the same architecture code evaluates a second source family", second != null && second.Groups.Count > 0, null);
+                    string firstArchitecture = JsonSerializer.Serialize(architecture);
+                    check("native architecture suggestions are reproducible and preserve the source",
+                        firstArchitecture == JsonSerializer.Serialize(EvidenceArchitecture.Suggest(file.MyExtendedFastaItems, proposal))
+                        && before == EvidenceClassifier.Fingerprint(file.MyExtendedFastaItems), null);
+                }
                 Directory.CreateDirectory(Path.GetDirectoryName(Path.GetFullPath(output))!);
                 File.WriteAllText(output, JsonSerializer.Serialize(new
                 {
@@ -98,6 +121,7 @@ namespace FamilyQuant.Tests
                     proposal.Families, proposal.Markers,
                     proteins = proposal.Proteins,
                     recoveryComparison = recovery,
+                    architecture,
                     sourceGuardViolations = violations,
                 }, new JsonSerializerOptions { WriteIndented = true }));
                 Console.WriteLine("Classification report: " + output);
