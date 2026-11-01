@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace FamilyQuant
@@ -46,56 +45,11 @@ namespace FamilyQuant
         List<FastaClusterElement> MyClusterElements { get; set; }
         Dictionary<string, int> WordIndex { get; set; }
 
-        static readonly string[] StopWords = new string[]
-        {
-            "protein", "fragment", "a", "about", "above", "after", "again", "against", "all", "am", "an", "and", "any", "are",
-            "aren't", "as", "at", "be", "because", "been", "before", "being", "below", "between", "both", "but", "by", "can't",
-            "cannot", "could", "couldn't", "did", "didn't", "do", "does", "doesn't", "doing", "don't", "down", "during", "each",
-            "few", "for", "from", "further", "had", "hadn't", "has", "hasn't", "have", "haven't", "having", "he", "he'd",
-            "he'll", "he's", "her", "here", "here's", "hers", "herself", "him", "himself", "his", "how", "how's", "i", "i'd",
-            "i'll", "i'm", "i've", "if", "in", "into", "is", "isn't", "it", "it's", "its", "itself", "let's", "me", "more",
-            "most", "mustn't", "my", "myself", "no", "nor", "not", "of", "off", "on", "once", "only", "or", "other", "ought",
-            "our", "ours", "ourselves", "out", "over", "own", "same", "shan't", "she", "she'd", "she'll", "she's", "should",
-            "shouldn't", "so", "some", "such", "than", "that", "that's", "the", "their", "theirs", "them", "themselves",
-            "then", "there", "there's", "these", "they", "they'd", "they'll", "they're", "they've", "this", "those", "through",
-            "to", "too", "under", "until", "up", "very", "was", "wasn't", "we", "we'd", "we'll", "we're", "we've", "were",
-            "weren't", "what", "what's", "when", "when's", "where", "where's", "which", "while", "who", "who's", "whom",
-            "why", "why's", "with", "won't", "would", "wouldn't", "you", "you'd", "you'll", "you're", "you've", "your",
-            "yours", "yourself", "yourselves"
-        };
-
         public WordCluster(List<FastaItemExtended> fastaItems, List<string> additionalWordsToExlcude)
         {
-            // Built once. This used to be re-concatenated for every protein and probed with a linear
-            // IEnumerable.Contains, i.e. O(proteins x words x stop-words) string comparisons.
-            // OrdinalIgnoreCase also makes the user's exclusion list work regardless of how it was typed:
-            // the terms are lower-cased here but the two callers passed them through differently, so
-            // "Fragment" silently excluded nothing while "fragment" did.
-            var wordsToExclude = new HashSet<string>(StopWords, StringComparer.OrdinalIgnoreCase);
-            foreach (string word in additionalWordsToExlcude)
-            {
-                if (!string.IsNullOrWhiteSpace(word)) wordsToExclude.Add(word.Trim());
-            }
-
-            // Terms per protein, in input order, so the word index below is deterministic.
-            var termsPerItem = new List<string[]>(fastaItems.Count);
-            var matchTokensPerItem = new List<string[]>(fastaItems.Count);
-
-            foreach (var item in fastaItems)
-            {
-                string trimmedDescription = (item.Description ?? string.Empty)
-                    .Split(new[] { " OS=" }, StringSplitOptions.None)[0];
-
-                string[] rawTokens = Tokenize(trimmedDescription);
-                string[] words = rawTokens.Where(w => w.Length > 1 && !wordsToExclude.Contains(w)).ToArray();
-
-                // The whole word sequence, stop words included, for PHRASES and exclude words: "ribosomal
-                // protein" has to be found as written, and "protein" is a stop word above. Separate from
-                // the terms, whose punctuation is part of the TF-IDF index and must not change.
-                matchTokensPerItem.Add(MatchTokens(trimmedDescription));
-
-                termsPerItem.Add(words.Concat(GenerateBigrams(words)).ToArray());
-            }
+            var matcher = new DescriptionWordMatcher(additionalWordsToExlcude);
+            var descriptions = fastaItems.Select(item => matcher.Read(item.Description)).ToList();
+            var termsPerItem = descriptions.Select(d => d.Terms).ToList();
 
             WordIndex = GenerateWordIndex(termsPerItem);
 
@@ -115,77 +69,14 @@ namespace FamilyQuant
                     FamilyId = fastaItems[i].UserID,
                     Words = terms.Select(t => WordIndex[t]).ToList(),
                     Description = string.Join(" ", terms),
-                    RawTokens = matchTokensPerItem[i],
-                    MatchWords = matchTokensPerItem[i].Where(w => w.Length > 1 && !wordsToExclude.Contains(w)).ToArray(),
+                    RawTokens = descriptions[i].RawTokens,
+                    MatchWords = descriptions[i].MatchWords,
                 });
             }
         }
 
-        /// <summary>Lower-cased words of a description, split exactly as the word index splits them
-        /// (spaces, hyphens, underscores, slashes), with nothing removed.</summary>
-        private static string[] Tokenize(string text) =>
-            Regex.Split((text ?? string.Empty).ToLower(), @"[\s-_/]+").Where(w => w.Length > 0).ToArray();
-
-        private static readonly char[] WordPunctuation = { '(', ')', '[', ']', '{', '}', ',', ';', ':', '.', '\'', '"' };
-
-        /// <summary>The words a person reads: <see cref="Tokenize"/> with the punctuation around each word
-        /// removed, so "(Fragment)" is the word fragment and "A2," the word a2. Everything that MATCHES a
-        /// typed word goes through this, on both sides.</summary>
-        private static string[] MatchTokens(string text) =>
-            Tokenize(text).Select(w => w.Trim(WordPunctuation)).Where(w => w.Length > 0).ToArray();
-
-        /// <summary>
-        /// Every word box of Layer 1 (the Super Cluster keywords and both Exclude Words boxes): a "quoted
-        /// phrase" (straight or curly quotes) is one entry that must appear as those consecutive words;
-        /// everything outside quotes is split into single words at commas, semicolons and any whitespace.
-        /// All lower-cased; a phrase keeps one space between its words. Ana asked (2026-10-24) for
-        /// "ribosomal subunit" or "ribosomal protein". One parser on purpose: the exclude box had its own
-        /// whitespace-only split, so words typed with commas kept the comma and excluded nothing.
-        /// </summary>
-        public static List<string> ParseKeywords(string? text)
-        {
-            var keywords = new List<string>();
-            if (string.IsNullOrWhiteSpace(text)) return keywords;
-
-            string normalized = text.Replace('“', '"').Replace('”', '"');
-            string[] parts = normalized.Split('"');
-            for (int i = 0; i < parts.Length; i++)
-            {
-                if (i % 2 == 1)
-                {
-                    // Inside quotes: a phrase (or a single word, if that is all it holds).
-                    string phrase = string.Join(" ", MatchTokens(parts[i]));
-                    if (phrase.Length > 0) keywords.Add(phrase);
-                }
-                else
-                {
-                    keywords.AddRange(Regex.Split(parts[i], @"[\s,;]+")
-                        .Select(k => k.Trim().ToLower())
-                        .Where(k => k.Length > 0));
-                }
-            }
-            return keywords.Distinct(StringComparer.Ordinal).ToList();
-        }
-
-        private static bool ContainsPhrase(string[] tokens, string[] phrase)
-        {
-            if (phrase.Length == 0 || phrase.Length > tokens.Length) return false;
-            for (int start = 0; start + phrase.Length <= tokens.Length; start++)
-            {
-                int j = 0;
-                while (j < phrase.Length && string.Equals(tokens[start + j], phrase[j], StringComparison.Ordinal)) j++;
-                if (j == phrase.Length) return true;
-            }
-            return false;
-        }
-
-        private IEnumerable<string> GenerateBigrams(string[] words)
-        {
-            for (int i = 0; i < words.Length - 1; i++)
-            {
-                yield return $"{words[i]}_{words[i + 1]}";
-            }
-        }
+        /// <summary>Parses the shared keyword and exclusion boxes, preserving quoted phrases.</summary>
+        public static List<string> ParseKeywords(string? text) => DescriptionWordMatcher.ParseKeywords(text);
 
         /// <summary>
         /// Groups the elements based on their similarity, represented as vectors,
@@ -299,62 +190,8 @@ namespace FamilyQuant
         /// cannot trip it either.
         /// </summary>
         public KeywordFamilies MatchKeywords(List<string> keywords, KeywordMatch match = KeywordMatch.Any,
-                                             List<string>? excludeWords = null)
-        {
-            var found = new KeywordFamilies();
-
-            // A keyword that stands for several words, quoted or hyphenated as descriptions are split, is
-            // a PHRASE: consecutive words of the full description. A single word is looked up among the
-            // element's words, so a stop word alone still matches nothing.
-            List<string[]> keywordWords = keywords.Select(MatchTokens).Where(w => w.Length > 0).ToList();
-
-            // MatchTokens lower-cases, so an exclude word typed in any case removes the family regardless.
-            var excludeEntries = new List<(string[] Tokens, HashSet<int> Families, HashSet<int> Proteins)>();
-            if (excludeWords != null)
-            {
-                foreach (string w in excludeWords.Where(w => !string.IsNullOrWhiteSpace(w)).Select(w => w.Trim().ToLower()).Distinct())
-                {
-                    string[] tokens = MatchTokens(w);
-                    if (tokens.Length == 0) continue;
-                    var families = new HashSet<int>();
-                    var proteins = new HashSet<int>();
-                    found.ByExcludeEntry[w] = families;
-                    found.ProteinsByExcludeEntry[w] = proteins;
-                    excludeEntries.Add((tokens, families, proteins));
-                }
-            }
-
-            for (int position = 0; position < MyClusterElements.Count; position++)
-            {
-                FastaClusterElement element = MyClusterElements[position];
-
-                // A family with an excluded word ANYWHERE among its members is out, so one member carrying
-                // the exclude word disqualifies the whole family - "none of its description words is in
-                // excludeWords" read at family scope.
-                foreach (var exclude in excludeEntries)
-                {
-                    if (!ContainsPhrase(element.RawTokens, exclude.Tokens)) continue;
-                    exclude.Families.Add(element.FamilyId);
-                    exclude.Proteins.Add(position);
-                }
-
-                bool Has(string[] keyword) => keyword.Length > 1
-                    ? ContainsPhrase(element.RawTokens, keyword)
-                    : Array.IndexOf(element.MatchWords, keyword[0]) >= 0;
-
-                bool matches = match == KeywordMatch.All
-                    ? keywordWords.Count > 0 && keywordWords.All(Has)
-                    : keywordWords.Any(Has);
-
-                if (matches)
-                {
-                    found.Matched.Add(element.FamilyId);
-                    found.MatchedProteins.Add(position);
-                }
-            }
-
-            return found;
-        }
+                                             List<string>? excludeWords = null) =>
+            DescriptionWordMatcher.MatchKeywords(MyClusterElements, keywords, match, excludeWords);
 
         /// <summary>The preview's sentence on the exclude words: what each kept out, and which kept out
         /// nothing, the failure a user cannot otherwise see. Empty when none was typed.</summary>
