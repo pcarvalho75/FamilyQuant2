@@ -30,6 +30,9 @@ adds `system/1366x820` and `system/1024x768` folders for a total of 84 PNGs. Eac
 manifest capture records both the selected and effective theme. Capturing a theme
 does not save a profile preference.
 
+Add `--screen-shell-status` to hide curation's inline status banner through the
+same `UseShellStatusBar` property the shell uses. The manifest records this flag.
+
 `screens.json` lists all 56 PNGs, input paths and SHA-256 hashes, runtime and OS.
 A failed capture or changed input returns a nonzero exit code and does not write
 a successful manifest. Run into a fresh step directory for review provenance.
