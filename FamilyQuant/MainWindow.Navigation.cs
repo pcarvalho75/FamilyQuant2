@@ -13,13 +13,15 @@ public partial class MainWindow
     private void InitializeNavigation()
     {
         NavigationRail.SetModel(NavigationModel);
-        NavigationModel.NavigationRequested += destination =>
+        NavigationModel.NavigationRequested += async destination =>
         {
             switch (destination)
             {
                 case ShellDestination.Start: PresentHome(); break;
                 case ShellDestination.Families: PresentCurationOrOpen(); break;
-                case ShellDestination.Build: PresentBuild(); break;
+                case ShellDestination.Build:
+                    if (await ConfirmCanReplaceAsync()) PresentBuild();
+                    break;
                 case ShellDestination.Quantify: PresentCompute(); break;
                 case ShellDestination.Results: PresentResults(); break;
                 case ShellDestination.DeNovo: PresentDeNovo(); break;
