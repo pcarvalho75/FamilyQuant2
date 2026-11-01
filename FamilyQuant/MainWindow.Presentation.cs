@@ -186,6 +186,11 @@ public partial class MainWindow
 
         public void PresentCompute()
         {
+            if (MainWindow.ComputeDialogOverride == null)
+            {
+                owner.PresentQuantifyScreen();
+                return;
+            }
             if (owner.cgc == null || owner.cgc.fcf == null)
             {
                 MessageBox.Show(

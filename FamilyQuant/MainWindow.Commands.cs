@@ -23,7 +23,7 @@ public partial class MainWindow
             CommandBindings.Add(new CommandBinding(command, (_, e) => { run(); e.Handled = true; },
                 (_, e) => { e.CanExecute = allowed?.Invoke() ?? true; e.Handled = true; }));
         Bind(ApplicationCommands.New, () => MenuRunUSearch_Click(this, new RoutedEventArgs()), () => NavigationModel.CanNavigate(ShellDestination.Build));
-        Bind(ApplicationCommands.Open, () => MenuItemCluster_Click(this, new RoutedEventArgs()), () => !saveInProgress);
+        Bind(ApplicationCommands.Open, () => MenuItemCluster_Click(this, new RoutedEventArgs()), () => !saveInProgress && !IsQuantifyBusy);
         Bind(ApplicationCommands.Save, () => MenuItemSaveProject_Click(this, new RoutedEventArgs()), () => cgc != null && !saveInProgress);
         Bind(ApplicationCommands.SaveAs, () => MenuItemSaveAs_Click(this, new RoutedEventArgs()), () => cgc != null && !saveInProgress);
         Bind(ApplicationCommands.Undo, () => cgc?.ButtonUndo.RaiseEvent(new RoutedEventArgs(Button.ClickEvent)),

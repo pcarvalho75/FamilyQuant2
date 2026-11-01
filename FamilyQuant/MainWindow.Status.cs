@@ -69,15 +69,15 @@ public partial class MainWindow
             RefreshShellMenuState();
             bool families = cgc != null && GridApp.Children.Contains(cgc);
             RefreshNavigationState();
-            NavigationModel.SetCurrent(home != null ? ShellDestination.Start : analytics != null ? ShellDestination.Results
+            NavigationModel.SetCurrent(IsQuantifyVisible ? ShellDestination.Quantify : home != null ? ShellDestination.Start : analytics != null ? ShellDestination.Results
                 : dnc != null ? ShellDestination.DeNovo : families ? ShellDestination.Families
                 : usearch != null ? ShellDestination.Build : ShellDestination.Start);
             AttachStatusSource(usearch != null && GridApp.Children.Contains(usearch) ? usearch : families ? cgc : null);
-            string stage = home != null ? "Start" : analytics != null ? "Results" : dnc != null ? "De novo"
+            string stage = IsQuantifyVisible ? "Quantify" : home != null ? "Start" : analytics != null ? "Results" : dnc != null ? "De novo"
                 : families ? "Families" : usearch != null ? "Build families" : "Start";
             string project = cgc != null ? Path.GetFileName(lastFcfPath) ?? "Open project" : "No project open";
             if (cgc != null && DocumentState.IsModified) project += " *";
-            string activity = SourceStatus("ShellStatusText");
+            string activity = IsQuantifyVisible ? quantify!.ViewModel.Status : SourceStatus("ShellStatusText");
             if (activity.Length == 0 && families && cgc?.FindName("TextBlockStatusLine") is TextBlock legacy) activity = legacy.Text;
             if (activity.StartsWith("showing: ", StringComparison.OrdinalIgnoreCase)) activity = activity[9..];
             string context = CurrentContextHelp() + "\n\n" + ProjectStatusText();
