@@ -79,7 +79,7 @@ public partial class MainWindow
         MenuItemExportFamilyTable.IsEnabled = cgc?.ButtonSaveReport.IsEnabled == true;
         MenuItemHideDecoys.IsEnabled = project;
         MenuItemHideContaminants.IsEnabled = project;
-        MenuItemAnalytics.IsEnabled = project && !saveInProgress && !analyticsInProgress;
+        MenuItemAnalytics.IsEnabled = (project || latestHomologyResult != null) && !saveInProgress && !analyticsInProgress;
         MenuItemHideDecoys.IsChecked = cgc?.CheckBoxExcludeReverse.IsChecked == true;
         MenuItemHideContaminants.IsChecked = cgc?.CheckBoxExcludeContaminants.IsChecked == true;
         UpdateThemeMenu();

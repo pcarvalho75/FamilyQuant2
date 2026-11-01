@@ -130,6 +130,7 @@ public partial class MainWindow
             owner.MenuItemReanotateSEPro.IsEnabled = false;
 
             owner.dnc = new DeNovoControl(owner.SharedDeNovoFilters());
+            owner.dnc.HomologyCompleted += owner.KeepHomologyResult;
 
             // Only a suggestion, and only into an empty box: the de novo screen reads nothing until its
             // own Search button is pressed.
@@ -152,11 +153,14 @@ public partial class MainWindow
             AnalyticsControl control;
             try
             {
-                var (completed, _) = await owner.RefreshSpectrumFamiliesAsync();
-                if (!completed) return;   // the project changed while waiting; the user is elsewhere now
+                if (owner.loadedQuant.Count > 0)
+                {
+                    var (completed, _) = await owner.RefreshSpectrumFamiliesAsync();
+                    if (!completed) return;   // the project changed while waiting
+                }
                 PeptideFamilyAttribution? held = owner.cgc != null && owner.cgc.HasFullXic && ReferenceEquals(owner.cgc.fcf, owner.loadedCuration)
                     ? owner.cgc.CurrentFullXicAttribution() : null;
-                control = new AnalyticsControl(owner.loadedQuant, owner.loadedManifest, owner.loadedCuration, held);
+                control = new AnalyticsControl(owner.loadedQuant, owner.loadedManifest, owner.loadedCuration, held, owner.latestHomologyResult);
             }
             finally
             {

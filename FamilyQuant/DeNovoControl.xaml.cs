@@ -20,7 +20,9 @@ namespace FamilyQuant;
 public partial class DeNovoControl : UserControl
 {
     private bool ready;
+    private DeNovoHomology? publishedHomology;
     public DeNovoViewModel ViewModel { get; }
+    public event Action<DeNovoHomology>? HomologyCompleted;
     public DeNovoControl() : this(new DeNovoFilterViewModel()) { }
     public DeNovoControl(DeNovoFilterViewModel filters)
     {
@@ -30,10 +32,8 @@ public partial class DeNovoControl : UserControl
         InitializeComponent();
         DataContext = ViewModel;
         ScreenBindings.Attach(this, ViewModel);
-        ApplyReviewColumnTooltips(); ApplyXicColumnTooltips(); ApplyHomologyColumnTooltips();
+        ApplyReviewColumnTooltips(); ApplyHomologyColumnTooltips();
         ViewModel.PropertyChanged += (_, _) => RefreshPresentation();
-        TextBoxPartitionPlp.TextChanged += (_, _) => UpdateLayerStates();
-        TextBoxPartitionXic2.TextChanged += (_, _) => UpdateLayerStates();
         SelectSource();
         ready = true;
         UpdateSourceUi();
@@ -46,27 +46,25 @@ public partial class DeNovoControl : UserControl
         ready = false; SelectSource(); ready = wasReady;
         UpdateSourceUi();
         TextBlockDeNovoStatus.Text = ViewModel.Status;
-        foreach (var group in new[] { GroupBoxImportAndFilter, GroupBoxReconcile, GroupBoxExtractXic, GroupBoxHomology, GroupBoxPartition })
+        foreach (var group in new[] { GroupBoxImportAndFilter, GroupBoxReconcile, GroupBoxHomology })
             group.IsEnabled = ViewModel.CanEdit;
-        BorderPartitionChart.Child = ViewModel.PartitionChartRows == null ? null : new ThreeWayChart(ViewModel.PartitionChartRows);
-        ApplyPartitionColumnTooltips(ViewModel.PartitionSample);
         UpdateLayerStates();
+        if (ViewModel.LastHomology is { } homology && !ReferenceEquals(publishedHomology, homology))
+        {
+            publishedHomology = homology;
+            HomologyCompleted?.Invoke(homology);
+        }
+        else if (ViewModel.LastHomology == null) publishedHomology = null;
     }
     private void UpdateLayerStates()
     {
         if (!ready) return;
         TextBlockDeNovoLayer1State.Text = "READY";
         TextBlockDeNovoLayer2State.Text = ViewModel.ReconcileState;
-        TextBlockDeNovoLayer3State.Text = ViewModel.ExtractState;
         TextBlockDeNovoLayer4State.Text = ViewModel.HomologyState;
-        TextBlockDeNovoLayer5State.Text = ViewModel.PartitionState;
         ButtonReconcile.IsEnabled = ViewModel.CanReconcile;
         ButtonExportSummary.IsEnabled = ButtonExportReviewQueue.IsEnabled = ButtonExportOverlapStudy.IsEnabled = LastReconciliation != null;
-        ButtonExtractXic.IsEnabled = ViewModel.CanExtract;
         ButtonSearchHomology.IsEnabled = ViewModel.CanSearch;
-        ButtonExportHomologyCsv.IsEnabled = LastHomology != null;
-        ButtonBuildPartition.IsEnabled = ViewModel.CanPartition;
-        ButtonSavePartitionCsv.IsEnabled = ButtonOpenPartitionWindow.IsEnabled = LastPartition?.IsAvailable == true;
     }
     private void SelectSource()
     {
@@ -84,12 +82,12 @@ public partial class DeNovoControl : UserControl
         UpdateSourceUi();
     }
     private void TextBoxPeaksDirectory_TextChanged(object sender, TextChangedEventArgs e) { if (ready) ViewModel.SourcePathChanged(); }
-    private void TextBoxRawDirectory_TextChanged(object sender, TextChangedEventArgs e) { if (ready) ViewModel.RawDirectoryChanged(); }
+
     private async void ButtonLoadAndFilter_Click(object sender, RoutedEventArgs e) { ViewModel.ImportOverride = ImportOverride; await ViewModel.ImportAsync(); }
     private async void ButtonReconcile_Click(object sender, RoutedEventArgs e) => await ViewModel.ReconcileAsync();
-    private async void ButtonExtractXic_Click(object sender, RoutedEventArgs e) => await ViewModel.ExtractAsync();
+
     private async void ButtonSearchHomology_Click(object sender, RoutedEventArgs e) => await ViewModel.SearchAsync();
-    private async void ButtonBuildPartition_Click(object sender, RoutedEventArgs e) => await ViewModel.PartitionAsync();
+
         private void UpdateSourceUi()
         {
             if (LabelMinimumSourceConfidence == null || TextBlockNativeConfidence == null) return;

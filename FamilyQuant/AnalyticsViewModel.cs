@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace FamilyQuant;
 
-public enum ResultsExportKind { Summary, Peptides, Figures, EvidencePack }
+public enum ResultsExportKind { Summary, Peptides, Figures, EvidencePack, Homology }
 public sealed record ResultsSummaryCard(string Title, string Value, string Detail);
 
 /// <summary>Results derived from the held quantitation, with no RAW extraction or document mutation.</summary>
@@ -21,22 +21,41 @@ public sealed class AnalyticsViewModel : ScreenViewModel
     private ResultsExportKind exportKind;
     public AnalyticsData? Data { get; }
     public FamilyEnvelopeQuantResult? Families { get; }
+    public DeNovoHomology? Homology { get; }
+    public bool HasHomology => Homology != null;
+    public string HomologySummary => Homology == null ? "" :
+        $"Latest homology snapshot: {Homology.MappedToTargets:N0} of {Homology.PeptidesSearched:N0} distinct " +
+        (Homology.PeptidesSearched == 1 ? "peptide" : "peptides") + " reached targets. " +
+        $"Source: {Path.GetFileName(Homology.FcfPath)}. This snapshot is independent of full XIC.";
     public bool HasData => Data != null;
     public string Details { get; } = "";
-    public string EmptyMessage => "No full XIC is stored. Open Quantify, compute the full XIC, and return to Results.";
+    public string EmptyMessage => HasHomology ? "No full XIC is stored. The standalone homology snapshot can be exported here."
+        : "No full XIC is stored. Open Quantify, compute the full XIC, and return to Results.";
     public IReadOnlyList<ResultsSummaryCard> Cards { get; } = Array.Empty<ResultsSummaryCard>();
     public int FamilyTopN { get => topN; set => Set(ref topN, value); }
     public bool FamilyAsPercent { get => percent; set => Set(ref percent, value); }
     public string Status { get => status; private set => Set(ref status, value); }
     public ResultsExportKind ExportKind { get => exportKind; set { Set(ref exportKind, value); Changed(nameof(CanExport)); } }
-    public bool CanExport => HasData && (ExportKind != ResultsExportKind.EvidencePack || manifest != null && curation != null && Families != null);
+    public bool CanExport => ExportKind == ResultsExportKind.Homology ? HasHomology :
+        HasData && (ExportKind != ResultsExportKind.EvidencePack || manifest != null && curation != null && Families != null);
 
     public AnalyticsViewModel(IReadOnlyList<QuantRow>? rows, QuantManifest? manifest,
-        FamilyClusterFile? curation = null, PeptideFamilyAttribution? attribution = null)
+        FamilyClusterFile? curation = null, PeptideFamilyAttribution? attribution = null, DeNovoHomology? homology = null)
     {
         this.manifest = manifest;
         this.curation = curation;
-        if (rows == null || rows.Count == 0) return;
+        Homology = homology;
+        if (rows == null || rows.Count == 0)
+        {
+            if (homology != null)
+            {
+                exportKind = ResultsExportKind.Homology;
+                Cards = new[] { new ResultsSummaryCard("Homology snapshot", homology.Families.Count.ToString("N0", CultureInfo.CurrentCulture) +
+                    (homology.Families.Count == 1 ? " family" : " families"),
+                    HomologySummary) };
+            }
+            return;
+        }
         Data = AnalyticsBuilder.Build(rows, manifest?.PerRunTic ?? new Dictionary<string, double>(StringComparer.OrdinalIgnoreCase));
         if (manifest?.DerivedFractions is { Count: > 0 })
             NativeQuantFractions.ApplyDetectedToFractions(Data.Fractions, Data.Grouped, manifest.DerivedFractions);
@@ -63,15 +82,16 @@ public sealed class AnalyticsViewModel : ScreenViewModel
     public void ShowStatus(string message) => Status = message;
     public void Export(string path)
     {
-        if (!CanExport || Data == null) { Status = "The selected export needs stored results and its required project evidence."; return; }
+        if (!CanExport) { Status = "The selected export needs its stored result and required project evidence."; return; }
         try
         {
             switch (ExportKind)
             {
-                case ResultsExportKind.Summary: File.WriteAllText(path, AnalyticsCsv.BuildSummaryCsv(Data.Fractions, Data.Grouped)); break;
-                case ResultsExportKind.Peptides: File.WriteAllText(path, AnalyticsCsv.BuildPeptideCsv(Data.Peptides)); break;
-                case ResultsExportKind.Figures: AnalyticsFigures.Save(Data, Families, path, FamilyTopN, FamilyAsPercent); break;
-                case ResultsExportKind.EvidencePack: PresentationEvidencePack.Save(Data, manifest!, curation!, Families!, path); break;
+                case ResultsExportKind.Summary: File.WriteAllText(path, AnalyticsCsv.BuildSummaryCsv(Data!.Fractions, Data.Grouped)); break;
+                case ResultsExportKind.Peptides: File.WriteAllText(path, AnalyticsCsv.BuildPeptideCsv(Data!.Peptides)); break;
+                case ResultsExportKind.Figures: AnalyticsFigures.Save(Data!, Families, path, FamilyTopN, FamilyAsPercent); break;
+                case ResultsExportKind.EvidencePack: PresentationEvidencePack.Save(Data!, manifest!, curation!, Families!, path); break;
+                case ResultsExportKind.Homology: HomologyCsv.Write(path, Homology!); break;
             }
             Status = "Written to " + path + ".";
         }

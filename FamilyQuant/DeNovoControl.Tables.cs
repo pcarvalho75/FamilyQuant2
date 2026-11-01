@@ -70,48 +70,7 @@ public partial class DeNovoControl
                 "sequence with a weak PatternLab XCorr. Both are left out of the de novo quantitation.");
         }
 
-        private void ApplyXicColumnTooltips()
-        {
-            ColumnXicRun.HeaderStyle = HeaderTip(
-                "The acquisition run, by file name without extension. Its .raw was found by this " +
-                "name, never by order.");
 
-            ColumnXicRowsIn.HeaderStyle = HeaderTip(
-                "Kept de novo rows of this run sent for extraction: the De novo only and Different " +
-                "precursor context rows. Rows matching PatternLab are left out, so no signal counts twice.");
-
-            ColumnXicUnique.HeaderStyle = HeaderTip(
-                "Rows merged by scan, m/z and charge: one request per precursor, even when a spectrum " +
-                "has several de novo candidates.");
-
-            ColumnXicWithSignal.HeaderStyle = HeaderTip(
-                "Requests whose extraction found a signal. Still counted per MS2 scan: several can " +
-                "be the same peak.");
-
-            ColumnXicDistinctPeaks.HeaderStyle = HeaderTip(
-                "Distinct chromatographic peaks, the ones the M+0 total sums. A peak sampled by " +
-                "several MS2 scans counts once.");
-
-            ColumnXicRedundantAnchors.HeaderStyle = HeaderTip(
-                "Requests that landed in a peak another request had already found, so they add " +
-                "nothing.");
-
-            ColumnXicRedundantArea.HeaderStyle = HeaderTip(
-                "The area those repeated requests would have added a second time. Shown so you can " +
-                "see what was avoided.");
-
-            ColumnXicSharedWindow.HeaderStyle = HeaderTip(
-                "An upper limit on area that might still be counted twice: separate peaks in the same " +
-                "precursor window. Nothing is subtracted for it.");
-
-            ColumnXicTotalM0.HeaderStyle = HeaderTip(
-                "Sum of M+0 areas over this run's distinct peaks: the de novo part of the partition. " +
-                "M+0 only, to match PatternLab's quants.");
-
-            ColumnXicElapsed.HeaderStyle = HeaderTip(
-                "Seconds spent extracting this run, mostly loading the RAW. A run read from the cache " +
-                "is much faster.");
-        }
 
         private void ApplyHomologyColumnTooltips()
         {
@@ -129,45 +88,7 @@ public partial class DeNovoControl
                 "all its members.");
         }
 
-        private void ApplyPartitionColumnTooltips(ThreeWayPartitionRow? sample)
-        {
-            string Provenance(Func<ThreeWayPartitionRow, PartitionValue> pick) =>
-                sample == null
-                    ? " Source: not known until a partition has been built."
-                    : " Source: " + pick(sample).Label;
 
-            ColumnPartitionRun.HeaderStyle = HeaderTip(
-                "The acquisition run, or \"" + ThreeWayPartition.GroupedRunName + "\" for the total " +
-                "line. Every column was matched by this name, never by order.");
-
-            ColumnPartitionTic.HeaderStyle = HeaderTip(
-                "The run's whole total ion current, nothing trimmed at either end." +
-                Provenance(r => r.Tic));
-
-            ColumnPartitionPatternLab.HeaderStyle = HeaderTip(
-                "The identified part: this run's PatternLab quants, M+0 only." +
-                Provenance(r => r.PatternLab));
-
-            ColumnPartitionDeNovo.HeaderStyle = HeaderTip(
-                "The de novo part: M+0 summed over this run's distinct peaks, each peak counted once." +
-                Provenance(r => r.DeNovo));
-
-            ColumnPartitionRemainder.HeaderStyle = HeaderTip(
-                "The total minus the other two: signal nobody identified. It can be negative, and it " +
-                "is never set to zero." +
-                Provenance(r => r.Remainder));
-
-            ColumnPartitionSharePl.HeaderStyle = HeaderTip(
-                "The PatternLab part as a percentage of the run's ion current, to four decimals.");
-
-            ColumnPartitionShareDn.HeaderStyle = HeaderTip(
-                "The de novo part as a percentage of the run's ion current. Comparable with PatternLab " +
-                "because both use M+0 and count each peak once.");
-
-            ColumnPartitionShareRest.HeaderStyle = HeaderTip(
-                "What is left, as a percentage. The three shares add up to 100% by design, and this " +
-                "is checked.");
-        }
 
         private static void RightAlign(params DataGridTextColumn[] columns)
         {
