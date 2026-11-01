@@ -18,6 +18,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\FamilyQuant.Core\FamilyQuant.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="images\FamilyQuant.png" />
   </ItemGroup>
 
@@ -74,21 +78,6 @@
     <Resource Include="images\FamilyQuant.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Update="MyResources.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>MyResources.resx</DependentUpon>
-    </Compile>
-  </ItemGroup>
-
-  <ItemGroup>
-    <EmbeddedResource Update="MyResources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>MyResources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
   </ItemGroup>
 
 </Project>
