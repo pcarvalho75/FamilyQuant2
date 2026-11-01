@@ -50,6 +50,18 @@ namespace FamilyQuant.Tests
             }
             if (args.Length > 0 && args[0] == "--feature-ledger-check") return FeatureLedgerTests();
             if (args.Length > 0 && args[0] == "--feature-ledger-release-check") return FeatureLedgerTests(release: true);
+            if (args.Length > 0 && args[0] == "--shell-checks")
+            {
+                string shellWork = Path.Combine(Path.GetTempPath(), "FamilyQuant.Shell.Tests");
+                Directory.CreateDirectory(shellWork);
+                EnsureApplication();
+                StandardMenuTests(shellWork);
+                OpenProjectNavigationTests(shellWork);
+                AppVersionTests();
+                Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
+                return failed == 0 ? 0 : 1;
+            }
+            if (args.Length == 2 && args[0] == "--shell-menu-screens") return ShellMenuScreens(args[1]);
 
             // PowerShell 5.1 silently DROPS empty "" arguments to native executables, which shifted
             // the data directories into the wrong positions and turned every real-data section into a
@@ -543,6 +555,9 @@ namespace FamilyQuant.Tests
 
             Section("Feature ledger - frozen source inventory and explicit preservation checks");
             FeatureLedgerTests();
+
+            Section("Standard menu - shortcuts, save paths, curation routing and recent projects");
+            StandardMenuTests(workDir);
 
             Console.WriteLine();
             Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");

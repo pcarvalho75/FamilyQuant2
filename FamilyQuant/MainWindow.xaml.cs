@@ -72,6 +72,7 @@ namespace FamilyQuant
         public MainWindow()
         {
             InitializeComponent();
+            InitializeShellCommands();
 
             this.Title += " " + AppVersion();
 
@@ -188,6 +189,7 @@ namespace FamilyQuant
         /// </summary>
         private void UpdateGuide()
         {
+            RefreshShellMenuState();
             // The home screen is the hub, not a step of the sequence. It names the project so the through
             // line is stated even here, where none is open.
             if (home != null)
@@ -282,16 +284,12 @@ namespace FamilyQuant
 
         private void MenuItemCluster_Click(object sender, RoutedEventArgs e)
         {
-            OpenFileDialog ofd = new OpenFileDialog
-            {
-                Filter = "FamilyQuant project or Family Cluster File (*.fqproj;*.fcf)|*.fqproj;*.fcf|" +
-                         "FamilyQuant project (*.fqproj)|*.fqproj|" +
-                         "FamilyClusterFile (*.fcf)|*.fcf",
-                Title = "Choose the project or Family Cluster File to work on"
-            };
+            string? path = ChooseOpenProjectPath();
+            if (path != null) OpenProjectPath(path);
+        }
 
-            if (ofd.ShowDialog() != true) return;
-
+        public bool OpenProjectPath(string path)
+        {
             try
             {
                 // Read the container or the plain file BEFORE touching the layout, so a corrupt project
@@ -301,16 +299,16 @@ namespace FamilyQuant
                 List<QuantRow> quant;
                 QuantManifest? manifest;
 
-                if (ProjectStore.IsProjectPath(ofd.FileName))
+                if (ProjectStore.IsProjectPath(path))
                 {
-                    var (fcf, rows, mf) = ProjectStore.ReadFqproj(ofd.FileName);
+                    var (fcf, rows, mf) = ProjectStore.ReadFqproj(path);
                     loaded = new ClusterGenerationControl(fcf) { Name = "MyClusterGenerationControl" };
                     quant = rows;
                     manifest = mf;
                 }
                 else
                 {
-                    loaded = new ClusterGenerationControl(ofd.FileName) { Name = "MyClusterGenerationControl" };
+                    loaded = new ClusterGenerationControl(path) { Name = "MyClusterGenerationControl" };
                     quant = new List<QuantRow>();
                     manifest = null;
                 }
@@ -321,7 +319,7 @@ namespace FamilyQuant
                 dnc = null;
                 analytics = null;
                 home = null;
-                lastFcfPath = ofd.FileName;
+                lastFcfPath = Path.GetFullPath(path);
                 loadedQuant = quant;
                 loadedManifest = manifest;
                 loadedCuration = loaded.fcf;
@@ -339,16 +337,19 @@ namespace FamilyQuant
                 lastSpectrumComparisonCsvPath = null;
 
                 UpdateGuide();
+                RememberProject(path);
+                return true;
             }
             catch (Exception ex)
             {
-                MessageBox.Show(
+                ReportShellMessage(
                     "The project could not be opened, and what was on screen has been left alone.\n\n" +
                     "Reason given by the program: " + ex.Message + "\n\n" +
                     "Next step: check that this really is a .fqproj or a .fcf written by FamilyQuant and " +
                     "that it is not open in another program. If it was interrupted while being saved it " +
                     "will have to be generated again from the database with \"Run USearch\".",
-                    "Could not open the file", MessageBoxButton.OK, MessageBoxImage.Error);
+                    "Could not open the file", MessageBoxImage.Error);
+                return false;
             }
         }
 
@@ -509,6 +510,9 @@ namespace FamilyQuant
         /// and whose quant is empty until Compute / update full XIC fills it.
         /// </summary>
         private async void MenuItemSaveProject_Click(object sender, RoutedEventArgs e)
+            => await SaveProjectAsync(saveAs: false);
+
+        private async Task SaveProjectAsync(bool saveAs)
         {
             if (saveInProgress) return;   // a Save already waiting; it will report when it finishes
 
@@ -522,15 +526,8 @@ namespace FamilyQuant
                 return;
             }
 
-            SaveFileDialog sfd = new SaveFileDialog
-            {
-                Filter = "FamilyQuant project (*.fqproj)|*.fqproj",
-                Title = "Save the project as a FamilyQuant project",
-                DefaultExt = ".fqproj",
-                AddExtension = true,
-            };
-
-            if (sfd.ShowDialog() != true) return;
+            string? savePath = ChooseSaveProjectPath(saveAs);
+            if (savePath == null) return;
 
             // ONE project bundle, captured now and written as captured: the refresh below can wait for a
             // background attach, and a project opened or recomputed meanwhile must never be mixed with
@@ -572,27 +569,29 @@ namespace FamilyQuant
                     return;
                 }
 
-                ProjectStore.WriteFqproj(sfd.FileName, curation, quant, manifest);
+                ProjectStore.WriteFqproj(savePath, curation, quant, manifest);
                 loadedManifest = manifest;
+                lastFcfPath = Path.GetFullPath(savePath);
+                RememberProject(savePath);
 
-                MessageBox.Show(
-                    "The project was saved to\n" + sfd.FileName + "\n\n" +
+                ReportShellMessage(
+                    "The project was saved to\n" + savePath + "\n\n" +
                     "The container holds the grouping, your User IDs and annotations, and " +
                     quant.Count.ToString("N0", CultureInfo.CurrentCulture) +
                     " stored quant row(s). Reopening it restores both.\n\n" +
                     (familyNote != null ? familyNote + "\n\n" : string.Empty) +
                     "Next step: nothing. Carry on working, or open this file later to return to exactly " +
                     "this project.",
-                    "Saved", MessageBoxButton.OK, MessageBoxImage.Information);
+                    "Saved", MessageBoxImage.Information);
             }
             catch (Exception ex)
             {
-                MessageBox.Show(
+                ReportShellMessage(
                     "The project could not be written, so nothing was saved.\n\n" +
                     "Reason given by the program: " + ex.Message + "\n\n" +
                     "Next step: check that the file is not open in another program and that you can write " +
                     "to that folder, then save again.",
-                    "Could not save", MessageBoxButton.OK, MessageBoxImage.Error);
+                    "Could not save", MessageBoxImage.Error);
             }
             finally
             {
@@ -915,7 +914,7 @@ namespace FamilyQuant
                 "   Export to CSV writes exactly the rows on screen, with the shares as fractions\n" +
                 "   between 0 and 1 and a dot for the decimal separator, so any program can read them.\n" +
                 "   File · Save Family Cluster File keeps the grouping for next time.\n" +
-                "   File · Reanotate Sepro stamps your User ID family numbers into a copy of a SEPro\n" +
+                "   Analysis > Reannotate SEPro stamps your User ID family numbers into a copy of a SEPro\n" +
                 "   result package, leaving the original untouched.\n\n" +
 
                 // The de novo screen is a separate workflow and is written as one: it is numbered
