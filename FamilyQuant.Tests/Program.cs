@@ -123,6 +123,13 @@ namespace FamilyQuant.Tests
                 return failed == 0 ? 0 : 1;
             }
 
+            if (args.Contains(MotifCheckRun.Argument))
+            {
+                MotifCheckRun.Run(args, Check);
+                Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
+                return failed == 0 ? 0 : 1;
+            }
+
             if (args.Contains(CoherenceCheckRun.Argument))
             {
                 CoherenceCheckRun.Run(args, Check);
@@ -596,6 +603,9 @@ namespace FamilyQuant.Tests
 
             Section("Coherence check - what the reviewed members of a family ever show");
             CoherenceCheckTests();
+
+            Section("Motif check - the user's patterns counted per family on complete entries");
+            MotifCheckTests(workDir);
 
             Section("Batch edit - one User ID and annotation for many selected rows");
             BatchCurationTests();
