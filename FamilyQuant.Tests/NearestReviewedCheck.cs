@@ -34,8 +34,8 @@ namespace FamilyQuant.Tests
                 string input = At(1, "D:/FamilyQuant-data/out-opus/e4-ana-panel.fcf");
                 string output = At(2, "D:/FamilyQuant-data/out-opus/e4-ana-panel-neighbours.fcf");
                 FamilyClusterFile file = FamilyClusterFile.Load(input);
-                Func<ProteinEvidence, bool> scope = e => e.Keywords.Contains(ScopeKeyword, StringComparer.Ordinal)
-                    || e.TissueSpecificity.Any(t => t.Contains(ScopeTissue, StringComparison.OrdinalIgnoreCase));
+                // The classifier's own matcher, so the stored search answers for exactly its scope.
+                Func<ProteinEvidence, bool> scope = e => EvidenceClassifier.IsInScope(e, new[] { ScopeKeyword, ScopeTissue });
                 var watch = System.Diagnostics.Stopwatch.StartNew();
                 NeighbourSearch search = NearestReviewed.SearchAndStore(file, scope);
                 double seconds = watch.Elapsed.TotalSeconds;

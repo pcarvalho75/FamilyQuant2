@@ -17,6 +17,34 @@ namespace FamilyQuant.Tests
         private const string ScopeTissue = "venom gland";
         private const double LeaveOneOutIdentity = 60.0;
 
+        internal const string RefreshArgument = "--refresh-panel";
+
+        /// <summary>Fetches the panel again into a file that already holds a neighbour search, and says whether
+        /// that search is still current for the new references (then it need not run again).</summary>
+        internal static void Refresh(string[] args, Action<string, bool, string?> check)
+        {
+            try
+            {
+                int flag = Array.IndexOf(args, RefreshArgument);
+                string input = args.Length > flag + 1 ? args[flag + 1] : "D:/FamilyQuant-data/out-opus/e4-ana-panel-neighbours.fcf";
+                string output = args.Length > flag + 2 ? args[flag + 2] : "D:/FamilyQuant-data/out-opus/e16-ana.fcf";
+                Func<ProteinEvidence, bool> scope = e =>
+                    e.Keywords.Contains(ScopeKeyword, StringComparer.Ordinal)
+                    || e.TissueSpecificity.Any(t => t.Contains(ScopeTissue, StringComparison.OrdinalIgnoreCase));
+                FamilyClusterFile file = FamilyClusterFile.Load(input);
+                ReferencePanel panel = ReferencePanelFetcher.FetchAndStoreAsync(file, scope).GetAwaiter().GetResult();
+                bool current = NearestReviewed.IsCurrent(file.EvidenceSource?.NearestReviewed, NearestReviewed.Targets(file),
+                    NearestReviewed.References(file, scope));
+                file.Save(output);
+                check("the panel was fetched again, with tissue, and saved", panel.Entries.Count > 0
+                    && panel.Entries.Count(e => e.Evidence.TissueSpecificity.Count > 0) > 0,
+                    panel.Entries.Count + " entries, " + panel.Entries.Count(e => e.Evidence.TissueSpecificity.Count > 0)
+                    + " with tissue, release " + panel.Release);
+                check("the stored neighbour search is still current for the new panel", current, output);
+            }
+            catch (Exception ex) { check("panel refresh completed", false, ex.GetBaseException().ToString()); }
+        }
+
         internal static void Run(string[] args, Action<string, bool, string?> check)
         {
             try
