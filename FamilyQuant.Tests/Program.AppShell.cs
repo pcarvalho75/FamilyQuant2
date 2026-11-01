@@ -29,6 +29,7 @@ namespace FamilyQuant.Tests
         /// </summary>
         private static void AppVersionTests()
         {
+            DeploymentIdentityTests();
             Check("2.0 has its own executable assembly identity",
                 typeof(AppVersionInfo).Assembly.GetName().Name == "FamilyQuant2");
             Check("the resource namespace stays compatible after the project rename",
@@ -88,6 +89,40 @@ namespace FamilyQuant.Tests
             {
                 Environment.SetEnvironmentVariable(AppVersionInfo.ClickOnceCurrentVersionVariable, saved);
             }
+        }
+
+        private static void DeploymentIdentityTests()
+        {
+            Check("the 2.0 assembly starts at version 2.0.0.0",
+                typeof(AppVersionInfo).Assembly.GetName().Version == new Version(2, 0, 0, 0));
+
+            DirectoryInfo? root = new DirectoryInfo(AppContext.BaseDirectory);
+            while (root != null && !File.Exists(Path.Combine(root.FullName, "FamilyQuant2.sln")))
+                root = root.Parent;
+            Check("the deployment contract can find the checkout", root != null);
+            if (root == null) return;
+
+            var project = System.Xml.Linq.XDocument.Load(
+                Path.Combine(root.FullName, "FamilyQuant", "FamilyQuant.App.csproj"));
+            var profile = System.Xml.Linq.XDocument.Load(
+                Path.Combine(root.FullName, "FamilyQuant", "Properties", "PublishProfiles", "ClickOnceProfile.pubxml"));
+            string? Property(System.Xml.Linq.XDocument document, string name) =>
+                document.Root!.Elements("PropertyGroup").SelectMany(g => g.Elements(name))
+                    .Select(e => e.Value).SingleOrDefault();
+
+            Check("assembly and file versions match the fixed 2.0 deployment version",
+                new[] { "Version", "AssemblyVersion", "FileVersion" }
+                    .All(name => Property(project, name) == "2.0.0.0") &&
+                Property(profile, "ApplicationVersion") == "2.0.0.0" &&
+                Property(profile, "ApplicationRevision") == "0");
+            const string install = "http://patternlabforproteomics.org/familyquant2/";
+            Check("2.0 installs and updates from its separate address",
+                Property(profile, "InstallUrl") == install && Property(profile, "UpdateUrl") == install);
+            Check("the installed product has its own Start menu identity",
+                Property(profile, "ProductName") == "FamilyQuant 2.0");
+            Check("automatic foreground updates stay enabled",
+                string.Equals(Property(profile, "UpdateEnabled"), "true", StringComparison.OrdinalIgnoreCase) &&
+                Property(profile, "UpdateMode") == "Foreground");
         }
 
         /// <summary>
