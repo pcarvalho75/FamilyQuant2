@@ -1,0 +1,44 @@
+<UserControl x:Class="FamilyQuant.ShellNavigationRail"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:FamilyQuant">
+        <UserControl.Resources>
+            <Style x:Key="NavigationButton" TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
+                <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                <Setter Property="Background" Value="{DynamicResource SurfaceBrush}"/>
+                <Setter Property="BorderThickness" Value="0"/>
+                <Setter Property="Padding" Value="10,8"/>
+                <Setter Property="Margin" Value="0,0,0,4"/>
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding IsSelected}" Value="True">
+                        <Setter Property="Background" Value="{DynamicResource SelectionBrush}"/>
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
+        </UserControl.Resources>
+            <Border Background="{DynamicResource SurfaceBrush}" Padding="10,16">
+                <DockPanel LastChildFill="True">
+                    <Button DockPanel.Dock="Top" Content="Start" Command="{x:Static local:MainWindow.NavigateShellCommand}" CommandParameter="{x:Static local:ShellDestination.Start}" CommandTarget="{Binding RelativeSource={RelativeSource AncestorType=Window}}" HorizontalContentAlignment="Left" Margin="0,0,0,18"
+                            ToolTip="Returns to the Start page while keeping your project open. Keyboard shortcut: Alt+0."/>
+                    <Button DockPanel.Dock="Bottom" Content="Build from database" Margin="0,18,0,0"
+                            Command="{x:Static local:MainWindow.NavigateShellCommand}" CommandParameter="{x:Static local:ShellDestination.Build}"
+                            CommandTarget="{Binding RelativeSource={RelativeSource AncestorType=Window}}"
+                            ToolTip="Builds families from a different database using the existing flow. Save your project before starting; Ctrl+N does the same."/>
+                    <ItemsControl x:Name="NavigationRailItems">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Button Style="{StaticResource NavigationButton}" IsEnabled="{Binding IsEnabled}" ToolTip="{Binding ToolTip}"
+                                        Command="{x:Static local:MainWindow.NavigateShellCommand}" CommandParameter="{Binding Destination}"
+                                        CommandTarget="{Binding RelativeSource={RelativeSource AncestorType=Window}}">
+                                    <StackPanel>
+                                        <TextBlock Text="{Binding Label}" Foreground="{DynamicResource TextBrush}"/>
+                                        <TextBlock Text="{Binding StateText}" Foreground="{DynamicResource MutedBrush}" FontSize="{DynamicResource CaptionSize}" Margin="0,4,0,0" TextWrapping="Wrap"/>
+                                    </StackPanel>
+                                </Button>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </DockPanel>
+            </Border>
+</UserControl>

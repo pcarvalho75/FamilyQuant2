@@ -68,6 +68,10 @@ public partial class MainWindow
         {
             RefreshShellMenuState();
             bool families = cgc != null && GridApp.Children.Contains(cgc);
+            RefreshNavigationState();
+            NavigationModel.SetCurrent(home != null ? ShellDestination.Start : analytics != null ? ShellDestination.Results
+                : dnc != null ? ShellDestination.DeNovo : families ? ShellDestination.Families
+                : usearch != null ? ShellDestination.Build : ShellDestination.Start);
             AttachStatusSource(usearch != null && GridApp.Children.Contains(usearch) ? usearch : families ? cgc : null);
             string stage = home != null ? "Start" : analytics != null ? "Results" : dnc != null ? "De novo"
                 : families ? "Families" : usearch != null ? "Build families" : "Start";
