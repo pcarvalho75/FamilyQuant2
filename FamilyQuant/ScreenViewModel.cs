@@ -17,6 +17,14 @@ public abstract class ScreenViewModel : INotifyPropertyChanged
         Changed(name);
         return true;
     }
+    protected void ObserveChild(INotifyPropertyChanged child, string name)
+    {
+        var weak = new WeakReference<ScreenViewModel>(this);
+        PropertyChangedEventHandler? handler = null;
+        handler = (_, _) => { if (weak.TryGetTarget(out var model)) model.ChildChanged(name); else child.PropertyChanged -= handler; };
+        child.PropertyChanged += handler;
+    }
+    protected virtual void ChildChanged(string name) => Changed(name);
 }
 
 public sealed class ScreenCommand(Action execute, Func<bool>? enabled = null) : ICommand
@@ -25,4 +33,9 @@ public sealed class ScreenCommand(Action execute, Func<bool>? enabled = null) : 
     public bool CanExecute(object? parameter) => enabled?.Invoke() ?? true;
     public void Execute(object? parameter) { if (CanExecute(parameter)) execute(); }
     public void Refresh() => CanExecuteChanged?.Invoke(this, EventArgs.Empty);
+}
+
+public sealed class ScreenProgress(Action<string> report) : IProgress<string>
+{
+    public void Report(string message) => report(message);
 }

@@ -40,6 +40,7 @@ Finished steps, moved here from docs/ROADMAP.md. The board shows them as green.
 | E14 | Science gate: the whole rule against the frozen Python classes, as a checker only. Every disagreement listed and judged on biology and literature. The rule is never tuned to copy Python; a real error found in Python is recorded as one | VH | 5 | E4, E6, E7, E9, C4 | A1, E15, E16 | Every difference has a written verdict approved by GR; the 256 reviewed entries are carried by E16 | EV | OP | 0% | 0% | T+17 |
 | E11 | Apply: new numbers past every number in use, annotations, locks, decoys and unassigned proteins untouched, one undo step. Writes a recipe into the project (scope, thresholds, ticked families, names, splits, single-protein overrides, release, program version) | H | 4 | E5, E6, F5 | E12, E13, A1, C4 | Applying the recipe twice gives byte-identical assignments; undo restores everything; recipe survives save and reopen | EV | not started | 0% | 0% | T+4 |
 | E15 | Method written up: Help page, `SCIENTIFIC_METHOD.md`, what is new compared with word and keyword grouping | L | 2 | E14 | R1 | Help opens; every number in it comes from the validation report | EV | OP | 0% | 0% | T+4 |
+| E12 | File check after every save: reopen the saved file and compare sequences, decoys, unassigned proteins, locks, source hash. Result shown on screen. Replaces the checks in `make_draft_fcf.cs` | M | 2 | E11 | A1, S5 | A corrupted fixture is caught; a good file reports passed | EV | not started | 0% | 0% | T+3 |
 
 ### W2 Ana's result, through the software
 
@@ -77,6 +78,7 @@ Finished steps, moved here from docs/ROADMAP.md. The board shows them as green.
 | C8 | Quantify screen instead of the Compute dialog; one run summary | M | 3 | S2 | C10, V3, C13 | Same inputs, same outputs; golden equal; run summary kept | EV | RS | 0% | 0% | T+3 |
 | C9 | Results screen: Analytics paragraph becomes short summary cards with details on demand; one primary export | M | 4 | S2 | V6, V3, X9, C13 | Every fact in the paragraph still reachable; golden equal | EV | RS | 0% | 0% | T+4 |
 | C6 | Build families screen: one flow, one explanation line, button labels that say what they do ("Input a FASTA file" and "Run USearch" go); Remove Redundancy kept | M | 3 | S2, X3 | C7, V3 | All ledger rows kept; renders pass | AS | SH | 0% | 0% | T+6 |
+| C10 | De novo uses the filters Compute uses, so the screen can no longer disagree with the run. `DeNovoControl` (2,329 lines) replaced by a view model and a thin view | H | 5 | C8 | C11, V3 | One source of filters; test proves it; ledger rows checked | EV | RS | 0% | 0% | T+5 |
 
 ### W6 Core rewrite: copy what is good, rewrite what is better
 

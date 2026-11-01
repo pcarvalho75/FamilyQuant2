@@ -135,6 +135,7 @@ namespace FamilyQuant.Tests
             if (args.Length == 2 && args[0] == "--quantify-screens") return QuantifyScreens(args[1]);
             if (args.Length is 2 or 3 && args[0] == "--results-screens") return ResultsScreens(args[1], args.Length == 3 ? args[2] : null);
             if (args.Length == 2 && args[0] == "--shell-window-screens") return ShellWindowPreferenceScreens(args[1]);
+            if (args.Length == 2 && args[0] == "--denovo-screens") return DeNovoScreens(args[1]);
             if (args.Length == 2 && args[0] == "--shell-window-screens") return ShellWindowPreferenceScreens(args[1]);
             if (args.Length == 2 && args[0] == "--build-family-screens") return BuildFamiliesScreens(args[1]);
             if (args.Length == 2 && args[0] == "--quantify-screens") return QuantifyScreens(args[1]);
@@ -523,6 +524,7 @@ namespace FamilyQuant.Tests
             WordClusterTests();
             QuantifyViewModelTests(workDir);
             ResultsViewModelTests();
+            DeNovoViewModelTests(workDir);
 
             Section("Database parsing and the decoy tag");
             DatabaseTests(workDir);
