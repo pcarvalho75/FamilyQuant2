@@ -156,7 +156,7 @@ namespace FamilyQuant
 
             noDomains = new TextBlock
             {
-                Text = "No domains in this file yet: press Fetch Domains in the main window.",
+                Text = "No domains in this file yet: press Fetch evidence in the main window.",
                 Foreground = Muted,
                 VerticalAlignment = VerticalAlignment.Center,
                 Margin = new Thickness(14, 0, 0, 0),

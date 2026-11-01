@@ -1515,7 +1515,7 @@ namespace FamilyQuant
 
             ColumnDomains.HeaderStyle = HeaderTip(
                 "The protein's Pfam domains, from UniProt: what it contains, whatever it is called. Empty until " +
-                "Fetch Domains is pressed, and for a protein too short for Pfam. The Search box finds them.");
+                "Fetch evidence is pressed, and for a protein too short for Pfam. The Search box finds them.");
 
             ColumnMass.HeaderStyle = HeaderTip(
                 "The sum of the protein's residue masses in daltons, without the terminal water. Add " +
@@ -1676,7 +1676,7 @@ namespace FamilyQuant
             // the refresh that follows.
             DataGridResultGrid.CommitEdit(DataGridEditingUnit.Row, true);
 
-            string title = "Fetch domains";
+            string title = "Fetch evidence";
             string message;
             MessageBoxImage icon = MessageBoxImage.Information;
             bool fetched = false;
@@ -1708,7 +1708,7 @@ namespace FamilyQuant
                 title = "No domains fetched";
                 message = "No domains were fetched and the file is as it was: UniProt could not be reached or " +
                           "gave an answer the program could not read.\n\nReason given: " + ex.Message + "\n\n" +
-                          "Next step: check the internet connection and press Fetch Domains again.";
+                          "Next step: check the internet connection and press Fetch evidence again.";
             }
             finally
             {

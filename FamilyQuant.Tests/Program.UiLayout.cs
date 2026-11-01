@@ -47,6 +47,19 @@ namespace FamilyQuant.Tests
                 UiField<Button>(control, "ButtonAlignSelected")!.Content as string == "Align selected"
                 && UiField<Button>(control, "ButtonWordCluster")!.Content as string == "Recluster by words"
                 && UiField<Button>(control, "ButtonFetchDomains")!.Content as string == "Fetch evidence");
+            var preview = new SuperClusterPreviewWindow(new SuperClusterPreview(file.MyExtendedFastaItems,
+                null, "example", "", KeywordMatch.Any, null, null));
+            Check("preview instructions name the visible fetch command",
+                UiField<TextBlock>(preview, "noDomains")!.Text.Contains("Fetch evidence", StringComparison.Ordinal));
+            string help = Flatten(HelpContent.Build(null, NormalizationMode.TotalChromatogram, SharedPeptidePolicy.FamilyUnique));
+            Check("Help names the visible fetch command and retains the Pfam explanation",
+                help.Contains("Fetch evidence asks UniProt", StringComparison.Ordinal)
+                && help.Contains("Pfam domains", StringComparison.Ordinal));
+            string fetchSource = File.ReadAllText(Path.Combine(GoldenNumbers.FindRepository(), "FamilyQuant", "ClusterGenerationControl.xaml.cs"));
+            Check("fetch retry and dialog title name the visible fetch command",
+                fetchSource.Contains("press Fetch evidence again", StringComparison.Ordinal)
+                && fetchSource.Contains("string title = \"Fetch evidence\"", StringComparison.Ordinal)
+                && !fetchSource.Contains("Fetch Domains", StringComparison.Ordinal));
             control.Measure(new Size(1366, 820)); control.Arrange(new Rect(0, 0, 1366, 820));
             var primaryStyle = (Style)Application.Current.FindResource("PrimaryButton");
             var groups = WalkTree(control).OfType<GroupBox>().ToList();
