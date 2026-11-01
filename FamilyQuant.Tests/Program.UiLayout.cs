@@ -398,7 +398,7 @@ namespace FamilyQuant.Tests
             }
             CheckTooltipCoverage("ComputeXicWindow", computeWindow);
 
-            ComboBox? deNovoMode = UiField<ComboBox>(computeWindow, "ComboBoxDeNovoSource");
+            ComboBox? deNovoMode = UiField<ComboBox>(UiField<DeNovoFilterControl>(computeWindow.Screen, "FilterControl")!, "ComboBoxDeNovoSource");
             string[] deNovoModeTags = deNovoMode?.Items.Cast<ComboBoxItem>()
                 .Select(item => item.Tag as string ?? string.Empty).ToArray()
                 ?? Array.Empty<string>();
@@ -440,15 +440,11 @@ namespace FamilyQuant.Tests
             var restoredOnlyDeep = new ComputeXicWindow("test", onlyDeepManifest);
             var restoredAllDeep = new ComputeXicWindow("test", allDeepManifest);
             string RestoredTag(ComputeXicWindow window) =>
-                (UiField<ComboBox>(window, "ComboBoxDeNovoSource")?.SelectedItem as ComboBoxItem)
+                (UiField<ComboBox>(UiField<DeNovoFilterControl>(window.Screen, "FilterControl")!, "ComboBoxDeNovoSource")?.SelectedItem as ComboBoxItem)
                     ?.Tag as string ?? string.Empty;
             IReadOnlyList<DeNovoSourceSelection> RestoredSelections(ComputeXicWindow window)
             {
-                MethodInfo? method = typeof(ComputeXicWindow).GetMethod("TryBuildDeNovoSelections",
-                    BindingFlags.Instance | BindingFlags.NonPublic);
-                object?[] arguments = { null };
-                bool built = method != null && (bool)(method.Invoke(window, arguments) ?? false);
-                return built && arguments[0] is IReadOnlyList<DeNovoSourceSelection> selections
+                return window.ViewModel.Filters.TryBuild(out _, out var selections, out _)
                     ? selections : Array.Empty<DeNovoSourceSelection>();
             }
             IReadOnlyList<DeNovoSourceSelection> onlyDeepSelections =

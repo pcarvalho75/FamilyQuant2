@@ -83,6 +83,7 @@ namespace FamilyQuant.Tests
             }
             if (args.Length == 2 && args[0] == "--shell-menu-screens") return ShellMenuScreens(args[1]);
             if (args.Length == 2 && args[0] == "--start-page-screens") return HomeStartScreens(args[1]);
+            if (args.Length == 2 && args[0] == "--quantify-screens") return QuantifyScreens(args[1]);
 
             // PowerShell 5.1 silently DROPS empty "" arguments to native executables, which shifted
             // the data directories into the wrong positions and turned every real-data section into a
@@ -405,6 +406,7 @@ namespace FamilyQuant.Tests
 
             Section("Word-based reclustering invariants");
             WordClusterTests();
+            QuantifyViewModelTests(workDir);
 
             Section("Database parsing and the decoy tag");
             DatabaseTests(workDir);
