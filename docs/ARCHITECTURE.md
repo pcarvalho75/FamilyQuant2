@@ -94,6 +94,17 @@ The builder has not run the full real-data/golden gate or installed either app.
 
 ## Views and view models
 
+X2 separates the 702-line family file into a 198-line document, a 343-line
+per-document PatternLab attribution service and a 206-line scoring/search service.
+Public document entry points remain compatible. Calculation bodies, traversal and
+I/O are preserved; only the unused normalized-cache slot is removed. Legacy XIC
+still deserializes and is omitted from new writes through .NET 10's serialization
+condition. Current XICUser, identifiers, sequence and curation migration persist.
+Verification: focused file/scoring/denominator fixtures 64/64; quick suite
+1802 passed, zero failed, 18 skipped. Two stored-project golden exports each pass
+all four byte comparisons to frozen 1.5.0.6, and their four files match each other.
+The 18th skip is a shell curation-status integration seam awaiting its LK contract.
+
 Use ordinary `INotifyPropertyChanged` view models and small command classes in
 App; do not add an MVVM framework. A view model exposes the selected document,
 parameters, current selection, enabled reasons, status and command state. It
@@ -165,11 +176,13 @@ it does not mean that later work has been completed or reviewed.
 
 <!-- SOURCE-INVENTORY -->
 
-Inventory refreshed after E1 and F6: 163 files; 70 C# files and one resource moved to Core.
+Inventory refreshed after the shell merges and X2: 174 files and unique rows, zero gaps.
 
 | Source path at planning | Destination | Copy/rewrite plan |
 |---|---|---|
+| `FamilyQuant.Core/FamilyClusterScoring.cs` | `FamilyQuant.Core/FamilyClusterScoring.cs` | X2: target/decoy score and identity-search implementation extracted unchanged |
 | `FamilyQuant.Core/FamilyQuant.Core.csproj` | `FamilyQuant.Core/FamilyQuant.Core.csproj` | New F6 library project; no WPF, existing package pins and explicit vendor references |
+| `FamilyQuant.Core/PatternLabAttribution.cs` | `FamilyQuant.Core/PatternLabAttribution.cs` | X2: per-document PLP caches and attribution implementation extracted unchanged |
 | `FamilyQuant.Tests/AttributionRuleStudy.cs` | `FamilyQuant.Tests/AttributionRuleStudy.cs` | Keep test coverage; update only API/path integration when its owning step moves code |
 | `FamilyQuant.Tests/ChargeAudit.cs` | `FamilyQuant.Tests/ChargeAudit.cs` | Keep test coverage; update only API/path integration when its owning step moves code |
 | `FamilyQuant.Tests/DeNovoXicTests.cs` | `FamilyQuant.Tests/DeNovoXicTests.cs` | Keep test coverage; update only API/path integration when its owning step moves code |
@@ -196,6 +209,7 @@ Inventory refreshed after E1 and F6: 163 files; 70 C# files and one resource mov
 | `FamilyQuant.Tests/Program.FullXic.cs` | `FamilyQuant.Tests/Program.FullXic.cs` | Keep test coverage; update only API/path integration when its owning step moves code |
 | `FamilyQuant.Tests/Program.GridCopy.cs` | `FamilyQuant.Tests/Program.GridCopy.cs` | Keep test coverage; update only API/path integration when its owning step moves code |
 | `FamilyQuant.Tests/Program.GroupingScore.cs` | `FamilyQuant.Tests/Program.GroupingScore.cs` | Keep test coverage; update only API/path integration when its owning step moves code |
+| `FamilyQuant.Tests/Program.HomeStart.cs` | `FamilyQuant.Tests/Program.HomeStart.cs` | Keep shell/curation regression coverage with its owning screen step |
 | `FamilyQuant.Tests/Program.HomologyRealData.cs` | `FamilyQuant.Tests/Program.HomologyRealData.cs` | Keep test coverage; update only API/path integration when its owning step moves code |
 | `FamilyQuant.Tests/Program.IdentityScan.cs` | `FamilyQuant.Tests/Program.IdentityScan.cs` | Keep test coverage; update only API/path integration when its owning step moves code |
 | `FamilyQuant.Tests/Program.Ms1Envelope.cs` | `FamilyQuant.Tests/Program.Ms1Envelope.cs` | Keep test coverage; update only API/path integration when its owning step moves code |
@@ -204,7 +218,9 @@ Inventory refreshed after E1 and F6: 163 files; 70 C# files and one resource mov
 | `FamilyQuant.Tests/Program.ProteinDomains.cs` | `FamilyQuant.Tests/Program.ProteinDomains.cs` | Keep test coverage; update only API/path integration when its owning step moves code |
 | `FamilyQuant.Tests/Program.Quantitation.cs` | `FamilyQuant.Tests/Program.Quantitation.cs` | Keep test coverage; update only API/path integration when its owning step moves code |
 | `FamilyQuant.Tests/Program.ReportsAndHelp.cs` | `FamilyQuant.Tests/Program.ReportsAndHelp.cs` | Keep test coverage; update only API/path integration when its owning step moves code |
+| `FamilyQuant.Tests/Program.ShellStatus.cs` | `FamilyQuant.Tests/Program.ShellStatus.cs` | Keep shell/curation regression coverage with its owning screen step |
 | `FamilyQuant.Tests/Program.SourceContracts.cs` | `FamilyQuant.Tests/Program.SourceContracts.cs` | Keep test coverage; update only API/path integration when its owning step moves code |
+| `FamilyQuant.Tests/Program.StandardMenu.cs` | `FamilyQuant.Tests/Program.StandardMenu.cs` | Keep shell/curation regression coverage with its owning screen step |
 | `FamilyQuant.Tests/Program.SuperClusterPreview.cs` | `FamilyQuant.Tests/Program.SuperClusterPreview.cs` | Keep test coverage; update only API/path integration when its owning step moves code |
 | `FamilyQuant.Tests/Program.ThreeWayPartition.cs` | `FamilyQuant.Tests/Program.ThreeWayPartition.cs` | Keep test coverage; update only API/path integration when its owning step moves code |
 | `FamilyQuant.Tests/Program.UiLayout.cs` | `FamilyQuant.Tests/Program.UiLayout.cs` | Keep test coverage; update only API/path integration when its owning step moves code |
@@ -272,6 +288,7 @@ Inventory refreshed after E1 and F6: 163 files; 70 C# files and one resource mov
 | `FamilyQuant/DeNovo/ThreeWayChart.cs` | `FamilyQuant/DeNovo/ThreeWayChart.cs` | Copy in F6; X8: share drawing base and preserve exported PNGs |
 | `FamilyQuant/DeNovo/ThreeWayPartition.cs` | `FamilyQuant.Core/DeNovo/ThreeWayPartition.cs` | Copy to Core in F6; X6: organize readers/reconciliation, retaining pinned behavior |
 | `FamilyQuant/DeNovo/ThreeWayWindow.cs` | `FamilyQuant/DeNovo/ThreeWayWindow.cs` | Copy in F6; C12: thin secondary view (FQShell) |
+| `FamilyQuant/DeNovoControl.Files.cs` | `FamilyQuant/DeNovoControl.Files.cs` | Keep in App; shell, navigation and appearance owned by FQLook |
 | `FamilyQuant/DeNovoControl.xaml` | `FamilyQuant/DeNovoControl.xaml` | Copy in F6; C10: shared filters and thin view (FQEvidence) |
 | `FamilyQuant/DeNovoControl.xaml.cs` | `FamilyQuant/DeNovoControl.xaml.cs` | Copy in F6; C10: shared filters and thin view (FQEvidence) |
 | `FamilyQuant/Evidence/ProteinEvidence.cs` | `FamilyQuant.Core/Evidence/ProteinEvidence.cs` | Copy E1 model to Core in F6; evidence contracts stay owned by FQEvidence |
@@ -280,14 +297,15 @@ Inventory refreshed after E1 and F6: 163 files; 70 C# files and one resource mov
 | `FamilyQuant/FamilyFilter.cs` | `FamilyQuant.Core/FamilyFilter.cs` | Copy to Core in F6; Keep the existing tested implementation |
 | `FamilyQuant/FamilyNaming.cs` | `FamilyQuant.Core/FamilyNaming.cs` | Copy to Core in F6; Keep the existing tested implementation |
 | `FamilyQuant/FamilyQuant.App.csproj` | `FamilyQuant/FamilyQuant.App.csproj` | Copy project identity; F6 adds Core reference without changing publishing metadata |
-| `FamilyQuant/FamilyQuantFile.cs` | `FamilyQuant.Core/FamilyQuantFile.cs` | Copy to Core in F6; X2: split document, scoring and attribution |
-| `FamilyQuant/FastaItemExtended.cs` | `FamilyQuant.Core/FastaItemExtended.cs` | Copy to Core in F6; E1 and X2: retain persisted fields and the published evidence contract |
+| `FamilyQuant/FamilyQuantFile.cs` | `FamilyQuant.Core/FamilyQuantFile.cs` | X2: document, canonical I/O and thin compatibility entry points; calculations delegated to dedicated services |
+| `FamilyQuant/FastaItemExtended.cs` | `FamilyQuant.Core/FastaItemExtended.cs` | Keep published E1 model; X2 reads legacy XIC and omits it from new writes |
 | `FamilyQuant/FileFingerprint.cs` | `FamilyQuant.Core/FileFingerprint.cs` | Copy to Core in F6; Keep the existing tested implementation |
 | `FamilyQuant/FullXicComputer.cs` | `FamilyQuant.Core/FullXicComputer.cs` | Copy to Core in F6; X5: stage the pipeline without changing scientific reductions |
 | `FamilyQuant/GridCopy.cs` | `FamilyQuant/GridCopy.cs` | Copy in F6; Keep UI resources; theme work stays with FQLook |
 | `FamilyQuant/GroupingScore.cs` | `FamilyQuant.Core/GroupingScore.cs` | Copy to Core in F6; Keep the existing tested implementation |
 | `FamilyQuant/GroupingSnapshot.cs` | `FamilyQuant.Core/GroupingSnapshot.cs` | Copy to Core in F6; Keep the existing tested implementation |
 | `FamilyQuant/HelpContent.cs` | `FamilyQuant.Core/HelpContent.cs` | Copy to Core in F6; E15/C13: facts follow the validated engine and rebuilt screens |
+| `FamilyQuant/HomeControl.ViewModel.cs` | `FamilyQuant/HomeControl.ViewModel.cs` | Keep in App; shell, navigation and appearance owned by FQLook |
 | `FamilyQuant/HomeControl.xaml` | `FamilyQuant/HomeControl.xaml` | Copy in F6; S4: start page and recent projects |
 | `FamilyQuant/HomeControl.xaml.cs` | `FamilyQuant/HomeControl.xaml.cs` | Copy in F6; S4: start page and recent projects |
 | `FamilyQuant/Homology/HomologyDatabase.cs` | `FamilyQuant.Core/Homology/HomologyDatabase.cs` | Copy to Core in F6; Keep the existing tested implementation |
@@ -302,6 +320,9 @@ Inventory refreshed after E1 and F6: 163 files; 70 C# files and one resource mov
 | `FamilyQuant/IdentityScanWindow.cs` | `FamilyQuant/IdentityScanWindow.cs` | Copy in F6; C12: thin secondary view (FQShell) |
 | `FamilyQuant/IsotopeCountChart.cs` | `FamilyQuant/IsotopeCountChart.cs` | Copy in F6; X8: share drawing base and preserve exported PNGs |
 | `FamilyQuant/LockManagerWindow.cs` | `FamilyQuant/LockManagerWindow.cs` | Copy in F6; C12: thin secondary view (FQShell) |
+| `FamilyQuant/MainWindow.Commands.cs` | `FamilyQuant/MainWindow.Commands.cs` | Keep in App; shell, navigation and appearance owned by FQLook |
+| `FamilyQuant/MainWindow.State.cs` | `FamilyQuant/MainWindow.State.cs` | Keep in App; shell, navigation and appearance owned by FQLook |
+| `FamilyQuant/MainWindow.Status.cs` | `FamilyQuant/MainWindow.Status.cs` | Keep in App; shell, navigation and appearance owned by FQLook |
 | `FamilyQuant/MainWindow.xaml` | `FamilyQuant/MainWindow.xaml` | Copy in F6; S2: thin shell and view model |
 | `FamilyQuant/MainWindow.xaml.cs` | `FamilyQuant/MainWindow.xaml.cs` | Copy in F6; S2: thin shell and view model |
 | `FamilyQuant/MyResources.Designer.cs` | `FamilyQuant.Core/MyResources.Designer.cs` | Copy to Core in F6; Keep the existing tested implementation |
@@ -326,6 +347,7 @@ Inventory refreshed after E1 and F6: 163 files; 70 C# files and one resource mov
 | `FamilyQuant/Themes/Controls.xaml` | `FamilyQuant/Themes/Controls.xaml` | Copy in F6; Keep UI resources; theme work stays with FQLook |
 | `FamilyQuant/Themes/NumericPalette.cs` | `FamilyQuant/Themes/NumericPalette.cs` | Copy in F6; Keep UI resources; theme work stays with FQLook |
 | `FamilyQuant/Themes/ThemeManager.cs` | `FamilyQuant/Themes/ThemeManager.cs` | Copy in F6; Keep UI resources; theme work stays with FQLook |
+| `FamilyQuant/Themes/ThemeSettings.cs` | `FamilyQuant/Themes/ThemeSettings.cs` | Keep in App; shell, navigation and appearance owned by FQLook |
 | `FamilyQuant/Themes/Tokens.xaml` | `FamilyQuant/Themes/Tokens.xaml` | Copy in F6; Keep UI resources; theme work stays with FQLook |
 | `FamilyQuant/USearch.xaml` | `FamilyQuant/USearch.xaml` | Copy in F6; C6/C7: build and identity views (FQShell) |
 | `FamilyQuant/USearch.xaml.cs` | `FamilyQuant/USearch.xaml.cs` | Copy in F6; C6/C7: build and identity views (FQShell) |
