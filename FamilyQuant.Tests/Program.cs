@@ -41,6 +41,7 @@ namespace FamilyQuant.Tests
         private static int Main(string[] args)
         {
             if (args.Length > 0 && args[0] == WordGroupingSnapshot.Argument) return WordGroupingSnapshot.Run(args);
+            if (args.Length > 0 && args[0] == ChartExportSnapshot.Argument) return ChartExportSnapshot.Run(args);
             if (args.Contains("--test-core-boundary", StringComparer.Ordinal))
             {
                 CoreBoundaryTests();
