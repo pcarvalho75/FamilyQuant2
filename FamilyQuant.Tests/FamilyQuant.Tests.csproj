@@ -1,0 +1,28 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <!-- Must track the app's TargetFramework so the suite runs on the runtime the published app requires. -->
+    <TargetFramework>net10.0-windows7.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+    <!-- SeproPckg2.ResultPackage.Load deserialises .sepr2 with BinaryFormatter, which .NET
+         disables by default; without this the de novo reconciliation cannot read the PSM list. -->
+    <EnableUnsafeBinaryFormatterSerialization>true</EnableUnsafeBinaryFormatterSerialization>
+    <RootNamespace>FamilyQuant.Tests</RootNamespace>
+    <!-- Not published: this project exists so the engine can be exercised without clicking the UI. -->
+    <IsPublishable>false</IsPublishable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\FamilyQuant\FamilyQuant.csproj" />
+  </ItemGroup>
+
+  <!-- HintPath references do not flow through a ProjectReference, so PatternTools is named again here. -->
+  <ItemGroup>
+    <Reference Include="PatternTools">
+      <HintPath>..\FamilyQuant\DLLs\PatternTools.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>

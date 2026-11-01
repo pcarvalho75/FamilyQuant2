@@ -1,0 +1,191 @@
+using FamilyQuant.DeNovo;
+using PatternTools.PLP;
+using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.IO;
+using System.Linq;
+using System.Reflection;
+using System.Text;
+using System.Text.Json;
+using System.Threading;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Threading;
+
+namespace FamilyQuant.Tests
+{
+    internal static partial class Program
+    {
+
+        /// <summary>
+        /// The title showed the csproj's assembly version (1.5.0.0) on an installed 1.5.0.2: Visual
+        /// Studio's Publish increments only the publish profile's ApplicationVersion. The installed copy
+        /// now reports the deployment version the ClickOnce launcher passes in ClickOnce_CurrentVersion.
+        /// </summary>
+        private static void AppVersionTests()
+        {
+            var assembly = new Version(1, 5, 0, 0);
+            Check("the ClickOnce deployment version wins, all four parts",
+                AppVersionInfo.Resolve("1.5.0.2", assembly) == "1.5.0.2");
+            Check("without ClickOnce the assembly version is reported",
+                AppVersionInfo.Resolve(null, assembly) == "1.5.0.0" && AppVersionInfo.Resolve(" ", assembly) == "1.5.0.0");
+            Check("an unparseable deployment version falls back to the assembly version",
+                AppVersionInfo.Resolve("not-a-version", assembly) == "1.5.0.0");
+            Check("no version at all reads unknown",
+                AppVersionInfo.Resolve(null, null) == "unknown");
+
+            // End to end through the window title, with the variable set the way the launcher sets it.
+            string? saved = Environment.GetEnvironmentVariable(AppVersionInfo.ClickOnceCurrentVersionVariable);
+            try
+            {
+                Environment.SetEnvironmentVariable(AppVersionInfo.ClickOnceCurrentVersionVariable, "9.8.7.6");
+                var main = new MainWindow();
+                Check("an installed copy shows its deployment version in the title",
+                    main.Title.EndsWith(" 9.8.7.6", StringComparison.Ordinal), main.Title);
+                main.Close();
+
+                Environment.SetEnvironmentVariable(AppVersionInfo.ClickOnceCurrentVersionVariable, null);
+                string own = typeof(AppVersionInfo).Assembly.GetName().Version!.ToString();
+                var dev = new MainWindow();
+                Check("a build run outside ClickOnce shows the assembly version in the title",
+                    dev.Title.EndsWith(" " + own, StringComparison.Ordinal), dev.Title);
+                dev.Close();
+            }
+            finally
+            {
+                Environment.SetEnvironmentVariable(AppVersionInfo.ClickOnceCurrentVersionVariable, saved);
+            }
+        }
+
+        /// <summary>
+        /// Ana (2026-10-25): long tooltips ran off the right edge, one line per paragraph, and could not
+        /// be read. The app's ToolTip style caps the width and draws text tooltips wrapped. Builds a
+        /// ToolTip the way WPF does for a string ToolTip property and lays it out.
+        /// </summary>
+        private static void TooltipWrapTests()
+        {
+            var style = System.Windows.Application.Current.TryFindResource(typeof(ToolTip)) as Style;
+            Check("the application defines a ToolTip style", style != null);
+            if (style == null) return;
+
+            string longText = string.Join(" ", Enumerable.Repeat("a long tooltip sentence", 60)) +
+                              "\n\nand a second paragraph";
+            var tip = new ToolTip { Style = style, Content = longText };
+            tip.ApplyTemplate();
+            tip.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
+            tip.Arrange(new Rect(tip.DesiredSize));
+            tip.UpdateLayout();
+
+            var text = WalkTree(tip).OfType<TextBlock>().FirstOrDefault(t => t.Text == longText);
+            Check("a text tooltip is drawn by a wrapping TextBlock",
+                text != null && text.TextWrapping == TextWrapping.Wrap,
+                text == null ? "no TextBlock carries the text" : text.TextWrapping.ToString());
+            Check("and the tooltip is no wider than its cap, however long the text",
+                tip.MaxWidth <= 600 && tip.DesiredSize.Width <= tip.MaxWidth + 0.5,
+                tip.DesiredSize.Width.ToString("F0", CultureInfo.InvariantCulture) + " of " +
+                tip.MaxWidth.ToString("F0", CultureInfo.InvariantCulture));
+            Check("so the long text takes several lines instead of one",
+                text != null && text.ActualHeight > 3 * text.FontSize * text.FontFamily.LineSpacing,
+                text == null ? "-" : text.ActualHeight.ToString("F0", CultureInfo.InvariantCulture));
+
+            // A tooltip that holds its own element is not forced through the text template.
+            var panel = new StackPanel();
+            var custom = new ToolTip { Style = style, Content = panel };
+            custom.ApplyTemplate();
+            custom.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
+            Check("a tooltip holding its own element shows that element",
+                WalkTree(custom).Contains(panel));
+        }
+
+        /// <summary>
+        /// The reported case (Ana, 2026-10-25): Compute started from the Home card finished, and Save
+        /// project was disabled there; the only way back to the curation screen reopened the file, which
+        /// threw the computed quant away, and Analytics dropped the project outright. The open project now
+        /// stays saveable on Home and Analytics, and the Curate card returns to it as it was left.
+        /// </summary>
+        private static void OpenProjectNavigationTests(string workDir)
+        {
+            string fcfPath = Path.Combine(workDir, "openproject.fcf");
+            new FamilyClusterFile
+            {
+                ClusteringIdentity = 70,
+                MyExtendedFastaItems = new List<FastaItemExtended>
+                {
+                    new FastaItemExtended { SequenceIdentifier = "sp|A|X", Description = "Toxin", USearchID = 1, UserID = 1 },
+                }
+            }.Save(fcfPath);
+
+            MainWindow main;
+            ClusterGenerationControl project;
+            try
+            {
+                main = new MainWindow();
+                project = new ClusterGenerationControl(fcfPath);
+            }
+            catch (Exception ex)
+            {
+                Check("the main window and a project build for the navigation check", false, ex.ToString());
+                return;
+            }
+
+            void Set(string field, object? value) => typeof(MainWindow)
+                .GetField(field, BindingFlags.NonPublic | BindingFlags.Instance)!.SetValue(main, value);
+            object? Get(string field) => typeof(MainWindow)
+                .GetField(field, BindingFlags.NonPublic | BindingFlags.Instance)!.GetValue(main);
+            void Call(string method) => typeof(MainWindow)
+                .GetMethod(method, BindingFlags.NonPublic | BindingFlags.Instance, null,
+                    method.EndsWith("_Click", StringComparison.Ordinal)
+                        ? new[] { typeof(object), typeof(RoutedEventArgs) } : Type.EmptyTypes, null)!
+                .Invoke(main, method.EndsWith("_Click", StringComparison.Ordinal) ? new object?[] { null, null } : null);
+
+            var app = UiField<Grid>(main, "GridApp")!;
+            var saveProject = UiField<MenuItem>(main, "MenuItemSaveProject")!;
+            var saveFcf = UiField<MenuItem>(main, "MenuItemSaveFCF")!;
+            var compute = UiField<MenuItem>(main, "MenuItemComputeXic")!;
+
+            Call("ShowHome");
+            Check("with no project open, the Home leaves both Save commands off",
+                !saveProject.IsEnabled && !saveFcf.IsEnabled);
+
+            // An open project with a quantitation computed in this session, as Compute leaves them.
+            var computed = new List<QuantRow> { new QuantRow { Side = "identified", Run = "run_01", Sequence = "PEPTIDEK" } };
+            Set("cgc", project);
+            Set("lastFcfPath", fcfPath);
+            Set("loadedCuration", project.fcf);
+            Set("loadedQuant", computed);
+
+            Call("ShowHome");
+            var homeCompute = UiField<Button>((HomeControl)app.Children[0], "ButtonHomeCompute")!;
+            Check("on the Home, an open project can be saved, project and Family Cluster File alike",
+                saveProject.IsEnabled && saveFcf.IsEnabled && compute.IsEnabled && homeCompute.IsEnabled);
+
+            Call("ShowCurationOrOpen");
+            Check("Curate returns to the SAME open project instead of reopening the file",
+                app.Children.Count == 1 && ReferenceEquals(app.Children[0], project) && ReferenceEquals(Get("cgc"), project));
+            Check("and the quantitation computed in the session is still held, and saveable",
+                ReferenceEquals(Get("loadedQuant"), computed) && saveProject.IsEnabled);
+
+            Set("loadedQuant", new List<QuantRow>());
+            Call("MenuItemAnalytics_Click");
+            Check("Analytics keeps the open project, so Save project stays live there and Compute does not",
+                app.Children.Count == 1 && app.Children[0] is AnalyticsControl
+                && ReferenceEquals(Get("cgc"), project) && saveProject.IsEnabled && !compute.IsEnabled);
+
+            Call("ShowHome");
+            var homeAfter = UiField<Button>((HomeControl)app.Children[0], "ButtonHomeCompute")!;
+            Check("back on the Home after Analytics, the project is still open and its cards are lit",
+                homeAfter.IsEnabled && saveProject.IsEnabled);
+
+            Set("loadedQuant", computed);
+            Call("MenuItemDeNovo_Click");
+            Check("the de novo review keeps the open project and its computed quant, and Save stays live",
+                app.Children[0] is DeNovoControl && ReferenceEquals(Get("cgc"), project)
+                && ReferenceEquals(Get("loadedQuant"), computed) && saveProject.IsEnabled && !compute.IsEnabled);
+        }
+    }
+}

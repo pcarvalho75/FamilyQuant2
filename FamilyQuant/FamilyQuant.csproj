@@ -1,0 +1,90 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0-windows7.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+    <!-- SeproPckg2.ResultPackage.Load deserialises .sepr2 with BinaryFormatter, which .NET
+         disables by default; without this the de novo reconciliation cannot read the PSM list. -->
+    <EnableUnsafeBinaryFormatterSerialization>true</EnableUnsafeBinaryFormatterSerialization>
+    <Version>1.5.0.0</Version>
+    <AssemblyVersion>1.5.0.0</AssemblyVersion>
+    <FileVersion>1.5.0.0</FileVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="images\FamilyQuant.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="DLLs\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\.editorconfig" Link=".editorconfig" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Extended.Wpf.Toolkit" Version="4.6.1" />
+    <PackageReference Include="LiteDB" Version="5.0.21" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <!-- RawFileReader 5.0.0.38 pins a vulnerable OpenMcdf 2.2.1.3. The direct reference raises the
+         resolved implementation to the current patched release; the real-RAW regression validates
+         binary compatibility before this revision is accepted. -->
+    <PackageReference Include="OpenMcdf" Version="3.2.0" />
+    <PackageReference Include="System.Runtime.Serialization.Formatters" Version="10.0.3" />
+    <!-- RAW reading for the de novo XIC extraction. The vendored PatternTools.dll references these
+         four; without them the first RAW read throws FileNotFoundException. Same versions PL51 pins.
+         The owner has confirmed these ship with the program (PLV already redistributes them). -->
+    <PackageReference Include="ThermoFisher.CommonCore.BackgroundSubtraction" Version="5.0.0.38" />
+    <PackageReference Include="ThermoFisher.CommonCore.Data" Version="5.0.0.38" />
+    <PackageReference Include="ThermoFisher.CommonCore.MassPrecisionEstimator" Version="5.0.0.38" />
+    <PackageReference Include="ThermoFisher.CommonCore.RawFileReader" Version="5.0.0.38" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="MAligner">
+      <HintPath>DLLs\MAligner.dll</HintPath>
+    </Reference>
+    <Reference Include="PatternTools">
+      <HintPath>DLLs\PatternTools.dll</HintPath>
+    </Reference>
+    <Reference Include="SeproPckg2">
+      <HintPath>DLLs\SeproPckg2.dll</HintPath>
+    </Reference>
+    <!-- XQuant2.dll was removed on 2026-08-16: the vendored copy was 19 months stale, still carried
+         the ascending tie-break defect fixed in Aug/2026, and no line of this program used it. XIC
+         extraction goes through PatternTools directly. -->
+    <Reference Include="alglibnet2">
+      <HintPath>DLLs\alglibnet2.dll</HintPath>
+      <Private>true</Private>
+    </Reference>
+    <Reference Include="CSMSL">
+      <HintPath>DLLs\CSMSL.dll</HintPath>
+      <Private>true</Private>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="images\FamilyQuant.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="MyResources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>MyResources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="MyResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>MyResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
+</Project>

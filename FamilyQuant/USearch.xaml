@@ -1,0 +1,107 @@
+<UserControl x:Class="FamilyQuant.USearchLib"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:FamilyQuant" xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+             mc:Ignorable="d"
+             d:DesignHeight="450" d:DesignWidth="800"
+             Background="{StaticResource PanelDarkBrush}">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Border Grid.Row="0" Grid.ColumnSpan="2" Background="#2A303E" BorderBrush="#4A5568" BorderThickness="1"
+                CornerRadius="3" Padding="10,6" Margin="5,0,5,6">
+            <TextBlock x:Name="TextBlockUSearchState" TextWrapping="Wrap" Foreground="#FFD700" FontSize="12"
+                       Text="Step 1 of 4 · Pick a protein database and press &quot;Input a FASTA file&quot;. That writes a Family Cluster File (.fcf) beside it, which you then open with File · Load Family Cluster File."
+                       ToolTip="Where you are in this panel and what to do next. It updates once a Family Cluster File is made."/>
+        </Border>
+
+        <GroupBox Header="🔍 Family Cluster File Generation" Grid.Row="1" Grid.Column="0" Margin="5"
+                  Background="{StaticResource PanelMidBrush}" Foreground="White" Padding="10">
+            <StackPanel>
+                <WrapPanel Margin="0,6">
+                    <Label Content="Identity:" Foreground="White" VerticalAlignment="Center"
+                           ToolTip="How similar two sequences must be before USEARCH puts them in the same family."/>
+                    <xctk:IntegerUpDown x:Name="IntegerUpDownIdentity" Value="85" Minimum="1" Maximum="100"
+                                        Width="70" Background="White" Foreground="Black"
+                                        Margin="6,0" VerticalAlignment="Center"
+                                        ToolTip="Percent identity two sequences need to join the same family (default 85). Higher gives more, smaller families; lower gives fewer, larger ones. Use &quot;Scan identity range&quot; to compare values."/>
+                    <Label Content="%" Foreground="White" VerticalAlignment="Center"
+                           ToolTip="The identity is a percentage, from 1 to 100."/>
+                </WrapPanel>
+
+                <CheckBox x:Name="CheckBoxExhaustiveClustering"
+                          Content="Exhaustive clustering (close the gaps the fast pass leaves)"
+                          IsChecked="True" Foreground="White" Margin="4,4,4,6" VerticalAlignment="Center"
+                          ToolTip="Aligns every pair of sequences after the fast pass and rejoins families the fast pass split. Leave it on; turn it off only for speed. Databases over 10,000 sequences take longer, and you are asked first."/>
+
+                <Button x:Name="ButtonInput" Content="Input a FASTA file" Click="ButtonInput_Click"
+                        HorizontalAlignment="Left" Margin="4,8,4,4"
+                        ToolTip="Step 1: clusters the database you pick at the identity above and saves a Family Cluster File (.fcf) beside it. You are asked before an existing .fcf is replaced."/>
+                <Button x:Name="ButtonCalculateFDR" Content="Calculate FDR" Click="ButtonCalculateFDR_Click"
+                        IsEnabled="False" HorizontalAlignment="Left" Margin="4"
+                        Background="{StaticResource PanelLightBrush}"
+                        ToolTip="Shows the fraction of families that mix real and decoy (Reverse_) sequences; zero is what you want. Needs a target-decoy (.T-R) database. Disabled until a Family Cluster File is generated above."/>
+            </StackPanel>
+        </GroupBox>
+
+        <GroupBox Header="🎯 Divide and Conquer (auto-tune identity)" Grid.Row="1" Grid.Column="1" Margin="5"
+                  Background="{StaticResource PanelMidBrush}" Foreground="White" Padding="10">
+            <StackPanel>
+                <WrapPanel Margin="0,6">
+                    <Label Content="Max acceptable mixing score:" Foreground="White" VerticalAlignment="Center"
+                           ToolTip="How much target/decoy mixing the automatic search is allowed to accept. Keep it at 0."/>
+                    <xctk:DecimalUpDown x:Name="DecimalUpDownMaxFDR" Value="0" Minimum="0" Maximum="0.5" Increment="0.01"
+                                        Width="70" Background="White" Foreground="Black"
+                                        Margin="6,0" VerticalAlignment="Center"
+                                        ToolTip="Largest fraction of families allowed to mix target and decoy sequences. Default 0; leave it there, because any higher value lets alignments that are only noise merge families."/>
+                </WrapPanel>
+
+                <TextBlock TextWrapping="Wrap" Margin="4,2,4,6" Foreground="#CCCCCC" FontSize="11"
+                           ToolTip="Why the automatic answer is a lower bound, not a recommendation. Help · How to read these numbers explains more."
+                           Text="The target/decoy score only detects a target aligning to a decoy, which marks where alignment becomes noise. It cannot see two unrelated target families being fused, so use it as a floor - not as a budget."/>
+
+                <Button x:Name="ButtonDivideAndConquer" Content="Run Divide &amp; Conquer" Click="ButtonDivideAndConquer_Click"
+                        HorizontalAlignment="Left" Margin="4,8,4,4"
+                        ToolTip="Finds the lowest identity that keeps the mixing score within the limit above. It only reports a number: type it into Identity and press &quot;Input a FASTA file&quot;. Treat it as a floor."/>
+
+                <Button x:Name="ButtonScanIdentities" Content="Scan identity range" Click="ButtonScanIdentities_Click"
+                        HorizontalAlignment="Left" Margin="4"
+                        Background="{StaticResource PanelLightBrush}"
+                        ToolTip="Clusters at every identity from 95% down to 10% and tabulates the family count and target/decoy mixing. Use it before choosing a threshold. Nothing is saved; large databases take a while."/>
+            </StackPanel>
+        </GroupBox>
+
+        <GroupBox Header="🧬 Remove Redundancy (preserve order)" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Margin="5"
+                  Background="{StaticResource PanelMidBrush}" Foreground="White" Padding="10">
+            <StackPanel>
+                <TextBlock TextWrapping="Wrap" Foreground="#CCCCCC" FontSize="11" Margin="0,0,0,6"
+                           Text="Removes subset / near-identical sequences from a FASTA and writes &lt;name&gt;_NO_REDUNDANCY.fasta beside it, keeping the original sequence order and headers. Do this before &quot;Input a FASTA file&quot; when a database has fragments or duplicates that would otherwise split a family. Same as PatternLab's database generator, without leaving this window."
+                           ToolTip="Like PatternLab's 'Eliminate subset sequences', but this one keeps the original sequence order, which matters because USEARCH is order-sensitive."/>
+                <WrapPanel Margin="0,4">
+                    <Label Content="Identity:" Foreground="White" VerticalAlignment="Center"
+                           ToolTip="100 removes only exact subset sequences (a sequence wholly contained in another). Below 100 removes near-identical sequences by alignment."/>
+                    <xctk:IntegerUpDown x:Name="IntegerUpDownRedundancyIdentity" Value="100" Minimum="50" Maximum="100"
+                                        Width="70" Background="White" Foreground="Black"
+                                        Margin="6,0" VerticalAlignment="Center"
+                                        ToolTip="Identity above which two sequences count as redundant (default 100). At 100 only fragments and exact duplicates go; below 100, near-identical sequences go too, which is slower."/>
+                    <Label Content="%" Foreground="White" VerticalAlignment="Center"
+                           ToolTip="The identity is a percentage of aligned residues."/>
+                    <Button x:Name="ButtonRemoveRedundancy" Content="Remove redundancy from FASTA..."
+                            Click="ButtonRemoveRedundancy_Click" Margin="16,0,0,0"
+                            ToolTip="Saves a copy of a FASTA without subset or near-identical sequences, as &lt;name&gt;_NO_REDUNDANCY.fasta beside it. Order and headers are kept; the original file is never changed."/>
+                </WrapPanel>
+            </StackPanel>
+        </GroupBox>
+
+    </Grid>
+</UserControl>

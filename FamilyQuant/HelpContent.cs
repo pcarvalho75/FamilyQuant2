@@ -1,0 +1,668 @@
+﻿using FamilyQuant.DeNovo;
+using System;
+using System.Globalization;
+using System.Text;
+
+namespace FamilyQuant
+{
+    /// <summary>
+    /// The "How to read these numbers" panel, as plain text so it can be asserted by the test suite and
+    /// so it cannot drift from the wording used by the controls: every mode and policy name below comes
+    /// from the same extension methods the ComboBoxes are filled from.
+    ///
+    /// It answers the four questions that were actually asked out loud: what the denominator is, why the
+    /// families do not add up to 100%, what a shared peptide is, and why the Divide and Conquer identity
+    /// is a floor rather than a recommendation.
+    ///
+    /// <see cref="BuildDeNovo"/> is the second page, for the de novo evidence screen. Two pages and not
+    /// one: they are two workflows, and neither page's text applies to the other's screen.
+    /// </summary>
+    public static class HelpContent
+    {
+        /// <summary>
+        /// <paramref name="profile"/> is null before a project is loaded; the text then explains what the
+        /// choice WILL be rather than claiming a denominator the program cannot yet name.
+        /// </summary>
+        public static string Build(QuantitationProfile? profile, NormalizationMode mode, SharedPeptidePolicy policy)
+        {
+            var sb = new StringBuilder();
+
+            sb.AppendLine("HOW TO READ THESE NUMBERS");
+            sb.AppendLine("=========================");
+            sb.AppendLine();
+
+            sb.AppendLine("THE ORDER OF WORK");
+            sb.AppendLine("-----------------");
+            sb.AppendLine("1. Run USearch on a FASTA or target-decoy (.T-R) database. That writes a Family");
+            sb.AppendLine("   Cluster File (.fcf) next to the database: proteins grouped into families.");
+            sb.AppendLine("2. File -> Load Family Cluster File opens that .fcf. You are now in Layer 1 and");
+            sb.AppendLine("   can merge families further by description words or by keyword.");
+            sb.AppendLine("3. Layer 2: load the PatternLab project (.plp) that holds the quantitation. It");
+            sb.AppendLine("   must have been exported at PEPTIDE level - a protein-level export has nothing");
+            sb.AppendLine("   this program can attribute to a family.");
+            sb.AppendLine("4. Layer 3: choose what the percentage is OF, choose what to do with shared");
+            sb.AppendLine("   peptides, then press Recalculate.");
+            sb.AppendLine("5. Export to CSV, and/or File -> Reanotate Sepro to stamp the family numbers back");
+            sb.AppendLine("   into a SEPro result package.");
+            sb.AppendLine();
+            sb.AppendLine("The families and the quantitation you keep live in one FamilyQuant project file, a");
+            sb.AppendLine(".fqproj, written by File -> Save project. Beyond the share above, File -> Compute /");
+            sb.AppendLine("update full XIC measures each peptide's full isotope envelope straight from the RAW");
+            sb.AppendLine("and stores it in that project, and the Analytics screen then reads the recovery");
+            sb.AppendLine("from it. An old Family Cluster File (.fcf) still opens, with the quantitation empty");
+            sb.AppendLine("until it is computed.");
+            sb.AppendLine();
+
+            sb.AppendLine("WHAT THE PERCENTAGE IS OF (THE DENOMINATOR)");
+            sb.AppendLine("-------------------------------------------");
+            sb.AppendLine("A family's number is a share, and a share is meaningless until you know of what.");
+            sb.AppendLine("The list called \"Report XIC as\" is that choice. It currently reads:");
+            sb.AppendLine();
+            sb.AppendLine("    " + mode.DisplayName());
+            sb.AppendLine();
+            sb.AppendLine(Wrap(mode.Explanation(), "    "));
+            sb.AppendLine();
+
+            if (profile == null)
+            {
+                sb.AppendLine("No project is loaded, so the program cannot yet say which denominators this");
+                sb.AppendLine("data supports. Load one in Layer 2: the modes it cannot supply are greyed out,");
+                sb.AppendLine("each with the reason in its tooltip.");
+            }
+            else
+            {
+                sb.AppendLine("The loaded project says:");
+                sb.AppendLine();
+                sb.AppendLine(Wrap(profile.Summary(), "    "));
+                sb.AppendLine();
+
+                if (profile.Evidence == DenominatorEvidence.Inferred)
+                {
+                    sb.AppendLine("Note the words \"NOT recorded\" above. This project was exported before");
+                    sb.AppendLine("PatternLab wrote down which divisor it had used, so the program worked it out");
+                    sb.AppendLine("from the size of the numbers. That is a guess, and it is labelled as one");
+                    sb.AppendLine("everywhere it appears. Re-exporting from XQuant turns it into a recorded fact.");
+                }
+            }
+
+            sb.AppendLine();
+            sb.AppendLine("WHY THE FAMILIES DO NOT ADD UP TO 100%");
+            sb.AppendLine("--------------------------------------");
+            sb.AppendLine("In \"" + NormalizationMode.IdentifiedSignal.ShortName() + "\" they do, by construction:");
+            sb.AppendLine("every family is divided by the sum of all families.");
+            sb.AppendLine();
+            sb.AppendLine("In \"" + NormalizationMode.TotalChromatogram.ShortName() + "\" they do not, and that is");
+            sb.AppendLine("the point of the mode. The denominator is the whole chromatogram, and most of a");
+            sb.AppendLine("chromatogram is never identified: signal from peptides your database does not");
+            sb.AppendLine("contain, from non-peptide material, from charge states that were not extracted.");
+            sb.AppendLine("The gap between your families' total and 100% is that unidentified remainder. It is");
+            sb.AppendLine("a measurement, not an error - reading it as one is the mistake this mode exists to");
+            sb.AppendLine("prevent.");
+            sb.AppendLine();
+            sb.AppendLine("Under \"" + SharedPeptidePolicy.FamilyUnique.DisplayName() + "\" a second piece is");
+            sb.AppendLine("missing as well: the signal on peptides that belong to more than one family and is");
+            sb.AppendLine("therefore counted for none of them.");
+            sb.AppendLine();
+
+            sb.AppendLine("WHAT A SHARED PEPTIDE IS");
+            sb.AppendLine("------------------------");
+            sb.AppendLine("A peptide whose sequence occurs in proteins of more than one family. In a venom");
+            sb.AppendLine("database, where whole families differ by a handful of residues, this is not a");
+            sb.AppendLine("corner case: most of the signal can sit on shared peptides. Nothing can say which");
+            sb.AppendLine("family such a peptide came from, so the program does not pretend to. In the Full");
+            sb.AppendLine("XIC column an identified peptide belongs to the families whose proteins contain");
+            sb.AppendLine("it, exactly as above; a de novo sequence, which has no protein of its own, to the");
+            sb.AppendLine("families of every protein it resembles at the minimum homology identity. The");
+            sb.AppendLine("choice is yours, and it is currently:");
+            sb.AppendLine();
+            sb.AppendLine("    " + policy.DisplayName());
+            sb.AppendLine();
+            sb.AppendLine(Wrap(policy.Explanation(), "    "));
+            sb.AppendLine();
+            sb.AppendLine("The other options:");
+            sb.AppendLine();
+
+            foreach (SharedPeptidePolicy other in new[]
+                     {
+                         SharedPeptidePolicy.FamilyUnique,
+                         SharedPeptidePolicy.SplitEqually,
+                         SharedPeptidePolicy.CountInEveryFamily
+                     })
+            {
+                if (other == policy) continue;
+
+                sb.AppendLine("    " + other.DisplayName());
+                sb.AppendLine(Wrap(other.Explanation(), "        "));
+                sb.AppendLine();
+            }
+
+            sb.AppendLine("HOW THE FAMILIES ARE BUILT: TWO STAGES");
+            sb.AppendLine("--------------------------------------");
+            sb.AppendLine("Clustering runs in two stages. The fast first pass groups the database quickly,");
+            sb.AppendLine("but it is greedy and order-sensitive: two proteins that align above your identity");
+            sb.AppendLine("can still land in separate families, because the second was only ever compared");
+            sb.AppendLine("against the seed of a family it did not quite match. That leaves biological holes,");
+            sb.AppendLine("full-length homologues split apart.");
+            sb.AppendLine();
+            sb.AppendLine("The \"Exhaustive clustering\" checkbox (on by default) closes them. After the first");
+            sb.AppendLine("pass it aligns EVERY pair of proteins in full and merges two families whenever the");
+            sb.AppendLine("proteins reach your identity over most of the LONGER sequence. Proteins that share");
+            sb.AppendLine("only a short motif fail that coverage test and are correctly kept apart, so an");
+            sb.AppendLine("angiotensin fragment does not pull in a whole metalloproteinase, but two full-length");
+            sb.AppendLine("metalloproteinases the fast pass split are put back together.");
+            sb.AppendLine();
+            sb.AppendLine("This is single linkage: every pair at or above the identity chains its two families");
+            sb.AppendLine("into one, so the merge can chain a whole superfamily together. That is the intended");
+            sb.AppendLine("meaning of the threshold, not a side effect: the identity you choose IS the tightness");
+            sb.AppendLine("knob. Raise it for more, smaller families; lower it to chain more together.");
+            sb.AppendLine();
+            sb.AppendLine("The exhaustive pass runs at any database size and is never capped. On a database");
+            sb.AppendLine("over 10,000 sequences the all-versus-all alignment takes longer and more memory, so");
+            sb.AppendLine("you are warned once before it starts and can proceed or stop; it still runs at any");
+            sb.AppendLine("size if you proceed. Turn the checkbox off to use the faster first-pass-only");
+            sb.AppendLine("clustering, which is quicker but leaves the holes.");
+            sb.AppendLine();
+
+            sb.AppendLine("CURATING BY HAND: UNDO, SUPER CLUSTER OPTIONS, SEARCH-SCOPED RECLUSTERING");
+            sb.AppendLine("------------------------------------------------------------------------");
+            sb.AppendLine("Undo steps back through the changes you make in Layer 1, one at a time, without");
+            sb.AppendLine("reloading the file. It reverses a Recluster by Words, a Create Super Cluster, a");
+            sb.AppendLine("User ID number you changed, or a lock you removed, putting the family numbers and");
+            sb.AppendLine("the locks back exactly as they were just before. It remembers the last 50 steps of");
+            sb.AppendLine("this session, does not survive closing the file, and there is no redo.");
+            sb.AppendLine();
+            sb.AppendLine("Create Super Cluster now offers two choices. \"Match\" decides whether one description");
+            sb.AppendLine("must contain ALL of your keywords or just ANY one of them; the default is \"match all");
+            sb.AppendLine("words\", so a phrase such as \"acidic phospholipase\" gathers only the acidic");
+            sb.AppendLine("phospholipases and leaves the plain ones alone, while \"match any word\" gathers");
+            sb.AppendLine("every family carrying even one keyword. A single keyword behaves the same either");
+            sb.AppendLine("way. The super cluster's own \"Exclude Words\" box keeps a protein OUT even when its");
+            sb.AppendLine("family matches: exclude \"inhibitor\" to gather the phospholipases without the");
+            sb.AppendLine("phospholipase inhibitor. It is separate from the Recluster by Words exclude box,");
+            sb.AppendLine("which drops words from the comparison rather than dropping a protein.");
+            sb.AppendLine("Separate its words with commas or spaces. It matches WHOLE words of the description");
+            sb.AppendLine("before OS=, and keeps out the proteins carrying the word; the rest of the family joins.");
+            sb.AppendLine();
+            sb.AppendLine("Create Super Cluster first shows a preview and changes nothing until you confirm.");
+            sb.AppendLine("Keywords find the families; every protein of those families is listed, each with a");
+            sb.AppendLine("tick, its Locus, its description as the database has it, and its domains. A protein");
+            sb.AppendLine("with none of your words is in red: it is here because another protein of its family");
+            sb.AppendLine("carries one, which is how a venom disintegrin comes along with a metalloproteinase.");
+            sb.AppendLine("Untick a protein and it stays in its family, while the rest of that family joins.");
+            sb.AppendLine("\"Untick the red ones\" does that for all of them at once. To untick many by hand,");
+            sb.AppendLine("click a heading to sort, Shift+click to select, and press Untick selected. When part");
+            sb.AppendLine("of a family leaves, the new family is locked, so that a Recluster by Words cannot put");
+            sb.AppendLine("back what you left out; the lock manager removes it. An annotation stays on each protein.");
+            sb.AppendLine();
+            sb.AppendLine("You do not have to know how a protein is named. The ADAM proteins, for example, are");
+            sb.AppendLine("called \"Disintegrin and metalloproteinase domain-containing protein\", so the word");
+            sb.AppendLine("ADAM finds nothing; the preview says so, and there they are on the list to untick.");
+            sb.AppendLine("The keywords and exclude words can be edited there and everything follows as you");
+            sb.AppendLine("type. If the Search box hides families that match, one tick brings them in.");
+            sb.AppendLine();
+            sb.AppendLine("Fetch Domains asks UniProt once for each protein's Pfam domains and saving keeps them");
+            sb.AppendLine("in the file, with the UniProt release. They fill the Domains column, the Search box");
+            sb.AppendLine("finds them, and in the preview Keep domains unticks the proteins with none of the");
+            sb.AppendLine("domains you name: Reprolysin keeps those with the metalloproteinase domain whatever");
+            sb.AppendLine("they are called, and leaves out inhibitors and matrix metalloproteinases without a");
+            sb.AppendLine("single exclude word. A protein with no domains at all stays ticked if it carries a");
+            sb.AppendLine("keyword: the short disintegrins and many fragments are too short for Pfam. Domains do");
+            sb.AppendLine("not separate everything: most ADAMs have the same ones as a P-III SVMP.");
+            sb.AppendLine();
+            sb.AppendLine("In the preview and the Data Browser, right-click a row to copy its UniProt code or");
+            sb.AppendLine("description or to open its UniProt page. Ctrl+C copies the column you clicked, for");
+            sb.AppendLine("every selected row, or the whole row after a click on a row number.");
+            sb.AppendLine();
+            sb.AppendLine("Put words in quotes to require them together, in that order: \"ribosomal subunit\",");
+            sb.AppendLine("\"ribosomal protein\" with \"match any word\" gathers either phrase. A phrase is");
+            sb.AppendLine("matched on the whole description, so a common word such as \"protein\", ignored as a");
+            sb.AppendLine("single keyword, still counts inside a phrase.");
+            sb.AppendLine();
+            sb.AppendLine("The Search box takes several terms separated by commas, for example");
+            sb.AppendLine("\"metalloprotease, SVMP\": a row is shown when it carries ANY of them.");
+            sb.AppendLine();
+            sb.AppendLine("Typing in the Search box now limits BOTH Recluster by Words and Create Super");
+            sb.AppendLine("Cluster to the families the search shows: every family the search hides keeps its");
+            sb.AppendLine("numbers untouched, so you can organise one subgroup at a time. The word vectors are");
+            sb.AppendLine("then computed within the shown families, which is the intended \"organise just this");
+            sb.AppendLine("subgroup\" behaviour. The scope follows the SEARCH TEXT only, not the Hide Reverse");
+            sb.AppendLine("or Hide Contaminants checkboxes, so hiding rows for display never silently drops a");
+            sb.AppendLine("family from a recluster. Clear the Search box and both act on the whole database");
+            sb.AppendLine("again, exactly as before. Locks still hold within the subgroup.");
+            sb.AppendLine();
+
+            sb.AppendLine("WHY DIVIDE AND CONQUER GIVES A FLOOR, NOT A RECOMMENDATION");
+            sb.AppendLine("---------------------------------------------------------");
+            sb.AppendLine("Divide and Conquer searches for the lowest sequence identity at which no family");
+            sb.AppendLine("holds both a target and a decoy sequence. It is tempting to read its answer as");
+            sb.AppendLine("\"the right identity\". It is not, for a reason built into what the score can see.");
+            sb.AppendLine();
+            sb.AppendLine("A reversed database has the same internal redundancy as the real one: if two");
+            sb.AppendLine("proteins are similar, their reversed copies are similar too. So decoy families");
+            sb.AppendLine("collapse at the same rate as target families, and putting two decoys together is");
+            sb.AppendLine("not an error. The only event the score can detect is a target aligning to a decoy,");
+            sb.AppendLine("which happens once alignments have stopped being better than noise.");
+            sb.AppendLine();
+            sb.AppendLine("It therefore marks the identity below which clustering is meaningless. It CANNOT");
+            sb.AppendLine("see two unrelated target families being fused, which is the error you actually");
+            sb.AppendLine("care about. The number it gives you is a floor, not a recommendation.");
+            sb.AppendLine();
+            sb.AppendLine("So: cluster at that identity or above, and");
+            sb.AppendLine("choose the exact value from \"Scan identity range\" and from the biology of your");
+            sb.AppendLine("proteins. Raising the allowance above 0 does not buy accuracy, it buys merges made");
+            sb.AppendLine("inside the noise.");
+            sb.AppendLine();
+
+            sb.AppendLine("THE OTHER COLUMNS");
+            sb.AppendLine("-----------------");
+            sb.AppendLine("USearch ID       the last automatic grouping (USearch, then any reclustering the");
+            sb.AppendLine("                 program ran). Read-only. It equals User ID except where you");
+            sb.AppendLine("                 renumbered a family by hand.");
+            sb.AppendLine("User ID          your own family number. Editable: change it and the families are");
+            sb.AppendLine("                 regrouped, the User column recalculated, and it is the number");
+            sb.AppendLine("                 written back by Reanotate Sepro.");
+            sb.AppendLine("User Annotation  free text, saved in the .fcf and exported. It also NAMES the family");
+            sb.AppendLine("                 in the Full XIC composition CSV, the Analytics chart and the");
+            sb.AppendLine("                 evidence pack. A family without one is named by the protein name");
+            sb.AppendLine("                 most of its members share (read before \"OS=\", \"(Fragment)\"");
+            sb.AppendLine("                 ignored); a tie goes to the first member in the table's order.");
+            sb.AppendLine("Locus            the protein identifier as it appears in the database.");
+            sb.AppendLine("Residue mass     the sum of the protein's amino-acid residue masses, in daltons.");
+            sb.AppendLine("                 It does NOT include the terminal water: add 18.011 Da for the");
+            sb.AppendLine("                 neutral protein, and 1.007 Da more for the protonated (MH+) mass.");
+            sb.AppendLine("                 The column used to be called \"Monoisotopic MH\", which this number");
+            sb.AppendLine("                 has never been.");
+            sb.AppendLine();
+            sb.AppendLine("THE FAMILY COUNTER AND THE FILTERS");
+            sb.AppendLine("----------------------------------");
+            sb.AppendLine("The counter reads \"N visible · M in file\". The filters below the table hide rows,");
+            sb.AppendLine("they never change a number: hiding decoys or contaminants lowers the visible count");
+            sb.AppendLine("and leaves every percentage exactly as it was. In \"" +
+                          NormalizationMode.IdentifiedSignal.ShortName() + "\" the hidden rows");
+            sb.AppendLine("are still inside the denominator, because that denominator is the sum over all");
+            sb.AppendLine("families, filtered or not.");
+            sb.AppendLine();
+            sb.AppendLine("Export to CSV writes exactly the rows you can see, with the values as fractions");
+            sb.AppendLine("between 0 and 1 and a dot as the decimal separator, whatever your machine's");
+            sb.AppendLine("language is. That is on purpose: the file is meant to be read by a program.");
+
+            return sb.ToString();
+        }
+
+        /// <summary>
+        /// The de novo evidence screen's own help, opened by its Help button and by the main window's
+        /// Help menu while that screen is the one on display.
+        ///
+        /// It is a separate page rather than a section of <see cref="Build"/> because it is a separate
+        /// workflow: none of the family text above applies to it, and none of this applies to the family
+        /// screen. It answers the questions this feature was actually asked: what the selected source is,
+        /// what the three filters mean, why a chimeric spectrum is coverage rather than a duplicate,
+        /// what the review queue decides and why nothing decides it automatically, what the extracted
+        /// numbers count, what the decoy-only count is for, and what the three-way bar partitions.
+        ///
+        /// <paramref name="criteria"/> is null when the caller has no parsed criteria to hand; the
+        /// defaults are then taken from <see cref="DeNovoFilterCriteria"/> itself, so the numbers quoted
+        /// here cannot drift from the ones the screen starts with.
+        /// </summary>
+        public static string BuildDeNovo(DeNovoFilterCriteria? criteria = null,
+                                         DeNovoSource? source = null)
+        {
+            DeNovoFilterCriteria c = criteria ?? new DeNovoFilterCriteria();
+            source ??= DeNovoSource.DenovoOnly;
+            string sourceName = string.Equals(source.Id, DeNovoSource.DenovoOnly.Id,
+                    StringComparison.OrdinalIgnoreCase)
+                ? "PEAKS de novo only"
+                : string.Equals(source.Id, DeNovoSource.DeNovoAll.Id,
+                    StringComparison.OrdinalIgnoreCase)
+                    ? "PEAKS de novo all"
+                    : source.DisplayName;
+            string confidenceName = source.ConfidenceLabel;
+            string confidenceShortName = confidenceName.EndsWith(" (%)", StringComparison.Ordinal)
+                ? confidenceName.Substring(0, confidenceName.Length - 4)
+                : confidenceName;
+            var defaults = new DeNovoFilterCriteria();
+            bool isPublishedPeaksBaseline = source.IsDenovoOnly
+                && c.MinLength == defaults.MinLength
+                && Math.Abs(c.MinAverageLocalConfidence - defaults.MinAverageLocalConfidence) < 1e-9
+                && c.StretchLength == defaults.StretchLength
+                && c.StretchFloor == defaults.StretchFloor;
+
+            var sb = new StringBuilder();
+
+            sb.AppendLine("THE DE NOVO EVIDENCE SCREEN");
+            sb.AppendLine("===========================");
+            sb.AppendLine("Selected source: " + sourceName + " (" + source.FileGlob + "; " +
+                          confidenceName + ").");
+            sb.AppendLine();
+            sb.AppendLine("A separate workflow, not a step of the family one. It needs no Family Cluster");
+            sb.AppendLine("File to start, it changes no family, no User ID and no quantitation, and it");
+            sb.AppendLine("writes nothing except the CSV files you ask it for. It asks which de novo calls");
+            sb.AppendLine("pass their source-specific filters and how comparable precursor hypotheses relate");
+            sb.AppendLine("to the PatternLab search.");
+            sb.AppendLine();
+            sb.AppendLine("Nothing on this screen interrupts you with a dialog. A parameter it cannot");
+            sb.AppendLine("accept, a folder with no export in it, a file that will not open: all of them");
+            sb.AppendLine("are reported in the yellow line at the bottom, and the previous value or the");
+            sb.AppendLine("previous result is left in force.");
+            sb.AppendLine();
+
+            sb.AppendLine("THE ORDER OF WORK");
+            sb.AppendLine("-----------------");
+            sb.AppendLine("This screen has two core steps, and an optional advanced section below them.");
+            sb.AppendLine();
+            sb.AppendLine("Step 1, Import and filter, reads the selected de novo export and keeps the confident");
+            sb.AppendLine("sequences. Step 2, Reconcile and review, compares them with a PatternLab search");
+            sb.AppendLine("of the SAME runs and lists comparable-precursor alternative hypotheses and weak");
+            sb.AppendLine("agreements as a review queue.");
+            sb.AppendLine("That queue is the one thing only this screen produces.");
+            sb.AppendLine();
+            sb.AppendLine("The precursors you keep here are then measured by the main Compute / update full");
+            sb.AppendLine("XIC step and reported by Analytics, through the .fqproj project, which is why the");
+            sb.AppendLine("de novo set no longer has to carry the whole story on its own.");
+            sb.AppendLine();
+            sb.AppendLine("The collapsed \"Standalone run (advanced)\" section holds three more computations,");
+            sb.AppendLine("Extract areas, Attribute to families and Partition ion current. They are the SAME");
+            sb.AppendLine("computations the main Compute full XIC and Analytics screens now run; they are kept");
+            sb.AppendLine("here only for a de-novo-only run that has no project. Attribute to families reads");
+            sb.AppendLine("peptides, not chromatograms, so it can run straight after step 1; Extract areas and");
+            sb.AppendLine("Partition ion current follow the reconciliation.");
+            sb.AppendLine();
+
+            sb.AppendLine("WHAT THE SELECTED SOURCE LIST IS");
+            sb.AppendLine("--------------------------------");
+            sb.AppendLine(sourceName + " writes one " + source.FileGlob + " export per run.");
+            if (source.IsDenovoOnly)
+            {
+                sb.AppendLine("These are spectra sequenced from fragments alone that the PEAKS database");
+                sb.AppendLine("search did not identify. This is an export category, not proof that the");
+                sb.AppendLine("sequence is correct or biologically novel.");
+            }
+            else
+            {
+                sb.AppendLine("This source is not restricted to PEAKS database-search misses. Treat it as");
+                sb.AppendLine("a caller-specific sequence list; novelty is established only by the explicit");
+                sb.AppendLine("PatternLab reconciliation below, never by the file name alone.");
+            }
+            sb.AppendLine();
+            sb.AppendLine("A sequence read this way carries no protein and no statistical support from a");
+            sb.AppendLine("search engine. It carries " + sourceName + "'s own " + confidenceName +
+                          ", which is why this screen");
+            sb.AppendLine("starts with a filter rather than with a count.");
+            sb.AppendLine();
+            sb.AppendLine("The folder is searched recursively, so the folder holding the per-run");
+            sb.AppendLine("sub-folders is the right one to give, and every run of the export is read");
+            sb.AppendLine("together. Runs are named by their FILE NAME everywhere on this screen, never by");
+            sb.AppendLine("their position in a folder or in a project: a de novo export, a directory listing");
+            sb.AppendLine("and a PatternLab project are not in the same order, and pairing them by");
+            sb.AppendLine("position joins every spectrum against the wrong acquisition.");
+            sb.AppendLine();
+
+            sb.AppendLine("THE THREE DE NOVO QUALITY FILTERS");
+            sb.AppendLine("---------------------------------");
+            sb.AppendLine("A row is kept only if it clears all three. The third filter uses two boxes.");
+            sb.AppendLine();
+            sb.AppendLine("Minimum length (" + c.MinLength.ToString(CultureInfo.CurrentCulture) + " residues)");
+            sb.AppendLine(Wrap("A short call carries too little information to be matched against a " +
+                               "protein afterwards. Lowering this is what turns the homology step of " +
+                               "Layer 4 into a random-match generator.", "    "));
+            sb.AppendLine();
+            sb.AppendLine("Minimum " + confidenceShortName + " (" +
+                          c.MinAverageLocalConfidence.ToString("0.###", CultureInfo.CurrentCulture) + "%)");
+            string confidenceExplanation = string.Equals(confidenceShortName, "ALC",
+                StringComparison.OrdinalIgnoreCase)
+                ? "ALC is PEAKS' average local confidence: the mean of the per-residue confidences " +
+                  "of one call. It is the blunt filter; the local-confidence stretch below asks a " +
+                  "different question."
+                : confidenceShortName + " is this source's native per-call confidence.";
+            sb.AppendLine(Wrap(confidenceExplanation + " It is an operational threshold, not a " +
+                               "calibrated de novo FDR, and it is not interchangeable with another " +
+                               "caller's score.", "    "));
+            sb.AppendLine();
+            sb.AppendLine("Stretch length (" + c.StretchLength.ToString(CultureInfo.CurrentCulture) +
+                          " residues) and stretch floor (" + c.StretchFloor.ToString(CultureInfo.CurrentCulture) + "%)");
+            sb.AppendLine(Wrap("One criterion in two boxes, and the sharp one: somewhere in the sequence " +
+                               "there must be a run of that many CONSECUTIVE residues, each of them at " +
+                               "or above that confidence. A residue below the floor breaks the run. This " +
+                               "is what keeps the sequence with one trustworthy region and drops the one " +
+                               "a global score can flatter; it complements rather than replaces the " +
+                               "source-native score cutoff.", "    "));
+            sb.AppendLine();
+            if (isPublishedPeaksBaseline)
+            {
+                sb.AppendLine("For the historical three-run PEAKS de-novo-only baseline, these defaults kept");
+                sb.AppendLine("35,686 rows of 181,643 (19.6%). Those counts do not apply to another source");
+                sb.AppendLine("or cutoff; use the counters on this screen for the loaded data.");
+            }
+            sb.AppendLine("Loosening the filters is a decision about how much uncertain sequence you carry");
+            sb.AppendLine("into every later step. The");
+            sb.AppendLine("per-run breakdown under the counters is where to look for a run that behaved");
+            sb.AppendLine("differently from the others.");
+            sb.AppendLine();
+
+            sb.AppendLine("THE FIVE VERDICTS, IN PLAIN LANGUAGE");
+            sb.AppendLine("------------------------------------");
+            sb.AppendLine("Layer 2 first joins by normalized acquisition file and MS2 scan. It then requires");
+            sb.AppendLine("the same reported charge and precursor m/z within 20 ppm, isotope-error-aware so");
+            sb.AppendLine("the M, M+-1 and M+-2 selections of one precursor match, before comparing sequences.");
+            sb.AppendLine("Each filtered row from the selected source receives one of five verdicts:");
+            sb.AppendLine();
+            sb.AppendLine("De novo only        nothing in the search shares that spectrum. This is new");
+            sb.AppendLine("                    relative to PatternLab at the file-and-scan level; the");
+            sb.AppendLine("                    current screen reports the count for the loaded source.");
+            sb.AppendLine("Different precursor the scan is shared, but no PatternLab PSM has both the same");
+            sb.AppendLine("context             charge and m/z within 20 ppm. No sequence comparison is made.");
+            sb.AppendLine("Redundant equal     same file, scan, charge, m/z and sequence once the notation");
+            sb.AppendLine("                    is normalised. It only confirms what PatternLab has.");
+            sb.AppendLine("Equal but weak PSM  same comparable precursor and sequence, but PatternLab's own");
+            sb.AppendLine("                    cross-correlation is below the threshold.");
+            sb.AppendLine("Overlapping         same file, scan, charge and m/z, but a different sequence.");
+            sb.AppendLine("alternative         It is excluded from additive de novo quantification and kept");
+            sb.AppendLine("                    for review. It is not a database-search accuracy estimate.");
+            sb.AppendLine();
+            if (isPublishedPeaksBaseline)
+            {
+                sb.AppendLine("In the historical three-run PEAKS de-novo-only baseline, 10,249 filtered rows");
+                sb.AppendLine("shared file + scan with PatternLab. Of those, 4,874 reported a different");
+                sb.AppendLine("charge; 4,355 shared charge but not m/z; and 1,020 passed file + scan + charge");
+                sb.AppendLine("+ 20-ppm m/z. Inside that final set, 2 were strict PTM-cleaned sequence matches,");
+                sb.AppendLine("2 more became equivalent after I/L folding, and 1,016 remained alternatives.");
+                sb.AppendLine("The earlier 1,129 / 1,125 figures did not require equal charge and are superseded.");
+                sb.AppendLine();
+            }
+            sb.AppendLine("The different-precursor-context verdict is worth understanding. A mass spectrometer");
+            sb.AppendLine("isolates a window, not a molecule, so two species eluting together are");
+            sb.AppendLine("fragmented into ONE spectrum: a chimeric spectrum. PatternLab explained one of");
+            sb.AppendLine("them; the de novo call may be an alternative ion in that window. The scan number");
+            sb.AppendLine("alone cannot establish duplication, sequence conflict, or biological truth.");
+            sb.AppendLine();
+            sb.AppendLine("That is why scan number alone is never used to claim equality. Charge and m/z are");
+            sb.AppendLine("explicit gates; failing either means a different precursor context, not a conflict.");
+            sb.AppendLine();
+
+            sb.AppendLine("THE DATABASE-SEARCH AGREEMENT CONTROL");
+            sb.AppendLine("-------------------------------------");
+            sb.AppendLine("The valid search-vs-search control compares PatternLab PSMs with PEAKS db.psms,");
+            sb.AppendLine("not with a de novo export. In the historical three-run control, the two database");
+            sb.AppendLine("searches shared 57,956 file+scan keys; 56,626 (97.7%) had an exact sequence after");
+            sb.AppendLine("PTM notation was removed. They shared a reported charge on 57,507 keys, and 56,626");
+            sb.AppendLine("of those were exact (98.5%). Those are dataset-specific historical values: use the");
+            sb.AppendLine("loaded project's database-search concordance table for a current analysis.");
+            sb.AppendLine();
+
+            sb.AppendLine("THE REVIEW QUEUE, AND WHY IT IS MANUAL");
+            sb.AppendLine("--------------------------------------");
+            sb.AppendLine("The queue holds exactly two of the five verdicts: overlapping alternatives, and");
+            sb.AppendLine("agreements where PatternLab's own evidence was weak. The other three are");
+            sb.AppendLine("results, and a result does not need a decision.");
+            sb.AppendLine();
+            sb.AppendLine("An overlapping alternative is a de novo hypothesis on a comparable precursor.");
+            sb.AppendLine("Nothing in either");
+            sb.AppendLine("answer decides which is right: a cross-correlation and " + confidenceName + " are not on the");
+            sb.AppendLine("same scale, are not calibrated against each other, and are not measuring the");
+            sb.AppendLine("same thing. An automatic rule here would be an invented threshold dressed as a");
+            sb.AppendLine("result, and it would be invisible afterwards.");
+            sb.AppendLine();
+            sb.AppendLine("So the program presents the evidence and decides nothing. The table is");
+            sb.AppendLine("read-only and shows both sequences side by side with the cross-correlation on");
+            sb.AppendLine("the PatternLab side and " + confidenceName + " plus the weakest residue confidence on the de");
+            sb.AppendLine("novo side, plus how far apart the two precursors were in ppm. It is a");
+            sb.AppendLine("review set for the loaded source. Export it and");
+            sb.AppendLine("the evidence can be inspected away from this screen. These rows are not added to");
+            sb.AppendLine("the de novo signal while unresolved, so review cannot inflate quantification.");
+            sb.AppendLine();
+            sb.AppendLine("An equal-but-weak row is retained in the review export rather than labelled as an");
+            sb.AppendLine("ordinary redundant confirmation. It is excluded from additive de novo quantification");
+            sb.AppendLine("until reviewed, so the evidence remains visible without double-counting its signal.");
+            sb.AppendLine();
+
+            sb.AppendLine("WHAT THE EXTRACTED NUMBERS ARE (LAYER 3)");
+            sb.AppendLine("----------------------------------------");
+            sb.AppendLine("Layer 3 opens each run's .raw once and integrates a chromatogram for every kept");
+            sb.AppendLine("precursor, at its own anchor scan. The acquisitions are found BY FILE NAME, one");
+            sb.AppendLine("run is held in memory at a time, and the results are cached beside the RAW");
+            sb.AppendLine("files so a second session over the same runs costs seconds instead of minutes.");
+            sb.AppendLine();
+            sb.AppendLine("M+0 is the monoisotopic peak alone: the isotope that carries no heavy carbon.");
+            sb.AppendLine("The whole isotope envelope (M+0 plus M+1 plus M+2) is measured beside it, but");
+            sb.AppendLine("only as a diagnostic, and it is deliberately kept out of the chart in Layer 5.");
+            sb.AppendLine("PatternLab's stored quants are M+0, and one bar cannot be built from two");
+            sb.AppendLine("different bases without saying something false about the comparison.");
+            sb.AppendLine();
+            sb.AppendLine("The counts come in TWO GRAINS and the column headings say which:");
+            sb.AppendLine();
+            sb.AppendLine("    ANCHORS   one request per MS2 scan that fired on that precursor. \"Rows");
+            sb.AppendLine("              in\", \"unique precursors\" and \"with signal\" are anchors.");
+            sb.AppendLine("    PEAKS     one integrated elution peak. \"Distinct peaks\" and every area");
+            sb.AppendLine("              are peaks.");
+            sb.AppendLine();
+            sb.AppendLine("They differ because one elution peak is usually sampled by several MS2 scans:");
+            sb.AppendLine("several anchors, one peak, and the extractor hands that same peak back to each");
+            sb.AppendLine("of them. Every total on this screen is summed over DISTINCT PEAKS. Summing per");
+            sb.AppendLine("anchor instead would add the same trapezoid once per MS2 event, which inflates");
+            sb.AppendLine("the ion current by a few percent, always upwards, and never fails a check. The");
+            sb.AppendLine("\"redundant anchors\" and \"redundant area\" columns report exactly what that");
+            sb.AppendLine("mistake would have added.");
+            sb.AppendLine();
+            sb.AppendLine("The \"shared-window bound\" column is a BOUND, not a correction. Two peaks of the");
+            sb.AppendLine("same precursor inside one extraction window can be two genuine elution events");
+            sb.AppendLine("across a long gradient, or one broad peak entered twice; telling them apart");
+            sb.AppendLine("needs each peak's scan span, which this extraction does not record. So they are");
+            sb.AppendLine("all kept, and the most that could still be double-counted (each window's total");
+            sb.AppendLine("less its largest peak) is printed instead of being quietly removed.");
+            sb.AppendLine();
+
+            sb.AppendLine("WHAT THE HOMOLOGY LAYER MAPS (LAYER 4)");
+            sb.AppendLine("--------------------------------------");
+            sb.AppendLine("A de novo sequence has no protein attached to it. Layer 4 asks whether it looks");
+            sb.AppendLine("like one anyway: each DISTINCT kept sequence is aligned against the proteins of");
+            sb.AppendLine("a Family Cluster File, and every surviving hit is attributed to the User ID");
+            sb.AppendLine("family of the protein it landed in. One file answers both halves, which is why");
+            sb.AppendLine("a hit can never land in a protein the family table does not know.");
+            sb.AppendLine();
+            sb.AppendLine("The sequences are deduplicated first: the same tag read in fifty spectra is one");
+            sb.AppendLine("alignment, not fifty, so \"peptides searched\" is far below the rows kept in");
+            sb.AppendLine("Layer 1. The minimum identity is a PREFILTER, not the score: a protein that");
+            sb.AppendLine("never reaches that fraction of literal identity is never aligned at all.");
+            sb.AppendLine("Isoleucine and leucine are treated as one residue there by default, because");
+            sb.AppendLine("they have the same mass and a fragment spectrum cannot tell them apart, so");
+            sb.AppendLine("punishing the engine's arbitrary choice between them would be punishing physics.");
+            sb.AppendLine();
+            sb.AppendLine("WHAT THE DECOY-ONLY COUNT MEANS. It is a CONTROL, and it is not an FDR. The");
+            sb.AppendLine("family file carries reversed sequences beside the real ones. A peptide that");
+            sb.AppendLine("found only reversed proteins was attributed to something that does not exist,");
+            sb.AppendLine("so the rate of that is the rate at which this identity threshold invents a");
+            sb.AppendLine("family out of chance similarity. Read \"mapped to targets\" beside it and never");
+            sb.AppendLine("on its own: if the two are of the same size, the threshold is too low, whatever");
+            sb.AppendLine("the mapped number looks like alone.");
+            sb.AppendLine();
+            sb.AppendLine("It is not an FDR because nothing here is calibrated into a corrected error rate");
+            sb.AppendLine("per hit: there is no competition between a target and its decoy for one");
+            sb.AppendLine("spectrum, and no q-value is computed or implied. It is one number to read the");
+            sb.AppendLine("other against. A peptide that found both keeps its targets and drops its");
+            sb.AppendLine("decoys; a peptide that found only decoys keeps them, which is the entire point");
+            sb.AppendLine("of having them, and it stays out of the family table below.");
+            sb.AppendLine();
+            sb.AppendLine("Most kept sequences match nothing at all, and that is not a defect. They are");
+            sb.AppendLine("the reason a de novo search was run.");
+            sb.AppendLine();
+
+            sb.AppendLine("WHAT THE THREE-WAY CHART PARTITIONS (LAYER 5)");
+            sb.AppendLine("---------------------------------------------");
+            sb.AppendLine("One bar per run, plus one for the runs together. The bar is the run's WHOLE ion");
+            sb.AppendLine("current, read from the RAW with no trimming at either end, and it is cut into");
+            sb.AppendLine("three exhaustive parts:");
+            sb.AppendLine();
+            sb.AppendLine("    PatternLab   the ion current of the peptides the database search");
+            sb.AppendLine("                 identified and quantified.");
+            sb.AppendLine("    De novo      what the kept de novo set adds on top of that.");
+            sb.AppendLine("    Remainder    what is left, and still has no owner.");
+            sb.AppendLine();
+            sb.AppendLine("The three shares add up to 100% by construction, because the remainder is");
+            sb.AppendLine("defined as what the other two leave. That is arithmetic, not a result, and the");
+            sb.AppendLine("thing that had to be earned instead is COMPARABILITY: both of the first two");
+            sb.AppendLine("numerators are monoisotopic, and both count one integrated peak once.");
+            sb.AppendLine();
+            sb.AppendLine("A NEGATIVE remainder is never clamped to zero. It is a finding: it says the two");
+            sb.AppendLine("numerators together claim more signal than the run's chromatogram holds, and");
+            sb.AppendLine("hiding it would hide exactly the case worth knowing about.");
+            sb.AppendLine();
+            sb.AppendLine("THE PROVENANCE WORDS. Each number of the table carries one of three, because");
+            sb.AppendLine("the three parts arrive by three different routes and only two of them are");
+            sb.AppendLine("measurements:");
+            sb.AppendLine();
+            sb.AppendLine("    measured   computed here, from the RAW file, by the machinery named beside");
+            sb.AppendLine("               the word. The total ion current and the de novo areas are this.");
+            sb.AppendLine("    recorded   read out of a file that had written it down: a divisor recorded");
+            sb.AppendLine("               in the .plp, or the stored quants of a .xic2. The PatternLab");
+            sb.AppendLine("               part is this.");
+            sb.AppendLine("    derived    neither measured nor read, but obtained from the others by");
+            sb.AppendLine("               arithmetic. The remainder is always this, and that is why it");
+            sb.AppendLine("               can come out negative.");
+            sb.AppendLine();
+            sb.AppendLine("The word alone is not enough, so the source is printed with it: \"recorded\"");
+            sb.AppendLine("does not distinguish a divisor read from a .plp from quants summed out of a");
+            sb.AppendLine(".xic2, and those are different measurements of different things.");
+            sb.AppendLine();
+            sb.AppendLine("Which source actually answered is printed above the table WORD FOR WORD,");
+            sb.AppendLine("refusals included. A project that merged its technical replicates holds one");
+            sb.AppendLine("averaged column for three acquisitions and cannot answer per run; no arithmetic");
+            sb.AppendLine("recovers what was averaged away, so it says so and the .xic2 is used instead.");
+            sb.AppendLine("Reducing that to a flag would hide which of the two you are looking at.");
+            sb.AppendLine();
+            sb.AppendLine("Every CSV this screen writes uses a dot for the decimal separator whatever your");
+            sb.AppendLine("machine's language is, and the partition numbers are written in their shortest");
+            sb.AppendLine("round-trippable form, so a value read back is the same bits that were plotted.");
+
+            return sb.ToString();
+        }
+
+        /// <summary>
+        /// Hard-wraps a paragraph at 76 columns with an indent, so the panel reads the same whatever the
+        /// window is doing and the assertions in the test suite see a stable shape.
+        /// </summary>
+        private static string Wrap(string text, string indent)
+        {
+            var sb = new StringBuilder();
+            var line = new StringBuilder(indent);
+
+            foreach (string word in (text ?? string.Empty).Split(' '))
+            {
+                if (word.Length == 0) continue;
+
+                if (line.Length > indent.Length && line.Length + 1 + word.Length > 76)
+                {
+                    sb.AppendLine(line.ToString());
+                    line.Clear();
+                    line.Append(indent);
+                }
+
+                if (line.Length > indent.Length) line.Append(' ');
+                line.Append(word);
+            }
+
+            if (line.Length > indent.Length) sb.Append(line.ToString());
+
+            return sb.ToString();
+        }
+    }
+}
