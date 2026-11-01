@@ -20,7 +20,7 @@ This is now FamilyQuant 2.0, a new project in a new repository, installed beside
 
 ## Off limits
 
-- `FamilyQuant/Properties/PublishProfiles/` and every version number: the orchestrator owns those.
+- `FamilyQuant/Properties/PublishProfiles/` and every version number, except in step N1: N1 is yours and includes the publish profile, the install address and version 2.0.0.0. After N1 the orchestrator owns those again.
 - The evidence model, fetch, classifier and apply code: FQEvidence owns them (E1, E2, E5, E6, E11, E12, E13). You build on the model it publishes in E1. Until that lands, work on F4 and F5, and do not guess its shape: read its commits and ask it through the orchestrator.
 - XAML and code-behind that FQLook owns, until a step in your queue hands you one: `App.xaml`, `MainWindow.*`, `HomeControl.*`, `ClusterGenerationControl.*`, `SuperClusterPreviewWindow.cs`, every theme file. F4 and F5 may need a minimal edit there; say so in the READY post.
 - The deck `BrProt_FamilyQuant_FourPart_Source_Decomposition.pptx` and anything feeding it.
