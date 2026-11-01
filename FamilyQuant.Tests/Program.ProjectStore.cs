@@ -21,6 +21,28 @@ namespace FamilyQuant.Tests
 {
     internal static partial class Program
     {
+        private static void GoldenNumberGuardTests()
+        {
+            var original = new Dictionary<string, byte[]>(StringComparer.Ordinal)
+            {
+                ["families.csv"] = Encoding.UTF8.GetBytes("family,share\r\n1,0.25\r\n"),
+            };
+            var same = original.ToDictionary(p => p.Key, p => p.Value.ToArray(), StringComparer.Ordinal);
+            Check("golden guard accepts identical export bytes", GoldenNumbers.Differences(original, same).Count == 0);
+            same["families.csv"] = Encoding.UTF8.GetBytes("family,share\r\n1,0.26\r\n");
+            Check("golden guard catches a one-share mutation of equal length",
+                GoldenNumbers.Differences(original, same).SequenceEqual(new[] { "families.csv" }));
+            same.Clear();
+            Check("golden guard catches a missing export", GoldenNumbers.Differences(original, same).Count == 1);
+            same["extra.csv"] = Array.Empty<byte>();
+            Check("golden guard catches an unexpected export", GoldenNumbers.Differences(original, same).Count == 2);
+            string numbers = GoldenNumbers.NumericValues("{\"generatedUtc\":\"now\",\"values\":[9007199254740993,0.12345678901234567]}");
+            Check("golden pack projection keeps integer and floating point literals without conversion",
+                numbers.Contains("9007199254740993") && numbers.Contains("0.12345678901234567"));
+            Check("golden pack projection ignores timestamp changes and object property order",
+                GoldenNumbers.NumericValues("{\"x\":2,\"generatedUtc\":\"first\",\"y\":3}")
+                == GoldenNumbers.NumericValues("{\"y\":3,\"generatedUtc\":\"second\",\"x\":2}"));
+        }
 
         // ============================================================ project store (Q2)
 
