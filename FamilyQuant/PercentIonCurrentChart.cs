@@ -15,13 +15,12 @@ namespace FamilyQuant
     ///
     /// Drawn with OnRender for the same reason as the other charts, and renders headless.
     /// </summary>
-    public class PercentIonCurrentChart : FrameworkElement, IPalettedChart
+    public class PercentIonCurrentChart : ChartDrawingBase, IPalettedChart
     {
         private readonly List<AnalyticsPeptide> peptides;
         private readonly double tic;
         private readonly double binWidth;
 
-        private ChartPalette palette = ChartPalette.Dark;
 
         /// <param name="tic">The run (or grouped) total ion current, or 0 to omit the share-of-TIC overlay.</param>
         /// <param name="palette">The colours to paint in, or null for the screen palette.</param>
@@ -40,22 +39,6 @@ namespace FamilyQuant
                       "current is known, are its share of all ion current.";
         }
 
-        /// <inheritdoc/>
-        public ChartPalette Palette
-        {
-            get => palette;
-            set
-            {
-                palette = value ?? ChartPalette.Dark;
-                InvalidateVisual();
-            }
-        }
-
-        private static FormattedText Text(string s, Brush brush, double size, bool bold = false) =>
-            new FormattedText(s, CultureInfo.CurrentCulture, FlowDirection.LeftToRight,
-                new Typeface(new FontFamily("Segoe UI"), FontStyles.Normal,
-                             bold ? FontWeights.Bold : FontWeights.Normal, FontStretches.Normal),
-                size, brush, 96);
 
         protected override void OnRender(DrawingContext dc)
         {
@@ -65,7 +48,7 @@ namespace FamilyQuant
             Brush Backdrop = pal.Backdrop, Ink = pal.Ink, Muted = pal.Muted, Grid = pal.Grid;
             Brush Found = pal.Found, OfTic = pal.OfTic;
 
-            dc.DrawRectangle(Backdrop, null, new Rect(0, 0, ActualWidth, ActualHeight));
+            DrawBackdrop(dc, Backdrop);
 
             var head = Text("Percent of ion current by mass", Ink, 13, bold: true);
             dc.DrawText(head, new Point(14, 10));
@@ -77,8 +60,7 @@ namespace FamilyQuant
 
             if (peptides.Count == 0)
             {
-                var none = Text("Nothing to show: no peptide carried a positive envelope yet.", Muted, 12);
-                dc.DrawText(none, new Point(plot.Left, plot.Top + plot.Height / 2));
+                DrawEmpty(dc, "Nothing to show: no peptide carried a positive envelope yet.", Muted, new Point(plot.Left, plot.Top + plot.Height / 2));
                 return;
             }
 
@@ -106,13 +88,10 @@ namespace FamilyQuant
             for (int i = 0; i <= 4; i++)
             {
                 double y = plot.Bottom - i / 4.0 * plot.Height;
-                dc.DrawLine(gridPen, new Point(plot.Left, y), new Point(plot.Right, y));
-                var label = Text((top * i / 4.0).ToString("P0", CultureInfo.CurrentCulture), Muted, 11);
-                dc.DrawText(label, new Point(plot.Left - label.Width - 8, y - label.Height / 2));
+                DrawHorizontalTick(dc, plot, y, gridPen, (top * i / 4.0).ToString("P0", CultureInfo.CurrentCulture), Muted);
             }
 
-            dc.DrawLine(axisPen, new Point(plot.Left, plot.Top), new Point(plot.Left, plot.Bottom));
-            dc.DrawLine(axisPen, new Point(plot.Left, plot.Bottom), new Point(plot.Right, plot.Bottom));
+            DrawAxes(dc, plot, axisPen);
 
             double slot = plot.Width / binCount;
             double barWidth = Math.Max(2, slot * 0.7);
