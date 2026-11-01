@@ -110,6 +110,20 @@ namespace FamilyQuant.Tests
                 return failed == 0 ? 0 : 1;
             }
 
+            if (args.Contains(CoherenceCheckRun.Argument))
+            {
+                CoherenceCheckRun.Run(args, Check);
+                Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
+                return failed == 0 ? 0 : 1;
+            }
+
+            if (args.Contains(NearestReviewedCheck.FullArgument))
+            {
+                NearestReviewedCheck.RunFull(args, Check);
+                Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
+                return failed == 0 ? 0 : 1;
+            }
+
             if (args.Contains(NearestReviewedCheck.Argument))
             {
                 NearestReviewedCheck.Run(args, Check);
@@ -566,6 +580,9 @@ namespace FamilyQuant.Tests
             Section("Nearest reviewed protein and the outside panel - never itself, gated, deterministic, offline");
             NearestReviewedTests(workDir);
             ReferencePanelTests(workDir);
+
+            Section("Coherence check - what the reviewed members of a family ever show");
+            CoherenceCheckTests();
 
             Section("Batch edit - one User ID and annotation for many selected rows");
             BatchCurationTests();
