@@ -537,7 +537,7 @@ namespace FamilyQuant
         /// <summary>
         /// Splits the current families into target-only, decoy-only and mixed.
         /// </summary>
-        public GroupingScore CalculateGroupingScore(string decoyTag = "Reverse_")
+        public GroupingScore CalculateGroupingScore(string decoyTag = SequenceLabels.DecoyPrefix)
         {
             var score = new GroupingScore();
 
@@ -578,7 +578,7 @@ namespace FamilyQuant
         /// alignments are no better than noise. Fusions of two unrelated TARGET families are invisible
         /// to it. Treat it as a floor ("do not cluster below this identity"), never as a budget to spend.
         /// </summary>
-        public double CalculateFDR(string decoyTag = "Reverse_")
+        public double CalculateFDR(string decoyTag = SequenceLabels.DecoyPrefix)
         {
             GroupingScore score = CalculateGroupingScore(decoyTag);
 
@@ -592,7 +592,7 @@ namespace FamilyQuant
         /// each one, so a threshold can be chosen from the whole curve instead of a single optimiser
         /// answer. Runs USEARCH once per step, from the strictest identity down to the loosest.
         /// </summary>
-        public static List<IdentityScanRow> ScanIdentities(string fileName, int from = 95, int to = 10, int step = 5, string decoyTag = "Reverse_", bool exhaustive = true)
+        public static List<IdentityScanRow> ScanIdentities(string fileName, int from = 95, int to = 10, int step = 5, string decoyTag = SequenceLabels.DecoyPrefix, bool exhaustive = true)
         {
             if (step <= 0) throw new ArgumentOutOfRangeException(nameof(step), "Step must be positive.");
             if (from < to) throw new ArgumentException("'from' must be greater than or equal to 'to'.", nameof(from));
@@ -610,7 +610,7 @@ namespace FamilyQuant
                 GroupingScore score = clustered.CalculateGroupingScore(decoyTag);
                 int nonContaminantTargets = clustered.GroupedFastaItems.Count(g => g.Any(i =>
                     !(i.SequenceIdentifier ?? string.Empty).StartsWith(decoyTag, StringComparison.Ordinal)
-                    && !(i.SequenceIdentifier ?? string.Empty).StartsWith("contaminant_", StringComparison.OrdinalIgnoreCase)));
+                    && !(i.SequenceIdentifier ?? string.Empty).StartsWith(SequenceLabels.ContaminantPrefix, StringComparison.OrdinalIgnoreCase)));
 
                 rows.Add(new IdentityScanRow()
                 {
@@ -649,7 +649,7 @@ namespace FamilyQuant
         /// then not a single upper interval and the bisection can settle on either edge. At the default
         /// of 0 the predicate reduces to "no mixed family at all", which has no such hole.
         /// </summary>
-        public static double DivideAndConquer(string fileName, double acceptableScore = 0.0, string decoyTag = "Reverse_", bool exhaustive = true)
+        public static double DivideAndConquer(string fileName, double acceptableScore = 0.0, string decoyTag = SequenceLabels.DecoyPrefix, bool exhaustive = true)
         {
             return DivideAndConquerDetailed(fileName, acceptableScore, decoyTag, exhaustive).Identity;
         }
@@ -659,7 +659,7 @@ namespace FamilyQuant
         /// the families that mix there are WHY the search stopped where it did. One short peptide matching
         /// its own reversed decoy can set the floor on its own, and a bare number cannot show that.
         /// </summary>
-        public static DivideAndConquerResult DivideAndConquerDetailed(string fileName, double acceptableScore = 0.0, string decoyTag = "Reverse_", bool exhaustive = true)
+        public static DivideAndConquerResult DivideAndConquerDetailed(string fileName, double acceptableScore = 0.0, string decoyTag = SequenceLabels.DecoyPrefix, bool exhaustive = true)
         {
             var fi = new FileInfo(fileName);
 

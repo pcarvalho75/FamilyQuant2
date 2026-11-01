@@ -1492,7 +1492,8 @@ namespace FamilyQuant
                 "calculation.");
 
             ColumnLocus.HeaderStyle = HeaderTip(
-                "The protein identifier as in the database. \"Reverse_\" marks a decoy and \"contaminant\" a " +
+                "The protein identifier as in the database. \"" + SequenceLabels.DecoyPrefix +
+                "\" marks a decoy and \"" + SequenceLabels.ContaminantMarker + "\" a " +
                 "laboratory contaminant; both can be hidden in the Display and Export panel. Right-click a " +
                 "row to copy its UniProt code or open its UniProt page; Ctrl+C copies the column you clicked.");
 

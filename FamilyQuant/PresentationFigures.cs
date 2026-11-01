@@ -23,9 +23,9 @@ namespace FamilyQuant
             if (curation == null) throw new ArgumentNullException(nameof(curation));
             var groups = curation.GroupedFastaItems;
             bool IsDecoy(FastaItemExtended i) => (i.SequenceIdentifier ?? string.Empty)
-                .StartsWith("Reverse_", StringComparison.Ordinal);
+                .StartsWith(SequenceLabels.DecoyPrefix, StringComparison.Ordinal);
             bool IsContaminant(FastaItemExtended i) => (i.SequenceIdentifier ?? string.Empty)
-                .StartsWith("contaminant_", StringComparison.OrdinalIgnoreCase);
+                .StartsWith(SequenceLabels.ContaminantPrefix, StringComparison.OrdinalIgnoreCase);
 
             return new ReferenceComponentSummary
             {

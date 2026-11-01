@@ -11,13 +11,13 @@ namespace FamilyQuant
     /// </summary>
     public static class FamilyFilter
     {
-        public const string DecoyPrefix = "Reverse_";
+        public const string DecoyPrefix = SequenceLabels.DecoyPrefix;
 
         /// <summary>
         /// Matched anywhere in the identifier, case-insensitively, so both "contaminant_KRT1" and its
         /// decoy "Reverse_contaminant_KRT1" are recognised.
         /// </summary>
-        public const string ContaminantMarker = "contaminant";
+        public const string ContaminantMarker = SequenceLabels.ContaminantMarker;
 
         public static bool IsContaminant(FastaItemExtended item)
         {
