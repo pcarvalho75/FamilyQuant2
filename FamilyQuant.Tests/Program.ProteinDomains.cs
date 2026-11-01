@@ -21,6 +21,174 @@ namespace FamilyQuant.Tests
 {
     internal static partial class Program
     {
+        private static Task<Evidence.EvidenceFetchResult> FetchEvidenceForTest(IReadOnlyCollection<FastaItemExtended> items,
+            System.Net.Http.HttpMessageHandler handler) => Evidence.EvidenceFetcher.FetchAsync(
+                new FamilyClusterFile { MyExtendedFastaItems = items.ToList() }, handler);
+
+        private static Dictionary<string, string> ParseDomainsForTest(string json) => Evidence.EvidenceFetcher.Parse(json)
+            .ToDictionary(p => p.Key, p => Evidence.EvidenceFetcher.DomainNames(p.Value), StringComparer.Ordinal);
+        private const string RichEvidenceReply = """
+            {"results":[{"primaryAccession":"P00001","entryType":"UniProtKB reviewed (Swiss-Prot)",
+              "proteinDescription":{"flag":"Fragment"},
+              "comments":[{"commentType":"SIMILARITY","texts":[{"value":"Belongs to the example family. Narrow subfamily."}]},
+                          {"commentType":"TISSUE SPECIFICITY","texts":[{"value":"Expressed in a source tissue"}]}],
+              "keywords":[{"id":"KW-0001","name":"example keyword"}],
+              "features":[{"type":"Transmembrane"},{"type":"Transmembrane"},{"type":"Domain"}],
+              "uniProtKBCrossReferences":[
+                {"database":"Pfam","id":"PF00001","properties":[{"key":"EntryName","value":"Example domain"}]},
+                {"database":"PANTHER","id":"PTHR00001","properties":[{"key":"EntryName","value":"Example reference"}]}]}]}
+            """;
+
+        private static void EvidenceFetchTests()
+        {
+            const string compositeFamilyReply = """
+                {"results":[{"primaryAccession":"P00001","comments":[
+                  {"commentType":"SIMILARITY","texts":[{"value":"In the first section; belongs to the alpha family"}]},
+                  {"commentType":"SIMILARITY","texts":[{"value":"In the second section; belongs to the beta superfamily. Specific beta family"}]}]}]}
+                """;
+            Evidence.ProteinEvidence composite = Evidence.EvidenceFetcher.Parse(compositeFamilyReply)["P00001"];
+            Check("regional memberships retain separate hierarchies and do not invent one family label",
+                composite.FamilyAnnotation == "alpha family; beta superfamily, Specific beta family" && composite.Family.Length == 0
+                && composite.FamilyMemberships?.Count == 2 && composite.SimilarityAnnotations?.Count == 2
+                && composite.FamilyMemberships[0].Context == "In the first section");
+            Evidence.ProteinEvidence unranked = Evidence.EvidenceFetcher.Parse("""
+                {"results":[{"primaryAccession":"P00001","comments":[
+                  {"commentType":"SIMILARITY","texts":[{"value":"Belongs to the unranked example group"}]}]}]}
+                """)["P00001"];
+            Check("an unranked similarity statement is retained without being called a family annotation",
+                unranked.FamilyAnnotation.Length == 0 && unranked.Family.Length == 0
+                && unranked.SimilarityAnnotations?.Single() == "Belongs to the unranked example group");
+            var protein = new FastaItemExtended { SequenceIdentifier = "sp|P00001|TEST", UserID = 17, USearchID = 17 };
+            var handler = new CannedUniProt((System.Net.HttpStatusCode.OK, RichEvidenceReply));
+            FetchEvidenceForTest(new[] { protein }, handler).GetAwaiter().GetResult();
+            Check("fetch reads all evidence fields while keeping the Domains column",
+                protein.Evidence is { Reviewed: true, Fragment: true, TransmembraneCount: 2 } evidence
+                && evidence.Family == "example family" && evidence.Subfamily == "Narrow subfamily"
+                && evidence.Keywords.SequenceEqual(new[] { "example keyword" })
+                && evidence.TissueSpecificity.SequenceEqual(new[] { "Expressed in a source tissue" })
+                && evidence.Pfam.Count == 1 && evidence.Pfam[0].Accession == "PF00001"
+                && evidence.Panther.Count == 1 && evidence.Panther[0].Name == "Example reference"
+                && protein.Domains == "Example domain" && protein.UserID == 17 && protein.USearchID == 17);
+
+            var progress = new List<Evidence.FetchProgress>();
+            FamilyClusterFile complete = Fixture(1);
+            complete.MyExtendedFastaItems.Add(new FastaItemExtended
+            {
+                SequenceIdentifier = "Reverse_sp|P00001|TEST", Domains = "decoy annotation", UserID = 22,
+            });
+            Evidence.EvidenceFetcher.FetchAsync(complete,
+                new CannedUniProt((System.Net.HttpStatusCode.OK, RichEvidenceReply)),
+                new EvidenceProgress(p => progress.Add(p))).GetAwaiter().GetResult();
+            Check("file-level fetch records the release, record source and progress without changing decoys",
+                complete.EvidenceSource?.Release == "2026_03"
+                && complete.MyExtendedFastaItems[0].Evidence?.Source?.Release == "2026_03"
+                && complete.MyExtendedFastaItems[1].Domains == "decoy annotation"
+                && complete.MyExtendedFastaItems[1].Evidence == null
+                && progress.Count == 2 && progress[0].CompletedBatches == 0 && progress[1].CompletedBatches == 1);
+
+            FamilyClusterFile missing = Fixture(2);
+            var older = new Evidence.ProteinEvidence
+            {
+                Family = "older family", Source = new Evidence.EvidenceRecordSource { Provider = "UniProt", Release = "earlier" },
+            };
+            missing.MyExtendedFastaItems[1].Evidence = older;
+            Evidence.EvidenceFetchResult partial = Evidence.EvidenceFetcher.FetchAsync(missing,
+                new CannedUniProt((System.Net.HttpStatusCode.OK, RichEvidenceReply))).GetAwaiter().GetResult();
+            Check("a missing entry keeps its annotations and earlier record source, with its accession recorded",
+                partial.Asked == 2 && partial.Found == 1 && partial.Missing == 1
+                && ReferenceEquals(missing.MyExtendedFastaItems[1].Evidence, older)
+                && missing.MyExtendedFastaItems[1].Domains == "before"
+                && missing.MyExtendedFastaItems[1].Evidence!.Source!.Release == "earlier"
+                && missing.EvidenceSource!.UnresolvedAccessions!.SequenceEqual(new[] { "P00002" }));
+
+            FamilyClusterFile lateRefusal = Fixture(501);
+            string before = lateRefusal.ToJsonText();
+            var refused = new CannedUniProt((System.Net.HttpStatusCode.OK, Reply(lateRefusal.MyExtendedFastaItems.Take(500))),
+                (System.Net.HttpStatusCode.BadRequest, "refused"));
+            Check("a refused later batch applies no protein, domain or provenance changes and is not retried",
+                Throws<System.Net.Http.HttpRequestException>(() => Evidence.EvidenceFetcher.FetchAsync(lateRefusal, refused).GetAwaiter().GetResult())
+                && lateRefusal.ToJsonText() == before && refused.Asked.Count == 2);
+
+            FamilyClusterFile cancelled = Fixture(501);
+            before = cancelled.ToJsonText();
+            using var cancel = new CancellationTokenSource();
+            var cancelHandler = new CannedUniProt((System.Net.HttpStatusCode.OK, Reply(cancelled.MyExtendedFastaItems.Take(500))));
+            Check("cancellation after a successful batch applies nothing and sends no later request",
+                Throws<OperationCanceledException>(() => Evidence.EvidenceFetcher.FetchAsync(cancelled, cancelHandler,
+                    new EvidenceProgress(p => { if (p.CompletedBatches == 1) cancel.Cancel(); }), cancel.Token).GetAwaiter().GetResult())
+                && cancelled.ToJsonText() == before && cancelHandler.Asked.Count == 1);
+
+            FamilyClusterFile mixedRelease = Fixture(501);
+            before = mixedRelease.ToJsonText();
+            var mixedHandler = new CannedUniProt((System.Net.HttpStatusCode.OK, Reply(mixedRelease.MyExtendedFastaItems.Take(500))),
+                (System.Net.HttpStatusCode.OK, Reply(mixedRelease.MyExtendedFastaItems.Skip(500))))
+            {
+                ReleaseForRequest = n => n == 1 ? "first-release" : "second-release",
+            };
+            Check("a release change between batches applies nothing",
+                Throws<InvalidDataException>(() => Evidence.EvidenceFetcher.FetchAsync(mixedRelease, mixedHandler).GetAwaiter().GetResult())
+                && mixedRelease.ToJsonText() == before);
+
+            FamilyClusterFile noRelease = Fixture(1);
+            before = noRelease.ToJsonText();
+            var noReleaseHandler = new CannedUniProt((System.Net.HttpStatusCode.OK, RichEvidenceReply)) { ReleaseForRequest = _ => "" };
+            Check("a reply with no release is refused without recording unsupported provenance",
+                Throws<InvalidDataException>(() => Evidence.EvidenceFetcher.FetchAsync(noRelease, noReleaseHandler).GetAwaiter().GetResult())
+                && noRelease.ToJsonText() == before);
+
+            FamilyClusterFile noStatus = Fixture(1);
+            before = noStatus.ToJsonText();
+            Check("a fetched record without the requested review status is refused",
+                Throws<InvalidDataException>(() => Evidence.EvidenceFetcher.FetchAsync(noStatus,
+                    new CannedUniProt((System.Net.HttpStatusCode.OK, """{"results":[{"primaryAccession":"P00001"}]}"""))).GetAwaiter().GetResult())
+                && noStatus.ToJsonText() == before);
+
+            FamilyClusterFile noCodes = Fixture(1);
+            noCodes.MyExtendedFastaItems[0].SequenceIdentifier = "local_sequence";
+            before = noCodes.ToJsonText();
+            var unusedHandler = new CannedUniProt();
+            Evidence.EvidenceFetchResult nothing = Evidence.EvidenceFetcher.FetchAsync(noCodes, unusedHandler).GetAwaiter().GetResult();
+            Check("a file without accession codes is unchanged and sends no request",
+                nothing.Asked == 0 && unusedHandler.Asked.Count == 0 && noCodes.ToJsonText() == before);
+
+            FamilyClusterFile changed = Fixture(1);
+            Check("a protein changed during fetch cannot receive evidence for its previous identifier",
+                Throws<InvalidDataException>(() => Evidence.EvidenceFetcher.FetchAsync(changed,
+                    new CannedUniProt((System.Net.HttpStatusCode.OK, RichEvidenceReply)),
+                    new EvidenceProgress(p => { if (p.CompletedBatches == 1) changed.MyExtendedFastaItems[0].SequenceIdentifier = "local_changed"; }))
+                    .GetAwaiter().GetResult()) && changed.MyExtendedFastaItems[0].Evidence == null
+                && changed.MyExtendedFastaItems[0].Domains == "before" && changed.DomainSource == "before");
+
+            var rateLimited = new CannedUniProt((System.Net.HttpStatusCode.TooManyRequests, "busy"),
+                (System.Net.HttpStatusCode.OK, RichEvidenceReply));
+            Check("an HTTP 429 batch is retried before applying complete evidence",
+                Evidence.EvidenceFetcher.FetchAsync(Fixture(1), rateLimited).GetAwaiter().GetResult().Found == 1
+                && rateLimited.Asked.Count == 2);
+
+            static FamilyClusterFile Fixture(int count) => new FamilyClusterFile
+            {
+                DomainSource = "before", LockedUserIds = new HashSet<int> { 17 }, SourceSha256 = "unchanged-source",
+                MyExtendedFastaItems = Enumerable.Range(1, count).Select(i => new FastaItemExtended
+                {
+                    SequenceIdentifier = "sp|P" + i.ToString("D5", CultureInfo.InvariantCulture) + "|TEST",
+                    Sequence = "ACDEFGHIK", Domains = "before", UserID = i + 20, USearchID = i + 20,
+                }).ToList(),
+            };
+            static string Reply(IEnumerable<FastaItemExtended> items) => JsonSerializer.Serialize(new
+            {
+                results = items.Select(i => new
+                {
+                    primaryAccession = FamilyNaming.Accession(i.SequenceIdentifier), entryType = "UniProtKB unreviewed (TrEMBL)",
+                }).ToArray(),
+            });
+        }
+
+        private sealed class EvidenceProgress : IProgress<Evidence.FetchProgress>
+        {
+            private readonly Action<Evidence.FetchProgress> report;
+            public EvidenceProgress(Action<Evidence.FetchProgress> report) => this.report = report;
+            public void Report(Evidence.FetchProgress value) => report(value);
+        }
         private static void EvidenceStorageTests(string workDir)
         {
             const string evidenceJson = """
@@ -64,6 +232,7 @@ namespace FamilyQuant.Tests
         {
             private readonly Queue<(System.Net.HttpStatusCode Status, string Body)> replies;
             public List<string> Asked { get; } = new List<string>();
+            public Func<int, string>? ReleaseForRequest { get; set; }
 
             public CannedUniProt(params (System.Net.HttpStatusCode Status, string Body)[] replies) =>
                 this.replies = new Queue<(System.Net.HttpStatusCode, string)>(replies);
@@ -73,25 +242,26 @@ namespace FamilyQuant.Tests
                 Asked.Add(request.RequestUri!.ToString());
                 (System.Net.HttpStatusCode status, string body) = replies.Dequeue();
                 var response = new System.Net.Http.HttpResponseMessage(status) { Content = new System.Net.Http.StringContent(body) };
-                response.Headers.Add("x-uniprot-release", "2026_03");
+                string release = ReleaseForRequest?.Invoke(Asked.Count) ?? "2026_03";
+                if (release.Length > 0) response.Headers.Add("x-uniprot-release", release);
                 return Task.FromResult(response);
             }
         }
 
         private const string UniProtReply = """
             {"results":[
-              {"primaryAccession":"P0DM77","uniProtKBCrossReferences":[]},
-              {"primaryAccession":"O93517","uniProtKBCrossReferences":[
+              {"primaryAccession":"P0DM77","entryType":"UniProtKB unreviewed (TrEMBL)","uniProtKBCrossReferences":[]},
+              {"primaryAccession":"O93517","entryType":"UniProtKB unreviewed (TrEMBL)","uniProtKBCrossReferences":[
                 {"database":"Pfam","id":"PF00200","properties":[{"key":"EntryName","value":"Disintegrin"},{"key":"MatchStatus","value":"1"}]},
                 {"database":"Pfam","id":"PF01421","properties":[{"key":"EntryName","value":"Reprolysin"},{"key":"MatchStatus","value":"1"}]}]},
-              {"primaryAccession":"P83044"}
+              {"primaryAccession":"P83044","entryType":"UniProtKB unreviewed (TrEMBL)"}
             ]}
             """;
 
         /// <summary>Pfam from UniProt: read the reply, ask only what the service accepts, and never leave half a file.</summary>
         private static void ProteinDomainsTests(string workDir)
         {
-            Dictionary<string, string> parsed = ProteinDomains.Parse(UniProtReply);
+            Dictionary<string, string> parsed = ParseDomainsForTest(UniProtReply);
             Check("a reply gives each protein's domains by name", parsed["O93517"] == "Disintegrin; Reprolysin", parsed["O93517"]);
             Check("and a protein looked up with none is there, empty", parsed["P0DM77"] == "" && parsed["P83044"] == "");
             Check("the stored value reads back as names, tolerating spaces and nothing at all",
@@ -118,7 +288,7 @@ namespace FamilyQuant.Tests
             List<FastaItemExtended> items = Disintegrins();
             items.Add(new FastaItemExtended { SequenceIdentifier = "Reverse_sp|O93517|VM3S4_GLOBR", Description = "", UserID = 1, USearchID = 1 });
             var canned = new CannedUniProt((System.Net.HttpStatusCode.OK, UniProtReply));
-            ProteinDomains.FetchResult result = ProteinDomains.FetchAsync(items, canned).GetAwaiter().GetResult();
+            Evidence.EvidenceFetchResult result = FetchEvidenceForTest(items, canned).GetAwaiter().GetResult();
             Check("a fetch fills the proteins and records the release",
                 items.First(i => i.SequenceIdentifier == "sp|O93517|VM3S4_GLOBR").Domains == "Disintegrin; Reprolysin"
                 && result.Source == "UniProt 2026_03" && result.WithDomains == 1 && result.Asked == 7, result.Source + " " + result.Asked);
@@ -133,7 +303,7 @@ namespace FamilyQuant.Tests
             try
             {
                 var refused = new CannedUniProt((System.Net.HttpStatusCode.BadRequest, ""));
-                ProteinDomains.FetchAsync(kept, refused).GetAwaiter().GetResult();
+                FetchEvidenceForTest(kept, refused).GetAwaiter().GetResult();
             }
             catch (System.Net.Http.HttpRequestException) { failed = true; }
             Check("a refused request is an error, not a file full of empty domains, and what was there stays", failed && kept[0].Domains == "Reprolysin");
@@ -145,14 +315,14 @@ namespace FamilyQuant.Tests
                 catch (InvalidDataException) { return true; }
             }
             Check("a reply that is not UniProt's list is refused, not a crash",
-                Refused(() => ProteinDomains.Parse("{}")) && Refused(() => ProteinDomains.Parse("[]")) && Refused(() => ProteinDomains.Parse("not json"))
-                && Refused(() => ProteinDomains.Parse("""{"results":[{"nothing":1}]}""")));
+                Refused(() => ParseDomainsForTest("{}")) && Refused(() => ParseDomainsForTest("[]")) && Refused(() => ParseDomainsForTest("not json"))
+                && Refused(() => ParseDomainsForTest("""{"results":[{"nothing":1}]}""")));
             Check("and so is a reply naming nobody, which would otherwise wipe every domain",
-                Refused(() => ProteinDomains.FetchAsync(kept, new CannedUniProt((System.Net.HttpStatusCode.OK, """{"results":[]}"""))).GetAwaiter().GetResult())
+                Refused(() => FetchEvidenceForTest(kept, new CannedUniProt((System.Net.HttpStatusCode.OK, """{"results":[]}"""))).GetAwaiter().GetResult())
                 && kept[0].Domains == "Reprolysin");
             List<FastaItemExtended> partly = Disintegrins();
             partly[0].Domains = "from an earlier release";
-            ProteinDomains.FetchResult partlyFound = ProteinDomains.FetchAsync(partly, new CannedUniProt((System.Net.HttpStatusCode.OK, UniProtReply))).GetAwaiter().GetResult();
+            Evidence.EvidenceFetchResult partlyFound = FetchEvidenceForTest(partly, new CannedUniProt((System.Net.HttpStatusCode.OK, UniProtReply))).GetAwaiter().GetResult();
             Check("a protein the reply does not name is counted, and left as it was: unknown is not empty",
                 partly[0].Domains == "from an earlier release" && partlyFound.Found == 3 && partlyFound.Asked == 7, partlyFound.Found + " of " + partlyFound.Asked);
             List<FastaItemExtended> sortable = Disintegrins();
@@ -165,7 +335,7 @@ namespace FamilyQuant.Tests
 
             List<FastaItemExtended> second = Disintegrins();
             var busy = new CannedUniProt((System.Net.HttpStatusCode.ServiceUnavailable, ""), (System.Net.HttpStatusCode.OK, UniProtReply));
-            ProteinDomains.FetchAsync(second, busy).GetAwaiter().GetResult();
+            FetchEvidenceForTest(second, busy).GetAwaiter().GetResult();
             Check("a busy service is asked again", busy.Asked.Count == 2 && second[1].Domains.Length > 0, busy.Asked.Count.ToString());
 
             string fcfPath = Path.Combine(workDir, "domains.fcf");
