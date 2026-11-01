@@ -43,6 +43,14 @@ namespace FamilyQuant.Tests
             // Screen capture is an isolated lane: it never runs scientific export commands.
             if (ScreenHarness.IsRequested(args)) return ScreenHarness.Run(args);
 
+            if (args.Length > 0 && args[0] == FeatureLedger.GenerateArgument)
+            {
+                if (args.Length != 3) throw new ArgumentException("Supply frozen source root and repository root.");
+                return FeatureLedger.Generate(args[1], args[2]);
+            }
+            if (args.Length > 0 && args[0] == "--feature-ledger-check") return FeatureLedgerTests();
+            if (args.Length > 0 && args[0] == "--feature-ledger-release-check") return FeatureLedgerTests(release: true);
+
             // PowerShell 5.1 silently DROPS empty "" arguments to native executables, which shifted
             // the data directories into the wrong positions and turned every real-data section into a
             // silent skip. A dot is the positional placeholder that survives every shell; it maps to
@@ -51,6 +59,14 @@ namespace FamilyQuant.Tests
 
             string workDir = Path.Combine(Path.GetTempPath(), "FamilyQuant.Tests");
             Directory.CreateDirectory(workDir);
+
+            if (GoldenNumbers.IsRequested(args))
+            {
+                EnsureApplication();
+                GoldenNumbers.Run(args, Check);
+                Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
+                return failed == 0 ? 0 : 1;
+            }
 
             // The conference-talk deliverable, GATED on its own flag and on nothing else, so a normal run
             // (with or without the four data paths) never reaches it. It is an OWN-LANE runner rather than
@@ -388,6 +404,7 @@ namespace FamilyQuant.Tests
 
             Section("Project store (Q2) - .fqproj container round trip, migration and structure");
             ProjectStoreTests(workDir);
+            GoldenNumberGuardTests();
 
             Section("Talk export routing - one override root for heavy and fast lanes");
             TalkOutputRootTests(workDir);
@@ -533,6 +550,9 @@ namespace FamilyQuant.Tests
             Section("Appearance directions - theme changes preserve curation and input surfaces");
             AppearanceDirectionTests();
             LegacySurfaceContrastTests();
+
+            Section("Feature ledger - frozen source inventory and explicit preservation checks");
+            FeatureLedgerTests();
 
             Console.WriteLine();
             Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
