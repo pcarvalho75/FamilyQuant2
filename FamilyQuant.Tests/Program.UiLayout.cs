@@ -385,15 +385,7 @@ namespace FamilyQuant.Tests
                 topN.Items.Count == 5 && topN.Items.Cast<ComboBoxItem>().All(i => i.ToolTip != null),
                 topN.Items.Count.ToString(CultureInfo.CurrentCulture));
 
-            // A count as well as a sweep: a command added without a tooltip fails above, but a command
-            // that never reaches the menu at all would pass everything silently. Fifteen leaves now: the
-            // spectrum comparison table joined Home, Analytics, the Q2 Save project and Compute / update
-            // full XIC, the original commands and the three appearance choices.
-            Check("the menu offers all fifteen commands, including the spectrum table and three appearances",
-                WalkTree(main).OfType<MenuItem>()
-                    .Count(m => m.TemplatedParent == null && m.Items.Count == 0) == 15,
-                WalkTree(main).OfType<MenuItem>()
-                    .Count(m => m.TemplatedParent == null && m.Items.Count == 0).ToString());
+            MenuCommandPreservationTests(main);
 
             // The Q2 compute window is a view of ours like the others, so it is swept for tooltips too.
             ComputeXicWindow computeWindow;
@@ -848,9 +840,13 @@ namespace FamilyQuant.Tests
             // The controls reference the shared theme brushes declared in App.xaml, so a real Application
             // must exist first. InitializeComponent only loads resources; StartupUri fires on Run(),
             // which is never called here. Only one Application may ever exist in a process.
-            if (System.Windows.Application.Current != null) return;
+            if (System.Windows.Application.Current != null)
+            {
+                System.Windows.Application.Current.ShutdownMode = ShutdownMode.OnExplicitShutdown;
+                return;
+            }
 
-            var app = new App();
+            var app = new App { ShutdownMode = ShutdownMode.OnExplicitShutdown };
             app.GetType().GetMethod("InitializeComponent")?.Invoke(app, null);
         }
 
@@ -885,6 +881,22 @@ namespace FamilyQuant.Tests
 
             Check($"{what}: no tooltip is a bare restatement of the label",
                 terse.Count == 0, string.Join(", ", terse.Select(Describe).Take(6)));
+        }
+
+        private static void MenuCommandPreservationTests(MainWindow main)
+        {
+            // Named command coverage stays stable when the recent-file submenu changes length.
+            string[] commands = {
+                "MenuItemHome", "MenuItemRunUSearch", "MenuItemLoadFQC", "MenuItemSaveProject",
+                "MenuItemSaveFCF", "MenuItemComputeXic", "MenuItemSpectrumComparison", "MenuItemReanotateSEPro",
+                "MenuItemDeNovo", "MenuItemAnalytics", "MenuItemHowToRead", "MenuItemWhereAmI",
+                "MenuThemeLight", "MenuThemeDark", "MenuThemeSystem", "MenuItemSaveAs", "MenuItemUndo", "MenuItemCopy",
+                "MenuItemFind", "MenuItemHideDecoys", "MenuItemHideContaminants", "MenuItemExportFamilyTable",
+                "MenuItemExportComposition", "MenuItemFamilies"
+            };
+            string[] missing = commands.Where(name => main.FindName(name) is not MenuItem { HasItems: false }).ToArray();
+            Check("all legacy and new shell commands remain reachable menu leaves", missing.Length == 0,
+                string.Join(", ", missing));
         }
 
         private static void CheckMenuTooltips(string what, FrameworkElement root)

@@ -15,6 +15,10 @@ namespace FamilyQuant
     /// </summary>
     public partial class HomeControl : UserControl
     {
+        public HomeViewModel ViewModel { get; } = new();
+        public event Action? OpenRequested;
+        public event Action<string>? OpenPathRequested;
+        public event Action? LastResultRequested;
         /// <summary>Step 1: build families. MainWindow wires this to MenuRunUSearch_Click.</summary>
         public event Action? BuildFamiliesRequested;
 
@@ -33,6 +37,8 @@ namespace FamilyQuant
         public HomeControl()
         {
             InitializeComponent();
+            ViewModel.PropertyChanged += (_, _) => ApplyViewModel();
+            RecentProjectsList.ItemsSource = ViewModel.RecentProjects;
 
             // Opens with no project: steps 3 and 4 are dark until one is loaded in step 2.
             SetProjectState(false, "No project open.");
@@ -48,10 +54,28 @@ namespace FamilyQuant
         /// a full XIC has been computed, or that no project is open.</param>
         public void SetProjectState(bool projectLoaded, string projectSummary)
         {
-            TextBlockHomeProject.Text = projectSummary;
+            ViewModel.SetProjectState(projectLoaded, projectSummary);
+        }
 
-            ButtonHomeCompute.IsEnabled = projectLoaded;
-            ButtonHomeAnalytics.IsEnabled = projectLoaded;
+        public void SetRecentProjects(System.Collections.Generic.IEnumerable<string> paths) => ViewModel.SetRecentProjects(paths);
+        public void SetLastResult(string? path, bool currentHasResult) => ViewModel.SetLastResult(path, currentHasResult);
+
+        private void ApplyViewModel()
+        {
+            TextBlockHomeProject.Text = ViewModel.ProjectSummary;
+            TextBlockProjectReason.Text = ViewModel.ProjectReason;
+            ButtonHomeCompute.IsEnabled = ViewModel.HasProject;
+            ButtonHomeAnalytics.IsEnabled = ViewModel.HasProject;
+            ButtonHomeLastResult.IsEnabled = ViewModel.HasLastResult;
+            TextBlockLastResult.Text = ViewModel.LastResultText;
+            TextBlockNoRecents.Visibility = ViewModel.HasRecents ? System.Windows.Visibility.Collapsed : System.Windows.Visibility.Visible;
+        }
+
+        private void ButtonHomeOpen_Click(object sender, System.Windows.RoutedEventArgs e) => OpenRequested?.Invoke();
+        private void ButtonHomeLastResult_Click(object sender, System.Windows.RoutedEventArgs e) => LastResultRequested?.Invoke();
+        private void RecentProject_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            if (sender is Button { DataContext: HomeRecentProject { Exists: true } recent }) OpenPathRequested?.Invoke(recent.Path);
         }
 
         private void ButtonHomeBuild_Click(object sender, System.Windows.RoutedEventArgs e)

@@ -421,12 +421,12 @@
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
 
-                    <Label Grid.Column="0" Content="Family Cluster File:" Foreground="White" VerticalAlignment="Center"
-                           ToolTip="The .fcf whose proteins the de novo peptides are searched against, and whose User IDs give the families. Filled in if a family file was already open."/>
+                    <Label Grid.Column="0" Content="Project or family file:" Foreground="White" VerticalAlignment="Center"
+                           ToolTip="The project or Family Cluster File supplying the proteins and family numbers. Filled in when a project is already open."/>
 
                     <TextBox Grid.Column="1" x:Name="TextBoxHomologyFcf" Margin="5" VerticalAlignment="Center"
                              Background="White" Foreground="Black"
-                             ToolTip="Type or paste the .fcf file's full path. It is only read when you press Search."/>
+                             ToolTip="Type or paste the .fqproj or .fcf file's full path. It is only read when you press Search."/>
 
                     <Button Grid.Column="2" x:Name="ButtonBrowseHomologyFcf" Content="Browse..." Padding="12,5"
                             Click="ButtonBrowseHomologyFcf_Click"
