@@ -66,6 +66,13 @@ namespace FamilyQuant.Tests
             string workDir = Path.Combine(Path.GetTempPath(), "FamilyQuant.Tests");
             Directory.CreateDirectory(workDir);
 
+            if (args.Contains(EvidenceFetchCheck.Argument) || args.Contains(EvidenceFetchCheck.VerifyArgument))
+            {
+                EvidenceFetchCheck.Run(args, Check);
+                Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
+                return failed == 0 ? 0 : 1;
+            }
+
             if (args.Contains(EvidenceStorageCheck.Argument))
             {
                 EvidenceStorageCheck.Run(args, Check);
@@ -517,6 +524,7 @@ namespace FamilyQuant.Tests
             EnsureApplication();
             ProteinDomainsTests(workDir);
             EvidenceStorageTests(workDir);
+            EvidenceFetchTests();
 
             Section("Batch edit - one User ID and annotation for many selected rows");
             BatchCurationTests();
