@@ -23,16 +23,19 @@ public static class ShellProjectOperations
         string full = Path.GetFullPath(path);
         string staged = full + ".saving-" + Guid.NewGuid().ToString("N") + ".fqproj";
         string expected = Convert.ToHexString(SHA256.HashData(Encoding.UTF8.GetBytes(curation.ToJsonText())));
+        var snapshot = Evidence.SavedFileCheck.Capture(curation);
         try
         {
             ProjectStore.WriteFqproj(staged, curation, rows, manifest);
             validateStaged?.Invoke(staged);
+            curation.LastSaveCheck = Evidence.SavedFileCheck.Verify(snapshot, staged, project: true);
+            Evidence.SavedFileCheck.RequirePassed(curation.LastSaveCheck);
             var reopened = ProjectStore.ReadFqproj(staged);
             string actual = Convert.ToHexString(SHA256.HashData(Encoding.UTF8.GetBytes(reopened.fcf.ToJsonText())));
             if (!string.Equals(expected, actual, StringComparison.Ordinal) || reopened.quant.Count != rows.Count)
                 throw new InvalidDataException("The saved project did not reproduce its curation and stored row count.");
             File.Move(staged, full, true);
-            return "Curation round-trip check passed.";
+            return curation.LastSaveCheck.Message;
         }
         finally
         {

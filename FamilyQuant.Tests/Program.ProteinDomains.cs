@@ -95,6 +95,7 @@ namespace FamilyQuant.Tests
         }
         private static void EvidenceApplyTests()
         {
+            SavedFileCheckTests();
             Verify("evidence apply allocates beyond every protein number and orphan lock", () =>
             {
                 var (file, proposal, selection) = Fixture();
@@ -244,6 +245,84 @@ namespace FamilyQuant.Tests
             static void Verify(string name, Func<bool> verify)
             {
                 try { Check(name, verify()); }
+                catch (Exception ex) { Check(name, false, ex.GetBaseException().Message); }
+            }
+        }
+        private static void SavedFileCheckTests()
+        {
+            string path = Path.Combine(Path.GetTempPath(), "e12-" + Guid.NewGuid().ToString("N") + ".fcf");
+            var file = new FamilyClusterFile
+            {
+                SourceSha256 = "source identity", LockedUserIds = new HashSet<int> { 12 },
+                MyExtendedFastaItems = new List<FastaItemExtended>
+                {
+                    new FastaItemExtended { SequenceIdentifier = "target", Sequence = "PEPTIDEA", UserID = 12, USearchID = 4 },
+                    new FastaItemExtended { SequenceIdentifier = "Reverse_fixture", Sequence = "AEDITPEP", UserID = 5, USearchID = 5 },
+                    new FastaItemExtended { SequenceIdentifier = "unassigned", Sequence = "ACDEFG", UserID = 7, USearchID = 7 },
+                },
+                EvidenceRecipe = new Evidence.EvidenceRecipe
+                {
+                    Assignments = new List<Evidence.EvidenceAssignment> { new Evidence.EvidenceAssignment { ProteinIndex = 0 } },
+                },
+            };
+            Verify("a good saved family file reports every E12 check passed", () =>
+            {
+                file.Save(path);
+                var result = Evidence.SavedFileCheck.Check(file, path);
+                return result.Passed && result.Message.Contains("passed", StringComparison.Ordinal) && result.Checks.Count >= 6 && result.Checks.All(c => c.Passed);
+            });
+            foreach (var mutation in new (string Code, Action<FamilyClusterFile> Change)[]
+            {
+                ("sequences", f => f.MyExtendedFastaItems[0].Sequence = "ALTERED"),
+                ("decoys", f => f.MyExtendedFastaItems[1].UserID = 99),
+                ("unassigned", f => f.MyExtendedFastaItems[2].UserAnnotation = "wrong"),
+                ("locks", f => f.LockedUserIds.Remove(12)),
+                ("source", f => f.SourceSha256 = "wrong"),
+                ("curation", f => f.MyExtendedFastaItems[0].UserID = 99),
+            })
+            {
+                Verify("saved-file check catches corrupt " + mutation.Code, () =>
+                {
+                    var corrupt = FamilyClusterFile.FromJsonText(file.ToJsonText());
+                    mutation.Change(corrupt);
+                    File.WriteAllText(path, corrupt.ToJsonText());
+                    var result = Evidence.SavedFileCheck.Check(file, path);
+                    return !result.Passed && result.Checks.Any(c => c.Code == mutation.Code && !c.Passed);
+                });
+            }
+            Verify("invalid saved JSON reports failure with no successful check", () =>
+            {
+                File.WriteAllText(path, "broken JSON");
+                var result = Evidence.SavedFileCheck.Check(file, path);
+                return !result.Passed && result.Checks.All(c => !c.Passed);
+            });
+            Verify("every family save automatically reopens and checks its written bytes", () =>
+            {
+                file.Save(path);
+                return file.LastSaveCheck?.Passed == true;
+            });
+            Verify("every project save automatically reopens and checks its curation", () =>
+            {
+                ProjectStore.WriteFqproj(path, file, new List<QuantRow>(), new QuantManifest());
+                return file.LastSaveCheck?.Passed == true && Evidence.SavedFileCheck.Check(file, path, project: true).Passed;
+            });
+            Verify("a corrupt staged family file never replaces the previous file", () =>
+            {
+                File.WriteAllText(path, "previous file");
+                var progress = new InlineOperationProgress(p =>
+                {
+                    if (p.Stage != "file-check" || p.Completed != 0) return;
+                    foreach (string staged in Directory.GetFiles(Path.GetDirectoryName(path)!, Path.GetFileName(path) + ".*.tmp"))
+                        File.WriteAllText(staged, "corrupt staged fixture");
+                });
+                return Throws<InvalidDataException>(() => file.Save(path, new Operations.OperationContext(progress: progress)))
+                    && File.ReadAllText(path) == "previous file" && file.LastSaveCheck?.Passed == false;
+            });
+            if (File.Exists(path)) File.Delete(path);
+
+            static void Verify(string name, Func<bool> run)
+            {
+                try { Check(name, run()); }
                 catch (Exception ex) { Check(name, false, ex.GetBaseException().Message); }
             }
         }
