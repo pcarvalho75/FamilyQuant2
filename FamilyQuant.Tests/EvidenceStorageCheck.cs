@@ -81,7 +81,7 @@ namespace FamilyQuant.Tests
             return Convert.ToHexString(SHA256.HashData(input));
         }
 
-        private static Dictionary<string, ProteinEvidence> ReadReference(string path)
+        internal static Dictionary<string, ProteinEvidence> ReadReference(string path)
         {
             using var reader = new TextFieldParser(path);
             reader.SetDelimiters("\t");

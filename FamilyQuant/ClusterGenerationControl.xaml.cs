@@ -1666,7 +1666,7 @@ namespace FamilyQuant
             IsEnabled = false;
             try
             {
-                ProteinDomains.FetchResult result = await ProteinDomains.FetchAsync(fcf.MyExtendedFastaItems, FetchDomainsHandlerOverride);
+                Evidence.EvidenceFetchResult result = await Evidence.EvidenceFetcher.FetchAsync(fcf, FetchDomainsHandlerOverride);
                 fetched = result.Asked > 0;
                 if (fetched) fcf.DomainSource = result.Source;
 
