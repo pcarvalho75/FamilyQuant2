@@ -1,0 +1,227 @@
+using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.IO;
+using System.Linq;
+using System.Net.Http;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+using System.Threading;
+using System.Threading.Tasks;
+
+namespace FamilyQuant.Evidence
+{
+    /// <summary>One reviewed protein from outside the file. Its evidence is parsed by
+    /// <see cref="EvidenceFetcher.Parse"/>, so its family reads exactly as the file's own proteins do.</summary>
+    public sealed class PanelEntry
+    {
+        public string Accession { get; set; } = string.Empty;
+        public string Sequence { get; set; } = string.Empty;
+        public ProteinEvidence Evidence { get; set; } = new ProteinEvidence();
+    }
+
+    /// <summary>The reviewed proteins of the families found in the file, from every taxon, kept with the
+    /// file so the neighbour search answers offline.</summary>
+    public sealed class ReferencePanel
+    {
+        public string Provider { get; set; } = string.Empty;
+        public string Release { get; set; } = string.Empty;
+        public DateTimeOffset? RetrievedAtUtc { get; set; }
+
+        /// <summary>The families asked for, sorted.</summary>
+        public List<string> Families { get; set; } = new List<string>();
+
+        /// <summary>The entries, sorted by accession.</summary>
+        public List<PanelEntry> Entries { get; set; } = new List<PanelEntry>();
+    }
+
+    public sealed partial class EvidenceProvenance
+    {
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public ReferencePanel? ReferencePanel { get; set; }
+    }
+
+    public static class ReferencePanelFetcher
+    {
+        private const string Endpoint = "https://rest.uniprot.org/uniprotkb/search?format=json&size=500&fields="
+            + "accession,reviewed,protein_families,keyword,xref_pfam,xref_panther,ft_transmem,fragment,sequence&query=";
+        private const int Attempts = 3;
+
+        /// <summary>Every family named by a target's evidence, optionally only those of targets in a scope
+        /// the caller chose; case folded, sorted. Read from the data, so the program holds no family list.</summary>
+        public static List<string> FamiliesFound(FamilyClusterFile file, Func<ProteinEvidence, bool>? inScope = null)
+        {
+            var families = new SortedSet<string>(StringComparer.OrdinalIgnoreCase);
+            foreach (FastaItemExtended item in NearestReviewed.Targets(file))
+            {
+                ProteinEvidence? evidence = item.Evidence;
+                if (evidence == null || (inScope != null && !inScope(evidence))) continue;
+                foreach (string family in FamiliesOf(evidence)) families.Add(family);
+            }
+            return families.OrderBy(f => f, StringComparer.OrdinalIgnoreCase).ThenBy(f => f, StringComparer.Ordinal).ToList();
+        }
+
+        /// <summary>Every family a protein belongs to: each membership, or the single family.</summary>
+        public static IEnumerable<string> FamiliesOf(ProteinEvidence evidence)
+        {
+            if (evidence.FamilyMemberships != null && evidence.FamilyMemberships.Count > 0)
+                return evidence.FamilyMemberships.Select(m => m.Family).Where(f => f.Length > 0);
+            return evidence.Family.Length > 0 ? new[] { evidence.Family } : Array.Empty<string>();
+        }
+
+        /// <summary>
+        /// The reviewed proteins of each family, every taxon. UniProt's family search is a text search, so
+        /// an entry is kept only when one of its memberships is the family asked for. All or nothing: a
+        /// refused page, a missing release or a release that changes between pages throws and returns no
+        /// panel. Progress counts families done.
+        /// </summary>
+        public static async Task<ReferencePanel> FetchAsync(IReadOnlyList<string> families,
+            HttpMessageHandler? handler = null, IProgress<FetchProgress>? progress = null,
+            CancellationToken cancellationToken = default)
+        {
+            List<string> asked = families.Where(f => !string.IsNullOrWhiteSpace(f))
+                .Distinct(StringComparer.OrdinalIgnoreCase)
+                .OrderBy(f => f, StringComparer.OrdinalIgnoreCase).ThenBy(f => f, StringComparer.Ordinal).ToList();
+            var entries = new SortedDictionary<string, PanelEntry>(StringComparer.Ordinal);
+            string? release = null;
+            int received = 0;
+            using HttpClient client = handler == null ? new HttpClient() : new HttpClient(handler, disposeHandler: false);
+            client.Timeout = TimeSpan.FromSeconds(100);
+            client.DefaultRequestHeaders.UserAgent.ParseAdd("FamilyQuant");
+            Report(0);
+            for (int index = 0; index < asked.Count; index++)
+            {
+                string family = asked[index];
+                string? url = Endpoint + Uri.EscapeDataString("(reviewed:true) AND (family:\"" + family.Replace("\"", "") + "\")");
+                while (url != null)
+                {
+                    cancellationToken.ThrowIfCancellationRequested();
+                    using HttpResponseMessage response = await GetWithRetry(client, url, cancellationToken).ConfigureAwait(false);
+                    string currentRelease = response.Headers.TryGetValues("x-uniprot-release", out IEnumerable<string>? values)
+                        ? values.FirstOrDefault() ?? string.Empty : string.Empty;
+                    if (currentRelease.Length == 0)
+                        throw new InvalidDataException("UniProt omitted its release. No panel was made.");
+                    if (release != null && release != currentRelease)
+                        throw new InvalidDataException("The UniProt release changed while the panel was fetched. No panel was made.");
+                    release = currentRelease;
+
+                    string json = await response.Content.ReadAsStringAsync(cancellationToken).ConfigureAwait(false);
+                    Dictionary<string, ProteinEvidence> parsed = EvidenceFetcher.Parse(json);
+                    foreach ((string accession, string sequence) in Sequences(json))
+                    {
+                        received++;
+                        if (!parsed.TryGetValue(accession, out ProteinEvidence? evidence) || evidence.Accession != accession)
+                            throw new InvalidDataException("UniProt returned an entry it did not describe. No panel was made.");
+                        if (evidence.Reviewed != true)
+                            throw new InvalidDataException("UniProt returned an unreviewed entry to a reviewed search. No panel was made.");
+                        if (!FamiliesOf(evidence).Contains(family, StringComparer.OrdinalIgnoreCase)) continue;
+                        if (sequence.Length == 0 || entries.ContainsKey(accession)) continue;
+                        // Prose is dropped: a reference is read for its family, memberships and domains.
+                        evidence.TissueSpecificity = new List<string>();
+                        evidence.SimilarityAnnotations = null;
+                        entries.Add(accession, new PanelEntry { Accession = accession, Sequence = sequence, Evidence = evidence });
+                    }
+                    url = NextPage(response);
+                }
+                Report(index + 1);
+            }
+
+            return new ReferencePanel
+            {
+                Provider = "UniProt",
+                Release = release ?? string.Empty,
+                RetrievedAtUtc = DateTimeOffset.UtcNow,
+                Families = asked,
+                Entries = entries.Values.ToList(),
+            };
+
+            void Report(int done) => progress?.Report(new FetchProgress
+            {
+                CompletedBatches = done, TotalBatches = asked.Count, Asked = received, Found = entries.Count,
+            });
+        }
+
+        /// <summary>Fetches the panel for the families found in the file (in scope when given) and keeps it
+        /// with the file's evidence. Nothing changes in the file unless the whole panel arrives.</summary>
+        public static async Task<ReferencePanel> FetchAndStoreAsync(FamilyClusterFile file,
+            Func<ProteinEvidence, bool>? inScope = null, HttpMessageHandler? handler = null,
+            IProgress<FetchProgress>? progress = null, CancellationToken cancellationToken = default)
+        {
+            ReferencePanel panel = await FetchAsync(FamiliesFound(file, inScope), handler, progress, cancellationToken)
+                .ConfigureAwait(false);
+            cancellationToken.ThrowIfCancellationRequested();
+            file.EvidenceSource ??= new EvidenceProvenance();
+            file.EvidenceSource.ReferencePanel = panel;
+            return panel;
+        }
+
+        /// <summary>The panel's entries as neighbour references, leaving out any accession already among
+        /// <paramref name="present"/> (the file's own reviewed proteins answer for themselves).</summary>
+        public static List<NeighbourReference> References(ReferencePanel? panel, IEnumerable<string>? present = null)
+        {
+            if (panel == null) return new List<NeighbourReference>();
+            var skip = new HashSet<string>(present ?? Array.Empty<string>(), StringComparer.Ordinal);
+            return panel.Entries
+                .Where(e => e.Sequence.Length > 0 && !skip.Contains(e.Accession))
+                .Select(e => new NeighbourReference
+                {
+                    Accession = e.Accession,
+                    Family = e.Evidence.Family ?? string.Empty,
+                    Sequence = e.Sequence,
+                    Evidence = e.Evidence,
+                })
+                .ToList();
+        }
+
+        private static IEnumerable<(string, string)> Sequences(string json)
+        {
+            using JsonDocument document = JsonDocument.Parse(json);
+            var found = new List<(string, string)>();
+            foreach (JsonElement item in document.RootElement.GetProperty("results").EnumerateArray())
+            {
+                string accession = item.GetProperty("primaryAccession").GetString() ?? string.Empty;
+                string sequence = item.TryGetProperty("sequence", out JsonElement s) && s.TryGetProperty("value", out JsonElement v)
+                    ? v.GetString() ?? string.Empty : string.Empty;
+                found.Add((accession, sequence));
+            }
+            return found;
+        }
+
+        /// <summary>The next page from UniProt's <c>Link: &lt;url&gt;; rel="next"</c> header, or null.</summary>
+        private static string? NextPage(HttpResponseMessage response)
+        {
+            if (!response.Headers.TryGetValues("Link", out IEnumerable<string>? links)) return null;
+            foreach (string link in links.SelectMany(l => l.Split(',')))
+            {
+                if (!link.Contains("rel=\"next\"", StringComparison.Ordinal)) continue;
+                int open = link.IndexOf('<'), close = link.IndexOf('>');
+                if (open >= 0 && close > open) return link.Substring(open + 1, close - open - 1);
+            }
+            return null;
+        }
+
+        private static async Task<HttpResponseMessage> GetWithRetry(HttpClient client, string url, CancellationToken cancellationToken)
+        {
+            for (int attempt = 1; ; attempt++)
+            {
+                HttpResponseMessage? response = null;
+                try { response = await client.GetAsync(url, cancellationToken).ConfigureAwait(false); }
+                catch (HttpRequestException) when (attempt < Attempts) { }
+                catch (TaskCanceledException) when (attempt < Attempts && !cancellationToken.IsCancellationRequested) { }
+                if (response != null)
+                {
+                    if (response.IsSuccessStatusCode) return response;
+                    int status = (int)response.StatusCode;
+                    if (attempt == Attempts || (status != 429 && status < 500))
+                    {
+                        response.Dispose();
+                        throw new HttpRequestException("UniProt refused a panel page (HTTP "
+                            + status.ToString(CultureInfo.InvariantCulture) + "). No panel was made.", null, response.StatusCode);
+                    }
+                    response.Dispose();
+                }
+                await Task.Delay(TimeSpan.FromSeconds(attempt), cancellationToken).ConfigureAwait(false);
+            }
+        }
+    }
+}
