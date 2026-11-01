@@ -51,6 +51,7 @@ Finished steps, moved here from docs/ROADMAP.md. The board shows them as green.
 | S1 | Menu in standard order: File (New from database, Open, Save, Save as, Export, Recent, Exit), Edit (Undo, Copy), View (theme, hide decoys, hide contaminants), Analysis (Compute, Results, De novo, Reannotate SEPro), Help. Ctrl+N, O, S, Z, F, F1 | M | 3 | V5, N3 | S2, S3, S5, C4 | File is first; each ledger command reachable; shortcut tests; "Reanotate" typo gone | LK | SH | 0% | 0% | T+12 |
 | S3 | Replace both yellow banners and the "showing" line with one quiet status bar; long text goes to Help | M | 2 | S1 | S2 | No banner over one line at the smallest size; no fact lost, each moved to Help | LK | SH | 0% | 0% | T+14 |
 | S4 | Start page: open, new, recent projects, last result; fixes the white disabled cards | M | 3 | S1 | S2, V3 | Disabled state readable in both themes; recents survive restart | LK | SH | 0% | 0% | T+17 |
+| S2 | Left navigation rail in place of the Home card grid: Families, Quantify, Results, De novo, with state marks. `MainWindow` becomes a thin shell over a view model | H | 4 | S1, S4 | C1, C6, C8, C9, C10 | Every screen reachable by keyboard; disabled steps readable with the reason | LK | SH | 0% | 0% | T+4 |
 
 ### W5 Screens: each rebuilt as a thin view over a tested view model
 
