@@ -80,6 +80,7 @@ Finished steps, moved here from docs/ROADMAP.md. The board shows them as green.
 | C6 | Build families screen: one flow, one explanation line, button labels that say what they do ("Input a FASTA file" and "Run USearch" go); Remove Redundancy kept | M | 3 | S2, X3 | C7, V3 | All ledger rows kept; renders pass | AS | SH | 0% | 0% | T+6 |
 | C10 | De novo uses the filters Compute uses, so the screen can no longer disagree with the run. `DeNovoControl` (2,329 lines) replaced by a view model and a thin view | H | 5 | C8 | C11, V3 | One source of filters; test proves it; ledger rows checked | EV | RS | 0% | 0% | T+5 |
 | C12 | Secondary windows rebuilt: Lock manager, Spectrum table, Identity scan, Text report, Help | M | 4 | V4 | V3, C14 | All render clean in both themes | AS | SH | 0% | 0% | T+7 |
+| C7 | One "find best identity" flow, if the check passes: first prove Scan gives Divide and Conquer's answer on the Bjararaca and Viperidae files, otherwise both stay | M | 2 | C6 | R2 | Equivalence measured and written down; `FDR` still reported | AS | AS | 0% | 0% | T+2 |
 
 ### W6 Core rewrite: copy what is good, rewrite what is better
 
