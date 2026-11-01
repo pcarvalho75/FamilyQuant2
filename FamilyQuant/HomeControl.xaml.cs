@@ -19,6 +19,11 @@ namespace FamilyQuant
         public event Action? OpenRequested;
         public event Action<string>? OpenPathRequested;
         public event Action? LastResultRequested;
+        public bool UseShellNavigationRail
+        {
+            get => HomeProjectActions.Visibility == System.Windows.Visibility.Collapsed;
+            set => HomeProjectActions.Visibility = value ? System.Windows.Visibility.Collapsed : System.Windows.Visibility.Visible;
+        }
         /// <summary>Step 1: build families. MainWindow wires this to MenuRunUSearch_Click.</summary>
         public event Action? BuildFamiliesRequested;
 

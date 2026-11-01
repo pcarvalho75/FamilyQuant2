@@ -20,7 +20,7 @@ public partial class MainWindow
         void Bind(RoutedCommand command, Action run, Func<bool>? allowed = null) =>
             CommandBindings.Add(new CommandBinding(command, (_, e) => { run(); e.Handled = true; },
                 (_, e) => { e.CanExecute = allowed?.Invoke() ?? true; e.Handled = true; }));
-        Bind(ApplicationCommands.New, () => MenuRunUSearch_Click(this, new RoutedEventArgs()), () => !saveInProgress);
+        Bind(ApplicationCommands.New, () => MenuRunUSearch_Click(this, new RoutedEventArgs()), () => NavigationModel.CanNavigate(ShellDestination.Build));
         Bind(ApplicationCommands.Open, () => MenuItemCluster_Click(this, new RoutedEventArgs()), () => !saveInProgress);
         Bind(ApplicationCommands.Save, () => MenuItemSaveProject_Click(this, new RoutedEventArgs()), () => cgc != null && !saveInProgress);
         Bind(ApplicationCommands.SaveAs, () => MenuItemSaveAs_Click(this, new RoutedEventArgs()), () => cgc != null && !saveInProgress);
@@ -77,6 +77,7 @@ public partial class MainWindow
         MenuItemExportFamilyTable.IsEnabled = cgc?.ButtonSaveReport.IsEnabled == true;
         MenuItemHideDecoys.IsEnabled = project;
         MenuItemHideContaminants.IsEnabled = project;
+        MenuItemAnalytics.IsEnabled = project && !saveInProgress && !analyticsInProgress;
         MenuItemHideDecoys.IsChecked = cgc?.CheckBoxExcludeReverse.IsChecked == true;
         MenuItemHideContaminants.IsChecked = cgc?.CheckBoxExcludeContaminants.IsChecked == true;
         UpdateThemeMenu();
