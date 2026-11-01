@@ -20,6 +20,7 @@ namespace FamilyQuant
         [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull)]
         public Evidence.ProteinEvidence? Evidence { get; set; }
 
+        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWriting)]
         public double XIC { get; set; }
 
         public double XICUser { get; set; }

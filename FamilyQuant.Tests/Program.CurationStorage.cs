@@ -58,8 +58,24 @@ namespace FamilyQuant.Tests
             Check("sequence survives", b.Sequence == a.Sequence);
             Check("user annotation survives", b.UserAnnotation == a.UserAnnotation);
             Check("both family ids survive", b.USearchID == a.USearchID && b.UserID == a.UserID);
-            Check("XIC survives bit-exactly",
-                BitConverter.DoubleToInt64Bits(b.XIC) == BitConverter.DoubleToInt64Bits(a.XIC));
+            Check("the current User XIC survives bit-exactly",
+                BitConverter.DoubleToInt64Bits(b.XICUser) == BitConverter.DoubleToInt64Bits(a.XICUser));
+            using (var written = JsonDocument.Parse(File.ReadAllText(path)))
+                Check("new curation files omit the unused legacy XIC field",
+                    !written.RootElement.GetProperty("MyExtendedFastaItems")[0].TryGetProperty("XIC", out _));
+
+            const string legacy = "{\"ClusteringIdentity\":70,\"MyExtendedFastaItems\":[{\"SequenceIdentifier\":\"legacy\",\"Sequence\":\"MKAWLL\",\"USearchID\":2,\"UserID\":5,\"XIC\":0.125,\"XICUser\":0.0625}]}";
+            var imported = FamilyClusterFile.FromJsonText(legacy);
+            Check("old files still import legacy XIC bit-exactly",
+                BitConverter.DoubleToInt64Bits(imported.MyExtendedFastaItems[0].XIC) ==
+                BitConverter.DoubleToInt64Bits(0.125));
+            Check("legacy import retains current quantitation, sequences and both family numbers",
+                imported.MyExtendedFastaItems[0].XICUser == 0.0625 &&
+                imported.MyExtendedFastaItems[0].Sequence == "MKAWLL" &&
+                imported.MyExtendedFastaItems[0].USearchID == 2 && imported.MyExtendedFastaItems[0].UserID == 5);
+            string firstWrite = imported.ToJsonText();
+            string reopenedWrite = FamilyClusterFile.FromJsonText(firstWrite).ToJsonText();
+            Check("save and reopen retain byte-identical canonical document text", firstWrite == reopenedWrite);
             Check("the computed grouping is not duplicated into the file",
                 !File.ReadAllText(path).Contains("GroupedFastaItems"));
 
