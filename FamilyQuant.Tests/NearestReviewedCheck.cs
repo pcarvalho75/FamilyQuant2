@@ -105,6 +105,12 @@ namespace FamilyQuant.Tests
                     allReviewedNeighbours = unscoped.Neighbours.Count,
                     allReviewedNeighboursWithoutSingleFamily = unscoped.Neighbours.Count(n => n.Family.Length == 0),
                 };
+                // The searched file with each search stored, so the classifier's checks need not search again.
+                file.EvidenceSource ??= new EvidenceProvenance();
+                file.EvidenceSource.NearestReviewed = first;
+                file.Save(Path.Combine(outDir, "e3-ana-neighbours-scoped.fcf"));
+                file.EvidenceSource.NearestReviewed = unscoped;
+                file.Save(Path.Combine(outDir, "e3-ana-neighbours-all.fcf"));
                 string reportText = JsonSerializer.Serialize(report, new JsonSerializerOptions { WriteIndented = true });
                 File.WriteAllText(Path.Combine(outDir, "e3-report.json"), reportText);
                 Console.WriteLine(reportText);
