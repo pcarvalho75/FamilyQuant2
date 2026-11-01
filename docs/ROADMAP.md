@@ -209,7 +209,7 @@ F4, F5, N1, N3, N4, F6 for the structure. E1, E2, E3, E5, then both E6 and C4 (C
 
 | ID | Decision | Default if no answer | Needed by |
 |---|---|---|---|
-| P1 | Light or dark as the default look (V1) | Work continues on my recommendation; the other stays as a View option | Before C14 |
+| P1 | Light or dark as the default look: Paulo chose dark, 2026-11-01; light stays as a View option | Decided | Before C14 |
 | P2 | Do Ana and Richard use the De Novo sections Extract areas and Partition ion current? | They stay until someone says they can go | Before C11 |
 | P3 | Hold the Python-made draft to Ana (A0) | Held | Now |
 
