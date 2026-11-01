@@ -146,6 +146,13 @@ namespace FamilyQuant.Tests
                 return failed == 0 ? 0 : 1;
             }
 
+            if (args.Contains(LeftOutCheckRun.Argument))
+            {
+                LeftOutCheckRun.Run(args, Check);
+                Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
+                return failed == 0 ? 0 : 1;
+            }
+
             if (args.Contains(ValidationCheckRun.Argument))
             {
                 ValidationCheckRun.Run(args, Check);
@@ -642,6 +649,9 @@ namespace FamilyQuant.Tests
 
             Section("Validation report - leave-one-out on reviewed proteins and the routes against their labels");
             ValidationReportTests();
+
+            Section("Left-out list - marker carriers kept out of the marker's family, with why");
+            LeftOutListTests();
 
             Section("Batch edit - one User ID and annotation for many selected rows");
             BatchCurationTests();
