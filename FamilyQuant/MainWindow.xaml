@@ -60,6 +60,8 @@
                               ToolTip="Uses dark surfaces and light text. This is the default application appearance."/>
                     <MenuItem x:Name="MenuThemeLight" Header="Light" IsCheckable="True" Click="MenuThemeLight_Click"
                               ToolTip="Uses light surfaces and dark text. Every command and value stays the same."/>
+                    <MenuItem x:Name="MenuThemeSystem" Header="Use Windows setting" IsCheckable="True" Click="MenuThemeSystem_Click"
+                              ToolTip="Follows the light or dark app setting in Windows. The appearance updates when Windows changes."/>
                 </MenuItem>
                 <Separator/>
                 <MenuItem x:Name="MenuItemHideDecoys" Header="Hide decoys" IsCheckable="True" Click="MenuItemHideDecoys_Click"

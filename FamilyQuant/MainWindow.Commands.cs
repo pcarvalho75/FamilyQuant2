@@ -79,8 +79,7 @@ public partial class MainWindow
         MenuItemHideContaminants.IsEnabled = project;
         MenuItemHideDecoys.IsChecked = cgc?.CheckBoxExcludeReverse.IsChecked == true;
         MenuItemHideContaminants.IsChecked = cgc?.CheckBoxExcludeContaminants.IsChecked == true;
-        MenuThemeDark.IsChecked = Themes.ThemeManager.Current == Themes.AppTheme.Dark;
-        MenuThemeLight.IsChecked = Themes.ThemeManager.Current == Themes.AppTheme.Light;
+        UpdateThemeMenu();
         CommandManager.InvalidateRequerySuggested();
     }
 

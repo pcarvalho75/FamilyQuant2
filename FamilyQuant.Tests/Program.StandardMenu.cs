@@ -61,6 +61,27 @@ internal static partial class Program
                             item.IsSubmenuOpen = false;
                             PumpDispatcher();
                         }
+                        var viewMenu = menu.Items.OfType<MenuItem>().Single(i => i.Header as string == "View");
+                        viewMenu.IsSubmenuOpen = true;
+                        PumpDispatcher();
+                        var appearance = viewMenu.Items.OfType<MenuItem>().Single(i => i.Header as string == "Appearance");
+                        appearance.IsSubmenuOpen = true;
+                        PumpDispatcher();
+                        var appearancePopup = (Popup)appearance.Template.FindName("PART_Popup", appearance);
+                        var appearanceContent = (FrameworkElement)appearancePopup.Child;
+                        var appearanceVisual = new DrawingVisual();
+                        int appearanceWidth = (int)Math.Ceiling(appearanceContent.ActualWidth);
+                        int appearanceHeight = (int)Math.Ceiling(appearanceContent.ActualHeight);
+                        using (DrawingContext dc = appearanceVisual.RenderOpen())
+                            dc.DrawRectangle(new VisualBrush(appearanceContent), null, new Rect(0, 0, appearanceWidth, appearanceHeight));
+                        var appearanceBitmap = new RenderTargetBitmap(appearanceWidth, appearanceHeight, 96, 96, PixelFormats.Pbgra32);
+                        appearanceBitmap.Render(appearanceVisual);
+                        var appearanceEncoder = new PngBitmapEncoder();
+                        appearanceEncoder.Frames.Add(BitmapFrame.Create(appearanceBitmap));
+                        using (var stream = File.Create(Path.Combine(folder, "Appearance.png"))) appearanceEncoder.Save(stream);
+                        appearance.IsSubmenuOpen = false;
+                        viewMenu.IsSubmenuOpen = false;
+                        PumpDispatcher();
                         typeof(MainWindow).GetMethod("MenuItemDeNovo_Click", BindingFlags.Instance | BindingFlags.NonPublic)!
                             .Invoke(main, new object[] { main, new RoutedEventArgs() });
                         var deNovo = ((Grid)main.FindName("GridApp")).Children.OfType<DeNovoControl>().Single();

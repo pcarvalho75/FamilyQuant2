@@ -890,7 +890,7 @@ namespace FamilyQuant.Tests
                 "MenuItemHome", "MenuItemRunUSearch", "MenuItemLoadFQC", "MenuItemSaveProject",
                 "MenuItemSaveFCF", "MenuItemComputeXic", "MenuItemSpectrumComparison", "MenuItemReanotateSEPro",
                 "MenuItemDeNovo", "MenuItemAnalytics", "MenuItemHowToRead", "MenuItemWhereAmI",
-                "MenuThemeLight", "MenuThemeDark", "MenuItemSaveAs", "MenuItemUndo", "MenuItemCopy",
+                "MenuThemeLight", "MenuThemeDark", "MenuThemeSystem", "MenuItemSaveAs", "MenuItemUndo", "MenuItemCopy",
                 "MenuItemFind", "MenuItemHideDecoys", "MenuItemHideContaminants", "MenuItemExportFamilyTable",
                 "MenuItemExportComposition", "MenuItemFamilies"
             };
