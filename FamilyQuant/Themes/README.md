@@ -4,7 +4,7 @@ V1 uses the .NET 10 WPF Fluent theme, with two directions on the real curation
 screen. Light uses neutral paper surfaces and dark ink. Dark uses neutral charcoal
 surfaces and light ink. Selection and primary actions use the blue accent. Plain
 values use the same ink as labels; small status text can indicate readiness or a
-problem. The provisional recommendation is Light for reviewing dense tables.
+problem. Dark is the default, selected by Paulo.
 The View menu keeps both choices available.
 
 `Tokens.xaml` is the one place for colour values and the shared spacing, type and
@@ -23,7 +23,13 @@ rest of the application's colour migration follow in their roadmap steps.
 The implementation follows the WPF team's
 [Fluent theme guide](https://github.com/dotnet/wpf/blob/main/Documentation/docs/using-fluent.md).
 `ThemeMode` is experimental, so `WPF0001` is suppressed locally around its API
-use. System mode, persistence and platform verification belong to V2.
+use. System mode follows Windows' app appearance and refreshes the token set on
+preference changes through the UI dispatcher. Event handlers detach on app exit.
+The real app saves the choice in `%LOCALAPPDATA%/FamilyQuant2/appearance.json`.
+Missing, unknown or damaged settings fall back to Dark. Test and render hosts do
+not initialize profile persistence, so a capture never changes the user's choice.
+Unrebuilt views keep their original named surface resources until their replacements
+land, preserving their existing text contrast during the staged rewrite.
 
 Use `FamilyQuant.Tests/SCREENS.md` for reproducible captures. These captures show
 client content and exclude native title bars. They do not prove keyboard focus,
