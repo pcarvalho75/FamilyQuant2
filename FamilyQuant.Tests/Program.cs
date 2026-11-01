@@ -90,6 +90,8 @@ namespace FamilyQuant.Tests
                 ShellProjectOperationTests(shellWork);
                 ShellSavingTests(shellWork);
                 ShellWindowPreferenceTests(shellWork);
+                BuildFamiliesScreenTests(shellWork);
+                LegacySurfaceContrastTests();
                 AppVersionTests();
                 Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
                 return failed == 0 ? 0 : 1;
@@ -99,6 +101,7 @@ namespace FamilyQuant.Tests
             if (args.Length == 3 && args[0] == "--shell-save-smoke") return ShellSaveSmoke(args[1], args[2]);
             if (args.Length == 2 && args[0] == "--shell-save-screens") return ShellSaveScreens(args[1]);
             if (args.Length == 2 && args[0] == "--shell-window-screens") return ShellWindowPreferenceScreens(args[1]);
+            if (args.Length == 2 && args[0] == "--build-family-screens") return BuildFamiliesScreens(args[1]);
 
             // PowerShell 5.1 silently DROPS empty "" arguments to native executables, which shifted
             // the data directories into the wrong positions and turned every real-data section into a
@@ -639,6 +642,7 @@ namespace FamilyQuant.Tests
             ShellProjectOperationTests(workDir);
             ShellSavingTests(workDir);
             ShellWindowPreferenceTests(workDir);
+            BuildFamiliesScreenTests(workDir);
 
             Console.WriteLine();
             Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");

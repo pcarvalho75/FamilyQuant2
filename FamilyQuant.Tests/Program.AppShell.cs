@@ -376,15 +376,14 @@ namespace FamilyQuant.Tests
                     screen.Arrange(new Rect(0, 0, 1280, 800));
                     AppearancePump();
                     screen.UpdateLayout();
-                    var group = AppearanceWalk(screen).OfType<GroupBox>().First();
-                    var identity = AppearanceWalk(group).OfType<Label>().First(l => l.Content as string == "Identity:");
-                    Check(theme + " preserves readable labels on the unrebuilt Build screen",
-                        ChartPalette.ContrastRatio(identity.Foreground, group.Background) >= 4.5);
-                    var heading = AppearanceWalk(group).OfType<ContentControl>()
-                        .FirstOrDefault(c => c is not GroupBox && Equals(c.Content, group.Header));
-                    Check(theme + " preserves readable headings on the unrebuilt Build screen",
-                        heading != null && ChartPalette.ContrastRatio(heading.Foreground, group.Background) >= 4.5,
-                        "heading=" + (heading?.Foreground?.ToString() ?? "missing") + "; panel=" + group.Background);
+                    var identity = AppearanceWalk(screen).OfType<Label>().First(l => l.Content as string == "Identity (%)");
+                    var surface = (Brush)screen.FindResource("SurfaceBrush");
+                    Check(theme + " preserves readable labels on the rebuilt Build screen",
+                        ChartPalette.ContrastRatio(identity.Foreground, surface) >= 4.5);
+                    var heading = AppearanceWalk(screen).OfType<TextBlock>().FirstOrDefault(c => c.Text == "Database");
+                    Check(theme + " preserves readable headings on the rebuilt Build screen",
+                        heading != null && ChartPalette.ContrastRatio(heading.Foreground, surface) >= 4.5,
+                        "heading=" + (heading?.Foreground?.ToString() ?? "missing") + "; panel=" + surface);
                 }
             }
             finally { ThemeManager.Apply(saved); }

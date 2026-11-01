@@ -104,6 +104,11 @@ public partial class MainWindow
 
         public void MenuItemHowToRead_Click(object sender, RoutedEventArgs e)
         {
+            if (owner.usearch != null)
+            {
+                owner.usearch.ShowHelp();
+                return;
+            }
             // Two workflows, two pages. Neither page's text applies to the other's screen, so the menu
             // shows the one belonging to what is actually on display.
             if (owner.dnc != null)

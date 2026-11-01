@@ -34,7 +34,7 @@ internal static partial class Program
             ApplicationCommands.New.Execute(null, main);
             var build = ((Grid)main.FindName("GridApp")).Children.OfType<USearchLib>().Single();
             Check("the shell suppresses the duplicate Build banner", build.UseShellStatusBar
-                && guide.Text.Contains("Build families") && guide.Text.Contains("Ready to build"), guide.Text);
+                && guide.Text.Contains("Build families") && guide.Text.Contains("Choose a database"), guide.Text);
             var begin = typeof(USearchLib).GetMethod("BeginRun", any)!;
             var end = typeof(USearchLib).GetMethod("EndRun", any)!;
             try
@@ -47,7 +47,7 @@ internal static partial class Program
             finally { end.Invoke(build, null); }
             string workflow = (string)typeof(MainWindow).GetMethod("WorkflowText", any)!.Invoke(main, null)!;
             Check("the former Build banner facts remain reachable in Help", workflow.Contains("Family Cluster File")
-                && workflow.Contains("Input a FASTA file") && workflow.Contains(build.ShellHelpText));
+                && workflow.Contains("Build families") && workflow.Contains(build.ShellHelpText));
             typeof(MainWindow).GetMethod("MenuItemDeNovo_Click", any)!.Invoke(main, new object[] { main, new RoutedEventArgs() });
             Check("de novo status is short while its detailed navigation facts stay in Help", guide.Text.Contains("De novo")
                 && main.StatusModel.ContextHelp.Contains("Load Family") && main.StatusModel.ContextHelp.Contains("scan, charge"));
