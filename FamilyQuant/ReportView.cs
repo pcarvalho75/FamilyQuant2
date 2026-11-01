@@ -54,11 +54,9 @@ namespace FamilyQuant
         }
 
         /// <summary>Families that ended up with a number, for the status line.</summary>
-        public static int QuantifiedFamilies(IEnumerable<FastaItemExtended> items, GroupingType grouping)
+        public static int QuantifiedFamilies(IEnumerable<FastaItemExtended> items)
         {
-            return grouping == GroupingType.USearch
-                ? items.Where(i => i.XIC > 0).Select(i => i.USearchID).Distinct().Count()
-                : items.Where(i => i.XICUser > 0).Select(i => i.UserID).Distinct().Count();
+            return items.Where(i => i.XICUser > 0).Select(i => i.UserID).Distinct().Count();
         }
 
         /// <summary>

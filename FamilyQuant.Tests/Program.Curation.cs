@@ -161,10 +161,9 @@ namespace FamilyQuant.Tests
                 string.Join(" | ", lockedRun.Select(c => string.Join(",", c))));
 
             // ---- a locked family never joins a keyword super-cluster either.
-            var super = new WordCluster(Venom(), new List<string>())
-                .GroupByKeywords(new List<string> { "phospholipase" }, locks);
+            var super = new SuperClusterPreview(Venom(), null, "phospholipase", "", KeywordMatch.Any, null, locks);
             Check("a keyword super cluster does not absorb a locked family",
-                !super.Any(c => c.Contains(2) && c.Contains(500)));
+                !super.JoiningFamilies.Contains(2) && !super.JoiningFamilies.Contains(500));
 
             // ---- the locks are part of the file, and an old file without them still loads.
             string workDir = Path.Combine(Path.GetTempPath(), "FamilyQuant.Tests");

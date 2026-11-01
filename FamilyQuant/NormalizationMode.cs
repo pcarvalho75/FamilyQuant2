@@ -96,30 +96,26 @@ namespace FamilyQuant
         }
 
         /// <summary>
-        /// What the grid column shows, naming the denominator in use and which of the two groupings the
-        /// column belongs to. "XIC Original" said neither.
+        /// What the grid column shows, naming the denominator and the curated grouping.
         /// </summary>
-        public static string ColumnHeader(this NormalizationMode mode, GroupingType grouping)
+        public static string ColumnHeader(this NormalizationMode mode)
         {
-            string who = grouping == GroupingType.USearch ? "USearch families" : "User families";
-            return mode.ShortName() + " (" + who + ")";
+            return mode.ShortName() + " (User families)";
         }
 
         /// <summary>The same for the CSV, where the values stay fractions rather than percentages.</summary>
-        public static string CsvHeader(this NormalizationMode? mode, GroupingType grouping)
+        public static string CsvHeader(this NormalizationMode? mode)
         {
-            string who = grouping == GroupingType.USearch ? "USearch families" : "User families";
-
             if (mode == null)
             {
-                return "Family share, fraction 0-1, denominator unknown (" + who + ")";
+                return "Family share, fraction 0-1, denominator unknown (User families)";
             }
 
             string what = mode.Value == NormalizationMode.IdentifiedSignal
                 ? "of identified signal"
                 : mode.Value.ShortName().Replace("% of", "of");
 
-            return "Family share " + what + ", fraction 0-1 (" + who + ")";
+            return "Family share " + what + ", fraction 0-1 (User families)";
         }
 
         /// <summary>

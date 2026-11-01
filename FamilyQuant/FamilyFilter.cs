@@ -43,16 +43,8 @@ namespace FamilyQuant
         public static List<FastaItemExtended> Apply(IEnumerable<FastaItemExtended> items,
                                                     string searchText,
                                                     bool onlyWithXic,
-                                                    bool hideDecoys)
-        {
-            return Apply(items, searchText, onlyWithXic, hideDecoys, false);
-        }
-
-        public static List<FastaItemExtended> Apply(IEnumerable<FastaItemExtended> items,
-                                                    string searchText,
-                                                    bool onlyWithXic,
                                                     bool hideDecoys,
-                                                    bool hideContaminants)
+                                                    bool hideContaminants = false)
         {
             IEnumerable<FastaItemExtended> result = items;
 

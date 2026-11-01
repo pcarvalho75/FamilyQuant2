@@ -236,16 +236,6 @@ namespace FamilyQuant
             }
         }
 
-        public void AttributeXICToGroups(PatternLabProject MyPLP, GroupingType groupingType)
-        {
-            AttributeXICToGroups(MyPLP, groupingType, NormalizationMode.IdentifiedSignal, SharedPeptidePolicy.FamilyUnique);
-        }
-
-        public void AttributeXICToGroups(PatternLabProject MyPLP, GroupingType groupingType, NormalizationMode mode)
-        {
-            AttributeXICToGroups(MyPLP, groupingType, mode, SharedPeptidePolicy.FamilyUnique);
-        }
-
         /// <summary>
         /// Fills the XIC column for every family.
         ///
@@ -260,7 +250,7 @@ namespace FamilyQuant
         /// makes the families overlap, and on a redundant venom database that pushes the column's total
         /// well past 100% of the chromatogram. Only the additive policies may be read as a composition.
         /// </summary>
-        public void AttributeXICToGroups(PatternLabProject MyPLP, GroupingType groupingType,
+        public void AttributeXICToGroups(PatternLabProject MyPLP,
                                          NormalizationMode mode, SharedPeptidePolicy sharedPolicy)
         {
             EnsureLookupsFor(MyPLP);
@@ -283,13 +273,7 @@ namespace FamilyQuant
                 if (!plan.IsAvailable || !plan.RequiresRescaling) plan = null;
             }
 
-            var groupedItems = groupingType == GroupingType.USearch
-                ? (from mf in MyExtendedFastaItems
-                   group mf by mf.USearchID into thegroups
-                   select thegroups).ToList()
-                : (from mf in MyExtendedFastaItems
-                   group mf by mf.UserID into thegroups
-                   select thegroups).ToList();
+            var groupedItems = GroupedFastaItems;
 
             var familiesPerPeptide = CountFamiliesPerPeptide(groupedItems);
 
@@ -338,35 +322,17 @@ namespace FamilyQuant
 
                 foreach (FastaItemExtended item in group)
                 {
-                    if (groupingType == GroupingType.USearch)
-                        item.XIC = value;
-                    else
-                        item.XICUser = value;
+                    item.XICUser = value;
                 }
             }
-        }
-
-        public double GetGroupXIC(IGrouping<int, FastaItemExtended> theGroup, PatternLabProject MyPLP)
-        {
-            return GetGroupXIC(theGroup, MyPLP, null, SharedPeptidePolicy.CountInEveryFamily);
         }
 
         /// <summary>
         /// Total quantitation of one family. <paramref name="familiesPerPeptide"/> is required by every
         /// policy except <see cref="SharedPeptidePolicy.CountInEveryFamily"/>, which needs no weighting.
+        /// A non-null <paramref name="plan"/> re-expresses each run under its requested denominator.
         /// </summary>
-        public double GetGroupXIC(IGrouping<int, FastaItemExtended> theGroup, PatternLabProject MyPLP,
-                                  Dictionary<string, int>? familiesPerPeptide, SharedPeptidePolicy sharedPolicy)
-        {
-            return GetGroupXIC(theGroup, MyPLP, familiesPerPeptide, sharedPolicy, null);
-        }
-
-        /// <summary>
-        /// As above, with an optional <paramref name="plan"/> that re-expresses each run's values under a
-        /// different denominator before they are summed (Phase 4). A null plan means "use the file's own
-        /// values", which is the pre-Phase-4 behaviour exactly.
-        /// </summary>
-        public double GetGroupXIC(IGrouping<int, FastaItemExtended> theGroup, PatternLabProject MyPLP,
+        private double GetGroupXIC(IGrouping<int, FastaItemExtended> theGroup, PatternLabProject MyPLP,
                                   Dictionary<string, int>? familiesPerPeptide, SharedPeptidePolicy sharedPolicy,
                                   NormalizationPlan? plan)
         {
