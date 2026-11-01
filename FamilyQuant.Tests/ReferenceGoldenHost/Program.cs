@@ -7,6 +7,8 @@ namespace FamilyQuant.Tests
         [STAThread]
         private static int Main(string[] args)
         {
+            if (args.Length > 0 && args[0] == WordGroupingSnapshot.Argument) return WordGroupingSnapshot.Run(args);
+            if (args.Length > 0 && args[0] == ChartExportSnapshot.Argument) return ChartExportSnapshot.Run(args);
             var app = new App();
             app.GetType().GetMethod("InitializeComponent")?.Invoke(app, null);
             int failures = 0;

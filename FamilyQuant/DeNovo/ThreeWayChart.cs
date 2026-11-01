@@ -31,7 +31,7 @@ namespace FamilyQuant.DeNovo
     /// <see cref="FamilyQuant.IdentityScanChart"/>: the application ships no such dependency, and a
     /// resize redraws for free.
     /// </summary>
-    public class ThreeWayChart : FrameworkElement
+    public class ThreeWayChart : ChartDrawingBase
     {
         private readonly List<ThreeWayPartitionRow> rows;
         private readonly string title;
@@ -78,13 +78,6 @@ namespace FamilyQuant.DeNovo
             Margin = new Thickness(0);
         }
 
-        private static FormattedText Text(string s, Brush brush, double size, bool bold = false)
-        {
-            return new FormattedText(s, CultureInfo.CurrentCulture, FlowDirection.LeftToRight,
-                new Typeface(new FontFamily("Segoe UI"), FontStyles.Normal,
-                             bold ? FontWeights.Bold : FontWeights.Normal, FontStretches.Normal),
-                size, brush, 96);
-        }
 
         private static string Percent(double value) =>
             value.ToString("F2", CultureInfo.CurrentCulture) + "%";
@@ -95,7 +88,7 @@ namespace FamilyQuant.DeNovo
 
             // Its own backdrop, so the light ink is legible wherever the control is hosted and a
             // render to a bitmap shows what the window shows rather than light text on transparency.
-            dc.DrawRectangle(Backdrop, null, new Rect(0, 0, ActualWidth, ActualHeight));
+            DrawBackdrop(dc, Backdrop);
 
             if (rows.Count == 0 || ActualWidth < 320 || ActualHeight < 140) return;
 
