@@ -96,6 +96,23 @@ namespace FamilyQuant.Tests
                 && GroupOf(21).InferredProteinIndices.Count == 0);
             Check("F3: members with domain calls keep exactly the groups they had",
                 GroupOf(0).Key == "[\"PF00011\"]" && GroupOf(10).Key == "[\"PF00011\",\"PF00012\"]" && GroupOf(10).ProteinIndices.Count == 10);
+            Check("F3: every member the split could not place is listed for the user, with why",
+                arch.Undetermined.Select(u => u.ProteinIndex).SequenceEqual(new[] { 21, 22, 23 })
+                && arch.Undetermined[0].Reason == "A fragment with no domain call: its length cannot tell which group it belongs to."
+                && arch.Undetermined[1].Reason == "No domain call, and its length and cysteines lie outside every learned group."
+                && arch.Undetermined[2].Reason == "No domain call, and its source does not say whether it is complete.",
+                string.Join(" | ", arch.Undetermined.Select(u => u.ProteinIndex + ": " + u.Reason)));
+            var oneArchitecture = new List<FastaItemExtended> { family[0], family[21] };
+            var oneProposal = new EvidenceProposal
+            {
+                SourceFingerprint = EvidenceClassifier.Fingerprint(oneArchitecture),
+                Proteins = oneArchitecture.Select((p, i) => new EvidenceProteinProposal
+                {
+                    ProteinIndex = i, Identifier = p.SequenceIdentifier, Family = "Alpha family", Tier = EvidenceTier.UniProtFamily,
+                }).ToArray(),
+            };
+            Check("F3: a family with nothing to split lists nobody as undetermined",
+                EvidenceArchitecture.Suggest(oneArchitecture, oneProposal).Single().Undetermined.Count == 0);
             EvidenceArchitectureProposal tooFew = EvidenceArchitecture.Suggest(family, archProposal, minimumMembers: 11).Single();
             Check("F3: a combination with fewer complete reviewed members than the minimum places nobody",
                 tooFew.Groups.All(g => g.InferredProteinIndices.Count == 0));

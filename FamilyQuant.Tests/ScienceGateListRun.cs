@@ -120,6 +120,8 @@ namespace FamilyQuant.Tests
                 var reviewedVenom = File.ReadLines(svmpClasses).Skip(1).Where(l => l.Length > 0).Select(l => l.Split('\t'))
                     .Where(c => c[6] == "yes").Select(c => (Locus: c[0], Class: c[1])).ToList();
                 var venomOutcome = new SortedDictionary<string, int>(StringComparer.Ordinal);
+                var undetermined = architecture.SelectMany(a => a.Undetermined).ToDictionary(u => u.ProteinIndex, u => u.Reason);
+                var notShown = new List<string>();
                 foreach (var (locus, pyClass) in reviewedVenom)
                 {
                     EvidenceProteinProposal p = proposal.Proteins.Single(x => x.Identifier == locus);
@@ -129,6 +131,10 @@ namespace FamilyQuant.Tests
                     string outcome = programClass == pyClass ? "consistent"
                         : "differs, verdict " + (rowByLocus.TryGetValue(locus, out string[]? row) ? row[0] : "MISSING");
                     venomOutcome[pyClass + ": " + outcome] = venomOutcome.TryGetValue(pyClass + ": " + outcome, out int k) ? k + 1 : 1;
+                    // What the program itself shows for an entry left inconsistent: its row's flags, or its place among
+                    // the members the split could not decide.
+                    if (programClass != pyClass)
+                        notShown.AddRange(p.Flags.Count > 0 || undetermined.ContainsKey(p.ProteinIndex) ? Array.Empty<string>() : new[] { locus });
                 }
 
                 string reportText = JsonSerializer.Serialize(new
@@ -142,6 +148,8 @@ namespace FamilyQuant.Tests
                 File.WriteAllText(Path.Combine(outDir, "e14-disagreements.json"), reportText);
                 Console.WriteLine(reportText);
                 check("every disagreement has a verdict", !verdicts.ContainsKey(Unjudged), verdicts.GetValueOrDefault(Unjudged) + " unjudged");
+                check("every reviewed venom entry left inconsistent is shown by the program, flagged or listed as undetermined",
+                    notShown.Count == 0, string.Join(", ", notShown));
                 check("every reviewed venom entry is consistent or carries a verdict",
                     venomOutcome.Keys.All(k => !k.EndsWith("MISSING", StringComparison.Ordinal)), string.Join("; ", venomOutcome.Select(o => o.Key + " " + o.Value)));
             }
