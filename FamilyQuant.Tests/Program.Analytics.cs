@@ -318,8 +318,8 @@ namespace FamilyQuant.Tests
                 control.Families == null
                 && WalkTree(control).OfType<FamilyContributionChart>().Single().Bars.Count == 0);
             Check("and the status line says which file would fill it",
-                UiField<TextBlock>(control, "TextBlockStatus")!.Text.Contains("No Family Cluster File is open"),
-                UiField<TextBlock>(control, "TextBlockStatus")!.Text);
+                control.ViewModel.Details.Contains("No Family Cluster File is open"),
+                control.ViewModel.Details);
 
             var emptyControl = new AnalyticsControl(new List<QuantRow>(), null);
             Check("the control with no quant shows the compute-first message and draws no chart",

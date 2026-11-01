@@ -42,6 +42,12 @@ namespace FamilyQuant.Tests
         {
             if (args.Length > 0 && args[0] == WordGroupingSnapshot.Argument) return WordGroupingSnapshot.Run(args);
             if (args.Length > 0 && args[0] == ChartExportSnapshot.Argument) return ChartExportSnapshot.Run(args);
+            if (args.Contains("--test-results", StringComparer.Ordinal))
+            {
+                ResultsViewModelTests();
+                Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
+                return failed == 0 ? 0 : 1;
+            }
             if (args.Contains("--test-document", StringComparer.Ordinal))
             {
                 string documentWorkDir = Path.Combine(Path.GetTempPath(), "FamilyQuant.Tests");
@@ -95,6 +101,7 @@ namespace FamilyQuant.Tests
             if (args.Length == 2 && args[0] == "--shell-menu-screens") return ShellMenuScreens(args[1]);
             if (args.Length == 2 && args[0] == "--start-page-screens") return HomeStartScreens(args[1]);
             if (args.Length == 2 && args[0] == "--quantify-screens") return QuantifyScreens(args[1]);
+            if (args.Length is 2 or 3 && args[0] == "--results-screens") return ResultsScreens(args[1], args.Length == 3 ? args[2] : null);
 
             // PowerShell 5.1 silently DROPS empty "" arguments to native executables, which shifted
             // the data directories into the wrong positions and turned every real-data section into a
@@ -418,6 +425,7 @@ namespace FamilyQuant.Tests
             Section("Word-based reclustering invariants");
             WordClusterTests();
             QuantifyViewModelTests(workDir);
+            ResultsViewModelTests();
 
             Section("Database parsing and the decoy tag");
             DatabaseTests(workDir);
