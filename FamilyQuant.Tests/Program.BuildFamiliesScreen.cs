@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -112,6 +113,16 @@ internal static partial class Program
             Check("Build keeps its generated file and enables the existing FDR action", File.Exists(output)
                 && ReferenceEquals(view.fcf, generated) && !view.ViewModel.IsBusy && ((Button)view.FindName("ButtonCalculateFDR")).IsEnabled);
             Check("Build never changes its source database", File.ReadAllText(input) == before);
+            AppearanceWalk(view).OfType<Expander>().Single().IsExpanded = true;
+            view.UpdateLayout();
+            PumpDispatcher();
+            var namedControls = AppearanceWalk(view).OfType<ContentControl>()
+                .Where(c => c is Button or CheckBox).Select(c => c.Content as string).OfType<string>().ToHashSet(StringComparer.Ordinal);
+            string[] namedCommands = Regex.Matches(USearchLib.LargeDatabaseWarning(input, 10001) + "\n" + view.ViewModel.Details,
+                "(?:press|turn off|with) \\\"([^\\\"]+)\\\"").Select(m => m.Groups[1].Value).ToArray();
+            Check("every quoted command in the large-database warning and completed build is on the screen",
+                namedCommands.Length == 3 && namedCommands.All(namedControls.Contains),
+                "Missing: " + string.Join(", ", namedCommands.Where(name => !namedControls.Contains(name))));
             ((Button)view.FindName("ButtonCalculateFDR")).RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
             Check("FDR remains reported with its interpretation", view.ViewModel.Details.Contains("Mixing score:")
                 && view.ViewModel.Details.Contains("unrelated real families"));
