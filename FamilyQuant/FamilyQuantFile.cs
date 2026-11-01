@@ -81,6 +81,9 @@ namespace FamilyQuant
         /// Annotation changes between releases, so the file records which one its domains are.</summary>
         public string DomainSource { get; set; } = string.Empty;
 
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public Evidence.EvidenceProvenance? EvidenceSource { get; set; }
+
         public List<FastaItemExtended> MyExtendedFastaItems { get; set; } = new List<FastaItemExtended>();
 
         /// <summary>How the current grouping was produced, for display.</summary>
