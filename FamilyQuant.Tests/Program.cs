@@ -168,6 +168,13 @@ namespace FamilyQuant.Tests
                 return failed == 0 ? 0 : 1;
             }
 
+            if (args.Contains(ScienceGateListRun.Argument))
+            {
+                ScienceGateListRun.Run(args, Check);
+                Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
+                return failed == 0 ? 0 : 1;
+            }
+
             if (args.Contains(LeftOutCheckRun.Argument))
             {
                 LeftOutCheckRun.Run(args, Check);
