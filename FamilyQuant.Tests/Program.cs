@@ -518,6 +518,9 @@ namespace FamilyQuant.Tests
             ProteinDomainsTests(workDir);
             EvidenceStorageTests(workDir);
 
+            Section("Nearest reviewed protein - never itself, gated, deterministic and memoised");
+            NearestReviewedTests(workDir);
+
             Section("Batch edit - one User ID and annotation for many selected rows");
             BatchCurationTests();
             EnsureApplication();
