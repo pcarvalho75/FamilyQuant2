@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -93,6 +94,8 @@ namespace FamilyQuant.Evidence
             {
                 string family = asked[index];
                 string? url = Endpoint + Uri.EscapeDataString("(reviewed:true) AND (family:\"" + family.Replace("\"", "") + "\")");
+                int? announced = null;
+                int delivered = 0;
                 while (url != null)
                 {
                     cancellationToken.ThrowIfCancellationRequested();
@@ -104,12 +107,16 @@ namespace FamilyQuant.Evidence
                     if (release != null && release != currentRelease)
                         throw new InvalidDataException("The UniProt release changed while the panel was fetched. No panel was made.");
                     release = currentRelease;
+                    if (announced == null && response.Headers.TryGetValues("x-total-results", out IEnumerable<string>? totals)
+                        && int.TryParse(totals.FirstOrDefault(), NumberStyles.Integer, CultureInfo.InvariantCulture, out int total))
+                        announced = total;
 
                     string json = await response.Content.ReadAsStringAsync(cancellationToken).ConfigureAwait(false);
                     Dictionary<string, ProteinEvidence> parsed = EvidenceFetcher.Parse(json);
                     foreach ((string accession, string sequence) in Sequences(json))
                     {
                         received++;
+                        delivered++;
                         if (!parsed.TryGetValue(accession, out ProteinEvidence? evidence) || evidence.Accession != accession)
                             throw new InvalidDataException("UniProt returned an entry it did not describe. No panel was made.");
                         if (evidence.Reviewed != true)
@@ -123,6 +130,11 @@ namespace FamilyQuant.Evidence
                     }
                     url = NextPage(response);
                 }
+                // A page left unread is a silent hole in the panel, so the count UniProt announced must arrive.
+                if (announced != null && delivered != announced)
+                    throw new InvalidDataException("UniProt announced " + announced.Value.ToString(CultureInfo.InvariantCulture)
+                        + " reviewed entries for \"" + family + "\" and delivered "
+                        + delivered.ToString(CultureInfo.InvariantCulture) + ". No panel was made.");
                 Report(index + 1);
             }
 
@@ -187,18 +199,17 @@ namespace FamilyQuant.Evidence
             return found;
         }
 
-        /// <summary>The next page from UniProt's <c>Link: &lt;url&gt;; rel="next"</c> header, or null.</summary>
+        /// <summary>The next page from UniProt's <c>Link: &lt;url&gt;; rel="next"</c> header, or null. The
+        /// URL is read between its brackets, never split at commas: it carries the comma-separated fields.</summary>
         private static string? NextPage(HttpResponseMessage response)
         {
             if (!response.Headers.TryGetValues("Link", out IEnumerable<string>? links)) return null;
-            foreach (string link in links.SelectMany(l => l.Split(',')))
-            {
-                if (!link.Contains("rel=\"next\"", StringComparison.Ordinal)) continue;
-                int open = link.IndexOf('<'), close = link.IndexOf('>');
-                if (open >= 0 && close > open) return link.Substring(open + 1, close - open - 1);
-            }
-            return null;
+            Match next = NextLink.Match(string.Join(",", links));
+            return next.Success ? next.Groups[1].Value : null;
         }
+
+        private static readonly Regex NextLink = new Regex("<([^>]*)>\\s*;\\s*rel=\"next\"",
+            RegexOptions.Compiled | RegexOptions.CultureInvariant);
 
         private static async Task<HttpResponseMessage> GetWithRetry(HttpClient client, string url, CancellationToken cancellationToken)
         {
