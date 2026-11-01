@@ -33,7 +33,7 @@ What each rule changed on Ana's file (UniProt 2026_03, panel fetched again with 
 
 Verdicts after E16: V02 11, V03 52, V04 68, V05 10, V06 9, V09 4, V10 1, V11 11 (V01, V07 and V08 are empty). The leave-one-out is unchanged, as it does not use the classifier: 976 right, 20 wrong, 96 without a neighbour (986, 17, 89 with the panel).
 
-The one of the 256 left is **morulustatin** (sp|P0DW29), a 37-residue fragment of a mature disintegrin with no domain call. Being a fragment, its length cannot place it (it lies below every combination's range, as any piece does), so it stays in the SVMP family's "(no domain calls)" group, which C4's split list shows, where the user can move it. Python placed it by its name. Verdict V02 stands for it.
+The one of the 256 left is **morulustatin** (sp|P0DW29), a 37-residue fragment of a mature disintegrin with no domain call. Being a fragment, its length cannot place it (it lies below every combination's range, as any piece does), so it stays in the SVMP family's "(no domain calls)" group. The program lists it, with that reason, among the members the split could not place (`EvidenceArchitectureProposal.Undetermined`, filled whenever the family can split), and the gate fails if an inconsistent entry of the 256 is neither flagged nor listed so. Showing that list beside the split is C4's part (FQLook); until C4 is merged no screen shows it. Python placed it by its name. Verdict V02 stands for it.
 
 ### V11. Unannotated proteins joined through an in-scope reviewed neighbour (11)
 

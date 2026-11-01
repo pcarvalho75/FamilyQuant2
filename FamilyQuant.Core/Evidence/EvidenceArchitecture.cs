@@ -20,11 +20,22 @@ namespace FamilyQuant.Evidence
         public IReadOnlyList<int> InferredProteinIndices { get; init; } = Array.Empty<int>();
     }
 
+    /// <summary>A member with no domain call the split could not place, and why: shown to the user, because
+    /// keeping a split apart decides which side it lands on.</summary>
+    public sealed class EvidenceArchitectureUndetermined
+    {
+        public int ProteinIndex { get; init; }
+        public string Reason { get; init; } = string.Empty;
+    }
+
     public sealed class EvidenceArchitectureProposal
     {
         public string Family { get; init; } = string.Empty;
         public bool CanSplit { get; init; }
         public IReadOnlyList<EvidenceArchitectureGroup> Groups { get; init; } = Array.Empty<EvidenceArchitectureGroup>();
+
+        /// <summary>When the family can split: its members with no domain call that no learned range placed.</summary>
+        public IReadOnlyList<EvidenceArchitectureUndetermined> Undetermined { get; init; } = Array.Empty<EvidenceArchitectureUndetermined>();
     }
 
     public sealed class EvidenceArchitectureChoice
@@ -73,18 +84,32 @@ namespace FamilyQuant.Evidence
                 }
                 var ranges = LearnRanges(family.Key, proteins, panel, minimumMembers, domainNames);
                 var inferred = new HashSet<int>();
+                var unplaced = new List<EvidenceArchitectureUndetermined>();
                 string KeyOf(int index)
                 {
                     FastaItemExtended protein = proteins[index];
                     string own = JsonSerializer.Serialize(Domains(protein.Evidence));
-                    if (Domains(protein.Evidence).Length > 0 || protein.Evidence?.Fragment != false || !MotifCheck.IsComplete(protein))
-                        return own;
-                    int length = (protein.Sequence ?? string.Empty).Length, cysteines = CoherenceCheck.Cysteines(protein.Sequence ?? string.Empty);
-                    List<string> fits = ranges.Where(r => length >= r.Value.MinLength && length <= r.Value.MaxLength
-                        && cysteines >= r.Value.MinCysteines && cysteines <= r.Value.MaxCysteines).Select(r => r.Key).ToList();
-                    if (fits.Count != 1) return own;
-                    inferred.Add(index);
-                    return fits[0];
+                    if (Domains(protein.Evidence).Length > 0) return own;
+                    string? why = protein.Evidence?.Fragment == true || !MotifCheck.IsComplete(protein)
+                            ? "A fragment with no domain call: its length cannot tell which group it belongs to."
+                        : protein.Evidence?.Fragment == null ? "No domain call, and its source does not say whether it is complete."
+                        : null;
+                    if (why == null)
+                    {
+                        int length = (protein.Sequence ?? string.Empty).Length, cysteines = CoherenceCheck.Cysteines(protein.Sequence ?? string.Empty);
+                        List<string> fits = ranges.Where(r => length >= r.Value.MinLength && length <= r.Value.MaxLength
+                            && cysteines >= r.Value.MinCysteines && cysteines <= r.Value.MaxCysteines).Select(r => r.Key).ToList();
+                        if (fits.Count == 1)
+                        {
+                            inferred.Add(index);
+                            return fits[0];
+                        }
+                        why = fits.Count == 0
+                            ? "No domain call, and its length and cysteines lie outside every learned group."
+                            : "No domain call, and its length and cysteines fit " + fits.Count.ToString(CultureInfo.InvariantCulture) + " learned groups.";
+                    }
+                    unplaced.Add(new EvidenceArchitectureUndetermined { ProteinIndex = index, Reason = why });
+                    return own;
                 }
                 // Cross-references give domain presence, so the stable key describes a combination.
                 // No positional order is inferred from the provider's list order.
@@ -124,9 +149,11 @@ namespace FamilyQuant.Evidence
                             InferredProteinIndices = group.Where(inferred.Contains).ToArray(),
                         };
                     }).ToList();
+                bool canSplit = groups.Count(g => g.Domains.Count > 0) > 1;
                 result.Add(new EvidenceArchitectureProposal
                 {
-                    Family = family.Key, CanSplit = groups.Count(g => g.Domains.Count > 0) > 1, Groups = groups,
+                    Family = family.Key, CanSplit = canSplit, Groups = groups,
+                    Undetermined = canSplit ? unplaced.OrderBy(u => u.ProteinIndex).ToArray() : Array.Empty<EvidenceArchitectureUndetermined>(),
                 });
             }
             return result;
