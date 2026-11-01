@@ -71,6 +71,7 @@ namespace FamilyQuant.Tests
                 OpenProjectNavigationTests(shellWork);
                 DeNovoScreenNavigationTests();
                 ShellStatusTests(shellWork);
+                ShellStatusBridgeTests();
                 HomeStartTests(shellWork);
                 AppVersionTests();
                 Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
@@ -605,6 +606,7 @@ namespace FamilyQuant.Tests
             Section("Appearance directions - theme changes preserve curation and input surfaces");
             AppearanceDirectionTests();
             LegacySurfaceContrastTests();
+            ShellStatusBridgeTests();
             ThemePreferenceTests(workDir);
 
             Section("Feature ledger - frozen source inventory and explicit preservation checks");
