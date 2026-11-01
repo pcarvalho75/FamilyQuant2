@@ -129,7 +129,7 @@ public partial class MainWindow
             owner.MenuItemComputeXic.IsEnabled = false;
             owner.MenuItemReanotateSEPro.IsEnabled = false;
 
-            owner.dnc = new DeNovoControl();
+            owner.dnc = new DeNovoControl(owner.SharedDeNovoFilters());
 
             // Only a suggestion, and only into an empty box: the de novo screen reads nothing until its
             // own Search button is pressed.
@@ -201,7 +201,7 @@ public partial class MainWindow
                 owner.StatusModel.ShowMessage("Quantify needs a displayed application window.");
                 return;
             }
-            var window = new ComputeXicWindow(MainWindow.AppVersion(), owner.loadedManifest, owner.loadedCuration);
+            var window = new ComputeXicWindow(MainWindow.AppVersion(), owner.loadedManifest, owner.loadedCuration, owner.SharedDeNovoFilters());
             if (attached) window.Owner = owner;
             if (MainWindow.ComputeDialogOverride != null)
             {

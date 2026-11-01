@@ -25,9 +25,9 @@
      <Button Grid.Row="2" Grid.Column="2" Content="Browse..." Click="BrowseDeNovo" ToolTip="Choose the de novo export root."/>
      <local:DeNovoFilterControl x:Name="FilterControl" Grid.Row="3" Grid.ColumnSpan="3" DataContext="{Binding Filters}" Margin="0,12,0,12"/>
      <WrapPanel Grid.Row="4" Grid.ColumnSpan="3">
-      <Label Content="Isotope ceiling" ToolTip="Maximum credited isotopes per peptide, including the monoisotopic peak."/><xctk:IntegerUpDown x:Name="IntegerUpDownIsotopes" Width="70" Minimum="1" Maximum="6" Value="{Binding IsotopeCeiling, Mode=TwoWay}"
+      <Label Content="Isotope ceiling" ToolTip="Maximum credited isotopes per peptide, including the monoisotopic peak."/><xctk:IntegerUpDown x:Name="IntegerUpDownIsotopes" Margin="{DynamicResource ControlPadding}" Width="70" Minimum="1" Maximum="6" Value="{Binding IsotopeCeiling, Mode=TwoWay}"
        ToolTip="Maximum isotopes per peptide, 1 to 6. An absent isotope adds nothing. Default 6."/>
-      <Label Content="Minimum points per peak" ToolTip="Required array points per isotope peak, including the two padding points." Margin="20,0,0,0"/><xctk:IntegerUpDown x:Name="IntegerUpDownMinPoints" Width="70" Minimum="1" Maximum="20" Value="{Binding MinimumPoints, Mode=TwoWay}"
+      <Label Content="Minimum points per peak" ToolTip="Required array points per isotope peak, including the two padding points." Margin="20,0,0,0"/><xctk:IntegerUpDown x:Name="IntegerUpDownMinPoints" Margin="{DynamicResource ControlPadding}" Width="70" Minimum="1" Maximum="20" Value="{Binding MinimumPoints, Mode=TwoWay}"
        ToolTip="Points per isotope peak, including two padding points. Default 3. A value of 1 restores the legacy height rule."/>
      </WrapPanel>
     </Grid>
