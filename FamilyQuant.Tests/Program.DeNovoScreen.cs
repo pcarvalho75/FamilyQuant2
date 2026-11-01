@@ -806,7 +806,8 @@ namespace FamilyQuant.Tests
             Check("choosing it puts the de novo screen on display",
                 app.Children.Count == 1 && app.Children[0] is DeNovoControl);
             Check("the status names de novo while Help keeps its purpose and return path",
-                guide.Text.Contains("De novo") && main.StatusModel.ContextHelp.Contains("Load Family")
+                guide.Text.Contains("De novo") && main.StatusModel.ContextHelp.Contains("View > Families")
+                && main.StatusModel.ContextHelp.Contains("File > Open")
                 && main.StatusModel.ContextHelp.Contains("separate workflow", StringComparison.OrdinalIgnoreCase),
                 guide.Text);
             Check("and the two commands that write a Family Cluster File are disabled, "
@@ -836,8 +837,8 @@ namespace FamilyQuant.Tests
             Check("and that block says it is a separate workflow that changes no family",
                 workflow.Contains("A separate workflow, not a step of the four above")
                 && workflow.Contains("changes no family"));
-            Check("and lists both core steps plus the advanced standalone section",
-                new[] { "     1. ", "     2. ", "Standalone run (advanced)" }
+            Check("and lists both core steps plus current quantitation and attribution paths",
+                new[] { "     1. ", "     2. ", "Quantify", "Results", "attribution remains available" }
                     .All(workflow.Contains));
         }
 

@@ -42,7 +42,7 @@ namespace FamilyQuant.Tests
             try
             {
                 window.Measure(new Size(900, 700));
-                string? shown = (window.Content as TextBox)?.Text;
+                string? shown = WalkTree(window).OfType<TextBox>().SingleOrDefault()?.Text;
                 Check("the evidence help opens in the help window with its whole text", shown == full, shown?.Length.ToString());
             }
             finally { window.Close(); }

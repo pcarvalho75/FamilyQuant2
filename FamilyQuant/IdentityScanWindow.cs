@@ -22,113 +22,42 @@ namespace FamilyQuant
     /// </summary>
     public static class IdentityScanWindow
     {
-        static readonly Color Backdrop = Color.FromRgb(0x33, 0x39, 0x49);
-
         /// <summary>The name the sweep figure is saved under, beside the analytics figures.</summary>
         public const string FigureFile = "identity_sweep.png";
 
         public static Window Create(string title, List<IdentityScanRow> rows, string report,
                                     int? currentIdentity = null)
         {
-            // Written from what the sweep actually contains: on a decoy-free database the chart draws
-            // no floor line and no mixing curve, and a caption explaining both would describe a picture
-            // that is not on screen.
-            bool hasDecoys = rows != null && rows.Count > 0
-                             && !rows.All(r => r.Groups == r.TargetGroups && r.MixedGroups == 0);
-            var grid = new Grid { Margin = new Thickness(14) };
-            grid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(2.1, GridUnitType.Star) });
-            grid.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
-            grid.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
-            grid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1.0, GridUnitType.Star) });
-
-            var chart = new IdentityScanChart(rows ?? new List<IdentityScanRow>(), currentIdentity);
-            Grid.SetRow(chart, 0);
-            grid.Children.Add(chart);
-
-            var caption = new TextBlock
-            {
-                Text = hasDecoys
-                    ? "Each point is one USEARCH run. The floor line marks the loosest identity at which "
-                      + "no family mixed a target with a decoy: below it, alignments are no better than "
-                      + "noise. It is a floor and not an optimum, because two unrelated target families "
-                      + "fusing is invisible to this measurement."
-                    : "Each point is one USEARCH run. This database carries no decoy sequences, so there "
-                      + "is no mixing to measure and no floor to mark: choose the threshold from the "
-                      + "family counts and from the biology, or re-run on a target-decoy database.",
-                TextWrapping = TextWrapping.Wrap,
-                Foreground = new SolidColorBrush(Color.FromRgb(0xA8, 0xA4, 0x9A)),
-                FontSize = 12,
-                Margin = new Thickness(0, 12, 0, 10)
-            };
-            Grid.SetRow(caption, 1);
-            grid.Children.Add(caption);
-
-            // The families-vs-identity curve is one of the figures a talk needs, so the window offers it
-            // as a PNG rather than leaving it to a screenshot of a window.
-            var status = new TextBlock
-            {
-                TextWrapping = TextWrapping.Wrap,
-                Foreground = new SolidColorBrush(Color.FromRgb(0xA8, 0xA4, 0x9A)),
-                FontSize = 12,
-                VerticalAlignment = VerticalAlignment.Center,
-                Margin = new Thickness(12, 0, 0, 0)
-            };
-
-            var save = new Button
-            {
-                Content = "Save figure (PNG)",
-                Padding = new Thickness(12, 5, 12, 5),
-                Background = new SolidColorBrush(Color.FromRgb(0x3A, 0x41, 0x52)),
-                Foreground = Brushes.White,
-                HorizontalAlignment = HorizontalAlignment.Left,
-                ToolTip = "Saves this sweep chart as a PNG, 1920 by 1080 pixels on a light background, " +
-                          "ready for a slide. Only the PNG you name is written; the project is not changed.",
-            };
-
-            save.Click += (_, __) => SaveFigureFromDialog(save, status, rows ?? new List<IdentityScanRow>(),
-                                                          currentIdentity);
-
-            var bar = new StackPanel
-            {
-                Orientation = Orientation.Horizontal,
-                Margin = new Thickness(0, 0, 0, 10),
-            };
-            bar.Children.Add(save);
-            bar.Children.Add(status);
-            Grid.SetRow(bar, 2);
-            grid.Children.Add(bar);
-
-            var table = new TextBox
-            {
-                Text = report,
-                AcceptsReturn = true,
-                IsReadOnly = true,
-                IsReadOnlyCaretVisible = true,
-                FontFamily = new FontFamily("Consolas"),
-                FontSize = 12.5,
-                Padding = new Thickness(10),
-                BorderThickness = new Thickness(0),
-                Background = new SolidColorBrush(Color.FromRgb(0x2A, 0x2F, 0x3C)),
-                Foreground = Brushes.White,
-                SelectionBrush = new SolidColorBrush(Color.FromRgb(0x61, 0xAE, 0xEE)),
-                TextWrapping = TextWrapping.NoWrap,
-                VerticalScrollBarVisibility = ScrollBarVisibility.Auto,
-                HorizontalScrollBarVisibility = ScrollBarVisibility.Auto,
-                ToolTip = "The same sweep as numbers. Read-only; select any part and copy it with Ctrl+C."
-            };
-            Grid.SetRow(table, 3);
-            grid.Children.Add(table);
-
-            return new Window
-            {
-                Title = title,
-                Width = 980,
-                Height = 760,
-                MinWidth = 520,
-                MinHeight = 380,
-                Background = new SolidColorBrush(Backdrop),
-                Content = grid
-            };
+            var model = new IdentityScanViewModel(title, rows, report, currentIdentity);
+            var window = new Window { Title = model.Title, DataContext = model, Width = 980, Height = 760,
+                MinWidth = 520, MinHeight = 380 };
+            SecondaryWindowView.Theme(window);
+            var grid = new Grid();
+            grid.RowDefinitions.Add(new() { Height = GridLength.Auto });
+            grid.RowDefinitions.Add(new() { Height = new GridLength(2.1, GridUnitType.Star) });
+            grid.RowDefinitions.Add(new() { Height = GridLength.Auto });
+            grid.RowDefinitions.Add(new() { Height = new GridLength(1, GridUnitType.Star) });
+            grid.Children.Add(SecondaryWindowView.Text("Compare family counts and target-decoy mixing across the tested identities.", true));
+            var chart = new IdentityScanChart(model.Rows, model.CurrentIdentity, ChartPalette.UiPalette);
+            EventHandler updatePalette = (_, _) => chart.Palette = ChartPalette.UiPalette;
+            Themes.ThemeManager.ThemeChanged += updatePalette;
+            window.Closed += (_, _) => Themes.ThemeManager.ThemeChanged -= updatePalette;
+            Grid.SetRow(chart, 1); grid.Children.Add(chart);
+            var status = SecondaryWindowView.Text("", true);
+            status.Margin = new Thickness(12, 0, 0, 0); status.VerticalAlignment = VerticalAlignment.Center;
+            var save = new Button { Content = "Save figure (PNG)", HorizontalAlignment = HorizontalAlignment.Left,
+                ToolTip = "Saves this sweep chart as a PNG, 1920 by 1080 pixels on a light background, ready for a slide. Only the PNG you name is written; the project is not changed." };
+            save.SetResourceReference(FrameworkElement.StyleProperty, "PrimaryButton");
+            save.Click += (_, _) => SaveFigureFromDialog(save, status, model.Rows, model.CurrentIdentity);
+            var bar = new DockPanel { Margin = new Thickness(0, 10, 0, 10) };
+            DockPanel.SetDock(save, Dock.Left); bar.Children.Add(save);
+            var help = SecondaryWindowView.Help("Identity scan help", model.Explanation, window);
+            DockPanel.SetDock(help, Dock.Right); bar.Children.Add(help); bar.Children.Add(status);
+            Grid.SetRow(bar, 2); grid.Children.Add(bar);
+            var table = SecondaryWindowView.Report(model.Report, false,
+                "The same sweep as numbers. Read-only; select any part and copy it with Ctrl+C.");
+            Grid.SetRow(table, 3); grid.Children.Add(table); window.Content = SecondaryWindowView.Frame(grid);
+            return window;
         }
 
         public static void Show(string title, List<IdentityScanRow> rows, string report,
