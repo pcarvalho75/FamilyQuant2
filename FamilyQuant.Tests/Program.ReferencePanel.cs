@@ -18,6 +18,9 @@ namespace FamilyQuant.Tests
             private readonly Queue<(HttpStatusCode Status, string Body, string Release, string? Next)> pages;
             public List<string> Asked { get; } = new List<string>();
 
+            /// <summary>The x-total-results the first page of a family announces, when set.</summary>
+            public Queue<int?> Totals { get; } = new Queue<int?>();
+
             public CannedPanelUniProt(params (HttpStatusCode, string, string, string?)[] pages) =>
                 this.pages = new Queue<(HttpStatusCode, string, string, string?)>(pages);
 
@@ -28,6 +31,8 @@ namespace FamilyQuant.Tests
                 var response = new HttpResponseMessage(status) { Content = new StringContent(body) };
                 if (release.Length > 0) response.Headers.Add("x-uniprot-release", release);
                 if (next != null) response.Headers.Add("Link", "<" + next + ">; rel=\"next\"");
+                if (Totals.Count > 0 && Totals.Dequeue() is int total)
+                    response.Headers.Add("x-total-results", total.ToString(System.Globalization.CultureInfo.InvariantCulture));
                 return Task.FromResult(response);
             }
         }
@@ -66,7 +71,8 @@ namespace FamilyQuant.Tests
             Check("without a scope every target's family is asked",
                 ReferencePanelFetcher.FamiliesFound(file).Count == 3);
 
-            const string next = "https://rest.uniprot.org/uniprotkb/search?cursor=page2";
+            // A real next link carries the field list, commas included.
+            const string next = "https://rest.uniprot.org/uniprotkb/search?format=json&fields=accession,reviewed,sequence&cursor=page2&size=500";
             var handler = new CannedPanelUniProt(
                 (HttpStatusCode.OK, PanelPage(
                     PanelEntryJson("P20003", "Belongs to the alpha family.", alphaBase),
@@ -77,6 +83,7 @@ namespace FamilyQuant.Tests
                     PanelEntryJson("P20001", "Belongs to the gamma family.", NearestMutate(gammaBase, 9)),
                     PanelEntryJson("P20003", "Belongs to the alpha family.", alphaBase),
                     PanelEntryJson("P20004", "In the N-terminal section; belongs to the gamma family. In the C-terminal section; belongs to the delta family.", NearestMutate(gammaBase, 5))), "2026_03", null));
+            foreach (int? total in new int?[] { 3, null, 3 }) handler.Totals.Enqueue(total);
             ReferencePanel panel = ReferencePanelFetcher.FetchAndStoreAsync(file, scope, handler).GetAwaiter().GetResult();
             Check("each family is asked as a reviewed search, and the next page is followed",
                 handler.Asked.Count == 3 && handler.Asked[0].Contains("(reviewed:true) AND (family:\"Alpha family\")")
@@ -146,6 +153,12 @@ namespace FamilyQuant.Tests
                     NearestReviewed.Targets(reopened), NearestReviewed.References(reopened, scope)));
         }
 
+        private static CannedPanelUniProt Announcing(CannedPanelUniProt handler, int total)
+        {
+            handler.Totals.Enqueue(total);
+            return handler;
+        }
+
         private static void PanelRefusalTests(Func<ProteinEvidence, bool> scope)
         {
             string body = PanelPage(PanelEntryJson("P30001", "Belongs to the alpha family.", "MKTAYIAKQRQISFVKSHFSRQ"));
@@ -155,6 +168,8 @@ namespace FamilyQuant.Tests
                     (HttpStatusCode.OK, body, "2026_03", "https://rest.uniprot.org/next"), (HttpStatusCode.OK, body, "2026_04", null))),
                 ("a page without a release", new CannedPanelUniProt((HttpStatusCode.OK, body, "", null))),
                 ("a refused page", new CannedPanelUniProt((HttpStatusCode.BadRequest, "{}", "2026_03", null))),
+                ("fewer entries than UniProt announced (a page left unread)", Announcing(new CannedPanelUniProt(
+                    (HttpStatusCode.OK, body, "2026_03", null)), 2)),
                 ("an unreviewed entry in a reviewed search", new CannedPanelUniProt((HttpStatusCode.OK,
                     PanelPage(PanelEntryJson("P30002", "Belongs to the alpha family.", "MKTAYIAK", reviewed: false)), "2026_03", null))),
             };
