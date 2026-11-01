@@ -408,13 +408,13 @@
                                           Margin="10,5" Foreground="{DynamicResource TextBrush}" VerticalAlignment="Center"
                                           Checked="CheckBoxShowXICOnly_CheckedChanged"
                                           Unchecked="CheckBoxShowXICOnly_CheckedChanged"
-                                          ToolTip="Hides entries whose identifier contains 'contaminant' (keratins, trypsin, serum proteins) from the table and the CSV. Percentages do not change, so in '% of identified signal' the visible ones no longer add up to 100%."/>
+                                          ToolTip="{x:Static local:IdentifierText.HideContaminantsToolTip}"/>
 
                                 <CheckBox x:Name="CheckBoxExcludeReverse" Content="Hide Reverse (decoys)"
                                           Margin="10,5" Foreground="{DynamicResource TextBrush}" VerticalAlignment="Center"
                                           Checked="CheckBoxExcludeReverse_CheckedChanged"
                                           Unchecked="CheckBoxExcludeReverse_CheckedChanged"
-                                          ToolTip="Hides decoys, whose identifier starts with 'Reverse_', from the table and the CSV. Nothing is deleted and no percentage moves; keep them visible while judging the clustering."/>
+                                          ToolTip="{x:Static local:IdentifierText.HideDecoysToolTip}"/>
 
                                 <Button x:Name="ButtonSaveReport" Style="{DynamicResource PrimaryButton}" Margin="15,5,5,5" Click="ButtonSaveReport_Click"
                                         Content="Export to CSV"

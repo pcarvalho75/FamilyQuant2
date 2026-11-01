@@ -461,7 +461,7 @@
                            ToolTip="Text that marks a decoy protein in the family file. If it is wrong, decoys count as targets and the mapped count looks better than it is."/>
                     <TextBox x:Name="TextBoxDecoyLabel" Width="90" Margin="5" VerticalAlignment="Center"
                              Background="White" Foreground="Black"
-                             ToolTip="The decoy prefix, case-sensitive. Default Reverse_, which FamilyQuant writes. An empty box is refused when you press Search."/>
+                             ToolTip="{x:Static local:IdentifierText.DecoyPrefixToolTip}"/>
                 </WrapPanel>
 
                 <WrapPanel Grid.Row="2" Margin="5,10,5,0">

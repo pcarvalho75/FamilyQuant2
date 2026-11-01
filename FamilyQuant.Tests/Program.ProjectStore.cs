@@ -23,6 +23,12 @@ namespace FamilyQuant.Tests
     {
         private static void GoldenNumberGuardTests()
         {
+            string? repository = null;
+            try { repository = GoldenNumbers.FindRepository(); }
+            catch (DirectoryNotFoundException) { }
+            Check("the golden guard recognizes the renamed 2.0 worktree",
+                repository != null && File.Exists(Path.Combine(repository, "FamilyQuant2.sln")));
+
             var original = new Dictionary<string, byte[]>(StringComparer.Ordinal)
             {
                 ["families.csv"] = Encoding.UTF8.GetBytes("family,share\r\n1,0.25\r\n"),

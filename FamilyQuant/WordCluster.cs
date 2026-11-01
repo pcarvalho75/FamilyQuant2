@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -288,51 +288,6 @@ namespace FamilyQuant
             return all.Where(i => scopeIds.Contains(i.UserID)).ToList();
         }
 
-        /// <summary>The family-level merge. Create Super Cluster now moves the proteins its preview lists, so no
-        /// screen calls this; it stays because the suite pins the matching rule through it.</summary>
-        public List<List<int>> GroupByKeywords(List<string> keywords, ISet<int>? lockedFamilies = null,
-            KeywordMatch match = KeywordMatch.Any, List<string>? excludeWords = null)
-        {
-            return GroupByKeywordsCounted(keywords, lockedFamilies, match, excludeWords).clusters;
-        }
-
-        /// <summary>
-        /// Same as <see cref="GroupByKeywords"/>, also reporting how many matching families were kept
-        /// OUT of the super-cluster because they are locked. Without that count the caller's outcome
-        /// message lied in exactly the scenario the locks exist for: keywords matching only a
-        /// hand-separated pair reported "no family matched, check the spelling".
-        ///
-        /// <paramref name="match"/> chooses whether ALL of the keywords must be present in a family's
-        /// description or just ANY one. <paramref name="excludeWords"/> disqualifies a family outright:
-        /// if any member's description carries an entry of the exclude list the family never joins the
-        /// super-cluster, even when its keywords all match. Both default to the historical behaviour
-        /// (Any, no exclusions) so the older two-argument callers are unchanged.
-        ///
-        /// </summary>
-        public (List<List<int>> clusters, int lockedMatches) GroupByKeywordsCounted(
-            List<string> keywords, ISet<int>? lockedFamilies = null,
-            KeywordMatch match = KeywordMatch.Any, List<string>? excludeWords = null)
-        {
-            KeywordFamilies found = MatchKeywords(keywords, match, excludeWords);
-
-            var keywordClusters = new HashSet<int>(found.Matched);
-            keywordClusters.ExceptWith(found.Excluded);
-
-            // Keyword matches collapse into one super-cluster; everything else is preserved as-is.
-            // A locked family never joins the super-cluster, even when its words match: it was
-            // curated by hand, and an automatic operation does not outrank the curator.
-            int lockedMatches = 0;
-            if (lockedFamilies != null)
-            {
-                lockedMatches = keywordClusters.Count(lockedFamilies.Contains);
-                keywordClusters.ExceptWith(lockedFamilies);
-            }
-
-            var allClusterIds = MyClusterElements.Select(e => e.FamilyId).Distinct().ToList();
-
-            return (MergeKeywordClusters(allClusterIds, keywordClusters), lockedMatches);
-        }
-
         /// <summary>
         /// Which families and proteins carry the keywords and each exclude entry, without merging anything:
         /// the one matching rule. The preview reads it, and the merge moves what the preview listed.
@@ -421,27 +376,6 @@ namespace FamilyQuant
                           string.Join(", ", nothing) + ". Matching is on whole words of the description before OS=, " +
                           "so those proteins may go by another name: look for them in the list below and untick them there.");
             return string.Join("\n", parts);
-        }
-
-        private List<List<int>> MergeKeywordClusters(List<int> allClusterIds, HashSet<int> keywordClusters)
-        {
-            var mergedClusters = new List<List<int>>();
-
-            // All keyword-matching families merge into a single super-cluster (added first so callers
-            // can read result[0] as the super-cluster).
-            var superCluster = allClusterIds.Where(id => keywordClusters.Contains(id)).ToList();
-            if (superCluster.Count > 0)
-            {
-                mergedClusters.Add(superCluster);
-            }
-
-            // Every non-matching family is preserved unchanged as its own cluster.
-            foreach (var id in allClusterIds.Where(id => !keywordClusters.Contains(id)))
-            {
-                mergedClusters.Add(new List<int> { id });
-            }
-
-            return mergedClusters;
         }
 
         private List<(int, Dictionary<int, double>)> GenerateVectors(Dictionary<int, List<FastaClusterElement>> initialGroups)

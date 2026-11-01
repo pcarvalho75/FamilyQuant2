@@ -89,10 +89,11 @@ namespace FamilyQuant.Tests
                 throw new ArgumentException("The input project, snapshot and output folders must be separate.");
         }
 
-        private static string FindRepository()
+        internal static string FindRepository()
         {
             for (DirectoryInfo? dir = new DirectoryInfo(AppContext.BaseDirectory); dir != null; dir = dir.Parent)
-                if (File.Exists(Path.Combine(dir.FullName, "FamilyQuant.sln"))) return dir.FullName;
+                if (File.Exists(Path.Combine(dir.FullName, "FamilyQuant2.sln")) ||
+                    File.Exists(Path.Combine(dir.FullName, "FamilyQuant.sln"))) return dir.FullName;
             throw new DirectoryNotFoundException("Run the golden guard from a FamilyQuant worktree build.");
         }
 

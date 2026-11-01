@@ -301,7 +301,7 @@ namespace FamilyQuant
                     "The search could not be completed, and nothing was saved.\n\n" +
                     "Reason given by the program: " + ex.Message + "\n\n" +
                     "Next step: this search needs a database containing reversed decoy sequences, whose " +
-                    "identifiers start with \"Reverse_\". On a database without them, choose the identity " +
+                    "identifiers start with \"" + SequenceLabels.DecoyPrefix + "\". On a database without them, choose the identity " +
                     "from \"Scan identity range\" and from the biology instead.",
                     "Could not finish the search", MessageBoxButton.OK, MessageBoxImage.Error);
             }

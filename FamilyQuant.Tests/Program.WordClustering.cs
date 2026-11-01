@@ -26,6 +26,7 @@ namespace FamilyQuant.Tests
 
         private static void WordClusterTests()
         {
+            DeadPathContractTests();
             var items = new List<FastaItemExtended>();
             string[] descriptions =
             {
@@ -86,11 +87,11 @@ namespace FamilyQuant.Tests
             Check("the exclusion list is honoured regardless of typed case", excluded.Count >= loose.Count,
                 $"{excluded.Count} vs {loose.Count}");
 
-            var super = new WordCluster(items, new List<string>()).GroupByKeywords(new List<string> { "metalloproteinase" });
-            var superEmitted = super.SelectMany(c => c).ToList();
-            Check("a super cluster still partitions the families",
-                superEmitted.Count == inputFamilies && superEmitted.Distinct().Count() == inputFamilies);
-            Check("the keyword families end up together", super[0].Count == 2, $"{super[0].Count}");
+            var originalIds = items.Select(i => i.UserID).ToArray();
+            var super = new WordCluster(items, new List<string>()).MatchKeywords(new List<string> { "metalloproteinase" });
+            Check("keyword matching leaves every family untouched",
+                items.Select(i => i.UserID).SequenceEqual(originalIds));
+            Check("the same two families carry the keyword", super.Matched.SetEquals(new[] { 0, 1 }));
 
             ManualSplitSurvivesReclusteringTests();
             IdfWeightingTests();
@@ -122,72 +123,40 @@ namespace FamilyQuant.Tests
                     Description = "Zinc metalloproteinase-disintegrin OS=Bothrops jararaca OX=8724" },
             };
 
-            // ANY: either keyword is enough, so every phospholipase family joins, the metalloproteinase
-            // does not.
-            var any = new WordCluster(Families(), new List<string>())
-                .GroupByKeywords(new List<string> { "acidic", "phospholipase" },
-                                 null, KeywordMatch.Any, null);
-            var anySuper = any.First(c => c.Count > 1);
-            Check("ANY groups every family carrying either keyword (0,1,2), not the metalloproteinase (3)",
-                anySuper.OrderBy(i => i).SequenceEqual(new[] { 0, 1, 2 }),
-                string.Join(",", anySuper.OrderBy(i => i)));
+            var members = Families();
+            var matcher = new WordCluster(members, new List<string>());
+            var any = matcher.MatchKeywords(new List<string> { "acidic", "phospholipase" }, KeywordMatch.Any);
+            Check("ANY matches every family carrying either keyword (0,1,2), not the metalloproteinase (3)",
+                any.Matched.SetEquals(new[] { 0, 1, 2 }));
 
-            // ALL: both keywords must be present, so only "Acidic phospholipase A2" qualifies. One family
-            // cannot make a super cluster, so there is no multi-member cluster at all.
-            var all = new WordCluster(Families(), new List<string>())
-                .GroupByKeywords(new List<string> { "acidic", "phospholipase" },
-                                 null, KeywordMatch.All, null);
-            Check("ALL matches only the acidic phospholipase, so no family is joined to another",
-                all.All(c => c.Count == 1) && all.Count == 4,
-                string.Join(" | ", all.Select(c => string.Join(",", c))));
+            var all = matcher.MatchKeywords(new List<string> { "acidic", "phospholipase" }, KeywordMatch.All);
+            Check("ALL matches only the acidic phospholipase",
+                all.Matched.SetEquals(new[] { 0 }));
 
-            // ALL with a keyword every phospholipase shares AND the acidic word: still only family 0,
-            // proving the plain phospholipases are excluded by the missing "acidic".
-            var allShared = new WordCluster(Families(), new List<string>())
-                .GroupByKeywords(new List<string> { "phospholipase" }, null, KeywordMatch.All, null);
-            var allSharedSuper = allShared.FirstOrDefault(c => c.Count > 1);
-            Check("ALL on the single shared keyword still groups all three phospholipases",
-                allSharedSuper != null && allSharedSuper.OrderBy(i => i).SequenceEqual(new[] { 0, 1, 2 }),
-                allSharedSuper == null ? "none" : string.Join(",", allSharedSuper.OrderBy(i => i)));
+            var allShared = matcher.MatchKeywords(new List<string> { "phospholipase" }, KeywordMatch.All);
+            Check("ALL on the single shared keyword matches all three phospholipases",
+                allShared.Matched.SetEquals(new[] { 0, 1, 2 }));
 
-            // Exclude removes a family that otherwise matched: ANY "phospholipase" but exclude "inhibitor"
-            // drops family 1, leaving 0 and 2.
-            var excluded = new WordCluster(Families(), new List<string>())
-                .GroupByKeywords(new List<string> { "phospholipase" }, null, KeywordMatch.Any,
-                                 new List<string> { "inhibitor" });
-            var excludedSuper = excluded.First(c => c.Count > 1);
-            Check("the family-level merge: an exclude word removes the family that otherwise matched (inhibitor drops family 1)",
-                excludedSuper.OrderBy(i => i).SequenceEqual(new[] { 0, 2 }),
-                string.Join(",", excludedSuper.OrderBy(i => i)));
-            Check("the excluded family survives on its own rather than vanishing",
-                excluded.Any(c => c.Count == 1 && c[0] == 1),
-                string.Join(" | ", excluded.Select(c => string.Join(",", c))));
+            var excluded = matcher.MatchKeywords(new List<string> { "phospholipase" }, KeywordMatch.Any,
+                new List<string> { "inhibitor" });
+            Check("an exclude word identifies the family that otherwise matched (inhibitor removes family 1)",
+                excluded.Matched.Except(excluded.Excluded).OrderBy(i => i).SequenceEqual(new[] { 0, 2 }));
+            Check("the excluded family remains available without changing its membership",
+                excluded.Excluded.SetEquals(new[] { 1 }) && members[1].UserID == 1);
 
-            // Exclude is case-insensitive, like the recluster exclude list.
-            var excludedCase = new WordCluster(Families(), new List<string>())
-                .GroupByKeywords(new List<string> { "phospholipase" }, null, KeywordMatch.Any,
-                                 new List<string> { "INHIBITOR" });
+            var excludedCase = matcher.MatchKeywords(new List<string> { "phospholipase" }, KeywordMatch.Any,
+                new List<string> { "INHIBITOR" });
             Check("the super-cluster exclude ignores typed case",
-                excludedCase.First(c => c.Count > 1).OrderBy(i => i).SequenceEqual(new[] { 0, 2 }),
-                string.Join(",", excludedCase.First(c => c.Count > 1).OrderBy(i => i)));
+                excludedCase.Excluded.SetEquals(excluded.Excluded));
 
-            // Backward compatibility: the old two-argument call defaults to ANY, so existing behaviour is
-            // unchanged.
-            var legacyCall = new WordCluster(Families(), new List<string>())
-                .GroupByKeywords(new List<string> { "acidic", "phospholipase" });
-            Check("the two-argument GroupByKeywords still defaults to ANY (0,1,2 grouped)",
-                legacyCall.First(c => c.Count > 1).OrderBy(i => i).SequenceEqual(new[] { 0, 1, 2 }));
+            var defaultMatch = matcher.MatchKeywords(new List<string> { "acidic", "phospholipase" });
+            Check("the matcher defaults to ANY (0,1,2 matched)",
+                defaultMatch.Matched.SetEquals(new[] { 0, 1, 2 }));
 
-            // A locked family is still held out of the super cluster, and still counted, under the new
-            // signature (lockedMatches path unchanged).
-            var lockedResult = new WordCluster(Families(), new List<string>())
-                .GroupByKeywordsCounted(new List<string> { "phospholipase" },
-                                        new HashSet<int> { 1 }, KeywordMatch.Any, null);
-            Check("a locked family never joins the super cluster and is still counted as a locked match",
-                lockedResult.lockedMatches == 1 &&
-                !lockedResult.clusters.Any(c => c.Count > 1 && c.Contains(1)),
-                lockedResult.lockedMatches + " | " +
-                string.Join(" ", lockedResult.clusters.Select(c => string.Join(",", c))));
+            var lockedResult = new SuperClusterPreview(members, null, "phospholipase", "",
+                KeywordMatch.Any, null, new[] { 1 });
+            Check("a locked family never joins the preview and is still counted as a locked match",
+                lockedResult.LockedMatches == 1 && !lockedResult.JoiningFamilies.Contains(1));
         }
 
         /// <summary>
@@ -335,59 +304,49 @@ namespace FamilyQuant.Tests
             // which has "ribosomal" and "subunit" but not together, does not.
             const string twoPhrases = "\"ribosomal subunit\", \"ribosomal protein\"";
             var any = new WordCluster(Db(), new List<string>())
-                .GroupByKeywords(WordCluster.ParseKeywords(twoPhrases), null, KeywordMatch.Any, null);
-            var anySuper = any.FirstOrDefault(c => c.Count > 1);
-            Check("ANY of two quoted phrases joins the ribosomal-protein families only (3,4,7, not 5)",
-                anySuper != null && anySuper.OrderBy(i => i).SequenceEqual(new[] { 3, 4, 7 }),
-                anySuper == null ? "none" : string.Join(",", anySuper.OrderBy(i => i)));
+                .MatchKeywords(WordCluster.ParseKeywords(twoPhrases), KeywordMatch.Any);
+            Check("ANY of two quoted phrases matches the ribosomal-protein families only (3,4,7, not 5)",
+                any.Matched.SetEquals(new[] { 3, 4, 7 }));
 
             // "protein" is a stop word, so as a single keyword it matches nothing (unchanged), yet inside
             // a phrase it counts: that is why phrases read the full description.
             var stopWord = new WordCluster(Db(), new List<string>())
-                .GroupByKeywords(WordCluster.ParseKeywords("protein"), null, KeywordMatch.Any, null);
+                .MatchKeywords(WordCluster.ParseKeywords("protein"), KeywordMatch.Any);
             Check("a stop word alone still matches nothing, as before",
-                stopWord.All(c => c.Count == 1));
+                stopWord.Matched.Count == 0);
 
             // ALL of the two phrases: no single description holds both, so nothing merges.
             var all = new WordCluster(Db(), new List<string>())
-                .GroupByKeywords(WordCluster.ParseKeywords(twoPhrases), null, KeywordMatch.All, null);
-            Check("ALL of two phrases needs both in one description, so nothing merges here",
-                all.All(c => c.Count == 1),
-                string.Join(" | ", all.Select(c => string.Join(",", c))));
+                .MatchKeywords(WordCluster.ParseKeywords(twoPhrases), KeywordMatch.All);
+            Check("ALL of two phrases needs both in one description, so nothing matches here",
+                all.Matched.Count == 0);
 
             // A phrase must be consecutive and in order: "subunit ribosomal" matches nothing.
             var reversed = new WordCluster(Db(), new List<string>())
-                .GroupByKeywords(WordCluster.ParseKeywords("\"subunit ribosomal\""), null, KeywordMatch.Any, null);
+                .MatchKeywords(WordCluster.ParseKeywords("\"subunit ribosomal\""), KeywordMatch.Any);
             Check("a quoted phrase is matched in its own word order only",
-                reversed.All(c => c.Count == 1));
+                reversed.Matched.Count == 0);
 
             // A phrase and a single word under ALL: both on the same description.
             var mixed = new WordCluster(Db(), new List<string>())
-                .GroupByKeywords(WordCluster.ParseKeywords("\"ribosomal subunit\" 40s"), null, KeywordMatch.All, null);
-            var mixedSuper = mixed.FirstOrDefault(c => c.Count > 1);
-            Check("ALL with a phrase and a word joins the families carrying both (4,7)",
-                mixedSuper != null && mixedSuper.OrderBy(i => i).SequenceEqual(new[] { 4, 7 }),
-                mixedSuper == null ? "none" : string.Join(",", mixedSuper.OrderBy(i => i)));
+                .MatchKeywords(WordCluster.ParseKeywords("\"ribosomal subunit\" 40s"), KeywordMatch.All);
+            Check("ALL with a phrase and a word matches the families carrying both (4,7)",
+                mixed.Matched.SetEquals(new[] { 4, 7 }));
             var mixedMiss = new WordCluster(Db(), new List<string>())
-                .GroupByKeywords(WordCluster.ParseKeywords("\"ribosomal subunit\" 60s"), null, KeywordMatch.All, null);
-            Check("ALL with a phrase and a word that never meet merges nothing",
-                mixedMiss.All(c => c.Count == 1));
+                .MatchKeywords(WordCluster.ParseKeywords("\"ribosomal subunit\" 60s"), KeywordMatch.All);
+            Check("ALL with a phrase and a word that never meet matches nothing",
+                mixedMiss.Matched.Count == 0);
             var mixedAny = new WordCluster(Db(), new List<string>())
-                .GroupByKeywords(WordCluster.ParseKeywords("\"ribosomal protein\" metalloprotease"),
-                                 null, KeywordMatch.Any, null);
-            var mixedAnySuper = mixedAny.FirstOrDefault(c => c.Count > 1);
-            Check("ANY with a phrase and a single word gathers families matching either (1,3)",
-                mixedAnySuper != null && mixedAnySuper.OrderBy(i => i).SequenceEqual(new[] { 1, 3 }),
-                mixedAnySuper == null ? "none" : string.Join(",", mixedAnySuper.OrderBy(i => i)));
+                .MatchKeywords(WordCluster.ParseKeywords("\"ribosomal protein\" metalloprotease"), KeywordMatch.Any);
+            Check("ANY with a phrase and a single word finds families matching either (1,3)",
+                mixedAny.Matched.SetEquals(new[] { 1, 3 }));
 
             // An exclude word still disqualifies a family a phrase matched.
             var excluded = new WordCluster(Db(), new List<string>())
-                .GroupByKeywords(WordCluster.ParseKeywords(twoPhrases), null, KeywordMatch.Any,
+                .MatchKeywords(WordCluster.ParseKeywords(twoPhrases), KeywordMatch.Any,
                                  new List<string> { "60s" });
-            var excludedSuper = excluded.FirstOrDefault(c => c.Count > 1);
             Check("an exclude word removes a family a phrase matched (60S drops family 3)",
-                excludedSuper != null && excludedSuper.OrderBy(i => i).SequenceEqual(new[] { 4, 7 }),
-                excludedSuper == null ? "none" : string.Join(",", excludedSuper.OrderBy(i => i)));
+                excluded.Matched.Except(excluded.Excluded).OrderBy(i => i).SequenceEqual(new[] { 4, 7 }));
 
             SuperClusterExcludeBoxTests();
         }
@@ -401,9 +360,9 @@ namespace FamilyQuant.Tests
         {
             List<int> Joined(List<FastaItemExtended> items, string excludeBox, List<string>? reclusterExclude = null)
             {
-                var (clusters, _) = new WordCluster(items, reclusterExclude ?? new List<string>()).GroupByKeywordsCounted(
-                    WordCluster.ParseKeywords(ViperKeywords), null, KeywordMatch.Any, WordCluster.ParseKeywords(excludeBox));
-                return (clusters.FirstOrDefault(c => c.Count > 1) ?? new List<int>()).OrderBy(i => i).ToList();
+                var found = new WordCluster(items, reclusterExclude ?? new List<string>()).MatchKeywords(
+                    WordCluster.ParseKeywords(ViperKeywords), KeywordMatch.Any, WordCluster.ParseKeywords(excludeBox));
+                return found.Matched.Except(found.Excluded).OrderBy(i => i).ToList();
             }
 
             Check("the exclude box reaches the matcher as clean words when typed with commas",
@@ -561,29 +520,16 @@ namespace FamilyQuant.Tests
                 split.CalculateGroupingScore().TotalGroups == 3,
                 $"{split.CalculateGroupingScore().TotalGroups}");
 
-            // A super cluster on a keyword that matches neither the toxin nor the inhibitor.
-            var result = new WordCluster(items, new List<string>())
-                .GroupByKeywords(new List<string> { "metalloproteinase" });
+            var matches = new WordCluster(items, new List<string>())
+                .MatchKeywords(new List<string> { "phospholipase" });
+            Check("keyword matching sees the hand-made family, not the USEARCH one",
+                matches.Matched.Contains(500));
+            Check("the toxin and the inhibitor are matched as two separate families",
+                matches.Matched.SetEquals(new[] { 2, 500 }));
 
-            var emitted = result.SelectMany(c => c).ToList();
-            Check("reclustering sees the hand-made family, not the USEARCH one",
-                emitted.Contains(500), string.Join(",", emitted));
-            Check("the toxin and the inhibitor arrive as two separate families",
-                result.Any(c => c.Contains(2)) && result.Any(c => c.Contains(500))
-                && !result.Any(c => c.Contains(2) && c.Contains(500)));
-
-            // Apply the result the way UpdateClusterIds does: keyed by the curated id, written to it.
-            var map = new Dictionary<int, int>();
-            int next = 0;
-            foreach (var cluster in result)
-            {
-                foreach (var id in cluster) map[id] = next;
-                next++;
-            }
-            foreach (var item in items)
-            {
-                if (map.TryGetValue(item.UserID, out int newId)) item.UserID = newId;
-            }
+            var unrelated = new SuperClusterPreview(items, null, "metalloproteinase", "",
+                KeywordMatch.Any, null, null);
+            unrelated.Join(items);
 
             int toxin = items[0].UserID;
             int inhibitor = items[2].UserID;
@@ -602,10 +548,10 @@ namespace FamilyQuant.Tests
                 new FastaItemExtended { SequenceIdentifier = "B", Description = "Phospholipase A2 inhibitor",
                     USearchID = 2, UserID = 500 },
             };
-            var joined = new WordCluster(items2, new List<string>())
-                .GroupByKeywords(new List<string> { "phospholipase" });
+            var joined = new SuperClusterPreview(items2, null, "phospholipase", "", KeywordMatch.Any, null, null);
+            joined.Join(items2);
             Check("a keyword that matches both still merges them",
-                joined[0].Contains(2) && joined[0].Contains(500), $"{joined[0].Count}");
+                items2.Select(i => i.UserID).Distinct().Count() == 1);
         }
     }
 }
