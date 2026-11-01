@@ -20,6 +20,35 @@ namespace FamilyQuant.Tests
         private const string ScopeKeyword = "Toxin";
         private const string ScopeTissue = "venom gland";
 
+        internal const string FullArgument = "--nearest-reviewed-full";
+
+        /// <summary>The whole search as the program would run it on a file with a stored panel: every
+        /// target against the scoped reviewed proteins and the panel, timed and stored.</summary>
+        internal static void RunFull(string[] args, Action<string, bool, string?> check)
+        {
+            try
+            {
+                int flag = Array.IndexOf(args, FullArgument);
+                string At(int offset, string fallback) =>
+                    args.Length > flag + offset && args[flag + offset].Length > 0 ? args[flag + offset] : fallback;
+                string input = At(1, "D:/FamilyQuant-data/out-opus/e4-ana-panel.fcf");
+                string output = At(2, "D:/FamilyQuant-data/out-opus/e4-ana-panel-neighbours.fcf");
+                FamilyClusterFile file = FamilyClusterFile.Load(input);
+                Func<ProteinEvidence, bool> scope = e => e.Keywords.Contains(ScopeKeyword, StringComparer.Ordinal)
+                    || e.TissueSpecificity.Any(t => t.Contains(ScopeTissue, StringComparison.OrdinalIgnoreCase));
+                var watch = System.Diagnostics.Stopwatch.StartNew();
+                NeighbourSearch search = NearestReviewed.SearchAndStore(file, scope);
+                double seconds = watch.Elapsed.TotalSeconds;
+                file.Save(output);
+                Console.WriteLine($"targets {search.Queries}, references {search.References}, neighbours {search.Neighbours.Count}, " +
+                    $"from the panel {search.Neighbours.Count(n => n.Reference.Length == 0)}, " +
+                    $"seconds {seconds.ToString("0", CultureInfo.InvariantCulture)}, saved {output}");
+                check("the full search with the panel completed and was stored", file.EvidenceSource?.NearestReviewed == search,
+                    search.Neighbours.Count + " neighbours");
+            }
+            catch (Exception ex) { check("full nearest reviewed search completed", false, ex.GetBaseException().ToString()); }
+        }
+
         internal static void Run(string[] args, Action<string, bool, string?> check)
         {
             try
@@ -105,6 +134,12 @@ namespace FamilyQuant.Tests
                     allReviewedNeighbours = unscoped.Neighbours.Count,
                     allReviewedNeighboursWithoutSingleFamily = unscoped.Neighbours.Count(n => n.Family.Length == 0),
                 };
+                // The searched file with each search stored, so the classifier's checks need not search again.
+                file.EvidenceSource ??= new EvidenceProvenance();
+                file.EvidenceSource.NearestReviewed = first;
+                file.Save(Path.Combine(outDir, "e3-ana-neighbours-scoped.fcf"));
+                file.EvidenceSource.NearestReviewed = unscoped;
+                file.Save(Path.Combine(outDir, "e3-ana-neighbours-all.fcf"));
                 string reportText = JsonSerializer.Serialize(report, new JsonSerializerOptions { WriteIndented = true });
                 File.WriteAllText(Path.Combine(outDir, "e3-report.json"), reportText);
                 Console.WriteLine(reportText);
