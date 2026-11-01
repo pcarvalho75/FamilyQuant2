@@ -590,7 +590,21 @@ namespace FamilyQuant.Tests
                     ExactSameChargeDatabaseSearchScanKeys = 1,
                 },
             };
+            byte[]? previousStale = File.Exists(staleConcordance) ? File.ReadAllBytes(staleConcordance) : null;
+            Check("a save check refuses an unreadable concordance before publishing the project",
+                Throws<InvalidDataException>(() => ProjectStore.WriteFqproj(staleConcordance, fcf, new List<QuantRow>(), staleManifest))
+                && (previousStale == null ? !File.Exists(staleConcordance) : previousStale.SequenceEqual(File.ReadAllBytes(staleConcordance))));
+            // The reader's legacy fixture must be corrupted after a valid save, since saves now reopen their output.
+            var legacyConcordance = staleManifest.IdentificationConcordance;
+            staleManifest.IdentificationConcordance = null;
             ProjectStore.WriteFqproj(staleConcordance, fcf, new List<QuantRow>(), staleManifest);
+            staleManifest.IdentificationConcordance = legacyConcordance;
+            using (var archive = System.IO.Compression.ZipFile.Open(staleConcordance, System.IO.Compression.ZipArchiveMode.Update))
+            {
+                archive.GetEntry(ProjectStore.ManifestEntryName)!.Delete();
+                using var writer = new StreamWriter(archive.CreateEntry(ProjectStore.ManifestEntryName).Open());
+                writer.Write(JsonSerializer.Serialize(staleManifest));
+            }
             string staleMessage = string.Empty;
             try { _ = ProjectStore.ReadFqproj(staleConcordance); }
             catch (InvalidDataException ex) { staleMessage = ex.Message; }
