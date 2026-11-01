@@ -40,10 +40,12 @@
                       ToolTip="Step 1: clusters a FASTA or target-decoy (.T-R) database by sequence identity and writes a .fcf beside it. This closes the open project, so save first."/>
 
             <MenuItem Header="View" ToolTip="Choose the application appearance. Light and dark keep the same controls and data.">
-                <MenuItem x:Name="MenuThemeLight" Header="Light" IsCheckable="True" IsChecked="True" Click="MenuThemeLight_Click"
-                          ToolTip="Uses light surfaces and dark text. This is the recommended starting appearance."/>
-                <MenuItem x:Name="MenuThemeDark" Header="Dark" IsCheckable="True" Click="MenuThemeDark_Click"
+                <MenuItem x:Name="MenuThemeLight" Header="Light" IsCheckable="True" Click="MenuThemeLight_Click"
+                          ToolTip="Uses light surfaces and dark text. Every command and value stays the same."/>
+                <MenuItem x:Name="MenuThemeDark" Header="Dark" IsCheckable="True" IsChecked="True" Click="MenuThemeDark_Click"
                           ToolTip="Uses dark surfaces and light text. Every command and value stays the same."/>
+                <MenuItem x:Name="MenuThemeSystem" Header="Use Windows setting" IsCheckable="True" Click="MenuThemeSystem_Click"
+                          ToolTip="Follows the light or dark app setting in Windows. The appearance updates when Windows changes."/>
             </MenuItem>
 
             <!-- A separate workflow, not a step of the family one: it answers what a run holds that the

@@ -72,6 +72,7 @@ namespace FamilyQuant
         public MainWindow()
         {
             InitializeComponent();
+            UpdateThemeMenu();
 
             this.Title += " " + AppVersion();
 
@@ -82,12 +83,19 @@ namespace FamilyQuant
 
         private void MenuThemeLight_Click(object sender, RoutedEventArgs e) => ApplyTheme(Themes.AppTheme.Light);
         private void MenuThemeDark_Click(object sender, RoutedEventArgs e) => ApplyTheme(Themes.AppTheme.Dark);
+        private void MenuThemeSystem_Click(object sender, RoutedEventArgs e) => ApplyTheme(Themes.AppTheme.System);
 
         private void ApplyTheme(Themes.AppTheme theme)
         {
-            Themes.ThemeManager.Apply(theme);
-            MenuThemeLight.IsChecked = theme == Themes.AppTheme.Light;
-            MenuThemeDark.IsChecked = theme == Themes.AppTheme.Dark;
+            Themes.ThemeManager.Apply(theme, savePreference: true);
+            UpdateThemeMenu();
+        }
+
+        private void UpdateThemeMenu()
+        {
+            MenuThemeLight.IsChecked = Themes.ThemeManager.Current == Themes.AppTheme.Light;
+            MenuThemeDark.IsChecked = Themes.ThemeManager.Current == Themes.AppTheme.Dark;
+            MenuThemeSystem.IsChecked = Themes.ThemeManager.Current == Themes.AppTheme.System;
         }
 
         /// <summary>
