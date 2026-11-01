@@ -175,8 +175,7 @@ namespace FamilyQuant
             // Changing the mode does not recalculate on its own - the user clicks Recalculate.
             if (CurrentPLP != null && ButtonRecalculateQuantitation != null)
             {
-                // Visual feedback that recalculation is needed
-                ButtonRecalculateQuantitation.Background = new SolidColorBrush(Color.FromRgb(255, 69, 0));
+                // The status mark reports pending changes; the action keeps its primary role.
                 UpdateLayerStates();
             }
 
@@ -411,8 +410,6 @@ namespace FamilyQuant
 
             RecalculateQuantitationInternal();
 
-            // Reset button color to normal
-            ButtonRecalculateQuantitation.Background = new SolidColorBrush(Color.FromRgb(255, 140, 0));
         }
 
         private void RecalculateQuantitationInternal()
@@ -557,7 +554,7 @@ namespace FamilyQuant
 
                 // Update status
                 TextBlockPLPStatus.Text = "✓ Loaded: " + Path.GetFileName(ofd.FileName);
-                TextBlockPLPStatus.Foreground = new SolidColorBrush(Color.FromRgb(144, 238, 144));
+                TextBlockPLPStatus.SetResourceReference(TextBlock.ForegroundProperty, "TextBrush");
 
                 // Enable Layer 3 controls
                 ButtonRecalculateQuantitation.IsEnabled = true;
@@ -616,7 +613,7 @@ namespace FamilyQuant
 
                 // Reset status
                 TextBlockPLPStatus.Text = "Could not open the last project";
-                TextBlockPLPStatus.Foreground = new SolidColorBrush(Color.FromRgb(255, 99, 71));
+                TextBlockPLPStatus.SetResourceReference(TextBlock.ForegroundProperty, "ErrorBrush");
                 UpdateLayerStates();
             }
         }
@@ -1248,10 +1245,9 @@ namespace FamilyQuant
 
             text.Text = ReportView.LayerState(ready, blockedBecause);
 
-            badge.Background = new SolidColorBrush(ready
-                ? Color.FromRgb(0x2F, 0x85, 0x5A)                                    // green: usable now
-                : (blockedBecause == null ? Color.FromRgb(0xB7, 0x79, 0x1F)          // amber: waiting on you
-                                          : Color.FromRgb(0x9B, 0x2C, 0x2C)));       // red: blocked, with a reason
+            badge.SetResourceReference(System.Windows.Controls.Border.BackgroundProperty, "ClearBrush");
+            text.SetResourceReference(TextBlock.ForegroundProperty,
+                ready ? "SuccessBrush" : blockedBecause == null ? "WarningBrush" : "ErrorBrush");
 
             badge.ToolTip = tooltip;
         }
@@ -1263,7 +1259,8 @@ namespace FamilyQuant
             if (badge == null || text == null) return;
 
             text.Text = "OPTIONAL · " + reason;
-            badge.Background = new SolidColorBrush(Color.FromRgb(0x5A, 0x63, 0x73));
+            badge.SetResourceReference(System.Windows.Controls.Border.BackgroundProperty, "ClearBrush");
+            text.SetResourceReference(TextBlock.ForegroundProperty, "MutedBrush");
             badge.ToolTip = tooltip;
         }
 
@@ -1532,7 +1529,8 @@ namespace FamilyQuant
         /// </summary>
         private static Style HeaderTip(string tooltip)
         {
-            var style = new Style(typeof(System.Windows.Controls.Primitives.DataGridColumnHeader));
+            var style = new Style(typeof(System.Windows.Controls.Primitives.DataGridColumnHeader),
+                Application.Current.TryFindResource(typeof(System.Windows.Controls.Primitives.DataGridColumnHeader)) as Style);
 
             style.Setters.Add(new Setter(FrameworkElement.ToolTipProperty, tooltip));
             style.Setters.Add(new Setter(System.Windows.Controls.ToolTipService.ShowDurationProperty, 60000));

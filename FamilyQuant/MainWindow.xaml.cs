@@ -80,6 +80,16 @@ namespace FamilyQuant
             ShowHome();
         }
 
+        private void MenuThemeLight_Click(object sender, RoutedEventArgs e) => ApplyTheme(Themes.AppTheme.Light);
+        private void MenuThemeDark_Click(object sender, RoutedEventArgs e) => ApplyTheme(Themes.AppTheme.Dark);
+
+        private void ApplyTheme(Themes.AppTheme theme)
+        {
+            Themes.ThemeManager.Apply(theme);
+            MenuThemeLight.IsChecked = theme == Themes.AppTheme.Light;
+            MenuThemeDark.IsChecked = theme == Themes.AppTheme.Dark;
+        }
+
         /// <summary>
         /// Returns this executable's own version without asking PatternTools to rediscover it by name.
         /// PatternTools' legacy helper dereferences a missing assembly when FamilyQuant is hosted by the
