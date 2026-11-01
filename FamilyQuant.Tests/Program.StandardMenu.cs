@@ -121,6 +121,7 @@ internal static partial class Program
             var menu = Field<Menu>("MainMenu");
             Check("shell menus use standard Windows order", string.Join(",", menu.Items.OfType<MenuItem>().Select(i => i.Header)) ==
                 "File,Edit,View,Analysis,Help");
+            MenuCommandPreservationTests(main);
             var required = new[]
             {
                 (Key.N, ModifierKeys.Control, ApplicationCommands.New),
