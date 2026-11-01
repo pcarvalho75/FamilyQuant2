@@ -715,6 +715,7 @@ namespace FamilyQuant.Tests
 
             Section("Left-out list - marker carriers kept out of the marker's family, with why");
             LeftOutListTests();
+            EvidenceExportTests();
 
             Section("Batch edit - one User ID and annotation for many selected rows");
             BatchCurationTests();
