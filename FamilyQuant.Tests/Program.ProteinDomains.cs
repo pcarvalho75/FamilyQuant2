@@ -21,6 +21,43 @@ namespace FamilyQuant.Tests
 {
     internal static partial class Program
     {
+        private static void EvidenceStorageTests(string workDir)
+        {
+            const string evidenceJson = """
+                {"Accession":"Q00001","Reviewed":true,"Family":"Family from source","Subfamily":"Subfamily from source",
+                 "FamilyAnnotation":"Complete family annotation","Keywords":["first keyword","second keyword"],
+                 "TissueSpecificity":["first tissue","second tissue"],
+                 "Pfam":[{"Accession":"PF00001","Name":"Domain from source"}],
+                 "Panther":[{"Accession":"PTHR00001","Name":"Reference from source"}],
+                 "TransmembraneCount":2,"Fragment":false}
+                """;
+            const string sourceJson = """
+                {"Provider":"UniProt","Release":"test-release","RetrievedAtUtc":"2026-01-01T00:00:00+00:00"}
+                """;
+            var legacy = BuildSyntheticFcf();
+            string legacyText = legacy.ToJsonText();
+            var root = System.Text.Json.Nodes.JsonNode.Parse(legacyText)!;
+            root["EvidenceSource"] = System.Text.Json.Nodes.JsonNode.Parse(sourceJson);
+            root["MyExtendedFastaItems"]![0]!["Evidence"] = System.Text.Json.Nodes.JsonNode.Parse(evidenceJson);
+            FamilyClusterFile loaded = FamilyClusterFile.FromJsonText(root.ToJsonString());
+            var written = System.Text.Json.Nodes.JsonNode.Parse(loaded.ToJsonText())!;
+            Check("per-protein evidence survives the file serializer offline",
+                System.Text.Json.Nodes.JsonNode.DeepEquals(root["MyExtendedFastaItems"]![0]!["Evidence"],
+                    written["MyExtendedFastaItems"]![0]!["Evidence"]));
+            Check("the file retains its evidence provider, release and retrieval time",
+                System.Text.Json.Nodes.JsonNode.DeepEquals(root["EvidenceSource"], written["EvidenceSource"]));
+            string file = Path.Combine(workDir, "evidence-storage.fcf");
+            loaded.Save(file);
+            Check("evidence survives an actual file save and reopen",
+                FamilyClusterFile.Load(file).ToJsonText() == loaded.ToJsonText());
+            string project = Path.Combine(workDir, "evidence-storage.fqproj");
+            ProjectStore.WriteFqproj(project, loaded, new List<QuantRow>(), new QuantManifest());
+            Check("a project container retains exactly the same evidence-bearing curation",
+                ProjectStore.ReadFqproj(project).fcf.ToJsonText() == loaded.ToJsonText());
+            Check("an old file gains no empty evidence properties or curation changes",
+                FamilyClusterFile.FromJsonText(legacyText).ToJsonText() == legacyText
+                && !legacyText.Contains("\"Evidence\"") && !legacyText.Contains("\"EvidenceSource\""));
+        }
 
         /// <summary>UniProt, answering from a list of replies, so no test reaches the network.</summary>
         private sealed class CannedUniProt : System.Net.Http.HttpMessageHandler
