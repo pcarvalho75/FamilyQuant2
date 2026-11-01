@@ -1254,7 +1254,8 @@ namespace FamilyQuant.Tests
 
             // The screen's own export path is the same one, so what a talk gets is what the screen showed.
             var control = new AnalyticsControl(rows, new QuantManifest { PerRunTic = tic });
-            var figureButton = UiField<Button>(control, "ButtonSaveFigures");
+            control.ViewModel.ExportKind = ResultsExportKind.Figures;
+            var figureButton = UiField<Button>(control, "ButtonExport");
             Check("the analytics screen offers the figure export, enabled once there is something to draw",
                 figureButton != null && figureButton.IsEnabled
                 && figureButton.ToolTip is string t && t.Contains("1920"), figureButton?.ToolTip as string);
@@ -1266,7 +1267,7 @@ namespace FamilyQuant.Tests
 
             var emptyControl = new AnalyticsControl(new List<QuantRow>(), null);
             Check("with no quantitation the figure export is dark, like the two CSV exports",
-                UiField<Button>(emptyControl, "ButtonSaveFigures")!.IsEnabled == false);
+                UiField<Button>(emptyControl, "ButtonExport")!.IsEnabled == false);
         }
 
         /// <summary>

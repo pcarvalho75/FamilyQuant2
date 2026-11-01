@@ -76,6 +76,7 @@ public partial class MainWindow
             string stage = home != null ? "Start" : analytics != null ? "Results" : dnc != null ? "De novo"
                 : families ? "Families" : usearch != null ? "Build families" : "Start";
             string project = cgc != null ? Path.GetFileName(lastFcfPath) ?? "Open project" : "No project open";
+            if (cgc != null && DocumentState.IsModified) project += " *";
             string activity = SourceStatus("ShellStatusText");
             if (activity.Length == 0 && families && cgc?.FindName("TextBlockStatusLine") is TextBlock legacy) activity = legacy.Text;
             if (activity.StartsWith("showing: ", StringComparison.OrdinalIgnoreCase)) activity = activity[9..];

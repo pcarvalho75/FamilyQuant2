@@ -11,6 +11,10 @@ public sealed class ShellSessionState
 {
     public List<string> RecentProjects { get; set; } = new();
     public string? LastResultProject { get; set; }
+    public string? LastFolder { get; set; }
+    public double WindowWidth { get; set; } = 1024;
+    public double WindowHeight { get; set; } = 768;
+    public bool WindowMaximized { get; set; }
 
     public void Remember(string path, bool hasStoredResults = false)
     {
@@ -29,6 +33,10 @@ public sealed class ShellSessionState
             state.RecentProjects = (state.RecentProjects ?? new()).Where(p => !string.IsNullOrWhiteSpace(p))
                 .Where(p => Path.IsPathFullyQualified(p)).Distinct(StringComparer.OrdinalIgnoreCase).Take(10).ToList();
             if (!Path.IsPathFullyQualified(state.LastResultProject ?? "")) state.LastResultProject = null;
+            if (!Directory.Exists(state.LastFolder)) state.LastFolder = null;
+            else state.LastFolder = Path.GetFullPath(state.LastFolder!);
+            if (!double.IsFinite(state.WindowWidth) || state.WindowWidth < 1) state.WindowWidth = 1024;
+            if (!double.IsFinite(state.WindowHeight) || state.WindowHeight < 1) state.WindowHeight = 768;
             return state;
         }
         catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or JsonException or ArgumentException)
@@ -49,7 +57,7 @@ public sealed class ShellSessionState
         }
         catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or ArgumentException)
         {
-            return "Recent projects could not be saved: " + ex.Message;
+            return "Application preferences could not be saved: " + ex.Message;
         }
         finally
         {
@@ -66,21 +74,23 @@ public partial class MainWindow
     public static Func<string?>? SelectSaveProjectPathOverride { get; set; }
     private ShellSessionState shellState = new();
     private string shellSettingsPath = "";
+    private bool persistShellSettings;
 
     private void RememberProject(string path)
     {
         shellState.Remember(path, loadedQuant.Count > 0);
-        string? error = shellState.Save(shellSettingsPath);
+        shellState.LastFolder = Path.GetDirectoryName(Path.GetFullPath(path));
+        string? error = persistShellSettings ? shellState.Save(shellSettingsPath) : null;
         if (error != null) StatusModel.ShowMessage(error);
         RefreshRecentMenu();
         home?.SetRecentProjects(shellState.RecentProjects);
         home?.SetLastResult(shellState.LastResultProject, loadedQuant.Count > 0);
     }
 
-    private void ShowLastResult()
+    private async void ShowLastResult()
     {
         if (cgc != null && loadedQuant.Count > 0) MenuItemAnalytics_Click(this, new System.Windows.RoutedEventArgs());
-        else if (shellState.LastResultProject is string path && OpenProjectPath(path))
+        else if (shellState.LastResultProject is string path && await OpenProjectSafelyAsync(path))
             MenuItemAnalytics_Click(this, new System.Windows.RoutedEventArgs());
     }
 }

@@ -30,6 +30,7 @@ Finished steps, moved here from docs/ROADMAP.md. The board shows them as green.
 | E1 | Evidence model and storage: per protein reviewed, UniProt family and subfamily, keywords, tissue, Pfam accession and name, PANTHER, transmembrane count, fragment flag; file level source and release. Stored in the file; old files still load | M | 3 | 🟢 | E2, E3 | Round trip test offline; old `.fcf` opens unchanged; size growth measured on Ana's file | EV | working | 10% | 0% | T+3 |
 | E2 | Fetch Evidence replaces Fetch Domains: same all-or-nothing batches and retries, more fields, progress and cancel. Domains column unchanged | M | 3 | E1 | E3, E5 | Live on Ana's file: asked 31,775, found 31,775, every field count agrees with `viperidae_rich.tsv`; canned tests for a refused batch and a missing entry | EV | not started | 0% | 0% | T+3 |
 | E3 | Nearest reviewed protein inside the app: `usearch_global` of all targets against the reviewed ones, id at least 50%, alignment at least 70% of the query, never the protein itself (accession compared), deterministic ties, memoised, stored as evidence | M | 3 | E2 | E4, E5 | Best hit agrees with `vs_revtox2.tsv` on all pairs or each difference explained; two runs byte-identical | AS | OP | 0% | 0% | T+3 |
+| E5 | The classifier, pure and general. Scope is words the user gives, matched on keywords and tissue. Order: annotated with a UniProt family; annotated with a neighbour at 60%; annotated with a marker domain learned at 80% vote; unannotated with a neighbour at 70% and compatible domains; else unassigned. Each protein gets family, tier and reason. Publishes the `EvidenceProposal` contract for C4 | H | 5 | E3 | E6, E7, E8, E9, E10, E11, C4 | Known-answer tests; a suite check fails on any family name, Pfam or PANTHER code, or venom word in `Evidence/`; PLA2 and SVSP unannotated members recovered as in `exp5` | EV | not started | 0% | 0% | T+5 |
 
 ### W2 Ana's result, through the software
 
@@ -44,6 +45,7 @@ Finished steps, moved here from docs/ROADMAP.md. The board shows them as green.
 | P1 | Dark is the default look; light stays as a View option (Paulo) | L | 0 | 🟢 | C14 | Decided | Paulo | done | 100% | 100% | done |
 | V1 | Two directions on the real curation screen, dark and light, on the Fluent base. Paulo picks the default; the other stays as a View option | M | 3 | 🟢 | V2 | Renders delivered; Paulo's pick logged. Work continues on the recommended one meanwhile | LK | working | 10% | 0% | T+3 |
 | V2 | Tokens file (colour, spacing, type, radius) and Fluent base through `ThemeMode`; drop the custom Button template and the gold focus ring; light, dark and system | H | 5 | 🟢 | V4, V5, V7, C4 | Windows 11 tested, which is what Ana and Richard run; suite green; no gold left in `App.xaml` | LK | not started | 0% | 0% | T+5 |
+| L1 | New logo, Paulo's choice on 2026-11-01: Grok 3, three bars in a rounded tile with the centre bar marked, source in `D:/FamilyQuant-data/logos/chosen`. Redraw it as clean vector, transparent background, working on dark and light; produce PNG sizes, a multi-size `.ico` for the app, window and installer, and the start page image. The DNA logo goes from 2.0 | M | 2 | V2 | S4, R1 | Reads at 16, 32 and 256 pixels on dark and light; app, taskbar and installer show it; name spelled FamilyQuant | LK | not started | 0% | 0% | T+14 |
 
 ### W4 Shell
 
@@ -53,12 +55,16 @@ Finished steps, moved here from docs/ROADMAP.md. The board shows them as green.
 | S3 | Replace both yellow banners and the "showing" line with one quiet status bar; long text goes to Help | M | 2 | S1 | S2 | No banner over one line at the smallest size; no fact lost, each moved to Help | LK | SH | 0% | 0% | T+14 |
 | S4 | Start page: open, new, recent projects, last result; fixes the white disabled cards | M | 3 | S1 | S2, V3 | Disabled state readable in both themes; recents survive restart | LK | SH | 0% | 0% | T+17 |
 | S2 | Left navigation rail in place of the Home card grid: Families, Quantify, Results, De novo, with state marks. `MainWindow` becomes a thin shell over a view model | H | 4 | S1, S4 | C1, C6, C8, C9, C10 | Every screen reachable by keyboard; disabled steps readable with the reason | LK | SH | 0% | 0% | T+4 |
+| S5 | One Save: `.fqproj` is the file, `.fcf` stays as Export and still opens. Unsaved mark, prompt on close. Ana's file goes from 70 MB to about 16 MB | H | 4 | S1, E12, X7 | R2 | Old `.fcf` opens; project round trip byte-equal in curation; a curation-only project opens with no quant | LK | SH | 0% | 0% | T+35 |
+| S7 | Window size and last folder remembered; drag a file to open | L | 1 | S1 | R2 | Survives restart | LK | SH | 0% | 0% | T+7 |
 
 ### W5 Screens: each rebuilt as a thin view over a tested view model
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
 | P2 | Retire the De Novo sections Extract areas and Partition ion current in 2.0 (Paulo) | L | 0 | 🟢 | C11 | Decided | Paulo | done | 100% | 100% | done |
+| C8 | Quantify screen instead of the Compute dialog; one run summary | M | 3 | S2 | C10, V3, C13 | Same inputs, same outputs; golden equal; run summary kept | EV | RS | 0% | 0% | T+3 |
+| C9 | Results screen: Analytics paragraph becomes short summary cards with details on demand; one primary export | M | 4 | S2 | V6, V3, X9, C13 | Every fact in the paragraph still reachable; golden equal | EV | RS | 0% | 0% | T+4 |
 
 ### W6 Core rewrite: copy what is good, rewrite what is better
 

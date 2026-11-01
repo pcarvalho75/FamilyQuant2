@@ -40,7 +40,7 @@ public partial class MainWindow
 
             owner.home = new HomeControl { UseShellNavigationRail = true };
             owner.home.OpenRequested += () => owner.MenuItemCluster_Click(owner, new RoutedEventArgs());
-            owner.home.OpenPathRequested += path => owner.OpenProjectPath(path);
+            owner.home.OpenPathRequested += async path => await owner.OpenProjectSafelyAsync(path);
             owner.home.LastResultRequested += owner.ShowLastResult;
             owner.home.BuildFamiliesRequested += () => owner.MenuRunUSearch_Click(owner, new RoutedEventArgs());
             owner.home.CurateRequested += owner.ShowCurationOrOpen;
@@ -91,6 +91,7 @@ public partial class MainWindow
 
         public void PresentBuild()
         {
+            owner.DocumentState.Clear();
             owner.GridApp.Children.Clear();
 
             // Children.Clear() only detaches the cluster view; the field kept pointing at it, so
@@ -216,6 +217,7 @@ public partial class MainWindow
             {
                 owner.loadedQuant = window.ResultRows;
                 owner.loadedManifest = window.ResultManifest;
+                owner.DocumentState.MarkModified();
                 owner.lastSpectrumComparisonCsvPath = window.SpectrumComparisonCsvPath;
                 owner.MenuItemSpectrumComparison.IsEnabled =
                     (owner.loadedManifest?.SpectrumComparisonRows?.Count ?? 0) > 0 || owner.loadedQuant.Count > 0;

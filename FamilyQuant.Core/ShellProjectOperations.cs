@@ -2,7 +2,10 @@ using FamilyQuant.DeNovo;
 using FamilyQuant.Operations;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace FamilyQuant;
 
@@ -12,6 +15,35 @@ public sealed record ShellReannotationResult(int Updated, IReadOnlyList<string> 
 /// <summary>Headless document operations used by shell commands. Existing numerical services retain their rules.</summary>
 public static class ShellProjectOperations
 {
+    public static string WriteVerifiedProject(string path, FamilyClusterFile curation, List<QuantRow> rows, QuantManifest manifest,
+        Action<string>? validateStaged = null)
+    {
+        if (!ProjectStore.IsProjectPath(path))
+            throw new ArgumentException("Save projects with a .fqproj filename. Use Export for a legacy Family Cluster File.", nameof(path));
+        string full = Path.GetFullPath(path);
+        string staged = full + ".saving-" + Guid.NewGuid().ToString("N") + ".fqproj";
+        string expected = Convert.ToHexString(SHA256.HashData(Encoding.UTF8.GetBytes(curation.ToJsonText())));
+        try
+        {
+            ProjectStore.WriteFqproj(staged, curation, rows, manifest);
+            validateStaged?.Invoke(staged);
+            var reopened = ProjectStore.ReadFqproj(staged);
+            string actual = Convert.ToHexString(SHA256.HashData(Encoding.UTF8.GetBytes(reopened.fcf.ToJsonText())));
+            if (!string.Equals(expected, actual, StringComparison.Ordinal) || reopened.quant.Count != rows.Count)
+                throw new InvalidDataException("The saved project did not reproduce its curation and stored row count.");
+            File.Move(staged, full, true);
+            return "Curation round-trip check passed.";
+        }
+        finally
+        {
+            foreach (string temporary in new[] { staged, staged + ".tmp" })
+            {
+                try { if (File.Exists(temporary)) File.Delete(temporary); }
+                catch (Exception ex) when (ex is IOException or UnauthorizedAccessException) { }
+            }
+        }
+    }
+
     public static ShellProjectContent Read(string path, OperationContext? operation = null)
     {
         if (!ProjectStore.IsProjectPath(path)) return new(FamilyClusterFile.Load(path, operation), new(), null);

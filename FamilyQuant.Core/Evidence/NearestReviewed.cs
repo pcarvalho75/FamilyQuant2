@@ -196,12 +196,15 @@ namespace FamilyQuant.Evidence
         /// <summary>
         /// The nearest reference of every query. Decoys and empty sequences are not searched. The answer
         /// is memoised on the content of both sets and the gate, so a repeated call in one session does not
-        /// run USEARCH again; a failed run is never remembered.
+        /// run USEARCH again; a failed run is never remembered. <paramref name="ownAccessions"/> names the
+        /// entry of a query whose identifier does not carry it (a leave-one-out on stripped headers), so
+        /// that query still never takes itself.
         /// </summary>
         public static NeighbourSearch Search(IReadOnlyList<FastaItemExtended> queries,
             IReadOnlyList<NeighbourReference> references,
             double minIdentityPercent = DefaultMinIdentityPercent,
-            int minQueryAlignedPercent = DefaultMinQueryAlignedPercent)
+            int minQueryAlignedPercent = DefaultMinQueryAlignedPercent,
+            IReadOnlyDictionary<string, string>? ownAccessions = null)
         {
             if (minIdentityPercent <= 0 || minIdentityPercent > 100)
                 throw new ArgumentOutOfRangeException(nameof(minIdentityPercent));
@@ -211,14 +214,15 @@ namespace FamilyQuant.Evidence
             List<FastaItemExtended> searched = queries
                 .Where(q => !IsDecoy(q) && !string.IsNullOrEmpty(q.Sequence)).ToList();
             List<NeighbourReference> panel = references.Where(r => !string.IsNullOrEmpty(r.Sequence)).ToList();
-            string queryHash = QueryFingerprint(searched);
+            List<string> own = searched.Select(q => OwnAccession(q, ownAccessions)).ToList();
+            string queryHash = QueryFingerprint(searched, own);
             string referenceHash = ReferenceFingerprint(panel);
             string key = string.Join("|", Method,
                 minIdentityPercent.ToString("R", CultureInfo.InvariantCulture),
                 minQueryAlignedPercent.ToString(CultureInfo.InvariantCulture), queryHash, referenceHash);
 
             Lazy<List<NearestNeighbour>> lazy = Memo.GetOrAdd(key, _ => new Lazy<List<NearestNeighbour>>(
-                () => Run(searched, panel, minIdentityPercent, minQueryAlignedPercent),
+                () => Run(searched, own, panel, minIdentityPercent, minQueryAlignedPercent),
                 LazyThreadSafetyMode.ExecutionAndPublication));
             List<NearestNeighbour> found;
             try { found = lazy.Value; }
@@ -240,42 +244,66 @@ namespace FamilyQuant.Evidence
             };
         }
 
+        /// <summary>The file's reviewed proteins (in scope when given) and the stored reference panel's
+        /// entries that are not already among them.</summary>
+        public static List<NeighbourReference> References(FamilyClusterFile file, Func<ProteinEvidence, bool>? inScope = null)
+        {
+            List<NeighbourReference> references = ReviewedReferences(file, inScope);
+            references.AddRange(ReferencePanelFetcher.References(file.EvidenceSource?.ReferencePanel,
+                references.Select(r => r.Accession)));
+            return references;
+        }
+
         /// <summary>Searches every target of the file against its reviewed proteins (narrowed by
-        /// <paramref name="inScope"/> when given) and stores the answer with the file's evidence.</summary>
+        /// <paramref name="inScope"/> when given) and its stored reference panel, and stores the answer
+        /// with the file's evidence.</summary>
         public static NeighbourSearch SearchAndStore(FamilyClusterFile file, Func<ProteinEvidence, bool>? inScope = null)
         {
-            NeighbourSearch search = Search(Targets(file), ReviewedReferences(file, inScope));
+            NeighbourSearch search = Search(Targets(file), References(file, inScope));
             file.EvidenceSource ??= new EvidenceProvenance();
             file.EvidenceSource.NearestReviewed = search;
             return search;
         }
 
-        /// <summary>The evidence of a neighbour's reference protein, found in the file by its identifier;
-        /// null for an outside entry or a reference with no evidence.</summary>
+        /// <summary>The evidence of a neighbour's reference protein: found in the file by its identifier,
+        /// or in the stored reference panel by accession for an outside entry; null when there is none.</summary>
         public static Func<NearestNeighbour, ProteinEvidence?> ReferenceEvidence(FamilyClusterFile file)
         {
             var byIdentifier = new Dictionary<string, ProteinEvidence>(StringComparer.Ordinal);
             foreach (FastaItemExtended item in file.MyExtendedFastaItems)
                 if (item.Evidence != null && !string.IsNullOrEmpty(item.SequenceIdentifier))
                     byIdentifier.TryAdd(item.SequenceIdentifier, item.Evidence);
-            return n => byIdentifier.TryGetValue(n.Reference, out ProteinEvidence? e) ? e : null;
+            var byAccession = new Dictionary<string, ProteinEvidence>(StringComparer.Ordinal);
+            foreach (PanelEntry entry in file.EvidenceSource?.ReferencePanel?.Entries ?? new List<PanelEntry>())
+                byAccession.TryAdd(entry.Accession, entry.Evidence);
+            return n => n.Reference.Length > 0
+                ? (byIdentifier.TryGetValue(n.Reference, out ProteinEvidence? e) ? e : null)
+                : (byAccession.TryGetValue(n.Accession, out ProteinEvidence? p) ? p : null);
         }
 
         /// <summary>Whether a stored search still answers for these targets and references: same
         /// method, same gate, same sequences and the same reference labels.</summary>
         public static bool IsCurrent(NeighbourSearch? stored, IReadOnlyList<FastaItemExtended> queries,
-            IReadOnlyList<NeighbourReference> references)
+            IReadOnlyList<NeighbourReference> references, IReadOnlyDictionary<string, string>? ownAccessions = null)
         {
             if (stored == null || !string.Equals(stored.Method, Method, StringComparison.Ordinal)) return false;
             List<FastaItemExtended> searched = queries
                 .Where(q => !IsDecoy(q) && !string.IsNullOrEmpty(q.Sequence)).ToList();
             List<NeighbourReference> panel = references.Where(r => !string.IsNullOrEmpty(r.Sequence)).ToList();
-            return string.Equals(stored.QuerySha256, QueryFingerprint(searched), StringComparison.Ordinal)
+            List<string> own = searched.Select(q => OwnAccession(q, ownAccessions)).ToList();
+            return string.Equals(stored.QuerySha256, QueryFingerprint(searched, own), StringComparison.Ordinal)
                 && string.Equals(stored.ReferenceSha256, ReferenceFingerprint(panel), StringComparison.Ordinal);
         }
 
-        private static List<NearestNeighbour> Run(List<FastaItemExtended> queries, List<NeighbourReference> references,
-            double minIdentityPercent, int minQueryAlignedPercent)
+        private static string OwnAccession(FastaItemExtended query, IReadOnlyDictionary<string, string>? ownAccessions)
+        {
+            string id = query.SequenceIdentifier ?? string.Empty;
+            return ownAccessions != null && ownAccessions.TryGetValue(id, out string? accession) && !string.IsNullOrEmpty(accession)
+                ? accession : EntryAccession(id);
+        }
+
+        private static List<NearestNeighbour> Run(List<FastaItemExtended> queries, List<string> own,
+            List<NeighbourReference> references, double minIdentityPercent, int minQueryAlignedPercent)
         {
             if (queries.Count == 0 || references.Count == 0) return new List<NearestNeighbour>();
 
@@ -308,7 +336,7 @@ namespace FamilyQuant.Evidence
                 {
                     if (!hitsByQuery.TryGetValue(q, out var hits)) continue;
                     string id = queries[q].SequenceIdentifier ?? string.Empty;
-                    NearestNeighbour? best = Choose(id, EntryAccession(id), hits,
+                    NearestNeighbour? best = Choose(id, own[q], hits,
                         minIdentityPercent, minQueryAlignedPercent);
                     if (best != null) found.Add(best);
                 }
@@ -342,8 +370,8 @@ namespace FamilyQuant.Evidence
             }
         }
 
-        private static string QueryFingerprint(IEnumerable<FastaItemExtended> queries) =>
-            Fingerprint(queries.Select(q => new[] { q.SequenceIdentifier ?? string.Empty, q.Sequence }));
+        private static string QueryFingerprint(List<FastaItemExtended> queries, List<string> own) =>
+            Fingerprint(queries.Select((q, i) => new[] { q.SequenceIdentifier ?? string.Empty, own[i], q.Sequence }));
 
         private static string ReferenceFingerprint(IEnumerable<NeighbourReference> references) =>
             Fingerprint(references.Select(r => new[] { r.Accession, r.Identifier, r.Family, r.Sequence }));

@@ -18,10 +18,10 @@ public partial class MainWindow
         private readonly MainWindow owner;
         public ShellDocumentCommands(MainWindow owner) => this.owner = owner;
 
-        public void MenuItemCluster_Click(object sender, RoutedEventArgs e)
+        public async void MenuItemCluster_Click(object sender, RoutedEventArgs e)
         {
             string? path = owner.ChooseOpenProjectPath();
-            if (path != null) owner.OpenProjectPath(path);
+            if (path != null) await owner.OpenProjectSafelyAsync(path);
         }
 
         public bool OpenProjectPath(string path)
@@ -58,6 +58,8 @@ public partial class MainWindow
                     (owner.loadedManifest?.SpectrumComparisonRows?.Count ?? 0) > 0 || owner.loadedQuant.Count > 0;
                 owner.MenuItemReanotateSEPro.IsEnabled = true;
                 owner.lastSpectrumComparisonCsvPath = null;
+                owner.DocumentState.Open(loaded.fcf, ProjectStore.IsProjectPath(path) ? System.IO.Path.GetFullPath(path) : null);
+                owner.TrackCuration(loaded);
 
                 owner.UpdateGuide();
                 owner.RememberProject(path);
@@ -96,7 +98,9 @@ public partial class MainWindow
                 Title = "Save the current families as a Family Cluster File"
             };
 
+            owner.PrepareFileDialog(sfd);
             if (sfd.ShowDialog() != true) return;
+            owner.RememberFolder(sfd.FileName);
 
             try
             {
@@ -173,21 +177,21 @@ public partial class MainWindow
                     return;
                 }
 
-                ProjectStore.WriteFqproj(savePath, curation, quant, manifest);
+                string checkText = ShellProjectOperations.WriteVerifiedProject(savePath, curation, quant, manifest);
                 owner.loadedManifest = manifest;
                 owner.lastFcfPath = Path.GetFullPath(savePath);
+                owner.DocumentState.Saved(curation, owner.lastFcfPath, checkText);
                 owner.UpdateGuide();
                 owner.RememberProject(savePath);
 
-                owner.ReportShellMessage(
-                    "The project was saved to\n" + savePath + "\n\n" +
+                owner.StatusModel.ShowMessage(
+                    "Saved. " + checkText + "\nThe project was saved to\n" + savePath + "\n\n" +
                     "The container holds the grouping, your User IDs and annotations, and " +
                     quant.Count.ToString("N0", CultureInfo.CurrentCulture) +
                     " stored quant row(s). Reopening it restores both.\n\n" +
                     (familyNote != null ? familyNote + "\n\n" : string.Empty) +
                     "Next step: nothing. Carry on working, or open this file later to return to exactly " +
-                    "this project.",
-                    "Saved", MessageBoxImage.Information);
+                    "this project.\n\n" + checkText);
             }
             catch (Exception ex)
             {
@@ -297,7 +301,9 @@ public partial class MainWindow
                 Title = "Choose a TRUSTED SEPro result package (legacy unsafe deserialization)"
             };
 
+            owner.PrepareFileDialog(ofd);
             if (ofd.ShowDialog() != true) return;
+            owner.RememberFolder(ofd.FileName);
 
             try
             {

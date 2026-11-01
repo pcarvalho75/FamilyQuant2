@@ -367,17 +367,14 @@ namespace FamilyQuant.Tests
             }
             CheckTooltipCoverage("AnalyticsControl", analytics);
 
-            // A count as well as the sweep, for the same reason as the menu count below: a control added
-            // without a tooltip fails above, but a control REMOVED would pass everything in silence. Six
-            // chrome controls - export peptides, export summary, save screen figures, save talk plots,
-            // the TopN list and the percent-label switch - plus the five list entries the TopN selector offers.
+            // Four chrome controls: export choice/action, TopN and percent. Export kinds stay pinned in the view-model check.
             var analyticsControls = WalkTree(analytics).OfType<FrameworkElement>()
                 .Where(e => e.TemplatedParent == null)
                 .Where(e => e is Button || e is CheckBox || e is ComboBox || e is TextBox || e is Label)
                 .ToList();
 
-            Check("the analytics screen offers exactly its six chrome controls",
-                analyticsControls.Count == 6,
+            Check("the Results screen offers its four consolidated chrome controls",
+                analyticsControls.Count == 4,
                 string.Join(", ", analyticsControls.Select(Describe)));
 
             var topN = UiField<ComboBox>(analytics, "ComboBoxFamilyTopN")!;
@@ -398,7 +395,7 @@ namespace FamilyQuant.Tests
             }
             CheckTooltipCoverage("ComputeXicWindow", computeWindow);
 
-            ComboBox? deNovoMode = UiField<ComboBox>(computeWindow, "ComboBoxDeNovoSource");
+            ComboBox? deNovoMode = UiField<ComboBox>(UiField<DeNovoFilterControl>(computeWindow.Screen, "FilterControl")!, "ComboBoxDeNovoSource");
             string[] deNovoModeTags = deNovoMode?.Items.Cast<ComboBoxItem>()
                 .Select(item => item.Tag as string ?? string.Empty).ToArray()
                 ?? Array.Empty<string>();
@@ -440,15 +437,11 @@ namespace FamilyQuant.Tests
             var restoredOnlyDeep = new ComputeXicWindow("test", onlyDeepManifest);
             var restoredAllDeep = new ComputeXicWindow("test", allDeepManifest);
             string RestoredTag(ComputeXicWindow window) =>
-                (UiField<ComboBox>(window, "ComboBoxDeNovoSource")?.SelectedItem as ComboBoxItem)
+                (UiField<ComboBox>(UiField<DeNovoFilterControl>(window.Screen, "FilterControl")!, "ComboBoxDeNovoSource")?.SelectedItem as ComboBoxItem)
                     ?.Tag as string ?? string.Empty;
             IReadOnlyList<DeNovoSourceSelection> RestoredSelections(ComputeXicWindow window)
             {
-                MethodInfo? method = typeof(ComputeXicWindow).GetMethod("TryBuildDeNovoSelections",
-                    BindingFlags.Instance | BindingFlags.NonPublic);
-                object?[] arguments = { null };
-                bool built = method != null && (bool)(method.Invoke(window, arguments) ?? false);
-                return built && arguments[0] is IReadOnlyList<DeNovoSourceSelection> selections
+                return window.ViewModel.Filters.TryBuild(out _, out var selections, out _)
                     ? selections : Array.Empty<DeNovoSourceSelection>();
             }
             IReadOnlyList<DeNovoSourceSelection> onlyDeepSelections =

@@ -36,6 +36,8 @@ namespace FamilyQuant
             TextBlockGuide.DataContext = StatusModel;
             UpdateThemeMenu();
             Title += " " + AppVersion();
+            InitializeDocumentLifecycle();
+            InitializeWindowPreferences();
             ShowHome();
         }
 
