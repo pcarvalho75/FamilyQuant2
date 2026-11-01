@@ -1,4 +1,4 @@
-﻿using FamilyQuant.DeNovo;
+using FamilyQuant.DeNovo;
 using System;
 using System.Globalization;
 using System.Text;
@@ -351,7 +351,7 @@ namespace FamilyQuant
             sb.AppendLine();
             sb.AppendLine("Nothing on this screen interrupts you with a dialog. A parameter it cannot");
             sb.AppendLine("accept, a folder with no export in it, a file that will not open: all of them");
-            sb.AppendLine("are reported in the yellow line at the bottom, and the previous value or the");
+            sb.AppendLine("are reported in the status line at the bottom, and the previous value or the");
             sb.AppendLine("previous result is left in force.");
             sb.AppendLine();
 
@@ -365,16 +365,15 @@ namespace FamilyQuant
             sb.AppendLine("agreements as a review queue.");
             sb.AppendLine("That queue is the one thing only this screen produces.");
             sb.AppendLine();
-            sb.AppendLine("The precursors you keep here are then measured by the main Compute / update full");
-            sb.AppendLine("XIC step and reported by Analytics, through the .fqproj project, which is why the");
+            sb.AppendLine("The selected sources and shared filters are used by Quantify for the full");
+            sb.AppendLine("XIC computation and reported by Results through the .fqproj project, so the");
             sb.AppendLine("de novo set no longer has to carry the whole story on its own.");
             sb.AppendLine();
-            sb.AppendLine("The collapsed \"Standalone run (advanced)\" section holds three more computations,");
-            sb.AppendLine("Extract areas, Attribute to families and Partition ion current. They are the SAME");
-            sb.AppendLine("computations the main Compute full XIC and Analytics screens now run; they are kept");
-            sb.AppendLine("here only for a de-novo-only run that has no project. Attribute to families reads");
-            sb.AppendLine("peptides, not chromatograms, so it can run straight after step 1; Extract areas and");
-            sb.AppendLine("Partition ion current follow the reconciliation.");
+            sb.AppendLine("The collapsed Standalone homology (advanced) section maps the kept peptide");
+            sb.AppendLine("sequences against a family file. It needs neither quantitation nor an open");
+            sb.AppendLine("project, and it can run straight after Import and filter. After the search,");
+            sb.AppendLine("open Results, choose Homology assignments (CSV), and press Export. Results");
+            sb.AppendLine("retains that completed snapshot independently of full XIC.");
             sb.AppendLine();
 
             sb.AppendLine("WHAT THE SELECTED SOURCE LIST IS");
@@ -413,7 +412,7 @@ namespace FamilyQuant
             sb.AppendLine("Minimum length (" + c.MinLength.ToString(CultureInfo.CurrentCulture) + " residues)");
             sb.AppendLine(Wrap("A short call carries too little information to be matched against a " +
                                "protein afterwards. Lowering this is what turns the homology step of " +
-                               "Layer 4 into a random-match generator.", "    "));
+                               "standalone homology into a random-match generator.", "    "));
             sb.AppendLine();
             sb.AppendLine("Minimum " + confidenceShortName + " (" +
                           c.MinAverageLocalConfidence.ToString("0.###", CultureInfo.CurrentCulture) + "%)");
@@ -524,16 +523,20 @@ namespace FamilyQuant
             sb.AppendLine("until reviewed, so the evidence remains visible without double-counting its signal.");
             sb.AppendLine();
 
-            sb.AppendLine("WHAT THE EXTRACTED NUMBERS ARE (LAYER 3)");
+            sb.AppendLine("The following legacy definitions remain as scientific reference for old files.");
+            sb.AppendLine("Their standalone extraction and partition controls were retired from De novo");
+            sb.AppendLine("in 2.0; use Quantify and Results for full XIC.");
+            sb.AppendLine();
+            sb.AppendLine("LEGACY EXTRACTION SEMANTICS (REFERENCE)");
             sb.AppendLine("----------------------------------------");
-            sb.AppendLine("Layer 3 opens each run's .raw once and integrates a chromatogram for every kept");
+            sb.AppendLine("The legacy extraction engine opens a run's RAW once and integrates every kept");
             sb.AppendLine("precursor, at its own anchor scan. The acquisitions are found BY FILE NAME, one");
             sb.AppendLine("run is held in memory at a time, and the results are cached beside the RAW");
             sb.AppendLine("files so a second session over the same runs costs seconds instead of minutes.");
             sb.AppendLine();
             sb.AppendLine("M+0 is the monoisotopic peak alone: the isotope that carries no heavy carbon.");
             sb.AppendLine("The whole isotope envelope (M+0 plus M+1 plus M+2) is measured beside it, but");
-            sb.AppendLine("only as a diagnostic, and it is deliberately kept out of the chart in Layer 5.");
+            sb.AppendLine("only as a diagnostic in the legacy three-way comparison described below.");
             sb.AppendLine("PatternLab's stored quants are M+0, and one bar cannot be built from two");
             sb.AppendLine("different bases without saying something false about the comparison.");
             sb.AppendLine();
@@ -546,7 +549,7 @@ namespace FamilyQuant
             sb.AppendLine();
             sb.AppendLine("They differ because one elution peak is usually sampled by several MS2 scans:");
             sb.AppendLine("several anchors, one peak, and the extractor hands that same peak back to each");
-            sb.AppendLine("of them. Every total on this screen is summed over DISTINCT PEAKS. Summing per");
+            sb.AppendLine("of them. Legacy extraction totals are summed over DISTINCT PEAKS. Summing per");
             sb.AppendLine("anchor instead would add the same trapezoid once per MS2 event, which inflates");
             sb.AppendLine("the ion current by a few percent, always upwards, and never fails a check. The");
             sb.AppendLine("\"redundant anchors\" and \"redundant area\" columns report exactly what that");
@@ -560,9 +563,9 @@ namespace FamilyQuant
             sb.AppendLine("less its largest peak) is printed instead of being quietly removed.");
             sb.AppendLine();
 
-            sb.AppendLine("WHAT THE HOMOLOGY LAYER MAPS (LAYER 4)");
+            sb.AppendLine("WHAT STANDALONE HOMOLOGY MAPS");
             sb.AppendLine("--------------------------------------");
-            sb.AppendLine("A de novo sequence has no protein attached to it. Layer 4 asks whether it looks");
+            sb.AppendLine("A de novo sequence has no protein attached. Standalone homology asks whether it looks");
             sb.AppendLine("like one anyway: each DISTINCT kept sequence is aligned against the proteins of");
             sb.AppendLine("a Family Cluster File, and every surviving hit is attributed to the User ID");
             sb.AppendLine("family of the protein it landed in. One file answers both halves, which is why");
@@ -570,7 +573,7 @@ namespace FamilyQuant
             sb.AppendLine();
             sb.AppendLine("The sequences are deduplicated first: the same tag read in fifty spectra is one");
             sb.AppendLine("alignment, not fifty, so \"peptides searched\" is far below the rows kept in");
-            sb.AppendLine("Layer 1. The minimum identity is a PREFILTER, not the score: a protein that");
+            sb.AppendLine("Import and filter. The minimum identity is a PREFILTER, not the score: a protein that");
             sb.AppendLine("never reaches that fraction of literal identity is never aligned at all.");
             sb.AppendLine("Isoleucine and leucine are treated as one residue there by default, because");
             sb.AppendLine("they have the same mass and a fragment spectrum cannot tell them apart, so");
@@ -595,9 +598,9 @@ namespace FamilyQuant
             sb.AppendLine("the reason a de novo search was run.");
             sb.AppendLine();
 
-            sb.AppendLine("WHAT THE THREE-WAY CHART PARTITIONS (LAYER 5)");
+            sb.AppendLine("LEGACY THREE-WAY COMPARISON (REFERENCE)");
             sb.AppendLine("---------------------------------------------");
-            sb.AppendLine("One bar per run, plus one for the runs together. The bar is the run's WHOLE ion");
+            sb.AppendLine("The legacy comparison has a bar per run and one pooled bar. It uses the WHOLE ion");
             sb.AppendLine("current, read from the RAW with no trimming at either end, and it is cut into");
             sb.AppendLine("three exhaustive parts:");
             sb.AppendLine();
@@ -632,14 +635,14 @@ namespace FamilyQuant
             sb.AppendLine("does not distinguish a divisor read from a .plp from quants summed out of a");
             sb.AppendLine(".xic2, and those are different measurements of different things.");
             sb.AppendLine();
-            sb.AppendLine("Which source actually answered is printed above the table WORD FOR WORD,");
+            sb.AppendLine("The legacy branch note records which source actually answered WORD FOR WORD,");
             sb.AppendLine("refusals included. A project that merged its technical replicates holds one");
             sb.AppendLine("averaged column for three acquisitions and cannot answer per run; no arithmetic");
             sb.AppendLine("recovers what was averaged away, so it says so and the .xic2 is used instead.");
             sb.AppendLine("Reducing that to a flag would hide which of the two you are looking at.");
             sb.AppendLine();
-            sb.AppendLine("Every CSV this screen writes uses a dot for the decimal separator whatever your");
-            sb.AppendLine("machine's language is, and the partition numbers are written in their shortest");
+            sb.AppendLine("Every inspection or Results CSV uses a dot for the decimal separator whatever your");
+            sb.AppendLine("machine's language is. Legacy partition numbers are written in their shortest");
             sb.AppendLine("round-trippable form, so a value read back is the same bits that were plotted.");
 
             return sb.ToString();

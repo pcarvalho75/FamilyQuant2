@@ -48,6 +48,7 @@ public partial class MainWindow
     private void RefreshNavigationState()
     {
         NavigationModel.UpdateProjectState(cgc != null, saveInProgress || analyticsInProgress || IsQuantifyBusy);
+        NavigationModel.SetHomologyState(latestHomologyResult != null);
         NavigationModel.SetDocument(cgc?.fcf, lastFcfPath, loadedQuant.Count > 0);
         CommandManager.InvalidateRequerySuggested();
     }
