@@ -40,6 +40,13 @@ namespace FamilyQuant.Tests
         [STAThread]   // required: the UI smoke section constructs WPF controls
         private static int Main(string[] args)
         {
+            if (args.Length > 0 && args[0] == IdentitySearchStudy.Argument) return IdentitySearchStudy.Run(args);
+            if (args.Contains("--test-identity-study", StringComparer.Ordinal))
+            {
+                IdentityStudyTests();
+                Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
+                return failed == 0 ? 0 : 1;
+            }
             if (args.Length > 0 && (args[0] == ClusteringSnapshot.Argument || args[0] == ClusteringSnapshot.ExportArgument || args[0] == ClusteringSnapshot.VerifyExportArgument))
                 return ClusteringSnapshot.Run(args);
             if (args.Contains("--test-clustering-results", StringComparer.Ordinal))
@@ -519,6 +526,7 @@ namespace FamilyQuant.Tests
             Section("Redundancy removal - order kept, subsets dropped");
             RedundancyTests(workDir);
             ClusteringResultTests(workDir);
+            IdentityStudyTests();
 
             Section("De novo evidence - source-aware reader, filters, reconciliation");
             DeNovoTests(workDir);
