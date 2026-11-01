@@ -46,6 +46,7 @@ namespace FamilyQuant.Tests
                 Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
                 return failed == 0 ? 0 : 1;
             }
+            if (LogoAssets.IsRequested(args)) return LogoAssets.Run(args);
             if (args.Contains("--test-inputs", StringComparer.Ordinal))
             {
                 RealDataInputTests();
@@ -587,6 +588,7 @@ namespace FamilyQuant.Tests
             AppearanceDirectionTests();
             LegacySurfaceContrastTests();
             ShellStatusBridgeTests();
+            LogoResourceTests(workDir);
             ThemePreferenceTests(workDir);
 
             Section("Feature ledger - frozen source inventory and explicit preservation checks");
