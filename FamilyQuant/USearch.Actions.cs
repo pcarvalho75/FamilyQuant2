@@ -12,6 +12,13 @@ namespace FamilyQuant;
 
 public partial class USearchLib
 {
+    public static string LargeDatabaseWarning(string inputFile, int count) =>
+        "\"" + Path.GetFileName(inputFile) + "\" has " + count.ToString("N0", CultureInfo.CurrentCulture) +
+        " sequences. Exhaustive clustering aligns every pair of them in full, which on a database this large can take several minutes and a large amount of memory.\n\n" +
+        "It is not capped: choose Yes to run the full alignment at this size. Choose No to stop, " +
+        "then either turn off \"Exhaustive second pass\" for the faster first-pass-only grouping, " +
+        "or reduce the database first with \"Remove redundancy\".";
+
     private sealed class BuildActions
     {
         private readonly USearchLib owner;
@@ -32,13 +39,7 @@ public partial class USearchLib
             if (PresentationSource.FromVisual(owner) == null) return true;
 
             var answer = owner.ShowBuildMessage(
-                "\"" + Path.GetFileName(inputFile) + "\" has " +
-                count.ToString("N0", CultureInfo.CurrentCulture) + " sequences. Exhaustive clustering " +
-                "aligns every pair of them in full, which on a database this large can take several " +
-                "minutes and a large amount of memory.\n\n" +
-                "It is not capped: choose Yes to run the full alignment at this size. Choose No to stop, " +
-                "then either turn off \"Exhaustive clustering\" for the faster first-pass-only grouping, " +
-                "or reduce the database first with \"Remove redundancy from FASTA\".",
+                LargeDatabaseWarning(inputFile, count),
                 "Run exhaustive clustering on a large database?",
                 MessageBoxButton.YesNo, MessageBoxImage.Warning, MessageBoxResult.No);
 
@@ -112,7 +113,7 @@ public partial class USearchLib
                     " families at " + identity.ToString(CultureInfo.CurrentCulture) + "% identity, and written to\n" +
                     fcfPath + "\n\n" +
                     "Next step: open that file with File > Open to refine the grouping " +
-                    "and attach quantitation. You can also press \"Calculate FDR\" here first to check " +
+                    "and attach quantitation. You can also press \"Check mixing (FDR)\" here first to check " +
                     "whether this identity keeps real and decoy sequences apart.",
                     "Family Cluster File generated", MessageBoxButton.OK, MessageBoxImage.Information);
             }
