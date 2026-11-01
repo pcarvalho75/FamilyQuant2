@@ -25,8 +25,8 @@ Read everything. Build and run the quick suite in your own worktree. Write only 
 
 Stay in the session while the team works.
 
-1. Read all three OUTBOX files for `## READY <step> <commit>` and `## FIXED <step> <commit>` posts you have not reviewed. Read your INBOX.
-2. Take the oldest. Critical-path steps go first: N1, F4, F5, N3, N4, F6, E1, E2, E3, E5, E6, C4, E11, E12, E13, E14.
+1. Read `D:/FamilyQuant-data/reviews/CLAIMS.md`: lines read `CLAIM <step> <commit> <reviewer>`. You alternate with FQArgon (Gemini); take only lines that name FQReview and have no verdict of yours yet. Read your INBOX.
+2. Take the oldest.
 3. Review that exact commit against its row in `docs/ROADMAP.md`. Write `D:/FamilyQuant-data/reviews/<step>.md`.
 4. Post one line in your OUTBOX as a heading: `## APPROVED <step> <commit> <one-line reason>` or `## REJECTED <step> <commit> <findings summary>`.
 5. If nothing is waiting, run `sleep 280` and go back to step 1. Do not end your turn because the queue is empty. End only when the orchestrator tells you to stop in your INBOX.

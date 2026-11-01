@@ -27,7 +27,7 @@ Finished rows leave this file at the next refresh and go to `docs/ROADMAP-archiv
 
 ## The team
 
-This team is exclusive to FamilyQuant: three Sol workers and one Grok reviewer, sharing no workers, folders or tools with Project Orion.
+This team is exclusive to FamilyQuant: three Sol workers and two reviewers, Grok and Gemini, sharing no workers, folders or tools with Project Orion.
 
 | Name | Engine | Role | Worktree | Branch |
 |---|---|---|---|---|
@@ -35,9 +35,10 @@ This team is exclusive to FamilyQuant: three Sol workers and one Grok reviewer, 
 | FQEvidence (EV) | Sol 6.1 xhigh | Golden check, evidence model, fetch, classifier, apply, Ana's file, then quantitation and project rewrite | `D:/FamilyQuant-wt/evidence` | `fq/evidence` |
 | FQLook (LK) | Sol 6.1 xhigh | Look, shell, curation and review screens | `D:/FamilyQuant-wt/look` | `fq/look` |
 | FQAssay (AS) | Sol 6.1 xhigh | New project, ledger, architecture, neighbour search, coherence, validation, then core rewrite | `D:/FamilyQuant-wt/assay` | `fq/assay` |
-| FQReview (GR) | Grok 4.7 xhigh | Reviews every step, code and science. Never edits product code. | `D:/FamilyQuant-wt/review` | detached |
+| FQReview (GR) | Grok 4.7 xhigh | Reviews steps in turn with FQArgon, code and science. Never edits product code. | `D:/FamilyQuant-wt/review` | detached |
+| FQArgon (AR) | Gemini 4 Argon high | Reviews steps in turn with FQReview, code and science. Never edits product code. | `D:/FamilyQuant-wt/argon` | detached |
 
-Flow of one step: owner posts `READY <step> <commit>`; GR posts `APPROVED <step> <commit> <reason>` or `REJECTED <step> <commit> <findings>`; a rejection is the owner's next commit, red then green, and GR checks it again; the orchestrator merges, builds, runs the suite, and only then the row closes.
+Flow of one step: owner posts `READY <step> <commit>`; the orchestrator assigns it to GR or AR in turn in `D:/FamilyQuant-data/reviews/CLAIMS.md`; that reviewer posts `APPROVED <step> <commit> <reason>` or `REJECTED <step> <commit> <findings>`; a rejection is the owner's next commit, red then green, and the other reviewer checks it; the orchestrator merges, builds, runs the suite, and only then the row closes.
 
 ## Target layout
 
@@ -74,7 +75,7 @@ The rules:
 
 ## Workstreams
 
-Columns: Diff = L, M, H, VH. Hrs = worker hours, my estimate; the first steps ran several times faster than estimated. Blocked by: 🟢 = open now. ETA = hours after launch in that worker's queue, a rough estimate and never a promise. Prog = my estimate of work done. Cred = counted only after approval and merge. EV, LK, AS and GR are the workers above.
+Columns: Diff = L, M, H, VH. Hrs = worker hours, my estimate; the first steps ran several times faster than estimated. Blocked by: 🟢 = open now. ETA = hours after launch in that worker's queue, a rough estimate and never a promise. Prog = my estimate of work done. Cred = counted only after approval and merge. EV, LK, AS, GR and AR are the workers above.
 
 ### W0 Foundation and the new project
 
