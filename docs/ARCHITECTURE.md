@@ -176,16 +176,22 @@ it does not mean that later work has been completed or reviewed.
 
 <!-- SOURCE-INVENTORY -->
 
-Inventory refreshed after the shell merges and X2: 174 files and unique rows, zero gaps.
+Inventory refreshed for the published evidence code and X10 contract: 182 files/rows, zero gaps.
 
 | Source path at planning | Destination | Copy/rewrite plan |
 |---|---|---|
+| `FamilyQuant.Core/Evidence/EvidenceFetcher.cs` | `FamilyQuant.Core/Evidence/EvidenceFetcher.cs` | Keep published evidence implementation in Core; owned by its assigned EV/Opus step |
+| `FamilyQuant.Core/Evidence/FamilyMembership.cs` | `FamilyQuant.Core/Evidence/FamilyMembership.cs` | Keep published evidence implementation in Core; owned by its assigned EV/Opus step |
+| `FamilyQuant.Core/Evidence/FetchProvenance.cs` | `FamilyQuant.Core/Evidence/FetchProvenance.cs` | Keep published evidence implementation in Core; owned by its assigned EV/Opus step |
+| `FamilyQuant.Core/Evidence/NearestReviewed.cs` | `FamilyQuant.Core/Evidence/NearestReviewed.cs` | Keep published evidence implementation in Core; owned by its assigned EV/Opus step |
 | `FamilyQuant.Core/FamilyClusterScoring.cs` | `FamilyQuant.Core/FamilyClusterScoring.cs` | X2: target/decoy score and identity-search implementation extracted unchanged |
 | `FamilyQuant.Core/FamilyQuant.Core.csproj` | `FamilyQuant.Core/FamilyQuant.Core.csproj` | New F6 library project; no WPF, existing package pins and explicit vendor references |
+| `FamilyQuant.Core/Operations/CoreOperation.cs` | `FamilyQuant.Core/Operations/CoreOperation.cs` | X10: shared WPF-free operation outcome, progress, cancellation and final-commit contract |
 | `FamilyQuant.Core/PatternLabAttribution.cs` | `FamilyQuant.Core/PatternLabAttribution.cs` | X2: per-document PLP caches and attribution implementation extracted unchanged |
 | `FamilyQuant.Tests/AttributionRuleStudy.cs` | `FamilyQuant.Tests/AttributionRuleStudy.cs` | Keep test coverage; update only API/path integration when its owning step moves code |
 | `FamilyQuant.Tests/ChargeAudit.cs` | `FamilyQuant.Tests/ChargeAudit.cs` | Keep test coverage; update only API/path integration when its owning step moves code |
 | `FamilyQuant.Tests/DeNovoXicTests.cs` | `FamilyQuant.Tests/DeNovoXicTests.cs` | Keep test coverage; update only API/path integration when its owning step moves code |
+| `FamilyQuant.Tests/EvidenceFetchCheck.cs` | `FamilyQuant.Tests/EvidenceFetchCheck.cs` | Keep evidence/operation regression coverage with its owning step |
 | `FamilyQuant.Tests/EvidenceStorageCheck.cs` | `FamilyQuant.Tests/EvidenceStorageCheck.cs` | Keep E1 storage/size checks; use the published evidence contract |
 | `FamilyQuant.Tests/FamilyQuant.Tests.csproj` | `FamilyQuant.Tests/FamilyQuant.Tests.csproj` | Keep test coverage; update only API/path integration when its owning step moves code |
 | `FamilyQuant.Tests/FeatureLedger.cs` | `FamilyQuant.Tests/FeatureLedger.cs` | Keep test coverage; update only API/path integration when its owning step moves code |
@@ -195,6 +201,7 @@ Inventory refreshed after the shell merges and X2: 174 files and unique rows, ze
 | `FamilyQuant.Tests/Program.Analytics.cs` | `FamilyQuant.Tests/Program.Analytics.cs` | Keep test coverage; update only API/path integration when its owning step moves code |
 | `FamilyQuant.Tests/Program.AppShell.cs` | `FamilyQuant.Tests/Program.AppShell.cs` | Keep test coverage; update only API/path integration when its owning step moves code |
 | `FamilyQuant.Tests/Program.Charts.cs` | `FamilyQuant.Tests/Program.Charts.cs` | Keep test coverage; update only API/path integration when its owning step moves code |
+| `FamilyQuant.Tests/Program.CoreOperations.cs` | `FamilyQuant.Tests/Program.CoreOperations.cs` | Keep evidence/operation regression coverage with its owning step |
 | `FamilyQuant.Tests/Program.Csv.cs` | `FamilyQuant.Tests/Program.Csv.cs` | Keep test coverage; update only API/path integration when its owning step moves code |
 | `FamilyQuant.Tests/Program.Curation.cs` | `FamilyQuant.Tests/Program.Curation.cs` | Keep test coverage; update only API/path integration when its owning step moves code |
 | `FamilyQuant.Tests/Program.CurationStorage.cs` | `FamilyQuant.Tests/Program.CurationStorage.cs` | Keep test coverage; update only API/path integration when its owning step moves code |
@@ -214,6 +221,7 @@ Inventory refreshed after the shell merges and X2: 174 files and unique rows, ze
 | `FamilyQuant.Tests/Program.IdentityScan.cs` | `FamilyQuant.Tests/Program.IdentityScan.cs` | Keep test coverage; update only API/path integration when its owning step moves code |
 | `FamilyQuant.Tests/Program.Ms1Envelope.cs` | `FamilyQuant.Tests/Program.Ms1Envelope.cs` | Keep test coverage; update only API/path integration when its owning step moves code |
 | `FamilyQuant.Tests/Program.NativeFractions.cs` | `FamilyQuant.Tests/Program.NativeFractions.cs` | Keep test coverage; update only API/path integration when its owning step moves code |
+| `FamilyQuant.Tests/Program.NearestReviewed.cs` | `FamilyQuant.Tests/Program.NearestReviewed.cs` | Keep evidence/operation regression coverage with its owning step |
 | `FamilyQuant.Tests/Program.ProjectStore.cs` | `FamilyQuant.Tests/Program.ProjectStore.cs` | Keep test coverage; update only API/path integration when its owning step moves code |
 | `FamilyQuant.Tests/Program.ProteinDomains.cs` | `FamilyQuant.Tests/Program.ProteinDomains.cs` | Keep test coverage; update only API/path integration when its owning step moves code |
 | `FamilyQuant.Tests/Program.Quantitation.cs` | `FamilyQuant.Tests/Program.Quantitation.cs` | Keep test coverage; update only API/path integration when its owning step moves code |

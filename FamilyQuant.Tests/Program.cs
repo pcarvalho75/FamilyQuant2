@@ -40,6 +40,13 @@ namespace FamilyQuant.Tests
         [STAThread]   // required: the UI smoke section constructs WPF controls
         private static int Main(string[] args)
         {
+            if (args.Contains("--test-operations", StringComparer.Ordinal))
+            {
+                string operationWorkDir = Path.Combine(Path.GetTempPath(), "FamilyQuant.Tests");
+                CoreOperationTests(operationWorkDir);
+                Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
+                return failed == 0 ? 0 : 1;
+            }
             if (args.Contains("--test-document", StringComparer.Ordinal))
             {
                 string documentWorkDir = Path.Combine(Path.GetTempPath(), "FamilyQuant.Tests");
@@ -387,6 +394,9 @@ namespace FamilyQuant.Tests
 
             Section("CSV export - locale and escaping");
             CsvTests();
+
+            Section("Core operation outcomes, progress and cancellation");
+            CoreOperationTests(workDir);
 
             Section("Display filters and the family counter");
             FilterTests();
