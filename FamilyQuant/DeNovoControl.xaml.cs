@@ -1585,8 +1585,8 @@ namespace FamilyQuant
 
             var ofd = new OpenFileDialog
             {
-                Filter = "FamilyClusterFile (*.fcf)|*.fcf",
-                Title = "Choose the Family Cluster File to search against and map onto"
+                Filter = "FamilyQuant project or Family Cluster File (*.fqproj;*.fcf)|*.fqproj;*.fcf",
+                Title = "Choose the project or family file to search against and map onto"
             };
 
             if (ofd.ShowDialog() != true) return;
@@ -1679,7 +1679,7 @@ namespace FamilyQuant
             {
                 DeNovoHomology outcome = await Task.Run(() =>
                 {
-                    FamilyClusterFile fcf = FamilyClusterFile.Load(fcfPath);
+                    FamilyClusterFile fcf = LoadHomologyCuration(fcfPath);
                     return SearchHomology(peptides, fcf, options, fcfPath);
                 });
 
