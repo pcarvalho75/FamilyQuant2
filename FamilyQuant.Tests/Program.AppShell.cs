@@ -422,6 +422,56 @@ namespace FamilyQuant.Tests
                 && file.MyExtendedFastaItems[0].USearchID == 7);
         }
 
+        private static void LogoResourceTests(string workDir)
+        {
+            var mark = Application.Current.TryFindResource("StartPageLogo") as DrawingImage;
+            Check("StartPageLogo is a square vector ImageSource", mark != null && mark.Width == 256 && mark.Height == 256);
+            if (mark == null) return;
+            Color markColour = ((SolidColorBrush)Application.Current.FindResource("LogoMarkBrush")).Color;
+            Color tileColour = ((SolidColorBrush)Application.Current.FindResource("LogoTileBrush")).Color;
+            foreach (int size in new[] { 16, 32, 256 })
+            {
+                using var stream = new MemoryStream(LogoAssets.Png(mark, size, size));
+                var decoded = BitmapFrame.Create(stream, BitmapCreateOptions.PreservePixelFormat, BitmapCacheOption.OnLoad);
+                var pixels = new FormatConvertedBitmap(decoded, PixelFormats.Bgra32, null, 0);
+                byte[] corner = new byte[4], middle = new byte[4];
+                pixels.CopyPixels(new Int32Rect(0, 0, 1, 1), corner, 4, 0);
+                pixels.CopyPixels(new Int32Rect(size / 2, size / 2, 1, 1), middle, 4, 0);
+                double Distance(Color colour) => Math.Pow(middle[2] - colour.R, 2)
+                    + Math.Pow(middle[1] - colour.G, 2) + Math.Pow(middle[0] - colour.B, 2);
+                Check("the " + size + " px mark has transparent corners and a visible centre mark",
+                    corner[3] == 0 && middle[3] == 255 && Distance(markColour) < Distance(tileColour));
+            }
+            var icon = Application.Current.FindResource("AppWindowIcon") as BitmapFrame;
+            Check("AppWindowIcon retains every native ICO size",
+                icon?.Decoder != null && icon.Decoder.Frames.Select(f => f.PixelWidth).OrderBy(n => n)
+                    .SequenceEqual(LogoAssets.IconSizes.OrderBy(n => n)));
+            var window = new Window { Width = 180, Height = 120, Left = -30000, Top = -30000,
+                WindowStartupLocation = WindowStartupLocation.Manual, ShowActivated = false, ShowInTaskbar = false };
+            window.Show();
+            try
+            {
+                AppearancePump();
+                var handle = new System.Windows.Interop.WindowInteropHelper(window).Handle;
+                IntPtr small = ReadLogoIcon(handle, 0x007F, IntPtr.Zero, IntPtr.Zero);
+                IntPtr large = ReadLogoIcon(handle, 0x007F, new IntPtr(1), IntPtr.Zero);
+                Check("a real off-screen window receives both native logo icons", small != IntPtr.Zero && large != IntPtr.Zero);
+                foreach (var native in new[] { ("small", small), ("large", large) })
+                {
+                    if (native.Item2 == IntPtr.Zero) continue;
+                    var image = System.Windows.Interop.Imaging.CreateBitmapSourceFromHIcon(native.Item2,
+                        Int32Rect.Empty, BitmapSizeOptions.FromEmptyOptions());
+                    var encoder = new PngBitmapEncoder(); encoder.Frames.Add(BitmapFrame.Create(image));
+                    using var output = File.Create(Path.Combine(workDir, "logo-native-" + native.Item1 + ".png"));
+                    encoder.Save(output);
+                }
+            }
+            finally { window.Close(); }
+        }
+
+        [System.Runtime.InteropServices.DllImport("user32.dll", EntryPoint = "SendMessageW")]
+        private static extern IntPtr ReadLogoIcon(IntPtr window, uint message, IntPtr parameter, IntPtr data);
+
         private static void AppearancePump()
         {
             var frame = new DispatcherFrame();

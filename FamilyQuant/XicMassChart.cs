@@ -16,11 +16,10 @@ namespace FamilyQuant
     /// <see cref="IdentityScanChart"/>: the application ships no such dependency, and a resize redraws
     /// for free. Renders headless to a bitmap because it paints its own backdrop.
     /// </summary>
-    public class XicMassChart : FrameworkElement, IPalettedChart
+    public class XicMassChart : ChartDrawingBase, IPalettedChart
     {
         private readonly List<AnalyticsPeptide> peptides;
 
-        private ChartPalette palette = ChartPalette.Dark;
 
         /// <param name="peptides">The deduped analytics table; only positive mass and envelope are drawn.</param>
         /// <param name="palette">The colours to paint in, or null for the screen palette.</param>
@@ -36,22 +35,6 @@ namespace FamilyQuant
                       "are the de novo additions.";
         }
 
-        /// <inheritdoc/>
-        public ChartPalette Palette
-        {
-            get => palette;
-            set
-            {
-                palette = value ?? ChartPalette.Dark;
-                InvalidateVisual();
-            }
-        }
-
-        private static FormattedText Text(string s, Brush brush, double size, bool bold = false) =>
-            new FormattedText(s, CultureInfo.CurrentCulture, FlowDirection.LeftToRight,
-                new Typeface(new FontFamily("Segoe UI"), FontStyles.Normal,
-                             bold ? FontWeights.Bold : FontWeights.Normal, FontStretches.Normal),
-                size, brush, 96);
 
         protected override void OnRender(DrawingContext dc)
         {
@@ -61,7 +44,7 @@ namespace FamilyQuant
             Brush Backdrop = pal.Backdrop, Ink = pal.Ink, Muted = pal.Muted, Grid = pal.Grid;
             Brush Identified = pal.Identified, DeNovo = pal.DeNovo;
 
-            dc.DrawRectangle(Backdrop, null, new Rect(0, 0, ActualWidth, ActualHeight));
+            DrawBackdrop(dc, Backdrop);
 
             var head = Text("XIC by mass: envelope area against peptide mass", Ink, 13, bold: true);
             dc.DrawText(head, new Point(14, 10));
@@ -73,8 +56,7 @@ namespace FamilyQuant
 
             if (peptides.Count == 0)
             {
-                var none = Text("Nothing to show: no peptide carried a positive envelope yet.", Muted, 12);
-                dc.DrawText(none, new Point(plot.Left, plot.Top + plot.Height / 2));
+                DrawEmpty(dc, "Nothing to show: no peptide carried a positive envelope yet.", Muted, new Point(plot.Left, plot.Top + plot.Height / 2));
                 DrawLegend(dc, plot);
                 return;
             }
@@ -96,9 +78,7 @@ namespace FamilyQuant
             {
                 double v = logMin + i;
                 double y = plot.Bottom - (v - logMin) / (logMax - logMin) * plot.Height;
-                dc.DrawLine(gridPen, new Point(plot.Left, y), new Point(plot.Right, y));
-                var label = Text("1e" + v.ToString("0", CultureInfo.CurrentCulture), Muted, 11);
-                dc.DrawText(label, new Point(plot.Left - label.Width - 8, y - label.Height / 2));
+                DrawHorizontalTick(dc, plot, y, gridPen, "1e" + v.ToString("0", CultureInfo.CurrentCulture), Muted);
             }
 
             // Mass ticks along the bottom.
@@ -111,8 +91,7 @@ namespace FamilyQuant
                 dc.DrawText(t, new Point(x - t.Width / 2, plot.Bottom + 6));
             }
 
-            dc.DrawLine(axisPen, new Point(plot.Left, plot.Top), new Point(plot.Left, plot.Bottom));
-            dc.DrawLine(axisPen, new Point(plot.Left, plot.Bottom), new Point(plot.Right, plot.Bottom));
+            DrawAxes(dc, plot, axisPen);
 
             // The two series. De novo drawn first so the more numerous identified dots do not bury it.
             DrawSeries(dc, peptides.Where(p => p.Side == NativeQuantFractions.SideDeNovo), DeNovo, plot, massHi, logMin, logMax);

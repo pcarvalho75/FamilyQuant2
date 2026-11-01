@@ -17,12 +17,11 @@ namespace FamilyQuant
     /// The bars are optionally split by mass band (light / medium / heavy) so the reader can see whether
     /// the shortfall is a mass effect. Drawn with OnRender for the same reason as the other charts.
     /// </summary>
-    public class IsotopeCountChart : FrameworkElement, IPalettedChart
+    public class IsotopeCountChart : ChartDrawingBase, IPalettedChart
     {
         private readonly List<AnalyticsPeptide> peptides;
         private readonly bool splitByMass;
 
-        private ChartPalette palette = ChartPalette.Dark;
 
         static readonly string[] BandNames = { "under 1500 Da", "1500 to 3000 Da", "over 3000 Da" };
         const double Band1 = 1500, Band2 = 3000;
@@ -44,22 +43,6 @@ namespace FamilyQuant
                       "split each bar by peptide mass.";
         }
 
-        /// <inheritdoc/>
-        public ChartPalette Palette
-        {
-            get => palette;
-            set
-            {
-                palette = value ?? ChartPalette.Dark;
-                InvalidateVisual();
-            }
-        }
-
-        private static FormattedText Text(string s, Brush brush, double size, bool bold = false) =>
-            new FormattedText(s, CultureInfo.CurrentCulture, FlowDirection.LeftToRight,
-                new Typeface(new FontFamily("Segoe UI"), FontStyles.Normal,
-                             bold ? FontWeights.Bold : FontWeights.Normal, FontStretches.Normal),
-                size, brush, 96);
 
         private static int BandOf(double mass) => mass < Band1 ? 0 : mass < Band2 ? 1 : 2;
 
@@ -71,7 +54,7 @@ namespace FamilyQuant
             Brush Backdrop = pal.Backdrop, Ink = pal.Ink, Muted = pal.Muted, Grid = pal.Grid;
             IReadOnlyList<Brush> Bands = pal.MassBands;
 
-            dc.DrawRectangle(Backdrop, null, new Rect(0, 0, ActualWidth, ActualHeight));
+            DrawBackdrop(dc, Backdrop);
 
             var head = Text("Isotopes credited per peptide", Ink, 13, bold: true);
             dc.DrawText(head, new Point(14, 10));
@@ -83,8 +66,7 @@ namespace FamilyQuant
 
             if (peptides.Count == 0)
             {
-                var none = Text("Nothing to show: no peptide was credited an isotope yet.", Muted, 12);
-                dc.DrawText(none, new Point(plot.Left, plot.Top + plot.Height / 2));
+                DrawEmpty(dc, "Nothing to show: no peptide was credited an isotope yet.", Muted, new Point(plot.Left, plot.Top + plot.Height / 2));
                 return;
             }
 
@@ -112,13 +94,10 @@ namespace FamilyQuant
             for (int i = 0; i <= 4; i++)
             {
                 double y = plot.Bottom - i / 4.0 * plot.Height;
-                dc.DrawLine(gridPen, new Point(plot.Left, y), new Point(plot.Right, y));
-                var label = Text((top * i / 4.0).ToString("N0", CultureInfo.CurrentCulture), Muted, 11);
-                dc.DrawText(label, new Point(plot.Left - label.Width - 8, y - label.Height / 2));
+                DrawHorizontalTick(dc, plot, y, gridPen, (top * i / 4.0).ToString("N0", CultureInfo.CurrentCulture), Muted);
             }
 
-            dc.DrawLine(axisPen, new Point(plot.Left, plot.Top), new Point(plot.Left, plot.Bottom));
-            dc.DrawLine(axisPen, new Point(plot.Left, plot.Bottom), new Point(plot.Right, plot.Bottom));
+            DrawAxes(dc, plot, axisPen);
 
             double slot = plot.Width / bins;
             double barWidth = Math.Min(90, slot * 0.6);
