@@ -532,6 +532,7 @@ namespace FamilyQuant.Tests
 
             Section("Appearance directions - theme changes preserve curation and input surfaces");
             AppearanceDirectionTests();
+            LegacySurfaceContrastTests();
 
             Console.WriteLine();
             Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");

@@ -254,6 +254,33 @@ namespace FamilyQuant.Tests
             finally { main.Close(); ThemeManager.Apply(AppTheme.Light); }
         }
 
+        private static void LegacySurfaceContrastTests()
+        {
+            AppTheme saved = ThemeManager.Current;
+            try
+            {
+                foreach (AppTheme theme in new[] { AppTheme.Light, AppTheme.Dark })
+                {
+                    ThemeManager.Apply(theme);
+                    var screen = new USearchLib();
+                    screen.Measure(new Size(1280, 800));
+                    screen.Arrange(new Rect(0, 0, 1280, 800));
+                    AppearancePump();
+                    screen.UpdateLayout();
+                    var group = AppearanceWalk(screen).OfType<GroupBox>().First();
+                    var identity = AppearanceWalk(group).OfType<Label>().First(l => l.Content as string == "Identity:");
+                    Check(theme + " preserves readable labels on the unrebuilt Build screen",
+                        ChartPalette.ContrastRatio(identity.Foreground, group.Background) >= 4.5);
+                    var heading = AppearanceWalk(group).OfType<ContentControl>()
+                        .FirstOrDefault(c => c is not GroupBox && Equals(c.Content, group.Header));
+                    Check(theme + " preserves readable headings on the unrebuilt Build screen",
+                        heading != null && ChartPalette.ContrastRatio(heading.Foreground, group.Background) >= 4.5,
+                        "heading=" + (heading?.Foreground?.ToString() ?? "missing") + "; panel=" + group.Background);
+                }
+            }
+            finally { ThemeManager.Apply(saved); }
+        }
+
         private static void AppearancePump()
         {
             var frame = new DispatcherFrame();
