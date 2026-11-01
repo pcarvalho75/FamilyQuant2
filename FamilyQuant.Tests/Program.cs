@@ -40,6 +40,12 @@ namespace FamilyQuant.Tests
         [STAThread]   // required: the UI smoke section constructs WPF controls
         private static int Main(string[] args)
         {
+            if (args.Contains("--test-inputs", StringComparer.Ordinal))
+            {
+                RealDataInputTests();
+                Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
+                return failed == 0 ? 0 : 1;
+            }
             // Screen capture is an isolated lane: it never runs scientific export commands.
             if (ScreenHarness.IsRequested(args)) return ScreenHarness.Run(args);
 

@@ -32,6 +32,7 @@ Notes:
   - **The four positional arguments, in order:** `[0]` a `.plp` project, `[1]` a protein database (`.fasta` or `.T-R`), `[2]` the de novo export root (PEAKS and/or DeepNovo), `[3]` the directory holding the real `.sepr2` / `.xic2` / `.raw` files. All four are optional and **positional**, so a missing one must still occupy its slot.
   - **`"."` is the placeholder for an absent argument**, not an empty string: PowerShell 5.1 silently DROPS empty `""` arguments to a native executable, which shifts every later path into the wrong slot and turns real-data sections into silent skips. `Main` maps `"."` back to `""` on entry. Example: `dotnet run --project FamilyQuant.Tests -c Release --no-build -- . . C:/Users/paulo/Desktop/FamilyQuant/PEAKS-EXPORT_FamilyQuant C:/Users/paulo/Desktop/FamilyQuant`
   - Every section that does not name a file builds its own fixtures and runs anywhere; the ones that need real data **skip** rather than fail when it is not supplied.
+  - The quick pass has no Desktop fallback. The real exhaustive-clustering check uses the fourth positional argument, like the other acquisition-backed checks. `--test-inputs` runs only the two input-selection contract checks.
   - The runner prints `PASS`/`FAIL`/`SKIP` per check and returns a non-zero exit code if anything failed.
   - It is marked `IsPublishable=false`, so it never reaches a ClickOnce payload.
   - Set `FAMILYQUANT_USEARCH` to a `usearch.exe` you control if the bundled one cannot be executed (AppLocker / antivirus blocking user-writable folders).

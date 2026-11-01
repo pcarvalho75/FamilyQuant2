@@ -68,6 +68,7 @@ namespace FamilyQuant.Tests
 
         private static void DatabaseTests(string workDir)
         {
+            RealDataInputTests();
             // A repeated identifier must stop the run: it would otherwise vanish from the .fcf and its
             // peptides would never be attributed to any family.
             string duplicates = Path.Combine(workDir, "duplicate.fasta");
@@ -221,14 +222,34 @@ namespace FamilyQuant.Tests
         /// Exhaustive FALSE reproduces the old fast-only result (pair 1 and pair 3 SEPARATE, more
         /// clusters), which pins that the checkbox genuinely switches behaviour. The cluster counts are
         /// pinned; they are measured from this database and this bundled USEARCH, both deterministic.
-        /// Skips when the database is not on this machine.
+        /// Runs only when the real-data directory is supplied as the fourth suite argument.
         /// </summary>
+        private const string ExhaustiveDatabaseFileName =
+            "uniprotkb_taxonomy_id_8724_2026_06_25_ORDENADO_CONT123_NO-Redundancy.T-R";
+
+        private static string? ExhaustiveDatabasePath(string? desktopDir) =>
+            string.IsNullOrWhiteSpace(desktopDir) || desktopDir == "."
+                ? null : Path.Combine(desktopDir, ExhaustiveDatabaseFileName);
+
+        private static void RealDataInputTests()
+        {
+            Check("real-data alignment has no implicit input for an absent root",
+                new string?[] { null, "", " ", "." }.All(root => ExhaustiveDatabasePath(root) == null));
+            string supplied = Path.Combine(Path.GetTempPath(), "explicit real-data input");
+            Check("a supplied full-suite root still selects the same real database",
+                ExhaustiveDatabasePath(supplied) == Path.Combine(supplied, ExhaustiveDatabaseFileName));
+        }
+
         private static void ExhaustiveRealDataTests(string? desktopDir)
         {
-            const string TrName = "uniprotkb_taxonomy_id_8724_2026_06_25_ORDENADO_CONT123_NO-Redundancy.T-R";
-            string tr = !string.IsNullOrEmpty(desktopDir)
-                ? Path.Combine(desktopDir, TrName)
-                : Path.Combine(@"C:\Users\paulo\Desktop\FamilyQuant", TrName);
+            string? tr = ExhaustiveDatabasePath(desktopDir);
+
+            if (tr == null)
+            {
+                Console.WriteLine("  SKIP  exhaustive clustering on the venom T-R - supply the real-data directory as the fourth argument");
+                skipped++;
+                return;
+            }
 
             if (!File.Exists(tr))
             {
