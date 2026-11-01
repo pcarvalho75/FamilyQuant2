@@ -71,6 +71,7 @@ namespace FamilyQuant.Tests
                 OpenProjectNavigationTests(shellWork);
                 DeNovoScreenNavigationTests();
                 ShellStatusTests(shellWork);
+                ShellStatusBridgeTests();
                 HomeStartTests(shellWork);
                 AppVersionTests();
                 Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
