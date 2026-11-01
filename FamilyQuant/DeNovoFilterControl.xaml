@@ -1,0 +1,37 @@
+<UserControl x:Class="FamilyQuant.DeNovoFilterControl"
+ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+ <Grid>
+  <Grid.ColumnDefinitions><ColumnDefinition Width="190"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+  <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
+  <Label Content="De novo source" ToolTip="The selected caller determines the files and native confidence field used."/>
+  <ComboBox x:Name="ComboBoxDeNovoSource" Grid.Column="1" SelectedValuePath="Tag"
+   SelectedValue="{Binding ModeTag, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+   ToolTip="Choose a source or union. Each source keeps its own native confidence cutoff.">
+   <ComboBoxItem Content="PEAKS de novo only" Tag="peaks-only"/>
+   <ComboBoxItem Content="PEAKS de novo all" Tag="peaks-all"/>
+   <ComboBoxItem Content="DeepNovo" Tag="deepnovo"/>
+   <ComboBoxItem Content="PEAKS de novo only + DeepNovo" Tag="union-only-deepnovo"/>
+   <ComboBoxItem Content="PEAKS de novo all + DeepNovo" Tag="union-all-deepnovo"/>
+  </ComboBox>
+  <Label Grid.Row="1" Content="PEAKS minimum ALC (%)" ToolTip="Minimum average local confidence for PEAKS calls, from 0 to 100."/>
+  <TextBox Grid.Row="1" Grid.Column="1" Width="80" HorizontalAlignment="Left"
+   IsEnabled="{Binding UsesPeaks}" Text="{Binding PeaksMinimumAlc, UpdateSourceTrigger=PropertyChanged}"
+   ToolTip="PEAKS ALC cutoff from 0 to 100. It applies only to PEAKS calls."/>
+  <Label Grid.Row="2" Content="DeepNovo minimum SCORE (%)" ToolTip="Minimum native confidence score for DeepNovo calls, from 0 to 100."/>
+  <TextBox Grid.Row="2" Grid.Column="1" Width="80" HorizontalAlignment="Left"
+   IsEnabled="{Binding UsesDeepNovo}" Text="{Binding DeepNovoMinimumScore, UpdateSourceTrigger=PropertyChanged}"
+   ToolTip="DeepNovo SCORE cutoff from 0 to 100. SCORE and ALC are separate confidence scales."/>
+  <Expander Grid.Row="3" Grid.ColumnSpan="2" Header="Length and local confidence" Margin="0,8,0,0"
+   ToolTip="These length and consecutive-residue filters are shared by Quantify and De novo.">
+   <WrapPanel Margin="0,8,0,0">
+    <Label Content="Minimum length" ToolTip="Minimum accepted peptide length in residues, from 1 to 100."/><TextBox Width="54" Text="{Binding MinimumLength, UpdateSourceTrigger=PropertyChanged}"
+     ToolTip="Minimum peptide length in residues, from 1 to 100. Default 7."/>
+    <Label Content="Consecutive residues" ToolTip="Number of consecutive residues required above the local confidence floor."/><TextBox Width="54" Text="{Binding StretchLength, UpdateSourceTrigger=PropertyChanged}"
+     ToolTip="Required consecutive residues above the local confidence floor, from 1 to 100. Default 5."/>
+    <Label Content="At least (%)" ToolTip="Minimum local confidence of each residue in the requested stretch."/><TextBox Width="54" Text="{Binding StretchFloor, UpdateSourceTrigger=PropertyChanged}"
+     ToolTip="Local confidence floor from 0 to 100. Rounded to the nearest whole number. Default 90."/>
+   </WrapPanel>
+  </Expander>
+ </Grid>
+</UserControl>

@@ -96,7 +96,7 @@ public partial class MainWindow
                 ToolTip = exists ? "Opens this recent project: " + path : "This file is unavailable. Last path: " + path,
                 Tag = path
             };
-            item.Click += (_, _) => OpenProjectPath(path);
+            item.Click += async (_, _) => await OpenProjectSafelyAsync(path);
             MenuItemRecent.Items.Add(item);
         }
         if (MenuItemRecent.Items.Count == 0)

@@ -21,6 +21,127 @@ namespace FamilyQuant.Tests
 {
     internal static partial class Program
     {
+        private static void EvidenceClassifierTests()
+        {
+            string[] suppliedNames = { "Alpha family", "Beta family", "unseen example family" };
+            Check("evidence guard rejects a planted family literal from supplied data",
+                EvidenceRuleGuard.Violations("Family = \"unseen example family\";", suppliedNames).Count > 0);
+            Check("evidence guard rejects planted domain and family database codes",
+                EvidenceRuleGuard.Violations("var id = \"PF00001\";", suppliedNames).Count > 0
+                && EvidenceRuleGuard.Violations("var id = \"PTHR00001:SF2\";", suppliedNames).Count > 0);
+            Check("evidence guard rejects a planted fixed scope word",
+                EvidenceRuleGuard.Violations("scope.Contains(\"venom\")", suppliedNames).Count > 0);
+            string root = GoldenNumbers.FindRepository();
+            string engine = Directory.Exists(Path.Combine(root, "FamilyQuant.Core", "Evidence"))
+                ? Path.Combine(root, "FamilyQuant.Core", "Evidence") : Path.Combine(root, "FamilyQuant", "Evidence");
+            var sourceViolations = Directory.GetFiles(engine, "*.cs", SearchOption.AllDirectories)
+                .SelectMany(path => EvidenceRuleGuard.Violations(File.ReadAllText(path), suppliedNames).Select(v => Path.GetFileName(path) + ": " + v)).ToList();
+            Check("evidence engine has no fixed biological codes, supplied family labels or scope word",
+                sourceViolations.Count == 0, string.Join("; ", sourceViolations));
+            var options = new Evidence.EvidenceClassificationOptions { ScopeTerms = new[] { "chosen tissue", "selected" } };
+            FastaItemExtended alpha = ClassifiedItem("P00001", "Alpha family", "domain-a", true);
+            FastaItemExtended beta = ClassifiedItem("P00002", "Beta family", "domain-b", true);
+            FastaItemExtended query = ClassifiedItem("P00003", "", "domain-a", true);
+            var rows = new List<FastaItemExtended> { alpha, beta, query };
+            var hits = new Dictionary<string, Evidence.NearestNeighbour>(StringComparer.Ordinal)
+            {
+                [query.SequenceIdentifier] = Hit(query, alpha, 60),
+                [alpha.SequenceIdentifier] = Hit(alpha, beta, 99),
+            };
+            string before = new FamilyClusterFile { MyExtendedFastaItems = rows }.ToJsonText();
+            Evidence.EvidenceProposal proposal = Evidence.EvidenceClassifier.Propose(rows, options, hits);
+            Check("classification uses the source family before a conflicting neighbour",
+                proposal.Proteins[0].Tier == Evidence.EvidenceTier.UniProtFamily && proposal.Proteins[0].Family == "Alpha family");
+            Check("an annotated protein accepts a reviewed neighbour exactly at sixty percent",
+                proposal.Proteins[2].Tier == Evidence.EvidenceTier.ReviewedNeighbour && proposal.Proteins[2].Family == "Alpha family");
+            Check("building an evidence proposal changes no stored protein or family value",
+                new FamilyClusterFile { MyExtendedFastaItems = rows }.ToJsonText() == before);
+            Check("scope matches complete words and phrases in keywords or tissue only",
+                Evidence.EvidenceClassifier.IsInScope(new Evidence.ProteinEvidence { TissueSpecificity = new List<string> { "The chosen tissue is expressed here" } }, options.ScopeTerms)
+                && !Evidence.EvidenceClassifier.IsInScope(new Evidence.ProteinEvidence { Keywords = new List<string> { "unselected" } }, options.ScopeTerms));
+            Check("an empty scope is refused rather than implicitly selecting every protein",
+                Throws<ArgumentException>(() => Evidence.EvidenceClassifier.Propose(rows, new Evidence.EvidenceClassificationOptions())));
+
+            var markerRows = Enumerable.Range(1, 6).Select(i => ClassifiedItem("Q" + i.ToString("D5", CultureInfo.InvariantCulture),
+                i <= 4 ? "Alpha family" : i == 5 ? "Beta family" : "", "domain-a", true)).ToList();
+            var markerProposal = Evidence.EvidenceClassifier.Propose(markerRows, options);
+            Check("one domain vote per carrier learns a family exactly at eighty percent",
+                markerProposal.Markers.Count == 1 && markerProposal.Markers[0].FamilyCarriers == 4
+                && markerProposal.Markers[0].LabelledCarriers == 5 && markerProposal.Markers[0].AllCarriers == 6
+                && markerProposal.Proteins[5].Tier == Evidence.EvidenceTier.LearnedMarker);
+            var aboveVote = Evidence.EvidenceClassifier.Propose(markerRows,
+                new Evidence.EvidenceClassificationOptions { ScopeTerms = options.ScopeTerms, MarkerVoteFraction = 0.801 });
+            Check("a vote below the selected purity stays unassigned", aboveVote.Proteins[5].Tier == Evidence.EvidenceTier.Unassigned);
+            markerRows[0].Evidence!.Pfam.Add(new Evidence.EvidenceDomain { Accession = "domain-a", Name = "Duplicate source reference" });
+            Check("duplicate domain references do not count as extra carrier votes",
+                Evidence.EvidenceClassifier.Propose(markerRows, options).Markers.Single().AllCarriers == 6);
+            var heldOut = Evidence.EvidenceClassifier.Propose(markerRows, options, maskedLabels: new HashSet<int> { 0 });
+            Check("a held-out label is absent from direct assignment and marker training",
+                heldOut.Proteins[0].Tier == Evidence.EvidenceTier.Unassigned && heldOut.Markers.Count == 0);
+
+            query.Evidence!.Keywords.Clear();
+            query.Evidence.TissueSpecificity.Clear();
+            hits[query.SequenceIdentifier] = Hit(query, alpha, 70);
+            proposal = Evidence.EvidenceClassifier.Propose(rows, options, hits);
+            Check("an unannotated protein needs seventy percent and compatible domains",
+                proposal.Proteins[2].Tier == Evidence.EvidenceTier.UnannotatedNeighbour && proposal.Proteins[2].Family == "Alpha family");
+            hits[query.SequenceIdentifier] = Hit(query, alpha, 69.99);
+            Check("an unannotated hit below seventy percent remains unassigned",
+                Evidence.EvidenceClassifier.Propose(rows, options, hits).Proteins[2].Tier == Evidence.EvidenceTier.Unassigned);
+            hits[query.SequenceIdentifier] = Hit(query, alpha, 90);
+            query.Evidence.Pfam = new List<Evidence.EvidenceDomain> { new Evidence.EvidenceDomain { Accession = "domain-z", Name = "Domain Z" } };
+            Check("high identity does not override incompatible observed domains",
+                Evidence.EvidenceClassifier.Propose(rows, options, hits).Proteins[2].Tier == Evidence.EvidenceTier.Unassigned);
+
+            query.Evidence.TissueSpecificity.Add("Expressed in the chosen tissue.");
+            query.Evidence.Pfam.Clear();
+            hits[query.SequenceIdentifier] = Hit(query, alpha, 90, aligned: 69);
+            Check("query coverage below seventy percent is not a usable neighbour",
+                Evidence.EvidenceClassifier.Propose(rows, options, hits).Proteins[2].Tier == Evidence.EvidenceTier.Unassigned);
+            hits[query.SequenceIdentifier] = Hit(query, query, 100);
+            Check("the classifier never accepts a self-labelled neighbour",
+                Evidence.EvidenceClassifier.Propose(rows, options, hits).Proteins[2].Tier == Evidence.EvidenceTier.Unassigned);
+
+            query.Evidence.FamilyMemberships = new List<Evidence.EvidenceFamilyMembership>
+            {
+                new Evidence.EvidenceFamilyMembership { Family = "Alpha family", Context = "first section" },
+                new Evidence.EvidenceFamilyMembership { Family = "Beta family", Context = "second section" },
+            };
+            hits[query.SequenceIdentifier] = Hit(query, alpha, 95);
+            var ambiguous = Evidence.EvidenceClassifier.Propose(rows, options, hits).Proteins[2];
+            Check("multiple source families stay flagged for user choice instead of choosing a neighbour",
+                ambiguous.Tier == Evidence.EvidenceTier.Unassigned && ambiguous.Flags.Count > 0 && !ambiguous.SuggestedSelected);
+            query.Evidence.FamilyMemberships = null;
+            var tied = Hit(query, alpha, 95);
+            tied.TiedFamilies.Add("Beta family");
+            hits[query.SequenceIdentifier] = tied;
+            var crossFamilyTie = Evidence.EvidenceClassifier.Propose(rows, options, hits).Proteins[2];
+            Check("a tie across reviewed families remains flagged and unassigned",
+                crossFamilyTie.Tier == Evidence.EvidenceTier.Unassigned && crossFamilyTie.Flags.Count > 0);
+            var decoy = ClassifiedItem("P00004", "Alpha family", "domain-a", true);
+            decoy.SequenceIdentifier = SequenceLabels.DecoyPrefix + decoy.SequenceIdentifier;
+            rows.Add(decoy);
+            Check("decoys receive no classification proposal", Evidence.EvidenceClassifier.Propose(rows, options, hits).Proteins.Count == 3);
+
+            static FastaItemExtended ClassifiedItem(string accession, string family, string domain, bool annotated) => new FastaItemExtended
+            {
+                SequenceIdentifier = "sp|" + accession + "|TEST", Sequence = "ACDEFGHIK", Description = "selected in description only",
+                UserID = 31, USearchID = 31,
+                Evidence = new Evidence.ProteinEvidence
+                {
+                    Accession = accession, Reviewed = true, Family = family,
+                    Keywords = annotated ? new List<string> { "selected" } : new List<string>(),
+                    Pfam = new List<Evidence.EvidenceDomain> { new Evidence.EvidenceDomain { Accession = domain, Name = "Domain from source" } },
+                },
+            };
+            static Evidence.NearestNeighbour Hit(FastaItemExtended target, FastaItemExtended reference, double identity, int aligned = 70) =>
+                new Evidence.NearestNeighbour
+                {
+                    Query = target.SequenceIdentifier, Reference = reference.SequenceIdentifier,
+                    Accession = reference.Evidence!.Accession, Family = reference.Evidence.Family,
+                    IdentityPercent = identity, AlignmentLength = aligned, QueryLength = 100, ReferenceLength = 100,
+                };
+        }
         private static Task<Evidence.EvidenceFetchResult> FetchEvidenceForTest(IReadOnlyCollection<FastaItemExtended> items,
             System.Net.Http.HttpMessageHandler handler) => Evidence.EvidenceFetcher.FetchAsync(
                 new FamilyClusterFile { MyExtendedFastaItems = items.ToList() }, handler);
