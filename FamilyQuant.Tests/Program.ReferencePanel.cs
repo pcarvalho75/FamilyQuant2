@@ -37,9 +37,11 @@ namespace FamilyQuant.Tests
             }
         }
 
-        private static string PanelEntryJson(string accession, string similarity, string sequence, bool reviewed = true) =>
+        private static string PanelEntryJson(string accession, string similarity, string sequence, bool reviewed = true,
+            string keyword = "Chosen") =>
             "{\"primaryAccession\":\"" + accession + "\",\"entryType\":\"UniProtKB " +
             (reviewed ? "reviewed (Swiss-Prot)" : "unreviewed (TrEMBL)") + "\"," +
+            (keyword.Length > 0 ? "\"keywords\":[{\"name\":\"" + keyword + "\"}]," : "") +
             "\"comments\":[{\"commentType\":\"SIMILARITY\",\"texts\":[{\"value\":\"" + similarity + "\"}]}," +
             "{\"commentType\":\"TISSUE SPECIFICITY\",\"texts\":[{\"value\":\"A long paragraph of prose.\"}]}]," +
             "\"uniProtKBCrossReferences\":[{\"database\":\"Pfam\",\"id\":\"PF09999\",\"properties\":[{\"key\":\"EntryName\",\"value\":\"Testdomain\"}]}]," +
