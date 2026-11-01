@@ -10,6 +10,7 @@
   <ItemGroup>
     <Reference Include="$(ReferenceRoot)/*.dll" />
     <Compile Include="../GoldenNumbers.cs" Link="GoldenNumbers.cs" />
+    <Compile Include="../WordGroupingSnapshot.cs" Link="WordGroupingSnapshot.cs" />
     <Content Include="$(ReferenceRoot)/**/*" Link="%(RecursiveDir)%(Filename)%(Extension)"
              CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>

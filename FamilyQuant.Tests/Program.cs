@@ -40,6 +40,7 @@ namespace FamilyQuant.Tests
         [STAThread]   // required: the UI smoke section constructs WPF controls
         private static int Main(string[] args)
         {
+            if (args.Length > 0 && args[0] == WordGroupingSnapshot.Argument) return WordGroupingSnapshot.Run(args);
             if (args.Contains("--test-core-boundary", StringComparer.Ordinal))
             {
                 CoreBoundaryTests();
