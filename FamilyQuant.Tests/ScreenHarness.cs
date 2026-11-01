@@ -53,6 +53,7 @@ namespace FamilyQuant.Tests
                 string output = Path.GetFullPath(Option(args, Argument)!);
                 string? fcfPath = Option(args, "--screen-fcf");
                 string? projectPath = Option(args, "--screen-project");
+                bool shellStatus = args.Contains("--screen-shell-status", StringComparer.OrdinalIgnoreCase);
                 var inputHashes = new Dictionary<string, string>();
                 foreach (string path in new[] { fcfPath, projectPath }.OfType<string>())
                 {
@@ -85,7 +86,7 @@ namespace FamilyQuant.Tests
                     Themes.ThemeManager.Apply(theme == "system" ? Themes.AppTheme.System
                         : theme == "dark" ? Themes.AppTheme.Dark : Themes.AppTheme.Light);
                     CaptureTheme(theme, source, project.fcf, project.quant, project.manifest, output, captures,
-                        fcfPath ?? "synthetic fixture.fcf", projectPath ?? "synthetic fixture.fqproj");
+                        fcfPath ?? "synthetic fixture.fcf", projectPath ?? "synthetic fixture.fqproj", shellStatus);
                 }
                 foreach (var input in inputHashes)
                     if (FileHash(input.Key) != input.Value)
@@ -96,6 +97,7 @@ namespace FamilyQuant.Tests
                     AnalyticsSource = projectPath == null ? "empty synthetic fixture" : Path.GetFullPath(projectPath),
                     InputSha256 = inputHashes,
                     InputsUnchanged = true,
+                    UseShellStatusBar = shellStatus,
                     OperatingSystem = Environment.OSVersion.VersionString,
                     Runtime = Environment.Version.ToString(),
                     Capture = "Client area only, 96 DPI, off-screen real WPF windows; no native title bar.",
@@ -121,7 +123,7 @@ namespace FamilyQuant.Tests
 
         private static void CaptureTheme(string theme, FamilyClusterFile source, FamilyClusterFile projectFile,
             List<QuantRow> quant, QuantManifest manifest, string output, List<CaptureInfo> captures,
-            string curationPath, string projectPath)
+            string curationPath, string projectPath, bool shellStatus)
         {
             var main = new MainWindow();
             ShowOffScreen(main);
@@ -160,7 +162,7 @@ namespace FamilyQuant.Tests
                 Walk(deNovo).OfType<ScrollViewer>().First().ScrollToBottom();
                 Capture(Screens[5], main);
 
-                var curation = new ClusterGenerationControl(source);
+                var curation = new ClusterGenerationControl(source) { UseShellStatusBar = shellStatus };
                 Set(main, "cgc", curation);
                 Set(main, "loadedCuration", source);
                 Set(main, "lastFcfPath", curationPath);
