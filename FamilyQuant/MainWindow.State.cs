@@ -67,7 +67,7 @@ public partial class MainWindow
     {
         shellState.Remember(path);
         string? error = shellState.Save(shellSettingsPath);
-        if (error != null) TextBlockGuide.Text = error;
+        if (error != null) StatusModel.ShowMessage(error);
         RefreshRecentMenu();
     }
 }

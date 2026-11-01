@@ -58,6 +58,7 @@ namespace FamilyQuant.Tests
                 StandardMenuTests(shellWork);
                 OpenProjectNavigationTests(shellWork);
                 DeNovoScreenNavigationTests();
+                ShellStatusTests(shellWork);
                 AppVersionTests();
                 Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
                 return failed == 0 ? 0 : 1;
@@ -568,6 +569,7 @@ namespace FamilyQuant.Tests
 
             Section("Standard menu - shortcuts, save paths, curation routing and recent projects");
             StandardMenuTests(workDir);
+            ShellStatusTests(workDir);
 
             Console.WriteLine();
             Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");

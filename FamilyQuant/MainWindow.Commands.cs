@@ -134,7 +134,7 @@ public partial class MainWindow
 
     private void ReportShellMessage(string message, string title, MessageBoxImage image)
     {
-        TextBlockGuide.Text = message.Split('\n')[0];
+        StatusModel.ShowMessage(message);
         if (PresentationSource.FromVisual(this) != null)
             MessageBox.Show(this, message, title, MessageBoxButton.OK, image);
     }

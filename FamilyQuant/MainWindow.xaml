@@ -9,8 +9,8 @@
     <Grid x:Name="MainGrid">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
             <RowDefinition/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
         <Menu x:Name="MainMenu" Grid.Row="0" Background="{DynamicResource SurfaceBrush}">
@@ -90,15 +90,15 @@
 
         <!-- The first thing a new user sees. It says what to do, in order, and it stays until a Family
              Cluster File is opened - the sequence used to be discoverable only by trying every menu. -->
-        <Border x:Name="BorderGuide" Grid.Row="1" Background="{DynamicResource CanvasBrush}" BorderBrush="{DynamicResource EdgeBrush}" BorderThickness="0,0,0,1"
+        <Border x:Name="BorderGuide" Grid.Row="2" Background="{DynamicResource SubtleBrush}"
                 Padding="12,8">
-            <TextBlock x:Name="TextBlockGuide" TextWrapping="NoWrap" TextTrimming="CharacterEllipsis" Foreground="{DynamicResource MutedBrush}" FontSize="12"
-                       ToolTip="Shows where you are in the workflow and what to do next. It updates as you go."/>
+            <TextBlock x:Name="TextBlockGuide" Text="{Binding Text}" TextWrapping="NoWrap" TextTrimming="CharacterEllipsis" Foreground="{DynamicResource MutedBrush}" FontSize="12"
+                       ToolTip="Shows the current view, project and operation in one line. Help contains the workflow and full status details."/>
         </Border>
 
         <!-- The task-oriented home screen is swapped in here by the constructor and is the default view.
              The other four views (clustering, curation, de novo, analytics) replace it in turn, and Home
              on the menu brings it back. -->
-        <Grid x:Name="GridApp" Grid.Row="2" Background="{DynamicResource CanvasBrush}"/>
+        <Grid x:Name="GridApp" Grid.Row="1" Background="{DynamicResource CanvasBrush}"/>
     </Grid>
 </Window>

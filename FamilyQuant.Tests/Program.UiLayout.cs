@@ -848,9 +848,13 @@ namespace FamilyQuant.Tests
             // The controls reference the shared theme brushes declared in App.xaml, so a real Application
             // must exist first. InitializeComponent only loads resources; StartupUri fires on Run(),
             // which is never called here. Only one Application may ever exist in a process.
-            if (System.Windows.Application.Current != null) return;
+            if (System.Windows.Application.Current != null)
+            {
+                System.Windows.Application.Current.ShutdownMode = ShutdownMode.OnExplicitShutdown;
+                return;
+            }
 
-            var app = new App();
+            var app = new App { ShutdownMode = ShutdownMode.OnExplicitShutdown };
             app.GetType().GetMethod("InitializeComponent")?.Invoke(app, null);
         }
 

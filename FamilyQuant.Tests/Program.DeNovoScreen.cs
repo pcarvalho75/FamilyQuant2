@@ -806,7 +806,7 @@ namespace FamilyQuant.Tests
         {
             MainWindow main;
 
-            try { main = new MainWindow(); }
+            try { main = new MainWindow(); PumpDispatcher(); }
             catch (Exception ex)
             {
                 Check("the main window builds for the de novo navigation check", false,
@@ -835,8 +835,9 @@ namespace FamilyQuant.Tests
 
             Check("choosing it puts the de novo screen on display",
                 app.Children.Count == 1 && app.Children[0] is DeNovoControl);
-            Check("the guide says what the screen is for and how to get back to the families",
-                guide.Text.Contains("De Novo") && guide.Text.Contains("Load Family Cluster File"),
+            Check("the status names de novo while Help keeps its purpose and return path",
+                guide.Text.Contains("De novo") && main.StatusModel.ContextHelp.Contains("Load Family")
+                && main.StatusModel.ContextHelp.Contains("separate workflow", StringComparison.OrdinalIgnoreCase),
                 guide.Text);
             Check("and the two commands that write a Family Cluster File are disabled, "
                 + "since there is no longer one on screen",

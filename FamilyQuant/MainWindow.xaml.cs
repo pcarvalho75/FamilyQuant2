@@ -73,6 +73,7 @@ namespace FamilyQuant
         {
             InitializeComponent();
             InitializeShellCommands();
+            TextBlockGuide.DataContext = StatusModel;
 
             this.Title += " " + AppVersion();
 
@@ -187,25 +188,23 @@ namespace FamilyQuant
         /// File, then quantitation project, then export - and nothing in the window used to say where
         /// you were in it or what the next step was.
         /// </summary>
-        private void UpdateGuide()
+        private string CurrentContextHelp()
         {
-            RefreshShellMenuState();
             // The home screen is the hub, not a step of the sequence. It names the project so the through
             // line is stated even here, where none is open.
             if (home != null)
             {
-                TextBlockGuide.Text =
+                return
                     "Home · The whole flow in four steps, plus the optional de novo side-branch. " +
                     ProjectStatusText() + " Pick a step below, or open a project in step 2 to light up " +
                     "Compute full XIC and Analytics.";
-                return;
             }
 
             // The analytics screen is NOT a step of that sequence either: it summarises what the earlier
             // steps produced, reads only, and says how to get back to the families.
             if (analytics != null)
             {
-                TextBlockGuide.Text =
+                return
                     "Analytics · A read-only view of this project's own full-envelope quantitation: the XIC " +
                     "by mass, the isotopes credited per peptide, the percent of ion current by mass, what " +
                     "each family contributes, and the recovery of the total ion current. Every graph can be " +
@@ -213,14 +212,13 @@ namespace FamilyQuant
                     "there is nothing to analyse, run File · Compute / update full XIC first. The open " +
                     "project stays open: File · Save project saves it from here, and Home · Curate families " +
                     "returns to it. File · Load project or Family Cluster File opens a different one.";
-                return;
             }
 
             // The de novo screen is NOT a step of that sequence, so it says what it is instead of a
             // step number, and it says how to get back to the families.
             if (dnc != null)
             {
-                TextBlockGuide.Text =
+                return
                     "De Novo evidence · A separate workflow: select PEAKS or DeepNovo, apply the three " +
                     "source-aware filters, and reconcile the accepted calls with PatternLab by file, " +
                     "scan, charge and precursor m/z. It needs no Family Cluster File and changes no family. The " +
@@ -228,28 +226,25 @@ namespace FamilyQuant
                     "beside it explains every number this screen shows. To return to the family " +
                     "workflow, use Home · Curate families (the open project stays open) or File · Load Family " +
                     "Cluster File for another one.";
-                return;
             }
 
             if (cgc != null)
             {
-                TextBlockGuide.Text =
+                return
                     "Step 2 of 4 · Families loaded. " + ProjectStatusText() + " Curate them here, then " +
                     "File · Compute / update full XIC gives the project its own quantitation, and Analytics " +
                     "reads it. Help · How to read these numbers explains every column.";
-                return;
             }
 
             if (usearch != null)
             {
-                TextBlockGuide.Text =
+                return
                     "Step 1 of 4 · Pick a FASTA or target-decoy (.T-R) database and press \"Input a FASTA " +
                     "file\". That writes a Family Cluster File (.fcf) next to the database. Then open it " +
                     "with File · Load project or Family Cluster File.";
-                return;
             }
 
-            TextBlockGuide.Text =
+            return
                 "Start here · If you have never run this database before, use \"Run USearch\" to group its " +
                 "proteins into families. If you already have a project (.fqproj) or a Family Cluster File " +
                 "(.fcf), open it with File · Load project or Family Cluster File.";
@@ -572,6 +567,7 @@ namespace FamilyQuant
                 ProjectStore.WriteFqproj(savePath, curation, quant, manifest);
                 loadedManifest = manifest;
                 lastFcfPath = Path.GetFullPath(savePath);
+                UpdateGuide();
                 RememberProject(savePath);
 
                 ReportShellMessage(
@@ -885,7 +881,7 @@ namespace FamilyQuant
             return
                 "WHAT DO I DO FIRST?\n" +
                 "===================\n\n" +
-                "You are at: " + TextBlockGuide.Text + "\n\n" +
+                "You are at: " + StatusModel.Text + "\n\n" + StatusModel.ContextHelp + "\n\n" +
                 "STEP 1 · Group the proteins into families\n" +
                 "   Menu: Run USearch\n" +
                 "   Needs: a protein database, either a plain .fasta or a target-decoy .T-R file.\n" +
@@ -900,8 +896,8 @@ namespace FamilyQuant
                 "   Menu: File · Load Family Cluster File\n" +
                 "   Needs: the .fcf from step 1.\n" +
                 "   You can now merge families further by their description words, or build one family\n" +
-                "   from a keyword list. Both are shown in Layer 1 and neither can be undone, so save\n" +
-                "   under a new name if you want to keep the previous grouping.\n\n" +
+                "   from a keyword list. Curation changes can be undone in this session. Use Save as\n" +
+                "   to keep the previous grouping in a separate project.\n\n" +
                 "STEP 3 · Attach the quantitation\n" +
                 "   Layer 2: Load PLP File\n" +
                 "   Needs: a PatternLab project (.plp) exported at PEPTIDE level. A protein-level\n" +
