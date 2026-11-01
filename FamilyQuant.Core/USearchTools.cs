@@ -459,19 +459,20 @@ namespace FamilyQuant
 
         /// <summary>
         /// Every hit of every query against a database at or above <paramref name="minIdentity"/> (a
-        /// fraction), from <c>usearch -usearch_global</c> with no accept or reject limit, so no hit is lost
-        /// to the order USEARCH tries targets in. It still aligns only targets sharing at least one word
-        /// with the query, so a pair with no identical five-residue stretch is never reported. Labels come
-        /// back as written in the two FASTA files, up to the first space. A failure throws; nothing is
-        /// memoised here.
+        /// fraction), from <c>usearch -search_global</c>, which aligns every query with every target.
+        /// The indexed <c>-usearch_global</c> is not used: even with no accept or reject limit its word
+        /// index left out pairs depending on the order of the database (one venom query found 76 of the
+        /// 175 targets above 50% in file order and 95 in reverse order). Hits are handed to
+        /// <paramref name="onHit"/> as they are read, labels up to the first space. A failure throws.
         /// </summary>
-        public static List<PairwiseEdge> SearchGlobal(string queryFasta, string databaseFasta, double minIdentity)
+        public static void SearchGlobal(string queryFasta, string databaseFasta, double minIdentity,
+                                        Action<PairwiseEdge> onHit)
         {
             string usearchExe = GetUSearchPath();
             string tempDir = ApplicationPaths.ScratchDirectory;
             Directory.CreateDirectory(tempDir);
             string tsvFile = Path.Combine(tempDir, "global_" + Guid.NewGuid().ToString("N") + ".tsv");
-            string arguments = $"-usearch_global \"{queryFasta}\" -db \"{databaseFasta}\" " +
+            string arguments = $"-search_global \"{queryFasta}\" -db \"{databaseFasta}\" " +
                                $"-id {minIdentity.ToString("0.######", CultureInfo.InvariantCulture)} " +
                                $"-maxaccepts 0 -maxrejects 0 -userout \"{tsvFile}\" " +
                                "-userfields query+target+id+alnlen+ql+tl";
@@ -480,7 +481,21 @@ namespace FamilyQuant
                 RunUSearch(usearchExe, arguments, tempDir);
                 if (!File.Exists(tsvFile))
                     throw new InvalidOperationException("USEARCH finished without writing its hit table.");
-                return ParsePairwiseEdges(tsvFile);
+                foreach (string line in File.ReadLines(tsvFile))
+                {
+                    if (string.IsNullOrWhiteSpace(line)) continue;
+                    string[] cols = line.Split('	');
+                    if (cols.Length < 6
+                        || !double.TryParse(cols[2], NumberStyles.Float, CultureInfo.InvariantCulture, out double id)
+                        || !int.TryParse(cols[3], NumberStyles.Integer, CultureInfo.InvariantCulture, out int alnlen)
+                        || !int.TryParse(cols[4], NumberStyles.Integer, CultureInfo.InvariantCulture, out int ql)
+                        || !int.TryParse(cols[5], NumberStyles.Integer, CultureInfo.InvariantCulture, out int tl))
+                        throw new InvalidDataException("USEARCH wrote a hit line that cannot be read: \"" + line + "\".");
+                    // Every reported hit is at or above the threshold, so one at or under 1.0 can only be a
+                    // build reporting the fraction; ParsePairwiseEdges guards the same way.
+                    if (id <= 1.0 && minIdentity > 0.01) id *= 100.0;
+                    onHit(new PairwiseEdge(ExtractIdentifier(cols[0]), ExtractIdentifier(cols[1]), id, alnlen, ql, tl));
+                }
             }
             finally
             {
