@@ -43,6 +43,14 @@ namespace FamilyQuant.Tests
             // Screen capture is an isolated lane: it never runs scientific export commands.
             if (ScreenHarness.IsRequested(args)) return ScreenHarness.Run(args);
 
+            if (args.Length > 0 && args[0] == FeatureLedger.GenerateArgument)
+            {
+                if (args.Length != 3) throw new ArgumentException("Supply frozen source root and repository root.");
+                return FeatureLedger.Generate(args[1], args[2]);
+            }
+            if (args.Length > 0 && args[0] == "--feature-ledger-check") return FeatureLedgerTests();
+            if (args.Length > 0 && args[0] == "--feature-ledger-release-check") return FeatureLedgerTests(release: true);
+
             // PowerShell 5.1 silently DROPS empty "" arguments to native executables, which shifted
             // the data directories into the wrong positions and turned every real-data section into a
             // silent skip. A dot is the positional placeholder that survives every shell; it maps to
@@ -532,6 +540,9 @@ namespace FamilyQuant.Tests
 
             Section("Appearance directions - theme changes preserve curation and input surfaces");
             AppearanceDirectionTests();
+
+            Section("Feature ledger - frozen source inventory and explicit preservation checks");
+            FeatureLedgerTests();
 
             Console.WriteLine();
             Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
