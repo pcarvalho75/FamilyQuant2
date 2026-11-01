@@ -15,7 +15,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\FamilyQuant\FamilyQuant.csproj" />
+    <ProjectReference Include="..\FamilyQuant\FamilyQuant.App.csproj" />
   </ItemGroup>
 
   <!-- HintPath references do not flow through a ProjectReference, so PatternTools is named again here. -->

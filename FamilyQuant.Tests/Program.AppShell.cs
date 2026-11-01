@@ -29,6 +29,32 @@ namespace FamilyQuant.Tests
         /// </summary>
         private static void AppVersionTests()
         {
+            Check("2.0 has its own executable assembly identity",
+                typeof(AppVersionInfo).Assembly.GetName().Name == "FamilyQuant2");
+            Check("the resource namespace stays compatible after the project rename",
+                typeof(AppVersionInfo).Assembly.GetManifestResourceNames()
+                    .Contains("FamilyQuant.MyResources.resources"));
+            Check("2.0 has a local data folder separate from 1.x",
+                ApplicationPaths.LocalDataDirectory == Path.Combine(
+                    Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "FamilyQuant2"));
+            Check("2.0 isolates USEARCH scratch files from 1.x",
+                ApplicationPaths.ScratchDirectory == Path.Combine(Path.GetTempPath(), "FamilyQuant2"));
+
+            string? usearchOverride = Environment.GetEnvironmentVariable("FAMILYQUANT_USEARCH");
+            try
+            {
+                Environment.SetEnvironmentVariable("FAMILYQUANT_USEARCH", null);
+                string bundled = (string)typeof(USearchTools)
+                    .GetMethod("GetUSearchPath", BindingFlags.NonPublic | BindingFlags.Static)!
+                    .Invoke(null, null)!;
+                Check("the bundled USEARCH is extracted under the 2.0 data folder",
+                    Path.GetDirectoryName(bundled) == ApplicationPaths.LocalDataDirectory && File.Exists(bundled), bundled);
+            }
+            finally
+            {
+                Environment.SetEnvironmentVariable("FAMILYQUANT_USEARCH", usearchOverride);
+            }
+
             var assembly = new Version(1, 5, 0, 0);
             Check("the ClickOnce deployment version wins, all four parts",
                 AppVersionInfo.Resolve("1.5.0.2", assembly) == "1.5.0.2");
@@ -45,6 +71,8 @@ namespace FamilyQuant.Tests
             {
                 Environment.SetEnvironmentVariable(AppVersionInfo.ClickOnceCurrentVersionVariable, "9.8.7.6");
                 var main = new MainWindow();
+                Check("the window identifies FamilyQuant 2.0 beside the older application",
+                    main.Title.StartsWith("FamilyQuant 2.0 ", StringComparison.Ordinal), main.Title);
                 Check("an installed copy shows its deployment version in the title",
                     main.Title.EndsWith(" 9.8.7.6", StringComparison.Ordinal), main.Title);
                 main.Close();

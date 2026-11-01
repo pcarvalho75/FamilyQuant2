@@ -8,20 +8,20 @@ FamilyQuant is a Windows-only WPF desktop app (.NET 10) for **protein-family clu
 
 ## Build & run
 
-Two projects in one solution. Build and run from the **repo root**, where `FamilyQuant.sln` lives:
+Two projects in one solution. Build and run from the **repo root**, where `FamilyQuant2.sln` lives:
 
-- `dotnet build FamilyQuant.sln -c Release`
-- `dotnet run --project FamilyQuant/FamilyQuant.csproj`
-- Or open `FamilyQuant.sln` in Visual Studio 2022.
+- `dotnet build FamilyQuant2.sln -c Release`
+- `dotnet run --project FamilyQuant/FamilyQuant.App.csproj`
+- Or open `FamilyQuant2.sln` in Visual Studio 2022.
 
 **Publish (ClickOnce).** The product is delivered by ClickOnce auto-update from
-`http://patternlabforproteomics.org/familyquant/`. The rehearsal, which writes only into the local
+`http://patternlabforproteomics.org/familyquant2/`. The rehearsal, which writes only into the local
 `PublishDir` / `PublishUrl` and uploads nothing:
 
-- **`dotnet publish` cannot do it.** With `BootstrapperEnabled=True` the profile reaches the `GenerateBootstrapper` task, which fails on the .NET Core MSBuild with `error MSB4803`. It fails **destructively**: by then it has already rebuilt `app.publish`, so the previous `FamilyQuant.application` and `setup.exe` are gone and the folder is left without a deployable manifest (verified 2026-08-16). Re-run the .NET Framework MSBuild below to restore it. Use the **.NET Framework** MSBuild that ships with Visual Studio (locate it with `vswhere -latest -find "MSBuild\**\Bin\MSBuild.exe"`):
-  - `"<VS>\MSBuild\Current\Bin\MSBuild.exe" FamilyQuant/FamilyQuant.csproj -t:Publish -p:Configuration=Release -p:PublishProfile=Properties/PublishProfiles/ClickOnceProfile.pubxml`
-- Output goes to **`PublishDir`**, i.e. `FamilyQuant/bin/Release/net10.0-windows7.0/app.publish/`: `FamilyQuant.application`, `Application Files/FamilyQuant_<version>/` (every payload file with a `.deploy` suffix), `setup.exe`, and the loose copy of the build. The command line does **not** produce the `PublishUrl` copy or the `index.html` web page; Visual Studio's own Publish does that, and it is the owner who deploys.
-- **The version lives in TWO files and they must be bumped TOGETHER**: `Version` / `AssemblyVersion` / `FileVersion` in `FamilyQuant/FamilyQuant.csproj`, and `ApplicationVersion` in `FamilyQuant/Properties/PublishProfiles/ClickOnceProfile.pubxml`. The manifest takes its version from the **pubxml**, so a publish with the pubxml left behind ships new code under the old version and updates nobody. A review already caught that once. Visual Studio's Publish increments only the pubxml, so the title bar, the manifest's `AppVersion` and the Compute window read the **deployment** version through `AppVersionInfo` (the .NET ClickOnce launcher's `ClickOnce_CurrentVersion` environment variable), falling back to the assembly version outside ClickOnce; the title read 1.5.0.0 on an installed 1.5.0.2 before that.
+- **`dotnet publish` cannot do it.** With `BootstrapperEnabled=True` the profile reaches the `GenerateBootstrapper` task, which fails on the .NET Core MSBuild with `error MSB4803`. It fails **destructively**: by then it has already rebuilt `app.publish`, so the previous `FamilyQuant2.application` and `setup.exe` are gone and the folder is left without a deployable manifest (verified 2026-08-16). Re-run the .NET Framework MSBuild below to restore it. Use the **.NET Framework** MSBuild that ships with Visual Studio (locate it with `vswhere -latest -find "MSBuild\**\Bin\MSBuild.exe"`):
+  - `"<VS>\MSBuild\Current\Bin\MSBuild.exe" FamilyQuant/FamilyQuant.App.csproj -t:Publish -p:Configuration=Release -p:PublishProfile=Properties/PublishProfiles/ClickOnceProfile.pubxml`
+- Output goes to **`PublishDir`**, i.e. `FamilyQuant/bin/Release/net10.0-windows7.0/app.publish/`: `FamilyQuant2.application`, `Application Files/FamilyQuant2_<version>/` (every payload file with a `.deploy` suffix), `setup.exe`, and the loose copy of the build. The command line does **not** produce the `PublishUrl` copy or the `index.html` web page; Visual Studio's own Publish does that, and it is the owner who deploys.
+- **The version lives in TWO files and they must be bumped TOGETHER**: `Version` / `AssemblyVersion` / `FileVersion` in `FamilyQuant/FamilyQuant.App.csproj`, and `ApplicationVersion` in `FamilyQuant/Properties/PublishProfiles/ClickOnceProfile.pubxml`. The manifest takes its version from the **pubxml**, so a publish with the pubxml left behind ships new code under the old version and updates nobody. A review already caught that once. Visual Studio's Publish increments only the pubxml, so the title bar, the manifest's `AppVersion` and the Compute window read the **deployment** version through `AppVersionInfo` (the .NET ClickOnce launcher's `ClickOnce_CurrentVersion` environment variable), falling back to the assembly version outside ClickOnce; the title read 1.5.0.0 on an installed 1.5.0.2 before that.
 - The bootstrapper package is `Microsoft.NetCore.DesktopRuntime.10.0.x64`. The `ProductName` in the pubxml is only a label: the generated `setup.exe` carries whichever runtime package the machine's SDK has (rehearsed 2026-08-16 on 10.0.11 while the pubxml still said 10.0.10). The payload must carry the four `ThermoFisher.CommonCore.*` assemblies, `SeproPckg2.dll`, `PatternTools.dll`, `MAligner.dll`, `CSMSL.dll` and `alglibnet2.dll`. USEARCH is not a payload file: it is embedded in `MyResources.resx` and extracted on first use. `FamilyQuant.Tests` is `IsPublishable=false` and must never appear in the payload.
 
 Notes:
@@ -181,8 +181,8 @@ Break any of these and the numbers stay plausible, which is the whole problem.
 
 ## Gotchas
 
-- The USEARCH executable is **embedded** as a resource in `MyResources.resx` and extracted on first use to `%LOCALAPPDATA%\FamilyQuant\usearch11.0.667_win32.exe`, deliberately not `%TEMP%`, which can be cleaned mid-session. It is re-extracted whenever it is missing or its size does not match the embedded copy (antivirus quarantine, truncated write). `FAMILYQUANT_USEARCH` overrides the whole mechanism. See `USearchTools.GetUSearchPath`.
-- USEARCH scratch files (`.fasta`, `.aln`, `.uc`) go to `%TEMP%\FamilyQuant\` with GUID-stamped names so a leftover file from a crashed run cannot be read back as a stale result. The process working directory is **not** mutated.
+- The USEARCH executable is **embedded** as a resource in `MyResources.resx` and extracted on first use to `%LOCALAPPDATA%\FamilyQuant2\usearch11.0.667_win32.exe`, deliberately not `%TEMP%`, which can be cleaned mid-session. It is re-extracted whenever it is missing or its size does not match the embedded copy (antivirus quarantine, truncated write). `FAMILYQUANT_USEARCH` overrides the whole mechanism. See `USearchTools.GetUSearchPath`.
+- USEARCH scratch files (`.fasta`, `.aln`, `.uc`) go to `%TEMP%\FamilyQuant2\` with GUID-stamped names so a leftover file from a crashed run cannot be read back as a stale result. The process working directory is **not** mutated.
 - PLP files must be exported at **peptide level** (not protein) for quant to resolve.
 - `<InvariantGlobalization>true</InvariantGlobalization>` makes LiteDB throw `CultureNotFoundException` when it **opens** a database: LiteDB v5 stores an LCID in the file header and rebuilds a `CultureInfo` from it, and under invariant globalization that lookup throws. This project references LiteDB, so leave the setting at its default (`false`). The symptom is a database that will not open at all, not one that sorts oddly.
 - **Tooltips are one or two plain sentences** (users, 2026-10-25: "too long and complicated"): what the control does, the usual value, and "Disabled until ..." when it can be disabled; the detail belongs in `HelpContent`. `App.xaml`'s implicit `ToolTip` style wraps string tooltips at 520 px. The suite still requires a tooltip of at least six words on every control, and pins a few phrases ("Disabled until", "Layer 2", "two rows", "1920").
