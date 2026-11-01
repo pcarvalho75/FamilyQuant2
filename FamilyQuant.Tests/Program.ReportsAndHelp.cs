@@ -55,13 +55,13 @@ namespace FamilyQuant.Tests
             // --- the column headings. "XIC Original" named neither the quantity nor the unit.
             foreach (NormalizationMode mode in Enum.GetValues<NormalizationMode>())
             {
-                string head = mode.ColumnHeader(GroupingType.USearch);
+                string head = mode.ColumnHeader();
                 Check($"the {mode} column heading names its denominator",
                     head.Contains(mode.ShortName()), head);
                 Check($"the {mode} column heading says which grouping it belongs to",
-                    head.Contains("USearch"), head);
-                Check($"the {mode} User column is distinguishable from the USearch one",
-                    mode.ColumnHeader(GroupingType.User) != head);
+                    head.Contains("User families"), head);
+                Check($"the {mode} column names only the curated grouping",
+                    !head.Contains("USearch", StringComparison.Ordinal));
 
                 // Every name the interface uses must be findable in the interface itself.
                 Check($"the {mode} short name is part of the name shown in the list",
@@ -71,11 +71,11 @@ namespace FamilyQuant.Tests
             // The CSV says "fraction 0-1" because that is what it writes - the screen shows percentages.
             NormalizationMode? tic = NormalizationMode.TotalChromatogram;
             Check("the CSV heading warns that its values are fractions, not percentages",
-                tic.CsvHeader(GroupingType.USearch).Contains("0-1"), tic.CsvHeader(GroupingType.USearch));
+                tic.CsvHeader().Contains("0-1"), tic.CsvHeader());
 
             NormalizationMode? nothing = null;
             Check("with no denominator established the CSV heading says unknown rather than guessing",
-                nothing.CsvHeader(GroupingType.User).Contains("unknown"), nothing.CsvHeader(GroupingType.User));
+                nothing.CsvHeader().Contains("unknown"), nothing.CsvHeader());
 
             string csv = CsvReport.Build(
                 new List<FastaItemExtended> { new FastaItemExtended { SequenceIdentifier = "A", XIC = 0.5 } },
@@ -103,7 +103,8 @@ namespace FamilyQuant.Tests
                     Description = "protein " + (i % 3),
                     USearchID = i % 5,
                     UserID = i % 5,
-                    XIC = (i % 5) * 0.1          // 12 rows share every value
+                    XIC = (i % 5) * 0.1,
+                    XICUser = (i % 5) * 0.1     // 12 rows share every value
                 });
             }
 
@@ -130,8 +131,8 @@ namespace FamilyQuant.Tests
                 ReportView.Sort(rows, "NoSuchColumn", false).Count == rows.Count);
 
             Check("the quantified-family count ignores families that scored zero",
-                ReportView.QuantifiedFamilies(rows, GroupingType.USearch) == 4,
-                ReportView.QuantifiedFamilies(rows, GroupingType.USearch).ToString());
+                ReportView.QuantifiedFamilies(rows) == 4,
+                ReportView.QuantifiedFamilies(rows).ToString());
 
             // --- the ascending/descending toggle (Ana's stuck-ascending bug). NextSort is the pure
             // decision the header handler makes; it must read the PERSISTED state, so re-clicking the same

@@ -30,6 +30,33 @@ namespace FamilyQuant.Tests
         /// </summary>
         private static void AppVersionTests()
         {
+            DeploymentIdentityTests();
+            Check("2.0 has its own executable assembly identity",
+                typeof(AppVersionInfo).Assembly.GetName().Name == "FamilyQuant2");
+            Check("the resource namespace stays compatible after the project rename",
+                typeof(AppVersionInfo).Assembly.GetManifestResourceNames()
+                    .Contains("FamilyQuant.MyResources.resources"));
+            Check("2.0 has a local data folder separate from 1.x",
+                ApplicationPaths.LocalDataDirectory == Path.Combine(
+                    Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "FamilyQuant2"));
+            Check("2.0 isolates USEARCH scratch files from 1.x",
+                ApplicationPaths.ScratchDirectory == Path.Combine(Path.GetTempPath(), "FamilyQuant2"));
+
+            string? usearchOverride = Environment.GetEnvironmentVariable("FAMILYQUANT_USEARCH");
+            try
+            {
+                Environment.SetEnvironmentVariable("FAMILYQUANT_USEARCH", null);
+                string bundled = (string)typeof(USearchTools)
+                    .GetMethod("GetUSearchPath", BindingFlags.NonPublic | BindingFlags.Static)!
+                    .Invoke(null, null)!;
+                Check("the bundled USEARCH is extracted under the 2.0 data folder",
+                    Path.GetDirectoryName(bundled) == ApplicationPaths.LocalDataDirectory && File.Exists(bundled), bundled);
+            }
+            finally
+            {
+                Environment.SetEnvironmentVariable("FAMILYQUANT_USEARCH", usearchOverride);
+            }
+
             var assembly = new Version(1, 5, 0, 0);
             Check("the ClickOnce deployment version wins, all four parts",
                 AppVersionInfo.Resolve("1.5.0.2", assembly) == "1.5.0.2");
@@ -46,6 +73,8 @@ namespace FamilyQuant.Tests
             {
                 Environment.SetEnvironmentVariable(AppVersionInfo.ClickOnceCurrentVersionVariable, "9.8.7.6");
                 var main = new MainWindow();
+                Check("the window identifies FamilyQuant 2.0 beside the older application",
+                    main.Title.StartsWith("FamilyQuant 2.0 ", StringComparison.Ordinal), main.Title);
                 Check("an installed copy shows its deployment version in the title",
                     main.Title.EndsWith(" 9.8.7.6", StringComparison.Ordinal), main.Title);
                 main.Close();
@@ -61,6 +90,40 @@ namespace FamilyQuant.Tests
             {
                 Environment.SetEnvironmentVariable(AppVersionInfo.ClickOnceCurrentVersionVariable, saved);
             }
+        }
+
+        private static void DeploymentIdentityTests()
+        {
+            Check("the 2.0 assembly starts at version 2.0.0.0",
+                typeof(AppVersionInfo).Assembly.GetName().Version == new Version(2, 0, 0, 0));
+
+            DirectoryInfo? root = new DirectoryInfo(AppContext.BaseDirectory);
+            while (root != null && !File.Exists(Path.Combine(root.FullName, "FamilyQuant2.sln")))
+                root = root.Parent;
+            Check("the deployment contract can find the checkout", root != null);
+            if (root == null) return;
+
+            var project = System.Xml.Linq.XDocument.Load(
+                Path.Combine(root.FullName, "FamilyQuant", "FamilyQuant.App.csproj"));
+            var profile = System.Xml.Linq.XDocument.Load(
+                Path.Combine(root.FullName, "FamilyQuant", "Properties", "PublishProfiles", "ClickOnceProfile.pubxml"));
+            string? Property(System.Xml.Linq.XDocument document, string name) =>
+                document.Root!.Elements("PropertyGroup").SelectMany(g => g.Elements(name))
+                    .Select(e => e.Value).SingleOrDefault();
+
+            Check("assembly and file versions match the fixed 2.0 deployment version",
+                new[] { "Version", "AssemblyVersion", "FileVersion" }
+                    .All(name => Property(project, name) == "2.0.0.0") &&
+                Property(profile, "ApplicationVersion") == "2.0.0.0" &&
+                Property(profile, "ApplicationRevision") == "0");
+            const string install = "http://patternlabforproteomics.org/familyquant2/";
+            Check("2.0 installs and updates from its separate address",
+                Property(profile, "InstallUrl") == install && Property(profile, "UpdateUrl") == install);
+            Check("the installed product has its own Start menu identity",
+                Property(profile, "ProductName") == "FamilyQuant 2.0");
+            Check("automatic foreground updates stay enabled",
+                string.Equals(Property(profile, "UpdateEnabled"), "true", StringComparison.OrdinalIgnoreCase) &&
+                Property(profile, "UpdateMode") == "Foreground");
         }
 
         /// <summary>

@@ -424,7 +424,7 @@ namespace FamilyQuant
                 SharedPeptidePolicy shared = SelectedSharedPolicy;
 
                 // One pass, over the curated grouping, which is the only one the table reports.
-                fcf.AttributeXICToGroups(CurrentPLP, GroupingType.User, mode, shared);
+                fcf.AttributeXICToGroups(CurrentPLP, mode, shared);
 
                 // Only now do the labels change: everything that names a denominator reads these two,
                 // never the ComboBoxes, so the headings always describe the numbers on screen.
@@ -1126,7 +1126,7 @@ namespace FamilyQuant
             TextBlockStatusLine.Text = ReportView.StatusLine(
                 DisplayedMode,
                 DisplayedSharedPolicy,
-                ReportView.QuantifiedFamilies(fcf.MyExtendedFastaItems, GroupingType.User),
+                ReportView.QuantifiedFamilies(fcf.MyExtendedFastaItems),
                 FamilyFilter.CountFamilies(fcf.MyExtendedFastaItems));
         }
 
@@ -1141,7 +1141,7 @@ namespace FamilyQuant
 
             ColumnXicUser.Header = DisplayedMode == null
                 ? "Share of signal (none calculated yet)"
-                : DisplayedMode.Value.ColumnHeader(GroupingType.User);
+                : DisplayedMode.Value.ColumnHeader();
 
             if (ColumnFullXic != null)
                 ColumnFullXic.Header = !HasFullXic
@@ -1489,7 +1489,8 @@ namespace FamilyQuant
                 "calculation.");
 
             ColumnLocus.HeaderStyle = HeaderTip(
-                "The protein identifier as in the database. \"Reverse_\" marks a decoy and \"contaminant\" a " +
+                "The protein identifier as in the database. \"" + SequenceLabels.DecoyPrefix +
+                "\" marks a decoy and \"" + SequenceLabels.ContaminantMarker + "\" a " +
                 "laboratory contaminant; both can be hidden in the Display and Export panel. Right-click a " +
                 "row to copy its UniProt code or open its UniProt page; Ctrl+C copies the column you clicked.");
 
