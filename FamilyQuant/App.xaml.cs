@@ -1,4 +1,5 @@
 using System.Globalization;
+using System.Reflection;
 using System.Windows;
 using System.Windows.Markup;
 
@@ -14,6 +15,17 @@ namespace FamilyQuant
         public App()
         {
             ApplyDisplayCulture();
+        }
+
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            base.OnStartup(e);
+            if (Assembly.GetEntryAssembly() == typeof(App).Assembly)
+            {
+                Themes.ThemeManager.Initialize();
+                MainWindow = new MainWindow();
+                MainWindow.Show();
+            }
         }
 
         /// <summary>

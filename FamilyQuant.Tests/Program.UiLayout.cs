@@ -386,12 +386,12 @@ namespace FamilyQuant.Tests
                 topN.Items.Count.ToString(CultureInfo.CurrentCulture));
 
             // A count as well as a sweep: a command added without a tooltip fails above, but a command
-            // that never reaches the menu at all would pass everything silently. Fourteen leaves now: the
+            // that never reaches the menu at all would pass everything silently. Fifteen leaves now: the
             // spectrum comparison table joined Home, Analytics, the Q2 Save project and Compute / update
-            // full XIC, the original commands and the two appearance choices.
-            Check("the menu offers all fourteen commands, including the spectrum table and both appearances",
+            // full XIC, the original commands and the three appearance choices.
+            Check("the menu offers all fifteen commands, including the spectrum table and three appearances",
                 WalkTree(main).OfType<MenuItem>()
-                    .Count(m => m.TemplatedParent == null && m.Items.Count == 0) == 14,
+                    .Count(m => m.TemplatedParent == null && m.Items.Count == 0) == 15,
                 WalkTree(main).OfType<MenuItem>()
                     .Count(m => m.TemplatedParent == null && m.Items.Count == 0).ToString());
 

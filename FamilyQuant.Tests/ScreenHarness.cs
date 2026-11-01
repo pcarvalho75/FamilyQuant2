@@ -30,6 +30,8 @@ namespace FamilyQuant.Tests
             "10-lock-manager", "11-spectrum-table", "12-identity-scan", "13-text-report", "14-help"
         };
         private static readonly (int Width, int Height)[] Sizes = { (1366, 820), (1024, 768) };
+        private static string[] ThemeNames(string[] args) => args.Contains("--screen-system", StringComparer.OrdinalIgnoreCase)
+            ? new[] { "dark", "light", "system" } : new[] { "dark", "light" };
 
         internal static bool IsRequested(string[] args) =>
             args.Any(a => string.Equals(a, Argument, StringComparison.OrdinalIgnoreCase));
@@ -75,11 +77,13 @@ namespace FamilyQuant.Tests
                 app = new App { ShutdownMode = ShutdownMode.OnExplicitShutdown };
                 app.InitializeComponent();
                 var captures = new List<CaptureInfo>();
-                foreach (string theme in new[] { "light", "dark" })
+                string[] themeNames = ThemeNames(args);
+                foreach (string theme in themeNames)
                 {
                     // Exercise the actual Fluent base without removing or replacing product styles.
                     // V2 will remove the legacy templates from the application itself.
-                    Themes.ThemeManager.Apply(theme == "dark" ? Themes.AppTheme.Dark : Themes.AppTheme.Light);
+                    Themes.ThemeManager.Apply(theme == "system" ? Themes.AppTheme.System
+                        : theme == "dark" ? Themes.AppTheme.Dark : Themes.AppTheme.Light);
                     CaptureTheme(theme, source, project.fcf, project.quant, project.manifest, output, captures,
                         fcfPath ?? "synthetic fixture.fcf", projectPath ?? "synthetic fixture.fqproj");
                 }
@@ -98,7 +102,7 @@ namespace FamilyQuant.Tests
                     Captures = captures
                 }, new JsonSerializerOptions { WriteIndented = true }));
                 Console.WriteLine("Screens: " + captures.Count + " PNGs; input hashes unchanged; " + output);
-                return captures.Count == Screens.Length * Sizes.Length * 2 ? 0 : 1;
+                return captures.Count == Screens.Length * Sizes.Length * themeNames.Length ? 0 : 1;
             }
             catch (Exception ex)
             {
@@ -133,8 +137,11 @@ namespace FamilyQuant.Tests
                         window.Width = size.Width;
                         window.Height = size.Height;
                         Pump();
+                        if (!string.Equals(Themes.ThemeManager.Current.ToString(), theme, StringComparison.OrdinalIgnoreCase))
+                            throw new InvalidOperationException("The selected theme changed during capture: " + theme);
                         Save(window, path, size.Width, size.Height);
-                        captures.Add(new CaptureInfo(relative.Replace('\\', '/'), theme, size.Width, size.Height, name));
+                        captures.Add(new CaptureInfo(relative.Replace('\\', '/'), theme, size.Width, size.Height, name,
+                            Themes.ThemeManager.Effective.ToString()));
                         Console.WriteLine("  " + relative);
                     }
                 }
@@ -277,7 +284,8 @@ namespace FamilyQuant.Tests
         private static void Set(object instance, string name, object? value) => instance.GetType().GetField(name, Any)!.SetValue(instance, value);
         private static void Call(object instance, string name, params object[] args) => instance.GetType().GetMethod(name, Any)!.Invoke(instance, args);
         private static string FileHash(string path) { using var file = File.OpenRead(path); return Convert.ToHexString(SHA256.HashData(file)); }
-        private sealed record CaptureInfo(string File, string Theme, int PixelWidth, int PixelHeight, string Screen);
+        private sealed record CaptureInfo(string File, string Theme, int PixelWidth, int PixelHeight, string Screen,
+            string EffectiveTheme);
 
         private static FamilyClusterFile Fixture() => new FamilyClusterFile
         {
@@ -297,7 +305,10 @@ namespace FamilyQuant.Tests
             check("screen lane is opt-in and accepts a flag after positional arguments",
                 !IsRequested(Array.Empty<string>()) && IsRequested(new[] { ".", ".", Argument, "out" }), null);
             check("screen matrix contains 14 unique views in both themes and viewport sizes",
-                Screens.Length == 14 && Screens.Distinct().Count() == 14 && Sizes.Length == 2, null);
+                Screens.Length == 14 && Screens.Distinct().Count() == 14 && Sizes.Length == 2
+                && ThemeNames(Array.Empty<string>()).Length == 2, null);
+            check("System capture is opt-in and adds the Windows appearance without dropping either direction",
+                ThemeNames(new[] { "--screen-system" }).SequenceEqual(new[] { "dark", "light", "system" }), null);
             bool refused = false;
             try { Option(new[] { Argument, "--screen-fcf" }, Argument); }
             catch (ArgumentException) { refused = true; }
