@@ -1,4 +1,5 @@
 using PatternTools.PLP;
+using FamilyQuant.Operations;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -86,11 +87,12 @@ namespace FamilyQuant
 
         }
 
-        public void SetLookupDictionary(PatternLabProject MyPLP) =>
-            patternLabAttribution.SetLookupDictionary(MyPLP);
+        public void SetLookupDictionary(PatternLabProject MyPLP, OperationContext? operation = null) =>
+            patternLabAttribution.SetLookupDictionary(MyPLP, operation);
 
-        public void AttributeXICToGroups(PatternLabProject MyPLP, NormalizationMode mode, SharedPeptidePolicy sharedPolicy) =>
-            patternLabAttribution.AttributeXICToGroups(this, MyPLP, mode, sharedPolicy);
+        public void AttributeXICToGroups(PatternLabProject MyPLP, NormalizationMode mode, SharedPeptidePolicy sharedPolicy,
+            OperationContext? operation = null) =>
+            patternLabAttribution.AttributeXICToGroups(this, MyPLP, mode, sharedPolicy, operation);
 
         public GroupingScore CalculateGroupingScore(string decoyTag = SequenceLabels.DecoyPrefix) =>
             FamilyClusterScoring.CalculateGroupingScore(this, decoyTag);
@@ -99,16 +101,16 @@ namespace FamilyQuant
             FamilyClusterScoring.CalculateFDR(this, decoyTag);
 
         public static List<IdentityScanRow> ScanIdentities(string fileName, int from = 95, int to = 10,
-            int step = 5, string decoyTag = SequenceLabels.DecoyPrefix, bool exhaustive = true) =>
-            FamilyClusterScoring.ScanIdentities(fileName, from, to, step, decoyTag, exhaustive);
+            int step = 5, string decoyTag = SequenceLabels.DecoyPrefix, bool exhaustive = true, OperationContext? operation = null) =>
+            FamilyClusterScoring.ScanIdentities(fileName, from, to, step, decoyTag, exhaustive, operation);
 
         public static double DivideAndConquer(string fileName, double acceptableScore = 0.0,
-            string decoyTag = SequenceLabels.DecoyPrefix, bool exhaustive = true) =>
-            FamilyClusterScoring.DivideAndConquer(fileName, acceptableScore, decoyTag, exhaustive);
+            string decoyTag = SequenceLabels.DecoyPrefix, bool exhaustive = true, OperationContext? operation = null) =>
+            FamilyClusterScoring.DivideAndConquer(fileName, acceptableScore, decoyTag, exhaustive, operation);
 
         public static DivideAndConquerResult DivideAndConquerDetailed(string fileName, double acceptableScore = 0.0,
-            string decoyTag = SequenceLabels.DecoyPrefix, bool exhaustive = true) =>
-            FamilyClusterScoring.DivideAndConquerDetailed(fileName, acceptableScore, decoyTag, exhaustive);
+            string decoyTag = SequenceLabels.DecoyPrefix, bool exhaustive = true, OperationContext? operation = null) =>
+            FamilyClusterScoring.DivideAndConquerDetailed(fileName, acceptableScore, decoyTag, exhaustive, operation);
 
         /// <summary>
         /// The serialization options every curation write uses, so a .fcf on disk and the curation.json
@@ -125,13 +127,17 @@ namespace FamilyQuant
         /// project is saved as a container instead of a plain file.</summary>
         public string ToJsonText() => JsonSerializer.Serialize(this, CurationJsonOptions);
 
-        public static FamilyClusterFile Load(string fileName)
+        public static FamilyClusterFile Load(string fileName, OperationContext? operation = null)
         {
+            operation?.Report("document-read", "Opening family document");
             string theFile = File.ReadAllText(fileName);
+            operation?.ThrowIfCancellationRequested();
 
             try
             {
-                return FromJsonText(theFile);
+                var document = FromJsonText(theFile);
+                operation?.ThrowIfCancellationRequested();
+                return document;
             }
             catch (InvalidDataException)
             {
@@ -183,15 +189,26 @@ namespace FamilyQuant
             return loaded;
         }
 
-        public void Save(string fileName)
+        public void Save(string fileName, OperationContext? operation = null)
         {
             // Written to a temporary file and moved into place, so a process killed, a power loss or a
             // full disk mid-write leaves the previous .fcf intact rather than a truncated one that
             // FromJsonText would reject, losing all curation. Mirrors ProjectStore.WriteFqproj. The shared
             // options keep a .fcf and a .fqproj's curation.json byte-identical for the same file.
-            string temp = fileName + ".tmp";
-            File.WriteAllText(temp, ToJsonText());
-            File.Move(temp, fileName, overwrite: true);
+            operation?.Report("save", "Preparing the family document");
+            string temp = fileName + "." + Guid.NewGuid().ToString("N") + ".tmp";
+            try
+            {
+                File.WriteAllText(temp, ToJsonText());
+                operation?.Report("save", "Publishing the family document", 1, 1);
+                void Publish() => File.Move(temp, fileName, overwrite: true);
+                if (operation == null) Publish();
+                else operation.Commit(Publish);
+            }
+            finally
+            {
+                try { if (File.Exists(temp)) File.Delete(temp); } catch { }
+            }
         }
 
     }

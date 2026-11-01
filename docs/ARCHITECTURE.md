@@ -176,25 +176,34 @@ it does not mean that later work has been completed or reviewed.
 
 <!-- SOURCE-INVENTORY -->
 
-Inventory refreshed after the shell merges and X2: 174 files and unique rows, zero gaps.
+Inventory refreshed for S2 and X10 operation wiring: 193 files/rows, zero gaps.
 
 | Source path at planning | Destination | Copy/rewrite plan |
 |---|---|---|
+| `FamilyQuant.Core/Evidence/EvidenceFetcher.cs` | `FamilyQuant.Core/Evidence/EvidenceFetcher.cs` | Keep published evidence implementation in Core; owned by its assigned EV/Opus step |
+| `FamilyQuant.Core/Evidence/FamilyMembership.cs` | `FamilyQuant.Core/Evidence/FamilyMembership.cs` | Keep published evidence implementation in Core; owned by its assigned EV/Opus step |
+| `FamilyQuant.Core/Evidence/FetchProvenance.cs` | `FamilyQuant.Core/Evidence/FetchProvenance.cs` | Keep published evidence implementation in Core; owned by its assigned EV/Opus step |
+| `FamilyQuant.Core/Evidence/NearestReviewed.cs` | `FamilyQuant.Core/Evidence/NearestReviewed.cs` | Keep published evidence implementation in Core; owned by its assigned EV/Opus step |
 | `FamilyQuant.Core/FamilyClusterScoring.cs` | `FamilyQuant.Core/FamilyClusterScoring.cs` | X2: target/decoy score and identity-search implementation extracted unchanged |
 | `FamilyQuant.Core/FamilyQuant.Core.csproj` | `FamilyQuant.Core/FamilyQuant.Core.csproj` | New F6 library project; no WPF, existing package pins and explicit vendor references |
+| `FamilyQuant.Core/Operations/CoreOperation.cs` | `FamilyQuant.Core/Operations/CoreOperation.cs` | X10: shared WPF-free operation outcome, progress, cancellation and final-commit contract |
 | `FamilyQuant.Core/PatternLabAttribution.cs` | `FamilyQuant.Core/PatternLabAttribution.cs` | X2: per-document PLP caches and attribution implementation extracted unchanged |
+| `FamilyQuant.Core/ShellProjectOperations.cs` | `FamilyQuant.Core/ShellProjectOperations.cs` | Keep headless shell document services; X10 optional context for project reads |
 | `FamilyQuant.Tests/AttributionRuleStudy.cs` | `FamilyQuant.Tests/AttributionRuleStudy.cs` | Keep test coverage; update only API/path integration when its owning step moves code |
 | `FamilyQuant.Tests/ChargeAudit.cs` | `FamilyQuant.Tests/ChargeAudit.cs` | Keep test coverage; update only API/path integration when its owning step moves code |
 | `FamilyQuant.Tests/DeNovoXicTests.cs` | `FamilyQuant.Tests/DeNovoXicTests.cs` | Keep test coverage; update only API/path integration when its owning step moves code |
+| `FamilyQuant.Tests/EvidenceFetchCheck.cs` | `FamilyQuant.Tests/EvidenceFetchCheck.cs` | Keep evidence/operation regression coverage with its owning step |
 | `FamilyQuant.Tests/EvidenceStorageCheck.cs` | `FamilyQuant.Tests/EvidenceStorageCheck.cs` | Keep E1 storage/size checks; use the published evidence contract |
 | `FamilyQuant.Tests/FamilyQuant.Tests.csproj` | `FamilyQuant.Tests/FamilyQuant.Tests.csproj` | Keep test coverage; update only API/path integration when its owning step moves code |
 | `FamilyQuant.Tests/FeatureLedger.cs` | `FamilyQuant.Tests/FeatureLedger.cs` | Keep test coverage; update only API/path integration when its owning step moves code |
 | `FamilyQuant.Tests/GoldenNumbers.cs` | `FamilyQuant.Tests/GoldenNumbers.cs` | Keep test coverage; update only API/path integration when its owning step moves code |
 | `FamilyQuant.Tests/HomologyTests.cs` | `FamilyQuant.Tests/HomologyTests.cs` | Keep test coverage; update only API/path integration when its owning step moves code |
 | `FamilyQuant.Tests/IsotopePrecursorEquivalenceTests.cs` | `FamilyQuant.Tests/IsotopePrecursorEquivalenceTests.cs` | Keep test coverage; update only API/path integration when its owning step moves code |
+| `FamilyQuant.Tests/NearestReviewedCheck.cs` | `FamilyQuant.Tests/NearestReviewedCheck.cs` | Keep operation and shell navigation regression coverage |
 | `FamilyQuant.Tests/Program.Analytics.cs` | `FamilyQuant.Tests/Program.Analytics.cs` | Keep test coverage; update only API/path integration when its owning step moves code |
 | `FamilyQuant.Tests/Program.AppShell.cs` | `FamilyQuant.Tests/Program.AppShell.cs` | Keep test coverage; update only API/path integration when its owning step moves code |
 | `FamilyQuant.Tests/Program.Charts.cs` | `FamilyQuant.Tests/Program.Charts.cs` | Keep test coverage; update only API/path integration when its owning step moves code |
+| `FamilyQuant.Tests/Program.CoreOperations.cs` | `FamilyQuant.Tests/Program.CoreOperations.cs` | Keep evidence/operation regression coverage with its owning step |
 | `FamilyQuant.Tests/Program.Csv.cs` | `FamilyQuant.Tests/Program.Csv.cs` | Keep test coverage; update only API/path integration when its owning step moves code |
 | `FamilyQuant.Tests/Program.Curation.cs` | `FamilyQuant.Tests/Program.Curation.cs` | Keep test coverage; update only API/path integration when its owning step moves code |
 | `FamilyQuant.Tests/Program.CurationStorage.cs` | `FamilyQuant.Tests/Program.CurationStorage.cs` | Keep test coverage; update only API/path integration when its owning step moves code |
@@ -214,10 +223,13 @@ Inventory refreshed after the shell merges and X2: 174 files and unique rows, ze
 | `FamilyQuant.Tests/Program.IdentityScan.cs` | `FamilyQuant.Tests/Program.IdentityScan.cs` | Keep test coverage; update only API/path integration when its owning step moves code |
 | `FamilyQuant.Tests/Program.Ms1Envelope.cs` | `FamilyQuant.Tests/Program.Ms1Envelope.cs` | Keep test coverage; update only API/path integration when its owning step moves code |
 | `FamilyQuant.Tests/Program.NativeFractions.cs` | `FamilyQuant.Tests/Program.NativeFractions.cs` | Keep test coverage; update only API/path integration when its owning step moves code |
+| `FamilyQuant.Tests/Program.NearestReviewed.cs` | `FamilyQuant.Tests/Program.NearestReviewed.cs` | Keep evidence/operation regression coverage with its owning step |
+| `FamilyQuant.Tests/Program.OperationCancellation.cs` | `FamilyQuant.Tests/Program.OperationCancellation.cs` | Keep operation and shell navigation regression coverage |
 | `FamilyQuant.Tests/Program.ProjectStore.cs` | `FamilyQuant.Tests/Program.ProjectStore.cs` | Keep test coverage; update only API/path integration when its owning step moves code |
 | `FamilyQuant.Tests/Program.ProteinDomains.cs` | `FamilyQuant.Tests/Program.ProteinDomains.cs` | Keep test coverage; update only API/path integration when its owning step moves code |
 | `FamilyQuant.Tests/Program.Quantitation.cs` | `FamilyQuant.Tests/Program.Quantitation.cs` | Keep test coverage; update only API/path integration when its owning step moves code |
 | `FamilyQuant.Tests/Program.ReportsAndHelp.cs` | `FamilyQuant.Tests/Program.ReportsAndHelp.cs` | Keep test coverage; update only API/path integration when its owning step moves code |
+| `FamilyQuant.Tests/Program.ShellNavigation.cs` | `FamilyQuant.Tests/Program.ShellNavigation.cs` | Keep operation and shell navigation regression coverage |
 | `FamilyQuant.Tests/Program.ShellStatus.cs` | `FamilyQuant.Tests/Program.ShellStatus.cs` | Keep shell/curation regression coverage with its owning screen step |
 | `FamilyQuant.Tests/Program.SourceContracts.cs` | `FamilyQuant.Tests/Program.SourceContracts.cs` | Keep test coverage; update only API/path integration when its owning step moves code |
 | `FamilyQuant.Tests/Program.StandardMenu.cs` | `FamilyQuant.Tests/Program.StandardMenu.cs` | Keep shell/curation regression coverage with its owning screen step |
@@ -321,8 +333,15 @@ Inventory refreshed after the shell merges and X2: 174 files and unique rows, ze
 | `FamilyQuant/IsotopeCountChart.cs` | `FamilyQuant/IsotopeCountChart.cs` | Copy in F6; X8: share drawing base and preserve exported PNGs |
 | `FamilyQuant/LockManagerWindow.cs` | `FamilyQuant/LockManagerWindow.cs` | Copy in F6; C12: thin secondary view (FQShell) |
 | `FamilyQuant/MainWindow.Commands.cs` | `FamilyQuant/MainWindow.Commands.cs` | Keep in App; shell, navigation and appearance owned by FQLook |
+| `FamilyQuant/MainWindow.Documents.cs` | `FamilyQuant/MainWindow.Documents.cs` | Keep in App; thin shell/navigation implementation owned by its screen step |
+| `FamilyQuant/MainWindow.Help.cs` | `FamilyQuant/MainWindow.Help.cs` | Keep in App; thin shell/navigation implementation owned by its screen step |
+| `FamilyQuant/MainWindow.Navigation.cs` | `FamilyQuant/MainWindow.Navigation.cs` | Keep in App; thin shell/navigation implementation owned by its screen step |
+| `FamilyQuant/MainWindow.NavigationRail.xaml` | `FamilyQuant/MainWindow.NavigationRail.xaml` | Keep in App; thin shell/navigation implementation owned by its screen step |
+| `FamilyQuant/MainWindow.NavigationRail.xaml.cs` | `FamilyQuant/MainWindow.NavigationRail.xaml.cs` | Keep in App; thin shell/navigation implementation owned by its screen step |
+| `FamilyQuant/MainWindow.Presentation.cs` | `FamilyQuant/MainWindow.Presentation.cs` | Keep in App; thin shell/navigation implementation owned by its screen step |
 | `FamilyQuant/MainWindow.State.cs` | `FamilyQuant/MainWindow.State.cs` | Keep in App; shell, navigation and appearance owned by FQLook |
 | `FamilyQuant/MainWindow.Status.cs` | `FamilyQuant/MainWindow.Status.cs` | Keep in App; shell, navigation and appearance owned by FQLook |
+| `FamilyQuant/MainWindow.ViewModel.cs` | `FamilyQuant/MainWindow.ViewModel.cs` | Keep in App; thin shell/navigation implementation owned by its screen step |
 | `FamilyQuant/MainWindow.xaml` | `FamilyQuant/MainWindow.xaml` | Copy in F6; S2: thin shell and view model |
 | `FamilyQuant/MainWindow.xaml.cs` | `FamilyQuant/MainWindow.xaml.cs` | Copy in F6; S2: thin shell and view model |
 | `FamilyQuant/MyResources.Designer.cs` | `FamilyQuant.Core/MyResources.Designer.cs` | Copy to Core in F6; Keep the existing tested implementation |
