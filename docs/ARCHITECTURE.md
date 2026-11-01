@@ -64,6 +64,15 @@ HintPath references do not flow through project references. Core must not acquir
 Extended.Wpf.Toolkit or a WindowsDesktop/WPF framework reference. Its Windows
 target is for the existing RAW/file integrations, not for a UI dependency.
 
+F6 marks Core's checked-in vendor references `ExternallyResolved`, with scientific
+dependencies named explicitly. App resolves their complete runtime graph. This
+keeps the unused WindowsBase metadata in PatternTools out of Core's compiler
+graph without a warning suppression or a WPF framework reference. See the
+[MSBuild resolution contract](https://learn.microsoft.com/en-us/dotnet/api/microsoft.build.tasks.resolveassemblyreference?view=msbuild-18-netcore).
+The Core DLL reference check passes; real RAW behavior remains part of the full
+merge gate. The shared `SpreadsheetSafeCsv` class becomes public so the existing
+App report writer can call it; its implementation is unchanged.
+
 XAML that names a moved type uses an explicit Core assembly namespace. Resource
 tests follow the resource's owning assembly. The executable's identity, title and
 deployment-version tests continue to use App. Avoid widening internal APIs just
@@ -73,6 +82,15 @@ Acceptance is a clean build, unchanged quick/full check counts on the same head,
 the golden comparison, a Core reference check, and a publish payload containing
 Core. The orchestrator owns the full real-data and golden merge gates. A build or
 the quick suite alone does not establish numerical parity on the stored project.
+
+F6 builder verification: 71 moved files, of which 69 remain byte-identical. The
+other two have only the documented CSV class visibility and resource path edits.
+Core and solution builds have zero warnings/errors; the focused boundary check
+passes 4/4, after failing 3/4 before extraction. The quick suite passes 1727 checks
+with zero failures and 17 skips, including E1 and the four new boundary checks.
+The local publish payload contains Core and every prior DLL; required scientific
+vendor DLLs have unchanged hashes, and no Tests or Reports payload is present.
+The builder has not run the full real-data/golden gate or installed either app.
 
 ## Views and view models
 
@@ -147,13 +165,15 @@ it does not mean that later work has been completed or reviewed.
 
 <!-- SOURCE-INVENTORY -->
 
-Scanned: 160 files; 69 C# files and one resource file are planned for Core.
+Inventory refreshed after E1 and F6: 163 files; 70 C# files and one resource moved to Core.
 
-| Current source | Destination | Copy/rewrite plan |
+| Source path at planning | Destination | Copy/rewrite plan |
 |---|---|---|
+| `FamilyQuant.Core/FamilyQuant.Core.csproj` | `FamilyQuant.Core/FamilyQuant.Core.csproj` | New F6 library project; no WPF, existing package pins and explicit vendor references |
 | `FamilyQuant.Tests/AttributionRuleStudy.cs` | `FamilyQuant.Tests/AttributionRuleStudy.cs` | Keep test coverage; update only API/path integration when its owning step moves code |
 | `FamilyQuant.Tests/ChargeAudit.cs` | `FamilyQuant.Tests/ChargeAudit.cs` | Keep test coverage; update only API/path integration when its owning step moves code |
 | `FamilyQuant.Tests/DeNovoXicTests.cs` | `FamilyQuant.Tests/DeNovoXicTests.cs` | Keep test coverage; update only API/path integration when its owning step moves code |
+| `FamilyQuant.Tests/EvidenceStorageCheck.cs` | `FamilyQuant.Tests/EvidenceStorageCheck.cs` | Keep E1 storage/size checks; use the published evidence contract |
 | `FamilyQuant.Tests/FamilyQuant.Tests.csproj` | `FamilyQuant.Tests/FamilyQuant.Tests.csproj` | Keep test coverage; update only API/path integration when its owning step moves code |
 | `FamilyQuant.Tests/FeatureLedger.cs` | `FamilyQuant.Tests/FeatureLedger.cs` | Keep test coverage; update only API/path integration when its owning step moves code |
 | `FamilyQuant.Tests/GoldenNumbers.cs` | `FamilyQuant.Tests/GoldenNumbers.cs` | Keep test coverage; update only API/path integration when its owning step moves code |
@@ -254,6 +274,7 @@ Scanned: 160 files; 69 C# files and one resource file are planned for Core.
 | `FamilyQuant/DeNovo/ThreeWayWindow.cs` | `FamilyQuant/DeNovo/ThreeWayWindow.cs` | Copy in F6; C12: thin secondary view (FQShell) |
 | `FamilyQuant/DeNovoControl.xaml` | `FamilyQuant/DeNovoControl.xaml` | Copy in F6; C10: shared filters and thin view (FQEvidence) |
 | `FamilyQuant/DeNovoControl.xaml.cs` | `FamilyQuant/DeNovoControl.xaml.cs` | Copy in F6; C10: shared filters and thin view (FQEvidence) |
+| `FamilyQuant/Evidence/ProteinEvidence.cs` | `FamilyQuant.Core/Evidence/ProteinEvidence.cs` | Copy E1 model to Core in F6; evidence contracts stay owned by FQEvidence |
 | `FamilyQuant/FamilyContributionChart.cs` | `FamilyQuant/FamilyContributionChart.cs` | Copy in F6; X8: share drawing base and preserve exported PNGs |
 | `FamilyQuant/FamilyEnvelopeQuant.cs` | `FamilyQuant.Core/FamilyEnvelopeQuant.cs` | Copy to Core in F6; X5: stage attribution without changing peptide/peak grain |
 | `FamilyQuant/FamilyFilter.cs` | `FamilyQuant.Core/FamilyFilter.cs` | Copy to Core in F6; Keep the existing tested implementation |
@@ -308,6 +329,6 @@ Scanned: 160 files; 69 C# files and one resource file are planned for Core.
 | `FamilyQuant/Themes/Tokens.xaml` | `FamilyQuant/Themes/Tokens.xaml` | Copy in F6; Keep UI resources; theme work stays with FQLook |
 | `FamilyQuant/USearch.xaml` | `FamilyQuant/USearch.xaml` | Copy in F6; C6/C7: build and identity views (FQShell) |
 | `FamilyQuant/USearch.xaml.cs` | `FamilyQuant/USearch.xaml.cs` | Copy in F6; C6/C7: build and identity views (FQShell) |
-| `FamilyQuant/USearchTools.cs` | `FamilyQuant.Core/USearchTools.cs` | Copy to Core in F6; X3: result types, progress and cancel; E3 adds the reviewed-neighbor call |
+| `FamilyQuant/USearchTools.cs` | `FamilyQuant.Core/USearchTools.cs` | Copy to Core in F6; X3 stays AS; only the new E3 global-search method belongs to FQOpus |
 | `FamilyQuant/WordCluster.cs` | `FamilyQuant.Core/WordCluster.cs` | Copy to Core in F6; X4: preserve TF-IDF and keyword contracts around one matcher |
 | `FamilyQuant/XicMassChart.cs` | `FamilyQuant/XicMassChart.cs` | Copy in F6; X8: share drawing base and preserve exported PNGs |

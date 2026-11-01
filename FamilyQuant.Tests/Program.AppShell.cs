@@ -34,7 +34,7 @@ namespace FamilyQuant.Tests
             Check("2.0 has its own executable assembly identity",
                 typeof(AppVersionInfo).Assembly.GetName().Name == "FamilyQuant2");
             Check("the resource namespace stays compatible after the project rename",
-                typeof(AppVersionInfo).Assembly.GetManifestResourceNames()
+                typeof(USearchTools).Assembly.GetManifestResourceNames()
                     .Contains("FamilyQuant.MyResources.resources"));
             Check("2.0 has a local data folder separate from 1.x",
                 ApplicationPaths.LocalDataDirectory == Path.Combine(

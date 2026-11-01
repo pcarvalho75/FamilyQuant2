@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:core="clr-namespace:FamilyQuant;assembly=FamilyQuant.Core"
              xmlns:local="clr-namespace:FamilyQuant"
              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
              mc:Ignorable="d" FontSize="{DynamicResource BodySize}"
@@ -408,13 +409,13 @@
                                           Margin="10,5" Foreground="{DynamicResource TextBrush}" VerticalAlignment="Center"
                                           Checked="CheckBoxShowXICOnly_CheckedChanged"
                                           Unchecked="CheckBoxShowXICOnly_CheckedChanged"
-                                          ToolTip="{x:Static local:IdentifierText.HideContaminantsToolTip}"/>
+                                          ToolTip="{x:Static core:IdentifierText.HideContaminantsToolTip}"/>
 
                                 <CheckBox x:Name="CheckBoxExcludeReverse" Content="Hide Reverse (decoys)"
                                           Margin="10,5" Foreground="{DynamicResource TextBrush}" VerticalAlignment="Center"
                                           Checked="CheckBoxExcludeReverse_CheckedChanged"
                                           Unchecked="CheckBoxExcludeReverse_CheckedChanged"
-                                          ToolTip="{x:Static local:IdentifierText.HideDecoysToolTip}"/>
+                                          ToolTip="{x:Static core:IdentifierText.HideDecoysToolTip}"/>
 
                                 <Button x:Name="ButtonSaveReport" Style="{DynamicResource PrimaryButton}" Margin="15,5,5,5" Click="ButtonSaveReport_Click"
                                         Content="Export to CSV"
