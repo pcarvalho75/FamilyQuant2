@@ -9,78 +9,98 @@
     <Grid x:Name="MainGrid">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
             <RowDefinition/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <!-- File comes first; S1 consolidates the remaining navigation and shortcuts. -->
-        <Menu Grid.Row="0" Background="{DynamicResource SurfaceBrush}">
-
-            <MenuItem Header="File" Foreground="{DynamicResource TextBrush}">
-                <MenuItem x:Name="MenuItemLoadFQC" Header="Load project or Family Cluster File" Foreground="{DynamicResource TextBrush}" Click="MenuItemCluster_Click"
-                          ToolTip="Step 2: opens a project (.fqproj) with its families and quantitation, or a Family Cluster File (.fcf) with families only. Save first if you have unsaved edits."/>
-                <MenuItem x:Name="MenuItemSaveProject" IsEnabled="False" Foreground="{DynamicResource TextBrush}" Header="Save project (.fqproj)" Click="MenuItemSaveProject_Click"
-                          ToolTip="Saves the families, your User IDs and annotations, and the computed quantitation to one .fqproj file. Save under a new name to keep the old version. Disabled until a project is loaded."/>
-                <MenuItem x:Name="MenuItemSaveFCF" IsEnabled="False" Foreground="{DynamicResource TextBrush}" Header="Save Family Cluster File (.fcf)" Click="MenuItemSaveFCF_Click"
-                          ToolTip="Saves the families, your User IDs and annotations to a .fcf file, without the quantitation (use Save project for that). Disabled until a Family Cluster File is loaded."/>
-                <MenuItem x:Name="MenuItemComputeXic" IsEnabled="False" Foreground="{DynamicResource TextBrush}" Header="Compute / update full XIC" Click="MenuItemComputeXic_Click"
-                          ToolTip="Step 3: measures every identified peptide and kept de novo precursor from the RAW files with the full isotope envelope. Save project afterwards to keep it. Disabled until a project is loaded."/>
-                <MenuItem x:Name="MenuItemSpectrumComparison" IsEnabled="False" Foreground="{DynamicResource TextBrush}"
-                          Header="View spectrum comparison table" Click="MenuItemSpectrumComparison_Click"
-                          ToolTip="Shows a read-only table comparing PEAKS, DeepNovo and PatternLab, one row per file, scan, charge and precursor m/z. It can be saved as CSV. Disabled until spectrum evidence is loaded."/>
-                <MenuItem x:Name="MenuItemReanotateSEPro" IsEnabled="False" Foreground="{DynamicResource TextBrush}" Header="Reanotate Sepro" Click="MenuItemReanotateSEPro_Click"
-                          ToolTip="Writes your User ID family numbers into a SEPro .sepr2 file, saved as a new _regrouped.sepr2; the original is not changed. Disabled until a Family Cluster File is loaded."/>
+        <Menu x:Name="MainMenu" Grid.Row="0" Background="{DynamicResource SurfaceBrush}">
+            <MenuItem x:Name="MenuFile" Header="File" ToolTip="Create, open, save and export your project.">
+                <MenuItem x:Name="MenuItemRunUSearch" Header="New from database" Command="New" InputGestureText="Ctrl+N"
+                          ToolTip="Builds families from a FASTA or target-decoy database. Save the open project before starting a different database."/>
+                <MenuItem x:Name="MenuItemLoadFQC" Header="Open" Command="Open" InputGestureText="Ctrl+O"
+                          ToolTip="Opens a FamilyQuant project or an older Family Cluster File. Save your current changes first."/>
+                <Separator/>
+                <MenuItem x:Name="MenuItemSaveProject" Header="Save" Command="Save" InputGestureText="Ctrl+S" IsEnabled="False"
+                          ToolTip="Saves the open project's families and stored quantitation. Disabled until a project is loaded."/>
+                <MenuItem x:Name="MenuItemSaveAs" Header="Save as" Command="SaveAs" InputGestureText="Ctrl+Shift+S" IsEnabled="False"
+                          ToolTip="Saves the project under a new name. Disabled until a project is loaded."/>
+                <MenuItem x:Name="MenuItemExport" Header="Export" IsEnabled="False"
+                          ToolTip="Exports families or tables without replacing the open project. Disabled until a project is loaded.">
+                    <MenuItem x:Name="MenuItemSaveFCF" Header="Families for FamilyQuant 1.5 (.fcf)" Click="MenuItemSaveFCF_Click" IsEnabled="False"
+                              ToolTip="Exports families, User IDs and annotations for FamilyQuant 1.5, without quantitation. Disabled until a project is loaded."/>
+                    <MenuItem x:Name="MenuItemExportFamilyTable" Header="Visible protein table (CSV)" Click="MenuItemExportFamilyTable_Click"
+                              ToolTip="Exports the visible protein rows using the table's existing filters and columns. Disabled until a project is loaded."/>
+                    <MenuItem x:Name="MenuItemExportComposition" Header="Family composition (CSV)" Click="MenuItemExportComposition_Click"
+                              ToolTip="Exports the current Full XIC family composition with its existing attribution settings. Disabled until Full XIC is available."/>
+                </MenuItem>
+                <MenuItem x:Name="MenuItemRecent" Header="Recent projects" SubmenuOpened="MenuItemRecent_SubmenuOpened"
+                          ToolTip="Reopens a recent project or Family Cluster File. Missing files remain listed with their paths."/>
+                <Separator/>
+                <MenuItem Header="Exit" Command="Close" InputGestureText="Alt+F4"
+                          ToolTip="Closes this application window. Save the project first to keep your changes."/>
             </MenuItem>
-
-
-            <MenuItem x:Name="MenuItemHome" Header="Home" Foreground="{DynamicResource TextBrush}" Click="MenuItemHome_Click"
-                      ToolTip="Returns to the start screen, which shows the four steps and names the open project. Your open project stays open."/>
-
-            <MenuItem x:Name="MenuItemRunUSearch" Header="Run USearch" Foreground="{DynamicResource TextBrush}" Click="MenuRunUSearch_Click"
-                      ToolTip="Step 1: clusters a FASTA or target-decoy (.T-R) database by sequence identity and writes a .fcf beside it. This closes the open project, so save first."/>
-
-            <MenuItem Header="View" ToolTip="Choose the application appearance. Light and dark keep the same controls and data.">
-                <MenuItem x:Name="MenuThemeLight" Header="Light" IsCheckable="True" Click="MenuThemeLight_Click"
-                          ToolTip="Uses light surfaces and dark text. Every command and value stays the same."/>
-                <MenuItem x:Name="MenuThemeDark" Header="Dark" IsCheckable="True" IsChecked="True" Click="MenuThemeDark_Click"
-                          ToolTip="Uses dark surfaces and light text. Every command and value stays the same."/>
-                <MenuItem x:Name="MenuThemeSystem" Header="Use Windows setting" IsCheckable="True" Click="MenuThemeSystem_Click"
-                          ToolTip="Follows the light or dark app setting in Windows. The appearance updates when Windows changes."/>
+            <MenuItem Header="Edit" ToolTip="Undo curation, copy selected text or find proteins.">
+                <MenuItem x:Name="MenuItemUndo" Header="Undo" Command="Undo" InputGestureText="Ctrl+Z"
+                          ToolTip="Undoes the last text edit or curation change. Disabled until there is a change to undo."/>
+                <MenuItem x:Name="MenuItemCopy" Header="Copy" Command="Copy" InputGestureText="Ctrl+C"
+                          ToolTip="Copies selected text or the selected table cells using the table's copy rules. Disabled while nothing is selected."/>
+                <Separator/>
+                <MenuItem x:Name="MenuItemFind" Header="Find proteins" Command="Find" InputGestureText="Ctrl+F"
+                          ToolTip="Focuses the family search box in the open project. Disabled until a project is loaded."/>
             </MenuItem>
-
-            <!-- A separate workflow, not a step of the family one: it answers what a run holds that the
-                 database search did not find. It is the optional side-branch, and it never touches the
-                 families. -->
-            <MenuItem x:Name="MenuItemDeNovo" Header="De Novo evidence" Foreground="{DynamicResource TextBrush}" Click="MenuItemDeNovo_Click"
-                      ToolTip="Opens the de novo review screen: import a PEAKS or DeepNovo export, filter it, and compare it with PatternLab by file, scan, charge and m/z. It changes no family or quantitation."/>
-
-            <!-- Reads the loaded project's own full-envelope quant (Q2 store + Q3 fractions) and draws the
-                 graphs for the paper and the talk. It reads, never recomputes, and needs no Family Cluster
-                 File; with no computed quantitation it says so instead of drawing blank axes. It sits after
-                 the de novo workflow and before Help, because it summarises what the earlier steps produced. -->
-            <MenuItem x:Name="MenuItemAnalytics" Header="Analytics" Foreground="{DynamicResource TextBrush}" Click="MenuItemAnalytics_Click"
-                      ToolTip="Step 4: graphs the project's full isotope-envelope quantitation, including each family's share and how much of the total ion current is recovered. Read only; run Compute / update full XIC first."/>
-
-            <MenuItem x:Name="MenuItemHelp" Header="Help" Foreground="{DynamicResource TextBrush}">
-                <MenuItem x:Name="MenuItemHowToRead" Header="How to read these numbers" Foreground="{DynamicResource TextBrush}" Click="MenuItemHowToRead_Click"
-                          ToolTip="Explains every number the program shows, such as what the percentages are of and what a shared peptide is. On the De Novo screen it opens that screen's own help."/>
-                <MenuItem x:Name="MenuItemWhereAmI" Header="What do I do first?" Foreground="{DynamicResource TextBrush}" Click="MenuItemWhereAmI_Click"
-                          ToolTip="Lists the order of work, from a protein database to an exported table, and what each step needs. The de novo review at the end is optional."/>
+            <MenuItem Header="View" SubmenuOpened="MenuView_SubmenuOpened"
+                      ToolTip="Navigate between project views and choose the appearance or visible protein rows.">
+                <MenuItem x:Name="MenuItemHome" Header="Start page" Click="MenuItemHome_Click"
+                          ToolTip="Returns to the start page while keeping your project open. Its actions use these same menu commands."/>
+                <MenuItem x:Name="MenuItemFamilies" Header="Families" Click="MenuItemFamilies_Click"
+                          ToolTip="Returns to the current family table, or opens a project when none is loaded. Existing curation stays in memory."/>
+                <Separator/>
+                <MenuItem Header="Appearance" ToolTip="Choose light or dark surfaces without changing the project or its numbers.">
+                    <MenuItem x:Name="MenuThemeDark" Header="Dark" IsCheckable="True" IsChecked="True" Click="MenuThemeDark_Click"
+                              ToolTip="Uses dark surfaces and light text. This is the default application appearance."/>
+                    <MenuItem x:Name="MenuThemeLight" Header="Light" IsCheckable="True" Click="MenuThemeLight_Click"
+                              ToolTip="Uses light surfaces and dark text. Every command and value stays the same."/>
+                    <MenuItem x:Name="MenuThemeSystem" Header="Use Windows setting" IsCheckable="True" Click="MenuThemeSystem_Click"
+                              ToolTip="Follows the light or dark app setting in Windows. The appearance updates when Windows changes."/>
+                </MenuItem>
+                <Separator/>
+                <MenuItem x:Name="MenuItemHideDecoys" Header="Hide decoys" IsCheckable="True" Click="MenuItemHideDecoys_Click"
+                          ToolTip="Hides decoy rows in the family table and its CSV without changing percentages. Disabled until a project is loaded."/>
+                <MenuItem x:Name="MenuItemHideContaminants" Header="Hide contaminants" IsCheckable="True" Click="MenuItemHideContaminants_Click"
+                          ToolTip="Hides contaminant rows in the family table and its CSV without changing percentages. Disabled until a project is loaded."/>
             </MenuItem>
-
+            <MenuItem Header="Analysis" ToolTip="Compute quantitation, inspect results or review de novo evidence.">
+                <MenuItem x:Name="MenuItemComputeXic" Header="Compute full XIC" Click="MenuItemComputeXic_Click" IsEnabled="False"
+                          ToolTip="Measures identified and kept de novo precursors from RAW files with the full isotope envelope. Disabled until a project is loaded."/>
+                <MenuItem x:Name="MenuItemAnalytics" Header="Results" Click="MenuItemAnalytics_Click"
+                          ToolTip="Shows the project's stored quantitation and its exports. Compute full XIC first when no results are stored."/>
+                <MenuItem x:Name="MenuItemDeNovo" Header="De novo evidence" Click="MenuItemDeNovo_Click"
+                          ToolTip="Imports, filters and compares PEAKS or DeepNovo evidence with PatternLab. It changes no family or quantitation."/>
+                <MenuItem x:Name="MenuItemSpectrumComparison" Header="Spectrum comparison" Click="MenuItemSpectrumComparison_Click" IsEnabled="False"
+                          ToolTip="Shows the source comparison table and its existing CSV and score plot exports. Disabled until spectrum evidence is loaded."/>
+                <Separator/>
+                <MenuItem x:Name="MenuItemReanotateSEPro" Header="Reannotate SEPro" Click="MenuItemReanotateSEPro_Click" IsEnabled="False"
+                          ToolTip="Writes family numbers to a new regrouped SEPro package, leaving the original unchanged. Disabled until a project is loaded."/>
+            </MenuItem>
+            <MenuItem x:Name="MenuItemHelp" Header="Help" ToolTip="Read the current screen's explanations or the complete workflow.">
+                <MenuItem x:Name="MenuItemHowToRead" Header="How to read these numbers" Command="Help" InputGestureText="F1"
+                          ToolTip="Explains the current screen's numbers and choices, including denominators and shared peptides. F1 opens this same help."/>
+                <MenuItem x:Name="MenuItemWhereAmI" Header="What do I do first?" Click="MenuItemWhereAmI_Click"
+                          ToolTip="Lists the complete workflow and what each step needs. De novo review is optional."/>
+            </MenuItem>
         </Menu>
 
         <!-- The first thing a new user sees. It says what to do, in order, and it stays until a Family
              Cluster File is opened - the sequence used to be discoverable only by trying every menu. -->
-        <Border x:Name="BorderGuide" Grid.Row="1" Background="{DynamicResource CanvasBrush}" BorderBrush="{DynamicResource EdgeBrush}" BorderThickness="0,0,0,1"
+        <Border x:Name="BorderGuide" Grid.Row="2" Background="{DynamicResource SubtleBrush}"
                 Padding="12,8">
-            <TextBlock x:Name="TextBlockGuide" TextWrapping="NoWrap" TextTrimming="CharacterEllipsis" Foreground="{DynamicResource MutedBrush}" FontSize="12"
-                       ToolTip="Shows where you are in the workflow and what to do next. It updates as you go."/>
+            <TextBlock x:Name="TextBlockGuide" Text="{Binding Text}" TextWrapping="NoWrap" TextTrimming="CharacterEllipsis" Foreground="{DynamicResource MutedBrush}" FontSize="12"
+                       ToolTip="Shows the current view, project and operation in one line. Help contains the workflow and full status details."/>
         </Border>
 
         <!-- The task-oriented home screen is swapped in here by the constructor and is the default view.
              The other four views (clustering, curation, de novo, analytics) replace it in turn, and Home
              on the menu brings it back. -->
-        <Grid x:Name="GridApp" Grid.Row="2" Background="{DynamicResource CanvasBrush}"/>
+        <Grid x:Name="GridApp" Grid.Row="1" Background="{DynamicResource CanvasBrush}"/>
     </Grid>
 </Window>

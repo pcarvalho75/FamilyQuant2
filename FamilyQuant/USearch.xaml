@@ -18,9 +18,9 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <Border Grid.Row="0" Grid.ColumnSpan="2" Background="#2A303E" BorderBrush="#4A5568" BorderThickness="1"
+        <Border x:Name="BorderUSearchStatus" Grid.Row="0" Grid.ColumnSpan="2" Background="{DynamicResource SubtleBrush}"
                 CornerRadius="3" Padding="10,6" Margin="5,0,5,6">
-            <TextBlock x:Name="TextBlockUSearchState" TextWrapping="Wrap" Foreground="#FFD700" FontSize="12"
+            <TextBlock x:Name="TextBlockUSearchState" TextWrapping="NoWrap" TextTrimming="CharacterEllipsis" Foreground="{DynamicResource MutedBrush}" FontSize="12"
                        Text="Step 1 of 4 · Pick a protein database and press &quot;Input a FASTA file&quot;. That writes a Family Cluster File (.fcf) beside it, which you then open with File · Load Family Cluster File."
                        ToolTip="Where you are in this panel and what to do next. It updates once a Family Cluster File is made."/>
         </Border>
