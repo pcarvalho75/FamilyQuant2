@@ -130,6 +130,7 @@ namespace FamilyQuant.Tests
             if (args.Length == 2 && args[0] == "--shell-menu-screens") return ShellMenuScreens(args[1]);
             if (args.Length == 2 && args[0] == "--start-page-screens") return HomeStartScreens(args[1]);
             if (args.Length == 3 && args[0] == "--shell-save-smoke") return ShellSaveSmoke(args[1], args[2]);
+            if (args.Length == 2 && args[0] == "--evidence-recipe-replay-check") return EvidenceRecipeReplayCheck(args[1]);
             if (args.Length == 2 && args[0] == "--shell-save-screens") return ShellSaveScreens(args[1]);
             if (args.Length == 2 && args[0] == "--quantify-screens") return QuantifyScreens(args[1]);
             if (args.Length is 2 or 3 && args[0] == "--results-screens") return ResultsScreens(args[1], args.Length == 3 ? args[2] : null);
@@ -149,7 +150,7 @@ namespace FamilyQuant.Tests
             Directory.CreateDirectory(workDir);
 
             if (args.Contains(EvidenceClassifierCheck.Argument) || args.Contains(EvidenceClassifierCheck.ArchitectureArgument)
-                || args.Contains(EvidenceClassifierCheck.ApplyArgument))
+                || args.Contains(EvidenceClassifierCheck.ApplyArgument) || args.Contains(EvidenceClassifierCheck.SessionApplyArgument))
             {
                 EvidenceClassifierCheck.Run(args, Check);
                 Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
