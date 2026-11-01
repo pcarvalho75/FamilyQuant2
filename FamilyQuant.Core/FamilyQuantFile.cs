@@ -10,7 +10,7 @@ using System.Text.Json.Serialization;
 
 namespace FamilyQuant
 {
-    public class FamilyClusterFile
+    public partial class FamilyClusterFile
     {
         private readonly PatternLabAttribution patternLabAttribution = new PatternLabAttribution();
 
