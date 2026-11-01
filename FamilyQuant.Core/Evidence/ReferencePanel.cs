@@ -9,6 +9,7 @@ using System.Text.Json.Serialization;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
+using FamilyQuant.Operations;
 
 namespace FamilyQuant.Evidence
 {
@@ -165,6 +166,40 @@ namespace FamilyQuant.Evidence
             file.EvidenceSource ??= new EvidenceProvenance();
             file.EvidenceSource.ReferencePanel = panel;
             return panel;
+        }
+
+        /// <summary>The stage name the panel fetch reports its progress under.</summary>
+        public const string ProgressStage = "Reference panel";
+
+        /// <summary>The panel fetch on the operation path: progress after each family, Cancel through the
+        /// context, and the panel kept with the file only by the final commit, so a cancel or a failure leaves
+        /// the file as it was. Run it through CoreOperation.RunAsync.</summary>
+        public static async Task<ReferencePanel> FetchAndStoreAsync(FamilyClusterFile file, OperationContext operation,
+            Func<ProteinEvidence, bool>? inScope = null, HttpMessageHandler? handler = null)
+        {
+            ArgumentNullException.ThrowIfNull(operation);
+            List<string> families = FamiliesFound(file, inScope);
+            ReferencePanel panel = await FetchAsync(families, handler, new OperationFetchProgress(operation),
+                operation.CancellationToken).ConfigureAwait(false);
+            operation.Commit(() =>
+            {
+                file.EvidenceSource ??= new EvidenceProvenance();
+                file.EvidenceSource.ReferencePanel = panel;
+            });
+            return panel;
+        }
+
+        /// <summary>Reports at once, on the fetching thread, so a cancel stops the fetch at the next family.</summary>
+        private sealed class OperationFetchProgress : IProgress<FetchProgress>
+        {
+            private readonly OperationContext operation;
+            public OperationFetchProgress(OperationContext operation) => this.operation = operation;
+
+            public void Report(FetchProgress value) => operation.Report(ProgressStage,
+                "Fetched " + value.CompletedBatches.ToString(CultureInfo.InvariantCulture) + " of "
+                + value.TotalBatches.ToString(CultureInfo.InvariantCulture) + " families, "
+                + value.Found.ToString("N0", CultureInfo.InvariantCulture) + " reviewed proteins kept",
+                value.CompletedBatches, value.TotalBatches);
         }
 
         /// <summary>The panel's entries as neighbour references, leaving out any accession already among

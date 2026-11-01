@@ -8,6 +8,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading;
+using FamilyQuant.Operations;
 
 namespace FamilyQuant.Evidence
 {
@@ -87,6 +88,13 @@ namespace FamilyQuant.Evidence
         public const string Method = "USEARCH search_global, every pair aligned, best hit by identity, never the same entry";
         public const double DefaultMinIdentityPercent = 50.0;
         public const int DefaultMinQueryAlignedPercent = 70;
+
+        /// <summary>Proteins aligned per USEARCH run: the search reports progress and can stop between runs.
+        /// The answer does not depend on it, since each protein's hits are its own.</summary>
+        public const int DefaultQueriesPerRun = 2000;
+
+        /// <summary>The stage name the search reports its progress under.</summary>
+        public const string ProgressStage = "Nearest reviewed protein";
         private const double IdentityEpsilon = 1e-9;
 
         private static readonly ConcurrentDictionary<string, Lazy<List<NearestNeighbour>>> Memo =
@@ -198,18 +206,21 @@ namespace FamilyQuant.Evidence
         /// is memoised on the content of both sets and the gate, so a repeated call in one session does not
         /// run USEARCH again; a failed run is never remembered. <paramref name="ownAccessions"/> names the
         /// entry of a query whose identifier does not carry it (a leave-one-out on stripped headers), so
-        /// that query still never takes itself.
+        /// that query still never takes itself. With an <paramref name="operation"/>, progress is reported
+        /// after every <paramref name="queriesPerRun"/> proteins, and a cancel stops USEARCH and remembers nothing.
         /// </summary>
         public static NeighbourSearch Search(IReadOnlyList<FastaItemExtended> queries,
             IReadOnlyList<NeighbourReference> references,
             double minIdentityPercent = DefaultMinIdentityPercent,
             int minQueryAlignedPercent = DefaultMinQueryAlignedPercent,
-            IReadOnlyDictionary<string, string>? ownAccessions = null)
+            IReadOnlyDictionary<string, string>? ownAccessions = null,
+            OperationContext? operation = null, int queriesPerRun = DefaultQueriesPerRun)
         {
             if (minIdentityPercent <= 0 || minIdentityPercent > 100)
                 throw new ArgumentOutOfRangeException(nameof(minIdentityPercent));
             if (minQueryAlignedPercent < 0 || minQueryAlignedPercent > 100)
                 throw new ArgumentOutOfRangeException(nameof(minQueryAlignedPercent));
+            if (queriesPerRun < 1) throw new ArgumentOutOfRangeException(nameof(queriesPerRun));
 
             List<FastaItemExtended> searched = queries
                 .Where(q => !IsDecoy(q) && !string.IsNullOrEmpty(q.Sequence)).ToList();
@@ -222,7 +233,7 @@ namespace FamilyQuant.Evidence
                 minQueryAlignedPercent.ToString(CultureInfo.InvariantCulture), queryHash, referenceHash);
 
             Lazy<List<NearestNeighbour>> lazy = Memo.GetOrAdd(key, _ => new Lazy<List<NearestNeighbour>>(
-                () => Run(searched, own, panel, minIdentityPercent, minQueryAlignedPercent),
+                () => Run(searched, own, panel, minIdentityPercent, minQueryAlignedPercent, operation, queriesPerRun),
                 LazyThreadSafetyMode.ExecutionAndPublication));
             List<NearestNeighbour> found;
             try { found = lazy.Value; }
@@ -256,12 +267,20 @@ namespace FamilyQuant.Evidence
 
         /// <summary>Searches every target of the file against its reviewed proteins (narrowed by
         /// <paramref name="inScope"/> when given) and its stored reference panel, and stores the answer
-        /// with the file's evidence.</summary>
-        public static NeighbourSearch SearchAndStore(FamilyClusterFile file, Func<ProteinEvidence, bool>? inScope = null)
+        /// with the file's evidence. With an <paramref name="operation"/> the answer is stored only by its
+        /// final commit, so a cancel leaves the file as it was; run it through CoreOperation.Run for
+        /// progress and Cancel.</summary>
+        public static NeighbourSearch SearchAndStore(FamilyClusterFile file, Func<ProteinEvidence, bool>? inScope = null,
+            OperationContext? operation = null, int queriesPerRun = DefaultQueriesPerRun)
         {
-            NeighbourSearch search = Search(Targets(file), References(file, inScope));
-            file.EvidenceSource ??= new EvidenceProvenance();
-            file.EvidenceSource.NearestReviewed = search;
+            NeighbourSearch search = Search(Targets(file), References(file, inScope), operation: operation, queriesPerRun: queriesPerRun);
+            void Store()
+            {
+                file.EvidenceSource ??= new EvidenceProvenance();
+                file.EvidenceSource.NearestReviewed = search;
+            }
+            if (operation == null) Store();
+            else operation.Commit(Store);
             return search;
         }
 
@@ -303,7 +322,8 @@ namespace FamilyQuant.Evidence
         }
 
         private static List<NearestNeighbour> Run(List<FastaItemExtended> queries, List<string> own,
-            List<NeighbourReference> references, double minIdentityPercent, int minQueryAlignedPercent)
+            List<NeighbourReference> references, double minIdentityPercent, int minQueryAlignedPercent,
+            OperationContext? operation, int queriesPerRun)
         {
             if (queries.Count == 0 || references.Count == 0) return new List<NearestNeighbour>();
 
@@ -314,22 +334,31 @@ namespace FamilyQuant.Evidence
             string referenceFasta = Path.Combine(dir, "nearest_r_" + token + ".fasta");
             try
             {
-                // Index labels, so no header character can reach USEARCH's label parsing.
-                WriteFasta(queryFasta, 'q', queries.Select(q => q.Sequence));
+                // Index labels, so no header character can reach USEARCH's label parsing; the queries of
+                // one run keep their position in the whole list.
                 WriteFasta(referenceFasta, 'r', references.Select(r => r.Sequence));
                 Interlocked.Increment(ref searchRuns);
                 // Only hits past the gate and on another entry are kept, so a query with hundreds of
                 // short fragment hits does not hold them all in memory.
                 var hitsByQuery = new Dictionary<int, List<(NeighbourReference, double, int, int, int)>>();
-                USearchTools.SearchGlobal(queryFasta, referenceFasta, minIdentityPercent / 100.0, edge =>
+                operation?.Report(ProgressStage, "Aligning " + Count(queries.Count) + " proteins with "
+                    + Count(references.Count) + " reviewed proteins", 0, queries.Count);
+                for (int start = 0; start < queries.Count; start += queriesPerRun)
                 {
-                    int q = LabelIndex(edge.QueryId, 'q', queries.Count);
-                    int r = LabelIndex(edge.TargetId, 'r', references.Count);
-                    if (!PassesGate(edge.IdentityPercent, edge.AlignmentLength, edge.QueryLength,
-                            minIdentityPercent, minQueryAlignedPercent)) return;
-                    if (!hitsByQuery.TryGetValue(q, out var list)) hitsByQuery[q] = list = new();
-                    list.Add((references[r], edge.IdentityPercent, edge.AlignmentLength, edge.QueryLength, edge.TargetLength));
-                });
+                    int end = Math.Min(queries.Count, start + queriesPerRun);
+                    WriteFasta(queryFasta, 'q', queries.Skip(start).Take(end - start).Select(q => q.Sequence), start);
+                    USearchTools.SearchGlobal(queryFasta, referenceFasta, minIdentityPercent / 100.0, edge =>
+                    {
+                        int q = LabelIndex(edge.QueryId, 'q', queries.Count);
+                        int r = LabelIndex(edge.TargetId, 'r', references.Count);
+                        if (!PassesGate(edge.IdentityPercent, edge.AlignmentLength, edge.QueryLength,
+                                minIdentityPercent, minQueryAlignedPercent)) return;
+                        if (!hitsByQuery.TryGetValue(q, out var list)) hitsByQuery[q] = list = new();
+                        list.Add((references[r], edge.IdentityPercent, edge.AlignmentLength, edge.QueryLength, edge.TargetLength));
+                    }, operation);
+                    operation?.Report(ProgressStage, "Aligned " + Count(end) + " of " + Count(queries.Count) + " proteins",
+                        end, queries.Count);
+                }
 
                 var found = new List<NearestNeighbour>();
                 for (int q = 0; q < queries.Count; q++)
@@ -349,6 +378,8 @@ namespace FamilyQuant.Evidence
             }
         }
 
+        private static string Count(int value) => value.ToString("N0", CultureInfo.InvariantCulture);
+
         private static int LabelIndex(string label, char prefix, int count)
         {
             if (label.Length > 1 && label[0] == prefix
@@ -358,10 +389,10 @@ namespace FamilyQuant.Evidence
             throw new InvalidDataException("USEARCH reported a label it was not given: \"" + label + "\".");
         }
 
-        private static void WriteFasta(string path, char prefix, IEnumerable<string> sequences)
+        private static void WriteFasta(string path, char prefix, IEnumerable<string> sequences, int first = 0)
         {
             using var writer = new StreamWriter(path, false, new UTF8Encoding(false)) { NewLine = "\n" };
-            int n = 0;
+            int n = first;
             foreach (string sequence in sequences)
             {
                 writer.WriteLine(">" + prefix + n.ToString(CultureInfo.InvariantCulture));
