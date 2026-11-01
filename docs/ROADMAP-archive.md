@@ -77,6 +77,7 @@ Finished steps, moved here from docs/ROADMAP.md. The board shows them as green.
 | C8 | Quantify screen instead of the Compute dialog; one run summary | M | 3 | S2 | C10, V3, C13 | Same inputs, same outputs; golden equal; run summary kept | EV | RS | 0% | 0% | T+3 |
 | C9 | Results screen: Analytics paragraph becomes short summary cards with details on demand; one primary export | M | 4 | S2 | V6, V3, X9, C13 | Every fact in the paragraph still reachable; golden equal | EV | RS | 0% | 0% | T+4 |
 | C6 | Build families screen: one flow, one explanation line, button labels that say what they do ("Input a FASTA file" and "Run USearch" go); Remove Redundancy kept | M | 3 | S2, X3 | C7, V3 | All ledger rows kept; renders pass | AS | SH | 0% | 0% | T+6 |
+| C10 | De novo uses the filters Compute uses, so the screen can no longer disagree with the run. `DeNovoControl` (2,329 lines) replaced by a view model and a thin view | H | 5 | C8 | C11, V3 | One source of filters; test proves it; ledger rows checked | EV | RS | 0% | 0% | T+5 |
 
 ### W6 Core rewrite: copy what is good, rewrite what is better
 
