@@ -50,7 +50,8 @@ internal static partial class Program
                 && workflow.Contains("Build families") && workflow.Contains(build.ShellHelpText));
             typeof(MainWindow).GetMethod("MenuItemDeNovo_Click", any)!.Invoke(main, new object[] { main, new RoutedEventArgs() });
             Check("de novo status is short while its detailed navigation facts stay in Help", guide.Text.Contains("De novo")
-                && main.StatusModel.ContextHelp.Contains("Load Family") && main.StatusModel.ContextHelp.Contains("scan, charge"));
+                && main.StatusModel.ContextHelp.Contains("View > Families") && main.StatusModel.ContextHelp.Contains("File > Open")
+                && main.StatusModel.ContextHelp.Contains("scan, charge"));
 
             bool curationContract = typeof(ClusterGenerationControl).GetProperty("ShellStatusText") != null
                 && typeof(ClusterGenerationControl).GetProperty("UseShellStatusBar") != null
