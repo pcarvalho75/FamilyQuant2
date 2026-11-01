@@ -80,6 +80,28 @@ namespace FamilyQuant.Tests
             literal.Contains("Reverse_", StringComparison.Ordinal) ||
             literal.Contains("contaminant_", StringComparison.Ordinal) || literal == "contaminant";
 
+        private static void CoreMessageBoxTests()
+        {
+            bool ContainsMessageBox(string source)
+            {
+                string code = Regex.Replace(source,
+                    @"(?s)/\*.*?\*/|//[^\r\n]*|@""(?:""""|[^""])*""|""(?:\\.|[^""\\])*""",
+                    token => new string(' ', token.Length));
+                return Regex.IsMatch(code, @"\bMessageBox\b");
+            }
+            Check("the Core message-box guard rejects a planted call", ContainsMessageBox("MessageBox.Show(\"blocked\");"));
+            Check("the Core message-box guard ignores comments and user text",
+                !ContainsMessageBox("// MessageBox.Show()\nstring text = \"MessageBox\";"));
+            DirectoryInfo? root = new DirectoryInfo(AppContext.BaseDirectory);
+            while (root != null && !File.Exists(Path.Combine(root.FullName, "FamilyQuant2.sln"))) root = root.Parent;
+            var violations = root == null ? new[] { "checkout not found" } :
+                Directory.EnumerateFiles(Path.Combine(root.FullName, "FamilyQuant.Core"), "*.cs", SearchOption.AllDirectories)
+                    .Where(path => !Path.GetRelativePath(root.FullName, path).Split(Path.DirectorySeparatorChar)
+                        .Any(part => part is "bin" or "obj"))
+                    .Where(path => ContainsMessageBox(File.ReadAllText(path))).ToArray();
+            Check("Core raises no message boxes", violations.Length == 0, string.Join(", ", violations));
+        }
+
         private static List<int> PrefixLiterals(string source)
         {
             var positions = new List<int>();

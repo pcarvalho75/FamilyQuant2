@@ -1,4 +1,5 @@
 using PatternTools.FastaTools;
+using FamilyQuant.Operations;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -65,8 +66,9 @@ namespace FamilyQuant
         private static long pairwiseAlignmentRuns;
         public static long PairwiseAlignmentRunCount => Interlocked.Read(ref pairwiseAlignmentRuns);
 
-        public static string Align(List<FastaItemExtended> fastaSequences)
+        public static string Align(List<FastaItemExtended> fastaSequences, OperationContext? operation = null)
         {
+            operation?.ThrowIfCancellationRequested();
             string usearchExe = GetUSearchPath();
 
             string tempDir = ApplicationPaths.ScratchDirectory;
@@ -84,6 +86,7 @@ namespace FamilyQuant
                 {
                     foreach (FastaItemExtended f in fastaSequences)
                     {
+                        operation?.ThrowIfCancellationRequested();
                         sw.WriteLine(">" + f.SequenceIdentifier);
                         sw.WriteLine(f.Sequence);
                     }
@@ -94,7 +97,7 @@ namespace FamilyQuant
                 // unquoted command line and was the most likely cause of the alignment crash.
                 string arguments = $"-allpairs_global \"{fileFasta}\" -alnout \"{alnFile}\" --acceptall";
 
-                RunUSearch(usearchExe, arguments, tempDir);
+                RunUSearch(usearchExe, arguments, tempDir, operation);
 
                 if (!File.Exists(alnFile))
                 {
@@ -184,8 +187,9 @@ namespace FamilyQuant
         /// simply takes longer on a large database, and the caller (the USearch panel) warns once before
         /// starting it rather than capping it here.
         /// </summary>
-        public static FamilyClusterFile GenerateFCF(FileInfo fi, int identity, bool exhaustive = true)
+        public static FamilyClusterFile GenerateFCF(FileInfo fi, int identity, bool exhaustive = true, OperationContext? operation = null)
         {
+            operation?.ThrowIfCancellationRequested();
             string usearchExe = GetUSearchPath();
 
             // Absolute, quoted paths plus an explicit working directory: we no longer mutate the
@@ -209,7 +213,7 @@ namespace FamilyQuant
 
             try
             {
-                RunUSearch(usearchExe, arguments, fi.DirectoryName ?? Environment.CurrentDirectory);
+                RunUSearch(usearchExe, arguments, fi.DirectoryName ?? Environment.CurrentDirectory, operation);
 
                 if (!File.Exists(ucFile))
                 {
@@ -222,11 +226,11 @@ namespace FamilyQuant
                     ffp.ParseFile(reader, false);
                 }
 
-                List<FastaItemExtended> fastaItemsExtended = ParseClusterFile(ucFile, ffp.MyItems);
+                List<FastaItemExtended> fastaItemsExtended = ParseClusterFile(ucFile, ffp.MyItems, operation);
 
                 if (exhaustive)
                 {
-                    ApplyExhaustiveSecondPass(fi, usearchExe, fastaItemsExtended, identity);
+                    ApplyExhaustiveSecondPass(fi, usearchExe, fastaItemsExtended, identity, operation);
                 }
 
                 return new FamilyClusterFile()
@@ -248,11 +252,13 @@ namespace FamilyQuant
         /// Number of sequences in a FASTA, counted by its '&gt;' header lines without loading the file
         /// into memory. Used to warn before an exhaustive clustering of a very large database.
         /// </summary>
-        public static int CountSequences(FileInfo fi)
+        public static int CountSequences(FileInfo fi, OperationContext? operation = null)
         {
+            operation?.ThrowIfCancellationRequested();
             int count = 0;
             foreach (string line in File.ReadLines(fi.FullName))
             {
+                operation?.ThrowIfCancellationRequested();
                 if (line.Length > 0 && line[0] == '>') count++;
             }
             return count;
@@ -286,8 +292,9 @@ namespace FamilyQuant
         public static Dictionary<string, int> MergeFirstPassClusters(
             IReadOnlyDictionary<string, int> firstPassClusterBySeq,
             IEnumerable<PairwiseEdge> edges,
-            int identity)
+            int identity, OperationContext? operation = null)
         {
+            operation?.ThrowIfCancellationRequested();
             var parent = new Dictionary<int, int>();
 
             int Find(int x)
@@ -350,9 +357,9 @@ namespace FamilyQuant
         /// untouched rather than throwing: the caller still gets a usable Family Cluster File.
         /// </summary>
         private static void ApplyExhaustiveSecondPass(
-            FileInfo fi, string usearchExe, List<FastaItemExtended> items, int identity)
+            FileInfo fi, string usearchExe, List<FastaItemExtended> items, int identity, OperationContext? operation)
         {
-            List<PairwiseEdge>? edges = GetOrAlignPairwiseEdges(fi, usearchExe);
+            List<PairwiseEdge>? edges = GetOrAlignPairwiseEdges(fi, usearchExe, operation);
             if (edges == null || edges.Count == 0)
             {
                 // Never fail silently: the exhaustive pass was requested but the all-pairs alignment
@@ -366,7 +373,7 @@ namespace FamilyQuant
             var firstPass = new Dictionary<string, int>(items.Count, StringComparer.Ordinal);
             foreach (FastaItemExtended item in items) firstPass[item.SequenceIdentifier] = item.USearchID;
 
-            Dictionary<string, int> merged = MergeFirstPassClusters(firstPass, edges, identity);
+            Dictionary<string, int> merged = MergeFirstPassClusters(firstPass, edges, identity, operation);
 
             foreach (FastaItemExtended item in items)
             {
@@ -384,19 +391,25 @@ namespace FamilyQuant
         /// alignment and the rest read the cache. A FAILED or EMPTY alignment is dropped from the memo
         /// before returning, so it is retried next time instead of being remembered as "no edges".
         /// </summary>
-        private static List<PairwiseEdge>? GetOrAlignPairwiseEdges(FileInfo fi, string usearchExe)
+        private static List<PairwiseEdge>? GetOrAlignPairwiseEdges(FileInfo fi, string usearchExe, OperationContext? operation = null)
         {
+            operation?.ThrowIfCancellationRequested();
             fi.Refresh();
             string key = fi.FullName + "|" + FileFingerprint.Sha256(fi.FullName);
 
             Lazy<List<PairwiseEdge>?> lazy = PairwiseEdgeCache.GetOrAdd(
                 key,
                 _ => new Lazy<List<PairwiseEdge>?>(
-                    () => AlignAllPairs(fi, usearchExe),
+                    () => AlignAllPairs(fi, usearchExe, operation),
                     LazyThreadSafetyMode.ExecutionAndPublication));
 
             List<PairwiseEdge>? edges;
-            try { edges = lazy.Value; }
+            try { operation?.ThrowIfCancellationRequested(); edges = lazy.Value; operation?.ThrowIfCancellationRequested(); }
+            catch (OperationCanceledException)
+            {
+                PairwiseEdgeCache.TryRemove(new KeyValuePair<string, Lazy<List<PairwiseEdge>?>>(key, lazy));
+                throw;
+            }
             catch { edges = null; }
 
             if (edges == null || edges.Count == 0)
@@ -413,9 +426,10 @@ namespace FamilyQuant
         /// Test seam: the memoised all-pairs edges for a FASTA (aligning once and caching, exactly as the
         /// exhaustive pass does). Returns null when the alignment fails or is empty.
         /// </summary>
-        public static IReadOnlyList<PairwiseEdge>? GetPairwiseEdgesForTest(FileInfo fi)
+        public static IReadOnlyList<PairwiseEdge>? GetPairwiseEdgesForTest(FileInfo fi, OperationContext? operation = null)
         {
-            return GetOrAlignPairwiseEdges(fi, GetUSearchPath());
+            operation?.ThrowIfCancellationRequested();
+            return GetOrAlignPairwiseEdges(fi, GetUSearchPath(), operation);
         }
 
         /// <summary>
@@ -423,7 +437,7 @@ namespace FamilyQuant
         /// query/target/id/alnlen/ql/tl table. Any failure returns null (rather than throwing) so the
         /// memo above never caches an exception, and the exhaustive pass falls back to fast-only.
         /// </summary>
-        private static List<PairwiseEdge>? AlignAllPairs(FileInfo fi, string usearchExe)
+        private static List<PairwiseEdge>? AlignAllPairs(FileInfo fi, string usearchExe, OperationContext? operation)
         {
             string tsvFile = Path.Combine(
                 fi.DirectoryName ?? string.Empty,
@@ -439,12 +453,13 @@ namespace FamilyQuant
 
             try
             {
-                RunUSearch(usearchExe, arguments, fi.DirectoryName ?? Environment.CurrentDirectory);
+                RunUSearch(usearchExe, arguments, fi.DirectoryName ?? Environment.CurrentDirectory, operation);
 
                 if (!File.Exists(tsvFile)) return null;
 
-                return ParsePairwiseEdges(tsvFile);
+                return ParsePairwiseEdges(tsvFile, operation);
             }
+            catch (OperationCanceledException) { throw; }
             catch
             {
                 // A blocked/removed USEARCH, a locked temp path, or an unreadable table: fall back to the
@@ -503,13 +518,14 @@ namespace FamilyQuant
             }
         }
 
-        private static List<PairwiseEdge> ParsePairwiseEdges(string tsvFile)
+        private static List<PairwiseEdge> ParsePairwiseEdges(string tsvFile, OperationContext? operation = null)
         {
             var edges = new List<PairwiseEdge>();
             double maxId = 0.0;
 
             foreach (string line in File.ReadLines(tsvFile))
             {
+                operation?.ThrowIfCancellationRequested();
                 if (string.IsNullOrWhiteSpace(line)) continue;
 
                 string[] cols = line.Split('\t');
@@ -560,8 +576,9 @@ namespace FamilyQuant
         /// WaitForExit deadlock when USEARCH is chatty, and a failure to launch (blocked/removed exe) is
         /// translated into an actionable message.
         /// </summary>
-        private static void RunUSearch(string exePath, string arguments, string workingDirectory)
+        private static void RunUSearch(string exePath, string arguments, string workingDirectory, OperationContext? operation = null)
         {
+            operation?.Report("usearch", "Running sequence alignment");
             ProcessStartInfo psi = new ProcessStartInfo(exePath, arguments)
             {
                 UseShellExecute = false,        // required to redirect output; also avoids a console flash
@@ -590,11 +607,26 @@ namespace FamilyQuant
                     process.Start();
                     process.BeginOutputReadLine();
                     process.BeginErrorReadLine();
-                    if (!process.WaitForExit(ProcessTimeout))
+                    bool exited;
+                    if (operation == null) exited = process.WaitForExit(ProcessTimeout);
+                    else
+                    {
+                        var timer = Stopwatch.StartNew();
+                        while (!(exited = process.WaitForExit(100)) && timer.Elapsed < ProcessTimeout)
+                        {
+                            if (!operation.IsCancellationRequested) continue;
+                            try { process.Kill(entireProcessTree: true); } catch { }
+                            process.WaitForExit();
+                            operation.ThrowIfCancellationRequested();
+                        }
+                    }
+                    if (!exited)
                     {
                         try { process.Kill(entireProcessTree: true); } catch { }
+                        process.WaitForExit();
                         throw new TimeoutException("USEARCH exceeded the 30-minute safety timeout and was stopped.");
                     }
+                    operation?.ThrowIfCancellationRequested();
                     process.WaitForExit();   // ensure asynchronous output readers have drained
 
                     if (process.ExitCode != 0)
@@ -627,7 +659,7 @@ namespace FamilyQuant
             }
         }
 
-        private static List<FastaItemExtended> ParseClusterFile(string file, List<FastaItem> fastaItems)
+        private static List<FastaItemExtended> ParseClusterFile(string file, List<FastaItem> fastaItems, OperationContext? operation = null)
         {
             // Refuse a repeated identifier instead of quietly keeping the first: the duplicate would be
             // dropped from the .fcf entirely (the .uc dedup below discards it too), so its peptides would
@@ -635,6 +667,7 @@ namespace FamilyQuant
             var locusSequenceDict = new Dictionary<string, string>();
             foreach (var item in fastaItems)
             {
+                operation?.ThrowIfCancellationRequested();
                 if (locusSequenceDict.ContainsKey(item.SequenceIdentifier))
                 {
                     throw new InvalidOperationException(

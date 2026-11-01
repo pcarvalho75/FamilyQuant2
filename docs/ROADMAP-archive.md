@@ -78,4 +78,5 @@ Finished steps, moved here from docs/ROADMAP.md. The board shows them as green.
 | X2 | Family document: split `FamilyQuantFile` (733 lines) into document, target-decoy score and PatternLab attribution. `XIC` legacy field read on load only | H | 4 | F6 | X3, X7 | Every old `.fcf` opens; golden equal; lines reported | AS | not started | 0% | 0% | T+4 |
 | X4 | Word and keyword grouping: `WordCluster` rewritten around one matcher, keeping every rule the suite pins | H | 3 | F5, F6 | R3 | Same merges on real files; `SearchTerms` and phrases pinned | AS | RS | 0% | 0% | T+3 |
 | X8 | Charts: one shared base for the 8 chart classes, so axes, labels and PNG export are written once | H | 4 | F6, V2 | V6, X9 | Exported PNGs unchanged; line count reported | AS | RS | 0% | 0% | T+7 |
+| X10 | One path for errors, progress and cancel in Core; no message box below the App layer | M | 3 | F6 | X3, X5, S6 | A suite check fails on `MessageBox` in Core; each long operation cancels cleanly | AS | not started | 0% | 0% | T+3 |
 

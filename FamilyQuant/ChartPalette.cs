@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Windows;
 using System.Windows.Media;
 
 namespace FamilyQuant
@@ -179,6 +180,39 @@ namespace FamilyQuant
         /// what the application looks like, rather than throwing inside a render pass.</summary>
         public static ChartPalette For(ChartPaletteVariant variant) =>
             variant == ChartPaletteVariant.Light ? Light : Dark;
+
+        /// <summary>A frozen snapshot of the current application tokens for on-screen charts.
+        /// Read on the application dispatcher and read again after ThemeManager.ThemeChanged.
+        /// The historical Dark and slide Light palettes remain independent.</summary>
+        public static ChartPalette UiPalette
+        {
+            get
+            {
+                var app = Application.Current ?? throw new InvalidOperationException("An application is required for UI chart tokens.");
+                app.Dispatcher.VerifyAccess();
+                Brush Token(string key)
+                {
+                    var brush = ((Brush)app.FindResource(key)).CloneCurrentValue();
+                    brush.Freeze(); return brush;
+                }
+                var backdrop = Token("CanvasBrush");
+                var identified = Token("ChartIdentifiedBrush"); var deNovo = Token("ChartDeNovoBrush");
+                var mixing = Token("ErrorBrush"); var detected = Token("ChartDetectedBrush");
+                var muted = Token("MutedBrush");
+                return new ChartPalette(RelativeLuminance(backdrop) > 0.5 ? ChartPaletteVariant.Light : ChartPaletteVariant.Dark)
+                {
+                    Backdrop = backdrop, Ink = Token("TextBrush"), Muted = muted, Grid = Token("EdgeBrush"),
+                    Panel = Token("SubtleBrush"), Axis = muted, SegmentLabel = Token("AccentInkBrush"),
+                    Identified = identified, DeNovo = deNovo, Quantified = Token("ChartQuantifiedBrush"),
+                    NotQuantified = Token("ChartNotQuantifiedBrush"), PeptideLikeUnidentified = Token("ChartPeptideLikeBrush"),
+                    Remainder = Token("ChartRemainderBrush"), Detected = detected, DetectedMultiplyCharged = detected,
+                    DetectedSinglyCharged = Token("ChartSinglyBrush"), Tic = Token("ChartTicBrush"),
+                    Families = identified, Mixing = mixing, Floor = Token("SuccessBrush"),
+                    NotAFamily = Token("ChartPeptideLikeBrush"), Found = identified, OfTic = deNovo,
+                    MassBands = new[] { identified, deNovo, mixing }
+                };
+            }
+        }
 
         private static ChartPalette BuildDark()
         {
