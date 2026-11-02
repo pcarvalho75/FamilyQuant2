@@ -52,6 +52,9 @@ namespace FamilyQuant.Tests
             if (args.Contains("--test-evidence-task", StringComparer.Ordinal))
             {
                 EvidenceTaskTests();
+                Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
+                return failed == 0 ? 0 : 1;
+            }
             if (args.Contains("--test-keyword-command", StringComparer.Ordinal))
             {
                 KeywordCommandTests();
