@@ -17,7 +17,7 @@ Render targets refer to `ScreenHarness.Screens`, captured with `--screens <outpu
 Release gate: `FamilyQuant.Tests.exe --feature-ledger-release-check` fails until every retained row is VERIFIED with evidence. Authorized DROP rows use APPROVED_DROP, which records a decision, not a completed UI removal. The normal quick suite permits OPEN rows during development. Regeneration resets retained rows to OPEN; preserve reviewed evidence when updating the scanner.
 
 Scan count: **5756**. Ledger rows: **5756**. Source files: **104**.
-Authorized DROP rows: **296**; proposed VERIFIED retained rows: **3116**; OPEN retained rows: **2344**.
+Authorized DROP rows: **296**; proposed VERIFIED retained rows: **3126**; OPEN retained rows: **2334**.
 
 | ID | Disposition | Kind | Frozen source | Fact or control | Planned check | State | Evidence |
 |---|---|---|---|---|---|---|---|
@@ -5546,7 +5546,7 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **3116**; OPEN r
 | FQ15-5A6CA2000AEA | IMPROVE | tooltip | FamilyQuant/USearch.xaml:49 | ButtonInput.ToolTip = Step 1: clusters the database you pick at the identity above and saves a Family Cluster File (.fcf) beside it. You are asked before an existing .fcf is replaced. | render:02-build | OPEN | pending |
 | FQ15-6065665A6950 | IMPROVE | control | FamilyQuant/USearch.xaml:50 | Button ButtonCalculateFDR | test:RunAssayRuntimeLedger | VERIFIED | evidence:AS-build-properties:FQ15-6065665A6950 |
 | FQ15-3C6A779987F9 | IMPROVE | option/copy | FamilyQuant/USearch.xaml:50 | ButtonCalculateFDR.Content = Calculate FDR | render:02-build | OPEN | pending |
-| FQ15-E3960ECBE389 | KEEP | handler | FamilyQuant/USearch.xaml:50 | ButtonCalculateFDR.Click = ButtonCalculateFDR_Click | render:02-build | OPEN | pending |
+| FQ15-E3960ECBE389 | KEEP | handler | FamilyQuant/USearch.xaml:50 | ButtonCalculateFDR.Click = ButtonCalculateFDR_Click | test:RunAssayRuntimeLedger | VERIFIED | evidence:AS-build-workflow:FQ15-E3960ECBE389 |
 | FQ15-39E956DE650F | IMPROVE | option/copy | FamilyQuant/USearch.xaml:51 | ButtonCalculateFDR.IsEnabled = False | test:ShellLedgerComparisonCommand | VERIFIED | evidence:SH:FQ15-39E956DE650F |
 | FQ15-FCA4B942E595 | IMPROVE | tooltip | FamilyQuant/USearch.xaml:53 | ButtonCalculateFDR.ToolTip = Shows the fraction of families that mix real and decoy (Reverse_) sequences; zero is what you want. Needs a target-decoy (.T-R) database. Disabled until a Family Cluster File is generated above. | render:02-build | OPEN | pending |
 | FQ15-9B7D3F11FB58 | IMPROVE | option/copy | FamilyQuant/USearch.xaml:57 | GroupBox.Header = \uD83C\uDFAF Divide and Conquer (auto-tune identity) | render:02-build | OPEN | pending |
@@ -5560,11 +5560,11 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **3116**; OPEN r
 | FQ15-C8FFCC2A4667 | IMPROVE | option/copy | FamilyQuant/USearch.xaml:71 | TextBlock.Text = The target/decoy score only detects a target aligning to a decoy, which marks where alignment becomes noise. It cannot see two unrelated target families being fused, so use it as a floor - not as a budget. | render:02-build | OPEN | pending |
 | FQ15-BB5437376059 | IMPROVE | control | FamilyQuant/USearch.xaml:73 | Button ButtonDivideAndConquer | test:RunAssayRuntimeLedger | VERIFIED | evidence:AS-build-properties:FQ15-BB5437376059 |
 | FQ15-04FFDD6B6BF9 | IMPROVE | option/copy | FamilyQuant/USearch.xaml:73 | ButtonDivideAndConquer.Content = Run Divide & Conquer | render:02-build | OPEN | pending |
-| FQ15-6DBF9740F722 | KEEP | handler | FamilyQuant/USearch.xaml:73 | ButtonDivideAndConquer.Click = ButtonDivideAndConquer_Click | render:02-build | OPEN | pending |
+| FQ15-6DBF9740F722 | KEEP | handler | FamilyQuant/USearch.xaml:73 | ButtonDivideAndConquer.Click = ButtonDivideAndConquer_Click | test:RunAssayRuntimeLedger | VERIFIED | evidence:AS-build-workflow:FQ15-6DBF9740F722 |
 | FQ15-5C14D092A72E | IMPROVE | tooltip | FamilyQuant/USearch.xaml:75 | ButtonDivideAndConquer.ToolTip = Finds the lowest identity that keeps the mixing score within the limit above. It only reports a number: type it into Identity and press "Input a FASTA file". Treat it as a floor. | render:02-build | OPEN | pending |
 | FQ15-25C42617BBA4 | IMPROVE | control | FamilyQuant/USearch.xaml:77 | Button ButtonScanIdentities | test:RunAssayRuntimeLedger | VERIFIED | evidence:AS-build-properties:FQ15-25C42617BBA4 |
 | FQ15-9B01394529F6 | IMPROVE | option/copy | FamilyQuant/USearch.xaml:77 | ButtonScanIdentities.Content = Scan identity range | test:ShellLedgerComparisonCommand | VERIFIED | evidence:SH:FQ15-9B01394529F6 |
-| FQ15-032C14B46507 | KEEP | handler | FamilyQuant/USearch.xaml:77 | ButtonScanIdentities.Click = ButtonScanIdentities_Click | render:02-build | OPEN | pending |
+| FQ15-032C14B46507 | KEEP | handler | FamilyQuant/USearch.xaml:77 | ButtonScanIdentities.Click = ButtonScanIdentities_Click | test:RunAssayRuntimeLedger | VERIFIED | evidence:AS-build-workflow:FQ15-032C14B46507 |
 | FQ15-67C18A2317D7 | IMPROVE | tooltip | FamilyQuant/USearch.xaml:80 | ButtonScanIdentities.ToolTip = Clusters at every identity from 95% down to 10% and tabulates the family count and target/decoy mixing. Use it before choosing a threshold. Nothing is saved; large databases take a while. | render:02-build | OPEN | pending |
 | FQ15-7823248CE671 | IMPROVE | option/copy | FamilyQuant/USearch.xaml:84 | GroupBox.Header = \uD83E\uDDEC Remove Redundancy (preserve order) | render:02-build | OPEN | pending |
 | FQ15-4A644A3EA1F3 | IMPROVE | option/copy | FamilyQuant/USearch.xaml:88 | TextBlock.Text = Removes subset / near-identical sequences from a FASTA and writes &lt;name&gt;_NO_REDUNDANCY.fasta beside it, keeping the original sequence order and headers. Do this before "Input a FASTA file" when a database has fragments or duplicates that would otherwise split a family. Same as PatternLab's database generator, without leaving this window. | render:02-build | OPEN | pending |
@@ -5580,7 +5580,7 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **3116**; OPEN r
 | FQ15-BE7BFC4196C9 | IMPROVE | tooltip | FamilyQuant/USearch.xaml:98 | Label.ToolTip = The identity is a percentage of aligned residues. | render:02-build | OPEN | pending |
 | FQ15-21F35F2A9566 | IMPROVE | control | FamilyQuant/USearch.xaml:99 | Button ButtonRemoveRedundancy | test:RunAssayRuntimeLedger | VERIFIED | evidence:AS-build-properties:FQ15-21F35F2A9566 |
 | FQ15-5DF089148055 | IMPROVE | option/copy | FamilyQuant/USearch.xaml:99 | ButtonRemoveRedundancy.Content = Remove redundancy from FASTA... | render:02-build | OPEN | pending |
-| FQ15-6093D76BEEB0 | KEEP | handler | FamilyQuant/USearch.xaml:100 | ButtonRemoveRedundancy.Click = ButtonRemoveRedundancy_Click | render:02-build | OPEN | pending |
+| FQ15-6093D76BEEB0 | KEEP | handler | FamilyQuant/USearch.xaml:100 | ButtonRemoveRedundancy.Click = ButtonRemoveRedundancy_Click | test:RunAssayRuntimeLedger | VERIFIED | evidence:AS-build-workflow:FQ15-6093D76BEEB0 |
 | FQ15-F512518204F4 | IMPROVE | tooltip | FamilyQuant/USearch.xaml:101 | ButtonRemoveRedundancy.ToolTip = Saves a copy of a FASTA without subset or near-identical sequences, as &lt;name&gt;_NO_REDUNDANCY.fasta beside it. Order and headers are kept; the original file is never changed. | render:02-build | OPEN | pending |
 | FQ15-94CC1A1E09A7 | IMPROVE | code fact | FamilyQuant/USearch.xaml.cs:40 | "Nothing was started: a clustering run is already going.\n\n" | render:02-build | OPEN | pending |
 | FQ15-92BF28F4DE7B | IMPROVE | code fact | FamilyQuant/USearch.xaml.cs:41 | "USEARCH is being run on this database right now, and two runs over the same files " | render:02-build | OPEN | pending |
@@ -5608,7 +5608,7 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **3116**; OPEN r
 | FQ15-69A89EC19D12 | IMPROVE | code fact | FamilyQuant/USearch.xaml.cs:120 | "Run exhaustive clustering on a large database?" | render:02-build | OPEN | pending |
 | FQ15-86A889C7F876 | KEEP | format/export | FamilyQuant/USearch.xaml.cs:130 | "FASTA or T-R (*.fasta or *.T-R)&#124;*.fasta;*.T-R;*.T" | render:02-build | OPEN | pending |
 | FQ15-AD996DDF8498 | IMPROVE | code fact | FamilyQuant/USearch.xaml.cs:131 | "Choose the protein database to group into families" | render:02-build | OPEN | pending |
-| FQ15-5CFE9A349CD9 | KEEP | format/export | FamilyQuant/USearch.xaml.cs:141 | ".fcf" | render:02-build | OPEN | pending |
+| FQ15-5CFE9A349CD9 | KEEP | format/export | FamilyQuant/USearch.xaml.cs:141 | ".fcf" | test:RunAssayRuntimeLedger | VERIFIED | evidence:AS-build-workflow:FQ15-5CFE9A349CD9 |
 | FQ15-E0CE19231C50 | IMPROVE | code fact | FamilyQuant/USearch.xaml.cs:148 | "\"" | render:02-build | OPEN | pending |
 | FQ15-148B413DE568 | IMPROVE | code fact | FamilyQuant/USearch.xaml.cs:148 | "\" already exists beside this database and will be " | render:02-build | OPEN | pending |
 | FQ15-AECC43288344 | IMPROVE | code fact | FamilyQuant/USearch.xaml.cs:149 | "replaced.\n\n" | render:02-build | OPEN | pending |
@@ -5711,7 +5711,7 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **3116**; OPEN r
 | FQ15-8606BD1E4DE3 | IMPROVE | code fact | FamilyQuant/USearch.xaml.cs:360 | "Already running" | render:02-build | OPEN | pending |
 | FQ15-03A849FBACFB | KEEP | format/export | FamilyQuant/USearch.xaml.cs:366 | "FASTA (*.fasta;*.fa;*.fas)&#124;*.fasta;*.fa;*.fas&#124;All files (*.*)&#124;*.*" | render:02-build | OPEN | pending |
 | FQ15-7F5D121CAE28 | IMPROVE | code fact | FamilyQuant/USearch.xaml.cs:367 | "Choose the FASTA to remove redundant sequences from" | render:02-build | OPEN | pending |
-| FQ15-9EFCC84CCA4E | KEEP | format/export | FamilyQuant/USearch.xaml.cs:375 | "_NO_REDUNDANCY.fasta" | render:02-build | OPEN | pending |
+| FQ15-9EFCC84CCA4E | KEEP | format/export | FamilyQuant/USearch.xaml.cs:375 | "_NO_REDUNDANCY.fasta" | test:RunAssayRuntimeLedger | VERIFIED | evidence:AS-build-workflow:FQ15-9EFCC84CCA4E |
 | FQ15-3B50E44350B4 | IMPROVE | code fact | FamilyQuant/USearch.xaml.cs:383 | "Working \u00B7 removing redundant sequences from " | render:02-build | OPEN | pending |
 | FQ15-3385D4BF21BC | IMPROVE | code fact | FamilyQuant/USearch.xaml.cs:384 | ". The original order and headers are kept; the buttons come back when it finishes." | render:02-build | OPEN | pending |
 | FQ15-08A48106FA52 | IMPROVE | code fact | FamilyQuant/USearch.xaml.cs:394 | "N0" | render:02-build | OPEN | pending |
@@ -5752,10 +5752,10 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **3116**; OPEN r
 | FQ15-A4CE65AEFBC7 | IMPROVE | code fact | FamilyQuant/USearch.xaml.cs:472 | "Nothing here has been saved. Pick an identity, type it into the Identity box, and press" | render:02-build | OPEN | pending |
 | FQ15-B14F4E273A3B | IMPROVE | code fact | FamilyQuant/USearch.xaml.cs:473 | "\"Input a FASTA file\" to build the Family Cluster File at that value." | render:02-build | OPEN | pending |
 | FQ15-126AFD464272 | KEEP | handler definition | FamilyQuant/USearch.xaml.cs:126 | private async void ButtonInput_Click(object sender, RoutedEventArgs e) | render:02-build | OPEN | pending |
-| FQ15-56C3EADB2030 | KEEP | handler definition | FamilyQuant/USearch.xaml.cs:206 | private void ButtonCalculateFDR_Click(object sender, RoutedEventArgs e) | render:02-build | OPEN | pending |
-| FQ15-2E08B8B417C6 | KEEP | handler definition | FamilyQuant/USearch.xaml.cs:244 | private async void ButtonDivideAndConquer_Click(object sender, RoutedEventArgs e) | render:02-build | OPEN | pending |
-| FQ15-742D7AA226AF | KEEP | handler definition | FamilyQuant/USearch.xaml.cs:310 | private async void ButtonScanIdentities_Click(object sender, RoutedEventArgs e) | render:02-build | OPEN | pending |
-| FQ15-0FFD53E0F489 | KEEP | handler definition | FamilyQuant/USearch.xaml.cs:354 | private async void ButtonRemoveRedundancy_Click(object sender, RoutedEventArgs e) | render:02-build | OPEN | pending |
+| FQ15-56C3EADB2030 | KEEP | handler definition | FamilyQuant/USearch.xaml.cs:206 | private void ButtonCalculateFDR_Click(object sender, RoutedEventArgs e) | test:RunAssayRuntimeLedger | VERIFIED | evidence:AS-build-workflow:FQ15-56C3EADB2030 |
+| FQ15-2E08B8B417C6 | KEEP | handler definition | FamilyQuant/USearch.xaml.cs:244 | private async void ButtonDivideAndConquer_Click(object sender, RoutedEventArgs e) | test:RunAssayRuntimeLedger | VERIFIED | evidence:AS-build-workflow:FQ15-2E08B8B417C6 |
+| FQ15-742D7AA226AF | KEEP | handler definition | FamilyQuant/USearch.xaml.cs:310 | private async void ButtonScanIdentities_Click(object sender, RoutedEventArgs e) | test:RunAssayRuntimeLedger | VERIFIED | evidence:AS-build-workflow:FQ15-742D7AA226AF |
+| FQ15-0FFD53E0F489 | KEEP | handler definition | FamilyQuant/USearch.xaml.cs:354 | private async void ButtonRemoveRedundancy_Click(object sender, RoutedEventArgs e) | test:RunAssayRuntimeLedger | VERIFIED | evidence:AS-build-workflow:FQ15-0FFD53E0F489 |
 | FQ15-ABA539F0E87C | KEEP | format/export | FamilyQuant/USearchTools.cs:78 | ".fasta" | test:RunAssayRuntimeLedger | VERIFIED | evidence:AS-native-paths:FQ15-ABA539F0E87C |
 | FQ15-0858D5BCC3DD | KEEP | format/export | FamilyQuant/USearchTools.cs:79 | ".aln" | test:RunAssayRuntimeLedger | VERIFIED | evidence:AS-native-paths:FQ15-0858D5BCC3DD |
 | FQ15-343852E54626 | KEEP | format/export | FamilyQuant/USearchTools.cs:204 | ".uc" | test:RunAssayRuntimeLedger | VERIFIED | evidence:AS-native-paths:FQ15-343852E54626 |
