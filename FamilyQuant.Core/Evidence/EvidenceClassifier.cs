@@ -211,7 +211,7 @@ namespace FamilyQuant.Evidence
         private static HashSet<string> Domains(ProteinEvidence? evidence) => EvidenceDomains.Ordered(evidence).ToHashSet(StringComparer.Ordinal);
 
         private static bool IsContaminant(FastaItemExtended protein) =>
-            (protein.SequenceIdentifier ?? string.Empty).StartsWith(SequenceLabels.ContaminantPrefix, StringComparison.Ordinal);
+            SequenceLabels.IsContaminant(protein.SequenceIdentifier);
 
         private static bool HasMultipleFamilies(ProteinEvidence? evidence) => evidence?.FamilyMemberships != null
             && evidence.FamilyMemberships.Select(m => m.Family).Where(f => !string.IsNullOrWhiteSpace(f))
@@ -249,11 +249,16 @@ namespace FamilyQuant.Evidence
 
         private static bool Passes(NearestNeighbour neighbour, double identity, int coverage) =>
             double.IsFinite(neighbour.IdentityPercent) && neighbour.IdentityPercent <= 100
-            && NearestReviewed.PassesGate(neighbour.IdentityPercent, neighbour.AlignmentLength, neighbour.QueryLength, identity, coverage);
+            && neighbour.QueryAlignedResidues is int covered
+            && NearestReviewed.PassesGate(neighbour.IdentityPercent, covered, neighbour.QueryLength, identity, coverage);
 
         private static string NeighbourReason(NearestNeighbour neighbour, string start) => start + ": "
             + neighbour.IdentityPercent.ToString("0.##", CultureInfo.InvariantCulture) + "% identity, "
-            + neighbour.QueryAlignedPercent.ToString("0.##", CultureInfo.InvariantCulture) + "% query alignment.";
+            + neighbour.QueryCoveragePercent!.Value.ToString("0.##", CultureInfo.InvariantCulture) + "% of query residues aligned ("
+            + neighbour.QueryAlignedResidues!.Value.ToString(CultureInfo.InvariantCulture) + "/"
+            + neighbour.QueryLength.ToString(CultureInfo.InvariantCulture) + "); "
+            + neighbour.AlignmentLength.ToString(CultureInfo.InvariantCulture) + " alignment columns; query length "
+            + neighbour.QueryLength.ToString(CultureInfo.InvariantCulture) + " residues.";
 
         private static void Validate(EvidenceClassificationOptions options)
         {

@@ -174,7 +174,7 @@ namespace FamilyQuant.Evidence
             foreach (FastaItemExtended protein in proteins)
             {
                 if (NearestReviewed.IsDecoy(protein) || protein.Evidence?.Reviewed != true || string.IsNullOrEmpty(protein.Sequence)) continue;
-                if ((protein.SequenceIdentifier ?? string.Empty).StartsWith(SequenceLabels.ContaminantPrefix, StringComparison.Ordinal)) continue;
+                if (SequenceLabels.IsContaminant(protein.SequenceIdentifier)) continue;
                 if (seen.Add(NearestReviewed.EntryAccession(protein.SequenceIdentifier))) reviewed.Add((protein.Sequence, protein.Evidence));
             }
             foreach (PanelEntry entry in panel?.Entries ?? new List<PanelEntry>())

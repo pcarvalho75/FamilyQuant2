@@ -263,7 +263,7 @@ namespace FamilyQuant.Evidence
                 || recipe.Assignments.GroupBy(a => a.GroupKey, StringComparer.Ordinal).Any(g => g.Select(a => a.FamilyId).Distinct().Count() != 1)
                 || StateFingerprint(file, recipe.Assignments, recipe, projectSession: true) != recipe.AppliedStateFingerprint)
                 throw new ArgumentException("The recipe's resulting grouping does not match its recorded state.", nameof(recipe));
-            ValidateSearch(file, recipe.SessionSearch, recipe.SessionReferences, recipe.Options, operation);
+            ValidateSearch(file, recipe.SessionSearch, recipe.SessionReferences, recipe.Options, operation, allowLegacyCoverage: true);
             foreach (MotifPattern motif in recipe.CheckedMotifs ?? new List<MotifPattern>()) MotifCheck.Compile(motif.Pattern);
             return Commit(file, recipe, operation);
         }
@@ -322,7 +322,7 @@ namespace FamilyQuant.Evidence
             {
                 Proteins = EvidenceClassifier.Fingerprint(rows), file.SourceSha256, file.SourceSequenceCount,
                 file.WordSimilarity, file.IsKeywordSuperCluster, Locks = locks.OrderBy(i => i),
-                file.DomainSource, EvidenceSource = projectSession ? SessionSource(file, session?.SessionSearch) : file.EvidenceSource,
+                file.DomainSource, EvidenceSource = CurationSource(projectSession ? SessionSource(file, session?.SessionSearch) : file.EvidenceSource),
             });
             // Keep earlier recipes' state hashes unchanged when they have no session evidence.
             string state = session?.IncludesSessionEvidence == true ? Hash(new
@@ -334,6 +334,13 @@ namespace FamilyQuant.Evidence
         }
 
         private static string GroupKey(params string[] parts) => JsonSerializer.Serialize(parts);
+        private static EvidenceProvenance? CurationSource(EvidenceProvenance? source)
+        {
+            if (source?.FamilyWorld == null) return source;
+            var curation = Clone(source);
+            curation.FamilyWorld = null;
+            return curation;
+        }
         private static string Hash<T>(T value) => Convert.ToHexString(SHA256.HashData(Encoding.UTF8.GetBytes(JsonSerializer.Serialize(value))));
         internal static T Clone<T>(T value) => JsonSerializer.Deserialize<T>(JsonSerializer.Serialize(value))!;
     }

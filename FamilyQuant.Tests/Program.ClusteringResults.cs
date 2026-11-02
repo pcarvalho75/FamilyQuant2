@@ -12,6 +12,7 @@ namespace FamilyQuant.Tests
     {
         private static void ClusteringResultTests(string workDir)
         {
+            ClusteringImprovementGuards(workDir);
             var cache = typeof(USearchTools).GetField("PairwiseEdgeCache", System.Reflection.BindingFlags.Static |
                 System.Reflection.BindingFlags.NonPublic)!;
             Check("X14: exhaustive memo stores no edge list", !cache.FieldType.ToString().Contains("List`1", StringComparison.Ordinal));

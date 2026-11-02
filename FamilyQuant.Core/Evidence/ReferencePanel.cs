@@ -235,7 +235,7 @@ namespace FamilyQuant.Evidence
 
         /// <summary>The next page from UniProt's <c>Link: &lt;url&gt;; rel="next"</c> header, or null. The
         /// URL is read between its brackets, never split at commas: it carries the comma-separated fields.</summary>
-        private static string? NextPage(HttpResponseMessage response)
+        internal static string? NextPage(HttpResponseMessage response)
         {
             if (!response.Headers.TryGetValues("Link", out IEnumerable<string>? links)) return null;
             Match next = NextLink.Match(string.Join(",", links));
