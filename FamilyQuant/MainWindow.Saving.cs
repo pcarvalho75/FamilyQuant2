@@ -85,7 +85,7 @@ public partial class MainWindow
             else if (PresentationSource.FromVisual(this) == null) return false;
             else
             {
-                MessageBoxResult answer = MessageBox.Show(this, "Save changes to the open project before continuing?",
+                MessageBoxResult answer = ShellMessages.Report(this, "Save changes to the open project before continuing?",
                     "Unsaved project", MessageBoxButton.YesNoCancel, MessageBoxImage.Question, MessageBoxResult.Cancel);
                 choice = answer == MessageBoxResult.Yes ? UnsavedProjectChoice.Save
                     : answer == MessageBoxResult.No ? UnsavedProjectChoice.Discard : UnsavedProjectChoice.Cancel;

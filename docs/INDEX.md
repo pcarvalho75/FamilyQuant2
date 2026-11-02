@@ -9,6 +9,8 @@ This is the navigation index for the current checkout. The roadmap owns unfinish
 | [CLAUDE.md](../CLAUDE.md) | Current projects, build/test setup, scientific invariants and implementation guidance |
 | [Architecture](ARCHITECTURE.md) | Current boundaries, planned Reports/operation host, budgets and historical destination inventory |
 | [Core operations](CORE-OPERATIONS.md) | Progress, cancellation, outcomes and atomic publication |
+| [App operations](APP-OPERATIONS.md) | Busy host, overlay and publication adapters |
+| [Shell dialogs](SHELL-DIALOGS.md) | Headless messages, browse preferences and protected C1 adoption |
 | [Clustering refactor](CLUSTERING-REFACTOR.md) | Result contracts and bounded frozen/current comparison |
 | [Dependencies](DEPENDENCIES.md) | Package decisions, cache compatibility and real-file opening checks |
 | [Test commands](TEST-COMMANDS.md) | Feature-owned command tables and adding a flag without editing Main |
@@ -73,6 +75,7 @@ Invoke each flag with `& $testExe <flag>` after building. Dispatch and arity are
 | `--test-inputs` | Real-data argument-selection contract, without choosing Desktop fallbacks |
 | `--test-operations` | Core outcomes, progress, cancellation and the owned native-child fixture |
 | `--test-busy` | App operation host, running-command cancellation, prior file bytes and guarded publication |
+| `--test-shell-dialogs [--after-busy]` | Browse callers, folder preference, accept/cancel, owned windows and headless messages; optional busy-group setup first |
 | `--test-clustering-results` | Typed clustering/redundancy results and native synthetic fixtures |
 | `--test-identity-study` | Probe parser and grid-versus-probe interpretation |
 | `--test-results` | Results view-model readiness and export choices |

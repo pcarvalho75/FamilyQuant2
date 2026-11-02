@@ -199,7 +199,7 @@ public partial class MainWindow
             }
             if (owner.cgc == null || owner.cgc.fcf == null)
             {
-                MessageBox.Show(
+                ShellMessages.Report(owner,
                     "There is no project on screen to compute quantitation for.\n\n" +
                     "Next step: open a project or a Family Cluster File with File > Open first.",
                     "Load a project first", MessageBoxButton.OK, MessageBoxImage.Information);
@@ -242,7 +242,7 @@ public partial class MainWindow
                 owner.home?.SetLastResult(owner.shellState.LastResultProject, owner.loadedQuant.Count > 0);
                 owner.UpdateGuide();
 
-                MessageBox.Show(
+                ShellMessages.Report(owner,
                     window.ResultRows.Count.ToString("N0", CultureInfo.CurrentCulture) +
                     " quant row(s) were computed and are now held by the project.\n\n" +
                     (window.TicShareSummary.Count > 0

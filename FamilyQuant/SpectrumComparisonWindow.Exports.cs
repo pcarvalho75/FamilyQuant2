@@ -37,7 +37,7 @@ namespace FamilyQuant
                 ? null : Path.GetDirectoryName(existingCsvPath);
             if (!string.IsNullOrWhiteSpace(folder) && Directory.Exists(folder))
                 dialog.InitialDirectory = folder;
-            if (dialog.ShowDialog() != true) return;
+            if (!ShellDialogs.ShowFile(button, "spectrum.score-plot", dialog)) return;
             using var operation = AppOperationHost.For(button).Begin("Export accepted-call score plot");
 
             try
@@ -95,7 +95,7 @@ namespace FamilyQuant
                 DefaultExt = ".csv",
                 InitialDirectory = initialDirectory,
             };
-            if (dialog.ShowDialog() != true) return;
+            if (!ShellDialogs.ShowFile(button, "spectrum.csv", dialog)) return;
             using var operation = AppOperationHost.For(button).Begin("Export spectrum comparison");
 
             try
