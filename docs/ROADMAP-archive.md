@@ -94,6 +94,7 @@ Finished steps, moved here from docs/ROADMAP.md. The board shows them as green.
 | C4 | Group by evidence window: families on the left with ticks and names, proteins on the right with reason, tier, flags, split, motif box, left-out tab. Same window as the Super Cluster preview, with a keyword mode, so the ticks, red rows and copy all stay | VH | 7 | E5, V4, S1 | E14, A1 | Whole flow by keyboard and mouse in the suite; 31,777 proteins scroll smoothly; Cancel changes nothing; the group with no domain calls and the members placed by length and cysteines show on the screen, with the one reviewed entry left (morulustatin) visible | LK | not started | 0% | 0% | T+7 |
 | C3 | Keyword boxes only in that window: one "Group by keywords" command on the screen | L | 0.5 | 🟢 | C1 | Three duplicate inputs gone; suite re-pointed | LK | not started | 0% | 0% | T+0 |
 | C15 | The review window's architecture split works per group: each group has its own tick, so one group can leave while the rest of the family stays whole. Core already takes a choice per group | L | 0.5 | 🟢 | R2 | Ticking only the disintegrin-alone group keeps the rest together; recipe replay exact | RS | not started | 0% | 0% | T+0 |
+| C5 | Quantitation panel: Layers 2 and 3 merged; Full XIC first, PatternLab as a secondary source, options shown only when they apply | M | 1 | C1 | V3, C13, R2 | Every option kept; golden equal | RS | not started | 0% | 0% | T+3 |
 
 ### W6 Core rewrite: copy what is good, rewrite what is better
 
