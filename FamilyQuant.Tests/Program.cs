@@ -74,6 +74,9 @@ namespace FamilyQuant.Tests
                 Directory.CreateDirectory(busyWork);
                 EnsureApplication();
                 BusyOperationTests(busyWork);
+                Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
+                return failed == 0 ? 0 : 1;
+            }
             if (args.Contains("--test-chart-themes", StringComparer.Ordinal))
             {
                 string chartWork = args.Length == 2 ? args[1] : Path.Combine(Path.GetTempPath(), "FamilyQuant.Tests.ChartThemes");
