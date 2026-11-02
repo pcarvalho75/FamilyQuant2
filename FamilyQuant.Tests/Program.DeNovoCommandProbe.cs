@@ -22,6 +22,7 @@ internal static partial class Program
     private static int DeNovoCommandProbe(string[] args)
     {
         if (args.Length != 4) throw new ArgumentException("Supply frozen app folder, trusted SEPro package and fresh output.");
+        if (!NativeProofDesktop.IsPrivate) return IsolatedNativeProof(new[] { "--isolated-native-proof" }.Concat(args).ToArray());
         string output = Path.GetFullPath(args[3]);
         if (Directory.Exists(output) && Directory.EnumerateFileSystemEntries(output).Any()) throw new IOException("Output must be fresh.");
         Directory.CreateDirectory(output); CultureInfo.CurrentCulture = CultureInfo.InvariantCulture;

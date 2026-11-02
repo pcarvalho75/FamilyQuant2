@@ -16,6 +16,7 @@ internal static partial class Program
     private static int DeNovoCommandEvidence(string[] args)
     {
         if (args.Length != 6) throw new ArgumentException("Supply frozen source, frozen app, trusted package, fresh output and date timestamp.");
+        if (!NativeProofDesktop.IsPrivate) return IsolatedNativeProof(new[] { "--isolated-native-proof" }.Concat(args).ToArray());
         string root = FindLedgerRoot()!, frozenRoot = Path.GetFullPath(args[1]), output = Path.GetFullPath(args[4]);
         if (Directory.Exists(output)) throw new IOException("Use a fresh output directory.");
         var inventory = JsonSerializer.Deserialize<FeatureLedger.Inventory>(File.ReadAllText(Path.Combine(root, "docs/feature-ledger-scan.json")))!;
@@ -150,7 +151,7 @@ internal static partial class Program
         string archive = Path.Combine(output, "executed"); Directory.CreateDirectory(archive);
         var artifacts = Directory.GetFiles(output, "*.json").Concat(Directory.GetFiles(output, "*.csv")).Append(log).ToList();
         foreach (string relative in sources.Concat(new[] { "FamilyQuant.Tests/Program.DeNovoCommandProbe.cs", "FamilyQuant.Tests/Program.DeNovoCommandEvidence.cs",
-            "FamilyQuant.Tests/Program.DeNovoChangedCopyFacts.cs", "FamilyQuant.Tests/NativeOwnedDialogDriver.cs", "FamilyQuant.Tests/Program.Commands.DeNovoLedger.cs" }))
+            "FamilyQuant.Tests/Program.DeNovoChangedCopyFacts.cs", "FamilyQuant.Tests/NativeOwnedDialogDriver.cs", "FamilyQuant.Tests/NativeProofDesktop.cs", "FamilyQuant.Tests/Program.Commands.DeNovoLedger.cs" }))
         {
             string copy = Path.Combine(archive, relative.Replace('/', '_')); File.Copy(Path.Combine(root, relative), copy); artifacts.Add(copy);
         }

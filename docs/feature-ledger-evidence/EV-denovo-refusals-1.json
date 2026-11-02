@@ -5,280 +5,280 @@
   "runs": [
     {
       "id": "EV-denovo-refusals",
-      "command": "C:\\FamilyQuant-gate\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --prove-denovo-refusals D:/FamilyQuant-data/out-shell/N3/source D:/FamilyQuant-data/reference-1.5.0.6/app D:/FamilyQuant-data/out-refresh\\20261102-085841-FamilyQuant-gate\\denovo-refusals \u00222026-11-02 08:58:57 -0800\u0022",
-      "executedAt": "2026-11-02 08:58:57 -0800",
-      "commit": "ad3b2e78a2215e9711acda3eddcbd04c00863c1f",
+      "command": "D:\\FamilyQuant-wt\\evidence\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --prove-denovo-refusals D:/FamilyQuant-data/out-shell/N3/source D:/FamilyQuant-data/reference-1.5.0.6/app D:/FamilyQuant-data/out-evidence/n6c-refusals-current \u00222026-11-02 09:57:19 -0800\u0022",
+      "executedAt": "2026-11-02 09:57:19 -0800",
+      "commit": "09f1ab2950a10400519fd9cec94a5dfe6c65bba5",
       "artifacts": [
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-085841-FamilyQuant-gate\\denovo-refusals\\comparisons.log",
+          "path": "D:\\FamilyQuant-data\\out-evidence\\n6c-refusals-current\\comparisons.log",
           "sha256": "736A3ED4AE79829DCB3944D72D63A5380DF78FE7B1FF190495553FE607BC2AC0"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-085841-FamilyQuant-gate\\denovo-refusals\\comparisons.json",
+          "path": "D:\\FamilyQuant-data\\out-evidence\\n6c-refusals-current\\comparisons.json",
           "sha256": "58D9BB2A8FD874B297ABAC294BF9A0793E23F99C53A4A6AE51DAC186BBBE847D"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-085841-FamilyQuant-gate\\denovo-refusals\\executed\\FamilyQuant.Core_DeNovo_DeNovoBatchExtractor.cs",
+          "path": "D:\\FamilyQuant-data\\out-evidence\\n6c-refusals-current\\executed\\FamilyQuant.Core_DeNovo_DeNovoBatchExtractor.cs",
           "sha256": "0FFA340223DED2A7D9C9F2AB64B822A0188C9002D81990A2D0DFAB95CB9CBE34"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-085841-FamilyQuant-gate\\denovo-refusals\\executed\\FamilyQuant.Core_DeNovo_DeNovoFilter.cs",
+          "path": "D:\\FamilyQuant-data\\out-evidence\\n6c-refusals-current\\executed\\FamilyQuant.Core_DeNovo_DeNovoFilter.cs",
           "sha256": "BF5AD5FF6DC42EC345724E0F08918A1FE6C79F08FC4C139FDD29183036444518"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-085841-FamilyQuant-gate\\denovo-refusals\\executed\\FamilyQuant.Core_DeNovo_DeNovoReconciler.cs",
+          "path": "D:\\FamilyQuant-data\\out-evidence\\n6c-refusals-current\\executed\\FamilyQuant.Core_DeNovo_DeNovoReconciler.cs",
           "sha256": "E773452CA224E76B70017F184E502BD1ED9B6D1E9E40CE28DE31FF512226E105"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-085841-FamilyQuant-gate\\denovo-refusals\\executed\\FamilyQuant.Core_DeNovo_DeNovoReconciliationReport.cs",
+          "path": "D:\\FamilyQuant-data\\out-evidence\\n6c-refusals-current\\executed\\FamilyQuant.Core_DeNovo_DeNovoReconciliationReport.cs",
           "sha256": "3AF07869DAEB11B28A2CD0FCD655F1523EB00BAD3105B0C1C73D6F57802CE0E1"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-085841-FamilyQuant-gate\\denovo-refusals\\executed\\FamilyQuant.Core_DeNovo_DeNovoScoreScatterStudy.cs",
+          "path": "D:\\FamilyQuant-data\\out-evidence\\n6c-refusals-current\\executed\\FamilyQuant.Core_DeNovo_DeNovoScoreScatterStudy.cs",
           "sha256": "0CF9E125369DBF6B00119919BF6326198B1A690100BBDC785D9698CDF5935E7B"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-085841-FamilyQuant-gate\\denovo-refusals\\executed\\FamilyQuant.Core_DeNovo_DeNovoSource.cs",
+          "path": "D:\\FamilyQuant-data\\out-evidence\\n6c-refusals-current\\executed\\FamilyQuant.Core_DeNovo_DeNovoSource.cs",
           "sha256": "F5D28EB3D7DC60C34D4288ED4C55EBB7C8878D8ECC015842B907469BC4267D3C"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-085841-FamilyQuant-gate\\denovo-refusals\\executed\\FamilyQuant.Core_DeNovo_DeNovoTalkComparison.cs",
+          "path": "D:\\FamilyQuant-data\\out-evidence\\n6c-refusals-current\\executed\\FamilyQuant.Core_DeNovo_DeNovoTalkComparison.cs",
           "sha256": "F6A1DF69CC6F843C525000456D59ECE1BBDD7C012A350744EC36B8FBB26100FE"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-085841-FamilyQuant-gate\\denovo-refusals\\executed\\FamilyQuant.Core_DeNovo_DeNovoUnionResolver.cs",
+          "path": "D:\\FamilyQuant-data\\out-evidence\\n6c-refusals-current\\executed\\FamilyQuant.Core_DeNovo_DeNovoUnionResolver.cs",
           "sha256": "01404EB835853E821A9C8F95487E6D3704CE7C874677FFFEC54DBBCF22235DB8"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-085841-FamilyQuant-gate\\denovo-refusals\\executed\\FamilyQuant.Core_DeNovo_DeNovoVariantComparison.cs",
+          "path": "D:\\FamilyQuant-data\\out-evidence\\n6c-refusals-current\\executed\\FamilyQuant.Core_DeNovo_DeNovoVariantComparison.cs",
           "sha256": "08767B50B96AE4D5F0F955837E9092C3E8505040B345DF43703D6B611795C1D7"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-085841-FamilyQuant-gate\\denovo-refusals\\executed\\FamilyQuant.Core_DeNovo_DeNovoXicCache.cs",
+          "path": "D:\\FamilyQuant-data\\out-evidence\\n6c-refusals-current\\executed\\FamilyQuant.Core_DeNovo_DeNovoXicCache.cs",
           "sha256": "D63E0B9022082142131FA26E1E050BA705133F492761C1D8C97321E4B7CC2B5B"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-085841-FamilyQuant-gate\\denovo-refusals\\executed\\FamilyQuant.Core_DeNovo_DeNovoXicExtractor.cs",
+          "path": "D:\\FamilyQuant-data\\out-evidence\\n6c-refusals-current\\executed\\FamilyQuant.Core_DeNovo_DeNovoXicExtractor.cs",
           "sha256": "0542D9A4F01298D622F037CBC4DA7F6CEF9E7E743A0D2B0D5CCEA4E75FB48701"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-085841-FamilyQuant-gate\\denovo-refusals\\executed\\FamilyQuant.Core_DeNovo_ExtractionCacheJson.cs",
+          "path": "D:\\FamilyQuant-data\\out-evidence\\n6c-refusals-current\\executed\\FamilyQuant.Core_DeNovo_ExtractionCacheJson.cs",
           "sha256": "02449AE15CDD325AAF5F974F5D867567194909661D77F1A646FE8E82430816BD"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-085841-FamilyQuant-gate\\denovo-refusals\\executed\\FamilyQuant.Core_DeNovo_IdentifiedQuantExtractor.cs",
+          "path": "D:\\FamilyQuant-data\\out-evidence\\n6c-refusals-current\\executed\\FamilyQuant.Core_DeNovo_IdentifiedQuantExtractor.cs",
           "sha256": "1486F481B7126DA72C7D859CF4A78A4B5F0866AB6682BC9587054B269A62CD0A"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-085841-FamilyQuant-gate\\denovo-refusals\\executed\\FamilyQuant.Core_DeNovo_Inspection_DeNovoInspectionSelection.cs",
+          "path": "D:\\FamilyQuant-data\\out-evidence\\n6c-refusals-current\\executed\\FamilyQuant.Core_DeNovo_Inspection_DeNovoInspectionSelection.cs",
           "sha256": "0794F5B5FBF37B0B76441D72137DCBDC5CE940FB5BB8DE33B6BFA8FF766BB699"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-085841-FamilyQuant-gate\\denovo-refusals\\executed\\FamilyQuant.Core_DeNovo_Inspection_DeNovoOperationResults.cs",
+          "path": "D:\\FamilyQuant-data\\out-evidence\\n6c-refusals-current\\executed\\FamilyQuant.Core_DeNovo_Inspection_DeNovoOperationResults.cs",
           "sha256": "23FC52E7A1D98ECA2824BBF4BAD120350536C216982F3099A7749197263056AC"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-085841-FamilyQuant-gate\\denovo-refusals\\executed\\FamilyQuant.Core_DeNovo_Inspection_DeNovoReviewTableBuilder.cs",
+          "path": "D:\\FamilyQuant-data\\out-evidence\\n6c-refusals-current\\executed\\FamilyQuant.Core_DeNovo_Inspection_DeNovoReviewTableBuilder.cs",
           "sha256": "DB8A3266573432441CB756DB495476B2F35BC815D6C638F6A8503877E04CA4F8"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-085841-FamilyQuant-gate\\denovo-refusals\\executed\\FamilyQuant.Core_DeNovo_Inspection_ReconciliationModels.cs",
+          "path": "D:\\FamilyQuant-data\\out-evidence\\n6c-refusals-current\\executed\\FamilyQuant.Core_DeNovo_Inspection_ReconciliationModels.cs",
           "sha256": "2696D1E3D699A59C63DDBC65B63642337A5082566B7847C40C499F282C5FFDDE"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-085841-FamilyQuant-gate\\denovo-refusals\\executed\\FamilyQuant.Core_DeNovo_Inspection_ReviewQueueRow.cs",
+          "path": "D:\\FamilyQuant-data\\out-evidence\\n6c-refusals-current\\executed\\FamilyQuant.Core_DeNovo_Inspection_ReviewQueueRow.cs",
           "sha256": "3D4BEB65C2F217737E3033233BAB7FB283A15F6558E75A2D95B3C923EA2E4D18"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-085841-FamilyQuant-gate\\denovo-refusals\\executed\\FamilyQuant.Core_DeNovo_Ms1EnvelopeDetector.cs",
-          "sha256": "79CA110CF12B1603F371147540B1682854EE4671584F76DA65613F074DCE601F"
+          "path": "D:\\FamilyQuant-data\\out-evidence\\n6c-refusals-current\\executed\\FamilyQuant.Core_DeNovo_Ms1EnvelopeDetector.cs",
+          "sha256": "46CA6872D443D30E3A496A87C2A92D7E4EDD9950AEDCB3E52848DA731DC53FDB"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-085841-FamilyQuant-gate\\denovo-refusals\\executed\\FamilyQuant.Core_DeNovo_NativeQuantFractions.cs",
+          "path": "D:\\FamilyQuant-data\\out-evidence\\n6c-refusals-current\\executed\\FamilyQuant.Core_DeNovo_NativeQuantFractions.cs",
           "sha256": "1B584F17E5D5796993F127A35D75354F178185E9C84536C96198D50908FCCB4E"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-085841-FamilyQuant-gate\\denovo-refusals\\executed\\FamilyQuant.Core_DeNovo_PatternLabRunQuants.cs",
+          "path": "D:\\FamilyQuant-data\\out-evidence\\n6c-refusals-current\\executed\\FamilyQuant.Core_DeNovo_PatternLabRunQuants.cs",
           "sha256": "98159D7F59E7860B3FBB8A9CBD97843AD91DDA27D1C1F212AD837832C6214A1C"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-085841-FamilyQuant-gate\\denovo-refusals\\executed\\FamilyQuant.Core_DeNovo_PeptideMass.cs",
+          "path": "D:\\FamilyQuant-data\\out-evidence\\n6c-refusals-current\\executed\\FamilyQuant.Core_DeNovo_PeptideMass.cs",
           "sha256": "FD0BF2EDA5218306BE5162913AC5547EC33D02C124679CE42DBB561A8A5CCA2F"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-085841-FamilyQuant-gate\\denovo-refusals\\executed\\FamilyQuant.Core_DeNovo_PeptidoformIdentity.cs",
+          "path": "D:\\FamilyQuant-data\\out-evidence\\n6c-refusals-current\\executed\\FamilyQuant.Core_DeNovo_PeptidoformIdentity.cs",
           "sha256": "1AE27580D2FD1A5325D0FD126414E855EFF0A14E3EC4CB8FBA875840EB48D9B9"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-085841-FamilyQuant-gate\\denovo-refusals\\executed\\FamilyQuant.Core_DeNovo_PsmDeNovoCounterpartStudy.cs",
+          "path": "D:\\FamilyQuant-data\\out-evidence\\n6c-refusals-current\\executed\\FamilyQuant.Core_DeNovo_PsmDeNovoCounterpartStudy.cs",
           "sha256": "12BCAE2FC33D66EC02E47E6FA96A6BBB2F8E597B1B7C6E9A6B22AE561A81AB2C"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-085841-FamilyQuant-gate\\denovo-refusals\\executed\\FamilyQuant.Core_DeNovo_RawScanChargeReader.cs",
+          "path": "D:\\FamilyQuant-data\\out-evidence\\n6c-refusals-current\\executed\\FamilyQuant.Core_DeNovo_RawScanChargeReader.cs",
           "sha256": "F2F007BE43A50F27CFCE92CC144E46B618BCB3A0EA79832C7A0CCFA65C6877E7"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-085841-FamilyQuant-gate\\denovo-refusals\\executed\\FamilyQuant.Core_DeNovo_Readers_DeNovoSourceRows.cs",
+          "path": "D:\\FamilyQuant-data\\out-evidence\\n6c-refusals-current\\executed\\FamilyQuant.Core_DeNovo_Readers_DeNovoSourceRows.cs",
           "sha256": "14F011D7B49E7F486F87D6FECB385DF819EE8CF8D929E3C22F577DE884AE49B2"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-085841-FamilyQuant-gate\\denovo-refusals\\executed\\FamilyQuant.Core_DeNovo_Readers_PeaksCsvReader.cs",
+          "path": "D:\\FamilyQuant-data\\out-evidence\\n6c-refusals-current\\executed\\FamilyQuant.Core_DeNovo_Readers_PeaksCsvReader.cs",
           "sha256": "490B9BA0778AE4A884AC8E62C5A9A6AF5764DD90BE45B9F416990D5DB7174809"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-085841-FamilyQuant-gate\\denovo-refusals\\executed\\FamilyQuant.Core_DeNovo_Readers_PeaksDatabasePsmReader.cs",
+          "path": "D:\\FamilyQuant-data\\out-evidence\\n6c-refusals-current\\executed\\FamilyQuant.Core_DeNovo_Readers_PeaksDatabasePsmReader.cs",
           "sha256": "BAE88C16509A545D6CB93433B533ABA3F2182128AE7CE3A6DDB2474D3F95E03F"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-085841-FamilyQuant-gate\\denovo-refusals\\executed\\FamilyQuant.Core_DeNovo_ReferenceEnvelopeEstimator.cs",
+          "path": "D:\\FamilyQuant-data\\out-evidence\\n6c-refusals-current\\executed\\FamilyQuant.Core_DeNovo_ReferenceEnvelopeEstimator.cs",
           "sha256": "FDC3528CF45CE9023D8576FD87680DFED3F20E2F530DCEC11EA8C78D38458080"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-085841-FamilyQuant-gate\\denovo-refusals\\executed\\FamilyQuant.Core_DeNovo_SeproPsmAdapter.cs",
+          "path": "D:\\FamilyQuant-data\\out-evidence\\n6c-refusals-current\\executed\\FamilyQuant.Core_DeNovo_SeproPsmAdapter.cs",
           "sha256": "00B9CFF5C8A4A5CFD7714F3CC076FF44DB00BAAB13EB02153A11B890F9696C40"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-085841-FamilyQuant-gate\\denovo-refusals\\executed\\FamilyQuant.Core_DeNovo_SetNoveltyStudy.cs",
+          "path": "D:\\FamilyQuant-data\\out-evidence\\n6c-refusals-current\\executed\\FamilyQuant.Core_DeNovo_SetNoveltyStudy.cs",
           "sha256": "7CDACE7E392B954DC041BF04C9FF371703EE6209650EA56F78400961AD232BBA"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-085841-FamilyQuant-gate\\denovo-refusals\\executed\\FamilyQuant.Core_DeNovo_SpectrumComparisonTable.cs",
+          "path": "D:\\FamilyQuant-data\\out-evidence\\n6c-refusals-current\\executed\\FamilyQuant.Core_DeNovo_SpectrumComparisonTable.cs",
           "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-085841-FamilyQuant-gate\\denovo-refusals\\executed\\FamilyQuant.Core_DeNovo_SpreadsheetSafeCsv.cs",
+          "path": "D:\\FamilyQuant-data\\out-evidence\\n6c-refusals-current\\executed\\FamilyQuant.Core_DeNovo_SpreadsheetSafeCsv.cs",
           "sha256": "B654DE265D6C7D459797EC1296DBB0938B16BD6BB8745C30B4BC740DC148E25C"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-085841-FamilyQuant-gate\\denovo-refusals\\executed\\FamilyQuant.Core_DeNovo_ThreeWayPartition.cs",
+          "path": "D:\\FamilyQuant-data\\out-evidence\\n6c-refusals-current\\executed\\FamilyQuant.Core_DeNovo_ThreeWayPartition.cs",
           "sha256": "7173311D16275646CD22A9FE44B1396CBE5502CD6AF5964833D913B8A33E9E9D"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-085841-FamilyQuant-gate\\denovo-refusals\\executed\\FamilyQuant.Core_DeNovoInspectionAudit.cs",
+          "path": "D:\\FamilyQuant-data\\out-evidence\\n6c-refusals-current\\executed\\FamilyQuant.Core_DeNovoInspectionAudit.cs",
           "sha256": "74173BCE06F06B38AFDD0DBCE03FDD2632A740A9BC36FD98085D44B0A7CF1BF5"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-085841-FamilyQuant-gate\\denovo-refusals\\executed\\FamilyQuant.Core_DeNovoScreenOperations.cs",
+          "path": "D:\\FamilyQuant-data\\out-evidence\\n6c-refusals-current\\executed\\FamilyQuant.Core_DeNovoScreenOperations.cs",
           "sha256": "A9E88AEDD45115A5A0859EC2F03EF367C6C1929B52DA3B2AE204CE56BED7FC61"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-085841-FamilyQuant-gate\\denovo-refusals\\executed\\FamilyQuant.Core_DeNovoSourceImport.cs",
+          "path": "D:\\FamilyQuant-data\\out-evidence\\n6c-refusals-current\\executed\\FamilyQuant.Core_DeNovoSourceImport.cs",
           "sha256": "33826F8F9471758ED81568545C746982676C633283CA2CB1471F591730AF24BD"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-085841-FamilyQuant-gate\\denovo-refusals\\executed\\FamilyQuant.Core_Homology_HomologyOptions.cs",
+          "path": "D:\\FamilyQuant-data\\out-evidence\\n6c-refusals-current\\executed\\FamilyQuant.Core_Homology_HomologyOptions.cs",
           "sha256": "514F26D4E6B2B4B24C2BF0F875BFC9646B8F798FA1BF00439ED0BD8298B481E8"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-085841-FamilyQuant-gate\\denovo-refusals\\executed\\FamilyQuant_DeNovoControl.Compatibility.cs",
+          "path": "D:\\FamilyQuant-data\\out-evidence\\n6c-refusals-current\\executed\\FamilyQuant_DeNovoControl.Compatibility.cs",
           "sha256": "BB45BCACC7C63869B4B22F63EE16C6572D12F7F2A2C9B589686B2DE2BC15479C"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-085841-FamilyQuant-gate\\denovo-refusals\\executed\\FamilyQuant_DeNovoControl.Dialogs.cs",
+          "path": "D:\\FamilyQuant-data\\out-evidence\\n6c-refusals-current\\executed\\FamilyQuant_DeNovoControl.Dialogs.cs",
           "sha256": "B714D7D9AA689F30D9EDFA2479D373824358521783DBBD267E209E34E91884A1"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-085841-FamilyQuant-gate\\denovo-refusals\\executed\\FamilyQuant_DeNovoControl.Files.cs",
+          "path": "D:\\FamilyQuant-data\\out-evidence\\n6c-refusals-current\\executed\\FamilyQuant_DeNovoControl.Files.cs",
           "sha256": "A894899A775DE9BC762B0069DCE26314631BE060B82892F480A5EA3D88B7CD14"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-085841-FamilyQuant-gate\\denovo-refusals\\executed\\FamilyQuant_DeNovoControl.Tables.cs",
+          "path": "D:\\FamilyQuant-data\\out-evidence\\n6c-refusals-current\\executed\\FamilyQuant_DeNovoControl.Tables.cs",
           "sha256": "5B2292689F03600BD8FB482588343C0A24DF674B1A4D909588FD9BF747BA296A"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-085841-FamilyQuant-gate\\denovo-refusals\\executed\\FamilyQuant_DeNovoControl.xaml",
-          "sha256": "024AB577E3E28F445C6B4761C3F093510532E25933AA8B5A036D8AD8B2DFB6BC"
+          "path": "D:\\FamilyQuant-data\\out-evidence\\n6c-refusals-current\\executed\\FamilyQuant_DeNovoControl.xaml",
+          "sha256": "C64BA87F386ED38607C988542429882451BF749DFA54D8C9F359145F79422806"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-085841-FamilyQuant-gate\\denovo-refusals\\executed\\FamilyQuant_DeNovoControl.xaml.cs",
+          "path": "D:\\FamilyQuant-data\\out-evidence\\n6c-refusals-current\\executed\\FamilyQuant_DeNovoControl.xaml.cs",
           "sha256": "99FC1066E85361D8BCA7BDDC16FBA2B172DF2E8932268731E91F4B01854CECD8"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-085841-FamilyQuant-gate\\denovo-refusals\\executed\\FamilyQuant_DeNovoFilterControl.xaml",
+          "path": "D:\\FamilyQuant-data\\out-evidence\\n6c-refusals-current\\executed\\FamilyQuant_DeNovoFilterControl.xaml",
           "sha256": "C5F5FD8218E9862B6C3279B39686CBB8E287F809D11483BF4B20BD9EF6381E41"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-085841-FamilyQuant-gate\\denovo-refusals\\executed\\FamilyQuant_DeNovoFilterControl.xaml.cs",
+          "path": "D:\\FamilyQuant-data\\out-evidence\\n6c-refusals-current\\executed\\FamilyQuant_DeNovoFilterControl.xaml.cs",
           "sha256": "40DA440AE1CCBE68A7A99D261D7BAE87B103D6EB11DFC862CA26B309BA018108"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-085841-FamilyQuant-gate\\denovo-refusals\\executed\\FamilyQuant_DeNovoFilterViewModel.cs",
+          "path": "D:\\FamilyQuant-data\\out-evidence\\n6c-refusals-current\\executed\\FamilyQuant_DeNovoFilterViewModel.cs",
           "sha256": "8F34872C345515C7D40A1D068628195740FF7C7C3832E2B598976BB230B20F10"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-085841-FamilyQuant-gate\\denovo-refusals\\executed\\FamilyQuant_DeNovoSession.cs",
+          "path": "D:\\FamilyQuant-data\\out-evidence\\n6c-refusals-current\\executed\\FamilyQuant_DeNovoSession.cs",
           "sha256": "AA3D0D76B6CB1FEF2E0D3D40A24DB834BA7E485BEDC3DC97A6653B89FA0700B4"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-085841-FamilyQuant-gate\\denovo-refusals\\executed\\FamilyQuant_DeNovoViewModel.Readiness.cs",
+          "path": "D:\\FamilyQuant-data\\out-evidence\\n6c-refusals-current\\executed\\FamilyQuant_DeNovoViewModel.Readiness.cs",
           "sha256": "4AD40C6B4500D1BFE99073A01FFB0D108954FAD4EF281B4EA9C8790C6EBC386B"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-085841-FamilyQuant-gate\\denovo-refusals\\executed\\FamilyQuant_DeNovoViewModel.cs",
+          "path": "D:\\FamilyQuant-data\\out-evidence\\n6c-refusals-current\\executed\\FamilyQuant_DeNovoViewModel.cs",
           "sha256": "2FFF30BF700616645D36D91A25F12D038DDD10442BE65A6288CE06B5855B35C0"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-085841-FamilyQuant-gate\\denovo-refusals\\executed\\FamilyQuant.Tests_Program.DeNovoLedger.cs",
+          "path": "D:\\FamilyQuant-data\\out-evidence\\n6c-refusals-current\\executed\\FamilyQuant.Tests_Program.DeNovoLedger.cs",
           "sha256": "E9B6D9A40F09CB9141A071CA58D8B376729299E1420410E922E458751A170206"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-085841-FamilyQuant-gate\\denovo-refusals\\executed\\FamilyQuant.Tests_Program.Commands.DeNovoLedger.cs",
-          "sha256": "FDAAA75F1C928C3E7B294BA58BDDC2F95755BD090F16A83D7B64E45B254D6F03"
+          "path": "D:\\FamilyQuant-data\\out-evidence\\n6c-refusals-current\\executed\\FamilyQuant.Tests_Program.Commands.DeNovoLedger.cs",
+          "sha256": "F2D124BF8AFC1940C7B05FAB89B403F18762A230E1769A00BBAEE064A612CB6B"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-085841-FamilyQuant-gate\\denovo-refusals\\executed\\FamilyQuant.Tests_Program.DeNovoLedgerRuntime.cs",
-          "sha256": "E22B29DA8275597B3578912FF943695F72DB2643B1FFB6C29238F7E943BD5F65"
+          "path": "D:\\FamilyQuant-data\\out-evidence\\n6c-refusals-current\\executed\\FamilyQuant.Tests_Program.DeNovoLedgerRuntime.cs",
+          "sha256": "70742BDADE7074DC970A5979481E8FAEBDBEB1E36352430C3CF974D15D1B088D"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-085841-FamilyQuant-gate\\denovo-refusals\\executed\\FamilyQuant.Tests_Program.DeNovoLedgerWorkflow.cs",
+          "path": "D:\\FamilyQuant-data\\out-evidence\\n6c-refusals-current\\executed\\FamilyQuant.Tests_Program.DeNovoLedgerWorkflow.cs",
           "sha256": "10CE2ADF8BCDDA54E5E42D43D9E0F29623CFE6583229B8E6EE2585F3D966D6E5"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-085841-FamilyQuant-gate\\denovo-refusals\\executed\\FamilyQuant.Tests_Program.DeNovoLedgerRefusals.cs",
+          "path": "D:\\FamilyQuant-data\\out-evidence\\n6c-refusals-current\\executed\\FamilyQuant.Tests_Program.DeNovoLedgerRefusals.cs",
           "sha256": "52CFC17EFCE971ED19E8459C97433A0F0CC2EB5D8595F7ADEDC561A23D37E54D"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-085841-FamilyQuant-gate\\denovo-refusals\\executed\\FamilyQuant.Tests_LedgerMemberFactComparison.cs",
+          "path": "D:\\FamilyQuant-data\\out-evidence\\n6c-refusals-current\\executed\\FamilyQuant.Tests_LedgerMemberFactComparison.cs",
           "sha256": "1F3254D635B40D22576E9F40347DBEB503A5FF661EFC18E743EAC35B097FC14C"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-085841-FamilyQuant-gate\\denovo-refusals\\executed\\FamilyQuant.Tests_LedgerDeclarationComparison.cs",
+          "path": "D:\\FamilyQuant-data\\out-evidence\\n6c-refusals-current\\executed\\FamilyQuant.Tests_LedgerDeclarationComparison.cs",
           "sha256": "78EC993565740269D572410A84584AF1D96488C1AE81F2455B1D9AA2D94BB4C3"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-085841-FamilyQuant-gate\\denovo-refusals\\executed\\FamilyQuant.Tests_FeatureLedger.cs",
+          "path": "D:\\FamilyQuant-data\\out-evidence\\n6c-refusals-current\\executed\\FamilyQuant.Tests_FeatureLedger.cs",
           "sha256": "4ED1D1D467EEE05E77DE325D35BD42FCD0409D3DF1CFF72AC5F7CE1FDAAE8A39"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-085841-FamilyQuant-gate\\denovo-refusals\\executed\\FamilyQuant.Tests_FeatureLedgerEvidence.cs",
+          "path": "D:\\FamilyQuant-data\\out-evidence\\n6c-refusals-current\\executed\\FamilyQuant.Tests_FeatureLedgerEvidence.cs",
           "sha256": "370FC41121F164A0C2495B260A62149FAD53F6F353203A97488423F2E6FA8738"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-085841-FamilyQuant-gate\\denovo-refusals\\executed\\frozen_FamilyQuant_DeNovoControl.xaml",
+          "path": "D:\\FamilyQuant-data\\out-evidence\\n6c-refusals-current\\executed\\frozen_FamilyQuant_DeNovoControl.xaml",
           "sha256": "E7F6B72A22E658A4CFCBD4BD6FDC3DF42AAC0F0DEBAA5EF8B3CA337B736F51BF"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-085841-FamilyQuant-gate\\denovo-refusals\\executed\\frozen_FamilyQuant_DeNovoControl.xaml.cs",
+          "path": "D:\\FamilyQuant-data\\out-evidence\\n6c-refusals-current\\executed\\frozen_FamilyQuant_DeNovoControl.xaml.cs",
           "sha256": "16D617F16382298A4A60238100D58B65CE03A6562C4B3F0B5B37C629E70A40BF"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-085841-FamilyQuant-gate\\denovo-refusals\\executed\\FamilyQuant.Tests.dll",
-          "sha256": "1CFB3800BC363289CDEE1611CEE639F33F16AA4A92D4506172681E8C69A7B380"
+          "path": "D:\\FamilyQuant-data\\out-evidence\\n6c-refusals-current\\executed\\FamilyQuant.Tests.dll",
+          "sha256": "242737FDCB634D9F33D1B2B13BF34217583B12AFD7D4878C68BF8F4DB1D3A98F"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-085841-FamilyQuant-gate\\denovo-refusals\\executed\\FamilyQuant2.dll",
-          "sha256": "8BA8CA26381F66569B31B6E20B1F9D54BE68D59B2EC9552AB6EDDFB13DC1E35F"
+          "path": "D:\\FamilyQuant-data\\out-evidence\\n6c-refusals-current\\executed\\FamilyQuant2.dll",
+          "sha256": "18EA5144D089E3010912A693F9C8BE62DC78E686846D1391FBD503C8E5052C2A"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-085841-FamilyQuant-gate\\denovo-refusals\\executed\\FamilyQuant.Core.dll",
-          "sha256": "B2B9DE16971AABD93E095A2EEBDC56D15524CCF280140AF4BD90CC9F8EC4A36B"
+          "path": "D:\\FamilyQuant-data\\out-evidence\\n6c-refusals-current\\executed\\FamilyQuant.Core.dll",
+          "sha256": "F16DA03382739359850855C48C0C8298832244BBE04454188E0F2AE5EE226B18"
         },
         {
           "path": "D:\\FamilyQuant-data\\reference-1.5.0.6\\app\\FamilyQuant.dll",
           "sha256": "D764488C923945285E03B338E5A91BF28106A35B11AB465D8E2B23D125F03FD8"
         }
       ],
-      "workingDirectory": "C:\\FamilyQuant-gate"
+      "workingDirectory": "D:\\FamilyQuant-wt\\evidence"
     }
   ],
   "rows": [
@@ -383,7 +383,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs",
           "symbol": "Runtime comparison dependency",
-          "sha256": "79CA110CF12B1603F371147540B1682854EE4671584F76DA65613F074DCE601F"
+          "sha256": "46CA6872D443D30E3A496A87C2A92D7E4EDD9950AEDCB3E52848DA731DC53FDB"
         },
         {
           "path": "FamilyQuant.Core/DeNovo/NativeQuantFractions.cs",
@@ -503,7 +503,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "Runtime comparison dependency",
-          "sha256": "024AB577E3E28F445C6B4761C3F093510532E25933AA8B5A036D8AD8B2DFB6BC"
+          "sha256": "C64BA87F386ED38607C988542429882451BF749DFA54D8C9F359145F79422806"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -642,7 +642,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs",
           "symbol": "Runtime comparison dependency",
-          "sha256": "79CA110CF12B1603F371147540B1682854EE4671584F76DA65613F074DCE601F"
+          "sha256": "46CA6872D443D30E3A496A87C2A92D7E4EDD9950AEDCB3E52848DA731DC53FDB"
         },
         {
           "path": "FamilyQuant.Core/DeNovo/NativeQuantFractions.cs",
@@ -762,7 +762,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "Runtime comparison dependency",
-          "sha256": "024AB577E3E28F445C6B4761C3F093510532E25933AA8B5A036D8AD8B2DFB6BC"
+          "sha256": "C64BA87F386ED38607C988542429882451BF749DFA54D8C9F359145F79422806"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -901,7 +901,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs",
           "symbol": "Runtime comparison dependency",
-          "sha256": "79CA110CF12B1603F371147540B1682854EE4671584F76DA65613F074DCE601F"
+          "sha256": "46CA6872D443D30E3A496A87C2A92D7E4EDD9950AEDCB3E52848DA731DC53FDB"
         },
         {
           "path": "FamilyQuant.Core/DeNovo/NativeQuantFractions.cs",
@@ -1021,7 +1021,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "Runtime comparison dependency",
-          "sha256": "024AB577E3E28F445C6B4761C3F093510532E25933AA8B5A036D8AD8B2DFB6BC"
+          "sha256": "C64BA87F386ED38607C988542429882451BF749DFA54D8C9F359145F79422806"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -1160,7 +1160,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs",
           "symbol": "Runtime comparison dependency",
-          "sha256": "79CA110CF12B1603F371147540B1682854EE4671584F76DA65613F074DCE601F"
+          "sha256": "46CA6872D443D30E3A496A87C2A92D7E4EDD9950AEDCB3E52848DA731DC53FDB"
         },
         {
           "path": "FamilyQuant.Core/DeNovo/NativeQuantFractions.cs",
@@ -1280,7 +1280,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "Runtime comparison dependency",
-          "sha256": "024AB577E3E28F445C6B4761C3F093510532E25933AA8B5A036D8AD8B2DFB6BC"
+          "sha256": "C64BA87F386ED38607C988542429882451BF749DFA54D8C9F359145F79422806"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -1419,7 +1419,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs",
           "symbol": "Runtime comparison dependency",
-          "sha256": "79CA110CF12B1603F371147540B1682854EE4671584F76DA65613F074DCE601F"
+          "sha256": "46CA6872D443D30E3A496A87C2A92D7E4EDD9950AEDCB3E52848DA731DC53FDB"
         },
         {
           "path": "FamilyQuant.Core/DeNovo/NativeQuantFractions.cs",
@@ -1539,7 +1539,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "Runtime comparison dependency",
-          "sha256": "024AB577E3E28F445C6B4761C3F093510532E25933AA8B5A036D8AD8B2DFB6BC"
+          "sha256": "C64BA87F386ED38607C988542429882451BF749DFA54D8C9F359145F79422806"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -1678,7 +1678,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs",
           "symbol": "Runtime comparison dependency",
-          "sha256": "79CA110CF12B1603F371147540B1682854EE4671584F76DA65613F074DCE601F"
+          "sha256": "46CA6872D443D30E3A496A87C2A92D7E4EDD9950AEDCB3E52848DA731DC53FDB"
         },
         {
           "path": "FamilyQuant.Core/DeNovo/NativeQuantFractions.cs",
@@ -1798,7 +1798,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "Runtime comparison dependency",
-          "sha256": "024AB577E3E28F445C6B4761C3F093510532E25933AA8B5A036D8AD8B2DFB6BC"
+          "sha256": "C64BA87F386ED38607C988542429882451BF749DFA54D8C9F359145F79422806"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -1937,7 +1937,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs",
           "symbol": "Runtime comparison dependency",
-          "sha256": "79CA110CF12B1603F371147540B1682854EE4671584F76DA65613F074DCE601F"
+          "sha256": "46CA6872D443D30E3A496A87C2A92D7E4EDD9950AEDCB3E52848DA731DC53FDB"
         },
         {
           "path": "FamilyQuant.Core/DeNovo/NativeQuantFractions.cs",
@@ -2057,7 +2057,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "Runtime comparison dependency",
-          "sha256": "024AB577E3E28F445C6B4761C3F093510532E25933AA8B5A036D8AD8B2DFB6BC"
+          "sha256": "C64BA87F386ED38607C988542429882451BF749DFA54D8C9F359145F79422806"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -2196,7 +2196,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs",
           "symbol": "Runtime comparison dependency",
-          "sha256": "79CA110CF12B1603F371147540B1682854EE4671584F76DA65613F074DCE601F"
+          "sha256": "46CA6872D443D30E3A496A87C2A92D7E4EDD9950AEDCB3E52848DA731DC53FDB"
         },
         {
           "path": "FamilyQuant.Core/DeNovo/NativeQuantFractions.cs",
@@ -2316,7 +2316,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "Runtime comparison dependency",
-          "sha256": "024AB577E3E28F445C6B4761C3F093510532E25933AA8B5A036D8AD8B2DFB6BC"
+          "sha256": "C64BA87F386ED38607C988542429882451BF749DFA54D8C9F359145F79422806"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -2455,7 +2455,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs",
           "symbol": "Runtime comparison dependency",
-          "sha256": "79CA110CF12B1603F371147540B1682854EE4671584F76DA65613F074DCE601F"
+          "sha256": "46CA6872D443D30E3A496A87C2A92D7E4EDD9950AEDCB3E52848DA731DC53FDB"
         },
         {
           "path": "FamilyQuant.Core/DeNovo/NativeQuantFractions.cs",
@@ -2575,7 +2575,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "Runtime comparison dependency",
-          "sha256": "024AB577E3E28F445C6B4761C3F093510532E25933AA8B5A036D8AD8B2DFB6BC"
+          "sha256": "C64BA87F386ED38607C988542429882451BF749DFA54D8C9F359145F79422806"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -2714,7 +2714,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs",
           "symbol": "Runtime comparison dependency",
-          "sha256": "79CA110CF12B1603F371147540B1682854EE4671584F76DA65613F074DCE601F"
+          "sha256": "46CA6872D443D30E3A496A87C2A92D7E4EDD9950AEDCB3E52848DA731DC53FDB"
         },
         {
           "path": "FamilyQuant.Core/DeNovo/NativeQuantFractions.cs",
@@ -2834,7 +2834,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "Runtime comparison dependency",
-          "sha256": "024AB577E3E28F445C6B4761C3F093510532E25933AA8B5A036D8AD8B2DFB6BC"
+          "sha256": "C64BA87F386ED38607C988542429882451BF749DFA54D8C9F359145F79422806"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -2973,7 +2973,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs",
           "symbol": "Runtime comparison dependency",
-          "sha256": "79CA110CF12B1603F371147540B1682854EE4671584F76DA65613F074DCE601F"
+          "sha256": "46CA6872D443D30E3A496A87C2A92D7E4EDD9950AEDCB3E52848DA731DC53FDB"
         },
         {
           "path": "FamilyQuant.Core/DeNovo/NativeQuantFractions.cs",
@@ -3093,7 +3093,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "Runtime comparison dependency",
-          "sha256": "024AB577E3E28F445C6B4761C3F093510532E25933AA8B5A036D8AD8B2DFB6BC"
+          "sha256": "C64BA87F386ED38607C988542429882451BF749DFA54D8C9F359145F79422806"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -3232,7 +3232,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs",
           "symbol": "Runtime comparison dependency",
-          "sha256": "79CA110CF12B1603F371147540B1682854EE4671584F76DA65613F074DCE601F"
+          "sha256": "46CA6872D443D30E3A496A87C2A92D7E4EDD9950AEDCB3E52848DA731DC53FDB"
         },
         {
           "path": "FamilyQuant.Core/DeNovo/NativeQuantFractions.cs",
@@ -3352,7 +3352,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "Runtime comparison dependency",
-          "sha256": "024AB577E3E28F445C6B4761C3F093510532E25933AA8B5A036D8AD8B2DFB6BC"
+          "sha256": "C64BA87F386ED38607C988542429882451BF749DFA54D8C9F359145F79422806"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -3491,7 +3491,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs",
           "symbol": "Runtime comparison dependency",
-          "sha256": "79CA110CF12B1603F371147540B1682854EE4671584F76DA65613F074DCE601F"
+          "sha256": "46CA6872D443D30E3A496A87C2A92D7E4EDD9950AEDCB3E52848DA731DC53FDB"
         },
         {
           "path": "FamilyQuant.Core/DeNovo/NativeQuantFractions.cs",
@@ -3606,7 +3606,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "Runtime comparison dependency",
-          "sha256": "024AB577E3E28F445C6B4761C3F093510532E25933AA8B5A036D8AD8B2DFB6BC"
+          "sha256": "C64BA87F386ED38607C988542429882451BF749DFA54D8C9F359145F79422806"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -3750,7 +3750,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs",
           "symbol": "Runtime comparison dependency",
-          "sha256": "79CA110CF12B1603F371147540B1682854EE4671584F76DA65613F074DCE601F"
+          "sha256": "46CA6872D443D30E3A496A87C2A92D7E4EDD9950AEDCB3E52848DA731DC53FDB"
         },
         {
           "path": "FamilyQuant.Core/DeNovo/NativeQuantFractions.cs",
@@ -3865,7 +3865,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "Runtime comparison dependency",
-          "sha256": "024AB577E3E28F445C6B4761C3F093510532E25933AA8B5A036D8AD8B2DFB6BC"
+          "sha256": "C64BA87F386ED38607C988542429882451BF749DFA54D8C9F359145F79422806"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -4009,7 +4009,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs",
           "symbol": "Runtime comparison dependency",
-          "sha256": "79CA110CF12B1603F371147540B1682854EE4671584F76DA65613F074DCE601F"
+          "sha256": "46CA6872D443D30E3A496A87C2A92D7E4EDD9950AEDCB3E52848DA731DC53FDB"
         },
         {
           "path": "FamilyQuant.Core/DeNovo/NativeQuantFractions.cs",
@@ -4124,7 +4124,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "Runtime comparison dependency",
-          "sha256": "024AB577E3E28F445C6B4761C3F093510532E25933AA8B5A036D8AD8B2DFB6BC"
+          "sha256": "C64BA87F386ED38607C988542429882451BF749DFA54D8C9F359145F79422806"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -4268,7 +4268,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs",
           "symbol": "Runtime comparison dependency",
-          "sha256": "79CA110CF12B1603F371147540B1682854EE4671584F76DA65613F074DCE601F"
+          "sha256": "46CA6872D443D30E3A496A87C2A92D7E4EDD9950AEDCB3E52848DA731DC53FDB"
         },
         {
           "path": "FamilyQuant.Core/DeNovo/NativeQuantFractions.cs",
@@ -4383,7 +4383,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "Runtime comparison dependency",
-          "sha256": "024AB577E3E28F445C6B4761C3F093510532E25933AA8B5A036D8AD8B2DFB6BC"
+          "sha256": "C64BA87F386ED38607C988542429882451BF749DFA54D8C9F359145F79422806"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -4527,7 +4527,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs",
           "symbol": "Runtime comparison dependency",
-          "sha256": "79CA110CF12B1603F371147540B1682854EE4671584F76DA65613F074DCE601F"
+          "sha256": "46CA6872D443D30E3A496A87C2A92D7E4EDD9950AEDCB3E52848DA731DC53FDB"
         },
         {
           "path": "FamilyQuant.Core/DeNovo/NativeQuantFractions.cs",
@@ -4642,7 +4642,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "Runtime comparison dependency",
-          "sha256": "024AB577E3E28F445C6B4761C3F093510532E25933AA8B5A036D8AD8B2DFB6BC"
+          "sha256": "C64BA87F386ED38607C988542429882451BF749DFA54D8C9F359145F79422806"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -4786,7 +4786,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs",
           "symbol": "Runtime comparison dependency",
-          "sha256": "79CA110CF12B1603F371147540B1682854EE4671584F76DA65613F074DCE601F"
+          "sha256": "46CA6872D443D30E3A496A87C2A92D7E4EDD9950AEDCB3E52848DA731DC53FDB"
         },
         {
           "path": "FamilyQuant.Core/DeNovo/NativeQuantFractions.cs",
@@ -4906,7 +4906,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "Runtime comparison dependency",
-          "sha256": "024AB577E3E28F445C6B4761C3F093510532E25933AA8B5A036D8AD8B2DFB6BC"
+          "sha256": "C64BA87F386ED38607C988542429882451BF749DFA54D8C9F359145F79422806"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -5045,7 +5045,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs",
           "symbol": "Runtime comparison dependency",
-          "sha256": "79CA110CF12B1603F371147540B1682854EE4671584F76DA65613F074DCE601F"
+          "sha256": "46CA6872D443D30E3A496A87C2A92D7E4EDD9950AEDCB3E52848DA731DC53FDB"
         },
         {
           "path": "FamilyQuant.Core/DeNovo/NativeQuantFractions.cs",
@@ -5165,7 +5165,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "Runtime comparison dependency",
-          "sha256": "024AB577E3E28F445C6B4761C3F093510532E25933AA8B5A036D8AD8B2DFB6BC"
+          "sha256": "C64BA87F386ED38607C988542429882451BF749DFA54D8C9F359145F79422806"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -5304,7 +5304,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs",
           "symbol": "Runtime comparison dependency",
-          "sha256": "79CA110CF12B1603F371147540B1682854EE4671584F76DA65613F074DCE601F"
+          "sha256": "46CA6872D443D30E3A496A87C2A92D7E4EDD9950AEDCB3E52848DA731DC53FDB"
         },
         {
           "path": "FamilyQuant.Core/DeNovo/NativeQuantFractions.cs",
@@ -5424,7 +5424,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "Runtime comparison dependency",
-          "sha256": "024AB577E3E28F445C6B4761C3F093510532E25933AA8B5A036D8AD8B2DFB6BC"
+          "sha256": "C64BA87F386ED38607C988542429882451BF749DFA54D8C9F359145F79422806"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -5563,7 +5563,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs",
           "symbol": "Runtime comparison dependency",
-          "sha256": "79CA110CF12B1603F371147540B1682854EE4671584F76DA65613F074DCE601F"
+          "sha256": "46CA6872D443D30E3A496A87C2A92D7E4EDD9950AEDCB3E52848DA731DC53FDB"
         },
         {
           "path": "FamilyQuant.Core/DeNovo/NativeQuantFractions.cs",
@@ -5683,7 +5683,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "Runtime comparison dependency",
-          "sha256": "024AB577E3E28F445C6B4761C3F093510532E25933AA8B5A036D8AD8B2DFB6BC"
+          "sha256": "C64BA87F386ED38607C988542429882451BF749DFA54D8C9F359145F79422806"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -5822,7 +5822,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs",
           "symbol": "Runtime comparison dependency",
-          "sha256": "79CA110CF12B1603F371147540B1682854EE4671584F76DA65613F074DCE601F"
+          "sha256": "46CA6872D443D30E3A496A87C2A92D7E4EDD9950AEDCB3E52848DA731DC53FDB"
         },
         {
           "path": "FamilyQuant.Core/DeNovo/NativeQuantFractions.cs",
@@ -5942,7 +5942,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "Runtime comparison dependency",
-          "sha256": "024AB577E3E28F445C6B4761C3F093510532E25933AA8B5A036D8AD8B2DFB6BC"
+          "sha256": "C64BA87F386ED38607C988542429882451BF749DFA54D8C9F359145F79422806"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -6081,7 +6081,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs",
           "symbol": "Runtime comparison dependency",
-          "sha256": "79CA110CF12B1603F371147540B1682854EE4671584F76DA65613F074DCE601F"
+          "sha256": "46CA6872D443D30E3A496A87C2A92D7E4EDD9950AEDCB3E52848DA731DC53FDB"
         },
         {
           "path": "FamilyQuant.Core/DeNovo/NativeQuantFractions.cs",
@@ -6201,7 +6201,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "Runtime comparison dependency",
-          "sha256": "024AB577E3E28F445C6B4761C3F093510532E25933AA8B5A036D8AD8B2DFB6BC"
+          "sha256": "C64BA87F386ED38607C988542429882451BF749DFA54D8C9F359145F79422806"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -6250,7 +6250,7 @@
           "kind": "test",
           "target": "DeNovoLedgerRefusalsCommand",
           "assertion": "De novo refusal/path kind code fact: every listed old/current case agrees",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-085841-FamilyQuant-gate\\denovo-refusals\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-evidence\\n6c-refusals-current\\comparisons.log",
           "inspectedBy": ""
         }
       ]
@@ -6264,7 +6264,7 @@
           "kind": "test",
           "target": "DeNovoLedgerRefusalsCommand",
           "assertion": "De novo refusal/path kind format/export: every listed old/current case agrees",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-085841-FamilyQuant-gate\\denovo-refusals\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-evidence\\n6c-refusals-current\\comparisons.log",
           "inspectedBy": ""
         }
       ]
