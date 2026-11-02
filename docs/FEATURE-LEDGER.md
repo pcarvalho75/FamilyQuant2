@@ -17,7 +17,7 @@ Render targets refer to `ScreenHarness.Screens`, captured with `--screens <outpu
 Release gate: `FamilyQuant.Tests.exe --feature-ledger-release-check` fails until every retained row is VERIFIED with evidence. Authorized DROP rows use APPROVED_DROP, which records a decision, not a completed UI removal. The normal quick suite permits OPEN rows during development. Regeneration resets retained rows to OPEN; preserve reviewed evidence when updating the scanner.
 
 Scan count: **5756**. Ledger rows: **5756**. Source files: **104**.
-Authorized DROP rows: **296**; proposed VERIFIED retained rows: **3365**; OPEN retained rows: **2095**.
+Authorized DROP rows: **296**; proposed VERIFIED retained rows: **3397**; OPEN retained rows: **2063**.
 
 | ID | Disposition | Kind | Frozen source | Fact or control | Planned check | State | Evidence |
 |---|---|---|---|---|---|---|---|
@@ -4025,14 +4025,14 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **3365**; OPEN r
 | FQ15-015C529AFCCA | KEEP | format/export | FamilyQuant/MainWindow.xaml.cs:278 | "FamilyQuant project (*.fqproj)&#124;*.fqproj&#124;" | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-015C529AFCCA |
 | FQ15-098012E95BE9 | KEEP | format/export | FamilyQuant/MainWindow.xaml.cs:279 | "FamilyClusterFile (*.fcf)&#124;*.fcf" | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-098012E95BE9 |
 | FQ15-162BB1A4F4F8 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:280 | "Choose the project or Family Cluster File to work on" | render:01-home | OPEN | pending |
-| FQ15-E2620B485929 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:297 | "MyClusterGenerationControl" | render:01-home | OPEN | pending |
-| FQ15-F37BABACE038 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:303 | "MyClusterGenerationControl" | render:01-home | OPEN | pending |
-| FQ15-51D93C9A42D7 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:336 | "The project could not be opened, and what was on screen has been left alone.\n\n" | render:01-home | OPEN | pending |
-| FQ15-1EC2245C020C | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:337 | "Reason given by the program: " | render:01-home | OPEN | pending |
-| FQ15-A2FD633E05A4 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:337 | "\n\n" | render:01-home | OPEN | pending |
-| FQ15-D913CA4A8571 | KEEP | format/export | FamilyQuant/MainWindow.xaml.cs:338 | "Next step: check that this really is a .fqproj or a .fcf written by FamilyQuant and " | render:01-home | OPEN | pending |
-| FQ15-1BB85E29A291 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:339 | "that it is not open in another program. If it was interrupted while being saved it " | render:01-home | OPEN | pending |
-| FQ15-C74B5049B6EB | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:340 | "will have to be generated again from the database with \"Run USearch\"." | render:01-home | OPEN | pending |
+| FQ15-E2620B485929 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:297 | "MyClusterGenerationControl" | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-E2620B485929 |
+| FQ15-F37BABACE038 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:303 | "MyClusterGenerationControl" | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-F37BABACE038 |
+| FQ15-51D93C9A42D7 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:336 | "The project could not be opened, and what was on screen has been left alone.\n\n" | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-51D93C9A42D7 |
+| FQ15-1EC2245C020C | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:337 | "Reason given by the program: " | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-1EC2245C020C |
+| FQ15-A2FD633E05A4 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:337 | "\n\n" | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-A2FD633E05A4 |
+| FQ15-D913CA4A8571 | KEEP | format/export | FamilyQuant/MainWindow.xaml.cs:338 | "Next step: check that this really is a .fqproj or a .fcf written by FamilyQuant and " | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-D913CA4A8571 |
+| FQ15-1BB85E29A291 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:339 | "that it is not open in another program. If it was interrupted while being saved it " | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-1BB85E29A291 |
+| FQ15-C74B5049B6EB | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:340 | "will have to be generated again from the database with \"Run USearch\"." | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-C74B5049B6EB |
 | FQ15-29290A1DEF52 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:341 | "Could not open the file" | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-29290A1DEF52 |
 | FQ15-A9136DA0DDEC | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:456 | "Nothing was saved: there are no families on screen to save.\n\n" | render:01-home | OPEN | pending |
 | FQ15-6CA9DCF5DEAA | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:457 | "Next step: open a Family Cluster File with File \u00B7 Load Family Cluster File, or build " | render:01-home | OPEN | pending |
@@ -4109,32 +4109,32 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **3365**; OPEN r
 | FQ15-6379736D2F52 | KEEP | format/export | FamilyQuant/MainWindow.xaml.cs:773 | "SEPro 2.0 (*.sepr2)&#124;*.sepr2" | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-6379736D2F52 |
 | FQ15-D9B5F67123FE | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:774 | "Choose a TRUSTED SEPro result package (legacy unsafe deserialization)" | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-D9B5F67123FE |
 | FQ15-A079DE8A62D5 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:782 | "SEPro Package loaded" | render:01-home | OPEN | pending |
-| FQ15-BF47EB479788 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:801 | "Nothing was written: " | render:01-home | OPEN | pending |
+| FQ15-BF47EB479788 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:801 | "Nothing was written: " | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-BF47EB479788 |
 | FQ15-C1F09243B19C | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:801 | "N0" | render:01-home | OPEN | pending |
-| FQ15-0A6BE0E01AB9 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:802 | " protein(s) in the SEPro package are not in the database these families came " | render:01-home | OPEN | pending |
-| FQ15-AC70C47D59F5 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:803 | "from, so they have no family number to receive.\n\n" | render:01-home | OPEN | pending |
-| FQ15-D2D42CD3165B | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:804 | "This normally means the search and the clustering used different FASTA files, or " | render:01-home | OPEN | pending |
-| FQ15-EDE55513E381 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:805 | "different versions of the same one.\n\n" | render:01-home | OPEN | pending |
-| FQ15-DB566AD91F24 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:806 | "Next step: recluster the exact database the SEPro search used, with Run USearch, " | render:01-home | OPEN | pending |
-| FQ15-CDADBFE1E05C | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:807 | "and try again.\n\n" | render:01-home | OPEN | pending |
-| FQ15-09A66AEC1BAA | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:808 | "Examples of the missing identifiers: " | render:01-home | OPEN | pending |
+| FQ15-0A6BE0E01AB9 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:802 | " protein(s) in the SEPro package are not in the database these families came " | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-0A6BE0E01AB9 |
+| FQ15-AC70C47D59F5 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:803 | "from, so they have no family number to receive.\n\n" | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-AC70C47D59F5 |
+| FQ15-D2D42CD3165B | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:804 | "This normally means the search and the clustering used different FASTA files, or " | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-D2D42CD3165B |
+| FQ15-EDE55513E381 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:805 | "different versions of the same one.\n\n" | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-EDE55513E381 |
+| FQ15-DB566AD91F24 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:806 | "Next step: recluster the exact database the SEPro search used, with Run USearch, " | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-DB566AD91F24 |
+| FQ15-CDADBFE1E05C | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:807 | "and try again.\n\n" | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-CDADBFE1E05C |
+| FQ15-09A66AEC1BAA | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:808 | "Examples of the missing identifiers: " | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-09A66AEC1BAA |
 | FQ15-C2A6ED67B237 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:809 | ", " | render:01-home | OPEN | pending |
-| FQ15-96E7ED457634 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:809 | ", ..." | render:01-home | OPEN | pending |
-| FQ15-46C7EDAE6F70 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:810 | "The package and the database do not match" | render:01-home | OPEN | pending |
-| FQ15-B02D92F38DEE | KEEP | format/export | FamilyQuant/MainWindow.xaml.cs:819 | "_regrouped.sepr2" | render:01-home | OPEN | pending |
+| FQ15-96E7ED457634 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:809 | ", ..." | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-96E7ED457634 |
+| FQ15-46C7EDAE6F70 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:810 | "The package and the database do not match" | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-46C7EDAE6F70 |
+| FQ15-B02D92F38DEE | KEEP | format/export | FamilyQuant/MainWindow.xaml.cs:819 | "_regrouped.sepr2" | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-B02D92F38DEE |
 | FQ15-CE9A6051C843 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:823 | "N0" | render:01-home | OPEN | pending |
-| FQ15-ADD26B230959 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:824 | " protein(s) were given their family number and written to\n" | render:01-home | OPEN | pending |
-| FQ15-86905E852F63 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:824 | "\n\n" | render:01-home | OPEN | pending |
-| FQ15-B4ABFF0708DA | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:825 | "The number written is the User ID column, so any family you merged by hand is what " | render:01-home | OPEN | pending |
-| FQ15-E324CADFF7D5 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:826 | "went in. The file you chose was not modified.\n\n" | render:01-home | OPEN | pending |
-| FQ15-BEEC76DC6727 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:827 | "Next step: use the _regrouped package in the rest of the PatternLab pipeline." | render:01-home | OPEN | pending |
-| FQ15-92C3CAA143CF | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:828 | "SEPro package reannotated" | render:01-home | OPEN | pending |
-| FQ15-4749DB5C7C36 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:833 | "The SEPro package could not be reannotated, and no file was written.\n\n" | render:01-home | OPEN | pending |
-| FQ15-1C7E4B78A91C | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:834 | "Reason given by the program: " | render:01-home | OPEN | pending |
-| FQ15-D53CA3DD7DFC | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:834 | "\n\n" | render:01-home | OPEN | pending |
-| FQ15-083D6DE21A64 | KEEP | format/export | FamilyQuant/MainWindow.xaml.cs:835 | "Next step: check that the .sepr2 opens in SEPro and that you can write to its folder, " | render:01-home | OPEN | pending |
-| FQ15-CA406CB51D5A | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:836 | "then try again." | render:01-home | OPEN | pending |
-| FQ15-965D5F90198A | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:837 | "Could not reannotate" | render:01-home | OPEN | pending |
+| FQ15-ADD26B230959 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:824 | " protein(s) were given their family number and written to\n" | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-ADD26B230959 |
+| FQ15-86905E852F63 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:824 | "\n\n" | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-86905E852F63 |
+| FQ15-B4ABFF0708DA | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:825 | "The number written is the User ID column, so any family you merged by hand is what " | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-B4ABFF0708DA |
+| FQ15-E324CADFF7D5 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:826 | "went in. The file you chose was not modified.\n\n" | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-E324CADFF7D5 |
+| FQ15-BEEC76DC6727 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:827 | "Next step: use the _regrouped package in the rest of the PatternLab pipeline." | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-BEEC76DC6727 |
+| FQ15-92C3CAA143CF | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:828 | "SEPro package reannotated" | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-92C3CAA143CF |
+| FQ15-4749DB5C7C36 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:833 | "The SEPro package could not be reannotated, and no file was written.\n\n" | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-4749DB5C7C36 |
+| FQ15-1C7E4B78A91C | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:834 | "Reason given by the program: " | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-1C7E4B78A91C |
+| FQ15-D53CA3DD7DFC | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:834 | "\n\n" | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-D53CA3DD7DFC |
+| FQ15-083D6DE21A64 | KEEP | format/export | FamilyQuant/MainWindow.xaml.cs:835 | "Next step: check that the .sepr2 opens in SEPro and that you can write to its folder, " | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-083D6DE21A64 |
+| FQ15-CA406CB51D5A | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:836 | "then try again." | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-CA406CB51D5A |
+| FQ15-965D5F90198A | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:837 | "Could not reannotate" | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-965D5F90198A |
 | FQ15-E63181E24161 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:860 | "FamilyQuant \u00B7 How to read these numbers" | render:01-home | OPEN | pending |
 | FQ15-BBC1B4974AAF | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:867 | "FamilyQuant \u00B7 What do I do first?" | render:01-home | OPEN | pending |
 | FQ15-40787AA4E92D | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:877 | "WHAT DO I DO FIRST?\n" | render:01-home | OPEN | pending |
@@ -4195,7 +4195,7 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **3365**; OPEN r
 | FQ15-7526DED77FA2 | KEEP | handler definition | FamilyQuant/MainWindow.xaml.cs:501 | private async void MenuItemSaveProject_Click(object sender, RoutedEventArgs e) | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-7526DED77FA2 |
 | FQ15-0AD0CE6F978B | KEEP | handler definition | FamilyQuant/MainWindow.xaml.cs:598 | private void MenuItemComputeXic_Click(object sender, RoutedEventArgs e) | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-0AD0CE6F978B |
 | FQ15-65700BDA90F3 | KEEP | handler definition | FamilyQuant/MainWindow.xaml.cs:713 | private async void MenuItemSpectrumComparison_Click(object sender, RoutedEventArgs e) | render:01-home | OPEN | pending |
-| FQ15-A79FAB873090 | KEEP | handler definition | FamilyQuant/MainWindow.xaml.cs:759 | private void MenuItemReanotateSEPro_Click(object sender, RoutedEventArgs e) | render:01-home | OPEN | pending |
+| FQ15-A79FAB873090 | KEEP | handler definition | FamilyQuant/MainWindow.xaml.cs:759 | private void MenuItemReanotateSEPro_Click(object sender, RoutedEventArgs e) | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-A79FAB873090 |
 | FQ15-C4526422A15C | KEEP | handler definition | FamilyQuant/MainWindow.xaml.cs:841 | private void MenuItemHowToRead_Click(object sender, RoutedEventArgs e) | render:01-home | OPEN | pending |
 | FQ15-8921B21922FE | KEEP | handler definition | FamilyQuant/MainWindow.xaml.cs:865 | private void MenuItemWhereAmI_Click(object sender, RoutedEventArgs e) | render:01-home | OPEN | pending |
 | FQ15-CC6338717408 | IMPROVE | code fact | FamilyQuant/NormalizationMode.cs:79 | "% of whole chromatogram (TIC)" | test:ResultsMemberComparisonCommand | VERIFIED | evidence:RS-members:FQ15-CC6338717408 |
