@@ -58,7 +58,7 @@ pairs per case must agree byte-for-byte, including ambiguity and quoted/comma-co
 The source-aware additional CSV fields are outside that legacy-byte comparison.
 
 Its green packet supports 104 new observations: 90 code facts and 14 table bindings,
-with no overlap with the first batch. The combined cohort has 286 proposed VERIFIED rows and
+with no overlap with the first batch. After that batch the cohort had 286 proposed VERIFIED rows and
 333 OPEN rows. The 41 compared status-copy observations that differ
 remain OPEN. A passing CSV pair does not automatically verify a format or handler row: each
 proposed row still names its actual production projection or resolved cell comparison.
@@ -67,3 +67,16 @@ The native `c13-style-role-mapping-open.json` handoff lists 24 OPEN frozen style
 their IDs, lines, values, style keys and target types. It supplies no current-role mapping;
 FQLook owns that mapping under orchestrator M47. The producer verifies each listed row is
 OPEN when it writes the inventory. This is a handoff, not style verification.
+
+The third batch's `--prove-denovo-refusals` supports 23 further rows, 20 code facts and
+three format/path facts. It compares actual old/current numeric acceptance and output,
+restoration callback counts and exact refusal messages, homology settings and restored boxes,
+integer/verdict display formats, cache folder/path results and run-name lookup under en-US
+and fr-FR. Fixtures include bounds, comma/nonfinite text, missing runs and case/extension
+matching. The native check compares absolute paths first, then records paths relative to
+the fixture root so repeated comparison JSON is independent of the output folder.
+
+Those fixtures never open the empty RAW-name files as acquired data and perform no extraction
+or search. There is no overlap with earlier batches. The combined cohort has 309 proposed
+VERIFIED observations and 310 OPEN observations. Exact remaining counts and evidence are in
+the native audit mapping; no unsupported row is closed by this aggregate total.

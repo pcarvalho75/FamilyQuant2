@@ -27,6 +27,7 @@ internal static partial class Program
         "--prove-denovo-ledger",
         "--prove-denovo-runtime",
         "--prove-denovo-workflows",
+        "--prove-denovo-refusals",
         "--test-family-world-fetch",
         "--family-world-fetch",
         "--test-query-residue-coverage",

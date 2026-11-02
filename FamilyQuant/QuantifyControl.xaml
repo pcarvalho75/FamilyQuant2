@@ -26,9 +26,9 @@
      <local:DeNovoFilterControl x:Name="FilterControl" Grid.Row="3" Grid.ColumnSpan="3" DataContext="{Binding Filters}" Margin="0,12,0,12"/>
      <WrapPanel Grid.Row="4" Grid.ColumnSpan="3">
       <Label Content="Isotope ceiling" ToolTip="Maximum credited isotopes per peptide, including the monoisotopic peak."/><numeric:IntegerUpDown x:Name="IntegerUpDownIsotopes" Margin="{DynamicResource ControlPadding}" Width="70" Minimum="1" Maximum="6" Value="{Binding IsotopeCeiling, Mode=TwoWay}"
-       ToolTip="Maximum isotopes per peptide, 1 to 6. An absent isotope adds nothing. Default 6."/>
+       ToolTip="Maximum isotopes per peptide from 1 to 6, default 6. An absent isotope adds nothing."/>
       <Label Content="Minimum points per peak" ToolTip="Required array points per isotope peak, including the two padding points." Margin="20,0,0,0"/><numeric:IntegerUpDown x:Name="IntegerUpDownMinPoints" Margin="{DynamicResource ControlPadding}" Width="70" Minimum="1" Maximum="20" Value="{Binding MinimumPoints, Mode=TwoWay}"
-       ToolTip="Points per isotope peak, including two padding points. Default 3. A value of 1 restores the legacy height rule."/>
+       ToolTip="Points per isotope peak, including two padding points; default 3. Set 1 to restore the legacy height rule."/>
      </WrapPanel>
     </Grid>
    </Border>

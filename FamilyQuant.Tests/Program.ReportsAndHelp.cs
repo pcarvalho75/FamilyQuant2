@@ -224,9 +224,9 @@ namespace FamilyQuant.Tests
                 help.Contains("Undo steps back") && help.Contains("no redo"));
             Check("the help documents the super-cluster match-all/match-any choice and the exclude box",
                 help.Contains("match all words") && help.Contains("match any word")
-                && help.Contains("Exclude Words"));
+                && help.Contains("Exclude words"));
             Check("the help documents that Search now scopes reclustering by the search text only",
-                help.Contains("limits BOTH Recluster by Words and Create Super") && help.Contains("SEARCH TEXT only"));
+                help.Contains("limits both Recluster by words and Group by keywords") && help.Contains("SEARCH TEXT only"));
 
             // Every mode and policy the help mentions must be a name the user can find in the lists.
             foreach (NormalizationMode mode in Enum.GetValues<NormalizationMode>())
