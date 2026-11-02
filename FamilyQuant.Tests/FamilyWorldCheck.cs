@@ -136,6 +136,8 @@ namespace FamilyQuant.Tests
                 return kept;
             }
             List<FamilyWorldProtein> withoutSpecies = Without(species, "species");
+            bool OwnSpecies(FamilyWorldProtein p) => species.Organisms.Contains(p.Taxon) || sampleTaxa.Contains(p.Taxon)
+                || species.Accessions.Contains(p.Accession) || sampleAccessions.Contains(p.Accession);
             Line("world_without_species", N0(withoutSpecies.Count));
 
             // ---------------------------------------------------------------- known answers
@@ -540,6 +542,75 @@ namespace FamilyQuant.Tests
                     FamilyWorld.Join(credit.Families), FamilyWorld.Join(credit.OutOfScopeFamilies), D11Right(p) ? "1" : "0"));
             }
             Write(outDir, "family_world_known_answers_d11.csv", d11Csv.ToString());
+
+            // ---------------------------------------------------------------- B6, the error beside every family
+            // The product's known-answer engine (FamilyWorldErrors) must find the checker's own known answers and,
+            // under D11, the same credits; then the stored table is written into a copy of the project and read back.
+            // The one call Compute makes (after the pass above), with the checker's species removal for this interim world.
+            FamilyWorldAnalysisResult analysis = FamilyWorldAnalysis.Complete(firstPass, pass, sample, manifest.SpectrumComparisonRows,
+                coverageWorld, panelRelease, OwnSpecies, d11, FamilyWorldErrors.DefaultMinimumKnownCredits);
+            List<FamilyWorldKnownAnswer> answers = analysis.KnownAnswers;
+            check("family world (B6): the product's known answers are the checker's, pair for pair",
+                answers.Count == pairs.Count && answers.Zip(pairs.Values).All(x => x.First.Tag == x.Second.Tag && x.First.Identified == x.Second.Identified
+                    && x.First.Calls == x.Second.Calls && x.First.Exclusion == x.Second.Exclusion && x.First.UnlabelledHolders == x.Second.UnlabelledHolders
+                    && x.First.KnownFamilies.SetEquals(x.Second.Known)), N(answers.Count) + " vs " + N(pairs.Count));
+            check("family world (B6): the product credits every known answer as the checker does under D11",
+                answers.Where(a => a.IsKnown).All(a => a.Credit!.Outcome == d11Credits[a.Tag].Outcome
+                    && a.Credit.Families.SetEquals(d11Credits[a.Tag].Families)) && answers.Count(a => a.Landed) == d11Landed
+                && answers.Count(a => a.Right) == d11Right, N(answers.Count(a => a.Right)) + " right");
+            FamilyWorldSummary errors = analysis.Summary;
+            Console.WriteLine();
+            Console.WriteLine("        THE ERROR BESIDE EVERY FAMILY (B6; right rate shown from " + N(errors.MinimumKnownCredits) + " known credits)");
+            Console.WriteLine("          family: own share of the residual | decoy rate | known credits, truly the family | right rate or evidence");
+            foreach (FamilyWorldFamilySummary f in errors.Families)
+                Console.WriteLine("            " + f.Family + ": " + P(f.UniqueEnvelope / errors.ResidualEnvelope) + " | " +
+                    (f.DecoyRate.HasValue ? P(f.DecoyRate.Value) : "nothing credited") + " | " + N(f.KnownCredited) + ", " + N(f.KnownCreditedTrue) +
+                    " | " + (f.RightRate.HasValue ? P(f.RightRate.Value) : f.Evidence));
+            check("family world (B6): every family row has its decoy rate and its right rate, or says why not",
+                errors.Families.All(f => (f.DecoyRate.HasValue || f.CreditedEnvelope == 0)
+                    && (f.RightRate.HasValue ? f.Evidence == "measured" : f.Evidence.Length > 0)), N(errors.Families.Count) + " families");
+            double errorsClosure = errors.Families.Sum(f => f.UniqueEnvelope)
+                + errors.Outcomes.Where(o => o.Outcome != nameof(FamilyWorldOutcome.Credited)).Sum(o => o.Envelope);
+            check("family world (B6): the stored rows close on the residual",
+                Math.Abs(errorsClosure - errors.ResidualEnvelope) <= 1e-9 * Math.Max(1, errors.ResidualEnvelope), R(errorsClosure));
+            Write(outDir, "family_world_errors.csv", errors.BuildCsv());
+
+            Console.WriteLine("        THE RESULT TABLE (B7's): identified | de novo in the database | de novo only in the family world, own parts, of the measured total");
+            foreach (FamilyWorldCompositionRow r in errors.Composition.Take(25))
+                Console.WriteLine("            " + r.Family + (r.Kind == FamilyWorldCompositionRow.CuratedKind ? " (curated)" : "") + ": " +
+                    P(r.IdentifiedEnvelope / errors.MeasuredTotalEnvelope) + " | " + P(r.DatabaseDeNovoEnvelope / errors.MeasuredTotalEnvelope) + " | " +
+                    P(r.WorldDeNovoEnvelope / errors.MeasuredTotalEnvelope) + (r.WorldRightRate.HasValue ? ", right " + P(r.WorldRightRate.Value) : r.WorldEvidence.Length > 0 ? ", " + r.WorldEvidence : ""));
+            Console.WriteLine("          " + N(errors.Composition.Count) + " rows; shared: identified " + P(errors.SharedIdentifiedEnvelope / errors.MeasuredTotalEnvelope) +
+                ", database de novo " + P(errors.SharedDatabaseDeNovoEnvelope / errors.MeasuredTotalEnvelope) + ", family world " +
+                P(errors.SharedEnvelope / errors.MeasuredTotalEnvelope) + "; identified in no family " + P(errors.UnattributedIdentifiedEnvelope / errors.MeasuredTotalEnvelope) +
+                "; de novo unexplained " + P(errors.UnexplainedEnvelope / errors.MeasuredTotalEnvelope));
+            FamilyEnvelopeQuantResult composed = FamilyEnvelopeQuant.BuildFromAttributedPeptides(firstPass);
+            check("family world (B7 table): its measured basis is FamilyEnvelopeQuant's, bit for bit",
+                errors.MeasuredIdentifiedEnvelope.Equals(composed.MeasuredIdentifiedEnvelope)
+                && errors.MeasuredDeNovoEnvelope.Equals(composed.MeasuredDeNovoEnvelopeReferenceCalibrated)
+                && errors.MeasuredTotalEnvelope.Equals(composed.MeasuredTotalEnvelopeReferenceCalibrated), R(errors.MeasuredTotalEnvelope));
+            double tableClosure = errors.Composition.Sum(r => r.TotalEnvelope) + errors.SharedIdentifiedEnvelope + errors.SharedDatabaseDeNovoEnvelope
+                + errors.SharedEnvelope + errors.UnattributedIdentifiedEnvelope + errors.UnexplainedEnvelope;
+            check("family world (B7 table): family parts, shared rows, identified in no family and the unexplained bucket close on the measured total",
+                Math.Abs(tableClosure - errors.MeasuredTotalEnvelope) <= 1e-9 * errors.MeasuredTotalEnvelope
+                && Math.Abs(errors.UnattributedIdentifiedEnvelope - composed.UnattributedIdentifiedEnvelope) <= 1e-9 * Math.Max(1, composed.UnattributedIdentifiedEnvelope),
+                R(tableClosure) + " vs " + R(errors.MeasuredTotalEnvelope));
+            Write(outDir, "family_world_composition.csv", errors.BuildCompositionCsv());
+
+            string stored = Path.Combine(outDir, "family_world_project.fqproj");
+            manifest.FamilyWorldResult = errors;
+            ProjectStore.WriteFqproj(stored, sample, quant, manifest);
+            manifest.FamilyWorldResult = null;
+            var (_, _, reopened) = ProjectStore.ReadFqproj(stored);
+            check("family world (B6): the table is stored in the project and reads back identical",
+                reopened.FamilyWorldResult != null && System.Text.Json.JsonSerializer.Serialize(reopened.FamilyWorldResult)
+                    == System.Text.Json.JsonSerializer.Serialize(errors) && reopened.FamilyWorldResult.BuildCsv() == errors.BuildCsv(), stored);
+            File.Delete(stored);
+            Line("b6_known_pairs", N0(errors.KnownPairs));
+            Line("b6_known_landed", N0(errors.KnownLanded));
+            Line("b6_known_right", N0(errors.KnownRight));
+            Line("b6_families", N0(errors.Families.Count));
+            Line("b6_families_measured", N0(errors.Families.Count(f => f.RightRate.HasValue)));
             Write(outDir, "family_world_summary.tsv", summary.ToString());
             Log("written to " + outDir);
         }
@@ -661,6 +732,19 @@ namespace FamilyQuant.Tests
         };
 
         private static string Csv(params string[] fields) => string.Join(",", fields.Select(TestCsvFields.Field)) + "\n";
+
+        /// <summary>The fields of one CSV line, commas inside quotes not counted.</summary>
+        private static int FieldCount(string line)
+        {
+            int fields = 1;
+            bool quoted = false;
+            foreach (char c in line)
+            {
+                if (c == '"') quoted = !quoted;
+                else if (c == ',' && !quoted) fields++;
+            }
+            return fields;
+        }
 
         private static void Write(string outDir, string name, string text) =>
             File.WriteAllText(Path.Combine(outDir, name), text, new UTF8Encoding(false));
@@ -956,6 +1040,122 @@ namespace FamilyQuant.Tests
             check("family world pass fixture: with B1's settings the short tag is searched and beta and gamma are credited",
                 b1.Peptides(FamilyWorldOutcome.TooShort) == 0 && b1.Peptides(FamilyWorldOutcome.OutOfScope) == 0
                 && b1.Families.Select(f => f.Family).OrderBy(f => f, StringComparer.Ordinal).SequenceEqual(new[] { "alpha family", "beta family", "gamma family" }), null);
+
+            // ---- B6: known answers from the spectrum table, the error beside every family, stored in the project
+            var known = new FamilyClusterFile();
+            known.MyExtendedFastaItems.Add(new FastaItemExtended { SequenceIdentifier = "sp|S00002|ALPHA_SAMPLE", Description = "Alpha OS=One OX=111", Sequence = alpha, Evidence = Family("alpha family") });
+            known.MyExtendedFastaItems.Add(new FastaItemExtended { SequenceIdentifier = "sp|S00003|BETA_SAMPLE", Description = "Beta OS=One OX=111", Sequence = beta, Evidence = Family("beta family") });
+            known.MyExtendedFastaItems.Add(new FastaItemExtended { SequenceIdentifier = SequenceLabels.ContaminantPrefix + "K00001", Sequence = "MKWWKWWKPPRPPRGGHGGHK" });
+            SpectrumComparisonRow Spectrum(string identified, string? peaks, string? deepNovo, bool accepted = true) => new SpectrumComparisonRow
+            {
+                PatternLabCleanSequence = identified,
+                PeaksDeNovoCleanSequence = peaks ?? string.Empty, PeaksDeNovoAccepted = peaks == null ? null : accepted,
+                DeepNovoCleanSequence = deepNovo ?? string.Empty, DeepNovoAccepted = deepNovo == null ? null : accepted,
+            };
+            var spectra = new List<SpectrumComparisonRow>
+            {
+                Spectrum(alpha.Substring(30, 12), alpha.Substring(30, 12), null),             // alpha, right through the other species
+                Spectrum(alpha.Substring(30, 12), alpha.Substring(30, 12), alpha.Substring(30, 12)), // the same pair again, two more calls
+                Spectrum(alpha.Substring(40, 12), null, alpha.Substring(40, 8)),              // too short under D11
+                Spectrum(beta.Substring(20, 12), beta.Substring(20, 12), null),               // beta is out of scope
+                Spectrum(beta.Substring(20, 12), alpha.Substring(50, 12), null),              // a wrong call: credited alpha, truly beta
+                Spectrum(alpha.Substring(70, 12), alpha.Substring(70, 12), null, accepted: false), // not accepted: no answer
+                Spectrum("MKWWKWWKPPR", "MKWWKWWKPPR", null),                                // a contaminant holds it
+            };
+            List<FamilyWorldKnownAnswer> answers = FamilyWorldErrors.KnownAnswers(spectra, known, FamilyWorldErrors.Labels(all, known));
+            check("family world errors fixture: accepted calls on identified scans become known answers, one per (tag, identified) pair",
+                answers.Count == 5 && answers.Single(a => a.Tag == DeNovoReconciler.NormalizeSequence(alpha.Substring(30, 12))).Calls == 3
+                && answers.Single(a => a.Identified == "MKWWKWWKPPR").Exclusion == "a contaminant holds the identified peptide"
+                && FamilyWorld.Join(answers.Single(a => a.Tag == DeNovoReconciler.NormalizeSequence(alpha.Substring(50, 12))).KnownFamilies) == "beta family",
+                answers.Count.ToString(CultureInfo.InvariantCulture));
+            FamilyWorldErrors.Credit(answers, withoutOne, withoutOne.ScopeFamilies, new FamilyWorldOptions());
+            FamilyWorldKnownAnswer Answer(string tag) => answers.Single(a => a.Tag == DeNovoReconciler.NormalizeSequence(tag));
+            check("family world errors fixture: each known answer is credited under D11 in the world without its species",
+                Answer(alpha.Substring(30, 12)).Right && Answer(alpha.Substring(40, 8)).Credit!.Outcome == FamilyWorldOutcome.TooShort
+                && Answer(beta.Substring(20, 12)).Credit!.Outcome == FamilyWorldOutcome.OutOfScope
+                && Answer(alpha.Substring(50, 12)).Landed && !Answer(alpha.Substring(50, 12)).Right, null);
+            FamilyWorldSummary floor10 = FamilyWorldErrors.Summarize(pass, answers, "fixture", new[] { "111" });
+            FamilyWorldSummary floor1 = FamilyWorldErrors.Summarize(pass, answers, "fixture", new[] { "111" }, minimumKnownCredits: 1);
+            FamilyWorldFamilySummary alpha10 = floor10.Families.Single(), alpha1 = floor1.Families.Single();
+            check("family world errors fixture: alpha's two known credits, one true, show as too little evidence under the floor of 10",
+                alpha10.Family == "alpha family" && alpha10.KnownCredited == 2 && alpha10.KnownCreditedTrue == 1 && alpha10.RightRate == null
+                && alpha10.Evidence == "too little evidence: 2 known credits", alpha10.Evidence);
+            check("family world errors fixture: with a floor of 1 the right rate is a half, measured; the decoy rate is beside it",
+                alpha1.RightRate == 0.5 && alpha1.Evidence == "measured" && alpha1.DecoyRate == alpha1.DecoyEnvelope / alpha1.CreditedEnvelope
+                && alpha1.KnownPairs == 2 && alpha1.KnownLanded == 1 && alpha1.KnownRight == 1, null);
+            string errorsCsv = floor10.BuildCsv();
+            check("family world errors fixture: the export has the family row, seven closing rows that close, and the rules",
+                errorsCsv.TrimEnd('\n').Split('\n').Length == 9 && errorsCsv.Contains("\"too little evidence: 2 known credits\"", StringComparison.Ordinal)
+                && Math.Abs(floor10.Families.Sum(f => f.UniqueEnvelope) + floor10.Outcomes.Where(o => o.Outcome != "Credited").Sum(o => o.Envelope)
+                    - floor10.ResidualEnvelope) < 1e-9 && floor10.Rules == FamilyWorldPass.RuleText(pass), null);
+
+            string folder = Path.Combine(Path.GetTempPath(), "FamilyQuant.Tests.FamilyWorld");
+            Directory.CreateDirectory(folder);
+            string withTable = Path.Combine(folder, "with-table.fqproj"), without = Path.Combine(folder, "without-table.fqproj");
+            ProjectStore.WriteFqproj(withTable, sample, rows, new QuantManifest { FamilyWorldResult = floor10 });
+            ProjectStore.WriteFqproj(without, sample, rows, new QuantManifest());
+            QuantManifest reread = ProjectStore.ReadFqproj(withTable).manifest;
+            string ManifestText(string path)
+            {
+                using System.IO.Compression.ZipArchive zip = System.IO.Compression.ZipFile.OpenRead(path);
+                using var reader = new StreamReader(zip.GetEntry("manifest.json")!.Open());
+                return reader.ReadToEnd();
+            }
+            check("family world errors fixture: the table is stored in the project and reads back the same; without it, no trace",
+                reread.FamilyWorldResult != null && reread.FamilyWorldResult.BuildCsv() == errorsCsv
+                && System.Text.Json.JsonSerializer.Serialize(reread.FamilyWorldResult) == System.Text.Json.JsonSerializer.Serialize(floor10)
+                && !ManifestText(without).Contains("FamilyWorldResult", StringComparison.Ordinal), null);
+            File.Delete(withTable);
+            File.Delete(without);
+
+            // ---- the result table (B7's, built in Core): first-pass parts mapped from curated groups to UniProt families
+            FamilyPeptideAttribution samplePass = FamilyEnvelopeQuant.AttributePeptides(prepared, FamilyEnvelopeQuant.BuildAttributionFromCuration(rows, sample));
+            FamilyWorldErrors.Compose(floor10, samplePass, sample, FamilyWorldErrors.Labels(all, sample));
+            FamilyEnvelopeQuantResult sampleTotals = FamilyEnvelopeQuant.BuildFromAttributedPeptides(samplePass);
+            FamilyWorldCompositionRow sampleRow = floor10.Composition.Single(r => r.Kind == FamilyWorldCompositionRow.CuratedKind);
+            check("result table fixture: a curated group with no UniProt family keeps its own row with its identified and database parts",
+                sampleRow.Family == "Sample OS=One OX=111" && sampleRow.CuratedUserIds.SequenceEqual(new[] { 7 }) && sampleRow.IdentifiedPeptides == 1
+                && sampleRow.DatabaseDeNovoPeptides == 1 && sampleRow.WorldDeNovoEnvelope == 0, sampleRow.Family);
+            check("result table fixture: alpha's family-world part and its error sit in the same table",
+                floor10.Composition.Single(r => r.Family == "alpha family").WorldDeNovoEnvelope == alpha10.UniqueEnvelope
+                && floor10.Composition.Single(r => r.Family == "alpha family").WorldEvidence == alpha10.Evidence, null);
+            double sampleClosure = floor10.Composition.Sum(r => r.TotalEnvelope) + floor10.SharedIdentifiedEnvelope + floor10.SharedDatabaseDeNovoEnvelope
+                + floor10.SharedEnvelope + floor10.UnattributedIdentifiedEnvelope + floor10.UnexplainedEnvelope;
+            check("result table fixture: the table closes on FamilyEnvelopeQuant's measured total",
+                floor10.MeasuredTotalEnvelope.Equals(sampleTotals.MeasuredTotalEnvelopeReferenceCalibrated)
+                && Math.Abs(sampleClosure - floor10.MeasuredTotalEnvelope) < 1e-9, null);
+
+            var groups = new FamilyClusterFile();
+            groups.MyExtendedFastaItems.Add(new FastaItemExtended { SequenceIdentifier = "sp|G00001|G_ONE", Sequence = "MPEPTLDEKWW", UserID = 1, Evidence = Family("alpha family") });
+            groups.MyExtendedFastaItems.Add(new FastaItemExtended { SequenceIdentifier = "sp|G00002|G_TWO", Sequence = "MPEPTLDEKYY", UserID = 2, Evidence = Family("alpha family") });
+            groups.MyExtendedFastaItems.Add(new FastaItemExtended { SequenceIdentifier = "sp|G00003|G_THREE", Sequence = "MVVVVVVVKHH", UserID = 3, Evidence = Family("beta family") });
+            var mapping = new PeptideFamilyAttribution();
+            mapping.DeNovoBySequence["PEPTLDEK"] = new[] { 1, 2 };
+            mapping.DeNovoBySequence["VVVVVVVK"] = new[] { 1, 3 };
+            mapping.IdentifiedBySequence["WWWWWWWK"] = new[] { 2 };
+            scan = 100;
+            var groupRows = new List<QuantRow>
+            {
+                Row(NativeQuantFractions.SideIdentified, "AAAAAAAK", 2, 6),
+                Row(NativeQuantFractions.SideIdentified, "WWWWWWWK", 3, 9),
+                Row(NativeQuantFractions.SideDeNovo, "PEPTLDEK", 4, 10),
+                Row(NativeQuantFractions.SideDeNovo, "VVVVVVVK", 5, 12),
+            };
+            FamilyPeptideAttribution groupPass = FamilyEnvelopeQuant.AttributePeptides(FamilyEnvelopeQuant.PreparePeptides(groupRows), mapping);
+            var groupTable = new FamilyWorldSummary();
+            FamilyWorldErrors.Compose(groupTable, groupPass, groups, FamilyWorldErrors.Labels(Array.Empty<FamilyWorldProtein>(), groups));
+            double DeNovoOf(string sequence) => groupPass.Peptides.Single(p => p.Peptide.Sequence == sequence).Peptide.ReferenceCalibratedEnvelope;
+            FamilyWorldCompositionRow alphaGroups = groupTable.Composition.Single(r => r.Family == "alpha family");
+            check("result table fixture: a peptide shared by two curated groups of one UniProt family is that family's own",
+                alphaGroups.CuratedUserIds.SequenceEqual(new[] { 1, 2 }) && alphaGroups.DatabaseDeNovoEnvelope == DeNovoOf("PEPTLDEK")
+                && alphaGroups.DatabaseDeNovoPeptides == 1 && alphaGroups.IdentifiedEnvelope == 9, null);
+            check("result table fixture: a peptide reaching two UniProt families goes to the shared row, and an identified one in no group to its own",
+                groupTable.SharedDatabaseDeNovoEnvelope == DeNovoOf("VVVVVVVK") && groupTable.UnattributedIdentifiedEnvelope == 6
+                && groupTable.Composition.All(r => r.Family != "beta family" || r.TotalEnvelope == 0), null);
+            string compositionCsv = groupTable.BuildCompositionCsv();
+            check("result table fixture: the export has the family rows and five global rows, all with the same columns",
+                compositionCsv.TrimEnd('\n').Split('\n').Length == 1 + groupTable.Composition.Count + 5
+                && compositionCsv.TrimEnd('\n').Split('\n').Select(FieldCount).Distinct().SequenceEqual(new[] { 15 }), null);
 
             check("family world fixture: the verdict at the roadmap's bars",
                 Verdict(0.95, 0.20, 0.05) == FamilyWorldVerdict.Pass

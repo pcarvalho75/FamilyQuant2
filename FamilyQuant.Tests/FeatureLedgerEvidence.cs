@@ -89,6 +89,32 @@ internal static partial class FeatureLedgerEvidence
         }
         bool Matches(string path, string expected) => Regex.IsMatch(expected ?? "", "^[0-9A-Fa-f]{64}$")
             && File.Exists(path) && string.Equals(CachedHash(path), expected, StringComparison.OrdinalIgnoreCase);
+        var sourceEolHashes = new Dictionary<string, HashSet<string>>(StringComparer.OrdinalIgnoreCase);
+        bool MatchesCurrentSource(string path, string expected)
+        {
+            if (Matches(path, expected)) return true;
+            // Only current C#/XAML implementations tolerate checkout EOL changes.
+            // Frozen sources, logs, renders and all retained artifacts still use raw hashes.
+            if (!File.Exists(path) || Path.GetExtension(path) is not (".cs" or ".xaml")) return false;
+            if (!sourceEolHashes.TryGetValue(path, out var variants))
+            {
+                byte[] bytes = File.ReadAllBytes(path);
+                variants = new(StringComparer.OrdinalIgnoreCase);
+                foreach (bool crlf in new[] { false, true })
+                {
+                    using var converted = new MemoryStream();
+                    for (int i = 0; i < bytes.Length; i++)
+                    {
+                        if (bytes[i] == 13 && i + 1 < bytes.Length && bytes[i + 1] == 10) continue;
+                        if (bytes[i] == 10 && crlf) converted.WriteByte(13);
+                        converted.WriteByte(bytes[i]);
+                    }
+                    variants.Add(Convert.ToHexString(SHA256.HashData(converted.ToArray())));
+                }
+                sourceEolHashes[path] = variants;
+            }
+            return variants.Contains(expected);
+        }
         string ResolveArtifact(string path)
         {
             string full = Path.GetFullPath(Path.IsPathFullyQualified(path) ? path : Path.Combine(root, path));
@@ -145,7 +171,7 @@ internal static partial class FeatureLedgerEvidence
                             throw new InvalidDataException("Implementation leaves this worktree.");
                         if (full.Split(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar).Any(p => p.Equals("Orion", StringComparison.OrdinalIgnoreCase)))
                             throw new InvalidDataException("Implementation is outside this mission.");
-                        if (string.IsNullOrWhiteSpace(source.Symbol) || !Matches(full, source.Sha256)) problems.Add("Implementation hash/symbol differs: " + source.Path);
+                        if (string.IsNullOrWhiteSpace(source.Symbol) || !MatchesCurrentSource(full, source.Sha256)) problems.Add("Implementation hash/symbol differs: " + source.Path);
                     }
                     catch (Exception ex) when (ex is IOException or ArgumentException or InvalidDataException or UnauthorizedAccessException)
                     { problems.Add(ex.Message); }

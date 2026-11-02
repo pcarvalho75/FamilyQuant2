@@ -1,0 +1,1052 @@
+{
+  "schemaVersion": 1,
+  "step": "AS-remaining",
+  "frozenCommit": "e9b73064d8ff19b2fde3e3231240b636a64c0a91",
+  "runs": [
+    {
+      "id": "AS-member-comparison",
+      "command": "D:\\FamilyQuant-wt\\assay\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --ledger-assay-cohort D:/FamilyQuant-data/out-shell/N3/source D:/FamilyQuant-data/out-assay/m48-plans/remaining.json D:/FamilyQuant-data/out-assay/m48-remaining-2 AS-remaining \u00222026-11-02 04:01:11 -0800\u0022",
+      "executedAt": "2026-11-02 04:01:11 -0800",
+      "commit": "f1a5529770833c07cb597c80839783cedee062cd",
+      "artifacts": [
+        {
+          "path": "D:\\FamilyQuant-data\\out-assay\\m48-remaining-2\\comparisons.log",
+          "sha256": "52493BA6CC8CBAB5C29ECC6203B5F4957D0D4C8551F8DDAC94A8AB8533AC5958"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-assay\\m48-remaining-2\\comparisons.json",
+          "sha256": "663195D00EDEF66EE6C4A9FA2381239997B2D2F5EBB2E9CBD1C45479EE5412C4"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-assay\\m48-remaining-2\\unproven.tsv",
+          "sha256": "DDFC99DAC74A868B670093654647BFE0E3DA8F72062EDBC6C6C5D279E7CE4970"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-assay\\m48-remaining-2\\counts-by-source.tsv",
+          "sha256": "21C83F2F7B8DEBC8AF1F9326ECA9DFCF37C98A3537C640407630816002A61218"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-assay\\m48-plans\\remaining.json",
+          "sha256": "37BA4469F033CCB87D1B8E92424FF57C0B401716DB85F260413E1F205029B550"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-assay\\m48-remaining-2\\executed\\Program.LedgerAssayCohort.cs",
+          "sha256": "1454F77DB5AAF78EC0D2B36A5999E294B0FA69E7838FE1FF7329A50BAD5DFC58"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-assay\\m48-remaining-2\\executed\\Program.Commands.AssayLedger.cs",
+          "sha256": "4F72BD75DB34033DD2A24ACA553D82230DAF65940A12B17B873FD6F5BAE617AA"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-assay\\m48-remaining-2\\executed\\LedgerMemberFactComparison.cs",
+          "sha256": "83C53F2CC3E962DB92855AF87E4D5E1508ED907B62BDAD443D3B0861BD95071B"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-assay\\m48-remaining-2\\executed\\LedgerDeclarationComparison.cs",
+          "sha256": "78EC993565740269D572410A84584AF1D96488C1AE81F2455B1D9AA2D94BB4C3"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-assay\\m48-remaining-2\\executed\\FamilyQuant.Tests.dll",
+          "sha256": "FC099BF32DB81D7CA00114726AAA39CC5F070D0BAAA5347DEF3FE9C46CF1DA31"
+        }
+      ],
+      "workingDirectory": "D:\\FamilyQuant-wt\\assay"
+    }
+  ],
+  "rows": [
+    {
+      "observationId": "FQ15-00C8D5F2D73A",
+      "implementation": [
+        {
+          "path": "FamilyQuant.Core/DeNovo/PsmDeNovoCounterpartStudy.cs",
+          "symbol": "FamilyQuant.DeNovo.PsmDeNovoCounterpartStudy::private static string Csv ( string value )",
+          "sha256": "12BCAE2FC33D66EC02E47E6FA96A6BBB2F8E597B1B7C6E9A6B22AE561A81AB2C"
+        }
+      ],
+      "proofs": [],
+      "note": "Exact literal syntax, multiplicity and complete member tokens agree. Declaration only; no runtime or behavior claim.",
+      "kindReceiptId": "member-export-storage-fact",
+      "compared": "\u0022\\\u0022\u0022 -\u003E FamilyQuant.Core/DeNovo/PsmDeNovoCounterpartStudy.cs: FamilyQuant.DeNovo.PsmDeNovoCounterpartStudy::private static string Csv ( string value ) = \u0022\\\u0022\u0022"
+    },
+    {
+      "observationId": "FQ15-043F6533495C",
+      "implementation": [
+        {
+          "path": "FamilyQuant/DeNovo/ThreeWayChart.cs",
+          "symbol": "FamilyQuant.DeNovo.ThreeWayChart::public ThreeWayChart ( IEnumerable \u003C ThreeWayPartitionRow \u003E ? rows , string ? title = null )",
+          "sha256": "19F9F13A529D85160EF4E5ABE462ED7762374B37CB94205487BE98D4328FF601"
+        }
+      ],
+      "proofs": [],
+      "note": "The enclosing type declaration changed and needs an explicit reviewed relocation.",
+      "kindReceiptId": null,
+      "compared": "\u0022Ion current per run: identified, added by de novo, still without an owner\u0022 -\u003E FamilyQuant/DeNovo/ThreeWayChart.cs: FamilyQuant.DeNovo.ThreeWayChart::public ThreeWayChart ( IEnumerable \u003C ThreeWayPartitionRow \u003E ? rows , string ? title = null ) = \u0022Ion current per run: identified, added by de novo, still without an owner\u0022"
+    },
+    {
+      "observationId": "FQ15-058D38F232C5",
+      "implementation": [],
+      "proofs": [],
+      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
+      "kindReceiptId": null,
+      "compared": "\u0022entries\u0022 -\u003E :  = "
+    },
+    {
+      "observationId": "FQ15-05B931C7E81A",
+      "implementation": [],
+      "proofs": [],
+      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
+      "kindReceiptId": null,
+      "compared": "\u0022.csv\u0022 -\u003E :  = "
+    },
+    {
+      "observationId": "FQ15-0858D5BCC3DD",
+      "implementation": [],
+      "proofs": [],
+      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
+      "kindReceiptId": null,
+      "compared": "\u0022.aln\u0022 -\u003E :  = "
+    },
+    {
+      "observationId": "FQ15-088FABB46324",
+      "implementation": [],
+      "proofs": [],
+      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
+      "kindReceiptId": null,
+      "compared": "\u0022runName\u0022 -\u003E :  = "
+    },
+    {
+      "observationId": "FQ15-0897A9D41548",
+      "implementation": [],
+      "proofs": [],
+      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
+      "kindReceiptId": null,
+      "compared": "\u0022isotopeCount\u0022 -\u003E :  = "
+    },
+    {
+      "observationId": "FQ15-100A948ADB02",
+      "implementation": [
+        {
+          "path": "FamilyQuant.Core/DeNovo/NativeQuantFractions.cs",
+          "symbol": "FamilyQuant.DeNovo.NativeQuantFractions::public static List \u003C NativePeptideQuant \u003E DedupToPeptides ( IEnumerable \u003C QuantRow \u003E rows )",
+          "sha256": "1B584F17E5D5796993F127A35D75354F178185E9C84536C96198D50908FCCB4E"
+        }
+      ],
+      "proofs": [],
+      "note": "Exact literal syntax, multiplicity and complete member tokens agree. Declaration only; no runtime or behavior claim.",
+      "kindReceiptId": "member-export-storage-fact",
+      "compared": "\u0022\u0001\u0022 -\u003E FamilyQuant.Core/DeNovo/NativeQuantFractions.cs: FamilyQuant.DeNovo.NativeQuantFractions::public static List \u003C NativePeptideQuant \u003E DedupToPeptides ( IEnumerable \u003C QuantRow \u003E rows ) = \u0022\u0001\u0022"
+    },
+    {
+      "observationId": "FQ15-12F781C542A4",
+      "implementation": [],
+      "proofs": [],
+      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
+      "kindReceiptId": null,
+      "compared": "\u0022maxCharge\u0022 -\u003E :  = "
+    },
+    {
+      "observationId": "FQ15-156008EA69AE",
+      "implementation": [
+        {
+          "path": "FamilyQuant/DeNovo/ThreeWayChart.cs",
+          "symbol": "FamilyQuant.DeNovo.ThreeWayChart::private void DrawLegend ( DrawingContext dc , Point at )",
+          "sha256": "19F9F13A529D85160EF4E5ABE462ED7762374B37CB94205487BE98D4328FF601"
+        }
+      ],
+      "proofs": [],
+      "note": "The enclosing type declaration changed and needs an explicit reviewed relocation.",
+      "kindReceiptId": null,
+      "compared": "\u0022PatternLab, identified (M\u002B0)\u0022 -\u003E FamilyQuant/DeNovo/ThreeWayChart.cs: FamilyQuant.DeNovo.ThreeWayChart::private void DrawLegend ( DrawingContext dc , Point at ) = \u0022PatternLab, identified (M\u002B0)\u0022"
+    },
+    {
+      "observationId": "FQ15-1751EF9EAE8B",
+      "implementation": [],
+      "proofs": [],
+      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
+      "kindReceiptId": null,
+      "compared": "\u0022version\u0022 -\u003E :  = "
+    },
+    {
+      "observationId": "FQ15-1A310DFE13FA",
+      "implementation": [],
+      "proofs": [],
+      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
+      "kindReceiptId": null,
+      "compared": "\u0022Save the three-way partition\u0022 -\u003E :  = "
+    },
+    {
+      "observationId": "FQ15-1B3D1FDBC771",
+      "implementation": [],
+      "proofs": [],
+      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
+      "kindReceiptId": null,
+      "compared": "\u0022Comma-separated values (*.csv)|*.csv|All files (*.*)|*.*\u0022 -\u003E :  = "
+    },
+    {
+      "observationId": "FQ15-21F35ACE3684",
+      "implementation": [],
+      "proofs": [],
+      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
+      "kindReceiptId": null,
+      "compared": "\u0022detectedCountByCharge\u0022 -\u003E :  = "
+    },
+    {
+      "observationId": "FQ15-2749F7FD71F8",
+      "implementation": [],
+      "proofs": [],
+      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
+      "kindReceiptId": null,
+      "compared": "\u0022minIsotopes\u0022 -\u003E :  = "
+    },
+    {
+      "observationId": "FQ15-27FA37092FAE",
+      "implementation": [],
+      "proofs": [],
+      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
+      "kindReceiptId": null,
+      "compared": "\u0022.tsv\u0022 -\u003E :  = "
+    },
+    {
+      "observationId": "FQ15-2BD2C6E2E417",
+      "implementation": [
+        {
+          "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
+          "symbol": "FamilyQuant.DeNovo.SpectrumComparisonTable::private static List \u003C Claim \u003E Ranked ( IEnumerable \u003C Claim \u003E claims )",
+          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
+        }
+      ],
+      "proofs": [],
+      "note": "Exact literal syntax, multiplicity and complete member tokens agree. Declaration only; no runtime or behavior claim.",
+      "kindReceiptId": "member-export-storage-fact",
+      "compared": "\u0022\\u001f\u0022 -\u003E FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs: FamilyQuant.DeNovo.SpectrumComparisonTable::private static List \u003C Claim \u003E Ranked ( IEnumerable \u003C Claim \u003E claims ) = \u0022\\u001f\u0022"
+    },
+    {
+      "observationId": "FQ15-312D5600756A",
+      "implementation": [],
+      "proofs": [],
+      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
+      "kindReceiptId": null,
+      "compared": "\u0022detectedPeptideLikeArea\u0022 -\u003E :  = "
+    },
+    {
+      "observationId": "FQ15-31BADB27CA6C",
+      "implementation": [
+        {
+          "path": "FamilyQuant.Core/DeNovo/NativeQuantFractions.cs",
+          "symbol": "FamilyQuant.DeNovo.NativeQuantFractions::public static List \u003C NativePeptideQuant \u003E DedupToPeptides ( IEnumerable \u003C QuantRow \u003E rows )",
+          "sha256": "1B584F17E5D5796993F127A35D75354F178185E9C84536C96198D50908FCCB4E"
+        }
+      ],
+      "proofs": [],
+      "note": "Exact literal syntax, multiplicity and complete member tokens agree. Declaration only; no runtime or behavior claim.",
+      "kindReceiptId": "member-export-storage-fact",
+      "compared": "\u0022\u0001\u0022 -\u003E FamilyQuant.Core/DeNovo/NativeQuantFractions.cs: FamilyQuant.DeNovo.NativeQuantFractions::public static List \u003C NativePeptideQuant \u003E DedupToPeptides ( IEnumerable \u003C QuantRow \u003E rows ) = \u0022\u0001\u0022"
+    },
+    {
+      "observationId": "FQ15-343852E54626",
+      "implementation": [],
+      "proofs": [],
+      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
+      "kindReceiptId": null,
+      "compared": "\u0022.uc\u0022 -\u003E :  = "
+    },
+    {
+      "observationId": "FQ15-34B1621B5569",
+      "implementation": [],
+      "proofs": [],
+      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
+      "kindReceiptId": null,
+      "compared": "\u0022Save the three-way partition\u0022 -\u003E :  = "
+    },
+    {
+      "observationId": "FQ15-399C3233EFA4",
+      "implementation": [
+        {
+          "path": "FamilyQuant.Core/DeNovo/ThreeWayPartition.cs",
+          "symbol": "FamilyQuant.DeNovo.ThreeWayPartition::private static string Field ( string ? value )",
+          "sha256": "7173311D16275646CD22A9FE44B1396CBE5502CD6AF5964833D913B8A33E9E9D"
+        }
+      ],
+      "proofs": [],
+      "note": "The exact literal multiplicity within the containing member changed.",
+      "kindReceiptId": null,
+      "compared": "\u0022\\\u0022\u0022 -\u003E FamilyQuant.Core/DeNovo/ThreeWayPartition.cs: FamilyQuant.DeNovo.ThreeWayPartition::private static string Field ( string ? value ) = "
+    },
+    {
+      "observationId": "FQ15-3A56954B2B0C",
+      "implementation": [
+        {
+          "path": "FamilyQuant.Core/DeNovo/DeNovoXicCache.cs",
+          "symbol": "FamilyQuant.DeNovo.DeNovoXicCache::public void Save ( )",
+          "sha256": "D63E0B9022082142131FA26E1E050BA705133F492761C1D8C97321E4B7CC2B5B"
+        }
+      ],
+      "proofs": [],
+      "note": "The containing member declaration or body changed; retained text alone is insufficient.",
+      "kindReceiptId": null,
+      "compared": "\u0022.tmp\u0022 -\u003E FamilyQuant.Core/DeNovo/DeNovoXicCache.cs: FamilyQuant.DeNovo.DeNovoXicCache::public void Save ( ) = \u0022.tmp\u0022"
+    },
+    {
+      "observationId": "FQ15-3BEEA08C5D73",
+      "implementation": [],
+      "proofs": [],
+      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
+      "kindReceiptId": null,
+      "compared": "\u0022runName\u0022 -\u003E :  = "
+    },
+    {
+      "observationId": "FQ15-3F845CD11BCD",
+      "implementation": [
+        {
+          "path": "FamilyQuant.Core/DeNovo/ThreeWayPartition.cs",
+          "symbol": "FamilyQuant.DeNovo.ThreeWayPartition::private static string Field ( string ? value )",
+          "sha256": "7173311D16275646CD22A9FE44B1396CBE5502CD6AF5964833D913B8A33E9E9D"
+        }
+      ],
+      "proofs": [],
+      "note": "The exact literal multiplicity within the containing member changed.",
+      "kindReceiptId": null,
+      "compared": "\u0022\\\u0022\\\u0022\u0022 -\u003E FamilyQuant.Core/DeNovo/ThreeWayPartition.cs: FamilyQuant.DeNovo.ThreeWayPartition::private static string Field ( string ? value ) = "
+    },
+    {
+      "observationId": "FQ15-452E69C7EBC6",
+      "implementation": [
+        {
+          "path": "FamilyQuant.Core/DeNovo/NativeQuantFractions.cs",
+          "symbol": "FamilyQuant.DeNovo.NativeQuantFractions::public static List \u003C NativePeptideQuant \u003E DedupToPeptides ( IEnumerable \u003C QuantRow \u003E rows )",
+          "sha256": "1B584F17E5D5796993F127A35D75354F178185E9C84536C96198D50908FCCB4E"
+        }
+      ],
+      "proofs": [],
+      "note": "Exact literal syntax, multiplicity and complete member tokens agree. Declaration only; no runtime or behavior claim.",
+      "kindReceiptId": "member-export-storage-fact",
+      "compared": "\u0022\u0001\u0022 -\u003E FamilyQuant.Core/DeNovo/NativeQuantFractions.cs: FamilyQuant.DeNovo.NativeQuantFractions::public static List \u003C NativePeptideQuant \u003E DedupToPeptides ( IEnumerable \u003C QuantRow \u003E rows ) = \u0022\u0001\u0022"
+    },
+    {
+      "observationId": "FQ15-4763CD2BA539",
+      "implementation": [
+        {
+          "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
+          "symbol": "FamilyQuant.DeNovo.SpectrumComparisonTable::private static List \u003C Claim \u003E Ranked ( IEnumerable \u003C Claim \u003E claims )",
+          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
+        }
+      ],
+      "proofs": [],
+      "note": "Exact literal syntax, multiplicity and complete member tokens agree. Declaration only; no runtime or behavior claim.",
+      "kindReceiptId": "member-export-storage-fact",
+      "compared": "\u0022\\u001f\u0022 -\u003E FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs: FamilyQuant.DeNovo.SpectrumComparisonTable::private static List \u003C Claim \u003E Ranked ( IEnumerable \u003C Claim \u003E claims ) = \u0022\\u001f\u0022"
+    },
+    {
+      "observationId": "FQ15-5180D79E1E95",
+      "implementation": [],
+      "proofs": [],
+      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
+      "kindReceiptId": null,
+      "compared": "\u0022ms1Tolerance\u0022 -\u003E :  = "
+    },
+    {
+      "observationId": "FQ15-5C42434F53E7",
+      "implementation": [
+        {
+          "path": "FamilyQuant/DeNovo/ThreeWayChart.cs",
+          "symbol": "FamilyQuant.DeNovo.ThreeWayChart::private void DrawLegend ( DrawingContext dc , Point at )",
+          "sha256": "19F9F13A529D85160EF4E5ABE462ED7762374B37CB94205487BE98D4328FF601"
+        }
+      ],
+      "proofs": [],
+      "note": "The enclosing type declaration changed and needs an explicit reviewed relocation.",
+      "kindReceiptId": null,
+      "compared": "\u0022numerators exceed the TIC\u0022 -\u003E FamilyQuant/DeNovo/ThreeWayChart.cs: FamilyQuant.DeNovo.ThreeWayChart::private void DrawLegend ( DrawingContext dc , Point at ) = \u0022numerators exceed the TIC\u0022"
+    },
+    {
+      "observationId": "FQ15-6109C6E4CC7A",
+      "implementation": [],
+      "proofs": [],
+      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
+      "kindReceiptId": null,
+      "compared": "\u0022isotopeCeiling\u0022 -\u003E :  = "
+    },
+    {
+      "observationId": "FQ15-61B679CA9B47",
+      "implementation": [],
+      "proofs": [],
+      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
+      "kindReceiptId": null,
+      "compared": "\u0022USEARCH produced no cluster (.uc) file for \u0022 -\u003E :  = "
+    },
+    {
+      "observationId": "FQ15-653097E679CA",
+      "implementation": [],
+      "proofs": [],
+      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
+      "kindReceiptId": null,
+      "compared": "\u0022detectedCountMultiplyCharged\u0022 -\u003E :  = "
+    },
+    {
+      "observationId": "FQ15-6FA43148ADFE",
+      "implementation": [
+        {
+          "path": "FamilyQuant.Core/DeNovo/DeNovoReconciliationReport.cs",
+          "symbol": "FamilyQuant.DeNovo.DeNovoReconciliationReport::private static string Field ( string s )",
+          "sha256": "3AF07869DAEB11B28A2CD0FCD655F1523EB00BAD3105B0C1C73D6F57802CE0E1"
+        }
+      ],
+      "proofs": [],
+      "note": "Exact literal syntax, multiplicity and complete member tokens agree. Declaration only; no runtime or behavior claim.",
+      "kindReceiptId": "member-export-storage-fact",
+      "compared": "\u0022\\\u0022\u0022 -\u003E FamilyQuant.Core/DeNovo/DeNovoReconciliationReport.cs: FamilyQuant.DeNovo.DeNovoReconciliationReport::private static string Field ( string s ) = \u0022\\\u0022\u0022"
+    },
+    {
+      "observationId": "FQ15-740A8F8ACBF9",
+      "implementation": [
+        {
+          "path": "FamilyQuant.Core/DeNovo/DeNovoReconciliationReport.cs",
+          "symbol": "FamilyQuant.DeNovo.DeNovoReconciliationReport::private static string Field ( string s )",
+          "sha256": "3AF07869DAEB11B28A2CD0FCD655F1523EB00BAD3105B0C1C73D6F57802CE0E1"
+        }
+      ],
+      "proofs": [],
+      "note": "Exact literal syntax, multiplicity and complete member tokens agree. Declaration only; no runtime or behavior claim.",
+      "kindReceiptId": "member-export-storage-fact",
+      "compared": "\u0022\\\u0022\u0022 -\u003E FamilyQuant.Core/DeNovo/DeNovoReconciliationReport.cs: FamilyQuant.DeNovo.DeNovoReconciliationReport::private static string Field ( string s ) = \u0022\\\u0022\u0022"
+    },
+    {
+      "observationId": "FQ15-7418B217FD10",
+      "implementation": [
+        {
+          "path": "FamilyQuant.Core/DeNovo/ThreeWayPartition.cs",
+          "symbol": "FamilyQuant.DeNovo.ThreeWayPartition::private static string Field ( string ? value )",
+          "sha256": "7173311D16275646CD22A9FE44B1396CBE5502CD6AF5964833D913B8A33E9E9D"
+        }
+      ],
+      "proofs": [],
+      "note": "The exact literal multiplicity within the containing member changed.",
+      "kindReceiptId": null,
+      "compared": "\u0022\\\u0022\u0022 -\u003E FamilyQuant.Core/DeNovo/ThreeWayPartition.cs: FamilyQuant.DeNovo.ThreeWayPartition::private static string Field ( string ? value ) = "
+    },
+    {
+      "observationId": "FQ15-7690CC0C912C",
+      "implementation": [],
+      "proofs": [],
+      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
+      "kindReceiptId": null,
+      "compared": "\u0022ms1ScanCount\u0022 -\u003E :  = "
+    },
+    {
+      "observationId": "FQ15-76E0628398E8",
+      "implementation": [
+        {
+          "path": "FamilyQuant/DeNovo/ThreeWayWindow.cs",
+          "symbol": "FamilyQuant.DeNovo.ThreeWayWindow::public static Window Create ( string title , IReadOnlyList \u003C ThreeWayPartitionRow \u003E rows , string ? provenanceNote = null )",
+          "sha256": "1D679388E2600C7A40CE6B1934C6AEC2A6E2DBFC3F1B846EB358600E03A3E502"
+        }
+      ],
+      "proofs": [],
+      "note": "The containing member declaration or body changed; retained text alone is insufficient.",
+      "kindReceiptId": null,
+      "compared": "\u0022How to read the chart above, and where each number came from.\u0022 -\u003E FamilyQuant/DeNovo/ThreeWayWindow.cs: FamilyQuant.DeNovo.ThreeWayWindow::public static Window Create ( string title , IReadOnlyList \u003C ThreeWayPartitionRow \u003E rows , string ? provenanceNote = null ) = \u0022How to read the chart above, and where each number came from.\u0022"
+    },
+    {
+      "observationId": "FQ15-7DE5A8BF2E6E",
+      "implementation": [],
+      "proofs": [],
+      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
+      "kindReceiptId": null,
+      "compared": "\u0022three_way_partition.csv\u0022 -\u003E :  = "
+    },
+    {
+      "observationId": "FQ15-7DE6215F27DF",
+      "implementation": [],
+      "proofs": [],
+      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
+      "kindReceiptId": null,
+      "compared": "\u0022detectedEnvelopeCount\u0022 -\u003E :  = "
+    },
+    {
+      "observationId": "FQ15-81151181893E",
+      "implementation": [
+        {
+          "path": "FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs",
+          "symbol": "FamilyQuant.DeNovo.Ms1EnvelopeDetector::private static void SaveCache ( string path , Ms1EnvelopeDetectionResult result , string sourceFingerprint )",
+          "sha256": "46CA6872D443D30E3A496A87C2A92D7E4EDD9950AEDCB3E52848DA731DC53FDB"
+        }
+      ],
+      "proofs": [],
+      "note": "The containing member declaration or body changed; retained text alone is insufficient.",
+      "kindReceiptId": null,
+      "compared": "\u0022.tmp\u0022 -\u003E FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs: FamilyQuant.DeNovo.Ms1EnvelopeDetector::private static void SaveCache ( string path , Ms1EnvelopeDetectionResult result , string sourceFingerprint ) = \u0022.tmp\u0022"
+    },
+    {
+      "observationId": "FQ15-830694537CD8",
+      "implementation": [],
+      "proofs": [],
+      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
+      "kindReceiptId": null,
+      "compared": "\u0022detectedAreaByCharge\u0022 -\u003E :  = "
+    },
+    {
+      "observationId": "FQ15-849492CAA7C9",
+      "implementation": [
+        {
+          "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
+          "symbol": "FamilyQuant.DeNovo.SpectrumComparisonTable::private static List \u003C Claim \u003E Ranked ( IEnumerable \u003C Claim \u003E claims )",
+          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
+        }
+      ],
+      "proofs": [],
+      "note": "Exact literal syntax, multiplicity and complete member tokens agree. Declaration only; no runtime or behavior claim.",
+      "kindReceiptId": "member-export-storage-fact",
+      "compared": "\u0022\\u001f\u0022 -\u003E FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs: FamilyQuant.DeNovo.SpectrumComparisonTable::private static List \u003C Claim \u003E Ranked ( IEnumerable \u003C Claim \u003E claims ) = \u0022\\u001f\u0022"
+    },
+    {
+      "observationId": "FQ15-8583140954A1",
+      "implementation": [
+        {
+          "path": "FamilyQuant/DeNovo/ThreeWayChart.cs",
+          "symbol": "FamilyQuant.DeNovo.ThreeWayChart::private void DrawBar ( DrawingContext dc , ThreeWayPartitionRow row , Rect bar )",
+          "sha256": "19F9F13A529D85160EF4E5ABE462ED7762374B37CB94205487BE98D4328FF601"
+        }
+      ],
+      "proofs": [],
+      "note": "The enclosing type declaration changed and needs an explicit reviewed relocation.",
+      "kindReceiptId": null,
+      "compared": "\u0022 over\u0022 -\u003E FamilyQuant/DeNovo/ThreeWayChart.cs: FamilyQuant.DeNovo.ThreeWayChart::private void DrawBar ( DrawingContext dc , ThreeWayPartitionRow row , Rect bar ) = \u0022 over\u0022"
+    },
+    {
+      "observationId": "FQ15-8A8D3D7643E4",
+      "implementation": [
+        {
+          "path": "FamilyQuant/DeNovo/ThreeWayChart.cs",
+          "symbol": "FamilyQuant.DeNovo.ThreeWayChart::private static string Percent ( double value )",
+          "sha256": "19F9F13A529D85160EF4E5ABE462ED7762374B37CB94205487BE98D4328FF601"
+        }
+      ],
+      "proofs": [],
+      "note": "The enclosing type declaration changed and needs an explicit reviewed relocation.",
+      "kindReceiptId": null,
+      "compared": "\u0022%\u0022 -\u003E FamilyQuant/DeNovo/ThreeWayChart.cs: FamilyQuant.DeNovo.ThreeWayChart::private static string Percent ( double value ) = \u0022%\u0022"
+    },
+    {
+      "observationId": "FQ15-8C62E0B97BDB",
+      "implementation": [
+        {
+          "path": "FamilyQuant.Core/DeNovo/SpreadsheetSafeCsv.cs",
+          "symbol": "FamilyQuant.DeNovo.SpreadsheetSafeCsv::public static string Encode ( string ? value , bool alwaysQuote = false )",
+          "sha256": "B654DE265D6C7D459797EC1296DBB0938B16BD6BB8745C30B4BC740DC148E25C"
+        }
+      ],
+      "proofs": [],
+      "note": "Exact literal syntax, multiplicity and complete member tokens agree. Declaration only; no runtime or behavior claim. Parsed utility type visibility widened from internal to public; full member tokens still agree.",
+      "kindReceiptId": "member-export-storage-fact",
+      "compared": "\u0022\u0027\u0022 -\u003E FamilyQuant.Core/DeNovo/SpreadsheetSafeCsv.cs: FamilyQuant.DeNovo.SpreadsheetSafeCsv::public static string Encode ( string ? value , bool alwaysQuote = false ) = \u0022\u0027\u0022"
+    },
+    {
+      "observationId": "FQ15-8E42F3DFA90D",
+      "implementation": [],
+      "proofs": [],
+      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
+      "kindReceiptId": null,
+      "compared": "\u0022detectedCountSinglyCharged\u0022 -\u003E :  = "
+    },
+    {
+      "observationId": "FQ15-914981428DB1",
+      "implementation": [],
+      "proofs": [],
+      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
+      "kindReceiptId": null,
+      "compared": "\u0022sourceSha256\u0022 -\u003E :  = "
+    },
+    {
+      "observationId": "FQ15-94CA095927D9",
+      "implementation": [
+        {
+          "path": "FamilyQuant/DeNovo/ThreeWayWindow.cs",
+          "symbol": "FamilyQuant.DeNovo.ThreeWayWindow::public static Window Create ( string title , IReadOnlyList \u003C ThreeWayPartitionRow \u003E rows , string ? provenanceNote = null )",
+          "sha256": "1D679388E2600C7A40CE6B1934C6AEC2A6E2DBFC3F1B846EB358600E03A3E502"
+        }
+      ],
+      "proofs": [],
+      "note": "The containing member declaration or body changed; retained text alone is insufficient.",
+      "kindReceiptId": null,
+      "compared": "\u0022Save CSV...\u0022 -\u003E FamilyQuant/DeNovo/ThreeWayWindow.cs: FamilyQuant.DeNovo.ThreeWayWindow::public static Window Create ( string title , IReadOnlyList \u003C ThreeWayPartitionRow \u003E rows , string ? provenanceNote = null ) = \u0022Save CSV...\u0022"
+    },
+    {
+      "observationId": "FQ15-94F91E656BDB",
+      "implementation": [
+        {
+          "path": "FamilyQuant/DeNovo/ThreeWayChart.cs",
+          "symbol": "FamilyQuant.DeNovo.ThreeWayChart::private static string Percent ( double value )",
+          "sha256": "19F9F13A529D85160EF4E5ABE462ED7762374B37CB94205487BE98D4328FF601"
+        }
+      ],
+      "proofs": [],
+      "note": "The enclosing type declaration changed and needs an explicit reviewed relocation.",
+      "kindReceiptId": null,
+      "compared": "\u0022F2\u0022 -\u003E FamilyQuant/DeNovo/ThreeWayChart.cs: FamilyQuant.DeNovo.ThreeWayChart::private static string Percent ( double value ) = \u0022F2\u0022"
+    },
+    {
+      "observationId": "FQ15-95466CD2D13F",
+      "implementation": [
+        {
+          "path": "FamilyQuant/DeNovo/ThreeWayChart.cs",
+          "symbol": "FamilyQuant.DeNovo.ThreeWayChart::private void DrawLegend ( DrawingContext dc , Point at )",
+          "sha256": "19F9F13A529D85160EF4E5ABE462ED7762374B37CB94205487BE98D4328FF601"
+        }
+      ],
+      "proofs": [],
+      "note": "The enclosing type declaration changed and needs an explicit reviewed relocation.",
+      "kindReceiptId": null,
+      "compared": "\u0022without an owner\u0022 -\u003E FamilyQuant/DeNovo/ThreeWayChart.cs: FamilyQuant.DeNovo.ThreeWayChart::private void DrawLegend ( DrawingContext dc , Point at ) = \u0022without an owner\u0022"
+    },
+    {
+      "observationId": "FQ15-95A457BBC51D",
+      "implementation": [
+        {
+          "path": "FamilyQuant/DeNovo/ThreeWayWindow.cs",
+          "symbol": "FamilyQuant.DeNovo.ThreeWayWindow::public static Window Create ( string title , IReadOnlyList \u003C ThreeWayPartitionRow \u003E rows , string ? provenanceNote = null )",
+          "sha256": "1D679388E2600C7A40CE6B1934C6AEC2A6E2DBFC3F1B846EB358600E03A3E502"
+        }
+      ],
+      "proofs": [],
+      "note": "The containing member declaration or body changed; retained text alone is insufficient.",
+      "kindReceiptId": null,
+      "compared": "\u0022from. Numbers use a dot as the decimal separator.\u0022 -\u003E FamilyQuant/DeNovo/ThreeWayWindow.cs: FamilyQuant.DeNovo.ThreeWayWindow::public static Window Create ( string title , IReadOnlyList \u003C ThreeWayPartitionRow \u003E rows , string ? provenanceNote = null ) = \u0022from. Numbers use a dot as the decimal separator.\u0022"
+    },
+    {
+      "observationId": "FQ15-9754613BEA27",
+      "implementation": [
+        {
+          "path": "FamilyQuant.Core/DeNovo/SpreadsheetSafeCsv.cs",
+          "symbol": "FamilyQuant.DeNovo.SpreadsheetSafeCsv::public static string Encode ( string ? value , bool alwaysQuote = false )",
+          "sha256": "B654DE265D6C7D459797EC1296DBB0938B16BD6BB8745C30B4BC740DC148E25C"
+        }
+      ],
+      "proofs": [],
+      "note": "Exact literal syntax, multiplicity and complete member tokens agree. Declaration only; no runtime or behavior claim. Parsed utility type visibility widened from internal to public; full member tokens still agree.",
+      "kindReceiptId": "member-export-storage-fact",
+      "compared": "\u0022\\\u0022\\\u0022\u0022 -\u003E FamilyQuant.Core/DeNovo/SpreadsheetSafeCsv.cs: FamilyQuant.DeNovo.SpreadsheetSafeCsv::public static string Encode ( string ? value , bool alwaysQuote = false ) = \u0022\\\u0022\\\u0022\u0022"
+    },
+    {
+      "observationId": "FQ15-98722D8DF1C8",
+      "implementation": [
+        {
+          "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
+          "symbol": "FamilyQuant.DeNovo.SpectrumComparisonTable::private static string CreditedKey ( NativePeptideQuant quant )",
+          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
+        }
+      ],
+      "proofs": [],
+      "note": "Exact literal syntax, multiplicity and complete member tokens agree. Declaration only; no runtime or behavior claim.",
+      "kindReceiptId": "member-export-storage-fact",
+      "compared": "\u0022\\u001f\u0022 -\u003E FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs: FamilyQuant.DeNovo.SpectrumComparisonTable::private static string CreditedKey ( NativePeptideQuant quant ) = \u0022\\u001f\u0022"
+    },
+    {
+      "observationId": "FQ15-9A6BDABD7A93",
+      "implementation": [],
+      "proofs": [],
+      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
+      "kindReceiptId": null,
+      "compared": "\u0022ppmTolerance\u0022 -\u003E :  = "
+    },
+    {
+      "observationId": "FQ15-9C7E2D47D996",
+      "implementation": [],
+      "proofs": [],
+      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
+      "kindReceiptId": null,
+      "compared": "\u0022Segoe UI\u0022 -\u003E :  = "
+    },
+    {
+      "observationId": "FQ15-A00438CE05A1",
+      "implementation": [],
+      "proofs": [],
+      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
+      "kindReceiptId": null,
+      "compared": "\u0022sourceSha256\u0022 -\u003E :  = "
+    },
+    {
+      "observationId": "FQ15-A150C1E68938",
+      "implementation": [
+        {
+          "path": "FamilyQuant/DeNovo/ThreeWayChart.cs",
+          "symbol": "FamilyQuant.DeNovo.ThreeWayChart::private void DrawLegend ( DrawingContext dc , Point at )",
+          "sha256": "19F9F13A529D85160EF4E5ABE462ED7762374B37CB94205487BE98D4328FF601"
+        }
+      ],
+      "proofs": [],
+      "note": "The enclosing type declaration changed and needs an explicit reviewed relocation.",
+      "kindReceiptId": null,
+      "compared": "\u0022De novo addition (M\u002B0)\u0022 -\u003E FamilyQuant/DeNovo/ThreeWayChart.cs: FamilyQuant.DeNovo.ThreeWayChart::private void DrawLegend ( DrawingContext dc , Point at ) = \u0022De novo addition (M\u002B0)\u0022"
+    },
+    {
+      "observationId": "FQ15-A6DE60F9C8A8",
+      "implementation": [
+        {
+          "path": "FamilyQuant/DeNovo/ThreeWayChart.cs",
+          "symbol": "FamilyQuant.DeNovo.ThreeWayChart::private void DrawBar ( DrawingContext dc , ThreeWayPartitionRow row , Rect bar )",
+          "sha256": "19F9F13A529D85160EF4E5ABE462ED7762374B37CB94205487BE98D4328FF601"
+        }
+      ],
+      "proofs": [],
+      "note": "The enclosing type declaration changed and needs an explicit reviewed relocation.",
+      "kindReceiptId": null,
+      "compared": "\u0022 left\u0022 -\u003E FamilyQuant/DeNovo/ThreeWayChart.cs: FamilyQuant.DeNovo.ThreeWayChart::private void DrawBar ( DrawingContext dc , ThreeWayPartitionRow row , Rect bar ) = \u0022 left\u0022"
+    },
+    {
+      "observationId": "FQ15-ABA539F0E87C",
+      "implementation": [],
+      "proofs": [],
+      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
+      "kindReceiptId": null,
+      "compared": "\u0022.fasta\u0022 -\u003E :  = "
+    },
+    {
+      "observationId": "FQ15-ADD31604C7AE",
+      "implementation": [
+        {
+          "path": "FamilyQuant.Core/DeNovo/DeNovoReconciliationReport.cs",
+          "symbol": "FamilyQuant.DeNovo.DeNovoReconciliationReport::private static string Field ( string s )",
+          "sha256": "3AF07869DAEB11B28A2CD0FCD655F1523EB00BAD3105B0C1C73D6F57802CE0E1"
+        }
+      ],
+      "proofs": [],
+      "note": "Exact literal syntax, multiplicity and complete member tokens agree. Declaration only; no runtime or behavior claim.",
+      "kindReceiptId": "member-export-storage-fact",
+      "compared": "\u0022\\\u0022\u0022 -\u003E FamilyQuant.Core/DeNovo/DeNovoReconciliationReport.cs: FamilyQuant.DeNovo.DeNovoReconciliationReport::private static string Field ( string s ) = \u0022\\\u0022\u0022"
+    },
+    {
+      "observationId": "FQ15-AE5BB1697126",
+      "implementation": [],
+      "proofs": [],
+      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
+      "kindReceiptId": null,
+      "compared": "\u0022version\u0022 -\u003E :  = "
+    },
+    {
+      "observationId": "FQ15-B0F2B4F49116",
+      "implementation": [
+        {
+          "path": "FamilyQuant.Core/DeNovo/PsmDeNovoCounterpartStudy.cs",
+          "symbol": "FamilyQuant.DeNovo.PsmDeNovoCounterpartStudy::private static string Csv ( string value )",
+          "sha256": "12BCAE2FC33D66EC02E47E6FA96A6BBB2F8E597B1B7C6E9A6B22AE561A81AB2C"
+        }
+      ],
+      "proofs": [],
+      "note": "Exact literal syntax, multiplicity and complete member tokens agree. Declaration only; no runtime or behavior claim.",
+      "kindReceiptId": "member-export-storage-fact",
+      "compared": "\u0022\\\u0022\u0022 -\u003E FamilyQuant.Core/DeNovo/PsmDeNovoCounterpartStudy.cs: FamilyQuant.DeNovo.PsmDeNovoCounterpartStudy::private static string Csv ( string value ) = \u0022\\\u0022\u0022"
+    },
+    {
+      "observationId": "FQ15-B3686CCA5BFE",
+      "implementation": [
+        {
+          "path": "FamilyQuant.Core/DeNovo/ThreeWayPartition.cs",
+          "symbol": "FamilyQuant.DeNovo.ThreeWayPartition::private static string Field ( string ? value )",
+          "sha256": "7173311D16275646CD22A9FE44B1396CBE5502CD6AF5964833D913B8A33E9E9D"
+        }
+      ],
+      "proofs": [],
+      "note": "The exact literal multiplicity within the containing member changed.",
+      "kindReceiptId": null,
+      "compared": "\u0022\\\u0022\u0022 -\u003E FamilyQuant.Core/DeNovo/ThreeWayPartition.cs: FamilyQuant.DeNovo.ThreeWayPartition::private static string Field ( string ? value ) = "
+    },
+    {
+      "observationId": "FQ15-B412E607E771",
+      "implementation": [
+        {
+          "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
+          "symbol": "FamilyQuant.DeNovo.SpectrumComparisonTable::private static List \u003C Claim \u003E Ranked ( IEnumerable \u003C Claim \u003E claims )",
+          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
+        }
+      ],
+      "proofs": [],
+      "note": "Exact literal syntax, multiplicity and complete member tokens agree. Declaration only; no runtime or behavior claim.",
+      "kindReceiptId": "member-export-storage-fact",
+      "compared": "\u0022\\u001f\u0022 -\u003E FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs: FamilyQuant.DeNovo.SpectrumComparisonTable::private static List \u003C Claim \u003E Ranked ( IEnumerable \u003C Claim \u003E claims ) = \u0022\\u001f\u0022"
+    },
+    {
+      "observationId": "FQ15-B4999B5FC55A",
+      "implementation": [],
+      "proofs": [],
+      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
+      "kindReceiptId": null,
+      "compared": "\u0022minPointsForQuant\u0022 -\u003E :  = "
+    },
+    {
+      "observationId": "FQ15-B7024F6EC011",
+      "implementation": [
+        {
+          "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
+          "symbol": "FamilyQuant.DeNovo.SpectrumComparisonTable::private static string CreditedKey ( NativePeptideQuant quant )",
+          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
+        }
+      ],
+      "proofs": [],
+      "note": "Exact literal syntax, multiplicity and complete member tokens agree. Declaration only; no runtime or behavior claim.",
+      "kindReceiptId": "member-export-storage-fact",
+      "compared": "\u0022\\u001f\u0022 -\u003E FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs: FamilyQuant.DeNovo.SpectrumComparisonTable::private static string CreditedKey ( NativePeptideQuant quant ) = \u0022\\u001f\u0022"
+    },
+    {
+      "observationId": "FQ15-BBA0881F14A9",
+      "implementation": [
+        {
+          "path": "FamilyQuant.Core/DeNovo/DeNovoVariantComparison.cs",
+          "symbol": "FamilyQuant.DeNovo.DeNovoVariantComparison::public static string ToMarkdown ( IEnumerable \u003C DeNovoVariantSummary \u003E rows )",
+          "sha256": "08767B50B96AE4D5F0F955837E9092C3E8505040B345DF43703D6B611795C1D7"
+        }
+      ],
+      "proofs": [],
+      "note": "Exact literal syntax, multiplicity and complete member tokens agree. Declaration only; no runtime or behavior claim.",
+      "kindReceiptId": "member-export-storage-fact",
+      "compared": "\u0022 | \u0022 -\u003E FamilyQuant.Core/DeNovo/DeNovoVariantComparison.cs: FamilyQuant.DeNovo.DeNovoVariantComparison::public static string ToMarkdown ( IEnumerable \u003C DeNovoVariantSummary \u003E rows ) = \u0022 | \u0022"
+    },
+    {
+      "observationId": "FQ15-BF4C53A7F344",
+      "implementation": [],
+      "proofs": [],
+      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
+      "kindReceiptId": null,
+      "compared": "\u0022ppm\u0022 -\u003E :  = "
+    },
+    {
+      "observationId": "FQ15-C442BD57571B",
+      "implementation": [
+        {
+          "path": "FamilyQuant/DeNovo/ThreeWayWindow.cs",
+          "symbol": "FamilyQuant.DeNovo.ThreeWayWindow::public static Window Create ( string title , IReadOnlyList \u003C ThreeWayPartitionRow \u003E rows , string ? provenanceNote = null )",
+          "sha256": "1D679388E2600C7A40CE6B1934C6AEC2A6E2DBFC3F1B846EB358600E03A3E502"
+        }
+      ],
+      "proofs": [],
+      "note": "The containing member declaration or body changed; retained text alone is insufficient.",
+      "kindReceiptId": null,
+      "compared": "\u0022Saves every number behind this chart as a CSV, with where each one came \u0022 -\u003E FamilyQuant/DeNovo/ThreeWayWindow.cs: FamilyQuant.DeNovo.ThreeWayWindow::public static Window Create ( string title , IReadOnlyList \u003C ThreeWayPartitionRow \u003E rows , string ? provenanceNote = null ) = \u0022Saves every number behind this chart as a CSV, with where each one came \u0022"
+    },
+    {
+      "observationId": "FQ15-C4B2B76F2431",
+      "implementation": [
+        {
+          "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
+          "symbol": "FamilyQuant.DeNovo.SpectrumComparisonTable::private static string EquivalentClaimKey ( Claim claim )",
+          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
+        }
+      ],
+      "proofs": [],
+      "note": "Exact literal syntax, multiplicity and complete member tokens agree. Declaration only; no runtime or behavior claim.",
+      "kindReceiptId": "member-export-storage-fact",
+      "compared": "\u0022\\u001f\u0022 -\u003E FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs: FamilyQuant.DeNovo.SpectrumComparisonTable::private static string EquivalentClaimKey ( Claim claim ) = \u0022\\u001f\u0022"
+    },
+    {
+      "observationId": "FQ15-C65D12900AF7",
+      "implementation": [],
+      "proofs": [],
+      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
+      "kindReceiptId": null,
+      "compared": "\u0022minScansPerFeature\u0022 -\u003E :  = "
+    },
+    {
+      "observationId": "FQ15-D5FD9DDF1A6D",
+      "implementation": [
+        {
+          "path": "FamilyQuant.Core/DeNovo/SpreadsheetSafeCsv.cs",
+          "symbol": "FamilyQuant.DeNovo.SpreadsheetSafeCsv::public static string Encode ( string ? value , bool alwaysQuote = false )",
+          "sha256": "B654DE265D6C7D459797EC1296DBB0938B16BD6BB8745C30B4BC740DC148E25C"
+        }
+      ],
+      "proofs": [],
+      "note": "Exact literal syntax, multiplicity and complete member tokens agree. Declaration only; no runtime or behavior claim. Parsed utility type visibility widened from internal to public; full member tokens still agree.",
+      "kindReceiptId": "member-export-storage-fact",
+      "compared": "\u0022\\\u0022\u0022 -\u003E FamilyQuant.Core/DeNovo/SpreadsheetSafeCsv.cs: FamilyQuant.DeNovo.SpreadsheetSafeCsv::public static string Encode ( string ? value , bool alwaysQuote = false ) = \u0022\\\u0022\u0022"
+    },
+    {
+      "observationId": "FQ15-DD46A954BBFE",
+      "implementation": [
+        {
+          "path": "FamilyQuant.Core/DeNovo/SpreadsheetSafeCsv.cs",
+          "symbol": "FamilyQuant.DeNovo.SpreadsheetSafeCsv::public static string Encode ( string ? value , bool alwaysQuote = false )",
+          "sha256": "B654DE265D6C7D459797EC1296DBB0938B16BD6BB8745C30B4BC740DC148E25C"
+        }
+      ],
+      "proofs": [],
+      "note": "Exact literal syntax, multiplicity and complete member tokens agree. Declaration only; no runtime or behavior claim. Parsed utility type visibility widened from internal to public; full member tokens still agree.",
+      "kindReceiptId": "member-export-storage-fact",
+      "compared": "\u0022\\\u0022\u0022 -\u003E FamilyQuant.Core/DeNovo/SpreadsheetSafeCsv.cs: FamilyQuant.DeNovo.SpreadsheetSafeCsv::public static string Encode ( string ? value , bool alwaysQuote = false ) = \u0022\\\u0022\u0022"
+    },
+    {
+      "observationId": "FQ15-DF0811D8E3F3",
+      "implementation": [],
+      "proofs": [],
+      "note": "This comparison supports literal declarations only; behavior needs its own executed check.",
+      "kindReceiptId": null,
+      "compared": "save.Click \u002B= (_, __) =\u003E SaveCsv(perRun); -\u003E :  = "
+    },
+    {
+      "observationId": "FQ15-DF75D56E6E5E",
+      "implementation": [
+        {
+          "path": "FamilyQuant.Core/DeNovo/ThreeWayPartition.cs",
+          "symbol": "FamilyQuant.DeNovo.ThreeWayPartition::private static string Number ( double value )",
+          "sha256": "7173311D16275646CD22A9FE44B1396CBE5502CD6AF5964833D913B8A33E9E9D"
+        }
+      ],
+      "proofs": [],
+      "note": "The exact literal multiplicity within the containing member changed.",
+      "kindReceiptId": null,
+      "compared": "\u0022R\u0022 -\u003E FamilyQuant.Core/DeNovo/ThreeWayPartition.cs: FamilyQuant.DeNovo.ThreeWayPartition::private static string Number ( double value ) = "
+    },
+    {
+      "observationId": "FQ15-DF964D6F2B12",
+      "implementation": [
+        {
+          "path": "FamilyQuant.Core/DeNovo/SpreadsheetSafeCsv.cs",
+          "symbol": "FamilyQuant.DeNovo.SpreadsheetSafeCsv::public static string Encode ( string ? value , bool alwaysQuote = false )",
+          "sha256": "B654DE265D6C7D459797EC1296DBB0938B16BD6BB8745C30B4BC740DC148E25C"
+        }
+      ],
+      "proofs": [],
+      "note": "Exact literal syntax, multiplicity and complete member tokens agree. Declaration only; no runtime or behavior claim. Parsed utility type visibility widened from internal to public; full member tokens still agree.",
+      "kindReceiptId": "member-export-storage-fact",
+      "compared": "\u0022\\\u0022\u0022 -\u003E FamilyQuant.Core/DeNovo/SpreadsheetSafeCsv.cs: FamilyQuant.DeNovo.SpreadsheetSafeCsv::public static string Encode ( string ? value , bool alwaysQuote = false ) = \u0022\\\u0022\u0022"
+    },
+    {
+      "observationId": "FQ15-E0D87026DC21",
+      "implementation": [],
+      "proofs": [],
+      "note": "This comparison supports literal declarations only; behavior needs its own executed check.",
+      "kindReceiptId": null,
+      "compared": "new Button -\u003E :  = "
+    },
+    {
+      "observationId": "FQ15-E2F575FFC98E",
+      "implementation": [
+        {
+          "path": "FamilyQuant/DeNovo/ThreeWayWindow.cs",
+          "symbol": "FamilyQuant.DeNovo.ThreeWayWindow::public static Window Create ( string title , IReadOnlyList \u003C ThreeWayPartitionRow \u003E rows , string ? provenanceNote = null )",
+          "sha256": "1D679388E2600C7A40CE6B1934C6AEC2A6E2DBFC3F1B846EB358600E03A3E502"
+        }
+      ],
+      "proofs": [],
+      "note": "The containing member declaration or body changed; retained text alone is insufficient.",
+      "kindReceiptId": null,
+      "compared": "\u0022Each bar is one run\u0027s total ion current, so the three segments add up to \u0022 -\u003E FamilyQuant/DeNovo/ThreeWayWindow.cs: FamilyQuant.DeNovo.ThreeWayWindow::public static Window Create ( string title , IReadOnlyList \u003C ThreeWayPartitionRow \u003E rows , string ? provenanceNote = null ) = \u0022Each bar is one run\u0027s total ion current, so the three segments add up to \u0022"
+    },
+    {
+      "observationId": "FQ15-F0F1CD15694D",
+      "implementation": [
+        {
+          "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
+          "symbol": "FamilyQuant.DeNovo.SpectrumComparisonTable::private static string EquivalentClaimKey ( Claim claim )",
+          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
+        }
+      ],
+      "proofs": [],
+      "note": "Exact literal syntax, multiplicity and complete member tokens agree. Declaration only; no runtime or behavior claim.",
+      "kindReceiptId": "member-export-storage-fact",
+      "compared": "\u0022\\u001f\u0022 -\u003E FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs: FamilyQuant.DeNovo.SpectrumComparisonTable::private static string EquivalentClaimKey ( Claim claim ) = \u0022\\u001f\u0022"
+    },
+    {
+      "observationId": "FQ15-F29920DDF419",
+      "implementation": [
+        {
+          "path": "FamilyQuant.Core/DeNovo/DeNovoVariantComparison.cs",
+          "symbol": "FamilyQuant.DeNovo.DeNovoVariantComparison::public static string ToMarkdown ( IEnumerable \u003C DeNovoVariantSummary \u003E rows )",
+          "sha256": "08767B50B96AE4D5F0F955837E9092C3E8505040B345DF43703D6B611795C1D7"
+        }
+      ],
+      "proofs": [],
+      "note": "Exact literal syntax, multiplicity and complete member tokens agree. Declaration only; no runtime or behavior claim.",
+      "kindReceiptId": "member-export-storage-fact",
+      "compared": "\u0022 | \u0022 -\u003E FamilyQuant.Core/DeNovo/DeNovoVariantComparison.cs: FamilyQuant.DeNovo.DeNovoVariantComparison::public static string ToMarkdown ( IEnumerable \u003C DeNovoVariantSummary \u003E rows ) = \u0022 | \u0022"
+    },
+    {
+      "observationId": "FQ15-F35925F451AA",
+      "implementation": [
+        {
+          "path": "FamilyQuant/DeNovo/ThreeWayWindow.cs",
+          "symbol": "FamilyQuant.DeNovo.ThreeWayWindow::public static Window Create ( string title , IReadOnlyList \u003C ThreeWayPartitionRow \u003E rows , string ? provenanceNote = null )",
+          "sha256": "1D679388E2600C7A40CE6B1934C6AEC2A6E2DBFC3F1B846EB358600E03A3E502"
+        }
+      ],
+      "proofs": [],
+      "note": "The containing member declaration or body changed; retained text alone is insufficient.",
+      "kindReceiptId": null,
+      "compared": "\u0022compare fairly.\u0022 -\u003E FamilyQuant/DeNovo/ThreeWayWindow.cs: FamilyQuant.DeNovo.ThreeWayWindow::public static Window Create ( string title , IReadOnlyList \u003C ThreeWayPartitionRow \u003E rows , string ? provenanceNote = null ) = \u0022compare fairly.\u0022"
+    },
+    {
+      "observationId": "FQ15-F37912D44F30",
+      "implementation": [],
+      "proofs": [],
+      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
+      "kindReceiptId": null,
+      "compared": "\u0022detectedAreaSinglyCharged\u0022 -\u003E :  = "
+    },
+    {
+      "observationId": "FQ15-F57CFF90B6C9",
+      "implementation": [],
+      "proofs": [],
+      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
+      "kindReceiptId": null,
+      "compared": "\u0022detectedAreaMultiplyCharged\u0022 -\u003E :  = "
+    },
+    {
+      "observationId": "FQ15-F7A78C1A13E7",
+      "implementation": [
+        {
+          "path": "FamilyQuant.Core/DeNovo/PsmDeNovoCounterpartStudy.cs",
+          "symbol": "FamilyQuant.DeNovo.PsmDeNovoCounterpartStudy::private static string Csv ( string value )",
+          "sha256": "12BCAE2FC33D66EC02E47E6FA96A6BBB2F8E597B1B7C6E9A6B22AE561A81AB2C"
+        }
+      ],
+      "proofs": [],
+      "note": "Exact literal syntax, multiplicity and complete member tokens agree. Declaration only; no runtime or behavior claim.",
+      "kindReceiptId": "member-export-storage-fact",
+      "compared": "\u0022\\\u0022\u0022 -\u003E FamilyQuant.Core/DeNovo/PsmDeNovoCounterpartStudy.cs: FamilyQuant.DeNovo.PsmDeNovoCounterpartStudy::private static string Csv ( string value ) = \u0022\\\u0022\u0022"
+    },
+    {
+      "observationId": "FQ15-FB44CE7084AF",
+      "implementation": [],
+      "proofs": [],
+      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
+      "kindReceiptId": null,
+      "compared": "\u0022The file could not be written: \u0022 -\u003E :  = "
+    },
+    {
+      "observationId": "FQ15-FDCB254F47D1",
+      "implementation": [],
+      "proofs": [],
+      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
+      "kindReceiptId": null,
+      "compared": "\u0022minCharge\u0022 -\u003E :  = "
+    },
+    {
+      "observationId": "FQ15-FF4DF02AD818",
+      "implementation": [
+        {
+          "path": "FamilyQuant/DeNovo/ThreeWayWindow.cs",
+          "symbol": "FamilyQuant.DeNovo.ThreeWayWindow::public static Window Create ( string title , IReadOnlyList \u003C ThreeWayPartitionRow \u003E rows , string ? provenanceNote = null )",
+          "sha256": "1D679388E2600C7A40CE6B1934C6AEC2A6E2DBFC3F1B846EB358600E03A3E502"
+        }
+      ],
+      "proofs": [],
+      "note": "The containing member declaration or body changed; retained text alone is insufficient.",
+      "kindReceiptId": null,
+      "compared": "\u0022100%. The PatternLab and de novo areas both use the M\u002B0 peak, so they \u0022 -\u003E FamilyQuant/DeNovo/ThreeWayWindow.cs: FamilyQuant.DeNovo.ThreeWayWindow::public static Window Create ( string title , IReadOnlyList \u003C ThreeWayPartitionRow \u003E rows , string ? provenanceNote = null ) = \u0022100%. The PatternLab and de novo areas both use the M\u002B0 peak, so they \u0022"
+    }
+  ],
+  "kindReceipts": [
+    {
+      "id": "member-export-storage-fact",
+      "kind": "export/storage fact",
+      "proofs": [
+        {
+          "runId": "AS-member-comparison",
+          "kind": "test",
+          "target": "LedgerAssayCohortCommand",
+          "assertion": "AS member kind export/storage fact: every listed frozen/current member declaration agrees",
+          "artifact": "D:\\FamilyQuant-data\\out-assay\\m48-remaining-2\\comparisons.log",
+          "inspectedBy": ""
+        }
+      ]
+    }
+  ]
+}

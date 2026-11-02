@@ -22,7 +22,7 @@ public partial class ClusterGenerationControl
             QuantitationPanel.SharedItemEvery.ToolTip = SharedPeptidePolicy.CountInEveryFamily.ShortExplanation();
 
             QuantitationPanel.ComboBoxSharedPeptides.ToolTip =
-                "What to do with a peptide found in more than one family. In a redundant database, such as " +
+                "What to do with a peptide found in more than one family; in a redundant database, such as " +
                 "a venom, this choice moves the numbers a great deal. Default: " +
                 SharedPeptidePolicy.FamilyUnique.DisplayName() + ".";
 
@@ -37,7 +37,7 @@ public partial class ClusterGenerationControl
             QuantitationPanel.ModeItemChargeRestricted.ToolTip = NormalizationMode.ChargeRestrictedSignal.ShortExplanation();
 
             QuantitationPanel.ComboBoxNormalization.ToolTip =
-                "What the share column is a percentage OF; the measurements themselves never change. A mode " +
+                "What the share column is a percentage OF; the measurements themselves never change, and a mode " +
                 "is greyed out when the loaded project lacks the totals it needs. Default: " +
                 NormalizationMode.IdentifiedSignal.DisplayName() + ".";
         }

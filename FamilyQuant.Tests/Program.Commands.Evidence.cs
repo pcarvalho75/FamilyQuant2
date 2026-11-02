@@ -14,6 +14,8 @@ internal static partial class Program
         new("--evidence-delivery", 2, TestCommandPhase.Raw, EvidenceDeliveryRequested, RunEvidenceDelivery),
         new("--test-evidence-delivery", 3, TestCommandPhase.Raw, EvidenceDeliveryTestsRequested, RunEvidenceDeliveryTests),
         new("--evidence-task-check", 60, TestCommandPhase.Raw, EvidenceTaskCheckRequested, RunEvidenceTaskCheck),
+        new("--evidence-task-header-audit", 65, TestCommandPhase.Raw,
+            args => args.Length > 0 && args[0] == "--evidence-task-header-audit", (args, _) => EvidenceTaskHeaderAuditCommand(args)),
         new("--test-evidence-task", 70, TestCommandPhase.Raw, EvidenceTaskTestsRequested, RunEvidenceTaskTests),
         new("--test-evidence-task-scope", 430, TestCommandPhase.Raw, EvidenceTaskScopeRequested, RunEvidenceTaskScope),
     ];
