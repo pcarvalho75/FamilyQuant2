@@ -65,3 +65,43 @@ does not claim a Viperidae exhaustive comparison or a fresh RAW extraction.
 Release build: zero warnings and errors. Quick suite: 2007 passed, zero failed,
 17 skipped. The six result checks pass, and all four stored-project golden
 exports match frozen 1.5.0.6 byte for byte in `out-assay/x3-integrated-golden`.
+
+## X14 streaming exhaustive edges
+
+The native all-pairs alignment, fields, identity/coverage gate and surviving family IDs stay the same.
+The memo now retains an immutable native table in application scratch, rather than a list of all
+pairs. A constant-memory metadata pass establishes the valid-row count and the historical
+whole-column identity scale. Each clustering then streams the table into the existing union-find.
+Metadata parsing does not allocate identifier strings; the merge retains only sequence/family maps.
+
+Concurrent callers share one lazy alignment per source path and SHA256. Empty, failed and cancelled
+alignments leave no memo entry. Successful tables remain until process exit so identity sweeps can
+reuse them; exit cleanup deletes only paths created by that process. A changed input gets a new
+table. A missing cached table is regenerated. A crash can leave a scratch file, but no future run
+trusts or reuses that file by name. Disk use grows with aligned inputs until the application closes.
+
+`GetPairwiseEdgesForTest` remains the compatibility seam and materializes its requested test rows;
+production clustering streams directly. The original memo and gate checks remain. Additional tests
+cover fractional versus percentage tables, malformed rows, cancellation during edge consumption,
+concurrent memo readers and retry after an empty native result.
+
+The benchmark uses the same Bjararaca input, identity 85 and exhaustive mode in fresh test hosts.
+`ClusteringSnapshot` records the host's OS peak working set after writing all assignments. This
+measures the managed host, not the separate native alignment child. Shared-machine wall time is
+excluded from the result. Logs and snapshots are `D:/FamilyQuant-data/out-assay/x14-*`.
+
+| Run | Host peak working set, bytes | Assignment snapshot SHA256 |
+|---|---:|---|
+| Before, retained edge list | 115154944 | `DA19D1B4DC0101F45AD00CBD3E7205F891F96044F39ECBFEE196A6A24A0FD42D` |
+| After, streamed edges | 69079040 | `DA19D1B4DC0101F45AD00CBD3E7205F891F96044F39ECBFEE196A6A24A0FD42D` |
+| After, fresh repeat | 69394432 | `DA19D1B4DC0101F45AD00CBD3E7205F891F96044F39ECBFEE196A6A24A0FD42D` |
+
+All three runs contain all 584 proteins and 441 families. The two fresh streamed hosts use about
+40 percent less peak working set than the baseline host. Their native table files were absent after
+normal exit, confirming owned cleanup on these runs. This is bounded Bjararaca exhaustive
+parity, not a Viperidae exhaustive result or a fresh quantitation/extraction validation.
+
+X14's no-edge-list regression failed before the refactor (6 passed, 1 failed). Focused clustering
+checks after it were 12 passed, 0 failed, 0 skipped. The integrated V5 build had zero warnings/errors;
+quick suite was 2372 passed, 0 failed, 17 skipped, and stored-project golden was 4 passed, 0 failed,
+0 skipped. The V5 merge's missing dependency-dispatch closing lines were restored before that build.
