@@ -95,6 +95,7 @@ Finished steps, moved here from docs/ROADMAP.md. The board shows them as green.
 | C3 | Keyword boxes only in that window: one "Group by keywords" command on the screen | L | 0.5 | 🟢 | C1 | Three duplicate inputs gone; suite re-pointed | LK | not started | 0% | 0% | T+0 |
 | C15 | The review window's architecture split works per group: each group has its own tick, so one group can leave while the rest of the family stays whole. Core already takes a choice per group | L | 0.5 | 🟢 | R2 | Ticking only the disintegrin-alone group keeps the rest together; recipe replay exact | RS | not started | 0% | 0% | T+0 |
 | C5 | Quantitation panel: Layers 2 and 3 merged; Full XIC first, PatternLab as a secondary source, options shown only when they apply | M | 1 | C1 | V3, C13, R2 | Every option kept; golden equal | RS | not started | 0% | 0% | T+3 |
+| C1 | Curation rebuilt: table always in view, actions in a side panel, no Controls and Data Browser tabs, no "Layer" words. USearch ID column hidden by default, data kept. Decoys hidden by default; Locus shows the accession. Long operations use the S6 host. `ClusterGenerationControl` (1,978 lines) replaced by a view model and a thin view | VH | 2 | 🟢 | C2, C5, V3, C13 | Pressing any action shows its result without changing view; every ledger row of the screen checked; golden equal | LK | not started | 0% | 0% | T+2 |
 
 ### W6 Core rewrite: copy what is good, rewrite what is better
 
