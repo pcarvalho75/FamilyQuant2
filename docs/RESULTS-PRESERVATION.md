@@ -14,7 +14,7 @@ overlap study and publishes no folder. That refusal is not a successful full-pac
 export. Current shorter copy is explicitly mapped to each frozen observation for
 semantic review. Both-theme captures were inspected.
 
-`RS-members.json` covers 255 exact C# literal declarations. It uses the shared
+`RS-members.json` covers 248 exact C# literal declarations. It uses the shared
 `LedgerMemberFactComparison` with bounded source modules, exact literal syntax and
 multiplicity, and complete containing-member token equality. Six chart classes
 retain their owners while inheriting `ChartDrawingBase` instead of `FrameworkElement`;
@@ -22,11 +22,17 @@ two private display helpers moved from `AnalyticsControl` to `AnalyticsViewModel
 Those relocations are explicit. Changed bodies and declarations remain unverified.
 These are declaration receipts, not runtime scientific reproduction.
 
+`RS-C13-tooltips.json` covers the other seven chart-tooltip fragments after C13's
+two-sentence wording pass. It records each frozen fragment and the actual native
+tooltip, with explicit checks for every retained fact and the dynamic isotope
+ceiling. These are semantic wording receipts for independent review, not claims
+that the old literal text or complete constructor tokens remain identical.
+
 The remaining observations include changed drawing methods, rewritten export and
 empty-state helpers, the summary method whose access changed, ambiguous frozen
 literal anchors, the delegated CSV formatter, and the removed grouping argument of
 the normalization headers. Their precise member/reason records are retained in
-`D:/FamilyQuant-data/out-results/ledger-ready/members/comparisons.json`. No same-text
+`D:/FamilyQuant-data/out-results/C13-tips/rs-members/comparisons.json`. No same-text
 fallback, guessed relocation or inferred DROP closes them.
 
 The two proof commands retain the executing checker/source and compiled assemblies,

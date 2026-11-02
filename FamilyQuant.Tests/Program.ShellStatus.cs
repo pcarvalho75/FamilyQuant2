@@ -28,6 +28,12 @@ internal static partial class Program
         const BindingFlags any = BindingFlags.Instance | BindingFlags.NonPublic;
         try
         {
+            string diagnosticTip = ((MenuItem)main.FindName("MenuItemClusteringDiagnostic")).ToolTip.ToString()!;
+            Check("clustering diagnostic tooltip retains saved input, identity and unchanged-family facts",
+                new[] { "diagnostic report", "saved .fcf or .fqproj", "clustering identity", "Save changes first", "families stay as they are" }
+                    .All(fact => diagnosticTip.Contains(fact, StringComparison.OrdinalIgnoreCase)));
+            Check("clustering diagnostic tooltip uses at most two sentences",
+                System.Text.RegularExpressions.Regex.Matches(diagnosticTip, @"[.!?](?:\s|$)").Count <= 2);
             var guide = (TextBlock)main.FindName("TextBlockGuide");
             Check("the shell owns one quiet bottom status bar", guide.TextWrapping == TextWrapping.NoWrap
                 && Grid.GetRow((Border)main.FindName("BorderGuide")) > Grid.GetRow((Grid)main.FindName("GridApp")));

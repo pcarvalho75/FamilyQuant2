@@ -68,6 +68,7 @@ Finished steps, moved here from docs/ROADMAP.md. The board shows them as green.
 | V4 | Table style for all grids: rows, header, hover, selection, numbers right-aligned, cut-off text shown in a tooltip | M | 3 | V7 | C1, C2, C4 | Renders in both themes at both sizes; header readable | LK | not started | 0% | 0% | T+5 |
 | V5 | Emoji out, Segoe Fluent Icons in | L | 0.5 | 🟢 | C1, all screens | Suite check fails on an emoji in UI text | LK | not started | 0% | 0% | T+0 |
 | V6 | Charts follow the tokens in both themes; `ChartPalette` stays the one source; pinned contrast checks kept | M | 1 | 🟢 | V3, B7, C14 | Contrast check passes; exported PNGs unchanged in the Light palette | RS | not started | 0% | 0% | T+1 |
+| V3 | Zero hard-coded colours: a suite check fails on any colour outside tokens and the chart palette. Each rebuilt screen must pass it; this row closes when the last one does | H | 0.5 | 🟢 | C14 | Guard red on a planted colour; 0 sites left; golden equal | LK | not started | 0% | 0% | T+0 |
 
 ### W4 Shell
 

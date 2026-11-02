@@ -79,7 +79,7 @@ Columns: Diff = L, M, H, VH. Hrs = worker hours at measured speed: the 56 steps 
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| N6 | Close the ledger by kind of row (D13): one executed check per kind, such as frozen 1.5.0.6 text compared with 2.0, with each row naming what was compared. A row no kind covers gets its own proof or stays open | H | 1.5 | C13 | C14 | `--feature-ledger-release-check` passes; a reviewer samples 200 rows at random across all kinds and agrees; any sample failure reopens that whole kind | SH | not started | 0% | 0% | T+3 |
+| N6 | Close the ledger by kind of row (D13): one executed check per kind, such as frozen 1.5.0.6 text compared with 2.0, with each row naming what was compared. A row no kind covers gets its own proof or stays open | H | 1.5 | C13 | C14 | `--feature-ledger-release-check` passes; a reviewer samples 200 rows at random across all kinds and agrees; any sample failure reopens that whole kind | SH | not started | 0% | 0% | T+2 |
 
 ### W2 Ana's result, through the software
 
@@ -91,7 +91,6 @@ Columns: Diff = L, M, H, VH. Hrs = worker hours at measured speed: the 56 steps 
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| V3 | Zero hard-coded colours: a suite check fails on any colour outside tokens and the chart palette. Each rebuilt screen must pass it; this row closes when the last one does | H | 0.5 | 🟢 | C14 | Guard red on a planted colour; 0 sites left; golden equal | LK | not started | 0% | 0% | T+0 |
 
 ### W4 Shell
 
@@ -102,8 +101,8 @@ Columns: Diff = L, M, H, VH. Hrs = worker hours at measured speed: the 56 steps 
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| C13 | Wording pass: labels, tooltips (one or two sentences) and Help match the new screens | M | 1 | 🟢 | N6, C14 | Suite's tooltip checks green; no old screen named anywhere | LK | not started | 0% | 0% | T+2 |
-| C14 | Finish: 100, 125 and 150% scaling, smallest window, Tab order, focus visible, both themes | M | 0.5 | C13, V3, N6 | R2 | Harness renders at each scale; Paulo's final look sign-off | LK | not started | 0% | 0% | T+4 |
+| C13 | Wording pass: labels, tooltips (one or two sentences) and Help match the new screens | M | 1 | 🟢 | N6, C14 | Suite's tooltip checks green; no old screen named anywhere | LK | not started | 0% | 0% | T+1 |
+| C14 | Finish: 100, 125 and 150% scaling, smallest window, Tab order, focus visible, both themes | M | 0.5 | C13, N6 | R2 | Harness renders at each scale; Paulo's final look sign-off | LK | not started | 0% | 0% | T+3 |
 
 ### W6 Core rewrite: copy what is good, rewrite what is better
 
@@ -116,7 +115,7 @@ Columns: Diff = L, M, H, VH. Hrs = worker hours at measured speed: the 56 steps 
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
 | R2 | 2.0 preview 2: new look and shell | M | 0.5 | C14 | R3 | Same, plus Paulo's sign-off on renders, and a published update reaches an installed 2.0 | Orchestrator | not started | 0% | 0% | T+4 |
 | R3 | 2.0 release candidate: rewrite finished, every ledger row closed, the family world in if B1 passed | M | 0.5 | R2, B8 | R4 | Same, plus the ledger check | Orchestrator | not started | 0% | 0% | T+4 |
-| R4 | Final adversarial pass on the whole product | H | 1 | R3 | R5 | GR's verdict; all findings closed | GR | not started | 0% | 0% | T+6 |
+| R4 | Final adversarial pass on the whole product | H | 1 | R3 | R5 | GR's verdict; all findings closed | GR | not started | 0% | 0% | T+5 |
 | R5 | FamilyQuant 2.0 final, then the archive of this roadmap | L | 0.5 | R4 | Done | Paulo publishes | Orchestrator | not started | 0% | 0% | T+6 |
 
 ### W8 Breakthrough: the family world
