@@ -14,6 +14,9 @@ internal static partial class Program
     private static void ArchitectureGroupSplitTests(string? output = null)
     {
         Section("Architecture choices - one group can leave while the rest stays together");
+        Check("the C15 command is registered with its own raw handler", TestCommandRegistry.Commands.Any(c =>
+            c.Flag == "--test-architecture-group-split" && c.Phase == TestCommandPhase.Raw && c.Order == 5
+            && c.Run.Method.Name == nameof(RunArchitectureGroupSplitCommand)));
         EnsureApplication();
         var splitProperty = typeof(ReviewArchitectureRow).GetProperty("Split");
         Check("each supplied architecture group exposes its own split choice", splitProperty != null);
