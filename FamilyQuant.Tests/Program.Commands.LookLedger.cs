@@ -17,5 +17,7 @@ internal static partial class Program
             }),
         new("--prove-look-copy", 10210, TestCommandPhase.Raw,
             args => args.Length > 0 && args[0] == "--prove-look-copy", (args, _) => LookCopyReceiptCommand(args)),
+        new("--prove-look-style-roles", 10220, TestCommandPhase.Raw,
+            args => args.Length > 0 && args[0] == "--prove-look-style-roles", (args, _) => LookStyleRoleCommand(args)),
     ];
 }

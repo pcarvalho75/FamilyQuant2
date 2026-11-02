@@ -17,7 +17,7 @@ Render targets refer to `ScreenHarness.Screens`, captured with `--screens <outpu
 Release gate: `FamilyQuant.Tests.exe --feature-ledger-release-check` fails until every retained row is VERIFIED with evidence. Authorized DROP rows use APPROVED_DROP, which records a decision, not a completed UI removal. The normal quick suite permits OPEN rows during development. Regeneration resets retained rows to OPEN; preserve reviewed evidence when updating the scanner.
 
 Scan count: **5756**. Ledger rows: **5756**. Source files: **104**.
-Authorized DROP rows: **296**; proposed VERIFIED retained rows: **2022**; OPEN retained rows: **3438**.
+Authorized DROP rows: **296**; proposed VERIFIED retained rows: **2046**; OPEN retained rows: **3414**.
 
 | ID | Disposition | Kind | Frozen source | Fact or control | Planned check | State | Evidence |
 |---|---|---|---|---|---|---|---|
@@ -1063,30 +1063,30 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **2022**; OPEN r
 | FQ15-D3ED3D034725 | KEEP | export/storage fact | FamilyQuant/CsvReport.cs:128 | "\"" | test:DeNovoAgreementUnitTests | OPEN | pending |
 | FQ15-6A8D402A968E | KEEP | export/storage fact | FamilyQuant/CsvReport.cs:128 | "\"\"" | test:DeNovoAgreementUnitTests | OPEN | pending |
 | FQ15-158C444BB7FC | KEEP | export/storage fact | FamilyQuant/CsvReport.cs:128 | "\"" | test:DeNovoAgreementUnitTests | OPEN | pending |
-| FQ15-8BC847EA8C1E | IMPROVE | option/copy | FamilyQuant/DeNovoControl.xaml:13 | Style.Key = LayerBadge | render:06-denovo-advanced | OPEN | pending |
-| FQ15-F8D72845D5F1 | IMPROVE | option/copy | FamilyQuant/DeNovoControl.xaml:14 | Setter.Value = 3 | render:06-denovo-advanced | OPEN | pending |
-| FQ15-3BAEF428C0E5 | IMPROVE | option/copy | FamilyQuant/DeNovoControl.xaml:15 | Setter.Value = 7,1 | render:06-denovo-advanced | OPEN | pending |
-| FQ15-9A11B5EA2B79 | IMPROVE | option/copy | FamilyQuant/DeNovoControl.xaml:16 | Setter.Value = 10,0,0,0 | render:06-denovo-advanced | OPEN | pending |
-| FQ15-861D29CD144B | IMPROVE | option/copy | FamilyQuant/DeNovoControl.xaml:17 | Setter.Value = Center | render:06-denovo-advanced | OPEN | pending |
-| FQ15-969B0A56C686 | IMPROVE | option/copy | FamilyQuant/DeNovoControl.xaml:20 | Style.Key = LayerBadgeText | render:06-denovo-advanced | OPEN | pending |
-| FQ15-36F91EE02CDC | IMPROVE | option/copy | FamilyQuant/DeNovoControl.xaml:21 | Setter.Value = 10 | render:06-denovo-advanced | OPEN | pending |
-| FQ15-A81C965D49A9 | IMPROVE | option/copy | FamilyQuant/DeNovoControl.xaml:22 | Setter.Value = Bold | render:06-denovo-advanced | OPEN | pending |
-| FQ15-53C091FC29DF | IMPROVE | option/copy | FamilyQuant/DeNovoControl.xaml:23 | Setter.Value = White | render:06-denovo-advanced | OPEN | pending |
-| FQ15-220D63CC3ECF | IMPROVE | option/copy | FamilyQuant/DeNovoControl.xaml:26 | Style.Key = LayerTitle | render:06-denovo-advanced | OPEN | pending |
-| FQ15-06623D41A745 | IMPROVE | option/copy | FamilyQuant/DeNovoControl.xaml:27 | Setter.Value = White | render:06-denovo-advanced | OPEN | pending |
-| FQ15-74C914EA14F2 | IMPROVE | option/copy | FamilyQuant/DeNovoControl.xaml:28 | Setter.Value = Bold | render:06-denovo-advanced | OPEN | pending |
-| FQ15-616DB022B653 | IMPROVE | option/copy | FamilyQuant/DeNovoControl.xaml:29 | Setter.Value = Center | render:06-denovo-advanced | OPEN | pending |
-| FQ15-4246F074896F | IMPROVE | option/copy | FamilyQuant/DeNovoControl.xaml:32 | Style.Key = ResultValue | render:06-denovo-advanced | OPEN | pending |
-| FQ15-5680CE8D113E | IMPROVE | option/copy | FamilyQuant/DeNovoControl.xaml:33 | Setter.Value = #FFD700 | render:06-denovo-advanced | OPEN | pending |
-| FQ15-BDE150D37198 | IMPROVE | option/copy | FamilyQuant/DeNovoControl.xaml:34 | Setter.Value = Bold | render:06-denovo-advanced | OPEN | pending |
-| FQ15-298DB85DE10C | IMPROVE | option/copy | FamilyQuant/DeNovoControl.xaml:35 | Setter.Value = 13 | render:06-denovo-advanced | OPEN | pending |
-| FQ15-D549F0C6E7EA | IMPROVE | option/copy | FamilyQuant/DeNovoControl.xaml:36 | Setter.Value = Center | render:06-denovo-advanced | OPEN | pending |
-| FQ15-F6C1061154A9 | IMPROVE | option/copy | FamilyQuant/DeNovoControl.xaml:37 | Setter.Value = 0,0,14,0 | render:06-denovo-advanced | OPEN | pending |
-| FQ15-8E574C2E5D40 | IMPROVE | option/copy | FamilyQuant/DeNovoControl.xaml:40 | Style.Key = Note | render:06-denovo-advanced | OPEN | pending |
-| FQ15-5F2C1E449429 | IMPROVE | option/copy | FamilyQuant/DeNovoControl.xaml:41 | Setter.Value = #AAAAAA | render:06-denovo-advanced | OPEN | pending |
-| FQ15-CA0B824CA99E | IMPROVE | option/copy | FamilyQuant/DeNovoControl.xaml:42 | Setter.Value = 11 | render:06-denovo-advanced | OPEN | pending |
-| FQ15-B6FB542118DB | IMPROVE | option/copy | FamilyQuant/DeNovoControl.xaml:43 | Setter.Value = Wrap | render:06-denovo-advanced | OPEN | pending |
-| FQ15-B64AE83318C9 | IMPROVE | option/copy | FamilyQuant/DeNovoControl.xaml:44 | Setter.Value = 10,4,10,4 | render:06-denovo-advanced | OPEN | pending |
+| FQ15-8BC847EA8C1E | IMPROVE | option/copy | FamilyQuant/DeNovoControl.xaml:13 | Style.Key = LayerBadge | test:LookStyleRoleCommand | VERIFIED | evidence:LK-style-roles:FQ15-8BC847EA8C1E |
+| FQ15-F8D72845D5F1 | IMPROVE | option/copy | FamilyQuant/DeNovoControl.xaml:14 | Setter.Value = 3 | test:LookStyleRoleCommand | VERIFIED | evidence:LK-style-roles:FQ15-F8D72845D5F1 |
+| FQ15-3BAEF428C0E5 | IMPROVE | option/copy | FamilyQuant/DeNovoControl.xaml:15 | Setter.Value = 7,1 | test:LookStyleRoleCommand | VERIFIED | evidence:LK-style-roles:FQ15-3BAEF428C0E5 |
+| FQ15-9A11B5EA2B79 | IMPROVE | option/copy | FamilyQuant/DeNovoControl.xaml:16 | Setter.Value = 10,0,0,0 | test:LookStyleRoleCommand | VERIFIED | evidence:LK-style-roles:FQ15-9A11B5EA2B79 |
+| FQ15-861D29CD144B | IMPROVE | option/copy | FamilyQuant/DeNovoControl.xaml:17 | Setter.Value = Center | test:LookStyleRoleCommand | VERIFIED | evidence:LK-style-roles:FQ15-861D29CD144B |
+| FQ15-969B0A56C686 | IMPROVE | option/copy | FamilyQuant/DeNovoControl.xaml:20 | Style.Key = LayerBadgeText | test:LookStyleRoleCommand | VERIFIED | evidence:LK-style-roles:FQ15-969B0A56C686 |
+| FQ15-36F91EE02CDC | IMPROVE | option/copy | FamilyQuant/DeNovoControl.xaml:21 | Setter.Value = 10 | test:LookStyleRoleCommand | VERIFIED | evidence:LK-style-roles:FQ15-36F91EE02CDC |
+| FQ15-A81C965D49A9 | IMPROVE | option/copy | FamilyQuant/DeNovoControl.xaml:22 | Setter.Value = Bold | test:LookStyleRoleCommand | VERIFIED | evidence:LK-style-roles:FQ15-A81C965D49A9 |
+| FQ15-53C091FC29DF | IMPROVE | option/copy | FamilyQuant/DeNovoControl.xaml:23 | Setter.Value = White | test:LookStyleRoleCommand | VERIFIED | evidence:LK-style-roles:FQ15-53C091FC29DF |
+| FQ15-220D63CC3ECF | IMPROVE | option/copy | FamilyQuant/DeNovoControl.xaml:26 | Style.Key = LayerTitle | test:LookStyleRoleCommand | VERIFIED | evidence:LK-style-roles:FQ15-220D63CC3ECF |
+| FQ15-06623D41A745 | IMPROVE | option/copy | FamilyQuant/DeNovoControl.xaml:27 | Setter.Value = White | test:LookStyleRoleCommand | VERIFIED | evidence:LK-style-roles:FQ15-06623D41A745 |
+| FQ15-74C914EA14F2 | IMPROVE | option/copy | FamilyQuant/DeNovoControl.xaml:28 | Setter.Value = Bold | test:LookStyleRoleCommand | VERIFIED | evidence:LK-style-roles:FQ15-74C914EA14F2 |
+| FQ15-616DB022B653 | IMPROVE | option/copy | FamilyQuant/DeNovoControl.xaml:29 | Setter.Value = Center | test:LookStyleRoleCommand | VERIFIED | evidence:LK-style-roles:FQ15-616DB022B653 |
+| FQ15-4246F074896F | IMPROVE | option/copy | FamilyQuant/DeNovoControl.xaml:32 | Style.Key = ResultValue | test:LookStyleRoleCommand | VERIFIED | evidence:LK-style-roles:FQ15-4246F074896F |
+| FQ15-5680CE8D113E | IMPROVE | option/copy | FamilyQuant/DeNovoControl.xaml:33 | Setter.Value = #FFD700 | test:LookStyleRoleCommand | VERIFIED | evidence:LK-style-roles:FQ15-5680CE8D113E |
+| FQ15-BDE150D37198 | IMPROVE | option/copy | FamilyQuant/DeNovoControl.xaml:34 | Setter.Value = Bold | test:LookStyleRoleCommand | VERIFIED | evidence:LK-style-roles:FQ15-BDE150D37198 |
+| FQ15-298DB85DE10C | IMPROVE | option/copy | FamilyQuant/DeNovoControl.xaml:35 | Setter.Value = 13 | test:LookStyleRoleCommand | VERIFIED | evidence:LK-style-roles:FQ15-298DB85DE10C |
+| FQ15-D549F0C6E7EA | IMPROVE | option/copy | FamilyQuant/DeNovoControl.xaml:36 | Setter.Value = Center | test:LookStyleRoleCommand | VERIFIED | evidence:LK-style-roles:FQ15-D549F0C6E7EA |
+| FQ15-F6C1061154A9 | IMPROVE | option/copy | FamilyQuant/DeNovoControl.xaml:37 | Setter.Value = 0,0,14,0 | test:LookStyleRoleCommand | VERIFIED | evidence:LK-style-roles:FQ15-F6C1061154A9 |
+| FQ15-8E574C2E5D40 | IMPROVE | option/copy | FamilyQuant/DeNovoControl.xaml:40 | Style.Key = Note | test:LookStyleRoleCommand | VERIFIED | evidence:LK-style-roles:FQ15-8E574C2E5D40 |
+| FQ15-5F2C1E449429 | IMPROVE | option/copy | FamilyQuant/DeNovoControl.xaml:41 | Setter.Value = #AAAAAA | test:LookStyleRoleCommand | VERIFIED | evidence:LK-style-roles:FQ15-5F2C1E449429 |
+| FQ15-CA0B824CA99E | IMPROVE | option/copy | FamilyQuant/DeNovoControl.xaml:42 | Setter.Value = 11 | test:LookStyleRoleCommand | VERIFIED | evidence:LK-style-roles:FQ15-CA0B824CA99E |
+| FQ15-B6FB542118DB | IMPROVE | option/copy | FamilyQuant/DeNovoControl.xaml:43 | Setter.Value = Wrap | test:LookStyleRoleCommand | VERIFIED | evidence:LK-style-roles:FQ15-B6FB542118DB |
+| FQ15-B64AE83318C9 | IMPROVE | option/copy | FamilyQuant/DeNovoControl.xaml:44 | Setter.Value = 10,4,10,4 | test:LookStyleRoleCommand | VERIFIED | evidence:LK-style-roles:FQ15-B64AE83318C9 |
 | FQ15-4832FF567C73 | IMPROVE | option/copy | FamilyQuant/DeNovoControl.xaml:70 | TextBlock.Text = \uD83D\uDCE5 Step 1: Import and filter | render:06-denovo-advanced | OPEN | pending |
 | FQ15-9D2697CC6412 | IMPROVE | option/copy | FamilyQuant/DeNovoControl.xaml:72 | TextBlockDeNovoLayer1State.Text = READY | test:DeNovoLedgerDeclarationsCommand | OPEN | pending: execution evidence missing or stale |
 | FQ15-7A6177A9566E | IMPROVE | option/copy | FamilyQuant/DeNovoControl.xaml:94 | Label.Content = De novo export folder: | render:06-denovo-advanced | OPEN | pending |
