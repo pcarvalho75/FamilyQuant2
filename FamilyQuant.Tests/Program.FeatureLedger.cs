@@ -52,6 +52,7 @@ internal static partial class Program
             FeatureLedger.Validate(inventory with { Scanner = "unapproved" }, markdown).Count > 0);
         FeatureLedgerEvidenceTests();
         ShellMetadataComparisonTests();
+        ShellMessageFrameTests();
         string liveOutput = Path.Combine(Path.GetTempPath(), "FamilyQuant.Ledger.Live", Guid.NewGuid().ToString("N"));
         Directory.CreateDirectory(liveOutput);
         var live = LedgerPreservationTests(root, liveOutput, inventory);

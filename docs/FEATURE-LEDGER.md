@@ -17,7 +17,7 @@ Render targets refer to `ScreenHarness.Screens`, captured with `--screens <outpu
 Release gate: `FamilyQuant.Tests.exe --feature-ledger-release-check` fails until every retained row is VERIFIED with evidence. Authorized DROP rows use APPROVED_DROP, which records a decision, not a completed UI removal. The normal quick suite permits OPEN rows during development. Regeneration resets retained rows to OPEN; preserve reviewed evidence when updating the scanner.
 
 Scan count: **5756**. Ledger rows: **5756**. Source files: **104**.
-Authorized DROP rows: **296**; proposed VERIFIED retained rows: **3008**; OPEN retained rows: **2452**.
+Authorized DROP rows: **296**; proposed VERIFIED retained rows: **3072**; OPEN retained rows: **2388**.
 
 | ID | Disposition | Kind | Frozen source | Fact or control | Planned check | State | Evidence |
 |---|---|---|---|---|---|---|---|
@@ -3927,33 +3927,33 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **3008**; OPEN r
 | FQ15-8D38F872FF44 | KEEP | handler | FamilyQuant/LockManagerWindow.cs:154 | closeButton.Click += (sender, e) =&gt; Close(); | render:10-lock-manager | OPEN | pending |
 | FQ15-822F25A3F3E4 | KEEP | handler | FamilyQuant/LockManagerWindow.cs:230 | grid.SelectionChanged += (sender, e) =&gt; UpdateRemoveButton(); | render:10-lock-manager | OPEN | pending |
 | FQ15-7679EFCAE0B7 | IMPROVE | control | FamilyQuant/MainWindow.xaml:21 | MenuItem MenuItemHome | test:ShellMetadataReceipts | VERIFIED | evidence:SH-runtime:FQ15-7679EFCAE0B7 |
-| FQ15-04C00B4757B5 | IMPROVE | option/copy | FamilyQuant/MainWindow.xaml:21 | MenuItemHome.Header = Home | render:01-home | OPEN | pending |
-| FQ15-45662E0D334E | KEEP | handler | FamilyQuant/MainWindow.xaml:21 | MenuItemHome.Click = MenuItemHome_Click | render:01-home | OPEN | pending |
+| FQ15-04C00B4757B5 | IMPROVE | option/copy | FamilyQuant/MainWindow.xaml:21 | MenuItemHome.Header = Home | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-04C00B4757B5 |
+| FQ15-45662E0D334E | KEEP | handler | FamilyQuant/MainWindow.xaml:21 | MenuItemHome.Click = MenuItemHome_Click | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-45662E0D334E |
 | FQ15-93776868FAB5 | IMPROVE | tooltip | FamilyQuant/MainWindow.xaml:22 | MenuItemHome.ToolTip = Returns to the start screen, which shows the four steps and names the open project. Your open project stays open. | render:01-home | OPEN | pending |
 | FQ15-94FC1247DE2C | IMPROVE | control | FamilyQuant/MainWindow.xaml:24 | MenuItem MenuItemRunUSearch | test:ShellMetadataReceipts | VERIFIED | evidence:SH-runtime:FQ15-94FC1247DE2C |
-| FQ15-46EB4E24AC7D | IMPROVE | option/copy | FamilyQuant/MainWindow.xaml:24 | MenuItemRunUSearch.Header = Run USearch | render:01-home | OPEN | pending |
-| FQ15-085E5B81E35D | KEEP | handler | FamilyQuant/MainWindow.xaml:24 | MenuItemRunUSearch.Click = MenuRunUSearch_Click | render:01-home | OPEN | pending |
+| FQ15-46EB4E24AC7D | IMPROVE | option/copy | FamilyQuant/MainWindow.xaml:24 | MenuItemRunUSearch.Header = Run USearch | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-46EB4E24AC7D |
+| FQ15-085E5B81E35D | KEEP | handler | FamilyQuant/MainWindow.xaml:24 | MenuItemRunUSearch.Click = MenuRunUSearch_Click | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-085E5B81E35D |
 | FQ15-45A20ED85C9C | IMPROVE | tooltip | FamilyQuant/MainWindow.xaml:25 | MenuItemRunUSearch.ToolTip = Step 1: clusters a FASTA or target-decoy (.T-R) database by sequence identity and writes a .fcf beside it. This closes the open project, so save first. | render:01-home | OPEN | pending |
-| FQ15-D7A1D45E49F5 | IMPROVE | control | FamilyQuant/MainWindow.xaml:27 | MenuItem MenuItem | render:01-home | OPEN | pending |
-| FQ15-21D9A55B91A6 | IMPROVE | option/copy | FamilyQuant/MainWindow.xaml:27 | MenuItem.Header = File | render:01-home | OPEN | pending |
+| FQ15-D7A1D45E49F5 | IMPROVE | control | FamilyQuant/MainWindow.xaml:27 | MenuItem MenuItem | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-D7A1D45E49F5 |
+| FQ15-21D9A55B91A6 | IMPROVE | option/copy | FamilyQuant/MainWindow.xaml:27 | MenuItem.Header = File | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-21D9A55B91A6 |
 | FQ15-BECEDE5FD7A4 | IMPROVE | control | FamilyQuant/MainWindow.xaml:28 | MenuItem MenuItemLoadFQC | test:ShellMetadataReceipts | VERIFIED | evidence:SH-runtime:FQ15-BECEDE5FD7A4 |
-| FQ15-C2500D2F7285 | IMPROVE | option/copy | FamilyQuant/MainWindow.xaml:28 | MenuItemLoadFQC.Header = Load project or Family Cluster File | render:01-home | OPEN | pending |
-| FQ15-D88E5CED913A | KEEP | handler | FamilyQuant/MainWindow.xaml:28 | MenuItemLoadFQC.Click = MenuItemCluster_Click | render:01-home | OPEN | pending |
+| FQ15-C2500D2F7285 | IMPROVE | option/copy | FamilyQuant/MainWindow.xaml:28 | MenuItemLoadFQC.Header = Load project or Family Cluster File | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-C2500D2F7285 |
+| FQ15-D88E5CED913A | KEEP | handler | FamilyQuant/MainWindow.xaml:28 | MenuItemLoadFQC.Click = MenuItemCluster_Click | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-D88E5CED913A |
 | FQ15-8FCD469AC3D0 | IMPROVE | tooltip | FamilyQuant/MainWindow.xaml:29 | MenuItemLoadFQC.ToolTip = Step 2: opens a project (.fqproj) with its families and quantitation, or a Family Cluster File (.fcf) with families only. Save first if you have unsaved edits. | render:01-home | OPEN | pending |
 | FQ15-51C0A5780B58 | IMPROVE | control | FamilyQuant/MainWindow.xaml:30 | MenuItem MenuItemSaveProject | test:ShellMetadataReceipts | VERIFIED | evidence:SH-runtime:FQ15-51C0A5780B58 |
 | FQ15-CBF21E135197 | IMPROVE | option/copy | FamilyQuant/MainWindow.xaml:30 | MenuItemSaveProject.IsEnabled = False | test:LedgerDeclarationCommand | VERIFIED | evidence:SH-C13-tooltip:FQ15-CBF21E135197 |
-| FQ15-67E9A390B4D4 | IMPROVE | option/copy | FamilyQuant/MainWindow.xaml:30 | MenuItemSaveProject.Header = Save project (.fqproj) | render:01-home | OPEN | pending |
-| FQ15-D11D9392E890 | KEEP | handler | FamilyQuant/MainWindow.xaml:30 | MenuItemSaveProject.Click = MenuItemSaveProject_Click | render:01-home | OPEN | pending |
+| FQ15-67E9A390B4D4 | IMPROVE | option/copy | FamilyQuant/MainWindow.xaml:30 | MenuItemSaveProject.Header = Save project (.fqproj) | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-67E9A390B4D4 |
+| FQ15-D11D9392E890 | KEEP | handler | FamilyQuant/MainWindow.xaml:30 | MenuItemSaveProject.Click = MenuItemSaveProject_Click | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-D11D9392E890 |
 | FQ15-853CE1DB7A64 | IMPROVE | tooltip | FamilyQuant/MainWindow.xaml:31 | MenuItemSaveProject.ToolTip = Saves the families, your User IDs and annotations, and the computed quantitation to one .fqproj file. Save under a new name to keep the old version. Disabled until a project is loaded. | render:01-home | OPEN | pending |
 | FQ15-B593D6C75DAA | IMPROVE | control | FamilyQuant/MainWindow.xaml:32 | MenuItem MenuItemSaveFCF | test:ShellMetadataReceipts | VERIFIED | evidence:SH-runtime:FQ15-B593D6C75DAA |
 | FQ15-08230753D2CC | IMPROVE | option/copy | FamilyQuant/MainWindow.xaml:32 | MenuItemSaveFCF.IsEnabled = False | test:LedgerDeclarationCommand | VERIFIED | evidence:SH-C13-tooltip:FQ15-08230753D2CC |
-| FQ15-34318E61C997 | IMPROVE | option/copy | FamilyQuant/MainWindow.xaml:32 | MenuItemSaveFCF.Header = Save Family Cluster File (.fcf) | render:01-home | OPEN | pending |
-| FQ15-CFD1302DD85B | KEEP | handler | FamilyQuant/MainWindow.xaml:32 | MenuItemSaveFCF.Click = MenuItemSaveFCF_Click | render:01-home | OPEN | pending |
+| FQ15-34318E61C997 | IMPROVE | option/copy | FamilyQuant/MainWindow.xaml:32 | MenuItemSaveFCF.Header = Save Family Cluster File (.fcf) | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-34318E61C997 |
+| FQ15-CFD1302DD85B | KEEP | handler | FamilyQuant/MainWindow.xaml:32 | MenuItemSaveFCF.Click = MenuItemSaveFCF_Click | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-CFD1302DD85B |
 | FQ15-06B2D227813F | IMPROVE | tooltip | FamilyQuant/MainWindow.xaml:33 | MenuItemSaveFCF.ToolTip = Saves the families, your User IDs and annotations to a .fcf file, without the quantitation (use Save project for that). Disabled until a Family Cluster File is loaded. | render:01-home | OPEN | pending |
 | FQ15-2C748FDB400F | IMPROVE | control | FamilyQuant/MainWindow.xaml:34 | MenuItem MenuItemComputeXic | test:ShellMetadataReceipts | VERIFIED | evidence:SH-runtime:FQ15-2C748FDB400F |
 | FQ15-902296155C18 | IMPROVE | option/copy | FamilyQuant/MainWindow.xaml:34 | MenuItemComputeXic.IsEnabled = False | test:LedgerDeclarationCommand | VERIFIED | evidence:SH-C13-tooltip:FQ15-902296155C18 |
-| FQ15-1BA879330EBB | IMPROVE | option/copy | FamilyQuant/MainWindow.xaml:34 | MenuItemComputeXic.Header = Compute / update full XIC | render:01-home | OPEN | pending |
-| FQ15-0CA40EFF5B28 | KEEP | handler | FamilyQuant/MainWindow.xaml:34 | MenuItemComputeXic.Click = MenuItemComputeXic_Click | render:01-home | OPEN | pending |
+| FQ15-1BA879330EBB | IMPROVE | option/copy | FamilyQuant/MainWindow.xaml:34 | MenuItemComputeXic.Header = Compute / update full XIC | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-1BA879330EBB |
+| FQ15-0CA40EFF5B28 | KEEP | handler | FamilyQuant/MainWindow.xaml:34 | MenuItemComputeXic.Click = MenuItemComputeXic_Click | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-0CA40EFF5B28 |
 | FQ15-EAFC1F85EBD6 | IMPROVE | tooltip | FamilyQuant/MainWindow.xaml:35 | MenuItemComputeXic.ToolTip = Step 3: measures every identified peptide and kept de novo precursor from the RAW files with the full isotope envelope. Save project afterwards to keep it. Disabled until a project is loaded. | render:01-home | OPEN | pending |
 | FQ15-C4624341BA1F | IMPROVE | control | FamilyQuant/MainWindow.xaml:36 | MenuItem MenuItemSpectrumComparison | test:ShellMetadataReceipts | VERIFIED | evidence:SH-runtime:FQ15-C4624341BA1F |
 | FQ15-CD4156A30F6C | IMPROVE | option/copy | FamilyQuant/MainWindow.xaml:36 | MenuItemSpectrumComparison.IsEnabled = False | test:LedgerDeclarationCommand | VERIFIED | evidence:SH-C13-tooltip:FQ15-CD4156A30F6C |
@@ -3962,16 +3962,16 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **3008**; OPEN r
 | FQ15-5DD50C3323AD | IMPROVE | tooltip | FamilyQuant/MainWindow.xaml:38 | MenuItemSpectrumComparison.ToolTip = Shows a read-only table comparing PEAKS, DeepNovo and PatternLab, one row per file, scan, charge and precursor m/z. It can be saved as CSV. Disabled until spectrum evidence is loaded. | render:01-home | OPEN | pending |
 | FQ15-82C0DC480D30 | IMPROVE | control | FamilyQuant/MainWindow.xaml:39 | MenuItem MenuItemReanotateSEPro | test:ShellMetadataReceipts | VERIFIED | evidence:SH-runtime:FQ15-82C0DC480D30 |
 | FQ15-5B5F37F3309E | IMPROVE | option/copy | FamilyQuant/MainWindow.xaml:39 | MenuItemReanotateSEPro.IsEnabled = False | test:LedgerDeclarationCommand | VERIFIED | evidence:SH-C13-tooltip:FQ15-5B5F37F3309E |
-| FQ15-C07C8EF91D69 | IMPROVE | option/copy | FamilyQuant/MainWindow.xaml:39 | MenuItemReanotateSEPro.Header = Reanotate Sepro | render:01-home | OPEN | pending |
-| FQ15-DD7878AEE818 | KEEP | handler | FamilyQuant/MainWindow.xaml:39 | MenuItemReanotateSEPro.Click = MenuItemReanotateSEPro_Click | render:01-home | OPEN | pending |
+| FQ15-C07C8EF91D69 | IMPROVE | option/copy | FamilyQuant/MainWindow.xaml:39 | MenuItemReanotateSEPro.Header = Reanotate Sepro | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-C07C8EF91D69 |
+| FQ15-DD7878AEE818 | KEEP | handler | FamilyQuant/MainWindow.xaml:39 | MenuItemReanotateSEPro.Click = MenuItemReanotateSEPro_Click | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-DD7878AEE818 |
 | FQ15-032559C20232 | IMPROVE | tooltip | FamilyQuant/MainWindow.xaml:40 | MenuItemReanotateSEPro.ToolTip = Writes your User ID family numbers into a SEPro .sepr2 file, saved as a new _regrouped.sepr2; the original is not changed. Disabled until a Family Cluster File is loaded. | render:01-home | OPEN | pending |
 | FQ15-9DC1E8217276 | IMPROVE | control | FamilyQuant/MainWindow.xaml:46 | MenuItem MenuItemDeNovo | test:ShellMetadataReceipts | VERIFIED | evidence:SH-runtime:FQ15-9DC1E8217276 |
-| FQ15-ED964B3D45AE | IMPROVE | option/copy | FamilyQuant/MainWindow.xaml:46 | MenuItemDeNovo.Header = De Novo evidence | render:01-home | OPEN | pending |
-| FQ15-185E1DC40B89 | KEEP | handler | FamilyQuant/MainWindow.xaml:46 | MenuItemDeNovo.Click = MenuItemDeNovo_Click | render:01-home | OPEN | pending |
+| FQ15-ED964B3D45AE | IMPROVE | option/copy | FamilyQuant/MainWindow.xaml:46 | MenuItemDeNovo.Header = De Novo evidence | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-ED964B3D45AE |
+| FQ15-185E1DC40B89 | KEEP | handler | FamilyQuant/MainWindow.xaml:46 | MenuItemDeNovo.Click = MenuItemDeNovo_Click | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-185E1DC40B89 |
 | FQ15-743E1845215D | IMPROVE | tooltip | FamilyQuant/MainWindow.xaml:47 | MenuItemDeNovo.ToolTip = Opens the de novo review screen: import a PEAKS or DeepNovo export, filter it, and compare it with PatternLab by file, scan, charge and m/z. It changes no family or quantitation. | render:01-home | OPEN | pending |
 | FQ15-234428E9BC70 | IMPROVE | control | FamilyQuant/MainWindow.xaml:53 | MenuItem MenuItemAnalytics | test:ShellMetadataReceipts | VERIFIED | evidence:SH-runtime:FQ15-234428E9BC70 |
-| FQ15-D373CC8B2236 | IMPROVE | option/copy | FamilyQuant/MainWindow.xaml:53 | MenuItemAnalytics.Header = Analytics | render:01-home | OPEN | pending |
-| FQ15-A33C172644F1 | KEEP | handler | FamilyQuant/MainWindow.xaml:53 | MenuItemAnalytics.Click = MenuItemAnalytics_Click | render:01-home | OPEN | pending |
+| FQ15-D373CC8B2236 | IMPROVE | option/copy | FamilyQuant/MainWindow.xaml:53 | MenuItemAnalytics.Header = Analytics | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-D373CC8B2236 |
+| FQ15-A33C172644F1 | KEEP | handler | FamilyQuant/MainWindow.xaml:53 | MenuItemAnalytics.Click = MenuItemAnalytics_Click | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-A33C172644F1 |
 | FQ15-0E8F41C31827 | IMPROVE | tooltip | FamilyQuant/MainWindow.xaml:54 | MenuItemAnalytics.ToolTip = Step 4: graphs the project's full isotope-envelope quantitation, including each family's share and how much of the total ion current is recovered. Read only; run Compute / update full XIC first. | render:01-home | OPEN | pending |
 | FQ15-2B96D715268C | IMPROVE | control | FamilyQuant/MainWindow.xaml:56 | MenuItem MenuItemHelp | render:01-home | OPEN | pending |
 | FQ15-D6942502EDAD | IMPROVE | option/copy | FamilyQuant/MainWindow.xaml:56 | MenuItemHelp.Header = Help | test:LedgerDeclarationCommand | VERIFIED | evidence:SH-C13-tooltip:FQ15-D6942502EDAD |
@@ -4021,9 +4021,9 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **3008**; OPEN r
 | FQ15-473B38A966B6 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:270 | "Project: " | render:01-home | OPEN | pending |
 | FQ15-17B0D56754BF | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:270 | " (" | render:01-home | OPEN | pending |
 | FQ15-1DC368BC5392 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:270 | ")." | render:01-home | OPEN | pending |
-| FQ15-84741041780F | KEEP | format/export | FamilyQuant/MainWindow.xaml.cs:277 | "FamilyQuant project or Family Cluster File (*.fqproj;*.fcf)&#124;*.fqproj;*.fcf&#124;" | render:01-home | OPEN | pending |
-| FQ15-015C529AFCCA | KEEP | format/export | FamilyQuant/MainWindow.xaml.cs:278 | "FamilyQuant project (*.fqproj)&#124;*.fqproj&#124;" | render:01-home | OPEN | pending |
-| FQ15-098012E95BE9 | KEEP | format/export | FamilyQuant/MainWindow.xaml.cs:279 | "FamilyClusterFile (*.fcf)&#124;*.fcf" | render:01-home | OPEN | pending |
+| FQ15-84741041780F | KEEP | format/export | FamilyQuant/MainWindow.xaml.cs:277 | "FamilyQuant project or Family Cluster File (*.fqproj;*.fcf)&#124;*.fqproj;*.fcf&#124;" | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-84741041780F |
+| FQ15-015C529AFCCA | KEEP | format/export | FamilyQuant/MainWindow.xaml.cs:278 | "FamilyQuant project (*.fqproj)&#124;*.fqproj&#124;" | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-015C529AFCCA |
+| FQ15-098012E95BE9 | KEEP | format/export | FamilyQuant/MainWindow.xaml.cs:279 | "FamilyClusterFile (*.fcf)&#124;*.fcf" | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-098012E95BE9 |
 | FQ15-162BB1A4F4F8 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:280 | "Choose the project or Family Cluster File to work on" | render:01-home | OPEN | pending |
 | FQ15-E2620B485929 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:297 | "MyClusterGenerationControl" | render:01-home | OPEN | pending |
 | FQ15-F37BABACE038 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:303 | "MyClusterGenerationControl" | render:01-home | OPEN | pending |
@@ -4033,53 +4033,53 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **3008**; OPEN r
 | FQ15-D913CA4A8571 | KEEP | format/export | FamilyQuant/MainWindow.xaml.cs:338 | "Next step: check that this really is a .fqproj or a .fcf written by FamilyQuant and " | render:01-home | OPEN | pending |
 | FQ15-1BB85E29A291 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:339 | "that it is not open in another program. If it was interrupted while being saved it " | render:01-home | OPEN | pending |
 | FQ15-C74B5049B6EB | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:340 | "will have to be generated again from the database with \"Run USearch\"." | render:01-home | OPEN | pending |
-| FQ15-29290A1DEF52 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:341 | "Could not open the file" | render:01-home | OPEN | pending |
+| FQ15-29290A1DEF52 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:341 | "Could not open the file" | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-29290A1DEF52 |
 | FQ15-A9136DA0DDEC | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:456 | "Nothing was saved: there are no families on screen to save.\n\n" | render:01-home | OPEN | pending |
 | FQ15-6CA9DCF5DEAA | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:457 | "Next step: open a Family Cluster File with File \u00B7 Load Family Cluster File, or build " | render:01-home | OPEN | pending |
 | FQ15-2074AE04D745 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:458 | "one from a database with Run USearch." | render:01-home | OPEN | pending |
 | FQ15-E1E6DB0BA001 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:459 | "Nothing to save" | render:01-home | OPEN | pending |
-| FQ15-891E975B730E | KEEP | format/export | FamilyQuant/MainWindow.xaml.cs:465 | "FamilyClusterFile (*.fcf)&#124;*.fcf" | render:01-home | OPEN | pending |
-| FQ15-896FD56FF1F3 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:466 | "Save the current families as a Family Cluster File" | render:01-home | OPEN | pending |
-| FQ15-29EB32BD76B6 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:476 | "The families were saved to\n" | render:01-home | OPEN | pending |
-| FQ15-8D6A1F9ED763 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:476 | "\n\n" | render:01-home | OPEN | pending |
-| FQ15-91DF62AD5796 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:477 | "The file holds the grouping, your User IDs and your annotations. It does not hold the " | render:01-home | OPEN | pending |
-| FQ15-1DA6DACF8438 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:478 | "quantitation: reopening it restores the families, and the percentages come back when " | render:01-home | OPEN | pending |
-| FQ15-63177F1FB3F4 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:479 | "you load a PatternLab project again.\n\n" | render:01-home | OPEN | pending |
-| FQ15-4EF7F04BBFA8 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:480 | "Next step: nothing. Carry on working, or open this file later to return to exactly " | render:01-home | OPEN | pending |
-| FQ15-5165C52E6F76 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:481 | "this grouping." | render:01-home | OPEN | pending |
-| FQ15-003CB3619980 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:482 | "Saved" | render:01-home | OPEN | pending |
-| FQ15-823926A0CCF5 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:487 | "The file could not be written, so nothing was saved.\n\n" | render:01-home | OPEN | pending |
-| FQ15-92991B8F6A93 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:488 | "Reason given by the program: " | render:01-home | OPEN | pending |
-| FQ15-749394F72DDE | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:488 | "\n\n" | render:01-home | OPEN | pending |
-| FQ15-BE8A76C73E91 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:489 | "Next step: check that the file is not open in another program and that you can write " | render:01-home | OPEN | pending |
-| FQ15-822AB951DC48 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:490 | "to that folder, then save again." | render:01-home | OPEN | pending |
-| FQ15-9F5CB9B18BB0 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:491 | "Could not save" | render:01-home | OPEN | pending |
+| FQ15-891E975B730E | KEEP | format/export | FamilyQuant/MainWindow.xaml.cs:465 | "FamilyClusterFile (*.fcf)&#124;*.fcf" | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-891E975B730E |
+| FQ15-896FD56FF1F3 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:466 | "Save the current families as a Family Cluster File" | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-896FD56FF1F3 |
+| FQ15-29EB32BD76B6 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:476 | "The families were saved to\n" | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-29EB32BD76B6 |
+| FQ15-8D6A1F9ED763 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:476 | "\n\n" | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-8D6A1F9ED763 |
+| FQ15-91DF62AD5796 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:477 | "The file holds the grouping, your User IDs and your annotations. It does not hold the " | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-91DF62AD5796 |
+| FQ15-1DA6DACF8438 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:478 | "quantitation: reopening it restores the families, and the percentages come back when " | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-1DA6DACF8438 |
+| FQ15-63177F1FB3F4 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:479 | "you load a PatternLab project again.\n\n" | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-63177F1FB3F4 |
+| FQ15-4EF7F04BBFA8 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:480 | "Next step: nothing. Carry on working, or open this file later to return to exactly " | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-4EF7F04BBFA8 |
+| FQ15-5165C52E6F76 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:481 | "this grouping." | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-5165C52E6F76 |
+| FQ15-003CB3619980 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:482 | "Saved" | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-003CB3619980 |
+| FQ15-823926A0CCF5 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:487 | "The file could not be written, so nothing was saved.\n\n" | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-823926A0CCF5 |
+| FQ15-92991B8F6A93 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:488 | "Reason given by the program: " | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-92991B8F6A93 |
+| FQ15-749394F72DDE | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:488 | "\n\n" | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-749394F72DDE |
+| FQ15-BE8A76C73E91 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:489 | "Next step: check that the file is not open in another program and that you can write " | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-BE8A76C73E91 |
+| FQ15-822AB951DC48 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:490 | "to that folder, then save again." | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-822AB951DC48 |
+| FQ15-9F5CB9B18BB0 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:491 | "Could not save" | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-9F5CB9B18BB0 |
 | FQ15-213FD342609B | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:508 | "Nothing was saved: there is no project on screen to save.\n\n" | render:01-home | OPEN | pending |
 | FQ15-EFD2DF3A7FF3 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:509 | "Next step: open a project or a Family Cluster File with File \u00B7 Load, or build one " | render:01-home | OPEN | pending |
 | FQ15-2CDDE5EC105D | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:510 | "from a database with Run USearch." | render:01-home | OPEN | pending |
 | FQ15-FDBF9F028EB2 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:511 | "Nothing to save" | render:01-home | OPEN | pending |
-| FQ15-9085ACC92A5A | KEEP | format/export | FamilyQuant/MainWindow.xaml.cs:517 | "FamilyQuant project (*.fqproj)&#124;*.fqproj" | render:01-home | OPEN | pending |
+| FQ15-9085ACC92A5A | KEEP | format/export | FamilyQuant/MainWindow.xaml.cs:517 | "FamilyQuant project (*.fqproj)&#124;*.fqproj" | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-9085ACC92A5A |
 | FQ15-A5803E29B75B | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:518 | "Save the project as a FamilyQuant project" | render:01-home | OPEN | pending |
-| FQ15-71A448372328 | KEEP | format/export | FamilyQuant/MainWindow.xaml.cs:519 | ".fqproj" | render:01-home | OPEN | pending |
+| FQ15-71A448372328 | KEEP | format/export | FamilyQuant/MainWindow.xaml.cs:519 | ".fqproj" | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-71A448372328 |
 | FQ15-C42FB2273C1C | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:558 | "Nothing was saved: the open project changed (another one was opened, or its quantitation " | render:01-home | OPEN | pending |
 | FQ15-9A9A4198C024 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:559 | "was recomputed) while the save was waiting for the family attribution to finish.\n\n" | render:01-home | OPEN | pending |
 | FQ15-BE500CA08363 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:560 | "Next step: save again." | render:01-home | OPEN | pending |
 | FQ15-D834B0398136 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:561 | "Nothing saved" | render:01-home | OPEN | pending |
-| FQ15-BD8FCDF44947 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:569 | "The project was saved to\n" | render:01-home | OPEN | pending |
-| FQ15-F17372AEAD0F | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:569 | "\n\n" | render:01-home | OPEN | pending |
-| FQ15-5E69DF58FFFE | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:570 | "The container holds the grouping, your User IDs and annotations, and " | render:01-home | OPEN | pending |
+| FQ15-BD8FCDF44947 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:569 | "The project was saved to\n" | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-BD8FCDF44947 |
+| FQ15-F17372AEAD0F | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:569 | "\n\n" | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-F17372AEAD0F |
+| FQ15-5E69DF58FFFE | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:570 | "The container holds the grouping, your User IDs and annotations, and " | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-5E69DF58FFFE |
 | FQ15-A0A334D576C6 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:571 | "N0" | render:01-home | OPEN | pending |
-| FQ15-433A5AAC1117 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:572 | " stored quant row(s). Reopening it restores both.\n\n" | render:01-home | OPEN | pending |
+| FQ15-433A5AAC1117 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:572 | " stored quant row(s). Reopening it restores both.\n\n" | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-433A5AAC1117 |
 | FQ15-7A26DBC0417D | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:573 | "\n\n" | render:01-home | OPEN | pending |
-| FQ15-1680DF391053 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:574 | "Next step: nothing. Carry on working, or open this file later to return to exactly " | render:01-home | OPEN | pending |
-| FQ15-5A8060C351E2 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:575 | "this project." | render:01-home | OPEN | pending |
+| FQ15-1680DF391053 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:574 | "Next step: nothing. Carry on working, or open this file later to return to exactly " | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-1680DF391053 |
+| FQ15-5A8060C351E2 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:575 | "this project." | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-5A8060C351E2 |
 | FQ15-117A1F9A31C3 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:576 | "Saved" | render:01-home | OPEN | pending |
-| FQ15-1EC0FFA1496F | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:581 | "The project could not be written, so nothing was saved.\n\n" | render:01-home | OPEN | pending |
-| FQ15-D41E82F7EE50 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:582 | "Reason given by the program: " | render:01-home | OPEN | pending |
-| FQ15-D5987DF13F28 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:582 | "\n\n" | render:01-home | OPEN | pending |
-| FQ15-69AA92E0C13D | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:583 | "Next step: check that the file is not open in another program and that you can write " | render:01-home | OPEN | pending |
-| FQ15-490DB1A37514 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:584 | "to that folder, then save again." | render:01-home | OPEN | pending |
-| FQ15-7206BF98F2B5 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:585 | "Could not save" | render:01-home | OPEN | pending |
+| FQ15-1EC0FFA1496F | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:581 | "The project could not be written, so nothing was saved.\n\n" | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-1EC0FFA1496F |
+| FQ15-D41E82F7EE50 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:582 | "Reason given by the program: " | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-D41E82F7EE50 |
+| FQ15-D5987DF13F28 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:582 | "\n\n" | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-D5987DF13F28 |
+| FQ15-69AA92E0C13D | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:583 | "Next step: check that the file is not open in another program and that you can write " | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-69AA92E0C13D |
+| FQ15-490DB1A37514 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:584 | "to that folder, then save again." | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-490DB1A37514 |
+| FQ15-7206BF98F2B5 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:585 | "Could not save" | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-7206BF98F2B5 |
 | FQ15-735FF4F51778 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:603 | "There is no project on screen to compute quantitation for.\n\n" | render:01-home | OPEN | pending |
 | FQ15-6522B89F7A90 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:604 | "Next step: open a project or a Family Cluster File with File \u00B7 Load first." | render:01-home | OPEN | pending |
 | FQ15-128CDF2967A3 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:605 | "Load a project first" | render:01-home | OPEN | pending |
@@ -4106,8 +4106,8 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **3008**; OPEN r
 | FQ15-AE43B9EBD55B | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:765 | "package.\n\n" | render:01-home | OPEN | pending |
 | FQ15-BFB67A34EF78 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:766 | "Next step: open a Family Cluster File with File \u00B7 Load Family Cluster File first." | render:01-home | OPEN | pending |
 | FQ15-C9E4A3901552 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:767 | "Load the families first" | render:01-home | OPEN | pending |
-| FQ15-6379736D2F52 | KEEP | format/export | FamilyQuant/MainWindow.xaml.cs:773 | "SEPro 2.0 (*.sepr2)&#124;*.sepr2" | render:01-home | OPEN | pending |
-| FQ15-D9B5F67123FE | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:774 | "Choose a TRUSTED SEPro result package (legacy unsafe deserialization)" | render:01-home | OPEN | pending |
+| FQ15-6379736D2F52 | KEEP | format/export | FamilyQuant/MainWindow.xaml.cs:773 | "SEPro 2.0 (*.sepr2)&#124;*.sepr2" | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-6379736D2F52 |
+| FQ15-D9B5F67123FE | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:774 | "Choose a TRUSTED SEPro result package (legacy unsafe deserialization)" | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-D9B5F67123FE |
 | FQ15-A079DE8A62D5 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:782 | "SEPro Package loaded" | render:01-home | OPEN | pending |
 | FQ15-BF47EB479788 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:801 | "Nothing was written: " | render:01-home | OPEN | pending |
 | FQ15-C1F09243B19C | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:801 | "N0" | render:01-home | OPEN | pending |
@@ -4186,14 +4186,14 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **3008**; OPEN r
 | FQ15-9DB506F5F17D | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:926 | "   attribution and ion-current partitioning for work without a saved project.\n" | render:01-home | OPEN | pending |
 | FQ15-3A2440863772 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:927 | "   That screen has a Help button of its own, and while it is open Help \u00B7 How to read\n" | render:01-home | OPEN | pending |
 | FQ15-E600191604B2 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:928 | "   these numbers shows its page instead of this one.\n" | render:01-home | OPEN | pending |
-| FQ15-8952FD454F0F | KEEP | handler definition | FamilyQuant/MainWindow.xaml.cs:137 | private void MenuItemHome_Click(object sender, RoutedEventArgs e) | render:01-home | OPEN | pending |
-| FQ15-77AB63820143 | KEEP | handler definition | FamilyQuant/MainWindow.xaml.cs:273 | private void MenuItemCluster_Click(object sender, RoutedEventArgs e) | render:01-home | OPEN | pending |
-| FQ15-3997625A78A4 | KEEP | handler definition | FamilyQuant/MainWindow.xaml.cs:345 | private void MenuRunUSearch_Click(object sender, RoutedEventArgs e) | render:01-home | OPEN | pending |
-| FQ15-84F3ED74E32D | KEEP | handler definition | FamilyQuant/MainWindow.xaml.cs:378 | private void MenuItemDeNovo_Click(object sender, RoutedEventArgs e) | render:01-home | OPEN | pending |
-| FQ15-37054BF5BA1E | KEEP | handler definition | FamilyQuant/MainWindow.xaml.cs:407 | private async void MenuItemAnalytics_Click(object sender, RoutedEventArgs e) | render:01-home | OPEN | pending |
-| FQ15-BEE9CF7ACF93 | KEEP | handler definition | FamilyQuant/MainWindow.xaml.cs:449 | private void MenuItemSaveFCF_Click(object sender, RoutedEventArgs e) | render:01-home | OPEN | pending |
-| FQ15-7526DED77FA2 | KEEP | handler definition | FamilyQuant/MainWindow.xaml.cs:501 | private async void MenuItemSaveProject_Click(object sender, RoutedEventArgs e) | render:01-home | OPEN | pending |
-| FQ15-0AD0CE6F978B | KEEP | handler definition | FamilyQuant/MainWindow.xaml.cs:598 | private void MenuItemComputeXic_Click(object sender, RoutedEventArgs e) | render:01-home | OPEN | pending |
+| FQ15-8952FD454F0F | KEEP | handler definition | FamilyQuant/MainWindow.xaml.cs:137 | private void MenuItemHome_Click(object sender, RoutedEventArgs e) | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-8952FD454F0F |
+| FQ15-77AB63820143 | KEEP | handler definition | FamilyQuant/MainWindow.xaml.cs:273 | private void MenuItemCluster_Click(object sender, RoutedEventArgs e) | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-77AB63820143 |
+| FQ15-3997625A78A4 | KEEP | handler definition | FamilyQuant/MainWindow.xaml.cs:345 | private void MenuRunUSearch_Click(object sender, RoutedEventArgs e) | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-3997625A78A4 |
+| FQ15-84F3ED74E32D | KEEP | handler definition | FamilyQuant/MainWindow.xaml.cs:378 | private void MenuItemDeNovo_Click(object sender, RoutedEventArgs e) | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-84F3ED74E32D |
+| FQ15-37054BF5BA1E | KEEP | handler definition | FamilyQuant/MainWindow.xaml.cs:407 | private async void MenuItemAnalytics_Click(object sender, RoutedEventArgs e) | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-37054BF5BA1E |
+| FQ15-BEE9CF7ACF93 | KEEP | handler definition | FamilyQuant/MainWindow.xaml.cs:449 | private void MenuItemSaveFCF_Click(object sender, RoutedEventArgs e) | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-BEE9CF7ACF93 |
+| FQ15-7526DED77FA2 | KEEP | handler definition | FamilyQuant/MainWindow.xaml.cs:501 | private async void MenuItemSaveProject_Click(object sender, RoutedEventArgs e) | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-7526DED77FA2 |
+| FQ15-0AD0CE6F978B | KEEP | handler definition | FamilyQuant/MainWindow.xaml.cs:598 | private void MenuItemComputeXic_Click(object sender, RoutedEventArgs e) | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-0AD0CE6F978B |
 | FQ15-65700BDA90F3 | KEEP | handler definition | FamilyQuant/MainWindow.xaml.cs:713 | private async void MenuItemSpectrumComparison_Click(object sender, RoutedEventArgs e) | render:01-home | OPEN | pending |
 | FQ15-A79FAB873090 | KEEP | handler definition | FamilyQuant/MainWindow.xaml.cs:759 | private void MenuItemReanotateSEPro_Click(object sender, RoutedEventArgs e) | render:01-home | OPEN | pending |
 | FQ15-C4526422A15C | KEEP | handler definition | FamilyQuant/MainWindow.xaml.cs:841 | private void MenuItemHowToRead_Click(object sender, RoutedEventArgs e) | render:01-home | OPEN | pending |

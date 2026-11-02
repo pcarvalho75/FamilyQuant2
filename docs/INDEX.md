@@ -148,6 +148,7 @@ Invoke each flag with `& $testExe <flag>` after building. Dispatch and arity are
 | `--test-ledger-evidence` | Adversarial receipt, source/artifact hash, assertion and render checks |
 | `--test-ledger-declarations` | Exact named-XAML and C# member comparison checks |
 | `--test-shell-metadata` | Compiled shell-metadata and isolated Home-event comparison guards; included in the ordinary ledger guard |
+| `--test-shell-message-frames [--negative-control]` | Exact frozen handler/message/dialog frames, contributing literals and complete file-filter groups; optional planted wrong-path binding |
 
 ## Screens and UI metadata
 
@@ -205,6 +206,7 @@ Companion options for `--screens` are `--screen-fcf <input.fcf>`, `--screen-proj
 | `--ledger-xic-runtime <frozen-root> <fresh-output> <date> <stored-project> <validated-cache> [--negative-control]` | Native XIC refusal/source/completion facts plus bounded validated cache replay; [runtime guide](CORE-RUNTIME-LEDGER.md) |
 | `--shell-metadata-snapshot <frozen-root> <inventory> <fresh-output.json>` | Same native metadata helper in current and frozen hosts; assigned views remain unshown |
 | `--ledger-shell-native <frozen-root> <frozen-host.exe> <fresh-output> <date> [C1-cohort-register]` | Execute compiled SH/C1 metadata and isolated Home clicks; own candidate registers and complete comparison gaps |
+| `--prove-shell-main <frozen-root> <fresh-output> <date>` | Native MainWindow routes, synthetic file writes/refusals and captured dialog/report frames; own SH-main-routes candidate register |
 | `--word-grouping-snapshot <input.fcf-or-fqproj> <output.txt>` | [WordGroupingSnapshot.cs](../FamilyQuant.Tests/WordGroupingSnapshot.cs), also linked into frozen host |
 | `--chart-export-snapshot <output-dir>` | [ChartExportSnapshot.cs](../FamilyQuant.Tests/ChartExportSnapshot.cs), synthetic chart parity fixtures |
 | `--clustering-snapshot <input.fasta> <output.tsv> <integer-identity> <fast-or-exhaustive>` | [ClusteringSnapshot.cs](../FamilyQuant.Tests/ClusteringSnapshot.cs) |
