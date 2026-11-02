@@ -211,9 +211,9 @@ Companion options for `--screens` are `--screen-fcf <input.fcf>`, `--screen-proj
 | `--ledger-assay-cohort <frozen-root> <selection.json> <output> <step> <date>` | Scoped shared declaration comparisons; [receipt scope](ASSAY-LEDGER.md) |
 | `--ledger-assay-cache <frozen-root> <output> <date> [--negative-control]` | Frozen/current native cache wire and staging checks; frozen host build required |
 | `--assay-cache-snapshot <output>` | Shared synthetic native cache fixture; fresh output required |
-| `--test-assay-spectrum-properties`, `--test-assay-build-workflow` | Frozen column/property anchors and native Build handler receipt guards |
-| `--assay-view-snapshot spectrum/build <output>`, `--assay-build-output-snapshot <output>` | Native view properties and shared clustering/redundancy fixture outputs; fresh output |
-| `--ledger-assay-spectrum-properties <frozen-root> <output> <date> [--negative-control]`, `--ledger-assay-build-workflow` (same arguments) | Constructed column properties and native [Build workflow](N6H-USEARCH.md) against frozen reference |
+| `--test-assay-spectrum-properties`, `--test-assay-build-workflow`, `--test-assay-figure-gaps` | Frozen property, handler and native producer receipt guards |
+| `--assay-view-snapshot spectrum/build <output>`, `--assay-build-output-snapshot <output>`, `--assay-figure-gap-snapshot <output>` | Native view, clustering/redundancy and synthetic figure fixtures; fresh output |
+| `--ledger-assay-spectrum-properties <frozen-root> <output> <date> [--negative-control]`, `--ledger-assay-build-workflow`, `--ledger-assay-figure-gaps` (same arguments) | Native columns, [Build workflow](N6H-USEARCH.md) and [producer gaps](N6J-PRODUCERS.md) against frozen reference |
 | `--ledger-core-relocation <frozen-root> <fresh-output> X5/X7 <date> [member-mappings.json]` | Scoped complete Core member comparisons, exact frozen hashes, retained source/checker snapshots and per-row gaps; [guide](CORE-RELOCATION-LEDGER.md) |
 | `--ledger-shell-compare <frozen-root> <fresh-output> <date>` | SH and C1 exact declarations/member tokens; separate candidate registers, unproven rows kept OPEN |
 | `--ledger-storage-runtime <frozen-root> <fresh-output> <date> [--negative-control]` | Public project reader/writer schema, codec and refusal observations; [runtime guide](CORE-RUNTIME-LEDGER.md) |

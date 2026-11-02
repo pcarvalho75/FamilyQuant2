@@ -7,6 +7,13 @@ internal static partial class Program
     [TestCommandTable]
     private static IEnumerable<TestCommand> AssayLedgerCommandTable() =>
     [
+        new("--ledger-assay-figure-gaps", 10000, TestCommandPhase.Raw,
+            args => args.Length > 0 && args[0] == "--ledger-assay-figure-gaps", (args, _) => AssayFigureGapsLedgerCommand(args)),
+        new(AssayFigureGapSnapshot.Argument, 10000, TestCommandPhase.Raw,
+            args => args.Length > 0 && args[0] == AssayFigureGapSnapshot.Argument, (args, _) => AssayFigureGapSnapshot.Run(args)),
+        new("--test-assay-figure-gaps", 10000, TestCommandPhase.Raw,
+            args => args.Length > 0 && args[0] == "--test-assay-figure-gaps", (args, _) =>
+            { AssayFigureGapGuardTests(); System.Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped ====="); return failed == 0 ? 0 : 1; }),
         new("--ledger-assay-build-workflow", 10000, TestCommandPhase.Raw,
             args => args.Length > 0 && args[0] == "--ledger-assay-build-workflow", (args, _) => AssayBuildWorkflowLedgerCommand(args)),
         new("--test-assay-build-workflow", 10000, TestCommandPhase.Raw,
