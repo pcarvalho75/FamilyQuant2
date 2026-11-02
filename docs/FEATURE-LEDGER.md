@@ -17,7 +17,7 @@ Render targets refer to `ScreenHarness.Screens`, captured with `--screens <outpu
 Release gate: `FamilyQuant.Tests.exe --feature-ledger-release-check` fails until every retained row is VERIFIED with evidence. Authorized DROP rows use APPROVED_DROP, which records a decision, not a completed UI removal. The normal quick suite permits OPEN rows during development. Regeneration resets retained rows to OPEN; preserve reviewed evidence when updating the scanner.
 
 Scan count: **5756**. Ledger rows: **5756**. Source files: **104**.
-Authorized DROP rows: **296**; proposed VERIFIED retained rows: **441**; OPEN retained rows: **5019**.
+Authorized DROP rows: **296**; proposed VERIFIED retained rows: **570**; OPEN retained rows: **4890**.
 
 | ID | Disposition | Kind | Frozen source | Fact or control | Planned check | State | Evidence |
 |---|---|---|---|---|---|---|---|
@@ -1110,11 +1110,11 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **441**; OPEN re
 | FQ15-FC55DD924EC1 | IMPROVE | control | FamilyQuant/DeNovoControl.xaml:114 | ComboBoxItem ComboBoxItem | render:06-denovo-advanced | OPEN | pending |
 | FQ15-216A5572AAF7 | IMPROVE | option/copy | FamilyQuant/DeNovoControl.xaml:114 | ComboBoxItem.Content = DeepNovo (*.deepnovo.csv) | render:06-denovo-advanced | OPEN | pending |
 | FQ15-94580B062C26 | IMPROVE | option/copy | FamilyQuant/DeNovoControl.xaml:117 | TextBlockNativeConfidence.Text = Native confidence: PEAKS ALC (%) | render:06-denovo-advanced | OPEN | pending |
-| FQ15-30B6355FEB66 | IMPROVE | tooltip | FamilyQuant/DeNovoControl.xaml:118 | TextBlockNativeConfidence.ToolTip = The confidence score that is read and filtered. PEAKS ALC and DeepNovo SCORE are different scales and are not interchangeable. | render:06-denovo-advanced | OPEN | pending |
+| FQ15-30B6355FEB66 | IMPROVE | tooltip | FamilyQuant/DeNovoControl.xaml:118 | TextBlockNativeConfidence.ToolTip = The confidence score that is read and filtered. PEAKS ALC and DeepNovo SCORE are different scales and are not interchangeable. | test:LookCopyReceiptCommand | VERIFIED | evidence:LK-copy-1:FQ15-30B6355FEB66 |
 | FQ15-1502A64D128E | IMPROVE | option/copy | FamilyQuant/DeNovoControl.xaml:124 | Label.Content = Minimum length: | render:06-denovo-advanced | OPEN | pending |
 | FQ15-6FBB092019A5 | IMPROVE | tooltip | FamilyQuant/DeNovoControl.xaml:125 | Label.ToolTip = Shortest de novo sequence kept, in residues. Short sequences match proteins by chance, so lower it only with a reason. Default 7. | render:06-denovo-advanced | OPEN | pending |
 | FQ15-16711CF0F4C9 | IMPROVE | control | FamilyQuant/DeNovoControl.xaml:126 | TextBox TextBoxMinLength | render:06-denovo-advanced | OPEN | pending |
-| FQ15-0EE063D7800F | IMPROVE | tooltip | FamilyQuant/DeNovoControl.xaml:128 | TextBoxMinLength.ToolTip = A whole number from 1 to 100. A value out of range is refused when you press Load and filter, and the previous value stays. | render:06-denovo-advanced | OPEN | pending |
+| FQ15-0EE063D7800F | IMPROVE | tooltip | FamilyQuant/DeNovoControl.xaml:128 | TextBoxMinLength.ToolTip = A whole number from 1 to 100. A value out of range is refused when you press Load and filter, and the previous value stays. | test:LookCopyReceiptCommand | VERIFIED | evidence:LK-copy-1:FQ15-0EE063D7800F |
 | FQ15-DE567F4F9532 | IMPROVE | option/copy | FamilyQuant/DeNovoControl.xaml:130 | LabelMinimumSourceConfidence.Content = Minimum ALC (%): | render:06-denovo-advanced | OPEN | pending |
 | FQ15-18FEE4C4A624 | IMPROVE | tooltip | FamilyQuant/DeNovoControl.xaml:131 | LabelMinimumSourceConfidence.ToolTip = Lowest overall confidence kept (PEAKS ALC or DeepNovo SCORE). The two scales are not equivalent, and neither is a calibrated FDR. Default 80%. | render:06-denovo-advanced | OPEN | pending |
 | FQ15-F1830EF21057 | IMPROVE | control | FamilyQuant/DeNovoControl.xaml:132 | TextBox TextBoxMinAlc | render:06-denovo-advanced | OPEN | pending |
@@ -1122,7 +1122,7 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **441**; OPEN re
 | FQ15-603C70DEE702 | IMPROVE | option/copy | FamilyQuant/DeNovoControl.xaml:136 | Label.Content = Stretch length: | render:06-denovo-advanced | OPEN | pending |
 | FQ15-B6130CA6FD27 | IMPROVE | tooltip | FamilyQuant/DeNovoControl.xaml:137 | Label.ToolTip = How many consecutive residues must each reach the stretch floor. This keeps a sequence with one clearly read region and drops a uniformly mediocre one. Default 5. | render:06-denovo-advanced | OPEN | pending |
 | FQ15-E68793B5F031 | IMPROVE | control | FamilyQuant/DeNovoControl.xaml:138 | TextBox TextBoxStretchLength | render:06-denovo-advanced | OPEN | pending |
-| FQ15-0727E7F538A0 | IMPROVE | tooltip | FamilyQuant/DeNovoControl.xaml:140 | TextBoxStretchLength.ToolTip = A whole number from 1 to 100; a longer stretch is stricter. A value out of range is refused when you press Load and filter. | render:06-denovo-advanced | OPEN | pending |
+| FQ15-0727E7F538A0 | IMPROVE | tooltip | FamilyQuant/DeNovoControl.xaml:140 | TextBoxStretchLength.ToolTip = A whole number from 1 to 100; a longer stretch is stricter. A value out of range is refused when you press Load and filter. | test:LookCopyReceiptCommand | VERIFIED | evidence:LK-copy-1:FQ15-0727E7F538A0 |
 | FQ15-8327789B8931 | IMPROVE | option/copy | FamilyQuant/DeNovoControl.xaml:142 | Label.Content = Stretch floor (%): | render:06-denovo-advanced | OPEN | pending |
 | FQ15-42A98C0170F8 | IMPROVE | tooltip | FamilyQuant/DeNovoControl.xaml:143 | Label.ToolTip = The confidence every residue in the stretch must reach; a lower residue breaks the run. Keep it high. Default 90%. | render:06-denovo-advanced | OPEN | pending |
 | FQ15-0A85C2BD775E | IMPROVE | control | FamilyQuant/DeNovoControl.xaml:144 | TextBox TextBoxStretchFloor | render:06-denovo-advanced | OPEN | pending |
@@ -1130,9 +1130,9 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **441**; OPEN re
 | FQ15-506F32502C21 | IMPROVE | control | FamilyQuant/DeNovoControl.xaml:148 | Button ButtonLoadAndFilter | render:06-denovo-advanced | OPEN | pending |
 | FQ15-ECDFCF5DC9AC | IMPROVE | option/copy | FamilyQuant/DeNovoControl.xaml:148 | ButtonLoadAndFilter.Content = Load and filter | render:06-denovo-advanced | OPEN | pending |
 | FQ15-262AE3B154CA | KEEP | handler | FamilyQuant/DeNovoControl.xaml:149 | ButtonLoadAndFilter.Click = ButtonLoadAndFilter_Click | render:06-denovo-advanced | OPEN | pending |
-| FQ15-0909914D6EE8 | IMPROVE | tooltip | FamilyQuant/DeNovoControl.xaml:150 | ButtonLoadAndFilter.ToolTip = Reads every export file of the chosen source in the folder and keeps the rows that pass the length, confidence and stretch filters. | render:06-denovo-advanced | OPEN | pending |
+| FQ15-0909914D6EE8 | IMPROVE | tooltip | FamilyQuant/DeNovoControl.xaml:150 | ButtonLoadAndFilter.ToolTip = Reads every export file of the chosen source in the folder and keeps the rows that pass the length, confidence and stretch filters. | test:LookCopyReceiptCommand | VERIFIED | evidence:LK-copy-1:FQ15-0909914D6EE8 |
 | FQ15-626FD323347B | IMPROVE | option/copy | FamilyQuant/DeNovoControl.xaml:155 | LabelFilesFound.Content = Files found: 0 | render:06-denovo-advanced | OPEN | pending |
-| FQ15-28F91A2BB058 | IMPROVE | tooltip | FamilyQuant/DeNovoControl.xaml:156 | LabelFilesFound.ToolTip = Export files of the chosen source found in the folder and its sub-folders. Zero means the wrong folder or the wrong source. | render:06-denovo-advanced | OPEN | pending |
+| FQ15-28F91A2BB058 | IMPROVE | tooltip | FamilyQuant/DeNovoControl.xaml:156 | LabelFilesFound.ToolTip = Export files of the chosen source found in the folder and its sub-folders. Zero means the wrong folder or the wrong source. | test:LookCopyReceiptCommand | VERIFIED | evidence:LK-copy-1:FQ15-28F91A2BB058 |
 | FQ15-BB3AD7A4162C | IMPROVE | option/copy | FamilyQuant/DeNovoControl.xaml:157 | LabelRowsRead.Content = Rows read: 0 | render:06-denovo-advanced | OPEN | pending |
 | FQ15-FDC9409D009C | IMPROVE | tooltip | FamilyQuant/DeNovoControl.xaml:158 | LabelRowsRead.ToolTip = De novo rows read from the files, before filtering. Truncated lines are skipped. | render:06-denovo-advanced | OPEN | pending |
 | FQ15-A6F47BABF943 | IMPROVE | option/copy | FamilyQuant/DeNovoControl.xaml:159 | LabelRowsKept.Content = Rows kept: 0 | render:06-denovo-advanced | OPEN | pending |
@@ -1148,7 +1148,7 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **441**; OPEN re
 | FQ15-DD230CC1D377 | IMPROVE | control | FamilyQuant/DeNovoControl.xaml:209 | Button ButtonBrowseSeproPackage | render:06-denovo-advanced | OPEN | pending |
 | FQ15-1C187D8E6472 | IMPROVE | option/copy | FamilyQuant/DeNovoControl.xaml:209 | ButtonBrowseSeproPackage.Content = Browse... | render:06-denovo-advanced | OPEN | pending |
 | FQ15-44CB1EE1D17F | KEEP | handler | FamilyQuant/DeNovoControl.xaml:210 | ButtonBrowseSeproPackage.Click = ButtonBrowseSeproPackage_Click | render:06-denovo-advanced | OPEN | pending |
-| FQ15-402A907D22A2 | IMPROVE | tooltip | FamilyQuant/DeNovoControl.xaml:211 | ButtonBrowseSeproPackage.ToolTip = Pick the .sepr2 file. Nothing is read until you press Reconcile. | render:06-denovo-advanced | OPEN | pending |
+| FQ15-402A907D22A2 | IMPROVE | tooltip | FamilyQuant/DeNovoControl.xaml:211 | ButtonBrowseSeproPackage.ToolTip = Pick the .sepr2 file. Nothing is read until you press Reconcile. | test:LookCopyReceiptCommand | VERIFIED | evidence:LK-copy-1:FQ15-402A907D22A2 |
 | FQ15-59FD7F62DA2D | IMPROVE | control | FamilyQuant/DeNovoControl.xaml:213 | Button ButtonReconcile | render:06-denovo-advanced | OPEN | pending |
 | FQ15-3FD302C9CB33 | IMPROVE | option/copy | FamilyQuant/DeNovoControl.xaml:213 | ButtonReconcile.Content = Reconcile | render:06-denovo-advanced | OPEN | pending |
 | FQ15-41E9B72D15A8 | KEEP | handler | FamilyQuant/DeNovoControl.xaml:214 | ButtonReconcile.Click = ButtonReconcile_Click | render:06-denovo-advanced | OPEN | pending |
@@ -1159,7 +1159,7 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **441**; OPEN re
 | FQ15-17189B23C9F5 | IMPROVE | option/copy | FamilyQuant/DeNovoControl.xaml:222 | LabelVerdictCoIsolated.Content = Different precursor context: - | render:06-denovo-advanced | OPEN | pending |
 | FQ15-5F51CDE49107 | IMPROVE | tooltip | FamilyQuant/DeNovoControl.xaml:223 | LabelVerdictCoIsolated.ToolTip = PatternLab identified this scan, but not at the same charge and precursor m/z (within 20 ppm). This may be co-isolation; it is not a sequence disagreement. | render:06-denovo-advanced | OPEN | pending |
 | FQ15-CFD51D3A11F5 | IMPROVE | option/copy | FamilyQuant/DeNovoControl.xaml:224 | LabelVerdictRedundant.Content = Redundant equal: - | render:06-denovo-advanced | OPEN | pending |
-| FQ15-270FCB1F50FE | IMPROVE | tooltip | FamilyQuant/DeNovoControl.xaml:225 | LabelVerdictRedundant.ToolTip = Same scan, precursor and sequence as a PatternLab identification, so it adds nothing new. None at all usually means the search is not of the same runs. | render:06-denovo-advanced | OPEN | pending |
+| FQ15-270FCB1F50FE | IMPROVE | tooltip | FamilyQuant/DeNovoControl.xaml:225 | LabelVerdictRedundant.ToolTip = Same scan, precursor and sequence as a PatternLab identification, so it adds nothing new. None at all usually means the search is not of the same runs. | test:LookCopyReceiptCommand | VERIFIED | evidence:LK-copy-1:FQ15-270FCB1F50FE |
 | FQ15-820F7316C891 | IMPROVE | option/copy | FamilyQuant/DeNovoControl.xaml:226 | LabelVerdictWeakPsm.Content = Equal but weak PSM: - | render:06-denovo-advanced | OPEN | pending |
 | FQ15-846D5F3404C7 | IMPROVE | tooltip | FamilyQuant/DeNovoControl.xaml:227 | LabelVerdictWeakPsm.ToolTip = Same sequence as PatternLab, but the PatternLab XCorr is below the threshold. Kept for review, not counted as new signal. | render:06-denovo-advanced | OPEN | pending |
 | FQ15-F879C291A000 | IMPROVE | option/copy | FamilyQuant/DeNovoControl.xaml:228 | LabelVerdictConflict.Content = Overlapping alternative sequence: - | render:06-denovo-advanced | OPEN | pending |
@@ -1167,13 +1167,13 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **441**; OPEN re
 | FQ15-BA682EC01C28 | IMPROVE | option/copy | FamilyQuant/DeNovoControl.xaml:234 | LabelReviewQueueCount.Content = Review queue: - | render:06-denovo-advanced | OPEN | pending |
 | FQ15-64CF95ED48B1 | IMPROVE | tooltip | FamilyQuant/DeNovoControl.xaml:235 | LabelReviewQueueCount.ToolTip = Rows kept for review: alternative sequences plus matches whose PatternLab XCorr is below the threshold. | render:06-denovo-advanced | OPEN | pending |
 | FQ15-C9FF927ED0F6 | IMPROVE | option/copy | FamilyQuant/DeNovoControl.xaml:237 | LabelOverlapScan.Content = Same file + scan: - | render:06-denovo-advanced | OPEN | pending |
-| FQ15-401240DA39D0 | IMPROVE | tooltip | FamilyQuant/DeNovoControl.xaml:238 | LabelOverlapScan.ToolTip = Spectra both programs reported in the same file and scan. This does not yet mean the same precursor, since one scan can hold several. | render:06-denovo-advanced | OPEN | pending |
+| FQ15-401240DA39D0 | IMPROVE | tooltip | FamilyQuant/DeNovoControl.xaml:238 | LabelOverlapScan.ToolTip = Spectra both programs reported in the same file and scan. This does not yet mean the same precursor, since one scan can hold several. | test:LookCopyReceiptCommand | VERIFIED | evidence:LK-copy-1:FQ15-401240DA39D0 |
 | FQ15-4AC8E8D08C23 | IMPROVE | option/copy | FamilyQuant/DeNovoControl.xaml:239 | LabelOverlapPrecursor.Content = Same precursor (20 ppm): - | render:06-denovo-advanced | OPEN | pending |
-| FQ15-50ECC10B42CE | IMPROVE | tooltip | FamilyQuant/DeNovoControl.xaml:240 | LabelOverlapPrecursor.ToolTip = Same file, scan and charge, with precursor m/z within 20 ppm. Sequences are compared only inside this group. | render:06-denovo-advanced | OPEN | pending |
+| FQ15-50ECC10B42CE | IMPROVE | tooltip | FamilyQuant/DeNovoControl.xaml:240 | LabelOverlapPrecursor.ToolTip = Same file, scan and charge, with precursor m/z within 20 ppm. Sequences are compared only inside this group. | test:LookCopyReceiptCommand | VERIFIED | evidence:LK-copy-1:FQ15-50ECC10B42CE |
 | FQ15-A404497C48FB | IMPROVE | option/copy | FamilyQuant/DeNovoControl.xaml:241 | LabelOverlapExact.Content = Same scan + charge, exact sequence: - | render:06-denovo-advanced | OPEN | pending |
 | FQ15-A0FE5CF345D7 | IMPROVE | tooltip | FamilyQuant/DeNovoControl.xaml:242 | LabelOverlapExact.ToolTip = Same file, scan and charge, and the same sequence as the best PatternLab match once modifications are removed. I and L count as different here. | render:06-denovo-advanced | OPEN | pending |
 | FQ15-02D50AED453D | IMPROVE | option/copy | FamilyQuant/DeNovoControl.xaml:243 | LabelOverlapDivergent.Content = Same scan + charge, alternative sequence: - | render:06-denovo-advanced | OPEN | pending |
-| FQ15-33CC4C6EE110 | IMPROVE | tooltip | FamilyQuant/DeNovoControl.xaml:244 | LabelOverlapDivergent.ToolTip = Same file, scan and charge, but a different sequence once modifications are removed. The stricter m/z-matched count is shown separately. | render:06-denovo-advanced | OPEN | pending |
+| FQ15-33CC4C6EE110 | IMPROVE | tooltip | FamilyQuant/DeNovoControl.xaml:244 | LabelOverlapDivergent.ToolTip = Same file, scan and charge, but a different sequence once modifications are removed. The stricter m/z-matched count is shown separately. | test:LookCopyReceiptCommand | VERIFIED | evidence:LK-copy-1:FQ15-33CC4C6EE110 |
 | FQ15-14FBFA82D87C | IMPROVE | control | FamilyQuant/DeNovoControl.xaml:246 | Button ButtonExportSummary | render:06-denovo-advanced | OPEN | pending |
 | FQ15-C453B3B0DEF5 | IMPROVE | option/copy | FamilyQuant/DeNovoControl.xaml:246 | ButtonExportSummary.Content = \uD83D\uDCBE Export summary CSV | render:06-denovo-advanced | OPEN | pending |
 | FQ15-BA54B9A61BCA | KEEP | handler | FamilyQuant/DeNovoControl.xaml:247 | ButtonExportSummary.Click = ButtonExportSummary_Click | render:06-denovo-advanced | OPEN | pending |
@@ -1296,7 +1296,7 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **441**; OPEN re
 | FQ15-6973B8061312 | IMPROVE | control | FamilyQuant/DeNovoControl.xaml:430 | Button ButtonBrowseHomologyFcf | render:06-denovo-advanced | OPEN | pending |
 | FQ15-16B36F68CEA2 | IMPROVE | option/copy | FamilyQuant/DeNovoControl.xaml:430 | ButtonBrowseHomologyFcf.Content = Browse... | render:06-denovo-advanced | OPEN | pending |
 | FQ15-47E1C7C97E1F | KEEP | handler | FamilyQuant/DeNovoControl.xaml:431 | ButtonBrowseHomologyFcf.Click = ButtonBrowseHomologyFcf_Click | render:06-denovo-advanced | OPEN | pending |
-| FQ15-2A13FAA50E49 | IMPROVE | tooltip | FamilyQuant/DeNovoControl.xaml:432 | ButtonBrowseHomologyFcf.ToolTip = Pick the .fcf file. Nothing is read until you press Search. | render:06-denovo-advanced | OPEN | pending |
+| FQ15-2A13FAA50E49 | IMPROVE | tooltip | FamilyQuant/DeNovoControl.xaml:432 | ButtonBrowseHomologyFcf.ToolTip = Pick the .fcf file. Nothing is read until you press Search. | test:LookCopyReceiptCommand | VERIFIED | evidence:LK-copy-1:FQ15-2A13FAA50E49 |
 | FQ15-89082139AB77 | IMPROVE | control | FamilyQuant/DeNovoControl.xaml:434 | Button ButtonSearchHomology | render:06-denovo-advanced | OPEN | pending |
 | FQ15-F4A71CC1B150 | IMPROVE | option/copy | FamilyQuant/DeNovoControl.xaml:434 | ButtonSearchHomology.Content = Search | render:06-denovo-advanced | OPEN | pending |
 | FQ15-D1C96A54C4E7 | KEEP | handler | FamilyQuant/DeNovoControl.xaml:435 | ButtonSearchHomology.Click = ButtonSearchHomology_Click | render:06-denovo-advanced | OPEN | pending |
@@ -1337,7 +1337,7 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **441**; OPEN re
 | FQ15-C52BCFB9A2DC | IMPROVE | tooltip | FamilyQuant/DeNovoControl.xaml:481 | ButtonExportHomologyCsv.ToolTip = Saves one line per peptide with its families, proteins and whether it is ambiguous. Disabled until a search has been run. | render:06-denovo-advanced | OPEN | pending |
 | FQ15-7BCBAA5EB6FB | IMPROVE | control | FamilyQuant/DeNovoControl.xaml:484 | DataGrid DataGridHomologyFamilies | render:06-denovo-advanced | OPEN | pending |
 | FQ15-059DF4DD48B2 | IMPROVE | option/copy | FamilyQuant/DeNovoControl.xaml:485 | DataGridHomologyFamilies.IsReadOnly = True | render:06-denovo-advanced | OPEN | pending |
-| FQ15-2A6660087265 | IMPROVE | tooltip | FamilyQuant/DeNovoControl.xaml:488 | DataGridHomologyFamilies.ToolTip = One line per family reached, most peptides first, target hits only. A peptide in two families counts in both, so the column does not sum to the peptides searched. | render:06-denovo-advanced | OPEN | pending |
+| FQ15-2A6660087265 | IMPROVE | tooltip | FamilyQuant/DeNovoControl.xaml:488 | DataGridHomologyFamilies.ToolTip = One line per family reached, most peptides first, target hits only. A peptide in two families counts in both, so the column does not sum to the peptides searched. | test:LookCopyReceiptCommand | VERIFIED | evidence:LK-copy-1:FQ15-2A6660087265 |
 | FQ15-72DA7BDE514D | IMPROVE | control | FamilyQuant/DeNovoControl.xaml:490 | DataGridTextColumn ColumnFamilyId | render:06-denovo-advanced | OPEN | pending |
 | FQ15-1E75F228EDC2 | IMPROVE | column | FamilyQuant/DeNovoControl.xaml:490 | ColumnFamilyId.Header = Family (User ID) | render:06-denovo-advanced | OPEN | pending |
 | FQ15-6A8E8F9D6E32 | IMPROVE | column | FamilyQuant/DeNovoControl.xaml:490 | ColumnFamilyId.Binding = {Binding Path=FamilyId} | render:06-denovo-advanced | OPEN | pending |
@@ -1412,7 +1412,7 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **441**; OPEN re
 | FQ15-CA38337D82EE | IMPROVE | control | FamilyQuant/DeNovoControl.xaml:624 | Button ButtonDeNovoHelp | render:06-denovo-advanced | OPEN | pending |
 | FQ15-3AA6CF64D0A7 | IMPROVE | option/copy | FamilyQuant/DeNovoControl.xaml:624 | ButtonDeNovoHelp.Content = \u2754 Help | render:06-denovo-advanced | OPEN | pending |
 | FQ15-97BE9095ACA9 | KEEP | handler | FamilyQuant/DeNovoControl.xaml:625 | ButtonDeNovoHelp.Click = ButtonDeNovoHelp_Click | render:06-denovo-advanced | OPEN | pending |
-| FQ15-4712D0663AE7 | IMPROVE | tooltip | FamilyQuant/DeNovoControl.xaml:626 | ButtonDeNovoHelp.ToolTip = Opens the help page for this screen in a window you can keep open. It explains the source, the three filters, the reconciliation and the review queue. | render:06-denovo-advanced | OPEN | pending |
+| FQ15-4712D0663AE7 | IMPROVE | tooltip | FamilyQuant/DeNovoControl.xaml:626 | ButtonDeNovoHelp.ToolTip = Opens the help page for this screen in a window you can keep open. It explains the source, the three filters, the reconciliation and the review queue. | test:LookCopyReceiptCommand | VERIFIED | evidence:LK-copy-1:FQ15-4712D0663AE7 |
 | FQ15-E97749D4FBD7 | IMPROVE | tooltip | FamilyQuant/DeNovoControl.xaml:630 | TextBlockDeNovoStatus.ToolTip = What is on screen and what to do next. Refused values, empty folders and unreadable files are reported here, not in pop-ups. | render:06-denovo-advanced | OPEN | pending |
 | FQ15-2C97986F49B6 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:224 | "Step 1 of 5 \u00B7 Nothing imported yet. Choose a de novo source and its export folder, " | render:06-denovo-advanced | OPEN | pending |
 | FQ15-56EFD9B009FD | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:225 | "check the three confidence filters, and press \"Load and filter\". Layers 2 to 5 stay " | render:06-denovo-advanced | OPEN | pending |
@@ -3300,21 +3300,21 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **441**; OPEN re
 | FQ15-B85F52C3CC74 | KEEP | shortcut | FamilyQuant/GridCopy.cs:53 | &#124;&#124; !extending && e.Key is Key.Up or Key.Down or Key.Home or Key.End or Key.PageUp or Key.PageDown) | render:03-curation | OPEN | pending |
 | FQ15-892AA7339679 | KEEP | shortcut | FamilyQuant/GridCopy.cs:53 | &#124;&#124; !extending && e.Key is Key.Up or Key.Down or Key.Home or Key.End or Key.PageUp or Key.PageDown) | render:03-curation | OPEN | pending |
 | FQ15-A551DA5C1A01 | KEEP | shortcut | FamilyQuant/GridCopy.cs:53 | &#124;&#124; !extending && e.Key is Key.Up or Key.Down or Key.Home or Key.End or Key.PageUp or Key.PageDown) | render:03-curation | OPEN | pending |
-| FQ15-16FDCA2FEE33 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:30 | "HOW TO READ THESE NUMBERS" | render:14-help | OPEN | pending |
+| FQ15-16FDCA2FEE33 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:30 | "HOW TO READ THESE NUMBERS" | test:LookCopyReceiptCommand | VERIFIED | evidence:LK-copy-1:FQ15-16FDCA2FEE33 |
 | FQ15-77BD9938227C | IMPROVE | help fact | FamilyQuant/HelpContent.cs:31 | "=========================" | render:14-help | OPEN | pending |
 | FQ15-B723E515417F | IMPROVE | help fact | FamilyQuant/HelpContent.cs:34 | "THE ORDER OF WORK" | render:14-help | OPEN | pending |
 | FQ15-DDB5B82DAAD8 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:35 | "-----------------" | render:14-help | OPEN | pending |
 | FQ15-D498F9890B9B | KEEP | format/export | FamilyQuant/HelpContent.cs:36 | "1. Run USearch on a FASTA or target-decoy (.T-R) database. That writes a Family" | render:14-help | OPEN | pending |
 | FQ15-9D2713E3D10D | KEEP | format/export | FamilyQuant/HelpContent.cs:37 | "   Cluster File (.fcf) next to the database: proteins grouped into families." | render:14-help | OPEN | pending |
 | FQ15-A832A6193C72 | KEEP | format/export | FamilyQuant/HelpContent.cs:38 | "2. File -&gt; Load Family Cluster File opens that .fcf. You are now in Layer 1 and" | render:14-help | OPEN | pending |
-| FQ15-1779F1A43941 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:39 | "   can merge families further by description words or by keyword." | render:14-help | OPEN | pending |
+| FQ15-1779F1A43941 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:39 | "   can merge families further by description words or by keyword." | test:LookCopyReceiptCommand | VERIFIED | evidence:LK-copy-1:FQ15-1779F1A43941 |
 | FQ15-E0967C11504D | KEEP | format/export | FamilyQuant/HelpContent.cs:40 | "3. Layer 2: load the PatternLab project (.plp) that holds the quantitation. It" | render:14-help | OPEN | pending |
-| FQ15-31DB88F2483C | IMPROVE | help fact | FamilyQuant/HelpContent.cs:41 | "   must have been exported at PEPTIDE level - a protein-level export has nothing" | render:14-help | OPEN | pending |
+| FQ15-31DB88F2483C | IMPROVE | help fact | FamilyQuant/HelpContent.cs:41 | "   must have been exported at PEPTIDE level - a protein-level export has nothing" | test:LookCopyReceiptCommand | VERIFIED | evidence:LK-copy-1:FQ15-31DB88F2483C |
 | FQ15-B519EA36C213 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:42 | "   this program can attribute to a family." | render:14-help | OPEN | pending |
 | FQ15-C88C215DECF6 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:43 | "4. Layer 3: choose what the percentage is OF, choose what to do with shared" | render:14-help | OPEN | pending |
 | FQ15-7CE7F63C1854 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:44 | "   peptides, then press Recalculate." | render:14-help | OPEN | pending |
 | FQ15-9490F7267E6D | IMPROVE | help fact | FamilyQuant/HelpContent.cs:45 | "5. Export to CSV, and/or File -&gt; Reanotate Sepro to stamp the family numbers back" | render:14-help | OPEN | pending |
-| FQ15-326E4D99426C | IMPROVE | help fact | FamilyQuant/HelpContent.cs:46 | "   into a SEPro result package." | render:14-help | OPEN | pending |
+| FQ15-326E4D99426C | IMPROVE | help fact | FamilyQuant/HelpContent.cs:46 | "   into a SEPro result package." | test:LookCopyReceiptCommand | VERIFIED | evidence:LK-copy-1:FQ15-326E4D99426C |
 | FQ15-849590FAAE39 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:48 | "The families and the quantitation you keep live in one FamilyQuant project file, a" | render:14-help | OPEN | pending |
 | FQ15-D93D13EF5E70 | KEEP | format/export | FamilyQuant/HelpContent.cs:49 | ".fqproj, written by File -&gt; Save project. Beyond the share above, File -&gt; Compute /" | render:14-help | OPEN | pending |
 | FQ15-5649DC0CCC44 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:50 | "update full XIC measures each peptide's full isotope envelope straight from the RAW" | render:14-help | OPEN | pending |
@@ -3322,7 +3322,7 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **441**; OPEN re
 | FQ15-5DE04A6489DF | KEEP | format/export | FamilyQuant/HelpContent.cs:52 | "from it. An old Family Cluster File (.fcf) still opens, with the quantitation empty" | render:14-help | OPEN | pending |
 | FQ15-E90092829B15 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:53 | "until it is computed." | render:14-help | OPEN | pending |
 | FQ15-C38783F5FD3F | IMPROVE | help fact | FamilyQuant/HelpContent.cs:56 | "WHAT THE PERCENTAGE IS OF (THE DENOMINATOR)" | render:14-help | OPEN | pending |
-| FQ15-3EFB68F27578 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:57 | "-------------------------------------------" | render:14-help | OPEN | pending |
+| FQ15-3EFB68F27578 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:57 | "-------------------------------------------" | test:LookCopyReceiptCommand | VERIFIED | evidence:LK-copy-1:FQ15-3EFB68F27578 |
 | FQ15-6AC43FBE723A | IMPROVE | help fact | FamilyQuant/HelpContent.cs:58 | "A family's number is a share, and a share is meaningless until you know of what." | render:14-help | OPEN | pending |
 | FQ15-5A3322C91DC6 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:59 | "The list called \"Report XIC as\" is that choice. It currently reads:" | render:14-help | OPEN | pending |
 | FQ15-1401C92E1A25 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:61 | "    " | render:14-help | OPEN | pending |
@@ -3330,37 +3330,37 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **441**; OPEN re
 | FQ15-ADFD838C0642 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:68 | "No project is loaded, so the program cannot yet say which denominators this" | render:14-help | OPEN | pending |
 | FQ15-165F67A7C177 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:69 | "data supports. Load one in Layer 2: the modes it cannot supply are greyed out," | render:14-help | OPEN | pending |
 | FQ15-70C98F05A173 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:70 | "each with the reason in its tooltip." | render:14-help | OPEN | pending |
-| FQ15-4BF4A1DB2F7A | IMPROVE | help fact | FamilyQuant/HelpContent.cs:74 | "The loaded project says:" | render:14-help | OPEN | pending |
+| FQ15-4BF4A1DB2F7A | IMPROVE | help fact | FamilyQuant/HelpContent.cs:74 | "The loaded project says:" | test:LookCopyReceiptCommand | VERIFIED | evidence:LK-copy-1:FQ15-4BF4A1DB2F7A |
 | FQ15-BEA7B5CA3D3D | IMPROVE | help fact | FamilyQuant/HelpContent.cs:76 | "    " | render:14-help | OPEN | pending |
 | FQ15-D0CDE9D7510D | IMPROVE | help fact | FamilyQuant/HelpContent.cs:81 | "Note the words \"NOT recorded\" above. This project was exported before" | render:14-help | OPEN | pending |
 | FQ15-1AA7FC4EF4FE | IMPROVE | help fact | FamilyQuant/HelpContent.cs:82 | "PatternLab wrote down which divisor it had used, so the program worked it out" | render:14-help | OPEN | pending |
 | FQ15-27C446D0A7D9 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:83 | "from the size of the numbers. That is a guess, and it is labelled as one" | render:14-help | OPEN | pending |
 | FQ15-FE389B118C91 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:84 | "everywhere it appears. Re-exporting from XQuant turns it into a recorded fact." | render:14-help | OPEN | pending |
-| FQ15-31F426807805 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:89 | "WHY THE FAMILIES DO NOT ADD UP TO 100%" | render:14-help | OPEN | pending |
+| FQ15-31F426807805 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:89 | "WHY THE FAMILIES DO NOT ADD UP TO 100%" | test:LookCopyReceiptCommand | VERIFIED | evidence:LK-copy-1:FQ15-31F426807805 |
 | FQ15-635528BE7EB3 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:90 | "--------------------------------------" | render:14-help | OPEN | pending |
 | FQ15-BE6CB54DC92F | IMPROVE | help fact | FamilyQuant/HelpContent.cs:91 | "In \"" | render:14-help | OPEN | pending |
 | FQ15-AAC472EAAE72 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:91 | "\" they do, by construction:" | render:14-help | OPEN | pending |
-| FQ15-3AC3B95D0FBD | IMPROVE | help fact | FamilyQuant/HelpContent.cs:92 | "every family is divided by the sum of all families." | render:14-help | OPEN | pending |
+| FQ15-3AC3B95D0FBD | IMPROVE | help fact | FamilyQuant/HelpContent.cs:92 | "every family is divided by the sum of all families." | test:LookCopyReceiptCommand | VERIFIED | evidence:LK-copy-1:FQ15-3AC3B95D0FBD |
 | FQ15-65E6A4ED162F | IMPROVE | help fact | FamilyQuant/HelpContent.cs:94 | "In \"" | render:14-help | OPEN | pending |
 | FQ15-B96F6B72A70C | IMPROVE | help fact | FamilyQuant/HelpContent.cs:94 | "\" they do not, and that is" | render:14-help | OPEN | pending |
 | FQ15-F2B93DA585AC | IMPROVE | help fact | FamilyQuant/HelpContent.cs:95 | "the point of the mode. The denominator is the whole chromatogram, and most of a" | render:14-help | OPEN | pending |
 | FQ15-AEEF0AC4C476 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:96 | "chromatogram is never identified: signal from peptides your database does not" | render:14-help | OPEN | pending |
 | FQ15-92A187CDA3AA | IMPROVE | help fact | FamilyQuant/HelpContent.cs:97 | "contain, from non-peptide material, from charge states that were not extracted." | render:14-help | OPEN | pending |
-| FQ15-3B7D66511C5A | IMPROVE | help fact | FamilyQuant/HelpContent.cs:98 | "The gap between your families' total and 100% is that unidentified remainder. It is" | render:14-help | OPEN | pending |
+| FQ15-3B7D66511C5A | IMPROVE | help fact | FamilyQuant/HelpContent.cs:98 | "The gap between your families' total and 100% is that unidentified remainder. It is" | test:LookCopyReceiptCommand | VERIFIED | evidence:LK-copy-1:FQ15-3B7D66511C5A |
 | FQ15-E82B15B10646 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:99 | "a measurement, not an error - reading it as one is the mistake this mode exists to" | render:14-help | OPEN | pending |
 | FQ15-BBD47D8C8E7A | IMPROVE | help fact | FamilyQuant/HelpContent.cs:100 | "prevent." | render:14-help | OPEN | pending |
 | FQ15-F14090FD5527 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:102 | "Under \"" | render:14-help | OPEN | pending |
 | FQ15-86526991217F | IMPROVE | help fact | FamilyQuant/HelpContent.cs:102 | "\" a second piece is" | render:14-help | OPEN | pending |
 | FQ15-AF9B08CD95D9 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:103 | "missing as well: the signal on peptides that belong to more than one family and is" | render:14-help | OPEN | pending |
-| FQ15-1E6B520A6D75 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:104 | "therefore counted for none of them." | render:14-help | OPEN | pending |
+| FQ15-1E6B520A6D75 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:104 | "therefore counted for none of them." | test:LookCopyReceiptCommand | VERIFIED | evidence:LK-copy-1:FQ15-1E6B520A6D75 |
 | FQ15-DADF38F34225 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:107 | "WHAT A SHARED PEPTIDE IS" | render:14-help | OPEN | pending |
 | FQ15-8D7CDCA90AAA | IMPROVE | help fact | FamilyQuant/HelpContent.cs:108 | "------------------------" | render:14-help | OPEN | pending |
-| FQ15-140B26B4ACD9 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:109 | "A peptide whose sequence occurs in proteins of more than one family. In a venom" | render:14-help | OPEN | pending |
-| FQ15-4A452DFEB3D4 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:110 | "database, where whole families differ by a handful of residues, this is not a" | render:14-help | OPEN | pending |
+| FQ15-140B26B4ACD9 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:109 | "A peptide whose sequence occurs in proteins of more than one family. In a venom" | test:LookCopyReceiptCommand | VERIFIED | evidence:LK-copy-1:FQ15-140B26B4ACD9 |
+| FQ15-4A452DFEB3D4 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:110 | "database, where whole families differ by a handful of residues, this is not a" | test:LookCopyReceiptCommand | VERIFIED | evidence:LK-copy-1:FQ15-4A452DFEB3D4 |
 | FQ15-8CDA063A01D2 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:111 | "corner case: most of the signal can sit on shared peptides. Nothing can say which" | render:14-help | OPEN | pending |
 | FQ15-B26B14CE5F2B | IMPROVE | help fact | FamilyQuant/HelpContent.cs:112 | "family such a peptide came from, so the program does not pretend to. In the Full" | render:14-help | OPEN | pending |
-| FQ15-23CF1A3FB31B | IMPROVE | help fact | FamilyQuant/HelpContent.cs:113 | "XIC column an identified peptide belongs to the families whose proteins contain" | render:14-help | OPEN | pending |
-| FQ15-53907B4A7ADD | IMPROVE | help fact | FamilyQuant/HelpContent.cs:114 | "it, exactly as above; a de novo sequence, which has no protein of its own, to the" | render:14-help | OPEN | pending |
+| FQ15-23CF1A3FB31B | IMPROVE | help fact | FamilyQuant/HelpContent.cs:113 | "XIC column an identified peptide belongs to the families whose proteins contain" | test:LookCopyReceiptCommand | VERIFIED | evidence:LK-copy-1:FQ15-23CF1A3FB31B |
+| FQ15-53907B4A7ADD | IMPROVE | help fact | FamilyQuant/HelpContent.cs:114 | "it, exactly as above; a de novo sequence, which has no protein of its own, to the" | test:LookCopyReceiptCommand | VERIFIED | evidence:LK-copy-1:FQ15-53907B4A7ADD |
 | FQ15-96C9531E29AB | IMPROVE | help fact | FamilyQuant/HelpContent.cs:115 | "families of every protein it resembles at the minimum homology identity. The" | render:14-help | OPEN | pending |
 | FQ15-C6D0D9DFF097 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:116 | "choice is yours, and it is currently:" | render:14-help | OPEN | pending |
 | FQ15-B57281C5F6F8 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:118 | "    " | render:14-help | OPEN | pending |
@@ -3373,21 +3373,21 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **441**; OPEN re
 | FQ15-AB9E7F2AECEA | IMPROVE | help fact | FamilyQuant/HelpContent.cs:141 | "Clustering runs in two stages. The fast first pass groups the database quickly," | render:14-help | OPEN | pending |
 | FQ15-75D7C9C02611 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:142 | "but it is greedy and order-sensitive: two proteins that align above your identity" | render:14-help | OPEN | pending |
 | FQ15-CB4A49DE72B2 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:143 | "can still land in separate families, because the second was only ever compared" | render:14-help | OPEN | pending |
-| FQ15-2F611D37AF87 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:144 | "against the seed of a family it did not quite match. That leaves biological holes," | render:14-help | OPEN | pending |
+| FQ15-2F611D37AF87 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:144 | "against the seed of a family it did not quite match. That leaves biological holes," | test:LookCopyReceiptCommand | VERIFIED | evidence:LK-copy-1:FQ15-2F611D37AF87 |
 | FQ15-C6149FDD6499 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:145 | "full-length homologues split apart." | render:14-help | OPEN | pending |
 | FQ15-4A395D38F359 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:147 | "The \"Exhaustive clustering\" checkbox (on by default) closes them. After the first" | render:14-help | OPEN | pending |
 | FQ15-D433967938BB | IMPROVE | help fact | FamilyQuant/HelpContent.cs:148 | "pass it aligns EVERY pair of proteins in full and merges two families whenever the" | render:14-help | OPEN | pending |
 | FQ15-AA7C526C82BC | IMPROVE | help fact | FamilyQuant/HelpContent.cs:149 | "proteins reach your identity over most of the LONGER sequence. Proteins that share" | render:14-help | OPEN | pending |
 | FQ15-D443742F8F8A | IMPROVE | help fact | FamilyQuant/HelpContent.cs:150 | "only a short motif fail that coverage test and are correctly kept apart, so an" | render:14-help | OPEN | pending |
-| FQ15-28E620F41BF5 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:151 | "angiotensin fragment does not pull in a whole metalloproteinase, but two full-length" | render:14-help | OPEN | pending |
+| FQ15-28E620F41BF5 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:151 | "angiotensin fragment does not pull in a whole metalloproteinase, but two full-length" | test:LookCopyReceiptCommand | VERIFIED | evidence:LK-copy-1:FQ15-28E620F41BF5 |
 | FQ15-C95C61908023 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:152 | "metalloproteinases the fast pass split are put back together." | render:14-help | OPEN | pending |
-| FQ15-15A3347E96DE | IMPROVE | help fact | FamilyQuant/HelpContent.cs:154 | "This is single linkage: every pair at or above the identity chains its two families" | render:14-help | OPEN | pending |
-| FQ15-32B3C89537DA | IMPROVE | help fact | FamilyQuant/HelpContent.cs:155 | "into one, so the merge can chain a whole superfamily together. That is the intended" | render:14-help | OPEN | pending |
+| FQ15-15A3347E96DE | IMPROVE | help fact | FamilyQuant/HelpContent.cs:154 | "This is single linkage: every pair at or above the identity chains its two families" | test:LookCopyReceiptCommand | VERIFIED | evidence:LK-copy-1:FQ15-15A3347E96DE |
+| FQ15-32B3C89537DA | IMPROVE | help fact | FamilyQuant/HelpContent.cs:155 | "into one, so the merge can chain a whole superfamily together. That is the intended" | test:LookCopyReceiptCommand | VERIFIED | evidence:LK-copy-1:FQ15-32B3C89537DA |
 | FQ15-72AEB0663F06 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:156 | "meaning of the threshold, not a side effect: the identity you choose IS the tightness" | render:14-help | OPEN | pending |
 | FQ15-93FB7ED50577 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:157 | "knob. Raise it for more, smaller families; lower it to chain more together." | render:14-help | OPEN | pending |
 | FQ15-7285DBCB5E04 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:159 | "The exhaustive pass runs at any database size and is never capped. On a database" | render:14-help | OPEN | pending |
-| FQ15-3719709B38CE | IMPROVE | help fact | FamilyQuant/HelpContent.cs:160 | "over 10,000 sequences the all-versus-all alignment takes longer and more memory, so" | render:14-help | OPEN | pending |
-| FQ15-3212E262EA3D | IMPROVE | help fact | FamilyQuant/HelpContent.cs:161 | "you are warned once before it starts and can proceed or stop; it still runs at any" | render:14-help | OPEN | pending |
+| FQ15-3719709B38CE | IMPROVE | help fact | FamilyQuant/HelpContent.cs:160 | "over 10,000 sequences the all-versus-all alignment takes longer and more memory, so" | test:LookCopyReceiptCommand | VERIFIED | evidence:LK-copy-1:FQ15-3719709B38CE |
+| FQ15-3212E262EA3D | IMPROVE | help fact | FamilyQuant/HelpContent.cs:161 | "you are warned once before it starts and can proceed or stop; it still runs at any" | test:LookCopyReceiptCommand | VERIFIED | evidence:LK-copy-1:FQ15-3212E262EA3D |
 | FQ15-8DE0CDACBAFD | IMPROVE | help fact | FamilyQuant/HelpContent.cs:162 | "size if you proceed. Turn the checkbox off to use the faster first-pass-only" | render:14-help | OPEN | pending |
 | FQ15-FA2896DB2A6A | IMPROVE | help fact | FamilyQuant/HelpContent.cs:163 | "clustering, which is quicker but leaves the holes." | render:14-help | OPEN | pending |
 | FQ15-733925E65215 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:166 | "CURATING BY HAND: UNDO, SUPER CLUSTER OPTIONS, SEARCH-SCOPED RECLUSTERING" | render:14-help | OPEN | pending |
@@ -3399,37 +3399,37 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **441**; OPEN re
 | FQ15-6510D386241E | IMPROVE | help fact | FamilyQuant/HelpContent.cs:172 | "this session, does not survive closing the file, and there is no redo." | render:14-help | OPEN | pending |
 | FQ15-27BC9FC2E026 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:174 | "Create Super Cluster now offers two choices. \"Match\" decides whether one description" | render:14-help | OPEN | pending |
 | FQ15-F2A3321728FE | IMPROVE | help fact | FamilyQuant/HelpContent.cs:175 | "must contain ALL of your keywords or just ANY one of them; the default is \"match all" | render:14-help | OPEN | pending |
-| FQ15-0D8B0C15A3E3 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:176 | "words\", so a phrase such as \"acidic phospholipase\" gathers only the acidic" | render:14-help | OPEN | pending |
-| FQ15-356158F75E55 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:177 | "phospholipases and leaves the plain ones alone, while \"match any word\" gathers" | render:14-help | OPEN | pending |
+| FQ15-0D8B0C15A3E3 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:176 | "words\", so a phrase such as \"acidic phospholipase\" gathers only the acidic" | test:LookCopyReceiptCommand | VERIFIED | evidence:LK-copy-1:FQ15-0D8B0C15A3E3 |
+| FQ15-356158F75E55 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:177 | "phospholipases and leaves the plain ones alone, while \"match any word\" gathers" | test:LookCopyReceiptCommand | VERIFIED | evidence:LK-copy-1:FQ15-356158F75E55 |
 | FQ15-CAC3F717BD84 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:178 | "every family carrying even one keyword. A single keyword behaves the same either" | render:14-help | OPEN | pending |
 | FQ15-80A92E4EC4C1 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:179 | "way. The super cluster's own \"Exclude Words\" box keeps a protein OUT even when its" | render:14-help | OPEN | pending |
 | FQ15-E4210C7B4B4F | IMPROVE | help fact | FamilyQuant/HelpContent.cs:180 | "family matches: exclude \"inhibitor\" to gather the phospholipases without the" | render:14-help | OPEN | pending |
 | FQ15-99626C99C260 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:181 | "phospholipase inhibitor. It is separate from the Recluster by Words exclude box," | render:14-help | OPEN | pending |
 | FQ15-83812B96413F | IMPROVE | help fact | FamilyQuant/HelpContent.cs:182 | "which drops words from the comparison rather than dropping a protein." | render:14-help | OPEN | pending |
-| FQ15-4B50F8FAAC52 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:183 | "Separate its words with commas or spaces. It matches WHOLE words of the description" | render:14-help | OPEN | pending |
+| FQ15-4B50F8FAAC52 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:183 | "Separate its words with commas or spaces. It matches WHOLE words of the description" | test:LookCopyReceiptCommand | VERIFIED | evidence:LK-copy-1:FQ15-4B50F8FAAC52 |
 | FQ15-F597C842DADE | IMPROVE | help fact | FamilyQuant/HelpContent.cs:184 | "before OS=, and keeps out the proteins carrying the word; the rest of the family joins." | render:14-help | OPEN | pending |
 | FQ15-57B2F5448304 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:186 | "Create Super Cluster first shows a preview and changes nothing until you confirm." | render:14-help | OPEN | pending |
-| FQ15-1CD0CDC7B970 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:187 | "Keywords find the families; every protein of those families is listed, each with a" | render:14-help | OPEN | pending |
+| FQ15-1CD0CDC7B970 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:187 | "Keywords find the families; every protein of those families is listed, each with a" | test:LookCopyReceiptCommand | VERIFIED | evidence:LK-copy-1:FQ15-1CD0CDC7B970 |
 | FQ15-73ECD24B9EB0 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:188 | "tick, its Locus, its description as the database has it, and its domains. A protein" | render:14-help | OPEN | pending |
 | FQ15-FF869C17CE55 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:189 | "with none of your words is in red: it is here because another protein of its family" | render:14-help | OPEN | pending |
-| FQ15-44223E509024 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:190 | "carries one, which is how a venom disintegrin comes along with a metalloproteinase." | render:14-help | OPEN | pending |
+| FQ15-44223E509024 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:190 | "carries one, which is how a venom disintegrin comes along with a metalloproteinase." | test:LookCopyReceiptCommand | VERIFIED | evidence:LK-copy-1:FQ15-44223E509024 |
 | FQ15-8FD708C80D58 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:191 | "Untick a protein and it stays in its family, while the rest of that family joins." | render:14-help | OPEN | pending |
 | FQ15-EE3426F2FEC4 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:192 | "\"Untick the red ones\" does that for all of them at once. To untick many by hand," | render:14-help | OPEN | pending |
 | FQ15-B240E4489C4F | IMPROVE | help fact | FamilyQuant/HelpContent.cs:193 | "click a heading to sort, Shift+click to select, and press Untick selected. When part" | render:14-help | OPEN | pending |
 | FQ15-541BE80ED3F7 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:194 | "of a family leaves, the new family is locked, so that a Recluster by Words cannot put" | render:14-help | OPEN | pending |
 | FQ15-BF9F56B1BD19 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:195 | "back what you left out; the lock manager removes it. An annotation stays on each protein." | render:14-help | OPEN | pending |
-| FQ15-08956BF33C27 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:197 | "You do not have to know how a protein is named. The ADAM proteins, for example, are" | render:14-help | OPEN | pending |
+| FQ15-08956BF33C27 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:197 | "You do not have to know how a protein is named. The ADAM proteins, for example, are" | test:LookCopyReceiptCommand | VERIFIED | evidence:LK-copy-1:FQ15-08956BF33C27 |
 | FQ15-9C81928D2FE9 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:198 | "called \"Disintegrin and metalloproteinase domain-containing protein\", so the word" | render:14-help | OPEN | pending |
 | FQ15-F55F7951356A | IMPROVE | help fact | FamilyQuant/HelpContent.cs:199 | "ADAM finds nothing; the preview says so, and there they are on the list to untick." | render:14-help | OPEN | pending |
-| FQ15-52ACAF630D8C | IMPROVE | help fact | FamilyQuant/HelpContent.cs:200 | "The keywords and exclude words can be edited there and everything follows as you" | render:14-help | OPEN | pending |
+| FQ15-52ACAF630D8C | IMPROVE | help fact | FamilyQuant/HelpContent.cs:200 | "The keywords and exclude words can be edited there and everything follows as you" | test:LookCopyReceiptCommand | VERIFIED | evidence:LK-copy-1:FQ15-52ACAF630D8C |
 | FQ15-700BD2973F60 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:201 | "type. If the Search box hides families that match, one tick brings them in." | render:14-help | OPEN | pending |
 | FQ15-5C50C70D9C7A | IMPROVE | help fact | FamilyQuant/HelpContent.cs:203 | "Fetch Domains asks UniProt once for each protein's Pfam domains and saving keeps them" | render:14-help | OPEN | pending |
 | FQ15-95FA9A3543E1 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:204 | "in the file, with the UniProt release. They fill the Domains column, the Search box" | render:14-help | OPEN | pending |
 | FQ15-A8408C233228 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:205 | "finds them, and in the preview Keep domains unticks the proteins with none of the" | render:14-help | OPEN | pending |
 | FQ15-5AD48CC5E63C | IMPROVE | help fact | FamilyQuant/HelpContent.cs:206 | "domains you name: Reprolysin keeps those with the metalloproteinase domain whatever" | render:14-help | OPEN | pending |
 | FQ15-E785EEC2FF4F | IMPROVE | help fact | FamilyQuant/HelpContent.cs:207 | "they are called, and leaves out inhibitors and matrix metalloproteinases without a" | render:14-help | OPEN | pending |
-| FQ15-0ABF39AD0501 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:208 | "single exclude word. A protein with no domains at all stays ticked if it carries a" | render:14-help | OPEN | pending |
-| FQ15-40376A90B38E | IMPROVE | help fact | FamilyQuant/HelpContent.cs:209 | "keyword: the short disintegrins and many fragments are too short for Pfam. Domains do" | render:14-help | OPEN | pending |
+| FQ15-0ABF39AD0501 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:208 | "single exclude word. A protein with no domains at all stays ticked if it carries a" | test:LookCopyReceiptCommand | VERIFIED | evidence:LK-copy-1:FQ15-0ABF39AD0501 |
+| FQ15-40376A90B38E | IMPROVE | help fact | FamilyQuant/HelpContent.cs:209 | "keyword: the short disintegrins and many fragments are too short for Pfam. Domains do" | test:LookCopyReceiptCommand | VERIFIED | evidence:LK-copy-1:FQ15-40376A90B38E |
 | FQ15-682A45FA41B4 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:210 | "not separate everything: most ADAMs have the same ones as a P-III SVMP." | render:14-help | OPEN | pending |
 | FQ15-32EE7689E127 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:212 | "In the preview and the Data Browser, right-click a row to copy its UniProt code or" | render:14-help | OPEN | pending |
 | FQ15-D5054F4EAB44 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:213 | "description or to open its UniProt page. Ctrl+C copies the column you clicked, for" | render:14-help | OPEN | pending |
@@ -3438,34 +3438,34 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **441**; OPEN re
 | FQ15-CC045BF428D9 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:217 | "\"ribosomal protein\" with \"match any word\" gathers either phrase. A phrase is" | render:14-help | OPEN | pending |
 | FQ15-86A69C8A4ED7 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:218 | "matched on the whole description, so a common word such as \"protein\", ignored as a" | render:14-help | OPEN | pending |
 | FQ15-73A7BEA29B2A | IMPROVE | help fact | FamilyQuant/HelpContent.cs:219 | "single keyword, still counts inside a phrase." | render:14-help | OPEN | pending |
-| FQ15-4CD0BA58207E | IMPROVE | help fact | FamilyQuant/HelpContent.cs:221 | "The Search box takes several terms separated by commas, for example" | render:14-help | OPEN | pending |
-| FQ15-33D3BF88BB06 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:222 | "\"metalloprotease, SVMP\": a row is shown when it carries ANY of them." | render:14-help | OPEN | pending |
+| FQ15-4CD0BA58207E | IMPROVE | help fact | FamilyQuant/HelpContent.cs:221 | "The Search box takes several terms separated by commas, for example" | test:LookCopyReceiptCommand | VERIFIED | evidence:LK-copy-1:FQ15-4CD0BA58207E |
+| FQ15-33D3BF88BB06 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:222 | "\"metalloprotease, SVMP\": a row is shown when it carries ANY of them." | test:LookCopyReceiptCommand | VERIFIED | evidence:LK-copy-1:FQ15-33D3BF88BB06 |
 | FQ15-41F16894E671 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:224 | "Typing in the Search box now limits BOTH Recluster by Words and Create Super" | render:14-help | OPEN | pending |
 | FQ15-285451F7351E | IMPROVE | help fact | FamilyQuant/HelpContent.cs:225 | "Cluster to the families the search shows: every family the search hides keeps its" | render:14-help | OPEN | pending |
 | FQ15-938754782F21 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:226 | "numbers untouched, so you can organise one subgroup at a time. The word vectors are" | render:14-help | OPEN | pending |
-| FQ15-4C1D983456A7 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:227 | "then computed within the shown families, which is the intended \"organise just this" | render:14-help | OPEN | pending |
+| FQ15-4C1D983456A7 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:227 | "then computed within the shown families, which is the intended \"organise just this" | test:LookCopyReceiptCommand | VERIFIED | evidence:LK-copy-1:FQ15-4C1D983456A7 |
 | FQ15-8A2678B883B4 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:228 | "subgroup\" behaviour. The scope follows the SEARCH TEXT only, not the Hide Reverse" | render:14-help | OPEN | pending |
 | FQ15-8722DAD861C4 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:229 | "or Hide Contaminants checkboxes, so hiding rows for display never silently drops a" | render:14-help | OPEN | pending |
-| FQ15-4F5F6E113E86 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:230 | "family from a recluster. Clear the Search box and both act on the whole database" | render:14-help | OPEN | pending |
+| FQ15-4F5F6E113E86 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:230 | "family from a recluster. Clear the Search box and both act on the whole database" | test:LookCopyReceiptCommand | VERIFIED | evidence:LK-copy-1:FQ15-4F5F6E113E86 |
 | FQ15-8A6AEF52CD47 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:231 | "again, exactly as before. Locks still hold within the subgroup." | render:14-help | OPEN | pending |
-| FQ15-4C8DA9D88B23 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:234 | "WHY DIVIDE AND CONQUER GIVES A FLOOR, NOT A RECOMMENDATION" | render:14-help | OPEN | pending |
-| FQ15-5071C2B04362 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:235 | "---------------------------------------------------------" | render:14-help | OPEN | pending |
+| FQ15-4C8DA9D88B23 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:234 | "WHY DIVIDE AND CONQUER GIVES A FLOOR, NOT A RECOMMENDATION" | test:LookCopyReceiptCommand | VERIFIED | evidence:LK-copy-1:FQ15-4C8DA9D88B23 |
+| FQ15-5071C2B04362 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:235 | "---------------------------------------------------------" | test:LookCopyReceiptCommand | VERIFIED | evidence:LK-copy-1:FQ15-5071C2B04362 |
 | FQ15-AB665BA75DF2 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:236 | "Divide and Conquer searches for the lowest sequence identity at which no family" | render:14-help | OPEN | pending |
-| FQ15-4ADEBBC287A8 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:237 | "holds both a target and a decoy sequence. It is tempting to read its answer as" | render:14-help | OPEN | pending |
+| FQ15-4ADEBBC287A8 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:237 | "holds both a target and a decoy sequence. It is tempting to read its answer as" | test:LookCopyReceiptCommand | VERIFIED | evidence:LK-copy-1:FQ15-4ADEBBC287A8 |
 | FQ15-6AEA4CA71156 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:238 | "\"the right identity\". It is not, for a reason built into what the score can see." | render:14-help | OPEN | pending |
-| FQ15-39CE9FBDFC8E | IMPROVE | help fact | FamilyQuant/HelpContent.cs:240 | "A reversed database has the same internal redundancy as the real one: if two" | render:14-help | OPEN | pending |
+| FQ15-39CE9FBDFC8E | IMPROVE | help fact | FamilyQuant/HelpContent.cs:240 | "A reversed database has the same internal redundancy as the real one: if two" | test:LookCopyReceiptCommand | VERIFIED | evidence:LK-copy-1:FQ15-39CE9FBDFC8E |
 | FQ15-86ED6E1871B0 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:241 | "proteins are similar, their reversed copies are similar too. So decoy families" | render:14-help | OPEN | pending |
 | FQ15-FAB63D74D20A | IMPROVE | help fact | FamilyQuant/HelpContent.cs:242 | "collapse at the same rate as target families, and putting two decoys together is" | render:14-help | OPEN | pending |
-| FQ15-1D39169096F5 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:243 | "not an error. The only event the score can detect is a target aligning to a decoy," | render:14-help | OPEN | pending |
+| FQ15-1D39169096F5 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:243 | "not an error. The only event the score can detect is a target aligning to a decoy," | test:LookCopyReceiptCommand | VERIFIED | evidence:LK-copy-1:FQ15-1D39169096F5 |
 | FQ15-A0C261A31FF9 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:244 | "which happens once alignments have stopped being better than noise." | render:14-help | OPEN | pending |
 | FQ15-A71BFCD5F931 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:246 | "It therefore marks the identity below which clustering is meaningless. It CANNOT" | render:14-help | OPEN | pending |
-| FQ15-0D28004D3211 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:247 | "see two unrelated target families being fused, which is the error you actually" | render:14-help | OPEN | pending |
+| FQ15-0D28004D3211 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:247 | "see two unrelated target families being fused, which is the error you actually" | test:LookCopyReceiptCommand | VERIFIED | evidence:LK-copy-1:FQ15-0D28004D3211 |
 | FQ15-9829356DF660 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:248 | "care about. The number it gives you is a floor, not a recommendation." | render:14-help | OPEN | pending |
-| FQ15-1F99309D7DA9 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:250 | "So: cluster at that identity or above, and" | render:14-help | OPEN | pending |
-| FQ15-01403C778554 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:251 | "choose the exact value from \"Scan identity range\" and from the biology of your" | render:14-help | OPEN | pending |
+| FQ15-1F99309D7DA9 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:250 | "So: cluster at that identity or above, and" | test:LookCopyReceiptCommand | VERIFIED | evidence:LK-copy-1:FQ15-1F99309D7DA9 |
+| FQ15-01403C778554 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:251 | "choose the exact value from \"Scan identity range\" and from the biology of your" | test:LookCopyReceiptCommand | VERIFIED | evidence:LK-copy-1:FQ15-01403C778554 |
 | FQ15-CABC9A901FD2 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:252 | "proteins. Raising the allowance above 0 does not buy accuracy, it buys merges made" | render:14-help | OPEN | pending |
-| FQ15-11EDD9AC29BB | IMPROVE | help fact | FamilyQuant/HelpContent.cs:253 | "inside the noise." | render:14-help | OPEN | pending |
-| FQ15-248A744BCF1E | IMPROVE | help fact | FamilyQuant/HelpContent.cs:256 | "THE OTHER COLUMNS" | render:14-help | OPEN | pending |
+| FQ15-11EDD9AC29BB | IMPROVE | help fact | FamilyQuant/HelpContent.cs:253 | "inside the noise." | test:LookCopyReceiptCommand | VERIFIED | evidence:LK-copy-1:FQ15-11EDD9AC29BB |
+| FQ15-248A744BCF1E | IMPROVE | help fact | FamilyQuant/HelpContent.cs:256 | "THE OTHER COLUMNS" | test:LookCopyReceiptCommand | VERIFIED | evidence:LK-copy-1:FQ15-248A744BCF1E |
 | FQ15-F1C188527124 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:257 | "-----------------" | render:14-help | OPEN | pending |
 | FQ15-E490B2683CD8 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:258 | "USearch ID       the last automatic grouping (USearch, then any reclustering the" | render:14-help | OPEN | pending |
 | FQ15-702F5F1A4544 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:259 | "                 program ran). Read-only. It equals User ID except where you" | render:14-help | OPEN | pending |
@@ -3481,22 +3481,22 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **441**; OPEN re
 | FQ15-60863DD78ECA | IMPROVE | help fact | FamilyQuant/HelpContent.cs:269 | "Locus            the protein identifier as it appears in the database." | render:14-help | OPEN | pending |
 | FQ15-ECEBDD3A4C3E | IMPROVE | help fact | FamilyQuant/HelpContent.cs:270 | "Residue mass     the sum of the protein's amino-acid residue masses, in daltons." | render:14-help | OPEN | pending |
 | FQ15-C1CA8C823913 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:271 | "                 It does NOT include the terminal water: add 18.011 Da for the" | render:14-help | OPEN | pending |
-| FQ15-3CD679100BFC | IMPROVE | help fact | FamilyQuant/HelpContent.cs:272 | "                 neutral protein, and 1.007 Da more for the protonated (MH+) mass." | render:14-help | OPEN | pending |
+| FQ15-3CD679100BFC | IMPROVE | help fact | FamilyQuant/HelpContent.cs:272 | "                 neutral protein, and 1.007 Da more for the protonated (MH+) mass." | test:LookCopyReceiptCommand | VERIFIED | evidence:LK-copy-1:FQ15-3CD679100BFC |
 | FQ15-D5811F80F5F5 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:273 | "                 The column used to be called \"Monoisotopic MH\", which this number" | render:14-help | OPEN | pending |
 | FQ15-89D688292B95 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:274 | "                 has never been." | render:14-help | OPEN | pending |
 | FQ15-C77E2E379823 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:276 | "THE FAMILY COUNTER AND THE FILTERS" | render:14-help | OPEN | pending |
 | FQ15-5751CE3A16FE | IMPROVE | help fact | FamilyQuant/HelpContent.cs:277 | "----------------------------------" | render:14-help | OPEN | pending |
 | FQ15-216239573E8C | IMPROVE | help fact | FamilyQuant/HelpContent.cs:278 | "The counter reads \"N visible \u00B7 M in file\". The filters below the table hide rows," | render:14-help | OPEN | pending |
-| FQ15-4E033CE0F007 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:279 | "they never change a number: hiding decoys or contaminants lowers the visible count" | render:14-help | OPEN | pending |
+| FQ15-4E033CE0F007 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:279 | "they never change a number: hiding decoys or contaminants lowers the visible count" | test:LookCopyReceiptCommand | VERIFIED | evidence:LK-copy-1:FQ15-4E033CE0F007 |
 | FQ15-E022B84D8055 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:280 | "and leaves every percentage exactly as it was. In \"" | render:14-help | OPEN | pending |
 | FQ15-D97FD212AC12 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:281 | "\" the hidden rows" | render:14-help | OPEN | pending |
-| FQ15-0AEC58EBA929 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:282 | "are still inside the denominator, because that denominator is the sum over all" | render:14-help | OPEN | pending |
+| FQ15-0AEC58EBA929 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:282 | "are still inside the denominator, because that denominator is the sum over all" | test:LookCopyReceiptCommand | VERIFIED | evidence:LK-copy-1:FQ15-0AEC58EBA929 |
 | FQ15-90FBE0B0A792 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:283 | "families, filtered or not." | render:14-help | OPEN | pending |
 | FQ15-F3E118B73B20 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:285 | "Export to CSV writes exactly the rows you can see, with the values as fractions" | render:14-help | OPEN | pending |
 | FQ15-5F14BEFA1121 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:286 | "between 0 and 1 and a dot as the decimal separator, whatever your machine's" | render:14-help | OPEN | pending |
 | FQ15-6867E804C1DC | IMPROVE | help fact | FamilyQuant/HelpContent.cs:287 | "language is. That is on purpose: the file is meant to be read by a program." | render:14-help | OPEN | pending |
-| FQ15-2A1BC8721EA6 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:314 | "PEAKS de novo only" | render:14-help | OPEN | pending |
-| FQ15-1AC2A16D083A | IMPROVE | help fact | FamilyQuant/HelpContent.cs:317 | "PEAKS de novo all" | render:14-help | OPEN | pending |
+| FQ15-2A1BC8721EA6 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:314 | "PEAKS de novo only" | test:LookCopyReceiptCommand | VERIFIED | evidence:LK-copy-1:FQ15-2A1BC8721EA6 |
+| FQ15-1AC2A16D083A | IMPROVE | help fact | FamilyQuant/HelpContent.cs:317 | "PEAKS de novo all" | test:LookCopyReceiptCommand | VERIFIED | evidence:LK-copy-1:FQ15-1AC2A16D083A |
 | FQ15-FAF14D110C45 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:320 | " (%)" | render:14-help | OPEN | pending |
 | FQ15-ECE3802B874B | IMPROVE | help fact | FamilyQuant/HelpContent.cs:332 | "THE DE NOVO EVIDENCE SCREEN" | render:14-help | OPEN | pending |
 | FQ15-C7F7EFF1F88E | IMPROVE | help fact | FamilyQuant/HelpContent.cs:333 | "===========================" | render:14-help | OPEN | pending |
@@ -3505,21 +3505,21 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **441**; OPEN re
 | FQ15-D58352EB61E2 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:334 | "; " | render:14-help | OPEN | pending |
 | FQ15-F6E9BC981767 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:335 | ")." | render:14-help | OPEN | pending |
 | FQ15-88FA3C611A95 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:337 | "A separate workflow, not a step of the family one. It needs no Family Cluster" | render:14-help | OPEN | pending |
-| FQ15-429BE986A9DB | IMPROVE | help fact | FamilyQuant/HelpContent.cs:338 | "File to start, it changes no family, no User ID and no quantitation, and it" | render:14-help | OPEN | pending |
-| FQ15-3E6E0D476DEB | IMPROVE | help fact | FamilyQuant/HelpContent.cs:339 | "writes nothing except the CSV files you ask it for. It asks which de novo calls" | render:14-help | OPEN | pending |
-| FQ15-4B78024759F4 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:340 | "pass their source-specific filters and how comparable precursor hypotheses relate" | render:14-help | OPEN | pending |
-| FQ15-16FABEC841DC | IMPROVE | help fact | FamilyQuant/HelpContent.cs:341 | "to the PatternLab search." | render:14-help | OPEN | pending |
+| FQ15-429BE986A9DB | IMPROVE | help fact | FamilyQuant/HelpContent.cs:338 | "File to start, it changes no family, no User ID and no quantitation, and it" | test:LookCopyReceiptCommand | VERIFIED | evidence:LK-copy-1:FQ15-429BE986A9DB |
+| FQ15-3E6E0D476DEB | IMPROVE | help fact | FamilyQuant/HelpContent.cs:339 | "writes nothing except the CSV files you ask it for. It asks which de novo calls" | test:LookCopyReceiptCommand | VERIFIED | evidence:LK-copy-1:FQ15-3E6E0D476DEB |
+| FQ15-4B78024759F4 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:340 | "pass their source-specific filters and how comparable precursor hypotheses relate" | test:LookCopyReceiptCommand | VERIFIED | evidence:LK-copy-1:FQ15-4B78024759F4 |
+| FQ15-16FABEC841DC | IMPROVE | help fact | FamilyQuant/HelpContent.cs:341 | "to the PatternLab search." | test:LookCopyReceiptCommand | VERIFIED | evidence:LK-copy-1:FQ15-16FABEC841DC |
 | FQ15-922E5555EBF4 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:343 | "Nothing on this screen interrupts you with a dialog. A parameter it cannot" | render:14-help | OPEN | pending |
 | FQ15-72314F8BA35B | IMPROVE | help fact | FamilyQuant/HelpContent.cs:344 | "accept, a folder with no export in it, a file that will not open: all of them" | render:14-help | OPEN | pending |
 | FQ15-E5B904B47AD7 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:345 | "are reported in the yellow line at the bottom, and the previous value or the" | render:14-help | OPEN | pending |
-| FQ15-4AAAF505FF36 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:346 | "previous result is left in force." | render:14-help | OPEN | pending |
+| FQ15-4AAAF505FF36 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:346 | "previous result is left in force." | test:LookCopyReceiptCommand | VERIFIED | evidence:LK-copy-1:FQ15-4AAAF505FF36 |
 | FQ15-ED389E6B5DB1 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:349 | "THE ORDER OF WORK" | render:14-help | OPEN | pending |
 | FQ15-557FD2203AFD | IMPROVE | help fact | FamilyQuant/HelpContent.cs:350 | "-----------------" | render:14-help | OPEN | pending |
-| FQ15-135F6CDFB00C | IMPROVE | help fact | FamilyQuant/HelpContent.cs:351 | "This screen has two core steps, and an optional advanced section below them." | render:14-help | OPEN | pending |
-| FQ15-03697C77A6D6 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:353 | "Step 1, Import and filter, reads the selected de novo export and keeps the confident" | render:14-help | OPEN | pending |
-| FQ15-010530F90DFA | IMPROVE | help fact | FamilyQuant/HelpContent.cs:354 | "sequences. Step 2, Reconcile and review, compares them with a PatternLab search" | render:14-help | OPEN | pending |
-| FQ15-186D7624998F | IMPROVE | help fact | FamilyQuant/HelpContent.cs:355 | "of the SAME runs and lists comparable-precursor alternative hypotheses and weak" | render:14-help | OPEN | pending |
-| FQ15-4C6C91315435 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:356 | "agreements as a review queue." | render:14-help | OPEN | pending |
+| FQ15-135F6CDFB00C | IMPROVE | help fact | FamilyQuant/HelpContent.cs:351 | "This screen has two core steps, and an optional advanced section below them." | test:LookCopyReceiptCommand | VERIFIED | evidence:LK-copy-1:FQ15-135F6CDFB00C |
+| FQ15-03697C77A6D6 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:353 | "Step 1, Import and filter, reads the selected de novo export and keeps the confident" | test:LookCopyReceiptCommand | VERIFIED | evidence:LK-copy-1:FQ15-03697C77A6D6 |
+| FQ15-010530F90DFA | IMPROVE | help fact | FamilyQuant/HelpContent.cs:354 | "sequences. Step 2, Reconcile and review, compares them with a PatternLab search" | test:LookCopyReceiptCommand | VERIFIED | evidence:LK-copy-1:FQ15-010530F90DFA |
+| FQ15-186D7624998F | IMPROVE | help fact | FamilyQuant/HelpContent.cs:355 | "of the SAME runs and lists comparable-precursor alternative hypotheses and weak" | test:LookCopyReceiptCommand | VERIFIED | evidence:LK-copy-1:FQ15-186D7624998F |
+| FQ15-4C6C91315435 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:356 | "agreements as a review queue." | test:LookCopyReceiptCommand | VERIFIED | evidence:LK-copy-1:FQ15-4C6C91315435 |
 | FQ15-C426D629562F | IMPROVE | help fact | FamilyQuant/HelpContent.cs:357 | "That queue is the one thing only this screen produces." | render:14-help | OPEN | pending |
 | FQ15-4BEE2F3FFAF2 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:359 | "The precursors you keep here are then measured by the main Compute / update full" | render:14-help | OPEN | pending |
 | FQ15-5D2B0F0DF729 | KEEP | format/export | FamilyQuant/HelpContent.cs:360 | "XIC step and reported by Analytics, through the .fqproj project, which is why the" | render:14-help | OPEN | pending |
@@ -3535,41 +3535,41 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **441**; OPEN re
 | FQ15-C101A528CEC8 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:373 | " writes one " | render:14-help | OPEN | pending |
 | FQ15-702F7C12A9F2 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:373 | " export per run." | render:14-help | OPEN | pending |
 | FQ15-67364A0CE81B | IMPROVE | help fact | FamilyQuant/HelpContent.cs:376 | "These are spectra sequenced from fragments alone that the PEAKS database" | render:14-help | OPEN | pending |
-| FQ15-332CF04B8679 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:377 | "search did not identify. This is an export category, not proof that the" | render:14-help | OPEN | pending |
+| FQ15-332CF04B8679 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:377 | "search did not identify. This is an export category, not proof that the" | test:LookCopyReceiptCommand | VERIFIED | evidence:LK-copy-1:FQ15-332CF04B8679 |
 | FQ15-F52CEEF2CB3C | IMPROVE | help fact | FamilyQuant/HelpContent.cs:378 | "sequence is correct or biologically novel." | render:14-help | OPEN | pending |
-| FQ15-021D58797CD5 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:382 | "This source is not restricted to PEAKS database-search misses. Treat it as" | render:14-help | OPEN | pending |
-| FQ15-35CBBB766800 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:383 | "a caller-specific sequence list; novelty is established only by the explicit" | render:14-help | OPEN | pending |
+| FQ15-021D58797CD5 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:382 | "This source is not restricted to PEAKS database-search misses. Treat it as" | test:LookCopyReceiptCommand | VERIFIED | evidence:LK-copy-1:FQ15-021D58797CD5 |
+| FQ15-35CBBB766800 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:383 | "a caller-specific sequence list; novelty is established only by the explicit" | test:LookCopyReceiptCommand | VERIFIED | evidence:LK-copy-1:FQ15-35CBBB766800 |
 | FQ15-AC3DCDF7E374 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:384 | "PatternLab reconciliation below, never by the file name alone." | render:14-help | OPEN | pending |
 | FQ15-EC65D35C76EE | IMPROVE | help fact | FamilyQuant/HelpContent.cs:387 | "A sequence read this way carries no protein and no statistical support from a" | render:14-help | OPEN | pending |
-| FQ15-04D8F6EC63CC | IMPROVE | help fact | FamilyQuant/HelpContent.cs:388 | "search engine. It carries " | render:14-help | OPEN | pending |
+| FQ15-04D8F6EC63CC | IMPROVE | help fact | FamilyQuant/HelpContent.cs:388 | "search engine. It carries " | test:LookCopyReceiptCommand | VERIFIED | evidence:LK-copy-1:FQ15-04D8F6EC63CC |
 | FQ15-5D09B8A935A1 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:388 | "'s own " | render:14-help | OPEN | pending |
-| FQ15-1378ED98CD4E | IMPROVE | help fact | FamilyQuant/HelpContent.cs:389 | ", which is why this screen" | render:14-help | OPEN | pending |
+| FQ15-1378ED98CD4E | IMPROVE | help fact | FamilyQuant/HelpContent.cs:389 | ", which is why this screen" | test:LookCopyReceiptCommand | VERIFIED | evidence:LK-copy-1:FQ15-1378ED98CD4E |
 | FQ15-C827D94EA828 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:390 | "starts with a filter rather than with a count." | render:14-help | OPEN | pending |
 | FQ15-DCD0A5DA22DF | IMPROVE | help fact | FamilyQuant/HelpContent.cs:392 | "The folder is searched recursively, so the folder holding the per-run" | render:14-help | OPEN | pending |
-| FQ15-4A96F6025552 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:393 | "sub-folders is the right one to give, and every run of the export is read" | render:14-help | OPEN | pending |
-| FQ15-237526A14A86 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:394 | "together. Runs are named by their FILE NAME everywhere on this screen, never by" | render:14-help | OPEN | pending |
-| FQ15-501F9C9CA237 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:395 | "their position in a folder or in a project: a de novo export, a directory listing" | render:14-help | OPEN | pending |
+| FQ15-4A96F6025552 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:393 | "sub-folders is the right one to give, and every run of the export is read" | test:LookCopyReceiptCommand | VERIFIED | evidence:LK-copy-1:FQ15-4A96F6025552 |
+| FQ15-237526A14A86 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:394 | "together. Runs are named by their FILE NAME everywhere on this screen, never by" | test:LookCopyReceiptCommand | VERIFIED | evidence:LK-copy-1:FQ15-237526A14A86 |
+| FQ15-501F9C9CA237 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:395 | "their position in a folder or in a project: a de novo export, a directory listing" | test:LookCopyReceiptCommand | VERIFIED | evidence:LK-copy-1:FQ15-501F9C9CA237 |
 | FQ15-F2DF0BC1CDDE | IMPROVE | help fact | FamilyQuant/HelpContent.cs:396 | "and a PatternLab project are not in the same order, and pairing them by" | render:14-help | OPEN | pending |
-| FQ15-325416BB22A2 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:397 | "position joins every spectrum against the wrong acquisition." | render:14-help | OPEN | pending |
+| FQ15-325416BB22A2 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:397 | "position joins every spectrum against the wrong acquisition." | test:LookCopyReceiptCommand | VERIFIED | evidence:LK-copy-1:FQ15-325416BB22A2 |
 | FQ15-64ABE4C562BB | IMPROVE | help fact | FamilyQuant/HelpContent.cs:400 | "THE THREE DE NOVO QUALITY FILTERS" | render:14-help | OPEN | pending |
 | FQ15-70B638E95E57 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:401 | "---------------------------------" | render:14-help | OPEN | pending |
-| FQ15-1188D888A803 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:402 | "A row is kept only if it clears all three. The third filter uses two boxes." | render:14-help | OPEN | pending |
+| FQ15-1188D888A803 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:402 | "A row is kept only if it clears all three. The third filter uses two boxes." | test:LookCopyReceiptCommand | VERIFIED | evidence:LK-copy-1:FQ15-1188D888A803 |
 | FQ15-FE69DFFB5893 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:404 | "Minimum length (" | render:14-help | OPEN | pending |
 | FQ15-F9B0133C8289 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:404 | " residues)" | render:14-help | OPEN | pending |
 | FQ15-C27055C62DA1 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:405 | "A short call carries too little information to be matched against a " | render:14-help | OPEN | pending |
-| FQ15-51BAA0BB3828 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:406 | "protein afterwards. Lowering this is what turns the homology step of " | render:14-help | OPEN | pending |
+| FQ15-51BAA0BB3828 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:406 | "protein afterwards. Lowering this is what turns the homology step of " | test:LookCopyReceiptCommand | VERIFIED | evidence:LK-copy-1:FQ15-51BAA0BB3828 |
 | FQ15-1DF6A8FB4B75 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:407 | "Layer 4 into a random-match generator." | render:14-help | OPEN | pending |
 | FQ15-8729D38516B7 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:407 | "    " | render:14-help | OPEN | pending |
 | FQ15-F30B1E4560FB | IMPROVE | help fact | FamilyQuant/HelpContent.cs:409 | "Minimum " | render:14-help | OPEN | pending |
 | FQ15-428D9FFD2C54 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:409 | " (" | render:14-help | OPEN | pending |
 | FQ15-CFCAA86A49CB | IMPROVE | help fact | FamilyQuant/HelpContent.cs:410 | "0.###" | render:14-help | OPEN | pending |
 | FQ15-2B9BDC14F1DA | IMPROVE | help fact | FamilyQuant/HelpContent.cs:410 | "%)" | render:14-help | OPEN | pending |
-| FQ15-0B3D635360CE | IMPROVE | help fact | FamilyQuant/HelpContent.cs:411 | "ALC" | render:14-help | OPEN | pending |
+| FQ15-0B3D635360CE | IMPROVE | help fact | FamilyQuant/HelpContent.cs:411 | "ALC" | test:LookCopyReceiptCommand | VERIFIED | evidence:LK-copy-1:FQ15-0B3D635360CE |
 | FQ15-630CB95EB392 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:413 | "ALC is PEAKS' average local confidence: the mean of the per-residue confidences " | render:14-help | OPEN | pending |
 | FQ15-C1BA2592610F | IMPROVE | help fact | FamilyQuant/HelpContent.cs:414 | "of one call. It is the blunt filter; the local-confidence stretch below asks a " | render:14-help | OPEN | pending |
 | FQ15-9A51FBBD792C | IMPROVE | help fact | FamilyQuant/HelpContent.cs:415 | "different question." | render:14-help | OPEN | pending |
-| FQ15-39EA24A7D05E | IMPROVE | help fact | FamilyQuant/HelpContent.cs:416 | " is this source's native per-call confidence." | render:14-help | OPEN | pending |
-| FQ15-3AD8B7AFA77C | IMPROVE | help fact | FamilyQuant/HelpContent.cs:417 | " It is an operational threshold, not a " | render:14-help | OPEN | pending |
+| FQ15-39EA24A7D05E | IMPROVE | help fact | FamilyQuant/HelpContent.cs:416 | " is this source's native per-call confidence." | test:LookCopyReceiptCommand | VERIFIED | evidence:LK-copy-1:FQ15-39EA24A7D05E |
+| FQ15-3AD8B7AFA77C | IMPROVE | help fact | FamilyQuant/HelpContent.cs:417 | " It is an operational threshold, not a " | test:LookCopyReceiptCommand | VERIFIED | evidence:LK-copy-1:FQ15-3AD8B7AFA77C |
 | FQ15-CFFDD63237FF | IMPROVE | help fact | FamilyQuant/HelpContent.cs:418 | "calibrated de novo FDR, and it is not interchangeable with another " | render:14-help | OPEN | pending |
 | FQ15-CC5A4C756FDD | IMPROVE | help fact | FamilyQuant/HelpContent.cs:419 | "caller's score." | render:14-help | OPEN | pending |
 | FQ15-1ED341AE1494 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:419 | "    " | render:14-help | OPEN | pending |
@@ -3577,20 +3577,20 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **441**; OPEN re
 | FQ15-7D3903A1AC4E | IMPROVE | help fact | FamilyQuant/HelpContent.cs:422 | " residues) and stretch floor (" | render:14-help | OPEN | pending |
 | FQ15-53C622D8EEDA | IMPROVE | help fact | FamilyQuant/HelpContent.cs:422 | "%)" | render:14-help | OPEN | pending |
 | FQ15-992FA6527DE1 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:423 | "One criterion in two boxes, and the sharp one: somewhere in the sequence " | render:14-help | OPEN | pending |
-| FQ15-48FEBAB33984 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:424 | "there must be a run of that many CONSECUTIVE residues, each of them at " | render:14-help | OPEN | pending |
+| FQ15-48FEBAB33984 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:424 | "there must be a run of that many CONSECUTIVE residues, each of them at " | test:LookCopyReceiptCommand | VERIFIED | evidence:LK-copy-1:FQ15-48FEBAB33984 |
 | FQ15-E34F2F4C45AC | IMPROVE | help fact | FamilyQuant/HelpContent.cs:425 | "or above that confidence. A residue below the floor breaks the run. This " | render:14-help | OPEN | pending |
-| FQ15-2E08651EC407 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:426 | "is what keeps the sequence with one trustworthy region and drops the one " | render:14-help | OPEN | pending |
+| FQ15-2E08651EC407 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:426 | "is what keeps the sequence with one trustworthy region and drops the one " | test:LookCopyReceiptCommand | VERIFIED | evidence:LK-copy-1:FQ15-2E08651EC407 |
 | FQ15-F9A16C1A3872 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:427 | "a global score can flatter; it complements rather than replaces the " | render:14-help | OPEN | pending |
 | FQ15-999A3D629388 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:428 | "source-native score cutoff." | render:14-help | OPEN | pending |
 | FQ15-22A6A44E620A | IMPROVE | help fact | FamilyQuant/HelpContent.cs:428 | "    " | render:14-help | OPEN | pending |
-| FQ15-4FE13F380B73 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:432 | "For the historical three-run PEAKS de-novo-only baseline, these defaults kept" | render:14-help | OPEN | pending |
+| FQ15-4FE13F380B73 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:432 | "For the historical three-run PEAKS de-novo-only baseline, these defaults kept" | test:LookCopyReceiptCommand | VERIFIED | evidence:LK-copy-1:FQ15-4FE13F380B73 |
 | FQ15-B4851B97771D | IMPROVE | help fact | FamilyQuant/HelpContent.cs:433 | "35,686 rows of 181,643 (19.6%). Those counts do not apply to another source" | render:14-help | OPEN | pending |
 | FQ15-B16288229AF0 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:434 | "or cutoff; use the counters on this screen for the loaded data." | render:14-help | OPEN | pending |
 | FQ15-AD322790926A | IMPROVE | help fact | FamilyQuant/HelpContent.cs:436 | "Loosening the filters is a decision about how much uncertain sequence you carry" | render:14-help | OPEN | pending |
 | FQ15-C62C1072346A | IMPROVE | help fact | FamilyQuant/HelpContent.cs:437 | "into every later step. The" | render:14-help | OPEN | pending |
 | FQ15-CA92D182D534 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:438 | "per-run breakdown under the counters is where to look for a run that behaved" | render:14-help | OPEN | pending |
 | FQ15-6B75F5A35795 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:439 | "differently from the others." | render:14-help | OPEN | pending |
-| FQ15-2049FEB4C428 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:442 | "THE FIVE VERDICTS, IN PLAIN LANGUAGE" | render:14-help | OPEN | pending |
+| FQ15-2049FEB4C428 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:442 | "THE FIVE VERDICTS, IN PLAIN LANGUAGE" | test:LookCopyReceiptCommand | VERIFIED | evidence:LK-copy-1:FQ15-2049FEB4C428 |
 | FQ15-E660C721CDAA | IMPROVE | help fact | FamilyQuant/HelpContent.cs:443 | "------------------------------------" | render:14-help | OPEN | pending |
 | FQ15-AAC35A652716 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:444 | "Layer 2 first joins by normalized acquisition file and MS2 scan. It then requires" | render:14-help | OPEN | pending |
 | FQ15-BF8985A29570 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:445 | "the same reported charge and precursor m/z within 20 ppm, isotope-error-aware so" | render:14-help | OPEN | pending |
@@ -3599,23 +3599,23 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **441**; OPEN re
 | FQ15-55C76FEFC865 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:449 | "De novo only        nothing in the search shares that spectrum. This is new" | render:14-help | OPEN | pending |
 | FQ15-D19886E6A251 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:450 | "                    relative to PatternLab at the file-and-scan level; the" | render:14-help | OPEN | pending |
 | FQ15-8BB8B8E81DB1 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:451 | "                    current screen reports the count for the loaded source." | render:14-help | OPEN | pending |
-| FQ15-54510BAE2AF3 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:452 | "Different precursor the scan is shared, but no PatternLab PSM has both the same" | render:14-help | OPEN | pending |
-| FQ15-0246BBCF2880 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:453 | "context             charge and m/z within 20 ppm. No sequence comparison is made." | render:14-help | OPEN | pending |
-| FQ15-2EDAB498CE83 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:454 | "Redundant equal     same file, scan, charge, m/z and sequence once the notation" | render:14-help | OPEN | pending |
+| FQ15-54510BAE2AF3 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:452 | "Different precursor the scan is shared, but no PatternLab PSM has both the same" | test:LookCopyReceiptCommand | VERIFIED | evidence:LK-copy-1:FQ15-54510BAE2AF3 |
+| FQ15-0246BBCF2880 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:453 | "context             charge and m/z within 20 ppm. No sequence comparison is made." | test:LookCopyReceiptCommand | VERIFIED | evidence:LK-copy-1:FQ15-0246BBCF2880 |
+| FQ15-2EDAB498CE83 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:454 | "Redundant equal     same file, scan, charge, m/z and sequence once the notation" | test:LookCopyReceiptCommand | VERIFIED | evidence:LK-copy-1:FQ15-2EDAB498CE83 |
 | FQ15-9A495B0C0D5E | IMPROVE | help fact | FamilyQuant/HelpContent.cs:455 | "                    is normalised. It only confirms what PatternLab has." | render:14-help | OPEN | pending |
 | FQ15-BA54B91C6E2F | IMPROVE | help fact | FamilyQuant/HelpContent.cs:456 | "Equal but weak PSM  same comparable precursor and sequence, but PatternLab's own" | render:14-help | OPEN | pending |
-| FQ15-077B9A2428FF | IMPROVE | help fact | FamilyQuant/HelpContent.cs:457 | "                    cross-correlation is below the threshold." | render:14-help | OPEN | pending |
+| FQ15-077B9A2428FF | IMPROVE | help fact | FamilyQuant/HelpContent.cs:457 | "                    cross-correlation is below the threshold." | test:LookCopyReceiptCommand | VERIFIED | evidence:LK-copy-1:FQ15-077B9A2428FF |
 | FQ15-C213F0099ACC | IMPROVE | help fact | FamilyQuant/HelpContent.cs:458 | "Overlapping         same file, scan, charge and m/z, but a different sequence." | render:14-help | OPEN | pending |
-| FQ15-2AEFEE0B38AC | IMPROVE | help fact | FamilyQuant/HelpContent.cs:459 | "alternative         It is excluded from additive de novo quantification and kept" | render:14-help | OPEN | pending |
+| FQ15-2AEFEE0B38AC | IMPROVE | help fact | FamilyQuant/HelpContent.cs:459 | "alternative         It is excluded from additive de novo quantification and kept" | test:LookCopyReceiptCommand | VERIFIED | evidence:LK-copy-1:FQ15-2AEFEE0B38AC |
 | FQ15-79C8DB184CD0 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:460 | "                    for review. It is not a database-search accuracy estimate." | render:14-help | OPEN | pending |
 | FQ15-70E48E6B25D8 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:464 | "In the historical three-run PEAKS de-novo-only baseline, 10,249 filtered rows" | render:14-help | OPEN | pending |
-| FQ15-29540723FCCB | IMPROVE | help fact | FamilyQuant/HelpContent.cs:465 | "shared file + scan with PatternLab. Of those, 4,874 reported a different" | render:14-help | OPEN | pending |
+| FQ15-29540723FCCB | IMPROVE | help fact | FamilyQuant/HelpContent.cs:465 | "shared file + scan with PatternLab. Of those, 4,874 reported a different" | test:LookCopyReceiptCommand | VERIFIED | evidence:LK-copy-1:FQ15-29540723FCCB |
 | FQ15-A8C754395A78 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:466 | "charge; 4,355 shared charge but not m/z; and 1,020 passed file + scan + charge" | render:14-help | OPEN | pending |
 | FQ15-D8DBBA1F770F | IMPROVE | help fact | FamilyQuant/HelpContent.cs:467 | "+ 20-ppm m/z. Inside that final set, 2 were strict PTM-cleaned sequence matches," | render:14-help | OPEN | pending |
-| FQ15-3AE55BB3B38E | IMPROVE | help fact | FamilyQuant/HelpContent.cs:468 | "2 more became equivalent after I/L folding, and 1,016 remained alternatives." | render:14-help | OPEN | pending |
+| FQ15-3AE55BB3B38E | IMPROVE | help fact | FamilyQuant/HelpContent.cs:468 | "2 more became equivalent after I/L folding, and 1,016 remained alternatives." | test:LookCopyReceiptCommand | VERIFIED | evidence:LK-copy-1:FQ15-3AE55BB3B38E |
 | FQ15-6D7AEBEFE95F | IMPROVE | help fact | FamilyQuant/HelpContent.cs:469 | "The earlier 1,129 / 1,125 figures did not require equal charge and are superseded." | render:14-help | OPEN | pending |
 | FQ15-59789BFDC39B | IMPROVE | help fact | FamilyQuant/HelpContent.cs:472 | "The different-precursor-context verdict is worth understanding. A mass spectrometer" | render:14-help | OPEN | pending |
-| FQ15-4731B86106EB | IMPROVE | help fact | FamilyQuant/HelpContent.cs:473 | "isolates a window, not a molecule, so two species eluting together are" | render:14-help | OPEN | pending |
+| FQ15-4731B86106EB | IMPROVE | help fact | FamilyQuant/HelpContent.cs:473 | "isolates a window, not a molecule, so two species eluting together are" | test:LookCopyReceiptCommand | VERIFIED | evidence:LK-copy-1:FQ15-4731B86106EB |
 | FQ15-E2BD85BE5041 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:474 | "fragmented into ONE spectrum: a chimeric spectrum. PatternLab explained one of" | render:14-help | OPEN | pending |
 | FQ15-F3316078430F | IMPROVE | help fact | FamilyQuant/HelpContent.cs:475 | "them; the de novo call may be an alternative ion in that window. The scan number" | render:14-help | OPEN | pending |
 | FQ15-9A55411F84A8 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:476 | "alone cannot establish duplication, sequence conflict, or biological truth." | render:14-help | OPEN | pending |
@@ -3624,42 +3624,42 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **441**; OPEN re
 | FQ15-DD027FBEE0BD | IMPROVE | help fact | FamilyQuant/HelpContent.cs:482 | "THE DATABASE-SEARCH AGREEMENT CONTROL" | render:14-help | OPEN | pending |
 | FQ15-62B2CF663ED2 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:483 | "-------------------------------------" | render:14-help | OPEN | pending |
 | FQ15-8A8335490306 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:484 | "The valid search-vs-search control compares PatternLab PSMs with PEAKS db.psms," | render:14-help | OPEN | pending |
-| FQ15-17AEF4F2398A | IMPROVE | help fact | FamilyQuant/HelpContent.cs:485 | "not with a de novo export. In the historical three-run control, the two database" | render:14-help | OPEN | pending |
+| FQ15-17AEF4F2398A | IMPROVE | help fact | FamilyQuant/HelpContent.cs:485 | "not with a de novo export. In the historical three-run control, the two database" | test:LookCopyReceiptCommand | VERIFIED | evidence:LK-copy-1:FQ15-17AEF4F2398A |
 | FQ15-CAEB389B6C05 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:486 | "searches shared 57,956 file+scan keys; 56,626 (97.7%) had an exact sequence after" | render:14-help | OPEN | pending |
-| FQ15-4218AA99A4C1 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:487 | "PTM notation was removed. They shared a reported charge on 57,507 keys, and 56,626" | render:14-help | OPEN | pending |
-| FQ15-21A063435238 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:488 | "of those were exact (98.5%). Those are dataset-specific historical values: use the" | render:14-help | OPEN | pending |
+| FQ15-4218AA99A4C1 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:487 | "PTM notation was removed. They shared a reported charge on 57,507 keys, and 56,626" | test:LookCopyReceiptCommand | VERIFIED | evidence:LK-copy-1:FQ15-4218AA99A4C1 |
+| FQ15-21A063435238 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:488 | "of those were exact (98.5%). Those are dataset-specific historical values: use the" | test:LookCopyReceiptCommand | VERIFIED | evidence:LK-copy-1:FQ15-21A063435238 |
 | FQ15-C4932548B194 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:489 | "loaded project's database-search concordance table for a current analysis." | render:14-help | OPEN | pending |
 | FQ15-982A735FF40C | IMPROVE | help fact | FamilyQuant/HelpContent.cs:492 | "THE REVIEW QUEUE, AND WHY IT IS MANUAL" | render:14-help | OPEN | pending |
-| FQ15-3635CBD415F5 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:493 | "--------------------------------------" | render:14-help | OPEN | pending |
+| FQ15-3635CBD415F5 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:493 | "--------------------------------------" | test:LookCopyReceiptCommand | VERIFIED | evidence:LK-copy-1:FQ15-3635CBD415F5 |
 | FQ15-D463C42456FA | IMPROVE | help fact | FamilyQuant/HelpContent.cs:494 | "The queue holds exactly two of the five verdicts: overlapping alternatives, and" | render:14-help | OPEN | pending |
-| FQ15-2E0E2FFD58CC | IMPROVE | help fact | FamilyQuant/HelpContent.cs:495 | "agreements where PatternLab's own evidence was weak. The other three are" | render:14-help | OPEN | pending |
-| FQ15-124DAE1A807B | IMPROVE | help fact | FamilyQuant/HelpContent.cs:496 | "results, and a result does not need a decision." | render:14-help | OPEN | pending |
+| FQ15-2E0E2FFD58CC | IMPROVE | help fact | FamilyQuant/HelpContent.cs:495 | "agreements where PatternLab's own evidence was weak. The other three are" | test:LookCopyReceiptCommand | VERIFIED | evidence:LK-copy-1:FQ15-2E0E2FFD58CC |
+| FQ15-124DAE1A807B | IMPROVE | help fact | FamilyQuant/HelpContent.cs:496 | "results, and a result does not need a decision." | test:LookCopyReceiptCommand | VERIFIED | evidence:LK-copy-1:FQ15-124DAE1A807B |
 | FQ15-C6618A7501E6 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:498 | "An overlapping alternative is a de novo hypothesis on a comparable precursor." | render:14-help | OPEN | pending |
-| FQ15-13C4733D9E42 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:499 | "Nothing in either" | render:14-help | OPEN | pending |
+| FQ15-13C4733D9E42 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:499 | "Nothing in either" | test:LookCopyReceiptCommand | VERIFIED | evidence:LK-copy-1:FQ15-13C4733D9E42 |
 | FQ15-96172472D999 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:500 | "answer decides which is right: a cross-correlation and " | render:14-help | OPEN | pending |
 | FQ15-57FDC534C4B8 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:500 | " are not on the" | render:14-help | OPEN | pending |
 | FQ15-B219836523E5 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:501 | "same scale, are not calibrated against each other, and are not measuring the" | render:14-help | OPEN | pending |
-| FQ15-3DA7E3F0A828 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:502 | "same thing. An automatic rule here would be an invented threshold dressed as a" | render:14-help | OPEN | pending |
+| FQ15-3DA7E3F0A828 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:502 | "same thing. An automatic rule here would be an invented threshold dressed as a" | test:LookCopyReceiptCommand | VERIFIED | evidence:LK-copy-1:FQ15-3DA7E3F0A828 |
 | FQ15-9AB8D22B4586 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:503 | "result, and it would be invisible afterwards." | render:14-help | OPEN | pending |
 | FQ15-B795D383412A | IMPROVE | help fact | FamilyQuant/HelpContent.cs:505 | "So the program presents the evidence and decides nothing. The table is" | render:14-help | OPEN | pending |
 | FQ15-7E435B373D34 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:506 | "read-only and shows both sequences side by side with the cross-correlation on" | render:14-help | OPEN | pending |
 | FQ15-C48656ED5122 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:507 | "the PatternLab side and " | render:14-help | OPEN | pending |
-| FQ15-0DA7FE9FFF6B | IMPROVE | help fact | FamilyQuant/HelpContent.cs:507 | " plus the weakest residue confidence on the de" | render:14-help | OPEN | pending |
+| FQ15-0DA7FE9FFF6B | IMPROVE | help fact | FamilyQuant/HelpContent.cs:507 | " plus the weakest residue confidence on the de" | test:LookCopyReceiptCommand | VERIFIED | evidence:LK-copy-1:FQ15-0DA7FE9FFF6B |
 | FQ15-A8F419BD8A9A | IMPROVE | help fact | FamilyQuant/HelpContent.cs:508 | "novo side, plus how far apart the two precursors were in ppm. It is a" | render:14-help | OPEN | pending |
 | FQ15-6291CF3DB688 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:509 | "review set for the loaded source. Export it and" | render:14-help | OPEN | pending |
-| FQ15-2E6F0BB6FFAD | IMPROVE | help fact | FamilyQuant/HelpContent.cs:510 | "the evidence can be inspected away from this screen. These rows are not added to" | render:14-help | OPEN | pending |
+| FQ15-2E6F0BB6FFAD | IMPROVE | help fact | FamilyQuant/HelpContent.cs:510 | "the evidence can be inspected away from this screen. These rows are not added to" | test:LookCopyReceiptCommand | VERIFIED | evidence:LK-copy-1:FQ15-2E6F0BB6FFAD |
 | FQ15-A5C2912877E1 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:511 | "the de novo signal while unresolved, so review cannot inflate quantification." | render:14-help | OPEN | pending |
-| FQ15-06304CE752E1 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:513 | "An equal-but-weak row is retained in the review export rather than labelled as an" | render:14-help | OPEN | pending |
+| FQ15-06304CE752E1 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:513 | "An equal-but-weak row is retained in the review export rather than labelled as an" | test:LookCopyReceiptCommand | VERIFIED | evidence:LK-copy-1:FQ15-06304CE752E1 |
 | FQ15-DD36959A3F5C | IMPROVE | help fact | FamilyQuant/HelpContent.cs:514 | "ordinary redundant confirmation. It is excluded from additive de novo quantification" | render:14-help | OPEN | pending |
 | FQ15-9311332D627C | IMPROVE | help fact | FamilyQuant/HelpContent.cs:515 | "until reviewed, so the evidence remains visible without double-counting its signal." | render:14-help | OPEN | pending |
 | FQ15-807AAD52DF6C | IMPROVE | help fact | FamilyQuant/HelpContent.cs:518 | "WHAT THE EXTRACTED NUMBERS ARE (LAYER 3)" | render:14-help | OPEN | pending |
-| FQ15-522A53B0AE6B | IMPROVE | help fact | FamilyQuant/HelpContent.cs:519 | "----------------------------------------" | render:14-help | OPEN | pending |
+| FQ15-522A53B0AE6B | IMPROVE | help fact | FamilyQuant/HelpContent.cs:519 | "----------------------------------------" | test:LookCopyReceiptCommand | VERIFIED | evidence:LK-copy-1:FQ15-522A53B0AE6B |
 | FQ15-0BCF3A447B1C | KEEP | format/export | FamilyQuant/HelpContent.cs:520 | "Layer 3 opens each run's .raw once and integrates a chromatogram for every kept" | render:14-help | OPEN | pending |
-| FQ15-0E5779072074 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:521 | "precursor, at its own anchor scan. The acquisitions are found BY FILE NAME, one" | render:14-help | OPEN | pending |
-| FQ15-4724D33AC8FF | IMPROVE | help fact | FamilyQuant/HelpContent.cs:522 | "run is held in memory at a time, and the results are cached beside the RAW" | render:14-help | OPEN | pending |
-| FQ15-3478BF3A34FE | IMPROVE | help fact | FamilyQuant/HelpContent.cs:523 | "files so a second session over the same runs costs seconds instead of minutes." | render:14-help | OPEN | pending |
-| FQ15-3303C6DA3EE3 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:525 | "M+0 is the monoisotopic peak alone: the isotope that carries no heavy carbon." | render:14-help | OPEN | pending |
-| FQ15-0C58BB9C8CAA | IMPROVE | help fact | FamilyQuant/HelpContent.cs:526 | "The whole isotope envelope (M+0 plus M+1 plus M+2) is measured beside it, but" | render:14-help | OPEN | pending |
+| FQ15-0E5779072074 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:521 | "precursor, at its own anchor scan. The acquisitions are found BY FILE NAME, one" | test:LookCopyReceiptCommand | VERIFIED | evidence:LK-copy-1:FQ15-0E5779072074 |
+| FQ15-4724D33AC8FF | IMPROVE | help fact | FamilyQuant/HelpContent.cs:522 | "run is held in memory at a time, and the results are cached beside the RAW" | test:LookCopyReceiptCommand | VERIFIED | evidence:LK-copy-1:FQ15-4724D33AC8FF |
+| FQ15-3478BF3A34FE | IMPROVE | help fact | FamilyQuant/HelpContent.cs:523 | "files so a second session over the same runs costs seconds instead of minutes." | test:LookCopyReceiptCommand | VERIFIED | evidence:LK-copy-1:FQ15-3478BF3A34FE |
+| FQ15-3303C6DA3EE3 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:525 | "M+0 is the monoisotopic peak alone: the isotope that carries no heavy carbon." | test:LookCopyReceiptCommand | VERIFIED | evidence:LK-copy-1:FQ15-3303C6DA3EE3 |
+| FQ15-0C58BB9C8CAA | IMPROVE | help fact | FamilyQuant/HelpContent.cs:526 | "The whole isotope envelope (M+0 plus M+1 plus M+2) is measured beside it, but" | test:LookCopyReceiptCommand | VERIFIED | evidence:LK-copy-1:FQ15-0C58BB9C8CAA |
 | FQ15-A8B4A5CF598B | IMPROVE | help fact | FamilyQuant/HelpContent.cs:527 | "only as a diagnostic, and it is deliberately kept out of the chart in Layer 5." | render:14-help | OPEN | pending |
 | FQ15-68367A957B6F | IMPROVE | help fact | FamilyQuant/HelpContent.cs:528 | "PatternLab's stored quants are M+0, and one bar cannot be built from two" | render:14-help | OPEN | pending |
 | FQ15-CA4EC581C2CF | IMPROVE | help fact | FamilyQuant/HelpContent.cs:529 | "different bases without saying something false about the comparison." | render:14-help | OPEN | pending |
@@ -3669,13 +3669,13 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **441**; OPEN re
 | FQ15-94E91FC11DF4 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:535 | "    PEAKS     one integrated elution peak. \"Distinct peaks\" and every area" | render:14-help | OPEN | pending |
 | FQ15-E4FBE7F17CDB | IMPROVE | help fact | FamilyQuant/HelpContent.cs:536 | "              are peaks." | render:14-help | OPEN | pending |
 | FQ15-884C362A9291 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:538 | "They differ because one elution peak is usually sampled by several MS2 scans:" | render:14-help | OPEN | pending |
-| FQ15-03F65CFF8610 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:539 | "several anchors, one peak, and the extractor hands that same peak back to each" | render:14-help | OPEN | pending |
+| FQ15-03F65CFF8610 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:539 | "several anchors, one peak, and the extractor hands that same peak back to each" | test:LookCopyReceiptCommand | VERIFIED | evidence:LK-copy-1:FQ15-03F65CFF8610 |
 | FQ15-6EC776681099 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:540 | "of them. Every total on this screen is summed over DISTINCT PEAKS. Summing per" | render:14-help | OPEN | pending |
 | FQ15-6D6E3D465A90 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:541 | "anchor instead would add the same trapezoid once per MS2 event, which inflates" | render:14-help | OPEN | pending |
 | FQ15-A45F0E39C99D | IMPROVE | help fact | FamilyQuant/HelpContent.cs:542 | "the ion current by a few percent, always upwards, and never fails a check. The" | render:14-help | OPEN | pending |
 | FQ15-743F029936E5 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:543 | "\"redundant anchors\" and \"redundant area\" columns report exactly what that" | render:14-help | OPEN | pending |
 | FQ15-A3BBD95CE7D3 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:544 | "mistake would have added." | render:14-help | OPEN | pending |
-| FQ15-5030F3621ABB | IMPROVE | help fact | FamilyQuant/HelpContent.cs:546 | "The \"shared-window bound\" column is a BOUND, not a correction. Two peaks of the" | render:14-help | OPEN | pending |
+| FQ15-5030F3621ABB | IMPROVE | help fact | FamilyQuant/HelpContent.cs:546 | "The \"shared-window bound\" column is a BOUND, not a correction. Two peaks of the" | test:LookCopyReceiptCommand | VERIFIED | evidence:LK-copy-1:FQ15-5030F3621ABB |
 | FQ15-5457CA883E3E | IMPROVE | help fact | FamilyQuant/HelpContent.cs:547 | "same precursor inside one extraction window can be two genuine elution events" | render:14-help | OPEN | pending |
 | FQ15-719F58DAA362 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:548 | "across a long gradient, or one broad peak entered twice; telling them apart" | render:14-help | OPEN | pending |
 | FQ15-ECCB3DBCDFD2 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:549 | "needs each peak's scan span, which this extraction does not record. So they are" | render:14-help | OPEN | pending |
@@ -3684,28 +3684,28 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **441**; OPEN re
 | FQ15-784F0016F1BC | IMPROVE | help fact | FamilyQuant/HelpContent.cs:554 | "WHAT THE HOMOLOGY LAYER MAPS (LAYER 4)" | render:14-help | OPEN | pending |
 | FQ15-5FF3ED978CDA | IMPROVE | help fact | FamilyQuant/HelpContent.cs:555 | "--------------------------------------" | render:14-help | OPEN | pending |
 | FQ15-88AE6D6EEF8E | IMPROVE | help fact | FamilyQuant/HelpContent.cs:556 | "A de novo sequence has no protein attached to it. Layer 4 asks whether it looks" | render:14-help | OPEN | pending |
-| FQ15-4EB0374C2343 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:557 | "like one anyway: each DISTINCT kept sequence is aligned against the proteins of" | render:14-help | OPEN | pending |
+| FQ15-4EB0374C2343 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:557 | "like one anyway: each DISTINCT kept sequence is aligned against the proteins of" | test:LookCopyReceiptCommand | VERIFIED | evidence:LK-copy-1:FQ15-4EB0374C2343 |
 | FQ15-D3D2E692E4BB | IMPROVE | help fact | FamilyQuant/HelpContent.cs:558 | "a Family Cluster File, and every surviving hit is attributed to the User ID" | render:14-help | OPEN | pending |
 | FQ15-932820931F39 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:559 | "family of the protein it landed in. One file answers both halves, which is why" | render:14-help | OPEN | pending |
 | FQ15-B4684871B338 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:560 | "a hit can never land in a protein the family table does not know." | render:14-help | OPEN | pending |
 | FQ15-C6111BCFAA1E | IMPROVE | help fact | FamilyQuant/HelpContent.cs:562 | "The sequences are deduplicated first: the same tag read in fifty spectra is one" | render:14-help | OPEN | pending |
 | FQ15-C1A61AA76C4C | IMPROVE | help fact | FamilyQuant/HelpContent.cs:563 | "alignment, not fifty, so \"peptides searched\" is far below the rows kept in" | render:14-help | OPEN | pending |
 | FQ15-5A7693E2AA99 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:564 | "Layer 1. The minimum identity is a PREFILTER, not the score: a protein that" | render:14-help | OPEN | pending |
-| FQ15-067EC1C964A7 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:565 | "never reaches that fraction of literal identity is never aligned at all." | render:14-help | OPEN | pending |
+| FQ15-067EC1C964A7 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:565 | "never reaches that fraction of literal identity is never aligned at all." | test:LookCopyReceiptCommand | VERIFIED | evidence:LK-copy-1:FQ15-067EC1C964A7 |
 | FQ15-6C9C9F448149 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:566 | "Isoleucine and leucine are treated as one residue there by default, because" | render:14-help | OPEN | pending |
 | FQ15-FDC5AA426515 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:567 | "they have the same mass and a fragment spectrum cannot tell them apart, so" | render:14-help | OPEN | pending |
 | FQ15-97C7B103A67E | IMPROVE | help fact | FamilyQuant/HelpContent.cs:568 | "punishing the engine's arbitrary choice between them would be punishing physics." | render:14-help | OPEN | pending |
 | FQ15-8C698ABC8CF4 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:570 | "WHAT THE DECOY-ONLY COUNT MEANS. It is a CONTROL, and it is not an FDR. The" | render:14-help | OPEN | pending |
-| FQ15-4D0C520CA6C8 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:571 | "family file carries reversed sequences beside the real ones. A peptide that" | render:14-help | OPEN | pending |
+| FQ15-4D0C520CA6C8 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:571 | "family file carries reversed sequences beside the real ones. A peptide that" | test:LookCopyReceiptCommand | VERIFIED | evidence:LK-copy-1:FQ15-4D0C520CA6C8 |
 | FQ15-7891ABA16AA4 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:572 | "found only reversed proteins was attributed to something that does not exist," | render:14-help | OPEN | pending |
 | FQ15-F88685EA235F | IMPROVE | help fact | FamilyQuant/HelpContent.cs:573 | "so the rate of that is the rate at which this identity threshold invents a" | render:14-help | OPEN | pending |
 | FQ15-841C255A5B7F | IMPROVE | help fact | FamilyQuant/HelpContent.cs:574 | "family out of chance similarity. Read \"mapped to targets\" beside it and never" | render:14-help | OPEN | pending |
 | FQ15-87E517C6EFDE | IMPROVE | help fact | FamilyQuant/HelpContent.cs:575 | "on its own: if the two are of the same size, the threshold is too low, whatever" | render:14-help | OPEN | pending |
 | FQ15-D4765A2F2F5D | IMPROVE | help fact | FamilyQuant/HelpContent.cs:576 | "the mapped number looks like alone." | render:14-help | OPEN | pending |
 | FQ15-B0BF9E13C3F8 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:578 | "It is not an FDR because nothing here is calibrated into a corrected error rate" | render:14-help | OPEN | pending |
-| FQ15-3AA03D3899EF | IMPROVE | help fact | FamilyQuant/HelpContent.cs:579 | "per hit: there is no competition between a target and its decoy for one" | render:14-help | OPEN | pending |
+| FQ15-3AA03D3899EF | IMPROVE | help fact | FamilyQuant/HelpContent.cs:579 | "per hit: there is no competition between a target and its decoy for one" | test:LookCopyReceiptCommand | VERIFIED | evidence:LK-copy-1:FQ15-3AA03D3899EF |
 | FQ15-930A3948469A | IMPROVE | help fact | FamilyQuant/HelpContent.cs:580 | "spectrum, and no q-value is computed or implied. It is one number to read the" | render:14-help | OPEN | pending |
-| FQ15-2D2372B50AD7 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:581 | "other against. A peptide that found both keeps its targets and drops its" | render:14-help | OPEN | pending |
+| FQ15-2D2372B50AD7 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:581 | "other against. A peptide that found both keeps its targets and drops its" | test:LookCopyReceiptCommand | VERIFIED | evidence:LK-copy-1:FQ15-2D2372B50AD7 |
 | FQ15-DCF63FB32F4E | IMPROVE | help fact | FamilyQuant/HelpContent.cs:582 | "decoys; a peptide that found only decoys keeps them, which is the entire point" | render:14-help | OPEN | pending |
 | FQ15-5D55CB44AE4A | IMPROVE | help fact | FamilyQuant/HelpContent.cs:583 | "of having them, and it stays out of the family table below." | render:14-help | OPEN | pending |
 | FQ15-86C874D0E8F4 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:585 | "Most kept sequences match nothing at all, and that is not a defect. They are" | render:14-help | OPEN | pending |
@@ -3717,24 +3717,24 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **441**; OPEN re
 | FQ15-5D254BF9B1D8 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:593 | "three exhaustive parts:" | render:14-help | OPEN | pending |
 | FQ15-DBEA3231135A | IMPROVE | help fact | FamilyQuant/HelpContent.cs:595 | "    PatternLab   the ion current of the peptides the database search" | render:14-help | OPEN | pending |
 | FQ15-F4E040314E27 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:596 | "                 identified and quantified." | render:14-help | OPEN | pending |
-| FQ15-181CE67921D3 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:597 | "    De novo      what the kept de novo set adds on top of that." | render:14-help | OPEN | pending |
-| FQ15-0D4D21F1C626 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:598 | "    Remainder    what is left, and still has no owner." | render:14-help | OPEN | pending |
-| FQ15-19E3F872228B | IMPROVE | help fact | FamilyQuant/HelpContent.cs:600 | "The three shares add up to 100% by construction, because the remainder is" | render:14-help | OPEN | pending |
-| FQ15-4E4C05ED5A87 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:601 | "defined as what the other two leave. That is arithmetic, not a result, and the" | render:14-help | OPEN | pending |
+| FQ15-181CE67921D3 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:597 | "    De novo      what the kept de novo set adds on top of that." | test:LookCopyReceiptCommand | VERIFIED | evidence:LK-copy-1:FQ15-181CE67921D3 |
+| FQ15-0D4D21F1C626 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:598 | "    Remainder    what is left, and still has no owner." | test:LookCopyReceiptCommand | VERIFIED | evidence:LK-copy-1:FQ15-0D4D21F1C626 |
+| FQ15-19E3F872228B | IMPROVE | help fact | FamilyQuant/HelpContent.cs:600 | "The three shares add up to 100% by construction, because the remainder is" | test:LookCopyReceiptCommand | VERIFIED | evidence:LK-copy-1:FQ15-19E3F872228B |
+| FQ15-4E4C05ED5A87 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:601 | "defined as what the other two leave. That is arithmetic, not a result, and the" | test:LookCopyReceiptCommand | VERIFIED | evidence:LK-copy-1:FQ15-4E4C05ED5A87 |
 | FQ15-B8487604EC0B | IMPROVE | help fact | FamilyQuant/HelpContent.cs:602 | "thing that had to be earned instead is COMPARABILITY: both of the first two" | render:14-help | OPEN | pending |
 | FQ15-F2620806B7D2 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:603 | "numerators are monoisotopic, and both count one integrated peak once." | render:14-help | OPEN | pending |
 | FQ15-6A5127C4C3D0 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:605 | "A NEGATIVE remainder is never clamped to zero. It is a finding: it says the two" | render:14-help | OPEN | pending |
 | FQ15-B721E800B82A | IMPROVE | help fact | FamilyQuant/HelpContent.cs:606 | "numerators together claim more signal than the run's chromatogram holds, and" | render:14-help | OPEN | pending |
 | FQ15-9884C53D86F8 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:607 | "hiding it would hide exactly the case worth knowing about." | render:14-help | OPEN | pending |
-| FQ15-3BBE94C586CA | IMPROVE | help fact | FamilyQuant/HelpContent.cs:609 | "THE PROVENANCE WORDS. Each number of the table carries one of three, because" | render:14-help | OPEN | pending |
+| FQ15-3BBE94C586CA | IMPROVE | help fact | FamilyQuant/HelpContent.cs:609 | "THE PROVENANCE WORDS. Each number of the table carries one of three, because" | test:LookCopyReceiptCommand | VERIFIED | evidence:LK-copy-1:FQ15-3BBE94C586CA |
 | FQ15-6A0C0259E670 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:610 | "the three parts arrive by three different routes and only two of them are" | render:14-help | OPEN | pending |
 | FQ15-634E57AEDEE5 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:611 | "measurements:" | render:14-help | OPEN | pending |
 | FQ15-C88659DDCEC0 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:613 | "    measured   computed here, from the RAW file, by the machinery named beside" | render:14-help | OPEN | pending |
-| FQ15-4045CD54165D | IMPROVE | help fact | FamilyQuant/HelpContent.cs:614 | "               the word. The total ion current and the de novo areas are this." | render:14-help | OPEN | pending |
+| FQ15-4045CD54165D | IMPROVE | help fact | FamilyQuant/HelpContent.cs:614 | "               the word. The total ion current and the de novo areas are this." | test:LookCopyReceiptCommand | VERIFIED | evidence:LK-copy-1:FQ15-4045CD54165D |
 | FQ15-A7A4D26FF131 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:615 | "    recorded   read out of a file that had written it down: a divisor recorded" | render:14-help | OPEN | pending |
 | FQ15-7CD9A53F1CC7 | KEEP | format/export | FamilyQuant/HelpContent.cs:616 | "               in the .plp, or the stored quants of a .xic2. The PatternLab" | render:14-help | OPEN | pending |
 | FQ15-7CEEF6B2FBD3 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:617 | "               part is this." | render:14-help | OPEN | pending |
-| FQ15-1A613DA8A1AC | IMPROVE | help fact | FamilyQuant/HelpContent.cs:618 | "    derived    neither measured nor read, but obtained from the others by" | render:14-help | OPEN | pending |
+| FQ15-1A613DA8A1AC | IMPROVE | help fact | FamilyQuant/HelpContent.cs:618 | "    derived    neither measured nor read, but obtained from the others by" | test:LookCopyReceiptCommand | VERIFIED | evidence:LK-copy-1:FQ15-1A613DA8A1AC |
 | FQ15-9F4E352D7968 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:619 | "               arithmetic. The remainder is always this, and that is why it" | render:14-help | OPEN | pending |
 | FQ15-7BDC463D3A4F | IMPROVE | help fact | FamilyQuant/HelpContent.cs:620 | "               can come out negative." | render:14-help | OPEN | pending |
 | FQ15-CAC8B8586A2F | IMPROVE | help fact | FamilyQuant/HelpContent.cs:622 | "The word alone is not enough, so the source is printed with it: \"recorded\"" | render:14-help | OPEN | pending |
@@ -3744,7 +3744,7 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **441**; OPEN re
 | FQ15-F991E755E8B2 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:627 | "refusals included. A project that merged its technical replicates holds one" | render:14-help | OPEN | pending |
 | FQ15-D904EE908EFA | IMPROVE | help fact | FamilyQuant/HelpContent.cs:628 | "averaged column for three acquisitions and cannot answer per run; no arithmetic" | render:14-help | OPEN | pending |
 | FQ15-3C4644555B98 | KEEP | format/export | FamilyQuant/HelpContent.cs:629 | "recovers what was averaged away, so it says so and the .xic2 is used instead." | render:14-help | OPEN | pending |
-| FQ15-165F7FA4EAC8 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:630 | "Reducing that to a flag would hide which of the two you are looking at." | render:14-help | OPEN | pending |
+| FQ15-165F7FA4EAC8 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:630 | "Reducing that to a flag would hide which of the two you are looking at." | test:LookCopyReceiptCommand | VERIFIED | evidence:LK-copy-1:FQ15-165F7FA4EAC8 |
 | FQ15-1D837E05FE2D | IMPROVE | help fact | FamilyQuant/HelpContent.cs:632 | "Every CSV this screen writes uses a dot for the decimal separator whatever your" | render:14-help | OPEN | pending |
 | FQ15-54F1A7C1236A | IMPROVE | help fact | FamilyQuant/HelpContent.cs:633 | "machine's language is, and the partition numbers are written in their shortest" | render:14-help | OPEN | pending |
 | FQ15-ED332ECCB44F | IMPROVE | help fact | FamilyQuant/HelpContent.cs:634 | "round-trippable form, so a value read back is the same bits that were plotted." | render:14-help | OPEN | pending |

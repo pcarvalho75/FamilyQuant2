@@ -105,6 +105,8 @@ Invoke each flag with `& $testExe <flag>` after building. Dispatch and arity are
 | `--test-keyword-command` | Single keyword command, empty review, Cancel and accepted-setting retention |
 | `--test-review-wait` | Dispatcher completion beyond the former load timeout, original fault/cancellation and synchronization context retention |
 | `--test-ui-wording` | Current curation/shell Help paths, family overview and lock instructions, retired-screen names, tooltip length and retained report/Help facts |
+| `--test-look-copy-preservation` | Scoped published-Help comparison negative controls, exact case and numeric boundaries |
+| `--prove-look-copy <frozen-source> <native-audit> <new-output> <date-timestamp>` | Exact OPEN help/tooltip cohort, native published Help and named-tooltip comparisons, 200-row LK register batches |
 | `--test-chart-themes [output-dir]` | Seven hosted chart types, live token refresh, contrast, subscription lifetime and frozen Light palette pins; labelled synthetic chart captures |
 | `--test-evidence-task-scope [output-dir]` | Supplied task facts, editable scope, cancellation, native confirmation and both-theme synthetic captures |
 | `--test-report-study-boundary` | Report-only operation ownership, retained Core models and screen dependencies |

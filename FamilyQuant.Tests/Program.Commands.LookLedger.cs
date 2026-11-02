@@ -1,0 +1,21 @@
+using System;
+using System.Collections.Generic;
+
+namespace FamilyQuant.Tests;
+
+internal static partial class Program
+{
+    [TestCommandTable]
+    private static IEnumerable<TestCommand> LookLedgerCommandTable() =>
+    [
+        new("--test-look-copy-preservation", 10200, TestCommandPhase.Raw,
+            args => args.Length == 1 && args[0] == "--test-look-copy-preservation", (_, _) =>
+            {
+                LookCopyComparisonTests();
+                Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
+                return failed == 0 ? 0 : 1;
+            }),
+        new("--prove-look-copy", 10210, TestCommandPhase.Raw,
+            args => args.Length > 0 && args[0] == "--prove-look-copy", (args, _) => LookCopyReceiptCommand(args)),
+    ];
+}
