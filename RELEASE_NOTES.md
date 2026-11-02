@@ -2,6 +2,19 @@
 
 This file preserves historical release notes, including their original pending-publish labels. It is not the current checkout release status. Current work and release gates are in [the roadmap](docs/ROADMAP.md), with build/test commands in [the catalog](docs/INDEX.md). No historical version heading is changed by this note.
 
+## 2.0 preview 1 (pending publish)
+
+FamilyQuant 2.0 is a new program that installs beside 1.5, with its own install address and data folder. 1.5 stays installed and untouched, and 2.0 opens its files.
+
+- **Group by evidence.** Each protein is placed in a family from UniProt annotation, its nearest reviewed protein and its domains, never from the words of its name. Each one gets a family or none, with a tier and a reason, and the recipe is stored so the result can be reproduced. Against the 224 reviewed venom metalloproteinases on the Viperidae file, the evidence route took 224 and no other reviewed protein; the words route took 213 and 12 others.
+- **A review window.** Families with ticks, proteins with reasons and flags, domain-architecture splits, motifs and a left-out list. Nothing changes until Create, and one Undo reverses it.
+- **Checks you can read.** Leave-one-out validation, a check of the file after every save, and audit and left-out CSV files from the program.
+- **A new look.** Dark by default, light in View. File menu first, a navigation rail, one quiet status bar, and rebuilt Build, Quantify, Results, De novo and secondary screens. New logo.
+- **One Save.** `.fqproj` is the file. `.fcf` still opens and stays as an export.
+- **Retired from the De novo screen:** Extract areas and Partition ion current. 1.5 keeps them. The homology CSV moved to Results.
+
+Not in this preview: the rebuilt curation screen and family view, an `.fcf` export that 1.5 can open, and the proof that every function of 1.5 is kept. Those arrive before the final release.
+
 ## 1.5.0.0 (pending publish)
 
 This release makes PEAKS de novo-only and DeepNovo first-class, source-aware evidence and makes the
