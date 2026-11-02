@@ -64,7 +64,7 @@ public sealed class LockManagerViewModel
         {
             families.TryGetValue(id, out var members);
             bool exists = members?.Count > 0;
-            var targets = members?.Where(i => !(i.SequenceIdentifier ?? "").StartsWith(FamilyFilter.DecoyPrefix, StringComparison.Ordinal)).ToList();
+            var targets = members?.Where(i => !SequenceLabels.IsDecoy(i.SequenceIdentifier ?? "")).ToList();
             return new LockedFamilyRow { UserId = id, Members = members?.Count ?? 0, Exists = exists,
                 Presence = exists ? "yes" : "no, merged away",
                 Description = exists ? FamilyNaming.Name(targets!.Count > 0 ? targets : members!) : "" };

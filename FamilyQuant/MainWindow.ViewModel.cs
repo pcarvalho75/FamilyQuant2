@@ -37,6 +37,7 @@ public sealed class ShellViewModel : INotifyPropertyChanged
     public FamilyClusterFile? Document { get; private set; }
     public string? ProjectPath { get; private set; }
     public bool HasStoredResults { get; private set; }
+    public bool HasHomologyResult { get; private set; }
     public IReadOnlyList<ShellNavigationItem> Items { get; } = new[]
     {
         new ShellNavigationItem(ShellDestination.Families, "Families"),
@@ -49,7 +50,9 @@ public sealed class ShellViewModel : INotifyPropertyChanged
 
     public ShellViewModel() => Refresh();
     public bool CanNavigate(ShellDestination destination) => Enum.IsDefined(destination) && !IsBusy &&
-        (HasProject || destination is not (ShellDestination.Quantify or ShellDestination.Results));
+        (HasProject || destination == ShellDestination.Results && HasHomologyResult
+            || destination is not (ShellDestination.Quantify or ShellDestination.Results));
+    public void SetHomologyState(bool available) { HasHomologyResult = available; Refresh(); }
     public bool RequestNavigate(ShellDestination destination)
     {
         if (!CanNavigate(destination)) return false;

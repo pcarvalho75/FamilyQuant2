@@ -1,5 +1,7 @@
 # FamilyQuant release notes
 
+This file preserves historical release notes, including their original pending-publish labels. It is not the current checkout release status. Current work and release gates are in [the roadmap](docs/ROADMAP.md), with build/test commands in [the catalog](docs/INDEX.md). No historical version heading is changed by this note.
+
 ## 1.5.0.0 (pending publish)
 
 This release makes PEAKS de novo-only and DeepNovo first-class, source-aware evidence and makes the

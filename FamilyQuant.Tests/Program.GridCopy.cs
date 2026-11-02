@@ -173,7 +173,7 @@ namespace FamilyQuant.Tests
             var window = new SuperClusterPreviewWindow(preview);
             var content = (FrameworkElement)window.Content;
             LayoutAt(content, new Size(window.Width, window.Height), -1);
-            DataGrid table = WalkTree(content).OfType<DataGrid>().Single();
+            DataGrid table = UiField<DataGrid>(window, "grid")!;
             SuperClusterPreviewProtein Protein(string locus) => preview.Proteins.First(x => x.Locus == locus);
             Button Action(string text) => WalkTree(content).OfType<Button>().First(b => (b.Content as string) == text);
             static void Click(Button button) => button.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
@@ -182,7 +182,8 @@ namespace FamilyQuant.Tests
                 table.ScrollIntoView(Protein(locus));
                 LayoutAt(content, new Size(window.Width, window.Height), -1);
                 var row = (DataGridRow)table.ItemContainerGenerator.ContainerFromItem(Protein(locus));
-                return row.Foreground is SolidColorBrush brush && brush.Color.R > 150 && brush.Color.G < 60;
+                return row.Foreground is SolidColorBrush brush
+                    && brush.Color == ((SolidColorBrush)Application.Current.FindResource("ErrorBrush")).Color;
             }
 
             Check("the table lists every protein", table.Items.Count == 6, table.Items.Count.ToString());
@@ -192,7 +193,7 @@ namespace FamilyQuant.Tests
             Check("'In family' sorts on its number, or 10 of 20 would come before 2 of 11",
                 familyCount.SortMemberPath == nameof(SuperClusterPreviewProtein.FamilyCarriers), familyCount.SortMemberPath);
 
-            TextBlock Headline() => WalkTree(content).OfType<TextBlock>().First(t => t.FontSize == 16);
+            TextBlock Headline() => UiField<TextBlock>(window, "headline")!;
             Click(Action("Untick the red ones"));
             Check("Untick the red ones reaches the model and the headline at once",
                 preview.JoiningProteins == 3 && Headline().Text.StartsWith("3 proteins from 2 families", StringComparison.Ordinal), Headline().Text);
@@ -232,6 +233,7 @@ namespace FamilyQuant.Tests
             TextBox excludeBox = WalkTree(content).OfType<TextBox>().First(x => x.TemplatedParent == null && (x.ToolTip as string)?.StartsWith("Whole words", StringComparison.Ordinal) == true);
             table.Items.SortDescriptions.Add(new System.ComponentModel.SortDescription(nameof(SuperClusterPreviewProtein.Locus), System.ComponentModel.ListSortDirection.Descending));
             excludeBox.Text = "cc8b";
+            PumpDispatcher();
             Check("typing rebuilds the list and keeps the sort a curator chose", table.Items.Count == 5 && table.Items.SortDescriptions.Count == 1, table.Items.Count.ToString());
             excludeBox.Text = "";
             table.Items.SortDescriptions.Clear();

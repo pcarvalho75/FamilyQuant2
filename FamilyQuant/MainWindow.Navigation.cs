@@ -44,10 +44,10 @@ public partial class MainWindow
     private void MenuItemDeNovo_Click(object sender, RoutedEventArgs e) => NavigationModel.RequestNavigate(ShellDestination.DeNovo);
     private void MenuItemAnalytics_Click(object sender, RoutedEventArgs e) => NavigationModel.RequestNavigate(ShellDestination.Results);
     private void MenuItemComputeXic_Click(object sender, RoutedEventArgs e) => NavigationModel.RequestNavigate(ShellDestination.Quantify);
-    private void NavigationStart_Click(object sender, RoutedEventArgs e) => ShowHome();
     private void RefreshNavigationState()
     {
         NavigationModel.UpdateProjectState(cgc != null, saveInProgress || analyticsInProgress || IsQuantifyBusy);
+        NavigationModel.SetHomologyState(latestHomologyResult != null);
         NavigationModel.SetDocument(cgc?.fcf, lastFcfPath, loadedQuant.Count > 0);
         CommandManager.InvalidateRequerySuggested();
     }

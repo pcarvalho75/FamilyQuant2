@@ -1,11 +1,11 @@
 # FamilyQuant appearance
 
-V1 uses the .NET 10 WPF Fluent theme, with two directions on the real curation
-screen. Light uses neutral paper surfaces and dark ink. Dark uses neutral charcoal
+The application uses the .NET 10 WPF Fluent theme. V1 established the two directions on the real curation
+screen; View > Appearance now also offers Use Windows setting. Light uses neutral paper surfaces and dark ink. Dark uses neutral charcoal
 surfaces and light ink. Selection and primary actions use the blue accent. Plain
 values use the same ink as labels; small status text can indicate readiness or a
 problem. Dark is the default, selected by Paulo.
-The View menu keeps both choices available.
+The View menu keeps Light, Dark and the Windows setting available. Shared typography/table roles are described in [STYLE-GUIDE.md](STYLE-GUIDE.md). `ChartPalette.UiPalette` snapshots current tokens for on-screen charts, while export palettes remain pinned.
 
 `Tokens.xaml` is the one place for colour values and the shared spacing, type and
 radius scale. `Controls.xaml` inherits the built-in Fluent control styles. It does
@@ -31,6 +31,6 @@ not initialize profile persistence, so a capture never changes the user's choice
 Unrebuilt views keep their original named surface resources until their replacements
 land, preserving their existing text contrast during the staged rewrite.
 
-Use `FamilyQuant.Tests/SCREENS.md` for reproducible captures. These captures show
+Use [the screen harness guide](../../FamilyQuant.Tests/SCREENS.md) for reproducible captures. These captures show
 client content and exclude native title bars. They do not prove keyboard focus,
 screen reader support, high contrast mode or another Windows version.

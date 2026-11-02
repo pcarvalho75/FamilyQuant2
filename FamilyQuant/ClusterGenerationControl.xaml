@@ -128,6 +128,9 @@
                                             Click="ButtonFetchDomains_Click"
                                             ToolTip="Asks UniProt for each protein's Pfam domains, which needs the internet once. They fill the Domains column, the Search box finds them, the super cluster preview can choose by them, and saving keeps them in the file. Family numbers do not change."
                                             Background="{DynamicResource SubtleBrush}" Foreground="{DynamicResource TextBrush}" Padding="10,5"/>
+                                    <Button x:Name="ButtonEvidenceGrouping" Margin="15,0,0,0" Content="Group by evidence" Click="ButtonEvidenceGrouping_Click"
+                                            ToolTip="Opens the grouping review. Set scope words, review the evidence proposal and apply its ticks and names, or cancel without changing the document."
+                                            Padding="10,5"/>
                                 </WrapPanel>
 
                                 <!-- Word Reclustering Controls -->

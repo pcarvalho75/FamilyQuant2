@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -58,6 +57,5 @@ namespace FamilyQuant
         private void ButtonDivideAndConquer_Click(object sender, RoutedEventArgs e) => actions.ButtonDivideAndConquer_Click(sender, e);
         private void ButtonScanIdentities_Click(object sender, RoutedEventArgs e) => actions.ButtonScanIdentities_Click(sender, e);
         private void ButtonRemoveRedundancy_Click(object sender, RoutedEventArgs e) => actions.ButtonRemoveRedundancy_Click(sender, e);
-        private static string FormatScanReport(List<IdentityScanRow> rows) => BuildReportFormatter.Format(rows);
     }
 }

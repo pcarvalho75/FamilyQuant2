@@ -84,7 +84,7 @@ namespace FamilyQuant
         public static string Accession(string? identifier)
         {
             string id = (identifier ?? string.Empty).Trim();
-            if (id.StartsWith(HomologyOptions.DefaultDecoyLabel, StringComparison.Ordinal)) return string.Empty;
+            if (SequenceLabels.IsDecoy(id)) return string.Empty;
 
             foreach (string field in id.Split('|'))
             {

@@ -105,11 +105,7 @@ namespace FamilyQuant.Tests
                 || full.StartsWith(root + Path.DirectorySeparatorChar, StringComparison.OrdinalIgnoreCase);
         }
 
-        private static string ProjectHash(string project)
-        {
-            using FileStream input = File.OpenRead(project);
-            return Convert.ToHexString(SHA256.HashData(input));
-        }
+        private static string ProjectHash(string project) => TestFileHash.Upper(project);
 
         private static void VerifySource(string snapshot, string hash)
         {
