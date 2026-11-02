@@ -52,6 +52,9 @@ namespace FamilyQuant.Tests
             if (args.Contains("--test-evidence-task", StringComparer.Ordinal))
             {
                 EvidenceTaskTests();
+            if (args.Contains("--test-keyword-command", StringComparer.Ordinal))
+            {
+                KeywordCommandTests();
                 Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
                 return failed == 0 ? 0 : 1;
             }
@@ -806,6 +809,7 @@ namespace FamilyQuant.Tests
             LogoResourceTests(workDir);
             TypographyRulesTests();
             UiIconTests();
+            KeywordCommandTests();
             TableAppearanceTests();
             EvidenceReviewModelTests();
             GroupingReviewInteractionTests();
