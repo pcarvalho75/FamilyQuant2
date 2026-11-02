@@ -44,5 +44,6 @@ internal static partial class Program
             "family IDs, protein IDs and ambiguity", "reads peptides, not chromatograms", "use Quantify and Results");
         Facts("Locks", LockManagerViewModel.Explanation, "read-only", "zero remaining proteins", "Still in use", "already removed from the open file");
         Facts("Spectrum table", SpectrumComparisonViewModel.Explanation, "number of rows shown", "read-only", "one scan can have several rows");
+        PrefixDefinitionTests();
     }
 }

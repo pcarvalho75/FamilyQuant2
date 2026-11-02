@@ -30,7 +30,7 @@ public static class HelpWorkflowFacts
         "PatternLab projects must be exported at PEPTIDE level; a protein-level export makes every row read 0. The optional PatternLab share column stays empty until a project is loaded in PatternLab (optional), and Recalculate is unavailable until then.\n\n" +
         "For Full XIC, quantified signal gives family composition and total ion current gives each family's share of the whole sample, using the summed TIC of every recorded run. A Full XIC basis change applies at once.\n\n" +
         "The Full XIC summary accounts for families, peptides shared between families and peptides with no family. Export family composition writes CSV with one row per family and an unattributed row; its shared-peptide row appears only with Family-unique only.\n\n" +
-        "Show quantified families only starts off and hides unquantified families without changing percentages. Hide decoys hides identifiers starting with Reverse_ from the table and CSV, without deleting data or changing percentages; show them while judging the clustering.\n\n" +
+        "Show quantified families only starts off and hides unquantified families without changing percentages. Hide decoys hides identifiers starting with " + SequenceLabels.DecoyPrefix + " from the table and CSV, without deleting data or changing percentages; show them while judging the clustering.\n\n" +
         "Manage locks is unavailable while no family is locked; removing a lock changes the open file immediately, and saving keeps it on disk. Apply grouping gathers the ticked proteins into one family and can be reversed with Undo; it is unavailable when there is no change to apply.\n\n";
 
     public const string Quantify =
