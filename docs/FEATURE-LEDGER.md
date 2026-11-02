@@ -1,6 +1,8 @@
 # FamilyQuant 1.5.0.6 feature ledger
 
 Contract for 2.0. Only Paulo may authorize DROP. KEEP preserves behavior; IMPROVE preserves the function while its presentation changes.
+Per-row receipts and current audit commands are documented in `docs/FEATURE-EVIDENCE.md`.
+VERIFIED states proposed by a worker remain provisional until independent review and the desk's merged green gate.
 Retained rows start OPEN. A planned check is not evidence that behavior passed. Close a retained row only after its owner records an executed test or an inspected render and reviewer approval. Approved DROP rows record Paulo's decision as evidence, without claiming their implementation is removed yet.
 Approved exception: Paulo via orchestrator M4, 2026-11-01 11:20:38: retire the De Novo Extract areas and Partition ion current sections in 2.0; 1.5 keeps them. Attribute to families stays and its CSV moves to Results in C11.
 DROP covers the two frozen XAML section subtrees and their exclusive view handlers/tooltips. Shared extraction/partition engines, test seams, explanatory science and Attribute to families remain preserved. The guard rejects DROP outside that scope. Actual retirement is C11.
@@ -15,7 +17,7 @@ Render targets refer to `ScreenHarness.Screens`, captured with `--screens <outpu
 Release gate: `FamilyQuant.Tests.exe --feature-ledger-release-check` fails until every retained row is VERIFIED with evidence. Authorized DROP rows use APPROVED_DROP, which records a decision, not a completed UI removal. The normal quick suite permits OPEN rows during development. Regeneration resets retained rows to OPEN; preserve reviewed evidence when updating the scanner.
 
 Scan count: **5756**. Ledger rows: **5756**. Source files: **104**.
-Authorized DROP rows: **296**; the remaining rows stay OPEN.
+Authorized DROP rows: **296**; proposed VERIFIED retained rows: **72**; OPEN retained rows: **5388**.
 
 | ID | Disposition | Kind | Frozen source | Fact or control | Planned check | State | Evidence |
 |---|---|---|---|---|---|---|---|
@@ -2330,35 +2332,35 @@ Authorized DROP rows: **296**; the remaining rows stay OPEN.
 | FQ15-EF777781A5EC | KEEP | export/storage fact | FamilyQuant/DeNovo/DeNovoScoreScatterStudy.cs:166 | "&#124; Pearson r (ALC vs SCORE, shared) &#124; " | test:DeNovoAgreementUnitTests | OPEN | pending |
 | FQ15-33C07479D7FE | KEEP | export/storage fact | FamilyQuant/DeNovo/DeNovoScoreScatterStudy.cs:167 | "0.###" | test:DeNovoAgreementUnitTests | OPEN | pending |
 | FQ15-9449F5DEF039 | KEEP | export/storage fact | FamilyQuant/DeNovo/DeNovoScoreScatterStudy.cs:167 | " &#124;\n\n" | test:DeNovoAgreementUnitTests | OPEN | pending |
-| FQ15-7A13A45A5F69 | IMPROVE | code fact | FamilyQuant/DeNovo/DeNovoSource.cs:32 | "A stable source id is required." | render:06-denovo-advanced | OPEN | pending |
-| FQ15-7D078E78DADC | IMPROVE | code fact | FamilyQuant/DeNovo/DeNovoSource.cs:34 | "A display name is required." | render:06-denovo-advanced | OPEN | pending |
-| FQ15-58C4C478BAED | IMPROVE | code fact | FamilyQuant/DeNovo/DeNovoSource.cs:36 | "A file glob is required." | render:06-denovo-advanced | OPEN | pending |
-| FQ15-A7FA686D8E73 | IMPROVE | code fact | FamilyQuant/DeNovo/DeNovoSource.cs:38 | "A confidence column is required." | render:06-denovo-advanced | OPEN | pending |
-| FQ15-3B197D67924A | IMPROVE | code fact | FamilyQuant/DeNovo/DeNovoSource.cs:74 | "peaks-denovo-only" | render:06-denovo-advanced | OPEN | pending |
-| FQ15-A6996DB788A9 | IMPROVE | code fact | FamilyQuant/DeNovo/DeNovoSource.cs:74 | "de novo only" | render:06-denovo-advanced | OPEN | pending |
-| FQ15-B875F8E0EF71 | KEEP | format/export | FamilyQuant/DeNovo/DeNovoSource.cs:74 | "*.denovoOnly.csv" | render:06-denovo-advanced | OPEN | pending |
-| FQ15-C35550A96D04 | IMPROVE | code fact | FamilyQuant/DeNovo/DeNovoSource.cs:74 | "ALC (%)" | render:06-denovo-advanced | OPEN | pending |
-| FQ15-A030BBDCD130 | IMPROVE | code fact | FamilyQuant/DeNovo/DeNovoSource.cs:79 | "peaks-denovo-all" | render:06-denovo-advanced | OPEN | pending |
-| FQ15-E3E8E11F54D6 | IMPROVE | code fact | FamilyQuant/DeNovo/DeNovoSource.cs:79 | "de novo all" | render:06-denovo-advanced | OPEN | pending |
-| FQ15-662D85255ACF | KEEP | format/export | FamilyQuant/DeNovo/DeNovoSource.cs:79 | "*.denovo.csv" | render:06-denovo-advanced | OPEN | pending |
-| FQ15-021B6A5826E1 | IMPROVE | code fact | FamilyQuant/DeNovo/DeNovoSource.cs:79 | "ALC (%)" | render:06-denovo-advanced | OPEN | pending |
-| FQ15-2957C99E4509 | IMPROVE | code fact | FamilyQuant/DeNovo/DeNovoSource.cs:84 | "deepnovo" | render:06-denovo-advanced | OPEN | pending |
-| FQ15-9CC6DA22E43D | IMPROVE | code fact | FamilyQuant/DeNovo/DeNovoSource.cs:84 | "DeepNovo" | render:06-denovo-advanced | OPEN | pending |
-| FQ15-7642C21EFB76 | KEEP | format/export | FamilyQuant/DeNovo/DeNovoSource.cs:84 | "*.deepnovo.csv" | render:06-denovo-advanced | OPEN | pending |
-| FQ15-7E70C78DF1B3 | IMPROVE | code fact | FamilyQuant/DeNovo/DeNovoSource.cs:84 | "SCORE (%)" | render:06-denovo-advanced | OPEN | pending |
-| FQ15-D057870D915B | IMPROVE | code fact | FamilyQuant/DeNovo/DeNovoSource.cs:115 | "A source confidence cutoff must be in [0, 100]." | render:06-denovo-advanced | OPEN | pending |
-| FQ15-5EAEA6ECC2B7 | IMPROVE | code fact | FamilyQuant/DeNovo/DeNovoSource.cs:126 | " &gt;= " | render:06-denovo-advanced | OPEN | pending |
-| FQ15-3EFB074CBAF2 | IMPROVE | code fact | FamilyQuant/DeNovo/DeNovoSource.cs:127 | "0.###" | render:06-denovo-advanced | OPEN | pending |
-| FQ15-741749FE2D0D | IMPROVE | code fact | FamilyQuant/DeNovo/DeNovoSource.cs:143 | " &gt;= " | render:06-denovo-advanced | OPEN | pending |
-| FQ15-170DBA4A2A67 | IMPROVE | code fact | FamilyQuant/DeNovo/DeNovoSource.cs:144 | "0.###" | render:06-denovo-advanced | OPEN | pending |
-| FQ15-795A7F967780 | IMPROVE | code fact | FamilyQuant/DeNovo/DeNovoSource.cs:158 | "A de novo export directory is required." | render:06-denovo-advanced | OPEN | pending |
-| FQ15-7AA5A56D46CD | IMPROVE | code fact | FamilyQuant/DeNovo/DeNovoSource.cs:163 | "The de novo export directory does not exist: " | render:06-denovo-advanced | OPEN | pending |
-| FQ15-008C54E1A893 | IMPROVE | code fact | FamilyQuant/DeNovo/DeNovoSource.cs:171 | "The configured de novo source '" | render:06-denovo-advanced | OPEN | pending |
-| FQ15-856E088CAD09 | IMPROVE | code fact | FamilyQuant/DeNovo/DeNovoSource.cs:171 | "' matched no files " | render:06-denovo-advanced | OPEN | pending |
-| FQ15-9B6B0DA4C370 | IMPROVE | code fact | FamilyQuant/DeNovo/DeNovoSource.cs:172 | "with glob '" | render:06-denovo-advanced | OPEN | pending |
-| FQ15-0880AF558C0B | IMPROVE | code fact | FamilyQuant/DeNovo/DeNovoSource.cs:172 | "' under " | render:06-denovo-advanced | OPEN | pending |
-| FQ15-447590079D9B | IMPROVE | code fact | FamilyQuant/DeNovo/DeNovoSource.cs:172 | ". Nothing was " | render:06-denovo-advanced | OPEN | pending |
-| FQ15-43E0539B0DAE | IMPROVE | code fact | FamilyQuant/DeNovo/DeNovoSource.cs:173 | "computed because silently omitting a configured caller would mislabel the result." | render:06-denovo-advanced | OPEN | pending |
+| FQ15-7A13A45A5F69 | IMPROVE | code fact | FamilyQuant/DeNovo/DeNovoSource.cs:32 | "A stable source id is required." | test:LedgerPreservationTests | VERIFIED | evidence:N5:FQ15-7A13A45A5F69 |
+| FQ15-7D078E78DADC | IMPROVE | code fact | FamilyQuant/DeNovo/DeNovoSource.cs:34 | "A display name is required." | test:LedgerPreservationTests | VERIFIED | evidence:N5:FQ15-7D078E78DADC |
+| FQ15-58C4C478BAED | IMPROVE | code fact | FamilyQuant/DeNovo/DeNovoSource.cs:36 | "A file glob is required." | test:LedgerPreservationTests | VERIFIED | evidence:N5:FQ15-58C4C478BAED |
+| FQ15-A7FA686D8E73 | IMPROVE | code fact | FamilyQuant/DeNovo/DeNovoSource.cs:38 | "A confidence column is required." | test:LedgerPreservationTests | VERIFIED | evidence:N5:FQ15-A7FA686D8E73 |
+| FQ15-3B197D67924A | IMPROVE | code fact | FamilyQuant/DeNovo/DeNovoSource.cs:74 | "peaks-denovo-only" | test:LedgerPreservationTests | VERIFIED | evidence:N5:FQ15-3B197D67924A |
+| FQ15-A6996DB788A9 | IMPROVE | code fact | FamilyQuant/DeNovo/DeNovoSource.cs:74 | "de novo only" | test:LedgerPreservationTests | VERIFIED | evidence:N5:FQ15-A6996DB788A9 |
+| FQ15-B875F8E0EF71 | KEEP | format/export | FamilyQuant/DeNovo/DeNovoSource.cs:74 | "*.denovoOnly.csv" | test:LedgerPreservationTests | VERIFIED | evidence:N5:FQ15-B875F8E0EF71 |
+| FQ15-C35550A96D04 | IMPROVE | code fact | FamilyQuant/DeNovo/DeNovoSource.cs:74 | "ALC (%)" | test:LedgerPreservationTests | VERIFIED | evidence:N5:FQ15-C35550A96D04 |
+| FQ15-A030BBDCD130 | IMPROVE | code fact | FamilyQuant/DeNovo/DeNovoSource.cs:79 | "peaks-denovo-all" | test:LedgerPreservationTests | VERIFIED | evidence:N5:FQ15-A030BBDCD130 |
+| FQ15-E3E8E11F54D6 | IMPROVE | code fact | FamilyQuant/DeNovo/DeNovoSource.cs:79 | "de novo all" | test:LedgerPreservationTests | VERIFIED | evidence:N5:FQ15-E3E8E11F54D6 |
+| FQ15-662D85255ACF | KEEP | format/export | FamilyQuant/DeNovo/DeNovoSource.cs:79 | "*.denovo.csv" | test:LedgerPreservationTests | VERIFIED | evidence:N5:FQ15-662D85255ACF |
+| FQ15-021B6A5826E1 | IMPROVE | code fact | FamilyQuant/DeNovo/DeNovoSource.cs:79 | "ALC (%)" | test:LedgerPreservationTests | VERIFIED | evidence:N5:FQ15-021B6A5826E1 |
+| FQ15-2957C99E4509 | IMPROVE | code fact | FamilyQuant/DeNovo/DeNovoSource.cs:84 | "deepnovo" | test:LedgerPreservationTests | VERIFIED | evidence:N5:FQ15-2957C99E4509 |
+| FQ15-9CC6DA22E43D | IMPROVE | code fact | FamilyQuant/DeNovo/DeNovoSource.cs:84 | "DeepNovo" | test:LedgerPreservationTests | VERIFIED | evidence:N5:FQ15-9CC6DA22E43D |
+| FQ15-7642C21EFB76 | KEEP | format/export | FamilyQuant/DeNovo/DeNovoSource.cs:84 | "*.deepnovo.csv" | test:LedgerPreservationTests | VERIFIED | evidence:N5:FQ15-7642C21EFB76 |
+| FQ15-7E70C78DF1B3 | IMPROVE | code fact | FamilyQuant/DeNovo/DeNovoSource.cs:84 | "SCORE (%)" | test:LedgerPreservationTests | VERIFIED | evidence:N5:FQ15-7E70C78DF1B3 |
+| FQ15-D057870D915B | IMPROVE | code fact | FamilyQuant/DeNovo/DeNovoSource.cs:115 | "A source confidence cutoff must be in [0, 100]." | test:LedgerPreservationTests | VERIFIED | evidence:N5:FQ15-D057870D915B |
+| FQ15-5EAEA6ECC2B7 | IMPROVE | code fact | FamilyQuant/DeNovo/DeNovoSource.cs:126 | " &gt;= " | test:LedgerPreservationTests | VERIFIED | evidence:N5:FQ15-5EAEA6ECC2B7 |
+| FQ15-3EFB074CBAF2 | IMPROVE | code fact | FamilyQuant/DeNovo/DeNovoSource.cs:127 | "0.###" | test:LedgerPreservationTests | VERIFIED | evidence:N5:FQ15-3EFB074CBAF2 |
+| FQ15-741749FE2D0D | IMPROVE | code fact | FamilyQuant/DeNovo/DeNovoSource.cs:143 | " &gt;= " | test:LedgerPreservationTests | VERIFIED | evidence:N5:FQ15-741749FE2D0D |
+| FQ15-170DBA4A2A67 | IMPROVE | code fact | FamilyQuant/DeNovo/DeNovoSource.cs:144 | "0.###" | test:LedgerPreservationTests | VERIFIED | evidence:N5:FQ15-170DBA4A2A67 |
+| FQ15-795A7F967780 | IMPROVE | code fact | FamilyQuant/DeNovo/DeNovoSource.cs:158 | "A de novo export directory is required." | test:LedgerPreservationTests | VERIFIED | evidence:N5:FQ15-795A7F967780 |
+| FQ15-7AA5A56D46CD | IMPROVE | code fact | FamilyQuant/DeNovo/DeNovoSource.cs:163 | "The de novo export directory does not exist: " | test:LedgerPreservationTests | VERIFIED | evidence:N5:FQ15-7AA5A56D46CD |
+| FQ15-008C54E1A893 | IMPROVE | code fact | FamilyQuant/DeNovo/DeNovoSource.cs:171 | "The configured de novo source '" | test:LedgerPreservationTests | VERIFIED | evidence:N5:FQ15-008C54E1A893 |
+| FQ15-856E088CAD09 | IMPROVE | code fact | FamilyQuant/DeNovo/DeNovoSource.cs:171 | "' matched no files " | test:LedgerPreservationTests | VERIFIED | evidence:N5:FQ15-856E088CAD09 |
+| FQ15-9B6B0DA4C370 | IMPROVE | code fact | FamilyQuant/DeNovo/DeNovoSource.cs:172 | "with glob '" | test:LedgerPreservationTests | VERIFIED | evidence:N5:FQ15-9B6B0DA4C370 |
+| FQ15-0880AF558C0B | IMPROVE | code fact | FamilyQuant/DeNovo/DeNovoSource.cs:172 | "' under " | test:LedgerPreservationTests | VERIFIED | evidence:N5:FQ15-0880AF558C0B |
+| FQ15-447590079D9B | IMPROVE | code fact | FamilyQuant/DeNovo/DeNovoSource.cs:172 | ". Nothing was " | test:LedgerPreservationTests | VERIFIED | evidence:N5:FQ15-447590079D9B |
+| FQ15-43E0539B0DAE | IMPROVE | code fact | FamilyQuant/DeNovo/DeNovoSource.cs:173 | "computed because silently omitting a configured caller would mislabel the result." | test:LedgerPreservationTests | VERIFIED | evidence:N5:FQ15-43E0539B0DAE |
 | FQ15-DC49DB6E988C | KEEP | export/storage fact | FamilyQuant/DeNovo/DeNovoSourceVennStudy.cs:17 | "pooled" | test:ProjectStoreTests | OPEN | pending |
 | FQ15-8BFACAAC755B | KEEP | export/storage fact | FamilyQuant/DeNovo/DeNovoSourceVennStudy.cs:30 | "Every de novo Venn region row must state its stage, scope and counting grain." | test:ProjectStoreTests | OPEN | pending |
 | FQ15-51827A19D35A | KEEP | export/storage fact | FamilyQuant/DeNovo/DeNovoSourceVennStudy.cs:32 | "De novo Venn region counts cannot be negative." | test:ProjectStoreTests | OPEN | pending |
@@ -5011,49 +5013,49 @@ Authorized DROP rows: **296**; the remaining rows stay OPEN.
 | FQ15-B367AFCE52B9 | KEEP | shortcut | FamilyQuant/PresentationFigures.cs:967 | .Select(g =&gt; g.Key.SourceDisplayName + " \u00B7 " + g.Key.ConfidenceField + " &gt;= " + | test:AnalyticsRenderTests | OPEN | pending |
 | FQ15-7A34161A5B3A | KEEP | shortcut | FamilyQuant/PresentationFigures.cs:967 | .Select(g =&gt; g.Key.SourceDisplayName + " \u00B7 " + g.Key.ConfidenceField + " &gt;= " + | test:AnalyticsRenderTests | OPEN | pending |
 | FQ15-5D43ED4317D6 | KEEP | shortcut | FamilyQuant/PresentationFigures.cs:968 | g.Key.MinimumConfidence.ToString("0.###", CultureInfo.CurrentCulture)).ToList(); | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-3A73D0EA2CEB | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:527 | "area_m0" | test:ProjectStoreTests | OPEN | pending |
-| FQ15-4A6E229824ED | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:527 | "measured" | test:ProjectStoreTests | OPEN | pending |
-| FQ15-554928074AB5 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:528 | "area_m1" | test:ProjectStoreTests | OPEN | pending |
-| FQ15-4F578A187EB7 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:528 | "measured" | test:ProjectStoreTests | OPEN | pending |
-| FQ15-DE45FB8A9EDC | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:529 | "area_m2" | test:ProjectStoreTests | OPEN | pending |
-| FQ15-E1B07D326141 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:529 | "measured" | test:ProjectStoreTests | OPEN | pending |
-| FQ15-1CEC65FD799B | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:530 | "area_m3" | test:ProjectStoreTests | OPEN | pending |
-| FQ15-521EC8707644 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:530 | "measured" | test:ProjectStoreTests | OPEN | pending |
-| FQ15-ED906DC39F2E | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:531 | "area_m4" | test:ProjectStoreTests | OPEN | pending |
-| FQ15-BA9D5EB3D72E | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:531 | "measured" | test:ProjectStoreTests | OPEN | pending |
-| FQ15-479CB86583FB | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:532 | "area_m5" | test:ProjectStoreTests | OPEN | pending |
-| FQ15-A20F3B9AC766 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:532 | "measured" | test:ProjectStoreTests | OPEN | pending |
-| FQ15-8FF92D872DC0 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:533 | "envelope_sum" | test:ProjectStoreTests | OPEN | pending |
-| FQ15-D1FDC7352FBC | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:533 | "derived" | test:ProjectStoreTests | OPEN | pending |
-| FQ15-6809BD59963F | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:534 | "tic" | test:ProjectStoreTests | OPEN | pending |
-| FQ15-084B9CE2A9A6 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:534 | "measured" | test:ProjectStoreTests | OPEN | pending |
-| FQ15-9B6933EC00EC | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:535 | "family_userid" | test:ProjectStoreTests | OPEN | pending |
-| FQ15-9F8BE9ADF943 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:535 | "unset" | test:ProjectStoreTests | OPEN | pending |
-| FQ15-FFDACDBBF734 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:539 | "under_sampled" | test:ProjectStoreTests | OPEN | pending |
-| FQ15-7CE635F6AA7C | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:539 | "measured-or-estimated" | test:ProjectStoreTests | OPEN | pending |
-| FQ15-B2EEF7F999D4 | KEEP | format/export | FamilyQuant/ProjectStore.cs:579 | ".fqproj" | test:ProjectStoreTests | OPEN | pending |
-| FQ15-4125BDC9D9E4 | KEEP | format/export | FamilyQuant/ProjectStore.cs:581 | "curation.json" | test:ProjectStoreTests | OPEN | pending |
-| FQ15-6209E9A73911 | KEEP | format/export | FamilyQuant/ProjectStore.cs:586 | "quant.tsv.gz" | test:ProjectStoreTests | OPEN | pending |
-| FQ15-D355DF369812 | KEEP | format/export | FamilyQuant/ProjectStore.cs:588 | "manifest.json" | test:ProjectStoreTests | OPEN | pending |
-| FQ15-9B98EE3542D8 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:593 | "spectrum_comparison.jsonl.gz" | test:ProjectStoreTests | OPEN | pending |
-| FQ15-9753B6AA522A | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:600 | "side" | test:ProjectStoreTests | OPEN | pending |
-| FQ15-C37E75592AC2 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:600 | "run" | test:ProjectStoreTests | OPEN | pending |
-| FQ15-128379750CCC | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:600 | "scan" | test:ProjectStoreTests | OPEN | pending |
-| FQ15-E9FB9559928D | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:600 | "precursor_mz" | test:ProjectStoreTests | OPEN | pending |
-| FQ15-8FC43ECEA164 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:600 | "charge" | test:ProjectStoreTests | OPEN | pending |
-| FQ15-9B78CBB81C8E | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:600 | "sequence" | test:ProjectStoreTests | OPEN | pending |
-| FQ15-A058982DBB8A | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:601 | "patternlab_xscore" | test:ProjectStoreTests | OPEN | pending |
-| FQ15-6AC71082A526 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:601 | "denovo_evidence_json" | test:ProjectStoreTests | OPEN | pending |
-| FQ15-BBF878F85F25 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:602 | "area_m0" | test:ProjectStoreTests | OPEN | pending |
-| FQ15-77D3E342BA86 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:602 | "area_m1" | test:ProjectStoreTests | OPEN | pending |
-| FQ15-CACA566043BC | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:602 | "area_m2" | test:ProjectStoreTests | OPEN | pending |
-| FQ15-9F075B101A12 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:602 | "area_m3" | test:ProjectStoreTests | OPEN | pending |
-| FQ15-69F62274DF68 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:602 | "area_m4" | test:ProjectStoreTests | OPEN | pending |
-| FQ15-7ECD142ABDD2 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:602 | "area_m5" | test:ProjectStoreTests | OPEN | pending |
-| FQ15-92E5CE966288 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:603 | "envelope_sum" | test:ProjectStoreTests | OPEN | pending |
-| FQ15-9D951130781D | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:603 | "under_sampled" | test:ProjectStoreTests | OPEN | pending |
-| FQ15-2156E4FAB256 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:603 | "under_sampled_estimate" | test:ProjectStoreTests | OPEN | pending |
-| FQ15-0EBEB1105B90 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:603 | "family_userid" | test:ProjectStoreTests | OPEN | pending |
+| FQ15-3A73D0EA2CEB | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:527 | "area_m0" | test:LedgerPreservationTests | VERIFIED | evidence:N5:FQ15-3A73D0EA2CEB |
+| FQ15-4A6E229824ED | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:527 | "measured" | test:LedgerPreservationTests | VERIFIED | evidence:N5:FQ15-4A6E229824ED |
+| FQ15-554928074AB5 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:528 | "area_m1" | test:LedgerPreservationTests | VERIFIED | evidence:N5:FQ15-554928074AB5 |
+| FQ15-4F578A187EB7 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:528 | "measured" | test:LedgerPreservationTests | VERIFIED | evidence:N5:FQ15-4F578A187EB7 |
+| FQ15-DE45FB8A9EDC | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:529 | "area_m2" | test:LedgerPreservationTests | VERIFIED | evidence:N5:FQ15-DE45FB8A9EDC |
+| FQ15-E1B07D326141 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:529 | "measured" | test:LedgerPreservationTests | VERIFIED | evidence:N5:FQ15-E1B07D326141 |
+| FQ15-1CEC65FD799B | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:530 | "area_m3" | test:LedgerPreservationTests | VERIFIED | evidence:N5:FQ15-1CEC65FD799B |
+| FQ15-521EC8707644 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:530 | "measured" | test:LedgerPreservationTests | VERIFIED | evidence:N5:FQ15-521EC8707644 |
+| FQ15-ED906DC39F2E | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:531 | "area_m4" | test:LedgerPreservationTests | VERIFIED | evidence:N5:FQ15-ED906DC39F2E |
+| FQ15-BA9D5EB3D72E | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:531 | "measured" | test:LedgerPreservationTests | VERIFIED | evidence:N5:FQ15-BA9D5EB3D72E |
+| FQ15-479CB86583FB | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:532 | "area_m5" | test:LedgerPreservationTests | VERIFIED | evidence:N5:FQ15-479CB86583FB |
+| FQ15-A20F3B9AC766 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:532 | "measured" | test:LedgerPreservationTests | VERIFIED | evidence:N5:FQ15-A20F3B9AC766 |
+| FQ15-8FF92D872DC0 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:533 | "envelope_sum" | test:LedgerPreservationTests | VERIFIED | evidence:N5:FQ15-8FF92D872DC0 |
+| FQ15-D1FDC7352FBC | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:533 | "derived" | test:LedgerPreservationTests | VERIFIED | evidence:N5:FQ15-D1FDC7352FBC |
+| FQ15-6809BD59963F | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:534 | "tic" | test:LedgerPreservationTests | VERIFIED | evidence:N5:FQ15-6809BD59963F |
+| FQ15-084B9CE2A9A6 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:534 | "measured" | test:LedgerPreservationTests | VERIFIED | evidence:N5:FQ15-084B9CE2A9A6 |
+| FQ15-9B6933EC00EC | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:535 | "family_userid" | test:LedgerPreservationTests | VERIFIED | evidence:N5:FQ15-9B6933EC00EC |
+| FQ15-9F8BE9ADF943 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:535 | "unset" | test:LedgerPreservationTests | VERIFIED | evidence:N5:FQ15-9F8BE9ADF943 |
+| FQ15-FFDACDBBF734 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:539 | "under_sampled" | test:LedgerPreservationTests | VERIFIED | evidence:N5:FQ15-FFDACDBBF734 |
+| FQ15-7CE635F6AA7C | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:539 | "measured-or-estimated" | test:LedgerPreservationTests | VERIFIED | evidence:N5:FQ15-7CE635F6AA7C |
+| FQ15-B2EEF7F999D4 | KEEP | format/export | FamilyQuant/ProjectStore.cs:579 | ".fqproj" | test:LedgerPreservationTests | VERIFIED | evidence:N5:FQ15-B2EEF7F999D4 |
+| FQ15-4125BDC9D9E4 | KEEP | format/export | FamilyQuant/ProjectStore.cs:581 | "curation.json" | test:LedgerPreservationTests | VERIFIED | evidence:N5:FQ15-4125BDC9D9E4 |
+| FQ15-6209E9A73911 | KEEP | format/export | FamilyQuant/ProjectStore.cs:586 | "quant.tsv.gz" | test:LedgerPreservationTests | VERIFIED | evidence:N5:FQ15-6209E9A73911 |
+| FQ15-D355DF369812 | KEEP | format/export | FamilyQuant/ProjectStore.cs:588 | "manifest.json" | test:LedgerPreservationTests | VERIFIED | evidence:N5:FQ15-D355DF369812 |
+| FQ15-9B98EE3542D8 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:593 | "spectrum_comparison.jsonl.gz" | test:LedgerPreservationTests | VERIFIED | evidence:N5:FQ15-9B98EE3542D8 |
+| FQ15-9753B6AA522A | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:600 | "side" | test:LedgerPreservationTests | VERIFIED | evidence:N5:FQ15-9753B6AA522A |
+| FQ15-C37E75592AC2 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:600 | "run" | test:LedgerPreservationTests | VERIFIED | evidence:N5:FQ15-C37E75592AC2 |
+| FQ15-128379750CCC | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:600 | "scan" | test:LedgerPreservationTests | VERIFIED | evidence:N5:FQ15-128379750CCC |
+| FQ15-E9FB9559928D | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:600 | "precursor_mz" | test:LedgerPreservationTests | VERIFIED | evidence:N5:FQ15-E9FB9559928D |
+| FQ15-8FC43ECEA164 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:600 | "charge" | test:LedgerPreservationTests | VERIFIED | evidence:N5:FQ15-8FC43ECEA164 |
+| FQ15-9B78CBB81C8E | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:600 | "sequence" | test:LedgerPreservationTests | VERIFIED | evidence:N5:FQ15-9B78CBB81C8E |
+| FQ15-A058982DBB8A | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:601 | "patternlab_xscore" | test:LedgerPreservationTests | VERIFIED | evidence:N5:FQ15-A058982DBB8A |
+| FQ15-6AC71082A526 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:601 | "denovo_evidence_json" | test:LedgerPreservationTests | VERIFIED | evidence:N5:FQ15-6AC71082A526 |
+| FQ15-BBF878F85F25 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:602 | "area_m0" | test:LedgerPreservationTests | VERIFIED | evidence:N5:FQ15-BBF878F85F25 |
+| FQ15-77D3E342BA86 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:602 | "area_m1" | test:LedgerPreservationTests | VERIFIED | evidence:N5:FQ15-77D3E342BA86 |
+| FQ15-CACA566043BC | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:602 | "area_m2" | test:LedgerPreservationTests | VERIFIED | evidence:N5:FQ15-CACA566043BC |
+| FQ15-9F075B101A12 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:602 | "area_m3" | test:LedgerPreservationTests | VERIFIED | evidence:N5:FQ15-9F075B101A12 |
+| FQ15-69F62274DF68 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:602 | "area_m4" | test:LedgerPreservationTests | VERIFIED | evidence:N5:FQ15-69F62274DF68 |
+| FQ15-7ECD142ABDD2 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:602 | "area_m5" | test:LedgerPreservationTests | VERIFIED | evidence:N5:FQ15-7ECD142ABDD2 |
+| FQ15-92E5CE966288 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:603 | "envelope_sum" | test:LedgerPreservationTests | VERIFIED | evidence:N5:FQ15-92E5CE966288 |
+| FQ15-9D951130781D | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:603 | "under_sampled" | test:LedgerPreservationTests | VERIFIED | evidence:N5:FQ15-9D951130781D |
+| FQ15-2156E4FAB256 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:603 | "under_sampled_estimate" | test:LedgerPreservationTests | VERIFIED | evidence:N5:FQ15-2156E4FAB256 |
+| FQ15-0EBEB1105B90 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:603 | "family_userid" | test:LedgerPreservationTests | VERIFIED | evidence:N5:FQ15-0EBEB1105B90 |
 | FQ15-EE5B39EDA457 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:610 | "side" | test:ProjectStoreTests | OPEN | pending |
 | FQ15-B740395FE757 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:610 | "run" | test:ProjectStoreTests | OPEN | pending |
 | FQ15-A105F466A9CD | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:610 | "scan" | test:ProjectStoreTests | OPEN | pending |

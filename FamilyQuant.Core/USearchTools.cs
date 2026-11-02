@@ -139,35 +139,48 @@ namespace FamilyQuant
                 return overridePath;
             }
 
-            byte[] payload = MyResources.usearch11_0_667_win32;
-
             // Extract to a stable per-user folder rather than %TEMP% (which can be cleaned mid-session).
-            string dir = ApplicationPaths.LocalDataDirectory;
+            return ExtractBundledExecutable(MyResources.usearch11_0_667_win32, ApplicationPaths.LocalDataDirectory);
+        }
+
+        private static string ExtractBundledExecutable(byte[] payload, string dir)
+        {
             Directory.CreateDirectory(dir);
 
-            string usearchPath = Path.Combine(dir, "usearch11.0.667_win32.exe");
+            string payloadHash = Convert.ToHexString(SHA256.HashData(payload));
+            string usearchPath = Path.Combine(dir, "usearch11.0.667_win32_" + payloadHash + ".exe");
 
-            string payloadHash;
-            using (SHA256 sha = SHA256.Create()) payloadHash = Convert.ToHexString(sha.ComputeHash(payload));
-            bool executableMatches = false;
-            if (File.Exists(usearchPath) && new FileInfo(usearchPath).Length == payload.Length)
+            bool MatchesPayload()
             {
                 try
                 {
-                    executableMatches = string.Equals(
+                    return File.Exists(usearchPath) && new FileInfo(usearchPath).Length == payload.Length && string.Equals(
                         Convert.ToHexString(SHA256.HashData(File.ReadAllBytes(usearchPath))),
                         payloadHash, StringComparison.Ordinal);
                 }
-                catch { executableMatches = false; }
+                catch { return false; }
             }
 
-            // Re-extract if missing or its CONTENT differs from the embedded payload. Equal size is not
-            // an integrity check: a modified executable can keep the same length.
-            if (!executableMatches)
+            if (MatchesPayload()) return usearchPath;
+
+            // Different payloads keep separate executable paths, so an older running image can remain
+            // open. Serialize publishers of the same path across threads/processes, then atomically
+            // publish complete bytes. Recheck after acquiring ownership because a caller may have won.
+            string mutexName = "Local\\FamilyQuant2.Usearch." + Convert.ToHexString(SHA256.HashData(
+                Encoding.UTF8.GetBytes(Path.GetFullPath(usearchPath).ToUpperInvariant())));
+            using var publication = new Mutex(false, mutexName);
+            try { publication.WaitOne(); }
+            catch (AbandonedMutexException) { } // Ownership is granted; validate or repair the file below.
+            try
             {
+                if (MatchesPayload()) return usearchPath;
+                string temporary = usearchPath + "." + Guid.NewGuid().ToString("N") + ".tmp";
                 try
                 {
-                    File.WriteAllBytes(usearchPath, payload);
+                    File.WriteAllBytes(temporary, payload);
+                    try { File.Move(temporary, usearchPath, overwrite: true); }
+                    catch (IOException) when (MatchesPayload()) { }
+                    if (!MatchesPayload()) throw new IOException("The extracted executable does not match its embedded payload.");
                 }
                 catch (Exception ex)
                 {
@@ -176,9 +189,10 @@ namespace FamilyQuant
                         "that security software is not blocking it, or set FAMILYQUANT_USEARCH to your own " +
                         "usearch.exe.\n\n" + ex.Message, ex);
                 }
+                finally { TryDelete(temporary); }
+                return usearchPath;
             }
-
-            return usearchPath;
+            finally { publication.ReleaseMutex(); }
         }
 
         /// <summary>

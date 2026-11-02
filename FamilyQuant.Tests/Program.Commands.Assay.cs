@@ -26,6 +26,7 @@ internal static partial class Program
     [
         new("--dependency-file-check", 100, TestCommandPhase.Raw, MatchesCommand001, RunCommand001),
         new("--test-dependencies", 200, TestCommandPhase.Raw, MatchesCommand002, RunCommand002),
+        new("--test-usearch-binary", 10000, TestCommandPhase.Raw, args => args.Length > 0 && args[0] == "--test-usearch-binary", RunUseSearchBinaryTests),
     ];
 
     private static bool MatchesCommand001(string[] args) => args.Length > 0 && args[0] == "--dependency-file-check";
