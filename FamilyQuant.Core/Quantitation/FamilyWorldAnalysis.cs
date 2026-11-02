@@ -3,6 +3,7 @@ using FamilyQuant.Evidence;
 using FamilyQuant.Operations;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 
 namespace FamilyQuant
@@ -34,6 +35,34 @@ namespace FamilyQuant
             (curation.MyExtendedFastaItems ?? new List<FastaItemExtended>()).Where(i => i != null
                 && !SequenceLabels.IsDecoy(i.SequenceIdentifier ?? string.Empty)
                 && !(i.SequenceIdentifier ?? string.Empty).StartsWith(SequenceLabels.ContaminantPrefix, StringComparison.Ordinal));
+
+        /// <summary>
+        /// B5 and B6: when the curation carries a stored family world (B4), the de novo envelope the curated families
+        /// leave unattributed goes through the family-world pass, and the table with the error beside every family is
+        /// stored in the manifest. Without a stored world nothing is added, so such a project's manifest is unchanged.
+        /// A failure is noted and never loses the quantitation.
+        /// </summary>
+        public static void AttachToCompute(FamilyClusterFile? curation, FullXicComputeResult result)
+        {
+            if (result == null) throw new ArgumentNullException(nameof(result));
+            if (curation?.EvidenceSource?.FamilyWorld == null) return;
+            try
+            {
+                FamilyWorldSummary table = FamilyWorldAnalysis.FromStoredWorld(result.Rows, curation, result.SpectrumComparisonRows).Summary;
+                result.Manifest.FamilyWorldResult = table;
+                double landed = table.ResidualEnvelope > 0
+                    ? table.Outcomes.Where(o => o.Outcome == nameof(FamilyWorldOutcome.Credited)).Sum(o => o.Envelope) / table.ResidualEnvelope : 0;
+                result.Notes.Add("Family world: " + landed.ToString("P2", CultureInfo.InvariantCulture) +
+                    " of the de novo envelope the curated families leave unattributed is credited to a family in scope (" +
+                    table.Rules + ").");
+            }
+            catch (Exception ex)
+            {
+                result.Manifest.FamilyWorldResult = null;
+                result.Notes.Add("WARNING: the family-world pass did not run (" + ex.GetType().Name + ": " + ex.Message +
+                    "). Quantitation completed without it.");
+            }
+        }
 
         /// <summary>What Compute runs when the curation carries a stored family world (B4): the snapshot is verified
         /// offline, then the whole analysis runs on it.</summary>

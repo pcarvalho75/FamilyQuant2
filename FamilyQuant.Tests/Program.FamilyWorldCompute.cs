@@ -52,7 +52,7 @@ internal static partial class Program
         };
 
         FullXicComputeResult attached = Computed();
-        FullXicComputer.AttachFamilyWorld(file, attached);
+        FamilyWorldAnalysis.AttachToCompute(file, attached);
         FamilyWorldSummary? table = attached.Manifest.FamilyWorldResult;
         Check("Compute family world: with a stored world the table is attached, with the snapshot's release, hash and rules",
             table != null && table.WorldRelease == snapshot.Release && table.WorldFingerprint == snapshot.ContentSha256
@@ -66,7 +66,7 @@ internal static partial class Program
                 + table.SharedEnvelope + table.UnattributedIdentifiedEnvelope + table.UnexplainedEnvelope - table.MeasuredTotalEnvelope) < 1e-9);
 
         FullXicComputeResult plain = Computed();
-        FullXicComputer.AttachFamilyWorld(TaskFile(), plain);
+        FamilyWorldAnalysis.AttachToCompute(TaskFile(), plain);
         Check("Compute family world: without a stored world nothing is attached and nothing is said",
             plain.Manifest.FamilyWorldResult == null && plain.Notes.Count == 0);
 
@@ -74,7 +74,7 @@ internal static partial class Program
         damaged.EvidenceSource!.FamilyWorld!.Entries[0].Sequence += "A";
         FullXicComputeResult refused = Computed();
         int rows = refused.Rows.Count;
-        FullXicComputer.AttachFamilyWorld(damaged, refused);
+        FamilyWorldAnalysis.AttachToCompute(damaged, refused);
         Check("Compute family world: a damaged stored world is refused with a warning and the quantitation is kept",
             refused.Manifest.FamilyWorldResult == null && refused.Rows.Count == rows
             && refused.Notes.Single().StartsWith("WARNING: the family-world pass did not run", StringComparison.Ordinal), refused.Notes.FirstOrDefault());
