@@ -655,9 +655,6 @@ namespace FamilyQuant.Tests
             var control = new ClusterGenerationControl(fcfPath);
             int keywordChanges = 0; control.DocumentChanged += (_, _) => keywordChanges++;
             FamilyClusterFile fcf = control.fcf;
-            var keywordBox = UiField<TextBox>(control, "TextBoxSuperClusterWording")!;
-            var excludeBox = UiField<TextBox>(control, "TextBoxSuperClusterExclude")!;
-            var matchBox = UiField<ComboBox>(control, "ComboBoxSuperClusterMatch")!;
             var searchBox = UiField<TextBox>(control, "TextBoxSearch")!;
             var undoButton = UiField<Button>(control, "ButtonUndo")!;
             var click = typeof(ClusterGenerationControl).GetMethod("ButtonSuperCluster_Click",
@@ -683,13 +680,13 @@ namespace FamilyQuant.Tests
                     return asked;
                 }
 
-                keywordBox.Text = ViperKeywords;
-                excludeBox.Text = AnaExcludeBox;
-                matchBox.SelectedIndex = 1;
-
                 SuperClusterPreview? seen = null;
-                bool asked = Click(p => { seen = p; return false; }, () => true);
-                Check("Create Super Cluster shows the preview, carrying the boxes as typed",
+                bool asked = Click(p =>
+                {
+                    seen = p; p.KeywordsText = ViperKeywords; p.ExcludeText = AnaExcludeBox;
+                    p.Match = KeywordMatch.Any; p.Refresh(); return false;
+                }, () => true);
+                Check("Group by keywords opens the review, whose inputs drive the preview",
                     asked && seen != null && seen.ExcludeText == AnaExcludeBox && seen.Match == KeywordMatch.Any);
                 Check("the exclude box typed with commas reaches the matcher as clean words",
                     seen != null && seen.ExcludeEntries.SequenceEqual(new[] { "inhibitor", "adam", "matrix", "thrombospondin", "atp" }),
@@ -700,6 +697,7 @@ namespace FamilyQuant.Tests
                 List<string>? promised = null;
                 Click(p =>
                 {
+                    p.KeywordsText = ViperKeywords; p.ExcludeText = AnaExcludeBox; p.Match = KeywordMatch.Any;
                     p.ExcludeText += ", domain-containing";
                     p.Refresh();
                     p.Proteins.First(n => n.Locus == "sp|B|2").Join = false;
@@ -718,30 +716,25 @@ namespace FamilyQuant.Tests
                     && Family("sp|F|6") == 6 && Family("sp|J|9") == 9 && Family("sp|K|10") == 10, Numbers());
                 Check("a moved protein has both its numbers in step, as after any automatic grouping",
                     fcf.MyExtendedFastaItems.First(i => i.SequenceIdentifier == "sp|I|9").USearchID == Family("sp|I|9"));
-                Check("what was typed in the preview stays in the box for next time",
-                    excludeBox.Text.EndsWith("domain-containing", StringComparison.Ordinal), excludeBox.Text);
+                bool retained = false;
+                Click(p => { retained = p.ExcludeText.EndsWith("domain-containing", StringComparison.Ordinal); return false; }, () => true);
+                Check("what was accepted in the preview is retained for next time", retained);
                 Check("part of family 9 left it, so the new family is locked, and only that one",
                     fcf.LockedUserIds.SetEquals(new[] { Family("sp|A|1") }), string.Join(",", fcf.LockedUserIds));
 
                 undoClick.Invoke(control, new object?[] { null, null });
                 Check("one Undo reverses it, lock included", Numbers() == before && fcf.LockedUserIds.Count == 0, Numbers());
 
-                string keywordsBefore = keywordBox.Text;
-                string excludeBefore = excludeBox.Text;
-                keywordBox.Text = "snake";
-                excludeBox.Text = string.Empty;
-                PumpDispatcher();
-                Click(p => true, () => fcf.IsKeywordSuperCluster && undoButton.IsEnabled);
+                Click(p => { p.KeywordsText = "snake"; p.ExcludeText = string.Empty; p.Refresh(); return true; },
+                    () => fcf.IsKeywordSuperCluster && undoButton.IsEnabled);
                 Check("whole families joining lock nothing, as a merge never did", Family("sp|A|1") == Family("sp|H|8") && fcf.LockedUserIds.Count == 0, Numbers());
                 undoClick.Invoke(control, new object?[] { null, null });
-                keywordBox.Text = keywordsBefore;
-                excludeBox.Text = excludeBefore;
 
                 // The Search box shows families 1 and 8; family 2 matches but is hidden, and must not move.
                 searchBox.Text = "Snake venom";
-                excludeBox.Text = AnaExcludeBox + ", domain-containing";
                 PumpDispatcher();
-                Click(p => { searchBox.Text = string.Empty; return true; }, () => fcf.IsKeywordSuperCluster && undoButton.IsEnabled);
+                Click(p => { p.KeywordsText = ViperKeywords; p.ExcludeText = AnaExcludeBox + ", domain-containing";
+                    p.Refresh(); searchBox.Text = string.Empty; return true; }, () => fcf.IsKeywordSuperCluster && undoButton.IsEnabled);
                 FastaItemExtended hiddenFamily = fcf.MyExtendedFastaItems.First(i => i.SequenceIdentifier == "sp|B|2");
                 Check("with a Search the merge stays inside it, even if the box is cleared before confirming",
                     Family("sp|A|1") == Family("sp|H|8") && hiddenFamily.UserID == 2 && hiddenFamily.USearchID == 2, Numbers());

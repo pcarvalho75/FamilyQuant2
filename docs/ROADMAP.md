@@ -30,17 +30,18 @@ Version 2 closed 56 steps and the H1 cooldown: the evidence engine, the new shel
 
 ## The team
 
-This team is exclusive to FamilyQuant: five Sol workers, one Opus worker, Grok as reviewer and Gemini back when its quota returns, sharing no workers, folders or tools with Project Orion.
+This team is exclusive to FamilyQuant: six Sol workers, one Opus worker, Grok as reviewer and Gemini back when its quota returns, sharing no workers, folders or tools with Project Orion.
 
 | Name | Engine | Role | Worktree | Branch |
 |---|---|---|---|---|
 | Orchestrator | Claude, main session | Assigns, merges, runs gates, keeps this file true. Writes no product code. | | master |
-| FQEvidence (EV) | Sol 6.1 xhigh | Ana's file, family-world fetch, project formats, de novo tidy, figures | `D:/FamilyQuant-wt/evidence` | `fq/evidence` |
+| FQEvidence (EV) | Sol 6.1 xhigh | Ana's file, the program reading the task from the file, family-world fetch | `D:/FamilyQuant-wt/evidence` | `fq/evidence` |
 | FQLook (LK) | Sol 6.1 xhigh | Look, curation and family screens | `D:/FamilyQuant-wt/look` | `fq/look` |
 | FQShell (SH) | Sol 6.1 xhigh | Busy overlay, shell messages, closing the feature ledger | `D:/FamilyQuant-wt/shell` | `fq/shell` |
-| FQAssay (AS) | Sol 6.1 xhigh | Dependencies, clustering, improvements, documents | `D:/FamilyQuant-wt/assay` | `fq/assay` |
-| FQResults (RS) | Sol 6.1 xhigh | Charts, quantitation panel, family-world results | `C:/FamilyQuant-wt2/results` | `fq/results` |
-| FQOpus (OP) | Opus 5.5 xhigh | The gate experiment, quantitation pipeline, second attribution pass. Second reviewer of others' work until FQArgon returns | `D:/FamilyQuant-wt/opus` | `fq/opus` |
+| FQAssay (AS) | Sol 6.1 xhigh | Dependencies, clustering, de novo tidy, improvements, documents | `D:/FamilyQuant-wt/assay` | `fq/assay` |
+| FQResults (RS) | Sol 6.1 xhigh | Charts, quantitation panel, figures, family-world results | `C:/FamilyQuant-wt2/results` | `fq/results` |
+| FQOpus (OP) | Opus 5.5 xhigh | The gate experiment and the second attribution pass. Second reviewer of others' work until FQArgon returns | `D:/FamilyQuant-wt/opus` | `fq/opus` |
+| FQFloater (FL) | Sol 6.1 xhigh | Floater: quantitation pipeline, project formats, then whatever waits longest | `C:/FamilyQuant-wt2/floater` | `fq/floater` |
 | FQReview (GR) | Grok 4.7 xhigh | Main reviewer, code and science, with FQOpus second, and owns B2, A2, B8 and R4. Never edits product code. | `D:/FamilyQuant-wt/review` | detached |
 | FQArgon (AR) | Gemini 4 Argon high | Reviews steps in turn with FQReview. Out of quota until about 2026-11-07. | `D:/FamilyQuant-wt/argon` | detached |
 | FQFable | Fable 5.1 xhigh | Architect, only on Paulo's request, in short sessions. Not in the queues. | `C:/FamilyQuant-wt2/fable` | `fable/vision` |
@@ -71,7 +72,7 @@ Flow of one step: owner posts `READY <step> <commit>`; the orchestrator assigns 
 
 ## Workstreams
 
-Columns: Diff = L, M, H, VH. Hrs = worker hours at measured speed: the 56 steps of version 2 were estimated at 155 hours and took at most about 41 worker hours (6.8 hours on the clock, at most six builders), so every estimate here is divided by 4. Blocked by: 🟢 = open now. ETA = hours after the restart in that worker's queue, never a promise. Prog = my estimate of work done. Cred = counted only after approval and merge. EV, LK, AS, SH, RS, OP, GR and AR are the workers above.
+Columns: Diff = L, M, H, VH. Hrs = worker hours at measured speed: the 56 steps of version 2 were estimated at 155 hours and took at most about 41 worker hours (6.8 hours on the clock, at most six builders), so every estimate here is divided by 4. Blocked by: 🟢 = open now. ETA = hours after the restart in that worker's queue, never a promise. Prog = my estimate of work done. Cred = counted only after approval and merge. EV, LK, AS, SH, RS, OP, FL, GR and AR are the workers above.
 
 ### W0 Foundation and the new project
 
@@ -107,8 +108,7 @@ Columns: Diff = L, M, H, VH. Hrs = worker hours at measured speed: the 56 steps 
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| C3 | Keyword boxes only in that window: one "Group by keywords" command on the screen | L | 0.5 | 🟢 | C1 | Three duplicate inputs gone; suite re-pointed | LK | not started | 0% | 0% | T+0 |
-| C1 | Curation rebuilt: table always in view, actions in a side panel, no Controls and Data Browser tabs, no "Layer" words. USearch ID column hidden by default, data kept. Decoys hidden by default; Locus shows the accession. Long operations use the S6 host. `ClusterGenerationControl` (1,978 lines) replaced by a view model and a thin view | VH | 2 | C3, S6 | C2, C5, V3, C13 | Pressing any action shows its result without changing view; every ledger row of the screen checked; golden equal | LK | not started | 0% | 0% | T+3 |
+| C1 | Curation rebuilt: table always in view, actions in a side panel, no Controls and Data Browser tabs, no "Layer" words. USearch ID column hidden by default, data kept. Decoys hidden by default; Locus shows the accession. Long operations use the S6 host. `ClusterGenerationControl` (1,978 lines) replaced by a view model and a thin view | VH | 2 | S6 | C2, C5, V3, C13 | Pressing any action shows its result without changing view; every ledger row of the screen checked; golden equal | LK | not started | 0% | 0% | T+3 |
 | C2 | Family view: a table of families (name, proteins, shares, lock) with the proteins of the selected family beside it | H | 1.5 | C1 | N6, R2 | Selection, edit, lock and undo work on both tables; 39,996 families smooth | LK | not started | 0% | 0% | T+4 |
 | C5 | Quantitation panel: Layers 2 and 3 merged; Full XIC first, PatternLab as a secondary source, options shown only when they apply | M | 1 | C1 | V3, C13, R2 | Every option kept; golden equal | RS | not started | 0% | 0% | T+4 |
 | C13 | Wording pass: labels, tooltips (one or two sentences) and Help match the new screens | M | 1 | C1, C5 | N6, C14 | Suite's tooltip checks green; no old screen named anywhere | LK | not started | 0% | 0% | T+6 |
@@ -119,15 +119,16 @@ Columns: Diff = L, M, H, VH. Hrs = worker hours at measured speed: the 56 steps 
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| X5 | Quantitation pipeline: `FullXicComputer` (997) and `FamilyEnvelopeQuant` (968) restructured into stages with clear inputs and outputs, leaving one clean seam for the second attribution pass (B5). The studies Compute calls stay and get their own folder | VH | 1.5 | 🟢 | B5, X12, R3 | Golden equal on the full project; every invariant in the guide has a test; run time not worse | OP | not started | 0% | 0% | T+3 |
+| X5 | Quantitation pipeline: `FullXicComputer` (997) and `FamilyEnvelopeQuant` (968) restructured into stages with clear inputs and outputs, leaving one clean seam for the second attribution pass (B5). The studies Compute calls stay and get their own folder | VH | 1.5 | 🟢 | B5, X12, R3 | Golden equal on the full project; every invariant in the guide has a test; run time not worse | FL | not started | 0% | 0% | T+2 |
 | X6 | De novo engine tidy: readers, reconciler and table builders, with the logic left in `DeNovoControl` moved into Core | H | 1 | 🟢 | R3 | Golden equal; real-data de novo sections green | AS | not started | 0% | 0% | T+4 |
-| X7 | Project and file formats: `ProjectStore` (1,083) split, schema versioned, and an `.fcf` export the frozen 1.5.0.6 opens | H | 1 | 🟢 | R2 | A file written by 2.0 opens in the reference build with the same families; old `.fqproj` rules kept | EV | not started | 0% | 0% | T+4 |
+| X7 | Project and file formats: `ProjectStore` (1,083) split, schema versioned, and an `.fcf` export the frozen 1.5.0.6 opens | H | 1 | 🟢 | R2 | A file written by 2.0 opens in the reference build with the same families; old `.fqproj` rules kept | FL | not started | 0% | 0% | T+2 |
 | X9 | Move paper and talk figure code out of the installed app, but only code no screen calls. The Results screen calls `PresentationEvidencePack`, so that stays. Audit first, keeping the chart findings in `docs/housekeeping/H1-NOTES.md`; if little remains, close it small without a `FamilyQuant.Reports` project | H | 1 | 🟢 | R3 | Same evidence pack from the app, byte for byte except the existing `generatedUtc` field; no screen lost a function; what moved or stayed is listed | RS | not started | 0% | 0% | T+3 |
 | X11 | Dependencies: `Extended.Wpf.Toolkit` (6 uses), `Newtonsoft.Json` (3 files, the rest is `System.Text.Json`), `OpenMcdf` (no reference in this repo), `LiteDB`. Each goes only if a real RAW and `.xic2` still open | M | 1 | 🟢 | R3 | Publish rehearsal runs; real files open | AS | not started | 0% | 0% | T+1 |
-| X12 | Improvements found on the way, listed in `docs/IMPROVEMENTS.md` with before and after. Known candidates: the fast clustering pass has no coverage gate (20.1% of its joins, 2,329 of 11,584, fail the second pass's gate); the decoy mixing score cannot see over-merging, so use identified peptides to test the grouping (a peptide identical in two identity families is evidence they are one); the evidence family as a veto on single-linkage merges; one contaminant rule (D5). Anything that changes a number goes to Paulo first | H | 1 | X5 | X13, R3 | Each change measured on real data; science review; golden snapshot updated only by Paulo's word | AS | not started | 0% | 0% | T+4 |
+| X12 | Improvements found on the way, listed in `docs/IMPROVEMENTS.md` with before and after. Known candidates: the fast clustering pass has no coverage gate (20.1% of its joins, 2,329 of 11,584, fail the second pass's gate); the decoy mixing score cannot see over-merging, so use identified peptides to test the grouping (a peptide identical in two identity families is evidence they are one); the evidence family as a veto on single-linkage merges; one contaminant rule (D5). Anything that changes a number goes to Paulo first | H | 1 | X5 | X13, R3 | Each change measured on real data; science review; golden snapshot updated only by Paulo's word | AS | not started | 0% | 0% | T+5 |
 | X13 | Documents: `CLAUDE.md` from 50 KB to a working guide, history to `docs/HISTORY.md`, talk documents out of the root, release notes for 2.0. `SCIENTIFIC_METHOD.md` gains the rule that an unannotated protein joins only through an in-scope neighbour, which the code has and the document lacks. The three test files over 1,000 lines split with no check lost; `dotnet format` differences cleared | L | 1 | X12 | R3 | No fact lost, no line over 300 characters; suite count unchanged; `dotnet format --verify-no-changes` clean | AS | not started | 0% | 0% | T+6 |
 | X14 | Exhaustive clustering stops holding every pair in memory: `USearchTools` streams its edges through the union-find. The all-pairs alignment itself stays as it is | M | 1 | 🟢 | R3 | Same families on Bjararaca exhaustive; peak memory measured before and after; the memo tests kept | AS | not started | 0% | 0% | T+2 |
-| X15 | Bundled USEARCH: the binary's hash differs from upstream 11.0.667, so its origin is unproven. The author publishes versions 5 to 11 as CC0, and VSEARCH has no amino acid support, so it cannot replace it. Swap in the upstream file after a parity check (D6) | L | 0.5 | 🟢 | R3 | Same families on Bjararaca and Viperidae; hash and source recorded; publish rehearsal runs | AS | not started | 0% | 0% | T+2 |
+| X16 | Test flags register one line each in a table, so a merge cannot drop part of a dispatch block and two lanes adding flags never touch the same lines | L | 0.5 | 🟢 | R3 | Every flag and every check kept; the count does not fall; a planted missing flag fails | AS | not started | 0% | 0% | T+2 |
+| X15 | Bundled USEARCH: the binary's hash differs from upstream 11.0.667, so its origin is unproven. The author publishes versions 5 to 11 as CC0, and VSEARCH has no amino acid support, so it cannot replace it. Swap in the upstream file after a parity check (D6) | L | 0.5 | 🟢 | R3 | Same families on Bjararaca and Viperidae; hash and source recorded; publish rehearsal runs | AS | not started | 0% | 0% | T+3 |
 
 ### W7 Releases (Paulo publishes each one)
 
