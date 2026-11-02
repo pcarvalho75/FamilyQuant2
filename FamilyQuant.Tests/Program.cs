@@ -263,6 +263,7 @@ namespace FamilyQuant.Tests
             GroupingReviewInteractionTests();
             EvidenceGroupingFlowTests();
             ReportStudyBoundaryTests();
+            QuantitationPanelTests(Path.Combine(workDir, "quantitation-panel"));
             ArchitectureGroupSplitTests();
             ArchitectureMemberViewTests();
             EvidenceFetchCoordinatorTests();
