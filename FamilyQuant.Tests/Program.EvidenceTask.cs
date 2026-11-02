@@ -20,6 +20,7 @@ internal static partial class Program
         internal bool MissingRelease, ChangedRelease, WrongId;
         internal CancellationTokenSource? Cancel;
         internal Action? DuringRequest;
+        internal int? DifferentFamilyTaxon;
         protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken token)
         {
             Requests++;
@@ -39,8 +40,9 @@ internal static partial class Program
                 Content = new StringContent(JsonSerializer.Serialize(new
                 {
                     taxonId = WrongId ? id + 1 : id, scientificName = "Species " + id.ToString(CultureInfo.InvariantCulture), rank = "species", active = true,
-                    lineage = new[] { new { taxonId = 10, scientificName = "Fixture clade", rank = "family" },
-                        new { taxonId = 11, scientificName = "Fixture genus", rank = "genus" } },
+                    lineage = new[] { new { taxonId = 1, scientificName = "Fixture root", rank = "superkingdom" },
+                        new { taxonId = id == DifferentFamilyTaxon ? 12 : 10, scientificName = "Fixture clade", rank = "family" },
+                        new { taxonId = id == DifferentFamilyTaxon ? 13 : 11, scientificName = "Fixture genus", rank = "genus" } },
                 })),
             };
             if (!MissingRelease) response.Headers.Add("x-uniprot-release", ChangedRelease && Requests > 1 ? "other" : "fixture");
@@ -89,13 +91,38 @@ internal static partial class Program
                     result.TargetProteins == 3 && result.ReviewedProteins == 2 && result.Taxa.Select(t => t.TaxonId).SequenceEqual(new[] { 21, 22 })
                     && result.Clade.TaxonId == 10 && handler.Requests == 3 && file.ToJsonText() == before);
             });
-        Verify("M48 a conflicting joined target refuses the entire discovery", () =>
+        Verify("B11 a joined target retains every parsed taxon", () =>
         {
-            var file = TaskFile(); file.MyExtendedFastaItems[0].Description += " : tr|P00992|ALIAS Fixture OS=Other label OX=22 PE=1 SV=1";
+            var file = TaskFile(); file.MyExtendedFastaItems[0].Description += " : tr|P00992|ALIAS Fixture OS=Other label OX=23 PE=1 SV=1";
+            string before = file.ToJsonText();
+            Check("B11 sample taxa retain the secondary taxon without counting decoys or contaminants",
+                FamilyWorldAnalysis.SampleTaxa(file).SetEquals(new[] { "21", "22", "23" }));
+            var joined = FamilyWorld.Collect(file).Single(protein => protein.Id == file.MyExtendedFastaItems[0].SequenceIdentifier);
+            Check("B11 a joined world target belongs to each taxon for own-species removal",
+                FamilyWorld.IsOfTaxa(joined, new[] { "21" }) && FamilyWorld.IsOfTaxa(joined, new[] { "23" })
+                && !FamilyWorld.IsOfTaxa(joined, new[] { "24" }));
+            using var handler = new TaskTaxonomyHandler { DifferentFamilyTaxon = 23 };
+            var proposal = EvidenceTaskDiscovery.DiscoverAsync(file, handler).GetAwaiter().GetResult();
+            Check("B11 joined different-taxon header is one target and all taxa determine the common clade",
+                proposal.TargetProteins == 3 && proposal.ReviewedProteins == 2 && proposal.Taxa.Select(taxon => taxon.TaxonId).SequenceEqual(new[] { 21, 22, 23 })
+                && proposal.Clade.TaxonId == 1 && proposal.ProposedScopeTerms.SequenceEqual(new[] { "Leading scope" })
+                && proposal.Keywords[0].ReviewedProteins == 2 && handler.Requests == 4 && file.ToJsonText() == before);
+            using var repeated = new TaskTaxonomyHandler { DifferentFamilyTaxon = 23 };
+            Check("B11 repeated multi-taxon discovery is byte identical", JsonSerializer.Serialize(proposal)
+                == JsonSerializer.Serialize(EvidenceTaskDiscovery.DiscoverAsync(file, repeated).GetAwaiter().GetResult()));
+            var choice = EvidenceTaskDiscovery.Confirm(file, proposal, proposal.ProposedScopeTerms);
+            var saved = JsonSerializer.Deserialize<EvidenceTaskChoice>(JsonSerializer.Serialize(choice))!;
+            Check("B11 confirmed task roundtrip retains all taxa and clade without changing the source",
+                saved.Proposal.Taxa.Select(taxon => taxon.TaxonId).SequenceEqual(new[] { 21, 22, 23 }) && saved.Proposal.Clade.TaxonId == 1
+                && file.ToJsonText() == before);
+        });
+        Verify("B11 refuses a target with no parsable taxon before HTTP", () =>
+        {
+            var file = TaskFile(); file.MyExtendedFastaItems[0].Description = "Fixture OS=No numeric taxon OX=unknown";
             string before = file.ToJsonText(); using var handler = new TaskTaxonomyHandler(); bool refused = false;
             try { EvidenceTaskDiscovery.DiscoverAsync(file, handler).GetAwaiter().GetResult(); }
             catch (InvalidDataException) { refused = true; }
-            Check("M48 one conflicting joined target refuses the whole file before HTTP and leaves it unchanged",
+            Check("B11 no parsable taxon refuses the whole discovery without guessing or changing source",
                 refused && handler.Requests == 0 && file.ToJsonText() == before);
         });
         Verify("M48 conflicting contaminant headers remain outside discovery", () =>

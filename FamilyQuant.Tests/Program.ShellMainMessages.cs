@@ -53,9 +53,24 @@ internal static partial class Program
                         ["""quant.Count.ToString("N0",CultureInfo.CurrentCulture)"""] = "0",
                         ["""(familyNote!=null?familyNote+"\n\n":string.Empty)"""] = ""
                     };
+                    var branches = new Dictionary<string, bool>(StringComparer.Ordinal);
                     if (executed.Dialogs.SingleOrDefault(dialog => dialog.Accepted) is { } dialog) bindings["sfd.FileName"] = dialog.FileName;
                     if (executed.ExceptionMessage != null) bindings["ex.Message"] = executed.ExceptionMessage;
-                    var expected = LedgerMemberFactComparison.EvaluateMessage(caption ? frame!.Caption : frame!.Text, bindings);
+                    if (executed.Id == "sepro-success" && executed.Dialogs.SingleOrDefault(dialog => dialog.Accepted) is { } package)
+                    {
+                        bindings["spckg.MyProteins.MyProteinList.Count.ToString(\"N0\",CultureInfo.CurrentCulture)"] = "1";
+                        bindings["newFileName"] = Path.Combine(Path.GetDirectoryName(package.FileName)!,
+                            Path.GetFileNameWithoutExtension(package.FileName) + "_regrouped.sepr2");
+                    }
+                    if (executed.Id.StartsWith("sepro-missing-", StringComparison.Ordinal))
+                    {
+                        int missing = int.Parse(executed.Id["sepro-missing-".Length..], CultureInfo.InvariantCulture);
+                        bindings["missing.Count.ToString(\"N0\",CultureInfo.CurrentCulture)"] = missing.ToString("N0", CultureInfo.InvariantCulture);
+                        bindings["string.Join(\", \",missing.Take(10))"] = string.Join(", ", Enumerable.Range(0, Math.Min(10, missing))
+                            .Select(index => "absent_" + index.ToString("D2", CultureInfo.InvariantCulture)));
+                        branches["missing.Count>10"] = missing > 10;
+                    }
+                    var expected = LedgerMemberFactComparison.EvaluateMessage(caption ? frame!.Caption : frame!.Text, bindings, branches);
                     var expectedTitle = LedgerMemberFactComparison.EvaluateMessage(frame!.Caption, bindings);
                     string? actual = null;
                     if (executed.Messages.SingleOrDefault() is { } message && expectedTitle.Supported && message.Title == expectedTitle.Value)
@@ -69,9 +84,13 @@ internal static partial class Program
                             actual = executed.Status[(index + prefix.Length)..^suffix.Length];
                     }
                     bool contributes = expected.Contributing.Any(token => token.Line == row.Line && token.Text == row.Detail);
-                    bool matched = expected.Supported && contributes && actual != null && expected.Value == actual;
+                    bool menuRelocation = !caption && expected.Supported && actual != null && expected.Value != actual
+                        && method is "MenuItemCluster_Click" or "MenuItemReanotateSEPro_Click"
+                        && SameReportAfterMenuRename(expected, actual, bindings, view, native);
+                    bool matched = expected.Supported && contributes && actual != null && (expected.Value == actual || menuRelocation);
                     result = new(row.Id, row.Kind, row.Line, matched, frame.Member, expected.Value, actual ?? "", executed.Id,
-                        matched ? (caption ? "Complete frozen caption equals the report from the executed native branch."
+                        matched ? (menuRelocation ? "Complete frozen report matches after one verified menu-reference rename; native variables are not rewritten."
+                            : caption ? "Complete frozen caption equals the report from the executed native branch."
                             : "Complete frozen message expression equals the executed native report; dynamic inner literals are not credited.")
                             : expected.Supported ? "Changed, unexecuted or noncontributing frozen message fact." : expected.Reason, frame.MemberSha256);
                     if (matched) break;
@@ -94,6 +113,17 @@ internal static partial class Program
                             : "Changed or unsupported dialog field; no borrowed label.", dialogFrame.MemberSha256);
                     if (matched) break;
                 }
+            }
+            else if (LedgerMemberFactComparison.TryScopedMessageLiteral(row, frozen, method, out string owner, out string hash))
+            {
+                bool controlName = row.Detail == "\"MyClusterGenerationControl\"" && method == "MenuItemCluster_Click";
+                bool suffix = row.Detail == "\"_regrouped.sepr2\"" && method == "MenuItemReanotateSEPro_Click";
+                var executed = native.SingleOrDefault(record => record.Id == (controlName ? row.Line < 300 ? "open-project" : "open-fcf" : "sepro-success"));
+                if ((controlName || suffix) && executed is { Passed: true })
+                    result = new(row.Id, row.Kind, row.Line, true, owner, row.Detail, executed.Outcome, executed.Id,
+                        controlName ? "The native FCF/FQPROJ Open branch checks the actual attached curation control name."
+                            : "The actual SEPro handler creates the separately named regrouped file and its reopened curated GroupNo is checked.", hash);
+                else result = result with { Reason = reason };
             }
             else result = result with { Reason = reason };
             results.Add(result);
@@ -119,6 +149,29 @@ internal static partial class Program
         return left.Where((_, index) => index % 2 == 1).SequenceEqual(right.Where((_, index) => index % 2 == 1), StringComparer.Ordinal);
     }
 
+    private static bool SameReportAfterMenuRename(LedgerMemberFactComparison.MessageValue before, string actual,
+        IReadOnlyDictionary<string, string> bindings, XDocument frozen, IReadOnlyList<ShellRouteCase> native)
+    {
+        var oldBuild = frozen.Descendants().Single(node => node.Attributes()
+            .Any(attribute => attribute.Name.LocalName == "Name" && attribute.Value == "MenuItemRunUSearch"));
+        string label = oldBuild.Attribute("Header")!.Value;
+        var build = native.Single(record => record.Id == "new");
+        var file = native.Single(record => record.Id == "file-menu");
+        if (!build.Passed || !file.Passed || build.Menu != "MenuItemRunUSearch" || build.Header != "New from database" || file.Header != "File"
+            || bindings.Values.Any(value => value.Contains(label, StringComparison.Ordinal))) return false;
+        string oldReference = before.Value.Contains("\"" + label + "\"", StringComparison.Ordinal) ? "\"" + label + "\"" : label;
+        int first = before.Value.IndexOf(oldReference, StringComparison.Ordinal);
+        if (first < 0 || first != before.Value.LastIndexOf(oldReference, StringComparison.Ordinal)) return false;
+        int contributing = before.Contributing.Count(token =>
+        {
+            try { return JsonSerializer.Deserialize<string>(token.Text)?.Contains(label, StringComparison.Ordinal) == true; }
+            catch (JsonException) { return false; }
+        });
+        if (contributing != 1) return false;
+        string currentReference = file.Header + " > " + build.Header;
+        return before.Value.Replace(oldReference, currentReference, StringComparison.Ordinal) == actual;
+    }
+
     private static IEnumerable<ShellMainComparison> ShellNativeRouteComparisons(FeatureLedger.Inventory inventory, XDocument frozen,
         IReadOnlyList<ShellRouteCase> native)
     {
@@ -132,7 +185,7 @@ internal static partial class Program
             (Menu: "MenuItemComputeXic", Case: "quantify", Header: "Compute full XIC", Definition: true),
             (Menu: "MenuItemDeNovo", Case: "denovo", Header: "De novo evidence", Definition: true),
             (Menu: "MenuItemAnalytics", Case: "results", Header: "Results", Definition: true),
-            (Menu: "MenuItemReanotateSEPro", Case: "sepro-cancel", Header: "Reannotate SEPro", Definition: false)
+            (Menu: "MenuItemReanotateSEPro", Case: "sepro-success", Header: "Reannotate SEPro", Definition: true)
         };
         foreach (var route in routes)
         {

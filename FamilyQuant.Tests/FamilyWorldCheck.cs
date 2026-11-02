@@ -76,6 +76,9 @@ namespace FamilyQuant.Tests
         private static string R(double v) => v.ToString("R", CultureInfo.InvariantCulture);
         private static string N0(int v) => v.ToString(CultureInfo.InvariantCulture);
 
+        private static bool HasRemovedTaxon(FamilyWorldProtein protein, ICollection<string> providerTaxa, ICollection<string> sampleTaxa) =>
+            FamilyWorld.IsOfTaxa(protein, providerTaxa) || FamilyWorld.IsOfTaxa(protein, sampleTaxa);
+
         private static void RunOn(string projectPath, string worldPath, string outDir, Action<string, bool, string?> check)
         {
             var watch = System.Diagnostics.Stopwatch.StartNew();
@@ -88,11 +91,11 @@ namespace FamilyQuant.Tests
             List<FastaItemExtended> sampleTargets = sampleItems.Where(i => i != null
                 && !SequenceLabels.IsDecoy(i.SequenceIdentifier ?? string.Empty)
                 && !(i.SequenceIdentifier ?? string.Empty).StartsWith(SequenceLabels.ContaminantPrefix, StringComparison.Ordinal)).ToList();
-            var sampleTaxa = new SortedSet<string>(sampleTargets.Select(i => FamilyWorld.TaxonOf(i.Description)).Where(t => t.Length > 0), StringComparer.Ordinal);
+            var sampleTaxa = FamilyWorldAnalysis.SampleTaxa(sample);
             var sampleAccessions = new HashSet<string>(sampleTargets.Select(i => FamilyWorld.BaseAccession(FamilyNaming.Accession(i.SequenceIdentifier))), StringComparer.Ordinal);
             Log("project: " + N(sampleItems.Count) + " proteins, " + N(sampleTargets.Count) + " targets, taxa " + string.Join(",", sampleTaxa) +
                 "; " + N(quant.Count) + " quant rows, " + N(manifest.SpectrumComparisonRows.Count) + " spectrum rows");
-            check("family world: the sample's targets name their taxon (OX=)", sampleTaxa.Count > 0 && sampleTargets.All(i => FamilyWorld.TaxonOf(i.Description).Length > 0),
+            check("family world: the sample's targets name their taxon (OX=)", sampleTaxa.Count > 0 && sampleTargets.All(i => FamilyWorld.TaxaOf(i.Description).Count > 0),
                 N(sampleTaxa.Count) + " taxa");
 
             FamilyClusterFile worldFile = FamilyClusterFile.Load(worldPath);
@@ -124,19 +127,19 @@ namespace FamilyQuant.Tests
 
             List<FamilyWorldProtein> Without(TaxonMembers members, string label)
             {
-                bool Out(FamilyWorldProtein p) => members.Organisms.Contains(p.Taxon) || sampleTaxa.Contains(p.Taxon)
+                bool Out(FamilyWorldProtein p) => HasRemovedTaxon(p, members.Organisms, sampleTaxa)
                     || members.Accessions.Contains(p.Accession) || sampleAccessions.Contains(p.Accession);
                 List<FamilyWorldProtein> kept = all.Where(p => !Out(p)).ToList();
-                int byHeader = all.Count(p => members.Organisms.Contains(p.Taxon) || sampleTaxa.Contains(p.Taxon));
+                int byHeader = all.Count(p => HasRemovedTaxon(p, members.Organisms, sampleTaxa));
                 Log(label + " removed: " + N(all.Count - kept.Count) + " proteins (" + N(byHeader) + " by OX=, " +
                     N(all.Count - kept.Count - byHeader) + " by UniProt's list or the sample database, " +
                     N(all.Count(p => p.FromPanel) - kept.Count(p => p.FromPanel)) + " of them panel entries)");
                 check("family world: the world without the " + label + " holds none of its proteins",
-                    kept.All(p => !members.Accessions.Contains(p.Accession) && !members.Organisms.Contains(p.Taxon)), null);
+                    kept.All(p => !members.Accessions.Contains(p.Accession) && !HasRemovedTaxon(p, members.Organisms, sampleTaxa)), null);
                 return kept;
             }
             List<FamilyWorldProtein> withoutSpecies = Without(species, "species");
-            bool OwnSpecies(FamilyWorldProtein p) => species.Organisms.Contains(p.Taxon) || sampleTaxa.Contains(p.Taxon)
+            bool OwnSpecies(FamilyWorldProtein p) => HasRemovedTaxon(p, species.Organisms, sampleTaxa)
                 || species.Accessions.Contains(p.Accession) || sampleAccessions.Contains(p.Accession);
             Line("world_without_species", N0(withoutSpecies.Count));
 
@@ -888,6 +891,14 @@ namespace FamilyQuant.Tests
         /// without any data file.</summary>
         internal static void RunFixtures(Action<string, bool, string?> check)
         {
+            var joinedFile = new FamilyClusterFile { MyExtendedFastaItems = new List<FastaItemExtended> { new() {
+                SequenceIdentifier = "sp|P00991|JOINED", Sequence = "ACDEFGHIK",
+                Description = "First OS=First source OX=21 : Second OS=Second source OX=23" } } };
+            var joined = FamilyWorld.Collect(joinedFile).Single();
+            check("B11 study removal recognizes a joined secondary taxon from either provider or sample",
+                HasRemovedTaxon(joined, new HashSet<string> { "23" }, new HashSet<string>())
+                && HasRemovedTaxon(joined, new HashSet<string>(), new HashSet<string> { "23" })
+                && !HasRemovedTaxon(joined, new HashSet<string> { "24" }, new HashSet<string>()), null);
             static ProteinEvidence Family(string family) => new ProteinEvidence { Family = family };
             const string alpha = "MKTAYIAKQRQISFVKSHFSRQLEERLGLIEVQAPILSRVGDGTQDNLSGAEKAVQVKVKALPDAQFEVVHSLAKWKRQTLGQHDFSAGEGLYTHMKALRPDEDRLSPLHSVYVDQWDWERVMGDGERQFSTLKSTVEAIWAGIKATEAAVSEEFGLAPFLPDQIHFVHSQELLSRYPDLDAKGRERAIAKDLGAVFLVGIGGKLSDGHRHDVRAPDYDDWETPA";
             const string beta = "GSHMNEQLRASTWCYPKGDVLAEFRHNWTCQPSVDGKLMYETRHAFNSQWGCVPLDKTRENYMWAHGSFIQKDLVCRTEPGYWNHQAMSFDVKLRETCGYPANWHQ";

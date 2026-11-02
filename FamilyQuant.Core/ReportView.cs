@@ -44,7 +44,7 @@ namespace FamilyQuant
             if (mode == null)
             {
                 return "showing: family clustering only · no quantitation loaded · the share column " +
-                       "stay empty until a PatternLab project is loaded in Layer 2";
+                       "stays empty until Load PatternLab project is used under PatternLab (optional)";
             }
 
             return "showing: " + mode.Value.ShortName() +

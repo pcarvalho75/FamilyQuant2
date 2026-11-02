@@ -59,7 +59,7 @@ namespace FamilyQuant.Tests
 
             var host = new Window
             {
-                Content = grid, Width = 900, Height = 400, Left = -3000, Top = 20,
+                Content = grid, Width = 900, Height = 400, Left = -30000, Top = -30000,
                 WindowStartupLocation = WindowStartupLocation.Manual, ShowActivated = false, ShowInTaskbar = false,
             };
             var copied = new List<string>();
@@ -337,7 +337,8 @@ namespace FamilyQuant.Tests
                 var control = new ClusterGenerationControl(fcfPath);
                 UiField<CheckBox>(control, "CheckBoxExcludeReverse")!.IsChecked = false;
                 DataGrid browser = UiField<DataGrid>(control, "DataGridResultGrid")!;
-                var host = new Window { Content = control, Width = 1400, Height = 900, Left = -3000, ShowActivated = false, ShowInTaskbar = false };
+                var host = new Window { Content = control, Width = 1400, Height = 900, Left = -30000, Top = -30000,
+                    WindowStartupLocation = WindowStartupLocation.Manual, ShowActivated = false, ShowInTaskbar = false };
                 host.Show();
                 Check("the protein table is available without switching tabs", !WalkTree(control).OfType<TabControl>().Any());
                 PumpDispatcher();

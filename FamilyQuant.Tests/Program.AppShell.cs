@@ -334,7 +334,7 @@ namespace FamilyQuant.Tests
                 string help = HelpContent.Build(null, NormalizationMode.IdentifiedSignal, SharedPeptidePolicy.FamilyUnique);
                 Check("Help retains the explanation moved from the curation panel",
                     help.Contains("Shared peptides applies to both columns", StringComparison.Ordinal)
-                    && help.Contains("Full XIC share of to the Full XIC column", StringComparison.Ordinal), null);
+                    && help.Contains("Share of under Full XIC changes that column immediately", StringComparison.Ordinal), null);
                 Check("hosted theme switching never writes the user's appearance preference",
                     ProfileMarker() == profileBefore);
             }

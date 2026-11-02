@@ -12,6 +12,7 @@ internal static partial class Program
 {
     private static void LedgerDeclarationComparisonTests()
     {
+        LookCopyComparisonTests();
         Check("named UI declarations have an observation-specific frozen/current comparer",
             typeof(Program).Assembly.GetType("FamilyQuant.Tests.LedgerDeclarationComparison") != null);
         const string old = "<UserControl xmlns:x='http://schemas.microsoft.com/winfx/2006/xaml' x:Class='Fixture.View'><Button x:Name='Keep' ToolTip='Six plain words describe this action.' IsEnabled='False'/></UserControl>";
