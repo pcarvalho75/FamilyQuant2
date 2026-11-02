@@ -10,6 +10,13 @@ The producer writes three registers with 200, 200 and 212 observations, includin
 the explicit unsupported cases. Authors propose states for independent review;
 they do not accept their own kind reviews.
 
+After the X13 merge, a native audit and re-execution preserve the first 129 LK
+proofs and skip two newly valid teammate proofs. The remaining packet supports
+246 Help facts and 27 tooltips, with byte-identical comparison data across two
+runs. LK therefore proposes 402 distinct supported observations: 362 Help facts
+and 40 tooltips. The 73 Help and 135 tooltip gaps remain OPEN. Register prefixes
+can be supplied for later packets so earlier registers stay intact.
+
 For a Help fact, the shared member comparer first identifies the exact frozen
 literal and its unique containing member. The native program generates General
 Help for every reporting mode/shared policy with no PatternLab project and three
@@ -40,7 +47,7 @@ execution's timestamp, paths and commit separately.
 ```text
 FamilyQuant.Tests.exe --test-look-copy-preservation
 FamilyQuant.Tests.exe --feature-ledger-evidence <fresh-audit-folder>
-FamilyQuant.Tests.exe --prove-look-copy D:/FamilyQuant-data/out-shell/N3/source <native-audit-folder> <fresh-output> <timestamp-from-date>
+FamilyQuant.Tests.exe --prove-look-copy D:/FamilyQuant-data/out-shell/N3/source <native-audit-folder> <fresh-output> <timestamp-from-date> [LK-register-prefix]
 FamilyQuant.Tests.exe --feature-ledger-evidence-import <generated-register> <fresh-import-report>
 ```
 

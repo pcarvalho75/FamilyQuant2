@@ -8,6 +8,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.Json;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Xml.Linq;
@@ -23,7 +24,9 @@ internal static partial class Program
 
     private static int LookCopyReceiptCommand(string[] args)
     {
-        if (args.Length != 5) throw new ArgumentException("Supply frozen source root, native audit folder, fresh output and a timestamp from date.");
+        if (args.Length is not (5 or 6)) throw new ArgumentException("Supply frozen source root, native audit folder, fresh output, a timestamp from date and optional LK register prefix.");
+        string prefix = args.Length == 6 ? args[5] : "LK-copy";
+        if (!Regex.IsMatch(prefix, "^LK-[A-Za-z0-9-]+$", RegexOptions.CultureInvariant)) throw new ArgumentException("Use an LK-owned register prefix.");
         string root = FindLedgerRoot()!, frozenRoot = Path.GetFullPath(args[1]), audit = Path.GetFullPath(args[2]), output = Path.GetFullPath(args[3]);
         if (Directory.Exists(output) && Directory.EnumerateFileSystemEntries(output).Any()) throw new IOException("Output must be fresh.");
         Directory.CreateDirectory(output);
@@ -137,7 +140,7 @@ internal static partial class Program
         int batch = 0;
         foreach (var chunk in results.Chunk(200))
         {
-            string step = "LK-copy-" + (++batch).ToString(CultureInfo.InvariantCulture);
+            string step = prefix + "-" + (++batch).ToString(CultureInfo.InvariantCulture);
             var receipts = chunk.Where(r => r.Matched).GroupBy(r => (r.Kind, r.Mode)).Select(g => new FeatureLedgerEvidence.KindReceipt(
                 CopyReceiptId(g.Key.Kind, g.Key.Mode), g.Key.Kind, new() { new(runId, "test", nameof(LookCopyReceiptCommand), CopyKindAssertion(g.Key.Kind, g.Key.Mode), log, "") })).ToList();
             var rows = chunk.Select(result =>
