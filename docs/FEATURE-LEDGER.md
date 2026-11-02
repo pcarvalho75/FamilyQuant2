@@ -17,7 +17,7 @@ Render targets refer to `ScreenHarness.Screens`, captured with `--screens <outpu
 Release gate: `FamilyQuant.Tests.exe --feature-ledger-release-check` fails until every retained row is VERIFIED with evidence. Authorized DROP rows use APPROVED_DROP, which records a decision, not a completed UI removal. The normal quick suite permits OPEN rows during development. Regeneration resets retained rows to OPEN; preserve reviewed evidence when updating the scanner.
 
 Scan count: **5756**. Ledger rows: **5756**. Source files: **104**.
-Authorized DROP rows: **296**; proposed VERIFIED retained rows: **3039**; OPEN retained rows: **2421**.
+Authorized DROP rows: **296**; proposed VERIFIED retained rows: **3116**; OPEN retained rows: **2344**.
 
 | ID | Disposition | Kind | Frozen source | Fact or control | Planned check | State | Evidence |
 |---|---|---|---|---|---|---|---|
@@ -3032,11 +3032,11 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **3039**; OPEN r
 | FQ15-AC36467B01E0 | KEEP | export/storage fact | FamilyQuant/DeNovo/ThreeWayPartition.cs:393 | "true" | test:LedgerAssayCompareCommand | VERIFIED | evidence:AS-retained:FQ15-AC36467B01E0 |
 | FQ15-E17DE394C3EF | KEEP | export/storage fact | FamilyQuant/DeNovo/ThreeWayPartition.cs:393 | "false" | test:LedgerAssayCompareCommand | VERIFIED | evidence:AS-retained:FQ15-E17DE394C3EF |
 | FQ15-257E9627C92D | KEEP | export/storage fact | FamilyQuant/DeNovo/ThreeWayPartition.cs:397 | "," | test:LedgerAssayCompareCommand | VERIFIED | evidence:AS-retained:FQ15-257E9627C92D |
-| FQ15-DF75D56E6E5E | KEEP | export/storage fact | FamilyQuant/DeNovo/ThreeWayPartition.cs:400 | "R" | test:ThreeWayPartitionTests | OPEN | pending |
-| FQ15-B3686CCA5BFE | KEEP | export/storage fact | FamilyQuant/DeNovo/ThreeWayPartition.cs:407 | "\"" | test:ThreeWayPartitionTests | OPEN | pending |
-| FQ15-399C3233EFA4 | KEEP | export/storage fact | FamilyQuant/DeNovo/ThreeWayPartition.cs:407 | "\"" | test:ThreeWayPartitionTests | OPEN | pending |
-| FQ15-3F845CD11BCD | KEEP | export/storage fact | FamilyQuant/DeNovo/ThreeWayPartition.cs:407 | "\"\"" | test:ThreeWayPartitionTests | OPEN | pending |
-| FQ15-7418B217FD10 | KEEP | export/storage fact | FamilyQuant/DeNovo/ThreeWayPartition.cs:407 | "\"" | test:ThreeWayPartitionTests | OPEN | pending |
+| FQ15-DF75D56E6E5E | KEEP | export/storage fact | FamilyQuant/DeNovo/ThreeWayPartition.cs:400 | "R" | test:RunAssayRuntimeLedger | VERIFIED | evidence:AS-partition-format:FQ15-DF75D56E6E5E |
+| FQ15-B3686CCA5BFE | KEEP | export/storage fact | FamilyQuant/DeNovo/ThreeWayPartition.cs:407 | "\"" | test:RunAssayRuntimeLedger | VERIFIED | evidence:AS-partition-format:FQ15-B3686CCA5BFE |
+| FQ15-399C3233EFA4 | KEEP | export/storage fact | FamilyQuant/DeNovo/ThreeWayPartition.cs:407 | "\"" | test:RunAssayRuntimeLedger | VERIFIED | evidence:AS-partition-format:FQ15-399C3233EFA4 |
+| FQ15-3F845CD11BCD | KEEP | export/storage fact | FamilyQuant/DeNovo/ThreeWayPartition.cs:407 | "\"\"" | test:RunAssayRuntimeLedger | VERIFIED | evidence:AS-partition-format:FQ15-3F845CD11BCD |
+| FQ15-7418B217FD10 | KEEP | export/storage fact | FamilyQuant/DeNovo/ThreeWayPartition.cs:407 | "\"" | test:RunAssayRuntimeLedger | VERIFIED | evidence:AS-partition-format:FQ15-7418B217FD10 |
 | FQ15-9BB705F02458 | KEEP | export/storage fact | FamilyQuant/DeNovo/ThreeWayPartition.cs:421 | "The " | test:LedgerAssayCompareCommand | VERIFIED | evidence:AS-retained:FQ15-9BB705F02458 |
 | FQ15-5262F0CD6FE4 | KEEP | export/storage fact | FamilyQuant/DeNovo/ThreeWayPartition.cs:421 | " carry an entry with no run name." | test:LedgerAssayCompareCommand | VERIFIED | evidence:AS-retained:FQ15-5262F0CD6FE4 |
 | FQ15-78FB3073005F | KEEP | export/storage fact | FamilyQuant/DeNovo/ThreeWayPartition.cs:424 | "Two entries of the " | test:LedgerAssayCompareCommand | VERIFIED | evidence:AS-retained:FQ15-78FB3073005F |
@@ -5258,35 +5258,35 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **3039**; OPEN r
 | FQ15-A4FCC507D1D5 | IMPROVE | code fact | FamilyQuant/SharedPeptidePolicy.cs:103 | "A peptide found in more than one family is counted for none of them, so the " | test:ResultsMemberComparisonCommand | VERIFIED | evidence:RS-members:FQ15-A4FCC507D1D5 |
 | FQ15-9C9974E46684 | IMPROVE | code fact | FamilyQuant/SharedPeptidePolicy.cs:104 | "families can be read as a composition. The default, and right for reporting." | test:ResultsMemberComparisonCommand | VERIFIED | evidence:RS-members:FQ15-9C9974E46684 |
 | FQ15-2BE072BF078F | KEEP | format/export | FamilyQuant/SpectrumComparisonWindow.cs:26 | "FamilyQuant_spectrum_comparison.csv" | test:ShellLedgerComparisonCommand | VERIFIED | evidence:SH:FQ15-2BE072BF078F |
-| FQ15-E06AECC2FE8F | IMPROVE | code fact | FamilyQuant/SpectrumComparisonWindow.cs:47 | "One row per normalized file + MS2 scan + compatible source-reported charge and " | render:11-spectrum-table | OPEN | pending |
-| FQ15-68E7DEC99B44 | IMPROVE | code fact | FamilyQuant/SpectrumComparisonWindow.cs:48 | "non-chaining 20-ppm m/z cluster. Alternative sequences share ONE XIC only " | render:11-spectrum-table | OPEN | pending |
-| FQ15-C08CBBFA8D5A | IMPROVE | code fact | FamilyQuant/SpectrumComparisonWindow.cs:49 | "inside that compatible precursor-hypothesis row; incompatible same-scan " | render:11-spectrum-table | OPEN | pending |
-| FQ15-C6852B87CA79 | IMPROVE | code fact | FamilyQuant/SpectrumComparisonWindow.cs:50 | "metadata stays on separate flagged rows. RAW-selected z/mz remains visible as " | render:11-spectrum-table | OPEN | pending |
-| FQ15-4EBD6A8069C3 | IMPROVE | code fact | FamilyQuant/SpectrumComparisonWindow.cs:51 | "diagnostic evidence, not a rule that forces all claims in one scan together. " | render:11-spectrum-table | OPEN | pending |
-| FQ15-7C8FB9F25D48 | IMPROVE | code fact | FamilyQuant/SpectrumComparisonWindow.cs:52 | "Direct M+0 and plot-parity primary quant remain separate." | render:11-spectrum-table | OPEN | pending |
+| FQ15-E06AECC2FE8F | IMPROVE | code fact | FamilyQuant/SpectrumComparisonWindow.cs:47 | "One row per normalized file + MS2 scan + compatible source-reported charge and " | test:RunAssayRuntimeLedger | VERIFIED | evidence:AS-spectrum-details:FQ15-E06AECC2FE8F |
+| FQ15-68E7DEC99B44 | IMPROVE | code fact | FamilyQuant/SpectrumComparisonWindow.cs:48 | "non-chaining 20-ppm m/z cluster. Alternative sequences share ONE XIC only " | test:RunAssayRuntimeLedger | VERIFIED | evidence:AS-spectrum-details:FQ15-68E7DEC99B44 |
+| FQ15-C08CBBFA8D5A | IMPROVE | code fact | FamilyQuant/SpectrumComparisonWindow.cs:49 | "inside that compatible precursor-hypothesis row; incompatible same-scan " | test:RunAssayRuntimeLedger | VERIFIED | evidence:AS-spectrum-details:FQ15-C08CBBFA8D5A |
+| FQ15-C6852B87CA79 | IMPROVE | code fact | FamilyQuant/SpectrumComparisonWindow.cs:50 | "metadata stays on separate flagged rows. RAW-selected z/mz remains visible as " | test:RunAssayRuntimeLedger | VERIFIED | evidence:AS-spectrum-details:FQ15-C6852B87CA79 |
+| FQ15-4EBD6A8069C3 | IMPROVE | code fact | FamilyQuant/SpectrumComparisonWindow.cs:51 | "diagnostic evidence, not a rule that forces all claims in one scan together. " | test:RunAssayRuntimeLedger | VERIFIED | evidence:AS-spectrum-details:FQ15-4EBD6A8069C3 |
+| FQ15-7C8FB9F25D48 | IMPROVE | code fact | FamilyQuant/SpectrumComparisonWindow.cs:52 | "Direct M+0 and plot-parity primary quant remain separate." | test:RunAssayRuntimeLedger | VERIFIED | evidence:AS-spectrum-details:FQ15-7C8FB9F25D48 |
 | FQ15-C1162895D157 | IMPROVE | code fact | FamilyQuant/SpectrumComparisonWindow.cs:56 | "How the rows are built and what a blank cell means. A blank is missing " | render:11-spectrum-table | OPEN | pending |
 | FQ15-F68CC59DBB0D | IMPROVE | code fact | FamilyQuant/SpectrumComparisonWindow.cs:57 | "evidence, not a zero score and not a sequence disagreement." | render:11-spectrum-table | OPEN | pending |
-| FQ15-0908BA69C203 | IMPROVE | code fact | FamilyQuant/SpectrumComparisonWindow.cs:64 | "N0" | render:11-spectrum-table | OPEN | pending |
-| FQ15-C12FDBFF007E | IMPROVE | code fact | FamilyQuant/SpectrumComparisonWindow.cs:65 | " precursor-hypothesis row(s)" | render:11-spectrum-table | OPEN | pending |
+| FQ15-0908BA69C203 | IMPROVE | code fact | FamilyQuant/SpectrumComparisonWindow.cs:64 | "N0" | test:RunAssayRuntimeLedger | VERIFIED | evidence:AS-spectrum-details:FQ15-0908BA69C203 |
+| FQ15-C12FDBFF007E | IMPROVE | code fact | FamilyQuant/SpectrumComparisonWindow.cs:65 | " precursor-hypothesis row(s)" | test:RunAssayRuntimeLedger | VERIFIED | evidence:AS-spectrum-details:FQ15-C12FDBFF007E |
 | FQ15-9BF3481B1263 | IMPROVE | code fact | FamilyQuant/SpectrumComparisonWindow.cs:70 | "The number of rows shown. One scan can give several rows, one per precursor hypothesis." | render:11-spectrum-table | OPEN | pending |
-| FQ15-CE05D724B775 | IMPROVE | code fact | FamilyQuant/SpectrumComparisonWindow.cs:75 | "ButtonSaveSpectrumComparisonCsv" | render:11-spectrum-table | OPEN | pending |
-| FQ15-E1E21B0400F5 | IMPROVE | code fact | FamilyQuant/SpectrumComparisonWindow.cs:76 | "Save a copy (CSV)" | render:11-spectrum-table | OPEN | pending |
+| FQ15-CE05D724B775 | IMPROVE | code fact | FamilyQuant/SpectrumComparisonWindow.cs:75 | "ButtonSaveSpectrumComparisonCsv" | test:RunAssayRuntimeLedger | VERIFIED | evidence:AS-spectrum-actions:FQ15-CE05D724B775 |
+| FQ15-E1E21B0400F5 | IMPROVE | code fact | FamilyQuant/SpectrumComparisonWindow.cs:76 | "Save a copy (CSV)" | test:RunAssayRuntimeLedger | VERIFIED | evidence:AS-spectrum-actions:FQ15-E1E21B0400F5 |
 | FQ15-4DE8597B3173 | IMPROVE | code fact | FamilyQuant/SpectrumComparisonWindow.cs:79 | "Saves exactly the rows in this table as a CSV. Scores stay in separate columns, " | render:11-spectrum-table | OPEN | pending |
 | FQ15-4A6FF7FC7BB3 | IMPROVE | code fact | FamilyQuant/SpectrumComparisonWindow.cs:80 | "missing values stay blank, and the project is not changed." | render:11-spectrum-table | OPEN | pending |
-| FQ15-7E29C1ED8488 | IMPROVE | code fact | FamilyQuant/SpectrumComparisonWindow.cs:91 | "ButtonSaveAcceptedScoreScatter" | render:11-spectrum-table | OPEN | pending |
-| FQ15-13682B7228FE | IMPROVE | code fact | FamilyQuant/SpectrumComparisonWindow.cs:92 | "Save accepted-call score plot" | render:11-spectrum-table | OPEN | pending |
+| FQ15-7E29C1ED8488 | IMPROVE | code fact | FamilyQuant/SpectrumComparisonWindow.cs:91 | "ButtonSaveAcceptedScoreScatter" | test:RunAssayRuntimeLedger | VERIFIED | evidence:AS-spectrum-actions:FQ15-7E29C1ED8488 |
+| FQ15-13682B7228FE | IMPROVE | code fact | FamilyQuant/SpectrumComparisonWindow.cs:92 | "Save accepted-call score plot" | test:RunAssayRuntimeLedger | VERIFIED | evidence:AS-spectrum-actions:FQ15-13682B7228FE |
 | FQ15-F3BDBF95C557 | IMPROVE | code fact | FamilyQuant/SpectrumComparisonWindow.cs:97 | "Saves a 1920 x 1080 PNG and its CSV: one dot per row where both PEAKS and " | render:11-spectrum-table | OPEN | pending |
 | FQ15-2AB23E3CEF2C | IMPROVE | code fact | FamilyQuant/SpectrumComparisonWindow.cs:98 | "DeepNovo passed their filters. Blue circles are sequence matches; red diamonds " | render:11-spectrum-table | OPEN | pending |
 | FQ15-CC2E78AF38A6 | IMPROVE | code fact | FamilyQuant/SpectrumComparisonWindow.cs:99 | "are mismatches." | render:11-spectrum-table | OPEN | pending |
-| FQ15-836428C77D50 | IMPROVE | code fact | FamilyQuant/SpectrumComparisonWindow.cs:105 | "No automatic CSV path is available for this view." | render:11-spectrum-table | OPEN | pending |
-| FQ15-910777A7C13F | IMPROVE | code fact | FamilyQuant/SpectrumComparisonWindow.cs:106 | "CSV: " | render:11-spectrum-table | OPEN | pending |
-| FQ15-2837FB9B6E15 | IMPROVE | code fact | FamilyQuant/SpectrumComparisonWindow.cs:111 | "The CSV saved automatically by the latest computation, if any. Saving a copy " | render:11-spectrum-table | OPEN | pending |
-| FQ15-D4F6DCC3BE8E | IMPROVE | code fact | FamilyQuant/SpectrumComparisonWindow.cs:112 | "does not change the project." | render:11-spectrum-table | OPEN | pending |
+| FQ15-836428C77D50 | IMPROVE | code fact | FamilyQuant/SpectrumComparisonWindow.cs:105 | "No automatic CSV path is available for this view." | test:RunAssayRuntimeLedger | VERIFIED | evidence:AS-spectrum-details:FQ15-836428C77D50 |
+| FQ15-910777A7C13F | IMPROVE | code fact | FamilyQuant/SpectrumComparisonWindow.cs:106 | "CSV: " | test:RunAssayRuntimeLedger | VERIFIED | evidence:AS-spectrum-details:FQ15-910777A7C13F |
+| FQ15-2837FB9B6E15 | IMPROVE | code fact | FamilyQuant/SpectrumComparisonWindow.cs:111 | "The CSV saved automatically by the latest computation, if any. Saving a copy " | test:RunAssayRuntimeLedger | VERIFIED | evidence:AS-spectrum-details:FQ15-2837FB9B6E15 |
+| FQ15-D4F6DCC3BE8E | IMPROVE | code fact | FamilyQuant/SpectrumComparisonWindow.cs:112 | "does not change the project." | test:RunAssayRuntimeLedger | VERIFIED | evidence:AS-spectrum-details:FQ15-D4F6DCC3BE8E |
 | FQ15-DA9285380A90 | IMPROVE | code fact | FamilyQuant/SpectrumComparisonWindow.cs:134 | "Shows where Save a copy wrote the CSV, or why it could not." | render:11-spectrum-table | OPEN | pending |
 | FQ15-8A683CC9FA21 | IMPROVE | code fact | FamilyQuant/SpectrumComparisonWindow.cs:141 | "FamilyQuant \u00B7 Spectrum comparison table" | render:11-spectrum-table | OPEN | pending |
-| FQ15-231902287B95 | IMPROVE | code fact | FamilyQuant/SpectrumComparisonWindow.cs:169 | "DataGridSpectrumComparison" | render:11-spectrum-table | OPEN | pending |
-| FQ15-ABEE2CF20D4D | IMPROVE | code fact | FamilyQuant/SpectrumComparisonWindow.cs:185 | "One read-only row per file, scan and precursor hypothesis. Click a column heading to " | render:11-spectrum-table | OPEN | pending |
-| FQ15-332E524ED0DD | IMPROVE | code fact | FamilyQuant/SpectrumComparisonWindow.cs:186 | "sort; the CSV keeps the file and scan order." | render:11-spectrum-table | OPEN | pending |
+| FQ15-231902287B95 | IMPROVE | code fact | FamilyQuant/SpectrumComparisonWindow.cs:169 | "DataGridSpectrumComparison" | test:RunAssayRuntimeLedger | VERIFIED | evidence:AS-spectrum-actions:FQ15-231902287B95 |
+| FQ15-ABEE2CF20D4D | IMPROVE | code fact | FamilyQuant/SpectrumComparisonWindow.cs:185 | "One read-only row per file, scan and precursor hypothesis. Click a column heading to " | test:RunAssayRuntimeLedger | VERIFIED | evidence:AS-spectrum-actions:FQ15-ABEE2CF20D4D |
+| FQ15-332E524ED0DD | IMPROVE | code fact | FamilyQuant/SpectrumComparisonWindow.cs:186 | "sort; the CSV keeps the file and scan order." | test:RunAssayRuntimeLedger | VERIFIED | evidence:AS-spectrum-actions:FQ15-332E524ED0DD |
 | FQ15-EADF3B922739 | IMPROVE | code fact | FamilyQuant/SpectrumComparisonWindow.cs:189 | "Scan" | test:RunAssayRuntimeLedger | VERIFIED | evidence:AS-spectrum-properties:FQ15-EADF3B922739 |
 | FQ15-4A9C24C3AF08 | IMPROVE | code fact | FamilyQuant/SpectrumComparisonWindow.cs:190 | "The MS2 scan number within the acquisition file." | test:RunAssayRuntimeLedger | VERIFIED | evidence:AS-spectrum-properties:FQ15-4A9C24C3AF08 |
 | FQ15-11523DF8BC47 | IMPROVE | code fact | FamilyQuant/SpectrumComparisonWindow.cs:191 | "File name" | test:RunAssayRuntimeLedger | VERIFIED | evidence:AS-spectrum-properties:FQ15-11523DF8BC47 |
@@ -5417,42 +5417,42 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **3039**; OPEN r
 | FQ15-02A2CCD33CE0 | IMPROVE | code fact | FamilyQuant/SpectrumComparisonWindow.cs:305 | "Join status" | test:RunAssayRuntimeLedger | VERIFIED | evidence:AS-spectrum-properties:FQ15-02A2CCD33CE0 |
 | FQ15-E23659C2978A | IMPROVE | code fact | FamilyQuant/SpectrumComparisonWindow.cs:306 | "A short verdict on which tools made a call here and whether they agree. Calls in the " | test:RunAssayRuntimeLedger | VERIFIED | evidence:AS-spectrum-properties:FQ15-E23659C2978A |
 | FQ15-211B25267F8D | IMPROVE | code fact | FamilyQuant/SpectrumComparisonWindow.cs:307 | "same scan with a different charge or m/z are kept on separate rows." | test:RunAssayRuntimeLedger | VERIFIED | evidence:AS-spectrum-properties:FQ15-211B25267F8D |
-| FQ15-385750EEF709 | IMPROVE | code fact | FamilyQuant/SpectrumComparisonWindow.cs:317 | "Nothing was saved because this comparison window is not on a display. " | render:11-spectrum-table | OPEN | pending |
-| FQ15-4E27BBF9D4AA | IMPROVE | code fact | FamilyQuant/SpectrumComparisonWindow.cs:318 | "Open it from the loaded project and choose Save accepted-call score plot." | render:11-spectrum-table | OPEN | pending |
-| FQ15-ABD2FD522C2F | IMPROVE | code fact | FamilyQuant/SpectrumComparisonWindow.cs:324 | "Save accepted PEAKS versus DeepNovo score plot and exact CSV" | render:11-spectrum-table | OPEN | pending |
-| FQ15-95EA301403F7 | KEEP | format/export | FamilyQuant/SpectrumComparisonWindow.cs:325 | "PNG image (*.png)&#124;*.png" | render:11-spectrum-table | OPEN | pending |
-| FQ15-AF48139BCAFB | KEEP | format/export | FamilyQuant/SpectrumComparisonWindow.cs:328 | ".png" | render:11-spectrum-table | OPEN | pending |
-| FQ15-932F74108F0A | KEEP | format/export | FamilyQuant/SpectrumComparisonWindow.cs:342 | ".csv" | render:11-spectrum-table | OPEN | pending |
-| FQ15-FD84AF423A40 | IMPROVE | code fact | FamilyQuant/SpectrumComparisonWindow.cs:345 | "Saved " | render:11-spectrum-table | OPEN | pending |
-| FQ15-3F95C93169BF | IMPROVE | code fact | FamilyQuant/SpectrumComparisonWindow.cs:345 | " and " | render:11-spectrum-table | OPEN | pending |
-| FQ15-DA5178732418 | IMPROVE | code fact | FamilyQuant/SpectrumComparisonWindow.cs:345 | ". " | render:11-spectrum-table | OPEN | pending |
-| FQ15-402DAF4CB80B | IMPROVE | code fact | FamilyQuant/SpectrumComparisonWindow.cs:346 | "N0" | render:11-spectrum-table | OPEN | pending |
-| FQ15-8D578029BC46 | IMPROVE | code fact | FamilyQuant/SpectrumComparisonWindow.cs:347 | " jointly accepted precursor-hypothesis row(s): " | render:11-spectrum-table | OPEN | pending |
-| FQ15-2539856F1EAD | IMPROVE | code fact | FamilyQuant/SpectrumComparisonWindow.cs:348 | "N0" | render:11-spectrum-table | OPEN | pending |
-| FQ15-C6ED0DC284EB | IMPROVE | code fact | FamilyQuant/SpectrumComparisonWindow.cs:349 | " strict matches and " | render:11-spectrum-table | OPEN | pending |
-| FQ15-9A71BF62E6A0 | IMPROVE | code fact | FamilyQuant/SpectrumComparisonWindow.cs:350 | "N0" | render:11-spectrum-table | OPEN | pending |
-| FQ15-91DAD8FD3427 | IMPROVE | code fact | FamilyQuant/SpectrumComparisonWindow.cs:351 | " mismatches." | render:11-spectrum-table | OPEN | pending |
-| FQ15-9720CE3BA4BA | IMPROVE | code fact | FamilyQuant/SpectrumComparisonWindow.cs:355 | "The accepted-call score plot was not saved. " | render:11-spectrum-table | OPEN | pending |
-| FQ15-D7E5589C4080 | IMPROVE | code fact | FamilyQuant/SpectrumComparisonWindow.cs:384 | "Nothing was saved, because this window is not on a display and a file " | render:11-spectrum-table | OPEN | pending |
-| FQ15-E563845A7EC9 | IMPROVE | code fact | FamilyQuant/SpectrumComparisonWindow.cs:385 | "dialog there is a window nothing can close. Open this table in the " | render:11-spectrum-table | OPEN | pending |
-| FQ15-B4760E520F75 | IMPROVE | code fact | FamilyQuant/SpectrumComparisonWindow.cs:386 | "application and press Save a copy again." | render:11-spectrum-table | OPEN | pending |
-| FQ15-F38FD070BACB | KEEP | format/export | FamilyQuant/SpectrumComparisonWindow.cs:398 | "CSV files (*.csv)&#124;*.csv&#124;All files (*.*)&#124;*.*" | render:11-spectrum-table | OPEN | pending |
-| FQ15-C568758251BF | IMPROVE | code fact | FamilyQuant/SpectrumComparisonWindow.cs:400 | "Save the spectrum comparison table" | render:11-spectrum-table | OPEN | pending |
-| FQ15-B54161CBD937 | KEEP | format/export | FamilyQuant/SpectrumComparisonWindow.cs:402 | ".csv" | render:11-spectrum-table | OPEN | pending |
-| FQ15-94F2AA49C7AB | IMPROVE | code fact | FamilyQuant/SpectrumComparisonWindow.cs:410 | "Written " | render:11-spectrum-table | OPEN | pending |
-| FQ15-0738B8F2C7DD | IMPROVE | code fact | FamilyQuant/SpectrumComparisonWindow.cs:410 | "N0" | render:11-spectrum-table | OPEN | pending |
-| FQ15-B69CD9176B5D | IMPROVE | code fact | FamilyQuant/SpectrumComparisonWindow.cs:411 | " spectrum row(s) to " | render:11-spectrum-table | OPEN | pending |
-| FQ15-B2090253E404 | IMPROVE | code fact | FamilyQuant/SpectrumComparisonWindow.cs:412 | ". The project and its quantitation were not changed." | render:11-spectrum-table | OPEN | pending |
-| FQ15-555A43340658 | IMPROVE | code fact | FamilyQuant/SpectrumComparisonWindow.cs:416 | "The CSV could not be written, so nothing was saved. Reason given by the " | render:11-spectrum-table | OPEN | pending |
-| FQ15-114E3BB905DB | IMPROVE | code fact | FamilyQuant/SpectrumComparisonWindow.cs:417 | "program: " | render:11-spectrum-table | OPEN | pending |
-| FQ15-36394D283051 | IMPROVE | code fact | FamilyQuant/SpectrumComparisonWindow.cs:417 | " Check that the file is not open elsewhere " | render:11-spectrum-table | OPEN | pending |
-| FQ15-D35FA6C8D0E1 | IMPROVE | code fact | FamilyQuant/SpectrumComparisonWindow.cs:418 | "and that you can write to that folder, then save again." | render:11-spectrum-table | OPEN | pending |
-| FQ15-CA28E49ABF49 | IMPROVE | code control | FamilyQuant/SpectrumComparisonWindow.cs:73 | new Button | render:11-spectrum-table | OPEN | pending |
-| FQ15-CD9682DD861E | IMPROVE | code control | FamilyQuant/SpectrumComparisonWindow.cs:89 | new Button | render:11-spectrum-table | OPEN | pending |
-| FQ15-98F81CE88BFD | IMPROVE | code control | FamilyQuant/SpectrumComparisonWindow.cs:167 | new DataGrid | render:11-spectrum-table | OPEN | pending |
-| FQ15-65C05F63436B | IMPROVE | code control | FamilyQuant/SpectrumComparisonWindow.cs:369 | new DataGridTextColumn | render:11-spectrum-table | OPEN | pending |
-| FQ15-CFC838A2ABA7 | KEEP | handler | FamilyQuant/SpectrumComparisonWindow.cs:150 | save.Click += (_, __) =&gt; SaveCopy(save, status, displayRows, existingCsvPath); | render:11-spectrum-table | OPEN | pending |
-| FQ15-0DDF756D3A48 | KEEP | handler | FamilyQuant/SpectrumComparisonWindow.cs:151 | saveScorePlot.Click += (_, __) =&gt; SaveAcceptedScoreScatter( | render:11-spectrum-table | OPEN | pending |
+| FQ15-385750EEF709 | IMPROVE | code fact | FamilyQuant/SpectrumComparisonWindow.cs:317 | "Nothing was saved because this comparison window is not on a display. " | test:RunAssayRuntimeLedger | VERIFIED | evidence:AS-spectrum-actions:FQ15-385750EEF709 |
+| FQ15-4E27BBF9D4AA | IMPROVE | code fact | FamilyQuant/SpectrumComparisonWindow.cs:318 | "Open it from the loaded project and choose Save accepted-call score plot." | test:RunAssayRuntimeLedger | VERIFIED | evidence:AS-spectrum-actions:FQ15-4E27BBF9D4AA |
+| FQ15-ABD2FD522C2F | IMPROVE | code fact | FamilyQuant/SpectrumComparisonWindow.cs:324 | "Save accepted PEAKS versus DeepNovo score plot and exact CSV" | test:RunAssayRuntimeLedger | VERIFIED | evidence:AS-spectrum-exports:FQ15-ABD2FD522C2F |
+| FQ15-95EA301403F7 | KEEP | format/export | FamilyQuant/SpectrumComparisonWindow.cs:325 | "PNG image (*.png)&#124;*.png" | test:RunAssayRuntimeLedger | VERIFIED | evidence:AS-spectrum-exports:FQ15-95EA301403F7 |
+| FQ15-AF48139BCAFB | KEEP | format/export | FamilyQuant/SpectrumComparisonWindow.cs:328 | ".png" | test:RunAssayRuntimeLedger | VERIFIED | evidence:AS-spectrum-exports:FQ15-AF48139BCAFB |
+| FQ15-932F74108F0A | KEEP | format/export | FamilyQuant/SpectrumComparisonWindow.cs:342 | ".csv" | test:RunAssayRuntimeLedger | VERIFIED | evidence:AS-spectrum-exports:FQ15-932F74108F0A |
+| FQ15-FD84AF423A40 | IMPROVE | code fact | FamilyQuant/SpectrumComparisonWindow.cs:345 | "Saved " | test:RunAssayRuntimeLedger | VERIFIED | evidence:AS-spectrum-exports:FQ15-FD84AF423A40 |
+| FQ15-3F95C93169BF | IMPROVE | code fact | FamilyQuant/SpectrumComparisonWindow.cs:345 | " and " | test:RunAssayRuntimeLedger | VERIFIED | evidence:AS-spectrum-exports:FQ15-3F95C93169BF |
+| FQ15-DA5178732418 | IMPROVE | code fact | FamilyQuant/SpectrumComparisonWindow.cs:345 | ". " | test:RunAssayRuntimeLedger | VERIFIED | evidence:AS-spectrum-exports:FQ15-DA5178732418 |
+| FQ15-402DAF4CB80B | IMPROVE | code fact | FamilyQuant/SpectrumComparisonWindow.cs:346 | "N0" | test:RunAssayRuntimeLedger | VERIFIED | evidence:AS-spectrum-exports:FQ15-402DAF4CB80B |
+| FQ15-8D578029BC46 | IMPROVE | code fact | FamilyQuant/SpectrumComparisonWindow.cs:347 | " jointly accepted precursor-hypothesis row(s): " | test:RunAssayRuntimeLedger | VERIFIED | evidence:AS-spectrum-exports:FQ15-8D578029BC46 |
+| FQ15-2539856F1EAD | IMPROVE | code fact | FamilyQuant/SpectrumComparisonWindow.cs:348 | "N0" | test:RunAssayRuntimeLedger | VERIFIED | evidence:AS-spectrum-exports:FQ15-2539856F1EAD |
+| FQ15-C6ED0DC284EB | IMPROVE | code fact | FamilyQuant/SpectrumComparisonWindow.cs:349 | " strict matches and " | test:RunAssayRuntimeLedger | VERIFIED | evidence:AS-spectrum-exports:FQ15-C6ED0DC284EB |
+| FQ15-9A71BF62E6A0 | IMPROVE | code fact | FamilyQuant/SpectrumComparisonWindow.cs:350 | "N0" | test:RunAssayRuntimeLedger | VERIFIED | evidence:AS-spectrum-exports:FQ15-9A71BF62E6A0 |
+| FQ15-91DAD8FD3427 | IMPROVE | code fact | FamilyQuant/SpectrumComparisonWindow.cs:351 | " mismatches." | test:RunAssayRuntimeLedger | VERIFIED | evidence:AS-spectrum-exports:FQ15-91DAD8FD3427 |
+| FQ15-9720CE3BA4BA | IMPROVE | code fact | FamilyQuant/SpectrumComparisonWindow.cs:355 | "The accepted-call score plot was not saved. " | test:RunAssayRuntimeLedger | VERIFIED | evidence:AS-spectrum-exports:FQ15-9720CE3BA4BA |
+| FQ15-D7E5589C4080 | IMPROVE | code fact | FamilyQuant/SpectrumComparisonWindow.cs:384 | "Nothing was saved, because this window is not on a display and a file " | test:RunAssayRuntimeLedger | VERIFIED | evidence:AS-spectrum-actions:FQ15-D7E5589C4080 |
+| FQ15-E563845A7EC9 | IMPROVE | code fact | FamilyQuant/SpectrumComparisonWindow.cs:385 | "dialog there is a window nothing can close. Open this table in the " | test:RunAssayRuntimeLedger | VERIFIED | evidence:AS-spectrum-actions:FQ15-E563845A7EC9 |
+| FQ15-B4760E520F75 | IMPROVE | code fact | FamilyQuant/SpectrumComparisonWindow.cs:386 | "application and press Save a copy again." | test:RunAssayRuntimeLedger | VERIFIED | evidence:AS-spectrum-actions:FQ15-B4760E520F75 |
+| FQ15-F38FD070BACB | KEEP | format/export | FamilyQuant/SpectrumComparisonWindow.cs:398 | "CSV files (*.csv)&#124;*.csv&#124;All files (*.*)&#124;*.*" | test:RunAssayRuntimeLedger | VERIFIED | evidence:AS-spectrum-exports:FQ15-F38FD070BACB |
+| FQ15-C568758251BF | IMPROVE | code fact | FamilyQuant/SpectrumComparisonWindow.cs:400 | "Save the spectrum comparison table" | test:RunAssayRuntimeLedger | VERIFIED | evidence:AS-spectrum-exports:FQ15-C568758251BF |
+| FQ15-B54161CBD937 | KEEP | format/export | FamilyQuant/SpectrumComparisonWindow.cs:402 | ".csv" | test:RunAssayRuntimeLedger | VERIFIED | evidence:AS-spectrum-exports:FQ15-B54161CBD937 |
+| FQ15-94F2AA49C7AB | IMPROVE | code fact | FamilyQuant/SpectrumComparisonWindow.cs:410 | "Written " | test:RunAssayRuntimeLedger | VERIFIED | evidence:AS-spectrum-exports:FQ15-94F2AA49C7AB |
+| FQ15-0738B8F2C7DD | IMPROVE | code fact | FamilyQuant/SpectrumComparisonWindow.cs:410 | "N0" | test:RunAssayRuntimeLedger | VERIFIED | evidence:AS-spectrum-exports:FQ15-0738B8F2C7DD |
+| FQ15-B69CD9176B5D | IMPROVE | code fact | FamilyQuant/SpectrumComparisonWindow.cs:411 | " spectrum row(s) to " | test:RunAssayRuntimeLedger | VERIFIED | evidence:AS-spectrum-exports:FQ15-B69CD9176B5D |
+| FQ15-B2090253E404 | IMPROVE | code fact | FamilyQuant/SpectrumComparisonWindow.cs:412 | ". The project and its quantitation were not changed." | test:RunAssayRuntimeLedger | VERIFIED | evidence:AS-spectrum-exports:FQ15-B2090253E404 |
+| FQ15-555A43340658 | IMPROVE | code fact | FamilyQuant/SpectrumComparisonWindow.cs:416 | "The CSV could not be written, so nothing was saved. Reason given by the " | test:RunAssayRuntimeLedger | VERIFIED | evidence:AS-spectrum-exports:FQ15-555A43340658 |
+| FQ15-114E3BB905DB | IMPROVE | code fact | FamilyQuant/SpectrumComparisonWindow.cs:417 | "program: " | test:RunAssayRuntimeLedger | VERIFIED | evidence:AS-spectrum-exports:FQ15-114E3BB905DB |
+| FQ15-36394D283051 | IMPROVE | code fact | FamilyQuant/SpectrumComparisonWindow.cs:417 | " Check that the file is not open elsewhere " | test:RunAssayRuntimeLedger | VERIFIED | evidence:AS-spectrum-exports:FQ15-36394D283051 |
+| FQ15-D35FA6C8D0E1 | IMPROVE | code fact | FamilyQuant/SpectrumComparisonWindow.cs:418 | "and that you can write to that folder, then save again." | test:RunAssayRuntimeLedger | VERIFIED | evidence:AS-spectrum-exports:FQ15-D35FA6C8D0E1 |
+| FQ15-CA28E49ABF49 | IMPROVE | code control | FamilyQuant/SpectrumComparisonWindow.cs:73 | new Button | test:RunAssayRuntimeLedger | VERIFIED | evidence:AS-spectrum-actions:FQ15-CA28E49ABF49 |
+| FQ15-CD9682DD861E | IMPROVE | code control | FamilyQuant/SpectrumComparisonWindow.cs:89 | new Button | test:RunAssayRuntimeLedger | VERIFIED | evidence:AS-spectrum-actions:FQ15-CD9682DD861E |
+| FQ15-98F81CE88BFD | IMPROVE | code control | FamilyQuant/SpectrumComparisonWindow.cs:167 | new DataGrid | test:RunAssayRuntimeLedger | VERIFIED | evidence:AS-spectrum-actions:FQ15-98F81CE88BFD |
+| FQ15-65C05F63436B | IMPROVE | code control | FamilyQuant/SpectrumComparisonWindow.cs:369 | new DataGridTextColumn | test:RunAssayRuntimeLedger | VERIFIED | evidence:AS-spectrum-actions:FQ15-65C05F63436B |
+| FQ15-CFC838A2ABA7 | KEEP | handler | FamilyQuant/SpectrumComparisonWindow.cs:150 | save.Click += (_, __) =&gt; SaveCopy(save, status, displayRows, existingCsvPath); | test:RunAssayRuntimeLedger | VERIFIED | evidence:AS-spectrum-actions:FQ15-CFC838A2ABA7 |
+| FQ15-0DDF756D3A48 | KEEP | handler | FamilyQuant/SpectrumComparisonWindow.cs:151 | saveScorePlot.Click += (_, __) =&gt; SaveAcceptedScoreScatter( | test:RunAssayRuntimeLedger | VERIFIED | evidence:AS-spectrum-actions:FQ15-0DDF756D3A48 |
 | FQ15-BBC412FECF76 | IMPROVE | code fact | FamilyQuant/SuperClusterPreviewWindow.cs:48 | "Super cluster preview" | render:09-super-cluster-preview | OPEN | pending |
 | FQ15-1AE7BDB2129D | IMPROVE | code fact | FamilyQuant/SuperClusterPreviewWindow.cs:74 | "Keywords separated by commas or spaces; the list below follows as you type." | render:09-super-cluster-preview | OPEN | pending |
 | FQ15-2E591FCE5DCB | IMPROVE | code fact | FamilyQuant/SuperClusterPreviewWindow.cs:79 | "Whether a protein must carry every keyword, or any one of them." | render:09-super-cluster-preview | OPEN | pending |
@@ -5529,22 +5529,22 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **3039**; OPEN r
 | FQ15-7F1522E909F4 | IMPROVE | option/copy | FamilyQuant/USearch.xaml:28 | GroupBox.Header = \uD83D\uDD0D Family Cluster File Generation | render:02-build | OPEN | pending |
 | FQ15-35FBEDEA7583 | IMPROVE | option/copy | FamilyQuant/USearch.xaml:32 | Label.Content = Identity: | render:02-build | OPEN | pending |
 | FQ15-1F77DB04853A | IMPROVE | tooltip | FamilyQuant/USearch.xaml:33 | Label.ToolTip = How similar two sequences must be before USEARCH puts them in the same family. | render:02-build | OPEN | pending |
-| FQ15-00014F7B5211 | IMPROVE | control | FamilyQuant/USearch.xaml:34 | IntegerUpDown IntegerUpDownIdentity | render:02-build | OPEN | pending |
-| FQ15-A9056D654142 | IMPROVE | option/copy | FamilyQuant/USearch.xaml:34 | IntegerUpDownIdentity.Value = 85 | render:02-build | OPEN | pending |
+| FQ15-00014F7B5211 | IMPROVE | control | FamilyQuant/USearch.xaml:34 | IntegerUpDown IntegerUpDownIdentity | test:RunAssayRuntimeLedger | VERIFIED | evidence:AS-build-properties:FQ15-00014F7B5211 |
+| FQ15-A9056D654142 | IMPROVE | option/copy | FamilyQuant/USearch.xaml:34 | IntegerUpDownIdentity.Value = 85 | test:RunAssayRuntimeLedger | VERIFIED | evidence:AS-build-properties:FQ15-A9056D654142 |
 | FQ15-C94EDE66704E | IMPROVE | option/copy | FamilyQuant/USearch.xaml:34 | IntegerUpDownIdentity.Minimum = 1 | test:ShellLedgerComparisonCommand | VERIFIED | evidence:SH:FQ15-C94EDE66704E |
 | FQ15-658752C24A20 | IMPROVE | option/copy | FamilyQuant/USearch.xaml:34 | IntegerUpDownIdentity.Maximum = 100 | test:ShellLedgerComparisonCommand | VERIFIED | evidence:SH:FQ15-658752C24A20 |
 | FQ15-C55639A5A0BE | IMPROVE | tooltip | FamilyQuant/USearch.xaml:37 | IntegerUpDownIdentity.ToolTip = Percent identity two sequences need to join the same family (default 85). Higher gives more, smaller families; lower gives fewer, larger ones. Use "Scan identity range" to compare values. | render:02-build | OPEN | pending |
 | FQ15-2E0859E53C03 | IMPROVE | option/copy | FamilyQuant/USearch.xaml:38 | Label.Content = % | render:02-build | OPEN | pending |
 | FQ15-235DB133A2D5 | IMPROVE | tooltip | FamilyQuant/USearch.xaml:39 | Label.ToolTip = The identity is a percentage, from 1 to 100. | render:02-build | OPEN | pending |
-| FQ15-2751E8205ED5 | IMPROVE | control | FamilyQuant/USearch.xaml:42 | CheckBox CheckBoxExhaustiveClustering | render:02-build | OPEN | pending |
+| FQ15-2751E8205ED5 | IMPROVE | control | FamilyQuant/USearch.xaml:42 | CheckBox CheckBoxExhaustiveClustering | test:RunAssayRuntimeLedger | VERIFIED | evidence:AS-build-properties:FQ15-2751E8205ED5 |
 | FQ15-CA5C120170D4 | IMPROVE | option/copy | FamilyQuant/USearch.xaml:43 | CheckBoxExhaustiveClustering.Content = Exhaustive clustering (close the gaps the fast pass leaves) | render:02-build | OPEN | pending |
-| FQ15-9010A5C31951 | IMPROVE | option/copy | FamilyQuant/USearch.xaml:44 | CheckBoxExhaustiveClustering.IsChecked = True | render:02-build | OPEN | pending |
+| FQ15-9010A5C31951 | IMPROVE | option/copy | FamilyQuant/USearch.xaml:44 | CheckBoxExhaustiveClustering.IsChecked = True | test:RunAssayRuntimeLedger | VERIFIED | evidence:AS-build-properties:FQ15-9010A5C31951 |
 | FQ15-DF72D3E013B6 | IMPROVE | tooltip | FamilyQuant/USearch.xaml:45 | CheckBoxExhaustiveClustering.ToolTip = Aligns every pair of sequences after the fast pass and rejoins families the fast pass split. Leave it on; turn it off only for speed. Databases over 10,000 sequences take longer, and you are asked first. | render:02-build | OPEN | pending |
-| FQ15-961F39A7C9EB | IMPROVE | control | FamilyQuant/USearch.xaml:47 | Button ButtonInput | render:02-build | OPEN | pending |
+| FQ15-961F39A7C9EB | IMPROVE | control | FamilyQuant/USearch.xaml:47 | Button ButtonInput | test:RunAssayRuntimeLedger | VERIFIED | evidence:AS-build-properties:FQ15-961F39A7C9EB |
 | FQ15-26F90004D374 | IMPROVE | option/copy | FamilyQuant/USearch.xaml:47 | ButtonInput.Content = Input a FASTA file | render:02-build | OPEN | pending |
 | FQ15-5070AE0ACBCE | KEEP | handler | FamilyQuant/USearch.xaml:47 | ButtonInput.Click = ButtonInput_Click | render:02-build | OPEN | pending |
 | FQ15-5A6CA2000AEA | IMPROVE | tooltip | FamilyQuant/USearch.xaml:49 | ButtonInput.ToolTip = Step 1: clusters the database you pick at the identity above and saves a Family Cluster File (.fcf) beside it. You are asked before an existing .fcf is replaced. | render:02-build | OPEN | pending |
-| FQ15-6065665A6950 | IMPROVE | control | FamilyQuant/USearch.xaml:50 | Button ButtonCalculateFDR | render:02-build | OPEN | pending |
+| FQ15-6065665A6950 | IMPROVE | control | FamilyQuant/USearch.xaml:50 | Button ButtonCalculateFDR | test:RunAssayRuntimeLedger | VERIFIED | evidence:AS-build-properties:FQ15-6065665A6950 |
 | FQ15-3C6A779987F9 | IMPROVE | option/copy | FamilyQuant/USearch.xaml:50 | ButtonCalculateFDR.Content = Calculate FDR | render:02-build | OPEN | pending |
 | FQ15-E3960ECBE389 | KEEP | handler | FamilyQuant/USearch.xaml:50 | ButtonCalculateFDR.Click = ButtonCalculateFDR_Click | render:02-build | OPEN | pending |
 | FQ15-39E956DE650F | IMPROVE | option/copy | FamilyQuant/USearch.xaml:51 | ButtonCalculateFDR.IsEnabled = False | test:ShellLedgerComparisonCommand | VERIFIED | evidence:SH:FQ15-39E956DE650F |
@@ -5552,17 +5552,17 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **3039**; OPEN r
 | FQ15-9B7D3F11FB58 | IMPROVE | option/copy | FamilyQuant/USearch.xaml:57 | GroupBox.Header = \uD83C\uDFAF Divide and Conquer (auto-tune identity) | render:02-build | OPEN | pending |
 | FQ15-7C72457C77F9 | IMPROVE | option/copy | FamilyQuant/USearch.xaml:61 | Label.Content = Max acceptable mixing score: | render:02-build | OPEN | pending |
 | FQ15-0D784C392D23 | IMPROVE | tooltip | FamilyQuant/USearch.xaml:62 | Label.ToolTip = How much target/decoy mixing the automatic search is allowed to accept. Keep it at 0. | render:02-build | OPEN | pending |
-| FQ15-9EA401129802 | IMPROVE | option/copy | FamilyQuant/USearch.xaml:63 | DecimalUpDownMaxFDR.Value = 0 | render:02-build | OPEN | pending |
+| FQ15-9EA401129802 | IMPROVE | option/copy | FamilyQuant/USearch.xaml:63 | DecimalUpDownMaxFDR.Value = 0 | test:RunAssayRuntimeLedger | VERIFIED | evidence:AS-build-properties:FQ15-9EA401129802 |
 | FQ15-41F9C5320389 | IMPROVE | option/copy | FamilyQuant/USearch.xaml:63 | DecimalUpDownMaxFDR.Minimum = 0 | test:ShellLedgerComparisonCommand | VERIFIED | evidence:SH:FQ15-41F9C5320389 |
 | FQ15-20CFCAD9785B | IMPROVE | option/copy | FamilyQuant/USearch.xaml:63 | DecimalUpDownMaxFDR.Maximum = 0.5 | test:ShellLedgerComparisonCommand | VERIFIED | evidence:SH:FQ15-20CFCAD9785B |
 | FQ15-E54683D1109F | IMPROVE | tooltip | FamilyQuant/USearch.xaml:66 | DecimalUpDownMaxFDR.ToolTip = Largest fraction of families allowed to mix target and decoy sequences. Default 0; leave it there, because any higher value lets alignments that are only noise merge families. | render:02-build | OPEN | pending |
 | FQ15-71AA63BB9816 | IMPROVE | tooltip | FamilyQuant/USearch.xaml:70 | TextBlock.ToolTip = Why the automatic answer is a lower bound, not a recommendation. Help \u00B7 How to read these numbers explains more. | render:02-build | OPEN | pending |
 | FQ15-C8FFCC2A4667 | IMPROVE | option/copy | FamilyQuant/USearch.xaml:71 | TextBlock.Text = The target/decoy score only detects a target aligning to a decoy, which marks where alignment becomes noise. It cannot see two unrelated target families being fused, so use it as a floor - not as a budget. | render:02-build | OPEN | pending |
-| FQ15-BB5437376059 | IMPROVE | control | FamilyQuant/USearch.xaml:73 | Button ButtonDivideAndConquer | render:02-build | OPEN | pending |
+| FQ15-BB5437376059 | IMPROVE | control | FamilyQuant/USearch.xaml:73 | Button ButtonDivideAndConquer | test:RunAssayRuntimeLedger | VERIFIED | evidence:AS-build-properties:FQ15-BB5437376059 |
 | FQ15-04FFDD6B6BF9 | IMPROVE | option/copy | FamilyQuant/USearch.xaml:73 | ButtonDivideAndConquer.Content = Run Divide & Conquer | render:02-build | OPEN | pending |
 | FQ15-6DBF9740F722 | KEEP | handler | FamilyQuant/USearch.xaml:73 | ButtonDivideAndConquer.Click = ButtonDivideAndConquer_Click | render:02-build | OPEN | pending |
 | FQ15-5C14D092A72E | IMPROVE | tooltip | FamilyQuant/USearch.xaml:75 | ButtonDivideAndConquer.ToolTip = Finds the lowest identity that keeps the mixing score within the limit above. It only reports a number: type it into Identity and press "Input a FASTA file". Treat it as a floor. | render:02-build | OPEN | pending |
-| FQ15-25C42617BBA4 | IMPROVE | control | FamilyQuant/USearch.xaml:77 | Button ButtonScanIdentities | render:02-build | OPEN | pending |
+| FQ15-25C42617BBA4 | IMPROVE | control | FamilyQuant/USearch.xaml:77 | Button ButtonScanIdentities | test:RunAssayRuntimeLedger | VERIFIED | evidence:AS-build-properties:FQ15-25C42617BBA4 |
 | FQ15-9B01394529F6 | IMPROVE | option/copy | FamilyQuant/USearch.xaml:77 | ButtonScanIdentities.Content = Scan identity range | test:ShellLedgerComparisonCommand | VERIFIED | evidence:SH:FQ15-9B01394529F6 |
 | FQ15-032C14B46507 | KEEP | handler | FamilyQuant/USearch.xaml:77 | ButtonScanIdentities.Click = ButtonScanIdentities_Click | render:02-build | OPEN | pending |
 | FQ15-67C18A2317D7 | IMPROVE | tooltip | FamilyQuant/USearch.xaml:80 | ButtonScanIdentities.ToolTip = Clusters at every identity from 95% down to 10% and tabulates the family count and target/decoy mixing. Use it before choosing a threshold. Nothing is saved; large databases take a while. | render:02-build | OPEN | pending |
@@ -5571,14 +5571,14 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **3039**; OPEN r
 | FQ15-7F693FC0BCB9 | IMPROVE | tooltip | FamilyQuant/USearch.xaml:89 | TextBlock.ToolTip = Like PatternLab's 'Eliminate subset sequences', but this one keeps the original sequence order, which matters because USEARCH is order-sensitive. | render:02-build | OPEN | pending |
 | FQ15-A7D75E41769F | IMPROVE | option/copy | FamilyQuant/USearch.xaml:91 | Label.Content = Identity: | render:02-build | OPEN | pending |
 | FQ15-4D640F0B5E15 | IMPROVE | tooltip | FamilyQuant/USearch.xaml:92 | Label.ToolTip = 100 removes only exact subset sequences (a sequence wholly contained in another). Below 100 removes near-identical sequences by alignment. | render:02-build | OPEN | pending |
-| FQ15-C1BFB140777A | IMPROVE | control | FamilyQuant/USearch.xaml:93 | IntegerUpDown IntegerUpDownRedundancyIdentity | render:02-build | OPEN | pending |
-| FQ15-23F4B3B559C2 | IMPROVE | option/copy | FamilyQuant/USearch.xaml:93 | IntegerUpDownRedundancyIdentity.Value = 100 | render:02-build | OPEN | pending |
+| FQ15-C1BFB140777A | IMPROVE | control | FamilyQuant/USearch.xaml:93 | IntegerUpDown IntegerUpDownRedundancyIdentity | test:RunAssayRuntimeLedger | VERIFIED | evidence:AS-build-properties:FQ15-C1BFB140777A |
+| FQ15-23F4B3B559C2 | IMPROVE | option/copy | FamilyQuant/USearch.xaml:93 | IntegerUpDownRedundancyIdentity.Value = 100 | test:RunAssayRuntimeLedger | VERIFIED | evidence:AS-build-properties:FQ15-23F4B3B559C2 |
 | FQ15-A2928884051F | IMPROVE | option/copy | FamilyQuant/USearch.xaml:93 | IntegerUpDownRedundancyIdentity.Minimum = 50 | test:ShellLedgerComparisonCommand | VERIFIED | evidence:SH:FQ15-A2928884051F |
 | FQ15-4F46770C5322 | IMPROVE | option/copy | FamilyQuant/USearch.xaml:93 | IntegerUpDownRedundancyIdentity.Maximum = 100 | test:ShellLedgerComparisonCommand | VERIFIED | evidence:SH:FQ15-4F46770C5322 |
 | FQ15-19C5DB33694C | IMPROVE | tooltip | FamilyQuant/USearch.xaml:96 | IntegerUpDownRedundancyIdentity.ToolTip = Identity above which two sequences count as redundant (default 100). At 100 only fragments and exact duplicates go; below 100, near-identical sequences go too, which is slower. | render:02-build | OPEN | pending |
 | FQ15-3A16887AED27 | IMPROVE | option/copy | FamilyQuant/USearch.xaml:97 | Label.Content = % | render:02-build | OPEN | pending |
 | FQ15-BE7BFC4196C9 | IMPROVE | tooltip | FamilyQuant/USearch.xaml:98 | Label.ToolTip = The identity is a percentage of aligned residues. | render:02-build | OPEN | pending |
-| FQ15-21F35F2A9566 | IMPROVE | control | FamilyQuant/USearch.xaml:99 | Button ButtonRemoveRedundancy | render:02-build | OPEN | pending |
+| FQ15-21F35F2A9566 | IMPROVE | control | FamilyQuant/USearch.xaml:99 | Button ButtonRemoveRedundancy | test:RunAssayRuntimeLedger | VERIFIED | evidence:AS-build-properties:FQ15-21F35F2A9566 |
 | FQ15-5DF089148055 | IMPROVE | option/copy | FamilyQuant/USearch.xaml:99 | ButtonRemoveRedundancy.Content = Remove redundancy from FASTA... | render:02-build | OPEN | pending |
 | FQ15-6093D76BEEB0 | KEEP | handler | FamilyQuant/USearch.xaml:100 | ButtonRemoveRedundancy.Click = ButtonRemoveRedundancy_Click | render:02-build | OPEN | pending |
 | FQ15-F512518204F4 | IMPROVE | tooltip | FamilyQuant/USearch.xaml:101 | ButtonRemoveRedundancy.ToolTip = Saves a copy of a FASTA without subset or near-identical sequences, as &lt;name&gt;_NO_REDUNDANCY.fasta beside it. Order and headers are kept; the original file is never changed. | render:02-build | OPEN | pending |
@@ -5756,11 +5756,11 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **3039**; OPEN r
 | FQ15-2E08B8B417C6 | KEEP | handler definition | FamilyQuant/USearch.xaml.cs:244 | private async void ButtonDivideAndConquer_Click(object sender, RoutedEventArgs e) | render:02-build | OPEN | pending |
 | FQ15-742D7AA226AF | KEEP | handler definition | FamilyQuant/USearch.xaml.cs:310 | private async void ButtonScanIdentities_Click(object sender, RoutedEventArgs e) | render:02-build | OPEN | pending |
 | FQ15-0FFD53E0F489 | KEEP | handler definition | FamilyQuant/USearch.xaml.cs:354 | private async void ButtonRemoveRedundancy_Click(object sender, RoutedEventArgs e) | render:02-build | OPEN | pending |
-| FQ15-ABA539F0E87C | KEEP | format/export | FamilyQuant/USearchTools.cs:78 | ".fasta" | test:DatabaseTests | OPEN | pending |
-| FQ15-0858D5BCC3DD | KEEP | format/export | FamilyQuant/USearchTools.cs:79 | ".aln" | test:DatabaseTests | OPEN | pending |
-| FQ15-343852E54626 | KEEP | format/export | FamilyQuant/USearchTools.cs:204 | ".uc" | test:DatabaseTests | OPEN | pending |
-| FQ15-61B679CA9B47 | KEEP | format/export | FamilyQuant/USearchTools.cs:218 | "USEARCH produced no cluster (.uc) file for " | test:DatabaseTests | OPEN | pending |
-| FQ15-27FA37092FAE | KEEP | format/export | FamilyQuant/USearchTools.cs:433 | ".tsv" | test:DatabaseTests | OPEN | pending |
+| FQ15-ABA539F0E87C | KEEP | format/export | FamilyQuant/USearchTools.cs:78 | ".fasta" | test:RunAssayRuntimeLedger | VERIFIED | evidence:AS-native-paths:FQ15-ABA539F0E87C |
+| FQ15-0858D5BCC3DD | KEEP | format/export | FamilyQuant/USearchTools.cs:79 | ".aln" | test:RunAssayRuntimeLedger | VERIFIED | evidence:AS-native-paths:FQ15-0858D5BCC3DD |
+| FQ15-343852E54626 | KEEP | format/export | FamilyQuant/USearchTools.cs:204 | ".uc" | test:RunAssayRuntimeLedger | VERIFIED | evidence:AS-native-paths:FQ15-343852E54626 |
+| FQ15-61B679CA9B47 | KEEP | format/export | FamilyQuant/USearchTools.cs:218 | "USEARCH produced no cluster (.uc) file for " | test:RunAssayRuntimeLedger | VERIFIED | evidence:AS-native-paths:FQ15-61B679CA9B47 |
+| FQ15-27FA37092FAE | KEEP | format/export | FamilyQuant/USearchTools.cs:433 | ".tsv" | test:RunAssayRuntimeLedger | VERIFIED | evidence:AS-native-paths:FQ15-27FA37092FAE |
 | FQ15-4DECEB0D8774 | IMPROVE | code fact | FamilyQuant/XicMassChart.cs:34 | "One dot per peptide: its extracted isotope envelope (log10 area, up the side) " | test:ResultsMemberComparisonCommand | VERIFIED | evidence:RS-members:FQ15-4DECEB0D8774 |
 | FQ15-60554875A19A | IMPROVE | code fact | FamilyQuant/XicMassChart.cs:35 | "against its mass (along the bottom). Blue dots are identified peptides; green dots " | test:ResultsMemberComparisonCommand | VERIFIED | evidence:RS-members:FQ15-60554875A19A |
 | FQ15-45C4F2A2837C | IMPROVE | code fact | FamilyQuant/XicMassChart.cs:36 | "are the de novo additions." | test:ResultsMemberComparisonCommand | VERIFIED | evidence:RS-members:FQ15-45C4F2A2837C |

@@ -1,0 +1,197 @@
+{
+  "schemaVersion": 1,
+  "step": "AS-native-paths",
+  "frozenCommit": "e9b73064d8ff19b2fde3e3231240b636a64c0a91",
+  "runs": [
+    {
+      "id": "native",
+      "command": "D:\\FamilyQuant-wt\\assay\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --ledger-assay-native-paths D:/FamilyQuant-data/out-shell/N3/source D:/FamilyQuant-data/out-assay/m67-native-paths-final-2 \u00222026-11-02 07:55:26 -0800\u0022",
+      "executedAt": "2026-11-02 07:55:26 -0800",
+      "commit": "9a5118f8ac3c8e0e31f0dcb0e58d484c0f5f21b7",
+      "artifacts": [
+        {
+          "path": "D:\\FamilyQuant-data\\out-assay\\m67-native-paths-final-2\\proofs.log",
+          "sha256": "2A36C6135BF7988112FDAEA07F1AE733F0EC37E522DAE29A12108C2D3619046C"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-assay\\m67-native-paths-final-2\\actual-values.json",
+          "sha256": "1558723A7B7C6A712F5E362B7B197510C4A69F76108BD833E0BCFA661D0C49F1"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-assay\\m67-native-paths-final-2\\executed\\FamilyQuant.Core/ApplicationPaths.cs",
+          "sha256": "3274D9A4A8B5412098FA5FEC8BE6BF1C7C5CB5297C4618ACA09B4867689B658B"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-assay\\m67-native-paths-final-2\\executed\\FamilyQuant.Core/USearchTools.cs",
+          "sha256": "7F644E1379D8A72937266A95B1E525417C4AFF55B1DFF5A9E10ABBC5BF80ACF9"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-assay\\m67-native-paths-final-2\\executed\\FamilyQuant.Tests/AssayCacheSnapshot.cs",
+          "sha256": "9E0CD15CD1616F7A312E6A14209E745CF8C4ADB6EEF1A3D6125690A9602CCC1B"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-assay\\m67-native-paths-final-2\\executed\\FamilyQuant.Tests/FeatureLedgerEvidence.Reporting.cs",
+          "sha256": "8633DCBB14E8DBF1746A1FD771AD4E9404900EB68BA46690A31EFC8DEDFA247B"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-assay\\m67-native-paths-final-2\\executed\\FamilyQuant.Tests/FeatureLedgerEvidence.cs",
+          "sha256": "370FC41121F164A0C2495B260A62149FAD53F6F353203A97488423F2E6FA8738"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-assay\\m67-native-paths-final-2\\executed\\FamilyQuant.Tests/Program.AssayCacheLedger.cs",
+          "sha256": "7D3B175CC9824DA443DC369CF9C8983E1C59004FD15F080951BCEEF72B5449C9"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-assay\\m67-native-paths-final-2\\executed\\FamilyQuant.Tests/Program.AssayNativePaths.cs",
+          "sha256": "11F90EED5ECC361F02699B3A5779D739B7B430CF15FFBFE662B5BAA59D845F51"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-assay\\m67-native-paths-final-2\\executed\\FamilyQuant.Tests/Program.AssayRuntimeLedger.cs",
+          "sha256": "24F4A0BACCC044156A198BDE8790FCDE12BF0A995641CA359FCB1AFEB3009CB7"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-assay\\m67-native-paths-final-2\\executed\\FamilyQuant.Tests/Program.Commands.AssayLedger.cs",
+          "sha256": "584AE2E5132718747D9B86EE007150164FF7516FD6C6449C48287F9D8CD173F9"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-assay\\m67-native-paths-final-2\\executed\\frozen\\FamilyQuant/USearchTools.cs",
+          "sha256": "91AB296C3DA978C40DF2F94E767713D75244E17BE48F8F9993D499C601B76353"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-assay\\m67-native-paths-final-2\\executed\\FamilyQuant.Tests.dll",
+          "sha256": "7FE355FE7653D77B0ADC6471A94189033F4CFBCCBA346B8CA8A5E296EA2E1857"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-assay\\m67-native-paths-final-2\\executed\\FamilyQuant.Core.dll",
+          "sha256": "362F72FCC26677EB000A3440435D9A2BEAA6E1B3A0B85AEE774CDB718B4E91DA"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-assay\\m67-native-paths-final-2\\missing-cluster.txt",
+          "sha256": "4848748FE4E73379CF376C36B16099846A5F893805B4BA38D68C1ADB053AB092"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-assay\\m67-native-paths-final-2\\native-fixture.fasta",
+          "sha256": "C90E95F74D0574C58A3860E5E58D278E4E216BD6B58521EFC408D72D8955B89E"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-assay\\m67-native-paths-final-2\\observed-suffixes.txt",
+          "sha256": "F302C5E696C7685242B7E9CEC975BCF9CDB17B0C474772FF9434616AC4084A4A"
+        }
+      ],
+      "workingDirectory": "D:\\FamilyQuant-wt\\assay"
+    }
+  ],
+  "rows": [
+    {
+      "observationId": "FQ15-0858D5BCC3DD",
+      "implementation": [
+        {
+          "path": "FamilyQuant.Core/ApplicationPaths.cs",
+          "symbol": "Actual bundled alignment/cluster/allpairs file suffixes and native no-output refusal",
+          "sha256": "3274D9A4A8B5412098FA5FEC8BE6BF1C7C5CB5297C4618ACA09B4867689B658B"
+        },
+        {
+          "path": "FamilyQuant.Core/USearchTools.cs",
+          "symbol": "Actual bundled alignment/cluster/allpairs file suffixes and native no-output refusal",
+          "sha256": "7F644E1379D8A72937266A95B1E525417C4AFF55B1DFF5A9E10ABBC5BF80ACF9"
+        }
+      ],
+      "proofs": [],
+      "note": "Executed native value/refusal check, with the specific comparison recorded below.",
+      "kindReceiptId": "native-format-export",
+      "compared": "FamilyQuant/USearchTools.cs:79 \u0022.aln\u0022; actual native file creation observed at the recorded suffix; expected .aln; actual .aln"
+    },
+    {
+      "observationId": "FQ15-27FA37092FAE",
+      "implementation": [
+        {
+          "path": "FamilyQuant.Core/ApplicationPaths.cs",
+          "symbol": "Actual bundled alignment/cluster/allpairs file suffixes and native no-output refusal",
+          "sha256": "3274D9A4A8B5412098FA5FEC8BE6BF1C7C5CB5297C4618ACA09B4867689B658B"
+        },
+        {
+          "path": "FamilyQuant.Core/USearchTools.cs",
+          "symbol": "Actual bundled alignment/cluster/allpairs file suffixes and native no-output refusal",
+          "sha256": "7F644E1379D8A72937266A95B1E525417C4AFF55B1DFF5A9E10ABBC5BF80ACF9"
+        }
+      ],
+      "proofs": [],
+      "note": "Executed native value/refusal check, with the specific comparison recorded below.",
+      "kindReceiptId": "native-format-export",
+      "compared": "FamilyQuant/USearchTools.cs:433 \u0022.tsv\u0022; actual native file creation observed at the recorded suffix; expected .tsv; actual .tsv"
+    },
+    {
+      "observationId": "FQ15-343852E54626",
+      "implementation": [
+        {
+          "path": "FamilyQuant.Core/ApplicationPaths.cs",
+          "symbol": "Actual bundled alignment/cluster/allpairs file suffixes and native no-output refusal",
+          "sha256": "3274D9A4A8B5412098FA5FEC8BE6BF1C7C5CB5297C4618ACA09B4867689B658B"
+        },
+        {
+          "path": "FamilyQuant.Core/USearchTools.cs",
+          "symbol": "Actual bundled alignment/cluster/allpairs file suffixes and native no-output refusal",
+          "sha256": "7F644E1379D8A72937266A95B1E525417C4AFF55B1DFF5A9E10ABBC5BF80ACF9"
+        }
+      ],
+      "proofs": [],
+      "note": "Executed native value/refusal check, with the specific comparison recorded below.",
+      "kindReceiptId": "native-format-export",
+      "compared": "FamilyQuant/USearchTools.cs:204 \u0022.uc\u0022; actual native file creation observed at the recorded suffix; expected .uc; actual .uc"
+    },
+    {
+      "observationId": "FQ15-61B679CA9B47",
+      "implementation": [
+        {
+          "path": "FamilyQuant.Core/ApplicationPaths.cs",
+          "symbol": "Actual bundled alignment/cluster/allpairs file suffixes and native no-output refusal",
+          "sha256": "3274D9A4A8B5412098FA5FEC8BE6BF1C7C5CB5297C4618ACA09B4867689B658B"
+        },
+        {
+          "path": "FamilyQuant.Core/USearchTools.cs",
+          "symbol": "Actual bundled alignment/cluster/allpairs file suffixes and native no-output refusal",
+          "sha256": "7F644E1379D8A72937266A95B1E525417C4AFF55B1DFF5A9E10ABBC5BF80ACF9"
+        }
+      ],
+      "proofs": [],
+      "note": "Executed native value/refusal check, with the specific comparison recorded below.",
+      "kindReceiptId": "native-format-export",
+      "compared": "FamilyQuant/USearchTools.cs:218 \u0022USEARCH produced no cluster (.uc) file for \u0022; owned native no-output test process exercises the real missing-cluster refusal; expected USEARCH produced no cluster (.uc) file for native-fixture.fasta.; actual USEARCH produced no cluster (.uc) file for native-fixture.fasta."
+    },
+    {
+      "observationId": "FQ15-ABA539F0E87C",
+      "implementation": [
+        {
+          "path": "FamilyQuant.Core/ApplicationPaths.cs",
+          "symbol": "Actual bundled alignment/cluster/allpairs file suffixes and native no-output refusal",
+          "sha256": "3274D9A4A8B5412098FA5FEC8BE6BF1C7C5CB5297C4618ACA09B4867689B658B"
+        },
+        {
+          "path": "FamilyQuant.Core/USearchTools.cs",
+          "symbol": "Actual bundled alignment/cluster/allpairs file suffixes and native no-output refusal",
+          "sha256": "7F644E1379D8A72937266A95B1E525417C4AFF55B1DFF5A9E10ABBC5BF80ACF9"
+        }
+      ],
+      "proofs": [],
+      "note": "Executed native value/refusal check, with the specific comparison recorded below.",
+      "kindReceiptId": "native-format-export",
+      "compared": "FamilyQuant/USearchTools.cs:78 \u0022.fasta\u0022; actual native file creation observed at the recorded suffix; expected .fasta; actual .fasta"
+    }
+  ],
+  "kindReceipts": [
+    {
+      "id": "native-format-export",
+      "kind": "format/export",
+      "proofs": [
+        {
+          "runId": "native",
+          "kind": "test",
+          "target": "RunAssayRuntimeLedger",
+          "assertion": "AS-native-paths kind format/export: every listed native value and branch check passed",
+          "artifact": "D:\\FamilyQuant-data\\out-assay\\m67-native-paths-final-2\\proofs.log",
+          "inspectedBy": ""
+        }
+      ]
+    }
+  ]
+}

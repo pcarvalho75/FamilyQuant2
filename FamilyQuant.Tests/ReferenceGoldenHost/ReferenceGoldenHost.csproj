@@ -8,6 +8,8 @@
     <ReferenceRoot Condition="'$(ReferenceRoot)' == ''">D:/FamilyQuant-data/reference-1.5.0.6/app</ReferenceRoot>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="../AssayPartitionSnapshot.cs" Link="AssayPartitionSnapshot.cs" />
+    <Compile Include="../AssayBuildReportSnapshot.cs" Link="AssayBuildReportSnapshot.cs" />
     <Compile Include="../AssayViewSnapshot.cs" Link="AssayViewSnapshot.cs" />
     <Compile Include="../AssayCacheSnapshot.cs" Link="AssayCacheSnapshot.cs" />
     <Compile Include="../ClusteringSnapshot.cs" Link="ClusteringSnapshot.cs" />

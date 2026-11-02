@@ -1,0 +1,2372 @@
+{
+  "schemaVersion": 1,
+  "step": "AS-build-properties",
+  "frozenCommit": "e9b73064d8ff19b2fde3e3231240b636a64c0a91",
+  "runs": [
+    {
+      "id": "native",
+      "command": "D:\\FamilyQuant-wt\\assay\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --ledger-assay-build-properties D:/FamilyQuant-data/out-shell/N3/source D:/FamilyQuant-data/out-assay/m67-build-properties-final-2 \u00222026-11-02 07:54:22 -0800\u0022",
+      "executedAt": "2026-11-02 07:54:22 -0800",
+      "commit": "9a5118f8ac3c8e0e31f0dcb0e58d484c0f5f21b7",
+      "artifacts": [
+        {
+          "path": "D:\\FamilyQuant-data\\out-assay\\m67-build-properties-final-2\\proofs.log",
+          "sha256": "B8241AAE3E62A49EBCA36D09C81EA1F3492004ADB2AC659AB6470719AEF4D70A"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-assay\\m67-build-properties-final-2\\actual-values.json",
+          "sha256": "1FC25DAE93C98868FBCE9E44AE6158814FF16875A2061795A112A5A4F0E55F82"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-assay\\m67-build-properties-final-2\\executed\\FamilyQuant.Tests/AssayBuildPropertyComparison.cs",
+          "sha256": "7FE61FF5EB598A29FA3A2F2E01A07BB20F40965D71B43A1E649EF5FAF61A0646"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-assay\\m67-build-properties-final-2\\executed\\FamilyQuant.Tests/AssayCacheSnapshot.cs",
+          "sha256": "9E0CD15CD1616F7A312E6A14209E745CF8C4ADB6EEF1A3D6125690A9602CCC1B"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-assay\\m67-build-properties-final-2\\executed\\FamilyQuant.Tests/AssaySpectrumPropertyComparison.cs",
+          "sha256": "157C955F947789AA5BA5759EA3B37D762EA6A5E693AB49345BDE540C420CC036"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-assay\\m67-build-properties-final-2\\executed\\FamilyQuant.Tests/AssayViewSnapshot.cs",
+          "sha256": "A6F968F2ADEF225690DBCD30373E1150E513E07B2D6D0CAC0C30AB4EA2B66001"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-assay\\m67-build-properties-final-2\\executed\\FamilyQuant.Tests/FeatureLedgerEvidence.Reporting.cs",
+          "sha256": "8633DCBB14E8DBF1746A1FD771AD4E9404900EB68BA46690A31EFC8DEDFA247B"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-assay\\m67-build-properties-final-2\\executed\\FamilyQuant.Tests/FeatureLedgerEvidence.cs",
+          "sha256": "370FC41121F164A0C2495B260A62149FAD53F6F353203A97488423F2E6FA8738"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-assay\\m67-build-properties-final-2\\executed\\FamilyQuant.Tests/Program.AssayBuildProperties.cs",
+          "sha256": "FCE805C95B474BFF4CCAFDD91080BDA642A176F0D4174BFC0C98CDC5426D8304"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-assay\\m67-build-properties-final-2\\executed\\FamilyQuant.Tests/Program.AssayCacheLedger.cs",
+          "sha256": "7D3B175CC9824DA443DC369CF9C8983E1C59004FD15F080951BCEEF72B5449C9"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-assay\\m67-build-properties-final-2\\executed\\FamilyQuant.Tests/Program.AssayRuntimeLedger.cs",
+          "sha256": "24F4A0BACCC044156A198BDE8790FCDE12BF0A995641CA359FCB1AFEB3009CB7"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-assay\\m67-build-properties-final-2\\executed\\FamilyQuant.Tests/Program.AssaySpectrumLedger.cs",
+          "sha256": "03817FFBD5BCE472DFE27AE69711ACC589854EEFE783711170DA44EF848B77FB"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-assay\\m67-build-properties-final-2\\executed\\FamilyQuant.Tests/Program.Commands.AssayLedger.cs",
+          "sha256": "584AE2E5132718747D9B86EE007150164FF7516FD6C6449C48287F9D8CD173F9"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-assay\\m67-build-properties-final-2\\executed\\FamilyQuant/NumericUpDown.cs",
+          "sha256": "C11ED6BE7990FC050F7171D2DF23A26DBDA32C0043E48023D6144FD5A9257ED0"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-assay\\m67-build-properties-final-2\\executed\\FamilyQuant/USearch.Actions.cs",
+          "sha256": "5C9102771D011BC74D57110ADB467B1CB863C7FAE8B54BD3901FEF0E2BA927B2"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-assay\\m67-build-properties-final-2\\executed\\FamilyQuant/USearch.Presentation.cs",
+          "sha256": "6428C2CD839B10C3B55C3144629B4D492567E8553F6BCB570D3B51538F9BF35F"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-assay\\m67-build-properties-final-2\\executed\\FamilyQuant/USearch.Report.cs",
+          "sha256": "5ECEE34F97D000E7FB1B3D140CBED8BFF97312D28ABA53D4F398F8A427691164"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-assay\\m67-build-properties-final-2\\executed\\FamilyQuant/USearch.ViewModel.cs",
+          "sha256": "7F2B00D5FF4971D43728A6AD20E696AEFA76793FC47C9D80BB0E54A6707A46E1"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-assay\\m67-build-properties-final-2\\executed\\FamilyQuant/USearch.xaml",
+          "sha256": "CFCD12EC58A094D0B5C3D8FE9CA0D07FB442F6DCFB5480F299D786E839BE0202"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-assay\\m67-build-properties-final-2\\executed\\FamilyQuant/USearch.xaml.cs",
+          "sha256": "84D42556EC109D828B4DF5230F76638953DDFF11C4E7E183BDD6D912C77128A9"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-assay\\m67-build-properties-final-2\\executed\\frozen\\FamilyQuant/USearch.xaml",
+          "sha256": "9AFFA6E1E8BEBD1BA44EABD784C6FF91EA769B79514143C4125B7D32143C7AE3"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-assay\\m67-build-properties-final-2\\executed\\FamilyQuant.Tests.dll",
+          "sha256": "7FE355FE7653D77B0ADC6471A94189033F4CFBCCBA346B8CA8A5E296EA2E1857"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-assay\\m67-build-properties-final-2\\executed\\FamilyQuant.Core.dll",
+          "sha256": "362F72FCC26677EB000A3440435D9A2BEAA6E1B3A0B85AEE774CDB718B4E91DA"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-assay\\m67-build-properties-final-2\\executed\\FamilyQuant.dll",
+          "sha256": "A256D90C375713BE33AFE782844962FD10D1D29CACEAF04644434BC12A5AA52B"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-assay\\m67-build-properties-final-2\\build-anchors.json",
+          "sha256": "DE5784634C427960E039DB0037C5F83F25F3EB8D7EBE0BD2EF47E375B4136BC7"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-assay\\m67-build-properties-final-2\\frozen-FamilyQuant.dll",
+          "sha256": "D764488C923945285E03B338E5A91BF28106A35B11AB465D8E2B23D125F03FD8"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-assay\\m67-build-properties-final-2\\frozen-ReferenceGoldenHost.dll",
+          "sha256": "BB818CCDA272A1EA54BB2A9FDFAF286089FC00B14E8C02F55BFFC41464651022"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-assay\\m67-build-properties-final-2\\frozen-ReferenceGoldenHost.exe",
+          "sha256": "322B2D3E91C164B0D13B1D5B0E2F355BBF43398B8984AA32460ADD06B0A3CA72"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-assay\\m67-build-properties-final-2\\frozen-view.log",
+          "sha256": "34126471EEE7E485DAA09CE8B9A2808B84CE06AB86FF9A1AC05C18F212EE6C44"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-assay\\m67-build-properties-final-2\\current-view\\properties.json",
+          "sha256": "8340FBA9DBD427C77E57AD1B03D8424902697CF9FD836633175FCC6D468BFCCA"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-assay\\m67-build-properties-final-2\\frozen-view\\properties.json",
+          "sha256": "8797D9B6428F3CE44F0EE9445DA19B423C022E56259C8E438CB00BD21EA4BB1B"
+        }
+      ],
+      "workingDirectory": "D:\\FamilyQuant-wt\\assay"
+    }
+  ],
+  "rows": [
+    {
+      "observationId": "FQ15-00014F7B5211",
+      "implementation": [
+        {
+          "path": "FamilyQuant/NumericUpDown.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "C11ED6BE7990FC050F7171D2DF23A26DBDA32C0043E48023D6144FD5A9257ED0"
+        },
+        {
+          "path": "FamilyQuant/USearch.Actions.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "5C9102771D011BC74D57110ADB467B1CB863C7FAE8B54BD3901FEF0E2BA927B2"
+        },
+        {
+          "path": "FamilyQuant/USearch.Presentation.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "6428C2CD839B10C3B55C3144629B4D492567E8553F6BCB570D3B51538F9BF35F"
+        },
+        {
+          "path": "FamilyQuant/USearch.Report.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "5ECEE34F97D000E7FB1B3D140CBED8BFF97312D28ABA53D4F398F8A427691164"
+        },
+        {
+          "path": "FamilyQuant/USearch.ViewModel.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "7F2B00D5FF4971D43728A6AD20E696AEFA76793FC47C9D80BB0E54A6707A46E1"
+        },
+        {
+          "path": "FamilyQuant/USearch.xaml",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "CFCD12EC58A094D0B5C3D8FE9CA0D07FB442F6DCFB5480F299D786E839BE0202"
+        },
+        {
+          "path": "FamilyQuant/USearch.xaml.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "84D42556EC109D828B4DF5230F76638953DDFF11C4E7E183BDD6D912C77128A9"
+        }
+      ],
+      "proofs": [],
+      "note": "Executed native value/refusal check, with the specific comparison recorded below.",
+      "kindReceiptId": "native-control",
+      "compared": "FamilyQuant/USearch.xaml:34 IntegerUpDown IntegerUpDownIdentity; named/IntegerUpDownIdentity/type: Actual matching named control is constructed in both product views; no handler/navigation claim.; expected IntegerUpDown; actual IntegerUpDown"
+    },
+    {
+      "observationId": "FQ15-032C14B46507",
+      "implementation": [
+        {
+          "path": "FamilyQuant/NumericUpDown.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "C11ED6BE7990FC050F7171D2DF23A26DBDA32C0043E48023D6144FD5A9257ED0"
+        },
+        {
+          "path": "FamilyQuant/USearch.Actions.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "5C9102771D011BC74D57110ADB467B1CB863C7FAE8B54BD3901FEF0E2BA927B2"
+        },
+        {
+          "path": "FamilyQuant/USearch.Presentation.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "6428C2CD839B10C3B55C3144629B4D492567E8553F6BCB570D3B51538F9BF35F"
+        },
+        {
+          "path": "FamilyQuant/USearch.Report.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "5ECEE34F97D000E7FB1B3D140CBED8BFF97312D28ABA53D4F398F8A427691164"
+        },
+        {
+          "path": "FamilyQuant/USearch.ViewModel.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "7F2B00D5FF4971D43728A6AD20E696AEFA76793FC47C9D80BB0E54A6707A46E1"
+        },
+        {
+          "path": "FamilyQuant/USearch.xaml",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "CFCD12EC58A094D0B5C3D8FE9CA0D07FB442F6DCFB5480F299D786E839BE0202"
+        },
+        {
+          "path": "FamilyQuant/USearch.xaml.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "84D42556EC109D828B4DF5230F76638953DDFF11C4E7E183BDD6D912C77128A9"
+        }
+      ],
+      "proofs": [],
+      "note": "No observation-specific native check; remains OPEN.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-04FFDD6B6BF9",
+      "implementation": [
+        {
+          "path": "FamilyQuant/NumericUpDown.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "C11ED6BE7990FC050F7171D2DF23A26DBDA32C0043E48023D6144FD5A9257ED0"
+        },
+        {
+          "path": "FamilyQuant/USearch.Actions.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "5C9102771D011BC74D57110ADB467B1CB863C7FAE8B54BD3901FEF0E2BA927B2"
+        },
+        {
+          "path": "FamilyQuant/USearch.Presentation.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "6428C2CD839B10C3B55C3144629B4D492567E8553F6BCB570D3B51538F9BF35F"
+        },
+        {
+          "path": "FamilyQuant/USearch.Report.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "5ECEE34F97D000E7FB1B3D140CBED8BFF97312D28ABA53D4F398F8A427691164"
+        },
+        {
+          "path": "FamilyQuant/USearch.ViewModel.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "7F2B00D5FF4971D43728A6AD20E696AEFA76793FC47C9D80BB0E54A6707A46E1"
+        },
+        {
+          "path": "FamilyQuant/USearch.xaml",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "CFCD12EC58A094D0B5C3D8FE9CA0D07FB442F6DCFB5480F299D786E839BE0202"
+        },
+        {
+          "path": "FamilyQuant/USearch.xaml.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "84D42556EC109D828B4DF5230F76638953DDFF11C4E7E183BDD6D912C77128A9"
+        }
+      ],
+      "proofs": [],
+      "note": "No observation-specific native check; remains OPEN.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-0D784C392D23",
+      "implementation": [
+        {
+          "path": "FamilyQuant/NumericUpDown.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "C11ED6BE7990FC050F7171D2DF23A26DBDA32C0043E48023D6144FD5A9257ED0"
+        },
+        {
+          "path": "FamilyQuant/USearch.Actions.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "5C9102771D011BC74D57110ADB467B1CB863C7FAE8B54BD3901FEF0E2BA927B2"
+        },
+        {
+          "path": "FamilyQuant/USearch.Presentation.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "6428C2CD839B10C3B55C3144629B4D492567E8553F6BCB570D3B51538F9BF35F"
+        },
+        {
+          "path": "FamilyQuant/USearch.Report.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "5ECEE34F97D000E7FB1B3D140CBED8BFF97312D28ABA53D4F398F8A427691164"
+        },
+        {
+          "path": "FamilyQuant/USearch.ViewModel.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "7F2B00D5FF4971D43728A6AD20E696AEFA76793FC47C9D80BB0E54A6707A46E1"
+        },
+        {
+          "path": "FamilyQuant/USearch.xaml",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "CFCD12EC58A094D0B5C3D8FE9CA0D07FB442F6DCFB5480F299D786E839BE0202"
+        },
+        {
+          "path": "FamilyQuant/USearch.xaml.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "84D42556EC109D828B4DF5230F76638953DDFF11C4E7E183BDD6D912C77128A9"
+        }
+      ],
+      "proofs": [],
+      "note": "No observation-specific native check; remains OPEN.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-19C5DB33694C",
+      "implementation": [
+        {
+          "path": "FamilyQuant/NumericUpDown.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "C11ED6BE7990FC050F7171D2DF23A26DBDA32C0043E48023D6144FD5A9257ED0"
+        },
+        {
+          "path": "FamilyQuant/USearch.Actions.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "5C9102771D011BC74D57110ADB467B1CB863C7FAE8B54BD3901FEF0E2BA927B2"
+        },
+        {
+          "path": "FamilyQuant/USearch.Presentation.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "6428C2CD839B10C3B55C3144629B4D492567E8553F6BCB570D3B51538F9BF35F"
+        },
+        {
+          "path": "FamilyQuant/USearch.Report.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "5ECEE34F97D000E7FB1B3D140CBED8BFF97312D28ABA53D4F398F8A427691164"
+        },
+        {
+          "path": "FamilyQuant/USearch.ViewModel.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "7F2B00D5FF4971D43728A6AD20E696AEFA76793FC47C9D80BB0E54A6707A46E1"
+        },
+        {
+          "path": "FamilyQuant/USearch.xaml",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "CFCD12EC58A094D0B5C3D8FE9CA0D07FB442F6DCFB5480F299D786E839BE0202"
+        },
+        {
+          "path": "FamilyQuant/USearch.xaml.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "84D42556EC109D828B4DF5230F76638953DDFF11C4E7E183BDD6D912C77128A9"
+        }
+      ],
+      "proofs": [],
+      "note": "No observation-specific native check; remains OPEN.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-1F77DB04853A",
+      "implementation": [
+        {
+          "path": "FamilyQuant/NumericUpDown.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "C11ED6BE7990FC050F7171D2DF23A26DBDA32C0043E48023D6144FD5A9257ED0"
+        },
+        {
+          "path": "FamilyQuant/USearch.Actions.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "5C9102771D011BC74D57110ADB467B1CB863C7FAE8B54BD3901FEF0E2BA927B2"
+        },
+        {
+          "path": "FamilyQuant/USearch.Presentation.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "6428C2CD839B10C3B55C3144629B4D492567E8553F6BCB570D3B51538F9BF35F"
+        },
+        {
+          "path": "FamilyQuant/USearch.Report.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "5ECEE34F97D000E7FB1B3D140CBED8BFF97312D28ABA53D4F398F8A427691164"
+        },
+        {
+          "path": "FamilyQuant/USearch.ViewModel.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "7F2B00D5FF4971D43728A6AD20E696AEFA76793FC47C9D80BB0E54A6707A46E1"
+        },
+        {
+          "path": "FamilyQuant/USearch.xaml",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "CFCD12EC58A094D0B5C3D8FE9CA0D07FB442F6DCFB5480F299D786E839BE0202"
+        },
+        {
+          "path": "FamilyQuant/USearch.xaml.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "84D42556EC109D828B4DF5230F76638953DDFF11C4E7E183BDD6D912C77128A9"
+        }
+      ],
+      "proofs": [],
+      "note": "No observation-specific native check; remains OPEN.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-21F35F2A9566",
+      "implementation": [
+        {
+          "path": "FamilyQuant/NumericUpDown.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "C11ED6BE7990FC050F7171D2DF23A26DBDA32C0043E48023D6144FD5A9257ED0"
+        },
+        {
+          "path": "FamilyQuant/USearch.Actions.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "5C9102771D011BC74D57110ADB467B1CB863C7FAE8B54BD3901FEF0E2BA927B2"
+        },
+        {
+          "path": "FamilyQuant/USearch.Presentation.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "6428C2CD839B10C3B55C3144629B4D492567E8553F6BCB570D3B51538F9BF35F"
+        },
+        {
+          "path": "FamilyQuant/USearch.Report.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "5ECEE34F97D000E7FB1B3D140CBED8BFF97312D28ABA53D4F398F8A427691164"
+        },
+        {
+          "path": "FamilyQuant/USearch.ViewModel.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "7F2B00D5FF4971D43728A6AD20E696AEFA76793FC47C9D80BB0E54A6707A46E1"
+        },
+        {
+          "path": "FamilyQuant/USearch.xaml",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "CFCD12EC58A094D0B5C3D8FE9CA0D07FB442F6DCFB5480F299D786E839BE0202"
+        },
+        {
+          "path": "FamilyQuant/USearch.xaml.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "84D42556EC109D828B4DF5230F76638953DDFF11C4E7E183BDD6D912C77128A9"
+        }
+      ],
+      "proofs": [],
+      "note": "Executed native value/refusal check, with the specific comparison recorded below.",
+      "kindReceiptId": "native-control",
+      "compared": "FamilyQuant/USearch.xaml:99 Button ButtonRemoveRedundancy; named/ButtonRemoveRedundancy/type: Actual matching named control is constructed in both product views; no handler/navigation claim.; expected Button; actual Button"
+    },
+    {
+      "observationId": "FQ15-235DB133A2D5",
+      "implementation": [
+        {
+          "path": "FamilyQuant/NumericUpDown.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "C11ED6BE7990FC050F7171D2DF23A26DBDA32C0043E48023D6144FD5A9257ED0"
+        },
+        {
+          "path": "FamilyQuant/USearch.Actions.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "5C9102771D011BC74D57110ADB467B1CB863C7FAE8B54BD3901FEF0E2BA927B2"
+        },
+        {
+          "path": "FamilyQuant/USearch.Presentation.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "6428C2CD839B10C3B55C3144629B4D492567E8553F6BCB570D3B51538F9BF35F"
+        },
+        {
+          "path": "FamilyQuant/USearch.Report.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "5ECEE34F97D000E7FB1B3D140CBED8BFF97312D28ABA53D4F398F8A427691164"
+        },
+        {
+          "path": "FamilyQuant/USearch.ViewModel.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "7F2B00D5FF4971D43728A6AD20E696AEFA76793FC47C9D80BB0E54A6707A46E1"
+        },
+        {
+          "path": "FamilyQuant/USearch.xaml",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "CFCD12EC58A094D0B5C3D8FE9CA0D07FB442F6DCFB5480F299D786E839BE0202"
+        },
+        {
+          "path": "FamilyQuant/USearch.xaml.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "84D42556EC109D828B4DF5230F76638953DDFF11C4E7E183BDD6D912C77128A9"
+        }
+      ],
+      "proofs": [],
+      "note": "No observation-specific native check; remains OPEN.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-23F4B3B559C2",
+      "implementation": [
+        {
+          "path": "FamilyQuant/NumericUpDown.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "C11ED6BE7990FC050F7171D2DF23A26DBDA32C0043E48023D6144FD5A9257ED0"
+        },
+        {
+          "path": "FamilyQuant/USearch.Actions.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "5C9102771D011BC74D57110ADB467B1CB863C7FAE8B54BD3901FEF0E2BA927B2"
+        },
+        {
+          "path": "FamilyQuant/USearch.Presentation.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "6428C2CD839B10C3B55C3144629B4D492567E8553F6BCB570D3B51538F9BF35F"
+        },
+        {
+          "path": "FamilyQuant/USearch.Report.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "5ECEE34F97D000E7FB1B3D140CBED8BFF97312D28ABA53D4F398F8A427691164"
+        },
+        {
+          "path": "FamilyQuant/USearch.ViewModel.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "7F2B00D5FF4971D43728A6AD20E696AEFA76793FC47C9D80BB0E54A6707A46E1"
+        },
+        {
+          "path": "FamilyQuant/USearch.xaml",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "CFCD12EC58A094D0B5C3D8FE9CA0D07FB442F6DCFB5480F299D786E839BE0202"
+        },
+        {
+          "path": "FamilyQuant/USearch.xaml.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "84D42556EC109D828B4DF5230F76638953DDFF11C4E7E183BDD6D912C77128A9"
+        }
+      ],
+      "proofs": [],
+      "note": "Executed native value/refusal check, with the specific comparison recorded below.",
+      "kindReceiptId": "native-option-copy",
+      "compared": "FamilyQuant/USearch.xaml:93 IntegerUpDownRedundancyIdentity.Value = 100; named/IntegerUpDownRedundancyIdentity/Value: Frozen explicit scalar equals both native bound control values.; expected 100; actual 100"
+    },
+    {
+      "observationId": "FQ15-25C42617BBA4",
+      "implementation": [
+        {
+          "path": "FamilyQuant/NumericUpDown.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "C11ED6BE7990FC050F7171D2DF23A26DBDA32C0043E48023D6144FD5A9257ED0"
+        },
+        {
+          "path": "FamilyQuant/USearch.Actions.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "5C9102771D011BC74D57110ADB467B1CB863C7FAE8B54BD3901FEF0E2BA927B2"
+        },
+        {
+          "path": "FamilyQuant/USearch.Presentation.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "6428C2CD839B10C3B55C3144629B4D492567E8553F6BCB570D3B51538F9BF35F"
+        },
+        {
+          "path": "FamilyQuant/USearch.Report.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "5ECEE34F97D000E7FB1B3D140CBED8BFF97312D28ABA53D4F398F8A427691164"
+        },
+        {
+          "path": "FamilyQuant/USearch.ViewModel.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "7F2B00D5FF4971D43728A6AD20E696AEFA76793FC47C9D80BB0E54A6707A46E1"
+        },
+        {
+          "path": "FamilyQuant/USearch.xaml",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "CFCD12EC58A094D0B5C3D8FE9CA0D07FB442F6DCFB5480F299D786E839BE0202"
+        },
+        {
+          "path": "FamilyQuant/USearch.xaml.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "84D42556EC109D828B4DF5230F76638953DDFF11C4E7E183BDD6D912C77128A9"
+        }
+      ],
+      "proofs": [],
+      "note": "Executed native value/refusal check, with the specific comparison recorded below.",
+      "kindReceiptId": "native-control",
+      "compared": "FamilyQuant/USearch.xaml:77 Button ButtonScanIdentities; named/ButtonScanIdentities/type: Actual matching named control is constructed in both product views; no handler/navigation claim.; expected Button; actual Button"
+    },
+    {
+      "observationId": "FQ15-26F90004D374",
+      "implementation": [
+        {
+          "path": "FamilyQuant/NumericUpDown.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "C11ED6BE7990FC050F7171D2DF23A26DBDA32C0043E48023D6144FD5A9257ED0"
+        },
+        {
+          "path": "FamilyQuant/USearch.Actions.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "5C9102771D011BC74D57110ADB467B1CB863C7FAE8B54BD3901FEF0E2BA927B2"
+        },
+        {
+          "path": "FamilyQuant/USearch.Presentation.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "6428C2CD839B10C3B55C3144629B4D492567E8553F6BCB570D3B51538F9BF35F"
+        },
+        {
+          "path": "FamilyQuant/USearch.Report.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "5ECEE34F97D000E7FB1B3D140CBED8BFF97312D28ABA53D4F398F8A427691164"
+        },
+        {
+          "path": "FamilyQuant/USearch.ViewModel.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "7F2B00D5FF4971D43728A6AD20E696AEFA76793FC47C9D80BB0E54A6707A46E1"
+        },
+        {
+          "path": "FamilyQuant/USearch.xaml",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "CFCD12EC58A094D0B5C3D8FE9CA0D07FB442F6DCFB5480F299D786E839BE0202"
+        },
+        {
+          "path": "FamilyQuant/USearch.xaml.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "84D42556EC109D828B4DF5230F76638953DDFF11C4E7E183BDD6D912C77128A9"
+        }
+      ],
+      "proofs": [],
+      "note": "No observation-specific native check; remains OPEN.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-2751E8205ED5",
+      "implementation": [
+        {
+          "path": "FamilyQuant/NumericUpDown.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "C11ED6BE7990FC050F7171D2DF23A26DBDA32C0043E48023D6144FD5A9257ED0"
+        },
+        {
+          "path": "FamilyQuant/USearch.Actions.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "5C9102771D011BC74D57110ADB467B1CB863C7FAE8B54BD3901FEF0E2BA927B2"
+        },
+        {
+          "path": "FamilyQuant/USearch.Presentation.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "6428C2CD839B10C3B55C3144629B4D492567E8553F6BCB570D3B51538F9BF35F"
+        },
+        {
+          "path": "FamilyQuant/USearch.Report.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "5ECEE34F97D000E7FB1B3D140CBED8BFF97312D28ABA53D4F398F8A427691164"
+        },
+        {
+          "path": "FamilyQuant/USearch.ViewModel.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "7F2B00D5FF4971D43728A6AD20E696AEFA76793FC47C9D80BB0E54A6707A46E1"
+        },
+        {
+          "path": "FamilyQuant/USearch.xaml",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "CFCD12EC58A094D0B5C3D8FE9CA0D07FB442F6DCFB5480F299D786E839BE0202"
+        },
+        {
+          "path": "FamilyQuant/USearch.xaml.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "84D42556EC109D828B4DF5230F76638953DDFF11C4E7E183BDD6D912C77128A9"
+        }
+      ],
+      "proofs": [],
+      "note": "Executed native value/refusal check, with the specific comparison recorded below.",
+      "kindReceiptId": "native-control",
+      "compared": "FamilyQuant/USearch.xaml:42 CheckBox CheckBoxExhaustiveClustering; named/CheckBoxExhaustiveClustering/type: Actual matching named control is constructed in both product views; no handler/navigation claim.; expected CheckBox; actual CheckBox"
+    },
+    {
+      "observationId": "FQ15-2E0859E53C03",
+      "implementation": [
+        {
+          "path": "FamilyQuant/NumericUpDown.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "C11ED6BE7990FC050F7171D2DF23A26DBDA32C0043E48023D6144FD5A9257ED0"
+        },
+        {
+          "path": "FamilyQuant/USearch.Actions.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "5C9102771D011BC74D57110ADB467B1CB863C7FAE8B54BD3901FEF0E2BA927B2"
+        },
+        {
+          "path": "FamilyQuant/USearch.Presentation.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "6428C2CD839B10C3B55C3144629B4D492567E8553F6BCB570D3B51538F9BF35F"
+        },
+        {
+          "path": "FamilyQuant/USearch.Report.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "5ECEE34F97D000E7FB1B3D140CBED8BFF97312D28ABA53D4F398F8A427691164"
+        },
+        {
+          "path": "FamilyQuant/USearch.ViewModel.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "7F2B00D5FF4971D43728A6AD20E696AEFA76793FC47C9D80BB0E54A6707A46E1"
+        },
+        {
+          "path": "FamilyQuant/USearch.xaml",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "CFCD12EC58A094D0B5C3D8FE9CA0D07FB442F6DCFB5480F299D786E839BE0202"
+        },
+        {
+          "path": "FamilyQuant/USearch.xaml.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "84D42556EC109D828B4DF5230F76638953DDFF11C4E7E183BDD6D912C77128A9"
+        }
+      ],
+      "proofs": [],
+      "note": "No observation-specific native check; remains OPEN.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-31C956AA7FF7",
+      "implementation": [
+        {
+          "path": "FamilyQuant/NumericUpDown.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "C11ED6BE7990FC050F7171D2DF23A26DBDA32C0043E48023D6144FD5A9257ED0"
+        },
+        {
+          "path": "FamilyQuant/USearch.Actions.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "5C9102771D011BC74D57110ADB467B1CB863C7FAE8B54BD3901FEF0E2BA927B2"
+        },
+        {
+          "path": "FamilyQuant/USearch.Presentation.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "6428C2CD839B10C3B55C3144629B4D492567E8553F6BCB570D3B51538F9BF35F"
+        },
+        {
+          "path": "FamilyQuant/USearch.Report.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "5ECEE34F97D000E7FB1B3D140CBED8BFF97312D28ABA53D4F398F8A427691164"
+        },
+        {
+          "path": "FamilyQuant/USearch.ViewModel.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "7F2B00D5FF4971D43728A6AD20E696AEFA76793FC47C9D80BB0E54A6707A46E1"
+        },
+        {
+          "path": "FamilyQuant/USearch.xaml",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "CFCD12EC58A094D0B5C3D8FE9CA0D07FB442F6DCFB5480F299D786E839BE0202"
+        },
+        {
+          "path": "FamilyQuant/USearch.xaml.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "84D42556EC109D828B4DF5230F76638953DDFF11C4E7E183BDD6D912C77128A9"
+        }
+      ],
+      "proofs": [],
+      "note": "No observation-specific native check; remains OPEN.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-35FBEDEA7583",
+      "implementation": [
+        {
+          "path": "FamilyQuant/NumericUpDown.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "C11ED6BE7990FC050F7171D2DF23A26DBDA32C0043E48023D6144FD5A9257ED0"
+        },
+        {
+          "path": "FamilyQuant/USearch.Actions.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "5C9102771D011BC74D57110ADB467B1CB863C7FAE8B54BD3901FEF0E2BA927B2"
+        },
+        {
+          "path": "FamilyQuant/USearch.Presentation.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "6428C2CD839B10C3B55C3144629B4D492567E8553F6BCB570D3B51538F9BF35F"
+        },
+        {
+          "path": "FamilyQuant/USearch.Report.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "5ECEE34F97D000E7FB1B3D140CBED8BFF97312D28ABA53D4F398F8A427691164"
+        },
+        {
+          "path": "FamilyQuant/USearch.ViewModel.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "7F2B00D5FF4971D43728A6AD20E696AEFA76793FC47C9D80BB0E54A6707A46E1"
+        },
+        {
+          "path": "FamilyQuant/USearch.xaml",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "CFCD12EC58A094D0B5C3D8FE9CA0D07FB442F6DCFB5480F299D786E839BE0202"
+        },
+        {
+          "path": "FamilyQuant/USearch.xaml.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "84D42556EC109D828B4DF5230F76638953DDFF11C4E7E183BDD6D912C77128A9"
+        }
+      ],
+      "proofs": [],
+      "note": "No observation-specific native check; remains OPEN.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-3A16887AED27",
+      "implementation": [
+        {
+          "path": "FamilyQuant/NumericUpDown.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "C11ED6BE7990FC050F7171D2DF23A26DBDA32C0043E48023D6144FD5A9257ED0"
+        },
+        {
+          "path": "FamilyQuant/USearch.Actions.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "5C9102771D011BC74D57110ADB467B1CB863C7FAE8B54BD3901FEF0E2BA927B2"
+        },
+        {
+          "path": "FamilyQuant/USearch.Presentation.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "6428C2CD839B10C3B55C3144629B4D492567E8553F6BCB570D3B51538F9BF35F"
+        },
+        {
+          "path": "FamilyQuant/USearch.Report.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "5ECEE34F97D000E7FB1B3D140CBED8BFF97312D28ABA53D4F398F8A427691164"
+        },
+        {
+          "path": "FamilyQuant/USearch.ViewModel.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "7F2B00D5FF4971D43728A6AD20E696AEFA76793FC47C9D80BB0E54A6707A46E1"
+        },
+        {
+          "path": "FamilyQuant/USearch.xaml",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "CFCD12EC58A094D0B5C3D8FE9CA0D07FB442F6DCFB5480F299D786E839BE0202"
+        },
+        {
+          "path": "FamilyQuant/USearch.xaml.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "84D42556EC109D828B4DF5230F76638953DDFF11C4E7E183BDD6D912C77128A9"
+        }
+      ],
+      "proofs": [],
+      "note": "No observation-specific native check; remains OPEN.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-3C6A779987F9",
+      "implementation": [
+        {
+          "path": "FamilyQuant/NumericUpDown.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "C11ED6BE7990FC050F7171D2DF23A26DBDA32C0043E48023D6144FD5A9257ED0"
+        },
+        {
+          "path": "FamilyQuant/USearch.Actions.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "5C9102771D011BC74D57110ADB467B1CB863C7FAE8B54BD3901FEF0E2BA927B2"
+        },
+        {
+          "path": "FamilyQuant/USearch.Presentation.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "6428C2CD839B10C3B55C3144629B4D492567E8553F6BCB570D3B51538F9BF35F"
+        },
+        {
+          "path": "FamilyQuant/USearch.Report.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "5ECEE34F97D000E7FB1B3D140CBED8BFF97312D28ABA53D4F398F8A427691164"
+        },
+        {
+          "path": "FamilyQuant/USearch.ViewModel.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "7F2B00D5FF4971D43728A6AD20E696AEFA76793FC47C9D80BB0E54A6707A46E1"
+        },
+        {
+          "path": "FamilyQuant/USearch.xaml",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "CFCD12EC58A094D0B5C3D8FE9CA0D07FB442F6DCFB5480F299D786E839BE0202"
+        },
+        {
+          "path": "FamilyQuant/USearch.xaml.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "84D42556EC109D828B4DF5230F76638953DDFF11C4E7E183BDD6D912C77128A9"
+        }
+      ],
+      "proofs": [],
+      "note": "No observation-specific native check; remains OPEN.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-4A644A3EA1F3",
+      "implementation": [
+        {
+          "path": "FamilyQuant/NumericUpDown.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "C11ED6BE7990FC050F7171D2DF23A26DBDA32C0043E48023D6144FD5A9257ED0"
+        },
+        {
+          "path": "FamilyQuant/USearch.Actions.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "5C9102771D011BC74D57110ADB467B1CB863C7FAE8B54BD3901FEF0E2BA927B2"
+        },
+        {
+          "path": "FamilyQuant/USearch.Presentation.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "6428C2CD839B10C3B55C3144629B4D492567E8553F6BCB570D3B51538F9BF35F"
+        },
+        {
+          "path": "FamilyQuant/USearch.Report.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "5ECEE34F97D000E7FB1B3D140CBED8BFF97312D28ABA53D4F398F8A427691164"
+        },
+        {
+          "path": "FamilyQuant/USearch.ViewModel.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "7F2B00D5FF4971D43728A6AD20E696AEFA76793FC47C9D80BB0E54A6707A46E1"
+        },
+        {
+          "path": "FamilyQuant/USearch.xaml",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "CFCD12EC58A094D0B5C3D8FE9CA0D07FB442F6DCFB5480F299D786E839BE0202"
+        },
+        {
+          "path": "FamilyQuant/USearch.xaml.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "84D42556EC109D828B4DF5230F76638953DDFF11C4E7E183BDD6D912C77128A9"
+        }
+      ],
+      "proofs": [],
+      "note": "No observation-specific native check; remains OPEN.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-4D640F0B5E15",
+      "implementation": [
+        {
+          "path": "FamilyQuant/NumericUpDown.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "C11ED6BE7990FC050F7171D2DF23A26DBDA32C0043E48023D6144FD5A9257ED0"
+        },
+        {
+          "path": "FamilyQuant/USearch.Actions.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "5C9102771D011BC74D57110ADB467B1CB863C7FAE8B54BD3901FEF0E2BA927B2"
+        },
+        {
+          "path": "FamilyQuant/USearch.Presentation.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "6428C2CD839B10C3B55C3144629B4D492567E8553F6BCB570D3B51538F9BF35F"
+        },
+        {
+          "path": "FamilyQuant/USearch.Report.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "5ECEE34F97D000E7FB1B3D140CBED8BFF97312D28ABA53D4F398F8A427691164"
+        },
+        {
+          "path": "FamilyQuant/USearch.ViewModel.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "7F2B00D5FF4971D43728A6AD20E696AEFA76793FC47C9D80BB0E54A6707A46E1"
+        },
+        {
+          "path": "FamilyQuant/USearch.xaml",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "CFCD12EC58A094D0B5C3D8FE9CA0D07FB442F6DCFB5480F299D786E839BE0202"
+        },
+        {
+          "path": "FamilyQuant/USearch.xaml.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "84D42556EC109D828B4DF5230F76638953DDFF11C4E7E183BDD6D912C77128A9"
+        }
+      ],
+      "proofs": [],
+      "note": "No observation-specific native check; remains OPEN.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-5070AE0ACBCE",
+      "implementation": [
+        {
+          "path": "FamilyQuant/NumericUpDown.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "C11ED6BE7990FC050F7171D2DF23A26DBDA32C0043E48023D6144FD5A9257ED0"
+        },
+        {
+          "path": "FamilyQuant/USearch.Actions.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "5C9102771D011BC74D57110ADB467B1CB863C7FAE8B54BD3901FEF0E2BA927B2"
+        },
+        {
+          "path": "FamilyQuant/USearch.Presentation.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "6428C2CD839B10C3B55C3144629B4D492567E8553F6BCB570D3B51538F9BF35F"
+        },
+        {
+          "path": "FamilyQuant/USearch.Report.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "5ECEE34F97D000E7FB1B3D140CBED8BFF97312D28ABA53D4F398F8A427691164"
+        },
+        {
+          "path": "FamilyQuant/USearch.ViewModel.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "7F2B00D5FF4971D43728A6AD20E696AEFA76793FC47C9D80BB0E54A6707A46E1"
+        },
+        {
+          "path": "FamilyQuant/USearch.xaml",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "CFCD12EC58A094D0B5C3D8FE9CA0D07FB442F6DCFB5480F299D786E839BE0202"
+        },
+        {
+          "path": "FamilyQuant/USearch.xaml.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "84D42556EC109D828B4DF5230F76638953DDFF11C4E7E183BDD6D912C77128A9"
+        }
+      ],
+      "proofs": [],
+      "note": "No observation-specific native check; remains OPEN.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-5A6CA2000AEA",
+      "implementation": [
+        {
+          "path": "FamilyQuant/NumericUpDown.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "C11ED6BE7990FC050F7171D2DF23A26DBDA32C0043E48023D6144FD5A9257ED0"
+        },
+        {
+          "path": "FamilyQuant/USearch.Actions.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "5C9102771D011BC74D57110ADB467B1CB863C7FAE8B54BD3901FEF0E2BA927B2"
+        },
+        {
+          "path": "FamilyQuant/USearch.Presentation.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "6428C2CD839B10C3B55C3144629B4D492567E8553F6BCB570D3B51538F9BF35F"
+        },
+        {
+          "path": "FamilyQuant/USearch.Report.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "5ECEE34F97D000E7FB1B3D140CBED8BFF97312D28ABA53D4F398F8A427691164"
+        },
+        {
+          "path": "FamilyQuant/USearch.ViewModel.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "7F2B00D5FF4971D43728A6AD20E696AEFA76793FC47C9D80BB0E54A6707A46E1"
+        },
+        {
+          "path": "FamilyQuant/USearch.xaml",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "CFCD12EC58A094D0B5C3D8FE9CA0D07FB442F6DCFB5480F299D786E839BE0202"
+        },
+        {
+          "path": "FamilyQuant/USearch.xaml.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "84D42556EC109D828B4DF5230F76638953DDFF11C4E7E183BDD6D912C77128A9"
+        }
+      ],
+      "proofs": [],
+      "note": "No observation-specific native check; remains OPEN.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-5C14D092A72E",
+      "implementation": [
+        {
+          "path": "FamilyQuant/NumericUpDown.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "C11ED6BE7990FC050F7171D2DF23A26DBDA32C0043E48023D6144FD5A9257ED0"
+        },
+        {
+          "path": "FamilyQuant/USearch.Actions.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "5C9102771D011BC74D57110ADB467B1CB863C7FAE8B54BD3901FEF0E2BA927B2"
+        },
+        {
+          "path": "FamilyQuant/USearch.Presentation.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "6428C2CD839B10C3B55C3144629B4D492567E8553F6BCB570D3B51538F9BF35F"
+        },
+        {
+          "path": "FamilyQuant/USearch.Report.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "5ECEE34F97D000E7FB1B3D140CBED8BFF97312D28ABA53D4F398F8A427691164"
+        },
+        {
+          "path": "FamilyQuant/USearch.ViewModel.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "7F2B00D5FF4971D43728A6AD20E696AEFA76793FC47C9D80BB0E54A6707A46E1"
+        },
+        {
+          "path": "FamilyQuant/USearch.xaml",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "CFCD12EC58A094D0B5C3D8FE9CA0D07FB442F6DCFB5480F299D786E839BE0202"
+        },
+        {
+          "path": "FamilyQuant/USearch.xaml.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "84D42556EC109D828B4DF5230F76638953DDFF11C4E7E183BDD6D912C77128A9"
+        }
+      ],
+      "proofs": [],
+      "note": "No observation-specific native check; remains OPEN.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-5DF089148055",
+      "implementation": [
+        {
+          "path": "FamilyQuant/NumericUpDown.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "C11ED6BE7990FC050F7171D2DF23A26DBDA32C0043E48023D6144FD5A9257ED0"
+        },
+        {
+          "path": "FamilyQuant/USearch.Actions.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "5C9102771D011BC74D57110ADB467B1CB863C7FAE8B54BD3901FEF0E2BA927B2"
+        },
+        {
+          "path": "FamilyQuant/USearch.Presentation.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "6428C2CD839B10C3B55C3144629B4D492567E8553F6BCB570D3B51538F9BF35F"
+        },
+        {
+          "path": "FamilyQuant/USearch.Report.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "5ECEE34F97D000E7FB1B3D140CBED8BFF97312D28ABA53D4F398F8A427691164"
+        },
+        {
+          "path": "FamilyQuant/USearch.ViewModel.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "7F2B00D5FF4971D43728A6AD20E696AEFA76793FC47C9D80BB0E54A6707A46E1"
+        },
+        {
+          "path": "FamilyQuant/USearch.xaml",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "CFCD12EC58A094D0B5C3D8FE9CA0D07FB442F6DCFB5480F299D786E839BE0202"
+        },
+        {
+          "path": "FamilyQuant/USearch.xaml.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "84D42556EC109D828B4DF5230F76638953DDFF11C4E7E183BDD6D912C77128A9"
+        }
+      ],
+      "proofs": [],
+      "note": "No observation-specific native check; remains OPEN.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-6065665A6950",
+      "implementation": [
+        {
+          "path": "FamilyQuant/NumericUpDown.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "C11ED6BE7990FC050F7171D2DF23A26DBDA32C0043E48023D6144FD5A9257ED0"
+        },
+        {
+          "path": "FamilyQuant/USearch.Actions.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "5C9102771D011BC74D57110ADB467B1CB863C7FAE8B54BD3901FEF0E2BA927B2"
+        },
+        {
+          "path": "FamilyQuant/USearch.Presentation.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "6428C2CD839B10C3B55C3144629B4D492567E8553F6BCB570D3B51538F9BF35F"
+        },
+        {
+          "path": "FamilyQuant/USearch.Report.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "5ECEE34F97D000E7FB1B3D140CBED8BFF97312D28ABA53D4F398F8A427691164"
+        },
+        {
+          "path": "FamilyQuant/USearch.ViewModel.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "7F2B00D5FF4971D43728A6AD20E696AEFA76793FC47C9D80BB0E54A6707A46E1"
+        },
+        {
+          "path": "FamilyQuant/USearch.xaml",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "CFCD12EC58A094D0B5C3D8FE9CA0D07FB442F6DCFB5480F299D786E839BE0202"
+        },
+        {
+          "path": "FamilyQuant/USearch.xaml.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "84D42556EC109D828B4DF5230F76638953DDFF11C4E7E183BDD6D912C77128A9"
+        }
+      ],
+      "proofs": [],
+      "note": "Executed native value/refusal check, with the specific comparison recorded below.",
+      "kindReceiptId": "native-control",
+      "compared": "FamilyQuant/USearch.xaml:50 Button ButtonCalculateFDR; named/ButtonCalculateFDR/type: Actual matching named control is constructed in both product views; no handler/navigation claim.; expected Button; actual Button"
+    },
+    {
+      "observationId": "FQ15-6093D76BEEB0",
+      "implementation": [
+        {
+          "path": "FamilyQuant/NumericUpDown.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "C11ED6BE7990FC050F7171D2DF23A26DBDA32C0043E48023D6144FD5A9257ED0"
+        },
+        {
+          "path": "FamilyQuant/USearch.Actions.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "5C9102771D011BC74D57110ADB467B1CB863C7FAE8B54BD3901FEF0E2BA927B2"
+        },
+        {
+          "path": "FamilyQuant/USearch.Presentation.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "6428C2CD839B10C3B55C3144629B4D492567E8553F6BCB570D3B51538F9BF35F"
+        },
+        {
+          "path": "FamilyQuant/USearch.Report.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "5ECEE34F97D000E7FB1B3D140CBED8BFF97312D28ABA53D4F398F8A427691164"
+        },
+        {
+          "path": "FamilyQuant/USearch.ViewModel.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "7F2B00D5FF4971D43728A6AD20E696AEFA76793FC47C9D80BB0E54A6707A46E1"
+        },
+        {
+          "path": "FamilyQuant/USearch.xaml",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "CFCD12EC58A094D0B5C3D8FE9CA0D07FB442F6DCFB5480F299D786E839BE0202"
+        },
+        {
+          "path": "FamilyQuant/USearch.xaml.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "84D42556EC109D828B4DF5230F76638953DDFF11C4E7E183BDD6D912C77128A9"
+        }
+      ],
+      "proofs": [],
+      "note": "No observation-specific native check; remains OPEN.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-67C18A2317D7",
+      "implementation": [
+        {
+          "path": "FamilyQuant/NumericUpDown.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "C11ED6BE7990FC050F7171D2DF23A26DBDA32C0043E48023D6144FD5A9257ED0"
+        },
+        {
+          "path": "FamilyQuant/USearch.Actions.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "5C9102771D011BC74D57110ADB467B1CB863C7FAE8B54BD3901FEF0E2BA927B2"
+        },
+        {
+          "path": "FamilyQuant/USearch.Presentation.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "6428C2CD839B10C3B55C3144629B4D492567E8553F6BCB570D3B51538F9BF35F"
+        },
+        {
+          "path": "FamilyQuant/USearch.Report.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "5ECEE34F97D000E7FB1B3D140CBED8BFF97312D28ABA53D4F398F8A427691164"
+        },
+        {
+          "path": "FamilyQuant/USearch.ViewModel.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "7F2B00D5FF4971D43728A6AD20E696AEFA76793FC47C9D80BB0E54A6707A46E1"
+        },
+        {
+          "path": "FamilyQuant/USearch.xaml",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "CFCD12EC58A094D0B5C3D8FE9CA0D07FB442F6DCFB5480F299D786E839BE0202"
+        },
+        {
+          "path": "FamilyQuant/USearch.xaml.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "84D42556EC109D828B4DF5230F76638953DDFF11C4E7E183BDD6D912C77128A9"
+        }
+      ],
+      "proofs": [],
+      "note": "No observation-specific native check; remains OPEN.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-6DBF9740F722",
+      "implementation": [
+        {
+          "path": "FamilyQuant/NumericUpDown.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "C11ED6BE7990FC050F7171D2DF23A26DBDA32C0043E48023D6144FD5A9257ED0"
+        },
+        {
+          "path": "FamilyQuant/USearch.Actions.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "5C9102771D011BC74D57110ADB467B1CB863C7FAE8B54BD3901FEF0E2BA927B2"
+        },
+        {
+          "path": "FamilyQuant/USearch.Presentation.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "6428C2CD839B10C3B55C3144629B4D492567E8553F6BCB570D3B51538F9BF35F"
+        },
+        {
+          "path": "FamilyQuant/USearch.Report.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "5ECEE34F97D000E7FB1B3D140CBED8BFF97312D28ABA53D4F398F8A427691164"
+        },
+        {
+          "path": "FamilyQuant/USearch.ViewModel.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "7F2B00D5FF4971D43728A6AD20E696AEFA76793FC47C9D80BB0E54A6707A46E1"
+        },
+        {
+          "path": "FamilyQuant/USearch.xaml",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "CFCD12EC58A094D0B5C3D8FE9CA0D07FB442F6DCFB5480F299D786E839BE0202"
+        },
+        {
+          "path": "FamilyQuant/USearch.xaml.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "84D42556EC109D828B4DF5230F76638953DDFF11C4E7E183BDD6D912C77128A9"
+        }
+      ],
+      "proofs": [],
+      "note": "No observation-specific native check; remains OPEN.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-71AA63BB9816",
+      "implementation": [
+        {
+          "path": "FamilyQuant/NumericUpDown.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "C11ED6BE7990FC050F7171D2DF23A26DBDA32C0043E48023D6144FD5A9257ED0"
+        },
+        {
+          "path": "FamilyQuant/USearch.Actions.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "5C9102771D011BC74D57110ADB467B1CB863C7FAE8B54BD3901FEF0E2BA927B2"
+        },
+        {
+          "path": "FamilyQuant/USearch.Presentation.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "6428C2CD839B10C3B55C3144629B4D492567E8553F6BCB570D3B51538F9BF35F"
+        },
+        {
+          "path": "FamilyQuant/USearch.Report.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "5ECEE34F97D000E7FB1B3D140CBED8BFF97312D28ABA53D4F398F8A427691164"
+        },
+        {
+          "path": "FamilyQuant/USearch.ViewModel.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "7F2B00D5FF4971D43728A6AD20E696AEFA76793FC47C9D80BB0E54A6707A46E1"
+        },
+        {
+          "path": "FamilyQuant/USearch.xaml",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "CFCD12EC58A094D0B5C3D8FE9CA0D07FB442F6DCFB5480F299D786E839BE0202"
+        },
+        {
+          "path": "FamilyQuant/USearch.xaml.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "84D42556EC109D828B4DF5230F76638953DDFF11C4E7E183BDD6D912C77128A9"
+        }
+      ],
+      "proofs": [],
+      "note": "No observation-specific native check; remains OPEN.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-7823248CE671",
+      "implementation": [
+        {
+          "path": "FamilyQuant/NumericUpDown.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "C11ED6BE7990FC050F7171D2DF23A26DBDA32C0043E48023D6144FD5A9257ED0"
+        },
+        {
+          "path": "FamilyQuant/USearch.Actions.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "5C9102771D011BC74D57110ADB467B1CB863C7FAE8B54BD3901FEF0E2BA927B2"
+        },
+        {
+          "path": "FamilyQuant/USearch.Presentation.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "6428C2CD839B10C3B55C3144629B4D492567E8553F6BCB570D3B51538F9BF35F"
+        },
+        {
+          "path": "FamilyQuant/USearch.Report.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "5ECEE34F97D000E7FB1B3D140CBED8BFF97312D28ABA53D4F398F8A427691164"
+        },
+        {
+          "path": "FamilyQuant/USearch.ViewModel.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "7F2B00D5FF4971D43728A6AD20E696AEFA76793FC47C9D80BB0E54A6707A46E1"
+        },
+        {
+          "path": "FamilyQuant/USearch.xaml",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "CFCD12EC58A094D0B5C3D8FE9CA0D07FB442F6DCFB5480F299D786E839BE0202"
+        },
+        {
+          "path": "FamilyQuant/USearch.xaml.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "84D42556EC109D828B4DF5230F76638953DDFF11C4E7E183BDD6D912C77128A9"
+        }
+      ],
+      "proofs": [],
+      "note": "No observation-specific native check; remains OPEN.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-7C72457C77F9",
+      "implementation": [
+        {
+          "path": "FamilyQuant/NumericUpDown.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "C11ED6BE7990FC050F7171D2DF23A26DBDA32C0043E48023D6144FD5A9257ED0"
+        },
+        {
+          "path": "FamilyQuant/USearch.Actions.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "5C9102771D011BC74D57110ADB467B1CB863C7FAE8B54BD3901FEF0E2BA927B2"
+        },
+        {
+          "path": "FamilyQuant/USearch.Presentation.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "6428C2CD839B10C3B55C3144629B4D492567E8553F6BCB570D3B51538F9BF35F"
+        },
+        {
+          "path": "FamilyQuant/USearch.Report.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "5ECEE34F97D000E7FB1B3D140CBED8BFF97312D28ABA53D4F398F8A427691164"
+        },
+        {
+          "path": "FamilyQuant/USearch.ViewModel.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "7F2B00D5FF4971D43728A6AD20E696AEFA76793FC47C9D80BB0E54A6707A46E1"
+        },
+        {
+          "path": "FamilyQuant/USearch.xaml",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "CFCD12EC58A094D0B5C3D8FE9CA0D07FB442F6DCFB5480F299D786E839BE0202"
+        },
+        {
+          "path": "FamilyQuant/USearch.xaml.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "84D42556EC109D828B4DF5230F76638953DDFF11C4E7E183BDD6D912C77128A9"
+        }
+      ],
+      "proofs": [],
+      "note": "No observation-specific native check; remains OPEN.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-7F1522E909F4",
+      "implementation": [
+        {
+          "path": "FamilyQuant/NumericUpDown.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "C11ED6BE7990FC050F7171D2DF23A26DBDA32C0043E48023D6144FD5A9257ED0"
+        },
+        {
+          "path": "FamilyQuant/USearch.Actions.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "5C9102771D011BC74D57110ADB467B1CB863C7FAE8B54BD3901FEF0E2BA927B2"
+        },
+        {
+          "path": "FamilyQuant/USearch.Presentation.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "6428C2CD839B10C3B55C3144629B4D492567E8553F6BCB570D3B51538F9BF35F"
+        },
+        {
+          "path": "FamilyQuant/USearch.Report.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "5ECEE34F97D000E7FB1B3D140CBED8BFF97312D28ABA53D4F398F8A427691164"
+        },
+        {
+          "path": "FamilyQuant/USearch.ViewModel.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "7F2B00D5FF4971D43728A6AD20E696AEFA76793FC47C9D80BB0E54A6707A46E1"
+        },
+        {
+          "path": "FamilyQuant/USearch.xaml",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "CFCD12EC58A094D0B5C3D8FE9CA0D07FB442F6DCFB5480F299D786E839BE0202"
+        },
+        {
+          "path": "FamilyQuant/USearch.xaml.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "84D42556EC109D828B4DF5230F76638953DDFF11C4E7E183BDD6D912C77128A9"
+        }
+      ],
+      "proofs": [],
+      "note": "No observation-specific native check; remains OPEN.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-7F693FC0BCB9",
+      "implementation": [
+        {
+          "path": "FamilyQuant/NumericUpDown.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "C11ED6BE7990FC050F7171D2DF23A26DBDA32C0043E48023D6144FD5A9257ED0"
+        },
+        {
+          "path": "FamilyQuant/USearch.Actions.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "5C9102771D011BC74D57110ADB467B1CB863C7FAE8B54BD3901FEF0E2BA927B2"
+        },
+        {
+          "path": "FamilyQuant/USearch.Presentation.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "6428C2CD839B10C3B55C3144629B4D492567E8553F6BCB570D3B51538F9BF35F"
+        },
+        {
+          "path": "FamilyQuant/USearch.Report.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "5ECEE34F97D000E7FB1B3D140CBED8BFF97312D28ABA53D4F398F8A427691164"
+        },
+        {
+          "path": "FamilyQuant/USearch.ViewModel.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "7F2B00D5FF4971D43728A6AD20E696AEFA76793FC47C9D80BB0E54A6707A46E1"
+        },
+        {
+          "path": "FamilyQuant/USearch.xaml",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "CFCD12EC58A094D0B5C3D8FE9CA0D07FB442F6DCFB5480F299D786E839BE0202"
+        },
+        {
+          "path": "FamilyQuant/USearch.xaml.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "84D42556EC109D828B4DF5230F76638953DDFF11C4E7E183BDD6D912C77128A9"
+        }
+      ],
+      "proofs": [],
+      "note": "No observation-specific native check; remains OPEN.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-8A8526A9016B",
+      "implementation": [
+        {
+          "path": "FamilyQuant/NumericUpDown.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "C11ED6BE7990FC050F7171D2DF23A26DBDA32C0043E48023D6144FD5A9257ED0"
+        },
+        {
+          "path": "FamilyQuant/USearch.Actions.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "5C9102771D011BC74D57110ADB467B1CB863C7FAE8B54BD3901FEF0E2BA927B2"
+        },
+        {
+          "path": "FamilyQuant/USearch.Presentation.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "6428C2CD839B10C3B55C3144629B4D492567E8553F6BCB570D3B51538F9BF35F"
+        },
+        {
+          "path": "FamilyQuant/USearch.Report.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "5ECEE34F97D000E7FB1B3D140CBED8BFF97312D28ABA53D4F398F8A427691164"
+        },
+        {
+          "path": "FamilyQuant/USearch.ViewModel.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "7F2B00D5FF4971D43728A6AD20E696AEFA76793FC47C9D80BB0E54A6707A46E1"
+        },
+        {
+          "path": "FamilyQuant/USearch.xaml",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "CFCD12EC58A094D0B5C3D8FE9CA0D07FB442F6DCFB5480F299D786E839BE0202"
+        },
+        {
+          "path": "FamilyQuant/USearch.xaml.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "84D42556EC109D828B4DF5230F76638953DDFF11C4E7E183BDD6D912C77128A9"
+        }
+      ],
+      "proofs": [],
+      "note": "No observation-specific native check; remains OPEN.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-9010A5C31951",
+      "implementation": [
+        {
+          "path": "FamilyQuant/NumericUpDown.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "C11ED6BE7990FC050F7171D2DF23A26DBDA32C0043E48023D6144FD5A9257ED0"
+        },
+        {
+          "path": "FamilyQuant/USearch.Actions.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "5C9102771D011BC74D57110ADB467B1CB863C7FAE8B54BD3901FEF0E2BA927B2"
+        },
+        {
+          "path": "FamilyQuant/USearch.Presentation.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "6428C2CD839B10C3B55C3144629B4D492567E8553F6BCB570D3B51538F9BF35F"
+        },
+        {
+          "path": "FamilyQuant/USearch.Report.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "5ECEE34F97D000E7FB1B3D140CBED8BFF97312D28ABA53D4F398F8A427691164"
+        },
+        {
+          "path": "FamilyQuant/USearch.ViewModel.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "7F2B00D5FF4971D43728A6AD20E696AEFA76793FC47C9D80BB0E54A6707A46E1"
+        },
+        {
+          "path": "FamilyQuant/USearch.xaml",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "CFCD12EC58A094D0B5C3D8FE9CA0D07FB442F6DCFB5480F299D786E839BE0202"
+        },
+        {
+          "path": "FamilyQuant/USearch.xaml.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "84D42556EC109D828B4DF5230F76638953DDFF11C4E7E183BDD6D912C77128A9"
+        }
+      ],
+      "proofs": [],
+      "note": "Executed native value/refusal check, with the specific comparison recorded below.",
+      "kindReceiptId": "native-option-copy",
+      "compared": "FamilyQuant/USearch.xaml:44 CheckBoxExhaustiveClustering.IsChecked = True; named/CheckBoxExhaustiveClustering/IsChecked: Frozen explicit scalar equals both native bound control values.; expected True; actual True"
+    },
+    {
+      "observationId": "FQ15-961F39A7C9EB",
+      "implementation": [
+        {
+          "path": "FamilyQuant/NumericUpDown.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "C11ED6BE7990FC050F7171D2DF23A26DBDA32C0043E48023D6144FD5A9257ED0"
+        },
+        {
+          "path": "FamilyQuant/USearch.Actions.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "5C9102771D011BC74D57110ADB467B1CB863C7FAE8B54BD3901FEF0E2BA927B2"
+        },
+        {
+          "path": "FamilyQuant/USearch.Presentation.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "6428C2CD839B10C3B55C3144629B4D492567E8553F6BCB570D3B51538F9BF35F"
+        },
+        {
+          "path": "FamilyQuant/USearch.Report.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "5ECEE34F97D000E7FB1B3D140CBED8BFF97312D28ABA53D4F398F8A427691164"
+        },
+        {
+          "path": "FamilyQuant/USearch.ViewModel.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "7F2B00D5FF4971D43728A6AD20E696AEFA76793FC47C9D80BB0E54A6707A46E1"
+        },
+        {
+          "path": "FamilyQuant/USearch.xaml",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "CFCD12EC58A094D0B5C3D8FE9CA0D07FB442F6DCFB5480F299D786E839BE0202"
+        },
+        {
+          "path": "FamilyQuant/USearch.xaml.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "84D42556EC109D828B4DF5230F76638953DDFF11C4E7E183BDD6D912C77128A9"
+        }
+      ],
+      "proofs": [],
+      "note": "Executed native value/refusal check, with the specific comparison recorded below.",
+      "kindReceiptId": "native-control",
+      "compared": "FamilyQuant/USearch.xaml:47 Button ButtonInput; named/ButtonInput/type: Actual matching named control is constructed in both product views; no handler/navigation claim.; expected Button; actual Button"
+    },
+    {
+      "observationId": "FQ15-9B7D3F11FB58",
+      "implementation": [
+        {
+          "path": "FamilyQuant/NumericUpDown.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "C11ED6BE7990FC050F7171D2DF23A26DBDA32C0043E48023D6144FD5A9257ED0"
+        },
+        {
+          "path": "FamilyQuant/USearch.Actions.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "5C9102771D011BC74D57110ADB467B1CB863C7FAE8B54BD3901FEF0E2BA927B2"
+        },
+        {
+          "path": "FamilyQuant/USearch.Presentation.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "6428C2CD839B10C3B55C3144629B4D492567E8553F6BCB570D3B51538F9BF35F"
+        },
+        {
+          "path": "FamilyQuant/USearch.Report.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "5ECEE34F97D000E7FB1B3D140CBED8BFF97312D28ABA53D4F398F8A427691164"
+        },
+        {
+          "path": "FamilyQuant/USearch.ViewModel.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "7F2B00D5FF4971D43728A6AD20E696AEFA76793FC47C9D80BB0E54A6707A46E1"
+        },
+        {
+          "path": "FamilyQuant/USearch.xaml",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "CFCD12EC58A094D0B5C3D8FE9CA0D07FB442F6DCFB5480F299D786E839BE0202"
+        },
+        {
+          "path": "FamilyQuant/USearch.xaml.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "84D42556EC109D828B4DF5230F76638953DDFF11C4E7E183BDD6D912C77128A9"
+        }
+      ],
+      "proofs": [],
+      "note": "No observation-specific native check; remains OPEN.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-9EA401129802",
+      "implementation": [
+        {
+          "path": "FamilyQuant/NumericUpDown.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "C11ED6BE7990FC050F7171D2DF23A26DBDA32C0043E48023D6144FD5A9257ED0"
+        },
+        {
+          "path": "FamilyQuant/USearch.Actions.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "5C9102771D011BC74D57110ADB467B1CB863C7FAE8B54BD3901FEF0E2BA927B2"
+        },
+        {
+          "path": "FamilyQuant/USearch.Presentation.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "6428C2CD839B10C3B55C3144629B4D492567E8553F6BCB570D3B51538F9BF35F"
+        },
+        {
+          "path": "FamilyQuant/USearch.Report.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "5ECEE34F97D000E7FB1B3D140CBED8BFF97312D28ABA53D4F398F8A427691164"
+        },
+        {
+          "path": "FamilyQuant/USearch.ViewModel.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "7F2B00D5FF4971D43728A6AD20E696AEFA76793FC47C9D80BB0E54A6707A46E1"
+        },
+        {
+          "path": "FamilyQuant/USearch.xaml",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "CFCD12EC58A094D0B5C3D8FE9CA0D07FB442F6DCFB5480F299D786E839BE0202"
+        },
+        {
+          "path": "FamilyQuant/USearch.xaml.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "84D42556EC109D828B4DF5230F76638953DDFF11C4E7E183BDD6D912C77128A9"
+        }
+      ],
+      "proofs": [],
+      "note": "Executed native value/refusal check, with the specific comparison recorded below.",
+      "kindReceiptId": "native-option-copy",
+      "compared": "FamilyQuant/USearch.xaml:63 DecimalUpDownMaxFDR.Value = 0; named/DecimalUpDownMaxFDR/Value: Frozen explicit scalar equals both native bound control values.; expected 0; actual 0"
+    },
+    {
+      "observationId": "FQ15-A7D75E41769F",
+      "implementation": [
+        {
+          "path": "FamilyQuant/NumericUpDown.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "C11ED6BE7990FC050F7171D2DF23A26DBDA32C0043E48023D6144FD5A9257ED0"
+        },
+        {
+          "path": "FamilyQuant/USearch.Actions.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "5C9102771D011BC74D57110ADB467B1CB863C7FAE8B54BD3901FEF0E2BA927B2"
+        },
+        {
+          "path": "FamilyQuant/USearch.Presentation.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "6428C2CD839B10C3B55C3144629B4D492567E8553F6BCB570D3B51538F9BF35F"
+        },
+        {
+          "path": "FamilyQuant/USearch.Report.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "5ECEE34F97D000E7FB1B3D140CBED8BFF97312D28ABA53D4F398F8A427691164"
+        },
+        {
+          "path": "FamilyQuant/USearch.ViewModel.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "7F2B00D5FF4971D43728A6AD20E696AEFA76793FC47C9D80BB0E54A6707A46E1"
+        },
+        {
+          "path": "FamilyQuant/USearch.xaml",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "CFCD12EC58A094D0B5C3D8FE9CA0D07FB442F6DCFB5480F299D786E839BE0202"
+        },
+        {
+          "path": "FamilyQuant/USearch.xaml.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "84D42556EC109D828B4DF5230F76638953DDFF11C4E7E183BDD6D912C77128A9"
+        }
+      ],
+      "proofs": [],
+      "note": "No observation-specific native check; remains OPEN.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-A9056D654142",
+      "implementation": [
+        {
+          "path": "FamilyQuant/NumericUpDown.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "C11ED6BE7990FC050F7171D2DF23A26DBDA32C0043E48023D6144FD5A9257ED0"
+        },
+        {
+          "path": "FamilyQuant/USearch.Actions.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "5C9102771D011BC74D57110ADB467B1CB863C7FAE8B54BD3901FEF0E2BA927B2"
+        },
+        {
+          "path": "FamilyQuant/USearch.Presentation.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "6428C2CD839B10C3B55C3144629B4D492567E8553F6BCB570D3B51538F9BF35F"
+        },
+        {
+          "path": "FamilyQuant/USearch.Report.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "5ECEE34F97D000E7FB1B3D140CBED8BFF97312D28ABA53D4F398F8A427691164"
+        },
+        {
+          "path": "FamilyQuant/USearch.ViewModel.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "7F2B00D5FF4971D43728A6AD20E696AEFA76793FC47C9D80BB0E54A6707A46E1"
+        },
+        {
+          "path": "FamilyQuant/USearch.xaml",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "CFCD12EC58A094D0B5C3D8FE9CA0D07FB442F6DCFB5480F299D786E839BE0202"
+        },
+        {
+          "path": "FamilyQuant/USearch.xaml.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "84D42556EC109D828B4DF5230F76638953DDFF11C4E7E183BDD6D912C77128A9"
+        }
+      ],
+      "proofs": [],
+      "note": "Executed native value/refusal check, with the specific comparison recorded below.",
+      "kindReceiptId": "native-option-copy",
+      "compared": "FamilyQuant/USearch.xaml:34 IntegerUpDownIdentity.Value = 85; named/IntegerUpDownIdentity/Value: Frozen explicit scalar equals both native bound control values.; expected 85; actual 85"
+    },
+    {
+      "observationId": "FQ15-BB5437376059",
+      "implementation": [
+        {
+          "path": "FamilyQuant/NumericUpDown.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "C11ED6BE7990FC050F7171D2DF23A26DBDA32C0043E48023D6144FD5A9257ED0"
+        },
+        {
+          "path": "FamilyQuant/USearch.Actions.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "5C9102771D011BC74D57110ADB467B1CB863C7FAE8B54BD3901FEF0E2BA927B2"
+        },
+        {
+          "path": "FamilyQuant/USearch.Presentation.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "6428C2CD839B10C3B55C3144629B4D492567E8553F6BCB570D3B51538F9BF35F"
+        },
+        {
+          "path": "FamilyQuant/USearch.Report.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "5ECEE34F97D000E7FB1B3D140CBED8BFF97312D28ABA53D4F398F8A427691164"
+        },
+        {
+          "path": "FamilyQuant/USearch.ViewModel.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "7F2B00D5FF4971D43728A6AD20E696AEFA76793FC47C9D80BB0E54A6707A46E1"
+        },
+        {
+          "path": "FamilyQuant/USearch.xaml",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "CFCD12EC58A094D0B5C3D8FE9CA0D07FB442F6DCFB5480F299D786E839BE0202"
+        },
+        {
+          "path": "FamilyQuant/USearch.xaml.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "84D42556EC109D828B4DF5230F76638953DDFF11C4E7E183BDD6D912C77128A9"
+        }
+      ],
+      "proofs": [],
+      "note": "Executed native value/refusal check, with the specific comparison recorded below.",
+      "kindReceiptId": "native-control",
+      "compared": "FamilyQuant/USearch.xaml:73 Button ButtonDivideAndConquer; named/ButtonDivideAndConquer/type: Actual matching named control is constructed in both product views; no handler/navigation claim.; expected Button; actual Button"
+    },
+    {
+      "observationId": "FQ15-BE7BFC4196C9",
+      "implementation": [
+        {
+          "path": "FamilyQuant/NumericUpDown.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "C11ED6BE7990FC050F7171D2DF23A26DBDA32C0043E48023D6144FD5A9257ED0"
+        },
+        {
+          "path": "FamilyQuant/USearch.Actions.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "5C9102771D011BC74D57110ADB467B1CB863C7FAE8B54BD3901FEF0E2BA927B2"
+        },
+        {
+          "path": "FamilyQuant/USearch.Presentation.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "6428C2CD839B10C3B55C3144629B4D492567E8553F6BCB570D3B51538F9BF35F"
+        },
+        {
+          "path": "FamilyQuant/USearch.Report.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "5ECEE34F97D000E7FB1B3D140CBED8BFF97312D28ABA53D4F398F8A427691164"
+        },
+        {
+          "path": "FamilyQuant/USearch.ViewModel.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "7F2B00D5FF4971D43728A6AD20E696AEFA76793FC47C9D80BB0E54A6707A46E1"
+        },
+        {
+          "path": "FamilyQuant/USearch.xaml",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "CFCD12EC58A094D0B5C3D8FE9CA0D07FB442F6DCFB5480F299D786E839BE0202"
+        },
+        {
+          "path": "FamilyQuant/USearch.xaml.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "84D42556EC109D828B4DF5230F76638953DDFF11C4E7E183BDD6D912C77128A9"
+        }
+      ],
+      "proofs": [],
+      "note": "No observation-specific native check; remains OPEN.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-C1BFB140777A",
+      "implementation": [
+        {
+          "path": "FamilyQuant/NumericUpDown.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "C11ED6BE7990FC050F7171D2DF23A26DBDA32C0043E48023D6144FD5A9257ED0"
+        },
+        {
+          "path": "FamilyQuant/USearch.Actions.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "5C9102771D011BC74D57110ADB467B1CB863C7FAE8B54BD3901FEF0E2BA927B2"
+        },
+        {
+          "path": "FamilyQuant/USearch.Presentation.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "6428C2CD839B10C3B55C3144629B4D492567E8553F6BCB570D3B51538F9BF35F"
+        },
+        {
+          "path": "FamilyQuant/USearch.Report.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "5ECEE34F97D000E7FB1B3D140CBED8BFF97312D28ABA53D4F398F8A427691164"
+        },
+        {
+          "path": "FamilyQuant/USearch.ViewModel.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "7F2B00D5FF4971D43728A6AD20E696AEFA76793FC47C9D80BB0E54A6707A46E1"
+        },
+        {
+          "path": "FamilyQuant/USearch.xaml",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "CFCD12EC58A094D0B5C3D8FE9CA0D07FB442F6DCFB5480F299D786E839BE0202"
+        },
+        {
+          "path": "FamilyQuant/USearch.xaml.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "84D42556EC109D828B4DF5230F76638953DDFF11C4E7E183BDD6D912C77128A9"
+        }
+      ],
+      "proofs": [],
+      "note": "Executed native value/refusal check, with the specific comparison recorded below.",
+      "kindReceiptId": "native-control",
+      "compared": "FamilyQuant/USearch.xaml:93 IntegerUpDown IntegerUpDownRedundancyIdentity; named/IntegerUpDownRedundancyIdentity/type: Actual matching named control is constructed in both product views; no handler/navigation claim.; expected IntegerUpDown; actual IntegerUpDown"
+    },
+    {
+      "observationId": "FQ15-C55639A5A0BE",
+      "implementation": [
+        {
+          "path": "FamilyQuant/NumericUpDown.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "C11ED6BE7990FC050F7171D2DF23A26DBDA32C0043E48023D6144FD5A9257ED0"
+        },
+        {
+          "path": "FamilyQuant/USearch.Actions.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "5C9102771D011BC74D57110ADB467B1CB863C7FAE8B54BD3901FEF0E2BA927B2"
+        },
+        {
+          "path": "FamilyQuant/USearch.Presentation.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "6428C2CD839B10C3B55C3144629B4D492567E8553F6BCB570D3B51538F9BF35F"
+        },
+        {
+          "path": "FamilyQuant/USearch.Report.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "5ECEE34F97D000E7FB1B3D140CBED8BFF97312D28ABA53D4F398F8A427691164"
+        },
+        {
+          "path": "FamilyQuant/USearch.ViewModel.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "7F2B00D5FF4971D43728A6AD20E696AEFA76793FC47C9D80BB0E54A6707A46E1"
+        },
+        {
+          "path": "FamilyQuant/USearch.xaml",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "CFCD12EC58A094D0B5C3D8FE9CA0D07FB442F6DCFB5480F299D786E839BE0202"
+        },
+        {
+          "path": "FamilyQuant/USearch.xaml.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "84D42556EC109D828B4DF5230F76638953DDFF11C4E7E183BDD6D912C77128A9"
+        }
+      ],
+      "proofs": [],
+      "note": "No observation-specific native check; remains OPEN.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-C8FFCC2A4667",
+      "implementation": [
+        {
+          "path": "FamilyQuant/NumericUpDown.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "C11ED6BE7990FC050F7171D2DF23A26DBDA32C0043E48023D6144FD5A9257ED0"
+        },
+        {
+          "path": "FamilyQuant/USearch.Actions.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "5C9102771D011BC74D57110ADB467B1CB863C7FAE8B54BD3901FEF0E2BA927B2"
+        },
+        {
+          "path": "FamilyQuant/USearch.Presentation.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "6428C2CD839B10C3B55C3144629B4D492567E8553F6BCB570D3B51538F9BF35F"
+        },
+        {
+          "path": "FamilyQuant/USearch.Report.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "5ECEE34F97D000E7FB1B3D140CBED8BFF97312D28ABA53D4F398F8A427691164"
+        },
+        {
+          "path": "FamilyQuant/USearch.ViewModel.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "7F2B00D5FF4971D43728A6AD20E696AEFA76793FC47C9D80BB0E54A6707A46E1"
+        },
+        {
+          "path": "FamilyQuant/USearch.xaml",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "CFCD12EC58A094D0B5C3D8FE9CA0D07FB442F6DCFB5480F299D786E839BE0202"
+        },
+        {
+          "path": "FamilyQuant/USearch.xaml.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "84D42556EC109D828B4DF5230F76638953DDFF11C4E7E183BDD6D912C77128A9"
+        }
+      ],
+      "proofs": [],
+      "note": "No observation-specific native check; remains OPEN.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-CA5C120170D4",
+      "implementation": [
+        {
+          "path": "FamilyQuant/NumericUpDown.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "C11ED6BE7990FC050F7171D2DF23A26DBDA32C0043E48023D6144FD5A9257ED0"
+        },
+        {
+          "path": "FamilyQuant/USearch.Actions.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "5C9102771D011BC74D57110ADB467B1CB863C7FAE8B54BD3901FEF0E2BA927B2"
+        },
+        {
+          "path": "FamilyQuant/USearch.Presentation.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "6428C2CD839B10C3B55C3144629B4D492567E8553F6BCB570D3B51538F9BF35F"
+        },
+        {
+          "path": "FamilyQuant/USearch.Report.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "5ECEE34F97D000E7FB1B3D140CBED8BFF97312D28ABA53D4F398F8A427691164"
+        },
+        {
+          "path": "FamilyQuant/USearch.ViewModel.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "7F2B00D5FF4971D43728A6AD20E696AEFA76793FC47C9D80BB0E54A6707A46E1"
+        },
+        {
+          "path": "FamilyQuant/USearch.xaml",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "CFCD12EC58A094D0B5C3D8FE9CA0D07FB442F6DCFB5480F299D786E839BE0202"
+        },
+        {
+          "path": "FamilyQuant/USearch.xaml.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "84D42556EC109D828B4DF5230F76638953DDFF11C4E7E183BDD6D912C77128A9"
+        }
+      ],
+      "proofs": [],
+      "note": "No observation-specific native check; remains OPEN.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-DF72D3E013B6",
+      "implementation": [
+        {
+          "path": "FamilyQuant/NumericUpDown.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "C11ED6BE7990FC050F7171D2DF23A26DBDA32C0043E48023D6144FD5A9257ED0"
+        },
+        {
+          "path": "FamilyQuant/USearch.Actions.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "5C9102771D011BC74D57110ADB467B1CB863C7FAE8B54BD3901FEF0E2BA927B2"
+        },
+        {
+          "path": "FamilyQuant/USearch.Presentation.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "6428C2CD839B10C3B55C3144629B4D492567E8553F6BCB570D3B51538F9BF35F"
+        },
+        {
+          "path": "FamilyQuant/USearch.Report.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "5ECEE34F97D000E7FB1B3D140CBED8BFF97312D28ABA53D4F398F8A427691164"
+        },
+        {
+          "path": "FamilyQuant/USearch.ViewModel.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "7F2B00D5FF4971D43728A6AD20E696AEFA76793FC47C9D80BB0E54A6707A46E1"
+        },
+        {
+          "path": "FamilyQuant/USearch.xaml",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "CFCD12EC58A094D0B5C3D8FE9CA0D07FB442F6DCFB5480F299D786E839BE0202"
+        },
+        {
+          "path": "FamilyQuant/USearch.xaml.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "84D42556EC109D828B4DF5230F76638953DDFF11C4E7E183BDD6D912C77128A9"
+        }
+      ],
+      "proofs": [],
+      "note": "No observation-specific native check; remains OPEN.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-E3960ECBE389",
+      "implementation": [
+        {
+          "path": "FamilyQuant/NumericUpDown.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "C11ED6BE7990FC050F7171D2DF23A26DBDA32C0043E48023D6144FD5A9257ED0"
+        },
+        {
+          "path": "FamilyQuant/USearch.Actions.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "5C9102771D011BC74D57110ADB467B1CB863C7FAE8B54BD3901FEF0E2BA927B2"
+        },
+        {
+          "path": "FamilyQuant/USearch.Presentation.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "6428C2CD839B10C3B55C3144629B4D492567E8553F6BCB570D3B51538F9BF35F"
+        },
+        {
+          "path": "FamilyQuant/USearch.Report.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "5ECEE34F97D000E7FB1B3D140CBED8BFF97312D28ABA53D4F398F8A427691164"
+        },
+        {
+          "path": "FamilyQuant/USearch.ViewModel.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "7F2B00D5FF4971D43728A6AD20E696AEFA76793FC47C9D80BB0E54A6707A46E1"
+        },
+        {
+          "path": "FamilyQuant/USearch.xaml",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "CFCD12EC58A094D0B5C3D8FE9CA0D07FB442F6DCFB5480F299D786E839BE0202"
+        },
+        {
+          "path": "FamilyQuant/USearch.xaml.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "84D42556EC109D828B4DF5230F76638953DDFF11C4E7E183BDD6D912C77128A9"
+        }
+      ],
+      "proofs": [],
+      "note": "No observation-specific native check; remains OPEN.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-E54683D1109F",
+      "implementation": [
+        {
+          "path": "FamilyQuant/NumericUpDown.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "C11ED6BE7990FC050F7171D2DF23A26DBDA32C0043E48023D6144FD5A9257ED0"
+        },
+        {
+          "path": "FamilyQuant/USearch.Actions.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "5C9102771D011BC74D57110ADB467B1CB863C7FAE8B54BD3901FEF0E2BA927B2"
+        },
+        {
+          "path": "FamilyQuant/USearch.Presentation.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "6428C2CD839B10C3B55C3144629B4D492567E8553F6BCB570D3B51538F9BF35F"
+        },
+        {
+          "path": "FamilyQuant/USearch.Report.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "5ECEE34F97D000E7FB1B3D140CBED8BFF97312D28ABA53D4F398F8A427691164"
+        },
+        {
+          "path": "FamilyQuant/USearch.ViewModel.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "7F2B00D5FF4971D43728A6AD20E696AEFA76793FC47C9D80BB0E54A6707A46E1"
+        },
+        {
+          "path": "FamilyQuant/USearch.xaml",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "CFCD12EC58A094D0B5C3D8FE9CA0D07FB442F6DCFB5480F299D786E839BE0202"
+        },
+        {
+          "path": "FamilyQuant/USearch.xaml.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "84D42556EC109D828B4DF5230F76638953DDFF11C4E7E183BDD6D912C77128A9"
+        }
+      ],
+      "proofs": [],
+      "note": "No observation-specific native check; remains OPEN.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-F512518204F4",
+      "implementation": [
+        {
+          "path": "FamilyQuant/NumericUpDown.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "C11ED6BE7990FC050F7171D2DF23A26DBDA32C0043E48023D6144FD5A9257ED0"
+        },
+        {
+          "path": "FamilyQuant/USearch.Actions.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "5C9102771D011BC74D57110ADB467B1CB863C7FAE8B54BD3901FEF0E2BA927B2"
+        },
+        {
+          "path": "FamilyQuant/USearch.Presentation.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "6428C2CD839B10C3B55C3144629B4D492567E8553F6BCB570D3B51538F9BF35F"
+        },
+        {
+          "path": "FamilyQuant/USearch.Report.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "5ECEE34F97D000E7FB1B3D140CBED8BFF97312D28ABA53D4F398F8A427691164"
+        },
+        {
+          "path": "FamilyQuant/USearch.ViewModel.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "7F2B00D5FF4971D43728A6AD20E696AEFA76793FC47C9D80BB0E54A6707A46E1"
+        },
+        {
+          "path": "FamilyQuant/USearch.xaml",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "CFCD12EC58A094D0B5C3D8FE9CA0D07FB442F6DCFB5480F299D786E839BE0202"
+        },
+        {
+          "path": "FamilyQuant/USearch.xaml.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "84D42556EC109D828B4DF5230F76638953DDFF11C4E7E183BDD6D912C77128A9"
+        }
+      ],
+      "proofs": [],
+      "note": "No observation-specific native check; remains OPEN.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-FCA4B942E595",
+      "implementation": [
+        {
+          "path": "FamilyQuant/NumericUpDown.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "C11ED6BE7990FC050F7171D2DF23A26DBDA32C0043E48023D6144FD5A9257ED0"
+        },
+        {
+          "path": "FamilyQuant/USearch.Actions.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "5C9102771D011BC74D57110ADB467B1CB863C7FAE8B54BD3901FEF0E2BA927B2"
+        },
+        {
+          "path": "FamilyQuant/USearch.Presentation.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "6428C2CD839B10C3B55C3144629B4D492567E8553F6BCB570D3B51538F9BF35F"
+        },
+        {
+          "path": "FamilyQuant/USearch.Report.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "5ECEE34F97D000E7FB1B3D140CBED8BFF97312D28ABA53D4F398F8A427691164"
+        },
+        {
+          "path": "FamilyQuant/USearch.ViewModel.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "7F2B00D5FF4971D43728A6AD20E696AEFA76793FC47C9D80BB0E54A6707A46E1"
+        },
+        {
+          "path": "FamilyQuant/USearch.xaml",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "CFCD12EC58A094D0B5C3D8FE9CA0D07FB442F6DCFB5480F299D786E839BE0202"
+        },
+        {
+          "path": "FamilyQuant/USearch.xaml.cs",
+          "symbol": "Actual constructed named build controls and bound scalar defaults/limits",
+          "sha256": "84D42556EC109D828B4DF5230F76638953DDFF11C4E7E183BDD6D912C77128A9"
+        }
+      ],
+      "proofs": [],
+      "note": "No observation-specific native check; remains OPEN.",
+      "kindReceiptId": null,
+      "compared": null
+    }
+  ],
+  "kindReceipts": [
+    {
+      "id": "native-control",
+      "kind": "control",
+      "proofs": [
+        {
+          "runId": "native",
+          "kind": "test",
+          "target": "RunAssayRuntimeLedger",
+          "assertion": "AS-build-properties kind control: every listed native value and branch check passed",
+          "artifact": "D:\\FamilyQuant-data\\out-assay\\m67-build-properties-final-2\\proofs.log",
+          "inspectedBy": ""
+        }
+      ]
+    },
+    {
+      "id": "native-option-copy",
+      "kind": "option/copy",
+      "proofs": [
+        {
+          "runId": "native",
+          "kind": "test",
+          "target": "RunAssayRuntimeLedger",
+          "assertion": "AS-build-properties kind option/copy: every listed native value and branch check passed",
+          "artifact": "D:\\FamilyQuant-data\\out-assay\\m67-build-properties-final-2\\proofs.log",
+          "inspectedBy": ""
+        }
+      ]
+    }
+  ]
+}
