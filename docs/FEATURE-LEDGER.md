@@ -17,7 +17,7 @@ Render targets refer to `ScreenHarness.Screens`, captured with `--screens <outpu
 Release gate: `FamilyQuant.Tests.exe --feature-ledger-release-check` fails until every retained row is VERIFIED with evidence. Authorized DROP rows use APPROVED_DROP, which records a decision, not a completed UI removal. The normal quick suite permits OPEN rows during development. Regeneration resets retained rows to OPEN; preserve reviewed evidence when updating the scanner.
 
 Scan count: **5756**. Ledger rows: **5756**. Source files: **104**.
-Authorized DROP rows: **296**; proposed VERIFIED retained rows: **441**; OPEN retained rows: **5019**.
+Authorized DROP rows: **296**; proposed VERIFIED retained rows: **531**; OPEN retained rows: **4929**.
 
 | ID | Disposition | Kind | Frozen source | Fact or control | Planned check | State | Evidence |
 |---|---|---|---|---|---|---|---|
@@ -5056,96 +5056,96 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **441**; OPEN re
 | FQ15-9D951130781D | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:603 | "under_sampled" | test:LedgerPreservationTests | VERIFIED | evidence:N5:FQ15-9D951130781D |
 | FQ15-2156E4FAB256 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:603 | "under_sampled_estimate" | test:LedgerPreservationTests | VERIFIED | evidence:N5:FQ15-2156E4FAB256 |
 | FQ15-0EBEB1105B90 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:603 | "family_userid" | test:LedgerPreservationTests | VERIFIED | evidence:N5:FQ15-0EBEB1105B90 |
-| FQ15-EE5B39EDA457 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:610 | "side" | test:ProjectStoreTests | OPEN | pending |
-| FQ15-B740395FE757 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:610 | "run" | test:ProjectStoreTests | OPEN | pending |
-| FQ15-A105F466A9CD | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:610 | "scan" | test:ProjectStoreTests | OPEN | pending |
-| FQ15-564D92935A49 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:610 | "precursor_mz" | test:ProjectStoreTests | OPEN | pending |
-| FQ15-B41B7AB910B7 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:610 | "charge" | test:ProjectStoreTests | OPEN | pending |
-| FQ15-B9A2B81609E8 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:610 | "sequence" | test:ProjectStoreTests | OPEN | pending |
-| FQ15-FF34FE1ACBDF | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:611 | "area_m0" | test:ProjectStoreTests | OPEN | pending |
-| FQ15-390F986674E5 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:611 | "area_m1" | test:ProjectStoreTests | OPEN | pending |
-| FQ15-119CCB1BBC13 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:611 | "area_m2" | test:ProjectStoreTests | OPEN | pending |
-| FQ15-029B105F6856 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:611 | "area_m3" | test:ProjectStoreTests | OPEN | pending |
-| FQ15-7CD9F04BB558 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:611 | "envelope_sum" | test:ProjectStoreTests | OPEN | pending |
-| FQ15-57F8D85DA5CB | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:611 | "family_userid" | test:ProjectStoreTests | OPEN | pending |
-| FQ15-5F3574518383 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:662 | "Cannot write a project whose FormatVersion is " | test:ProjectStoreTests | OPEN | pending |
-| FQ15-E109CD077B06 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:664 | ", because this FamilyQuant build writes at most version " | test:ProjectStoreTests | OPEN | pending |
-| FQ15-0BBAE8258341 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:666 | ". Open and save it with a build that understands that newer format." | test:ProjectStoreTests | OPEN | pending |
-| FQ15-634074ADF222 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:675 | "The quant table holds at most " | test:ProjectStoreTests | OPEN | pending |
-| FQ15-12362AA6CA44 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:676 | " isotope columns (area_m0..area_m" | test:ProjectStoreTests | OPEN | pending |
-| FQ15-850B3A088C9A | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:678 | "), but the manifest requests IsotopeCount=" | test:ProjectStoreTests | OPEN | pending |
-| FQ15-C68AF367E588 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:680 | "; storing it would silently drop the higher isotopes." | test:ProjectStoreTests | OPEN | pending |
-| FQ15-DB5CE7330697 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:687 | "SpectrumComparisonRows contains a null row. The project was not written because " | test:ProjectStoreTests | OPEN | pending |
-| FQ15-1AAF7752845C | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:688 | "counting that row while omitting it from the sidecar would create an unreadable project." | test:ProjectStoreTests | OPEN | pending |
-| FQ15-1E795CD8C8EE | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:700 | ".tmp" | test:ProjectStoreTests | OPEN | pending |
-| FQ15-579497562F21 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:732 | "\"" | test:ProjectStoreTests | OPEN | pending |
-| FQ15-A83E0CE728C5 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:732 | "\" is not a valid FamilyQuant project: its " | test:ProjectStoreTests | OPEN | pending |
-| FQ15-E1C839E36E6D | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:733 | " entry is missing." | test:ProjectStoreTests | OPEN | pending |
-| FQ15-63A86C3B8020 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:737 | "\"" | test:ProjectStoreTests | OPEN | pending |
-| FQ15-D0180B9F9B3D | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:737 | "\" is not a valid FamilyQuant project: its " | test:ProjectStoreTests | OPEN | pending |
-| FQ15-36D968AEE3CE | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:738 | " entry is missing." | test:ProjectStoreTests | OPEN | pending |
-| FQ15-1CEC4A73D52E | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:745 | "\"" | test:ProjectStoreTests | OPEN | pending |
-| FQ15-5E1C8237F1BF | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:745 | "\" carries an unreadable " | test:ProjectStoreTests | OPEN | pending |
-| FQ15-337972828174 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:745 | " entry." | test:ProjectStoreTests | OPEN | pending |
-| FQ15-100DCCDBA61E | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:749 | "\"" | test:ProjectStoreTests | OPEN | pending |
-| FQ15-F0C281196992 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:749 | "\" is a version " | test:ProjectStoreTests | OPEN | pending |
-| FQ15-A7E3E21C8FD3 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:750 | " project, and this build understands up to version " | test:ProjectStoreTests | OPEN | pending |
-| FQ15-F185C537A4D1 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:752 | ". Update FamilyQuant to open it." | test:ProjectStoreTests | OPEN | pending |
-| FQ15-F7CACF754CC1 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:765 | "\"" | test:ProjectStoreTests | OPEN | pending |
-| FQ15-954F379760B1 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:765 | "\" contains a legacy database-search concordance audit with " | test:ProjectStoreTests | OPEN | pending |
-| FQ15-02FF78469D24 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:767 | " shared scan(s) but no precursor-qualified one-to-one PSM fields. Recompute full " | test:ProjectStoreTests | OPEN | pending |
-| FQ15-8F5236BA1CCA | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:768 | "XIC with the current FamilyQuant build; raw shared scans cannot be used as the " | test:ProjectStoreTests | OPEN | pending |
-| FQ15-E2025753B5DD | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:769 | "sequence-agreement denominator." | test:ProjectStoreTests | OPEN | pending |
-| FQ15-3B98DF17339E | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:783 | "\"" | test:ProjectStoreTests | OPEN | pending |
-| FQ15-D7946E4CE762 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:783 | "\" is a version-2 project whose " | test:ProjectStoreTests | OPEN | pending |
-| FQ15-449F0617966A | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:784 | " does not declare SpectrumComparisonRowCount. The spectrum evidence sidecar " | test:ProjectStoreTests | OPEN | pending |
-| FQ15-24E5917D865F | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:785 | "cannot be verified; recompute or re-save it with a current FamilyQuant build." | test:ProjectStoreTests | OPEN | pending |
-| FQ15-75B92B0128A3 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:790 | "\"" | test:ProjectStoreTests | OPEN | pending |
-| FQ15-C0CFC4F3C3DA | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:790 | "\" declares a negative SpectrumComparisonRowCount (" | test:ProjectStoreTests | OPEN | pending |
-| FQ15-46CB6F7608C3 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:791 | ")." | test:ProjectStoreTests | OPEN | pending |
-| FQ15-106017DA66A2 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:794 | "\"" | test:ProjectStoreTests | OPEN | pending |
-| FQ15-4977BCB41D11 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:794 | "\" declares " | test:ProjectStoreTests | OPEN | pending |
-| FQ15-66F1A246432D | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:796 | " spectrum comparison row(s), but its required " | test:ProjectStoreTests | OPEN | pending |
-| FQ15-2EA3E4EF1D87 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:797 | " entry is missing." | test:ProjectStoreTests | OPEN | pending |
-| FQ15-BEA77AA30D0F | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:802 | "\"" | test:ProjectStoreTests | OPEN | pending |
-| FQ15-2A3D33C2CF57 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:802 | "\" declares " | test:ProjectStoreTests | OPEN | pending |
-| FQ15-B0EB223573F7 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:804 | " spectrum comparison row(s), but " | test:ProjectStoreTests | OPEN | pending |
-| FQ15-5281F748E4AE | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:805 | " contains " | test:ProjectStoreTests | OPEN | pending |
-| FQ15-16E8336412EC | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:806 | ". The sidecar is incomplete or does not belong to this manifest." | test:ProjectStoreTests | OPEN | pending |
-| FQ15-921AACC47484 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:898 | "The row deserialised to null." | test:ProjectStoreTests | OPEN | pending |
-| FQ15-CAECA810C975 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:904 | "The " | test:ProjectStoreTests | OPEN | pending |
-| FQ15-959631689015 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:904 | " entry contains invalid JSON at line " | test:ProjectStoreTests | OPEN | pending |
-| FQ15-7FAD12DD7C58 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:905 | "." | test:ProjectStoreTests | OPEN | pending |
-| FQ15-D75945E29CF9 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:925 | "\t" | test:ProjectStoreTests | OPEN | pending |
-| FQ15-6D31B5C68055 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:933 | "R" | test:ProjectStoreTests | OPEN | pending |
-| FQ15-489648269F6C | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:937 | "R" | test:ProjectStoreTests | OPEN | pending |
-| FQ15-417C196AACD0 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:949 | "R" | test:ProjectStoreTests | OPEN | pending |
-| FQ15-3470ABF1B9A4 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:950 | "R" | test:ProjectStoreTests | OPEN | pending |
-| FQ15-38482A968DDF | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:951 | "1" | test:ProjectStoreTests | OPEN | pending |
-| FQ15-5BFE7DBB8806 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:951 | "0" | test:ProjectStoreTests | OPEN | pending |
-| FQ15-E6854EDE9409 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:983 | "side" | test:ProjectStoreTests | OPEN | pending |
-| FQ15-0AB5206F94D3 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:983 | "run" | test:ProjectStoreTests | OPEN | pending |
-| FQ15-E9AE069E2D57 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:983 | "scan" | test:ProjectStoreTests | OPEN | pending |
-| FQ15-A3B14FAEA8E8 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:983 | "precursor_mz" | test:ProjectStoreTests | OPEN | pending |
-| FQ15-A40FDDAEE1CF | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:983 | "charge" | test:ProjectStoreTests | OPEN | pending |
-| FQ15-E3B6BA04B462 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:983 | "sequence" | test:ProjectStoreTests | OPEN | pending |
-| FQ15-A0838DF41304 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:987 | "The quant table's header is missing the \"" | test:ProjectStoreTests | OPEN | pending |
-| FQ15-1978D68EB128 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:987 | "\" column, so this is " | test:ProjectStoreTests | OPEN | pending |
-| FQ15-F550A08FE59C | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:988 | "not a FamilyQuant quant table. Found: " | test:ProjectStoreTests | OPEN | pending |
-| FQ15-D64911808F78 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:991 | "side" | test:ProjectStoreTests | OPEN | pending |
-| FQ15-95AFABC5118B | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:991 | "run" | test:ProjectStoreTests | OPEN | pending |
-| FQ15-BB77721FB67D | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:991 | "scan" | test:ProjectStoreTests | OPEN | pending |
-| FQ15-C3B997CFE299 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:992 | "precursor_mz" | test:ProjectStoreTests | OPEN | pending |
-| FQ15-A56641C76D11 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:992 | "charge" | test:ProjectStoreTests | OPEN | pending |
-| FQ15-E7C1F3879F57 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:992 | "sequence" | test:ProjectStoreTests | OPEN | pending |
-| FQ15-ED7B1FDDC2FA | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:993 | "patternlab_xscore" | test:ProjectStoreTests | OPEN | pending |
-| FQ15-361758343572 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:994 | "denovo_evidence_json" | test:ProjectStoreTests | OPEN | pending |
-| FQ15-060C197B2218 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:995 | "envelope_sum" | test:ProjectStoreTests | OPEN | pending |
-| FQ15-BD9A760CADD6 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:995 | "family_userid" | test:ProjectStoreTests | OPEN | pending |
-| FQ15-4DDEEB60D558 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:996 | "under_sampled" | test:ProjectStoreTests | OPEN | pending |
-| FQ15-CECEF4AD4D7B | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:996 | "under_sampled_estimate" | test:ProjectStoreTests | OPEN | pending |
-| FQ15-44434E3176D9 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:1001 | "area_m" | test:ProjectStoreTests | OPEN | pending |
-| FQ15-D2D71ADCCAE2 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:1054 | "1" | test:ProjectStoreTests | OPEN | pending |
+| FQ15-EE5B39EDA457 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:610 | "side" | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X7-runtime:FQ15-EE5B39EDA457 |
+| FQ15-B740395FE757 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:610 | "run" | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X7-runtime:FQ15-B740395FE757 |
+| FQ15-A105F466A9CD | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:610 | "scan" | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X7-runtime:FQ15-A105F466A9CD |
+| FQ15-564D92935A49 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:610 | "precursor_mz" | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X7-runtime:FQ15-564D92935A49 |
+| FQ15-B41B7AB910B7 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:610 | "charge" | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X7-runtime:FQ15-B41B7AB910B7 |
+| FQ15-B9A2B81609E8 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:610 | "sequence" | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X7-runtime:FQ15-B9A2B81609E8 |
+| FQ15-FF34FE1ACBDF | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:611 | "area_m0" | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X7-runtime:FQ15-FF34FE1ACBDF |
+| FQ15-390F986674E5 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:611 | "area_m1" | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X7-runtime:FQ15-390F986674E5 |
+| FQ15-119CCB1BBC13 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:611 | "area_m2" | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X7-runtime:FQ15-119CCB1BBC13 |
+| FQ15-029B105F6856 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:611 | "area_m3" | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X7-runtime:FQ15-029B105F6856 |
+| FQ15-7CD9F04BB558 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:611 | "envelope_sum" | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X7-runtime:FQ15-7CD9F04BB558 |
+| FQ15-57F8D85DA5CB | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:611 | "family_userid" | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X7-runtime:FQ15-57F8D85DA5CB |
+| FQ15-5F3574518383 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:662 | "Cannot write a project whose FormatVersion is " | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X7-runtime:FQ15-5F3574518383 |
+| FQ15-E109CD077B06 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:664 | ", because this FamilyQuant build writes at most version " | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X7-runtime:FQ15-E109CD077B06 |
+| FQ15-0BBAE8258341 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:666 | ". Open and save it with a build that understands that newer format." | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X7-runtime:FQ15-0BBAE8258341 |
+| FQ15-634074ADF222 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:675 | "The quant table holds at most " | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X7-runtime:FQ15-634074ADF222 |
+| FQ15-12362AA6CA44 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:676 | " isotope columns (area_m0..area_m" | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X7-runtime:FQ15-12362AA6CA44 |
+| FQ15-850B3A088C9A | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:678 | "), but the manifest requests IsotopeCount=" | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X7-runtime:FQ15-850B3A088C9A |
+| FQ15-C68AF367E588 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:680 | "; storing it would silently drop the higher isotopes." | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X7-runtime:FQ15-C68AF367E588 |
+| FQ15-DB5CE7330697 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:687 | "SpectrumComparisonRows contains a null row. The project was not written because " | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X7-runtime:FQ15-DB5CE7330697 |
+| FQ15-1AAF7752845C | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:688 | "counting that row while omitting it from the sidecar would create an unreadable project." | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X7-runtime:FQ15-1AAF7752845C |
+| FQ15-1E795CD8C8EE | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:700 | ".tmp" | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X7-runtime:FQ15-1E795CD8C8EE |
+| FQ15-579497562F21 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:732 | "\"" | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X7-runtime:FQ15-579497562F21 |
+| FQ15-A83E0CE728C5 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:732 | "\" is not a valid FamilyQuant project: its " | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X7-runtime:FQ15-A83E0CE728C5 |
+| FQ15-E1C839E36E6D | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:733 | " entry is missing." | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X7-runtime:FQ15-E1C839E36E6D |
+| FQ15-63A86C3B8020 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:737 | "\"" | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X7-runtime:FQ15-63A86C3B8020 |
+| FQ15-D0180B9F9B3D | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:737 | "\" is not a valid FamilyQuant project: its " | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X7-runtime:FQ15-D0180B9F9B3D |
+| FQ15-36D968AEE3CE | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:738 | " entry is missing." | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X7-runtime:FQ15-36D968AEE3CE |
+| FQ15-1CEC4A73D52E | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:745 | "\"" | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X7-runtime:FQ15-1CEC4A73D52E |
+| FQ15-5E1C8237F1BF | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:745 | "\" carries an unreadable " | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X7-runtime:FQ15-5E1C8237F1BF |
+| FQ15-337972828174 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:745 | " entry." | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X7-runtime:FQ15-337972828174 |
+| FQ15-100DCCDBA61E | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:749 | "\"" | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X7-runtime:FQ15-100DCCDBA61E |
+| FQ15-F0C281196992 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:749 | "\" is a version " | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X7-runtime:FQ15-F0C281196992 |
+| FQ15-A7E3E21C8FD3 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:750 | " project, and this build understands up to version " | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X7-runtime:FQ15-A7E3E21C8FD3 |
+| FQ15-F185C537A4D1 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:752 | ". Update FamilyQuant to open it." | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X7-runtime:FQ15-F185C537A4D1 |
+| FQ15-F7CACF754CC1 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:765 | "\"" | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X7-runtime:FQ15-F7CACF754CC1 |
+| FQ15-954F379760B1 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:765 | "\" contains a legacy database-search concordance audit with " | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X7-runtime:FQ15-954F379760B1 |
+| FQ15-02FF78469D24 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:767 | " shared scan(s) but no precursor-qualified one-to-one PSM fields. Recompute full " | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X7-runtime:FQ15-02FF78469D24 |
+| FQ15-8F5236BA1CCA | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:768 | "XIC with the current FamilyQuant build; raw shared scans cannot be used as the " | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X7-runtime:FQ15-8F5236BA1CCA |
+| FQ15-E2025753B5DD | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:769 | "sequence-agreement denominator." | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X7-runtime:FQ15-E2025753B5DD |
+| FQ15-3B98DF17339E | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:783 | "\"" | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X7-runtime:FQ15-3B98DF17339E |
+| FQ15-D7946E4CE762 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:783 | "\" is a version-2 project whose " | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X7-runtime:FQ15-D7946E4CE762 |
+| FQ15-449F0617966A | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:784 | " does not declare SpectrumComparisonRowCount. The spectrum evidence sidecar " | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X7-runtime:FQ15-449F0617966A |
+| FQ15-24E5917D865F | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:785 | "cannot be verified; recompute or re-save it with a current FamilyQuant build." | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X7-runtime:FQ15-24E5917D865F |
+| FQ15-75B92B0128A3 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:790 | "\"" | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X7-runtime:FQ15-75B92B0128A3 |
+| FQ15-C0CFC4F3C3DA | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:790 | "\" declares a negative SpectrumComparisonRowCount (" | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X7-runtime:FQ15-C0CFC4F3C3DA |
+| FQ15-46CB6F7608C3 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:791 | ")." | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X7-runtime:FQ15-46CB6F7608C3 |
+| FQ15-106017DA66A2 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:794 | "\"" | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X7-runtime:FQ15-106017DA66A2 |
+| FQ15-4977BCB41D11 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:794 | "\" declares " | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X7-runtime:FQ15-4977BCB41D11 |
+| FQ15-66F1A246432D | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:796 | " spectrum comparison row(s), but its required " | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X7-runtime:FQ15-66F1A246432D |
+| FQ15-2EA3E4EF1D87 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:797 | " entry is missing." | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X7-runtime:FQ15-2EA3E4EF1D87 |
+| FQ15-BEA77AA30D0F | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:802 | "\"" | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X7-runtime:FQ15-BEA77AA30D0F |
+| FQ15-2A3D33C2CF57 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:802 | "\" declares " | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X7-runtime:FQ15-2A3D33C2CF57 |
+| FQ15-B0EB223573F7 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:804 | " spectrum comparison row(s), but " | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X7-runtime:FQ15-B0EB223573F7 |
+| FQ15-5281F748E4AE | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:805 | " contains " | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X7-runtime:FQ15-5281F748E4AE |
+| FQ15-16E8336412EC | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:806 | ". The sidecar is incomplete or does not belong to this manifest." | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X7-runtime:FQ15-16E8336412EC |
+| FQ15-921AACC47484 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:898 | "The row deserialised to null." | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X7-runtime:FQ15-921AACC47484 |
+| FQ15-CAECA810C975 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:904 | "The " | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X7-runtime:FQ15-CAECA810C975 |
+| FQ15-959631689015 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:904 | " entry contains invalid JSON at line " | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X7-runtime:FQ15-959631689015 |
+| FQ15-7FAD12DD7C58 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:905 | "." | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X7-runtime:FQ15-7FAD12DD7C58 |
+| FQ15-D75945E29CF9 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:925 | "\t" | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X7-runtime:FQ15-D75945E29CF9 |
+| FQ15-6D31B5C68055 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:933 | "R" | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X7-runtime:FQ15-6D31B5C68055 |
+| FQ15-489648269F6C | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:937 | "R" | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X7-runtime:FQ15-489648269F6C |
+| FQ15-417C196AACD0 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:949 | "R" | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X7-runtime:FQ15-417C196AACD0 |
+| FQ15-3470ABF1B9A4 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:950 | "R" | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X7-runtime:FQ15-3470ABF1B9A4 |
+| FQ15-38482A968DDF | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:951 | "1" | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X7-runtime:FQ15-38482A968DDF |
+| FQ15-5BFE7DBB8806 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:951 | "0" | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X7-runtime:FQ15-5BFE7DBB8806 |
+| FQ15-E6854EDE9409 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:983 | "side" | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X7-runtime:FQ15-E6854EDE9409 |
+| FQ15-0AB5206F94D3 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:983 | "run" | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X7-runtime:FQ15-0AB5206F94D3 |
+| FQ15-E9AE069E2D57 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:983 | "scan" | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X7-runtime:FQ15-E9AE069E2D57 |
+| FQ15-A3B14FAEA8E8 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:983 | "precursor_mz" | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X7-runtime:FQ15-A3B14FAEA8E8 |
+| FQ15-A40FDDAEE1CF | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:983 | "charge" | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X7-runtime:FQ15-A40FDDAEE1CF |
+| FQ15-E3B6BA04B462 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:983 | "sequence" | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X7-runtime:FQ15-E3B6BA04B462 |
+| FQ15-A0838DF41304 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:987 | "The quant table's header is missing the \"" | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X7-runtime:FQ15-A0838DF41304 |
+| FQ15-1978D68EB128 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:987 | "\" column, so this is " | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X7-runtime:FQ15-1978D68EB128 |
+| FQ15-F550A08FE59C | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:988 | "not a FamilyQuant quant table. Found: " | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X7-runtime:FQ15-F550A08FE59C |
+| FQ15-D64911808F78 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:991 | "side" | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X7-runtime:FQ15-D64911808F78 |
+| FQ15-95AFABC5118B | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:991 | "run" | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X7-runtime:FQ15-95AFABC5118B |
+| FQ15-BB77721FB67D | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:991 | "scan" | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X7-runtime:FQ15-BB77721FB67D |
+| FQ15-C3B997CFE299 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:992 | "precursor_mz" | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X7-runtime:FQ15-C3B997CFE299 |
+| FQ15-A56641C76D11 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:992 | "charge" | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X7-runtime:FQ15-A56641C76D11 |
+| FQ15-E7C1F3879F57 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:992 | "sequence" | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X7-runtime:FQ15-E7C1F3879F57 |
+| FQ15-ED7B1FDDC2FA | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:993 | "patternlab_xscore" | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X7-runtime:FQ15-ED7B1FDDC2FA |
+| FQ15-361758343572 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:994 | "denovo_evidence_json" | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X7-runtime:FQ15-361758343572 |
+| FQ15-060C197B2218 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:995 | "envelope_sum" | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X7-runtime:FQ15-060C197B2218 |
+| FQ15-BD9A760CADD6 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:995 | "family_userid" | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X7-runtime:FQ15-BD9A760CADD6 |
+| FQ15-4DDEEB60D558 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:996 | "under_sampled" | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X7-runtime:FQ15-4DDEEB60D558 |
+| FQ15-CECEF4AD4D7B | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:996 | "under_sampled_estimate" | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X7-runtime:FQ15-CECEF4AD4D7B |
+| FQ15-44434E3176D9 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:1001 | "area_m" | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X7-runtime:FQ15-44434E3176D9 |
+| FQ15-D2D71ADCCAE2 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:1054 | "1" | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X7-runtime:FQ15-D2D71ADCCAE2 |
 | FQ15-691B67597B55 | KEEP | export/storage fact | FamilyQuant/ProjectStore.cs:1066 | "R" | test:CoreRelocationCommand | VERIFIED | evidence:Core-X7:FQ15-691B67597B55 |
 | FQ15-C9A212E23A82 | IMPROVE | code fact | FamilyQuant/QuantitationProfile.cs:108 | "NIAF" | test:ResultsMemberComparisonCommand | VERIFIED | evidence:RS-members:FQ15-C9A212E23A82 |
 | FQ15-C5498BE9D800 | IMPROVE | code fact | FamilyQuant/QuantitationProfile.cs:202 | "recorded by the exporter" | test:ResultsMemberComparisonCommand | VERIFIED | evidence:RS-members:FQ15-C5498BE9D800 |

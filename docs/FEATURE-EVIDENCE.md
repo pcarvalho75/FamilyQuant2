@@ -70,6 +70,7 @@ Run the built test executable with these flags and explicit lane-owned outputs:
 | `--test-ledger-declarations` | Exact XAML declaration and scoped C# member comparison fixtures |
 | `--ledger-declaration-compare <frozen-root> <current-root> <fresh-output> <step> <source-prefix> <date>` | Compare named explicit XAML properties and emit kind receipts |
 | `--ledger-core-relocation <frozen-root> <fresh-output> X5/X7 <date> [member-mappings.json]` | Compare complete scoped Core member declarations and retain per-row gaps; see [Core relocation ledger](CORE-RELOCATION-LEDGER.md) |
+| `--ledger-storage-runtime <frozen-root> <fresh-output> <date> [--negative-control]` | Native schema/header/value and exact refusal checks for remaining X7 observations; [runtime guide](CORE-RUNTIME-LEDGER.md) |
 
 For example, obtain the timestamp with `date '+%F %T %z'` immediately before the proof command.
 Neither the proof runner nor the audit invokes the frozen-source generator.
