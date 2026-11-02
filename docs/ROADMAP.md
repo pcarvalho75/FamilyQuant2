@@ -108,9 +108,8 @@ Columns: Diff = L, M, H, VH. Hrs = worker hours at measured speed: estimates are
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| C14c | Tab order and visible focus | L | 0.2 | 🟢 | C14e | Whole flow by keyboard | LK | not started | 0% | 0% | T+0 |
 | C14d | Both themes, every screen | L | 0.2 | 🟢 | C14e | Renders inspected | LK | not started | 0% | 0% | T+0 |
-| C14e | Paulo's final look sign-off | L | 0 | C14c, C14d | R3a | Paulo's word | Paulo | not started | 0% | 0% | T+3 |
+| C14e | Paulo's final look sign-off | L | 0 | C14d | R3a | Paulo's word | Paulo | not started | 0% | 0% | T+3 |
 
 ### W5 Release (Paulo publishes)
 
