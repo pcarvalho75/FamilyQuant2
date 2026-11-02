@@ -46,6 +46,13 @@ internal static partial class Program
             new Dictionary<string, LedgerPauloRulings.FactCheck>(StringComparer.Ordinal)).Closed);
         var lost = new Dictionary<string, LedgerPauloRulings.FactCheck>(facts, StringComparer.Ordinal) { [row.Id] = new("lost", "Synthetic lost fact.") };
         Check("a lost verdict cannot close real compiled wording", !LedgerPauloRulings.Evaluate(input, row, LedgerRulingLiveText.Find, lost).Closed);
+        // A frozen C# literal that itself holds " = " is that literal, not a XAML "Name.Property = value" assignment.
+        var assignedLiteral = row with { Detail = "\"; signal = \"", Kind = "code fact" };
+        var assignedInput = input with { OldText = "; signal = ", NewText = "; signal = " };
+        Check("a frozen C# literal holding ' = ' is read whole, so its identical kept wording reaches the witness",
+            LedgerPauloRulings.Evaluate(assignedInput, assignedLiteral, _ => new(true, "fixture", "fixture", "fixture"), facts) is { Closed: true, Rule: "1" });
+        Check("a XAML assignment is still read after its ' = '", LedgerPauloRulings.Evaluate(assignedInput with { OldText = "Caption", NewText = "Caption" },
+            row with { Detail = "TextBlock.Text = Caption", Kind = "option/copy" }, _ => new(true, "fixture", "fixture", "fixture"), facts) is { Closed: true, Rule: "1" });
         // Rule 4, Paulo's group ruling: an optional pinned TSV; a listed row closes unless an earlier rule closes it or it is a
         // DROP or an execution row. Missing or empty input closes nothing.
         string groupFolder = Path.Combine(output, "group-fixtures"); Directory.CreateDirectory(groupFolder);
