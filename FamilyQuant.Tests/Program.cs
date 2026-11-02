@@ -79,6 +79,7 @@ namespace FamilyQuant.Tests
             DatabaseGapTests(Path.Combine(workDir, "database-gap"));
             ResultsPreservationTests(Path.Combine(workDir, "results-preservation"));
             ResultsTooltipTests();
+            ResultsExportFactTests(Path.Combine(workDir, "results-export-facts"));
             DeNovoViewModelTests(workDir);
             HomologyResultsTests(workDir);
             Section("Database parsing and the decoy tag");
