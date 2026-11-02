@@ -28,6 +28,7 @@ This is the navigation index for the current checkout. The roadmap owns unfinish
 | [Code map](vision/CODE-MAP.md) | How a FASTA and a RAW file become a family number, and what that read did not cover |
 | [Feature ledger](FEATURE-LEDGER.md) | Frozen preservation contract, dispositions and acceptance state |
 | [Feature evidence](FEATURE-EVIDENCE.md) | Per-observation receipts, native proof runner, audit and review sample |
+| [AS ledger receipt](ASSAY-LEDGER.md) | Exact M22 cohort, executed C# declaration comparisons and remaining proof requirements |
 | [Measured improvement candidates](IMPROVEMENTS.md) | X12 clustering coverage, peptide ambiguity, evidence veto and contaminant measurements |
 | [Ledger scan](feature-ledger-scan.json) | Exact frozen observations and source hashes |
 | [Roadmap](ROADMAP.md) | Current work and acceptance gates; orchestrator owned |
@@ -153,6 +154,7 @@ Companion options for `--screens` are `--screen-fcf <input.fcf>`, `--screen-proj
 | `--feature-ledger-evidence <output>` | Read-only counts by kind, source mappings and reproducible 50-row sample |
 | `--feature-ledger-kind-review <kind> REOPENED/ACCEPTED <reviewer> <reason> <date> <output>` | Independent D13 kind-review decision and whole-kind reopening |
 | `--ledger-declaration-compare <frozen-root> <current-root> <fresh-output> <step> <source-prefix> <date>` | Frozen/current explicit XAML property comparisons and kind receipts |
+| `--ledger-assay-compare <frozen-root> <owner-map> <output> <step> <date>` | Shared C# member comparisons for the exact M22 OPEN cohorts; all nonmatches retained |
 | `--word-grouping-snapshot <input.fcf-or-fqproj> <output.txt>` | [WordGroupingSnapshot.cs](../FamilyQuant.Tests/WordGroupingSnapshot.cs), also linked into frozen host |
 | `--chart-export-snapshot <output-dir>` | [ChartExportSnapshot.cs](../FamilyQuant.Tests/ChartExportSnapshot.cs), synthetic chart parity fixtures |
 | `--clustering-snapshot <input.fasta> <output.tsv> <integer-identity> <fast-or-exhaustive>` | [ClusteringSnapshot.cs](../FamilyQuant.Tests/ClusteringSnapshot.cs) |
