@@ -40,6 +40,14 @@ namespace FamilyQuant.Tests
         [STAThread]   // required: the UI smoke section constructs WPF controls
         private static int Main(string[] args)
         {
+            if (args.Length > 0 && args[0] == "--dependency-file-check")
+                return DependencyFileCheck(args);
+            if (args.Contains("--test-dependencies", StringComparer.Ordinal))
+            {
+                DependencyCacheTests(Path.Combine(Path.GetTempPath(), "FamilyQuant.Tests"));
+                Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
+                return failed == 0 ? 0 : 1;
+            }
             if (args.Length > 0 && args[0] == IdentitySearchStudy.Argument) return IdentitySearchStudy.Run(args);
             if (args.Contains("--test-identity-study", StringComparer.Ordinal))
             {
@@ -595,6 +603,7 @@ namespace FamilyQuant.Tests
 
             Section("Isotope envelope engine (Q1) - configurable isotope count, unit invariants");
             IsotopeEnvelopeUnitTests();
+            DependencyCacheTests(workDir);
 
             Section("Minimum points per peak and the isotope ceiling - the rule, per isotope, and legacy mode");
             MinimumPointsAndCeilingUnitTests();
