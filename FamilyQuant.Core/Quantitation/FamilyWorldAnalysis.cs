@@ -71,13 +71,15 @@ namespace FamilyQuant
         {
             if (curation == null) throw new ArgumentNullException(nameof(curation));
             FamilyWorldSnapshot snapshot = FamilyWorldFetcher.Stored(curation);
-            return Run(rows, curation, spectra, FamilyWorld.FromSnapshot(snapshot), snapshot.Release, operation: operation);
+            return Run(rows, curation, spectra, FamilyWorld.FromSnapshot(snapshot), snapshot.Release, operation: operation,
+                lengths: FamilyWorldOptions.LengthChoices);
         }
 
         public static FamilyWorldAnalysisResult Run(IEnumerable<QuantRow> rows, FamilyClusterFile curation,
             IEnumerable<SpectrumComparisonRow> spectra, FamilyWorld world, string worldRelease,
             Func<FamilyWorldProtein, bool>? ownSpecies = null, FamilyWorldOptions? options = null,
-            int minimumKnownCredits = FamilyWorldErrors.DefaultMinimumKnownCredits, OperationContext? operation = null)
+            int minimumKnownCredits = FamilyWorldErrors.DefaultMinimumKnownCredits, OperationContext? operation = null,
+            IReadOnlyList<int>? lengths = null)
         {
             if (rows == null) throw new ArgumentNullException(nameof(rows));
             if (curation == null) throw new ArgumentNullException(nameof(curation));
@@ -85,8 +87,14 @@ namespace FamilyQuant
             PeptideFamilyAttribution attribution = FamilyEnvelopeQuant.BuildAttributionFromCuration(rowList, curation);
             FamilyPeptideAttribution firstPass = FamilyEnvelopeQuant.AttributePeptides(FamilyEnvelopeQuant.PreparePeptides(rowList), attribution);
             options ??= new FamilyWorldOptions();
-            FamilyWorldPassResult pass = FamilyWorldPass.Run(firstPass, world, options, operation);
-            return Complete(firstPass, pass, curation, spectra, world, worldRelease, ownSpecies, options, minimumKnownCredits, operation);
+            if (lengths == null || lengths.Count == 0)
+            {
+                FamilyWorldPassResult pass = FamilyWorldPass.Run(firstPass, world, options, operation);
+                return Complete(firstPass, pass, curation, spectra, world, worldRelease, ownSpecies, options, minimumKnownCredits, operation);
+            }
+            List<int> choices = lengths.Append(options.MinimumTagLength).Distinct().OrderBy(l => l).ToList();
+            IReadOnlyList<FamilyWorldPassResult> passes = FamilyWorldPass.RunLengths(firstPass, world, options, choices, operation);
+            return CompleteLengths(firstPass, passes, curation, spectra, world, worldRelease, ownSpecies, options, minimumKnownCredits, operation);
         }
 
         /// <summary>The analysis after the pass: known answers in the world without the sample's species (by default its
@@ -96,8 +104,23 @@ namespace FamilyQuant
             FamilyClusterFile curation, IEnumerable<SpectrumComparisonRow> spectra, FamilyWorld world, string worldRelease,
             Func<FamilyWorldProtein, bool>? ownSpecies, FamilyWorldOptions options, int minimumKnownCredits, OperationContext? operation = null)
         {
-            if (firstPass == null) throw new ArgumentNullException(nameof(firstPass));
             if (pass == null) throw new ArgumentNullException(nameof(pass));
+            return CompleteLengths(firstPass, new[] { pass }, curation, spectra, world, worldRelease, ownSpecies, options,
+                minimumKnownCredits, operation);
+        }
+
+        /// <summary>
+        /// The analysis after the passes at several minimum tag lengths (B10). The known answers are searched once, at
+        /// the lowest length, and read again under each higher one; every length gets its complete table. The result's
+        /// table is the one at <see cref="FamilyWorldOptions.MinimumTagLength"/>, and when several lengths were given it
+        /// carries all of them in <see cref="FamilyWorldSummary.Lengths"/> with their quick estimates.
+        /// </summary>
+        public static FamilyWorldAnalysisResult CompleteLengths(FamilyPeptideAttribution firstPass, IReadOnlyList<FamilyWorldPassResult> passes,
+            FamilyClusterFile curation, IEnumerable<SpectrumComparisonRow> spectra, FamilyWorld world, string worldRelease,
+            Func<FamilyWorldProtein, bool>? ownSpecies, FamilyWorldOptions options, int minimumKnownCredits, OperationContext? operation = null)
+        {
+            if (firstPass == null) throw new ArgumentNullException(nameof(firstPass));
+            if (passes == null || passes.Count == 0) throw new ArgumentException("Give at least one pass.", nameof(passes));
             if (curation == null) throw new ArgumentNullException(nameof(curation));
             if (spectra == null) throw new ArgumentNullException(nameof(spectra));
             if (world == null) throw new ArgumentNullException(nameof(world));
@@ -108,10 +131,28 @@ namespace FamilyQuant
             FamilyWorld withoutSpecies = FamilyWorld.Build(world.Proteins.Where(p => !ownSpecies(p)), world.ScopeFamilies);
             Dictionary<string, IReadOnlyList<string>> labels = FamilyWorldErrors.Labels(world.Proteins, curation);
             List<FamilyWorldKnownAnswer> answers = FamilyWorldErrors.KnownAnswers(spectra, curation, labels, operation);
-            FamilyWorldErrors.Credit(answers, withoutSpecies, pass.CreditableFamilies, options, operation);
-            FamilyWorldSummary summary = FamilyWorldErrors.Summarize(pass, answers, worldRelease, taxa, minimumKnownCredits);
-            FamilyWorldErrors.Compose(summary, firstPass, curation, labels);
-            return new FamilyWorldAnalysisResult { Pass = pass, KnownAnswers = answers, Summary = summary };
+            int lowest = passes.Min(p => p.MinimumTagLength);
+            FamilyWorldOptions searchOptions = options.Clone();
+            searchOptions.MinimumTagLength = lowest;
+            FamilyWorldErrors.Credit(answers, withoutSpecies, passes[0].CreditableFamilies, searchOptions, operation);
+
+            (FamilyWorldSummary Table, List<FamilyWorldKnownAnswer> Answers) TableAt(FamilyWorldPassResult pass)
+            {
+                List<FamilyWorldKnownAnswer> read = answers.Select(a => a.AtMinimumLength(pass.MinimumTagLength)).ToList();
+                FamilyWorldSummary table = FamilyWorldErrors.Summarize(pass, read, worldRelease, taxa, minimumKnownCredits);
+                FamilyWorldErrors.Compose(table, firstPass, curation, labels);
+                return (table, read);
+            }
+
+            FamilyWorldPassResult chosen = passes.FirstOrDefault(p => p.MinimumTagLength == options.MinimumTagLength) ?? passes[0];
+            var (summary, chosenAnswers) = TableAt(chosen);
+            if (passes.Count > 1)
+            {
+                // Separate objects for every length, the chosen one included, so the stored JSON has no cycle.
+                summary.Lengths = passes.OrderBy(p => p.MinimumTagLength).Select(p => TableAt(p).Table).ToList();
+                summary.LengthEstimates = summary.Lengths.Select(FamilyWorldErrors.Estimate).ToList();
+            }
+            return new FamilyWorldAnalysisResult { Pass = chosen, KnownAnswers = chosenAnswers, Summary = summary };
         }
     }
 }

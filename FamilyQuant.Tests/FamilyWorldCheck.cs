@@ -777,7 +777,7 @@ namespace FamilyQuant.Tests
 
         /// <summary>The genus above a taxon in UniProt's taxonomy lineage, or empty when there is none. Kept in the
         /// output folder so a rerun answers offline.</summary>
-        private static (string Id, string Name) Genus(HttpClient client, string taxon, string outDir, Action<string> log)
+        internal static (string Id, string Name) Genus(HttpClient client, string taxon, string outDir, Action<string> log)
         {
             string cache = Path.Combine(outDir, "family_world_lineage_" + taxon + ".tsv");
             if (File.Exists(cache))
@@ -1167,6 +1167,43 @@ namespace FamilyQuant.Tests
             check("result table fixture: the export has the family rows and five global rows, all with the same columns",
                 compositionCsv.TrimEnd('\n').Split('\n').Length == 1 + groupTable.Composition.Count + 5
                 && compositionCsv.TrimEnd('\n').Split('\n').Select(FieldCount).Distinct().SequenceEqual(new[] { 15 }), null);
+
+            // ---- B10: every minimum tag length from one search, equal to a pass run at that length alone
+            string Json(object value) => System.Text.Json.JsonSerializer.Serialize(value);
+            FamilyPeptideAttribution lengthPass = FamilyEnvelopeQuant.AttributePeptides(prepared, FamilyEnvelopeQuant.BuildAttributionFromCuration(rows, sample));
+            int[] someLengths = { 7, 8, 9, 12 };
+            IReadOnlyList<FamilyWorldPassResult> filtered = FamilyWorldPass.RunLengths(lengthPass, world, new FamilyWorldOptions(), someLengths);
+            check("family world lengths fixture (B10): one search at the lowest length gives each length's pass exactly",
+                filtered.Count == 4 && someLengths.Select((l, i) => Json(filtered[i]) ==
+                    Json(FamilyWorldPass.Run(lengthPass, world, new FamilyWorldOptions { MinimumTagLength = l }))).All(same => same)
+                && filtered[0].Peptides(FamilyWorldOutcome.TooShort) == 0 && filtered[2].Peptides(FamilyWorldOutcome.TooShort) == 1,
+                string.Join(",", filtered.Select(f => f.Peptides(FamilyWorldOutcome.TooShort))));
+            var both = new FamilyClusterFile();
+            both.MyExtendedFastaItems.AddRange(sample.MyExtendedFastaItems);
+            both.MyExtendedFastaItems.AddRange(known.MyExtendedFastaItems);
+            FamilyWorldOptions OptionsAt(int length) => new FamilyWorldOptions { MinimumTagLength = length };
+            FamilyWorldAnalysisResult Single(int length) => FamilyWorldAnalysis.Complete(lengthPass,
+                FamilyWorldPass.Run(lengthPass, world, OptionsAt(length)), both, spectra, world, "fixture", null, OptionsAt(length),
+                FamilyWorldErrors.DefaultMinimumKnownCredits);
+            FamilyWorldAnalysisResult every = FamilyWorldAnalysis.CompleteLengths(lengthPass,
+                FamilyWorldPass.RunLengths(lengthPass, world, new FamilyWorldOptions(), FamilyWorldOptions.LengthChoices), both, spectra, world,
+                "fixture", null, new FamilyWorldOptions(), FamilyWorldErrors.DefaultMinimumKnownCredits);
+            FamilyWorldSummary chosenTable = every.Summary;
+            List<FamilyWorldSummary>? lengthTables = chosenTable.Lengths;
+            List<FamilyWorldLengthEstimate>? estimates = chosenTable.LengthEstimates;
+            chosenTable.Lengths = null;
+            chosenTable.LengthEstimates = null;
+            check("family world lengths fixture (B10): the default table is the one-length analysis at 9, byte for byte",
+                chosenTable.MinimumTagLength == 9 && Json(chosenTable) == Json(Single(9).Summary), null);
+            chosenTable.Lengths = lengthTables;
+            chosenTable.LengthEstimates = estimates;
+            check("family world lengths fixture (B10): every length 7 to 15 has its complete table, equal to an analysis at that length alone",
+                lengthTables != null && lengthTables.Select(t => t.MinimumTagLength).SequenceEqual(FamilyWorldOptions.LengthChoices)
+                && lengthTables.All(t => Json(t) == Json(Single(t.MinimumTagLength).Summary)), null);
+            check("family world lengths fixture (B10): the quick estimate per length reads its table, and a length is chosen without a search",
+                estimates != null && estimates.Count == 9 && estimates.Zip(lengthTables!).All(x => Json(x.First) == Json(FamilyWorldErrors.Estimate(x.Second)))
+                && Json(chosenTable.ForLength(12)!) == Json(lengthTables![5]) && chosenTable.ForLength(6) == null
+                && lengthTables[0].KnownLanded >= lengthTables[2].KnownLanded, null);
 
             check("family world fixture: the verdict at the roadmap's bars",
                 Verdict(0.95, 0.20, 0.05) == FamilyWorldVerdict.Pass

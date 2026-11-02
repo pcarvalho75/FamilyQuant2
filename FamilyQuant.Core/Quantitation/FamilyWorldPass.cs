@@ -66,6 +66,9 @@ namespace FamilyQuant
         /// <summary>D11: a tag needs at least 9 residues. Measured in the B1 study (docs/vision/B1-GATE.md).</summary>
         public const int DefaultMinimumTagLength = 9;
 
+        /// <summary>B10: the minimum tag lengths a person can choose from; Compute stores the complete table for each.</summary>
+        public static IReadOnlyList<int> LengthChoices { get; } = Array.AsReadOnly(new[] { 7, 8, 9, 10, 11, 12, 13, 14, 15 });
+
         public int MinimumTagLength { get; set; } = DefaultMinimumTagLength;
 
         /// <summary>The families that may be credited. Null takes the families the world was gathered for, its
@@ -77,6 +80,11 @@ namespace FamilyQuant
         /// <summary>The de novo side of the production attribution: every target past the gate after the
         /// target-decoy competition, with no cut at the mapper's top three.</summary>
         public HomologyOptions SearchOptions() => new HomologyOptions { MinIdentity = MinIdentity, TopHitsPerPeptide = int.MaxValue };
+
+        public FamilyWorldOptions Clone() => new FamilyWorldOptions
+        {
+            MinimumTagLength = MinimumTagLength, CreditableFamilies = CreditableFamilies, MinIdentity = MinIdentity,
+        };
     }
 
     /// <summary>
@@ -387,46 +395,66 @@ namespace FamilyQuant
         }
 
         public static FamilyWorldPassResult Run(FamilyPeptideAttribution firstPass, FamilyWorld world,
-            FamilyWorldOptions? options = null, OperationContext? operation = null)
+            FamilyWorldOptions? options = null, OperationContext? operation = null) =>
+            RunLengths(firstPass, world, options, new[] { (options ?? new FamilyWorldOptions()).MinimumTagLength }, operation)[0];
+
+        /// <summary>
+        /// The pass at several minimum tag lengths from ONE world search, at the lowest of them (B10). A tag's search
+        /// result depends only on the tag, the world and the mapper options, never on the minimum, so each length's
+        /// result is the lowest-length search with the tags under that length set to <see cref="FamilyWorldOutcome.TooShort"/>.
+        /// The residual is walked in the same order for every length, so each result equals a pass run at that length
+        /// alone, sums included, to the last bit. Results come back in the order of <paramref name="lengths"/>.
+        /// </summary>
+        public static IReadOnlyList<FamilyWorldPassResult> RunLengths(FamilyPeptideAttribution firstPass, FamilyWorld world,
+            FamilyWorldOptions? options, IReadOnlyList<int> lengths, OperationContext? operation = null)
         {
             if (firstPass == null) throw new ArgumentNullException(nameof(firstPass));
             if (world == null) throw new ArgumentNullException(nameof(world));
+            if (lengths == null || lengths.Count == 0) throw new ArgumentException("Give at least one minimum tag length.", nameof(lengths));
             options ??= new FamilyWorldOptions();
-            if (options.MinimumTagLength < 0) throw new ArgumentOutOfRangeException(nameof(options), "The minimum tag length cannot be negative.");
+            if (lengths.Any(l => l < 0)) throw new ArgumentOutOfRangeException(nameof(lengths), "The minimum tag length cannot be negative.");
             IReadOnlyCollection<string> creditable = options.CreditableFamilies ?? world.ScopeFamilies;
             if (creditable.Count == 0)
                 throw new InvalidOperationException("The family world records no families in scope, so no family can be credited. " +
                     "Fetch the family world for a confirmed scope first.");
+            string[] creditableSorted = creditable.Distinct(StringComparer.OrdinalIgnoreCase)
+                .OrderBy(f => f, StringComparer.OrdinalIgnoreCase).ThenBy(f => f, StringComparer.Ordinal).ToArray();
 
+            int lowest = lengths.Min();
+            List<(NativePeptideQuant Peptide, string Sequence)> residual = firstPass.UnattributedDeNovoPeptides
+                .Select(p => (p, DeNovoReconciler.NormalizeSequence(p.Sequence ?? string.Empty))).ToList();
+            List<string> searched = residual.Select(r => r.Sequence).Where(s => s.Length > 0 && s.Length >= lowest)
+                .Distinct(StringComparer.Ordinal).ToList();
+            var credits = new Dictionary<string, FamilyWorldCredit>(StringComparer.Ordinal);
+            foreach (HomologyResult r in HomologyMapper.Search(searched, world.Database, options.SearchOptions(), operation))
+                credits[r.IsRejected ? r.Peptide : r.NormalizedPeptide] = world.Credit(r, creditableSorted, lowest);
+            operation?.ThrowIfCancellationRequested();
+            return lengths.Select(length => Aggregate(residual, credits, length, creditableSorted, world, options)).ToList();
+        }
+
+        private static FamilyWorldPassResult Aggregate(List<(NativePeptideQuant Peptide, string Sequence)> residual,
+            Dictionary<string, FamilyWorldCredit> credits, int minimumTagLength, string[] creditable, FamilyWorld world,
+            FamilyWorldOptions options)
+        {
             var result = new FamilyWorldPassResult
             {
-                MinimumTagLength = options.MinimumTagLength,
+                MinimumTagLength = minimumTagLength,
                 MinIdentity = options.MinIdentity,
-                CreditableFamilies = creditable.Distinct(StringComparer.OrdinalIgnoreCase)
-                    .OrderBy(f => f, StringComparer.OrdinalIgnoreCase).ThenBy(f => f, StringComparer.Ordinal).ToArray(),
+                CreditableFamilies = creditable,
                 WorldFingerprint = world.Fingerprint,
                 WorldProteins = world.Proteins.Count,
             };
 
-            List<(NativePeptideQuant Peptide, string Sequence)> residual = firstPass.UnattributedDeNovoPeptides
-                .Select(p => (p, DeNovoReconciler.NormalizeSequence(p.Sequence ?? string.Empty))).ToList();
-            List<string> searched = residual.Select(r => r.Sequence).Where(s => s.Length > 0 && s.Length >= options.MinimumTagLength)
-                .Distinct(StringComparer.Ordinal).ToList();
-            var credits = new Dictionary<string, FamilyWorldCredit>(StringComparer.Ordinal);
-            foreach (HomologyResult r in HomologyMapper.Search(searched, world.Database, options.SearchOptions(), operation))
-                credits[r.IsRejected ? r.Peptide : r.NormalizedPeptide] = world.Credit(r, result.CreditableFamilies, options.MinimumTagLength);
-            operation?.ThrowIfCancellationRequested();
-
             FamilyWorldCredit CreditOf(string sequence) => sequence.Length == 0
                 ? new FamilyWorldCredit { Outcome = FamilyWorldOutcome.Rejected }
-                : sequence.Length < options.MinimumTagLength ? new FamilyWorldCredit { Outcome = FamilyWorldOutcome.TooShort }
+                : sequence.Length < minimumTagLength ? new FamilyWorldCredit { Outcome = FamilyWorldOutcome.TooShort }
                 : credits[sequence];
 
             var byFamily = new Dictionary<string, FamilyWorldFamilyRow>(StringComparer.OrdinalIgnoreCase);
             FamilyWorldFamilyRow Row(string family) => byFamily.TryGetValue(family, out FamilyWorldFamilyRow? row)
                 ? row : byFamily[family] = new FamilyWorldFamilyRow { Family = family };
             var bySequence = new Dictionary<string, FamilyWorldSequenceRow>(StringComparer.Ordinal);
-            var creditableSet = new HashSet<string>(result.CreditableFamilies, StringComparer.OrdinalIgnoreCase);
+            var creditableSet = new HashSet<string>(creditable, StringComparer.OrdinalIgnoreCase);
             foreach (var (peptide, sequence) in residual)
             {
                 double envelope = peptide.ReferenceCalibratedEnvelope;
