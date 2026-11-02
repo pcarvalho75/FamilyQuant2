@@ -208,8 +208,8 @@ namespace FamilyQuant
             sb.AppendLine("phospholipases and leaves the plain ones alone, while \"match any word\" gathers");
             sb.AppendLine("every family carrying even one keyword. A single keyword behaves the same either");
             sb.AppendLine("way. The review's own \"Exclude words\" box keeps a protein OUT even when its");
-            sb.AppendLine("family matches: exclude \"inhibitor\" to gather the phospholipases without the");
-            sb.AppendLine("phospholipase inhibitor. It is separate from the Recluster by words Ignore words box,");
+            sb.AppendLine("family matches: exclude \"inhibitor\" to leave out inhibitor descriptions while");
+            sb.AppendLine("the rest of a matching family joins. It is separate from the Recluster by words Ignore words box,");
             sb.AppendLine("which drops words from the comparison rather than dropping a protein.");
             sb.AppendLine("Separate its words with commas or spaces. It matches WHOLE words of the description");
             sb.AppendLine("before OS=, and keeps out the proteins carrying the word; the rest of the family joins.");
@@ -225,9 +225,9 @@ namespace FamilyQuant
             sb.AppendLine("of a family leaves, the new family is locked, so that Recluster by words cannot put");
             sb.AppendLine("back what you left out; the lock manager removes it. An annotation stays on each protein.");
             sb.AppendLine();
-            sb.AppendLine("You do not have to know how a protein is named. The ADAM proteins, for example, are");
-            sb.AppendLine("called \"Disintegrin and metalloproteinase domain-containing protein\", so the word");
-            sb.AppendLine("ADAM finds nothing; the preview says so, and there they are on the list to untick.");
+            sb.AppendLine("A familiar protein name may be absent from the database description, so that keyword");
+            sb.AppendLine("can find nothing even for a protein you expected to include. The preview shows");
+            sb.AppendLine("the supplied descriptions and domains so you can decide which proteins to untick.");
             sb.AppendLine("The keywords and exclude words can be edited there and everything follows as you");
             sb.AppendLine("type. If the Search box hides families that match, one tick brings them in.");
             sb.AppendLine();
@@ -236,11 +236,10 @@ namespace FamilyQuant
             sb.AppendLine("The operation publishes the completed evidence and panel together; saving keeps them");
             sb.AppendLine("in the file with their release for offline review. Pfam domains fill the Domains column; the Search box");
             sb.AppendLine("finds them, and in the preview Keep domains unticks the proteins with none of the");
-            sb.AppendLine("domains you name: Reprolysin keeps those with the metalloproteinase domain whatever");
-            sb.AppendLine("they are called, and leaves out inhibitors and matrix metalloproteinases without a");
-            sb.AppendLine("single exclude word. A protein with no domains at all stays ticked if it carries a");
-            sb.AppendLine("keyword: the short disintegrins and many fragments are too short for Pfam. Domains do");
-            sb.AppendLine("not separate everything: most ADAMs have the same ones as a P-III SVMP.");
+            sb.AppendLine("domains you name: choosing a domain keeps proteins carrying it regardless of their");
+            sb.AppendLine("descriptions, and unticks noncarriers without an exclude word. A protein with no");
+            sb.AppendLine("domains stays ticked if it carries a keyword; short proteins and fragments can have");
+            sb.AppendLine("no Pfam call. Domains do not separate everything: different families can share them.");
             sb.AppendLine();
             sb.AppendLine("Fetch family world uses the confirmed database task and scope from Group by evidence.");
             sb.AppendLine("Fetch evidence first to supply the database's family annotations.");
@@ -264,7 +263,7 @@ namespace FamilyQuant
             sb.AppendLine("single keyword, still counts inside a phrase.");
             sb.AppendLine();
             sb.AppendLine("The Search box takes several terms separated by commas, for example");
-            sb.AppendLine("\"metalloprotease, SVMP\": a row is shown when it carries ANY of them.");
+            sb.AppendLine("\"domain, fragment\": a row is shown when it carries ANY of them.");
             sb.AppendLine();
             sb.AppendLine("Typing in the Search box limits both Recluster by words and Group by keywords");
             sb.AppendLine("to the families the search shows: every family the search hides keeps its");
@@ -374,13 +373,6 @@ namespace FamilyQuant
             string confidenceShortName = confidenceName.EndsWith(" (%)", StringComparison.Ordinal)
                 ? confidenceName.Substring(0, confidenceName.Length - 4)
                 : confidenceName;
-            var defaults = new DeNovoFilterCriteria();
-            bool isPublishedPeaksBaseline = source.IsDenovoOnly
-                && c.MinLength == defaults.MinLength
-                && Math.Abs(c.MinAverageLocalConfidence - defaults.MinAverageLocalConfidence) < 1e-9
-                && c.StretchLength == defaults.StretchLength
-                && c.StretchFloor == defaults.StretchFloor;
-
             var sb = new StringBuilder();
 
             sb.AppendLine("THE DE NOVO EVIDENCE SCREEN");
@@ -480,12 +472,8 @@ namespace FamilyQuant
                                "a global score can flatter; it complements rather than replaces the " +
                                "source-native score cutoff.", "    "));
             sb.AppendLine();
-            if (isPublishedPeaksBaseline)
-            {
-                sb.AppendLine("For the historical three-run PEAKS de-novo-only baseline, these defaults kept");
-                sb.AppendLine("35,686 rows of 181,643 (19.6%). Those counts do not apply to another source");
-                sb.AppendLine("or cutoff; use the counters on this screen for the loaded data.");
-            }
+            sb.AppendLine("Counts depend on the selected source and cutoffs. The counters on this screen show the loaded data,");
+            sb.AppendLine("including how many rows were read and kept; the per-run breakdown shows each acquisition.");
             sb.AppendLine("Loosening the filters is a decision about how much uncertain sequence you carry");
             sb.AppendLine("into every later step. The");
             sb.AppendLine("per-run breakdown under the counters is where to look for a run that behaved");
@@ -512,16 +500,10 @@ namespace FamilyQuant
             sb.AppendLine("alternative         It is excluded from additive de novo quantification and kept");
             sb.AppendLine("                    for review. It is not a database-search accuracy estimate.");
             sb.AppendLine();
-            if (isPublishedPeaksBaseline)
-            {
-                sb.AppendLine("In the historical three-run PEAKS de-novo-only baseline, 10,249 filtered rows");
-                sb.AppendLine("shared file + scan with PatternLab. Of those, 4,874 reported a different");
-                sb.AppendLine("charge; 4,355 shared charge but not m/z; and 1,020 passed file + scan + charge");
-                sb.AppendLine("+ 20-ppm m/z. Inside that final set, 2 were strict PTM-cleaned sequence matches,");
-                sb.AppendLine("2 more became equivalent after I/L folding, and 1,016 remained alternatives.");
-                sb.AppendLine("The earlier 1,129 / 1,125 figures did not require equal charge and are superseded.");
-                sb.AppendLine();
-            }
+            sb.AppendLine("The loaded data determines how many rows share a file and scan, then a charge and");
+            sb.AppendLine("20-ppm precursor m/z, before strict or I/L-folded sequence comparison. Read the");
+            sb.AppendLine("on-screen counters and comparison table for the current source and cutoffs.");
+            sb.AppendLine();
             sb.AppendLine("The different-precursor-context verdict is worth understanding. A mass spectrometer");
             sb.AppendLine("isolates a window, not a molecule, so two species eluting together are");
             sb.AppendLine("fragmented into ONE spectrum: a chimeric spectrum. PatternLab explained one of");
@@ -535,11 +517,9 @@ namespace FamilyQuant
             sb.AppendLine("THE DATABASE-SEARCH AGREEMENT CONTROL");
             sb.AppendLine("-------------------------------------");
             sb.AppendLine("The valid search-vs-search control compares PatternLab PSMs with PEAKS db.psms,");
-            sb.AppendLine("not with a de novo export. In the historical three-run control, the two database");
-            sb.AppendLine("searches shared 57,956 file+scan keys; 56,626 (97.7%) had an exact sequence after");
-            sb.AppendLine("PTM notation was removed. They shared a reported charge on 57,507 keys, and 56,626");
-            sb.AppendLine("of those were exact (98.5%). Those are dataset-specific historical values: use the");
-            sb.AppendLine("loaded project's database-search concordance table for a current analysis.");
+            sb.AppendLine("not with a de novo export. It compares shared file+scan keys, reported charge and");
+            sb.AppendLine("exact sequence after removing PTM notation. The counts and agreement percentages");
+            sb.AppendLine("depend on the loaded searches; use the loaded project's database-search concordance table.");
             sb.AppendLine();
 
             sb.AppendLine("THE REVIEW QUEUE, AND WHY IT IS MANUAL");
