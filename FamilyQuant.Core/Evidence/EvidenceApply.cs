@@ -322,7 +322,7 @@ namespace FamilyQuant.Evidence
             {
                 Proteins = EvidenceClassifier.Fingerprint(rows), file.SourceSha256, file.SourceSequenceCount,
                 file.WordSimilarity, file.IsKeywordSuperCluster, Locks = locks.OrderBy(i => i),
-                file.DomainSource, EvidenceSource = projectSession ? SessionSource(file, session?.SessionSearch) : file.EvidenceSource,
+                file.DomainSource, EvidenceSource = CurationSource(projectSession ? SessionSource(file, session?.SessionSearch) : file.EvidenceSource),
             });
             // Keep earlier recipes' state hashes unchanged when they have no session evidence.
             string state = session?.IncludesSessionEvidence == true ? Hash(new
@@ -334,6 +334,13 @@ namespace FamilyQuant.Evidence
         }
 
         private static string GroupKey(params string[] parts) => JsonSerializer.Serialize(parts);
+        private static EvidenceProvenance? CurationSource(EvidenceProvenance? source)
+        {
+            if (source?.FamilyWorld == null) return source;
+            var curation = Clone(source);
+            curation.FamilyWorld = null;
+            return curation;
+        }
         private static string Hash<T>(T value) => Convert.ToHexString(SHA256.HashData(Encoding.UTF8.GetBytes(JsonSerializer.Serialize(value))));
         internal static T Clone<T>(T value) => JsonSerializer.Deserialize<T>(JsonSerializer.Serialize(value))!;
     }
