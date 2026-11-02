@@ -12,183 +12,6 @@ using System.Text.RegularExpressions;
 
 namespace FamilyQuant.Tests
 {
-    /// <summary>What one sequence found in the family world.</summary>
-    internal enum FamilyWorldOutcome
-    {
-        /// <summary>The mapper refused the query (a character it cannot score).</summary>
-        Rejected,
-        /// <summary>No protein of the world, target or decoy, passed the identity gate.</summary>
-        NotLanded,
-        /// <summary>A reversed copy scored at least as well as every target (a tie goes to the decoy).</summary>
-        Decoy,
-        /// <summary>Targets won, but none of them carries a UniProt family, so no family is credited.</summary>
-        LandedNoFamily,
-        /// <summary>Targets won and at least one carries a UniProt family: the families are credited.</summary>
-        Credited,
-    }
-
-    /// <summary>One protein of the family world: its UniProt families come from its own stored evidence.</summary>
-    internal sealed class FamilyWorldProtein
-    {
-        public string Id { get; init; } = string.Empty;
-        public string Accession { get; init; } = string.Empty;
-        public string Sequence { get; init; } = string.Empty;
-        public IReadOnlyList<string> Families { get; init; } = Array.Empty<string>();
-        /// <summary>The NCBI taxon read from the header's OX=, empty when the entry has no header (a panel entry).</summary>
-        public string Taxon { get; init; } = string.Empty;
-        public bool FromPanel { get; init; }
-    }
-
-    /// <summary>The families one sequence was credited to, and the families whose reversed copies beat it.</summary>
-    internal sealed class FamilyWorldCredit
-    {
-        public FamilyWorldOutcome Outcome { get; init; }
-        public SortedSet<string> Families { get; init; } = FamilyWorld.NewFamilySet();
-        public SortedSet<string> DecoySourceFamilies { get; init; } = FamilyWorld.NewFamilySet();
-    }
-
-    /// <summary>
-    /// The family world as B1 tests it: every protein of a family-world file (its own entries and its stored
-    /// reference panel), each labelled with the UniProt families of its own evidence, searched with its
-    /// reversed copies as decoys. A hit credits the FAMILIES of the winning target proteins, never a protein.
-    /// Nothing here names a family: the labels are whatever UniProt's similarity text said.
-    /// </summary>
-    internal sealed class FamilyWorld
-    {
-        private static readonly Regex TaxonField = new Regex(@"(?:^|\s)OX=(\d+)", RegexOptions.CultureInvariant);
-        private readonly Dictionary<string, FamilyWorldProtein> byId;
-
-        private FamilyWorld(List<FamilyWorldProtein> proteins, HomologyDatabase database)
-        {
-            Proteins = proteins;
-            Database = database;
-            byId = proteins.ToDictionary(p => p.Id, StringComparer.Ordinal);
-        }
-
-        public IReadOnlyList<FamilyWorldProtein> Proteins { get; }
-        public HomologyDatabase Database { get; }
-
-        internal static SortedSet<string> NewFamilySet() => new SortedSet<string>(StringComparer.OrdinalIgnoreCase);
-
-        /// <summary>The OX= taxon of a FASTA description, or empty.</summary>
-        public static string TaxonOf(string? description)
-        {
-            Match m = TaxonField.Match(description ?? string.Empty);
-            return m.Success ? m.Groups[1].Value : string.Empty;
-        }
-
-        /// <summary>An accession without its isoform suffix, so P12345-2 and P12345 are one protein.</summary>
-        public static string BaseAccession(string accession)
-        {
-            int dash = accession.IndexOf('-');
-            return dash > 0 ? accession.Substring(0, dash) : accession;
-        }
-
-        public static IReadOnlyList<string> FamiliesOf(ProteinEvidence? evidence) => evidence == null
-            ? Array.Empty<string>()
-            : ReferencePanelFetcher.FamiliesOf(evidence).Distinct(StringComparer.OrdinalIgnoreCase)
-                .OrderBy(f => f, StringComparer.OrdinalIgnoreCase).ThenBy(f => f, StringComparer.Ordinal).ToArray();
-
-        /// <summary>Every protein of a family-world file before any exclusion: the file's entries (decoys left out,
-        /// the world gets its own reversed copies), then each panel entry the file does not already hold.</summary>
-        public static List<FamilyWorldProtein> Collect(FamilyClusterFile file)
-        {
-            var proteins = new List<FamilyWorldProtein>();
-            var accessions = new HashSet<string>(StringComparer.Ordinal);
-            foreach (FastaItemExtended item in file.MyExtendedFastaItems ?? new List<FastaItemExtended>())
-            {
-                string id = item?.SequenceIdentifier ?? string.Empty;
-                if (item == null || id.Length == 0 || SequenceLabels.IsDecoy(id)) continue;
-                string accession = BaseAccession(FamilyNaming.Accession(id));
-                accessions.Add(accession);
-                proteins.Add(new FamilyWorldProtein
-                {
-                    Id = id,
-                    Accession = accession,
-                    Sequence = item.Sequence ?? string.Empty,
-                    Families = FamiliesOf(item.Evidence),
-                    Taxon = TaxonOf(item.Description),
-                });
-            }
-            foreach (PanelEntry entry in file.EvidenceSource?.ReferencePanel?.Entries ?? new List<PanelEntry>())
-            {
-                string accession = BaseAccession(entry.Accession);
-                if (!accessions.Add(accession)) continue;
-                proteins.Add(new FamilyWorldProtein
-                {
-                    Id = "panel|" + entry.Accession,
-                    Accession = accession,
-                    Sequence = entry.Sequence,
-                    Families = FamiliesOf(entry.Evidence),
-                    FromPanel = true,
-                });
-            }
-            return proteins;
-        }
-
-        /// <summary>The searchable world: the kept proteins and one reversed copy of each.</summary>
-        public static FamilyWorld Build(IEnumerable<FamilyWorldProtein> proteins)
-        {
-            List<FamilyWorldProtein> kept = proteins.Where(p => p.Sequence.Length > 0).ToList();
-            var entries = new List<(string Id, string Sequence)>(kept.Count * 2);
-            foreach (FamilyWorldProtein p in kept) entries.Add((p.Id, p.Sequence));
-            foreach (FamilyWorldProtein p in kept)
-            {
-                char[] reversed = p.Sequence.ToCharArray();
-                Array.Reverse(reversed);
-                entries.Add((SequenceLabels.DecoyPrefix + p.Id, new string(reversed)));
-            }
-            return new FamilyWorld(kept, HomologyDatabase.Build(entries));
-        }
-
-        /// <summary>The de novo side of the production attribution (SearchCuration): every target past the
-        /// identity gate after the target-decoy competition, no cut at the mapper's top three.</summary>
-        public static HomologyOptions DeNovoOptions()
-        {
-            var options = new HomologyOptions { TopHitsPerPeptide = int.MaxValue };
-            return options;
-        }
-
-        /// <summary>The identified side of the production attribution: only the proteins tied at the best score.</summary>
-        public static HomologyOptions IdentifiedOptions()
-        {
-            HomologyOptions options = DeNovoOptions();
-            options.BestScoreOnly = true;
-            return options;
-        }
-
-        public FamilyWorldCredit Credit(HomologyResult result)
-        {
-            if (result.IsRejected) return new FamilyWorldCredit { Outcome = FamilyWorldOutcome.Rejected };
-            if (result.Hits.Count == 0) return new FamilyWorldCredit { Outcome = FamilyWorldOutcome.NotLanded };
-            if (result.Hits.All(h => h.IsDecoy))
-            {
-                SortedSet<string> sources = NewFamilySet();
-                foreach (HomologyHit hit in result.Hits)
-                    if (byId.TryGetValue(hit.ProteinId.Substring(SequenceLabels.DecoyPrefix.Length), out FamilyWorldProtein? source))
-                        sources.UnionWith(source.Families);
-                return new FamilyWorldCredit { Outcome = FamilyWorldOutcome.Decoy, DecoySourceFamilies = sources };
-            }
-            SortedSet<string> families = NewFamilySet();
-            foreach (HomologyHit hit in result.Hits)
-                if (!hit.IsDecoy && byId.TryGetValue(hit.ProteinId, out FamilyWorldProtein? protein)) families.UnionWith(protein.Families);
-            return new FamilyWorldCredit
-            {
-                Outcome = families.Count == 0 ? FamilyWorldOutcome.LandedNoFamily : FamilyWorldOutcome.Credited,
-                Families = families,
-            };
-        }
-
-        /// <summary>Right only when every credited family is one of the known ones: a tag credited to its own
-        /// family and to another one is counted wrong, because the other family would receive its signal.</summary>
-        public static bool IsRight(FamilyWorldCredit credit, IReadOnlyCollection<string> known) =>
-            credit.Outcome == FamilyWorldOutcome.Credited && known.Count > 0
-            && credit.Families.All(f => known.Contains(f, StringComparer.OrdinalIgnoreCase));
-
-        public static string Join(IEnumerable<string> families) => string.Join("; ",
-            families.OrderBy(f => f, StringComparer.OrdinalIgnoreCase).ThenBy(f => f, StringComparer.Ordinal));
-    }
-
     internal enum FamilyWorldVerdict { Pass, Between, Kill }
 
     /// <summary>
@@ -219,6 +42,11 @@ namespace FamilyQuant.Tests
         internal const double KillDecoyRate = 0.20;
 
         private const string UniProt = "https://rest.uniprot.org/";
+
+        /// <summary>B1's settings: no minimum tag length and every family of the world creditable. The product's
+        /// defaults are D11's (<see cref="FamilyWorldOptions"/>).</summary>
+        private static FamilyWorldOptions B1Options(FamilyWorld world) =>
+            new FamilyWorldOptions { MinimumTagLength = 0, CreditableFamilies = world.Families };
 
         internal static FamilyWorldVerdict Verdict(double rightRate, double landedFraction, double decoyRate)
         {
@@ -338,7 +166,7 @@ namespace FamilyQuant.Tests
             // found by the production identified rule (the proteins tied at the best score).
             HomologyDatabase sampleDatabase = HomologyDatabase.Build(sampleItems);
             var identifiedHits = HomologyMapper.Search(pairs.Values.Select(p => p.Identified).Distinct(StringComparer.Ordinal), sampleDatabase,
-                    FamilyWorld.IdentifiedOptions())
+                    new HomologyOptions { TopHitsPerPeptide = int.MaxValue, BestScoreOnly = true })
                 .Where(r => !r.IsRejected).ToDictionary(r => r.NormalizedPeptide, StringComparer.Ordinal);
             foreach (KnownPair pair in pairs.Values)
             {
@@ -367,7 +195,10 @@ namespace FamilyQuant.Tests
             Line("known_pairs_all", N0(pairs.Count));
             Line("known_pairs", N0(known.Count));
 
-            var speciesRun = RunKnown("species", "", pairs.Values.ToList(), known, FamilyWorld.Build(withoutSpecies), outDir, Log, Line);
+            // The families the world was gathered for: the panel's, read from the file. D11 credits only these.
+            IReadOnlyList<string> scopeFamilies = worldFile.EvidenceSource?.ReferencePanel?.Families ?? new List<string>();
+            FamilyWorld knownWorld = FamilyWorld.Build(withoutSpecies, scopeFamilies);
+            var speciesRun = RunKnown("species", "", pairs.Values.ToList(), known, knownWorld, outDir, Log, Line);
             double rightRate = speciesRun.RightRate;
             if (genus != null)
             {
@@ -375,7 +206,7 @@ namespace FamilyQuant.Tests
                 Line("genus", string.Join(",", genera.Select(g => g.Id + " " + g.Name)));
                 List<FamilyWorldProtein> withoutGenus = Without(genus, "genus " + string.Join(", ", genera.Select(g => g.Name)));
                 Line("world_without_genus", N0(withoutGenus.Count));
-                RunKnown("genus (ungated)", "_genus", pairs.Values.ToList(), known, FamilyWorld.Build(withoutGenus), outDir, Log, Line);
+                RunKnown("genus (ungated)", "_genus", pairs.Values.ToList(), known, FamilyWorld.Build(withoutGenus, scopeFamilies), outDir, Log, Line);
             }
             else Console.WriteLine("        no genus above the sample's taxa in UniProt's lineage; the genus run is skipped");
 
@@ -410,14 +241,22 @@ namespace FamilyQuant.Tests
                 residualEnvelope.Equals(first.UnattributedDeNovoEnvelopeReferenceCalibrated) && residual.Count == first.UnattributedDeNovoPeptides,
                 R(residualEnvelope) + " vs " + R(first.UnattributedDeNovoEnvelopeReferenceCalibrated));
 
-            FamilyWorld coverageWorld = FamilyWorld.Build(all);
-            List<string> residualSequences = residual.Select(r => r.Sequence).Where(s => s.Length > 0).Distinct(StringComparer.Ordinal).ToList();
-            Log("whole world: " + N(coverageWorld.Proteins.Count) + " targets and as many reversed copies; searching " + N(residualSequences.Count) + " sequences");
-            Dictionary<string, FamilyWorldCredit> residualCredit = HomologyMapper.Search(residualSequences, coverageWorld.Database, FamilyWorld.DeNovoOptions())
-                .ToDictionary(r => r.IsRejected ? r.Peptide : r.NormalizedPeptide, coverageWorld.Credit, StringComparer.Ordinal);
+            // The quantitation seam must hand the second pass exactly this residual, in this order.
+            FamilyPeptideAttribution firstPass = FamilyEnvelopeQuant.AttributePeptides(peptides, attribution);
+            check("family world: the quantitation seam's unattributed de novo peptides are the walked residual, in order",
+                firstPass.UnattributedDeNovoPeptides.Count == residual.Count
+                && firstPass.UnattributedDeNovoPeptides.Select((p, i) => ReferenceEquals(p, residual[i].Peptide)).All(same => same),
+                N(firstPass.UnattributedDeNovoPeptides.Count) + " vs " + N(residual.Count));
+
+            // B1's coverage through the product pass itself (FamilyWorldPass), under B1's settings; the tally below is
+            // the checker's own and must agree with it to the last bit.
+            FamilyWorld coverageWorld = FamilyWorld.Build(all, scopeFamilies);
+            Log("whole world: " + N(coverageWorld.Proteins.Count) + " targets and as many reversed copies; searching " +
+                N(residual.Select(r => r.Sequence).Where(s => s.Length > 0).Distinct(StringComparer.Ordinal).Count()) + " sequences under B1's settings");
+            FamilyWorldPassResult b1Pass = FamilyWorldPass.Run(firstPass, coverageWorld, B1Options(coverageWorld));
             Log("residual searched");
-            FamilyWorldCredit CreditOf(string sequence) =>
-                sequence.Length == 0 ? new FamilyWorldCredit { Outcome = FamilyWorldOutcome.Rejected } : residualCredit[sequence];
+            Dictionary<string, FamilyWorldCredit> residualCredit = b1Pass.Sequences.ToDictionary(s => s.Sequence, s => s.Credit, StringComparer.Ordinal);
+            FamilyWorldCredit CreditOf(string sequence) => residualCredit[sequence];
 
             var envelopeBy = new Dictionary<FamilyWorldOutcome, double>();
             var peptidesBy = new Dictionary<FamilyWorldOutcome, int>();
@@ -447,8 +286,16 @@ namespace FamilyQuant.Tests
             double landedFraction = residualEnvelope <= 0 ? 0 : credited / residualEnvelope;
             double decoyRate = credited <= 0 ? double.PositiveInfinity : decoy / credited;
             double closure = envelopeBy.Values.Sum();
-            check("family world: the five outcomes close on the residual",
+            check("family world: the outcomes close on the residual",
                 Math.Abs(closure - residualEnvelope) <= 1e-9 * Math.Max(1, residualEnvelope) && peptidesBy.Values.Sum() == residual.Count, R(closure));
+            check("family world: the product pass gives B1's checker the same numbers, bit for bit",
+                b1Pass.ResidualEnvelope.Equals(residualEnvelope) && b1Pass.ResidualPeptides == residual.Count
+                && Enum.GetValues<FamilyWorldOutcome>().All(o => b1Pass.Envelope(o).Equals(envelopeBy.GetValueOrDefault(o))
+                    && b1Pass.Peptides(o) == peptidesBy.GetValueOrDefault(o))
+                && b1Pass.Families.Count == coverageBy.Count
+                && b1Pass.Families.All(f => coverageBy.TryGetValue(f.Family, out CoverageTally? t) && t.Envelope.Equals(f.CreditedEnvelope)
+                    && t.UniqueEnvelope.Equals(f.UniqueEnvelope) && t.Peptides == f.Peptides && t.DecoyEnvelope.Equals(f.DecoyEnvelope)),
+                N(b1Pass.Families.Count) + " families");
 
             Console.WriteLine("        COVERAGE (the unattributed de novo reference-calibrated envelope, " + N(residual.Count) + " peptides)");
             foreach (FamilyWorldOutcome o in Enum.GetValues<FamilyWorldOutcome>())
@@ -478,7 +325,6 @@ namespace FamilyQuant.Tests
             Line("decoy_rate", R(decoyRate));
             Line("right_rate", R(rightRate));
             Line("verdict", verdict.ToString().ToUpperInvariant());
-            Write(outDir, "family_world_summary.tsv", summary.ToString());
 
             var coverageCsv = new StringBuilder("family,credited_envelope,unique_envelope,peptides,decoy_envelope,share_of_residual\n");
             foreach (var (family, t) in coverageBy)
@@ -605,18 +451,110 @@ namespace FamilyQuant.Tests
             }
             Write(outDir, "family_world_gate_study.csv", studyCsv.ToString());
             Write(outDir, "family_world_gate_study_by_family.csv", studyFamilyCsv.ToString());
+
+            // ---------------------------------------------------------------- the product pass under D11
+            // What B5 ships: a tag needs at least 9 residues and only the families in scope can be credited. The
+            // coverage is the product pass itself. The known answers are credited again under the same rule from the
+            // searches above, because a search does not depend on the rule that reads it.
+            var d11 = new FamilyWorldOptions();
+            Console.WriteLine();
+            Log("product pass (D11): tags of at least " + N(d11.MinimumTagLength) + " residues, " + N(coverageWorld.ScopeFamilies.Count) +
+                " families in scope; searching");
+            FamilyWorldPassResult pass = FamilyWorldPass.Run(firstPass, coverageWorld, d11);
+            Log("product pass searched");
+            Console.WriteLine("        PRODUCT PASS (D11) on the unattributed de novo envelope (" + FamilyWorldPass.RuleText(pass) + ")");
+            foreach (FamilyWorldOutcome o in Enum.GetValues<FamilyWorldOutcome>())
+                Console.WriteLine("          " + o + ": " + P(pass.ResidualEnvelope <= 0 ? 0 : pass.Envelope(o) / pass.ResidualEnvelope) +
+                    " of the residual, " + N(pass.Peptides(o)) + " peptides");
+            Console.WriteLine("          landed on a family in scope: " + P(pass.LandedFraction) + "; decoys as a share of it: " + P(pass.DecoyRate) +
+                "; shared between families: " + P(pass.SharedEnvelope / pass.ResidualEnvelope) + "; credited although an out-of-scope family also matched: " +
+                P(pass.AlsoOutOfScopeEnvelope / pass.ResidualEnvelope));
+            Console.WriteLine("          by family (its own peptides; every peptide reaching it; decoys won against its reversed copies):");
+            foreach (FamilyWorldFamilyRow f in pass.Families.Take(20))
+                Console.WriteLine("            " + f.Family + ": " + P(f.UniqueEnvelope / pass.ResidualEnvelope) + "; " + P(f.CreditedEnvelope / pass.ResidualEnvelope) +
+                    "; " + N(f.Peptides) + " peptides; decoys " + P(f.DecoyEnvelope / pass.ResidualEnvelope));
+
+            double passClosure = pass.Families.Sum(f => f.UniqueEnvelope) + pass.SharedEnvelope
+                + Enum.GetValues<FamilyWorldOutcome>().Where(o => o != FamilyWorldOutcome.Credited).Sum(o => pass.Envelope(o));
+            check("family world: the product pass's family parts, shared row and other outcomes close on the residual",
+                Math.Abs(passClosure - pass.ResidualEnvelope) <= 1e-9 * Math.Max(1, pass.ResidualEnvelope) && pass.ResidualEnvelope.Equals(residualEnvelope),
+                R(passClosure) + " vs " + R(pass.ResidualEnvelope));
+            check("family world: the product pass credits families in scope only and searches no tag under the minimum",
+                pass.Families.All(f => coverageWorld.ScopeFamilies.Contains(f.Family, StringComparer.OrdinalIgnoreCase))
+                && pass.Peptides(FamilyWorldOutcome.TooShort) == residual.Count(r => r.Sequence.Length > 0 && r.Sequence.Length < d11.MinimumTagLength),
+                N(pass.Families.Count) + " families");
+            // With every family creditable, the pass at 9 residues is the study's row at 9: what D11's scope rule
+            // takes away is exactly what it moves to "out of scope".
+            double study9Landed = 0, study9Decoys = 0;
+            foreach (var (peptide, sequence) in residual)
+            {
+                if (sequence.Length < d11.MinimumTagLength) continue;
+                FamilyWorldOutcome o = CreditOf(sequence).Outcome;
+                if (o == FamilyWorldOutcome.Credited) study9Landed += peptide.ReferenceCalibratedEnvelope;
+                else if (o == FamilyWorldOutcome.Decoy) study9Decoys += peptide.ReferenceCalibratedEnvelope;
+            }
+            check("family world: the product pass agrees with the study's 9-residue row once the scope rule is undone",
+                Math.Abs(pass.Envelope(FamilyWorldOutcome.Credited) + pass.Envelope(FamilyWorldOutcome.OutOfScope) - study9Landed) <= 1e-9 * Math.Max(1, study9Landed)
+                && Math.Abs(pass.Envelope(FamilyWorldOutcome.Decoy) - study9Decoys) <= 1e-9 * Math.Max(1, study9Decoys),
+                R(pass.Envelope(FamilyWorldOutcome.Credited) + pass.Envelope(FamilyWorldOutcome.OutOfScope)) + " vs " + R(study9Landed));
+            Write(outDir, "family_world_pass.csv", FamilyWorldPass.BuildCsv(pass));
+            Line("d11_minimum_tag_length", N0(pass.MinimumTagLength));
+            Line("d11_families_in_scope", N0(pass.CreditableFamilies.Count));
+            Line("d11_world_fingerprint", pass.WorldFingerprint);
+            foreach (FamilyWorldOutcome o in Enum.GetValues<FamilyWorldOutcome>()) Line("d11_residual_" + o + "_envelope", R(pass.Envelope(o)));
+            Line("d11_shared_envelope", R(pass.SharedEnvelope));
+            Line("d11_landed_fraction", R(pass.LandedFraction));
+            Line("d11_decoy_rate", R(pass.DecoyRate));
+
+            Dictionary<string, FamilyWorldCredit> d11Credits = speciesRun.Results.ToDictionary(kv => kv.Key,
+                kv => knownWorld.Credit(kv.Value, knownWorld.ScopeFamilies, d11.MinimumTagLength), StringComparer.Ordinal);
+            bool D11Landed(KnownPair p) => d11Credits[p.Tag].Outcome == FamilyWorldOutcome.Credited;
+            bool D11Right(KnownPair p) => FamilyWorld.IsRight(d11Credits[p.Tag], p.Known);
+            string D11Rate(IEnumerable<KnownPair> set)
+            {
+                List<KnownPair> landedSet = set.Where(D11Landed).ToList();
+                int rightCount = landedSet.Count(D11Right);
+                return N(rightCount) + " of " + N(landedSet.Count) + (landedSet.Count > 0 ? " (" + P(rightCount / (double)landedSet.Count) + ")" : "");
+            }
+            Console.WriteLine("        KNOWN ANSWERS UNDER D11, world without the species (" + N(known.Count) + " pairs)");
+            foreach (FamilyWorldOutcome o in Enum.GetValues<FamilyWorldOutcome>())
+                Console.WriteLine("          " + o + ": " + N(known.Count(p => d11Credits[p.Tag].Outcome == o)));
+            Console.WriteLine("          right among landed: pooled " + D11Rate(known) + "; table half " + D11Rate(halves[0]) + "; held-out half " + D11Rate(halves[1]));
+            List<string> d11Foreign = known.Where(D11Landed).SelectMany(p => d11Credits[p.Tag].Families).Where(f => !knownFamilies.Contains(f)).ToList();
+            Console.WriteLine("          credits to families with no known answer: " + N(d11Foreign.Count) + " to " +
+                N(d11Foreign.Distinct(StringComparer.OrdinalIgnoreCase).Count()) + " families");
+            Console.WriteLine("          by family with at least 10 known pairs (right among landed, pooled):");
+            foreach (string family in knownFamilies.Where(f => known.Count(p => p.Known.Contains(f)) >= 10)
+                         .OrderByDescending(f => known.Count(p => p.Known.Contains(f))).ThenBy(f => f, StringComparer.Ordinal))
+                Console.WriteLine("            " + family + ": " + D11Rate(known.Where(p => p.Known.Contains(family))));
+            int d11Landed = known.Count(D11Landed), d11Right = known.Count(D11Right);
+            Line("d11_known_landed", N0(d11Landed));
+            Line("d11_known_right", N0(d11Right));
+            Line("d11_known_right_rate", R(d11Landed == 0 ? 0 : d11Right / (double)d11Landed));
+            Line("d11_known_unknown_family_credits", N0(d11Foreign.Count));
+            var d11Csv = new StringBuilder("tag,identified,half,known_families,outcome,credited_families,out_of_scope_families,right\n");
+            foreach (KnownPair p in known)
+            {
+                FamilyWorldCredit credit = d11Credits[p.Tag];
+                d11Csv.Append(Csv(p.Tag, p.Identified, HalfOf(p) == 0 ? "table" : "heldout", FamilyWorld.Join(p.Known), credit.Outcome.ToString(),
+                    FamilyWorld.Join(credit.Families), FamilyWorld.Join(credit.OutOfScopeFamilies), D11Right(p) ? "1" : "0"));
+            }
+            Write(outDir, "family_world_known_answers_d11.csv", d11Csv.ToString());
+            Write(outDir, "family_world_summary.tsv", summary.ToString());
             Log("written to " + outDir);
         }
 
-        /// <summary>One known-answer run against one world. Returns the right rate among the landed pairs and the
-        /// credit of every tag.</summary>
-        private static (double RightRate, Dictionary<string, FamilyWorldCredit> Credits) RunKnown(string label, string suffix, List<KnownPair> pairs, List<KnownPair> known, FamilyWorld world,
+        /// <summary>One known-answer run against one world, under B1's settings. Returns the right rate among the
+        /// landed pairs, the credit of every tag and its search result.</summary>
+        private static (double RightRate, Dictionary<string, FamilyWorldCredit> Credits, Dictionary<string, HomologyResult> Results) RunKnown(string label, string suffix, List<KnownPair> pairs, List<KnownPair> known, FamilyWorld world,
             string outDir, Action<string> log, Action<string, string> line)
         {
             List<string> tags = known.Select(p => p.Tag).Distinct(StringComparer.Ordinal).ToList();
             log("world without the " + label + ": " + N(world.Proteins.Count) + " targets and as many reversed copies; searching " + N(tags.Count) + " tags");
-            Dictionary<string, FamilyWorldCredit> credits = HomologyMapper.Search(tags, world.Database, FamilyWorld.DeNovoOptions())
-                .ToDictionary(r => r.IsRejected ? r.Peptide : r.NormalizedPeptide, world.Credit, StringComparer.Ordinal);
+            Dictionary<string, HomologyResult> results = HomologyMapper.Search(tags, world.Database, B1Options(world).SearchOptions())
+                .ToDictionary(r => r.IsRejected ? r.Peptide : r.NormalizedPeptide, StringComparer.Ordinal);
+            Dictionary<string, FamilyWorldCredit> credits = results.ToDictionary(kv => kv.Key,
+                kv => world.Credit(kv.Value, world.Families, 0), StringComparer.Ordinal);
             log("tags searched");
             FamilyWorldCredit CreditOf(KnownPair p) => credits[p.Tag];
             bool Landed(KnownPair p) => CreditOf(p).Outcome == FamilyWorldOutcome.Credited;
@@ -707,7 +645,7 @@ namespace FamilyQuant.Tests
             foreach (var (family, t) in byFamily)
                 familyCsv.Append(Csv(family, N0(t.Known), N0(t.KnownLanded), N0(t.KnownRight), N0(t.KnownDecoy), N0(t.Credited), N0(t.CreditedTrue)));
             Write(outDir, "family_world_known_by_family" + suffix + ".csv", familyCsv.ToString());
-            return (rightRate, credits);
+            return (rightRate, credits, results);
         }
 
         private static (int Order, string Name) LengthBin(int length) => length switch
@@ -875,6 +813,7 @@ namespace FamilyQuant.Tests
             file.MyExtendedFastaItems.Add(new FastaItemExtended { SequenceIdentifier = "sp|P10002|BETA_ONE", Description = "Beta OS=One OX=111", Sequence = beta, Evidence = Family("beta family") });
             file.MyExtendedFastaItems.Add(new FastaItemExtended { SequenceIdentifier = "tr|A0A001|ORPH_ONE", Description = "Unknown OS=One OX=111", Sequence = orphan });
             file.MyExtendedFastaItems.Add(new FastaItemExtended { SequenceIdentifier = "sp|P10003|ALPHA_TWO", Description = "Alpha OS=Two OX=222", Sequence = "WWWW" + alpha.Substring(20, 60) + "WWWW", Evidence = Family("alpha family") });
+            file.MyExtendedFastaItems.Add(new FastaItemExtended { SequenceIdentifier = "sp|P10004|DUAL_TWO", Description = "Dual OS=Two OX=222", Sequence = "YYYY" + alpha.Substring(150, 40) + "YYYY", Evidence = Family("gamma family") });
             file.MyExtendedFastaItems.Add(new FastaItemExtended { SequenceIdentifier = SequenceLabels.DecoyPrefix + "sp|P10001|ALPHA_ONE", Sequence = "AAAA" });
             file.EvidenceSource = new EvidenceProvenance
             {
@@ -890,12 +829,15 @@ namespace FamilyQuant.Tests
 
             List<FamilyWorldProtein> all = FamilyWorld.Collect(file);
             check("family world fixture: the file's decoys are left out and a panel entry the file holds is not repeated",
-                all.Count == 5 && all.Count(p => p.FromPanel) == 1 && all.Single(p => p.FromPanel).Accession == "Q20001", all.Count.ToString(CultureInfo.InvariantCulture));
+                all.Count == 6 && all.Count(p => p.FromPanel) == 1 && all.Single(p => p.FromPanel).Accession == "Q20001", all.Count.ToString(CultureInfo.InvariantCulture));
             check("family world fixture: the taxon comes from OX= and a panel entry has none",
                 all.Single(p => p.Accession == "P10003").Taxon == "222" && all.Single(p => p.FromPanel).Taxon.Length == 0, null);
 
-            FamilyWorld world = FamilyWorld.Build(all);
-            FamilyWorldCredit Search(FamilyWorld w, string tag) => w.Credit(HomologyMapper.SearchOne(tag, w.Database, FamilyWorld.DeNovoOptions()));
+            // B1's settings: every family creditable, no minimum length. The scope (alpha only) is D11's.
+            FamilyWorld world = FamilyWorld.Build(all, new[] { "alpha family" });
+            HomologyResult Find(FamilyWorld w, string tag) => HomologyMapper.SearchOne(tag, w.Database, new FamilyWorldOptions().SearchOptions());
+            FamilyWorldCredit Search(FamilyWorld w, string tag) => w.Credit(Find(w, tag), w.Families, 0);
+            FamilyWorldCredit D11(FamilyWorld w, string tag) => w.Credit(Find(w, tag), w.ScopeFamilies, FamilyWorldOptions.DefaultMinimumTagLength);
             string alphaTag = alpha.Substring(30, 12);
             string betaTag = beta.Substring(20, 12);
             string orphanTag = orphan.Substring(10, 12);
@@ -911,7 +853,7 @@ namespace FamilyQuant.Tests
             check("family world fixture: a tag found nowhere does not land", Search(world, "DDDDDDDDDDDD").Outcome == FamilyWorldOutcome.NotLanded, null);
             check("family world fixture: a tag the mapper cannot read is rejected, not dropped", Search(world, "PEP7IDE").Outcome == FamilyWorldOutcome.Rejected, null);
 
-            FamilyWorld withoutOne = FamilyWorld.Build(all.Where(p => p.Taxon != "111"));
+            FamilyWorld withoutOne = FamilyWorld.Build(all.Where(p => p.Taxon != "111"), world.ScopeFamilies);
             FamilyWorldCredit cross = Search(withoutOne, alphaTag);
             check("family world fixture: with its own species out, the alpha tag finds alpha through the other species",
                 cross.Outcome == FamilyWorldOutcome.Credited && FamilyWorld.Join(cross.Families) == "alpha family", cross.Outcome.ToString());
@@ -923,6 +865,97 @@ namespace FamilyQuant.Tests
             check("family world fixture: right means every credited family is known; a second family makes it wrong",
                 FamilyWorld.IsRight(a, new[] { "Alpha family" }) && !FamilyWorld.IsRight(twoFamilies, new[] { "alpha family" })
                 && FamilyWorld.IsRight(twoFamilies, new[] { "alpha family", "beta family" }) && !FamilyWorld.IsRight(a, Array.Empty<string>()), null);
+
+            // ---- D11: a tag needs 9 residues, and only families in scope are credited (scope here: alpha)
+            check("family world fixture (D11): a 9-residue alpha tag is credited, an 8-residue one is too short",
+                D11(world, alpha.Substring(40, 9)).Outcome == FamilyWorldOutcome.Credited
+                && D11(world, alpha.Substring(60, 8)).Outcome == FamilyWorldOutcome.TooShort, null);
+            FamilyWorldCredit outOfScope = D11(world, betaTag);
+            check("family world fixture (D11): a tag landing only on a family out of scope credits nothing and names it",
+                outOfScope.Outcome == FamilyWorldOutcome.OutOfScope && outOfScope.Families.Count == 0
+                && FamilyWorld.Join(outOfScope.OutOfScopeFamilies) == "beta family", outOfScope.Outcome.ToString());
+            string dualTag = alpha.Substring(160, 12);
+            FamilyWorldCredit dual = D11(world, dualTag);
+            check("family world fixture (D11): a tag reaching alpha and an out-of-scope family credits alpha alone and keeps the other apart",
+                dual.Outcome == FamilyWorldOutcome.Credited && FamilyWorld.Join(dual.Families) == "alpha family"
+                && FamilyWorld.Join(dual.OutOfScopeFamilies) == "gamma family"
+                && FamilyWorld.Join(Search(world, dualTag).Families) == "alpha family; gamma family", FamilyWorld.Join(dual.Families));
+            check("family world fixture: a world built from a file takes its panel's families as the scope",
+                FamilyWorld.FromFile(new FamilyClusterFile { EvidenceSource = new EvidenceProvenance
+                    { ReferencePanel = new ReferencePanel { Families = { "beta family", "Alpha family" } } } }).ScopeFamilies.SequenceEqual(new[] { "Alpha family", "beta family" }), null);
+
+            // ---- the pass itself, on quant rows: first pass on the sample's database, second on the world
+            const string sampleProtein = "MHHHHHHWWWWKRRRRMMMMNNNNKPPPPQQQQSSSSTTTTK";
+            var sample = new FamilyClusterFile();
+            sample.MyExtendedFastaItems.Add(new FastaItemExtended { SequenceIdentifier = "sp|S00001|SAMP_ONE", Description = "Sample OS=One OX=111", Sequence = sampleProtein, UserID = 7 });
+            int scan = 0;
+            QuantRow Row(string side, string sequence, double m0, double envelope) => new QuantRow
+            {
+                Side = side, Run = "r1", Scan = ++scan, Charge = 2, Sequence = sequence,
+                PrecursorMz = Math.Round(500.0 + scan * 1e-3, 5), IsotopeAreas = new[] { m0, 0.0, 0.0, 0.0 }, EnvelopeSum = envelope,
+            };
+            var rows = new List<QuantRow>
+            {
+                Row(NativeQuantFractions.SideIdentified, "HHHHHHWWWWK", 10, 30),
+                Row(NativeQuantFractions.SideDeNovo, "RRRRMMMMNNNNK", 4, 9),        // first pass: the sample's own family
+                Row(NativeQuantFractions.SideDeNovo, alpha.Substring(40, 9), 5, 11), // credited to alpha
+                Row(NativeQuantFractions.SideDeNovo, dualTag, 6, 13),                // credited to alpha, gamma kept apart
+                Row(NativeQuantFractions.SideDeNovo, alpha.Substring(60, 8), 7, 15), // too short
+                Row(NativeQuantFractions.SideDeNovo, betaTag, 8, 17),                // out of scope
+                Row(NativeQuantFractions.SideDeNovo, decoyTag, 9, 19),               // won by a reversed copy
+                Row(NativeQuantFractions.SideDeNovo, "DDDDDDDDDDDD", 3, 7),          // not in the world
+            };
+            FamilyWorldPassResult pass = FamilyWorldPass.Run(rows, sample, world);
+            List<NativePeptideQuant> prepared = FamilyEnvelopeQuant.PreparePeptides(rows);
+            double EnvelopeOf(params string[] sequences) => prepared.Where(p => p.Side == NativeQuantFractions.SideDeNovo
+                && sequences.Select(DeNovoReconciler.NormalizeSequence).Contains(DeNovoReconciler.NormalizeSequence(p.Sequence))).Sum(p => p.ReferenceCalibratedEnvelope);
+            string[] residualSequences = { alpha.Substring(40, 9), dualTag, alpha.Substring(60, 8), betaTag, decoyTag, "DDDDDDDDDDDD" };
+            check("family world pass fixture: the first pass keeps its own family and the second pass gets the other six de novo peptides",
+                pass.ResidualPeptides == 6 && Math.Abs(pass.ResidualEnvelope - EnvelopeOf(residualSequences)) < 1e-9,
+                pass.ResidualPeptides.ToString(CultureInfo.InvariantCulture));
+            check("family world pass fixture: each peptide lands in its outcome under D11",
+                pass.Peptides(FamilyWorldOutcome.Credited) == 2 && pass.Peptides(FamilyWorldOutcome.TooShort) == 1
+                && pass.Peptides(FamilyWorldOutcome.OutOfScope) == 1 && pass.Peptides(FamilyWorldOutcome.Decoy) == 1
+                && pass.Peptides(FamilyWorldOutcome.NotLanded) == 1 && pass.Peptides(FamilyWorldOutcome.LandedNoFamily) == 0, null);
+            FamilyWorldFamilyRow alphaRow = pass.Families.Single();
+            check("family world pass fixture: alpha holds both credited peptides, its decoy and nothing of beta or gamma",
+                alphaRow.Family == "alpha family" && alphaRow.Peptides == 2 && alphaRow.UniquePeptides == 2
+                && Math.Abs(alphaRow.UniqueEnvelope - pass.Envelope(FamilyWorldOutcome.Credited)) < 1e-9
+                && Math.Abs(alphaRow.DecoyEnvelope - pass.Envelope(FamilyWorldOutcome.Decoy)) < 1e-9
+                && Math.Abs(pass.AlsoOutOfScopeEnvelope - EnvelopeOf(dualTag)) < 1e-9, null);
+            FamilyWorldSequenceRow dualRow = pass.Sequences.Single(r => r.Sequence == DeNovoReconciler.NormalizeSequence(dualTag));
+            check("family world pass fixture: each tag keeps the world proteins it hit, and a family row only its own",
+                alphaRow.Proteins.SequenceEqual(new[] { "sp|P10001|ALPHA_ONE", "sp|P10003|ALPHA_TWO" })
+                && dualRow.Credit.Proteins.SequenceEqual(new[] { "sp|P10001|ALPHA_ONE", "sp|P10004|DUAL_TWO" })
+                && world.Protein("sp|P10004|DUAL_TWO")?.Sequence.Length == 48 && world.Protein("nothing") == null,
+                string.Join(" ", alphaRow.Proteins));
+            double closed = pass.Families.Sum(f => f.UniqueEnvelope) + pass.SharedEnvelope
+                + Enum.GetValues<FamilyWorldOutcome>().Where(o => o != FamilyWorldOutcome.Credited).Sum(o => pass.Envelope(o));
+            check("family world pass fixture: family parts, shared row and the other outcomes close on the residual",
+                Math.Abs(closed - pass.ResidualEnvelope) < 1e-9 && pass.MinimumTagLength == 9 && pass.CreditableFamilies.SequenceEqual(new[] { "alpha family" }), null);
+            string csv = FamilyWorldPass.BuildCsv(pass);
+            string[] csvLines = csv.TrimEnd('\n').Split('\n');
+            check("family world pass fixture: the export has one family row, seven closing rows and the rules on every row",
+                csvLines.Length == 9 && csvLines.Skip(1).All(l => l.Contains("tags of at least 9 residues", StringComparison.Ordinal)
+                    && l.Contains("only families in scope can be credited (1)", StringComparison.Ordinal)), csvLines.Length.ToString(CultureInfo.InvariantCulture));
+            CultureInfo culture = CultureInfo.CurrentCulture;
+            string again, brazil;
+            try
+            {
+                again = FamilyWorldPass.BuildCsv(FamilyWorldPass.Run(rows, sample, world));
+                CultureInfo.CurrentCulture = CultureInfo.GetCultureInfo("pt-BR");
+                brazil = FamilyWorldPass.BuildCsv(FamilyWorldPass.Run(rows, sample, world));
+            }
+            finally { CultureInfo.CurrentCulture = culture; }
+            check("family world pass fixture: two runs give the same export, byte for byte, under pt-BR too", again == csv && brazil == csv, null);
+            bool refused = false;
+            try { FamilyWorldPass.Run(rows, sample, FamilyWorld.Build(all, Array.Empty<string>())); }
+            catch (InvalidOperationException) { refused = true; }
+            check("family world pass fixture: a world with no families in scope is refused, never credited to every family", refused, null);
+            FamilyWorldPassResult b1 = FamilyWorldPass.Run(rows, sample, world, new FamilyWorldOptions { MinimumTagLength = 0, CreditableFamilies = world.Families });
+            check("family world pass fixture: with B1's settings the short tag is searched and beta and gamma are credited",
+                b1.Peptides(FamilyWorldOutcome.TooShort) == 0 && b1.Peptides(FamilyWorldOutcome.OutOfScope) == 0
+                && b1.Families.Select(f => f.Family).OrderBy(f => f, StringComparer.Ordinal).SequenceEqual(new[] { "alpha family", "beta family", "gamma family" }), null);
 
             check("family world fixture: the verdict at the roadmap's bars",
                 Verdict(0.95, 0.20, 0.05) == FamilyWorldVerdict.Pass
