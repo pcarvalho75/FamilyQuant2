@@ -40,6 +40,14 @@ namespace FamilyQuant.Tests
         [STAThread]   // required: the UI smoke section constructs WPF controls
         private static int Main(string[] args)
         {
+            if (args.Contains("--test-evidence-fetch-atomic", StringComparer.Ordinal))
+            {
+                EnsureApplication();
+                EvidenceFetchAtomicTests();
+                EvidenceFetchCoordinatorTests();
+                Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
+                return failed == 0 ? 0 : 1;
+            }
             if (args.Length > 0 && args[0] == "--evidence-delivery") return EvidenceDeliveryCommand(args);
             if (args.Contains("--test-evidence-delivery", StringComparer.Ordinal))
             {
@@ -755,6 +763,7 @@ namespace FamilyQuant.Tests
             ProteinDomainsTests(workDir);
             EvidenceStorageTests(workDir);
             EvidenceFetchTests();
+            EvidenceFetchAtomicTests();
             EvidenceTaskTests();
             EvidenceClassifierTests();
             EvidenceDeliveryFixtureTests(workDir);
