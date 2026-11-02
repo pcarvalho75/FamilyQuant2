@@ -174,9 +174,20 @@ Break any of these and the numbers stay plausible, which is the whole problem.
 - **Families** remains `ClusterGenerationControl` over the open document. Its full layout rewrite and Evidence review are tracked by their unfinished roadmap rows; do not describe a planned review UI as shipped. Curation, locks, word/keyword grouping and quantitation semantics remain governed by their Core services and tests.
 - **Quantify** is a hosted `QuantifyControl` over `ComputeXicViewModel`. `ComputeXicWindow` remains a compatibility wrapper used by tests and overrides. A completed result attaches only to the captured open project and marks it unsaved; a failed/cancelled computation keeps prior results.
 - **Results** uses `AnalyticsControl` and `AnalyticsViewModel` to read stored quantitation, charts and explicit export choices. It can also display a completed de novo homology result without inventing quantitation. Presentation exports still live in App until the planned Reports extraction.
+  The evidence pack writes the 12 core 1920 by 1080 figures plus persisted caller-agreement,
+  source-Venn, accepted-score, variant-comparison and compact source-effect figures. Each source
+  retains its own score panel and exact CSV. The exporter refuses a plot whose source study is absent.
 - **De novo** uses a thin `DeNovoControl`, `DeNovoViewModel`/`DeNovoSession` and headless `DeNovoScreenOperations`, `DeNovoSourceImport` and `DeNovoInspectionAudit`. Import, reconciliation, review and family attribution remain; retired extraction/partition sections are replaced by Quantify/Results. Quantify and De novo receive the shared `DeNovoFilterViewModel`; changing filters prepares the next request and does not rewrite stored quantitation. Historical test seams, including `ImportOverride` and `CachePathForRunOverride`, remain in the compatibility adapter. The screen raises no MessageBox.
+  Every long operation disables the whole screen through its shared `IsBusy`/`CanEdit` state,
+  not only the part it writes. This prevents homology or other work from starting on rows an
+  in-flight import is about to replace; readiness is restored after completion or refusal.
+  `HelpContent.Build` serves the family page; `HelpContent.BuildDeNovo(Criteria, ActiveDeNovoSource)`
+  serves De novo. Only the latter quotes the historical PEAKS de-novo-only census, and only when
+  that source and its default criteria are selected, so another caller's help never inherits that baseline.
 - **Secondary views** use the tested models in `SecondaryWindows.ViewModels.cs`. Lock manager changes only the open lock set, spectrum comparison delegates exact CSV output to Core, and Text report/Help keep selectable read-only text. On-screen identity charts use `ChartPalette.UiPalette` and follow theme changes; frozen export palettes remain separate.
 - **Saving** uses `ShellDocumentState`, guarded project snapshots and verified staged output. The persisted project also runs `SavedFileCheck` on reopen. Exporting an old FCF does not clear the project's dirty state. Save/Discard/Cancel protects replacement and closing.
+- **SEPro reannotation**, through Analysis > Reannotate SEPro, writes the curated `UserID` family
+  numbers into a separate `*_regrouped.sepr2` copy, leaving the original package file untouched.
 
 The shared Core operation context supplies outcome, progress, cancellation and one final commit. It does not itself schedule synchronous work off the UI thread. The common shell busy overlay is still the S6 roadmap task; do not infer universal UI cancellation from the merged Core contract. See [CORE-OPERATIONS.md](docs/CORE-OPERATIONS.md).
 
