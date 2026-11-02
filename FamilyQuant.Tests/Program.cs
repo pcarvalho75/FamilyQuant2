@@ -201,6 +201,7 @@ namespace FamilyQuant.Tests
             EvidenceFetchAtomicTests();
             EvidenceCoverageTests();
             QueryResidueCoverageTests();
+            FamilyWorldFetchTests();
             EvidenceTaskTests();
             EvidenceClassifierTests();
             EvidenceDeliveryFixtureTests(workDir);
