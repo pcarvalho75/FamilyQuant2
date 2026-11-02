@@ -22,8 +22,10 @@ internal static partial class Program
         Check("the headline explicitly labels the primary estimate and its RAW TIC denominator",
             model.Cards[0].Title == "Primary recovery estimate" && model.Cards[0].Detail.Contains("reference-calibrated estimate")
             && model.Cards[0].Detail.Contains("RAW TIC"));
-        Check("Results keeps four quantitation exports and the homology choice with evidence-dependent availability", model.CanExport
-            && Enum.GetValues<ResultsExportKind>().Length == 5);
+        Check("Results keeps its original exports and adds the two evidence-dependent Database gap choices", model.CanExport
+            && Enum.GetValues<ResultsExportKind>().Length == 7
+            && new[] { ResultsExportKind.Summary, ResultsExportKind.Peptides, ResultsExportKind.Figures, ResultsExportKind.EvidencePack,
+                ResultsExportKind.Homology }.All(kind => Enum.IsDefined(kind)));
         model.ExportKind = ResultsExportKind.EvidencePack;
         Check("the evidence pack stays unavailable until its project evidence exists", !model.CanExport);
         model.ExportKind = ResultsExportKind.Peptides;
