@@ -80,12 +80,9 @@ public sealed class DatabaseGapViewModel
         try
         {
             FamilyWorldSnapshot stored = FamilyWorldFetcher.Stored(file);
-            // The stored snapshot has exact accession keys. Build its identity through Core, without
-            // a header parser, accession shortening, sequence substitution or a second attribution.
-            var proteins = stored.Entries.Select(entry => new FamilyWorldProtein { Id = entry.Accession, Accession = entry.Accession,
-                Sequence = entry.Sequence, Families = FamilyWorld.FamiliesOf(entry.Evidence),
-                Taxon = entry.TaxonId.ToString(CultureInfo.InvariantCulture), FromPanel = entry.FromReviewedPanel });
-            FamilyWorld world = FamilyWorld.Build(proteins, stored.Families);
+            // Use the same verified snapshot identity as the production second pass. Exact accession
+            // lookup below still refuses missing records; this does not infer aliases or new attribution.
+            FamilyWorld world = FamilyWorld.FromSnapshot(stored);
             if (!string.Equals(world.Fingerprint, summary!.WorldFingerprint, StringComparison.OrdinalIgnoreCase))
                 throw new InvalidDataException("The result fingerprint does not match the stored world. No protein was substituted.");
             if (stored.Release != summary.WorldRelease || !stored.Families.OrderBy(f => f, StringComparer.Ordinal).SequenceEqual(
@@ -135,6 +132,7 @@ public static class DatabaseGapHelp
         + "The minimum tag length and the in-scope family rule stored with the result are shown beside it and in the CSV. "
         + "The decoy rate is the reversed-copy envelope divided by the envelope credited to that family, including shared credits. "
         + "The known-answer right rate always shows its true/credited counts. "
+        + "A credit counts as right for a family when that family is among the known answers, even if the peptide was also credited to another family. "
         + "Below the stored minimum known-credit count, the evidence message replaces that rate. "
         + "The CSV comes directly from the same stored table. Suggested additions exports exact sequences of the recorded hit proteins "
         + "from the verified matching stored world. Add any candidates you accept to your database and search again in PatternLab. "
