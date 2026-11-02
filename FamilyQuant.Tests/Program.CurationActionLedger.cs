@@ -82,7 +82,7 @@ internal static partial class Program
         foreach (string path in Directory.GetFiles(output, "*", SearchOption.AllDirectories)) Artifact(path);
         Artifact(Path.GetFullPath(args[3]));
         string executed = Path.Combine(output, "executed"); Directory.CreateDirectory(executed);
-        string[] checks = ["CurationExportSnapshot.cs", "Program.CurationActionProbe.cs", "Program.CurationActionLedger.cs", "Program.Commands.CurationActions.cs", "Program.ShellProofWindows.cs"];
+        string[] checks = ["CurationExportSnapshot.cs", "Program.CurationActionProbe.cs", "Program.CurationActionLedger.cs", "Program.ShellReviewWording.cs", "Program.Commands.CurationActions.cs", "Program.ShellProofWindows.cs"];
         foreach (string check in checks)
         {
             string target = Path.Combine(executed, check); File.Copy(Path.Combine(root, "FamilyQuant.Tests", check), target); Artifact(target);
@@ -132,78 +132,6 @@ internal static partial class Program
 
     private static void CurationPendingList(string root, string output, FeatureLedger.Observation[] rows)
     {
-        var views = new[] { "FamilyQuant/ClusterGenerationControl.xaml", "FamilyQuant/CurationQuantitationPanel.xaml" }
-            .ToDictionary(path => path, path => XDocument.Load(Path.Combine(root, path)), StringComparer.Ordinal);
-        var native = new ClusterGenerationControl(new FamilyClusterFile { MyExtendedFastaItems = new()
-        { new() { SequenceIdentifier = "pending_wording_fixture", Sequence = "PEPTIDEK", UserID = 1, USearchID = 1 } } });
-        native.Measure(new System.Windows.Size(1280, 900)); native.Arrange(new System.Windows.Rect(0, 0, 1280, 900)); native.UpdateLayout();
-        string? NativeValue(string name, string property)
-        {
-            object? element = ShellMetadataSnapshot.Resolve(native, name);
-            if (element == null) return null;
-            if (property == "$type") return element.GetType().Name + " " + name;
-            var info = ShellMetadataSnapshot.Property(element.GetType(), property);
-            if (info == null || info.GetIndexParameters().Length != 0) return null;
-            object? value = info.GetValue(element);
-            return value == null ? "<null>" : value is string || value is bool || value.GetType().IsEnum || value is IFormattable
-                ? Convert.ToString(value, CultureInfo.InvariantCulture) : null;
-        }
-        var sources = Directory.GetFiles(Path.Combine(root, "FamilyQuant"), "*.cs", SearchOption.TopDirectoryOnly)
-            .Where(path => Path.GetFileName(path).StartsWith("ClusterGenerationControl", StringComparison.Ordinal)
-                || Path.GetFileName(path).StartsWith("Curation", StringComparison.Ordinal))
-            .Concat(new[] { "FamilyQuant.Core/HelpContent.cs", "FamilyQuant.Core/NormalizationMode.cs", "FamilyQuant.Core/ReportView.cs" }
-                .Select(path => Path.Combine(root, path)).Where(File.Exists))
-            .ToDictionary(path => Path.GetRelativePath(root, path).Replace('\\', '/'), File.ReadAllText, StringComparer.Ordinal);
-        string Cell(string value) => value.Replace("\r", "\\r", StringComparison.Ordinal).Replace("\n", "\\n", StringComparison.Ordinal)
-            .Replace("\t", "\\t", StringComparison.Ordinal).Replace("\u2013", "\\u2013", StringComparison.Ordinal).Replace("\u2014", "\\u2014", StringComparison.Ordinal);
-        var lines = new List<string> { "lane\trow_id\told_text\tnew_text\treason" };
-        const string windows = "FL-secondary-runtime: D:/FamilyQuant-data/out-refresh/20261102-070844-FamilyQuant-gate/secondary-runtime";
-        foreach (var row in rows.OrderBy(row => row.Id, StringComparer.Ordinal))
-        {
-            string current = "<No exact current value captured>";
-            string reason = "UNPROVED. Tracking entry for desk/Paulo; no semantic proof or DROP. ";
-            if (row.Source.EndsWith(".xaml", StringComparison.Ordinal))
-            {
-                var property = Regex.Match(row.Detail, @"^(\w+)\.(\w+) = ");
-                if (property.Success)
-                {
-                    var matches = views.Values.SelectMany(view => view.Descendants()).Where(node => node.Attributes().Any(attribute =>
-                        attribute.Name.LocalName == "Name" && attribute.Value == property.Groups[1].Value)).ToArray();
-                    if (matches.Length == 1 && matches[0].Attribute(property.Groups[2].Value) is { } value)
-                        current = property.Groups[1].Value + "." + property.Groups[2].Value + " = " + value.Value;
-                    if (NativeValue(property.Groups[1].Value, property.Groups[2].Value) is { } nativeValue)
-                        current = property.Groups[1].Value + "." + property.Groups[2].Value + " = " + nativeValue;
-                }
-                else if (row.Kind == "control")
-                {
-                    string name = row.Detail.Split(' ').Last();
-                    var matches = views.Values.SelectMany(view => view.Descendants()).Where(node => node.Attributes().Any(attribute =>
-                        attribute.Name.LocalName == "Name" && attribute.Value == name)).ToArray();
-                    if (matches.Length == 1) current = matches[0].Name.LocalName + " " + name;
-                    else current = "<Original inline/unnamed control is absent from the current curation view>";
-                    if (NativeValue(name, "$type") is { } nativeType) current = nativeType;
-                }
-                reason += "Unshown default-fixture native scalar where available, otherwise current XAML declaration/structural capture; runtime equivalence not inferred. ";
-            }
-            else if (row.Kind == "handler definition")
-            {
-                string name = Regex.Match(row.Detail, @"\b(\w+)\(").Groups[1].Value;
-                var pattern = new Regex(@"(?:private|public)\s+(?:async\s+)?void\s+" + Regex.Escape(name)
-                    + @"\s*\([^)]*\)\s*(?:=>[^;]*;|\{[^{}]*\})", RegexOptions.Singleline);
-                var match = sources.Select(source => (source.Key, Match: pattern.Match(source.Value))).FirstOrDefault(value => value.Match.Success);
-                if (match.Match != null && match.Match.Success) current = match.Key + ": " + match.Match.Value.Trim();
-                reason += "Current handler entry source capture; the displayed secondary path was not executed here. ";
-            }
-            else if (sources.Any(source => source.Value.Contains(row.Detail, StringComparison.Ordinal)))
-            {
-                current = row.Detail;
-                reason += "Exact token remains in current feature source; compiled reachability is assigned to N6a. ";
-            }
-            else reason += "No exact token at the captured feature sources; inspect as wording/fact gap. ";
-            if (row.Detail.Contains("ButtonHelp", StringComparison.Ordinal) || row.Detail.Contains("ButtonAlignSelected", StringComparison.Ordinal)
-                || row.Detail.Contains("ButtonManageLocks", StringComparison.Ordinal)) reason += windows + "; handler/window boundary tracked per M6. ";
-            lines.Add(string.Join("\t", "FQShell", row.Id, Cell(row.Detail), Cell(current), Cell(row.Source + ":" + row.Line + " " + reason)));
-        }
-        File.WriteAllLines(Path.Combine(output, "wording-for-paulo.tsv"), lines, new UTF8Encoding(false));
+        WriteShellWording(Path.Combine(output, "wording-for-paulo.tsv"), CaptureShellWording(rows));
     }
 }

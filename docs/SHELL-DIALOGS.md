@@ -86,3 +86,13 @@ selects its explicit User branch; sorting and counters are also compared. Report
 wording is outside this cohort. The optional negative control plants different CSV
 comparison bytes and must fail. Plain-text and unexecuted observations remain OPEN;
 an action does not supply a semantic proof for changed copy.
+
+The review-list producer captures current text from unshown compiled controls,
+MainWindow Help/status methods, curation Help, context-menu strings and the text-report
+view. Retained native MainWindow report captures are accepted only when both executing
+product assemblies match the captured bytes. A value that cannot be captured is written
+as exactly `no current equivalent`, with its reason. Source literals and XAML declarations
+are not substituted for current user text. These entries request a decision; they never
+mark a feature VERIFIED or approve a retirement. The list validator also requires every
+ID in the independent review's gap packet, including ReportView, GridCopy and text-report
+rows outside the original ten-row CSV cohort.

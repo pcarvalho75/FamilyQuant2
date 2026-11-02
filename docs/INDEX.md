@@ -229,6 +229,8 @@ Companion options for `--screens` are `--screen-fcf <input.fcf>`, `--screen-proj
 | `--prove-shell-main <frozen-root> <fresh-output> <date>` | Native MainWindow routes, synthetic file writes/refusals and captured dialog/report frames; own SH-main-routes candidate register |
 | `--prove-curation-actions <frozen-root> <own-frozen-host> <fixed-audit.json> <fresh-output> <date> [--negative-control]` | Native curation handlers and real synthetic CSV writes/refusals; complete frozen/current CSV comparison in two cultures; own SH-curation-actions candidate, fixed OPEN cohort only |
 | `--curation-export-snapshot <fresh-json>` | Shared current/frozen synthetic CSV and retained User sorting/counter values; no RAW computation |
+| `--shell-review-wording <review-gaps.tsv> <shared-wording.tsv> <matching-native-main-packet> <fresh-output> <date>` | Generate every requested/previous own list row from compiled/native feature text or the exact `no current equivalent` decision with a reason; never changes dispositions |
+| `--check-shell-review-list <review-gaps.tsv> <wording.tsv>` | Reject missing rows, empty values/reasons and unresolved angle-bracket placeholders in the reviewed cohort |
 | `--word-grouping-snapshot <input.fcf-or-fqproj> <output.txt>` | [WordGroupingSnapshot.cs](../FamilyQuant.Tests/WordGroupingSnapshot.cs), also linked into frozen host |
 | `--chart-export-snapshot <output-dir>` | [ChartExportSnapshot.cs](../FamilyQuant.Tests/ChartExportSnapshot.cs), synthetic chart parity fixtures |
 | `--clustering-snapshot <input.fasta> <output.tsv> <integer-identity> <fast-or-exhaustive>` | [ClusteringSnapshot.cs](../FamilyQuant.Tests/ClusteringSnapshot.cs) |
