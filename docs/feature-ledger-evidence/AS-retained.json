@@ -5,24 +5,24 @@
   "runs": [
     {
       "id": "AS-member-comparison",
-      "command": "D:\\FamilyQuant-wt\\assay\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --ledger-assay-compare D:/FamilyQuant-data/out-shell/N3/source D:/FamilyQuant-data/out-shell/N5-final-20261101-224706/audit-a/mapping.json D:/FamilyQuant-data/out-assay/n5-assay-c AS-retained \u00222026-11-02 02:02:47 -0800\u0022",
-      "executedAt": "2026-11-02 02:02:47 -0800",
-      "commit": "4fabe08823cf5117068069cddfa7788bca392727",
+      "command": "D:\\FamilyQuant-wt\\assay\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --ledger-assay-compare D:/FamilyQuant-data/out-shell/N3/source D:/FamilyQuant-data/out-shell/N5-final-20261101-224706/audit-a/mapping.json D:/FamilyQuant-data/out-assay/n6-as2-refresh AS-retained \u00222026-11-02 03:00:15 -0800\u0022",
+      "executedAt": "2026-11-02 03:00:15 -0800",
+      "commit": "bb981a89bbf74f687035360792b942d26e85511f",
       "artifacts": [
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\n5-assay-c\\comparisons.log",
+          "path": "D:\\FamilyQuant-data\\out-assay\\n6-as2-refresh\\comparisons.log",
           "sha256": "2BA3E9C10A5A4B48573D0011AF8659A534BC6E41E73896CEDC0D88C76EF250E7"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\n5-assay-c\\comparisons.json",
-          "sha256": "54484B4EC7738B02E2E6483E2F3052F96A5F415D80E678E01EF610F196C22B9D"
+          "path": "D:\\FamilyQuant-data\\out-assay\\n6-as2-refresh\\comparisons.json",
+          "sha256": "F39F563CDEC291FC64C70925AE00E999D117DFF3740B261CDD31FE08192877B8"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\n5-assay-c\\unproven.tsv",
+          "path": "D:\\FamilyQuant-data\\out-assay\\n6-as2-refresh\\unproven.tsv",
           "sha256": "C726ACB35BE1464BBCF05E657EEB804605BAC76F97338F9D6CA66047D3B76FC9"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\n5-assay-c\\counts-by-source.tsv",
+          "path": "D:\\FamilyQuant-data\\out-assay\\n6-as2-refresh\\counts-by-source.tsv",
           "sha256": "3F184AD48DFB161AFAD36EDC555FA20135533A366D88BB76AEA3F389796648D0"
         },
         {
@@ -30,20 +30,20 @@
           "sha256": "DE1EDBDA53D9EE54B672F5820ED85D94087F2C0671270E08CBFF3FCD02F2A352"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\n5-assay-c\\executed\\Program.LedgerAssayComparison.cs",
+          "path": "D:\\FamilyQuant-data\\out-assay\\n6-as2-refresh\\executed\\Program.LedgerAssayComparison.cs",
           "sha256": "F46525287DE0A489203762FD80BB8D014F4E7E16D4DD429E1F090A4C72E223CF"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\n5-assay-c\\executed\\Program.Commands.AssayLedger.cs",
+          "path": "D:\\FamilyQuant-data\\out-assay\\n6-as2-refresh\\executed\\Program.Commands.AssayLedger.cs",
           "sha256": "389375950A482CFC10AD7055AC78CC1864118300FC0DC4281F64F59340722013"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\n5-assay-c\\executed\\LedgerMemberFactComparison.cs",
+          "path": "D:\\FamilyQuant-data\\out-assay\\n6-as2-refresh\\executed\\LedgerMemberFactComparison.cs",
           "sha256": "AE18ABC01A916A43012F3E34F1B53798FC99346FFEB21CD179CA3D8ADE5834A7"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\n5-assay-c\\executed\\FamilyQuant.Tests.dll",
-          "sha256": "E38352536D1DAB8C5FB2A5625E232C924D6422DB0C688B89C4FD6D4719D468B8"
+          "path": "D:\\FamilyQuant-data\\out-assay\\n6-as2-refresh\\executed\\FamilyQuant.Tests.dll",
+          "sha256": "7742B0F83AAE4D7BCDC9E0F8AFFE204CD18F1090700A4D9BF8E4D3704B77693E"
         }
       ],
       "workingDirectory": "D:\\FamilyQuant-wt\\assay"
@@ -558,7 +558,7 @@
         {
           "path": "FamilyQuant/DeNovo/ThreeWayWindow.cs",
           "symbol": "FamilyQuant.DeNovo.ThreeWayWindow::private static string Caption ( bool anyNegative )",
-          "sha256": "B13352B3147494C36373EA7B34AA7F9237680DE48E2E4FD7C80B7944A39EB68F"
+          "sha256": "1D679388E2600C7A40CE6B1934C6AEC2A6E2DBFC3F1B846EB358600E03A3E502"
         }
       ],
       "proofs": [],
@@ -800,7 +800,7 @@
         {
           "path": "FamilyQuant/DeNovo/ThreeWayWindow.cs",
           "symbol": "FamilyQuant.DeNovo.ThreeWayWindow::private static string Caption ( bool anyNegative )",
-          "sha256": "B13352B3147494C36373EA7B34AA7F9237680DE48E2E4FD7C80B7944A39EB68F"
+          "sha256": "1D679388E2600C7A40CE6B1934C6AEC2A6E2DBFC3F1B846EB358600E03A3E502"
         }
       ],
       "proofs": [],
@@ -1038,7 +1038,7 @@
         {
           "path": "FamilyQuant/DeNovo/ThreeWayWindow.cs",
           "symbol": "FamilyQuant.DeNovo.ThreeWayWindow::private static string Caption ( bool anyNegative )",
-          "sha256": "B13352B3147494C36373EA7B34AA7F9237680DE48E2E4FD7C80B7944A39EB68F"
+          "sha256": "1D679388E2600C7A40CE6B1934C6AEC2A6E2DBFC3F1B846EB358600E03A3E502"
         }
       ],
       "proofs": [],
@@ -2022,7 +2022,7 @@
         {
           "path": "FamilyQuant/DeNovo/ThreeWayWindow.cs",
           "symbol": "FamilyQuant.DeNovo.ThreeWayWindow::private static string Caption ( bool anyNegative )",
-          "sha256": "B13352B3147494C36373EA7B34AA7F9237680DE48E2E4FD7C80B7944A39EB68F"
+          "sha256": "1D679388E2600C7A40CE6B1934C6AEC2A6E2DBFC3F1B846EB358600E03A3E502"
         }
       ],
       "proofs": [],
@@ -6602,7 +6602,7 @@
         {
           "path": "FamilyQuant/DeNovo/ThreeWayWindow.cs",
           "symbol": "FamilyQuant.DeNovo.ThreeWayWindow::public static Window Create ( string title , IReadOnlyList \u003C ThreeWayPartitionRow \u003E rows , string ? provenanceNote = null )",
-          "sha256": "B13352B3147494C36373EA7B34AA7F9237680DE48E2E4FD7C80B7944A39EB68F"
+          "sha256": "1D679388E2600C7A40CE6B1934C6AEC2A6E2DBFC3F1B846EB358600E03A3E502"
         }
       ],
       "proofs": [],
@@ -6966,7 +6966,7 @@
         {
           "path": "FamilyQuant/DeNovo/ThreeWayWindow.cs",
           "symbol": "FamilyQuant.DeNovo.ThreeWayWindow::private static string Caption ( bool anyNegative )",
-          "sha256": "B13352B3147494C36373EA7B34AA7F9237680DE48E2E4FD7C80B7944A39EB68F"
+          "sha256": "1D679388E2600C7A40CE6B1934C6AEC2A6E2DBFC3F1B846EB358600E03A3E502"
         }
       ],
       "proofs": [],
@@ -8398,7 +8398,7 @@
         {
           "path": "FamilyQuant/DeNovo/ThreeWayWindow.cs",
           "symbol": "FamilyQuant.DeNovo.ThreeWayWindow::private static string Caption ( bool anyNegative )",
-          "sha256": "B13352B3147494C36373EA7B34AA7F9237680DE48E2E4FD7C80B7944A39EB68F"
+          "sha256": "1D679388E2600C7A40CE6B1934C6AEC2A6E2DBFC3F1B846EB358600E03A3E502"
         }
       ],
       "proofs": [],
@@ -8744,7 +8744,7 @@
         {
           "path": "FamilyQuant/DeNovo/ThreeWayWindow.cs",
           "symbol": "FamilyQuant.DeNovo.ThreeWayWindow::public static Window Create ( string title , IReadOnlyList \u003C ThreeWayPartitionRow \u003E rows , string ? provenanceNote = null )",
-          "sha256": "B13352B3147494C36373EA7B34AA7F9237680DE48E2E4FD7C80B7944A39EB68F"
+          "sha256": "1D679388E2600C7A40CE6B1934C6AEC2A6E2DBFC3F1B846EB358600E03A3E502"
         }
       ],
       "proofs": [],
@@ -8786,7 +8786,7 @@
         {
           "path": "FamilyQuant/DeNovo/ThreeWayWindow.cs",
           "symbol": "FamilyQuant.DeNovo.ThreeWayWindow::public static Window Create ( string title , IReadOnlyList \u003C ThreeWayPartitionRow \u003E rows , string ? provenanceNote = null )",
-          "sha256": "B13352B3147494C36373EA7B34AA7F9237680DE48E2E4FD7C80B7944A39EB68F"
+          "sha256": "1D679388E2600C7A40CE6B1934C6AEC2A6E2DBFC3F1B846EB358600E03A3E502"
         }
       ],
       "proofs": [],
@@ -8978,7 +8978,7 @@
         {
           "path": "FamilyQuant/DeNovo/ThreeWayWindow.cs",
           "symbol": "FamilyQuant.DeNovo.ThreeWayWindow::private static string Caption ( bool anyNegative )",
-          "sha256": "B13352B3147494C36373EA7B34AA7F9237680DE48E2E4FD7C80B7944A39EB68F"
+          "sha256": "1D679388E2600C7A40CE6B1934C6AEC2A6E2DBFC3F1B846EB358600E03A3E502"
         }
       ],
       "proofs": [],
@@ -10050,7 +10050,7 @@
         {
           "path": "FamilyQuant/DeNovo/ThreeWayWindow.cs",
           "symbol": "FamilyQuant.DeNovo.ThreeWayWindow::private static string Caption ( bool anyNegative )",
-          "sha256": "B13352B3147494C36373EA7B34AA7F9237680DE48E2E4FD7C80B7944A39EB68F"
+          "sha256": "1D679388E2600C7A40CE6B1934C6AEC2A6E2DBFC3F1B846EB358600E03A3E502"
         }
       ],
       "proofs": [],
@@ -11638,7 +11638,7 @@
         {
           "path": "FamilyQuant/DeNovo/ThreeWayWindow.cs",
           "symbol": "FamilyQuant.DeNovo.ThreeWayWindow::private static string Caption ( bool anyNegative )",
-          "sha256": "B13352B3147494C36373EA7B34AA7F9237680DE48E2E4FD7C80B7944A39EB68F"
+          "sha256": "1D679388E2600C7A40CE6B1934C6AEC2A6E2DBFC3F1B846EB358600E03A3E502"
         }
       ],
       "proofs": [],
@@ -11884,7 +11884,7 @@
         {
           "path": "FamilyQuant/DeNovo/ThreeWayWindow.cs",
           "symbol": "FamilyQuant.DeNovo.ThreeWayWindow::public static Window Create ( string title , IReadOnlyList \u003C ThreeWayPartitionRow \u003E rows , string ? provenanceNote = null )",
-          "sha256": "B13352B3147494C36373EA7B34AA7F9237680DE48E2E4FD7C80B7944A39EB68F"
+          "sha256": "1D679388E2600C7A40CE6B1934C6AEC2A6E2DBFC3F1B846EB358600E03A3E502"
         }
       ],
       "proofs": [],
@@ -12096,7 +12096,7 @@
         {
           "path": "FamilyQuant/DeNovo/ThreeWayWindow.cs",
           "symbol": "FamilyQuant.DeNovo.ThreeWayWindow::private static string Caption ( bool anyNegative )",
-          "sha256": "B13352B3147494C36373EA7B34AA7F9237680DE48E2E4FD7C80B7944A39EB68F"
+          "sha256": "1D679388E2600C7A40CE6B1934C6AEC2A6E2DBFC3F1B846EB358600E03A3E502"
         }
       ],
       "proofs": [],
@@ -13534,7 +13534,7 @@
         {
           "path": "FamilyQuant/DeNovo/ThreeWayWindow.cs",
           "symbol": "FamilyQuant.DeNovo.ThreeWayWindow::public static Window Create ( string title , IReadOnlyList \u003C ThreeWayPartitionRow \u003E rows , string ? provenanceNote = null )",
-          "sha256": "B13352B3147494C36373EA7B34AA7F9237680DE48E2E4FD7C80B7944A39EB68F"
+          "sha256": "1D679388E2600C7A40CE6B1934C6AEC2A6E2DBFC3F1B846EB358600E03A3E502"
         }
       ],
       "proofs": [],
@@ -13962,7 +13962,7 @@
         {
           "path": "FamilyQuant/DeNovo/ThreeWayWindow.cs",
           "symbol": "FamilyQuant.DeNovo.ThreeWayWindow::private static string Caption ( bool anyNegative )",
-          "sha256": "B13352B3147494C36373EA7B34AA7F9237680DE48E2E4FD7C80B7944A39EB68F"
+          "sha256": "1D679388E2600C7A40CE6B1934C6AEC2A6E2DBFC3F1B846EB358600E03A3E502"
         }
       ],
       "proofs": [],
@@ -14074,7 +14074,7 @@
         {
           "path": "FamilyQuant/DeNovo/ThreeWayWindow.cs",
           "symbol": "FamilyQuant.DeNovo.ThreeWayWindow::private static string Caption ( bool anyNegative )",
-          "sha256": "B13352B3147494C36373EA7B34AA7F9237680DE48E2E4FD7C80B7944A39EB68F"
+          "sha256": "1D679388E2600C7A40CE6B1934C6AEC2A6E2DBFC3F1B846EB358600E03A3E502"
         }
       ],
       "proofs": [],
@@ -14596,7 +14596,7 @@
         {
           "path": "FamilyQuant/DeNovo/ThreeWayWindow.cs",
           "symbol": "FamilyQuant.DeNovo.ThreeWayWindow::public static Window Create ( string title , IReadOnlyList \u003C ThreeWayPartitionRow \u003E rows , string ? provenanceNote = null )",
-          "sha256": "B13352B3147494C36373EA7B34AA7F9237680DE48E2E4FD7C80B7944A39EB68F"
+          "sha256": "1D679388E2600C7A40CE6B1934C6AEC2A6E2DBFC3F1B846EB358600E03A3E502"
         }
       ],
       "proofs": [],
@@ -15266,7 +15266,7 @@
         {
           "path": "FamilyQuant/DeNovo/ThreeWayWindow.cs",
           "symbol": "FamilyQuant.DeNovo.ThreeWayWindow::public static Window Create ( string title , IReadOnlyList \u003C ThreeWayPartitionRow \u003E rows , string ? provenanceNote = null )",
-          "sha256": "B13352B3147494C36373EA7B34AA7F9237680DE48E2E4FD7C80B7944A39EB68F"
+          "sha256": "1D679388E2600C7A40CE6B1934C6AEC2A6E2DBFC3F1B846EB358600E03A3E502"
         }
       ],
       "proofs": [],
@@ -15307,7 +15307,7 @@
           "kind": "test",
           "target": "LedgerAssayCompareCommand",
           "assertion": "AS member kind code fact: every listed frozen/current member declaration agrees",
-          "artifact": "D:\\FamilyQuant-data\\out-assay\\n5-assay-c\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-assay\\n6-as2-refresh\\comparisons.log",
           "inspectedBy": ""
         }
       ]
@@ -15321,7 +15321,7 @@
           "kind": "test",
           "target": "LedgerAssayCompareCommand",
           "assertion": "AS member kind export/storage fact: every listed frozen/current member declaration agrees",
-          "artifact": "D:\\FamilyQuant-data\\out-assay\\n5-assay-c\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-assay\\n6-as2-refresh\\comparisons.log",
           "inspectedBy": ""
         }
       ]
@@ -15335,7 +15335,7 @@
           "kind": "test",
           "target": "LedgerAssayCompareCommand",
           "assertion": "AS member kind format/export: every listed frozen/current member declaration agrees",
-          "artifact": "D:\\FamilyQuant-data\\out-assay\\n5-assay-c\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-assay\\n6-as2-refresh\\comparisons.log",
           "inspectedBy": ""
         }
       ]

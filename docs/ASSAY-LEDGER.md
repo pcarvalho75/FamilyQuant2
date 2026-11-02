@@ -67,3 +67,15 @@ The receipt links its retained logs and the original ownership map with exact SH
 Later source edits, including formatting, can invalidate implementation hashes. Re-execute
 the comparison and use the explicit replacement import after such an edit; retain the old
 register in the lane output as required by the evidence protocol.
+
+## V3 refresh, N6-AS-2
+
+M47 requested re-execution after V3 `e03ddc8` changed the bytes of `ThreeWayWindow.cs`.
+The refreshed run at `D:/FamilyQuant-data/out-assay/n6-as2-refresh` still reports 996/0/155:
+991 declarations match and the same 155 observations remain OPEN. Covered members did not
+change, but the containing source-file hashes were refreshed rather than reused.
+The explicit `--replace-existing` import retains the old register in `n6-as2-import`.
+The native ledger check passes at the merged dependency checkpoint `bb981a8`.
+The combined local ledger now reports 1,432 VERIFIED, 4,028 OPEN and 296 APPROVED_DROP,
+including other lanes' merged registers. This is a narrow approved-receipt refresh, not a
+new product change, broad suite run or independent review claim.
