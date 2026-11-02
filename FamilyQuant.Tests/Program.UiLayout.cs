@@ -55,7 +55,8 @@ namespace FamilyQuant.Tests
             Check("Help names the visible fetch command and retains the Pfam explanation",
                 help.Contains("Fetch evidence asks UniProt", StringComparison.Ordinal)
                 && help.Contains("Pfam domains", StringComparison.Ordinal));
-            string fetchSource = File.ReadAllText(Path.Combine(GoldenNumbers.FindRepository(), "FamilyQuant", "ClusterGenerationControl.xaml.cs"));
+            string fetchSource = File.ReadAllText(Path.Combine(GoldenNumbers.FindRepository(), "FamilyQuant", "ClusterGenerationControl.xaml.cs"))
+                + File.ReadAllText(Path.Combine(GoldenNumbers.FindRepository(), "FamilyQuant", "CurationViewModel.Evidence.cs"));
             Check("fetch retry and dialog title name the visible fetch command",
                 fetchSource.Contains("press Fetch evidence again", StringComparison.Ordinal)
                 && fetchSource.Contains("string title = \"Fetch evidence\"", StringComparison.Ordinal)
