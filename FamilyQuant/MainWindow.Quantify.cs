@@ -15,6 +15,7 @@ public partial class MainWindow
         var model = QuantifyViewModelFactoryOverride?.Invoke(loadedManifest, loadedCuration)
             ?? new ComputeXicViewModel(AppVersion(), loadedManifest, loadedCuration, SharedDeNovoFilters());
         var control = new QuantifyControl(model);
+        model.Operations = Operations;
         ClusterGenerationControl? heldProject = cgc;
         FamilyClusterFile? heldCuration = loadedCuration;
         var heldRows = loadedQuant;

@@ -33,6 +33,7 @@ namespace FamilyQuant
             helpPresenter = new ShellHelpPresenter(this);
             InitializeShellCommands();
             InitializeNavigation();
+            InitializeOperations();
             TextBlockGuide.DataContext = StatusModel;
             UpdateThemeMenu();
             Title += " " + AppVersion();
