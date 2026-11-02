@@ -10,6 +10,7 @@
   <ItemGroup>
     <Compile Include="../ShellMetadataSnapshot.cs" Link="ShellMetadataSnapshot.cs" />
     <Compile Include="../ShellMetadataSnapshot.Home.cs" Link="ShellMetadataSnapshot.Home.cs" />
+    <Compile Include="../AssayViewSnapshot.cs" Link="AssayViewSnapshot.cs" />
     <Compile Include="../AssayCacheSnapshot.cs" Link="AssayCacheSnapshot.cs" />
     <Compile Include="../ClusteringSnapshot.cs" Link="ClusteringSnapshot.cs" />
     <Reference Include="$(ReferenceRoot)/*.dll" />
