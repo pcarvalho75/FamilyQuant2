@@ -128,6 +128,8 @@ Invoke each flag with `& $testExe <flag>` after building. Dispatch and arity are
 | `--database-gap-screens <project.fqproj> <fresh-output>` | Read-only native Database gap captures in both themes, stored table CSV, and verified suggested FASTA when available |
 | `--prove-results-interactions <fresh-output> <date-timestamp>` | Native Results controls, displaced handlers, deterministic exports and observation receipts |
 | `--prove-results-members <frozen-root> <fresh-output> <date-timestamp>` | Shared scoped member comparison for assigned Results and quantitation declarations; changed members stay open |
+| `--prove-results-runtime <frozen-root> <own-frozen-host> <fresh-output> <date-timestamp> [--negative-control]` | Native frozen/current summary, CSV, User-header and chart-byte comparisons with repeated outputs and per-row receipts |
+| `--results-runtime-snapshot <fresh-json-path>` | Shared native frozen/current synthetic presentation values; not scientific result generation |
 | `--test-quantitation-panel [output-dir]` | Full XIC first, conditional source options, retained selectors and both-theme native captures |
 | `--test-curation-quantitation` | Full-XIC column, denominator changes, shared policy and unavailable-TIC fallback |
 | `--test-curation-operations` | Shared host queue/cancel paths, staged PatternLab publication, stale membership, browse preferences and headless refusal |
