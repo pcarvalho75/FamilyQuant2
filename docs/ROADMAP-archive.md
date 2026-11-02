@@ -103,3 +103,5 @@ Finished steps, moved here from docs/ROADMAP.md. The board shows them as green.
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
 | H1 | Cooldown at the middle, by the `halt-team-for-regroup` skill: everyone finished the step in hand, all branches merged, housekeeping, duplicate-code review, roadmap readjusted from measured speed | H | 2 | | R2, R3 | All worker branches merged; full suite and golden green; ledger status reported; roadmap version 3 written | Orchestrator | done | 100% | 100% | done |
+| R1 | 2.0 preview 1: evidence engine and review window, for Ana's file; installs beside 1.5 | M | 0.5 | 🟢 | A1 | Full suite, golden, publish rehearsal, release notes | Orchestrator | not started | 0% | 0% | T+0 |
+
