@@ -40,3 +40,26 @@ The quick suite checks command isolation, the matrix, missing arguments and an
 encoded PNG's exact dimensions. It does not run the real-data capture matrix.
 
 Focused screen producers and their exact arguments are listed in [the command catalog](../docs/INDEX.md). Legacy capture names are stable review identifiers; they are not the main menu order.
+
+## C14 scale matrix
+
+Add `--screen-finish --screen-shell-status` to `--screens <fresh-output>` for the
+C14a matrix. It captures 16 client views in both themes at WPF root scales 1,
+1.25 and 1.5, at 900x600 and 1366x820 DIPs. A secondary window with a larger
+declared minimum uses that minimum instead. The two extra views are the actual
+Quantify screen and the selected-family member view.
+
+The harness calls `VisualTreeHelper.SetRootDpi` on each real WPF window and checks
+that `GetDpi` on both window and content reports the requested scale. PNG pixel
+dimensions and resolution follow that scale. `FinishCaptures` records DIP and
+pixel sizes, minimum dimensions, native DPI values, layout checks and native Tab
+candidates. All windows stay off screen and refuse activation or keyboard focus.
+Software rendering and a dispatcher-driven animation settling period keep repeated
+captures stable. The default C14 Results data is a labelled, populated synthetic
+fixture; the ordinary harness retains its original empty default.
+
+These are native WPF client renders at 96, 120 and 144 DPI. Windows monitor DPI
+settings stay unchanged. Native chrome, actual Tab traversal and live keyboard
+focus visibility are separate C14 checks and Paulo's sign-off. A rendered scale
+matrix does not close a red small-window/layout check; the manifest retains each
+frame's `LayoutAccepted` value and the command returns failure for layout gaps.

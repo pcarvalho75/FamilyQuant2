@@ -1,0 +1,358 @@
+{
+  "schemaVersion": 1,
+  "step": "AS-figure-gaps",
+  "frozenCommit": "e9b73064d8ff19b2fde3e3231240b636a64c0a91",
+  "runs": [
+    {
+      "id": "native",
+      "command": "D:\\FamilyQuant-wt\\assay\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --ledger-assay-figure-gaps D:/FamilyQuant-data/out-shell/N3/source D:/FamilyQuant-data/out-assay/n6j-final-native-2 \u00222026-11-02 09:17:02 -0800\u0022",
+      "executedAt": "2026-11-02 09:17:02 -0800",
+      "commit": "11521b99c62000083e489a7ebe2f4479acc46ce5",
+      "artifacts": [
+        {
+          "path": "D:\\FamilyQuant-data\\out-assay\\n6j-final-native-2\\proofs.log",
+          "sha256": "D6B983B79392DBA16DF3C0BE36AF630527CD3DD2A21121162AC4CFC7E3599AB7"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-assay\\n6j-final-native-2\\actual-values.json",
+          "sha256": "9B80F7CC65D216C48CC6F5C46CE671B76D805C9F07353AD0502E133F49841C10"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-assay\\n6j-final-native-2\\executed\\FamilyQuant.Core/FamilyQuantFile.cs",
+          "sha256": "0845785B94D6ED35E9702CD57B9DEB382608DE637444F8ED7154683872D75E5E"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-assay\\n6j-final-native-2\\executed\\FamilyQuant.Core/SequenceLabels.cs",
+          "sha256": "63ED669CB9BCBC03B1C5C762F9545146EE649E9F883B5813B9BF4F6AF5522CF8"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-assay\\n6j-final-native-2\\executed\\FamilyQuant.Tests/AssayCacheSnapshot.cs",
+          "sha256": "9E0CD15CD1616F7A312E6A14209E745CF8C4ADB6EEF1A3D6125690A9602CCC1B"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-assay\\n6j-final-native-2\\executed\\FamilyQuant.Tests/AssayFigureGapComparison.cs",
+          "sha256": "41426756E14B14CF9452C50894299EA99F7829F3C54496D544882185AC5E214F"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-assay\\n6j-final-native-2\\executed\\FamilyQuant.Tests/AssayFigureGapSnapshot.cs",
+          "sha256": "02780C63BBBF457995DF39B599F6338C6874013FC295A464F983BEB114F91AD4"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-assay\\n6j-final-native-2\\executed\\FamilyQuant.Tests/FeatureLedgerEvidence.Reporting.cs",
+          "sha256": "8633DCBB14E8DBF1746A1FD771AD4E9404900EB68BA46690A31EFC8DEDFA247B"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-assay\\n6j-final-native-2\\executed\\FamilyQuant.Tests/FeatureLedgerEvidence.cs",
+          "sha256": "370FC41121F164A0C2495B260A62149FAD53F6F353203A97488423F2E6FA8738"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-assay\\n6j-final-native-2\\executed\\FamilyQuant.Tests/Program.AssayCacheLedger.cs",
+          "sha256": "7D3B175CC9824DA443DC369CF9C8983E1C59004FD15F080951BCEEF72B5449C9"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-assay\\n6j-final-native-2\\executed\\FamilyQuant.Tests/Program.AssayFigureGaps.cs",
+          "sha256": "597D7C51440EB656F033AF396C466A8F444C53004C9F893971D43C5F1B5F8CD0"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-assay\\n6j-final-native-2\\executed\\FamilyQuant.Tests/Program.AssayRuntimeLedger.cs",
+          "sha256": "24F4A0BACCC044156A198BDE8790FCDE12BF0A995641CA359FCB1AFEB3009CB7"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-assay\\n6j-final-native-2\\executed\\FamilyQuant.Tests/Program.Commands.AssayLedger.cs",
+          "sha256": "46DA029D0DBAA113B736A5E3B2BE7D29C486565EAE0063281F58F292ECC8112E"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-assay\\n6j-final-native-2\\executed\\FamilyQuant/ChartImageExporter.cs",
+          "sha256": "77B1752BCDC39B6E677B688259C14E05386F2E797A20292463857158D6567BBC"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-assay\\n6j-final-native-2\\executed\\FamilyQuant/ChartPalette.cs",
+          "sha256": "08EE43A5A44D35CDA783D7D48E692929BA87170515CF953BE25CA29E07A20FB3"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-assay\\n6j-final-native-2\\executed\\FamilyQuant/PresentationFigures.cs",
+          "sha256": "C896F29F17D40275E77F1387034D36BA2F584FE6EBF75D5C18A76033E6CF6927"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-assay\\n6j-final-native-2\\executed\\frozen\\FamilyQuant/PresentationFigures.cs",
+          "sha256": "E0D5E8D3B28AAAB809311E0BCD1FA60E6CC7BC83E3CE0FDD6705FCEAF76081D0"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-assay\\n6j-final-native-2\\executed\\FamilyQuant.Tests.dll",
+          "sha256": "D1D00A00B4522C8FADC2304A858C9A33AED5522BE000EDD5EE72398E85532A42"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-assay\\n6j-final-native-2\\executed\\FamilyQuant.Core.dll",
+          "sha256": "F16F4280F8B7765B9CD47DA3E39C7DB5D8BF7310CD929C8AA21064CE4B436648"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-assay\\n6j-final-native-2\\executed\\FamilyQuant.dll",
+          "sha256": "172BB437A9F69F594EC33EFFF40769B04483820EDD5CA9533D9B14EABD853AD3"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-assay\\n6j-final-native-2\\figure-anchors.json",
+          "sha256": "831389847E2EDB748E537AC514FB734D9FEDA5076804C711D851DF0FFF1CD64E"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-assay\\n6j-final-native-2\\frozen-FamilyQuant.dll",
+          "sha256": "D764488C923945285E03B338E5A91BF28106A35B11AB465D8E2B23D125F03FD8"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-assay\\n6j-final-native-2\\frozen-ReferenceGoldenHost.dll",
+          "sha256": "2B302F2CC210EDB2A6C20623ED3A9175C62472A0FB811C0BDB88F57B7308FF3E"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-assay\\n6j-final-native-2\\frozen-ReferenceGoldenHost.exe",
+          "sha256": "5E601CA815B040FD8ACAD029C99D54379B4F9164BE1B41B1F06EC3A43DC74ABB"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-assay\\n6j-final-native-2\\frozen-figure.log",
+          "sha256": "BF5E87D4FEF3E0665619F508144A2128EA39C700F63085CD9947A70512735829"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-assay\\n6j-final-native-2\\current-figure\\ConfidenceField.png",
+          "sha256": "20B73DB83AF62C53CB52A40D93AA17365D24F5DD44A61348B1AA2BC00C37AB08"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-assay\\n6j-final-native-2\\current-figure\\MinimumConfidence.png",
+          "sha256": "D5FAF7BE21E90C09AA0857EA4D7429121FB5355EB575B741428D1637EC0CB2C4"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-assay\\n6j-final-native-2\\current-figure\\SourceDisplayName.png",
+          "sha256": "6B429C82146B639F85677AF6B99317063B3546177C7A3B402894C0F2FD435D42"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-assay\\n6j-final-native-2\\current-figure\\base.png",
+          "sha256": "6CACDBD6AED4B1050A15125EC032FC6A1E3B70A4CC416FB3D21092A0A05A0CC4"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-assay\\n6j-final-native-2\\current-figure\\figure-values.json",
+          "sha256": "84E91DB2269494ACB053D6B23316142277F424C4F79F82E77DAD513FAD7CF8E3"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-assay\\n6j-final-native-2\\frozen-figure\\ConfidenceField.png",
+          "sha256": "20B73DB83AF62C53CB52A40D93AA17365D24F5DD44A61348B1AA2BC00C37AB08"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-assay\\n6j-final-native-2\\frozen-figure\\MinimumConfidence.png",
+          "sha256": "D5FAF7BE21E90C09AA0857EA4D7429121FB5355EB575B741428D1637EC0CB2C4"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-assay\\n6j-final-native-2\\frozen-figure\\SourceDisplayName.png",
+          "sha256": "6B429C82146B639F85677AF6B99317063B3546177C7A3B402894C0F2FD435D42"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-assay\\n6j-final-native-2\\frozen-figure\\base.png",
+          "sha256": "6CACDBD6AED4B1050A15125EC032FC6A1E3B70A4CC416FB3D21092A0A05A0CC4"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-assay\\n6j-final-native-2\\frozen-figure\\figure-values.json",
+          "sha256": "84E91DB2269494ACB053D6B23316142277F424C4F79F82E77DAD513FAD7CF8E3"
+        }
+      ],
+      "workingDirectory": "D:\\FamilyQuant-wt\\assay"
+    }
+  ],
+  "rows": [
+    {
+      "observationId": "FQ15-5D43ED4317D6",
+      "implementation": [
+        {
+          "path": "FamilyQuant.Core/FamilyQuantFile.cs",
+          "symbol": "Native fixture reference-component prefix boundaries and dynamic rendered source-rule fields; no keyboard shortcut claim",
+          "sha256": "0845785B94D6ED35E9702CD57B9DEB382608DE637444F8ED7154683872D75E5E"
+        },
+        {
+          "path": "FamilyQuant.Core/SequenceLabels.cs",
+          "symbol": "Native fixture reference-component prefix boundaries and dynamic rendered source-rule fields; no keyboard shortcut claim",
+          "sha256": "63ED669CB9BCBC03B1C5C762F9545146EE649E9F883B5813B9BF4F6AF5522CF8"
+        },
+        {
+          "path": "FamilyQuant/ChartImageExporter.cs",
+          "symbol": "Native fixture reference-component prefix boundaries and dynamic rendered source-rule fields; no keyboard shortcut claim",
+          "sha256": "77B1752BCDC39B6E677B688259C14E05386F2E797A20292463857158D6567BBC"
+        },
+        {
+          "path": "FamilyQuant/ChartPalette.cs",
+          "symbol": "Native fixture reference-component prefix boundaries and dynamic rendered source-rule fields; no keyboard shortcut claim",
+          "sha256": "08EE43A5A44D35CDA783D7D48E692929BA87170515CF953BE25CA29E07A20FB3"
+        },
+        {
+          "path": "FamilyQuant/PresentationFigures.cs",
+          "symbol": "Native fixture reference-component prefix boundaries and dynamic rendered source-rule fields; no keyboard shortcut claim",
+          "sha256": "C896F29F17D40275E77F1387034D36BA2F584FE6EBF75D5C18A76033E6CF6927"
+        }
+      ],
+      "proofs": [],
+      "note": "Executed native value/refusal check, with the specific comparison recorded below.",
+      "kindReceiptId": "native-shortcut",
+      "compared": "FamilyQuant/PresentationFigures.cs:968 g.Key.MinimumConfidence.ToString(\u00220.###\u0022, CultureInfo.CurrentCulture)).ToList();; actual exported chart drawing responds to manifest MinimumConfidence; scanner shortcut kind is a g.Key data-field false positive; expected identical frozen/current native values and dynamic render response; actual MinimumConfidence: True"
+    },
+    {
+      "observationId": "FQ15-7A34161A5B3A",
+      "implementation": [
+        {
+          "path": "FamilyQuant.Core/FamilyQuantFile.cs",
+          "symbol": "Native fixture reference-component prefix boundaries and dynamic rendered source-rule fields; no keyboard shortcut claim",
+          "sha256": "0845785B94D6ED35E9702CD57B9DEB382608DE637444F8ED7154683872D75E5E"
+        },
+        {
+          "path": "FamilyQuant.Core/SequenceLabels.cs",
+          "symbol": "Native fixture reference-component prefix boundaries and dynamic rendered source-rule fields; no keyboard shortcut claim",
+          "sha256": "63ED669CB9BCBC03B1C5C762F9545146EE649E9F883B5813B9BF4F6AF5522CF8"
+        },
+        {
+          "path": "FamilyQuant/ChartImageExporter.cs",
+          "symbol": "Native fixture reference-component prefix boundaries and dynamic rendered source-rule fields; no keyboard shortcut claim",
+          "sha256": "77B1752BCDC39B6E677B688259C14E05386F2E797A20292463857158D6567BBC"
+        },
+        {
+          "path": "FamilyQuant/ChartPalette.cs",
+          "symbol": "Native fixture reference-component prefix boundaries and dynamic rendered source-rule fields; no keyboard shortcut claim",
+          "sha256": "08EE43A5A44D35CDA783D7D48E692929BA87170515CF953BE25CA29E07A20FB3"
+        },
+        {
+          "path": "FamilyQuant/PresentationFigures.cs",
+          "symbol": "Native fixture reference-component prefix boundaries and dynamic rendered source-rule fields; no keyboard shortcut claim",
+          "sha256": "C896F29F17D40275E77F1387034D36BA2F584FE6EBF75D5C18A76033E6CF6927"
+        }
+      ],
+      "proofs": [],
+      "note": "Executed native value/refusal check, with the specific comparison recorded below.",
+      "kindReceiptId": "native-shortcut",
+      "compared": "FamilyQuant/PresentationFigures.cs:967 .Select(g =\u003E g.Key.SourceDisplayName \u002B \u0022 \u00B7 \u0022 \u002B g.Key.ConfidenceField \u002B \u0022 \u003E= \u0022 \u002B; actual exported chart drawing responds to manifest ConfidenceField; scanner shortcut kind is a g.Key data-field false positive; expected identical frozen/current native values and dynamic render response; actual ConfidenceField: True"
+    },
+    {
+      "observationId": "FQ15-B367AFCE52B9",
+      "implementation": [
+        {
+          "path": "FamilyQuant.Core/FamilyQuantFile.cs",
+          "symbol": "Native fixture reference-component prefix boundaries and dynamic rendered source-rule fields; no keyboard shortcut claim",
+          "sha256": "0845785B94D6ED35E9702CD57B9DEB382608DE637444F8ED7154683872D75E5E"
+        },
+        {
+          "path": "FamilyQuant.Core/SequenceLabels.cs",
+          "symbol": "Native fixture reference-component prefix boundaries and dynamic rendered source-rule fields; no keyboard shortcut claim",
+          "sha256": "63ED669CB9BCBC03B1C5C762F9545146EE649E9F883B5813B9BF4F6AF5522CF8"
+        },
+        {
+          "path": "FamilyQuant/ChartImageExporter.cs",
+          "symbol": "Native fixture reference-component prefix boundaries and dynamic rendered source-rule fields; no keyboard shortcut claim",
+          "sha256": "77B1752BCDC39B6E677B688259C14E05386F2E797A20292463857158D6567BBC"
+        },
+        {
+          "path": "FamilyQuant/ChartPalette.cs",
+          "symbol": "Native fixture reference-component prefix boundaries and dynamic rendered source-rule fields; no keyboard shortcut claim",
+          "sha256": "08EE43A5A44D35CDA783D7D48E692929BA87170515CF953BE25CA29E07A20FB3"
+        },
+        {
+          "path": "FamilyQuant/PresentationFigures.cs",
+          "symbol": "Native fixture reference-component prefix boundaries and dynamic rendered source-rule fields; no keyboard shortcut claim",
+          "sha256": "C896F29F17D40275E77F1387034D36BA2F584FE6EBF75D5C18A76033E6CF6927"
+        }
+      ],
+      "proofs": [],
+      "note": "Executed native value/refusal check, with the specific comparison recorded below.",
+      "kindReceiptId": "native-shortcut",
+      "compared": "FamilyQuant/PresentationFigures.cs:967 .Select(g =\u003E g.Key.SourceDisplayName \u002B \u0022 \u00B7 \u0022 \u002B g.Key.ConfidenceField \u002B \u0022 \u003E= \u0022 \u002B; actual exported chart drawing responds to manifest SourceDisplayName; scanner shortcut kind is a g.Key data-field false positive; expected identical frozen/current native values and dynamic render response; actual SourceDisplayName: True"
+    },
+    {
+      "observationId": "FQ15-B9EF8B77B2BA",
+      "implementation": [
+        {
+          "path": "FamilyQuant.Core/FamilyQuantFile.cs",
+          "symbol": "Native fixture reference-component prefix boundaries and dynamic rendered source-rule fields; no keyboard shortcut claim",
+          "sha256": "0845785B94D6ED35E9702CD57B9DEB382608DE637444F8ED7154683872D75E5E"
+        },
+        {
+          "path": "FamilyQuant.Core/SequenceLabels.cs",
+          "symbol": "Native fixture reference-component prefix boundaries and dynamic rendered source-rule fields; no keyboard shortcut claim",
+          "sha256": "63ED669CB9BCBC03B1C5C762F9545146EE649E9F883B5813B9BF4F6AF5522CF8"
+        },
+        {
+          "path": "FamilyQuant/ChartImageExporter.cs",
+          "symbol": "Native fixture reference-component prefix boundaries and dynamic rendered source-rule fields; no keyboard shortcut claim",
+          "sha256": "77B1752BCDC39B6E677B688259C14E05386F2E797A20292463857158D6567BBC"
+        },
+        {
+          "path": "FamilyQuant/ChartPalette.cs",
+          "symbol": "Native fixture reference-component prefix boundaries and dynamic rendered source-rule fields; no keyboard shortcut claim",
+          "sha256": "08EE43A5A44D35CDA783D7D48E692929BA87170515CF953BE25CA29E07A20FB3"
+        },
+        {
+          "path": "FamilyQuant/PresentationFigures.cs",
+          "symbol": "Native fixture reference-component prefix boundaries and dynamic rendered source-rule fields; no keyboard shortcut claim",
+          "sha256": "C896F29F17D40275E77F1387034D36BA2F584FE6EBF75D5C18A76033E6CF6927"
+        }
+      ],
+      "proofs": [],
+      "note": "Executed native value/refusal check, with the specific comparison recorded below.",
+      "kindReceiptId": "native-code-fact",
+      "compared": "FamilyQuant/PresentationFigures.cs:28 \u0022contaminant_\u0022; native reference summary, empty/single-member/mixed prefix boundaries; expected identical frozen/current native values and dynamic render response; actual reference: True"
+    },
+    {
+      "observationId": "FQ15-CE2D01789779",
+      "implementation": [
+        {
+          "path": "FamilyQuant.Core/FamilyQuantFile.cs",
+          "symbol": "Native fixture reference-component prefix boundaries and dynamic rendered source-rule fields; no keyboard shortcut claim",
+          "sha256": "0845785B94D6ED35E9702CD57B9DEB382608DE637444F8ED7154683872D75E5E"
+        },
+        {
+          "path": "FamilyQuant.Core/SequenceLabels.cs",
+          "symbol": "Native fixture reference-component prefix boundaries and dynamic rendered source-rule fields; no keyboard shortcut claim",
+          "sha256": "63ED669CB9BCBC03B1C5C762F9545146EE649E9F883B5813B9BF4F6AF5522CF8"
+        },
+        {
+          "path": "FamilyQuant/ChartImageExporter.cs",
+          "symbol": "Native fixture reference-component prefix boundaries and dynamic rendered source-rule fields; no keyboard shortcut claim",
+          "sha256": "77B1752BCDC39B6E677B688259C14E05386F2E797A20292463857158D6567BBC"
+        },
+        {
+          "path": "FamilyQuant/ChartPalette.cs",
+          "symbol": "Native fixture reference-component prefix boundaries and dynamic rendered source-rule fields; no keyboard shortcut claim",
+          "sha256": "08EE43A5A44D35CDA783D7D48E692929BA87170515CF953BE25CA29E07A20FB3"
+        },
+        {
+          "path": "FamilyQuant/PresentationFigures.cs",
+          "symbol": "Native fixture reference-component prefix boundaries and dynamic rendered source-rule fields; no keyboard shortcut claim",
+          "sha256": "C896F29F17D40275E77F1387034D36BA2F584FE6EBF75D5C18A76033E6CF6927"
+        }
+      ],
+      "proofs": [],
+      "note": "Executed native value/refusal check, with the specific comparison recorded below.",
+      "kindReceiptId": "native-code-fact",
+      "compared": "FamilyQuant/PresentationFigures.cs:26 \u0022Reverse_\u0022; native reference summary, empty/single-member/mixed prefix boundaries; expected identical frozen/current native values and dynamic render response; actual reference: True"
+    }
+  ],
+  "kindReceipts": [
+    {
+      "id": "native-code-fact",
+      "kind": "code fact",
+      "proofs": [
+        {
+          "runId": "native",
+          "kind": "test",
+          "target": "RunAssayRuntimeLedger",
+          "assertion": "AS-figure-gaps kind code fact: every listed native value and branch check passed",
+          "artifact": "D:\\FamilyQuant-data\\out-assay\\n6j-final-native-2\\proofs.log",
+          "inspectedBy": ""
+        }
+      ]
+    },
+    {
+      "id": "native-shortcut",
+      "kind": "shortcut",
+      "proofs": [
+        {
+          "runId": "native",
+          "kind": "test",
+          "target": "RunAssayRuntimeLedger",
+          "assertion": "AS-figure-gaps kind shortcut: every listed native value and branch check passed",
+          "artifact": "D:\\FamilyQuant-data\\out-assay\\n6j-final-native-2\\proofs.log",
+          "inspectedBy": ""
+        }
+      ]
+    }
+  ]
+}

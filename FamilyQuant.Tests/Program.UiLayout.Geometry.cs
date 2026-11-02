@@ -161,6 +161,17 @@ namespace FamilyQuant.Tests
                 BoundsIn(canvas, overflow).Width > 50
                 && Math.Abs(VisibleBoundsIn(canvas, overflow).Width - 50) < 0.001,
                 "raw=" + BoundsIn(canvas, overflow) + "; visible=" + VisibleBoundsIn(canvas, overflow));
+
+            string longHeading = new string('M', 50);
+            var headerGrid = new DataGrid { Width = 600, Height = 100, AutoGenerateColumns = false };
+            headerGrid.Columns.Add(new DataGridTextColumn { Header = longHeading, Width = 100, MinWidth = 100 });
+            headerGrid.Columns.Add(new DataGridTextColumn { Header = "Second", Width = 400 });
+            canvas.Children.Clear(); canvas.Children.Add(headerGrid);
+            LayoutAt(canvas, new Size(600, 100), -1);
+            var heading = WalkTree(headerGrid).OfType<TextBlock>().First(block => block.Text == longHeading);
+            Check("overlap bounds respect native per-column layout clipping",
+                VisibleBoundsIn(canvas, heading).Width <= 100,
+                "raw=" + BoundsIn(canvas, heading) + "; visible=" + VisibleBoundsIn(canvas, heading));
         }
 
         private static string DescribeVisually(FrameworkElement element)
@@ -207,6 +218,8 @@ namespace FamilyQuant.Tests
                     if (parent.ClipToBounds || ReferenceEquals(parent, root)) bounds.Intersect(BoundsIn(root, parent));
                     if (parent.Clip is Geometry clip)
                         bounds.Intersect(parent.TransformToAncestor(root).TransformBounds(clip.Bounds));
+                    if (VisualTreeHelper.GetClip(parent) is Geometry renderedClip)
+                        bounds.Intersect(parent.TransformToAncestor(root).TransformBounds(renderedClip.Bounds));
                 }
                 if (ReferenceEquals(node, root)) break;
             }

@@ -8,8 +8,10 @@
     <ReferenceRoot Condition="'$(ReferenceRoot)' == ''">D:/FamilyQuant-data/reference-1.5.0.6/app</ReferenceRoot>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="../AssayFigureGapSnapshot.cs" Link="AssayFigureGapSnapshot.cs" />
     <Compile Include="../ShellMetadataSnapshot.cs" Link="ShellMetadataSnapshot.cs" />
     <Compile Include="../ShellMetadataSnapshot.Home.cs" Link="ShellMetadataSnapshot.Home.cs" />
+    <Compile Include="../AssayBuildOutputSnapshot.cs" Link="AssayBuildOutputSnapshot.cs" />
     <Compile Include="../AssayPartitionSnapshot.cs" Link="AssayPartitionSnapshot.cs" />
     <Compile Include="../AssayBuildReportSnapshot.cs" Link="AssayBuildReportSnapshot.cs" />
     <Compile Include="../AssayViewSnapshot.cs" Link="AssayViewSnapshot.cs" />
@@ -22,6 +24,7 @@
     <Compile Include="../WordGroupingSnapshot.cs" Link="WordGroupingSnapshot.cs" />
     <Compile Include="../ChartExportSnapshot.cs" Link="ChartExportSnapshot.cs" />
     <Compile Include="../ResultsRuntimeSnapshot.cs" Link="ResultsRuntimeSnapshot.cs" />
+    <Compile Include="../CurationExportSnapshot.cs" Link="CurationExportSnapshot.cs" />
     <Content Include="$(ReferenceRoot)/**/*" Link="%(RecursiveDir)%(Filename)%(Extension)"
              CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>

@@ -40,6 +40,7 @@ namespace FamilyQuant.Themes
             private readonly DataGrid grid;
             private readonly Dictionary<DataGridColumn, (Style? Original, Style Applied, bool Numeric)> headers = new();
             private readonly Dictionary<DataGridTextColumn, Style?> originals = new();
+            private readonly Dictionary<DataGridColumn, (double Original, double Applied)> minimums = new();
             private readonly DependencyPropertyDescriptor headerProperty = DependencyPropertyDescriptor.FromProperty(
                 DataGridColumn.HeaderStyleProperty, typeof(DataGridColumn));
             private readonly DependencyPropertyDescriptor sourceProperty = DependencyPropertyDescriptor.FromProperty(
@@ -119,6 +120,15 @@ namespace FamilyQuant.Themes
                 writing = true;
                 try { column.HeaderStyle = header; }
                 finally { writing = false; }
+                if (column.Header is string heading && heading.Length > 0)
+                {
+                    var probe = new DataGridColumnHeader { Content = heading, Style = header };
+                    probe.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
+                    double minimum = Math.Min(column.MaxWidth, Math.Max(column.MinWidth, Math.Ceiling(probe.DesiredSize.Width + 16)));
+                    double originalMinimum = minimums.TryGetValue(column, out var saved) ? saved.Original : column.MinWidth;
+                    minimums[column] = (originalMinimum, minimum);
+                    column.SetCurrentValue(DataGridColumn.MinWidthProperty, minimum);
+                }
                 if (column is DataGridTextColumn text)
                 {
                     if (!originals.TryGetValue(text, out var textOriginal)) originals[text] = textOriginal = text.ElementStyle;
@@ -137,6 +147,8 @@ namespace FamilyQuant.Themes
                 headerProperty.RemoveValueChanged(column, HeaderChanged);
                 if (headers.Remove(column, out var entry) && ReferenceEquals(column.HeaderStyle, entry.Applied)) column.HeaderStyle = entry.Original;
                 if (column is DataGridTextColumn text && originals.Remove(text, out var original)) text.ElementStyle = original;
+                if (minimums.Remove(column, out var saved) && column.MinWidth == saved.Applied)
+                    column.SetCurrentValue(DataGridColumn.MinWidthProperty, saved.Original);
             }
             private void Detach()
             {
