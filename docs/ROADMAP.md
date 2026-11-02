@@ -84,7 +84,7 @@ Columns: Diff = L, M, H, VH. Hrs = worker hours at measured speed: the 56 steps 
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| A1 | Make her file with 2.0 preview 1 on her original `.fcf`: Fetch Evidence, fetch the panel again so it keeps tissue text, review, Create, Save, Export. Provenance shows version, recipe and release | M | 0.5 | R1 | A2 | Recipe reapplied gives the same file; file check passed; no script touched it | EV | not started | 0% | 0% | T+2 |
+| A1 | Make her file with 2.0 preview 1 on her original `.fcf`: Fetch Evidence, fetch the panel again so it keeps tissue text, review, Create, Save, Export. Provenance shows version, recipe and release | M | 0.5 | 🟢 | A2 | Recipe reapplied gives the same file; file check passed; no script touched it | EV | not started | 0% | 0% | T+2 |
 | A2 | Adversarial science review of the file: concepts, denominators, labels, red flags, comparison with what Ana already holds | H | 1 | A1 | A3 | GR's written verdict; every finding closed | GR | not started | 0% | 0% | T+2 |
 | A3 | Paulo sends Ana a second email, the same day if the team gets there: FamilyQuant 2.0 preview 1 and the program's file, with a short note that it replaces the file she received and that 1.5 stays installed | L | 0 | A2 | A4 | Sent by Paulo | Paulo | not started | 0% | 0% | T+2 |
 | A4 | Ana's answers: is the family list right; keep disintegrins separate (default yes, one click to reverse); does the scope stay `Toxin` and `venom gland`, given that it brings in 125 left-out calmodulin-like rows; a `.sepr2` on this database | L | 0 | A3 | A5 | Answers recorded in the recipe | Ana | not started | 0% | 0% | her pace |
