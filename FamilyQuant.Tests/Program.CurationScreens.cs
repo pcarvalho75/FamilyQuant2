@@ -10,7 +10,7 @@ namespace FamilyQuant.Tests;
 
 internal static partial class Program
 {
-    private static int CurationScreens(string output, string input)
+    private static int CurationScreens(string output, string input, bool selectFamily = false)
     {
         EnsureApplication();
         output = Path.GetFullPath(output); input = Path.GetFullPath(input);
@@ -25,6 +25,7 @@ internal static partial class Program
         {
             FamilyQuant.Themes.ThemeManager.Apply(theme);
             var screen = new ClusterGenerationControl(FamilyClusterFile.Load(input));
+            if (selectFamily) screen.ViewModel.SelectedFamily = screen.ViewModel.Families.FirstOrDefault();
             var window = new Window { Content = screen, Width = size.Item1, Height = size.Item2,
                 Left = -30000, Top = -30000, ShowActivated = false, ShowInTaskbar = false,
                 WindowStartupLocation = WindowStartupLocation.Manual, WindowStyle = WindowStyle.None,
@@ -36,7 +37,8 @@ internal static partial class Program
                 PumpDispatcher(); window.UpdateLayout();
                 ScreenHarness.Save(window, Path.Combine(output, name), size.Item1, size.Item2);
                 captures.Add(new { file = name, theme = theme.ToString(), width = size.Item1, height = size.Item2,
-                    proteinsInFile = screen.fcf.MyExtendedFastaItems.Count, visibleProteins = screen.ViewModel.Rows.Count,
+                    proteinsInFile = screen.fcf.MyExtendedFastaItems.Count, visibleProteins = screen.ViewModel.SelectedFamilyProteins.Count,
+                    selectedFamilyId = screen.ViewModel.SelectedFamily?.FamilyId,
                     state = "Stored curation only; no RAW or quantitation recomputed" });
             }
             finally { window.Close(); }

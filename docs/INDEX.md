@@ -13,6 +13,7 @@ This is the navigation index for the current checkout. The roadmap owns unfinish
 | [Shell dialogs](SHELL-DIALOGS.md) | Headless messages, browse preferences and protected C1 adoption |
 | [Quantitation stages](QUANTITATION-PIPELINE.md) | Full-XIC stage contracts, second-pass residual seam and focused parity checker |
 | [De novo engine](DENOVO-ENGINE.md) | Reader/result boundaries, Core selections and review tables, focused real-data parity |
+| [Project formats](PROJECT-FORMATS.md) | Versioned schema/codecs, legacy container rules and frozen-reader FCF proof |
 | [Clustering refactor](CLUSTERING-REFACTOR.md) | Result contracts and bounded frozen/current comparison |
 | [Dependencies](DEPENDENCIES.md) | Package decisions, cache compatibility and real-file opening checks |
 | [USEARCH provenance](USEARCH-PROVENANCE.md) | Pinned author artifact, license and full assignment parity |
@@ -34,6 +35,7 @@ This is the navigation index for the current checkout. The roadmap owns unfinish
 | [B6 errors](vision/B6-ERRORS.md) | The decoy and right rate beside every family-world number, and the conserved families read by hand |
 | [Feature ledger](FEATURE-LEDGER.md) | Frozen preservation contract, dispositions and acceptance state |
 | [Feature evidence](FEATURE-EVIDENCE.md) | Per-observation receipts, native proof runner, audit and review sample |
+| [Measured improvement candidates](IMPROVEMENTS.md) | X12 clustering coverage, peptide ambiguity, evidence veto and contaminant measurements |
 | [Ledger scan](feature-ledger-scan.json) | Exact frozen observations and source hashes |
 | [Roadmap](ROADMAP.md) | Current work and acceptance gates; orchestrator owned |
 | [Roadmap archive](ROADMAP-archive.md) | Historical step records; orchestrator owned |
@@ -91,6 +93,7 @@ Invoke each flag with `& $testExe <flag>` after building. Dispatch and arity are
 | `--test-family-world-fetch` | Staged fetch, paging, release/taxonomy validation, offline persistence and recipe compatibility |
 | `--test-quantitation-stages` | Prepared-peptide assignments, cross-side suppression, residual calibration, rollup and deterministic CSV |
 | `--test-denovo-engine` | Core retained selection/review-table contracts and existing reader/reconciliation/source-aware fixtures |
+| `--test-project-formats` | Schema contract and existing versioned project round-trip/refusal fixtures |
 | `--test-inputs` | Real-data argument-selection contract, without choosing Desktop fallbacks |
 | `--test-operations` | Core outcomes, progress, cancellation and the owned native-child fixture |
 | `--test-busy` | App operation host, running-command cancellation, prior file bytes and guarded publication |
@@ -114,11 +117,15 @@ Invoke each flag with `& $testExe <flag>` after building. Dispatch and arity are
 | `--test-quantitation-panel [output-dir]` | Full XIC first, conditional source options, retained selectors and both-theme native captures |
 | `--test-curation-quantitation` | Full-XIC column, denominator changes, shared policy and unavailable-TIC fallback |
 | `--test-curation-operations` | Shared host queue/cancel paths, staged PatternLab publication, stale membership, browse preferences and headless refusal |
+| `--test-family-view` | Native family selection, name editing, accessible locks, Undo, production-share projection and 39,996-family virtualization |
 | `--test-architecture-group-split [output-dir]` | Native per-key split choices, retained bulk choice, unsplit members staying together, exact recipe replay and optional synthetic captures |
 | `--test-report-study-boundary` | Report-only operation ownership, retained Core models and screen dependencies |
 | `--report-study-snapshot <new-output-dir>` | Six native synthetic text/PNG fixtures for source-move parity |
 | `--shell-checks` | Shell navigation, saving, preferences, Build/Quantify integration and secondary views |
 | `--feature-ledger-check` | Inventory, row coverage, dispositions and guard regressions |
+| `--test-clustering-improvements` | X12 paired-letter, component-veto, native parse and contaminant diagnostic guards |
+| `--clustering-improvements <document> <FASTA> <output> <identity> [--small-exhaustive]` | Real-data diagnostic candidates; no product numerical change; bounded all-pairs only |
+| `--clustering-improvements-replay <document> <FASTA> <packet> <output> <identity> [--small-exhaustive]` | Recompute a report from recorded native alignments after exact input/executable fingerprint checks |
 | `--feature-ledger-release-check` | Same inventory with all retained rows required VERIFIED; OPEN rows intentionally fail |
 | `--test-ledger-evidence` | Adversarial receipt, source/artifact hash, assertion and render checks |
 | `--test-ledger-declarations` | Exact named-XAML and C# member comparison checks |
@@ -131,6 +138,7 @@ These commands create native WPF client captures or labelled synthetic fixtures,
 |---|---|
 | `--screens <output-dir>` | [ScreenHarness.cs](../FamilyQuant.Tests/ScreenHarness.cs) |
 | `--curation-screens <new-output-dir> <input.fcf>` | [Program.CurationScreens.cs](../FamilyQuant.Tests/Program.CurationScreens.cs); four native client captures with input hash |
+| `--family-view-screens <new-output-dir> <input.fcf>` | Same producer with a family selected; selection and visible member count recorded |
 | `--busy-screens <output-dir>` | [Program.BusyOperations.cs](../FamilyQuant.Tests/Program.BusyOperations.cs); six synthetic overlay states in both themes |
 | `--shell-menu-screens <output-dir>` | [Program.StandardMenu.cs](../FamilyQuant.Tests/Program.StandardMenu.cs) |
 | `--start-page-screens <output-dir>` | [Program.HomeStart.cs](../FamilyQuant.Tests/Program.HomeStart.cs) |
