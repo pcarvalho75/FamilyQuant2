@@ -514,8 +514,8 @@ namespace FamilyQuant
         private void ComboBoxFullXicBasis_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (fcf == null) return;   // fires once while the XAML selects its default item
-            UpdateColumnHeaders();
             UpdateFilteredResults();
+            UpdateColumnHeaders();
         }
 
         // ===================================================================== layer states

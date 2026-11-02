@@ -1,5 +1,6 @@
 using System.Windows;
 using System.Windows.Controls;
+using System.ComponentModel;
 
 namespace FamilyQuant;
 
@@ -9,7 +10,14 @@ public partial class DatabaseGapControl : UserControl
     public DatabaseGapControl(DatabaseGapViewModel model)
     {
         ViewModel = model; InitializeComponent(); DataContext = model;
-        TextBlockEmpty.Visibility = model.HasData ? Visibility.Collapsed : Visibility.Visible;
-        if (model.HasData) ChartHost.Content = new DatabaseGapChart(model.ChartRows);
+        PropertyChangedEventManager.AddHandler(model, ModelChanged, string.Empty);
+        RefreshResult();
+    }
+    private void ModelChanged(object? sender, PropertyChangedEventArgs args)
+    { if (string.IsNullOrEmpty(args.PropertyName) || args.PropertyName == nameof(ViewModel.MinimumTagLength)) RefreshResult(); }
+    private void RefreshResult()
+    {
+        TextBlockEmpty.Visibility = ViewModel.HasData ? Visibility.Collapsed : Visibility.Visible;
+        ChartHost.Content = ViewModel.HasData ? new DatabaseGapChart(ViewModel.ChartRows) : null;
     }
 }

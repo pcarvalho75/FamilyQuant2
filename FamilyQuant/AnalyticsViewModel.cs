@@ -23,6 +23,7 @@ public sealed class AnalyticsViewModel : ScreenViewModel
     public FamilyEnvelopeQuantResult? Families { get; }
     public DeNovoHomology? Homology { get; }
     public DatabaseGapViewModel DatabaseGap { get; }
+    public event EventHandler? ResultsOptionsChanged;
     public bool HasHomology => Homology != null;
     public string HomologySummary => Homology == null ? "" :
         $"Latest homology snapshot: {Homology.MappedToTargets:N0} of {Homology.PeptidesSearched:N0} distinct " +
@@ -51,7 +52,13 @@ public sealed class AnalyticsViewModel : ScreenViewModel
         this.manifest = manifest;
         this.curation = curation;
         Homology = homology;
-        DatabaseGap = new DatabaseGapViewModel(manifest?.FamilyWorldResult, curation);
+        DatabaseGap = new DatabaseGapViewModel(manifest?.FamilyWorldResult, curation, manifest?.DatabaseGapMinimumTagLength, length =>
+        {
+            if (manifest == null) return;
+            manifest.DatabaseGapMinimumTagLength = length == FamilyWorldOptions.DefaultMinimumTagLength ? null : length;
+            ResultsOptionsChanged?.Invoke(this, EventArgs.Empty);
+        });
+        DatabaseGap.PropertyChanged += (_, _) => Changed(nameof(CanExport));
         if (rows == null || rows.Count == 0)
         {
             if (homology != null)
@@ -61,7 +68,7 @@ public sealed class AnalyticsViewModel : ScreenViewModel
                     (homology.Families.Count == 1 ? " family" : " families"),
                     HomologySummary) };
             }
-            if (DatabaseGap.HasData) exportKind = ResultsExportKind.DatabaseGap;
+            if (DatabaseGap.HasStoredResult) exportKind = ResultsExportKind.DatabaseGap;
             return;
         }
         Data = AnalyticsBuilder.Build(rows, manifest?.PerRunTic ?? new Dictionary<string, double>(StringComparer.OrdinalIgnoreCase));

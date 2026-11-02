@@ -4,6 +4,7 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text.Json;
+using System.Text;
 using System.Text.RegularExpressions;
 using System.Xml.Linq;
 
@@ -54,6 +55,8 @@ internal static partial class Program
                         ["""(familyNote!=null?familyNote+"\n\n":string.Empty)"""] = ""
                     };
                     var branches = new Dictionary<string, bool>(StringComparer.Ordinal);
+                    if (executed.Bindings != null) foreach (var pair in executed.Bindings) bindings[pair.Key] = pair.Value;
+                    if (executed.Branches != null) foreach (var pair in executed.Branches) branches[pair.Key] = pair.Value;
                     if (executed.Dialogs.SingleOrDefault(dialog => dialog.Accepted) is { } dialog) bindings["sfd.FileName"] = dialog.FileName;
                     if (executed.ExceptionMessage != null) bindings["ex.Message"] = executed.ExceptionMessage;
                     if (executed.Id == "sepro-success" && executed.Dialogs.SingleOrDefault(dialog => dialog.Accepted) is { } package)
@@ -83,16 +86,20 @@ internal static partial class Program
                             && executed.Status.EndsWith(suffix, StringComparison.Ordinal))
                             actual = executed.Status[(index + prefix.Length)..^suffix.Length];
                     }
+                    if (caption && executed.Id == "project-success" && expectedTitle.Supported && expectedTitle.Value == "Saved"
+                        && executed.SavedCheck is { } savedCheck && executed.Status.Contains("\n\nSaved. " + savedCheck + "\n", StringComparison.Ordinal))
+                        actual = "Saved";
                     bool contributes = expected.Contributing.Any(token => token.Line == row.Line && token.Text == row.Detail);
                     bool menuRelocation = !caption && expected.Supported && actual != null && expected.Value != actual
                         && method is "MenuItemCluster_Click" or "MenuItemReanotateSEPro_Click"
                         && SameReportAfterMenuRename(expected, actual, bindings, view, native);
                     bool matched = expected.Supported && contributes && actual != null && (expected.Value == actual || menuRelocation);
-                    result = new(row.Id, row.Kind, row.Line, matched, frame.Member, expected.Value, actual ?? "", executed.Id,
+                    var candidate = new ShellMainComparison(row.Id, row.Kind, row.Line, matched, frame.Member, expected.Value, actual ?? "", executed.Id,
                         matched ? (menuRelocation ? "Complete frozen report matches after one verified menu-reference rename; native variables are not rewritten."
                             : caption ? "Complete frozen caption equals the report from the executed native branch."
                             : "Complete frozen message expression equals the executed native report; dynamic inner literals are not credited.")
                             : expected.Supported ? "Changed, unexecuted or noncontributing frozen message fact." : expected.Reason, frame.MemberSha256);
+                    if (matched || actual != null || result.Actual.Length == 0) result = candidate;
                     if (matched) break;
                 }
             }
@@ -118,10 +125,13 @@ internal static partial class Program
             {
                 bool controlName = row.Detail == "\"MyClusterGenerationControl\"" && method == "MenuItemCluster_Click";
                 bool suffix = row.Detail == "\"_regrouped.sepr2\"" && method == "MenuItemReanotateSEPro_Click";
+                bool console = row.Detail == "\"SEPro Package loaded\"" && method == "MenuItemReanotateSEPro_Click";
                 var executed = native.SingleOrDefault(record => record.Id == (controlName ? row.Line < 300 ? "open-project" : "open-fcf" : "sepro-success"));
-                if ((controlName || suffix) && executed is { Passed: true })
+                if ((controlName || suffix || console) && executed is { Passed: true }
+                    && (!console || executed.ConsoleText == "SEPro Package loaded" + Environment.NewLine))
                     result = new(row.Id, row.Kind, row.Line, true, owner, row.Detail, executed.Outcome, executed.Id,
                         controlName ? "The native FCF/FQPROJ Open branch checks the actual attached curation control name."
+                            : console ? "The successful native reannotation dispatch emits exactly the frozen console line."
                             : "The actual SEPro handler creates the separately named regrouped file and its reopened curated GroupNo is checked.", hash);
                 else result = result with { Reason = reason };
             }
@@ -136,6 +146,7 @@ internal static partial class Program
             if (result.Matched) Check("native shell route mapping " + result.Id + ": " + result.NativeCase, true);
             else { skipped++; Console.WriteLine("  SKIP  " + result.Id + ": " + result.Reason); }
         }
+        ShellMainPendingWording(output, inventory, results, native);
         FeatureLedgerEvidence.WriteJson(Path.Combine(output, "message-comparisons.json"), results);
         System.Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
         return failed == 0 ? 0 : 1;
@@ -147,6 +158,30 @@ internal static partial class Program
         if (left.Length < 2 || right.Length < 2 || left.Length % 2 != 0 || right.Length % 2 != 0
             || left.Any(string.IsNullOrWhiteSpace) || right.Any(string.IsNullOrWhiteSpace)) return false;
         return left.Where((_, index) => index % 2 == 1).SequenceEqual(right.Where((_, index) => index % 2 == 1), StringComparer.Ordinal);
+    }
+
+    private static void ShellMainPendingWording(string output, FeatureLedger.Inventory inventory,
+        IReadOnlyList<ShellMainComparison> comparisons, IReadOnlyList<ShellRouteCase> native)
+    {
+        string Cell(string value) => value.Replace(output, "<fixture>", StringComparison.Ordinal)
+            .Replace(output.Replace('\\', '/'), "<fixture>", StringComparison.Ordinal)
+            .Replace("\r", "\\r", StringComparison.Ordinal).Replace("\n", "\\n", StringComparison.Ordinal).Replace("\t", "\\t", StringComparison.Ordinal);
+        var lines = new List<string> { "lane\tid\tsource\tline\told_text\tnew_text\treason" };
+        foreach (var result in comparisons.Where(row => !row.Matched).OrderBy(row => row.Id, StringComparer.Ordinal))
+        {
+            var row = inventory.Observations.Single(row => row.Id == result.Id);
+            var executed = native.SingleOrDefault(record => record.Id == result.NativeCase);
+            string current = result.Actual.Length > 0 ? result.Actual : executed?.Messages.SingleOrDefault()?.Text
+                ?? "No direct runtime value captured for this inner expression.";
+            lines.Add(string.Join("\t", "FQShell", row.Id, row.Source, row.Line.ToString(CultureInfo.InvariantCulture),
+                Cell(row.Detail), Cell(current), Cell(result.Reason + " Native case: " + result.NativeCase + ". OPEN for Paulo; no semantic proof.")));
+        }
+        var spectrum = native.Single(record => record.Id == "spectrum-failure");
+        foreach (var row in inventory.Observations.Where(row => row.Source == "FamilyQuant/MainWindow.xaml" && row.Kind == "option/copy"
+            && row.Detail.StartsWith("MenuItemSpectrumComparison.Header = ", StringComparison.Ordinal)))
+            lines.Add(string.Join("\t", "FQShell", row.Id, row.Source, row.Line.ToString(CultureInfo.InvariantCulture), Cell(row.Detail),
+                Cell("MenuItemSpectrumComparison.Header = " + spectrum.Header), "Changed menu wording; actual native Click/refusal executed. OPEN for Paulo; no semantic proof."));
+        File.WriteAllLines(Path.Combine(output, "wording-for-paulo.tsv"), lines, new UTF8Encoding(false));
     }
 
     private static bool SameReportAfterMenuRename(LedgerMemberFactComparison.MessageValue before, string actual,
@@ -208,5 +243,12 @@ internal static partial class Program
             && row.Kind is "control" or "option/copy"))
             yield return new(row.Id, row.Kind, row.Line, file.Passed && file.Header == "File", "MainMenu.Items[0]", row.Detail,
                 file.Outcome, file.Id, "Frozen File menu remains the first attached native menu; project commands are exercised through it.", "", row.Source);
+        var spectrum = native.Single(record => record.Id == "spectrum-failure");
+        foreach (var row in inventory.Observations.Where(row =>
+            row.Source == "FamilyQuant/MainWindow.xaml" && row.Kind == "handler" && row.Detail == "MenuItemSpectrumComparison.Click = MenuItemSpectrumComparison_Click"
+            || row.Source == "FamilyQuant/MainWindow.xaml.cs" && row.Kind == "handler definition" && row.Detail.Contains(" MenuItemSpectrumComparison_Click(", StringComparison.Ordinal)))
+            yield return new(row.Id, row.Kind, row.Line, spectrum.Passed && spectrum.Dispatch == "native Click event",
+                "MenuItemSpectrumComparison_Click", row.Detail, spectrum.Dispatch + "; " + spectrum.Outcome, spectrum.Id,
+                "The enabled native menu dispatch reaches its actual handler and catches the pre-window Build refusal. Secondary-window content is outside this shell check.", "", row.Source);
     }
 }

@@ -13,7 +13,19 @@ internal static partial class Program
 {
     private const string StoredWorldFastaAssertion = "Database gap stored-world project requires available suggested-additions export";
 
-    private static int DatabaseGapScreens(string projectPath, string output, bool oldFingerprint = false)
+    private static int DatabaseGapCaptureCommand(string[] args)
+    {
+        bool negative = false; int? length = null;
+        for (int index = 3; index < args.Length; index++)
+            if (args[index] == "--negative-fingerprint") negative = true;
+            else if (args[index] == "--minimum-length" && ++index < args.Length
+                && int.TryParse(args[index], NumberStyles.Integer, CultureInfo.InvariantCulture, out int parsed)
+                && FamilyWorldOptions.LengthChoices.Contains(parsed)) length = parsed;
+            else throw new ArgumentException("Unknown Database gap capture option or minimum length.");
+        return DatabaseGapScreens(args[1], args[2], negative, length);
+    }
+
+    private static int DatabaseGapScreens(string projectPath, string output, bool oldFingerprint = false, int? selectedLength = null)
     {
         EnsureApplication();
         if (Directory.Exists(output) && Directory.EnumerateFileSystemEntries(output).Any())
@@ -21,10 +33,11 @@ internal static partial class Program
         Directory.CreateDirectory(output);
         string inputHash = FeatureLedgerEvidence.Hash(projectPath);
         var project = ProjectStore.ReadFqproj(projectPath);
+        int length = selectedLength ?? project.manifest.DatabaseGapMinimumTagLength ?? FamilyWorldOptions.DefaultMinimumTagLength;
         if (oldFingerprint)
         {
             var stored = Evidence.FamilyWorldFetcher.Stored(project.fcf);
-            var summary = project.manifest.FamilyWorldResult ?? throw new InvalidDataException("No stored result to exercise.");
+            var summary = project.manifest.FamilyWorldResult?.ForLength(length) ?? throw new InvalidDataException("No stored selected-length result to exercise.");
             // Reproduce the pre-B6 adapter's protein-list identity in memory. Input bytes stay untouched.
             summary.WorldFingerprint = FamilyWorld.Build(stored.Entries.Select(entry => new FamilyWorldProtein
             { Id = entry.Accession, Accession = entry.Accession, Sequence = entry.Sequence, Families = FamilyWorld.FamiliesOf(entry.Evidence),
@@ -32,7 +45,7 @@ internal static partial class Program
             if (summary.WorldFingerprint == stored.ContentSha256) throw new InvalidDataException("Negative fixture did not change the fingerprint.");
             Console.WriteLine("Negative control planted the old protein-list fingerprint in memory: " + summary.WorldFingerprint);
         }
-        var model = new DatabaseGapViewModel(project.manifest.FamilyWorldResult, project.fcf);
+        var model = new DatabaseGapViewModel(project.manifest.FamilyWorldResult, project.fcf, length);
         var previousTheme = Themes.ThemeManager.Current;
         try
         {
@@ -59,7 +72,7 @@ internal static partial class Program
                 File.WriteAllText(fastaPath, model.BuildSuggestedFasta());
                 var stored = Evidence.FamilyWorldFetcher.Stored(project.fcf);
                 var sequences = stored.Entries.ToDictionary(entry => entry.Accession, entry => entry.Sequence, StringComparer.Ordinal);
-                var expected = project.manifest.FamilyWorldResult!.Families.SelectMany(row => row.WorldProteins).ToHashSet(StringComparer.Ordinal);
+                var expected = model.Summary!.Families.SelectMany(row => row.WorldProteins).ToHashSet(StringComparer.Ordinal);
                 var actual = new Dictionary<string, StringBuilder>(StringComparer.Ordinal); string? accession = null;
                 bool validHeaders = true;
                 foreach (string line in File.ReadAllLines(fastaPath))
@@ -96,10 +109,13 @@ internal static partial class Program
         if (Directory.Exists(output) && Directory.EnumerateFileSystemEntries(output).Any()) throw new IOException("Regression output must be fresh.");
         Directory.CreateDirectory(output);
         string before = FeatureLedgerEvidence.Hash(projectPath), childOutput = Path.Combine(output, "negative");
+        int storedLength = ProjectStore.ReadFqproj(projectPath).manifest.FamilyWorldResult?.MinimumTagLength
+            ?? throw new InvalidDataException("No stored result for refusal regression.");
         var start = new ProcessStartInfo(Path.ChangeExtension(typeof(Program).Assembly.Location, ".exe"))
         { WorkingDirectory = Environment.CurrentDirectory, UseShellExecute = false, CreateNoWindow = true,
             RedirectStandardOutput = true, RedirectStandardError = true };
-        foreach (string argument in new[] { "--database-gap-screens", projectPath, childOutput, "--negative-fingerprint" }) start.ArgumentList.Add(argument);
+        foreach (string argument in new[] { "--database-gap-screens", projectPath, childOutput, "--minimum-length",
+            storedLength.ToString(CultureInfo.InvariantCulture), "--negative-fingerprint" }) start.ArgumentList.Add(argument);
         using var child = Process.Start(start)!;
         var error = child.StandardError.ReadToEndAsync(); string text = child.StandardOutput.ReadToEnd(); child.WaitForExit();
         text += error.GetAwaiter().GetResult(); File.WriteAllText(Path.Combine(output, "negative.log"), text);

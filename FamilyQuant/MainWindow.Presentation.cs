@@ -183,7 +183,12 @@ public partial class MainWindow
             owner.dnc = null;
             owner.home = null;
             owner.analytics = control;
-
+            var resultManifest = owner.loadedManifest;
+            control.ViewModel.ResultsOptionsChanged += (_, _) =>
+            {
+                if (ReferenceEquals(owner.analytics, control) && ReferenceEquals(owner.loadedManifest, resultManifest))
+                    owner.DocumentState.MarkModified();
+            };
 
             owner.GridApp.Children.Add(owner.analytics);
 

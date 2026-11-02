@@ -1,4 +1,5 @@
 using FamilyQuant.DeNovo;
+using System;
 using System.Collections.Generic;
 using System.Windows;
 
@@ -27,5 +28,11 @@ public partial class ComputeXicWindow : Window
         ScreenHost.Content = Screen;
         OperationOverlay.DataContext = ViewModel.Operations;
         Closing += (_, e) => { if (ViewModel.IsBusy) { e.Cancel = true; ViewModel.CancelCommand.Execute(null); } };
+    }
+
+    private void ButtonClose_Click(object sender, RoutedEventArgs e)
+    {
+        try { DialogResult = true; }
+        catch (InvalidOperationException) { Close(); }
     }
 }

@@ -5,61 +5,61 @@
   "runs": [
     {
       "id": "shell-declarations",
-      "command": "C:\\FamilyQuant-gate\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --ledger-shell-compare D:/FamilyQuant-data/out-shell/N3/source D:/FamilyQuant-data/out-refresh\\20261102-064527-FamilyQuant-gate\\shell-compare \u00222026-11-02 06:46:18 -0800\u0022",
-      "executedAt": "2026-11-02 06:46:18 -0800",
-      "commit": "bdd77ae8411f95752d74c8779e4c7c223b577ab2",
+      "command": "C:\\FamilyQuant-gate\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --ledger-shell-compare D:/FamilyQuant-data/out-shell/N3/source D:/FamilyQuant-data/out-refresh\\20261102-083342-FamilyQuant-gate\\shell-compare \u00222026-11-02 08:33:55 -0800\u0022",
+      "executedAt": "2026-11-02 08:33:55 -0800",
+      "commit": "c5cbd921a9328e18951ccef645a0966f1c658f7f",
       "artifacts": [
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-064527-FamilyQuant-gate\\shell-compare\\comparisons.log",
-          "sha256": "B147F7E1164DDC43FCFF244B88DC4E9AFA9A4CD1911878C469A1F9A7FDE5B154"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\shell-compare\\comparisons.log",
+          "sha256": "6E2FC1C285797B04CD40173760BB02C74834533D9CDCEF564C4870AB0A2AC5DA"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-064527-FamilyQuant-gate\\shell-compare\\comparisons.json",
-          "sha256": "E22D9957633F8EF5F70674773FEBEA5758411FABED7092F926C3F0D377D28E56"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\shell-compare\\comparisons.json",
+          "sha256": "FA15A844B75A71162C7C396D0C7A8890D38D5FC5FAE77FF51F211C5AD232B151"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-064527-FamilyQuant-gate\\shell-compare\\curation-runtime.json",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\shell-compare\\curation-runtime.json",
           "sha256": "4EF1BCE9EAFF5985013CD15A6B1CBFA29C34D7D42702007E522840A20879D128"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-064527-FamilyQuant-gate\\shell-compare\\executed\\Program.ShellLedgerReceipts.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\shell-compare\\executed\\Program.ShellLedgerReceipts.cs",
           "sha256": "6C0E1250A4A019C4937A0CABEF9BA9078213B35E597781407B767279490D3EF3"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-064527-FamilyQuant-gate\\shell-compare\\executed\\Program.ShellLedgerComparison.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\shell-compare\\executed\\Program.ShellLedgerComparison.cs",
           "sha256": "869FC668090431A23D08E8ED109B95BC937D9A6B94DE63E11E86672852649FEB"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-064527-FamilyQuant-gate\\shell-compare\\executed\\Program.Commands.LedgerDeclarations.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\shell-compare\\executed\\Program.Commands.LedgerDeclarations.cs",
           "sha256": "5F18F4DD7E56E601368051AAD44866736DE2FA60C17A5550F4A330C98DABB3D4"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-064527-FamilyQuant-gate\\shell-compare\\executed\\Program.CurationScreen.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\shell-compare\\executed\\Program.CurationScreen.cs",
           "sha256": "42C2CC3D48F2E59DC8E48D06915FE933C6A025F48972FDC3FB0458A0284FA2FF"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-064527-FamilyQuant-gate\\shell-compare\\executed\\LedgerDeclarationComparison.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\shell-compare\\executed\\LedgerDeclarationComparison.cs",
           "sha256": "78EC993565740269D572410A84584AF1D96488C1AE81F2455B1D9AA2D94BB4C3"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-064527-FamilyQuant-gate\\shell-compare\\executed\\LedgerMemberFactComparison.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\shell-compare\\executed\\LedgerMemberFactComparison.cs",
           "sha256": "1F3254D635B40D22576E9F40347DBEB503A5FF661EFC18E743EAC35B097FC14C"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-064527-FamilyQuant-gate\\shell-compare\\executed\\FeatureLedgerEvidence.Reporting.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\shell-compare\\executed\\FeatureLedgerEvidence.Reporting.cs",
           "sha256": "8633DCBB14E8DBF1746A1FD771AD4E9404900EB68BA46690A31EFC8DEDFA247B"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-064527-FamilyQuant-gate\\shell-compare\\executed\\FamilyQuant.Tests.dll",
-          "sha256": "BE4AFE7AFCCB5FCED49CA823DF90459D801AA6342A72B5ABD7F4DADB4CE0955B"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\shell-compare\\executed\\FamilyQuant.Tests.dll",
+          "sha256": "9A01C4E961B1B9331249F83D454CD0D9EDE4E50B17D923CF7E0EBC917751C350"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-064527-FamilyQuant-gate\\shell-compare\\executed\\FamilyQuant2.dll",
-          "sha256": "FF02C5678FFD09236674E5348A280FC32DEEC0E7168E14C04E2F9318F82735D0"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\shell-compare\\executed\\FamilyQuant2.dll",
+          "sha256": "A062FA792C8BCC2C058A656D85EE046B4B11698AE1A93C43A0898B8D021F6CE2"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-064527-FamilyQuant-gate\\shell-compare\\executed\\FamilyQuant.Core.dll",
-          "sha256": "57E9E7DAD845F3BC2101EC18B6C48ACA2340E9AF80B49DF7F63E2FA168BB4B02"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\shell-compare\\executed\\FamilyQuant.Core.dll",
+          "sha256": "F134CF23D6BD421822928B3419FF96FE425093781C645DA7AAA965F4BE639843"
         }
       ],
       "workingDirectory": "C:\\FamilyQuant-gate"
@@ -5644,11 +5644,17 @@
     },
     {
       "observationId": "FQ15-91271C1193AE",
-      "implementation": [],
+      "implementation": [
+        {
+          "path": "FamilyQuant/ComputeXicWindow.xaml",
+          "symbol": "FamilyQuant.ComputeXicWindow.ButtonClose.Content",
+          "sha256": "5B67765FC8C89E84679999CE0AE8C91769C36EB2655451BDF141784E4A1EBF90"
+        }
+      ],
       "proofs": [],
-      "note": "Current named element is missing or ambiguous.",
-      "kindReceiptId": null,
-      "compared": null
+      "note": "Declaration only; no reachability or handler-execution claim.",
+      "kindReceiptId": "shell-decl-option-copy",
+      "compared": "FamilyQuant/ComputeXicWindow.xaml:137 Close -\u003E FamilyQuant/ComputeXicWindow.xaml: FamilyQuant.ComputeXicWindow.ButtonClose.Content = Close"
     },
     {
       "observationId": "FQ15-9130F9764373",
@@ -8134,11 +8140,17 @@
     },
     {
       "observationId": "FQ15-D416700A21F4",
-      "implementation": [],
+      "implementation": [
+        {
+          "path": "FamilyQuant/ComputeXicWindow.xaml",
+          "symbol": "FamilyQuant.ComputeXicWindow.ButtonClose.ToolTip",
+          "sha256": "5B67765FC8C89E84679999CE0AE8C91769C36EB2655451BDF141784E4A1EBF90"
+        }
+      ],
       "proofs": [],
-      "note": "Current named element is missing or ambiguous.",
-      "kindReceiptId": null,
-      "compared": null
+      "note": "Declaration only; no reachability or handler-execution claim.",
+      "kindReceiptId": "shell-decl-tooltip",
+      "compared": "FamilyQuant/ComputeXicWindow.xaml:139 Close this window. A finished computation is kept in the project; Save the project to write it to disk. -\u003E FamilyQuant/ComputeXicWindow.xaml: FamilyQuant.ComputeXicWindow.ButtonClose.ToolTip = Close this window. A finished computation is kept in the project; Save the project to write it to disk."
     },
     {
       "observationId": "FQ15-D41E82F7EE50",
@@ -9805,7 +9817,7 @@
           "kind": "test",
           "target": "ShellLedgerComparisonCommand",
           "assertion": "shell declaration kind code fact: every listed matched observation retains its exact declaration",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-064527-FamilyQuant-gate\\shell-compare\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\shell-compare\\comparisons.log",
           "inspectedBy": ""
         }
       ]
@@ -9819,7 +9831,7 @@
           "kind": "test",
           "target": "ShellLedgerComparisonCommand",
           "assertion": "shell declaration kind export/storage fact: every listed matched observation retains its exact declaration",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-064527-FamilyQuant-gate\\shell-compare\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\shell-compare\\comparisons.log",
           "inspectedBy": ""
         }
       ]
@@ -9833,7 +9845,7 @@
           "kind": "test",
           "target": "ShellLedgerComparisonCommand",
           "assertion": "shell declaration kind format/export: every listed matched observation retains its exact declaration",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-064527-FamilyQuant-gate\\shell-compare\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\shell-compare\\comparisons.log",
           "inspectedBy": ""
         }
       ]
@@ -9847,7 +9859,21 @@
           "kind": "test",
           "target": "ShellLedgerComparisonCommand",
           "assertion": "shell declaration kind option/copy: every listed matched observation retains its exact declaration",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-064527-FamilyQuant-gate\\shell-compare\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\shell-compare\\comparisons.log",
+          "inspectedBy": ""
+        }
+      ]
+    },
+    {
+      "id": "shell-decl-tooltip",
+      "kind": "tooltip",
+      "proofs": [
+        {
+          "runId": "shell-declarations",
+          "kind": "test",
+          "target": "ShellLedgerComparisonCommand",
+          "assertion": "shell declaration kind tooltip: every listed matched observation retains its exact declaration",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\shell-compare\\comparisons.log",
           "inspectedBy": ""
         }
       ]

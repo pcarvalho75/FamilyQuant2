@@ -155,3 +155,39 @@ The build has zero warnings/errors; receipt fixtures are 33/0/0 and shared compa
 fixtures 52/0/0. The final quick suite is 3,058/0/17 in 103 seconds. Stored-project
 golden comparisons are 4/0/0 at `secondary/interactions-golden-final`. The worker
 did not run the desk's full suite, fresh RAW extraction or Ana-file reproduction.
+
+## Restored Quantify Close contract
+
+M40 assigns the product repair solely to `ComputeXicWindow.xaml` and its code behind.
+The compatibility host again offers a bottom-right Close button using the current
+implicit button style. Its existing frozen handler pattern sets `DialogResult = true`
+for modal callers and closes a nonmodal host when that property refuses the assignment.
+The busy overlay covers both the Quantify content and the Close footer.
+
+`--test-quantify-close`, also called by the ordinary shell checks, first failed
+8 assertions before the product edit. Afterward all 16 checks pass across dark/light
+themes and modal/nonmodal hosts. Actual Close clicks close once, preserve the exact
+completed rows and manifest, and return true to modal callers. Each host starts at
+Left/Top -30000, with ShowActivated and ShowInTaskbar false. The checker reads the
+foreground handle and native active state before clicking; every host stays inactive.
+It never changes the real clipboard or foreground window.
+
+The secondary interaction producer now compares all four restored rows by executing
+the frozen and current buttons in both host modes. It retains the button, caption,
+Click count, Closed result, modal return, position and activation readings per row.
+The earlier modal gap above describes the pre-fix packet, not the repaired behavior.
+
+Accepted Close-fix runs are `secondary/close-interactions-1` and `-2`: 56/0/124,
+with all 84 non-receipt files identical. The same receipt now supports 48 rows,
+including the four restored Close rows. Its deliberate Shift negative is 54/1/124,
+and importing it fails before mutation, leaving the accepted receipt unchanged.
+The affected first packet was refreshed with current host hashes at `close-first-1`
+and `-2`, 172/0/172 with all 74 non-receipt files identical and the same 163 proofs.
+Native ledger import reports 3,470 VERIFIED, 1,990 OPEN and 296 approved drops.
+
+The product READY merge is `e257948` with master `ada6c23`. The final build has zero
+warnings/errors, quick passes 3,135/0/17 in 183 seconds, and stored-project golden
+passes 4/0/0 at `secondary/close-golden`. The desk's full suite was not run here.
+Subsequent tests/receipts/docs-only batches follow M41: focused/native ledger checks,
+no routine READY merge and no worker quick/golden. Producers remain the documented
+`--ledger-secondary-runtime` and `--ledger-secondary-interactions` commands.

@@ -129,7 +129,7 @@ internal static partial class Program
             .Distinct(StringComparer.Ordinal).ToArray();
         SecondaryLedgerRegister(root, frozenRoot, audit, output, args[5], step, nameof(SecondaryRuntimeCommand), results, assertions, log, data,
             sources, Directory.GetFiles(Path.Combine(root, "FamilyQuant.Tests"), "Program.Secondary*.cs").Select(path => Path.GetRelativePath(root, path))
-                .Append("FamilyQuant.Tests/Program.Commands.SecondaryLedger.cs"), runtime: true);
+                .Append("FamilyQuant.Tests/Program.Commands.SecondaryLedger.cs").Append("FamilyQuant.Tests/Program.QuantifyClose.cs"), runtime: true);
         return failed == 0 ? 0 : 1;
     }
 

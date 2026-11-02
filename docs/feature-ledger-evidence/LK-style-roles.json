@@ -5,56 +5,56 @@
   "runs": [
     {
       "id": "LK-style-roles",
-      "command": "D:\\FamilyQuant-wt\\look\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --prove-look-style-roles D:/FamilyQuant-data/out-shell/N3/source D:/FamilyQuant-wt/look/docs/LOOK-STYLE-ROLES.json D:/FamilyQuant-data/out-look/ledger/styles/green-1 \u00222026-11-02 04:48:31 -0800\u0022",
-      "executedAt": "2026-11-02 04:48:31 -0800",
-      "commit": "10dd1eb670b8bdb0dfe22233ba0b3c79e78a8b0b",
+      "command": "C:\\FamilyQuant-gate\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --refresh-look-registers D:/FamilyQuant-data/out-shell/N3/source D:/FamilyQuant-data/out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh \u00222026-11-02 08:34:42 -0800\u0022",
+      "executedAt": "2026-11-02 08:34:42 -0800",
+      "commit": "c5cbd921a9328e18951ccef645a0966f1c658f7f",
       "artifacts": [
         {
-          "path": "D:\\FamilyQuant-data\\out-look\\ledger\\styles\\green-1\\proofs.log",
-          "sha256": "C56FE3D726DAEB88D5A29BD0BE06A73E324A6189D6E75C8EB9D4568F6736012B"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-style-roles\\proofs.log",
+          "sha256": "51F20F27DAD537AF2BB261AD1C79F97DCD94CCEFDF3BC1F3EFDC52F4874A02BF"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-look\\ledger\\styles\\green-1\\resolved-styles.json",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-style-roles\\resolved-styles.json",
           "sha256": "81866C2965D6C8A58BE7AF2E631FE8D4968035E0E4D6250EFBBBB664AE7AD545"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-look\\ledger\\styles\\green-1\\executed\\FamilyQuant_DeNovoControl.xaml",
-          "sha256": "C64BA87F386ED38607C988542429882451BF749DFA54D8C9F359145F79422806"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-style-roles\\executed\\FamilyQuant_DeNovoControl.xaml",
+          "sha256": "024AB577E3E28F445C6B4761C3F093510532E25933AA8B5A036D8AD8B2DFB6BC"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-look\\ledger\\styles\\green-1\\executed\\FamilyQuant_Themes_ThemeManager.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-style-roles\\executed\\FamilyQuant_Themes_ThemeManager.cs",
           "sha256": "9711D576445774BFBFE872F8A813AA6A3EEF7962A3A849ED9113D6718C0D298E"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-look\\ledger\\styles\\green-1\\executed\\FamilyQuant_Themes_Tokens.xaml",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-style-roles\\executed\\FamilyQuant_Themes_Tokens.xaml",
           "sha256": "F0034F7A77C15E7FB8A21C5C4F169322922C7860418D7D3C1ED1CEA7D7BBFD7D"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-look\\ledger\\styles\\green-1\\executed\\FamilyQuant.Tests_Program.LookStyleRoles.cs",
-          "sha256": "0930F926F73051952CB00A760819C83680FAA4188FD7B25DB720E6732C0A1570"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-style-roles\\executed\\FamilyQuant.Tests_Program.LookStyleRoles.cs",
+          "sha256": "67729F9BBB5501B22BDDE5DDE9A8B3D26115F9ED37FDD50F604355322096514F"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-look\\ledger\\styles\\green-1\\executed\\FamilyQuant.Tests_Program.Commands.LookLedger.cs",
-          "sha256": "ADDFAB808CB82BC1BC73391D4587053B8A3DA8B63225DC59EEF1885BD95B526E"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-style-roles\\executed\\FamilyQuant.Tests_Program.Commands.LookLedger.cs",
+          "sha256": "720C18B4EFB51512A4DF2EEB3E25DFD58C9029105886C20E6072F27FD3396992"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-look\\ledger\\styles\\green-1\\executed\\LOOK-STYLE-ROLES.json",
-          "sha256": "AA758507059035785C11B8B09E1DBCBB528AE91B4E0BB1A879241EC429C5C661"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-style-roles\\executed\\LOOK-STYLE-ROLES.json",
+          "sha256": "0ED17004A35DFA06BEB7846B9F8F78B1F06BAD9E4229BDA1711F8D570766AC2E"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-look\\ledger\\styles\\green-1\\executed\\FamilyQuant.Tests.dll",
-          "sha256": "5AF5B97BBA68DC33178248CB866DD19E91C23DF8ADBAC94A7608E60B19796058"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-style-roles\\executed\\FamilyQuant.Tests.dll",
+          "sha256": "9A01C4E961B1B9331249F83D454CD0D9EDE4E50B17D923CF7E0EBC917751C350"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-look\\ledger\\styles\\green-1\\executed\\FamilyQuant2.dll",
-          "sha256": "16974A44C11FEA40628B3AA216171D6BC57027C0006000BB5E237E39971CD5D0"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-style-roles\\executed\\FamilyQuant2.dll",
+          "sha256": "A062FA792C8BCC2C058A656D85EE046B4B11698AE1A93C43A0898B8D021F6CE2"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-look\\ledger\\styles\\green-1\\executed\\FamilyQuant.Core.dll",
-          "sha256": "C74F7954A3AC95E7C4BEF501461C4DC74FB7D0FBB87D7BC289B773385804D105"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-style-roles\\executed\\FamilyQuant.Core.dll",
+          "sha256": "F134CF23D6BD421822928B3419FF96FE425093781C645DA7AAA965F4BE639843"
         }
       ],
-      "workingDirectory": "D:\\FamilyQuant-wt\\look"
+      "workingDirectory": "C:\\FamilyQuant-gate"
     }
   ],
   "rows": [
@@ -64,7 +64,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "DeNovoControl style role LayerBadge.Style.Key",
-          "sha256": "C64BA87F386ED38607C988542429882451BF749DFA54D8C9F359145F79422806"
+          "sha256": "024AB577E3E28F445C6B4761C3F093510532E25933AA8B5A036D8AD8B2DFB6BC"
         },
         {
           "path": "FamilyQuant/Themes/ThemeManager.cs",
@@ -83,7 +83,7 @@
           "kind": "test",
           "target": "LookStyleRoleCommand",
           "assertion": "style role FQ15-8BC847EA8C1E / Dark: LayerBadge.Style.Key",
-          "artifact": "D:\\FamilyQuant-data\\out-look\\ledger\\styles\\green-1\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-style-roles\\proofs.log",
           "inspectedBy": ""
         },
         {
@@ -91,7 +91,7 @@
           "kind": "test",
           "target": "LookStyleRoleCommand",
           "assertion": "style role FQ15-8BC847EA8C1E / Light: LayerBadge.Style.Key",
-          "artifact": "D:\\FamilyQuant-data\\out-look\\ledger\\styles\\green-1\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-style-roles\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -105,7 +105,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "DeNovoControl style role LayerBadge.CornerRadius",
-          "sha256": "C64BA87F386ED38607C988542429882451BF749DFA54D8C9F359145F79422806"
+          "sha256": "024AB577E3E28F445C6B4761C3F093510532E25933AA8B5A036D8AD8B2DFB6BC"
         },
         {
           "path": "FamilyQuant/Themes/ThemeManager.cs",
@@ -124,7 +124,7 @@
           "kind": "test",
           "target": "LookStyleRoleCommand",
           "assertion": "style role FQ15-F8D72845D5F1 / Dark: LayerBadge.CornerRadius",
-          "artifact": "D:\\FamilyQuant-data\\out-look\\ledger\\styles\\green-1\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-style-roles\\proofs.log",
           "inspectedBy": ""
         },
         {
@@ -132,7 +132,7 @@
           "kind": "test",
           "target": "LookStyleRoleCommand",
           "assertion": "style role FQ15-F8D72845D5F1 / Light: LayerBadge.CornerRadius",
-          "artifact": "D:\\FamilyQuant-data\\out-look\\ledger\\styles\\green-1\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-style-roles\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -146,7 +146,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "DeNovoControl style role LayerBadge.Padding",
-          "sha256": "C64BA87F386ED38607C988542429882451BF749DFA54D8C9F359145F79422806"
+          "sha256": "024AB577E3E28F445C6B4761C3F093510532E25933AA8B5A036D8AD8B2DFB6BC"
         },
         {
           "path": "FamilyQuant/Themes/ThemeManager.cs",
@@ -165,7 +165,7 @@
           "kind": "test",
           "target": "LookStyleRoleCommand",
           "assertion": "style role FQ15-3BAEF428C0E5 / Dark: LayerBadge.Padding",
-          "artifact": "D:\\FamilyQuant-data\\out-look\\ledger\\styles\\green-1\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-style-roles\\proofs.log",
           "inspectedBy": ""
         },
         {
@@ -173,7 +173,7 @@
           "kind": "test",
           "target": "LookStyleRoleCommand",
           "assertion": "style role FQ15-3BAEF428C0E5 / Light: LayerBadge.Padding",
-          "artifact": "D:\\FamilyQuant-data\\out-look\\ledger\\styles\\green-1\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-style-roles\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -187,7 +187,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "DeNovoControl style role LayerBadge.Margin",
-          "sha256": "C64BA87F386ED38607C988542429882451BF749DFA54D8C9F359145F79422806"
+          "sha256": "024AB577E3E28F445C6B4761C3F093510532E25933AA8B5A036D8AD8B2DFB6BC"
         },
         {
           "path": "FamilyQuant/Themes/ThemeManager.cs",
@@ -206,7 +206,7 @@
           "kind": "test",
           "target": "LookStyleRoleCommand",
           "assertion": "style role FQ15-9A11B5EA2B79 / Dark: LayerBadge.Margin",
-          "artifact": "D:\\FamilyQuant-data\\out-look\\ledger\\styles\\green-1\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-style-roles\\proofs.log",
           "inspectedBy": ""
         },
         {
@@ -214,7 +214,7 @@
           "kind": "test",
           "target": "LookStyleRoleCommand",
           "assertion": "style role FQ15-9A11B5EA2B79 / Light: LayerBadge.Margin",
-          "artifact": "D:\\FamilyQuant-data\\out-look\\ledger\\styles\\green-1\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-style-roles\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -228,7 +228,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "DeNovoControl style role LayerBadge.VerticalAlignment",
-          "sha256": "C64BA87F386ED38607C988542429882451BF749DFA54D8C9F359145F79422806"
+          "sha256": "024AB577E3E28F445C6B4761C3F093510532E25933AA8B5A036D8AD8B2DFB6BC"
         },
         {
           "path": "FamilyQuant/Themes/ThemeManager.cs",
@@ -247,7 +247,7 @@
           "kind": "test",
           "target": "LookStyleRoleCommand",
           "assertion": "style role FQ15-861D29CD144B / Dark: LayerBadge.VerticalAlignment",
-          "artifact": "D:\\FamilyQuant-data\\out-look\\ledger\\styles\\green-1\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-style-roles\\proofs.log",
           "inspectedBy": ""
         },
         {
@@ -255,7 +255,7 @@
           "kind": "test",
           "target": "LookStyleRoleCommand",
           "assertion": "style role FQ15-861D29CD144B / Light: LayerBadge.VerticalAlignment",
-          "artifact": "D:\\FamilyQuant-data\\out-look\\ledger\\styles\\green-1\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-style-roles\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -269,7 +269,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "DeNovoControl style role LayerBadgeText.Style.Key",
-          "sha256": "C64BA87F386ED38607C988542429882451BF749DFA54D8C9F359145F79422806"
+          "sha256": "024AB577E3E28F445C6B4761C3F093510532E25933AA8B5A036D8AD8B2DFB6BC"
         },
         {
           "path": "FamilyQuant/Themes/ThemeManager.cs",
@@ -288,7 +288,7 @@
           "kind": "test",
           "target": "LookStyleRoleCommand",
           "assertion": "style role FQ15-969B0A56C686 / Dark: LayerBadgeText.Style.Key",
-          "artifact": "D:\\FamilyQuant-data\\out-look\\ledger\\styles\\green-1\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-style-roles\\proofs.log",
           "inspectedBy": ""
         },
         {
@@ -296,7 +296,7 @@
           "kind": "test",
           "target": "LookStyleRoleCommand",
           "assertion": "style role FQ15-969B0A56C686 / Light: LayerBadgeText.Style.Key",
-          "artifact": "D:\\FamilyQuant-data\\out-look\\ledger\\styles\\green-1\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-style-roles\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -310,7 +310,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "DeNovoControl style role LayerBadgeText.FontSize",
-          "sha256": "C64BA87F386ED38607C988542429882451BF749DFA54D8C9F359145F79422806"
+          "sha256": "024AB577E3E28F445C6B4761C3F093510532E25933AA8B5A036D8AD8B2DFB6BC"
         },
         {
           "path": "FamilyQuant/Themes/ThemeManager.cs",
@@ -329,7 +329,7 @@
           "kind": "test",
           "target": "LookStyleRoleCommand",
           "assertion": "style role FQ15-36F91EE02CDC / Dark: LayerBadgeText.FontSize",
-          "artifact": "D:\\FamilyQuant-data\\out-look\\ledger\\styles\\green-1\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-style-roles\\proofs.log",
           "inspectedBy": ""
         },
         {
@@ -337,7 +337,7 @@
           "kind": "test",
           "target": "LookStyleRoleCommand",
           "assertion": "style role FQ15-36F91EE02CDC / Light: LayerBadgeText.FontSize",
-          "artifact": "D:\\FamilyQuant-data\\out-look\\ledger\\styles\\green-1\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-style-roles\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -351,7 +351,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "DeNovoControl style role LayerBadgeText.FontWeight",
-          "sha256": "C64BA87F386ED38607C988542429882451BF749DFA54D8C9F359145F79422806"
+          "sha256": "024AB577E3E28F445C6B4761C3F093510532E25933AA8B5A036D8AD8B2DFB6BC"
         },
         {
           "path": "FamilyQuant/Themes/ThemeManager.cs",
@@ -370,7 +370,7 @@
           "kind": "test",
           "target": "LookStyleRoleCommand",
           "assertion": "style role FQ15-A81C965D49A9 / Dark: LayerBadgeText.FontWeight",
-          "artifact": "D:\\FamilyQuant-data\\out-look\\ledger\\styles\\green-1\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-style-roles\\proofs.log",
           "inspectedBy": ""
         },
         {
@@ -378,7 +378,7 @@
           "kind": "test",
           "target": "LookStyleRoleCommand",
           "assertion": "style role FQ15-A81C965D49A9 / Light: LayerBadgeText.FontWeight",
-          "artifact": "D:\\FamilyQuant-data\\out-look\\ledger\\styles\\green-1\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-style-roles\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -392,7 +392,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "DeNovoControl style role LayerBadgeText.Foreground",
-          "sha256": "C64BA87F386ED38607C988542429882451BF749DFA54D8C9F359145F79422806"
+          "sha256": "024AB577E3E28F445C6B4761C3F093510532E25933AA8B5A036D8AD8B2DFB6BC"
         },
         {
           "path": "FamilyQuant/Themes/ThemeManager.cs",
@@ -411,7 +411,7 @@
           "kind": "test",
           "target": "LookStyleRoleCommand",
           "assertion": "style role FQ15-53C091FC29DF / Dark: LayerBadgeText.Foreground",
-          "artifact": "D:\\FamilyQuant-data\\out-look\\ledger\\styles\\green-1\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-style-roles\\proofs.log",
           "inspectedBy": ""
         },
         {
@@ -419,7 +419,7 @@
           "kind": "test",
           "target": "LookStyleRoleCommand",
           "assertion": "style role FQ15-53C091FC29DF / Light: LayerBadgeText.Foreground",
-          "artifact": "D:\\FamilyQuant-data\\out-look\\ledger\\styles\\green-1\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-style-roles\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -433,7 +433,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "DeNovoControl style role LayerTitle.Style.Key",
-          "sha256": "C64BA87F386ED38607C988542429882451BF749DFA54D8C9F359145F79422806"
+          "sha256": "024AB577E3E28F445C6B4761C3F093510532E25933AA8B5A036D8AD8B2DFB6BC"
         },
         {
           "path": "FamilyQuant/Themes/ThemeManager.cs",
@@ -452,7 +452,7 @@
           "kind": "test",
           "target": "LookStyleRoleCommand",
           "assertion": "style role FQ15-220D63CC3ECF / Dark: LayerTitle.Style.Key",
-          "artifact": "D:\\FamilyQuant-data\\out-look\\ledger\\styles\\green-1\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-style-roles\\proofs.log",
           "inspectedBy": ""
         },
         {
@@ -460,7 +460,7 @@
           "kind": "test",
           "target": "LookStyleRoleCommand",
           "assertion": "style role FQ15-220D63CC3ECF / Light: LayerTitle.Style.Key",
-          "artifact": "D:\\FamilyQuant-data\\out-look\\ledger\\styles\\green-1\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-style-roles\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -474,7 +474,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "DeNovoControl style role LayerTitle.Foreground",
-          "sha256": "C64BA87F386ED38607C988542429882451BF749DFA54D8C9F359145F79422806"
+          "sha256": "024AB577E3E28F445C6B4761C3F093510532E25933AA8B5A036D8AD8B2DFB6BC"
         },
         {
           "path": "FamilyQuant/Themes/ThemeManager.cs",
@@ -493,7 +493,7 @@
           "kind": "test",
           "target": "LookStyleRoleCommand",
           "assertion": "style role FQ15-06623D41A745 / Dark: LayerTitle.Foreground",
-          "artifact": "D:\\FamilyQuant-data\\out-look\\ledger\\styles\\green-1\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-style-roles\\proofs.log",
           "inspectedBy": ""
         },
         {
@@ -501,7 +501,7 @@
           "kind": "test",
           "target": "LookStyleRoleCommand",
           "assertion": "style role FQ15-06623D41A745 / Light: LayerTitle.Foreground",
-          "artifact": "D:\\FamilyQuant-data\\out-look\\ledger\\styles\\green-1\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-style-roles\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -515,7 +515,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "DeNovoControl style role LayerTitle.FontWeight",
-          "sha256": "C64BA87F386ED38607C988542429882451BF749DFA54D8C9F359145F79422806"
+          "sha256": "024AB577E3E28F445C6B4761C3F093510532E25933AA8B5A036D8AD8B2DFB6BC"
         },
         {
           "path": "FamilyQuant/Themes/ThemeManager.cs",
@@ -534,7 +534,7 @@
           "kind": "test",
           "target": "LookStyleRoleCommand",
           "assertion": "style role FQ15-74C914EA14F2 / Dark: LayerTitle.FontWeight",
-          "artifact": "D:\\FamilyQuant-data\\out-look\\ledger\\styles\\green-1\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-style-roles\\proofs.log",
           "inspectedBy": ""
         },
         {
@@ -542,7 +542,7 @@
           "kind": "test",
           "target": "LookStyleRoleCommand",
           "assertion": "style role FQ15-74C914EA14F2 / Light: LayerTitle.FontWeight",
-          "artifact": "D:\\FamilyQuant-data\\out-look\\ledger\\styles\\green-1\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-style-roles\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -556,7 +556,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "DeNovoControl style role LayerTitle.VerticalAlignment",
-          "sha256": "C64BA87F386ED38607C988542429882451BF749DFA54D8C9F359145F79422806"
+          "sha256": "024AB577E3E28F445C6B4761C3F093510532E25933AA8B5A036D8AD8B2DFB6BC"
         },
         {
           "path": "FamilyQuant/Themes/ThemeManager.cs",
@@ -575,7 +575,7 @@
           "kind": "test",
           "target": "LookStyleRoleCommand",
           "assertion": "style role FQ15-616DB022B653 / Dark: LayerTitle.VerticalAlignment",
-          "artifact": "D:\\FamilyQuant-data\\out-look\\ledger\\styles\\green-1\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-style-roles\\proofs.log",
           "inspectedBy": ""
         },
         {
@@ -583,7 +583,7 @@
           "kind": "test",
           "target": "LookStyleRoleCommand",
           "assertion": "style role FQ15-616DB022B653 / Light: LayerTitle.VerticalAlignment",
-          "artifact": "D:\\FamilyQuant-data\\out-look\\ledger\\styles\\green-1\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-style-roles\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -597,7 +597,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "DeNovoControl style role ResultValue.Style.Key",
-          "sha256": "C64BA87F386ED38607C988542429882451BF749DFA54D8C9F359145F79422806"
+          "sha256": "024AB577E3E28F445C6B4761C3F093510532E25933AA8B5A036D8AD8B2DFB6BC"
         },
         {
           "path": "FamilyQuant/Themes/ThemeManager.cs",
@@ -616,7 +616,7 @@
           "kind": "test",
           "target": "LookStyleRoleCommand",
           "assertion": "style role FQ15-4246F074896F / Dark: ResultValue.Style.Key",
-          "artifact": "D:\\FamilyQuant-data\\out-look\\ledger\\styles\\green-1\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-style-roles\\proofs.log",
           "inspectedBy": ""
         },
         {
@@ -624,7 +624,7 @@
           "kind": "test",
           "target": "LookStyleRoleCommand",
           "assertion": "style role FQ15-4246F074896F / Light: ResultValue.Style.Key",
-          "artifact": "D:\\FamilyQuant-data\\out-look\\ledger\\styles\\green-1\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-style-roles\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -638,7 +638,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "DeNovoControl style role ResultValue.Foreground",
-          "sha256": "C64BA87F386ED38607C988542429882451BF749DFA54D8C9F359145F79422806"
+          "sha256": "024AB577E3E28F445C6B4761C3F093510532E25933AA8B5A036D8AD8B2DFB6BC"
         },
         {
           "path": "FamilyQuant/Themes/ThemeManager.cs",
@@ -657,7 +657,7 @@
           "kind": "test",
           "target": "LookStyleRoleCommand",
           "assertion": "style role FQ15-5680CE8D113E / Dark: ResultValue.Foreground",
-          "artifact": "D:\\FamilyQuant-data\\out-look\\ledger\\styles\\green-1\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-style-roles\\proofs.log",
           "inspectedBy": ""
         },
         {
@@ -665,7 +665,7 @@
           "kind": "test",
           "target": "LookStyleRoleCommand",
           "assertion": "style role FQ15-5680CE8D113E / Light: ResultValue.Foreground",
-          "artifact": "D:\\FamilyQuant-data\\out-look\\ledger\\styles\\green-1\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-style-roles\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -679,7 +679,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "DeNovoControl style role ResultValue.FontWeight",
-          "sha256": "C64BA87F386ED38607C988542429882451BF749DFA54D8C9F359145F79422806"
+          "sha256": "024AB577E3E28F445C6B4761C3F093510532E25933AA8B5A036D8AD8B2DFB6BC"
         },
         {
           "path": "FamilyQuant/Themes/ThemeManager.cs",
@@ -698,7 +698,7 @@
           "kind": "test",
           "target": "LookStyleRoleCommand",
           "assertion": "style role FQ15-BDE150D37198 / Dark: ResultValue.FontWeight",
-          "artifact": "D:\\FamilyQuant-data\\out-look\\ledger\\styles\\green-1\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-style-roles\\proofs.log",
           "inspectedBy": ""
         },
         {
@@ -706,7 +706,7 @@
           "kind": "test",
           "target": "LookStyleRoleCommand",
           "assertion": "style role FQ15-BDE150D37198 / Light: ResultValue.FontWeight",
-          "artifact": "D:\\FamilyQuant-data\\out-look\\ledger\\styles\\green-1\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-style-roles\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -720,7 +720,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "DeNovoControl style role ResultValue.FontSize",
-          "sha256": "C64BA87F386ED38607C988542429882451BF749DFA54D8C9F359145F79422806"
+          "sha256": "024AB577E3E28F445C6B4761C3F093510532E25933AA8B5A036D8AD8B2DFB6BC"
         },
         {
           "path": "FamilyQuant/Themes/ThemeManager.cs",
@@ -739,7 +739,7 @@
           "kind": "test",
           "target": "LookStyleRoleCommand",
           "assertion": "style role FQ15-298DB85DE10C / Dark: ResultValue.FontSize",
-          "artifact": "D:\\FamilyQuant-data\\out-look\\ledger\\styles\\green-1\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-style-roles\\proofs.log",
           "inspectedBy": ""
         },
         {
@@ -747,7 +747,7 @@
           "kind": "test",
           "target": "LookStyleRoleCommand",
           "assertion": "style role FQ15-298DB85DE10C / Light: ResultValue.FontSize",
-          "artifact": "D:\\FamilyQuant-data\\out-look\\ledger\\styles\\green-1\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-style-roles\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -761,7 +761,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "DeNovoControl style role ResultValue.VerticalAlignment",
-          "sha256": "C64BA87F386ED38607C988542429882451BF749DFA54D8C9F359145F79422806"
+          "sha256": "024AB577E3E28F445C6B4761C3F093510532E25933AA8B5A036D8AD8B2DFB6BC"
         },
         {
           "path": "FamilyQuant/Themes/ThemeManager.cs",
@@ -780,7 +780,7 @@
           "kind": "test",
           "target": "LookStyleRoleCommand",
           "assertion": "style role FQ15-D549F0C6E7EA / Dark: ResultValue.VerticalAlignment",
-          "artifact": "D:\\FamilyQuant-data\\out-look\\ledger\\styles\\green-1\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-style-roles\\proofs.log",
           "inspectedBy": ""
         },
         {
@@ -788,7 +788,7 @@
           "kind": "test",
           "target": "LookStyleRoleCommand",
           "assertion": "style role FQ15-D549F0C6E7EA / Light: ResultValue.VerticalAlignment",
-          "artifact": "D:\\FamilyQuant-data\\out-look\\ledger\\styles\\green-1\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-style-roles\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -802,7 +802,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "DeNovoControl style role ResultValue.Margin",
-          "sha256": "C64BA87F386ED38607C988542429882451BF749DFA54D8C9F359145F79422806"
+          "sha256": "024AB577E3E28F445C6B4761C3F093510532E25933AA8B5A036D8AD8B2DFB6BC"
         },
         {
           "path": "FamilyQuant/Themes/ThemeManager.cs",
@@ -821,7 +821,7 @@
           "kind": "test",
           "target": "LookStyleRoleCommand",
           "assertion": "style role FQ15-F6C1061154A9 / Dark: ResultValue.Margin",
-          "artifact": "D:\\FamilyQuant-data\\out-look\\ledger\\styles\\green-1\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-style-roles\\proofs.log",
           "inspectedBy": ""
         },
         {
@@ -829,7 +829,7 @@
           "kind": "test",
           "target": "LookStyleRoleCommand",
           "assertion": "style role FQ15-F6C1061154A9 / Light: ResultValue.Margin",
-          "artifact": "D:\\FamilyQuant-data\\out-look\\ledger\\styles\\green-1\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-style-roles\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -843,7 +843,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "DeNovoControl style role Note.Style.Key",
-          "sha256": "C64BA87F386ED38607C988542429882451BF749DFA54D8C9F359145F79422806"
+          "sha256": "024AB577E3E28F445C6B4761C3F093510532E25933AA8B5A036D8AD8B2DFB6BC"
         },
         {
           "path": "FamilyQuant/Themes/ThemeManager.cs",
@@ -862,7 +862,7 @@
           "kind": "test",
           "target": "LookStyleRoleCommand",
           "assertion": "style role FQ15-8E574C2E5D40 / Dark: Note.Style.Key",
-          "artifact": "D:\\FamilyQuant-data\\out-look\\ledger\\styles\\green-1\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-style-roles\\proofs.log",
           "inspectedBy": ""
         },
         {
@@ -870,7 +870,7 @@
           "kind": "test",
           "target": "LookStyleRoleCommand",
           "assertion": "style role FQ15-8E574C2E5D40 / Light: Note.Style.Key",
-          "artifact": "D:\\FamilyQuant-data\\out-look\\ledger\\styles\\green-1\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-style-roles\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -884,7 +884,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "DeNovoControl style role Note.Foreground",
-          "sha256": "C64BA87F386ED38607C988542429882451BF749DFA54D8C9F359145F79422806"
+          "sha256": "024AB577E3E28F445C6B4761C3F093510532E25933AA8B5A036D8AD8B2DFB6BC"
         },
         {
           "path": "FamilyQuant/Themes/ThemeManager.cs",
@@ -903,7 +903,7 @@
           "kind": "test",
           "target": "LookStyleRoleCommand",
           "assertion": "style role FQ15-5F2C1E449429 / Dark: Note.Foreground",
-          "artifact": "D:\\FamilyQuant-data\\out-look\\ledger\\styles\\green-1\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-style-roles\\proofs.log",
           "inspectedBy": ""
         },
         {
@@ -911,7 +911,7 @@
           "kind": "test",
           "target": "LookStyleRoleCommand",
           "assertion": "style role FQ15-5F2C1E449429 / Light: Note.Foreground",
-          "artifact": "D:\\FamilyQuant-data\\out-look\\ledger\\styles\\green-1\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-style-roles\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -925,7 +925,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "DeNovoControl style role Note.FontSize",
-          "sha256": "C64BA87F386ED38607C988542429882451BF749DFA54D8C9F359145F79422806"
+          "sha256": "024AB577E3E28F445C6B4761C3F093510532E25933AA8B5A036D8AD8B2DFB6BC"
         },
         {
           "path": "FamilyQuant/Themes/ThemeManager.cs",
@@ -944,7 +944,7 @@
           "kind": "test",
           "target": "LookStyleRoleCommand",
           "assertion": "style role FQ15-CA0B824CA99E / Dark: Note.FontSize",
-          "artifact": "D:\\FamilyQuant-data\\out-look\\ledger\\styles\\green-1\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-style-roles\\proofs.log",
           "inspectedBy": ""
         },
         {
@@ -952,7 +952,7 @@
           "kind": "test",
           "target": "LookStyleRoleCommand",
           "assertion": "style role FQ15-CA0B824CA99E / Light: Note.FontSize",
-          "artifact": "D:\\FamilyQuant-data\\out-look\\ledger\\styles\\green-1\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-style-roles\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -966,7 +966,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "DeNovoControl style role Note.TextWrapping",
-          "sha256": "C64BA87F386ED38607C988542429882451BF749DFA54D8C9F359145F79422806"
+          "sha256": "024AB577E3E28F445C6B4761C3F093510532E25933AA8B5A036D8AD8B2DFB6BC"
         },
         {
           "path": "FamilyQuant/Themes/ThemeManager.cs",
@@ -985,7 +985,7 @@
           "kind": "test",
           "target": "LookStyleRoleCommand",
           "assertion": "style role FQ15-B6FB542118DB / Dark: Note.TextWrapping",
-          "artifact": "D:\\FamilyQuant-data\\out-look\\ledger\\styles\\green-1\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-style-roles\\proofs.log",
           "inspectedBy": ""
         },
         {
@@ -993,7 +993,7 @@
           "kind": "test",
           "target": "LookStyleRoleCommand",
           "assertion": "style role FQ15-B6FB542118DB / Light: Note.TextWrapping",
-          "artifact": "D:\\FamilyQuant-data\\out-look\\ledger\\styles\\green-1\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-style-roles\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -1007,7 +1007,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "DeNovoControl style role Note.Margin",
-          "sha256": "C64BA87F386ED38607C988542429882451BF749DFA54D8C9F359145F79422806"
+          "sha256": "024AB577E3E28F445C6B4761C3F093510532E25933AA8B5A036D8AD8B2DFB6BC"
         },
         {
           "path": "FamilyQuant/Themes/ThemeManager.cs",
@@ -1026,7 +1026,7 @@
           "kind": "test",
           "target": "LookStyleRoleCommand",
           "assertion": "style role FQ15-B64AE83318C9 / Dark: Note.Margin",
-          "artifact": "D:\\FamilyQuant-data\\out-look\\ledger\\styles\\green-1\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-style-roles\\proofs.log",
           "inspectedBy": ""
         },
         {
@@ -1034,7 +1034,7 @@
           "kind": "test",
           "target": "LookStyleRoleCommand",
           "assertion": "style role FQ15-B64AE83318C9 / Light: Note.Margin",
-          "artifact": "D:\\FamilyQuant-data\\out-look\\ledger\\styles\\green-1\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-style-roles\\proofs.log",
           "inspectedBy": ""
         }
       ],

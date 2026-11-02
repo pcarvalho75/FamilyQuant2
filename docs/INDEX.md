@@ -94,6 +94,7 @@ Invoke each flag with `& $testExe <flag>` after building. Dispatch and arity are
 | `--list-test-commands` | Deterministic command table; executes no test or scientific handler |
 | `--test-document` | Document round trip, scoring and denominator attribution fixtures |
 | `--test-evidence-task` | File-derived taxonomy, keyword counts, confirmation and recipe replay fixtures |
+| `--source-caption-check <fresh-output>` | Compiled source picker: all five frozen filename/Union facts, selected-source screenshots and native whole-control checks in both themes |
 | `--test-evidence-delivery` | Native default review, save, exports, exact app-session replay and app Open fixture |
 | `--test-evidence-fetch-atomic` | Combined evidence/panel staging, cancellation boundaries, failures and one final commit |
 | `--test-evidence-coverage` | Native alignment-row interpretation, counterfactual chooser and honest audit labels |
@@ -135,6 +136,8 @@ Invoke each flag with `& $testExe <flag>` after building. Dispatch and arity are
 | `--test-results-tooltips [fresh-output date-timestamp]` | Two-sentence shared/normalization/chart tips retain every fact and dynamic default; optional semantic preservation receipts |
 | `--database-gap-screens <project.fqproj> <fresh-output> [--negative-fingerprint]` | Capture/export the stored table; a stored-world project must enable FASTA, and refusal fails the command |
 | `--test-database-gap-refusal <project.fqproj> <fresh-output>` | Native child plants the old fingerprint and must fail the availability gate without writing FASTA or changing input bytes |
+| `--test-database-gap-lengths <fresh-output>` | Whole native length chooser, result/CSV/FASTA consistency, repeated bytes, project roundtrip and shell Save/Cancel |
+| `--database-gap-lengths-screens <project.fqproj> <fresh-output>` | Real stored length table in both themes, all native length/CSV/FASTA choices and byte repeats; input unchanged |
 | `--prove-results-interactions <fresh-output> <date-timestamp>` | Native Results controls, displaced handlers, deterministic exports and observation receipts |
 | `--prove-results-members <frozen-root> <fresh-output> <date-timestamp>` | Shared scoped member comparison for assigned Results and quantitation declarations; changed members stay open |
 | `--prove-results-runtime <frozen-root> <own-frozen-host> <fresh-output> <date-timestamp> [--negative-control]` | Native frozen/current summary, CSV, User-header and chart-byte comparisons with repeated outputs and per-row receipts |
@@ -208,9 +211,9 @@ Companion options for `--screens` are `--screen-fcf <input.fcf>`, `--screen-proj
 | `--ledger-assay-cohort <frozen-root> <selection.json> <output> <step> <date>` | Scoped shared declaration comparisons; [receipt scope](ASSAY-LEDGER.md) |
 | `--ledger-assay-cache <frozen-root> <output> <date> [--negative-control]` | Frozen/current native cache wire and staging checks; frozen host build required |
 | `--assay-cache-snapshot <output>` | Shared synthetic native cache fixture; fresh output required |
-| `--test-assay-spectrum-properties` | Frozen column-ID/binding anchors, full values and refusal of borrowed headers |
-| `--assay-view-snapshot spectrum/build <output>` | Actual native view properties; fresh output, no windows shown |
-| `--ledger-assay-spectrum-properties <frozen-root> <output> <date> [--negative-control]` | Exact constructed column properties against frozen source and native reference |
+| `--test-assay-spectrum-properties`, `--test-assay-build-workflow` | Frozen column/property anchors and native Build handler receipt guards |
+| `--assay-view-snapshot spectrum/build <output>`, `--assay-build-output-snapshot <output>` | Native view properties and shared clustering/redundancy fixture outputs; fresh output |
+| `--ledger-assay-spectrum-properties <frozen-root> <output> <date> [--negative-control]`, `--ledger-assay-build-workflow` (same arguments) | Constructed column properties and native [Build workflow](N6H-USEARCH.md) against frozen reference |
 | `--ledger-core-relocation <frozen-root> <fresh-output> X5/X7 <date> [member-mappings.json]` | Scoped complete Core member comparisons, exact frozen hashes, retained source/checker snapshots and per-row gaps; [guide](CORE-RELOCATION-LEDGER.md) |
 | `--ledger-shell-compare <frozen-root> <fresh-output> <date>` | SH and C1 exact declarations/member tokens; separate candidate registers, unproven rows kept OPEN |
 | `--ledger-storage-runtime <frozen-root> <fresh-output> <date> [--negative-control]` | Public project reader/writer schema, codec and refusal observations; [runtime guide](CORE-RUNTIME-LEDGER.md) |
@@ -218,6 +221,7 @@ Companion options for `--screens` are `--screen-fcf <input.fcf>`, `--screen-proj
 | `--ledger-secondary-compare <frozen-root> <native-master-audit> <fresh-output> <date> [--negative-control]` | Shared exact secondary declarations from native OPEN master IDs; [guide](SECONDARY-LEDGER.md) |
 | `--ledger-secondary-runtime <frozen-root> <native-master-audit> <frozen-app> <fresh-output> <date> [--negative-control]` | Native frozen/current secondary values and interactions; [guide](SECONDARY-LEDGER.md) |
 | `--ledger-secondary-interactions <frozen-root> <native-master-audit> <frozen-app> <fresh-output> <date> [--negative-control]` | Native Quantify/close, identity chooser and injected GridCopy IO/modifier contracts; [guide](SECONDARY-LEDGER.md) |
+| `--test-quantify-close` | Native styled Close button, modal result, retained result and no-focus checks in both themes; included in shell/quick checks |
 | `--prove-denovo-ledger <frozen-source-root> <fresh-output> <date>` | Scoped exact De novo declarations, retained snapshots and ledger receipts in batches of 250; [guide](DENOVO-PRESERVATION.md) |
 | `--prove-denovo-runtime <frozen-source-root> <frozen-app-folder> <fresh-output> <date>` | Native frozen/current controls and resolved values across both themes and three legacy sources |
 | `--prove-denovo-workflows <frozen-source-root> <frozen-app-folder> <fresh-output> <date>` | Native frozen/current projection, reconciliation, binding and legacy export fixtures; C13 style handoff |
