@@ -24,6 +24,9 @@
     <Reference Include="PatternTools">
       <HintPath>..\FamilyQuant\DLLs\PatternTools.dll</HintPath>
     </Reference>
+    <Reference Include="SeproPckg2">
+      <HintPath>..\FamilyQuant\DLLs\SeproPckg2.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>

@@ -81,6 +81,17 @@ such credits, with the counts always beside it; otherwise the row says why. The 
 (absent from `manifest.json` when the pass never ran) and writes its own CSV. The
 reading of this table on the Bothrops jararaca project is in `docs/vision/B6-ERRORS.md`.
 
+B10 lets a person choose the minimum tag length. A tag's search result depends only
+on the tag, the world and the mapper options, never on the minimum, so
+`FamilyWorldPass.RunLengths` searches once at the lowest length and builds each
+length's result by marking shorter tags `TooShort`; the known answers are searched
+once and read again per length. Compute stores the complete table for every length
+in `FamilyWorldOptions.LengthChoices` (7 to 15) in `FamilyWorldSummary.Lengths`, with
+a quick estimate per length in `LengthEstimates`; the top-level table stays the
+default 9. `ForLength` returns a stored table, so choosing a length needs no fetch
+and no Compute. `--family-world-lengths` checks on a real project that each stored
+table equals an analysis searched at that length alone.
+
 ## Guide invariants and checks
 
 The eight invariants in `CLAUDE.md` retain their existing fixture coverage. The

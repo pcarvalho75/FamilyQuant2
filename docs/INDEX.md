@@ -115,6 +115,14 @@ Invoke each flag with `& $testExe <flag>` after building. Dispatch and arity are
 | `--test-ui-colors` | Literal/fixed-factory color guard with Tokens/ChartPalette sources and the explicit protected export-only PresentationFigures exception |
 | `--test-keyword-command` | Single keyword command, empty review, Cancel and accepted-setting retention |
 | `--test-review-wait` | Dispatcher completion beyond the former load timeout, original fault/cancellation and synchronization context retention |
+| `--test-ui-wording` | Current curation/shell Help paths, family overview and lock instructions, retired-screen names, tooltip length and retained report/Help facts |
+| `--test-look-copy-preservation` | Scoped published-Help comparison negative controls, exact case and numeric boundaries |
+| `--prove-look-style-roles <frozen-source> <role-map> <new-output> <date-timestamp>` | Twenty-four explicit De novo role mappings, old/current values, native resolved properties and actual consumers in both themes |
+| `--probe-look-home-styles <new-output> [--negative-control]` | Native Home action/state checks, resolved style values and off-screen captures in both themes; optional planted lost-enablement regression; no focus or ledger closure by screenshot |
+| `--prove-look-app-tokens <frozen-source> <new-output> <date-timestamp>` | Explicit frozen/current application palette roles and named native Home consumers in both themes; unsupported roles stay OPEN |
+| `--prove-look-copy <frozen-source> <native-audit> <new-output> <date-timestamp> [LK-prefix]` | Exact OPEN help/tooltip cohort, native published Help and named-tooltip comparisons, 200-row LK register batches |
+| `--refresh-look-registers <frozen-source> <new-output> <date-timestamp>` | Regenerates all five existing LK copy/style registers from their fixed ordered IDs, with no audit or hand preparation; leaves unsupported rows unproved |
+| `--test-look-refresh-cohort` | Fixed-cohort selection and refusal of duplicate, unknown, empty or differently identified inputs |
 | `--test-chart-themes [output-dir]` | Seven hosted chart types, live token refresh, contrast, subscription lifetime and frozen Light palette pins; labelled synthetic chart captures |
 | `--test-evidence-task-scope [output-dir]` | Supplied task facts, editable scope, cancellation, native confirmation and both-theme synthetic captures |
 | `--test-report-study-boundary` | Report-only operation ownership, retained Core models and screen dependencies |
@@ -125,10 +133,14 @@ Invoke each flag with `& $testExe <flag>` after building. Dispatch and arity are
 | `--test-evidence-coverage-ui [output-dir]` | Recorded query-residue coverage, missing legacy facts, bounded display and native rule line |
 | `--test-database-gap [output-dir]` | Stored Core family parts/global buckets, sparse evidence, exact CSV/FASTA, offline reopen and native Results export routes |
 | `--test-results-tooltips [fresh-output date-timestamp]` | Two-sentence shared/normalization/chart tips retain every fact and dynamic default; optional semantic preservation receipts |
-| `--database-gap-screens <project.fqproj> <fresh-output>` | Read-only native Database gap captures in both themes, stored table CSV, and verified suggested FASTA when available |
+| `--database-gap-screens <project.fqproj> <fresh-output> [--negative-fingerprint]` | Capture/export the stored table; a stored-world project must enable FASTA, and refusal fails the command |
+| `--test-database-gap-refusal <project.fqproj> <fresh-output>` | Native child plants the old fingerprint and must fail the availability gate without writing FASTA or changing input bytes |
+| `--test-database-gap-lengths <fresh-output>` | Whole native length chooser, result/CSV/FASTA consistency, repeated bytes, project roundtrip and shell Save/Cancel |
+| `--database-gap-lengths-screens <project.fqproj> <fresh-output>` | Real stored length table in both themes, all native length/CSV/FASTA choices and byte repeats; input unchanged |
 | `--prove-results-interactions <fresh-output> <date-timestamp>` | Native Results controls, displaced handlers, deterministic exports and observation receipts |
 | `--prove-results-members <frozen-root> <fresh-output> <date-timestamp>` | Shared scoped member comparison for assigned Results and quantitation declarations; changed members stay open |
 | `--prove-results-runtime <frozen-root> <own-frozen-host> <fresh-output> <date-timestamp> [--negative-control]` | Native frozen/current summary, CSV, User-header and chart-byte comparisons with repeated outputs and per-row receipts |
+| `--prove-results-export-facts <frozen-root> <fresh-output> <date-timestamp>` | Native execution receipts for 57 empty/export facts, cancelled choosers, CSV/PNG IO failures and complete/incomplete evidence packs |
 | `--results-runtime-snapshot <fresh-json-path>` | Shared native frozen/current synthetic presentation values; not scientific result generation |
 | `--test-quantitation-panel [output-dir]` | Full XIC first, conditional source options, retained selectors and both-theme native captures |
 | `--test-curation-quantitation` | Full-XIC column, denominator changes, shared policy and unavailable-TIC fallback |
@@ -147,6 +159,11 @@ Invoke each flag with `& $testExe <flag>` after building. Dispatch and arity are
 | `--feature-ledger-release-check` | Same inventory with all retained rows required VERIFIED; OPEN rows intentionally fail |
 | `--test-ledger-evidence` | Adversarial receipt, source/artifact hash, assertion and render checks |
 | `--test-ledger-declarations` | Exact named-XAML and C# member comparison checks |
+| `--test-shell-metadata` | Compiled shell-metadata and isolated Home-event comparison guards; included in the ordinary ledger guard |
+| `--test-shell-message-frames [--negative-control]` | Exact frozen handler/message/dialog frames, contributing literals and complete file-filter groups; optional planted wrong-path binding |
+| `--test-shell-sepro-fixture <fresh-output.sepr2>` | Owned synthetic package round trip through the actual vendor serializer; no collaborator data or spectra |
+| `--test-shell-proof-windows` | Before-Show geometry plus actual off-screen HWND, nonactivation and no-taskbar proof |
+| `--test-grid-copy` | Existing native GridCopy context-menu and row/column Copy routines with fake clipboard/browser seams |
 
 ## Screens and UI metadata
 
@@ -199,14 +216,24 @@ Companion options for `--screens` are `--screen-fcf <input.fcf>`, `--screen-proj
 | `--ledger-core-relocation <frozen-root> <fresh-output> X5/X7 <date> [member-mappings.json]` | Scoped complete Core member comparisons, exact frozen hashes, retained source/checker snapshots and per-row gaps; [guide](CORE-RELOCATION-LEDGER.md) |
 | `--ledger-shell-compare <frozen-root> <fresh-output> <date>` | SH and C1 exact declarations/member tokens; separate candidate registers, unproven rows kept OPEN |
 | `--ledger-storage-runtime <frozen-root> <fresh-output> <date> [--negative-control]` | Public project reader/writer schema, codec and refusal observations; [runtime guide](CORE-RUNTIME-LEDGER.md) |
+| `--ledger-xic-runtime <frozen-root> <fresh-output> <date> <stored-project> <validated-cache> [--negative-control]` | Native XIC refusal/source/completion facts plus bounded validated cache replay; [runtime guide](CORE-RUNTIME-LEDGER.md) |
+| `--ledger-secondary-compare <frozen-root> <native-master-audit> <fresh-output> <date> [--negative-control]` | Shared exact secondary declarations from native OPEN master IDs; [guide](SECONDARY-LEDGER.md) |
+| `--ledger-secondary-runtime <frozen-root> <native-master-audit> <frozen-app> <fresh-output> <date> [--negative-control]` | Native frozen/current secondary values and interactions; [guide](SECONDARY-LEDGER.md) |
+| `--ledger-secondary-interactions <frozen-root> <native-master-audit> <frozen-app> <fresh-output> <date> [--negative-control]` | Native Quantify/close, identity chooser and injected GridCopy IO/modifier contracts; [guide](SECONDARY-LEDGER.md) |
+| `--test-quantify-close` | Native styled Close button, modal result, retained result and no-focus checks in both themes; included in shell/quick checks |
 | `--prove-denovo-ledger <frozen-source-root> <fresh-output> <date>` | Scoped exact De novo declarations, retained snapshots and ledger receipts in batches of 250; [guide](DENOVO-PRESERVATION.md) |
 | `--prove-denovo-runtime <frozen-source-root> <frozen-app-folder> <fresh-output> <date>` | Native frozen/current controls and resolved values across both themes and three legacy sources |
 | `--prove-denovo-workflows <frozen-source-root> <frozen-app-folder> <fresh-output> <date>` | Native frozen/current projection, reconciliation, binding and legacy export fixtures; C13 style handoff |
+| `--prove-denovo-refusals <frozen-source-root> <frozen-app-folder> <fresh-output> <date>` | Native parser/refusal callback feedback, homology setting restoration, formatting and file-name lookup comparisons |
+| `--prove-denovo-commands <frozen-source> <frozen-app> <trusted-sepr2> <fresh-output> <date>` | Actual old/current command/data/status and native chooser/export success/cancel/failure receipts; 41-row semantic fact inventory |
+| `--denovo-command-probe <frozen-app> <trusted-sepr2> <fresh-output>` | Actual command trace without ledger import |
+| `--native-dialog-probe <fresh-output>` | Owned-process native Open/Folder/Save selection driver check |
 | `--ledger-shell-compare <frozen-root> <fresh-output> <date>` | SH and C1 exact declarations/member tokens; separate candidate registers, unproven rows kept OPEN |
 | `--ledger-core-relocation <frozen-root> <fresh-output> X5/X7 <date> [member-mappings.json]` | Scoped complete Core member comparisons, exact frozen hashes, retained source/checker snapshots and per-row gaps; [guide](CORE-RELOCATION-LEDGER.md) |
-| `--ledger-core-relocation <frozen-root> <fresh-output> X5/X7 <date> [member-mappings.json]` | Scoped complete Core member comparisons, exact frozen hashes, retained source/checker snapshots and per-row gaps; [guide](CORE-RELOCATION-LEDGER.md) |
-| `--ledger-shell-compare <frozen-root> <fresh-output> <date>` | SH and C1 exact declarations/member tokens; separate candidate registers, unproven rows kept OPEN |
 | `--ledger-xic-runtime <frozen-root> <fresh-output> <date> <stored-project> <validated-cache> [--negative-control]` | Native XIC refusal/source/completion facts plus bounded validated cache replay; [runtime guide](CORE-RUNTIME-LEDGER.md) |
+| `--shell-metadata-snapshot <frozen-root> <inventory> <fresh-output.json>` | Same native metadata helper in current and frozen hosts; assigned views remain unshown |
+| `--ledger-shell-native <frozen-root> <frozen-host.exe> <fresh-output> <date> [C1-cohort-register]` | Execute compiled SH/C1 metadata and isolated Home clicks; own candidate registers and complete comparison gaps |
+| `--prove-shell-main <frozen-root> <fresh-output> <date>` | Native MainWindow routes, synthetic file writes/refusals and captured dialog/report frames; own SH-main-routes candidate register |
 | `--word-grouping-snapshot <input.fcf-or-fqproj> <output.txt>` | [WordGroupingSnapshot.cs](../FamilyQuant.Tests/WordGroupingSnapshot.cs), also linked into frozen host |
 | `--chart-export-snapshot <output-dir>` | [ChartExportSnapshot.cs](../FamilyQuant.Tests/ChartExportSnapshot.cs), synthetic chart parity fixtures |
 | `--clustering-snapshot <input.fasta> <output.tsv> <integer-identity> <fast-or-exhaustive>` | [ClusteringSnapshot.cs](../FamilyQuant.Tests/ClusteringSnapshot.cs) |
@@ -247,6 +274,8 @@ and output must be separate. None is executed merely to maintain this catalog.
 | `--evidence-architecture-check [searched.fcf] [report.json] [scope-terms]` | Same helper, architecture suggestions |
 | `--evidence-apply-check [searched.fcf] [report.json] [scope-terms]` | Same helper, explicit apply/undo/reopen checks in separate outputs |
 | `--evidence-session-apply-check [searched.fcf] [report.json] [scope-terms]` | Same helper, session preparation and recipe replay |
+| `--family-world-lengths [computed.fqproj] [output-dir]` | [FamilyWorldLengthsCheck.cs](../FamilyQuant.Tests/FamilyWorldLengthsCheck.cs), B10: every minimum tag length from one search against an analysis at each length alone, timed, with the per-length estimate CSV |
+| `--family-world-report [project.fqproj] [output-dir]` | [FamilyWorldReport.cs](../FamilyQuant.Tests/FamilyWorldReport.cs), the family-world table a project stores, printed and exported |
 | `--family-world-check [project.fqproj] [world.fcf] [output-dir]` | [FamilyWorldCheck.cs](../FamilyQuant.Tests/FamilyWorldCheck.cs); B1 gate, gate study, B5 product pass under D11 and B6 per-family errors; live taxonomy lists in output |
 | `--coherence-check [panel.fcf] [classes.tsv] [output-dir]` | [CoherenceCheckRun.cs](../FamilyQuant.Tests/CoherenceCheckRun.cs) |
 | `--motif-check [evidence.fcf] [classes.tsv] [expected.tsv] [output-dir]` | [MotifCheckRun.cs](../FamilyQuant.Tests/MotifCheckRun.cs) |

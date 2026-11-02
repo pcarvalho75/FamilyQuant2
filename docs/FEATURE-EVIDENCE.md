@@ -72,9 +72,14 @@ Run the built test executable with these flags and explicit lane-owned outputs:
 | `--ledger-core-relocation <frozen-root> <fresh-output> X5/X7 <date> [member-mappings.json]` | Compare complete scoped Core member declarations and retain per-row gaps; see [Core relocation ledger](CORE-RELOCATION-LEDGER.md) |
 | `--ledger-shell-compare <frozen-root> <fresh-output> <date>` | Compare SH/C1 declarations and run native curation interactions; emit separate candidate registers |
 | `--ledger-storage-runtime <frozen-root> <fresh-output> <date> [--negative-control]` | Native schema/header/value and exact refusal checks for remaining X7 observations; [runtime guide](CORE-RUNTIME-LEDGER.md) |
-| `--ledger-shell-compare <frozen-root> <fresh-output> <date>` | Compare SH/C1 declarations and run native curation interactions; emit separate candidate registers |
-| `--ledger-core-relocation <frozen-root> <fresh-output> X5/X7 <date> [member-mappings.json]` | Compare complete scoped Core member declarations and retain per-row gaps; see [Core relocation ledger](CORE-RELOCATION-LEDGER.md) |
 | `--ledger-xic-runtime <frozen-root> <fresh-output> <date> <stored-project> <validated-cache> [--negative-control]` | Public input refusals, executed source/completion branches and bounded cache replay; [runtime guide](CORE-RUNTIME-LEDGER.md) |
+| `--test-shell-metadata` | Adversarial compiled-metadata and isolated-event comparison fixtures, also run by the ordinary ledger guard |
+| `--shell-metadata-snapshot <frozen-root> <inventory> <fresh-output.json>` | Read assigned compiled shell views without showing windows; the same helper is linked into ReferenceGoldenHost |
+| `--ledger-shell-native <frozen-root> <frozen-host.exe> <fresh-output> <date> [C1-cohort-register]` | Execute frozen/current view metadata and isolated Home clicks; emit SH-runtime and the bounded C1-runtime candidates |
+| `--ledger-secondary-compare <frozen-root> <native-master-audit> <fresh-output> <date> [--negative-control]` | Scoped exact secondary-view declarations for OPEN master IDs; [guide](SECONDARY-LEDGER.md) |
+| `--ledger-secondary-runtime <frozen-root> <native-master-audit> <frozen-app> <fresh-output> <date> [--negative-control]` | Native secondary controls, actions, values and cache contracts; [guide](SECONDARY-LEDGER.md) |
+| `--prove-shell-main <frozen-root> <fresh-output> <date>` | Execute native MainWindow route/dialog/message cases and compare scoped frozen frames; emit SH-main-routes without importing |
+| `--ledger-secondary-interactions <frozen-root> <native-master-audit> <frozen-app> <fresh-output> <date> [--negative-control]` | Quantify/close, native identity chooser outcomes and injected GridCopy failure/modifier contracts; [guide](SECONDARY-LEDGER.md) |
 
 For example, obtain the timestamp with `date '+%F %T %z'` immediately before the proof command.
 Neither the proof runner nor the audit invokes the frozen-source generator.
@@ -126,6 +131,56 @@ The same execution runs `CurationScreenTests`: ten explicitly mapped table, iden
 annotation-binding and Undo observations get individual interaction receipts. Their
 implementation maps name the actual view/model classes and hash the executed test source.
 `curation-runtime.json` separates those observations from exact declaration matches.
+
+The compiled shell producer supplies a second, separate kind check. It verifies the frozen
+source hashes and the actual frozen application assembly, then executes the same helper in
+ReferenceGoldenHost and the current checker. Named controls must belong to their view's
+content, items or column collection. It compares effective scalar properties, column binding
+paths/modes/formats and named resource keys. App style checks read the effective property on
+the corresponding control. A resource-key match does not establish color equality, focus
+behavior or use of that resource. Numeric replacement types additionally require equal
+native minimum, maximum and default values. Unnamed, missing, ambiguous and changed facts
+stay unverified; template triggers require a separate state check or render.
+
+Five isolated Home button clicks each have to emit exactly their own navigation event once.
+Those receipts cover the Home event wiring, not the shell route or a scientific operation.
+Help and tooltip observations and the transferred ComputeXicWindow, GridCopy and secondary
+view sources are outside this producer. The bounded C1-runtime register contains only the
+observations supported by the current probe; the remaining C1 work belongs to FQResults.
+For subsequent replays, supply that retained register as the optional C1 cohort argument.
+It restricts the observation IDs only; every retained ID still needs a fresh native comparison.
+The complete native packets and comparison gaps remain in the output. No window is shown,
+no dialog, clipboard or browser is used, and no project, evidence or quantitation is written.
+Run twice and compare frozen.json, current.json, comparisons.json and comparisons.log before
+import. Preserve the executed checker sources and assemblies with each packet.
+
+The MainWindow producer dispatches the actual menu command or Click event under a dispatcher
+synchronization context. Owned synthetic files test chooser cancellation, FCF/FQPROJ reads,
+successful writes and retained previous bytes after refusal. Fake presenters capture native
+dialog fields and reports without opening a system dialog. Navigation receipts pin the old
+entry point, the current header and the executed view/document outcome. Quantify navigation
+does not execute extraction. An owned synthetic SEPro package additionally exercises the
+actual reannotation success, one/eleven missing identifiers and controlled loader failure.
+The check verifies the separate copy's curated GroupNo and unchanged source package/curation.
+It uses the vendor constructors and Save/Load API, with no collaborator data or spectra. Help/tooltips
+and the transferred App/Home style rows are excluded.
+
+Message facts use the frozen handler's complete first/second MessageBox argument. Known
+variables come from the native selected file or an independently executed controlled failure.
+The complete evaluated message or caption must match its native report. Literals hidden
+inside a bound dynamic term are never credited; unsupported or unexecuted terms stay OPEN.
+Project-save status is compared after checking its explicit saved-file-check wrapper.
+Chooser filters compare complete ordered acceptance groups while recording renamed human
+labels in full. Source hashes, archived checker sources/binaries and individual PASS assertions
+support the candidate register. Compare comparisons.json, comparisons.log and
+native-cases-canonical.json between two runs. Canonicalization replaces only the owned fixture
+root after all raw-value and file-state checks; raw captures remain retained. Native fixture
+project timestamps are not a scientific determinism or RAW-validation claim.
+Conditional message literals need the predicate recorded by their native case; skipped
+branches and inner format strings earn no credit. One obsolete Build-menu reference may
+follow the frozen named command to its executed current File path. That comparison requires
+one literal occurrence, excludes variable values and compares the complete resulting report.
+Its old/new text and the specific route remain explicit in each receipt.
 
 The N5 first pass executes synthetic project write/read, native ZIP and quant-column checks,
 source discovery, descriptor/cutoff checks and refusal paths. Each closed row has its own

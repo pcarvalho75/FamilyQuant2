@@ -102,6 +102,7 @@ Finished steps, moved here from docs/ROADMAP.md. The board shows them as green.
 | C5 | Quantitation panel: Layers 2 and 3 merged; Full XIC first, PatternLab as a secondary source, options shown only when they apply | M | 1 | C1 | V3, C13, R2 | Every option kept; golden equal | RS | not started | 0% | 0% | T+3 |
 | C1 | Curation rebuilt: table always in view, actions in a side panel, no Controls and Data Browser tabs, no "Layer" words. USearch ID column hidden by default, data kept. Decoys hidden by default; Locus shows the accession. Long operations use the S6 host. `ClusterGenerationControl` (1,978 lines) replaced by a view model and a thin view | VH | 2 | 🟢 | C2, C5, V3, C13 | Pressing any action shows its result without changing view; every ledger row of the screen checked; golden equal | LK | not started | 0% | 0% | T+2 |
 | C2 | Family view: a table of families (name, proteins, shares, lock) with the proteins of the selected family beside it | H | 1.5 | 🟢 | N6, R2 | Selection, edit, lock and undo work on both tables; 39,996 families smooth | LK | not started | 0% | 0% | T+2 |
+| C13 | Wording pass: labels, tooltips (one or two sentences) and Help match the new screens | M | 1 | 🟢 | N6, C14 | Suite's tooltip checks green; no old screen named anywhere | LK | not started | 0% | 0% | T+1 |
 
 ### W6 Core rewrite: copy what is good, rewrite what is better
 
@@ -141,4 +142,29 @@ Finished steps, moved here from docs/ROADMAP.md. The board shows them as green.
 | B5 | Second attribution pass: de novo peptides left unattributed go to `HomologyMapper.Search` against the family world with reversed decoys. A tag needs at least 9 residues and only families in scope can be credited (D11). A hit credits the UniProt family, never a protein | H | 1.5 | B4 | B6 | Existing exports byte-identical (golden 4/0/0), new columns in a new export only; two runs byte-identical; same numbers as B1's checker | OP | not started | 0% | 0% | T+4 |
 | B4 | Fetch the family world: the reviewed panel plus one clade query per family, unreviewed included, all or nothing, release recorded, stored with the project, offline afterwards | M | 1 | 🟢 | B5 | An interrupted fetch leaves the file as it was; offline rerun identical; size growth measured on Ana's file | EV | not started | 0% | 0% | T+1 |
 | B6 | The error beside every claim: for each family, the decoy rate and the known-answer right rate, stored in the project. A family with too little evidence shows that instead of a number | M | 1 | 🟢 | B7 | Every family row has both; reproducible; conserved families checked by hand | OP | not started | 0% | 0% | T+1 |
+| B7 | Result: three parts per family (identified, de novo in your database, de novo only in the family world) plus one global unexplained bucket, and the "Database gap" ranking: the families with the most signal missing from your database. An export writes a FASTA of the family-world proteins the tags hit, as suggested additions for the person to add and search again in PatternLab. The program never changes the database itself. The screen, the CSV and Help state the minimum tag length and the in-scope rule beside the result | M | 1 | 🟢 | B8 | Screen and CSV from one table; every number from the program; the rules in force are visible on the screen and in the export, and stored in the project; both themes | RS | not started | 0% | 0% | T+1 |
+
+### W1 Family world
+
+| ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
+|---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
+| B11 | Several taxa on one target: a joined header keeps all its taxa, and one such target no longer stops the file | L | 0.1 | 🟢 | R3a | Two-species fixture passes; Ana and Bothrops audits unchanged | EV | not started | 0% | 0% | T+0 |
+| B10a | Core: complete tables for minimum tag lengths 7 to 15, stored with the result | M | 0.1 | 🟢 | B10b, B10c | Each length equals a run at that length alone; on master | OP | not started | 0% | 0% | T+0 |
+| B10c | Database gap screen: table by length, 7 to 15 | M | 0.5 | 🟢 | B10d | Both themes; every number read from Core | RS | not started | 0% | 0% | T+1 |
+| B10d | The chosen length drives the result, the CSV and the FASTA, and is stored in the project | M | 0.5 | B10c | B10e | Save, close and reopen keep the choice | RS | not started | 0% | 0% | T+1 |
+
+### W2 Port gaps found by the proofs
+
+| ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
+|---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
+| Y1 | TIC column header follows the chosen basis | L | 0.1 | 🟢 | R3a | Native regression red, then green | RS | not started | 0% | 0% | T+0 |
+| Y2 | Compute window Close restored, with the same result to a modal caller | L | 0.1 | 🟢 | R3a | Native regression red, then green | FL | not started | 0% | 0% | T+0 |
+| Y4 | Homology tooltip gets its output-row fact back | L | 0.2 | 🟢 | R3a | Fact shown; two sentences at most | RS | not started | 0% | 0% | T+2 |
+| Y5 | No organism or venom wording in anything the user sees, with a guard | L | 0.3 | 🟢 | R3a | Guard red on a planted word; facts kept | LK | not started | 0% | 0% | T+0 |
+
+### W3 Ledger, screen by screen
+
+| ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
+|---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
+| N6m | Home and App (73 rows) | M | 0.5 | 🟢 | N6p | Each row proved or on the wording list | LK | not started | 0% | 0% | T+1 |
 

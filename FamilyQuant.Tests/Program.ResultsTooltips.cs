@@ -23,7 +23,7 @@ internal static partial class Program
             Check(name + " tooltip retains each required fact and its dynamic default", facts.All(fact => text.Contains(fact, StringComparison.OrdinalIgnoreCase)), text);
         }
         Verify("shared-peptide policy", ((ComboBox)panel.FindName("ComboBoxSharedPeptides")).ToolTip,
-            "peptide found in more than one family", "redundant database", "venom", "moves the numbers a great deal",
+            "peptide found in more than one family", "redundant database", "moves the numbers a great deal",
             "Default:", SharedPeptidePolicy.FamilyUnique.DisplayName());
         Verify("normalization", ((ComboBox)panel.FindName("ComboBoxNormalization")).ToolTip,
             "share column", "percentage", "measurements", "never change", "greyed out", "loaded project", "totals",

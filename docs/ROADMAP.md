@@ -1,9 +1,9 @@
 # FamilyQuant 2.0 roadmap (remaining work only)
 
-Version 3, 2026-11-01. Owner: Paulo. Orchestrator: the Claude session "Family Quant codebase review".
+Version 4, 2026-11-02. Owner: Paulo. Orchestrator: the Claude session "Family Quant codebase review".
 Finished rows leave this file at the next refresh and go to `docs/ROADMAP-archive.md`.
 
-Version 2 closed 56 steps and the H1 cooldown: the evidence engine, the new shell, the rebuilt Build, Quantify, Results and De novo screens, the Core split and housekeeping. Master `7a54be1` passed a clean clone at 2,525 passed, 0 failed, 3 skipped. This version starts the count again from zero. Paulo restarted the team on 2026-11-01.
+Version 3 closed 35 steps; they are in `docs/ROADMAP-archive.md`. At Paulo's order the needle went back to zero and every remaining step was cut small, so that no step hides other work: each box is one thing a person can see finished.
 
 ## The goal, in Paulo's words
 
@@ -27,6 +27,7 @@ Version 2 closed 56 steps and the H1 cooldown: the evidence engine, the new shel
 8. **A step counts as done only after the reviewer approves it** and it is merged and green.
 9. **The deck stays untouched:** `BrProt_FamilyQuant_FourPart_Source_Decomposition.pptx` and its sources, until Paulo says otherwise.
 10. **No em dashes or en dashes** in anything written, UI text included.
+- Steps stay small. A step that hides several pieces of work is split, so that the needle shows real progress. Paulo, 2026-11-02.
 
 ## The team
 
@@ -73,59 +74,75 @@ Flow of one step: owner posts `READY <step> <commit>`; the orchestrator assigns 
 
 ## Workstreams
 
-Columns: Diff = L, M, H, VH. Hrs = worker hours at measured speed: the 56 steps of version 2 were estimated at 155 hours and took at most about 41 worker hours (6.8 hours on the clock, at most six builders), so every estimate here is divided by 4. Blocked by: 🟢 = open now. ETA = hours after the restart in that worker's queue, never a promise. Prog = my estimate of work done. Cred = counted only after approval and merge. EV, LK, AS, SH, RS, OP, FL, GR, KM and AR are the workers above.
+Columns: Diff = L, M, H, VH. Hrs = worker hours at measured speed: estimates are short because these steps are small. Blocked by: 🟢 = open now. ETA = hours after the restart in that worker's queue, never a promise. Prog = my estimate of work done. Cred = counted only after approval and merge. EV, LK, AS, SH, RS, OP, FL, GR, KM and AR are the workers above.
 
-### W0 Foundation and the new project
-
-| ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
-|---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| N6 | Close the ledger by kind of row (D13): one executed check per kind, such as frozen 1.5.0.6 text compared with 2.0, with each row naming what was compared. A row no kind covers gets its own proof or stays open | H | 1.5 | C13 | C14 | `--feature-ledger-release-check` passes; a reviewer samples 200 rows at random across all kinds and agrees; any sample failure reopens that whole kind | SH | not started | 0% | 0% | T+2 |
-
-### W2 Ana's result, through the software
+### W1 Family world
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| A5 | Measure the shared-peptide effect on her data, through Compute full XIC. It needs a `.sepr2` on this database: if none exists when you reach it, post that and leave the step open | M | 0.5 | 🟢 | Paper numbers | Numbers exported by the program | EV | not started | 0% | 0% | her pace |
+| B10b | Default length 8 in Core, tests, rule text and docs | L | 0.3 | 🟢 | B10e, B8a | Choosing 9 reproduces the B6 table byte for byte | OP | not started | 0% | 0% | T+0 |
+| B10e | Real project at the default length: screen, CSV and FASTA | L | 0.2 | B10b | R3a | Repeats byte for byte; inspected in both themes | RS | not started | 0% | 0% | T+0 |
+| B8a | Claim numbers redone at length 8 on both worlds | L | 0.2 | B10b | B8b | Numbers from the program | OP | not started | 0% | 0% | T+0 |
+| B8b | Reviewer checks the claim sentence against the stored files | L | 0.2 | B8a | B8c | GR's verdict | GR | not started | 0% | 0% | T+2 |
+| B8c | Paulo accepts the claim sentence, for Ana and records only | L | 0 | B8b | R3a | Paulo's word | Paulo | not started | 0% | 0% | T+2 |
 
-### W3 Look
-
-| ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
-|---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-
-### W4 Shell
-
-| ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
-|---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-
-### W5 Screens: each rebuilt as a thin view over a tested view model
+### W2 Port gaps found by the proofs
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| C13 | Wording pass: labels, tooltips (one or two sentences) and Help match the new screens | M | 1 | 🟢 | N6, C14 | Suite's tooltip checks green; no old screen named anywhere | LK | not started | 0% | 0% | T+1 |
-| C14 | Finish: 100, 125 and 150% scaling, smallest window, Tab order, focus visible, both themes | M | 0.5 | C13, N6 | R2 | Harness renders at each scale; Paulo's final look sign-off | LK | not started | 0% | 0% | T+3 |
+| Y3 | Five source captions get their filename patterns and Union prefixes back | L | 0.2 | 🟢 | R3a | Five facts shown in both themes | EV | not started | 0% | 0% | T+0 |
 
-### W6 Core rewrite: copy what is good, rewrite what is better
-
-| ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
-|---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-
-### W7 Releases (Paulo publishes each one)
+### W3 Ledger, screen by screen
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| R2 | 2.0 preview 2: new look and shell | M | 0.5 | C14 | R3 | Same, plus Paulo's sign-off on renders, and a published update reaches an installed 2.0 | Orchestrator | not started | 0% | 0% | T+4 |
-| R3 | 2.0 release candidate: rewrite finished, every ledger row closed, the family world in if B1 passed | M | 0.5 | R2, B8 | R4 | Same, plus the ledger check | Orchestrator | not started | 0% | 0% | T+4 |
-| R4 | Final adversarial pass on the whole product | H | 1 | R3 | R5 | GR's verdict; all findings closed | GR | not started | 0% | 0% | T+5 |
-| R5 | FamilyQuant 2.0 final, then the archive of this roadmap | L | 0.5 | R4 | Done | Paulo publishes | Orchestrator | not started | 0% | 0% | T+6 |
+| N6a | Text tool: closes rows whose 1.5 text is in the compiled 2.0 program, in the same feature, reachable from a real screen | M | 0.7 | 🟢 | N6b | Tool run on master; dead-code negative stays open; counts by kind | OP | not started | 0% | 0% | T+1 |
+| N6b | Reviewer samples the text tool's rows | L | 0.2 | N6a | N6r | GR's verdict; one failure reopens the kind | GR | not started | 0% | 0% | T+1 |
+| N6c | De novo screen: commands, exports and handlers (290 rows today) | H | 1 | 🟢 | N6p | Each row proved or on the wording list | EV | not started | 0% | 0% | T+1 |
+| N6d | Three-way window, chart and partition (30 rows) | L | 0.2 | 🟢 | N6p | Each row proved or on the wording list | EV | not started | 0% | 0% | T+1 |
+| N6e | Main window: routes, dialogs and messages (158 rows) | M | 1 | 🟢 | N6p | Each row proved or on the wording list | SH | not started | 0% | 0% | T+1 |
+| N6f | Curation code (302 rows) | H | 1 | 🟢 | N6p | Each row proved or on the wording list | SH | not started | 0% | 0% | T+2 |
+| N6g | Curation screen (147 rows) | M | 0.5 | 🟢 | N6p | Each row proved or on the wording list | SH | not started | 0% | 0% | T+2 |
+| N6h | USearch window (224 rows) | M | 1 | 🟢 | N6p | Each row proved or on the wording list | AS | not started | 0% | 0% | T+2 |
+| N6i | Spectrum window (195 rows, 130 of them waiting on the producer fix) | M | 0.5 | 🟢 | N6p | Each row proved or on the wording list | AS | not started | 0% | 0% | T+0 |
+| N6j | Deck producers: the last five rows | L | 0.1 | 🟢 | N6p | Each row proved or on the wording list | AS | not started | 0% | 0% | T+2 |
+| N6k | Compute window (79 rows) | M | 0.5 | 🟢 | N6p | Each row proved or on the wording list | FL | not started | 0% | 0% | T+0 |
+| N6l | Preview, lock and identity windows (71 rows) | M | 0.5 | 🟢 | N6p | Each row proved or on the wording list | FL | not started | 0% | 0% | T+1 |
+| N6n | Help gaps (88 rows) | M | 0.5 | 🟢 | N6p | Each row proved or on the wording list | LK | not started | 0% | 0% | T+0 |
+| N6o | Report and CSV facts (19 rows) | L | 0.2 | 🟢 | N6p | Each row proved or on the wording list | SH | not started | 0% | 0% | T+3 |
+| N6p | Wording list assembled for Paulo: rows that changed on purpose, with old and new text | L | 0.2 | N6c, N6d, N6e, N6g, N6h, N6i, N6j, N6k, N6l, N6n, N6o | N6q | List grouped by reason | Orchestrator | not started | 0% | 0% | T+3 |
+| N6q | Paulo rules on the wording list in one pass | L | 0 | N6p | N6r | Paulo's ruling recorded | Paulo | not started | 0% | 0% | T+3 |
+| N6r | Reviewer's 200-row random sample across the whole ledger | M | 0.3 | N6b, N6q | N6s | GR's verdict; one failure reopens the kind | GR | not started | 0% | 0% | T+3 |
+| N6s | Release check passes | L | 0.1 | N6r | R3a | `--feature-ledger-release-check` passes | Orchestrator | not started | 0% | 0% | T+3 |
 
-### W8 Breakthrough: the family world
-
-The bet, from `docs/vision/VISION.md`: a de novo peptide your database cannot place is searched against every reviewed member of the family, from all species, plus the unreviewed entries of the sample's clade, and is credited to the family, never to a protein. The family becomes the unit that reaches past the database. The result says, per family: identified, de novo in your database and de novo only in the family world (the database gap), with what stays unexplained reported as one total, and the program ranks the families by that gap and offers the proteins the tags hit as suggested additions to the database. B1 decides it. If B1 is killed, B4 to B8 leave the roadmap and R3 stops waiting for them; B2 and B3 stand either way.
+### W4 Look
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| B7 | Result: three parts per family (identified, de novo in your database, de novo only in the family world) plus one global unexplained bucket, and the "Database gap" ranking: the families with the most signal missing from your database. An export writes a FASTA of the family-world proteins the tags hit, as suggested additions for the person to add and search again in PatternLab. The program never changes the database itself. The screen, the CSV and Help state the minimum tag length and the in-scope rule beside the result | M | 1 | 🟢 | B8 | Screen and CSV from one table; every number from the program; the rules in force are visible on the screen and in the export, and stored in the project; both themes | RS | not started | 0% | 0% | T+1 |
-| B8 | Science review on a real sample: labels, denominators, inflation of conserved families, and the wording of the claim | H | 1 | B7 | R3 | GR's verdict; findings closed; Paulo accepts the wording | GR | not started | 0% | 0% | T+2 |
+| C14a | Scaling at 100, 125 and 150% | L | 0.2 | 🟢 | C14e | Harness renders at each scale | LK | not started | 0% | 0% | T+1 |
+| C14b | Smallest window | L | 0.2 | 🟢 | C14e | Every screen usable at the smallest size | LK | not started | 0% | 0% | T+1 |
+| C14c | Tab order and visible focus | L | 0.2 | 🟢 | C14e | Whole flow by keyboard | LK | not started | 0% | 0% | T+1 |
+| C14d | Both themes, every screen | L | 0.2 | 🟢 | C14e | Renders inspected | LK | not started | 0% | 0% | T+1 |
+| C14e | Paulo's final look sign-off | L | 0 | C14a, C14b, C14c, C14d | R3a | Paulo's word | Paulo | not started | 0% | 0% | T+3 |
+
+### W5 Release (Paulo publishes)
+
+| ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
+|---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
+| R3a | Code freeze: only review findings touch product code after this | L | 0 | N6s, C14e, B8c, B10e, Y3 | R3b | Freeze noted; all lanes told | Orchestrator | not started | 0% | 0% | T+3 |
+| R3b | Final proof refresh and full suite on the frozen code | L | 0.2 | R3a | R3c | Every proof current; suite green | Orchestrator | not started | 0% | 0% | T+4 |
+| R3c | Release candidate: versions, build and a clean install rehearsal | M | 0.3 | R3b | R4a, R4b | Rehearsal installs beside 1.5 and opens her file | Orchestrator | not started | 0% | 0% | T+4 |
+| R4a | Final adversarial pass: code and behaviour | H | 1 | R3c | R4c | GR's verdict | GR | not started | 0% | 0% | T+5 |
+| R4b | Final adversarial pass: science and numbers | H | 1 | R3c | R4c | KM's verdict | KM | not started | 0% | 0% | T+5 |
+| R4c | Every finding fixed and gated | M | 0.5 | R4a, R4b | R5a | No open finding | Orchestrator | not started | 0% | 0% | T+5 |
+| R5a | FamilyQuant 2.0 final published | L | 0 | R4c | R5b | Paulo publishes | Paulo | not started | 0% | 0% | T+5 |
+| R5b | Archive this roadmap | L | 0.1 | R5a | Done | Archive committed | Orchestrator | not started | 0% | 0% | T+5 |
+
+### W6 Paper numbers (no release depends on these)
+
+| ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
+|---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
+| A5b | Shared-peptide effect through Compute full XIC, on Paulo's `.sepr2`: one Bothrops jararaca run on the species database, labelled as such | M | 0.3 | 🟢 | Paper numbers | Numbers exported by the program, with the label | EV | not started | 0% | 0% | T+2 |
 
 ## Cooldown
 
@@ -133,7 +150,7 @@ H1 ran at the middle of the project and is finished: 56 steps landed, housekeepi
 
 ## Critical path
 
-Three lines run side by side from the restart. For Ana's file: A1, A2. For the breakthrough: B1, then B4, X5, B5, B6, B7, B8. For the look: V5, C3, C1, then C2, C5, C13, N6, C14, R2. R3 waits for all of them. X5 is the seam: it opens both B5 and X12.
+Everything meets at R3a, the code freeze. The family world runs B10a, B10b, then the screen B10c, B10d, B10e, then the claim B8a, B8b, B8c. The ledger runs side by side, screen by screen, N6a to N6o, then Paulo's one ruling N6q, the sample N6r and the release check N6s. The look runs C14a to C14e. After the freeze the chain is R3b, R3c, R4a and R4b, R4c, R5a.
 
 ## Paulo's decisions
 
@@ -147,6 +164,14 @@ Paulo agreed these at the restart, 2026-11-01.
 | ID | Question | Taken |
 |---|---|---|
 | D14 | Should identity clustering change its coverage rule, merge on shared peptides, or use a reviewed-family veto? | No. Clustering stays as it is, and the measurements ship as a diagnostic the user can see |
+| D23 | Finish today | Yes. C14 runs beside the ledger, preview 2 folds into the release candidate, and rows that only changed wording get one ruling from Paulo at the end. Paulo, 11-02 |
+| D22 | Default minimum tag length | 8, and the user can choose 7 to 15. Replaces the 9 in D11. Paulo, 11-02 |
+| D21 | Is the program general? | Yes. It must work with any database, so nothing the user sees names an organism, a venom or a sample's numbers. Paulo, 11-02 |
+| D20 | Minimum tag length | The user can change it and see the error by length on their own project; 9 stays the default. Paulo, 11-02. Step B10 |
+| D19 | A joined header with different taxa | The target keeps all its taxa and the file is not refused. Paulo, 11-02. Step B11 |
+| D18 | Does the family world ship on one sample? | Yes. Every project shows its own measured rates, and it stays optional. Paulo, 11-02 |
+| D17 | Row FQ15-0061551CF9D6 | The clause on Layer 5 goes with the retired partition screen; the assignment fact stays. Paulo, 11-02 |
+| D16 | Where the claim sentence goes | To Ana, papers and project records only, never into the program. It also states that the program has been tested only on venom. Paulo, 11-02 |
 | D15 | Does the contaminant rule look past `Reverse_`? | Yes, one exact unwrap, then the database prefix in exact case. Target classes do not change; golden stays 4/0/0 |
 | D13 | How the ledger is proven | By kind of row, one executed check per kind, plus a reviewer's random sample, instead of hand work per row |
 | D11 | Minimum tag length for the family world | 9 residues, and only families in scope can be credited. Paulo: the program must show this to the user |

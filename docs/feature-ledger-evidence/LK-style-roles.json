@@ -1,0 +1,1047 @@
+{
+  "schemaVersion": 1,
+  "step": "LK-style-roles",
+  "frozenCommit": "e9b73064d8ff19b2fde3e3231240b636a64c0a91",
+  "runs": [
+    {
+      "id": "LK-style-roles",
+      "command": "C:\\FamilyQuant-gate\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --refresh-look-registers D:/FamilyQuant-data/out-shell/N3/source D:/FamilyQuant-data/out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh \u00222026-11-02 08:34:42 -0800\u0022",
+      "executedAt": "2026-11-02 08:34:42 -0800",
+      "commit": "c5cbd921a9328e18951ccef645a0966f1c658f7f",
+      "artifacts": [
+        {
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-style-roles\\proofs.log",
+          "sha256": "51F20F27DAD537AF2BB261AD1C79F97DCD94CCEFDF3BC1F3EFDC52F4874A02BF"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-style-roles\\resolved-styles.json",
+          "sha256": "81866C2965D6C8A58BE7AF2E631FE8D4968035E0E4D6250EFBBBB664AE7AD545"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-style-roles\\executed\\FamilyQuant_DeNovoControl.xaml",
+          "sha256": "024AB577E3E28F445C6B4761C3F093510532E25933AA8B5A036D8AD8B2DFB6BC"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-style-roles\\executed\\FamilyQuant_Themes_ThemeManager.cs",
+          "sha256": "9711D576445774BFBFE872F8A813AA6A3EEF7962A3A849ED9113D6718C0D298E"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-style-roles\\executed\\FamilyQuant_Themes_Tokens.xaml",
+          "sha256": "F0034F7A77C15E7FB8A21C5C4F169322922C7860418D7D3C1ED1CEA7D7BBFD7D"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-style-roles\\executed\\FamilyQuant.Tests_Program.LookStyleRoles.cs",
+          "sha256": "67729F9BBB5501B22BDDE5DDE9A8B3D26115F9ED37FDD50F604355322096514F"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-style-roles\\executed\\FamilyQuant.Tests_Program.Commands.LookLedger.cs",
+          "sha256": "720C18B4EFB51512A4DF2EEB3E25DFD58C9029105886C20E6072F27FD3396992"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-style-roles\\executed\\LOOK-STYLE-ROLES.json",
+          "sha256": "0ED17004A35DFA06BEB7846B9F8F78B1F06BAD9E4229BDA1711F8D570766AC2E"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-style-roles\\executed\\FamilyQuant.Tests.dll",
+          "sha256": "9A01C4E961B1B9331249F83D454CD0D9EDE4E50B17D923CF7E0EBC917751C350"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-style-roles\\executed\\FamilyQuant2.dll",
+          "sha256": "A062FA792C8BCC2C058A656D85EE046B4B11698AE1A93C43A0898B8D021F6CE2"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-style-roles\\executed\\FamilyQuant.Core.dll",
+          "sha256": "F134CF23D6BD421822928B3419FF96FE425093781C645DA7AAA965F4BE639843"
+        }
+      ],
+      "workingDirectory": "C:\\FamilyQuant-gate"
+    }
+  ],
+  "rows": [
+    {
+      "observationId": "FQ15-8BC847EA8C1E",
+      "implementation": [
+        {
+          "path": "FamilyQuant/DeNovoControl.xaml",
+          "symbol": "DeNovoControl style role LayerBadge.Style.Key",
+          "sha256": "024AB577E3E28F445C6B4761C3F093510532E25933AA8B5A036D8AD8B2DFB6BC"
+        },
+        {
+          "path": "FamilyQuant/Themes/ThemeManager.cs",
+          "symbol": "ThemeManager.TextBrush",
+          "sha256": "9711D576445774BFBFE872F8A813AA6A3EEF7962A3A849ED9113D6718C0D298E"
+        },
+        {
+          "path": "FamilyQuant/Themes/Tokens.xaml",
+          "symbol": "TextBrush",
+          "sha256": "F0034F7A77C15E7FB8A21C5C4F169322922C7860418D7D3C1ED1CEA7D7BBFD7D"
+        }
+      ],
+      "proofs": [
+        {
+          "runId": "LK-style-roles",
+          "kind": "test",
+          "target": "LookStyleRoleCommand",
+          "assertion": "style role FQ15-8BC847EA8C1E / Dark: LayerBadge.Style.Key",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-style-roles\\proofs.log",
+          "inspectedBy": ""
+        },
+        {
+          "runId": "LK-style-roles",
+          "kind": "test",
+          "target": "LookStyleRoleCommand",
+          "assertion": "style role FQ15-8BC847EA8C1E / Light: LayerBadge.Style.Key",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-style-roles\\proofs.log",
+          "inspectedBy": ""
+        }
+      ],
+      "note": "Intentional visual role mapping; colors change with the theme and gold is removed. No numerical, handler or DPI claim.",
+      "kindReceiptId": null,
+      "compared": "frozen LayerBadge.Style.Key = LayerBadge -\u003E current LayerBadge; Dark resolved LayerBadge via BadgeDeNovoLayer1; Light resolved LayerBadge via BadgeDeNovoLayer1"
+    },
+    {
+      "observationId": "FQ15-F8D72845D5F1",
+      "implementation": [
+        {
+          "path": "FamilyQuant/DeNovoControl.xaml",
+          "symbol": "DeNovoControl style role LayerBadge.CornerRadius",
+          "sha256": "024AB577E3E28F445C6B4761C3F093510532E25933AA8B5A036D8AD8B2DFB6BC"
+        },
+        {
+          "path": "FamilyQuant/Themes/ThemeManager.cs",
+          "symbol": "ThemeManager.TextBrush",
+          "sha256": "9711D576445774BFBFE872F8A813AA6A3EEF7962A3A849ED9113D6718C0D298E"
+        },
+        {
+          "path": "FamilyQuant/Themes/Tokens.xaml",
+          "symbol": "TextBrush",
+          "sha256": "F0034F7A77C15E7FB8A21C5C4F169322922C7860418D7D3C1ED1CEA7D7BBFD7D"
+        }
+      ],
+      "proofs": [
+        {
+          "runId": "LK-style-roles",
+          "kind": "test",
+          "target": "LookStyleRoleCommand",
+          "assertion": "style role FQ15-F8D72845D5F1 / Dark: LayerBadge.CornerRadius",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-style-roles\\proofs.log",
+          "inspectedBy": ""
+        },
+        {
+          "runId": "LK-style-roles",
+          "kind": "test",
+          "target": "LookStyleRoleCommand",
+          "assertion": "style role FQ15-F8D72845D5F1 / Light: LayerBadge.CornerRadius",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-style-roles\\proofs.log",
+          "inspectedBy": ""
+        }
+      ],
+      "note": "Intentional visual role mapping; colors change with the theme and gold is removed. No numerical, handler or DPI claim.",
+      "kindReceiptId": null,
+      "compared": "frozen LayerBadge.CornerRadius = 3 -\u003E current 3; Dark resolved 3,3,3,3 via BadgeDeNovoLayer1; Light resolved 3,3,3,3 via BadgeDeNovoLayer1"
+    },
+    {
+      "observationId": "FQ15-3BAEF428C0E5",
+      "implementation": [
+        {
+          "path": "FamilyQuant/DeNovoControl.xaml",
+          "symbol": "DeNovoControl style role LayerBadge.Padding",
+          "sha256": "024AB577E3E28F445C6B4761C3F093510532E25933AA8B5A036D8AD8B2DFB6BC"
+        },
+        {
+          "path": "FamilyQuant/Themes/ThemeManager.cs",
+          "symbol": "ThemeManager.TextBrush",
+          "sha256": "9711D576445774BFBFE872F8A813AA6A3EEF7962A3A849ED9113D6718C0D298E"
+        },
+        {
+          "path": "FamilyQuant/Themes/Tokens.xaml",
+          "symbol": "TextBrush",
+          "sha256": "F0034F7A77C15E7FB8A21C5C4F169322922C7860418D7D3C1ED1CEA7D7BBFD7D"
+        }
+      ],
+      "proofs": [
+        {
+          "runId": "LK-style-roles",
+          "kind": "test",
+          "target": "LookStyleRoleCommand",
+          "assertion": "style role FQ15-3BAEF428C0E5 / Dark: LayerBadge.Padding",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-style-roles\\proofs.log",
+          "inspectedBy": ""
+        },
+        {
+          "runId": "LK-style-roles",
+          "kind": "test",
+          "target": "LookStyleRoleCommand",
+          "assertion": "style role FQ15-3BAEF428C0E5 / Light: LayerBadge.Padding",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-style-roles\\proofs.log",
+          "inspectedBy": ""
+        }
+      ],
+      "note": "Intentional visual role mapping; colors change with the theme and gold is removed. No numerical, handler or DPI claim.",
+      "kindReceiptId": null,
+      "compared": "frozen LayerBadge.Padding = 7,1 -\u003E current 7,1; Dark resolved 7,1,7,1 via BadgeDeNovoLayer1; Light resolved 7,1,7,1 via BadgeDeNovoLayer1"
+    },
+    {
+      "observationId": "FQ15-9A11B5EA2B79",
+      "implementation": [
+        {
+          "path": "FamilyQuant/DeNovoControl.xaml",
+          "symbol": "DeNovoControl style role LayerBadge.Margin",
+          "sha256": "024AB577E3E28F445C6B4761C3F093510532E25933AA8B5A036D8AD8B2DFB6BC"
+        },
+        {
+          "path": "FamilyQuant/Themes/ThemeManager.cs",
+          "symbol": "ThemeManager.TextBrush",
+          "sha256": "9711D576445774BFBFE872F8A813AA6A3EEF7962A3A849ED9113D6718C0D298E"
+        },
+        {
+          "path": "FamilyQuant/Themes/Tokens.xaml",
+          "symbol": "TextBrush",
+          "sha256": "F0034F7A77C15E7FB8A21C5C4F169322922C7860418D7D3C1ED1CEA7D7BBFD7D"
+        }
+      ],
+      "proofs": [
+        {
+          "runId": "LK-style-roles",
+          "kind": "test",
+          "target": "LookStyleRoleCommand",
+          "assertion": "style role FQ15-9A11B5EA2B79 / Dark: LayerBadge.Margin",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-style-roles\\proofs.log",
+          "inspectedBy": ""
+        },
+        {
+          "runId": "LK-style-roles",
+          "kind": "test",
+          "target": "LookStyleRoleCommand",
+          "assertion": "style role FQ15-9A11B5EA2B79 / Light: LayerBadge.Margin",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-style-roles\\proofs.log",
+          "inspectedBy": ""
+        }
+      ],
+      "note": "Intentional visual role mapping; colors change with the theme and gold is removed. No numerical, handler or DPI claim.",
+      "kindReceiptId": null,
+      "compared": "frozen LayerBadge.Margin = 10,0,0,0 -\u003E current 10,0,0,0; Dark resolved 10,0,0,0 via BadgeDeNovoLayer1; Light resolved 10,0,0,0 via BadgeDeNovoLayer1"
+    },
+    {
+      "observationId": "FQ15-861D29CD144B",
+      "implementation": [
+        {
+          "path": "FamilyQuant/DeNovoControl.xaml",
+          "symbol": "DeNovoControl style role LayerBadge.VerticalAlignment",
+          "sha256": "024AB577E3E28F445C6B4761C3F093510532E25933AA8B5A036D8AD8B2DFB6BC"
+        },
+        {
+          "path": "FamilyQuant/Themes/ThemeManager.cs",
+          "symbol": "ThemeManager.TextBrush",
+          "sha256": "9711D576445774BFBFE872F8A813AA6A3EEF7962A3A849ED9113D6718C0D298E"
+        },
+        {
+          "path": "FamilyQuant/Themes/Tokens.xaml",
+          "symbol": "TextBrush",
+          "sha256": "F0034F7A77C15E7FB8A21C5C4F169322922C7860418D7D3C1ED1CEA7D7BBFD7D"
+        }
+      ],
+      "proofs": [
+        {
+          "runId": "LK-style-roles",
+          "kind": "test",
+          "target": "LookStyleRoleCommand",
+          "assertion": "style role FQ15-861D29CD144B / Dark: LayerBadge.VerticalAlignment",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-style-roles\\proofs.log",
+          "inspectedBy": ""
+        },
+        {
+          "runId": "LK-style-roles",
+          "kind": "test",
+          "target": "LookStyleRoleCommand",
+          "assertion": "style role FQ15-861D29CD144B / Light: LayerBadge.VerticalAlignment",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-style-roles\\proofs.log",
+          "inspectedBy": ""
+        }
+      ],
+      "note": "Intentional visual role mapping; colors change with the theme and gold is removed. No numerical, handler or DPI claim.",
+      "kindReceiptId": null,
+      "compared": "frozen LayerBadge.VerticalAlignment = Center -\u003E current Center; Dark resolved Center via BadgeDeNovoLayer1; Light resolved Center via BadgeDeNovoLayer1"
+    },
+    {
+      "observationId": "FQ15-969B0A56C686",
+      "implementation": [
+        {
+          "path": "FamilyQuant/DeNovoControl.xaml",
+          "symbol": "DeNovoControl style role LayerBadgeText.Style.Key",
+          "sha256": "024AB577E3E28F445C6B4761C3F093510532E25933AA8B5A036D8AD8B2DFB6BC"
+        },
+        {
+          "path": "FamilyQuant/Themes/ThemeManager.cs",
+          "symbol": "ThemeManager.TextBrush",
+          "sha256": "9711D576445774BFBFE872F8A813AA6A3EEF7962A3A849ED9113D6718C0D298E"
+        },
+        {
+          "path": "FamilyQuant/Themes/Tokens.xaml",
+          "symbol": "TextBrush",
+          "sha256": "F0034F7A77C15E7FB8A21C5C4F169322922C7860418D7D3C1ED1CEA7D7BBFD7D"
+        }
+      ],
+      "proofs": [
+        {
+          "runId": "LK-style-roles",
+          "kind": "test",
+          "target": "LookStyleRoleCommand",
+          "assertion": "style role FQ15-969B0A56C686 / Dark: LayerBadgeText.Style.Key",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-style-roles\\proofs.log",
+          "inspectedBy": ""
+        },
+        {
+          "runId": "LK-style-roles",
+          "kind": "test",
+          "target": "LookStyleRoleCommand",
+          "assertion": "style role FQ15-969B0A56C686 / Light: LayerBadgeText.Style.Key",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-style-roles\\proofs.log",
+          "inspectedBy": ""
+        }
+      ],
+      "note": "Intentional visual role mapping; colors change with the theme and gold is removed. No numerical, handler or DPI claim.",
+      "kindReceiptId": null,
+      "compared": "frozen LayerBadgeText.Style.Key = LayerBadgeText -\u003E current LayerBadgeText; Dark resolved LayerBadgeText via TextBlockDeNovoLayer1State; Light resolved LayerBadgeText via TextBlockDeNovoLayer1State"
+    },
+    {
+      "observationId": "FQ15-36F91EE02CDC",
+      "implementation": [
+        {
+          "path": "FamilyQuant/DeNovoControl.xaml",
+          "symbol": "DeNovoControl style role LayerBadgeText.FontSize",
+          "sha256": "024AB577E3E28F445C6B4761C3F093510532E25933AA8B5A036D8AD8B2DFB6BC"
+        },
+        {
+          "path": "FamilyQuant/Themes/ThemeManager.cs",
+          "symbol": "ThemeManager.TextBrush",
+          "sha256": "9711D576445774BFBFE872F8A813AA6A3EEF7962A3A849ED9113D6718C0D298E"
+        },
+        {
+          "path": "FamilyQuant/Themes/Tokens.xaml",
+          "symbol": "TextBrush",
+          "sha256": "F0034F7A77C15E7FB8A21C5C4F169322922C7860418D7D3C1ED1CEA7D7BBFD7D"
+        }
+      ],
+      "proofs": [
+        {
+          "runId": "LK-style-roles",
+          "kind": "test",
+          "target": "LookStyleRoleCommand",
+          "assertion": "style role FQ15-36F91EE02CDC / Dark: LayerBadgeText.FontSize",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-style-roles\\proofs.log",
+          "inspectedBy": ""
+        },
+        {
+          "runId": "LK-style-roles",
+          "kind": "test",
+          "target": "LookStyleRoleCommand",
+          "assertion": "style role FQ15-36F91EE02CDC / Light: LayerBadgeText.FontSize",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-style-roles\\proofs.log",
+          "inspectedBy": ""
+        }
+      ],
+      "note": "Intentional visual role mapping; colors change with the theme and gold is removed. No numerical, handler or DPI claim.",
+      "kindReceiptId": null,
+      "compared": "frozen LayerBadgeText.FontSize = 10 -\u003E current 10; Dark resolved 10 via TextBlockDeNovoLayer1State; Light resolved 10 via TextBlockDeNovoLayer1State"
+    },
+    {
+      "observationId": "FQ15-A81C965D49A9",
+      "implementation": [
+        {
+          "path": "FamilyQuant/DeNovoControl.xaml",
+          "symbol": "DeNovoControl style role LayerBadgeText.FontWeight",
+          "sha256": "024AB577E3E28F445C6B4761C3F093510532E25933AA8B5A036D8AD8B2DFB6BC"
+        },
+        {
+          "path": "FamilyQuant/Themes/ThemeManager.cs",
+          "symbol": "ThemeManager.TextBrush",
+          "sha256": "9711D576445774BFBFE872F8A813AA6A3EEF7962A3A849ED9113D6718C0D298E"
+        },
+        {
+          "path": "FamilyQuant/Themes/Tokens.xaml",
+          "symbol": "TextBrush",
+          "sha256": "F0034F7A77C15E7FB8A21C5C4F169322922C7860418D7D3C1ED1CEA7D7BBFD7D"
+        }
+      ],
+      "proofs": [
+        {
+          "runId": "LK-style-roles",
+          "kind": "test",
+          "target": "LookStyleRoleCommand",
+          "assertion": "style role FQ15-A81C965D49A9 / Dark: LayerBadgeText.FontWeight",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-style-roles\\proofs.log",
+          "inspectedBy": ""
+        },
+        {
+          "runId": "LK-style-roles",
+          "kind": "test",
+          "target": "LookStyleRoleCommand",
+          "assertion": "style role FQ15-A81C965D49A9 / Light: LayerBadgeText.FontWeight",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-style-roles\\proofs.log",
+          "inspectedBy": ""
+        }
+      ],
+      "note": "Intentional visual role mapping; colors change with the theme and gold is removed. No numerical, handler or DPI claim.",
+      "kindReceiptId": null,
+      "compared": "frozen LayerBadgeText.FontWeight = Bold -\u003E current Bold; Dark resolved Bold via TextBlockDeNovoLayer1State; Light resolved Bold via TextBlockDeNovoLayer1State"
+    },
+    {
+      "observationId": "FQ15-53C091FC29DF",
+      "implementation": [
+        {
+          "path": "FamilyQuant/DeNovoControl.xaml",
+          "symbol": "DeNovoControl style role LayerBadgeText.Foreground",
+          "sha256": "024AB577E3E28F445C6B4761C3F093510532E25933AA8B5A036D8AD8B2DFB6BC"
+        },
+        {
+          "path": "FamilyQuant/Themes/ThemeManager.cs",
+          "symbol": "ThemeManager.TextBrush",
+          "sha256": "9711D576445774BFBFE872F8A813AA6A3EEF7962A3A849ED9113D6718C0D298E"
+        },
+        {
+          "path": "FamilyQuant/Themes/Tokens.xaml",
+          "symbol": "TextBrush",
+          "sha256": "F0034F7A77C15E7FB8A21C5C4F169322922C7860418D7D3C1ED1CEA7D7BBFD7D"
+        }
+      ],
+      "proofs": [
+        {
+          "runId": "LK-style-roles",
+          "kind": "test",
+          "target": "LookStyleRoleCommand",
+          "assertion": "style role FQ15-53C091FC29DF / Dark: LayerBadgeText.Foreground",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-style-roles\\proofs.log",
+          "inspectedBy": ""
+        },
+        {
+          "runId": "LK-style-roles",
+          "kind": "test",
+          "target": "LookStyleRoleCommand",
+          "assertion": "style role FQ15-53C091FC29DF / Light: LayerBadgeText.Foreground",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-style-roles\\proofs.log",
+          "inspectedBy": ""
+        }
+      ],
+      "note": "Intentional visual role mapping; colors change with the theme and gold is removed. No numerical, handler or DPI claim.",
+      "kindReceiptId": null,
+      "compared": "frozen LayerBadgeText.Foreground = White -\u003E current {DynamicResource TextBrush}; Dark resolved #FFF5F5F5 via TextBlockDeNovoLayer1State; Light resolved #FF1A1A1A via TextBlockDeNovoLayer1State"
+    },
+    {
+      "observationId": "FQ15-220D63CC3ECF",
+      "implementation": [
+        {
+          "path": "FamilyQuant/DeNovoControl.xaml",
+          "symbol": "DeNovoControl style role LayerTitle.Style.Key",
+          "sha256": "024AB577E3E28F445C6B4761C3F093510532E25933AA8B5A036D8AD8B2DFB6BC"
+        },
+        {
+          "path": "FamilyQuant/Themes/ThemeManager.cs",
+          "symbol": "ThemeManager.TextBrush",
+          "sha256": "9711D576445774BFBFE872F8A813AA6A3EEF7962A3A849ED9113D6718C0D298E"
+        },
+        {
+          "path": "FamilyQuant/Themes/Tokens.xaml",
+          "symbol": "TextBrush",
+          "sha256": "F0034F7A77C15E7FB8A21C5C4F169322922C7860418D7D3C1ED1CEA7D7BBFD7D"
+        }
+      ],
+      "proofs": [
+        {
+          "runId": "LK-style-roles",
+          "kind": "test",
+          "target": "LookStyleRoleCommand",
+          "assertion": "style role FQ15-220D63CC3ECF / Dark: LayerTitle.Style.Key",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-style-roles\\proofs.log",
+          "inspectedBy": ""
+        },
+        {
+          "runId": "LK-style-roles",
+          "kind": "test",
+          "target": "LookStyleRoleCommand",
+          "assertion": "style role FQ15-220D63CC3ECF / Light: LayerTitle.Style.Key",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-style-roles\\proofs.log",
+          "inspectedBy": ""
+        }
+      ],
+      "note": "Intentional visual role mapping; colors change with the theme and gold is removed. No numerical, handler or DPI claim.",
+      "kindReceiptId": null,
+      "compared": "frozen LayerTitle.Style.Key = LayerTitle -\u003E current LayerTitle; Dark resolved LayerTitle via style:LayerTitle; Light resolved LayerTitle via style:LayerTitle"
+    },
+    {
+      "observationId": "FQ15-06623D41A745",
+      "implementation": [
+        {
+          "path": "FamilyQuant/DeNovoControl.xaml",
+          "symbol": "DeNovoControl style role LayerTitle.Foreground",
+          "sha256": "024AB577E3E28F445C6B4761C3F093510532E25933AA8B5A036D8AD8B2DFB6BC"
+        },
+        {
+          "path": "FamilyQuant/Themes/ThemeManager.cs",
+          "symbol": "ThemeManager.TextBrush",
+          "sha256": "9711D576445774BFBFE872F8A813AA6A3EEF7962A3A849ED9113D6718C0D298E"
+        },
+        {
+          "path": "FamilyQuant/Themes/Tokens.xaml",
+          "symbol": "TextBrush",
+          "sha256": "F0034F7A77C15E7FB8A21C5C4F169322922C7860418D7D3C1ED1CEA7D7BBFD7D"
+        }
+      ],
+      "proofs": [
+        {
+          "runId": "LK-style-roles",
+          "kind": "test",
+          "target": "LookStyleRoleCommand",
+          "assertion": "style role FQ15-06623D41A745 / Dark: LayerTitle.Foreground",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-style-roles\\proofs.log",
+          "inspectedBy": ""
+        },
+        {
+          "runId": "LK-style-roles",
+          "kind": "test",
+          "target": "LookStyleRoleCommand",
+          "assertion": "style role FQ15-06623D41A745 / Light: LayerTitle.Foreground",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-style-roles\\proofs.log",
+          "inspectedBy": ""
+        }
+      ],
+      "note": "Intentional visual role mapping; colors change with the theme and gold is removed. No numerical, handler or DPI claim.",
+      "kindReceiptId": null,
+      "compared": "frozen LayerTitle.Foreground = White -\u003E current {DynamicResource TextBrush}; Dark resolved #FFF5F5F5 via style:LayerTitle; Light resolved #FF1A1A1A via style:LayerTitle"
+    },
+    {
+      "observationId": "FQ15-74C914EA14F2",
+      "implementation": [
+        {
+          "path": "FamilyQuant/DeNovoControl.xaml",
+          "symbol": "DeNovoControl style role LayerTitle.FontWeight",
+          "sha256": "024AB577E3E28F445C6B4761C3F093510532E25933AA8B5A036D8AD8B2DFB6BC"
+        },
+        {
+          "path": "FamilyQuant/Themes/ThemeManager.cs",
+          "symbol": "ThemeManager.TextBrush",
+          "sha256": "9711D576445774BFBFE872F8A813AA6A3EEF7962A3A849ED9113D6718C0D298E"
+        },
+        {
+          "path": "FamilyQuant/Themes/Tokens.xaml",
+          "symbol": "TextBrush",
+          "sha256": "F0034F7A77C15E7FB8A21C5C4F169322922C7860418D7D3C1ED1CEA7D7BBFD7D"
+        }
+      ],
+      "proofs": [
+        {
+          "runId": "LK-style-roles",
+          "kind": "test",
+          "target": "LookStyleRoleCommand",
+          "assertion": "style role FQ15-74C914EA14F2 / Dark: LayerTitle.FontWeight",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-style-roles\\proofs.log",
+          "inspectedBy": ""
+        },
+        {
+          "runId": "LK-style-roles",
+          "kind": "test",
+          "target": "LookStyleRoleCommand",
+          "assertion": "style role FQ15-74C914EA14F2 / Light: LayerTitle.FontWeight",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-style-roles\\proofs.log",
+          "inspectedBy": ""
+        }
+      ],
+      "note": "Intentional visual role mapping; colors change with the theme and gold is removed. No numerical, handler or DPI claim.",
+      "kindReceiptId": null,
+      "compared": "frozen LayerTitle.FontWeight = Bold -\u003E current Bold; Dark resolved Bold via style:LayerTitle; Light resolved Bold via style:LayerTitle"
+    },
+    {
+      "observationId": "FQ15-616DB022B653",
+      "implementation": [
+        {
+          "path": "FamilyQuant/DeNovoControl.xaml",
+          "symbol": "DeNovoControl style role LayerTitle.VerticalAlignment",
+          "sha256": "024AB577E3E28F445C6B4761C3F093510532E25933AA8B5A036D8AD8B2DFB6BC"
+        },
+        {
+          "path": "FamilyQuant/Themes/ThemeManager.cs",
+          "symbol": "ThemeManager.TextBrush",
+          "sha256": "9711D576445774BFBFE872F8A813AA6A3EEF7962A3A849ED9113D6718C0D298E"
+        },
+        {
+          "path": "FamilyQuant/Themes/Tokens.xaml",
+          "symbol": "TextBrush",
+          "sha256": "F0034F7A77C15E7FB8A21C5C4F169322922C7860418D7D3C1ED1CEA7D7BBFD7D"
+        }
+      ],
+      "proofs": [
+        {
+          "runId": "LK-style-roles",
+          "kind": "test",
+          "target": "LookStyleRoleCommand",
+          "assertion": "style role FQ15-616DB022B653 / Dark: LayerTitle.VerticalAlignment",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-style-roles\\proofs.log",
+          "inspectedBy": ""
+        },
+        {
+          "runId": "LK-style-roles",
+          "kind": "test",
+          "target": "LookStyleRoleCommand",
+          "assertion": "style role FQ15-616DB022B653 / Light: LayerTitle.VerticalAlignment",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-style-roles\\proofs.log",
+          "inspectedBy": ""
+        }
+      ],
+      "note": "Intentional visual role mapping; colors change with the theme and gold is removed. No numerical, handler or DPI claim.",
+      "kindReceiptId": null,
+      "compared": "frozen LayerTitle.VerticalAlignment = Center -\u003E current Center; Dark resolved Center via style:LayerTitle; Light resolved Center via style:LayerTitle"
+    },
+    {
+      "observationId": "FQ15-4246F074896F",
+      "implementation": [
+        {
+          "path": "FamilyQuant/DeNovoControl.xaml",
+          "symbol": "DeNovoControl style role ResultValue.Style.Key",
+          "sha256": "024AB577E3E28F445C6B4761C3F093510532E25933AA8B5A036D8AD8B2DFB6BC"
+        },
+        {
+          "path": "FamilyQuant/Themes/ThemeManager.cs",
+          "symbol": "ThemeManager.TextBrush",
+          "sha256": "9711D576445774BFBFE872F8A813AA6A3EEF7962A3A849ED9113D6718C0D298E"
+        },
+        {
+          "path": "FamilyQuant/Themes/Tokens.xaml",
+          "symbol": "TextBrush",
+          "sha256": "F0034F7A77C15E7FB8A21C5C4F169322922C7860418D7D3C1ED1CEA7D7BBFD7D"
+        }
+      ],
+      "proofs": [
+        {
+          "runId": "LK-style-roles",
+          "kind": "test",
+          "target": "LookStyleRoleCommand",
+          "assertion": "style role FQ15-4246F074896F / Dark: ResultValue.Style.Key",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-style-roles\\proofs.log",
+          "inspectedBy": ""
+        },
+        {
+          "runId": "LK-style-roles",
+          "kind": "test",
+          "target": "LookStyleRoleCommand",
+          "assertion": "style role FQ15-4246F074896F / Light: ResultValue.Style.Key",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-style-roles\\proofs.log",
+          "inspectedBy": ""
+        }
+      ],
+      "note": "Intentional visual role mapping; colors change with the theme and gold is removed. No numerical, handler or DPI claim.",
+      "kindReceiptId": null,
+      "compared": "frozen ResultValue.Style.Key = ResultValue -\u003E current ResultValue; Dark resolved ResultValue via LabelFilesFound; Light resolved ResultValue via LabelFilesFound"
+    },
+    {
+      "observationId": "FQ15-5680CE8D113E",
+      "implementation": [
+        {
+          "path": "FamilyQuant/DeNovoControl.xaml",
+          "symbol": "DeNovoControl style role ResultValue.Foreground",
+          "sha256": "024AB577E3E28F445C6B4761C3F093510532E25933AA8B5A036D8AD8B2DFB6BC"
+        },
+        {
+          "path": "FamilyQuant/Themes/ThemeManager.cs",
+          "symbol": "ThemeManager.TextBrush",
+          "sha256": "9711D576445774BFBFE872F8A813AA6A3EEF7962A3A849ED9113D6718C0D298E"
+        },
+        {
+          "path": "FamilyQuant/Themes/Tokens.xaml",
+          "symbol": "TextBrush",
+          "sha256": "F0034F7A77C15E7FB8A21C5C4F169322922C7860418D7D3C1ED1CEA7D7BBFD7D"
+        }
+      ],
+      "proofs": [
+        {
+          "runId": "LK-style-roles",
+          "kind": "test",
+          "target": "LookStyleRoleCommand",
+          "assertion": "style role FQ15-5680CE8D113E / Dark: ResultValue.Foreground",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-style-roles\\proofs.log",
+          "inspectedBy": ""
+        },
+        {
+          "runId": "LK-style-roles",
+          "kind": "test",
+          "target": "LookStyleRoleCommand",
+          "assertion": "style role FQ15-5680CE8D113E / Light: ResultValue.Foreground",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-style-roles\\proofs.log",
+          "inspectedBy": ""
+        }
+      ],
+      "note": "Intentional visual role mapping; colors change with the theme and gold is removed. No numerical, handler or DPI claim.",
+      "kindReceiptId": null,
+      "compared": "frozen ResultValue.Foreground = #FFD700 -\u003E current {DynamicResource TextBrush}; Dark resolved #FFF5F5F5 via LabelFilesFound; Light resolved #FF1A1A1A via LabelFilesFound"
+    },
+    {
+      "observationId": "FQ15-BDE150D37198",
+      "implementation": [
+        {
+          "path": "FamilyQuant/DeNovoControl.xaml",
+          "symbol": "DeNovoControl style role ResultValue.FontWeight",
+          "sha256": "024AB577E3E28F445C6B4761C3F093510532E25933AA8B5A036D8AD8B2DFB6BC"
+        },
+        {
+          "path": "FamilyQuant/Themes/ThemeManager.cs",
+          "symbol": "ThemeManager.TextBrush",
+          "sha256": "9711D576445774BFBFE872F8A813AA6A3EEF7962A3A849ED9113D6718C0D298E"
+        },
+        {
+          "path": "FamilyQuant/Themes/Tokens.xaml",
+          "symbol": "TextBrush",
+          "sha256": "F0034F7A77C15E7FB8A21C5C4F169322922C7860418D7D3C1ED1CEA7D7BBFD7D"
+        }
+      ],
+      "proofs": [
+        {
+          "runId": "LK-style-roles",
+          "kind": "test",
+          "target": "LookStyleRoleCommand",
+          "assertion": "style role FQ15-BDE150D37198 / Dark: ResultValue.FontWeight",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-style-roles\\proofs.log",
+          "inspectedBy": ""
+        },
+        {
+          "runId": "LK-style-roles",
+          "kind": "test",
+          "target": "LookStyleRoleCommand",
+          "assertion": "style role FQ15-BDE150D37198 / Light: ResultValue.FontWeight",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-style-roles\\proofs.log",
+          "inspectedBy": ""
+        }
+      ],
+      "note": "Intentional visual role mapping; colors change with the theme and gold is removed. No numerical, handler or DPI claim.",
+      "kindReceiptId": null,
+      "compared": "frozen ResultValue.FontWeight = Bold -\u003E current Bold; Dark resolved Bold via LabelFilesFound; Light resolved Bold via LabelFilesFound"
+    },
+    {
+      "observationId": "FQ15-298DB85DE10C",
+      "implementation": [
+        {
+          "path": "FamilyQuant/DeNovoControl.xaml",
+          "symbol": "DeNovoControl style role ResultValue.FontSize",
+          "sha256": "024AB577E3E28F445C6B4761C3F093510532E25933AA8B5A036D8AD8B2DFB6BC"
+        },
+        {
+          "path": "FamilyQuant/Themes/ThemeManager.cs",
+          "symbol": "ThemeManager.TextBrush",
+          "sha256": "9711D576445774BFBFE872F8A813AA6A3EEF7962A3A849ED9113D6718C0D298E"
+        },
+        {
+          "path": "FamilyQuant/Themes/Tokens.xaml",
+          "symbol": "TextBrush",
+          "sha256": "F0034F7A77C15E7FB8A21C5C4F169322922C7860418D7D3C1ED1CEA7D7BBFD7D"
+        }
+      ],
+      "proofs": [
+        {
+          "runId": "LK-style-roles",
+          "kind": "test",
+          "target": "LookStyleRoleCommand",
+          "assertion": "style role FQ15-298DB85DE10C / Dark: ResultValue.FontSize",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-style-roles\\proofs.log",
+          "inspectedBy": ""
+        },
+        {
+          "runId": "LK-style-roles",
+          "kind": "test",
+          "target": "LookStyleRoleCommand",
+          "assertion": "style role FQ15-298DB85DE10C / Light: ResultValue.FontSize",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-style-roles\\proofs.log",
+          "inspectedBy": ""
+        }
+      ],
+      "note": "Intentional visual role mapping; colors change with the theme and gold is removed. No numerical, handler or DPI claim.",
+      "kindReceiptId": null,
+      "compared": "frozen ResultValue.FontSize = 13 -\u003E current 13; Dark resolved 13 via LabelFilesFound; Light resolved 13 via LabelFilesFound"
+    },
+    {
+      "observationId": "FQ15-D549F0C6E7EA",
+      "implementation": [
+        {
+          "path": "FamilyQuant/DeNovoControl.xaml",
+          "symbol": "DeNovoControl style role ResultValue.VerticalAlignment",
+          "sha256": "024AB577E3E28F445C6B4761C3F093510532E25933AA8B5A036D8AD8B2DFB6BC"
+        },
+        {
+          "path": "FamilyQuant/Themes/ThemeManager.cs",
+          "symbol": "ThemeManager.TextBrush",
+          "sha256": "9711D576445774BFBFE872F8A813AA6A3EEF7962A3A849ED9113D6718C0D298E"
+        },
+        {
+          "path": "FamilyQuant/Themes/Tokens.xaml",
+          "symbol": "TextBrush",
+          "sha256": "F0034F7A77C15E7FB8A21C5C4F169322922C7860418D7D3C1ED1CEA7D7BBFD7D"
+        }
+      ],
+      "proofs": [
+        {
+          "runId": "LK-style-roles",
+          "kind": "test",
+          "target": "LookStyleRoleCommand",
+          "assertion": "style role FQ15-D549F0C6E7EA / Dark: ResultValue.VerticalAlignment",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-style-roles\\proofs.log",
+          "inspectedBy": ""
+        },
+        {
+          "runId": "LK-style-roles",
+          "kind": "test",
+          "target": "LookStyleRoleCommand",
+          "assertion": "style role FQ15-D549F0C6E7EA / Light: ResultValue.VerticalAlignment",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-style-roles\\proofs.log",
+          "inspectedBy": ""
+        }
+      ],
+      "note": "Intentional visual role mapping; colors change with the theme and gold is removed. No numerical, handler or DPI claim.",
+      "kindReceiptId": null,
+      "compared": "frozen ResultValue.VerticalAlignment = Center -\u003E current Center; Dark resolved Center via LabelFilesFound; Light resolved Center via LabelFilesFound"
+    },
+    {
+      "observationId": "FQ15-F6C1061154A9",
+      "implementation": [
+        {
+          "path": "FamilyQuant/DeNovoControl.xaml",
+          "symbol": "DeNovoControl style role ResultValue.Margin",
+          "sha256": "024AB577E3E28F445C6B4761C3F093510532E25933AA8B5A036D8AD8B2DFB6BC"
+        },
+        {
+          "path": "FamilyQuant/Themes/ThemeManager.cs",
+          "symbol": "ThemeManager.TextBrush",
+          "sha256": "9711D576445774BFBFE872F8A813AA6A3EEF7962A3A849ED9113D6718C0D298E"
+        },
+        {
+          "path": "FamilyQuant/Themes/Tokens.xaml",
+          "symbol": "TextBrush",
+          "sha256": "F0034F7A77C15E7FB8A21C5C4F169322922C7860418D7D3C1ED1CEA7D7BBFD7D"
+        }
+      ],
+      "proofs": [
+        {
+          "runId": "LK-style-roles",
+          "kind": "test",
+          "target": "LookStyleRoleCommand",
+          "assertion": "style role FQ15-F6C1061154A9 / Dark: ResultValue.Margin",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-style-roles\\proofs.log",
+          "inspectedBy": ""
+        },
+        {
+          "runId": "LK-style-roles",
+          "kind": "test",
+          "target": "LookStyleRoleCommand",
+          "assertion": "style role FQ15-F6C1061154A9 / Light: ResultValue.Margin",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-style-roles\\proofs.log",
+          "inspectedBy": ""
+        }
+      ],
+      "note": "Intentional visual role mapping; colors change with the theme and gold is removed. No numerical, handler or DPI claim.",
+      "kindReceiptId": null,
+      "compared": "frozen ResultValue.Margin = 0,0,14,0 -\u003E current 0,0,14,0; Dark resolved 0,0,14,0 via LabelFilesFound; Light resolved 0,0,14,0 via LabelFilesFound"
+    },
+    {
+      "observationId": "FQ15-8E574C2E5D40",
+      "implementation": [
+        {
+          "path": "FamilyQuant/DeNovoControl.xaml",
+          "symbol": "DeNovoControl style role Note.Style.Key",
+          "sha256": "024AB577E3E28F445C6B4761C3F093510532E25933AA8B5A036D8AD8B2DFB6BC"
+        },
+        {
+          "path": "FamilyQuant/Themes/ThemeManager.cs",
+          "symbol": "ThemeManager.TextBrush",
+          "sha256": "9711D576445774BFBFE872F8A813AA6A3EEF7962A3A849ED9113D6718C0D298E"
+        },
+        {
+          "path": "FamilyQuant/Themes/Tokens.xaml",
+          "symbol": "TextBrush",
+          "sha256": "F0034F7A77C15E7FB8A21C5C4F169322922C7860418D7D3C1ED1CEA7D7BBFD7D"
+        }
+      ],
+      "proofs": [
+        {
+          "runId": "LK-style-roles",
+          "kind": "test",
+          "target": "LookStyleRoleCommand",
+          "assertion": "style role FQ15-8E574C2E5D40 / Dark: Note.Style.Key",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-style-roles\\proofs.log",
+          "inspectedBy": ""
+        },
+        {
+          "runId": "LK-style-roles",
+          "kind": "test",
+          "target": "LookStyleRoleCommand",
+          "assertion": "style role FQ15-8E574C2E5D40 / Light: Note.Style.Key",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-style-roles\\proofs.log",
+          "inspectedBy": ""
+        }
+      ],
+      "note": "Intentional visual role mapping; colors change with the theme and gold is removed. No numerical, handler or DPI claim.",
+      "kindReceiptId": null,
+      "compared": "frozen Note.Style.Key = Note -\u003E current Note; Dark resolved Note via TextBlockPerRunBreakdown; Light resolved Note via TextBlockPerRunBreakdown"
+    },
+    {
+      "observationId": "FQ15-5F2C1E449429",
+      "implementation": [
+        {
+          "path": "FamilyQuant/DeNovoControl.xaml",
+          "symbol": "DeNovoControl style role Note.Foreground",
+          "sha256": "024AB577E3E28F445C6B4761C3F093510532E25933AA8B5A036D8AD8B2DFB6BC"
+        },
+        {
+          "path": "FamilyQuant/Themes/ThemeManager.cs",
+          "symbol": "ThemeManager.TextBrush",
+          "sha256": "9711D576445774BFBFE872F8A813AA6A3EEF7962A3A849ED9113D6718C0D298E"
+        },
+        {
+          "path": "FamilyQuant/Themes/Tokens.xaml",
+          "symbol": "TextBrush",
+          "sha256": "F0034F7A77C15E7FB8A21C5C4F169322922C7860418D7D3C1ED1CEA7D7BBFD7D"
+        }
+      ],
+      "proofs": [
+        {
+          "runId": "LK-style-roles",
+          "kind": "test",
+          "target": "LookStyleRoleCommand",
+          "assertion": "style role FQ15-5F2C1E449429 / Dark: Note.Foreground",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-style-roles\\proofs.log",
+          "inspectedBy": ""
+        },
+        {
+          "runId": "LK-style-roles",
+          "kind": "test",
+          "target": "LookStyleRoleCommand",
+          "assertion": "style role FQ15-5F2C1E449429 / Light: Note.Foreground",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-style-roles\\proofs.log",
+          "inspectedBy": ""
+        }
+      ],
+      "note": "Intentional visual role mapping; colors change with the theme and gold is removed. No numerical, handler or DPI claim.",
+      "kindReceiptId": null,
+      "compared": "frozen Note.Foreground = #AAAAAA -\u003E current {DynamicResource TextBrush}; Dark resolved #FFF5F5F5 via TextBlockPerRunBreakdown; Light resolved #FF1A1A1A via TextBlockPerRunBreakdown"
+    },
+    {
+      "observationId": "FQ15-CA0B824CA99E",
+      "implementation": [
+        {
+          "path": "FamilyQuant/DeNovoControl.xaml",
+          "symbol": "DeNovoControl style role Note.FontSize",
+          "sha256": "024AB577E3E28F445C6B4761C3F093510532E25933AA8B5A036D8AD8B2DFB6BC"
+        },
+        {
+          "path": "FamilyQuant/Themes/ThemeManager.cs",
+          "symbol": "ThemeManager.TextBrush",
+          "sha256": "9711D576445774BFBFE872F8A813AA6A3EEF7962A3A849ED9113D6718C0D298E"
+        },
+        {
+          "path": "FamilyQuant/Themes/Tokens.xaml",
+          "symbol": "TextBrush",
+          "sha256": "F0034F7A77C15E7FB8A21C5C4F169322922C7860418D7D3C1ED1CEA7D7BBFD7D"
+        }
+      ],
+      "proofs": [
+        {
+          "runId": "LK-style-roles",
+          "kind": "test",
+          "target": "LookStyleRoleCommand",
+          "assertion": "style role FQ15-CA0B824CA99E / Dark: Note.FontSize",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-style-roles\\proofs.log",
+          "inspectedBy": ""
+        },
+        {
+          "runId": "LK-style-roles",
+          "kind": "test",
+          "target": "LookStyleRoleCommand",
+          "assertion": "style role FQ15-CA0B824CA99E / Light: Note.FontSize",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-style-roles\\proofs.log",
+          "inspectedBy": ""
+        }
+      ],
+      "note": "Intentional visual role mapping; colors change with the theme and gold is removed. No numerical, handler or DPI claim.",
+      "kindReceiptId": null,
+      "compared": "frozen Note.FontSize = 11 -\u003E current 11; Dark resolved 11 via TextBlockPerRunBreakdown; Light resolved 11 via TextBlockPerRunBreakdown"
+    },
+    {
+      "observationId": "FQ15-B6FB542118DB",
+      "implementation": [
+        {
+          "path": "FamilyQuant/DeNovoControl.xaml",
+          "symbol": "DeNovoControl style role Note.TextWrapping",
+          "sha256": "024AB577E3E28F445C6B4761C3F093510532E25933AA8B5A036D8AD8B2DFB6BC"
+        },
+        {
+          "path": "FamilyQuant/Themes/ThemeManager.cs",
+          "symbol": "ThemeManager.TextBrush",
+          "sha256": "9711D576445774BFBFE872F8A813AA6A3EEF7962A3A849ED9113D6718C0D298E"
+        },
+        {
+          "path": "FamilyQuant/Themes/Tokens.xaml",
+          "symbol": "TextBrush",
+          "sha256": "F0034F7A77C15E7FB8A21C5C4F169322922C7860418D7D3C1ED1CEA7D7BBFD7D"
+        }
+      ],
+      "proofs": [
+        {
+          "runId": "LK-style-roles",
+          "kind": "test",
+          "target": "LookStyleRoleCommand",
+          "assertion": "style role FQ15-B6FB542118DB / Dark: Note.TextWrapping",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-style-roles\\proofs.log",
+          "inspectedBy": ""
+        },
+        {
+          "runId": "LK-style-roles",
+          "kind": "test",
+          "target": "LookStyleRoleCommand",
+          "assertion": "style role FQ15-B6FB542118DB / Light: Note.TextWrapping",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-style-roles\\proofs.log",
+          "inspectedBy": ""
+        }
+      ],
+      "note": "Intentional visual role mapping; colors change with the theme and gold is removed. No numerical, handler or DPI claim.",
+      "kindReceiptId": null,
+      "compared": "frozen Note.TextWrapping = Wrap -\u003E current Wrap; Dark resolved Wrap via TextBlockPerRunBreakdown; Light resolved Wrap via TextBlockPerRunBreakdown"
+    },
+    {
+      "observationId": "FQ15-B64AE83318C9",
+      "implementation": [
+        {
+          "path": "FamilyQuant/DeNovoControl.xaml",
+          "symbol": "DeNovoControl style role Note.Margin",
+          "sha256": "024AB577E3E28F445C6B4761C3F093510532E25933AA8B5A036D8AD8B2DFB6BC"
+        },
+        {
+          "path": "FamilyQuant/Themes/ThemeManager.cs",
+          "symbol": "ThemeManager.TextBrush",
+          "sha256": "9711D576445774BFBFE872F8A813AA6A3EEF7962A3A849ED9113D6718C0D298E"
+        },
+        {
+          "path": "FamilyQuant/Themes/Tokens.xaml",
+          "symbol": "TextBrush",
+          "sha256": "F0034F7A77C15E7FB8A21C5C4F169322922C7860418D7D3C1ED1CEA7D7BBFD7D"
+        }
+      ],
+      "proofs": [
+        {
+          "runId": "LK-style-roles",
+          "kind": "test",
+          "target": "LookStyleRoleCommand",
+          "assertion": "style role FQ15-B64AE83318C9 / Dark: Note.Margin",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-style-roles\\proofs.log",
+          "inspectedBy": ""
+        },
+        {
+          "runId": "LK-style-roles",
+          "kind": "test",
+          "target": "LookStyleRoleCommand",
+          "assertion": "style role FQ15-B64AE83318C9 / Light: Note.Margin",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-style-roles\\proofs.log",
+          "inspectedBy": ""
+        }
+      ],
+      "note": "Intentional visual role mapping; colors change with the theme and gold is removed. No numerical, handler or DPI claim.",
+      "kindReceiptId": null,
+      "compared": "frozen Note.Margin = 10,4,10,4 -\u003E current 10,4,10,4; Dark resolved 10,4,10,4 via TextBlockPerRunBreakdown; Light resolved 10,4,10,4 via TextBlockPerRunBreakdown"
+    }
+  ],
+  "kindReceipts": null
+}

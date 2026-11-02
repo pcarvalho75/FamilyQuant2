@@ -26,12 +26,12 @@ public partial class AnalyticsControl : UserControl
         ViewModel = viewModel;
         InitializeComponent();
         DataContext = ViewModel;
-        DatabaseGapHost.Content = ViewModel.DatabaseGap.HasData ? new DatabaseGapControl(ViewModel.DatabaseGap)
+        DatabaseGapHost.Content = ViewModel.DatabaseGap.HasStoredResult ? new DatabaseGapControl(ViewModel.DatabaseGap)
             : new TextBlock { Text = ViewModel.DatabaseGap.EmptyMessage, TextWrapping = TextWrapping.Wrap };
         foreach (ComboBoxItem item in ComboBoxExportKind.Items)
             if (string.Equals(item.Tag as string, ViewModel.ExportKind.ToString(), StringComparison.Ordinal)) ComboBoxExportKind.SelectedItem = item;
         TextBlockDetails.Text = ViewModel.Details;
-        BorderEmpty.Visibility = Data == null && !ViewModel.DatabaseGap.HasData ? Visibility.Visible : Visibility.Collapsed;
+        BorderEmpty.Visibility = Data == null && !ViewModel.DatabaseGap.HasStoredResult ? Visibility.Visible : Visibility.Collapsed;
         ComboBoxFamilyTopN.IsEnabled = CheckBoxFamilyPercent.IsEnabled = ViewModel.HasData;
         ButtonExport.IsEnabled = ViewModel.CanExport;
         RefreshExportHint();
@@ -70,17 +70,19 @@ public partial class AnalyticsControl : UserControl
     }
     private void RefreshExportHint() => ButtonExport.ToolTip = ViewModel.ExportKind switch {
         ResultsExportKind.SuggestedAdditions => ViewModel.DatabaseGap.FastaState,
-        ResultsExportKind.DatabaseGap => "Write the stored composition table, every global bucket and its recorded rules.",
+        ResultsExportKind.DatabaseGap => ViewModel.DatabaseGap.HasData ? "Write the stored composition table, every global bucket and its recorded rules." : ViewModel.DatabaseGap.EmptyMessage,
         _ => "Save the selected result in CSV or PNG format with invariant decimals. Figures use 1920 by 1080 pixels in the Light palette." };
     private async void ExportClicked(object sender, RoutedEventArgs e)
     {
         if (!ViewModel.CanExport) return;
         if (PresentationSource.FromVisual(this) == null)
-        { ViewModel.ShowStatus("Nothing was exported, because this screen is not on a display. Open the project in the application to export."); return; }
+        { ViewModel.ShowStatus("Nothing was exported, because this screen is not on a display. Export dialogs need an open application window; " +
+            "open the complete project in the application to export from Results."); return; }
         string? path;
         if (ViewModel.ExportKind is ResultsExportKind.Figures or ResultsExportKind.EvidencePack)
         {
-            var dialog = new OpenFolderDialog { Title = "Choose the export folder" };
+            var dialog = new OpenFolderDialog { Title = ViewModel.ExportKind == ResultsExportKind.Figures
+                ? "Choose the folder for screen figures" : "Choose the folder for the presentation evidence pack" };
             path = ShellDialogs.ShowFolder(this, "results." + ViewModel.ExportKind, dialog) ? dialog.FolderName : null;
         }
         else
@@ -92,7 +94,8 @@ public partial class AnalyticsControl : UserControl
                     ResultsExportKind.Homology => "FamilyQuant_DeNovo_Homology.csv",
                     ResultsExportKind.DatabaseGap => "familyquant_database_gap.csv",
                     ResultsExportKind.SuggestedAdditions => "familyquant_suggested_additions.fasta",
-                    _ => "familyquant_analytics_peptides.csv" }, Title = "Export results" };
+                    _ => "familyquant_analytics_peptides.csv" }, Title = ViewModel.ExportKind switch {
+                        ResultsExportKind.Peptides => "Export peptide table", ResultsExportKind.Summary => "Export run summary", _ => "Export results" } };
             path = ShellDialogs.ShowFile(this, "results." + ViewModel.ExportKind, dialog) ? dialog.FileName : null;
         }
         if (path != null) await ViewModel.ExportAsync(path, AppOperationHost.For(this));

@@ -62,6 +62,7 @@ internal static partial class Program
 
     private static void QuantifyShellTests(string workDir)
     {
+        QuantifyCloseTests();
         string first = Path.Combine(workDir, "quantify-shell-first.fcf"), second = Path.Combine(workDir, "quantify-shell-second.fcf");
         FamilyClusterFile Fixture(int id) => new() { MyExtendedFastaItems = new()
         {

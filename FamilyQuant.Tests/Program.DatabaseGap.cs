@@ -21,6 +21,28 @@ internal static partial class Program
         Check("the composition CSV has a dedicated export choice", Enum.GetNames<ResultsExportKind>().Contains("DatabaseGap"));
         Check("suggested FASTA additions have a dedicated export choice", Enum.GetNames<ResultsExportKind>().Contains("SuggestedAdditions"));
         Check("Database gap has specific Help for its stored rules", typeof(App).Assembly.GetType("FamilyQuant.DatabaseGapHelp") != null);
+        string help = (string)typeof(App).Assembly.GetType("FamilyQuant.DatabaseGapHelp")!.GetField("Text")!.GetValue(null)!;
+        Check("Database gap Help defines right per family even with additional credited families", help.Contains(
+            "A credit counts as right for a family when that family is among the known answers, even if the peptide was also credited to another family.", StringComparison.Ordinal));
+        var choiceProperty = typeof(QuantManifest).GetProperty("DatabaseGapMinimumTagLength");
+        Check("stored Database gap length is an optional project choice", choiceProperty?.PropertyType == typeof(int?));
+        var choiceManifest = new QuantManifest();
+        Check("an unspecified Database gap length adds no manifest JSON field", !JsonSerializer.Serialize(choiceManifest)
+            .Contains("DatabaseGapMinimumTagLength", StringComparison.Ordinal));
+        if (choiceProperty != null)
+        {
+            choiceProperty.SetValue(choiceManifest, 7);
+            var reopenedChoice = JsonSerializer.Deserialize<QuantManifest>(JsonSerializer.Serialize(choiceManifest))!;
+            Check("a chosen Database gap length survives manifest serialization", (int?)choiceProperty.GetValue(reopenedChoice) == 7);
+        }
+        var homologyControl = new AnalyticsControl(Array.Empty<QuantRow>(), null, null, null, new DeNovoHomology());
+        string homologyTip = ((ComboBox)homologyControl.FindName("ComboBoxExportKind")).Items.OfType<ComboBoxItem>()
+            .Single(item => (string?)item.Tag == ResultsExportKind.Homology.ToString()).ToolTip.ToString()!;
+        Check("Homology export tooltip retains one row per searched peptide", homologyTip.Contains("one row per searched peptide", StringComparison.OrdinalIgnoreCase));
+        Check("Homology export tooltip retains family IDs, protein IDs and ambiguity", new[] { "family IDs", "protein IDs", "ambiguity" }
+            .All(fact => homologyTip.Contains(fact, StringComparison.OrdinalIgnoreCase)));
+        Check("Homology export tooltip stays within two sentences and retains standalone use", homologyTip.Split('.').Count(sentence => sentence.Trim().Length > 0) <= 2
+            && homologyTip.Contains("standalone", StringComparison.OrdinalIgnoreCase) && homologyTip.Contains("No full XIC", StringComparison.Ordinal));
         EnsureApplication(); Directory.CreateDirectory(output);
         var missing = new DatabaseGapViewModel(null);
         var legacy = new DatabaseGapViewModel(new FamilyWorldSummary());
@@ -37,15 +59,13 @@ internal static partial class Program
         var stored = FamilyWorldFetcher.Stored(file);
         foreach (var entry in stored.Entries) entry.Sequence = string.Concat(Enumerable.Repeat("ACDEFGHIKLMNPQRSTVWY", 7));
         stored.ContentSha256 = FamilyWorldFetcher.ContentHash(stored);
-        var world = FamilyWorld.Build(stored.Entries.Select(entry => new FamilyWorldProtein { Id = entry.Accession, Accession = entry.Accession,
-            Sequence = entry.Sequence, Families = FamilyWorld.FamiliesOf(entry.Evidence), Taxon = entry.TaxonId.ToString(CultureInfo.InvariantCulture),
-            FromPanel = entry.FromReviewedPanel }), stored.Families);
-        var summary = new FamilyWorldSummary { CompositionRules = FamilyWorldErrors.CompositionRule, MinimumTagLength = 9,
+        var world = FamilyWorld.FromSnapshot(stored);
+        var summary = new FamilyWorldSummary { CompositionRules = FamilyWorldErrors.CompositionRule, MinimumTagLength = FamilyWorldOptions.DefaultMinimumTagLength,
             MinIdentity = .8, MinimumKnownCredits = 10, ScopeFamilies = stored.Families.ToList(), WorldFingerprint = world.Fingerprint,
             WorldRelease = stored.Release, MeasuredIdentifiedEnvelope = 1000, MeasuredDeNovoEnvelope = 500,
             SharedIdentifiedEnvelope = 10, SharedDatabaseDeNovoEnvelope = 20, SharedEnvelope = 30,
             UnattributedIdentifiedEnvelope = 40, UnexplainedEnvelope = 50,
-            Rules = FamilyWorldPass.RuleText(new FamilyWorldPassResult { MinimumTagLength = 9, MinIdentity = .8,
+            Rules = FamilyWorldPass.RuleText(new FamilyWorldPassResult { MinimumTagLength = FamilyWorldOptions.DefaultMinimumTagLength, MinIdentity = .8,
                 CreditableFamilies = stored.Families.ToArray() }) };
         var first = new FamilyWorldCompositionRow { Family = stored.Families[0], IdentifiedEnvelope = 125.25,
             DatabaseDeNovoEnvelope = 30.125, WorldDeNovoEnvelope = 200.5, WorldKnownCredited = 12, WorldKnownCreditedTrue = 11,
@@ -71,7 +91,7 @@ internal static partial class Program
             model.Rows[0].RightRate.Contains("11/12", StringComparison.Ordinal) && model.Rows[1].RightRate.Contains("8/9", StringComparison.Ordinal)
             && model.Rows[1].RightRate.Contains("too little evidence", StringComparison.Ordinal) && !model.Rows[1].RightRate.Contains("99", StringComparison.Ordinal));
         Check("CSV is exactly the Core composition writer including all global rows and rules", model.BuildCsv() == summary.BuildCompositionCsv()
-            && model.BuildCsv().Contains("tags of at least 9", StringComparison.Ordinal) && model.BuildCsv().Contains("only families", StringComparison.Ordinal));
+            && model.BuildCsv().Contains("tags of at least " + FamilyWorldOptions.DefaultMinimumTagLength, StringComparison.Ordinal) && model.BuildCsv().Contains("only families", StringComparison.Ordinal));
         Check("matching verified stored world enables suggested additions", model.CanExportFasta && model.FastaProblem.Length == 0);
         string fasta = model.BuildSuggestedFasta();
         var records = fasta.Split('>').Skip(1).Select(record => record.Split('\n'))
@@ -157,7 +177,7 @@ internal static partial class Program
                 {
                     host.Show(); host.UpdateLayout(); PumpDispatcher();
                     Check(theme + " native gap view shows its rule and all Core rows", ((TextBlock)control.FindName("TextBlockRules")).IsVisible
-                        && ((TextBlock)control.FindName("TextBlockRules")).Text.Contains("9 residues", StringComparison.Ordinal)
+                        && ((TextBlock)control.FindName("TextBlockRules")).Text.Contains(FamilyWorldOptions.DefaultMinimumTagLength + " residues", StringComparison.Ordinal)
                         && ((DataGrid)control.FindName("DataGridFamilies")).Items.Count == 3
                         && WalkTree(control).OfType<DatabaseGapChart>().Single().Rows.SequenceEqual(model.ChartRows));
                     System.Threading.Thread.Sleep(350); PumpDispatcher();

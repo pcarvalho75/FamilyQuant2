@@ -12,7 +12,7 @@ namespace FamilyQuant.Tests;
 /// Callers supply a deliberately scoped set of source files and validate their provenance separately.
 /// Unsupported syntax and ambiguous destinations remain nonmatches.
 /// </summary>
-internal static class LedgerMemberFactComparison
+internal static partial class LedgerMemberFactComparison
 {
     internal sealed record Result(string Id, bool Matched, string Before, string Actual, string CurrentPath,
         string Symbol, string Reason, string FrozenMember = "", string CurrentMember = "",

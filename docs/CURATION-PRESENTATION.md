@@ -73,3 +73,16 @@ The family/member dictionaries are rebuilt after document changes or display
 filters; selection looks up the already indexed rows. `--test-family-view`
 exercises the native actions and scrolls/selects the last of 39,996 fixture families
 while checking recycling virtualization and the realized row count.
+
+## Wording checks
+
+C13 checks Help against the actual word/keyword buttons and the Full XIC and
+PatternLab denominator labels. It documents the persistent overview, filtered
+protein selection, whole-family counts, names, locks, batch edits and Undo.
+The original denominator and shared-peptide explanations remain in Help.
+
+`--test-ui-wording` covers that copy, grouping notes, shell workflow Help and
+the retained report/Help facts. The existing layout sweep also checks visible
+text, tooltips and column-header tips for retired screen names, and enforces
+one or two sentences across its nine native views. It preserves the earlier
+coverage, minimum-detail, disabled-control and clipping checks.

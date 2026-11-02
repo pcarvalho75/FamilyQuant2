@@ -1,0 +1,36 @@
+{
+  "source": "FamilyQuant/DeNovoControl.xaml",
+  "roles": [
+    { "frozenKey": "LayerBadge", "currentKey": "LayerBadge", "targetType": "Border", "role": "Compact workflow state badge container", "consumer": "BadgeDeNovoLayer1" },
+    { "frozenKey": "LayerBadgeText", "currentKey": "LayerBadgeText", "targetType": "TextBlock", "role": "Workflow state badge text", "consumer": "TextBlockDeNovoLayer1State" },
+    { "frozenKey": "LayerTitle", "currentKey": "LayerTitle", "targetType": "TextBlock", "role": "Workflow section heading", "consumer": "style:LayerTitle" },
+    { "frozenKey": "ResultValue", "currentKey": "ResultValue", "targetType": "Label", "role": "Neutral numeric result or counter", "consumer": "LabelFilesFound" },
+    { "frozenKey": "Note", "currentKey": "Note", "targetType": "TextBlock", "role": "Wrapping explanatory text", "consumer": "TextBlockPerRunBreakdown" }
+  ],
+  "rows": [
+    { "id": "FQ15-8BC847EA8C1E", "key": "LayerBadge", "property": "Style.Key", "old": "LayerBadge", "current": "LayerBadge" },
+    { "id": "FQ15-F8D72845D5F1", "key": "LayerBadge", "property": "CornerRadius", "old": "3", "current": "3" },
+    { "id": "FQ15-3BAEF428C0E5", "key": "LayerBadge", "property": "Padding", "old": "7,1", "current": "7,1" },
+    { "id": "FQ15-9A11B5EA2B79", "key": "LayerBadge", "property": "Margin", "old": "10,0,0,0", "current": "10,0,0,0" },
+    { "id": "FQ15-861D29CD144B", "key": "LayerBadge", "property": "VerticalAlignment", "old": "Center", "current": "Center" },
+    { "id": "FQ15-969B0A56C686", "key": "LayerBadgeText", "property": "Style.Key", "old": "LayerBadgeText", "current": "LayerBadgeText" },
+    { "id": "FQ15-36F91EE02CDC", "key": "LayerBadgeText", "property": "FontSize", "old": "10", "current": "10" },
+    { "id": "FQ15-A81C965D49A9", "key": "LayerBadgeText", "property": "FontWeight", "old": "Bold", "current": "Bold" },
+    { "id": "FQ15-53C091FC29DF", "key": "LayerBadgeText", "property": "Foreground", "old": "White", "current": "{DynamicResource TextBrush}" },
+    { "id": "FQ15-220D63CC3ECF", "key": "LayerTitle", "property": "Style.Key", "old": "LayerTitle", "current": "LayerTitle" },
+    { "id": "FQ15-06623D41A745", "key": "LayerTitle", "property": "Foreground", "old": "White", "current": "{DynamicResource TextBrush}" },
+    { "id": "FQ15-74C914EA14F2", "key": "LayerTitle", "property": "FontWeight", "old": "Bold", "current": "Bold" },
+    { "id": "FQ15-616DB022B653", "key": "LayerTitle", "property": "VerticalAlignment", "old": "Center", "current": "Center" },
+    { "id": "FQ15-4246F074896F", "key": "ResultValue", "property": "Style.Key", "old": "ResultValue", "current": "ResultValue" },
+    { "id": "FQ15-5680CE8D113E", "key": "ResultValue", "property": "Foreground", "old": "#FFD700", "current": "{DynamicResource TextBrush}" },
+    { "id": "FQ15-BDE150D37198", "key": "ResultValue", "property": "FontWeight", "old": "Bold", "current": "Bold" },
+    { "id": "FQ15-298DB85DE10C", "key": "ResultValue", "property": "FontSize", "old": "13", "current": "13" },
+    { "id": "FQ15-D549F0C6E7EA", "key": "ResultValue", "property": "VerticalAlignment", "old": "Center", "current": "Center" },
+    { "id": "FQ15-F6C1061154A9", "key": "ResultValue", "property": "Margin", "old": "0,0,14,0", "current": "0,0,14,0" },
+    { "id": "FQ15-8E574C2E5D40", "key": "Note", "property": "Style.Key", "old": "Note", "current": "Note" },
+    { "id": "FQ15-5F2C1E449429", "key": "Note", "property": "Foreground", "old": "#AAAAAA", "current": "{DynamicResource TextBrush}" },
+    { "id": "FQ15-CA0B824CA99E", "key": "Note", "property": "FontSize", "old": "11", "current": "11" },
+    { "id": "FQ15-B6FB542118DB", "key": "Note", "property": "TextWrapping", "old": "Wrap", "current": "Wrap" },
+    { "id": "FQ15-B64AE83318C9", "key": "Note", "property": "Margin", "old": "10,4,10,4", "current": "10,4,10,4" }
+  ]
+}

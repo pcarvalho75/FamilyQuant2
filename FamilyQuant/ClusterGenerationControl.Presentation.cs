@@ -22,8 +22,8 @@ public partial class ClusterGenerationControl
             QuantitationPanel.SharedItemEvery.ToolTip = SharedPeptidePolicy.CountInEveryFamily.ShortExplanation();
 
             QuantitationPanel.ComboBoxSharedPeptides.ToolTip =
-                "What to do with a peptide found in more than one family; in a redundant database, such as " +
-                "a venom, this choice moves the numbers a great deal. Default: " +
+                "What to do with a peptide found in more than one family; in a redundant database, " +
+                "this choice moves the numbers a great deal. Default: " +
                 SharedPeptidePolicy.FamilyUnique.DisplayName() + ".";
 
             QuantitationPanel.ModeItemIdentified.Content = NormalizationMode.IdentifiedSignal.DisplayName();
@@ -152,7 +152,7 @@ public partial class ClusterGenerationControl
                 DisplayedMode,
                 DisplayedSharedPolicy,
                 ReportView.QuantifiedFamilies(fcf.MyExtendedFastaItems),
-                FamilyFilter.CountFamilies(fcf.MyExtendedFastaItems)).Replace("Layer 2", "PatternLab source", StringComparison.Ordinal).Replace("Layer 3", "Quantitation options", StringComparison.Ordinal);
+                FamilyFilter.CountFamilies(fcf.MyExtendedFastaItems));
             PublishShellStatus();
         }
 
@@ -237,7 +237,7 @@ public partial class ClusterGenerationControl
             else
                 SetOptionalBadge(QuantitationPanel.BadgeLayer2, QuantitationPanel.TextBlockLayer2State, "no .plp loaded",
                     "Optional: a PatternLab .plp, exported at peptide level, for the 'Share of signal' " +
-                    "column. Not needed when the project has a full XIC (File · Compute / update full XIC).");
+                    "column. Full XIC is available separately through Analysis > Compute full XIC.");
 
             bool pending = haveQuant && DisplayedMode != null &&
                            (DisplayedMode.Value != SelectedMode || DisplayedSharedPolicy != SelectedSharedPolicy);
@@ -245,8 +245,8 @@ public partial class ClusterGenerationControl
             if (!haveQuant && HasFullXic)
             {
                 SetBadge(QuantitationPanel.BadgeLayer3, QuantitationPanel.TextBlockLayer3State, true, null,
-                    "Shared peptides and Full XIC share of apply to the Full XIC column at once. Report XIC " +
-                    "as and Recalculate apply only to a .plp loaded in PatternLab source.");
+                    "Shared peptides and Share of apply to Full XIC immediately. PatternLab share of " +
+                    "and Recalculate apply only to the optional .plp column.");
             }
             else if (!haveQuant && fullXicPending)
             {
@@ -257,8 +257,8 @@ public partial class ClusterGenerationControl
             else if (!haveQuant)
             {
                 SetBadge(QuantitationPanel.BadgeLayer3, QuantitationPanel.TextBlockLayer3State, false, "no quantitation yet",
-                    "These options do nothing until there is a quantitation: run File · Compute / update " +
-                    "full XIC, or load a PatternLab .plp in PatternLab source.");
+                    "Compute full XIC through Analysis > Compute full XIC, or use Load PatternLab project " +
+                    "under PatternLab (optional). The source's options become available when it is loaded.");
             }
             else if (pending)
             {
@@ -355,30 +355,28 @@ public partial class ClusterGenerationControl
                 "calculation.");
 
             ColumnLocus.HeaderStyle = HeaderTip(
-                "The protein identifier as in the database. \"" + SequenceLabels.DecoyPrefix +
-                "\" marks a decoy and \"" + SequenceLabels.ContaminantMarker + "\" a " +
-                "laboratory contaminant; both can be hidden in the Display and Export panel. Right-click a " +
-                "row to copy its UniProt code or open its UniProt page; Ctrl+C copies the column you clicked.");
+                "A UniProt accession where available, otherwise the database identifier; hover over the cell for the original. " +
+                "Right-click for its UniProt code or page; Ctrl+C copies the clicked column.");
 
             ColumnDomains.HeaderStyle = HeaderTip(
-                "The protein's Pfam domains, from UniProt: what it contains, whatever it is called. Empty until " +
-                "Fetch evidence is pressed, and for a protein too short for Pfam. The Search box finds them.");
+                "The protein's Pfam domains from UniProt, searchable by the Search box. Empty until " +
+                "Fetch evidence is pressed, or when no domain was called, including proteins too short for Pfam.");
 
             ColumnMass.HeaderStyle = HeaderTip(
                 "The sum of the protein's residue masses in daltons, without the terminal water. Add " +
                 "18.011 Da for the neutral protein mass.");
 
             ColumnFullXic.HeaderStyle = HeaderTip(
-                "This family's share of the full XIC (File · Compute / update full XIC), the primary " +
+                "This family's share of the full XIC (Analysis > Compute full XIC), the primary " +
                 "estimate: identified peptides measured in the RAW files plus an estimate for de novo " +
-                "peptides. Set what it is a share of in Quantitation options.");
+                "peptides. Choose its denominator with Share of under Full XIC in Quantitation.");
 
             ColumnXicUser.HeaderStyle = HeaderTip(
-                "The share of signal held by this protein's family, from the .plp loaded in PatternLab source. The " +
-                "heading names what it is a percentage of; change it in Quantitation options and press Recalculate.");
+                "The share of signal held by this protein's family, from the .plp under PatternLab (optional). " +
+                "The heading names its denominator; change PatternLab share of and press Recalculate.");
 
             ColumnDescription.HeaderStyle = HeaderTip(
-                "The FASTA description line of the protein. Recluster by Words and Create Super Cluster " +
+                "The FASTA description line of the protein. Recluster by words and Group by keywords " +
                 "read it, so poor descriptions limit how well they work.");
         }
 

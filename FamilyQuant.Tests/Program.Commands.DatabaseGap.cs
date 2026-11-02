@@ -17,6 +17,13 @@ internal static partial class Program
                 return failed == 0 ? 0 : 1;
             }),
         new("--database-gap-screens", 10091, TestCommandPhase.Raw,
-            args => args.Length == 3 && args[0] == "--database-gap-screens", (args, _) => DatabaseGapScreens(args[1], args[2])),
+            args => args.Length >= 3 && args[0] == "--database-gap-screens", (args, _) => DatabaseGapCaptureCommand(args)),
+        new("--test-database-gap-refusal", 10096, TestCommandPhase.Raw,
+            args => args.Length == 3 && args[0] == "--test-database-gap-refusal", (args, _) => DatabaseGapRefusalTest(args[1], args[2])),
+        new("--test-database-gap-lengths", 10140, TestCommandPhase.Raw,
+            args => args.Length == 2 && args[0] == "--test-database-gap-lengths", (args, _) =>
+            { DatabaseGapLengthTests(args[1]); Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped ====="); return failed == 0 ? 0 : 1; }),
+        new("--database-gap-lengths-screens", 10141, TestCommandPhase.Raw,
+            args => args.Length == 3 && args[0] == "--database-gap-lengths-screens", (args, _) => DatabaseGapLengthScreens(args[1], args[2])),
     ];
 }
