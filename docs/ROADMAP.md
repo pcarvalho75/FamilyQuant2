@@ -85,6 +85,7 @@ Columns: Diff = L, M, H, VH. Hrs = worker hours at measured speed: estimates are
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
+| Y9 | Failure guidance restored: the 46 rows where a user would miss what 1.5 said, such as the share column warning after a failed recalculation | M | 0.7 | 🟢 | R3a | Each fact shown on the normal route, its row closes on an independent read, or it is listed for Paulo | EV | not started | 0% | 0% | T+0 |
 
 ### W3 Ledger, screen by screen
 
@@ -104,7 +105,7 @@ Columns: Diff = L, M, H, VH. Hrs = worker hours at measured speed: estimates are
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| R3a | Code freeze: only review findings touch product code after this | L | 0 | N6s | R3b | Freeze noted; all lanes told | Orchestrator | not started | 0% | 0% | T+1 |
+| R3a | Code freeze: only review findings touch product code after this | L | 0 | N6s, Y9 | R3b | Freeze noted; all lanes told | Orchestrator | not started | 0% | 0% | T+1 |
 | R3b | Final proof refresh and full suite on the frozen code | L | 0.2 | R3a | R3c | Every proof current; suite green | Orchestrator | not started | 0% | 0% | T+1 |
 | R3c | Release candidate: versions, build and a clean install rehearsal | M | 0.3 | R3b | R4a, R4b | Rehearsal installs beside 1.5 and opens her file | Orchestrator | not started | 0% | 0% | T+1 |
 | R4a | Final adversarial pass: code and behaviour | H | 1 | R3c | R4c | GR's verdict | GR | not started | 0% | 0% | T+2 |
@@ -138,6 +139,8 @@ Paulo agreed these at the restart, 2026-11-01.
 | ID | Question | Taken |
 |---|---|---|
 | D14 | Should identity clustering change its coverage rule, merge on shared peptides, or use a reviewed-family veto? | No. Clustering stays as it is, and the measurements ship as a diagnostic the user can see |
+| D26 | Failure guidance that got shorter in the port | Restored in Y9 before the freeze. Independent fact checks found 46 rows a user would miss. Desk, 11-02 |
+| D25 | Wording rules | Rule 1: the old fact in new wording is accepted. Rule 2: a row that only describes the old look closes under the new theme. Rule 3: the current screen name replaces Layer N and a clause about a retired screen goes. Paulo, 11-02 |
 | D24 | Is the claim sentence roadmap work? | No. It is Paulo's own message to Ana, so its boxes left the roadmap. Paulo, 11-02 |
 | D23 | Finish today | Yes. C14 runs beside the ledger, preview 2 folds into the release candidate, and rows that only changed wording get one ruling from Paulo at the end. Paulo, 11-02 |
 | D22 | Default minimum tag length | 8, and the user can choose 7 to 15. Replaces the 9 in D11. Paulo, 11-02 |
