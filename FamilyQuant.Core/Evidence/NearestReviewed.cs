@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Security.Cryptography;
 using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading;
@@ -410,17 +409,10 @@ namespace FamilyQuant.Evidence
 
         private static string Fingerprint(IEnumerable<string[]> rows)
         {
-            using var hash = IncrementalHash.CreateHash(HashAlgorithmName.SHA256);
+            using var hash = new LengthPrefixedSha256();
             foreach (string[] row in rows)
-            {
-                foreach (string field in row)
-                {
-                    byte[] bytes = Encoding.UTF8.GetBytes(field);
-                    hash.AppendData(BitConverter.GetBytes(bytes.Length));
-                    hash.AppendData(bytes);
-                }
-            }
-            return Convert.ToHexString(hash.GetHashAndReset()).ToLowerInvariant();
+                foreach (string field in row) hash.Append(field);
+            return hash.Finish().ToLowerInvariant();
         }
 
         private static void TryDelete(string path)

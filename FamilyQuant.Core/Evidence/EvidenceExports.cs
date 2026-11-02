@@ -46,13 +46,8 @@ namespace FamilyQuant.Evidence
         }
 
         private static string YesNo(bool? value) => value == null ? string.Empty : value.Value ? "yes" : "no";
-        private static string Number(int value) => value.ToString(CultureInfo.InvariantCulture);
+        private static string Number(int value) => CsvFormatting.Number(value);
 
-        private static string Field(string? value)
-        {
-            string text = value ?? string.Empty;
-            if (text.Length > 0 && "=+-@".IndexOf(text[0]) >= 0) text = "'" + text;
-            return text.IndexOfAny(new[] { ',', '"', '\r', '\n' }) >= 0 ? "\"" + text.Replace("\"", "\"\"") + "\"" : text;
-        }
+        private static string Field(string? value) => CsvFormatting.Guarded(value);
     }
 }
