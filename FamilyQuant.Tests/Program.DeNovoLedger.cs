@@ -105,6 +105,7 @@ internal static partial class Program
             "FamilyQuant.Tests/Program.DeNovoLedger.cs", "FamilyQuant.Tests/Program.Commands.DeNovoLedger.cs",
             "FamilyQuant.Tests/Program.DeNovoLedgerRuntime.cs",
             "FamilyQuant.Tests/Program.DeNovoLedgerWorkflow.cs",
+            "FamilyQuant.Tests/Program.DeNovoLedgerRefusals.cs",
             "FamilyQuant.Tests/LedgerMemberFactComparison.cs", "FamilyQuant.Tests/LedgerDeclarationComparison.cs",
             "FamilyQuant.Tests/FeatureLedger.cs", "FamilyQuant.Tests/FeatureLedgerEvidence.cs" }).Distinct(StringComparer.Ordinal))
         {
