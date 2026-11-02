@@ -26,8 +26,7 @@ namespace FamilyQuant.Tests
             try
             {
                 int flag = Array.IndexOf(args, Argument);
-                string At(int offset, string fallback) =>
-                    args.Length > flag + offset && args[flag + offset].Length > 0 ? args[flag + offset] : fallback;
+                string At(int offset, string fallback) => TestArguments.EmptyFallsBack(args, flag, offset, fallback);
                 string input = At(1, "D:/FamilyQuant-data/out-opus/e4-ana-panel-neighbours.fcf");
                 string baseline = At(2, "D:/FamilyQuant-data/baseline/vs_revtox2.tsv");
                 string frozen = At(3, "D:/FamilyQuant-data/baseline/viperidae_rich.tsv");
@@ -183,14 +182,8 @@ namespace FamilyQuant.Tests
             return rows;
         }
 
-        private static string PythonAccession(string s)
-        {
-            if (s.StartsWith("contaminant_", StringComparison.Ordinal)) return s.Substring("contaminant_".Length).Split('|')[0];
-            string[] p = s.Split('|');
-            return p.Length >= 2 ? p[1] : s;
-        }
+        private static string PythonAccession(string s) => FrozenAnswerKey.PythonAccession(s);
 
-        private static string Field(string value) =>
-            value.IndexOfAny(new[] { ',', '"', '\r', '\n' }) >= 0 ? "\"" + value.Replace("\"", "\"\"") + "\"" : value;
+        private static string Field(string value) => TestCsvFields.Field(value);
     }
 }

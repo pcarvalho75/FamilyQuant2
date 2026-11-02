@@ -526,6 +526,7 @@ namespace FamilyQuant.Tests
 
             Section("CSV export - locale and escaping");
             CoreReuseContractTests();
+            SharedTestHelperContracts(workDir);
             CsvTests();
 
             Section("Core operation outcomes, progress and cancellation");
@@ -833,7 +834,7 @@ namespace FamilyQuant.Tests
             }
         }
 
-        private static bool Throws<T>(Action action, Action<string>? capture = null) where T : Exception
+        internal static bool Throws<T>(Action action, Action<string>? capture = null) where T : Exception
         {
             try
             {

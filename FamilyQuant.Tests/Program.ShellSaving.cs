@@ -72,11 +72,7 @@ internal static partial class Program
         string source = Path.GetFullPath(input), target = Path.GetFullPath(output);
         if (string.Equals(source, target, StringComparison.OrdinalIgnoreCase))
             throw new ArgumentException("Keep the source and project output separate.");
-        string InputHash()
-        {
-            using var stream = File.OpenRead(source);
-            return Convert.ToHexString(System.Security.Cryptography.SHA256.HashData(stream));
-        }
+        string InputHash() => TestFileHash.Upper(source);
         string before = InputHash();
         var watch = System.Diagnostics.Stopwatch.StartNew();
         var curation = FamilyClusterFile.Load(source);

@@ -25,8 +25,7 @@ namespace FamilyQuant.Tests
             try
             {
                 int flag = Array.IndexOf(args, Argument);
-                string At(int offset, string fallback) =>
-                    args.Length > flag + offset && args[flag + offset].Length > 0 ? args[flag + offset] : fallback;
+                string At(int offset, string fallback) => TestArguments.EmptyFallsBack(args, flag, offset, fallback);
                 string input = At(1, "D:/FamilyQuant-data/out-opus/e4-ana-panel.fcf");
                 string classes = At(2, "D:/FamilyQuant-data/baseline/classes_all.tsv");
                 string outDir = At(3, "D:/FamilyQuant-data/out-opus");
@@ -111,7 +110,6 @@ namespace FamilyQuant.Tests
             catch (Exception ex) { check("coherence real-data check completed", false, ex.GetBaseException().ToString()); }
         }
 
-        private static string Field(string value) =>
-            value.IndexOfAny(new[] { ',', '"', '\r', '\n' }) >= 0 ? "\"" + value.Replace("\"", "\"\"") + "\"" : value;
+        private static string Field(string value) => TestCsvFields.Field(value);
     }
 }

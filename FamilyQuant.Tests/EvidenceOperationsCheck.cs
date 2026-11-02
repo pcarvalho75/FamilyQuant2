@@ -35,7 +35,7 @@ namespace FamilyQuant.Tests
                 clock.Restart();
                 OperationResult<NeighbourSearch> stopped = CoreOperation.Run("Nearest reviewed protein",
                     op => NearestReviewed.SearchAndStore(file, inScope, op),
-                    cancel.Token, new InlineProgress(p =>
+                    cancel.Token, new Program.InlineOperationProgress(p =>
                     {
                         Print(p);
                         if (p.Stage == NearestReviewed.ProgressStage && ++reports == 2) { cancelledAt = clock.Elapsed.TotalSeconds; cancel.Cancel(); }
@@ -50,7 +50,7 @@ namespace FamilyQuant.Tests
                 // The whole search, its progress printed as it comes.
                 clock.Restart();
                 OperationResult<NeighbourSearch> done = CoreOperation.Run("Nearest reviewed protein",
-                    op => NearestReviewed.SearchAndStore(file, inScope, op), progress: new InlineProgress(Print));
+                    op => NearestReviewed.SearchAndStore(file, inScope, op), progress: new Program.InlineOperationProgress(Print));
                 check("the search on Ana's file completes with progress and is stored by its commit",
                     done.Status == OperationStatus.Succeeded && ReferenceEquals(file.EvidenceSource?.NearestReviewed, done.Value),
                     done.Status == OperationStatus.Succeeded ? done.Value.Neighbours.Count + " neighbours in "
@@ -64,12 +64,12 @@ namespace FamilyQuant.Tests
                 clock.Restart();
                 OperationResult<ReferencePanel> panelStopped = CoreOperation.RunAsync("Reference panel",
                     op => ReferencePanelFetcher.FetchAndStoreAsync(fresh, op, inScope), cancelPanel.Token,
-                    new InlineProgress(p => { Print(p); if (p.Completed == 5) cancelPanel.Cancel(); })).GetAwaiter().GetResult();
+                    new Program.InlineOperationProgress(p => { Print(p); if (p.Completed == 5) cancelPanel.Cancel(); })).GetAwaiter().GetResult();
                 check("Cancel during the live panel fetch leaves the file exactly as it was",
                     panelStopped.Status == OperationStatus.Cancelled && fresh.ToJsonText() == freshBefore, panelStopped.Status.ToString());
                 clock.Restart();
                 OperationResult<ReferencePanel> panel = CoreOperation.RunAsync("Reference panel",
-                    op => ReferencePanelFetcher.FetchAndStoreAsync(fresh, op, inScope), progress: new InlineProgress(Print)).GetAwaiter().GetResult();
+                    op => ReferencePanelFetcher.FetchAndStoreAsync(fresh, op, inScope), progress: new Program.InlineOperationProgress(Print)).GetAwaiter().GetResult();
                 check("the live panel fetch completes with progress per family",
                     panel.Status == OperationStatus.Succeeded && fresh.EvidenceSource?.ReferencePanel == panel.Value,
                     panel.Status == OperationStatus.Succeeded ? panel.Value.Entries.Count + " entries, release " + panel.Value.Release
@@ -78,11 +78,5 @@ namespace FamilyQuant.Tests
             catch (Exception ex) { check("evidence operations check completed", false, ex.GetBaseException().ToString()); }
         }
 
-        private sealed class InlineProgress : IProgress<OperationProgress>
-        {
-            private readonly Action<OperationProgress> report;
-            public InlineProgress(Action<OperationProgress> report) => this.report = report;
-            public void Report(OperationProgress value) => report(value);
-        }
     }
 }
