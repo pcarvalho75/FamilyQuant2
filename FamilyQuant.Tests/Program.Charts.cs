@@ -498,6 +498,7 @@ namespace FamilyQuant.Tests
         /// </summary>
         private static void ChartPaletteTests(string workDir)
         {
+            ChartThemeTests(workDir);
             UiChartPaletteTests(workDir);
             ChartPalette dark = ChartPalette.Dark;
             ChartPalette light = ChartPalette.Light;
@@ -1247,7 +1248,8 @@ namespace FamilyQuant.Tests
                 ["NotQuantified"] = "#FF7B2D9E", ["PeptideLikeUnidentified"] = "#FFA85F13", ["Remainder"] = "#FF5F6675",
                 ["Detected"] = "#FF8A5A12", ["DetectedMultiplyCharged"] = "#FF8A5A12", ["DetectedSinglyCharged"] = "#FF8C7C5C",
                 ["Tic"] = "#FF7B8394", ["Families"] = "#FF10428C", ["Mixing"] = "#FFC2410C", ["Floor"] = "#FF1F8F5A",
-                ["NotAFamily"] = "#FFA85F13", ["Found"] = "#FF10428C", ["OfTic"] = "#FF1F8F5A"
+                ["NotAFamily"] = "#FFA85F13", ["Found"] = "#FF10428C", ["OfTic"] = "#FF1F8F5A",
+                ["Negative"] = "#FFC42B1C"
             };
             var actual = typeof(ChartPalette).GetProperties(BindingFlags.Instance | BindingFlags.Public)
                 .Where(p => p.PropertyType == typeof(Brush)).ToDictionary(p => p.Name,
