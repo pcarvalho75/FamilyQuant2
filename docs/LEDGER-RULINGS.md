@@ -1,10 +1,10 @@
 # Recorded Paulo wording rulings
 
 `--ledger-apply-rulings <fresh-output> <date>` reads the shared wording TSV and
-the three recorded rules under `D:/FamilyQuant-data/reviews`. It writes one
+the four recorded rules under `D:/FamilyQuant-data/reviews`. It writes one
 `Paulo-rulings` register. Import it with the ordinary native evidence importer.
 The rule source is pinned to SHA256
-`D3C632398BF48334E08AC2FF31879E4D814865BB72D0AEE781E8EF029C70090B`.
+`3C6B1EC5979F0B593A609D0555AB84BC5EC05FCC60B370A647E11030993A8605`.
 Changing the rules requires reviewing this producer before another application.
 
 The dedicated `ruling` proof includes the full rule, old wording and new wording.
@@ -27,8 +27,23 @@ fact verdict is required as well; the reviewer must still sample accepted rows.
 Rule 2 accepts only an exact frozen XAML Style/Setter anchor whose setters use
 the supported visual properties. Event setters and unsupported properties stay
 open. Export/storage and format/export observations never qualify. Identical
-wording belongs to the text comparison tool. Placeholders, empty values, missing
-compiled text and unsupported behavior also stay open with a reason.
+old and new wording closes under Rule 1 only with a kept verdict, a wording kind
+and a live compiled witness; otherwise it belongs to the text comparison tool.
+Placeholders, empty values, missing compiled text and unsupported behavior also
+stay open with a reason.
+
+Rule 4 reads Paulo's group ruling, `D:/FamilyQuant-data/reviews/paulo-group-ruling.tsv`
+(`row_id`, `group`, `note`), pinned in the packet when present. A row that rules 1
+to 3 leave open closes under rule 4 when listed as `fragment` (no user fact of its
+own), `format` (a number format where the same quantity shows the same precision
+today) or `superseded` (the feature changed and the row only concerns wording or
+layout). The reason is recorded as `Paulo group ruling: fragment, no user fact of
+its own`, `Paulo group ruling: format, same precision today` followed by the note,
+or `Paulo group ruling: superseded, ` followed by the note. An approved DROP stays
+a DROP, export/storage and format/export rows never close this way, and a row Rule
+1 closes stays Rule 1. A missing or empty file closes nothing. Paulo fills the file;
+a superseded row that removes something the user could do stays open and goes to
+him one by one.
 
 Duplicate TSV entries are evaluated by observation ID in stable ordinal order.
 One eligible decision closes that observation; otherwise one reasoned decision

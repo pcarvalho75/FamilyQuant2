@@ -21,7 +21,7 @@ internal static class LedgerPauloRulings
     internal const string LeftPath = "D:/FamilyQuant-data/reviews/wording-left-for-paulo.tsv";
     internal const string FrozenRoot = "D:/FamilyQuant-data/out-shell/N3/source";
     internal const string GroupRulingPath = "D:/FamilyQuant-data/reviews/paulo-group-ruling.tsv";
-    internal const string RulesSha256 = "D3C632398BF48334E08AC2FF31879E4D814865BB72D0AEE781E8EF029C70090B";
+    internal const string RulesSha256 = "3C6B1EC5979F0B593A609D0555AB84BC5EC05FCC60B370A647E11030993A8605";
     internal sealed record Input(int Line, string Lane, string Id, string OldText, string NewText, string Reason);
     internal sealed record Decision(string Id, string Lane, string OldText, string NewText, string Rule, string Reason,
         string WitnessAssembly = "", string WitnessSymbol = "", string WitnessTextSha256 = "", bool Closed = false, string FactCheckNote = "");
@@ -31,7 +31,7 @@ internal static class LedgerPauloRulings
         string TsvSha256, string RuleSourceSha256, List<Decision> Decisions, string FactChecksArtifact = "", string FactChecksSha256 = "",
         string GroupRulingArtifact = "", string GroupRulingSha256 = "");
 
-    /// <summary>Paulo's group ruling (rule 4): row_id, group (fragment or superseded), note. A missing or empty file holds no rows.</summary>
+    /// <summary>Paulo's group ruling (rule 4): row_id, group (fragment, format or superseded), note. A missing or empty file holds no rows.</summary>
     internal static Dictionary<string, GroupRuling> ReadGroupRulings(string path)
     {
         var result = new Dictionary<string, GroupRuling>(StringComparer.Ordinal);
@@ -42,14 +42,18 @@ internal static class LedgerPauloRulings
         if (!records[0].Fields.SequenceEqual(new[] { "row_id", "group", "note" }))
             throw new InvalidDataException("Group ruling TSV must use row_id, group, note columns.");
         foreach (var record in records.Skip(1).Where(record => record.Fields.Any(field => field.Length > 0)))
-            if (record.Fields.Count != 3 || string.IsNullOrWhiteSpace(record.Fields[0]) || record.Fields[1] is not ("fragment" or "superseded")
+            if (record.Fields.Count != 3 || string.IsNullOrWhiteSpace(record.Fields[0]) || record.Fields[1] is not ("fragment" or "format" or "superseded")
                 || !result.TryAdd(record.Fields[0], new(record.Fields[1], record.Fields[2])))
                 throw new InvalidDataException("Malformed, duplicate or unknown group ruling at TSV line " + record.Line.ToString(CultureInfo.InvariantCulture) + ".");
         return result;
     }
 
-    internal static string GroupReason(GroupRuling ruling) => ruling.Group == "fragment"
-        ? "Paulo group ruling: fragment, no user fact of its own" : "Paulo group ruling: superseded, " + ruling.Note;
+    internal static string GroupReason(GroupRuling ruling) => ruling.Group switch
+    {
+        "fragment" => "Paulo group ruling: fragment, no user fact of its own",
+        "format" => "Paulo group ruling: format, same precision today" + (ruling.Note.Length == 0 ? "" : ", " + ruling.Note),
+        _ => "Paulo group ruling: superseded, " + ruling.Note,
+    };
 
     /// <summary>The rule text a rule-4 receipt cites: the group ruling's own reason for this row.</summary>
     internal static string GroupRule(Decision decision) => "Rule 4, Paulo group ruling (" + Path.GetFileName(GroupRulingPath) + "): " + decision.Reason;

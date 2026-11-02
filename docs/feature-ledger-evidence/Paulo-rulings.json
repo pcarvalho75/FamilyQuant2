@@ -5,124 +5,128 @@
   "runs": [
     {
       "id": "rulings",
-      "command": "C:\\FamilyQuant-gate\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --ledger-apply-rulings D:/FamilyQuant-data/out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings \u00222026-11-02 13:05:52 -0800\u0022",
-      "executedAt": "2026-11-02 13:05:52 -0800",
-      "commit": "d3b71621ce6198f63f586cf062567a18103f9e72",
+      "command": "D:\\FamilyQuant-wt\\opus\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --ledger-apply-rulings D:/FamilyQuant-data/out-refresh\\20261102-131714-opus\\paulo-rulings \u00222026-11-02 13:17:24 -0800\u0022",
+      "executedAt": "2026-11-02 13:17:24 -0800",
+      "commit": "29b920ae4f51a25289301ce2ce08355af5f1f011",
       "artifacts": [
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\decisions.json",
-          "sha256": "D8A46E21A9380D5681012B424A1FC0CECBF2873D09A3240D3EBF045C9CDBAE76"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\decisions.json",
+          "sha256": "A06B37B444F94BA337CBDBADF838EA85F239C4197D38FE8C23B920C3197BB4D2"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\executed\\FamilyQuant.Core.dll",
-          "sha256": "B3DE904BB50477ACCB982BDE2CE437BA6962BB1DA44E7D260B992D1E188837BC"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\executed\\FamilyQuant.Core.dll",
+          "sha256": "177BE86123B470FA74D18D25869FB5F5B2C086BCF640056CBDD9CA178D13C60B"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\executed\\FamilyQuant.Tests.dll",
-          "sha256": "338CB1ED8EE1B52F92368A79B99A6C1D2789A40AE07801AAB7226AA8B8A528A4"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\executed\\FamilyQuant.Tests.dll",
+          "sha256": "101CC915C40F5696E1FD44C0AF99CAB888FEDB3B3BFDE7235C5EDD9278A00268"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\executed\\FamilyQuant.Tests\\FeatureLedgerEvidence.Rulings.cs",
-          "sha256": "DF10CF4D4706FA5A09EBC3F766F9E633F781B4109C274345B707EA442490E3BD"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\executed\\FamilyQuant.Tests\\FeatureLedgerEvidence.Rulings.cs",
+          "sha256": "163F85E37ED292E9D14F1E1AC6A4F0C55476551FF1489A76CDB9B6834CABB729"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\executed\\FamilyQuant.Tests\\FeatureLedgerEvidence.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\executed\\FamilyQuant.Tests\\FeatureLedgerEvidence.cs",
           "sha256": "2060D409570285CEAE8FA6ADF3F4A5173924C80C2A6A99B1856294055365174C"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\executed\\FamilyQuant.Tests\\LedgerPauloRulings.cs",
-          "sha256": "1ADAC48072ECAB4C4EE4F8FB956F6CAFB94011715B6A35C7653E01D78DA3BD46"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\executed\\FamilyQuant.Tests\\LedgerPauloRulings.cs",
+          "sha256": "7DB7A6D4CC7664AFB4C926D11ECE0AE709E6CCBF840F6253087F9BF33DDB0BA4"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\executed\\FamilyQuant.Tests\\LedgerRulingLiveText.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\executed\\FamilyQuant.Tests\\LedgerRulingLiveText.cs",
           "sha256": "E35616E1F7F8F877F3EEAB3383BA5EEA4D00D9C9A22D2CF6620D9782E75513A1"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\executed\\FamilyQuant.Tests\\Program.Commands.PauloRulings.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\executed\\FamilyQuant.Tests\\Program.Commands.PauloRulings.cs",
           "sha256": "806FAA3E31486680719882EBA319D03FF2048659F434C17A3A0FEA83DEA5152E"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\executed\\FamilyQuant.Tests\\Program.PauloRulingTests.cs",
-          "sha256": "D07A3CB86A1395C3C08134FB6789176577B3C16369BF01F892C7C69E14F132B5"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\executed\\FamilyQuant.Tests\\Program.PauloRulingTests.cs",
+          "sha256": "F88854E4E1F91076E4223558DCEC95BAB69254B6E2E3DA4E15DE9AFFC3AA4A82"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\executed\\FamilyQuant.Tests\\Program.PauloRulings.cs",
-          "sha256": "98C4B7D771262B423487F006872E568A1BF22B4EF8E6FBFCB0DCF16A6DFC785F"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\executed\\FamilyQuant.Tests\\Program.PauloRulings.cs",
+          "sha256": "A22EB22323CA2B691B554A0F0A83D2285D9599DF740545A65790DFDA3939655F"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\executed\\FamilyQuant2.dll",
-          "sha256": "C0FF8144D05014240713CC94900258E162FF2B6F51DB01CA13758C4E0BD9784D"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\executed\\FamilyQuant2.dll",
+          "sha256": "3D9C375B9DD649BC721C42EF663B42E5097C45626825D05DF0956A8CDD6680DC"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\executed\\frozen\\FamilyQuant\\App.xaml",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\executed\\frozen\\FamilyQuant\\App.xaml",
           "sha256": "166324C43527D213AE342ADD8AD1ABD37ECC78A87858B6ECA751C02E5AF820AB"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\executed\\frozen\\FamilyQuant\\ClusterGenerationControl.xaml",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\executed\\frozen\\FamilyQuant\\ClusterGenerationControl.xaml",
           "sha256": "EFA575858B5C391E8911F1C78A6C1617851657DA93DF315791B676827A60AC59"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\executed\\frozen\\FamilyQuant\\HomeControl.xaml",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\executed\\frozen\\FamilyQuant\\HomeControl.xaml",
           "sha256": "9FD4C5CD62DDD122DE4BEF2E624B7940A4E59F9070EFB06FC3B3273AAC9F8035"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\group-fixtures\\bad.tsv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\group-fixtures\\bad.tsv",
           "sha256": "582FC117610B148829FAAEC7B9F9B137D2CCA262A5B2480CDCCDFBDE4A8977EE"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\group-fixtures\\empty.tsv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\group-fixtures\\empty.tsv",
           "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\group-fixtures\\header.tsv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\group-fixtures\\format.tsv",
+          "sha256": "9CB08D839DC4E0818BFA65D66860B67785E5A624899EE851F07DD4EA9F52EFDA"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\group-fixtures\\header.tsv",
           "sha256": "DBB3996D8A5D38D395C416DB23EC0031AEE074EF51DE469CE852C57BC8AC3C04"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\guard-fixtures\\facts.tsv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\guard-fixtures\\facts.tsv",
           "sha256": "88250CABA4FDA2D568514C6AACB9E0AF00D9E9AD64874400527ABB9DC052EAED"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\guard-fixtures\\group.tsv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\guard-fixtures\\group.tsv",
           "sha256": "5CF8ED2F912F97AF86DCFC4F769E9BFA0D9F76D6226F02DB41ABCF5A17A2C394"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\guard-fixtures\\input.tsv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\guard-fixtures\\input.tsv",
           "sha256": "27FDFCD3FD2D863A515B168DAC9DDD51CEE77C448FEF581DC4D75784030356A4"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\guard-fixtures\\packet.json",
-          "sha256": "01150064882ABD6B879DA1E8DFE8E247C596991E8B83134C87094CA50634CC0C"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\guard-fixtures\\packet.json",
+          "sha256": "05C377E497CEB22F890DDFE922938B9BC59D9C63A123841E559C6F5E82202A1D"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\guard-fixtures\\rules.md",
-          "sha256": "D3C632398BF48334E08AC2FF31879E4D814865BB72D0AEE781E8EF029C70090B"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\guard-fixtures\\rules.md",
+          "sha256": "3C6B1EC5979F0B593A609D0555AB84BC5EC05FCC60B370A647E11030993A8605"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\proofs.log",
-          "sha256": "ECBA2D1BFA47D076C9E10622F9EDE8BDF15A888737510276D386C46EB7F51370"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\proofs.log",
+          "sha256": "3BC0F2569F006451B2639AA5CA1FAF29C9D86787162CDB94758A6E0FC9B1EC00"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
-          "sha256": "E97E1EFDF77D063A10BFC718D3651546D5EBABE078FB5DB76098DCDAFC3351FD"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
+          "sha256": "19C0DEEAEE0D47474F8302C78EE65994EBEA11D6BE08BD2A883DE8DB55A5177F"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\rulings-fact-check.tsv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\rulings-fact-check.tsv",
           "sha256": "88250CABA4FDA2D568514C6AACB9E0AF00D9E9AD64874400527ABB9DC052EAED"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\wording-input.tsv",
-          "sha256": "3751F2EFE1BCC68586674DA4B70C27129A7F52D32E470F49843FAA8FA085DBFA"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\wording-input.tsv",
+          "sha256": "54A9A5E2D6FB962DD5162FF3FCCBDC0360437D516D74243195F4ACF8FD6477F2"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\wording-left-for-paulo.tsv",
-          "sha256": "197631D5CE3601A16B4F13E5E962AC3A88C74A137BBC4F504032DE6E920544DC"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\wording-left-for-paulo.tsv",
+          "sha256": "B8C4E6E73B8EA40A54B319461055D8E991F7E0D53A73CC1FED21EF11C44AFF8E"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\wording-rulings.md",
-          "sha256": "D3C632398BF48334E08AC2FF31879E4D814865BB72D0AEE781E8EF029C70090B"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\wording-rulings.md",
+          "sha256": "3C6B1EC5979F0B593A609D0555AB84BC5EC05FCC60B370A647E11030993A8605"
         }
       ],
-      "workingDirectory": "C:\\FamilyQuant-gate"
+      "workingDirectory": "D:\\FamilyQuant-wt\\opus"
     }
   ],
   "rows": [
@@ -141,7 +145,7 @@
           "kind": "ruling",
           "target": "Rule 1",
           "assertion": "Rule 1, Paulo 2026-11-02: when the old fact still reaches the user in the new wording, the new wording is accepted, for labels, tooltips, Help and messages. Reviewer samples the rows it closes. Rows where the fact is not shown stay open.\nOld: Family\nNew: The number of the family this protein belongs to now.",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -164,7 +168,7 @@
           "kind": "ruling",
           "target": "Rule 1",
           "assertion": "Rule 1, Paulo 2026-11-02: when the old fact still reaches the user in the new wording, the new wording is accepted, for labels, tooltips, Help and messages. Reviewer samples the rows it closes. Rows where the fact is not shown stay open.\nOld: MenuItemReanotateSEPro.ToolTip = Writes your User ID family numbers into a SEPro .sepr2 file, saved as a new _regrouped.sepr2; the original is not changed. Disabled until a Family Cluster File is loaded.\nNew: Writes family numbers to a new regrouped SEPro package, leaving the original unchanged. Disabled until a project is loaded.",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -187,7 +191,7 @@
           "kind": "ruling",
           "target": "Rule 2",
           "assertion": "Rule 2, Paulo 2026-11-02: the new theme stays. A row that only describes how something looked in 1.5 (color, font, cursor, decoration) is closed by the new theme. Anything that changes what the user can do stays a real row.\nOld: Setter.Value = {StaticResource KeyboardFocusVisual}\nNew: Themes/Controls.xaml and native .NET 10 Fluent styles replace the old application style. Exact replacement of this property is not proved.",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -210,7 +214,7 @@
           "kind": "ruling",
           "target": "Rule 1",
           "assertion": "Rule 1, Paulo 2026-11-02: when the old fact still reaches the user in the new wording, the new wording is accepted, for labels, tooltips, Help and messages. Reviewer samples the rows it closes. Rows where the fact is not shown stay open.\nOld: Run Divide \u0026 Conquer\nNew: Find lowest identity",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -233,7 +237,7 @@
           "kind": "ruling",
           "target": "Rule 2",
           "assertion": "Rule 2, Paulo 2026-11-02: the new theme stays. A row that only describes how something looked in 1.5 (color, font, cursor, decoration) is closed by the new theme. Anything that changes what the user can do stays a real row.\nOld: Setter.Value = Bold\nNew: Named action labels in Home and the navigation rail replace StepTitle text.",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -256,7 +260,7 @@
           "kind": "ruling",
           "target": "Rule 3",
           "assertion": "Rule 3, Paulo 2026-11-02: where the screen still exists, the current screen name replaces Layer N and the rest of the fact stays. Where the old text points to a retired screen, that clause goes. Each row must still show the rest of its fact reaches the user, or it stays open.\nOld: There is no homology search to export; run one in Layer 4 first.\nNew: There is no homology search to export; run one in Step 4 first.",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -279,7 +283,7 @@
           "kind": "ruling",
           "target": "Rule 2",
           "assertion": "Rule 2, Paulo 2026-11-02: the new theme stays. A row that only describes how something looked in 1.5 (color, font, cursor, decoration) is closed by the new theme. Anything that changes what the user can do stays a real row.\nOld: Setter.Value = Bold\nNew: no current equivalent",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -302,7 +306,7 @@
           "kind": "ruling",
           "target": "Rule 1",
           "assertion": "Rule 1, Paulo 2026-11-02: when the old fact still reaches the user in the new wording, the new wording is accepted, for labels, tooltips, Help and messages. Reviewer samples the rows it closes. Rows where the fact is not shown stay open.\nOld: A number from 0 to 100, decimals allowed. Spectra scoring below it are dropped. A value out of range is refused when you press Load and filter.\nNew: Accepts 0 to 100, including decimals, and drops spectra below the cutoff. Load and filter refuses an out-of-range value.",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -325,7 +329,7 @@
           "kind": "ruling",
           "target": "Rule 2",
           "assertion": "Rule 2, Paulo 2026-11-02: the new theme stays. A row that only describes how something looked in 1.5 (color, font, cursor, decoration) is closed by the new theme. Anything that changes what the user can do stays a real row.\nOld: Setter.Value = 8\nNew: Named Fluent buttons, including ButtonHomeBuild (New from database), replace fixed-width StepCard tiles.",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -348,7 +352,7 @@
           "kind": "ruling",
           "target": "Rule 1",
           "assertion": "Rule 1, Paulo 2026-11-02: when the old fact still reaches the user in the new wording, the new wording is accepted, for labels, tooltips, Help and messages. Reviewer samples the rows it closes. Rows where the fact is not shown stay open.\nOld: Show Only XIC \u003E 0\nNew: Show quantified families only",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -371,7 +375,7 @@
           "kind": "ruling",
           "target": "Rule 1",
           "assertion": "Rule 1, Paulo 2026-11-02: when the old fact still reaches the user in the new wording, the new wording is accepted, for labels, tooltips, Help and messages. Reviewer samples the rows it closes. Rows where the fact is not shown stay open.\nOld: View spectrum comparison table\nNew: Spectrum table",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -394,7 +398,7 @@
           "kind": "ruling",
           "target": "Rule 1",
           "assertion": "Rule 1, Paulo 2026-11-02: when the old fact still reaches the user in the new wording, the new wording is accepted, for labels, tooltips, Help and messages. Reviewer samples the rows it closes. Rows where the fact is not shown stay open.\nOld: What the last \u0027Apply to selected rows\u0027 did, or why it did nothing.\nNew: The result of the last selected-protein edit, or the reason nothing changed.",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -417,7 +421,7 @@
           "kind": "ruling",
           "target": "Rule 1",
           "assertion": "Rule 1, Paulo 2026-11-02: when the old fact still reaches the user in the new wording, the new wording is accepted, for labels, tooltips, Help and messages. Reviewer samples the rows it closes. Rows where the fact is not shown stay open.\nOld: is no mixing to measure and no floor to mark: choose the threshold from the \nNew: Each point is one USEARCH run. This database carries no decoy sequences, so there is no mixing to measure and no floor to mark: choose the threshold from the family counts and from the biology, or re-run on a target-decoy database.",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -440,7 +444,7 @@
           "kind": "ruling",
           "target": "Rule 2",
           "assertion": "Rule 2, Paulo 2026-11-02: the new theme stays. A row that only describes how something looked in 1.5 (color, font, cursor, decoration) is closed by the new theme. Anything that changes what the user can do stays a real row.\nOld: Setter.Value = {StaticResource MutedTextBrush}\nNew: Short tooltips and Help \u003E What do I do first? replace StepBody paragraphs.",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -463,7 +467,7 @@
           "kind": "ruling",
           "target": "Rule 2",
           "assertion": "Rule 2, Paulo 2026-11-02: the new theme stays. A row that only describes how something looked in 1.5 (color, font, cursor, decoration) is closed by the new theme. Anything that changes what the user can do stays a real row.\nOld: Setter.Value = 0.15\nNew: Themes/Controls.xaml and native .NET 10 Fluent styles replace the old application style. Exact replacement of this property is not proved.",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -486,7 +490,7 @@
           "kind": "ruling",
           "target": "Rule 1",
           "assertion": "Rule 1, Paulo 2026-11-02: when the old fact still reaches the user in the new wording, the new wording is accepted, for labels, tooltips, Help and messages. Reviewer samples the rows it closes. Rows where the fact is not shown stay open.\nOld: A peptide whose sequence occurs in proteins of more than one family. In a venom\nNew: A peptide whose sequence occurs in proteins of more than one family. In a redundant database, where whole families differ by a handful of residues, this is not a corner case: most of the signal can sit on shared peptides.",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -509,7 +513,7 @@
           "kind": "ruling",
           "target": "Rule 1",
           "assertion": "Rule 1, Paulo 2026-11-02: when the old fact still reaches the user in the new wording, the new wording is accepted, for labels, tooltips, Help and messages. Reviewer samples the rows it closes. Rows where the fact is not shown stay open.\nOld: Choose the project or Family Cluster File to work on\nNew: Open a project or Family Cluster File",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -532,7 +536,7 @@
           "kind": "ruling",
           "target": "Rule 3",
           "assertion": "Rule 3, Paulo 2026-11-02: where the screen still exists, the current screen name replaces Layer N and the rest of the fact stays. Where the old text points to a retired screen, that clause goes. Each row must still show the rest of its fact reaches the user, or it stays open.\nOld: data supports. Load one in Layer 2: the modes it cannot supply are greyed out,\nNew: No PatternLab project is loaded, so the program cannot yet say which .plp denominators are available. Use Load PatternLab project: unsupported modes are greyed out,",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -555,7 +559,7 @@
           "kind": "ruling",
           "target": "Rule 2",
           "assertion": "Rule 2, Paulo 2026-11-02: the new theme stays. A row that only describes how something looked in 1.5 (color, font, cursor, decoration) is closed by the new theme. Anything that changes what the user can do stays a real row.\nOld: Setter.Value = 0.30\nNew: Themes/Controls.xaml and native .NET 10 Fluent styles replace the old application style. Exact replacement of this property is not proved.",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -578,7 +582,7 @@
           "kind": "ruling",
           "target": "Rule 2",
           "assertion": "Rule 2, Paulo 2026-11-02: the new theme stays. A row that only describes how something looked in 1.5 (color, font, cursor, decoration) is closed by the new theme. Anything that changes what the user can do stays a real row.\nOld: Setter.Value = 15\nNew: Named action labels in Home and the navigation rail replace StepTitle text.",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -601,7 +605,7 @@
           "kind": "ruling",
           "target": "Rule 2",
           "assertion": "Rule 2, Paulo 2026-11-02: the new theme stays. A row that only describes how something looked in 1.5 (color, font, cursor, decoration) is closed by the new theme. Anything that changes what the user can do stays a real row.\nOld: Setter.Value = 10\nNew: no current equivalent",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -624,7 +628,7 @@
           "kind": "ruling",
           "target": "Rule 1",
           "assertion": "Rule 1, Paulo 2026-11-02: when the old fact still reaches the user in the new wording, the new wording is accepted, for labels, tooltips, Help and messages. Reviewer samples the rows it closes. Rows where the fact is not shown stay open.\nOld: PatternLab wrote down which divisor it had used, so the program worked it out\nNew: PatternLab wrote down which divisor it had used, so the program worked it out",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -647,7 +651,7 @@
           "kind": "ruling",
           "target": "Rule 1",
           "assertion": "Rule 1, Paulo 2026-11-02: when the old fact still reaches the user in the new wording, the new wording is accepted, for labels, tooltips, Help and messages. Reviewer samples the rows it closes. Rows where the fact is not shown stay open.\nOld: Keywords separated by commas or spaces; the list below follows as you type.\nNew: Keywords separated by commas or spaces; the list below follows as you type. Words in quotes form a phrase.",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -670,7 +674,7 @@
           "kind": "ruling",
           "target": "Rule 2",
           "assertion": "Rule 2, Paulo 2026-11-02: the new theme stays. A row that only describes how something looked in 1.5 (color, font, cursor, decoration) is closed by the new theme. Anything that changes what the user can do stays a real row.\nOld: Style.Key = StepCard\nNew: Named Fluent buttons, including ButtonHomeBuild (New from database), replace fixed-width StepCard tiles.",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -693,7 +697,7 @@
           "kind": "ruling",
           "target": "Rule 3",
           "assertion": "Rule 3, Paulo 2026-11-02: where the screen still exists, the current screen name replaces Layer N and the rest of the fact stays. Where the old text points to a retired screen, that clause goes. Each row must still show the rest of its fact reaches the user, or it stays open.\nOld: WHAT THE THREE-WAY CHART PARTITIONS (LAYER 5)\nNew: LEGACY THREE-WAY COMPARISON (REFERENCE)",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -716,7 +720,7 @@
           "kind": "ruling",
           "target": "Rule 1",
           "assertion": "Rule 1, Paulo 2026-11-02: when the old fact still reaches the user in the new wording, the new wording is accepted, for labels, tooltips, Help and messages. Reviewer samples the rows it closes. Rows where the fact is not shown stay open.\nOld: Whole words that keep a protein out, separated by commas or spaces; the rest of its family still joins. A hyphenated word or a \u0022quoted phrase\u0022 also works.\nNew: Whole words that keep a protein out, separated by commas or spaces; the rest of its family still joins. A hyphenated word or a quoted phrase also works.",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -739,7 +743,7 @@
           "kind": "ruling",
           "target": "Rule 3",
           "assertion": "Rule 3, Paulo 2026-11-02: where the screen still exists, the current screen name replaces Layer N and the rest of the fact stays. Where the old text points to a retired screen, that clause goes. Each row must still show the rest of its fact reaches the user, or it stays open.\nOld: Layer 4 into a random-match generator.\nNew: standalone homology into a random-match generator.",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -762,7 +766,7 @@
           "kind": "ruling",
           "target": "Rule 2",
           "assertion": "Rule 2, Paulo 2026-11-02: the new theme stays. A row that only describes how something looked in 1.5 (color, font, cursor, decoration) is closed by the new theme. Anything that changes what the user can do stays a real row.\nOld: Style.Key = LayerBadge\nNew: no current equivalent",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -785,7 +789,7 @@
           "kind": "ruling",
           "target": "Rule 1",
           "assertion": "Rule 1, Paulo 2026-11-02: when the old fact still reaches the user in the new wording, the new wording is accepted, for labels, tooltips, Help and messages. Reviewer samples the rows it closes. Rows where the fact is not shown stay open.\nOld: one from a database with Run USearch.\nNew: Nothing was saved: there are no families on screen to save.\n\nNext step: open a Family Cluster File with File \u003E Open, or build one with File \u003E New from database.",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -808,7 +812,7 @@
           "kind": "ruling",
           "target": "Rule 1",
           "assertion": "Rule 1, Paulo 2026-11-02: when the old fact still reaches the user in the new wording, the new wording is accepted, for labels, tooltips, Help and messages. Reviewer samples the rows it closes. Rows where the fact is not shown stay open.\nOld: \uD83D\uDCBE Export to CSV\nNew: Export to CSV",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -831,7 +835,7 @@
           "kind": "ruling",
           "target": "Rule 1",
           "assertion": "Rule 1, Paulo 2026-11-02: when the old fact still reaches the user in the new wording, the new wording is accepted, for labels, tooltips, Help and messages. Reviewer samples the rows it closes. Rows where the fact is not shown stay open.\nOld: Type or paste the de novo export folder here, or use Browse. Subfolders are searched too. Leave it empty to store only the identified peptides.\nNew: Export root searched recursively for the selected sources. Leave empty for identified peptides only.",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -854,7 +858,7 @@
           "kind": "ruling",
           "target": "Rule 1",
           "assertion": "Rule 1, Paulo 2026-11-02: when the old fact still reaches the user in the new wording, the new wording is accepted, for labels, tooltips, Help and messages. Reviewer samples the rows it closes. Rows where the fact is not shown stay open.\nOld: Hide Contaminants\nNew: Hide contaminants",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -877,7 +881,7 @@
           "kind": "ruling",
           "target": "Rule 1",
           "assertion": "Rule 1, Paulo 2026-11-02: when the old fact still reaches the user in the new wording, the new wording is accepted, for labels, tooltips, Help and messages. Reviewer samples the rows it closes. Rows where the fact is not shown stay open.\nOld: Input a FASTA file\nNew: Choose database",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -900,7 +904,7 @@
           "kind": "ruling",
           "target": "Rule 1",
           "assertion": "Rule 1, Paulo 2026-11-02: when the old fact still reaches the user in the new wording, the new wording is accepted, for labels, tooltips, Help and messages. Reviewer samples the rows it closes. Rows where the fact is not shown stay open.\nOld: from the size of the numbers. That is a guess, and it is labelled as one\nNew: from the size of the numbers. That is a guess, and it is labelled as one",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -923,7 +927,7 @@
           "kind": "ruling",
           "target": "Rule 1",
           "assertion": "Rule 1, Paulo 2026-11-02: when the old fact still reaches the user in the new wording, the new wording is accepted, for labels, tooltips, Help and messages. Reviewer samples the rows it closes. Rows where the fact is not shown stay open.\nOld: Align Selected\nNew: Align selected",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -946,7 +950,7 @@
           "kind": "ruling",
           "target": "Rule 1",
           "assertion": "Rule 1, Paulo 2026-11-02: when the old fact still reaches the user in the new wording, the new wording is accepted, for labels, tooltips, Help and messages. Reviewer samples the rows it closes. Rows where the fact is not shown stay open.\nOld: Cluster to the families the search shows: every family the search hides keeps its\nNew: Typing in the Search box limits both Recluster by words and Group by keywords to the families the search shows: every family the search hides keeps its",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -969,7 +973,7 @@
           "kind": "ruling",
           "target": "Rule 2",
           "assertion": "Rule 2, Paulo 2026-11-02: the new theme stays. A row that only describes how something looked in 1.5 (color, font, cursor, decoration) is closed by the new theme. Anything that changes what the user can do stays a real row.\nOld: Setter.Value = 0,8,0,0\nNew: Short tooltips and Help \u003E What do I do first? replace StepBody paragraphs.",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -992,7 +996,7 @@
           "kind": "ruling",
           "target": "Rule 1",
           "assertion": "Rule 1, Paulo 2026-11-02: when the old fact still reaches the user in the new wording, the new wording is accepted, for labels, tooltips, Help and messages. Reviewer samples the rows it closes. Rows where the fact is not shown stay open.\nOld: Untick the red ones\nNew: Unticks every protein with no keyword, leaving only the ones that carry your words.",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -1015,7 +1019,7 @@
           "kind": "ruling",
           "target": "Rule 1",
           "assertion": "Rule 1, Paulo 2026-11-02: when the old fact still reaches the user in the new wording, the new wording is accepted, for labels, tooltips, Help and messages. Reviewer samples the rows it closes. Rows where the fact is not shown stay open.\nOld: Saves a 1920 x 1080 PNG and its CSV: one dot per row where both PEAKS and DeepNovo passed their filters. Blue circles are sequence matches; red diamonds are mismatches.\nNew: Save a 1920 x 1080 PNG and its CSV: one dot per row where both PEAKS and DeepNovo passed their filters. Blue circles are sequence matches; red diamonds are mismatches.",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -1038,7 +1042,7 @@
           "kind": "ruling",
           "target": "Rule 2",
           "assertion": "Rule 2, Paulo 2026-11-02: the new theme stays. A row that only describes how something looked in 1.5 (color, font, cursor, decoration) is closed by the new theme. Anything that changes what the user can do stays a real row.\nOld: Setter.Value = 1\nNew: Themes/Controls.xaml and native .NET 10 Fluent styles replace the old application style. Exact replacement of this property is not proved.",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -1061,7 +1065,7 @@
           "kind": "ruling",
           "target": "Rule 1",
           "assertion": "Rule 1, Paulo 2026-11-02: when the old fact still reaches the user in the new wording, the new wording is accepted, for labels, tooltips, Help and messages. Reviewer samples the rows it closes. Rows where the fact is not shown stay open.\nOld: Description\nNew: The description exactly as in the database, OS= and all.",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -1084,7 +1088,7 @@
           "kind": "ruling",
           "target": "Rule 2",
           "assertion": "Rule 2, Paulo 2026-11-02: the new theme stays. A row that only describes how something looked in 1.5 (color, font, cursor, decoration) is closed by the new theme. Anything that changes what the user can do stays a real row.\nOld: Setter.Value = Wrap\nNew: Named action labels in Home and the navigation rail replace StepTitle text.",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -1107,7 +1111,7 @@
           "kind": "ruling",
           "target": "Rule 1",
           "assertion": "Rule 1, Paulo 2026-11-02: when the old fact still reaches the user in the new wording, the new wording is accepted, for labels, tooltips, Help and messages. Reviewer samples the rows it closes. Rows where the fact is not shown stay open.\nOld: family counts and from the biology, or re-run on a target-decoy database.\nNew: Each point is one USEARCH run. This database carries no decoy sequences, so there is no mixing to measure and no floor to mark: choose the threshold from the family counts and from the biology, or re-run on a target-decoy database.",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -1130,7 +1134,7 @@
           "kind": "ruling",
           "target": "Rule 1",
           "assertion": "Rule 1, Paulo 2026-11-02: when the old fact still reaches the user in the new wording, the new wording is accepted, for labels, tooltips, Help and messages. Reviewer samples the rows it closes. Rows where the fact is not shown stay open.\nOld: Create super cluster\nNew: Apply grouping",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -1153,7 +1157,7 @@
           "kind": "ruling",
           "target": "Rule 1",
           "assertion": "Rule 1, Paulo 2026-11-02: when the old fact still reaches the user in the new wording, the new wording is accepted, for labels, tooltips, Help and messages. Reviewer samples the rows it closes. Rows where the fact is not shown stay open.\nOld: In the preview and the Data Browser, right-click a row to copy its UniProt code or\nNew: Group by evidence opens the Evidence tab of Review grouping. Confirm the scope, then review the supplied families, reasons, flags and protein ticks before Apply grouping; the review\u0027s Help explains its architecture, motif and left-out views. Cancelling leaves the open grouping unchanged and adds no Undo step. In Review grouping and the Families protein table, right-click to copy a UniProt code or",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -1176,7 +1180,7 @@
           "kind": "ruling",
           "target": "Rule 2",
           "assertion": "Rule 2, Paulo 2026-11-02: the new theme stays. A row that only describes how something looked in 1.5 (color, font, cursor, decoration) is closed by the new theme. Anything that changes what the user can do stays a real row.\nOld: Setter.Value = {StaticResource AccentBrush}\nNew: Themes/Controls.xaml and native .NET 10 Fluent styles replace the old application style. Exact replacement of this property is not proved.",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -1199,7 +1203,7 @@
           "kind": "ruling",
           "target": "Rule 1",
           "assertion": "Rule 1, Paulo 2026-11-02: when the old fact still reaches the user in the new wording, the new wording is accepted, for labels, tooltips, Help and messages. Reviewer samples the rows it closes. Rows where the fact is not shown stay open.\nOld: The family\u0027s name: its User Annotation, or else its most common protein description. Empty \nNew: User Annotation, or the most common protein description. Empty when no protein carries the number.",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -1222,7 +1226,7 @@
           "kind": "ruling",
           "target": "Rule 1",
           "assertion": "Rule 1, Paulo 2026-11-02: when the old fact still reaches the user in the new wording, the new wording is accepted, for labels, tooltips, Help and messages. Reviewer samples the rows it closes. Rows where the fact is not shown stay open.\nOld:                  ignored); a tie goes to the first member in the table\u0027s order.\nNew:                  ignored); a tie follows the stored member order, not the grid sort. Locus            a UniProt accession where available, otherwise the database identifier.                  Hover over a cell for the full original identifier, kept in the file.",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -1245,7 +1249,7 @@
           "kind": "ruling",
           "target": "Rule 1",
           "assertion": "Rule 1, Paulo 2026-11-02: when the old fact still reaches the user in the new wording, the new wording is accepted, for labels, tooltips, Help and messages. Reviewer samples the rows it closes. Rows where the fact is not shown stay open.\nOld: MenuItemHowToRead.ToolTip = Explains every number the program shows, such as what the percentages are of and what a shared peptide is. On the De Novo screen it opens that screen\u0027s own help.\nNew: Explains the current screen\u0027s numbers and choices, including denominators and shared peptides. F1 opens this same help.",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -1268,7 +1272,7 @@
           "kind": "ruling",
           "target": "Rule 2",
           "assertion": "Rule 2, Paulo 2026-11-02: the new theme stays. A row that only describes how something looked in 1.5 (color, font, cursor, decoration) is closed by the new theme. Anything that changes what the user can do stays a real row.\nOld: Style.Key = StepNumber\nNew: New from database, Families, Quantify and Results replace decorative step numbers. Workflow Help still provides the numbered workflow.",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -1291,7 +1295,7 @@
           "kind": "ruling",
           "target": "Rule 1",
           "assertion": "Rule 1, Paulo 2026-11-02: when the old fact still reaches the user in the new wording, the new wording is accepted, for labels, tooltips, Help and messages. Reviewer samples the rows it closes. Rows where the fact is not shown stay open.\nOld: TextBlock.Text = FamilyQuant\nNew: FamilyQuant",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -1314,7 +1318,7 @@
           "kind": "ruling",
           "target": "Rule 1",
           "assertion": "Rule 1, Paulo 2026-11-02: when the old fact still reaches the user in the new wording, the new wording is accepted, for labels, tooltips, Help and messages. Reviewer samples the rows it closes. Rows where the fact is not shown stay open.\nOld: How many proteins carry this family number now. Zero means it is no longer in use \nNew: Proteins carrying this family number now. Zero means the number is no longer in use.",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -1337,7 +1341,7 @@
           "kind": "ruling",
           "target": "Rule 1",
           "assertion": "Rule 1, Paulo 2026-11-02: when the old fact still reaches the user in the new wording, the new wording is accepted, for labels, tooltips, Help and messages. Reviewer samples the rows it closes. Rows where the fact is not shown stay open.\nOld: Type or paste the path of the .sepr2 file here, or use Browse. It must come from the same runs as the RAW files.\nNew: SEPro identification package from the same runs as the RAW acquisitions.",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -1360,7 +1364,7 @@
           "kind": "ruling",
           "target": "Rule 1",
           "assertion": "Rule 1, Paulo 2026-11-02: when the old fact still reaches the user in the new wording, the new wording is accepted, for labels, tooltips, Help and messages. Reviewer samples the rows it closes. Rows where the fact is not shown stay open.\nOld: \u0022says how it was obtained. In the CSV it is also called PrimaryQuantValue.\u0022\nNew: The main plot quantity, called PrimaryQuantValue in the CSV. It can differ from M\u002B0 XIC; the next column says how it was obtained.",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -1383,7 +1387,7 @@
           "kind": "ruling",
           "target": "Rule 1",
           "assertion": "Rule 1, Paulo 2026-11-02: when the old fact still reaches the user in the new wording, the new wording is accepted, for labels, tooltips, Help and messages. Reviewer samples the rows it closes. Rows where the fact is not shown stay open.\nOld: , because this window is not on a display and a file dialog there is a \nNew: Type the path into its box. File dialogs need a displayed application window.",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -1406,7 +1410,7 @@
           "kind": "ruling",
           "target": "Rule 1",
           "assertion": "Rule 1, Paulo 2026-11-02: when the old fact still reaches the user in the new wording, the new wording is accepted, for labels, tooltips, Help and messages. Reviewer samples the rows it closes. Rows where the fact is not shown stay open.\nOld: Calculate FDR\nNew: Check mixing (FDR)",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -1429,7 +1433,7 @@
           "kind": "ruling",
           "target": "Rule 1",
           "assertion": "Rule 1, Paulo 2026-11-02: when the old fact still reaches the user in the new wording, the new wording is accepted, for labels, tooltips, Help and messages. Reviewer samples the rows it closes. Rows where the fact is not shown stay open.\nOld: Ticks the rows selected in the table, without changing any other row.\nNew: Ticks selected rows without changing any other row.",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -1452,7 +1456,7 @@
           "kind": "ruling",
           "target": "Rule 2",
           "assertion": "Rule 2, Paulo 2026-11-02: the new theme stays. A row that only describes how something looked in 1.5 (color, font, cursor, decoration) is closed by the new theme. Anything that changes what the user can do stays a real row.\nOld: Setter.Value = 22\nNew: New from database, Families, Quantify and Results replace decorative step numbers. Workflow Help still provides the numbered workflow.",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -1475,7 +1479,7 @@
           "kind": "ruling",
           "target": "Rule 1",
           "assertion": "Rule 1, Paulo 2026-11-02: when the old fact still reaches the user in the new wording, the new wording is accepted, for labels, tooltips, Help and messages. Reviewer samples the rows it closes. Rows where the fact is not shown stay open.\nOld: Typing in the Search box now limits BOTH Recluster by Words and Create Super\nNew: Typing in the Search box limits both Recluster by words and Group by keywords to the families the search shows: every family the search hides keeps its",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -1498,7 +1502,7 @@
           "kind": "ruling",
           "target": "Rule 1",
           "assertion": "Rule 1, Paulo 2026-11-02: when the old fact still reaches the user in the new wording, the new wording is accepted, for labels, tooltips, Help and messages. Reviewer samples the rows it closes. Rows where the fact is not shown stay open.\nOld: Locus\nNew: The protein identifier as in the database.",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -1521,7 +1525,7 @@
           "kind": "ruling",
           "target": "Rule 1",
           "assertion": "Rule 1, Paulo 2026-11-02: when the old fact still reaches the user in the new wording, the new wording is accepted, for labels, tooltips, Help and messages. Reviewer samples the rows it closes. Rows where the fact is not shown stay open.\nOld: carries one, which is how a venom disintegrin comes along with a metalloproteinase.\nNew: carries one, so a protein without a keyword can come along with a matching protein.",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -1544,7 +1548,7 @@
           "kind": "ruling",
           "target": "Rule 2",
           "assertion": "Rule 2, Paulo 2026-11-02: the new theme stays. A row that only describes how something looked in 1.5 (color, font, cursor, decoration) is closed by the new theme. Anything that changes what the user can do stays a real row.\nOld: Setter.Value = Stretch\nNew: Named Fluent buttons, including ButtonHomeBuild (New from database), replace fixed-width StepCard tiles.",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -1567,7 +1571,7 @@
           "kind": "ruling",
           "target": "Rule 1",
           "assertion": "Rule 1, Paulo 2026-11-02: when the old fact still reaches the user in the new wording, the new wording is accepted, for labels, tooltips, Help and messages. Reviewer samples the rows it closes. Rows where the fact is not shown stay open.\nOld: Untick it and it stays in its family, without affecting the others.\nNew: This protein carries no keyword: another protein in its family does. Untick it to keep it in its current family without affecting the others.",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -1590,7 +1594,7 @@
           "kind": "ruling",
           "target": "Rule 1",
           "assertion": "Rule 1, Paulo 2026-11-02: when the old fact still reaches the user in the new wording, the new wording is accepted, for labels, tooltips, Help and messages. Reviewer samples the rows it closes. Rows where the fact is not shown stay open.\nOld: Type or paste the folder with the .raw files here, or use Browse. Runs are matched to files by name.\nNew: Folder containing the RAW acquisitions. Runs are matched by file name.",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -1613,7 +1617,7 @@
           "kind": "ruling",
           "target": "Rule 1",
           "assertion": "Rule 1, Paulo 2026-11-02: when the old fact still reaches the user in the new wording, the new wording is accepted, for labels, tooltips, Help and messages. Reviewer samples the rows it closes. Rows where the fact is not shown stay open.\nOld: Saves exactly the rows in this table as a CSV. Scores stay in separate columns, missing values stay blank, and the project is not changed.\nNew: Save exactly these rows as CSV. Scores stay in separate columns, missing values stay blank, and the project is not changed.",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -1636,7 +1640,7 @@
           "kind": "ruling",
           "target": "Rule 1",
           "assertion": "Rule 1, Paulo 2026-11-02: when the old fact still reaches the user in the new wording, the new wording is accepted, for labels, tooltips, Help and messages. Reviewer samples the rows it closes. Rows where the fact is not shown stay open.\nOld: Saves exactly the rows in this table as a CSV. Scores stay in separate columns, missing values stay blank, and the project is not changed.\nNew: Save exactly these rows as CSV. Scores stay in separate columns, missing values stay blank, and the project is not changed.",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -1659,7 +1663,7 @@
           "kind": "ruling",
           "target": "Rule 2",
           "assertion": "Rule 2, Paulo 2026-11-02: the new theme stays. A row that only describes how something looked in 1.5 (color, font, cursor, decoration) is closed by the new theme. Anything that changes what the user can do stays a real row.\nOld: Setter.Value = 0.45\nNew: Themes/Controls.xaml and native .NET 10 Fluent styles replace the old application style. Exact replacement of this property is not proved.",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -1682,7 +1686,7 @@
           "kind": "ruling",
           "target": "Rule 2",
           "assertion": "Rule 2, Paulo 2026-11-02: the new theme stays. A row that only describes how something looked in 1.5 (color, font, cursor, decoration) is closed by the new theme. Anything that changes what the user can do stays a real row.\nOld: Setter.Value = Center\nNew: New from database, Families, Quantify and Results replace decorative step numbers. Workflow Help still provides the numbered workflow.",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -1705,7 +1709,7 @@
           "kind": "ruling",
           "target": "Rule 1",
           "assertion": "Rule 1, Paulo 2026-11-02: when the old fact still reaches the user in the new wording, the new wording is accepted, for labels, tooltips, Help and messages. Reviewer samples the rows it closes. Rows where the fact is not shown stay open.\nOld: Each point is one USEARCH run. This database carries no decoy sequences, so there \nNew: Each point is one USEARCH run. This database carries no decoy sequences, so there is no mixing to measure and no floor to mark: choose the threshold from the family counts and from the biology, or re-run on a target-decoy database.",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -1728,7 +1732,7 @@
           "kind": "ruling",
           "target": "Rule 1",
           "assertion": "Rule 1, Paulo 2026-11-02: when the old fact still reaches the user in the new wording, the new wording is accepted, for labels, tooltips, Help and messages. Reviewer samples the rows it closes. Rows where the fact is not shown stay open.\nOld: of a family leaves, the new family is locked, so that a Recluster by Words cannot put\nNew: of a family leaves, the new family is locked, so that Recluster by words cannot put",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -1751,7 +1755,7 @@
           "kind": "ruling",
           "target": "Rule 1",
           "assertion": "Rule 1, Paulo 2026-11-02: when the old fact still reaches the user in the new wording, the new wording is accepted, for labels, tooltips, Help and messages. Reviewer samples the rows it closes. Rows where the fact is not shown stay open.\nOld: Unlocks the selected families, so the next reclustering may merge them again. \nNew: Unlock selected families for future reclustering without saving to disk. Disabled until a row is selected.",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -1774,7 +1778,7 @@
           "kind": "ruling",
           "target": "Rule 3",
           "assertion": "Rule 3, Paulo 2026-11-02: where the screen still exists, the current screen name replaces Layer N and the rest of the fact stays. Where the old text points to a retired screen, that clause goes. Each row must still show the rest of its fact reaches the user, or it stays open.\nOld: Undo steps back through the changes you make in Layer 1, one at a time, without\nNew: Undo steps back through the changes you make in Families, one at a time, without reloading the file. It reverses Recluster by words, Group by keywords, evidence grouping, a family name or checkbox edit, a batch edit, a User ID edit or lock removal, putting the changed family numbers, annotations and",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -1797,7 +1801,7 @@
           "kind": "ruling",
           "target": "Rule 1",
           "assertion": "Rule 1, Paulo 2026-11-02: when the old fact still reaches the user in the new wording, the new wording is accepted, for labels, tooltips, Help and messages. Reviewer samples the rows it closes. Rows where the fact is not shown stay open.\nOld: update full XIC measures each peptide\u0027s full isotope envelope straight from the RAW\nNew: .fqproj, written by File \u003E Save. Beyond the share above, Analysis \u003E Compute full XIC opens Quantify, which measures each peptide\u0027s full isotope envelope straight from the RAW and stores it in that project, and the Results screen then reads the recovery",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -1820,7 +1824,7 @@
           "kind": "ruling",
           "target": "Rule 1",
           "assertion": "Rule 1, Paulo 2026-11-02: when the old fact still reaches the user in the new wording, the new wording is accepted, for labels, tooltips, Help and messages. Reviewer samples the rows it closes. Rows where the fact is not shown stay open.\nOld: Create Super Cluster first shows a preview and changes nothing until you confirm.\nNew: Group by keywords changes nothing until you confirm Apply grouping in the review.",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -1843,7 +1847,7 @@
           "kind": "ruling",
           "target": "Rule 1",
           "assertion": "Rule 1, Paulo 2026-11-02: when the old fact still reaches the user in the new wording, the new wording is accepted, for labels, tooltips, Help and messages. Reviewer samples the rows it closes. Rows where the fact is not shown stay open.\nOld: Manage locks...\nNew: Manage locks",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -1866,7 +1870,7 @@
           "kind": "ruling",
           "target": "Rule 1",
           "assertion": "Rule 1, Paulo 2026-11-02: when the old fact still reaches the user in the new wording, the new wording is accepted, for labels, tooltips, Help and messages. Reviewer samples the rows it closes. Rows where the fact is not shown stay open.\nOld: Nothing was reannotated: there are no families on screen to write into a SEPro \nNew: Nothing was reannotated: there are no families on screen to write into a SEPro package.\n\nNext step: open a Family Cluster File with File \u003E Open first.",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -1889,7 +1893,7 @@
           "kind": "ruling",
           "target": "Rule 3",
           "assertion": "Rule 3, Paulo 2026-11-02: where the screen still exists, the current screen name replaces Layer N and the rest of the fact stays. Where the old text points to a retired screen, that clause goes. Each row must still show the rest of its fact reaches the user, or it stays open.\nOld: Layer 1. The minimum identity is a PREFILTER, not the score: a protein that\nNew: Import and filter. The minimum identity is a PREFILTER, not the score: a protein that",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -1912,7 +1916,7 @@
           "kind": "ruling",
           "target": "Rule 1",
           "assertion": "Rule 1, Paulo 2026-11-02: when the old fact still reaches the user in the new wording, the new wording is accepted, for labels, tooltips, Help and messages. Reviewer samples the rows it closes. Rows where the fact is not shown stay open.\nOld: The number of locked families in this file, including numbers a later merge took out of use. It shows what the next reclustering will refuse to merge.\nNew: Families protected from automatic grouping, including stored locks whose family has no proteins. Manage locks lets you remove that protection.",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -1935,7 +1939,7 @@
           "kind": "ruling",
           "target": "Rule 1",
           "assertion": "Rule 1, Paulo 2026-11-02: when the old fact still reaches the user in the new wording, the new wording is accepted, for labels, tooltips, Help and messages. Reviewer samples the rows it closes. Rows where the fact is not shown stay open.\nOld: Fetch Domains asks UniProt once for each protein\u0027s Pfam domains and saving keeps them\nNew: Fetch evidence asks UniProt for protein evidence, including Pfam domains, family, keyword and tissue annotations, plus reviewed references for the families found. The operation publishes the completed evidence and panel together; saving keeps them in the file with their release for offline review. Pfam domains fill the Domains column; the Search box",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -1958,7 +1962,7 @@
           "kind": "ruling",
           "target": "Rule 1",
           "assertion": "Rule 1, Paulo 2026-11-02: when the old fact still reaches the user in the new wording, the new wording is accepted, for labels, tooltips, Help and messages. Reviewer samples the rows it closes. Rows where the fact is not shown stay open.\nOld: Remove redundancy from FASTA...\nNew: Remove redundancy",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -1981,7 +1985,7 @@
           "kind": "ruling",
           "target": "Rule 2",
           "assertion": "Rule 2, Paulo 2026-11-02: the new theme stays. A row that only describes how something looked in 1.5 (color, font, cursor, decoration) is closed by the new theme. Anything that changes what the user can do stays a real row.\nOld: Style.Key = StepBody\nNew: Short tooltips and Help \u003E What do I do first? replace StepBody paragraphs.",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -2004,7 +2008,7 @@
           "kind": "ruling",
           "target": "Rule 1",
           "assertion": "Rule 1, Paulo 2026-11-02: when the old fact still reaches the user in the new wording, the new wording is accepted, for labels, tooltips, Help and messages. Reviewer samples the rows it closes. Rows where the fact is not shown stay open.\nOld: Locus            the protein identifier as it appears in the database.\nNew:                  ignored); a tie follows the stored member order, not the grid sort. Locus            a UniProt accession where available, otherwise the database identifier.                  Hover over a cell for the full original identifier, kept in the file.",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -2027,7 +2031,7 @@
           "kind": "ruling",
           "target": "Rule 1",
           "assertion": "Rule 1, Paulo 2026-11-02: when the old fact still reaches the user in the new wording, the new wording is accepted, for labels, tooltips, Help and messages. Reviewer samples the rows it closes. Rows where the fact is not shown stay open.\nOld: Type part of a locus, description or domain. Separate several terms with commas, for example: metalloprotease, SVMP; a row is shown when it has ANY of them. Filtering never changes a percentage.\nNew: Filter by accession, description or domain, using commas between alternatives. Filtering never changes a percentage.",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -2050,7 +2054,7 @@
           "kind": "ruling",
           "target": "Rule 1",
           "assertion": "Rule 1, Paulo 2026-11-02: when the old fact still reaches the user in the new wording, the new wording is accepted, for labels, tooltips, Help and messages. Reviewer samples the rows it closes. Rows where the fact is not shown stay open.\nOld: Next step: open a project or a Family Cluster File with File \u00B7 Load first.\nNew: There is no project on screen to compute quantitation for.\n\nNext step: open a project or a Family Cluster File with File \u003E Open first.",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -2073,7 +2077,7 @@
           "kind": "ruling",
           "target": "Rule 2",
           "assertion": "Rule 2, Paulo 2026-11-02: the new theme stays. A row that only describes how something looked in 1.5 (color, font, cursor, decoration) is closed by the new theme. Anything that changes what the user can do stays a real row.\nOld: Setter.Value = Top\nNew: Named Fluent buttons, including ButtonHomeBuild (New from database), replace fixed-width StepCard tiles.",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -2096,7 +2100,7 @@
           "kind": "ruling",
           "target": "Rule 1",
           "assertion": "Rule 1, Paulo 2026-11-02: when the old fact still reaches the user in the new wording, the new wording is accepted, for labels, tooltips, Help and messages. Reviewer samples the rows it closes. Rows where the fact is not shown stay open.\nOld: \u27F3 Recalculate\nNew: Recalculate",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -2119,7 +2123,7 @@
           "kind": "ruling",
           "target": "Rule 1",
           "assertion": "Rule 1, Paulo 2026-11-02: when the old fact still reaches the user in the new wording, the new wording is accepted, for labels, tooltips, Help and messages. Reviewer samples the rows it closes. Rows where the fact is not shown stay open.\nOld: Nothing is saved until you save the Family Cluster File. Disabled until a row is selected.\nNew: Unlock selected families for future reclustering without saving to disk. Disabled until a row is selected.",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -2142,7 +2146,7 @@
           "kind": "ruling",
           "target": "Rule 1",
           "assertion": "Rule 1, Paulo 2026-11-02: when the old fact still reaches the user in the new wording, the new wording is accepted, for labels, tooltips, Help and messages. Reviewer samples the rows it closes. Rows where the fact is not shown stay open.\nOld: Rows read and kept for each run. Runs are named by file name, not by order. A run keeping far fewer rows than the others is worth checking.\nNew: Rows read and kept per run, named by file rather than order. Check a run that keeps far fewer rows than the others.",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -2165,7 +2169,7 @@
           "kind": "ruling",
           "target": "Rule 1",
           "assertion": "Rule 1, Paulo 2026-11-02: when the old fact still reaches the user in the new wording, the new wording is accepted, for labels, tooltips, Help and messages. Reviewer samples the rows it closes. Rows where the fact is not shown stay open.\nOld: Next step: open a Family Cluster File with File \u00B7 Load Family Cluster File, or build \nNew: Nothing was saved: there are no families on screen to save.\n\nNext step: open a Family Cluster File with File \u003E Open, or build one with File \u003E New from database.",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -2188,7 +2192,7 @@
           "kind": "ruling",
           "target": "Rule 1",
           "assertion": "Rule 1, Paulo 2026-11-02: when the old fact still reaches the user in the new wording, the new wording is accepted, for labels, tooltips, Help and messages. Reviewer samples the rows it closes. Rows where the fact is not shown stay open.\nOld: LabelHomologyUnmatched.ToolTip = Peptides that matched no protein at this identity. In venom de novo data this is common, and it is not an error.\nNew: Peptides that matched no protein at this identity. In de novo data this is common, and it is not an error.",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -2211,7 +2215,7 @@
           "kind": "ruling",
           "target": "Rule 1",
           "assertion": "Rule 1, Paulo 2026-11-02: when the old fact still reaches the user in the new wording, the new wording is accepted, for labels, tooltips, Help and messages. Reviewer samples the rows it closes. Rows where the fact is not shown stay open.\nOld: Keywords:\nNew: Keywords",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -2234,7 +2238,7 @@
           "kind": "ruling",
           "target": "Rule 1",
           "assertion": "Rule 1, Paulo 2026-11-02: when the old fact still reaches the user in the new wording, the new wording is accepted, for labels, tooltips, Help and messages. Reviewer samples the rows it closes. Rows where the fact is not shown stay open.\nOld: of them. Every total on this screen is summed over DISTINCT PEAKS. Summing per\nNew: of them. Legacy extraction totals are summed over DISTINCT PEAKS. Summing per",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -2257,7 +2261,7 @@
           "kind": "ruling",
           "target": "Rule 1",
           "assertion": "Rule 1, Paulo 2026-11-02: when the old fact still reaches the user in the new wording, the new wording is accepted, for labels, tooltips, Help and messages. Reviewer samples the rows it closes. Rows where the fact is not shown stay open.\nOld: Keyword\nNew: Whether this protein carries a keyword itself, in the description before OS=.",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -2280,7 +2284,7 @@
           "kind": "ruling",
           "target": "Rule 1",
           "assertion": "Rule 1, Paulo 2026-11-02: when the old fact still reaches the user in the new wording, the new wording is accepted, for labels, tooltips, Help and messages. Reviewer samples the rows it closes. Rows where the fact is not shown stay open.\nOld: when no protein carries the number any more.\nNew: User Annotation, or the most common protein description. Empty when no protein carries the number.",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -2303,7 +2307,7 @@
           "kind": "ruling",
           "target": "Rule 2",
           "assertion": "Rule 2, Paulo 2026-11-02: the new theme stays. A row that only describes how something looked in 1.5 (color, font, cursor, decoration) is closed by the new theme. Anything that changes what the user can do stays a real row.\nOld: Setter.Value = 3\nNew: no current equivalent",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -2326,7 +2330,7 @@
           "kind": "ruling",
           "target": "Rule 1",
           "assertion": "Rule 1, Paulo 2026-11-02: when the old fact still reaches the user in the new wording, the new wording is accepted, for labels, tooltips, Help and messages. Reviewer samples the rows it closes. Rows where the fact is not shown stay open.\nOld: CURATING BY HAND: UNDO, SUPER CLUSTER OPTIONS, SEARCH-SCOPED RECLUSTERING\nNew: THE FAMILY OVERVIEW AND PROTEIN TABLE ------------------------------------- Families keeps the family overview, protein table and actions beside one another. Select a family to show its proteins; All proteins restores the filtered protein list. Each overview row shows its whole-family target count and one family share, including members hidden by display filters; it never adds the repeated protein shares together. Column headings name the current denominator. Edit the family name to annotate every target member, including hidden members. The family checkbox protects it from automatic grouping or removes that protection. Each committed name or checkbox edit is one Undo step. Edit selected proteins can join or split selected rows and set their annotation in one batch; destination and surviving source families are locked, while emptied source families are not. CURATING BY HAND: UNDO, KEYWORD REVIEW, SEARCH-SCOPED RECLUSTERING",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -2349,7 +2353,7 @@
           "kind": "ruling",
           "target": "Rule 1",
           "assertion": "Rule 1, Paulo 2026-11-02: when the old fact still reaches the user in the new wording, the new wording is accepted, for labels, tooltips, Help and messages. Reviewer samples the rows it closes. Rows where the fact is not shown stay open.\nOld: There is no project on screen to compute quantitation for.\n\n\nNew: There is no project on screen to compute quantitation for.\n\nNext step: open a project or a Family Cluster File with File \u003E Open first.",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -2372,7 +2376,7 @@
           "kind": "ruling",
           "target": "Rule 1",
           "assertion": "Rule 1, Paulo 2026-11-02: when the old fact still reaches the user in the new wording, the new wording is accepted, for labels, tooltips, Help and messages. Reviewer samples the rows it closes. Rows where the fact is not shown stay open.\nOld: Load PLP File\nNew: Load PatternLab project",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -2395,7 +2399,7 @@
           "kind": "ruling",
           "target": "Rule 2",
           "assertion": "Rule 2, Paulo 2026-11-02: the new theme stays. A row that only describes how something looked in 1.5 (color, font, cursor, decoration) is closed by the new theme. Anything that changes what the user can do stays a real row.\nOld: Setter.Value = SemiBold\nNew: Themes/Controls.xaml and native .NET 10 Fluent styles replace the old application style. Exact replacement of this property is not proved.",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -2418,7 +2422,7 @@
           "kind": "ruling",
           "target": "Rule 1",
           "assertion": "Rule 1, Paulo 2026-11-02: when the old fact still reaches the user in the new wording, the new wording is accepted, for labels, tooltips, Help and messages. Reviewer samples the rows it closes. Rows where the fact is not shown stay open.\nOld: Isotopes to credit (ceiling)\nNew: Isotope ceiling",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -2441,7 +2445,7 @@
           "kind": "ruling",
           "target": "Rule 3",
           "assertion": "Rule 3, Paulo 2026-11-02: where the screen still exists, the current screen name replaces Layer N and the rest of the fact stays. Where the old text points to a retired screen, that clause goes. Each row must still show the rest of its fact reaches the user, or it stays open.\nOld: WHAT THE HOMOLOGY LAYER MAPS (LAYER 4)\nNew: WHAT STANDALONE HOMOLOGY MAPS",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -2464,7 +2468,7 @@
           "kind": "ruling",
           "target": "Rule 2",
           "assertion": "Rule 2, Paulo 2026-11-02: the new theme stays. A row that only describes how something looked in 1.5 (color, font, cursor, decoration) is closed by the new theme. Anything that changes what the user can do stays a real row.\nOld: Setter.Value = 0\nNew: Named Fluent buttons, including ButtonHomeBuild (New from database), replace fixed-width StepCard tiles.",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -2487,7 +2491,7 @@
           "kind": "ruling",
           "target": "Rule 2",
           "assertion": "Rule 2, Paulo 2026-11-02: the new theme stays. A row that only describes how something looked in 1.5 (color, font, cursor, decoration) is closed by the new theme. Anything that changes what the user can do stays a real row.\nOld: Setter.Value = White\nNew: no current equivalent",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -2510,7 +2514,7 @@
           "kind": "ruling",
           "target": "Rule 1",
           "assertion": "Rule 1, Paulo 2026-11-02: when the old fact still reaches the user in the new wording, the new wording is accepted, for labels, tooltips, Help and messages. Reviewer samples the rows it closes. Rows where the fact is not shown stay open.\nOld: Aligns each distinct kept peptide to the family file\u0027s proteins and assigns the hits to families. It does not need extracted areas. Disabled until Step 1 has kept at least one row.\nNew: Aligns each distinct kept peptide to the family file\u0027s proteins and assigns hits to families without requiring extracted areas. Disabled until Step 1 has kept at least one row.",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -2533,7 +2537,7 @@
           "kind": "ruling",
           "target": "Rule 1",
           "assertion": "Rule 1, Paulo 2026-11-02: when the old fact still reaches the user in the new wording, the new wording is accepted, for labels, tooltips, Help and messages. Reviewer samples the rows it closes. Rows where the fact is not shown stay open.\nOld:    peptides, then press Recalculate.\nNew: 4. In Quantitation, choose Shared peptides for either source. Share of applies to    Full XIC immediately; PatternLab share of needs Recalculate for the .plp column. 5. File \u003E Export writes CSV; Analysis \u003E Reannotate SEPro stamps the family numbers back",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -2556,7 +2560,7 @@
           "kind": "ruling",
           "target": "Rule 1",
           "assertion": "Rule 1, Paulo 2026-11-02: when the old fact still reaches the user in the new wording, the new wording is accepted, for labels, tooltips, Help and messages. Reviewer samples the rows it closes. Rows where the fact is not shown stay open.\nOld: \u0022Choose the database to scan across identities\u0022\nNew: Choose the protein database",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -2579,7 +2583,7 @@
           "kind": "ruling",
           "target": "Rule 2",
           "assertion": "Rule 2, Paulo 2026-11-02: the new theme stays. A row that only describes how something looked in 1.5 (color, font, cursor, decoration) is closed by the new theme. Anything that changes what the user can do stays a real row.\nOld: Setter.Value = 12\nNew: Short tooltips and Help \u003E What do I do first? replace StepBody paragraphs.",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -2602,7 +2606,7 @@
           "kind": "ruling",
           "target": "Rule 1",
           "assertion": "Rule 1, Paulo 2026-11-02: when the old fact still reaches the user in the new wording, the new wording is accepted, for labels, tooltips, Help and messages. Reviewer samples the rows it closes. Rows where the fact is not shown stay open.\nOld: Choose the SEPro identification file (.sepr2). The identified peptides are taken from this file.\nNew: Choose the SEPro identification package for these RAW acquisitions.",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -2625,7 +2629,7 @@
           "kind": "ruling",
           "target": "Rule 2",
           "assertion": "Rule 2, Paulo 2026-11-02: the new theme stays. A row that only describes how something looked in 1.5 (color, font, cursor, decoration) is closed by the new theme. Anything that changes what the user can do stays a real row.\nOld: Setter.Value = 228\nNew: Named Fluent buttons, including ButtonHomeBuild (New from database), replace fixed-width StepCard tiles.",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -2648,7 +2652,7 @@
           "kind": "ruling",
           "target": "Rule 1",
           "assertion": "Rule 1, Paulo 2026-11-02: when the old fact still reaches the user in the new wording, the new wording is accepted, for labels, tooltips, Help and messages. Reviewer samples the rows it closes. Rows where the fact is not shown stay open.\nOld: \u0022Choose the FASTA to remove redundant sequences from\u0022\nNew: Choose the protein database",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -2671,7 +2675,7 @@
           "kind": "ruling",
           "target": "Rule 2",
           "assertion": "Rule 2, Paulo 2026-11-02: the new theme stays. A row that only describes how something looked in 1.5 (color, font, cursor, decoration) is closed by the new theme. Anything that changes what the user can do stays a real row.\nOld: Setter.Value = {StaticResource PanelMidBrush}\nNew: Named Fluent buttons, including ButtonHomeBuild (New from database), replace fixed-width StepCard tiles.",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -2694,7 +2698,7 @@
           "kind": "ruling",
           "target": "Rule 1",
           "assertion": "Rule 1, Paulo 2026-11-02: when the old fact still reaches the user in the new wording, the new wording is accepted, for labels, tooltips, Help and messages. Reviewer samples the rows it closes. Rows where the fact is not shown stay open.\nOld: or Hide Contaminants checkboxes, so hiding rows for display never silently drops a\nNew: subgroup\u0022 behaviour. The scope follows the SEARCH TEXT only, not the Hide decoys or Hide contaminants checkboxes, so hiding rows for display never silently drops a",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -2717,7 +2721,7 @@
           "kind": "ruling",
           "target": "Rule 1",
           "assertion": "Rule 1, Paulo 2026-11-02: when the old fact still reaches the user in the new wording, the new wording is accepted, for labels, tooltips, Help and messages. Reviewer samples the rows it closes. Rows where the fact is not shown stay open.\nOld: ready for a slide. Only the PNG you name is written; the project is not changed.\nNew: Saves this sweep chart as a PNG, 1920 by 1080 pixels on a light background, ready for a slide. Only the PNG you name is written; the project is not changed.",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -2740,7 +2744,7 @@
           "kind": "ruling",
           "target": "Rule 3",
           "assertion": "Rule 3, Paulo 2026-11-02: where the screen still exists, the current screen name replaces Layer N and the rest of the fact stays. Where the old text points to a retired screen, that clause goes. Each row must still show the rest of its fact reaches the user, or it stays open.\nOld: A de novo sequence has no protein attached to it. Layer 4 asks whether it looks\nNew: A de novo sequence has no protein attached. Standalone homology asks whether it looks",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -2763,7 +2767,7 @@
           "kind": "ruling",
           "target": "Rule 2",
           "assertion": "Rule 2, Paulo 2026-11-02: the new theme stays. A row that only describes how something looked in 1.5 (color, font, cursor, decoration) is closed by the new theme. Anything that changes what the user can do stays a real row.\nOld: Setter.Value = {StaticResource KeyboardFocusVisual}\nNew: Themes/Controls.xaml and native .NET 10 Fluent styles replace the old application style. Exact replacement of this property is not proved.",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -2786,7 +2790,7 @@
           "kind": "ruling",
           "target": "Rule 1",
           "assertion": "Rule 1, Paulo 2026-11-02: when the old fact still reaches the user in the new wording, the new wording is accepted, for labels, tooltips, Help and messages. Reviewer samples the rows it closes. Rows where the fact is not shown stay open.\nOld: Union: PEAKS de novo all \u002B DeepNovo\nNew: PEAKS de novo all \u002B DeepNovo",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -2809,7 +2813,7 @@
           "kind": "ruling",
           "target": "Rule 1",
           "assertion": "Rule 1, Paulo 2026-11-02: when the old fact still reaches the user in the new wording, the new wording is accepted, for labels, tooltips, Help and messages. Reviewer samples the rows it closes. Rows where the fact is not shown stay open.\nOld: No quantitation loaded\nNew: No PatternLab project loaded",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -2832,7 +2836,7 @@
           "kind": "ruling",
           "target": "Rule 1",
           "assertion": "Rule 1, Paulo 2026-11-02: when the old fact still reaches the user in the new wording, the new wording is accepted, for labels, tooltips, Help and messages. Reviewer samples the rows it closes. Rows where the fact is not shown stay open.\nOld: The locked family number, as in the User ID column. Automatic reclustering never \nNew: The locked User ID. Automatic reclustering never merges it while this lock exists.",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -2855,7 +2859,7 @@
           "kind": "ruling",
           "target": "Rule 1",
           "assertion": "Rule 1, Paulo 2026-11-02: when the old fact still reaches the user in the new wording, the new wording is accepted, for labels, tooltips, Help and messages. Reviewer samples the rows it closes. Rows where the fact is not shown stay open.\nOld: FamilyQuant \u00B7 Spectrum comparison table\nNew: FamilyQuant: Spectrum comparison table",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -2878,7 +2882,7 @@
           "kind": "ruling",
           "target": "Rule 2",
           "assertion": "Rule 2, Paulo 2026-11-02: the new theme stays. A row that only describes how something looked in 1.5 (color, font, cursor, decoration) is closed by the new theme. Anything that changes what the user can do stays a real row.\nOld: Setter.Value = 7,1\nNew: no current equivalent",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -2901,7 +2905,7 @@
           "kind": "ruling",
           "target": "Rule 2",
           "assertion": "Rule 2, Paulo 2026-11-02: the new theme stays. A row that only describes how something looked in 1.5 (color, font, cursor, decoration) is closed by the new theme. Anything that changes what the user can do stays a real row.\nOld: Setter.Value = {StaticResource TextOnDarkBrush}\nNew: Named action labels in Home and the navigation rail replace StepTitle text.",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -2924,7 +2928,7 @@
           "kind": "ruling",
           "target": "Rule 2",
           "assertion": "Rule 2, Paulo 2026-11-02: the new theme stays. A row that only describes how something looked in 1.5 (color, font, cursor, decoration) is closed by the new theme. Anything that changes what the user can do stays a real row.\nOld: Setter.Value = Center\nNew: no current equivalent",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -2947,7 +2951,7 @@
           "kind": "ruling",
           "target": "Rule 1",
           "assertion": "Rule 1, Paulo 2026-11-02: when the old fact still reaches the user in the new wording, the new wording is accepted, for labels, tooltips, Help and messages. Reviewer samples the rows it closes. Rows where the fact is not shown stay open.\nOld: Exclude words:\nNew: Exclude words",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -2970,7 +2974,7 @@
           "kind": "ruling",
           "target": "Rule 1",
           "assertion": "Rule 1, Paulo 2026-11-02: when the old fact still reaches the user in the new wording, the new wording is accepted, for labels, tooltips, Help and messages. Reviewer samples the rows it closes. Rows where the fact is not shown stay open.\nOld: The domains on this list, most proteins first. Choosing one adds it to the box on the left.\nNew: The domains on this list, most proteins first. Choosing one adds its name to the box and resets this list.",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -2993,7 +2997,7 @@
           "kind": "ruling",
           "target": "Rule 1",
           "assertion": "Rule 1, Paulo 2026-11-02: when the old fact still reaches the user in the new wording, the new wording is accepted, for labels, tooltips, Help and messages. Reviewer samples the rows it closes. Rows where the fact is not shown stay open.\nOld: Type or paste the .fcf file\u0027s full path. It is only read when you press Search.\nNew: Type or paste the .fqproj or .fcf file\u0027s full path. It is only read when you press Search.",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -3016,7 +3020,7 @@
           "kind": "ruling",
           "target": "Rule 1",
           "assertion": "Rule 1, Paulo 2026-11-02: when the old fact still reaches the user in the new wording, the new wording is accepted, for labels, tooltips, Help and messages. Reviewer samples the rows it closes. Rows where the fact is not shown stay open.\nOld: Divides by every quantified peptide, each counted once.\nNew: Divides by all quantified peptides, each counted once.",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -3039,7 +3043,7 @@
           "kind": "ruling",
           "target": "Rule 1",
           "assertion": "Rule 1, Paulo 2026-11-02: when the old fact still reaches the user in the new wording, the new wording is accepted, for labels, tooltips, Help and messages. Reviewer samples the rows it closes. Rows where the fact is not shown stay open.\nOld: 5. Export to CSV, and/or File -\u003E Reanotate Sepro to stamp the family numbers back\nNew: 4. In Quantitation, choose Shared peptides for either source. Share of applies to    Full XIC immediately; PatternLab share of needs Recalculate for the .plp column. 5. File \u003E Export writes CSV; Analysis \u003E Reannotate SEPro stamps the family numbers back",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -3062,7 +3066,7 @@
           "kind": "ruling",
           "target": "Rule 1",
           "assertion": "Rule 1, Paulo 2026-11-02: when the old fact still reaches the user in the new wording, the new wording is accepted, for labels, tooltips, Help and messages. Reviewer samples the rows it closes. Rows where the fact is not shown stay open.\nOld: Fetch Domains\nNew: Fetch evidence",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -3085,7 +3089,7 @@
           "kind": "ruling",
           "target": "Rule 1",
           "assertion": "Rule 1, Paulo 2026-11-02: when the old fact still reaches the user in the new wording, the new wording is accepted, for labels, tooltips, Help and messages. Reviewer samples the rows it closes. Rows where the fact is not shown stay open.\nOld: fusing is invisible to this measurement.\nNew: Each point is one USEARCH run. The floor line marks the loosest identity at which no family mixed a target with a decoy: below it, alignments are no better than noise. It is a floor and not an optimum, because two unrelated target families fusing is invisible to this measurement.",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -3108,7 +3112,7 @@
           "kind": "ruling",
           "target": "Rule 1",
           "assertion": "Rule 1, Paulo 2026-11-02: when the old fact still reaches the user in the new wording, the new wording is accepted, for labels, tooltips, Help and messages. Reviewer samples the rows it closes. Rows where the fact is not shown stay open.\nOld: in the file, with the UniProt release. They fill the Domains column, the Search box\nNew: Fetch evidence asks UniProt for protein evidence, including Pfam domains, family, keyword and tissue annotations, plus reviewed references for the families found. The operation publishes the completed evidence and panel together; saving keeps them in the file with their release for offline review. Pfam domains fill the Domains column; the Search box",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -3131,7 +3135,7 @@
           "kind": "ruling",
           "target": "Rule 1",
           "assertion": "Rule 1, Paulo 2026-11-02: when the old fact still reaches the user in the new wording, the new wording is accepted, for labels, tooltips, Help and messages. Reviewer samples the rows it closes. Rows where the fact is not shown stay open.\nOld: How the families were built: \u0027none\u0027 means by sequence identity only, a number is the threshold of the last Recluster by Words, and \u0027keywords\u0027 means a keyword merge.\nNew: The last description similarity threshold, or keywords for a keyword grouping. None means only sequence identity was used.",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -3154,7 +3158,7 @@
           "kind": "ruling",
           "target": "Rule 1",
           "assertion": "Rule 1, Paulo 2026-11-02: when the old fact still reaches the user in the new wording, the new wording is accepted, for labels, tooltips, Help and messages. Reviewer samples the rows it closes. Rows where the fact is not shown stay open.\nOld: Apply\nNew: Unticks proteins with none of these domains. A protein with no domains stays ticked if it carries a keyword.",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -3177,7 +3181,7 @@
           "kind": "ruling",
           "target": "Rule 1",
           "assertion": "Rule 1, Paulo 2026-11-02: when the old fact still reaches the user in the new wording, the new wording is accepted, for labels, tooltips, Help and messages. Reviewer samples the rows it closes. Rows where the fact is not shown stay open.\nOld: phospholipase inhibitor. It is separate from the Recluster by Words exclude box,\nNew: phospholipase inhibitor. It is separate from the Recluster by words Ignore words box,",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -3200,7 +3204,7 @@
           "kind": "ruling",
           "target": "Rule 1",
           "assertion": "Rule 1, Paulo 2026-11-02: when the old fact still reaches the user in the new wording, the new wording is accepted, for labels, tooltips, Help and messages. Reviewer samples the rows it closes. Rows where the fact is not shown stay open.\nOld: Each point is one USEARCH run. The floor line marks the loosest identity at which \nNew: Each point is one USEARCH run. The floor line marks the loosest identity at which no family mixed a target with a decoy: below it, alignments are no better than noise. It is a floor and not an optimum, because two unrelated target families fusing is invisible to this measurement.",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -3223,7 +3227,7 @@
           "kind": "ruling",
           "target": "Rule 2",
           "assertion": "Rule 2, Paulo 2026-11-02: the new theme stays. A row that only describes how something looked in 1.5 (color, font, cursor, decoration) is closed by the new theme. Anything that changes what the user can do stays a real row.\nOld: Setter.Value = {StaticResource KeyboardFocusVisual}\nNew: Themes/Controls.xaml and native .NET 10 Fluent styles replace the old application style. Exact replacement of this property is not proved.",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -3246,7 +3250,7 @@
           "kind": "ruling",
           "target": "Rule 2",
           "assertion": "Rule 2, Paulo 2026-11-02: the new theme stays. A row that only describes how something looked in 1.5 (color, font, cursor, decoration) is closed by the new theme. Anything that changes what the user can do stays a real row.\nOld: Style.Key = StepTitle\nNew: Named action labels in Home and the navigation rail replace StepTitle text.",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -3269,7 +3273,7 @@
           "kind": "ruling",
           "target": "Rule 1",
           "assertion": "Rule 1, Paulo 2026-11-02: when the old fact still reaches the user in the new wording, the new wording is accepted, for labels, tooltips, Help and messages. Reviewer samples the rows it closes. Rows where the fact is not shown stay open.\nOld: Unticks the rows selected in the table. Click a heading to sort, then Shift\u002Bclick to select many.\nNew: Unticks selected rows. Click a heading to sort, then Shift\u002Bclick to select many.",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -3292,7 +3296,7 @@
           "kind": "ruling",
           "target": "Rule 1",
           "assertion": "Rule 1, Paulo 2026-11-02: when the old fact still reaches the user in the new wording, the new wording is accepted, for labels, tooltips, Help and messages. Reviewer samples the rows it closes. Rows where the fact is not shown stay open.\nOld: De novo export root (optional)\nNew: De novo folder (optional)",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -3315,7 +3319,7 @@
           "kind": "ruling",
           "target": "Rule 1",
           "assertion": "Rule 1, Paulo 2026-11-02: when the old fact still reaches the user in the new wording, the new wording is accepted, for labels, tooltips, Help and messages. Reviewer samples the rows it closes. Rows where the fact is not shown stay open.\nOld: No domains in this file yet: press Fetch Domains in the main window.\nNew: No domains in this file yet: press Fetch evidence in the main window.",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -3338,7 +3342,7 @@
           "kind": "ruling",
           "target": "Rule 1",
           "assertion": "Rule 1, Paulo 2026-11-02: when the old fact still reaches the user in the new wording, the new wording is accepted, for labels, tooltips, Help and messages. Reviewer samples the rows it closes. Rows where the fact is not shown stay open.\nOld: \uD83D\uDCBE Export assignments CSV\nNew: Homology assignments (CSV)",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -3361,7 +3365,7 @@
           "kind": "ruling",
           "target": "Rule 1",
           "assertion": "Rule 1, Paulo 2026-11-02: when the old fact still reaches the user in the new wording, the new wording is accepted, for labels, tooltips, Help and messages. Reviewer samples the rows it closes. Rows where the fact is not shown stay open.\nOld:                  written back by Reanotate Sepro.\nNew:                  written back by Analysis \u003E Reannotate SEPro.",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -3384,7 +3388,7 @@
           "kind": "ruling",
           "target": "Rule 1",
           "assertion": "Rule 1, Paulo 2026-11-02: when the old fact still reaches the user in the new wording, the new wording is accepted, for labels, tooltips, Help and messages. Reviewer samples the rows it closes. Rows where the fact is not shown stay open.\nOld: Save the project as a FamilyQuant project\nNew: Save project as",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -3407,7 +3411,7 @@
           "kind": "ruling",
           "target": "Rule 3",
           "assertion": "Rule 3, Paulo 2026-11-02: where the screen still exists, the current screen name replaces Layer N and the rest of the fact stays. Where the old text points to a retired screen, that clause goes. Each row must still show the rest of its fact reaches the user, or it stays open.\nOld: only as a diagnostic, and it is deliberately kept out of the chart in Layer 5.\nNew: only as a diagnostic in the legacy three-way comparison described below.",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -3430,7 +3434,7 @@
           "kind": "ruling",
           "target": "Rule 1",
           "assertion": "Rule 1, Paulo 2026-11-02: when the old fact still reaches the user in the new wording, the new wording is accepted, for labels, tooltips, Help and messages. Reviewer samples the rows it closes. Rows where the fact is not shown stay open.\nOld: Nothing was saved: there are no families on screen to save.\n\n\nNew: Nothing was saved: there are no families on screen to save.\n\nNext step: open a Family Cluster File with File \u003E Open, or build one with File \u003E New from database.",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -3453,7 +3457,7 @@
           "kind": "ruling",
           "target": "Rule 1",
           "assertion": "Rule 1, Paulo 2026-11-02: when the old fact still reaches the user in the new wording, the new wording is accepted, for labels, tooltips, Help and messages. Reviewer samples the rows it closes. Rows where the fact is not shown stay open.\nOld: Create Super Cluster\nNew: Group by keywords",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -3476,7 +3480,7 @@
           "kind": "ruling",
           "target": "Rule 3",
           "assertion": "Rule 3, Paulo 2026-11-02: where the screen still exists, the current screen name replaces Layer N and the rest of the fact stays. Where the old text points to a retired screen, that clause goes. Each row must still show the rest of its fact reaches the user, or it stays open.\nOld: Layer 2 first joins by normalized acquisition file and MS2 scan. It then requires\nNew: Reconcile first joins by normalized acquisition file and MS2 scan. It then requires",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -3499,7 +3503,7 @@
           "kind": "ruling",
           "target": "Rule 2",
           "assertion": "Rule 2, Paulo 2026-11-02: the new theme stays. A row that only describes how something looked in 1.5 (color, font, cursor, decoration) is closed by the new theme. Anything that changes what the user can do stays a real row.\nOld: Setter.Value = Wrap\nNew: Short tooltips and Help \u003E What do I do first? replace StepBody paragraphs.",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -3522,7 +3526,7 @@
           "kind": "ruling",
           "target": "Rule 2",
           "assertion": "Rule 2, Paulo 2026-11-02: the new theme stays. A row that only describes how something looked in 1.5 (color, font, cursor, decoration) is closed by the new theme. Anything that changes what the user can do stays a real row.\nOld: Setter.Value = 0,0,10,0\nNew: New from database, Families, Quantify and Results replace decorative step numbers. Workflow Help still provides the numbered workflow.",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -3545,7 +3549,7 @@
           "kind": "ruling",
           "target": "Rule 1",
           "assertion": "Rule 1, Paulo 2026-11-02: when the old fact still reaches the user in the new wording, the new wording is accepted, for labels, tooltips, Help and messages. Reviewer samples the rows it closes. Rows where the fact is not shown stay open.\nOld: \u0022Choose the protein database to group into families\u0022\nNew: Choose the protein database",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -3568,7 +3572,7 @@
           "kind": "ruling",
           "target": "Rule 1",
           "assertion": "Rule 1, Paulo 2026-11-02: when the old fact still reaches the user in the new wording, the new wording is accepted, for labels, tooltips, Help and messages. Reviewer samples the rows it closes. Rows where the fact is not shown stay open.\nOld: No project is loaded, so the program cannot yet say which denominators this\nNew: No PatternLab project is loaded, so the program cannot yet say which .plp denominators are available. Use Load PatternLab project: unsupported modes are greyed out,",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -3591,7 +3595,7 @@
           "kind": "ruling",
           "target": "Rule 1",
           "assertion": "Rule 1, Paulo 2026-11-02: when the old fact still reaches the user in the new wording, the new wording is accepted, for labels, tooltips, Help and messages. Reviewer samples the rows it closes. Rows where the fact is not shown stay open.\nOld: package.\n\n\nNew: Nothing was reannotated: there are no families on screen to write into a SEPro package.\n\nNext step: open a Family Cluster File with File \u003E Open first.",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -3614,7 +3618,7 @@
           "kind": "ruling",
           "target": "Rule 1",
           "assertion": "Rule 1, Paulo 2026-11-02: when the old fact still reaches the user in the new wording, the new wording is accepted, for labels, tooltips, Help and messages. Reviewer samples the rows it closes. Rows where the fact is not shown stay open.\nOld: One bar per run, plus one for the runs together. The bar is the run\u0027s WHOLE ion\nNew: The legacy comparison has a bar per run and one pooled bar. It uses the WHOLE ion",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -3637,7 +3641,7 @@
           "kind": "ruling",
           "target": "Rule 2",
           "assertion": "Rule 2, Paulo 2026-11-02: the new theme stays. A row that only describes how something looked in 1.5 (color, font, cursor, decoration) is closed by the new theme. Anything that changes what the user can do stays a real row.\nOld: Setter.Value = White\nNew: Themes/Controls.xaml and native .NET 10 Fluent styles replace the old application style. Exact replacement of this property is not proved.",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -3660,7 +3664,7 @@
           "kind": "ruling",
           "target": "Rule 1",
           "assertion": "Rule 1, Paulo 2026-11-02: when the old fact still reaches the user in the new wording, the new wording is accepted, for labels, tooltips, Help and messages. Reviewer samples the rows it closes. Rows where the fact is not shown stay open.\nOld: and stores it in that project, and the Analytics screen then reads the recovery\nNew: .fqproj, written by File \u003E Save. Beyond the share above, Analysis \u003E Compute full XIC opens Quantify, which measures each peptide\u0027s full isotope envelope straight from the RAW and stores it in that project, and the Results screen then reads the recovery",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -3683,7 +3687,7 @@
           "kind": "ruling",
           "target": "Rule 2",
           "assertion": "Rule 2, Paulo 2026-11-02: the new theme stays. A row that only describes how something looked in 1.5 (color, font, cursor, decoration) is closed by the new theme. Anything that changes what the user can do stays a real row.\nOld: Setter.Value = Center\nNew: no current equivalent",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -3706,7 +3710,7 @@
           "kind": "ruling",
           "target": "Rule 1",
           "assertion": "Rule 1, Paulo 2026-11-02: when the old fact still reaches the user in the new wording, the new wording is accepted, for labels, tooltips, Help and messages. Reviewer samples the rows it closes. Rows where the fact is not shown stay open.\nOld: Undoes the last curation change, such as a merge, a User ID edit or a lock removal, up to 50 steps in this session. Disabled until there is a change to undo.\nNew: Undoes the last curation change, such as a grouping, family number edit or lock removal, up to 50 steps in this session. Disabled until there is a change to undo.",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -3729,7 +3733,7 @@
           "kind": "ruling",
           "target": "Rule 1",
           "assertion": "Rule 1, Paulo 2026-11-02: when the old fact still reaches the user in the new wording, the new wording is accepted, for labels, tooltips, Help and messages. Reviewer samples the rows it closes. Rows where the fact is not shown stay open.\nOld: Tick all\nNew: Ticks every protein on the list again, undoing your unticks here.",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -3752,7 +3756,7 @@
           "kind": "ruling",
           "target": "Rule 1",
           "assertion": "Rule 1, Paulo 2026-11-02: when the old fact still reaches the user in the new wording, the new wording is accepted, for labels, tooltips, Help and messages. Reviewer samples the rows it closes. Rows where the fact is not shown stay open.\nOld: No full XIC computed for this project yet: run File \u00B7 Compute / update full XIC to fill the Full XIC share column.\nNew: No full XIC is attached. Open Quantify to compute it for the current families.",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -3775,7 +3779,7 @@
           "kind": "ruling",
           "target": "Rule 1",
           "assertion": "Rule 1, Paulo 2026-11-02: when the old fact still reaches the user in the new wording, the new wording is accepted, for labels, tooltips, Help and messages. Reviewer samples the rows it closes. Rows where the fact is not shown stay open.\nOld: One row per protein, the ones with no keyword first. Click a heading to sort. Right-click to copy \nNew: One row per protein, the ones with no keyword first. Click a heading to sort; right-click for the UniProt code, description or page; Ctrl\u002BC copies the clicked column.",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -3798,7 +3802,7 @@
           "kind": "ruling",
           "target": "Rule 1",
           "assertion": "Rule 1, Paulo 2026-11-02: when the old fact still reaches the user in the new wording, the new wording is accepted, for labels, tooltips, Help and messages. Reviewer samples the rows it closes. Rows where the fact is not shown stay open.\nOld: no family mixed a target with a decoy: below it, alignments are no better than \nNew: Each point is one USEARCH run. The floor line marks the loosest identity at which no family mixed a target with a decoy: below it, alignments are no better than noise. It is a floor and not an optimum, because two unrelated target families fusing is invisible to this measurement.",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -3821,7 +3825,7 @@
           "kind": "ruling",
           "target": "Rule 1",
           "assertion": "Rule 1, Paulo 2026-11-02: when the old fact still reaches the user in the new wording, the new wording is accepted, for labels, tooltips, Help and messages. Reviewer samples the rows it closes. Rows where the fact is not shown stay open.\nOld: \u21B6 Undo\nNew: Undo",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -3844,7 +3848,7 @@
           "kind": "ruling",
           "target": "Rule 1",
           "assertion": "Rule 1, Paulo 2026-11-02: when the old fact still reaches the user in the new wording, the new wording is accepted, for labels, tooltips, Help and messages. Reviewer samples the rows it closes. Rows where the fact is not shown stay open.\nOld: noise. It is a floor and not an optimum, because two unrelated target families \nNew: Each point is one USEARCH run. The floor line marks the loosest identity at which no family mixed a target with a decoy: below it, alignments are no better than noise. It is a floor and not an optimum, because two unrelated target families fusing is invisible to this measurement.",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -3867,7 +3871,7 @@
           "kind": "ruling",
           "target": "Rule 2",
           "assertion": "Rule 2, Paulo 2026-11-02: the new theme stays. A row that only describes how something looked in 1.5 (color, font, cursor, decoration) is closed by the new theme. Anything that changes what the user can do stays a real row.\nOld: Setter.Value = {StaticResource KeyboardFocusVisual}\nNew: Themes/Controls.xaml and native .NET 10 Fluent styles replace the old application style. Exact replacement of this property is not proved.",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -3890,7 +3894,7 @@
           "kind": "ruling",
           "target": "Rule 1",
           "assertion": "Rule 1, Paulo 2026-11-02: when the old fact still reaches the user in the new wording, the new wording is accepted, for labels, tooltips, Help and messages. Reviewer samples the rows it closes. Rows where the fact is not shown stay open.\nOld: Super cluster preview\nNew: Review grouping",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -3913,7 +3917,7 @@
           "kind": "ruling",
           "target": "Rule 1",
           "assertion": "Rule 1, Paulo 2026-11-02: when the old fact still reaches the user in the new wording, the new wording is accepted, for labels, tooltips, Help and messages. Reviewer samples the rows it closes. Rows where the fact is not shown stay open.\nOld: update full XIC first.\nNew: There is no spectrum comparison table to show yet.\n\nNext step: load a .fqproj that contains full quantitation, or run Analysis \u003E Compute full XIC first.",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -3936,7 +3940,7 @@
           "kind": "ruling",
           "target": "Rule 1",
           "assertion": "Rule 1, Paulo 2026-11-02: when the old fact still reaches the user in the new wording, the new wording is accepted, for labels, tooltips, Help and messages. Reviewer samples the rows it closes. Rows where the fact is not shown stay open.\nOld: Closes this window and changes nothing in the file you have open.\nNew: Closes the review and changes nothing in the open document. No undo step is added.",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -3959,7 +3963,7 @@
           "kind": "ruling",
           "target": "Rule 1",
           "assertion": "Rule 1, Paulo 2026-11-02: when the old fact still reaches the user in the new wording, the new wording is accepted, for labels, tooltips, Help and messages. Reviewer samples the rows it closes. Rows where the fact is not shown stay open.\nOld: Next step: open a Family Cluster File with File \u00B7 Load Family Cluster File first.\nNew: Nothing was reannotated: there are no families on screen to write into a SEPro package.\n\nNext step: open a Family Cluster File with File \u003E Open first.",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -3982,7 +3986,7 @@
           "kind": "ruling",
           "target": "Rule 1",
           "assertion": "Rule 1, Paulo 2026-11-02: when the old fact still reaches the user in the new wording, the new wording is accepted, for labels, tooltips, Help and messages. Reviewer samples the rows it closes. Rows where the fact is not shown stay open.\nOld: the lock stays, and applies again if a family takes that number.\nNew: A merge can retire a family number; its lock stays and applies if another family adopts that number.",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -4005,7 +4009,7 @@
           "kind": "ruling",
           "target": "Rule 1",
           "assertion": "Rule 1, Paulo 2026-11-02: when the old fact still reaches the user in the new wording, the new wording is accepted, for labels, tooltips, Help and messages. Reviewer samples the rows it closes. Rows where the fact is not shown stay open.\nOld: a UniProt code or a description, or to open the UniProt page; Ctrl\u002BC copies the column you clicked.\nNew: One row per protein, the ones with no keyword first. Click a heading to sort; right-click for the UniProt code, description or page; Ctrl\u002BC copies the clicked column.",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -4028,7 +4032,7 @@
           "kind": "ruling",
           "target": "Rule 1",
           "assertion": "Rule 1, Paulo 2026-11-02: when the old fact still reaches the user in the new wording, the new wording is accepted, for labels, tooltips, Help and messages. Reviewer samples the rows it closes. Rows where the fact is not shown stay open.\nOld: Choose the folder with the .raw files. The chosen folder is written into the box beside this button.\nNew: Choose the folder containing the RAW acquisitions.",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -4051,7 +4055,7 @@
           "kind": "ruling",
           "target": "Rule 2",
           "assertion": "Rule 2, Paulo 2026-11-02: the new theme stays. A row that only describes how something looked in 1.5 (color, font, cursor, decoration) is closed by the new theme. Anything that changes what the user can do stays a real row.\nOld: Style.Key = LayerTitle\nNew: no current equivalent",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -4074,7 +4078,7 @@
           "kind": "ruling",
           "target": "Rule 2",
           "assertion": "Rule 2, Paulo 2026-11-02: the new theme stays. A row that only describes how something looked in 1.5 (color, font, cursor, decoration) is closed by the new theme. Anything that changes what the user can do stays a real row.\nOld: Setter.Value = Hand\nNew: Themes/Controls.xaml and native .NET 10 Fluent styles replace the old application style. Exact replacement of this property is not proved.",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -4097,7 +4101,7 @@
           "kind": "ruling",
           "target": "Rule 3",
           "assertion": "Rule 3, Paulo 2026-11-02: where the screen still exists, the current screen name replaces Layer N and the rest of the fact stays. Where the old text points to a retired screen, that clause goes. Each row must still show the rest of its fact reaches the user, or it stays open.\nOld: 4. Layer 3: choose what the percentage is OF, choose what to do with shared\nNew: 4. In Quantitation, choose Shared peptides for either source. Share of applies to    Full XIC immediately; PatternLab share of needs Recalculate for the .plp column. 5. File \u003E Export writes CSV; Analysis \u003E Reannotate SEPro stamps the family numbers back",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -4120,7 +4124,7 @@
           "kind": "ruling",
           "target": "Rule 1",
           "assertion": "Rule 1, Paulo 2026-11-02: when the old fact still reaches the user in the new wording, the new wording is accepted, for labels, tooltips, Help and messages. Reviewer samples the rows it closes. Rows where the fact is not shown stay open.\nOld: Writes the visible rows, with the table\u0027s columns, to a CSV file; shares are fractions from 0 to 1 with a dot as decimal point. Disabled while every row is hidden by a filter.\nNew: Export exactly the visible protein rows, with invariant decimal fractions. Disabled while every row is hidden by a filter.",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -4143,7 +4147,7 @@
           "kind": "ruling",
           "target": "Rule 1",
           "assertion": "Rule 1, Paulo 2026-11-02: when the old fact still reaches the user in the new wording, the new wording is accepted, for labels, tooltips, Help and messages. Reviewer samples the rows it closes. Rows where the fact is not shown stay open.\nOld: Saves this sweep chart as a PNG, 1920 by 1080 pixels on a light background, \nNew: Saves this sweep chart as a PNG, 1920 by 1080 pixels on a light background, ready for a slide. Only the PNG you name is written; the project is not changed.",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -4166,7 +4170,7 @@
           "kind": "ruling",
           "target": "Rule 1",
           "assertion": "Rule 1, Paulo 2026-11-02: when the old fact still reaches the user in the new wording, the new wording is accepted, for labels, tooltips, Help and messages. Reviewer samples the rows it closes. Rows where the fact is not shown stay open.\nOld: Exhaustive clustering (close the gaps the fast pass leaves)\nNew: Exhaustive second pass",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -4189,7 +4193,7 @@
           "kind": "ruling",
           "target": "Rule 1",
           "assertion": "Rule 1, Paulo 2026-11-02: when the old fact still reaches the user in the new wording, the new wording is accepted, for labels, tooltips, Help and messages. Reviewer samples the rows it closes. Rows where the fact is not shown stay open.\nOld: Saves a 1920 x 1080 PNG and its CSV: one dot per row where both PEAKS and DeepNovo passed their filters. Blue circles are sequence matches; red diamonds are mismatches.\nNew: Save a 1920 x 1080 PNG and its CSV: one dot per row where both PEAKS and DeepNovo passed their filters. Blue circles are sequence matches; red diamonds are mismatches.",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -4212,7 +4216,7 @@
           "kind": "ruling",
           "target": "Rule 1",
           "assertion": "Rule 1, Paulo 2026-11-02: when the old fact still reaches the user in the new wording, the new wording is accepted, for labels, tooltips, Help and messages. Reviewer samples the rows it closes. Rows where the fact is not shown stay open.\nOld: The Pfam domains of this protein, from UniProt. Empty when the file has none yet, or when the protein is too short for Pfam.\nNew: The Pfam domains from UniProt. Empty when there are none yet or the protein is too short for Pfam.",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -4235,7 +4239,7 @@
           "kind": "ruling",
           "target": "Rule 1",
           "assertion": "Rule 1, Paulo 2026-11-02: when the old fact still reaches the user in the new wording, the new wording is accepted, for labels, tooltips, Help and messages. Reviewer samples the rows it closes. Rows where the fact is not shown stay open.\nOld: estimate: identified peptides measured in the RAW files plus an estimate for de novo \nNew: This family\u0027s share of the full XIC (Analysis \u003E Compute full XIC), the primary estimate: identified peptides measured in the RAW files plus an estimate for de novo peptides. Choose its denominator with Share of under Full XIC in Quantitation.",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -4258,7 +4262,7 @@
           "kind": "ruling",
           "target": "Rule 1",
           "assertion": "Rule 1, Paulo 2026-11-02: when the old fact still reaches the user in the new wording, the new wording is accepted, for labels, tooltips, Help and messages. Reviewer samples the rows it closes. Rows where the fact is not shown stay open.\nOld: Hide Reverse (decoys)\nNew: Hide decoys",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -4281,7 +4285,7 @@
           "kind": "ruling",
           "target": "Rule 1",
           "assertion": "Rule 1, Paulo 2026-11-02: when the old fact still reaches the user in the new wording, the new wording is accepted, for labels, tooltips, Help and messages. Reviewer samples the rows it closes. Rows where the fact is not shown stay open.\nOld: Shows every protein that would join, each with a tick, before anything changes, then gathers the ticked ones into one family, and Undo steps it back. Disabled until you type a keyword in the box to the left.\nNew: Enter keywords, exclusions and the match rule in the grouping review. Review the protein ticks before applying; Undo reverses the grouping.",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -4304,7 +4308,7 @@
           "kind": "ruling",
           "target": "Rule 1",
           "assertion": "Rule 1, Paulo 2026-11-02: when the old fact still reaches the user in the new wording, the new wording is accepted, for labels, tooltips, Help and messages. Reviewer samples the rows it closes. Rows where the fact is not shown stay open.\nOld: 0.###\nNew: 0.###",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -4327,7 +4331,7 @@
           "kind": "ruling",
           "target": "Rule 1",
           "assertion": "Rule 1, Paulo 2026-11-02: when the old fact still reaches the user in the new wording, the new wording is accepted, for labels, tooltips, Help and messages. Reviewer samples the rows it closes. Rows where the fact is not shown stay open.\nOld: merges it while the lock is here.\nNew: The locked User ID. Automatic reclustering never merges it while this lock exists.",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -4350,7 +4354,7 @@
           "kind": "ruling",
           "target": "Rule 1",
           "assertion": "Rule 1, Paulo 2026-11-02: when the old fact still reaches the user in the new wording, the new wording is accepted, for labels, tooltips, Help and messages. Reviewer samples the rows it closes. Rows where the fact is not shown stay open.\nOld: Keep domains:\nNew: Keep domains",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -4373,7 +4377,7 @@
           "kind": "ruling",
           "target": "Rule 2",
           "assertion": "Rule 2, Paulo 2026-11-02: the new theme stays. A row that only describes how something looked in 1.5 (color, font, cursor, decoration) is closed by the new theme. Anything that changes what the user can do stays a real row.\nOld: Style.Key = LayerBadgeText\nNew: no current equivalent",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -4396,7 +4400,7 @@
           "kind": "ruling",
           "target": "Rule 2",
           "assertion": "Rule 2, Paulo 2026-11-02: the new theme stays. A row that only describes how something looked in 1.5 (color, font, cursor, decoration) is closed by the new theme. Anything that changes what the user can do stays a real row.\nOld: Setter.Value = Bold\nNew: New from database, Families, Quantify and Results replace decorative step numbers. Workflow Help still provides the numbered workflow.",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -4419,7 +4423,7 @@
           "kind": "ruling",
           "target": "Rule 2",
           "assertion": "Rule 2, Paulo 2026-11-02: the new theme stays. A row that only describes how something looked in 1.5 (color, font, cursor, decoration) is closed by the new theme. Anything that changes what the user can do stays a real row.\nOld: Setter.Value = Bold\nNew: no current equivalent",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -4442,7 +4446,7 @@
           "kind": "ruling",
           "target": "Rule 2",
           "assertion": "Rule 2, Paulo 2026-11-02: the new theme stays. A row that only describes how something looked in 1.5 (color, font, cursor, decoration) is closed by the new theme. Anything that changes what the user can do stays a real row.\nOld: Setter.Value = Center\nNew: Named action labels in Home and the navigation rail replace StepTitle text.",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -4465,7 +4469,7 @@
           "kind": "ruling",
           "target": "Rule 1",
           "assertion": "Rule 1, Paulo 2026-11-02: when the old fact still reaches the user in the new wording, the new wording is accepted, for labels, tooltips, Help and messages. Reviewer samples the rows it closes. Rows where the fact is not shown stay open.\nOld: What the loaded project says about its own quantitation: the divisor it used, and which reporting modes it can therefore support.\nNew: The loaded project\u0027s recorded denominator and available reporting modes.",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -4488,7 +4492,7 @@
           "kind": "ruling",
           "target": "Rule 1",
           "assertion": "Rule 1, Paulo 2026-11-02: when the old fact still reaches the user in the new wording, the new wording is accepted, for labels, tooltips, Help and messages. Reviewer samples the rows it closes. Rows where the fact is not shown stay open.\nOld: The folder with the .raw files of these runs. Runs are matched to files by name, so the order of the files does not matter.\nNew: Acquisition folder whose file names are matched to the identified runs.",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -4511,7 +4515,7 @@
           "kind": "ruling",
           "target": "Rule 1",
           "assertion": "Rule 1, Paulo 2026-11-02: when the old fact still reaches the user in the new wording, the new wording is accepted, for labels, tooltips, Help and messages. Reviewer samples the rows it closes. Rows where the fact is not shown stay open.\nOld: The minimum PEAKS ALC (average local confidence) a call needs to be kept. Used only when a PEAKS source is selected.\nNew: Minimum average local confidence for PEAKS calls, from 0 to 100.",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -4534,7 +4538,7 @@
           "kind": "ruling",
           "target": "Rule 1",
           "assertion": "Rule 1, Paulo 2026-11-02: when the old fact still reaches the user in the new wording, the new wording is accepted, for labels, tooltips, Help and messages. Reviewer samples the rows it closes. Rows where the fact is not shown stay open.\nOld: Shows where Save a copy wrote the CSV, or why it could not.\nNew: Where the export was saved, or why it could not be written.",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -4557,7 +4561,7 @@
           "kind": "ruling",
           "target": "Rule 1",
           "assertion": "Rule 1, Paulo 2026-11-02: when the old fact still reaches the user in the new wording, the new wording is accepted, for labels, tooltips, Help and messages. Reviewer samples the rows it closes. Rows where the fact is not shown stay open.\nOld: Recluster by Words\nNew: Recluster by words",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -4580,7 +4584,7 @@
           "kind": "ruling",
           "target": "Rule 1",
           "assertion": "Rule 1, Paulo 2026-11-02: when the old fact still reaches the user in the new wording, the new wording is accepted, for labels, tooltips, Help and messages. Reviewer samples the rows it closes. Rows where the fact is not shown stay open.\nOld: Which source actually answered is printed above the table WORD FOR WORD,\nNew: The legacy branch note records which source actually answered WORD FOR WORD,",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -4603,7 +4607,7 @@
           "kind": "ruling",
           "target": "Rule 1",
           "assertion": "Rule 1, Paulo 2026-11-02: when the old fact still reaches the user in the new wording, the new wording is accepted, for labels, tooltips, Help and messages. Reviewer samples the rows it closes. Rows where the fact is not shown stay open.\nOld: Left: families among the rows shown. Right: families in the whole file. They differ while a filter, such as Hide Reverse, is on.\nNew: Visible families and families in the file. Display filters never change the saved grouping or percentages.",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -4626,7 +4630,7 @@
           "kind": "ruling",
           "target": "Rule 1",
           "assertion": "Rule 1, Paulo 2026-11-02: when the old fact still reaches the user in the new wording, the new wording is accepted, for labels, tooltips, Help and messages. Reviewer samples the rows it closes. Rows where the fact is not shown stay open.\nOld: Untick selected\nNew: Unticks selected rows. Click a heading to sort, then Shift\u002Bclick to select many.",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -4649,7 +4653,7 @@
           "kind": "ruling",
           "target": "Rule 1",
           "assertion": "Rule 1, Paulo 2026-11-02: when the old fact still reaches the user in the new wording, the new wording is accepted, for labels, tooltips, Help and messages. Reviewer samples the rows it closes. Rows where the fact is not shown stay open.\nOld: Tick selected\nNew: Ticks selected rows without changing any other row.",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -4672,7 +4676,7 @@
           "kind": "ruling",
           "target": "Rule 1",
           "assertion": "Rule 1, Paulo 2026-11-02: when the old fact still reaches the user in the new wording, the new wording is accepted, for labels, tooltips, Help and messages. Reviewer samples the rows it closes. Rows where the fact is not shown stay open.\nOld: reloading the file. It reverses a Recluster by Words, a Create Super Cluster, a\nNew: Undo steps back through the changes you make in Families, one at a time, without reloading the file. It reverses Recluster by words, Group by keywords, evidence grouping, a family name or checkbox edit, a batch edit, a User ID edit or lock removal, putting the changed family numbers, annotations and",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -4695,7 +4699,7 @@
           "kind": "ruling",
           "target": "Rule 1",
           "assertion": "Rule 1, Paulo 2026-11-02: when the old fact still reaches the user in the new wording, the new wording is accepted, for labels, tooltips, Help and messages. Reviewer samples the rows it closes. Rows where the fact is not shown stay open.\nOld: A family number for every selected row; leave it empty to keep their numbers. An existing number joins that family, an unused one makes a new family. The family they join, and any family they leave that still has members, is locked against reclustering.\nNew: Give selected proteins this family number, or leave it empty to keep their numbers. Joining and surviving source families are locked.",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -4718,7 +4722,7 @@
           "kind": "ruling",
           "target": "Rule 1",
           "assertion": "Rule 1, Paulo 2026-11-02: when the old fact still reaches the user in the new wording, the new wording is accepted, for labels, tooltips, Help and messages. Reviewer samples the rows it closes. Rows where the fact is not shown stay open.\nOld: Unticks proteins with none of these domains. A protein with no domains at all stays ticked if it carries a keyword.\nNew: Unticks proteins with none of these domains. A protein with no domains stays ticked if it carries a keyword.",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -4741,7 +4745,7 @@
           "kind": "ruling",
           "target": "Rule 1",
           "assertion": "Rule 1, Paulo 2026-11-02: when the old fact still reaches the user in the new wording, the new wording is accepted, for labels, tooltips, Help and messages. Reviewer samples the rows it closes. Rows where the fact is not shown stay open.\nOld: Largest fraction of families allowed to mix target and decoy sequences. Default 0; leave it there, because any higher value lets alignments that are only noise merge families.\nNew: Target-decoy mixing fraction accepted by the lowest-identity search. Default zero; a nonzero allowance can admit noisy joins.",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -4764,7 +4768,7 @@
           "kind": "ruling",
           "target": "Rule 2",
           "assertion": "Rule 2, Paulo 2026-11-02: the new theme stays. A row that only describes how something looked in 1.5 (color, font, cursor, decoration) is closed by the new theme. Anything that changes what the user can do stays a real row.\nOld: Setter.Value = 10,0,0,0\nNew: no current equivalent",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -4787,7 +4791,7 @@
           "kind": "ruling",
           "target": "Rule 1",
           "assertion": "Rule 1, Paulo 2026-11-02: when the old fact still reaches the user in the new wording, the new wording is accepted, for labels, tooltips, Help and messages. Reviewer samples the rows it closes. Rows where the fact is not shown stay open.\nOld: are reported in the yellow line at the bottom, and the previous value or the\nNew: are reported in the status line at the bottom, and the previous value or the",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -4810,7 +4814,7 @@
           "kind": "ruling",
           "target": "Rule 2",
           "assertion": "Rule 2, Paulo 2026-11-02: the new theme stays. A row that only describes how something looked in 1.5 (color, font, cursor, decoration) is closed by the new theme. Anything that changes what the user can do stays a real row.\nOld: Setter.Value = White\nNew: no current equivalent",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -4833,7 +4837,7 @@
           "kind": "ruling",
           "target": "Rule 1",
           "assertion": "Rule 1, Paulo 2026-11-02: when the old fact still reaches the user in the new wording, the new wording is accepted, for labels, tooltips, Help and messages. Reviewer samples the rows it closes. Rows where the fact is not shown stay open.\nOld:                  in the Full XIC composition CSV, the Analytics chart and the\nNew:                  in the Full XIC composition CSV, the Results chart and the",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -4856,7 +4860,7 @@
           "kind": "ruling",
           "target": "Rule 1",
           "assertion": "Rule 1, Paulo 2026-11-02: when the old fact still reaches the user in the new wording, the new wording is accepted, for labels, tooltips, Help and messages. Reviewer samples the rows it closes. Rows where the fact is not shown stay open.\nOld: Text for the User Annotation column of every selected row, for example: cellular proteins. Leave it empty to keep their annotations; annotations are exported with the CSV.\nNew: Annotate the selected proteins, or leave this empty to keep their annotations. The text is saved and exported with the file.",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -4879,7 +4883,7 @@
           "kind": "ruling",
           "target": "Rule 1",
           "assertion": "Rule 1, Paulo 2026-11-02: when the old fact still reaches the user in the new wording, the new wording is accepted, for labels, tooltips, Help and messages. Reviewer samples the rows it closes. Rows where the fact is not shown stay open.\nOld: The SEPro result file (.sepr2) with the identified peptides of these runs. Choose the one made from the same runs as the RAW files.\nNew: Trusted SEPro package containing the identifications from these RAW acquisitions.",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -4902,7 +4906,7 @@
           "kind": "ruling",
           "target": "Rule 1",
           "assertion": "Rule 1, Paulo 2026-11-02: when the old fact still reaches the user in the new wording, the new wording is accepted, for labels, tooltips, Help and messages. Reviewer samples the rows it closes. Rows where the fact is not shown stay open.\nOld: This protein carries no keyword: it is here because another protein of its family does. \nNew: This protein carries no keyword: another protein in its family does. Untick it to keep it in its current family without affecting the others.",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -4925,7 +4929,7 @@
           "kind": "ruling",
           "target": "Rule 2",
           "assertion": "Rule 2, Paulo 2026-11-02: the new theme stays. A row that only describes how something looked in 1.5 (color, font, cursor, decoration) is closed by the new theme. Anything that changes what the user can do stays a real row.\nOld: Setter.Value = Arrow\nNew: Themes/Controls.xaml and native .NET 10 Fluent styles replace the old application style. Exact replacement of this property is not proved.",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -4948,7 +4952,7 @@
           "kind": "ruling",
           "target": "Rule 1",
           "assertion": "Rule 1, Paulo 2026-11-02: when the old fact still reaches the user in the new wording, the new wording is accepted, for labels, tooltips, Help and messages. Reviewer samples the rows it closes. Rows where the fact is not shown stay open.\nOld: User ID number you changed, or a lock you removed, putting the family numbers and\nNew: Undo steps back through the changes you make in Families, one at a time, without reloading the file. It reverses Recluster by words, Group by keywords, evidence grouping, a family name or checkbox edit, a batch edit, a User ID edit or lock removal, putting the changed family numbers, annotations and",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -4971,7 +4975,7 @@
           "kind": "ruling",
           "target": "Rule 1",
           "assertion": "Rule 1, Paulo 2026-11-02: when the old fact still reaches the user in the new wording, the new wording is accepted, for labels, tooltips, Help and messages. Reviewer samples the rows it closes. Rows where the fact is not shown stay open.\nOld: Saves a 1920 x 1080 PNG and its CSV: one dot per row where both PEAKS and DeepNovo passed their filters. Blue circles are sequence matches; red diamonds are mismatches.\nNew: Save a 1920 x 1080 PNG and its CSV: one dot per row where both PEAKS and DeepNovo passed their filters. Blue circles are sequence matches; red diamonds are mismatches.",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -4994,7 +4998,7 @@
           "kind": "ruling",
           "target": "Rule 1",
           "assertion": "Rule 1, Paulo 2026-11-02: when the old fact still reaches the user in the new wording, the new wording is accepted, for labels, tooltips, Help and messages. Reviewer samples the rows it closes. Rows where the fact is not shown stay open.\nOld: Union: PEAKS de novo only \u002B DeepNovo\nNew: PEAKS de novo only \u002B DeepNovo",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -5017,7 +5021,7 @@
           "kind": "ruling",
           "target": "Rule 1",
           "assertion": "Rule 1, Paulo 2026-11-02: when the old fact still reaches the user in the new wording, the new wording is accepted, for labels, tooltips, Help and messages. Reviewer samples the rows it closes. Rows where the fact is not shown stay open.\nOld: \u0022The main quantity used in the plots. It can differ from the M\u002B0 XIC; the next column \u0022\nNew: The main plot quantity, called PrimaryQuantValue in the CSV. It can differ from M\u002B0 XIC; the next column says how it was obtained.",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -5040,7 +5044,7 @@
           "kind": "ruling",
           "target": "Rule 2",
           "assertion": "Rule 2, Paulo 2026-11-02: the new theme stays. A row that only describes how something looked in 1.5 (color, font, cursor, decoration) is closed by the new theme. Anything that changes what the user can do stays a real row.\nOld: Setter.Value = {StaticResource GoldBrush}\nNew: New from database, Families, Quantify and Results replace decorative step numbers. Workflow Help still provides the numbered workflow.",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -5063,7 +5067,7 @@
           "kind": "ruling",
           "target": "Rule 1",
           "assertion": "Rule 1, Paulo 2026-11-02: when the old fact still reaches the user in the new wording, the new wording is accepted, for labels, tooltips, Help and messages. Reviewer samples the rows it closes. Rows where the fact is not shown stay open.\nOld: MenuItemWhereAmI.ToolTip = Lists the order of work, from a protein database to an exported table, and what each step needs. The de novo review at the end is optional.\nNew: Lists the complete workflow and what each step needs. De novo review is optional.",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -5086,7 +5090,7 @@
           "kind": "ruling",
           "target": "Rule 1",
           "assertion": "Rule 1, Paulo 2026-11-02: when the old fact still reaches the user in the new wording, the new wording is accepted, for labels, tooltips, Help and messages. Reviewer samples the rows it closes. Rows where the fact is not shown stay open.\nOld: everywhere it appears. Re-exporting from XQuant turns it into a recorded fact.\nNew: everywhere it appears. Re-exporting from XQuant turns it into a recorded fact.",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],
@@ -5109,7 +5113,7 @@
           "kind": "ruling",
           "target": "Rule 1",
           "assertion": "Rule 1, Paulo 2026-11-02: when the old fact still reaches the user in the new wording, the new wording is accepted, for labels, tooltips, Help and messages. Reviewer samples the rows it closes. Rows where the fact is not shown stay open.\nOld: There is no spectrum comparison table to show yet.\n\n\nNew: There is no spectrum comparison table to show yet.\n\nNext step: load a .fqproj that contains full quantitation, or run Analysis \u003E Compute full XIC first.",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\paulo-rulings\\ruling-packet.json",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-131714-opus\\paulo-rulings\\ruling-packet.json",
           "inspectedBy": "Paulo"
         }
       ],

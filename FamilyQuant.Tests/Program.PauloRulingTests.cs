@@ -55,7 +55,14 @@ internal static partial class Program
             && LedgerPauloRulings.ReadGroupRulings(groupEmpty).Count == 0 && LedgerPauloRulings.ReadGroupRulings(groupHeader).Count == 0);
         bool badRefused = false;
         try { LedgerPauloRulings.ReadGroupRulings(groupBad); } catch (InvalidDataException) { badRefused = true; }
-        Check("a group ruling must be fragment or superseded", badRefused);
+        Check("a group ruling must be fragment, format or superseded", badRefused);
+        string groupFormat = Path.Combine(groupFolder, "format.tsv");
+        File.WriteAllText(groupFormat, "row_id\tgroup\tnote\n" + row.Id + "\tformat\tN0 counts keep digit grouping.\n");
+        Check("a format group ruling is read with its note", LedgerPauloRulings.ReadGroupRulings(groupFormat) is { Count: 1 } formatRead
+            && formatRead[row.Id] == new LedgerPauloRulings.GroupRuling("format", "N0 counts keep digit grouping."));
+        Check("the pinned rules record Paulo's rule 4 with its fragment, format and superseded groups", File.ReadAllLines(LedgerPauloRulings.RulesPath)
+            .Any(line => line.StartsWith("Rule 4, Paulo 2026-11-02:", StringComparison.Ordinal) && line.Contains("Fragment:", StringComparison.Ordinal)
+                && line.Contains("Format:", StringComparison.Ordinal) && line.Contains("Superseded:", StringComparison.Ordinal)));
         var unverified = LedgerPauloRulings.ReadInputs(LedgerPauloRulings.InputPath).Select(candidate => (Input: candidate,
                 Row: inventory.Observations.FirstOrDefault(observation => observation.Id == candidate.Id)))
             .First(pair => pair.Row != null && Decide(pair.Input, pair.Row).Reason == "Independent fact-check verdict is missing.");
@@ -67,18 +74,33 @@ internal static partial class Program
         var asSuperseded = LedgerPauloRulings.Evaluate(unverified.Input, unverified.Row!, LedgerRulingLiveText.Find, facts, superseded);
         Check("a superseded group ruling carries its note in the reason",
             asSuperseded.Closed && asSuperseded.Rule == "4" && asSuperseded.Reason == "Paulo group ruling: superseded, Build help replaces it.");
+        var format = new Dictionary<string, LedgerPauloRulings.GroupRuling>(StringComparer.Ordinal) { [unverified.Input.Id] = new("format", "N0 counts keep digit grouping.") };
+        var asFormat = LedgerPauloRulings.Evaluate(unverified.Input, unverified.Row!, LedgerRulingLiveText.Find, facts, format);
+        Check("a format group ruling closes an open wording row under rule 4 with the same-precision reason and its note",
+            asFormat.Closed && asFormat.Rule == "4" && asFormat.Reason == "Paulo group ruling: format, same precision today, N0 counts keep digit grouping.");
+        var bareFormat = LedgerPauloRulings.Evaluate(unverified.Input, unverified.Row!, LedgerRulingLiveText.Find, facts,
+            new Dictionary<string, LedgerPauloRulings.GroupRuling>(StringComparer.Ordinal) { [unverified.Input.Id] = new("format", "") });
+        Check("a format group ruling without a note gives the bare format reason",
+            bareFormat.Closed && bareFormat.Rule == "4" && bareFormat.Reason == "Paulo group ruling: format, same precision today");
         Check("without a group ruling the same row stays open", !Decide(unverified.Input, unverified.Row!).Closed);
         var keptGroups = new Dictionary<string, LedgerPauloRulings.GroupRuling>(StringComparer.Ordinal) { [row.Id] = new("fragment", "") };
         var stillOne = LedgerPauloRulings.Evaluate(input, row, LedgerRulingLiveText.Find, facts, keptGroups);
         Check("a kept-verdict row that closes under rule 1 stays rule 1 when also group-ruled", stillOne.Closed && stillOne.Rule == "1");
-        foreach (string kind in new[] { "format/export", "export/storage fact" })
-            Check("a group ruling cannot close a " + kind + " row", !LedgerPauloRulings.Evaluate(unverified.Input, unverified.Row! with { Kind = kind },
-                LedgerRulingLiveText.Find, facts, fragment).Closed);
+        var stillOneFormat = LedgerPauloRulings.Evaluate(input, row, LedgerRulingLiveText.Find, facts,
+            new Dictionary<string, LedgerPauloRulings.GroupRuling>(StringComparer.Ordinal) { [row.Id] = new("format", "Synthetic.") });
+        Check("a kept-verdict row that closes under rule 1 stays rule 1 when also ruled format", stillOneFormat.Closed && stillOneFormat.Rule == "1");
+        foreach (var (group, rulings) in new[] { ("fragment", fragment), ("format", format) })
+            foreach (string kind in new[] { "format/export", "export/storage fact" })
+                Check("a " + group + " group ruling cannot close a " + kind + " row", !LedgerPauloRulings.Evaluate(unverified.Input, unverified.Row! with { Kind = kind },
+                    LedgerRulingLiveText.Find, facts, rulings).Closed);
         var drop = inventory.Observations.First(FeatureLedger.IsApprovedDrop);
         var dropInput = new LedgerPauloRulings.Input(3, "synthetic guard", drop.Id, drop.Detail, drop.Detail, "Synthetic DROP fixture.");
         var dropDecision = LedgerPauloRulings.Evaluate(dropInput, drop, LedgerRulingLiveText.Find, facts,
             new Dictionary<string, LedgerPauloRulings.GroupRuling>(StringComparer.Ordinal) { [drop.Id] = new("superseded", "Synthetic.") });
         Check("an approved DROP stays a DROP under a group ruling", !dropDecision.Closed && dropDecision.Reason == "Approved DROP is not a wording ruling.");
+        var dropFormat = LedgerPauloRulings.Evaluate(dropInput, drop, LedgerRulingLiveText.Find, facts,
+            new Dictionary<string, LedgerPauloRulings.GroupRuling>(StringComparer.Ordinal) { [drop.Id] = new("format", "Synthetic.") });
+        Check("an approved DROP stays a DROP under a format group ruling", !dropFormat.Closed && dropFormat.Reason == "Approved DROP is not a wording ruling.");
         foreach (string kind in new[] { "format/export", "export/storage fact", "handler", "handler definition", "control", "shortcut" })
             Check("ruling cannot replace " + kind + " execution", !Decide(input, row with { Kind = kind }).Closed);
         // Frozen App.xaml:46 sets only Foreground. The first Style also has a
