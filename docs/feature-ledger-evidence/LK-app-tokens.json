@@ -5,49 +5,49 @@
   "runs": [
     {
       "id": "LK-app-tokens",
-      "command": "C:\\FamilyQuant-gate\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --prove-look-app-tokens D:/FamilyQuant-data/out-shell/N3/source D:/FamilyQuant-data/out-refresh\\20261102-115935-FamilyQuant-gate\\look-app-tokens \u00222026-11-02 12:01:09 -0800\u0022",
-      "executedAt": "2026-11-02 12:01:09 -0800",
-      "commit": "a25db98253f90ce9a5ff050166e9562a6f7c5ede",
+      "command": "C:\\FamilyQuant-gate\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --prove-look-app-tokens D:/FamilyQuant-data/out-shell/N3/source D:/FamilyQuant-data/out-refresh\\20261102-123305-FamilyQuant-gate\\look-app-tokens \u00222026-11-02 12:33:53 -0800\u0022",
+      "executedAt": "2026-11-02 12:33:53 -0800",
+      "commit": "f4dc6b32acc4c159f4c7317b5e7a8cb7dd400d1c",
       "artifacts": [
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-115935-FamilyQuant-gate\\look-app-tokens\\proofs.log",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-123305-FamilyQuant-gate\\look-app-tokens\\proofs.log",
           "sha256": "7DC737998EA03AF50FDED4D221B58602DBA02A004FA8910811432B8A0D10AC7A"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-115935-FamilyQuant-gate\\look-app-tokens\\resolved-tokens.json",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-123305-FamilyQuant-gate\\look-app-tokens\\resolved-tokens.json",
           "sha256": "ADBDF085B65DA5ADC631221D688AB9B7A06CC7CBB80EB01A9B53D8251052F516"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-115935-FamilyQuant-gate\\look-app-tokens\\executed\\docs_LOOK-APP-TOKEN-ROLES.json",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-123305-FamilyQuant-gate\\look-app-tokens\\executed\\docs_LOOK-APP-TOKEN-ROLES.json",
           "sha256": "19CE407D2047023655ECE64FFFD0A85D0DF9A9E962352600F49A678F94CDF5D0"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-115935-FamilyQuant-gate\\look-app-tokens\\executed\\FamilyQuant_Themes_Tokens.xaml",
-          "sha256": "F0034F7A77C15E7FB8A21C5C4F169322922C7860418D7D3C1ED1CEA7D7BBFD7D"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-123305-FamilyQuant-gate\\look-app-tokens\\executed\\FamilyQuant_Themes_Tokens.xaml",
+          "sha256": "9A2C4D68A50492789FD4F3187C8E6E46133806AA54B521FE343CCDD2B32C6FE4"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-115935-FamilyQuant-gate\\look-app-tokens\\executed\\FamilyQuant_Themes_ThemeManager.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-123305-FamilyQuant-gate\\look-app-tokens\\executed\\FamilyQuant_Themes_ThemeManager.cs",
           "sha256": "9711D576445774BFBFE872F8A813AA6A3EEF7962A3A849ED9113D6718C0D298E"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-115935-FamilyQuant-gate\\look-app-tokens\\executed\\FamilyQuant_HomeControl.xaml",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-123305-FamilyQuant-gate\\look-app-tokens\\executed\\FamilyQuant_HomeControl.xaml",
           "sha256": "418C26820B6D043B994FB3730DB44E933A93BD5023B9C25D29A69953F45A3E6D"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-115935-FamilyQuant-gate\\look-app-tokens\\executed\\FamilyQuant.Tests_Program.LookAppTokens.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-123305-FamilyQuant-gate\\look-app-tokens\\executed\\FamilyQuant.Tests_Program.LookAppTokens.cs",
           "sha256": "20A28A4A9D24A8241D6F5C79436E6E5235730A1D32D616CEA4523301868F8F8D"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-115935-FamilyQuant-gate\\look-app-tokens\\executed\\FamilyQuant.Tests.dll",
-          "sha256": "5379B0EB15114003E972590D829015479CAC50655995ABBCA8A0BBD788DBC3DA"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-123305-FamilyQuant-gate\\look-app-tokens\\executed\\FamilyQuant.Tests.dll",
+          "sha256": "8E553822814AE1B1F76A5F46D532D95C0C938EB96408A3C611FB8376A1136DEF"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-115935-FamilyQuant-gate\\look-app-tokens\\executed\\FamilyQuant2.dll",
-          "sha256": "2501D288DBFCA0B6ADB8005208AF8BB2FC37D15A712DCFAAF74F952F2422436A"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-123305-FamilyQuant-gate\\look-app-tokens\\executed\\FamilyQuant2.dll",
+          "sha256": "E19C7BC2C7AB6A65D911A0918A17C9EACB7E65C506D0930D9144470494640DED"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-115935-FamilyQuant-gate\\look-app-tokens\\executed\\FamilyQuant.Core.dll",
-          "sha256": "09729858CD31AAB222029CF7EF95279F0A617B5AC50413D5BA00B65DE160E095"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-123305-FamilyQuant-gate\\look-app-tokens\\executed\\FamilyQuant.Core.dll",
+          "sha256": "52B70916AF4F6DB9AE6C949F0184D99A9F3E4196741F550AA568B3407E47B21F"
         }
       ],
       "workingDirectory": "C:\\FamilyQuant-gate"
@@ -60,7 +60,7 @@
         {
           "path": "FamilyQuant/Themes/Tokens.xaml",
           "symbol": "CanvasBrush",
-          "sha256": "F0034F7A77C15E7FB8A21C5C4F169322922C7860418D7D3C1ED1CEA7D7BBFD7D"
+          "sha256": "9A2C4D68A50492789FD4F3187C8E6E46133806AA54B521FE343CCDD2B32C6FE4"
         },
         {
           "path": "FamilyQuant/Themes/ThemeManager.cs",
@@ -79,7 +79,7 @@
           "kind": "test",
           "target": "LookAppTokenCommand",
           "assertion": "App token role FQ15-B1182A35C62C / Dark: PanelDarkBrush -\u003E CanvasBrush",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-115935-FamilyQuant-gate\\look-app-tokens\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-123305-FamilyQuant-gate\\look-app-tokens\\proofs.log",
           "inspectedBy": ""
         },
         {
@@ -87,7 +87,7 @@
           "kind": "test",
           "target": "LookAppTokenCommand",
           "assertion": "App token role FQ15-B1182A35C62C / Light: PanelDarkBrush -\u003E CanvasBrush",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-115935-FamilyQuant-gate\\look-app-tokens\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-123305-FamilyQuant-gate\\look-app-tokens\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -101,7 +101,7 @@
         {
           "path": "FamilyQuant/Themes/Tokens.xaml",
           "symbol": "SurfaceBrush",
-          "sha256": "F0034F7A77C15E7FB8A21C5C4F169322922C7860418D7D3C1ED1CEA7D7BBFD7D"
+          "sha256": "9A2C4D68A50492789FD4F3187C8E6E46133806AA54B521FE343CCDD2B32C6FE4"
         },
         {
           "path": "FamilyQuant/Themes/ThemeManager.cs",
@@ -120,7 +120,7 @@
           "kind": "test",
           "target": "LookAppTokenCommand",
           "assertion": "App token role FQ15-4CC490537F8C / Dark: PanelMidBrush -\u003E SurfaceBrush",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-115935-FamilyQuant-gate\\look-app-tokens\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-123305-FamilyQuant-gate\\look-app-tokens\\proofs.log",
           "inspectedBy": ""
         },
         {
@@ -128,7 +128,7 @@
           "kind": "test",
           "target": "LookAppTokenCommand",
           "assertion": "App token role FQ15-4CC490537F8C / Light: PanelMidBrush -\u003E SurfaceBrush",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-115935-FamilyQuant-gate\\look-app-tokens\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-123305-FamilyQuant-gate\\look-app-tokens\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -142,7 +142,7 @@
         {
           "path": "FamilyQuant/Themes/Tokens.xaml",
           "symbol": "SubtleBrush",
-          "sha256": "F0034F7A77C15E7FB8A21C5C4F169322922C7860418D7D3C1ED1CEA7D7BBFD7D"
+          "sha256": "9A2C4D68A50492789FD4F3187C8E6E46133806AA54B521FE343CCDD2B32C6FE4"
         },
         {
           "path": "FamilyQuant/Themes/ThemeManager.cs",
@@ -161,7 +161,7 @@
           "kind": "test",
           "target": "LookAppTokenCommand",
           "assertion": "App token role FQ15-EFD6FE0DBCF2 / Dark: PanelLightBrush -\u003E SubtleBrush",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-115935-FamilyQuant-gate\\look-app-tokens\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-123305-FamilyQuant-gate\\look-app-tokens\\proofs.log",
           "inspectedBy": ""
         },
         {
@@ -169,7 +169,7 @@
           "kind": "test",
           "target": "LookAppTokenCommand",
           "assertion": "App token role FQ15-EFD6FE0DBCF2 / Light: PanelLightBrush -\u003E SubtleBrush",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-115935-FamilyQuant-gate\\look-app-tokens\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-123305-FamilyQuant-gate\\look-app-tokens\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -183,7 +183,7 @@
         {
           "path": "FamilyQuant/Themes/Tokens.xaml",
           "symbol": "AccentBrush",
-          "sha256": "F0034F7A77C15E7FB8A21C5C4F169322922C7860418D7D3C1ED1CEA7D7BBFD7D"
+          "sha256": "9A2C4D68A50492789FD4F3187C8E6E46133806AA54B521FE343CCDD2B32C6FE4"
         },
         {
           "path": "FamilyQuant/Themes/ThemeManager.cs",
@@ -202,7 +202,7 @@
           "kind": "test",
           "target": "LookAppTokenCommand",
           "assertion": "App token role FQ15-42AEF08F0BA6 / Dark: AccentBrush -\u003E AccentBrush",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-115935-FamilyQuant-gate\\look-app-tokens\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-123305-FamilyQuant-gate\\look-app-tokens\\proofs.log",
           "inspectedBy": ""
         },
         {
@@ -210,7 +210,7 @@
           "kind": "test",
           "target": "LookAppTokenCommand",
           "assertion": "App token role FQ15-42AEF08F0BA6 / Light: AccentBrush -\u003E AccentBrush",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-115935-FamilyQuant-gate\\look-app-tokens\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-123305-FamilyQuant-gate\\look-app-tokens\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -224,7 +224,7 @@
         {
           "path": "FamilyQuant/Themes/Tokens.xaml",
           "symbol": "TextBrush",
-          "sha256": "F0034F7A77C15E7FB8A21C5C4F169322922C7860418D7D3C1ED1CEA7D7BBFD7D"
+          "sha256": "9A2C4D68A50492789FD4F3187C8E6E46133806AA54B521FE343CCDD2B32C6FE4"
         },
         {
           "path": "FamilyQuant/Themes/ThemeManager.cs",
@@ -243,7 +243,7 @@
           "kind": "test",
           "target": "LookAppTokenCommand",
           "assertion": "App token role FQ15-FBFD00584F87 / Dark: TextOnDarkBrush -\u003E TextBrush",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-115935-FamilyQuant-gate\\look-app-tokens\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-123305-FamilyQuant-gate\\look-app-tokens\\proofs.log",
           "inspectedBy": ""
         },
         {
@@ -251,7 +251,7 @@
           "kind": "test",
           "target": "LookAppTokenCommand",
           "assertion": "App token role FQ15-FBFD00584F87 / Light: TextOnDarkBrush -\u003E TextBrush",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-115935-FamilyQuant-gate\\look-app-tokens\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-123305-FamilyQuant-gate\\look-app-tokens\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -265,7 +265,7 @@
         {
           "path": "FamilyQuant/Themes/Tokens.xaml",
           "symbol": "MutedBrush",
-          "sha256": "F0034F7A77C15E7FB8A21C5C4F169322922C7860418D7D3C1ED1CEA7D7BBFD7D"
+          "sha256": "9A2C4D68A50492789FD4F3187C8E6E46133806AA54B521FE343CCDD2B32C6FE4"
         },
         {
           "path": "FamilyQuant/Themes/ThemeManager.cs",
@@ -284,7 +284,7 @@
           "kind": "test",
           "target": "LookAppTokenCommand",
           "assertion": "App token role FQ15-47695503C8C9 / Dark: MutedTextBrush -\u003E MutedBrush",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-115935-FamilyQuant-gate\\look-app-tokens\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-123305-FamilyQuant-gate\\look-app-tokens\\proofs.log",
           "inspectedBy": ""
         },
         {
@@ -292,7 +292,7 @@
           "kind": "test",
           "target": "LookAppTokenCommand",
           "assertion": "App token role FQ15-47695503C8C9 / Light: MutedTextBrush -\u003E MutedBrush",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-115935-FamilyQuant-gate\\look-app-tokens\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-123305-FamilyQuant-gate\\look-app-tokens\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -306,7 +306,7 @@
         {
           "path": "FamilyQuant/Themes/Tokens.xaml",
           "symbol": "AccentBrush",
-          "sha256": "F0034F7A77C15E7FB8A21C5C4F169322922C7860418D7D3C1ED1CEA7D7BBFD7D"
+          "sha256": "9A2C4D68A50492789FD4F3187C8E6E46133806AA54B521FE343CCDD2B32C6FE4"
         },
         {
           "path": "FamilyQuant/Themes/ThemeManager.cs",
