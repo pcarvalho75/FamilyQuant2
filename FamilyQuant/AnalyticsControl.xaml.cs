@@ -26,16 +26,20 @@ public partial class AnalyticsControl : UserControl
         ViewModel = viewModel;
         InitializeComponent();
         DataContext = ViewModel;
+        DatabaseGapHost.Content = ViewModel.DatabaseGap.HasData ? new DatabaseGapControl(ViewModel.DatabaseGap)
+            : new TextBlock { Text = ViewModel.DatabaseGap.EmptyMessage, TextWrapping = TextWrapping.Wrap };
         foreach (ComboBoxItem item in ComboBoxExportKind.Items)
             if (string.Equals(item.Tag as string, ViewModel.ExportKind.ToString(), StringComparison.Ordinal)) ComboBoxExportKind.SelectedItem = item;
         TextBlockDetails.Text = ViewModel.Details;
-        BorderEmpty.Visibility = Data == null ? Visibility.Visible : Visibility.Collapsed;
+        BorderEmpty.Visibility = Data == null && !ViewModel.DatabaseGap.HasData ? Visibility.Visible : Visibility.Collapsed;
         ComboBoxFamilyTopN.IsEnabled = CheckBoxFamilyPercent.IsEnabled = ViewModel.HasData;
         ButtonExport.IsEnabled = ViewModel.CanExport;
+        RefreshExportHint();
         ViewModel.PropertyChanged += (_, e) =>
         {
             TextBlockStatus.Text = ViewModel.Status;
             ButtonExport.IsEnabled = ViewModel.CanExport;
+            RefreshExportHint();
             if (e.PropertyName is nameof(ViewModel.FamilyTopN) or nameof(ViewModel.FamilyAsPercent)) DrawCharts();
         };
         TextBlockStatus.Text = ViewModel.Status;
@@ -64,6 +68,10 @@ public partial class AnalyticsControl : UserControl
         if (ready && Enum.TryParse((ComboBoxExportKind.SelectedItem as ComboBoxItem)?.Tag as string, out ResultsExportKind kind))
             ViewModel.ExportKind = kind;
     }
+    private void RefreshExportHint() => ButtonExport.ToolTip = ViewModel.ExportKind switch {
+        ResultsExportKind.SuggestedAdditions => ViewModel.DatabaseGap.FastaState,
+        ResultsExportKind.DatabaseGap => "Write the stored composition table, every global bucket and its recorded rules.",
+        _ => "Save the selected result in CSV or PNG format with invariant decimals. Figures use 1920 by 1080 pixels in the Light palette." };
     private async void ExportClicked(object sender, RoutedEventArgs e)
     {
         if (!ViewModel.CanExport) return;
@@ -77,10 +85,13 @@ public partial class AnalyticsControl : UserControl
         }
         else
         {
-            var dialog = new SaveFileDialog { Filter = FileDialogFilters.Csv, AddExtension = true,
-                DefaultExt = ".csv", FileName = ViewModel.ExportKind switch {
+            bool fasta = ViewModel.ExportKind == ResultsExportKind.SuggestedAdditions;
+            var dialog = new SaveFileDialog { Filter = fasta ? "FASTA files (*.fasta)|*.fasta|All files (*.*)|*.*" : FileDialogFilters.Csv, AddExtension = true,
+                DefaultExt = fasta ? ".fasta" : ".csv", FileName = ViewModel.ExportKind switch {
                     ResultsExportKind.Summary => "familyquant_analytics_summary.csv",
                     ResultsExportKind.Homology => "FamilyQuant_DeNovo_Homology.csv",
+                    ResultsExportKind.DatabaseGap => "familyquant_database_gap.csv",
+                    ResultsExportKind.SuggestedAdditions => "familyquant_suggested_additions.fasta",
                     _ => "familyquant_analytics_peptides.csv" }, Title = "Export results" };
             path = ShellDialogs.ShowFile(this, "results." + ViewModel.ExportKind, dialog) ? dialog.FileName : null;
         }

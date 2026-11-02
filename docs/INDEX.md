@@ -112,6 +112,8 @@ Invoke each flag with `& $testExe <flag>` after building. Dispatch and arity are
 | `--test-curation-view` | Persistent table, accession/full identifier, hidden defaults and native annotation edit/Undo |
 | `--test-curation-layout` | Retained chrome, tooltips and ancestor-clipping regression |
 | `--test-evidence-coverage-ui [output-dir]` | Recorded query-residue coverage, missing legacy facts, bounded display and native rule line |
+| `--test-database-gap [output-dir]` | Stored Core family parts/global buckets, sparse evidence, exact CSV/FASTA, offline reopen and native Results export routes |
+| `--database-gap-screens <project.fqproj> <fresh-output>` | Read-only native Database gap captures in both themes, stored table CSV, and verified suggested FASTA when available |
 | `--prove-results-interactions <fresh-output> <date-timestamp>` | Native Results controls, displaced handlers, deterministic exports and observation receipts |
 | `--prove-results-members <frozen-root> <fresh-output> <date-timestamp>` | Shared scoped member comparison for assigned Results and quantitation declarations; changed members stay open |
 | `--test-quantitation-panel [output-dir]` | Full XIC first, conditional source options, retained selectors and both-theme native captures |
