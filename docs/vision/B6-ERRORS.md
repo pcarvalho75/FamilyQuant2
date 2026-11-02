@@ -111,3 +111,24 @@ tags too short 8.15%, not found 72.37%; known answers 1,832 right of 1,881 lande
 runs are byte-identical, and against a Compute run with no stored world the quant and spectrum outputs
 are identical and the manifest differs only by the added table. With this sample's own scope the world
 holds 12 families instead of Ana's 40, so families such as the phosphodiesterase are not credited here.
+
+## At the default length 8 (D22, B8a)
+
+The default minimum tag length is now 8. These numbers are program output at 8. Decoys are given over both
+denominators: the unattributed de novo envelope (the residual) and the credited envelope.
+
+- 12-family world. The project was recomputed through Compute as
+  `D:/FamilyQuant-data/out-opus/b10b/computed12/computed.fqproj` (SHA256 0f39525a3b25fc22...). Its stored
+  table credits 20.54% of the residual to a family in scope (55,264,469,830.69 of 269,071,929,058.21).
+  Decoys are 4,615,782.77: 0.0017% of the residual, 0.0084% of the credited. Known answers are 1,902 right
+  of 1,954 landed (97.34%): the table half 935 of 970 (96.39%), the held-out half 967 of 984 (98.27%).
+  Choosing 9 in that project gives the table of the previous section, byte for byte
+  (`--family-world-lengths` with the B6 project as reference: 7 passed, 0 failed; output in
+  `D:/FamilyQuant-data/out-opus/b10b/lengths12`).
+- 40-family world (FQEvidence's `b4-ana-world.fcf`, hash EF95269818318019...). It was fetched for another
+  source database, so the program cannot attach it to this project and no Compute of it exists. The
+  numbers come from the same analysis Compute runs, given the world file (`--family-world-lengths` with
+  the world file: 5 passed, 0 failed; output in `D:/FamilyQuant-data/out-opus/b10b/lengths40`). It credits
+  22.44% of the residual (60,385,069,310.34). Decoys are 5,940,885.19: 0.0022% of the residual, 0.0098% of
+  the credited. Known answers are 1,977 right of 2,042 landed (96.82%): the table half 963 of 1,001
+  (96.20%), the held-out half 1,014 of 1,041 (97.41%).
