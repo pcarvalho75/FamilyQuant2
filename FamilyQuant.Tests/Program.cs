@@ -264,6 +264,7 @@ namespace FamilyQuant.Tests
             CurationOperationTests();
             TableAppearanceTests();
             EvidenceReviewModelTests();
+            EvidenceCoverageUiTests(Path.Combine(workDir, "evidence-coverage-ui"));
             EvidenceTaskScopeTests();
             EvidenceTaskScopeRecipeTests();
             EvidenceTaskScopeWindowTests(Path.Combine(workDir, "task-scope"));
