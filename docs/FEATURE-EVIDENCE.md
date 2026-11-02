@@ -73,6 +73,8 @@ Run the built test executable with these flags and explicit lane-owned outputs:
 | `--ledger-shell-compare <frozen-root> <fresh-output> <date>` | Compare SH/C1 declarations and run native curation interactions; emit separate candidate registers |
 | `--ledger-storage-runtime <frozen-root> <fresh-output> <date> [--negative-control]` | Native schema/header/value and exact refusal checks for remaining X7 observations; [runtime guide](CORE-RUNTIME-LEDGER.md) |
 | `--ledger-xic-runtime <frozen-root> <fresh-output> <date> <stored-project> <validated-cache> [--negative-control]` | Public input refusals, executed source/completion branches and bounded cache replay; [runtime guide](CORE-RUNTIME-LEDGER.md) |
+| `--ledger-secondary-compare <frozen-root> <native-master-audit> <fresh-output> <date> [--negative-control]` | Scoped exact secondary-view declarations for OPEN master IDs; [guide](SECONDARY-LEDGER.md) |
+| `--ledger-secondary-runtime <frozen-root> <native-master-audit> <frozen-app> <fresh-output> <date> [--negative-control]` | Native secondary controls, actions, values and cache contracts; [guide](SECONDARY-LEDGER.md) |
 
 For example, obtain the timestamp with `date '+%F %T %z'` immediately before the proof command.
 Neither the proof runner nor the audit invokes the frozen-source generator.
