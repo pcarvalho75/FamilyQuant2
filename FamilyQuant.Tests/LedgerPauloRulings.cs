@@ -17,14 +17,29 @@ internal static class LedgerPauloRulings
     internal const string Command = "--ledger-apply-rulings";
     internal const string RulesPath = "D:/FamilyQuant-data/reviews/wording-rulings.md";
     internal const string InputPath = "D:/FamilyQuant-data/reviews/wording-for-paulo.tsv";
+    internal const string FactChecksPath = "D:/FamilyQuant-data/reviews/rulings-fact-check.tsv";
     internal const string LeftPath = "D:/FamilyQuant-data/reviews/wording-left-for-paulo.tsv";
     internal const string FrozenRoot = "D:/FamilyQuant-data/out-shell/N3/source";
     internal const string RulesSha256 = "D3C632398BF48334E08AC2FF31879E4D814865BB72D0AEE781E8EF029C70090B";
     internal sealed record Input(int Line, string Lane, string Id, string OldText, string NewText, string Reason);
     internal sealed record Decision(string Id, string Lane, string OldText, string NewText, string Rule, string Reason,
-        string WitnessAssembly = "", string WitnessSymbol = "", string WitnessTextSha256 = "", bool Closed = false);
+        string WitnessAssembly = "", string WitnessSymbol = "", string WitnessTextSha256 = "", bool Closed = false, string FactCheckNote = "");
+    internal sealed record FactCheck(string Verdict, string Note);
     internal sealed record Packet(int SchemaVersion, string Producer, string TsvArtifact, string RulesArtifact,
-        string TsvSha256, string RuleSourceSha256, List<Decision> Decisions);
+        string TsvSha256, string RuleSourceSha256, List<Decision> Decisions, string FactChecksArtifact = "", string FactChecksSha256 = "");
+
+    internal static Dictionary<string, FactCheck> ReadFactChecks(string path)
+    {
+        var records = ParseTsv(File.ReadAllText(path));
+        if (records.Count == 0 || !records[0].Fields.SequenceEqual(new[] { "row_id", "verdict", "note" }))
+            throw new InvalidDataException("Fact-check TSV must use row_id, verdict, note columns.");
+        var result = new Dictionary<string, FactCheck>(StringComparer.Ordinal);
+        foreach (var record in records.Skip(1).Where(record => record.Fields.Any(field => field.Length > 0)))
+            if (record.Fields.Count != 3 || string.IsNullOrWhiteSpace(record.Fields[0]) || record.Fields[1] is not ("kept" or "lost")
+                || !result.TryAdd(record.Fields[0], new(record.Fields[1], record.Fields[2])))
+                throw new InvalidDataException("Malformed, duplicate or unknown fact verdict at TSV line " + record.Line.ToString(CultureInfo.InvariantCulture) + ".");
+        return result;
+    }
 
     internal static string Decode(string value)
     {
@@ -74,9 +89,10 @@ internal static class LedgerPauloRulings
         return result;
     }
 
-    internal static Decision Evaluate(Input input, FeatureLedger.Observation? row, Func<string, LedgerRulingLiveText.Match> live)
+    internal static Decision Evaluate(Input input, FeatureLedger.Observation? row, Func<string, LedgerRulingLiveText.Match> live,
+        IReadOnlyDictionary<string, FactCheck>? factChecks = null)
     {
-        Decision Left(string reason) => new(input.Id, input.Lane, input.OldText, input.NewText, "", reason);
+        Decision Left(string reason, string note = "") => new(input.Id, input.Lane, input.OldText, input.NewText, "", reason, FactCheckNote: note);
         if (row == null) return Left("Unknown or malformed observation ID.");
         if (FeatureLedger.IsApprovedDrop(row)) return Left("Approved DROP is not a wording ruling.");
         if (row.Kind is "export/storage fact" or "format/export") return Left("Export/storage and format/export rows require execution.");
@@ -92,11 +108,14 @@ internal static class LedgerPauloRulings
         if (row.Kind is not ("option/copy" or "tooltip" or "help fact" or "help page" or "code fact")
             && !(row.Kind == "column" && row.Detail.Contains(".Header = ", StringComparison.Ordinal)))
             return Left("Behavior/control/handler/binding row is outside wording rules.");
+        if (factChecks == null || !factChecks.TryGetValue(input.Id, out var fact))
+            return Left("Independent fact-check verdict is missing.");
+        if (fact.Verdict != "kept") return Left("Independent fact check marks the old fact lost.", fact.Note);
         string rule = Regex.IsMatch(input.OldText, @"\bLayer\s+\d+\b", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant) ? "3" : "1";
         var match = live(input.NewText);
         if (!match.Found) return Left("New text is not present in the compiled App/Core or resolved current Help.");
         return new(input.Id, input.Lane, input.OldText, input.NewText, rule, "Recorded Paulo wording ruling; live text witness retained; independent sample required.",
-            match.AssemblyName, match.Symbol, match.TextSha256, true);
+            match.AssemblyName, match.Symbol, match.TextSha256, true, fact.Note);
     }
 
     private static bool OldFactMatches(FeatureLedger.Observation row, string old)

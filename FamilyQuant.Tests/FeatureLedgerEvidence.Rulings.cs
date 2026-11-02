@@ -9,7 +9,8 @@ namespace FamilyQuant.Tests;
 
 internal static partial class FeatureLedgerEvidence
 {
-    private sealed record RulingContext(LedgerPauloRulings.Packet Packet, List<LedgerPauloRulings.Input> Inputs, string[] Rules);
+    private sealed record RulingContext(LedgerPauloRulings.Packet Packet, List<LedgerPauloRulings.Input> Inputs, string[] Rules,
+        Dictionary<string, LedgerPauloRulings.FactCheck> Facts, Dictionary<string, LedgerPauloRulings.FactCheck> CurrentFacts);
 
     private static void ValidateRuling(string root, FeatureLedger.Inventory inventory, Register register, Row row,
         FeatureLedger.Observation? observation, Proof proof, Run run, string full,
@@ -24,20 +25,23 @@ internal static partial class FeatureLedgerEvidence
         {
             var packet = JsonSerializer.Deserialize<LedgerPauloRulings.Packet>(File.ReadAllText(full), JsonOptions)
                 ?? throw new InvalidDataException("Empty ruling decision packet.");
-            if (packet.SchemaVersion != 1 || packet.Producer != LedgerPauloRulings.Command
+            if (packet.SchemaVersion != 2 || packet.Producer != LedgerPauloRulings.Command
                 || packet.RuleSourceSha256 != LedgerPauloRulings.RulesSha256 || packet.Decisions == null
                 || string.IsNullOrWhiteSpace(packet.TsvArtifact) || string.IsNullOrWhiteSpace(packet.RulesArtifact)
+                || string.IsNullOrWhiteSpace(packet.FactChecksArtifact) || string.IsNullOrWhiteSpace(packet.FactChecksSha256)
                 || packet.Decisions.Any(decision => decision == null || decision.OldText == null || decision.NewText == null))
                 throw new InvalidDataException("Ruling packet is not from the recorded command/rules.");
-            string tsv = resolve(packet.TsvArtifact), rules = resolve(packet.RulesArtifact);
+            string tsv = resolve(packet.TsvArtifact), rules = resolve(packet.RulesArtifact), facts = resolve(packet.FactChecksArtifact);
             bool Declared(string path, string sha) => run.Artifacts.Count(artifact => resolve(artifact.Path).Equals(path, StringComparison.OrdinalIgnoreCase)
                 && artifact.Sha256.Equals(sha, StringComparison.OrdinalIgnoreCase)) == 1 && File.Exists(path) && Hash(path) == sha;
-            if (!Declared(tsv, packet.TsvSha256) || !Declared(rules, LedgerPauloRulings.RulesSha256))
-                throw new InvalidDataException("Ruling input/rules are not byte-pinned execution artifacts.");
+            if (!Declared(tsv, packet.TsvSha256) || !Declared(rules, LedgerPauloRulings.RulesSha256) || !Declared(facts, packet.FactChecksSha256))
+                throw new InvalidDataException("Ruling input/rules/fact verdicts are not byte-pinned execution artifacts.");
             var lines = File.ReadAllLines(rules).Where(line => !string.IsNullOrWhiteSpace(line)).ToArray();
             if (lines.Length != 3 || !Enumerable.Range(1, 3).All(number => lines[number - 1].StartsWith("Rule " + number + ", Paulo 2026-11-02:", StringComparison.Ordinal)))
                 throw new InvalidDataException("The recorded three Paulo rules are required.");
-            context = new(packet, LedgerPauloRulings.ReadInputs(tsv), lines); contexts.Add(contextKey, context);
+            context = new(packet, LedgerPauloRulings.ReadInputs(tsv), lines, LedgerPauloRulings.ReadFactChecks(facts),
+                File.Exists(LedgerPauloRulings.FactChecksPath) ? LedgerPauloRulings.ReadFactChecks(LedgerPauloRulings.FactChecksPath) : new(StringComparer.Ordinal));
+            contexts.Add(contextKey, context);
         }
         var decisions = context.Packet.Decisions.Where(decision => decision.Id == observation.Id && decision.Closed).ToArray();
         if (decisions.Length != 1) { problems.Add("Ruling requires exactly one closed decision for this observation."); return; }
@@ -51,9 +55,11 @@ internal static partial class FeatureLedgerEvidence
             if (Hash(frozen) != inventory.Files.Single(file => file.Path == observation.Source).Sha256)
             { problems.Add("Frozen style source differs from inventory."); return; }
         }
-        var evaluated = LedgerPauloRulings.Evaluate(listed[0], observation, LedgerRulingLiveText.Find);
+        if (decision.Rule is "1" or "3" && (!context.CurrentFacts.TryGetValue(observation.Id, out var currentFact) || currentFact.Verdict != "kept"))
+        { problems.Add("Current independent fact verdict is missing or lost; wording ruling stays OPEN."); return; }
+        var evaluated = LedgerPauloRulings.Evaluate(listed[0], observation, LedgerRulingLiveText.Find, context.Facts);
         if (!evaluated.Closed || evaluated.Rule != decision.Rule || evaluated.WitnessAssembly != decision.WitnessAssembly
-            || evaluated.WitnessSymbol != decision.WitnessSymbol || evaluated.WitnessTextSha256 != decision.WitnessTextSha256)
+            || evaluated.WitnessSymbol != decision.WitnessSymbol || evaluated.WitnessTextSha256 != decision.WitnessTextSha256 || evaluated.FactCheckNote != decision.FactCheckNote)
         { problems.Add("Ruling policy/live compiled text no longer accepts this exact row and wording."); return; }
         if (!int.TryParse(decision.Rule, out int number) || number is < 1 or > 3 || proof.Target != "Rule " + number
             || proof.Assertion != RulingAssertion(context.Rules[number - 1], decision)
