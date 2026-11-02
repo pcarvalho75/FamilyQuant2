@@ -5,816 +5,820 @@
   "runs": [
     {
       "id": "native",
-      "command": "C:\\FamilyQuant-gate\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --prove-results-runtime D:/FamilyQuant-data/out-shell/N3/source C:\\FamilyQuant-gate\\FamilyQuant.Tests\\ReferenceGoldenHost\\bin\\Release\\net10.0-windows7.0\\ReferenceGoldenHost.exe D:/FamilyQuant-data/out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime \u00222026-11-02 13:04:53 -0800\u0022",
-      "executedAt": "2026-11-02 13:04:53 -0800",
-      "commit": "d3b71621ce6198f63f586cf062567a18103f9e72",
+      "command": "C:\\FamilyQuant-gate\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --prove-results-runtime D:/FamilyQuant-data/out-shell/N3/source C:\\FamilyQuant-gate\\FamilyQuant.Tests\\ReferenceGoldenHost\\bin\\Release\\net10.0-windows7.0\\ReferenceGoldenHost.exe D:/FamilyQuant-data/out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime \u00222026-11-02 13:58:28 -0800\u0022",
+      "executedAt": "2026-11-02 13:58:28 -0800",
+      "commit": "4d28dbcc530f7cccc9dff5a9df676924c4b558f8",
       "artifacts": [
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\comparisons.json",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\comparisons.json",
           "sha256": "CBD6A1B006E4C40F2B01E738DB083702D2B865888489427FD0957E1CF4AFDECD"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\current-charts\\families-False-Dark-420.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\current-charts\\families-False-Dark-420.png",
           "sha256": "8B579DB35C71A2ED5D5B953D9822172CC9B4A4C7438BF0F62A6981DC4FA31125"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\current-charts\\families-False-Dark-960.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\current-charts\\families-False-Dark-960.png",
           "sha256": "E038BB699E08FA147B8CD9F351C37E2818BED14756620021036DC99783FC7178"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\current-charts\\families-False-Light-420.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\current-charts\\families-False-Light-420.png",
           "sha256": "5C494722BF6D29929127CBF91004F462C0B56F53FD488DD811B1ABA835D6457B"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\current-charts\\families-False-Light-960.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\current-charts\\families-False-Light-960.png",
           "sha256": "CAFF4842F8A5C9095B4E8C6E801BD22DEC35E9DE8CF1CFBDF0373C23663C00E2"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\current-charts\\families-True-Dark-420.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\current-charts\\families-True-Dark-420.png",
           "sha256": "EBEC02EFB97DFFDA55BC316C0CD332550B1CCE44967D605F0950F7DF616EEAF0"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\current-charts\\families-True-Dark-960.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\current-charts\\families-True-Dark-960.png",
           "sha256": "5598D03F4900061B56F7DBEE854710D7E5978B893096677BACC1E5A7BDC7E63D"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\current-charts\\families-True-Light-420.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\current-charts\\families-True-Light-420.png",
           "sha256": "649E82103EB0A7919F6C906CD231B19C4CFD6D0B89232760A2C063048E26EB0E"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\current-charts\\families-True-Light-960.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\current-charts\\families-True-Light-960.png",
           "sha256": "A789D3704032E2645182EFEE1E768476A9F2F5C790C21E2CA6F1FC0D9DCDA0AB"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\current-charts\\identity-False-Dark-420.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\current-charts\\identity-False-Dark-420.png",
           "sha256": "1C86F3DE388FBC6722AD38391982DF773EFCE3EC162FB3C8732D3AAF1DE0E8CD"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\current-charts\\identity-False-Dark-960.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\current-charts\\identity-False-Dark-960.png",
           "sha256": "D79193F8777F2BC41D3BE3BD2BE6E8E46C73A238711B509CFC88332D3A2D32D7"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\current-charts\\identity-False-Light-420.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\current-charts\\identity-False-Light-420.png",
           "sha256": "FCDF03D278E6B35928776420210F3FABC08A55DBA15425615F7564D050DC151B"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\current-charts\\identity-False-Light-960.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\current-charts\\identity-False-Light-960.png",
           "sha256": "009F0E5C7CD6AC0DD949633E5E3A28C46F3A4025B0DC8DAC2F5DE3929B791C80"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\current-charts\\identity-True-Dark-420.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\current-charts\\identity-True-Dark-420.png",
           "sha256": "43AA7A822AABB389C4EAB9FF12680A954FB4AF26E712D4105ED8598A6B18D97B"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\current-charts\\identity-True-Dark-960.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\current-charts\\identity-True-Dark-960.png",
           "sha256": "5D8D10D59CDE9470800B61B1B1078CD6F78BF8E991735443BCF026785E80706D"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\current-charts\\identity-True-Light-420.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\current-charts\\identity-True-Light-420.png",
           "sha256": "3DC1AC0E6E2969087B41C9BD83549E5B81374925DEE139F4FDB14986A7FAB3E5"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\current-charts\\identity-True-Light-960.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\current-charts\\identity-True-Light-960.png",
           "sha256": "4D946CC8908AABE185F0E1C123B5242620D70A6572A18042EF96DDE31677F07B"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\current-charts\\isotopes-False-Dark-420.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\current-charts\\isotopes-False-Dark-420.png",
           "sha256": "5CE649CC929E590A58E377EC4393E4B8E41C347ADD9FE007DE54A571AB596B14"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\current-charts\\isotopes-False-Dark-960.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\current-charts\\isotopes-False-Dark-960.png",
           "sha256": "9B5635A234F68DED3BB07B9CFEF318058EA4175BECE20ED1231F9EF8C26166CE"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\current-charts\\isotopes-False-Light-420.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\current-charts\\isotopes-False-Light-420.png",
           "sha256": "868576143A44B620093D5153FFEEAA80AFA0921427D4BE4139870F256910E5DE"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\current-charts\\isotopes-False-Light-960.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\current-charts\\isotopes-False-Light-960.png",
           "sha256": "B460C285C6D2E1B5667D28619662E161C14D29B63747CA5458FA30F1A8ED5EDF"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\current-charts\\isotopes-True-Dark-420.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\current-charts\\isotopes-True-Dark-420.png",
           "sha256": "879DFD588972CCA10708A1CCA7F689CCCCC1656103C18CBB4BAF82FF53939390"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\current-charts\\isotopes-True-Dark-960.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\current-charts\\isotopes-True-Dark-960.png",
           "sha256": "F6367421A5D646CB7F22B84B06255DBAB78FA198D1E69E71153EA8C2B345D309"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\current-charts\\isotopes-True-Light-420.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\current-charts\\isotopes-True-Light-420.png",
           "sha256": "48D3ECE26B339870C10BD4E9E613B903C33193190410341479EE768EB1947893"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\current-charts\\isotopes-True-Light-960.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\current-charts\\isotopes-True-Light-960.png",
           "sha256": "8E4A36B629C2519D6DF9BA1FAA5F11696F296397370DBC53C37C2DB28B1011E9"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\current-charts\\mass-False-Dark-420.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\current-charts\\mass-False-Dark-420.png",
           "sha256": "C9B64B5C8B2B53F698C33669BE3EC66CE4CB710D262D59764F97D22EDD31E80A"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\current-charts\\mass-False-Dark-960.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\current-charts\\mass-False-Dark-960.png",
           "sha256": "74F33755F274C8DAEA29A58D53C186A067A59AAAE387DD1B3D1B67B15027ACA4"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\current-charts\\mass-False-Light-420.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\current-charts\\mass-False-Light-420.png",
           "sha256": "DAAEEF70F61D085D4818732D14CBC0B03630374CAA658FE5906CDA0BD7F8304B"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\current-charts\\mass-False-Light-960.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\current-charts\\mass-False-Light-960.png",
           "sha256": "FCB13F7AF59BE48469EDCE07489C7E3CE8F2178665F5BB1C5CD02851C6025C35"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\current-charts\\mass-True-Dark-420.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\current-charts\\mass-True-Dark-420.png",
           "sha256": "FB526617118535CC1FF333265DA2D00F6B468D87C28E378EAB5711F73CE6F287"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\current-charts\\mass-True-Dark-960.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\current-charts\\mass-True-Dark-960.png",
           "sha256": "83271EB8AC51C1B6830A276BE0339F535D2A26A2CB0F16B88F0C95B1BDDA41F0"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\current-charts\\mass-True-Light-420.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\current-charts\\mass-True-Light-420.png",
           "sha256": "25A80DD6D3CCB644C4156E9118FB7E9DABDDD2699AB4CB01C047D77E014A344F"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\current-charts\\mass-True-Light-960.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\current-charts\\mass-True-Light-960.png",
           "sha256": "AF241A7CB537E418C40D290B86D0AD5F8BDF698FCD6BD5A3A1633CF67E2C1E98"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\current-charts\\partition-False-Dark-420.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\current-charts\\partition-False-Dark-420.png",
           "sha256": "CC6A57FAD75370EA6908E90F8A8286C2A7B570403612ACE4FCADB9891FB8867D"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\current-charts\\partition-False-Dark-960.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\current-charts\\partition-False-Dark-960.png",
           "sha256": "D94B142BFC16F11E3A88C75AC9EB70D804B59938B5B7258AB18ACF5384AC890D"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\current-charts\\partition-False-Light-420.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\current-charts\\partition-False-Light-420.png",
           "sha256": "CC6A57FAD75370EA6908E90F8A8286C2A7B570403612ACE4FCADB9891FB8867D"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\current-charts\\partition-False-Light-960.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\current-charts\\partition-False-Light-960.png",
           "sha256": "D94B142BFC16F11E3A88C75AC9EB70D804B59938B5B7258AB18ACF5384AC890D"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\current-charts\\partition-True-Dark-420.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\current-charts\\partition-True-Dark-420.png",
           "sha256": "43AA7A822AABB389C4EAB9FF12680A954FB4AF26E712D4105ED8598A6B18D97B"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\current-charts\\partition-True-Dark-960.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\current-charts\\partition-True-Dark-960.png",
           "sha256": "5D8D10D59CDE9470800B61B1B1078CD6F78BF8E991735443BCF026785E80706D"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\current-charts\\partition-True-Light-420.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\current-charts\\partition-True-Light-420.png",
           "sha256": "43AA7A822AABB389C4EAB9FF12680A954FB4AF26E712D4105ED8598A6B18D97B"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\current-charts\\partition-True-Light-960.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\current-charts\\partition-True-Light-960.png",
           "sha256": "5D8D10D59CDE9470800B61B1B1078CD6F78BF8E991735443BCF026785E80706D"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\current-charts\\percent-False-Dark-420.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\current-charts\\percent-False-Dark-420.png",
           "sha256": "8BCE40C6E3B0C9F528DC4B572E8541AFB44AA3D3798167A30B0B9D553D88D8F4"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\current-charts\\percent-False-Dark-960.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\current-charts\\percent-False-Dark-960.png",
           "sha256": "9B08302A4C77B2DBAC0B92396F53A9162C1AF6AF7280D1A9D9FDD95BD5A6F117"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\current-charts\\percent-False-Light-420.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\current-charts\\percent-False-Light-420.png",
           "sha256": "BB479E33D2A762AF1A89AEFE72F589EFCF773F26BE0626334DE40A95F927A93F"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\current-charts\\percent-False-Light-960.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\current-charts\\percent-False-Light-960.png",
           "sha256": "E0FB9532AB8C01BEF8EBFE6A2E252BDC8F58326502C86894BD22CD858112FFFC"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\current-charts\\percent-True-Dark-420.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\current-charts\\percent-True-Dark-420.png",
           "sha256": "76FB3B64A64BF901FF8DA458C14C03B20DD117F13DC8252B098AF2EB5927FA34"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\current-charts\\percent-True-Dark-960.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\current-charts\\percent-True-Dark-960.png",
           "sha256": "095EA3C45A72717DCEF04BEF4ED10ACE23A24AB408E8A22430442455B6D2C8B4"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\current-charts\\percent-True-Light-420.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\current-charts\\percent-True-Light-420.png",
           "sha256": "91CB2CB0CC6BBB50E99C1EF687A55E7094E7BF5995A19172C4903BC1D9CDBB8B"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\current-charts\\percent-True-Light-960.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\current-charts\\percent-True-Light-960.png",
           "sha256": "6B687C34BA64F0B019FFD3D1844AA2ACDFB1348A05D7337EBC7153A1E3BEA343"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\current-charts\\recovery-False-Dark-420.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\current-charts\\recovery-False-Dark-420.png",
           "sha256": "7684CAD359872FB824D48C8FD7BB6472A57584DDDC83079726C295A92378C6AC"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\current-charts\\recovery-False-Dark-960.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\current-charts\\recovery-False-Dark-960.png",
           "sha256": "E7E090C790BD500262F56A99BED22D2F6FD0977030BB75CC7BA8797B23BD70A9"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\current-charts\\recovery-False-Light-420.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\current-charts\\recovery-False-Light-420.png",
           "sha256": "2C164C80C5277A7148695A08665719C4EF96C0F5633A139FA8E0C286B87AAA99"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\current-charts\\recovery-False-Light-960.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\current-charts\\recovery-False-Light-960.png",
           "sha256": "C9044746264432FCDF5E8546FFB649D7A3E2097DB5DEE202F779CDB242CB6454"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\current-charts\\recovery-True-Dark-420.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\current-charts\\recovery-True-Dark-420.png",
           "sha256": "49AB9C27FFCB061EA26207D8359DD560245FA576B3FD217B0872383394E16A69"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\current-charts\\recovery-True-Dark-960.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\current-charts\\recovery-True-Dark-960.png",
           "sha256": "F44CF2BE06E6A2673CF3697499B491F0C04D7C606BFE4619931BC1D70172B290"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\current-charts\\recovery-True-Light-420.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\current-charts\\recovery-True-Light-420.png",
           "sha256": "0908B34AC89AB70597B3CE728EE34FA9FFA6287B20554B2A0E5C460A222222E8"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\current-charts\\recovery-True-Light-960.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\current-charts\\recovery-True-Light-960.png",
           "sha256": "AA9300EAE920FA380C59023DA3F799D4CCF79B0CCDDB8862981315B99C7043A7"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\current-values.json",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\current-values.json",
           "sha256": "0108AC8BC772CD87DCF1F6EE49735788A2A464DBCF321B2A874D53242B36CFAC"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\executed\\FamilyQuant.Core\\AnalyticsModel.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\executed\\FamilyQuant.Core\\AnalyticsModel.cs",
           "sha256": "735ABBBF39EB5BA9CC40D28B2FEE57386D1FD33E268AD708632EF119BCBFDD73"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\executed\\FamilyQuant.Core\\NormalizationMode.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\executed\\FamilyQuant.Core\\NormalizationMode.cs",
           "sha256": "951708B64A2746F38DA428448E32DD50DA1004F864C58ACB410A39F872CA29C5"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\executed\\FamilyQuant.Tests\\ChartExportSnapshot.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\executed\\FamilyQuant.Tests\\ChartExportSnapshot.cs",
           "sha256": "9EF95CEECBE0FDB7A80AF3D26A92D46007C9B1BE7F610D91020275F83E257DD6"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\executed\\FamilyQuant.Tests\\Program.Commands.ResultsRuntimeLedger.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\executed\\FamilyQuant.Tests\\Program.Commands.ResultsRuntimeLedger.cs",
           "sha256": "AE6AAD56515CDE2378D3C3754D7599C8FF658F06912D9C78C46E8382F0887D6C"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\executed\\FamilyQuant.Tests\\Program.ResultsRuntimeLedger.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\executed\\FamilyQuant.Tests\\Program.ResultsRuntimeLedger.cs",
           "sha256": "1A9D79574CDCB544B42E044F9CA6CC469F058C2232B2898F8D78FFDCD75F26EC"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\executed\\FamilyQuant.Tests\\ReferenceGoldenHost\\Program.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\executed\\FamilyQuant.Tests\\ReferenceGoldenHost\\Program.cs",
           "sha256": "B35CF2C9532E821E92B73DDE08E8AFFDC407C15C465CB486A98F75C56C4FA125"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\executed\\FamilyQuant.Tests\\ReferenceGoldenHost\\ReferenceGoldenHost.csproj",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\executed\\FamilyQuant.Tests\\ReferenceGoldenHost\\ReferenceGoldenHost.csproj",
           "sha256": "6E765AC6228BB73AFE487547FBDBF7F1404E7CFB0B496989607707CBB1B5828E"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\executed\\FamilyQuant.Tests\\ResultsRuntimeSnapshot.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\executed\\FamilyQuant.Tests\\ResultsRuntimeSnapshot.cs",
           "sha256": "2F4639B4D50043835D8EAFB450236D4CB14D8E6EE537D0DDA326CDCD7EC261FB"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\executed\\FamilyQuant\\AnalyticsViewModel.cs",
-          "sha256": "106080427A4AD78C9256E979E6A8B59BB01825637F7D8CAB9B30631CB1D1DECC"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\executed\\FamilyQuant\\AnalyticsViewModel.cs",
+          "sha256": "1EB5F952996E46F35E0FE1912CA683327E091439128D92727EF37BE2233E3B03"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\executed\\FamilyQuant\\FamilyContributionChart.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\executed\\FamilyQuant\\FamilyContributionChart.cs",
           "sha256": "939A4F9C98A0739582DDBBEA460C0631F90C29871BD45F0BDC4ACB8DB5EF60E2"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\executed\\FamilyQuant\\IdentityScanChart.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\executed\\FamilyQuant\\IdentityScanChart.cs",
           "sha256": "6E12975B73154AFD5E6AF1796751F28ED49CD977C5C3E38830A11FC45F015CAF"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\executed\\FamilyQuant\\IsotopeCountChart.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\executed\\FamilyQuant\\IsotopeCountChart.cs",
           "sha256": "C18B470572D3647F4B9007B8170702C5F231BCB62989EBD6662825DCE7AF17EF"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\executed\\FamilyQuant\\PercentIonCurrentChart.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\executed\\FamilyQuant\\PercentIonCurrentChart.cs",
           "sha256": "61E28173A23BF601B17197ECFF2A47AFD523A4DEC2F47BD244BDDA6FCD106E05"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\executed\\FamilyQuant\\RecoveryChart.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\executed\\FamilyQuant\\RecoveryChart.cs",
           "sha256": "F39E00E4455E67A05AC77A8324D51819C3C343FB95B183DCD93D6A5B9D5FAB6A"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\executed\\FamilyQuant\\XicMassChart.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\executed\\FamilyQuant\\XicMassChart.cs",
           "sha256": "DC13EE41EE7A44EAA05EF0A47AB25D16317335965CD7EAE4A9F9CFD2AE7D8629"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\executed\\current\\FamilyQuant.Core.dll",
-          "sha256": "B3DE904BB50477ACCB982BDE2CE437BA6962BB1DA44E7D260B992D1E188837BC"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\executed\\current\\FamilyQuant.Core.dll",
+          "sha256": "743F2A4D78BAFC24B294E887663A75FE5A7BB4DA8B0ACF95EBF52F5BEE2DC116"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\executed\\current\\FamilyQuant.Tests.dll",
-          "sha256": "338CB1ED8EE1B52F92368A79B99A6C1D2789A40AE07801AAB7226AA8B8A528A4"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\executed\\current\\FamilyQuant.Tests.dll",
+          "sha256": "AF6B483E2C3E34036AD088F4ECCBB6B316270C6B911EA6D31A7EA222DB761AE2"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\executed\\current\\FamilyQuant2.dll",
-          "sha256": "C0FF8144D05014240713CC94900258E162FF2B6F51DB01CA13758C4E0BD9784D"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\executed\\current\\FamilyQuant2.dll",
+          "sha256": "8511AB784ACA1C6C07FD728C1CEB53E76C60D9A4A7EBE381AF9759D294F15C59"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\executed\\frozen\\FamilyQuant\\AnalyticsControl.xaml.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\executed\\frozen\\FamilyQuant\\AnalyticsControl.xaml",
+          "sha256": "86433A8586FD5F5843804285BF2CD9337F1F8C42B364CD8476E32473710F61E1"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\executed\\frozen\\FamilyQuant\\AnalyticsControl.xaml.cs",
           "sha256": "4E760B397BE1979AED87D871D661D5264975113F77E4A65A59FE6150B015FB71"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\executed\\frozen\\FamilyQuant\\AnalyticsModel.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\executed\\frozen\\FamilyQuant\\AnalyticsModel.cs",
           "sha256": "06AB29E8A11BA0DEEE49239C0E66E04055589ED6FDCBA86665FB90E86E088140"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\executed\\frozen\\FamilyQuant\\FamilyContributionChart.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\executed\\frozen\\FamilyQuant\\FamilyContributionChart.cs",
           "sha256": "13B9702374060C463B79F2ED84BE9593BC0AF011E9BD28BAF943E0D49D0B39A5"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\executed\\frozen\\FamilyQuant\\IdentityScanChart.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\executed\\frozen\\FamilyQuant\\IdentityScanChart.cs",
           "sha256": "139579CBBBBEA5FA8841C82C8681F9EE72E29A78CE347F1BF35B01CD00599613"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\executed\\frozen\\FamilyQuant\\IsotopeCountChart.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\executed\\frozen\\FamilyQuant\\IsotopeCountChart.cs",
           "sha256": "6A58C5AA15A51D45E3FAD2CF663A9FBC4BEC572DCA6120BCF44F9032464CEE06"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\executed\\frozen\\FamilyQuant\\NormalizationMode.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\executed\\frozen\\FamilyQuant\\NormalizationMode.cs",
           "sha256": "998862FE80112393A63D135353CF2E576744187F7965D263E20DCADFE22EAA2E"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\executed\\frozen\\FamilyQuant\\PercentIonCurrentChart.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\executed\\frozen\\FamilyQuant\\PercentIonCurrentChart.cs",
           "sha256": "955EDE5EED5A99CF1BC35361DDC4A511359E7FEC697D1ED9A5285B04324E0741"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\executed\\frozen\\FamilyQuant\\RecoveryChart.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\executed\\frozen\\FamilyQuant\\RecoveryChart.cs",
           "sha256": "85A7D3A2899A800252291A38F070214F91312063F5ABC138EBD30D38F3DECDC4"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\executed\\frozen\\FamilyQuant\\XicMassChart.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\executed\\frozen\\FamilyQuant\\XicMassChart.cs",
           "sha256": "5C97E3B0AFDD4A5A4FF656CF8B510CF0C1EB14EBDE7AA87FA45EB43745CA2631"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\executed\\reference\\FamilyQuant.dll",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\executed\\reference\\FamilyQuant.dll",
           "sha256": "D764488C923945285E03B338E5A91BF28106A35B11AB465D8E2B23D125F03FD8"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\executed\\reference\\ReferenceGoldenHost.dll",
-          "sha256": "0BF395FCF7CD43A602F5FF4BC684193F4C399729CB51D1692BA9612D38C25847"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\executed\\reference\\ReferenceGoldenHost.dll",
+          "sha256": "13B9395F56C66659A6A90C350190D140E2E07F847D24B39D591ECE63EEDF720A"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\frozen-charts\\families-False-Dark-420.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\frozen-charts\\families-False-Dark-420.png",
           "sha256": "8B579DB35C71A2ED5D5B953D9822172CC9B4A4C7438BF0F62A6981DC4FA31125"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\frozen-charts\\families-False-Dark-960.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\frozen-charts\\families-False-Dark-960.png",
           "sha256": "E038BB699E08FA147B8CD9F351C37E2818BED14756620021036DC99783FC7178"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\frozen-charts\\families-False-Light-420.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\frozen-charts\\families-False-Light-420.png",
           "sha256": "5C494722BF6D29929127CBF91004F462C0B56F53FD488DD811B1ABA835D6457B"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\frozen-charts\\families-False-Light-960.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\frozen-charts\\families-False-Light-960.png",
           "sha256": "CAFF4842F8A5C9095B4E8C6E801BD22DEC35E9DE8CF1CFBDF0373C23663C00E2"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\frozen-charts\\families-True-Dark-420.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\frozen-charts\\families-True-Dark-420.png",
           "sha256": "EBEC02EFB97DFFDA55BC316C0CD332550B1CCE44967D605F0950F7DF616EEAF0"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\frozen-charts\\families-True-Dark-960.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\frozen-charts\\families-True-Dark-960.png",
           "sha256": "5598D03F4900061B56F7DBEE854710D7E5978B893096677BACC1E5A7BDC7E63D"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\frozen-charts\\families-True-Light-420.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\frozen-charts\\families-True-Light-420.png",
           "sha256": "649E82103EB0A7919F6C906CD231B19C4CFD6D0B89232760A2C063048E26EB0E"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\frozen-charts\\families-True-Light-960.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\frozen-charts\\families-True-Light-960.png",
           "sha256": "A789D3704032E2645182EFEE1E768476A9F2F5C790C21E2CA6F1FC0D9DCDA0AB"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\frozen-charts\\identity-False-Dark-420.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\frozen-charts\\identity-False-Dark-420.png",
           "sha256": "1C86F3DE388FBC6722AD38391982DF773EFCE3EC162FB3C8732D3AAF1DE0E8CD"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\frozen-charts\\identity-False-Dark-960.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\frozen-charts\\identity-False-Dark-960.png",
           "sha256": "D79193F8777F2BC41D3BE3BD2BE6E8E46C73A238711B509CFC88332D3A2D32D7"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\frozen-charts\\identity-False-Light-420.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\frozen-charts\\identity-False-Light-420.png",
           "sha256": "FCDF03D278E6B35928776420210F3FABC08A55DBA15425615F7564D050DC151B"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\frozen-charts\\identity-False-Light-960.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\frozen-charts\\identity-False-Light-960.png",
           "sha256": "009F0E5C7CD6AC0DD949633E5E3A28C46F3A4025B0DC8DAC2F5DE3929B791C80"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\frozen-charts\\identity-True-Dark-420.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\frozen-charts\\identity-True-Dark-420.png",
           "sha256": "43AA7A822AABB389C4EAB9FF12680A954FB4AF26E712D4105ED8598A6B18D97B"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\frozen-charts\\identity-True-Dark-960.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\frozen-charts\\identity-True-Dark-960.png",
           "sha256": "5D8D10D59CDE9470800B61B1B1078CD6F78BF8E991735443BCF026785E80706D"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\frozen-charts\\identity-True-Light-420.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\frozen-charts\\identity-True-Light-420.png",
           "sha256": "3DC1AC0E6E2969087B41C9BD83549E5B81374925DEE139F4FDB14986A7FAB3E5"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\frozen-charts\\identity-True-Light-960.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\frozen-charts\\identity-True-Light-960.png",
           "sha256": "4D946CC8908AABE185F0E1C123B5242620D70A6572A18042EF96DDE31677F07B"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\frozen-charts\\isotopes-False-Dark-420.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\frozen-charts\\isotopes-False-Dark-420.png",
           "sha256": "5CE649CC929E590A58E377EC4393E4B8E41C347ADD9FE007DE54A571AB596B14"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\frozen-charts\\isotopes-False-Dark-960.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\frozen-charts\\isotopes-False-Dark-960.png",
           "sha256": "9B5635A234F68DED3BB07B9CFEF318058EA4175BECE20ED1231F9EF8C26166CE"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\frozen-charts\\isotopes-False-Light-420.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\frozen-charts\\isotopes-False-Light-420.png",
           "sha256": "868576143A44B620093D5153FFEEAA80AFA0921427D4BE4139870F256910E5DE"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\frozen-charts\\isotopes-False-Light-960.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\frozen-charts\\isotopes-False-Light-960.png",
           "sha256": "B460C285C6D2E1B5667D28619662E161C14D29B63747CA5458FA30F1A8ED5EDF"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\frozen-charts\\isotopes-True-Dark-420.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\frozen-charts\\isotopes-True-Dark-420.png",
           "sha256": "879DFD588972CCA10708A1CCA7F689CCCCC1656103C18CBB4BAF82FF53939390"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\frozen-charts\\isotopes-True-Dark-960.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\frozen-charts\\isotopes-True-Dark-960.png",
           "sha256": "F6367421A5D646CB7F22B84B06255DBAB78FA198D1E69E71153EA8C2B345D309"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\frozen-charts\\isotopes-True-Light-420.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\frozen-charts\\isotopes-True-Light-420.png",
           "sha256": "48D3ECE26B339870C10BD4E9E613B903C33193190410341479EE768EB1947893"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\frozen-charts\\isotopes-True-Light-960.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\frozen-charts\\isotopes-True-Light-960.png",
           "sha256": "8E4A36B629C2519D6DF9BA1FAA5F11696F296397370DBC53C37C2DB28B1011E9"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\frozen-charts\\mass-False-Dark-420.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\frozen-charts\\mass-False-Dark-420.png",
           "sha256": "C9B64B5C8B2B53F698C33669BE3EC66CE4CB710D262D59764F97D22EDD31E80A"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\frozen-charts\\mass-False-Dark-960.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\frozen-charts\\mass-False-Dark-960.png",
           "sha256": "74F33755F274C8DAEA29A58D53C186A067A59AAAE387DD1B3D1B67B15027ACA4"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\frozen-charts\\mass-False-Light-420.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\frozen-charts\\mass-False-Light-420.png",
           "sha256": "DAAEEF70F61D085D4818732D14CBC0B03630374CAA658FE5906CDA0BD7F8304B"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\frozen-charts\\mass-False-Light-960.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\frozen-charts\\mass-False-Light-960.png",
           "sha256": "FCB13F7AF59BE48469EDCE07489C7E3CE8F2178665F5BB1C5CD02851C6025C35"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\frozen-charts\\mass-True-Dark-420.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\frozen-charts\\mass-True-Dark-420.png",
           "sha256": "FB526617118535CC1FF333265DA2D00F6B468D87C28E378EAB5711F73CE6F287"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\frozen-charts\\mass-True-Dark-960.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\frozen-charts\\mass-True-Dark-960.png",
           "sha256": "83271EB8AC51C1B6830A276BE0339F535D2A26A2CB0F16B88F0C95B1BDDA41F0"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\frozen-charts\\mass-True-Light-420.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\frozen-charts\\mass-True-Light-420.png",
           "sha256": "25A80DD6D3CCB644C4156E9118FB7E9DABDDD2699AB4CB01C047D77E014A344F"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\frozen-charts\\mass-True-Light-960.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\frozen-charts\\mass-True-Light-960.png",
           "sha256": "AF241A7CB537E418C40D290B86D0AD5F8BDF698FCD6BD5A3A1633CF67E2C1E98"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\frozen-charts\\partition-False-Dark-420.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\frozen-charts\\partition-False-Dark-420.png",
           "sha256": "CC6A57FAD75370EA6908E90F8A8286C2A7B570403612ACE4FCADB9891FB8867D"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\frozen-charts\\partition-False-Dark-960.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\frozen-charts\\partition-False-Dark-960.png",
           "sha256": "D94B142BFC16F11E3A88C75AC9EB70D804B59938B5B7258AB18ACF5384AC890D"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\frozen-charts\\partition-False-Light-420.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\frozen-charts\\partition-False-Light-420.png",
           "sha256": "CC6A57FAD75370EA6908E90F8A8286C2A7B570403612ACE4FCADB9891FB8867D"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\frozen-charts\\partition-False-Light-960.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\frozen-charts\\partition-False-Light-960.png",
           "sha256": "D94B142BFC16F11E3A88C75AC9EB70D804B59938B5B7258AB18ACF5384AC890D"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\frozen-charts\\partition-True-Dark-420.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\frozen-charts\\partition-True-Dark-420.png",
           "sha256": "43AA7A822AABB389C4EAB9FF12680A954FB4AF26E712D4105ED8598A6B18D97B"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\frozen-charts\\partition-True-Dark-960.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\frozen-charts\\partition-True-Dark-960.png",
           "sha256": "5D8D10D59CDE9470800B61B1B1078CD6F78BF8E991735443BCF026785E80706D"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\frozen-charts\\partition-True-Light-420.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\frozen-charts\\partition-True-Light-420.png",
           "sha256": "43AA7A822AABB389C4EAB9FF12680A954FB4AF26E712D4105ED8598A6B18D97B"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\frozen-charts\\partition-True-Light-960.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\frozen-charts\\partition-True-Light-960.png",
           "sha256": "5D8D10D59CDE9470800B61B1B1078CD6F78BF8E991735443BCF026785E80706D"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\frozen-charts\\percent-False-Dark-420.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\frozen-charts\\percent-False-Dark-420.png",
           "sha256": "8BCE40C6E3B0C9F528DC4B572E8541AFB44AA3D3798167A30B0B9D553D88D8F4"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\frozen-charts\\percent-False-Dark-960.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\frozen-charts\\percent-False-Dark-960.png",
           "sha256": "9B08302A4C77B2DBAC0B92396F53A9162C1AF6AF7280D1A9D9FDD95BD5A6F117"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\frozen-charts\\percent-False-Light-420.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\frozen-charts\\percent-False-Light-420.png",
           "sha256": "BB479E33D2A762AF1A89AEFE72F589EFCF773F26BE0626334DE40A95F927A93F"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\frozen-charts\\percent-False-Light-960.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\frozen-charts\\percent-False-Light-960.png",
           "sha256": "E0FB9532AB8C01BEF8EBFE6A2E252BDC8F58326502C86894BD22CD858112FFFC"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\frozen-charts\\percent-True-Dark-420.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\frozen-charts\\percent-True-Dark-420.png",
           "sha256": "76FB3B64A64BF901FF8DA458C14C03B20DD117F13DC8252B098AF2EB5927FA34"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\frozen-charts\\percent-True-Dark-960.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\frozen-charts\\percent-True-Dark-960.png",
           "sha256": "095EA3C45A72717DCEF04BEF4ED10ACE23A24AB408E8A22430442455B6D2C8B4"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\frozen-charts\\percent-True-Light-420.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\frozen-charts\\percent-True-Light-420.png",
           "sha256": "91CB2CB0CC6BBB50E99C1EF687A55E7094E7BF5995A19172C4903BC1D9CDBB8B"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\frozen-charts\\percent-True-Light-960.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\frozen-charts\\percent-True-Light-960.png",
           "sha256": "6B687C34BA64F0B019FFD3D1844AA2ACDFB1348A05D7337EBC7153A1E3BEA343"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\frozen-charts\\recovery-False-Dark-420.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\frozen-charts\\recovery-False-Dark-420.png",
           "sha256": "7684CAD359872FB824D48C8FD7BB6472A57584DDDC83079726C295A92378C6AC"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\frozen-charts\\recovery-False-Dark-960.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\frozen-charts\\recovery-False-Dark-960.png",
           "sha256": "E7E090C790BD500262F56A99BED22D2F6FD0977030BB75CC7BA8797B23BD70A9"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\frozen-charts\\recovery-False-Light-420.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\frozen-charts\\recovery-False-Light-420.png",
           "sha256": "2C164C80C5277A7148695A08665719C4EF96C0F5633A139FA8E0C286B87AAA99"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\frozen-charts\\recovery-False-Light-960.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\frozen-charts\\recovery-False-Light-960.png",
           "sha256": "C9044746264432FCDF5E8546FFB649D7A3E2097DB5DEE202F779CDB242CB6454"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\frozen-charts\\recovery-True-Dark-420.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\frozen-charts\\recovery-True-Dark-420.png",
           "sha256": "49AB9C27FFCB061EA26207D8359DD560245FA576B3FD217B0872383394E16A69"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\frozen-charts\\recovery-True-Dark-960.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\frozen-charts\\recovery-True-Dark-960.png",
           "sha256": "F44CF2BE06E6A2673CF3697499B491F0C04D7C606BFE4619931BC1D70172B290"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\frozen-charts\\recovery-True-Light-420.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\frozen-charts\\recovery-True-Light-420.png",
           "sha256": "0908B34AC89AB70597B3CE728EE34FA9FFA6287B20554B2A0E5C460A222222E8"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\frozen-charts\\recovery-True-Light-960.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\frozen-charts\\recovery-True-Light-960.png",
           "sha256": "AA9300EAE920FA380C59023DA3F799D4CCF79B0CCDDB8862981315B99C7043A7"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\frozen-values.json",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\frozen-values.json",
           "sha256": "FBEFD232387169AE206B13FBEEA90AF5429C46D66CD65AE6F96251447F335655"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\proofs.log",
-          "sha256": "FB5F53542E5561A2410427077930A523D18D9013C2E1AB258502816C8A8E0A92"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\proofs.log",
+          "sha256": "1CE3331FC39D88FE59A028E46C8BA53F74574F3C5F3322396CC1E5A278B08240"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\repeat-charts\\families-False-Dark-420.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\repeat-charts\\families-False-Dark-420.png",
           "sha256": "8B579DB35C71A2ED5D5B953D9822172CC9B4A4C7438BF0F62A6981DC4FA31125"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\repeat-charts\\families-False-Dark-960.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\repeat-charts\\families-False-Dark-960.png",
           "sha256": "E038BB699E08FA147B8CD9F351C37E2818BED14756620021036DC99783FC7178"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\repeat-charts\\families-False-Light-420.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\repeat-charts\\families-False-Light-420.png",
           "sha256": "5C494722BF6D29929127CBF91004F462C0B56F53FD488DD811B1ABA835D6457B"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\repeat-charts\\families-False-Light-960.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\repeat-charts\\families-False-Light-960.png",
           "sha256": "CAFF4842F8A5C9095B4E8C6E801BD22DEC35E9DE8CF1CFBDF0373C23663C00E2"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\repeat-charts\\families-True-Dark-420.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\repeat-charts\\families-True-Dark-420.png",
           "sha256": "EBEC02EFB97DFFDA55BC316C0CD332550B1CCE44967D605F0950F7DF616EEAF0"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\repeat-charts\\families-True-Dark-960.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\repeat-charts\\families-True-Dark-960.png",
           "sha256": "5598D03F4900061B56F7DBEE854710D7E5978B893096677BACC1E5A7BDC7E63D"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\repeat-charts\\families-True-Light-420.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\repeat-charts\\families-True-Light-420.png",
           "sha256": "649E82103EB0A7919F6C906CD231B19C4CFD6D0B89232760A2C063048E26EB0E"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\repeat-charts\\families-True-Light-960.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\repeat-charts\\families-True-Light-960.png",
           "sha256": "A789D3704032E2645182EFEE1E768476A9F2F5C790C21E2CA6F1FC0D9DCDA0AB"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\repeat-charts\\identity-False-Dark-420.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\repeat-charts\\identity-False-Dark-420.png",
           "sha256": "1C86F3DE388FBC6722AD38391982DF773EFCE3EC162FB3C8732D3AAF1DE0E8CD"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\repeat-charts\\identity-False-Dark-960.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\repeat-charts\\identity-False-Dark-960.png",
           "sha256": "D79193F8777F2BC41D3BE3BD2BE6E8E46C73A238711B509CFC88332D3A2D32D7"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\repeat-charts\\identity-False-Light-420.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\repeat-charts\\identity-False-Light-420.png",
           "sha256": "FCDF03D278E6B35928776420210F3FABC08A55DBA15425615F7564D050DC151B"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\repeat-charts\\identity-False-Light-960.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\repeat-charts\\identity-False-Light-960.png",
           "sha256": "009F0E5C7CD6AC0DD949633E5E3A28C46F3A4025B0DC8DAC2F5DE3929B791C80"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\repeat-charts\\identity-True-Dark-420.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\repeat-charts\\identity-True-Dark-420.png",
           "sha256": "43AA7A822AABB389C4EAB9FF12680A954FB4AF26E712D4105ED8598A6B18D97B"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\repeat-charts\\identity-True-Dark-960.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\repeat-charts\\identity-True-Dark-960.png",
           "sha256": "5D8D10D59CDE9470800B61B1B1078CD6F78BF8E991735443BCF026785E80706D"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\repeat-charts\\identity-True-Light-420.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\repeat-charts\\identity-True-Light-420.png",
           "sha256": "3DC1AC0E6E2969087B41C9BD83549E5B81374925DEE139F4FDB14986A7FAB3E5"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\repeat-charts\\identity-True-Light-960.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\repeat-charts\\identity-True-Light-960.png",
           "sha256": "4D946CC8908AABE185F0E1C123B5242620D70A6572A18042EF96DDE31677F07B"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\repeat-charts\\isotopes-False-Dark-420.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\repeat-charts\\isotopes-False-Dark-420.png",
           "sha256": "5CE649CC929E590A58E377EC4393E4B8E41C347ADD9FE007DE54A571AB596B14"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\repeat-charts\\isotopes-False-Dark-960.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\repeat-charts\\isotopes-False-Dark-960.png",
           "sha256": "9B5635A234F68DED3BB07B9CFEF318058EA4175BECE20ED1231F9EF8C26166CE"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\repeat-charts\\isotopes-False-Light-420.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\repeat-charts\\isotopes-False-Light-420.png",
           "sha256": "868576143A44B620093D5153FFEEAA80AFA0921427D4BE4139870F256910E5DE"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\repeat-charts\\isotopes-False-Light-960.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\repeat-charts\\isotopes-False-Light-960.png",
           "sha256": "B460C285C6D2E1B5667D28619662E161C14D29B63747CA5458FA30F1A8ED5EDF"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\repeat-charts\\isotopes-True-Dark-420.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\repeat-charts\\isotopes-True-Dark-420.png",
           "sha256": "879DFD588972CCA10708A1CCA7F689CCCCC1656103C18CBB4BAF82FF53939390"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\repeat-charts\\isotopes-True-Dark-960.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\repeat-charts\\isotopes-True-Dark-960.png",
           "sha256": "F6367421A5D646CB7F22B84B06255DBAB78FA198D1E69E71153EA8C2B345D309"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\repeat-charts\\isotopes-True-Light-420.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\repeat-charts\\isotopes-True-Light-420.png",
           "sha256": "48D3ECE26B339870C10BD4E9E613B903C33193190410341479EE768EB1947893"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\repeat-charts\\isotopes-True-Light-960.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\repeat-charts\\isotopes-True-Light-960.png",
           "sha256": "8E4A36B629C2519D6DF9BA1FAA5F11696F296397370DBC53C37C2DB28B1011E9"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\repeat-charts\\mass-False-Dark-420.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\repeat-charts\\mass-False-Dark-420.png",
           "sha256": "C9B64B5C8B2B53F698C33669BE3EC66CE4CB710D262D59764F97D22EDD31E80A"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\repeat-charts\\mass-False-Dark-960.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\repeat-charts\\mass-False-Dark-960.png",
           "sha256": "74F33755F274C8DAEA29A58D53C186A067A59AAAE387DD1B3D1B67B15027ACA4"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\repeat-charts\\mass-False-Light-420.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\repeat-charts\\mass-False-Light-420.png",
           "sha256": "DAAEEF70F61D085D4818732D14CBC0B03630374CAA658FE5906CDA0BD7F8304B"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\repeat-charts\\mass-False-Light-960.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\repeat-charts\\mass-False-Light-960.png",
           "sha256": "FCB13F7AF59BE48469EDCE07489C7E3CE8F2178665F5BB1C5CD02851C6025C35"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\repeat-charts\\mass-True-Dark-420.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\repeat-charts\\mass-True-Dark-420.png",
           "sha256": "FB526617118535CC1FF333265DA2D00F6B468D87C28E378EAB5711F73CE6F287"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\repeat-charts\\mass-True-Dark-960.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\repeat-charts\\mass-True-Dark-960.png",
           "sha256": "83271EB8AC51C1B6830A276BE0339F535D2A26A2CB0F16B88F0C95B1BDDA41F0"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\repeat-charts\\mass-True-Light-420.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\repeat-charts\\mass-True-Light-420.png",
           "sha256": "25A80DD6D3CCB644C4156E9118FB7E9DABDDD2699AB4CB01C047D77E014A344F"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\repeat-charts\\mass-True-Light-960.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\repeat-charts\\mass-True-Light-960.png",
           "sha256": "AF241A7CB537E418C40D290B86D0AD5F8BDF698FCD6BD5A3A1633CF67E2C1E98"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\repeat-charts\\partition-False-Dark-420.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\repeat-charts\\partition-False-Dark-420.png",
           "sha256": "CC6A57FAD75370EA6908E90F8A8286C2A7B570403612ACE4FCADB9891FB8867D"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\repeat-charts\\partition-False-Dark-960.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\repeat-charts\\partition-False-Dark-960.png",
           "sha256": "D94B142BFC16F11E3A88C75AC9EB70D804B59938B5B7258AB18ACF5384AC890D"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\repeat-charts\\partition-False-Light-420.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\repeat-charts\\partition-False-Light-420.png",
           "sha256": "CC6A57FAD75370EA6908E90F8A8286C2A7B570403612ACE4FCADB9891FB8867D"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\repeat-charts\\partition-False-Light-960.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\repeat-charts\\partition-False-Light-960.png",
           "sha256": "D94B142BFC16F11E3A88C75AC9EB70D804B59938B5B7258AB18ACF5384AC890D"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\repeat-charts\\partition-True-Dark-420.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\repeat-charts\\partition-True-Dark-420.png",
           "sha256": "43AA7A822AABB389C4EAB9FF12680A954FB4AF26E712D4105ED8598A6B18D97B"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\repeat-charts\\partition-True-Dark-960.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\repeat-charts\\partition-True-Dark-960.png",
           "sha256": "5D8D10D59CDE9470800B61B1B1078CD6F78BF8E991735443BCF026785E80706D"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\repeat-charts\\partition-True-Light-420.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\repeat-charts\\partition-True-Light-420.png",
           "sha256": "43AA7A822AABB389C4EAB9FF12680A954FB4AF26E712D4105ED8598A6B18D97B"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\repeat-charts\\partition-True-Light-960.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\repeat-charts\\partition-True-Light-960.png",
           "sha256": "5D8D10D59CDE9470800B61B1B1078CD6F78BF8E991735443BCF026785E80706D"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\repeat-charts\\percent-False-Dark-420.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\repeat-charts\\percent-False-Dark-420.png",
           "sha256": "8BCE40C6E3B0C9F528DC4B572E8541AFB44AA3D3798167A30B0B9D553D88D8F4"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\repeat-charts\\percent-False-Dark-960.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\repeat-charts\\percent-False-Dark-960.png",
           "sha256": "9B08302A4C77B2DBAC0B92396F53A9162C1AF6AF7280D1A9D9FDD95BD5A6F117"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\repeat-charts\\percent-False-Light-420.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\repeat-charts\\percent-False-Light-420.png",
           "sha256": "BB479E33D2A762AF1A89AEFE72F589EFCF773F26BE0626334DE40A95F927A93F"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\repeat-charts\\percent-False-Light-960.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\repeat-charts\\percent-False-Light-960.png",
           "sha256": "E0FB9532AB8C01BEF8EBFE6A2E252BDC8F58326502C86894BD22CD858112FFFC"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\repeat-charts\\percent-True-Dark-420.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\repeat-charts\\percent-True-Dark-420.png",
           "sha256": "76FB3B64A64BF901FF8DA458C14C03B20DD117F13DC8252B098AF2EB5927FA34"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\repeat-charts\\percent-True-Dark-960.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\repeat-charts\\percent-True-Dark-960.png",
           "sha256": "095EA3C45A72717DCEF04BEF4ED10ACE23A24AB408E8A22430442455B6D2C8B4"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\repeat-charts\\percent-True-Light-420.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\repeat-charts\\percent-True-Light-420.png",
           "sha256": "91CB2CB0CC6BBB50E99C1EF687A55E7094E7BF5995A19172C4903BC1D9CDBB8B"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\repeat-charts\\percent-True-Light-960.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\repeat-charts\\percent-True-Light-960.png",
           "sha256": "6B687C34BA64F0B019FFD3D1844AA2ACDFB1348A05D7337EBC7153A1E3BEA343"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\repeat-charts\\recovery-False-Dark-420.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\repeat-charts\\recovery-False-Dark-420.png",
           "sha256": "7684CAD359872FB824D48C8FD7BB6472A57584DDDC83079726C295A92378C6AC"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\repeat-charts\\recovery-False-Dark-960.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\repeat-charts\\recovery-False-Dark-960.png",
           "sha256": "E7E090C790BD500262F56A99BED22D2F6FD0977030BB75CC7BA8797B23BD70A9"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\repeat-charts\\recovery-False-Light-420.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\repeat-charts\\recovery-False-Light-420.png",
           "sha256": "2C164C80C5277A7148695A08665719C4EF96C0F5633A139FA8E0C286B87AAA99"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\repeat-charts\\recovery-False-Light-960.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\repeat-charts\\recovery-False-Light-960.png",
           "sha256": "C9044746264432FCDF5E8546FFB649D7A3E2097DB5DEE202F779CDB242CB6454"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\repeat-charts\\recovery-True-Dark-420.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\repeat-charts\\recovery-True-Dark-420.png",
           "sha256": "49AB9C27FFCB061EA26207D8359DD560245FA576B3FD217B0872383394E16A69"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\repeat-charts\\recovery-True-Dark-960.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\repeat-charts\\recovery-True-Dark-960.png",
           "sha256": "F44CF2BE06E6A2673CF3697499B491F0C04D7C606BFE4619931BC1D70172B290"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\repeat-charts\\recovery-True-Light-420.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\repeat-charts\\recovery-True-Light-420.png",
           "sha256": "0908B34AC89AB70597B3CE728EE34FA9FFA6287B20554B2A0E5C460A222222E8"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\repeat-charts\\recovery-True-Light-960.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\repeat-charts\\recovery-True-Light-960.png",
           "sha256": "AA9300EAE920FA380C59023DA3F799D4CCF79B0CCDDB8862981315B99C7043A7"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\repeat-values.json",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\repeat-values.json",
           "sha256": "0108AC8BC772CD87DCF1F6EE49735788A2A464DBCF321B2A874D53242B36CFAC"
         }
       ],
@@ -842,7 +846,7 @@
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
           "symbol": "native SummaryLine branch text and formatted values; the sole reviewed screen-name substitution is Layer 3 -\u003E the quantitation panel",
-          "sha256": "106080427A4AD78C9256E979E6A8B59BB01825637F7D8CAB9B30631CB1D1DECC"
+          "sha256": "1EB5F952996E46F35E0FE1912CA683327E091439128D92727EF37BE2233E3B03"
         }
       ],
       "proofs": [],
@@ -898,7 +902,7 @@
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
           "symbol": "native SummaryLine branch text and formatted values; the sole reviewed screen-name substitution is Layer 3 -\u003E the quantitation panel",
-          "sha256": "106080427A4AD78C9256E979E6A8B59BB01825637F7D8CAB9B30631CB1D1DECC"
+          "sha256": "1EB5F952996E46F35E0FE1912CA683327E091439128D92727EF37BE2233E3B03"
         }
       ],
       "proofs": [],
@@ -954,7 +958,7 @@
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
           "symbol": "native SummaryLine branch text and formatted values; the sole reviewed screen-name substitution is Layer 3 -\u003E the quantitation panel",
-          "sha256": "106080427A4AD78C9256E979E6A8B59BB01825637F7D8CAB9B30631CB1D1DECC"
+          "sha256": "1EB5F952996E46F35E0FE1912CA683327E091439128D92727EF37BE2233E3B03"
         }
       ],
       "proofs": [],
@@ -1080,7 +1084,7 @@
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
           "symbol": "native SummaryLine branch text and formatted values; the sole reviewed screen-name substitution is Layer 3 -\u003E the quantitation panel",
-          "sha256": "106080427A4AD78C9256E979E6A8B59BB01825637F7D8CAB9B30631CB1D1DECC"
+          "sha256": "1EB5F952996E46F35E0FE1912CA683327E091439128D92727EF37BE2233E3B03"
         }
       ],
       "proofs": [],
@@ -1094,7 +1098,7 @@
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
           "symbol": "native SummaryLine branch text and formatted values; the sole reviewed screen-name substitution is Layer 3 -\u003E the quantitation panel",
-          "sha256": "106080427A4AD78C9256E979E6A8B59BB01825637F7D8CAB9B30631CB1D1DECC"
+          "sha256": "1EB5F952996E46F35E0FE1912CA683327E091439128D92727EF37BE2233E3B03"
         }
       ],
       "proofs": [],
@@ -1122,7 +1126,7 @@
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
           "symbol": "native SummaryLine branch text and formatted values; the sole reviewed screen-name substitution is Layer 3 -\u003E the quantitation panel",
-          "sha256": "106080427A4AD78C9256E979E6A8B59BB01825637F7D8CAB9B30631CB1D1DECC"
+          "sha256": "1EB5F952996E46F35E0FE1912CA683327E091439128D92727EF37BE2233E3B03"
         }
       ],
       "proofs": [],
@@ -1192,7 +1196,7 @@
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
           "symbol": "native SummaryLine branch text and formatted values; the sole reviewed screen-name substitution is Layer 3 -\u003E the quantitation panel",
-          "sha256": "106080427A4AD78C9256E979E6A8B59BB01825637F7D8CAB9B30631CB1D1DECC"
+          "sha256": "1EB5F952996E46F35E0FE1912CA683327E091439128D92727EF37BE2233E3B03"
         }
       ],
       "proofs": [],
@@ -1206,7 +1210,7 @@
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
           "symbol": "native SummaryLine branch text and formatted values; the sole reviewed screen-name substitution is Layer 3 -\u003E the quantitation panel",
-          "sha256": "106080427A4AD78C9256E979E6A8B59BB01825637F7D8CAB9B30631CB1D1DECC"
+          "sha256": "1EB5F952996E46F35E0FE1912CA683327E091439128D92727EF37BE2233E3B03"
         }
       ],
       "proofs": [],
@@ -1304,7 +1308,7 @@
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
           "symbol": "native SummaryLine branch text and formatted values; the sole reviewed screen-name substitution is Layer 3 -\u003E the quantitation panel",
-          "sha256": "106080427A4AD78C9256E979E6A8B59BB01825637F7D8CAB9B30631CB1D1DECC"
+          "sha256": "1EB5F952996E46F35E0FE1912CA683327E091439128D92727EF37BE2233E3B03"
         }
       ],
       "proofs": [],
@@ -1346,7 +1350,7 @@
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
           "symbol": "native SummaryLine branch text and formatted values; the sole reviewed screen-name substitution is Layer 3 -\u003E the quantitation panel",
-          "sha256": "106080427A4AD78C9256E979E6A8B59BB01825637F7D8CAB9B30631CB1D1DECC"
+          "sha256": "1EB5F952996E46F35E0FE1912CA683327E091439128D92727EF37BE2233E3B03"
         }
       ],
       "proofs": [],
@@ -1360,7 +1364,7 @@
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
           "symbol": "native SummaryLine branch text and formatted values; the sole reviewed screen-name substitution is Layer 3 -\u003E the quantitation panel",
-          "sha256": "106080427A4AD78C9256E979E6A8B59BB01825637F7D8CAB9B30631CB1D1DECC"
+          "sha256": "1EB5F952996E46F35E0FE1912CA683327E091439128D92727EF37BE2233E3B03"
         }
       ],
       "proofs": [],
@@ -1444,7 +1448,7 @@
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
           "symbol": "native SummaryLine branch text and formatted values; the sole reviewed screen-name substitution is Layer 3 -\u003E the quantitation panel",
-          "sha256": "106080427A4AD78C9256E979E6A8B59BB01825637F7D8CAB9B30631CB1D1DECC"
+          "sha256": "1EB5F952996E46F35E0FE1912CA683327E091439128D92727EF37BE2233E3B03"
         }
       ],
       "proofs": [],
@@ -1486,7 +1490,7 @@
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
           "symbol": "native SummaryLine branch text and formatted values; the sole reviewed screen-name substitution is Layer 3 -\u003E the quantitation panel",
-          "sha256": "106080427A4AD78C9256E979E6A8B59BB01825637F7D8CAB9B30631CB1D1DECC"
+          "sha256": "1EB5F952996E46F35E0FE1912CA683327E091439128D92727EF37BE2233E3B03"
         }
       ],
       "proofs": [],
@@ -1500,7 +1504,7 @@
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
           "symbol": "native SummaryLine branch text and formatted values; the sole reviewed screen-name substitution is Layer 3 -\u003E the quantitation panel",
-          "sha256": "106080427A4AD78C9256E979E6A8B59BB01825637F7D8CAB9B30631CB1D1DECC"
+          "sha256": "1EB5F952996E46F35E0FE1912CA683327E091439128D92727EF37BE2233E3B03"
         }
       ],
       "proofs": [],
@@ -1514,7 +1518,7 @@
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
           "symbol": "native SummaryLine branch text and formatted values; the sole reviewed screen-name substitution is Layer 3 -\u003E the quantitation panel",
-          "sha256": "106080427A4AD78C9256E979E6A8B59BB01825637F7D8CAB9B30631CB1D1DECC"
+          "sha256": "1EB5F952996E46F35E0FE1912CA683327E091439128D92727EF37BE2233E3B03"
         }
       ],
       "proofs": [],
@@ -1542,7 +1546,7 @@
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
           "symbol": "native SummaryLine branch text and formatted values; the sole reviewed screen-name substitution is Layer 3 -\u003E the quantitation panel",
-          "sha256": "106080427A4AD78C9256E979E6A8B59BB01825637F7D8CAB9B30631CB1D1DECC"
+          "sha256": "1EB5F952996E46F35E0FE1912CA683327E091439128D92727EF37BE2233E3B03"
         }
       ],
       "proofs": [],
@@ -1570,7 +1574,7 @@
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
           "symbol": "native SummaryLine branch text and formatted values; the sole reviewed screen-name substitution is Layer 3 -\u003E the quantitation panel",
-          "sha256": "106080427A4AD78C9256E979E6A8B59BB01825637F7D8CAB9B30631CB1D1DECC"
+          "sha256": "1EB5F952996E46F35E0FE1912CA683327E091439128D92727EF37BE2233E3B03"
         }
       ],
       "proofs": [],
@@ -1584,7 +1588,7 @@
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
           "symbol": "native SummaryLine branch text and formatted values; the sole reviewed screen-name substitution is Layer 3 -\u003E the quantitation panel",
-          "sha256": "106080427A4AD78C9256E979E6A8B59BB01825637F7D8CAB9B30631CB1D1DECC"
+          "sha256": "1EB5F952996E46F35E0FE1912CA683327E091439128D92727EF37BE2233E3B03"
         }
       ],
       "proofs": [],
@@ -1612,7 +1616,7 @@
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
           "symbol": "native SummaryLine branch text and formatted values; the sole reviewed screen-name substitution is Layer 3 -\u003E the quantitation panel",
-          "sha256": "106080427A4AD78C9256E979E6A8B59BB01825637F7D8CAB9B30631CB1D1DECC"
+          "sha256": "1EB5F952996E46F35E0FE1912CA683327E091439128D92727EF37BE2233E3B03"
         }
       ],
       "proofs": [],
@@ -1626,7 +1630,7 @@
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
           "symbol": "native SummaryLine branch text and formatted values; the sole reviewed screen-name substitution is Layer 3 -\u003E the quantitation panel",
-          "sha256": "106080427A4AD78C9256E979E6A8B59BB01825637F7D8CAB9B30631CB1D1DECC"
+          "sha256": "1EB5F952996E46F35E0FE1912CA683327E091439128D92727EF37BE2233E3B03"
         }
       ],
       "proofs": [],
@@ -1640,7 +1644,7 @@
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
           "symbol": "native SummaryLine branch text and formatted values; the sole reviewed screen-name substitution is Layer 3 -\u003E the quantitation panel",
-          "sha256": "106080427A4AD78C9256E979E6A8B59BB01825637F7D8CAB9B30631CB1D1DECC"
+          "sha256": "1EB5F952996E46F35E0FE1912CA683327E091439128D92727EF37BE2233E3B03"
         }
       ],
       "proofs": [],
@@ -1654,7 +1658,7 @@
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
           "symbol": "native SummaryLine branch text and formatted values; the sole reviewed screen-name substitution is Layer 3 -\u003E the quantitation panel",
-          "sha256": "106080427A4AD78C9256E979E6A8B59BB01825637F7D8CAB9B30631CB1D1DECC"
+          "sha256": "1EB5F952996E46F35E0FE1912CA683327E091439128D92727EF37BE2233E3B03"
         }
       ],
       "proofs": [],
@@ -1682,7 +1686,7 @@
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
           "symbol": "native SummaryLine branch text and formatted values; the sole reviewed screen-name substitution is Layer 3 -\u003E the quantitation panel",
-          "sha256": "106080427A4AD78C9256E979E6A8B59BB01825637F7D8CAB9B30631CB1D1DECC"
+          "sha256": "1EB5F952996E46F35E0FE1912CA683327E091439128D92727EF37BE2233E3B03"
         }
       ],
       "proofs": [],
@@ -1724,7 +1728,7 @@
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
           "symbol": "native SummaryLine branch text and formatted values; the sole reviewed screen-name substitution is Layer 3 -\u003E the quantitation panel",
-          "sha256": "106080427A4AD78C9256E979E6A8B59BB01825637F7D8CAB9B30631CB1D1DECC"
+          "sha256": "1EB5F952996E46F35E0FE1912CA683327E091439128D92727EF37BE2233E3B03"
         }
       ],
       "proofs": [],
@@ -1752,7 +1756,7 @@
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
           "symbol": "native SummaryLine branch text and formatted values; the sole reviewed screen-name substitution is Layer 3 -\u003E the quantitation panel",
-          "sha256": "106080427A4AD78C9256E979E6A8B59BB01825637F7D8CAB9B30631CB1D1DECC"
+          "sha256": "1EB5F952996E46F35E0FE1912CA683327E091439128D92727EF37BE2233E3B03"
         }
       ],
       "proofs": [],
@@ -1766,7 +1770,7 @@
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
           "symbol": "native SummaryLine branch text and formatted values; the sole reviewed screen-name substitution is Layer 3 -\u003E the quantitation panel",
-          "sha256": "106080427A4AD78C9256E979E6A8B59BB01825637F7D8CAB9B30631CB1D1DECC"
+          "sha256": "1EB5F952996E46F35E0FE1912CA683327E091439128D92727EF37BE2233E3B03"
         }
       ],
       "proofs": [],
@@ -1808,7 +1812,7 @@
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
           "symbol": "native SummaryLine branch text and formatted values; the sole reviewed screen-name substitution is Layer 3 -\u003E the quantitation panel",
-          "sha256": "106080427A4AD78C9256E979E6A8B59BB01825637F7D8CAB9B30631CB1D1DECC"
+          "sha256": "1EB5F952996E46F35E0FE1912CA683327E091439128D92727EF37BE2233E3B03"
         }
       ],
       "proofs": [],
@@ -1864,7 +1868,7 @@
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
           "symbol": "native SummaryLine branch text and formatted values; the sole reviewed screen-name substitution is Layer 3 -\u003E the quantitation panel",
-          "sha256": "106080427A4AD78C9256E979E6A8B59BB01825637F7D8CAB9B30631CB1D1DECC"
+          "sha256": "1EB5F952996E46F35E0FE1912CA683327E091439128D92727EF37BE2233E3B03"
         }
       ],
       "proofs": [],
@@ -1892,7 +1896,7 @@
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
           "symbol": "native SummaryLine branch text and formatted values; the sole reviewed screen-name substitution is Layer 3 -\u003E the quantitation panel",
-          "sha256": "106080427A4AD78C9256E979E6A8B59BB01825637F7D8CAB9B30631CB1D1DECC"
+          "sha256": "1EB5F952996E46F35E0FE1912CA683327E091439128D92727EF37BE2233E3B03"
         }
       ],
       "proofs": [],
@@ -1906,7 +1910,7 @@
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
           "symbol": "native SummaryLine branch text and formatted values; the sole reviewed screen-name substitution is Layer 3 -\u003E the quantitation panel",
-          "sha256": "106080427A4AD78C9256E979E6A8B59BB01825637F7D8CAB9B30631CB1D1DECC"
+          "sha256": "1EB5F952996E46F35E0FE1912CA683327E091439128D92727EF37BE2233E3B03"
         }
       ],
       "proofs": [],
@@ -1920,7 +1924,7 @@
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
           "symbol": "native SummaryLine branch text and formatted values; the sole reviewed screen-name substitution is Layer 3 -\u003E the quantitation panel",
-          "sha256": "106080427A4AD78C9256E979E6A8B59BB01825637F7D8CAB9B30631CB1D1DECC"
+          "sha256": "1EB5F952996E46F35E0FE1912CA683327E091439128D92727EF37BE2233E3B03"
         }
       ],
       "proofs": [],
@@ -1934,7 +1938,7 @@
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
           "symbol": "native SummaryLine branch text and formatted values; the sole reviewed screen-name substitution is Layer 3 -\u003E the quantitation panel",
-          "sha256": "106080427A4AD78C9256E979E6A8B59BB01825637F7D8CAB9B30631CB1D1DECC"
+          "sha256": "1EB5F952996E46F35E0FE1912CA683327E091439128D92727EF37BE2233E3B03"
         }
       ],
       "proofs": [],
@@ -1981,7 +1985,7 @@
           "kind": "test",
           "target": "ResultsRuntimeLedgerCommand",
           "assertion": "RS runtime kind code fact: every listed native branch comparison and deterministic repeat passed",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\proofs.log",
           "inspectedBy": ""
         }
       ]
@@ -1995,7 +1999,7 @@
           "kind": "test",
           "target": "ResultsRuntimeLedgerCommand",
           "assertion": "RS runtime kind export/storage fact: every listed native branch comparison and deterministic repeat passed",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\proofs.log",
           "inspectedBy": ""
         }
       ]
@@ -2009,7 +2013,7 @@
           "kind": "test",
           "target": "ResultsRuntimeLedgerCommand",
           "assertion": "RS runtime kind format/export: every listed native branch comparison and deterministic repeat passed",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\results-runtime\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\results-runtime\\proofs.log",
           "inspectedBy": ""
         }
       ]
