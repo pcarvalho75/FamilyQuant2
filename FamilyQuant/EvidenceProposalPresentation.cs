@@ -9,6 +9,8 @@ namespace FamilyQuant
     /// <summary>Copies supplied scientific facts into display rows without classifying or applying them.</summary>
     public static class EvidenceProposalPresentation
     {
+        public const string QueryCoverageRule =
+            "At least 70 percent of the query's residues occur in the alignment; inserted gap columns do not count.";
         public static EvidenceReviewInput Present(EvidenceProposal proposal, FamilyClusterFile file)
         {
             var input = Present(proposal, file.MyExtendedFastaItems, file.LockedUserIds);
@@ -73,10 +75,19 @@ namespace FamilyQuant
             _ => tier.ToString()
         };
 
-        private static string NeighbourText(NearestNeighbour? n) => n == null ? "" :
-            n.Accession + "; " + n.IdentityPercent.ToString("0.##", CultureInfo.CurrentCulture) + "% identity; "
-            + n.QueryAlignedPercent.ToString("0.##", CultureInfo.CurrentCulture) + "% of query aligned ("
-            + n.AlignmentLength + "/" + n.QueryLength + "); reference length " + n.ReferenceLength
-            + "; family " + n.Family + (n.TiedFamilies.Count == 0 ? "" : "; tied families: " + string.Join(", ", n.TiedFamilies));
+        private static string NeighbourText(NearestNeighbour? n)
+        {
+            if (n == null) return "";
+            string coverage = n.QueryCoveragePercent is double percent
+                ? percent.ToString("0.##", CultureInfo.CurrentCulture) + "% of query residues ("
+                    + n.QueryAlignedResidues!.Value.ToString(CultureInfo.CurrentCulture) + "/"
+                    + n.QueryLength.ToString(CultureInfo.CurrentCulture) + ")"
+                : "query coverage not recorded; aligned query residues not recorded";
+            return n.Accession + "; " + n.IdentityPercent.ToString("0.##", CultureInfo.CurrentCulture) + "% identity; "
+                + coverage + "; alignment columns " + n.AlignmentLength.ToString(CultureInfo.CurrentCulture)
+                + "; query length " + n.QueryLength.ToString(CultureInfo.CurrentCulture)
+                + "; reference length " + n.ReferenceLength.ToString(CultureInfo.CurrentCulture)
+                + "; family " + n.Family + (n.TiedFamilies.Count == 0 ? "" : "; tied families: " + string.Join(", ", n.TiedFamilies));
+        }
     }
 }
