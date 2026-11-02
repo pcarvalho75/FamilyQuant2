@@ -17,7 +17,7 @@ Render targets refer to `ScreenHarness.Screens`, captured with `--screens <outpu
 Release gate: `FamilyQuant.Tests.exe --feature-ledger-release-check` fails until every retained row is VERIFIED with evidence. Authorized DROP rows use APPROVED_DROP, which records a decision, not a completed UI removal. The normal quick suite permits OPEN rows during development. Regeneration resets retained rows to OPEN; preserve reviewed evidence when updating the scanner.
 
 Scan count: **5756**. Ledger rows: **5756**. Source files: **104**.
-Authorized DROP rows: **296**; proposed VERIFIED retained rows: **3764**; OPEN retained rows: **1696**.
+Authorized DROP rows: **296**; proposed VERIFIED retained rows: **3820**; OPEN retained rows: **1640**.
 
 | ID | Disposition | Kind | Frozen source | Fact or control | Planned check | State | Evidence |
 |---|---|---|---|---|---|---|---|
@@ -356,7 +356,7 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **3764**; OPEN r
 | FQ15-EF96CD28B8C0 | IMPROVE | tooltip | FamilyQuant/ClusterGenerationControl.xaml:149 | TextBoxWordsToBeExcluded.ToolTip = Words to ignore when comparing descriptions, separated by commas or spaces, for example: protein, domain, fragment. Use it when a common word pulls unrelated families together; it also applies to Create Super Cluster. | render:03-curation | OPEN | pending |
 | FQ15-F7C544AA3218 | IMPROVE | control | FamilyQuant/ClusterGenerationControl.xaml:152 | Button ButtonWordCluster | test:ShellMetadataReceipts | VERIFIED | evidence:C1-runtime:FQ15-F7C544AA3218 |
 | FQ15-DD9B83A6383B | IMPROVE | option/copy | FamilyQuant/ClusterGenerationControl.xaml:152 | ButtonWordCluster.Content = Recluster by Words | render:03-curation | OPEN | pending |
-| FQ15-FA8FFCD4C266 | KEEP | handler | FamilyQuant/ClusterGenerationControl.xaml:153 | ButtonWordCluster.Click = ButtonWordCluster_Click | render:03-curation | OPEN | pending |
+| FQ15-FA8FFCD4C266 | KEEP | handler | FamilyQuant/ClusterGenerationControl.xaml:153 | ButtonWordCluster.Click = ButtonWordCluster_Click | test:CurationActionProbe | VERIFIED | evidence:SH-curation-actions:FQ15-FA8FFCD4C266 |
 | FQ15-8CF463172DFA | IMPROVE | tooltip | FamilyQuant/ClusterGenerationControl.xaml:154 | ButtonWordCluster.ToolTip = Merges families whose descriptions are at least as similar as the Similarity value. Family numbers change and percentages are recalculated; press Undo to step it back. | render:03-curation | OPEN | pending |
 | FQ15-85D51618BA6C | IMPROVE | option/copy | FamilyQuant/ClusterGenerationControl.xaml:159 | Label.Content = Super Cluster Keywords: | render:03-curation | OPEN | pending |
 | FQ15-0A29B5097BB3 | IMPROVE | tooltip | FamilyQuant/ClusterGenerationControl.xaml:160 | Label.ToolTip = Keywords that define one deliberately large family. | render:03-curation | OPEN | pending |
@@ -379,7 +379,7 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **3764**; OPEN r
 | FQ15-6C127EDE518A | IMPROVE | tooltip | FamilyQuant/ClusterGenerationControl.xaml:181 | TextBoxSuperClusterExclude.ToolTip = Whole words that keep a protein out of the super cluster, separated by commas or spaces, for example: inhibitor, matrix. The rest of its family still joins. Use it to gather 'phospholipase' while leaving out 'phospholipase inhibitor'. | render:03-curation | OPEN | pending |
 | FQ15-1DD0C23A46B1 | IMPROVE | control | FamilyQuant/ClusterGenerationControl.xaml:184 | Button ButtonSuperCluster | test:ShellMetadataReceipts | VERIFIED | evidence:C1-runtime:FQ15-1DD0C23A46B1 |
 | FQ15-AA5164A600DE | IMPROVE | option/copy | FamilyQuant/ClusterGenerationControl.xaml:184 | ButtonSuperCluster.Content = Create Super Cluster | render:03-curation | OPEN | pending |
-| FQ15-D3695665884F | KEEP | handler | FamilyQuant/ClusterGenerationControl.xaml:185 | ButtonSuperCluster.Click = ButtonSuperCluster_Click | render:03-curation | OPEN | pending |
+| FQ15-D3695665884F | KEEP | handler | FamilyQuant/ClusterGenerationControl.xaml:185 | ButtonSuperCluster.Click = ButtonSuperCluster_Click | test:CurationActionProbe | VERIFIED | evidence:SH-curation-actions:FQ15-D3695665884F |
 | FQ15-0F3C5F5D43F5 | IMPROVE | option/copy | FamilyQuant/ClusterGenerationControl.xaml:185 | ButtonSuperCluster.IsEnabled = False | render:03-curation | OPEN | pending |
 | FQ15-CF4118C913D1 | IMPROVE | tooltip | FamilyQuant/ClusterGenerationControl.xaml:186 | ButtonSuperCluster.ToolTip = Shows every protein that would join, each with a tick, before anything changes, then gathers the ticked ones into one family, and Undo steps it back. Disabled until you type a keyword in the box to the left. | render:03-curation | OPEN | pending |
 | FQ15-79D69E00F881 | IMPROVE | option/copy | FamilyQuant/ClusterGenerationControl.xaml:205 | Label.Content = Selected rows: | render:03-curation | OPEN | pending |
@@ -394,7 +394,7 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **3764**; OPEN r
 | FQ15-E79AAA4079D1 | IMPROVE | tooltip | FamilyQuant/ClusterGenerationControl.xaml:215 | TextBoxBatchAnnotation.ToolTip = Text for the User Annotation column of every selected row, for example: cellular proteins. Leave it empty to keep their annotations; annotations are exported with the CSV. | render:03-curation | OPEN | pending |
 | FQ15-A38752F9FF5C | IMPROVE | control | FamilyQuant/ClusterGenerationControl.xaml:217 | Button ButtonApplyToSelected | test:ShellMetadataReceipts | VERIFIED | evidence:C1-runtime:FQ15-A38752F9FF5C |
 | FQ15-3BA9E50CC75B | IMPROVE | option/copy | FamilyQuant/ClusterGenerationControl.xaml:217 | ButtonApplyToSelected.Content = Apply to selected rows | test:ShellLedgerComparisonCommand | VERIFIED | evidence:C1:FQ15-3BA9E50CC75B |
-| FQ15-8ECA0ED7BB80 | KEEP | handler | FamilyQuant/ClusterGenerationControl.xaml:218 | ButtonApplyToSelected.Click = ButtonApplyToSelected_Click | render:03-curation | OPEN | pending |
+| FQ15-8ECA0ED7BB80 | KEEP | handler | FamilyQuant/ClusterGenerationControl.xaml:218 | ButtonApplyToSelected.Click = ButtonApplyToSelected_Click | test:CurationActionProbe | VERIFIED | evidence:SH-curation-actions:FQ15-8ECA0ED7BB80 |
 | FQ15-5D851DA8FF1E | IMPROVE | tooltip | FamilyQuant/ClusterGenerationControl.xaml:219 | ButtonApplyToSelected.ToolTip = Gives every selected row the User ID and/or annotation typed to the left. Select with Ctrl+click or Shift+click, or Ctrl+A for all visible rows; Undo steps it back. | render:03-curation | OPEN | pending |
 | FQ15-0DE1D8B77CF6 | IMPROVE | tooltip | FamilyQuant/ClusterGenerationControl.xaml:223 | TextBlockBatchStatus.ToolTip = What the last 'Apply to selected rows' did, or why it did nothing. | render:03-curation | OPEN | pending |
 | FQ15-CEB71924758E | IMPROVE | option/copy | FamilyQuant/ClusterGenerationControl.xaml:227 | Label.Content = Curation locks: | render:03-curation | OPEN | pending |
@@ -415,7 +415,7 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **3764**; OPEN r
 | FQ15-01F167226B8C | IMPROVE | option/copy | FamilyQuant/ClusterGenerationControl.xaml:256 | TextBlockLayer2State.Text = PENDING | test:ShellMetadataReceipts | VERIFIED | evidence:C1-runtime:FQ15-01F167226B8C |
 | FQ15-FE4D453E16C1 | IMPROVE | control | FamilyQuant/ClusterGenerationControl.xaml:262 | Button ButtonLoadQuantData | test:ShellMetadataReceipts | VERIFIED | evidence:C1-runtime:FQ15-FE4D453E16C1 |
 | FQ15-74B2A7D3812E | IMPROVE | option/copy | FamilyQuant/ClusterGenerationControl.xaml:262 | ButtonLoadQuantData.Content = Load PLP File | render:03-curation | OPEN | pending |
-| FQ15-F858A5EF8F7D | KEEP | handler | FamilyQuant/ClusterGenerationControl.xaml:263 | ButtonLoadQuantData.Click = ButtonLoadQuantData_Click | render:03-curation | OPEN | pending |
+| FQ15-F858A5EF8F7D | KEEP | handler | FamilyQuant/ClusterGenerationControl.xaml:263 | ButtonLoadQuantData.Click = ButtonLoadQuantData_Click | test:CurationActionProbe | VERIFIED | evidence:SH-curation-actions:FQ15-F858A5EF8F7D |
 | FQ15-1289ECC17F86 | IMPROVE | tooltip | FamilyQuant/ClusterGenerationControl.xaml:264 | ButtonLoadQuantData.ToolTip = Loads a PatternLab project (.plp) to fill the share column for these families. It must be exported at PEPTIDE level; a protein-level export makes every row read 0. | render:03-curation | OPEN | pending |
 | FQ15-D206355200E1 | IMPROVE | option/copy | FamilyQuant/ClusterGenerationControl.xaml:268 | TextBlock.Text = Status: | render:03-curation | OPEN | pending |
 | FQ15-EAE48FA17375 | IMPROVE | tooltip | FamilyQuant/ClusterGenerationControl.xaml:269 | TextBlock.ToolTip = Which quantitation project is loaded, if any. | render:03-curation | OPEN | pending |
@@ -426,14 +426,14 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **3764**; OPEN r
 | FQ15-C964975CDAB4 | IMPROVE | option/copy | FamilyQuant/ClusterGenerationControl.xaml:305 | Label.Content = Shared peptides: | render:03-curation | OPEN | pending |
 | FQ15-20BC0B076967 | IMPROVE | tooltip | FamilyQuant/ClusterGenerationControl.xaml:306 | Label.ToolTip = What to do with a peptide that belongs to more than one family. | render:03-curation | OPEN | pending |
 | FQ15-9623A155C7C2 | IMPROVE | control | FamilyQuant/ClusterGenerationControl.xaml:307 | ComboBox ComboBoxSharedPeptides | test:ShellMetadataReceipts | VERIFIED | evidence:C1-runtime:FQ15-9623A155C7C2 |
-| FQ15-58795AB24692 | KEEP | handler | FamilyQuant/ClusterGenerationControl.xaml:310 | ComboBoxSharedPeptides.SelectionChanged = ComboBoxNormalization_SelectionChanged | render:03-curation | OPEN | pending |
+| FQ15-58795AB24692 | KEEP | handler | FamilyQuant/ClusterGenerationControl.xaml:310 | ComboBoxSharedPeptides.SelectionChanged = ComboBoxNormalization_SelectionChanged | test:CurationActionProbe | VERIFIED | evidence:SH-curation-actions:FQ15-58795AB24692 |
 | FQ15-46B2DB4C62F7 | IMPROVE | control | FamilyQuant/ClusterGenerationControl.xaml:311 | ComboBoxItem SharedItemUnique | test:ShellMetadataReceipts | VERIFIED | evidence:C1-runtime:FQ15-46B2DB4C62F7 |
 | FQ15-AEE2B7BF8C6E | IMPROVE | control | FamilyQuant/ClusterGenerationControl.xaml:312 | ComboBoxItem SharedItemSplit | test:ShellMetadataReceipts | VERIFIED | evidence:C1-runtime:FQ15-AEE2B7BF8C6E |
 | FQ15-38B7F0A5F5EC | IMPROVE | control | FamilyQuant/ClusterGenerationControl.xaml:313 | ComboBoxItem SharedItemEvery | test:ShellMetadataReceipts | VERIFIED | evidence:C1-runtime:FQ15-38B7F0A5F5EC |
 | FQ15-A62DED5AD4E2 | IMPROVE | option/copy | FamilyQuant/ClusterGenerationControl.xaml:322 | Label.Content = Report XIC as: | render:03-curation | OPEN | pending |
 | FQ15-346A7A4441BD | IMPROVE | tooltip | FamilyQuant/ClusterGenerationControl.xaml:323 | Label.ToolTip = What the numbers in the share column are a percentage OF. | render:03-curation | OPEN | pending |
 | FQ15-DF1DECF277A7 | IMPROVE | control | FamilyQuant/ClusterGenerationControl.xaml:324 | ComboBox ComboBoxNormalization | test:ShellMetadataReceipts | VERIFIED | evidence:C1-runtime:FQ15-DF1DECF277A7 |
-| FQ15-DA0F0BB74285 | KEEP | handler | FamilyQuant/ClusterGenerationControl.xaml:327 | ComboBoxNormalization.SelectionChanged = ComboBoxNormalization_SelectionChanged | render:03-curation | OPEN | pending |
+| FQ15-DA0F0BB74285 | KEEP | handler | FamilyQuant/ClusterGenerationControl.xaml:327 | ComboBoxNormalization.SelectionChanged = ComboBoxNormalization_SelectionChanged | test:CurationActionProbe | VERIFIED | evidence:SH-curation-actions:FQ15-DA0F0BB74285 |
 | FQ15-A7797B59A49B | IMPROVE | control | FamilyQuant/ClusterGenerationControl.xaml:335 | ComboBoxItem ModeItemIdentified | test:ShellMetadataReceipts | VERIFIED | evidence:C1-runtime:FQ15-A7797B59A49B |
 | FQ15-3F9DEF631CD6 | IMPROVE | control | FamilyQuant/ClusterGenerationControl.xaml:336 | ComboBoxItem ModeItemTic | test:ShellMetadataReceipts | VERIFIED | evidence:C1-runtime:FQ15-3F9DEF631CD6 |
 | FQ15-837C59E34EBC | IMPROVE | control | FamilyQuant/ClusterGenerationControl.xaml:337 | ComboBoxItem ModeItemPeptideSignal | test:ShellMetadataReceipts | VERIFIED | evidence:C1-runtime:FQ15-837C59E34EBC |
@@ -441,7 +441,7 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **3764**; OPEN r
 | FQ15-6855AF0D2D17 | IMPROVE | option/copy | FamilyQuant/ClusterGenerationControl.xaml:347 | Label.Content = Full XIC share of: | render:03-curation | OPEN | pending |
 | FQ15-07F64705D40E | IMPROVE | tooltip | FamilyQuant/ClusterGenerationControl.xaml:348 | Label.ToolTip = What the Full XIC share column is a percentage OF. | render:03-curation | OPEN | pending |
 | FQ15-7DDA6832FD2F | IMPROVE | control | FamilyQuant/ClusterGenerationControl.xaml:349 | ComboBox ComboBoxFullXicBasis | test:ShellMetadataReceipts | VERIFIED | evidence:C1-runtime:FQ15-7DDA6832FD2F |
-| FQ15-711F8AB8FED2 | KEEP | handler | FamilyQuant/ClusterGenerationControl.xaml:351 | ComboBoxFullXicBasis.SelectionChanged = ComboBoxFullXicBasis_SelectionChanged | render:03-curation | OPEN | pending |
+| FQ15-711F8AB8FED2 | KEEP | handler | FamilyQuant/ClusterGenerationControl.xaml:351 | ComboBoxFullXicBasis.SelectionChanged = ComboBoxFullXicBasis_SelectionChanged | test:CurationActionProbe | VERIFIED | evidence:SH-curation-actions:FQ15-711F8AB8FED2 |
 | FQ15-78968F255E60 | IMPROVE | tooltip | FamilyQuant/ClusterGenerationControl.xaml:352 | ComboBoxFullXicBasis.ToolTip = What the Full XIC share column is divided by. Use 'the quantified signal' for a composition (a pie chart of the families), 'the total ion current' for each family's share of the whole sample. Applies at once. | render:03-curation | OPEN | pending |
 | FQ15-E2B00FC280B8 | IMPROVE | control | FamilyQuant/ClusterGenerationControl.xaml:353 | ComboBoxItem FullXicBasisQuantified | test:ShellMetadataReceipts | VERIFIED | evidence:C1-runtime:FQ15-E2B00FC280B8 |
 | FQ15-BD9B0E4C8984 | IMPROVE | option/copy | FamilyQuant/ClusterGenerationControl.xaml:353 | FullXicBasisQuantified.Content = the quantified signal | test:ShellLedgerComparisonCommand | VERIFIED | evidence:C1:FQ15-BD9B0E4C8984 |
@@ -455,7 +455,7 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **3764**; OPEN r
 | FQ15-3D8C4BD3E245 | IMPROVE | option/copy | FamilyQuant/ClusterGenerationControl.xaml:368 | TextBlockQuantProfile.Text = Load a project in Layer 2 to see how it was exported. | render:03-curation | OPEN | pending |
 | FQ15-3DA6AEC552E0 | IMPROVE | control | FamilyQuant/ClusterGenerationControl.xaml:371 | Button ButtonRecalculateQuantitation | test:ShellMetadataReceipts | VERIFIED | evidence:C1-runtime:FQ15-3DA6AEC552E0 |
 | FQ15-6A1D7B2FCA11 | IMPROVE | option/copy | FamilyQuant/ClusterGenerationControl.xaml:373 | ButtonRecalculateQuantitation.Content = \u27F3 Recalculate | render:03-curation | OPEN | pending |
-| FQ15-1A0C69A53B5A | KEEP | handler | FamilyQuant/ClusterGenerationControl.xaml:376 | ButtonRecalculateQuantitation.Click = ButtonRecalculateQuantitation_Click | render:03-curation | OPEN | pending |
+| FQ15-1A0C69A53B5A | KEEP | handler | FamilyQuant/ClusterGenerationControl.xaml:376 | ButtonRecalculateQuantitation.Click = ButtonRecalculateQuantitation_Click | test:CurationActionProbe | VERIFIED | evidence:SH-curation-actions:FQ15-1A0C69A53B5A |
 | FQ15-D02C1CA346AB | IMPROVE | option/copy | FamilyQuant/ClusterGenerationControl.xaml:377 | ButtonRecalculateQuantitation.IsEnabled = False | test:ShellLedgerComparisonCommand | VERIFIED | evidence:C1:FQ15-D02C1CA346AB |
 | FQ15-BEF6F613076C | IMPROVE | tooltip | FamilyQuant/ClusterGenerationControl.xaml:378 | ButtonRecalculateQuantitation.ToolTip = Applies the two choices on the left to the share column; the button changes colour when the table is out of date. Disabled until a PatternLab project is loaded in Layer 2. | render:03-curation | OPEN | pending |
 | FQ15-B86AA6571114 | IMPROVE | option/copy | FamilyQuant/ClusterGenerationControl.xaml:387 | Run.Text = \u2139\uFE0F  How quantitation works: | render:03-curation | OPEN | pending |
@@ -466,35 +466,35 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **3764**; OPEN r
 | FQ15-D6E1B5687C47 | IMPROVE | option/copy | FamilyQuant/ClusterGenerationControl.xaml:405 | TextBlockExportState.Text = READY | test:ShellMetadataReceipts | VERIFIED | evidence:C1-runtime:FQ15-D6E1B5687C47 |
 | FQ15-E945F32A44FD | IMPROVE | control | FamilyQuant/ClusterGenerationControl.xaml:411 | CheckBox CheckBoxShowXICOnly | test:ShellMetadataReceipts | VERIFIED | evidence:C1-runtime:FQ15-E945F32A44FD |
 | FQ15-0A76FC7C4A9C | IMPROVE | option/copy | FamilyQuant/ClusterGenerationControl.xaml:411 | CheckBoxShowXICOnly.Content = Show Only XIC &gt; 0 | render:03-curation | OPEN | pending |
-| FQ15-9A0FD81603C0 | KEEP | handler | FamilyQuant/ClusterGenerationControl.xaml:413 | CheckBoxShowXICOnly.Checked = CheckBoxShowXICOnly_CheckedChanged | render:03-curation | OPEN | pending |
-| FQ15-31DFF14F0E7F | KEEP | handler | FamilyQuant/ClusterGenerationControl.xaml:414 | CheckBoxShowXICOnly.Unchecked = CheckBoxShowXICOnly_CheckedChanged | render:03-curation | OPEN | pending |
+| FQ15-9A0FD81603C0 | KEEP | handler | FamilyQuant/ClusterGenerationControl.xaml:413 | CheckBoxShowXICOnly.Checked = CheckBoxShowXICOnly_CheckedChanged | test:CurationActionProbe | VERIFIED | evidence:SH-curation-actions:FQ15-9A0FD81603C0 |
+| FQ15-31DFF14F0E7F | KEEP | handler | FamilyQuant/ClusterGenerationControl.xaml:414 | CheckBoxShowXICOnly.Unchecked = CheckBoxShowXICOnly_CheckedChanged | test:CurationActionProbe | VERIFIED | evidence:SH-curation-actions:FQ15-31DFF14F0E7F |
 | FQ15-8AF2BD7E4C9F | IMPROVE | tooltip | FamilyQuant/ClusterGenerationControl.xaml:415 | CheckBoxShowXICOnly.ToolTip = Hides families with no quantitation, so only the families your project measured are shown. Percentages do not change. Off by default. | render:03-curation | OPEN | pending |
 | FQ15-3729DC76C6F7 | IMPROVE | control | FamilyQuant/ClusterGenerationControl.xaml:417 | CheckBox CheckBoxExcludeContaminants | test:ShellMetadataReceipts | VERIFIED | evidence:C1-runtime:FQ15-3729DC76C6F7 |
 | FQ15-26D371043959 | IMPROVE | option/copy | FamilyQuant/ClusterGenerationControl.xaml:417 | CheckBoxExcludeContaminants.Content = Hide Contaminants | render:03-curation | OPEN | pending |
-| FQ15-DDCCACAC07BE | KEEP | handler | FamilyQuant/ClusterGenerationControl.xaml:419 | CheckBoxExcludeContaminants.Checked = CheckBoxShowXICOnly_CheckedChanged | render:03-curation | OPEN | pending |
-| FQ15-1232366124D9 | KEEP | handler | FamilyQuant/ClusterGenerationControl.xaml:420 | CheckBoxExcludeContaminants.Unchecked = CheckBoxShowXICOnly_CheckedChanged | render:03-curation | OPEN | pending |
+| FQ15-DDCCACAC07BE | KEEP | handler | FamilyQuant/ClusterGenerationControl.xaml:419 | CheckBoxExcludeContaminants.Checked = CheckBoxShowXICOnly_CheckedChanged | test:CurationActionProbe | VERIFIED | evidence:SH-curation-actions:FQ15-DDCCACAC07BE |
+| FQ15-1232366124D9 | KEEP | handler | FamilyQuant/ClusterGenerationControl.xaml:420 | CheckBoxExcludeContaminants.Unchecked = CheckBoxShowXICOnly_CheckedChanged | test:CurationActionProbe | VERIFIED | evidence:SH-curation-actions:FQ15-1232366124D9 |
 | FQ15-8F7963BD883F | IMPROVE | tooltip | FamilyQuant/ClusterGenerationControl.xaml:421 | CheckBoxExcludeContaminants.ToolTip = Hides entries whose identifier contains 'contaminant' (keratins, trypsin, serum proteins) from the table and the CSV. Percentages do not change, so in '% of identified signal' the visible ones no longer add up to 100%. | render:03-curation | OPEN | pending |
 | FQ15-C06D8D3ABE36 | IMPROVE | control | FamilyQuant/ClusterGenerationControl.xaml:423 | CheckBox CheckBoxExcludeReverse | test:CurationScreenTests | VERIFIED | evidence:C1:FQ15-C06D8D3ABE36 |
 | FQ15-CED60D610474 | IMPROVE | option/copy | FamilyQuant/ClusterGenerationControl.xaml:423 | CheckBoxExcludeReverse.Content = Hide Reverse (decoys) | render:03-curation | OPEN | pending |
-| FQ15-C2C55772DDCD | KEEP | handler | FamilyQuant/ClusterGenerationControl.xaml:425 | CheckBoxExcludeReverse.Checked = CheckBoxExcludeReverse_CheckedChanged | render:03-curation | OPEN | pending |
-| FQ15-824A61ACB001 | KEEP | handler | FamilyQuant/ClusterGenerationControl.xaml:426 | CheckBoxExcludeReverse.Unchecked = CheckBoxExcludeReverse_CheckedChanged | render:03-curation | OPEN | pending |
+| FQ15-C2C55772DDCD | KEEP | handler | FamilyQuant/ClusterGenerationControl.xaml:425 | CheckBoxExcludeReverse.Checked = CheckBoxExcludeReverse_CheckedChanged | test:CurationActionProbe | VERIFIED | evidence:SH-curation-actions:FQ15-C2C55772DDCD |
+| FQ15-824A61ACB001 | KEEP | handler | FamilyQuant/ClusterGenerationControl.xaml:426 | CheckBoxExcludeReverse.Unchecked = CheckBoxExcludeReverse_CheckedChanged | test:CurationActionProbe | VERIFIED | evidence:SH-curation-actions:FQ15-824A61ACB001 |
 | FQ15-F9E8273066A4 | IMPROVE | tooltip | FamilyQuant/ClusterGenerationControl.xaml:427 | CheckBoxExcludeReverse.ToolTip = Hides decoys, whose identifier starts with 'Reverse_', from the table and the CSV. Nothing is deleted and no percentage moves; keep them visible while judging the clustering. | render:03-curation | OPEN | pending |
 | FQ15-8D7B25407979 | IMPROVE | control | FamilyQuant/ClusterGenerationControl.xaml:429 | Button ButtonSaveReport | test:ShellMetadataReceipts | VERIFIED | evidence:C1-runtime:FQ15-8D7B25407979 |
-| FQ15-92A4702A8D4F | KEEP | handler | FamilyQuant/ClusterGenerationControl.xaml:429 | ButtonSaveReport.Click = ButtonSaveReport_Click | render:03-curation | OPEN | pending |
+| FQ15-92A4702A8D4F | KEEP | handler | FamilyQuant/ClusterGenerationControl.xaml:429 | ButtonSaveReport.Click = ButtonSaveReport_Click | test:CurationActionProbe | VERIFIED | evidence:SH-curation-actions:FQ15-92A4702A8D4F |
 | FQ15-242403E763BC | IMPROVE | option/copy | FamilyQuant/ClusterGenerationControl.xaml:430 | ButtonSaveReport.Content = \uD83D\uDCBE Export to CSV | render:03-curation | OPEN | pending |
 | FQ15-C8E0420448F6 | IMPROVE | tooltip | FamilyQuant/ClusterGenerationControl.xaml:431 | ButtonSaveReport.ToolTip = Writes the visible rows, with the table's columns, to a CSV file; shares are fractions from 0 to 1 with a dot as decimal point. Disabled while every row is hidden by a filter. | render:03-curation | OPEN | pending |
 | FQ15-B404339E9906 | IMPROVE | control | FamilyQuant/ClusterGenerationControl.xaml:434 | Button ButtonExportComposition | test:ShellMetadataReceipts | VERIFIED | evidence:C1-runtime:FQ15-B404339E9906 |
-| FQ15-E991B91E70F7 | KEEP | handler | FamilyQuant/ClusterGenerationControl.xaml:434 | ButtonExportComposition.Click = ButtonExportComposition_Click | render:03-curation | OPEN | pending |
+| FQ15-E991B91E70F7 | KEEP | handler | FamilyQuant/ClusterGenerationControl.xaml:434 | ButtonExportComposition.Click = ButtonExportComposition_Click | test:CurationActionProbe | VERIFIED | evidence:SH-curation-actions:FQ15-E991B91E70F7 |
 | FQ15-D96F3083D0A8 | IMPROVE | option/copy | FamilyQuant/ClusterGenerationControl.xaml:435 | ButtonExportComposition.Content = \uD83E\uDD67 Export family composition (CSV) | render:03-curation | OPEN | pending |
 | FQ15-5096F1A8AE3A | IMPROVE | option/copy | FamilyQuant/ClusterGenerationControl.xaml:435 | ButtonExportComposition.IsEnabled = False | test:ShellLedgerComparisonCommand | VERIFIED | evidence:C1:FQ15-5096F1A8AE3A |
 | FQ15-E911CE9EA6C6 | IMPROVE | tooltip | FamilyQuant/ClusterGenerationControl.xaml:436 | ButtonExportComposition.ToolTip = Writes the Full XIC family composition to a CSV: one row per family, plus the unattributed peptides and, with 'Family-unique only', the shared ones. Disabled until the project has a full XIC (File \u00B7 Compute / update full XIC). | render:03-curation | OPEN | pending |
 | FQ15-B7A8EB1EE831 | IMPROVE | control | FamilyQuant/ClusterGenerationControl.xaml:445 | TabItem TabItem | render:03-curation | OPEN | pending |
 | FQ15-32E5E9C40647 | IMPROVE | option/copy | FamilyQuant/ClusterGenerationControl.xaml:445 | TabItem.Header = \uD83D\uDCCB Data Browser | render:03-curation | OPEN | pending |
 | FQ15-DAA4C7D576D2 | IMPROVE | control | FamilyQuant/ClusterGenerationControl.xaml:450 | DataGrid DataGridResultGrid | test:CurationScreenTests | VERIFIED | evidence:C1:FQ15-DAA4C7D576D2 |
-| FQ15-DF62EBEA48EC | KEEP | handler | FamilyQuant/ClusterGenerationControl.xaml:450 | DataGridResultGrid.LoadingRow = DataGridResultGrid_LoadingRow | render:03-curation | OPEN | pending |
-| FQ15-C644416CABF9 | KEEP | handler | FamilyQuant/ClusterGenerationControl.xaml:452 | DataGridResultGrid.CellEditEnding = DataGridResultGrid_CellEditEnding | render:03-curation | OPEN | pending |
-| FQ15-CFBFA30412EE | KEEP | handler | FamilyQuant/ClusterGenerationControl.xaml:453 | DataGridResultGrid.SelectionChanged = DataGridResultGrid_SelectionChanged | render:03-curation | OPEN | pending |
-| FQ15-6BDBE8A04573 | KEEP | handler | FamilyQuant/ClusterGenerationControl.xaml:454 | DataGridResultGrid.Sorting = DataGridResultGrid_Sorting | render:03-curation | OPEN | pending |
+| FQ15-DF62EBEA48EC | KEEP | handler | FamilyQuant/ClusterGenerationControl.xaml:450 | DataGridResultGrid.LoadingRow = DataGridResultGrid_LoadingRow | test:CurationActionProbe | VERIFIED | evidence:SH-curation-actions:FQ15-DF62EBEA48EC |
+| FQ15-C644416CABF9 | KEEP | handler | FamilyQuant/ClusterGenerationControl.xaml:452 | DataGridResultGrid.CellEditEnding = DataGridResultGrid_CellEditEnding | test:CurationActionProbe | VERIFIED | evidence:SH-curation-actions:FQ15-C644416CABF9 |
+| FQ15-CFBFA30412EE | KEEP | handler | FamilyQuant/ClusterGenerationControl.xaml:453 | DataGridResultGrid.SelectionChanged = DataGridResultGrid_SelectionChanged | test:CurationActionProbe | VERIFIED | evidence:SH-curation-actions:FQ15-CFBFA30412EE |
+| FQ15-6BDBE8A04573 | KEEP | handler | FamilyQuant/ClusterGenerationControl.xaml:454 | DataGridResultGrid.Sorting = DataGridResultGrid_Sorting | test:CurationActionProbe | VERIFIED | evidence:SH-curation-actions:FQ15-6BDBE8A04573 |
 | FQ15-C88B61D04FBC | IMPROVE | control | FamilyQuant/ClusterGenerationControl.xaml:457 | DataGridTextColumn ColumnUSearchId | test:CurationScreenTests | VERIFIED | evidence:C1:FQ15-C88B61D04FBC |
 | FQ15-8EFF7D90A53B | IMPROVE | column | FamilyQuant/ClusterGenerationControl.xaml:457 | ColumnUSearchId.IsReadOnly = True | test:ShellLedgerComparisonCommand | VERIFIED | evidence:C1:FQ15-8EFF7D90A53B |
 | FQ15-9991B4692CA7 | IMPROVE | column | FamilyQuant/ClusterGenerationControl.xaml:458 | ColumnUSearchId.Header = USearch ID | test:ShellLedgerComparisonCommand | VERIFIED | evidence:C1:FQ15-9991B4692CA7 |
@@ -840,18 +840,18 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **3764**; OPEN r
 | FQ15-3571BF176F3D | IMPROVE | code fact | FamilyQuant/ClusterGenerationControl.xaml.cs:1969 | "Next step: press Recalculate in Layer 3. If it fails again, reload the project in " | render:03-curation | OPEN | pending |
 | FQ15-0F0981C5998A | IMPROVE | code fact | FamilyQuant/ClusterGenerationControl.xaml.cs:1970 | "Layer 2." | render:03-curation | OPEN | pending |
 | FQ15-264CF9033A10 | IMPROVE | code fact | FamilyQuant/ClusterGenerationControl.xaml.cs:1971 | "Regrouped, but not recalculated" | render:03-curation | OPEN | pending |
-| FQ15-ECFA25B4D253 | KEEP | handler definition | FamilyQuant/ClusterGenerationControl.xaml.cs:399 | private void ButtonRecalculateQuantitation_Click(object sender, RoutedEventArgs e) | render:03-curation | OPEN | pending |
-| FQ15-D41FA4175033 | KEEP | handler definition | FamilyQuant/ClusterGenerationControl.xaml.cs:496 | private async void ButtonLoadQuantData_Click(object sender, RoutedEventArgs e) | render:03-curation | OPEN | pending |
-| FQ15-F3ADB44715EA | KEEP | handler definition | FamilyQuant/ClusterGenerationControl.xaml.cs:626 | private void ButtonSaveReport_Click(object sender, RoutedEventArgs e) | render:03-curation | OPEN | pending |
-| FQ15-45CF531DFAD4 | KEEP | handler definition | FamilyQuant/ClusterGenerationControl.xaml.cs:1041 | private void ButtonExportComposition_Click(object sender, RoutedEventArgs e) | render:03-curation | OPEN | pending |
+| FQ15-ECFA25B4D253 | KEEP | handler definition | FamilyQuant/ClusterGenerationControl.xaml.cs:399 | private void ButtonRecalculateQuantitation_Click(object sender, RoutedEventArgs e) | test:CurationActionProbe | VERIFIED | evidence:SH-curation-actions:FQ15-ECFA25B4D253 |
+| FQ15-D41FA4175033 | KEEP | handler definition | FamilyQuant/ClusterGenerationControl.xaml.cs:496 | private async void ButtonLoadQuantData_Click(object sender, RoutedEventArgs e) | test:CurationActionProbe | VERIFIED | evidence:SH-curation-actions:FQ15-D41FA4175033 |
+| FQ15-F3ADB44715EA | KEEP | handler definition | FamilyQuant/ClusterGenerationControl.xaml.cs:626 | private void ButtonSaveReport_Click(object sender, RoutedEventArgs e) | test:CurationActionProbe | VERIFIED | evidence:SH-curation-actions:FQ15-F3ADB44715EA |
+| FQ15-45CF531DFAD4 | KEEP | handler definition | FamilyQuant/ClusterGenerationControl.xaml.cs:1041 | private void ButtonExportComposition_Click(object sender, RoutedEventArgs e) | test:CurationActionProbe | VERIFIED | evidence:SH-curation-actions:FQ15-45CF531DFAD4 |
 | FQ15-E020BBE69C92 | KEEP | handler definition | FamilyQuant/ClusterGenerationControl.xaml.cs:1344 | private void ButtonUndo_Click(object sender, RoutedEventArgs e) | test:CurationScreenTests | VERIFIED | evidence:C1:FQ15-E020BBE69C92 |
-| FQ15-F996D5D33AF0 | KEEP | handler definition | FamilyQuant/ClusterGenerationControl.xaml.cs:1389 | private void ButtonApplyToSelected_Click(object sender, RoutedEventArgs e) | render:03-curation | OPEN | pending |
+| FQ15-F996D5D33AF0 | KEEP | handler definition | FamilyQuant/ClusterGenerationControl.xaml.cs:1389 | private void ButtonApplyToSelected_Click(object sender, RoutedEventArgs e) | test:CurationActionProbe | VERIFIED | evidence:SH-curation-actions:FQ15-F996D5D33AF0 |
 | FQ15-3F6F786470BC | KEEP | handler definition | FamilyQuant/ClusterGenerationControl.xaml.cs:1468 | private void ButtonManageLocks_Click(object sender, RoutedEventArgs e) | render:03-curation | OPEN | pending |
 | FQ15-DE649731E000 | KEEP | handler definition | FamilyQuant/ClusterGenerationControl.xaml.cs:1583 | private void ButtonHelp_Click(object sender, RoutedEventArgs e) | render:03-curation | OPEN | pending |
 | FQ15-A6FE034CDA86 | KEEP | handler definition | FamilyQuant/ClusterGenerationControl.xaml.cs:1601 | private async void ButtonAlignSelected_Click(object sender, RoutedEventArgs e) | render:03-curation | OPEN | pending |
-| FQ15-756FB1829BE8 | KEEP | handler definition | FamilyQuant/ClusterGenerationControl.xaml.cs:1643 | private async void ButtonWordCluster_Click(object sender, RoutedEventArgs e) | render:03-curation | OPEN | pending |
+| FQ15-756FB1829BE8 | KEEP | handler definition | FamilyQuant/ClusterGenerationControl.xaml.cs:1643 | private async void ButtonWordCluster_Click(object sender, RoutedEventArgs e) | test:CurationActionProbe | VERIFIED | evidence:SH-curation-actions:FQ15-756FB1829BE8 |
 | FQ15-5E1A13AD8818 | KEEP | handler definition | FamilyQuant/ClusterGenerationControl.xaml.cs:1655 | private async void ButtonFetchDomains_Click(object sender, RoutedEventArgs e) | render:03-curation | OPEN | pending |
-| FQ15-0C92F28B60CF | KEEP | handler definition | FamilyQuant/ClusterGenerationControl.xaml.cs:1708 | private async void ButtonSuperCluster_Click(object sender, RoutedEventArgs e) | render:03-curation | OPEN | pending |
+| FQ15-0C92F28B60CF | KEEP | handler definition | FamilyQuant/ClusterGenerationControl.xaml.cs:1708 | private async void ButtonSuperCluster_Click(object sender, RoutedEventArgs e) | test:CurationActionProbe | VERIFIED | evidence:SH-curation-actions:FQ15-0C92F28B60CF |
 | FQ15-903BC9DCDC73 | IMPROVE | option/copy | FamilyQuant/ComputeXicWindow.xaml:32 | TextBlock.Text = Re-extract every identified peptide, and any kept de novo precursor, straight from the RAW acquisitions with the full isotope envelope, and store the numbers in this project. Nothing derived is computed here: the shares and the family rollups are a later step. Runs are matched to acquisitions by file name. | render:08-compute | OPEN | pending |
 | FQ15-033F630F491F | IMPROVE | option/copy | FamilyQuant/ComputeXicWindow.xaml:35 | Label.Content = RAW folder | test:SecondaryRuntimeCommand | VERIFIED | evidence:FL-secondary-interactions:FQ15-033F630F491F |
 | FQ15-D8DA7A20683E | IMPROVE | tooltip | FamilyQuant/ComputeXicWindow.xaml:36 | Label.ToolTip = The folder with the .raw files of these runs. Runs are matched to files by name, so the order of the files does not matter. | render:08-compute | OPEN | pending |
@@ -1037,12 +1037,12 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **3764**; OPEN r
 | FQ15-452A85384C72 | KEEP | handler definition | FamilyQuant/ComputeXicWindow.xaml.cs:264 | private async void ButtonCompute_Click(object sender, RoutedEventArgs e) | test:SecondaryRuntimeCommand | VERIFIED | evidence:FL-secondary-runtime:FQ15-452A85384C72 |
 | FQ15-7BB37DBBE52F | KEEP | handler definition | FamilyQuant/ComputeXicWindow.xaml.cs:384 | private void ButtonViewSpectrumComparison_Click(object sender, RoutedEventArgs e) | render:08-compute | OPEN | pending |
 | FQ15-B61F52952457 | KEEP | handler definition | FamilyQuant/ComputeXicWindow.xaml.cs:397 | private void ButtonClose_Click(object sender, RoutedEventArgs e) | render:08-compute | OPEN | pending |
-| FQ15-C421B41B6A87 | KEEP | export/storage fact | FamilyQuant/CsvReport.cs:28 | "USearch ID" | test:DeNovoAgreementUnitTests | OPEN | pending |
-| FQ15-D2361FE28E57 | KEEP | export/storage fact | FamilyQuant/CsvReport.cs:29 | "User ID" | test:DeNovoAgreementUnitTests | OPEN | pending |
-| FQ15-E4D5FB24767B | KEEP | export/storage fact | FamilyQuant/CsvReport.cs:30 | "User Annotation" | test:DeNovoAgreementUnitTests | OPEN | pending |
-| FQ15-F6326D5E1C84 | KEEP | export/storage fact | FamilyQuant/CsvReport.cs:31 | "Locus" | test:DeNovoAgreementUnitTests | OPEN | pending |
-| FQ15-40C6B105BF30 | KEEP | export/storage fact | FamilyQuant/CsvReport.cs:32 | "Residue mass (Da)" | test:DeNovoAgreementUnitTests | OPEN | pending |
-| FQ15-7BEE81ADB336 | KEEP | export/storage fact | FamilyQuant/CsvReport.cs:35 | "Description" | test:DeNovoAgreementUnitTests | OPEN | pending |
+| FQ15-C421B41B6A87 | KEEP | export/storage fact | FamilyQuant/CsvReport.cs:28 | "USearch ID" | test:CurationActionsLedger | VERIFIED | evidence:SH-curation-actions:FQ15-C421B41B6A87 |
+| FQ15-D2361FE28E57 | KEEP | export/storage fact | FamilyQuant/CsvReport.cs:29 | "User ID" | test:CurationActionsLedger | VERIFIED | evidence:SH-curation-actions:FQ15-D2361FE28E57 |
+| FQ15-E4D5FB24767B | KEEP | export/storage fact | FamilyQuant/CsvReport.cs:30 | "User Annotation" | test:CurationActionsLedger | VERIFIED | evidence:SH-curation-actions:FQ15-E4D5FB24767B |
+| FQ15-F6326D5E1C84 | KEEP | export/storage fact | FamilyQuant/CsvReport.cs:31 | "Locus" | test:CurationActionsLedger | VERIFIED | evidence:SH-curation-actions:FQ15-F6326D5E1C84 |
+| FQ15-40C6B105BF30 | KEEP | export/storage fact | FamilyQuant/CsvReport.cs:32 | "Residue mass (Da)" | test:CurationActionsLedger | VERIFIED | evidence:SH-curation-actions:FQ15-40C6B105BF30 |
+| FQ15-7BEE81ADB336 | KEEP | export/storage fact | FamilyQuant/CsvReport.cs:35 | "Description" | test:CurationActionsLedger | VERIFIED | evidence:SH-curation-actions:FQ15-7BEE81ADB336 |
 | FQ15-5A06CA17D19F | KEEP | export/storage fact | FamilyQuant/CsvReport.cs:40 | "Full XIC family share, fraction 0-1, not computed" | test:ShellLedgerComparisonCommand | VERIFIED | evidence:SH:FQ15-5A06CA17D19F |
 | FQ15-FF06D3867D20 | KEEP | export/storage fact | FamilyQuant/CsvReport.cs:57 | "," | test:ShellLedgerComparisonCommand | VERIFIED | evidence:SH:FQ15-FF06D3867D20 |
 | FQ15-CDE28B37900C | KEEP | export/storage fact | FamilyQuant/CsvReport.cs:75 | "," | test:ShellLedgerComparisonCommand | VERIFIED | evidence:SH:FQ15-CDE28B37900C |
@@ -1059,10 +1059,10 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **3764**; OPEN r
 | FQ15-9FDF0CC7EACE | KEEP | export/storage fact | FamilyQuant/CsvReport.cs:111 | "shared between families" | test:ShellLedgerComparisonCommand | VERIFIED | evidence:SH:FQ15-9FDF0CC7EACE |
 | FQ15-DC72052AA7DC | KEEP | export/storage fact | FamilyQuant/CsvReport.cs:115 | "," | test:ShellLedgerComparisonCommand | VERIFIED | evidence:SH:FQ15-DC72052AA7DC |
 | FQ15-2025778EF37B | KEEP | export/storage fact | FamilyQuant/CsvReport.cs:115 | "not attributed to any family" | test:ShellLedgerComparisonCommand | VERIFIED | evidence:SH:FQ15-2025778EF37B |
-| FQ15-A461B04622FD | KEEP | export/storage fact | FamilyQuant/CsvReport.cs:128 | "\"" | test:DeNovoAgreementUnitTests | OPEN | pending |
-| FQ15-D3ED3D034725 | KEEP | export/storage fact | FamilyQuant/CsvReport.cs:128 | "\"" | test:DeNovoAgreementUnitTests | OPEN | pending |
-| FQ15-6A8D402A968E | KEEP | export/storage fact | FamilyQuant/CsvReport.cs:128 | "\"\"" | test:DeNovoAgreementUnitTests | OPEN | pending |
-| FQ15-158C444BB7FC | KEEP | export/storage fact | FamilyQuant/CsvReport.cs:128 | "\"" | test:DeNovoAgreementUnitTests | OPEN | pending |
+| FQ15-A461B04622FD | KEEP | export/storage fact | FamilyQuant/CsvReport.cs:128 | "\"" | test:CurationActionsLedger | VERIFIED | evidence:SH-curation-actions:FQ15-A461B04622FD |
+| FQ15-D3ED3D034725 | KEEP | export/storage fact | FamilyQuant/CsvReport.cs:128 | "\"" | test:CurationActionsLedger | VERIFIED | evidence:SH-curation-actions:FQ15-D3ED3D034725 |
+| FQ15-6A8D402A968E | KEEP | export/storage fact | FamilyQuant/CsvReport.cs:128 | "\"\"" | test:CurationActionsLedger | VERIFIED | evidence:SH-curation-actions:FQ15-6A8D402A968E |
+| FQ15-158C444BB7FC | KEEP | export/storage fact | FamilyQuant/CsvReport.cs:128 | "\"" | test:CurationActionsLedger | VERIFIED | evidence:SH-curation-actions:FQ15-158C444BB7FC |
 | FQ15-8BC847EA8C1E | IMPROVE | option/copy | FamilyQuant/DeNovoControl.xaml:13 | Style.Key = LayerBadge | test:LookStyleRoleCommand | VERIFIED | evidence:LK-style-roles:FQ15-8BC847EA8C1E |
 | FQ15-F8D72845D5F1 | IMPROVE | option/copy | FamilyQuant/DeNovoControl.xaml:14 | Setter.Value = 3 | test:LookStyleRoleCommand | VERIFIED | evidence:LK-style-roles:FQ15-F8D72845D5F1 |
 | FQ15-3BAEF428C0E5 | IMPROVE | option/copy | FamilyQuant/DeNovoControl.xaml:15 | Setter.Value = 7,1 | test:LookStyleRoleCommand | VERIFIED | evidence:LK-style-roles:FQ15-3BAEF428C0E5 |
@@ -3958,7 +3958,7 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **3764**; OPEN r
 | FQ15-C4624341BA1F | IMPROVE | control | FamilyQuant/MainWindow.xaml:36 | MenuItem MenuItemSpectrumComparison | test:ShellMetadataReceipts | VERIFIED | evidence:SH-runtime:FQ15-C4624341BA1F |
 | FQ15-CD4156A30F6C | IMPROVE | option/copy | FamilyQuant/MainWindow.xaml:36 | MenuItemSpectrumComparison.IsEnabled = False | test:ShellLedgerComparisonCommand | VERIFIED | evidence:SH:FQ15-CD4156A30F6C |
 | FQ15-DED0AB9EBFAE | IMPROVE | option/copy | FamilyQuant/MainWindow.xaml:37 | MenuItemSpectrumComparison.Header = View spectrum comparison table | render:01-home | OPEN | pending |
-| FQ15-017C8541B68E | KEEP | handler | FamilyQuant/MainWindow.xaml:37 | MenuItemSpectrumComparison.Click = MenuItemSpectrumComparison_Click | render:01-home | OPEN | pending |
+| FQ15-017C8541B68E | KEEP | handler | FamilyQuant/MainWindow.xaml:37 | MenuItemSpectrumComparison.Click = MenuItemSpectrumComparison_Click | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-017C8541B68E |
 | FQ15-5DD50C3323AD | IMPROVE | tooltip | FamilyQuant/MainWindow.xaml:38 | MenuItemSpectrumComparison.ToolTip = Shows a read-only table comparing PEAKS, DeepNovo and PatternLab, one row per file, scan, charge and precursor m/z. It can be saved as CSV. Disabled until spectrum evidence is loaded. | render:01-home | OPEN | pending |
 | FQ15-82C0DC480D30 | IMPROVE | control | FamilyQuant/MainWindow.xaml:39 | MenuItem MenuItemReanotateSEPro | test:ShellMetadataReceipts | VERIFIED | evidence:SH-runtime:FQ15-82C0DC480D30 |
 | FQ15-5B5F37F3309E | IMPROVE | option/copy | FamilyQuant/MainWindow.xaml:39 | MenuItemReanotateSEPro.IsEnabled = False | test:ShellLedgerComparisonCommand | VERIFIED | evidence:SH:FQ15-5B5F37F3309E |
@@ -4037,7 +4037,7 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **3764**; OPEN r
 | FQ15-A9136DA0DDEC | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:456 | "Nothing was saved: there are no families on screen to save.\n\n" | render:01-home | OPEN | pending |
 | FQ15-6CA9DCF5DEAA | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:457 | "Next step: open a Family Cluster File with File \u00B7 Load Family Cluster File, or build " | render:01-home | OPEN | pending |
 | FQ15-2074AE04D745 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:458 | "one from a database with Run USearch." | render:01-home | OPEN | pending |
-| FQ15-E1E6DB0BA001 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:459 | "Nothing to save" | render:01-home | OPEN | pending |
+| FQ15-E1E6DB0BA001 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:459 | "Nothing to save" | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-E1E6DB0BA001 |
 | FQ15-891E975B730E | KEEP | format/export | FamilyQuant/MainWindow.xaml.cs:465 | "FamilyClusterFile (*.fcf)&#124;*.fcf" | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-891E975B730E |
 | FQ15-896FD56FF1F3 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:466 | "Save the current families as a Family Cluster File" | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-896FD56FF1F3 |
 | FQ15-29EB32BD76B6 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:476 | "The families were saved to\n" | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-29EB32BD76B6 |
@@ -4057,14 +4057,14 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **3764**; OPEN r
 | FQ15-213FD342609B | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:508 | "Nothing was saved: there is no project on screen to save.\n\n" | render:01-home | OPEN | pending |
 | FQ15-EFD2DF3A7FF3 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:509 | "Next step: open a project or a Family Cluster File with File \u00B7 Load, or build one " | render:01-home | OPEN | pending |
 | FQ15-2CDDE5EC105D | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:510 | "from a database with Run USearch." | render:01-home | OPEN | pending |
-| FQ15-FDBF9F028EB2 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:511 | "Nothing to save" | render:01-home | OPEN | pending |
+| FQ15-FDBF9F028EB2 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:511 | "Nothing to save" | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-FDBF9F028EB2 |
 | FQ15-9085ACC92A5A | KEEP | format/export | FamilyQuant/MainWindow.xaml.cs:517 | "FamilyQuant project (*.fqproj)&#124;*.fqproj" | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-9085ACC92A5A |
 | FQ15-A5803E29B75B | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:518 | "Save the project as a FamilyQuant project" | render:01-home | OPEN | pending |
 | FQ15-71A448372328 | KEEP | format/export | FamilyQuant/MainWindow.xaml.cs:519 | ".fqproj" | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-71A448372328 |
-| FQ15-C42FB2273C1C | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:558 | "Nothing was saved: the open project changed (another one was opened, or its quantitation " | render:01-home | OPEN | pending |
-| FQ15-9A9A4198C024 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:559 | "was recomputed) while the save was waiting for the family attribution to finish.\n\n" | render:01-home | OPEN | pending |
-| FQ15-BE500CA08363 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:560 | "Next step: save again." | render:01-home | OPEN | pending |
-| FQ15-D834B0398136 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:561 | "Nothing saved" | render:01-home | OPEN | pending |
+| FQ15-C42FB2273C1C | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:558 | "Nothing was saved: the open project changed (another one was opened, or its quantitation " | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-C42FB2273C1C |
+| FQ15-9A9A4198C024 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:559 | "was recomputed) while the save was waiting for the family attribution to finish.\n\n" | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-9A9A4198C024 |
+| FQ15-BE500CA08363 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:560 | "Next step: save again." | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-BE500CA08363 |
+| FQ15-D834B0398136 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:561 | "Nothing saved" | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-D834B0398136 |
 | FQ15-BD8FCDF44947 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:569 | "The project was saved to\n" | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-BD8FCDF44947 |
 | FQ15-F17372AEAD0F | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:569 | "\n\n" | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-F17372AEAD0F |
 | FQ15-5E69DF58FFFE | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:570 | "The container holds the grouping, your User IDs and annotations, and " | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-5E69DF58FFFE |
@@ -4073,7 +4073,7 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **3764**; OPEN r
 | FQ15-7A26DBC0417D | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:573 | "\n\n" | render:01-home | OPEN | pending |
 | FQ15-1680DF391053 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:574 | "Next step: nothing. Carry on working, or open this file later to return to exactly " | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-1680DF391053 |
 | FQ15-5A8060C351E2 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:575 | "this project." | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-5A8060C351E2 |
-| FQ15-117A1F9A31C3 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:576 | "Saved" | render:01-home | OPEN | pending |
+| FQ15-117A1F9A31C3 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:576 | "Saved" | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-117A1F9A31C3 |
 | FQ15-1EC0FFA1496F | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:581 | "The project could not be written, so nothing was saved.\n\n" | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-1EC0FFA1496F |
 | FQ15-D41E82F7EE50 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:582 | "Reason given by the program: " | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-D41E82F7EE50 |
 | FQ15-D5987DF13F28 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:582 | "\n\n" | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-D5987DF13F28 |
@@ -4082,7 +4082,7 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **3764**; OPEN r
 | FQ15-7206BF98F2B5 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:585 | "Could not save" | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-7206BF98F2B5 |
 | FQ15-735FF4F51778 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:603 | "There is no project on screen to compute quantitation for.\n\n" | render:01-home | OPEN | pending |
 | FQ15-6522B89F7A90 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:604 | "Next step: open a project or a Family Cluster File with File \u00B7 Load first." | render:01-home | OPEN | pending |
-| FQ15-128CDF2967A3 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:605 | "Load a project first" | render:01-home | OPEN | pending |
+| FQ15-128CDF2967A3 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:605 | "Load a project first" | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-128CDF2967A3 |
 | FQ15-9326F0470B5D | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:637 | "N0" | render:01-home | OPEN | pending |
 | FQ15-7AE169949A24 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:638 | " quant row(s) were computed and are now held by the project.\n\n" | render:01-home | OPEN | pending |
 | FQ15-8E7C9D4B893F | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:640 | "\n\n" | render:01-home | OPEN | pending |
@@ -4091,21 +4091,21 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **3764**; OPEN r
 | FQ15-E81D4D8CC4E3 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:648 | "\n\n" | render:01-home | OPEN | pending |
 | FQ15-9A649BDCD31D | KEEP | format/export | FamilyQuant/MainWindow.xaml.cs:649 | "Next step: File \u00B7 Save project (.fqproj) to persist the quant rows and the complete " | render:01-home | OPEN | pending |
 | FQ15-776EFFB6D540 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:650 | "spectrum evidence table inside the project. The project itself has not been saved yet." | render:01-home | OPEN | pending |
-| FQ15-F0F954EF5FD4 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:651 | "Quantitation computed" | render:01-home | OPEN | pending |
+| FQ15-F0F954EF5FD4 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:651 | "Quantitation computed" | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-F0F954EF5FD4 |
 | FQ15-FF65BEA5BC8E | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:732 | "There is no spectrum comparison table to show yet.\n\n" | render:01-home | OPEN | pending |
 | FQ15-78E48B16D6B7 | KEEP | format/export | FamilyQuant/MainWindow.xaml.cs:733 | "Next step: load a .fqproj that contains full quantitation, or run File \u00B7 Compute / " | render:01-home | OPEN | pending |
 | FQ15-BC317ADA5428 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:734 | "update full XIC first." | render:01-home | OPEN | pending |
-| FQ15-85A627D0F2C4 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:735 | "No spectrum table yet" | render:01-home | OPEN | pending |
-| FQ15-0642600CF373 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:751 | "The spectrum comparison table could not be built, and the project was not changed.\n\n" | render:01-home | OPEN | pending |
-| FQ15-FC74E0231458 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:752 | "Reason given by the program: " | render:01-home | OPEN | pending |
-| FQ15-C080E034F652 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:752 | "\n\n" | render:01-home | OPEN | pending |
-| FQ15-FCCB78925C6E | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:753 | "Next step: recompute the full XIC with the PEAKS de-novo-only + DeepNovo union if " | render:01-home | OPEN | pending |
-| FQ15-D212AA6005F3 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:754 | "this is an older project that does not carry source-resolved evidence." | render:01-home | OPEN | pending |
-| FQ15-DFC26E50FB7E | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:755 | "Could not build spectrum table" | render:01-home | OPEN | pending |
+| FQ15-85A627D0F2C4 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:735 | "No spectrum table yet" | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-85A627D0F2C4 |
+| FQ15-0642600CF373 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:751 | "The spectrum comparison table could not be built, and the project was not changed.\n\n" | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-0642600CF373 |
+| FQ15-FC74E0231458 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:752 | "Reason given by the program: " | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-FC74E0231458 |
+| FQ15-C080E034F652 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:752 | "\n\n" | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-C080E034F652 |
+| FQ15-FCCB78925C6E | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:753 | "Next step: recompute the full XIC with the PEAKS de-novo-only + DeepNovo union if " | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-FCCB78925C6E |
+| FQ15-D212AA6005F3 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:754 | "this is an older project that does not carry source-resolved evidence." | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-D212AA6005F3 |
+| FQ15-DFC26E50FB7E | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:755 | "Could not build spectrum table" | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-DFC26E50FB7E |
 | FQ15-59AC5985D313 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:764 | "Nothing was reannotated: there are no families on screen to write into a SEPro " | render:01-home | OPEN | pending |
 | FQ15-AE43B9EBD55B | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:765 | "package.\n\n" | render:01-home | OPEN | pending |
 | FQ15-BFB67A34EF78 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:766 | "Next step: open a Family Cluster File with File \u00B7 Load Family Cluster File first." | render:01-home | OPEN | pending |
-| FQ15-C9E4A3901552 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:767 | "Load the families first" | render:01-home | OPEN | pending |
+| FQ15-C9E4A3901552 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:767 | "Load the families first" | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-C9E4A3901552 |
 | FQ15-6379736D2F52 | KEEP | format/export | FamilyQuant/MainWindow.xaml.cs:773 | "SEPro 2.0 (*.sepr2)&#124;*.sepr2" | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-6379736D2F52 |
 | FQ15-D9B5F67123FE | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:774 | "Choose a TRUSTED SEPro result package (legacy unsafe deserialization)" | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-D9B5F67123FE |
 | FQ15-A079DE8A62D5 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:782 | "SEPro Package loaded" | render:01-home | OPEN | pending |
@@ -4194,7 +4194,7 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **3764**; OPEN r
 | FQ15-BEE9CF7ACF93 | KEEP | handler definition | FamilyQuant/MainWindow.xaml.cs:449 | private void MenuItemSaveFCF_Click(object sender, RoutedEventArgs e) | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-BEE9CF7ACF93 |
 | FQ15-7526DED77FA2 | KEEP | handler definition | FamilyQuant/MainWindow.xaml.cs:501 | private async void MenuItemSaveProject_Click(object sender, RoutedEventArgs e) | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-7526DED77FA2 |
 | FQ15-0AD0CE6F978B | KEEP | handler definition | FamilyQuant/MainWindow.xaml.cs:598 | private void MenuItemComputeXic_Click(object sender, RoutedEventArgs e) | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-0AD0CE6F978B |
-| FQ15-65700BDA90F3 | KEEP | handler definition | FamilyQuant/MainWindow.xaml.cs:713 | private async void MenuItemSpectrumComparison_Click(object sender, RoutedEventArgs e) | render:01-home | OPEN | pending |
+| FQ15-65700BDA90F3 | KEEP | handler definition | FamilyQuant/MainWindow.xaml.cs:713 | private async void MenuItemSpectrumComparison_Click(object sender, RoutedEventArgs e) | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-65700BDA90F3 |
 | FQ15-A79FAB873090 | KEEP | handler definition | FamilyQuant/MainWindow.xaml.cs:759 | private void MenuItemReanotateSEPro_Click(object sender, RoutedEventArgs e) | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-A79FAB873090 |
 | FQ15-C4526422A15C | KEEP | handler definition | FamilyQuant/MainWindow.xaml.cs:841 | private void MenuItemHowToRead_Click(object sender, RoutedEventArgs e) | render:01-home | OPEN | pending |
 | FQ15-8921B21922FE | KEEP | handler definition | FamilyQuant/MainWindow.xaml.cs:865 | private void MenuItemWhereAmI_Click(object sender, RoutedEventArgs e) | render:01-home | OPEN | pending |

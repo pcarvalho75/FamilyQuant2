@@ -20,6 +20,7 @@
     <Compile Include="../WordGroupingSnapshot.cs" Link="WordGroupingSnapshot.cs" />
     <Compile Include="../ChartExportSnapshot.cs" Link="ChartExportSnapshot.cs" />
     <Compile Include="../ResultsRuntimeSnapshot.cs" Link="ResultsRuntimeSnapshot.cs" />
+    <Compile Include="../CurationExportSnapshot.cs" Link="CurationExportSnapshot.cs" />
     <Content Include="$(ReferenceRoot)/**/*" Link="%(RecursiveDir)%(Filename)%(Extension)"
              CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>

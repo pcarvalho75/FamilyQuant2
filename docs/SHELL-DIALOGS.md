@@ -36,9 +36,10 @@ The same handler paths are driven disconnected to check that no native presenter
 | `spectrum.csv`, `spectrum.score-plot` | Detached spectrum comparison exports |
 | `partition.csv` | Retained three-way-window compatibility export |
 
-Per orchestrator M3, the protected curation callers remain C1-owned:
-PatternLab loading, visible protein-report CSV, composition CSV, and its message boxes.
-They must adopt the same helper. S8 does not claim their adoption is already complete.
+Curation uses the same boundaries for PatternLab loading, visible protein-report CSV,
+composition CSV and its messages. Its native screen proof exercises chooser cancellation,
+accepted synthetic loading, the actual CSV writes and preservation of an existing file
+after a write refusal.
 Lock management also refuses headless modal presentation.
 
 `FilePresenter`, `FolderPresenter`, `ShellMessages.Presenter` and the `Reported` event
@@ -66,3 +67,22 @@ outputs were byte-identical after fixture-root canonicalization; raw captures re
 beside them. This is fixture determinism, not a scientific-data claim. The producer
 also writes `wording-for-paulo.tsv`: unchanged comparisons still need executed evidence,
 while changed wording and unsupported inner expressions stay OPEN for Paulo's ruling.
+
+`--prove-curation-actions` takes the frozen source, this worktree's frozen host, a fixed
+native-audit JSON, a fresh output and a timestamp. The retained cohort has 449 curation
+observations and ten CSV observations. One native screen run covers filters, native sort
+events, row numbering, selection availability, batch curation and Undo, User ID editing,
+PatternLab loading, pending normalization and Recalculate, both exports, Full XIC basis,
+and word/keyword grouping with Undo. The edit test emits the actual grid event and updates
+the column's binding on a detached editor; it does not call `BeginEdit` or request focus.
+Every action also checks actual HWND placement and nonactivation. Secondary Help,
+alignment-result and modal lock windows require their own safe presentation boundary.
+
+The shared export helper executes twenty complete CSV fixtures: two cultures, every
+normalization mode plus no declared mode, both Full XIC headings, null/empty fields,
+commas, quotes, CR/LF, and fractional values. The frozen and current output must match
+exactly and the current helper must repeat byte for byte. The frozen ReportView adapter
+selects its explicit User branch; sorting and counters are also compared. ReportView's
+wording is outside this cohort. The optional negative control plants different CSV
+comparison bytes and must fail. Plain-text and unexecuted observations remain OPEN;
+an action does not supply a semantic proof for changed copy.
