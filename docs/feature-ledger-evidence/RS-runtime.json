@@ -1,0 +1,2088 @@
+{
+  "schemaVersion": 1,
+  "step": "RS-runtime",
+  "frozenCommit": "e9b73064d8ff19b2fde3e3231240b636a64c0a91",
+  "runs": [
+    {
+      "id": "native",
+      "command": "C:\\FamilyQuant-wt2\\results\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --prove-results-runtime D:/FamilyQuant-data/out-shell/N3/source C:/FamilyQuant-wt2/results/FamilyQuant.Tests/ReferenceGoldenHost/bin/Release/net10.0-windows7.0/ReferenceGoldenHost.exe D:/FamilyQuant-data/out-results/RS-runtime/ready-eol \u00222026-11-02 04:49:26 -0800\u0022",
+      "executedAt": "2026-11-02 04:49:26 -0800",
+      "commit": "b25ef7cdf7eb323b99e0d43495c3016f82f060bd",
+      "artifacts": [
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\comparisons.json",
+          "sha256": "5B5FAF9570A88240D9849B2AB7D9C12B5321C468A228CDF217B9DF9731E295CE"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\current-charts\\families-False-Dark-420.png",
+          "sha256": "8B579DB35C71A2ED5D5B953D9822172CC9B4A4C7438BF0F62A6981DC4FA31125"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\current-charts\\families-False-Dark-960.png",
+          "sha256": "E038BB699E08FA147B8CD9F351C37E2818BED14756620021036DC99783FC7178"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\current-charts\\families-False-Light-420.png",
+          "sha256": "5C494722BF6D29929127CBF91004F462C0B56F53FD488DD811B1ABA835D6457B"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\current-charts\\families-False-Light-960.png",
+          "sha256": "CAFF4842F8A5C9095B4E8C6E801BD22DEC35E9DE8CF1CFBDF0373C23663C00E2"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\current-charts\\families-True-Dark-420.png",
+          "sha256": "EBEC02EFB97DFFDA55BC316C0CD332550B1CCE44967D605F0950F7DF616EEAF0"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\current-charts\\families-True-Dark-960.png",
+          "sha256": "5598D03F4900061B56F7DBEE854710D7E5978B893096677BACC1E5A7BDC7E63D"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\current-charts\\families-True-Light-420.png",
+          "sha256": "649E82103EB0A7919F6C906CD231B19C4CFD6D0B89232760A2C063048E26EB0E"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\current-charts\\families-True-Light-960.png",
+          "sha256": "A789D3704032E2645182EFEE1E768476A9F2F5C790C21E2CA6F1FC0D9DCDA0AB"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\current-charts\\identity-False-Dark-420.png",
+          "sha256": "1C86F3DE388FBC6722AD38391982DF773EFCE3EC162FB3C8732D3AAF1DE0E8CD"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\current-charts\\identity-False-Dark-960.png",
+          "sha256": "D79193F8777F2BC41D3BE3BD2BE6E8E46C73A238711B509CFC88332D3A2D32D7"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\current-charts\\identity-False-Light-420.png",
+          "sha256": "FCDF03D278E6B35928776420210F3FABC08A55DBA15425615F7564D050DC151B"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\current-charts\\identity-False-Light-960.png",
+          "sha256": "009F0E5C7CD6AC0DD949633E5E3A28C46F3A4025B0DC8DAC2F5DE3929B791C80"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\current-charts\\identity-True-Dark-420.png",
+          "sha256": "43AA7A822AABB389C4EAB9FF12680A954FB4AF26E712D4105ED8598A6B18D97B"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\current-charts\\identity-True-Dark-960.png",
+          "sha256": "5D8D10D59CDE9470800B61B1B1078CD6F78BF8E991735443BCF026785E80706D"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\current-charts\\identity-True-Light-420.png",
+          "sha256": "3DC1AC0E6E2969087B41C9BD83549E5B81374925DEE139F4FDB14986A7FAB3E5"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\current-charts\\identity-True-Light-960.png",
+          "sha256": "4D946CC8908AABE185F0E1C123B5242620D70A6572A18042EF96DDE31677F07B"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\current-charts\\isotopes-False-Dark-420.png",
+          "sha256": "5CE649CC929E590A58E377EC4393E4B8E41C347ADD9FE007DE54A571AB596B14"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\current-charts\\isotopes-False-Dark-960.png",
+          "sha256": "9B5635A234F68DED3BB07B9CFEF318058EA4175BECE20ED1231F9EF8C26166CE"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\current-charts\\isotopes-False-Light-420.png",
+          "sha256": "868576143A44B620093D5153FFEEAA80AFA0921427D4BE4139870F256910E5DE"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\current-charts\\isotopes-False-Light-960.png",
+          "sha256": "B460C285C6D2E1B5667D28619662E161C14D29B63747CA5458FA30F1A8ED5EDF"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\current-charts\\isotopes-True-Dark-420.png",
+          "sha256": "879DFD588972CCA10708A1CCA7F689CCCCC1656103C18CBB4BAF82FF53939390"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\current-charts\\isotopes-True-Dark-960.png",
+          "sha256": "F6367421A5D646CB7F22B84B06255DBAB78FA198D1E69E71153EA8C2B345D309"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\current-charts\\isotopes-True-Light-420.png",
+          "sha256": "48D3ECE26B339870C10BD4E9E613B903C33193190410341479EE768EB1947893"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\current-charts\\isotopes-True-Light-960.png",
+          "sha256": "8E4A36B629C2519D6DF9BA1FAA5F11696F296397370DBC53C37C2DB28B1011E9"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\current-charts\\mass-False-Dark-420.png",
+          "sha256": "C9B64B5C8B2B53F698C33669BE3EC66CE4CB710D262D59764F97D22EDD31E80A"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\current-charts\\mass-False-Dark-960.png",
+          "sha256": "74F33755F274C8DAEA29A58D53C186A067A59AAAE387DD1B3D1B67B15027ACA4"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\current-charts\\mass-False-Light-420.png",
+          "sha256": "DAAEEF70F61D085D4818732D14CBC0B03630374CAA658FE5906CDA0BD7F8304B"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\current-charts\\mass-False-Light-960.png",
+          "sha256": "FCB13F7AF59BE48469EDCE07489C7E3CE8F2178665F5BB1C5CD02851C6025C35"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\current-charts\\mass-True-Dark-420.png",
+          "sha256": "FB526617118535CC1FF333265DA2D00F6B468D87C28E378EAB5711F73CE6F287"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\current-charts\\mass-True-Dark-960.png",
+          "sha256": "83271EB8AC51C1B6830A276BE0339F535D2A26A2CB0F16B88F0C95B1BDDA41F0"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\current-charts\\mass-True-Light-420.png",
+          "sha256": "25A80DD6D3CCB644C4156E9118FB7E9DABDDD2699AB4CB01C047D77E014A344F"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\current-charts\\mass-True-Light-960.png",
+          "sha256": "AF241A7CB537E418C40D290B86D0AD5F8BDF698FCD6BD5A3A1633CF67E2C1E98"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\current-charts\\partition-False-Dark-420.png",
+          "sha256": "CC6A57FAD75370EA6908E90F8A8286C2A7B570403612ACE4FCADB9891FB8867D"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\current-charts\\partition-False-Dark-960.png",
+          "sha256": "D94B142BFC16F11E3A88C75AC9EB70D804B59938B5B7258AB18ACF5384AC890D"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\current-charts\\partition-False-Light-420.png",
+          "sha256": "CC6A57FAD75370EA6908E90F8A8286C2A7B570403612ACE4FCADB9891FB8867D"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\current-charts\\partition-False-Light-960.png",
+          "sha256": "D94B142BFC16F11E3A88C75AC9EB70D804B59938B5B7258AB18ACF5384AC890D"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\current-charts\\partition-True-Dark-420.png",
+          "sha256": "43AA7A822AABB389C4EAB9FF12680A954FB4AF26E712D4105ED8598A6B18D97B"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\current-charts\\partition-True-Dark-960.png",
+          "sha256": "5D8D10D59CDE9470800B61B1B1078CD6F78BF8E991735443BCF026785E80706D"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\current-charts\\partition-True-Light-420.png",
+          "sha256": "43AA7A822AABB389C4EAB9FF12680A954FB4AF26E712D4105ED8598A6B18D97B"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\current-charts\\partition-True-Light-960.png",
+          "sha256": "5D8D10D59CDE9470800B61B1B1078CD6F78BF8E991735443BCF026785E80706D"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\current-charts\\percent-False-Dark-420.png",
+          "sha256": "8BCE40C6E3B0C9F528DC4B572E8541AFB44AA3D3798167A30B0B9D553D88D8F4"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\current-charts\\percent-False-Dark-960.png",
+          "sha256": "9B08302A4C77B2DBAC0B92396F53A9162C1AF6AF7280D1A9D9FDD95BD5A6F117"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\current-charts\\percent-False-Light-420.png",
+          "sha256": "BB479E33D2A762AF1A89AEFE72F589EFCF773F26BE0626334DE40A95F927A93F"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\current-charts\\percent-False-Light-960.png",
+          "sha256": "E0FB9532AB8C01BEF8EBFE6A2E252BDC8F58326502C86894BD22CD858112FFFC"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\current-charts\\percent-True-Dark-420.png",
+          "sha256": "76FB3B64A64BF901FF8DA458C14C03B20DD117F13DC8252B098AF2EB5927FA34"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\current-charts\\percent-True-Dark-960.png",
+          "sha256": "095EA3C45A72717DCEF04BEF4ED10ACE23A24AB408E8A22430442455B6D2C8B4"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\current-charts\\percent-True-Light-420.png",
+          "sha256": "91CB2CB0CC6BBB50E99C1EF687A55E7094E7BF5995A19172C4903BC1D9CDBB8B"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\current-charts\\percent-True-Light-960.png",
+          "sha256": "6B687C34BA64F0B019FFD3D1844AA2ACDFB1348A05D7337EBC7153A1E3BEA343"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\current-charts\\recovery-False-Dark-420.png",
+          "sha256": "7684CAD359872FB824D48C8FD7BB6472A57584DDDC83079726C295A92378C6AC"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\current-charts\\recovery-False-Dark-960.png",
+          "sha256": "E7E090C790BD500262F56A99BED22D2F6FD0977030BB75CC7BA8797B23BD70A9"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\current-charts\\recovery-False-Light-420.png",
+          "sha256": "2C164C80C5277A7148695A08665719C4EF96C0F5633A139FA8E0C286B87AAA99"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\current-charts\\recovery-False-Light-960.png",
+          "sha256": "C9044746264432FCDF5E8546FFB649D7A3E2097DB5DEE202F779CDB242CB6454"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\current-charts\\recovery-True-Dark-420.png",
+          "sha256": "49AB9C27FFCB061EA26207D8359DD560245FA576B3FD217B0872383394E16A69"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\current-charts\\recovery-True-Dark-960.png",
+          "sha256": "F44CF2BE06E6A2673CF3697499B491F0C04D7C606BFE4619931BC1D70172B290"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\current-charts\\recovery-True-Light-420.png",
+          "sha256": "0908B34AC89AB70597B3CE728EE34FA9FFA6287B20554B2A0E5C460A222222E8"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\current-charts\\recovery-True-Light-960.png",
+          "sha256": "AA9300EAE920FA380C59023DA3F799D4CCF79B0CCDDB8862981315B99C7043A7"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\current-values.json",
+          "sha256": "0108AC8BC772CD87DCF1F6EE49735788A2A464DBCF321B2A874D53242B36CFAC"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\executed\\FamilyQuant.Core\\AnalyticsModel.cs",
+          "sha256": "735ABBBF39EB5BA9CC40D28B2FEE57386D1FD33E268AD708632EF119BCBFDD73"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\executed\\FamilyQuant.Core\\NormalizationMode.cs",
+          "sha256": "951708B64A2746F38DA428448E32DD50DA1004F864C58ACB410A39F872CA29C5"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\executed\\FamilyQuant.Tests\\ChartExportSnapshot.cs",
+          "sha256": "265353D56D761D1F863E023A233D7384F4FCACCA3E8CC6739F28F68595DF58A5"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\executed\\FamilyQuant.Tests\\Program.Commands.ResultsRuntimeLedger.cs",
+          "sha256": "AE6AAD56515CDE2378D3C3754D7599C8FF658F06912D9C78C46E8382F0887D6C"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\executed\\FamilyQuant.Tests\\Program.ResultsRuntimeLedger.cs",
+          "sha256": "1A9D79574CDCB544B42E044F9CA6CC469F058C2232B2898F8D78FFDCD75F26EC"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\executed\\FamilyQuant.Tests\\ReferenceGoldenHost\\Program.cs",
+          "sha256": "1BB1A52AB61E37F20723D05B971D93E42F17FF7586DC0C0EAF5FB6D9F1F89201"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\executed\\FamilyQuant.Tests\\ReferenceGoldenHost\\ReferenceGoldenHost.csproj",
+          "sha256": "550D61E9628ACA1AFD68A1EBE6775EFF61D069A76A5FAB00139C8DB02C739B1A"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\executed\\FamilyQuant.Tests\\ResultsRuntimeSnapshot.cs",
+          "sha256": "2F4639B4D50043835D8EAFB450236D4CB14D8E6EE537D0DDA326CDCD7EC261FB"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\executed\\FamilyQuant\\AnalyticsViewModel.cs",
+          "sha256": "581D33C2FF3CB6B07251B7480C016379902ED6825CF257D700FD1B14FF538945"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\executed\\FamilyQuant\\FamilyContributionChart.cs",
+          "sha256": "939A4F9C98A0739582DDBBEA460C0631F90C29871BD45F0BDC4ACB8DB5EF60E2"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\executed\\FamilyQuant\\IdentityScanChart.cs",
+          "sha256": "6E12975B73154AFD5E6AF1796751F28ED49CD977C5C3E38830A11FC45F015CAF"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\executed\\FamilyQuant\\IsotopeCountChart.cs",
+          "sha256": "C18B470572D3647F4B9007B8170702C5F231BCB62989EBD6662825DCE7AF17EF"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\executed\\FamilyQuant\\PercentIonCurrentChart.cs",
+          "sha256": "61E28173A23BF601B17197ECFF2A47AFD523A4DEC2F47BD244BDDA6FCD106E05"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\executed\\FamilyQuant\\RecoveryChart.cs",
+          "sha256": "F39E00E4455E67A05AC77A8324D51819C3C343FB95B183DCD93D6A5B9D5FAB6A"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\executed\\FamilyQuant\\XicMassChart.cs",
+          "sha256": "DC13EE41EE7A44EAA05EF0A47AB25D16317335965CD7EAE4A9F9CFD2AE7D8629"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\executed\\current\\FamilyQuant.Core.dll",
+          "sha256": "AE88406095B88716B1156E1086FD335866CF5BCD9495D08CC4BB7EE8CC8FE9B1"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\executed\\current\\FamilyQuant.Tests.dll",
+          "sha256": "1C773F337A8055180507EC458F962782276B65D2E1E72EF5F00B3AF3F69EBFC2"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\executed\\current\\FamilyQuant2.dll",
+          "sha256": "51285B88E733076749F493917830DBD3F1EC40728A6C2C4939558EEB3529F1C5"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\executed\\frozen\\FamilyQuant\\AnalyticsControl.xaml.cs",
+          "sha256": "4E760B397BE1979AED87D871D661D5264975113F77E4A65A59FE6150B015FB71"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\executed\\frozen\\FamilyQuant\\AnalyticsModel.cs",
+          "sha256": "06AB29E8A11BA0DEEE49239C0E66E04055589ED6FDCBA86665FB90E86E088140"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\executed\\frozen\\FamilyQuant\\FamilyContributionChart.cs",
+          "sha256": "13B9702374060C463B79F2ED84BE9593BC0AF011E9BD28BAF943E0D49D0B39A5"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\executed\\frozen\\FamilyQuant\\IdentityScanChart.cs",
+          "sha256": "139579CBBBBEA5FA8841C82C8681F9EE72E29A78CE347F1BF35B01CD00599613"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\executed\\frozen\\FamilyQuant\\IsotopeCountChart.cs",
+          "sha256": "6A58C5AA15A51D45E3FAD2CF663A9FBC4BEC572DCA6120BCF44F9032464CEE06"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\executed\\frozen\\FamilyQuant\\NormalizationMode.cs",
+          "sha256": "998862FE80112393A63D135353CF2E576744187F7965D263E20DCADFE22EAA2E"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\executed\\frozen\\FamilyQuant\\PercentIonCurrentChart.cs",
+          "sha256": "955EDE5EED5A99CF1BC35361DDC4A511359E7FEC697D1ED9A5285B04324E0741"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\executed\\frozen\\FamilyQuant\\RecoveryChart.cs",
+          "sha256": "85A7D3A2899A800252291A38F070214F91312063F5ABC138EBD30D38F3DECDC4"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\executed\\frozen\\FamilyQuant\\XicMassChart.cs",
+          "sha256": "5C97E3B0AFDD4A5A4FF656CF8B510CF0C1EB14EBDE7AA87FA45EB43745CA2631"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\executed\\reference\\FamilyQuant.dll",
+          "sha256": "D764488C923945285E03B338E5A91BF28106A35B11AB465D8E2B23D125F03FD8"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\executed\\reference\\ReferenceGoldenHost.dll",
+          "sha256": "C47E3BB4E3AC5B6EE6723E040F275A861AFF719330E2C45E29D1D19104D5BF36"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\frozen-charts\\families-False-Dark-420.png",
+          "sha256": "8B579DB35C71A2ED5D5B953D9822172CC9B4A4C7438BF0F62A6981DC4FA31125"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\frozen-charts\\families-False-Dark-960.png",
+          "sha256": "E038BB699E08FA147B8CD9F351C37E2818BED14756620021036DC99783FC7178"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\frozen-charts\\families-False-Light-420.png",
+          "sha256": "5C494722BF6D29929127CBF91004F462C0B56F53FD488DD811B1ABA835D6457B"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\frozen-charts\\families-False-Light-960.png",
+          "sha256": "CAFF4842F8A5C9095B4E8C6E801BD22DEC35E9DE8CF1CFBDF0373C23663C00E2"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\frozen-charts\\families-True-Dark-420.png",
+          "sha256": "EBEC02EFB97DFFDA55BC316C0CD332550B1CCE44967D605F0950F7DF616EEAF0"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\frozen-charts\\families-True-Dark-960.png",
+          "sha256": "5598D03F4900061B56F7DBEE854710D7E5978B893096677BACC1E5A7BDC7E63D"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\frozen-charts\\families-True-Light-420.png",
+          "sha256": "649E82103EB0A7919F6C906CD231B19C4CFD6D0B89232760A2C063048E26EB0E"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\frozen-charts\\families-True-Light-960.png",
+          "sha256": "A789D3704032E2645182EFEE1E768476A9F2F5C790C21E2CA6F1FC0D9DCDA0AB"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\frozen-charts\\identity-False-Dark-420.png",
+          "sha256": "1C86F3DE388FBC6722AD38391982DF773EFCE3EC162FB3C8732D3AAF1DE0E8CD"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\frozen-charts\\identity-False-Dark-960.png",
+          "sha256": "D79193F8777F2BC41D3BE3BD2BE6E8E46C73A238711B509CFC88332D3A2D32D7"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\frozen-charts\\identity-False-Light-420.png",
+          "sha256": "FCDF03D278E6B35928776420210F3FABC08A55DBA15425615F7564D050DC151B"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\frozen-charts\\identity-False-Light-960.png",
+          "sha256": "009F0E5C7CD6AC0DD949633E5E3A28C46F3A4025B0DC8DAC2F5DE3929B791C80"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\frozen-charts\\identity-True-Dark-420.png",
+          "sha256": "43AA7A822AABB389C4EAB9FF12680A954FB4AF26E712D4105ED8598A6B18D97B"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\frozen-charts\\identity-True-Dark-960.png",
+          "sha256": "5D8D10D59CDE9470800B61B1B1078CD6F78BF8E991735443BCF026785E80706D"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\frozen-charts\\identity-True-Light-420.png",
+          "sha256": "3DC1AC0E6E2969087B41C9BD83549E5B81374925DEE139F4FDB14986A7FAB3E5"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\frozen-charts\\identity-True-Light-960.png",
+          "sha256": "4D946CC8908AABE185F0E1C123B5242620D70A6572A18042EF96DDE31677F07B"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\frozen-charts\\isotopes-False-Dark-420.png",
+          "sha256": "5CE649CC929E590A58E377EC4393E4B8E41C347ADD9FE007DE54A571AB596B14"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\frozen-charts\\isotopes-False-Dark-960.png",
+          "sha256": "9B5635A234F68DED3BB07B9CFEF318058EA4175BECE20ED1231F9EF8C26166CE"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\frozen-charts\\isotopes-False-Light-420.png",
+          "sha256": "868576143A44B620093D5153FFEEAA80AFA0921427D4BE4139870F256910E5DE"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\frozen-charts\\isotopes-False-Light-960.png",
+          "sha256": "B460C285C6D2E1B5667D28619662E161C14D29B63747CA5458FA30F1A8ED5EDF"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\frozen-charts\\isotopes-True-Dark-420.png",
+          "sha256": "879DFD588972CCA10708A1CCA7F689CCCCC1656103C18CBB4BAF82FF53939390"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\frozen-charts\\isotopes-True-Dark-960.png",
+          "sha256": "F6367421A5D646CB7F22B84B06255DBAB78FA198D1E69E71153EA8C2B345D309"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\frozen-charts\\isotopes-True-Light-420.png",
+          "sha256": "48D3ECE26B339870C10BD4E9E613B903C33193190410341479EE768EB1947893"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\frozen-charts\\isotopes-True-Light-960.png",
+          "sha256": "8E4A36B629C2519D6DF9BA1FAA5F11696F296397370DBC53C37C2DB28B1011E9"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\frozen-charts\\mass-False-Dark-420.png",
+          "sha256": "C9B64B5C8B2B53F698C33669BE3EC66CE4CB710D262D59764F97D22EDD31E80A"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\frozen-charts\\mass-False-Dark-960.png",
+          "sha256": "74F33755F274C8DAEA29A58D53C186A067A59AAAE387DD1B3D1B67B15027ACA4"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\frozen-charts\\mass-False-Light-420.png",
+          "sha256": "DAAEEF70F61D085D4818732D14CBC0B03630374CAA658FE5906CDA0BD7F8304B"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\frozen-charts\\mass-False-Light-960.png",
+          "sha256": "FCB13F7AF59BE48469EDCE07489C7E3CE8F2178665F5BB1C5CD02851C6025C35"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\frozen-charts\\mass-True-Dark-420.png",
+          "sha256": "FB526617118535CC1FF333265DA2D00F6B468D87C28E378EAB5711F73CE6F287"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\frozen-charts\\mass-True-Dark-960.png",
+          "sha256": "83271EB8AC51C1B6830A276BE0339F535D2A26A2CB0F16B88F0C95B1BDDA41F0"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\frozen-charts\\mass-True-Light-420.png",
+          "sha256": "25A80DD6D3CCB644C4156E9118FB7E9DABDDD2699AB4CB01C047D77E014A344F"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\frozen-charts\\mass-True-Light-960.png",
+          "sha256": "AF241A7CB537E418C40D290B86D0AD5F8BDF698FCD6BD5A3A1633CF67E2C1E98"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\frozen-charts\\partition-False-Dark-420.png",
+          "sha256": "CC6A57FAD75370EA6908E90F8A8286C2A7B570403612ACE4FCADB9891FB8867D"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\frozen-charts\\partition-False-Dark-960.png",
+          "sha256": "D94B142BFC16F11E3A88C75AC9EB70D804B59938B5B7258AB18ACF5384AC890D"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\frozen-charts\\partition-False-Light-420.png",
+          "sha256": "CC6A57FAD75370EA6908E90F8A8286C2A7B570403612ACE4FCADB9891FB8867D"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\frozen-charts\\partition-False-Light-960.png",
+          "sha256": "D94B142BFC16F11E3A88C75AC9EB70D804B59938B5B7258AB18ACF5384AC890D"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\frozen-charts\\partition-True-Dark-420.png",
+          "sha256": "43AA7A822AABB389C4EAB9FF12680A954FB4AF26E712D4105ED8598A6B18D97B"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\frozen-charts\\partition-True-Dark-960.png",
+          "sha256": "5D8D10D59CDE9470800B61B1B1078CD6F78BF8E991735443BCF026785E80706D"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\frozen-charts\\partition-True-Light-420.png",
+          "sha256": "43AA7A822AABB389C4EAB9FF12680A954FB4AF26E712D4105ED8598A6B18D97B"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\frozen-charts\\partition-True-Light-960.png",
+          "sha256": "5D8D10D59CDE9470800B61B1B1078CD6F78BF8E991735443BCF026785E80706D"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\frozen-charts\\percent-False-Dark-420.png",
+          "sha256": "8BCE40C6E3B0C9F528DC4B572E8541AFB44AA3D3798167A30B0B9D553D88D8F4"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\frozen-charts\\percent-False-Dark-960.png",
+          "sha256": "9B08302A4C77B2DBAC0B92396F53A9162C1AF6AF7280D1A9D9FDD95BD5A6F117"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\frozen-charts\\percent-False-Light-420.png",
+          "sha256": "BB479E33D2A762AF1A89AEFE72F589EFCF773F26BE0626334DE40A95F927A93F"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\frozen-charts\\percent-False-Light-960.png",
+          "sha256": "E0FB9532AB8C01BEF8EBFE6A2E252BDC8F58326502C86894BD22CD858112FFFC"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\frozen-charts\\percent-True-Dark-420.png",
+          "sha256": "76FB3B64A64BF901FF8DA458C14C03B20DD117F13DC8252B098AF2EB5927FA34"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\frozen-charts\\percent-True-Dark-960.png",
+          "sha256": "095EA3C45A72717DCEF04BEF4ED10ACE23A24AB408E8A22430442455B6D2C8B4"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\frozen-charts\\percent-True-Light-420.png",
+          "sha256": "91CB2CB0CC6BBB50E99C1EF687A55E7094E7BF5995A19172C4903BC1D9CDBB8B"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\frozen-charts\\percent-True-Light-960.png",
+          "sha256": "6B687C34BA64F0B019FFD3D1844AA2ACDFB1348A05D7337EBC7153A1E3BEA343"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\frozen-charts\\recovery-False-Dark-420.png",
+          "sha256": "7684CAD359872FB824D48C8FD7BB6472A57584DDDC83079726C295A92378C6AC"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\frozen-charts\\recovery-False-Dark-960.png",
+          "sha256": "E7E090C790BD500262F56A99BED22D2F6FD0977030BB75CC7BA8797B23BD70A9"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\frozen-charts\\recovery-False-Light-420.png",
+          "sha256": "2C164C80C5277A7148695A08665719C4EF96C0F5633A139FA8E0C286B87AAA99"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\frozen-charts\\recovery-False-Light-960.png",
+          "sha256": "C9044746264432FCDF5E8546FFB649D7A3E2097DB5DEE202F779CDB242CB6454"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\frozen-charts\\recovery-True-Dark-420.png",
+          "sha256": "49AB9C27FFCB061EA26207D8359DD560245FA576B3FD217B0872383394E16A69"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\frozen-charts\\recovery-True-Dark-960.png",
+          "sha256": "F44CF2BE06E6A2673CF3697499B491F0C04D7C606BFE4619931BC1D70172B290"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\frozen-charts\\recovery-True-Light-420.png",
+          "sha256": "0908B34AC89AB70597B3CE728EE34FA9FFA6287B20554B2A0E5C460A222222E8"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\frozen-charts\\recovery-True-Light-960.png",
+          "sha256": "AA9300EAE920FA380C59023DA3F799D4CCF79B0CCDDB8862981315B99C7043A7"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\frozen-values.json",
+          "sha256": "FBEFD232387169AE206B13FBEEA90AF5429C46D66CD65AE6F96251447F335655"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\proofs.log",
+          "sha256": "403C03B881EECE5DDDECCB4DA29356620331227A2AB2E448E2CC428B35821FEC"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\repeat-charts\\families-False-Dark-420.png",
+          "sha256": "8B579DB35C71A2ED5D5B953D9822172CC9B4A4C7438BF0F62A6981DC4FA31125"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\repeat-charts\\families-False-Dark-960.png",
+          "sha256": "E038BB699E08FA147B8CD9F351C37E2818BED14756620021036DC99783FC7178"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\repeat-charts\\families-False-Light-420.png",
+          "sha256": "5C494722BF6D29929127CBF91004F462C0B56F53FD488DD811B1ABA835D6457B"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\repeat-charts\\families-False-Light-960.png",
+          "sha256": "CAFF4842F8A5C9095B4E8C6E801BD22DEC35E9DE8CF1CFBDF0373C23663C00E2"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\repeat-charts\\families-True-Dark-420.png",
+          "sha256": "EBEC02EFB97DFFDA55BC316C0CD332550B1CCE44967D605F0950F7DF616EEAF0"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\repeat-charts\\families-True-Dark-960.png",
+          "sha256": "5598D03F4900061B56F7DBEE854710D7E5978B893096677BACC1E5A7BDC7E63D"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\repeat-charts\\families-True-Light-420.png",
+          "sha256": "649E82103EB0A7919F6C906CD231B19C4CFD6D0B89232760A2C063048E26EB0E"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\repeat-charts\\families-True-Light-960.png",
+          "sha256": "A789D3704032E2645182EFEE1E768476A9F2F5C790C21E2CA6F1FC0D9DCDA0AB"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\repeat-charts\\identity-False-Dark-420.png",
+          "sha256": "1C86F3DE388FBC6722AD38391982DF773EFCE3EC162FB3C8732D3AAF1DE0E8CD"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\repeat-charts\\identity-False-Dark-960.png",
+          "sha256": "D79193F8777F2BC41D3BE3BD2BE6E8E46C73A238711B509CFC88332D3A2D32D7"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\repeat-charts\\identity-False-Light-420.png",
+          "sha256": "FCDF03D278E6B35928776420210F3FABC08A55DBA15425615F7564D050DC151B"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\repeat-charts\\identity-False-Light-960.png",
+          "sha256": "009F0E5C7CD6AC0DD949633E5E3A28C46F3A4025B0DC8DAC2F5DE3929B791C80"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\repeat-charts\\identity-True-Dark-420.png",
+          "sha256": "43AA7A822AABB389C4EAB9FF12680A954FB4AF26E712D4105ED8598A6B18D97B"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\repeat-charts\\identity-True-Dark-960.png",
+          "sha256": "5D8D10D59CDE9470800B61B1B1078CD6F78BF8E991735443BCF026785E80706D"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\repeat-charts\\identity-True-Light-420.png",
+          "sha256": "3DC1AC0E6E2969087B41C9BD83549E5B81374925DEE139F4FDB14986A7FAB3E5"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\repeat-charts\\identity-True-Light-960.png",
+          "sha256": "4D946CC8908AABE185F0E1C123B5242620D70A6572A18042EF96DDE31677F07B"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\repeat-charts\\isotopes-False-Dark-420.png",
+          "sha256": "5CE649CC929E590A58E377EC4393E4B8E41C347ADD9FE007DE54A571AB596B14"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\repeat-charts\\isotopes-False-Dark-960.png",
+          "sha256": "9B5635A234F68DED3BB07B9CFEF318058EA4175BECE20ED1231F9EF8C26166CE"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\repeat-charts\\isotopes-False-Light-420.png",
+          "sha256": "868576143A44B620093D5153FFEEAA80AFA0921427D4BE4139870F256910E5DE"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\repeat-charts\\isotopes-False-Light-960.png",
+          "sha256": "B460C285C6D2E1B5667D28619662E161C14D29B63747CA5458FA30F1A8ED5EDF"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\repeat-charts\\isotopes-True-Dark-420.png",
+          "sha256": "879DFD588972CCA10708A1CCA7F689CCCCC1656103C18CBB4BAF82FF53939390"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\repeat-charts\\isotopes-True-Dark-960.png",
+          "sha256": "F6367421A5D646CB7F22B84B06255DBAB78FA198D1E69E71153EA8C2B345D309"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\repeat-charts\\isotopes-True-Light-420.png",
+          "sha256": "48D3ECE26B339870C10BD4E9E613B903C33193190410341479EE768EB1947893"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\repeat-charts\\isotopes-True-Light-960.png",
+          "sha256": "8E4A36B629C2519D6DF9BA1FAA5F11696F296397370DBC53C37C2DB28B1011E9"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\repeat-charts\\mass-False-Dark-420.png",
+          "sha256": "C9B64B5C8B2B53F698C33669BE3EC66CE4CB710D262D59764F97D22EDD31E80A"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\repeat-charts\\mass-False-Dark-960.png",
+          "sha256": "74F33755F274C8DAEA29A58D53C186A067A59AAAE387DD1B3D1B67B15027ACA4"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\repeat-charts\\mass-False-Light-420.png",
+          "sha256": "DAAEEF70F61D085D4818732D14CBC0B03630374CAA658FE5906CDA0BD7F8304B"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\repeat-charts\\mass-False-Light-960.png",
+          "sha256": "FCB13F7AF59BE48469EDCE07489C7E3CE8F2178665F5BB1C5CD02851C6025C35"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\repeat-charts\\mass-True-Dark-420.png",
+          "sha256": "FB526617118535CC1FF333265DA2D00F6B468D87C28E378EAB5711F73CE6F287"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\repeat-charts\\mass-True-Dark-960.png",
+          "sha256": "83271EB8AC51C1B6830A276BE0339F535D2A26A2CB0F16B88F0C95B1BDDA41F0"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\repeat-charts\\mass-True-Light-420.png",
+          "sha256": "25A80DD6D3CCB644C4156E9118FB7E9DABDDD2699AB4CB01C047D77E014A344F"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\repeat-charts\\mass-True-Light-960.png",
+          "sha256": "AF241A7CB537E418C40D290B86D0AD5F8BDF698FCD6BD5A3A1633CF67E2C1E98"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\repeat-charts\\partition-False-Dark-420.png",
+          "sha256": "CC6A57FAD75370EA6908E90F8A8286C2A7B570403612ACE4FCADB9891FB8867D"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\repeat-charts\\partition-False-Dark-960.png",
+          "sha256": "D94B142BFC16F11E3A88C75AC9EB70D804B59938B5B7258AB18ACF5384AC890D"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\repeat-charts\\partition-False-Light-420.png",
+          "sha256": "CC6A57FAD75370EA6908E90F8A8286C2A7B570403612ACE4FCADB9891FB8867D"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\repeat-charts\\partition-False-Light-960.png",
+          "sha256": "D94B142BFC16F11E3A88C75AC9EB70D804B59938B5B7258AB18ACF5384AC890D"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\repeat-charts\\partition-True-Dark-420.png",
+          "sha256": "43AA7A822AABB389C4EAB9FF12680A954FB4AF26E712D4105ED8598A6B18D97B"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\repeat-charts\\partition-True-Dark-960.png",
+          "sha256": "5D8D10D59CDE9470800B61B1B1078CD6F78BF8E991735443BCF026785E80706D"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\repeat-charts\\partition-True-Light-420.png",
+          "sha256": "43AA7A822AABB389C4EAB9FF12680A954FB4AF26E712D4105ED8598A6B18D97B"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\repeat-charts\\partition-True-Light-960.png",
+          "sha256": "5D8D10D59CDE9470800B61B1B1078CD6F78BF8E991735443BCF026785E80706D"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\repeat-charts\\percent-False-Dark-420.png",
+          "sha256": "8BCE40C6E3B0C9F528DC4B572E8541AFB44AA3D3798167A30B0B9D553D88D8F4"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\repeat-charts\\percent-False-Dark-960.png",
+          "sha256": "9B08302A4C77B2DBAC0B92396F53A9162C1AF6AF7280D1A9D9FDD95BD5A6F117"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\repeat-charts\\percent-False-Light-420.png",
+          "sha256": "BB479E33D2A762AF1A89AEFE72F589EFCF773F26BE0626334DE40A95F927A93F"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\repeat-charts\\percent-False-Light-960.png",
+          "sha256": "E0FB9532AB8C01BEF8EBFE6A2E252BDC8F58326502C86894BD22CD858112FFFC"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\repeat-charts\\percent-True-Dark-420.png",
+          "sha256": "76FB3B64A64BF901FF8DA458C14C03B20DD117F13DC8252B098AF2EB5927FA34"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\repeat-charts\\percent-True-Dark-960.png",
+          "sha256": "095EA3C45A72717DCEF04BEF4ED10ACE23A24AB408E8A22430442455B6D2C8B4"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\repeat-charts\\percent-True-Light-420.png",
+          "sha256": "91CB2CB0CC6BBB50E99C1EF687A55E7094E7BF5995A19172C4903BC1D9CDBB8B"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\repeat-charts\\percent-True-Light-960.png",
+          "sha256": "6B687C34BA64F0B019FFD3D1844AA2ACDFB1348A05D7337EBC7153A1E3BEA343"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\repeat-charts\\recovery-False-Dark-420.png",
+          "sha256": "7684CAD359872FB824D48C8FD7BB6472A57584DDDC83079726C295A92378C6AC"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\repeat-charts\\recovery-False-Dark-960.png",
+          "sha256": "E7E090C790BD500262F56A99BED22D2F6FD0977030BB75CC7BA8797B23BD70A9"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\repeat-charts\\recovery-False-Light-420.png",
+          "sha256": "2C164C80C5277A7148695A08665719C4EF96C0F5633A139FA8E0C286B87AAA99"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\repeat-charts\\recovery-False-Light-960.png",
+          "sha256": "C9044746264432FCDF5E8546FFB649D7A3E2097DB5DEE202F779CDB242CB6454"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\repeat-charts\\recovery-True-Dark-420.png",
+          "sha256": "49AB9C27FFCB061EA26207D8359DD560245FA576B3FD217B0872383394E16A69"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\repeat-charts\\recovery-True-Dark-960.png",
+          "sha256": "F44CF2BE06E6A2673CF3697499B491F0C04D7C606BFE4619931BC1D70172B290"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\repeat-charts\\recovery-True-Light-420.png",
+          "sha256": "0908B34AC89AB70597B3CE728EE34FA9FFA6287B20554B2A0E5C460A222222E8"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\repeat-charts\\recovery-True-Light-960.png",
+          "sha256": "AA9300EAE920FA380C59023DA3F799D4CCF79B0CCDDB8862981315B99C7043A7"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\repeat-values.json",
+          "sha256": "0108AC8BC772CD87DCF1F6EE49735788A2A464DBCF321B2A874D53242B36CFAC"
+        }
+      ],
+      "workingDirectory": "C:\\FamilyQuant-wt2\\results"
+    }
+  ],
+  "rows": [
+    {
+      "observationId": "FQ15-0017BF7ED046",
+      "implementation": [
+        {
+          "path": "FamilyQuant/IdentityScanChart.cs",
+          "symbol": "complete native raster bytes: empty and populated branches, historical Light and Dark palettes, two sizes; font and draw labels included",
+          "sha256": "6E12975B73154AFD5E6AF1796751F28ED49CD977C5C3E38830A11FC45F015CAF"
+        }
+      ],
+      "proofs": [],
+      "note": "Frozen executable comparison of synthetic presentation inputs. No scientific inference or USearch removal approval. Textual screen-name change is explicit, not literal equality.",
+      "kindReceiptId": "native-code-fact",
+      "compared": "FamilyQuant/IdentityScanChart.cs:123 \u0022Segoe UI\u0022; complete native raster bytes: empty and populated branches, historical Light and Dark palettes, two sizes; font and draw labels included; exact fixture keys and before/actual values retained in comparisons.json"
+    },
+    {
+      "observationId": "FQ15-07D81C5B558B",
+      "implementation": [
+        {
+          "path": "FamilyQuant/AnalyticsViewModel.cs",
+          "symbol": "native SummaryLine branch text and formatted values; the sole reviewed screen-name substitution is Layer 3 -\u003E the quantitation panel",
+          "sha256": "581D33C2FF3CB6B07251B7480C016379902ED6825CF257D700FD1B14FF538945"
+        }
+      ],
+      "proofs": [],
+      "note": "Frozen executable comparison of synthetic presentation inputs. No scientific inference or USearch removal approval. Textual screen-name change is explicit, not literal equality.",
+      "kindReceiptId": "native-format-export",
+      "compared": "FamilyQuant/AnalyticsControl.xaml.cs:224 \u0022nothing to draw: open the project\u0027s .fcf or .fqproj and return here.\u0022; native SummaryLine branch text and formatted values; the sole reviewed screen-name substitution is Layer 3 -\u003E the quantitation panel; exact fixture keys and before/actual values retained in comparisons.json"
+    },
+    {
+      "observationId": "FQ15-0BF65773FF2C",
+      "implementation": [
+        {
+          "path": "FamilyQuant/XicMassChart.cs",
+          "symbol": "complete native raster bytes: empty and populated branches, historical Light and Dark palettes, two sizes; font and draw labels included",
+          "sha256": "DC13EE41EE7A44EAA05EF0A47AB25D16317335965CD7EAE4A9F9CFD2AE7D8629"
+        }
+      ],
+      "proofs": [],
+      "note": "Frozen executable comparison of synthetic presentation inputs. No scientific inference or USearch removal approval. Textual screen-name change is explicit, not literal equality.",
+      "kindReceiptId": "native-code-fact",
+      "compared": "FamilyQuant/XicMassChart.cs:100 \u00220\u0022; complete native raster bytes: empty and populated branches, historical Light and Dark palettes, two sizes; font and draw labels included; exact fixture keys and before/actual values retained in comparisons.json"
+    },
+    {
+      "observationId": "FQ15-10748E65D19F",
+      "implementation": [
+        {
+          "path": "FamilyQuant.Core/NormalizationMode.cs",
+          "symbol": "native normalization header, frozen User-family branch against current header; four modes, unknown CSV denominator, two cultures",
+          "sha256": "951708B64A2746F38DA428448E32DD50DA1004F864C58ACB410A39F872CA29C5"
+        }
+      ],
+      "proofs": [],
+      "note": "Frozen executable comparison of synthetic presentation inputs. No scientific inference or USearch removal approval. Textual screen-name change is explicit, not literal equality.",
+      "kindReceiptId": "native-code-fact",
+      "compared": "FamilyQuant/NormalizationMode.cs:105 \u0022 (\u0022; native normalization header, frozen User-family branch against current header; four modes, unknown CSV denominator, two cultures; exact fixture keys and before/actual values retained in comparisons.json"
+    },
+    {
+      "observationId": "FQ15-147A2344E576",
+      "implementation": [
+        {
+          "path": "FamilyQuant/IdentityScanChart.cs",
+          "symbol": "complete native raster bytes: empty and populated branches, historical Light and Dark palettes, two sizes; font and draw labels included",
+          "sha256": "6E12975B73154AFD5E6AF1796751F28ED49CD977C5C3E38830A11FC45F015CAF"
+        }
+      ],
+      "proofs": [],
+      "note": "Frozen executable comparison of synthetic presentation inputs. No scientific inference or USearch removal approval. Textual screen-name change is explicit, not literal equality.",
+      "kindReceiptId": "native-code-fact",
+      "compared": "FamilyQuant/IdentityScanChart.cs:213 \u0022%\u0022; complete native raster bytes: empty and populated branches, historical Light and Dark palettes, two sizes; font and draw labels included; exact fixture keys and before/actual values retained in comparisons.json"
+    },
+    {
+      "observationId": "FQ15-14985DE07575",
+      "implementation": [
+        {
+          "path": "FamilyQuant/AnalyticsViewModel.cs",
+          "symbol": "native SummaryLine branch text and formatted values; the sole reviewed screen-name substitution is Layer 3 -\u003E the quantitation panel",
+          "sha256": "581D33C2FF3CB6B07251B7480C016379902ED6825CF257D700FD1B14FF538945"
+        }
+      ],
+      "proofs": [],
+      "note": "Frozen executable comparison of synthetic presentation inputs. No scientific inference or USearch removal approval. Textual screen-name change is explicit, not literal equality.",
+      "kindReceiptId": "native-code-fact",
+      "compared": "FamilyQuant/AnalyticsControl.xaml.cs:234 \u0022 peptide(s) after collapsing each to one representative peak. No total ion current \u0022; native SummaryLine branch text and formatted values; the sole reviewed screen-name substitution is Layer 3 -\u003E the quantitation panel; exact fixture keys and before/actual values retained in comparisons.json"
+    },
+    {
+      "observationId": "FQ15-15A171A399A4",
+      "implementation": [
+        {
+          "path": "FamilyQuant/RecoveryChart.cs",
+          "symbol": "complete native raster bytes: empty and populated branches, historical Light and Dark palettes, two sizes; font and draw labels included",
+          "sha256": "F39E00E4455E67A05AC77A8324D51819C3C343FB95B183DCD93D6A5B9D5FAB6A"
+        }
+      ],
+      "proofs": [],
+      "note": "Frozen executable comparison of synthetic presentation inputs. No scientific inference or USearch removal approval. Textual screen-name change is explicit, not literal equality.",
+      "kindReceiptId": "native-code-fact",
+      "compared": "FamilyQuant/RecoveryChart.cs:114 \u0022Nothing to show: compute the full XIC so the runs have a TIC to divide by.\u0022; complete native raster bytes: empty and populated branches, historical Light and Dark palettes, two sizes; font and draw labels included; exact fixture keys and before/actual values retained in comparisons.json"
+    },
+    {
+      "observationId": "FQ15-170E6DDDE344",
+      "implementation": [
+        {
+          "path": "FamilyQuant.Core/NormalizationMode.cs",
+          "symbol": "native normalization header, frozen User-family branch against current header; four modes, unknown CSV denominator, two cultures",
+          "sha256": "951708B64A2746F38DA428448E32DD50DA1004F864C58ACB410A39F872CA29C5"
+        }
+      ],
+      "proofs": [],
+      "note": "Frozen executable comparison of synthetic presentation inputs. No scientific inference or USearch removal approval. Textual screen-name change is explicit, not literal equality.",
+      "kindReceiptId": "native-code-fact",
+      "compared": "FamilyQuant/NormalizationMode.cs:122 \u0022)\u0022; native normalization header, frozen User-family branch against current header; four modes, unknown CSV denominator, two cultures; exact fixture keys and before/actual values retained in comparisons.json"
+    },
+    {
+      "observationId": "FQ15-183961BF94B3",
+      "implementation": [
+        {
+          "path": "FamilyQuant/PercentIonCurrentChart.cs",
+          "symbol": "complete native raster bytes: empty and populated branches, historical Light and Dark palettes, two sizes; font and draw labels included",
+          "sha256": "61E28173A23BF601B17197ECFF2A47AFD523A4DEC2F47BD244BDDA6FCD106E05"
+        }
+      ],
+      "proofs": [],
+      "note": "Frozen executable comparison of synthetic presentation inputs. No scientific inference or USearch removal approval. Textual screen-name change is explicit, not literal equality.",
+      "kindReceiptId": "native-code-fact",
+      "compared": "FamilyQuant/PercentIonCurrentChart.cs:110 \u0022P0\u0022; complete native raster bytes: empty and populated branches, historical Light and Dark palettes, two sizes; font and draw labels included; exact fixture keys and before/actual values retained in comparisons.json"
+    },
+    {
+      "observationId": "FQ15-18B69E5FE48B",
+      "implementation": [
+        {
+          "path": "FamilyQuant/AnalyticsViewModel.cs",
+          "symbol": "native SummaryLine branch text and formatted values; the sole reviewed screen-name substitution is Layer 3 -\u003E the quantitation panel",
+          "sha256": "581D33C2FF3CB6B07251B7480C016379902ED6825CF257D700FD1B14FF538945"
+        }
+      ],
+      "proofs": [],
+      "note": "Frozen executable comparison of synthetic presentation inputs. No scientific inference or USearch removal approval. Textual screen-name change is explicit, not literal equality.",
+      "kindReceiptId": "native-code-fact",
+      "compared": "FamilyQuant/AnalyticsControl.xaml.cs:214 \u0022 family(ies) of the open grouping, reached by homology; families below the cut are \u0022; native SummaryLine branch text and formatted values; the sole reviewed screen-name substitution is Layer 3 -\u003E the quantitation panel; exact fixture keys and before/actual values retained in comparisons.json"
+    },
+    {
+      "observationId": "FQ15-18D61707CAFD",
+      "implementation": [
+        {
+          "path": "FamilyQuant/IsotopeCountChart.cs",
+          "symbol": "complete native raster bytes: empty and populated branches, historical Light and Dark palettes, two sizes; font and draw labels included",
+          "sha256": "C18B470572D3647F4B9007B8170702C5F231BCB62989EBD6662825DCE7AF17EF"
+        }
+      ],
+      "proofs": [],
+      "note": "Frozen executable comparison of synthetic presentation inputs. No scientific inference or USearch removal approval. Textual screen-name change is explicit, not literal equality.",
+      "kindReceiptId": "native-code-fact",
+      "compared": "FamilyQuant/IsotopeCountChart.cs:76 \u0022Isotopes credited per peptide\u0022; complete native raster bytes: empty and populated branches, historical Light and Dark palettes, two sizes; font and draw labels included; exact fixture keys and before/actual values retained in comparisons.json"
+    },
+    {
+      "observationId": "FQ15-195C6EA3EF4C",
+      "implementation": [
+        {
+          "path": "FamilyQuant.Core/AnalyticsModel.cs",
+          "symbol": "native KeyOf separators across two runs, sides, charges and cultures",
+          "sha256": "735ABBBF39EB5BA9CC40D28B2FEE57386D1FD33E268AD708632EF119BCBFDD73"
+        }
+      ],
+      "proofs": [],
+      "note": "Frozen executable comparison of synthetic presentation inputs. No scientific inference or USearch removal approval. Textual screen-name change is explicit, not literal equality.",
+      "kindReceiptId": "native-export-storage-fact",
+      "compared": "FamilyQuant/AnalyticsModel.cs:261 \u0022\\u0001\u0022; native KeyOf separators across two runs, sides, charges and cultures; exact fixture keys and before/actual values retained in comparisons.json"
+    },
+    {
+      "observationId": "FQ15-1AB0B0C1616E",
+      "implementation": [
+        {
+          "path": "FamilyQuant/IdentityScanChart.cs",
+          "symbol": "complete native raster bytes: empty and populated branches, historical Light and Dark palettes, two sizes; font and draw labels included",
+          "sha256": "6E12975B73154AFD5E6AF1796751F28ED49CD977C5C3E38830A11FC45F015CAF"
+        }
+      ],
+      "proofs": [],
+      "note": "Frozen executable comparison of synthetic presentation inputs. No scientific inference or USearch removal approval. Textual screen-name change is explicit, not literal equality.",
+      "kindReceiptId": "native-code-fact",
+      "compared": "FamilyQuant/IdentityScanChart.cs:239 \u0022USEARCH identity, strictest on the left\u0022; complete native raster bytes: empty and populated branches, historical Light and Dark palettes, two sizes; font and draw labels included; exact fixture keys and before/actual values retained in comparisons.json"
+    },
+    {
+      "observationId": "FQ15-1C4AF84D0909",
+      "implementation": [
+        {
+          "path": "FamilyQuant/FamilyContributionChart.cs",
+          "symbol": "complete native raster bytes: empty and populated branches, historical Light and Dark palettes, two sizes; font and draw labels included",
+          "sha256": "939A4F9C98A0739582DDBBEA460C0631F90C29871BD45F0BDC4ACB8DB5EF60E2"
+        }
+      ],
+      "proofs": [],
+      "note": "Frozen executable comparison of synthetic presentation inputs. No scientific inference or USearch removal approval. Textual screen-name change is explicit, not literal equality.",
+      "kindReceiptId": "native-code-fact",
+      "compared": "FamilyQuant/FamilyContributionChart.cs:415 \u0022Family Cluster File open beside the computed full XIC.\u0022; complete native raster bytes: empty and populated branches, historical Light and Dark palettes, two sizes; font and draw labels included; exact fixture keys and before/actual values retained in comparisons.json"
+    },
+    {
+      "observationId": "FQ15-1EB77992732D",
+      "implementation": [
+        {
+          "path": "FamilyQuant/IdentityScanChart.cs",
+          "symbol": "complete native raster bytes: empty and populated branches, historical Light and Dark palettes, two sizes; font and draw labels included",
+          "sha256": "6E12975B73154AFD5E6AF1796751F28ED49CD977C5C3E38830A11FC45F015CAF"
+        }
+      ],
+      "proofs": [],
+      "note": "Frozen executable comparison of synthetic presentation inputs. No scientific inference or USearch removal approval. Textual screen-name change is explicit, not literal equality.",
+      "kindReceiptId": "native-code-fact",
+      "compared": "FamilyQuant/IdentityScanChart.cs:233 \u0022families mixing target and decoy\u0022; complete native raster bytes: empty and populated branches, historical Light and Dark palettes, two sizes; font and draw labels included; exact fixture keys and before/actual values retained in comparisons.json"
+    },
+    {
+      "observationId": "FQ15-1F3377115E02",
+      "implementation": [
+        {
+          "path": "FamilyQuant/IdentityScanChart.cs",
+          "symbol": "complete native raster bytes: empty and populated branches, historical Light and Dark palettes, two sizes; font and draw labels included",
+          "sha256": "6E12975B73154AFD5E6AF1796751F28ED49CD977C5C3E38830A11FC45F015CAF"
+        }
+      ],
+      "proofs": [],
+      "note": "Frozen executable comparison of synthetic presentation inputs. No scientific inference or USearch removal approval. Textual screen-name change is explicit, not literal equality.",
+      "kindReceiptId": "native-code-fact",
+      "compared": "FamilyQuant/IdentityScanChart.cs:196 \u0022%\u0022; complete native raster bytes: empty and populated branches, historical Light and Dark palettes, two sizes; font and draw labels included; exact fixture keys and before/actual values retained in comparisons.json"
+    },
+    {
+      "observationId": "FQ15-2160B295CB8D",
+      "implementation": [
+        {
+          "path": "FamilyQuant.Core/AnalyticsModel.cs",
+          "symbol": "native RFC 4180 Field escaping: null, empty, plain, comma, quote, LF, CR and combined fields in two cultures",
+          "sha256": "735ABBBF39EB5BA9CC40D28B2FEE57386D1FD33E268AD708632EF119BCBFDD73"
+        }
+      ],
+      "proofs": [],
+      "note": "Frozen executable comparison of synthetic presentation inputs. No scientific inference or USearch removal approval. Textual screen-name change is explicit, not literal equality.",
+      "kindReceiptId": "native-export-storage-fact",
+      "compared": "FamilyQuant/AnalyticsModel.cs:455 \u0022\\\u0022\u0022; native RFC 4180 Field escaping: null, empty, plain, comma, quote, LF, CR and combined fields in two cultures; exact fixture keys and before/actual values retained in comparisons.json"
+    },
+    {
+      "observationId": "FQ15-2F326D517A18",
+      "implementation": [
+        {
+          "path": "FamilyQuant/PercentIonCurrentChart.cs",
+          "symbol": "complete native raster bytes: empty and populated branches, historical Light and Dark palettes, two sizes; font and draw labels included",
+          "sha256": "61E28173A23BF601B17197ECFF2A47AFD523A4DEC2F47BD244BDDA6FCD106E05"
+        }
+      ],
+      "proofs": [],
+      "note": "Frozen executable comparison of synthetic presentation inputs. No scientific inference or USearch removal approval. Textual screen-name change is explicit, not literal equality.",
+      "kindReceiptId": "native-code-fact",
+      "compared": "FamilyQuant/PercentIonCurrentChart.cs:140 \u0022N0\u0022; complete native raster bytes: empty and populated branches, historical Light and Dark palettes, two sizes; font and draw labels included; exact fixture keys and before/actual values retained in comparisons.json"
+    },
+    {
+      "observationId": "FQ15-2FE77BAEBF4C",
+      "implementation": [
+        {
+          "path": "FamilyQuant/XicMassChart.cs",
+          "symbol": "complete native raster bytes: empty and populated branches, historical Light and Dark palettes, two sizes; font and draw labels included",
+          "sha256": "DC13EE41EE7A44EAA05EF0A47AB25D16317335965CD7EAE4A9F9CFD2AE7D8629"
+        }
+      ],
+      "proofs": [],
+      "note": "Frozen executable comparison of synthetic presentation inputs. No scientific inference or USearch removal approval. Textual screen-name change is explicit, not literal equality.",
+      "kindReceiptId": "native-code-fact",
+      "compared": "FamilyQuant/XicMassChart.cs:110 \u0022N0\u0022; complete native raster bytes: empty and populated branches, historical Light and Dark palettes, two sizes; font and draw labels included; exact fixture keys and before/actual values retained in comparisons.json"
+    },
+    {
+      "observationId": "FQ15-3335A84B815E",
+      "implementation": [
+        {
+          "path": "FamilyQuant/XicMassChart.cs",
+          "symbol": "complete native raster bytes: empty and populated branches, historical Light and Dark palettes, two sizes; font and draw labels included",
+          "sha256": "DC13EE41EE7A44EAA05EF0A47AB25D16317335965CD7EAE4A9F9CFD2AE7D8629"
+        }
+      ],
+      "proofs": [],
+      "note": "Frozen executable comparison of synthetic presentation inputs. No scientific inference or USearch removal approval. Textual screen-name change is explicit, not literal equality.",
+      "kindReceiptId": "native-code-fact",
+      "compared": "FamilyQuant/XicMassChart.cs:66 \u0022XIC by mass: envelope area against peptide mass\u0022; complete native raster bytes: empty and populated branches, historical Light and Dark palettes, two sizes; font and draw labels included; exact fixture keys and before/actual values retained in comparisons.json"
+    },
+    {
+      "observationId": "FQ15-335AA9FA614A",
+      "implementation": [
+        {
+          "path": "FamilyQuant/AnalyticsViewModel.cs",
+          "symbol": "native SummaryLine branch text and formatted values; the sole reviewed screen-name substitution is Layer 3 -\u003E the quantitation panel",
+          "sha256": "581D33C2FF3CB6B07251B7480C016379902ED6825CF257D700FD1B14FF538945"
+        }
+      ],
+      "proofs": [],
+      "note": "Frozen executable comparison of synthetic presentation inputs. No scientific inference or USearch removal approval. Textual screen-name change is explicit, not literal equality.",
+      "kindReceiptId": "native-code-fact",
+      "compared": "FamilyQuant/AnalyticsControl.xaml.cs:246 \u0022too few points to integrate{2}. It is accounted for as its own block rather than left to \u0022; native SummaryLine branch text and formatted values; the sole reviewed screen-name substitution is Layer 3 -\u003E the quantitation panel; exact fixture keys and before/actual values retained in comparisons.json"
+    },
+    {
+      "observationId": "FQ15-337A451D104E",
+      "implementation": [
+        {
+          "path": "FamilyQuant/AnalyticsViewModel.cs",
+          "symbol": "native SummaryLine branch text and formatted values; the sole reviewed screen-name substitution is Layer 3 -\u003E the quantitation panel",
+          "sha256": "581D33C2FF3CB6B07251B7480C016379902ED6825CF257D700FD1B14FF538945"
+        }
+      ],
+      "proofs": [],
+      "note": "Frozen executable comparison of synthetic presentation inputs. No scientific inference or USearch removal approval. Textual screen-name change is explicit, not literal equality.",
+      "kindReceiptId": "native-code-fact",
+      "compared": "FamilyQuant/AnalyticsControl.xaml.cs:233 \u0022Read \u0022; native SummaryLine branch text and formatted values; the sole reviewed screen-name substitution is Layer 3 -\u003E the quantitation panel; exact fixture keys and before/actual values retained in comparisons.json"
+    },
+    {
+      "observationId": "FQ15-34B55159228E",
+      "implementation": [
+        {
+          "path": "FamilyQuant/RecoveryChart.cs",
+          "symbol": "complete native raster bytes: empty and populated branches, historical Light and Dark palettes, two sizes; font and draw labels included",
+          "sha256": "F39E00E4455E67A05AC77A8324D51819C3C343FB95B183DCD93D6A5B9D5FAB6A"
+        }
+      ],
+      "proofs": [],
+      "note": "Frozen executable comparison of synthetic presentation inputs. No scientific inference or USearch removal approval. Textual screen-name change is explicit, not literal equality.",
+      "kindReceiptId": "native-code-fact",
+      "compared": "FamilyQuant/RecoveryChart.cs:107 \u0022Recovery of the total ion current\u0022; complete native raster bytes: empty and populated branches, historical Light and Dark palettes, two sizes; font and draw labels included; exact fixture keys and before/actual values retained in comparisons.json"
+    },
+    {
+      "observationId": "FQ15-369CAF48846F",
+      "implementation": [
+        {
+          "path": "FamilyQuant/AnalyticsViewModel.cs",
+          "symbol": "native SummaryLine branch text and formatted values; the sole reviewed screen-name substitution is Layer 3 -\u003E the quantitation panel",
+          "sha256": "581D33C2FF3CB6B07251B7480C016379902ED6825CF257D700FD1B14FF538945"
+        }
+      ],
+      "proofs": [],
+      "note": "Frozen executable comparison of synthetic presentation inputs. No scientific inference or USearch removal approval. Textual screen-name change is explicit, not literal equality.",
+      "kindReceiptId": "native-code-fact",
+      "compared": "FamilyQuant/AnalyticsControl.xaml.cs:236 \u0022still read from the table.\u0022; native SummaryLine branch text and formatted values; the sole reviewed screen-name substitution is Layer 3 -\u003E the quantitation panel; exact fixture keys and before/actual values retained in comparisons.json"
+    },
+    {
+      "observationId": "FQ15-372A1D7D876F",
+      "implementation": [
+        {
+          "path": "FamilyQuant/PercentIonCurrentChart.cs",
+          "symbol": "complete native raster bytes: empty and populated branches, historical Light and Dark palettes, two sizes; font and draw labels included",
+          "sha256": "61E28173A23BF601B17197ECFF2A47AFD523A4DEC2F47BD244BDDA6FCD106E05"
+        }
+      ],
+      "proofs": [],
+      "note": "Frozen executable comparison of synthetic presentation inputs. No scientific inference or USearch removal approval. Textual screen-name change is explicit, not literal equality.",
+      "kindReceiptId": "native-code-fact",
+      "compared": "FamilyQuant/PercentIonCurrentChart.cs:70 \u0022Percent of ion current by mass\u0022; complete native raster bytes: empty and populated branches, historical Light and Dark palettes, two sizes; font and draw labels included; exact fixture keys and before/actual values retained in comparisons.json"
+    },
+    {
+      "observationId": "FQ15-393E11835299",
+      "implementation": [
+        {
+          "path": "FamilyQuant/PercentIonCurrentChart.cs",
+          "symbol": "complete native raster bytes: empty and populated branches, historical Light and Dark palettes, two sizes; font and draw labels included",
+          "sha256": "61E28173A23BF601B17197ECFF2A47AFD523A4DEC2F47BD244BDDA6FCD106E05"
+        }
+      ],
+      "proofs": [],
+      "note": "Frozen executable comparison of synthetic presentation inputs. No scientific inference or USearch removal approval. Textual screen-name change is explicit, not literal equality.",
+      "kindReceiptId": "native-code-fact",
+      "compared": "FamilyQuant/PercentIonCurrentChart.cs:80 \u0022Nothing to show: no peptide carried a positive envelope yet.\u0022; complete native raster bytes: empty and populated branches, historical Light and Dark palettes, two sizes; font and draw labels included; exact fixture keys and before/actual values retained in comparisons.json"
+    },
+    {
+      "observationId": "FQ15-3A5919BF25C4",
+      "implementation": [
+        {
+          "path": "FamilyQuant/IdentityScanChart.cs",
+          "symbol": "complete native raster bytes: empty and populated branches, historical Light and Dark palettes, two sizes; font and draw labels included",
+          "sha256": "6E12975B73154AFD5E6AF1796751F28ED49CD977C5C3E38830A11FC45F015CAF"
+        }
+      ],
+      "proofs": [],
+      "note": "Frozen executable comparison of synthetic presentation inputs. No scientific inference or USearch removal approval. Textual screen-name change is explicit, not literal equality.",
+      "kindReceiptId": "native-code-fact",
+      "compared": "FamilyQuant/IdentityScanChart.cs:228 \u0022non-contaminant target connected components\u0022; complete native raster bytes: empty and populated branches, historical Light and Dark palettes, two sizes; font and draw labels included; exact fixture keys and before/actual values retained in comparisons.json"
+    },
+    {
+      "observationId": "FQ15-3E8F095917C0",
+      "implementation": [
+        {
+          "path": "FamilyQuant/RecoveryChart.cs",
+          "symbol": "complete native raster bytes: empty and populated branches, historical Light and Dark palettes, two sizes; font and draw labels included",
+          "sha256": "F39E00E4455E67A05AC77A8324D51819C3C343FB95B183DCD93D6A5B9D5FAB6A"
+        }
+      ],
+      "proofs": [],
+      "note": "Frozen executable comparison of synthetic presentation inputs. No scientific inference or USearch removal approval. Textual screen-name change is explicit, not literal equality.",
+      "kindReceiptId": "native-code-fact",
+      "compared": "FamilyQuant/RecoveryChart.cs:91 \u0022Segoe UI\u0022; complete native raster bytes: empty and populated branches, historical Light and Dark palettes, two sizes; font and draw labels included; exact fixture keys and before/actual values retained in comparisons.json"
+    },
+    {
+      "observationId": "FQ15-4769F6956FF3",
+      "implementation": [
+        {
+          "path": "FamilyQuant/AnalyticsViewModel.cs",
+          "symbol": "native SummaryLine branch text and formatted values; the sole reviewed screen-name substitution is Layer 3 -\u003E the quantitation panel",
+          "sha256": "581D33C2FF3CB6B07251B7480C016379902ED6825CF257D700FD1B14FF538945"
+        }
+      ],
+      "proofs": [],
+      "note": "Frozen executable comparison of synthetic presentation inputs. No scientific inference or USearch removal approval. Textual screen-name change is explicit, not literal equality.",
+      "kindReceiptId": "native-code-fact",
+      "compared": "FamilyQuant/AnalyticsControl.xaml.cs:259 \u0022FamilyQuant\u0027s own full-envelope quant, deduped to one deterministic largest-M\u002B0 \u0022; native SummaryLine branch text and formatted values; the sole reviewed screen-name substitution is Layer 3 -\u003E the quantitation panel; exact fixture keys and before/actual values retained in comparisons.json"
+    },
+    {
+      "observationId": "FQ15-478160FEFF33",
+      "implementation": [
+        {
+          "path": "FamilyQuant.Core/AnalyticsModel.cs",
+          "symbol": "native KeyOf separators across two runs, sides, charges and cultures",
+          "sha256": "735ABBBF39EB5BA9CC40D28B2FEE57386D1FD33E268AD708632EF119BCBFDD73"
+        }
+      ],
+      "proofs": [],
+      "note": "Frozen executable comparison of synthetic presentation inputs. No scientific inference or USearch removal approval. Textual screen-name change is explicit, not literal equality.",
+      "kindReceiptId": "native-export-storage-fact",
+      "compared": "FamilyQuant/AnalyticsModel.cs:261 \u0022\\u0001\u0022; native KeyOf separators across two runs, sides, charges and cultures; exact fixture keys and before/actual values retained in comparisons.json"
+    },
+    {
+      "observationId": "FQ15-4B1E9C8B0D7C",
+      "implementation": [
+        {
+          "path": "FamilyQuant/AnalyticsViewModel.cs",
+          "symbol": "native SummaryLine branch text and formatted values; the sole reviewed screen-name substitution is Layer 3 -\u003E the quantitation panel",
+          "sha256": "581D33C2FF3CB6B07251B7480C016379902ED6825CF257D700FD1B14FF538945"
+        }
+      ],
+      "proofs": [],
+      "note": "Frozen executable comparison of synthetic presentation inputs. No scientific inference or USearch removal approval. Textual screen-name change is explicit, not literal equality.",
+      "kindReceiptId": "native-code-fact",
+      "compared": "FamilyQuant/AnalyticsControl.xaml.cs:233 \u0022N0\u0022; native SummaryLine branch text and formatted values; the sole reviewed screen-name substitution is Layer 3 -\u003E the quantitation panel; exact fixture keys and before/actual values retained in comparisons.json"
+    },
+    {
+      "observationId": "FQ15-4CE2050A0999",
+      "implementation": [
+        {
+          "path": "FamilyQuant/PercentIonCurrentChart.cs",
+          "symbol": "complete native raster bytes: empty and populated branches, historical Light and Dark palettes, two sizes; font and draw labels included",
+          "sha256": "61E28173A23BF601B17197ECFF2A47AFD523A4DEC2F47BD244BDDA6FCD106E05"
+        }
+      ],
+      "proofs": [],
+      "note": "Frozen executable comparison of synthetic presentation inputs. No scientific inference or USearch removal approval. Textual screen-name change is explicit, not literal equality.",
+      "kindReceiptId": "native-code-fact",
+      "compared": "FamilyQuant/PercentIonCurrentChart.cs:56 \u0022Segoe UI\u0022; complete native raster bytes: empty and populated branches, historical Light and Dark palettes, two sizes; font and draw labels included; exact fixture keys and before/actual values retained in comparisons.json"
+    },
+    {
+      "observationId": "FQ15-508AFF7616EF",
+      "implementation": [
+        {
+          "path": "FamilyQuant.Core/NormalizationMode.cs",
+          "symbol": "native normalization header, frozen User-family branch against current header; four modes, unknown CSV denominator, two cultures",
+          "sha256": "951708B64A2746F38DA428448E32DD50DA1004F864C58ACB410A39F872CA29C5"
+        }
+      ],
+      "proofs": [],
+      "note": "Frozen executable comparison of synthetic presentation inputs. No scientific inference or USearch removal approval. Textual screen-name change is explicit, not literal equality.",
+      "kindReceiptId": "native-code-fact",
+      "compared": "FamilyQuant/NormalizationMode.cs:115 \u0022Family share, fraction 0-1, denominator unknown (\u0022; native normalization header, frozen User-family branch against current header; four modes, unknown CSV denominator, two cultures; exact fixture keys and before/actual values retained in comparisons.json"
+    },
+    {
+      "observationId": "FQ15-5371D8A56686",
+      "implementation": [
+        {
+          "path": "FamilyQuant.Core/NormalizationMode.cs",
+          "symbol": "native normalization header, frozen User-family branch against current header; four modes, unknown CSV denominator, two cultures",
+          "sha256": "951708B64A2746F38DA428448E32DD50DA1004F864C58ACB410A39F872CA29C5"
+        }
+      ],
+      "proofs": [],
+      "note": "Frozen executable comparison of synthetic presentation inputs. No scientific inference or USearch removal approval. Textual screen-name change is explicit, not literal equality.",
+      "kindReceiptId": "native-code-fact",
+      "compared": "FamilyQuant/NormalizationMode.cs:119 \u0022of identified signal\u0022; native normalization header, frozen User-family branch against current header; four modes, unknown CSV denominator, two cultures; exact fixture keys and before/actual values retained in comparisons.json"
+    },
+    {
+      "observationId": "FQ15-54519B6879D6",
+      "implementation": [
+        {
+          "path": "FamilyQuant/IsotopeCountChart.cs",
+          "symbol": "complete native raster bytes: empty and populated branches, historical Light and Dark palettes, two sizes; font and draw labels included",
+          "sha256": "C18B470572D3647F4B9007B8170702C5F231BCB62989EBD6662825DCE7AF17EF"
+        }
+      ],
+      "proofs": [],
+      "note": "Frozen executable comparison of synthetic presentation inputs. No scientific inference or USearch removal approval. Textual screen-name change is explicit, not literal equality.",
+      "kindReceiptId": "native-code-fact",
+      "compared": "FamilyQuant/IsotopeCountChart.cs:159 \u0022 (ceiling)\u0022; complete native raster bytes: empty and populated branches, historical Light and Dark palettes, two sizes; font and draw labels included; exact fixture keys and before/actual values retained in comparisons.json"
+    },
+    {
+      "observationId": "FQ15-54F5DE5562BE",
+      "implementation": [
+        {
+          "path": "FamilyQuant/IsotopeCountChart.cs",
+          "symbol": "complete native raster bytes: empty and populated branches, historical Light and Dark palettes, two sizes; font and draw labels included",
+          "sha256": "C18B470572D3647F4B9007B8170702C5F231BCB62989EBD6662825DCE7AF17EF"
+        }
+      ],
+      "proofs": [],
+      "note": "Frozen executable comparison of synthetic presentation inputs. No scientific inference or USearch removal approval. Textual screen-name change is explicit, not literal equality.",
+      "kindReceiptId": "native-code-fact",
+      "compared": "FamilyQuant/IsotopeCountChart.cs:60 \u0022Segoe UI\u0022; complete native raster bytes: empty and populated branches, historical Light and Dark palettes, two sizes; font and draw labels included; exact fixture keys and before/actual values retained in comparisons.json"
+    },
+    {
+      "observationId": "FQ15-5ABBA0861220",
+      "implementation": [
+        {
+          "path": "FamilyQuant.Core/NormalizationMode.cs",
+          "symbol": "native normalization header, frozen User-family branch against current header; four modes, unknown CSV denominator, two cultures",
+          "sha256": "951708B64A2746F38DA428448E32DD50DA1004F864C58ACB410A39F872CA29C5"
+        }
+      ],
+      "proofs": [],
+      "note": "Frozen executable comparison of synthetic presentation inputs. No scientific inference or USearch removal approval. Textual screen-name change is explicit, not literal equality.",
+      "kindReceiptId": "native-code-fact",
+      "compared": "FamilyQuant/NormalizationMode.cs:104 \u0022User families\u0022; native normalization header, frozen User-family branch against current header; four modes, unknown CSV denominator, two cultures; exact fixture keys and before/actual values retained in comparisons.json"
+    },
+    {
+      "observationId": "FQ15-5B5F3C8922E5",
+      "implementation": [
+        {
+          "path": "FamilyQuant/AnalyticsViewModel.cs",
+          "symbol": "native SummaryLine branch text and formatted values; the sole reviewed screen-name substitution is Layer 3 -\u003E the quantitation panel",
+          "sha256": "581D33C2FF3CB6B07251B7480C016379902ED6825CF257D700FD1B14FF538945"
+        }
+      ],
+      "proofs": [],
+      "note": "Frozen executable comparison of synthetic presentation inputs. No scientific inference or USearch removal approval. Textual screen-name change is explicit, not literal equality.",
+      "kindReceiptId": "native-code-fact",
+      "compared": "FamilyQuant/AnalyticsControl.xaml.cs:216 \u0022peptide shared by several families in each of them; counted once instead, the peptides \u0022; native SummaryLine branch text and formatted values; the sole reviewed screen-name substitution is Layer 3 -\u003E the quantitation panel; exact fixture keys and before/actual values retained in comparisons.json"
+    },
+    {
+      "observationId": "FQ15-651394E9DCCF",
+      "implementation": [
+        {
+          "path": "FamilyQuant/IdentityScanChart.cs",
+          "symbol": "complete native raster bytes: empty and populated branches, historical Light and Dark palettes, two sizes; font and draw labels included",
+          "sha256": "6E12975B73154AFD5E6AF1796751F28ED49CD977C5C3E38830A11FC45F015CAF"
+        }
+      ],
+      "proofs": [],
+      "note": "Frozen executable comparison of synthetic presentation inputs. No scientific inference or USearch removal approval. Textual screen-name change is explicit, not literal equality.",
+      "kindReceiptId": "native-code-fact",
+      "compared": "FamilyQuant/IdentityScanChart.cs:164 \u0022P1\u0022; complete native raster bytes: empty and populated branches, historical Light and Dark palettes, two sizes; font and draw labels included; exact fixture keys and before/actual values retained in comparisons.json"
+    },
+    {
+      "observationId": "FQ15-6684BADC27CC",
+      "implementation": [
+        {
+          "path": "FamilyQuant.Core/NormalizationMode.cs",
+          "symbol": "native normalization header, frozen User-family branch against current header; four modes, unknown CSV denominator, two cultures",
+          "sha256": "951708B64A2746F38DA428448E32DD50DA1004F864C58ACB410A39F872CA29C5"
+        }
+      ],
+      "proofs": [],
+      "note": "Frozen executable comparison of synthetic presentation inputs. No scientific inference or USearch removal approval. Textual screen-name change is explicit, not literal equality.",
+      "kindReceiptId": "native-code-fact",
+      "compared": "FamilyQuant/NormalizationMode.cs:105 \u0022)\u0022; native normalization header, frozen User-family branch against current header; four modes, unknown CSV denominator, two cultures; exact fixture keys and before/actual values retained in comparisons.json"
+    },
+    {
+      "observationId": "FQ15-6906A1DF7316",
+      "implementation": [
+        {
+          "path": "FamilyQuant/AnalyticsViewModel.cs",
+          "symbol": "native SummaryLine branch text and formatted values; the sole reviewed screen-name substitution is Layer 3 -\u003E the quantitation panel",
+          "sha256": "581D33C2FF3CB6B07251B7480C016379902ED6825CF257D700FD1B14FF538945"
+        }
+      ],
+      "proofs": [],
+      "note": "Frozen executable comparison of synthetic presentation inputs. No scientific inference or USearch removal approval. Textual screen-name change is explicit, not literal equality.",
+      "kindReceiptId": "native-code-fact",
+      "compared": "FamilyQuant/AnalyticsControl.xaml.cs:245 \u0022 A further {0:P2} was identified but NOT quantified: {1:N0} peptide(s) whose peaks carried \u0022; native SummaryLine branch text and formatted values; the sole reviewed screen-name substitution is Layer 3 -\u003E the quantitation panel; exact fixture keys and before/actual values retained in comparisons.json"
+    },
+    {
+      "observationId": "FQ15-6B32904AA9E0",
+      "implementation": [
+        {
+          "path": "FamilyQuant/AnalyticsViewModel.cs",
+          "symbol": "native SummaryLine branch text and formatted values; the sole reviewed screen-name substitution is Layer 3 -\u003E the quantitation panel",
+          "sha256": "581D33C2FF3CB6B07251B7480C016379902ED6825CF257D700FD1B14FF538945"
+        }
+      ],
+      "proofs": [],
+      "note": "Frozen executable comparison of synthetic presentation inputs. No scientific inference or USearch removal approval. Textual screen-name change is explicit, not literal equality.",
+      "kindReceiptId": "native-code-fact",
+      "compared": "FamilyQuant/AnalyticsControl.xaml.cs:218 \u0022 of the quantified signal and \u0022; native SummaryLine branch text and formatted values; the sole reviewed screen-name substitution is Layer 3 -\u003E the quantitation panel; exact fixture keys and before/actual values retained in comparisons.json"
+    },
+    {
+      "observationId": "FQ15-6EB4F8E9DE00",
+      "implementation": [
+        {
+          "path": "FamilyQuant.Core/AnalyticsModel.cs",
+          "symbol": "native AnalyticsCsv.Num round-trip formatting of ten double cases in two cultures",
+          "sha256": "735ABBBF39EB5BA9CC40D28B2FEE57386D1FD33E268AD708632EF119BCBFDD73"
+        }
+      ],
+      "proofs": [],
+      "note": "Frozen executable comparison of synthetic presentation inputs. No scientific inference or USearch removal approval. Textual screen-name change is explicit, not literal equality.",
+      "kindReceiptId": "native-export-storage-fact",
+      "compared": "FamilyQuant/AnalyticsModel.cs:444 \u0022R\u0022; native AnalyticsCsv.Num round-trip formatting of ten double cases in two cultures; exact fixture keys and before/actual values retained in comparisons.json"
+    },
+    {
+      "observationId": "FQ15-7196A9C14D21",
+      "implementation": [
+        {
+          "path": "FamilyQuant/IdentityScanChart.cs",
+          "symbol": "complete native raster bytes: empty and populated branches, historical Light and Dark palettes, two sizes; font and draw labels included",
+          "sha256": "6E12975B73154AFD5E6AF1796751F28ED49CD977C5C3E38830A11FC45F015CAF"
+        }
+      ],
+      "proofs": [],
+      "note": "Frozen executable comparison of synthetic presentation inputs. No scientific inference or USearch removal approval. Textual screen-name change is explicit, not literal equality.",
+      "kindReceiptId": "native-code-fact",
+      "compared": "FamilyQuant/IdentityScanChart.cs:213 \u0022this file, \u0022; complete native raster bytes: empty and populated branches, historical Light and Dark palettes, two sizes; font and draw labels included; exact fixture keys and before/actual values retained in comparisons.json"
+    },
+    {
+      "observationId": "FQ15-727F643D4187",
+      "implementation": [
+        {
+          "path": "FamilyQuant/XicMassChart.cs",
+          "symbol": "complete native raster bytes: empty and populated branches, historical Light and Dark palettes, two sizes; font and draw labels included",
+          "sha256": "DC13EE41EE7A44EAA05EF0A47AB25D16317335965CD7EAE4A9F9CFD2AE7D8629"
+        }
+      ],
+      "proofs": [],
+      "note": "Frozen executable comparison of synthetic presentation inputs. No scientific inference or USearch removal approval. Textual screen-name change is explicit, not literal equality.",
+      "kindReceiptId": "native-code-fact",
+      "compared": "FamilyQuant/XicMassChart.cs:100 \u00221e\u0022; complete native raster bytes: empty and populated branches, historical Light and Dark palettes, two sizes; font and draw labels included; exact fixture keys and before/actual values retained in comparisons.json"
+    },
+    {
+      "observationId": "FQ15-74DAC099EC7F",
+      "implementation": [
+        {
+          "path": "FamilyQuant/IdentityScanChart.cs",
+          "symbol": "complete native raster bytes: empty and populated branches, historical Light and Dark palettes, two sizes; font and draw labels included",
+          "sha256": "6E12975B73154AFD5E6AF1796751F28ED49CD977C5C3E38830A11FC45F015CAF"
+        }
+      ],
+      "proofs": [],
+      "note": "Frozen executable comparison of synthetic presentation inputs. No scientific inference or USearch removal approval. Textual screen-name change is explicit, not literal equality.",
+      "kindReceiptId": "native-code-fact",
+      "compared": "FamilyQuant/IdentityScanChart.cs:196 \u0022floor \u0022; complete native raster bytes: empty and populated branches, historical Light and Dark palettes, two sizes; font and draw labels included; exact fixture keys and before/actual values retained in comparisons.json"
+    },
+    {
+      "observationId": "FQ15-798A3F744ACE",
+      "implementation": [
+        {
+          "path": "FamilyQuant/XicMassChart.cs",
+          "symbol": "complete native raster bytes: empty and populated branches, historical Light and Dark palettes, two sizes; font and draw labels included",
+          "sha256": "DC13EE41EE7A44EAA05EF0A47AB25D16317335965CD7EAE4A9F9CFD2AE7D8629"
+        }
+      ],
+      "proofs": [],
+      "note": "Frozen executable comparison of synthetic presentation inputs. No scientific inference or USearch removal approval. Textual screen-name change is explicit, not literal equality.",
+      "kindReceiptId": "native-code-fact",
+      "compared": "FamilyQuant/XicMassChart.cs:122 \u0022monoisotopic mass (Da)\u0022; complete native raster bytes: empty and populated branches, historical Light and Dark palettes, two sizes; font and draw labels included; exact fixture keys and before/actual values retained in comparisons.json"
+    },
+    {
+      "observationId": "FQ15-7AAC5C64F2CE",
+      "implementation": [
+        {
+          "path": "FamilyQuant/AnalyticsViewModel.cs",
+          "symbol": "native SummaryLine branch text and formatted values; the sole reviewed screen-name substitution is Layer 3 -\u003E the quantitation panel",
+          "sha256": "581D33C2FF3CB6B07251B7480C016379902ED6825CF257D700FD1B14FF538945"
+        }
+      ],
+      "proofs": [],
+      "note": "Frozen executable comparison of synthetic presentation inputs. No scientific inference or USearch removal approval. Textual screen-name change is explicit, not literal equality.",
+      "kindReceiptId": "native-code-fact",
+      "compared": "FamilyQuant/AnalyticsControl.xaml.cs:247 \u0022the remainder.\u0022; native SummaryLine branch text and formatted values; the sole reviewed screen-name substitution is Layer 3 -\u003E the quantitation panel; exact fixture keys and before/actual values retained in comparisons.json"
+    },
+    {
+      "observationId": "FQ15-7AFE128BF39F",
+      "implementation": [
+        {
+          "path": "FamilyQuant.Core/NormalizationMode.cs",
+          "symbol": "native normalization header, frozen User-family branch against current header; four modes, unknown CSV denominator, two cultures",
+          "sha256": "951708B64A2746F38DA428448E32DD50DA1004F864C58ACB410A39F872CA29C5"
+        }
+      ],
+      "proofs": [],
+      "note": "Frozen executable comparison of synthetic presentation inputs. No scientific inference or USearch removal approval. Textual screen-name change is explicit, not literal equality.",
+      "kindReceiptId": "native-code-fact",
+      "compared": "FamilyQuant/NormalizationMode.cs:120 \u0022of\u0022; native normalization header, frozen User-family branch against current header; four modes, unknown CSV denominator, two cultures; exact fixture keys and before/actual values retained in comparisons.json"
+    },
+    {
+      "observationId": "FQ15-7C20698A1A24",
+      "implementation": [
+        {
+          "path": "FamilyQuant/FamilyContributionChart.cs",
+          "symbol": "complete native raster bytes: empty and populated branches, historical Light and Dark palettes, two sizes; font and draw labels included",
+          "sha256": "939A4F9C98A0739582DDBBEA460C0631F90C29871BD45F0BDC4ACB8DB5EF60E2"
+        }
+      ],
+      "proofs": [],
+      "note": "Frozen executable comparison of synthetic presentation inputs. No scientific inference or USearch removal approval. Textual screen-name change is explicit, not literal equality.",
+      "kindReceiptId": "native-code-fact",
+      "compared": "FamilyQuant/FamilyContributionChart.cs:369 \u0022Segoe UI\u0022; complete native raster bytes: empty and populated branches, historical Light and Dark palettes, two sizes; font and draw labels included; exact fixture keys and before/actual values retained in comparisons.json"
+    },
+    {
+      "observationId": "FQ15-7C35B6C32532",
+      "implementation": [
+        {
+          "path": "FamilyQuant/AnalyticsViewModel.cs",
+          "symbol": "native SummaryLine branch text and formatted values; the sole reviewed screen-name substitution is Layer 3 -\u003E the quantitation panel",
+          "sha256": "581D33C2FF3CB6B07251B7480C016379902ED6825CF257D700FD1B14FF538945"
+        }
+      ],
+      "proofs": [],
+      "note": "Frozen executable comparison of synthetic presentation inputs. No scientific inference or USearch removal approval. Textual screen-name change is explicit, not literal equality.",
+      "kindReceiptId": "native-code-fact",
+      "compared": "FamilyQuant/AnalyticsControl.xaml.cs:225 \u0022 No family of the open grouping was reached by any peptide, so the family chart is \u0022; native SummaryLine branch text and formatted values; the sole reviewed screen-name substitution is Layer 3 -\u003E the quantitation panel; exact fixture keys and before/actual values retained in comparisons.json"
+    },
+    {
+      "observationId": "FQ15-7CC8C1A2752C",
+      "implementation": [
+        {
+          "path": "FamilyQuant/AnalyticsViewModel.cs",
+          "symbol": "native SummaryLine branch text and formatted values; the sole reviewed screen-name substitution is Layer 3 -\u003E the quantitation panel",
+          "sha256": "581D33C2FF3CB6B07251B7480C016379902ED6825CF257D700FD1B14FF538945"
+        }
+      ],
+      "proofs": [],
+      "note": "Frozen executable comparison of synthetic presentation inputs. No scientific inference or USearch removal approval. Textual screen-name change is explicit, not literal equality.",
+      "kindReceiptId": "native-code-fact",
+      "compared": "FamilyQuant/AnalyticsControl.xaml.cs:213 \u0022N0\u0022; native SummaryLine branch text and formatted values; the sole reviewed screen-name substitution is Layer 3 -\u003E the quantitation panel; exact fixture keys and before/actual values retained in comparisons.json"
+    },
+    {
+      "observationId": "FQ15-824E8A5CC3BC",
+      "implementation": [
+        {
+          "path": "FamilyQuant/AnalyticsViewModel.cs",
+          "symbol": "native SummaryLine branch text and formatted values; the sole reviewed screen-name substitution is Layer 3 -\u003E the quantitation panel",
+          "sha256": "581D33C2FF3CB6B07251B7480C016379902ED6825CF257D700FD1B14FF538945"
+        }
+      ],
+      "proofs": [],
+      "note": "Frozen executable comparison of synthetic presentation inputs. No scientific inference or USearch removal approval. Textual screen-name change is explicit, not literal equality.",
+      "kindReceiptId": "native-format-export",
+      "compared": "FamilyQuant/AnalyticsControl.xaml.cs:220 \u0022evidence pack\u0027s family_composition.csv uses this basis; the curation screen\u0027s Full XIC column \u0022; native SummaryLine branch text and formatted values; the sole reviewed screen-name substitution is Layer 3 -\u003E the quantitation panel; exact fixture keys and before/actual values retained in comparisons.json"
+    },
+    {
+      "observationId": "FQ15-84504F532220",
+      "implementation": [
+        {
+          "path": "FamilyQuant/IdentityScanChart.cs",
+          "symbol": "complete native raster bytes: empty and populated branches, historical Light and Dark palettes, two sizes; font and draw labels included",
+          "sha256": "6E12975B73154AFD5E6AF1796751F28ED49CD977C5C3E38830A11FC45F015CAF"
+        }
+      ],
+      "proofs": [],
+      "note": "Frozen executable comparison of synthetic presentation inputs. No scientific inference or USearch removal approval. Textual screen-name change is explicit, not literal equality.",
+      "kindReceiptId": "native-code-fact",
+      "compared": "FamilyQuant/IdentityScanChart.cs:159 \u0022N0\u0022; complete native raster bytes: empty and populated branches, historical Light and Dark palettes, two sizes; font and draw labels included; exact fixture keys and before/actual values retained in comparisons.json"
+    },
+    {
+      "observationId": "FQ15-86A622AD717E",
+      "implementation": [
+        {
+          "path": "FamilyQuant/AnalyticsViewModel.cs",
+          "symbol": "native SummaryLine branch text and formatted values; the sole reviewed screen-name substitution is Layer 3 -\u003E the quantitation panel",
+          "sha256": "581D33C2FF3CB6B07251B7480C016379902ED6825CF257D700FD1B14FF538945"
+        }
+      ],
+      "proofs": [],
+      "note": "Frozen executable comparison of synthetic presentation inputs. No scientific inference or USearch removal approval. Textual screen-name change is explicit, not literal equality.",
+      "kindReceiptId": "native-code-fact",
+      "compared": "FamilyQuant/AnalyticsControl.xaml.cs:215 \u0022folded into one bar and the signal that reached no family is drawn apart. Its bars count a \u0022; native SummaryLine branch text and formatted values; the sole reviewed screen-name substitution is Layer 3 -\u003E the quantitation panel; exact fixture keys and before/actual values retained in comparisons.json"
+    },
+    {
+      "observationId": "FQ15-94FE33F6CBEE",
+      "implementation": [
+        {
+          "path": "FamilyQuant.Core/NormalizationMode.cs",
+          "symbol": "native normalization header, frozen User-family branch against current header; four modes, unknown CSV denominator, two cultures",
+          "sha256": "951708B64A2746F38DA428448E32DD50DA1004F864C58ACB410A39F872CA29C5"
+        }
+      ],
+      "proofs": [],
+      "note": "Frozen executable comparison of synthetic presentation inputs. No scientific inference or USearch removal approval. Textual screen-name change is explicit, not literal equality.",
+      "kindReceiptId": "native-code-fact",
+      "compared": "FamilyQuant/NormalizationMode.cs:111 \u0022User families\u0022; native normalization header, frozen User-family branch against current header; four modes, unknown CSV denominator, two cultures; exact fixture keys and before/actual values retained in comparisons.json"
+    },
+    {
+      "observationId": "FQ15-9CA845CCA73D",
+      "implementation": [
+        {
+          "path": "FamilyQuant/AnalyticsViewModel.cs",
+          "symbol": "native SummaryLine branch text and formatted values; the sole reviewed screen-name substitution is Layer 3 -\u003E the quantitation panel",
+          "sha256": "581D33C2FF3CB6B07251B7480C016379902ED6825CF257D700FD1B14FF538945"
+        }
+      ],
+      "proofs": [],
+      "note": "Frozen executable comparison of synthetic presentation inputs. No scientific inference or USearch removal approval. Textual screen-name change is explicit, not literal equality.",
+      "kindReceiptId": "native-code-fact",
+      "compared": "FamilyQuant/AnalyticsControl.xaml.cs:223 \u0022 No Family Cluster File is open beside this quantitation, so the family chart has \u0022; native SummaryLine branch text and formatted values; the sole reviewed screen-name substitution is Layer 3 -\u003E the quantitation panel; exact fixture keys and before/actual values retained in comparisons.json"
+    },
+    {
+      "observationId": "FQ15-9FE6CD09BA9C",
+      "implementation": [
+        {
+          "path": "FamilyQuant/AnalyticsViewModel.cs",
+          "symbol": "native SummaryLine branch text and formatted values; the sole reviewed screen-name substitution is Layer 3 -\u003E the quantitation panel",
+          "sha256": "581D33C2FF3CB6B07251B7480C016379902ED6825CF257D700FD1B14FF538945"
+        }
+      ],
+      "proofs": [],
+      "note": "Frozen executable comparison of synthetic presentation inputs. No scientific inference or USearch removal approval. Textual screen-name change is explicit, not literal equality.",
+      "kindReceiptId": "native-code-fact",
+      "compared": "FamilyQuant/AnalyticsControl.xaml.cs:256 \u0022Across {0} run(s): the identified (DDA) envelope explains {1:P2} of the total ion current, \u0022; native SummaryLine branch text and formatted values; the sole reviewed screen-name substitution is Layer 3 -\u003E the quantitation panel; exact fixture keys and before/actual values retained in comparisons.json"
+    },
+    {
+      "observationId": "FQ15-A05988D6E225",
+      "implementation": [
+        {
+          "path": "FamilyQuant/XicMassChart.cs",
+          "symbol": "complete native raster bytes: empty and populated branches, historical Light and Dark palettes, two sizes; font and draw labels included",
+          "sha256": "DC13EE41EE7A44EAA05EF0A47AB25D16317335965CD7EAE4A9F9CFD2AE7D8629"
+        }
+      ],
+      "proofs": [],
+      "note": "Frozen executable comparison of synthetic presentation inputs. No scientific inference or USearch removal approval. Textual screen-name change is explicit, not literal equality.",
+      "kindReceiptId": "native-code-fact",
+      "compared": "FamilyQuant/XicMassChart.cs:52 \u0022Segoe UI\u0022; complete native raster bytes: empty and populated branches, historical Light and Dark palettes, two sizes; font and draw labels included; exact fixture keys and before/actual values retained in comparisons.json"
+    },
+    {
+      "observationId": "FQ15-A100063129F9",
+      "implementation": [
+        {
+          "path": "FamilyQuant.Core/AnalyticsModel.cs",
+          "symbol": "native RFC 4180 Field escaping: null, empty, plain, comma, quote, LF, CR and combined fields in two cultures",
+          "sha256": "735ABBBF39EB5BA9CC40D28B2FEE57386D1FD33E268AD708632EF119BCBFDD73"
+        }
+      ],
+      "proofs": [],
+      "note": "Frozen executable comparison of synthetic presentation inputs. No scientific inference or USearch removal approval. Textual screen-name change is explicit, not literal equality.",
+      "kindReceiptId": "native-export-storage-fact",
+      "compared": "FamilyQuant/AnalyticsModel.cs:455 \u0022\\\u0022\u0022; native RFC 4180 Field escaping: null, empty, plain, comma, quote, LF, CR and combined fields in two cultures; exact fixture keys and before/actual values retained in comparisons.json"
+    },
+    {
+      "observationId": "FQ15-A1E86108802F",
+      "implementation": [
+        {
+          "path": "FamilyQuant/AnalyticsViewModel.cs",
+          "symbol": "native SummaryLine branch text and formatted values; the sole reviewed screen-name substitution is Layer 3 -\u003E the quantitation panel",
+          "sha256": "581D33C2FF3CB6B07251B7480C016379902ED6825CF257D700FD1B14FF538945"
+        }
+      ],
+      "proofs": [],
+      "note": "Frozen executable comparison of synthetic presentation inputs. No scientific inference or USearch removal approval. Textual screen-name change is explicit, not literal equality.",
+      "kindReceiptId": "native-code-fact",
+      "compared": "FamilyQuant/AnalyticsControl.xaml.cs:219 \u0022 reached no family (the \u0022; native SummaryLine branch text and formatted values; the sole reviewed screen-name substitution is Layer 3 -\u003E the quantitation panel; exact fixture keys and before/actual values retained in comparisons.json"
+    },
+    {
+      "observationId": "FQ15-A3A60E01E74D",
+      "implementation": [
+        {
+          "path": "FamilyQuant/AnalyticsViewModel.cs",
+          "symbol": "native SummaryLine branch text and formatted values; the sole reviewed screen-name substitution is Layer 3 -\u003E the quantitation panel",
+          "sha256": "581D33C2FF3CB6B07251B7480C016379902ED6825CF257D700FD1B14FF538945"
+        }
+      ],
+      "proofs": [],
+      "note": "Frozen executable comparison of synthetic presentation inputs. No scientific inference or USearch removal approval. Textual screen-name change is explicit, not literal equality.",
+      "kindReceiptId": "native-code-fact",
+      "compared": "FamilyQuant/AnalyticsControl.xaml.cs:252 \u0022given the run\u0027s median scan spacing)\u0022; native SummaryLine branch text and formatted values; the sole reviewed screen-name substitution is Layer 3 -\u003E the quantitation panel; exact fixture keys and before/actual values retained in comparisons.json"
+    },
+    {
+      "observationId": "FQ15-A3E21DE253F6",
+      "implementation": [
+        {
+          "path": "FamilyQuant/AnalyticsViewModel.cs",
+          "symbol": "native SummaryLine branch text and formatted values; the sole reviewed screen-name substitution is Layer 3 -\u003E the quantitation panel",
+          "sha256": "581D33C2FF3CB6B07251B7480C016379902ED6825CF257D700FD1B14FF538945"
+        }
+      ],
+      "proofs": [],
+      "note": "Frozen executable comparison of synthetic presentation inputs. No scientific inference or USearch removal approval. Textual screen-name change is explicit, not literal equality.",
+      "kindReceiptId": "native-code-fact",
+      "compared": "FamilyQuant/AnalyticsControl.xaml.cs:251 \u0022, and part of that number is an ESTIMATE (a single-point peak has no width, so it is \u0022; native SummaryLine branch text and formatted values; the sole reviewed screen-name substitution is Layer 3 -\u003E the quantitation panel; exact fixture keys and before/actual values retained in comparisons.json"
+    },
+    {
+      "observationId": "FQ15-A5F7C6AF48F1",
+      "implementation": [
+        {
+          "path": "FamilyQuant/AnalyticsViewModel.cs",
+          "symbol": "native SummaryLine branch text and formatted values; the sole reviewed screen-name substitution is Layer 3 -\u003E the quantitation panel",
+          "sha256": "581D33C2FF3CB6B07251B7480C016379902ED6825CF257D700FD1B14FF538945"
+        }
+      ],
+      "proofs": [],
+      "note": "Frozen executable comparison of synthetic presentation inputs. No scientific inference or USearch removal approval. Textual screen-name change is explicit, not literal equality.",
+      "kindReceiptId": "native-code-fact",
+      "compared": "FamilyQuant/AnalyticsControl.xaml.cs:217 \u0022shared between families are \u0022; native SummaryLine branch text and formatted values; the sole reviewed screen-name substitution is Layer 3 -\u003E the quantitation panel; exact fixture keys and before/actual values retained in comparisons.json"
+    },
+    {
+      "observationId": "FQ15-A7CDC3BFB12D",
+      "implementation": [
+        {
+          "path": "FamilyQuant/IsotopeCountChart.cs",
+          "symbol": "complete native raster bytes: empty and populated branches, historical Light and Dark palettes, two sizes; font and draw labels included",
+          "sha256": "C18B470572D3647F4B9007B8170702C5F231BCB62989EBD6662825DCE7AF17EF"
+        }
+      ],
+      "proofs": [],
+      "note": "Frozen executable comparison of synthetic presentation inputs. No scientific inference or USearch removal approval. Textual screen-name change is explicit, not literal equality.",
+      "kindReceiptId": "native-code-fact",
+      "compared": "FamilyQuant/IsotopeCountChart.cs:163 \u0022isotopes credited (area \u003E 0)\u0022; complete native raster bytes: empty and populated branches, historical Light and Dark palettes, two sizes; font and draw labels included; exact fixture keys and before/actual values retained in comparisons.json"
+    },
+    {
+      "observationId": "FQ15-A86960BD0CB9",
+      "implementation": [
+        {
+          "path": "FamilyQuant/AnalyticsViewModel.cs",
+          "symbol": "native SummaryLine branch text and formatted values; the sole reviewed screen-name substitution is Layer 3 -\u003E the quantitation panel",
+          "sha256": "581D33C2FF3CB6B07251B7480C016379902ED6825CF257D700FD1B14FF538945"
+        }
+      ],
+      "proofs": [],
+      "note": "Frozen executable comparison of synthetic presentation inputs. No scientific inference or USearch removal approval. Textual screen-name change is explicit, not literal equality.",
+      "kindReceiptId": "native-code-fact",
+      "compared": "FamilyQuant/AnalyticsControl.xaml.cs:257 \u0022the de novo envelope adds {2:P2}, and together they recover {3:P2}. \u0022; native SummaryLine branch text and formatted values; the sole reviewed screen-name substitution is Layer 3 -\u003E the quantitation panel; exact fixture keys and before/actual values retained in comparisons.json"
+    },
+    {
+      "observationId": "FQ15-AB769D72248D",
+      "implementation": [
+        {
+          "path": "FamilyQuant/IdentityScanChart.cs",
+          "symbol": "complete native raster bytes: empty and populated branches, historical Light and Dark palettes, two sizes; font and draw labels included",
+          "sha256": "6E12975B73154AFD5E6AF1796751F28ED49CD977C5C3E38830A11FC45F015CAF"
+        }
+      ],
+      "proofs": [],
+      "note": "Frozen executable comparison of synthetic presentation inputs. No scientific inference or USearch removal approval. Textual screen-name change is explicit, not literal equality.",
+      "kindReceiptId": "native-code-fact",
+      "compared": "FamilyQuant/IdentityScanChart.cs:179 \u0022%\u0022; complete native raster bytes: empty and populated branches, historical Light and Dark palettes, two sizes; font and draw labels included; exact fixture keys and before/actual values retained in comparisons.json"
+    },
+    {
+      "observationId": "FQ15-B00484A75D89",
+      "implementation": [
+        {
+          "path": "FamilyQuant.Core/AnalyticsModel.cs",
+          "symbol": "native RFC 4180 Field escaping: null, empty, plain, comma, quote, LF, CR and combined fields in two cultures",
+          "sha256": "735ABBBF39EB5BA9CC40D28B2FEE57386D1FD33E268AD708632EF119BCBFDD73"
+        }
+      ],
+      "proofs": [],
+      "note": "Frozen executable comparison of synthetic presentation inputs. No scientific inference or USearch removal approval. Textual screen-name change is explicit, not literal equality.",
+      "kindReceiptId": "native-export-storage-fact",
+      "compared": "FamilyQuant/AnalyticsModel.cs:455 \u0022\\\u0022\u0022; native RFC 4180 Field escaping: null, empty, plain, comma, quote, LF, CR and combined fields in two cultures; exact fixture keys and before/actual values retained in comparisons.json"
+    },
+    {
+      "observationId": "FQ15-B25597DA07D1",
+      "implementation": [
+        {
+          "path": "FamilyQuant/IsotopeCountChart.cs",
+          "symbol": "complete native raster bytes: empty and populated branches, historical Light and Dark palettes, two sizes; font and draw labels included",
+          "sha256": "C18B470572D3647F4B9007B8170702C5F231BCB62989EBD6662825DCE7AF17EF"
+        }
+      ],
+      "proofs": [],
+      "note": "Frozen executable comparison of synthetic presentation inputs. No scientific inference or USearch removal approval. Textual screen-name change is explicit, not literal equality.",
+      "kindReceiptId": "native-code-fact",
+      "compared": "FamilyQuant/IsotopeCountChart.cs:116 \u0022N0\u0022; complete native raster bytes: empty and populated branches, historical Light and Dark palettes, two sizes; font and draw labels included; exact fixture keys and before/actual values retained in comparisons.json"
+    },
+    {
+      "observationId": "FQ15-B4F482100C1F",
+      "implementation": [
+        {
+          "path": "FamilyQuant/AnalyticsViewModel.cs",
+          "symbol": "native SummaryLine branch text and formatted values; the sole reviewed screen-name substitution is Layer 3 -\u003E the quantitation panel",
+          "sha256": "581D33C2FF3CB6B07251B7480C016379902ED6825CF257D700FD1B14FF538945"
+        }
+      ],
+      "proofs": [],
+      "note": "Frozen executable comparison of synthetic presentation inputs. No scientific inference or USearch removal approval. Textual screen-name change is explicit, not literal equality.",
+      "kindReceiptId": "native-code-fact",
+      "compared": "FamilyQuant/AnalyticsControl.xaml.cs:221 \u0022can show it too, with \u0027Family-unique only\u0027 and \u0027the quantified signal\u0027 chosen in Layer 3).\u0022; native SummaryLine branch text and formatted values; the sole reviewed screen-name substitution is Layer 3 -\u003E the quantitation panel; exact fixture keys and before/actual values retained in comparisons.json"
+    },
+    {
+      "observationId": "FQ15-B6507A24A6BB",
+      "implementation": [
+        {
+          "path": "FamilyQuant/IsotopeCountChart.cs",
+          "symbol": "complete native raster bytes: empty and populated branches, historical Light and Dark palettes, two sizes; font and draw labels included",
+          "sha256": "C18B470572D3647F4B9007B8170702C5F231BCB62989EBD6662825DCE7AF17EF"
+        }
+      ],
+      "proofs": [],
+      "note": "Frozen executable comparison of synthetic presentation inputs. No scientific inference or USearch removal approval. Textual screen-name change is explicit, not literal equality.",
+      "kindReceiptId": "native-code-fact",
+      "compared": "FamilyQuant/IsotopeCountChart.cs:86 \u0022Nothing to show: no peptide was credited an isotope yet.\u0022; complete native raster bytes: empty and populated branches, historical Light and Dark palettes, two sizes; font and draw labels included; exact fixture keys and before/actual values retained in comparisons.json"
+    },
+    {
+      "observationId": "FQ15-C0B70F0BDDD8",
+      "implementation": [
+        {
+          "path": "FamilyQuant/AnalyticsViewModel.cs",
+          "symbol": "native SummaryLine branch text and formatted values; the sole reviewed screen-name substitution is Layer 3 -\u003E the quantitation panel",
+          "sha256": "581D33C2FF3CB6B07251B7480C016379902ED6825CF257D700FD1B14FF538945"
+        }
+      ],
+      "proofs": [],
+      "note": "Frozen executable comparison of synthetic presentation inputs. No scientific inference or USearch removal approval. Textual screen-name change is explicit, not literal equality.",
+      "kindReceiptId": "native-format-export",
+      "compared": "FamilyQuant/AnalyticsControl.xaml.cs:261 \u0022by the raw TIC; nothing here is read from the .plp or the .xic2.\u0022; native SummaryLine branch text and formatted values; the sole reviewed screen-name substitution is Layer 3 -\u003E the quantitation panel; exact fixture keys and before/actual values retained in comparisons.json"
+    },
+    {
+      "observationId": "FQ15-C3187F7C321A",
+      "implementation": [
+        {
+          "path": "FamilyQuant/AnalyticsViewModel.cs",
+          "symbol": "native SummaryLine branch text and formatted values; the sole reviewed screen-name substitution is Layer 3 -\u003E the quantitation panel",
+          "sha256": "581D33C2FF3CB6B07251B7480C016379902ED6825CF257D700FD1B14FF538945"
+        }
+      ],
+      "proofs": [],
+      "note": "Frozen executable comparison of synthetic presentation inputs. No scientific inference or USearch removal approval. Textual screen-name change is explicit, not literal equality.",
+      "kindReceiptId": "native-code-fact",
+      "compared": "FamilyQuant/AnalyticsControl.xaml.cs:226 \u0022empty. Check that the curation and the quantitation come from the same database.\u0022; native SummaryLine branch text and formatted values; the sole reviewed screen-name substitution is Layer 3 -\u003E the quantitation panel; exact fixture keys and before/actual values retained in comparisons.json"
+    },
+    {
+      "observationId": "FQ15-C4EF0DA07C5D",
+      "implementation": [
+        {
+          "path": "FamilyQuant.Core/NormalizationMode.cs",
+          "symbol": "native normalization header, frozen User-family branch against current header; four modes, unknown CSV denominator, two cultures",
+          "sha256": "951708B64A2746F38DA428448E32DD50DA1004F864C58ACB410A39F872CA29C5"
+        }
+      ],
+      "proofs": [],
+      "note": "Frozen executable comparison of synthetic presentation inputs. No scientific inference or USearch removal approval. Textual screen-name change is explicit, not literal equality.",
+      "kindReceiptId": "native-code-fact",
+      "compared": "FamilyQuant/NormalizationMode.cs:122 \u0022Family share \u0022; native normalization header, frozen User-family branch against current header; four modes, unknown CSV denominator, two cultures; exact fixture keys and before/actual values retained in comparisons.json"
+    },
+    {
+      "observationId": "FQ15-D16E461B873F",
+      "implementation": [
+        {
+          "path": "FamilyQuant/PercentIonCurrentChart.cs",
+          "symbol": "complete native raster bytes: empty and populated branches, historical Light and Dark palettes, two sizes; font and draw labels included",
+          "sha256": "61E28173A23BF601B17197ECFF2A47AFD523A4DEC2F47BD244BDDA6FCD106E05"
+        }
+      ],
+      "proofs": [],
+      "note": "Frozen executable comparison of synthetic presentation inputs. No scientific inference or USearch removal approval. Textual screen-name change is explicit, not literal equality.",
+      "kindReceiptId": "native-code-fact",
+      "compared": "FamilyQuant/PercentIonCurrentChart.cs:145 \u0022monoisotopic mass (Da), upper edge of each bin\u0022; complete native raster bytes: empty and populated branches, historical Light and Dark palettes, two sizes; font and draw labels included; exact fixture keys and before/actual values retained in comparisons.json"
+    },
+    {
+      "observationId": "FQ15-D58E10A6C3FE",
+      "implementation": [
+        {
+          "path": "FamilyQuant/AnalyticsViewModel.cs",
+          "symbol": "native SummaryLine branch text and formatted values; the sole reviewed screen-name substitution is Layer 3 -\u003E the quantitation panel",
+          "sha256": "581D33C2FF3CB6B07251B7480C016379902ED6825CF257D700FD1B14FF538945"
+        }
+      ],
+      "proofs": [],
+      "note": "Frozen executable comparison of synthetic presentation inputs. No scientific inference or USearch removal approval. Textual screen-name change is explicit, not literal equality.",
+      "kindReceiptId": "native-code-fact",
+      "compared": "FamilyQuant/AnalyticsControl.xaml.cs:258 \u0022{4:N0} identified and {5:N0} de novo peptide(s), each counted once. Every number is \u0022; native SummaryLine branch text and formatted values; the sole reviewed screen-name substitution is Layer 3 -\u003E the quantitation panel; exact fixture keys and before/actual values retained in comparisons.json"
+    },
+    {
+      "observationId": "FQ15-D65400D5A22B",
+      "implementation": [
+        {
+          "path": "FamilyQuant.Core/NormalizationMode.cs",
+          "symbol": "native normalization header, frozen User-family branch against current header; four modes, unknown CSV denominator, two cultures",
+          "sha256": "951708B64A2746F38DA428448E32DD50DA1004F864C58ACB410A39F872CA29C5"
+        }
+      ],
+      "proofs": [],
+      "note": "Frozen executable comparison of synthetic presentation inputs. No scientific inference or USearch removal approval. Textual screen-name change is explicit, not literal equality.",
+      "kindReceiptId": "native-code-fact",
+      "compared": "FamilyQuant/NormalizationMode.cs:122 \u0022, fraction 0-1 (\u0022; native normalization header, frozen User-family branch against current header; four modes, unknown CSV denominator, two cultures; exact fixture keys and before/actual values retained in comparisons.json"
+    },
+    {
+      "observationId": "FQ15-E0DC8922ED9E",
+      "implementation": [
+        {
+          "path": "FamilyQuant/XicMassChart.cs",
+          "symbol": "complete native raster bytes: empty and populated branches, historical Light and Dark palettes, two sizes; font and draw labels included",
+          "sha256": "DC13EE41EE7A44EAA05EF0A47AB25D16317335965CD7EAE4A9F9CFD2AE7D8629"
+        }
+      ],
+      "proofs": [],
+      "note": "Frozen executable comparison of synthetic presentation inputs. No scientific inference or USearch removal approval. Textual screen-name change is explicit, not literal equality.",
+      "kindReceiptId": "native-code-fact",
+      "compared": "FamilyQuant/XicMassChart.cs:76 \u0022Nothing to show: no peptide carried a positive envelope yet.\u0022; complete native raster bytes: empty and populated branches, historical Light and Dark palettes, two sizes; font and draw labels included; exact fixture keys and before/actual values retained in comparisons.json"
+    },
+    {
+      "observationId": "FQ15-E205F47485DC",
+      "implementation": [
+        {
+          "path": "FamilyQuant.Core/NormalizationMode.cs",
+          "symbol": "native normalization header, frozen User-family branch against current header; four modes, unknown CSV denominator, two cultures",
+          "sha256": "951708B64A2746F38DA428448E32DD50DA1004F864C58ACB410A39F872CA29C5"
+        }
+      ],
+      "proofs": [],
+      "note": "Frozen executable comparison of synthetic presentation inputs. No scientific inference or USearch removal approval. Textual screen-name change is explicit, not literal equality.",
+      "kindReceiptId": "native-code-fact",
+      "compared": "FamilyQuant/NormalizationMode.cs:120 \u0022% of\u0022; native normalization header, frozen User-family branch against current header; four modes, unknown CSV denominator, two cultures; exact fixture keys and before/actual values retained in comparisons.json"
+    },
+    {
+      "observationId": "FQ15-E243A47466D1",
+      "implementation": [
+        {
+          "path": "FamilyQuant/AnalyticsViewModel.cs",
+          "symbol": "native SummaryLine branch text and formatted values; the sole reviewed screen-name substitution is Layer 3 -\u003E the quantitation panel",
+          "sha256": "581D33C2FF3CB6B07251B7480C016379902ED6825CF257D700FD1B14FF538945"
+        }
+      ],
+      "proofs": [],
+      "note": "Frozen executable comparison of synthetic presentation inputs. No scientific inference or USearch removal approval. Textual screen-name change is explicit, not literal equality.",
+      "kindReceiptId": "native-code-fact",
+      "compared": "FamilyQuant/AnalyticsControl.xaml.cs:260 \u0022representative per run, evidence side, canonical PTM-aware peptidoform and charge, divided \u0022; native SummaryLine branch text and formatted values; the sole reviewed screen-name substitution is Layer 3 -\u003E the quantitation panel; exact fixture keys and before/actual values retained in comparisons.json"
+    },
+    {
+      "observationId": "FQ15-E38BEFC387F6",
+      "implementation": [
+        {
+          "path": "FamilyQuant/FamilyContributionChart.cs",
+          "symbol": "complete native raster bytes: empty and populated branches, historical Light and Dark palettes, two sizes; font and draw labels included",
+          "sha256": "939A4F9C98A0739582DDBBEA460C0631F90C29871BD45F0BDC4ACB8DB5EF60E2"
+        }
+      ],
+      "proofs": [],
+      "note": "Frozen executable comparison of synthetic presentation inputs. No scientific inference or USearch removal approval. Textual screen-name change is explicit, not literal equality.",
+      "kindReceiptId": "native-code-fact",
+      "compared": "FamilyQuant/FamilyContributionChart.cs:414 \u0022Nothing to show: no family carries measured signal yet. A family needs a \u0022; complete native raster bytes: empty and populated branches, historical Light and Dark palettes, two sizes; font and draw labels included; exact fixture keys and before/actual values retained in comparisons.json"
+    },
+    {
+      "observationId": "FQ15-E675289A142D",
+      "implementation": [
+        {
+          "path": "FamilyQuant/AnalyticsViewModel.cs",
+          "symbol": "native SummaryLine branch text and formatted values; the sole reviewed screen-name substitution is Layer 3 -\u003E the quantitation panel",
+          "sha256": "581D33C2FF3CB6B07251B7480C016379902ED6825CF257D700FD1B14FF538945"
+        }
+      ],
+      "proofs": [],
+      "note": "Frozen executable comparison of synthetic presentation inputs. No scientific inference or USearch removal approval. Textual screen-name change is explicit, not literal equality.",
+      "kindReceiptId": "native-code-fact",
+      "compared": "FamilyQuant/AnalyticsControl.xaml.cs:212 \u0022 The family chart stands on \u0022; native SummaryLine branch text and formatted values; the sole reviewed screen-name substitution is Layer 3 -\u003E the quantitation panel; exact fixture keys and before/actual values retained in comparisons.json"
+    },
+    {
+      "observationId": "FQ15-E70EA3381DC2",
+      "implementation": [
+        {
+          "path": "FamilyQuant/AnalyticsViewModel.cs",
+          "symbol": "native SummaryLine branch text and formatted values; the sole reviewed screen-name substitution is Layer 3 -\u003E the quantitation panel",
+          "sha256": "581D33C2FF3CB6B07251B7480C016379902ED6825CF257D700FD1B14FF538945"
+        }
+      ],
+      "proofs": [],
+      "note": "Frozen executable comparison of synthetic presentation inputs. No scientific inference or USearch removal approval. Textual screen-name change is explicit, not literal equality.",
+      "kindReceiptId": "native-code-fact",
+      "compared": "FamilyQuant/AnalyticsControl.xaml.cs:235 \u0022is recorded, so the recovery shares cannot be taken; the mass and isotope graphs \u0022; native SummaryLine branch text and formatted values; the sole reviewed screen-name substitution is Layer 3 -\u003E the quantitation panel; exact fixture keys and before/actual values retained in comparisons.json"
+    },
+    {
+      "observationId": "FQ15-F1AF664F53C2",
+      "implementation": [
+        {
+          "path": "FamilyQuant/AnalyticsViewModel.cs",
+          "symbol": "native SummaryLine branch text and formatted values; the sole reviewed screen-name substitution is Layer 3 -\u003E the quantitation panel",
+          "sha256": "581D33C2FF3CB6B07251B7480C016379902ED6825CF257D700FD1B14FF538945"
+        }
+      ],
+      "proofs": [],
+      "note": "Frozen executable comparison of synthetic presentation inputs. No scientific inference or USearch removal approval. Textual screen-name change is explicit, not literal equality.",
+      "kindReceiptId": "native-code-fact",
+      "compared": "FamilyQuant/AnalyticsControl.xaml.cs:219 \u0022P2\u0022; native SummaryLine branch text and formatted values; the sole reviewed screen-name substitution is Layer 3 -\u003E the quantitation panel; exact fixture keys and before/actual values retained in comparisons.json"
+    },
+    {
+      "observationId": "FQ15-F5FDE7618839",
+      "implementation": [
+        {
+          "path": "FamilyQuant/AnalyticsViewModel.cs",
+          "symbol": "native SummaryLine branch text and formatted values; the sole reviewed screen-name substitution is Layer 3 -\u003E the quantitation panel",
+          "sha256": "581D33C2FF3CB6B07251B7480C016379902ED6825CF257D700FD1B14FF538945"
+        }
+      ],
+      "proofs": [],
+      "note": "Frozen executable comparison of synthetic presentation inputs. No scientific inference or USearch removal approval. Textual screen-name change is explicit, not literal equality.",
+      "kindReceiptId": "native-code-fact",
+      "compared": "FamilyQuant/AnalyticsControl.xaml.cs:218 \u0022P2\u0022; native SummaryLine branch text and formatted values; the sole reviewed screen-name substitution is Layer 3 -\u003E the quantitation panel; exact fixture keys and before/actual values retained in comparisons.json"
+    },
+    {
+      "observationId": "FQ15-FD8850C763D5",
+      "implementation": [
+        {
+          "path": "FamilyQuant.Core/NormalizationMode.cs",
+          "symbol": "native normalization header, frozen User-family branch against current header; four modes, unknown CSV denominator, two cultures",
+          "sha256": "951708B64A2746F38DA428448E32DD50DA1004F864C58ACB410A39F872CA29C5"
+        }
+      ],
+      "proofs": [],
+      "note": "Frozen executable comparison of synthetic presentation inputs. No scientific inference or USearch removal approval. Textual screen-name change is explicit, not literal equality.",
+      "kindReceiptId": "native-code-fact",
+      "compared": "FamilyQuant/NormalizationMode.cs:115 \u0022)\u0022; native normalization header, frozen User-family branch against current header; four modes, unknown CSV denominator, two cultures; exact fixture keys and before/actual values retained in comparisons.json"
+    },
+    {
+      "observationId": "FQ15-FF8E3AB54443",
+      "implementation": [
+        {
+          "path": "FamilyQuant/IsotopeCountChart.cs",
+          "symbol": "complete native raster bytes: empty and populated branches, historical Light and Dark palettes, two sizes; font and draw labels included",
+          "sha256": "C18B470572D3647F4B9007B8170702C5F231BCB62989EBD6662825DCE7AF17EF"
+        }
+      ],
+      "proofs": [],
+      "note": "Frozen executable comparison of synthetic presentation inputs. No scientific inference or USearch removal approval. Textual screen-name change is explicit, not literal equality.",
+      "kindReceiptId": "native-code-fact",
+      "compared": "FamilyQuant/IsotopeCountChart.cs:155 \u0022N0\u0022; complete native raster bytes: empty and populated branches, historical Light and Dark palettes, two sizes; font and draw labels included; exact fixture keys and before/actual values retained in comparisons.json"
+    }
+  ],
+  "kindReceipts": [
+    {
+      "id": "native-code-fact",
+      "kind": "code fact",
+      "proofs": [
+        {
+          "runId": "native",
+          "kind": "test",
+          "target": "ResultsRuntimeLedgerCommand",
+          "assertion": "RS runtime kind code fact: every listed native branch comparison and deterministic repeat passed",
+          "artifact": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\proofs.log",
+          "inspectedBy": ""
+        }
+      ]
+    },
+    {
+      "id": "native-export-storage-fact",
+      "kind": "export/storage fact",
+      "proofs": [
+        {
+          "runId": "native",
+          "kind": "test",
+          "target": "ResultsRuntimeLedgerCommand",
+          "assertion": "RS runtime kind export/storage fact: every listed native branch comparison and deterministic repeat passed",
+          "artifact": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\proofs.log",
+          "inspectedBy": ""
+        }
+      ]
+    },
+    {
+      "id": "native-format-export",
+      "kind": "format/export",
+      "proofs": [
+        {
+          "runId": "native",
+          "kind": "test",
+          "target": "ResultsRuntimeLedgerCommand",
+          "assertion": "RS runtime kind format/export: every listed native branch comparison and deterministic repeat passed",
+          "artifact": "D:\\FamilyQuant-data\\out-results\\RS-runtime\\ready-eol\\proofs.log",
+          "inspectedBy": ""
+        }
+      ]
+    }
+  ]
+}

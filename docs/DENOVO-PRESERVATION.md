@@ -6,7 +6,7 @@ previously approved exclusions are unchanged. No product code is changed by this
 
 The first batch proposes 182 distinct observations for review. The declaration register
 covers 92 rows and the runtime register covers 168, with 78 shared observations. The other
-437 observations remain OPEN. A declaration proves its named property or complete member,
+437 observations remained OPEN at that checkpoint. A declaration proves its named property or complete member,
 not an interaction. The runtime check proves the control or resolved value it compares,
 not a handler, an export or a numerical calculation.
 
@@ -45,6 +45,25 @@ The register
 files are `EV-denovo-declarations-1.json` and `EV-denovo-runtime-1.json`. The independent
 reviewer and merged gate decide acceptance. There is no self-recorded kind approval.
 
-Further work must execute the rewritten import/reconciliation projections, filtering/refusal
-paths, exports and handlers before proposing those rows. These fixtures make no fresh RAW,
+The first batch did not execute rewritten import/reconciliation projections, filtering/refusal
+paths, exports or handlers. These fixtures make no fresh RAW,
 real-data scientific accuracy, installation or complete-ledger closure claim.
+
+The second batch's `--prove-denovo-workflows` executes the supplied-PSM reconciliation API
+in both programs and compares every frozen result member. Its synthetic fixtures exercise
+all five verdicts, positive and empty projections, clearing downstream results on re-import
+and re-reconciliation, source changes, and resolved review/family table bindings. It repeats
+the three legacy source modes under en-US and fr-FR display cultures. Four legacy-data export
+pairs per case must agree byte-for-byte, including ambiguity and quoted/comma-containing IDs.
+The source-aware additional CSV fields are outside that legacy-byte comparison.
+
+Its green packet supports 104 new observations: 90 code facts and 14 table bindings,
+with no overlap with the first batch. The combined cohort has 286 proposed VERIFIED rows and
+333 OPEN rows. The 41 compared status-copy observations that differ
+remain OPEN. A passing CSV pair does not automatically verify a format or handler row: each
+proposed row still names its actual production projection or resolved cell comparison.
+
+The native `c13-style-role-mapping-open.json` handoff lists 24 OPEN frozen style observations,
+their IDs, lines, values, style keys and target types. It supplies no current-role mapping;
+FQLook owns that mapping under orchestrator M47. The producer verifies each listed row is
+OPEN when it writes the inventory. This is a handoff, not style verification.

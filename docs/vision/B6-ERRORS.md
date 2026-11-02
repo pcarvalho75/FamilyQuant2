@@ -52,6 +52,31 @@ Two rows to read with care. The phosphodiesterase family carries 1.32% of the re
 known credit, which was wrong: its share is real signal but unvalidated, and the table says so. And six
 families have no known answer at all; their rows show a share and a decoy rate, never a right rate.
 
+## The result table B7 reads
+
+`FamilyWorldErrors.Compose` completes the stored table with the first pass (ruling M33): each curated
+group of the project maps to the UniProt families its members carry, and a first-pass peptide is the own
+peptide of a family when all its curated groups map to that one family; otherwise it goes to a shared
+row. A curated group whose members carry no UniProt family keeps its own row, named by its members (a
+contaminant with no description by its identifier). The table closes on FamilyEnvelopeQuant's measured
+total, which the checker asserts bit for bit. Own parts as shares of the measured total, on this project
+(58 rows, 29 of them curated groups without a UniProt family):
+
+| Family | Identified | De novo in the database | De novo only in the family world | World right rate |
+|---|---:|---:|---:|---|
+| venom metalloproteinase (M12B) | 24.41% | 5.45% | 1.25% | 96.53% |
+| peptidase S1 | 15.30% | 2.43% | 0.30% | 99.22% |
+| snaclec | 10.34% | 2.60% | 1.97% | 95.58% |
+| flavin monoamine oxidase | 5.12% | 0.50% | 0.01% | 100% |
+| true venom lectin | 2.57% | 0.19% | 0.11% | 92.00% |
+| CRISP | 2.56% | 0.16% | 0.01% | 98.92% |
+| phospholipase A2 | 1.24% | 0.44% | 0.80% | 97.14% |
+| PDGF/VEGF growth factor | 1.12% | 0.10% | 0.02% | 97.62% |
+| nucleotide pyrophosphatase/phosphodiesterase | 0 | 0 | 0.30% | too little evidence |
+
+Global rows: shared between families 0.02% identified, 0.01% de novo in the database, under 0.01% in the
+family world; identified in no family 0.55%; de novo unexplained 18.18%, one bucket for the whole sample.
+
 ## Conserved families, checked by hand
 
 The 65 wrong credits among the 1,963 landed known answers, read one by one
@@ -73,3 +98,16 @@ The 65 wrong credits among the 1,963 landed known answers, read one by one
 So on this project the conserved families are not inflated by short motifs once tags have 9 residues:
 the wrong credits are two-family proteins (which the shared row absorbs) and de novo calls of another
 peptide. What this does not cover: a second sample, families with no known answer, and B4's own world.
+
+## The computed project (through Compute)
+
+`D:/FamilyQuant-data/out-opus/b6/bothrops-jararaca-family-world.fqproj` is the Bothrops jararaca project as
+a person would make it: `--family-world-project` fetched the curation's evidence (171 of 171), read the
+task from its headers (clade Viperidae, proposed scope Toxin, confirmed), and B4 fetched and stored the
+family world (12 families in scope, 4,203 entries, 2,842 of them reviewed, UniProt 2026_03, content hash
+3C1F01CA...). Compute (`--fullxic-pipeline-snapshot`) then attached the table. `--family-world-report`
+reads it back: 19.48% of the unattributed de novo envelope is credited to a family in scope, decoys 0.00%,
+tags too short 8.15%, not found 72.37%; known answers 1,832 right of 1,881 landed (97.40%). Two Compute
+runs are byte-identical, and against a Compute run with no stored world the quant and spectrum outputs
+are identical and the manifest differs only by the added table. With this sample's own scope the world
+holds 12 families instead of Ana's 40, so families such as the phosphodiesterase are not credited here.

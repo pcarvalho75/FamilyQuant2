@@ -57,6 +57,16 @@ internal static partial class Program
         Check("two indistinguishable frozen tokens on one line remain ambiguous",
             !LedgerMemberFactComparison.Compare(row with { Line = 1 }, duplicateLine,
                 new Dictionary<string, string> { ["one.cs"] = duplicateLine }).Matched);
+        string AnchoredId(int offset) => "FQ15-" + Convert.ToHexString(System.Security.Cryptography.SHA256.HashData(
+            System.Text.Encoding.UTF8.GetBytes(row.Source + "|" + offset.ToString(System.Globalization.CultureInfo.InvariantCulture) + "|" + row.Kind)))[..12];
+        int firstLiteral = duplicateLine.IndexOf("\".csv\"", StringComparison.Ordinal);
+        int secondLiteral = duplicateLine.LastIndexOf("\".csv\"", StringComparison.Ordinal);
+        Check("an exact frozen observation ID anchors the first same-line literal",
+            LedgerMemberFactComparison.Compare(row with { Line = 1, Id = AnchoredId(firstLiteral) }, duplicateLine,
+                new Dictionary<string, string> { ["one.cs"] = duplicateLine }).Matched);
+        Check("an exact frozen observation ID anchors the second same-line literal independently",
+            LedgerMemberFactComparison.Compare(row with { Line = 1, Id = AnchoredId(secondLiteral) }, duplicateLine,
+                new Dictionary<string, string> { ["one.cs"] = duplicateLine }).Matched);
         var relocation = new LedgerMemberFactComparison.MemberMapping(same.FrozenMember, "FamilyQuant/Current.cs",
             same.CurrentMember.Replace("Fixture.View::", "Fixture.DifferentView::", StringComparison.Ordinal));
         Check("an explicit relocation still requires identical complete member tokens",

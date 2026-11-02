@@ -128,6 +128,8 @@ Invoke each flag with `& $testExe <flag>` after building. Dispatch and arity are
 | `--database-gap-screens <project.fqproj> <fresh-output>` | Read-only native Database gap captures in both themes, stored table CSV, and verified suggested FASTA when available |
 | `--prove-results-interactions <fresh-output> <date-timestamp>` | Native Results controls, displaced handlers, deterministic exports and observation receipts |
 | `--prove-results-members <frozen-root> <fresh-output> <date-timestamp>` | Shared scoped member comparison for assigned Results and quantitation declarations; changed members stay open |
+| `--prove-results-runtime <frozen-root> <own-frozen-host> <fresh-output> <date-timestamp> [--negative-control]` | Native frozen/current summary, CSV, User-header and chart-byte comparisons with repeated outputs and per-row receipts |
+| `--results-runtime-snapshot <fresh-json-path>` | Shared native frozen/current synthetic presentation values; not scientific result generation |
 | `--test-quantitation-panel [output-dir]` | Full XIC first, conditional source options, retained selectors and both-theme native captures |
 | `--test-curation-quantitation` | Full-XIC column, denominator changes, shared policy and unavailable-TIC fallback |
 | `--test-curation-operations` | Shared host queue/cancel paths, staged PatternLab publication, stale membership, browse preferences and headless refusal |
@@ -189,11 +191,15 @@ Companion options for `--screens` are `--screen-fcf <input.fcf>`, `--screen-proj
 | `--feature-ledger-kind-review <kind> REOPENED/ACCEPTED <reviewer> <reason> <date> <output>` | Independent D13 kind-review decision and whole-kind reopening |
 | `--ledger-declaration-compare <frozen-root> <current-root> <fresh-output> <step> <source-prefix> <date>` | Frozen/current explicit XAML property comparisons and kind receipts |
 | `--ledger-assay-compare <frozen-root> <owner-map> <output> <step> <date>` | Shared C# member comparisons for the exact M22 OPEN cohorts; all nonmatches retained |
+| `--ledger-assay-cohort <frozen-root> <selection.json> <output> <step> <date>` | Scoped shared declaration comparisons; [receipt scope](ASSAY-LEDGER.md) |
+| `--ledger-assay-cache <frozen-root> <output> <date> [--negative-control]` | Frozen/current native cache wire and staging checks; frozen host build required |
+| `--assay-cache-snapshot <output>` | Shared synthetic native cache fixture; fresh output required |
 | `--ledger-core-relocation <frozen-root> <fresh-output> X5/X7 <date> [member-mappings.json]` | Scoped complete Core member comparisons, exact frozen hashes, retained source/checker snapshots and per-row gaps; [guide](CORE-RELOCATION-LEDGER.md) |
 | `--ledger-shell-compare <frozen-root> <fresh-output> <date>` | SH and C1 exact declarations/member tokens; separate candidate registers, unproven rows kept OPEN |
 | `--ledger-storage-runtime <frozen-root> <fresh-output> <date> [--negative-control]` | Public project reader/writer schema, codec and refusal observations; [runtime guide](CORE-RUNTIME-LEDGER.md) |
 | `--prove-denovo-ledger <frozen-source-root> <fresh-output> <date>` | Scoped exact De novo declarations, retained snapshots and ledger receipts in batches of 250; [guide](DENOVO-PRESERVATION.md) |
 | `--prove-denovo-runtime <frozen-source-root> <frozen-app-folder> <fresh-output> <date>` | Native frozen/current controls and resolved values across both themes and three legacy sources |
+| `--prove-denovo-workflows <frozen-source-root> <frozen-app-folder> <fresh-output> <date>` | Native frozen/current projection, reconciliation, binding and legacy export fixtures; C13 style handoff |
 | `--ledger-shell-compare <frozen-root> <fresh-output> <date>` | SH and C1 exact declarations/member tokens; separate candidate registers, unproven rows kept OPEN |
 | `--ledger-core-relocation <frozen-root> <fresh-output> X5/X7 <date> [member-mappings.json]` | Scoped complete Core member comparisons, exact frozen hashes, retained source/checker snapshots and per-row gaps; [guide](CORE-RELOCATION-LEDGER.md) |
 | `--ledger-xic-runtime <frozen-root> <fresh-output> <date> <stored-project> <validated-cache> [--negative-control]` | Native XIC refusal/source/completion facts plus bounded validated cache replay; [runtime guide](CORE-RUNTIME-LEDGER.md) |
@@ -239,8 +245,7 @@ and output must be separate. None is executed merely to maintain this catalog.
 | `--evidence-architecture-check [searched.fcf] [report.json] [scope-terms]` | Same helper, architecture suggestions |
 | `--evidence-apply-check [searched.fcf] [report.json] [scope-terms]` | Same helper, explicit apply/undo/reopen checks in separate outputs |
 | `--evidence-session-apply-check [searched.fcf] [report.json] [scope-terms]` | Same helper, session preparation and recipe replay |
-| `--family-world-check [project.fqproj] [world.fcf] [output-dir]` | [FamilyWorldCheck.cs](../FamilyQuant.Tests/FamilyWorldCheck.cs); B1 gate, gate study and B5 product pass under D11 (`family_world_pass.csv`); live UniProt taxonomy lists in the output folder |
-| `--family-world-check [project.fqproj] [world.fcf] [output-dir]` | [FamilyWorldCheck.cs](../FamilyQuant.Tests/FamilyWorldCheck.cs), the B1 gate: known answers without the sample's species (and, ungated, its genus) and coverage of the unattributed de novo envelope, the gate study, and the B5 product pass under D11 (`family_world_pass.csv`) and B6's per-family errors (`family_world_errors.csv`, stored in a project copy and read back); live UniProt taxonomy lists, kept in the output folder |
+| `--family-world-check [project.fqproj] [world.fcf] [output-dir]` | [FamilyWorldCheck.cs](../FamilyQuant.Tests/FamilyWorldCheck.cs); B1 gate, gate study, B5 product pass under D11 and B6 per-family errors; live taxonomy lists in output |
 | `--coherence-check [panel.fcf] [classes.tsv] [output-dir]` | [CoherenceCheckRun.cs](../FamilyQuant.Tests/CoherenceCheckRun.cs) |
 | `--motif-check [evidence.fcf] [classes.tsv] [expected.tsv] [output-dir]` | [MotifCheckRun.cs](../FamilyQuant.Tests/MotifCheckRun.cs) |
 | `--left-out-check [searched.fcf] [baseline.csv] [classes.tsv] [output-dir] [scope-terms]` | [LeftOutCheckRun.cs](../FamilyQuant.Tests/LeftOutCheckRun.cs) |
@@ -250,6 +255,8 @@ and output must be separate. None is executed merely to maintain this catalog.
 
 The B1 family-world gate checks known answers without the sample's species (and, ungated, its genus)
 and coverage of the unattributed de novo envelope.
+B5 writes `family_world_pass.csv`. B6 writes per-family errors to `family_world_errors.csv`,
+stores them in a project copy and reads them back.
 
 Quote semicolon-separated scope text, for example `'Toxin;venom gland'`.
 
