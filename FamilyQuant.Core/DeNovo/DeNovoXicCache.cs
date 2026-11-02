@@ -1,4 +1,5 @@
-using Newtonsoft.Json;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -118,7 +119,7 @@ namespace FamilyQuant.DeNovo
             {
                 if (!File.Exists(path)) return empty;
 
-                CacheFile? file = JsonConvert.DeserializeObject<CacheFile>(File.ReadAllText(path));
+                CacheFile? file = JsonSerializer.Deserialize<CacheFile>(File.ReadAllText(path), ExtractionCacheJson.Options);
                 if (file == null) return empty;
 
                 if (file.Version != CurrentVersion) return empty;
@@ -161,7 +162,7 @@ namespace FamilyQuant.DeNovo
         /// Writes the sidecar, via a temporary file and a move, so that a process killed mid-write
         /// leaves the previous cache intact rather than a truncated one.
         ///
-        /// Doubles round-trip exactly: Json.NET writes them in shortest round-trippable form, so an
+        /// Doubles round-trip exactly: System.Text.Json writes them in shortest round-trippable form, so an
         /// area read back from this file is the same bits that came out of the trapezoid. A cache
         /// that returned a value one ulp away would break the bit-for-bit reproduction that licenses
         /// this module in the first place.
@@ -185,7 +186,7 @@ namespace FamilyQuant.DeNovo
                 Entries = _entries,
             };
 
-            string json = JsonConvert.SerializeObject(file, Formatting.Indented);
+            string json = JsonSerializer.Serialize(file, ExtractionCacheJson.Options);
 
             string temp = Path + ".tmp";
             File.WriteAllText(temp, json);
@@ -198,28 +199,28 @@ namespace FamilyQuant.DeNovo
         /// the file, where a human opening it can see which run and which window it belongs to.</summary>
         private sealed class CacheFile
         {
-            [JsonProperty("version")]
+            [JsonPropertyName("version")]
             public int Version { get; set; }
 
-            [JsonProperty("runName")]
+            [JsonPropertyName("runName")]
             public string RunName { get; set; } = string.Empty;
 
-            [JsonProperty("ppm")]
+            [JsonPropertyName("ppm")]
             public double Ppm { get; set; }
 
-            [JsonProperty("ms1Tolerance")]
+            [JsonPropertyName("ms1Tolerance")]
             public int Ms1Tolerance { get; set; }
 
-            [JsonProperty("isotopeCount")]
+            [JsonPropertyName("isotopeCount")]
             public int IsotopeCount { get; set; }
 
-            [JsonProperty("minPointsForQuant")]
+            [JsonPropertyName("minPointsForQuant")]
             public int MinPointsForQuant { get; set; }
 
-            [JsonProperty("sourceSha256")]
+            [JsonPropertyName("sourceSha256")]
             public string SourceFingerprint { get; set; } = string.Empty;
 
-            [JsonProperty("entries")]
+            [JsonPropertyName("entries")]
             public Dictionary<string, DeNovoXicResult>? Entries { get; set; }
         }
     }

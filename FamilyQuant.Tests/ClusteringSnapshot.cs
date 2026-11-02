@@ -80,6 +80,8 @@ namespace FamilyQuant.Tests
             Console.WriteLine("Snapshot proteins=" + clustered.MyExtendedFastaItems.Count);
             Console.WriteLine("Snapshot families=" + clustered.GroupedFastaItems.Count);
             Console.WriteLine("Snapshot=" + args[2]);
+            Console.WriteLine("Host peak working set bytes=" + System.Diagnostics.Process.GetCurrentProcess().PeakWorkingSet64
+                .ToString(CultureInfo.InvariantCulture));
             return 0;
         }
     }

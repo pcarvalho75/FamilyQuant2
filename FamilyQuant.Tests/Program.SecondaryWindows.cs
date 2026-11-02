@@ -136,6 +136,9 @@ internal static partial class Program
                             && text.VerticalScrollBarVisibility == ScrollBarVisibility.Auto && ChartPalette.ContrastRatio(text.Foreground, text.Background) >= 4.5);
                     if (WalkTree(window).OfType<IdentityScanChart>().SingleOrDefault() is { } chart)
                     {
+                        window.Left = -30000; window.Top = -30000;
+                        window.ShowInTaskbar = false; window.ShowActivated = false;
+                        window.Show(); PumpDispatcher();
                         Themes.ThemeManager.Apply(theme == Themes.AppTheme.Dark ? Themes.AppTheme.Light : Themes.AppTheme.Dark);
                         PumpDispatcher();
                         Check(theme + " identity chart follows live theme tokens without changing its source rows", chart.Palette.Backdrop.IsFrozen
