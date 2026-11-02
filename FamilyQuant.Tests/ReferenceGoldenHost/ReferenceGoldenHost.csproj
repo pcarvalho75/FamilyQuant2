@@ -10,6 +10,7 @@
   <ItemGroup>
     <Compile Include="../ShellMetadataSnapshot.cs" Link="ShellMetadataSnapshot.cs" />
     <Compile Include="../ShellMetadataSnapshot.Home.cs" Link="ShellMetadataSnapshot.Home.cs" />
+    <Compile Include="../AssayBuildOutputSnapshot.cs" Link="AssayBuildOutputSnapshot.cs" />
     <Compile Include="../AssayPartitionSnapshot.cs" Link="AssayPartitionSnapshot.cs" />
     <Compile Include="../AssayBuildReportSnapshot.cs" Link="AssayBuildReportSnapshot.cs" />
     <Compile Include="../AssayViewSnapshot.cs" Link="AssayViewSnapshot.cs" />
