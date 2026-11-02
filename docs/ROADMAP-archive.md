@@ -76,6 +76,7 @@ Finished steps, moved here from docs/ROADMAP.md. The board shows them as green.
 | S5 | One Save: `.fqproj` is the file, `.fcf` stays as Export and still opens. Unsaved mark, prompt on close. Ana's file goes from 70 MB to about 16 MB | H | 4 | S1, E12, X7 | R2 | Old `.fcf` opens; project round trip byte-equal in curation; a curation-only project opens with no quant | LK | SH | 0% | 0% | T+35 |
 | S7 | Window size and last folder remembered; drag a file to open | L | 1 | S1 | R2 | Survives restart | LK | SH | 0% | 0% | T+7 |
 | S6 | One busy overlay with progress and Cancel for every long operation outside the curation screen, on the operation path, and a host C1 adopts for the curation paths | M | 1 | 🟢 | R2, C1 | Cancel leaves the file as it was; suite covers each operation | SH | not started | 0% | 0% | T+1 |
+| S8 | Shell messages and folders: one path for message boxes and status lines, and every browse dialog uses the folder preference. Left on the list by housekeeping because each is a behaviour change | L | 0.5 | 🟢 | C14 | A headless run never opens a dialog; each browse has a test; no message lost | SH | not started | 0% | 0% | T+0 |
 
 ### W5 Screens: each rebuilt as a thin view over a tested view model
 
@@ -91,6 +92,7 @@ Finished steps, moved here from docs/ROADMAP.md. The board shows them as green.
 | C11 | Retire Extract areas and Partition ion current from the De novo screen (superseded by Full XIC, and a second recovery on another basis). Homology CSV moves to Results. Paulo decided on 2026-11-01 to retire them; 1.5 keeps them | M | 2 | C10 | X11 | Ledger rows marked DROP by Paulo's word; homology CSV still exported | EV | RS | 0% | 0% | T+2 |
 | C4 | Group by evidence window: families on the left with ticks and names, proteins on the right with reason, tier, flags, split, motif box, left-out tab. Same window as the Super Cluster preview, with a keyword mode, so the ticks, red rows and copy all stay | VH | 7 | E5, V4, S1 | E14, A1 | Whole flow by keyboard and mouse in the suite; 31,777 proteins scroll smoothly; Cancel changes nothing; the group with no domain calls and the members placed by length and cysteines show on the screen, with the one reviewed entry left (morulustatin) visible | LK | not started | 0% | 0% | T+7 |
 | C3 | Keyword boxes only in that window: one "Group by keywords" command on the screen | L | 0.5 | 🟢 | C1 | Three duplicate inputs gone; suite re-pointed | LK | not started | 0% | 0% | T+0 |
+| C15 | The review window's architecture split works per group: each group has its own tick, so one group can leave while the rest of the family stays whole. Core already takes a choice per group | L | 0.5 | 🟢 | R2 | Ticking only the disintegrin-alone group keeps the rest together; recipe replay exact | RS | not started | 0% | 0% | T+0 |
 
 ### W6 Core rewrite: copy what is good, rewrite what is better
 
@@ -104,6 +106,7 @@ Finished steps, moved here from docs/ROADMAP.md. The board shows them as green.
 | X11 | Dependencies: `Extended.Wpf.Toolkit` (6 uses), `Newtonsoft.Json` (3 files, the rest is `System.Text.Json`), `OpenMcdf` (no reference in this repo), `LiteDB`. Each goes only if a real RAW and `.xic2` still open | M | 1 | 🟢 | R3 | Publish rehearsal runs; real files open | AS | not started | 0% | 0% | T+1 |
 | X14 | Exhaustive clustering stops holding every pair in memory: `USearchTools` streams its edges through the union-find. The all-pairs alignment itself stays as it is | M | 1 | 🟢 | R3 | Same families on Bjararaca exhaustive; peak memory measured before and after; the memo tests kept | AS | not started | 0% | 0% | T+2 |
 | X16 | Test flags register one line each in a table, so a merge cannot drop part of a dispatch block and two lanes adding flags never touch the same lines | L | 0.5 | 🟢 | R3 | Every flag and every check kept; the count does not fall; a planted missing flag fails | AS | not started | 0% | 0% | T+0 |
+| X5 | Quantitation pipeline: `FullXicComputer` (997) and `FamilyEnvelopeQuant` (968) restructured into stages with clear inputs and outputs, leaving one clean seam for the second attribution pass (B5). The studies Compute calls stay and get their own folder | VH | 1.5 | 🟢 | B5, X12, R3 | Golden equal on the full project; every invariant in the guide has a test; run time not worse | FL | not started | 0% | 0% | T+2 |
 
 ### W7 Releases (Paulo publishes each one)
 
@@ -118,4 +121,5 @@ Finished steps, moved here from docs/ROADMAP.md. The board shows them as green.
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
 | B3 | The program reads the task from the file: taxon from OS= and OX=, the clade from UniProt taxonomy, and a proposed scope from the UniProt keyword counts of the reviewed proteins in the file. The person confirms; the choice goes in the recipe. No word table in the code | M | 1 | 🟢 | B4 | On Ana's file it names Viperidae and proposes `Toxin` with its count, with no literal in `Evidence/`; recipe replay exact; contaminants ignored; non-UniProt headers refused plainly | EV | not started | 0% | 0% | T+1 |
 | B9 | The evidence window shows the taxon, clade and proposed scope with their counts, and the person confirms or edits them. A thin view over the B3 API | M | 0.5 | 🟢 | B4 | Confirmed scope reaches the recipe; both themes; no science in the view | RS | not started | 0% | 0% | T+2 |
+| B2 | Real prior-art search: read the closest work (PepExplorer, PEAKS SPIDER, venomics workflows, family-level quantitation) and write `docs/vision/PRIOR-ART.md`. Until it is done, nothing we write says new or first | M | 0.5 | 🟢 | B8 | Each close paper read, with what it does and does not do; a reviewer from another model family checks the citations | GR | not started | 0% | 0% | T+0 |
 

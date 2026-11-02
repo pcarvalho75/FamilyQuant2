@@ -4,14 +4,18 @@
     <Grid>
         <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition/></Grid.RowDefinitions>
         <Grid.ColumnDefinitions><ColumnDefinition Width="3*"/><ColumnDefinition Width="10"/><ColumnDefinition Width="2*"/></Grid.ColumnDefinitions>
-        <CheckBox Grid.ColumnSpan="3" Content="Split this family by domain combination" IsChecked="{Binding Split}" IsEnabled="{Binding CanSplit}"
-                  Margin="0,0,0,8" ToolTip="Uses the groups supplied by the evidence analysis. Clearing it keeps one proposed family; no domain order is inferred."/>
+        <CheckBox Grid.ColumnSpan="3" Content="Split all groups" IsChecked="{Binding SplitAll}" IsEnabled="{Binding CanSplit}"
+                  Margin="0,0,0,8" ToolTip="Selects or clears every supplied architecture group. A mixed tick means only some groups leave the family."/>
         <Grid Grid.Row="1">
             <Grid.RowDefinitions><RowDefinition Height="2*"/><RowDefinition Height="Auto"/><RowDefinition Height="3*"/></Grid.RowDefinitions>
             <DataGrid x:Name="groupGrid" ItemsSource="{Binding Groups}" SelectedItem="{Binding SelectedGroup}" AutoGenerateColumns="False"
                       CanUserAddRows="False" CanUserDeleteRows="False" SelectionMode="Single" HeadersVisibility="Column"
                       ToolTip="Select an architecture to see its members below. Split names are editable; memberships and inference flags come from the evidence analysis.">
                 <DataGrid.Columns>
+                    <DataGridTemplateColumn Header="Split" Width="62" MinWidth="62" IsReadOnly="True" ClipboardContentBinding="{Binding Split}"><DataGridTemplateColumn.CellTemplate><DataTemplate>
+                        <CheckBox IsChecked="{Binding Split, UpdateSourceTrigger=PropertyChanged}" IsEnabled="{Binding CanSplit}" HorizontalAlignment="Center"
+                                  ToolTip="Moves only this supplied group into its own family when Apply is pressed. Unticked groups stay together in the proposed family."/>
+                    </DataTemplate></DataGridTemplateColumn.CellTemplate></DataGridTemplateColumn>
                     <DataGridTextColumn Header="Split name" Width="160" MinWidth="130" Binding="{Binding Name, UpdateSourceTrigger=PropertyChanged}"/>
                     <DataGridTextColumn Header="Domain combination" Width="200" MinWidth="200" IsReadOnly="True" Binding="{Binding Domains}"/>
                     <DataGridTextColumn Header="Proteins" Width="90" MinWidth="90" IsReadOnly="True" Binding="{Binding Proteins}"/>

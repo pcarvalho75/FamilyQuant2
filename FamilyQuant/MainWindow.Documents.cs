@@ -107,7 +107,7 @@ public partial class MainWindow
             // it threw an InvalidCastException whenever the USearch panel was the one on screen.
             if (owner.cgc == null || owner.cgc.fcf == null)
             {
-                MessageBox.Show(
+                ShellMessages.Report(owner,
                     "Nothing was saved: there are no families on screen to save.\n\n" +
                     "Next step: open a Family Cluster File with File > Open, or build " +
                     "one with File > New from database.",
@@ -121,9 +121,7 @@ public partial class MainWindow
                 Title = "Save the current families as a Family Cluster File"
             };
 
-            owner.PrepareFileDialog(sfd);
-            if (sfd.ShowDialog() != true) return;
-            owner.RememberFolder(sfd.FileName);
+            if (!ShellDialogs.ShowFile(owner, "families.export", sfd)) return;
             using var operation = owner.Operations.Begin("Export families");
 
             try
@@ -132,7 +130,7 @@ public partial class MainWindow
                 await Task.Run(() => document.Save(sfd.FileName, operation.Context));
                 operation.Dispose();
 
-                MessageBox.Show(
+                ShellMessages.Report(owner,
                     "The families were saved to\n" + sfd.FileName + "\n\n" +
                     "The file holds the grouping, your User IDs and your annotations. It does not hold the " +
                     "quantitation: reopening it restores the families, and the percentages come back when " +
@@ -147,7 +145,7 @@ public partial class MainWindow
             }
             catch (Exception ex)
             {
-                MessageBox.Show(
+                ShellMessages.Report(owner,
                     "The file could not be written, so nothing was saved.\n\n" +
                     "Reason given by the program: " + ex.Message + "\n\n" +
                     "Next step: check that the file is not open in another program and that you can write " +
@@ -166,7 +164,7 @@ public partial class MainWindow
 
             if (owner.cgc == null || owner.cgc.fcf == null)
             {
-                MessageBox.Show(
+                ShellMessages.Report(owner,
                     "Nothing was saved: there is no project on screen to save.\n\n" +
                     "Next step: open a project or a Family Cluster File with File > Open, or build one " +
                     "with File > New from database.",
@@ -201,7 +199,7 @@ public partial class MainWindow
                 if (!completed || !ReferenceEquals(project, owner.cgc) || !ReferenceEquals(curation, owner.cgc?.fcf)
                     || !ReferenceEquals(quant, owner.loadedQuant) || !ReferenceEquals(heldManifest, owner.loadedManifest))
                 {
-                    MessageBox.Show(
+                    ShellMessages.Report(owner,
                         "Nothing was saved: the open project changed (another one was opened, or its quantitation " +
                         "was recomputed) while the save was waiting for the family attribution to finish.\n\n" +
                         "Next step: save again.",
@@ -306,7 +304,7 @@ public partial class MainWindow
                 && owner.loadedManifest.SpectrumComparisonRows.Count > 0;
             if (!havePersistedRows && owner.loadedQuant.Count == 0)
             {
-                MessageBox.Show(
+                ShellMessages.Report(owner,
                     "There is no spectrum comparison table to show yet.\n\n" +
                     "Next step: load a .fqproj that contains full quantitation, or run Analysis > Compute " +
                     "full XIC first.",
@@ -327,7 +325,7 @@ public partial class MainWindow
             }
             catch (Exception ex)
             {
-                MessageBox.Show(
+                ShellMessages.Report(owner,
                     "The spectrum comparison table could not be built, and the project was not changed.\n\n" +
                     "Reason given by the program: " + ex.Message + "\n\n" +
                     "Next step: recompute the full XIC with the PEAKS de-novo-only + DeepNovo union if " +
@@ -341,7 +339,7 @@ public partial class MainWindow
             if (owner.Operations.IsBusy) return;
             if (owner.cgc == null || owner.cgc.fcf == null)
             {
-                MessageBox.Show(
+                ShellMessages.Report(owner,
                     "Nothing was reannotated: there are no families on screen to write into a SEPro " +
                     "package.\n\n" +
                     "Next step: open a Family Cluster File with File > Open first.",
@@ -355,9 +353,7 @@ public partial class MainWindow
                 Title = "Choose a TRUSTED SEPro result package (legacy unsafe deserialization)"
             };
 
-            owner.PrepareFileDialog(ofd);
-            if (ofd.ShowDialog() != true) return;
-            owner.RememberFolder(ofd.FileName);
+            if (!ShellDialogs.ShowFile(owner, "sepro.reannotate", ofd)) return;
             using var operation = owner.Operations.Begin("Reannotate SEPro");
 
             try
@@ -371,7 +367,7 @@ public partial class MainWindow
 
                 if (missing.Count > 0)
                 {
-                    MessageBox.Show(
+                    ShellMessages.Report(owner,
                         "Nothing was written: " + missing.Count.ToString("N0", CultureInfo.CurrentCulture) +
                         " protein(s) in the SEPro package are not in the database these families came " +
                         "from, so they have no family number to receive.\n\n" +
@@ -389,7 +385,7 @@ public partial class MainWindow
                 await Task.Run(() => AppOperationFiles.WriteFile(newFileName, spckg.Save, operation.Context));
                 operation.Dispose();
 
-                MessageBox.Show(
+                ShellMessages.Report(owner,
                     spckg.MyProteins.MyProteinList.Count.ToString("N0", CultureInfo.CurrentCulture) +
                     " protein(s) were given their family number and written to\n" + newFileName + "\n\n" +
                     "The number written is the User ID column, so any family you merged by hand is what " +
@@ -403,7 +399,7 @@ public partial class MainWindow
             }
             catch (Exception ex)
             {
-                MessageBox.Show(
+                ShellMessages.Report(owner,
                     "The SEPro package could not be reannotated, and no file was written.\n\n" +
                     "Reason given by the program: " + ex.Message + "\n\n" +
                     "Next step: check that the .sepr2 opens in SEPro and that you can write to its folder, " +

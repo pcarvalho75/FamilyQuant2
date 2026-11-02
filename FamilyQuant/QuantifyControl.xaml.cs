@@ -28,19 +28,19 @@ public partial class QuantifyControl : UserControl
     {
         if (!CanShowDialog()) return;
         var dialog = new OpenFolderDialog { Title = "Choose the RAW folder" };
-        if (dialog.ShowDialog() == true) ViewModel.RawDirectory = dialog.FolderName;
+        if (ShellDialogs.ShowFolder(this, "quantify.raw", dialog)) ViewModel.RawDirectory = dialog.FolderName;
     }
     private void BrowseSepro(object sender, RoutedEventArgs e)
     {
         if (!CanShowDialog()) return;
         var dialog = new OpenFileDialog { Title = "Choose a trusted SEPro package", Filter = "SEPro package (*.sepr2)|*.sepr2" };
-        if (dialog.ShowDialog() == true) ViewModel.SeproPackage = dialog.FileName;
+        if (ShellDialogs.ShowFile(this, "quantify.sepro", dialog)) ViewModel.SeproPackage = dialog.FileName;
     }
     private void BrowseDeNovo(object sender, RoutedEventArgs e)
     {
         if (!CanShowDialog()) return;
         var dialog = new OpenFolderDialog { Title = "Choose the de novo export root" };
-        if (dialog.ShowDialog() == true) ViewModel.DeNovoDirectory = dialog.FolderName;
+        if (ShellDialogs.ShowFolder(this, "quantify.denovo", dialog)) ViewModel.DeNovoDirectory = dialog.FolderName;
     }
     private void ViewSpectrum(object sender, RoutedEventArgs e)
     {
