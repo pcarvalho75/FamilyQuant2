@@ -36,6 +36,14 @@ Each step supplies `docs/feature-ledger-evidence/<step>.json`, schema version 1:
 }
 ```
 
+Paulo's D13 permits one executed receipt per kind. A register may add
+`kindReceipts: [{id, kind, proofs}]`. A covered row sets `kindReceiptId` to that ID
+and records its exact frozen/current comparison in `compared`; its own `proofs`
+may be empty. The shared receipt must match the row's frozen kind, identify a green
+execution and retained artifacts, and every row still carries its current implementation
+mapping/hash. Rows not covered by a kind check need their own proof or remain OPEN.
+The checker expands shared proofs for validation; it never treats a kind name as evidence.
+
 A test proof must identify an actual assertion in a zero-failure execution log.
 The assertion must establish this observation's behavior, not merely that a broad method ran.
 All declared artifacts and mapped implementation hashes must still match.
@@ -58,6 +66,9 @@ Run the built test executable with these flags and explicit lane-owned outputs:
 | `--feature-ledger-evidence-import <register> <output>` | Validate and import a step register; apply only supported states |
 | Same import plus `--replace-existing` | Explicit replacement after re-execution, preserving the old register in output |
 | `--feature-ledger-evidence <output>` | Read-only counts, complete mapping and deterministic review sample |
+| `--feature-ledger-kind-review <kind> REOPENED/ACCEPTED <reviewer> <reason> <date> <output>` | Record an independent kind verdict and reapply supported states |
+| `--test-ledger-declarations` | Exact XAML declaration and scoped C# member comparison fixtures |
+| `--ledger-declaration-compare <frozen-root> <current-root> <fresh-output> <step> <source-prefix> <date>` | Compare named explicit XAML properties and emit kind receipts |
 
 For example, obtain the timestamp with `date '+%F %T %z'` immediately before the proof command.
 Neither the proof runner nor the audit invokes the frozen-source generator.
@@ -69,12 +80,29 @@ helper cannot hide behind a matching facade-file hash. Its current case IDs must
 the registered native cohort exactly.
 
 The audit emits `report.json`, `counts-by-kind.tsv`, `mapping.json`, `source-files.json`
-and `review-sample-50.json`, plus suggested routing in `open-by-owner.tsv`.
-The desk remains the authority for assigning work. The sample orders closed IDs by SHA256 of the frozen inventory
-fingerprint, a separator and the ID, taking the first 50. Its seed is recorded for reproduction.
+and `review-sample-200.json`, plus suggested routing in `open-by-owner.tsv`.
+It retains `review-sample-50.json` for the historical N5 packet.
+The desk remains the authority for assigning work. D13's final sample orders closed IDs
+by SHA256 of the frozen inventory fingerprint, a separator and the ID, taking the first 200.
+Its seed is recorded for reproduction. One failed sampled row reopens its whole kind.
+Kind review history is append-only in `docs/feature-ledger-kind-reviews.json`; a REOPENED
+kind is excluded from closure and cannot be silently reclosed by another import.
+An independent ACCEPTED verdict can release that block after the corrected check is reviewed.
 An audit introduces no current timestamp, so identical inputs produce byte-identical reports.
 Source-file movement categories describe physical file locations only. Per-row implementation
 records identify command/view-model replacements when the old file still exists as a wrapper.
+
+`LedgerDeclarationComparison.Compare` requires a unique named element, the same local type
+and exactly equal explicit property value. Markup expressions, missing or ambiguous anchors,
+and operation facts stay unverified. Its logical-module boundary prevents borrowing copy
+from an unrelated view. A declaration receipt does not establish reachability or a handler.
+
+`LedgerMemberFactComparison.Compare` supports C# literals inside a unique containing member.
+It requires exact literal syntax/multiplicity and identical complete member tokens after
+removing whitespace/comments. Explicitly reviewed `MemberMapping` values can identify a
+relocated owner/file. Changed member bodies, ambiguous tokens/destinations and unsupported
+syntax remain unverified. It is a declaration comparison, not a runtime result calculation.
+Focused tests cover wrong-member borrowing, changed branches and changed multiplicity.
 
 The N5 first pass executes synthetic project write/read, native ZIP and quant-column checks,
 source discovery, descriptor/cutoff checks and refusal paths. Each closed row has its own

@@ -11,7 +11,7 @@ namespace FamilyQuant;
 public sealed partial class CurationQuantitationViewModel : ScreenViewModel
 {
     public FamilyClusterFile Document { get; }
-    private string summary = "No full XIC computed for this project yet.";
+    private string summary = "No full XIC is attached to these families.";
     private int basisIndex;
     public SharedPeptidePolicy SharedPolicy { get; set; } = SharedPeptidePolicy.FamilyUnique;
     public int BasisIndex { get => basisIndex; set { basisIndex = value; Changed(); } }
@@ -26,6 +26,7 @@ public sealed partial class CurationQuantitationViewModel : ScreenViewModel
     {
         Changed(nameof(HasFullXic)); Changed(nameof(IsPending)); Changed(nameof(CanUseTic)); Changed(nameof(TicHelp));
         Changed(nameof(BasisIndex)); Changed(nameof(FullXicFamilies));
+        NotifyPresentationState();
     }
     private void PublishChanged() { NotifyState(); Refreshed?.Invoke(this, EventArgs.Empty); }
 
@@ -230,6 +231,7 @@ public sealed partial class CurationQuantitationViewModel : ScreenViewModel
         fullXicTicRefusal = null;
         fullXicProteinFingerprint = null;
         fullXicPending = false;
+        fullXicError = null;
     }
 
     private void ApplyFullXic(FullXicPrepared? prepared, string? error, int generation)
@@ -237,6 +239,7 @@ public sealed partial class CurationQuantitationViewModel : ScreenViewModel
         if (generation != fullXicGeneration) return;
 
         fullXicPending = false;
+        fullXicError = error;
         if (prepared != null)
         {
             fullXicPeptides = prepared.Peptides;
@@ -295,10 +298,8 @@ public sealed partial class CurationQuantitationViewModel : ScreenViewModel
             fullXicResult = null;
             fullXicAttribution = null;
             fullXicGrouping = null;
-            if (!fullXicPending
-                && !Summary.StartsWith("The full-XIC quantitation could not", StringComparison.Ordinal))
-                Summary = "No full XIC computed for this project yet: run File Â· Compute / " +
-                    "update full XIC to fill the Full XIC share column.";
+            if (!fullXicPending && !HasFullXicError)
+                Summary = "No full XIC is attached. Open Quantify to compute it for the current families.";
             return;
         }
 
