@@ -42,8 +42,8 @@ internal static partial class FeatureLedgerEvidence
             if (groups.Length > 0 && !Declared(groups, packet.GroupRulingSha256))
                 throw new InvalidDataException("Ruling group ruling is not a byte-pinned execution artifact.");
             var lines = File.ReadAllLines(rules).Where(line => !string.IsNullOrWhiteSpace(line)).ToArray();
-            if (lines.Length != 3 || !Enumerable.Range(1, 3).All(number => lines[number - 1].StartsWith("Rule " + number + ", Paulo 2026-11-02:", StringComparison.Ordinal)))
-                throw new InvalidDataException("The recorded three Paulo rules are required.");
+            if (lines.Length != 4 || !Enumerable.Range(1, 4).All(number => lines[number - 1].StartsWith("Rule " + number + ", Paulo 2026-11-02:", StringComparison.Ordinal)))
+                throw new InvalidDataException("The four recorded Paulo rules are required.");
             context = new(packet, LedgerPauloRulings.ReadInputs(tsv), lines, LedgerPauloRulings.ReadFactChecks(facts),
                 File.Exists(LedgerPauloRulings.FactChecksPath) ? LedgerPauloRulings.ReadFactChecks(LedgerPauloRulings.FactChecksPath) : new(StringComparer.Ordinal),
                 groups.Length > 0 ? LedgerPauloRulings.ReadGroupRulings(groups) : new(StringComparer.Ordinal));
