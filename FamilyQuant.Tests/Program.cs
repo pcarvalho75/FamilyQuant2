@@ -76,6 +76,7 @@ namespace FamilyQuant.Tests
             BusyOperationTests(workDir);
             ShellDialogTests(workDir);
             ResultsViewModelTests();
+            ResultsPreservationTests(Path.Combine(workDir, "results-preservation"));
             DeNovoViewModelTests(workDir);
             HomologyResultsTests(workDir);
             Section("Database parsing and the decoy tag");

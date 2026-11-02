@@ -105,6 +105,8 @@ Invoke each flag with `& $testExe <flag>` after building. Dispatch and arity are
 | `--test-curation-view` | Persistent table, accession/full identifier, hidden defaults and native annotation edit/Undo |
 | `--test-curation-layout` | Retained chrome, tooltips and ancestor-clipping regression |
 | `--test-evidence-coverage-ui [output-dir]` | Recorded query-residue coverage, missing legacy facts, bounded display and native rule line |
+| `--prove-results-interactions <fresh-output> <date-timestamp>` | Native Results controls, displaced handlers, deterministic exports and observation receipts |
+| `--prove-results-members <frozen-root> <fresh-output> <date-timestamp>` | Shared scoped member comparison for assigned Results and quantitation declarations; changed members stay open |
 | `--test-quantitation-panel [output-dir]` | Full XIC first, conditional source options, retained selectors and both-theme native captures |
 | `--test-curation-quantitation` | Full-XIC column, denominator changes, shared policy and unavailable-TIC fallback |
 | `--test-curation-operations` | Shared host queue/cancel paths, staged PatternLab publication, stale membership, browse preferences and headless refusal |
