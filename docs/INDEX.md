@@ -11,17 +11,21 @@ This is the navigation index for the current checkout. The roadmap owns unfinish
 | [Core operations](CORE-OPERATIONS.md) | Progress, cancellation, outcomes and atomic publication |
 | [App operations](APP-OPERATIONS.md) | Busy host, overlay and publication adapters |
 | [Shell dialogs](SHELL-DIALOGS.md) | Headless messages, browse preferences and protected C1 adoption |
+| [Quantitation stages](QUANTITATION-PIPELINE.md) | Full-XIC stage contracts, second-pass residual seam and focused parity checker |
 | [Clustering refactor](CLUSTERING-REFACTOR.md) | Result contracts and bounded frozen/current comparison |
 | [Dependencies](DEPENDENCIES.md) | Package decisions, cache compatibility and real-file opening checks |
+| [USEARCH provenance](USEARCH-PROVENANCE.md) | Pinned author artifact, license and full assignment parity |
 | [Test commands](TEST-COMMANDS.md) | Feature-owned command tables and adding a flag without editing Main |
 | [Identity study](IDENTITY-SEARCH-STUDY.md) | Why Scan and Divide remain separate, exact measured scope |
 | [Identity/deployment](N1-IDENTITY.md) | Separate application identity and the installed-profile check still owned by Paulo |
 | [Science gate](SCIENCE-GATE.md) | Recorded evidence-rule comparison, verdicts and limitations |
 | [Task discovery](EVIDENCE-TASK.md) | Header-derived taxonomy, functional keyword proposal and confirmed recipe contract |
+| [Study ownership](X9-STUDIES.md) | Small X9 move and retained screen dependencies |
 | [H1 findings](housekeeping/H1-NOTES.md) | Behavior decisions, protected work, ledger migration and remaining reuse scope |
 | [Vision](vision/VISION.md) | Fable's study: the family world proposal behind workstream W8, with the desk's corrections |
 | [Code map](vision/CODE-MAP.md) | How a FASTA and a RAW file become a family number, and what that read did not cover |
 | [Feature ledger](FEATURE-LEDGER.md) | Frozen preservation contract, dispositions and acceptance state |
+| [Feature evidence](FEATURE-EVIDENCE.md) | Per-observation receipts, native proof runner, audit and review sample |
 | [Ledger scan](feature-ledger-scan.json) | Exact frozen observations and source hashes |
 | [Roadmap](ROADMAP.md) | Current work and acceptance gates; orchestrator owned |
 | [Roadmap archive](ROADMAP-archive.md) | Historical step records; orchestrator owned |
@@ -67,10 +71,12 @@ Invoke each flag with `& $testExe <flag>` after building. Dispatch and arity are
 |---|---|
 | `--test-core-boundary` | Core/App ownership, references and resource contract |
 | `--test-dependencies` | Cache compatibility, package removal and shared numeric control contracts |
+| `--test-usearch-binary [published-Core-assembly]` | Pinned USEARCH bytes in the checkout, running Core and optional publish payload |
 | `--test-dispatch` | Flag inventory, routing, precedence, argument forwarding and merge guards |
 | `--list-test-commands` | Deterministic command table; executes no test or scientific handler |
 | `--test-document` | Document round trip, scoring and denominator attribution fixtures |
 | `--test-evidence-task` | File-derived taxonomy, keyword counts, confirmation and recipe replay fixtures |
+| `--test-quantitation-stages` | Prepared-peptide assignments, cross-side suppression, residual calibration, rollup and deterministic CSV |
 | `--test-inputs` | Real-data argument-selection contract, without choosing Desktop fallbacks |
 | `--test-operations` | Core outcomes, progress, cancellation and the owned native-child fixture |
 | `--test-busy` | App operation host, running-command cancellation, prior file bytes and guarded publication |
@@ -86,9 +92,12 @@ Invoke each flag with `& $testExe <flag>` after building. Dispatch and arity are
 | `--test-curation-layout` | Retained chrome, tooltips and ancestor-clipping regression |
 | `--test-curation-quantitation` | Full-XIC column, denominator changes, shared policy and unavailable-TIC fallback |
 | `--test-architecture-group-split [output-dir]` | Native per-key split choices, retained bulk choice, unsplit members staying together, exact recipe replay and optional synthetic captures |
+| `--test-report-study-boundary` | Report-only operation ownership, retained Core models and screen dependencies |
+| `--report-study-snapshot <new-output-dir>` | Six native synthetic text/PNG fixtures for source-move parity |
 | `--shell-checks` | Shell navigation, saving, preferences, Build/Quantify integration and secondary views |
 | `--feature-ledger-check` | Inventory, row coverage, dispositions and guard regressions |
 | `--feature-ledger-release-check` | Same inventory with all retained rows required VERIFIED; OPEN rows intentionally fail |
+| `--test-ledger-evidence` | Adversarial receipt, source/artifact hash, assertion and render checks |
 
 ## Screens and UI metadata
 
@@ -125,6 +134,9 @@ Companion options for `--screens` are `--screen-fcf <input.fcf>`, `--screen-proj
 | `--golden-verify <stored.fqproj> <frozen-snapshot-dir> <existing-output-dir>` | Verify source and compare existing exports without generating a new pack |
 | `--golden-record <stored.fqproj> <empty-snapshot-dir> <output-dir>` | Snapshot-owner maintenance only, through [ReferenceGoldenHost](../FamilyQuant.Tests/ReferenceGoldenHost/ReferenceGoldenHost.csproj) with frozen assemblies; current App is rejected and existing snapshots are never replaced |
 | `--feature-ledger-generate <frozen-source-root> <scratch-root>` | [FeatureLedger.cs](../FamilyQuant.Tests/FeatureLedger.cs); writes `scratch-root/docs`, never scan moving product source |
+| `--feature-ledger-prove <fresh-output> <date-timestamp>` | Native observation-specific storage/source proofs and register, no ledger edit |
+| `--feature-ledger-evidence-import <register> <output> [--replace-existing]` | Validate receipts, preserve an explicitly replaced register and apply evidenced states |
+| `--feature-ledger-evidence <output>` | Read-only counts by kind, source mappings and reproducible 50-row sample |
 | `--word-grouping-snapshot <input.fcf-or-fqproj> <output.txt>` | [WordGroupingSnapshot.cs](../FamilyQuant.Tests/WordGroupingSnapshot.cs), also linked into frozen host |
 | `--chart-export-snapshot <output-dir>` | [ChartExportSnapshot.cs](../FamilyQuant.Tests/ChartExportSnapshot.cs), synthetic chart parity fixtures |
 | `--clustering-snapshot <input.fasta> <output.tsv> <integer-identity> <fast-or-exhaustive>` | [ClusteringSnapshot.cs](../FamilyQuant.Tests/ClusteringSnapshot.cs) |
@@ -196,7 +208,12 @@ The guarded `build_scientific_deck.mjs` is a historical, deprecated producer wit
 
 ## Generated-ledger status
 
-The committed scan is a frozen-source inventory, not a scan of current view names. It contains 5,756 observations from 104 source files: 2,009 KEEP, 3,451 IMPROVE and 296 Paulo-approved DROP. All 5,460 retained rows remain OPEN; the approved retirements use APPROVED_DROP. Source moves and command-backed replacements require a mapping and reviewed execution evidence before VERIFIED. A missing old handler name is not proof that the function is lost.
+The committed scan is a frozen-source inventory, not a scan of current view names.
+It contains 5,756 observations from 104 source files: 2,009 KEEP, 3,451 IMPROVE
+and 296 Paulo-approved DROP. N5's first native proof pass proposes 72 VERIFIED retained
+rows and leaves 5,388 OPEN; the retirements remain APPROVED_DROP. The proposal still
+requires the independent review sample and merge gate. The evidence audit reports the
+current counts and rejects stale receipts. A missing old handler name is not proof of loss.
 
 Regenerate into scratch with the published command and compare both ledger files against the checkout and the Git blobs separately. On the audited Windows checkout both regenerated files are byte-identical to the working files; the scan JSON differs from its LF Git blob only by CRLF newlines, and normalized content is identical. The Markdown is also byte-identical to its Git blob. Never overwrite acceptance evidence or scan moving source to make the counts pass. The release check intentionally fails while retained rows remain OPEN.
 

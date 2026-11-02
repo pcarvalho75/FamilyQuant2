@@ -203,7 +203,7 @@ The merged Core implementation is under `FamilyQuant.Core/Evidence/`. Its input 
 
 ## Gotchas
 
-- The USEARCH executable is **embedded** as a resource in `MyResources.resx` and extracted on first use to `%LOCALAPPDATA%\FamilyQuant2\usearch11.0.667_win32.exe`, deliberately not `%TEMP%`, which can be cleaned mid-session. It is re-extracted whenever it is missing or its size does not match the embedded copy (antivirus quarantine, truncated write). `FAMILYQUANT_USEARCH` overrides the whole mechanism. See `USearchTools.GetUSearchPath`.
+- The USEARCH executable is **embedded** as a resource in `MyResources.resx` and extracted on first use to `%LOCALAPPDATA%\FamilyQuant2\usearch11.0.667_win32_<SHA256>.exe`, deliberately not `%TEMP%`, which can be cleaned mid-session. It is re-extracted whenever it is missing or its size or SHA256 differs from the embedded copy (antivirus quarantine, truncated write). `FAMILYQUANT_USEARCH` overrides the whole mechanism. See `USearchTools.GetUSearchPath`.
 - USEARCH scratch files (`.fasta`, `.aln`, `.uc`) go to `%TEMP%\FamilyQuant2\` with GUID-stamped names so a leftover file from a crashed run cannot be read back as a stale result. The process working directory is **not** mutated.
 - PLP files must be exported at **peptide level** (not protein) for quant to resolve.
 - `<InvariantGlobalization>true</InvariantGlobalization>` makes LiteDB throw `CultureNotFoundException` when it **opens** a database: LiteDB v5 stores an LCID in the file header and rebuilds a `CultureInfo` from it, and under invariant globalization that lookup throws. This project references LiteDB, so leave the setting at its default (`false`). The symptom is a database that will not open at all, not one that sorts oddly.
