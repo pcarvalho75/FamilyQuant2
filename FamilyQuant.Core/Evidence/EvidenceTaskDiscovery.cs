@@ -190,8 +190,10 @@ public static class EvidenceTaskDiscovery
         string identifier = protein.SequenceIdentifier ?? string.Empty;
         MatchCollection matches = Organism.Matches(protein.Description ?? string.Empty);
         if (!(identifier.StartsWith("sp|", StringComparison.Ordinal) || identifier.StartsWith("tr|", StringComparison.Ordinal))
-            || !FamilyNaming.IsUniProtAccession(FamilyNaming.Accession(identifier)) || matches.Count != 1
-            || !int.TryParse(matches[0].Groups["id"].Value, NumberStyles.None, CultureInfo.InvariantCulture, out int id))
+            || !FamilyNaming.IsUniProtAccession(FamilyNaming.Accession(identifier)) || matches.Count == 0
+            || !int.TryParse(matches[0].Groups["id"].Value, NumberStyles.None, CultureInfo.InvariantCulture, out int id)
+            || matches.Cast<Match>().Any(match => !int.TryParse(match.Groups["id"].Value, NumberStyles.None,
+                CultureInfo.InvariantCulture, out int other) || other != id))
             throw new InvalidDataException("Cannot read a UniProt OS= and OX= header for '" + identifier + "'. No task was guessed; use UniProt headers or choose the scope manually.");
         return new EvidenceTaxon { TaxonId = id, ScientificName = matches[0].Groups["name"].Value.Trim() };
     }
