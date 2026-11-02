@@ -29,7 +29,7 @@ This is the navigation index for the current checkout. The roadmap owns unfinish
 | [Appearance](../FamilyQuant/Themes/README.md) | Theme/token behavior and historical migration context |
 | [Screen rules](../FamilyQuant/Themes/STYLE-GUIDE.md) | Shared typography, tables and action roles |
 | [Brand assets](../FamilyQuant/Assets/Brand/README.md) | Geometry, generated assets and regeneration command |
-| [License](../LICENSE.txt) | Existing license text; unresolved identity placeholders require the owner |
+| [License](../LICENSE.txt) | All rights reserved, Fiocruz |
 
 Worker mission instructions and consult history are intentionally outside this maintained index.
 
@@ -67,6 +67,7 @@ Invoke each flag with `& $testExe <flag>` after building. Dispatch and arity are
 | `--test-clustering-results` | Typed clustering/redundancy results and native synthetic fixtures |
 | `--test-identity-study` | Probe parser and grid-versus-probe interpretation |
 | `--test-results` | Results view-model readiness and export choices |
+| `--test-ui-icons` | No emoji in product source, escaped/entity regressions and Fluent glyphs in both themes |
 | `--shell-checks` | Shell navigation, saving, preferences, Build/Quantify integration and secondary views |
 | `--feature-ledger-check` | Inventory, row coverage, dispositions and guard regressions |
 | `--feature-ledger-release-check` | Same inventory with all retained rows required VERIFIED; OPEN rows intentionally fail |
