@@ -10,8 +10,11 @@ namespace FamilyQuant.Tests;
 internal static partial class Program
 {
     private const string SecondaryWordingHeader = "lane\trow_id\told_text\tnew_text\treason";
-    private static string SecondaryWordingCell(string value) => value.Replace("\r", "", StringComparison.Ordinal)
-        .Replace("\n", "\\n", StringComparison.Ordinal).Replace("\t", "\\t", StringComparison.Ordinal);
+    private static string SecondaryWordingCell(string value)
+    {
+        string cell = value.Replace("\r", "", StringComparison.Ordinal).Replace("\n", "\\n", StringComparison.Ordinal).Replace("\t", "\\t", StringComparison.Ordinal);
+        return cell.StartsWith('"') ? "\"" + cell.Replace("\"", "\"\"", StringComparison.Ordinal) + "\"" : cell;
+    }
 
     // Decision list only. This never creates a proof, changes a ledger state or judges equivalence.
     private static void SecondaryWording(string output, string name, string source, IReadOnlyDictionary<int, string> values, bool includeUnchanged = false, bool tooltips = false)
