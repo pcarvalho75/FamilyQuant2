@@ -94,6 +94,7 @@ namespace FamilyQuant.Tests
                     BitConverter.DoubleToInt64Bits(detection.DetectedPeptideLikeArea));
             }
             NumericControlTests();
+            UseSearchBinaryTests();
         }
 
         private static void NumericControlTests()

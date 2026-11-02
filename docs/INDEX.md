@@ -13,6 +13,7 @@ This is the navigation index for the current checkout. The roadmap owns unfinish
 | [Shell dialogs](SHELL-DIALOGS.md) | Headless messages, browse preferences and protected C1 adoption |
 | [Clustering refactor](CLUSTERING-REFACTOR.md) | Result contracts and bounded frozen/current comparison |
 | [Dependencies](DEPENDENCIES.md) | Package decisions, cache compatibility and real-file opening checks |
+| [USEARCH provenance](USEARCH-PROVENANCE.md) | Pinned author artifact, license and full assignment parity |
 | [Test commands](TEST-COMMANDS.md) | Feature-owned command tables and adding a flag without editing Main |
 | [Identity study](IDENTITY-SEARCH-STUDY.md) | Why Scan and Divide remain separate, exact measured scope |
 | [Identity/deployment](N1-IDENTITY.md) | Separate application identity and the installed-profile check still owned by Paulo |
@@ -67,6 +68,7 @@ Invoke each flag with `& $testExe <flag>` after building. Dispatch and arity are
 |---|---|
 | `--test-core-boundary` | Core/App ownership, references and resource contract |
 | `--test-dependencies` | Cache compatibility, package removal and shared numeric control contracts |
+| `--test-usearch-binary [published-Core-assembly]` | Pinned USEARCH bytes in the checkout, running Core and optional publish payload |
 | `--test-dispatch` | Flag inventory, routing, precedence, argument forwarding and merge guards |
 | `--list-test-commands` | Deterministic command table; executes no test or scientific handler |
 | `--test-document` | Document round trip, scoring and denominator attribution fixtures |
