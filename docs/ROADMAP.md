@@ -162,6 +162,8 @@ Paulo agreed these at the restart, 2026-11-01.
 
 | ID | Question | Taken |
 |---|---|---|
+| D14 | Should identity clustering change its coverage rule, merge on shared peptides, or use a reviewed-family veto? | No. Clustering stays as it is, and the measurements ship as a diagnostic the user can see |
+| D15 | Does the contaminant rule look past `Reverse_`? | Yes, one exact unwrap, then the database prefix in exact case. Target classes do not change; golden stays 4/0/0 |
 | D13 | How the ledger is proven | By kind of row, one executed check per kind, plus a reviewer's random sample, instead of hand work per row |
 | D11 | Minimum tag length for the family world | 9 residues, and only families in scope can be credited. Paulo: the program must show this to the user |
 | D12 | How the 70% coverage gate is counted | Query letters actually aligned, so gaps earn no credit. Paulo: the program must show this to the user |
