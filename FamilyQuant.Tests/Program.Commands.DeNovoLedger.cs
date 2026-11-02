@@ -32,7 +32,7 @@ internal static partial class Program
     {
         if (args.Length < 3) throw new ArgumentException("Supply a native proof command and its arguments.");
         int outputIndex = args[1] switch { "--prove-denovo-results-export" => 4, "--prove-denovo-commands" => 5,
-            "--prove-threeway" => 4,
+            "--prove-threeway" => 4, "--ledger-input-file-contracts" => 4,
             "--denovo-command-probe" => 4, "--native-dialog-probe" => 2, _ => throw new ArgumentException("Unsupported native proof command.") };
         if (args.Length <= outputIndex) throw new ArgumentException("Missing native proof output.");
         string logPath = System.IO.Path.GetFullPath(args[outputIndex]) + ".isolated-process.log";
@@ -50,6 +50,7 @@ internal static partial class Program
                 }), true);
             var command = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Skip(args, 1));
             return args[1] switch { "--prove-denovo-results-export" => DeNovoResultsExportProof(command),
+                "--ledger-input-file-contracts" => InputFileCommand(command),
                 "--prove-threeway" => ThreeWayLedgerProof(command),
                 "--prove-denovo-commands" => DeNovoCommandEvidence(command), "--denovo-command-probe" => DeNovoCommandProbe(command),
                 _ => NativeDialogProbe(command) };
