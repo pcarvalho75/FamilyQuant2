@@ -5,64 +5,64 @@
   "runs": [
     {
       "id": "shell-declarations",
-      "command": "C:\\FamilyQuant-wt2\\results\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --ledger-shell-compare D:/FamilyQuant-data/out-shell/N3/source D:/FamilyQuant-data/out-results/C13-tips/shell-receipts \u00222026-11-02 03:20:36 -0800\u0022",
-      "executedAt": "2026-11-02 03:20:36 -0800",
-      "commit": "b128f44bfe526c9216f298227d97d4208ad3991f",
+      "command": "D:\\FamilyQuant-wt\\look\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --ledger-shell-compare D:/FamilyQuant-data/out-shell/N3/source D:/FamilyQuant-data/out-look/C13/refreshed-shell-c1 \u00222026-11-02 05:09:08 -0800\u0022",
+      "executedAt": "2026-11-02 05:09:08 -0800",
+      "commit": "734a4b3e1bb6913e2d9904c9de6e1fc910c0fa3e",
       "artifacts": [
         {
-          "path": "D:\\FamilyQuant-data\\out-results\\C13-tips\\shell-receipts\\comparisons.log",
-          "sha256": "2FF8B9E04CF66B5855861CF228DDA5CF69583AD587CECE918399D02DDB002D36"
+          "path": "D:\\FamilyQuant-data\\out-look\\C13\\refreshed-shell-c1\\comparisons.log",
+          "sha256": "B147F7E1164DDC43FCFF244B88DC4E9AFA9A4CD1911878C469A1F9A7FDE5B154"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-results\\C13-tips\\shell-receipts\\comparisons.json",
-          "sha256": "9442E06F66CD9CA64E01C4C85795410250C55EDBB177FE8E2E35794A41DDF0B9"
+          "path": "D:\\FamilyQuant-data\\out-look\\C13\\refreshed-shell-c1\\comparisons.json",
+          "sha256": "E22D9957633F8EF5F70674773FEBEA5758411FABED7092F926C3F0D377D28E56"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-results\\C13-tips\\shell-receipts\\curation-runtime.json",
+          "path": "D:\\FamilyQuant-data\\out-look\\C13\\refreshed-shell-c1\\curation-runtime.json",
           "sha256": "4EF1BCE9EAFF5985013CD15A6B1CBFA29C34D7D42702007E522840A20879D128"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-results\\C13-tips\\shell-receipts\\executed\\Program.ShellLedgerReceipts.cs",
+          "path": "D:\\FamilyQuant-data\\out-look\\C13\\refreshed-shell-c1\\executed\\Program.ShellLedgerReceipts.cs",
           "sha256": "6C0E1250A4A019C4937A0CABEF9BA9078213B35E597781407B767279490D3EF3"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-results\\C13-tips\\shell-receipts\\executed\\Program.ShellLedgerComparison.cs",
+          "path": "D:\\FamilyQuant-data\\out-look\\C13\\refreshed-shell-c1\\executed\\Program.ShellLedgerComparison.cs",
           "sha256": "869FC668090431A23D08E8ED109B95BC937D9A6B94DE63E11E86672852649FEB"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-results\\C13-tips\\shell-receipts\\executed\\Program.Commands.LedgerDeclarations.cs",
+          "path": "D:\\FamilyQuant-data\\out-look\\C13\\refreshed-shell-c1\\executed\\Program.Commands.LedgerDeclarations.cs",
           "sha256": "5F18F4DD7E56E601368051AAD44866736DE2FA60C17A5550F4A330C98DABB3D4"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-results\\C13-tips\\shell-receipts\\executed\\Program.CurationScreen.cs",
+          "path": "D:\\FamilyQuant-data\\out-look\\C13\\refreshed-shell-c1\\executed\\Program.CurationScreen.cs",
           "sha256": "42C2CC3D48F2E59DC8E48D06915FE933C6A025F48972FDC3FB0458A0284FA2FF"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-results\\C13-tips\\shell-receipts\\executed\\LedgerDeclarationComparison.cs",
+          "path": "D:\\FamilyQuant-data\\out-look\\C13\\refreshed-shell-c1\\executed\\LedgerDeclarationComparison.cs",
           "sha256": "78EC993565740269D572410A84584AF1D96488C1AE81F2455B1D9AA2D94BB4C3"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-results\\C13-tips\\shell-receipts\\executed\\LedgerMemberFactComparison.cs",
-          "sha256": "ECC25B1F5FE7A455C64C1C5ED21730BCAB6E7C1A726297E458957F70EC52FF6E"
+          "path": "D:\\FamilyQuant-data\\out-look\\C13\\refreshed-shell-c1\\executed\\LedgerMemberFactComparison.cs",
+          "sha256": "83C53F2CC3E962DB92855AF87E4D5E1508ED907B62BDAD443D3B0861BD95071B"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-results\\C13-tips\\shell-receipts\\executed\\FeatureLedgerEvidence.Reporting.cs",
+          "path": "D:\\FamilyQuant-data\\out-look\\C13\\refreshed-shell-c1\\executed\\FeatureLedgerEvidence.Reporting.cs",
           "sha256": "8633DCBB14E8DBF1746A1FD771AD4E9404900EB68BA46690A31EFC8DEDFA247B"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-results\\C13-tips\\shell-receipts\\executed\\FamilyQuant.Tests.dll",
-          "sha256": "D0072B1AF350DD0A49E700C7AE83C4241DC2FA48F4A45F36712C2E84D1184044"
+          "path": "D:\\FamilyQuant-data\\out-look\\C13\\refreshed-shell-c1\\executed\\FamilyQuant.Tests.dll",
+          "sha256": "D9795C3AB4394EB68676CE12029D0F2FAB6477DF2A23B3981A48A7AB3B5EB08B"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-results\\C13-tips\\shell-receipts\\executed\\FamilyQuant2.dll",
-          "sha256": "E23ABD53A1DDAD83415B88B5282E01F7A8A9C04B5801D8C0D049AE5258CB294A"
+          "path": "D:\\FamilyQuant-data\\out-look\\C13\\refreshed-shell-c1\\executed\\FamilyQuant2.dll",
+          "sha256": "2946D07DAEC9E466CFE262C907258C97D98327D3F3026C3FF91444027A932360"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-results\\C13-tips\\shell-receipts\\executed\\FamilyQuant.Core.dll",
-          "sha256": "A5CD72B15C7E967DDC768052FC41B8E8DE1CBF79772F605168949E855CFCD12A"
+          "path": "D:\\FamilyQuant-data\\out-look\\C13\\refreshed-shell-c1\\executed\\FamilyQuant.Core.dll",
+          "sha256": "EFA84EBA9AFB36500055417C767667F519F6E2E487C2936FFAC6BEE4BE8D94CE"
         }
       ],
-      "workingDirectory": "C:\\FamilyQuant-wt2\\results"
+      "workingDirectory": "D:\\FamilyQuant-wt\\look"
     }
   ],
   "rows": [
@@ -380,7 +380,7 @@
         {
           "path": "FamilyQuant/MainWindow.xaml",
           "symbol": "FamilyQuant.MainWindow.MenuItemSaveFCF.IsEnabled",
-          "sha256": "8457FF5355E95C48D38D280698F2F7A526F3C1F163198330855DBC20698F614C"
+          "sha256": "422DE48434233AA62B67BF4F37326A8F66C6C2771A45A828E40318E09A1806C5"
         }
       ],
       "proofs": [],
@@ -838,17 +838,11 @@
     },
     {
       "observationId": "FQ15-12DC0FDFD4F5",
-      "implementation": [
-        {
-          "path": "FamilyQuant.Core/ReportView.cs",
-          "symbol": "FamilyQuant.ReportView::public static string StatusLine ( NormalizationMode ? mode , SharedPeptidePolicy policy , int quantifiedFamilies , int familiesInFile )",
-          "sha256": "C8F494E5DD6B2BC1559C5A420A11A6C16FE8A2D74512C502783E6D424AF60985"
-        }
-      ],
+      "implementation": [],
       "proofs": [],
-      "note": "Declaration only; no reachability or handler-execution claim.",
-      "kindReceiptId": "shell-decl-code-fact",
-      "compared": "FamilyQuant/ReportView.cs:47 \u0022stay empty until a PatternLab project is loaded in Layer 2\u0022 -\u003E FamilyQuant.Core/ReportView.cs: FamilyQuant.ReportView::public static string StatusLine ( NormalizationMode ? mode , SharedPeptidePolicy policy , int quantifiedFamilies , int familiesInFile ) = \u0022stay empty until a PatternLab project is loaded in Layer 2\u0022; complete member tokens SHA256=44028B63C944F007A5FD9F57EE3D43B37EFD105914CFE7FB349DFA1499BC84E6"
+      "note": "The exact literal multiplicity within the containing member changed.",
+      "kindReceiptId": null,
+      "compared": null
     },
     {
       "observationId": "FQ15-13682B7228FE",
@@ -910,7 +904,7 @@
       "observationId": "FQ15-158C444BB7FC",
       "implementation": [],
       "proofs": [],
-      "note": "The frozen line does not identify exactly one recorded literal token.",
+      "note": "The exact literal multiplicity within the containing member changed.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -968,7 +962,7 @@
         {
           "path": "FamilyQuant.Core/ReportView.cs",
           "symbol": "FamilyQuant.ReportView::public static string FamilyCounter ( int visible , int inFile )",
-          "sha256": "C8F494E5DD6B2BC1559C5A420A11A6C16FE8A2D74512C502783E6D424AF60985"
+          "sha256": "6DAC5AA56BD69B6BBFE835877140448EC211ADE46C6FBA0F9E018B4BAC3541B9"
         }
       ],
       "proofs": [],
@@ -1014,7 +1008,7 @@
         {
           "path": "FamilyQuant.Core/ReportView.cs",
           "symbol": "FamilyQuant.ReportView::public static List \u003C FastaItemExtended \u003E Sort ( IEnumerable \u003C FastaItemExtended \u003E rows , string ? sortMemberPath , bool descending )",
-          "sha256": "C8F494E5DD6B2BC1559C5A420A11A6C16FE8A2D74512C502783E6D424AF60985"
+          "sha256": "6DAC5AA56BD69B6BBFE835877140448EC211ADE46C6FBA0F9E018B4BAC3541B9"
         }
       ],
       "proofs": [],
@@ -1374,7 +1368,7 @@
         {
           "path": "FamilyQuant.Core/ReportView.cs",
           "symbol": "FamilyQuant.ReportView::public static List \u003C FastaItemExtended \u003E Sort ( IEnumerable \u003C FastaItemExtended \u003E rows , string ? sortMemberPath , bool descending )",
-          "sha256": "C8F494E5DD6B2BC1559C5A420A11A6C16FE8A2D74512C502783E6D424AF60985"
+          "sha256": "6DAC5AA56BD69B6BBFE835877140448EC211ADE46C6FBA0F9E018B4BAC3541B9"
         }
       ],
       "proofs": [],
@@ -2282,7 +2276,7 @@
       "observationId": "FQ15-3AF889D02C38",
       "implementation": [],
       "proofs": [],
-      "note": "The containing member declaration or body changed; retained text alone is insufficient.",
+      "note": "The exact literal multiplicity within the containing member changed.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -3108,7 +3102,7 @@
         {
           "path": "FamilyQuant.Core/ReportView.cs",
           "symbol": "FamilyQuant.ReportView::public static string LayerState ( bool ready , string ? blockedBecause )",
-          "sha256": "C8F494E5DD6B2BC1559C5A420A11A6C16FE8A2D74512C502783E6D424AF60985"
+          "sha256": "6DAC5AA56BD69B6BBFE835877140448EC211ADE46C6FBA0F9E018B4BAC3541B9"
         }
       ],
       "proofs": [],
@@ -3150,17 +3144,11 @@
     },
     {
       "observationId": "FQ15-52B123DB1542",
-      "implementation": [
-        {
-          "path": "FamilyQuant.Core/ReportView.cs",
-          "symbol": "FamilyQuant.ReportView::public static string StatusLine ( NormalizationMode ? mode , SharedPeptidePolicy policy , int quantifiedFamilies , int familiesInFile )",
-          "sha256": "C8F494E5DD6B2BC1559C5A420A11A6C16FE8A2D74512C502783E6D424AF60985"
-        }
-      ],
+      "implementation": [],
       "proofs": [],
-      "note": "Declaration only; no reachability or handler-execution claim.",
-      "kindReceiptId": "shell-decl-code-fact",
-      "compared": "FamilyQuant/ReportView.cs:53 \u0022N0\u0022 -\u003E FamilyQuant.Core/ReportView.cs: FamilyQuant.ReportView::public static string StatusLine ( NormalizationMode ? mode , SharedPeptidePolicy policy , int quantifiedFamilies , int familiesInFile ) = \u0022N0\u0022; complete member tokens SHA256=44028B63C944F007A5FD9F57EE3D43B37EFD105914CFE7FB349DFA1499BC84E6"
+      "note": "The containing member declaration or body changed; retained text alone is insufficient.",
+      "kindReceiptId": null,
+      "compared": null
     },
     {
       "observationId": "FQ15-52BB0C94111F",
@@ -3304,7 +3292,7 @@
         {
           "path": "FamilyQuant.Core/ReportView.cs",
           "symbol": "FamilyQuant.ReportView::public static List \u003C FastaItemExtended \u003E Sort ( IEnumerable \u003C FastaItemExtended \u003E rows , string ? sortMemberPath , bool descending )",
-          "sha256": "C8F494E5DD6B2BC1559C5A420A11A6C16FE8A2D74512C502783E6D424AF60985"
+          "sha256": "6DAC5AA56BD69B6BBFE835877140448EC211ADE46C6FBA0F9E018B4BAC3541B9"
         }
       ],
       "proofs": [],
@@ -3436,7 +3424,7 @@
         {
           "path": "FamilyQuant/MainWindow.xaml",
           "symbol": "FamilyQuant.MainWindow.MenuItemReanotateSEPro.IsEnabled",
-          "sha256": "8457FF5355E95C48D38D280698F2F7A526F3C1F163198330855DBC20698F614C"
+          "sha256": "422DE48434233AA62B67BF4F37326A8F66C6C2771A45A828E40318E09A1806C5"
         }
       ],
       "proofs": [],
@@ -3556,17 +3544,11 @@
     },
     {
       "observationId": "FQ15-5F6E6165BD39",
-      "implementation": [
-        {
-          "path": "FamilyQuant.Core/ReportView.cs",
-          "symbol": "FamilyQuant.ReportView::public static string StatusLine ( NormalizationMode ? mode , SharedPeptidePolicy policy , int quantifiedFamilies , int familiesInFile )",
-          "sha256": "C8F494E5DD6B2BC1559C5A420A11A6C16FE8A2D74512C502783E6D424AF60985"
-        }
-      ],
+      "implementation": [],
       "proofs": [],
-      "note": "Declaration only; no reachability or handler-execution claim.",
-      "kindReceiptId": "shell-decl-code-fact",
-      "compared": "FamilyQuant/ReportView.cs:50 \u0022showing: \u0022 -\u003E FamilyQuant.Core/ReportView.cs: FamilyQuant.ReportView::public static string StatusLine ( NormalizationMode ? mode , SharedPeptidePolicy policy , int quantifiedFamilies , int familiesInFile ) = \u0022showing: \u0022; complete member tokens SHA256=44028B63C944F007A5FD9F57EE3D43B37EFD105914CFE7FB349DFA1499BC84E6"
+      "note": "The containing member declaration or body changed; retained text alone is insufficient.",
+      "kindReceiptId": null,
+      "compared": null
     },
     {
       "observationId": "FQ15-5F8DD620BA18",
@@ -3684,7 +3666,7 @@
         {
           "path": "FamilyQuant.Core/ReportView.cs",
           "symbol": "FamilyQuant.ReportView::public static string LayerState ( bool ready , string ? blockedBecause )",
-          "sha256": "C8F494E5DD6B2BC1559C5A420A11A6C16FE8A2D74512C502783E6D424AF60985"
+          "sha256": "6DAC5AA56BD69B6BBFE835877140448EC211ADE46C6FBA0F9E018B4BAC3541B9"
         }
       ],
       "proofs": [],
@@ -3894,7 +3876,7 @@
         {
           "path": "FamilyQuant.Core/ReportView.cs",
           "symbol": "FamilyQuant.ReportView::public static List \u003C FastaItemExtended \u003E Sort ( IEnumerable \u003C FastaItemExtended \u003E rows , string ? sortMemberPath , bool descending )",
-          "sha256": "C8F494E5DD6B2BC1559C5A420A11A6C16FE8A2D74512C502783E6D424AF60985"
+          "sha256": "6DAC5AA56BD69B6BBFE835877140448EC211ADE46C6FBA0F9E018B4BAC3541B9"
         }
       ],
       "proofs": [],
@@ -4032,17 +4014,11 @@
     },
     {
       "observationId": "FQ15-6BFA12D05FED",
-      "implementation": [
-        {
-          "path": "FamilyQuant.Core/ReportView.cs",
-          "symbol": "FamilyQuant.ReportView::public static string StatusLine ( NormalizationMode ? mode , SharedPeptidePolicy policy , int quantifiedFamilies , int familiesInFile )",
-          "sha256": "C8F494E5DD6B2BC1559C5A420A11A6C16FE8A2D74512C502783E6D424AF60985"
-        }
-      ],
+      "implementation": [],
       "proofs": [],
-      "note": "Declaration only; no reachability or handler-execution claim.",
-      "kindReceiptId": "shell-decl-code-fact",
-      "compared": "FamilyQuant/ReportView.cs:46 \u0022showing: family clustering only \u00B7 no quantitation loaded \u00B7 the share column \u0022 -\u003E FamilyQuant.Core/ReportView.cs: FamilyQuant.ReportView::public static string StatusLine ( NormalizationMode ? mode , SharedPeptidePolicy policy , int quantifiedFamilies , int familiesInFile ) = \u0022showing: family clustering only \u00B7 no quantitation loaded \u00B7 the share column \u0022; complete member tokens SHA256=44028B63C944F007A5FD9F57EE3D43B37EFD105914CFE7FB349DFA1499BC84E6"
+      "note": "The containing member declaration or body changed; retained text alone is insufficient.",
+      "kindReceiptId": null,
+      "compared": null
     },
     {
       "observationId": "FQ15-6C233E9A1541",
@@ -4240,7 +4216,7 @@
         {
           "path": "FamilyQuant.Core/ReportView.cs",
           "symbol": "FamilyQuant.ReportView::public static List \u003C FastaItemExtended \u003E Sort ( IEnumerable \u003C FastaItemExtended \u003E rows , string ? sortMemberPath , bool descending )",
-          "sha256": "C8F494E5DD6B2BC1559C5A420A11A6C16FE8A2D74512C502783E6D424AF60985"
+          "sha256": "6DAC5AA56BD69B6BBFE835877140448EC211ADE46C6FBA0F9E018B4BAC3541B9"
         }
       ],
       "proofs": [],
@@ -4462,7 +4438,7 @@
         {
           "path": "FamilyQuant.Core/ReportView.cs",
           "symbol": "FamilyQuant.ReportView::public static List \u003C FastaItemExtended \u003E Sort ( IEnumerable \u003C FastaItemExtended \u003E rows , string ? sortMemberPath , bool descending )",
-          "sha256": "C8F494E5DD6B2BC1559C5A420A11A6C16FE8A2D74512C502783E6D424AF60985"
+          "sha256": "6DAC5AA56BD69B6BBFE835877140448EC211ADE46C6FBA0F9E018B4BAC3541B9"
         }
       ],
       "proofs": [],
@@ -4716,7 +4692,7 @@
         {
           "path": "FamilyQuant.Core/ReportView.cs",
           "symbol": "FamilyQuant.ReportView::public static List \u003C FastaItemExtended \u003E Sort ( IEnumerable \u003C FastaItemExtended \u003E rows , string ? sortMemberPath , bool descending )",
-          "sha256": "C8F494E5DD6B2BC1559C5A420A11A6C16FE8A2D74512C502783E6D424AF60985"
+          "sha256": "6DAC5AA56BD69B6BBFE835877140448EC211ADE46C6FBA0F9E018B4BAC3541B9"
         }
       ],
       "proofs": [],
@@ -5374,7 +5350,7 @@
         {
           "path": "FamilyQuant.Core/ReportView.cs",
           "symbol": "FamilyQuant.ReportView::public static string FamilyCounter ( int visible , int inFile )",
-          "sha256": "C8F494E5DD6B2BC1559C5A420A11A6C16FE8A2D74512C502783E6D424AF60985"
+          "sha256": "6DAC5AA56BD69B6BBFE835877140448EC211ADE46C6FBA0F9E018B4BAC3541B9"
         }
       ],
       "proofs": [],
@@ -5452,7 +5428,7 @@
         {
           "path": "FamilyQuant/MainWindow.xaml",
           "symbol": "FamilyQuant.MainWindow.MenuItemWhereAmI.Header",
-          "sha256": "8457FF5355E95C48D38D280698F2F7A526F3C1F163198330855DBC20698F614C"
+          "sha256": "422DE48434233AA62B67BF4F37326A8F66C6C2771A45A828E40318E09A1806C5"
         }
       ],
       "proofs": [],
@@ -5602,7 +5578,7 @@
         {
           "path": "FamilyQuant/MainWindow.xaml",
           "symbol": "FamilyQuant.MainWindow.MenuItemComputeXic.IsEnabled",
-          "sha256": "8457FF5355E95C48D38D280698F2F7A526F3C1F163198330855DBC20698F614C"
+          "sha256": "422DE48434233AA62B67BF4F37326A8F66C6C2771A45A828E40318E09A1806C5"
         }
       ],
       "proofs": [],
@@ -5696,7 +5672,7 @@
         {
           "path": "FamilyQuant.Core/ReportView.cs",
           "symbol": "FamilyQuant.ReportView::public static string FamilyCounter ( int visible , int inFile )",
-          "sha256": "C8F494E5DD6B2BC1559C5A420A11A6C16FE8A2D74512C502783E6D424AF60985"
+          "sha256": "6DAC5AA56BD69B6BBFE835877140448EC211ADE46C6FBA0F9E018B4BAC3541B9"
         }
       ],
       "proofs": [],
@@ -6470,7 +6446,7 @@
       "observationId": "FQ15-A461B04622FD",
       "implementation": [],
       "proofs": [],
-      "note": "The frozen line does not identify exactly one recorded literal token.",
+      "note": "The exact literal multiplicity within the containing member changed.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -6480,7 +6456,7 @@
         {
           "path": "FamilyQuant.Core/ReportView.cs",
           "symbol": "FamilyQuant.ReportView::public static string FamilyCounter ( int visible , int inFile )",
-          "sha256": "C8F494E5DD6B2BC1559C5A420A11A6C16FE8A2D74512C502783E6D424AF60985"
+          "sha256": "6DAC5AA56BD69B6BBFE835877140448EC211ADE46C6FBA0F9E018B4BAC3541B9"
         }
       ],
       "proofs": [],
@@ -7152,17 +7128,11 @@
     },
     {
       "observationId": "FQ15-B6D96A405C89",
-      "implementation": [
-        {
-          "path": "FamilyQuant.Core/ReportView.cs",
-          "symbol": "FamilyQuant.ReportView::public static string StatusLine ( NormalizationMode ? mode , SharedPeptidePolicy policy , int quantifiedFamilies , int familiesInFile )",
-          "sha256": "C8F494E5DD6B2BC1559C5A420A11A6C16FE8A2D74512C502783E6D424AF60985"
-        }
-      ],
+      "implementation": [],
       "proofs": [],
-      "note": "Declaration only; no reachability or handler-execution claim.",
-      "kindReceiptId": "shell-decl-code-fact",
-      "compared": "FamilyQuant/ReportView.cs:51 \u0022 \u00B7 \u0022 -\u003E FamilyQuant.Core/ReportView.cs: FamilyQuant.ReportView::public static string StatusLine ( NormalizationMode ? mode , SharedPeptidePolicy policy , int quantifiedFamilies , int familiesInFile ) = \u0022 \u00B7 \u0022; complete member tokens SHA256=44028B63C944F007A5FD9F57EE3D43B37EFD105914CFE7FB349DFA1499BC84E6"
+      "note": "The containing member declaration or body changed; retained text alone is insufficient.",
+      "kindReceiptId": null,
+      "compared": null
     },
     {
       "observationId": "FQ15-B713611FCF54",
@@ -7190,17 +7160,11 @@
     },
     {
       "observationId": "FQ15-B7EE7F99026D",
-      "implementation": [
-        {
-          "path": "FamilyQuant.Core/ReportView.cs",
-          "symbol": "FamilyQuant.ReportView::public static string StatusLine ( NormalizationMode ? mode , SharedPeptidePolicy policy , int quantifiedFamilies , int familiesInFile )",
-          "sha256": "C8F494E5DD6B2BC1559C5A420A11A6C16FE8A2D74512C502783E6D424AF60985"
-        }
-      ],
+      "implementation": [],
       "proofs": [],
-      "note": "Declaration only; no reachability or handler-execution claim.",
-      "kindReceiptId": "shell-decl-code-fact",
-      "compared": "FamilyQuant/ReportView.cs:52 \u0022 \u00B7 \u0022 -\u003E FamilyQuant.Core/ReportView.cs: FamilyQuant.ReportView::public static string StatusLine ( NormalizationMode ? mode , SharedPeptidePolicy policy , int quantifiedFamilies , int familiesInFile ) = \u0022 \u00B7 \u0022; complete member tokens SHA256=44028B63C944F007A5FD9F57EE3D43B37EFD105914CFE7FB349DFA1499BC84E6"
+      "note": "The containing member declaration or body changed; retained text alone is insufficient.",
+      "kindReceiptId": null,
+      "compared": null
     },
     {
       "observationId": "FQ15-B82A1F9FF78B",
@@ -7484,17 +7448,11 @@
     },
     {
       "observationId": "FQ15-C13ED755EBC7",
-      "implementation": [
-        {
-          "path": "FamilyQuant.Core/ReportView.cs",
-          "symbol": "FamilyQuant.ReportView::public static string StatusLine ( NormalizationMode ? mode , SharedPeptidePolicy policy , int quantifiedFamilies , int familiesInFile )",
-          "sha256": "C8F494E5DD6B2BC1559C5A420A11A6C16FE8A2D74512C502783E6D424AF60985"
-        }
-      ],
+      "implementation": [],
       "proofs": [],
-      "note": "Declaration only; no reachability or handler-execution claim.",
-      "kindReceiptId": "shell-decl-code-fact",
-      "compared": "FamilyQuant/ReportView.cs:52 \u0022N0\u0022 -\u003E FamilyQuant.Core/ReportView.cs: FamilyQuant.ReportView::public static string StatusLine ( NormalizationMode ? mode , SharedPeptidePolicy policy , int quantifiedFamilies , int familiesInFile ) = \u0022N0\u0022; complete member tokens SHA256=44028B63C944F007A5FD9F57EE3D43B37EFD105914CFE7FB349DFA1499BC84E6"
+      "note": "The containing member declaration or body changed; retained text alone is insufficient.",
+      "kindReceiptId": null,
+      "compared": null
     },
     {
       "observationId": "FQ15-C1BFB140777A",
@@ -7698,17 +7656,11 @@
     },
     {
       "observationId": "FQ15-C845A1AC71F9",
-      "implementation": [
-        {
-          "path": "FamilyQuant.Core/ReportView.cs",
-          "symbol": "FamilyQuant.ReportView::public static string StatusLine ( NormalizationMode ? mode , SharedPeptidePolicy policy , int quantifiedFamilies , int familiesInFile )",
-          "sha256": "C8F494E5DD6B2BC1559C5A420A11A6C16FE8A2D74512C502783E6D424AF60985"
-        }
-      ],
+      "implementation": [],
       "proofs": [],
-      "note": "Declaration only; no reachability or handler-execution claim.",
-      "kindReceiptId": "shell-decl-code-fact",
-      "compared": "FamilyQuant/ReportView.cs:52 \u0022 of \u0022 -\u003E FamilyQuant.Core/ReportView.cs: FamilyQuant.ReportView::public static string StatusLine ( NormalizationMode ? mode , SharedPeptidePolicy policy , int quantifiedFamilies , int familiesInFile ) = \u0022 of \u0022; complete member tokens SHA256=44028B63C944F007A5FD9F57EE3D43B37EFD105914CFE7FB349DFA1499BC84E6"
+      "note": "The containing member declaration or body changed; retained text alone is insufficient.",
+      "kindReceiptId": null,
+      "compared": null
     },
     {
       "observationId": "FQ15-C89B929C0DD6",
@@ -7834,7 +7786,7 @@
         {
           "path": "FamilyQuant/MainWindow.xaml",
           "symbol": "FamilyQuant.MainWindow.MenuItemSaveProject.IsEnabled",
-          "sha256": "8457FF5355E95C48D38D280698F2F7A526F3C1F163198330855DBC20698F614C"
+          "sha256": "422DE48434233AA62B67BF4F37326A8F66C6C2771A45A828E40318E09A1806C5"
         }
       ],
       "proofs": [],
@@ -7888,7 +7840,7 @@
         {
           "path": "FamilyQuant/MainWindow.xaml",
           "symbol": "FamilyQuant.MainWindow.MenuItemSpectrumComparison.IsEnabled",
-          "sha256": "8457FF5355E95C48D38D280698F2F7A526F3C1F163198330855DBC20698F614C"
+          "sha256": "422DE48434233AA62B67BF4F37326A8F66C6C2771A45A828E40318E09A1806C5"
         }
       ],
       "proofs": [],
@@ -8176,7 +8128,7 @@
       "observationId": "FQ15-D3ED3D034725",
       "implementation": [],
       "proofs": [],
-      "note": "The frozen line does not identify exactly one recorded literal token.",
+      "note": "The exact literal multiplicity within the containing member changed.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -8304,7 +8256,7 @@
         {
           "path": "FamilyQuant.Core/ReportView.cs",
           "symbol": "FamilyQuant.ReportView::public static List \u003C FastaItemExtended \u003E Sort ( IEnumerable \u003C FastaItemExtended \u003E rows , string ? sortMemberPath , bool descending )",
-          "sha256": "C8F494E5DD6B2BC1559C5A420A11A6C16FE8A2D74512C502783E6D424AF60985"
+          "sha256": "6DAC5AA56BD69B6BBFE835877140448EC211ADE46C6FBA0F9E018B4BAC3541B9"
         }
       ],
       "proofs": [],
@@ -8318,7 +8270,7 @@
         {
           "path": "FamilyQuant/MainWindow.xaml",
           "symbol": "FamilyQuant.MainWindow.MenuItemHelp.Header",
-          "sha256": "8457FF5355E95C48D38D280698F2F7A526F3C1F163198330855DBC20698F614C"
+          "sha256": "422DE48434233AA62B67BF4F37326A8F66C6C2771A45A828E40318E09A1806C5"
         }
       ],
       "proofs": [],
@@ -8774,7 +8726,7 @@
         {
           "path": "FamilyQuant.Core/ReportView.cs",
           "symbol": "FamilyQuant.ReportView::public static List \u003C FastaItemExtended \u003E Sort ( IEnumerable \u003C FastaItemExtended \u003E rows , string ? sortMemberPath , bool descending )",
-          "sha256": "C8F494E5DD6B2BC1559C5A420A11A6C16FE8A2D74512C502783E6D424AF60985"
+          "sha256": "6DAC5AA56BD69B6BBFE835877140448EC211ADE46C6FBA0F9E018B4BAC3541B9"
         }
       ],
       "proofs": [],
@@ -9228,17 +9180,11 @@
     },
     {
       "observationId": "FQ15-ECB14BEAC060",
-      "implementation": [
-        {
-          "path": "FamilyQuant.Core/ReportView.cs",
-          "symbol": "FamilyQuant.ReportView::public static string StatusLine ( NormalizationMode ? mode , SharedPeptidePolicy policy , int quantifiedFamilies , int familiesInFile )",
-          "sha256": "C8F494E5DD6B2BC1559C5A420A11A6C16FE8A2D74512C502783E6D424AF60985"
-        }
-      ],
+      "implementation": [],
       "proofs": [],
-      "note": "Declaration only; no reachability or handler-execution claim.",
-      "kindReceiptId": "shell-decl-code-fact",
-      "compared": "FamilyQuant/ReportView.cs:53 \u0022 families quantified\u0022 -\u003E FamilyQuant.Core/ReportView.cs: FamilyQuant.ReportView::public static string StatusLine ( NormalizationMode ? mode , SharedPeptidePolicy policy , int quantifiedFamilies , int familiesInFile ) = \u0022 families quantified\u0022; complete member tokens SHA256=44028B63C944F007A5FD9F57EE3D43B37EFD105914CFE7FB349DFA1499BC84E6"
+      "note": "The containing member declaration or body changed; retained text alone is insufficient.",
+      "kindReceiptId": null,
+      "compared": null
     },
     {
       "observationId": "FQ15-ED28D2E0DB7C",
@@ -9302,7 +9248,7 @@
         {
           "path": "FamilyQuant.Core/ReportView.cs",
           "symbol": "FamilyQuant.ReportView::public static List \u003C FastaItemExtended \u003E Sort ( IEnumerable \u003C FastaItemExtended \u003E rows , string ? sortMemberPath , bool descending )",
-          "sha256": "C8F494E5DD6B2BC1559C5A420A11A6C16FE8A2D74512C502783E6D424AF60985"
+          "sha256": "6DAC5AA56BD69B6BBFE835877140448EC211ADE46C6FBA0F9E018B4BAC3541B9"
         }
       ],
       "proofs": [],
@@ -9372,7 +9318,7 @@
         {
           "path": "FamilyQuant/MainWindow.xaml",
           "symbol": "FamilyQuant.MainWindow.MenuItemHowToRead.Header",
-          "sha256": "8457FF5355E95C48D38D280698F2F7A526F3C1F163198330855DBC20698F614C"
+          "sha256": "422DE48434233AA62B67BF4F37326A8F66C6C2771A45A828E40318E09A1806C5"
         }
       ],
       "proofs": [],
@@ -9560,7 +9506,7 @@
       "observationId": "FQ15-F95421050019",
       "implementation": [],
       "proofs": [],
-      "note": "The containing member declaration or body changed; retained text alone is insufficient.",
+      "note": "The exact literal multiplicity within the containing member changed.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -9808,7 +9754,7 @@
         {
           "path": "FamilyQuant.Core/ReportView.cs",
           "symbol": "FamilyQuant.ReportView::public static string LayerState ( bool ready , string ? blockedBecause )",
-          "sha256": "C8F494E5DD6B2BC1559C5A420A11A6C16FE8A2D74512C502783E6D424AF60985"
+          "sha256": "6DAC5AA56BD69B6BBFE835877140448EC211ADE46C6FBA0F9E018B4BAC3541B9"
         }
       ],
       "proofs": [],
@@ -9859,7 +9805,7 @@
           "kind": "test",
           "target": "ShellLedgerComparisonCommand",
           "assertion": "shell declaration kind code fact: every listed matched observation retains its exact declaration",
-          "artifact": "D:\\FamilyQuant-data\\out-results\\C13-tips\\shell-receipts\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-look\\C13\\refreshed-shell-c1\\comparisons.log",
           "inspectedBy": ""
         }
       ]
@@ -9873,7 +9819,7 @@
           "kind": "test",
           "target": "ShellLedgerComparisonCommand",
           "assertion": "shell declaration kind export/storage fact: every listed matched observation retains its exact declaration",
-          "artifact": "D:\\FamilyQuant-data\\out-results\\C13-tips\\shell-receipts\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-look\\C13\\refreshed-shell-c1\\comparisons.log",
           "inspectedBy": ""
         }
       ]
@@ -9887,7 +9833,7 @@
           "kind": "test",
           "target": "ShellLedgerComparisonCommand",
           "assertion": "shell declaration kind format/export: every listed matched observation retains its exact declaration",
-          "artifact": "D:\\FamilyQuant-data\\out-results\\C13-tips\\shell-receipts\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-look\\C13\\refreshed-shell-c1\\comparisons.log",
           "inspectedBy": ""
         }
       ]
@@ -9901,7 +9847,7 @@
           "kind": "test",
           "target": "ShellLedgerComparisonCommand",
           "assertion": "shell declaration kind option/copy: every listed matched observation retains its exact declaration",
-          "artifact": "D:\\FamilyQuant-data\\out-results\\C13-tips\\shell-receipts\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-look\\C13\\refreshed-shell-c1\\comparisons.log",
           "inspectedBy": ""
         }
       ]
