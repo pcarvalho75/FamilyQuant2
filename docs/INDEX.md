@@ -155,6 +155,7 @@ Invoke each flag with `& $testExe <flag>` after building. Dispatch and arity are
 | `--test-ledger-declarations` | Exact named-XAML and C# member comparison checks |
 | `--test-shell-metadata` | Compiled shell-metadata and isolated Home-event comparison guards; included in the ordinary ledger guard |
 | `--test-shell-message-frames [--negative-control]` | Exact frozen handler/message/dialog frames, contributing literals and complete file-filter groups; optional planted wrong-path binding |
+| `--test-shell-sepro-fixture <fresh-output.sepr2>` | Owned synthetic package round trip through the actual vendor serializer; no collaborator data or spectra |
 
 ## Screens and UI metadata
 
