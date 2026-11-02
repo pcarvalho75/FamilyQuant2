@@ -22,9 +22,9 @@ namespace FamilyQuant.Tests
     /// <summary>
     /// Checks the parts of FamilyQuant that decide numbers, without a window to click.
     ///
-    ///   FamilyQuant.Tests.exe [pathToAPlpFile] [pathToAFastaOrTR]
+    ///   FamilyQuant.Tests.exe [plp] [database] [deNovoRoot] [acquisitionRoot]
     ///
-    /// Everything except the last two sections builds its own fixtures, so the suite runs anywhere.
+    /// Sections without real-data inputs build fixtures and run without a dataset.
     /// Pass a .plp to exercise the quantitation path against real data, and a database as well to run
     /// the UI smoke section - which builds the real WPF controls, because the XAML in
     /// ClusterGenerationControl is only parsed when a Family Cluster File is opened and nothing else
@@ -147,13 +147,8 @@ namespace FamilyQuant.Tests
             if (args.Length == 2 && args[0] == "--shell-window-screens") return ShellWindowPreferenceScreens(args[1]);
             if (args.Length == 2 && args[0] == "--denovo-screens") return DeNovoScreens(args[1]);
             if (args.Length == 2 && args[0] == "--homology-results-screens") return HomologyResultScreens(args[1]);
-            if (args.Length == 2 && args[0] == "--shell-window-screens") return ShellWindowPreferenceScreens(args[1]);
             if (args.Length == 2 && args[0] == "--build-family-screens") return BuildFamiliesScreens(args[1]);
-            if (args.Length == 2 && args[0] == "--quantify-screens") return QuantifyScreens(args[1]);
             if (args.Length == 2 && args[0] == "--quantify-shell-screens") return QuantifyShellScreens(args[1]);
-            if (args.Length == 2 && args[0] == "--quantify-screens") return QuantifyScreens(args[1]);
-            if (args.Length is 2 or 3 && args[0] == "--results-screens") return ResultsScreens(args[1], args.Length == 3 ? args[2] : null);
-            if (args.Length == 2 && args[0] == "--shell-window-screens") return ShellWindowPreferenceScreens(args[1]);
             if (args.Length == 2 && args[0] == "--secondary-screens") return SecondaryWindowScreens(args[1]);
 
             // PowerShell 5.1 silently DROPS empty "" arguments to native executables, which shifted
