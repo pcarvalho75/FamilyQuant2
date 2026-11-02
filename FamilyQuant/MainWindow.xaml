@@ -78,7 +78,7 @@
                 <MenuItem x:Name="MenuItemSpectrumComparison" Header="Spectrum comparison" Click="MenuItemSpectrumComparison_Click" IsEnabled="False"
                           ToolTip="Shows the source comparison table and its existing CSV and score plot exports. Disabled until spectrum evidence is loaded."/>
                 <MenuItem x:Name="MenuItemClusteringDiagnostic" Header="Clustering diagnostic" Click="MenuItemClusteringDiagnostic_Click" IsEnabled="False"
-                          ToolTip="Writes a diagnostic report from the saved .fcf or .fqproj using its clustering identity. Save changes first. Families stay as they are."/>
+                          ToolTip="Writes a diagnostic report from the saved .fcf or .fqproj using its clustering identity. Save changes first; families stay as they are."/>
                 <Separator/>
                 <MenuItem x:Name="MenuItemReanotateSEPro" Header="Reannotate SEPro" Click="MenuItemReanotateSEPro_Click" IsEnabled="False"
                           ToolTip="Writes family numbers to a new regrouped SEPro package, leaving the original unchanged. Disabled until a project is loaded."/>

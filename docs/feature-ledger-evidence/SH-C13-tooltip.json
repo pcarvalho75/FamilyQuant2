@@ -1,0 +1,2266 @@
+{
+  "schemaVersion": 1,
+  "step": "SH-C13-tooltip",
+  "frozenCommit": "e9b73064d8ff19b2fde3e3231240b636a64c0a91",
+  "runs": [
+    {
+      "id": "declarations",
+      "command": "D:\\FamilyQuant-wt\\shell\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --ledger-declaration-compare D:/FamilyQuant-data/out-shell/N3/source D:/FamilyQuant-wt/shell D:/FamilyQuant-data/out-shell/C13-diagnostic-tooltip-20261102-042657/declarations2 SH-C13-tooltip FamilyQuant/MainWindow.xaml \u00222026-11-02 04:29:55 -0800\u0022",
+      "executedAt": "2026-11-02 04:29:55 -0800",
+      "commit": "a51fe1f8f3e9424e84a7c2e4cbeda5a9202174ba",
+      "artifacts": [
+        {
+          "path": "D:\\FamilyQuant-data\\out-shell\\C13-diagnostic-tooltip-20261102-042657\\declarations2\\comparisons.log",
+          "sha256": "04F8B3F7EF578BB800A3D167185DD4A93BDC1924A23D37AB85800F815E9296C9"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-shell\\C13-diagnostic-tooltip-20261102-042657\\declarations2\\comparisons.json",
+          "sha256": "98C65AD25B6E3A844579B48F6BC40A0382C9A0CB29B991E079E3A673DC2B8D14"
+        }
+      ],
+      "workingDirectory": "D:\\FamilyQuant-wt\\shell"
+    }
+  ],
+  "rows": [
+    {
+      "observationId": "FQ15-7679EFCAE0B7",
+      "implementation": [],
+      "proofs": [],
+      "note": "This kind needs another executed check or an inspected render.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-04C00B4757B5",
+      "implementation": [],
+      "proofs": [],
+      "note": "The declared value changed and needs a specific preservation proof.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-45662E0D334E",
+      "implementation": [],
+      "proofs": [],
+      "note": "This kind needs another executed check or an inspected render.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-93776868FAB5",
+      "implementation": [],
+      "proofs": [],
+      "note": "The declared value changed and needs a specific preservation proof.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-94FC1247DE2C",
+      "implementation": [],
+      "proofs": [],
+      "note": "This kind needs another executed check or an inspected render.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-46EB4E24AC7D",
+      "implementation": [],
+      "proofs": [],
+      "note": "The declared value changed and needs a specific preservation proof.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-085E5B81E35D",
+      "implementation": [],
+      "proofs": [],
+      "note": "This kind needs another executed check or an inspected render.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-45A20ED85C9C",
+      "implementation": [],
+      "proofs": [],
+      "note": "The declared value changed and needs a specific preservation proof.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-D7A1D45E49F5",
+      "implementation": [],
+      "proofs": [],
+      "note": "This kind needs another executed check or an inspected render.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-21D9A55B91A6",
+      "implementation": [],
+      "proofs": [],
+      "note": "Unnamed or ambiguous frozen element; no guessed text match.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-BECEDE5FD7A4",
+      "implementation": [],
+      "proofs": [],
+      "note": "This kind needs another executed check or an inspected render.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-C2500D2F7285",
+      "implementation": [],
+      "proofs": [],
+      "note": "The declared value changed and needs a specific preservation proof.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-D88E5CED913A",
+      "implementation": [],
+      "proofs": [],
+      "note": "This kind needs another executed check or an inspected render.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-8FCD469AC3D0",
+      "implementation": [],
+      "proofs": [],
+      "note": "The declared value changed and needs a specific preservation proof.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-51C0A5780B58",
+      "implementation": [],
+      "proofs": [],
+      "note": "This kind needs another executed check or an inspected render.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-CBF21E135197",
+      "implementation": [
+        {
+          "path": "FamilyQuant/MainWindow.xaml",
+          "symbol": "FamilyQuant.MainWindow.MenuItemSaveProject.IsEnabled",
+          "sha256": "422DE48434233AA62B67BF4F37326A8F66C6C2771A45A828E40318E09A1806C5"
+        }
+      ],
+      "proofs": [],
+      "note": "Declaration only; reachability/operation observations require their own proof. Target source root: D:\\FamilyQuant-wt\\shell",
+      "kindReceiptId": "decl-option-copy",
+      "compared": "False -\u003E FamilyQuant/MainWindow.xaml: FamilyQuant.MainWindow.MenuItemSaveProject.IsEnabled = False"
+    },
+    {
+      "observationId": "FQ15-67E9A390B4D4",
+      "implementation": [],
+      "proofs": [],
+      "note": "The declared value changed and needs a specific preservation proof.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-D11D9392E890",
+      "implementation": [],
+      "proofs": [],
+      "note": "This kind needs another executed check or an inspected render.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-853CE1DB7A64",
+      "implementation": [],
+      "proofs": [],
+      "note": "The declared value changed and needs a specific preservation proof.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-B593D6C75DAA",
+      "implementation": [],
+      "proofs": [],
+      "note": "This kind needs another executed check or an inspected render.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-08230753D2CC",
+      "implementation": [
+        {
+          "path": "FamilyQuant/MainWindow.xaml",
+          "symbol": "FamilyQuant.MainWindow.MenuItemSaveFCF.IsEnabled",
+          "sha256": "422DE48434233AA62B67BF4F37326A8F66C6C2771A45A828E40318E09A1806C5"
+        }
+      ],
+      "proofs": [],
+      "note": "Declaration only; reachability/operation observations require their own proof. Target source root: D:\\FamilyQuant-wt\\shell",
+      "kindReceiptId": "decl-option-copy",
+      "compared": "False -\u003E FamilyQuant/MainWindow.xaml: FamilyQuant.MainWindow.MenuItemSaveFCF.IsEnabled = False"
+    },
+    {
+      "observationId": "FQ15-34318E61C997",
+      "implementation": [],
+      "proofs": [],
+      "note": "The declared value changed and needs a specific preservation proof.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-CFD1302DD85B",
+      "implementation": [],
+      "proofs": [],
+      "note": "This kind needs another executed check or an inspected render.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-06B2D227813F",
+      "implementation": [],
+      "proofs": [],
+      "note": "The declared value changed and needs a specific preservation proof.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-2C748FDB400F",
+      "implementation": [],
+      "proofs": [],
+      "note": "This kind needs another executed check or an inspected render.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-902296155C18",
+      "implementation": [
+        {
+          "path": "FamilyQuant/MainWindow.xaml",
+          "symbol": "FamilyQuant.MainWindow.MenuItemComputeXic.IsEnabled",
+          "sha256": "422DE48434233AA62B67BF4F37326A8F66C6C2771A45A828E40318E09A1806C5"
+        }
+      ],
+      "proofs": [],
+      "note": "Declaration only; reachability/operation observations require their own proof. Target source root: D:\\FamilyQuant-wt\\shell",
+      "kindReceiptId": "decl-option-copy",
+      "compared": "False -\u003E FamilyQuant/MainWindow.xaml: FamilyQuant.MainWindow.MenuItemComputeXic.IsEnabled = False"
+    },
+    {
+      "observationId": "FQ15-1BA879330EBB",
+      "implementation": [],
+      "proofs": [],
+      "note": "The declared value changed and needs a specific preservation proof.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-0CA40EFF5B28",
+      "implementation": [],
+      "proofs": [],
+      "note": "This kind needs another executed check or an inspected render.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-EAFC1F85EBD6",
+      "implementation": [],
+      "proofs": [],
+      "note": "The declared value changed and needs a specific preservation proof.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-C4624341BA1F",
+      "implementation": [],
+      "proofs": [],
+      "note": "This kind needs another executed check or an inspected render.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-CD4156A30F6C",
+      "implementation": [
+        {
+          "path": "FamilyQuant/MainWindow.xaml",
+          "symbol": "FamilyQuant.MainWindow.MenuItemSpectrumComparison.IsEnabled",
+          "sha256": "422DE48434233AA62B67BF4F37326A8F66C6C2771A45A828E40318E09A1806C5"
+        }
+      ],
+      "proofs": [],
+      "note": "Declaration only; reachability/operation observations require their own proof. Target source root: D:\\FamilyQuant-wt\\shell",
+      "kindReceiptId": "decl-option-copy",
+      "compared": "False -\u003E FamilyQuant/MainWindow.xaml: FamilyQuant.MainWindow.MenuItemSpectrumComparison.IsEnabled = False"
+    },
+    {
+      "observationId": "FQ15-DED0AB9EBFAE",
+      "implementation": [],
+      "proofs": [],
+      "note": "The declared value changed and needs a specific preservation proof.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-017C8541B68E",
+      "implementation": [],
+      "proofs": [],
+      "note": "This kind needs another executed check or an inspected render.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-5DD50C3323AD",
+      "implementation": [],
+      "proofs": [],
+      "note": "The declared value changed and needs a specific preservation proof.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-82C0DC480D30",
+      "implementation": [],
+      "proofs": [],
+      "note": "This kind needs another executed check or an inspected render.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-5B5F37F3309E",
+      "implementation": [
+        {
+          "path": "FamilyQuant/MainWindow.xaml",
+          "symbol": "FamilyQuant.MainWindow.MenuItemReanotateSEPro.IsEnabled",
+          "sha256": "422DE48434233AA62B67BF4F37326A8F66C6C2771A45A828E40318E09A1806C5"
+        }
+      ],
+      "proofs": [],
+      "note": "Declaration only; reachability/operation observations require their own proof. Target source root: D:\\FamilyQuant-wt\\shell",
+      "kindReceiptId": "decl-option-copy",
+      "compared": "False -\u003E FamilyQuant/MainWindow.xaml: FamilyQuant.MainWindow.MenuItemReanotateSEPro.IsEnabled = False"
+    },
+    {
+      "observationId": "FQ15-C07C8EF91D69",
+      "implementation": [],
+      "proofs": [],
+      "note": "The declared value changed and needs a specific preservation proof.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-DD7878AEE818",
+      "implementation": [],
+      "proofs": [],
+      "note": "This kind needs another executed check or an inspected render.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-032559C20232",
+      "implementation": [],
+      "proofs": [],
+      "note": "The declared value changed and needs a specific preservation proof.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-9DC1E8217276",
+      "implementation": [],
+      "proofs": [],
+      "note": "This kind needs another executed check or an inspected render.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-ED964B3D45AE",
+      "implementation": [],
+      "proofs": [],
+      "note": "The declared value changed and needs a specific preservation proof.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-185E1DC40B89",
+      "implementation": [],
+      "proofs": [],
+      "note": "This kind needs another executed check or an inspected render.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-743E1845215D",
+      "implementation": [],
+      "proofs": [],
+      "note": "The declared value changed and needs a specific preservation proof.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-234428E9BC70",
+      "implementation": [],
+      "proofs": [],
+      "note": "This kind needs another executed check or an inspected render.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-D373CC8B2236",
+      "implementation": [],
+      "proofs": [],
+      "note": "The declared value changed and needs a specific preservation proof.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-A33C172644F1",
+      "implementation": [],
+      "proofs": [],
+      "note": "This kind needs another executed check or an inspected render.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-0E8F41C31827",
+      "implementation": [],
+      "proofs": [],
+      "note": "The declared value changed and needs a specific preservation proof.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-2B96D715268C",
+      "implementation": [],
+      "proofs": [],
+      "note": "This kind needs another executed check or an inspected render.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-D6942502EDAD",
+      "implementation": [
+        {
+          "path": "FamilyQuant/MainWindow.xaml",
+          "symbol": "FamilyQuant.MainWindow.MenuItemHelp.Header",
+          "sha256": "422DE48434233AA62B67BF4F37326A8F66C6C2771A45A828E40318E09A1806C5"
+        }
+      ],
+      "proofs": [],
+      "note": "Declaration only; reachability/operation observations require their own proof. Target source root: D:\\FamilyQuant-wt\\shell",
+      "kindReceiptId": "decl-option-copy",
+      "compared": "Help -\u003E FamilyQuant/MainWindow.xaml: FamilyQuant.MainWindow.MenuItemHelp.Header = Help"
+    },
+    {
+      "observationId": "FQ15-7C5612C5D068",
+      "implementation": [],
+      "proofs": [],
+      "note": "This kind needs another executed check or an inspected render.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-F07F017EF771",
+      "implementation": [
+        {
+          "path": "FamilyQuant/MainWindow.xaml",
+          "symbol": "FamilyQuant.MainWindow.MenuItemHowToRead.Header",
+          "sha256": "422DE48434233AA62B67BF4F37326A8F66C6C2771A45A828E40318E09A1806C5"
+        }
+      ],
+      "proofs": [],
+      "note": "Declaration only; reachability/operation observations require their own proof. Target source root: D:\\FamilyQuant-wt\\shell",
+      "kindReceiptId": "decl-option-copy",
+      "compared": "How to read these numbers -\u003E FamilyQuant/MainWindow.xaml: FamilyQuant.MainWindow.MenuItemHowToRead.Header = How to read these numbers"
+    },
+    {
+      "observationId": "FQ15-D36A80A151FF",
+      "implementation": [],
+      "proofs": [],
+      "note": "This kind needs another executed check or an inspected render.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-34708753E1F6",
+      "implementation": [],
+      "proofs": [],
+      "note": "The declared value changed and needs a specific preservation proof.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-92FDC5469A5B",
+      "implementation": [],
+      "proofs": [],
+      "note": "This kind needs another executed check or an inspected render.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-8D5FBCC18545",
+      "implementation": [
+        {
+          "path": "FamilyQuant/MainWindow.xaml",
+          "symbol": "FamilyQuant.MainWindow.MenuItemWhereAmI.Header",
+          "sha256": "422DE48434233AA62B67BF4F37326A8F66C6C2771A45A828E40318E09A1806C5"
+        }
+      ],
+      "proofs": [],
+      "note": "Declaration only; reachability/operation observations require their own proof. Target source root: D:\\FamilyQuant-wt\\shell",
+      "kindReceiptId": "decl-option-copy",
+      "compared": "What do I do first? -\u003E FamilyQuant/MainWindow.xaml: FamilyQuant.MainWindow.MenuItemWhereAmI.Header = What do I do first?"
+    },
+    {
+      "observationId": "FQ15-4B1A5D805051",
+      "implementation": [],
+      "proofs": [],
+      "note": "This kind needs another executed check or an inspected render.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-FCF24F202E4B",
+      "implementation": [],
+      "proofs": [],
+      "note": "The declared value changed and needs a specific preservation proof.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-18DC9493B812",
+      "implementation": [],
+      "proofs": [],
+      "note": "The declared value changed and needs a specific preservation proof.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-B4108C63AE7B",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-A37F6028953D",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-FF63C6DC71DE",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-FF256776BCCA",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-357ADB27EABA",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-140E17436C6C",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-DAE3C2F192AF",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-7EA08FC8EA1E",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-0E181F5296B0",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-5F38A2F7A03A",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-DA20CB541B93",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-33A3F30B1C83",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-9DF67A7D4546",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-8A110CE79C91",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-4BBAD1F92143",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-800CFEC3B765",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-A8B19C137DC2",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-09E93A4F57B6",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-1FA8ED320451",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-3ED942757E45",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-16285CE0B5D8",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-B674BD0D6FB0",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-A08417F0591D",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-22317F5CE7C2",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-FDB9DDABF7CB",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-ABD880D7E74F",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-D7C96185D723",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-CA590E416B65",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-AE71A38B6CFF",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-A68DDF570330",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-0229A668BED9",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-73DCCECEAF83",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-CA80CB324C8E",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-817375A737E9",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-473B38A966B6",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-17B0D56754BF",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-1DC368BC5392",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-84741041780F",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-015C529AFCCA",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-098012E95BE9",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-162BB1A4F4F8",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-E2620B485929",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-F37BABACE038",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-51D93C9A42D7",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-1EC2245C020C",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-A2FD633E05A4",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-D913CA4A8571",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-1BB85E29A291",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-C74B5049B6EB",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-29290A1DEF52",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-A9136DA0DDEC",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-6CA9DCF5DEAA",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-2074AE04D745",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-E1E6DB0BA001",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-891E975B730E",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-896FD56FF1F3",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-29EB32BD76B6",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-8D6A1F9ED763",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-91DF62AD5796",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-1DA6DACF8438",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-63177F1FB3F4",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-4EF7F04BBFA8",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-5165C52E6F76",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-003CB3619980",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-823926A0CCF5",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-92991B8F6A93",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-749394F72DDE",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-BE8A76C73E91",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-822AB951DC48",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-9F5CB9B18BB0",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-213FD342609B",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-EFD2DF3A7FF3",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-2CDDE5EC105D",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-FDBF9F028EB2",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-9085ACC92A5A",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-A5803E29B75B",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-71A448372328",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-C42FB2273C1C",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-9A9A4198C024",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-BE500CA08363",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-D834B0398136",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-BD8FCDF44947",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-F17372AEAD0F",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-5E69DF58FFFE",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-A0A334D576C6",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-433A5AAC1117",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-7A26DBC0417D",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-1680DF391053",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-5A8060C351E2",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-117A1F9A31C3",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-1EC0FFA1496F",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-D41E82F7EE50",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-D5987DF13F28",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-69AA92E0C13D",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-490DB1A37514",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-7206BF98F2B5",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-735FF4F51778",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-6522B89F7A90",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-128CDF2967A3",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-9326F0470B5D",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-7AE169949A24",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-8E7C9D4B893F",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-4EA6BDD226D3",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-2F79C92D9BDC",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-E81D4D8CC4E3",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-9A649BDCD31D",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-776EFFB6D540",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-F0F954EF5FD4",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-FF65BEA5BC8E",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-78E48B16D6B7",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-BC317ADA5428",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-85A627D0F2C4",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-0642600CF373",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-FC74E0231458",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-C080E034F652",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-FCCB78925C6E",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-D212AA6005F3",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-DFC26E50FB7E",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-59AC5985D313",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-AE43B9EBD55B",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-BFB67A34EF78",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-C9E4A3901552",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-6379736D2F52",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-D9B5F67123FE",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-A079DE8A62D5",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-BF47EB479788",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-C1F09243B19C",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-0A6BE0E01AB9",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-AC70C47D59F5",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-D2D42CD3165B",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-EDE55513E381",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-DB566AD91F24",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-CDADBFE1E05C",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-09A66AEC1BAA",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-C2A6ED67B237",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-96E7ED457634",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-46C7EDAE6F70",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-B02D92F38DEE",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-CE9A6051C843",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-ADD26B230959",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-86905E852F63",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-B4ABFF0708DA",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-E324CADFF7D5",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-BEEC76DC6727",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-92C3CAA143CF",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-4749DB5C7C36",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-1C7E4B78A91C",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-D53CA3DD7DFC",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-083D6DE21A64",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-CA406CB51D5A",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-965D5F90198A",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-E63181E24161",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-BBC1B4974AAF",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-40787AA4E92D",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-3782529C4401",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-3C9AC070F5AD",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-983BCB37C98F",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-801501923567",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-DB6D62004E8F",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-CCF30AC529C7",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-66A98A8CF568",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-B5062F974B9D",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-B35E0335E9E9",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-85DFBAFCD066",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-1E3232859B20",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-EA3BADFBB257",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-99658E9D6800",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-1840AA5E6E1C",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-46D629490566",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-A0D8929A769D",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-A03C58D60828",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-6835FF00B985",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-62E15E6058E6",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-DB93FC373C10",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-5E0D804A009A",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-5BC9BADDBD2B",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-D244836D09DC",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-0E83C10F930D",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-68AF10373704",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-69491CA4404C",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-614BCB0B30F8",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-A3024F6B528A",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-A2ABD844B1FB",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-D4E0A8D158FF",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-9B36DF954C21",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-86DAA4B3FAE9",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-1915E878CAB8",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-8BEC30E52D69",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-08F05656FA9A",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-C7823E9AFE4C",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-21FBC1CC5103",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-0A8602AFB8CE",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-05D2F085CA1C",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-AE0487385DAA",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-E411A8A5B418",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-D44936F87CE9",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-8F1511ACC702",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-3886C6F5427B",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-6C93214DEAA5",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-9DB506F5F17D",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-3A2440863772",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-E600191604B2",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-8952FD454F0F",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-77AB63820143",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-3997625A78A4",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-84F3ED74E32D",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-37054BF5BA1E",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-BEE9CF7ACF93",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-7526DED77FA2",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-0AD0CE6F978B",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-65700BDA90F3",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-A79FAB873090",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-C4526422A15C",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-8921B21922FE",
+      "implementation": [],
+      "proofs": [],
+      "note": "C# facts require a scoped output/member comparison or specific assertion.",
+      "kindReceiptId": null,
+      "compared": null
+    }
+  ],
+  "kindReceipts": [
+    {
+      "id": "decl-option-copy",
+      "kind": "option/copy",
+      "proofs": [
+        {
+          "runId": "declarations",
+          "kind": "test",
+          "target": "LedgerDeclarationCommand",
+          "assertion": "declaration kind option/copy: every listed named property agrees",
+          "artifact": "D:\\FamilyQuant-data\\out-shell\\C13-diagnostic-tooltip-20261102-042657\\declarations2\\comparisons.log",
+          "inspectedBy": ""
+        }
+      ]
+    }
+  ]
+}
