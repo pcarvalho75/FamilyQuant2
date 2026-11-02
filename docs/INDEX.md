@@ -101,6 +101,7 @@ Invoke each flag with `& $testExe <flag>` after building. Dispatch and arity are
 | `--test-results` | Results view-model readiness and export choices |
 | `--test-family-world` | The family world's crediting rule, species removal, the B1 verdict bars, D11 and the B5 pass with its export, on a hand-made world |
 | `--test-ui-icons` | No emoji in product source, escaped/entity regressions and Fluent glyphs in both themes |
+| `--test-ui-colors` | Literal/fixed-factory color guard with Tokens/ChartPalette sources and the explicit protected export-only PresentationFigures exception |
 | `--test-keyword-command` | Single keyword command, empty review, Cancel and accepted-setting retention |
 | `--test-chart-themes [output-dir]` | Seven hosted chart types, live token refresh, contrast, subscription lifetime and frozen Light palette pins; labelled synthetic chart captures |
 | `--test-evidence-task-scope [output-dir]` | Supplied task facts, editable scope, cancellation, native confirmation and both-theme synthetic captures |

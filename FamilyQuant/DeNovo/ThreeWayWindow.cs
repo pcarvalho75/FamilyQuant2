@@ -21,8 +21,6 @@ namespace FamilyQuant.DeNovo
     /// </summary>
     public static class ThreeWayWindow
     {
-        static readonly Color Backdrop = Color.FromRgb(0x33, 0x39, 0x49);
-
         public static Window Create(string title, IReadOnlyList<ThreeWayPartitionRow> rows,
                                     string? provenanceNote = null)
         {
@@ -52,11 +50,11 @@ namespace FamilyQuant.DeNovo
                                                    ? string.Empty
                                                    : " " + provenanceNote),
                 TextWrapping = TextWrapping.Wrap,
-                Foreground = new SolidColorBrush(Color.FromRgb(0xA8, 0xA4, 0x9A)),
                 FontSize = 12,
                 Margin = new Thickness(0, 12, 0, 10),
                 ToolTip = "How to read the chart above, and where each number came from."
             };
+            caption.SetResourceReference(TextBlock.ForegroundProperty, "MutedBrush");
             Grid.SetRow(caption, 1);
             grid.Children.Add(caption);
 
@@ -73,16 +71,17 @@ namespace FamilyQuant.DeNovo
             Grid.SetRow(save, 2);
             grid.Children.Add(save);
 
-            return new Window
+            var window = new Window
             {
                 Title = title,
                 Width = 1020,
                 Height = 620,
                 MinWidth = 560,
                 MinHeight = 340,
-                Background = new SolidColorBrush(Backdrop),
                 Content = grid
             };
+            window.SetResourceReference(Control.BackgroundProperty, "CanvasBrush");
+            return window;
         }
 
         public static void Show(string title, IReadOnlyList<ThreeWayPartitionRow> rows,
