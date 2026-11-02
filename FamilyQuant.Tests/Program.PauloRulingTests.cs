@@ -22,7 +22,19 @@ internal static partial class Program
         Check("empty new text cannot close a ruling row", !Decide(input with { NewText = "" }, row).Closed);
         Check("bare newline cannot close a ruling row", !Decide(input with { NewText = "\r\n" }, row).Closed);
         Check("capture placeholder cannot close a ruling row", !Decide(input with { NewText = "<No exact current value captured>" }, row).Closed);
-        Check("identical wording stays with the text tool", !Decide(input with { NewText = input.OldText }, row).Closed);
+        // Identical old and new text: Rule 1 only with an independent kept verdict and a live text witness.
+        var identical = input with { NewText = input.OldText };
+        var identicalKept = Decide(identical, row);
+        Check("identical wording with a kept verdict and a live witness closes under Rule 1",
+            facts[row.Id].Verdict == "kept" && identicalKept.Closed && identicalKept.Rule == "1" && identicalKept.WitnessTextSha256.Length > 0);
+        var identicalUnverified = LedgerPauloRulings.Evaluate(identical, row, LedgerRulingLiveText.Find, new Dictionary<string, LedgerPauloRulings.FactCheck>(StringComparer.Ordinal));
+        Check("identical wording without a verdict stays with the text tool",
+            !identicalUnverified.Closed && identicalUnverified.Reason == "Identical old/new text belongs to the text tool.");
+        var identicalLost = new Dictionary<string, LedgerPauloRulings.FactCheck>(facts, StringComparer.Ordinal) { [row.Id] = new("lost", "Synthetic lost fact.") };
+        Check("identical wording with a lost verdict stays with the text tool",
+            LedgerPauloRulings.Evaluate(identical, row, LedgerRulingLiveText.Find, identicalLost) is { Closed: false, Reason: "Identical old/new text belongs to the text tool." });
+        Check("identical wording with a kept verdict but no live witness stays open",
+            !LedgerPauloRulings.Evaluate(identical, row, _ => new(false, "", "", ""), facts).Closed);
         Check("invented new wording remains open", !Decide(input with { NewText = "Uncompiled ruling sentinel 31892117" }, row).Closed);
         var rejectedInput = LedgerPauloRulings.ReadInputs(LedgerPauloRulings.InputPath).First(candidate => candidate.Id == "FQ15-BEF6F613076C");
         var rejectedRow = inventory.Observations.Single(observation => observation.Id == rejectedInput.Id);

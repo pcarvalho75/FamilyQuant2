@@ -96,7 +96,21 @@ internal static class LedgerPauloRulings
         if (row == null) return Left("Unknown or malformed observation ID.");
         if (FeatureLedger.IsApprovedDrop(row)) return Left("Approved DROP is not a wording ruling.");
         if (row.Kind is "export/storage fact" or "format/export") return Left("Export/storage and format/export rows require execution.");
-        if (LedgerRulingLiveText.Normalize(input.OldText) == LedgerRulingLiveText.Normalize(input.NewText)) return Left("Identical old/new text belongs to the text tool.");
+        if (LedgerRulingLiveText.Normalize(input.OldText) == LedgerRulingLiveText.Normalize(input.NewText))
+        {
+            // Identical old and new text closes under Rule 1 only with an independent kept verdict, a wording row of the frozen
+            // fact and a live text witness; otherwise it stays with the text tool, as before.
+            const string identical = "Identical old/new text belongs to the text tool.";
+            if (factChecks == null || !factChecks.TryGetValue(input.Id, out var kept) || kept.Verdict != "kept"
+                || string.IsNullOrWhiteSpace(input.NewText) || !input.NewText.Any(char.IsLetterOrDigit) || input.NewText.TrimStart().StartsWith('<')
+                || !OldFactMatches(row, input.OldText) || row.Detail.StartsWith("Style.", StringComparison.Ordinal)
+                || row.Detail.StartsWith("Setter.", StringComparison.Ordinal) || !IsWordingKind(row)) return Left(identical);
+            var witness = live(input.NewText);
+            if (!witness.Found) return Left(identical);
+            return new(input.Id, input.Lane, input.OldText, input.NewText, "1",
+                "Identical old/new text; independent kept verdict and live text witness retained; independent sample required.",
+                witness.AssemblyName, witness.Symbol, witness.TextSha256, true, kept.Note);
+        }
         if (string.IsNullOrWhiteSpace(input.NewText) || !input.NewText.Any(char.IsLetterOrDigit)) return Left("New text is empty, whitespace or bare punctuation/newline.");
         if (input.NewText.Contains("<No exact current value captured>", StringComparison.OrdinalIgnoreCase)
             || input.NewText.TrimStart().StartsWith('<')) return Left("New text is a placeholder, not captured user text.");
@@ -105,9 +119,7 @@ internal static class LedgerPauloRulings
             return new(input.Id, input.Lane, input.OldText, input.NewText, "2", styleReason, Closed: true);
         if (row.Detail.StartsWith("Style.", StringComparison.Ordinal) || row.Detail.StartsWith("Setter.", StringComparison.Ordinal))
             return Left(styleReason);
-        if (row.Kind is not ("option/copy" or "tooltip" or "help fact" or "help page" or "code fact")
-            && !(row.Kind == "column" && row.Detail.Contains(".Header = ", StringComparison.Ordinal)))
-            return Left("Behavior/control/handler/binding row is outside wording rules.");
+        if (!IsWordingKind(row)) return Left("Behavior/control/handler/binding row is outside wording rules.");
         if (factChecks == null || !factChecks.TryGetValue(input.Id, out var fact))
             return Left("Independent fact-check verdict is missing.");
         if (fact.Verdict != "kept") return Left("Independent fact check marks the old fact lost.", fact.Note);
@@ -117,6 +129,9 @@ internal static class LedgerPauloRulings
         return new(input.Id, input.Lane, input.OldText, input.NewText, rule, "Recorded Paulo wording ruling; live text witness retained; independent sample required.",
             match.AssemblyName, match.Symbol, match.TextSha256, true, fact.Note);
     }
+
+    private static bool IsWordingKind(FeatureLedger.Observation row) => row.Kind is "option/copy" or "tooltip" or "help fact" or "help page" or "code fact"
+        || row.Kind == "column" && row.Detail.Contains(".Header = ", StringComparison.Ordinal);
 
     private static bool OldFactMatches(FeatureLedger.Observation row, string old)
     {
