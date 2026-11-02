@@ -11,6 +11,7 @@ This is the navigation index for the current checkout. The roadmap owns unfinish
 | [Core operations](CORE-OPERATIONS.md) | Progress, cancellation, outcomes and atomic publication |
 | [Clustering refactor](CLUSTERING-REFACTOR.md) | Result contracts and bounded frozen/current comparison |
 | [Dependencies](DEPENDENCIES.md) | Package decisions, cache compatibility and real-file opening checks |
+| [Test commands](TEST-COMMANDS.md) | Feature-owned command tables and adding a flag without editing Main |
 | [Identity study](IDENTITY-SEARCH-STUDY.md) | Why Scan and Divide remain separate, exact measured scope |
 | [Identity/deployment](N1-IDENTITY.md) | Separate application identity and the installed-profile check still owned by Paulo |
 | [Science gate](SCIENCE-GATE.md) | Recorded evidence-rule comparison, verdicts and limitations |
@@ -63,6 +64,8 @@ Invoke each flag with `& $testExe <flag>` after building. Dispatch and arity are
 |---|---|
 | `--test-core-boundary` | Core/App ownership, references and resource contract |
 | `--test-dependencies` | Cache compatibility, package removal and shared numeric control contracts |
+| `--test-dispatch` | Flag inventory, routing, precedence, argument forwarding and merge guards |
+| `--list-test-commands` | Deterministic command table; executes no test or scientific handler |
 | `--test-document` | Document round trip, scoring and denominator attribution fixtures |
 | `--test-inputs` | Real-data argument-selection contract, without choosing Desktop fallbacks |
 | `--test-operations` | Core outcomes, progress, cancellation and the owned native-child fixture |
