@@ -253,7 +253,8 @@ namespace FamilyQuant.Evidence
 
         private static string NeighbourReason(NearestNeighbour neighbour, string start) => start + ": "
             + neighbour.IdentityPercent.ToString("0.##", CultureInfo.InvariantCulture) + "% identity, "
-            + neighbour.QueryAlignedPercent.ToString("0.##", CultureInfo.InvariantCulture) + "% query alignment.";
+            + neighbour.AlignmentLength.ToString(CultureInfo.InvariantCulture) + " alignment columns; query length "
+            + neighbour.QueryLength.ToString(CultureInfo.InvariantCulture) + " residues.";
 
         private static void Validate(EvidenceClassificationOptions options)
         {

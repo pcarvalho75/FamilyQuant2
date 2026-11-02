@@ -17,6 +17,7 @@ This is the navigation index for the current checkout. The roadmap owns unfinish
 | [Science gate](SCIENCE-GATE.md) | Recorded evidence-rule comparison, verdicts and limitations |
 | [Task discovery](EVIDENCE-TASK.md) | Header-derived taxonomy, functional keyword proposal and confirmed recipe contract |
 | [Native evidence delivery](EVIDENCE-DELIVERY.md) | Program-driven fetch, default review, explicit split, save, export and replay |
+| [A2 coverage audit](A2-COVERAGE.md) | Native counterfactual measurement and the counts-only alignment audit label |
 | [H1 findings](housekeeping/H1-NOTES.md) | Behavior decisions, protected work, ledger migration and remaining reuse scope |
 | [Vision](vision/VISION.md) | Fable's study: the family world proposal behind workstream W8, with the desk's corrections |
 | [Code map](vision/CODE-MAP.md) | How a FASTA and a RAW file become a family number, and what that read did not cover |
@@ -72,6 +73,7 @@ Invoke each flag with `& $testExe <flag>` after building. Dispatch and arity are
 | `--test-evidence-task` | File-derived taxonomy, keyword counts, confirmation and recipe replay fixtures |
 | `--test-evidence-delivery` | Native default review, save, exports, exact app-session replay and app Open fixture |
 | `--test-evidence-fetch-atomic` | Combined evidence/panel staging, cancellation boundaries, failures and one final commit |
+| `--test-evidence-coverage` | Native alignment-row interpretation, counterfactual chooser and honest audit labels |
 | `--test-inputs` | Real-data argument-selection contract, without choosing Desktop fallbacks |
 | `--test-operations` | Core outcomes, progress, cancellation and the owned native-child fixture |
 | `--test-busy` | App operation host, running-command cancellation, prior file bytes and guarded publication |
@@ -147,6 +149,7 @@ Optional positional values following each flag override its native defaults. The
 | `--evidence-storage-check [input.fcf] [reference.tsv] [report.json]` | [EvidenceStorageCheck.cs](../FamilyQuant.Tests/EvidenceStorageCheck.cs) |
 | `--evidence-task-check <evidence.fcf> <new-report.json>` | [Program.EvidenceTask.cs](../FamilyQuant.Tests/Program.EvidenceTask.cs); read-only live taxonomy discovery, native JSON report |
 | `--evidence-delivery prepare/split/create ...` | [Program.EvidenceDelivery.cs](../FamilyQuant.Tests/Program.EvidenceDelivery.cs); [native delivery syntax](EVIDENCE-DELIVERY.md) |
+| `--evidence-coverage-check <prepared.fcf> <applied.fcf> <new-output-directory> [existing-capture-directory]` | [Program.EvidenceCoverage.cs](../FamilyQuant.Tests/Program.EvidenceCoverage.cs); native capture or deterministic offline replay, without applying a counterfactual |
 | `--evidence-fetch-check [input.fcf] [reference.tsv] [output.fcf]` | [EvidenceFetchCheck.cs](../FamilyQuant.Tests/EvidenceFetchCheck.cs); live fetch |
 | `--evidence-fetch-verify [input.fcf] [reference.tsv] [existing-output.fcf]` | Same helper, verifies the existing native evidence copy |
 | `--reference-panel-check [evidence.fcf] [output-dir]` | [ReferencePanelCheck.cs](../FamilyQuant.Tests/ReferencePanelCheck.cs); live panel and validation |

@@ -42,7 +42,8 @@ namespace FamilyQuant.Evidence
         public int QueryLength { get; init; }
         public int ReferenceLength { get; init; }
 
-        /// <summary>The alignment's length as a percentage of the query's, the quantity the gate reads.</summary>
+        /// <summary>The legacy alignment-column/query-length ratio read by the gate. Gap columns can
+        /// make it exceed 100; it is not the percentage of query residues covered.</summary>
         [JsonIgnore]
         public double QueryAlignedPercent => QueryLength == 0 ? 0 : 100.0 * AlignmentLength / QueryLength;
 

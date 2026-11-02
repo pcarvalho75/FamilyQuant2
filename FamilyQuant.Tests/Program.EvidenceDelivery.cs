@@ -185,6 +185,19 @@ internal static partial class Program
         {
             if (args.Length == 6 && args[1] == "prepare") PrepareEvidenceDelivery(args[2], args[3], args[4], args[5]).GetAwaiter().GetResult();
             else if (args.Length == 4 && args[1] == "create") { EnsureApplication(); CompleteEvidenceDelivery(args[2], args[3]); }
+            else if (args.Length == 4 && args[1] == "verify-families")
+            {
+                var first = FamilyClusterFile.Load(args[2]); var second = FamilyClusterFile.Load(args[3]);
+                static string State(FamilyClusterFile file) => JsonSerializer.Serialize(new
+                {
+                    file.SourceSha256, file.SourceSequenceCount, file.ClusteringIdentity, file.WordSimilarity, file.IsKeywordSuperCluster,
+                    Locks = file.LockedUserIds.OrderBy(value => value),
+                    Proteins = file.MyExtendedFastaItems.Select(p => new { p.SequenceIdentifier, p.Sequence, p.Description,
+                        p.UserID, p.USearchID, p.UserAnnotation, p.Domains, p.XIC, p.XICUser, p.FullXicShare }),
+                });
+                if (State(first) != State(second)) throw new InvalidDataException("Family membership, annotations, sequence or quantitative state differs.");
+                Check("A2 family membership, annotations, sequences, locks and quantitative values remain identical", true);
+            }
             else if (args.Length == 5 && args[1] == "split")
             {
                 var defaults = ReadDelivery<EvidenceReviewSelection>(Path.Combine(args[2], "defaults.json"));
