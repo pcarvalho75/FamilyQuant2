@@ -5,6 +5,17 @@ The database's exact, case-sensitive `contaminant_` prefix is ignored. Each rema
 a UniProt `sp|` or `tr|` accession and an `OS=` name followed by a positive `OX=` taxon identifier.
 Unsupported headers are refused with the offending identifier; the program never guesses a taxon.
 
+A sequence with joined headers keeps every distinct parsed taxon. It remains one target protein;
+all its taxa take part in the common-clade proposal. Repeated aliases of the same taxon retain
+the first source name. Keyword votes still count reviewed accessions once. The original joined
+description remains stored unchanged, and confirmed proposals store all the discovered taxa.
+Family-world own-species removal reads every direct OX= taxon of each target, both when collecting
+sample taxa and when checking a joined world target against them. The first-taxon compatibility
+property remains available; it is not the membership rule for removal.
+The older native `--family-world` study uses these same collection/membership helpers for
+species and genus removal, including its provider taxonomy-list and accession fallbacks.
+`--test-family-world` pins the study predicate on a secondary joined taxon.
+
 The taxon identifier is resolved through UniProt's taxonomy API. The proposal retains the source
 organism names and identifiers, the nearest shared taxonomic family, and the taxonomy release.
 When no common family rank exists, the deepest shared ancestor is offered instead. This describes

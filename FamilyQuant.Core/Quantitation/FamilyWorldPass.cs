@@ -40,6 +40,8 @@ namespace FamilyQuant
         public IReadOnlyList<string> Families { get; init; } = Array.Empty<string>();
         /// <summary>The NCBI taxon read from the header's OX= (or stored by the fetch), empty when unknown.</summary>
         public string Taxon { get; init; } = string.Empty;
+        /// <summary>Every direct taxon when a sequence retains joined source headers.</summary>
+        public IReadOnlyList<string> Taxa { get; init; } = Array.Empty<string>();
         /// <summary>The taxa above <see cref="Taxon"/>, when the fetch stored them.</summary>
         public IReadOnlyList<string> LineageTaxa { get; init; } = Array.Empty<string>();
         public bool FromPanel { get; init; }
@@ -120,6 +122,12 @@ namespace FamilyQuant
             return m.Success ? m.Groups[1].Value : string.Empty;
         }
 
+        /// <summary>Every distinct positive OX= identifier of a FASTA description, including joined entries.</summary>
+        public static IReadOnlyList<string> TaxaOf(string? description) => TaxonField.Matches(description ?? string.Empty)
+            .Cast<Match>().Select(match => int.TryParse(match.Groups[1].Value, NumberStyles.None,
+                CultureInfo.InvariantCulture, out int id) && id > 0 ? id.ToString(CultureInfo.InvariantCulture) : string.Empty)
+            .Where(id => id.Length > 0).Distinct(StringComparer.Ordinal).OrderBy(id => id, StringComparer.Ordinal).ToArray();
+
         /// <summary>An accession without its isoform suffix, so P12345-2 and P12345 are one protein.</summary>
         public static string BaseAccession(string accession)
         {
@@ -152,6 +160,7 @@ namespace FamilyQuant
                     Sequence = item.Sequence ?? string.Empty,
                     Families = FamiliesOf(item.Evidence),
                     Taxon = TaxonOf(item.Description),
+                    Taxa = TaxaOf(item.Description),
                 });
             }
             foreach (PanelEntry entry in file.EvidenceSource?.ReferencePanel?.Entries ?? new List<PanelEntry>())
@@ -190,15 +199,16 @@ namespace FamilyQuant
                 Sequence = e.Sequence ?? string.Empty,
                 Families = FamiliesOf(e.Evidence),
                 Taxon = e.TaxonId > 0 ? e.TaxonId.ToString(CultureInfo.InvariantCulture) : string.Empty,
+                Taxa = e.TaxonId > 0 ? new[] { e.TaxonId.ToString(CultureInfo.InvariantCulture) } : Array.Empty<string>(),
                 LineageTaxa = e.LineageTaxonIds.Select(t => t.ToString(CultureInfo.InvariantCulture)).ToArray(),
                 FromPanel = e.FromReviewedPanel,
             }).ToList();
             return Build(proteins, snapshot.Families, snapshot.ContentSha256);
         }
 
-        /// <summary>Whether a protein belongs to one of the taxa: its own taxon or any taxon of its lineage.</summary>
+        /// <summary>Whether a protein belongs to any direct taxon, or any taxon of its lineage.</summary>
         public static bool IsOfTaxa(FamilyWorldProtein protein, ICollection<string> taxa) =>
-            (protein.Taxon.Length > 0 && taxa.Contains(protein.Taxon)) || protein.LineageTaxa.Any(taxa.Contains);
+            (protein.Taxon.Length > 0 && taxa.Contains(protein.Taxon)) || protein.Taxa.Any(taxa.Contains) || protein.LineageTaxa.Any(taxa.Contains);
 
         /// <summary>The searchable world: the kept proteins and one reversed copy of each.</summary>
         public static FamilyWorld Build(IEnumerable<FamilyWorldProtein> proteins, IEnumerable<string> scopeFamilies) =>
