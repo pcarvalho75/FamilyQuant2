@@ -63,6 +63,8 @@ internal static partial class Program
                     basis.SelectedIndex = 1; PumpDispatcher();
                     Check(theme + " the native basis event still updates the family column immediately", originalShare == 1
                         && file.MyExtendedFastaItems[0].FullXicShare == .2);
+                    Check(theme + " the family column header names the TIC basis used by its displayed numbers",
+                        ((DataGridTextColumn)control.FindName("ColumnFullXic")).Header as string == "Full XIC, % of TIC");
                     basis.SelectedIndex = 0;
                     Capture("full-xic");
                     model.CurrentPLP = new PatternLabProject(new FileInfo(plpPath));
