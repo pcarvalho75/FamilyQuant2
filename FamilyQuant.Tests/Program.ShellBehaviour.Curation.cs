@@ -135,7 +135,9 @@ internal static partial class Program
                 try
                 {
                     var apply = WalkTree(review).OfType<Button>().Single(value => value.Content as string == "Apply");
-                    var offered = WalkTree(review).OfType<DataGrid>().Single(); offered.SelectAll();
+                    var offered = (DataGrid?)review.GetType().GetField("grid", BindingFlags.Instance | BindingFlags.NonPublic)?.GetValue(review)
+                        ?? WalkTree(review).OfType<DataGrid>().First(value => value.IsVisible && value.Items.Count > 0);
+                    offered.SelectAll();
                     SecondaryClick(WalkTree(review).OfType<Button>().Single(value => value.Content as string == "Untick selected")); PumpDispatcher();
                     R(["0F3C5F5D43F5"], "blank keyword Apply gate", disabled && enabled && !apply.IsEnabled, "old blank false/nonblank true", apply.IsEnabled);
                 }
@@ -149,6 +151,9 @@ internal static partial class Program
                 void Set(object target, string name, object? value) => target.GetType().GetField(name, BindingFlags.NonPublic | BindingFlags.Instance)?.SetValue(target, value);
                 void Mount(Window shell, UserControl content, string field)
                 {
+                    if (content.Parent is Panel panel) panel.Children.Remove(content);
+                    else if (content.Parent is ContentControl parent) parent.Content = null;
+                    else if (content.Parent is Decorator decorator) decorator.Child = null;
                     var grid = (Grid)shell.FindName("GridApp"); grid.Children.Clear(); grid.Children.Add(content);
                     Set(shell, "cgc", field == "cgc" ? content : null); Set(shell, "dnc", field == "dnc" ? content : null);
                     SecondaryCall(shell, shell.GetType(), "UpdateGuide"); PumpDispatcher();

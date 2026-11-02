@@ -52,7 +52,14 @@ internal static partial class Program
                 else { skipped++; Console.WriteLine("  SKIP  SH behaviour " + name + ": " + reason); }
             }
             void Attempt(string[] ids, string name, Action action)
-            { try { action(); } catch (Exception ex) { Record(ids, name, false, null, null, ex.GetBaseException().GetType().Name + ": " + ex.GetBaseException().Message); } }
+            {
+                try { action(); }
+                catch (Exception ex)
+                {
+                    var pending = ids.Where(id => !facts.TryGetValue(id.StartsWith("FQ15-", StringComparison.Ordinal) ? id : "FQ15-" + id, out var recorded) || !recorded.Passed).ToArray();
+                    if (pending.Length > 0) Record(pending, name, false, null, null, ex.GetBaseException().GetType().Name + ": " + ex.GetBaseException().Message);
+                }
+            }
             ShellBehaviourCuration(legacy, output, Record, Attempt);
             ShellBehaviourBuild(legacy, output, Record, Attempt);
             var oldDeNovo = (UserControl)Activator.CreateInstance(legacy.GetType("FamilyQuant.DeNovoControl", true)!)!;
