@@ -76,6 +76,8 @@ Run the built test executable with these flags and explicit lane-owned outputs:
 | `--test-shell-metadata` | Adversarial compiled-metadata and isolated-event comparison fixtures, also run by the ordinary ledger guard |
 | `--shell-metadata-snapshot <frozen-root> <inventory> <fresh-output.json>` | Read assigned compiled shell views without showing windows; the same helper is linked into ReferenceGoldenHost |
 | `--ledger-shell-native <frozen-root> <frozen-host.exe> <fresh-output> <date> [C1-cohort-register]` | Execute frozen/current view metadata and isolated Home clicks; emit SH-runtime and the bounded C1-runtime candidates |
+| `--ledger-secondary-compare <frozen-root> <native-master-audit> <fresh-output> <date> [--negative-control]` | Scoped exact secondary-view declarations for OPEN master IDs; [guide](SECONDARY-LEDGER.md) |
+| `--ledger-secondary-runtime <frozen-root> <native-master-audit> <frozen-app> <fresh-output> <date> [--negative-control]` | Native secondary controls, actions, values and cache contracts; [guide](SECONDARY-LEDGER.md) |
 
 For example, obtain the timestamp with `date '+%F %T %z'` immediately before the proof command.
 Neither the proof runner nor the audit invokes the frozen-source generator.
