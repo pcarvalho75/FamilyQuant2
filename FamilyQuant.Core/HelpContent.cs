@@ -237,6 +237,13 @@ namespace FamilyQuant
             sb.AppendLine("keyword: the short disintegrins and many fragments are too short for Pfam. Domains do");
             sb.AppendLine("not separate everything: most ADAMs have the same ones as a P-III SVMP.");
             sb.AppendLine();
+            sb.AppendLine("Fetch family world uses the confirmed database task and scope from Group by evidence.");
+            sb.AppendLine("Fetch evidence first to supply the database's family annotations.");
+            sb.AppendLine("If no matching task is confirmed, it reads the database and asks you to confirm the scope first.");
+            sb.AppendLine("The screen shows the stored release, scope, protein count and size. Cancel or a failed fetch");
+            sb.AppendLine("keeps the previous file. Save the project to keep the world for offline use. Compute uses the");
+            sb.AppendLine("stored world to populate Database gap, where credited tags can suggest FASTA additions.");
+            sb.AppendLine();
             sb.AppendLine("Group by evidence opens the Evidence tab of Review grouping. Confirm the scope,");
             sb.AppendLine("then review the supplied families, reasons, flags and protein ticks before Apply");
             sb.AppendLine("grouping; the review's Help explains its architecture, motif and left-out views.");

@@ -28,7 +28,23 @@ membership ambiguity. The default minimum tag length is 8 residues (D22, which r
 attribution and per-family error estimates belong to B5/B6; this storage API makes none of those
 claims.
 
-Native commands:
+Desktop route:
+
+On the curation screen, **Fetch family world** sits beside **Fetch evidence**. It reuses a valid
+confirmed task from the evidence recipe or stored world; otherwise it reads the database task
+and asks the person to confirm scope words or quoted phrases. Discovery and confirmation do not
+change the document. The shared operation host supplies progress and Cancel during the fetch.
+The screen reports the stored release, scope, counts and serialized size. Save keeps the world
+in the project; offline reopen needs no network. Compute uses that world to populate Database
+gap, whose export can supply suggested FASTA additions when credited tags support them.
+
+The native desktop regression is `--test-desktop-world`. The real-data walk is
+`--desktop-world-walk <copied-project> <copied-raw-folder> <copied-sepr2> <copied-denovo-root> <output> <confirmed-scope>`.
+It runs the real fetch button, scope dialog, Compute command and Results export dialogs on a
+private desktop. It saves and reopens projects and checks the displayed Database gap table and
+FASTA output. It calls the product engine without replacing scientific results.
+
+Native fetch commands:
 
 ```text
 --test-family-world-fetch
