@@ -76,6 +76,7 @@ namespace FamilyQuant.Tests
             BusyOperationTests(workDir);
             ShellDialogTests(workDir);
             ResultsViewModelTests();
+            DatabaseGapTests(Path.Combine(workDir, "database-gap"));
             ResultsPreservationTests(Path.Combine(workDir, "results-preservation"));
             DeNovoViewModelTests(workDir);
             HomologyResultsTests(workDir);

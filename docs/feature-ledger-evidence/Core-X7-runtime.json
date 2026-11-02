@@ -5,176 +5,176 @@
   "runs": [
     {
       "id": "native",
-      "command": "D:\\FamilyQuant-wt\\opus\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --ledger-storage-runtime D:/FamilyQuant-data/out-floater/ledger/frozen-source D:/FamilyQuant-data/out-opus/b6/ledger-storage-2 \u00222026-11-02 04:05:31 -0800\u0022",
-      "executedAt": "2026-11-02 04:05:31 -0800",
-      "commit": "3b89328e0bf3124ecb1fc4b9afcb4b24fb0b2955",
+      "command": "C:\\FamilyQuant-wt2\\results\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --ledger-storage-runtime D:/FamilyQuant-data/out-floater/ledger/frozen-source D:/FamilyQuant-data/out-results/B7-2/storage-runtime \u00222026-11-02 03:37:00 -0800\u0022",
+      "executedAt": "2026-11-02 03:37:00 -0800",
+      "commit": "bef66db3951f2a77cb8a64c4aaeaa4f9f9e3989f",
       "artifacts": [
         {
-          "path": "D:\\FamilyQuant-data\\out-opus\\b6\\ledger-storage-2\\proofs.log",
+          "path": "D:\\FamilyQuant-data\\out-results\\B7-2\\storage-runtime\\proofs.log",
           "sha256": "9B91C96360CC936AA7BA49B9A395FA1E3583708466994A1458DCD5B4E2DF55B1"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-opus\\b6\\ledger-storage-2\\actual-values.json",
+          "path": "D:\\FamilyQuant-data\\out-results\\B7-2\\storage-runtime\\actual-values.json",
           "sha256": "12AA11E0C6876A22620917B2D59F42CFED3089EC781B89B66D7D5635A933915D"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-opus\\b6\\ledger-storage-2\\executed\\FamilyQuant.Core/ProjectStore.cs",
+          "path": "D:\\FamilyQuant-data\\out-results\\B7-2\\storage-runtime\\executed\\FamilyQuant.Core/ProjectStore.cs",
           "sha256": "CF34F9F920078064A0F94CA8C3F1021ABFD2D1D6229A69C15E75C9ED899E8949"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-opus\\b6\\ledger-storage-2\\executed\\FamilyQuant.Core/Storage/DerivedRunFraction.cs",
+          "path": "D:\\FamilyQuant-data\\out-results\\B7-2\\storage-runtime\\executed\\FamilyQuant.Core/Storage/DerivedRunFraction.cs",
           "sha256": "DB943BF669B6E133E4359C2FABF73502C482052C94E0694F5AC3BD6BF87E68F3"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-opus\\b6\\ledger-storage-2\\executed\\FamilyQuant.Core/Storage/ProjectArchiveEntries.cs",
+          "path": "D:\\FamilyQuant-data\\out-results\\B7-2\\storage-runtime\\executed\\FamilyQuant.Core/Storage/ProjectArchiveEntries.cs",
           "sha256": "E6F5E379CA8B22948A63F9E8955AF7B5727E9963DA17C8637865504F8B31739C"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-opus\\b6\\ledger-storage-2\\executed\\FamilyQuant.Core/Storage/ProjectFileSchema.cs",
+          "path": "D:\\FamilyQuant-data\\out-results\\B7-2\\storage-runtime\\executed\\FamilyQuant.Core/Storage/ProjectFileSchema.cs",
           "sha256": "CA83EE0B4B17D735F0C59EBDA615432F09856F7999CF885E40EBBC6173ED492B"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-opus\\b6\\ledger-storage-2\\executed\\FamilyQuant.Core/Storage/ProjectManifestCodec.cs",
+          "path": "D:\\FamilyQuant-data\\out-results\\B7-2\\storage-runtime\\executed\\FamilyQuant.Core/Storage/ProjectManifestCodec.cs",
           "sha256": "CB22639FA210E2838BD5F760C071E23AF0A74E49291479D8EEC9997AB9D7FE55"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-opus\\b6\\ledger-storage-2\\executed\\FamilyQuant.Core/Storage/ProjectQuantCodec.cs",
+          "path": "D:\\FamilyQuant-data\\out-results\\B7-2\\storage-runtime\\executed\\FamilyQuant.Core/Storage/ProjectQuantCodec.cs",
           "sha256": "A5097760D179973DCC6D29CEAA10208254C0B925D67E691F650B62A6BC97F1EC"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-opus\\b6\\ledger-storage-2\\executed\\FamilyQuant.Core/Storage/ProjectSpectrumCodec.cs",
+          "path": "D:\\FamilyQuant-data\\out-results\\B7-2\\storage-runtime\\executed\\FamilyQuant.Core/Storage/ProjectSpectrumCodec.cs",
           "sha256": "5DC87F85CB5719C9B38FD3262909E9D764CA9251D263DDE77B7199A0448356C5"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-opus\\b6\\ledger-storage-2\\executed\\FamilyQuant.Core/Storage/QuantManifest.cs",
+          "path": "D:\\FamilyQuant-data\\out-results\\B7-2\\storage-runtime\\executed\\FamilyQuant.Core/Storage/QuantManifest.cs",
           "sha256": "14FD6DCB68E55BA89C8518DE71D1F23BAD4A48642E55CC274B038E6D7140AE98"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-opus\\b6\\ledger-storage-2\\executed\\FamilyQuant.Core/Storage/QuantRow.cs",
+          "path": "D:\\FamilyQuant-data\\out-results\\B7-2\\storage-runtime\\executed\\FamilyQuant.Core/Storage/QuantRow.cs",
           "sha256": "7C8F6076F895F8935C09E72A8B12C79AB42886CA35F9132E026F77CE3DF307F1"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-opus\\b6\\ledger-storage-2\\executed\\FamilyQuant.Tests/FeatureLedgerEvidence.Reporting.cs",
+          "path": "D:\\FamilyQuant-data\\out-results\\B7-2\\storage-runtime\\executed\\FamilyQuant.Tests/FeatureLedgerEvidence.Reporting.cs",
           "sha256": "8633DCBB14E8DBF1746A1FD771AD4E9404900EB68BA46690A31EFC8DEDFA247B"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-opus\\b6\\ledger-storage-2\\executed\\FamilyQuant.Tests/FeatureLedgerEvidence.cs",
+          "path": "D:\\FamilyQuant-data\\out-results\\B7-2\\storage-runtime\\executed\\FamilyQuant.Tests/FeatureLedgerEvidence.cs",
           "sha256": "FCCFCE75E122616388FDD68B96AF3E3F7104DC809B61D1F48C3A4A07B9B1969C"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-opus\\b6\\ledger-storage-2\\executed\\FamilyQuant.Tests/Program.Commands.CoreRuntimeLedger.cs",
+          "path": "D:\\FamilyQuant-data\\out-results\\B7-2\\storage-runtime\\executed\\FamilyQuant.Tests/Program.Commands.CoreRuntimeLedger.cs",
           "sha256": "BE468A0FBE80F30FD298F16805E2066108127831C5A645BF9BCA586294367529"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-opus\\b6\\ledger-storage-2\\executed\\FamilyQuant.Tests/Program.CoreRuntimeLedger.cs",
+          "path": "D:\\FamilyQuant-data\\out-results\\B7-2\\storage-runtime\\executed\\FamilyQuant.Tests/Program.CoreRuntimeLedger.cs",
           "sha256": "759369D79079B29CAC0C8865F49525470CED0C1FBDE3F8AC3AD96594EDBE0CD5"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-opus\\b6\\ledger-storage-2\\executed\\FamilyQuant.Tests/Program.StorageRuntimeLedger.cs",
+          "path": "D:\\FamilyQuant-data\\out-results\\B7-2\\storage-runtime\\executed\\FamilyQuant.Tests/Program.StorageRuntimeLedger.cs",
           "sha256": "7F79DA8990B8157E83E71720892D7DBE7F414FC5E153D90333764DF6EEC31A57"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-opus\\b6\\ledger-storage-2\\executed\\frozen\\FamilyQuant/ProjectStore.cs",
+          "path": "D:\\FamilyQuant-data\\out-results\\B7-2\\storage-runtime\\executed\\frozen\\FamilyQuant/ProjectStore.cs",
           "sha256": "EC6F2C8603FDA27EB38ABA61686DD9CAA89B48968921925B83579F15A981DCA4"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-opus\\b6\\ledger-storage-2\\executed\\FamilyQuant.Tests.dll",
-          "sha256": "B4C6D86E7F3680970327060196160199530D6B25AE73BBCB9EF0E93D90BB9D26"
+          "path": "D:\\FamilyQuant-data\\out-results\\B7-2\\storage-runtime\\executed\\FamilyQuant.Tests.dll",
+          "sha256": "C0708ECD79DECA7E34C1E33ECF8356757C8F43F5A9F37D717F2F4AFC020B76B2"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-opus\\b6\\ledger-storage-2\\executed\\FamilyQuant.Core.dll",
-          "sha256": "419AD025FAC593821CE9C6B22D4852B0580A4C46ED7449D8C67966BCF65D0C88"
+          "path": "D:\\FamilyQuant-data\\out-results\\B7-2\\storage-runtime\\executed\\FamilyQuant.Core.dll",
+          "sha256": "E0A93AB8C91C8EDD992583C5D919183C4BAC0D5FD06E8B21CECB2DF9EBA0BE3C"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-opus\\b6\\ledger-storage-2\\atomic.fqproj",
+          "path": "D:\\FamilyQuant-data\\out-results\\B7-2\\storage-runtime\\atomic.fqproj",
           "sha256": "CE95E63BD94602390D3DF9978D38146D3E1EEE0987144AF225A4EDEDE9BC699E"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-opus\\b6\\ledger-storage-2\\booleans.fqproj",
+          "path": "D:\\FamilyQuant-data\\out-results\\B7-2\\storage-runtime\\booleans.fqproj",
           "sha256": "4CB6F199EB2DC744E5BEF7A7181B6FAF3234320C48897D2C6F2B5456F5056273"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-opus\\b6\\ledger-storage-2\\future-read.fqproj",
+          "path": "D:\\FamilyQuant-data\\out-results\\B7-2\\storage-runtime\\future-read.fqproj",
           "sha256": "9EFEEE022837ED98123D37150F879F479C6153CEC62244CFAB40DC3D64999FA7"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-opus\\b6\\ledger-storage-2\\legacy.fqproj",
+          "path": "D:\\FamilyQuant-data\\out-results\\B7-2\\storage-runtime\\legacy.fqproj",
           "sha256": "1F2F3715D715B7FD70186DFA44D0C435C7CF4785610124DEC3F16256B771FBEB"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-opus\\b6\\ledger-storage-2\\malformed-spectrum.fqproj",
+          "path": "D:\\FamilyQuant-data\\out-results\\B7-2\\storage-runtime\\malformed-spectrum.fqproj",
           "sha256": "CE0D3A2F59DACE7F3DC0A845B09A11A8ADB3D0AE65F9D6D3E05A74FD6FF1CE46"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-opus\\b6\\ledger-storage-2\\missing-charge.fqproj",
+          "path": "D:\\FamilyQuant-data\\out-results\\B7-2\\storage-runtime\\missing-charge.fqproj",
           "sha256": "DA28AF32183461561E3F70A85F0456D2FBAE74DA58375E92AEF1FFD4D25D4840"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-opus\\b6\\ledger-storage-2\\missing-count.fqproj",
+          "path": "D:\\FamilyQuant-data\\out-results\\B7-2\\storage-runtime\\missing-count.fqproj",
           "sha256": "5A1D9ED77780BE055FAC99A988B1F7E266A8F1839CF8329D78D9E800A2632A8F"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-opus\\b6\\ledger-storage-2\\missing-curation.fqproj",
+          "path": "D:\\FamilyQuant-data\\out-results\\B7-2\\storage-runtime\\missing-curation.fqproj",
           "sha256": "8B9EA5C86A79EC911D750B4CB02FA1515A275FB6607D04E79A72782E4C95FE41"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-opus\\b6\\ledger-storage-2\\missing-manifest.fqproj",
+          "path": "D:\\FamilyQuant-data\\out-results\\B7-2\\storage-runtime\\missing-manifest.fqproj",
           "sha256": "528F130B5688E9204977F975D16E87D4EDAF03B7D20A10FE82E4439CB019D069"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-opus\\b6\\ledger-storage-2\\missing-precursor_mz.fqproj",
+          "path": "D:\\FamilyQuant-data\\out-results\\B7-2\\storage-runtime\\missing-precursor_mz.fqproj",
           "sha256": "2B2B2DAC94A23E8F43A79FF800C33EDD84BDF8B08E5AB3DD9E315726FBACE9DE"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-opus\\b6\\ledger-storage-2\\missing-run.fqproj",
+          "path": "D:\\FamilyQuant-data\\out-results\\B7-2\\storage-runtime\\missing-run.fqproj",
           "sha256": "17BA0782574DFA742063F6DEEE38DFD7E91EE9064FAA24F8698F8143A3125404"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-opus\\b6\\ledger-storage-2\\missing-scan.fqproj",
+          "path": "D:\\FamilyQuant-data\\out-results\\B7-2\\storage-runtime\\missing-scan.fqproj",
           "sha256": "C0F541A5DAF5B2967E6CA0C8A194027F53654A408B56A8C570EA21B8D317EC31"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-opus\\b6\\ledger-storage-2\\missing-sequence.fqproj",
+          "path": "D:\\FamilyQuant-data\\out-results\\B7-2\\storage-runtime\\missing-sequence.fqproj",
           "sha256": "9F36B206C03209A1303122199647D3ABD1629FA66370D338B11E9E0F6908E07D"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-opus\\b6\\ledger-storage-2\\missing-side.fqproj",
+          "path": "D:\\FamilyQuant-data\\out-results\\B7-2\\storage-runtime\\missing-side.fqproj",
           "sha256": "6406637AC01D9329E41D58558FDB951A15AA250401D0449861E376B1640AF8AA"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-opus\\b6\\ledger-storage-2\\missing-sidecar.fqproj",
+          "path": "D:\\FamilyQuant-data\\out-results\\B7-2\\storage-runtime\\missing-sidecar.fqproj",
           "sha256": "40A23CC2B48293217AF97FDE7518F86D619FA1B301645C6E8E13687CE30336B0"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-opus\\b6\\ledger-storage-2\\negative-count.fqproj",
+          "path": "D:\\FamilyQuant-data\\out-results\\B7-2\\storage-runtime\\negative-count.fqproj",
           "sha256": "C2AD432D1ABC02352C14F2A53BE948392AA3AB1D30CFA1169E6AF7277AC4CF78"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-opus\\b6\\ledger-storage-2\\null-manifest.fqproj",
+          "path": "D:\\FamilyQuant-data\\out-results\\B7-2\\storage-runtime\\null-manifest.fqproj",
           "sha256": "A6E9892DDEB9CCA416AE01C03B5F485E697BFA4C527AE9665F33B4CA90708856"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-opus\\b6\\ledger-storage-2\\null-spectrum.fqproj",
+          "path": "D:\\FamilyQuant-data\\out-results\\B7-2\\storage-runtime\\null-spectrum.fqproj",
           "sha256": "E40B5512C8C7E256E99717A3C94A48BB8F0B01E7A234AAD073AA5E0C99AEB80F"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-opus\\b6\\ledger-storage-2\\permuted.fqproj",
+          "path": "D:\\FamilyQuant-data\\out-results\\B7-2\\storage-runtime\\permuted.fqproj",
           "sha256": "9449D5A4FDCFCA2A27ABC4310E9041282A23E9C094A2E30AF0C49AC1FA7B4029"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-opus\\b6\\ledger-storage-2\\stale-concordance.fqproj",
+          "path": "D:\\FamilyQuant-data\\out-results\\B7-2\\storage-runtime\\stale-concordance.fqproj",
           "sha256": "47F249786AB0B3C6662DE23499497A1CC13097A199B9FDECE43C1A4B01DF64D4"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-opus\\b6\\ledger-storage-2\\template.fqproj",
+          "path": "D:\\FamilyQuant-data\\out-results\\B7-2\\storage-runtime\\template.fqproj",
           "sha256": "0A8ADFB6C6E1A2B8D2C9F5CD2BB3ED3BF6A3863EC6F26939B96DAD78DF43A25A"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-opus\\b6\\ledger-storage-2\\wrong-count.fqproj",
+          "path": "D:\\FamilyQuant-data\\out-results\\B7-2\\storage-runtime\\wrong-count.fqproj",
           "sha256": "FE7BFCA9F45426D787094FA3F1D638ACA4AD1D729BD2DF743A223B87B91A1431"
         }
       ],
-      "workingDirectory": "D:\\FamilyQuant-wt\\opus"
+      "workingDirectory": "C:\\FamilyQuant-wt2\\results"
     }
   ],
   "rows": [
@@ -5049,7 +5049,7 @@
           "kind": "test",
           "target": "RunCoreRuntimeLedger",
           "assertion": "Core-X7-runtime kind export/storage fact: every listed native value and branch check passed",
-          "artifact": "D:\\FamilyQuant-data\\out-opus\\b6\\ledger-storage-2\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-results\\B7-2\\storage-runtime\\proofs.log",
           "inspectedBy": ""
         }
       ]
