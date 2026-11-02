@@ -17,7 +17,7 @@ Render targets refer to `ScreenHarness.Screens`, captured with `--screens <outpu
 Release gate: `FamilyQuant.Tests.exe --feature-ledger-release-check` fails until every retained row is VERIFIED with evidence. Authorized DROP rows use APPROVED_DROP, which records a decision, not a completed UI removal. The normal quick suite permits OPEN rows during development. Regeneration resets retained rows to OPEN; preserve reviewed evidence when updating the scanner.
 
 Scan count: **5756**. Ledger rows: **5756**. Source files: **104**.
-Authorized DROP rows: **296**; proposed VERIFIED retained rows: **2443**; OPEN retained rows: **3017**.
+Authorized DROP rows: **296**; proposed VERIFIED retained rows: **2909**; OPEN retained rows: **2551**.
 
 | ID | Disposition | Kind | Frozen source | Fact or control | Planned check | State | Evidence |
 |---|---|---|---|---|---|---|---|
@@ -4544,472 +4544,472 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **2443**; OPEN r
 | FQ15-07DB71D9C930 | KEEP | export/storage fact | FamilyQuant/PresentationEvidencePack.cs:740 | "," | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-pack:FQ15-07DB71D9C930 |
 | FQ15-CE2D01789779 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:26 | "Reverse_" | test:AnalyticsRenderTests | OPEN | pending |
 | FQ15-B9EF8B77B2BA | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:28 | "contaminant_" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-D86F27707924 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:67 | "Independent database searches reproduce the same sequence" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-561E1E206C60 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:68 | "PatternLab versus PEAKS: deterministic one-to-one PSM pairs, same file + scan + charge, precursor m/z within " | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-20D08FEEFD87 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:69 | "0.###" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-A35982B83556 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:69 | " ppm." | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-42158C422642 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:78 | " exact PTM-cleaned sequence matches" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-302805CD8B40 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:81 | " precursor-qualified one-to-one PSM pairs" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-19ECDFEA4689 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:83 | "PTM annotations removed; I and L remain distinct in the headline." | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-06798B65A051 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:89 | "NESTED AUDIT" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-43218B960F6D | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:90 | " / " | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-F49B7B74D50D | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:92 | "shared scans contain at least one precursor-qualified pair" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-1DBDABDDF531 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:94 | "Raw scan overlap is retained as an audit, not the agreement denominator." | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-59532EB625A6 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:96 | "Selected de novo-source calls are alternative hypotheses and are audited separately." | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-C0E9175BC215 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:103 | "strict sequence agreement" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-5AFD68803ADF | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:106 | " strict mismatches" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-72E2C912C86B | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:109 | " of these are I/L-equivalent" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-985222668BC3 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:110 | " PatternLab PSM rows" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-C406A156BADF | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:112 | " PEAKS database PSM rows" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-A4BE4FBA0F6A | KEEP | format/export | FamilyQuant/PresentationFigures.cs:124 | "de_novo_score_distribution.png" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-B07B1D613D5C | KEEP | format/export | FamilyQuant/PresentationFigures.cs:125 | "de_novo_consolidation.png" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-64AC40D19955 | KEEP | format/export | FamilyQuant/PresentationFigures.cs:126 | "peptide_representatives.png" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-8FD38C9211B5 | KEEP | format/export | FamilyQuant/PresentationFigures.cs:127 | "database_search_concordance.png" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-8CF52D4A19D5 | KEEP | format/export | FamilyQuant/PresentationFigures.cs:128 | "de_novo_alternative_triage.png" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-3BF417673809 | KEEP | format/export | FamilyQuant/PresentationFigures.cs:129 | "signal_by_run.png" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-ECE9A52DE149 | KEEP | format/export | FamilyQuant/PresentationFigures.cs:130 | "signal_uplift.png" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-1D490CD0A1AF | KEEP | format/export | FamilyQuant/PresentationFigures.cs:131 | "reference_envelope_model_diagnostics.png" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-3F5B4115C2BB | KEEP | format/export | FamilyQuant/PresentationFigures.cs:132 | "identity_sweep.png" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-97F79FB106B3 | KEEP | format/export | FamilyQuant/PresentationFigures.cs:133 | "family_contribution.png" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-64B9328C1CA3 | KEEP | format/export | FamilyQuant/PresentationFigures.cs:134 | "family_signal_vs_denovo_share.png" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-C2E7489727A9 | KEEP | format/export | FamilyQuant/PresentationFigures.cs:135 | "family_source_sequence_counts.png" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-450F3390CE2F | KEEP | format/export | FamilyQuant/PresentationFigures.cs:140 | "de_novo_score_sweep_overlap.png" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-66B32AC8BB61 | KEEP | format/export | FamilyQuant/PresentationFigures.cs:145 | "de_novo_peaks_deepnovo_agreement.png" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-1381526D587C | KEEP | format/export | FamilyQuant/PresentationFigures.cs:149 | "de_novo_source_venn.png" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-B3C511095A47 | KEEP | format/export | FamilyQuant/PresentationFigures.cs:154 | "de_novo_accepted_score_agreement.png" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-CAA7BC0D67D2 | KEEP | format/export | FamilyQuant/PresentationFigures.cs:159 | "de_novo_score_vs_score_scatter.png" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-C1482BF4E0DF | KEEP | format/export | FamilyQuant/PresentationFigures.cs:164 | "de_novo_set_novelty.png" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-1F9C39D40801 | KEEP | format/export | FamilyQuant/PresentationFigures.cs:169 | "de_novo_variant_comparison.png" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-F24B60556371 | KEEP | format/export | FamilyQuant/PresentationFigures.cs:173 | "de_novo_source_effect_comparison.png" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-8E24430F9249 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:193 | "This project has no stored de novo/search-engine overlap study. Recompute full XIC with the configured de novo input, or reconcile it in De Novo Step 2." | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-D14BFD2C7D35 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:195 | "This project's overlap study predates the literal same-file/same-scan sequence comparison. Recompute full XIC with the configured de novo input before exporting the talk plots." | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-895BBBD26EE8 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:197 | "This project has no stored de novo source-confidence distribution. Recompute full XIC with the configured de novo input before exporting the talk plots." | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-CA30235F0683 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:209 | "The stored source-confidence distributions do not exactly match the configured " | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-64E294DCA79F | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:210 | "de novo input sources. Inputs = [" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-BEE15E6CE915 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:211 | ", " | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-2A982963CD9C | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:212 | "]; distributions = [" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-4BEF2B25806C | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:213 | ", " | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-58DC94DF8F58 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:214 | "]. Recompute full XIC; a partial primary-source panel cannot stand in for a " | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-4225B584D811 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:215 | "multi-source project." | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-9C592C161D0A | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:217 | "This project has no stored de novo identification consolidation. Recompute full XIC with the configured de novo input before exporting the talk plots." | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-87FFA163260C | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:220 | "This project has no stored PatternLab/PEAKS database-search concordance audit. Recompute full XIC with the complete PEAKS export before exporting the talk plots." | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-F77A94A91138 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:228 | "This project's PatternLab/PEAKS concordance audit predates precursor-qualified " | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-8989F3F09A50 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:229 | "one-to-one pairing. Recompute full XIC before exporting figures; raw shared scans " | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-484E5E6BB3D5 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:230 | "cannot be used as the sequence-agreement denominator." | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-06A125B63E44 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:232 | "This project has no stored identity sweep. Run the identity scan from the USearch screen and save the complete scientific project before exporting the talk plots." | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-10728656631A | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:274 | "An output folder is required." | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-DE8D6795F15A | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:289 | "An output folder is required." | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-5D8D150CAB0B | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:302 | "An output folder is required." | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-BF67CE760541 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:315 | "An output folder is required." | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-F5A27F774DCE | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:330 | "An output folder is required." | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-0D9C35BDB644 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:344 | "An output folder is required." | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-A12721122CAA | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:357 | "An output folder is required." | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-5FDCCCEEEB72 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:367 | "An output folder is required." | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-195D05F64525 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:379 | "An output folder is required." | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-75C7BD7D9058 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:423 | " OS=" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-85209D3D9166 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:426 | "\u2026" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-EF10B6BF7161 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:427 | "F" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-239E960E5DB8 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:428 | " \u00B7 " | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-93049D5762EA | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:472 | "Segoe UI" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-EE20D3FD80DD | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:497 | "N0" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-1647E3B55A5E | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:498 | "F1" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-35B728C6B167 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:498 | "%" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-8A9A3A21631A | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:521 | "When both callers pass, do they report the same peptide?" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-39349AFB4855 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:522 | "One dot per compatible file + scan + charge/m/z precursor hypothesis; both source calls passed all configured filters." | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-BF066CBEE899 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:579 | "PEAKS " | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-DCC885DA63C8 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:580 | " \u00B7 accepted calls only" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-13F437DBD24D | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:583 | "DeepNovo " | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-740CDB6C3730 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:584 | " \u00B7 accepted calls only" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-E2E731E13F7A | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:590 | "JOINTLY ACCEPTED" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-CD06D04DEF3E | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:594 | "precursor-hypothesis rows" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-9B3A1B104955 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:600 | "Exact match" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-51AF8A3C0B29 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:602 | " \u00B7 " | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-945D761B9708 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:608 | "Sequence mismatch" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-DEB599DD949E | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:610 | " \u00B7 " | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-169496801ACB | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:616 | "MATCH RULE" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-D3AB957BA935 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:618 | "PTM notation removed" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-CE8C4262AE4A | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:620 | "I/L kept distinct" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-A7827AFC6C92 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:625 | "Inclusion: both Accepted = true after source score + peptide length + local-confidence stretch filters." | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-7651C67E1BC6 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:628 | "Important: ALC and SCORE are different source-native scales; the plot compares calls and does not treat equal numeric scores as equivalent probabilities." | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-1FA8033C1D7D | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:639 | "cutoff " | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-55D7BFFE75A7 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:650 | "cutoff " | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-7B7318DE1B05 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:676 | "An accepted-score axis requires at least one finite score or cutoff." | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-38BE83BA49C4 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:715 | "0.###" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-00923CDC70BB | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:778 | "PEAKS and DeepNovo contribute mostly distinct peptide sequences" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-876E798CCFC1 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:779 | "Exact directly observed sets from the same only+DeepNovo computation; each panel states when its sequence set is counted." | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-C00D8CF7083F | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:788 | "A \u00B7 FILTERED CALLS" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-F88054AE9A15 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:788 | "Before precursor union" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-74FDA53F24B2 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:790 | "B \u00B7 CARRIED FORWARD" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-ACBFD57362A4 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:790 | "Source claims on retained union rows" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-1B93BCD525DA | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:795 | "WHY DEEPNOVO STARTS SMALLER" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-98A9D00DD744 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:799 | " raw" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-C7D2D340C03D | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:800 | " \u2265 " | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-E470599ACF46 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:801 | "0.###" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-A887F430A2EA | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:802 | " + length \u2265 " | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-EAA9A2580C1D | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:804 | " + local stretch" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-33ACFB6017F4 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:815 | "\u2192" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-422DEE1AF437 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:819 | "Local stretch = at least " | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-05E5C5864896 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:820 | " consecutive residues at \u2265" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-798C5023C988 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:821 | "% local confidence. Sequence sets remove PTM notation, pool runs and charge, and keep I/L distinct." | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-DE15F8651C2D | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:823 | "Panel B uses provenance from this exact union; it is not inferred from separately run source totals." | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-8F966C6AC4E6 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:833 | "Circle areas approximate caller totals; overlap lens is schematic." | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-B3BC92227A3F | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:859 | "PEAKS de-novo-only" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-C367549CE11E | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:860 | "DeepNovo" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-C65E26324324 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:866 | "exclusive" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-E61F645CE5D6 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:870 | "shared" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-2B511897C629 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:872 | "exclusive" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-689697A43293 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:875 | "PEAKS total " | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-E4577FDE96AB | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:875 | "   \u00B7   DeepNovo total " | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-895C567DE98B | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:876 | "   \u00B7   union " | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-AA0DA0C6971E | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:880 | "pooled" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-ADD8E3189BEE | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:880 | "pooled distinct sequences" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-41746B6C0060 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:910 | "The project has no de novo consolidation audit." | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-3F29C4C1D947 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:916 | "How imported de novo calls become credited representatives" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-7189224F8623 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:917 | "Every stage is project-native. Count grain changes are explicit; these four numbers are not one common-denominator funnel." | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-9E30E0CAF23B | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:927 | "1 \u00B7 IMPORTED" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-A62C513042A7 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:927 | "raw spectrum calls" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-8C9FD2DC5D2D | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:928 | "sum of rows in recorded" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-7A5776DBE1DC | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:928 | "source files" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-ADE1FEDC89BD | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:929 | "2 \u00B7 ACCEPTED" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-9A6385C5AFA1 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:929 | "calls after filters + union" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-43E6558C41EB | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:930 | "source score + length + local stretch" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-80C04CCD9F9D | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:930 | "then one winner per precursor" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-22D99227BA7F | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:931 | "3 \u00B7 CONSOLIDATED" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-4ACA8B2AB326 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:931 | "pooled distinct sequences" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-DCD4701D55D3 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:932 | "PTM notation removed; runs + charge pooled" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-D5543102C290 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:932 | "I/L remains distinct" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-1588001DAB5E | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:933 | "4 \u00B7 CREDITED" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-34EC03809E01 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:933 | "de novo representatives" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-E38ED3B175DB | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:934 | "search reconciliation + XIC + dedup" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-6373DA68DB94 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:934 | "cross-side search overlap suppressed" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-E3FB0DAE3623 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:963 | "Legacy project: raw import count comes from the stored primary score distribution." | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-669EBDE91497 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:967 | " \u00B7 " | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-C658129D2732 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:967 | " &gt;= " | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-6D63757FF975 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:968 | "0.###" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-EA6C612926C9 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:969 | "RECORDED SOURCE RULES" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-D739B5B9A0B3 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:973 | "Why stage 4 can exceed stage 3: stage 3 pools technical runs and charge states; stage 4 counts separately credited run \u00D7 peptidoform \u00D7 charge \u00D7 mass-cluster representatives." | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-8A07A4B23221 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:975 | "Credited means an additional de novo hypothesis with admitted MS1 signal after the production search-overlap suppression rule; it is not a count of unique peptide backbones." | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-A4963AD6A9C3 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:999 | "Accepted de novo calls collapse to distinct peptide sequences" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-C86D31181E5E | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1000 | "Identification diversity is counted without XIC; credited representatives use a separate run \u00D7 peptidoform \u00D7 charge \u00D7 precursor-mass grain." | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-9B015D9AAE60 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1009 | "IDENTIFICATION ONLY \u00B7 NO XIC" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-100498AAADDB | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1014 | "accepted spectrum calls" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-07D807BF83B2 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1015 | "additional calls after search reconciliation" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-1C5CE28F40D3 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1016 | "distinct PTM-cleaned sequences pooled across runs and charge" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-656854F4515D | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1032 | "The pooled sequence count removes repeated spectra, charge states and technical-run repeats; I and L remain distinct." | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-6524A75A5F5F | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1035 | "QUANTITATION \u00B7 A DIFFERENT COUNTING GRAIN" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-7DEC3E800729 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1041 | "credited de novo representatives" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-AE89AA46E16D | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1043 | "  +  " | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-23E4EA93007C | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1044 | "Run " | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-6ACBFF2A59A2 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1045 | "  =  " | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-5BA1122E44DC | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1047 | "Keeps run, canonical peptidoform and charge separate; the cross-side join is isotope-error-aware (M, M+-1, M+-2) and search-overlapping de novo representatives are suppressed." | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-620152077E7A | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1074 | "De-novo-only calls are alternative hypotheses, not failed database searches" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-350DC96A0C83 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1075 | "Selected de novo calls are precursor-triaged before any sequence comparison" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-7543CF10D1D6 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1076 | "Sources: " | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-200E06207AF1 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1076 | ". Triage requires the same file, MS2 scan, reported charge, and precursor m/z." | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-4532A663DAE2 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1079 | "All " | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-B4F09247F05C | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1079 | " filtered de novo calls" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-286B1FCEB8FE | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1092 | " no search PSM in same scan" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-B0B9B5EC6406 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1094 | " different charge" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-7AA5D6F30829 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1096 | " same z, different m/z" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-304F267D322E | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1100 | "same scan + charge + m/z" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-6C84D78CFF86 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1110 | "WHY THE LARGE NONMATCH COUNT IS EXPECTED" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-8D9BB32285C1 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1111 | "SOURCE-AWARE INTERPRETATION" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-681416C6F0C2 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1114 | "PEAKS labels these rows de-novo-only: its database search did" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-583F1EA78D88 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1115 | "Each caller was filtered on its own native score before union" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-DD568F036F90 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1118 | "not accept the same sequence as a database PSM." | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-71B429354242 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1119 | "resolution; ALC and SCORE were never treated as one scale." | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-68DC837119F6 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1121 | "Only " | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-957C76B9AE0A | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1121 | " of " | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-47E1A46E0FA6 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1123 | " reproduce a PEAKS DB sequence at the same charge." | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-AD56ECB94F7D | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1126 | "That is a property of the export category, not a search-accuracy estimate." | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-792E2EEDDBCF | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1127 | "This contextual overlap is not a database-search or caller-accuracy estimate." | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-AAAF78D5F7DC | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1131 | "SEQUENCE CHECK AFTER ALL PRECURSOR GATES" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-6AC175941EE9 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1133 | " exact after PTM removal" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-2D2991E11953 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1135 | "+" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-C0DD25090D9C | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1135 | " after I/L equivalence" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-5FBB8BCE291B | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1137 | " alternative sequences" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-E426FD6537BE | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1139 | "Not called search-engine conflicts. These hypotheses are excluded from" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-75F4FD947B37 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1141 | "additive de novo quantification when they overlap an identified precursor." | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-BF07E32757A7 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1166 | "Reference-group count versus sequence-identity threshold" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-8251CAF0ED13 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1167 | "Lower thresholds connect more related sequences, producing fewer and larger reference groups." | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-2E4F8FC93467 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1208 | "selected " | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-3A805F0D73BF | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1208 | "%" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-2667479AC412 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1212 | "Groups with \u22651 real sequence" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-9B87624B697A | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1214 | "Groups with \u22651 curated candidate" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-F20719FEB3FA | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1216 | "Minimum identity required to connect proteins (%)" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-C5BBA7E2AD8B | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1220 | "DEFINITIONS" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-7BE83AEB9CF2 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1221 | "Real sequence" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-27E3EFAC0B5F | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1222 | "Not a reversed decoy; may still" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-8C15861C6E40 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1223 | "be labelled contaminant." | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-70FC0ABE031D | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1224 | "Curated candidate" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-C343B5387B95 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1225 | "At least one real sequence in the" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-8BF0DE6D30B7 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1226 | "group is not labelled contaminant." | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-DB17933B0030 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1229 | "AT " | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-7787475EA5C4 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1229 | "%" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-E275C10B229B | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1230 | " groups with a real sequence" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-0DBCE97083D9 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1232 | " with a curated candidate" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-7F74E16F004F | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1258 | "Peptide evidence and de novo/search-engine reconciliation" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-C2D6E2DFD128 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1259 | "Counts on the left are quantified representatives; counts on the right are filtered de novo rows before XIC collapse." | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-628E80384794 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1264 | "Quantified representatives by run" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-CD956A1E9B03 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1286 | "Run " | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-514EFCE21106 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1289 | "Search engine" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-98B4B95F1104 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1290 | "De novo" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-886B1856BE29 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1291 | " pooled representatives \u00B7 " | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-76F797BEECBD | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1292 | " de novo" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-E06DD81AF1B9 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1296 | "Overlap study: same scan is not automatically the same precursor" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-BE7D144EF026 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1298 | "Filter: length \u2265 " | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-3C7A2E03D51C | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1298 | "; ALC \u2265 " | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-AE7E5B7C0C83 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1299 | "0.#" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-91EDE839407D | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1299 | "%; " | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-BD9F770FF53E | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1300 | " consecutive residues \u2265 " | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-F133BB0E0202 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1300 | "% local confidence" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-4259ABF52A36 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1305 | "Passed de novo filter" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-67F4F47F5326 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1306 | "Share file + scan with a search PSM" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-47F30647794F | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1307 | "Same file + scan + charge" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-53536A276932 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1308 | "Exact sequence in same-charge scans" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-C1BE83BD7153 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1309 | "Same charge but no m/z match" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-0D8C3C77AB00 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1310 | "Comparable precursor within " | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-2600DC9A8DD9 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1310 | "0.#" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-3EF38F9F0F15 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1310 | " ppm" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-81C4A2108E2D | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1318 | " / " | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-DC6F286E29FB | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1318 | " (" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-7E0975FA234A | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1318 | ")" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-61952BF59493 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1321 | "Precursor-qualified subset: strict exact = " | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-6ECCBA3C5E30 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1322 | "; +" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-732BC4A70F92 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1322 | " after I/L folding; " | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-B542E4EC71DA | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1323 | " still divergent." | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-375EA955DEFE | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1363 | "At least one source distribution is required." | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-078E900E60A9 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1369 | "De novo score distributions and source-specific acceptance rules" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-79C058B5B835 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1370 | "Background bars show raw spectrum calls; overlaid bars show calls retained after score, length and local-stretch filters. ALC and SCORE are not equivalent scales." | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-E8DA3E99F14C | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1390 | "0.#" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-1F75453DB92E | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1406 | "0" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-35BAAB75D877 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1413 | " &gt;= " | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-6376CBA266E8 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1414 | "0.#" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-D20B9651DD67 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1421 | " raw calls" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-C7BE7F19BE83 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1423 | " retained (" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-FDB5B46D4A98 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1425 | ")" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-3A68CC0E744F | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1427 | "length &gt;= " | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-C3EE48F7D154 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1427 | "; " | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-893DBACD4BF5 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1428 | " consecutive local scores &gt;= " | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-5F9892E7A3DA | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1466 | "De novo peptide yield versus confidence cutoff" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-B99147043F56 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1468 | "Distinct clean sequences (I folded to L), three Bjararaca replicates pooled, " | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-AFABD15761F2 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1469 | "collapsed to each tool's max confidence per sequence." | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-3FEF6B56D2CA | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1471 | "The two panels use DIFFERENT vertical scales: PEAKS de novo (full) is about 10x DeepNovo." | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-EF383F2A2608 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1478 | "in PEAKS de novo only reference (ALC &gt;= " | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-52E071E686EB | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1479 | "0" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-CF1BC593F614 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1479 | ")" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-BD3BFE1469B3 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1482 | "new (not in that reference)" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-A112C8D8722D | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1488 | "PEAKS de novo (full), filtered by ALC" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-D2A7AAB38919 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1490 | "DeepNovo, filtered by score" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-E598A49FF496 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1510 | "0" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-0AFC8BE659B4 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1517 | "distinct peptides (thousands)" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-B4C12A0A5365 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1535 | "0" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-2CD63D261D23 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1535 | "%" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-853718DF127B | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1539 | "0" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-EF6FEC1E38CE | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1552 | "confidence cutoff (%)" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-4D98876AAB7A | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1562 | "at " | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-6989217E2BB2 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1562 | "0" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-7124D4573132 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1562 | "% cutoff" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-E562A13BB3A8 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1563 | " peptides" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-0C5119C90092 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1564 | "0" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-20E17081686B | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1564 | "% in reference" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-F606202F914E | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1638 | "identical (same sequence)" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-C563238220C3 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1639 | "different sequence; theoretical mass match" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-1198A4FF606F | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1640 | "different theoretical mass" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-DC46B08E09BC | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1641 | "unknown" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-8750F3A0C0AD | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1647 | "PEAKS vs DeepNovo: agreement after matching the precursor" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-A85DE09B1C07 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1649 | "Primary pair: deterministic one-to-one calls within normalized run + scan, same charge, m/z within " | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-3DE87A7CDE35 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1650 | "0.###" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-6124AE7CAE7E | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1651 | " ppm. X: PEAKS reported neutral mass. Y: PTM-stripped sequence identity (I/L distinct)." | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-18A7F28958F4 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1653 | "Population: all imported export calls (observed floors: PEAKS ALC " | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-59326D23AB22 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1654 | "0.###" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-FF7C3AEA9CE8 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1655 | ", DeepNovo SCORE " | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-CED1AED120F7 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1656 | "0.###" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-EFB81660D807 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1657 | "); this is not the downstream &gt;=80 quantified tier." | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-8765A30B3E98 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1659 | "Primary: " | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-B512C1AD64D3 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1659 | " precursor-call pairs across " | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-E1F687121513 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1660 | " of " | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-8CF62C8B9D4E | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1661 | " shared scans; identical PTM-stripped sequences: " | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-F315AFAF029C | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1662 | "F1" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-662B21400DC3 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1662 | "%." | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-2CC167BA8E87 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1664 | "Among " | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-0A11615B9848 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1664 | " sequence disagreements, " | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-865101CCE1CD | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1666 | " have modification-aware theoretical masses within " | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-FC366CEDB372 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1667 | "0.###" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-505782629631 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1667 | " Da." | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-D56C785A9029 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1687 | "0" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-723C7233F16B | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1687 | "%" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-FD68C203FF1C | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1695 | "0" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-047D142EA2E0 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1700 | "PEAKS peptide neutral mass (Da)" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-0088E5D3AEAD | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1702 | "sequence identity (%)" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-1F4D71759D69 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1751 | " spectra without a reported mass are omitted" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-54C50BAE9A1B | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1760 | " primary pairs" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-A2637817618C | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1762 | "across " | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-76487E3A9A00 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1762 | " precursor-qualified shared scans" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-313E002AFC64 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1776 | "  (" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-EE59F7D4EF7C | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1776 | "F1" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-A5E29831EDFE | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1776 | "%)" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-0C5B502D5638 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1784 | "Among sequence disagreements" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-37B24D0B847A | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1785 | " of " | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-72D67C5AA42C | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1786 | " disagreements" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-6ECEEA7A5A75 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1787 | "match in modification-aware theoretical mass." | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-DD1A35F82342 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1791 | " pair differs" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-D8D55C283021 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1791 | " pairs differ" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-D774551CE638 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1791 | " by one equal-mass" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-50DD090E98AD | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1793 | "residue substitution (descriptive, not validation)." | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-2983BE029E94 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1796 | "Theoretical-mass tolerance: &#124;delta&#124; &lt;= " | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-C51860DEABE2 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1797 | "0.###" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-292B94FC6A4E | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1797 | " Da." | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-EA4797A0ADB1 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1800 | "RT &lt;= " | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-1B4D7829290C | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1800 | "0.###" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-79E1AFB64F7F | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1801 | " min: " | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-3EC0B88E3DC3 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1801 | " pairs (sensitivity only)." | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-5A74E89A37E7 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1805 | "Same-precursor member of de novo only: " | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-860A2F22EEC3 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1805 | " of " | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-D4393B924222 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1806 | " (" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-049332DE8949 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1807 | "F1" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-C6BDB1B3A899 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1807 | "%)." | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-0CABAAC51A95 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1810 | "De-novo-only membership: not evaluated (audit source not loaded)." | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-54297EF26A7D | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1852 | "Do PEAKS and DeepNovo agree when they call the same peptide?" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-337579AE80ED | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1854 | "Bothrops jararaca venom, three pooled replicates. Each dot is one peptide sequence " | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-C8558A972847 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1855 | "identified by both tools; axes give each tool's own confidence." | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-E08DBD33E7A8 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1857 | "Matched by modification-stripped, I=L-folded sequence, keeping the max confidence per tool." | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-D782CB968085 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1897 | "PEAKS de novo confidence, ALC (%)" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-CD761ACF65FE | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1899 | "DeepNovo confidence, SCORE (%)" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-6E6F8CB1E309 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1904 | "PEAKS-only peptides  (n = " | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-3A05C612EDCA | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1904 | ")" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-35205AF6A62A | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1909 | "DeepNovo-only peptides" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-399739D258EE | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1911 | "n = " | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-3A803CC40A53 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1918 | "Shared peptides: " | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-9B1DF9BF070D | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1920 | "Pearson r = " | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-1ECBEF522EE4 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1920 | "0.00" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-6389975666DC | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1944 | "0" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-0461A699D05E | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1964 | "0" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-52656F6095F4 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2020 | "What each de novo source adds: set-novelty view of Bjararaca venom peptides" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-381FFE5863D2 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2022 | "Three replicates pooled; peptides matched by clean sequence (mods stripped, I folded " | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-0FA6AAB1B4B2 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2023 | "to L); confidence collapsed to the max per sequence." | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-1ECB664524AF | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2028 | "+" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-E0BCD948B5ED | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2029 | "sequences the full de novo export adds" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-3C56F2DC5C1A | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2030 | "over the database-unassigned only subset" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-9EDBE9FD2583 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2032 | "+" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-B5C5D8CD17AE | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2033 | "DeepNovo sequences PEAKS de novo never reports" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-298BA13306A8 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2038 | "Shared PEAKS core (only and all)" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-39328378277F | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2039 | "Added by the full export over only" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-AAD1CCFD1430 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2040 | "Reported by all three sources" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-96E39FA67201 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2041 | "DeepNovo unique (never in PEAKS de novo)" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-04E8BCF0DD64 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2066 | "Clean sequences in region (count)" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-385719AD3841 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2082 | "med " | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-2C6F16974D6E | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2083 | "0" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-17DFF70779A2 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2083 | "%" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-A3653C7A4F67 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2098 | "PEAKS de novo ONLY" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-F58170155E72 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2098 | "PEAKS de novo ALL" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-89B0F4927417 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2098 | "DeepNovo" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-C5A3CF69621E | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2120 | "Set size (sequences)" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-575A1F3F837D | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2127 | "(" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-96CA3E977264 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2127 | " more are shared with PEAKS de novo all)" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-AFD6A23976BD | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2175 | "Assigned signal by technical run" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-643FB9EBC6CD | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2176 | "Identified observed envelope plus the reference-envelope model estimate for de novo M+0, each divided by run TIC." | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-44DF348D8A64 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2187 | "Run " | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-85D361C03C40 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2188 | "total " | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-BC8402D9F71D | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2191 | "Search-engine signal" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-C97FBBB62DDD | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2192 | "De novo addition" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-F9F12CF282E8 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2203 | "Pooled value of de novo sequencing" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-8531BFA41530 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2204 | "Both bars use the same pooled TIC denominator and the same envelope basis." | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-F8AC719469E9 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2207 | "Search engine only" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-FE42867A08DF | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2207 | "Search + de novo" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-77070712077B | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2220 | "+" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-65BBD387A1F7 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2220 | " relative uplift" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-A959940EFE76 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2222 | "+" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-6EB45D22D315 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2222 | "F2" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-9A78B046172B | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2223 | " percentage points" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-77DD400E5BDA | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2243 | "Reference-envelope model: support, validation, sensitivity" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-87C8CF39071B | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2244 | "De novo M+0 is scaled by identified envelope/M+0 ratios in fixed neutral-mass bins. This is a model estimate, not empirical calibration." | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-588632ACA532 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2259 | "N0" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-213BC9AA0289 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2262 | "identified reference representatives" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-992A1437F15D | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2274 | "\u00D7" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-95FEFEBA38D1 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2274 | "0.00" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-D56EF735C538 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2275 | "*" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-9E5893023318 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2287 | "LEAVE-ONE-REPRESENTATIVE-OUT" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-921B5CBFD7F4 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2291 | "weighted absolute prediction error" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-B187C4C86F59 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2293 | "median APE  " | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-CD4AED3C18C2 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2295 | "90th-percentile APE  " | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-8D339D2FF779 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2297 | "signed bias  " | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-213BF31ECCFA | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2299 | " identified representatives validated" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-673FAA9B1E4D | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2302 | "MODEL-FORM SENSITIVITY" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-38DA4D78A781 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2304 | "fixed bins  " | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-982911397D05 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2306 | "one pooled ratio  " | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-B902C010B3E5 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2311 | "difference vs fixed-bin estimate  " | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-DE304810C0B7 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2313 | "Sensitivity comparator only, not a confidence interval." | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-BE544288700C | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2316 | "Ratio labels above bars are fitted identified envelope/M+0. * = no support in that bin; pooled identified ratio used." | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-FC4990EE6085 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2318 | "Method: " | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-2459614DB23B | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2324 | "0.#" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-1F562E79187D | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2325 | "k+" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-4BBF66239F72 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2326 | "0.#" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-58545E31FB8A | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2327 | "-" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-BF2D7CB7B77C | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2327 | "k" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-BE713350FC3E | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2341 | "+" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-C348DEC78899 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2342 | "0.0" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-0E6E4B52BC20 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2342 | "%" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-FCE6A0BB645D | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2345 | "0.###E+0" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-5D1BD7C5253E | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2345 | " intensity\u00D7min" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-E05D8B2756BD | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2356 | "Reference-database components at " | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-34DD7A92049E | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2356 | "% identity" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-E34EB07F3DC9 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2357 | "Database bookkeeping, not peptide identifications, detected proteins, or abundance. Categories can overlap by definition." | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-4DFF3FCC39BC | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2360 | "All connected components" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-AF16D7051549 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2361 | "Pure-decoy control components" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-BD78DEA8A3BC | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2362 | "Target-bearing components" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-7DDA63E25E58 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2363 | "Contaminant-bearing target components" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-EC066F39A511 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2364 | "Non-contaminant target components" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-13F6702D07EC | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2373 | " component(s) contain both target and decoy entries." | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-EFCF99BDC9A3 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2402 | "De novo contribution versus total attributed family signal" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-8937BFAADAB2 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2403 | "Each point is one of " | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-69DBA3772EA2 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2404 | " families with attributed signal; labels mark the ten strongest. X = identified signal + de novo model estimate; Y = de novo share." | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-386D3775CBE0 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2422 | "0.#" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-FF78D5B5DAF4 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2424 | "0" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-AE82D7344937 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2424 | "%" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-BC28BE2775EC | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2464 | "Total attributed family signal (\u00D710\u2079 intensity\u00B7min)" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-B52796F0DF96 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2466 | "De novo share of family signal (%)" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-936F1A9CF4B6 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2468 | "Orange: \u226520% de novo contribution" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-5359239A58B3 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2693 | "De novo sequence evidence across toxin families" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-67D5BF2F83B8 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2694 | "Pooled PTM-cleaned sequences; PEAKS-only, shared and DeepNovo-only sets are disjoint. Search is separate context." | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-2614284A4B1A | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2703 | "No source-resolved PEAKS de-novo-only / DeepNovo family sequences are stored in this project." | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-C43CB42FAE91 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2705 | "Recompute or load the exact only+DeepNovo variant to populate this figure." | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-A3F5B699E5FA | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2738 | "search " | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-9B508ACD41FC | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2745 | "PEAKS de-novo-only exclusive" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-CEFA2A4CBD79 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2746 | "shared exact sequence" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-615CB116D416 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2747 | "DeepNovo exclusive" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-CA86AAEF0290 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2756 | "Family mapping identity &gt;= " | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-7621BF4A8229 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2757 | "P0" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-67D471ED93A8 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2758 | "; one sequence may map to more than one family, so rows are non-additive." | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-0A737AF8A26D | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2778 | "The compact talk comparison requires search plus exactly three de novo conditions." | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-940A1C6C66FF | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2781 | "Search only" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-5296FFD9E131 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2782 | "The first compact comparison row must be the search baseline." | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-FA157053E268 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2788 | "What PEAKS de novo-only and DeepNovo add" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-E2EB5A54E3CA | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2789 | "Left: carried-forward distinct sequences (no XIC). Right: assigned share of the same pooled TIC; the de novo addition is model-estimated." | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-9AE12BA98114 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2801 | "CARRIED-FORWARD DISTINCT SEQUENCES" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-4DE465B2B0E2 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2803 | "PTM notation removed \u00B7 runs and charge pooled \u00B7 I/L distinct" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-444E185A4DBD | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2812 | "PEAKS de novo-only" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-38DE5D32E0BD | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2812 | "DeepNovo" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-E2B6965940B3 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2812 | "Both callers" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-2124645A660A | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2820 | "These counts are sequence diversity, not signal intensity." | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-56B5C79678BB | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2823 | "ASSIGNED SHARE OF POOLED TIC" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-9B687B634695 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2825 | "Observed search baseline + model-estimated de novo addition" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-E5DDA584AF33 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2834 | "Search only" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-B25D6D4E5ED1 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2834 | "PEAKS only" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-59B0A969F143 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2835 | "DeepNovo" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-180D601FE1C8 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2835 | "Both callers" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-8FA32C85B5D5 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2853 | "observed search" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-B05A4637BE34 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2857 | "de novo model estimate" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-69DE0FCE268D | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2861 | "The exact union is PEAKS de-novo-only + DeepNovo; PEAKS-all + DeepNovo is a separate variant and is not substituted here." | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-B89C05C5A29A | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2879 | "At least one variant is required." | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-9FDE896DB3DE | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2885 | "Observed search signal + de novo model estimate across source variants" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-387310D0A1D3 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2886 | "Same pooled TIC denominator; green is model-estimated, and each source keeps its native confidence field and cutoff. ALC and SCORE are not a common scale." | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-13DA37B293FC | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2918 | "+" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-92BD535C2535 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2939 | " credited de novo reps" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-D8AD56E9D1EA | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2943 | "Share of pooled TIC" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-0D6390AB7E7F | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2946 | "observed search envelope" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-01B9D1546CCA | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2950 | "reference-envelope model estimate for de novo M+0" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-84066BD709D7 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2955 | "fixed-bin vs pooled-ratio sensitivity (not a confidence interval)" | test:AnalyticsRenderTests | OPEN | pending |
+| FQ15-D86F27707924 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:67 | "Independent database searches reproduce the same sequence" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-D86F27707924 |
+| FQ15-561E1E206C60 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:68 | "PatternLab versus PEAKS: deterministic one-to-one PSM pairs, same file + scan + charge, precursor m/z within " | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-561E1E206C60 |
+| FQ15-20D08FEEFD87 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:69 | "0.###" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-20D08FEEFD87 |
+| FQ15-A35982B83556 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:69 | " ppm." | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-A35982B83556 |
+| FQ15-42158C422642 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:78 | " exact PTM-cleaned sequence matches" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-42158C422642 |
+| FQ15-302805CD8B40 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:81 | " precursor-qualified one-to-one PSM pairs" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-302805CD8B40 |
+| FQ15-19ECDFEA4689 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:83 | "PTM annotations removed; I and L remain distinct in the headline." | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-19ECDFEA4689 |
+| FQ15-06798B65A051 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:89 | "NESTED AUDIT" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-06798B65A051 |
+| FQ15-43218B960F6D | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:90 | " / " | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-43218B960F6D |
+| FQ15-F49B7B74D50D | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:92 | "shared scans contain at least one precursor-qualified pair" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-F49B7B74D50D |
+| FQ15-1DBDABDDF531 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:94 | "Raw scan overlap is retained as an audit, not the agreement denominator." | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-1DBDABDDF531 |
+| FQ15-59532EB625A6 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:96 | "Selected de novo-source calls are alternative hypotheses and are audited separately." | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-59532EB625A6 |
+| FQ15-C0E9175BC215 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:103 | "strict sequence agreement" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-C0E9175BC215 |
+| FQ15-5AFD68803ADF | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:106 | " strict mismatches" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-5AFD68803ADF |
+| FQ15-72E2C912C86B | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:109 | " of these are I/L-equivalent" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-72E2C912C86B |
+| FQ15-985222668BC3 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:110 | " PatternLab PSM rows" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-985222668BC3 |
+| FQ15-C406A156BADF | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:112 | " PEAKS database PSM rows" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-C406A156BADF |
+| FQ15-A4BE4FBA0F6A | KEEP | format/export | FamilyQuant/PresentationFigures.cs:124 | "de_novo_score_distribution.png" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-A4BE4FBA0F6A |
+| FQ15-B07B1D613D5C | KEEP | format/export | FamilyQuant/PresentationFigures.cs:125 | "de_novo_consolidation.png" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-B07B1D613D5C |
+| FQ15-64AC40D19955 | KEEP | format/export | FamilyQuant/PresentationFigures.cs:126 | "peptide_representatives.png" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-64AC40D19955 |
+| FQ15-8FD38C9211B5 | KEEP | format/export | FamilyQuant/PresentationFigures.cs:127 | "database_search_concordance.png" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-8FD38C9211B5 |
+| FQ15-8CF52D4A19D5 | KEEP | format/export | FamilyQuant/PresentationFigures.cs:128 | "de_novo_alternative_triage.png" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-8CF52D4A19D5 |
+| FQ15-3BF417673809 | KEEP | format/export | FamilyQuant/PresentationFigures.cs:129 | "signal_by_run.png" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-3BF417673809 |
+| FQ15-ECE9A52DE149 | KEEP | format/export | FamilyQuant/PresentationFigures.cs:130 | "signal_uplift.png" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-ECE9A52DE149 |
+| FQ15-1D490CD0A1AF | KEEP | format/export | FamilyQuant/PresentationFigures.cs:131 | "reference_envelope_model_diagnostics.png" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-1D490CD0A1AF |
+| FQ15-3F5B4115C2BB | KEEP | format/export | FamilyQuant/PresentationFigures.cs:132 | "identity_sweep.png" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-3F5B4115C2BB |
+| FQ15-97F79FB106B3 | KEEP | format/export | FamilyQuant/PresentationFigures.cs:133 | "family_contribution.png" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-97F79FB106B3 |
+| FQ15-64B9328C1CA3 | KEEP | format/export | FamilyQuant/PresentationFigures.cs:134 | "family_signal_vs_denovo_share.png" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-64B9328C1CA3 |
+| FQ15-C2E7489727A9 | KEEP | format/export | FamilyQuant/PresentationFigures.cs:135 | "family_source_sequence_counts.png" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-C2E7489727A9 |
+| FQ15-450F3390CE2F | KEEP | format/export | FamilyQuant/PresentationFigures.cs:140 | "de_novo_score_sweep_overlap.png" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-450F3390CE2F |
+| FQ15-66B32AC8BB61 | KEEP | format/export | FamilyQuant/PresentationFigures.cs:145 | "de_novo_peaks_deepnovo_agreement.png" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-66B32AC8BB61 |
+| FQ15-1381526D587C | KEEP | format/export | FamilyQuant/PresentationFigures.cs:149 | "de_novo_source_venn.png" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-1381526D587C |
+| FQ15-B3C511095A47 | KEEP | format/export | FamilyQuant/PresentationFigures.cs:154 | "de_novo_accepted_score_agreement.png" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-B3C511095A47 |
+| FQ15-CAA7BC0D67D2 | KEEP | format/export | FamilyQuant/PresentationFigures.cs:159 | "de_novo_score_vs_score_scatter.png" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-CAA7BC0D67D2 |
+| FQ15-C1482BF4E0DF | KEEP | format/export | FamilyQuant/PresentationFigures.cs:164 | "de_novo_set_novelty.png" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-C1482BF4E0DF |
+| FQ15-1F9C39D40801 | KEEP | format/export | FamilyQuant/PresentationFigures.cs:169 | "de_novo_variant_comparison.png" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-1F9C39D40801 |
+| FQ15-F24B60556371 | KEEP | format/export | FamilyQuant/PresentationFigures.cs:173 | "de_novo_source_effect_comparison.png" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-F24B60556371 |
+| FQ15-8E24430F9249 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:193 | "This project has no stored de novo/search-engine overlap study. Recompute full XIC with the configured de novo input, or reconcile it in De Novo Step 2." | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-8E24430F9249 |
+| FQ15-D14BFD2C7D35 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:195 | "This project's overlap study predates the literal same-file/same-scan sequence comparison. Recompute full XIC with the configured de novo input before exporting the talk plots." | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-D14BFD2C7D35 |
+| FQ15-895BBBD26EE8 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:197 | "This project has no stored de novo source-confidence distribution. Recompute full XIC with the configured de novo input before exporting the talk plots." | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-895BBBD26EE8 |
+| FQ15-CA30235F0683 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:209 | "The stored source-confidence distributions do not exactly match the configured " | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-CA30235F0683 |
+| FQ15-64E294DCA79F | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:210 | "de novo input sources. Inputs = [" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-64E294DCA79F |
+| FQ15-BEE15E6CE915 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:211 | ", " | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-BEE15E6CE915 |
+| FQ15-2A982963CD9C | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:212 | "]; distributions = [" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-2A982963CD9C |
+| FQ15-4BEF2B25806C | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:213 | ", " | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-4BEF2B25806C |
+| FQ15-58DC94DF8F58 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:214 | "]. Recompute full XIC; a partial primary-source panel cannot stand in for a " | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-58DC94DF8F58 |
+| FQ15-4225B584D811 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:215 | "multi-source project." | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-4225B584D811 |
+| FQ15-9C592C161D0A | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:217 | "This project has no stored de novo identification consolidation. Recompute full XIC with the configured de novo input before exporting the talk plots." | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-9C592C161D0A |
+| FQ15-87FFA163260C | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:220 | "This project has no stored PatternLab/PEAKS database-search concordance audit. Recompute full XIC with the complete PEAKS export before exporting the talk plots." | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-87FFA163260C |
+| FQ15-F77A94A91138 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:228 | "This project's PatternLab/PEAKS concordance audit predates precursor-qualified " | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-F77A94A91138 |
+| FQ15-8989F3F09A50 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:229 | "one-to-one pairing. Recompute full XIC before exporting figures; raw shared scans " | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-8989F3F09A50 |
+| FQ15-484E5E6BB3D5 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:230 | "cannot be used as the sequence-agreement denominator." | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-484E5E6BB3D5 |
+| FQ15-06A125B63E44 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:232 | "This project has no stored identity sweep. Run the identity scan from the USearch screen and save the complete scientific project before exporting the talk plots." | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-06A125B63E44 |
+| FQ15-10728656631A | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:274 | "An output folder is required." | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-10728656631A |
+| FQ15-DE8D6795F15A | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:289 | "An output folder is required." | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-DE8D6795F15A |
+| FQ15-5D8D150CAB0B | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:302 | "An output folder is required." | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-5D8D150CAB0B |
+| FQ15-BF67CE760541 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:315 | "An output folder is required." | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-BF67CE760541 |
+| FQ15-F5A27F774DCE | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:330 | "An output folder is required." | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-F5A27F774DCE |
+| FQ15-0D9C35BDB644 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:344 | "An output folder is required." | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-0D9C35BDB644 |
+| FQ15-A12721122CAA | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:357 | "An output folder is required." | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-A12721122CAA |
+| FQ15-5FDCCCEEEB72 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:367 | "An output folder is required." | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-5FDCCCEEEB72 |
+| FQ15-195D05F64525 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:379 | "An output folder is required." | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-195D05F64525 |
+| FQ15-75C7BD7D9058 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:423 | " OS=" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-75C7BD7D9058 |
+| FQ15-85209D3D9166 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:426 | "\u2026" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-85209D3D9166 |
+| FQ15-EF10B6BF7161 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:427 | "F" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-EF10B6BF7161 |
+| FQ15-239E960E5DB8 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:428 | " \u00B7 " | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-239E960E5DB8 |
+| FQ15-93049D5762EA | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:472 | "Segoe UI" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-93049D5762EA |
+| FQ15-EE20D3FD80DD | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:497 | "N0" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-EE20D3FD80DD |
+| FQ15-1647E3B55A5E | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:498 | "F1" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-1647E3B55A5E |
+| FQ15-35B728C6B167 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:498 | "%" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-35B728C6B167 |
+| FQ15-8A9A3A21631A | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:521 | "When both callers pass, do they report the same peptide?" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-8A9A3A21631A |
+| FQ15-39349AFB4855 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:522 | "One dot per compatible file + scan + charge/m/z precursor hypothesis; both source calls passed all configured filters." | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-39349AFB4855 |
+| FQ15-BF066CBEE899 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:579 | "PEAKS " | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-BF066CBEE899 |
+| FQ15-DCC885DA63C8 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:580 | " \u00B7 accepted calls only" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-DCC885DA63C8 |
+| FQ15-13F437DBD24D | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:583 | "DeepNovo " | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-13F437DBD24D |
+| FQ15-740CDB6C3730 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:584 | " \u00B7 accepted calls only" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-740CDB6C3730 |
+| FQ15-E2E731E13F7A | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:590 | "JOINTLY ACCEPTED" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-E2E731E13F7A |
+| FQ15-CD06D04DEF3E | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:594 | "precursor-hypothesis rows" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-CD06D04DEF3E |
+| FQ15-9B3A1B104955 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:600 | "Exact match" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-9B3A1B104955 |
+| FQ15-51AF8A3C0B29 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:602 | " \u00B7 " | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-51AF8A3C0B29 |
+| FQ15-945D761B9708 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:608 | "Sequence mismatch" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-945D761B9708 |
+| FQ15-DEB599DD949E | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:610 | " \u00B7 " | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-DEB599DD949E |
+| FQ15-169496801ACB | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:616 | "MATCH RULE" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-169496801ACB |
+| FQ15-D3AB957BA935 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:618 | "PTM notation removed" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-D3AB957BA935 |
+| FQ15-CE8C4262AE4A | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:620 | "I/L kept distinct" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-CE8C4262AE4A |
+| FQ15-A7827AFC6C92 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:625 | "Inclusion: both Accepted = true after source score + peptide length + local-confidence stretch filters." | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-A7827AFC6C92 |
+| FQ15-7651C67E1BC6 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:628 | "Important: ALC and SCORE are different source-native scales; the plot compares calls and does not treat equal numeric scores as equivalent probabilities." | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-7651C67E1BC6 |
+| FQ15-1FA8033C1D7D | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:639 | "cutoff " | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-1FA8033C1D7D |
+| FQ15-55D7BFFE75A7 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:650 | "cutoff " | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-55D7BFFE75A7 |
+| FQ15-7B7318DE1B05 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:676 | "An accepted-score axis requires at least one finite score or cutoff." | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-7B7318DE1B05 |
+| FQ15-38BE83BA49C4 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:715 | "0.###" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-38BE83BA49C4 |
+| FQ15-00923CDC70BB | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:778 | "PEAKS and DeepNovo contribute mostly distinct peptide sequences" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-00923CDC70BB |
+| FQ15-876E798CCFC1 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:779 | "Exact directly observed sets from the same only+DeepNovo computation; each panel states when its sequence set is counted." | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-876E798CCFC1 |
+| FQ15-C00D8CF7083F | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:788 | "A \u00B7 FILTERED CALLS" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-C00D8CF7083F |
+| FQ15-F88054AE9A15 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:788 | "Before precursor union" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-F88054AE9A15 |
+| FQ15-74FDA53F24B2 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:790 | "B \u00B7 CARRIED FORWARD" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-74FDA53F24B2 |
+| FQ15-ACBFD57362A4 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:790 | "Source claims on retained union rows" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-ACBFD57362A4 |
+| FQ15-1B93BCD525DA | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:795 | "WHY DEEPNOVO STARTS SMALLER" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-1B93BCD525DA |
+| FQ15-98A9D00DD744 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:799 | " raw" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-98A9D00DD744 |
+| FQ15-C7D2D340C03D | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:800 | " \u2265 " | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-C7D2D340C03D |
+| FQ15-E470599ACF46 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:801 | "0.###" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-E470599ACF46 |
+| FQ15-A887F430A2EA | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:802 | " + length \u2265 " | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-A887F430A2EA |
+| FQ15-EAA9A2580C1D | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:804 | " + local stretch" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-EAA9A2580C1D |
+| FQ15-33ACFB6017F4 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:815 | "\u2192" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-33ACFB6017F4 |
+| FQ15-422DEE1AF437 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:819 | "Local stretch = at least " | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-422DEE1AF437 |
+| FQ15-05E5C5864896 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:820 | " consecutive residues at \u2265" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-05E5C5864896 |
+| FQ15-798C5023C988 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:821 | "% local confidence. Sequence sets remove PTM notation, pool runs and charge, and keep I/L distinct." | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-798C5023C988 |
+| FQ15-DE15F8651C2D | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:823 | "Panel B uses provenance from this exact union; it is not inferred from separately run source totals." | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-DE15F8651C2D |
+| FQ15-8F966C6AC4E6 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:833 | "Circle areas approximate caller totals; overlap lens is schematic." | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-8F966C6AC4E6 |
+| FQ15-B3BC92227A3F | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:859 | "PEAKS de-novo-only" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-B3BC92227A3F |
+| FQ15-C367549CE11E | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:860 | "DeepNovo" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-C367549CE11E |
+| FQ15-C65E26324324 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:866 | "exclusive" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-C65E26324324 |
+| FQ15-E61F645CE5D6 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:870 | "shared" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-E61F645CE5D6 |
+| FQ15-2B511897C629 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:872 | "exclusive" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-2B511897C629 |
+| FQ15-689697A43293 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:875 | "PEAKS total " | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-689697A43293 |
+| FQ15-E4577FDE96AB | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:875 | "   \u00B7   DeepNovo total " | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-E4577FDE96AB |
+| FQ15-895C567DE98B | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:876 | "   \u00B7   union " | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-895C567DE98B |
+| FQ15-AA0DA0C6971E | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:880 | "pooled" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-AA0DA0C6971E |
+| FQ15-ADD8E3189BEE | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:880 | "pooled distinct sequences" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-ADD8E3189BEE |
+| FQ15-41746B6C0060 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:910 | "The project has no de novo consolidation audit." | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-41746B6C0060 |
+| FQ15-3F29C4C1D947 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:916 | "How imported de novo calls become credited representatives" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-3F29C4C1D947 |
+| FQ15-7189224F8623 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:917 | "Every stage is project-native. Count grain changes are explicit; these four numbers are not one common-denominator funnel." | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-7189224F8623 |
+| FQ15-9E30E0CAF23B | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:927 | "1 \u00B7 IMPORTED" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-9E30E0CAF23B |
+| FQ15-A62C513042A7 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:927 | "raw spectrum calls" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-A62C513042A7 |
+| FQ15-8C9FD2DC5D2D | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:928 | "sum of rows in recorded" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-8C9FD2DC5D2D |
+| FQ15-7A5776DBE1DC | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:928 | "source files" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-7A5776DBE1DC |
+| FQ15-ADE1FEDC89BD | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:929 | "2 \u00B7 ACCEPTED" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-ADE1FEDC89BD |
+| FQ15-9A6385C5AFA1 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:929 | "calls after filters + union" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-9A6385C5AFA1 |
+| FQ15-43E6558C41EB | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:930 | "source score + length + local stretch" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-43E6558C41EB |
+| FQ15-80C04CCD9F9D | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:930 | "then one winner per precursor" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-80C04CCD9F9D |
+| FQ15-22D99227BA7F | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:931 | "3 \u00B7 CONSOLIDATED" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-22D99227BA7F |
+| FQ15-4ACA8B2AB326 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:931 | "pooled distinct sequences" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-4ACA8B2AB326 |
+| FQ15-DCD4701D55D3 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:932 | "PTM notation removed; runs + charge pooled" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-DCD4701D55D3 |
+| FQ15-D5543102C290 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:932 | "I/L remains distinct" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-D5543102C290 |
+| FQ15-1588001DAB5E | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:933 | "4 \u00B7 CREDITED" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-1588001DAB5E |
+| FQ15-34EC03809E01 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:933 | "de novo representatives" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-34EC03809E01 |
+| FQ15-E38ED3B175DB | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:934 | "search reconciliation + XIC + dedup" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-E38ED3B175DB |
+| FQ15-6373DA68DB94 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:934 | "cross-side search overlap suppressed" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-6373DA68DB94 |
+| FQ15-E3FB0DAE3623 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:963 | "Legacy project: raw import count comes from the stored primary score distribution." | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-E3FB0DAE3623 |
+| FQ15-669EBDE91497 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:967 | " \u00B7 " | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-669EBDE91497 |
+| FQ15-C658129D2732 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:967 | " &gt;= " | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-C658129D2732 |
+| FQ15-6D63757FF975 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:968 | "0.###" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-6D63757FF975 |
+| FQ15-EA6C612926C9 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:969 | "RECORDED SOURCE RULES" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-EA6C612926C9 |
+| FQ15-D739B5B9A0B3 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:973 | "Why stage 4 can exceed stage 3: stage 3 pools technical runs and charge states; stage 4 counts separately credited run \u00D7 peptidoform \u00D7 charge \u00D7 mass-cluster representatives." | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-D739B5B9A0B3 |
+| FQ15-8A07A4B23221 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:975 | "Credited means an additional de novo hypothesis with admitted MS1 signal after the production search-overlap suppression rule; it is not a count of unique peptide backbones." | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-8A07A4B23221 |
+| FQ15-A4963AD6A9C3 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:999 | "Accepted de novo calls collapse to distinct peptide sequences" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-A4963AD6A9C3 |
+| FQ15-C86D31181E5E | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1000 | "Identification diversity is counted without XIC; credited representatives use a separate run \u00D7 peptidoform \u00D7 charge \u00D7 precursor-mass grain." | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-C86D31181E5E |
+| FQ15-9B015D9AAE60 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1009 | "IDENTIFICATION ONLY \u00B7 NO XIC" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-9B015D9AAE60 |
+| FQ15-100498AAADDB | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1014 | "accepted spectrum calls" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-100498AAADDB |
+| FQ15-07D807BF83B2 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1015 | "additional calls after search reconciliation" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-07D807BF83B2 |
+| FQ15-1C5CE28F40D3 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1016 | "distinct PTM-cleaned sequences pooled across runs and charge" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-1C5CE28F40D3 |
+| FQ15-656854F4515D | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1032 | "The pooled sequence count removes repeated spectra, charge states and technical-run repeats; I and L remain distinct." | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-656854F4515D |
+| FQ15-6524A75A5F5F | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1035 | "QUANTITATION \u00B7 A DIFFERENT COUNTING GRAIN" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-6524A75A5F5F |
+| FQ15-7DEC3E800729 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1041 | "credited de novo representatives" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-7DEC3E800729 |
+| FQ15-AE89AA46E16D | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1043 | "  +  " | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-AE89AA46E16D |
+| FQ15-23E4EA93007C | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1044 | "Run " | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-23E4EA93007C |
+| FQ15-6ACBFF2A59A2 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1045 | "  =  " | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-6ACBFF2A59A2 |
+| FQ15-5BA1122E44DC | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1047 | "Keeps run, canonical peptidoform and charge separate; the cross-side join is isotope-error-aware (M, M+-1, M+-2) and search-overlapping de novo representatives are suppressed." | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-5BA1122E44DC |
+| FQ15-620152077E7A | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1074 | "De-novo-only calls are alternative hypotheses, not failed database searches" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-620152077E7A |
+| FQ15-350DC96A0C83 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1075 | "Selected de novo calls are precursor-triaged before any sequence comparison" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-350DC96A0C83 |
+| FQ15-7543CF10D1D6 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1076 | "Sources: " | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-7543CF10D1D6 |
+| FQ15-200E06207AF1 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1076 | ". Triage requires the same file, MS2 scan, reported charge, and precursor m/z." | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-200E06207AF1 |
+| FQ15-4532A663DAE2 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1079 | "All " | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-4532A663DAE2 |
+| FQ15-B4F09247F05C | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1079 | " filtered de novo calls" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-B4F09247F05C |
+| FQ15-286B1FCEB8FE | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1092 | " no search PSM in same scan" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-286B1FCEB8FE |
+| FQ15-B0B9B5EC6406 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1094 | " different charge" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-B0B9B5EC6406 |
+| FQ15-7AA5D6F30829 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1096 | " same z, different m/z" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-7AA5D6F30829 |
+| FQ15-304F267D322E | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1100 | "same scan + charge + m/z" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-304F267D322E |
+| FQ15-6C84D78CFF86 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1110 | "WHY THE LARGE NONMATCH COUNT IS EXPECTED" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-6C84D78CFF86 |
+| FQ15-8D9BB32285C1 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1111 | "SOURCE-AWARE INTERPRETATION" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-8D9BB32285C1 |
+| FQ15-681416C6F0C2 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1114 | "PEAKS labels these rows de-novo-only: its database search did" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-681416C6F0C2 |
+| FQ15-583F1EA78D88 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1115 | "Each caller was filtered on its own native score before union" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-583F1EA78D88 |
+| FQ15-DD568F036F90 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1118 | "not accept the same sequence as a database PSM." | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-DD568F036F90 |
+| FQ15-71B429354242 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1119 | "resolution; ALC and SCORE were never treated as one scale." | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-71B429354242 |
+| FQ15-68DC837119F6 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1121 | "Only " | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-68DC837119F6 |
+| FQ15-957C76B9AE0A | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1121 | " of " | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-957C76B9AE0A |
+| FQ15-47E1A46E0FA6 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1123 | " reproduce a PEAKS DB sequence at the same charge." | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-47E1A46E0FA6 |
+| FQ15-AD56ECB94F7D | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1126 | "That is a property of the export category, not a search-accuracy estimate." | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-AD56ECB94F7D |
+| FQ15-792E2EEDDBCF | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1127 | "This contextual overlap is not a database-search or caller-accuracy estimate." | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-792E2EEDDBCF |
+| FQ15-AAAF78D5F7DC | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1131 | "SEQUENCE CHECK AFTER ALL PRECURSOR GATES" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-AAAF78D5F7DC |
+| FQ15-6AC175941EE9 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1133 | " exact after PTM removal" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-6AC175941EE9 |
+| FQ15-2D2991E11953 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1135 | "+" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-2D2991E11953 |
+| FQ15-C0DD25090D9C | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1135 | " after I/L equivalence" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-C0DD25090D9C |
+| FQ15-5FBB8BCE291B | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1137 | " alternative sequences" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-5FBB8BCE291B |
+| FQ15-E426FD6537BE | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1139 | "Not called search-engine conflicts. These hypotheses are excluded from" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-E426FD6537BE |
+| FQ15-75F4FD947B37 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1141 | "additive de novo quantification when they overlap an identified precursor." | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-75F4FD947B37 |
+| FQ15-BF07E32757A7 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1166 | "Reference-group count versus sequence-identity threshold" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-BF07E32757A7 |
+| FQ15-8251CAF0ED13 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1167 | "Lower thresholds connect more related sequences, producing fewer and larger reference groups." | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-8251CAF0ED13 |
+| FQ15-2E4F8FC93467 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1208 | "selected " | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-2E4F8FC93467 |
+| FQ15-3A805F0D73BF | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1208 | "%" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-3A805F0D73BF |
+| FQ15-2667479AC412 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1212 | "Groups with \u22651 real sequence" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-2667479AC412 |
+| FQ15-9B87624B697A | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1214 | "Groups with \u22651 curated candidate" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-9B87624B697A |
+| FQ15-F20719FEB3FA | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1216 | "Minimum identity required to connect proteins (%)" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-F20719FEB3FA |
+| FQ15-C5BBA7E2AD8B | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1220 | "DEFINITIONS" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-C5BBA7E2AD8B |
+| FQ15-7BE83AEB9CF2 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1221 | "Real sequence" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-7BE83AEB9CF2 |
+| FQ15-27E3EFAC0B5F | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1222 | "Not a reversed decoy; may still" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-27E3EFAC0B5F |
+| FQ15-8C15861C6E40 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1223 | "be labelled contaminant." | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-8C15861C6E40 |
+| FQ15-70FC0ABE031D | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1224 | "Curated candidate" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-70FC0ABE031D |
+| FQ15-C343B5387B95 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1225 | "At least one real sequence in the" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-C343B5387B95 |
+| FQ15-8BF0DE6D30B7 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1226 | "group is not labelled contaminant." | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-8BF0DE6D30B7 |
+| FQ15-DB17933B0030 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1229 | "AT " | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-DB17933B0030 |
+| FQ15-7787475EA5C4 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1229 | "%" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-7787475EA5C4 |
+| FQ15-E275C10B229B | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1230 | " groups with a real sequence" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-E275C10B229B |
+| FQ15-0DBCE97083D9 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1232 | " with a curated candidate" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-0DBCE97083D9 |
+| FQ15-7F74E16F004F | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1258 | "Peptide evidence and de novo/search-engine reconciliation" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-7F74E16F004F |
+| FQ15-C2D6E2DFD128 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1259 | "Counts on the left are quantified representatives; counts on the right are filtered de novo rows before XIC collapse." | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-C2D6E2DFD128 |
+| FQ15-628E80384794 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1264 | "Quantified representatives by run" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-628E80384794 |
+| FQ15-CD956A1E9B03 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1286 | "Run " | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-CD956A1E9B03 |
+| FQ15-514EFCE21106 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1289 | "Search engine" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-514EFCE21106 |
+| FQ15-98B4B95F1104 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1290 | "De novo" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-98B4B95F1104 |
+| FQ15-886B1856BE29 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1291 | " pooled representatives \u00B7 " | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-886B1856BE29 |
+| FQ15-76F797BEECBD | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1292 | " de novo" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-76F797BEECBD |
+| FQ15-E06DD81AF1B9 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1296 | "Overlap study: same scan is not automatically the same precursor" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-E06DD81AF1B9 |
+| FQ15-BE7D144EF026 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1298 | "Filter: length \u2265 " | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-BE7D144EF026 |
+| FQ15-3C7A2E03D51C | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1298 | "; ALC \u2265 " | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-3C7A2E03D51C |
+| FQ15-AE7E5B7C0C83 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1299 | "0.#" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-AE7E5B7C0C83 |
+| FQ15-91EDE839407D | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1299 | "%; " | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-91EDE839407D |
+| FQ15-BD9F770FF53E | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1300 | " consecutive residues \u2265 " | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-BD9F770FF53E |
+| FQ15-F133BB0E0202 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1300 | "% local confidence" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-F133BB0E0202 |
+| FQ15-4259ABF52A36 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1305 | "Passed de novo filter" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-4259ABF52A36 |
+| FQ15-67F4F47F5326 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1306 | "Share file + scan with a search PSM" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-67F4F47F5326 |
+| FQ15-47F30647794F | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1307 | "Same file + scan + charge" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-47F30647794F |
+| FQ15-53536A276932 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1308 | "Exact sequence in same-charge scans" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-53536A276932 |
+| FQ15-C1BE83BD7153 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1309 | "Same charge but no m/z match" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-C1BE83BD7153 |
+| FQ15-0D8C3C77AB00 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1310 | "Comparable precursor within " | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-0D8C3C77AB00 |
+| FQ15-2600DC9A8DD9 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1310 | "0.#" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-2600DC9A8DD9 |
+| FQ15-3EF38F9F0F15 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1310 | " ppm" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-3EF38F9F0F15 |
+| FQ15-81C4A2108E2D | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1318 | " / " | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-81C4A2108E2D |
+| FQ15-DC6F286E29FB | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1318 | " (" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-DC6F286E29FB |
+| FQ15-7E0975FA234A | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1318 | ")" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-7E0975FA234A |
+| FQ15-61952BF59493 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1321 | "Precursor-qualified subset: strict exact = " | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-61952BF59493 |
+| FQ15-6ECCBA3C5E30 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1322 | "; +" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-6ECCBA3C5E30 |
+| FQ15-732BC4A70F92 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1322 | " after I/L folding; " | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-732BC4A70F92 |
+| FQ15-B542E4EC71DA | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1323 | " still divergent." | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-B542E4EC71DA |
+| FQ15-375EA955DEFE | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1363 | "At least one source distribution is required." | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-375EA955DEFE |
+| FQ15-078E900E60A9 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1369 | "De novo score distributions and source-specific acceptance rules" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-078E900E60A9 |
+| FQ15-79C058B5B835 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1370 | "Background bars show raw spectrum calls; overlaid bars show calls retained after score, length and local-stretch filters. ALC and SCORE are not equivalent scales." | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-79C058B5B835 |
+| FQ15-E8DA3E99F14C | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1390 | "0.#" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-E8DA3E99F14C |
+| FQ15-1F75453DB92E | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1406 | "0" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-1F75453DB92E |
+| FQ15-35BAAB75D877 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1413 | " &gt;= " | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-35BAAB75D877 |
+| FQ15-6376CBA266E8 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1414 | "0.#" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-6376CBA266E8 |
+| FQ15-D20B9651DD67 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1421 | " raw calls" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-D20B9651DD67 |
+| FQ15-C7BE7F19BE83 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1423 | " retained (" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-C7BE7F19BE83 |
+| FQ15-FDB5B46D4A98 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1425 | ")" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-FDB5B46D4A98 |
+| FQ15-3A68CC0E744F | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1427 | "length &gt;= " | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-3A68CC0E744F |
+| FQ15-C3EE48F7D154 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1427 | "; " | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-C3EE48F7D154 |
+| FQ15-893DBACD4BF5 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1428 | " consecutive local scores &gt;= " | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-893DBACD4BF5 |
+| FQ15-5F9892E7A3DA | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1466 | "De novo peptide yield versus confidence cutoff" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-5F9892E7A3DA |
+| FQ15-B99147043F56 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1468 | "Distinct clean sequences (I folded to L), three Bjararaca replicates pooled, " | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-B99147043F56 |
+| FQ15-AFABD15761F2 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1469 | "collapsed to each tool's max confidence per sequence." | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-AFABD15761F2 |
+| FQ15-3FEF6B56D2CA | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1471 | "The two panels use DIFFERENT vertical scales: PEAKS de novo (full) is about 10x DeepNovo." | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-3FEF6B56D2CA |
+| FQ15-EF383F2A2608 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1478 | "in PEAKS de novo only reference (ALC &gt;= " | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-EF383F2A2608 |
+| FQ15-52E071E686EB | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1479 | "0" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-52E071E686EB |
+| FQ15-CF1BC593F614 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1479 | ")" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-CF1BC593F614 |
+| FQ15-BD3BFE1469B3 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1482 | "new (not in that reference)" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-BD3BFE1469B3 |
+| FQ15-A112C8D8722D | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1488 | "PEAKS de novo (full), filtered by ALC" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-A112C8D8722D |
+| FQ15-D2A7AAB38919 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1490 | "DeepNovo, filtered by score" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-D2A7AAB38919 |
+| FQ15-E598A49FF496 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1510 | "0" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-E598A49FF496 |
+| FQ15-0AFC8BE659B4 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1517 | "distinct peptides (thousands)" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-0AFC8BE659B4 |
+| FQ15-B4C12A0A5365 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1535 | "0" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-B4C12A0A5365 |
+| FQ15-2CD63D261D23 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1535 | "%" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-2CD63D261D23 |
+| FQ15-853718DF127B | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1539 | "0" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-853718DF127B |
+| FQ15-EF6FEC1E38CE | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1552 | "confidence cutoff (%)" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-EF6FEC1E38CE |
+| FQ15-4D98876AAB7A | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1562 | "at " | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-4D98876AAB7A |
+| FQ15-6989217E2BB2 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1562 | "0" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-6989217E2BB2 |
+| FQ15-7124D4573132 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1562 | "% cutoff" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-7124D4573132 |
+| FQ15-E562A13BB3A8 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1563 | " peptides" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-E562A13BB3A8 |
+| FQ15-0C5119C90092 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1564 | "0" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-0C5119C90092 |
+| FQ15-20E17081686B | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1564 | "% in reference" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-20E17081686B |
+| FQ15-F606202F914E | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1638 | "identical (same sequence)" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-F606202F914E |
+| FQ15-C563238220C3 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1639 | "different sequence; theoretical mass match" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-C563238220C3 |
+| FQ15-1198A4FF606F | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1640 | "different theoretical mass" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-1198A4FF606F |
+| FQ15-DC46B08E09BC | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1641 | "unknown" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-DC46B08E09BC |
+| FQ15-8750F3A0C0AD | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1647 | "PEAKS vs DeepNovo: agreement after matching the precursor" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-8750F3A0C0AD |
+| FQ15-A85DE09B1C07 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1649 | "Primary pair: deterministic one-to-one calls within normalized run + scan, same charge, m/z within " | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-A85DE09B1C07 |
+| FQ15-3DE87A7CDE35 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1650 | "0.###" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-3DE87A7CDE35 |
+| FQ15-6124AE7CAE7E | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1651 | " ppm. X: PEAKS reported neutral mass. Y: PTM-stripped sequence identity (I/L distinct)." | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-6124AE7CAE7E |
+| FQ15-18A7F28958F4 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1653 | "Population: all imported export calls (observed floors: PEAKS ALC " | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-18A7F28958F4 |
+| FQ15-59326D23AB22 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1654 | "0.###" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-59326D23AB22 |
+| FQ15-FF7C3AEA9CE8 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1655 | ", DeepNovo SCORE " | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-FF7C3AEA9CE8 |
+| FQ15-CED1AED120F7 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1656 | "0.###" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-CED1AED120F7 |
+| FQ15-EFB81660D807 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1657 | "); this is not the downstream &gt;=80 quantified tier." | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-EFB81660D807 |
+| FQ15-8765A30B3E98 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1659 | "Primary: " | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-8765A30B3E98 |
+| FQ15-B512C1AD64D3 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1659 | " precursor-call pairs across " | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-B512C1AD64D3 |
+| FQ15-E1F687121513 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1660 | " of " | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-E1F687121513 |
+| FQ15-8CF62C8B9D4E | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1661 | " shared scans; identical PTM-stripped sequences: " | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-8CF62C8B9D4E |
+| FQ15-F315AFAF029C | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1662 | "F1" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-F315AFAF029C |
+| FQ15-662B21400DC3 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1662 | "%." | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-662B21400DC3 |
+| FQ15-2CC167BA8E87 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1664 | "Among " | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-2CC167BA8E87 |
+| FQ15-0A11615B9848 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1664 | " sequence disagreements, " | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-0A11615B9848 |
+| FQ15-865101CCE1CD | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1666 | " have modification-aware theoretical masses within " | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-865101CCE1CD |
+| FQ15-FC366CEDB372 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1667 | "0.###" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-FC366CEDB372 |
+| FQ15-505782629631 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1667 | " Da." | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-505782629631 |
+| FQ15-D56C785A9029 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1687 | "0" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-D56C785A9029 |
+| FQ15-723C7233F16B | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1687 | "%" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-723C7233F16B |
+| FQ15-FD68C203FF1C | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1695 | "0" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-FD68C203FF1C |
+| FQ15-047D142EA2E0 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1700 | "PEAKS peptide neutral mass (Da)" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-047D142EA2E0 |
+| FQ15-0088E5D3AEAD | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1702 | "sequence identity (%)" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-0088E5D3AEAD |
+| FQ15-1F4D71759D69 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1751 | " spectra without a reported mass are omitted" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-1F4D71759D69 |
+| FQ15-54C50BAE9A1B | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1760 | " primary pairs" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-54C50BAE9A1B |
+| FQ15-A2637817618C | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1762 | "across " | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-A2637817618C |
+| FQ15-76487E3A9A00 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1762 | " precursor-qualified shared scans" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-76487E3A9A00 |
+| FQ15-313E002AFC64 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1776 | "  (" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-313E002AFC64 |
+| FQ15-EE59F7D4EF7C | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1776 | "F1" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-EE59F7D4EF7C |
+| FQ15-A5E29831EDFE | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1776 | "%)" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-A5E29831EDFE |
+| FQ15-0C5B502D5638 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1784 | "Among sequence disagreements" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-0C5B502D5638 |
+| FQ15-37B24D0B847A | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1785 | " of " | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-37B24D0B847A |
+| FQ15-72D67C5AA42C | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1786 | " disagreements" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-72D67C5AA42C |
+| FQ15-6ECEEA7A5A75 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1787 | "match in modification-aware theoretical mass." | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-6ECEEA7A5A75 |
+| FQ15-DD1A35F82342 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1791 | " pair differs" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-DD1A35F82342 |
+| FQ15-D8D55C283021 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1791 | " pairs differ" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-D8D55C283021 |
+| FQ15-D774551CE638 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1791 | " by one equal-mass" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-D774551CE638 |
+| FQ15-50DD090E98AD | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1793 | "residue substitution (descriptive, not validation)." | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-50DD090E98AD |
+| FQ15-2983BE029E94 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1796 | "Theoretical-mass tolerance: &#124;delta&#124; &lt;= " | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-2983BE029E94 |
+| FQ15-C51860DEABE2 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1797 | "0.###" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-C51860DEABE2 |
+| FQ15-292B94FC6A4E | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1797 | " Da." | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-292B94FC6A4E |
+| FQ15-EA4797A0ADB1 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1800 | "RT &lt;= " | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-EA4797A0ADB1 |
+| FQ15-1B4D7829290C | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1800 | "0.###" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-1B4D7829290C |
+| FQ15-79E1AFB64F7F | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1801 | " min: " | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-79E1AFB64F7F |
+| FQ15-3EC0B88E3DC3 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1801 | " pairs (sensitivity only)." | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-3EC0B88E3DC3 |
+| FQ15-5A74E89A37E7 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1805 | "Same-precursor member of de novo only: " | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-5A74E89A37E7 |
+| FQ15-860A2F22EEC3 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1805 | " of " | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-860A2F22EEC3 |
+| FQ15-D4393B924222 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1806 | " (" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-D4393B924222 |
+| FQ15-049332DE8949 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1807 | "F1" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-049332DE8949 |
+| FQ15-C6BDB1B3A899 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1807 | "%)." | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-C6BDB1B3A899 |
+| FQ15-0CABAAC51A95 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1810 | "De-novo-only membership: not evaluated (audit source not loaded)." | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-0CABAAC51A95 |
+| FQ15-54297EF26A7D | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1852 | "Do PEAKS and DeepNovo agree when they call the same peptide?" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-54297EF26A7D |
+| FQ15-337579AE80ED | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1854 | "Bothrops jararaca venom, three pooled replicates. Each dot is one peptide sequence " | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-337579AE80ED |
+| FQ15-C8558A972847 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1855 | "identified by both tools; axes give each tool's own confidence." | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-C8558A972847 |
+| FQ15-E08DBD33E7A8 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1857 | "Matched by modification-stripped, I=L-folded sequence, keeping the max confidence per tool." | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-E08DBD33E7A8 |
+| FQ15-D782CB968085 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1897 | "PEAKS de novo confidence, ALC (%)" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-D782CB968085 |
+| FQ15-CD761ACF65FE | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1899 | "DeepNovo confidence, SCORE (%)" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-CD761ACF65FE |
+| FQ15-6E6F8CB1E309 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1904 | "PEAKS-only peptides  (n = " | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-6E6F8CB1E309 |
+| FQ15-3A05C612EDCA | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1904 | ")" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-3A05C612EDCA |
+| FQ15-35205AF6A62A | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1909 | "DeepNovo-only peptides" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-35205AF6A62A |
+| FQ15-399739D258EE | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1911 | "n = " | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-399739D258EE |
+| FQ15-3A803CC40A53 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1918 | "Shared peptides: " | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-3A803CC40A53 |
+| FQ15-9B1DF9BF070D | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1920 | "Pearson r = " | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-9B1DF9BF070D |
+| FQ15-1ECBEF522EE4 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1920 | "0.00" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-1ECBEF522EE4 |
+| FQ15-6389975666DC | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1944 | "0" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-6389975666DC |
+| FQ15-0461A699D05E | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:1964 | "0" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-0461A699D05E |
+| FQ15-52656F6095F4 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2020 | "What each de novo source adds: set-novelty view of Bjararaca venom peptides" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-52656F6095F4 |
+| FQ15-381FFE5863D2 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2022 | "Three replicates pooled; peptides matched by clean sequence (mods stripped, I folded " | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-381FFE5863D2 |
+| FQ15-0FA6AAB1B4B2 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2023 | "to L); confidence collapsed to the max per sequence." | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-0FA6AAB1B4B2 |
+| FQ15-1ECB664524AF | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2028 | "+" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-1ECB664524AF |
+| FQ15-E0BCD948B5ED | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2029 | "sequences the full de novo export adds" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-E0BCD948B5ED |
+| FQ15-3C56F2DC5C1A | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2030 | "over the database-unassigned only subset" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-3C56F2DC5C1A |
+| FQ15-9EDBE9FD2583 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2032 | "+" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-9EDBE9FD2583 |
+| FQ15-B5C5D8CD17AE | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2033 | "DeepNovo sequences PEAKS de novo never reports" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-B5C5D8CD17AE |
+| FQ15-298BA13306A8 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2038 | "Shared PEAKS core (only and all)" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-298BA13306A8 |
+| FQ15-39328378277F | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2039 | "Added by the full export over only" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-39328378277F |
+| FQ15-AAD1CCFD1430 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2040 | "Reported by all three sources" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-AAD1CCFD1430 |
+| FQ15-96E39FA67201 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2041 | "DeepNovo unique (never in PEAKS de novo)" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-96E39FA67201 |
+| FQ15-04E8BCF0DD64 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2066 | "Clean sequences in region (count)" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-04E8BCF0DD64 |
+| FQ15-385719AD3841 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2082 | "med " | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-385719AD3841 |
+| FQ15-2C6F16974D6E | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2083 | "0" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-2C6F16974D6E |
+| FQ15-17DFF70779A2 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2083 | "%" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-17DFF70779A2 |
+| FQ15-A3653C7A4F67 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2098 | "PEAKS de novo ONLY" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-A3653C7A4F67 |
+| FQ15-F58170155E72 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2098 | "PEAKS de novo ALL" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-F58170155E72 |
+| FQ15-89B0F4927417 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2098 | "DeepNovo" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-89B0F4927417 |
+| FQ15-C5A3CF69621E | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2120 | "Set size (sequences)" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-C5A3CF69621E |
+| FQ15-575A1F3F837D | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2127 | "(" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-575A1F3F837D |
+| FQ15-96CA3E977264 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2127 | " more are shared with PEAKS de novo all)" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-96CA3E977264 |
+| FQ15-AFD6A23976BD | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2175 | "Assigned signal by technical run" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-AFD6A23976BD |
+| FQ15-643FB9EBC6CD | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2176 | "Identified observed envelope plus the reference-envelope model estimate for de novo M+0, each divided by run TIC." | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-643FB9EBC6CD |
+| FQ15-44DF348D8A64 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2187 | "Run " | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-44DF348D8A64 |
+| FQ15-85D361C03C40 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2188 | "total " | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-85D361C03C40 |
+| FQ15-BC8402D9F71D | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2191 | "Search-engine signal" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-BC8402D9F71D |
+| FQ15-C97FBBB62DDD | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2192 | "De novo addition" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-C97FBBB62DDD |
+| FQ15-F9F12CF282E8 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2203 | "Pooled value of de novo sequencing" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-F9F12CF282E8 |
+| FQ15-8531BFA41530 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2204 | "Both bars use the same pooled TIC denominator and the same envelope basis." | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-8531BFA41530 |
+| FQ15-F8AC719469E9 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2207 | "Search engine only" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-F8AC719469E9 |
+| FQ15-FE42867A08DF | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2207 | "Search + de novo" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-FE42867A08DF |
+| FQ15-77070712077B | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2220 | "+" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-77070712077B |
+| FQ15-65BBD387A1F7 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2220 | " relative uplift" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-65BBD387A1F7 |
+| FQ15-A959940EFE76 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2222 | "+" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-A959940EFE76 |
+| FQ15-6EB45D22D315 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2222 | "F2" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-6EB45D22D315 |
+| FQ15-9A78B046172B | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2223 | " percentage points" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-9A78B046172B |
+| FQ15-77DD400E5BDA | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2243 | "Reference-envelope model: support, validation, sensitivity" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-77DD400E5BDA |
+| FQ15-87C8CF39071B | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2244 | "De novo M+0 is scaled by identified envelope/M+0 ratios in fixed neutral-mass bins. This is a model estimate, not empirical calibration." | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-87C8CF39071B |
+| FQ15-588632ACA532 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2259 | "N0" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-588632ACA532 |
+| FQ15-213BC9AA0289 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2262 | "identified reference representatives" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-213BC9AA0289 |
+| FQ15-992A1437F15D | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2274 | "\u00D7" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-992A1437F15D |
+| FQ15-95FEFEBA38D1 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2274 | "0.00" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-95FEFEBA38D1 |
+| FQ15-D56EF735C538 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2275 | "*" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-D56EF735C538 |
+| FQ15-9E5893023318 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2287 | "LEAVE-ONE-REPRESENTATIVE-OUT" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-9E5893023318 |
+| FQ15-921B5CBFD7F4 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2291 | "weighted absolute prediction error" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-921B5CBFD7F4 |
+| FQ15-B187C4C86F59 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2293 | "median APE  " | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-B187C4C86F59 |
+| FQ15-CD4AED3C18C2 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2295 | "90th-percentile APE  " | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-CD4AED3C18C2 |
+| FQ15-8D339D2FF779 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2297 | "signed bias  " | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-8D339D2FF779 |
+| FQ15-213BF31ECCFA | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2299 | " identified representatives validated" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-213BF31ECCFA |
+| FQ15-673FAA9B1E4D | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2302 | "MODEL-FORM SENSITIVITY" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-673FAA9B1E4D |
+| FQ15-38DA4D78A781 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2304 | "fixed bins  " | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-38DA4D78A781 |
+| FQ15-982911397D05 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2306 | "one pooled ratio  " | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-982911397D05 |
+| FQ15-B902C010B3E5 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2311 | "difference vs fixed-bin estimate  " | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-B902C010B3E5 |
+| FQ15-DE304810C0B7 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2313 | "Sensitivity comparator only, not a confidence interval." | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-DE304810C0B7 |
+| FQ15-BE544288700C | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2316 | "Ratio labels above bars are fitted identified envelope/M+0. * = no support in that bin; pooled identified ratio used." | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-BE544288700C |
+| FQ15-FC4990EE6085 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2318 | "Method: " | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-FC4990EE6085 |
+| FQ15-2459614DB23B | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2324 | "0.#" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-2459614DB23B |
+| FQ15-1F562E79187D | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2325 | "k+" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-1F562E79187D |
+| FQ15-4BBF66239F72 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2326 | "0.#" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-4BBF66239F72 |
+| FQ15-58545E31FB8A | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2327 | "-" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-58545E31FB8A |
+| FQ15-BF2D7CB7B77C | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2327 | "k" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-BF2D7CB7B77C |
+| FQ15-BE713350FC3E | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2341 | "+" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-BE713350FC3E |
+| FQ15-C348DEC78899 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2342 | "0.0" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-C348DEC78899 |
+| FQ15-0E6E4B52BC20 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2342 | "%" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-0E6E4B52BC20 |
+| FQ15-FCE6A0BB645D | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2345 | "0.###E+0" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-FCE6A0BB645D |
+| FQ15-5D1BD7C5253E | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2345 | " intensity\u00D7min" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-5D1BD7C5253E |
+| FQ15-E05D8B2756BD | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2356 | "Reference-database components at " | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-E05D8B2756BD |
+| FQ15-34DD7A92049E | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2356 | "% identity" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-34DD7A92049E |
+| FQ15-E34EB07F3DC9 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2357 | "Database bookkeeping, not peptide identifications, detected proteins, or abundance. Categories can overlap by definition." | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-E34EB07F3DC9 |
+| FQ15-4DFF3FCC39BC | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2360 | "All connected components" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-4DFF3FCC39BC |
+| FQ15-AF16D7051549 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2361 | "Pure-decoy control components" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-AF16D7051549 |
+| FQ15-BD78DEA8A3BC | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2362 | "Target-bearing components" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-BD78DEA8A3BC |
+| FQ15-7DDA63E25E58 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2363 | "Contaminant-bearing target components" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-7DDA63E25E58 |
+| FQ15-EC066F39A511 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2364 | "Non-contaminant target components" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-EC066F39A511 |
+| FQ15-13F6702D07EC | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2373 | " component(s) contain both target and decoy entries." | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-13F6702D07EC |
+| FQ15-EFCF99BDC9A3 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2402 | "De novo contribution versus total attributed family signal" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-EFCF99BDC9A3 |
+| FQ15-8937BFAADAB2 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2403 | "Each point is one of " | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-8937BFAADAB2 |
+| FQ15-69DBA3772EA2 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2404 | " families with attributed signal; labels mark the ten strongest. X = identified signal + de novo model estimate; Y = de novo share." | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-69DBA3772EA2 |
+| FQ15-386D3775CBE0 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2422 | "0.#" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-386D3775CBE0 |
+| FQ15-FF78D5B5DAF4 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2424 | "0" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-FF78D5B5DAF4 |
+| FQ15-AE82D7344937 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2424 | "%" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-AE82D7344937 |
+| FQ15-BC28BE2775EC | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2464 | "Total attributed family signal (\u00D710\u2079 intensity\u00B7min)" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-BC28BE2775EC |
+| FQ15-B52796F0DF96 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2466 | "De novo share of family signal (%)" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-B52796F0DF96 |
+| FQ15-936F1A9CF4B6 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2468 | "Orange: \u226520% de novo contribution" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-936F1A9CF4B6 |
+| FQ15-5359239A58B3 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2693 | "De novo sequence evidence across toxin families" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-5359239A58B3 |
+| FQ15-67D5BF2F83B8 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2694 | "Pooled PTM-cleaned sequences; PEAKS-only, shared and DeepNovo-only sets are disjoint. Search is separate context." | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-67D5BF2F83B8 |
+| FQ15-2614284A4B1A | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2703 | "No source-resolved PEAKS de-novo-only / DeepNovo family sequences are stored in this project." | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-2614284A4B1A |
+| FQ15-C43CB42FAE91 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2705 | "Recompute or load the exact only+DeepNovo variant to populate this figure." | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-C43CB42FAE91 |
+| FQ15-A3F5B699E5FA | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2738 | "search " | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-A3F5B699E5FA |
+| FQ15-9B508ACD41FC | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2745 | "PEAKS de-novo-only exclusive" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-9B508ACD41FC |
+| FQ15-CEFA2A4CBD79 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2746 | "shared exact sequence" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-CEFA2A4CBD79 |
+| FQ15-615CB116D416 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2747 | "DeepNovo exclusive" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-615CB116D416 |
+| FQ15-CA86AAEF0290 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2756 | "Family mapping identity &gt;= " | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-CA86AAEF0290 |
+| FQ15-7621BF4A8229 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2757 | "P0" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-7621BF4A8229 |
+| FQ15-67D471ED93A8 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2758 | "; one sequence may map to more than one family, so rows are non-additive." | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-67D471ED93A8 |
+| FQ15-0A737AF8A26D | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2778 | "The compact talk comparison requires search plus exactly three de novo conditions." | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-0A737AF8A26D |
+| FQ15-940A1C6C66FF | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2781 | "Search only" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-940A1C6C66FF |
+| FQ15-5296FFD9E131 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2782 | "The first compact comparison row must be the search baseline." | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-5296FFD9E131 |
+| FQ15-FA157053E268 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2788 | "What PEAKS de novo-only and DeepNovo add" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-FA157053E268 |
+| FQ15-E2EB5A54E3CA | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2789 | "Left: carried-forward distinct sequences (no XIC). Right: assigned share of the same pooled TIC; the de novo addition is model-estimated." | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-E2EB5A54E3CA |
+| FQ15-9AE12BA98114 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2801 | "CARRIED-FORWARD DISTINCT SEQUENCES" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-9AE12BA98114 |
+| FQ15-4DE465B2B0E2 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2803 | "PTM notation removed \u00B7 runs and charge pooled \u00B7 I/L distinct" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-4DE465B2B0E2 |
+| FQ15-444E185A4DBD | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2812 | "PEAKS de novo-only" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-444E185A4DBD |
+| FQ15-38DE5D32E0BD | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2812 | "DeepNovo" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-38DE5D32E0BD |
+| FQ15-E2B6965940B3 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2812 | "Both callers" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-E2B6965940B3 |
+| FQ15-2124645A660A | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2820 | "These counts are sequence diversity, not signal intensity." | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-2124645A660A |
+| FQ15-56B5C79678BB | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2823 | "ASSIGNED SHARE OF POOLED TIC" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-56B5C79678BB |
+| FQ15-9B687B634695 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2825 | "Observed search baseline + model-estimated de novo addition" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-9B687B634695 |
+| FQ15-E5DDA584AF33 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2834 | "Search only" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-E5DDA584AF33 |
+| FQ15-B25D6D4E5ED1 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2834 | "PEAKS only" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-B25D6D4E5ED1 |
+| FQ15-59B0A969F143 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2835 | "DeepNovo" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-59B0A969F143 |
+| FQ15-180D601FE1C8 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2835 | "Both callers" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-180D601FE1C8 |
+| FQ15-8FA32C85B5D5 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2853 | "observed search" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-8FA32C85B5D5 |
+| FQ15-B05A4637BE34 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2857 | "de novo model estimate" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-B05A4637BE34 |
+| FQ15-69DE0FCE268D | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2861 | "The exact union is PEAKS de-novo-only + DeepNovo; PEAKS-all + DeepNovo is a separate variant and is not substituted here." | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-69DE0FCE268D |
+| FQ15-B89C05C5A29A | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2879 | "At least one variant is required." | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-B89C05C5A29A |
+| FQ15-9FDE896DB3DE | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2885 | "Observed search signal + de novo model estimate across source variants" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-9FDE896DB3DE |
+| FQ15-387310D0A1D3 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2886 | "Same pooled TIC denominator; green is model-estimated, and each source keeps its native confidence field and cutoff. ALC and SCORE are not a common scale." | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-387310D0A1D3 |
+| FQ15-13DA37B293FC | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2918 | "+" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-13DA37B293FC |
+| FQ15-92BD535C2535 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2939 | " credited de novo reps" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-92BD535C2535 |
+| FQ15-D8AD56E9D1EA | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2943 | "Share of pooled TIC" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-D8AD56E9D1EA |
+| FQ15-0D6390AB7E7F | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2946 | "observed search envelope" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-0D6390AB7E7F |
+| FQ15-01B9D1546CCA | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2950 | "reference-envelope model estimate for de novo M+0" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-01B9D1546CCA |
+| FQ15-84066BD709D7 | IMPROVE | code fact | FamilyQuant/PresentationFigures.cs:2955 | "fixed-bin vs pooled-ratio sensitivity (not a confidence interval)" | test:LedgerAssayCohortCommand | VERIFIED | evidence:AS-presentation-figures:FQ15-84066BD709D7 |
 | FQ15-B367AFCE52B9 | KEEP | shortcut | FamilyQuant/PresentationFigures.cs:967 | .Select(g =&gt; g.Key.SourceDisplayName + " \u00B7 " + g.Key.ConfidenceField + " &gt;= " + | test:AnalyticsRenderTests | OPEN | pending |
 | FQ15-7A34161A5B3A | KEEP | shortcut | FamilyQuant/PresentationFigures.cs:967 | .Select(g =&gt; g.Key.SourceDisplayName + " \u00B7 " + g.Key.ConfidenceField + " &gt;= " + | test:AnalyticsRenderTests | OPEN | pending |
 | FQ15-5D43ED4317D6 | KEEP | shortcut | FamilyQuant/PresentationFigures.cs:968 | g.Key.MinimumConfidence.ToString("0.###", CultureInfo.CurrentCulture)).ToList(); | test:AnalyticsRenderTests | OPEN | pending |
