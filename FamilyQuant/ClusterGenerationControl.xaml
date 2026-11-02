@@ -106,7 +106,7 @@
                             <Button x:Name="ButtonFetchDomains" Content="Fetch evidence" Click="ButtonFetchDomains_Click"
                                     ToolTip="Fetch protein evidence and reviewed references from UniProt for offline review. Save the file to keep the fetched evidence."/>
                             <Button x:Name="ButtonFetchFamilyWorld" Content="Fetch family world" Click="ButtonFetchFamilyWorld_Click"
-                                    ToolTip="Fetch family references for the confirmed database task and scope. Cancel keeps the previous file. Save to keep the world for offline Compute and Database gap."/>
+                                    ToolTip="Fetch family references for the confirmed database task and scope. Cancel keeps the previous file; save to keep the world for offline Compute and Database gap."/>
                             <Button x:Name="ButtonAlignSelected" Content="Align selected" Click="ButtonAlignSelected_Click" IsEnabled="False"
                                     ToolTip="Align the selected proteins without changing their families. Disabled until at least two rows are selected in the protein table."/>
                         </WrapPanel>

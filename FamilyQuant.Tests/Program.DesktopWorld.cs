@@ -30,6 +30,7 @@ internal static partial class Program
         var view = new ClusterGenerationControl(TaskFile());
         Check("Y8 curation exposes a family-world fetch button beside evidence", view.FindName("ButtonFetchFamilyWorld") is Button);
         Check("Y8 curation exposes persistent family-world state", view.FindName("TextBlockFamilyWorldState") is TextBlock);
+        Check("Y8 family-world tooltip uses at most two sentences", TooltipSentenceCount(((Button)view.FindName("ButtonFetchFamilyWorld")).ToolTip.ToString()!) <= 2);
         Check("Y8 no world is reported as not fetched", view.ViewModel.FamilyWorldState == "Family world: not fetched.");
         var withoutEvidence = TaskFile();
         foreach (var protein in withoutEvidence.MyExtendedFastaItems) protein.Evidence = null;
