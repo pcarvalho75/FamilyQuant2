@@ -55,7 +55,8 @@ namespace FamilyQuant.Tests
             Check("Help names the visible fetch command and retains the Pfam explanation",
                 help.Contains("Fetch evidence asks UniProt", StringComparison.Ordinal)
                 && help.Contains("Pfam domains", StringComparison.Ordinal));
-            string fetchSource = File.ReadAllText(Path.Combine(GoldenNumbers.FindRepository(), "FamilyQuant", "ClusterGenerationControl.xaml.cs"));
+            string fetchSource = File.ReadAllText(Path.Combine(GoldenNumbers.FindRepository(), "FamilyQuant", "ClusterGenerationControl.xaml.cs"))
+                + File.ReadAllText(Path.Combine(GoldenNumbers.FindRepository(), "FamilyQuant", "CurationViewModel.Evidence.cs"));
             Check("fetch retry and dialog title name the visible fetch command",
                 fetchSource.Contains("press Fetch evidence again", StringComparison.Ordinal)
                 && fetchSource.Contains("string title = \"Fetch evidence\"", StringComparison.Ordinal)
@@ -254,6 +255,7 @@ namespace FamilyQuant.Tests
 
             int RowCount() => VisibleRows(grid).Count;
 
+            hideDecoys!.IsChecked = false; refresh.Invoke(control, null);
             int all = RowCount();
             hideDecoys!.IsChecked = true; refresh.Invoke(control, null);
             int withoutDecoys = RowCount();
@@ -762,7 +764,7 @@ namespace FamilyQuant.Tests
 
             Check("Recalculate is disabled before a project is loaded", !recalculate.IsEnabled);
             Check("and its tooltip says what would enable it",
-                (recalculate.ToolTip as string ?? "").Contains("Layer 2"), recalculate.ToolTip as string);
+                (recalculate.ToolTip as string ?? "").Contains("PatternLab"), recalculate.ToolTip as string);
             Check("Align Selected is disabled until rows are selected", !align.IsEnabled);
             Check("and its tooltip says so",
                 (align.ToolTip as string ?? "").Contains("two rows"), align.ToolTip as string);
@@ -1107,14 +1109,14 @@ namespace FamilyQuant.Tests
 
             foreach (Button button in buttons)
             {
-                Rect buttonBounds = BoundsIn(root, button);
+                Rect buttonBounds = VisibleBoundsIn(root, button);
                 if (buttonBounds.IsEmpty) continue;
 
                 foreach (TextBlock text in texts)
                 {
                     if (IsAncestorOf(button, text)) continue;    // the button's own caption
 
-                    Rect textBounds = BoundsIn(root, text);
+                    Rect textBounds = VisibleBoundsIn(root, text);
                     if (textBounds.IsEmpty) continue;
 
                     // Half a unit of slack so that merely touching edges is not an overlap.
@@ -1162,6 +1164,16 @@ namespace FamilyQuant.Tests
 
             Check("and does not accuse a label that fits",
                 LayoutInformation.GetLayoutClip(fits) == null);
+
+            var overflow = new TextBlock { Text = new string('M', 50), Width = 500, Height = 20 };
+            var clippedHost = new Border { Width = 50, Height = 20, ClipToBounds = true, Child = overflow };
+            var canvas = new Canvas { Width = 600, Height = 100 };
+            canvas.Children.Add(clippedHost);
+            LayoutAt(canvas, new Size(600, 100), -1);
+            Check("the overlap detector respects clipped table and scroll content",
+                BoundsIn(canvas, overflow).Width > 50
+                && Math.Abs(VisibleBoundsIn(canvas, overflow).Width - 50) < 0.001,
+                "raw=" + BoundsIn(canvas, overflow) + "; visible=" + VisibleBoundsIn(canvas, overflow));
         }
 
         private static string DescribeVisually(FrameworkElement element)
@@ -1196,6 +1208,22 @@ namespace FamilyQuant.Tests
                 // Left over from a tab that is no longer realised; nothing to measure.
                 return Rect.Empty;
             }
+        }
+
+        private static Rect VisibleBoundsIn(FrameworkElement root, FrameworkElement element)
+        {
+            Rect bounds = BoundsIn(root, element);
+            for (DependencyObject? node = element; node != null && !bounds.IsEmpty; node = VisualParentOf(node))
+            {
+                if (node is FrameworkElement parent)
+                {
+                    if (parent.ClipToBounds || ReferenceEquals(parent, root)) bounds.Intersect(BoundsIn(root, parent));
+                    if (parent.Clip is Geometry clip)
+                        bounds.Intersect(parent.TransformToAncestor(root).TransformBounds(clip.Bounds));
+                }
+                if (ReferenceEquals(node, root)) break;
+            }
+            return bounds;
         }
 
         private static bool HasAncestor<T>(DependencyObject node) where T : DependencyObject
@@ -1280,9 +1308,13 @@ namespace FamilyQuant.Tests
 
         private static T? UiField<T>(object control, string name) where T : class
         {
-            return control.GetType()
+            var value = control.GetType()
                 .GetField(name, BindingFlags.NonPublic | BindingFlags.Instance)?
                 .GetValue(control) as T;
+            if (value != null) return value;
+            if (control is ClusterGenerationControl curation && curation.FindName("QuantitationPanel") is CurationQuantitationPanel panel)
+                return UiField<T>(panel, name);
+            return null;
         }
     }
 }

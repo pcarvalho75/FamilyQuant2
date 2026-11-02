@@ -5,46 +5,55 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:core="clr-namespace:FamilyQuant;assembly=FamilyQuant.Core"
              xmlns:local="clr-namespace:FamilyQuant"
+             xmlns:theme="clr-namespace:FamilyQuant.Themes"
              xmlns:numeric="clr-namespace:FamilyQuant"
              mc:Ignorable="d" FontSize="{DynamicResource BodySize}"
              d:DesignHeight="450" d:DesignWidth="1024">
-    <UserControl.Resources>
+    <UserControl.Resources><local:AccessionTextConverter x:Key="AccessionText"/></UserControl.Resources>
 
-        <!-- The state badge on each Layer header. One style, so "READY" looks the same everywhere and a
-             blocked Layer cannot be mistaken for a ready one. -->
-        <Style x:Key="LayerBadge" TargetType="Border">
-            <Setter Property="CornerRadius" Value="3"/>
-            <Setter Property="Padding" Value="7,1"/>
-            <Setter Property="Margin" Value="10,0,0,0"/>
-            <Setter Property="VerticalAlignment" Value="Center"/>
-        </Style>
-
-        <Style x:Key="LayerBadgeText" TargetType="TextBlock">
-            <Setter Property="FontSize" Value="10"/>
-            <Setter Property="FontWeight" Value="Bold"/>
-            <Setter Property="Foreground" Value="{DynamicResource TextBrush}"/>
-        </Style>
-
-        <Style x:Key="LayerTitle" TargetType="TextBlock" BasedOn="{StaticResource SectionTitle}">
-            <Setter Property="VerticalAlignment" Value="Center"/>
-        </Style>
-
-    </UserControl.Resources>
-
-    <Grid Background="{DynamicResource CanvasBrush}">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-
-        <!-- ============================================================================
-             The permanent status line. It names what the share column is a
-             percentage OF, what was done with peptides belonging to several families, and
-             how many families ended up with a number. It is outside the TabControl on
-             purpose: the numbers are meaningless without it, so it must not be something
-             you can tab away from.
-             ============================================================================ -->
-        <Border x:Name="BorderCurationStatus" Grid.Row="0" Background="{DynamicResource SubtleBrush}" BorderBrush="{DynamicResource EdgeBrush}" BorderThickness="0,0,0,1" Padding="10,6">
+    <Grid Background="{DynamicResource CanvasBrush}" Margin="12">
+        <Grid.ColumnDefinitions><ColumnDefinition/><ColumnDefinition Width="12"/><ColumnDefinition Width="360"/></Grid.ColumnDefinitions>
+        <Grid><Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
+            <DockPanel Margin="0,0,0,10">
+                <TextBlock Text="Proteins" Style="{StaticResource PageTitle}" DockPanel.Dock="Left"/>
+                <Label x:Name="LabelNumberOfGroups" HorizontalAlignment="Right" ToolTip="Visible families and families in the file. Display filters never change the saved grouping or percentages."/>
+            </DockPanel>
+            <DockPanel Grid.Row="1" Margin="0,0,0,10">
+                <Label Content="Search" Target="{Binding ElementName=TextBoxSearch}" VerticalAlignment="Center" Margin="0,0,8,0"
+                       ToolTip="Filter the protein table without changing the stored families or shares."/>
+                <TextBox x:Name="TextBoxSearch" KeyUp="TextBoxSearch_KeyUp" AutomationProperties.Name="Search proteins"
+                         ToolTip="Filter by accession, description or domain, using commas between alternatives. Filtering never changes a percentage."/>
+            </DockPanel>
+<DataGrid Grid.Row="2" x:Name="DataGridResultGrid" AutoGenerateColumns="False" LoadingRow="DataGridResultGrid_LoadingRow" ClipToBounds="True"
+                          CanUserAddRows="False" CanUserDeleteRows="False"
+                          CellEditEnding="DataGridResultGrid_CellEditEnding"
+                          SelectionChanged="DataGridResultGrid_SelectionChanged"
+                          Sorting="DataGridResultGrid_Sorting"
+                          AlternatingRowBackground="{DynamicResource SubtleBrush}" GridLinesVisibility="None" Margin="5">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn x:Name="ColumnUSearchId" CanUserReorder="True" IsReadOnly="True" CanUserResize="True" CanUserSort="True"
+                                            Visibility="Collapsed" Header="USearch ID" Width="90" MinWidth="90" Binding="{Binding Path=USearchID}" />
+                        <DataGridTextColumn x:Name="ColumnUserId" CanUserReorder="True" CanUserResize="True" CanUserSort="True"
+                                            Header="User ID" Width="80" MinWidth="80" Binding="{Binding Path=UserID, Mode=TwoWay}" />
+                        <DataGridTextColumn x:Name="ColumnLocus" CanUserReorder="True" IsReadOnly="True" CanUserResize="True" CanUserSort="True"
+                                            Header="Locus" Width="120" MinWidth="120" theme:TableAppearance.FullTextPath="SequenceIdentifier"
+                                            Binding="{Binding Path=SequenceIdentifier, Converter={StaticResource AccessionText}}"/>
+                        <DataGridTextColumn x:Name="ColumnDescription" CanUserReorder="True" IsReadOnly="True" CanUserResize="True" CanUserSort="True"
+                                            Header="Description" Width="*" MinWidth="220" Binding="{Binding Path=Description}"/>
+                        <DataGridTextColumn x:Name="ColumnFullXic" CanUserReorder="True" IsReadOnly="True" CanUserResize="True" CanUserSort="True"
+                                            SortMemberPath="FullXicShare"
+                                            Header="Full XIC share" Width="170" MinWidth="170" Binding="{Binding Path=FullXicShare, StringFormat=P3}"/>
+                        <DataGridTextColumn x:Name="ColumnXicUser" CanUserReorder="True" IsReadOnly="True" CanUserResize="True" CanUserSort="True"
+                                            Header="Share of signal" Width="170" MinWidth="170" Binding="{Binding Path=XICUser, StringFormat=P3}"/>
+                        <DataGridTextColumn x:Name="ColumnUserAnnotation" CanUserReorder="True" CanUserResize="True" CanUserSort="True"
+                                            Header="User Annotation" Width="150" MinWidth="150" Binding="{Binding Path=UserAnnotation, Mode=TwoWay}"/>
+                        <DataGridTextColumn x:Name="ColumnDomains" CanUserReorder="True" IsReadOnly="True" CanUserResize="True" CanUserSort="True"
+                                            Header="Domains" Width="170" MinWidth="170" Binding="{Binding Path=Domains}"/>
+                        <DataGridTextColumn x:Name="ColumnMass" CanUserReorder="True" IsReadOnly="True" CanUserResize="True" CanUserSort="True"
+                                            Header="Residue mass (Da)" Width="110" MinWidth="110" Binding="{Binding Path=MonoisotopicMass, StringFormat=N3}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+<Border x:Name="BorderCurationStatus" Grid.Row="3" Background="{DynamicResource SubtleBrush}" BorderBrush="{DynamicResource EdgeBrush}" BorderThickness="0,0,0,1" Padding="10,6">
             <DockPanel LastChildFill="True">
                 <Button x:Name="ButtonHelp" DockPanel.Dock="Right" Content="?  How to read these numbers"
                         Click="ButtonHelp_Click" Margin="10,0,0,0" Padding="10,4" FontWeight="Normal"
@@ -57,410 +66,95 @@
                            ToolTip="What the share column currently shows: its denominator, how shared peptides were treated, and how many families got a value. It changes only when you press Recalculate."/>
             </DockPanel>
         </Border>
-
-        <TabControl Grid.Row="1" Margin="5" Background="{DynamicResource CanvasBrush}">
-
-            <!-- Tab 1: Controls -->
-            <TabItem Header="Controls" >
-                <!-- Horizontal scrolling is DISABLED on purpose. It makes the panel be measured against
-                     the width actually on screen, so the WrapPanels wrap and the explanatory text below
-                     the two lists wraps inside its own column. Allowing horizontal scroll would measure
-                     the content against infinite width, and a wrapping TextBlock measured against
-                     infinity becomes one very long line - which is how that text ended up running
-                     underneath the Recalculate button. -->
-                <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
-                    <StackPanel Margin="10">
-
-                        <!-- Layer 1: Clustering Operations -->
-                        <GroupBox Margin="5" Background="{DynamicResource SurfaceBrush}" Foreground="{DynamicResource TextBrush}" Padding="5">
-                            <GroupBox.Header>
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="Layer 1: Protein family clustering" Style="{StaticResource LayerTitle}"/>
-                                    <Border x:Name="BadgeLayer1" Style="{StaticResource LayerBadge}" Background="{DynamicResource ClearBrush}">
-                                        <TextBlock x:Name="TextBlockLayer1State" Style="{StaticResource LayerBadgeText}" Text="READY"/>
-                                    </Border>
-                                </StackPanel>
-                            </GroupBox.Header>
-
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                </Grid.RowDefinitions>
-
-                                <!-- USearch Controls -->
-                                <WrapPanel Grid.Row="0" HorizontalAlignment="Left" Margin="5">
-                                    <Label Content="Search:"
-                                           ToolTip="Filters the table by locus, description or domain. Separate several terms with commas; a row is shown when it has ANY of them."
-                                           Foreground="{DynamicResource TextBrush}" VerticalAlignment="Center"/>
-                                    <TextBox Width="200" x:Name="TextBoxSearch" KeyUp="TextBoxSearch_KeyUp"
-                                             ToolTip="Type part of a locus, description or domain. Separate several terms with commas, for example: metalloprotease, SVMP; a row is shown when it has ANY of them. Filtering never changes a percentage."
-                                             Background="{DynamicResource InputBrush}" Foreground="{DynamicResource TextBrush}" Margin="5" VerticalAlignment="Center"/>
-
-                                    <Separator Width="20" Background="{DynamicResource ClearBrush}"/>
-
-                                    <Label Content="Families:" Foreground="{DynamicResource TextBrush}" VerticalAlignment="Center"
-                                           ToolTip="How many protein families there are: visible after the filters, and in the whole file."/>
-                                    <Label x:Name="LabelNumberOfGroups" Content="?"
-                                           ToolTip="Left: families among the rows shown. Right: families in the whole file. They differ while a filter, such as Hide Reverse, is on."
-                                           Foreground="{DynamicResource TextBrush}" FontWeight="Bold" FontSize="14" VerticalAlignment="Center"/>
-
-                                    <Label Content="Identity:" Foreground="{DynamicResource TextBrush}" Margin="10,0,0,0" VerticalAlignment="Center"
-                                           ToolTip="The sequence-identity threshold USearch used to build these families."/>
-                                    <Label x:Name="LabelClusterThreshold" Content="?"
-                                           ToolTip="The USearch identity threshold this file was built at. Higher gives more, smaller families. To change it, run USearch again and generate a new .fcf."
-                                           Foreground="{DynamicResource TextBrush}" FontWeight="Bold" FontSize="14" VerticalAlignment="Center"/>
-
-                                    <Label Content="Word similarity:" Foreground="{DynamicResource TextBrush}" Margin="10,0,0,0" VerticalAlignment="Center"
-                                           ToolTip="Whether these families were merged further by their description words, and at what threshold."/>
-                                    <Label x:Name="LabelWordSimilarity" Content="none"
-                                           ToolTip="How the families were built: 'none' means by sequence identity only, a number is the threshold of the last Recluster by Words, and 'keywords' means a keyword merge."
-                                           Foreground="{DynamicResource TextBrush}" FontWeight="Bold" FontSize="14" VerticalAlignment="Center"/>
-
-                                    <Button x:Name="ButtonAlignSelected" Margin="15,0,0,0" Content="Align selected"
-                                            Click="ButtonAlignSelected_Click" IsEnabled="False"
-                                            ToolTip="Aligns the selected proteins and opens the alignment in a new window, to check that a family's members really are homologous. Disabled until at least two rows are selected in the Data Browser tab."
-                                            Background="{DynamicResource SubtleBrush}" Foreground="{DynamicResource TextBrush}" Padding="10,5"/>
-
-                                    <Button x:Name="ButtonFetchDomains" Margin="15,0,0,0" Content="Fetch evidence"
-                                            Click="ButtonFetchDomains_Click"
-                                            ToolTip="Asks UniProt for each protein's Pfam domains, which needs the internet once. They fill the Domains column, the Search box finds them, the super cluster preview can choose by them, and saving keeps them in the file. Family numbers do not change."
-                                            Background="{DynamicResource SubtleBrush}" Foreground="{DynamicResource TextBrush}" Padding="10,5"/>
-                                    <Button x:Name="ButtonEvidenceGrouping" Margin="15,0,0,0" Content="Group by evidence" Click="ButtonEvidenceGrouping_Click"
-                                            ToolTip="Opens the grouping review. Set scope words, review the evidence proposal and apply its ticks and names, or cancel without changing the document."
-                                            Padding="10,5"/>
-                                </WrapPanel>
-
-                                <!-- Word Reclustering Controls -->
-                                <GroupBox Header="Word-Based Reclustering" Grid.Row="1" Margin="5,5,5,0" Background="{DynamicResource SubtleBrush}" Foreground="{DynamicResource TextBrush}">
-                                    <StackPanel>
-                                        <WrapPanel HorizontalAlignment="Left" Margin="5">
-                                            <Label Content="Similarity:"
-                                                   ToolTip="How alike two families' descriptions must be before they are merged into one."
-                                                   Foreground="{DynamicResource TextBrush}" VerticalAlignment="Center"/>
-                                            <numeric:DecimalUpDown x:Name="DecimalUpDownWordReCluster" Value="0.95"
-                                                                Increment="0.01" Maximum="1" Minimum="0.10"
-                                                                ToolTip="Families whose description words score at or above this value are merged (0.10 to 1.00). Default 0.95 merges only near-identical wording; lower it towards 0.90 to gather related families."
-                                                                Background="{DynamicResource InputBrush}" Foreground="{DynamicResource TextBrush}" Width="60" Margin="5" VerticalAlignment="Center"/>
-
-                                            <Label Content="Exclude Words:" Foreground="{DynamicResource TextBrush}" Margin="15,0,5,0" VerticalAlignment="Center"
-                                                   ToolTip="Words to ignore when comparing descriptions."/>
-                                            <TextBox x:Name="TextBoxWordsToBeExcluded" Width="200"
-                                                     ToolTip="Words to ignore when comparing descriptions, separated by commas or spaces, for example: protein, domain, fragment. Use it when a common word pulls unrelated families together; it also applies to Create Super Cluster."
-                                                     Background="{DynamicResource InputBrush}" Foreground="{DynamicResource TextBrush}" Margin="5" VerticalAlignment="Center"/>
-
-                                            <Button x:Name="ButtonWordCluster" Margin="15,0,5,0" Content="Recluster by words"
-                                                    Click="ButtonWordCluster_Click"
-                                                    ToolTip="Merges families whose descriptions are at least as similar as the Similarity value. Family numbers change and percentages are recalculated; press Undo to step it back."
-                                                    Background="{DynamicResource SubtleBrush}" Foreground="{DynamicResource TextBrush}" Padding="10,5"/>
-                                        </WrapPanel>
-
-                                        <WrapPanel HorizontalAlignment="Left" Margin="5">
-                                            <Button Content="Group by keywords" x:Name="ButtonSuperCluster" Style="{DynamicResource PrimaryButton}"
-                                                    Click="ButtonSuperCluster_Click"
-                                                    ToolTip="Opens the keyword grouping review, where you enter keywords, exclusions and the match rule. Review the protein ticks before applying; Undo reverses the grouping." Padding="10,5"/>
-                                        </WrapPanel>
-                                    </StackPanel>
-                                </GroupBox>
-
-                                <!-- ============================================================
-                                     Curation locks. They are written by editing the User ID column
-                                     and were otherwise invisible: nothing on screen said a family
-                                     was protected, and nothing could remove a lock short of
-                                     hand-editing the .fcf JSON. The counter sits in this Layer
-                                     because a lock is a statement about what the two buttons above
-                                     will refuse to merge.
-                                     ============================================================ -->
-                                <!-- Batch edit of the selected rows: typing one User ID or annotation
-                                     per row does not scale to joining many proteins, splitting several
-                                     out of a family, or gathering a whole class (the cellular proteins
-                                     of a venom database) into one labelled family. -->
-                                <WrapPanel Grid.Row="2" HorizontalAlignment="Center" Margin="5,8,5,0">
-                                    <Label Content="Selected rows:" Foreground="{DynamicResource TextBrush}" VerticalAlignment="Center"
-                                           ToolTip="Changes every row you have selected in the table at once, instead of one row at a time."/>
-                                    <Label Content="User ID" Foreground="{DynamicResource TextBrush}" Margin="5,0,0,0" VerticalAlignment="Center"
-                                           ToolTip="The family number to give every selected row."/>
-                                    <TextBox x:Name="TextBoxBatchUserId" Width="70"
-                                             ToolTip="A family number for every selected row; leave it empty to keep their numbers. An existing number joins that family, an unused one makes a new family. The family they join, and any family they leave that still has members, is locked against reclustering."
-                                             Background="{DynamicResource InputBrush}" Foreground="{DynamicResource TextBrush}" Margin="5" VerticalAlignment="Center"/>
-                                    <Label Content="Annotation" Foreground="{DynamicResource TextBrush}" Margin="5,0,0,0" VerticalAlignment="Center"
-                                           ToolTip="The text to write into the User Annotation column of every selected row."/>
-                                    <TextBox x:Name="TextBoxBatchAnnotation" Width="160"
-                                             ToolTip="Text for the User Annotation column of every selected row, for example: cellular proteins. Leave it empty to keep their annotations; annotations are exported with the CSV."
-                                             Background="{DynamicResource InputBrush}" Foreground="{DynamicResource TextBrush}" Margin="5" VerticalAlignment="Center"/>
-                                    <Button x:Name="ButtonApplyToSelected" Margin="10,0,0,0" Content="Apply to selected rows"
-                                            Click="ButtonApplyToSelected_Click"
-                                            ToolTip="Gives every selected row the User ID and/or annotation typed to the left. Select with Ctrl+click or Shift+click, or Ctrl+A for all visible rows; Undo steps it back."
-                                            Background="{DynamicResource SubtleBrush}" Foreground="{DynamicResource TextBrush}" Padding="10,5"/>
-                                    <TextBlock x:Name="TextBlockBatchStatus" Margin="10,0,0,0" MaxWidth="420" TextWrapping="Wrap"
-                                               Foreground="#A8A49A" VerticalAlignment="Center"
-                                               ToolTip="What the last 'Apply to selected rows' did, or why it did nothing."/>
-                                </WrapPanel>
-
-                                <WrapPanel Grid.Row="3" HorizontalAlignment="Center" Margin="5,8,5,0">
-                                    <Label Content="Curation locks:" Foreground="{DynamicResource TextBrush}" VerticalAlignment="Center"
-                                           ToolTip="How many families are protected from automatic reclustering. A locked family is never merged by Recluster by Words or Create Super Cluster."/>
-                                    <Label x:Name="LabelLockCount" Content="No families locked"
-                                           ToolTip="The number of locked families in this file, including numbers a later merge took out of use. It shows what the next reclustering will refuse to merge."
-                                           Foreground="{DynamicResource TextBrush}" FontWeight="Bold" FontSize="14" VerticalAlignment="Center"/>
-
-                                    <Button x:Name="ButtonManageLocks" Margin="15,0,0,0" Content="Manage locks..."
-                                            Click="ButtonManageLocks_Click" IsEnabled="False"
-                                            ToolTip="Opens the list of locked families, where you can read and remove locks. A removal reaches the disk only when you save the Family Cluster File. Disabled while no family is locked."
-                                            Background="{DynamicResource SubtleBrush}" Foreground="{DynamicResource TextBrush}" Padding="10,5"/>
-
-                                    <!-- Undo steps back through the curation operations of this session (a
-                                         Recluster by Words, a Create Super Cluster, a User ID edit that
-                                         changed a number, a lock removal). It works on the open file only and
-                                         needs no reload. Enabled only while there is a step to take back. -->
-                                    <Button x:Name="ButtonUndo" Margin="15,0,0,0" Content="Undo"
-                                            Click="ButtonUndo_Click" IsEnabled="False"
-                                            ToolTip="Undoes the last curation change, such as a merge, a User ID edit or a lock removal, up to 50 steps in this session. Disabled until there is a change to undo."
-                                            Background="{DynamicResource SubtleBrush}" Foreground="{DynamicResource TextBrush}" Padding="10,5"/>
-                                </WrapPanel>
-                            </Grid>
-                        </GroupBox>
-
-                        <!-- Layer 2: Quantitation Loading -->
-                        <GroupBox Margin="5" Background="{DynamicResource SurfaceBrush}" Foreground="{DynamicResource TextBrush}" Padding="5">
-                            <GroupBox.Header>
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="Layer 2: PatternLab quantitation (.plp, optional)" Style="{StaticResource LayerTitle}"/>
-                                    <Border x:Name="BadgeLayer2" Style="{StaticResource LayerBadge}" Background="{DynamicResource ClearBrush}">
-                                        <TextBlock x:Name="TextBlockLayer2State" Style="{StaticResource LayerBadgeText}" Text="PENDING"/>
-                                    </Border>
-                                </StackPanel>
-                            </GroupBox.Header>
-
-                            <WrapPanel HorizontalAlignment="Left" Margin="5">
-                                <Button x:Name="ButtonLoadQuantData" Style="{DynamicResource PrimaryButton}" Content="Load PLP File"
-                                        Click="ButtonLoadQuantData_Click"
-                                        ToolTip="Loads a PatternLab project (.plp) to fill the share column for these families. It must be exported at PEPTIDE level; a protein-level export makes every row read 0." FontWeight="SemiBold" Padding="15,8" FontSize="13"/>
-
-                                <StackPanel Orientation="Horizontal" Margin="20,0,0,0" VerticalAlignment="Center">
-                                    <TextBlock Text="Status:" Foreground="{DynamicResource TextBrush}" FontWeight="SemiBold" Margin="0,0,8,0"
-                                               ToolTip="Which quantitation project is loaded, if any."/>
-                                    <TextBlock x:Name="IconPLPStatus" Text="&#xE73E;" Style="{DynamicResource FluentIcon}"
-                                               Visibility="Collapsed" Margin="0,0,6,0"/>
-                                    <TextBlock x:Name="TextBlockPLPStatus" Text="No quantitation loaded"
-                                               Foreground="{DynamicResource MutedBrush}" FontStyle="Italic" TextWrapping="Wrap" MaxWidth="420"
-                                               ToolTip="The name of the loaded PatternLab project. Until one is loaded, the share column stays empty."/>
-                                </StackPanel>
-                            </WrapPanel>
-                        </GroupBox>
-
-                        <!-- Layer 3: Quantitation Calculation -->
-                        <GroupBox Margin="5" Background="{DynamicResource SurfaceBrush}" Foreground="{DynamicResource TextBrush}" Padding="5">
-                            <GroupBox.Header>
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="Layer 3: Quantitation calculation options" Style="{StaticResource LayerTitle}"/>
-                                    <Border x:Name="BadgeLayer3" Style="{StaticResource LayerBadge}" Background="{DynamicResource ClearBrush}">
-                                        <TextBlock x:Name="TextBlockLayer3State" Style="{StaticResource LayerBadgeText}" Text="BLOCKED"/>
-                                    </Border>
-                                </StackPanel>
-                            </GroupBox.Header>
-
-                            <StackPanel>
-                                <!-- A Grid, not a WrapPanel. The options column is elastic and the button
-                                     column is fixed, so the explanatory text below the two lists wraps
-                                     inside its own column instead of running underneath the Recalculate
-                                     button, which is what it did before. -->
-                                <Grid Margin="5">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*" MinWidth="240"/>
-                                        <ColumnDefinition Width="Auto"/>
-                                    </Grid.ColumnDefinitions>
-
-                                    <StackPanel Grid.Column="0" Orientation="Vertical" Margin="5">
-                                        <Grid Margin="0,0,0,8">
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="Auto"/>
-                                                <ColumnDefinition Width="*"/>
-                                            </Grid.ColumnDefinitions>
-                                            <Label Grid.Column="0" Content="Shared peptides:" Foreground="{DynamicResource TextBrush}" FontWeight="SemiBold" VerticalAlignment="Center"
-                                                   ToolTip="What to do with a peptide that belongs to more than one family."/>
-                                            <ComboBox Grid.Column="1" x:Name="ComboBoxSharedPeptides" Margin="6,0" MaxWidth="380"
-                                                      HorizontalAlignment="Left" MinWidth="200"
-                                                      VerticalAlignment="Center"
-                                                      SelectionChanged="ComboBoxNormalization_SelectionChanged">
-                                                <ComboBoxItem x:Name="SharedItemUnique" IsSelected="True"/>
-                                                <ComboBoxItem x:Name="SharedItemSplit"/>
-                                                <ComboBoxItem x:Name="SharedItemEvery"/>
-                                            </ComboBox>
-                                        </Grid>
-
-                                        <Grid>
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="Auto"/>
-                                                <ColumnDefinition Width="*"/>
-                                            </Grid.ColumnDefinitions>
-                                            <Label Grid.Column="0" Content="Report XIC as:" Foreground="{DynamicResource TextBrush}" FontWeight="SemiBold" VerticalAlignment="Center"
-                                                   ToolTip="What the numbers in the share column are a percentage OF."/>
-                                            <ComboBox Grid.Column="1" x:Name="ComboBoxNormalization" Margin="6,0" MaxWidth="380"
-                                                      HorizontalAlignment="Left" MinWidth="200"
-                                                      VerticalAlignment="Center"
-                                                      SelectionChanged="ComboBoxNormalization_SelectionChanged">
-                                                <!-- Item order MUST equal NormalizationMode's numbering: SelectedIndex IS the enum
-                                                     value, with no lookup table to drift out of sync. Items are DISABLED, never
-                                                     removed - removing one would shift every index above it and index 1 would stop
-                                                     meaning TIC, silently changing what every existing selection reports.
-                                                     The visible text is filled in from NormalizationModeExtensions.DisplayName at
-                                                     construction, so a column header or a dialog quoting a mode quotes exactly
-                                                     what this list shows. -->
-                                                <ComboBoxItem x:Name="ModeItemIdentified" IsSelected="True"/>
-                                                <ComboBoxItem x:Name="ModeItemTic"/>
-                                                <ComboBoxItem x:Name="ModeItemPeptideSignal"/>
-                                                <ComboBoxItem x:Name="ModeItemChargeRestricted"/>
-                                            </ComboBox>
-                                        </Grid>
-
-                                        <Grid Margin="0,8,0,0">
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="Auto"/>
-                                                <ColumnDefinition Width="*"/>
-                                            </Grid.ColumnDefinitions>
-                                            <Label Grid.Column="0" Content="Full XIC share of:" Foreground="{DynamicResource TextBrush}" FontWeight="SemiBold" VerticalAlignment="Center"
-                                                   ToolTip="What the Full XIC share column is a percentage OF."/>
-                                            <ComboBox Grid.Column="1" x:Name="ComboBoxFullXicBasis" Margin="6,0" MaxWidth="380"
-                                                      HorizontalAlignment="Left" MinWidth="200" VerticalAlignment="Center"
-                                                      SelectionChanged="ComboBoxFullXicBasis_SelectionChanged"
-                                                      ToolTip="What the Full XIC share column is divided by. Use 'the quantified signal' for a composition (a pie chart of the families), 'the total ion current' for each family's share of the whole sample. Applies at once.">
-                                                <ComboBoxItem x:Name="FullXicBasisQuantified" IsSelected="True" Content="the quantified signal"
-                                                              ToolTip="Divides by every quantified peptide, each counted once."/>
-                                                <ComboBoxItem x:Name="FullXicBasisTic" Content="the total ion current of all runs"
-                                                              ToolTip="Divides by the summed TIC of every run the computation recorded."/>
-                                            </ComboBox>
-                                        </Grid>
-
-                                        <TextBlock x:Name="TextBlockFullXicSummary" TextWrapping="Wrap" Margin="6,8,6,0"
-                                                   Foreground="{DynamicResource MutedBrush}" FontSize="11" HorizontalAlignment="Stretch"
-                                                   ToolTip="What the Full XIC column adds up to: the families, the peptides shared between families, and the peptides with no family."
-                                                   Text="No full XIC computed for this project yet: run File · Compute / update full XIC to fill the Full XIC share column."/>
-
-                                        <TextBlock x:Name="TextBlockQuantProfile" TextWrapping="Wrap" Margin="6,10,6,0"
-                                                   Foreground="{DynamicResource MutedBrush}" FontSize="11" HorizontalAlignment="Stretch"
-                                                   ToolTip="What the loaded project says about its own quantitation: the divisor it used, and which reporting modes it can therefore support."
-                                                   Text="Load a project in Layer 2 to see how it was exported."/>
-                                    </StackPanel>
-
-                                    <Button Grid.Column="1"
-                                            x:Name="ButtonRecalculateQuantitation" Style="{DynamicResource PrimaryButton}"
-                                            Content="Recalculate"
-                                            Margin="20,5,5,5"
-                                            VerticalAlignment="Top"
-                                            Click="ButtonRecalculateQuantitation_Click"
-                                            IsEnabled="False"
-                                            ToolTip="Applies the two choices on the left to the share column; the status mark says when the table is out of date. Disabled until a PatternLab project is loaded in Layer 2."
-                                            FontWeight="SemiBold"
-                                            Padding="15,8"/>
-                                </Grid>
-                            </StackPanel>
-                        </GroupBox>
-
-                        <!-- Display and Export -->
-                        <GroupBox Margin="5" Background="{DynamicResource SurfaceBrush}" Foreground="{DynamicResource TextBrush}" Padding="5">
-                            <GroupBox.Header>
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="Display and export options" Style="{StaticResource LayerTitle}"/>
-                                    <Border x:Name="BadgeExport" Style="{StaticResource LayerBadge}" Background="{DynamicResource ClearBrush}">
-                                        <TextBlock x:Name="TextBlockExportState" Style="{StaticResource LayerBadgeText}" Text="READY"/>
-                                    </Border>
-                                </StackPanel>
-                            </GroupBox.Header>
-
-                            <WrapPanel HorizontalAlignment="Left" Margin="5">
-                                <CheckBox x:Name="CheckBoxShowXICOnly" Content="Show Only XIC &gt; 0"
-                                          Margin="10,5" Foreground="{DynamicResource TextBrush}" VerticalAlignment="Center"
-                                          Checked="CheckBoxShowXICOnly_CheckedChanged"
-                                          Unchecked="CheckBoxShowXICOnly_CheckedChanged"
-                                          ToolTip="Hides families with no quantitation, so only the families your project measured are shown. Percentages do not change. Off by default."/>
-
-                                <CheckBox x:Name="CheckBoxExcludeContaminants" Content="Hide Contaminants"
-                                          Margin="10,5" Foreground="{DynamicResource TextBrush}" VerticalAlignment="Center"
-                                          Checked="CheckBoxShowXICOnly_CheckedChanged"
-                                          Unchecked="CheckBoxShowXICOnly_CheckedChanged"
-                                          ToolTip="{x:Static core:IdentifierText.HideContaminantsToolTip}"/>
-
-                                <CheckBox x:Name="CheckBoxExcludeReverse" Content="Hide Reverse (decoys)"
-                                          Margin="10,5" Foreground="{DynamicResource TextBrush}" VerticalAlignment="Center"
-                                          Checked="CheckBoxExcludeReverse_CheckedChanged"
-                                          Unchecked="CheckBoxExcludeReverse_CheckedChanged"
-                                          ToolTip="{x:Static core:IdentifierText.HideDecoysToolTip}"/>
-
-                                <Button x:Name="ButtonSaveReport" Style="{DynamicResource PrimaryButton}" Margin="15,5,5,5" Click="ButtonSaveReport_Click"
-                                        Content="Export to CSV"
-                                        ToolTip="Writes the visible rows, with the table's columns, to a CSV file; shares are fractions from 0 to 1 with a dot as decimal point. Disabled while every row is hidden by a filter." Padding="15,8" FontWeight="SemiBold"/>
-
-                                <Button x:Name="ButtonExportComposition" Margin="5,5,5,5" Click="ButtonExportComposition_Click"
-                                        Content="Export family composition (CSV)" IsEnabled="False"
-                                        ToolTip="Writes the Full XIC family composition to a CSV: one row per family, plus the unattributed peptides and, with 'Family-unique only', the shared ones. Disabled until the project has a full XIC (File · Compute / update full XIC)."
-                                        Background="{DynamicResource SubtleBrush}" Foreground="{DynamicResource TextBrush}" Padding="15,8" FontWeight="SemiBold"/>
-                            </WrapPanel>
-                        </GroupBox>
-                    </StackPanel>
-                </ScrollViewer>
-            </TabItem>
-
-            <!-- Tab 2: Data Browser -->
-            <TabItem Header="Data Browser">
-                <!-- The new-item placeholder row is disabled on purpose: FastaItemExtended has a
-                     parameterless constructor, so the placeholder was editable and typing into it
-                     created a blank protein in the FILTERED copy of the list - exportable to CSV,
-                     gone on the next refresh, and its edit locked family 0 as a side effect. -->
-                <DataGrid x:Name="DataGridResultGrid" AutoGenerateColumns="False" LoadingRow="DataGridResultGrid_LoadingRow"
-                          CanUserAddRows="False" CanUserDeleteRows="False"
-                          CellEditEnding="DataGridResultGrid_CellEditEnding"
-                          SelectionChanged="DataGridResultGrid_SelectionChanged"
-                          Sorting="DataGridResultGrid_Sorting"
-                          AlternatingRowBackground="{DynamicResource SubtleBrush}" GridLinesVisibility="None" Margin="5">
-                    <DataGrid.Columns>
-                        <DataGridTextColumn x:Name="ColumnUSearchId" CanUserReorder="True" IsReadOnly="True" CanUserResize="True" CanUserSort="True"
-                                            Header="USearch ID" Width="90" MinWidth="90" Binding="{Binding Path=USearchID}" />
-                        <DataGridTextColumn x:Name="ColumnUserId" CanUserReorder="True" CanUserResize="True" CanUserSort="True"
-                                            Header="User ID" Width="80" MinWidth="80" Binding="{Binding Path=UserID, Mode=TwoWay}" />
-                        <DataGridTextColumn x:Name="ColumnUserAnnotation" CanUserReorder="True" CanUserResize="True" CanUserSort="True"
-                                            Header="User Annotation" Width="150" MinWidth="150" Binding="{Binding Path=UserAnnotation, Mode=TwoWay}"/>
-                        <DataGridTextColumn x:Name="ColumnLocus" CanUserReorder="True" IsReadOnly="True" CanUserResize="True" CanUserSort="True"
-                                            Header="Locus" Width="120" MinWidth="120" Binding="{Binding Path=SequenceIdentifier}"/>
-                        <!-- The share heading names the denominator in use, so its text changes with the
-                             reporting mode and is far wider than the numbers below. Every heading in this
-                             grid wraps (see ApplyColumnHeaderTooltips), so a fixed width is safe and,
-                             unlike Auto, is settled by the layout pass rather than by a later one.
-                             There used to be a second share column, computed over the USEARCH grouping.
-                             Once reclustering stopped overwriting the curated grouping, that column
-                             answered only "what would the share have been if nobody had curated", which
-                             is a question nobody asks, and it cost a whole extra quantitation pass. The
-                             USearch ID column above shows the last automatic grouping, which equals the
-                             User ID column except where a family was renumbered by hand. -->
-                        <DataGridTextColumn x:Name="ColumnMass" CanUserReorder="True" IsReadOnly="True" CanUserResize="True" CanUserSort="True"
-                                            Header="Residue mass (Da)" Width="110" MinWidth="110" Binding="{Binding Path=MonoisotopicMass, StringFormat=N3}"/>
-                        <DataGridTextColumn x:Name="ColumnXicUser" CanUserReorder="True" IsReadOnly="True" CanUserResize="True" CanUserSort="True"
-                                            Header="Share of signal" Width="170" MinWidth="170" Binding="{Binding Path=XICUser, StringFormat=P3}"/>
-                        <DataGridTextColumn x:Name="ColumnFullXic" CanUserReorder="True" IsReadOnly="True" CanUserResize="True" CanUserSort="True"
-                                            SortMemberPath="FullXicShare"
-                                            Header="Full XIC share" Width="170" MinWidth="170" Binding="{Binding Path=FullXicShare, StringFormat=P3}"/>
-                        <DataGridTextColumn x:Name="ColumnDescription" CanUserReorder="True" IsReadOnly="True" CanUserResize="True" CanUserSort="True"
-                                            Header="Description" Width="*" MinWidth="120" Binding="{Binding Path=Description}"/>
-                        <DataGridTextColumn x:Name="ColumnDomains" CanUserReorder="True" IsReadOnly="True" CanUserResize="True" CanUserSort="True"
-                                            Header="Domains" Width="170" MinWidth="170" Binding="{Binding Path=Domains}"/>
-                    </DataGrid.Columns>
-                </DataGrid>
-            </TabItem>
-        </TabControl>
-
-        <!-- Wait Screen Overlay -->
-        <Grid x:Name="WaitScreen" Grid.Row="0" Grid.RowSpan="2" Background="{DynamicResource OverlayBrush}" Visibility="Collapsed">
-            <Border Background="{DynamicResource SurfaceBrush}" CornerRadius="10" Padding="30" HorizontalAlignment="Center" VerticalAlignment="Center"
-                    BorderBrush="{DynamicResource EdgeBrush}" BorderThickness="2">
-                <StackPanel>
-                    <TextBlock Text="Processing..." Foreground="{DynamicResource TextBrush}" FontSize="24" FontWeight="Bold" HorizontalAlignment="Center"/>
-                    <ProgressBar IsIndeterminate="True" Width="300" Height="20" Margin="0,15,0,10"/>
-                    <TextBlock x:Name="WaitScreenMessage" Text="Please wait..." Foreground="{DynamicResource MutedBrush}" FontSize="14"
-                               HorizontalAlignment="Center" TextAlignment="Center" TextWrapping="Wrap" MaxWidth="300"/>
-                </StackPanel>
-            </Border>
         </Grid>
+        <ScrollViewer Grid.Column="2" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+            <StackPanel>
+                <GroupBox Header="Grouping" Margin="0,0,0,10">
+                    <StackPanel>
+                        <Button x:Name="ButtonEvidenceGrouping" Content="Group by evidence" Style="{DynamicResource PrimaryButton}"
+                                Click="ButtonEvidenceGrouping_Click" ToolTip="Review the evidence proposal and protein selections before applying. Cancel keeps the current grouping unchanged."/>
+                        <Button x:Name="ButtonSuperCluster" Content="Group by keywords" Click="ButtonSuperCluster_Click"
+                                ToolTip="Enter keywords, exclusions and the match rule in the grouping review. Review the protein ticks before applying; Undo reverses the grouping."/>
+                        <WrapPanel>
+                            <Button x:Name="ButtonFetchDomains" Content="Fetch evidence" Click="ButtonFetchDomains_Click"
+                                    ToolTip="Fetch protein evidence and reviewed references from UniProt for offline review. Save the file to keep the fetched evidence."/>
+                            <Button x:Name="ButtonAlignSelected" Content="Align selected" Click="ButtonAlignSelected_Click" IsEnabled="False"
+                                    ToolTip="Align the selected proteins without changing their families. Disabled until at least two rows are selected in the protein table."/>
+                        </WrapPanel>
+                        <Grid Margin="4,8,4,0">
+                            <Grid.ColumnDefinitions><ColumnDefinition Width="Auto"/><ColumnDefinition/></Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
+                            <TextBlock Text="Identity" VerticalAlignment="Center" Foreground="{DynamicResource MutedBrush}"/>
+                            <Label Grid.Column="1" x:Name="LabelClusterThreshold" Margin="8,0,0,0"
+                                   ToolTip="The sequence identity used when building these families. Build from database lets you choose a different threshold."/>
+                            <TextBlock Grid.Row="1" Text="Word similarity" VerticalAlignment="Center" Foreground="{DynamicResource MutedBrush}"/>
+                            <Label Grid.Row="1" Grid.Column="1" x:Name="LabelWordSimilarity" Margin="8,0,0,0"
+                                   ToolTip="The last description similarity threshold, or keywords for a keyword grouping. None means only sequence identity was used."/>
+                        </Grid>
+                        <Border x:Name="BadgeLayer1" Visibility="Collapsed"><TextBlock x:Name="TextBlockLayer1State"/></Border>
+                    </StackPanel>
+                </GroupBox>
+                <Expander x:Name="WordGroupingActions" Header="Recluster by words" Margin="0,0,0,8">
+                    <StackPanel Margin="8">
+                        <Label Content="Description similarity" ToolTip="The minimum description similarity that permits a word grouping."/>
+                        <numeric:DecimalUpDown x:Name="DecimalUpDownWordReCluster" Value="0.95" Increment="0.01" Minimum="0.10" Maximum="1"
+                                            ToolTip="Merge families whose description similarity meets this threshold. The default 0.95 merges near-identical wording; lower values allow more joins."/>
+                        <Label Content="Ignore words" ToolTip="Words removed from descriptions before comparing their similarity."/>
+                        <TextBox x:Name="TextBoxWordsToBeExcluded"
+                                 ToolTip="Whole words ignored when comparing descriptions, separated by commas or spaces. Keyword review also uses these ignored words."/>
+                        <Button x:Name="ButtonWordCluster" Content="Recluster by words" Click="ButtonWordCluster_Click"
+                                ToolTip="Merge unlocked families using the chosen description similarity. The search limits its scope; Undo reverses the grouping."/>
+                    </StackPanel>
+                </Expander>
+                <Expander x:Name="SelectedProteinActions" Header="Edit selected proteins" Margin="0,0,0,8">
+                    <StackPanel Margin="8">
+                        <Label Content="Family number" ToolTip="The family number to give every selected protein."/>
+                        <TextBox x:Name="TextBoxBatchUserId"
+                                 ToolTip="Give selected proteins this family number, or leave it empty to keep their numbers. Joining and surviving source families are locked."/>
+                        <Label Content="Annotation" ToolTip="The annotation to write to every selected protein."/>
+                        <TextBox x:Name="TextBoxBatchAnnotation"
+                                 ToolTip="Annotate the selected proteins, or leave this empty to keep their annotations. The text is saved and exported with the file."/>
+                        <Button x:Name="ButtonApplyToSelected" Content="Apply to selected rows" Click="ButtonApplyToSelected_Click"
+                                ToolTip="Apply the family number and annotation to selected proteins. Select with Ctrl+click, Shift+click or Ctrl+A; Undo reverses the change."/>
+                        <TextBlock x:Name="TextBlockBatchStatus" TextWrapping="Wrap" Foreground="{DynamicResource MutedBrush}"
+                                   ToolTip="The result of the last selected-protein edit, or the reason nothing changed."/>
+                    </StackPanel>
+                </Expander>
+                <StackPanel Margin="4,0,4,10">
+                    <Label x:Name="LabelLockCount" ToolTip="Families protected from automatic grouping, including stored locks whose family has no proteins. Manage locks lets you remove that protection."/>
+                    <WrapPanel>
+                        <Button x:Name="ButtonManageLocks" Content="Manage locks" Click="ButtonManageLocks_Click"
+                                ToolTip="Review or remove locks on curated family numbers. A removal is one reversible Undo step."/>
+                        <Button x:Name="ButtonUndo" Content="Undo" Click="ButtonUndo_Click" IsEnabled="False"
+                                ToolTip="Undoes the last curation change, such as a grouping, family number edit or lock removal, up to 50 steps in this session. Disabled until there is a change to undo."/>
+                    </WrapPanel>
+                </StackPanel>
+                <local:CurationQuantitationPanel x:Name="QuantitationPanel"
+                    LoadRequested="ButtonLoadQuantData_Click" RecalculateRequested="ButtonRecalculateQuantitation_Click"
+                    ChoiceChanged="ComboBoxNormalization_SelectionChanged" BasisChanged="ComboBoxFullXicBasis_SelectionChanged"/>
+                <Expander Header="Display and export" Margin="0,10,0,0">
+                    <StackPanel Margin="8">
+                        <CheckBox x:Name="CheckBoxExcludeReverse" Content="Hide decoys" IsChecked="True"
+                                  Checked="CheckBoxExcludeReverse_CheckedChanged" Unchecked="CheckBoxExcludeReverse_CheckedChanged"
+                                  ToolTip="Hide decoys from the tables and visible-row CSV. This starts on and never deletes proteins or changes percentages."/>
+                        <CheckBox x:Name="CheckBoxExcludeContaminants" Content="Hide contaminants"
+                                  Checked="CheckBoxShowXICOnly_CheckedChanged" Unchecked="CheckBoxShowXICOnly_CheckedChanged"
+                                  ToolTip="{x:Static core:IdentifierText.HideContaminantsToolTip}"/>
+                        <CheckBox x:Name="CheckBoxShowXICOnly" Content="Show quantified families only"
+                                  Checked="CheckBoxShowXICOnly_CheckedChanged" Unchecked="CheckBoxShowXICOnly_CheckedChanged"
+                                  ToolTip="Hide families whose PatternLab share is zero. Display filtering never changes percentages or the saved proteins."/>
+                        <CheckBox x:Name="CheckBoxShowSearchIds" Content="Show USearch ID"
+                                  Checked="SearchIdVisibility_Changed" Unchecked="SearchIdVisibility_Changed"
+                                  ToolTip="Show the last automatic family number beside the curated number. Hiding this column keeps the stored IDs."/>
+                        <Button x:Name="ButtonSaveReport" Content="Export to CSV" Click="ButtonSaveReport_Click"
+                                ToolTip="Export exactly the visible protein rows, with invariant decimal fractions. Disabled while every row is hidden by a filter."/>
+                        <Button x:Name="ButtonExportComposition" Content="Export family composition" Click="ButtonExportComposition_Click" IsEnabled="False"
+                                ToolTip="Export one Full XIC row per family, shared peptides and unattributed peptides. Disabled until full XIC is available."/>
+                        <Border x:Name="BadgeExport" Visibility="Collapsed"><TextBlock x:Name="TextBlockExportState"/></Border>
+                    </StackPanel>
+                </Expander>
+            </StackPanel>
+        </ScrollViewer>
+
     </Grid>
 </UserControl>

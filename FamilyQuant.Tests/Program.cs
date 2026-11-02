@@ -95,6 +95,7 @@ namespace FamilyQuant.Tests
             DeNovoRealExportTests(args.Length > 2 ? args[2] : null);
             Section("De novo source provenance - separate score semantics, deterministic union and project round trip");
             SourceAwareDeNovoTests.Run(Check, workDir);
+            DeNovoEngineTidyTests();
             Section("Isotope-aware precursor equivalence - the JOIN/matching paths pair M, M+-1, M+-2 of one precursor");
             IsotopePrecursorEquivalenceTests.Run(Check);
             Section("De novo XIC - stored quants reproduced bit for bit from the RAW");
@@ -104,6 +105,8 @@ namespace FamilyQuant.Tests
                 skipped++;
             Section("Homology - PepExplorer's aligner, ported with its C-terminus and character defects fixed");
             HomologyTests.Run(Check);
+            Section("Family world (B1) - a de novo tag credited to UniProt families, on a fixture");
+            FamilyWorldCheck.RunFixtures(Check);
             Section("De novo reconciliation against the real .sepr2 - the request's items 3 to 5");
             ReconciliationRealTests(args.Length > 2 ? args[2] : null, args.Length > 3 ? args[3] : null, workDir);
             Section("De novo batch XIC - run _01 extracted whole, cached, and compared to PEAKS' areas");
@@ -254,6 +257,8 @@ namespace FamilyQuant.Tests
             TypographyRulesTests();
             UiIconTests();
             KeywordCommandTests();
+            CurationScreenTests();
+            CurationOperationTests();
             TableAppearanceTests();
             EvidenceReviewModelTests();
             EvidenceTaskScopeTests();
@@ -261,6 +266,8 @@ namespace FamilyQuant.Tests
             EvidenceTaskScopeWindowTests(Path.Combine(workDir, "task-scope"));
             GroupingReviewInteractionTests();
             EvidenceGroupingFlowTests();
+            ReportStudyBoundaryTests();
+            QuantitationPanelTests(Path.Combine(workDir, "quantitation-panel"));
             ArchitectureGroupSplitTests();
             ArchitectureMemberViewTests();
             EvidenceFetchCoordinatorTests();

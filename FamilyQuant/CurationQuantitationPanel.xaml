@@ -1,0 +1,97 @@
+<UserControl x:Class="FamilyQuant.CurationQuantitationPanel"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <UserControl.Resources>
+        <Style x:Key="QuantitationBadge" TargetType="Border">
+            <Setter Property="Padding" Value="7,1"/>
+            <Setter Property="Margin" Value="8,0,0,0"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+        <Style x:Key="QuantitationBadgeText" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="10"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Foreground" Value="{DynamicResource MutedBrush}"/>
+        </Style>
+    </UserControl.Resources>
+    <StackPanel Margin="0,12,0,0">
+        <DockPanel Margin="0,0,0,12">
+            <Border x:Name="BadgeLayer3" DockPanel.Dock="Right" Style="{StaticResource QuantitationBadge}" Background="{DynamicResource ClearBrush}">
+                <TextBlock x:Name="TextBlockLayer3State" Style="{StaticResource QuantitationBadgeText}"/>
+            </Border>
+            <TextBlock Text="Quantitation" Style="{DynamicResource SectionTitle}"/>
+        </DockPanel>
+        <StackPanel x:Name="FullXicSection">
+            <DockPanel>
+                <TextBlock x:Name="FullXicSourceState" DockPanel.Dock="Right" Foreground="{DynamicResource MutedBrush}" VerticalAlignment="Center"/>
+                <TextBlock Text="Full XIC" FontWeight="SemiBold"/>
+            </DockPanel>
+            <TextBlock x:Name="EmptyInstructions" Text="Compute full XIC in Quantify."
+                       Foreground="{DynamicResource MutedBrush}" Margin="0,6,0,0"/>
+            <TextBlock x:Name="FullXicFailureText" TextWrapping="Wrap" Foreground="{DynamicResource ErrorBrush}" FontSize="11" Margin="0,6,0,0"/>
+            <StackPanel x:Name="FullXicOptions" Margin="0,8,0,0">
+                <Label Content="Share of" Padding="0,0,0,4"
+                       ToolTip="Choose the denominator for the Full XIC family shares. Changes apply to that column immediately."/>
+                <ComboBox x:Name="ComboBoxFullXicBasis" SelectionChanged="Basis_Changed" HorizontalAlignment="Stretch"
+                          ToolTip="Divides Full XIC by the quantified signal or all recorded run TICs. A missing run TIC makes that basis unavailable.">
+                    <ComboBoxItem x:Name="FullXicBasisQuantified" IsSelected="True" Content="the quantified signal"
+                                  ToolTip="Divides by all quantified peptides, each counted once."/>
+                    <ComboBoxItem x:Name="FullXicBasisTic" Content="the total ion current of all runs"
+                                  ToolTip="Divides by the summed TIC of every recorded run."/>
+                </ComboBox>
+                <TextBlock x:Name="TicRefusalHint" TextWrapping="Wrap" Foreground="{DynamicResource MutedBrush}" FontSize="11" Margin="0,6,0,0"/>
+            </StackPanel>
+            <Expander x:Name="FullXicDetails" Header="Full XIC details" Margin="0,8,0,0"
+                      ToolTip="Shows the quantity, denominator, shared bucket and unattributed signal. These are the facts behind the Full XIC column.">
+                <TextBlock x:Name="TextBlockFullXicSummary" TextWrapping="Wrap" Margin="0,6,0,0"
+                           Foreground="{DynamicResource MutedBrush}" FontSize="11"
+                           ToolTip="The exact basis and conservation statement for the current Full XIC shares."/>
+            </Expander>
+        </StackPanel>
+        <StackPanel x:Name="SharedOptions" Margin="0,12,0,0">
+            <Label Content="Shared peptides" Padding="0,0,0,4"
+                   ToolTip="Choose how to handle peptides reaching more than one family. This rule applies to either quantitation source.">
+            </Label>
+            <ComboBox x:Name="ComboBoxSharedPeptides" SelectionChanged="Choice_Changed" HorizontalAlignment="Stretch">
+                <ComboBoxItem x:Name="SharedItemUnique" IsSelected="True"/>
+                <ComboBoxItem x:Name="SharedItemSplit"/>
+                <ComboBoxItem x:Name="SharedItemEvery"/>
+            </ComboBox>
+        </StackPanel>
+        <Border x:Name="PatternLabSection" Background="{DynamicResource SubtleBrush}" Padding="12" Margin="0,16,0,0">
+            <StackPanel>
+                <DockPanel Margin="0,0,0,8">
+                    <Border x:Name="BadgeLayer2" DockPanel.Dock="Right" Style="{StaticResource QuantitationBadge}" Background="{DynamicResource ClearBrush}">
+                        <TextBlock x:Name="TextBlockLayer2State" Style="{StaticResource QuantitationBadgeText}"/>
+                    </Border>
+                    <TextBlock Text="PatternLab (optional)" FontWeight="SemiBold"/>
+                </DockPanel>
+                <Button x:Name="ButtonLoadQuantData" Content="Load PatternLab project" Click="Load_Click" HorizontalAlignment="Left"
+                        ToolTip="Loads a peptide-level PatternLab project for the Share of signal column. Full XIC does not need this secondary source."/>
+                <DockPanel Margin="0,8,0,0">
+                    <TextBlock x:Name="IconPLPStatus" Text="&#xE73E;" Style="{DynamicResource FluentIcon}" Visibility="Collapsed" Margin="0,0,6,0"/>
+                    <TextBlock x:Name="TextBlockPLPStatus" Text="No PatternLab project loaded" Foreground="{DynamicResource MutedBrush}"
+                               TextWrapping="Wrap" FontSize="11" ToolTip="The PatternLab project loaded for the secondary Share of signal column."/>
+                </DockPanel>
+                <StackPanel x:Name="PatternLabOptions" Margin="0,10,0,0">
+                    <Label Content="PatternLab share of" Padding="0,0,0,4"
+                           ToolTip="Choose the denominator for the PatternLab Share of signal column. Recalculate applies that choice to its values."/>
+                    <ComboBox x:Name="ComboBoxNormalization" SelectionChanged="Choice_Changed" HorizontalAlignment="Stretch">
+                        <!-- Retain enum indexes, including disabled modes whose divisor is absent. -->
+                        <ComboBoxItem x:Name="ModeItemIdentified" IsSelected="True"/>
+                        <ComboBoxItem x:Name="ModeItemTic"/>
+                        <ComboBoxItem x:Name="ModeItemPeptideSignal"/>
+                        <ComboBoxItem x:Name="ModeItemChargeRestricted"/>
+                    </ComboBox>
+                    <Button x:Name="ButtonRecalculateQuantitation" Style="{DynamicResource PrimaryButton}" Content="Recalculate"
+                            Click="Recalculate_Click" IsEnabled="False" Margin="0,10,0,0" HorizontalAlignment="Left"
+                            ToolTip="Applies the chosen denominator and shared rule to PatternLab shares. Disabled until a PatternLab project is loaded."/>
+                    <Expander Header="PatternLab details" Margin="0,8,0,0"
+                              ToolTip="Shows the recorded quantitation profile and supported divisors. An unavailable mode keeps its explanation in the list.">
+                        <TextBlock x:Name="TextBlockQuantProfile" TextWrapping="Wrap" Foreground="{DynamicResource MutedBrush}" FontSize="11" Margin="0,6,0,0"
+                                   ToolTip="The loaded project's recorded denominator and available reporting modes."/>
+                    </Expander>
+                </StackPanel>
+            </StackPanel>
+        </Border>
+    </StackPanel>
+</UserControl>
