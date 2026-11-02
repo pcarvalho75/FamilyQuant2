@@ -94,6 +94,8 @@ namespace FamilyQuant.Evidence
     public static class NearestReviewed
     {
         public const string QueryCoverageMethod = "Non-gap query letters in native qrow / full query length, v1";
+        public static string CoverageRuleText(int minimumPercent) => "At least " + minimumPercent.ToString(CultureInfo.InvariantCulture)
+            + " percent of the query's residues occur in the alignment; inserted gap columns do not count.";
         public const string Method = "USEARCH search_global, every pair aligned, best hit by identity, never the same entry";
         public const double DefaultMinIdentityPercent = 50.0;
         public const int DefaultMinQueryAlignedPercent = 70;

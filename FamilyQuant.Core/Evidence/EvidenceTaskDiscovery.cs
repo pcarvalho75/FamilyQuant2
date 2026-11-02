@@ -183,7 +183,7 @@ public static class EvidenceTaskDiscovery
     }
 
     private static bool IsContaminant(FastaItemExtended protein) =>
-        (protein.SequenceIdentifier ?? string.Empty).StartsWith(SequenceLabels.ContaminantPrefix, StringComparison.Ordinal);
+        SequenceLabels.IsContaminant(protein.SequenceIdentifier);
 
     private static EvidenceTaxon Header(FastaItemExtended protein)
     {

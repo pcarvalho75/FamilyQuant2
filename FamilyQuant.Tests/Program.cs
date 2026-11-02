@@ -202,6 +202,7 @@ namespace FamilyQuant.Tests
             EvidenceFetchAtomicTests();
             EvidenceCoverageTests();
             QueryResidueCoverageTests();
+            FamilyWorldFetchTests();
             EvidenceTaskTests();
             EvidenceClassifierTests();
             EvidenceDeliveryFixtureTests(workDir);
@@ -262,6 +263,7 @@ namespace FamilyQuant.Tests
             LogoResourceTests(workDir);
             TypographyRulesTests();
             UiIconTests();
+            UiColorTests();
             KeywordCommandTests();
             CurationScreenTests();
             CurationOperationTests();

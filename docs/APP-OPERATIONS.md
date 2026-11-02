@@ -29,6 +29,7 @@ observe cancellation at their boundaries; their threads are never aborted.
 | De novo import, reconciliation, homology | Stages outcomes before applying. Homology forwards context to the index/search. `BusyDeNovoTests` cancels running import and reconciliation/search before I/O. Retired extraction/partition compatibility methods also use the host. |
 | Results preparation and exports | Preparation runs the existing model construction off the UI thread. CSV/figure writers prepare output before publication. Figure generation uses an owned STA thread. Existing synchronous model exports remain available to programmatic callers. |
 | De novo and secondary-window exports | Use the same staged-file path. Secondary windows host the same overlay control in their own window, with close guarded until work ends. |
+| Clustering diagnostic | Analysis runs the native diagnostic off the UI thread with the shared progress/Cancel context. It reads a saved unchanged FCF/FQPROJ and writes a fresh child folder. The adapter reads the returned report path and commits completed shell publication before opening the text and folder. Native fixture checks preserve input bytes/grouping/locks and compare two packets per format; injected presenters avoid launching desktop windows in the checks. |
 | Curation and online evidence fetch | Per orchestrator M2, C1 adopts the host for curation operations; S9 stages the complete evidence fetch. S6 does not claim these follow-on paths are already adopted. |
 
 `--test-busy` runs focused host and cancellation checks.
