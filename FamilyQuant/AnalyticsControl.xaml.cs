@@ -68,7 +68,7 @@ public partial class AnalyticsControl : UserControl
         if (ready && Enum.TryParse((ComboBoxExportKind.SelectedItem as ComboBoxItem)?.Tag as string, out ResultsExportKind kind))
             ViewModel.ExportKind = kind;
     }
-    private void RefreshExportHint() => ButtonExport.ToolTip = ViewModel.ExportKind switch {
+    private void RefreshExportHint() => ButtonExport.ToolTip = !ViewModel.CanExport ? ViewModel.ExportUnavailableReason : ViewModel.ExportKind switch {
         ResultsExportKind.SuggestedAdditions => ViewModel.DatabaseGap.FastaState,
         ResultsExportKind.DatabaseGap => ViewModel.DatabaseGap.HasData ? "Write the stored composition table, every global bucket and its recorded rules." : ViewModel.DatabaseGap.EmptyMessage,
         _ => "Save the selected result in CSV or PNG format with invariant decimals. Figures use 1920 by 1080 pixels in the Light palette." };

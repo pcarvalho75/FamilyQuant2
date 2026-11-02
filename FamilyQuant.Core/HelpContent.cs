@@ -188,6 +188,11 @@ namespace FamilyQuant
             sb.AppendLine("join or split selected rows and set their annotation in one batch; destination and");
             sb.AppendLine("surviving source families are locked, while emptied source families are not.");
             sb.AppendLine();
+            sb.AppendLine("A legacy PatternLab export can lack the recorded divisor and per-run totals.");
+            sb.AppendLine("Re-exporting it from XQuant records the divisor and every run's totals, making");
+            sb.AppendLine("TIC reporting available when those totals are present; the other reporting modes");
+            sb.AppendLine("remain usable while that mode is greyed out.");
+            sb.AppendLine();
             sb.AppendLine("CURATING BY HAND: UNDO, KEYWORD REVIEW, SEARCH-SCOPED RECLUSTERING");
             sb.AppendLine("------------------------------------------------------------------------");
             sb.AppendLine("Undo steps back through the changes you make in Families, one at a time, without");

@@ -57,7 +57,7 @@ public abstract class DeNovoSession : ScreenViewModel
     public string MinimumIdentity { get; set; } = "";
     public string TopHits { get; set; } = "";
     public string DecoyLabel { get; set; } = "";
-    public string PerRunBreakdown { get; protected set; } = "";
+    public string PerRunBreakdown { get; protected set; } = "No import yet. The breakdown per run appears here.";
     public string RawMatchPreview { get; protected set; } = "";
     public string BranchNote { get; protected set; } = "";
     public object? LabelFilesFound { get; protected set; } = "Files found: 0";
@@ -96,7 +96,7 @@ public abstract class DeNovoSession : ScreenViewModel
         ClearReconciliation();
         RawMatchPreview = "No reconciliation yet. Reconcile before matching RAW files.";
         ObserveChild(Filters, nameof(ActiveConfidenceText));
-        SetStatus("Step 1: choose a source and export folder, then press Load and filter.");
+        SetStatus("Step 1: choose a source and export folder, then press Load and filter. You can change the three filters and reapply them as often as you like.");
     }
     public void ShowStatus(string message) => SetStatus(message);
     protected void SetStatus(string message) { Status = message; Changed(null); }

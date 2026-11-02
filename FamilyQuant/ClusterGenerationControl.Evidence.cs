@@ -82,7 +82,7 @@ public partial class ClusterGenerationControl
             }
             DocumentChanged?.Invoke(this, EventArgs.Empty);
             AfterRegrouping();
-            ShowCurationOperationResult(result.Recipe.Assignments.Count.ToString("N0") + " proteins grouped in "
+            ShowGroupingCompletion(result.Recipe.Assignments.Count.ToString("N0") + " proteins grouped in "
                 + result.Recipe.Assignments.Select(a => a.FamilyId).Distinct().Count().ToString("N0") + " families. Undo restores the previous grouping.");
         }
         catch (Exception ex)

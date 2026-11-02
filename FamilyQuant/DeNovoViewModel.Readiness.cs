@@ -26,10 +26,10 @@ public sealed partial class DeNovoViewModel
     private bool EveryRunExtracted => LastExtraction != null && KeptRunNames().Count > 0
         && KeptRunNames().All(r => LastExtraction.ByRun.ContainsKey(r));
     public bool CanPartition => !IsBusy && EveryRunExtracted && (!string.IsNullOrWhiteSpace(PartitionPlp) || !string.IsNullOrWhiteSpace(PartitionXic2));
-    public string ReconcileState => ReportView.LayerState(CanReconcile, CanReconcile ? null : "no rows imported");
+    public string ReconcileState => ReportView.LayerState(CanReconcile, CanReconcile ? null : "no rows imported; use Load and filter in Step 1 first");
     public string ExtractState => ReportView.LayerState(CanExtract, LastReconciliation == null ? "no reconciliation yet"
         : KeptRunNames().Count == 0 ? "no rows survived the reconciliation" : null);
-    public string HomologyState => ReportView.LayerState(CanSearch, CanSearch ? null : "no rows imported");
+    public string HomologyState => ReportView.LayerState(CanSearch, CanSearch ? null : "no rows imported; use Load and filter in Step 1 first");
     public string PartitionState => ReportView.LayerState(CanPartition, EveryRunExtracted ? null : "no extraction yet");
     public void SourcePathChanged()
     {
