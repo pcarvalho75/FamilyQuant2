@@ -172,3 +172,19 @@ SCIENCE-GATE.md "After E16" has it. Code wins.
   (`EvidenceClassifier.Fingerprint`), the neighbour search (query + reference hashes), the recipe state hashes.
   This is the strongest asset of the code base for anything that must be reproducible, and the thing a new
   layer must plug into rather than bypass.
+
+## 6. What was NOT read (hard stop ordered at 19:56, M2)
+
+Read in full: every Core file named above in sections 1 to 5, plus Homology/HomologyMapper, HomologyScorer,
+HomologyOptions, HomologyDatabase, DeNovo/DeNovoReconciler, PeaksDeNovoReader, DeNovoFilter, DeNovoSource,
+DeNovoUnionResolver, ReferenceEnvelopeEstimator, PatternLabRunQuants, DeNovoXicCache, PeptidoformIdentity,
+PeptideMass, PeaksDatabasePsmReader, SeproPsmAdapter, RawScanChargeReader, IdentifiedQuantExtractor,
+DeNovoBatchExtractor, Ms1EnvelopeDetector, NativeQuantFractions, FullXicComputer, FamilyEnvelopeQuant,
+ProjectStore, AnalyticsModel, DeNovoScreenOperations, ShellProjectOperations, CoreOperation, CsvReport,
+ReportView, CsvFormatting, HomologyCsv, DeNovoSourceImport, DeNovoInspectionAudit.
+Read by header and public API only: SpectrumComparisonTable, HelpContent, QuantitationProfile, NormalizationMode,
+NormalizationPlan, PamMatrix, ThreeWayPartition and the thirteen de novo study files (Agreement, ScoreDistribution,
+IdentificationConcordance, SourceVenn, VariantComparison, Overlap, SetNovelty, AcceptedScoreScatter, ScoreScatter,
+TalkComparison, PsmDeNovoCounterpart, IdentificationSummary, ReconciliationReport).
+NOT read: the App (FamilyQuant/, 103 files) beyond what CLAUDE.md states, and the Tests checkers. Every claim in
+VISION.md about a screen or a test therefore comes from CLAUDE.md or docs/INDEX.md and is marked as such.
