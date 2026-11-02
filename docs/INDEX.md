@@ -124,6 +124,7 @@ Invoke each flag with `& $testExe <flag>` after building. Dispatch and arity are
 | `--report-study-snapshot <new-output-dir>` | Six native synthetic text/PNG fixtures for source-move parity |
 | `--shell-checks` | Shell navigation, saving, preferences, Build/Quantify integration and secondary views |
 | `--test-shell-workflow` | Current workflow Help routes and retained quantitation facts through the shell status checks |
+| `--test-shell-evidence-cancel` | Shared Cancel reaches active protein/panel HTTP requests; staged publication, failure and late Cancel |
 | `--feature-ledger-check` | Inventory, row coverage, dispositions and guard regressions |
 | `--test-clustering-improvements` | X12 paired-letter, component-veto, native parse and contaminant diagnostic guards |
 | `--clustering-improvements <document> <FASTA> <output> <identity> [--small-exhaustive]` | Real-data diagnostic candidates; no product numerical change; bounded all-pairs only |
