@@ -48,7 +48,7 @@ internal static partial class Program
                 ((TextBox)old.FindName("TextBoxDeNovoDirectory")).Text = deNovo;
             }
             var refusals = new List<string>();
-            foreach (var scenario in new[] { ("", "", "", 273, 279), (input, "", "", 285, 291), (input, package, "missing-native-de-novo", 295, 297) })
+            foreach (var scenario in new[] { ("", "", "", 273, 279), (input, "", "", 285, 289), (input, package, "missing-native-de-novo", 290, 291) })
             {
                 OldPaths(scenario.Item1, scenario.Item2, scenario.Item3);
                 model.RawDirectory = scenario.Item1; model.SeproPackage = scenario.Item2; model.DeNovoDirectory = scenario.Item3;

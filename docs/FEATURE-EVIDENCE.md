@@ -79,6 +79,7 @@ Run the built test executable with these flags and explicit lane-owned outputs:
 | `--ledger-secondary-compare <frozen-root> <native-master-audit> <fresh-output> <date> [--negative-control]` | Scoped exact secondary-view declarations for OPEN master IDs; [guide](SECONDARY-LEDGER.md) |
 | `--ledger-secondary-runtime <frozen-root> <native-master-audit> <frozen-app> <fresh-output> <date> [--negative-control]` | Native secondary controls, actions, values and cache contracts; [guide](SECONDARY-LEDGER.md) |
 | `--prove-shell-main <frozen-root> <fresh-output> <date>` | Execute native MainWindow route/dialog/message cases and compare scoped frozen frames; emit SH-main-routes without importing |
+| `--ledger-secondary-interactions <frozen-root> <native-master-audit> <frozen-app> <fresh-output> <date> [--negative-control]` | Quantify/close, native identity chooser outcomes and injected GridCopy failure/modifier contracts; [guide](SECONDARY-LEDGER.md) |
 
 For example, obtain the timestamp with `date '+%F %T %z'` immediately before the proof command.
 Neither the proof runner nor the audit invokes the frozen-source generator.
