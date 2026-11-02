@@ -5,52 +5,52 @@
   "runs": [
     {
       "id": "text-tool",
-      "command": "D:\\FamilyQuant-wt\\opus\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --ledger-text-preserved D:/FamilyQuant-data/out-shell/N3/source D:/FamilyQuant-data/out-refresh\\20261102-104057-opus\\text-preserved \u00222026-11-02 10:41:37 -0800\u0022",
-      "executedAt": "2026-11-02 10:41:37 -0800",
-      "commit": "5c50cf58a6917c06802c0f9c8be13d8b50772367",
+      "command": "D:\\FamilyQuant-wt\\opus\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --ledger-text-preserved D:/FamilyQuant-data/out-shell/N3/source D:/FamilyQuant-data/out-refresh\\20261102-114436-opus\\text-preserved \u00222026-11-02 11:44:52 -0800\u0022",
+      "executedAt": "2026-11-02 11:44:52 -0800",
+      "commit": "92db542296bba7f8990b12ae3a8135889132770e",
       "artifacts": [
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-104057-opus\\text-preserved\\text.log",
-          "sha256": "770B6BF2EF8E849B812968159D8BDF2588DAB2BE46F7F7DA42CA4E5BF23BBE9E"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-114436-opus\\text-preserved\\text.log",
+          "sha256": "6EB228A83101C3EF07EEC7E54755D368D9A301EEF3AC7E0B1FE3C1693FCD121E"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-104057-opus\\text-preserved\\text.json",
-          "sha256": "39F54D7EED9B2176E5BD9CC3427D993527943C7C6AAA0D9C2F4CD08147B33880"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-114436-opus\\text-preserved\\text.json",
+          "sha256": "B20D60875F1F66526D31B74190F2D6E636C3C961AA6F00D6D58013F7ABE1E288"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-104057-opus\\text-preserved\\executed\\FamilyQuant2.dll",
-          "sha256": "AD3B747E9F58242314C1D25CDF33501212D03DDEC6E8B63D0281A6EFBB0D2971"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-114436-opus\\text-preserved\\executed\\FamilyQuant2.dll",
+          "sha256": "249363789B685584034AF3B8FC35D9ACEF1BC1B06304D9D9FA56CBE8A21DD3BC"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-104057-opus\\text-preserved\\executed\\FamilyQuant2.pdb",
-          "sha256": "D060C990F08A32520FBD3389752DE9467A9685C2895FDC6772EC9BFF1E954541"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-114436-opus\\text-preserved\\executed\\FamilyQuant2.pdb",
+          "sha256": "CC7B2657CDE7F58A9A0E995989659A1756E11251325B9F6B9E45F8CF212BC8EF"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-104057-opus\\text-preserved\\executed\\FamilyQuant.Core.dll",
-          "sha256": "139C5D3236EDD2A0014006898EED4F2D16672F57701E2D5890CF09965566A16F"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-114436-opus\\text-preserved\\executed\\FamilyQuant.Core.dll",
+          "sha256": "BF9F16594E41FC1DE67CB964359F856E39AB81A6625CAA958AE659D2E0585422"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-104057-opus\\text-preserved\\executed\\FamilyQuant.Core.pdb",
-          "sha256": "DAB93C59374926F4C29610E3DD067B30CEA7ABA3BC5E620B4A8E5F29718ABFDA"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-114436-opus\\text-preserved\\executed\\FamilyQuant.Core.pdb",
+          "sha256": "33032938DAA82B3C84BC2E5784053BC3297E211BEBECAEDB0481D14CFC2C49DE"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-104057-opus\\text-preserved\\executed\\FamilyQuant.Tests.dll",
-          "sha256": "1F96DF006ADDE8458FDEEF8B5173420C1125286C8105F053BA453AEC2FA4FB67"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-114436-opus\\text-preserved\\executed\\FamilyQuant.Tests.dll",
+          "sha256": "83B67E3C9DC4787A5BCA5CCB6753C5E602C4CE03C14A5F7E0EE915074C7717CF"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-104057-opus\\text-preserved\\executed\\FamilyQuant.Tests/LedgerTextPreserved.cs",
-          "sha256": "5C89760AC02C2181ABBB8837E41AC385764EDE23059FE7230D82DF92E5B39099"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-114436-opus\\text-preserved\\executed\\FamilyQuant.Tests/LedgerTextPreserved.cs",
+          "sha256": "1C4E4F16D23EDBD018AB198EF23D28AFE64490FAAEAF9F4563DD0F8B8AB10F73"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-104057-opus\\text-preserved\\executed\\FamilyQuant.Tests/Program.LedgerTextPreserved.cs",
-          "sha256": "D984EC1243E4544ED4543FC030CF93F82D249FB14D6106475831F0B9CE39F943"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-114436-opus\\text-preserved\\executed\\FamilyQuant.Tests/Program.LedgerTextPreserved.cs",
+          "sha256": "03EE5968A6BEEFD3744654BFA5E8E9B4F678F981D3A3062D6DD50564B5D28621"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-104057-opus\\text-preserved\\executed\\FamilyQuant.Tests/Program.Commands.LedgerTextPreserved.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-114436-opus\\text-preserved\\executed\\FamilyQuant.Tests/Program.Commands.LedgerTextPreserved.cs",
           "sha256": "76B82F938173EA4E342000A363089B287BD5B2A897FDC8872B5EDB5319BB2F12"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-104057-opus\\text-preserved\\executed\\FamilyQuant.Tests/FeatureLedgerEvidence.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-114436-opus\\text-preserved\\executed\\FamilyQuant.Tests/FeatureLedgerEvidence.cs",
           "sha256": "A5C398B39A4DD93FA74401F7FA48A6302E25168A9A297B69FD5651CA621C0F43"
         }
       ],
@@ -87,14 +87,6 @@
       "implementation": [],
       "proofs": [],
       "note": "1 failed: no compiled XAML of its screen holds this element, property and value",
-      "kindReceiptId": null,
-      "compared": null
-    },
-    {
-      "observationId": "FQ15-0061551CF9D6",
-      "implementation": [],
-      "proofs": [],
-      "note": "1 failed: the frozen literal is not in the compiled program",
       "kindReceiptId": null,
       "compared": null
     },
@@ -961,14 +953,6 @@
       "compared": null
     },
     {
-      "observationId": "FQ15-19F09FA08309",
-      "implementation": [],
-      "proofs": [],
-      "note": "1 failed: no compiled XAML of its screen holds this named element",
-      "kindReceiptId": null,
-      "compared": null
-    },
-    {
       "observationId": "FQ15-1A310DFE13FA",
       "implementation": [],
       "proofs": [],
@@ -1371,14 +1355,6 @@
       "compared": null
     },
     {
-      "observationId": "FQ15-22934B24BA5E",
-      "implementation": [],
-      "proofs": [],
-      "note": "1 failed: a format string, separator or single word does not identify a fact by text alone",
-      "kindReceiptId": null,
-      "compared": null
-    },
-    {
       "observationId": "FQ15-22A6A44E620A",
       "implementation": [],
       "proofs": [],
@@ -1623,14 +1599,6 @@
       "compared": null
     },
     {
-      "observationId": "FQ15-293FACC88CFB",
-      "implementation": [],
-      "proofs": [],
-      "note": "1 failed: a format string, separator or single word does not identify a fact by text alone",
-      "kindReceiptId": null,
-      "compared": null
-    },
-    {
       "observationId": "FQ15-29C1749EE42B",
       "implementation": [],
       "proofs": [],
@@ -1803,14 +1771,6 @@
       "compared": null
     },
     {
-      "observationId": "FQ15-2DE872BB2CDF",
-      "implementation": [],
-      "proofs": [],
-      "note": "1 failed: a format string, separator or single word does not identify a fact by text alone",
-      "kindReceiptId": null,
-      "compared": null
-    },
-    {
       "observationId": "FQ15-2E0859E53C03",
       "implementation": [],
       "proofs": [],
@@ -1831,14 +1791,6 @@
       "implementation": [],
       "proofs": [],
       "note": "2 failed: the literal is compiled only in other members (FamilyQuant.USearchLib/BuildActions/\u003CButtonDivideAndConquer_ClickAsync\u003Ed__8::MoveNext()), not in member USearchLib.ButtonDivideAndConquer_Click or USearchLib.ChooseDatabasePath",
-      "kindReceiptId": null,
-      "compared": null
-    },
-    {
-      "observationId": "FQ15-2EDEA71A577B",
-      "implementation": [],
-      "proofs": [],
-      "note": "1 failed: the row records no literal text (kind handler definition)",
       "kindReceiptId": null,
       "compared": null
     },
@@ -2069,14 +2021,6 @@
       "implementation": [],
       "proofs": [],
       "note": "2 failed: the literal is compiled only in other members (FamilyQuant.DeNovoViewModel/\u003CReconcileAsync\u003Ed__7::MoveNext()), not in member DeNovoControl.ButtonReconcile_Click",
-      "kindReceiptId": null,
-      "compared": null
-    },
-    {
-      "observationId": "FQ15-364119867EF1",
-      "implementation": [],
-      "proofs": [],
-      "note": "1 failed: no compiled XAML of its screen holds this element, property and value",
       "kindReceiptId": null,
       "compared": null
     },
@@ -3505,14 +3449,6 @@
       "compared": null
     },
     {
-      "observationId": "FQ15-5CC29C895FD3",
-      "implementation": [],
-      "proofs": [],
-      "note": "1 failed: the row records no literal text (kind handler)",
-      "kindReceiptId": null,
-      "compared": null
-    },
-    {
       "observationId": "FQ15-5CCDA0B631E7",
       "implementation": [],
       "proofs": [],
@@ -4133,14 +4069,6 @@
       "implementation": [],
       "proofs": [],
       "note": "1 failed: the frozen literal is not in the compiled program",
-      "kindReceiptId": null,
-      "compared": null
-    },
-    {
-      "observationId": "FQ15-705F26F29B2E",
-      "implementation": [],
-      "proofs": [],
-      "note": "1 failed: a format string, separator or single word does not identify a fact by text alone",
       "kindReceiptId": null,
       "compared": null
     },
@@ -4901,14 +4829,6 @@
       "compared": null
     },
     {
-      "observationId": "FQ15-8472DA3BA776",
-      "implementation": [],
-      "proofs": [],
-      "note": "2 failed: the literal is compiled only in other members (FamilyQuant.HomologyCsv::Write(String,FamilyQuant.DeNovoHomology)), not in member DeNovoControl.ExportHomologyCsv or DeNovoSession.ExportHomologyCsv",
-      "kindReceiptId": null,
-      "compared": null
-    },
-    {
       "observationId": "FQ15-84CD85B9D9B1",
       "implementation": [
         {
@@ -5215,14 +5135,6 @@
       "compared": null
     },
     {
-      "observationId": "FQ15-8C11776C6CFB",
-      "implementation": [],
-      "proofs": [],
-      "note": "1 failed: a format string, separator or single word does not identify a fact by text alone",
-      "kindReceiptId": null,
-      "compared": null
-    },
-    {
       "observationId": "FQ15-8C1BC14A9C37",
       "implementation": [
         {
@@ -5429,14 +5341,6 @@
       "implementation": [],
       "proofs": [],
       "note": "1 failed: the frozen literal is not in the compiled program",
-      "kindReceiptId": null,
-      "compared": null
-    },
-    {
-      "observationId": "FQ15-910BE3F5ED6D",
-      "implementation": [],
-      "proofs": [],
-      "note": "1 failed: a format string, separator or single word does not identify a fact by text alone",
       "kindReceiptId": null,
       "compared": null
     },
@@ -5743,14 +5647,6 @@
       "implementation": [],
       "proofs": [],
       "note": "1 failed: a format string, separator or single word does not identify a fact by text alone",
-      "kindReceiptId": null,
-      "compared": null
-    },
-    {
-      "observationId": "FQ15-97BE9095ACA9",
-      "implementation": [],
-      "proofs": [],
-      "note": "1 failed: the row records no literal text (kind handler)",
       "kindReceiptId": null,
       "compared": null
     },
@@ -6185,14 +6081,6 @@
       "compared": "frozen literal \u0022 Next step: check that it is not already open in Excel and that you can write to that folder, then e...\u0022 (SHA256 1A7BA47CC846D997) verbatim in FamilyQuant2.dll FamilyQuant.DeNovoControl/\u003CExport\u003Ed__62::MoveNext() [FamilyQuant/DeNovoControl.Dialogs.cs]; feature member DeNovoControl.Export; reached as xaml handler FamilyQuant.DeNovoControl::ButtonExportSummary_Click(Object,System.Windows.RoutedEventArgs), 2 steps from the entry point"
     },
     {
-      "observationId": "FQ15-A357DCACD502",
-      "implementation": [],
-      "proofs": [],
-      "note": "1 failed: a format string, separator or single word does not identify a fact by text alone",
-      "kindReceiptId": null,
-      "compared": null
-    },
-    {
       "observationId": "FQ15-A36C0BF1AC22",
       "implementation": [
         {
@@ -6267,14 +6155,6 @@
       "implementation": [],
       "proofs": [],
       "note": "1 failed: the frozen literal is not in the compiled program",
-      "kindReceiptId": null,
-      "compared": null
-    },
-    {
-      "observationId": "FQ15-A59CA19463AD",
-      "implementation": [],
-      "proofs": [],
-      "note": "1 failed: the row records no literal text (kind control)",
       "kindReceiptId": null,
       "compared": null
     },
@@ -7055,14 +6935,6 @@
       "compared": "frozen literal \u0022Copies this text as the database has it, one line per selected row.\u0022 (SHA256 7E26C3210950A3C7) verbatim in FamilyQuant2.dll FamilyQuant.GridCopy::Attach(System.Windows.Controls.DataGrid,System.Func\u00602{Object,String},System.Func\u00602{Object,String},String) [FamilyQuant/GridCopy.cs]; feature member GridCopy.Attach; reached as delegate FamilyQuant.MainWindow/ShellDocumentCommands/\u003C\u003Ec__DisplayClass4_0::\u003COpenProjectPathAsync\u003Eb__0(), 5 steps from the entry point"
     },
     {
-      "observationId": "FQ15-BB99F97C4BA5",
-      "implementation": [],
-      "proofs": [],
-      "note": "1 failed: a format string, separator or single word does not identify a fact by text alone",
-      "kindReceiptId": null,
-      "compared": null
-    },
-    {
       "observationId": "FQ15-BBC1B4974AAF",
       "implementation": [],
       "proofs": [],
@@ -7179,14 +7051,6 @@
       "implementation": [],
       "proofs": [],
       "note": "2 failed: the literal is compiled only in other members (FamilyQuant.DeNovoViewModel/\u003CImportAsync\u003Ed__6::MoveNext(), FamilyQuant.DeNovoViewModel/\u003CReconcileAsync\u003Ed__7::MoveNext()), not in member DeNovoControl.ButtonReconcile_Click",
-      "kindReceiptId": null,
-      "compared": null
-    },
-    {
-      "observationId": "FQ15-C027EA198A78",
-      "implementation": [],
-      "proofs": [],
-      "note": "1 failed: the row records no literal text (kind control)",
       "kindReceiptId": null,
       "compared": null
     },
@@ -7919,14 +7783,6 @@
       "compared": null
     },
     {
-      "observationId": "FQ15-D6211E2A6653",
-      "implementation": [],
-      "proofs": [],
-      "note": "1 failed: the row records no literal text (kind handler definition)",
-      "kindReceiptId": null,
-      "compared": null
-    },
-    {
       "observationId": "FQ15-D66742344150",
       "implementation": [],
       "proofs": [],
@@ -8217,14 +8073,6 @@
       "compared": null
     },
     {
-      "observationId": "FQ15-DF0811D8E3F3",
-      "implementation": [],
-      "proofs": [],
-      "note": "1 failed: the row records no literal text (kind handler)",
-      "kindReceiptId": null,
-      "compared": null
-    },
-    {
       "observationId": "FQ15-DF330745D8A4",
       "implementation": [],
       "proofs": [],
@@ -8291,14 +8139,6 @@
       "implementation": [],
       "proofs": [],
       "note": "1 failed: a format string, separator or single word does not identify a fact by text alone",
-      "kindReceiptId": null,
-      "compared": null
-    },
-    {
-      "observationId": "FQ15-E0D87026DC21",
-      "implementation": [],
-      "proofs": [],
-      "note": "1 failed: the row records no literal text (kind code control)",
       "kindReceiptId": null,
       "compared": null
     },
@@ -8561,14 +8401,6 @@
       "implementation": [],
       "proofs": [],
       "note": "1 failed: no compiled XAML of its screen holds this element, property and value",
-      "kindReceiptId": null,
-      "compared": null
-    },
-    {
-      "observationId": "FQ15-EAE9707B7B9E",
-      "implementation": [],
-      "proofs": [],
-      "note": "1 failed: a format string, separator or single word does not identify a fact by text alone",
       "kindReceiptId": null,
       "compared": null
     },
@@ -8881,14 +8713,6 @@
       "compared": null
     },
     {
-      "observationId": "FQ15-F719B5590714",
-      "implementation": [],
-      "proofs": [],
-      "note": "1 failed: the row records no literal text (kind handler)",
-      "kindReceiptId": null,
-      "compared": null
-    },
-    {
       "observationId": "FQ15-F777A1A760B9",
       "implementation": [],
       "proofs": [],
@@ -9069,14 +8893,6 @@
       "compared": null
     },
     {
-      "observationId": "FQ15-FC55DD924EC1",
-      "implementation": [],
-      "proofs": [],
-      "note": "1 failed: the row records no literal text (kind control)",
-      "kindReceiptId": null,
-      "compared": null
-    },
-    {
       "observationId": "FQ15-FCA4B942E595",
       "implementation": [],
       "proofs": [],
@@ -9251,7 +9067,7 @@
           "kind": "test",
           "target": "LedgerTextPreservedCommand",
           "assertion": "Text tool kind code fact: every listed row holds its frozen literal verbatim in the compiled program, in its feature, reachable from the entry point",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-104057-opus\\text-preserved\\text.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-114436-opus\\text-preserved\\text.log",
           "inspectedBy": ""
         }
       ]
@@ -9265,7 +9081,7 @@
           "kind": "test",
           "target": "LedgerTextPreservedCommand",
           "assertion": "Text tool kind control: every listed row holds its frozen literal verbatim in the compiled program, in its feature, reachable from the entry point",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-104057-opus\\text-preserved\\text.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-114436-opus\\text-preserved\\text.log",
           "inspectedBy": ""
         }
       ]
@@ -9279,7 +9095,7 @@
           "kind": "test",
           "target": "LedgerTextPreservedCommand",
           "assertion": "Text tool kind help fact: every listed row holds its frozen literal verbatim in the compiled program, in its feature, reachable from the entry point",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-104057-opus\\text-preserved\\text.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-114436-opus\\text-preserved\\text.log",
           "inspectedBy": ""
         }
       ]
@@ -9293,7 +9109,7 @@
           "kind": "test",
           "target": "LedgerTextPreservedCommand",
           "assertion": "Text tool kind option/copy: every listed row holds its frozen literal verbatim in the compiled program, in its feature, reachable from the entry point",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-104057-opus\\text-preserved\\text.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-114436-opus\\text-preserved\\text.log",
           "inspectedBy": ""
         }
       ]
@@ -9307,7 +9123,7 @@
           "kind": "test",
           "target": "LedgerTextPreservedCommand",
           "assertion": "Text tool kind tooltip: every listed row holds its frozen literal verbatim in the compiled program, in its feature, reachable from the entry point",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-104057-opus\\text-preserved\\text.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-114436-opus\\text-preserved\\text.log",
           "inspectedBy": ""
         }
       ]
