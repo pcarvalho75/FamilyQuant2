@@ -16,7 +16,7 @@ public static partial class SpectrumComparisonWindow
         var bar = new WrapPanel { Margin = new Thickness(0, 0, 0, 10), VerticalAlignment = VerticalAlignment.Center };
         var count = SecondaryWindowView.Text(model.CountSummary);
         count.Margin = new Thickness(0, 0, 16, 0); count.VerticalAlignment = VerticalAlignment.Center;
-        count.ToolTip = "One scan can have several rows, one per compatible precursor hypothesis. A blank is missing evidence, not a zero score or a disagreement.";
+        count.ToolTip = "The counter is the number of rows shown; one scan can have several rows, one per compatible precursor hypothesis. A blank is missing evidence, not a zero score or a disagreement.";
         bar.Children.Add(count);
         var save = new Button { Name = "ButtonSaveSpectrumComparisonCsv", Content = "Save a copy (CSV)", IsEnabled = model.CanSave,
             ToolTip = "Save exactly these rows as CSV. Scores stay in separate columns, missing values stay blank, and the project is not changed." };

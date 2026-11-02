@@ -17,7 +17,7 @@ public sealed class ComputeXicViewModel : ScreenViewModel
     private readonly string appVersion;
     private readonly FamilyClusterFile? curation;
     private readonly Func<ComputeXicRequest, IProgress<string>, CancellationToken, Task<FullXicComputeResult>> compute;
-    private string raw = "", sepro = "", deNovo = "", status = "Choose the RAW folder and the identification package.", summary = "No computation yet.", details = "";
+    private string raw = "", sepro = "", deNovo = "", status = "Choose the RAW folder and the identification package.", summary = "No computation yet.", details = HelpWorkflowFacts.Quantify;
     private int? isotopes = DeNovoXicExtractor.DefaultEnvelopeIsotopeCount, points = DeNovoXicExtractor.DefaultMinPointsForQuant;
     private bool busy;
     private CancellationTokenSource? cancellation;
@@ -63,9 +63,9 @@ public sealed class ComputeXicViewModel : ScreenViewModel
     {
         if (IsBusy || Operations.IsBusy) return;
         string rawPath = RawDirectory.Trim(), seproPath = SeproPackage.Trim(), deNovoPath = DeNovoDirectory.Trim();
-        if (!Directory.Exists(rawPath)) { Status = "Choose an existing RAW folder."; return; }
-        if (!File.Exists(seproPath)) { Status = "Choose an existing SEPro identification package (.sepr2)."; return; }
-        if (deNovoPath.Length > 0 && !Directory.Exists(deNovoPath)) { Status = "Choose an existing de novo folder, or clear it."; return; }
+        if (!Directory.Exists(rawPath)) { Status = "Nothing was computed: the RAW folder does not exist or cannot be reached: " + rawPath + ". Enter the folder containing the .raw acquisitions."; return; }
+        if (!File.Exists(seproPath)) { Status = "Nothing was computed: the SEPro identification package does not exist or cannot be reached: " + seproPath + ". Choose the .sepr2 of the same runs as the acquisitions."; return; }
+        if (deNovoPath.Length > 0 && !Directory.Exists(deNovoPath)) { Status = "Nothing was computed: the de novo folder does not exist or cannot be reached: " + deNovoPath + ". Enter its export root, or leave it empty for identified peptides only."; return; }
         if (IsotopeCount > 6 || MinPointsForQuant > 20) { Status = "Use 1 to 6 isotopes and 1 to 20 points per peak."; return; }
         if (!Filters.TryBuild(out var criteria, out var selections, out string error)) { Status = error; return; }
         var request = new ComputeXicRequest(rawPath, seproPath, deNovoPath.Length == 0 ? null : deNovoPath,
@@ -97,7 +97,8 @@ public sealed class ComputeXicViewModel : ScreenViewModel
                     outcome.Manifest.DeNovoInputs.GroupBy(i => i.SourceId).Select(g => g.First().SourceDisplayName +
                     " (" + g.First().CutoffDescription + ", " + g.Count() + " files)"))) +
                 (string.IsNullOrWhiteSpace(outcome.SpectrumComparisonCsvPath) ? "" : "\nCSV: " + outcome.SpectrumComparisonCsvPath) +
-                (string.IsNullOrWhiteSpace(outcome.SpectrumComparisonCsvError) ? "" : "\n" + outcome.SpectrumComparisonCsvError);
+                (string.IsNullOrWhiteSpace(outcome.SpectrumComparisonCsvError) ? "" : "\n" + outcome.SpectrumComparisonCsvError) +
+                "\n\n" + HelpWorkflowFacts.Quantify;
             Status = "Computed. Save the project to keep these results.";
             Changed(nameof(Result)); Changed(nameof(Computed));
             operation.Dispose();

@@ -16,7 +16,7 @@ public partial class LockManagerWindow
         var table = new DataGrid { ItemsSource = Rows, AutoGenerateColumns = false, IsReadOnly = true,
             CanUserAddRows = false, CanUserDeleteRows = false, SelectionMode = DataGridSelectionMode.Extended,
             SelectionUnit = DataGridSelectionUnit.FullRow, HeadersVisibility = DataGridHeadersVisibility.Column,
-            ToolTip = "One row per locked family. Select rows with Ctrl or Shift, then Remove selected locks." };
+            ToolTip = "One read-only row per locked family. Select rows with Ctrl or Shift, then Remove selected locks." };
         void Column(string header, string property, DataGridLength width, string tip) => table.Columns.Add(new DataGridTextColumn
         { Header = header, Binding = new Binding(property), Width = width, HeaderStyle = SecondaryWindowView.HeaderTip(tip),
             ElementStyle = SecondaryWindowView.CellText() });
@@ -28,7 +28,7 @@ public partial class LockManagerWindow
         Grid.SetRow(table, 1); layout.Children.Add(table);
         var bar = new DockPanel { Margin = new Thickness(0, 12, 0, 0), LastChildFill = false };
         bar.Children.Add(SecondaryWindowView.Help("Curation locks help", LockManagerViewModel.Explanation, this));
-        var close = new Button { Content = "Close", IsCancel = true, ToolTip = "Close this window. Save from the main window to keep lock changes." };
+        var close = new Button { Content = "Close", IsCancel = true, ToolTip = "Close this window; removed locks are already removed from the open file. Save from the main window to keep lock changes on disk." };
         close.Click += (_, _) => Close(); DockPanel.SetDock(close, Dock.Right); bar.Children.Add(close);
         var remove = new Button { Content = "Remove selected locks", IsEnabled = false,
             ToolTip = "Unlock selected families for future reclustering without saving to disk. Disabled until a row is selected." };

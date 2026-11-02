@@ -31,7 +31,7 @@ public partial class USearchLib
         if (PresentationSource.FromVisual(this) == null) return null;
         var dialog = new OpenFileDialog
         {
-            Filter = "Protein database (*.fasta;*.fa;*.fas;*.T-R;*.T)|*.fasta;*.fa;*.fas;*.T-R;*.T",
+            Filter = "Protein database (*.fasta;*.fa;*.fas;*.T-R;*.T)|*.fasta;*.fa;*.fas;*.T-R;*.T|All files (*.*)|*.*",
             Title = "Choose the protein database"
         };
         if (!ShellDialogs.ShowFile(this, "build.database", dialog)) return null;
@@ -74,5 +74,5 @@ public partial class USearchLib
         "A database without decoys gives zero by construction. Use family counts and biological evidence when choosing above that floor.\n\n" +
         "Remove redundancy writes a separate _NO_REDUNDANCY.fasta, preserving sequence order and headers. " +
         "At 100 percent it removes exact subsets and duplicates; lower values also remove near-identical sequences by alignment.\n\n" +
-        ViewModel.Details;
+        HelpWorkflowFacts.Build + ViewModel.Details;
 }

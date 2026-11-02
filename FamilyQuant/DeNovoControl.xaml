@@ -81,7 +81,7 @@
                            ToolTip="Which de novo program made the export. Each keeps its own confidence score: PEAKS uses ALC, DeepNovo uses SCORE."/>
                     <ComboBox x:Name="ComboBoxDeNovoSource" Width="300" Margin="5" SelectedIndex="0"
                               SelectionChanged="ComboBoxDeNovoSource_SelectionChanged"
-                              ToolTip="Choose PEAKS de novo only (default), PEAKS de novo all (including identified spectra), or DeepNovo filtered on SCORE (%). Quantify and De novo use these same source-native cutoffs.">
+                              ToolTip="Choose PEAKS de novo only (default), PEAKS de novo all (including identified spectra), or DeepNovo filtered on SCORE (%). This inspection takes one source at a time with the shared source-native cutoffs; Quantify can combine sources.">
                         <ComboBoxItem Content="PEAKS de novo only (*.denovoOnly.csv)" Tag="peaks-denovo-only"/>
                         <ComboBoxItem Content="PEAKS de novo all (*.denovo.csv)" Tag="peaks-denovo-all"/>
                         <ComboBoxItem Content="DeepNovo (*.deepnovo.csv)" Tag="deepnovo"/>
@@ -218,7 +218,7 @@
             </Grid>
         </GroupBox>
         <Expander x:Name="ExpanderStandalone" Margin="5,6,5,0" IsExpanded="False"
-                  ToolTip="Map the kept peptides to a family file without full XIC or an open project. Export the completed snapshot from Results.">
+                  ToolTip="Map the kept peptides to a family file without full XIC or an open project, then export the snapshot from Results. With a project, use Quantify and Results for extraction and reporting.">
             <Expander.Header>
                 <TextBlock Text="Standalone homology (advanced)" FontWeight="Bold" TextWrapping="Wrap"/>
             </Expander.Header>

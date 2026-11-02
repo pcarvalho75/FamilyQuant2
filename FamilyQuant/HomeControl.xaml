@@ -16,34 +16,35 @@
                     </Image.Style>
                 </Image>
                 <StackPanel>
-                    <TextBlock Text="FamilyQuant" FontSize="{DynamicResource TitleSize}" FontWeight="SemiBold" Foreground="{DynamicResource TextBrush}"/>
-                    <TextBlock Text="Open a project or start from a protein database." Margin="0,6,0,0" Foreground="{DynamicResource MutedBrush}"/>
+                    <TextBlock Text="FamilyQuant" FontSize="{DynamicResource TitleSize}" FontWeight="SemiBold" Foreground="{DynamicResource TextBrush}"
+                               ToolTip="Groups a protein database into families for curation, measures full isotope envelopes from RAW and reports run recovery. One .fqproj keeps the families, User IDs, annotations and computed quantitation."/>
+                    <TextBlock Text="Four steps, one .fqproj: build, curate, measure RAW envelopes, read recovery." Margin="0,6,0,0" Foreground="{DynamicResource MutedBrush}"/>
                 </StackPanel>
             </DockPanel>
             <WrapPanel Margin="0,0,0,24">
                 <Button x:Name="ButtonHomeOpen" Content="Open project" Click="ButtonHomeOpen_Click" Style="{DynamicResource PrimaryButton}" Margin="0,0,10,0"
                         ToolTip="Opens a FamilyQuant project or an older Family Cluster File. Your existing files stay available."/>
                 <Button x:Name="ButtonHomeBuild" Content="New from database" Click="ButtonHomeBuild_Click"
-                        ToolTip="Builds protein families from a FASTA or target-decoy database. Opens the same Build families screen as File > New from database."/>
+                        ToolTip="Builds families once per database by USearch sequence identity from a FASTA or target-decoy (.T-R) file, using File > New from database. Skip this step and open an existing .fcf or .fqproj."/>
             </WrapPanel>
             <Border Background="{DynamicResource SurfaceBrush}" Padding="16" Margin="0,0,0,18">
                 <StackPanel>
                     <TextBlock Text="Current project" Foreground="{DynamicResource TextBrush}" FontWeight="SemiBold"/>
                     <TextBlock x:Name="TextBlockHomeProject" Margin="0,8,0,0" TextTrimming="CharacterEllipsis" TextWrapping="NoWrap" Foreground="{DynamicResource MutedBrush}"
-                               ToolTip="Names the open project and its stored quantitation. Help contains the full workflow and status details."/>
+                               ToolTip="Names the open project and whether full XIC has been computed. The status bar also tracks the current stage and project; Help explains what to do next."/>
                     <WrapPanel x:Name="HomeProjectActions" Margin="0,12,0,0">
                         <Button x:Name="ButtonHomeCurate" Content="Families" Click="ButtonHomeCurate_Click" Margin="0,0,8,0"
-                                ToolTip="Returns to the open family's curation, or opens a file when none is loaded. Existing edits stay in memory."/>
+                                ToolTip="Returns to the open project or opens a .fqproj or .fcf for merging, renaming, editing User IDs and locking families by hand. Existing edits stay in memory; opening a project enables Quantify and Results."/>
                         <Button x:Name="ButtonHomeCompute" Click="ButtonHomeCompute_Click" Margin="0,0,8,0" IsEnabled="False"
-                                ToolTip="Computes full XIC for the open project using the same command as Analysis > Compute full XIC. Disabled until a project is open.">
+                                ToolTip="Analysis > Compute full XIC measures every identified peptide and kept de novo precursor from RAW full isotope envelopes and stores the result in the open project. Disabled until a project is open; Save afterwards to keep the result.">
                             <TextBlock Text="Quantify" Foreground="{DynamicResource MutedBrush}"/>
                         </Button>
                         <Button x:Name="ButtonHomeAnalytics" Click="ButtonHomeAnalytics_Click" Margin="0,0,8,0" IsEnabled="False"
-                                ToolTip="Shows the open project's stored results without recomputing them. Disabled until a project is open.">
+                                ToolTip="Draws recovery figures with CSV and PNG export from stored full XIC; reads no RAW and recomputes nothing. Disabled until a project is open and changes no family.">
                             <TextBlock Text="Results" Foreground="{DynamicResource MutedBrush}"/>
                         </Button>
                         <Button x:Name="ButtonHomeDeNovo" Content="De novo evidence" Click="ButtonHomeDeNovo_Click"
-                                ToolTip="Opens the optional de novo inspection workflow. Its filters and review do not change the open project's families or quantitation."/>
+                                ToolTip="Optional inspection only: filter PEAKS or DeepNovo calls and compare them with PatternLab in a review queue. Quantify reads de novo folders itself, so this review is not needed for quantitation and changes no family or numbers."/>
                     </WrapPanel>
                     <TextBlock x:Name="TextBlockProjectReason" Margin="0,8,0,0" Foreground="{DynamicResource MutedBrush}" FontSize="{DynamicResource CaptionSize}"/>
                 </StackPanel>
