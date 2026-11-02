@@ -19,5 +19,9 @@ internal static partial class Program
             args => args.Length > 0 && args[0] == "--prove-look-copy", (args, _) => LookCopyReceiptCommand(args)),
         new("--prove-look-style-roles", 10220, TestCommandPhase.Raw,
             args => args.Length > 0 && args[0] == "--prove-look-style-roles", (args, _) => LookStyleRoleCommand(args)),
+        new("--probe-look-home-styles", 10230, TestCommandPhase.Raw,
+            args => args.Length > 0 && args[0] == "--probe-look-home-styles", (args, _) => LookHomeProbe(args)),
+        new("--prove-look-app-tokens", 10240, TestCommandPhase.Raw,
+            args => args.Length > 0 && args[0] == "--prove-look-app-tokens", (args, _) => LookAppTokenCommand(args)),
     ];
 }

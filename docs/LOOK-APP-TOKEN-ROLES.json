@@ -1,0 +1,9 @@
+[
+  { "id": "FQ15-B1182A35C62C", "oldKey": "PanelDarkBrush", "oldColor": "#FF333949", "currentKey": "CanvasBrush", "role": "Application canvas surface" },
+  { "id": "FQ15-4CC490537F8C", "oldKey": "PanelMidBrush", "oldColor": "#FF444B58", "currentKey": "SurfaceBrush", "role": "Content surface" },
+  { "id": "FQ15-EFD6FE0DBCF2", "oldKey": "PanelLightBrush", "oldColor": "#FF555C68", "currentKey": "SubtleBrush", "role": "Quiet control surface" },
+  { "id": "FQ15-42AEF08F0BA6", "oldKey": "AccentBrush", "oldColor": "#FF61AEEE", "currentKey": "AccentBrush", "role": "Primary action and selection accent" },
+  { "id": "FQ15-FBFD00584F87", "oldKey": "TextOnDarkBrush", "oldColor": "White", "currentKey": "TextBrush", "role": "Primary readable text in either theme" },
+  { "id": "FQ15-47695503C8C9", "oldKey": "MutedTextBrush", "oldColor": "#FFB9C0CC", "currentKey": "MutedBrush", "role": "Secondary explanatory text" },
+  { "id": "FQ15-E330EBDEE375", "oldKey": "GoldBrush", "oldColor": "#FFFFD700", "currentKey": "AccentBrush", "role": "Keyboard focus and selection attention; decorative step numbers are replaced by named actions" }
+]
