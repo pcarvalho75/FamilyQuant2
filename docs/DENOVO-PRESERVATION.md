@@ -102,6 +102,26 @@ export with the retired Layer 5 partition screen and is explicitly sent to Paulo
 it is neither VERIFIED nor an inferred DROP. No applicable missing fact was found in this
 packet, so no product restoration was made. Completed FQLook style rows are separate.
 
+Roadmap v4 box N6c uses the whole-screen `--prove-denovo-results-export` run for actual
+source-selection events, Help open/close and the relocated Results assignment export.
+Both cultures exercise populated and empty snapshots, native Save success/cancellation,
+chosen CSV bytes, unavailable state and retention of held data. The source-event fixture
+supplies an import before checking downstream reset, as both programs require. Two runs
+pass 124 checks with identical data. A corrupt-byte control fails four comparisons and
+emits no register. The existing actual-command replay passes 232 checks.
+
+The native-dialog entry points automatically launch the owned checker on a private Windows
+desktop that is never selected. WPF windows stay off screen with activation/taskbar display
+disabled. No global input, focus or clipboard operation is used. Executed source/binaries
+are retained. This is a component/interaction proof, not fresh scientific reproduction.
+
+At the current N6c accounting checkpoint, all 619 retained De novo observations are either
+supported (441) or on `D:/FamilyQuant-data/reviews/wording-for-paulo.tsv` (178). The 296
+previously approved UI exclusions remain separate. Wording entries preserve actual native
+values or current member literal sets; eleven extraction/partition-only instructions and
+callbacks have no replacement after the authorized UI retirement and request a ruling.
+These entries do not approve wording, infer DROP or satisfy the final release guard.
+
 For other status literals, a receipt requires the actual frozen PDB call site, occurrence of
 that literal in its executed message and complete matching current messages. A conditional
 call site alone cannot cover an unexecuted arm. Formatting tokens are outside that text test.
