@@ -29,6 +29,8 @@ disabled state in its tooltip. Do not add colour to plain values.
 No user-visible text may name an organism, a venom or a toxin. Use general
 examples that apply to any database. Names loaded from the user's database are
 data, and remain as supplied. Comments and protected figure producers stay intact.
+Product-authored Help, tooltips, status messages and export headers must not quote
+historical sample counts. Show the loaded data's counts and selected cutoffs instead.
 
 Existing screens retain their commands and facts until their scheduled rebuild.
 Each rebuilt screen adopts these roles, tokens and copy rules, and must render in
