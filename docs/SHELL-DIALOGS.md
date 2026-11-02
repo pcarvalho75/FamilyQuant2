@@ -73,7 +73,14 @@ native-audit JSON, a fresh output and a timestamp. The retained cohort has 449 c
 observations and ten CSV observations. One native screen run covers filters, native sort
 events, row numbering, selection availability, batch curation and Undo, User ID editing,
 PatternLab loading, pending normalization and Recalculate, both exports, Full XIC basis,
-and word/keyword grouping with Undo. The edit test emits the actual grid event and updates
+and word/keyword grouping with Undo. The annotation-only batch runs with PatternLab loaded,
+compares every family ID and share before/after recalculation, saves and reopens the .fcf,
+checks both quoted CSV annotations, and restores the exact pre-edit document through Undo.
+The export actions capture chooser filters/default filenames before the presenter supplies
+a path. Both CSV filters and filenames equal frozen literals; the accepted PLP chooser
+retains the frozen *.plp pattern, with the shorter current description recorded explicitly.
+These six additional storage/format observations bring this own cohort to 43 supported and
+416 OPEN rows. The edit test emits the actual grid event and updates
 the column's binding on a detached editor; it does not call `BeginEdit` or request focus.
 Every action also checks actual HWND placement and nonactivation. Secondary Help,
 alignment-result and modal lock windows require their own safe presentation boundary.
@@ -84,7 +91,17 @@ commas, quotes, CR/LF, and fractional values. The frozen and current output must
 exactly and the current helper must repeat byte for byte. The frozen ReportView adapter
 selects its explicit User branch; sorting and counters are also compared. ReportView's
 wording is outside this cohort. The optional negative control plants different CSV
-comparison bytes and must fail. Plain-text and unexecuted observations remain OPEN;
+comparison bytes and a different captured chooser filter; both assertions must fail.
+The final M22 packet is `D:/FamilyQuant-data/out-shell/final-leftrows`: two 19/0/0 runs,
+a 17/2/0 negative control and ten byte-identical data files. The unshown De novo control
+also supplies actual default binding values and constructor-replaced tooltips for the
+manual review, alongside resolved curation Help. This capture is no semantic proof.
+The separate 70-row manual
+fact review and 42-row execution report are `reviews/factcheck2-FQShell.tsv` and
+`reviews/execution2-FQShell.tsv` under `D:/FamilyQuant-data`. The execution report supplies
+specific inability reasons for 36 rows and references the six new native receipts.
+Manual wording verdicts supply no behavioral proof or disposition change.
+Plain-text and unexecuted observations remain OPEN;
 an action does not supply a semantic proof for changed copy.
 
 The review-list producer captures current text from unshown compiled controls,
