@@ -17,7 +17,7 @@ Render targets refer to `ScreenHarness.Screens`, captured with `--screens <outpu
 Release gate: `FamilyQuant.Tests.exe --feature-ledger-release-check` fails until every retained row is VERIFIED with evidence. Authorized DROP rows use APPROVED_DROP, which records a decision, not a completed UI removal. The normal quick suite permits OPEN rows during development. Regeneration resets retained rows to OPEN; preserve reviewed evidence when updating the scanner.
 
 Scan count: **5756**. Ledger rows: **5756**. Source files: **104**.
-Authorized DROP rows: **296**; proposed VERIFIED retained rows: **3764**; OPEN retained rows: **1696**.
+Authorized DROP rows: **296**; proposed VERIFIED retained rows: **3770**; OPEN retained rows: **1690**.
 
 | ID | Disposition | Kind | Frozen source | Fact or control | Planned check | State | Evidence |
 |---|---|---|---|---|---|---|---|
@@ -928,9 +928,9 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **3764**; OPEN r
 | FQ15-2C6730EC8F52 | IMPROVE | option/copy | FamilyQuant/ComputeXicWindow.xaml:125 | TextBlockSpectrumComparisonPath.Text = The spectrum comparison CSV is written after a successful computation. | render:08-compute | OPEN | pending |
 | FQ15-9D83E10BE70B | IMPROVE | tooltip | FamilyQuant/ComputeXicWindow.xaml:126 | TextBlockSpectrumComparisonPath.ToolTip = Where the latest computation saved the spectrum comparison CSV. It holds the same rows as the table. | render:08-compute | OPEN | pending |
 | FQ15-6BBBE800E500 | IMPROVE | tooltip | FamilyQuant/ComputeXicWindow.xaml:133 | TextBlockStatus.ToolTip = Shows what the computation is doing and what it found: progress, per-run counts and any refusal. | render:08-compute | OPEN | pending |
-| FQ15-D22FD31240E7 | IMPROVE | control | FamilyQuant/ComputeXicWindow.xaml:137 | Button ButtonClose | render:08-compute | OPEN | pending |
-| FQ15-91271C1193AE | IMPROVE | option/copy | FamilyQuant/ComputeXicWindow.xaml:137 | ButtonClose.Content = Close | render:08-compute | OPEN | pending |
-| FQ15-E6FC69103914 | KEEP | handler | FamilyQuant/ComputeXicWindow.xaml:138 | ButtonClose.Click = ButtonClose_Click | render:08-compute | OPEN | pending |
+| FQ15-D22FD31240E7 | IMPROVE | control | FamilyQuant/ComputeXicWindow.xaml:137 | Button ButtonClose | test:SecondaryRuntimeCommand | VERIFIED | evidence:FL-secondary-interactions:FQ15-D22FD31240E7 |
+| FQ15-91271C1193AE | IMPROVE | option/copy | FamilyQuant/ComputeXicWindow.xaml:137 | ButtonClose.Content = Close | test:SecondaryRuntimeCommand | VERIFIED | evidence:FL-secondary-interactions:FQ15-91271C1193AE |
+| FQ15-E6FC69103914 | KEEP | handler | FamilyQuant/ComputeXicWindow.xaml:138 | ButtonClose.Click = ButtonClose_Click | test:SecondaryRuntimeCommand | VERIFIED | evidence:FL-secondary-interactions:FQ15-E6FC69103914 |
 | FQ15-D416700A21F4 | IMPROVE | tooltip | FamilyQuant/ComputeXicWindow.xaml:139 | ButtonClose.ToolTip = Close this window. A finished computation is kept in the project; Save the project to write it to disk. | render:08-compute | OPEN | pending |
 | FQ15-7490E8A34AF5 | KEEP | format/export | FamilyQuant/ComputeXicWindow.xaml.cs:81 | "Nothing computed yet. Choose the folder holding the .raw acquisitions and the SEPro " | render:08-compute | OPEN | pending |
 | FQ15-F70843F20494 | IMPROVE | code fact | FamilyQuant/ComputeXicWindow.xaml.cs:82 | "identification package, add a de novo export root if you have one, select its source, then press " | render:08-compute | OPEN | pending |
@@ -1036,7 +1036,7 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **3764**; OPEN r
 | FQ15-A497399D2AB1 | KEEP | handler definition | FamilyQuant/ComputeXicWindow.xaml.cs:253 | private void ButtonBrowseDeNovo_Click(object sender, RoutedEventArgs e) | test:SecondaryRuntimeCommand | VERIFIED | evidence:FL-secondary-runtime:FQ15-A497399D2AB1 |
 | FQ15-452A85384C72 | KEEP | handler definition | FamilyQuant/ComputeXicWindow.xaml.cs:264 | private async void ButtonCompute_Click(object sender, RoutedEventArgs e) | test:SecondaryRuntimeCommand | VERIFIED | evidence:FL-secondary-runtime:FQ15-452A85384C72 |
 | FQ15-7BB37DBBE52F | KEEP | handler definition | FamilyQuant/ComputeXicWindow.xaml.cs:384 | private void ButtonViewSpectrumComparison_Click(object sender, RoutedEventArgs e) | render:08-compute | OPEN | pending |
-| FQ15-B61F52952457 | KEEP | handler definition | FamilyQuant/ComputeXicWindow.xaml.cs:397 | private void ButtonClose_Click(object sender, RoutedEventArgs e) | render:08-compute | OPEN | pending |
+| FQ15-B61F52952457 | KEEP | handler definition | FamilyQuant/ComputeXicWindow.xaml.cs:397 | private void ButtonClose_Click(object sender, RoutedEventArgs e) | test:SecondaryRuntimeCommand | VERIFIED | evidence:FL-secondary-interactions:FQ15-B61F52952457 |
 | FQ15-C421B41B6A87 | KEEP | export/storage fact | FamilyQuant/CsvReport.cs:28 | "USearch ID" | test:DeNovoAgreementUnitTests | OPEN | pending |
 | FQ15-D2361FE28E57 | KEEP | export/storage fact | FamilyQuant/CsvReport.cs:29 | "User ID" | test:DeNovoAgreementUnitTests | OPEN | pending |
 | FQ15-E4D5FB24767B | KEEP | export/storage fact | FamilyQuant/CsvReport.cs:30 | "User Annotation" | test:DeNovoAgreementUnitTests | OPEN | pending |
@@ -5508,8 +5508,8 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **3764**; OPEN r
 | FQ15-49F5DF16DF47 | IMPROVE | code control | FamilyQuant/SuperClusterPreviewWindow.cs:125 | new TextBox | test:SecondaryRuntimeCommand | VERIFIED | evidence:FL-secondary-runtime:FQ15-49F5DF16DF47 |
 | FQ15-3A35F9FF994B | IMPROVE | code control | FamilyQuant/SuperClusterPreviewWindow.cs:134 | new ComboBox | test:SecondaryRuntimeCommand | VERIFIED | evidence:FL-secondary-runtime:FQ15-3A35F9FF994B |
 | FQ15-71E525ACF12F | IMPROVE | code control | FamilyQuant/SuperClusterPreviewWindow.cs:176 | new Button | test:SecondaryRuntimeCommand | VERIFIED | evidence:FL-secondary-runtime:FQ15-71E525ACF12F |
-| FQ15-B59C73CCEF4F | IMPROVE | code control | FamilyQuant/SuperClusterPreviewWindow.cs:183 | new Button | render:09-super-cluster-preview | OPEN | pending |
-| FQ15-91602ED7139C | IMPROVE | code control | FamilyQuant/SuperClusterPreviewWindow.cs:215 | new TextBox | render:09-super-cluster-preview | OPEN | pending |
+| FQ15-B59C73CCEF4F | IMPROVE | code control | FamilyQuant/SuperClusterPreviewWindow.cs:183 | new Button | test:SecondaryRuntimeCommand | VERIFIED | evidence:FL-secondary-runtime:FQ15-B59C73CCEF4F |
+| FQ15-91602ED7139C | IMPROVE | code control | FamilyQuant/SuperClusterPreviewWindow.cs:215 | new TextBox | test:SecondaryRuntimeCommand | VERIFIED | evidence:FL-secondary-runtime:FQ15-91602ED7139C |
 | FQ15-08C2383B8CDF | IMPROVE | code control | FamilyQuant/SuperClusterPreviewWindow.cs:243 | new Button | test:SecondaryRuntimeCommand | VERIFIED | evidence:FL-secondary-runtime:FQ15-08C2383B8CDF |
 | FQ15-DC76ACF83982 | IMPROVE | code control | FamilyQuant/SuperClusterPreviewWindow.cs:257 | new DataGrid | test:SecondaryRuntimeCommand | VERIFIED | evidence:FL-secondary-runtime:FQ15-DC76ACF83982 |
 | FQ15-91343967EB15 | IMPROVE | code control | FamilyQuant/SuperClusterPreviewWindow.cs:288 | new DataGridTemplateColumn | test:SecondaryRuntimeCommand | VERIFIED | evidence:FL-secondary-runtime:FQ15-91343967EB15 |

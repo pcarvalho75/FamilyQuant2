@@ -7,12 +7,13 @@ using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
+using System.Windows.Threading;
 
 namespace FamilyQuant.Tests;
 
 internal static partial class Program
 {
-    private static void SecondarySuperRuntime(Assembly legacy, string output, Themes.AppTheme theme, SecondaryAdd add)
+    private static void SecondarySuperRuntime(Assembly legacy, string output, Themes.AppTheme theme, SecondaryAdd add, bool negative = false)
     {
         const string source = "FamilyQuant/SuperClusterPreviewWindow.cs";
         var file = new FamilyClusterFile { MyExtendedFastaItems = new()
@@ -94,6 +95,11 @@ internal static partial class Program
             oldExclude.Text = ""; exclude.Text = ""; PumpDispatcher();
             var oldKeywords = (TextBox)Find(old, "keywordsBox"); var keywords = (TextBox)Find(current, "keywordsBox", "KeywordsText");
             oldKeywords.Text = "secondary"; keywords.Text = "secondary"; PumpDispatcher();
+            add(source, 215, 215, "grouping screen text editors accept actual keyword/exclusion edits and reach the same preview rows",
+                new[] { oldKeywords.Text, oldExclude.Text }, new[] { keywords.Text, exclude.Text },
+                oldKeywords.IsVisible && keywords.IsVisible && oldExclude.IsVisible && exclude.IsVisible && Same()
+                    && oldKeywords.Text == keywords.Text && oldExclude.Text == exclude.Text,
+                "grouping screen native keyword/exclusion TextBox controls", row => row.Kind == "code control");
             add(source, 197, 197, "actual keyword TextChanged recomputes the same offered rows", Snapshot(oldPreview), Snapshot(preview), Same(),
                 "keyword text event", row => row.Kind == "handler");
             oldKeywords.Text = "copper"; keywords.Text = "copper"; PumpDispatcher();
@@ -123,6 +129,34 @@ internal static partial class Program
             add(source, 352, 352, "native domain count formatting and parentheses match the frozen choices", oldCounts, counts,
                 oldCounts.SequenceEqual(counts), "keyword domain choices N0/count punctuation");
             var create = (Button)Find(current, "createButton"); var oldCreate = (Button)Find(old, "createButton");
+            string Label(string role) => WalkTree(current).OfType<TextBlock>().First(block => block.IsVisible && block.Text.TrimEnd(':') == role).Text;
+            SecondaryWording(output, "grouping-" + theme, source, new Dictionary<int, string> {
+                [48] = current.Title, [178] = create.Content?.ToString() ?? "",
+                [93] = Label("Keywords"), [94] = Label("Exclude words"), [146] = Label("Keep domains") });
+            var words = new Dictionary<int, string> {
+                [74] = keywords.ToolTip?.ToString() ?? "", [85] = exclude.ToolTip?.ToString() ?? "", [79] = match.ToolTip?.ToString() ?? "",
+                [112] = hidden.ToolTip?.ToString() ?? "", [132] = domains.ToolTip?.ToString() ?? "", [139] = list.ToolTip?.ToString() ?? "",
+                [180] = create.ToolTip?.ToString() ?? "", [159] = ((TextBlock)current.FindName("noDomains")).Text,
+                [266] = grid.ToolTip?.ToString() ?? "", [267] = grid.ToolTip?.ToString() ?? "" };
+            foreach (var action in actions) words[action.Item1] = Button(current, action.Item2).ToolTip?.ToString() ?? "";
+            words[189] = Button(current, "Cancel").ToolTip?.ToString() ?? "";
+            int[] headerLines = { 298, 300, 301, 303, 304, 305, 307 };
+            for (int column = 0; column < headerLines.Length; column++) words[headerLines[column]] = SecondaryHeaderTip(grid.Columns[column]);
+            object redItem = grid.Items.Cast<object>().First(item => SecondaryRead(item, "HasKeyword") is false);
+            grid.ScrollIntoView(redItem); grid.UpdateLayout(); PumpDispatcher();
+            string redHint = ((DataGridRow)grid.ItemContainerGenerator.ContainerFromItem(redItem)).ToolTip?.ToString() ?? "[No current row tooltip]";
+            words[276] = words[277] = redHint;
+            var liveChoices = list.Items.Cast<string>().Take(2).ToArray();
+            int suffix = liveChoices[0].LastIndexOf(" (", StringComparison.Ordinal);
+            words[361] = liveChoices[0].Substring(suffix, 2);
+            if (liveChoices.Length == 2)
+            {
+                string firstName = domains.Text;
+                list.SelectedItem = liveChoices[1]; PumpDispatcher();
+                words[363] = domains.Text.Substring(firstName.Length, 2);
+            }
+            words[185] = Button(current, "Cancel").Content?.ToString() ?? "";
+            SecondaryWording(output, "grouping-copy-" + theme, source, words, includeUnchanged: true);
             add(source, 176, 176, "native confirmation control remains reachable", oldCreate.GetType().Name, create.GetType().Name,
                 oldCreate.IsVisible && create.IsVisible, "grouping confirmation button", row => row.Kind == "code control");
             SecondaryClick(Button(old, "Tick all")); SecondaryClick(Button(current, "Tick all")); PumpDispatcher();
@@ -132,5 +166,42 @@ internal static partial class Program
                 confirmed && !old.IsLoaded && !current.IsLoaded, "grouping confirmation Click", row => row.Kind == "handler");
         }
         finally { current.Close(); old.Close(); }
+        old = (Window)Activator.CreateInstance(legacy.GetType("FamilyQuant.SuperClusterPreviewWindow", true)!, oldPreview)!;
+        current = new SuperClusterPreviewWindow(preview);
+        System.ComponentModel.CancelEventHandler stopClose = (_, e) => e.Cancel = true;
+        try
+        {
+            string beforeFile = file.ToJsonText(), beforeOld = (string)SecondaryCall(oldFile, oldFile.GetType(), "ToJsonText")!;
+            (bool ClosedByClick, bool? Result, bool Safe) CancelModal(Window window, bool inject)
+            {
+                bool closed = false, byClick = false, safe = false;
+                window.Left = -30000; window.Top = -30000; window.ShowActivated = false; window.ShowInTaskbar = false;
+                window.WindowStartupLocation = WindowStartupLocation.Manual;
+                window.Closed += (_, _) => closed = true;
+                window.Loaded += (_, _) => window.Dispatcher.BeginInvoke(new Action(() =>
+                {
+                    safe = !window.IsActive && window.Left == -30000 && window.Top == -30000 && !window.ShowActivated && !window.ShowInTaskbar;
+                    if (inject) window.Closing += stopClose;
+                    var button = WalkTree(window).OfType<Button>().Single(value => value.IsVisible && value.Content as string == "Cancel");
+                    SecondaryClick(button); byClick = closed;
+                    window.Closing -= stopClose;
+                    if (!closed) window.Close();
+                }), DispatcherPriority.Background);
+                bool? result = window.ShowDialog();
+                return (byClick, result, safe);
+            }
+            var before = CancelModal(old, false); var actual = CancelModal(current, negative);
+            PumpDispatcher();
+            bool sourceSame = file.ToJsonText() == beforeFile;
+            bool oldSourceSame = (string)SecondaryCall(oldFile, oldFile.GetType(), "ToJsonText")! == beforeOld;
+            bool cancelled = before.Safe && actual.Safe && before.ClosedByClick && actual.ClosedByClick && before.Result == false && actual.Result == before.Result
+                && !(bool)SecondaryRead(old, "Confirmed")! && !current.Confirmed && !old.IsLoaded && !current.IsLoaded
+                && sourceSame && oldSourceSame;
+            add(source, 183, 183, "grouping screen Cancel control returns modal false without confirmation or source mutation through its actual Click",
+                new { before.ClosedByClick, before.Result, before.Safe, SourceSame = oldSourceSame, LoadedAfter = old.IsLoaded, Confirmed = (bool)SecondaryRead(old, "Confirmed")! },
+                new { actual.ClosedByClick, actual.Result, actual.Safe, SourceSame = sourceSame, LoadedAfter = current.IsLoaded, current.Confirmed }, cancelled, "SuperClusterPreviewWindow modal Cancel control and Cancel_Click",
+                row => row.Kind == "code control");
+        }
+        finally { current.Closing -= stopClose; current.Close(); old.Close(); }
     }
 }
