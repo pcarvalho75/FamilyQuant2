@@ -40,6 +40,12 @@ namespace FamilyQuant.Tests
         [STAThread]   // required: the UI smoke section constructs WPF controls
         private static int Main(string[] args)
         {
+            if (args.Contains("--test-architecture-group-split", StringComparer.Ordinal))
+            {
+                ArchitectureGroupSplitTests(args.Length == 2 ? args[1] : null);
+                Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
+                return failed == 0 ? 0 : 1;
+            }
             if (args.Contains("--test-evidence-task-scope", StringComparer.Ordinal))
             {
                 EnsureApplication();
@@ -828,6 +834,7 @@ namespace FamilyQuant.Tests
             EvidenceTaskScopeWindowTests(Path.Combine(workDir, "task-scope"));
             GroupingReviewInteractionTests();
             EvidenceGroupingFlowTests();
+            ArchitectureGroupSplitTests();
             ArchitectureMemberViewTests();
             EvidenceFetchCoordinatorTests();
             CurationSaveResultTests(workDir);
