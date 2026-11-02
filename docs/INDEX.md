@@ -227,6 +227,7 @@ Companion options for `--screens` are `--screen-fcf <input.fcf>`, `--screen-proj
 | `--ledger-secondary-interactions <frozen-root> <native-master-audit> <frozen-app> <fresh-output> <date> [--negative-control]` | Native Quantify/close, identity chooser and injected GridCopy IO/modifier contracts; [guide](SECONDARY-LEDGER.md) |
 | `--ledger-file-contracts <native-audit> <frozen-app> <fresh-output> <date> [--negative-control]` | Actual frozen/current FCF and CSV writes, partition/homology export routes, and explicit unproved format rows; [guide](FILE-CONTRACT-LEDGER.md) |
 | `--test-wording-tsv <fresh-output>` | Leading quotes, embedded quotes and escaped multiline fields roundtrip through both shared-list readers |
+| `--ledger-curation-file-contracts <native-audit> <frozen-app> <fresh-output> <date> [--negative-control]` | Native curation CSV choosers/files and real no-decoy engine refusal; [guide](CURATION-FILE-CONTRACTS.md) |
 | `--test-quantify-close` | Native styled Close button, modal result, retained result and no-focus checks in both themes; included in shell/quick checks |
 | `--secondary-wording-append <native-proof-output> <wording.tsv>` | Append native changed-wording candidates for Paulo; no semantic proof or ledger-state change |
 | `--secondary-box-audit <native-ledger-audit> <wording.tsv> N6k/N6l <output>` | Verify each retained box row has native proof or a lane wording entry; never changes ledger state |

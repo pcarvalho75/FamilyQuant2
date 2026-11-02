@@ -17,8 +17,11 @@ internal static partial class Program
     // metadata tokens are relocated, plus explicitly named platform calls with identical stacks.
     // This never patches a loaded assembly, a product file, or a process-wide native function.
     private static DynamicMethod SecondaryInject(MethodInfo method, IReadOnlyDictionary<MethodBase, MethodInfo> replacements,
-        List<SecondaryInjection> evidence)
+        List<SecondaryInjection> evidence, IReadOnlyDictionary<MethodBase, int>? expectedOccurrences = null)
     {
+        if (expectedOccurrences != null && (expectedOccurrences.Count != replacements.Count
+            || expectedOccurrences.Any(pair => pair.Value < 1 || !replacements.ContainsKey(pair.Key))))
+            throw new InvalidDataException("Each replacement needs one positive exact occurrence count.");
         var body = method.GetMethodBody() ?? throw new InvalidDataException("The injected method has no compiled body.");
         byte[] original = body.GetILAsByteArray()!, code = (byte[])original.Clone();
         var parameters = method.GetParameters().Select(parameter => parameter.ParameterType).ToList();
@@ -32,6 +35,7 @@ internal static partial class Program
         var opcodes = typeof(OpCodes).GetFields(BindingFlags.Public | BindingFlags.Static).Where(field => field.FieldType == typeof(OpCode))
             .Select(field => (OpCode)field.GetValue(null)!).ToDictionary(op => unchecked((ushort)op.Value));
         var used = new List<string>();
+        var usedCounts = new Dictionary<MethodBase, int>();
         Type[]? typeArgs = method.DeclaringType?.GetGenericArguments(), methodArgs = method.GetGenericArguments();
         int Token(MemberInfo member) => member switch
         {
@@ -70,6 +74,7 @@ internal static partial class Program
                         throw new InvalidDataException("An injected boundary changes the evaluation stack: " + call);
                     if (op == OpCodes.Callvirt) code[start] = unchecked((byte)OpCodes.Call.Value);
                     used.Add(call.DeclaringType!.FullName + "." + call.Name + " -> " + replacement.Name);
+                    usedCounts[call] = usedCounts.GetValueOrDefault(call) + 1;
                     member = replacement;
                 }
                 relocated = Token(member);
@@ -80,8 +85,9 @@ internal static partial class Program
             offset = checked(offset + size);
             if (offset > code.Length) throw new InvalidDataException("A compiled instruction extends beyond its body.");
         }
-        if (used.Count != replacements.Count || replacements.Keys.Any(call => !used.Any(item => item.StartsWith(call.DeclaringType!.FullName + "." + call.Name + " -> ", StringComparison.Ordinal))))
-            throw new InvalidDataException("Each injected platform boundary must occur exactly once in this compiled method.");
+        if (usedCounts.Count != replacements.Count || replacements.Keys.Any(call => usedCounts.GetValueOrDefault(call)
+            != (expectedOccurrences?.GetValueOrDefault(call) ?? 1)))
+            throw new InvalidDataException("A compiled platform boundary differs from its exact declared occurrence count.");
         if (body.ExceptionHandlingClauses.Count > 0)
         {
             byte[] regions = new byte[4 + 24 * body.ExceptionHandlingClauses.Count];

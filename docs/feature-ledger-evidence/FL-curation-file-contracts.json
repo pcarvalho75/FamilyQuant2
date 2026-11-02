@@ -1,0 +1,445 @@
+{
+  "schemaVersion": 1,
+  "step": "FL-curation-file-contracts",
+  "frozenCommit": "e9b73064d8ff19b2fde3e3231240b636a64c0a91",
+  "runs": [
+    {
+      "id": "native",
+      "command": "C:\\FamilyQuant-wt2\\floater\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --ledger-curation-file-contracts D:/FamilyQuant-data/out-floater/formats/cohort-ready D:/FamilyQuant-data/reference-1.5.0.6/app D:/FamilyQuant-data/out-floater/curation-formats/after-y6 \u00222026-11-02 12:39:36 -0800\u0022",
+      "executedAt": "2026-11-02 12:39:36 -0800",
+      "commit": "cacd6608a8750d69f83292db72f3b751e920e56c",
+      "artifacts": [
+        {
+          "path": "D:\\FamilyQuant-data\\out-floater\\curation-formats\\after-y6\\cohort-ledger.md",
+          "sha256": "718B7232BC728180B8CE3D76050AEC7F266C298A4357610AD8A9529AD7CD6F25"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-floater\\curation-formats\\after-y6\\cohort-mapping.json",
+          "sha256": "72013D1B74FC3ACDBE7D97E0606227A26D4F1527F6DDCFDCAD0B83404BC59FAA"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-floater\\curation-formats\\after-y6\\cohort-report.json",
+          "sha256": "1C7EC20E3F7A6DFD4B80A3DF362E5C667E1ACBCE70792A44844ADDDD6AFFC306"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-floater\\curation-formats\\after-y6\\en-US\\current-composition.csv",
+          "sha256": "E146FA173353B8E8D474606C14F1EC0D806D49702516EE3CF44BF725ED8A3763"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-floater\\curation-formats\\after-y6\\en-US\\current-protein.csv",
+          "sha256": "45B34A017456AB8E3D1CD4FDA1EBA4DDFC67E555934AA38F0A95BAE8283CEAD5"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-floater\\curation-formats\\after-y6\\en-US\\dialogs.json",
+          "sha256": "129DD8C9DDA2A31C52E75FFE4232A43F25DB17D47FB13CF1EA69908C420CC08C"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-floater\\curation-formats\\after-y6\\en-US\\frozen-composition.csv",
+          "sha256": "E146FA173353B8E8D474606C14F1EC0D806D49702516EE3CF44BF725ED8A3763"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-floater\\curation-formats\\after-y6\\en-US\\frozen-protein.csv",
+          "sha256": "45B34A017456AB8E3D1CD4FDA1EBA4DDFC67E555934AA38F0A95BAE8283CEAD5"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-floater\\curation-formats\\after-y6\\en-US\\injections.json",
+          "sha256": "26346149CE3D69E9DBB96BB661739755508FD87088B76FEBF31B59C20FABAF14"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-floater\\curation-formats\\after-y6\\executed\\FamilyQuant.Core.dll",
+          "sha256": "E9557242E4A674E687359A07FC93FC1D83D539FCFDA5F7091FBBF6B19F4FDF08"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-floater\\curation-formats\\after-y6\\executed\\FamilyQuant.Core\\CsvReport.cs",
+          "sha256": "453BA55ABE23B6A567016C1D2BB419AA102E6D801C7347A371769F1FD334DDDF"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-floater\\curation-formats\\after-y6\\executed\\FamilyQuant.Core\\FamilyClusterScoring.cs",
+          "sha256": "F033C9FDCB15D2F282CFF64BC12F301D0275346DB5C82F9EA983340F9340CE51"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-floater\\curation-formats\\after-y6\\executed\\FamilyQuant.Core\\FamilyQuantFile.cs",
+          "sha256": "0845785B94D6ED35E9702CD57B9DEB382608DE637444F8ED7154683872D75E5E"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-floater\\curation-formats\\after-y6\\executed\\FamilyQuant.Core\\USearchTools.cs",
+          "sha256": "7F644E1379D8A72937266A95B1E525417C4AFF55B1DFF5A9E10ABBC5BF80ACF9"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-floater\\curation-formats\\after-y6\\executed\\FamilyQuant.Tests.dll",
+          "sha256": "8063A8CE33DDFBC08AB9A711F8B580F6E3B264A827AC3E199930AAEDE01F4804"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-floater\\curation-formats\\after-y6\\executed\\FamilyQuant.Tests\\Program.Commands.SecondaryLedger.cs",
+          "sha256": "9DAD771B45298A8510AC7D103FF359EC4CC22400F3B41E90E1816AF4AE326A2D"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-floater\\curation-formats\\after-y6\\executed\\FamilyQuant.Tests\\Program.CurationFileContracts.cs",
+          "sha256": "7A3CE2446E3D8BA00722851C16F77698D4BC0646BE596ED4B81D410EFD0BB493"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-floater\\curation-formats\\after-y6\\executed\\FamilyQuant.Tests\\Program.SecondaryInjectedMethod.cs",
+          "sha256": "23A7781DDBD6E2B6299FB12C9F31A083CC4FF42C290513848F61EA4CEF31E2D1"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-floater\\curation-formats\\after-y6\\executed\\FamilyQuant2.dll",
+          "sha256": "7A34CADD6C2C8CE447549D30A5EB42BB365F016BAB0FE231AF21C1D7DA81BB08"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-floater\\curation-formats\\after-y6\\executed\\FamilyQuant\\ClusterGenerationControl.xaml.cs",
+          "sha256": "FC475D8417A728CC61528A1F8C49C467B1612D6C6E11462AA731A9284BFBCC48"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-floater\\curation-formats\\after-y6\\executed\\FamilyQuant\\CurationQuantitationViewModel.cs",
+          "sha256": "0ECF3950DE35D910A11F4BEBF8FF357C273AB0D1AFC90032C277EABF1A2C85B1"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-floater\\curation-formats\\after-y6\\executed\\frozen-FamilyQuant.dll",
+          "sha256": "D764488C923945285E03B338E5A91BF28106A35B11AB465D8E2B23D125F03FD8"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-floater\\curation-formats\\after-y6\\files.log",
+          "sha256": "0ADB523A9AED0CB6CD8000D405801BEDA6248269B5D60AAF3B7EC4E60A4C414C"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-floater\\curation-formats\\after-y6\\no-decoy\\current-usearch.exe",
+          "sha256": "CFB6A77FF0CABCF9D7334EE298A1DF22B2351A54C65418F0EB93F3913A10ACD3"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-floater\\curation-formats\\after-y6\\no-decoy\\current.fcf",
+          "sha256": "81379F0137F1A084E3BBCE2EA8B90CFD6A240F6B0F63CCDFC7DFC1C9F66FE517"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-floater\\curation-formats\\after-y6\\no-decoy\\frozen-usearch.exe",
+          "sha256": "E05C852CE29155CEA546B271AA0B79A303EBB90BC8C87299A87303832662E764"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-floater\\curation-formats\\after-y6\\no-decoy\\frozen.fcf",
+          "sha256": "070C2D6B1D34865D37FFB2A1106F5D4A3FBA32D686D291881086540C9F6A2EE7"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-floater\\curation-formats\\after-y6\\no-decoy\\values.json",
+          "sha256": "5D83F498A636ADB6576DDB88364E1451A6B0931F5C7A64A20E89B663A0A0BD43"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-floater\\curation-formats\\after-y6\\pt-BR\\current-composition.csv",
+          "sha256": "E146FA173353B8E8D474606C14F1EC0D806D49702516EE3CF44BF725ED8A3763"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-floater\\curation-formats\\after-y6\\pt-BR\\current-protein.csv",
+          "sha256": "45B34A017456AB8E3D1CD4FDA1EBA4DDFC67E555934AA38F0A95BAE8283CEAD5"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-floater\\curation-formats\\after-y6\\pt-BR\\dialogs.json",
+          "sha256": "7DB4D016224BAB2F8D349C2E6B379E83D3CB8B0D6B7721A2D4082FD854F417A2"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-floater\\curation-formats\\after-y6\\pt-BR\\frozen-composition.csv",
+          "sha256": "E146FA173353B8E8D474606C14F1EC0D806D49702516EE3CF44BF725ED8A3763"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-floater\\curation-formats\\after-y6\\pt-BR\\frozen-protein.csv",
+          "sha256": "45B34A017456AB8E3D1CD4FDA1EBA4DDFC67E555934AA38F0A95BAE8283CEAD5"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-floater\\curation-formats\\after-y6\\pt-BR\\injections.json",
+          "sha256": "26346149CE3D69E9DBB96BB661739755508FD87088B76FEBF31B59C20FABAF14"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-floater\\curation-formats\\after-y6\\target-audit.json",
+          "sha256": "0F0A5A4723B6E7CC1E91D51B8F4A6E6B66F21EFB56DD1030179E451A26419EAF"
+        }
+      ],
+      "workingDirectory": "C:\\FamilyQuant-wt2\\floater"
+    }
+  ],
+  "rows": [
+    {
+      "observationId": "FQ15-93D5A5132CAD",
+      "implementation": [
+        {
+          "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
+          "symbol": "Native curation CSV chooser and writer paths; native no-decoy refusal when executed",
+          "sha256": "FC475D8417A728CC61528A1F8C49C467B1612D6C6E11462AA731A9284BFBCC48"
+        },
+        {
+          "path": "FamilyQuant/CurationQuantitationViewModel.cs",
+          "symbol": "Native curation CSV chooser and writer paths; native no-decoy refusal when executed",
+          "sha256": "0ECF3950DE35D910A11F4BEBF8FF357C273AB0D1AFC90032C277EABF1A2C85B1"
+        },
+        {
+          "path": "FamilyQuant.Core/CsvReport.cs",
+          "symbol": "Native curation CSV chooser and writer paths; native no-decoy refusal when executed",
+          "sha256": "453BA55ABE23B6A567016C1D2BB419AA102E6D801C7347A371769F1FD334DDDF"
+        },
+        {
+          "path": "FamilyQuant.Core/USearchTools.cs",
+          "symbol": "Native curation CSV chooser and writer paths; native no-decoy refusal when executed",
+          "sha256": "7F644E1379D8A72937266A95B1E525417C4AFF55B1DFF5A9E10ABBC5BF80ACF9"
+        },
+        {
+          "path": "FamilyQuant.Core/FamilyClusterScoring.cs",
+          "symbol": "Native curation CSV chooser and writer paths; native no-decoy refusal when executed",
+          "sha256": "F033C9FDCB15D2F282CFF64BC12F301D0275346DB5C82F9EA983340F9340CE51"
+        },
+        {
+          "path": "FamilyQuant.Core/FamilyQuantFile.cs",
+          "symbol": "Native curation CSV chooser and writer paths; native no-decoy refusal when executed",
+          "sha256": "0845785B94D6ED35E9702CD57B9DEB382608DE637444F8ED7154683872D75E5E"
+        }
+      ],
+      "proofs": [],
+      "note": "Native attached CSV screen route and actual frozen/current files in two cultures.",
+      "kindReceiptId": "protein",
+      "compared": "FamilyQuant/ClusterGenerationControl.xaml.cs:642 \u0022CSV files (*.csv)|*.csv|All files (*.*)|*.*\u0022; native exact filter/default filename, cancelled destination preserved, accepted CSV bytes equal."
+    },
+    {
+      "observationId": "FQ15-F31EFE95C8DB",
+      "implementation": [
+        {
+          "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
+          "symbol": "Native curation CSV chooser and writer paths; native no-decoy refusal when executed",
+          "sha256": "FC475D8417A728CC61528A1F8C49C467B1612D6C6E11462AA731A9284BFBCC48"
+        },
+        {
+          "path": "FamilyQuant/CurationQuantitationViewModel.cs",
+          "symbol": "Native curation CSV chooser and writer paths; native no-decoy refusal when executed",
+          "sha256": "0ECF3950DE35D910A11F4BEBF8FF357C273AB0D1AFC90032C277EABF1A2C85B1"
+        },
+        {
+          "path": "FamilyQuant.Core/CsvReport.cs",
+          "symbol": "Native curation CSV chooser and writer paths; native no-decoy refusal when executed",
+          "sha256": "453BA55ABE23B6A567016C1D2BB419AA102E6D801C7347A371769F1FD334DDDF"
+        },
+        {
+          "path": "FamilyQuant.Core/USearchTools.cs",
+          "symbol": "Native curation CSV chooser and writer paths; native no-decoy refusal when executed",
+          "sha256": "7F644E1379D8A72937266A95B1E525417C4AFF55B1DFF5A9E10ABBC5BF80ACF9"
+        },
+        {
+          "path": "FamilyQuant.Core/FamilyClusterScoring.cs",
+          "symbol": "Native curation CSV chooser and writer paths; native no-decoy refusal when executed",
+          "sha256": "F033C9FDCB15D2F282CFF64BC12F301D0275346DB5C82F9EA983340F9340CE51"
+        },
+        {
+          "path": "FamilyQuant.Core/FamilyQuantFile.cs",
+          "symbol": "Native curation CSV chooser and writer paths; native no-decoy refusal when executed",
+          "sha256": "0845785B94D6ED35E9702CD57B9DEB382608DE637444F8ED7154683872D75E5E"
+        }
+      ],
+      "proofs": [],
+      "note": "Native attached CSV screen route and actual frozen/current files in two cultures.",
+      "kindReceiptId": "protein",
+      "compared": "FamilyQuant/ClusterGenerationControl.xaml.cs:643 \u0022FamilyQuant_Report.csv\u0022; native exact filter/default filename, cancelled destination preserved, accepted CSV bytes equal."
+    },
+    {
+      "observationId": "FQ15-32A336B58FA8",
+      "implementation": [
+        {
+          "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
+          "symbol": "Native curation CSV chooser and writer paths; native no-decoy refusal when executed",
+          "sha256": "FC475D8417A728CC61528A1F8C49C467B1612D6C6E11462AA731A9284BFBCC48"
+        },
+        {
+          "path": "FamilyQuant/CurationQuantitationViewModel.cs",
+          "symbol": "Native curation CSV chooser and writer paths; native no-decoy refusal when executed",
+          "sha256": "0ECF3950DE35D910A11F4BEBF8FF357C273AB0D1AFC90032C277EABF1A2C85B1"
+        },
+        {
+          "path": "FamilyQuant.Core/CsvReport.cs",
+          "symbol": "Native curation CSV chooser and writer paths; native no-decoy refusal when executed",
+          "sha256": "453BA55ABE23B6A567016C1D2BB419AA102E6D801C7347A371769F1FD334DDDF"
+        },
+        {
+          "path": "FamilyQuant.Core/USearchTools.cs",
+          "symbol": "Native curation CSV chooser and writer paths; native no-decoy refusal when executed",
+          "sha256": "7F644E1379D8A72937266A95B1E525417C4AFF55B1DFF5A9E10ABBC5BF80ACF9"
+        },
+        {
+          "path": "FamilyQuant.Core/FamilyClusterScoring.cs",
+          "symbol": "Native curation CSV chooser and writer paths; native no-decoy refusal when executed",
+          "sha256": "F033C9FDCB15D2F282CFF64BC12F301D0275346DB5C82F9EA983340F9340CE51"
+        },
+        {
+          "path": "FamilyQuant.Core/FamilyQuantFile.cs",
+          "symbol": "Native curation CSV chooser and writer paths; native no-decoy refusal when executed",
+          "sha256": "0845785B94D6ED35E9702CD57B9DEB382608DE637444F8ED7154683872D75E5E"
+        }
+      ],
+      "proofs": [],
+      "note": "Native attached CSV screen route and actual frozen/current files in two cultures.",
+      "kindReceiptId": "composition",
+      "compared": "FamilyQuant/ClusterGenerationControl.xaml.cs:1048 \u0022CSV files (*.csv)|*.csv|All files (*.*)|*.*\u0022; native exact filter/default filename, cancelled destination preserved, accepted CSV bytes equal."
+    },
+    {
+      "observationId": "FQ15-4C83255498C2",
+      "implementation": [
+        {
+          "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
+          "symbol": "Native curation CSV chooser and writer paths; native no-decoy refusal when executed",
+          "sha256": "FC475D8417A728CC61528A1F8C49C467B1612D6C6E11462AA731A9284BFBCC48"
+        },
+        {
+          "path": "FamilyQuant/CurationQuantitationViewModel.cs",
+          "symbol": "Native curation CSV chooser and writer paths; native no-decoy refusal when executed",
+          "sha256": "0ECF3950DE35D910A11F4BEBF8FF357C273AB0D1AFC90032C277EABF1A2C85B1"
+        },
+        {
+          "path": "FamilyQuant.Core/CsvReport.cs",
+          "symbol": "Native curation CSV chooser and writer paths; native no-decoy refusal when executed",
+          "sha256": "453BA55ABE23B6A567016C1D2BB419AA102E6D801C7347A371769F1FD334DDDF"
+        },
+        {
+          "path": "FamilyQuant.Core/USearchTools.cs",
+          "symbol": "Native curation CSV chooser and writer paths; native no-decoy refusal when executed",
+          "sha256": "7F644E1379D8A72937266A95B1E525417C4AFF55B1DFF5A9E10ABBC5BF80ACF9"
+        },
+        {
+          "path": "FamilyQuant.Core/FamilyClusterScoring.cs",
+          "symbol": "Native curation CSV chooser and writer paths; native no-decoy refusal when executed",
+          "sha256": "F033C9FDCB15D2F282CFF64BC12F301D0275346DB5C82F9EA983340F9340CE51"
+        },
+        {
+          "path": "FamilyQuant.Core/FamilyQuantFile.cs",
+          "symbol": "Native curation CSV chooser and writer paths; native no-decoy refusal when executed",
+          "sha256": "0845785B94D6ED35E9702CD57B9DEB382608DE637444F8ED7154683872D75E5E"
+        }
+      ],
+      "proofs": [],
+      "note": "Native attached CSV screen route and actual frozen/current files in two cultures.",
+      "kindReceiptId": "composition",
+      "compared": "FamilyQuant/ClusterGenerationControl.xaml.cs:1049 \u0022FamilyQuant_family_composition.csv\u0022; native exact filter/default filename, cancelled destination preserved, accepted CSV bytes equal."
+    },
+    {
+      "observationId": "FQ15-0DB3E899880B",
+      "implementation": [
+        {
+          "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
+          "symbol": "Native curation CSV chooser and writer paths; native no-decoy refusal when executed",
+          "sha256": "FC475D8417A728CC61528A1F8C49C467B1612D6C6E11462AA731A9284BFBCC48"
+        },
+        {
+          "path": "FamilyQuant/CurationQuantitationViewModel.cs",
+          "symbol": "Native curation CSV chooser and writer paths; native no-decoy refusal when executed",
+          "sha256": "0ECF3950DE35D910A11F4BEBF8FF357C273AB0D1AFC90032C277EABF1A2C85B1"
+        },
+        {
+          "path": "FamilyQuant.Core/CsvReport.cs",
+          "symbol": "Native curation CSV chooser and writer paths; native no-decoy refusal when executed",
+          "sha256": "453BA55ABE23B6A567016C1D2BB419AA102E6D801C7347A371769F1FD334DDDF"
+        },
+        {
+          "path": "FamilyQuant.Core/USearchTools.cs",
+          "symbol": "Native curation CSV chooser and writer paths; native no-decoy refusal when executed",
+          "sha256": "7F644E1379D8A72937266A95B1E525417C4AFF55B1DFF5A9E10ABBC5BF80ACF9"
+        },
+        {
+          "path": "FamilyQuant.Core/FamilyClusterScoring.cs",
+          "symbol": "Native curation CSV chooser and writer paths; native no-decoy refusal when executed",
+          "sha256": "F033C9FDCB15D2F282CFF64BC12F301D0275346DB5C82F9EA983340F9340CE51"
+        },
+        {
+          "path": "FamilyQuant.Core/FamilyQuantFile.cs",
+          "symbol": "Native curation CSV chooser and writer paths; native no-decoy refusal when executed",
+          "sha256": "0845785B94D6ED35E9702CD57B9DEB382608DE637444F8ED7154683872D75E5E"
+        }
+      ],
+      "proofs": [],
+      "note": "Native attached CSV screen route and actual frozen/current files in two cultures.",
+      "kindReceiptId": "no-decoy",
+      "compared": "FamilyQuant/FamilyQuantFile.cs:682 \u0022Use a target-decoy database (.T-R), or choose the threshold from \u0027Scan identity range\u0027 \u0022; actual frozen/current engine FCF writes, retained data equality and exact target-only rejection message."
+    }
+  ],
+  "kindReceipts": [
+    {
+      "id": "protein",
+      "kind": "format/export",
+      "proofs": [
+        {
+          "runId": "native",
+          "kind": "test",
+          "target": "CurationFileCommand",
+          "assertion": "native curation protein chooser/filter/name and cancel/accept route en-US",
+          "artifact": "D:\\FamilyQuant-data\\out-floater\\curation-formats\\after-y6\\files.log",
+          "inspectedBy": ""
+        },
+        {
+          "runId": "native",
+          "kind": "test",
+          "target": "CurationFileCommand",
+          "assertion": "native curation protein file bytes en-US",
+          "artifact": "D:\\FamilyQuant-data\\out-floater\\curation-formats\\after-y6\\files.log",
+          "inspectedBy": ""
+        },
+        {
+          "runId": "native",
+          "kind": "test",
+          "target": "CurationFileCommand",
+          "assertion": "native curation protein chooser/filter/name and cancel/accept route pt-BR",
+          "artifact": "D:\\FamilyQuant-data\\out-floater\\curation-formats\\after-y6\\files.log",
+          "inspectedBy": ""
+        },
+        {
+          "runId": "native",
+          "kind": "test",
+          "target": "CurationFileCommand",
+          "assertion": "native curation protein file bytes pt-BR",
+          "artifact": "D:\\FamilyQuant-data\\out-floater\\curation-formats\\after-y6\\files.log",
+          "inspectedBy": ""
+        }
+      ]
+    },
+    {
+      "id": "composition",
+      "kind": "format/export",
+      "proofs": [
+        {
+          "runId": "native",
+          "kind": "test",
+          "target": "CurationFileCommand",
+          "assertion": "native curation composition chooser/filter/name and cancel/accept route en-US",
+          "artifact": "D:\\FamilyQuant-data\\out-floater\\curation-formats\\after-y6\\files.log",
+          "inspectedBy": ""
+        },
+        {
+          "runId": "native",
+          "kind": "test",
+          "target": "CurationFileCommand",
+          "assertion": "native curation composition file bytes en-US",
+          "artifact": "D:\\FamilyQuant-data\\out-floater\\curation-formats\\after-y6\\files.log",
+          "inspectedBy": ""
+        },
+        {
+          "runId": "native",
+          "kind": "test",
+          "target": "CurationFileCommand",
+          "assertion": "native curation composition chooser/filter/name and cancel/accept route pt-BR",
+          "artifact": "D:\\FamilyQuant-data\\out-floater\\curation-formats\\after-y6\\files.log",
+          "inspectedBy": ""
+        },
+        {
+          "runId": "native",
+          "kind": "test",
+          "target": "CurationFileCommand",
+          "assertion": "native curation composition file bytes pt-BR",
+          "artifact": "D:\\FamilyQuant-data\\out-floater\\curation-formats\\after-y6\\files.log",
+          "inspectedBy": ""
+        }
+      ]
+    },
+    {
+      "id": "no-decoy",
+      "kind": "format/export",
+      "proofs": [
+        {
+          "runId": "native",
+          "kind": "test",
+          "target": "CurationFileCommand",
+          "assertion": "native no-decoy engine files and refusal agree",
+          "artifact": "D:\\FamilyQuant-data\\out-floater\\curation-formats\\after-y6\\files.log",
+          "inspectedBy": ""
+        }
+      ]
+    }
+  ]
+}
