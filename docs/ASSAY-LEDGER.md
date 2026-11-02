@@ -140,3 +140,22 @@ stored-project golden 4/0/0. The golden checks four native stored-project export
 reproduction, full suite, presentation run or independent review was performed by this lane.
 Registers: `AS-remaining.json`, `AS-cache-wire.json` and `AS-presentation-pack.json` under
 `docs/feature-ledger-evidence`. The 341 proposed rows remain subject to the merged review gate.
+
+## M48 second batch: protected Figures declarations
+
+The shared complete-member comparison proves 466 of 471 `PresentationFigures.cs` observations.
+Two native runs report 470/0/5. Comparison JSON, logs, per-source counts and OPEN-row lists
+are byte-identical. Only declaration facts are proposed; the source and its outputs were not
+edited, and no presentation render was run.
+
+Five rows stay OPEN. Two prefix literals in `ReferenceComponentSummary.FromCuration` now refer
+to `SequenceLabels` constants. Three inventory rows classified as shortcuts are dictionary
+`g.Key` metadata accesses in `DeNovoConsolidationChart.OnRender`, not keyboard actions.
+They need dedicated checks and make no shortcut-preservation claim. M55 agreed to ship the
+466 exact declarations while retaining those five gaps. No DROP is proposed.
+
+The register is `docs/feature-ledger-evidence/AS-presentation-figures.json`, with packets at
+`D:/FamilyQuant-data/out-assay/m48-figures-1` and `m48-figures-2`. On master merge `80b35a7`,
+the Release build is clean, quick suite is 3,013/0/17, stored-project golden is 4/0/0, and the
+native ledger check passes. The local audit proposes 2,718 VERIFIED, 2,742 OPEN and 296 DROP
+rows, including other lanes' merged work. No full suite or fresh RAW validation was run.
