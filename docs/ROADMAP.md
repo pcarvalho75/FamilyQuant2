@@ -109,7 +109,7 @@ Columns: Diff = L, M, H, VH. Hrs = worker hours at measured speed: the 56 steps 
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| X13 | Documents: `CLAUDE.md` from 50 KB to a working guide, history to `docs/HISTORY.md`, talk documents out of the root, release notes for 2.0. `SCIENTIFIC_METHOD.md` gains the rule that an unannotated protein joins only through an in-scope neighbour, which the code has and the document lacks. The three test files over 1,000 lines split with no check lost; `dotnet format` differences cleared | L | 1 | 🟢 | R3 | No fact lost, no line over 300 characters; suite count unchanged; `dotnet format --verify-no-changes` clean | AS | not started | 0% | 0% | T+1 |
+| X13 | Documents: `CLAUDE.md` from 50 KB to a working guide, history to `docs/HISTORY.md`, talk documents out of the root, release notes for 2.0. `SCIENTIFIC_METHOD.md` gains the rule that an unannotated protein joins only through an in-scope neighbour, which the code has and the document lacks. The three test files over 1,000 lines split with no check lost | L | 1 | 🟢 | R3 | No fact lost, no line over 300 characters; suite count unchanged | AS | not started | 0% | 0% | T+1 |
 
 ### W7 Releases (Paulo publishes each one)
 
