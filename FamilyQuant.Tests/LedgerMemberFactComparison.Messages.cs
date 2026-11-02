@@ -12,6 +12,17 @@ internal static partial class LedgerMemberFactComparison
     internal sealed record MessageValue(bool Supported, string Value, MessageToken[] Contributing, string Reason);
     internal sealed record DialogFrame(string Member, string DialogType, string Property, MessageToken[] Expression, string MemberSha256);
 
+    internal static bool TryScopedMessageLiteral(FeatureLedger.Observation row, string source, string expectedMethod,
+        out string memberName, out string memberHash)
+    {
+        memberName = memberHash = "";
+        if (!TryRead(source, out var parsed, out _)) return false;
+        var members = parsed.Members.Where(member => member.Symbol.StartsWith("FamilyQuant.MainWindow::", StringComparison.Ordinal)
+            && member.Symbol.Contains(" " + expectedMethod + " (", StringComparison.Ordinal)).ToArray();
+        if (members.Length != 1 || members[0].Tokens.Count(token => token.IsString && token.Line == row.Line && token.Text == row.Detail) != 1) return false;
+        memberName = members[0].Symbol; memberHash = Fingerprint(members[0]); return true;
+    }
+
     internal static bool TryDialogFrame(FeatureLedger.Observation row, string source, string expectedMethod,
         out DialogFrame? frame, out string reason)
     {
@@ -98,7 +109,8 @@ internal static partial class LedgerMemberFactComparison
         frame = found[0].Frame; caption = found[0].Caption; reason = ""; return true;
     }
 
-    internal static MessageValue EvaluateMessage(MessageToken[] expression, IReadOnlyDictionary<string, string> bindings)
+    internal static MessageValue EvaluateMessage(MessageToken[] expression, IReadOnlyDictionary<string, string> bindings,
+        IReadOnlyDictionary<string, bool>? branches = null)
     {
         var terms = new List<MessageToken[]>(); var term = new List<MessageToken>(); int depth = 0;
         foreach (var token in expression)
@@ -129,6 +141,24 @@ internal static partial class LedgerMemberFactComparison
                 catch (JsonException) { return new(false, "", [], "Unsupported C# literal escape or interpolation."); }
             }
             else if (bindings.TryGetValue(key, out string? actual)) value.Append(actual);
+            else if (part.Length >= 5 && part[0].Text == "(" && part[^1].Text == ")")
+            {
+                int nested = 0, question = -1, colon = -1;
+                for (int index = 1; index < part.Length - 1; index++)
+                {
+                    if (part[index].IsString) continue;
+                    if (part[index].Text is "(" or "[" or "{") nested++;
+                    if (part[index].Text is ")" or "]" or "}") nested--;
+                    if (nested == 0 && part[index].Text == "?") { if (question >= 0) return new(false, "", [], "Nested conditional needs a separate native proof."); question = index; }
+                    if (nested == 0 && part[index].Text == ":") { if (colon >= 0) return new(false, "", [], "Ambiguous conditional needs a separate native proof."); colon = index; }
+                }
+                string condition = question > 0 ? string.Concat(part[1..question].Select(token => token.Text)) : "";
+                if (question < 0 || colon <= question || branches == null || !branches.TryGetValue(condition, out bool selected))
+                    return new(false, "", [], "Conditional predicate was not recorded by the native case: " + key);
+                var evaluated = EvaluateMessage(selected ? part[(question + 1)..colon] : part[(colon + 1)..^1], bindings, branches);
+                if (!evaluated.Supported) return evaluated;
+                value.Append(evaluated.Value); contributed.AddRange(evaluated.Contributing);
+            }
             else if (key == "string.Empty") { }
             else return new(false, "", [], "Unexecuted or unsupported dynamic message term: " + key);
         }

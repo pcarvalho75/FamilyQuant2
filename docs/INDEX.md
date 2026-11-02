@@ -159,6 +159,9 @@ Invoke each flag with `& $testExe <flag>` after building. Dispatch and arity are
 | `--test-ledger-declarations` | Exact named-XAML and C# member comparison checks |
 | `--test-shell-metadata` | Compiled shell-metadata and isolated Home-event comparison guards; included in the ordinary ledger guard |
 | `--test-shell-message-frames [--negative-control]` | Exact frozen handler/message/dialog frames, contributing literals and complete file-filter groups; optional planted wrong-path binding |
+| `--test-shell-sepro-fixture <fresh-output.sepr2>` | Owned synthetic package round trip through the actual vendor serializer; no collaborator data or spectra |
+| `--test-shell-proof-windows` | Before-Show geometry plus actual off-screen HWND, nonactivation and no-taskbar proof |
+| `--test-grid-copy` | Existing native GridCopy context-menu and row/column Copy routines with fake clipboard/browser seams |
 
 ## Screens and UI metadata
 
@@ -214,10 +217,14 @@ Companion options for `--screens` are `--screen-fcf <input.fcf>`, `--screen-proj
 | `--ledger-xic-runtime <frozen-root> <fresh-output> <date> <stored-project> <validated-cache> [--negative-control]` | Native XIC refusal/source/completion facts plus bounded validated cache replay; [runtime guide](CORE-RUNTIME-LEDGER.md) |
 | `--ledger-secondary-compare <frozen-root> <native-master-audit> <fresh-output> <date> [--negative-control]` | Shared exact secondary declarations from native OPEN master IDs; [guide](SECONDARY-LEDGER.md) |
 | `--ledger-secondary-runtime <frozen-root> <native-master-audit> <frozen-app> <fresh-output> <date> [--negative-control]` | Native frozen/current secondary values and interactions; [guide](SECONDARY-LEDGER.md) |
+| `--ledger-secondary-interactions <frozen-root> <native-master-audit> <frozen-app> <fresh-output> <date> [--negative-control]` | Native Quantify/close, identity chooser and injected GridCopy IO/modifier contracts; [guide](SECONDARY-LEDGER.md) |
 | `--prove-denovo-ledger <frozen-source-root> <fresh-output> <date>` | Scoped exact De novo declarations, retained snapshots and ledger receipts in batches of 250; [guide](DENOVO-PRESERVATION.md) |
 | `--prove-denovo-runtime <frozen-source-root> <frozen-app-folder> <fresh-output> <date>` | Native frozen/current controls and resolved values across both themes and three legacy sources |
 | `--prove-denovo-workflows <frozen-source-root> <frozen-app-folder> <fresh-output> <date>` | Native frozen/current projection, reconciliation, binding and legacy export fixtures; C13 style handoff |
 | `--prove-denovo-refusals <frozen-source-root> <frozen-app-folder> <fresh-output> <date>` | Native parser/refusal callback feedback, homology setting restoration, formatting and file-name lookup comparisons |
+| `--prove-denovo-commands <frozen-source> <frozen-app> <trusted-sepr2> <fresh-output> <date>` | Actual old/current command/data/status and native chooser/export success/cancel/failure receipts; 41-row semantic fact inventory |
+| `--denovo-command-probe <frozen-app> <trusted-sepr2> <fresh-output>` | Actual command trace without ledger import |
+| `--native-dialog-probe <fresh-output>` | Owned-process native Open/Folder/Save selection driver check |
 | `--ledger-shell-compare <frozen-root> <fresh-output> <date>` | SH and C1 exact declarations/member tokens; separate candidate registers, unproven rows kept OPEN |
 | `--ledger-core-relocation <frozen-root> <fresh-output> X5/X7 <date> [member-mappings.json]` | Scoped complete Core member comparisons, exact frozen hashes, retained source/checker snapshots and per-row gaps; [guide](CORE-RELOCATION-LEDGER.md) |
 | `--ledger-xic-runtime <frozen-root> <fresh-output> <date> <stored-project> <validated-cache> [--negative-control]` | Native XIC refusal/source/completion facts plus bounded validated cache replay; [runtime guide](CORE-RUNTIME-LEDGER.md) |
@@ -264,6 +271,8 @@ and output must be separate. None is executed merely to maintain this catalog.
 | `--evidence-architecture-check [searched.fcf] [report.json] [scope-terms]` | Same helper, architecture suggestions |
 | `--evidence-apply-check [searched.fcf] [report.json] [scope-terms]` | Same helper, explicit apply/undo/reopen checks in separate outputs |
 | `--evidence-session-apply-check [searched.fcf] [report.json] [scope-terms]` | Same helper, session preparation and recipe replay |
+| `--family-world-lengths [computed.fqproj] [output-dir]` | [FamilyWorldLengthsCheck.cs](../FamilyQuant.Tests/FamilyWorldLengthsCheck.cs), B10: every minimum tag length from one search against an analysis at each length alone, timed, with the per-length estimate CSV |
+| `--family-world-report [project.fqproj] [output-dir]` | [FamilyWorldReport.cs](../FamilyQuant.Tests/FamilyWorldReport.cs), the family-world table a project stores, printed and exported |
 | `--family-world-check [project.fqproj] [world.fcf] [output-dir]` | [FamilyWorldCheck.cs](../FamilyQuant.Tests/FamilyWorldCheck.cs); B1 gate, gate study, B5 product pass under D11 and B6 per-family errors; live taxonomy lists in output |
 | `--coherence-check [panel.fcf] [classes.tsv] [output-dir]` | [CoherenceCheckRun.cs](../FamilyQuant.Tests/CoherenceCheckRun.cs) |
 | `--motif-check [evidence.fcf] [classes.tsv] [expected.tsv] [output-dir]` | [MotifCheckRun.cs](../FamilyQuant.Tests/MotifCheckRun.cs) |

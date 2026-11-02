@@ -16,13 +16,13 @@ internal static partial class Program
 {
     private sealed record SecondaryRuntimeFact(string Id, string Before, string Actual, bool Passed, string Operation, string Symbol);
 
-    private static int SecondaryRuntimeCommand(string[] args)
+    private static int SecondaryRuntimeCommand(string[] args, bool interactions = false)
     {
         if (args.Length is not (6 or 7) || args.Length == 7 && args[6] != "--negative-control")
             throw new ArgumentException("Supply frozen source root, native master audit, frozen app folder, fresh output, date and optional --negative-control.");
         string root = FindLedgerRoot()!, frozenRoot = Path.GetFullPath(args[1]), audit = Path.GetFullPath(args[2]);
         string legacyPath = Path.Combine(Path.GetFullPath(args[3]), "FamilyQuant.dll"), output = Path.GetFullPath(args[4]);
-        const string step = "FL-secondary-runtime";
+        string step = interactions ? "FL-secondary-interactions" : "FL-secondary-runtime";
         if (Directory.Exists(output) && Directory.EnumerateFileSystemEntries(output).Any()) throw new IOException("Runtime output must be fresh.");
         Directory.CreateDirectory(output);
         var inventory = JsonSerializer.Deserialize<FeatureLedger.Inventory>(File.ReadAllText(Path.Combine(root, "docs/feature-ledger-scan.json")))!;
@@ -51,7 +51,7 @@ internal static partial class Program
             Console.SetOut(new LedgerProofWriter(original, transcript));
             Check("secondary runtime loads the exact frozen source build", legacy.GetCustomAttribute<AssemblyInformationalVersionAttribute>()?.InformationalVersion
                 .EndsWith("+" + FeatureLedger.ReferenceCommit, StringComparison.Ordinal) == true);
-            SecondaryCacheRuntime(legacy, output, args.Length == 7, Add);
+            if (!interactions) SecondaryCacheRuntime(legacy, output, args.Length == 7, Add);
             foreach (var theme in new[] { Themes.AppTheme.Dark, Themes.AppTheme.Light })
             {
                 Themes.ThemeManager.Apply(theme);
@@ -59,12 +59,21 @@ internal static partial class Program
                 // retained once after comparing the two theme executions below.
                 var captured = new Dictionary<string, SecondaryRuntimeFact>(facts, StringComparer.Ordinal);
                 facts.Clear();
-                SecondaryControlsRuntime(legacy, output, theme, args.Length == 7, Add);
-                SecondaryLockRuntime(legacy, output, theme, Add);
-                SecondaryIdentityRuntime(legacy, output, theme, Add);
-                SecondarySuperRuntime(legacy, output, theme, Add);
-                SecondaryGridRuntime(legacy, output, theme, Add);
-                SecondaryComputeRuntime(legacy, output, theme, Add);
+                if (interactions)
+                {
+                    SecondaryComputeInteractions(legacy, output, theme, Add);
+                    SecondaryIdentityChooser(legacy, output, theme, Add);
+                    SecondaryGridBoundaries(legacy, output, theme, args.Length == 7, Add);
+                }
+                else
+                {
+                    SecondaryControlsRuntime(legacy, output, theme, args.Length == 7, Add);
+                    SecondaryLockRuntime(legacy, output, theme, Add);
+                    SecondaryIdentityRuntime(legacy, output, theme, Add);
+                    SecondarySuperRuntime(legacy, output, theme, Add);
+                    SecondaryGridRuntime(legacy, output, theme, Add);
+                    SecondaryComputeRuntime(legacy, output, theme, Add);
+                }
                 if (theme == Themes.AppTheme.Dark)
                 {
                     foreach (var fact in captured) facts.Add(fact.Key, fact.Value);
@@ -85,7 +94,9 @@ internal static partial class Program
             {
                 if (facts.TryGetValue(row.Id, out var fact))
                 {
-                    bool negativeProbe = args.Length == 7 && row.Source == "FamilyQuant/ComputeXicWindow.xaml" && row.Line == 37;
+                    bool negativeProbe = args.Length == 7 && (interactions
+                        ? row.Source == "FamilyQuant/GridCopy.cs" && row.Line == 51
+                        : row.Source == "FamilyQuant/ComputeXicWindow.xaml" && row.Line == 37);
                     if (fact.Passed || negativeProbe) Check("secondary runtime " + row.Id + ": " + fact.Operation, fact.Passed, fact.Actual);
                     else { skipped++; Console.WriteLine("  SKIP  " + row.Id + ": native values differ or the required action was not established; remains OPEN."); }
                     results.Add(new(row.Id, row.Kind, row.Source, row.Line, fact.Passed, fact.Before, fact.Actual,

@@ -47,7 +47,9 @@ internal static partial class Program
             Path.Combine(output, "native/native-cases.json") }) Artifact(path);
         string executed = Path.Combine(output, "executed"); Directory.CreateDirectory(executed);
         foreach (string file in new[] { "LedgerMemberFactComparison.cs", "LedgerMemberFactComparison.Messages.cs", "Program.ShellRouteNative.cs",
-            "Program.ShellMainMessages.cs", "Program.ShellMainReceipts.cs", "Program.ShellMessageFrames.cs", "Program.Commands.ShellRoutes.cs" })
+            "Program.ShellMainMessages.cs", "Program.ShellMainReceipts.cs", "Program.ShellMessageFrames.cs", "Program.Commands.ShellRoutes.cs",
+            "Program.ShellSeproFixture.cs", "Program.Commands.ShellSeproFixture.cs", "Program.ShellProofWindows.cs",
+            "Program.Commands.ShellProofWindows.cs", "FamilyQuant.Tests.csproj" })
         {
             string target = Path.Combine(executed, file); File.Copy(Path.Combine(root, "FamilyQuant.Tests", file), target); Artifact(target);
         }
@@ -55,6 +57,12 @@ internal static partial class Program
         {
             string target = Path.Combine(executed, Path.GetFileName(assembly)); File.Copy(assembly, target); Artifact(target);
         }
+        foreach (string file in new[] { "SeproPckg2.dll", "PatternTools.dll" })
+        {
+            string target = Path.Combine(executed, file); File.Copy(Path.Combine(root, "FamilyQuant/DLLs", file), target); Artifact(target);
+            Artifact(Path.Combine(root, "FamilyQuant/DLLs", file));
+        }
+        Artifact(Path.Combine(root, "FamilyQuant.Tests/FamilyQuant.Tests.csproj"));
         var inventory = JsonSerializer.Deserialize<FeatureLedger.Inventory>(File.ReadAllText(Path.Combine(root, "docs/feature-ledger-scan.json")))!;
         var rowsById = inventory.Observations.ToDictionary(row => row.Id, StringComparer.Ordinal);
         var implementationHashes = ShellMainImplementation(root).ToDictionary(path => path,
@@ -93,7 +101,7 @@ internal static partial class Program
     private static string[] ShellMainImplementation(string root)
     {
         string[] appNames = ["MainWindow", "ShellDialogs", "ShellDocumentState", "HomeControl", "ComputeXicViewModel", "QuantifyControl"];
-        string[] testNames = ["LedgerMemberFactComparison", "Program.ShellRouteNative", "Program.ShellMainMessages", "Program.ShellMainReceipts"];
+        string[] testNames = ["LedgerMemberFactComparison", "Program.ShellRouteNative", "Program.ShellMainMessages", "Program.ShellMainReceipts", "Program.ShellSeproFixture", "Program.ShellProofWindows"];
         var app = Directory.GetFiles(Path.Combine(root, "FamilyQuant"), "*", SearchOption.TopDirectoryOnly)
             .Where(path => path.EndsWith(".cs", StringComparison.Ordinal) || path.EndsWith(".xaml", StringComparison.Ordinal))
             .Where(path => appNames.Any(name => Path.GetFileName(path).StartsWith(name + ".", StringComparison.Ordinal)));

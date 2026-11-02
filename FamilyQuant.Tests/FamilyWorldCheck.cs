@@ -76,6 +76,9 @@ namespace FamilyQuant.Tests
         private static string R(double v) => v.ToString("R", CultureInfo.InvariantCulture);
         private static string N0(int v) => v.ToString(CultureInfo.InvariantCulture);
 
+        private static bool HasRemovedTaxon(FamilyWorldProtein protein, ICollection<string> providerTaxa, ICollection<string> sampleTaxa) =>
+            FamilyWorld.IsOfTaxa(protein, providerTaxa) || FamilyWorld.IsOfTaxa(protein, sampleTaxa);
+
         private static void RunOn(string projectPath, string worldPath, string outDir, Action<string, bool, string?> check)
         {
             var watch = System.Diagnostics.Stopwatch.StartNew();
@@ -88,11 +91,11 @@ namespace FamilyQuant.Tests
             List<FastaItemExtended> sampleTargets = sampleItems.Where(i => i != null
                 && !SequenceLabels.IsDecoy(i.SequenceIdentifier ?? string.Empty)
                 && !(i.SequenceIdentifier ?? string.Empty).StartsWith(SequenceLabels.ContaminantPrefix, StringComparison.Ordinal)).ToList();
-            var sampleTaxa = new SortedSet<string>(sampleTargets.Select(i => FamilyWorld.TaxonOf(i.Description)).Where(t => t.Length > 0), StringComparer.Ordinal);
+            var sampleTaxa = FamilyWorldAnalysis.SampleTaxa(sample);
             var sampleAccessions = new HashSet<string>(sampleTargets.Select(i => FamilyWorld.BaseAccession(FamilyNaming.Accession(i.SequenceIdentifier))), StringComparer.Ordinal);
             Log("project: " + N(sampleItems.Count) + " proteins, " + N(sampleTargets.Count) + " targets, taxa " + string.Join(",", sampleTaxa) +
                 "; " + N(quant.Count) + " quant rows, " + N(manifest.SpectrumComparisonRows.Count) + " spectrum rows");
-            check("family world: the sample's targets name their taxon (OX=)", sampleTaxa.Count > 0 && sampleTargets.All(i => FamilyWorld.TaxonOf(i.Description).Length > 0),
+            check("family world: the sample's targets name their taxon (OX=)", sampleTaxa.Count > 0 && sampleTargets.All(i => FamilyWorld.TaxaOf(i.Description).Count > 0),
                 N(sampleTaxa.Count) + " taxa");
 
             FamilyClusterFile worldFile = FamilyClusterFile.Load(worldPath);
@@ -124,19 +127,19 @@ namespace FamilyQuant.Tests
 
             List<FamilyWorldProtein> Without(TaxonMembers members, string label)
             {
-                bool Out(FamilyWorldProtein p) => members.Organisms.Contains(p.Taxon) || sampleTaxa.Contains(p.Taxon)
+                bool Out(FamilyWorldProtein p) => HasRemovedTaxon(p, members.Organisms, sampleTaxa)
                     || members.Accessions.Contains(p.Accession) || sampleAccessions.Contains(p.Accession);
                 List<FamilyWorldProtein> kept = all.Where(p => !Out(p)).ToList();
-                int byHeader = all.Count(p => members.Organisms.Contains(p.Taxon) || sampleTaxa.Contains(p.Taxon));
+                int byHeader = all.Count(p => HasRemovedTaxon(p, members.Organisms, sampleTaxa));
                 Log(label + " removed: " + N(all.Count - kept.Count) + " proteins (" + N(byHeader) + " by OX=, " +
                     N(all.Count - kept.Count - byHeader) + " by UniProt's list or the sample database, " +
                     N(all.Count(p => p.FromPanel) - kept.Count(p => p.FromPanel)) + " of them panel entries)");
                 check("family world: the world without the " + label + " holds none of its proteins",
-                    kept.All(p => !members.Accessions.Contains(p.Accession) && !members.Organisms.Contains(p.Taxon)), null);
+                    kept.All(p => !members.Accessions.Contains(p.Accession) && !HasRemovedTaxon(p, members.Organisms, sampleTaxa)), null);
                 return kept;
             }
             List<FamilyWorldProtein> withoutSpecies = Without(species, "species");
-            bool OwnSpecies(FamilyWorldProtein p) => species.Organisms.Contains(p.Taxon) || sampleTaxa.Contains(p.Taxon)
+            bool OwnSpecies(FamilyWorldProtein p) => HasRemovedTaxon(p, species.Organisms, sampleTaxa)
                 || species.Accessions.Contains(p.Accession) || sampleAccessions.Contains(p.Accession);
             Line("world_without_species", N0(withoutSpecies.Count));
 
@@ -774,7 +777,7 @@ namespace FamilyQuant.Tests
 
         /// <summary>The genus above a taxon in UniProt's taxonomy lineage, or empty when there is none. Kept in the
         /// output folder so a rerun answers offline.</summary>
-        private static (string Id, string Name) Genus(HttpClient client, string taxon, string outDir, Action<string> log)
+        internal static (string Id, string Name) Genus(HttpClient client, string taxon, string outDir, Action<string> log)
         {
             string cache = Path.Combine(outDir, "family_world_lineage_" + taxon + ".tsv");
             if (File.Exists(cache))
@@ -888,6 +891,14 @@ namespace FamilyQuant.Tests
         /// without any data file.</summary>
         internal static void RunFixtures(Action<string, bool, string?> check)
         {
+            var joinedFile = new FamilyClusterFile { MyExtendedFastaItems = new List<FastaItemExtended> { new() {
+                SequenceIdentifier = "sp|P00991|JOINED", Sequence = "ACDEFGHIK",
+                Description = "First OS=First source OX=21 : Second OS=Second source OX=23" } } };
+            var joined = FamilyWorld.Collect(joinedFile).Single();
+            check("B11 study removal recognizes a joined secondary taxon from either provider or sample",
+                HasRemovedTaxon(joined, new HashSet<string> { "23" }, new HashSet<string>())
+                && HasRemovedTaxon(joined, new HashSet<string>(), new HashSet<string> { "23" })
+                && !HasRemovedTaxon(joined, new HashSet<string> { "24" }, new HashSet<string>()), null);
             static ProteinEvidence Family(string family) => new ProteinEvidence { Family = family };
             const string alpha = "MKTAYIAKQRQISFVKSHFSRQLEERLGLIEVQAPILSRVGDGTQDNLSGAEKAVQVKVKALPDAQFEVVHSLAKWKRQTLGQHDFSAGEGLYTHMKALRPDEDRLSPLHSVYVDQWDWERVMGDGERQFSTLKSTVEAIWAGIKATEAAVSEEFGLAPFLPDQIHFVHSQELLSRYPDLDAKGRERAIAKDLGAVFLVGIGGKLSDGHRHDVRAPDYDDWETPA";
             const string beta = "GSHMNEQLRASTWCYPKGDVLAEFRHNWTCQPSVDGKLMYETRHAFNSQWGCVPLDKTRENYMWAHGSFIQKDLVCRTEPGYWNHQAMSFDVKLRETCGYPANWHQ";
@@ -1156,6 +1167,43 @@ namespace FamilyQuant.Tests
             check("result table fixture: the export has the family rows and five global rows, all with the same columns",
                 compositionCsv.TrimEnd('\n').Split('\n').Length == 1 + groupTable.Composition.Count + 5
                 && compositionCsv.TrimEnd('\n').Split('\n').Select(FieldCount).Distinct().SequenceEqual(new[] { 15 }), null);
+
+            // ---- B10: every minimum tag length from one search, equal to a pass run at that length alone
+            string Json(object value) => System.Text.Json.JsonSerializer.Serialize(value);
+            FamilyPeptideAttribution lengthPass = FamilyEnvelopeQuant.AttributePeptides(prepared, FamilyEnvelopeQuant.BuildAttributionFromCuration(rows, sample));
+            int[] someLengths = { 7, 8, 9, 12 };
+            IReadOnlyList<FamilyWorldPassResult> filtered = FamilyWorldPass.RunLengths(lengthPass, world, new FamilyWorldOptions(), someLengths);
+            check("family world lengths fixture (B10): one search at the lowest length gives each length's pass exactly",
+                filtered.Count == 4 && someLengths.Select((l, i) => Json(filtered[i]) ==
+                    Json(FamilyWorldPass.Run(lengthPass, world, new FamilyWorldOptions { MinimumTagLength = l }))).All(same => same)
+                && filtered[0].Peptides(FamilyWorldOutcome.TooShort) == 0 && filtered[2].Peptides(FamilyWorldOutcome.TooShort) == 1,
+                string.Join(",", filtered.Select(f => f.Peptides(FamilyWorldOutcome.TooShort))));
+            var both = new FamilyClusterFile();
+            both.MyExtendedFastaItems.AddRange(sample.MyExtendedFastaItems);
+            both.MyExtendedFastaItems.AddRange(known.MyExtendedFastaItems);
+            FamilyWorldOptions OptionsAt(int length) => new FamilyWorldOptions { MinimumTagLength = length };
+            FamilyWorldAnalysisResult Single(int length) => FamilyWorldAnalysis.Complete(lengthPass,
+                FamilyWorldPass.Run(lengthPass, world, OptionsAt(length)), both, spectra, world, "fixture", null, OptionsAt(length),
+                FamilyWorldErrors.DefaultMinimumKnownCredits);
+            FamilyWorldAnalysisResult every = FamilyWorldAnalysis.CompleteLengths(lengthPass,
+                FamilyWorldPass.RunLengths(lengthPass, world, new FamilyWorldOptions(), FamilyWorldOptions.LengthChoices), both, spectra, world,
+                "fixture", null, new FamilyWorldOptions(), FamilyWorldErrors.DefaultMinimumKnownCredits);
+            FamilyWorldSummary chosenTable = every.Summary;
+            List<FamilyWorldSummary>? lengthTables = chosenTable.Lengths;
+            List<FamilyWorldLengthEstimate>? estimates = chosenTable.LengthEstimates;
+            chosenTable.Lengths = null;
+            chosenTable.LengthEstimates = null;
+            check("family world lengths fixture (B10): the default table is the one-length analysis at 9, byte for byte",
+                chosenTable.MinimumTagLength == 9 && Json(chosenTable) == Json(Single(9).Summary), null);
+            chosenTable.Lengths = lengthTables;
+            chosenTable.LengthEstimates = estimates;
+            check("family world lengths fixture (B10): every length 7 to 15 has its complete table, equal to an analysis at that length alone",
+                lengthTables != null && lengthTables.Select(t => t.MinimumTagLength).SequenceEqual(FamilyWorldOptions.LengthChoices)
+                && lengthTables.All(t => Json(t) == Json(Single(t.MinimumTagLength).Summary)), null);
+            check("family world lengths fixture (B10): the quick estimate per length reads its table, and a length is chosen without a search",
+                estimates != null && estimates.Count == 9 && estimates.Zip(lengthTables!).All(x => Json(x.First) == Json(FamilyWorldErrors.Estimate(x.Second)))
+                && Json(chosenTable.ForLength(12)!) == Json(lengthTables![5]) && chosenTable.ForLength(6) == null
+                && lengthTables[0].KnownLanded >= lengthTables[2].KnownLanded, null);
 
             check("family world fixture: the verdict at the roadmap's bars",
                 Verdict(0.95, 0.20, 0.05) == FamilyWorldVerdict.Pass

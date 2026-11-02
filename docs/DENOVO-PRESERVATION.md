@@ -77,6 +77,38 @@ matching. The native check compares absolute paths first, then records paths rel
 the fixture root so repeated comparison JSON is independent of the output folder.
 
 Those fixtures never open the empty RAW-name files as acquired data and perform no extraction
-or search. There is no overlap with earlier batches. The combined cohort has 309 proposed
+or search. There is no overlap with earlier batches. At that checkpoint the cohort had 309 proposed
 VERIFIED observations and 310 OPEN observations. Exact remaining counts and evidence are in
 the native audit mapping; no unsupported row is closed by this aggregate total.
+
+`--prove-denovo-commands` exercises the actual frozen/current buttons for import,
+reconciliation and positive homology search, with status and data recorded after each route.
+Five program-selected PSMs from the explicitly supplied trusted SEPro package seed a small
+synthetic CSV fixture; one unmatched-scan row supplies a positive additive search case.
+The original package is hashed before/after. No RAW extraction is performed.
+
+Chooser/export evidence includes success, not only refusal. A native common-dialog driver
+operates only on the invoking test process and UI thread. It sends no global keyboard or
+mouse input. Both programs select actual folder, SEPro and curation paths and write three
+chosen exports. Data and written bytes are compared. Cancellation and missing/failed-reader,
+invalid-package and invalid-curation commands preserve prior data and paths in the fixtures.
+
+The 41-row `changed-copy-facts-41.json` assesses user-visible meaning instead of requiring
+unchanged prose. Forty facts are present. Observation `FQ15-0061551CF9D6` combines assignment
+export with the retired Layer 5 partition screen and is explicitly sent to Paulo for a ruling;
+it is neither VERIFIED nor an inferred DROP. No applicable missing fact was found in this
+packet, so no product restoration was made. Completed FQLook style rows are separate.
+
+For other status literals, a receipt requires the actual frozen PDB call site, occurrence of
+that literal in its executed message and complete matching current messages. A conditional
+call site alone cannot cover an unexecuted arm. Formatting tokens are outside that text test.
+Raw traces, paths and durations remain in the packet. The canonical comparison names the
+explicit fixture path argument symbolically and excludes elapsed duration; data, user facts,
+observations and exported-file hashes must otherwise repeat byte-for-byte.
+
+The tightened actual-command packet supports 119 observations: 91 newly evidenced rows and
+28 rechecks against the starting ledger. It passed 232 assertions without failure. The
+checkout's De novo cohort has 400 proposed VERIFIED and 219 OPEN rows; excluding FQLook's
+24 completed style observations leaves 195 in the EV lane. The native audit remains the
+authority for counts after merges. This packet does not claim coverage for the remaining
+observations or for the former homology-export button's new Results entry point.

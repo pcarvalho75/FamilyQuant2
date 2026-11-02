@@ -144,3 +144,10 @@ Finished steps, moved here from docs/ROADMAP.md. The board shows them as green.
 | B6 | The error beside every claim: for each family, the decoy rate and the known-answer right rate, stored in the project. A family with too little evidence shows that instead of a number | M | 1 | 🟢 | B7 | Every family row has both; reproducible; conserved families checked by hand | OP | not started | 0% | 0% | T+1 |
 | B7 | Result: three parts per family (identified, de novo in your database, de novo only in the family world) plus one global unexplained bucket, and the "Database gap" ranking: the families with the most signal missing from your database. An export writes a FASTA of the family-world proteins the tags hit, as suggested additions for the person to add and search again in PatternLab. The program never changes the database itself. The screen, the CSV and Help state the minimum tag length and the in-scope rule beside the result | M | 1 | 🟢 | B8 | Screen and CSV from one table; every number from the program; the rules in force are visible on the screen and in the export, and stored in the project; both themes | RS | not started | 0% | 0% | T+1 |
 
+### W1 Family world
+
+| ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
+|---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
+| B11 | Several taxa on one target: a joined header keeps all its taxa, and one such target no longer stops the file | L | 0.1 | 🟢 | R3a | Two-species fixture passes; Ana and Bothrops audits unchanged | EV | not started | 0% | 0% | T+0 |
+| B10a | Core: complete tables for minimum tag lengths 7 to 15, stored with the result | M | 0.1 | 🟢 | B10b, B10c | Each length equals a run at that length alone; on master | OP | not started | 0% | 0% | T+0 |
+
