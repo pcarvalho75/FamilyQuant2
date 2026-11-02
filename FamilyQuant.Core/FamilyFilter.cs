@@ -68,8 +68,7 @@ namespace FamilyQuant
 
             if (hideDecoys)
             {
-                result = result.Where(a => !(a.SequenceIdentifier ?? string.Empty)
-                    .StartsWith(DecoyPrefix, StringComparison.Ordinal));
+                result = result.Where(a => !SequenceLabels.IsDecoy(a.SequenceIdentifier ?? string.Empty));
             }
 
             if (hideContaminants)

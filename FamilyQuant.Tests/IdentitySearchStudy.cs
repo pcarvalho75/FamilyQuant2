@@ -105,11 +105,7 @@ internal static class IdentitySearchStudy
             writer.WriteLine(FormattableString.Invariant($"{row.Identity}\t{row.Groups}\t{row.TargetGroups}\t{row.MixedGroups}\t{row.Score:R}\t{row.TargetRelativeScore:R}"));
     }
 
-    private static string Hash(string path)
-    {
-        using var stream = File.OpenRead(path);
-        return Convert.ToHexString(SHA256.HashData(stream));
-    }
+    private static string Hash(string path) => TestFileHash.Upper(path);
 
     private sealed class TeeWriter(TextWriter first, TextWriter second) : TextWriter
     {

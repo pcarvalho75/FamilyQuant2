@@ -51,12 +51,7 @@ public partial class MainWindow
                 // A .fqproj carries its own quantitation: the curation table shows it at once.
                 _ = owner.cgc.SetFullXicQuantAsync(owner.loadedQuant, owner.loadedManifest?.PerRunTic);
 
-                owner.MenuItemSaveFCF.IsEnabled = true;
-                owner.MenuItemSaveProject.IsEnabled = true;
-                owner.MenuItemComputeXic.IsEnabled = true;
-                owner.MenuItemSpectrumComparison.IsEnabled =
-                    (owner.loadedManifest?.SpectrumComparisonRows?.Count ?? 0) > 0 || owner.loadedQuant.Count > 0;
-                owner.MenuItemReanotateSEPro.IsEnabled = true;
+                owner.RefreshProjectCommandAvailability(resetSpectrum: true);
                 owner.lastSpectrumComparisonCsvPath = null;
                 owner.DocumentState.Open(loaded.fcf, ProjectStore.IsProjectPath(path) ? System.IO.Path.GetFullPath(path) : null);
                 owner.TrackCuration(loaded);

@@ -9,19 +9,19 @@ $env:DOTNET_PROCESSOR_COUNT = '4'
 
 `--screens <dir>` is isolated from the regular suite and all scientific export
 commands. Optional `--screen-fcf` and `--screen-project` paths are read only.
-Without them, captures use a synthetic curation fixture and empty Analytics.
+Without them, captures use a synthetic curation fixture and empty Results.
 The manifest labels those states explicitly. No RAW file is opened.
 
 The harness loads `App.InitializeComponent()`, selects the .NET 10 Fluent theme
 through `ThemeMode`, shows the real windows off screen, drains layout work, then
 draws each client area through a `VisualBrush`. Product styles remain installed,
-including legacy styles until the theme migration removes them. Native title
+including compatibility views until their owning steps remove them. Native title
 bars, dialogs and operating system chrome are outside the image.
 
 Output has `light/1366x820`, `light/1024x768`, `dark/1366x820` and
 `dark/1024x768` folders. Dimensions are client viewports at 96 DPI. Each folder
 contains Home, Build, Curation controls and browser, De novo and advanced De novo,
-Analytics, Compute, Super Cluster preview, Lock manager, Spectrum table, Identity
+Results, the Compute compatibility wrapper, Super Cluster preview, Lock manager, Spectrum table, Identity
 scan, Text report and Help. The identity scan shows stored scan rows when the
 project has them; otherwise it truthfully shows the empty state.
 
@@ -38,3 +38,5 @@ A failed capture or changed input returns a nonzero exit code and does not write
 a successful manifest. Run into a fresh step directory for review provenance.
 The quick suite checks command isolation, the matrix, missing arguments and an
 encoded PNG's exact dimensions. It does not run the real-data capture matrix.
+
+Focused screen producers and their exact arguments are listed in [the command catalog](../docs/INDEX.md). Legacy capture names are stable review identifiers; they are not the main menu order.

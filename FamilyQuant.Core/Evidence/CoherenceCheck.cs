@@ -202,7 +202,7 @@ namespace FamilyQuant.Evidence
             (description ?? string.Empty).IndexOf("(Fragment", StringComparison.OrdinalIgnoreCase) >= 0;
 
         private static CoherenceFlag Flag(string code, string message) => new CoherenceFlag { Code = code, Message = message };
-        private static string Count(int value) => value.ToString(CultureInfo.InvariantCulture);
+        private static string Count(int value) => CsvFormatting.Number(value);
         private static string Range(int low, int high) => low == high ? Count(low) : Count(low) + " to " + Count(high);
     }
 }

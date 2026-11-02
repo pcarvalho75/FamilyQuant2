@@ -98,3 +98,8 @@ Finished steps, moved here from docs/ROADMAP.md. The board shows them as green.
 | X10 | One path for errors, progress and cancel in Core; no message box below the App layer | M | 3 | F6 | X3, X5, S6 | A suite check fails on `MessageBox` in Core; each long operation cancels cleanly | AS | not started | 0% | 0% | T+3 |
 | X3 | Clustering: `USearchTools` and `RedundancyTools` with clear result types, cancel and progress | H | 3 | X2, X10 | C6 | Same families frozen against current: Bjararaca exhaustive, Viperidae fast at identity 85 (exhaustive is about 2 billion pairs, ruled out on 2026-11-01); memo and gate tests kept | AS | not started | 0% | 0% | T+3 |
 
+### W7 Releases (Paulo publishes each one)
+
+| ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
+|---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
+| H1 | Cooldown at the middle, by the `halt-team-for-regroup` skill: everyone finished the step in hand, all branches merged, housekeeping, duplicate-code review, roadmap readjusted from measured speed | H | 2 | | R2, R3 | All worker branches merged; full suite and golden green; ledger status reported; roadmap version 3 written | Orchestrator | done | 100% | 100% | done |

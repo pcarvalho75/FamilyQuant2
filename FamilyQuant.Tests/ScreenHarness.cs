@@ -285,7 +285,7 @@ namespace FamilyQuant.Tests
         private static T Field<T>(object instance, string name) => (T)instance.GetType().GetField(name, Any)!.GetValue(instance)!;
         private static void Set(object instance, string name, object? value) => instance.GetType().GetField(name, Any)!.SetValue(instance, value);
         private static void Call(object instance, string name, params object[] args) => instance.GetType().GetMethod(name, Any)!.Invoke(instance, args);
-        private static string FileHash(string path) { using var file = File.OpenRead(path); return Convert.ToHexString(SHA256.HashData(file)); }
+        private static string FileHash(string path) => TestFileHash.Upper(path);
         private sealed record CaptureInfo(string File, string Theme, int PixelWidth, int PixelHeight, string Screen,
             string EffectiveTheme);
 

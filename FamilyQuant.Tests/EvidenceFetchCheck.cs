@@ -144,7 +144,7 @@ namespace FamilyQuant.Tests
                     check("frozen field count: " + name, expected == observed,
                         expected.ToString(CultureInfo.InvariantCulture) + " reference, " + observed.ToString(CultureInfo.InvariantCulture) + " observed");
                 }
-                string At(int offset, string fallback) => args.Length > flag + offset ? args[flag + offset] : fallback;
+                string At(int offset, string fallback) => TestArguments.EmptyPassesThrough(args, flag, offset, fallback);
             }
             catch (Exception ex) { check("native evidence fetch check completed", false, ex.GetBaseException().Message); }
         }
@@ -159,11 +159,7 @@ namespace FamilyQuant.Tests
             return value.Replace(". ", ", ");
         }
 
-        private static string FileHash(string path)
-        {
-            using FileStream input = File.OpenRead(path);
-            return Convert.ToHexString(SHA256.HashData(input));
-        }
+        private static string FileHash(string path) => TestFileHash.Upper(path);
 
         private static string CurationHash(FamilyClusterFile file) => Hash(writer =>
         {

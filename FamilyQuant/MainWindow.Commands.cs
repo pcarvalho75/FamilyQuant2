@@ -72,6 +72,7 @@ public partial class MainWindow
 
     private void RefreshShellMenuState()
     {
+        RefreshProjectCommandAvailability();
         bool project = cgc != null;
         MenuItemSaveAs.IsEnabled = project;
         MenuItemExport.IsEnabled = project;

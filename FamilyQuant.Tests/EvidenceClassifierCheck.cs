@@ -181,7 +181,7 @@ namespace FamilyQuant.Tests
                     sourceGuardViolations = violations,
                 }, new JsonSerializerOptions { WriteIndented = true }));
                 Console.WriteLine("Classification report: " + output);
-                string At(int offset, string fallback) => args.Length > flag + offset ? args[flag + offset] : fallback;
+                string At(int offset, string fallback) => TestArguments.EmptyPassesThrough(args, flag, offset, fallback);
             }
             catch (Exception ex) { check("native evidence classification check completed", false, ex.GetBaseException().Message); }
         }

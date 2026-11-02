@@ -126,6 +126,7 @@ namespace FamilyQuant.Tests
                 ShellStatusBridgeTests();
                 HomeStartTests(shellWork);
                 ShellNavigationTests(shellWork);
+                AppCommandReuseTests(shellWork);
                 ShellProjectOperationTests(shellWork);
                 ShellSavingTests(shellWork);
                 ShellWindowPreferenceTests(shellWork);
@@ -524,6 +525,8 @@ namespace FamilyQuant.Tests
             }
 
             Section("CSV export - locale and escaping");
+            CoreReuseContractTests();
+            SharedTestHelperContracts(workDir);
             CsvTests();
 
             Section("Core operation outcomes, progress and cancellation");
@@ -796,6 +799,7 @@ namespace FamilyQuant.Tests
             ShellStatusTests(workDir);
             HomeStartTests(workDir);
             ShellNavigationTests(workDir);
+            AppCommandReuseTests(workDir);
             ShellProjectOperationTests(workDir);
             ShellSavingTests(workDir);
             ShellWindowPreferenceTests(workDir);
@@ -830,7 +834,7 @@ namespace FamilyQuant.Tests
             }
         }
 
-        private static bool Throws<T>(Action action, Action<string>? capture = null) where T : Exception
+        internal static bool Throws<T>(Action action, Action<string>? capture = null) where T : Exception
         {
             try
             {

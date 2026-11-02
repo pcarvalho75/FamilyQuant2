@@ -192,8 +192,7 @@ namespace FamilyQuant.Evidence
                         matched++;
                     }
                 if (matched == 0) throw new InvalidDataException("UniProt answered about none of the accessions in a requested batch.");
-                string currentRelease = response.Headers.TryGetValues("x-uniprot-release", out IEnumerable<string>? values)
-                    ? values.FirstOrDefault() ?? string.Empty : string.Empty;
+                string currentRelease = UniProtHttp.Release(response);
                 if (currentRelease.Length == 0)
                     throw new InvalidDataException("UniProt omitted its release. No evidence was applied.");
                 if (release != null && release != currentRelease)
@@ -244,28 +243,7 @@ namespace FamilyQuant.Evidence
             });
         }
 
-        private static async Task<HttpResponseMessage> GetWithRetry(HttpClient client, string url, CancellationToken cancellationToken)
-        {
-            for (int attempt = 1; ; attempt++)
-            {
-                HttpResponseMessage? response = null;
-                try { response = await client.GetAsync(url, cancellationToken).ConfigureAwait(false); }
-                catch (HttpRequestException) when (attempt < Attempts) { }
-                catch (TaskCanceledException) when (attempt < Attempts && !cancellationToken.IsCancellationRequested) { }
-                if (response != null)
-                {
-                    if (response.IsSuccessStatusCode) return response;
-                    int status = (int)response.StatusCode;
-                    if (attempt == Attempts || (status != 429 && status < 500))
-                    {
-                        response.Dispose();
-                        throw new HttpRequestException("UniProt refused the evidence batch (HTTP "
-                            + status.ToString(System.Globalization.CultureInfo.InvariantCulture) + ").", null, response.StatusCode);
-                    }
-                    response.Dispose();
-                }
-                await Task.Delay(TimeSpan.FromSeconds(attempt), cancellationToken).ConfigureAwait(false);
-            }
-        }
+        private static Task<HttpResponseMessage> GetWithRetry(HttpClient client, string url, CancellationToken cancellationToken) =>
+            UniProtHttp.GetWithRetryAsync(client, url, Attempts, status => "UniProt refused the evidence batch (HTTP " + status.ToString(System.Globalization.CultureInfo.InvariantCulture) + ").", cancellationToken);
     }
 }

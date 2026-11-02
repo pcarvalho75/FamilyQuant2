@@ -35,8 +35,7 @@ namespace FamilyQuant.Tests
             try
             {
                 int flag = Array.IndexOf(args, Argument);
-                string At(int offset, string fallback) =>
-                    args.Length > flag + offset && args[flag + offset].Length > 0 ? args[flag + offset] : fallback;
+                string At(int offset, string fallback) => TestArguments.EmptyFallsBack(args, flag, offset, fallback);
                 string input = At(1, "D:/FamilyQuant-data/out-opus/e4-ana-panel-neighbours.fcf");
                 string classes = At(2, "D:/FamilyQuant-data/baseline/classes_all.tsv");
                 string svmpClasses = Path.Combine(Path.GetDirectoryName(classes)!, "classes.tsv");

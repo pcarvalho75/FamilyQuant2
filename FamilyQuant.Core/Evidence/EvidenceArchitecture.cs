@@ -199,8 +199,6 @@ namespace FamilyQuant.Evidence
             return ranges;
         }
 
-        private static string[] Domains(ProteinEvidence? evidence) => evidence?.Pfam == null ? Array.Empty<string>()
-            : evidence.Pfam.Select(d => d.Accession).Where(d => !string.IsNullOrWhiteSpace(d)).Distinct(StringComparer.Ordinal)
-                .OrderBy(d => d, StringComparer.Ordinal).ToArray();
+        private static string[] Domains(ProteinEvidence? evidence) => EvidenceDomains.Ordered(evidence);
     }
 }

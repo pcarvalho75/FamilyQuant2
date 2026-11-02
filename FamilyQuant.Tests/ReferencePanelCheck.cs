@@ -50,8 +50,7 @@ namespace FamilyQuant.Tests
             try
             {
                 int flag = Array.IndexOf(args, Argument);
-                string At(int offset, string fallback) =>
-                    args.Length > flag + offset && args[flag + offset].Length > 0 ? args[flag + offset] : fallback;
+                string At(int offset, string fallback) => TestArguments.EmptyFallsBack(args, flag, offset, fallback);
                 string input = At(1, "D:/FamilyQuant-data/out-evidence/ana-evidence.fcf");
                 string outDir = At(2, "D:/FamilyQuant-data/out-opus");
                 Directory.CreateDirectory(outDir);
@@ -227,7 +226,6 @@ namespace FamilyQuant.Tests
                 .Select(k => k.Value.ToString(CultureInfo.InvariantCulture) + "," + Field(k.Key.Split('\t')[0]) + "," + Field(k.Key.Split('\t')[1]))));
         }
 
-        private static string Field(string value) =>
-            value.IndexOfAny(new[] { ',', '"', '\r', '\n' }) >= 0 ? "\"" + value.Replace("\"", "\"\"") + "\"" : value;
+        private static string Field(string value) => TestCsvFields.Field(value);
     }
 }

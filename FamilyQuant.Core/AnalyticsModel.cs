@@ -441,9 +441,9 @@ namespace FamilyQuant
             sb.Append('\n');
         }
 
-        private static string Num(double v) => v.ToString("R", CultureInfo.InvariantCulture);
+        private static string Num(double v) => CsvFormatting.RoundTrip(v);
 
-        private static string Int(int v) => v.ToString(CultureInfo.InvariantCulture);
+        private static string Int(int v) => CsvFormatting.Number(v);
 
         /// <summary>RFC 4180 quoting: a field carrying a comma, a quote or a newline is wrapped in quotes
         /// with inner quotes doubled. Sequences and run names should never contain them; this is a guard.</summary>

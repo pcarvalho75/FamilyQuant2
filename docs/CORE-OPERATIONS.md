@@ -1,5 +1,7 @@
 # Core operation contract
 
+Validation counts in this note are the recorded milestone results, not a live suite total. Use the [command catalog](INDEX.md) for current invocations and report the exact tested commit.
+
 X10 publishes these WPF-free types in `FamilyQuant.Operations`:
 
 - `OperationContext`: one per operation, shared by nested phases; exposes the
