@@ -15,6 +15,7 @@ public partial class QuantifyControl : UserControl
         ViewModel = viewModel;
         InitializeComponent();
         DataContext = viewModel;
+        Loaded += (_, _) => ViewModel.Operations = AppOperationHost.BindWindow(this, ViewModel.Operations);
         FilterControl.Attach(viewModel.Filters);
         viewModel.Completed += result => Completed?.Invoke(result);
     }

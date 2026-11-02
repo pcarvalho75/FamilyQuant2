@@ -1,0 +1,46 @@
+<UserControl x:Class="FamilyQuant.BusyLogo"
+ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+ Focusable="False" IsHitTestVisible="False" AutomationProperties.Name="FamilyQuant">
+ <!-- Geometry follows images/FamilyQuant_logo.svg. Colour belongs to the current theme. -->
+ <Viewbox Stretch="Uniform" StretchDirection="DownOnly" MaxWidth="340" MaxHeight="220">
+  <Canvas Width="512" Height="416">
+   <Path Stroke="{DynamicResource MutedBrush}" StrokeThickness="2" Opacity="0.35" Data="M92,353 L420,353"/>
+   <Path x:Name="BarLeft" Fill="{DynamicResource AccentBrush}"><Path.Data><RectangleGeometry Rect="107,262,46,90" RadiusX="8" RadiusY="8"/></Path.Data></Path>
+   <Path x:Name="BarMiddle" Fill="{DynamicResource AccentBrush}"><Path.Data><RectangleGeometry Rect="233,214,46,138" RadiusX="8" RadiusY="8"/></Path.Data></Path>
+   <Path x:Name="BarRight" Fill="{DynamicResource AccentBrush}"><Path.Data><RectangleGeometry Rect="359,282,46,70" RadiusX="8" RadiusY="8"/></Path.Data></Path>
+   <Canvas x:Name="FamilyLeft">
+    <Canvas.RenderTransform><ScaleTransform CenterX="130" CenterY="150"/></Canvas.RenderTransform>
+    <Path Stroke="{DynamicResource AccentBrush}" StrokeThickness="2.4" Opacity="0.45" Data="M130,150 L96,116 M130,150 L168,124 M130,150 L106,186 M130,150 L160,182"/>
+    <Path Fill="{DynamicResource AccentBrush}"><Path.Data><GeometryGroup>
+     <EllipseGeometry Center="96,116" RadiusX="10" RadiusY="10"/><EllipseGeometry Center="168,124" RadiusX="11" RadiusY="11"/>
+     <EllipseGeometry Center="106,186" RadiusX="9" RadiusY="9"/><EllipseGeometry Center="160,182" RadiusX="8" RadiusY="8"/>
+    </GeometryGroup></Path.Data></Path>
+   </Canvas>
+   <Canvas x:Name="FamilyMiddle">
+    <Canvas.RenderTransform><ScaleTransform CenterX="256" CenterY="132"/></Canvas.RenderTransform>
+    <Path Stroke="{DynamicResource AccentBrush}" StrokeThickness="2.4" Opacity="0.45" Data="M256,132 L214,104 M256,132 L300,108 M256,132 L222,172 M256,132 L294,168 M256,132 L256,78"/>
+    <Path Fill="{DynamicResource AccentBrush}"><Path.Data><GeometryGroup>
+     <EllipseGeometry Center="214,104" RadiusX="10" RadiusY="10"/><EllipseGeometry Center="300,108" RadiusX="11" RadiusY="11"/>
+     <EllipseGeometry Center="222,172" RadiusX="9" RadiusY="9"/><EllipseGeometry Center="294,168" RadiusX="10" RadiusY="10"/>
+     <EllipseGeometry Center="256,78" RadiusX="8" RadiusY="8"/>
+    </GeometryGroup></Path.Data></Path>
+   </Canvas>
+   <Canvas x:Name="FamilyRight">
+    <Canvas.RenderTransform><ScaleTransform CenterX="382" CenterY="150"/></Canvas.RenderTransform>
+    <Path Stroke="{DynamicResource AccentBrush}" StrokeThickness="2.4" Opacity="0.45" Data="M382,150 L348,118 M382,150 L418,126 M382,150 L356,186 M382,150 L408,180"/>
+    <Path Fill="{DynamicResource AccentBrush}"><Path.Data><GeometryGroup>
+     <EllipseGeometry Center="348,118" RadiusX="10" RadiusY="10"/><EllipseGeometry Center="418,126" RadiusX="10" RadiusY="10"/>
+     <EllipseGeometry Center="356,186" RadiusX="9" RadiusY="9"/><EllipseGeometry Center="408,180" RadiusX="8" RadiusY="8"/>
+    </GeometryGroup></Path.Data></Path>
+   </Canvas>
+   <Path Fill="{DynamicResource AccentBrush}"><Path.Data><GeometryGroup>
+    <EllipseGeometry Center="130,150" RadiusX="22" RadiusY="22"/>
+    <EllipseGeometry Center="256,132" RadiusX="25" RadiusY="25"/>
+    <EllipseGeometry Center="382,150" RadiusX="22" RadiusY="22"/>
+   </GeometryGroup></Path.Data></Path>
+   <TextBlock Canvas.Left="92" Canvas.Top="370" Width="328" Text="FamilyQuant" TextAlignment="Center"
+    FontSize="40" FontWeight="SemiBold" Foreground="{DynamicResource TextBrush}"/>
+  </Canvas>
+ </Viewbox>
+</UserControl>

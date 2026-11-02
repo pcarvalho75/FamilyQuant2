@@ -31,6 +31,7 @@ public partial class DeNovoControl : UserControl
         { if (ViewModel.IsBusy) ViewModel.ShowStatus(message); })));
         InitializeComponent();
         DataContext = ViewModel;
+        Loaded += (_, _) => ViewModel.Operations = AppOperationHost.BindWindow(this, ViewModel.Operations);
         ScreenBindings.Attach(this, ViewModel);
         ApplyReviewColumnTooltips(); ApplyHomologyColumnTooltips();
         ViewModel.PropertyChanged += (_, _) => RefreshPresentation();
