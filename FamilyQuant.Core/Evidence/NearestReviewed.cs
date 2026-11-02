@@ -116,7 +116,7 @@ namespace FamilyQuant.Evidence
         }
 
         public static bool IsDecoy(FastaItemExtended item) =>
-            (item.SequenceIdentifier ?? string.Empty).StartsWith(SequenceLabels.DecoyPrefix, StringComparison.Ordinal);
+            SequenceLabels.IsDecoy(item.SequenceIdentifier ?? string.Empty);
 
         /// <summary>The targets of the file, in file order.</summary>
         public static List<FastaItemExtended> Targets(FamilyClusterFile file) =>

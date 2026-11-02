@@ -146,7 +146,7 @@ public partial class DeNovoControl
 
             var sfd = new SaveFileDialog
             {
-                Filter = "CSV files (*.csv)|*.csv|All files (*.*)|*.*",
+                Filter = FileDialogFilters.Csv,
                 FileName = suggestedName,
                 Title = title
             };

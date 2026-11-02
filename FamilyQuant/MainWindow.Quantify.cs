@@ -39,7 +39,7 @@ public partial class MainWindow
             loadedQuant = result.Rows;
             loadedManifest = result.Manifest;
             lastSpectrumComparisonCsvPath = result.SpectrumComparisonCsvPath;
-            MenuItemSpectrumComparison.IsEnabled = result.SpectrumComparisonRows.Count > 0 || loadedQuant.Count > 0;
+            RefreshProjectCommandAvailability(spectrumAvailable: result.SpectrumComparisonRows.Count > 0 || loadedQuant.Count > 0);
             _ = cgc!.SetFullXicQuantAsync(loadedQuant, loadedManifest.PerRunTic);
             DocumentState.MarkModified();
             UpdateGuide();
@@ -49,8 +49,6 @@ public partial class MainWindow
         GridApp.Children.Clear();
         home = null; usearch = null; dnc = null; analytics = null;
         GridApp.Children.Add(control);
-        MenuItemSaveFCF.IsEnabled = MenuItemSaveProject.IsEnabled = true;
-        MenuItemComputeXic.IsEnabled = false;
         UpdateGuide();
     }
 

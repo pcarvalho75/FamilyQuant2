@@ -108,7 +108,7 @@ namespace FamilyQuant
             {
                 FastaItemExtended item = items[position];
                 if (string.IsNullOrWhiteSpace(item.Description)
-                    && (item.SequenceIdentifier ?? string.Empty).StartsWith(HomologyOptions.DefaultDecoyLabel, StringComparison.Ordinal))
+                    && SequenceLabels.IsDecoy(item.SequenceIdentifier ?? string.Empty))
                     continue;
 
                 if (!membersByFamily.TryGetValue(item.UserID, out List<Member>? members))

@@ -33,10 +33,7 @@ public partial class MainWindow
             owner.usearch = null;
             owner.dnc = null;
             owner.analytics = null;
-            owner.MenuItemSaveFCF.IsEnabled = owner.cgc != null;
-            owner.MenuItemSaveProject.IsEnabled = owner.cgc != null;
-            owner.MenuItemComputeXic.IsEnabled = owner.cgc != null;
-            owner.MenuItemReanotateSEPro.IsEnabled = owner.cgc != null;
+
 
             owner.home = new HomeControl { UseShellNavigationRail = true };
             owner.home.OpenRequested += () => owner.MenuItemCluster_Click(owner, new RoutedEventArgs());
@@ -79,12 +76,7 @@ public partial class MainWindow
             owner.home = null;
             owner.GridApp.Children.Add(owner.cgc);
 
-            owner.MenuItemSaveFCF.IsEnabled = true;
-            owner.MenuItemSaveProject.IsEnabled = true;
-            owner.MenuItemComputeXic.IsEnabled = true;
-            owner.MenuItemSpectrumComparison.IsEnabled =
-                (owner.loadedManifest?.SpectrumComparisonRows?.Count ?? 0) > 0 || owner.loadedQuant.Count > 0;
-            owner.MenuItemReanotateSEPro.IsEnabled = true;
+            owner.RefreshProjectCommandAvailability(resetSpectrum: true);
 
             owner.UpdateGuide();
         }
@@ -105,11 +97,7 @@ public partial class MainWindow
             owner.loadedManifest = null;
             owner.loadedCuration = null;
             owner.lastSpectrumComparisonCsvPath = null;
-            owner.MenuItemSaveFCF.IsEnabled = false;
-            owner.MenuItemSaveProject.IsEnabled = false;
-            owner.MenuItemComputeXic.IsEnabled = false;
-            owner.MenuItemSpectrumComparison.IsEnabled = false;
-            owner.MenuItemReanotateSEPro.IsEnabled = false;
+
 
             owner.usearch = new USearchLib();
             owner.GridApp.Children.Add(owner.usearch);
@@ -124,10 +112,7 @@ public partial class MainWindow
             owner.usearch = null;
             owner.analytics = null;
             owner.home = null;
-            owner.MenuItemSaveFCF.IsEnabled = owner.cgc != null;
-            owner.MenuItemSaveProject.IsEnabled = owner.cgc != null;
-            owner.MenuItemComputeXic.IsEnabled = false;
-            owner.MenuItemReanotateSEPro.IsEnabled = false;
+
 
             owner.dnc = new DeNovoControl(owner.SharedDeNovoFilters());
             owner.dnc.HomologyCompleted += owner.KeepHomologyResult;
@@ -178,10 +163,7 @@ public partial class MainWindow
             owner.dnc = null;
             owner.home = null;
             owner.analytics = control;
-            owner.MenuItemSaveFCF.IsEnabled = owner.cgc != null;
-            owner.MenuItemSaveProject.IsEnabled = owner.cgc != null;
-            owner.MenuItemComputeXic.IsEnabled = false;
-            owner.MenuItemReanotateSEPro.IsEnabled = false;
+
 
             owner.GridApp.Children.Add(owner.analytics);
 
@@ -228,8 +210,7 @@ public partial class MainWindow
                 owner.loadedManifest = window.ResultManifest;
                 owner.DocumentState.MarkModified();
                 owner.lastSpectrumComparisonCsvPath = window.SpectrumComparisonCsvPath;
-                owner.MenuItemSpectrumComparison.IsEnabled =
-                    (owner.loadedManifest?.SpectrumComparisonRows?.Count ?? 0) > 0 || owner.loadedQuant.Count > 0;
+                owner.RefreshProjectCommandAvailability(spectrumAvailable: (owner.loadedManifest?.SpectrumComparisonRows?.Count ?? 0) > 0 || owner.loadedQuant.Count > 0);
 
                 // The curation table's Full XIC column follows the new quantitation at once (the users
                 // asked for the numbers in the table as well as in Analytics).
