@@ -74,6 +74,37 @@ namespace FamilyQuant
         public List<string> WorldProteins { get; set; } = new List<string>();
     }
 
+    /// <summary>One row of the result table (B7): a family's three parts, each counting only the peptides that
+    /// reach this family alone, with the family-world part's error beside it.</summary>
+    public sealed class FamilyWorldCompositionRow
+    {
+        public const string UniProtKind = "uniprot";
+        public const string CuratedKind = "curated";
+
+        public string Family { get; set; } = string.Empty;
+        /// <summary><see cref="UniProtKind"/> for a UniProt family; <see cref="CuratedKind"/> for a curated group whose
+        /// members carry no UniProt family, named by its members.</summary>
+        public string Kind { get; set; } = UniProtKind;
+        /// <summary>The curated groups (User IDs) whose members carry this family.</summary>
+        public List<int> CuratedUserIds { get; set; } = new List<int>();
+        public double IdentifiedEnvelope { get; set; }
+        public int IdentifiedPeptides { get; set; }
+        /// <summary>De novo peptides the project's own database places in this family.</summary>
+        public double DatabaseDeNovoEnvelope { get; set; }
+        public int DatabaseDeNovoPeptides { get; set; }
+        /// <summary>De novo peptides only the family world places in this family: the database gap.</summary>
+        public double WorldDeNovoEnvelope { get; set; }
+        public int WorldDeNovoPeptides { get; set; }
+        public double? WorldDecoyRate { get; set; }
+        public int WorldKnownCredited { get; set; }
+        public int WorldKnownCreditedTrue { get; set; }
+        public double? WorldRightRate { get; set; }
+        public string WorldEvidence { get; set; } = string.Empty;
+
+        [JsonIgnore]
+        public double TotalEnvelope => IdentifiedEnvelope + DatabaseDeNovoEnvelope + WorldDeNovoEnvelope;
+    }
+
     /// <summary>The stored table of the family world: the second pass, its rules and, per family, the error beside
     /// every number. It is what the result screen and its export read.</summary>
     public sealed class FamilyWorldSummary
@@ -98,6 +129,61 @@ namespace FamilyQuant
         public int KnownLanded { get; set; }
         public int KnownRight { get; set; }
         public List<FamilyWorldFamilySummary> Families { get; set; } = new List<FamilyWorldFamilySummary>();
+
+        /// <summary>The first pass's rule, in plain words, beside <see cref="Rules"/>.</summary>
+        public string CompositionRules { get; set; } = string.Empty;
+        /// <summary>The measured basis the composition closes on: identified envelope plus de novo reference-calibrated
+        /// envelope, each deduplicated peptide once (FamilyEnvelopeQuant's MeasuredTotalEnvelopeReferenceCalibrated).</summary>
+        public double MeasuredIdentifiedEnvelope { get; set; }
+        public double MeasuredDeNovoEnvelope { get; set; }
+        [JsonIgnore]
+        public double MeasuredTotalEnvelope => MeasuredIdentifiedEnvelope + MeasuredDeNovoEnvelope;
+        public List<FamilyWorldCompositionRow> Composition { get; set; } = new List<FamilyWorldCompositionRow>();
+        /// <summary>First-pass peptides whose curated groups reach several families: one shared row each.</summary>
+        public double SharedIdentifiedEnvelope { get; set; }
+        public double SharedDatabaseDeNovoEnvelope { get; set; }
+        /// <summary>Identified peptides the database search placed in no curated group.</summary>
+        public double UnattributedIdentifiedEnvelope { get; set; }
+        /// <summary>The one global unexplained bucket: de novo envelope neither the database nor the family world
+        /// credits (every outcome of the second pass but a credit).</summary>
+        public double UnexplainedEnvelope { get; set; }
+
+        /// <summary>
+        /// The result table's export: one row per family with its three parts and the family-world error, then the
+        /// global rows that close on the measured total. Every row states both passes' rules.
+        /// </summary>
+        public string BuildCompositionCsv()
+        {
+            string Num(double v) => v.ToString("R", CultureInfo.InvariantCulture);
+            string Opt(double? v) => v.HasValue ? Num(v.Value) : string.Empty;
+            string Int(int v) => v.ToString(CultureInfo.InvariantCulture);
+            string Fraction(double v) => MeasuredTotalEnvelope > 0 ? Num(v / MeasuredTotalEnvelope) : string.Empty;
+            string Q(string v) => CsvFormatting.AlwaysQuoted(v);
+            string rule = Q(CompositionRules + " | " + Rules);
+            var csv = new StringBuilder();
+            csv.Append(string.Join(",", new[]
+            {
+                "row", "kind", "family", "curated_user_ids", "identified_envelope", "database_de_novo_envelope",
+                "family_world_de_novo_envelope", "total_envelope", "fraction_of_measured_total", "family_world_decoy_rate",
+                "family_world_known_credited", "family_world_known_credited_true", "family_world_right_rate",
+                "family_world_evidence", "rule",
+            }.Select(Q))).Append('\n');
+            foreach (FamilyWorldCompositionRow r in Composition)
+                csv.Append(string.Join(",", Q("family"), Q(r.Kind), Q(r.Family),
+                    Q(string.Join(" ", r.CuratedUserIds.Select(id => id.ToString(CultureInfo.InvariantCulture)))),
+                    Num(r.IdentifiedEnvelope), Num(r.DatabaseDeNovoEnvelope), Num(r.WorldDeNovoEnvelope), Num(r.TotalEnvelope),
+                    Fraction(r.TotalEnvelope), Opt(r.WorldDecoyRate), Int(r.WorldKnownCredited), Int(r.WorldKnownCreditedTrue),
+                    Opt(r.WorldRightRate), Q(r.WorldEvidence), rule)).Append('\n');
+            void Global(string label, double envelope) =>
+                csv.Append(string.Join(",", Q("global"), Q(string.Empty), Q(label), Q(string.Empty), string.Empty, string.Empty, string.Empty,
+                    Num(envelope), Fraction(envelope), string.Empty, string.Empty, string.Empty, string.Empty, Q(string.Empty), rule)).Append('\n');
+            Global("identified, shared between families", SharedIdentifiedEnvelope);
+            Global("de novo in the database, shared between families", SharedDatabaseDeNovoEnvelope);
+            Global("de novo in the family world, shared between families", SharedEnvelope);
+            Global("identified, in no family", UnattributedIdentifiedEnvelope);
+            Global("de novo, unexplained", UnexplainedEnvelope);
+            return csv.ToString();
+        }
 
         /// <summary>
         /// The export: one row per family with its error beside it, then the rows that close on the unattributed
@@ -254,6 +340,114 @@ namespace FamilyQuant
                 a.Credit = a.Tag.Length < options.MinimumTagLength
                     ? new FamilyWorldCredit { Outcome = FamilyWorldOutcome.TooShort }
                     : credits[a.Tag];
+        }
+
+        public const string CompositionRule =
+            "first pass: the project's curated groups, each mapped to the UniProt families its members carry (a group " +
+            "whose members carry none keeps its own row); a peptide reaching one family is that family's own, a peptide " +
+            "reaching several goes to a shared row; fractions of the measured total";
+
+        /// <summary>
+        /// Completes the result table (B7): the first pass's peptides mapped from curated groups to UniProt families,
+        /// beside the family-world part already in <paramref name="summary"/>. A peptide shared between curated groups
+        /// that map to one UniProt family is that family's own. The rows close on the measured total: family parts,
+        /// the three shared rows, the identified peptides in no family and the one unexplained de novo bucket.
+        /// </summary>
+        public static void Compose(FamilyWorldSummary summary, FamilyPeptideAttribution firstPass, FamilyClusterFile curation,
+            IReadOnlyDictionary<string, IReadOnlyList<string>> labels)
+        {
+            if (summary == null) throw new ArgumentNullException(nameof(summary));
+            if (firstPass == null) throw new ArgumentNullException(nameof(firstPass));
+            if (curation == null) throw new ArgumentNullException(nameof(curation));
+            if (labels == null) throw new ArgumentNullException(nameof(labels));
+
+            List<FastaItemExtended> targets = (curation.MyExtendedFastaItems ?? new List<FastaItemExtended>())
+                .Where(i => i != null && !SequenceLabels.IsDecoy(i.SequenceIdentifier ?? string.Empty)).ToList();
+            var groupFamilies = new Dictionary<int, SortedSet<string>>();
+            foreach (FastaItemExtended item in targets)
+            {
+                if (!groupFamilies.TryGetValue(item.UserID, out SortedSet<string>? families)) groupFamilies[item.UserID] = families = FamilyWorld.NewFamilySet();
+                string accession = FamilyWorld.BaseAccession(FamilyNaming.Accession(item.SequenceIdentifier));
+                if (labels.TryGetValue(accession, out IReadOnlyList<string>? carried)) families.UnionWith(carried);
+            }
+            Dictionary<int, string> names = FamilyNaming.Names(targets);
+
+            var rows = new Dictionary<string, FamilyWorldCompositionRow>(StringComparer.OrdinalIgnoreCase);
+            FamilyWorldCompositionRow UniProtRow(string family) => rows.TryGetValue("u\u001f" + family, out FamilyWorldCompositionRow? row)
+                ? row : rows["u\u001f" + family] = new FamilyWorldCompositionRow { Family = family, Kind = FamilyWorldCompositionRow.UniProtKind };
+            FamilyWorldCompositionRow CuratedRow(int group) => rows.TryGetValue("c\u001f" + group.ToString(CultureInfo.InvariantCulture), out FamilyWorldCompositionRow? row)
+                ? row : rows["c\u001f" + group.ToString(CultureInfo.InvariantCulture)] = new FamilyWorldCompositionRow
+                {
+                    Family = names.TryGetValue(group, out string? name) && name.Length > 0 ? name : "group " + group.ToString(CultureInfo.InvariantCulture),
+                    Kind = FamilyWorldCompositionRow.CuratedKind,
+                    CuratedUserIds = { group },
+                };
+            foreach (var (group, families) in groupFamilies.OrderBy(kv => kv.Key))
+                foreach (string family in families)
+                    UniProtRow(family).CuratedUserIds.Add(group);
+
+            summary.CompositionRules = CompositionRule;
+            summary.MeasuredIdentifiedEnvelope = 0;
+            summary.MeasuredDeNovoEnvelope = 0;
+            summary.SharedIdentifiedEnvelope = 0;
+            summary.SharedDatabaseDeNovoEnvelope = 0;
+            summary.UnattributedIdentifiedEnvelope = 0;
+            foreach (FamilyAttributedPeptide attributed in firstPass.Peptides)
+            {
+                NativePeptideQuant p = attributed.Peptide;
+                bool identified = string.Equals(p.Side, NativeQuantFractions.SideIdentified, StringComparison.Ordinal);
+                double envelope = identified ? p.EnvelopeSum : p.ReferenceCalibratedEnvelope;
+                if (identified) summary.MeasuredIdentifiedEnvelope += envelope;
+                else summary.MeasuredDeNovoEnvelope += envelope;
+                if (attributed.FamilyUserIds.Count == 0)
+                {
+                    if (identified) summary.UnattributedIdentifiedEnvelope += envelope;
+                    continue; // an unattributed de novo peptide is the family world's
+                }
+                var reached = new List<FamilyWorldCompositionRow>();
+                foreach (int group in attributed.FamilyUserIds)
+                {
+                    if (groupFamilies.TryGetValue(group, out SortedSet<string>? families) && families.Count > 0)
+                        reached.AddRange(families.Select(UniProtRow));
+                    else reached.Add(CuratedRow(group));
+                }
+                reached = reached.Distinct().ToList();
+                if (reached.Count > 1)
+                {
+                    if (identified) summary.SharedIdentifiedEnvelope += envelope;
+                    else summary.SharedDatabaseDeNovoEnvelope += envelope;
+                    continue;
+                }
+                if (identified)
+                {
+                    reached[0].IdentifiedEnvelope += envelope;
+                    reached[0].IdentifiedPeptides++;
+                }
+                else
+                {
+                    reached[0].DatabaseDeNovoEnvelope += envelope;
+                    reached[0].DatabaseDeNovoPeptides++;
+                }
+            }
+            foreach (FamilyWorldFamilySummary f in summary.Families)
+            {
+                FamilyWorldCompositionRow row = UniProtRow(f.Family);
+                row.WorldDeNovoEnvelope = f.UniqueEnvelope;
+                row.WorldDeNovoPeptides = f.UniquePeptides;
+                row.WorldDecoyRate = f.DecoyRate;
+                row.WorldKnownCredited = f.KnownCredited;
+                row.WorldKnownCreditedTrue = f.KnownCreditedTrue;
+                row.WorldRightRate = f.RightRate;
+                row.WorldEvidence = f.Evidence;
+            }
+            summary.UnexplainedEnvelope = summary.Outcomes
+                .Where(o => o.Outcome != nameof(FamilyWorldOutcome.Credited) && o.Outcome != SharedOutcome).Sum(o => o.Envelope);
+            summary.Composition = rows.Values
+                .Where(r => r.TotalEnvelope > 0 || r.WorldKnownCredited > 0)
+                .OrderByDescending(r => r.TotalEnvelope).ThenBy(r => r.Kind, StringComparer.Ordinal)
+                .ThenBy(r => r.Family, StringComparer.OrdinalIgnoreCase).ThenBy(r => r.Family, StringComparer.Ordinal)
+                .ThenBy(r => r.CuratedUserIds.FirstOrDefault()).ToList();
+            foreach (FamilyWorldCompositionRow r in summary.Composition) r.CuratedUserIds.Sort();
         }
 
         /// <summary>The stored table: the pass, and per family in scope the decoy rate and the known-answer right
