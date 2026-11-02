@@ -24,6 +24,9 @@ internal static partial class Program
     [TestCommandTable]
     private static IEnumerable<TestCommand> AssayCommandTable() =>
     [
+        new("--clustering-improvements", 10000, TestCommandPhase.Raw, args => args.Length > 0 && args[0] == "--clustering-improvements", (args, _) => ClusteringImprovementAuditCommand(args)),
+        new("--clustering-improvements-replay", 10000, TestCommandPhase.Raw, args => args.Length > 0 && args[0] == "--clustering-improvements-replay", (args, _) => ClusteringImprovementReplayCommand(args)),
+        new("--test-clustering-improvements", 10000, TestCommandPhase.Raw, args => args.Length > 0 && args[0] == "--test-clustering-improvements", (_, _) => ClusteringImprovementTests(Path.Combine(Path.GetTempPath(), "FamilyQuant.Tests"))),
         new("--dependency-file-check", 100, TestCommandPhase.Raw, MatchesCommand001, RunCommand001),
         new("--test-dependencies", 200, TestCommandPhase.Raw, MatchesCommand002, RunCommand002),
         new("--test-usearch-binary", 10000, TestCommandPhase.Raw, args => args.Length > 0 && args[0] == "--test-usearch-binary", RunUseSearchBinaryTests),
