@@ -184,18 +184,8 @@ namespace FamilyQuant
             result.IdentificationConcordance.DeNovoFilterDescription = filterDescription;
             result.IdentificationConcordance.IsStrictDeNovoOnlyScope = strictDeNovoOnly;
 
-            foreach (ReconciledRow row in reconciliation)
-            {
-                if (row.Verdict != ReconciliationVerdict.DeNovoOnly
-                    && row.Verdict != ReconciliationVerdict.CoIsolatedExtra) continue;
-
-                string run = DeNovoReconciler.NormalizeRunName(row.DeNovo.RunName);
-                if (run.Length == 0) continue;
-
-                if (!result.ByRun.TryGetValue(run, out List<PeaksDeNovoRow>? rows))
-                    result.ByRun[run] = rows = new List<PeaksDeNovoRow>();
-                rows.Add(row.DeNovo);
-            }
+            foreach (var run in DeNovoInspectionSelection.GroupRetainedByRun(reconciliation))
+                result.ByRun.Add(run.Key, run.Value);
 
             return result;
         }

@@ -35,8 +35,8 @@ public sealed partial class DeNovoViewModel
     {
         if (Directory.Exists(ImportDirectory))
         {
-            try { LabelFilesFound = "Files found: " + Filters.Sources.Sum(source =>
-                DeNovoScreenOperations.CountExports(ImportDirectory, source)).ToString("N0", CultureInfo.CurrentCulture); }
+            try { LabelFilesFound = "Files found: " + DeNovoScreenOperations.CountSelectedExports(
+                ImportDirectory, Filters.Sources).ToString("N0", CultureInfo.CurrentCulture); }
             catch (IOException) { }
             catch (UnauthorizedAccessException) { }
         }

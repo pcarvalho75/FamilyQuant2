@@ -21,19 +21,7 @@ public static class DeNovoInspectionAudit
     public static DeNovoReconciliation AttachSources(DeNovoReconciliation result, DeNovoImport? import)
     {
         if (import == null || import.SourceId is "peaks-denovo-only" or "peaks-denovo-all") return result;
-        var sourceRows = new List<SourceAwareReviewQueueRow>();
-        foreach (var row in result.Rows)
-        {
-            var queue = DeNovoReconciliationReport.BuildReviewQueue(new[] { row });
-            if (queue.Count == 0) continue;
-            var q = queue[0];
-            sourceRows.Add(new SourceAwareReviewQueueRow {
-                SourceId = row.DeNovo.SourceId, Source = row.DeNovo.SourceId, ConfidenceField = row.DeNovo.ConfidenceField,
-                Run = q.Run, Scan = q.Scan, Verdict = q.Verdict, DeNovoSequence = q.DeNovoSequence, Alc = q.Alc,
-                MinResidueConfidence = q.MinResidueConfidence, DeNovoMz = q.DeNovoMz, Charge = q.Charge,
-                PatternLabSequence = q.PatternLabSequence, XCorr = q.XCorr, PatternLabMz = q.PatternLabMz, PpmApart = q.PpmApart });
-        }
-        result.SourceReviewQueue = sourceRows.OrderBy(q => q.Run, StringComparer.Ordinal).ThenBy(q => q.Scan).ToList();
+        result.SourceReviewQueue = DeNovoReviewTableBuilder.BuildWithSources(result.Rows);
         if (result.Overlap != null && import.Selections.Count > 0 && import.AppliedCriteria is { } criteria)
         {
             result.Overlap.SourceScopeLabel = import.SourceDisplayName;
