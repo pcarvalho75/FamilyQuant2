@@ -13,6 +13,8 @@ internal static partial class Program
     private static readonly Regex UiNamedColor = new(@"\b(?:Brushes|Colors)\.[A-Z][A-Za-z]+", RegexOptions.CultureInvariant);
     private static readonly Regex UiColorFactory = new(@"\b(?:Color\.(?:FromRgb|FromArgb|FromScRgb)|FreezeRgb|MakeBrush)\s*\((?<args>[^()]{1,180})\)", RegexOptions.CultureInvariant);
     private static readonly Regex UiColorNumber = new(@"^[+-]?(?:0x[0-9a-fA-F]+|(?:[0-9]+(?:\.[0-9]*)?|\.[0-9]+))[fFdDuUmM]?$", RegexOptions.CultureInvariant);
+    private static readonly Regex UiColorInitializer = new(@"\bnew\s*(?:(?:global::)?(?:System\.Windows\.Media\.)?Color\s*(?:\(\s*\))?|\(\s*\))\s*\{(?<members>[^{}]*)\}", RegexOptions.CultureInvariant);
+    private static readonly Regex UiColorComponent = new(@"\b(?:[ARGB]|Sc[ARGB])\s*=\s*(?:\(\s*(?:byte|float|double)\s*\)\s*)?(?<value>[^,}]+)", RegexOptions.CultureInvariant);
     private static readonly Regex UiXamlNamedColor = new("(?:Foreground|Background|BorderBrush|Fill|Stroke|Color)\\s*=\\s*[\"'](?<name>[A-Za-z]+)[\"']|Property\\s*=\\s*[\"'](?:Foreground|Background|BorderBrush|Fill|Stroke|Color)[\"']\\s+Value\\s*=\\s*[\"'](?<name>[A-Za-z]+)[\"']", RegexOptions.CultureInvariant);
 
     private static IEnumerable<int> UiColorLiteralPositions(string source)
@@ -24,6 +26,10 @@ internal static partial class Program
             string[] args = match.Groups["args"].Value.Split(',');
             if (args.Length is 3 or 4 && args.All(p => UiColorNumber.IsMatch(p.Trim()))) yield return match.Index;
         }
+        foreach (Match match in UiColorInitializer.Matches(source))
+            if (UiColorComponent.Matches(match.Groups["members"].Value)
+                .Any(component => UiColorNumber.IsMatch(component.Groups["value"].Value.Trim().Replace("_", "", StringComparison.Ordinal))))
+                yield return match.Index;
         foreach (Match match in UiXamlNamedColor.Matches(source))
             if (typeof(System.Windows.Media.Colors).GetProperty(match.Groups["name"].Value) != null) yield return match.Index;
     }
@@ -35,7 +41,14 @@ internal static partial class Program
                 "FreezeRgb(0x1F, 0x4E, 0x8C)", "Color.FromRgb(\n255,\n0,\n255)", "Foreground=\"White\"",
                 "Property=\"Background\" Value=\"Black\"" }.All(s => UiColorLiteralPositions(s).Any()));
         Check("UI color guard allows token references and dynamic brush factories",
-            !UiColorLiteralPositions("Foreground=\"{DynamicResource TextBrush}\"; Color.FromRgb(r, g, b); Palette.Axis").Any());
+            !UiColorLiteralPositions("Foreground=\"{DynamicResource TextBrush}\"; Color.FromRgb(r, g, b); Palette.Axis; new Color { R = r, G = g, B = b, A = a }").Any());
+        Check("UI color guard rejects fixed components in explicit and target-typed Color initializers",
+            new[] { "new Color { A = 255, R = 17, G = 34, B = 51 }",
+                "new System.Windows.Media.Color() { R = 0x11, G = 0x22, B = 0x33 }",
+                "Color value = new() { A = 255, R = red, G = green, B = blue }",
+                "new Color { ScA = 1f, ScR = .1f, ScG = .2f, ScB = .3f }",
+                "new Color { R = (byte)17, G = green, B = blue }" }
+            .All(s => UiColorLiteralPositions(s).Any()));
         string root = GoldenNumbers.FindRepository();
         // Orchestrator M33: roadmap rule 9 protects these export-only deck colors.
         const string protectedExport = "FamilyQuant/PresentationFigures.cs";
