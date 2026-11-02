@@ -137,7 +137,7 @@ internal static partial class Program
             MainWindow.UnsavedProjectChoiceOverride = oldChoice; MainWindow.ShellSettingsPathOverride = oldSettings; MainWindow.SelectSaveProjectPathOverride = oldSave; }
     }
 
-    private static int DatabaseGapLengthScreens(string projectPath, string output)
+    private static int DatabaseGapLengthScreens(string projectPath, string output, bool requireDefault = false)
     {
         EnsureApplication();
         if (Directory.Exists(output) && Directory.EnumerateFileSystemEntries(output).Any()) throw new IOException("Output must be fresh.");
@@ -158,11 +158,41 @@ internal static partial class Program
             var gap = (DatabaseGapControl)((ContentControl)control.FindName("DatabaseGapHost")).Content;
             var lengthChoice = (ComboBox)gap.FindName("ComboBoxMinimumTagLength");
             var exportChoice = (ComboBox)control.FindName("ComboBoxExportKind"); var button = (Button)control.FindName("ButtonExport");
+            if (requireDefault)
+            {
+                Check("default proof uses Core length 8 and a freshly stored top-level table at 8",
+                    FamilyWorldOptions.DefaultMinimumTagLength == 8 && root.MinimumTagLength == FamilyWorldOptions.DefaultMinimumTagLength);
+                Check("real Results opens at the Core default before any length choice, without a stored override",
+                    project.manifest.DatabaseGapMinimumTagLength == null && model.DatabaseGap.MinimumTagLength == FamilyWorldOptions.DefaultMinimumTagLength
+                    && Equals(lengthChoice.SelectedItem, FamilyWorldOptions.DefaultMinimumTagLength)
+                    && ReferenceEquals(model.DatabaseGap.Summary, root.ForLength(FamilyWorldOptions.DefaultMinimumTagLength)));
+            }
             foreach (var row in model.DatabaseGap.LengthRows)
                 transcript.Add(row.MinimumTagLength + " | " + row.LandedShare + " | " + row.DecoyRate + " | " + row.KnownAnswerRight + " | " + row.Availability);
-            foreach (int length in FamilyWorldOptions.LengthChoices)
+            // Capture the initial default before export status introduces output paths.
+            foreach (var theme in new[] { Themes.AppTheme.Dark, Themes.AppTheme.Light })
             {
-                lengthChoice.SelectedItem = length; PumpDispatcher();
+                Themes.ThemeManager.Apply(theme);
+                foreach (int length in (requireDefault ? new[] { FamilyWorldOptions.DefaultMinimumTagLength }
+                    : new[] { FamilyWorldOptions.DefaultMinimumTagLength, FamilyWorldOptions.LengthChoices[0] }).Distinct())
+                {
+                    if (!requireDefault) lengthChoice.SelectedItem = length;
+                    PumpDispatcher(); window.UpdateLayout();
+                    ScreenHarness.Save(window, Path.Combine(output, "lengths-" + theme + "-" + length + ".png"), 1180, 1040);
+                    if (requireDefault)
+                    {
+                        var scroll = (ScrollViewer)control.FindName("ScrollAnalytics");
+                        scroll.ScrollToBottom(); PumpDispatcher(); window.UpdateLayout();
+                        ScreenHarness.Save(window, Path.Combine(output, "details-" + theme + "-" + length + ".png"), 1180, 1040);
+                        scroll.ScrollToTop(); PumpDispatcher(); window.UpdateLayout();
+                    }
+                }
+            }
+            var lengths = requireDefault ? new[] { FamilyWorldOptions.DefaultMinimumTagLength } : FamilyWorldOptions.LengthChoices;
+            foreach (int length in lengths)
+            {
+                if (!requireDefault) lengthChoice.SelectedItem = length;
+                PumpDispatcher();
                 var active = root.ForLength(length);
                 bool ready = active != null && ReferenceEquals(model.DatabaseGap.Summary, active) && model.DatabaseGap.HasData && model.DatabaseGap.CanExportFasta;
                 exportsAgree &= ready;
@@ -183,22 +213,43 @@ internal static partial class Program
                         var records = File.ReadAllLines(paths[0]).Where(line => line.StartsWith('>')).Select(line => line[1..].Split(' ')[0]).ToHashSet(StringComparer.Ordinal);
                         equal = records.SetEquals(active!.Families.SelectMany(family => family.WorldProteins));
                         transcript.Add(length + " FASTA records: " + records.Count);
+                        // Reuse the real stored-world checker for exact sequences and headers,
+                        // not only accession membership.
+                        var stored = FamilyWorldFetcher.Stored(project.fcf);
+                        var actual = new Dictionary<string, System.Text.StringBuilder>(StringComparer.Ordinal);
+                        string? accession = null;
+                        foreach (string line in File.ReadAllLines(paths[0]))
+                            if (line.StartsWith('>'))
+                            {
+                                accession = line[1..].Split(' ')[0]; actual.Add(accession, new());
+                                equal &= line.EndsWith("world_sha256=" + stored.ContentSha256, StringComparison.Ordinal);
+                            }
+                            else if (accession != null) actual[accession].Append(line);
+                            else equal = false;
+                        var expected = stored.Entries.ToDictionary(entry => entry.Accession, entry => entry.Sequence, StringComparer.Ordinal);
+                        equal &= actual.All(record => expected.TryGetValue(record.Key, out string? sequence) && sequence == record.Value.ToString());
                     }
                     exportsAgree &= equal;
                 }
             }
-            Check("real length screen and both native exports follow every stored choice and repeat bytes", exportsAgree);
-            foreach (var theme in new[] { Themes.AppTheme.Dark, Themes.AppTheme.Light })
-            {
-                Themes.ThemeManager.Apply(theme);
-                foreach (int length in new[] { FamilyWorldOptions.DefaultMinimumTagLength, FamilyWorldOptions.LengthChoices[0] }.Distinct())
-                {
-                    lengthChoice.SelectedItem = length; PumpDispatcher(); window.UpdateLayout();
-                    ScreenHarness.Save(window, Path.Combine(output, "lengths-" + theme + "-" + length + ".png"), 1180, 1040);
-                }
-            }
+            Check(requireDefault ? "real default screen and both native exports agree with Core and repeat bytes without a length choice"
+                : "real length screen and both native exports follow every stored choice and repeat bytes", exportsAgree);
             Check("length screen leaves the copied project and computed tables unchanged", inputHash == FeatureLedgerEvidence.Hash(projectPath)
                 && storedTables == JsonSerializer.Serialize(root));
+            if (requireDefault && model.DatabaseGap.Summary is FamilyWorldSummary activeDefault)
+            {
+                var estimate = root.LengthEstimates?.Single(row => row.MinimumTagLength == FamilyWorldOptions.DefaultMinimumTagLength);
+                FeatureLedgerEvidence.WriteJson(Path.Combine(output, "default-values.json"), new
+                {
+                    inputSha256 = inputHash, defaultLength = FamilyWorldOptions.DefaultMinimumTagLength,
+                    storedTopLevelLength = root.MinimumTagLength, selectedLength = model.DatabaseGap.MinimumTagLength,
+                    storedOverride = project.manifest.DatabaseGapMinimumTagLength, activeDefault.WorldFingerprint, activeDefault.WorldProteins,
+                    activeDefault.MeasuredIdentifiedEnvelope, activeDefault.MeasuredDeNovoEnvelope, activeDefault.MeasuredTotalEnvelope,
+                    activeDefault.ResidualEnvelope, activeDefault.UnexplainedEnvelope, estimate
+                });
+                transcript.Add("Core default: " + FamilyWorldOptions.DefaultMinimumTagLength + "; stored top level: " + root.MinimumTagLength
+                    + "; stored override: " + (project.manifest.DatabaseGapMinimumTagLength?.ToString(System.Globalization.CultureInfo.InvariantCulture) ?? "none"));
+            }
             File.WriteAllLines(Path.Combine(output, "printed-lengths.txt"), transcript);
             foreach (string line in transcript) Console.WriteLine(line);
             Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
