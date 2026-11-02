@@ -24,8 +24,10 @@ namespace FamilyQuant
     {
         public FamilyClusterFile fcf { get; private set; }
         private string lastShellStatus = string.Empty;
+        private string saveResultStatus = string.Empty;
+        private object? statusTooltipBeforeSave;
 
-        public string ShellStatusText => DisplayedMode == null
+        public string ShellStatusText => saveResultStatus.Length > 0 ? saveResultStatus : DisplayedMode == null
             ? (HasFullXic ? "Family curation. Full XIC available." : "Family curation. No calculated shares.")
             : TextBlockStatusLine.Text.Replace("showing: ", string.Empty, StringComparison.Ordinal);
 
@@ -1099,7 +1101,7 @@ namespace FamilyQuant
             RefreshFullXicShares();
 
             var finalResult = FamilyFilter.Apply(
-                fcf.MyExtendedFastaItems,
+                fcf.MyExtendedFastaItems.OrderBy(a => a.UserID),
                 TextBoxSearch.Text,
                 CheckBoxShowXICOnly.IsChecked == true,
                 CheckBoxExcludeReverse.IsChecked == true,
@@ -1135,12 +1137,23 @@ namespace FamilyQuant
         private void UpdateStatusLine()
         {
             if (TextBlockStatusLine == null || fcf == null) return;
+            saveResultStatus = string.Empty;
+            if (statusTooltipBeforeSave != null)
+            {
+                TextBlockStatusLine.ToolTip = statusTooltipBeforeSave;
+                statusTooltipBeforeSave = null;
+            }
 
             TextBlockStatusLine.Text = ReportView.StatusLine(
                 DisplayedMode,
                 DisplayedSharedPolicy,
                 ReportView.QuantifiedFamilies(fcf.MyExtendedFastaItems),
                 FamilyFilter.CountFamilies(fcf.MyExtendedFastaItems));
+            PublishShellStatus();
+        }
+
+        private void PublishShellStatus()
+        {
             string current = ShellStatusText;
             if (!string.Equals(lastShellStatus, current, StringComparison.Ordinal))
             {
@@ -1173,7 +1186,10 @@ namespace FamilyQuant
             // Ordered by the curated family, so members of one family sit together in the order the
             // user sees. Ordering by USearchID did that only while reclustering still overwrote it;
             // with that field frozen it would scatter a curated family across the grid.
-            fcf.MyExtendedFastaItems = fcf.MyExtendedFastaItems.OrderBy(a => a.UserID).ToList();
+            // Evidence recipes and their Undo snapshots address the original protein positions.
+            // Preserve that order; the grid orders its own view above. Legacy files retain their path.
+            if (fcf.EvidenceRecipe == null)
+                fcf.MyExtendedFastaItems = fcf.MyExtendedFastaItems.OrderBy(a => a.UserID).ToList();
 
             LabelClusterThreshold.Content = fcf.ClusteringIdentity.ToString(CultureInfo.CurrentCulture) + "%";
             LabelWordSimilarity.Content = fcf.GroupingDescription();
@@ -1393,6 +1409,7 @@ namespace FamilyQuant
             UpdateGUI();
 
             UpdateUndoButton();
+            DocumentChanged?.Invoke(this, EventArgs.Empty);
         }
 
         // ===================================================================== batch edit
@@ -1577,6 +1594,7 @@ namespace FamilyQuant
         public void SaveFamilyClusterFile(string fileName)
         {
             fcf.Save(fileName);
+            ShowCurationOperationResult(fcf.LastSaveCheck?.Message ?? "Saved.");
         }
 
         private void DataGridResultGrid_LoadingRow(object sender, DataGridRowEventArgs e)
@@ -1672,22 +1690,29 @@ namespace FamilyQuant
         /// <summary>Fills every protein's Pfam domains from UniProt. They reach the file on the next save.</summary>
         private async void ButtonFetchDomains_Click(object sender, RoutedEventArgs e)
         {
+            if (evidenceFetchRunning) return;
             // Layer 1 can be pressed with a cell of the other tab still open, and a table in edit refuses
             // the refresh that follows.
             DataGridResultGrid.CommitEdit(DataGridEditingUnit.Row, true);
+            evidenceFetchRunning = true;
 
             string title = "Fetch evidence";
             string message;
             MessageBoxImage icon = MessageBoxImage.Information;
             bool fetched = false;
 
-            BeginWait("Asking UniProt for each protein's Pfam domains...");
+            BeginWait("Fetching protein evidence and reviewed references...");
             IsEnabled = false;
             try
             {
-                Evidence.EvidenceFetchResult result = await Evidence.EvidenceFetcher.FetchAsync(fcf, FetchDomainsHandlerOverride);
-                fetched = result.Asked > 0;
-                if (fetched) fcf.DomainSource = result.Source;
+                var progress = new Progress<Evidence.FetchProgress>(p => Dispatcher.BeginInvoke(new Action(() =>
+                {
+                    if (evidenceFetchRunning) WaitScreenMessage.Text = "Fetching evidence: " + p.CompletedBatches + " of " + p.TotalBatches
+                        + " batches or families; " + p.Found.ToString("N0", CultureInfo.CurrentCulture) + " entries received.";
+                })));
+                var outcome = await EvidenceFetchSession.FetchAsync(fcf, FetchDomainsHandlerOverride, progress);
+                Evidence.EvidenceFetchResult result = outcome.Evidence;
+                fetched = outcome.Changed;
 
                 int notFound = result.Asked - result.Found;
                 message = result.Asked == 0
@@ -1700,6 +1725,18 @@ namespace FamilyQuant
                       "They are in the Domains column, the Search box finds them, and the super cluster preview can " +
                       "choose by them. A protein too short for Pfam has none.\n\n" +
                       "Next step: save the file to keep them.";
+                if (outcome.Panel != null)
+                    message += "\n\nReviewed reference panel: " + outcome.Panel.Entries.Count.ToString("N0", CultureInfo.CurrentCulture)
+                        + " entries from " + outcome.Panel.Families.Count.ToString("N0", CultureInfo.CurrentCulture)
+                        + " families, " + outcome.Panel.Release + ". It is stored for offline grouping.";
+                if (outcome.PanelFailure != null)
+                {
+                    icon = MessageBoxImage.Warning;
+                    title = result.Asked > 0 ? "Evidence fetched; reference panel unchanged" : "Reference panel unchanged";
+                    message += (result.Asked > 0 ? "\n\nThe protein evidence was fetched, but the reviewed reference panel could not be updated. Reason given: "
+                        : "\n\nThe reviewed reference panel could not be updated. Stored protein evidence is unchanged. Reason given: ")
+                        + outcome.PanelFailure.Message + "\n\nNext step: check the internet connection and press Fetch evidence again.";
+                }
             }
             catch (Exception ex) when (ex is System.Net.Http.HttpRequestException || ex is TaskCanceledException
                                        || ex is System.Text.Json.JsonException || ex is System.IO.InvalidDataException)
@@ -1714,9 +1751,10 @@ namespace FamilyQuant
             {
                 IsEnabled = true;
                 EndWait();
+                evidenceFetchRunning = false;
             }
 
-            if (fetched) UpdateFilteredResults();
+            if (fetched) { UpdateFilteredResults(); DocumentChanged?.Invoke(this, EventArgs.Empty); }
 
             // Only with a person to answer it: in the test harness a modal box hangs the run.
             if (FetchDomainsHandlerOverride == null && PresentationSource.FromVisual(this) != null)
@@ -1800,13 +1838,7 @@ namespace FamilyQuant
         {
             if (ConfirmSuperClusterOverride != null) return ConfirmSuperClusterOverride(preview);
 
-            // No owner means the user left this screen while the preview was being built.
-            Window? owner = Window.GetWindow(this);
-            if (owner == null) return false;
-
-            var window = new SuperClusterPreviewWindow(preview) { Owner = owner };
-            window.ShowDialog();
-            return window.Confirmed;
+            return OpenGroupingReview(preview, false);
         }
 
         /// <summary>
@@ -1907,6 +1939,7 @@ namespace FamilyQuant
             AfterRegrouping();
 
             Console.WriteLine($"Super cluster created from {preview.JoiningFamilies.Count} families");
+            DocumentChanged?.Invoke(this, EventArgs.Empty);
         }
 
         /// <summary>
