@@ -51,6 +51,8 @@ internal static partial class Program
         Check("feature ledger rejects a changed inventory even if row counts are changed with it",
             FeatureLedger.Validate(inventory with { Scanner = "unapproved" }, markdown).Count > 0);
         FeatureLedgerEvidenceTests();
+        ShellMetadataComparisonTests();
+        ShellMessageFrameTests();
         string liveOutput = Path.Combine(Path.GetTempPath(), "FamilyQuant.Ledger.Live", Guid.NewGuid().ToString("N"));
         Directory.CreateDirectory(liveOutput);
         var live = LedgerPreservationTests(root, liveOutput, inventory);

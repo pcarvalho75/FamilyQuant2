@@ -1,0 +1,838 @@
+{
+  "schemaVersion": 1,
+  "step": "AS-cache-wire",
+  "frozenCommit": "e9b73064d8ff19b2fde3e3231240b636a64c0a91",
+  "runs": [
+    {
+      "id": "native",
+      "command": "D:\\FamilyQuant-wt\\assay\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --ledger-assay-cache D:/FamilyQuant-data/out-shell/N3/source D:/FamilyQuant-data/out-assay/m48-cache-ready \u00222026-11-02 04:08:21 -0800\u0022",
+      "executedAt": "2026-11-02 04:08:21 -0800",
+      "commit": "8a73535619de774932e4e0c738c5a9adaae30242",
+      "artifacts": [
+        {
+          "path": "D:\\FamilyQuant-data\\out-assay\\m48-cache-ready\\proofs.log",
+          "sha256": "4785CC4868A2016F8EFE7BF94B54472EF32E9099CA7CD1912A5A50F80E09DB45"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-assay\\m48-cache-ready\\actual-values.json",
+          "sha256": "D4BA12749E3BFB79E8DCC4ADFB92E96EB6417309A218DCDCEF1A7CD546129470"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-assay\\m48-cache-ready\\executed\\FamilyQuant.Core/DeNovo/DeNovoXicCache.cs",
+          "sha256": "D63E0B9022082142131FA26E1E050BA705133F492761C1D8C97321E4B7CC2B5B"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-assay\\m48-cache-ready\\executed\\FamilyQuant.Core/DeNovo/ExtractionCacheJson.cs",
+          "sha256": "02449AE15CDD325AAF5F974F5D867567194909661D77F1A646FE8E82430816BD"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-assay\\m48-cache-ready\\executed\\FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs",
+          "sha256": "46CA6872D443D30E3A496A87C2A92D7E4EDD9950AEDCB3E52848DA731DC53FDB"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-assay\\m48-cache-ready\\executed\\FamilyQuant.Tests/AssayCacheSnapshot.cs",
+          "sha256": "4DDF9F0DA5C35B6A2365A5398F0D8072CE77FF68E65B7D985455705AE21DAE3D"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-assay\\m48-cache-ready\\executed\\FamilyQuant.Tests/FeatureLedgerEvidence.Reporting.cs",
+          "sha256": "8633DCBB14E8DBF1746A1FD771AD4E9404900EB68BA46690A31EFC8DEDFA247B"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-assay\\m48-cache-ready\\executed\\FamilyQuant.Tests/FeatureLedgerEvidence.cs",
+          "sha256": "FCCFCE75E122616388FDD68B96AF3E3F7104DC809B61D1F48C3A4A07B9B1969C"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-assay\\m48-cache-ready\\executed\\FamilyQuant.Tests/Program.AssayCacheLedger.cs",
+          "sha256": "71F4E1AD3E8F36A42172188EE006C92E5C117F1583B30983DFD6BCABEB2AF560"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-assay\\m48-cache-ready\\executed\\FamilyQuant.Tests/Program.AssayRuntimeLedger.cs",
+          "sha256": "F91F1CC63E8B55F62DBF34C3C0421018749AE4FA6069B07978AAF2363816E3BE"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-assay\\m48-cache-ready\\executed\\FamilyQuant.Tests/Program.Commands.AssayLedger.cs",
+          "sha256": "4F72BD75DB34033DD2A24ACA553D82230DAF65940A12B17B873FD6F5BAE617AA"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-assay\\m48-cache-ready\\executed\\frozen\\FamilyQuant/DeNovo/DeNovoXicCache.cs",
+          "sha256": "28896247F0957D4D244802E5E41968B264CD075F3EC2381A1498B19D996AEEA1"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-assay\\m48-cache-ready\\executed\\frozen\\FamilyQuant/DeNovo/Ms1EnvelopeDetector.cs",
+          "sha256": "2BE7652D4FB2F3C44801773D52BA3787BAD054CA004D29CEA9ADAA9745654CA2"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-assay\\m48-cache-ready\\executed\\FamilyQuant.Tests.dll",
+          "sha256": "477543E61FF97BFB8D1DC89632D824B8F8C65886798B7066270492C299631821"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-assay\\m48-cache-ready\\executed\\FamilyQuant.Core.dll",
+          "sha256": "5E12F6FA166CAD69928F5A79E56DA1F3C7A248783E633E7EA0DF38CB031632D7"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-assay\\m48-cache-ready\\frozen-FamilyQuant.dll",
+          "sha256": "D764488C923945285E03B338E5A91BF28106A35B11AB465D8E2B23D125F03FD8"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-assay\\m48-cache-ready\\frozen-ReferenceGoldenHost.dll",
+          "sha256": "3745779F792A561D916ED1A7AF557192998A3BDE286AB6B7ADE33FA393FC6679"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-assay\\m48-cache-ready\\frozen-ReferenceGoldenHost.exe",
+          "sha256": "56F4F1347B4C1C0022E8AB136C75C5EDAFF90242D23383F0966CA27840A9AE43"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-assay\\m48-cache-ready\\frozen-host.log",
+          "sha256": "0E65B3EC7E70149A79E307FA3EE325666029EB8DB36D88675E62806C2360CADB"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-assay\\m48-cache-ready\\current\\blocked-ms1.json.tmp",
+          "sha256": "C20FFFD9198FC88300FF30679E721169B74CF632E2D611489653DCDD73A385EF"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-assay\\m48-cache-ready\\current\\blocked-xic.json.tmp",
+          "sha256": "E744A499BCFEB2354CDE24384BB9FF079F95D81CB994DEDF0E36C10638DC938B"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-assay\\m48-cache-ready\\current\\ms1.canonical.json",
+          "sha256": "26DACFC452C055D6F9D06CF3305937F0ECC60C828F94424FB4E8A74B6702D5FF"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-assay\\m48-cache-ready\\current\\ms1.json",
+          "sha256": "C20FFFD9198FC88300FF30679E721169B74CF632E2D611489653DCDD73A385EF"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-assay\\m48-cache-ready\\current\\staging.json",
+          "sha256": "14EC035F4C65A7EB2D60A3253FA88B955502CEEC3F067BCA6B8A46BB307FA33B"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-assay\\m48-cache-ready\\current\\xic.canonical.json",
+          "sha256": "B2BFBE12B1B669706499DDC9F54717B332FF5D3EC0803AA7B33D0637ECB2E6DE"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-assay\\m48-cache-ready\\current\\xic.json",
+          "sha256": "E744A499BCFEB2354CDE24384BB9FF079F95D81CB994DEDF0E36C10638DC938B"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-assay\\m48-cache-ready\\frozen\\blocked-ms1.json.tmp",
+          "sha256": "B84F06B833D8794C8D00BFAEA21A37B8D1CA7E82F599FF7F4D8FD275532F1726"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-assay\\m48-cache-ready\\frozen\\blocked-xic.json.tmp",
+          "sha256": "4AAFEBA830214D1B02F3B7233429A172B63B3621A35D13227E0AC462FFA4615F"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-assay\\m48-cache-ready\\frozen\\ms1.canonical.json",
+          "sha256": "26DACFC452C055D6F9D06CF3305937F0ECC60C828F94424FB4E8A74B6702D5FF"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-assay\\m48-cache-ready\\frozen\\ms1.json",
+          "sha256": "B84F06B833D8794C8D00BFAEA21A37B8D1CA7E82F599FF7F4D8FD275532F1726"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-assay\\m48-cache-ready\\frozen\\staging.json",
+          "sha256": "14EC035F4C65A7EB2D60A3253FA88B955502CEEC3F067BCA6B8A46BB307FA33B"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-assay\\m48-cache-ready\\frozen\\xic.canonical.json",
+          "sha256": "B2BFBE12B1B669706499DDC9F54717B332FF5D3EC0803AA7B33D0637ECB2E6DE"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-assay\\m48-cache-ready\\frozen\\xic.json",
+          "sha256": "4AAFEBA830214D1B02F3B7233429A172B63B3621A35D13227E0AC462FFA4615F"
+        }
+      ],
+      "workingDirectory": "D:\\FamilyQuant-wt\\assay"
+    }
+  ],
+  "rows": [
+    {
+      "observationId": "FQ15-058D38F232C5",
+      "implementation": [
+        {
+          "path": "FamilyQuant.Core/DeNovo/DeNovoXicCache.cs",
+          "symbol": "Native frozen/current cache wire and staging comparison",
+          "sha256": "D63E0B9022082142131FA26E1E050BA705133F492761C1D8C97321E4B7CC2B5B"
+        },
+        {
+          "path": "FamilyQuant.Core/DeNovo/ExtractionCacheJson.cs",
+          "symbol": "Native frozen/current cache wire and staging comparison",
+          "sha256": "02449AE15CDD325AAF5F974F5D867567194909661D77F1A646FE8E82430816BD"
+        },
+        {
+          "path": "FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs",
+          "symbol": "Native frozen/current cache wire and staging comparison",
+          "sha256": "46CA6872D443D30E3A496A87C2A92D7E4EDD9950AEDCB3E52848DA731DC53FDB"
+        }
+      ],
+      "proofs": [],
+      "note": "Executed native value/refusal check, with the specific comparison recorded below.",
+      "kindReceiptId": "native-export-storage-fact",
+      "compared": "FamilyQuant/DeNovo/DeNovoXicCache.cs:222 \u0022entries\u0022; native write/reopen compares top-level cache key entries and its complete fixture value; expected {\u002212|500.12345|2\u0022:{\u0022AreaMMinus1\u0022:-1,\u0022Charge\u0022:2,\u0022Failure\u0022:null,\u0022IsotopeAreas\u0022:[1.2345678901234567,5E-324,-1],\u0022IsotopePointCounts\u0022:[4,3,0],\u0022PrecursorMz\u0022:500.12345,\u0022RunName\u0022:\u0022synthetic-cache\u0022,\u0022ScanNoMS2\u0022:12,\u0022Tag\u0022:\u0022quoted \\u0022tag\\u0022, with \\u003Cmarkup\\u003E\u0022,\u0022UnderSampledArea\u0022:0.125,\u0022UnderSampledIsEstimate\u0022:true,\u0022UnderSampledIsotopes\u0022:1}}; actual {\u002212|500.12345|2\u0022:{\u0022AreaMMinus1\u0022:-1,\u0022Charge\u0022:2,\u0022Failure\u0022:null,\u0022IsotopeAreas\u0022:[1.2345678901234567,5E-324,-1],\u0022IsotopePointCounts\u0022:[4,3,0],\u0022PrecursorMz\u0022:500.12345,\u0022RunName\u0022:\u0022synthetic-cache\u0022,\u0022ScanNoMS2\u0022:12,\u0022Tag\u0022:\u0022quoted \\u0022tag\\u0022, with \\u003Cmarkup\\u003E\u0022,\u0022UnderSampledArea\u0022:0.125,\u0022UnderSampledIsEstimate\u0022:true,\u0022UnderSampledIsotopes\u0022:1}}"
+    },
+    {
+      "observationId": "FQ15-088FABB46324",
+      "implementation": [
+        {
+          "path": "FamilyQuant.Core/DeNovo/DeNovoXicCache.cs",
+          "symbol": "Native frozen/current cache wire and staging comparison",
+          "sha256": "D63E0B9022082142131FA26E1E050BA705133F492761C1D8C97321E4B7CC2B5B"
+        },
+        {
+          "path": "FamilyQuant.Core/DeNovo/ExtractionCacheJson.cs",
+          "symbol": "Native frozen/current cache wire and staging comparison",
+          "sha256": "02449AE15CDD325AAF5F974F5D867567194909661D77F1A646FE8E82430816BD"
+        },
+        {
+          "path": "FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs",
+          "symbol": "Native frozen/current cache wire and staging comparison",
+          "sha256": "46CA6872D443D30E3A496A87C2A92D7E4EDD9950AEDCB3E52848DA731DC53FDB"
+        }
+      ],
+      "proofs": [],
+      "note": "Executed native value/refusal check, with the specific comparison recorded below.",
+      "kindReceiptId": "native-export-storage-fact",
+      "compared": "FamilyQuant/DeNovo/Ms1EnvelopeDetector.cs:662 \u0022runName\u0022; native write/reopen compares top-level cache key runName and its complete fixture value; expected \u0022synthetic-cache\u0022; actual \u0022synthetic-cache\u0022"
+    },
+    {
+      "observationId": "FQ15-0897A9D41548",
+      "implementation": [
+        {
+          "path": "FamilyQuant.Core/DeNovo/DeNovoXicCache.cs",
+          "symbol": "Native frozen/current cache wire and staging comparison",
+          "sha256": "D63E0B9022082142131FA26E1E050BA705133F492761C1D8C97321E4B7CC2B5B"
+        },
+        {
+          "path": "FamilyQuant.Core/DeNovo/ExtractionCacheJson.cs",
+          "symbol": "Native frozen/current cache wire and staging comparison",
+          "sha256": "02449AE15CDD325AAF5F974F5D867567194909661D77F1A646FE8E82430816BD"
+        },
+        {
+          "path": "FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs",
+          "symbol": "Native frozen/current cache wire and staging comparison",
+          "sha256": "46CA6872D443D30E3A496A87C2A92D7E4EDD9950AEDCB3E52848DA731DC53FDB"
+        }
+      ],
+      "proofs": [],
+      "note": "Executed native value/refusal check, with the specific comparison recorded below.",
+      "kindReceiptId": "native-export-storage-fact",
+      "compared": "FamilyQuant/DeNovo/DeNovoXicCache.cs:213 \u0022isotopeCount\u0022; native write/reopen compares top-level cache key isotopeCount and its complete fixture value; expected 3; actual 3"
+    },
+    {
+      "observationId": "FQ15-12F781C542A4",
+      "implementation": [
+        {
+          "path": "FamilyQuant.Core/DeNovo/DeNovoXicCache.cs",
+          "symbol": "Native frozen/current cache wire and staging comparison",
+          "sha256": "D63E0B9022082142131FA26E1E050BA705133F492761C1D8C97321E4B7CC2B5B"
+        },
+        {
+          "path": "FamilyQuant.Core/DeNovo/ExtractionCacheJson.cs",
+          "symbol": "Native frozen/current cache wire and staging comparison",
+          "sha256": "02449AE15CDD325AAF5F974F5D867567194909661D77F1A646FE8E82430816BD"
+        },
+        {
+          "path": "FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs",
+          "symbol": "Native frozen/current cache wire and staging comparison",
+          "sha256": "46CA6872D443D30E3A496A87C2A92D7E4EDD9950AEDCB3E52848DA731DC53FDB"
+        }
+      ],
+      "proofs": [],
+      "note": "Executed native value/refusal check, with the specific comparison recorded below.",
+      "kindReceiptId": "native-export-storage-fact",
+      "compared": "FamilyQuant/DeNovo/Ms1EnvelopeDetector.cs:666 \u0022maxCharge\u0022; native write/reopen compares top-level cache key maxCharge and its complete fixture value; expected 5; actual 5"
+    },
+    {
+      "observationId": "FQ15-1751EF9EAE8B",
+      "implementation": [
+        {
+          "path": "FamilyQuant.Core/DeNovo/DeNovoXicCache.cs",
+          "symbol": "Native frozen/current cache wire and staging comparison",
+          "sha256": "D63E0B9022082142131FA26E1E050BA705133F492761C1D8C97321E4B7CC2B5B"
+        },
+        {
+          "path": "FamilyQuant.Core/DeNovo/ExtractionCacheJson.cs",
+          "symbol": "Native frozen/current cache wire and staging comparison",
+          "sha256": "02449AE15CDD325AAF5F974F5D867567194909661D77F1A646FE8E82430816BD"
+        },
+        {
+          "path": "FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs",
+          "symbol": "Native frozen/current cache wire and staging comparison",
+          "sha256": "46CA6872D443D30E3A496A87C2A92D7E4EDD9950AEDCB3E52848DA731DC53FDB"
+        }
+      ],
+      "proofs": [],
+      "note": "Executed native value/refusal check, with the specific comparison recorded below.",
+      "kindReceiptId": "native-export-storage-fact",
+      "compared": "FamilyQuant/DeNovo/Ms1EnvelopeDetector.cs:661 \u0022version\u0022; native write/reopen compares top-level cache key version and its complete fixture value; expected 3; actual 3"
+    },
+    {
+      "observationId": "FQ15-21F35ACE3684",
+      "implementation": [
+        {
+          "path": "FamilyQuant.Core/DeNovo/DeNovoXicCache.cs",
+          "symbol": "Native frozen/current cache wire and staging comparison",
+          "sha256": "D63E0B9022082142131FA26E1E050BA705133F492761C1D8C97321E4B7CC2B5B"
+        },
+        {
+          "path": "FamilyQuant.Core/DeNovo/ExtractionCacheJson.cs",
+          "symbol": "Native frozen/current cache wire and staging comparison",
+          "sha256": "02449AE15CDD325AAF5F974F5D867567194909661D77F1A646FE8E82430816BD"
+        },
+        {
+          "path": "FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs",
+          "symbol": "Native frozen/current cache wire and staging comparison",
+          "sha256": "46CA6872D443D30E3A496A87C2A92D7E4EDD9950AEDCB3E52848DA731DC53FDB"
+        }
+      ],
+      "proofs": [],
+      "note": "Executed native value/refusal check, with the specific comparison recorded below.",
+      "kindReceiptId": "native-export-storage-fact",
+      "compared": "FamilyQuant/DeNovo/Ms1EnvelopeDetector.cs:678 \u0022detectedCountByCharge\u0022; native write/reopen compares top-level cache key detectedCountByCharge and its complete fixture value; expected [0,1,2,0,0,0]; actual [0,1,2,0,0,0]"
+    },
+    {
+      "observationId": "FQ15-2749F7FD71F8",
+      "implementation": [
+        {
+          "path": "FamilyQuant.Core/DeNovo/DeNovoXicCache.cs",
+          "symbol": "Native frozen/current cache wire and staging comparison",
+          "sha256": "D63E0B9022082142131FA26E1E050BA705133F492761C1D8C97321E4B7CC2B5B"
+        },
+        {
+          "path": "FamilyQuant.Core/DeNovo/ExtractionCacheJson.cs",
+          "symbol": "Native frozen/current cache wire and staging comparison",
+          "sha256": "02449AE15CDD325AAF5F974F5D867567194909661D77F1A646FE8E82430816BD"
+        },
+        {
+          "path": "FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs",
+          "symbol": "Native frozen/current cache wire and staging comparison",
+          "sha256": "46CA6872D443D30E3A496A87C2A92D7E4EDD9950AEDCB3E52848DA731DC53FDB"
+        }
+      ],
+      "proofs": [],
+      "note": "Executed native value/refusal check, with the specific comparison recorded below.",
+      "kindReceiptId": "native-export-storage-fact",
+      "compared": "FamilyQuant/DeNovo/Ms1EnvelopeDetector.cs:668 \u0022minIsotopes\u0022; native write/reopen compares top-level cache key minIsotopes and its complete fixture value; expected 3; actual 3"
+    },
+    {
+      "observationId": "FQ15-312D5600756A",
+      "implementation": [
+        {
+          "path": "FamilyQuant.Core/DeNovo/DeNovoXicCache.cs",
+          "symbol": "Native frozen/current cache wire and staging comparison",
+          "sha256": "D63E0B9022082142131FA26E1E050BA705133F492761C1D8C97321E4B7CC2B5B"
+        },
+        {
+          "path": "FamilyQuant.Core/DeNovo/ExtractionCacheJson.cs",
+          "symbol": "Native frozen/current cache wire and staging comparison",
+          "sha256": "02449AE15CDD325AAF5F974F5D867567194909661D77F1A646FE8E82430816BD"
+        },
+        {
+          "path": "FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs",
+          "symbol": "Native frozen/current cache wire and staging comparison",
+          "sha256": "46CA6872D443D30E3A496A87C2A92D7E4EDD9950AEDCB3E52848DA731DC53FDB"
+        }
+      ],
+      "proofs": [],
+      "note": "Executed native value/refusal check, with the specific comparison recorded below.",
+      "kindReceiptId": "native-export-storage-fact",
+      "compared": "FamilyQuant/DeNovo/Ms1EnvelopeDetector.cs:671 \u0022detectedPeptideLikeArea\u0022; native write/reopen compares top-level cache key detectedPeptideLikeArea and its complete fixture value; expected 0.375; actual 0.375"
+    },
+    {
+      "observationId": "FQ15-3A56954B2B0C",
+      "implementation": [
+        {
+          "path": "FamilyQuant.Core/DeNovo/DeNovoXicCache.cs",
+          "symbol": "Native frozen/current cache wire and staging comparison",
+          "sha256": "D63E0B9022082142131FA26E1E050BA705133F492761C1D8C97321E4B7CC2B5B"
+        },
+        {
+          "path": "FamilyQuant.Core/DeNovo/ExtractionCacheJson.cs",
+          "symbol": "Native frozen/current cache wire and staging comparison",
+          "sha256": "02449AE15CDD325AAF5F974F5D867567194909661D77F1A646FE8E82430816BD"
+        },
+        {
+          "path": "FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs",
+          "symbol": "Native frozen/current cache wire and staging comparison",
+          "sha256": "46CA6872D443D30E3A496A87C2A92D7E4EDD9950AEDCB3E52848DA731DC53FDB"
+        }
+      ],
+      "proofs": [],
+      "note": "Executed native value/refusal check, with the specific comparison recorded below.",
+      "kindReceiptId": "native-export-storage-fact",
+      "compared": "FamilyQuant/DeNovo/DeNovoXicCache.cs:190 \u0022.tmp\u0022; blocked final rename retains complete native cache payload at the observed temporary suffix; expected .tmp; actual .tmp"
+    },
+    {
+      "observationId": "FQ15-3BEEA08C5D73",
+      "implementation": [
+        {
+          "path": "FamilyQuant.Core/DeNovo/DeNovoXicCache.cs",
+          "symbol": "Native frozen/current cache wire and staging comparison",
+          "sha256": "D63E0B9022082142131FA26E1E050BA705133F492761C1D8C97321E4B7CC2B5B"
+        },
+        {
+          "path": "FamilyQuant.Core/DeNovo/ExtractionCacheJson.cs",
+          "symbol": "Native frozen/current cache wire and staging comparison",
+          "sha256": "02449AE15CDD325AAF5F974F5D867567194909661D77F1A646FE8E82430816BD"
+        },
+        {
+          "path": "FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs",
+          "symbol": "Native frozen/current cache wire and staging comparison",
+          "sha256": "46CA6872D443D30E3A496A87C2A92D7E4EDD9950AEDCB3E52848DA731DC53FDB"
+        }
+      ],
+      "proofs": [],
+      "note": "Executed native value/refusal check, with the specific comparison recorded below.",
+      "kindReceiptId": "native-export-storage-fact",
+      "compared": "FamilyQuant/DeNovo/DeNovoXicCache.cs:204 \u0022runName\u0022; native write/reopen compares top-level cache key runName and its complete fixture value; expected \u0022synthetic-cache\u0022; actual \u0022synthetic-cache\u0022"
+    },
+    {
+      "observationId": "FQ15-5180D79E1E95",
+      "implementation": [
+        {
+          "path": "FamilyQuant.Core/DeNovo/DeNovoXicCache.cs",
+          "symbol": "Native frozen/current cache wire and staging comparison",
+          "sha256": "D63E0B9022082142131FA26E1E050BA705133F492761C1D8C97321E4B7CC2B5B"
+        },
+        {
+          "path": "FamilyQuant.Core/DeNovo/ExtractionCacheJson.cs",
+          "symbol": "Native frozen/current cache wire and staging comparison",
+          "sha256": "02449AE15CDD325AAF5F974F5D867567194909661D77F1A646FE8E82430816BD"
+        },
+        {
+          "path": "FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs",
+          "symbol": "Native frozen/current cache wire and staging comparison",
+          "sha256": "46CA6872D443D30E3A496A87C2A92D7E4EDD9950AEDCB3E52848DA731DC53FDB"
+        }
+      ],
+      "proofs": [],
+      "note": "Executed native value/refusal check, with the specific comparison recorded below.",
+      "kindReceiptId": "native-export-storage-fact",
+      "compared": "FamilyQuant/DeNovo/DeNovoXicCache.cs:210 \u0022ms1Tolerance\u0022; native write/reopen compares top-level cache key ms1Tolerance and its complete fixture value; expected 2; actual 2"
+    },
+    {
+      "observationId": "FQ15-6109C6E4CC7A",
+      "implementation": [
+        {
+          "path": "FamilyQuant.Core/DeNovo/DeNovoXicCache.cs",
+          "symbol": "Native frozen/current cache wire and staging comparison",
+          "sha256": "D63E0B9022082142131FA26E1E050BA705133F492761C1D8C97321E4B7CC2B5B"
+        },
+        {
+          "path": "FamilyQuant.Core/DeNovo/ExtractionCacheJson.cs",
+          "symbol": "Native frozen/current cache wire and staging comparison",
+          "sha256": "02449AE15CDD325AAF5F974F5D867567194909661D77F1A646FE8E82430816BD"
+        },
+        {
+          "path": "FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs",
+          "symbol": "Native frozen/current cache wire and staging comparison",
+          "sha256": "46CA6872D443D30E3A496A87C2A92D7E4EDD9950AEDCB3E52848DA731DC53FDB"
+        }
+      ],
+      "proofs": [],
+      "note": "Executed native value/refusal check, with the specific comparison recorded below.",
+      "kindReceiptId": "native-export-storage-fact",
+      "compared": "FamilyQuant/DeNovo/Ms1EnvelopeDetector.cs:667 \u0022isotopeCeiling\u0022; native write/reopen compares top-level cache key isotopeCeiling and its complete fixture value; expected 4; actual 4"
+    },
+    {
+      "observationId": "FQ15-653097E679CA",
+      "implementation": [
+        {
+          "path": "FamilyQuant.Core/DeNovo/DeNovoXicCache.cs",
+          "symbol": "Native frozen/current cache wire and staging comparison",
+          "sha256": "D63E0B9022082142131FA26E1E050BA705133F492761C1D8C97321E4B7CC2B5B"
+        },
+        {
+          "path": "FamilyQuant.Core/DeNovo/ExtractionCacheJson.cs",
+          "symbol": "Native frozen/current cache wire and staging comparison",
+          "sha256": "02449AE15CDD325AAF5F974F5D867567194909661D77F1A646FE8E82430816BD"
+        },
+        {
+          "path": "FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs",
+          "symbol": "Native frozen/current cache wire and staging comparison",
+          "sha256": "46CA6872D443D30E3A496A87C2A92D7E4EDD9950AEDCB3E52848DA731DC53FDB"
+        }
+      ],
+      "proofs": [],
+      "note": "Executed native value/refusal check, with the specific comparison recorded below.",
+      "kindReceiptId": "native-export-storage-fact",
+      "compared": "FamilyQuant/DeNovo/Ms1EnvelopeDetector.cs:681 \u0022detectedCountMultiplyCharged\u0022; native write/reopen compares top-level cache key detectedCountMultiplyCharged and its complete fixture value; expected 2; actual 2"
+    },
+    {
+      "observationId": "FQ15-7690CC0C912C",
+      "implementation": [
+        {
+          "path": "FamilyQuant.Core/DeNovo/DeNovoXicCache.cs",
+          "symbol": "Native frozen/current cache wire and staging comparison",
+          "sha256": "D63E0B9022082142131FA26E1E050BA705133F492761C1D8C97321E4B7CC2B5B"
+        },
+        {
+          "path": "FamilyQuant.Core/DeNovo/ExtractionCacheJson.cs",
+          "symbol": "Native frozen/current cache wire and staging comparison",
+          "sha256": "02449AE15CDD325AAF5F974F5D867567194909661D77F1A646FE8E82430816BD"
+        },
+        {
+          "path": "FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs",
+          "symbol": "Native frozen/current cache wire and staging comparison",
+          "sha256": "46CA6872D443D30E3A496A87C2A92D7E4EDD9950AEDCB3E52848DA731DC53FDB"
+        }
+      ],
+      "proofs": [],
+      "note": "Executed native value/refusal check, with the specific comparison recorded below.",
+      "kindReceiptId": "native-export-storage-fact",
+      "compared": "FamilyQuant/DeNovo/Ms1EnvelopeDetector.cs:672 \u0022ms1ScanCount\u0022; native write/reopen compares top-level cache key ms1ScanCount and its complete fixture value; expected 19; actual 19"
+    },
+    {
+      "observationId": "FQ15-7DE6215F27DF",
+      "implementation": [
+        {
+          "path": "FamilyQuant.Core/DeNovo/DeNovoXicCache.cs",
+          "symbol": "Native frozen/current cache wire and staging comparison",
+          "sha256": "D63E0B9022082142131FA26E1E050BA705133F492761C1D8C97321E4B7CC2B5B"
+        },
+        {
+          "path": "FamilyQuant.Core/DeNovo/ExtractionCacheJson.cs",
+          "symbol": "Native frozen/current cache wire and staging comparison",
+          "sha256": "02449AE15CDD325AAF5F974F5D867567194909661D77F1A646FE8E82430816BD"
+        },
+        {
+          "path": "FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs",
+          "symbol": "Native frozen/current cache wire and staging comparison",
+          "sha256": "46CA6872D443D30E3A496A87C2A92D7E4EDD9950AEDCB3E52848DA731DC53FDB"
+        }
+      ],
+      "proofs": [],
+      "note": "Executed native value/refusal check, with the specific comparison recorded below.",
+      "kindReceiptId": "native-export-storage-fact",
+      "compared": "FamilyQuant/DeNovo/Ms1EnvelopeDetector.cs:670 \u0022detectedEnvelopeCount\u0022; native write/reopen compares top-level cache key detectedEnvelopeCount and its complete fixture value; expected 3; actual 3"
+    },
+    {
+      "observationId": "FQ15-81151181893E",
+      "implementation": [
+        {
+          "path": "FamilyQuant.Core/DeNovo/DeNovoXicCache.cs",
+          "symbol": "Native frozen/current cache wire and staging comparison",
+          "sha256": "D63E0B9022082142131FA26E1E050BA705133F492761C1D8C97321E4B7CC2B5B"
+        },
+        {
+          "path": "FamilyQuant.Core/DeNovo/ExtractionCacheJson.cs",
+          "symbol": "Native frozen/current cache wire and staging comparison",
+          "sha256": "02449AE15CDD325AAF5F974F5D867567194909661D77F1A646FE8E82430816BD"
+        },
+        {
+          "path": "FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs",
+          "symbol": "Native frozen/current cache wire and staging comparison",
+          "sha256": "46CA6872D443D30E3A496A87C2A92D7E4EDD9950AEDCB3E52848DA731DC53FDB"
+        }
+      ],
+      "proofs": [],
+      "note": "Executed native value/refusal check, with the specific comparison recorded below.",
+      "kindReceiptId": "native-export-storage-fact",
+      "compared": "FamilyQuant/DeNovo/Ms1EnvelopeDetector.cs:646 \u0022.tmp\u0022; blocked final rename retains complete native cache payload at the observed temporary suffix; expected .tmp; actual .tmp"
+    },
+    {
+      "observationId": "FQ15-830694537CD8",
+      "implementation": [
+        {
+          "path": "FamilyQuant.Core/DeNovo/DeNovoXicCache.cs",
+          "symbol": "Native frozen/current cache wire and staging comparison",
+          "sha256": "D63E0B9022082142131FA26E1E050BA705133F492761C1D8C97321E4B7CC2B5B"
+        },
+        {
+          "path": "FamilyQuant.Core/DeNovo/ExtractionCacheJson.cs",
+          "symbol": "Native frozen/current cache wire and staging comparison",
+          "sha256": "02449AE15CDD325AAF5F974F5D867567194909661D77F1A646FE8E82430816BD"
+        },
+        {
+          "path": "FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs",
+          "symbol": "Native frozen/current cache wire and staging comparison",
+          "sha256": "46CA6872D443D30E3A496A87C2A92D7E4EDD9950AEDCB3E52848DA731DC53FDB"
+        }
+      ],
+      "proofs": [],
+      "note": "Executed native value/refusal check, with the specific comparison recorded below.",
+      "kindReceiptId": "native-export-storage-fact",
+      "compared": "FamilyQuant/DeNovo/Ms1EnvelopeDetector.cs:677 \u0022detectedAreaByCharge\u0022; native write/reopen compares top-level cache key detectedAreaByCharge and its complete fixture value; expected [0,0.125,0.25,0,0,0]; actual [0,0.125,0.25,0,0,0]"
+    },
+    {
+      "observationId": "FQ15-8E42F3DFA90D",
+      "implementation": [
+        {
+          "path": "FamilyQuant.Core/DeNovo/DeNovoXicCache.cs",
+          "symbol": "Native frozen/current cache wire and staging comparison",
+          "sha256": "D63E0B9022082142131FA26E1E050BA705133F492761C1D8C97321E4B7CC2B5B"
+        },
+        {
+          "path": "FamilyQuant.Core/DeNovo/ExtractionCacheJson.cs",
+          "symbol": "Native frozen/current cache wire and staging comparison",
+          "sha256": "02449AE15CDD325AAF5F974F5D867567194909661D77F1A646FE8E82430816BD"
+        },
+        {
+          "path": "FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs",
+          "symbol": "Native frozen/current cache wire and staging comparison",
+          "sha256": "46CA6872D443D30E3A496A87C2A92D7E4EDD9950AEDCB3E52848DA731DC53FDB"
+        }
+      ],
+      "proofs": [],
+      "note": "Executed native value/refusal check, with the specific comparison recorded below.",
+      "kindReceiptId": "native-export-storage-fact",
+      "compared": "FamilyQuant/DeNovo/Ms1EnvelopeDetector.cs:682 \u0022detectedCountSinglyCharged\u0022; native write/reopen compares top-level cache key detectedCountSinglyCharged and its complete fixture value; expected 1; actual 1"
+    },
+    {
+      "observationId": "FQ15-914981428DB1",
+      "implementation": [
+        {
+          "path": "FamilyQuant.Core/DeNovo/DeNovoXicCache.cs",
+          "symbol": "Native frozen/current cache wire and staging comparison",
+          "sha256": "D63E0B9022082142131FA26E1E050BA705133F492761C1D8C97321E4B7CC2B5B"
+        },
+        {
+          "path": "FamilyQuant.Core/DeNovo/ExtractionCacheJson.cs",
+          "symbol": "Native frozen/current cache wire and staging comparison",
+          "sha256": "02449AE15CDD325AAF5F974F5D867567194909661D77F1A646FE8E82430816BD"
+        },
+        {
+          "path": "FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs",
+          "symbol": "Native frozen/current cache wire and staging comparison",
+          "sha256": "46CA6872D443D30E3A496A87C2A92D7E4EDD9950AEDCB3E52848DA731DC53FDB"
+        }
+      ],
+      "proofs": [],
+      "note": "Executed native value/refusal check, with the specific comparison recorded below.",
+      "kindReceiptId": "native-export-storage-fact",
+      "compared": "FamilyQuant/DeNovo/Ms1EnvelopeDetector.cs:663 \u0022sourceSha256\u0022; native write/reopen compares top-level cache key sourceSha256 and its complete fixture value; expected \u0022synthetic-content-sha\u0022; actual \u0022synthetic-content-sha\u0022"
+    },
+    {
+      "observationId": "FQ15-9A6BDABD7A93",
+      "implementation": [
+        {
+          "path": "FamilyQuant.Core/DeNovo/DeNovoXicCache.cs",
+          "symbol": "Native frozen/current cache wire and staging comparison",
+          "sha256": "D63E0B9022082142131FA26E1E050BA705133F492761C1D8C97321E4B7CC2B5B"
+        },
+        {
+          "path": "FamilyQuant.Core/DeNovo/ExtractionCacheJson.cs",
+          "symbol": "Native frozen/current cache wire and staging comparison",
+          "sha256": "02449AE15CDD325AAF5F974F5D867567194909661D77F1A646FE8E82430816BD"
+        },
+        {
+          "path": "FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs",
+          "symbol": "Native frozen/current cache wire and staging comparison",
+          "sha256": "46CA6872D443D30E3A496A87C2A92D7E4EDD9950AEDCB3E52848DA731DC53FDB"
+        }
+      ],
+      "proofs": [],
+      "note": "Executed native value/refusal check, with the specific comparison recorded below.",
+      "kindReceiptId": "native-export-storage-fact",
+      "compared": "FamilyQuant/DeNovo/Ms1EnvelopeDetector.cs:664 \u0022ppmTolerance\u0022; native write/reopen compares top-level cache key ppmTolerance and its complete fixture value; expected 10; actual 10"
+    },
+    {
+      "observationId": "FQ15-A00438CE05A1",
+      "implementation": [
+        {
+          "path": "FamilyQuant.Core/DeNovo/DeNovoXicCache.cs",
+          "symbol": "Native frozen/current cache wire and staging comparison",
+          "sha256": "D63E0B9022082142131FA26E1E050BA705133F492761C1D8C97321E4B7CC2B5B"
+        },
+        {
+          "path": "FamilyQuant.Core/DeNovo/ExtractionCacheJson.cs",
+          "symbol": "Native frozen/current cache wire and staging comparison",
+          "sha256": "02449AE15CDD325AAF5F974F5D867567194909661D77F1A646FE8E82430816BD"
+        },
+        {
+          "path": "FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs",
+          "symbol": "Native frozen/current cache wire and staging comparison",
+          "sha256": "46CA6872D443D30E3A496A87C2A92D7E4EDD9950AEDCB3E52848DA731DC53FDB"
+        }
+      ],
+      "proofs": [],
+      "note": "Executed native value/refusal check, with the specific comparison recorded below.",
+      "kindReceiptId": "native-export-storage-fact",
+      "compared": "FamilyQuant/DeNovo/DeNovoXicCache.cs:219 \u0022sourceSha256\u0022; native write/reopen compares top-level cache key sourceSha256 and its complete fixture value; expected \u0022synthetic-content-sha\u0022; actual \u0022synthetic-content-sha\u0022"
+    },
+    {
+      "observationId": "FQ15-AE5BB1697126",
+      "implementation": [
+        {
+          "path": "FamilyQuant.Core/DeNovo/DeNovoXicCache.cs",
+          "symbol": "Native frozen/current cache wire and staging comparison",
+          "sha256": "D63E0B9022082142131FA26E1E050BA705133F492761C1D8C97321E4B7CC2B5B"
+        },
+        {
+          "path": "FamilyQuant.Core/DeNovo/ExtractionCacheJson.cs",
+          "symbol": "Native frozen/current cache wire and staging comparison",
+          "sha256": "02449AE15CDD325AAF5F974F5D867567194909661D77F1A646FE8E82430816BD"
+        },
+        {
+          "path": "FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs",
+          "symbol": "Native frozen/current cache wire and staging comparison",
+          "sha256": "46CA6872D443D30E3A496A87C2A92D7E4EDD9950AEDCB3E52848DA731DC53FDB"
+        }
+      ],
+      "proofs": [],
+      "note": "Executed native value/refusal check, with the specific comparison recorded below.",
+      "kindReceiptId": "native-export-storage-fact",
+      "compared": "FamilyQuant/DeNovo/DeNovoXicCache.cs:201 \u0022version\u0022; native write/reopen compares top-level cache key version and its complete fixture value; expected 4; actual 4"
+    },
+    {
+      "observationId": "FQ15-B4999B5FC55A",
+      "implementation": [
+        {
+          "path": "FamilyQuant.Core/DeNovo/DeNovoXicCache.cs",
+          "symbol": "Native frozen/current cache wire and staging comparison",
+          "sha256": "D63E0B9022082142131FA26E1E050BA705133F492761C1D8C97321E4B7CC2B5B"
+        },
+        {
+          "path": "FamilyQuant.Core/DeNovo/ExtractionCacheJson.cs",
+          "symbol": "Native frozen/current cache wire and staging comparison",
+          "sha256": "02449AE15CDD325AAF5F974F5D867567194909661D77F1A646FE8E82430816BD"
+        },
+        {
+          "path": "FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs",
+          "symbol": "Native frozen/current cache wire and staging comparison",
+          "sha256": "46CA6872D443D30E3A496A87C2A92D7E4EDD9950AEDCB3E52848DA731DC53FDB"
+        }
+      ],
+      "proofs": [],
+      "note": "Executed native value/refusal check, with the specific comparison recorded below.",
+      "kindReceiptId": "native-export-storage-fact",
+      "compared": "FamilyQuant/DeNovo/DeNovoXicCache.cs:216 \u0022minPointsForQuant\u0022; native write/reopen compares top-level cache key minPointsForQuant and its complete fixture value; expected 3; actual 3"
+    },
+    {
+      "observationId": "FQ15-BF4C53A7F344",
+      "implementation": [
+        {
+          "path": "FamilyQuant.Core/DeNovo/DeNovoXicCache.cs",
+          "symbol": "Native frozen/current cache wire and staging comparison",
+          "sha256": "D63E0B9022082142131FA26E1E050BA705133F492761C1D8C97321E4B7CC2B5B"
+        },
+        {
+          "path": "FamilyQuant.Core/DeNovo/ExtractionCacheJson.cs",
+          "symbol": "Native frozen/current cache wire and staging comparison",
+          "sha256": "02449AE15CDD325AAF5F974F5D867567194909661D77F1A646FE8E82430816BD"
+        },
+        {
+          "path": "FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs",
+          "symbol": "Native frozen/current cache wire and staging comparison",
+          "sha256": "46CA6872D443D30E3A496A87C2A92D7E4EDD9950AEDCB3E52848DA731DC53FDB"
+        }
+      ],
+      "proofs": [],
+      "note": "Executed native value/refusal check, with the specific comparison recorded below.",
+      "kindReceiptId": "native-export-storage-fact",
+      "compared": "FamilyQuant/DeNovo/DeNovoXicCache.cs:207 \u0022ppm\u0022; native write/reopen compares top-level cache key ppm and its complete fixture value; expected 10.25; actual 10.25"
+    },
+    {
+      "observationId": "FQ15-C65D12900AF7",
+      "implementation": [
+        {
+          "path": "FamilyQuant.Core/DeNovo/DeNovoXicCache.cs",
+          "symbol": "Native frozen/current cache wire and staging comparison",
+          "sha256": "D63E0B9022082142131FA26E1E050BA705133F492761C1D8C97321E4B7CC2B5B"
+        },
+        {
+          "path": "FamilyQuant.Core/DeNovo/ExtractionCacheJson.cs",
+          "symbol": "Native frozen/current cache wire and staging comparison",
+          "sha256": "02449AE15CDD325AAF5F974F5D867567194909661D77F1A646FE8E82430816BD"
+        },
+        {
+          "path": "FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs",
+          "symbol": "Native frozen/current cache wire and staging comparison",
+          "sha256": "46CA6872D443D30E3A496A87C2A92D7E4EDD9950AEDCB3E52848DA731DC53FDB"
+        }
+      ],
+      "proofs": [],
+      "note": "Executed native value/refusal check, with the specific comparison recorded below.",
+      "kindReceiptId": "native-export-storage-fact",
+      "compared": "FamilyQuant/DeNovo/Ms1EnvelopeDetector.cs:669 \u0022minScansPerFeature\u0022; native write/reopen compares top-level cache key minScansPerFeature and its complete fixture value; expected 2; actual 2"
+    },
+    {
+      "observationId": "FQ15-F37912D44F30",
+      "implementation": [
+        {
+          "path": "FamilyQuant.Core/DeNovo/DeNovoXicCache.cs",
+          "symbol": "Native frozen/current cache wire and staging comparison",
+          "sha256": "D63E0B9022082142131FA26E1E050BA705133F492761C1D8C97321E4B7CC2B5B"
+        },
+        {
+          "path": "FamilyQuant.Core/DeNovo/ExtractionCacheJson.cs",
+          "symbol": "Native frozen/current cache wire and staging comparison",
+          "sha256": "02449AE15CDD325AAF5F974F5D867567194909661D77F1A646FE8E82430816BD"
+        },
+        {
+          "path": "FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs",
+          "symbol": "Native frozen/current cache wire and staging comparison",
+          "sha256": "46CA6872D443D30E3A496A87C2A92D7E4EDD9950AEDCB3E52848DA731DC53FDB"
+        }
+      ],
+      "proofs": [],
+      "note": "Executed native value/refusal check, with the specific comparison recorded below.",
+      "kindReceiptId": "native-export-storage-fact",
+      "compared": "FamilyQuant/DeNovo/Ms1EnvelopeDetector.cs:680 \u0022detectedAreaSinglyCharged\u0022; native write/reopen compares top-level cache key detectedAreaSinglyCharged and its complete fixture value; expected 0.125; actual 0.125"
+    },
+    {
+      "observationId": "FQ15-F57CFF90B6C9",
+      "implementation": [
+        {
+          "path": "FamilyQuant.Core/DeNovo/DeNovoXicCache.cs",
+          "symbol": "Native frozen/current cache wire and staging comparison",
+          "sha256": "D63E0B9022082142131FA26E1E050BA705133F492761C1D8C97321E4B7CC2B5B"
+        },
+        {
+          "path": "FamilyQuant.Core/DeNovo/ExtractionCacheJson.cs",
+          "symbol": "Native frozen/current cache wire and staging comparison",
+          "sha256": "02449AE15CDD325AAF5F974F5D867567194909661D77F1A646FE8E82430816BD"
+        },
+        {
+          "path": "FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs",
+          "symbol": "Native frozen/current cache wire and staging comparison",
+          "sha256": "46CA6872D443D30E3A496A87C2A92D7E4EDD9950AEDCB3E52848DA731DC53FDB"
+        }
+      ],
+      "proofs": [],
+      "note": "Executed native value/refusal check, with the specific comparison recorded below.",
+      "kindReceiptId": "native-export-storage-fact",
+      "compared": "FamilyQuant/DeNovo/Ms1EnvelopeDetector.cs:679 \u0022detectedAreaMultiplyCharged\u0022; native write/reopen compares top-level cache key detectedAreaMultiplyCharged and its complete fixture value; expected 0.25; actual 0.25"
+    },
+    {
+      "observationId": "FQ15-FDCB254F47D1",
+      "implementation": [
+        {
+          "path": "FamilyQuant.Core/DeNovo/DeNovoXicCache.cs",
+          "symbol": "Native frozen/current cache wire and staging comparison",
+          "sha256": "D63E0B9022082142131FA26E1E050BA705133F492761C1D8C97321E4B7CC2B5B"
+        },
+        {
+          "path": "FamilyQuant.Core/DeNovo/ExtractionCacheJson.cs",
+          "symbol": "Native frozen/current cache wire and staging comparison",
+          "sha256": "02449AE15CDD325AAF5F974F5D867567194909661D77F1A646FE8E82430816BD"
+        },
+        {
+          "path": "FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs",
+          "symbol": "Native frozen/current cache wire and staging comparison",
+          "sha256": "46CA6872D443D30E3A496A87C2A92D7E4EDD9950AEDCB3E52848DA731DC53FDB"
+        }
+      ],
+      "proofs": [],
+      "note": "Executed native value/refusal check, with the specific comparison recorded below.",
+      "kindReceiptId": "native-export-storage-fact",
+      "compared": "FamilyQuant/DeNovo/Ms1EnvelopeDetector.cs:665 \u0022minCharge\u0022; native write/reopen compares top-level cache key minCharge and its complete fixture value; expected 1; actual 1"
+    }
+  ],
+  "kindReceipts": [
+    {
+      "id": "native-export-storage-fact",
+      "kind": "export/storage fact",
+      "proofs": [
+        {
+          "runId": "native",
+          "kind": "test",
+          "target": "RunAssayRuntimeLedger",
+          "assertion": "AS-cache-wire kind export/storage fact: every listed native value and branch check passed",
+          "artifact": "D:\\FamilyQuant-data\\out-assay\\m48-cache-ready\\proofs.log",
+          "inspectedBy": ""
+        }
+      ]
+    }
+  ]
+}
