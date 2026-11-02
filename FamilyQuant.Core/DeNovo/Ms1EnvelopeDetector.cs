@@ -142,9 +142,8 @@ namespace FamilyQuant.DeNovo
         /// <summary>Why the singly charged part is never called non-peptide. Quoted on the surfaces that
         /// have room for it.</summary>
         public const string SinglyChargedCaveat =
-            "Weaker evidence is not a claim of non-peptide: in venom the natural peptides (the " +
-            "bradykinin-potentiating peptides, the angiotensin-like fragments) are frequently singly " +
-            "charged, and this dataset contains identified charge-1 peptides.";
+            "Weaker evidence is not a claim of non-peptide: natural peptides are frequently singly " +
+            "charged, and identified charge-1 peptides demonstrate that charge alone cannot rule out peptides.";
 
         /// <summary>The charge at and above which an isotope spacing is strong evidence of a peptide: 2,
         /// where the spacing is 0.5 Da and a singly charged small molecule cannot produce it.</summary>

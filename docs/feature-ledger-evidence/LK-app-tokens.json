@@ -1,0 +1,329 @@
+{
+  "schemaVersion": 1,
+  "step": "LK-app-tokens",
+  "frozenCommit": "e9b73064d8ff19b2fde3e3231240b636a64c0a91",
+  "runs": [
+    {
+      "id": "LK-app-tokens",
+      "command": "D:\\FamilyQuant-wt\\look\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --prove-look-app-tokens D:/FamilyQuant-data/out-shell/N3/source D:/FamilyQuant-data/out-look/app-home/tokens-2 \u00222026-11-02 07:38:25 -0800\u0022",
+      "executedAt": "2026-11-02 07:38:25 -0800",
+      "commit": "50d4f30c270ccbcda820de9a0ddf0eab7946d0e6",
+      "artifacts": [
+        {
+          "path": "D:\\FamilyQuant-data\\out-look\\app-home\\tokens-2\\proofs.log",
+          "sha256": "7DC737998EA03AF50FDED4D221B58602DBA02A004FA8910811432B8A0D10AC7A"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-look\\app-home\\tokens-2\\resolved-tokens.json",
+          "sha256": "ADBDF085B65DA5ADC631221D688AB9B7A06CC7CBB80EB01A9B53D8251052F516"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-look\\app-home\\tokens-2\\executed\\docs_LOOK-APP-TOKEN-ROLES.json",
+          "sha256": "19CE407D2047023655ECE64FFFD0A85D0DF9A9E962352600F49A678F94CDF5D0"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-look\\app-home\\tokens-2\\executed\\FamilyQuant_Themes_Tokens.xaml",
+          "sha256": "F0034F7A77C15E7FB8A21C5C4F169322922C7860418D7D3C1ED1CEA7D7BBFD7D"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-look\\app-home\\tokens-2\\executed\\FamilyQuant_Themes_ThemeManager.cs",
+          "sha256": "9711D576445774BFBFE872F8A813AA6A3EEF7962A3A849ED9113D6718C0D298E"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-look\\app-home\\tokens-2\\executed\\FamilyQuant_HomeControl.xaml",
+          "sha256": "6F1E11235C84A5C91032FB1AAF08E29BE2858D714B80B29C91B8BBF1BC94D860"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-look\\app-home\\tokens-2\\executed\\FamilyQuant.Tests_Program.LookAppTokens.cs",
+          "sha256": "20A28A4A9D24A8241D6F5C79436E6E5235730A1D32D616CEA4523301868F8F8D"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-look\\app-home\\tokens-2\\executed\\FamilyQuant.Tests.dll",
+          "sha256": "8247278E2771E947892D5BB82F2EECB3C467E076F5474E662115F4083668090D"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-look\\app-home\\tokens-2\\executed\\FamilyQuant2.dll",
+          "sha256": "2A38160FB10C9DC2C43D812F2552A302524D16A479E6114FE1460891A9BED6EE"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-look\\app-home\\tokens-2\\executed\\FamilyQuant.Core.dll",
+          "sha256": "C6E9EBC9AC44926D340600EDAA3881EDE524DCAF861CE992CFED92EEEFCDA9DF"
+        }
+      ],
+      "workingDirectory": "D:\\FamilyQuant-wt\\look"
+    }
+  ],
+  "rows": [
+    {
+      "observationId": "FQ15-B1182A35C62C",
+      "implementation": [
+        {
+          "path": "FamilyQuant/Themes/Tokens.xaml",
+          "symbol": "CanvasBrush",
+          "sha256": "F0034F7A77C15E7FB8A21C5C4F169322922C7860418D7D3C1ED1CEA7D7BBFD7D"
+        },
+        {
+          "path": "FamilyQuant/Themes/ThemeManager.cs",
+          "symbol": "ThemeManager",
+          "sha256": "9711D576445774BFBFE872F8A813AA6A3EEF7962A3A849ED9113D6718C0D298E"
+        },
+        {
+          "path": "FamilyQuant/HomeControl.xaml",
+          "symbol": "Application canvas surface",
+          "sha256": "6F1E11235C84A5C91032FB1AAF08E29BE2858D714B80B29C91B8BBF1BC94D860"
+        }
+      ],
+      "proofs": [
+        {
+          "runId": "LK-app-tokens",
+          "kind": "test",
+          "target": "LookAppTokenCommand",
+          "assertion": "App token role FQ15-B1182A35C62C / Dark: PanelDarkBrush -\u003E CanvasBrush",
+          "artifact": "D:\\FamilyQuant-data\\out-look\\app-home\\tokens-2\\proofs.log",
+          "inspectedBy": ""
+        },
+        {
+          "runId": "LK-app-tokens",
+          "kind": "test",
+          "target": "LookAppTokenCommand",
+          "assertion": "App token role FQ15-B1182A35C62C / Light: PanelDarkBrush -\u003E CanvasBrush",
+          "artifact": "D:\\FamilyQuant-data\\out-look\\app-home\\tokens-2\\proofs.log",
+          "inspectedBy": ""
+        }
+      ],
+      "note": "Intentional themed visual-role replacement, not old-color equality.",
+      "kindReceiptId": null,
+      "compared": "PanelDarkBrush=#FF333949 -\u003E CanvasBrush: Application canvas surface"
+    },
+    {
+      "observationId": "FQ15-4CC490537F8C",
+      "implementation": [
+        {
+          "path": "FamilyQuant/Themes/Tokens.xaml",
+          "symbol": "SurfaceBrush",
+          "sha256": "F0034F7A77C15E7FB8A21C5C4F169322922C7860418D7D3C1ED1CEA7D7BBFD7D"
+        },
+        {
+          "path": "FamilyQuant/Themes/ThemeManager.cs",
+          "symbol": "ThemeManager",
+          "sha256": "9711D576445774BFBFE872F8A813AA6A3EEF7962A3A849ED9113D6718C0D298E"
+        },
+        {
+          "path": "FamilyQuant/HomeControl.xaml",
+          "symbol": "Content surface",
+          "sha256": "6F1E11235C84A5C91032FB1AAF08E29BE2858D714B80B29C91B8BBF1BC94D860"
+        }
+      ],
+      "proofs": [
+        {
+          "runId": "LK-app-tokens",
+          "kind": "test",
+          "target": "LookAppTokenCommand",
+          "assertion": "App token role FQ15-4CC490537F8C / Dark: PanelMidBrush -\u003E SurfaceBrush",
+          "artifact": "D:\\FamilyQuant-data\\out-look\\app-home\\tokens-2\\proofs.log",
+          "inspectedBy": ""
+        },
+        {
+          "runId": "LK-app-tokens",
+          "kind": "test",
+          "target": "LookAppTokenCommand",
+          "assertion": "App token role FQ15-4CC490537F8C / Light: PanelMidBrush -\u003E SurfaceBrush",
+          "artifact": "D:\\FamilyQuant-data\\out-look\\app-home\\tokens-2\\proofs.log",
+          "inspectedBy": ""
+        }
+      ],
+      "note": "Intentional themed visual-role replacement, not old-color equality.",
+      "kindReceiptId": null,
+      "compared": "PanelMidBrush=#FF444B58 -\u003E SurfaceBrush: Content surface"
+    },
+    {
+      "observationId": "FQ15-EFD6FE0DBCF2",
+      "implementation": [
+        {
+          "path": "FamilyQuant/Themes/Tokens.xaml",
+          "symbol": "SubtleBrush",
+          "sha256": "F0034F7A77C15E7FB8A21C5C4F169322922C7860418D7D3C1ED1CEA7D7BBFD7D"
+        },
+        {
+          "path": "FamilyQuant/Themes/ThemeManager.cs",
+          "symbol": "ThemeManager",
+          "sha256": "9711D576445774BFBFE872F8A813AA6A3EEF7962A3A849ED9113D6718C0D298E"
+        },
+        {
+          "path": "FamilyQuant/HomeControl.xaml",
+          "symbol": "Quiet control surface",
+          "sha256": "6F1E11235C84A5C91032FB1AAF08E29BE2858D714B80B29C91B8BBF1BC94D860"
+        }
+      ],
+      "proofs": [
+        {
+          "runId": "LK-app-tokens",
+          "kind": "test",
+          "target": "LookAppTokenCommand",
+          "assertion": "App token role FQ15-EFD6FE0DBCF2 / Dark: PanelLightBrush -\u003E SubtleBrush",
+          "artifact": "D:\\FamilyQuant-data\\out-look\\app-home\\tokens-2\\proofs.log",
+          "inspectedBy": ""
+        },
+        {
+          "runId": "LK-app-tokens",
+          "kind": "test",
+          "target": "LookAppTokenCommand",
+          "assertion": "App token role FQ15-EFD6FE0DBCF2 / Light: PanelLightBrush -\u003E SubtleBrush",
+          "artifact": "D:\\FamilyQuant-data\\out-look\\app-home\\tokens-2\\proofs.log",
+          "inspectedBy": ""
+        }
+      ],
+      "note": "Intentional themed visual-role replacement, not old-color equality.",
+      "kindReceiptId": null,
+      "compared": "PanelLightBrush=#FF555C68 -\u003E SubtleBrush: Quiet control surface"
+    },
+    {
+      "observationId": "FQ15-42AEF08F0BA6",
+      "implementation": [
+        {
+          "path": "FamilyQuant/Themes/Tokens.xaml",
+          "symbol": "AccentBrush",
+          "sha256": "F0034F7A77C15E7FB8A21C5C4F169322922C7860418D7D3C1ED1CEA7D7BBFD7D"
+        },
+        {
+          "path": "FamilyQuant/Themes/ThemeManager.cs",
+          "symbol": "ThemeManager",
+          "sha256": "9711D576445774BFBFE872F8A813AA6A3EEF7962A3A849ED9113D6718C0D298E"
+        },
+        {
+          "path": "FamilyQuant/HomeControl.xaml",
+          "symbol": "Primary action and selection accent",
+          "sha256": "6F1E11235C84A5C91032FB1AAF08E29BE2858D714B80B29C91B8BBF1BC94D860"
+        }
+      ],
+      "proofs": [
+        {
+          "runId": "LK-app-tokens",
+          "kind": "test",
+          "target": "LookAppTokenCommand",
+          "assertion": "App token role FQ15-42AEF08F0BA6 / Dark: AccentBrush -\u003E AccentBrush",
+          "artifact": "D:\\FamilyQuant-data\\out-look\\app-home\\tokens-2\\proofs.log",
+          "inspectedBy": ""
+        },
+        {
+          "runId": "LK-app-tokens",
+          "kind": "test",
+          "target": "LookAppTokenCommand",
+          "assertion": "App token role FQ15-42AEF08F0BA6 / Light: AccentBrush -\u003E AccentBrush",
+          "artifact": "D:\\FamilyQuant-data\\out-look\\app-home\\tokens-2\\proofs.log",
+          "inspectedBy": ""
+        }
+      ],
+      "note": "Intentional themed visual-role replacement, not old-color equality.",
+      "kindReceiptId": null,
+      "compared": "AccentBrush=#FF61AEEE -\u003E AccentBrush: Primary action and selection accent"
+    },
+    {
+      "observationId": "FQ15-FBFD00584F87",
+      "implementation": [
+        {
+          "path": "FamilyQuant/Themes/Tokens.xaml",
+          "symbol": "TextBrush",
+          "sha256": "F0034F7A77C15E7FB8A21C5C4F169322922C7860418D7D3C1ED1CEA7D7BBFD7D"
+        },
+        {
+          "path": "FamilyQuant/Themes/ThemeManager.cs",
+          "symbol": "ThemeManager",
+          "sha256": "9711D576445774BFBFE872F8A813AA6A3EEF7962A3A849ED9113D6718C0D298E"
+        },
+        {
+          "path": "FamilyQuant/HomeControl.xaml",
+          "symbol": "Primary readable text in either theme",
+          "sha256": "6F1E11235C84A5C91032FB1AAF08E29BE2858D714B80B29C91B8BBF1BC94D860"
+        }
+      ],
+      "proofs": [
+        {
+          "runId": "LK-app-tokens",
+          "kind": "test",
+          "target": "LookAppTokenCommand",
+          "assertion": "App token role FQ15-FBFD00584F87 / Dark: TextOnDarkBrush -\u003E TextBrush",
+          "artifact": "D:\\FamilyQuant-data\\out-look\\app-home\\tokens-2\\proofs.log",
+          "inspectedBy": ""
+        },
+        {
+          "runId": "LK-app-tokens",
+          "kind": "test",
+          "target": "LookAppTokenCommand",
+          "assertion": "App token role FQ15-FBFD00584F87 / Light: TextOnDarkBrush -\u003E TextBrush",
+          "artifact": "D:\\FamilyQuant-data\\out-look\\app-home\\tokens-2\\proofs.log",
+          "inspectedBy": ""
+        }
+      ],
+      "note": "Intentional themed visual-role replacement, not old-color equality.",
+      "kindReceiptId": null,
+      "compared": "TextOnDarkBrush=White -\u003E TextBrush: Primary readable text in either theme"
+    },
+    {
+      "observationId": "FQ15-47695503C8C9",
+      "implementation": [
+        {
+          "path": "FamilyQuant/Themes/Tokens.xaml",
+          "symbol": "MutedBrush",
+          "sha256": "F0034F7A77C15E7FB8A21C5C4F169322922C7860418D7D3C1ED1CEA7D7BBFD7D"
+        },
+        {
+          "path": "FamilyQuant/Themes/ThemeManager.cs",
+          "symbol": "ThemeManager",
+          "sha256": "9711D576445774BFBFE872F8A813AA6A3EEF7962A3A849ED9113D6718C0D298E"
+        },
+        {
+          "path": "FamilyQuant/HomeControl.xaml",
+          "symbol": "Secondary explanatory text",
+          "sha256": "6F1E11235C84A5C91032FB1AAF08E29BE2858D714B80B29C91B8BBF1BC94D860"
+        }
+      ],
+      "proofs": [
+        {
+          "runId": "LK-app-tokens",
+          "kind": "test",
+          "target": "LookAppTokenCommand",
+          "assertion": "App token role FQ15-47695503C8C9 / Dark: MutedTextBrush -\u003E MutedBrush",
+          "artifact": "D:\\FamilyQuant-data\\out-look\\app-home\\tokens-2\\proofs.log",
+          "inspectedBy": ""
+        },
+        {
+          "runId": "LK-app-tokens",
+          "kind": "test",
+          "target": "LookAppTokenCommand",
+          "assertion": "App token role FQ15-47695503C8C9 / Light: MutedTextBrush -\u003E MutedBrush",
+          "artifact": "D:\\FamilyQuant-data\\out-look\\app-home\\tokens-2\\proofs.log",
+          "inspectedBy": ""
+        }
+      ],
+      "note": "Intentional themed visual-role replacement, not old-color equality.",
+      "kindReceiptId": null,
+      "compared": "MutedTextBrush=#FFB9C0CC -\u003E MutedBrush: Secondary explanatory text"
+    },
+    {
+      "observationId": "FQ15-E330EBDEE375",
+      "implementation": [
+        {
+          "path": "FamilyQuant/Themes/Tokens.xaml",
+          "symbol": "AccentBrush",
+          "sha256": "F0034F7A77C15E7FB8A21C5C4F169322922C7860418D7D3C1ED1CEA7D7BBFD7D"
+        },
+        {
+          "path": "FamilyQuant/Themes/ThemeManager.cs",
+          "symbol": "ThemeManager",
+          "sha256": "9711D576445774BFBFE872F8A813AA6A3EEF7962A3A849ED9113D6718C0D298E"
+        },
+        {
+          "path": "FamilyQuant/HomeControl.xaml",
+          "symbol": "Keyboard focus and selection attention; decorative step numbers are replaced by named actions",
+          "sha256": "6F1E11235C84A5C91032FB1AAF08E29BE2858D714B80B29C91B8BBF1BC94D860"
+        }
+      ],
+      "proofs": [],
+      "note": "OPEN: focus and removed step-number roles need their own explicit native checks.",
+      "kindReceiptId": null,
+      "compared": "GoldBrush=#FFFFD700 -\u003E AccentBrush: Keyboard focus and selection attention; decorative step numbers are replaced by named actions"
+    }
+  ],
+  "kindReceipts": null
+}

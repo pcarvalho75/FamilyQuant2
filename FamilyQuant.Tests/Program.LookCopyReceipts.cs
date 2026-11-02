@@ -22,7 +22,7 @@ internal static partial class Program
     private sealed record CopyReceiptResult(string Id, string Kind, bool Matched, string Mode, string Frozen,
         string Actual, string CurrentPath, string Symbol, string Context, string Reason, string FrozenMember = "");
 
-    private static int LookCopyReceiptCommand(string[] args)
+    private static int LookCopyReceiptCommand(string[] args, string? fixedRegister = null)
     {
         if (args.Length is not (5 or 6)) throw new ArgumentException("Supply frozen source root, native audit folder, fresh output, a timestamp from date and optional LK register prefix.");
         string prefix = args.Length == 6 ? args[5] : "LK-copy";
@@ -31,6 +31,14 @@ internal static partial class Program
         if (Directory.Exists(output) && Directory.EnumerateFileSystemEntries(output).Any()) throw new IOException("Output must be fresh.");
         Directory.CreateDirectory(output);
         var inventory = JsonSerializer.Deserialize<FeatureLedger.Inventory>(File.ReadAllText(Path.Combine(root, "docs/feature-ledger-scan.json")))!;
+        FeatureLedger.Observation[] cohort;
+        if (fixedRegister != null)
+        {
+            var register = JsonSerializer.Deserialize<FeatureLedgerEvidence.Register>(File.ReadAllText(fixedRegister), FeatureLedgerEvidence.JsonOptions)!;
+            cohort = FixedLookCopyCohort(register, inventory);
+        }
+        else
+        {
         using var auditSummary = JsonDocument.Parse(File.ReadAllText(Path.Combine(audit, "report.json")));
         if (auditSummary.RootElement.GetProperty("frozenCommit").GetString() != FeatureLedger.ReferenceCommit
             || auditSummary.RootElement.GetProperty("inventorySha256").GetString() != FeatureLedger.ReferenceInventorySha256)
@@ -41,13 +49,14 @@ internal static partial class Program
         if (existing.FatalProblems.Count > 0) throw new InvalidDataException(string.Join("; ", existing.FatalProblems));
         var proved = existing.Entries.Values.Where(e => e.Valid && !existing.IsKindBlocked(e.Row.ObservationId))
             .Select(e => e.Row.ObservationId).ToHashSet(StringComparer.Ordinal);
-        var cohort = inventory.Observations.Where(r => open.ContainsKey(r.Id) && !proved.Contains(r.Id)
+        cohort = inventory.Observations.Where(r => open.ContainsKey(r.Id) && !proved.Contains(r.Id)
             && !FeatureLedger.IsApprovedDrop(r)).OrderBy(r => r.Id, StringComparer.Ordinal).ToArray();
         foreach (var row in cohort)
         {
             var entry = open[row.Id];
             if ((entry.Kind, entry.Source, entry.Line, entry.Detail) != (row.Kind, row.Source, row.Line, row.Detail))
                 throw new InvalidDataException("Audit row differs from frozen inventory: " + row.Id);
+        }
         }
         var frozen = new Dictionary<string, string>(StringComparer.Ordinal);
         foreach (string source in cohort.Select(r => r.Source).Distinct(StringComparer.Ordinal))
@@ -125,8 +134,8 @@ internal static partial class Program
         {
             string target = Path.Combine(archive, path.Replace('/', '_')); File.Copy(Path.Combine(root, path), target); artifacts.Add(target);
         }
-        foreach (string path in new[] { typeof(Program).Assembly.Location, typeof(App).Assembly.Location, typeof(HelpContent).Assembly.Location,
-            Path.Combine(audit, "mapping.json"), Path.Combine(audit, "report.json") })
+        foreach (string path in new[] { typeof(Program).Assembly.Location, typeof(App).Assembly.Location, typeof(HelpContent).Assembly.Location }
+            .Concat(fixedRegister == null ? new[] { Path.Combine(audit, "mapping.json"), Path.Combine(audit, "report.json") } : new[] { fixedRegister }))
         {
             string target = Path.Combine(archive, Path.GetFileName(path)); File.Copy(path, target); artifacts.Add(target);
         }
@@ -138,9 +147,10 @@ internal static partial class Program
         var run = new FeatureLedgerEvidence.Run(runId, Environment.CommandLine, args[4], commit,
             artifacts.Select(p => new FeatureLedgerEvidence.Artifact(p, FeatureLedgerEvidence.Hash(p))).ToList(), root);
         int batch = 0;
-        foreach (var chunk in results.Chunk(200))
+        foreach (var chunk in fixedRegister == null ? results.Chunk(200) : new[] { results.ToArray() })
         {
-            string step = prefix + "-" + (++batch).ToString(CultureInfo.InvariantCulture);
+            string step = fixedRegister == null ? prefix + "-" + (++batch).ToString(CultureInfo.InvariantCulture)
+                : Path.GetFileNameWithoutExtension(fixedRegister);
             var receipts = chunk.Where(r => r.Matched).GroupBy(r => (r.Kind, r.Mode)).Select(g => new FeatureLedgerEvidence.KindReceipt(
                 CopyReceiptId(g.Key.Kind, g.Key.Mode), g.Key.Kind, new() { new(runId, "test", nameof(LookCopyReceiptCommand), CopyKindAssertion(g.Key.Kind, g.Key.Mode), log, "") })).ToList();
             var rows = chunk.Select(result =>
