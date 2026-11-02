@@ -29,6 +29,15 @@ public sealed class AppOperationHost : ScreenViewModel
         "Scope", typeof(AppOperationHost), typeof(AppOperationHost), new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.Inherits));
     public static void SetScope(DependencyObject view, AppOperationHost host) => view.SetValue(ScopeProperty, host);
     public static AppOperationHost? GetScope(DependencyObject view) => (AppOperationHost?)view.GetValue(ScopeProperty);
+    public static AppOperationHost BindWindow(FrameworkElement view, AppOperationHost preferred)
+    {
+        var window = Window.GetWindow(view);
+        if (window == null) return preferred;
+        if (GetScope(window) is AppOperationHost inherited) return inherited;
+        SetScope(window, preferred);
+        BusyOverlay.AttachWindow(window, preferred);
+        return preferred;
+    }
     public static AppOperationHost For(DependencyObject view)
     {
         if (GetScope(view) is AppOperationHost host) return host;

@@ -208,6 +208,7 @@ namespace FamilyQuant.Tests
             EvidenceCoverageTests();
             QueryResidueCoverageTests();
             FamilyWorldFetchTests();
+            DesktopWorldChecks();
             EvidenceTaskTests();
             EvidenceClassifierTests();
             EvidenceDeliveryFixtureTests(workDir);

@@ -165,6 +165,8 @@ Finished steps, moved here from docs/ROADMAP.md. The board shows them as green.
 | Y5 | No organism or venom wording in anything the user sees, with a guard | L | 0.3 | 🟢 | R3a | Guard red on a planted word; facts kept | LK | not started | 0% | 0% | T+0 |
 | Y3 | Five source captions get their filename patterns and Union prefixes back | L | 0.2 | 🟢 | R3a | Five facts shown in both themes | EV | not started | 0% | 0% | T+0 |
 | Y6 | Lost facts restored: the rows where the old fact no longer reaches the user | M | 0.5 | 🟢 | R3a | Each fact shown again, or listed for Paulo with a reason | LK | not started | 0% | 0% | T+0 |
+| Y7 | Busy screen: a polished animated logo wherever the program computes, in the one shared busy overlay, with Cancel and progress kept | M | 0.5 | 🟢 | R3a | Shown in every long operation, both themes; animation stops when the work ends and costs no noticeable CPU; Paulo likes it | RS | not started | 0% | 0% | T+0 |
+| Y8 | Fetch the family world from the program: a screen action with the confirmed scope, Cancel and progress. Today only a command line reaches it | M | 0.7 | 🟢 | R3a | Real project walked through the buttons: fetch, Compute, Database gap, FASTA; Cancel leaves the file as it was | EV | not started | 0% | 0% | T+1 |
 
 ### W3 Ledger, screen by screen
 

@@ -186,7 +186,7 @@ namespace FamilyQuant.Tests
                     var table = UiField<DataGrid>(window, "evidenceGrid")!;
                     var familyTable = UiField<DataGrid>(window, "familyGrid")!;
                     var apply = UiField<Button>(window, "createButton")!;
-                    Button Action(string text) => WalkTree(window).OfType<Button>().First(b => b.Content as string == text);
+                    Button Action(string text) => WalkTree(window).OfType<Button>().First(b => b.IsVisible && b.Content as string == text);
                     void Press(string text) { Action(text).RaiseEvent(new RoutedEventArgs(Button.ClickEvent)); PumpDispatcher(); }
                     Press("All proteins"); window.UpdateLayout();
                     table.ScrollIntoView(model.Evidence!.Proteins[^1]); PumpDispatcher(); window.UpdateLayout();
@@ -238,8 +238,11 @@ namespace FamilyQuant.Tests
                     model.MotifPattern = "user pattern"; FinishReviewWork(model.CheckMotifAsync); PumpDispatcher();
                     Check(theme + " motif counts retain carriers and their complete-protein denominator", apply.IsEnabled && model.MotifReport.Contains("2\t3", StringComparison.Ordinal));
                     Check(theme + " native Enter and Escape actions remain available", apply.IsDefault && Action("Cancel").IsCancel);
+                    bool cancelledWindowClosed = false;
+                    window.Closed += (_, _) => cancelledWindowClosed = true;
                     Press("Cancel");
-                    Check(theme + " Cancel returns no selection and mutates no source proposal", !window.Confirmed && window.EvidenceSelection == null && JsonSerializer.Serialize(input) == before);
+                    Check(theme + " Cancel returns no selection and mutates no source proposal", cancelledWindowClosed
+                        && !window.Confirmed && window.EvidenceSelection == null && JsonSerializer.Serialize(input) == before);
                 }
                 finally { window.Close(); }
             }

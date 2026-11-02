@@ -85,8 +85,6 @@ Columns: Diff = L, M, H, VH. Hrs = worker hours at measured speed: estimates are
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| Y7 | Busy screen: a polished animated logo wherever the program computes, in the one shared busy overlay, with Cancel and progress kept | M | 0.5 | 🟢 | R3a | Shown in every long operation, both themes; animation stops when the work ends and costs no noticeable CPU; Paulo likes it | RS | not started | 0% | 0% | T+0 |
-| Y8 | Fetch the family world from the program: a screen action with the confirmed scope, Cancel and progress. Today only a command line reaches it | M | 0.7 | 🟢 | R3a | Real project walked through the buttons: fetch, Compute, Database gap, FASTA; Cancel leaves the file as it was | EV | not started | 0% | 0% | T+1 |
 
 ### W3 Ledger, screen by screen
 
@@ -108,7 +106,7 @@ Columns: Diff = L, M, H, VH. Hrs = worker hours at measured speed: estimates are
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| R3a | Code freeze: only review findings touch product code after this | L | 0 | N6s, Y7, Y8 | R3b | Freeze noted; all lanes told | Orchestrator | not started | 0% | 0% | T+1 |
+| R3a | Code freeze: only review findings touch product code after this | L | 0 | N6s | R3b | Freeze noted; all lanes told | Orchestrator | not started | 0% | 0% | T+1 |
 | R3b | Final proof refresh and full suite on the frozen code | L | 0.2 | R3a | R3c | Every proof current; suite green | Orchestrator | not started | 0% | 0% | T+2 |
 | R3c | Release candidate: versions, build and a clean install rehearsal | M | 0.3 | R3b | R4a, R4b | Rehearsal installs beside 1.5 and opens her file | Orchestrator | not started | 0% | 0% | T+2 |
 | R4a | Final adversarial pass: code and behaviour | H | 1 | R3c | R4c | GR's verdict | GR | not started | 0% | 0% | T+3 |

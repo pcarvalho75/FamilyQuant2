@@ -5,192 +5,192 @@
   "runs": [
     {
       "id": "native",
-      "command": "C:\\FamilyQuant-gate\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --ledger-assay-build-workflow D:/FamilyQuant-data/out-shell/N3/source D:/FamilyQuant-data/out-refresh\\20261102-115935-FamilyQuant-gate\\as-build-workflow \u00222026-11-02 12:00:04 -0800\u0022",
-      "executedAt": "2026-11-02 12:00:04 -0800",
-      "commit": "a25db98253f90ce9a5ff050166e9562a6f7c5ede",
+      "command": "C:\\FamilyQuant-gate\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --ledger-assay-build-workflow D:/FamilyQuant-data/out-shell/N3/source D:/FamilyQuant-data/out-refresh\\20261102-123305-FamilyQuant-gate\\as-build-workflow \u00222026-11-02 12:33:19 -0800\u0022",
+      "executedAt": "2026-11-02 12:33:19 -0800",
+      "commit": "f4dc6b32acc4c159f4c7317b5e7a8cb7dd400d1c",
       "artifacts": [
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-115935-FamilyQuant-gate\\as-build-workflow\\proofs.log",
-          "sha256": "D900B421529895514058B30CB4D1E52F67F45291DCE0BEEEE14F30988A827956"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-123305-FamilyQuant-gate\\as-build-workflow\\proofs.log",
+          "sha256": "7BD1C10A13BEED3302BB4B53BDE2477A16C6B8877B2BCA4E1D4990630BDD7E6C"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-115935-FamilyQuant-gate\\as-build-workflow\\actual-values.json",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-123305-FamilyQuant-gate\\as-build-workflow\\actual-values.json",
           "sha256": "DC54423F75A4B81E6C2594941147C330C3F3CC635DE5042E3210E52500C4E98B"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-115935-FamilyQuant-gate\\as-build-workflow\\executed\\FamilyQuant.Core/FamilyQuantFile.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-123305-FamilyQuant-gate\\as-build-workflow\\executed\\FamilyQuant.Core/FamilyQuantFile.cs",
           "sha256": "0845785B94D6ED35E9702CD57B9DEB382608DE637444F8ED7154683872D75E5E"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-115935-FamilyQuant-gate\\as-build-workflow\\executed\\FamilyQuant.Core/RedundancyTools.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-123305-FamilyQuant-gate\\as-build-workflow\\executed\\FamilyQuant.Core/RedundancyTools.cs",
           "sha256": "B51F93ECF6FF874ED17BDAB7E619EAF67691F0C099A5E8A21059C81DE0D086C5"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-115935-FamilyQuant-gate\\as-build-workflow\\executed\\FamilyQuant.Core/USearchTools.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-123305-FamilyQuant-gate\\as-build-workflow\\executed\\FamilyQuant.Core/USearchTools.cs",
           "sha256": "7F644E1379D8A72937266A95B1E525417C4AFF55B1DFF5A9E10ABBC5BF80ACF9"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-115935-FamilyQuant-gate\\as-build-workflow\\executed\\FamilyQuant.Tests/AssayBuildOutputSnapshot.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-123305-FamilyQuant-gate\\as-build-workflow\\executed\\FamilyQuant.Tests/AssayBuildOutputSnapshot.cs",
           "sha256": "57CC2BAE2FF17F0EAD6B5571BD47EA34F49D037AC2067146DA3935AE6787233A"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-115935-FamilyQuant-gate\\as-build-workflow\\executed\\FamilyQuant.Tests/AssayBuildWorkflowComparison.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-123305-FamilyQuant-gate\\as-build-workflow\\executed\\FamilyQuant.Tests/AssayBuildWorkflowComparison.cs",
           "sha256": "EEBF877F4BE8A0FE7C51D6F3339D51DA8C412BAE0D6685BCE81F4E24E0A5909E"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-115935-FamilyQuant-gate\\as-build-workflow\\executed\\FamilyQuant.Tests/AssayCacheSnapshot.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-123305-FamilyQuant-gate\\as-build-workflow\\executed\\FamilyQuant.Tests/AssayCacheSnapshot.cs",
           "sha256": "9E0CD15CD1616F7A312E6A14209E745CF8C4ADB6EEF1A3D6125690A9602CCC1B"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-115935-FamilyQuant-gate\\as-build-workflow\\executed\\FamilyQuant.Tests/AssaySpectrumPropertyComparison.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-123305-FamilyQuant-gate\\as-build-workflow\\executed\\FamilyQuant.Tests/AssaySpectrumPropertyComparison.cs",
           "sha256": "157C955F947789AA5BA5759EA3B37D762EA6A5E693AB49345BDE540C420CC036"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-115935-FamilyQuant-gate\\as-build-workflow\\executed\\FamilyQuant.Tests/AssayViewSnapshot.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-123305-FamilyQuant-gate\\as-build-workflow\\executed\\FamilyQuant.Tests/AssayViewSnapshot.cs",
           "sha256": "CC9596D8D5DFE89A459BF6D4E44CDEF3D690528063C87F47461DA4724083DDC7"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-115935-FamilyQuant-gate\\as-build-workflow\\executed\\FamilyQuant.Tests/FeatureLedgerEvidence.Reporting.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-123305-FamilyQuant-gate\\as-build-workflow\\executed\\FamilyQuant.Tests/FeatureLedgerEvidence.Reporting.cs",
           "sha256": "8633DCBB14E8DBF1746A1FD771AD4E9404900EB68BA46690A31EFC8DEDFA247B"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-115935-FamilyQuant-gate\\as-build-workflow\\executed\\FamilyQuant.Tests/FeatureLedgerEvidence.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-123305-FamilyQuant-gate\\as-build-workflow\\executed\\FamilyQuant.Tests/FeatureLedgerEvidence.cs",
           "sha256": "A5C398B39A4DD93FA74401F7FA48A6302E25168A9A297B69FD5651CA621C0F43"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-115935-FamilyQuant-gate\\as-build-workflow\\executed\\FamilyQuant.Tests/Program.AssayBuildWorkflow.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-123305-FamilyQuant-gate\\as-build-workflow\\executed\\FamilyQuant.Tests/Program.AssayBuildWorkflow.cs",
           "sha256": "EA69D4403315627CD4D216B193D0A4FA2BF24599625468784EC3430DC0FF7BF0"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-115935-FamilyQuant-gate\\as-build-workflow\\executed\\FamilyQuant.Tests/Program.AssayBuildWorkflowLedger.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-123305-FamilyQuant-gate\\as-build-workflow\\executed\\FamilyQuant.Tests/Program.AssayBuildWorkflowLedger.cs",
           "sha256": "24ABF234700F95A876F817A3DB74DCBF2945AF86767C3423EB99F02591AFB822"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-115935-FamilyQuant-gate\\as-build-workflow\\executed\\FamilyQuant.Tests/Program.AssayCacheLedger.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-123305-FamilyQuant-gate\\as-build-workflow\\executed\\FamilyQuant.Tests/Program.AssayCacheLedger.cs",
           "sha256": "7D3B175CC9824DA443DC369CF9C8983E1C59004FD15F080951BCEEF72B5449C9"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-115935-FamilyQuant-gate\\as-build-workflow\\executed\\FamilyQuant.Tests/Program.AssayRuntimeLedger.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-123305-FamilyQuant-gate\\as-build-workflow\\executed\\FamilyQuant.Tests/Program.AssayRuntimeLedger.cs",
           "sha256": "24F4A0BACCC044156A198BDE8790FCDE12BF0A995641CA359FCB1AFEB3009CB7"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-115935-FamilyQuant-gate\\as-build-workflow\\executed\\FamilyQuant.Tests/Program.Commands.AssayLedger.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-123305-FamilyQuant-gate\\as-build-workflow\\executed\\FamilyQuant.Tests/Program.Commands.AssayLedger.cs",
           "sha256": "46DA029D0DBAA113B736A5E3B2BE7D29C486565EAE0063281F58F292ECC8112E"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-115935-FamilyQuant-gate\\as-build-workflow\\executed\\FamilyQuant/AppOperationHost.cs",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-123305-FamilyQuant-gate\\as-build-workflow\\executed\\FamilyQuant/AppOperationHost.cs",
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-115935-FamilyQuant-gate\\as-build-workflow\\executed\\FamilyQuant/ShellDialogs.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-123305-FamilyQuant-gate\\as-build-workflow\\executed\\FamilyQuant/ShellDialogs.cs",
           "sha256": "BADA9EAE7CCA3011F34E56A17D71DA7304EAB666D61D06E0C53DA532589AAA76"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-115935-FamilyQuant-gate\\as-build-workflow\\executed\\FamilyQuant/USearch.Actions.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-123305-FamilyQuant-gate\\as-build-workflow\\executed\\FamilyQuant/USearch.Actions.cs",
           "sha256": "5C9102771D011BC74D57110ADB467B1CB863C7FAE8B54BD3901FEF0E2BA927B2"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-115935-FamilyQuant-gate\\as-build-workflow\\executed\\FamilyQuant/USearch.Presentation.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-123305-FamilyQuant-gate\\as-build-workflow\\executed\\FamilyQuant/USearch.Presentation.cs",
           "sha256": "8F8C52800E607F3F705B5263C84BA20C2455FCFBC27DCD917A02A3BA8EAF9D15"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-115935-FamilyQuant-gate\\as-build-workflow\\executed\\FamilyQuant/USearch.Report.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-123305-FamilyQuant-gate\\as-build-workflow\\executed\\FamilyQuant/USearch.Report.cs",
           "sha256": "5ECEE34F97D000E7FB1B3D140CBED8BFF97312D28ABA53D4F398F8A427691164"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-115935-FamilyQuant-gate\\as-build-workflow\\executed\\FamilyQuant/USearch.ViewModel.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-123305-FamilyQuant-gate\\as-build-workflow\\executed\\FamilyQuant/USearch.ViewModel.cs",
           "sha256": "7F2B00D5FF4971D43728A6AD20E696AEFA76793FC47C9D80BB0E54A6707A46E1"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-115935-FamilyQuant-gate\\as-build-workflow\\executed\\FamilyQuant/USearch.xaml",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-123305-FamilyQuant-gate\\as-build-workflow\\executed\\FamilyQuant/USearch.xaml",
           "sha256": "CFCD12EC58A094D0B5C3D8FE9CA0D07FB442F6DCFB5480F299D786E839BE0202"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-115935-FamilyQuant-gate\\as-build-workflow\\executed\\FamilyQuant/USearch.xaml.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-123305-FamilyQuant-gate\\as-build-workflow\\executed\\FamilyQuant/USearch.xaml.cs",
           "sha256": "84D42556EC109D828B4DF5230F76638953DDFF11C4E7E183BDD6D912C77128A9"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-115935-FamilyQuant-gate\\as-build-workflow\\executed\\frozen\\FamilyQuant/USearch.xaml",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-123305-FamilyQuant-gate\\as-build-workflow\\executed\\frozen\\FamilyQuant/USearch.xaml",
           "sha256": "9AFFA6E1E8BEBD1BA44EABD784C6FF91EA769B79514143C4125B7D32143C7AE3"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-115935-FamilyQuant-gate\\as-build-workflow\\executed\\frozen\\FamilyQuant/USearch.xaml.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-123305-FamilyQuant-gate\\as-build-workflow\\executed\\frozen\\FamilyQuant/USearch.xaml.cs",
           "sha256": "693D5B1F505751D5C552AB1F902C8FC6F0186B2D8B8E53E53C446B327F8A5597"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-115935-FamilyQuant-gate\\as-build-workflow\\executed\\FamilyQuant.Tests.dll",
-          "sha256": "5379B0EB15114003E972590D829015479CAC50655995ABBCA8A0BBD788DBC3DA"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-123305-FamilyQuant-gate\\as-build-workflow\\executed\\FamilyQuant.Tests.dll",
+          "sha256": "8E553822814AE1B1F76A5F46D532D95C0C938EB96408A3C611FB8376A1136DEF"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-115935-FamilyQuant-gate\\as-build-workflow\\executed\\FamilyQuant.Core.dll",
-          "sha256": "09729858CD31AAB222029CF7EF95279F0A617B5AC50413D5BA00B65DE160E095"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-123305-FamilyQuant-gate\\as-build-workflow\\executed\\FamilyQuant.Core.dll",
+          "sha256": "52B70916AF4F6DB9AE6C949F0184D99A9F3E4196741F550AA568B3407E47B21F"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-115935-FamilyQuant-gate\\as-build-workflow\\executed\\FamilyQuant.dll",
-          "sha256": "2501D288DBFCA0B6ADB8005208AF8BB2FC37D15A712DCFAAF74F952F2422436A"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-123305-FamilyQuant-gate\\as-build-workflow\\executed\\FamilyQuant.dll",
+          "sha256": "E19C7BC2C7AB6A65D911A0918A17C9EACB7E65C506D0930D9144470494640DED"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-115935-FamilyQuant-gate\\as-build-workflow\\frozen-FamilyQuant.dll",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-123305-FamilyQuant-gate\\as-build-workflow\\frozen-FamilyQuant.dll",
           "sha256": "D764488C923945285E03B338E5A91BF28106A35B11AB465D8E2B23D125F03FD8"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-115935-FamilyQuant-gate\\as-build-workflow\\frozen-ReferenceGoldenHost.dll",
-          "sha256": "454E7D24F8F3D3D8619C3DACE0DB3760D61FB242FAF7A7DC8C2018CDE85F227A"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-123305-FamilyQuant-gate\\as-build-workflow\\frozen-ReferenceGoldenHost.dll",
+          "sha256": "ADCEC450C2D4101751EA596EC6BA7D4B2A5C951107D1D38ED282521C6AB7A278"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-115935-FamilyQuant-gate\\as-build-workflow\\frozen-ReferenceGoldenHost.exe",
-          "sha256": "535AB57A6A4F9C3939791708EE89D14064CBA17182A4931AD1765CF2BCF7A336"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-123305-FamilyQuant-gate\\as-build-workflow\\frozen-ReferenceGoldenHost.exe",
+          "sha256": "EA45CC3B43909A7F77CBC33559A97762841B2271BAE0863FF38671CF0050BD71"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-115935-FamilyQuant-gate\\as-build-workflow\\frozen-native.log",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-123305-FamilyQuant-gate\\as-build-workflow\\frozen-native.log",
           "sha256": "8F7A6D041E150E0A68FE2C1A5C544E1E063165C582AE4346022869C0FE9A018A"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-115935-FamilyQuant-gate\\as-build-workflow\\workflow-anchors.json",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-123305-FamilyQuant-gate\\as-build-workflow\\workflow-anchors.json",
           "sha256": "79601963DF9D00ADF7D1EAC52ABB5F61F5847C5A1FAC671959D0ADCBFAD25ABB"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-115935-FamilyQuant-gate\\as-build-workflow\\current-native\\fixture.fasta",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-123305-FamilyQuant-gate\\as-build-workflow\\current-native\\fixture.fasta",
           "sha256": "697D8C44990CBE641D82AB135C3F44E8C2F6553E99F03C24CDD4D8F7B2E4C763"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-115935-FamilyQuant-gate\\as-build-workflow\\current-native\\fixture_NO_REDUNDANCY.fasta",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-123305-FamilyQuant-gate\\as-build-workflow\\current-native\\fixture_NO_REDUNDANCY.fasta",
           "sha256": "B4FB282F81C1037452C245A6C028419B4E148B5A312DD8AFC367950E7610A9C8"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-115935-FamilyQuant-gate\\as-build-workflow\\current-native\\native-values.json",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-123305-FamilyQuant-gate\\as-build-workflow\\current-native\\native-values.json",
           "sha256": "595093461DD8A6E5CEC80B2ABEB3BB839F5E7D7A10983B7CE3E5F02FDD243A2D"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-115935-FamilyQuant-gate\\as-build-workflow\\frozen-native\\fixture.fasta",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-123305-FamilyQuant-gate\\as-build-workflow\\frozen-native\\fixture.fasta",
           "sha256": "697D8C44990CBE641D82AB135C3F44E8C2F6553E99F03C24CDD4D8F7B2E4C763"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-115935-FamilyQuant-gate\\as-build-workflow\\frozen-native\\fixture_NO_REDUNDANCY.fasta",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-123305-FamilyQuant-gate\\as-build-workflow\\frozen-native\\fixture_NO_REDUNDANCY.fasta",
           "sha256": "B4FB282F81C1037452C245A6C028419B4E148B5A312DD8AFC367950E7610A9C8"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-115935-FamilyQuant-gate\\as-build-workflow\\frozen-native\\native-values.json",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-123305-FamilyQuant-gate\\as-build-workflow\\frozen-native\\native-values.json",
           "sha256": "595093461DD8A6E5CEC80B2ABEB3BB839F5E7D7A10983B7CE3E5F02FDD243A2D"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-115935-FamilyQuant-gate\\as-build-workflow\\workflow\\duplicate.fasta",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-123305-FamilyQuant-gate\\as-build-workflow\\workflow\\duplicate.fasta",
           "sha256": "3F457EA73863923CD09074D2E9C805E196D5CDDBE2EB8A65455419A47B202368"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-115935-FamilyQuant-gate\\as-build-workflow\\workflow\\fixture.fasta",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-123305-FamilyQuant-gate\\as-build-workflow\\workflow\\fixture.fasta",
           "sha256": "697D8C44990CBE641D82AB135C3F44E8C2F6553E99F03C24CDD4D8F7B2E4C763"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-115935-FamilyQuant-gate\\as-build-workflow\\workflow\\fixture.fcf",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-123305-FamilyQuant-gate\\as-build-workflow\\workflow\\fixture.fcf",
           "sha256": "290DE46CAFEA6D393C9DD7DD407727446DA780B42DFEA18CCCAD7A8EB1458062"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-115935-FamilyQuant-gate\\as-build-workflow\\workflow\\fixture_NO_REDUNDANCY.fasta",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-123305-FamilyQuant-gate\\as-build-workflow\\workflow\\fixture_NO_REDUNDANCY.fasta",
           "sha256": "B4FB282F81C1037452C245A6C028419B4E148B5A312DD8AFC367950E7610A9C8"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-115935-FamilyQuant-gate\\as-build-workflow\\workflow\\workflow-values.json",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-123305-FamilyQuant-gate\\as-build-workflow\\workflow\\workflow-values.json",
           "sha256": "851A345B8121242A473F919234C105D5525D1D8C24B8CE614C96BB1AF0A936D8"
         }
       ],
@@ -198,70 +198,6 @@
     }
   ],
   "rows": [
-    {
-      "observationId": "FQ15-00014F7B5211",
-      "implementation": [
-        {
-          "path": "FamilyQuant.Core/FamilyQuantFile.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "0845785B94D6ED35E9702CD57B9DEB382608DE637444F8ED7154683872D75E5E"
-        },
-        {
-          "path": "FamilyQuant.Core/RedundancyTools.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "B51F93ECF6FF874ED17BDAB7E619EAF67691F0C099A5E8A21059C81DE0D086C5"
-        },
-        {
-          "path": "FamilyQuant.Core/USearchTools.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "7F644E1379D8A72937266A95B1E525417C4AFF55B1DFF5A9E10ABBC5BF80ACF9"
-        },
-        {
-          "path": "FamilyQuant/AppOperationHost.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
-        },
-        {
-          "path": "FamilyQuant/ShellDialogs.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "BADA9EAE7CCA3011F34E56A17D71DA7304EAB666D61D06E0C53DA532589AAA76"
-        },
-        {
-          "path": "FamilyQuant/USearch.Actions.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "5C9102771D011BC74D57110ADB467B1CB863C7FAE8B54BD3901FEF0E2BA927B2"
-        },
-        {
-          "path": "FamilyQuant/USearch.Presentation.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "8F8C52800E607F3F705B5263C84BA20C2455FCFBC27DCD917A02A3BA8EAF9D15"
-        },
-        {
-          "path": "FamilyQuant/USearch.Report.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "5ECEE34F97D000E7FB1B3D140CBED8BFF97312D28ABA53D4F398F8A427691164"
-        },
-        {
-          "path": "FamilyQuant/USearch.ViewModel.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "7F2B00D5FF4971D43728A6AD20E696AEFA76793FC47C9D80BB0E54A6707A46E1"
-        },
-        {
-          "path": "FamilyQuant/USearch.xaml",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "CFCD12EC58A094D0B5C3D8FE9CA0D07FB442F6DCFB5480F299D786E839BE0202"
-        },
-        {
-          "path": "FamilyQuant/USearch.xaml.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "84D42556EC109D828B4DF5230F76638953DDFF11C4E7E183BDD6D912C77128A9"
-        }
-      ],
-      "proofs": [],
-      "note": "No observation-specific native check; remains OPEN.",
-      "kindReceiptId": null,
-      "compared": null
-    },
     {
       "observationId": "FQ15-032C14B46507",
       "implementation": [
@@ -283,7 +219,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -347,7 +283,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -411,7 +347,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -475,7 +411,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -539,7 +475,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -603,7 +539,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -667,7 +603,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -731,7 +667,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -795,7 +731,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -859,7 +795,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -923,7 +859,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -987,7 +923,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -1051,7 +987,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -1115,7 +1051,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -1179,7 +1115,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -1243,7 +1179,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -1307,7 +1243,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -1371,7 +1307,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -1435,7 +1371,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -1499,7 +1435,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -1563,7 +1499,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -1627,7 +1563,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -1691,7 +1627,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -1755,7 +1691,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -1819,7 +1755,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -1883,7 +1819,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -1947,7 +1883,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -2011,7 +1947,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -2075,7 +2011,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -2139,7 +2075,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -2203,7 +2139,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -2267,71 +2203,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
-        },
-        {
-          "path": "FamilyQuant/ShellDialogs.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "BADA9EAE7CCA3011F34E56A17D71DA7304EAB666D61D06E0C53DA532589AAA76"
-        },
-        {
-          "path": "FamilyQuant/USearch.Actions.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "5C9102771D011BC74D57110ADB467B1CB863C7FAE8B54BD3901FEF0E2BA927B2"
-        },
-        {
-          "path": "FamilyQuant/USearch.Presentation.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "8F8C52800E607F3F705B5263C84BA20C2455FCFBC27DCD917A02A3BA8EAF9D15"
-        },
-        {
-          "path": "FamilyQuant/USearch.Report.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "5ECEE34F97D000E7FB1B3D140CBED8BFF97312D28ABA53D4F398F8A427691164"
-        },
-        {
-          "path": "FamilyQuant/USearch.ViewModel.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "7F2B00D5FF4971D43728A6AD20E696AEFA76793FC47C9D80BB0E54A6707A46E1"
-        },
-        {
-          "path": "FamilyQuant/USearch.xaml",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "CFCD12EC58A094D0B5C3D8FE9CA0D07FB442F6DCFB5480F299D786E839BE0202"
-        },
-        {
-          "path": "FamilyQuant/USearch.xaml.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "84D42556EC109D828B4DF5230F76638953DDFF11C4E7E183BDD6D912C77128A9"
-        }
-      ],
-      "proofs": [],
-      "note": "No observation-specific native check; remains OPEN.",
-      "kindReceiptId": null,
-      "compared": null
-    },
-    {
-      "observationId": "FQ15-21F35F2A9566",
-      "implementation": [
-        {
-          "path": "FamilyQuant.Core/FamilyQuantFile.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "0845785B94D6ED35E9702CD57B9DEB382608DE637444F8ED7154683872D75E5E"
-        },
-        {
-          "path": "FamilyQuant.Core/RedundancyTools.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "B51F93ECF6FF874ED17BDAB7E619EAF67691F0C099A5E8A21059C81DE0D086C5"
-        },
-        {
-          "path": "FamilyQuant.Core/USearchTools.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "7F644E1379D8A72937266A95B1E525417C4AFF55B1DFF5A9E10ABBC5BF80ACF9"
-        },
-        {
-          "path": "FamilyQuant/AppOperationHost.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -2395,7 +2267,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -2459,7 +2331,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -2523,71 +2395,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
-        },
-        {
-          "path": "FamilyQuant/ShellDialogs.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "BADA9EAE7CCA3011F34E56A17D71DA7304EAB666D61D06E0C53DA532589AAA76"
-        },
-        {
-          "path": "FamilyQuant/USearch.Actions.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "5C9102771D011BC74D57110ADB467B1CB863C7FAE8B54BD3901FEF0E2BA927B2"
-        },
-        {
-          "path": "FamilyQuant/USearch.Presentation.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "8F8C52800E607F3F705B5263C84BA20C2455FCFBC27DCD917A02A3BA8EAF9D15"
-        },
-        {
-          "path": "FamilyQuant/USearch.Report.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "5ECEE34F97D000E7FB1B3D140CBED8BFF97312D28ABA53D4F398F8A427691164"
-        },
-        {
-          "path": "FamilyQuant/USearch.ViewModel.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "7F2B00D5FF4971D43728A6AD20E696AEFA76793FC47C9D80BB0E54A6707A46E1"
-        },
-        {
-          "path": "FamilyQuant/USearch.xaml",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "CFCD12EC58A094D0B5C3D8FE9CA0D07FB442F6DCFB5480F299D786E839BE0202"
-        },
-        {
-          "path": "FamilyQuant/USearch.xaml.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "84D42556EC109D828B4DF5230F76638953DDFF11C4E7E183BDD6D912C77128A9"
-        }
-      ],
-      "proofs": [],
-      "note": "No observation-specific native check; remains OPEN.",
-      "kindReceiptId": null,
-      "compared": null
-    },
-    {
-      "observationId": "FQ15-23F4B3B559C2",
-      "implementation": [
-        {
-          "path": "FamilyQuant.Core/FamilyQuantFile.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "0845785B94D6ED35E9702CD57B9DEB382608DE637444F8ED7154683872D75E5E"
-        },
-        {
-          "path": "FamilyQuant.Core/RedundancyTools.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "B51F93ECF6FF874ED17BDAB7E619EAF67691F0C099A5E8A21059C81DE0D086C5"
-        },
-        {
-          "path": "FamilyQuant.Core/USearchTools.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "7F644E1379D8A72937266A95B1E525417C4AFF55B1DFF5A9E10ABBC5BF80ACF9"
-        },
-        {
-          "path": "FamilyQuant/AppOperationHost.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -2651,7 +2459,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -2715,71 +2523,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
-        },
-        {
-          "path": "FamilyQuant/ShellDialogs.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "BADA9EAE7CCA3011F34E56A17D71DA7304EAB666D61D06E0C53DA532589AAA76"
-        },
-        {
-          "path": "FamilyQuant/USearch.Actions.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "5C9102771D011BC74D57110ADB467B1CB863C7FAE8B54BD3901FEF0E2BA927B2"
-        },
-        {
-          "path": "FamilyQuant/USearch.Presentation.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "8F8C52800E607F3F705B5263C84BA20C2455FCFBC27DCD917A02A3BA8EAF9D15"
-        },
-        {
-          "path": "FamilyQuant/USearch.Report.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "5ECEE34F97D000E7FB1B3D140CBED8BFF97312D28ABA53D4F398F8A427691164"
-        },
-        {
-          "path": "FamilyQuant/USearch.ViewModel.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "7F2B00D5FF4971D43728A6AD20E696AEFA76793FC47C9D80BB0E54A6707A46E1"
-        },
-        {
-          "path": "FamilyQuant/USearch.xaml",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "CFCD12EC58A094D0B5C3D8FE9CA0D07FB442F6DCFB5480F299D786E839BE0202"
-        },
-        {
-          "path": "FamilyQuant/USearch.xaml.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "84D42556EC109D828B4DF5230F76638953DDFF11C4E7E183BDD6D912C77128A9"
-        }
-      ],
-      "proofs": [],
-      "note": "No observation-specific native check; remains OPEN.",
-      "kindReceiptId": null,
-      "compared": null
-    },
-    {
-      "observationId": "FQ15-25C42617BBA4",
-      "implementation": [
-        {
-          "path": "FamilyQuant.Core/FamilyQuantFile.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "0845785B94D6ED35E9702CD57B9DEB382608DE637444F8ED7154683872D75E5E"
-        },
-        {
-          "path": "FamilyQuant.Core/RedundancyTools.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "B51F93ECF6FF874ED17BDAB7E619EAF67691F0C099A5E8A21059C81DE0D086C5"
-        },
-        {
-          "path": "FamilyQuant.Core/USearchTools.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "7F644E1379D8A72937266A95B1E525417C4AFF55B1DFF5A9E10ABBC5BF80ACF9"
-        },
-        {
-          "path": "FamilyQuant/AppOperationHost.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -2843,71 +2587,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
-        },
-        {
-          "path": "FamilyQuant/ShellDialogs.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "BADA9EAE7CCA3011F34E56A17D71DA7304EAB666D61D06E0C53DA532589AAA76"
-        },
-        {
-          "path": "FamilyQuant/USearch.Actions.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "5C9102771D011BC74D57110ADB467B1CB863C7FAE8B54BD3901FEF0E2BA927B2"
-        },
-        {
-          "path": "FamilyQuant/USearch.Presentation.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "8F8C52800E607F3F705B5263C84BA20C2455FCFBC27DCD917A02A3BA8EAF9D15"
-        },
-        {
-          "path": "FamilyQuant/USearch.Report.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "5ECEE34F97D000E7FB1B3D140CBED8BFF97312D28ABA53D4F398F8A427691164"
-        },
-        {
-          "path": "FamilyQuant/USearch.ViewModel.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "7F2B00D5FF4971D43728A6AD20E696AEFA76793FC47C9D80BB0E54A6707A46E1"
-        },
-        {
-          "path": "FamilyQuant/USearch.xaml",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "CFCD12EC58A094D0B5C3D8FE9CA0D07FB442F6DCFB5480F299D786E839BE0202"
-        },
-        {
-          "path": "FamilyQuant/USearch.xaml.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "84D42556EC109D828B4DF5230F76638953DDFF11C4E7E183BDD6D912C77128A9"
-        }
-      ],
-      "proofs": [],
-      "note": "No observation-specific native check; remains OPEN.",
-      "kindReceiptId": null,
-      "compared": null
-    },
-    {
-      "observationId": "FQ15-2751E8205ED5",
-      "implementation": [
-        {
-          "path": "FamilyQuant.Core/FamilyQuantFile.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "0845785B94D6ED35E9702CD57B9DEB382608DE637444F8ED7154683872D75E5E"
-        },
-        {
-          "path": "FamilyQuant.Core/RedundancyTools.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "B51F93ECF6FF874ED17BDAB7E619EAF67691F0C099A5E8A21059C81DE0D086C5"
-        },
-        {
-          "path": "FamilyQuant.Core/USearchTools.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "7F644E1379D8A72937266A95B1E525417C4AFF55B1DFF5A9E10ABBC5BF80ACF9"
-        },
-        {
-          "path": "FamilyQuant/AppOperationHost.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -2971,7 +2651,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -3035,7 +2715,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -3099,7 +2779,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -3163,7 +2843,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -3227,7 +2907,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -3291,7 +2971,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -3355,7 +3035,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -3419,7 +3099,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -3483,7 +3163,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -3547,7 +3227,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -3611,7 +3291,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -3675,7 +3355,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -3739,7 +3419,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -3803,7 +3483,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -3867,7 +3547,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -3931,7 +3611,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -3995,7 +3675,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -4059,7 +3739,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -4123,7 +3803,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -4187,7 +3867,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -4251,7 +3931,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -4315,7 +3995,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -4379,7 +4059,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -4443,7 +4123,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -4507,7 +4187,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -4571,7 +4251,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -4635,7 +4315,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -4699,7 +4379,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -4763,7 +4443,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -4827,7 +4507,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -4891,7 +4571,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -4955,7 +4635,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -5019,7 +4699,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -5083,7 +4763,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -5147,7 +4827,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -5211,7 +4891,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -5275,7 +4955,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -5339,7 +5019,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -5403,7 +5083,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -5467,7 +5147,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -5531,7 +5211,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -5595,7 +5275,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -5659,7 +5339,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -5723,71 +5403,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
-        },
-        {
-          "path": "FamilyQuant/ShellDialogs.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "BADA9EAE7CCA3011F34E56A17D71DA7304EAB666D61D06E0C53DA532589AAA76"
-        },
-        {
-          "path": "FamilyQuant/USearch.Actions.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "5C9102771D011BC74D57110ADB467B1CB863C7FAE8B54BD3901FEF0E2BA927B2"
-        },
-        {
-          "path": "FamilyQuant/USearch.Presentation.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "8F8C52800E607F3F705B5263C84BA20C2455FCFBC27DCD917A02A3BA8EAF9D15"
-        },
-        {
-          "path": "FamilyQuant/USearch.Report.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "5ECEE34F97D000E7FB1B3D140CBED8BFF97312D28ABA53D4F398F8A427691164"
-        },
-        {
-          "path": "FamilyQuant/USearch.ViewModel.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "7F2B00D5FF4971D43728A6AD20E696AEFA76793FC47C9D80BB0E54A6707A46E1"
-        },
-        {
-          "path": "FamilyQuant/USearch.xaml",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "CFCD12EC58A094D0B5C3D8FE9CA0D07FB442F6DCFB5480F299D786E839BE0202"
-        },
-        {
-          "path": "FamilyQuant/USearch.xaml.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "84D42556EC109D828B4DF5230F76638953DDFF11C4E7E183BDD6D912C77128A9"
-        }
-      ],
-      "proofs": [],
-      "note": "No observation-specific native check; remains OPEN.",
-      "kindReceiptId": null,
-      "compared": null
-    },
-    {
-      "observationId": "FQ15-6065665A6950",
-      "implementation": [
-        {
-          "path": "FamilyQuant.Core/FamilyQuantFile.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "0845785B94D6ED35E9702CD57B9DEB382608DE637444F8ED7154683872D75E5E"
-        },
-        {
-          "path": "FamilyQuant.Core/RedundancyTools.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "B51F93ECF6FF874ED17BDAB7E619EAF67691F0C099A5E8A21059C81DE0D086C5"
-        },
-        {
-          "path": "FamilyQuant.Core/USearchTools.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "7F644E1379D8A72937266A95B1E525417C4AFF55B1DFF5A9E10ABBC5BF80ACF9"
-        },
-        {
-          "path": "FamilyQuant/AppOperationHost.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -5851,7 +5467,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -5915,7 +5531,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -5979,7 +5595,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -6043,7 +5659,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -6107,7 +5723,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -6171,7 +5787,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -6235,7 +5851,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -6299,7 +5915,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -6363,7 +5979,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -6427,7 +6043,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -6491,7 +6107,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -6555,7 +6171,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -6619,7 +6235,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -6683,7 +6299,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -6747,7 +6363,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -6811,7 +6427,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -6875,7 +6491,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -6939,7 +6555,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -7003,7 +6619,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -7067,7 +6683,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -7131,7 +6747,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -7195,7 +6811,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -7259,7 +6875,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -7323,7 +6939,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -7387,7 +7003,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -7451,7 +7067,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -7515,7 +7131,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -7579,7 +7195,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -7643,7 +7259,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -7707,7 +7323,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -7771,7 +7387,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -7835,7 +7451,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -7899,7 +7515,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -7963,7 +7579,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -8027,7 +7643,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -8091,7 +7707,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -8155,7 +7771,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -8219,7 +7835,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -8283,7 +7899,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -8347,7 +7963,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -8411,7 +8027,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -8475,7 +8091,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -8539,71 +8155,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
-        },
-        {
-          "path": "FamilyQuant/ShellDialogs.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "BADA9EAE7CCA3011F34E56A17D71DA7304EAB666D61D06E0C53DA532589AAA76"
-        },
-        {
-          "path": "FamilyQuant/USearch.Actions.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "5C9102771D011BC74D57110ADB467B1CB863C7FAE8B54BD3901FEF0E2BA927B2"
-        },
-        {
-          "path": "FamilyQuant/USearch.Presentation.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "8F8C52800E607F3F705B5263C84BA20C2455FCFBC27DCD917A02A3BA8EAF9D15"
-        },
-        {
-          "path": "FamilyQuant/USearch.Report.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "5ECEE34F97D000E7FB1B3D140CBED8BFF97312D28ABA53D4F398F8A427691164"
-        },
-        {
-          "path": "FamilyQuant/USearch.ViewModel.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "7F2B00D5FF4971D43728A6AD20E696AEFA76793FC47C9D80BB0E54A6707A46E1"
-        },
-        {
-          "path": "FamilyQuant/USearch.xaml",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "CFCD12EC58A094D0B5C3D8FE9CA0D07FB442F6DCFB5480F299D786E839BE0202"
-        },
-        {
-          "path": "FamilyQuant/USearch.xaml.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "84D42556EC109D828B4DF5230F76638953DDFF11C4E7E183BDD6D912C77128A9"
-        }
-      ],
-      "proofs": [],
-      "note": "No observation-specific native check; remains OPEN.",
-      "kindReceiptId": null,
-      "compared": null
-    },
-    {
-      "observationId": "FQ15-9010A5C31951",
-      "implementation": [
-        {
-          "path": "FamilyQuant.Core/FamilyQuantFile.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "0845785B94D6ED35E9702CD57B9DEB382608DE637444F8ED7154683872D75E5E"
-        },
-        {
-          "path": "FamilyQuant.Core/RedundancyTools.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "B51F93ECF6FF874ED17BDAB7E619EAF67691F0C099A5E8A21059C81DE0D086C5"
-        },
-        {
-          "path": "FamilyQuant.Core/USearchTools.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "7F644E1379D8A72937266A95B1E525417C4AFF55B1DFF5A9E10ABBC5BF80ACF9"
-        },
-        {
-          "path": "FamilyQuant/AppOperationHost.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -8667,7 +8219,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -8731,7 +8283,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -8795,7 +8347,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -8859,7 +8411,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -8923,7 +8475,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -8987,7 +8539,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -9051,7 +8603,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -9115,7 +8667,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -9179,7 +8731,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -9243,71 +8795,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
-        },
-        {
-          "path": "FamilyQuant/ShellDialogs.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "BADA9EAE7CCA3011F34E56A17D71DA7304EAB666D61D06E0C53DA532589AAA76"
-        },
-        {
-          "path": "FamilyQuant/USearch.Actions.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "5C9102771D011BC74D57110ADB467B1CB863C7FAE8B54BD3901FEF0E2BA927B2"
-        },
-        {
-          "path": "FamilyQuant/USearch.Presentation.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "8F8C52800E607F3F705B5263C84BA20C2455FCFBC27DCD917A02A3BA8EAF9D15"
-        },
-        {
-          "path": "FamilyQuant/USearch.Report.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "5ECEE34F97D000E7FB1B3D140CBED8BFF97312D28ABA53D4F398F8A427691164"
-        },
-        {
-          "path": "FamilyQuant/USearch.ViewModel.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "7F2B00D5FF4971D43728A6AD20E696AEFA76793FC47C9D80BB0E54A6707A46E1"
-        },
-        {
-          "path": "FamilyQuant/USearch.xaml",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "CFCD12EC58A094D0B5C3D8FE9CA0D07FB442F6DCFB5480F299D786E839BE0202"
-        },
-        {
-          "path": "FamilyQuant/USearch.xaml.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "84D42556EC109D828B4DF5230F76638953DDFF11C4E7E183BDD6D912C77128A9"
-        }
-      ],
-      "proofs": [],
-      "note": "No observation-specific native check; remains OPEN.",
-      "kindReceiptId": null,
-      "compared": null
-    },
-    {
-      "observationId": "FQ15-961F39A7C9EB",
-      "implementation": [
-        {
-          "path": "FamilyQuant.Core/FamilyQuantFile.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "0845785B94D6ED35E9702CD57B9DEB382608DE637444F8ED7154683872D75E5E"
-        },
-        {
-          "path": "FamilyQuant.Core/RedundancyTools.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "B51F93ECF6FF874ED17BDAB7E619EAF67691F0C099A5E8A21059C81DE0D086C5"
-        },
-        {
-          "path": "FamilyQuant.Core/USearchTools.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "7F644E1379D8A72937266A95B1E525417C4AFF55B1DFF5A9E10ABBC5BF80ACF9"
-        },
-        {
-          "path": "FamilyQuant/AppOperationHost.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -9371,7 +8859,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -9435,7 +8923,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -9499,71 +8987,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
-        },
-        {
-          "path": "FamilyQuant/ShellDialogs.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "BADA9EAE7CCA3011F34E56A17D71DA7304EAB666D61D06E0C53DA532589AAA76"
-        },
-        {
-          "path": "FamilyQuant/USearch.Actions.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "5C9102771D011BC74D57110ADB467B1CB863C7FAE8B54BD3901FEF0E2BA927B2"
-        },
-        {
-          "path": "FamilyQuant/USearch.Presentation.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "8F8C52800E607F3F705B5263C84BA20C2455FCFBC27DCD917A02A3BA8EAF9D15"
-        },
-        {
-          "path": "FamilyQuant/USearch.Report.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "5ECEE34F97D000E7FB1B3D140CBED8BFF97312D28ABA53D4F398F8A427691164"
-        },
-        {
-          "path": "FamilyQuant/USearch.ViewModel.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "7F2B00D5FF4971D43728A6AD20E696AEFA76793FC47C9D80BB0E54A6707A46E1"
-        },
-        {
-          "path": "FamilyQuant/USearch.xaml",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "CFCD12EC58A094D0B5C3D8FE9CA0D07FB442F6DCFB5480F299D786E839BE0202"
-        },
-        {
-          "path": "FamilyQuant/USearch.xaml.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "84D42556EC109D828B4DF5230F76638953DDFF11C4E7E183BDD6D912C77128A9"
-        }
-      ],
-      "proofs": [],
-      "note": "No observation-specific native check; remains OPEN.",
-      "kindReceiptId": null,
-      "compared": null
-    },
-    {
-      "observationId": "FQ15-9EA401129802",
-      "implementation": [
-        {
-          "path": "FamilyQuant.Core/FamilyQuantFile.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "0845785B94D6ED35E9702CD57B9DEB382608DE637444F8ED7154683872D75E5E"
-        },
-        {
-          "path": "FamilyQuant.Core/RedundancyTools.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "B51F93ECF6FF874ED17BDAB7E619EAF67691F0C099A5E8A21059C81DE0D086C5"
-        },
-        {
-          "path": "FamilyQuant.Core/USearchTools.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "7F644E1379D8A72937266A95B1E525417C4AFF55B1DFF5A9E10ABBC5BF80ACF9"
-        },
-        {
-          "path": "FamilyQuant/AppOperationHost.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -9627,7 +9051,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -9691,7 +9115,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -9755,7 +9179,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -9819,7 +9243,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -9883,7 +9307,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -9947,7 +9371,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -10011,7 +9435,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -10075,7 +9499,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -10139,7 +9563,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -10203,71 +9627,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
-        },
-        {
-          "path": "FamilyQuant/ShellDialogs.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "BADA9EAE7CCA3011F34E56A17D71DA7304EAB666D61D06E0C53DA532589AAA76"
-        },
-        {
-          "path": "FamilyQuant/USearch.Actions.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "5C9102771D011BC74D57110ADB467B1CB863C7FAE8B54BD3901FEF0E2BA927B2"
-        },
-        {
-          "path": "FamilyQuant/USearch.Presentation.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "8F8C52800E607F3F705B5263C84BA20C2455FCFBC27DCD917A02A3BA8EAF9D15"
-        },
-        {
-          "path": "FamilyQuant/USearch.Report.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "5ECEE34F97D000E7FB1B3D140CBED8BFF97312D28ABA53D4F398F8A427691164"
-        },
-        {
-          "path": "FamilyQuant/USearch.ViewModel.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "7F2B00D5FF4971D43728A6AD20E696AEFA76793FC47C9D80BB0E54A6707A46E1"
-        },
-        {
-          "path": "FamilyQuant/USearch.xaml",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "CFCD12EC58A094D0B5C3D8FE9CA0D07FB442F6DCFB5480F299D786E839BE0202"
-        },
-        {
-          "path": "FamilyQuant/USearch.xaml.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "84D42556EC109D828B4DF5230F76638953DDFF11C4E7E183BDD6D912C77128A9"
-        }
-      ],
-      "proofs": [],
-      "note": "No observation-specific native check; remains OPEN.",
-      "kindReceiptId": null,
-      "compared": null
-    },
-    {
-      "observationId": "FQ15-A9056D654142",
-      "implementation": [
-        {
-          "path": "FamilyQuant.Core/FamilyQuantFile.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "0845785B94D6ED35E9702CD57B9DEB382608DE637444F8ED7154683872D75E5E"
-        },
-        {
-          "path": "FamilyQuant.Core/RedundancyTools.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "B51F93ECF6FF874ED17BDAB7E619EAF67691F0C099A5E8A21059C81DE0D086C5"
-        },
-        {
-          "path": "FamilyQuant.Core/USearchTools.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "7F644E1379D8A72937266A95B1E525417C4AFF55B1DFF5A9E10ABBC5BF80ACF9"
-        },
-        {
-          "path": "FamilyQuant/AppOperationHost.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -10331,7 +9691,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -10395,7 +9755,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -10459,7 +9819,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -10523,7 +9883,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -10587,7 +9947,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -10651,7 +10011,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -10715,7 +10075,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -10779,7 +10139,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -10843,7 +10203,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -10907,7 +10267,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -10971,7 +10331,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -11035,7 +10395,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -11099,7 +10459,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -11163,7 +10523,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -11227,71 +10587,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
-        },
-        {
-          "path": "FamilyQuant/ShellDialogs.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "BADA9EAE7CCA3011F34E56A17D71DA7304EAB666D61D06E0C53DA532589AAA76"
-        },
-        {
-          "path": "FamilyQuant/USearch.Actions.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "5C9102771D011BC74D57110ADB467B1CB863C7FAE8B54BD3901FEF0E2BA927B2"
-        },
-        {
-          "path": "FamilyQuant/USearch.Presentation.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "8F8C52800E607F3F705B5263C84BA20C2455FCFBC27DCD917A02A3BA8EAF9D15"
-        },
-        {
-          "path": "FamilyQuant/USearch.Report.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "5ECEE34F97D000E7FB1B3D140CBED8BFF97312D28ABA53D4F398F8A427691164"
-        },
-        {
-          "path": "FamilyQuant/USearch.ViewModel.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "7F2B00D5FF4971D43728A6AD20E696AEFA76793FC47C9D80BB0E54A6707A46E1"
-        },
-        {
-          "path": "FamilyQuant/USearch.xaml",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "CFCD12EC58A094D0B5C3D8FE9CA0D07FB442F6DCFB5480F299D786E839BE0202"
-        },
-        {
-          "path": "FamilyQuant/USearch.xaml.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "84D42556EC109D828B4DF5230F76638953DDFF11C4E7E183BDD6D912C77128A9"
-        }
-      ],
-      "proofs": [],
-      "note": "No observation-specific native check; remains OPEN.",
-      "kindReceiptId": null,
-      "compared": null
-    },
-    {
-      "observationId": "FQ15-BB5437376059",
-      "implementation": [
-        {
-          "path": "FamilyQuant.Core/FamilyQuantFile.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "0845785B94D6ED35E9702CD57B9DEB382608DE637444F8ED7154683872D75E5E"
-        },
-        {
-          "path": "FamilyQuant.Core/RedundancyTools.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "B51F93ECF6FF874ED17BDAB7E619EAF67691F0C099A5E8A21059C81DE0D086C5"
-        },
-        {
-          "path": "FamilyQuant.Core/USearchTools.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "7F644E1379D8A72937266A95B1E525417C4AFF55B1DFF5A9E10ABBC5BF80ACF9"
-        },
-        {
-          "path": "FamilyQuant/AppOperationHost.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -11355,7 +10651,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -11419,71 +10715,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
-        },
-        {
-          "path": "FamilyQuant/ShellDialogs.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "BADA9EAE7CCA3011F34E56A17D71DA7304EAB666D61D06E0C53DA532589AAA76"
-        },
-        {
-          "path": "FamilyQuant/USearch.Actions.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "5C9102771D011BC74D57110ADB467B1CB863C7FAE8B54BD3901FEF0E2BA927B2"
-        },
-        {
-          "path": "FamilyQuant/USearch.Presentation.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "8F8C52800E607F3F705B5263C84BA20C2455FCFBC27DCD917A02A3BA8EAF9D15"
-        },
-        {
-          "path": "FamilyQuant/USearch.Report.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "5ECEE34F97D000E7FB1B3D140CBED8BFF97312D28ABA53D4F398F8A427691164"
-        },
-        {
-          "path": "FamilyQuant/USearch.ViewModel.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "7F2B00D5FF4971D43728A6AD20E696AEFA76793FC47C9D80BB0E54A6707A46E1"
-        },
-        {
-          "path": "FamilyQuant/USearch.xaml",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "CFCD12EC58A094D0B5C3D8FE9CA0D07FB442F6DCFB5480F299D786E839BE0202"
-        },
-        {
-          "path": "FamilyQuant/USearch.xaml.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "84D42556EC109D828B4DF5230F76638953DDFF11C4E7E183BDD6D912C77128A9"
-        }
-      ],
-      "proofs": [],
-      "note": "No observation-specific native check; remains OPEN.",
-      "kindReceiptId": null,
-      "compared": null
-    },
-    {
-      "observationId": "FQ15-C1BFB140777A",
-      "implementation": [
-        {
-          "path": "FamilyQuant.Core/FamilyQuantFile.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "0845785B94D6ED35E9702CD57B9DEB382608DE637444F8ED7154683872D75E5E"
-        },
-        {
-          "path": "FamilyQuant.Core/RedundancyTools.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "B51F93ECF6FF874ED17BDAB7E619EAF67691F0C099A5E8A21059C81DE0D086C5"
-        },
-        {
-          "path": "FamilyQuant.Core/USearchTools.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "7F644E1379D8A72937266A95B1E525417C4AFF55B1DFF5A9E10ABBC5BF80ACF9"
-        },
-        {
-          "path": "FamilyQuant/AppOperationHost.cs",
-          "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -11547,7 +10779,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -11611,7 +10843,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -11675,7 +10907,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -11739,7 +10971,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -11803,7 +11035,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -11867,7 +11099,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -11931,7 +11163,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -11995,7 +11227,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -12059,7 +11291,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -12123,7 +11355,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -12187,7 +11419,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -12251,7 +11483,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -12315,7 +11547,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -12379,7 +11611,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -12443,7 +11675,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -12507,7 +11739,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -12571,7 +11803,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -12635,7 +11867,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -12699,7 +11931,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -12763,7 +11995,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -12827,7 +12059,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -12891,7 +12123,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -12955,7 +12187,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -13019,7 +12251,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -13083,7 +12315,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -13147,7 +12379,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -13211,7 +12443,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -13275,7 +12507,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -13339,7 +12571,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -13403,7 +12635,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -13467,7 +12699,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -13531,7 +12763,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -13595,7 +12827,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -13659,7 +12891,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -13723,7 +12955,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -13787,7 +13019,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -13851,7 +13083,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -13915,7 +13147,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -13979,7 +13211,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -14043,7 +13275,7 @@
         {
           "path": "FamilyQuant/AppOperationHost.cs",
           "symbol": "Actual named USearch clicks, guarded workers, FCF/redundancy paths and frozen/current native output comparison",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -14097,7 +13329,7 @@
           "kind": "test",
           "target": "RunAssayRuntimeLedger",
           "assertion": "AS-build-workflow kind format/export: every listed native value and branch check passed",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-115935-FamilyQuant-gate\\as-build-workflow\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-123305-FamilyQuant-gate\\as-build-workflow\\proofs.log",
           "inspectedBy": ""
         }
       ]
@@ -14111,7 +13343,7 @@
           "kind": "test",
           "target": "RunAssayRuntimeLedger",
           "assertion": "AS-build-workflow kind handler: every listed native value and branch check passed",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-115935-FamilyQuant-gate\\as-build-workflow\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-123305-FamilyQuant-gate\\as-build-workflow\\proofs.log",
           "inspectedBy": ""
         }
       ]
@@ -14125,7 +13357,7 @@
           "kind": "test",
           "target": "RunAssayRuntimeLedger",
           "assertion": "AS-build-workflow kind handler definition: every listed native value and branch check passed",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-115935-FamilyQuant-gate\\as-build-workflow\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-123305-FamilyQuant-gate\\as-build-workflow\\proofs.log",
           "inspectedBy": ""
         }
       ]

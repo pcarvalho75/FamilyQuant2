@@ -23,7 +23,7 @@ internal static class NativeProofDesktop
         }
     }
 
-    internal static int Run(string[] workerArguments, string log)
+    internal static int Run(string[] workerArguments, string log, uint timeoutMilliseconds = 300_000)
     {
         string name = Prefix + Environment.ProcessId + "_" + Guid.NewGuid().ToString("N");
         IntPtr desktop = CreateDesktop(name, IntPtr.Zero, IntPtr.Zero, 0, 0x01ff, IntPtr.Zero);
@@ -38,17 +38,18 @@ internal static class NativeProofDesktop
                 Environment.CurrentDirectory, ref startup, out process))
                 throw new Win32Exception(Marshal.GetLastWin32Error(), "Cannot start the isolated native proof.");
             Console.WriteLine("Native proof running on a private desktop; child PID " + process.ProcessId + ".");
-            uint wait = WaitForSingleObject(process.Process, 300_000);
+            uint wait = WaitForSingleObject(process.Process, timeoutMilliseconds);
             if (wait != 0)
             {
                 // This exact process handle belongs to the child created immediately above.
                 TerminateProcess(process.Process, 124);
                 WaitForSingleObject(process.Process, 10_000);
-                throw new TimeoutException("The owned native proof exceeded five minutes.");
+                throw new TimeoutException("The owned native proof exceeded its time limit.");
             }
             if (!GetExitCodeProcess(process.Process, out uint code)) throw new Win32Exception(Marshal.GetLastWin32Error());
             if (File.Exists(log)) Console.Write(File.ReadAllText(log));
-            return checked((int)code);
+            Console.WriteLine("Native proof child exit code: 0x" + code.ToString("X8", System.Globalization.CultureInfo.InvariantCulture));
+            return unchecked((int)code);
         }
         finally
         {

@@ -96,7 +96,12 @@ namespace FamilyQuant
             catch (Exception ex) { if (request == generation) Status = ex.Message; }
             finally { if (request == generation) IsBusy = false; }
         }
-        public void CancelPending() { generation++; discoveryCancellation?.Cancel(); IsBusy = false; }
+        public void CancelPending()
+        {
+            bool wasBusy = IsBusy;
+            generation++; discoveryCancellation?.Cancel(); IsBusy = false;
+            if (wasBusy) Status = "Cancelled. Previous review is kept.";
+        }
         public async Task CheckMotifAsync()
         {
             if (!CanCheckMotif) return;

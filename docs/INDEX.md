@@ -101,6 +101,8 @@ Invoke each flag with `& $testExe <flag>` after building. Dispatch and arity are
 | `--test-evidence-coverage` | Native alignment-row interpretation, counterfactual chooser and honest audit labels |
 | `--test-query-residue-coverage` | Actual query-letter gate, native facts, legacy serialization and evidence-session contracts |
 | `--test-family-world-fetch` | Staged fetch, paging, release/taxonomy validation, offline persistence and recipe compatibility |
+| `--test-desktop-world` | Actual curation fetch button, scope confirmation, shared busy host, Cancel/failure byte preservation, stored state and offline project reopen |
+| `--desktop-world-walk <copied-project> <copied-raw-folder> <copied-sepr2> <copied-denovo-root> <output> <confirmed-scope>` | Private desktop real-data fetch/scope dialog, production Compute, Database gap and native CSV/FASTA exports; uses only copies |
 | `--test-quantitation-stages` | Prepared-peptide assignments, cross-side suppression, residual calibration, rollup and deterministic CSV |
 | `--test-denovo-engine` | Core retained selection/review-table contracts and existing reader/reconciliation/source-aware fixtures |
 | `--test-project-formats` | Schema contract and existing versioned project round-trip/refusal fixtures |
@@ -179,6 +181,7 @@ These commands create native WPF client captures or labelled synthetic fixtures,
 | `--curation-screens <new-output-dir> <input.fcf>` | [Program.CurationScreens.cs](../FamilyQuant.Tests/Program.CurationScreens.cs); four native client captures with input hash |
 | `--family-view-screens <new-output-dir> <input.fcf>` | Same producer with a family selected; selection and visible member count recorded |
 | `--busy-screens <output-dir>` | [Program.BusyOperations.cs](../FamilyQuant.Tests/Program.BusyOperations.cs); six synthetic overlay states in both themes |
+| `--test-busy-logo <fresh-output>` | [Y7 shared wait screen](Y7-BUSY-SCREEN.md); native storyboard start/stop/Cancel, reduced motion, three DPIs, secondary-window routes, bounded cost probe and captured animation preview |
 | `--shell-menu-screens <output-dir>` | [Program.StandardMenu.cs](../FamilyQuant.Tests/Program.StandardMenu.cs) |
 | `--start-page-screens <output-dir>` | [Program.HomeStart.cs](../FamilyQuant.Tests/Program.HomeStart.cs) |
 | `--shell-save-screens <output-dir>` | [Program.ShellSaving.cs](../FamilyQuant.Tests/Program.ShellSaving.cs) |

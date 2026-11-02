@@ -48,6 +48,7 @@ public sealed partial class CurationViewModel : ScreenViewModel
             SearchText, OnlyQuantified, HideDecoys, HideContaminants), SortMemberPath, SortDescending);
         RefreshFamilies();
         Changed(nameof(Rows)); Changed(nameof(FamilyCounter)); Changed(nameof(LockSummary)); Changed(nameof(CanUndo));
+        Changed(nameof(FamilyWorldState));
     }
     public void PushUndo(IEnumerable<FastaItemExtended>? annotations = null)
     {
