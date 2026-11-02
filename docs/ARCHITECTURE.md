@@ -9,13 +9,13 @@ owned by FQShell. A feature is not removed by moving its implementation.
 The merged [feature ledger](FEATURE-LEDGER.md) records the approved UI retirements;
 their shared extraction, partition and homology engines remain available.
 
-## Projects and dependency direction
+## Current projects and planned dependency direction
 
 | Project | Contents | Dependencies |
 |---|---|---|
 | FamilyQuant.Core | Documents, grouping, evidence, readers, homology, quantitation and headless services | BCL and the existing scientific file/RAW dependencies; no WPF |
 | FamilyQuant.App | WPF entry point, views, view models, dialogs, themes and on-screen charts; executable FamilyQuant2 | Core |
-| FamilyQuant.Reports | Separate WPF-capable command-line figure exporter reading a saved project, introduced by X9 | Core and shared drawing source |
+| FamilyQuant.Reports (planned, X9) | Separate WPF-capable command-line figure exporter; no project exists yet in this solution | Core and shared drawing source |
 | FamilyQuant.Tests | The console suite, numerical fixtures, file-format checks and screen harness | Core and App; never published |
 
 ```mermaid
@@ -26,7 +26,7 @@ flowchart LR
     Tests --> App
 ```
 
-The installed app never references Reports. Reports links the same drawing source
+The current solution contains Core, App and Tests. The installed app does not reference the planned Reports project. The Reports target design links the same drawing source
 used by App, rather than taking a project reference to the installed executable
 or copying a second implementation of a chart. X9 moves the presentation-only
 entry points and figures after the Results export flow is ready.
@@ -83,7 +83,7 @@ the golden comparison, a Core reference check, and a publish payload containing
 Core. The orchestrator owns the full real-data and golden merge gates. A build or
 the quick suite alone does not establish numerical parity on the stored project.
 
-F6 builder verification: 71 moved files, of which 69 remain byte-identical. The
+Recorded F6 builder verification (historical counts, not the current suite total): 71 moved files, of which 69 remain byte-identical. The
 other two have only the documented CSV class visibility and resource path edits.
 Core and solution builds have zero warnings/errors; the focused boundary check
 passes 4/4, after failing 3/4 before extraction. The quick suite passes 1727 checks
@@ -103,7 +103,7 @@ condition. Current XICUser, identifiers, sequence and curation migration persist
 Verification: focused file/scoring/denominator fixtures 64/64; quick suite
 1802 passed, zero failed, 18 skipped. Two stored-project golden exports each pass
 all four byte comparisons to frozen 1.5.0.6, and their four files match each other.
-The 18th skip is a shell curation-status integration seam awaiting its LK contract.
+That recorded skip concerned the then-pending shell curation-status integration seam; the seam has since landed.
 
 Use ordinary `INotifyPropertyChanged` view models and small command classes in
 App; do not add an MVVM framework. A view model exposes the selected document,
@@ -112,8 +112,8 @@ calls a tested Core service and applies a completed result to the same document
 instance it started with. Core never sees a control, Dispatcher or MessageBox.
 
 Code-behind handles view-only work: focus, dialogs, clipboard, drag/drop and visual
-lifetime. Commands own re-entry protection and cancellation. A single operation
-host publishes busy state, progress and Cancel for the shell. Completion checks
+lifetime. Commands own re-entry protection and cancellation. S6 still owns the planned single operation
+host for shell busy state, progress and Cancel; the merged Core context alone does not supply that UI. Completion checks
 the captured document/quant/manifest identity before attaching results; keep the
 existing Save and Full XIC stale-result protections.
 
@@ -169,14 +169,14 @@ successful persistent caches retain their current keys and provenance.
 
 ## File inventory
 
-The following inventory is scanned from the checkout, including generated source,
-XAML, resource files and project files. It gives the first destination and the
+The following table is the recorded planning/destination snapshot, including generated source,
+XAML, resource files and project files. Its original source paths can intentionally differ from current paths after F6. It gives the first destination and the
 later rewrite owner for each file. Copy means preserve implementation and behavior;
 it does not mean that later work has been completed or reviewed.
 
 <!-- SOURCE-INVENTORY -->
 
-Inventory refreshed for X3 and merged shell/presentation steps: 223 files/rows, zero gaps.
+Recorded X3 planning inventory: 223 files/rows. These destination paths remain valid, but later additions are not claimed to be in this snapshot. For the current tracked set run `git ls-files -- "FamilyQuant/*.cs" "FamilyQuant/*.xaml" "FamilyQuant/*.resx" "FamilyQuant/*.csproj" "FamilyQuant.Core/*.cs" "FamilyQuant.Core/*.resx" "FamilyQuant.Core/*.csproj" "FamilyQuant.Tests/*.cs" "FamilyQuant.Tests/*.csproj"`. The document/command catalog is [INDEX.md](INDEX.md).
 
 | Source path at planning | Destination | Copy/rewrite plan |
 |---|---|---|
