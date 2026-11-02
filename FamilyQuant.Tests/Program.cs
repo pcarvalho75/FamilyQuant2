@@ -108,6 +108,7 @@ namespace FamilyQuant.Tests
             HomologyTests.Run(Check);
             Section("Family world (B1) - a de novo tag credited to UniProt families, on a fixture");
             FamilyWorldCheck.RunFixtures(Check);
+            FamilyWorldComputeTests();
             Section("De novo reconciliation against the real .sepr2 - the request's items 3 to 5");
             ReconciliationRealTests(args.Length > 2 ? args[2] : null, args.Length > 3 ? args[3] : null, workDir);
             Section("De novo batch XIC - run _01 extracted whole, cached, and compared to PEAKS' areas");

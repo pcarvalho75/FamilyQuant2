@@ -21,6 +21,7 @@ internal static partial class Program
     {
         Section("Family world (B1) - a de novo tag credited to UniProt families, on a fixture");
         FamilyWorldCheck.RunFixtures(Check);
+        FamilyWorldComputeTests();
         Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
         return failed == 0 ? 0 : 1;
     }

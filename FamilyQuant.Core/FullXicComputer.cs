@@ -64,6 +64,14 @@ namespace FamilyQuant
             return FullXicCompletionStage.Complete(input, options, result, rawPrecursorMetadata);
         }
 
+        /// <summary>The family-world step Compute runs at completion (B5, B6): with a family world stored in the
+        /// curation, the table with the error beside every family goes into the manifest; without one nothing changes.</summary>
+        public static void AttachFamilyWorld(FamilyClusterFile? curation, FullXicComputeResult result)
+        {
+            if (result == null) throw new ArgumentNullException(nameof(result));
+            FullXicCompletionStage.AttachFamilyWorld(curation, result);
+        }
+
         /// <summary>
         /// The share of the TIC explained, per run (and over all runs when there are several), in the
         /// language of SCIENTIFIC_METHOD.md: the identified observed envelope, plus, when de novo rows
