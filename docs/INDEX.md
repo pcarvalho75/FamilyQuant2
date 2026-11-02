@@ -151,6 +151,8 @@ Invoke each flag with `& $testExe <flag>` after building. Dispatch and arity are
 | `--test-shell-metadata` | Compiled shell-metadata and isolated Home-event comparison guards; included in the ordinary ledger guard |
 | `--test-shell-message-frames [--negative-control]` | Exact frozen handler/message/dialog frames, contributing literals and complete file-filter groups; optional planted wrong-path binding |
 | `--test-shell-sepro-fixture <fresh-output.sepr2>` | Owned synthetic package round trip through the actual vendor serializer; no collaborator data or spectra |
+| `--test-shell-proof-windows` | Before-Show geometry plus actual off-screen HWND, nonactivation and no-taskbar proof |
+| `--test-grid-copy` | Existing native GridCopy context-menu and row/column Copy routines with fake clipboard/browser seams |
 
 ## Screens and UI metadata
 

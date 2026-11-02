@@ -65,8 +65,7 @@ internal static partial class Program
         ShellMessages.Presenter = (_, _) => MessageBoxResult.OK;
         void Observe(ShellMessage message) { messages.Add(message); messageThreads.Add(Environment.CurrentManagedThreadId); }
         ShellMessages.Reported += Observe;
-        var main = new MainWindow { Left = -30000, Top = -30000, Width = 1024, Height = 768,
-            WindowStartupLocation = WindowStartupLocation.Manual, ShowInTaskbar = false, ShowActivated = false };
+        var main = OffscreenProofWindow(new MainWindow { Width = 1024, Height = 768 });
         var originalContext = SynchronizationContext.Current;
         SynchronizationContext.SetSynchronizationContext(new DispatcherSynchronizationContext(main.Dispatcher));
         Grid Host() => (Grid)main.FindName("GridApp");
@@ -103,6 +102,7 @@ internal static partial class Program
         }
         try
         {
+            if (!HasProofWindowPlacement(main)) throw new InvalidOperationException("Native proof windows must be isolated before Show.");
             main.Show(); PumpDispatcher();
             Reset();
             var fileMenu = (MenuItem)main.FindName("MenuFile");
