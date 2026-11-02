@@ -110,3 +110,65 @@ Document vs code: CLAUDE.md says the evidence rule "Tiers: ... out of scope with
 compatible domains". The code adds the E16 condition that the NEIGHBOUR itself must be in scope
 (EvidenceClassifier.cs:99-105) and refuses "neighbour_out_of_scope"; SCIENTIFIC_METHOD.md's tier list omits it,
 SCIENCE-GATE.md "After E16" has it. Code wins.
+
+## 4. How a RAW file becomes a family number (quantitation)
+
+- Entry: `FullXicComputer.ComputeFullXic` (FamilyQuant.Core/FullXicComputer.cs:368). Inputs: a RAW folder, a
+  .sepr2 (identified PSMs via `SeproPsmAdapter.Load`, DeNovo/SeproPsmAdapter.cs:266, BinaryFormatter boundary),
+  an optional de novo export root (PEAKS `*.denovoOnly.csv` / `*.denovo.csv` / DeepNovo `*.deepnovo.csv`,
+  DeNovoSource.cs:73), `FullXicOptions` (isotope ceiling 6, min points 3, 10 ppm, MS1 tolerance 1; line 13).
+- Runs pair BY NAME (`FullXicRunMatch.Build`, line 189; `DeNovoReconciler.NormalizeRunName`, DeNovoReconciler.cs:311);
+  no pair = refusal before any RAW opens (line 438).
+- Per run (line 446): identified side `IdentifiedQuantExtractor.ExtractForRun` (IdentifiedQuantExtractor.cs:139),
+  requests deduped by (scan, m/z 5 dp, charge); de novo side `DeNovoBatchExtractor.ExtractForRun`
+  (DeNovoBatchExtractor.cs:126) over the rows the reconciliation kept (DeNovoOnly and CoIsolatedExtra, line 958).
+  Both call `DeNovoXicExtractor.ExtractRun` (DeNovoXicExtractor.cs:489): MS1 loaded once through PatternTools
+  `ParserUltraLightRawFlash.Parse` with the production arguments (line 310), `XICGet5.GetXIC4(mz, ppm, ms2Scan)`
+  per isotope at mz + i*1.00335483/z (line 341), area rule from XQuant2 reproduced (`AreaFor`, line 354),
+  minimum points per cluster (`Classify`, line 397), M-1 control (line 596), per-run JSON cache keyed by
+  run + ppm + tolerance + isotope count + min points + RAW SHA-256 (DeNovoXicCache.cs:400).
+  TIC = `MSFileResolver.GetChromatogram` trapezoid (line 629). Then `Ms1EnvelopeDetector.DetectRun`
+  (Ms1EnvelopeDetector.cs:148): disjoint isotope chains per MS1 scan (>= 3 isotopes, ceiling 4, z 1..5, 10 ppm),
+  tracked across adjacent scans, trapezoid per feature, split by charge.
+- The stored grain is `QuantRow` (ProjectStore.cs:23): side, run, scan, m/z, charge, sequence, XCorr,
+  de novo evidence JSON, area_m0..m5, envelope_sum, under_sampled, family_userid (left null; line 118).
+  Persisted in the .fqproj ZIP (`ProjectStore.WriteFqproj`, line 650): curation.json (the .fcf text verbatim),
+  quant.tsv.gz, manifest.json (QuantManifest, line 260: parameters, per-run TIC, derived fractions, every de novo
+  study, family mapping provenance, input SHA-256s), spectrum_comparison.jsonl.gz.
+- Derived numbers: `NativeQuantFractions.DedupToPeptides` (NativeQuantFractions.cs:273) collapses anchors to ONE
+  representative per (run, side, canonical peptidoform, charge), largest M+0; `ReferenceEnvelopeEstimator.Apply`
+  (ReferenceEnvelopeEstimator.cs:76) scales a de novo M+0 by the identified envelope/M+0 ratio of its fixed
+  neutral-mass bin (bins at 800/1200/1600/2000/2500/3000 Da, line 69); cross-side suppression of a de novo
+  peptidoform equal (I/L folded, isotope-error aware 20 ppm) to an identified one (line 442);
+  `Compute` (line 378) gives per-run fractions; `PopulateManifest` (line 697) writes them.
+- Family attribution: `FamilyEnvelopeQuant.SearchCuration` (FamilyEnvelopeQuant.cs:702) builds a
+  `HomologyDatabase` over the curation's proteins (decoys included) and runs `HomologyMapper.Search`
+  (Homology/HomologyMapper.cs:49) for every distinct normalized sequence of each side: gapless window scan,
+  identity prefilter >= 0.80 of the peptide length with I/L folded (HomologyScorer.cs:217), then PAM30MS best
+  window (line 318), target-decoy competition where a tie goes to the decoy (HomologyMapper.cs:191), identified
+  side keeps only hits tied at the best score (`BestScoreOnly`, line 209), de novo side keeps every hit past the
+  gate, `TopHitsPerPeptide = int.MaxValue` here (FamilyEnvelopeQuant.cs:721). `AttributeHits` (line 779) joins
+  the compact hits onto the CURRENT `UserID` of target members. `BuildFromPeptides` (line 420) sums each
+  peptide's envelope into every family it reaches (count-in-every-family), plus the unique part, the split
+  part and the shared bucket (lines 537-593); `CompositionShare` (line 230) = unique / measured total.
+- So a de novo peptide "belongs" to a family only through >= 80% gapless identity to a protein of that
+  family in the curated FASTA. A peptide from a protein the database does not contain, and whose closest
+  database relative is below 80% over the tag's length, lands in `UnattributedDeNovoEnvelope` (line 524).
+  Nothing in Core looks at that residual beyond counting it. There is no feature-level (MS1) grouping of
+  unattributed signal, no sequence clustering of unattributed tags, and no link from the residual back to
+  the identity families.
+- `PatternLabAttribution` (PatternLabAttribution.cs:180) is the OTHER route (Layer 2): reads the .plp sparse
+  matrix, peptide -> loci from the index description ("Mappable proteins : ", line 122), family sum per
+  UserID group with the shared-peptide policy (line 287) and the normalization plan.
+
+## 5. Project files and provenance
+
+- `.fcf` = indented JSON of `FamilyClusterFile` (FamilyQuantFile.cs:128). `.fqproj` = ZIP of curation.json
+  + quant.tsv.gz + manifest.json + spectrum_comparison.jsonl.gz (ProjectStore.cs:573). Save goes temp +
+  `SavedFileCheck` + move (line 687); read refuses a format version above 2 and a sidecar count mismatch (line 757).
+- Everything scientific carries a SHA-256: the FASTA (`SourceSha256`), each RAW and the sepr2
+  (`ScientificInputFingerprints`, line 437 of FullXicComputer), the de novo CSVs (`DeNovoInputManifest.Sha256`),
+  the protein set of the attribution (`ProteinSetFingerprint`, FamilyEnvelopeQuant.cs:155), the evidence proposal
+  (`EvidenceClassifier.Fingerprint`), the neighbour search (query + reference hashes), the recipe state hashes.
+  This is the strongest asset of the code base for anything that must be reproducible, and the thing a new
+  layer must plug into rather than bypass.
