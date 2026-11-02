@@ -18,7 +18,8 @@ public sealed partial class CurationViewModel
         var evidenceSource = Document.EvidenceSource;
         var prepared = await Task.Run(() => FamilyClusterFile.FromJsonText(Document.ToJsonText()), operation.CancellationToken);
         operation.ThrowIfCancellationRequested();
-        var result = await EvidenceFetchSession.FetchAsync(prepared, handler, new CurationFetchProgress(operation));
+        var result = await EvidenceFetchSession.FetchAsync(prepared, handler, new CurationFetchProgress(operation),
+            cancellationToken: operation.CancellationToken);
         operation.ThrowIfCancellationRequested();
         if (!result.Changed) return result;
         operation.Commit(() =>
