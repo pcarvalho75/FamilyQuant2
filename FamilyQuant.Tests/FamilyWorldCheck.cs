@@ -369,14 +369,13 @@ namespace FamilyQuant.Tests
 
             var speciesRun = RunKnown("species", "", pairs.Values.ToList(), known, FamilyWorld.Build(withoutSpecies), outDir, Log, Line);
             double rightRate = speciesRun.RightRate;
-            List<(int Length, bool Landed, bool Right)>? genusOutcomes = null;
             if (genus != null)
             {
                 Console.WriteLine();
                 Line("genus", string.Join(",", genera.Select(g => g.Id + " " + g.Name)));
                 List<FamilyWorldProtein> withoutGenus = Without(genus, "genus " + string.Join(", ", genera.Select(g => g.Name)));
                 Line("world_without_genus", N0(withoutGenus.Count));
-                genusOutcomes = RunKnown("genus (ungated)", "_genus", pairs.Values.ToList(), known, FamilyWorld.Build(withoutGenus), outDir, Log, Line).Outcomes;
+                RunKnown("genus (ungated)", "_genus", pairs.Values.ToList(), known, FamilyWorld.Build(withoutGenus), outDir, Log, Line);
             }
             else Console.WriteLine("        no genus above the sample's taxa in UniProt's lineage; the genus run is skipped");
 
@@ -496,44 +495,122 @@ namespace FamilyQuant.Tests
             Write(outDir, "family_world_coverage_sequences.csv", sequenceCsv.ToString());
 
             // ---------------------------------------------------------------- gate study
-            // BETWEEN asks for a study of the gate before building. One candidate rule, measured and never applied:
-            // a minimum tag length for the cross-species pass. A shorter tag is simply not searched, so every row
-            // reads off the searches above and the residual stays the denominator. Nothing here changes the verdict.
-            int shortest = known.Select(p => p.Tag.Length).Concat(residual.Select(r => r.Sequence.Length)).Where(l => l > 0).DefaultIfEmpty(1).Min();
-            var studyCsv = new StringBuilder("minimum_tag_length,known_landed,known_right,known_right_rate,known_genus_landed,known_genus_right_rate," +
-                "residual_landed_fraction,residual_decoy_rate\n");
+            // BETWEEN asks for a study of the gate before building. One candidate rule, measured and never applied: a
+            // minimum tag length for the cross-species pass. A shorter tag is simply not searched, so every row reads off
+            // the searches above. The known answers are split in two before anything is looked at, by a hash of the
+            // identified peptide (all tags of one peptide stay together; the outcome plays no part): the first half makes
+            // the table and the second is reported beside it. The verdict above stays the only one; the choice is Paulo's.
+            Dictionary<string, FamilyWorldCredit> tagCredits = speciesRun.Credits;
+            int HalfOf(KnownPair p) => System.Security.Cryptography.SHA256.HashData(Encoding.UTF8.GetBytes(p.Identified))[0] & 1;
+            bool StudyLanded(KnownPair p) => tagCredits[p.Tag].Outcome == FamilyWorldOutcome.Credited;
+            bool StudyRight(KnownPair p) => FamilyWorld.IsRight(tagCredits[p.Tag], p.Known);
+            List<KnownPair>[] halves = { known.Where(p => HalfOf(p) == 0).ToList(), known.Where(p => HalfOf(p) == 1).ToList() };
+            check("family world study: the two halves partition the known answers and share no identified peptide",
+                halves[0].Count + halves[1].Count == known.Count
+                && !halves[0].Select(p => p.Identified).Intersect(halves[1].Select(p => p.Identified), StringComparer.Ordinal).Any(),
+                N(halves[0].Count) + " + " + N(halves[1].Count));
+            SortedSet<string> knownFamilies = FamilyWorld.NewFamilySet();
+            foreach (KnownPair p in known) knownFamilies.UnionWith(p.Known);
+            var panelFamilies = new HashSet<string>(worldFile.EvidenceSource?.ReferencePanel?.Families ?? new List<string>(), StringComparer.OrdinalIgnoreCase);
+
             Console.WriteLine();
-            Console.WriteLine("        GATE STUDY, measured and not applied: a minimum tag length for the cross-species pass");
-            Console.WriteLine("          minimum | known landed, right (species out) | right (genus out) | residual landed | decoys of landed");
-            for (int minimum = shortest; minimum <= 15; minimum++)
+            Console.WriteLine("        GATE STUDY, measured and not applied: a minimum tag length for the cross-species pass (species out)");
+            Console.WriteLine("          halves by a hash of the identified peptide: table half " + N(halves[0].Count) + " pairs (" +
+                N(halves[0].Select(p => p.Identified).Distinct().Count()) + " peptides), held-out half " + N(halves[1].Count) + " pairs (" +
+                N(halves[1].Select(p => p.Identified).Distinct().Count()) + " peptides)");
+            Console.WriteLine("          bars as fixed: right >= 95% pass, < 85% kill; landed >= 20% pass, < 5% kill; decoys <= 5% pass, > 20% kill");
+            Console.WriteLine("          minimum | table half: landed, right | held-out half: landed, right | residual landed | decoys of landed | credits to families with no known answer");
+            var studyCsv = new StringBuilder("minimum_tag_length,table_landed,table_right,table_right_rate,heldout_landed,heldout_right,heldout_right_rate," +
+                "residual_landed_fraction,residual_decoy_rate,unknown_family_credits,unknown_families,unknown_family_credits_outside_panel_families\n");
+            var studyFamilyCsv = new StringBuilder("minimum_tag_length,half,family,known_pairs,landed,right,credited,credited_true\n");
+            var familyRates = new SortedDictionary<string, string?[]>(StringComparer.OrdinalIgnoreCase);
+            const int FirstMinimum = 7, LastMinimum = 15;
+            for (int minimum = FirstMinimum; minimum <= LastMinimum; minimum++)
             {
-                (int Landed, int Right) Known(List<(int Length, bool Landed, bool Right)> outcomes) =>
-                    (outcomes.Count(o => o.Length >= minimum && o.Landed), outcomes.Count(o => o.Length >= minimum && o.Right));
-                var k = Known(speciesRun.Outcomes);
-                var g = genusOutcomes == null ? (Landed: 0, Right: 0) : Known(genusOutcomes);
-                double c = 0, d = 0;
-                foreach (var (p, sequence) in residual)
+                var landedRight = new (int Landed, int Right)[2];
+                for (int h = 0; h < 2; h++)
+                {
+                    List<KnownPair> kept = halves[h].Where(p => p.Tag.Length >= minimum).ToList();
+                    landedRight[h] = (kept.Count(StudyLanded), kept.Count(StudyRight));
+                    var tally = new SortedDictionary<string, FamilyTally>(StringComparer.OrdinalIgnoreCase);
+                    FamilyTally TallyOf(string f) => tally.TryGetValue(f, out FamilyTally? t) ? t : tally[f] = new FamilyTally();
+                    foreach (KnownPair pair in kept)
+                    {
+                        FamilyWorldCredit credit = tagCredits[pair.Tag];
+                        bool isRight = StudyRight(pair);
+                        foreach (string f in pair.Known)
+                        {
+                            FamilyTally t = TallyOf(f);
+                            t.Known++;
+                            if (credit.Outcome == FamilyWorldOutcome.Credited) t.KnownLanded++;
+                            if (isRight) t.KnownRight++;
+                        }
+                        foreach (string f in credit.Families)
+                        {
+                            FamilyTally t = TallyOf(f);
+                            t.Credited++;
+                            if (pair.Known.Contains(f)) t.CreditedTrue++;
+                        }
+                    }
+                    foreach (var (family, t) in tally)
+                    {
+                        studyFamilyCsv.Append(Csv(N0(minimum), h == 0 ? "table" : "heldout", family, N0(t.Known), N0(t.KnownLanded),
+                            N0(t.KnownRight), N0(t.Credited), N0(t.CreditedTrue)));
+                        if (!knownFamilies.Contains(family)) continue;
+                        if (!familyRates.TryGetValue(family, out string?[]? cells))
+                            familyRates[family] = cells = new string?[2 * (LastMinimum - FirstMinimum + 1)];
+                        cells[2 * (minimum - FirstMinimum) + h] = t.KnownLanded == 0 ? null
+                            : (100.0 * t.KnownRight / t.KnownLanded).ToString("F0", CultureInfo.InvariantCulture);
+                    }
+                }
+
+                // The families no known answer vouches for: every credit to them is wrong by construction.
+                List<string> foreign = known.Where(p => p.Tag.Length >= minimum && StudyLanded(p))
+                    .SelectMany(p => tagCredits[p.Tag].Families).Where(f => !knownFamilies.Contains(f)).ToList();
+                int foreignFamilies = foreign.Distinct(StringComparer.OrdinalIgnoreCase).Count();
+                int foreignOutsidePanel = foreign.Count(f => !panelFamilies.Contains(f));
+                double landedEnvelope = 0, decoyEnvelope = 0;
+                foreach (var (peptide, sequence) in residual)
                 {
                     if (sequence.Length < minimum) continue;
                     FamilyWorldOutcome o = CreditOf(sequence).Outcome;
-                    if (o == FamilyWorldOutcome.Credited) c += p.ReferenceCalibratedEnvelope;
-                    else if (o == FamilyWorldOutcome.Decoy) d += p.ReferenceCalibratedEnvelope;
+                    if (o == FamilyWorldOutcome.Credited) landedEnvelope += peptide.ReferenceCalibratedEnvelope;
+                    else if (o == FamilyWorldOutcome.Decoy) decoyEnvelope += peptide.ReferenceCalibratedEnvelope;
                 }
-                double kr = k.Landed == 0 ? 0 : k.Right / (double)k.Landed;
-                double gr = g.Landed == 0 ? 0 : g.Right / (double)g.Landed;
-                double lf = residualEnvelope <= 0 ? 0 : c / residualEnvelope;
-                double dr = c <= 0 ? double.PositiveInfinity : d / c;
-                Console.WriteLine("          " + minimum.ToString(CultureInfo.InvariantCulture).PadLeft(7) + " | " + N(k.Landed) + ", " + P(kr) +
-                    " | " + (genusOutcomes == null ? "n/a" : P(gr)) + " | " + P(lf) + " | " + P(dr));
-                studyCsv.Append(Csv(N0(minimum), N0(k.Landed), N0(k.Right), R(kr), N0(g.Landed), R(gr), R(lf), R(dr)));
+                static double RateOf((int Landed, int Right) x) => x.Landed == 0 ? 0 : x.Right / (double)x.Landed;
+                double studyLanded = residualEnvelope <= 0 ? 0 : landedEnvelope / residualEnvelope;
+                double studyDecoys = landedEnvelope <= 0 ? double.PositiveInfinity : decoyEnvelope / landedEnvelope;
+                Console.WriteLine("          " + minimum.ToString(CultureInfo.InvariantCulture).PadLeft(7) +
+                    " | " + N(landedRight[0].Landed) + ", " + P(RateOf(landedRight[0])) +
+                    " | " + N(landedRight[1].Landed) + ", " + P(RateOf(landedRight[1])) +
+                    " | " + P(studyLanded) + " | " + P(studyDecoys) + " | " + N(foreign.Count) + " to " + N(foreignFamilies) +
+                    " families, " + N(foreignOutsidePanel) + " of them outside the panel's families");
+                studyCsv.Append(Csv(N0(minimum), N0(landedRight[0].Landed), N0(landedRight[0].Right), R(RateOf(landedRight[0])),
+                    N0(landedRight[1].Landed), N0(landedRight[1].Right), R(RateOf(landedRight[1])), R(studyLanded), R(studyDecoys),
+                    N0(foreign.Count), N0(foreignFamilies), N0(foreignOutsidePanel)));
+            }
+
+            Console.WriteLine("          by family with at least 10 known pairs, right among landed in %, table half/held-out half (- = none landed):");
+            Console.WriteLine("            " + "minimum tag length".PadRight(44) + string.Concat(Enumerable.Range(FirstMinimum, LastMinimum - FirstMinimum + 1)
+                .Select(m => m.ToString(CultureInfo.InvariantCulture).PadLeft(9))));
+            foreach (var (family, cells) in familyRates
+                         .Select(kv => (Family: kv.Key, Cells: kv.Value, Known: known.Count(p => p.Known.Contains(kv.Key))))
+                         .Where(x => x.Known >= 10)
+                         .OrderByDescending(x => x.Known).ThenBy(x => x.Family, StringComparer.Ordinal)
+                         .Select(x => (x.Family, x.Cells)))
+            {
+                string name = family.Length > 42 ? family.Substring(0, 42) : family;
+                Console.WriteLine("            " + name.PadRight(44) + string.Concat(Enumerable.Range(0, LastMinimum - FirstMinimum + 1)
+                    .Select(i => ((cells[2 * i] ?? "-") + "/" + (cells[2 * i + 1] ?? "-")).PadLeft(9))));
             }
             Write(outDir, "family_world_gate_study.csv", studyCsv.ToString());
+            Write(outDir, "family_world_gate_study_by_family.csv", studyFamilyCsv.ToString());
             Log("written to " + outDir);
         }
 
-        /// <summary>One known-answer run against one world. Returns the right rate among the landed pairs, and per
-        /// pair its tag length, whether it landed and whether it was right.</summary>
-        private static (double RightRate, List<(int Length, bool Landed, bool Right)> Outcomes) RunKnown(string label, string suffix, List<KnownPair> pairs, List<KnownPair> known, FamilyWorld world,
+        /// <summary>One known-answer run against one world. Returns the right rate among the landed pairs and the
+        /// credit of every tag.</summary>
+        private static (double RightRate, Dictionary<string, FamilyWorldCredit> Credits) RunKnown(string label, string suffix, List<KnownPair> pairs, List<KnownPair> known, FamilyWorld world,
             string outDir, Action<string> log, Action<string, string> line)
         {
             List<string> tags = known.Select(p => p.Tag).Distinct(StringComparer.Ordinal).ToList();
@@ -630,7 +707,7 @@ namespace FamilyQuant.Tests
             foreach (var (family, t) in byFamily)
                 familyCsv.Append(Csv(family, N0(t.Known), N0(t.KnownLanded), N0(t.KnownRight), N0(t.KnownDecoy), N0(t.Credited), N0(t.CreditedTrue)));
             Write(outDir, "family_world_known_by_family" + suffix + ".csv", familyCsv.ToString());
-            return (rightRate, known.Select(p => (p.Tag.Length, Landed(p), Right(p))).ToList());
+            return (rightRate, credits);
         }
 
         private static (int Order, string Name) LengthBin(int length) => length switch
