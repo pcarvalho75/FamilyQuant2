@@ -279,6 +279,7 @@ namespace FamilyQuant.Tests
                 ShowInTaskbar = false, WindowStyle = WindowStyle.None, ResizeMode = ResizeMode.NoResize
             };
             var control = new ClusterGenerationControl(file);
+            ((Expander)control.FindName("WordGroupingActions")).IsExpanded = true;
             var host = (Grid)typeof(MainWindow).GetField("GridApp", any)!.GetValue(main)!;
             host.Children.Clear();
             host.Children.Add(control);

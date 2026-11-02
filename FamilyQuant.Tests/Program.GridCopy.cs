@@ -335,11 +335,11 @@ namespace FamilyQuant.Tests
                 };
                 new FamilyClusterFile { ClusteringIdentity = 70, MyExtendedFastaItems = file }.Save(fcfPath);
                 var control = new ClusterGenerationControl(fcfPath);
+                UiField<CheckBox>(control, "CheckBoxExcludeReverse")!.IsChecked = false;
                 DataGrid browser = UiField<DataGrid>(control, "DataGridResultGrid")!;
                 var host = new Window { Content = control, Width = 1400, Height = 900, Left = -3000, ShowActivated = false, ShowInTaskbar = false };
                 host.Show();
-                TabItem browserTab = WalkTree(control).OfType<TabItem>().First(t => (t.Header as string)?.Contains("Data Browser", StringComparison.Ordinal) == true);
-                browserTab.IsSelected = true;
+                Check("the protein table is available without switching tabs", !WalkTree(control).OfType<TabControl>().Any());
                 PumpDispatcher();
                 browser.UpdateLayout();
                 var rows = browser.Items.Cast<FastaItemExtended>().ToList();
