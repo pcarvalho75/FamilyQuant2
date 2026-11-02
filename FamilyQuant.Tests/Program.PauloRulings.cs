@@ -21,6 +21,8 @@ internal static partial class Program
             throw new InvalidDataException("Paulo's recorded rulings changed; review the producer before applying them.");
         string tsv = Path.Combine(output, "wording-input.tsv"), rules = Path.Combine(output, "wording-rulings.md");
         File.Copy(LedgerPauloRulings.InputPath, tsv); File.Copy(LedgerPauloRulings.RulesPath, rules);
+        string factFile = Path.Combine(output, "rulings-fact-check.tsv"); File.Copy(LedgerPauloRulings.FactChecksPath, factFile);
+        var factChecks = LedgerPauloRulings.ReadFactChecks(factFile);
         var inventory = JsonSerializer.Deserialize<FeatureLedger.Inventory>(File.ReadAllText(Path.Combine(root, "docs/feature-ledger-scan.json")))!;
         var byId = inventory.Observations.ToDictionary(row => row.Id, StringComparer.Ordinal);
         var inputs = LedgerPauloRulings.ReadInputs(tsv);
@@ -28,7 +30,7 @@ internal static partial class Program
         {
             byId.TryGetValue(group.Key, out var observation);
             var evaluated = group.OrderBy(input => input.Lane, StringComparer.Ordinal).ThenBy(input => input.OldText, StringComparer.Ordinal)
-                .ThenBy(input => input.NewText, StringComparer.Ordinal).Select(input => LedgerPauloRulings.Evaluate(input, observation, LedgerRulingLiveText.Find)).ToArray();
+                .ThenBy(input => input.NewText, StringComparer.Ordinal).Select(input => LedgerPauloRulings.Evaluate(input, observation, LedgerRulingLiveText.Find, factChecks)).ToArray();
             return evaluated.Where(decision => decision.Closed).OrderBy(decision => decision.Rule, StringComparer.Ordinal)
                 .ThenBy(decision => decision.NewText, StringComparer.Ordinal).FirstOrDefault() ?? evaluated[0];
         }).OrderBy(decision => decision.Id, StringComparer.Ordinal).ToList();
@@ -42,7 +44,9 @@ internal static partial class Program
             Check("ruling decisions are byte-identical on two evaluations of the same pinned input",
                 JsonSerializer.Serialize(decisions, FeatureLedgerEvidence.JsonOptions) == JsonSerializer.Serialize(repeat, FeatureLedgerEvidence.JsonOptions));
             Check("an empty new text closes no input row under any ruling", inputs.All(input =>
-            { byId.TryGetValue(input.Id, out var row); return !LedgerPauloRulings.Evaluate(input with { NewText = "" }, row, LedgerRulingLiveText.Find).Closed; }));
+            { byId.TryGetValue(input.Id, out var row); return !LedgerPauloRulings.Evaluate(input with { NewText = "" }, row, LedgerRulingLiveText.Find, factChecks).Closed; }));
+            Check("every accepted wording ruling has an independent kept fact verdict", decisions.Where(decision => decision.Closed && decision.Rule is "1" or "3")
+                .All(decision => factChecks.TryGetValue(decision.Id, out var fact) && fact.Verdict == "kept"));
             foreach (string rule in new[] { "1", "2", "3" })
                 Console.WriteLine("Rule " + rule + ": " + decisions.Count(decision => decision.Closed && decision.Rule == rule).ToString(CultureInfo.InvariantCulture) + " accepted rows.");
             foreach (var group in decisions.Where(decision => !decision.Closed).GroupBy(decision => decision.Reason).OrderBy(group => group.Key, StringComparer.Ordinal))
@@ -51,10 +55,11 @@ internal static partial class Program
         }
         finally { Console.SetOut(original); }
         string log = Path.Combine(output, "proofs.log"); File.WriteAllText(log, transcript.ToString(), new UTF8Encoding(false));
+        if (failed > 0) return 1; // Never publish a register or remaining list from failed guards.
         string values = Path.Combine(output, "decisions.json"); FeatureLedgerEvidence.WriteJson(values, decisions);
         string packetPath = Path.Combine(output, "ruling-packet.json");
-        FeatureLedgerEvidence.WriteJson(packetPath, new LedgerPauloRulings.Packet(1, LedgerPauloRulings.Command, tsv, rules,
-            FeatureLedgerEvidence.Hash(tsv), LedgerPauloRulings.RulesSha256, decisions));
+        FeatureLedgerEvidence.WriteJson(packetPath, new LedgerPauloRulings.Packet(2, LedgerPauloRulings.Command, tsv, rules,
+            FeatureLedgerEvidence.Hash(tsv), LedgerPauloRulings.RulesSha256, decisions, factFile, FeatureLedgerEvidence.Hash(factFile)));
         string left = Path.Combine(output, "wording-left-for-paulo.tsv");
         static string Clean(string text)
         {
@@ -62,7 +67,8 @@ internal static partial class Program
             return value.Contains('"') ? "\"" + value.Replace("\"", "\"\"", StringComparison.Ordinal) + "\"" : value;
         }
         var leftLines = new[] { "lane\trow_id\told_text\tnew_text\treason" }.Concat(decisions.Where(decision => !decision.Closed).Select(decision =>
-            string.Join('\t', new[] { decision.Lane, decision.Id, decision.OldText, decision.NewText, decision.Reason }.Select(Clean))));
+            string.Join('\t', new[] { decision.Lane, decision.Id, decision.OldText, decision.NewText,
+                decision.Reason + (decision.FactCheckNote.Length > 0 ? " " + decision.FactCheckNote : "") }.Select(Clean))));
         File.WriteAllText(left, string.Join('\n', leftLines) + "\n", new UTF8Encoding(false));
         // This is a derived review list, replaced atomically; the shared input is never rewritten.
         Directory.CreateDirectory(Path.GetDirectoryName(LedgerPauloRulings.LeftPath)!);
