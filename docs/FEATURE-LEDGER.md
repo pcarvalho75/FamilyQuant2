@@ -17,7 +17,7 @@ Render targets refer to `ScreenHarness.Screens`, captured with `--screens <outpu
 Release gate: `FamilyQuant.Tests.exe --feature-ledger-release-check` fails until every retained row is VERIFIED with evidence. Authorized DROP rows use APPROVED_DROP, which records a decision, not a completed UI removal. The normal quick suite permits OPEN rows during development. Regeneration resets retained rows to OPEN; preserve reviewed evidence when updating the scanner.
 
 Scan count: **5756**. Ledger rows: **5756**. Source files: **104**.
-Authorized DROP rows: **296**; proposed VERIFIED retained rows: **3365**; OPEN retained rows: **2095**.
+Authorized DROP rows: **296**; proposed VERIFIED retained rows: **3422**; OPEN retained rows: **2038**.
 
 | ID | Disposition | Kind | Frozen source | Fact or control | Planned check | State | Evidence |
 |---|---|---|---|---|---|---|---|
@@ -62,12 +62,12 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **3365**; OPEN r
 | FQ15-A338D170136B | KEEP | handler | FamilyQuant/AnalyticsControl.xaml:75 | CheckBoxFamilyPercent.Checked = CheckBoxFamilyPercent_Changed | test:ResultsPreservationTests | VERIFIED | evidence:RS-interactions:FQ15-A338D170136B |
 | FQ15-C213AEB5CD1C | KEEP | handler | FamilyQuant/AnalyticsControl.xaml:75 | CheckBoxFamilyPercent.Unchecked = CheckBoxFamilyPercent_Changed | test:ResultsPreservationTests | VERIFIED | evidence:RS-interactions:FQ15-C213AEB5CD1C |
 | FQ15-59366EF0C808 | IMPROVE | tooltip | FamilyQuant/AnalyticsControl.xaml:76 | CheckBoxFamilyPercent.ToolTip = Labels each bar with its percent of the total measured signal instead of the raw value. A peptide shared by two families counts in both, so the percents can add up to more than 100%. | test:ResultsPreservationTests | VERIFIED | evidence:RS-interactions:FQ15-59366EF0C808 |
-| FQ15-09732B2AEC6D | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:188 | "There is no quantitation to analyse yet. The analytics read FamilyQuant's own full " | render:07-analytics | OPEN | pending |
-| FQ15-F12F813A1611 | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:189 | "isotope-envelope quant, which is produced by File \u00B7 Compute / update full XIC after a " | render:07-analytics | OPEN | pending |
-| FQ15-790FBE87E308 | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:190 | "project is loaded. Compute the full XIC first, then return here.\n\n" | render:07-analytics | OPEN | pending |
-| FQ15-8586C71F3AD9 | KEEP | format/export | FamilyQuant/AnalyticsControl.xaml.cs:191 | "A project opened from a plain .fcf carries no quantitation, and a .fqproj that was saved " | render:07-analytics | OPEN | pending |
-| FQ15-FB6FB2373EC9 | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:192 | "before it was ever computed carries none either. In both cases the same step applies: run " | render:07-analytics | OPEN | pending |
-| FQ15-8DD9CD4C4EB7 | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:193 | "Compute / update full XIC, then this screen will draw the graphs." | render:07-analytics | OPEN | pending |
+| FQ15-09732B2AEC6D | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:188 | "There is no quantitation to analyse yet. The analytics read FamilyQuant's own full " | test:ResultsExportFactsCommand | VERIFIED | evidence:RS-export-facts:FQ15-09732B2AEC6D |
+| FQ15-F12F813A1611 | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:189 | "isotope-envelope quant, which is produced by File \u00B7 Compute / update full XIC after a " | test:ResultsExportFactsCommand | VERIFIED | evidence:RS-export-facts:FQ15-F12F813A1611 |
+| FQ15-790FBE87E308 | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:190 | "project is loaded. Compute the full XIC first, then return here.\n\n" | test:ResultsExportFactsCommand | VERIFIED | evidence:RS-export-facts:FQ15-790FBE87E308 |
+| FQ15-8586C71F3AD9 | KEEP | format/export | FamilyQuant/AnalyticsControl.xaml.cs:191 | "A project opened from a plain .fcf carries no quantitation, and a .fqproj that was saved " | test:ResultsExportFactsCommand | VERIFIED | evidence:RS-export-facts:FQ15-8586C71F3AD9 |
+| FQ15-FB6FB2373EC9 | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:192 | "before it was ever computed carries none either. In both cases the same step applies: run " | test:ResultsExportFactsCommand | VERIFIED | evidence:RS-export-facts:FQ15-FB6FB2373EC9 |
+| FQ15-8DD9CD4C4EB7 | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:193 | "Compute / update full XIC, then this screen will draw the graphs." | test:ResultsExportFactsCommand | VERIFIED | evidence:RS-export-facts:FQ15-8DD9CD4C4EB7 |
 | FQ15-E675289A142D | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:212 | " The family chart stands on " | test:ResultsRuntimeLedgerCommand | VERIFIED | evidence:RS-runtime:FQ15-E675289A142D |
 | FQ15-7CC8C1A2752C | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:213 | "N0" | test:ResultsRuntimeLedgerCommand | VERIFIED | evidence:RS-runtime:FQ15-7CC8C1A2752C |
 | FQ15-18B69E5FE48B | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:214 | " family(ies) of the open grouping, reached by homology; families below the cut are " | test:ResultsRuntimeLedgerCommand | VERIFIED | evidence:RS-runtime:FQ15-18B69E5FE48B |
@@ -113,57 +113,57 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **3365**; OPEN r
 | FQ15-1B9A231B893A | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:293 | "distinct PTM-cleaned sequences carried forward after search reconciliation, pooled across " | test:ResultsMemberComparisonCommand | VERIFIED | evidence:RS-members:FQ15-1B9A231B893A |
 | FQ15-655539134D15 | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:294 | "runs and charges. Quantification is a separate grain: {2:N0} post-XIC de novo run \u00D7 sequence " | test:ResultsMemberComparisonCommand | VERIFIED | evidence:RS-members:FQ15-655539134D15 |
 | FQ15-FF94C5049C5B | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:295 | "\u00D7 charge representatives; this is not a unique-peptide count." | test:ResultsMemberComparisonCommand | VERIFIED | evidence:RS-members:FQ15-FF94C5049C5B |
-| FQ15-45E2AF003EE5 | KEEP | format/export | FamilyQuant/AnalyticsControl.xaml.cs:320 | "familyquant_analytics_peptides.csv" | render:07-analytics | OPEN | pending |
-| FQ15-D366AC33835B | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:320 | "Save the per-peptide analytics table" | render:07-analytics | OPEN | pending |
-| FQ15-A17B12DAE36C | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:322 | "the per-peptide analytics table" | render:07-analytics | OPEN | pending |
-| FQ15-0BC049DEB5A7 | KEEP | format/export | FamilyQuant/AnalyticsControl.xaml.cs:328 | "familyquant_analytics_summary.csv" | render:07-analytics | OPEN | pending |
-| FQ15-0F55CD6B5CF6 | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:328 | "Save the per-run and grouped fraction summary" | render:07-analytics | OPEN | pending |
-| FQ15-35B391333AA1 | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:330 | "the per-run and grouped fraction summary" | render:07-analytics | OPEN | pending |
-| FQ15-9D66691AFCB8 | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:344 | "Nothing was saved, because this screen is not on a display and a " | render:07-analytics | OPEN | pending |
-| FQ15-ABC17DF0A5E5 | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:345 | "folder dialog there is a window nothing can close. Next step: open the project in the " | render:07-analytics | OPEN | pending |
-| FQ15-7DB9C34D3C78 | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:346 | "application and save the figures from there." | render:07-analytics | OPEN | pending |
-| FQ15-BED430C1BA66 | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:352 | "Choose the folder to write the figures into" | render:07-analytics | OPEN | pending |
-| FQ15-5692FF7BC32E | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:363 | "Written to " | render:07-analytics | OPEN | pending |
-| FQ15-1DBADFEEA403 | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:363 | ": " | render:07-analytics | OPEN | pending |
-| FQ15-7CB0CFA7513A | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:364 | "N0" | render:07-analytics | OPEN | pending |
-| FQ15-9DBFE36FE814 | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:364 | " figure(s) - " | render:07-analytics | OPEN | pending |
-| FQ15-DAA0E12A7E8C | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:365 | ", " | render:07-analytics | OPEN | pending |
-| FQ15-396781C7139F | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:365 | ". Each is " | render:07-analytics | OPEN | pending |
-| FQ15-1F3F3E8670AD | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:367 | "N0" | render:07-analytics | OPEN | pending |
-| FQ15-5FC5AE2E18DD | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:367 | " by " | render:07-analytics | OPEN | pending |
-| FQ15-F68B9E725182 | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:369 | "N0" | render:07-analytics | OPEN | pending |
-| FQ15-E84CFC14C601 | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:370 | " device pixels, which is crisp on a projector. Nothing on screen changed." | render:07-analytics | OPEN | pending |
-| FQ15-78512CC645F6 | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:374 | "The figures could not be written, so nothing was saved. Reason " | render:07-analytics | OPEN | pending |
-| FQ15-64EA32DE4D6F | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:375 | "given by the program: " | render:07-analytics | OPEN | pending |
-| FQ15-20BC077B0895 | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:375 | " Next step: check that you can write to that " | render:07-analytics | OPEN | pending |
-| FQ15-7789750E1CF9 | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:376 | "folder and that no PNG of the same name is open in another program, then save again." | render:07-analytics | OPEN | pending |
-| FQ15-716ADCCA568C | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:386 | "Nothing was saved, because this screen is not on a display and a " | render:07-analytics | OPEN | pending |
-| FQ15-79712FD8A72A | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:387 | "folder dialog there is a window nothing can close. Open the complete project in the " | render:07-analytics | OPEN | pending |
-| FQ15-5108FA8B3A44 | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:388 | "application and use Save presentation evidence pack from Analytics." | render:07-analytics | OPEN | pending |
-| FQ15-A63D6AA1A5AB | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:394 | "Choose the folder for the reproducible presentation evidence pack" | render:07-analytics | OPEN | pending |
-| FQ15-A662850E97CB | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:403 | "Written to " | render:07-analytics | OPEN | pending |
-| FQ15-5090C7D6412F | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:403 | ": " | render:07-analytics | OPEN | pending |
-| FQ15-0936BA0DC6CF | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:404 | "N0" | render:07-analytics | OPEN | pending |
-| FQ15-2871145B18A2 | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:405 | " FamilyQuant plot(s) plus " | render:07-analytics | OPEN | pending |
-| FQ15-19D21B123FB6 | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:406 | "N0" | render:07-analytics | OPEN | pending |
-| FQ15-EF49FDC822E4 | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:407 | " numeric/definition file(s). The PNGs are 1920 by 1080 in the light projector palette; " | render:07-analytics | OPEN | pending |
-| FQ15-C6C2C2F66829 | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:408 | "the CSV and JSON files contain the exact plotted numbers." | render:07-analytics | OPEN | pending |
-| FQ15-A2D69233CBC7 | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:412 | "The complete presentation plot pack was not written. " | render:07-analytics | OPEN | pending |
-| FQ15-B2E13817D54B | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:413 | " No partial claim is substituted. Load or recompute the named missing study, then try again." | render:07-analytics | OPEN | pending |
-| FQ15-11599C1A0B14 | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:426 | "Nothing was exported, because this screen is not on a display and a " | render:07-analytics | OPEN | pending |
-| FQ15-04D8AB1A7315 | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:427 | "file dialog there is a window nothing can close. Next step: open the project in the " | render:07-analytics | OPEN | pending |
-| FQ15-F2B1673187DC | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:428 | "application and export from there." | render:07-analytics | OPEN | pending |
-| FQ15-D8C4C083EA5F | KEEP | format/export | FamilyQuant/AnalyticsControl.xaml.cs:434 | "CSV files (*.csv)&#124;*.csv&#124;All files (*.*)&#124;*.*" | render:07-analytics | OPEN | pending |
-| FQ15-A147501D79B0 | KEEP | format/export | FamilyQuant/AnalyticsControl.xaml.cs:438 | ".csv" | render:07-analytics | OPEN | pending |
-| FQ15-195513C7DFFE | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:446 | "Written to " | render:07-analytics | OPEN | pending |
-| FQ15-5E413458166D | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:446 | ": " | render:07-analytics | OPEN | pending |
-| FQ15-AA5D9F6C1742 | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:446 | ". Numbers use a dot for " | render:07-analytics | OPEN | pending |
-| FQ15-988D6F88E020 | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:447 | "the decimal separator whatever your machine's language is, so any program can read them. " | render:07-analytics | OPEN | pending |
-| FQ15-CA91D10B9451 | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:448 | "Nothing on screen changed." | render:07-analytics | OPEN | pending |
-| FQ15-25C5AF297613 | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:452 | "The file could not be written, so nothing was exported. Reason given " | render:07-analytics | OPEN | pending |
-| FQ15-6C73094314C0 | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:453 | "by the program: " | render:07-analytics | OPEN | pending |
-| FQ15-081C3DB19C0F | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:453 | " Next step: check that it is not already open in Excel " | render:07-analytics | OPEN | pending |
-| FQ15-601168A47FB3 | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:454 | "and that you can write to that folder, then export again." | render:07-analytics | OPEN | pending |
+| FQ15-45E2AF003EE5 | KEEP | format/export | FamilyQuant/AnalyticsControl.xaml.cs:320 | "familyquant_analytics_peptides.csv" | test:ResultsExportFactsCommand | VERIFIED | evidence:RS-export-facts:FQ15-45E2AF003EE5 |
+| FQ15-D366AC33835B | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:320 | "Save the per-peptide analytics table" | test:ResultsExportFactsCommand | VERIFIED | evidence:RS-export-facts:FQ15-D366AC33835B |
+| FQ15-A17B12DAE36C | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:322 | "the per-peptide analytics table" | test:ResultsExportFactsCommand | VERIFIED | evidence:RS-export-facts:FQ15-A17B12DAE36C |
+| FQ15-0BC049DEB5A7 | KEEP | format/export | FamilyQuant/AnalyticsControl.xaml.cs:328 | "familyquant_analytics_summary.csv" | test:ResultsExportFactsCommand | VERIFIED | evidence:RS-export-facts:FQ15-0BC049DEB5A7 |
+| FQ15-0F55CD6B5CF6 | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:328 | "Save the per-run and grouped fraction summary" | test:ResultsExportFactsCommand | VERIFIED | evidence:RS-export-facts:FQ15-0F55CD6B5CF6 |
+| FQ15-35B391333AA1 | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:330 | "the per-run and grouped fraction summary" | test:ResultsExportFactsCommand | VERIFIED | evidence:RS-export-facts:FQ15-35B391333AA1 |
+| FQ15-9D66691AFCB8 | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:344 | "Nothing was saved, because this screen is not on a display and a " | test:ResultsExportFactsCommand | VERIFIED | evidence:RS-export-facts:FQ15-9D66691AFCB8 |
+| FQ15-ABC17DF0A5E5 | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:345 | "folder dialog there is a window nothing can close. Next step: open the project in the " | test:ResultsExportFactsCommand | VERIFIED | evidence:RS-export-facts:FQ15-ABC17DF0A5E5 |
+| FQ15-7DB9C34D3C78 | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:346 | "application and save the figures from there." | test:ResultsExportFactsCommand | VERIFIED | evidence:RS-export-facts:FQ15-7DB9C34D3C78 |
+| FQ15-BED430C1BA66 | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:352 | "Choose the folder to write the figures into" | test:ResultsExportFactsCommand | VERIFIED | evidence:RS-export-facts:FQ15-BED430C1BA66 |
+| FQ15-5692FF7BC32E | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:363 | "Written to " | test:ResultsExportFactsCommand | VERIFIED | evidence:RS-export-facts:FQ15-5692FF7BC32E |
+| FQ15-1DBADFEEA403 | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:363 | ": " | test:ResultsExportFactsCommand | VERIFIED | evidence:RS-export-facts:FQ15-1DBADFEEA403 |
+| FQ15-7CB0CFA7513A | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:364 | "N0" | test:ResultsExportFactsCommand | VERIFIED | evidence:RS-export-facts:FQ15-7CB0CFA7513A |
+| FQ15-9DBFE36FE814 | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:364 | " figure(s) - " | test:ResultsExportFactsCommand | VERIFIED | evidence:RS-export-facts:FQ15-9DBFE36FE814 |
+| FQ15-DAA0E12A7E8C | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:365 | ", " | test:ResultsExportFactsCommand | VERIFIED | evidence:RS-export-facts:FQ15-DAA0E12A7E8C |
+| FQ15-396781C7139F | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:365 | ". Each is " | test:ResultsExportFactsCommand | VERIFIED | evidence:RS-export-facts:FQ15-396781C7139F |
+| FQ15-1F3F3E8670AD | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:367 | "N0" | test:ResultsExportFactsCommand | VERIFIED | evidence:RS-export-facts:FQ15-1F3F3E8670AD |
+| FQ15-5FC5AE2E18DD | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:367 | " by " | test:ResultsExportFactsCommand | VERIFIED | evidence:RS-export-facts:FQ15-5FC5AE2E18DD |
+| FQ15-F68B9E725182 | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:369 | "N0" | test:ResultsExportFactsCommand | VERIFIED | evidence:RS-export-facts:FQ15-F68B9E725182 |
+| FQ15-E84CFC14C601 | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:370 | " device pixels, which is crisp on a projector. Nothing on screen changed." | test:ResultsExportFactsCommand | VERIFIED | evidence:RS-export-facts:FQ15-E84CFC14C601 |
+| FQ15-78512CC645F6 | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:374 | "The figures could not be written, so nothing was saved. Reason " | test:ResultsExportFactsCommand | VERIFIED | evidence:RS-export-facts:FQ15-78512CC645F6 |
+| FQ15-64EA32DE4D6F | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:375 | "given by the program: " | test:ResultsExportFactsCommand | VERIFIED | evidence:RS-export-facts:FQ15-64EA32DE4D6F |
+| FQ15-20BC077B0895 | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:375 | " Next step: check that you can write to that " | test:ResultsExportFactsCommand | VERIFIED | evidence:RS-export-facts:FQ15-20BC077B0895 |
+| FQ15-7789750E1CF9 | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:376 | "folder and that no PNG of the same name is open in another program, then save again." | test:ResultsExportFactsCommand | VERIFIED | evidence:RS-export-facts:FQ15-7789750E1CF9 |
+| FQ15-716ADCCA568C | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:386 | "Nothing was saved, because this screen is not on a display and a " | test:ResultsExportFactsCommand | VERIFIED | evidence:RS-export-facts:FQ15-716ADCCA568C |
+| FQ15-79712FD8A72A | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:387 | "folder dialog there is a window nothing can close. Open the complete project in the " | test:ResultsExportFactsCommand | VERIFIED | evidence:RS-export-facts:FQ15-79712FD8A72A |
+| FQ15-5108FA8B3A44 | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:388 | "application and use Save presentation evidence pack from Analytics." | test:ResultsExportFactsCommand | VERIFIED | evidence:RS-export-facts:FQ15-5108FA8B3A44 |
+| FQ15-A63D6AA1A5AB | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:394 | "Choose the folder for the reproducible presentation evidence pack" | test:ResultsExportFactsCommand | VERIFIED | evidence:RS-export-facts:FQ15-A63D6AA1A5AB |
+| FQ15-A662850E97CB | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:403 | "Written to " | test:ResultsExportFactsCommand | VERIFIED | evidence:RS-export-facts:FQ15-A662850E97CB |
+| FQ15-5090C7D6412F | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:403 | ": " | test:ResultsExportFactsCommand | VERIFIED | evidence:RS-export-facts:FQ15-5090C7D6412F |
+| FQ15-0936BA0DC6CF | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:404 | "N0" | test:ResultsExportFactsCommand | VERIFIED | evidence:RS-export-facts:FQ15-0936BA0DC6CF |
+| FQ15-2871145B18A2 | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:405 | " FamilyQuant plot(s) plus " | test:ResultsExportFactsCommand | VERIFIED | evidence:RS-export-facts:FQ15-2871145B18A2 |
+| FQ15-19D21B123FB6 | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:406 | "N0" | test:ResultsExportFactsCommand | VERIFIED | evidence:RS-export-facts:FQ15-19D21B123FB6 |
+| FQ15-EF49FDC822E4 | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:407 | " numeric/definition file(s). The PNGs are 1920 by 1080 in the light projector palette; " | test:ResultsExportFactsCommand | VERIFIED | evidence:RS-export-facts:FQ15-EF49FDC822E4 |
+| FQ15-C6C2C2F66829 | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:408 | "the CSV and JSON files contain the exact plotted numbers." | test:ResultsExportFactsCommand | VERIFIED | evidence:RS-export-facts:FQ15-C6C2C2F66829 |
+| FQ15-A2D69233CBC7 | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:412 | "The complete presentation plot pack was not written. " | test:ResultsExportFactsCommand | VERIFIED | evidence:RS-export-facts:FQ15-A2D69233CBC7 |
+| FQ15-B2E13817D54B | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:413 | " No partial claim is substituted. Load or recompute the named missing study, then try again." | test:ResultsExportFactsCommand | VERIFIED | evidence:RS-export-facts:FQ15-B2E13817D54B |
+| FQ15-11599C1A0B14 | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:426 | "Nothing was exported, because this screen is not on a display and a " | test:ResultsExportFactsCommand | VERIFIED | evidence:RS-export-facts:FQ15-11599C1A0B14 |
+| FQ15-04D8AB1A7315 | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:427 | "file dialog there is a window nothing can close. Next step: open the project in the " | test:ResultsExportFactsCommand | VERIFIED | evidence:RS-export-facts:FQ15-04D8AB1A7315 |
+| FQ15-F2B1673187DC | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:428 | "application and export from there." | test:ResultsExportFactsCommand | VERIFIED | evidence:RS-export-facts:FQ15-F2B1673187DC |
+| FQ15-D8C4C083EA5F | KEEP | format/export | FamilyQuant/AnalyticsControl.xaml.cs:434 | "CSV files (*.csv)&#124;*.csv&#124;All files (*.*)&#124;*.*" | test:ResultsExportFactsCommand | VERIFIED | evidence:RS-export-facts:FQ15-D8C4C083EA5F |
+| FQ15-A147501D79B0 | KEEP | format/export | FamilyQuant/AnalyticsControl.xaml.cs:438 | ".csv" | test:ResultsExportFactsCommand | VERIFIED | evidence:RS-export-facts:FQ15-A147501D79B0 |
+| FQ15-195513C7DFFE | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:446 | "Written to " | test:ResultsExportFactsCommand | VERIFIED | evidence:RS-export-facts:FQ15-195513C7DFFE |
+| FQ15-5E413458166D | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:446 | ": " | test:ResultsExportFactsCommand | VERIFIED | evidence:RS-export-facts:FQ15-5E413458166D |
+| FQ15-AA5D9F6C1742 | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:446 | ". Numbers use a dot for " | test:ResultsExportFactsCommand | VERIFIED | evidence:RS-export-facts:FQ15-AA5D9F6C1742 |
+| FQ15-988D6F88E020 | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:447 | "the decimal separator whatever your machine's language is, so any program can read them. " | test:ResultsExportFactsCommand | VERIFIED | evidence:RS-export-facts:FQ15-988D6F88E020 |
+| FQ15-CA91D10B9451 | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:448 | "Nothing on screen changed." | test:ResultsExportFactsCommand | VERIFIED | evidence:RS-export-facts:FQ15-CA91D10B9451 |
+| FQ15-25C5AF297613 | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:452 | "The file could not be written, so nothing was exported. Reason given " | test:ResultsExportFactsCommand | VERIFIED | evidence:RS-export-facts:FQ15-25C5AF297613 |
+| FQ15-6C73094314C0 | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:453 | "by the program: " | test:ResultsExportFactsCommand | VERIFIED | evidence:RS-export-facts:FQ15-6C73094314C0 |
+| FQ15-081C3DB19C0F | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:453 | " Next step: check that it is not already open in Excel " | test:ResultsExportFactsCommand | VERIFIED | evidence:RS-export-facts:FQ15-081C3DB19C0F |
+| FQ15-601168A47FB3 | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:454 | "and that you can write to that folder, then export again." | test:ResultsExportFactsCommand | VERIFIED | evidence:RS-export-facts:FQ15-601168A47FB3 |
 | FQ15-C968838F81DD | KEEP | handler definition | FamilyQuant/AnalyticsControl.xaml.cs:309 | private void CheckBoxFamilyPercent_Changed(object sender, RoutedEventArgs e) | test:ResultsPreservationTests | VERIFIED | evidence:RS-interactions:FQ15-C968838F81DD |
 | FQ15-44CB7F99655E | KEEP | handler definition | FamilyQuant/AnalyticsControl.xaml.cs:317 | private void ButtonExportPeptides_Click(object sender, RoutedEventArgs e) | test:ResultsPreservationTests | VERIFIED | evidence:RS-interactions:FQ15-44CB7F99655E |
 | FQ15-6C182BB4B81F | KEEP | handler definition | FamilyQuant/AnalyticsControl.xaml.cs:325 | private void ButtonExportSummary_Click(object sender, RoutedEventArgs e) | test:ResultsPreservationTests | VERIFIED | evidence:RS-interactions:FQ15-6C182BB4B81F |
@@ -175,8 +175,8 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **3365**; OPEN r
 | FQ15-DE01178972A9 | KEEP | format/export | FamilyQuant/AnalyticsFigures.cs:44 | "family_contribution.png" | test:ResultsMemberComparisonCommand | VERIFIED | evidence:RS-members:FQ15-DE01178972A9 |
 | FQ15-B42A95BF9A9B | KEEP | format/export | FamilyQuant/AnalyticsFigures.cs:45 | "recovery.png" | test:ResultsMemberComparisonCommand | VERIFIED | evidence:RS-members:FQ15-B42A95BF9A9B |
 | FQ15-3C96BBC03C6E | IMPROVE | code fact | FamilyQuant/AnalyticsFigures.cs:105 | "A folder is required to save the figures." | test:ResultsMemberComparisonCommand | VERIFIED | evidence:RS-members:FQ15-3C96BBC03C6E |
-| FQ15-478160FEFF33 | KEEP | export/storage fact | FamilyQuant/AnalyticsModel.cs:261 | "\u0001" | test:ResultsRuntimeLedgerCommand | VERIFIED | evidence:RS-runtime:FQ15-478160FEFF33 |
-| FQ15-195C6EA3EF4C | KEEP | export/storage fact | FamilyQuant/AnalyticsModel.cs:261 | "\u0001" | test:ResultsRuntimeLedgerCommand | VERIFIED | evidence:RS-runtime:FQ15-195C6EA3EF4C |
+| FQ15-478160FEFF33 | KEEP | export/storage fact | FamilyQuant/AnalyticsModel.cs:261 | "\u0001" | test:ResultsMemberComparisonCommand | VERIFIED | evidence:RS-members:FQ15-478160FEFF33 |
+| FQ15-195C6EA3EF4C | KEEP | export/storage fact | FamilyQuant/AnalyticsModel.cs:261 | "\u0001" | test:ResultsMemberComparisonCommand | VERIFIED | evidence:RS-members:FQ15-195C6EA3EF4C |
 | FQ15-14EF3FCA0F05 | KEEP | export/storage fact | FamilyQuant/AnalyticsModel.cs:262 | "\u0001" | test:ResultsMemberComparisonCommand | VERIFIED | evidence:RS-members:FQ15-14EF3FCA0F05 |
 | FQ15-7BF63C65597D | KEEP | export/storage fact | FamilyQuant/AnalyticsModel.cs:295 | "run" | test:ResultsMemberComparisonCommand | VERIFIED | evidence:RS-members:FQ15-7BF63C65597D |
 | FQ15-AC04A32666F4 | KEEP | export/storage fact | FamilyQuant/AnalyticsModel.cs:295 | "side" | test:ResultsMemberComparisonCommand | VERIFIED | evidence:RS-members:FQ15-AC04A32666F4 |
@@ -237,10 +237,10 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **3365**; OPEN r
 | FQ15-9986B5A8B91D | KEEP | export/storage fact | FamilyQuant/AnalyticsModel.cs:418 | "1" | test:ResultsMemberComparisonCommand | VERIFIED | evidence:RS-members:FQ15-9986B5A8B91D |
 | FQ15-3CF44012BB86 | KEEP | export/storage fact | FamilyQuant/AnalyticsModel.cs:418 | "0" | test:ResultsMemberComparisonCommand | VERIFIED | evidence:RS-members:FQ15-3CF44012BB86 |
 | FQ15-6EB4F8E9DE00 | KEEP | export/storage fact | FamilyQuant/AnalyticsModel.cs:444 | "R" | test:ResultsRuntimeLedgerCommand | VERIFIED | evidence:RS-runtime:FQ15-6EB4F8E9DE00 |
-| FQ15-B00484A75D89 | KEEP | export/storage fact | FamilyQuant/AnalyticsModel.cs:455 | "\"" | test:ResultsRuntimeLedgerCommand | VERIFIED | evidence:RS-runtime:FQ15-B00484A75D89 |
-| FQ15-2160B295CB8D | KEEP | export/storage fact | FamilyQuant/AnalyticsModel.cs:455 | "\"" | test:ResultsRuntimeLedgerCommand | VERIFIED | evidence:RS-runtime:FQ15-2160B295CB8D |
+| FQ15-B00484A75D89 | KEEP | export/storage fact | FamilyQuant/AnalyticsModel.cs:455 | "\"" | test:ResultsMemberComparisonCommand | VERIFIED | evidence:RS-members:FQ15-B00484A75D89 |
+| FQ15-2160B295CB8D | KEEP | export/storage fact | FamilyQuant/AnalyticsModel.cs:455 | "\"" | test:ResultsMemberComparisonCommand | VERIFIED | evidence:RS-members:FQ15-2160B295CB8D |
 | FQ15-4AB693585488 | KEEP | export/storage fact | FamilyQuant/AnalyticsModel.cs:455 | "\"\"" | test:ResultsMemberComparisonCommand | VERIFIED | evidence:RS-members:FQ15-4AB693585488 |
-| FQ15-A100063129F9 | KEEP | export/storage fact | FamilyQuant/AnalyticsModel.cs:455 | "\"" | test:ResultsRuntimeLedgerCommand | VERIFIED | evidence:RS-runtime:FQ15-A100063129F9 |
+| FQ15-A100063129F9 | KEEP | export/storage fact | FamilyQuant/AnalyticsModel.cs:455 | "\"" | test:ResultsMemberComparisonCommand | VERIFIED | evidence:RS-members:FQ15-A100063129F9 |
 | FQ15-B1182A35C62C | IMPROVE | option/copy | FamilyQuant/App.xaml:10 | SolidColorBrush.Key = PanelDarkBrush | test:ShellMetadataReceipts | VERIFIED | evidence:SH-runtime:FQ15-B1182A35C62C |
 | FQ15-4CC490537F8C | IMPROVE | option/copy | FamilyQuant/App.xaml:11 | SolidColorBrush.Key = PanelMidBrush | test:ShellMetadataReceipts | VERIFIED | evidence:SH-runtime:FQ15-4CC490537F8C |
 | FQ15-EFD6FE0DBCF2 | IMPROVE | option/copy | FamilyQuant/App.xaml:12 | SolidColorBrush.Key = PanelLightBrush | test:ShellMetadataReceipts | VERIFIED | evidence:SH-runtime:FQ15-EFD6FE0DBCF2 |

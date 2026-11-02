@@ -5,112 +5,112 @@
   "runs": [
     {
       "id": "RS-native-results",
-      "command": "C:\\FamilyQuant-wt2\\results\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --prove-results-interactions D:/FamilyQuant-data/out-results/B7/receipts/rs-interactions \u00222026-11-02 02:39:48 -0800\u0022",
-      "executedAt": "2026-11-02 02:39:48 -0800",
-      "commit": "bb7887305c5cd310891c571242426b064bb1e6a8",
+      "command": "C:\\FamilyQuant-wt2\\results\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --prove-results-interactions D:/FamilyQuant-data/out-results/RS-export-facts/receipts/interactions \u00222026-11-02 05:50:00 -0800\u0022",
+      "executedAt": "2026-11-02 05:50:00 -0800",
+      "commit": "1adfc60d8436aa17f2fc744f1d9db0b89c8b2c64",
       "artifacts": [
         {
-          "path": "D:\\FamilyQuant-data\\out-results\\B7\\receipts\\rs-interactions\\proofs.log",
-          "sha256": "8A60E256505EED2CA90D99EF302C3E3C1F65FA08D5CB4A2FF0A742FED61A72AA"
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-export-facts\\receipts\\interactions\\proofs.log",
+          "sha256": "B18374E529EE0D957966E9F3F3E6DB0E365D641C0DB8076BEA73C29A82E8EE0F"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-results\\B7\\receipts\\rs-interactions\\actual-checks.json",
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-export-facts\\receipts\\interactions\\actual-checks.json",
           "sha256": "96E2CCF8C0A4CCB29B334F00A0ED9AB191830A9FD4D94E48531D636559A6993D"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-results\\B7\\receipts\\rs-interactions\\executed\\FamilyQuant_AnalyticsControl.xaml",
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-export-facts\\receipts\\interactions\\executed\\FamilyQuant_AnalyticsControl.xaml",
           "sha256": "4C1D695B6A6A770B5E2116E7D47688C79E45C0B0ACD0D7A61754E7E590A77BFA"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-results\\B7\\receipts\\rs-interactions\\executed\\FamilyQuant_AnalyticsControl.xaml.cs",
-          "sha256": "E2747235985D458CD1371A666F0A9E61DAC3F1FEB175FD14FE81625B68DF4C39"
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-export-facts\\receipts\\interactions\\executed\\FamilyQuant_AnalyticsControl.xaml.cs",
+          "sha256": "DE812D53119D595B481FF77CA7A3BC6CEF6F61C4DD625B7948B8E3186F31F0B5"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-results\\B7\\receipts\\rs-interactions\\executed\\FamilyQuant_AnalyticsViewModel.cs",
-          "sha256": "581D33C2FF3CB6B07251B7480C016379902ED6825CF257D700FD1B14FF538945"
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-export-facts\\receipts\\interactions\\executed\\FamilyQuant_AnalyticsViewModel.cs",
+          "sha256": "5FE6334E06092E439C3790070E7A939A87B5793E60F4CF38F5D9A088C13025AA"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-results\\B7\\receipts\\rs-interactions\\executed\\FamilyQuant.Tests_Program.ResultsPreservation.cs",
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-export-facts\\receipts\\interactions\\executed\\FamilyQuant.Tests_Program.ResultsPreservation.cs",
           "sha256": "796EBE260F2B702F79DAC0C57C7875811DEE75933F3967E947CFDE6E03ACA674"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-results\\B7\\receipts\\rs-interactions\\executed\\FamilyQuant.Tests_Program.Commands.ResultsPreservation.cs",
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-export-facts\\receipts\\interactions\\executed\\FamilyQuant.Tests_Program.Commands.ResultsPreservation.cs",
           "sha256": "71C2C16E0A3E386CED407A5E1B26EDA17A7F6A894C691ADAFEDD97F8168C5397"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-results\\B7\\receipts\\rs-interactions\\executed\\FamilyQuant.Tests.dll",
-          "sha256": "F91A7075EDDCB09D8309CBC2B3149A453151E8D623E23D251373710D7C70EEF3"
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-export-facts\\receipts\\interactions\\executed\\FamilyQuant.Tests.dll",
+          "sha256": "C859D8DD75371CC25B28A6D1783B153A2C8277CE96614C169CF63096A15C1CB7"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-results\\B7\\receipts\\rs-interactions\\executed\\FamilyQuant2.dll",
-          "sha256": "9CAD7C06EF0775105A17CB393A33CFD0579080DA1035E70754EFD8F5E3DC8182"
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-export-facts\\receipts\\interactions\\executed\\FamilyQuant2.dll",
+          "sha256": "316ABA5C8A0BB88268DB7CBC19FF412EB38ED20973B993CEEB3DDDFA650030C6"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-results\\B7\\receipts\\rs-interactions\\executed\\FamilyQuant.Core.dll",
-          "sha256": "F9FE561349EAF5F040291E9117D585F59A8384AA3406313CFAC4FFA52B0FFE19"
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-export-facts\\receipts\\interactions\\executed\\FamilyQuant.Core.dll",
+          "sha256": "F661F13678C42DEE118A930D6D18698BD4E34DEDAFF2F08C8A91C1E0A30BC0D8"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-results\\B7\\receipts\\rs-interactions\\native\\Peptides-1",
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-export-facts\\receipts\\interactions\\native\\Peptides-1",
           "sha256": "1EB272F504B26BF2ECBC35843E378B2B9675C512AE94C6F811ACA454571C9185"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-results\\B7\\receipts\\rs-interactions\\native\\Peptides-2",
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-export-facts\\receipts\\interactions\\native\\Peptides-2",
           "sha256": "1EB272F504B26BF2ECBC35843E378B2B9675C512AE94C6F811ACA454571C9185"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-results\\B7\\receipts\\rs-interactions\\native\\results-Dark.png",
-          "sha256": "A0E7AB3DB851E540DB132585DCAA122D91972F188664D005E679E4A3CFC77094"
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-export-facts\\receipts\\interactions\\native\\results-Dark.png",
+          "sha256": "46937DE2D9A98D4DFB6B26801E924ED1419ABC2B9EE3A5D3D6E41241C3402E78"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-results\\B7\\receipts\\rs-interactions\\native\\results-Light.png",
-          "sha256": "37E4616C43D00CFCE0C674987F4067690731168B9953FBA37C483CFEC3E7484B"
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-export-facts\\receipts\\interactions\\native\\results-Light.png",
+          "sha256": "1CE28C0D2654FBD87A3FA5A869423FECC82B6BE87B3D4C2CDF84E634C17F3206"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-results\\B7\\receipts\\rs-interactions\\native\\Summary-1",
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-export-facts\\receipts\\interactions\\native\\Summary-1",
           "sha256": "25F983A1AAB49B72A8882A0E7B1B65598B2855BF907B9462EA06332A220CFF2F"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-results\\B7\\receipts\\rs-interactions\\native\\Summary-2",
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-export-facts\\receipts\\interactions\\native\\Summary-2",
           "sha256": "25F983A1AAB49B72A8882A0E7B1B65598B2855BF907B9462EA06332A220CFF2F"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-results\\B7\\receipts\\rs-interactions\\native\\Figures-1\\family_contribution.png",
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-export-facts\\receipts\\interactions\\native\\Figures-1\\family_contribution.png",
           "sha256": "73AF111DD1659F08E980CD328D96B6B218D9CCC26B4FE1CB81C546D761AB7116"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-results\\B7\\receipts\\rs-interactions\\native\\Figures-1\\isotopes_credited.png",
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-export-facts\\receipts\\interactions\\native\\Figures-1\\isotopes_credited.png",
           "sha256": "EC37E6C2C5317C6D5725FFE603899281EB30C5ABBBCB0FDE853221F3CE83A861"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-results\\B7\\receipts\\rs-interactions\\native\\Figures-1\\percent_ion_current_by_mass.png",
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-export-facts\\receipts\\interactions\\native\\Figures-1\\percent_ion_current_by_mass.png",
           "sha256": "548345447269A10FDB5ABBF13F9FB515B4D7348AEADD1C0D7CDD44A13A902794"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-results\\B7\\receipts\\rs-interactions\\native\\Figures-1\\recovery.png",
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-export-facts\\receipts\\interactions\\native\\Figures-1\\recovery.png",
           "sha256": "B3C8710717B3D959912BA79F47C83AA1C82F1D78DDDE698C73C098FF299FC080"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-results\\B7\\receipts\\rs-interactions\\native\\Figures-1\\xic_by_mass.png",
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-export-facts\\receipts\\interactions\\native\\Figures-1\\xic_by_mass.png",
           "sha256": "C799CA03E4E223CCE223660C3D70C5D2609D1F297B7CF93E1EF14DE7B2CB06A8"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-results\\B7\\receipts\\rs-interactions\\native\\Figures-2\\family_contribution.png",
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-export-facts\\receipts\\interactions\\native\\Figures-2\\family_contribution.png",
           "sha256": "73AF111DD1659F08E980CD328D96B6B218D9CCC26B4FE1CB81C546D761AB7116"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-results\\B7\\receipts\\rs-interactions\\native\\Figures-2\\isotopes_credited.png",
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-export-facts\\receipts\\interactions\\native\\Figures-2\\isotopes_credited.png",
           "sha256": "EC37E6C2C5317C6D5725FFE603899281EB30C5ABBBCB0FDE853221F3CE83A861"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-results\\B7\\receipts\\rs-interactions\\native\\Figures-2\\percent_ion_current_by_mass.png",
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-export-facts\\receipts\\interactions\\native\\Figures-2\\percent_ion_current_by_mass.png",
           "sha256": "548345447269A10FDB5ABBF13F9FB515B4D7348AEADD1C0D7CDD44A13A902794"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-results\\B7\\receipts\\rs-interactions\\native\\Figures-2\\recovery.png",
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-export-facts\\receipts\\interactions\\native\\Figures-2\\recovery.png",
           "sha256": "B3C8710717B3D959912BA79F47C83AA1C82F1D78DDDE698C73C098FF299FC080"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-results\\B7\\receipts\\rs-interactions\\native\\Figures-2\\xic_by_mass.png",
+          "path": "D:\\FamilyQuant-data\\out-results\\RS-export-facts\\receipts\\interactions\\native\\Figures-2\\xic_by_mass.png",
           "sha256": "C799CA03E4E223CCE223660C3D70C5D2609D1F297B7CF93E1EF14DE7B2CB06A8"
         }
       ],
@@ -129,12 +129,12 @@
         {
           "path": "FamilyQuant/AnalyticsControl.xaml.cs",
           "symbol": "ComboBoxFamilyTopN.Items",
-          "sha256": "E2747235985D458CD1371A666F0A9E61DAC3F1FEB175FD14FE81625B68DF4C39"
+          "sha256": "DE812D53119D595B481FF77CA7A3BC6CEF6F61C4DD625B7948B8E3186F31F0B5"
         },
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
           "symbol": "ComboBoxFamilyTopN.Items",
-          "sha256": "581D33C2FF3CB6B07251B7480C016379902ED6825CF257D700FD1B14FF538945"
+          "sha256": "5FE6334E06092E439C3790070E7A939A87B5793E60F4CF38F5D9A088C13025AA"
         }
       ],
       "proofs": [
@@ -143,7 +143,7 @@
           "kind": "test",
           "target": "ResultsPreservationTests",
           "assertion": "RS FQ15-075F89E875C2: family limit retains its label Top 30 families",
-          "artifact": "D:\\FamilyQuant-data\\out-results\\B7\\receipts\\rs-interactions\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-results\\RS-export-facts\\receipts\\interactions\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -162,12 +162,12 @@
         {
           "path": "FamilyQuant/AnalyticsControl.xaml.cs",
           "symbol": "AnalyticsControl / family chart label",
-          "sha256": "E2747235985D458CD1371A666F0A9E61DAC3F1FEB175FD14FE81625B68DF4C39"
+          "sha256": "DE812D53119D595B481FF77CA7A3BC6CEF6F61C4DD625B7948B8E3186F31F0B5"
         },
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
           "symbol": "AnalyticsControl / family chart label",
-          "sha256": "581D33C2FF3CB6B07251B7480C016379902ED6825CF257D700FD1B14FF538945"
+          "sha256": "5FE6334E06092E439C3790070E7A939A87B5793E60F4CF38F5D9A088C13025AA"
         }
       ],
       "proofs": [
@@ -176,7 +176,7 @@
           "kind": "test",
           "target": "ResultsPreservationTests",
           "assertion": "RS FQ15-152CD0CBD7E6: family chart retains its visible section label",
-          "artifact": "D:\\FamilyQuant-data\\out-results\\B7\\receipts\\rs-interactions\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-results\\RS-export-facts\\receipts\\interactions\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -195,12 +195,12 @@
         {
           "path": "FamilyQuant/AnalyticsControl.xaml.cs",
           "symbol": "AnalyticsControl / Results heading",
-          "sha256": "E2747235985D458CD1371A666F0A9E61DAC3F1FEB175FD14FE81625B68DF4C39"
+          "sha256": "DE812D53119D595B481FF77CA7A3BC6CEF6F61C4DD625B7948B8E3186F31F0B5"
         },
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
           "symbol": "AnalyticsControl / Results heading",
-          "sha256": "581D33C2FF3CB6B07251B7480C016379902ED6825CF257D700FD1B14FF538945"
+          "sha256": "5FE6334E06092E439C3790070E7A939A87B5793E60F4CF38F5D9A088C13025AA"
         }
       ],
       "proofs": [
@@ -209,7 +209,7 @@
           "kind": "test",
           "target": "ResultsPreservationTests",
           "assertion": "RS FQ15-155754DC695E: Analytics heading is presented as Results",
-          "artifact": "D:\\FamilyQuant-data\\out-results\\B7\\receipts\\rs-interactions\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-results\\RS-export-facts\\receipts\\interactions\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -228,12 +228,12 @@
         {
           "path": "FamilyQuant/AnalyticsControl.xaml.cs",
           "symbol": "CheckBoxFamilyPercent / ChartChoiceChanged",
-          "sha256": "E2747235985D458CD1371A666F0A9E61DAC3F1FEB175FD14FE81625B68DF4C39"
+          "sha256": "DE812D53119D595B481FF77CA7A3BC6CEF6F61C4DD625B7948B8E3186F31F0B5"
         },
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
           "symbol": "CheckBoxFamilyPercent / ChartChoiceChanged",
-          "sha256": "581D33C2FF3CB6B07251B7480C016379902ED6825CF257D700FD1B14FF538945"
+          "sha256": "5FE6334E06092E439C3790070E7A939A87B5793E60F4CF38F5D9A088C13025AA"
         }
       ],
       "proofs": [
@@ -242,7 +242,7 @@
           "kind": "test",
           "target": "ResultsPreservationTests",
           "assertion": "RS FQ15-1826BA8181A2: percent control remains enabled and changes the chart",
-          "artifact": "D:\\FamilyQuant-data\\out-results\\B7\\receipts\\rs-interactions\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-results\\RS-export-facts\\receipts\\interactions\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -261,12 +261,12 @@
         {
           "path": "FamilyQuant/AnalyticsControl.xaml.cs",
           "symbol": "ExportClicked / AnalyticsViewModel.ExportAsync",
-          "sha256": "E2747235985D458CD1371A666F0A9E61DAC3F1FEB175FD14FE81625B68DF4C39"
+          "sha256": "DE812D53119D595B481FF77CA7A3BC6CEF6F61C4DD625B7948B8E3186F31F0B5"
         },
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
           "symbol": "ExportClicked / AnalyticsViewModel.ExportAsync",
-          "sha256": "581D33C2FF3CB6B07251B7480C016379902ED6825CF257D700FD1B14FF538945"
+          "sha256": "5FE6334E06092E439C3790070E7A939A87B5793E60F4CF38F5D9A088C13025AA"
         }
       ],
       "proofs": [
@@ -275,7 +275,7 @@
           "kind": "test",
           "target": "ResultsPreservationTests",
           "assertion": "RS FQ15-187ED75059DC: native evidence-pack route refuses missing required studies and publishes no folder through the replacement handler",
-          "artifact": "D:\\FamilyQuant-data\\out-results\\B7\\receipts\\rs-interactions\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-results\\RS-export-facts\\receipts\\interactions\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -294,12 +294,12 @@
         {
           "path": "FamilyQuant/AnalyticsControl.xaml.cs",
           "symbol": "ComboBoxFamilyTopN.Items",
-          "sha256": "E2747235985D458CD1371A666F0A9E61DAC3F1FEB175FD14FE81625B68DF4C39"
+          "sha256": "DE812D53119D595B481FF77CA7A3BC6CEF6F61C4DD625B7948B8E3186F31F0B5"
         },
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
           "symbol": "ComboBoxFamilyTopN.Items",
-          "sha256": "581D33C2FF3CB6B07251B7480C016379902ED6825CF257D700FD1B14FF538945"
+          "sha256": "5FE6334E06092E439C3790070E7A939A87B5793E60F4CF38F5D9A088C13025AA"
         }
       ],
       "proofs": [
@@ -308,7 +308,7 @@
           "kind": "test",
           "target": "ResultsPreservationTests",
           "assertion": "RS FQ15-1A7280F9C040: family limit retains its label Top 20 families",
-          "artifact": "D:\\FamilyQuant-data\\out-results\\B7\\receipts\\rs-interactions\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-results\\RS-export-facts\\receipts\\interactions\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -327,12 +327,12 @@
         {
           "path": "FamilyQuant/AnalyticsControl.xaml.cs",
           "symbol": "ComboBoxFamilyTopN / ChartChoiceChanged",
-          "sha256": "E2747235985D458CD1371A666F0A9E61DAC3F1FEB175FD14FE81625B68DF4C39"
+          "sha256": "DE812D53119D595B481FF77CA7A3BC6CEF6F61C4DD625B7948B8E3186F31F0B5"
         },
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
           "symbol": "ComboBoxFamilyTopN / ChartChoiceChanged",
-          "sha256": "581D33C2FF3CB6B07251B7480C016379902ED6825CF257D700FD1B14FF538945"
+          "sha256": "5FE6334E06092E439C3790070E7A939A87B5793E60F4CF38F5D9A088C13025AA"
         }
       ],
       "proofs": [
@@ -341,7 +341,7 @@
           "kind": "test",
           "target": "ResultsPreservationTests",
           "assertion": "RS FQ15-1F00D6FFE5EE: family limit 10 can be selected through its native control",
-          "artifact": "D:\\FamilyQuant-data\\out-results\\B7\\receipts\\rs-interactions\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-results\\RS-export-facts\\receipts\\interactions\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -360,12 +360,12 @@
         {
           "path": "FamilyQuant/AnalyticsControl.xaml.cs",
           "symbol": "ComboBoxFamilyTopN / ChartChoiceChanged",
-          "sha256": "E2747235985D458CD1371A666F0A9E61DAC3F1FEB175FD14FE81625B68DF4C39"
+          "sha256": "DE812D53119D595B481FF77CA7A3BC6CEF6F61C4DD625B7948B8E3186F31F0B5"
         },
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
           "symbol": "ComboBoxFamilyTopN / ChartChoiceChanged",
-          "sha256": "581D33C2FF3CB6B07251B7480C016379902ED6825CF257D700FD1B14FF538945"
+          "sha256": "5FE6334E06092E439C3790070E7A939A87B5793E60F4CF38F5D9A088C13025AA"
         }
       ],
       "proofs": [
@@ -374,7 +374,7 @@
           "kind": "test",
           "target": "ResultsPreservationTests",
           "assertion": "RS FQ15-1F69AF99C92A: family limit selector is displayed and defaults to fifteen",
-          "artifact": "D:\\FamilyQuant-data\\out-results\\B7\\receipts\\rs-interactions\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-results\\RS-export-facts\\receipts\\interactions\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -393,12 +393,12 @@
         {
           "path": "FamilyQuant/AnalyticsControl.xaml.cs",
           "symbol": "ComboBoxExportKind / Peptides / ToolTip",
-          "sha256": "E2747235985D458CD1371A666F0A9E61DAC3F1FEB175FD14FE81625B68DF4C39"
+          "sha256": "DE812D53119D595B481FF77CA7A3BC6CEF6F61C4DD625B7948B8E3186F31F0B5"
         },
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
           "symbol": "ComboBoxExportKind / Peptides / ToolTip",
-          "sha256": "581D33C2FF3CB6B07251B7480C016379902ED6825CF257D700FD1B14FF538945"
+          "sha256": "5FE6334E06092E439C3790070E7A939A87B5793E60F4CF38F5D9A088C13025AA"
         }
       ],
       "proofs": [
@@ -407,7 +407,7 @@
           "kind": "test",
           "target": "ResultsPreservationTests",
           "assertion": "RS FQ15-21F91C29B9E2: retained tooltip: Per-peptide run, sequence, charge, mass, isotope areas, envelope and family assignments.",
-          "artifact": "D:\\FamilyQuant-data\\out-results\\B7\\receipts\\rs-interactions\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-results\\RS-export-facts\\receipts\\interactions\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -426,12 +426,12 @@
         {
           "path": "FamilyQuant/AnalyticsControl.xaml.cs",
           "symbol": "ComboBoxExportKind / ButtonExport / ExportChoiceChanged",
-          "sha256": "E2747235985D458CD1371A666F0A9E61DAC3F1FEB175FD14FE81625B68DF4C39"
+          "sha256": "DE812D53119D595B481FF77CA7A3BC6CEF6F61C4DD625B7948B8E3186F31F0B5"
         },
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
           "symbol": "ComboBoxExportKind / ButtonExport / ExportChoiceChanged",
-          "sha256": "581D33C2FF3CB6B07251B7480C016379902ED6825CF257D700FD1B14FF538945"
+          "sha256": "5FE6334E06092E439C3790070E7A939A87B5793E60F4CF38F5D9A088C13025AA"
         }
       ],
       "proofs": [
@@ -440,7 +440,7 @@
           "kind": "test",
           "target": "ResultsPreservationTests",
           "assertion": "RS FQ15-26786D42C42C: Peptides export remains selectable and enabled",
-          "artifact": "D:\\FamilyQuant-data\\out-results\\B7\\receipts\\rs-interactions\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-results\\RS-export-facts\\receipts\\interactions\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -459,12 +459,12 @@
         {
           "path": "FamilyQuant/AnalyticsControl.xaml.cs",
           "symbol": "ComboBoxExportKind / Figures / ToolTip",
-          "sha256": "E2747235985D458CD1371A666F0A9E61DAC3F1FEB175FD14FE81625B68DF4C39"
+          "sha256": "DE812D53119D595B481FF77CA7A3BC6CEF6F61C4DD625B7948B8E3186F31F0B5"
         },
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
           "symbol": "ComboBoxExportKind / Figures / ToolTip",
-          "sha256": "581D33C2FF3CB6B07251B7480C016379902ED6825CF257D700FD1B14FF538945"
+          "sha256": "5FE6334E06092E439C3790070E7A939A87B5793E60F4CF38F5D9A088C13025AA"
         }
       ],
       "proofs": [
@@ -473,7 +473,7 @@
           "kind": "test",
           "target": "ResultsPreservationTests",
           "assertion": "RS FQ15-2C55FFA436E6: retained tooltip: Every screen graph at 1920 by 1080 pixels in the Light palette.",
-          "artifact": "D:\\FamilyQuant-data\\out-results\\B7\\receipts\\rs-interactions\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-results\\RS-export-facts\\receipts\\interactions\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -492,12 +492,12 @@
         {
           "path": "FamilyQuant/AnalyticsControl.xaml.cs",
           "symbol": "ComboBoxFamilyTopN / tag 0 / ToolTip",
-          "sha256": "E2747235985D458CD1371A666F0A9E61DAC3F1FEB175FD14FE81625B68DF4C39"
+          "sha256": "DE812D53119D595B481FF77CA7A3BC6CEF6F61C4DD625B7948B8E3186F31F0B5"
         },
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
           "symbol": "ComboBoxFamilyTopN / tag 0 / ToolTip",
-          "sha256": "581D33C2FF3CB6B07251B7480C016379902ED6825CF257D700FD1B14FF538945"
+          "sha256": "5FE6334E06092E439C3790070E7A939A87B5793E60F4CF38F5D9A088C13025AA"
         }
       ],
       "proofs": [
@@ -506,7 +506,7 @@
           "kind": "test",
           "target": "ResultsPreservationTests",
           "assertion": "RS FQ15-3652AC893FCA: retained tooltip: Every family retains its own bar. Scrolling may be needed for a large grouping.",
-          "artifact": "D:\\FamilyQuant-data\\out-results\\B7\\receipts\\rs-interactions\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-results\\RS-export-facts\\receipts\\interactions\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -525,12 +525,12 @@
         {
           "path": "FamilyQuant/AnalyticsControl.xaml.cs",
           "symbol": "ComboBoxExportKind / Peptides / Content",
-          "sha256": "E2747235985D458CD1371A666F0A9E61DAC3F1FEB175FD14FE81625B68DF4C39"
+          "sha256": "DE812D53119D595B481FF77CA7A3BC6CEF6F61C4DD625B7948B8E3186F31F0B5"
         },
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
           "symbol": "ComboBoxExportKind / Peptides / Content",
-          "sha256": "581D33C2FF3CB6B07251B7480C016379902ED6825CF257D700FD1B14FF538945"
+          "sha256": "5FE6334E06092E439C3790070E7A939A87B5793E60F4CF38F5D9A088C13025AA"
         }
       ],
       "proofs": [
@@ -539,7 +539,7 @@
           "kind": "test",
           "target": "ResultsPreservationTests",
           "assertion": "RS FQ15-3BCC49F296C6: export label retained as Peptide table (CSV)",
-          "artifact": "D:\\FamilyQuant-data\\out-results\\B7\\receipts\\rs-interactions\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-results\\RS-export-facts\\receipts\\interactions\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -558,12 +558,12 @@
         {
           "path": "FamilyQuant/AnalyticsControl.xaml.cs",
           "symbol": "ComboBoxExportKind / EvidencePack / Content",
-          "sha256": "E2747235985D458CD1371A666F0A9E61DAC3F1FEB175FD14FE81625B68DF4C39"
+          "sha256": "DE812D53119D595B481FF77CA7A3BC6CEF6F61C4DD625B7948B8E3186F31F0B5"
         },
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
           "symbol": "ComboBoxExportKind / EvidencePack / Content",
-          "sha256": "581D33C2FF3CB6B07251B7480C016379902ED6825CF257D700FD1B14FF538945"
+          "sha256": "5FE6334E06092E439C3790070E7A939A87B5793E60F4CF38F5D9A088C13025AA"
         }
       ],
       "proofs": [
@@ -572,7 +572,7 @@
           "kind": "test",
           "target": "ResultsPreservationTests",
           "assertion": "RS FQ15-3CDBA38C569B: export label retained as Presentation evidence pack",
-          "artifact": "D:\\FamilyQuant-data\\out-results\\B7\\receipts\\rs-interactions\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-results\\RS-export-facts\\receipts\\interactions\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -591,12 +591,12 @@
         {
           "path": "FamilyQuant/AnalyticsControl.xaml.cs",
           "symbol": "ComboBoxFamilyTopN.Items",
-          "sha256": "E2747235985D458CD1371A666F0A9E61DAC3F1FEB175FD14FE81625B68DF4C39"
+          "sha256": "DE812D53119D595B481FF77CA7A3BC6CEF6F61C4DD625B7948B8E3186F31F0B5"
         },
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
           "symbol": "ComboBoxFamilyTopN.Items",
-          "sha256": "581D33C2FF3CB6B07251B7480C016379902ED6825CF257D700FD1B14FF538945"
+          "sha256": "5FE6334E06092E439C3790070E7A939A87B5793E60F4CF38F5D9A088C13025AA"
         }
       ],
       "proofs": [
@@ -605,7 +605,7 @@
           "kind": "test",
           "target": "ResultsPreservationTests",
           "assertion": "RS FQ15-3FF0D958178F: family limit retains its label All families",
-          "artifact": "D:\\FamilyQuant-data\\out-results\\B7\\receipts\\rs-interactions\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-results\\RS-export-facts\\receipts\\interactions\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -624,12 +624,12 @@
         {
           "path": "FamilyQuant/AnalyticsControl.xaml.cs",
           "symbol": "ExportClicked / AnalyticsViewModel.ExportAsync",
-          "sha256": "E2747235985D458CD1371A666F0A9E61DAC3F1FEB175FD14FE81625B68DF4C39"
+          "sha256": "DE812D53119D595B481FF77CA7A3BC6CEF6F61C4DD625B7948B8E3186F31F0B5"
         },
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
           "symbol": "ExportClicked / AnalyticsViewModel.ExportAsync",
-          "sha256": "581D33C2FF3CB6B07251B7480C016379902ED6825CF257D700FD1B14FF538945"
+          "sha256": "5FE6334E06092E439C3790070E7A939A87B5793E60F4CF38F5D9A088C13025AA"
         }
       ],
       "proofs": [
@@ -638,7 +638,7 @@
           "kind": "test",
           "target": "ResultsPreservationTests",
           "assertion": "RS FQ15-44CB7F99655E: native Peptides export writes byte-identical output twice through the replacement handler",
-          "artifact": "D:\\FamilyQuant-data\\out-results\\B7\\receipts\\rs-interactions\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-results\\RS-export-facts\\receipts\\interactions\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -657,12 +657,12 @@
         {
           "path": "FamilyQuant/AnalyticsControl.xaml.cs",
           "symbol": "ComboBoxFamilyTopN / ChartChoiceChanged",
-          "sha256": "E2747235985D458CD1371A666F0A9E61DAC3F1FEB175FD14FE81625B68DF4C39"
+          "sha256": "DE812D53119D595B481FF77CA7A3BC6CEF6F61C4DD625B7948B8E3186F31F0B5"
         },
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
           "symbol": "ComboBoxFamilyTopN / ChartChoiceChanged",
-          "sha256": "581D33C2FF3CB6B07251B7480C016379902ED6825CF257D700FD1B14FF538945"
+          "sha256": "5FE6334E06092E439C3790070E7A939A87B5793E60F4CF38F5D9A088C13025AA"
         }
       ],
       "proofs": [
@@ -671,7 +671,7 @@
           "kind": "test",
           "target": "ResultsPreservationTests",
           "assertion": "RS FQ15-4A6B08256B3F: family limit 30 can be selected through its native control",
-          "artifact": "D:\\FamilyQuant-data\\out-results\\B7\\receipts\\rs-interactions\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-results\\RS-export-facts\\receipts\\interactions\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -690,12 +690,12 @@
         {
           "path": "FamilyQuant/AnalyticsControl.xaml.cs",
           "symbol": "ExportClicked / AnalyticsViewModel.ExportAsync",
-          "sha256": "E2747235985D458CD1371A666F0A9E61DAC3F1FEB175FD14FE81625B68DF4C39"
+          "sha256": "DE812D53119D595B481FF77CA7A3BC6CEF6F61C4DD625B7948B8E3186F31F0B5"
         },
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
           "symbol": "ExportClicked / AnalyticsViewModel.ExportAsync",
-          "sha256": "581D33C2FF3CB6B07251B7480C016379902ED6825CF257D700FD1B14FF538945"
+          "sha256": "5FE6334E06092E439C3790070E7A939A87B5793E60F4CF38F5D9A088C13025AA"
         }
       ],
       "proofs": [
@@ -704,7 +704,7 @@
           "kind": "test",
           "target": "ResultsPreservationTests",
           "assertion": "RS FQ15-4CC6F55B2F33: native Summary export writes byte-identical output twice",
-          "artifact": "D:\\FamilyQuant-data\\out-results\\B7\\receipts\\rs-interactions\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-results\\RS-export-facts\\receipts\\interactions\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -723,12 +723,12 @@
         {
           "path": "FamilyQuant/AnalyticsControl.xaml.cs",
           "symbol": "ExportClicked / AnalyticsViewModel.ExportAsync",
-          "sha256": "E2747235985D458CD1371A666F0A9E61DAC3F1FEB175FD14FE81625B68DF4C39"
+          "sha256": "DE812D53119D595B481FF77CA7A3BC6CEF6F61C4DD625B7948B8E3186F31F0B5"
         },
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
           "symbol": "ExportClicked / AnalyticsViewModel.ExportAsync",
-          "sha256": "581D33C2FF3CB6B07251B7480C016379902ED6825CF257D700FD1B14FF538945"
+          "sha256": "5FE6334E06092E439C3790070E7A939A87B5793E60F4CF38F5D9A088C13025AA"
         }
       ],
       "proofs": [
@@ -737,7 +737,7 @@
           "kind": "test",
           "target": "ResultsPreservationTests",
           "assertion": "RS FQ15-523631E1F20E: native Peptides export writes byte-identical output twice",
-          "artifact": "D:\\FamilyQuant-data\\out-results\\B7\\receipts\\rs-interactions\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-results\\RS-export-facts\\receipts\\interactions\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -756,12 +756,12 @@
         {
           "path": "FamilyQuant/AnalyticsControl.xaml.cs",
           "symbol": "ComboBoxFamilyTopN / ChartChoiceChanged",
-          "sha256": "E2747235985D458CD1371A666F0A9E61DAC3F1FEB175FD14FE81625B68DF4C39"
+          "sha256": "DE812D53119D595B481FF77CA7A3BC6CEF6F61C4DD625B7948B8E3186F31F0B5"
         },
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
           "symbol": "ComboBoxFamilyTopN / ChartChoiceChanged",
-          "sha256": "581D33C2FF3CB6B07251B7480C016379902ED6825CF257D700FD1B14FF538945"
+          "sha256": "5FE6334E06092E439C3790070E7A939A87B5793E60F4CF38F5D9A088C13025AA"
         }
       ],
       "proofs": [
@@ -770,7 +770,7 @@
           "kind": "test",
           "target": "ResultsPreservationTests",
           "assertion": "RS FQ15-54521B6EF355: family limit 15 can be selected through its native control",
-          "artifact": "D:\\FamilyQuant-data\\out-results\\B7\\receipts\\rs-interactions\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-results\\RS-export-facts\\receipts\\interactions\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -789,12 +789,12 @@
         {
           "path": "FamilyQuant/AnalyticsControl.xaml.cs",
           "symbol": "CheckBoxFamilyPercent.ToolTip",
-          "sha256": "E2747235985D458CD1371A666F0A9E61DAC3F1FEB175FD14FE81625B68DF4C39"
+          "sha256": "DE812D53119D595B481FF77CA7A3BC6CEF6F61C4DD625B7948B8E3186F31F0B5"
         },
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
           "symbol": "CheckBoxFamilyPercent.ToolTip",
-          "sha256": "581D33C2FF3CB6B07251B7480C016379902ED6825CF257D700FD1B14FF538945"
+          "sha256": "5FE6334E06092E439C3790070E7A939A87B5793E60F4CF38F5D9A088C13025AA"
         }
       ],
       "proofs": [
@@ -803,7 +803,7 @@
           "kind": "test",
           "target": "ResultsPreservationTests",
           "assertion": "RS FQ15-59366EF0C808: retained tooltip: Divide by the measured signal. Count-in-every-family bars can overlap and their percentages must not be summed.",
-          "artifact": "D:\\FamilyQuant-data\\out-results\\B7\\receipts\\rs-interactions\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-results\\RS-export-facts\\receipts\\interactions\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -822,12 +822,12 @@
         {
           "path": "FamilyQuant/AnalyticsControl.xaml.cs",
           "symbol": "ExportClicked / AnalyticsViewModel.ExportAsync",
-          "sha256": "E2747235985D458CD1371A666F0A9E61DAC3F1FEB175FD14FE81625B68DF4C39"
+          "sha256": "DE812D53119D595B481FF77CA7A3BC6CEF6F61C4DD625B7948B8E3186F31F0B5"
         },
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
           "symbol": "ExportClicked / AnalyticsViewModel.ExportAsync",
-          "sha256": "581D33C2FF3CB6B07251B7480C016379902ED6825CF257D700FD1B14FF538945"
+          "sha256": "5FE6334E06092E439C3790070E7A939A87B5793E60F4CF38F5D9A088C13025AA"
         }
       ],
       "proofs": [
@@ -836,7 +836,7 @@
           "kind": "test",
           "target": "ResultsPreservationTests",
           "assertion": "RS FQ15-6C182BB4B81F: native Summary export writes byte-identical output twice through the replacement handler",
-          "artifact": "D:\\FamilyQuant-data\\out-results\\B7\\receipts\\rs-interactions\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-results\\RS-export-facts\\receipts\\interactions\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -855,12 +855,12 @@
         {
           "path": "FamilyQuant/AnalyticsControl.xaml.cs",
           "symbol": "ComboBoxFamilyTopN.ToolTip",
-          "sha256": "E2747235985D458CD1371A666F0A9E61DAC3F1FEB175FD14FE81625B68DF4C39"
+          "sha256": "DE812D53119D595B481FF77CA7A3BC6CEF6F61C4DD625B7948B8E3186F31F0B5"
         },
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
           "symbol": "ComboBoxFamilyTopN.ToolTip",
-          "sha256": "581D33C2FF3CB6B07251B7480C016379902ED6825CF257D700FD1B14FF538945"
+          "sha256": "5FE6334E06092E439C3790070E7A939A87B5793E60F4CF38F5D9A088C13025AA"
         }
       ],
       "proofs": [
@@ -869,7 +869,7 @@
           "kind": "test",
           "target": "ResultsPreservationTests",
           "assertion": "RS FQ15-6E6228F56C09: retained tooltip: Show the largest families and combine every remaining family in one bar.",
-          "artifact": "D:\\FamilyQuant-data\\out-results\\B7\\receipts\\rs-interactions\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-results\\RS-export-facts\\receipts\\interactions\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -888,12 +888,12 @@
         {
           "path": "FamilyQuant/AnalyticsControl.xaml.cs",
           "symbol": "ComboBoxFamilyTopN.Items",
-          "sha256": "E2747235985D458CD1371A666F0A9E61DAC3F1FEB175FD14FE81625B68DF4C39"
+          "sha256": "DE812D53119D595B481FF77CA7A3BC6CEF6F61C4DD625B7948B8E3186F31F0B5"
         },
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
           "symbol": "ComboBoxFamilyTopN.Items",
-          "sha256": "581D33C2FF3CB6B07251B7480C016379902ED6825CF257D700FD1B14FF538945"
+          "sha256": "5FE6334E06092E439C3790070E7A939A87B5793E60F4CF38F5D9A088C13025AA"
         }
       ],
       "proofs": [
@@ -902,7 +902,7 @@
           "kind": "test",
           "target": "ResultsPreservationTests",
           "assertion": "RS FQ15-777E1F0E05BC: family limit retains its label Top 10 families",
-          "artifact": "D:\\FamilyQuant-data\\out-results\\B7\\receipts\\rs-interactions\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-results\\RS-export-facts\\receipts\\interactions\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -921,12 +921,12 @@
         {
           "path": "FamilyQuant/AnalyticsControl.xaml.cs",
           "symbol": "ComboBoxExportKind / Summary / ToolTip",
-          "sha256": "E2747235985D458CD1371A666F0A9E61DAC3F1FEB175FD14FE81625B68DF4C39"
+          "sha256": "DE812D53119D595B481FF77CA7A3BC6CEF6F61C4DD625B7948B8E3186F31F0B5"
         },
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
           "symbol": "ComboBoxExportKind / Summary / ToolTip",
-          "sha256": "581D33C2FF3CB6B07251B7480C016379902ED6825CF257D700FD1B14FF538945"
+          "sha256": "5FE6334E06092E439C3790070E7A939A87B5793E60F4CF38F5D9A088C13025AA"
         }
       ],
       "proofs": [
@@ -935,7 +935,7 @@
           "kind": "test",
           "target": "ResultsPreservationTests",
           "assertion": "RS FQ15-7EE1B55F5E41: retained tooltip: Per-run TIC, peptide counts, envelopes and recovery shares in invariant decimal format.",
-          "artifact": "D:\\FamilyQuant-data\\out-results\\B7\\receipts\\rs-interactions\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-results\\RS-export-facts\\receipts\\interactions\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -954,12 +954,12 @@
         {
           "path": "FamilyQuant/AnalyticsControl.xaml.cs",
           "symbol": "ComboBoxFamilyTopN / tag 30 / ToolTip",
-          "sha256": "E2747235985D458CD1371A666F0A9E61DAC3F1FEB175FD14FE81625B68DF4C39"
+          "sha256": "DE812D53119D595B481FF77CA7A3BC6CEF6F61C4DD625B7948B8E3186F31F0B5"
         },
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
           "symbol": "ComboBoxFamilyTopN / tag 30 / ToolTip",
-          "sha256": "581D33C2FF3CB6B07251B7480C016379902ED6825CF257D700FD1B14FF538945"
+          "sha256": "5FE6334E06092E439C3790070E7A939A87B5793E60F4CF38F5D9A088C13025AA"
         }
       ],
       "proofs": [
@@ -968,7 +968,7 @@
           "kind": "test",
           "target": "ResultsPreservationTests",
           "assertion": "RS FQ15-7EF21BC4741F: retained tooltip: Thirty families plus one bar for the rest. Labels need more screen space.",
-          "artifact": "D:\\FamilyQuant-data\\out-results\\B7\\receipts\\rs-interactions\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-results\\RS-export-facts\\receipts\\interactions\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -987,12 +987,12 @@
         {
           "path": "FamilyQuant/AnalyticsControl.xaml.cs",
           "symbol": "ComboBoxFamilyTopN / tag 10 / ToolTip",
-          "sha256": "E2747235985D458CD1371A666F0A9E61DAC3F1FEB175FD14FE81625B68DF4C39"
+          "sha256": "DE812D53119D595B481FF77CA7A3BC6CEF6F61C4DD625B7948B8E3186F31F0B5"
         },
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
           "symbol": "ComboBoxFamilyTopN / tag 10 / ToolTip",
-          "sha256": "581D33C2FF3CB6B07251B7480C016379902ED6825CF257D700FD1B14FF538945"
+          "sha256": "5FE6334E06092E439C3790070E7A939A87B5793E60F4CF38F5D9A088C13025AA"
         }
       ],
       "proofs": [
@@ -1001,7 +1001,7 @@
           "kind": "test",
           "target": "ResultsPreservationTests",
           "assertion": "RS FQ15-803482A42F63: retained tooltip: Ten families plus one bar for the rest. Suits presentation slides.",
-          "artifact": "D:\\FamilyQuant-data\\out-results\\B7\\receipts\\rs-interactions\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-results\\RS-export-facts\\receipts\\interactions\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -1020,12 +1020,12 @@
         {
           "path": "FamilyQuant/AnalyticsControl.xaml.cs",
           "symbol": "ComboBoxExportKind / ButtonExport / ExportChoiceChanged",
-          "sha256": "E2747235985D458CD1371A666F0A9E61DAC3F1FEB175FD14FE81625B68DF4C39"
+          "sha256": "DE812D53119D595B481FF77CA7A3BC6CEF6F61C4DD625B7948B8E3186F31F0B5"
         },
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
           "symbol": "ComboBoxExportKind / ButtonExport / ExportChoiceChanged",
-          "sha256": "581D33C2FF3CB6B07251B7480C016379902ED6825CF257D700FD1B14FF538945"
+          "sha256": "5FE6334E06092E439C3790070E7A939A87B5793E60F4CF38F5D9A088C13025AA"
         }
       ],
       "proofs": [
@@ -1034,7 +1034,7 @@
           "kind": "test",
           "target": "ResultsPreservationTests",
           "assertion": "RS FQ15-8F08DA795CB5: Figures export remains selectable and enabled",
-          "artifact": "D:\\FamilyQuant-data\\out-results\\B7\\receipts\\rs-interactions\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-results\\RS-export-facts\\receipts\\interactions\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -1053,12 +1053,12 @@
         {
           "path": "FamilyQuant/AnalyticsControl.xaml.cs",
           "symbol": "ComboBoxFamilyTopN / ChartChoiceChanged",
-          "sha256": "E2747235985D458CD1371A666F0A9E61DAC3F1FEB175FD14FE81625B68DF4C39"
+          "sha256": "DE812D53119D595B481FF77CA7A3BC6CEF6F61C4DD625B7948B8E3186F31F0B5"
         },
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
           "symbol": "ComboBoxFamilyTopN / ChartChoiceChanged",
-          "sha256": "581D33C2FF3CB6B07251B7480C016379902ED6825CF257D700FD1B14FF538945"
+          "sha256": "5FE6334E06092E439C3790070E7A939A87B5793E60F4CF38F5D9A088C13025AA"
         }
       ],
       "proofs": [
@@ -1067,7 +1067,7 @@
           "kind": "test",
           "target": "ResultsPreservationTests",
           "assertion": "RS FQ15-905C4A500397: family limit 0 can be selected through its native control",
-          "artifact": "D:\\FamilyQuant-data\\out-results\\B7\\receipts\\rs-interactions\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-results\\RS-export-facts\\receipts\\interactions\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -1086,12 +1086,12 @@
         {
           "path": "FamilyQuant/AnalyticsControl.xaml.cs",
           "symbol": "ExportClicked / AnalyticsViewModel.ExportAsync",
-          "sha256": "E2747235985D458CD1371A666F0A9E61DAC3F1FEB175FD14FE81625B68DF4C39"
+          "sha256": "DE812D53119D595B481FF77CA7A3BC6CEF6F61C4DD625B7948B8E3186F31F0B5"
         },
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
           "symbol": "ExportClicked / AnalyticsViewModel.ExportAsync",
-          "sha256": "581D33C2FF3CB6B07251B7480C016379902ED6825CF257D700FD1B14FF538945"
+          "sha256": "5FE6334E06092E439C3790070E7A939A87B5793E60F4CF38F5D9A088C13025AA"
         }
       ],
       "proofs": [
@@ -1100,7 +1100,7 @@
           "kind": "test",
           "target": "ResultsPreservationTests",
           "assertion": "RS FQ15-9AB13C0AE2A4: native Figures export writes byte-identical output twice",
-          "artifact": "D:\\FamilyQuant-data\\out-results\\B7\\receipts\\rs-interactions\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-results\\RS-export-facts\\receipts\\interactions\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -1119,12 +1119,12 @@
         {
           "path": "FamilyQuant/AnalyticsControl.xaml.cs",
           "symbol": "ComboBoxExportKind / Figures / Content",
-          "sha256": "E2747235985D458CD1371A666F0A9E61DAC3F1FEB175FD14FE81625B68DF4C39"
+          "sha256": "DE812D53119D595B481FF77CA7A3BC6CEF6F61C4DD625B7948B8E3186F31F0B5"
         },
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
           "symbol": "ComboBoxExportKind / Figures / Content",
-          "sha256": "581D33C2FF3CB6B07251B7480C016379902ED6825CF257D700FD1B14FF538945"
+          "sha256": "5FE6334E06092E439C3790070E7A939A87B5793E60F4CF38F5D9A088C13025AA"
         }
       ],
       "proofs": [
@@ -1133,7 +1133,7 @@
           "kind": "test",
           "target": "ResultsPreservationTests",
           "assertion": "RS FQ15-9D6165ED150A: export label retained as Screen figures (PNG)",
-          "artifact": "D:\\FamilyQuant-data\\out-results\\B7\\receipts\\rs-interactions\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-results\\RS-export-facts\\receipts\\interactions\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -1152,12 +1152,12 @@
         {
           "path": "FamilyQuant/AnalyticsControl.xaml.cs",
           "symbol": "ComboBoxExportKind / ButtonExport / ExportChoiceChanged",
-          "sha256": "E2747235985D458CD1371A666F0A9E61DAC3F1FEB175FD14FE81625B68DF4C39"
+          "sha256": "DE812D53119D595B481FF77CA7A3BC6CEF6F61C4DD625B7948B8E3186F31F0B5"
         },
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
           "symbol": "ComboBoxExportKind / ButtonExport / ExportChoiceChanged",
-          "sha256": "581D33C2FF3CB6B07251B7480C016379902ED6825CF257D700FD1B14FF538945"
+          "sha256": "5FE6334E06092E439C3790070E7A939A87B5793E60F4CF38F5D9A088C13025AA"
         }
       ],
       "proofs": [
@@ -1166,7 +1166,7 @@
           "kind": "test",
           "target": "ResultsPreservationTests",
           "assertion": "RS FQ15-9DEFC5CA51C6: Summary export remains selectable and enabled",
-          "artifact": "D:\\FamilyQuant-data\\out-results\\B7\\receipts\\rs-interactions\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-results\\RS-export-facts\\receipts\\interactions\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -1185,12 +1185,12 @@
         {
           "path": "FamilyQuant/AnalyticsControl.xaml.cs",
           "symbol": "ComboBoxExportKind / EvidencePack / ToolTip",
-          "sha256": "E2747235985D458CD1371A666F0A9E61DAC3F1FEB175FD14FE81625B68DF4C39"
+          "sha256": "DE812D53119D595B481FF77CA7A3BC6CEF6F61C4DD625B7948B8E3186F31F0B5"
         },
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
           "symbol": "ComboBoxExportKind / EvidencePack / ToolTip",
-          "sha256": "581D33C2FF3CB6B07251B7480C016379902ED6825CF257D700FD1B14FF538945"
+          "sha256": "5FE6334E06092E439C3790070E7A939A87B5793E60F4CF38F5D9A088C13025AA"
         }
       ],
       "proofs": [
@@ -1199,7 +1199,7 @@
           "kind": "test",
           "target": "ResultsPreservationTests",
           "assertion": "RS FQ15-9F0785257B19: retained tooltip: Complete figures, exact CSV and JSON numbers and cutoff README. Required studies must be present.",
-          "artifact": "D:\\FamilyQuant-data\\out-results\\B7\\receipts\\rs-interactions\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-results\\RS-export-facts\\receipts\\interactions\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -1218,12 +1218,12 @@
         {
           "path": "FamilyQuant/AnalyticsControl.xaml.cs",
           "symbol": "ChartChoiceChanged",
-          "sha256": "E2747235985D458CD1371A666F0A9E61DAC3F1FEB175FD14FE81625B68DF4C39"
+          "sha256": "DE812D53119D595B481FF77CA7A3BC6CEF6F61C4DD625B7948B8E3186F31F0B5"
         },
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
           "symbol": "ChartChoiceChanged",
-          "sha256": "581D33C2FF3CB6B07251B7480C016379902ED6825CF257D700FD1B14FF538945"
+          "sha256": "5FE6334E06092E439C3790070E7A939A87B5793E60F4CF38F5D9A088C13025AA"
         }
       ],
       "proofs": [
@@ -1232,7 +1232,7 @@
           "kind": "test",
           "target": "ResultsPreservationTests",
           "assertion": "RS FQ15-A338D170136B: Checked event switches the displayed chart to measured-signal percentages",
-          "artifact": "D:\\FamilyQuant-data\\out-results\\B7\\receipts\\rs-interactions\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-results\\RS-export-facts\\receipts\\interactions\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -1251,12 +1251,12 @@
         {
           "path": "FamilyQuant/AnalyticsControl.xaml.cs",
           "symbol": "ComboBoxFamilyTopN / ChartChoiceChanged",
-          "sha256": "E2747235985D458CD1371A666F0A9E61DAC3F1FEB175FD14FE81625B68DF4C39"
+          "sha256": "DE812D53119D595B481FF77CA7A3BC6CEF6F61C4DD625B7948B8E3186F31F0B5"
         },
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
           "symbol": "ComboBoxFamilyTopN / ChartChoiceChanged",
-          "sha256": "581D33C2FF3CB6B07251B7480C016379902ED6825CF257D700FD1B14FF538945"
+          "sha256": "5FE6334E06092E439C3790070E7A939A87B5793E60F4CF38F5D9A088C13025AA"
         }
       ],
       "proofs": [
@@ -1265,7 +1265,7 @@
           "kind": "test",
           "target": "ResultsPreservationTests",
           "assertion": "RS FQ15-A376C13A408D: family limit 20 can be selected through its native control",
-          "artifact": "D:\\FamilyQuant-data\\out-results\\B7\\receipts\\rs-interactions\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-results\\RS-export-facts\\receipts\\interactions\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -1284,12 +1284,12 @@
         {
           "path": "FamilyQuant/AnalyticsControl.xaml.cs",
           "symbol": "ComboBoxFamilyTopN.Items",
-          "sha256": "E2747235985D458CD1371A666F0A9E61DAC3F1FEB175FD14FE81625B68DF4C39"
+          "sha256": "DE812D53119D595B481FF77CA7A3BC6CEF6F61C4DD625B7948B8E3186F31F0B5"
         },
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
           "symbol": "ComboBoxFamilyTopN.Items",
-          "sha256": "581D33C2FF3CB6B07251B7480C016379902ED6825CF257D700FD1B14FF538945"
+          "sha256": "5FE6334E06092E439C3790070E7A939A87B5793E60F4CF38F5D9A088C13025AA"
         }
       ],
       "proofs": [
@@ -1298,7 +1298,7 @@
           "kind": "test",
           "target": "ResultsPreservationTests",
           "assertion": "RS FQ15-B81F95D7A694: family limit retains its label Top 15 families",
-          "artifact": "D:\\FamilyQuant-data\\out-results\\B7\\receipts\\rs-interactions\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-results\\RS-export-facts\\receipts\\interactions\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -1317,12 +1317,12 @@
         {
           "path": "FamilyQuant/AnalyticsControl.xaml.cs",
           "symbol": "ChartChoiceChanged",
-          "sha256": "E2747235985D458CD1371A666F0A9E61DAC3F1FEB175FD14FE81625B68DF4C39"
+          "sha256": "DE812D53119D595B481FF77CA7A3BC6CEF6F61C4DD625B7948B8E3186F31F0B5"
         },
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
           "symbol": "ChartChoiceChanged",
-          "sha256": "581D33C2FF3CB6B07251B7480C016379902ED6825CF257D700FD1B14FF538945"
+          "sha256": "5FE6334E06092E439C3790070E7A939A87B5793E60F4CF38F5D9A088C13025AA"
         }
       ],
       "proofs": [
@@ -1331,7 +1331,7 @@
           "kind": "test",
           "target": "ResultsPreservationTests",
           "assertion": "RS FQ15-C213AEB5CD1C: Unchecked event restores the envelope chart",
-          "artifact": "D:\\FamilyQuant-data\\out-results\\B7\\receipts\\rs-interactions\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-results\\RS-export-facts\\receipts\\interactions\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -1350,12 +1350,12 @@
         {
           "path": "FamilyQuant/AnalyticsControl.xaml.cs",
           "symbol": "ComboBoxExportKind / ButtonExport / ExportChoiceChanged",
-          "sha256": "E2747235985D458CD1371A666F0A9E61DAC3F1FEB175FD14FE81625B68DF4C39"
+          "sha256": "DE812D53119D595B481FF77CA7A3BC6CEF6F61C4DD625B7948B8E3186F31F0B5"
         },
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
           "symbol": "ComboBoxExportKind / ButtonExport / ExportChoiceChanged",
-          "sha256": "581D33C2FF3CB6B07251B7480C016379902ED6825CF257D700FD1B14FF538945"
+          "sha256": "5FE6334E06092E439C3790070E7A939A87B5793E60F4CF38F5D9A088C13025AA"
         }
       ],
       "proofs": [
@@ -1364,7 +1364,7 @@
           "kind": "test",
           "target": "ResultsPreservationTests",
           "assertion": "RS FQ15-C571D9176653: EvidencePack export remains selectable and enabled",
-          "artifact": "D:\\FamilyQuant-data\\out-results\\B7\\receipts\\rs-interactions\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-results\\RS-export-facts\\receipts\\interactions\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -1383,12 +1383,12 @@
         {
           "path": "FamilyQuant/AnalyticsControl.xaml.cs",
           "symbol": "ComboBoxExportKind / Summary / Content",
-          "sha256": "E2747235985D458CD1371A666F0A9E61DAC3F1FEB175FD14FE81625B68DF4C39"
+          "sha256": "DE812D53119D595B481FF77CA7A3BC6CEF6F61C4DD625B7948B8E3186F31F0B5"
         },
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
           "symbol": "ComboBoxExportKind / Summary / Content",
-          "sha256": "581D33C2FF3CB6B07251B7480C016379902ED6825CF257D700FD1B14FF538945"
+          "sha256": "5FE6334E06092E439C3790070E7A939A87B5793E60F4CF38F5D9A088C13025AA"
         }
       ],
       "proofs": [
@@ -1397,7 +1397,7 @@
           "kind": "test",
           "target": "ResultsPreservationTests",
           "assertion": "RS FQ15-C7B652959EE3: export label retained as Run summary (CSV)",
-          "artifact": "D:\\FamilyQuant-data\\out-results\\B7\\receipts\\rs-interactions\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-results\\RS-export-facts\\receipts\\interactions\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -1416,12 +1416,12 @@
         {
           "path": "FamilyQuant/AnalyticsControl.xaml.cs",
           "symbol": "ExportClicked / AnalyticsViewModel.ExportAsync",
-          "sha256": "E2747235985D458CD1371A666F0A9E61DAC3F1FEB175FD14FE81625B68DF4C39"
+          "sha256": "DE812D53119D595B481FF77CA7A3BC6CEF6F61C4DD625B7948B8E3186F31F0B5"
         },
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
           "symbol": "ExportClicked / AnalyticsViewModel.ExportAsync",
-          "sha256": "581D33C2FF3CB6B07251B7480C016379902ED6825CF257D700FD1B14FF538945"
+          "sha256": "5FE6334E06092E439C3790070E7A939A87B5793E60F4CF38F5D9A088C13025AA"
         }
       ],
       "proofs": [
@@ -1430,7 +1430,7 @@
           "kind": "test",
           "target": "ResultsPreservationTests",
           "assertion": "RS FQ15-C7CC0C2ABDF0: native Figures export writes byte-identical output twice through the replacement handler",
-          "artifact": "D:\\FamilyQuant-data\\out-results\\B7\\receipts\\rs-interactions\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-results\\RS-export-facts\\receipts\\interactions\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -1449,12 +1449,12 @@
         {
           "path": "FamilyQuant/AnalyticsControl.xaml.cs",
           "symbol": "ChartChoiceChanged",
-          "sha256": "E2747235985D458CD1371A666F0A9E61DAC3F1FEB175FD14FE81625B68DF4C39"
+          "sha256": "DE812D53119D595B481FF77CA7A3BC6CEF6F61C4DD625B7948B8E3186F31F0B5"
         },
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
           "symbol": "ChartChoiceChanged",
-          "sha256": "581D33C2FF3CB6B07251B7480C016379902ED6825CF257D700FD1B14FF538945"
+          "sha256": "5FE6334E06092E439C3790070E7A939A87B5793E60F4CF38F5D9A088C13025AA"
         }
       ],
       "proofs": [
@@ -1463,7 +1463,7 @@
           "kind": "test",
           "target": "ResultsPreservationTests",
           "assertion": "RS FQ15-C968838F81DD: percent handler replacement applies checked and unchecked choices",
-          "artifact": "D:\\FamilyQuant-data\\out-results\\B7\\receipts\\rs-interactions\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-results\\RS-export-facts\\receipts\\interactions\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -1482,12 +1482,12 @@
         {
           "path": "FamilyQuant/AnalyticsControl.xaml.cs",
           "symbol": "ComboBoxFamilyTopN / tag 20 / ToolTip",
-          "sha256": "E2747235985D458CD1371A666F0A9E61DAC3F1FEB175FD14FE81625B68DF4C39"
+          "sha256": "DE812D53119D595B481FF77CA7A3BC6CEF6F61C4DD625B7948B8E3186F31F0B5"
         },
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
           "symbol": "ComboBoxFamilyTopN / tag 20 / ToolTip",
-          "sha256": "581D33C2FF3CB6B07251B7480C016379902ED6825CF257D700FD1B14FF538945"
+          "sha256": "5FE6334E06092E439C3790070E7A939A87B5793E60F4CF38F5D9A088C13025AA"
         }
       ],
       "proofs": [
@@ -1496,7 +1496,7 @@
           "kind": "test",
           "target": "ResultsPreservationTests",
           "assertion": "RS FQ15-CA12594472E1: retained tooltip: Twenty families plus one bar for the rest. Suits a paper figure.",
-          "artifact": "D:\\FamilyQuant-data\\out-results\\B7\\receipts\\rs-interactions\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-results\\RS-export-facts\\receipts\\interactions\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -1515,12 +1515,12 @@
         {
           "path": "FamilyQuant/AnalyticsControl.xaml.cs",
           "symbol": "ExportClicked / AnalyticsViewModel.ExportAsync",
-          "sha256": "E2747235985D458CD1371A666F0A9E61DAC3F1FEB175FD14FE81625B68DF4C39"
+          "sha256": "DE812D53119D595B481FF77CA7A3BC6CEF6F61C4DD625B7948B8E3186F31F0B5"
         },
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
           "symbol": "ExportClicked / AnalyticsViewModel.ExportAsync",
-          "sha256": "581D33C2FF3CB6B07251B7480C016379902ED6825CF257D700FD1B14FF538945"
+          "sha256": "5FE6334E06092E439C3790070E7A939A87B5793E60F4CF38F5D9A088C13025AA"
         }
       ],
       "proofs": [
@@ -1529,7 +1529,7 @@
           "kind": "test",
           "target": "ResultsPreservationTests",
           "assertion": "RS FQ15-D56E685BBF02: native evidence-pack route refuses missing required studies and publishes no folder",
-          "artifact": "D:\\FamilyQuant-data\\out-results\\B7\\receipts\\rs-interactions\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-results\\RS-export-facts\\receipts\\interactions\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -1548,12 +1548,12 @@
         {
           "path": "FamilyQuant/AnalyticsControl.xaml.cs",
           "symbol": "ChartChoiceChanged",
-          "sha256": "E2747235985D458CD1371A666F0A9E61DAC3F1FEB175FD14FE81625B68DF4C39"
+          "sha256": "DE812D53119D595B481FF77CA7A3BC6CEF6F61C4DD625B7948B8E3186F31F0B5"
         },
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
           "symbol": "ChartChoiceChanged",
-          "sha256": "581D33C2FF3CB6B07251B7480C016379902ED6825CF257D700FD1B14FF538945"
+          "sha256": "5FE6334E06092E439C3790070E7A939A87B5793E60F4CF38F5D9A088C13025AA"
         }
       ],
       "proofs": [
@@ -1562,7 +1562,7 @@
           "kind": "test",
           "target": "ResultsPreservationTests",
           "assertion": "RS FQ15-DF754B3A82A5: selection event applies all five family limits",
-          "artifact": "D:\\FamilyQuant-data\\out-results\\B7\\receipts\\rs-interactions\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-results\\RS-export-facts\\receipts\\interactions\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -1581,12 +1581,12 @@
         {
           "path": "FamilyQuant/AnalyticsControl.xaml.cs",
           "symbol": "CheckBoxFamilyPercent.Content",
-          "sha256": "E2747235985D458CD1371A666F0A9E61DAC3F1FEB175FD14FE81625B68DF4C39"
+          "sha256": "DE812D53119D595B481FF77CA7A3BC6CEF6F61C4DD625B7948B8E3186F31F0B5"
         },
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
           "symbol": "CheckBoxFamilyPercent.Content",
-          "sha256": "581D33C2FF3CB6B07251B7480C016379902ED6825CF257D700FD1B14FF538945"
+          "sha256": "5FE6334E06092E439C3790070E7A939A87B5793E60F4CF38F5D9A088C13025AA"
         }
       ],
       "proofs": [
@@ -1595,7 +1595,7 @@
           "kind": "test",
           "target": "ResultsPreservationTests",
           "assertion": "RS FQ15-E25869E2C149: percent label names the measured signal",
-          "artifact": "D:\\FamilyQuant-data\\out-results\\B7\\receipts\\rs-interactions\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-results\\RS-export-facts\\receipts\\interactions\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -1614,12 +1614,12 @@
         {
           "path": "FamilyQuant/AnalyticsControl.xaml.cs",
           "symbol": "ComboBoxFamilyTopN / tag 15 / ToolTip",
-          "sha256": "E2747235985D458CD1371A666F0A9E61DAC3F1FEB175FD14FE81625B68DF4C39"
+          "sha256": "DE812D53119D595B481FF77CA7A3BC6CEF6F61C4DD625B7948B8E3186F31F0B5"
         },
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
           "symbol": "ComboBoxFamilyTopN / tag 15 / ToolTip",
-          "sha256": "581D33C2FF3CB6B07251B7480C016379902ED6825CF257D700FD1B14FF538945"
+          "sha256": "5FE6334E06092E439C3790070E7A939A87B5793E60F4CF38F5D9A088C13025AA"
         }
       ],
       "proofs": [
@@ -1628,7 +1628,7 @@
           "kind": "test",
           "target": "ResultsPreservationTests",
           "assertion": "RS FQ15-EFA52B9AC7C2: retained tooltip: Fifteen families plus one bar for the rest. This is the default.",
-          "artifact": "D:\\FamilyQuant-data\\out-results\\B7\\receipts\\rs-interactions\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-results\\RS-export-facts\\receipts\\interactions\\proofs.log",
           "inspectedBy": ""
         }
       ],
