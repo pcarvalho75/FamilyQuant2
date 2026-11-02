@@ -139,7 +139,7 @@ Invoke each flag with `& $testExe <flag>` after building. Dispatch and arity are
 | `--database-gap-screens <project.fqproj> <fresh-output> [--negative-fingerprint]` | Capture/export the stored table; a stored-world project must enable FASTA, and refusal fails the command |
 | `--test-database-gap-refusal <project.fqproj> <fresh-output>` | Native child plants the old fingerprint and must fail the availability gate without writing FASTA or changing input bytes |
 | `--test-database-gap-lengths <fresh-output>` | Whole native length chooser, result/CSV/FASTA consistency, repeated bytes, project roundtrip and shell Save/Cancel |
-| `--database-gap-lengths-screens <project.fqproj> <fresh-output>` | Real stored length table in both themes, all native length/CSV/FASTA choices and byte repeats; input unchanged |
+| `--database-gap-lengths-screens <project.fqproj> <fresh-output> [--require-default]` | Real stored length table in both themes, native CSV/FASTA choices and byte repeats; input unchanged. Default proof requires an unselected Core default8 and stored table8, exact FASTA sequences and a native values snapshot |
 | `--prove-results-interactions <fresh-output> <date-timestamp>` | Native Results controls, displaced handlers, deterministic exports and observation receipts |
 | `--prove-results-members <frozen-root> <fresh-output> <date-timestamp>` | Shared scoped member comparison for assigned Results and quantitation declarations; changed members stay open |
 | `--prove-results-runtime <frozen-root> <own-frozen-host> <fresh-output> <date-timestamp> [--negative-control]` | Native frozen/current summary, CSV, User-header and chart-byte comparisons with repeated outputs and per-row receipts |
@@ -206,6 +206,7 @@ Companion options for `--screens` are `--screen-fcf <input.fcf>`, `--screen-proj
 | `--feature-ledger-generate <frozen-source-root> <scratch-root>` | [FeatureLedger.cs](../FamilyQuant.Tests/FeatureLedger.cs); writes `scratch-root/docs`, never scan moving product source |
 | `--feature-ledger-prove <fresh-output> <date-timestamp>` | Native observation-specific storage/source proofs and register, no ledger edit |
 | `--feature-ledger-evidence-import <register> <output> [--replace-existing]` | Validate receipts, preserve an explicitly replaced register and apply evidenced states |
+| `--ledger-apply-rulings <fresh-output> <date>` | Apply the three pinned Paulo wording rules to listed TSV rows; compiled App/Core/Help text witnesses, visual Style/Setter anchors, adversarial guards and remaining review list; [scope](LEDGER-RULINGS.md) |
 | `--feature-ledger-evidence <output>` | Read-only counts by kind, source mappings and reproducible 50-row sample |
 | `--feature-ledger-kind-review <kind> REOPENED/ACCEPTED <reviewer> <reason> <date> <output>` | Independent D13 kind-review decision and whole-kind reopening |
 | `--ledger-declaration-compare <frozen-root> <current-root> <fresh-output> <step> <source-prefix> <date>` | Frozen/current explicit XAML property comparisons and kind receipts |
