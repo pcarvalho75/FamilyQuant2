@@ -176,10 +176,11 @@ internal static class LedgerPauloRulings
 
     private static bool OldFactMatches(FeatureLedger.Observation row, string old)
     {
+        // A frozen C# literal is read first: its text may itself hold " = ", which only a XAML assignment uses as a separator.
         string detail = row.Detail; int equals = detail.IndexOf(" = ", StringComparison.Ordinal);
-        if (equals >= 0) detail = detail[(equals + 3)..];
-        else if (detail.StartsWith("@\"", StringComparison.Ordinal) && detail.EndsWith('"')) detail = detail[2..^1].Replace("\"\"", "\"", StringComparison.Ordinal);
+        if (detail.StartsWith("@\"", StringComparison.Ordinal) && detail.EndsWith('"')) detail = detail[2..^1].Replace("\"\"", "\"", StringComparison.Ordinal);
         else if (detail.StartsWith('"')) { try { detail = JsonSerializer.Deserialize<string>(detail) ?? ""; } catch (JsonException) { return false; } }
+        else if (equals >= 0) detail = detail[(equals + 3)..];
         string fact = LedgerRulingLiveText.Normalize(Decode(detail)), prior = LedgerRulingLiveText.Normalize(old);
         return fact.Length > 0 && (fact == prior || prior.Contains(fact, StringComparison.Ordinal));
     }
