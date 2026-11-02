@@ -44,6 +44,41 @@ internal static partial class Program
             new Dictionary<string, LedgerPauloRulings.FactCheck>(StringComparer.Ordinal)).Closed);
         var lost = new Dictionary<string, LedgerPauloRulings.FactCheck>(facts, StringComparer.Ordinal) { [row.Id] = new("lost", "Synthetic lost fact.") };
         Check("a lost verdict cannot close real compiled wording", !LedgerPauloRulings.Evaluate(input, row, LedgerRulingLiveText.Find, lost).Closed);
+        // Rule 4, Paulo's group ruling: an optional pinned TSV; a listed row closes unless an earlier rule closes it or it is a
+        // DROP or an execution row. Missing or empty input closes nothing.
+        string groupFolder = Path.Combine(output, "group-fixtures"); Directory.CreateDirectory(groupFolder);
+        string groupMissing = Path.Combine(groupFolder, "absent.tsv"), groupEmpty = Path.Combine(groupFolder, "empty.tsv"),
+            groupHeader = Path.Combine(groupFolder, "header.tsv"), groupBad = Path.Combine(groupFolder, "bad.tsv");
+        File.WriteAllText(groupEmpty, ""); File.WriteAllText(groupHeader, "row_id\tgroup\tnote\n");
+        File.WriteAllText(groupBad, "row_id\tgroup\tnote\n" + row.Id + "\tkept\tNot a group ruling\n");
+        Check("a missing, empty or header-only group ruling holds no rows", LedgerPauloRulings.ReadGroupRulings(groupMissing).Count == 0
+            && LedgerPauloRulings.ReadGroupRulings(groupEmpty).Count == 0 && LedgerPauloRulings.ReadGroupRulings(groupHeader).Count == 0);
+        bool badRefused = false;
+        try { LedgerPauloRulings.ReadGroupRulings(groupBad); } catch (InvalidDataException) { badRefused = true; }
+        Check("a group ruling must be fragment or superseded", badRefused);
+        var unverified = LedgerPauloRulings.ReadInputs(LedgerPauloRulings.InputPath).Select(candidate => (Input: candidate,
+                Row: inventory.Observations.FirstOrDefault(observation => observation.Id == candidate.Id)))
+            .First(pair => pair.Row != null && Decide(pair.Input, pair.Row).Reason == "Independent fact-check verdict is missing.");
+        var fragment = new Dictionary<string, LedgerPauloRulings.GroupRuling>(StringComparer.Ordinal) { [unverified.Input.Id] = new("fragment", "") };
+        var superseded = new Dictionary<string, LedgerPauloRulings.GroupRuling>(StringComparer.Ordinal) { [unverified.Input.Id] = new("superseded", "Build help replaces it.") };
+        var asFragment = LedgerPauloRulings.Evaluate(unverified.Input, unverified.Row!, LedgerRulingLiveText.Find, facts, fragment);
+        Check("a group ruling closes an open wording row under rule 4 as a fragment",
+            asFragment.Closed && asFragment.Rule == "4" && asFragment.Reason == "Paulo group ruling: fragment, no user fact of its own");
+        var asSuperseded = LedgerPauloRulings.Evaluate(unverified.Input, unverified.Row!, LedgerRulingLiveText.Find, facts, superseded);
+        Check("a superseded group ruling carries its note in the reason",
+            asSuperseded.Closed && asSuperseded.Rule == "4" && asSuperseded.Reason == "Paulo group ruling: superseded, Build help replaces it.");
+        Check("without a group ruling the same row stays open", !Decide(unverified.Input, unverified.Row!).Closed);
+        var keptGroups = new Dictionary<string, LedgerPauloRulings.GroupRuling>(StringComparer.Ordinal) { [row.Id] = new("fragment", "") };
+        var stillOne = LedgerPauloRulings.Evaluate(input, row, LedgerRulingLiveText.Find, facts, keptGroups);
+        Check("a kept-verdict row that closes under rule 1 stays rule 1 when also group-ruled", stillOne.Closed && stillOne.Rule == "1");
+        foreach (string kind in new[] { "format/export", "export/storage fact" })
+            Check("a group ruling cannot close a " + kind + " row", !LedgerPauloRulings.Evaluate(unverified.Input, unverified.Row! with { Kind = kind },
+                LedgerRulingLiveText.Find, facts, fragment).Closed);
+        var drop = inventory.Observations.First(FeatureLedger.IsApprovedDrop);
+        var dropInput = new LedgerPauloRulings.Input(3, "synthetic guard", drop.Id, drop.Detail, drop.Detail, "Synthetic DROP fixture.");
+        var dropDecision = LedgerPauloRulings.Evaluate(dropInput, drop, LedgerRulingLiveText.Find, facts,
+            new Dictionary<string, LedgerPauloRulings.GroupRuling>(StringComparer.Ordinal) { [drop.Id] = new("superseded", "Synthetic.") });
+        Check("an approved DROP stays a DROP under a group ruling", !dropDecision.Closed && dropDecision.Reason == "Approved DROP is not a wording ruling.");
         foreach (string kind in new[] { "format/export", "export/storage fact", "handler", "handler definition", "control", "shortcut" })
             Check("ruling cannot replace " + kind + " execution", !Decide(input, row with { Kind = kind }).Closed);
         // Frozen App.xaml:46 sets only Foreground. The first Style also has a
@@ -113,5 +148,27 @@ internal static partial class Program
         var rejectedReceipt = new FeatureLedgerEvidence.Row(rejectedRow.Id, new() { new(rejectedCurrent, "Synthetic rejected fact", FeatureLedgerEvidence.Hash(Path.Combine(root, rejectedCurrent))) },
             new() { proof with { Target = "Rule 3", Assertion = FeatureLedgerEvidence.RulingAssertion(File.ReadAllLines(rules)[2], forged) } }, Compared: FeatureLedgerEvidence.RulingComparison(forged));
         Check("a private forged kept verdict cannot override the canonical lost verdict", !Valid(rejectedReceipt));
+
+        // A rule-4 receipt is valid only with its group ruling pinned as an execution artifact.
+        string groupFile = Path.Combine(folder, "group.tsv");
+        File.WriteAllText(groupFile, "row_id\tgroup\tnote\n" + unverified.Input.Id + "\tfragment\t\n");
+        File.WriteAllText(tsv, "lane\trow_id\told_text\tnew_text\treason\nfixture\t" + unverified.Input.Id + "\t" + unverified.Input.OldText.Replace("\n", "\\n")
+            + "\t" + unverified.Input.NewText.Replace("\n", "\\n") + "\tSynthetic group guard\n");
+        File.Copy(LedgerPauloRulings.FactChecksPath, factFile, true);
+        var groupInput = LedgerPauloRulings.ReadInputs(tsv)[0];
+        var groupDecision = LedgerPauloRulings.Evaluate(groupInput, unverified.Row!, LedgerRulingLiveText.Find, facts, LedgerPauloRulings.ReadGroupRulings(groupFile));
+        var groupPacket = packet with { Decisions = new() { groupDecision }, TsvSha256 = FeatureLedgerEvidence.Hash(tsv), FactChecksSha256 = FeatureLedgerEvidence.Hash(factFile),
+            GroupRulingArtifact = groupFile, GroupRulingSha256 = FeatureLedgerEvidence.Hash(groupFile) };
+        FeatureLedgerEvidence.WriteJson(packetFile, groupPacket);
+        string groupCurrent = FeatureLedgerEvidence.CurrentPath(root, unverified.Row!.Source);
+        var groupReceipt = new FeatureLedgerEvidence.Row(unverified.Row.Id, new() { new(groupCurrent, "Paulo group ruling", FeatureLedgerEvidence.Hash(Path.Combine(root, groupCurrent))) },
+            new() { proof with { Target = "Rule 4", Assertion = FeatureLedgerEvidence.RulingAssertion(LedgerPauloRulings.GroupRule(groupDecision), groupDecision) } },
+            Compared: FeatureLedgerEvidence.RulingComparison(groupDecision));
+        FeatureLedgerEvidence.Run GroupRun() => Run() with { Artifacts = Run().Artifacts.Append(new(groupFile, FeatureLedgerEvidence.Hash(groupFile))).ToList() };
+        Check("a rule-4 receipt with its group ruling pinned is accepted", groupDecision.Rule == "4" && Valid(groupReceipt, run: GroupRun()));
+        Check("a rule-4 receipt without its group ruling declared is refused", !Valid(groupReceipt));
+        FeatureLedgerEvidence.WriteJson(packetFile, groupPacket with { GroupRulingSha256 = new string('0', 64) });
+        Check("a rule-4 receipt with a different group ruling hash is refused", !Valid(groupReceipt, run: GroupRun()));
+        FeatureLedgerEvidence.WriteJson(packetFile, packet);
     }
 }

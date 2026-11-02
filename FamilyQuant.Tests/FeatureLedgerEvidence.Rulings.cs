@@ -10,7 +10,8 @@ namespace FamilyQuant.Tests;
 internal static partial class FeatureLedgerEvidence
 {
     private sealed record RulingContext(LedgerPauloRulings.Packet Packet, List<LedgerPauloRulings.Input> Inputs, string[] Rules,
-        Dictionary<string, LedgerPauloRulings.FactCheck> Facts, Dictionary<string, LedgerPauloRulings.FactCheck> CurrentFacts);
+        Dictionary<string, LedgerPauloRulings.FactCheck> Facts, Dictionary<string, LedgerPauloRulings.FactCheck> CurrentFacts,
+        Dictionary<string, LedgerPauloRulings.GroupRuling> Groups);
 
     private static void ValidateRuling(string root, FeatureLedger.Inventory inventory, Register register, Row row,
         FeatureLedger.Observation? observation, Proof proof, Run run, string full,
@@ -36,11 +37,16 @@ internal static partial class FeatureLedgerEvidence
                 && artifact.Sha256.Equals(sha, StringComparison.OrdinalIgnoreCase)) == 1 && File.Exists(path) && Hash(path) == sha;
             if (!Declared(tsv, packet.TsvSha256) || !Declared(rules, LedgerPauloRulings.RulesSha256) || !Declared(facts, packet.FactChecksSha256))
                 throw new InvalidDataException("Ruling input/rules/fact verdicts are not byte-pinned execution artifacts.");
+            // Paulo's group ruling, when the packet records one, is pinned the same way.
+            string groups = packet.GroupRulingArtifact.Length > 0 ? resolve(packet.GroupRulingArtifact) : "";
+            if (groups.Length > 0 && !Declared(groups, packet.GroupRulingSha256))
+                throw new InvalidDataException("Ruling group ruling is not a byte-pinned execution artifact.");
             var lines = File.ReadAllLines(rules).Where(line => !string.IsNullOrWhiteSpace(line)).ToArray();
             if (lines.Length != 3 || !Enumerable.Range(1, 3).All(number => lines[number - 1].StartsWith("Rule " + number + ", Paulo 2026-11-02:", StringComparison.Ordinal)))
                 throw new InvalidDataException("The recorded three Paulo rules are required.");
             context = new(packet, LedgerPauloRulings.ReadInputs(tsv), lines, LedgerPauloRulings.ReadFactChecks(facts),
-                File.Exists(LedgerPauloRulings.FactChecksPath) ? LedgerPauloRulings.ReadFactChecks(LedgerPauloRulings.FactChecksPath) : new(StringComparer.Ordinal));
+                File.Exists(LedgerPauloRulings.FactChecksPath) ? LedgerPauloRulings.ReadFactChecks(LedgerPauloRulings.FactChecksPath) : new(StringComparer.Ordinal),
+                groups.Length > 0 ? LedgerPauloRulings.ReadGroupRulings(groups) : new(StringComparer.Ordinal));
             contexts.Add(contextKey, context);
         }
         var decisions = context.Packet.Decisions.Where(decision => decision.Id == observation.Id && decision.Closed).ToArray();
@@ -57,12 +63,12 @@ internal static partial class FeatureLedgerEvidence
         }
         if (decision.Rule is "1" or "3" && (!context.CurrentFacts.TryGetValue(observation.Id, out var currentFact) || currentFact.Verdict != "kept"))
         { problems.Add("Current independent fact verdict is missing or lost; wording ruling stays OPEN."); return; }
-        var evaluated = LedgerPauloRulings.Evaluate(listed[0], observation, LedgerRulingLiveText.Find, context.Facts);
+        var evaluated = LedgerPauloRulings.Evaluate(listed[0], observation, LedgerRulingLiveText.Find, context.Facts, context.Groups);
         if (!evaluated.Closed || evaluated.Rule != decision.Rule || evaluated.WitnessAssembly != decision.WitnessAssembly
             || evaluated.WitnessSymbol != decision.WitnessSymbol || evaluated.WitnessTextSha256 != decision.WitnessTextSha256 || evaluated.FactCheckNote != decision.FactCheckNote)
         { problems.Add("Ruling policy/live compiled text no longer accepts this exact row and wording."); return; }
-        if (!int.TryParse(decision.Rule, out int number) || number is < 1 or > 3 || proof.Target != "Rule " + number
-            || proof.Assertion != RulingAssertion(context.Rules[number - 1], decision)
+        if (!int.TryParse(decision.Rule, out int number) || number is < 1 or > 4 || proof.Target != "Rule " + number
+            || proof.Assertion != RulingAssertion(number == 4 ? LedgerPauloRulings.GroupRule(decision) : context.Rules[number - 1], decision)
             || row.Compared != RulingComparison(decision))
             problems.Add("Ruling must cite its exact recorded rule, old text and new text.");
     }
