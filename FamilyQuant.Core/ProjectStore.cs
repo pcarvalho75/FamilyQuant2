@@ -498,6 +498,11 @@ namespace FamilyQuant
         /// are then kept as computed rather than re-attributed.</summary>
         public FamilyMappingProvenance? FamilyMapping { get; set; }
 
+        /// <summary>The family world's second pass with the error beside every family (B6). Null on projects that
+        /// never ran it, and then left out of manifest.json altogether, so their bytes do not change.</summary>
+        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull)]
+        public FamilyWorldSummary? FamilyWorldResult { get; set; }
+
         /// <summary>The complete compute-time spectrum evidence table, including accepted source calls
         /// that did not yield a stored XIC and RAW-selected precursor metadata. Version-2 projects keep
         /// this collection in the streaming <c>spectrum_comparison.jsonl.gz</c> entry rather than in
