@@ -14,6 +14,7 @@ public static class HelpWorkflowFacts
     public const string Build =
         "BUILD WORKFLOW DETAILS\n" +
         "Build families uses USearch sequence identity on a FASTA or target-decoy database once per database, writes a .fcf beside it, and asks before replacing that file. Open the resulting .fcf with File > Open; skip Build when an existing .fcf or .fqproj is available.\n\n" +
+        "The database chooser offers All files (*.*) for an input whose extension is not listed. The file still needs to contain a supported protein database.\n\n" +
         "Higher identity gives more, smaller families; lower identity gives fewer, larger ones, and Scan identity range compares the values before choosing a threshold. The scan writes no family file and a large database can take a while.\n\n" +
         "Find lowest identity requires a target-decoy database and only reports a number: type the reported value into Identity, then Build families. Treat it as a floor, not a recommended threshold.\n\n" +
         "Exhaustive second pass aligns every pair after the fast pass and rejoins families that pass split; turn it off only for speed. It starts on, and asks before processing more than 10,000 sequences.\n\n" +

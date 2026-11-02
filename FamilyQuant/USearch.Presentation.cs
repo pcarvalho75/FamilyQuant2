@@ -31,7 +31,7 @@ public partial class USearchLib
         if (PresentationSource.FromVisual(this) == null) return null;
         var dialog = new OpenFileDialog
         {
-            Filter = "Protein database (*.fasta;*.fa;*.fas;*.T-R;*.T)|*.fasta;*.fa;*.fas;*.T-R;*.T",
+            Filter = "Protein database (*.fasta;*.fa;*.fas;*.T-R;*.T)|*.fasta;*.fa;*.fas;*.T-R;*.T|All files (*.*)|*.*",
             Title = "Choose the protein database"
         };
         if (!ShellDialogs.ShowFile(this, "build.database", dialog)) return null;
