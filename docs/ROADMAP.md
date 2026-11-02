@@ -80,8 +80,7 @@ Columns: Diff = L, M, H, VH. Hrs = worker hours at measured speed: estimates are
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| B10b | Default length 8 in Core, tests, rule text and docs | L | 0.3 | 🟢 | B10e | Choosing 9 reproduces the B6 table byte for byte | OP | not started | 0% | 0% | T+0 |
-| B10e | Real project at the default length: screen, CSV and FASTA | L | 0.2 | B10b | R3a | Repeats byte for byte; inspected in both themes | RS | not started | 0% | 0% | T+0 |
+| B10e | Real project at the default length: screen, CSV and FASTA | L | 0.2 | 🟢 | R3a | Repeats byte for byte; inspected in both themes | RS | not started | 0% | 0% | T+0 |
 
 ### W2 Port gaps found by the proofs
 

@@ -24,7 +24,7 @@ unchanged, and the curation replay hash excludes a non-null world explicitly. Th
 still participates in saved-file verification and persists in both FCF and project containers.
 
 The B5 reader must use only `snapshot.Families` for eligible family credits and retain full
-membership ambiguity. D11's minimum tag length is 9 residues. Length gating, reversed decoys,
+membership ambiguity. The default minimum tag length is 8 residues (D22, which replaced D11's 9). Length gating, reversed decoys,
 attribution and per-family error estimates belong to B5/B6; this storage API makes none of those
 claims.
 

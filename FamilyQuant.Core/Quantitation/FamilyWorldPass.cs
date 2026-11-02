@@ -60,11 +60,13 @@ namespace FamilyQuant
         public SortedSet<string> DecoySourceFamilies { get; init; } = FamilyWorld.NewFamilySet();
     }
 
-    /// <summary>The rules of the second pass. The defaults are Paulo's decision D11.</summary>
+    /// <summary>The rules of the second pass. The defaults are Paulo's decisions D11 (scope) and D22 (length).</summary>
     public sealed class FamilyWorldOptions
     {
-        /// <summary>D11: a tag needs at least 9 residues. Measured in the B1 study (docs/vision/B1-GATE.md).</summary>
-        public const int DefaultMinimumTagLength = 9;
+        /// <summary>D22 (Paulo, 2026-11-02): by default a tag needs at least 8 residues, replacing D11's 9, after the table
+        /// by length on both worlds (B10); a person can choose any of <see cref="LengthChoices"/>. The B1 study is in
+        /// docs/vision/B1-GATE.md.</summary>
+        public const int DefaultMinimumTagLength = 8;
 
         /// <summary>B10: the minimum tag lengths a person can choose from; Compute stores the complete table for each.</summary>
         public static IReadOnlyList<int> LengthChoices { get; } = Array.AsReadOnly(new[] { 7, 8, 9, 10, 11, 12, 13, 14, 15 });
