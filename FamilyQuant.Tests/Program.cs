@@ -104,6 +104,8 @@ namespace FamilyQuant.Tests
             }
             // Screen capture is an isolated lane: it never runs scientific export commands.
             if (ScreenHarness.IsRequested(args)) return ScreenHarness.Run(args);
+            if (args.Length >= 2 && args[0] == GroupingReviewScreens.Argument)
+                return GroupingReviewScreens.Run(args[1], args.Length >= 3 ? args[2] : null);
 
             if (args.Length > 0 && args[0] == FeatureLedger.GenerateArgument)
             {
@@ -783,6 +785,12 @@ namespace FamilyQuant.Tests
             LogoResourceTests(workDir);
             TypographyRulesTests();
             TableAppearanceTests();
+            EvidenceReviewModelTests();
+            GroupingReviewInteractionTests();
+            EvidenceGroupingFlowTests();
+            ArchitectureMemberViewTests();
+            EvidenceFetchCoordinatorTests();
+            CurationSaveResultTests(workDir);
             ThemePreferenceTests(workDir);
 
             Section("Feature ledger - frozen source inventory and explicit preservation checks");
