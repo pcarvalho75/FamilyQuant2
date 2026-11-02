@@ -34,9 +34,9 @@ public partial class ClusterGenerationControl
             finally { IsEnabled = true; EndWait(); }
             if (OpenGroupingReview(preview, true))
             {
-                TextBoxSuperClusterWording.Text = preview.KeywordsText;
-                TextBoxSuperClusterExclude.Text = preview.ExcludeText;
-                ComboBoxSuperClusterMatch.SelectedIndex = preview.Match == KeywordMatch.Any ? 1 : 0;
+                keywordReviewText = preview.KeywordsText;
+                keywordReviewExclude = preview.ExcludeText;
+                keywordReviewMatch = preview.Match;
                 PerformClustering(preview);
             }
         }

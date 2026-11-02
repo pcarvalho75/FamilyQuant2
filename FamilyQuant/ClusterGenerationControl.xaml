@@ -158,40 +158,9 @@
                                         </WrapPanel>
 
                                         <WrapPanel HorizontalAlignment="Left" Margin="5">
-                                            <StackPanel Orientation="Horizontal">
-<Label Content="Super Cluster Keywords:"
-                                                   ToolTip="Keywords that define one deliberately large family."
-                                                   Foreground="{DynamicResource TextBrush}" VerticalAlignment="Center"/>
-                                            <TextBox x:Name="TextBoxSuperClusterWording" Width="300"
-                                                     TextChanged="TextBoxSuperClusterWording_TextChanged"
-                                                     ToolTip="Keywords separated by commas or spaces, for example: metalloproteinase, SVMP; the proteins of matching families are listed, and the ones you keep become one family. Words in quotes are a phrase that must appear together in that order: &quot;ribosomal subunit&quot;, &quot;ribosomal protein&quot; with 'match any word' gathers either."
-                                                     Background="{DynamicResource InputBrush}" Foreground="{DynamicResource TextBrush}" Margin="5" VerticalAlignment="Center"/>
-</StackPanel>
-
-                                            <StackPanel Orientation="Horizontal">
-<Label Content="Match:" Foreground="{DynamicResource TextBrush}" Margin="10,0,5,0" VerticalAlignment="Center"
-                                                   ToolTip="Whether one protein's description must contain ALL the keywords or just ANY one of them for its family to be offered."/>
-                                            <ComboBox x:Name="ComboBoxSuperClusterMatch" Width="165" Margin="5" VerticalAlignment="Center"
-                                                      Background="{DynamicResource InputBrush}" Foreground="{DynamicResource TextBrush}"
-                                                      ToolTip="'match all words' offers a family only if one of its descriptions has every keyword; 'match any word' offers it if one has at least one keyword. A single keyword works the same either way. Default: match all words.">
-                                                <ComboBoxItem x:Name="SuperMatchAll" IsSelected="True" Content="match all words"
-                                                              ToolTip="A family is offered only if one of its descriptions contains EVERY keyword."/>
-                                                <ComboBoxItem x:Name="SuperMatchAny" Content="match any word"
-                                                              ToolTip="A family is offered if one of its descriptions contains AT LEAST ONE of the keywords."/>
-                                            </ComboBox>
-</StackPanel>
-
-                                            <StackPanel Orientation="Horizontal">
-<Label Content="Exclude Words:" Foreground="{DynamicResource TextBrush}" Margin="10,0,5,0" VerticalAlignment="Center"
-                                                   ToolTip="Words that keep a protein OUT of the super cluster even when its family matches."/>
-                                            <TextBox x:Name="TextBoxSuperClusterExclude" Width="180"
-                                                     ToolTip="Whole words that keep a protein out of the super cluster, separated by commas or spaces, for example: inhibitor, matrix. The rest of its family still joins. Use it to gather 'phospholipase' while leaving out 'phospholipase inhibitor'."
-                                                     Background="{DynamicResource InputBrush}" Foreground="{DynamicResource TextBrush}" Margin="5" VerticalAlignment="Center"/>
-</StackPanel>
-
-                                            <Button Content="Create super cluster" Margin="15,0,0,0" x:Name="ButtonSuperCluster" Style="{DynamicResource PrimaryButton}"
-                                                    Click="ButtonSuperCluster_Click" IsEnabled="False"
-                                                    ToolTip="Shows every protein that would join, each with a tick, before anything changes, then gathers the ticked ones into one family, and Undo steps it back. Disabled until you type a keyword in the box to the left." Padding="10,5"/>
+                                            <Button Content="Group by keywords" x:Name="ButtonSuperCluster" Style="{DynamicResource PrimaryButton}"
+                                                    Click="ButtonSuperCluster_Click"
+                                                    ToolTip="Opens the keyword grouping review, where you enter keywords, exclusions and the match rule. Review the protein ticks before applying; Undo reverses the grouping." Padding="10,5"/>
                                         </WrapPanel>
                                     </StackPanel>
                                 </GroupBox>
