@@ -52,6 +52,31 @@ Two rows to read with care. The phosphodiesterase family carries 1.32% of the re
 known credit, which was wrong: its share is real signal but unvalidated, and the table says so. And six
 families have no known answer at all; their rows show a share and a decoy rate, never a right rate.
 
+## The result table B7 reads
+
+`FamilyWorldErrors.Compose` completes the stored table with the first pass (ruling M33): each curated
+group of the project maps to the UniProt families its members carry, and a first-pass peptide is the own
+peptide of a family when all its curated groups map to that one family; otherwise it goes to a shared
+row. A curated group whose members carry no UniProt family keeps its own row, named by its members (a
+contaminant with no description by its identifier). The table closes on FamilyEnvelopeQuant's measured
+total, which the checker asserts bit for bit. Own parts as shares of the measured total, on this project
+(58 rows, 29 of them curated groups without a UniProt family):
+
+| Family | Identified | De novo in the database | De novo only in the family world | World right rate |
+|---|---:|---:|---:|---|
+| venom metalloproteinase (M12B) | 24.41% | 5.45% | 1.25% | 96.53% |
+| peptidase S1 | 15.30% | 2.43% | 0.30% | 99.22% |
+| snaclec | 10.34% | 2.60% | 1.97% | 95.58% |
+| flavin monoamine oxidase | 5.12% | 0.50% | 0.01% | 100% |
+| true venom lectin | 2.57% | 0.19% | 0.11% | 92.00% |
+| CRISP | 2.56% | 0.16% | 0.01% | 98.92% |
+| phospholipase A2 | 1.24% | 0.44% | 0.80% | 97.14% |
+| PDGF/VEGF growth factor | 1.12% | 0.10% | 0.02% | 97.62% |
+| nucleotide pyrophosphatase/phosphodiesterase | 0 | 0 | 0.30% | too little evidence |
+
+Global rows: shared between families 0.02% identified, 0.01% de novo in the database, under 0.01% in the
+family world; identified in no family 0.55%; de novo unexplained 18.18%, one bucket for the whole sample.
+
 ## Conserved families, checked by hand
 
 The 65 wrong credits among the 1,963 landed known answers, read one by one
