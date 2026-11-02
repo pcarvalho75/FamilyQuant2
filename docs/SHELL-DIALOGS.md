@@ -113,3 +113,23 @@ are not substituted for current user text. These entries request a decision; the
 mark a feature VERIFIED or approve a retirement. The list validator also requires every
 ID in the independent review's gap packet, including ReportView, GridCopy and text-report
 rows outside the original ten-row CSV cohort.
+
+`--prove-shell-execution3` creates the own `SH-execution3` register for M24's fixed
+twenty-row execution JSON. The existing native De novo packet runs both versions'
+enabled Import, Reconcile and Homology buttons, all three actual native choosers and
+all three chosen-file CSV exports, with cancellation/failure checks and complete
+frozen/current data comparisons. Its eighteen handler receipts are retained under
+this own register; no wording verdict is used as a handler proof. The same run executes
+both versions' contaminant accession stripping/decoy exclusion on five identifiers,
+and both versions' actual identity search on a two-target FASTA with no decoys.
+The latter must refuse with the same complete message and preserve the input bytes.
+
+All UI runs on the existing never-selected private desktop, with offscreen windows,
+nonactivation and native-dialog message automation. The packet under
+`D:/FamilyQuant-data/out-shell/execution3` has two 235/0/0 native runs and a 234/1/0
+planted label-comparison rejection. Six complete CSV files, native accession/refusal
+values and canonical command data are byte-identical between runs. Canonical data
+normalizes the owned output directory and excludes only UI status text, measured
+ElapsedSeconds and diagnostic UIA control listings; all scientific data values remain.
+Original status, timing and dialog traces remain in the full native packet.
+No product edit, new retirement, golden run or full-suite claim is made.
