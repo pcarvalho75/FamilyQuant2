@@ -5,20 +5,20 @@
   "runs": [
     {
       "id": "declarations",
-      "command": "D:\\FamilyQuant-wt\\shell\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --ledger-declaration-compare D:/FamilyQuant-data/out-shell/N3/source D:/FamilyQuant-wt/shell D:/FamilyQuant-data/out-shell/C13-diagnostic-tooltip-20261102-042657/declarations2 SH-C13-tooltip FamilyQuant/MainWindow.xaml \u00222026-11-02 04:29:55 -0800\u0022",
-      "executedAt": "2026-11-02 04:29:55 -0800",
-      "commit": "a51fe1f8f3e9424e84a7c2e4cbeda5a9202174ba",
+      "command": "C:\\FamilyQuant-gate\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --ledger-declaration-compare D:/FamilyQuant-data/out-shell/N3/source C:\\FamilyQuant-gate D:/FamilyQuant-data/out-refresh\\20261102-130357-FamilyQuant-gate\\shell-tooltip-declarations SH-C13-tooltip FamilyQuant/MainWindow.xaml \u00222026-11-02 13:05:59 -0800\u0022",
+      "executedAt": "2026-11-02 13:05:59 -0800",
+      "commit": "d3b71621ce6198f63f586cf062567a18103f9e72",
       "artifacts": [
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\C13-diagnostic-tooltip-20261102-042657\\declarations2\\comparisons.log",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-tooltip-declarations\\comparisons.log",
           "sha256": "04F8B3F7EF578BB800A3D167185DD4A93BDC1924A23D37AB85800F815E9296C9"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\C13-diagnostic-tooltip-20261102-042657\\declarations2\\comparisons.json",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-tooltip-declarations\\comparisons.json",
           "sha256": "98C65AD25B6E3A844579B48F6BC40A0382C9A0CB29B991E079E3A673DC2B8D14"
         }
       ],
-      "workingDirectory": "D:\\FamilyQuant-wt\\shell"
+      "workingDirectory": "C:\\FamilyQuant-gate"
     }
   ],
   "rows": [
@@ -152,7 +152,7 @@
         }
       ],
       "proofs": [],
-      "note": "Declaration only; reachability/operation observations require their own proof. Target source root: D:\\FamilyQuant-wt\\shell",
+      "note": "Declaration only; reachability/operation observations require their own proof. Target source root: C:\\FamilyQuant-gate",
       "kindReceiptId": "decl-option-copy",
       "compared": "False -\u003E FamilyQuant/MainWindow.xaml: FamilyQuant.MainWindow.MenuItemSaveProject.IsEnabled = False"
     },
@@ -198,7 +198,7 @@
         }
       ],
       "proofs": [],
-      "note": "Declaration only; reachability/operation observations require their own proof. Target source root: D:\\FamilyQuant-wt\\shell",
+      "note": "Declaration only; reachability/operation observations require their own proof. Target source root: C:\\FamilyQuant-gate",
       "kindReceiptId": "decl-option-copy",
       "compared": "False -\u003E FamilyQuant/MainWindow.xaml: FamilyQuant.MainWindow.MenuItemSaveFCF.IsEnabled = False"
     },
@@ -244,7 +244,7 @@
         }
       ],
       "proofs": [],
-      "note": "Declaration only; reachability/operation observations require their own proof. Target source root: D:\\FamilyQuant-wt\\shell",
+      "note": "Declaration only; reachability/operation observations require their own proof. Target source root: C:\\FamilyQuant-gate",
       "kindReceiptId": "decl-option-copy",
       "compared": "False -\u003E FamilyQuant/MainWindow.xaml: FamilyQuant.MainWindow.MenuItemComputeXic.IsEnabled = False"
     },
@@ -290,7 +290,7 @@
         }
       ],
       "proofs": [],
-      "note": "Declaration only; reachability/operation observations require their own proof. Target source root: D:\\FamilyQuant-wt\\shell",
+      "note": "Declaration only; reachability/operation observations require their own proof. Target source root: C:\\FamilyQuant-gate",
       "kindReceiptId": "decl-option-copy",
       "compared": "False -\u003E FamilyQuant/MainWindow.xaml: FamilyQuant.MainWindow.MenuItemSpectrumComparison.IsEnabled = False"
     },
@@ -336,7 +336,7 @@
         }
       ],
       "proofs": [],
-      "note": "Declaration only; reachability/operation observations require their own proof. Target source root: D:\\FamilyQuant-wt\\shell",
+      "note": "Declaration only; reachability/operation observations require their own proof. Target source root: C:\\FamilyQuant-gate",
       "kindReceiptId": "decl-option-copy",
       "compared": "False -\u003E FamilyQuant/MainWindow.xaml: FamilyQuant.MainWindow.MenuItemReanotateSEPro.IsEnabled = False"
     },
@@ -446,7 +446,7 @@
         }
       ],
       "proofs": [],
-      "note": "Declaration only; reachability/operation observations require their own proof. Target source root: D:\\FamilyQuant-wt\\shell",
+      "note": "Declaration only; reachability/operation observations require their own proof. Target source root: C:\\FamilyQuant-gate",
       "kindReceiptId": "decl-option-copy",
       "compared": "Help -\u003E FamilyQuant/MainWindow.xaml: FamilyQuant.MainWindow.MenuItemHelp.Header = Help"
     },
@@ -468,7 +468,7 @@
         }
       ],
       "proofs": [],
-      "note": "Declaration only; reachability/operation observations require their own proof. Target source root: D:\\FamilyQuant-wt\\shell",
+      "note": "Declaration only; reachability/operation observations require their own proof. Target source root: C:\\FamilyQuant-gate",
       "kindReceiptId": "decl-option-copy",
       "compared": "How to read these numbers -\u003E FamilyQuant/MainWindow.xaml: FamilyQuant.MainWindow.MenuItemHowToRead.Header = How to read these numbers"
     },
@@ -506,7 +506,7 @@
         }
       ],
       "proofs": [],
-      "note": "Declaration only; reachability/operation observations require their own proof. Target source root: D:\\FamilyQuant-wt\\shell",
+      "note": "Declaration only; reachability/operation observations require their own proof. Target source root: C:\\FamilyQuant-gate",
       "kindReceiptId": "decl-option-copy",
       "compared": "What do I do first? -\u003E FamilyQuant/MainWindow.xaml: FamilyQuant.MainWindow.MenuItemWhereAmI.Header = What do I do first?"
     },
@@ -2257,7 +2257,7 @@
           "kind": "test",
           "target": "LedgerDeclarationCommand",
           "assertion": "declaration kind option/copy: every listed named property agrees",
-          "artifact": "D:\\FamilyQuant-data\\out-shell\\C13-diagnostic-tooltip-20261102-042657\\declarations2\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-tooltip-declarations\\comparisons.log",
           "inspectedBy": ""
         }
       ]

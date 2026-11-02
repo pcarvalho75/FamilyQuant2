@@ -211,6 +211,8 @@ Companion options for `--screens` are `--screen-fcf <input.fcf>`, `--screen-proj
 | `--feature-ledger-generate <frozen-source-root> <scratch-root>` | [FeatureLedger.cs](../FamilyQuant.Tests/FeatureLedger.cs); writes `scratch-root/docs`, never scan moving product source |
 | `--feature-ledger-prove <fresh-output> <date-timestamp>` | Native observation-specific storage/source proofs and register, no ledger edit |
 | `--feature-ledger-evidence-import <register> <output> [--replace-existing]` | Validate receipts, preserve an explicitly replaced register and apply evidenced states |
+| `--feature-ledger-evidence-import-batch <output> <register1> [<register2> ...] [--replace-existing]` | Import in order with the same guards, atomic refusal and one final report |
+| `--test-ledger-import-batch` | Check ordered replacement and atomic batch refusal with synthetic validator inputs |
 | `--ledger-apply-rulings <fresh-output> <date>` | Apply the three pinned Paulo wording rules to listed TSV rows; compiled App/Core/Help text witnesses, visual Style/Setter anchors, adversarial guards and remaining review list; [scope](LEDGER-RULINGS.md) |
 | `--feature-ledger-evidence <output>` | Read-only counts by kind, source mappings and reproducible 50-row sample |
 | `--feature-ledger-kind-review <kind> REOPENED/ACCEPTED <reviewer> <reason> <date> <output>` | Independent D13 kind-review decision and whole-kind reopening |
@@ -232,6 +234,7 @@ Companion options for `--screens` are `--screen-fcf <input.fcf>`, `--screen-proj
 | `--ledger-file-contracts <native-audit> <frozen-app> <fresh-output> <date> [--negative-control]` | Actual frozen/current FCF and CSV writes, partition/homology export routes, and explicit unproved format rows; [guide](FILE-CONTRACT-LEDGER.md) |
 | `--test-wording-tsv <fresh-output>` | Leading quotes, embedded quotes and escaped multiline fields roundtrip through both shared-list readers |
 | `--ledger-curation-file-contracts <native-audit> <frozen-app> <fresh-output> <date> [--negative-control]` | Native curation CSV choosers/files and real no-decoy engine refusal; [guide](CURATION-FILE-CONTRACTS.md) |
+| `--ledger-input-file-contracts <frozen-app> <trusted-SEPro> <fresh-output> <date>` | Paired PLP, SEPro and FCF input choosers/readers on a private native desktop; [guide](INPUT-FILE-CONTRACTS.md) |
 | `--test-quantify-close` | Native styled Close button, modal result, retained result and no-focus checks in both themes; included in shell/quick checks |
 | `--secondary-wording-append <native-proof-output> <wording.tsv>` | Append native changed-wording candidates for Paulo; no semantic proof or ledger-state change |
 | `--secondary-box-audit <native-ledger-audit> <wording.tsv> N6k/N6l <output>` | Verify each retained box row has native proof or a lane wording entry; never changes ledger state |

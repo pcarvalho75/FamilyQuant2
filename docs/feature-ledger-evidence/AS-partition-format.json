@@ -5,250 +5,114 @@
   "runs": [
     {
       "id": "native",
-      "command": "D:\\FamilyQuant-wt\\assay\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --ledger-assay-partition-format D:/FamilyQuant-data/out-shell/N3/source D:/FamilyQuant-data/out-assay/m67-partition-format-final-2 \u00222026-11-02 07:55:46 -0800\u0022",
-      "executedAt": "2026-11-02 07:55:46 -0800",
-      "commit": "9a5118f8ac3c8e0e31f0dcb0e58d484c0f5f21b7",
+      "command": "C:\\FamilyQuant-gate\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --ledger-assay-partition-format D:/FamilyQuant-data/out-shell/N3/source D:/FamilyQuant-data/out-refresh\\20261102-130357-FamilyQuant-gate\\as-partition-format \u00222026-11-02 13:04:20 -0800\u0022",
+      "executedAt": "2026-11-02 13:04:20 -0800",
+      "commit": "d3b71621ce6198f63f586cf062567a18103f9e72",
       "artifacts": [
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\m67-partition-format-final-2\\proofs.log",
-          "sha256": "26835743A17AFFBDE3D78BEC21461237D74F6CA54C5AB0399720C810434CE576"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\as-partition-format\\proofs.log",
+          "sha256": "6C7A4A90615F8A2E6209151A05B12405AC7718475229E72B7D999199B101DDA8"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\m67-partition-format-final-2\\actual-values.json",
-          "sha256": "A61BBF30FE68C777B01B00F622639D69AE6BECF104EB5AD60264E6D05DC8B5E0"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\as-partition-format\\actual-values.json",
+          "sha256": "37517E5F3DC66819F61F5A7BB8ACE1921282415F10551D2DEFA5C3EB0985B570"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\m67-partition-format-final-2\\executed\\FamilyQuant.Core/CsvFormatting.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\as-partition-format\\executed\\FamilyQuant.Core/CsvFormatting.cs",
           "sha256": "D70EFC4C06C7E81C9215555102B5AF238781B734B8BB81E825A25140A268C57A"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\m67-partition-format-final-2\\executed\\FamilyQuant.Core/DeNovo/SpreadsheetSafeCsv.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\as-partition-format\\executed\\FamilyQuant.Core/DeNovo/SpreadsheetSafeCsv.cs",
           "sha256": "B654DE265D6C7D459797EC1296DBB0938B16BD6BB8745C30B4BC740DC148E25C"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\m67-partition-format-final-2\\executed\\FamilyQuant.Core/DeNovo/ThreeWayPartition.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\as-partition-format\\executed\\FamilyQuant.Core/DeNovo/ThreeWayPartition.cs",
           "sha256": "7173311D16275646CD22A9FE44B1396CBE5502CD6AF5964833D913B8A33E9E9D"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\m67-partition-format-final-2\\executed\\FamilyQuant.Tests/AssayCacheSnapshot.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\as-partition-format\\executed\\FamilyQuant.Tests/AssayCacheSnapshot.cs",
           "sha256": "9E0CD15CD1616F7A312E6A14209E745CF8C4ADB6EEF1A3D6125690A9602CCC1B"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\m67-partition-format-final-2\\executed\\FamilyQuant.Tests/AssayPartitionSnapshot.cs",
-          "sha256": "2589923B0FF306DE77CD575D57F0FE499649F2345476B7AE9E77990AEC9A494B"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\as-partition-format\\executed\\FamilyQuant.Tests/AssayPartitionSnapshot.cs",
+          "sha256": "A7D36F6608CEEE4F224F65F8216D98B9359B4455A3E7BC98497762135DBF437D"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\m67-partition-format-final-2\\executed\\FamilyQuant.Tests/FeatureLedgerEvidence.Reporting.cs",
-          "sha256": "8633DCBB14E8DBF1746A1FD771AD4E9404900EB68BA46690A31EFC8DEDFA247B"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\as-partition-format\\executed\\FamilyQuant.Tests/FeatureLedgerEvidence.Reporting.cs",
+          "sha256": "E9A4F3A2A671452283E1C28E155B81DEF97F9BAE907945607C1F16DD0078CC12"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\m67-partition-format-final-2\\executed\\FamilyQuant.Tests/FeatureLedgerEvidence.cs",
-          "sha256": "370FC41121F164A0C2495B260A62149FAD53F6F353203A97488423F2E6FA8738"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\as-partition-format\\executed\\FamilyQuant.Tests/FeatureLedgerEvidence.cs",
+          "sha256": "2060D409570285CEAE8FA6ADF3F4A5173924C80C2A6A99B1856294055365174C"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\m67-partition-format-final-2\\executed\\FamilyQuant.Tests/LedgerMemberFactComparison.cs",
-          "sha256": "83C53F2CC3E962DB92855AF87E4D5E1508ED907B62BDAD443D3B0861BD95071B"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\as-partition-format\\executed\\FamilyQuant.Tests/LedgerMemberFactComparison.cs",
+          "sha256": "1F3254D635B40D22576E9F40347DBEB503A5FF661EFC18E743EAC35B097FC14C"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\m67-partition-format-final-2\\executed\\FamilyQuant.Tests/Program.AssayCacheLedger.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\as-partition-format\\executed\\FamilyQuant.Tests/Program.AssayCacheLedger.cs",
           "sha256": "7D3B175CC9824DA443DC369CF9C8983E1C59004FD15F080951BCEEF72B5449C9"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\m67-partition-format-final-2\\executed\\FamilyQuant.Tests/Program.AssayPartitionLedger.cs",
-          "sha256": "96977ED2BAE9F92127E362B1AB4C18A53495D185C4FCE77C5521A109015B1957"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\as-partition-format\\executed\\FamilyQuant.Tests/Program.AssayPartitionLedger.cs",
+          "sha256": "91C0A6F5BD53EF4E84B7B5091E14375326BBFCC26FD656FBCD13AF3719E9A9B9"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\m67-partition-format-final-2\\executed\\FamilyQuant.Tests/Program.AssayRuntimeLedger.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\as-partition-format\\executed\\FamilyQuant.Tests/Program.AssayRuntimeLedger.cs",
           "sha256": "24F4A0BACCC044156A198BDE8790FCDE12BF0A995641CA359FCB1AFEB3009CB7"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\m67-partition-format-final-2\\executed\\FamilyQuant.Tests/Program.Commands.AssayLedger.cs",
-          "sha256": "584AE2E5132718747D9B86EE007150164FF7516FD6C6449C48287F9D8CD173F9"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\as-partition-format\\executed\\FamilyQuant.Tests/Program.Commands.AssayLedger.cs",
+          "sha256": "46DA029D0DBAA113B736A5E3B2BE7D29C486565EAE0063281F58F292ECC8112E"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\m67-partition-format-final-2\\executed\\frozen\\FamilyQuant/DeNovo/ThreeWayPartition.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\as-partition-format\\executed\\frozen\\FamilyQuant/DeNovo/ThreeWayPartition.cs",
           "sha256": "93A2DE151FF17493C8DB7A70AD067C9B68140377009E576032CADC48CC78B477"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\m67-partition-format-final-2\\executed\\FamilyQuant.Tests.dll",
-          "sha256": "7FE355FE7653D77B0ADC6471A94189033F4CFBCCBA346B8CA8A5E296EA2E1857"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\as-partition-format\\executed\\FamilyQuant.Tests.dll",
+          "sha256": "338CB1ED8EE1B52F92368A79B99A6C1D2789A40AE07801AAB7226AA8B8A528A4"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\m67-partition-format-final-2\\executed\\FamilyQuant.Core.dll",
-          "sha256": "362F72FCC26677EB000A3440435D9A2BEAA6E1B3A0B85AEE774CDB718B4E91DA"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\as-partition-format\\executed\\FamilyQuant.Core.dll",
+          "sha256": "B3DE904BB50477ACCB982BDE2CE437BA6962BB1DA44E7D260B992D1E188837BC"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\m67-partition-format-final-2\\frozen-FamilyQuant.dll",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\as-partition-format\\frozen-FamilyQuant.dll",
           "sha256": "D764488C923945285E03B338E5A91BF28106A35B11AB465D8E2B23D125F03FD8"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\m67-partition-format-final-2\\frozen-ReferenceGoldenHost.dll",
-          "sha256": "BB818CCDA272A1EA54BB2A9FDFAF286089FC00B14E8C02F55BFFC41464651022"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\as-partition-format\\frozen-ReferenceGoldenHost.dll",
+          "sha256": "0BF395FCF7CD43A602F5FF4BC684193F4C399729CB51D1692BA9612D38C25847"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\m67-partition-format-final-2\\frozen-ReferenceGoldenHost.exe",
-          "sha256": "322B2D3E91C164B0D13B1D5B0E2F355BBF43398B8984AA32460ADD06B0A3CA72"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\as-partition-format\\frozen-ReferenceGoldenHost.exe",
+          "sha256": "AD9AC8D65257A86320558DCB7CD3F9D3CCEAAFD439F38E6CA0A60E9EF476748C"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\m67-partition-format-final-2\\frozen-csv.log",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\as-partition-format\\frozen-csv.log",
           "sha256": "FDACA9EA6F441DEAE765E0085E626C69C2D6C1FCAF147456F83F5C66C38A024D"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\m67-partition-format-final-2\\current-csv\\en-US.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\as-partition-format\\current-csv\\en-US.csv",
           "sha256": "70A8EB599ADDD8C60C726C942D857E42C9EAB8DD4A67A2154E77799A49004EEF"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\m67-partition-format-final-2\\current-csv\\pt-BR.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\as-partition-format\\current-csv\\pt-BR.csv",
           "sha256": "70A8EB599ADDD8C60C726C942D857E42C9EAB8DD4A67A2154E77799A49004EEF"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\m67-partition-format-final-2\\frozen-csv\\en-US.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\as-partition-format\\frozen-csv\\en-US.csv",
           "sha256": "70A8EB599ADDD8C60C726C942D857E42C9EAB8DD4A67A2154E77799A49004EEF"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\m67-partition-format-final-2\\frozen-csv\\pt-BR.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\as-partition-format\\frozen-csv\\pt-BR.csv",
           "sha256": "70A8EB599ADDD8C60C726C942D857E42C9EAB8DD4A67A2154E77799A49004EEF"
         }
       ],
-      "workingDirectory": "D:\\FamilyQuant-wt\\assay"
+      "workingDirectory": "C:\\FamilyQuant-gate"
     }
   ],
-  "rows": [
-    {
-      "observationId": "FQ15-399C3233EFA4",
-      "implementation": [
-        {
-          "path": "FamilyQuant.Core/CsvFormatting.cs",
-          "symbol": "Native ThreeWayPartition CSV quoting and round-trip formatting in en-US and pt-BR",
-          "sha256": "D70EFC4C06C7E81C9215555102B5AF238781B734B8BB81E825A25140A268C57A"
-        },
-        {
-          "path": "FamilyQuant.Core/DeNovo/SpreadsheetSafeCsv.cs",
-          "symbol": "Native ThreeWayPartition CSV quoting and round-trip formatting in en-US and pt-BR",
-          "sha256": "B654DE265D6C7D459797EC1296DBB0938B16BD6BB8745C30B4BC740DC148E25C"
-        },
-        {
-          "path": "FamilyQuant.Core/DeNovo/ThreeWayPartition.cs",
-          "symbol": "Native ThreeWayPartition CSV quoting and round-trip formatting in en-US and pt-BR",
-          "sha256": "7173311D16275646CD22A9FE44B1396CBE5502CD6AF5964833D913B8A33E9E9D"
-        }
-      ],
-      "proofs": [],
-      "note": "Executed native value/refusal check, with the specific comparison recorded below.",
-      "kindReceiptId": "native-export-storage-fact",
-      "compared": "FamilyQuant/DeNovo/ThreeWayPartition.cs:407 \u0022\\\u0022\u0022; complete native CSV bytes for quoted/comma/newline fields, full-precision and subnormal numeric values in two cultures; expected identical frozen/current native CSV bytes; actual identical"
-    },
-    {
-      "observationId": "FQ15-3F845CD11BCD",
-      "implementation": [
-        {
-          "path": "FamilyQuant.Core/CsvFormatting.cs",
-          "symbol": "Native ThreeWayPartition CSV quoting and round-trip formatting in en-US and pt-BR",
-          "sha256": "D70EFC4C06C7E81C9215555102B5AF238781B734B8BB81E825A25140A268C57A"
-        },
-        {
-          "path": "FamilyQuant.Core/DeNovo/SpreadsheetSafeCsv.cs",
-          "symbol": "Native ThreeWayPartition CSV quoting and round-trip formatting in en-US and pt-BR",
-          "sha256": "B654DE265D6C7D459797EC1296DBB0938B16BD6BB8745C30B4BC740DC148E25C"
-        },
-        {
-          "path": "FamilyQuant.Core/DeNovo/ThreeWayPartition.cs",
-          "symbol": "Native ThreeWayPartition CSV quoting and round-trip formatting in en-US and pt-BR",
-          "sha256": "7173311D16275646CD22A9FE44B1396CBE5502CD6AF5964833D913B8A33E9E9D"
-        }
-      ],
-      "proofs": [],
-      "note": "Executed native value/refusal check, with the specific comparison recorded below.",
-      "kindReceiptId": "native-export-storage-fact",
-      "compared": "FamilyQuant/DeNovo/ThreeWayPartition.cs:407 \u0022\\\u0022\\\u0022\u0022; complete native CSV bytes for quoted/comma/newline fields, full-precision and subnormal numeric values in two cultures; expected identical frozen/current native CSV bytes; actual identical"
-    },
-    {
-      "observationId": "FQ15-7418B217FD10",
-      "implementation": [
-        {
-          "path": "FamilyQuant.Core/CsvFormatting.cs",
-          "symbol": "Native ThreeWayPartition CSV quoting and round-trip formatting in en-US and pt-BR",
-          "sha256": "D70EFC4C06C7E81C9215555102B5AF238781B734B8BB81E825A25140A268C57A"
-        },
-        {
-          "path": "FamilyQuant.Core/DeNovo/SpreadsheetSafeCsv.cs",
-          "symbol": "Native ThreeWayPartition CSV quoting and round-trip formatting in en-US and pt-BR",
-          "sha256": "B654DE265D6C7D459797EC1296DBB0938B16BD6BB8745C30B4BC740DC148E25C"
-        },
-        {
-          "path": "FamilyQuant.Core/DeNovo/ThreeWayPartition.cs",
-          "symbol": "Native ThreeWayPartition CSV quoting and round-trip formatting in en-US and pt-BR",
-          "sha256": "7173311D16275646CD22A9FE44B1396CBE5502CD6AF5964833D913B8A33E9E9D"
-        }
-      ],
-      "proofs": [],
-      "note": "Executed native value/refusal check, with the specific comparison recorded below.",
-      "kindReceiptId": "native-export-storage-fact",
-      "compared": "FamilyQuant/DeNovo/ThreeWayPartition.cs:407 \u0022\\\u0022\u0022; complete native CSV bytes for quoted/comma/newline fields, full-precision and subnormal numeric values in two cultures; expected identical frozen/current native CSV bytes; actual identical"
-    },
-    {
-      "observationId": "FQ15-B3686CCA5BFE",
-      "implementation": [
-        {
-          "path": "FamilyQuant.Core/CsvFormatting.cs",
-          "symbol": "Native ThreeWayPartition CSV quoting and round-trip formatting in en-US and pt-BR",
-          "sha256": "D70EFC4C06C7E81C9215555102B5AF238781B734B8BB81E825A25140A268C57A"
-        },
-        {
-          "path": "FamilyQuant.Core/DeNovo/SpreadsheetSafeCsv.cs",
-          "symbol": "Native ThreeWayPartition CSV quoting and round-trip formatting in en-US and pt-BR",
-          "sha256": "B654DE265D6C7D459797EC1296DBB0938B16BD6BB8745C30B4BC740DC148E25C"
-        },
-        {
-          "path": "FamilyQuant.Core/DeNovo/ThreeWayPartition.cs",
-          "symbol": "Native ThreeWayPartition CSV quoting and round-trip formatting in en-US and pt-BR",
-          "sha256": "7173311D16275646CD22A9FE44B1396CBE5502CD6AF5964833D913B8A33E9E9D"
-        }
-      ],
-      "proofs": [],
-      "note": "Executed native value/refusal check, with the specific comparison recorded below.",
-      "kindReceiptId": "native-export-storage-fact",
-      "compared": "FamilyQuant/DeNovo/ThreeWayPartition.cs:407 \u0022\\\u0022\u0022; complete native CSV bytes for quoted/comma/newline fields, full-precision and subnormal numeric values in two cultures; expected identical frozen/current native CSV bytes; actual identical"
-    },
-    {
-      "observationId": "FQ15-DF75D56E6E5E",
-      "implementation": [
-        {
-          "path": "FamilyQuant.Core/CsvFormatting.cs",
-          "symbol": "Native ThreeWayPartition CSV quoting and round-trip formatting in en-US and pt-BR",
-          "sha256": "D70EFC4C06C7E81C9215555102B5AF238781B734B8BB81E825A25140A268C57A"
-        },
-        {
-          "path": "FamilyQuant.Core/DeNovo/SpreadsheetSafeCsv.cs",
-          "symbol": "Native ThreeWayPartition CSV quoting and round-trip formatting in en-US and pt-BR",
-          "sha256": "B654DE265D6C7D459797EC1296DBB0938B16BD6BB8745C30B4BC740DC148E25C"
-        },
-        {
-          "path": "FamilyQuant.Core/DeNovo/ThreeWayPartition.cs",
-          "symbol": "Native ThreeWayPartition CSV quoting and round-trip formatting in en-US and pt-BR",
-          "sha256": "7173311D16275646CD22A9FE44B1396CBE5502CD6AF5964833D913B8A33E9E9D"
-        }
-      ],
-      "proofs": [],
-      "note": "Executed native value/refusal check, with the specific comparison recorded below.",
-      "kindReceiptId": "native-export-storage-fact",
-      "compared": "FamilyQuant/DeNovo/ThreeWayPartition.cs:400 \u0022R\u0022; complete native CSV bytes for quoted/comma/newline fields, full-precision and subnormal numeric values in two cultures; expected identical frozen/current native CSV bytes; actual identical"
-    }
-  ],
-  "kindReceipts": [
-    {
-      "id": "native-export-storage-fact",
-      "kind": "export/storage fact",
-      "proofs": [
-        {
-          "runId": "native",
-          "kind": "test",
-          "target": "RunAssayRuntimeLedger",
-          "assertion": "AS-partition-format kind export/storage fact: every listed native value and branch check passed",
-          "artifact": "D:\\FamilyQuant-data\\out-assay\\m67-partition-format-final-2\\proofs.log",
-          "inspectedBy": ""
-        }
-      ]
-    }
-  ]
+  "rows": [],
+  "kindReceipts": []
 }

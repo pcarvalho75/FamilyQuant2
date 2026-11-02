@@ -28,6 +28,7 @@ internal static partial class Program
         Check("an audit cannot accept a ledger with a missing frozen row", FeatureLedgerEvidence.Report(root, inventory,
             markdown.Replace(first + "\n", "", StringComparison.Ordinal), FeatureLedgerEvidence.Load(root, inventory), invalidAudit) == 1);
         ReceiptValidationFixtures(root, inventory);
+        LedgerImportBatchTests();
     }
 
     // Deliberately synthetic validator inputs. None is imported into the real ledger.

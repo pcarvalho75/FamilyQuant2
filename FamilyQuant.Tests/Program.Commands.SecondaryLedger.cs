@@ -25,5 +25,7 @@ internal static partial class Program
             args => args.Length > 0 && args[0] == "--test-wording-tsv", (args, _) => WordingTsvRoundTripCommand(args)),
         new("--ledger-curation-file-contracts", 10470, TestCommandPhase.Raw,
             args => args.Length > 0 && args[0] == "--ledger-curation-file-contracts", (args, _) => CurationFileCommand(args)),
+        new("--ledger-input-file-contracts", 10480, TestCommandPhase.Raw,
+            args => args.Length > 0 && args[0] == "--ledger-input-file-contracts", (args, _) => InputFileCommand(args)),
     ];
 }
