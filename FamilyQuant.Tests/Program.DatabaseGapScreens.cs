@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -10,7 +11,9 @@ namespace FamilyQuant.Tests;
 
 internal static partial class Program
 {
-    private static int DatabaseGapScreens(string projectPath, string output)
+    private const string StoredWorldFastaAssertion = "Database gap stored-world project requires available suggested-additions export";
+
+    private static int DatabaseGapScreens(string projectPath, string output, bool oldFingerprint = false)
     {
         EnsureApplication();
         if (Directory.Exists(output) && Directory.EnumerateFileSystemEntries(output).Any())
@@ -18,10 +21,23 @@ internal static partial class Program
         Directory.CreateDirectory(output);
         string inputHash = FeatureLedgerEvidence.Hash(projectPath);
         var project = ProjectStore.ReadFqproj(projectPath);
+        if (oldFingerprint)
+        {
+            var stored = Evidence.FamilyWorldFetcher.Stored(project.fcf);
+            var summary = project.manifest.FamilyWorldResult ?? throw new InvalidDataException("No stored result to exercise.");
+            // Reproduce the pre-B6 adapter's protein-list identity in memory. Input bytes stay untouched.
+            summary.WorldFingerprint = FamilyWorld.Build(stored.Entries.Select(entry => new FamilyWorldProtein
+            { Id = entry.Accession, Accession = entry.Accession, Sequence = entry.Sequence, Families = FamilyWorld.FamiliesOf(entry.Evidence),
+                Taxon = entry.TaxonId.ToString(CultureInfo.InvariantCulture), FromPanel = entry.FromReviewedPanel }), stored.Families).Fingerprint;
+            if (summary.WorldFingerprint == stored.ContentSha256) throw new InvalidDataException("Negative fixture did not change the fingerprint.");
+            Console.WriteLine("Negative control planted the old protein-list fingerprint in memory: " + summary.WorldFingerprint);
+        }
         var model = new DatabaseGapViewModel(project.manifest.FamilyWorldResult, project.fcf);
         var previousTheme = Themes.ThemeManager.Current;
         try
         {
+            if (project.fcf.EvidenceSource?.FamilyWorld != null)
+                Check(StoredWorldFastaAssertion, model.CanExportFasta, model.FastaState);
             foreach (var theme in new[] { Themes.AppTheme.Dark, Themes.AppTheme.Light })
             {
                 Themes.ThemeManager.Apply(theme);
@@ -73,5 +89,26 @@ internal static partial class Program
             return failed == 0 ? 0 : 1;
         }
         finally { Themes.ThemeManager.Apply(previousTheme); }
+    }
+
+    private static int DatabaseGapRefusalTest(string projectPath, string output)
+    {
+        if (Directory.Exists(output) && Directory.EnumerateFileSystemEntries(output).Any()) throw new IOException("Regression output must be fresh.");
+        Directory.CreateDirectory(output);
+        string before = FeatureLedgerEvidence.Hash(projectPath), childOutput = Path.Combine(output, "negative");
+        var start = new ProcessStartInfo(Path.ChangeExtension(typeof(Program).Assembly.Location, ".exe"))
+        { WorkingDirectory = Environment.CurrentDirectory, UseShellExecute = false, CreateNoWindow = true,
+            RedirectStandardOutput = true, RedirectStandardError = true };
+        foreach (string argument in new[] { "--database-gap-screens", projectPath, childOutput, "--negative-fingerprint" }) start.ArgumentList.Add(argument);
+        using var child = Process.Start(start)!;
+        var error = child.StandardError.ReadToEndAsync(); string text = child.StandardOutput.ReadToEnd(); child.WaitForExit();
+        text += error.GetAwaiter().GetResult(); File.WriteAllText(Path.Combine(output, "negative.log"), text);
+        Console.WriteLine(text);
+        Check("real-project checker rejects the planted old fingerprint with its explicit availability assertion", child.ExitCode == 1
+            && text.Contains("FAIL  " + StoredWorldFastaAssertion, StringComparison.Ordinal)
+            && !File.Exists(Path.Combine(childOutput, "suggested_additions.fasta")));
+        Check("negative-fingerprint regression leaves the project bytes unchanged", before == FeatureLedgerEvidence.Hash(projectPath));
+        Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
+        return failed == 0 ? 0 : 1;
     }
 }

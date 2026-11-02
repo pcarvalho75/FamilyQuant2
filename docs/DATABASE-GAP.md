@@ -49,7 +49,15 @@ FamilyQuant.Tests.exe --database-gap-screens <project.fqproj> <fresh-output>
 
 It reads the supplied project without changing its bytes, captures both themes,
 writes the stored composition CSV, and writes suggested FASTA only if its matching
-world is available. Synthetic fixtures do not establish fresh RAW reproduction,
+world is available. When the project holds a stored world, the checker requires
+FASTA availability before entering the export branch; a refusal makes the command
+exit with failure. Projects without a stored world can still capture empty states.
+Run `--test-database-gap-refusal <project.fqproj> <fresh-output>` to exercise the
+regression: its child plants the old protein-list fingerprint in memory and must
+fail with the availability assertion, publish no FASTA and retain the input bytes.
+The negative setup is also exposed as `--database-gap-screens <project> <output>
+--negative-fingerprint`; it never saves the modified manifest.
+Synthetic fixtures do not establish fresh RAW reproduction,
 real-sample correctness or installation.
 
 The retained B6 project `out-opus/b6/bothrops-jararaca-family-world.fqproj` was
@@ -57,7 +65,7 @@ checked on a byte-verified copy in `D:/FamilyQuant-data/out-results/B7-real`.
 The original UI's protein-list fingerprint refused this valid snapshot. The
 fixture now uses the production snapshot factory and failed before the UI fix;
 the corrected native fixture passes 27 checks, including the new Help definition.
-The real check passes two checks
+The real check now passes three checks
 per run, including an independent parser comparing FASTA membership and complete
 sequences with the verified stored world.
 
