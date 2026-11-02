@@ -30,8 +30,10 @@ public sealed class AnalyticsViewModel : ScreenViewModel
         $"Source: {Path.GetFileName(Homology.FcfPath)}. This snapshot is independent of full XIC.";
     public bool HasData => Data != null;
     public string Details { get; } = "";
-    public string EmptyMessage => HasHomology ? "No full XIC is stored. The standalone homology snapshot can be exported here."
-        : "No full XIC is stored. Open Quantify, compute the full XIC, and return to Results.";
+    private const string MissingQuantitation = "No full XIC is stored. Results reads FamilyQuant's own full isotope-envelope quantitation. " +
+        "A plain .fcf carries no quantitation, and a .fqproj saved before full XIC was ever computed carries none either. " +
+        "Load the project, open Quantify, compute full XIC, then return here to draw the graphs.";
+    public string EmptyMessage => MissingQuantitation + (HasHomology ? " The standalone homology snapshot can still be exported here." : "");
     public IReadOnlyList<ResultsSummaryCard> Cards { get; } = Array.Empty<ResultsSummaryCard>();
     public int FamilyTopN { get => topN; set => Set(ref topN, value); }
     public bool FamilyAsPercent { get => percent; set => Set(ref percent, value); }
@@ -91,18 +93,22 @@ public sealed class AnalyticsViewModel : ScreenViewModel
         if (!CanExport) { Status = "The selected export needs its stored result and required project evidence."; return; }
         try
         {
-            ExportWriter()(path);
-            Status = "Written to " + path + ".";
+            var kind = ExportKind;
+            string detail = ExportDescription(kind);
+            ExportWriter(description => detail = description)(path);
+            Status = ExportSuccess(path, kind, detail);
         }
-        catch (Exception ex) { Status = "The export did not finish. " + ex.Message; }
+        catch (Exception ex) { Status = ExportFailure(ExportKind, ex); }
     }
 
     public async System.Threading.Tasks.Task ExportAsync(string path, AppOperationHost operations)
     {
         if (!CanExport || operations.IsBusy) return;
         using var operation = operations.Begin("Export results");
-        var writer = ExportWriter();
-        bool folder = ExportKind is ResultsExportKind.Figures or ResultsExportKind.EvidencePack;
+        var kind = ExportKind;
+        string detail = ExportDescription(kind);
+        var writer = ExportWriter(description => detail = description);
+        bool folder = kind is ResultsExportKind.Figures or ResultsExportKind.EvidencePack;
         try
         {
             await AppOperationFiles.RunSta(() =>
@@ -110,14 +116,34 @@ public sealed class AnalyticsViewModel : ScreenViewModel
                 if (folder) AppOperationFiles.WriteFolder(path, writer, operation.Context);
                 else AppOperationFiles.WriteFile(path, writer, operation.Context);
             });
-            Status = "Written to " + path + ".";
+            Status = ExportSuccess(path, kind, detail);
         }
         catch (OperationCanceledException) when (operation.Context.IsCancellationRequested)
         { Status = "Cancelled. The previous export files were kept."; }
-        catch (Exception ex) { Status = "The export did not finish. " + ex.Message; }
+        catch (Exception ex) { Status = ExportFailure(kind, ex); }
     }
 
-    private Action<string> ExportWriter()
+    private static string ExportDescription(ResultsExportKind kind) => kind switch {
+        ResultsExportKind.Peptides => "the per-peptide analytics table",
+        ResultsExportKind.Summary => "the per-run and grouped fraction summary",
+        _ => "the selected result" };
+
+    private static string ExportSuccess(string path, ResultsExportKind kind, string detail) =>
+        "Written to " + path + ": " + detail + ". " +
+        (kind is ResultsExportKind.Figures or ResultsExportKind.EvidencePack or ResultsExportKind.SuggestedAdditions ? ""
+            : "Numbers use a dot for the decimal separator regardless of your machine's language. ") +
+        "Charts and family choices are unchanged.";
+
+    private static string ExportFailure(ResultsExportKind kind, Exception error) =>
+        "The export did not finish. Reason given by the program: " + error.Message + (kind switch {
+            ResultsExportKind.EvidencePack => " No partial claim is substituted. Load or recompute any named missing study, " +
+                "or check write access to the folder, then try again.",
+            ResultsExportKind.Figures => " Next step: check that you can write to that folder and that no PNG of the same name " +
+                "is open in another program, then save again.",
+            ResultsExportKind.SuggestedAdditions => " Next step: check that you can write to that folder, then export again.",
+            _ => " Next step: check that the CSV is not open in Excel and that you can write to that folder, then export again." });
+
+    private Action<string> ExportWriter(Action<string> describe)
     {
         int top = FamilyTopN;
         bool asPercent = FamilyAsPercent;
@@ -125,8 +151,17 @@ public sealed class AnalyticsViewModel : ScreenViewModel
         {
             ResultsExportKind.Summary => path => File.WriteAllText(path, AnalyticsCsv.BuildSummaryCsv(Data!.Fractions, Data.Grouped)),
             ResultsExportKind.Peptides => path => File.WriteAllText(path, AnalyticsCsv.BuildPeptideCsv(Data!.Peptides)),
-            ResultsExportKind.Figures => path => AnalyticsFigures.Save(Data!, Families, path, top, asPercent),
-            ResultsExportKind.EvidencePack => path => PresentationEvidencePack.Save(Data!, manifest!, curation!, Families!, path),
+            ResultsExportKind.Figures => path => {
+                var written = AnalyticsFigures.Save(Data!, Families, path, top, asPercent);
+                describe(written.Count.ToString("N0", CultureInfo.CurrentCulture) + " PNG figure(s): " +
+                    string.Join(", ", written.Select(Path.GetFileName)) + ". Each is 1920 by 1080 device pixels in the Light projector palette");
+            },
+            ResultsExportKind.EvidencePack => path => {
+                var written = PresentationEvidencePack.Save(Data!, manifest!, curation!, Families!, path);
+                describe(written.FigurePaths.Count.ToString("N0", CultureInfo.CurrentCulture) + " FamilyQuant PNG plot(s) plus " +
+                    written.DataPaths.Count.ToString("N0", CultureInfo.CurrentCulture) + " numeric/definition file(s). " +
+                    "The PNGs are 1920 by 1080 device pixels in the Light palette; the CSV and JSON files contain the exact plotted numbers");
+            },
             ResultsExportKind.Homology => path => HomologyCsv.Write(path, Homology!),
             ResultsExportKind.DatabaseGap => path => File.WriteAllText(path, DatabaseGap.BuildCsv()),
             ResultsExportKind.SuggestedAdditions => path => File.WriteAllText(path, DatabaseGap.BuildSuggestedFasta()),
