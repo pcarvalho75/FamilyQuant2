@@ -102,6 +102,7 @@ Invoke each flag with `& $testExe <flag>` after building. Dispatch and arity are
 | `--test-query-residue-coverage` | Actual query-letter gate, native facts, legacy serialization and evidence-session contracts |
 | `--test-family-world-fetch` | Staged fetch, paging, release/taxonomy validation, offline persistence and recipe compatibility |
 | `--test-desktop-world` | Actual curation fetch button, scope confirmation, shared busy host, Cancel/failure byte preservation, stored state and offline project reopen |
+| `--test-feedback-facts <output>` | Y9 normal curation/load/export/alignment failure and success routes, stale-share warnings, visible refusal/setup text and deterministic 39-row factcheck TSV on a private desktop |
 | `--desktop-world-walk <copied-project> <copied-raw-folder> <copied-sepr2> <copied-denovo-root> <output> <confirmed-scope>` | Private desktop real-data fetch/scope dialog, production Compute, Database gap and native CSV/FASTA exports; uses only copies |
 | `--test-quantitation-stages` | Prepared-peptide assignments, cross-side suppression, residual calibration, rollup and deterministic CSV |
 | `--test-denovo-engine` | Core retained selection/review-table contracts and existing reader/reconciliation/source-aware fixtures |
@@ -257,6 +258,7 @@ Companion options for `--screens` are `--screen-fcf <input.fcf>`, `--screen-proj
 | `--prove-shell-main <frozen-root> <fresh-output> <date>` | Native MainWindow routes, synthetic file writes/refusals and captured dialog/report frames; own SH-main-routes candidate register |
 | `--prove-curation-actions <frozen-root> <own-frozen-host> <fixed-audit.json> <fresh-output> <date> [--negative-control]` | Native curation handlers, annotation FCF/CSV roundtrip with unchanged shares, executed chooser filters/defaults and CSV writes/refusals; complete frozen/current CSV comparison in two cultures; own SH-curation-actions candidate, fixed OPEN cohort only |
 | `--prove-shell-execution3 <frozen-root> <frozen-app> <trusted-sepr2> <fixed-execution.json> <fresh-output> <date> [--negative-control]` | Own SH-execution3 twenty-row packet: real frozen/current De novo button actions and native choosers/CSV exports, contaminant/decoy accession handling, and actual no-decoy identity-search refusal; private desktop never selected |
+| `--prove-shell-behaviour <frozen-root> <frozen-app> <behaviour.json> <fresh-output> <date>` | Own SH-behaviour scoped native UI/contract comparisons with per-row supported or explicit OPEN outcomes; private desktop never selected |
 | `--curation-export-snapshot <fresh-json>` | Shared current/frozen synthetic CSV and retained User sorting/counter values; no RAW computation |
 | `--shell-review-wording <review-gaps.tsv> <shared-wording.tsv> <matching-native-main-packet> <fresh-output> <date>` | Generate every requested/previous own list row from compiled/native feature text or the exact `no current equivalent` decision with a reason; never changes dispositions |
 | `--check-shell-review-list <review-gaps.tsv> <wording.tsv>` | Reject missing rows, empty values/reasons and unresolved angle-bracket placeholders in the reviewed cohort |

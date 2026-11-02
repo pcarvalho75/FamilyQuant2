@@ -17,7 +17,9 @@ A missing or `lost` verdict leaves the row open. Old packets without the fact
 file no longer qualify. Existing test and render requirements remain in force.
 
 Rules 1 and 3 require changed, nonempty current text witnessed in compiled
-application/Core strings, compiled WPF resources or resolved current Help.
+application/Core strings, compiled WPF resources or resolved current Help: the
+Families Help page for every mode and shared-peptide policy, and the De novo Help
+page for each preset source with the default filters, as its Help button shows it.
 Test-assembly strings cannot qualify. The witness records its assembly, symbol
 and whole-string hash. Rule 3 applies to an old `Layer N` reference. These are
 recorded wording decisions, not evidence that a handler or export still works.

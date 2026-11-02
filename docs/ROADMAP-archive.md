@@ -167,6 +167,7 @@ Finished steps, moved here from docs/ROADMAP.md. The board shows them as green.
 | Y6 | Lost facts restored: the rows where the old fact no longer reaches the user | M | 0.5 | 🟢 | R3a | Each fact shown again, or listed for Paulo with a reason | LK | not started | 0% | 0% | T+0 |
 | Y7 | Busy screen: a polished animated logo wherever the program computes, in the one shared busy overlay, with Cancel and progress kept | M | 0.5 | 🟢 | R3a | Shown in every long operation, both themes; animation stops when the work ends and costs no noticeable CPU; Paulo likes it | RS | not started | 0% | 0% | T+0 |
 | Y8 | Fetch the family world from the program: a screen action with the confirmed scope, Cancel and progress. Today only a command line reaches it | M | 0.7 | 🟢 | R3a | Real project walked through the buttons: fetch, Compute, Database gap, FASTA; Cancel leaves the file as it was | EV | not started | 0% | 0% | T+1 |
+| Y9 | Failure guidance restored: the 46 rows where a user would miss what 1.5 said, such as the share column warning after a failed recalculation | M | 0.7 | 🟢 | R3a | Each fact shown on the normal route, its row closes on an independent read, or it is listed for Paulo | EV | not started | 0% | 0% | T+1 |
 
 ### W3 Ledger, screen by screen
 
@@ -204,4 +205,11 @@ Finished steps, moved here from docs/ROADMAP.md. The board shows them as green.
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
 | A5b | Shared-peptide effect through Compute full XIC, on Paulo's `.sepr2`: one Bothrops jararaca run on the species database, labelled as such | M | 0.3 | 🟢 | Paper numbers | Numbers exported by the program, with the label | EV | not started | 0% | 0% | T+2 |
+
+### W5 Release (Paulo publishes)
+
+| ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
+|---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
+| R3a | Code freeze: only review findings touch product code after this | L | 0 | 🟢 | R4a, R4b | Freeze noted; all lanes told | Orchestrator | not started | 0% | 0% | T+0 |
+| R4b | Final adversarial pass: science and numbers | H | 1 | 🟢 | R4c | KM's verdict | KM | not started | 0% | 0% | T+1 |
 

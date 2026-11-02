@@ -78,7 +78,11 @@ public partial class ClusterGenerationControl
             {
                 ShowCurationOperationResult("Cancelled. The previous document was kept."); return false;
             }
-            catch (Exception ex) { ShowCurationOperationResult(title + " could not finish: " + ex.Message); return false; }
+            catch (Exception ex)
+            {
+                if (title == "Recalculate family shares") lastRecalculationFailed = true;
+                ShowCurationOperationResult(CurationFeedback.Failure(title, ex)); return false;
+            }
             finally { if (began) EndSharedWait(); }
         });
 

@@ -95,9 +95,17 @@ public sealed class AnalyticsViewModel : ScreenViewModel
     }
 
     public void ShowStatus(string message) => Status = message;
+    public string ExportUnavailableReason => ExportKind switch
+    {
+        ResultsExportKind.Homology => "Nothing was exported: no homology search result is stored, so there are no assignments to write. Open De novo and press Search first, then return to Results.",
+        ResultsExportKind.SuggestedAdditions => DatabaseGap.FastaState,
+        ResultsExportKind.DatabaseGap => DatabaseGap.EmptyMessage,
+        _ => "The selected export needs its stored result and required project evidence."
+    };
+    private string ExportRefusal() => ExportUnavailableReason;
     public void Export(string path)
     {
-        if (!CanExport) { Status = "The selected export needs its stored result and required project evidence."; return; }
+        if (!CanExport) { Status = ExportRefusal(); return; }
         try
         {
             var kind = ExportKind;
@@ -110,7 +118,8 @@ public sealed class AnalyticsViewModel : ScreenViewModel
 
     public async System.Threading.Tasks.Task ExportAsync(string path, AppOperationHost operations)
     {
-        if (!CanExport || operations.IsBusy) return;
+        if (!CanExport) { Status = ExportRefusal(); return; }
+        if (operations.IsBusy) return;
         using var operation = operations.Begin("Export results");
         var kind = ExportKind;
         string detail = ExportDescription(kind);

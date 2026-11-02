@@ -5,61 +5,61 @@
   "runs": [
     {
       "id": "shell-declarations",
-      "command": "C:\\FamilyQuant-gate\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --ledger-shell-compare D:/FamilyQuant-data/out-shell/N3/source D:/FamilyQuant-data/out-refresh\\20261102-130357-FamilyQuant-gate\\shell-compare \u00222026-11-02 13:04:43 -0800\u0022",
-      "executedAt": "2026-11-02 13:04:43 -0800",
-      "commit": "d3b71621ce6198f63f586cf062567a18103f9e72",
+      "command": "C:\\FamilyQuant-gate\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --ledger-shell-compare D:/FamilyQuant-data/out-shell/N3/source D:/FamilyQuant-data/out-refresh\\20261102-135654-FamilyQuant-gate\\shell-compare \u00222026-11-02 13:58:19 -0800\u0022",
+      "executedAt": "2026-11-02 13:58:19 -0800",
+      "commit": "4d28dbcc530f7cccc9dff5a9df676924c4b558f8",
       "artifacts": [
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-compare\\comparisons.log",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-compare\\comparisons.log",
           "sha256": "6E2FC1C285797B04CD40173760BB02C74834533D9CDCEF564C4870AB0A2AC5DA"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-compare\\comparisons.json",
-          "sha256": "AD9C0B3D2F3AD00D41E40727D6F7B7A6F6ACEDBBB3A003612C7BD63E82754AE0"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-compare\\comparisons.json",
+          "sha256": "32E29184EDCFC4BFA11BD829AB498821A316F9EC51D83180417837A112F13C36"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-compare\\curation-runtime.json",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-compare\\curation-runtime.json",
           "sha256": "4EF1BCE9EAFF5985013CD15A6B1CBFA29C34D7D42702007E522840A20879D128"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-compare\\executed\\Program.ShellLedgerReceipts.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-compare\\executed\\Program.ShellLedgerReceipts.cs",
           "sha256": "6C0E1250A4A019C4937A0CABEF9BA9078213B35E597781407B767279490D3EF3"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-compare\\executed\\Program.ShellLedgerComparison.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-compare\\executed\\Program.ShellLedgerComparison.cs",
           "sha256": "869FC668090431A23D08E8ED109B95BC937D9A6B94DE63E11E86672852649FEB"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-compare\\executed\\Program.Commands.LedgerDeclarations.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-compare\\executed\\Program.Commands.LedgerDeclarations.cs",
           "sha256": "5F18F4DD7E56E601368051AAD44866736DE2FA60C17A5550F4A330C98DABB3D4"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-compare\\executed\\Program.CurationScreen.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-compare\\executed\\Program.CurationScreen.cs",
           "sha256": "42C2CC3D48F2E59DC8E48D06915FE933C6A025F48972FDC3FB0458A0284FA2FF"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-compare\\executed\\LedgerDeclarationComparison.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-compare\\executed\\LedgerDeclarationComparison.cs",
           "sha256": "78EC993565740269D572410A84584AF1D96488C1AE81F2455B1D9AA2D94BB4C3"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-compare\\executed\\LedgerMemberFactComparison.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-compare\\executed\\LedgerMemberFactComparison.cs",
           "sha256": "1F3254D635B40D22576E9F40347DBEB503A5FF661EFC18E743EAC35B097FC14C"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-compare\\executed\\FeatureLedgerEvidence.Reporting.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-compare\\executed\\FeatureLedgerEvidence.Reporting.cs",
           "sha256": "E9A4F3A2A671452283E1C28E155B81DEF97F9BAE907945607C1F16DD0078CC12"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-compare\\executed\\FamilyQuant.Tests.dll",
-          "sha256": "338CB1ED8EE1B52F92368A79B99A6C1D2789A40AE07801AAB7226AA8B8A528A4"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-compare\\executed\\FamilyQuant.Tests.dll",
+          "sha256": "AF6B483E2C3E34036AD088F4ECCBB6B316270C6B911EA6D31A7EA222DB761AE2"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-compare\\executed\\FamilyQuant2.dll",
-          "sha256": "C0FF8144D05014240713CC94900258E162FF2B6F51DB01CA13758C4E0BD9784D"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-compare\\executed\\FamilyQuant2.dll",
+          "sha256": "8511AB784ACA1C6C07FD728C1CEB53E76C60D9A4A7EBE381AF9759D294F15C59"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-compare\\executed\\FamilyQuant.Core.dll",
-          "sha256": "B3DE904BB50477ACCB982BDE2CE437BA6962BB1DA44E7D260B992D1E188837BC"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-compare\\executed\\FamilyQuant.Core.dll",
+          "sha256": "743F2A4D78BAFC24B294E887663A75FE5A7BB4DA8B0ACF95EBF52F5BEE2DC116"
         }
       ],
       "workingDirectory": "C:\\FamilyQuant-gate"
@@ -133,12 +133,12 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "FamilyQuant.ClusterGenerationControl",
-          "sha256": "FC475D8417A728CC61528A1F8C49C467B1612D6C6E11462AA731A9284BFBCC48"
+          "sha256": "5D928F417023C396D37C10C3FA048C9EF00D36C21BCCD3D09AE647BAF881449D"
         },
         {
           "path": "FamilyQuant/ClusterGenerationControl.Presentation.cs",
           "symbol": "FamilyQuant.ClusterGenerationControl",
-          "sha256": "D57BEBE580E4A301DBBAD1350BDC91E7D1834A17CFEEDC9DE8EF5DC678933802"
+          "sha256": "163C3F79EC1A4885705484E029FB1814589A70F3A709C47680245E111BA4BB37"
         },
         {
           "path": "FamilyQuant/CurationViewModel.cs",
@@ -157,7 +157,7 @@
           "kind": "test",
           "target": "CurationScreenTests",
           "assertion": "a native protein annotation edit marks the document and records one Undo step",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-compare\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-compare\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -1529,7 +1529,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.Presentation.cs",
           "symbol": "FamilyQuant.ClusterGenerationControl::private void UpdateLockSummary ( )",
-          "sha256": "D57BEBE580E4A301DBBAD1350BDC91E7D1834A17CFEEDC9DE8EF5DC678933802"
+          "sha256": "163C3F79EC1A4885705484E029FB1814589A70F3A709C47680245E111BA4BB37"
         }
       ],
       "proofs": [],
@@ -1877,7 +1877,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.Presentation.cs",
           "symbol": "FamilyQuant.ClusterGenerationControl::private void UpdateLockSummary ( )",
-          "sha256": "D57BEBE580E4A301DBBAD1350BDC91E7D1834A17CFEEDC9DE8EF5DC678933802"
+          "sha256": "163C3F79EC1A4885705484E029FB1814589A70F3A709C47680245E111BA4BB37"
         }
       ],
       "proofs": [],
@@ -1907,7 +1907,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.Presentation.cs",
           "symbol": "FamilyQuant.ClusterGenerationControl::private void ApplyModeAvailability ( ComboBoxItem item , NormalizationMode mode , bool available , string ? unavailableReason = null )",
-          "sha256": "D57BEBE580E4A301DBBAD1350BDC91E7D1834A17CFEEDC9DE8EF5DC678933802"
+          "sha256": "163C3F79EC1A4885705484E029FB1814589A70F3A709C47680245E111BA4BB37"
         }
       ],
       "proofs": [],
@@ -2126,12 +2126,12 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "FamilyQuant.ClusterGenerationControl",
-          "sha256": "FC475D8417A728CC61528A1F8C49C467B1612D6C6E11462AA731A9284BFBCC48"
+          "sha256": "5D928F417023C396D37C10C3FA048C9EF00D36C21BCCD3D09AE647BAF881449D"
         },
         {
           "path": "FamilyQuant/ClusterGenerationControl.Presentation.cs",
           "symbol": "FamilyQuant.ClusterGenerationControl",
-          "sha256": "D57BEBE580E4A301DBBAD1350BDC91E7D1834A17CFEEDC9DE8EF5DC678933802"
+          "sha256": "163C3F79EC1A4885705484E029FB1814589A70F3A709C47680245E111BA4BB37"
         },
         {
           "path": "FamilyQuant/CurationViewModel.cs",
@@ -2150,7 +2150,7 @@
           "kind": "test",
           "target": "CurationScreenTests",
           "assertion": "curation shows accession in Locus while retaining the complete protein identifier",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-compare\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-compare\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -2550,7 +2550,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.Presentation.cs",
           "symbol": "FamilyQuant.ClusterGenerationControl::private void UpdateLockSummary ( )",
-          "sha256": "D57BEBE580E4A301DBBAD1350BDC91E7D1834A17CFEEDC9DE8EF5DC678933802"
+          "sha256": "163C3F79EC1A4885705484E029FB1814589A70F3A709C47680245E111BA4BB37"
         }
       ],
       "proofs": [],
@@ -2744,7 +2744,7 @@
         {
           "path": "FamilyQuant/CurationQuantitationPanel.xaml",
           "symbol": "FamilyQuant.CurationQuantitationPanel.FullXicBasisTic.Content",
-          "sha256": "0888694E19AD785E8D3EE32CC9BC45E12893F81B7C7C9BEADC34FF5B7029E8ED"
+          "sha256": "92E9D5C4EDC997866F22E2EA0EE0F4C2F18436CD0D6447FF466F14F9C2C1D2D8"
         }
       ],
       "proofs": [],
@@ -2774,7 +2774,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "FamilyQuant.ClusterGenerationControl::public void ShowHelp ( )",
-          "sha256": "FC475D8417A728CC61528A1F8C49C467B1612D6C6E11462AA731A9284BFBCC48"
+          "sha256": "5D928F417023C396D37C10C3FA048C9EF00D36C21BCCD3D09AE647BAF881449D"
         }
       ],
       "proofs": [],
@@ -2913,12 +2913,12 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "FamilyQuant.ClusterGenerationControl",
-          "sha256": "FC475D8417A728CC61528A1F8C49C467B1612D6C6E11462AA731A9284BFBCC48"
+          "sha256": "5D928F417023C396D37C10C3FA048C9EF00D36C21BCCD3D09AE647BAF881449D"
         },
         {
           "path": "FamilyQuant/ClusterGenerationControl.Presentation.cs",
           "symbol": "FamilyQuant.ClusterGenerationControl",
-          "sha256": "D57BEBE580E4A301DBBAD1350BDC91E7D1834A17CFEEDC9DE8EF5DC678933802"
+          "sha256": "163C3F79EC1A4885705484E029FB1814589A70F3A709C47680245E111BA4BB37"
         },
         {
           "path": "FamilyQuant/CurationViewModel.cs",
@@ -2937,7 +2937,7 @@
           "kind": "test",
           "target": "CurationScreenTests",
           "assertion": "a native protein annotation edit marks the document and records one Undo step",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-compare\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-compare\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -3053,7 +3053,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.Presentation.cs",
           "symbol": "FamilyQuant.ClusterGenerationControl::private void UpdateLockSummary ( )",
-          "sha256": "D57BEBE580E4A301DBBAD1350BDC91E7D1834A17CFEEDC9DE8EF5DC678933802"
+          "sha256": "163C3F79EC1A4885705484E029FB1814589A70F3A709C47680245E111BA4BB37"
         }
       ],
       "proofs": [],
@@ -3606,12 +3606,12 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "FamilyQuant.ClusterGenerationControl",
-          "sha256": "FC475D8417A728CC61528A1F8C49C467B1612D6C6E11462AA731A9284BFBCC48"
+          "sha256": "5D928F417023C396D37C10C3FA048C9EF00D36C21BCCD3D09AE647BAF881449D"
         },
         {
           "path": "FamilyQuant/ClusterGenerationControl.Presentation.cs",
           "symbol": "FamilyQuant.ClusterGenerationControl",
-          "sha256": "D57BEBE580E4A301DBBAD1350BDC91E7D1834A17CFEEDC9DE8EF5DC678933802"
+          "sha256": "163C3F79EC1A4885705484E029FB1814589A70F3A709C47680245E111BA4BB37"
         },
         {
           "path": "FamilyQuant/CurationViewModel.cs",
@@ -3630,7 +3630,7 @@
           "kind": "test",
           "target": "CurationScreenTests",
           "assertion": "Undo restores the edited protein annotation and emits one more document change",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-compare\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-compare\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -3660,7 +3660,7 @@
         {
           "path": "FamilyQuant/CurationQuantitationPanel.xaml",
           "symbol": "FamilyQuant.CurationQuantitationPanel.FullXicBasisQuantified.Content",
-          "sha256": "0888694E19AD785E8D3EE32CC9BC45E12893F81B7C7C9BEADC34FF5B7029E8ED"
+          "sha256": "92E9D5C4EDC997866F22E2EA0EE0F4C2F18436CD0D6447FF466F14F9C2C1D2D8"
         }
       ],
       "proofs": [],
@@ -3717,12 +3717,12 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "FamilyQuant.ClusterGenerationControl",
-          "sha256": "FC475D8417A728CC61528A1F8C49C467B1612D6C6E11462AA731A9284BFBCC48"
+          "sha256": "5D928F417023C396D37C10C3FA048C9EF00D36C21BCCD3D09AE647BAF881449D"
         },
         {
           "path": "FamilyQuant/ClusterGenerationControl.Presentation.cs",
           "symbol": "FamilyQuant.ClusterGenerationControl",
-          "sha256": "D57BEBE580E4A301DBBAD1350BDC91E7D1834A17CFEEDC9DE8EF5DC678933802"
+          "sha256": "163C3F79EC1A4885705484E029FB1814589A70F3A709C47680245E111BA4BB37"
         },
         {
           "path": "FamilyQuant/CurationViewModel.cs",
@@ -3741,7 +3741,7 @@
           "kind": "test",
           "target": "CurationScreenTests",
           "assertion": "curation hides search IDs and decoys by default while keeping all document rows",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-compare\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-compare\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -3878,12 +3878,12 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "FamilyQuant.ClusterGenerationControl",
-          "sha256": "FC475D8417A728CC61528A1F8C49C467B1612D6C6E11462AA731A9284BFBCC48"
+          "sha256": "5D928F417023C396D37C10C3FA048C9EF00D36C21BCCD3D09AE647BAF881449D"
         },
         {
           "path": "FamilyQuant/ClusterGenerationControl.Presentation.cs",
           "symbol": "FamilyQuant.ClusterGenerationControl",
-          "sha256": "D57BEBE580E4A301DBBAD1350BDC91E7D1834A17CFEEDC9DE8EF5DC678933802"
+          "sha256": "163C3F79EC1A4885705484E029FB1814589A70F3A709C47680245E111BA4BB37"
         },
         {
           "path": "FamilyQuant/CurationViewModel.cs",
@@ -3902,7 +3902,7 @@
           "kind": "test",
           "target": "CurationScreenTests",
           "assertion": "curation hides search IDs and decoys by default while keeping all document rows",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-compare\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-compare\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -4104,7 +4104,7 @@
         {
           "path": "FamilyQuant/CurationQuantitationPanel.xaml",
           "symbol": "FamilyQuant.CurationQuantitationPanel.ButtonRecalculateQuantitation.IsEnabled",
-          "sha256": "0888694E19AD785E8D3EE32CC9BC45E12893F81B7C7C9BEADC34FF5B7029E8ED"
+          "sha256": "92E9D5C4EDC997866F22E2EA0EE0F4C2F18436CD0D6447FF466F14F9C2C1D2D8"
         }
       ],
       "proofs": [],
@@ -4345,12 +4345,12 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "FamilyQuant.ClusterGenerationControl",
-          "sha256": "FC475D8417A728CC61528A1F8C49C467B1612D6C6E11462AA731A9284BFBCC48"
+          "sha256": "5D928F417023C396D37C10C3FA048C9EF00D36C21BCCD3D09AE647BAF881449D"
         },
         {
           "path": "FamilyQuant/ClusterGenerationControl.Presentation.cs",
           "symbol": "FamilyQuant.ClusterGenerationControl",
-          "sha256": "D57BEBE580E4A301DBBAD1350BDC91E7D1834A17CFEEDC9DE8EF5DC678933802"
+          "sha256": "163C3F79EC1A4885705484E029FB1814589A70F3A709C47680245E111BA4BB37"
         },
         {
           "path": "FamilyQuant/CurationViewModel.cs",
@@ -4369,7 +4369,7 @@
           "kind": "test",
           "target": "CurationScreenTests",
           "assertion": "curation always shows its table without Controls or Data Browser tabs",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-compare\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-compare\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -4436,12 +4436,12 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "FamilyQuant.ClusterGenerationControl",
-          "sha256": "FC475D8417A728CC61528A1F8C49C467B1612D6C6E11462AA731A9284BFBCC48"
+          "sha256": "5D928F417023C396D37C10C3FA048C9EF00D36C21BCCD3D09AE647BAF881449D"
         },
         {
           "path": "FamilyQuant/ClusterGenerationControl.Presentation.cs",
           "symbol": "FamilyQuant.ClusterGenerationControl",
-          "sha256": "D57BEBE580E4A301DBBAD1350BDC91E7D1834A17CFEEDC9DE8EF5DC678933802"
+          "sha256": "163C3F79EC1A4885705484E029FB1814589A70F3A709C47680245E111BA4BB37"
         },
         {
           "path": "FamilyQuant/CurationViewModel.cs",
@@ -4460,7 +4460,7 @@
           "kind": "test",
           "target": "CurationScreenTests",
           "assertion": "curation shows accession in Locus while retaining the complete protein identifier",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-compare\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-compare\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -4539,12 +4539,12 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "FamilyQuant.ClusterGenerationControl",
-          "sha256": "FC475D8417A728CC61528A1F8C49C467B1612D6C6E11462AA731A9284BFBCC48"
+          "sha256": "5D928F417023C396D37C10C3FA048C9EF00D36C21BCCD3D09AE647BAF881449D"
         },
         {
           "path": "FamilyQuant/ClusterGenerationControl.Presentation.cs",
           "symbol": "FamilyQuant.ClusterGenerationControl",
-          "sha256": "D57BEBE580E4A301DBBAD1350BDC91E7D1834A17CFEEDC9DE8EF5DC678933802"
+          "sha256": "163C3F79EC1A4885705484E029FB1814589A70F3A709C47680245E111BA4BB37"
         },
         {
           "path": "FamilyQuant/CurationViewModel.cs",
@@ -4563,7 +4563,7 @@
           "kind": "test",
           "target": "CurationScreenTests",
           "assertion": "Undo restores the edited protein annotation and emits one more document change",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-compare\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-compare\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -4577,7 +4577,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.Presentation.cs",
           "symbol": "FamilyQuant.ClusterGenerationControl::private void ApplyModeAvailability ( ComboBoxItem item , NormalizationMode mode , bool available , string ? unavailableReason = null )",
-          "sha256": "D57BEBE580E4A301DBBAD1350BDC91E7D1834A17CFEEDC9DE8EF5DC678933802"
+          "sha256": "163C3F79EC1A4885705484E029FB1814589A70F3A709C47680245E111BA4BB37"
         }
       ],
       "proofs": [],
@@ -4604,12 +4604,12 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "FamilyQuant.ClusterGenerationControl",
-          "sha256": "FC475D8417A728CC61528A1F8C49C467B1612D6C6E11462AA731A9284BFBCC48"
+          "sha256": "5D928F417023C396D37C10C3FA048C9EF00D36C21BCCD3D09AE647BAF881449D"
         },
         {
           "path": "FamilyQuant/ClusterGenerationControl.Presentation.cs",
           "symbol": "FamilyQuant.ClusterGenerationControl",
-          "sha256": "D57BEBE580E4A301DBBAD1350BDC91E7D1834A17CFEEDC9DE8EF5DC678933802"
+          "sha256": "163C3F79EC1A4885705484E029FB1814589A70F3A709C47680245E111BA4BB37"
         },
         {
           "path": "FamilyQuant/CurationViewModel.cs",
@@ -4628,7 +4628,7 @@
           "kind": "test",
           "target": "CurationScreenTests",
           "assertion": "Undo restores the edited protein annotation and emits one more document change",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-compare\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-compare\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -4968,7 +4968,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.Presentation.cs",
           "symbol": "FamilyQuant.ClusterGenerationControl::private void ApplyModeAvailability ( ComboBoxItem item , NormalizationMode mode , bool available , string ? unavailableReason = null )",
-          "sha256": "D57BEBE580E4A301DBBAD1350BDC91E7D1834A17CFEEDC9DE8EF5DC678933802"
+          "sha256": "163C3F79EC1A4885705484E029FB1814589A70F3A709C47680245E111BA4BB37"
         }
       ],
       "proofs": [],
@@ -5171,7 +5171,7 @@
           "kind": "test",
           "target": "ShellLedgerComparisonCommand",
           "assertion": "shell declaration kind code fact: every listed matched observation retains its exact declaration",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-compare\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-compare\\comparisons.log",
           "inspectedBy": ""
         }
       ]
@@ -5185,7 +5185,7 @@
           "kind": "test",
           "target": "ShellLedgerComparisonCommand",
           "assertion": "shell declaration kind column: every listed matched observation retains its exact declaration",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-compare\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-compare\\comparisons.log",
           "inspectedBy": ""
         }
       ]
@@ -5199,7 +5199,7 @@
           "kind": "test",
           "target": "ShellLedgerComparisonCommand",
           "assertion": "shell declaration kind option/copy: every listed matched observation retains its exact declaration",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-compare\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-compare\\comparisons.log",
           "inspectedBy": ""
         }
       ]
@@ -5213,7 +5213,7 @@
           "kind": "test",
           "target": "ShellLedgerComparisonCommand",
           "assertion": "shell declaration kind tooltip: every listed matched observation retains its exact declaration",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-compare\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-compare\\comparisons.log",
           "inspectedBy": ""
         }
       ]

@@ -362,13 +362,14 @@ namespace FamilyQuant
 
         private async void ButtonRecalculateQuantitation_Click(object sender, RoutedEventArgs e)
         {
-            if (CurrentPLP == null) { ShowCurationOperationResult("Load a PatternLab project before recalculating its shares."); return; }
+            if (CurrentPLP == null) { ShowCurationOperationResult("In Families, open Quantitation > PatternLab (optional) and press Load PatternLab project before recalculating its shares."); return; }
             await RunCurationAsync("Recalculate family shares", async operation =>
             {
                 var prepared = await Quantitation.PrepareRecalculationAsync(SelectedMode, SelectedSharedPolicy, operation);
                 operation.Commit(() =>
                 {
                     Quantitation.PublishRecalculation(prepared);
+                    lastRecalculationFailed = false;
                     DataGridResultGrid.Items.Refresh(); UpdateColumnHeaders(); UpdateFilteredResults(); UpdateLayerStates();
                     ViewModel.NotifyDocumentChanged();
                 });
@@ -378,13 +379,21 @@ namespace FamilyQuant
 
         private void RecalculateQuantitationInternal()
         {
+            RecalculateWithFeedback("The family shares could not be recalculated");
+        }
+
+        private bool lastRecalculationFailed;
+
+        private void RecalculateWithFeedback(string failure)
+        {
+            lastRecalculationFailed = false;
             if (CurrentPLP == null) return;
             try
             {
                 Quantitation.Recalculate(SelectedMode, SelectedSharedPolicy);
                 DataGridResultGrid.Items.Refresh(); UpdateColumnHeaders(); UpdateFilteredResults(); UpdateLayerStates();
             }
-            catch (Exception ex) { ShowCurationOperationResult("The family shares could not be recalculated: " + ex.Message); }
+            catch (Exception ex) { lastRecalculationFailed = true; ShowCurationOperationResult(CurationFeedback.RecalculationFailure(failure, ex)); }
         }
 
         // ===================================================================== loading
@@ -401,6 +410,7 @@ namespace FamilyQuant
                 operation.Commit(() =>
                 {
                     Quantitation.PublishPatternLab(prepared);
+                    lastRecalculationFailed = false;
                     UpdateReportingModeAvailability(prepared.Profile);
                     QuantitationPanel.TextBlockQuantProfile.Text = prepared.Profile.Summary();
                     QuantitationPanel.TextBlockPLPStatus.Text = "Loaded: " + Path.GetFileName(dialog.FileName);
@@ -409,8 +419,7 @@ namespace FamilyQuant
                     QuantitationPanel.ButtonRecalculateQuantitation.IsEnabled = true;
                     ViewModel.NotifyDocumentChanged(); UpdateGUI();
                 });
-                ShowCurationOperationResult("PatternLab project loaded. " + prepared.Profile.DenominatorSentence()
-                    + (prepared.Profile.CanReportTotalChromatogram ? "" : " TIC reporting is unavailable; hover the mode for its reason."));
+                ShowCurationOperationResult(CurationFeedback.PatternLabLoaded(prepared.Profile, prepared.Mode));
             });
         }
 
@@ -432,7 +441,7 @@ namespace FamilyQuant
                     AppOperationFiles.WriteFile(dialog.FileName, temporary => File.WriteAllText(temporary, csv, Encoding.UTF8), operation);
                 }, operation.CancellationToken);
                 ShowCurationOperationResult(rows.Count.ToString("N0", CultureInfo.CurrentCulture) + " protein rows exported to " + dialog.FileName
-                    + ". Shares are fractional values with an invariant decimal point.");
+                    + "; shares are fractional values with an invariant decimal point. The table displays the same numbers as percentages in your own language; open the CSV in a spreadsheet, R or Python.");
             });
         }
 
@@ -564,7 +573,7 @@ namespace FamilyQuant
         {
             if (!ViewModel.CanUndo) return;
             ViewModel.Undo();
-            if (CurrentPLP != null) RecalculateQuantitationInternal();
+            if (CurrentPLP != null) RecalculateWithFeedback("The grouping was stepped back, but the family shares could not be recalculated");
             UpdateGUI();
         }
 
@@ -580,7 +589,7 @@ namespace FamilyQuant
             var outcome = ViewModel.ApplyBatch(DataGridResultGrid.SelectedItems.OfType<FastaItemExtended>().Distinct().ToList(),
                 TextBoxBatchUserId.Text ?? string.Empty, TextBoxBatchAnnotation.Text ?? string.Empty);
             TextBlockBatchStatus.Text = outcome.Status;
-            if (outcome.Changed && CurrentPLP != null) RecalculateQuantitationInternal();
+            if (outcome.Changed && CurrentPLP != null) RecalculateWithFeedback("The rows were changed, but the family shares could not be recalculated");
             UpdateGUI();
         }
 
@@ -629,7 +638,7 @@ namespace FamilyQuant
         private async Task AlignSelectedAsyncCore()
         {
             var selected = DataGridResultGrid.SelectedItems.OfType<FastaItemExtended>().ToList();
-            if (selected.Count < 2) { ShowCurationOperationResult("Select at least two proteins before aligning their sequences."); return; }
+            if (selected.Count < 2) { ShowCurationOperationResult(selected.Count.ToString("N0", CultureInfo.CurrentCulture) + " row(s) are selected. Select at least two proteins before aligning their sequences."); return; }
             string? alignment = null;
             bool completed = await RunCurationAsync("Align selected proteins", async operation =>
             {
@@ -638,7 +647,7 @@ namespace FamilyQuant
                 operation.ThrowIfCancellationRequested();
             });
             if (completed && alignment != null)
-                TextReportWindow.Show("Multiple sequence alignment", alignment, Window.GetWindow(this));
+                TextReportWindow.Show("Multiple sequence alignment: " + selected.Count.ToString("N0", CultureInfo.CurrentCulture) + " sequences", alignment, Window.GetWindow(this));
         }
 
         private async void ButtonWordCluster_Click(object sender, RoutedEventArgs e)
@@ -734,7 +743,7 @@ namespace FamilyQuant
                 string message = await ViewModel.ReclusterByWordsAsync(threshold, wordsToExclude,
                     operation.CancellationToken, operation.Commit);
                 operation.Report("grouping", "Refreshing the family shares");
-                AfterRegrouping(); ShowCurationOperationResult(message);
+                AfterRegrouping(); ShowGroupingCompletion(message);
             });
         }
 
@@ -747,7 +756,7 @@ namespace FamilyQuant
             try
             {
                 CurationOperation.Commit(() => { ViewModel.ApplyKeywordReview(preview); AfterRegrouping(); });
-                ShowCurationOperationResult("Keyword grouping applied. Undo restores the previous families.");
+                ShowGroupingCompletion("Keyword grouping applied. Undo restores the previous families.");
             }
             finally { EndWait(); }
         }
@@ -779,6 +788,7 @@ namespace FamilyQuant
         /// <summary>What every regrouping ends with: the numbers on screen follow the new families.</summary>
         private void AfterRegrouping()
         {
+            lastRecalculationFailed = false;
             // Recalculate XIC if we have quantitation data. The lookups do NOT need rebuilding here:
             // reclustering changes family membership, not the protein-to-peptide map, and rebuilding
             // threw away the memoised per-peptide XICs on every single reclustering.
@@ -786,7 +796,7 @@ namespace FamilyQuant
             {
                 try
                 {
-                    RecalculateQuantitationInternal();
+                    RecalculateWithFeedback("The families were regrouped, but their shares could not be recalculated");
                 }
                 catch (Exception ex)
                 {
@@ -802,6 +812,12 @@ namespace FamilyQuant
             }
 
             UpdateGUI();
+        }
+
+        private void ShowGroupingCompletion(string message)
+        {
+            if (!lastRecalculationFailed)
+                ShowCurationOperationResult(message + (CurrentPLP == null ? "" : " Family shares were recalculated over the new grouping."));
         }
     }
 }

@@ -5,52 +5,52 @@
   "runs": [
     {
       "id": "text-tool",
-      "command": "C:\\FamilyQuant-gate\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --ledger-text-preserved D:/FamilyQuant-data/out-shell/N3/source D:/FamilyQuant-data/out-refresh\\20261102-130357-FamilyQuant-gate\\text-preserved \u00222026-11-02 13:05:44 -0800\u0022",
-      "executedAt": "2026-11-02 13:05:44 -0800",
-      "commit": "d3b71621ce6198f63f586cf062567a18103f9e72",
+      "command": "C:\\FamilyQuant-gate\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --ledger-text-preserved D:/FamilyQuant-data/out-shell/N3/source D:/FamilyQuant-data/out-refresh\\20261102-135654-FamilyQuant-gate\\text-preserved \u00222026-11-02 13:59:29 -0800\u0022",
+      "executedAt": "2026-11-02 13:59:29 -0800",
+      "commit": "4d28dbcc530f7cccc9dff5a9df676924c4b558f8",
       "artifacts": [
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\text-preserved\\text.log",
-          "sha256": "236F01BAF25A80B476A85C5FD1CEEFB804F0A075338D74F9FEC39141BDFF3E15"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\text-preserved\\text.log",
+          "sha256": "41B7710491529120B3031333092A130BDD72E6BB22F26B2CAA84C7F81CA37C6B"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\text-preserved\\text.json",
-          "sha256": "CDCD25EB1FB6FD75669A58BC6CAC1C880DBC50C47FA69FA60E2CF595216F5800"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\text-preserved\\text.json",
+          "sha256": "F7517872D9E061F6EC80FAE9ACCACBD7E394AD401FD96AE4A6D2A50CA6C78BC6"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\text-preserved\\executed\\FamilyQuant2.dll",
-          "sha256": "C0FF8144D05014240713CC94900258E162FF2B6F51DB01CA13758C4E0BD9784D"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\text-preserved\\executed\\FamilyQuant2.dll",
+          "sha256": "8511AB784ACA1C6C07FD728C1CEB53E76C60D9A4A7EBE381AF9759D294F15C59"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\text-preserved\\executed\\FamilyQuant2.pdb",
-          "sha256": "B882938DDF715555E6AF1E03C5A3B48D9AA21D4ACB9A17A3A6D7312C92386EE4"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\text-preserved\\executed\\FamilyQuant2.pdb",
+          "sha256": "57A02BAAE7975042ECA6BBFA86C178DF2D6A326184E34361225D43B0F71B2A79"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\text-preserved\\executed\\FamilyQuant.Core.dll",
-          "sha256": "B3DE904BB50477ACCB982BDE2CE437BA6962BB1DA44E7D260B992D1E188837BC"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\text-preserved\\executed\\FamilyQuant.Core.dll",
+          "sha256": "743F2A4D78BAFC24B294E887663A75FE5A7BB4DA8B0ACF95EBF52F5BEE2DC116"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\text-preserved\\executed\\FamilyQuant.Core.pdb",
-          "sha256": "28BFDA16392ECDDB44A9D0F865378FA35A0F9BE387732729B5A451AE54CF31BF"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\text-preserved\\executed\\FamilyQuant.Core.pdb",
+          "sha256": "23E8FCBFD99A2BE4A57748390C1DFB112D83DBFD89EB21CD549D7283C8CC82D0"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\text-preserved\\executed\\FamilyQuant.Tests.dll",
-          "sha256": "338CB1ED8EE1B52F92368A79B99A6C1D2789A40AE07801AAB7226AA8B8A528A4"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\text-preserved\\executed\\FamilyQuant.Tests.dll",
+          "sha256": "AF6B483E2C3E34036AD088F4ECCBB6B316270C6B911EA6D31A7EA222DB761AE2"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\text-preserved\\executed\\FamilyQuant.Tests/LedgerTextPreserved.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\text-preserved\\executed\\FamilyQuant.Tests/LedgerTextPreserved.cs",
           "sha256": "2CB78207901A4D7ACADF502A2EA634EFA79F3C1FC984986B33E5559BAD99FD21"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\text-preserved\\executed\\FamilyQuant.Tests/Program.LedgerTextPreserved.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\text-preserved\\executed\\FamilyQuant.Tests/Program.LedgerTextPreserved.cs",
           "sha256": "5DF4825EB752822347F0BCA69799D5F85074B6233EC741A6F9FC8186AE2BD721"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\text-preserved\\executed\\FamilyQuant.Tests/Program.Commands.LedgerTextPreserved.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\text-preserved\\executed\\FamilyQuant.Tests/Program.Commands.LedgerTextPreserved.cs",
           "sha256": "76B82F938173EA4E342000A363089B287BD5B2A897FDC8872B5EDB5319BB2F12"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\text-preserved\\executed\\FamilyQuant.Tests/FeatureLedgerEvidence.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\text-preserved\\executed\\FamilyQuant.Tests/FeatureLedgerEvidence.cs",
           "sha256": "2060D409570285CEAE8FA6ADF3F4A5173924C80C2A6A99B1856294055365174C"
         }
       ],
@@ -107,14 +107,6 @@
       "compared": null
     },
     {
-      "observationId": "FQ15-00D8DDAFB01A",
-      "implementation": [],
-      "proofs": [],
-      "note": "1 failed: the row records no literal text (kind handler definition)",
-      "kindReceiptId": null,
-      "compared": null
-    },
-    {
       "observationId": "FQ15-0201C432AC72",
       "implementation": [],
       "proofs": [],
@@ -139,14 +131,6 @@
       "compared": null
     },
     {
-      "observationId": "FQ15-02849424D2AA",
-      "implementation": [],
-      "proofs": [],
-      "note": "2 failed: the literal is compiled only in other members (FamilyQuant.DeNovoSession::ApplyHomology(FamilyQuant.DeNovoHomology)), not in member DeNovoControl.ApplyHomology",
-      "kindReceiptId": null,
-      "compared": null
-    },
-    {
       "observationId": "FQ15-02C518935F28",
       "implementation": [],
       "proofs": [],
@@ -159,14 +143,6 @@
       "implementation": [],
       "proofs": [],
       "note": "1 failed: no compiled XAML of its screen holds this element, property and value",
-      "kindReceiptId": null,
-      "compared": null
-    },
-    {
-      "observationId": "FQ15-02E2055621DE",
-      "implementation": [],
-      "proofs": [],
-      "note": "1 failed: a format string, separator or single word does not identify a fact by text alone",
       "kindReceiptId": null,
       "compared": null
     },
@@ -184,13 +160,13 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "FamilyQuant.ClusterGenerationControl::AfterRegrouping()",
-          "sha256": "FC475D8417A728CC61528A1F8C49C467B1612D6C6E11462AA731A9284BFBCC48"
+          "sha256": "5D928F417023C396D37C10C3FA048C9EF00D36C21BCCD3D09AE647BAF881449D"
         }
       ],
       "proofs": [],
       "note": "Frozen text in the compiled program, in its feature, reachable; no behavior, number or file claim.",
       "kindReceiptId": "text-code-fact",
-      "compared": "frozen literal \u0022The families were regrouped, but their percentages could not be recalculated, so the share column st...\u0022 (SHA256 A1D4B8D084D0A3DE) verbatim in FamilyQuant2.dll FamilyQuant.ClusterGenerationControl::AfterRegrouping() [FamilyQuant/ClusterGenerationControl.xaml.cs]; feature member ClusterGenerationControl.AfterRegrouping; reached as delegate FamilyQuant.ClusterGenerationControl/\u003C\u003Ec__DisplayClass194_0::\u003CPerformClustering\u003Eb__0(), 1 steps from the entry point"
+      "compared": "frozen literal \u0022The families were regrouped, but their percentages could not be recalculated, so the share column st...\u0022 (SHA256 A1D4B8D084D0A3DE) verbatim in FamilyQuant2.dll FamilyQuant.ClusterGenerationControl::AfterRegrouping() [FamilyQuant/ClusterGenerationControl.xaml.cs]; feature member ClusterGenerationControl.AfterRegrouping; reached as delegate FamilyQuant.ClusterGenerationControl/\u003C\u003Ec__DisplayClass196_0::\u003CPerformClustering\u003Eb__0(), 1 steps from the entry point"
     },
     {
       "observationId": "FQ15-0427FBB54F6C",
@@ -253,28 +229,6 @@
       "note": "1 failed: no compiled XAML of its screen holds this element, property and value",
       "kindReceiptId": null,
       "compared": null
-    },
-    {
-      "observationId": "FQ15-06879967CEB3",
-      "implementation": [],
-      "proofs": [],
-      "note": "2 failed: the literal is compiled only in other members (FamilyQuant.DeNovoViewModel/\u003CImportAsync\u003Ed__6::MoveNext()), not in member DeNovoControl.ButtonLoadAndFilter_Click",
-      "kindReceiptId": null,
-      "compared": null
-    },
-    {
-      "observationId": "FQ15-06AE82FB3921",
-      "implementation": [
-        {
-          "path": "FamilyQuant/DeNovoControl.Dialogs.cs",
-          "symbol": "FamilyQuant.DeNovoControl/\u003CExport\u003Ed__62::MoveNext()",
-          "sha256": "B714D7D9AA689F30D9EDFA2479D373824358521783DBBD267E209E34E91884A1"
-        }
-      ],
-      "proofs": [],
-      "note": "Frozen text in the compiled program, in its feature, reachable; no behavior, number or file claim.",
-      "kindReceiptId": "text-code-fact",
-      "compared": "frozen literal \u0022. Numbers use a dot for the decimal separator whatever your machine\u0027s language is, so any program ca...\u0022 (SHA256 3DDA587DA614A161) verbatim in FamilyQuant2.dll FamilyQuant.DeNovoControl/\u003CExport\u003Ed__62::MoveNext() [FamilyQuant/DeNovoControl.Dialogs.cs]; feature member DeNovoControl.Export; reached as xaml handler FamilyQuant.DeNovoControl::ButtonExportSummary_Click(Object,System.Windows.RoutedEventArgs), 2 steps from the entry point"
     },
     {
       "observationId": "FQ15-06B2D227813F",
@@ -353,22 +307,6 @@
       "implementation": [],
       "proofs": [],
       "note": "1 failed: no compiled XAML of its screen holds this element, property and value",
-      "kindReceiptId": null,
-      "compared": null
-    },
-    {
-      "observationId": "FQ15-0810195F9FCC",
-      "implementation": [],
-      "proofs": [],
-      "note": "1 failed: the frozen literal is not in the compiled program",
-      "kindReceiptId": null,
-      "compared": null
-    },
-    {
-      "observationId": "FQ15-0822C8BC887B",
-      "implementation": [],
-      "proofs": [],
-      "note": "1 failed: a format string, separator or single word does not identify a fact by text alone",
       "kindReceiptId": null,
       "compared": null
     },
@@ -493,22 +431,6 @@
       "compared": null
     },
     {
-      "observationId": "FQ15-0B73960109D5",
-      "implementation": [],
-      "proofs": [],
-      "note": "1 failed: the row records no literal text (kind handler definition)",
-      "kindReceiptId": null,
-      "compared": null
-    },
-    {
-      "observationId": "FQ15-0C5C9D5D65CF",
-      "implementation": [],
-      "proofs": [],
-      "note": "2 failed: the literal is compiled only in other members (FamilyQuant.DeNovoSession::ApplyImport(FamilyQuant.DeNovoImport)), not in member DeNovoControl.ApplyImport",
-      "kindReceiptId": null,
-      "compared": null
-    },
-    {
       "observationId": "FQ15-0CDE069B156D",
       "implementation": [],
       "proofs": [],
@@ -619,14 +541,6 @@
       "compared": null
     },
     {
-      "observationId": "FQ15-117504DF6278",
-      "implementation": [],
-      "proofs": [],
-      "note": "1 failed: the row records no literal text (kind handler definition)",
-      "kindReceiptId": null,
-      "compared": null
-    },
-    {
       "observationId": "FQ15-118B59DFACD0",
       "implementation": [],
       "proofs": [],
@@ -639,14 +553,6 @@
       "implementation": [],
       "proofs": [],
       "note": "2 failed: the literal is compiled only in other members (FamilyQuant.USearchLib/BuildActions/\u003CButtonDivideAndConquer_ClickAsync\u003Ed__8::MoveNext()), not in member USearchLib.ButtonDivideAndConquer_Click",
-      "kindReceiptId": null,
-      "compared": null
-    },
-    {
-      "observationId": "FQ15-119FAEF14CE8",
-      "implementation": [],
-      "proofs": [],
-      "note": "2 failed: the literal is compiled only in other members (FamilyQuant.DeNovoViewModel/\u003CImportAsync\u003Ed__6::MoveNext()), not in member DeNovoControl.ButtonLoadAndFilter_Click",
       "kindReceiptId": null,
       "compared": null
     },
@@ -897,26 +803,10 @@
       "compared": null
     },
     {
-      "observationId": "FQ15-17B4F3CB7F34",
-      "implementation": [],
-      "proofs": [],
-      "note": "1 failed: a format string, separator or single word does not identify a fact by text alone",
-      "kindReceiptId": null,
-      "compared": null
-    },
-    {
-      "observationId": "FQ15-17C426DBF63A",
-      "implementation": [],
-      "proofs": [],
-      "note": "1 failed: a format string, separator or single word does not identify a fact by text alone",
-      "kindReceiptId": null,
-      "compared": null
-    },
-    {
       "observationId": "FQ15-17EC4B65B611",
       "implementation": [],
       "proofs": [],
-      "note": "2 failed: the literal is compiled only in other members (FamilyQuant.DeNovoViewModel::get_HomologyState(), FamilyQuant.DeNovoViewModel::get_ReconcileState()), not in member DeNovoControl.UpdateLayerStates",
+      "note": "1 failed: the frozen literal is not in the compiled program",
       "kindReceiptId": null,
       "compared": null
     },
@@ -1038,13 +928,13 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "FamilyQuant.HelpContent::Build(FamilyQuant.QuantitationProfile,FamilyQuant.NormalizationMode,FamilyQuant.SharedPeptidePolicy)",
-          "sha256": "7FB07E60C4C75E69FB42F94FF0DF36563FB3BF474753543E53C857AA4A1CA086"
+          "sha256": "CC34DF8B1BB35DD835E393BAC533EDAE74650AC0AA04C867C83226DD426530D3"
         }
       ],
       "proofs": [],
       "note": "Frozen text in the compiled program, in its feature, reachable; no behavior, number or file claim.",
       "kindReceiptId": "text-help-fact",
-      "compared": "frozen literal \u0022PatternLab wrote down which divisor it had used, so the program worked it out\u0022 (SHA256 99ADB3A3CD58C4FB) verbatim in FamilyQuant.Core.dll FamilyQuant.HelpContent::Build(FamilyQuant.QuantitationProfile,FamilyQuant.NormalizationMode,FamilyQuant.SharedPeptidePolicy) [FamilyQuant.Core/HelpContent.cs]; feature member HelpContent.Build or HelpContent.Build; reached as delegate FamilyQuant.MainWindow::\u003CInitializeShellCommands\u003Eb__30_14(), 3 steps from the entry point"
+      "compared": "frozen literal \u0022PatternLab wrote down which divisor it had used, so the program worked it out\u0022 (SHA256 99ADB3A3CD58C4FB) verbatim in FamilyQuant.Core.dll FamilyQuant.HelpContent::Build(FamilyQuant.QuantitationProfile,FamilyQuant.NormalizationMode,FamilyQuant.SharedPeptidePolicy) [FamilyQuant.Core/HelpContent.cs]; feature member HelpContent.Build; reached as delegate FamilyQuant.MainWindow::\u003CInitializeShellCommands\u003Eb__30_14(), 3 steps from the entry point"
     },
     {
       "observationId": "FQ15-1AE62E2EE8BD",
@@ -1066,7 +956,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.Presentation.cs",
           "symbol": "FamilyQuant.ClusterGenerationControl::UpdateLayerStates()",
-          "sha256": "D57BEBE580E4A301DBBAD1350BDC91E7D1834A17CFEEDC9DE8EF5DC678933802"
+          "sha256": "163C3F79EC1A4885705484E029FB1814589A70F3A709C47680245E111BA4BB37"
         }
       ],
       "proofs": [],
@@ -1079,14 +969,6 @@
       "implementation": [],
       "proofs": [],
       "note": "2 failed: the literal is compiled only in other members (FamilyQuant.USearchLib/BuildActions/\u003CButtonDivideAndConquer_ClickAsync\u003Ed__8::MoveNext()), not in member USearchLib.ButtonDivideAndConquer_Click",
-      "kindReceiptId": null,
-      "compared": null
-    },
-    {
-      "observationId": "FQ15-1BB1BBFE77DF",
-      "implementation": [],
-      "proofs": [],
-      "note": "1 failed: the row records no literal text (kind handler definition)",
       "kindReceiptId": null,
       "compared": null
     },
@@ -1203,26 +1085,18 @@
       "compared": null
     },
     {
-      "observationId": "FQ15-1E61FC693B2F",
-      "implementation": [],
-      "proofs": [],
-      "note": "2 failed: the literal is compiled only in other members (FamilyQuant.DeNovoSession::SourceChanged()), not in member DeNovoControl.UpdateSourceUi",
-      "kindReceiptId": null,
-      "compared": null
-    },
-    {
       "observationId": "FQ15-1E6D90635150",
       "implementation": [
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "FamilyQuant.ClusterGenerationControl::AfterRegrouping()",
-          "sha256": "FC475D8417A728CC61528A1F8C49C467B1612D6C6E11462AA731A9284BFBCC48"
+          "sha256": "5D928F417023C396D37C10C3FA048C9EF00D36C21BCCD3D09AE647BAF881449D"
         }
       ],
       "proofs": [],
       "note": "Frozen text in the compiled program, in its feature, reachable; no behavior, number or file claim.",
       "kindReceiptId": "text-code-fact",
-      "compared": "frozen literal \u0022The families were regrouped, but their percentages could not be recalculated, so the share column st...\u0022 (SHA256 A1D4B8D084D0A3DE) verbatim in FamilyQuant2.dll FamilyQuant.ClusterGenerationControl::AfterRegrouping() [FamilyQuant/ClusterGenerationControl.xaml.cs]; feature member ClusterGenerationControl.AfterRegrouping; reached as delegate FamilyQuant.ClusterGenerationControl/\u003C\u003Ec__DisplayClass194_0::\u003CPerformClustering\u003Eb__0(), 1 steps from the entry point"
+      "compared": "frozen literal \u0022The families were regrouped, but their percentages could not be recalculated, so the share column st...\u0022 (SHA256 A1D4B8D084D0A3DE) verbatim in FamilyQuant2.dll FamilyQuant.ClusterGenerationControl::AfterRegrouping() [FamilyQuant/ClusterGenerationControl.xaml.cs]; feature member ClusterGenerationControl.AfterRegrouping; reached as delegate FamilyQuant.ClusterGenerationControl/\u003C\u003Ec__DisplayClass196_0::\u003CPerformClustering\u003Eb__0(), 1 steps from the entry point"
     },
     {
       "observationId": "FQ15-1EA3C134F3CD",
@@ -1230,7 +1104,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "FamilyQuant.ClusterGenerationControl::DataGridResultGrid_CellEditEnding(Object,System.Windows.Controls.DataGridCellEditEndingEventArgs)",
-          "sha256": "FC475D8417A728CC61528A1F8C49C467B1612D6C6E11462AA731A9284BFBCC48"
+          "sha256": "5D928F417023C396D37C10C3FA048C9EF00D36C21BCCD3D09AE647BAF881449D"
         }
       ],
       "proofs": [],
@@ -1243,14 +1117,6 @@
       "implementation": [],
       "proofs": [],
       "note": "1 failed: a format string, separator or single word does not identify a fact by text alone",
-      "kindReceiptId": null,
-      "compared": null
-    },
-    {
-      "observationId": "FQ15-1EEC74BA5E8B",
-      "implementation": [],
-      "proofs": [],
-      "note": "1 failed: the row records no literal text (kind handler definition)",
       "kindReceiptId": null,
       "compared": null
     },
@@ -1313,14 +1179,6 @@
       "implementation": [],
       "proofs": [],
       "note": "1 failed: no compiled XAML of its screen holds this element, property and value",
-      "kindReceiptId": null,
-      "compared": null
-    },
-    {
-      "observationId": "FQ15-21059FDA8FDC",
-      "implementation": [],
-      "proofs": [],
-      "note": "1 failed: the row records no literal text (kind handler definition)",
       "kindReceiptId": null,
       "compared": null
     },
@@ -1424,7 +1282,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.Presentation.cs",
           "symbol": "FamilyQuant.ClusterGenerationControl::UpdateLayerStates()",
-          "sha256": "D57BEBE580E4A301DBBAD1350BDC91E7D1834A17CFEEDC9DE8EF5DC678933802"
+          "sha256": "163C3F79EC1A4885705484E029FB1814589A70F3A709C47680245E111BA4BB37"
         }
       ],
       "proofs": [],
@@ -1509,14 +1367,6 @@
       "compared": null
     },
     {
-      "observationId": "FQ15-262AE3B154CA",
-      "implementation": [],
-      "proofs": [],
-      "note": "1 failed: the row records no literal text (kind handler)",
-      "kindReceiptId": null,
-      "compared": null
-    },
-    {
       "observationId": "FQ15-263A0C53BE00",
       "implementation": [],
       "proofs": [],
@@ -1538,13 +1388,13 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "FamilyQuant.ClusterGenerationControl::AfterRegrouping()",
-          "sha256": "FC475D8417A728CC61528A1F8C49C467B1612D6C6E11462AA731A9284BFBCC48"
+          "sha256": "5D928F417023C396D37C10C3FA048C9EF00D36C21BCCD3D09AE647BAF881449D"
         }
       ],
       "proofs": [],
       "note": "Frozen text in the compiled program, in its feature, reachable; no behavior, number or file claim.",
       "kindReceiptId": "text-code-fact",
-      "compared": "frozen literal \u0022Regrouped, but not recalculated\u0022 (SHA256 A4622A4D2C50551F) verbatim in FamilyQuant2.dll FamilyQuant.ClusterGenerationControl::AfterRegrouping() [FamilyQuant/ClusterGenerationControl.xaml.cs]; feature member ClusterGenerationControl.AfterRegrouping; reached as delegate FamilyQuant.ClusterGenerationControl/\u003C\u003Ec__DisplayClass194_0::\u003CPerformClustering\u003Eb__0(), 1 steps from the entry point"
+      "compared": "frozen literal \u0022Regrouped, but not recalculated\u0022 (SHA256 A4622A4D2C50551F) verbatim in FamilyQuant2.dll FamilyQuant.ClusterGenerationControl::AfterRegrouping() [FamilyQuant/ClusterGenerationControl.xaml.cs]; feature member ClusterGenerationControl.AfterRegrouping; reached as delegate FamilyQuant.ClusterGenerationControl/\u003C\u003Ec__DisplayClass196_0::\u003CPerformClustering\u003Eb__0(), 1 steps from the entry point"
     },
     {
       "observationId": "FQ15-26CEF1599F8D",
@@ -1585,14 +1435,6 @@
       "compared": null
     },
     {
-      "observationId": "FQ15-27B79D3CDC99",
-      "implementation": [],
-      "proofs": [],
-      "note": "1 failed: a format string, separator or single word does not identify a fact by text alone",
-      "kindReceiptId": null,
-      "compared": null
-    },
-    {
       "observationId": "FQ15-27BC9FC2E026",
       "implementation": [],
       "proofs": [],
@@ -1606,13 +1448,13 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "FamilyQuant.HelpContent::Build(FamilyQuant.QuantitationProfile,FamilyQuant.NormalizationMode,FamilyQuant.SharedPeptidePolicy)",
-          "sha256": "7FB07E60C4C75E69FB42F94FF0DF36563FB3BF474753543E53C857AA4A1CA086"
+          "sha256": "CC34DF8B1BB35DD835E393BAC533EDAE74650AC0AA04C867C83226DD426530D3"
         }
       ],
       "proofs": [],
       "note": "Frozen text in the compiled program, in its feature, reachable; no behavior, number or file claim.",
       "kindReceiptId": "text-help-fact",
-      "compared": "frozen literal \u0022from the size of the numbers. That is a guess, and it is labelled as one\u0022 (SHA256 3A936AE2B387840D) verbatim in FamilyQuant.Core.dll FamilyQuant.HelpContent::Build(FamilyQuant.QuantitationProfile,FamilyQuant.NormalizationMode,FamilyQuant.SharedPeptidePolicy) [FamilyQuant.Core/HelpContent.cs]; feature member HelpContent.Build or HelpContent.Build; reached as delegate FamilyQuant.MainWindow::\u003CInitializeShellCommands\u003Eb__30_14(), 3 steps from the entry point"
+      "compared": "frozen literal \u0022from the size of the numbers. That is a guess, and it is labelled as one\u0022 (SHA256 3A936AE2B387840D) verbatim in FamilyQuant.Core.dll FamilyQuant.HelpContent::Build(FamilyQuant.QuantitationProfile,FamilyQuant.NormalizationMode,FamilyQuant.SharedPeptidePolicy) [FamilyQuant.Core/HelpContent.cs]; feature member HelpContent.Build; reached as delegate FamilyQuant.MainWindow::\u003CInitializeShellCommands\u003Eb__30_14(), 3 steps from the entry point"
     },
     {
       "observationId": "FQ15-286D7AEE802F",
@@ -1631,26 +1473,10 @@
       "compared": null
     },
     {
-      "observationId": "FQ15-28935611B5AB",
-      "implementation": [],
-      "proofs": [],
-      "note": "1 failed: a format string, separator or single word does not identify a fact by text alone",
-      "kindReceiptId": null,
-      "compared": null
-    },
-    {
       "observationId": "FQ15-28B0AC264D9E",
       "implementation": [],
       "proofs": [],
       "note": "2 failed: the literal is compiled only in other members (FamilyQuant.DeNovoViewModel/\u003CReconcileAsync\u003Ed__7::MoveNext()), not in member DeNovoControl.ButtonReconcile_Click",
-      "kindReceiptId": null,
-      "compared": null
-    },
-    {
-      "observationId": "FQ15-29C1749EE42B",
-      "implementation": [],
-      "proofs": [],
-      "note": "2 failed: the literal is compiled only in other members (FamilyQuant.DeNovoViewModel/\u003CImportAsync\u003Ed__6::MoveNext()), not in member DeNovoControl.ButtonLoadAndFilter_Click",
       "kindReceiptId": null,
       "compared": null
     },
@@ -1664,14 +1490,6 @@
     },
     {
       "observationId": "FQ15-29D75A50622D",
-      "implementation": [],
-      "proofs": [],
-      "note": "1 failed: the frozen literal is not in the compiled program",
-      "kindReceiptId": null,
-      "compared": null
-    },
-    {
-      "observationId": "FQ15-29D794690DFE",
       "implementation": [],
       "proofs": [],
       "note": "1 failed: the frozen literal is not in the compiled program",
@@ -1897,26 +1715,10 @@
       "compared": null
     },
     {
-      "observationId": "FQ15-30FDAA0FC251",
-      "implementation": [],
-      "proofs": [],
-      "note": "2 failed: the literal is compiled only in other members (FamilyQuant.DeNovoViewModel/\u003CImportAsync\u003Ed__6::MoveNext()), not in member DeNovoControl.ButtonLoadAndFilter_Click",
-      "kindReceiptId": null,
-      "compared": null
-    },
-    {
       "observationId": "FQ15-314DD5AC7F57",
       "implementation": [],
       "proofs": [],
       "note": "2 failed: the literal is compiled only in other members (FamilyQuant.USearchLib/BuildActions/\u003CButtonDivideAndConquer_ClickAsync\u003Ed__8::MoveNext()), not in member USearchLib.ButtonDivideAndConquer_Click",
-      "kindReceiptId": null,
-      "compared": null
-    },
-    {
-      "observationId": "FQ15-319497A8B500",
-      "implementation": [],
-      "proofs": [],
-      "note": "1 failed: a format string, separator or single word does not identify a fact by text alone",
       "kindReceiptId": null,
       "compared": null
     },
@@ -1962,14 +1764,6 @@
     },
     {
       "observationId": "FQ15-3373BFC10801",
-      "implementation": [],
-      "proofs": [],
-      "note": "1 failed: the frozen literal is not in the compiled program",
-      "kindReceiptId": null,
-      "compared": null
-    },
-    {
-      "observationId": "FQ15-337AAECB73AA",
       "implementation": [],
       "proofs": [],
       "note": "1 failed: the frozen literal is not in the compiled program",
@@ -2089,14 +1883,6 @@
       "compared": null
     },
     {
-      "observationId": "FQ15-3604A9990DD7",
-      "implementation": [],
-      "proofs": [],
-      "note": "2 failed: the literal is compiled only in other members (FamilyQuant.DeNovoViewModel/\u003CReconcileAsync\u003Ed__7::MoveNext()), not in member DeNovoControl.ButtonReconcile_Click",
-      "kindReceiptId": null,
-      "compared": null
-    },
-    {
       "observationId": "FQ15-362B3F07B111",
       "implementation": [],
       "proofs": [],
@@ -2129,34 +1915,12 @@
       "compared": null
     },
     {
-      "observationId": "FQ15-36CD9A3625EB",
-      "implementation": [],
-      "proofs": [],
-      "note": "1 failed: a format string, separator or single word does not identify a fact by text alone",
-      "kindReceiptId": null,
-      "compared": null
-    },
-    {
       "observationId": "FQ15-36FF1853F000",
       "implementation": [],
       "proofs": [],
       "note": "2 failed: the literal is compiled only in other members (FamilyQuant.USearchLib/BuildActions/\u003CButtonBuildFamilies_ClickAsync\u003Ed__5::MoveNext()), not in member USearchLib.ButtonInput_Click or USearchLib.ChooseDatabasePath",
       "kindReceiptId": null,
       "compared": null
-    },
-    {
-      "observationId": "FQ15-372244CC78BC",
-      "implementation": [
-        {
-          "path": "FamilyQuant/DeNovoControl.Dialogs.cs",
-          "symbol": "FamilyQuant.DeNovoControl::ButtonBrowsePeaksDirectory_Click(Object,System.Windows.RoutedEventArgs)",
-          "sha256": "B714D7D9AA689F30D9EDFA2479D373824358521783DBBD267E209E34E91884A1"
-        }
-      ],
-      "proofs": [],
-      "note": "Frozen text in the compiled program, in its feature, reachable; no behavior, number or file claim.",
-      "kindReceiptId": "text-code-fact",
-      "compared": "frozen literal \u0022 de novo export file(s) found under that folder. Next step: check the three filters and press \u0027Load ...\u0022 (SHA256 12074578F7A474C1) verbatim in FamilyQuant2.dll FamilyQuant.DeNovoControl::ButtonBrowsePeaksDirectory_Click(Object,System.Windows.RoutedEventArgs) [FamilyQuant/DeNovoControl.Dialogs.cs]; feature member DeNovoControl.ButtonBrowsePeaksDirectory_Click; reached as xaml handler FamilyQuant.DeNovoControl::ButtonBrowsePeaksDirectory_Click(Object,System.Windows.RoutedEventArgs), 0 steps from the entry point"
     },
     {
       "observationId": "FQ15-3744CC1026BF",
@@ -2209,14 +1973,6 @@
       "implementation": [],
       "proofs": [],
       "note": "1 failed: the frozen literal is not in the compiled program",
-      "kindReceiptId": null,
-      "compared": null
-    },
-    {
-      "observationId": "FQ15-39074CF0EDFA",
-      "implementation": [],
-      "proofs": [],
-      "note": "2 failed: the literal is compiled only in other members (FamilyQuant.DeNovoViewModel/\u003CReconcileAsync\u003Ed__7::MoveNext()), not in member DeNovoControl.ButtonReconcile_Click",
       "kindReceiptId": null,
       "compared": null
     },
@@ -2301,28 +2057,6 @@
       "compared": null
     },
     {
-      "observationId": "FQ15-3AE4418D821F",
-      "implementation": [],
-      "proofs": [],
-      "note": "1 failed: a format string, separator or single word does not identify a fact by text alone",
-      "kindReceiptId": null,
-      "compared": null
-    },
-    {
-      "observationId": "FQ15-3B2BB47C04F7",
-      "implementation": [
-        {
-          "path": "FamilyQuant/DeNovoControl.Dialogs.cs",
-          "symbol": "FamilyQuant.DeNovoControl::ButtonBrowseHomologyFcf_Click(Object,System.Windows.RoutedEventArgs)",
-          "sha256": "B714D7D9AA689F30D9EDFA2479D373824358521783DBBD267E209E34E91884A1"
-        }
-      ],
-      "proofs": [],
-      "note": "Frozen text in the compiled program, in its feature, reachable; no behavior, number or file claim.",
-      "kindReceiptId": "text-code-fact",
-      "compared": "frozen literal \u0022. Next step: check the identity threshold and the two residue options, then press Search. The file s...\u0022 (SHA256 F12300B91C2C0673) verbatim in FamilyQuant2.dll FamilyQuant.DeNovoControl::ButtonBrowseHomologyFcf_Click(Object,System.Windows.RoutedEventArgs) [FamilyQuant/DeNovoControl.Dialogs.cs]; feature member DeNovoControl.ButtonBrowseHomologyFcf_Click; reached as xaml handler FamilyQuant.DeNovoControl::ButtonBrowseHomologyFcf_Click(Object,System.Windows.RoutedEventArgs), 0 steps from the entry point"
-    },
-    {
       "observationId": "FQ15-3B2D779217E8",
       "implementation": [],
       "proofs": [],
@@ -2360,13 +2094,13 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "FamilyQuant.ClusterGenerationControl::AfterRegrouping()",
-          "sha256": "FC475D8417A728CC61528A1F8C49C467B1612D6C6E11462AA731A9284BFBCC48"
+          "sha256": "5D928F417023C396D37C10C3FA048C9EF00D36C21BCCD3D09AE647BAF881449D"
         }
       ],
       "proofs": [],
       "note": "Frozen text in the compiled program, in its feature, reachable; no behavior, number or file claim.",
       "kindReceiptId": "text-code-fact",
-      "compared": "frozen literal \u0022The families were regrouped, but their percentages could not be recalculated, so the share column st...\u0022 (SHA256 A1D4B8D084D0A3DE) verbatim in FamilyQuant2.dll FamilyQuant.ClusterGenerationControl::AfterRegrouping() [FamilyQuant/ClusterGenerationControl.xaml.cs]; feature member ClusterGenerationControl.AfterRegrouping; reached as delegate FamilyQuant.ClusterGenerationControl/\u003C\u003Ec__DisplayClass194_0::\u003CPerformClustering\u003Eb__0(), 1 steps from the entry point"
+      "compared": "frozen literal \u0022The families were regrouped, but their percentages could not be recalculated, so the share column st...\u0022 (SHA256 A1D4B8D084D0A3DE) verbatim in FamilyQuant2.dll FamilyQuant.ClusterGenerationControl::AfterRegrouping() [FamilyQuant/ClusterGenerationControl.xaml.cs]; feature member ClusterGenerationControl.AfterRegrouping; reached as delegate FamilyQuant.ClusterGenerationControl/\u003C\u003Ec__DisplayClass196_0::\u003CPerformClustering\u003Eb__0(), 1 steps from the entry point"
     },
     {
       "observationId": "FQ15-3BF546577CEC",
@@ -2498,7 +2232,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.Presentation.cs",
           "symbol": "FamilyQuant.ClusterGenerationControl::UpdateLayerStates()",
-          "sha256": "D57BEBE580E4A301DBBAD1350BDC91E7D1834A17CFEEDC9DE8EF5DC678933802"
+          "sha256": "163C3F79EC1A4885705484E029FB1814589A70F3A709C47680245E111BA4BB37"
         }
       ],
       "proofs": [],
@@ -2601,14 +2335,6 @@
       "compared": "frozen literal \u0022. This score belongs to this program and is not converted to any other program\u0027s scale.\u0022 (SHA256 911317EDEC66561B) verbatim in FamilyQuant2.dll FamilyQuant.DeNovoControl::UpdateSourceUi() [FamilyQuant/DeNovoControl.xaml.cs]; feature member DeNovoControl.UpdateSourceUi; reached as delegate FamilyQuant.MainWindow::\u003CInitializeNavigation\u003Eb__62_0(FamilyQuant.ShellDestination), 5 steps from the entry point"
     },
     {
-      "observationId": "FQ15-41E9B72D15A8",
-      "implementation": [],
-      "proofs": [],
-      "note": "1 failed: the row records no literal text (kind handler)",
-      "kindReceiptId": null,
-      "compared": null
-    },
-    {
       "observationId": "FQ15-41EE517BC169",
       "implementation": [],
       "proofs": [],
@@ -2692,21 +2418,13 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "FamilyQuant.ClusterGenerationControl::AfterRegrouping()",
-          "sha256": "FC475D8417A728CC61528A1F8C49C467B1612D6C6E11462AA731A9284BFBCC48"
+          "sha256": "5D928F417023C396D37C10C3FA048C9EF00D36C21BCCD3D09AE647BAF881449D"
         }
       ],
       "proofs": [],
       "note": "Frozen text in the compiled program, in its feature, reachable; no behavior, number or file claim.",
       "kindReceiptId": "text-code-fact",
-      "compared": "frozen literal \u0022The families were regrouped, but their percentages could not be recalculated, so the share column st...\u0022 (SHA256 A1D4B8D084D0A3DE) verbatim in FamilyQuant2.dll FamilyQuant.ClusterGenerationControl::AfterRegrouping() [FamilyQuant/ClusterGenerationControl.xaml.cs]; feature member ClusterGenerationControl.AfterRegrouping; reached as delegate FamilyQuant.ClusterGenerationControl/\u003C\u003Ec__DisplayClass194_0::\u003CPerformClustering\u003Eb__0(), 1 steps from the entry point"
-    },
-    {
-      "observationId": "FQ15-44CB1EE1D17F",
-      "implementation": [],
-      "proofs": [],
-      "note": "1 failed: the row records no literal text (kind handler)",
-      "kindReceiptId": null,
-      "compared": null
+      "compared": "frozen literal \u0022The families were regrouped, but their percentages could not be recalculated, so the share column st...\u0022 (SHA256 A1D4B8D084D0A3DE) verbatim in FamilyQuant2.dll FamilyQuant.ClusterGenerationControl::AfterRegrouping() [FamilyQuant/ClusterGenerationControl.xaml.cs]; feature member ClusterGenerationControl.AfterRegrouping; reached as delegate FamilyQuant.ClusterGenerationControl/\u003C\u003Ec__DisplayClass196_0::\u003CPerformClustering\u003Eb__0(), 1 steps from the entry point"
     },
     {
       "observationId": "FQ15-44D78614B3B0",
@@ -2829,14 +2547,6 @@
       "compared": null
     },
     {
-      "observationId": "FQ15-47E1C7C97E1F",
-      "implementation": [],
-      "proofs": [],
-      "note": "1 failed: the row records no literal text (kind handler)",
-      "kindReceiptId": null,
-      "compared": null
-    },
-    {
       "observationId": "FQ15-47E6689D468D",
       "implementation": [
         {
@@ -2891,14 +2601,6 @@
       "compared": null
     },
     {
-      "observationId": "FQ15-48A19048BFEA",
-      "implementation": [],
-      "proofs": [],
-      "note": "2 failed: the literal is compiled only in other members (FamilyQuant.DeNovoSession::.ctor(FamilyQuant.DeNovoFilterViewModel), FamilyQuant.DeNovoSession::SourceChanged()), not in member DeNovoControl.UpdateSourceUi",
-      "kindReceiptId": null,
-      "compared": null
-    },
-    {
       "observationId": "FQ15-48FB6F4B7D66",
       "implementation": [],
       "proofs": [],
@@ -2912,7 +2614,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.Presentation.cs",
           "symbol": "FamilyQuant.ClusterGenerationControl::UpdateLayerStates()",
-          "sha256": "D57BEBE580E4A301DBBAD1350BDC91E7D1834A17CFEEDC9DE8EF5DC678933802"
+          "sha256": "163C3F79EC1A4885705484E029FB1814589A70F3A709C47680245E111BA4BB37"
         }
       ],
       "proofs": [],
@@ -2949,14 +2651,6 @@
       "implementation": [],
       "proofs": [],
       "note": "1 failed: the frozen literal is not in the compiled program",
-      "kindReceiptId": null,
-      "compared": null
-    },
-    {
-      "observationId": "FQ15-4A31A5796BD8",
-      "implementation": [],
-      "proofs": [],
-      "note": "2 failed: the literal is compiled only in other members (FamilyQuant.DeNovoSession::ApplyHomology(FamilyQuant.DeNovoHomology)), not in member DeNovoControl.ApplyHomology",
       "kindReceiptId": null,
       "compared": null
     },
@@ -3118,7 +2812,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.Presentation.cs",
           "symbol": "FamilyQuant.ClusterGenerationControl::UpdateLayerStates()",
-          "sha256": "D57BEBE580E4A301DBBAD1350BDC91E7D1834A17CFEEDC9DE8EF5DC678933802"
+          "sha256": "163C3F79EC1A4885705484E029FB1814589A70F3A709C47680245E111BA4BB37"
         }
       ],
       "proofs": [],
@@ -3224,7 +2918,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.Presentation.cs",
           "symbol": "FamilyQuant.ClusterGenerationControl::UpdateLayerStates()",
-          "sha256": "D57BEBE580E4A301DBBAD1350BDC91E7D1834A17CFEEDC9DE8EF5DC678933802"
+          "sha256": "163C3F79EC1A4885705484E029FB1814589A70F3A709C47680245E111BA4BB37"
         }
       ],
       "proofs": [],
@@ -3255,20 +2949,6 @@
       "note": "2 failed: the literal is compiled only in other members (FamilyQuant.CurationQuantitationViewModel::WriteRecalculationDiagnostic(FamilyQuant.NormalizationMode,FamilyQuant.SharedPeptidePolicy)), not in member ClusterGenerationControl.RecalculateQuantitationInternal",
       "kindReceiptId": null,
       "compared": null
-    },
-    {
-      "observationId": "FQ15-50D78F955352",
-      "implementation": [
-        {
-          "path": "FamilyQuant/DeNovoControl.Dialogs.cs",
-          "symbol": "FamilyQuant.DeNovoControl::ButtonBrowseSeproPackage_Click(Object,System.Windows.RoutedEventArgs)",
-          "sha256": "B714D7D9AA689F30D9EDFA2479D373824358521783DBBD267E209E34E91884A1"
-        }
-      ],
-      "proofs": [],
-      "note": "Frozen text in the compiled program, in its feature, reachable; no behavior, number or file claim.",
-      "kindReceiptId": "text-code-fact",
-      "compared": "frozen literal \u0022Package chosen: \u0022 (SHA256 A24BFDA7A38D04EC) verbatim in FamilyQuant2.dll FamilyQuant.DeNovoControl::ButtonBrowseSeproPackage_Click(Object,System.Windows.RoutedEventArgs) [FamilyQuant/DeNovoControl.Dialogs.cs]; feature member DeNovoControl.ButtonBrowseSeproPackage_Click; reached as xaml handler FamilyQuant.DeNovoControl::ButtonBrowseSeproPackage_Click(Object,System.Windows.RoutedEventArgs), 0 steps from the entry point"
     },
     {
       "observationId": "FQ15-51763E712D19",
@@ -3357,14 +3037,6 @@
       "compared": null
     },
     {
-      "observationId": "FQ15-549529DEFE02",
-      "implementation": [],
-      "proofs": [],
-      "note": "1 failed: the frozen literal is not in the compiled program",
-      "kindReceiptId": null,
-      "compared": null
-    },
-    {
       "observationId": "FQ15-54BB7A04AC1F",
       "implementation": [],
       "proofs": [],
@@ -3401,14 +3073,6 @@
       "implementation": [],
       "proofs": [],
       "note": "1 failed: the frozen literal is not in the compiled program",
-      "kindReceiptId": null,
-      "compared": null
-    },
-    {
-      "observationId": "FQ15-5613D727F9F4",
-      "implementation": [],
-      "proofs": [],
-      "note": "2 failed: the literal is compiled only in other members (FamilyQuant.DeNovoSession::SourceChanged()), not in member DeNovoControl.UpdateSourceUi",
       "kindReceiptId": null,
       "compared": null
     },
@@ -3585,14 +3249,6 @@
       "compared": "frozen literal \u0022The file could not be written, so nothing was exported. Reason given by the program: \u0022 (SHA256 0702F56DE92CBF85) verbatim in FamilyQuant2.dll FamilyQuant.DeNovoControl/\u003CExport\u003Ed__62::MoveNext() [FamilyQuant/DeNovoControl.Dialogs.cs]; feature member DeNovoControl.Export; reached as xaml handler FamilyQuant.DeNovoControl::ButtonExportSummary_Click(Object,System.Windows.RoutedEventArgs), 2 steps from the entry point"
     },
     {
-      "observationId": "FQ15-5AF42E270E5F",
-      "implementation": [],
-      "proofs": [],
-      "note": "2 failed: the literal is compiled only in other members (FamilyQuant.DeNovoSession::ApplyImport(FamilyQuant.DeNovoImport)), not in member DeNovoControl.ApplyImport",
-      "kindReceiptId": null,
-      "compared": null
-    },
-    {
       "observationId": "FQ15-5B245027BF64",
       "implementation": [],
       "proofs": [],
@@ -3710,7 +3366,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.Presentation.cs",
           "symbol": "FamilyQuant.ClusterGenerationControl::UpdateLayerStates()",
-          "sha256": "D57BEBE580E4A301DBBAD1350BDC91E7D1834A17CFEEDC9DE8EF5DC678933802"
+          "sha256": "163C3F79EC1A4885705484E029FB1814589A70F3A709C47680245E111BA4BB37"
         }
       ],
       "proofs": [],
@@ -3813,14 +3469,6 @@
       "compared": null
     },
     {
-      "observationId": "FQ15-616094D09225",
-      "implementation": [],
-      "proofs": [],
-      "note": "2 failed: the literal is compiled only in other members (FamilyQuant.DeNovoViewModel/\u003CSearchAsync\u003Ed__9::MoveNext()), not in member DeNovoControl.ButtonSearchHomology_Click",
-      "kindReceiptId": null,
-      "compared": null
-    },
-    {
       "observationId": "FQ15-6168BF5C5C76",
       "implementation": [],
       "proofs": [],
@@ -3909,22 +3557,6 @@
       "compared": null
     },
     {
-      "observationId": "FQ15-646588177A4D",
-      "implementation": [],
-      "proofs": [],
-      "note": "1 failed: a format string, separator or single word does not identify a fact by text alone",
-      "kindReceiptId": null,
-      "compared": null
-    },
-    {
-      "observationId": "FQ15-647A793CAB9E",
-      "implementation": [],
-      "proofs": [],
-      "note": "1 failed: a format string, separator or single word does not identify a fact by text alone",
-      "kindReceiptId": null,
-      "compared": null
-    },
-    {
       "observationId": "FQ15-64F6298F9D52",
       "implementation": [],
       "proofs": [],
@@ -3949,20 +3581,6 @@
       "compared": null
     },
     {
-      "observationId": "FQ15-65D20791C824",
-      "implementation": [
-        {
-          "path": "FamilyQuant/DeNovoControl.Dialogs.cs",
-          "symbol": "FamilyQuant.DeNovoControl::ButtonBrowsePeaksDirectory_Click(Object,System.Windows.RoutedEventArgs)",
-          "sha256": "B714D7D9AA689F30D9EDFA2479D373824358521783DBBD267E209E34E91884A1"
-        }
-      ],
-      "proofs": [],
-      "note": "Frozen text in the compiled program, in its feature, reachable; no behavior, number or file claim.",
-      "kindReceiptId": "text-code-fact",
-      "compared": "frozen literal \u0022 de novo export file(s) found under that folder. Next step: check the three filters and press \u0027Load ...\u0022 (SHA256 12074578F7A474C1) verbatim in FamilyQuant2.dll FamilyQuant.DeNovoControl::ButtonBrowsePeaksDirectory_Click(Object,System.Windows.RoutedEventArgs) [FamilyQuant/DeNovoControl.Dialogs.cs]; feature member DeNovoControl.ButtonBrowsePeaksDirectory_Click; reached as xaml handler FamilyQuant.DeNovoControl::ButtonBrowsePeaksDirectory_Click(Object,System.Windows.RoutedEventArgs), 0 steps from the entry point"
-    },
-    {
       "observationId": "FQ15-660A36F480F7",
       "implementation": [],
       "proofs": [],
@@ -3985,20 +3603,6 @@
       "note": "1 failed: the frozen literal is not in the compiled program",
       "kindReceiptId": null,
       "compared": null
-    },
-    {
-      "observationId": "FQ15-66E8A7C104BB",
-      "implementation": [
-        {
-          "path": "FamilyQuant/DeNovoControl.Dialogs.cs",
-          "symbol": "FamilyQuant.DeNovoControl::ButtonBrowseSeproPackage_Click(Object,System.Windows.RoutedEventArgs)",
-          "sha256": "B714D7D9AA689F30D9EDFA2479D373824358521783DBBD267E209E34E91884A1"
-        }
-      ],
-      "proofs": [],
-      "note": "Frozen text in the compiled program, in its feature, reachable; no behavior, number or file claim.",
-      "kindReceiptId": "text-code-fact",
-      "compared": "frozen literal \u0022. Next step: press Reconcile. Reading a real package takes a while, and the screen is disabled while...\u0022 (SHA256 D330774ADFEAB493) verbatim in FamilyQuant2.dll FamilyQuant.DeNovoControl::ButtonBrowseSeproPackage_Click(Object,System.Windows.RoutedEventArgs) [FamilyQuant/DeNovoControl.Dialogs.cs]; feature member DeNovoControl.ButtonBrowseSeproPackage_Click; reached as xaml handler FamilyQuant.DeNovoControl::ButtonBrowseSeproPackage_Click(Object,System.Windows.RoutedEventArgs), 0 steps from the entry point"
     },
     {
       "observationId": "FQ15-67225AD66C7B",
@@ -4097,14 +3701,6 @@
       "compared": null
     },
     {
-      "observationId": "FQ15-68EE1C6A3380",
-      "implementation": [],
-      "proofs": [],
-      "note": "2 failed: the literal is compiled only in other members (FamilyQuant.DeNovoViewModel/\u003CImportAsync\u003Ed__6::MoveNext()), not in member DeNovoControl.ButtonLoadAndFilter_Click",
-      "kindReceiptId": null,
-      "compared": null
-    },
-    {
       "observationId": "FQ15-68FD48382D3A",
       "implementation": [],
       "proofs": [],
@@ -4129,26 +3725,10 @@
       "compared": null
     },
     {
-      "observationId": "FQ15-69497EC5F0A4",
-      "implementation": [],
-      "proofs": [],
-      "note": "1 failed: a format string, separator or single word does not identify a fact by text alone",
-      "kindReceiptId": null,
-      "compared": null
-    },
-    {
       "observationId": "FQ15-69A89EC19D12",
       "implementation": [],
       "proofs": [],
       "note": "2 failed: the literal is compiled only in other members (FamilyQuant.USearchLib/BuildActions::ConfirmLargeExhaustive(String,Boolean)), not in member USearchLib.ConfirmLargeExhaustive",
-      "kindReceiptId": null,
-      "compared": null
-    },
-    {
-      "observationId": "FQ15-69F77FABB90E",
-      "implementation": [],
-      "proofs": [],
-      "note": "2 failed: the literal is compiled only in other members (FamilyQuant.DeNovoViewModel/\u003CImportAsync\u003Ed__6::MoveNext(), FamilyQuant.DeNovoViewModel/\u003CReconcileAsync\u003Ed__7::MoveNext()), not in member DeNovoControl.ButtonLoadAndFilter_Click",
       "kindReceiptId": null,
       "compared": null
     },
@@ -4233,14 +3813,6 @@
       "compared": null
     },
     {
-      "observationId": "FQ15-6D49EFE30E0E",
-      "implementation": [],
-      "proofs": [],
-      "note": "1 failed: the row records no literal text (kind handler definition)",
-      "kindReceiptId": null,
-      "compared": null
-    },
-    {
       "observationId": "FQ15-6DA29B03605C",
       "implementation": [],
       "proofs": [],
@@ -4308,7 +3880,7 @@
       "observationId": "FQ15-701368E2E22F",
       "implementation": [],
       "proofs": [],
-      "note": "2 failed: the literal is compiled only in other members (FamilyQuant.DeNovoViewModel::get_HomologyState(), FamilyQuant.DeNovoViewModel::get_ReconcileState()), not in member DeNovoControl.UpdateLayerStates",
+      "note": "1 failed: the frozen literal is not in the compiled program",
       "kindReceiptId": null,
       "compared": null
     },
@@ -4471,20 +4043,6 @@
       "compared": null
     },
     {
-      "observationId": "FQ15-745332D47B0C",
-      "implementation": [
-        {
-          "path": "FamilyQuant/DeNovoControl.Dialogs.cs",
-          "symbol": "FamilyQuant.DeNovoControl/\u003CExport\u003Ed__62::MoveNext()",
-          "sha256": "B714D7D9AA689F30D9EDFA2479D373824358521783DBBD267E209E34E91884A1"
-        }
-      ],
-      "proofs": [],
-      "note": "Frozen text in the compiled program, in its feature, reachable; no behavior, number or file claim.",
-      "kindReceiptId": "text-code-fact",
-      "compared": "frozen literal \u0022Written to \u0022 (SHA256 4DC97379B610541E) verbatim in FamilyQuant2.dll FamilyQuant.DeNovoControl/\u003CExport\u003Ed__62::MoveNext() [FamilyQuant/DeNovoControl.Dialogs.cs]; feature member DeNovoControl.Export; reached as xaml handler FamilyQuant.DeNovoControl::ButtonExportSummary_Click(Object,System.Windows.RoutedEventArgs), 2 steps from the entry point"
-    },
-    {
       "observationId": "FQ15-7497282283CE",
       "implementation": [],
       "proofs": [],
@@ -4519,14 +4077,6 @@
       "implementation": [],
       "proofs": [],
       "note": "1 failed: the frozen literal is not in the compiled program",
-      "kindReceiptId": null,
-      "compared": null
-    },
-    {
-      "observationId": "FQ15-759EAE25FFB9",
-      "implementation": [],
-      "proofs": [],
-      "note": "1 failed: the row records no literal text (kind handler definition)",
       "kindReceiptId": null,
       "compared": null
     },
@@ -4685,20 +4235,12 @@
       "compared": "frozen literal \u0022Copies the code alone, P31982 from sp|P31982|VM2I_CROCC, one line per selected row.\u0022 (SHA256 74E0BCD4A5AC2EA7) verbatim in FamilyQuant2.dll FamilyQuant.GridCopy::Attach(System.Windows.Controls.DataGrid,System.Func\u00602{Object,String},System.Func\u00602{Object,String},String) [FamilyQuant/GridCopy.cs]; feature member GridCopy.Attach; reached as delegate FamilyQuant.MainWindow/ShellDocumentCommands/\u003C\u003Ec__DisplayClass4_0::\u003COpenProjectPathAsync\u003Eb__0(), 5 steps from the entry point"
     },
     {
-      "observationId": "FQ15-78CADC4BF323",
-      "implementation": [],
-      "proofs": [],
-      "note": "2 failed: the literal is compiled only in other members (FamilyQuant.DeNovoViewModel/\u003CImportAsync\u003Ed__6::MoveNext()), not in member DeNovoControl.ButtonLoadAndFilter_Click",
-      "kindReceiptId": null,
-      "compared": null
-    },
-    {
       "observationId": "FQ15-78FD049E9869",
       "implementation": [
         {
           "path": "FamilyQuant/ClusterGenerationControl.Presentation.cs",
           "symbol": "FamilyQuant.ClusterGenerationControl::UpdateLayerStates()",
-          "sha256": "D57BEBE580E4A301DBBAD1350BDC91E7D1834A17CFEEDC9DE8EF5DC678933802"
+          "sha256": "163C3F79EC1A4885705484E029FB1814589A70F3A709C47680245E111BA4BB37"
         }
       ],
       "proofs": [],
@@ -4913,14 +4455,6 @@
       "compared": null
     },
     {
-      "observationId": "FQ15-7E8B9FAD3F78",
-      "implementation": [],
-      "proofs": [],
-      "note": "1 failed: a format string, separator or single word does not identify a fact by text alone",
-      "kindReceiptId": null,
-      "compared": null
-    },
-    {
       "observationId": "FQ15-7EA08FC8EA1E",
       "implementation": [],
       "proofs": [],
@@ -5094,13 +4628,13 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.Presentation.cs",
           "symbol": "FamilyQuant.ClusterGenerationControl::ApplyColumnHeaderTooltips()",
-          "sha256": "D57BEBE580E4A301DBBAD1350BDC91E7D1834A17CFEEDC9DE8EF5DC678933802"
+          "sha256": "163C3F79EC1A4885705484E029FB1814589A70F3A709C47680245E111BA4BB37"
         }
       ],
       "proofs": [],
       "note": "Frozen text in the compiled program, in its feature, reachable; no behavior, number or file claim.",
       "kindReceiptId": "text-code-fact",
-      "compared": "frozen literal \u0022Free text of your own. It is saved in the .fcf and written to the CSV, and it affects no calculation...\u0022 (SHA256 2044478F94DDB604) verbatim in FamilyQuant2.dll FamilyQuant.ClusterGenerationControl::ApplyColumnHeaderTooltips() [FamilyQuant/ClusterGenerationControl.Presentation.cs]; feature member ClusterGenerationControl.ApplyColumnHeaderTooltips or ClusterGenerationControl.ApplyColumnHeaderTooltips; reached as delegate FamilyQuant.MainWindow/ShellDocumentCommands/\u003C\u003Ec__DisplayClass4_0::\u003COpenProjectPathAsync\u003Eb__0(), 6 steps from the entry point"
+      "compared": "frozen literal \u0022Free text of your own. It is saved in the .fcf and written to the CSV, and it affects no calculation...\u0022 (SHA256 2044478F94DDB604) verbatim in FamilyQuant2.dll FamilyQuant.ClusterGenerationControl::ApplyColumnHeaderTooltips() [FamilyQuant/ClusterGenerationControl.Presentation.cs]; feature member ClusterGenerationControl.ApplyColumnHeaderTooltips; reached as delegate FamilyQuant.MainWindow/ShellDocumentCommands/\u003C\u003Ec__DisplayClass4_0::\u003COpenProjectPathAsync\u003Eb__0(), 6 steps from the entry point"
     },
     {
       "observationId": "FQ15-826441F668F3",
@@ -5127,14 +4661,6 @@
       "compared": null
     },
     {
-      "observationId": "FQ15-82B0DE7C2F67",
-      "implementation": [],
-      "proofs": [],
-      "note": "1 failed: a format string, separator or single word does not identify a fact by text alone",
-      "kindReceiptId": null,
-      "compared": null
-    },
-    {
       "observationId": "FQ15-8327789B8931",
       "implementation": [
         {
@@ -5157,26 +4683,18 @@
       "compared": null
     },
     {
-      "observationId": "FQ15-83A79FCFF61A",
-      "implementation": [],
-      "proofs": [],
-      "note": "2 failed: the literal is compiled only in other members (FamilyQuant.DeNovoSession::ApplyHomology(FamilyQuant.DeNovoHomology)), not in member DeNovoControl.ApplyHomology",
-      "kindReceiptId": null,
-      "compared": null
-    },
-    {
       "observationId": "FQ15-84CD85B9D9B1",
       "implementation": [
         {
           "path": "FamilyQuant/ClusterGenerationControl.Presentation.cs",
           "symbol": "FamilyQuant.ClusterGenerationControl::ApplyColumnHeaderTooltips()",
-          "sha256": "D57BEBE580E4A301DBBAD1350BDC91E7D1834A17CFEEDC9DE8EF5DC678933802"
+          "sha256": "163C3F79EC1A4885705484E029FB1814589A70F3A709C47680245E111BA4BB37"
         }
       ],
       "proofs": [],
       "note": "Frozen text in the compiled program, in its feature, reachable; no behavior, number or file claim.",
       "kindReceiptId": "text-code-fact",
-      "compared": "frozen literal \u0022Your own family number, the only editable id. Type the same number in two rows to merge their famili...\u0022 (SHA256 C6A3DF6D916ECE40) verbatim in FamilyQuant2.dll FamilyQuant.ClusterGenerationControl::ApplyColumnHeaderTooltips() [FamilyQuant/ClusterGenerationControl.Presentation.cs]; feature member ClusterGenerationControl.ApplyColumnHeaderTooltips or ClusterGenerationControl.ApplyColumnHeaderTooltips; reached as delegate FamilyQuant.MainWindow/ShellDocumentCommands/\u003C\u003Ec__DisplayClass4_0::\u003COpenProjectPathAsync\u003Eb__0(), 6 steps from the entry point"
+      "compared": "frozen literal \u0022Your own family number, the only editable id. Type the same number in two rows to merge their famili...\u0022 (SHA256 C6A3DF6D916ECE40) verbatim in FamilyQuant2.dll FamilyQuant.ClusterGenerationControl::ApplyColumnHeaderTooltips() [FamilyQuant/ClusterGenerationControl.Presentation.cs]; feature member ClusterGenerationControl.ApplyColumnHeaderTooltips; reached as delegate FamilyQuant.MainWindow/ShellDocumentCommands/\u003C\u003Ec__DisplayClass4_0::\u003COpenProjectPathAsync\u003Eb__0(), 6 steps from the entry point"
     },
     {
       "observationId": "FQ15-8504F0703DBD",
@@ -5255,14 +4773,6 @@
       "implementation": [],
       "proofs": [],
       "note": "1 failed: the frozen literal is not in the compiled program",
-      "kindReceiptId": null,
-      "compared": null
-    },
-    {
-      "observationId": "FQ15-86FCA588E860",
-      "implementation": [],
-      "proofs": [],
-      "note": "1 failed: the row records no literal text (kind handler definition)",
       "kindReceiptId": null,
       "compared": null
     },
@@ -5355,20 +4865,6 @@
       "compared": null
     },
     {
-      "observationId": "FQ15-8A3FE99F899F",
-      "implementation": [
-        {
-          "path": "FamilyQuant/DeNovoControl.Dialogs.cs",
-          "symbol": "FamilyQuant.DeNovoControl::ButtonBrowseSeproPackage_Click(Object,System.Windows.RoutedEventArgs)",
-          "sha256": "B714D7D9AA689F30D9EDFA2479D373824358521783DBBD267E209E34E91884A1"
-        }
-      ],
-      "proofs": [],
-      "note": "Frozen text in the compiled program, in its feature, reachable; no behavior, number or file claim.",
-      "kindReceiptId": "text-code-fact",
-      "compared": "frozen literal \u0022. Next step: press Reconcile. Reading a real package takes a while, and the screen is disabled while...\u0022 (SHA256 D330774ADFEAB493) verbatim in FamilyQuant2.dll FamilyQuant.DeNovoControl::ButtonBrowseSeproPackage_Click(Object,System.Windows.RoutedEventArgs) [FamilyQuant/DeNovoControl.Dialogs.cs]; feature member DeNovoControl.ButtonBrowseSeproPackage_Click; reached as xaml handler FamilyQuant.DeNovoControl::ButtonBrowseSeproPackage_Click(Object,System.Windows.RoutedEventArgs), 0 steps from the entry point"
-    },
-    {
       "observationId": "FQ15-8A8526A9016B",
       "implementation": [],
       "proofs": [],
@@ -5438,7 +4934,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "FamilyQuant.ClusterGenerationControl::DataGridResultGrid_CellEditEnding(Object,System.Windows.Controls.DataGridCellEditEndingEventArgs)",
-          "sha256": "FC475D8417A728CC61528A1F8C49C467B1612D6C6E11462AA731A9284BFBCC48"
+          "sha256": "5D928F417023C396D37C10C3FA048C9EF00D36C21BCCD3D09AE647BAF881449D"
         }
       ],
       "proofs": [],
@@ -5459,14 +4955,6 @@
       "implementation": [],
       "proofs": [],
       "note": "1 failed: the frozen literal is not in the compiled program",
-      "kindReceiptId": null,
-      "compared": null
-    },
-    {
-      "observationId": "FQ15-8BBE9FBFD11B",
-      "implementation": [],
-      "proofs": [],
-      "note": "2 failed: the literal is compiled only in other members (FamilyQuant.DeNovoSession::ApplyImport(FamilyQuant.DeNovoImport)), not in member DeNovoControl.ApplyImport",
       "kindReceiptId": null,
       "compared": null
     },
@@ -5525,23 +5013,7 @@
       "compared": null
     },
     {
-      "observationId": "FQ15-8D63F28E3E2C",
-      "implementation": [],
-      "proofs": [],
-      "note": "1 failed: a format string, separator or single word does not identify a fact by text alone",
-      "kindReceiptId": null,
-      "compared": null
-    },
-    {
       "observationId": "FQ15-8D64D084F740",
-      "implementation": [],
-      "proofs": [],
-      "note": "1 failed: the frozen literal is not in the compiled program",
-      "kindReceiptId": null,
-      "compared": null
-    },
-    {
-      "observationId": "FQ15-8DD1826EC288",
       "implementation": [],
       "proofs": [],
       "note": "1 failed: the frozen literal is not in the compiled program",
@@ -5554,7 +5026,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.Presentation.cs",
           "symbol": "FamilyQuant.ClusterGenerationControl::UpdateColumnHeaders()",
-          "sha256": "D57BEBE580E4A301DBBAD1350BDC91E7D1834A17CFEEDC9DE8EF5DC678933802"
+          "sha256": "163C3F79EC1A4885705484E029FB1814589A70F3A709C47680245E111BA4BB37"
         }
       ],
       "proofs": [],
@@ -5640,13 +5112,13 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.Presentation.cs",
           "symbol": "FamilyQuant.ClusterGenerationControl::ApplyColumnHeaderTooltips()",
-          "sha256": "D57BEBE580E4A301DBBAD1350BDC91E7D1834A17CFEEDC9DE8EF5DC678933802"
+          "sha256": "163C3F79EC1A4885705484E029FB1814589A70F3A709C47680245E111BA4BB37"
         }
       ],
       "proofs": [],
       "note": "Frozen text in the compiled program, in its feature, reachable; no behavior, number or file claim.",
       "kindReceiptId": "text-code-fact",
-      "compared": "frozen literal \u0022The sum of the protein\u0027s residue masses in daltons, without the terminal water. Add 18.011 Da for th...\u0022 (SHA256 B7FBBD75E6982B71) verbatim in FamilyQuant2.dll FamilyQuant.ClusterGenerationControl::ApplyColumnHeaderTooltips() [FamilyQuant/ClusterGenerationControl.Presentation.cs]; feature member ClusterGenerationControl.ApplyColumnHeaderTooltips or ClusterGenerationControl.ApplyColumnHeaderTooltips; reached as delegate FamilyQuant.MainWindow/ShellDocumentCommands/\u003C\u003Ec__DisplayClass4_0::\u003COpenProjectPathAsync\u003Eb__0(), 6 steps from the entry point"
+      "compared": "frozen literal \u0022The sum of the protein\u0027s residue masses in daltons, without the terminal water. Add 18.011 Da for th...\u0022 (SHA256 B7FBBD75E6982B71) verbatim in FamilyQuant2.dll FamilyQuant.ClusterGenerationControl::ApplyColumnHeaderTooltips() [FamilyQuant/ClusterGenerationControl.Presentation.cs]; feature member ClusterGenerationControl.ApplyColumnHeaderTooltips; reached as delegate FamilyQuant.MainWindow/ShellDocumentCommands/\u003C\u003Ec__DisplayClass4_0::\u003COpenProjectPathAsync\u003Eb__0(), 6 steps from the entry point"
     },
     {
       "observationId": "FQ15-8F7963BD883F",
@@ -5758,13 +5230,13 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.Presentation.cs",
           "symbol": "FamilyQuant.ClusterGenerationControl::ApplyColumnHeaderTooltips()",
-          "sha256": "D57BEBE580E4A301DBBAD1350BDC91E7D1834A17CFEEDC9DE8EF5DC678933802"
+          "sha256": "163C3F79EC1A4885705484E029FB1814589A70F3A709C47680245E111BA4BB37"
         }
       ],
       "proofs": [],
       "note": "Frozen text in the compiled program, in its feature, reachable; no behavior, number or file claim.",
       "kindReceiptId": "text-code-fact",
-      "compared": "frozen literal \u0022The last automatic grouping, from USEARCH and any word or keyword merge. Read-only; it equals User I...\u0022 (SHA256 85498388F5C8F8DF) verbatim in FamilyQuant2.dll FamilyQuant.ClusterGenerationControl::ApplyColumnHeaderTooltips() [FamilyQuant/ClusterGenerationControl.Presentation.cs]; feature member ClusterGenerationControl.ApplyColumnHeaderTooltips or ClusterGenerationControl.ApplyColumnHeaderTooltips; reached as delegate FamilyQuant.MainWindow/ShellDocumentCommands/\u003C\u003Ec__DisplayClass4_0::\u003COpenProjectPathAsync\u003Eb__0(), 6 steps from the entry point"
+      "compared": "frozen literal \u0022The last automatic grouping, from USEARCH and any word or keyword merge. Read-only; it equals User I...\u0022 (SHA256 85498388F5C8F8DF) verbatim in FamilyQuant2.dll FamilyQuant.ClusterGenerationControl::ApplyColumnHeaderTooltips() [FamilyQuant/ClusterGenerationControl.Presentation.cs]; feature member ClusterGenerationControl.ApplyColumnHeaderTooltips; reached as delegate FamilyQuant.MainWindow/ShellDocumentCommands/\u003C\u003Ec__DisplayClass4_0::\u003COpenProjectPathAsync\u003Eb__0(), 6 steps from the entry point"
     },
     {
       "observationId": "FQ15-91DFEE84C0F4",
@@ -5839,14 +5311,6 @@
       "implementation": [],
       "proofs": [],
       "note": "1 failed: a format string, separator or single word does not identify a fact by text alone",
-      "kindReceiptId": null,
-      "compared": null
-    },
-    {
-      "observationId": "FQ15-934035A65B0A",
-      "implementation": [],
-      "proofs": [],
-      "note": "1 failed: the row records no literal text (kind handler)",
       "kindReceiptId": null,
       "compared": null
     },
@@ -5950,7 +5414,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "FamilyQuant.ClusterGenerationControl::DataGridResultGrid_CellEditEnding(Object,System.Windows.Controls.DataGridCellEditEndingEventArgs)",
-          "sha256": "FC475D8417A728CC61528A1F8C49C467B1612D6C6E11462AA731A9284BFBCC48"
+          "sha256": "5D928F417023C396D37C10C3FA048C9EF00D36C21BCCD3D09AE647BAF881449D"
         }
       ],
       "proofs": [],
@@ -6004,7 +5468,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.Presentation.cs",
           "symbol": "FamilyQuant.ClusterGenerationControl::UpdateLayerStates()",
-          "sha256": "D57BEBE580E4A301DBBAD1350BDC91E7D1834A17CFEEDC9DE8EF5DC678933802"
+          "sha256": "163C3F79EC1A4885705484E029FB1814589A70F3A709C47680245E111BA4BB37"
         }
       ],
       "proofs": [],
@@ -6059,14 +5523,6 @@
       "compared": "frozen literal \u0022How many proteins of its family carry a keyword: 2 of 11 means the family is here because of those 2...\u0022 (SHA256 DB6FECA6AE0B4651) verbatim in FamilyQuant2.dll FamilyQuant.SuperClusterPreviewWindow::InstallKeywordHeaders() [FamilyQuant/SuperClusterPreviewWindow.cs]; feature member SuperClusterPreviewWindow.BuildGrid or SuperClusterPreviewWindow.InstallKeywordHeaders; reached as delegate FamilyQuant.ClusterGenerationControl::ReviewEvidenceCoreAsync(), 4 steps from the entry point"
     },
     {
-      "observationId": "FQ15-97B2E3C28E44",
-      "implementation": [],
-      "proofs": [],
-      "note": "1 failed: a format string, separator or single word does not identify a fact by text alone",
-      "kindReceiptId": null,
-      "compared": null
-    },
-    {
       "observationId": "FQ15-97D540993B45",
       "implementation": [],
       "proofs": [],
@@ -6099,34 +5555,12 @@
       "compared": null
     },
     {
-      "observationId": "FQ15-988F7E1CF825",
-      "implementation": [],
-      "proofs": [],
-      "note": "2 failed: the literal is compiled only in other members (FamilyQuant.DeNovoSession::ApplyImport(FamilyQuant.DeNovoImport)), not in member DeNovoControl.ApplyImport",
-      "kindReceiptId": null,
-      "compared": null
-    },
-    {
       "observationId": "FQ15-99658E9D6800",
       "implementation": [],
       "proofs": [],
       "note": "1 failed: the frozen literal is not in the compiled program",
       "kindReceiptId": null,
       "compared": null
-    },
-    {
-      "observationId": "FQ15-9A02870EFB2D",
-      "implementation": [
-        {
-          "path": "FamilyQuant/DeNovoControl.Dialogs.cs",
-          "symbol": "FamilyQuant.DeNovoControl::ButtonBrowsePeaksDirectory_Click(Object,System.Windows.RoutedEventArgs)",
-          "sha256": "B714D7D9AA689F30D9EDFA2479D373824358521783DBBD267E209E34E91884A1"
-        }
-      ],
-      "proofs": [],
-      "note": "Frozen text in the compiled program, in its feature, reachable; no behavior, number or file claim.",
-      "kindReceiptId": "text-code-fact",
-      "compared": "frozen literal \u0022. Next step: choose the export root holding the per-run sub-folders and check that the selected sour...\u0022 (SHA256 BB3439FFBA7AB72E) verbatim in FamilyQuant2.dll FamilyQuant.DeNovoControl::ButtonBrowsePeaksDirectory_Click(Object,System.Windows.RoutedEventArgs) [FamilyQuant/DeNovoControl.Dialogs.cs]; feature member DeNovoControl.ButtonBrowsePeaksDirectory_Click; reached as xaml handler FamilyQuant.DeNovoControl::ButtonBrowsePeaksDirectory_Click(Object,System.Windows.RoutedEventArgs), 0 steps from the entry point"
     },
     {
       "observationId": "FQ15-9A1C29417A7E",
@@ -6151,20 +5585,6 @@
       "note": "2 failed: the literal is compiled only in other members (FamilyQuant.CurationViewModel::ApplyBatch(System.Collections.Generic.IReadOnlyList\u00601{FamilyQuant.FastaItemExtended},String,String)), not in member ClusterGenerationControl.ButtonApplyToSelected_Click",
       "kindReceiptId": null,
       "compared": null
-    },
-    {
-      "observationId": "FQ15-9A8A923BA90A",
-      "implementation": [
-        {
-          "path": "FamilyQuant/DeNovoControl.Dialogs.cs",
-          "symbol": "FamilyQuant.DeNovoControl::ButtonBrowseHomologyFcf_Click(Object,System.Windows.RoutedEventArgs)",
-          "sha256": "B714D7D9AA689F30D9EDFA2479D373824358521783DBBD267E209E34E91884A1"
-        }
-      ],
-      "proofs": [],
-      "note": "Frozen text in the compiled program, in its feature, reachable; no behavior, number or file claim.",
-      "kindReceiptId": "text-code-fact",
-      "compared": "frozen literal \u0022Family Cluster File chosen: \u0022 (SHA256 B8F8EACC92F5D25B) verbatim in FamilyQuant2.dll FamilyQuant.DeNovoControl::ButtonBrowseHomologyFcf_Click(Object,System.Windows.RoutedEventArgs) [FamilyQuant/DeNovoControl.Dialogs.cs]; feature member DeNovoControl.ButtonBrowseHomologyFcf_Click; reached as xaml handler FamilyQuant.DeNovoControl::ButtonBrowseHomologyFcf_Click(Object,System.Windows.RoutedEventArgs), 0 steps from the entry point"
     },
     {
       "observationId": "FQ15-9AAA02CA37D2",
@@ -6295,22 +5715,6 @@
       "compared": null
     },
     {
-      "observationId": "FQ15-9E73EC365DDF",
-      "implementation": [],
-      "proofs": [],
-      "note": "1 failed: a format string, separator or single word does not identify a fact by text alone",
-      "kindReceiptId": null,
-      "compared": null
-    },
-    {
-      "observationId": "FQ15-9E9B3B697A05",
-      "implementation": [],
-      "proofs": [],
-      "note": "1 failed: the frozen literal is not in the compiled program",
-      "kindReceiptId": null,
-      "compared": null
-    },
-    {
       "observationId": "FQ15-9EC278963534",
       "implementation": [],
       "proofs": [],
@@ -6325,20 +5729,6 @@
       "note": "2 failed: the literal is compiled only in other members (FamilyQuant.USearchLib/BuildActions::ButtonCalculateFDR_Click(Object,System.Windows.RoutedEventArgs)), not in member USearchLib.ButtonCalculateFDR_Click",
       "kindReceiptId": null,
       "compared": null
-    },
-    {
-      "observationId": "FQ15-9F933F8B5670",
-      "implementation": [
-        {
-          "path": "FamilyQuant/DeNovoControl.Dialogs.cs",
-          "symbol": "FamilyQuant.DeNovoControl::ButtonBrowseHomologyFcf_Click(Object,System.Windows.RoutedEventArgs)",
-          "sha256": "B714D7D9AA689F30D9EDFA2479D373824358521783DBBD267E209E34E91884A1"
-        }
-      ],
-      "proofs": [],
-      "note": "Frozen text in the compiled program, in its feature, reachable; no behavior, number or file claim.",
-      "kindReceiptId": "text-code-fact",
-      "compared": "frozen literal \u0022. Next step: check the identity threshold and the two residue options, then press Search. The file s...\u0022 (SHA256 F12300B91C2C0673) verbatim in FamilyQuant2.dll FamilyQuant.DeNovoControl::ButtonBrowseHomologyFcf_Click(Object,System.Windows.RoutedEventArgs) [FamilyQuant/DeNovoControl.Dialogs.cs]; feature member DeNovoControl.ButtonBrowseHomologyFcf_Click; reached as xaml handler FamilyQuant.DeNovoControl::ButtonBrowseHomologyFcf_Click(Object,System.Windows.RoutedEventArgs), 0 steps from the entry point"
     },
     {
       "observationId": "FQ15-A03420712329",
@@ -6466,7 +5856,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.Presentation.cs",
           "symbol": "FamilyQuant.ClusterGenerationControl::UpdateLayerStates()",
-          "sha256": "D57BEBE580E4A301DBBAD1350BDC91E7D1834A17CFEEDC9DE8EF5DC678933802"
+          "sha256": "163C3F79EC1A4885705484E029FB1814589A70F3A709C47680245E111BA4BB37"
         }
       ],
       "proofs": [],
@@ -6764,7 +6154,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.Presentation.cs",
           "symbol": "FamilyQuant.ClusterGenerationControl::UpdateLayerStates()",
-          "sha256": "D57BEBE580E4A301DBBAD1350BDC91E7D1834A17CFEEDC9DE8EF5DC678933802"
+          "sha256": "163C3F79EC1A4885705484E029FB1814589A70F3A709C47680245E111BA4BB37"
         }
       ],
       "proofs": [],
@@ -6831,14 +6221,6 @@
       "implementation": [],
       "proofs": [],
       "note": "2 failed: the literal is compiled only in other members (FamilyQuant.USearchLib/BuildActions/\u003CButtonRemoveRedundancy_ClickAsync\u003Ed__12::MoveNext()), not in member USearchLib.ButtonRemoveRedundancy_Click or USearchLib.ChooseDatabasePath",
-      "kindReceiptId": null,
-      "compared": null
-    },
-    {
-      "observationId": "FQ15-AC0CE9A0A3C5",
-      "implementation": [],
-      "proofs": [],
-      "note": "1 failed: the frozen literal is not in the compiled program",
       "kindReceiptId": null,
       "compared": null
     },
@@ -6955,14 +6337,6 @@
       "implementation": [],
       "proofs": [],
       "note": "1 failed: the frozen literal is not in the compiled program",
-      "kindReceiptId": null,
-      "compared": null
-    },
-    {
-      "observationId": "FQ15-B196620BD30B",
-      "implementation": [],
-      "proofs": [],
-      "note": "2 failed: the literal is compiled only in other members (FamilyQuant.DeNovoSession::ApplyHomology(FamilyQuant.DeNovoHomology)), not in member DeNovoControl.ApplyHomology",
       "kindReceiptId": null,
       "compared": null
     },
@@ -7132,13 +6506,13 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.Presentation.cs",
           "symbol": "FamilyQuant.ClusterGenerationControl::ApplyColumnHeaderTooltips()",
-          "sha256": "D57BEBE580E4A301DBBAD1350BDC91E7D1834A17CFEEDC9DE8EF5DC678933802"
+          "sha256": "163C3F79EC1A4885705484E029FB1814589A70F3A709C47680245E111BA4BB37"
         }
       ],
       "proofs": [],
       "note": "Frozen text in the compiled program, in its feature, reachable; no behavior, number or file claim.",
       "kindReceiptId": "text-code-fact",
-      "compared": "frozen literal \u0022Your own family number, the only editable id. Type the same number in two rows to merge their famili...\u0022 (SHA256 C6A3DF6D916ECE40) verbatim in FamilyQuant2.dll FamilyQuant.ClusterGenerationControl::ApplyColumnHeaderTooltips() [FamilyQuant/ClusterGenerationControl.Presentation.cs]; feature member ClusterGenerationControl.ApplyColumnHeaderTooltips or ClusterGenerationControl.ApplyColumnHeaderTooltips; reached as delegate FamilyQuant.MainWindow/ShellDocumentCommands/\u003C\u003Ec__DisplayClass4_0::\u003COpenProjectPathAsync\u003Eb__0(), 6 steps from the entry point"
+      "compared": "frozen literal \u0022Your own family number, the only editable id. Type the same number in two rows to merge their famili...\u0022 (SHA256 C6A3DF6D916ECE40) verbatim in FamilyQuant2.dll FamilyQuant.ClusterGenerationControl::ApplyColumnHeaderTooltips() [FamilyQuant/ClusterGenerationControl.Presentation.cs]; feature member ClusterGenerationControl.ApplyColumnHeaderTooltips; reached as delegate FamilyQuant.MainWindow/ShellDocumentCommands/\u003C\u003Ec__DisplayClass4_0::\u003COpenProjectPathAsync\u003Eb__0(), 6 steps from the entry point"
     },
     {
       "observationId": "FQ15-B5062F974B9D",
@@ -7226,13 +6600,13 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.Presentation.cs",
           "symbol": "FamilyQuant.ClusterGenerationControl::ApplyColumnHeaderTooltips()",
-          "sha256": "D57BEBE580E4A301DBBAD1350BDC91E7D1834A17CFEEDC9DE8EF5DC678933802"
+          "sha256": "163C3F79EC1A4885705484E029FB1814589A70F3A709C47680245E111BA4BB37"
         }
       ],
       "proofs": [],
       "note": "Frozen text in the compiled program, in its feature, reachable; no behavior, number or file claim.",
       "kindReceiptId": "text-code-fact",
-      "compared": "frozen literal \u0022The last automatic grouping, from USEARCH and any word or keyword merge. Read-only; it equals User I...\u0022 (SHA256 85498388F5C8F8DF) verbatim in FamilyQuant2.dll FamilyQuant.ClusterGenerationControl::ApplyColumnHeaderTooltips() [FamilyQuant/ClusterGenerationControl.Presentation.cs]; feature member ClusterGenerationControl.ApplyColumnHeaderTooltips or ClusterGenerationControl.ApplyColumnHeaderTooltips; reached as delegate FamilyQuant.MainWindow/ShellDocumentCommands/\u003C\u003Ec__DisplayClass4_0::\u003COpenProjectPathAsync\u003Eb__0(), 6 steps from the entry point"
+      "compared": "frozen literal \u0022The last automatic grouping, from USEARCH and any word or keyword merge. Read-only; it equals User I...\u0022 (SHA256 85498388F5C8F8DF) verbatim in FamilyQuant2.dll FamilyQuant.ClusterGenerationControl::ApplyColumnHeaderTooltips() [FamilyQuant/ClusterGenerationControl.Presentation.cs]; feature member ClusterGenerationControl.ApplyColumnHeaderTooltips; reached as delegate FamilyQuant.MainWindow/ShellDocumentCommands/\u003C\u003Ec__DisplayClass4_0::\u003COpenProjectPathAsync\u003Eb__0(), 6 steps from the entry point"
     },
     {
       "observationId": "FQ15-B7A8EB1EE831",
@@ -7283,14 +6657,6 @@
       "compared": null
     },
     {
-      "observationId": "FQ15-B883DB09A57C",
-      "implementation": [],
-      "proofs": [],
-      "note": "2 failed: the literal is compiled only in other members (FamilyQuant.DeNovoViewModel/\u003CImportAsync\u003Ed__6::MoveNext()), not in member DeNovoControl.ButtonLoadAndFilter_Click",
-      "kindReceiptId": null,
-      "compared": null
-    },
-    {
       "observationId": "FQ15-B8856E48D2ED",
       "implementation": [],
       "proofs": [],
@@ -7312,7 +6678,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.Presentation.cs",
           "symbol": "FamilyQuant.ClusterGenerationControl::UpdateColumnHeaders()",
-          "sha256": "D57BEBE580E4A301DBBAD1350BDC91E7D1834A17CFEEDC9DE8EF5DC678933802"
+          "sha256": "163C3F79EC1A4885705484E029FB1814589A70F3A709C47680245E111BA4BB37"
         }
       ],
       "proofs": [],
@@ -7349,14 +6715,6 @@
       "implementation": [],
       "proofs": [],
       "note": "1 failed: the frozen literal is not in the compiled program",
-      "kindReceiptId": null,
-      "compared": null
-    },
-    {
-      "observationId": "FQ15-BA54B9A61BCA",
-      "implementation": [],
-      "proofs": [],
-      "note": "1 failed: the row records no literal text (kind handler)",
       "kindReceiptId": null,
       "compared": null
     },
@@ -7546,7 +6904,7 @@
       "observationId": "FQ15-C1E31AA57727",
       "implementation": [],
       "proofs": [],
-      "note": "1 failed: the compiled literal is overwritten later in the same call path (FamilyQuant.ClusterGenerationControl/\u003CButtonSaveReport_Click\u003Ed__132::MoveNext())",
+      "note": "1 failed: the compiled literal is overwritten later in the same call path (FamilyQuant.ClusterGenerationControl/\u003CButtonSaveReport_Click\u003Ed__134::MoveNext())",
       "kindReceiptId": null,
       "compared": null
     },
@@ -7822,13 +7180,13 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.Presentation.cs",
           "symbol": "FamilyQuant.ClusterGenerationControl::ApplyColumnHeaderTooltips()",
-          "sha256": "D57BEBE580E4A301DBBAD1350BDC91E7D1834A17CFEEDC9DE8EF5DC678933802"
+          "sha256": "163C3F79EC1A4885705484E029FB1814589A70F3A709C47680245E111BA4BB37"
         }
       ],
       "proofs": [],
       "note": "Frozen text in the compiled program, in its feature, reachable; no behavior, number or file claim.",
       "kindReceiptId": "text-code-fact",
-      "compared": "frozen literal \u0022The sum of the protein\u0027s residue masses in daltons, without the terminal water. Add 18.011 Da for th...\u0022 (SHA256 B7FBBD75E6982B71) verbatim in FamilyQuant2.dll FamilyQuant.ClusterGenerationControl::ApplyColumnHeaderTooltips() [FamilyQuant/ClusterGenerationControl.Presentation.cs]; feature member ClusterGenerationControl.ApplyColumnHeaderTooltips or ClusterGenerationControl.ApplyColumnHeaderTooltips; reached as delegate FamilyQuant.MainWindow/ShellDocumentCommands/\u003C\u003Ec__DisplayClass4_0::\u003COpenProjectPathAsync\u003Eb__0(), 6 steps from the entry point"
+      "compared": "frozen literal \u0022The sum of the protein\u0027s residue masses in daltons, without the terminal water. Add 18.011 Da for th...\u0022 (SHA256 B7FBBD75E6982B71) verbatim in FamilyQuant2.dll FamilyQuant.ClusterGenerationControl::ApplyColumnHeaderTooltips() [FamilyQuant/ClusterGenerationControl.Presentation.cs]; feature member ClusterGenerationControl.ApplyColumnHeaderTooltips; reached as delegate FamilyQuant.MainWindow/ShellDocumentCommands/\u003C\u003Ec__DisplayClass4_0::\u003COpenProjectPathAsync\u003Eb__0(), 6 steps from the entry point"
     },
     {
       "observationId": "FQ15-C8FFCC2A4667",
@@ -7911,20 +7269,6 @@
       "compared": null
     },
     {
-      "observationId": "FQ15-CB1CCF968A7F",
-      "implementation": [
-        {
-          "path": "FamilyQuant/DeNovoControl.Dialogs.cs",
-          "symbol": "FamilyQuant.DeNovoControl::ButtonBrowseHomologyFcf_Click(Object,System.Windows.RoutedEventArgs)",
-          "sha256": "B714D7D9AA689F30D9EDFA2479D373824358521783DBBD267E209E34E91884A1"
-        }
-      ],
-      "proofs": [],
-      "note": "Frozen text in the compiled program, in its feature, reachable; no behavior, number or file claim.",
-      "kindReceiptId": "text-code-fact",
-      "compared": "frozen literal \u0022. Next step: check the identity threshold and the two residue options, then press Search. The file s...\u0022 (SHA256 F12300B91C2C0673) verbatim in FamilyQuant2.dll FamilyQuant.DeNovoControl::ButtonBrowseHomologyFcf_Click(Object,System.Windows.RoutedEventArgs) [FamilyQuant/DeNovoControl.Dialogs.cs]; feature member DeNovoControl.ButtonBrowseHomologyFcf_Click; reached as xaml handler FamilyQuant.DeNovoControl::ButtonBrowseHomologyFcf_Click(Object,System.Windows.RoutedEventArgs), 0 steps from the entry point"
-    },
-    {
       "observationId": "FQ15-CB92BE7E8C88",
       "implementation": [],
       "proofs": [],
@@ -8003,14 +7347,6 @@
       "compared": null
     },
     {
-      "observationId": "FQ15-CDD9EFABA0FA",
-      "implementation": [],
-      "proofs": [],
-      "note": "2 failed: the literal is compiled only in other members (FamilyQuant.DeNovoSession::ApplyImport(FamilyQuant.DeNovoImport)), not in member DeNovoControl.ApplyImport",
-      "kindReceiptId": null,
-      "compared": null
-    },
-    {
       "observationId": "FQ15-CDE5E8D22ECC",
       "implementation": [],
       "proofs": [],
@@ -8047,14 +7383,6 @@
       "implementation": [],
       "proofs": [],
       "note": "1 failed: no compiled XAML of its screen holds this element, property and value",
-      "kindReceiptId": null,
-      "compared": null
-    },
-    {
-      "observationId": "FQ15-CFCAA86A49CB",
-      "implementation": [],
-      "proofs": [],
-      "note": "1 failed: a format string, separator or single word does not identify a fact by text alone",
       "kindReceiptId": null,
       "compared": null
     },
@@ -8096,13 +7424,13 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "FamilyQuant.HelpContent::Build(FamilyQuant.QuantitationProfile,FamilyQuant.NormalizationMode,FamilyQuant.SharedPeptidePolicy)",
-          "sha256": "7FB07E60C4C75E69FB42F94FF0DF36563FB3BF474753543E53C857AA4A1CA086"
+          "sha256": "CC34DF8B1BB35DD835E393BAC533EDAE74650AC0AA04C867C83226DD426530D3"
         }
       ],
       "proofs": [],
       "note": "Frozen text in the compiled program, in its feature, reachable; no behavior, number or file claim.",
       "kindReceiptId": "text-help-fact",
-      "compared": "frozen literal \u0022Note the words \u0027NOT recorded\u0027 above. This project was exported before\u0022 (SHA256 6A8F037F4161D2AD) verbatim in FamilyQuant.Core.dll FamilyQuant.HelpContent::Build(FamilyQuant.QuantitationProfile,FamilyQuant.NormalizationMode,FamilyQuant.SharedPeptidePolicy) [FamilyQuant.Core/HelpContent.cs]; feature member HelpContent.Build or HelpContent.Build; reached as delegate FamilyQuant.MainWindow::\u003CInitializeShellCommands\u003Eb__30_14(), 3 steps from the entry point"
+      "compared": "frozen literal \u0022Note the words \u0027NOT recorded\u0027 above. This project was exported before\u0022 (SHA256 6A8F037F4161D2AD) verbatim in FamilyQuant.Core.dll FamilyQuant.HelpContent::Build(FamilyQuant.QuantitationProfile,FamilyQuant.NormalizationMode,FamilyQuant.SharedPeptidePolicy) [FamilyQuant.Core/HelpContent.cs]; feature member HelpContent.Build; reached as delegate FamilyQuant.MainWindow::\u003CInitializeShellCommands\u003Eb__30_14(), 3 steps from the entry point"
     },
     {
       "observationId": "FQ15-D136487227D2",
@@ -8125,14 +7453,6 @@
       "note": "Frozen text in the compiled program, in its feature, reachable; no behavior, number or file claim.",
       "kindReceiptId": "text-code-fact",
       "compared": "frozen literal \u0022Files found: \u0022 (SHA256 B565A775FA66A15C) verbatim in FamilyQuant2.dll FamilyQuant.DeNovoControl::ButtonBrowsePeaksDirectory_Click(Object,System.Windows.RoutedEventArgs) [FamilyQuant/DeNovoControl.Dialogs.cs]; feature member DeNovoControl.ButtonBrowsePeaksDirectory_Click; reached as xaml handler FamilyQuant.DeNovoControl::ButtonBrowsePeaksDirectory_Click(Object,System.Windows.RoutedEventArgs), 0 steps from the entry point"
-    },
-    {
-      "observationId": "FQ15-D1C96A54C4E7",
-      "implementation": [],
-      "proofs": [],
-      "note": "1 failed: the row records no literal text (kind handler)",
-      "kindReceiptId": null,
-      "compared": null
     },
     {
       "observationId": "FQ15-D1D364443CBF",
@@ -8171,14 +7491,6 @@
       "implementation": [],
       "proofs": [],
       "note": "1 failed: the frozen literal is not in the compiled program",
-      "kindReceiptId": null,
-      "compared": null
-    },
-    {
-      "observationId": "FQ15-D2F8FEEC80EE",
-      "implementation": [],
-      "proofs": [],
-      "note": "1 failed: a format string, separator or single word does not identify a fact by text alone",
       "kindReceiptId": null,
       "compared": null
     },
@@ -8319,14 +7631,6 @@
       "compared": null
     },
     {
-      "observationId": "FQ15-D6E8B4FC93AC",
-      "implementation": [],
-      "proofs": [],
-      "note": "2 failed: the literal is compiled only in other members (FamilyQuant.DeNovoViewModel/\u003CReconcileAsync\u003Ed__7::MoveNext()), not in member DeNovoControl.ButtonReconcile_Click",
-      "kindReceiptId": null,
-      "compared": null
-    },
-    {
       "observationId": "FQ15-D73E4A425B2F",
       "implementation": [],
       "proofs": [],
@@ -8348,7 +7652,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.Presentation.cs",
           "symbol": "FamilyQuant.ClusterGenerationControl::UpdateLayerStates()",
-          "sha256": "D57BEBE580E4A301DBBAD1350BDC91E7D1834A17CFEEDC9DE8EF5DC678933802"
+          "sha256": "163C3F79EC1A4885705484E029FB1814589A70F3A709C47680245E111BA4BB37"
         }
       ],
       "proofs": [],
@@ -8371,20 +7675,6 @@
       "note": "1 failed: the frozen literal is not in the compiled program",
       "kindReceiptId": null,
       "compared": null
-    },
-    {
-      "observationId": "FQ15-D8088C6F3110",
-      "implementation": [
-        {
-          "path": "FamilyQuant/DeNovoControl.Dialogs.cs",
-          "symbol": "FamilyQuant.DeNovoControl/\u003CExport\u003Ed__62::MoveNext()",
-          "sha256": "B714D7D9AA689F30D9EDFA2479D373824358521783DBBD267E209E34E91884A1"
-        }
-      ],
-      "proofs": [],
-      "note": "Frozen text in the compiled program, in its feature, reachable; no behavior, number or file claim.",
-      "kindReceiptId": "text-code-fact",
-      "compared": "frozen literal \u0022. Numbers use a dot for the decimal separator whatever your machine\u0027s language is, so any program ca...\u0022 (SHA256 3DDA587DA614A161) verbatim in FamilyQuant2.dll FamilyQuant.DeNovoControl/\u003CExport\u003Ed__62::MoveNext() [FamilyQuant/DeNovoControl.Dialogs.cs]; feature member DeNovoControl.Export; reached as xaml handler FamilyQuant.DeNovoControl::ButtonExportSummary_Click(Object,System.Windows.RoutedEventArgs), 2 steps from the entry point"
     },
     {
       "observationId": "FQ15-D8A33F8039BA",
@@ -8467,14 +7757,6 @@
       "compared": null
     },
     {
-      "observationId": "FQ15-DA934458B136",
-      "implementation": [],
-      "proofs": [],
-      "note": "2 failed: the literal is compiled only in other members (FamilyQuant.DeNovoViewModel/\u003CSearchAsync\u003Ed__9::MoveNext()), not in member DeNovoControl.ButtonSearchHomology_Click",
-      "kindReceiptId": null,
-      "compared": null
-    },
-    {
       "observationId": "FQ15-DAE3C2F192AF",
       "implementation": [],
       "proofs": [],
@@ -8531,22 +7813,6 @@
       "compared": null
     },
     {
-      "observationId": "FQ15-DDB35E0E348E",
-      "implementation": [],
-      "proofs": [],
-      "note": "1 failed: a format string, separator or single word does not identify a fact by text alone",
-      "kindReceiptId": null,
-      "compared": null
-    },
-    {
-      "observationId": "FQ15-DDDCD325392D",
-      "implementation": [],
-      "proofs": [],
-      "note": "2 failed: the literal is compiled only in other members (FamilyQuant.DeNovoSession::ApplyImport(FamilyQuant.DeNovoImport)), not in member DeNovoControl.ApplyImport",
-      "kindReceiptId": null,
-      "compared": null
-    },
-    {
       "observationId": "FQ15-DE649731E000",
       "implementation": [],
       "proofs": [],
@@ -8589,14 +7855,6 @@
       "implementation": [],
       "proofs": [],
       "note": "1 failed: no compiled XAML of its screen holds this element, property and value",
-      "kindReceiptId": null,
-      "compared": null
-    },
-    {
-      "observationId": "FQ15-DEE484B58160",
-      "implementation": [],
-      "proofs": [],
-      "note": "1 failed: the row records no literal text (kind handler)",
       "kindReceiptId": null,
       "compared": null
     },
@@ -8662,7 +7920,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.Presentation.cs",
           "symbol": "FamilyQuant.ClusterGenerationControl::UpdateLayerStates()",
-          "sha256": "D57BEBE580E4A301DBBAD1350BDC91E7D1834A17CFEEDC9DE8EF5DC678933802"
+          "sha256": "163C3F79EC1A4885705484E029FB1814589A70F3A709C47680245E111BA4BB37"
         }
       ],
       "proofs": [],
@@ -9059,26 +8317,10 @@
       "compared": null
     },
     {
-      "observationId": "FQ15-EF3B72BB48A4",
-      "implementation": [],
-      "proofs": [],
-      "note": "2 failed: the literal is compiled only in other members (FamilyQuant.DeNovoSession::ApplyImport(FamilyQuant.DeNovoImport)), not in member DeNovoControl.ApplyImport",
-      "kindReceiptId": null,
-      "compared": null
-    },
-    {
       "observationId": "FQ15-EF5F7EB3F94F",
       "implementation": [],
       "proofs": [],
       "note": "1 failed: the frozen literal is not in the compiled program",
-      "kindReceiptId": null,
-      "compared": null
-    },
-    {
-      "observationId": "FQ15-EF7CA1E93F27",
-      "implementation": [],
-      "proofs": [],
-      "note": "1 failed: a format string, separator or single word does not identify a fact by text alone",
       "kindReceiptId": null,
       "compared": null
     },
@@ -9227,14 +8469,6 @@
       "compared": null
     },
     {
-      "observationId": "FQ15-F51D867CF9B2",
-      "implementation": [],
-      "proofs": [],
-      "note": "2 failed: the literal is compiled only in other members (FamilyQuant.DeNovoSession::ApplyImport(FamilyQuant.DeNovoImport)), not in member DeNovoControl.ApplyImport",
-      "kindReceiptId": null,
-      "compared": null
-    },
-    {
       "observationId": "FQ15-F5ACB71EA8B3",
       "implementation": [
         {
@@ -9252,7 +8486,7 @@
       "observationId": "FQ15-F5C30A6D6CFB",
       "implementation": [],
       "proofs": [],
-      "note": "1 failed: the compiled literal is overwritten later in the same call path (FamilyQuant.ClusterGenerationControl/\u003CButtonExportComposition_Click\u003Ed__161::MoveNext())",
+      "note": "1 failed: the compiled literal is overwritten later in the same call path (FamilyQuant.ClusterGenerationControl/\u003CButtonExportComposition_Click\u003Ed__163::MoveNext())",
       "kindReceiptId": null,
       "compared": null
     },
@@ -9261,14 +8495,6 @@
       "implementation": [],
       "proofs": [],
       "note": "1 failed: a format string, separator or single word does not identify a fact by text alone",
-      "kindReceiptId": null,
-      "compared": null
-    },
-    {
-      "observationId": "FQ15-F685DDC96072",
-      "implementation": [],
-      "proofs": [],
-      "note": "1 failed: the row records no literal text (kind handler)",
       "kindReceiptId": null,
       "compared": null
     },
@@ -9353,28 +8579,6 @@
       "compared": null
     },
     {
-      "observationId": "FQ15-F917A2895716",
-      "implementation": [
-        {
-          "path": "FamilyQuant/DeNovoControl.Dialogs.cs",
-          "symbol": "FamilyQuant.DeNovoControl/\u003CExport\u003Ed__62::MoveNext()",
-          "sha256": "B714D7D9AA689F30D9EDFA2479D373824358521783DBBD267E209E34E91884A1"
-        }
-      ],
-      "proofs": [],
-      "note": "Frozen text in the compiled program, in its feature, reachable; no behavior, number or file claim.",
-      "kindReceiptId": "text-code-fact",
-      "compared": "frozen literal \u0022. Numbers use a dot for the decimal separator whatever your machine\u0027s language is, so any program ca...\u0022 (SHA256 3DDA587DA614A161) verbatim in FamilyQuant2.dll FamilyQuant.DeNovoControl/\u003CExport\u003Ed__62::MoveNext() [FamilyQuant/DeNovoControl.Dialogs.cs]; feature member DeNovoControl.Export; reached as xaml handler FamilyQuant.DeNovoControl::ButtonExportSummary_Click(Object,System.Windows.RoutedEventArgs), 2 steps from the entry point"
-    },
-    {
-      "observationId": "FQ15-F9B01DCA7ADF",
-      "implementation": [],
-      "proofs": [],
-      "note": "1 failed: the frozen literal is not in the compiled program",
-      "kindReceiptId": null,
-      "compared": null
-    },
-    {
       "observationId": "FQ15-F9E8273066A4",
       "implementation": [],
       "proofs": [],
@@ -9411,14 +8615,6 @@
       "implementation": [],
       "proofs": [],
       "note": "2 failed: the literal is compiled only in other members (FamilyQuant.CurationQuantitationViewModel::get_FullXicBasisLabel()), not in member ClusterGenerationControl.FullXicBasisLabel",
-      "kindReceiptId": null,
-      "compared": null
-    },
-    {
-      "observationId": "FQ15-FA4555DDF335",
-      "implementation": [],
-      "proofs": [],
-      "note": "1 failed: the frozen literal is not in the compiled program",
       "kindReceiptId": null,
       "compared": null
     },
@@ -9485,14 +8681,6 @@
       "compared": null
     },
     {
-      "observationId": "FQ15-FB9DC543F995",
-      "implementation": [],
-      "proofs": [],
-      "note": "1 failed: a format string, separator or single word does not identify a fact by text alone",
-      "kindReceiptId": null,
-      "compared": null
-    },
-    {
       "observationId": "FQ15-FC27767FEEC2",
       "implementation": [],
       "proofs": [],
@@ -9513,14 +8701,6 @@
       "implementation": [],
       "proofs": [],
       "note": "2 failed: the literal is compiled only in other members (FamilyQuant.USearchLib/BuildActions/\u003CButtonDivideAndConquer_ClickAsync\u003Ed__8::MoveNext()), not in member USearchLib.ButtonDivideAndConquer_Click",
-      "kindReceiptId": null,
-      "compared": null
-    },
-    {
-      "observationId": "FQ15-FD40ACC93D38",
-      "implementation": [],
-      "proofs": [],
-      "note": "2 failed: the literal is compiled only in other members (FamilyQuant.DeNovoViewModel/\u003CImportAsync\u003Ed__6::MoveNext()), not in member DeNovoControl.ButtonLoadAndFilter_Click",
       "kindReceiptId": null,
       "compared": null
     },
@@ -9562,13 +8742,13 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "FamilyQuant.HelpContent::Build(FamilyQuant.QuantitationProfile,FamilyQuant.NormalizationMode,FamilyQuant.SharedPeptidePolicy)",
-          "sha256": "7FB07E60C4C75E69FB42F94FF0DF36563FB3BF474753543E53C857AA4A1CA086"
+          "sha256": "CC34DF8B1BB35DD835E393BAC533EDAE74650AC0AA04C867C83226DD426530D3"
         }
       ],
       "proofs": [],
       "note": "Frozen text in the compiled program, in its feature, reachable; no behavior, number or file claim.",
       "kindReceiptId": "text-help-fact",
-      "compared": "frozen literal \u0022everywhere it appears. Re-exporting from XQuant turns it into a recorded fact.\u0022 (SHA256 421A30F61AAFD221) verbatim in FamilyQuant.Core.dll FamilyQuant.HelpContent::Build(FamilyQuant.QuantitationProfile,FamilyQuant.NormalizationMode,FamilyQuant.SharedPeptidePolicy) [FamilyQuant.Core/HelpContent.cs]; feature member HelpContent.Build or HelpContent.Build; reached as delegate FamilyQuant.MainWindow::\u003CInitializeShellCommands\u003Eb__30_14(), 3 steps from the entry point"
+      "compared": "frozen literal \u0022everywhere it appears. Re-exporting from XQuant turns it into a recorded fact.\u0022 (SHA256 421A30F61AAFD221) verbatim in FamilyQuant.Core.dll FamilyQuant.HelpContent::Build(FamilyQuant.QuantitationProfile,FamilyQuant.NormalizationMode,FamilyQuant.SharedPeptidePolicy) [FamilyQuant.Core/HelpContent.cs]; feature member HelpContent.Build; reached as delegate FamilyQuant.MainWindow::\u003CInitializeShellCommands\u003Eb__30_14(), 3 steps from the entry point"
     },
     {
       "observationId": "FQ15-FE448906A1E1",
@@ -9683,7 +8863,7 @@
           "kind": "test",
           "target": "LedgerTextPreservedCommand",
           "assertion": "Text tool kind code fact: every listed row holds its frozen literal verbatim in the compiled program, in its feature, reachable from the entry point",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\text-preserved\\text.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\text-preserved\\text.log",
           "inspectedBy": ""
         }
       ]
@@ -9697,7 +8877,7 @@
           "kind": "test",
           "target": "LedgerTextPreservedCommand",
           "assertion": "Text tool kind control: every listed row holds its frozen literal verbatim in the compiled program, in its feature, reachable from the entry point",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\text-preserved\\text.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\text-preserved\\text.log",
           "inspectedBy": ""
         }
       ]
@@ -9711,7 +8891,7 @@
           "kind": "test",
           "target": "LedgerTextPreservedCommand",
           "assertion": "Text tool kind help fact: every listed row holds its frozen literal verbatim in the compiled program, in its feature, reachable from the entry point",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\text-preserved\\text.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\text-preserved\\text.log",
           "inspectedBy": ""
         }
       ]
@@ -9725,7 +8905,7 @@
           "kind": "test",
           "target": "LedgerTextPreservedCommand",
           "assertion": "Text tool kind option/copy: every listed row holds its frozen literal verbatim in the compiled program, in its feature, reachable from the entry point",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\text-preserved\\text.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\text-preserved\\text.log",
           "inspectedBy": ""
         }
       ]
@@ -9739,7 +8919,7 @@
           "kind": "test",
           "target": "LedgerTextPreservedCommand",
           "assertion": "Text tool kind tooltip: every listed row holds its frozen literal verbatim in the compiled program, in its feature, reachable from the entry point",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\text-preserved\\text.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\text-preserved\\text.log",
           "inspectedBy": ""
         }
       ]

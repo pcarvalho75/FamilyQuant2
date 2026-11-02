@@ -27,6 +27,7 @@ internal static partial class Program
         "--source-caption-check",
         "--shared-peptide-effect",
         "--test-desktop-world",
+        "--test-feedback-facts",
         "--desktop-world-walk",
         "--prove-denovo-results-export",
         "--isolated-native-proof",

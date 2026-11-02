@@ -5,96 +5,96 @@
   "runs": [
     {
       "id": "native-shell-main",
-      "command": "C:\\FamilyQuant-gate\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --prove-shell-main D:/FamilyQuant-data/out-shell/N3/source D:/FamilyQuant-data/out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main \u00222026-11-02 13:05:59 -0800\u0022",
-      "executedAt": "2026-11-02 13:05:59 -0800",
-      "commit": "d3b71621ce6198f63f586cf062567a18103f9e72",
+      "command": "C:\\FamilyQuant-gate\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --prove-shell-main D:/FamilyQuant-data/out-shell/N3/source D:/FamilyQuant-data/out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main \u00222026-11-02 14:00:22 -0800\u0022",
+      "executedAt": "2026-11-02 14:00:22 -0800",
+      "commit": "4d28dbcc530f7cccc9dff5a9df676924c4b558f8",
       "artifacts": [
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\comparisons.log",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\comparisons.log",
           "sha256": "9BEC8F0A245A8EE2795E67FFF92A1ACC6D6AA29CB48CAF31CAD4E65574B22A74"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\comparisons.json",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\comparisons.json",
           "sha256": "6A181FFD3C488ECD84385982E75DD0AEE70F1A197DB3EA8B65D00D9DEF9BDCB9"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\native-cases-canonical.json",
-          "sha256": "ECE48A204A019FE818436D2D1B3F62D51C7FC9EA8B47FFA8506BC6D4DD8CB014"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\native-cases-canonical.json",
+          "sha256": "922ACDEF6CC8474360E1D2D3FFDE64E24CABA313FE2ED4443C7E716A220D5DC5"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\message-comparisons.json",
-          "sha256": "E42132FC90171E1C6993AA4EC3E68907936FD3F3BD4AE288F616B5FCC12C90CF"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\message-comparisons.json",
+          "sha256": "C47A7BA043208DE4F6C594F25873F5CFCF3395FFF3C6EEA0E178CA3053AC53A6"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\native/native-cases.json",
-          "sha256": "D2074BD52AD9DB7FC8FD85E96A306D14CF481C91CD0DED93D063DBC0966E2F25"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\native/native-cases.json",
+          "sha256": "9F2525A9E59C79F9DC99A11968A6273F3D73BA00133F733378418801E92E4C71"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\wording-for-paulo.tsv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\wording-for-paulo.tsv",
           "sha256": "50A86BDBA31700B655E92C15E2317189CAD69E45F818204C1DB23F7F49116BDF"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\executed\\LedgerMemberFactComparison.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\executed\\LedgerMemberFactComparison.cs",
           "sha256": "1F3254D635B40D22576E9F40347DBEB503A5FF661EFC18E743EAC35B097FC14C"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\executed\\LedgerMemberFactComparison.Messages.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\executed\\LedgerMemberFactComparison.Messages.cs",
           "sha256": "D9CA2353875D839C208F097B136E41A649250487F00A70164E8649B596DF622E"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\executed\\Program.ShellRouteNative.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\executed\\Program.ShellRouteNative.cs",
           "sha256": "240528C46906BC0321276C4CB996EA93395286A0DB9723BEF667985F90769E96"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\executed\\Program.ShellMainMessages.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\executed\\Program.ShellMainMessages.cs",
           "sha256": "4B08F7D47E8A28AD6255AE0A2E9E83D4DF0EFE9799E8FB8974253AE9D8286482"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\executed\\Program.ShellMainReceipts.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\executed\\Program.ShellMainReceipts.cs",
           "sha256": "6D33A953E4FA9FCD54E94B5472765CF06E1D86F37D5BB8619F97D05746DDAD5A"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\executed\\Program.ShellMessageFrames.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\executed\\Program.ShellMessageFrames.cs",
           "sha256": "9C0C1B8F74536F1FDE0D760D6D202E972D4ED1DE6C736C3DF870FB92F560389A"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\executed\\Program.Commands.ShellRoutes.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\executed\\Program.Commands.ShellRoutes.cs",
           "sha256": "7AE2F33E02B447E30AE57AB3A5913A2F748B3B997407BDD08A68047DE9AEEDDE"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\executed\\Program.ShellSeproFixture.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\executed\\Program.ShellSeproFixture.cs",
           "sha256": "1F3EA47B23440BC75A278743E4CEC661D8B61342BE85F0AC52D1530E418AFDD6"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\executed\\Program.Commands.ShellSeproFixture.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\executed\\Program.Commands.ShellSeproFixture.cs",
           "sha256": "75B9B62592B4666124F997277B959313908B0203274BEBE4818A12F9271CE9FC"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\executed\\Program.ShellProofWindows.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\executed\\Program.ShellProofWindows.cs",
           "sha256": "630AEB8FA35969CBF53BDD55A5EB1A28E6C86B14DAD3FA71EBF8EC560013D0EE"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\executed\\Program.Commands.ShellProofWindows.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\executed\\Program.Commands.ShellProofWindows.cs",
           "sha256": "47C3F5E10757C5F8CC8C017A7C52F99D3C6217BDCBB0ECDA03AE549EA03B4AAE"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\executed\\FamilyQuant.Tests.csproj",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\executed\\FamilyQuant.Tests.csproj",
           "sha256": "C49E26F885685BB74682F1A3C23C68BC2F780865110C240DC6F6BB703C555CAE"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\executed\\FamilyQuant.Tests.dll",
-          "sha256": "338CB1ED8EE1B52F92368A79B99A6C1D2789A40AE07801AAB7226AA8B8A528A4"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\executed\\FamilyQuant.Tests.dll",
+          "sha256": "AF6B483E2C3E34036AD088F4ECCBB6B316270C6B911EA6D31A7EA222DB761AE2"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\executed\\FamilyQuant2.dll",
-          "sha256": "C0FF8144D05014240713CC94900258E162FF2B6F51DB01CA13758C4E0BD9784D"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\executed\\FamilyQuant2.dll",
+          "sha256": "8511AB784ACA1C6C07FD728C1CEB53E76C60D9A4A7EBE381AF9759D294F15C59"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\executed\\FamilyQuant.Core.dll",
-          "sha256": "B3DE904BB50477ACCB982BDE2CE437BA6962BB1DA44E7D260B992D1E188837BC"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\executed\\FamilyQuant.Core.dll",
+          "sha256": "743F2A4D78BAFC24B294E887663A75FE5A7BB4DA8B0ACF95EBF52F5BEE2DC116"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\executed\\SeproPckg2.dll",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\executed\\SeproPckg2.dll",
           "sha256": "8A7D8B48B537F6F788718054E4959C129B55C6C5203BCBDF294F1A6B9F0A7EA2"
         },
         {
@@ -102,7 +102,7 @@
           "sha256": "8A7D8B48B537F6F788718054E4959C129B55C6C5203BCBDF294F1A6B9F0A7EA2"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\executed\\PatternTools.dll",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\executed\\PatternTools.dll",
           "sha256": "C36CC8957FFA977E16A8447F0D808BBD7E710BAB09B50EEC5172D8942987E1F6"
         },
         {
@@ -314,7 +314,7 @@
         {
           "path": "FamilyQuant/MainWindow.Status.cs",
           "symbol": "fcf-success: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "DF781080AD5D075D84F27F3757598ECB3E0B143BC6F4D39194900046BE1E3B55"
+          "sha256": "A13F51B49BD04137DF641A3B6251363646613F8DF04EAE2BE38E0A695D635A19"
         },
         {
           "path": "FamilyQuant/MainWindow.ViewModel.cs",
@@ -358,7 +358,7 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell message FQ15-003CB3619980: fcf-success at frozen line 482",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -562,7 +562,7 @@
         {
           "path": "FamilyQuant/MainWindow.Status.cs",
           "symbol": "open-project: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "DF781080AD5D075D84F27F3757598ECB3E0B143BC6F4D39194900046BE1E3B55"
+          "sha256": "A13F51B49BD04137DF641A3B6251363646613F8DF04EAE2BE38E0A695D635A19"
         },
         {
           "path": "FamilyQuant/MainWindow.ViewModel.cs",
@@ -606,7 +606,7 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell message FQ15-015C529AFCCA: open-project at frozen line 278",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -810,7 +810,7 @@
         {
           "path": "FamilyQuant/MainWindow.Status.cs",
           "symbol": "spectrum-failure: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "DF781080AD5D075D84F27F3757598ECB3E0B143BC6F4D39194900046BE1E3B55"
+          "sha256": "A13F51B49BD04137DF641A3B6251363646613F8DF04EAE2BE38E0A695D635A19"
         },
         {
           "path": "FamilyQuant/MainWindow.ViewModel.cs",
@@ -854,7 +854,7 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell message FQ15-0642600CF373: spectrum-failure at frozen line 751",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -1058,7 +1058,7 @@
         {
           "path": "FamilyQuant/MainWindow.Status.cs",
           "symbol": "sepro-failure: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "DF781080AD5D075D84F27F3757598ECB3E0B143BC6F4D39194900046BE1E3B55"
+          "sha256": "A13F51B49BD04137DF641A3B6251363646613F8DF04EAE2BE38E0A695D635A19"
         },
         {
           "path": "FamilyQuant/MainWindow.ViewModel.cs",
@@ -1102,7 +1102,7 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell message FQ15-083D6DE21A64: sepro-failure at frozen line 835",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -1306,7 +1306,7 @@
         {
           "path": "FamilyQuant/MainWindow.Status.cs",
           "symbol": "open-project: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "DF781080AD5D075D84F27F3757598ECB3E0B143BC6F4D39194900046BE1E3B55"
+          "sha256": "A13F51B49BD04137DF641A3B6251363646613F8DF04EAE2BE38E0A695D635A19"
         },
         {
           "path": "FamilyQuant/MainWindow.ViewModel.cs",
@@ -1350,7 +1350,7 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell message FQ15-098012E95BE9: open-project at frozen line 279",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -1554,7 +1554,7 @@
         {
           "path": "FamilyQuant/MainWindow.Status.cs",
           "symbol": "sepro-missing-1: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "DF781080AD5D075D84F27F3757598ECB3E0B143BC6F4D39194900046BE1E3B55"
+          "sha256": "A13F51B49BD04137DF641A3B6251363646613F8DF04EAE2BE38E0A695D635A19"
         },
         {
           "path": "FamilyQuant/MainWindow.ViewModel.cs",
@@ -1598,7 +1598,7 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell message FQ15-09A66AEC1BAA: sepro-missing-1 at frozen line 808",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -1802,7 +1802,7 @@
         {
           "path": "FamilyQuant/MainWindow.Status.cs",
           "symbol": "sepro-missing-1: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "DF781080AD5D075D84F27F3757598ECB3E0B143BC6F4D39194900046BE1E3B55"
+          "sha256": "A13F51B49BD04137DF641A3B6251363646613F8DF04EAE2BE38E0A695D635A19"
         },
         {
           "path": "FamilyQuant/MainWindow.ViewModel.cs",
@@ -1846,7 +1846,7 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell message FQ15-0A6BE0E01AB9: sepro-missing-1 at frozen line 802",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -2050,7 +2050,7 @@
         {
           "path": "FamilyQuant/MainWindow.Status.cs",
           "symbol": "project-success: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "DF781080AD5D075D84F27F3757598ECB3E0B143BC6F4D39194900046BE1E3B55"
+          "sha256": "A13F51B49BD04137DF641A3B6251363646613F8DF04EAE2BE38E0A695D635A19"
         },
         {
           "path": "FamilyQuant/MainWindow.ViewModel.cs",
@@ -2094,7 +2094,7 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell message FQ15-117A1F9A31C3: project-success at frozen line 576",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -2298,7 +2298,7 @@
         {
           "path": "FamilyQuant/MainWindow.Status.cs",
           "symbol": "compute-empty: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "DF781080AD5D075D84F27F3757598ECB3E0B143BC6F4D39194900046BE1E3B55"
+          "sha256": "A13F51B49BD04137DF641A3B6251363646613F8DF04EAE2BE38E0A695D635A19"
         },
         {
           "path": "FamilyQuant/MainWindow.ViewModel.cs",
@@ -2342,7 +2342,7 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell message FQ15-128CDF2967A3: compute-empty at frozen line 605",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -2554,7 +2554,7 @@
         {
           "path": "FamilyQuant/MainWindow.Status.cs",
           "symbol": "project-success: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "DF781080AD5D075D84F27F3757598ECB3E0B143BC6F4D39194900046BE1E3B55"
+          "sha256": "A13F51B49BD04137DF641A3B6251363646613F8DF04EAE2BE38E0A695D635A19"
         },
         {
           "path": "FamilyQuant/MainWindow.ViewModel.cs",
@@ -2598,13 +2598,13 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell message FQ15-1680DF391053: project-success at frozen line 574",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
       "note": "Complete frozen message expression equals the executed native report; dynamic inner literals are not credited.",
       "kindReceiptId": null,
-      "compared": "FamilyQuant/MainWindow.xaml.cs:574 \u0022Next step: nothing. Carry on working, or open this file later to return to exactly \u0022; frozen handler FamilyQuant.MainWindow::private async void MenuItemSaveProject_Click ( object sender , RoutedEventArgs e ) SHA256=810F5EAA567670C00E38AA106ACC95AFC9BA922B7CE7642AFB1C77BF3214E1BB; native case project-success; before=The project was saved to\nD:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\native\\saved.fqproj\n\nThe container holds the grouping, your User IDs and annotations, and 0 stored quant row(s). Reopening it restores both.\n\nNext step: nothing. Carry on working, or open this file later to return to exactly this project.; actual=The project was saved to\nD:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\native\\saved.fqproj\n\nThe container holds the grouping, your User IDs and annotations, and 0 stored quant row(s). Reopening it restores both.\n\nNext step: nothing. Carry on working, or open this file later to return to exactly this project."
+      "compared": "FamilyQuant/MainWindow.xaml.cs:574 \u0022Next step: nothing. Carry on working, or open this file later to return to exactly \u0022; frozen handler FamilyQuant.MainWindow::private async void MenuItemSaveProject_Click ( object sender , RoutedEventArgs e ) SHA256=810F5EAA567670C00E38AA106ACC95AFC9BA922B7CE7642AFB1C77BF3214E1BB; native case project-success; before=The project was saved to\nD:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\native\\saved.fqproj\n\nThe container holds the grouping, your User IDs and annotations, and 0 stored quant row(s). Reopening it restores both.\n\nNext step: nothing. Carry on working, or open this file later to return to exactly this project.; actual=The project was saved to\nD:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\native\\saved.fqproj\n\nThe container holds the grouping, your User IDs and annotations, and 0 stored quant row(s). Reopening it restores both.\n\nNext step: nothing. Carry on working, or open this file later to return to exactly this project."
     },
     {
       "observationId": "FQ15-1BB85E29A291",
@@ -2802,7 +2802,7 @@
         {
           "path": "FamilyQuant/MainWindow.Status.cs",
           "symbol": "open-failure: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "DF781080AD5D075D84F27F3757598ECB3E0B143BC6F4D39194900046BE1E3B55"
+          "sha256": "A13F51B49BD04137DF641A3B6251363646613F8DF04EAE2BE38E0A695D635A19"
         },
         {
           "path": "FamilyQuant/MainWindow.ViewModel.cs",
@@ -2846,7 +2846,7 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell message FQ15-1BB85E29A291: open-failure at frozen line 339",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -3050,7 +3050,7 @@
         {
           "path": "FamilyQuant/MainWindow.Status.cs",
           "symbol": "sepro-failure: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "DF781080AD5D075D84F27F3757598ECB3E0B143BC6F4D39194900046BE1E3B55"
+          "sha256": "A13F51B49BD04137DF641A3B6251363646613F8DF04EAE2BE38E0A695D635A19"
         },
         {
           "path": "FamilyQuant/MainWindow.ViewModel.cs",
@@ -3094,7 +3094,7 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell message FQ15-1C7E4B78A91C: sepro-failure at frozen line 834",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -3298,7 +3298,7 @@
         {
           "path": "FamilyQuant/MainWindow.Status.cs",
           "symbol": "fcf-success: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "DF781080AD5D075D84F27F3757598ECB3E0B143BC6F4D39194900046BE1E3B55"
+          "sha256": "A13F51B49BD04137DF641A3B6251363646613F8DF04EAE2BE38E0A695D635A19"
         },
         {
           "path": "FamilyQuant/MainWindow.ViewModel.cs",
@@ -3342,13 +3342,13 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell message FQ15-1DA6DACF8438: fcf-success at frozen line 478",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
       "note": "Complete frozen message expression equals the executed native report; dynamic inner literals are not credited.",
       "kindReceiptId": null,
-      "compared": "FamilyQuant/MainWindow.xaml.cs:478 \u0022quantitation: reopening it restores the families, and the percentages come back when \u0022; frozen handler FamilyQuant.MainWindow::private void MenuItemSaveFCF_Click ( object sender , RoutedEventArgs e ) SHA256=ECD06FF91E5D1BB955D661F429286ABA8D90A75467B5F581038DCD6FCABF18E9; native case fcf-success; before=The families were saved to\nD:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\native\\export.fcf\n\nThe file holds the grouping, your User IDs and your annotations. It does not hold the quantitation: reopening it restores the families, and the percentages come back when you load a PatternLab project again.\n\nNext step: nothing. Carry on working, or open this file later to return to exactly this grouping.; actual=The families were saved to\nD:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\native\\export.fcf\n\nThe file holds the grouping, your User IDs and your annotations. It does not hold the quantitation: reopening it restores the families, and the percentages come back when you load a PatternLab project again.\n\nNext step: nothing. Carry on working, or open this file later to return to exactly this grouping."
+      "compared": "FamilyQuant/MainWindow.xaml.cs:478 \u0022quantitation: reopening it restores the families, and the percentages come back when \u0022; frozen handler FamilyQuant.MainWindow::private void MenuItemSaveFCF_Click ( object sender , RoutedEventArgs e ) SHA256=ECD06FF91E5D1BB955D661F429286ABA8D90A75467B5F581038DCD6FCABF18E9; native case fcf-success; before=The families were saved to\nD:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\native\\export.fcf\n\nThe file holds the grouping, your User IDs and your annotations. It does not hold the quantitation: reopening it restores the families, and the percentages come back when you load a PatternLab project again.\n\nNext step: nothing. Carry on working, or open this file later to return to exactly this grouping.; actual=The families were saved to\nD:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\native\\export.fcf\n\nThe file holds the grouping, your User IDs and your annotations. It does not hold the quantitation: reopening it restores the families, and the percentages come back when you load a PatternLab project again.\n\nNext step: nothing. Carry on working, or open this file later to return to exactly this grouping."
     },
     {
       "observationId": "FQ15-1EC0FFA1496F",
@@ -3546,7 +3546,7 @@
         {
           "path": "FamilyQuant/MainWindow.Status.cs",
           "symbol": "project-failure: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "DF781080AD5D075D84F27F3757598ECB3E0B143BC6F4D39194900046BE1E3B55"
+          "sha256": "A13F51B49BD04137DF641A3B6251363646613F8DF04EAE2BE38E0A695D635A19"
         },
         {
           "path": "FamilyQuant/MainWindow.ViewModel.cs",
@@ -3590,7 +3590,7 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell message FQ15-1EC0FFA1496F: project-failure at frozen line 581",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -3794,7 +3794,7 @@
         {
           "path": "FamilyQuant/MainWindow.Status.cs",
           "symbol": "open-failure: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "DF781080AD5D075D84F27F3757598ECB3E0B143BC6F4D39194900046BE1E3B55"
+          "sha256": "A13F51B49BD04137DF641A3B6251363646613F8DF04EAE2BE38E0A695D635A19"
         },
         {
           "path": "FamilyQuant/MainWindow.ViewModel.cs",
@@ -3838,7 +3838,7 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell message FQ15-1EC2245C020C: open-failure at frozen line 337",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -4058,7 +4058,7 @@
         {
           "path": "FamilyQuant/MainWindow.Status.cs",
           "symbol": "open-failure: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "DF781080AD5D075D84F27F3757598ECB3E0B143BC6F4D39194900046BE1E3B55"
+          "sha256": "A13F51B49BD04137DF641A3B6251363646613F8DF04EAE2BE38E0A695D635A19"
         },
         {
           "path": "FamilyQuant/MainWindow.ViewModel.cs",
@@ -4102,7 +4102,7 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell message FQ15-29290A1DEF52: open-failure at frozen line 341",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -4306,7 +4306,7 @@
         {
           "path": "FamilyQuant/MainWindow.Status.cs",
           "symbol": "fcf-success: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "DF781080AD5D075D84F27F3757598ECB3E0B143BC6F4D39194900046BE1E3B55"
+          "sha256": "A13F51B49BD04137DF641A3B6251363646613F8DF04EAE2BE38E0A695D635A19"
         },
         {
           "path": "FamilyQuant/MainWindow.ViewModel.cs",
@@ -4350,13 +4350,13 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell message FQ15-29EB32BD76B6: fcf-success at frozen line 476",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
       "note": "Complete frozen message expression equals the executed native report; dynamic inner literals are not credited.",
       "kindReceiptId": null,
-      "compared": "FamilyQuant/MainWindow.xaml.cs:476 \u0022The families were saved to\\n\u0022; frozen handler FamilyQuant.MainWindow::private void MenuItemSaveFCF_Click ( object sender , RoutedEventArgs e ) SHA256=ECD06FF91E5D1BB955D661F429286ABA8D90A75467B5F581038DCD6FCABF18E9; native case fcf-success; before=The families were saved to\nD:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\native\\export.fcf\n\nThe file holds the grouping, your User IDs and your annotations. It does not hold the quantitation: reopening it restores the families, and the percentages come back when you load a PatternLab project again.\n\nNext step: nothing. Carry on working, or open this file later to return to exactly this grouping.; actual=The families were saved to\nD:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\native\\export.fcf\n\nThe file holds the grouping, your User IDs and your annotations. It does not hold the quantitation: reopening it restores the families, and the percentages come back when you load a PatternLab project again.\n\nNext step: nothing. Carry on working, or open this file later to return to exactly this grouping."
+      "compared": "FamilyQuant/MainWindow.xaml.cs:476 \u0022The families were saved to\\n\u0022; frozen handler FamilyQuant.MainWindow::private void MenuItemSaveFCF_Click ( object sender , RoutedEventArgs e ) SHA256=ECD06FF91E5D1BB955D661F429286ABA8D90A75467B5F581038DCD6FCABF18E9; native case fcf-success; before=The families were saved to\nD:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\native\\export.fcf\n\nThe file holds the grouping, your User IDs and your annotations. It does not hold the quantitation: reopening it restores the families, and the percentages come back when you load a PatternLab project again.\n\nNext step: nothing. Carry on working, or open this file later to return to exactly this grouping.; actual=The families were saved to\nD:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\native\\export.fcf\n\nThe file holds the grouping, your User IDs and your annotations. It does not hold the quantitation: reopening it restores the families, and the percentages come back when you load a PatternLab project again.\n\nNext step: nothing. Carry on working, or open this file later to return to exactly this grouping."
     },
     {
       "observationId": "FQ15-2CDDE5EC105D",
@@ -4570,7 +4570,7 @@
         {
           "path": "FamilyQuant/MainWindow.Status.cs",
           "symbol": "project-success: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "DF781080AD5D075D84F27F3757598ECB3E0B143BC6F4D39194900046BE1E3B55"
+          "sha256": "A13F51B49BD04137DF641A3B6251363646613F8DF04EAE2BE38E0A695D635A19"
         },
         {
           "path": "FamilyQuant/MainWindow.ViewModel.cs",
@@ -4614,13 +4614,13 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell message FQ15-433A5AAC1117: project-success at frozen line 572",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
       "note": "Complete frozen message expression equals the executed native report; dynamic inner literals are not credited.",
       "kindReceiptId": null,
-      "compared": "FamilyQuant/MainWindow.xaml.cs:572 \u0022 stored quant row(s). Reopening it restores both.\\n\\n\u0022; frozen handler FamilyQuant.MainWindow::private async void MenuItemSaveProject_Click ( object sender , RoutedEventArgs e ) SHA256=810F5EAA567670C00E38AA106ACC95AFC9BA922B7CE7642AFB1C77BF3214E1BB; native case project-success; before=The project was saved to\nD:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\native\\saved.fqproj\n\nThe container holds the grouping, your User IDs and annotations, and 0 stored quant row(s). Reopening it restores both.\n\nNext step: nothing. Carry on working, or open this file later to return to exactly this project.; actual=The project was saved to\nD:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\native\\saved.fqproj\n\nThe container holds the grouping, your User IDs and annotations, and 0 stored quant row(s). Reopening it restores both.\n\nNext step: nothing. Carry on working, or open this file later to return to exactly this project."
+      "compared": "FamilyQuant/MainWindow.xaml.cs:572 \u0022 stored quant row(s). Reopening it restores both.\\n\\n\u0022; frozen handler FamilyQuant.MainWindow::private async void MenuItemSaveProject_Click ( object sender , RoutedEventArgs e ) SHA256=810F5EAA567670C00E38AA106ACC95AFC9BA922B7CE7642AFB1C77BF3214E1BB; native case project-success; before=The project was saved to\nD:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\native\\saved.fqproj\n\nThe container holds the grouping, your User IDs and annotations, and 0 stored quant row(s). Reopening it restores both.\n\nNext step: nothing. Carry on working, or open this file later to return to exactly this project.; actual=The project was saved to\nD:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\native\\saved.fqproj\n\nThe container holds the grouping, your User IDs and annotations, and 0 stored quant row(s). Reopening it restores both.\n\nNext step: nothing. Carry on working, or open this file later to return to exactly this project."
     },
     {
       "observationId": "FQ15-46C7EDAE6F70",
@@ -4818,7 +4818,7 @@
         {
           "path": "FamilyQuant/MainWindow.Status.cs",
           "symbol": "sepro-missing-1: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "DF781080AD5D075D84F27F3757598ECB3E0B143BC6F4D39194900046BE1E3B55"
+          "sha256": "A13F51B49BD04137DF641A3B6251363646613F8DF04EAE2BE38E0A695D635A19"
         },
         {
           "path": "FamilyQuant/MainWindow.ViewModel.cs",
@@ -4862,7 +4862,7 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell message FQ15-46C7EDAE6F70: sepro-missing-1 at frozen line 810",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -5066,7 +5066,7 @@
         {
           "path": "FamilyQuant/MainWindow.Status.cs",
           "symbol": "sepro-failure: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "DF781080AD5D075D84F27F3757598ECB3E0B143BC6F4D39194900046BE1E3B55"
+          "sha256": "A13F51B49BD04137DF641A3B6251363646613F8DF04EAE2BE38E0A695D635A19"
         },
         {
           "path": "FamilyQuant/MainWindow.ViewModel.cs",
@@ -5110,7 +5110,7 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell message FQ15-4749DB5C7C36: sepro-failure at frozen line 833",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -5314,7 +5314,7 @@
         {
           "path": "FamilyQuant/MainWindow.Status.cs",
           "symbol": "project-failure: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "DF781080AD5D075D84F27F3757598ECB3E0B143BC6F4D39194900046BE1E3B55"
+          "sha256": "A13F51B49BD04137DF641A3B6251363646613F8DF04EAE2BE38E0A695D635A19"
         },
         {
           "path": "FamilyQuant/MainWindow.ViewModel.cs",
@@ -5358,7 +5358,7 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell message FQ15-490DB1A37514: project-failure at frozen line 584",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -5570,7 +5570,7 @@
         {
           "path": "FamilyQuant/MainWindow.Status.cs",
           "symbol": "fcf-success: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "DF781080AD5D075D84F27F3757598ECB3E0B143BC6F4D39194900046BE1E3B55"
+          "sha256": "A13F51B49BD04137DF641A3B6251363646613F8DF04EAE2BE38E0A695D635A19"
         },
         {
           "path": "FamilyQuant/MainWindow.ViewModel.cs",
@@ -5614,13 +5614,13 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell message FQ15-4EF7F04BBFA8: fcf-success at frozen line 480",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
       "note": "Complete frozen message expression equals the executed native report; dynamic inner literals are not credited.",
       "kindReceiptId": null,
-      "compared": "FamilyQuant/MainWindow.xaml.cs:480 \u0022Next step: nothing. Carry on working, or open this file later to return to exactly \u0022; frozen handler FamilyQuant.MainWindow::private void MenuItemSaveFCF_Click ( object sender , RoutedEventArgs e ) SHA256=ECD06FF91E5D1BB955D661F429286ABA8D90A75467B5F581038DCD6FCABF18E9; native case fcf-success; before=The families were saved to\nD:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\native\\export.fcf\n\nThe file holds the grouping, your User IDs and your annotations. It does not hold the quantitation: reopening it restores the families, and the percentages come back when you load a PatternLab project again.\n\nNext step: nothing. Carry on working, or open this file later to return to exactly this grouping.; actual=The families were saved to\nD:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\native\\export.fcf\n\nThe file holds the grouping, your User IDs and your annotations. It does not hold the quantitation: reopening it restores the families, and the percentages come back when you load a PatternLab project again.\n\nNext step: nothing. Carry on working, or open this file later to return to exactly this grouping."
+      "compared": "FamilyQuant/MainWindow.xaml.cs:480 \u0022Next step: nothing. Carry on working, or open this file later to return to exactly \u0022; frozen handler FamilyQuant.MainWindow::private void MenuItemSaveFCF_Click ( object sender , RoutedEventArgs e ) SHA256=ECD06FF91E5D1BB955D661F429286ABA8D90A75467B5F581038DCD6FCABF18E9; native case fcf-success; before=The families were saved to\nD:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\native\\export.fcf\n\nThe file holds the grouping, your User IDs and your annotations. It does not hold the quantitation: reopening it restores the families, and the percentages come back when you load a PatternLab project again.\n\nNext step: nothing. Carry on working, or open this file later to return to exactly this grouping.; actual=The families were saved to\nD:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\native\\export.fcf\n\nThe file holds the grouping, your User IDs and your annotations. It does not hold the quantitation: reopening it restores the families, and the percentages come back when you load a PatternLab project again.\n\nNext step: nothing. Carry on working, or open this file later to return to exactly this grouping."
     },
     {
       "observationId": "FQ15-5165C52E6F76",
@@ -5818,7 +5818,7 @@
         {
           "path": "FamilyQuant/MainWindow.Status.cs",
           "symbol": "fcf-success: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "DF781080AD5D075D84F27F3757598ECB3E0B143BC6F4D39194900046BE1E3B55"
+          "sha256": "A13F51B49BD04137DF641A3B6251363646613F8DF04EAE2BE38E0A695D635A19"
         },
         {
           "path": "FamilyQuant/MainWindow.ViewModel.cs",
@@ -5862,13 +5862,13 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell message FQ15-5165C52E6F76: fcf-success at frozen line 481",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
       "note": "Complete frozen message expression equals the executed native report; dynamic inner literals are not credited.",
       "kindReceiptId": null,
-      "compared": "FamilyQuant/MainWindow.xaml.cs:481 \u0022this grouping.\u0022; frozen handler FamilyQuant.MainWindow::private void MenuItemSaveFCF_Click ( object sender , RoutedEventArgs e ) SHA256=ECD06FF91E5D1BB955D661F429286ABA8D90A75467B5F581038DCD6FCABF18E9; native case fcf-success; before=The families were saved to\nD:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\native\\export.fcf\n\nThe file holds the grouping, your User IDs and your annotations. It does not hold the quantitation: reopening it restores the families, and the percentages come back when you load a PatternLab project again.\n\nNext step: nothing. Carry on working, or open this file later to return to exactly this grouping.; actual=The families were saved to\nD:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\native\\export.fcf\n\nThe file holds the grouping, your User IDs and your annotations. It does not hold the quantitation: reopening it restores the families, and the percentages come back when you load a PatternLab project again.\n\nNext step: nothing. Carry on working, or open this file later to return to exactly this grouping."
+      "compared": "FamilyQuant/MainWindow.xaml.cs:481 \u0022this grouping.\u0022; frozen handler FamilyQuant.MainWindow::private void MenuItemSaveFCF_Click ( object sender , RoutedEventArgs e ) SHA256=ECD06FF91E5D1BB955D661F429286ABA8D90A75467B5F581038DCD6FCABF18E9; native case fcf-success; before=The families were saved to\nD:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\native\\export.fcf\n\nThe file holds the grouping, your User IDs and your annotations. It does not hold the quantitation: reopening it restores the families, and the percentages come back when you load a PatternLab project again.\n\nNext step: nothing. Carry on working, or open this file later to return to exactly this grouping.; actual=The families were saved to\nD:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\native\\export.fcf\n\nThe file holds the grouping, your User IDs and your annotations. It does not hold the quantitation: reopening it restores the families, and the percentages come back when you load a PatternLab project again.\n\nNext step: nothing. Carry on working, or open this file later to return to exactly this grouping."
     },
     {
       "observationId": "FQ15-51D93C9A42D7",
@@ -6066,7 +6066,7 @@
         {
           "path": "FamilyQuant/MainWindow.Status.cs",
           "symbol": "open-failure: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "DF781080AD5D075D84F27F3757598ECB3E0B143BC6F4D39194900046BE1E3B55"
+          "sha256": "A13F51B49BD04137DF641A3B6251363646613F8DF04EAE2BE38E0A695D635A19"
         },
         {
           "path": "FamilyQuant/MainWindow.ViewModel.cs",
@@ -6110,7 +6110,7 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell message FQ15-51D93C9A42D7: open-failure at frozen line 336",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -6322,7 +6322,7 @@
         {
           "path": "FamilyQuant/MainWindow.Status.cs",
           "symbol": "project-success: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "DF781080AD5D075D84F27F3757598ECB3E0B143BC6F4D39194900046BE1E3B55"
+          "sha256": "A13F51B49BD04137DF641A3B6251363646613F8DF04EAE2BE38E0A695D635A19"
         },
         {
           "path": "FamilyQuant/MainWindow.ViewModel.cs",
@@ -6366,13 +6366,13 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell message FQ15-5A8060C351E2: project-success at frozen line 575",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
       "note": "Complete frozen message expression equals the executed native report; dynamic inner literals are not credited.",
       "kindReceiptId": null,
-      "compared": "FamilyQuant/MainWindow.xaml.cs:575 \u0022this project.\u0022; frozen handler FamilyQuant.MainWindow::private async void MenuItemSaveProject_Click ( object sender , RoutedEventArgs e ) SHA256=810F5EAA567670C00E38AA106ACC95AFC9BA922B7CE7642AFB1C77BF3214E1BB; native case project-success; before=The project was saved to\nD:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\native\\saved.fqproj\n\nThe container holds the grouping, your User IDs and annotations, and 0 stored quant row(s). Reopening it restores both.\n\nNext step: nothing. Carry on working, or open this file later to return to exactly this project.; actual=The project was saved to\nD:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\native\\saved.fqproj\n\nThe container holds the grouping, your User IDs and annotations, and 0 stored quant row(s). Reopening it restores both.\n\nNext step: nothing. Carry on working, or open this file later to return to exactly this project."
+      "compared": "FamilyQuant/MainWindow.xaml.cs:575 \u0022this project.\u0022; frozen handler FamilyQuant.MainWindow::private async void MenuItemSaveProject_Click ( object sender , RoutedEventArgs e ) SHA256=810F5EAA567670C00E38AA106ACC95AFC9BA922B7CE7642AFB1C77BF3214E1BB; native case project-success; before=The project was saved to\nD:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\native\\saved.fqproj\n\nThe container holds the grouping, your User IDs and annotations, and 0 stored quant row(s). Reopening it restores both.\n\nNext step: nothing. Carry on working, or open this file later to return to exactly this project.; actual=The project was saved to\nD:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\native\\saved.fqproj\n\nThe container holds the grouping, your User IDs and annotations, and 0 stored quant row(s). Reopening it restores both.\n\nNext step: nothing. Carry on working, or open this file later to return to exactly this project."
     },
     {
       "observationId": "FQ15-5E69DF58FFFE",
@@ -6570,7 +6570,7 @@
         {
           "path": "FamilyQuant/MainWindow.Status.cs",
           "symbol": "project-success: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "DF781080AD5D075D84F27F3757598ECB3E0B143BC6F4D39194900046BE1E3B55"
+          "sha256": "A13F51B49BD04137DF641A3B6251363646613F8DF04EAE2BE38E0A695D635A19"
         },
         {
           "path": "FamilyQuant/MainWindow.ViewModel.cs",
@@ -6614,13 +6614,13 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell message FQ15-5E69DF58FFFE: project-success at frozen line 570",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
       "note": "Complete frozen message expression equals the executed native report; dynamic inner literals are not credited.",
       "kindReceiptId": null,
-      "compared": "FamilyQuant/MainWindow.xaml.cs:570 \u0022The container holds the grouping, your User IDs and annotations, and \u0022; frozen handler FamilyQuant.MainWindow::private async void MenuItemSaveProject_Click ( object sender , RoutedEventArgs e ) SHA256=810F5EAA567670C00E38AA106ACC95AFC9BA922B7CE7642AFB1C77BF3214E1BB; native case project-success; before=The project was saved to\nD:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\native\\saved.fqproj\n\nThe container holds the grouping, your User IDs and annotations, and 0 stored quant row(s). Reopening it restores both.\n\nNext step: nothing. Carry on working, or open this file later to return to exactly this project.; actual=The project was saved to\nD:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\native\\saved.fqproj\n\nThe container holds the grouping, your User IDs and annotations, and 0 stored quant row(s). Reopening it restores both.\n\nNext step: nothing. Carry on working, or open this file later to return to exactly this project."
+      "compared": "FamilyQuant/MainWindow.xaml.cs:570 \u0022The container holds the grouping, your User IDs and annotations, and \u0022; frozen handler FamilyQuant.MainWindow::private async void MenuItemSaveProject_Click ( object sender , RoutedEventArgs e ) SHA256=810F5EAA567670C00E38AA106ACC95AFC9BA922B7CE7642AFB1C77BF3214E1BB; native case project-success; before=The project was saved to\nD:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\native\\saved.fqproj\n\nThe container holds the grouping, your User IDs and annotations, and 0 stored quant row(s). Reopening it restores both.\n\nNext step: nothing. Carry on working, or open this file later to return to exactly this project.; actual=The project was saved to\nD:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\native\\saved.fqproj\n\nThe container holds the grouping, your User IDs and annotations, and 0 stored quant row(s). Reopening it restores both.\n\nNext step: nothing. Carry on working, or open this file later to return to exactly this project."
     },
     {
       "observationId": "FQ15-63177F1FB3F4",
@@ -6818,7 +6818,7 @@
         {
           "path": "FamilyQuant/MainWindow.Status.cs",
           "symbol": "fcf-success: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "DF781080AD5D075D84F27F3757598ECB3E0B143BC6F4D39194900046BE1E3B55"
+          "sha256": "A13F51B49BD04137DF641A3B6251363646613F8DF04EAE2BE38E0A695D635A19"
         },
         {
           "path": "FamilyQuant/MainWindow.ViewModel.cs",
@@ -6862,13 +6862,13 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell message FQ15-63177F1FB3F4: fcf-success at frozen line 479",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
       "note": "Complete frozen message expression equals the executed native report; dynamic inner literals are not credited.",
       "kindReceiptId": null,
-      "compared": "FamilyQuant/MainWindow.xaml.cs:479 \u0022you load a PatternLab project again.\\n\\n\u0022; frozen handler FamilyQuant.MainWindow::private void MenuItemSaveFCF_Click ( object sender , RoutedEventArgs e ) SHA256=ECD06FF91E5D1BB955D661F429286ABA8D90A75467B5F581038DCD6FCABF18E9; native case fcf-success; before=The families were saved to\nD:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\native\\export.fcf\n\nThe file holds the grouping, your User IDs and your annotations. It does not hold the quantitation: reopening it restores the families, and the percentages come back when you load a PatternLab project again.\n\nNext step: nothing. Carry on working, or open this file later to return to exactly this grouping.; actual=The families were saved to\nD:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\native\\export.fcf\n\nThe file holds the grouping, your User IDs and your annotations. It does not hold the quantitation: reopening it restores the families, and the percentages come back when you load a PatternLab project again.\n\nNext step: nothing. Carry on working, or open this file later to return to exactly this grouping."
+      "compared": "FamilyQuant/MainWindow.xaml.cs:479 \u0022you load a PatternLab project again.\\n\\n\u0022; frozen handler FamilyQuant.MainWindow::private void MenuItemSaveFCF_Click ( object sender , RoutedEventArgs e ) SHA256=ECD06FF91E5D1BB955D661F429286ABA8D90A75467B5F581038DCD6FCABF18E9; native case fcf-success; before=The families were saved to\nD:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\native\\export.fcf\n\nThe file holds the grouping, your User IDs and your annotations. It does not hold the quantitation: reopening it restores the families, and the percentages come back when you load a PatternLab project again.\n\nNext step: nothing. Carry on working, or open this file later to return to exactly this grouping.; actual=The families were saved to\nD:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\native\\export.fcf\n\nThe file holds the grouping, your User IDs and your annotations. It does not hold the quantitation: reopening it restores the families, and the percentages come back when you load a PatternLab project again.\n\nNext step: nothing. Carry on working, or open this file later to return to exactly this grouping."
     },
     {
       "observationId": "FQ15-6379736D2F52",
@@ -7066,7 +7066,7 @@
         {
           "path": "FamilyQuant/MainWindow.Status.cs",
           "symbol": "sepro-failure: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "DF781080AD5D075D84F27F3757598ECB3E0B143BC6F4D39194900046BE1E3B55"
+          "sha256": "A13F51B49BD04137DF641A3B6251363646613F8DF04EAE2BE38E0A695D635A19"
         },
         {
           "path": "FamilyQuant/MainWindow.ViewModel.cs",
@@ -7110,7 +7110,7 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell message FQ15-6379736D2F52: sepro-failure at frozen line 773",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -7322,7 +7322,7 @@
         {
           "path": "FamilyQuant/MainWindow.Status.cs",
           "symbol": "project-failure: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "DF781080AD5D075D84F27F3757598ECB3E0B143BC6F4D39194900046BE1E3B55"
+          "sha256": "A13F51B49BD04137DF641A3B6251363646613F8DF04EAE2BE38E0A695D635A19"
         },
         {
           "path": "FamilyQuant/MainWindow.ViewModel.cs",
@@ -7366,7 +7366,7 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell message FQ15-69AA92E0C13D: project-failure at frozen line 583",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -7578,7 +7578,7 @@
         {
           "path": "FamilyQuant/MainWindow.Status.cs",
           "symbol": "project-stale: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "DF781080AD5D075D84F27F3757598ECB3E0B143BC6F4D39194900046BE1E3B55"
+          "sha256": "A13F51B49BD04137DF641A3B6251363646613F8DF04EAE2BE38E0A695D635A19"
         },
         {
           "path": "FamilyQuant/MainWindow.ViewModel.cs",
@@ -7622,7 +7622,7 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell message FQ15-71A448372328: project-stale at frozen line 519",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -7826,7 +7826,7 @@
         {
           "path": "FamilyQuant/MainWindow.Status.cs",
           "symbol": "project-failure: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "DF781080AD5D075D84F27F3757598ECB3E0B143BC6F4D39194900046BE1E3B55"
+          "sha256": "A13F51B49BD04137DF641A3B6251363646613F8DF04EAE2BE38E0A695D635A19"
         },
         {
           "path": "FamilyQuant/MainWindow.ViewModel.cs",
@@ -7870,7 +7870,7 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell message FQ15-7206BF98F2B5: project-failure at frozen line 585",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -8082,7 +8082,7 @@
         {
           "path": "FamilyQuant/MainWindow.Status.cs",
           "symbol": "fcf-failure: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "DF781080AD5D075D84F27F3757598ECB3E0B143BC6F4D39194900046BE1E3B55"
+          "sha256": "A13F51B49BD04137DF641A3B6251363646613F8DF04EAE2BE38E0A695D635A19"
         },
         {
           "path": "FamilyQuant/MainWindow.ViewModel.cs",
@@ -8126,7 +8126,7 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell message FQ15-749394F72DDE: fcf-failure at frozen line 488",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -8362,7 +8362,7 @@
         {
           "path": "FamilyQuant/MainWindow.Status.cs",
           "symbol": "fcf-failure: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "DF781080AD5D075D84F27F3757598ECB3E0B143BC6F4D39194900046BE1E3B55"
+          "sha256": "A13F51B49BD04137DF641A3B6251363646613F8DF04EAE2BE38E0A695D635A19"
         },
         {
           "path": "FamilyQuant/MainWindow.ViewModel.cs",
@@ -8406,7 +8406,7 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell message FQ15-822AB951DC48: fcf-failure at frozen line 490",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -8610,7 +8610,7 @@
         {
           "path": "FamilyQuant/MainWindow.Status.cs",
           "symbol": "fcf-failure: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "DF781080AD5D075D84F27F3757598ECB3E0B143BC6F4D39194900046BE1E3B55"
+          "sha256": "A13F51B49BD04137DF641A3B6251363646613F8DF04EAE2BE38E0A695D635A19"
         },
         {
           "path": "FamilyQuant/MainWindow.ViewModel.cs",
@@ -8654,7 +8654,7 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell message FQ15-823926A0CCF5: fcf-failure at frozen line 487",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -8858,7 +8858,7 @@
         {
           "path": "FamilyQuant/MainWindow.Status.cs",
           "symbol": "open-project: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "DF781080AD5D075D84F27F3757598ECB3E0B143BC6F4D39194900046BE1E3B55"
+          "sha256": "A13F51B49BD04137DF641A3B6251363646613F8DF04EAE2BE38E0A695D635A19"
         },
         {
           "path": "FamilyQuant/MainWindow.ViewModel.cs",
@@ -8902,7 +8902,7 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell message FQ15-84741041780F: open-project at frozen line 277",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -9106,7 +9106,7 @@
         {
           "path": "FamilyQuant/MainWindow.Status.cs",
           "symbol": "spectrum-empty: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "DF781080AD5D075D84F27F3757598ECB3E0B143BC6F4D39194900046BE1E3B55"
+          "sha256": "A13F51B49BD04137DF641A3B6251363646613F8DF04EAE2BE38E0A695D635A19"
         },
         {
           "path": "FamilyQuant/MainWindow.ViewModel.cs",
@@ -9150,7 +9150,7 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell message FQ15-85A627D0F2C4: spectrum-empty at frozen line 735",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -9354,7 +9354,7 @@
         {
           "path": "FamilyQuant/MainWindow.Status.cs",
           "symbol": "sepro-success: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "DF781080AD5D075D84F27F3757598ECB3E0B143BC6F4D39194900046BE1E3B55"
+          "sha256": "A13F51B49BD04137DF641A3B6251363646613F8DF04EAE2BE38E0A695D635A19"
         },
         {
           "path": "FamilyQuant/MainWindow.ViewModel.cs",
@@ -9398,13 +9398,13 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell message FQ15-86905E852F63: sepro-success at frozen line 824",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
       "note": "Complete frozen message expression equals the executed native report; dynamic inner literals are not credited.",
       "kindReceiptId": null,
-      "compared": "FamilyQuant/MainWindow.xaml.cs:824 \u0022\\n\\n\u0022; frozen handler FamilyQuant.MainWindow::private void MenuItemReanotateSEPro_Click ( object sender , RoutedEventArgs e ) SHA256=FA201018C95E6C567288E78A1F733DD6C62AE7E659C731EF55B3BAF9D84A7276; native case sepro-success; before=1 protein(s) were given their family number and written to\nD:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\native\\owned_regrouped.sepr2\n\nThe number written is the User ID column, so any family you merged by hand is what went in. The file you chose was not modified.\n\nNext step: use the _regrouped package in the rest of the PatternLab pipeline.; actual=1 protein(s) were given their family number and written to\nD:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\native\\owned_regrouped.sepr2\n\nThe number written is the User ID column, so any family you merged by hand is what went in. The file you chose was not modified.\n\nNext step: use the _regrouped package in the rest of the PatternLab pipeline."
+      "compared": "FamilyQuant/MainWindow.xaml.cs:824 \u0022\\n\\n\u0022; frozen handler FamilyQuant.MainWindow::private void MenuItemReanotateSEPro_Click ( object sender , RoutedEventArgs e ) SHA256=FA201018C95E6C567288E78A1F733DD6C62AE7E659C731EF55B3BAF9D84A7276; native case sepro-success; before=1 protein(s) were given their family number and written to\nD:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\native\\owned_regrouped.sepr2\n\nThe number written is the User ID column, so any family you merged by hand is what went in. The file you chose was not modified.\n\nNext step: use the _regrouped package in the rest of the PatternLab pipeline.; actual=1 protein(s) were given their family number and written to\nD:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\native\\owned_regrouped.sepr2\n\nThe number written is the User ID column, so any family you merged by hand is what went in. The file you chose was not modified.\n\nNext step: use the _regrouped package in the rest of the PatternLab pipeline."
     },
     {
       "observationId": "FQ15-891E975B730E",
@@ -9602,7 +9602,7 @@
         {
           "path": "FamilyQuant/MainWindow.Status.cs",
           "symbol": "fcf-failure: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "DF781080AD5D075D84F27F3757598ECB3E0B143BC6F4D39194900046BE1E3B55"
+          "sha256": "A13F51B49BD04137DF641A3B6251363646613F8DF04EAE2BE38E0A695D635A19"
         },
         {
           "path": "FamilyQuant/MainWindow.ViewModel.cs",
@@ -9646,7 +9646,7 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell message FQ15-891E975B730E: fcf-failure at frozen line 465",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -9850,7 +9850,7 @@
         {
           "path": "FamilyQuant/MainWindow.Status.cs",
           "symbol": "fcf-failure: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "DF781080AD5D075D84F27F3757598ECB3E0B143BC6F4D39194900046BE1E3B55"
+          "sha256": "A13F51B49BD04137DF641A3B6251363646613F8DF04EAE2BE38E0A695D635A19"
         },
         {
           "path": "FamilyQuant/MainWindow.ViewModel.cs",
@@ -9894,7 +9894,7 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell message FQ15-896FD56FF1F3: fcf-failure at frozen line 466",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -10098,7 +10098,7 @@
         {
           "path": "FamilyQuant/MainWindow.Status.cs",
           "symbol": "fcf-success: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "DF781080AD5D075D84F27F3757598ECB3E0B143BC6F4D39194900046BE1E3B55"
+          "sha256": "A13F51B49BD04137DF641A3B6251363646613F8DF04EAE2BE38E0A695D635A19"
         },
         {
           "path": "FamilyQuant/MainWindow.ViewModel.cs",
@@ -10142,13 +10142,13 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell message FQ15-8D6A1F9ED763: fcf-success at frozen line 476",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
       "note": "Complete frozen message expression equals the executed native report; dynamic inner literals are not credited.",
       "kindReceiptId": null,
-      "compared": "FamilyQuant/MainWindow.xaml.cs:476 \u0022\\n\\n\u0022; frozen handler FamilyQuant.MainWindow::private void MenuItemSaveFCF_Click ( object sender , RoutedEventArgs e ) SHA256=ECD06FF91E5D1BB955D661F429286ABA8D90A75467B5F581038DCD6FCABF18E9; native case fcf-success; before=The families were saved to\nD:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\native\\export.fcf\n\nThe file holds the grouping, your User IDs and your annotations. It does not hold the quantitation: reopening it restores the families, and the percentages come back when you load a PatternLab project again.\n\nNext step: nothing. Carry on working, or open this file later to return to exactly this grouping.; actual=The families were saved to\nD:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\native\\export.fcf\n\nThe file holds the grouping, your User IDs and your annotations. It does not hold the quantitation: reopening it restores the families, and the percentages come back when you load a PatternLab project again.\n\nNext step: nothing. Carry on working, or open this file later to return to exactly this grouping."
+      "compared": "FamilyQuant/MainWindow.xaml.cs:476 \u0022\\n\\n\u0022; frozen handler FamilyQuant.MainWindow::private void MenuItemSaveFCF_Click ( object sender , RoutedEventArgs e ) SHA256=ECD06FF91E5D1BB955D661F429286ABA8D90A75467B5F581038DCD6FCABF18E9; native case fcf-success; before=The families were saved to\nD:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\native\\export.fcf\n\nThe file holds the grouping, your User IDs and your annotations. It does not hold the quantitation: reopening it restores the families, and the percentages come back when you load a PatternLab project again.\n\nNext step: nothing. Carry on working, or open this file later to return to exactly this grouping.; actual=The families were saved to\nD:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\native\\export.fcf\n\nThe file holds the grouping, your User IDs and your annotations. It does not hold the quantitation: reopening it restores the families, and the percentages come back when you load a PatternLab project again.\n\nNext step: nothing. Carry on working, or open this file later to return to exactly this grouping."
     },
     {
       "observationId": "FQ15-8E7C9D4B893F",
@@ -10354,7 +10354,7 @@
         {
           "path": "FamilyQuant/MainWindow.Status.cs",
           "symbol": "project-stale: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "DF781080AD5D075D84F27F3757598ECB3E0B143BC6F4D39194900046BE1E3B55"
+          "sha256": "A13F51B49BD04137DF641A3B6251363646613F8DF04EAE2BE38E0A695D635A19"
         },
         {
           "path": "FamilyQuant/MainWindow.ViewModel.cs",
@@ -10398,7 +10398,7 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell message FQ15-9085ACC92A5A: project-stale at frozen line 517",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -10602,7 +10602,7 @@
         {
           "path": "FamilyQuant/MainWindow.Status.cs",
           "symbol": "fcf-success: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "DF781080AD5D075D84F27F3757598ECB3E0B143BC6F4D39194900046BE1E3B55"
+          "sha256": "A13F51B49BD04137DF641A3B6251363646613F8DF04EAE2BE38E0A695D635A19"
         },
         {
           "path": "FamilyQuant/MainWindow.ViewModel.cs",
@@ -10646,13 +10646,13 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell message FQ15-91DF62AD5796: fcf-success at frozen line 477",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
       "note": "Complete frozen message expression equals the executed native report; dynamic inner literals are not credited.",
       "kindReceiptId": null,
-      "compared": "FamilyQuant/MainWindow.xaml.cs:477 \u0022The file holds the grouping, your User IDs and your annotations. It does not hold the \u0022; frozen handler FamilyQuant.MainWindow::private void MenuItemSaveFCF_Click ( object sender , RoutedEventArgs e ) SHA256=ECD06FF91E5D1BB955D661F429286ABA8D90A75467B5F581038DCD6FCABF18E9; native case fcf-success; before=The families were saved to\nD:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\native\\export.fcf\n\nThe file holds the grouping, your User IDs and your annotations. It does not hold the quantitation: reopening it restores the families, and the percentages come back when you load a PatternLab project again.\n\nNext step: nothing. Carry on working, or open this file later to return to exactly this grouping.; actual=The families were saved to\nD:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\native\\export.fcf\n\nThe file holds the grouping, your User IDs and your annotations. It does not hold the quantitation: reopening it restores the families, and the percentages come back when you load a PatternLab project again.\n\nNext step: nothing. Carry on working, or open this file later to return to exactly this grouping."
+      "compared": "FamilyQuant/MainWindow.xaml.cs:477 \u0022The file holds the grouping, your User IDs and your annotations. It does not hold the \u0022; frozen handler FamilyQuant.MainWindow::private void MenuItemSaveFCF_Click ( object sender , RoutedEventArgs e ) SHA256=ECD06FF91E5D1BB955D661F429286ABA8D90A75467B5F581038DCD6FCABF18E9; native case fcf-success; before=The families were saved to\nD:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\native\\export.fcf\n\nThe file holds the grouping, your User IDs and your annotations. It does not hold the quantitation: reopening it restores the families, and the percentages come back when you load a PatternLab project again.\n\nNext step: nothing. Carry on working, or open this file later to return to exactly this grouping.; actual=The families were saved to\nD:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\native\\export.fcf\n\nThe file holds the grouping, your User IDs and your annotations. It does not hold the quantitation: reopening it restores the families, and the percentages come back when you load a PatternLab project again.\n\nNext step: nothing. Carry on working, or open this file later to return to exactly this grouping."
     },
     {
       "observationId": "FQ15-92991B8F6A93",
@@ -10850,7 +10850,7 @@
         {
           "path": "FamilyQuant/MainWindow.Status.cs",
           "symbol": "fcf-failure: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "DF781080AD5D075D84F27F3757598ECB3E0B143BC6F4D39194900046BE1E3B55"
+          "sha256": "A13F51B49BD04137DF641A3B6251363646613F8DF04EAE2BE38E0A695D635A19"
         },
         {
           "path": "FamilyQuant/MainWindow.ViewModel.cs",
@@ -10894,7 +10894,7 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell message FQ15-92991B8F6A93: fcf-failure at frozen line 488",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -11098,7 +11098,7 @@
         {
           "path": "FamilyQuant/MainWindow.Status.cs",
           "symbol": "sepro-success: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "DF781080AD5D075D84F27F3757598ECB3E0B143BC6F4D39194900046BE1E3B55"
+          "sha256": "A13F51B49BD04137DF641A3B6251363646613F8DF04EAE2BE38E0A695D635A19"
         },
         {
           "path": "FamilyQuant/MainWindow.ViewModel.cs",
@@ -11142,7 +11142,7 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell message FQ15-92C3CAA143CF: sepro-success at frozen line 828",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -11354,7 +11354,7 @@
         {
           "path": "FamilyQuant/MainWindow.Status.cs",
           "symbol": "sepro-failure: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "DF781080AD5D075D84F27F3757598ECB3E0B143BC6F4D39194900046BE1E3B55"
+          "sha256": "A13F51B49BD04137DF641A3B6251363646613F8DF04EAE2BE38E0A695D635A19"
         },
         {
           "path": "FamilyQuant/MainWindow.ViewModel.cs",
@@ -11398,7 +11398,7 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell message FQ15-965D5F90198A: sepro-failure at frozen line 837",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -11602,7 +11602,7 @@
         {
           "path": "FamilyQuant/MainWindow.Status.cs",
           "symbol": "sepro-missing-11: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "DF781080AD5D075D84F27F3757598ECB3E0B143BC6F4D39194900046BE1E3B55"
+          "sha256": "A13F51B49BD04137DF641A3B6251363646613F8DF04EAE2BE38E0A695D635A19"
         },
         {
           "path": "FamilyQuant/MainWindow.ViewModel.cs",
@@ -11646,7 +11646,7 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell message FQ15-96E7ED457634: sepro-missing-11 at frozen line 809",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -11858,7 +11858,7 @@
         {
           "path": "FamilyQuant/MainWindow.Status.cs",
           "symbol": "project-stale: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "DF781080AD5D075D84F27F3757598ECB3E0B143BC6F4D39194900046BE1E3B55"
+          "sha256": "A13F51B49BD04137DF641A3B6251363646613F8DF04EAE2BE38E0A695D635A19"
         },
         {
           "path": "FamilyQuant/MainWindow.ViewModel.cs",
@@ -11902,7 +11902,7 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell message FQ15-9A9A4198C024: project-stale at frozen line 559",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -12106,7 +12106,7 @@
         {
           "path": "FamilyQuant/MainWindow.Status.cs",
           "symbol": "fcf-failure: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "DF781080AD5D075D84F27F3757598ECB3E0B143BC6F4D39194900046BE1E3B55"
+          "sha256": "A13F51B49BD04137DF641A3B6251363646613F8DF04EAE2BE38E0A695D635A19"
         },
         {
           "path": "FamilyQuant/MainWindow.ViewModel.cs",
@@ -12150,7 +12150,7 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell message FQ15-9F5CB9B18BB0: fcf-failure at frozen line 491",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -12370,7 +12370,7 @@
         {
           "path": "FamilyQuant/MainWindow.Status.cs",
           "symbol": "open-failure: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "DF781080AD5D075D84F27F3757598ECB3E0B143BC6F4D39194900046BE1E3B55"
+          "sha256": "A13F51B49BD04137DF641A3B6251363646613F8DF04EAE2BE38E0A695D635A19"
         },
         {
           "path": "FamilyQuant/MainWindow.ViewModel.cs",
@@ -12414,7 +12414,7 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell message FQ15-A2FD633E05A4: open-failure at frozen line 337",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -12634,7 +12634,7 @@
         {
           "path": "FamilyQuant/MainWindow.Status.cs",
           "symbol": "sepro-missing-1: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "DF781080AD5D075D84F27F3757598ECB3E0B143BC6F4D39194900046BE1E3B55"
+          "sha256": "A13F51B49BD04137DF641A3B6251363646613F8DF04EAE2BE38E0A695D635A19"
         },
         {
           "path": "FamilyQuant/MainWindow.ViewModel.cs",
@@ -12678,7 +12678,7 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell message FQ15-AC70C47D59F5: sepro-missing-1 at frozen line 803",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -12882,7 +12882,7 @@
         {
           "path": "FamilyQuant/MainWindow.Status.cs",
           "symbol": "sepro-success: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "DF781080AD5D075D84F27F3757598ECB3E0B143BC6F4D39194900046BE1E3B55"
+          "sha256": "A13F51B49BD04137DF641A3B6251363646613F8DF04EAE2BE38E0A695D635A19"
         },
         {
           "path": "FamilyQuant/MainWindow.ViewModel.cs",
@@ -12926,13 +12926,13 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell message FQ15-ADD26B230959: sepro-success at frozen line 824",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
       "note": "Complete frozen message expression equals the executed native report; dynamic inner literals are not credited.",
       "kindReceiptId": null,
-      "compared": "FamilyQuant/MainWindow.xaml.cs:824 \u0022 protein(s) were given their family number and written to\\n\u0022; frozen handler FamilyQuant.MainWindow::private void MenuItemReanotateSEPro_Click ( object sender , RoutedEventArgs e ) SHA256=FA201018C95E6C567288E78A1F733DD6C62AE7E659C731EF55B3BAF9D84A7276; native case sepro-success; before=1 protein(s) were given their family number and written to\nD:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\native\\owned_regrouped.sepr2\n\nThe number written is the User ID column, so any family you merged by hand is what went in. The file you chose was not modified.\n\nNext step: use the _regrouped package in the rest of the PatternLab pipeline.; actual=1 protein(s) were given their family number and written to\nD:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\native\\owned_regrouped.sepr2\n\nThe number written is the User ID column, so any family you merged by hand is what went in. The file you chose was not modified.\n\nNext step: use the _regrouped package in the rest of the PatternLab pipeline."
+      "compared": "FamilyQuant/MainWindow.xaml.cs:824 \u0022 protein(s) were given their family number and written to\\n\u0022; frozen handler FamilyQuant.MainWindow::private void MenuItemReanotateSEPro_Click ( object sender , RoutedEventArgs e ) SHA256=FA201018C95E6C567288E78A1F733DD6C62AE7E659C731EF55B3BAF9D84A7276; native case sepro-success; before=1 protein(s) were given their family number and written to\nD:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\native\\owned_regrouped.sepr2\n\nThe number written is the User ID column, so any family you merged by hand is what went in. The file you chose was not modified.\n\nNext step: use the _regrouped package in the rest of the PatternLab pipeline.; actual=1 protein(s) were given their family number and written to\nD:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\native\\owned_regrouped.sepr2\n\nThe number written is the User ID column, so any family you merged by hand is what went in. The file you chose was not modified.\n\nNext step: use the _regrouped package in the rest of the PatternLab pipeline."
     },
     {
       "observationId": "FQ15-AE43B9EBD55B",
@@ -13138,7 +13138,7 @@
         {
           "path": "FamilyQuant/MainWindow.Status.cs",
           "symbol": "sepro-success: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "DF781080AD5D075D84F27F3757598ECB3E0B143BC6F4D39194900046BE1E3B55"
+          "sha256": "A13F51B49BD04137DF641A3B6251363646613F8DF04EAE2BE38E0A695D635A19"
         },
         {
           "path": "FamilyQuant/MainWindow.ViewModel.cs",
@@ -13182,7 +13182,7 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell message FQ15-B02D92F38DEE: sepro-success at frozen line 819",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -13386,7 +13386,7 @@
         {
           "path": "FamilyQuant/MainWindow.Status.cs",
           "symbol": "sepro-success: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "DF781080AD5D075D84F27F3757598ECB3E0B143BC6F4D39194900046BE1E3B55"
+          "sha256": "A13F51B49BD04137DF641A3B6251363646613F8DF04EAE2BE38E0A695D635A19"
         },
         {
           "path": "FamilyQuant/MainWindow.ViewModel.cs",
@@ -13430,13 +13430,13 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell message FQ15-B4ABFF0708DA: sepro-success at frozen line 825",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
       "note": "Complete frozen message expression equals the executed native report; dynamic inner literals are not credited.",
       "kindReceiptId": null,
-      "compared": "FamilyQuant/MainWindow.xaml.cs:825 \u0022The number written is the User ID column, so any family you merged by hand is what \u0022; frozen handler FamilyQuant.MainWindow::private void MenuItemReanotateSEPro_Click ( object sender , RoutedEventArgs e ) SHA256=FA201018C95E6C567288E78A1F733DD6C62AE7E659C731EF55B3BAF9D84A7276; native case sepro-success; before=1 protein(s) were given their family number and written to\nD:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\native\\owned_regrouped.sepr2\n\nThe number written is the User ID column, so any family you merged by hand is what went in. The file you chose was not modified.\n\nNext step: use the _regrouped package in the rest of the PatternLab pipeline.; actual=1 protein(s) were given their family number and written to\nD:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\native\\owned_regrouped.sepr2\n\nThe number written is the User ID column, so any family you merged by hand is what went in. The file you chose was not modified.\n\nNext step: use the _regrouped package in the rest of the PatternLab pipeline."
+      "compared": "FamilyQuant/MainWindow.xaml.cs:825 \u0022The number written is the User ID column, so any family you merged by hand is what \u0022; frozen handler FamilyQuant.MainWindow::private void MenuItemReanotateSEPro_Click ( object sender , RoutedEventArgs e ) SHA256=FA201018C95E6C567288E78A1F733DD6C62AE7E659C731EF55B3BAF9D84A7276; native case sepro-success; before=1 protein(s) were given their family number and written to\nD:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\native\\owned_regrouped.sepr2\n\nThe number written is the User ID column, so any family you merged by hand is what went in. The file you chose was not modified.\n\nNext step: use the _regrouped package in the rest of the PatternLab pipeline.; actual=1 protein(s) were given their family number and written to\nD:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\native\\owned_regrouped.sepr2\n\nThe number written is the User ID column, so any family you merged by hand is what went in. The file you chose was not modified.\n\nNext step: use the _regrouped package in the rest of the PatternLab pipeline."
     },
     {
       "observationId": "FQ15-BC317ADA5428",
@@ -13642,7 +13642,7 @@
         {
           "path": "FamilyQuant/MainWindow.Status.cs",
           "symbol": "project-success: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "DF781080AD5D075D84F27F3757598ECB3E0B143BC6F4D39194900046BE1E3B55"
+          "sha256": "A13F51B49BD04137DF641A3B6251363646613F8DF04EAE2BE38E0A695D635A19"
         },
         {
           "path": "FamilyQuant/MainWindow.ViewModel.cs",
@@ -13686,13 +13686,13 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell message FQ15-BD8FCDF44947: project-success at frozen line 569",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
       "note": "Complete frozen message expression equals the executed native report; dynamic inner literals are not credited.",
       "kindReceiptId": null,
-      "compared": "FamilyQuant/MainWindow.xaml.cs:569 \u0022The project was saved to\\n\u0022; frozen handler FamilyQuant.MainWindow::private async void MenuItemSaveProject_Click ( object sender , RoutedEventArgs e ) SHA256=810F5EAA567670C00E38AA106ACC95AFC9BA922B7CE7642AFB1C77BF3214E1BB; native case project-success; before=The project was saved to\nD:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\native\\saved.fqproj\n\nThe container holds the grouping, your User IDs and annotations, and 0 stored quant row(s). Reopening it restores both.\n\nNext step: nothing. Carry on working, or open this file later to return to exactly this project.; actual=The project was saved to\nD:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\native\\saved.fqproj\n\nThe container holds the grouping, your User IDs and annotations, and 0 stored quant row(s). Reopening it restores both.\n\nNext step: nothing. Carry on working, or open this file later to return to exactly this project."
+      "compared": "FamilyQuant/MainWindow.xaml.cs:569 \u0022The project was saved to\\n\u0022; frozen handler FamilyQuant.MainWindow::private async void MenuItemSaveProject_Click ( object sender , RoutedEventArgs e ) SHA256=810F5EAA567670C00E38AA106ACC95AFC9BA922B7CE7642AFB1C77BF3214E1BB; native case project-success; before=The project was saved to\nD:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\native\\saved.fqproj\n\nThe container holds the grouping, your User IDs and annotations, and 0 stored quant row(s). Reopening it restores both.\n\nNext step: nothing. Carry on working, or open this file later to return to exactly this project.; actual=The project was saved to\nD:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\native\\saved.fqproj\n\nThe container holds the grouping, your User IDs and annotations, and 0 stored quant row(s). Reopening it restores both.\n\nNext step: nothing. Carry on working, or open this file later to return to exactly this project."
     },
     {
       "observationId": "FQ15-BE500CA08363",
@@ -13890,7 +13890,7 @@
         {
           "path": "FamilyQuant/MainWindow.Status.cs",
           "symbol": "project-stale: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "DF781080AD5D075D84F27F3757598ECB3E0B143BC6F4D39194900046BE1E3B55"
+          "sha256": "A13F51B49BD04137DF641A3B6251363646613F8DF04EAE2BE38E0A695D635A19"
         },
         {
           "path": "FamilyQuant/MainWindow.ViewModel.cs",
@@ -13934,7 +13934,7 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell message FQ15-BE500CA08363: project-stale at frozen line 560",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -14138,7 +14138,7 @@
         {
           "path": "FamilyQuant/MainWindow.Status.cs",
           "symbol": "fcf-failure: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "DF781080AD5D075D84F27F3757598ECB3E0B143BC6F4D39194900046BE1E3B55"
+          "sha256": "A13F51B49BD04137DF641A3B6251363646613F8DF04EAE2BE38E0A695D635A19"
         },
         {
           "path": "FamilyQuant/MainWindow.ViewModel.cs",
@@ -14182,7 +14182,7 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell message FQ15-BE8A76C73E91: fcf-failure at frozen line 489",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -14386,7 +14386,7 @@
         {
           "path": "FamilyQuant/MainWindow.Status.cs",
           "symbol": "sepro-success: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "DF781080AD5D075D84F27F3757598ECB3E0B143BC6F4D39194900046BE1E3B55"
+          "sha256": "A13F51B49BD04137DF641A3B6251363646613F8DF04EAE2BE38E0A695D635A19"
         },
         {
           "path": "FamilyQuant/MainWindow.ViewModel.cs",
@@ -14430,13 +14430,13 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell message FQ15-BEEC76DC6727: sepro-success at frozen line 827",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
       "note": "Complete frozen message expression equals the executed native report; dynamic inner literals are not credited.",
       "kindReceiptId": null,
-      "compared": "FamilyQuant/MainWindow.xaml.cs:827 \u0022Next step: use the _regrouped package in the rest of the PatternLab pipeline.\u0022; frozen handler FamilyQuant.MainWindow::private void MenuItemReanotateSEPro_Click ( object sender , RoutedEventArgs e ) SHA256=FA201018C95E6C567288E78A1F733DD6C62AE7E659C731EF55B3BAF9D84A7276; native case sepro-success; before=1 protein(s) were given their family number and written to\nD:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\native\\owned_regrouped.sepr2\n\nThe number written is the User ID column, so any family you merged by hand is what went in. The file you chose was not modified.\n\nNext step: use the _regrouped package in the rest of the PatternLab pipeline.; actual=1 protein(s) were given their family number and written to\nD:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\native\\owned_regrouped.sepr2\n\nThe number written is the User ID column, so any family you merged by hand is what went in. The file you chose was not modified.\n\nNext step: use the _regrouped package in the rest of the PatternLab pipeline."
+      "compared": "FamilyQuant/MainWindow.xaml.cs:827 \u0022Next step: use the _regrouped package in the rest of the PatternLab pipeline.\u0022; frozen handler FamilyQuant.MainWindow::private void MenuItemReanotateSEPro_Click ( object sender , RoutedEventArgs e ) SHA256=FA201018C95E6C567288E78A1F733DD6C62AE7E659C731EF55B3BAF9D84A7276; native case sepro-success; before=1 protein(s) were given their family number and written to\nD:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\native\\owned_regrouped.sepr2\n\nThe number written is the User ID column, so any family you merged by hand is what went in. The file you chose was not modified.\n\nNext step: use the _regrouped package in the rest of the PatternLab pipeline.; actual=1 protein(s) were given their family number and written to\nD:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\native\\owned_regrouped.sepr2\n\nThe number written is the User ID column, so any family you merged by hand is what went in. The file you chose was not modified.\n\nNext step: use the _regrouped package in the rest of the PatternLab pipeline."
     },
     {
       "observationId": "FQ15-BF47EB479788",
@@ -14634,7 +14634,7 @@
         {
           "path": "FamilyQuant/MainWindow.Status.cs",
           "symbol": "sepro-missing-1: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "DF781080AD5D075D84F27F3757598ECB3E0B143BC6F4D39194900046BE1E3B55"
+          "sha256": "A13F51B49BD04137DF641A3B6251363646613F8DF04EAE2BE38E0A695D635A19"
         },
         {
           "path": "FamilyQuant/MainWindow.ViewModel.cs",
@@ -14678,7 +14678,7 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell message FQ15-BF47EB479788: sepro-missing-1 at frozen line 801",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -14890,7 +14890,7 @@
         {
           "path": "FamilyQuant/MainWindow.Status.cs",
           "symbol": "spectrum-failure: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "DF781080AD5D075D84F27F3757598ECB3E0B143BC6F4D39194900046BE1E3B55"
+          "sha256": "A13F51B49BD04137DF641A3B6251363646613F8DF04EAE2BE38E0A695D635A19"
         },
         {
           "path": "FamilyQuant/MainWindow.ViewModel.cs",
@@ -14934,7 +14934,7 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell message FQ15-C080E034F652: spectrum-failure at frozen line 752",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -15154,7 +15154,7 @@
         {
           "path": "FamilyQuant/MainWindow.Status.cs",
           "symbol": "project-stale: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "DF781080AD5D075D84F27F3757598ECB3E0B143BC6F4D39194900046BE1E3B55"
+          "sha256": "A13F51B49BD04137DF641A3B6251363646613F8DF04EAE2BE38E0A695D635A19"
         },
         {
           "path": "FamilyQuant/MainWindow.ViewModel.cs",
@@ -15198,7 +15198,7 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell message FQ15-C42FB2273C1C: project-stale at frozen line 558",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -15402,7 +15402,7 @@
         {
           "path": "FamilyQuant/MainWindow.Status.cs",
           "symbol": "open-failure: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "DF781080AD5D075D84F27F3757598ECB3E0B143BC6F4D39194900046BE1E3B55"
+          "sha256": "A13F51B49BD04137DF641A3B6251363646613F8DF04EAE2BE38E0A695D635A19"
         },
         {
           "path": "FamilyQuant/MainWindow.ViewModel.cs",
@@ -15446,7 +15446,7 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell message FQ15-C74B5049B6EB: open-failure at frozen line 340",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -15650,7 +15650,7 @@
         {
           "path": "FamilyQuant/MainWindow.Status.cs",
           "symbol": "sepro-empty: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "DF781080AD5D075D84F27F3757598ECB3E0B143BC6F4D39194900046BE1E3B55"
+          "sha256": "A13F51B49BD04137DF641A3B6251363646613F8DF04EAE2BE38E0A695D635A19"
         },
         {
           "path": "FamilyQuant/MainWindow.ViewModel.cs",
@@ -15694,7 +15694,7 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell message FQ15-C9E4A3901552: sepro-empty at frozen line 767",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -15898,7 +15898,7 @@
         {
           "path": "FamilyQuant/MainWindow.Status.cs",
           "symbol": "sepro-failure: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "DF781080AD5D075D84F27F3757598ECB3E0B143BC6F4D39194900046BE1E3B55"
+          "sha256": "A13F51B49BD04137DF641A3B6251363646613F8DF04EAE2BE38E0A695D635A19"
         },
         {
           "path": "FamilyQuant/MainWindow.ViewModel.cs",
@@ -15942,7 +15942,7 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell message FQ15-CA406CB51D5A: sepro-failure at frozen line 836",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -16146,7 +16146,7 @@
         {
           "path": "FamilyQuant/MainWindow.Status.cs",
           "symbol": "sepro-missing-1: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "DF781080AD5D075D84F27F3757598ECB3E0B143BC6F4D39194900046BE1E3B55"
+          "sha256": "A13F51B49BD04137DF641A3B6251363646613F8DF04EAE2BE38E0A695D635A19"
         },
         {
           "path": "FamilyQuant/MainWindow.ViewModel.cs",
@@ -16190,7 +16190,7 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell message FQ15-CDADBFE1E05C: sepro-missing-1 at frozen line 807",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -16402,7 +16402,7 @@
         {
           "path": "FamilyQuant/MainWindow.Status.cs",
           "symbol": "spectrum-failure: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "DF781080AD5D075D84F27F3757598ECB3E0B143BC6F4D39194900046BE1E3B55"
+          "sha256": "A13F51B49BD04137DF641A3B6251363646613F8DF04EAE2BE38E0A695D635A19"
         },
         {
           "path": "FamilyQuant/MainWindow.ViewModel.cs",
@@ -16446,7 +16446,7 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell message FQ15-D212AA6005F3: spectrum-failure at frozen line 754",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -16650,7 +16650,7 @@
         {
           "path": "FamilyQuant/MainWindow.Status.cs",
           "symbol": "sepro-missing-1: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "DF781080AD5D075D84F27F3757598ECB3E0B143BC6F4D39194900046BE1E3B55"
+          "sha256": "A13F51B49BD04137DF641A3B6251363646613F8DF04EAE2BE38E0A695D635A19"
         },
         {
           "path": "FamilyQuant/MainWindow.ViewModel.cs",
@@ -16694,7 +16694,7 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell message FQ15-D2D42CD3165B: sepro-missing-1 at frozen line 804",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -16898,7 +16898,7 @@
         {
           "path": "FamilyQuant/MainWindow.Status.cs",
           "symbol": "project-failure: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "DF781080AD5D075D84F27F3757598ECB3E0B143BC6F4D39194900046BE1E3B55"
+          "sha256": "A13F51B49BD04137DF641A3B6251363646613F8DF04EAE2BE38E0A695D635A19"
         },
         {
           "path": "FamilyQuant/MainWindow.ViewModel.cs",
@@ -16942,7 +16942,7 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell message FQ15-D41E82F7EE50: project-failure at frozen line 582",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -17146,7 +17146,7 @@
         {
           "path": "FamilyQuant/MainWindow.Status.cs",
           "symbol": "sepro-failure: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "DF781080AD5D075D84F27F3757598ECB3E0B143BC6F4D39194900046BE1E3B55"
+          "sha256": "A13F51B49BD04137DF641A3B6251363646613F8DF04EAE2BE38E0A695D635A19"
         },
         {
           "path": "FamilyQuant/MainWindow.ViewModel.cs",
@@ -17190,7 +17190,7 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell message FQ15-D53CA3DD7DFC: sepro-failure at frozen line 834",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -17394,7 +17394,7 @@
         {
           "path": "FamilyQuant/MainWindow.Status.cs",
           "symbol": "project-failure: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "DF781080AD5D075D84F27F3757598ECB3E0B143BC6F4D39194900046BE1E3B55"
+          "sha256": "A13F51B49BD04137DF641A3B6251363646613F8DF04EAE2BE38E0A695D635A19"
         },
         {
           "path": "FamilyQuant/MainWindow.ViewModel.cs",
@@ -17438,7 +17438,7 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell message FQ15-D5987DF13F28: project-failure at frozen line 582",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -17642,7 +17642,7 @@
         {
           "path": "FamilyQuant/MainWindow.Status.cs",
           "symbol": "project-stale: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "DF781080AD5D075D84F27F3757598ECB3E0B143BC6F4D39194900046BE1E3B55"
+          "sha256": "A13F51B49BD04137DF641A3B6251363646613F8DF04EAE2BE38E0A695D635A19"
         },
         {
           "path": "FamilyQuant/MainWindow.ViewModel.cs",
@@ -17686,7 +17686,7 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell message FQ15-D834B0398136: project-stale at frozen line 561",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -17890,7 +17890,7 @@
         {
           "path": "FamilyQuant/MainWindow.Status.cs",
           "symbol": "open-failure: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "DF781080AD5D075D84F27F3757598ECB3E0B143BC6F4D39194900046BE1E3B55"
+          "sha256": "A13F51B49BD04137DF641A3B6251363646613F8DF04EAE2BE38E0A695D635A19"
         },
         {
           "path": "FamilyQuant/MainWindow.ViewModel.cs",
@@ -17934,7 +17934,7 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell message FQ15-D913CA4A8571: open-failure at frozen line 338",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -18138,7 +18138,7 @@
         {
           "path": "FamilyQuant/MainWindow.Status.cs",
           "symbol": "sepro-failure: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "DF781080AD5D075D84F27F3757598ECB3E0B143BC6F4D39194900046BE1E3B55"
+          "sha256": "A13F51B49BD04137DF641A3B6251363646613F8DF04EAE2BE38E0A695D635A19"
         },
         {
           "path": "FamilyQuant/MainWindow.ViewModel.cs",
@@ -18182,7 +18182,7 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell message FQ15-D9B5F67123FE: sepro-failure at frozen line 774",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -18386,7 +18386,7 @@
         {
           "path": "FamilyQuant/MainWindow.Status.cs",
           "symbol": "sepro-missing-1: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "DF781080AD5D075D84F27F3757598ECB3E0B143BC6F4D39194900046BE1E3B55"
+          "sha256": "A13F51B49BD04137DF641A3B6251363646613F8DF04EAE2BE38E0A695D635A19"
         },
         {
           "path": "FamilyQuant/MainWindow.ViewModel.cs",
@@ -18430,7 +18430,7 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell message FQ15-DB566AD91F24: sepro-missing-1 at frozen line 806",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -18634,7 +18634,7 @@
         {
           "path": "FamilyQuant/MainWindow.Status.cs",
           "symbol": "spectrum-failure: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "DF781080AD5D075D84F27F3757598ECB3E0B143BC6F4D39194900046BE1E3B55"
+          "sha256": "A13F51B49BD04137DF641A3B6251363646613F8DF04EAE2BE38E0A695D635A19"
         },
         {
           "path": "FamilyQuant/MainWindow.ViewModel.cs",
@@ -18678,7 +18678,7 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell message FQ15-DFC26E50FB7E: spectrum-failure at frozen line 755",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -18882,7 +18882,7 @@
         {
           "path": "FamilyQuant/MainWindow.Status.cs",
           "symbol": "fcf-empty: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "DF781080AD5D075D84F27F3757598ECB3E0B143BC6F4D39194900046BE1E3B55"
+          "sha256": "A13F51B49BD04137DF641A3B6251363646613F8DF04EAE2BE38E0A695D635A19"
         },
         {
           "path": "FamilyQuant/MainWindow.ViewModel.cs",
@@ -18926,7 +18926,7 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell message FQ15-E1E6DB0BA001: fcf-empty at frozen line 459",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -19130,7 +19130,7 @@
         {
           "path": "FamilyQuant/MainWindow.Status.cs",
           "symbol": "open-project: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "DF781080AD5D075D84F27F3757598ECB3E0B143BC6F4D39194900046BE1E3B55"
+          "sha256": "A13F51B49BD04137DF641A3B6251363646613F8DF04EAE2BE38E0A695D635A19"
         },
         {
           "path": "FamilyQuant/MainWindow.ViewModel.cs",
@@ -19174,7 +19174,7 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell message FQ15-E2620B485929: open-project at frozen line 297",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -19378,7 +19378,7 @@
         {
           "path": "FamilyQuant/MainWindow.Status.cs",
           "symbol": "sepro-success: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "DF781080AD5D075D84F27F3757598ECB3E0B143BC6F4D39194900046BE1E3B55"
+          "sha256": "A13F51B49BD04137DF641A3B6251363646613F8DF04EAE2BE38E0A695D635A19"
         },
         {
           "path": "FamilyQuant/MainWindow.ViewModel.cs",
@@ -19422,13 +19422,13 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell message FQ15-E324CADFF7D5: sepro-success at frozen line 826",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
       "note": "Complete frozen message expression equals the executed native report; dynamic inner literals are not credited.",
       "kindReceiptId": null,
-      "compared": "FamilyQuant/MainWindow.xaml.cs:826 \u0022went in. The file you chose was not modified.\\n\\n\u0022; frozen handler FamilyQuant.MainWindow::private void MenuItemReanotateSEPro_Click ( object sender , RoutedEventArgs e ) SHA256=FA201018C95E6C567288E78A1F733DD6C62AE7E659C731EF55B3BAF9D84A7276; native case sepro-success; before=1 protein(s) were given their family number and written to\nD:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\native\\owned_regrouped.sepr2\n\nThe number written is the User ID column, so any family you merged by hand is what went in. The file you chose was not modified.\n\nNext step: use the _regrouped package in the rest of the PatternLab pipeline.; actual=1 protein(s) were given their family number and written to\nD:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\native\\owned_regrouped.sepr2\n\nThe number written is the User ID column, so any family you merged by hand is what went in. The file you chose was not modified.\n\nNext step: use the _regrouped package in the rest of the PatternLab pipeline."
+      "compared": "FamilyQuant/MainWindow.xaml.cs:826 \u0022went in. The file you chose was not modified.\\n\\n\u0022; frozen handler FamilyQuant.MainWindow::private void MenuItemReanotateSEPro_Click ( object sender , RoutedEventArgs e ) SHA256=FA201018C95E6C567288E78A1F733DD6C62AE7E659C731EF55B3BAF9D84A7276; native case sepro-success; before=1 protein(s) were given their family number and written to\nD:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\native\\owned_regrouped.sepr2\n\nThe number written is the User ID column, so any family you merged by hand is what went in. The file you chose was not modified.\n\nNext step: use the _regrouped package in the rest of the PatternLab pipeline.; actual=1 protein(s) were given their family number and written to\nD:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\native\\owned_regrouped.sepr2\n\nThe number written is the User ID column, so any family you merged by hand is what went in. The file you chose was not modified.\n\nNext step: use the _regrouped package in the rest of the PatternLab pipeline."
     },
     {
       "observationId": "FQ15-E81D4D8CC4E3",
@@ -19634,7 +19634,7 @@
         {
           "path": "FamilyQuant/MainWindow.Status.cs",
           "symbol": "sepro-missing-1: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "DF781080AD5D075D84F27F3757598ECB3E0B143BC6F4D39194900046BE1E3B55"
+          "sha256": "A13F51B49BD04137DF641A3B6251363646613F8DF04EAE2BE38E0A695D635A19"
         },
         {
           "path": "FamilyQuant/MainWindow.ViewModel.cs",
@@ -19678,7 +19678,7 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell message FQ15-EDE55513E381: sepro-missing-1 at frozen line 805",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -19890,7 +19890,7 @@
         {
           "path": "FamilyQuant/MainWindow.Status.cs",
           "symbol": "compute-report-csv: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "DF781080AD5D075D84F27F3757598ECB3E0B143BC6F4D39194900046BE1E3B55"
+          "sha256": "A13F51B49BD04137DF641A3B6251363646613F8DF04EAE2BE38E0A695D635A19"
         },
         {
           "path": "FamilyQuant/MainWindow.ViewModel.cs",
@@ -19934,7 +19934,7 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell message FQ15-F0F954EF5FD4: compute-report-csv at frozen line 651",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -20138,7 +20138,7 @@
         {
           "path": "FamilyQuant/MainWindow.Status.cs",
           "symbol": "project-success: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "DF781080AD5D075D84F27F3757598ECB3E0B143BC6F4D39194900046BE1E3B55"
+          "sha256": "A13F51B49BD04137DF641A3B6251363646613F8DF04EAE2BE38E0A695D635A19"
         },
         {
           "path": "FamilyQuant/MainWindow.ViewModel.cs",
@@ -20182,13 +20182,13 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell message FQ15-F17372AEAD0F: project-success at frozen line 569",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
       "note": "Complete frozen message expression equals the executed native report; dynamic inner literals are not credited.",
       "kindReceiptId": null,
-      "compared": "FamilyQuant/MainWindow.xaml.cs:569 \u0022\\n\\n\u0022; frozen handler FamilyQuant.MainWindow::private async void MenuItemSaveProject_Click ( object sender , RoutedEventArgs e ) SHA256=810F5EAA567670C00E38AA106ACC95AFC9BA922B7CE7642AFB1C77BF3214E1BB; native case project-success; before=The project was saved to\nD:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\native\\saved.fqproj\n\nThe container holds the grouping, your User IDs and annotations, and 0 stored quant row(s). Reopening it restores both.\n\nNext step: nothing. Carry on working, or open this file later to return to exactly this project.; actual=The project was saved to\nD:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\native\\saved.fqproj\n\nThe container holds the grouping, your User IDs and annotations, and 0 stored quant row(s). Reopening it restores both.\n\nNext step: nothing. Carry on working, or open this file later to return to exactly this project."
+      "compared": "FamilyQuant/MainWindow.xaml.cs:569 \u0022\\n\\n\u0022; frozen handler FamilyQuant.MainWindow::private async void MenuItemSaveProject_Click ( object sender , RoutedEventArgs e ) SHA256=810F5EAA567670C00E38AA106ACC95AFC9BA922B7CE7642AFB1C77BF3214E1BB; native case project-success; before=The project was saved to\nD:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\native\\saved.fqproj\n\nThe container holds the grouping, your User IDs and annotations, and 0 stored quant row(s). Reopening it restores both.\n\nNext step: nothing. Carry on working, or open this file later to return to exactly this project.; actual=The project was saved to\nD:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\native\\saved.fqproj\n\nThe container holds the grouping, your User IDs and annotations, and 0 stored quant row(s). Reopening it restores both.\n\nNext step: nothing. Carry on working, or open this file later to return to exactly this project."
     },
     {
       "observationId": "FQ15-F37BABACE038",
@@ -20386,7 +20386,7 @@
         {
           "path": "FamilyQuant/MainWindow.Status.cs",
           "symbol": "open-fcf: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "DF781080AD5D075D84F27F3757598ECB3E0B143BC6F4D39194900046BE1E3B55"
+          "sha256": "A13F51B49BD04137DF641A3B6251363646613F8DF04EAE2BE38E0A695D635A19"
         },
         {
           "path": "FamilyQuant/MainWindow.ViewModel.cs",
@@ -20430,7 +20430,7 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell message FQ15-F37BABACE038: open-fcf at frozen line 303",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -20634,7 +20634,7 @@
         {
           "path": "FamilyQuant/MainWindow.Status.cs",
           "symbol": "spectrum-failure: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "DF781080AD5D075D84F27F3757598ECB3E0B143BC6F4D39194900046BE1E3B55"
+          "sha256": "A13F51B49BD04137DF641A3B6251363646613F8DF04EAE2BE38E0A695D635A19"
         },
         {
           "path": "FamilyQuant/MainWindow.ViewModel.cs",
@@ -20678,7 +20678,7 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell message FQ15-FC74E0231458: spectrum-failure at frozen line 752",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -20882,7 +20882,7 @@
         {
           "path": "FamilyQuant/MainWindow.Status.cs",
           "symbol": "spectrum-failure: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "DF781080AD5D075D84F27F3757598ECB3E0B143BC6F4D39194900046BE1E3B55"
+          "sha256": "A13F51B49BD04137DF641A3B6251363646613F8DF04EAE2BE38E0A695D635A19"
         },
         {
           "path": "FamilyQuant/MainWindow.ViewModel.cs",
@@ -20926,7 +20926,7 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell message FQ15-FCCB78925C6E: spectrum-failure at frozen line 753",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -21130,7 +21130,7 @@
         {
           "path": "FamilyQuant/MainWindow.Status.cs",
           "symbol": "project-empty: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "DF781080AD5D075D84F27F3757598ECB3E0B143BC6F4D39194900046BE1E3B55"
+          "sha256": "A13F51B49BD04137DF641A3B6251363646613F8DF04EAE2BE38E0A695D635A19"
         },
         {
           "path": "FamilyQuant/MainWindow.ViewModel.cs",
@@ -21174,7 +21174,7 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell message FQ15-FDBF9F028EB2: project-empty at frozen line 511",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -21386,7 +21386,7 @@
         {
           "path": "FamilyQuant/MainWindow.Status.cs",
           "symbol": "home: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "DF781080AD5D075D84F27F3757598ECB3E0B143BC6F4D39194900046BE1E3B55"
+          "sha256": "A13F51B49BD04137DF641A3B6251363646613F8DF04EAE2BE38E0A695D635A19"
         },
         {
           "path": "FamilyQuant/MainWindow.ViewModel.cs",
@@ -21430,7 +21430,7 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell route mapping FQ15-04C00B4757B5: home",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -21634,7 +21634,7 @@
         {
           "path": "FamilyQuant/MainWindow.Status.cs",
           "symbol": "home: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "DF781080AD5D075D84F27F3757598ECB3E0B143BC6F4D39194900046BE1E3B55"
+          "sha256": "A13F51B49BD04137DF641A3B6251363646613F8DF04EAE2BE38E0A695D635A19"
         },
         {
           "path": "FamilyQuant/MainWindow.ViewModel.cs",
@@ -21678,7 +21678,7 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell route mapping FQ15-45662E0D334E: home",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -21882,7 +21882,7 @@
         {
           "path": "FamilyQuant/MainWindow.Status.cs",
           "symbol": "home: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "DF781080AD5D075D84F27F3757598ECB3E0B143BC6F4D39194900046BE1E3B55"
+          "sha256": "A13F51B49BD04137DF641A3B6251363646613F8DF04EAE2BE38E0A695D635A19"
         },
         {
           "path": "FamilyQuant/MainWindow.ViewModel.cs",
@@ -21926,7 +21926,7 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell route mapping FQ15-8952FD454F0F: home",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -22130,7 +22130,7 @@
         {
           "path": "FamilyQuant/MainWindow.Status.cs",
           "symbol": "new: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "DF781080AD5D075D84F27F3757598ECB3E0B143BC6F4D39194900046BE1E3B55"
+          "sha256": "A13F51B49BD04137DF641A3B6251363646613F8DF04EAE2BE38E0A695D635A19"
         },
         {
           "path": "FamilyQuant/MainWindow.ViewModel.cs",
@@ -22174,7 +22174,7 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell route mapping FQ15-46EB4E24AC7D: new",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -22378,7 +22378,7 @@
         {
           "path": "FamilyQuant/MainWindow.Status.cs",
           "symbol": "new: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "DF781080AD5D075D84F27F3757598ECB3E0B143BC6F4D39194900046BE1E3B55"
+          "sha256": "A13F51B49BD04137DF641A3B6251363646613F8DF04EAE2BE38E0A695D635A19"
         },
         {
           "path": "FamilyQuant/MainWindow.ViewModel.cs",
@@ -22422,7 +22422,7 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell route mapping FQ15-085E5B81E35D: new",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -22626,7 +22626,7 @@
         {
           "path": "FamilyQuant/MainWindow.Status.cs",
           "symbol": "new: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "DF781080AD5D075D84F27F3757598ECB3E0B143BC6F4D39194900046BE1E3B55"
+          "sha256": "A13F51B49BD04137DF641A3B6251363646613F8DF04EAE2BE38E0A695D635A19"
         },
         {
           "path": "FamilyQuant/MainWindow.ViewModel.cs",
@@ -22670,7 +22670,7 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell route mapping FQ15-3997625A78A4: new",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -22874,7 +22874,7 @@
         {
           "path": "FamilyQuant/MainWindow.Status.cs",
           "symbol": "open-fcf: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "DF781080AD5D075D84F27F3757598ECB3E0B143BC6F4D39194900046BE1E3B55"
+          "sha256": "A13F51B49BD04137DF641A3B6251363646613F8DF04EAE2BE38E0A695D635A19"
         },
         {
           "path": "FamilyQuant/MainWindow.ViewModel.cs",
@@ -22918,7 +22918,7 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell route mapping FQ15-C2500D2F7285: open-fcf",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -23122,7 +23122,7 @@
         {
           "path": "FamilyQuant/MainWindow.Status.cs",
           "symbol": "open-fcf: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "DF781080AD5D075D84F27F3757598ECB3E0B143BC6F4D39194900046BE1E3B55"
+          "sha256": "A13F51B49BD04137DF641A3B6251363646613F8DF04EAE2BE38E0A695D635A19"
         },
         {
           "path": "FamilyQuant/MainWindow.ViewModel.cs",
@@ -23166,7 +23166,7 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell route mapping FQ15-D88E5CED913A: open-fcf",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -23370,7 +23370,7 @@
         {
           "path": "FamilyQuant/MainWindow.Status.cs",
           "symbol": "open-fcf: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "DF781080AD5D075D84F27F3757598ECB3E0B143BC6F4D39194900046BE1E3B55"
+          "sha256": "A13F51B49BD04137DF641A3B6251363646613F8DF04EAE2BE38E0A695D635A19"
         },
         {
           "path": "FamilyQuant/MainWindow.ViewModel.cs",
@@ -23414,7 +23414,7 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell route mapping FQ15-77AB63820143: open-fcf",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -23618,7 +23618,7 @@
         {
           "path": "FamilyQuant/MainWindow.Status.cs",
           "symbol": "project-success: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "DF781080AD5D075D84F27F3757598ECB3E0B143BC6F4D39194900046BE1E3B55"
+          "sha256": "A13F51B49BD04137DF641A3B6251363646613F8DF04EAE2BE38E0A695D635A19"
         },
         {
           "path": "FamilyQuant/MainWindow.ViewModel.cs",
@@ -23662,7 +23662,7 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell route mapping FQ15-67E9A390B4D4: project-success",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -23866,7 +23866,7 @@
         {
           "path": "FamilyQuant/MainWindow.Status.cs",
           "symbol": "project-success: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "DF781080AD5D075D84F27F3757598ECB3E0B143BC6F4D39194900046BE1E3B55"
+          "sha256": "A13F51B49BD04137DF641A3B6251363646613F8DF04EAE2BE38E0A695D635A19"
         },
         {
           "path": "FamilyQuant/MainWindow.ViewModel.cs",
@@ -23910,7 +23910,7 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell route mapping FQ15-D11D9392E890: project-success",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -24114,7 +24114,7 @@
         {
           "path": "FamilyQuant/MainWindow.Status.cs",
           "symbol": "project-success: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "DF781080AD5D075D84F27F3757598ECB3E0B143BC6F4D39194900046BE1E3B55"
+          "sha256": "A13F51B49BD04137DF641A3B6251363646613F8DF04EAE2BE38E0A695D635A19"
         },
         {
           "path": "FamilyQuant/MainWindow.ViewModel.cs",
@@ -24158,7 +24158,7 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell route mapping FQ15-7526DED77FA2: project-success",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -24362,7 +24362,7 @@
         {
           "path": "FamilyQuant/MainWindow.Status.cs",
           "symbol": "fcf-success: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "DF781080AD5D075D84F27F3757598ECB3E0B143BC6F4D39194900046BE1E3B55"
+          "sha256": "A13F51B49BD04137DF641A3B6251363646613F8DF04EAE2BE38E0A695D635A19"
         },
         {
           "path": "FamilyQuant/MainWindow.ViewModel.cs",
@@ -24406,7 +24406,7 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell route mapping FQ15-34318E61C997: fcf-success",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -24610,7 +24610,7 @@
         {
           "path": "FamilyQuant/MainWindow.Status.cs",
           "symbol": "fcf-success: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "DF781080AD5D075D84F27F3757598ECB3E0B143BC6F4D39194900046BE1E3B55"
+          "sha256": "A13F51B49BD04137DF641A3B6251363646613F8DF04EAE2BE38E0A695D635A19"
         },
         {
           "path": "FamilyQuant/MainWindow.ViewModel.cs",
@@ -24654,7 +24654,7 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell route mapping FQ15-CFD1302DD85B: fcf-success",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -24858,7 +24858,7 @@
         {
           "path": "FamilyQuant/MainWindow.Status.cs",
           "symbol": "fcf-success: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "DF781080AD5D075D84F27F3757598ECB3E0B143BC6F4D39194900046BE1E3B55"
+          "sha256": "A13F51B49BD04137DF641A3B6251363646613F8DF04EAE2BE38E0A695D635A19"
         },
         {
           "path": "FamilyQuant/MainWindow.ViewModel.cs",
@@ -24902,7 +24902,7 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell route mapping FQ15-BEE9CF7ACF93: fcf-success",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -25106,7 +25106,7 @@
         {
           "path": "FamilyQuant/MainWindow.Status.cs",
           "symbol": "quantify: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "DF781080AD5D075D84F27F3757598ECB3E0B143BC6F4D39194900046BE1E3B55"
+          "sha256": "A13F51B49BD04137DF641A3B6251363646613F8DF04EAE2BE38E0A695D635A19"
         },
         {
           "path": "FamilyQuant/MainWindow.ViewModel.cs",
@@ -25150,7 +25150,7 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell route mapping FQ15-1BA879330EBB: quantify",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -25354,7 +25354,7 @@
         {
           "path": "FamilyQuant/MainWindow.Status.cs",
           "symbol": "quantify: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "DF781080AD5D075D84F27F3757598ECB3E0B143BC6F4D39194900046BE1E3B55"
+          "sha256": "A13F51B49BD04137DF641A3B6251363646613F8DF04EAE2BE38E0A695D635A19"
         },
         {
           "path": "FamilyQuant/MainWindow.ViewModel.cs",
@@ -25398,7 +25398,7 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell route mapping FQ15-0CA40EFF5B28: quantify",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -25602,7 +25602,7 @@
         {
           "path": "FamilyQuant/MainWindow.Status.cs",
           "symbol": "quantify: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "DF781080AD5D075D84F27F3757598ECB3E0B143BC6F4D39194900046BE1E3B55"
+          "sha256": "A13F51B49BD04137DF641A3B6251363646613F8DF04EAE2BE38E0A695D635A19"
         },
         {
           "path": "FamilyQuant/MainWindow.ViewModel.cs",
@@ -25646,7 +25646,7 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell route mapping FQ15-0AD0CE6F978B: quantify",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -25850,7 +25850,7 @@
         {
           "path": "FamilyQuant/MainWindow.Status.cs",
           "symbol": "denovo: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "DF781080AD5D075D84F27F3757598ECB3E0B143BC6F4D39194900046BE1E3B55"
+          "sha256": "A13F51B49BD04137DF641A3B6251363646613F8DF04EAE2BE38E0A695D635A19"
         },
         {
           "path": "FamilyQuant/MainWindow.ViewModel.cs",
@@ -25894,7 +25894,7 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell route mapping FQ15-ED964B3D45AE: denovo",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -26098,7 +26098,7 @@
         {
           "path": "FamilyQuant/MainWindow.Status.cs",
           "symbol": "denovo: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "DF781080AD5D075D84F27F3757598ECB3E0B143BC6F4D39194900046BE1E3B55"
+          "sha256": "A13F51B49BD04137DF641A3B6251363646613F8DF04EAE2BE38E0A695D635A19"
         },
         {
           "path": "FamilyQuant/MainWindow.ViewModel.cs",
@@ -26142,7 +26142,7 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell route mapping FQ15-185E1DC40B89: denovo",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -26346,7 +26346,7 @@
         {
           "path": "FamilyQuant/MainWindow.Status.cs",
           "symbol": "denovo: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "DF781080AD5D075D84F27F3757598ECB3E0B143BC6F4D39194900046BE1E3B55"
+          "sha256": "A13F51B49BD04137DF641A3B6251363646613F8DF04EAE2BE38E0A695D635A19"
         },
         {
           "path": "FamilyQuant/MainWindow.ViewModel.cs",
@@ -26390,7 +26390,7 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell route mapping FQ15-84F3ED74E32D: denovo",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -26594,7 +26594,7 @@
         {
           "path": "FamilyQuant/MainWindow.Status.cs",
           "symbol": "results: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "DF781080AD5D075D84F27F3757598ECB3E0B143BC6F4D39194900046BE1E3B55"
+          "sha256": "A13F51B49BD04137DF641A3B6251363646613F8DF04EAE2BE38E0A695D635A19"
         },
         {
           "path": "FamilyQuant/MainWindow.ViewModel.cs",
@@ -26638,7 +26638,7 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell route mapping FQ15-D373CC8B2236: results",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -26842,7 +26842,7 @@
         {
           "path": "FamilyQuant/MainWindow.Status.cs",
           "symbol": "results: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "DF781080AD5D075D84F27F3757598ECB3E0B143BC6F4D39194900046BE1E3B55"
+          "sha256": "A13F51B49BD04137DF641A3B6251363646613F8DF04EAE2BE38E0A695D635A19"
         },
         {
           "path": "FamilyQuant/MainWindow.ViewModel.cs",
@@ -26886,7 +26886,7 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell route mapping FQ15-A33C172644F1: results",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -27090,7 +27090,7 @@
         {
           "path": "FamilyQuant/MainWindow.Status.cs",
           "symbol": "results: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "DF781080AD5D075D84F27F3757598ECB3E0B143BC6F4D39194900046BE1E3B55"
+          "sha256": "A13F51B49BD04137DF641A3B6251363646613F8DF04EAE2BE38E0A695D635A19"
         },
         {
           "path": "FamilyQuant/MainWindow.ViewModel.cs",
@@ -27134,7 +27134,7 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell route mapping FQ15-37054BF5BA1E: results",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -27338,7 +27338,7 @@
         {
           "path": "FamilyQuant/MainWindow.Status.cs",
           "symbol": "sepro-success: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "DF781080AD5D075D84F27F3757598ECB3E0B143BC6F4D39194900046BE1E3B55"
+          "sha256": "A13F51B49BD04137DF641A3B6251363646613F8DF04EAE2BE38E0A695D635A19"
         },
         {
           "path": "FamilyQuant/MainWindow.ViewModel.cs",
@@ -27382,7 +27382,7 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell route mapping FQ15-C07C8EF91D69: sepro-success",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -27586,7 +27586,7 @@
         {
           "path": "FamilyQuant/MainWindow.Status.cs",
           "symbol": "sepro-success: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "DF781080AD5D075D84F27F3757598ECB3E0B143BC6F4D39194900046BE1E3B55"
+          "sha256": "A13F51B49BD04137DF641A3B6251363646613F8DF04EAE2BE38E0A695D635A19"
         },
         {
           "path": "FamilyQuant/MainWindow.ViewModel.cs",
@@ -27630,7 +27630,7 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell route mapping FQ15-DD7878AEE818: sepro-success",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -27834,7 +27834,7 @@
         {
           "path": "FamilyQuant/MainWindow.Status.cs",
           "symbol": "sepro-success: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "DF781080AD5D075D84F27F3757598ECB3E0B143BC6F4D39194900046BE1E3B55"
+          "sha256": "A13F51B49BD04137DF641A3B6251363646613F8DF04EAE2BE38E0A695D635A19"
         },
         {
           "path": "FamilyQuant/MainWindow.ViewModel.cs",
@@ -27878,7 +27878,7 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell route mapping FQ15-A79FAB873090: sepro-success",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -28082,7 +28082,7 @@
         {
           "path": "FamilyQuant/MainWindow.Status.cs",
           "symbol": "file-menu: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "DF781080AD5D075D84F27F3757598ECB3E0B143BC6F4D39194900046BE1E3B55"
+          "sha256": "A13F51B49BD04137DF641A3B6251363646613F8DF04EAE2BE38E0A695D635A19"
         },
         {
           "path": "FamilyQuant/MainWindow.ViewModel.cs",
@@ -28126,7 +28126,7 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell route mapping FQ15-D7A1D45E49F5: file-menu",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -28330,7 +28330,7 @@
         {
           "path": "FamilyQuant/MainWindow.Status.cs",
           "symbol": "file-menu: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "DF781080AD5D075D84F27F3757598ECB3E0B143BC6F4D39194900046BE1E3B55"
+          "sha256": "A13F51B49BD04137DF641A3B6251363646613F8DF04EAE2BE38E0A695D635A19"
         },
         {
           "path": "FamilyQuant/MainWindow.ViewModel.cs",
@@ -28374,7 +28374,7 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell route mapping FQ15-21D9A55B91A6: file-menu",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -28578,7 +28578,7 @@
         {
           "path": "FamilyQuant/MainWindow.Status.cs",
           "symbol": "spectrum-failure: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "DF781080AD5D075D84F27F3757598ECB3E0B143BC6F4D39194900046BE1E3B55"
+          "sha256": "A13F51B49BD04137DF641A3B6251363646613F8DF04EAE2BE38E0A695D635A19"
         },
         {
           "path": "FamilyQuant/MainWindow.ViewModel.cs",
@@ -28622,7 +28622,7 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell route mapping FQ15-017C8541B68E: spectrum-failure",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -28826,7 +28826,7 @@
         {
           "path": "FamilyQuant/MainWindow.Status.cs",
           "symbol": "spectrum-failure: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "DF781080AD5D075D84F27F3757598ECB3E0B143BC6F4D39194900046BE1E3B55"
+          "sha256": "A13F51B49BD04137DF641A3B6251363646613F8DF04EAE2BE38E0A695D635A19"
         },
         {
           "path": "FamilyQuant/MainWindow.ViewModel.cs",
@@ -28870,7 +28870,7 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell route mapping FQ15-65700BDA90F3: spectrum-failure",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\shell-main\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
