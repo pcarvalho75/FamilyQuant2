@@ -52,6 +52,9 @@ Finished steps, moved here from docs/ROADMAP.md. The board shows them as green.
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
 | A0 | Hold the Python-made files in the Gmail draft to Ana. Nothing more goes to her until A3 | L | 0 | 🟢 | A3 | Paulo confirms the draft stays unsent | Paulo | waiting: Paulo | 0% | 0% | now |
+| A1 | Make her file with 2.0 preview 1 on her original `.fcf`: Fetch Evidence, fetch the panel again so it keeps tissue text, review, Create, Save, Export. Provenance shows version, recipe and release | M | 0.5 | 🟢 | A2 | Recipe reapplied gives the same file; file check passed; no script touched it | EV | not started | 0% | 0% | T+0 |
+| A6 | The coverage gate counts the query letters actually aligned (D12). The evidence window, the audit CSV and Help state the rule in plain words, and no value reads over 100%. Ana's file is made again with it | M | 0.5 | 🟢 | A2 | Same families, tiers and default selection on her file; the neighbours that change are listed; recipe replay exact; the rule is visible on the screen and in the export | EV | not started | 0% | 0% | T+2 |
+| A2 | Adversarial science review of the file: concepts, denominators, labels, red flags, comparison with what Ana already holds | H | 1 | A1 | Ana's file ready | GR's written verdict; every finding closed | GR | not started | 0% | 0% | T+2 |
 
 ### W3 Look
 
@@ -78,6 +81,7 @@ Finished steps, moved here from docs/ROADMAP.md. The board shows them as green.
 | S7 | Window size and last folder remembered; drag a file to open | L | 1 | S1 | R2 | Survives restart | LK | SH | 0% | 0% | T+7 |
 | S6 | One busy overlay with progress and Cancel for every long operation outside the curation screen, on the operation path, and a host C1 adopts for the curation paths | M | 1 | 🟢 | R2, C1 | Cancel leaves the file as it was; suite covers each operation | SH | not started | 0% | 0% | T+1 |
 | S8 | Shell messages and folders: one path for message boxes and status lines, and every browse dialog uses the folder preference. Left on the list by housekeeping because each is a behaviour change | L | 0.5 | 🟢 | C14 | A headless run never opens a dialog; each browse has a test; no message lost | SH | not started | 0% | 0% | T+0 |
+| S9 | Evidence fetch stages the whole fetch on a copy and attaches it at the end. Today the first fetch is written before the panel, so a Cancel at the panel keeps half of it | M | 0.5 | A1 | R2 | Cancel at any point leaves the file as it was; red test first | EV | not started | 0% | 0% | T+1 |
 
 ### W5 Screens: each rebuilt as a thin view over a tested view model
 

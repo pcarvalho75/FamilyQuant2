@@ -85,10 +85,7 @@ Columns: Diff = L, M, H, VH. Hrs = worker hours at measured speed: the 56 steps 
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| A1 | Make her file with 2.0 preview 1 on her original `.fcf`: Fetch Evidence, fetch the panel again so it keeps tissue text, review, Create, Save, Export. Provenance shows version, recipe and release | M | 0.5 | 🟢 | A2 | Recipe reapplied gives the same file; file check passed; no script touched it | EV | not started | 0% | 0% | T+0 |
-| A2 | Adversarial science review of the file: concepts, denominators, labels, red flags, comparison with what Ana already holds | H | 1 | A1 | Ana's file ready | GR's written verdict; every finding closed | GR | not started | 0% | 0% | T+2 |
-| A6 | The coverage gate counts the query letters actually aligned (D12). The evidence window, the audit CSV and Help state the rule in plain words, and no value reads over 100%. Ana's file is made again with it | M | 0.5 | 🟢 | A2 | Same families, tiers and default selection on her file; the neighbours that change are listed; recipe replay exact; the rule is visible on the screen and in the export | EV | not started | 0% | 0% | T+2 |
-| A5 | Measure the shared-peptide effect on her data, through Compute full XIC. It needs a `.sepr2` on this database: if none exists when you reach it, post that and leave the step open | M | 0.5 | A2 | Paper numbers | Numbers exported by the program | EV | not started | 0% | 0% | her pace |
+| A5 | Measure the shared-peptide effect on her data, through Compute full XIC. It needs a `.sepr2` on this database: if none exists when you reach it, post that and leave the step open | M | 0.5 | 🟢 | Paper numbers | Numbers exported by the program | EV | not started | 0% | 0% | her pace |
 
 ### W3 Look
 
@@ -100,7 +97,6 @@ Columns: Diff = L, M, H, VH. Hrs = worker hours at measured speed: the 56 steps 
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| S9 | Evidence fetch stages the whole fetch on a copy and attaches it at the end. Today the first fetch is written before the panel, so a Cancel at the panel keeps half of it | M | 0.5 | A1 | R2 | Cancel at any point leaves the file as it was; red test first | EV | not started | 0% | 0% | T+1 |
 
 ### W5 Screens: each rebuilt as a thin view over a tested view model
 
@@ -131,7 +127,7 @@ The bet, from `docs/vision/VISION.md`: a de novo peptide your database cannot pl
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| B4 | Fetch the family world: the reviewed panel plus one clade query per family, unreviewed included, all or nothing, release recorded, stored with the project, offline afterwards | M | 1 | 🟢 | B5 | An interrupted fetch leaves the file as it was; offline rerun identical; size growth measured on Ana's file | EV | not started | 0% | 0% | T+2 |
+| B4 | Fetch the family world: the reviewed panel plus one clade query per family, unreviewed included, all or nothing, release recorded, stored with the project, offline afterwards | M | 1 | 🟢 | B5 | An interrupted fetch leaves the file as it was; offline rerun identical; size growth measured on Ana's file | EV | not started | 0% | 0% | T+1 |
 | B6 | The error beside every claim: for each family, the decoy rate and the known-answer right rate, stored in the project. A family with too little evidence shows that instead of a number | M | 1 | 🟢 | B7 | Every family row has both; reproducible; conserved families checked by hand | OP | not started | 0% | 0% | T+1 |
 | B7 | Result: three parts per family (identified, de novo in your database, de novo only in the family world) plus one global unexplained bucket, and the "Database gap" ranking: the families with the most signal missing from your database. An export writes a FASTA of the family-world proteins the tags hit, as suggested additions for the person to add and search again in PatternLab. The program never changes the database itself. The screen, the CSV and Help state the minimum tag length and the in-scope rule beside the result | M | 1 | B6 | B8 | Screen and CSV from one table; every number from the program; the rules in force are visible on the screen and in the export, and stored in the project; both themes | RS | not started | 0% | 0% | T+2 |
 | B8 | Science review on a real sample: labels, denominators, inflation of conserved families, and the wording of the claim | H | 1 | B7 | R3 | GR's verdict; findings closed; Paulo accepts the wording | GR | not started | 0% | 0% | T+3 |
