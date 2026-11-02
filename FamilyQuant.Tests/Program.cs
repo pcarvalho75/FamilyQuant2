@@ -122,6 +122,7 @@ namespace FamilyQuant.Tests
             Section("Identified-peptide envelope (Q1) - stored quants reproduced, full envelope measured");
             IdentifiedQuantRealTests(args.Length > 3 ? args[3] : null, workDir);
             Section("Project store (Q2) - .fqproj container round trip, migration and structure");
+            ProjectFormatStageTests();
             ProjectStoreTests(workDir);
             GoldenNumberGuardTests();
             Section("Talk export routing - one override root for heavy and fast lanes");
@@ -264,6 +265,7 @@ namespace FamilyQuant.Tests
             KeywordCommandTests();
             CurationScreenTests();
             CurationOperationTests();
+            FamilyViewTests();
             TableAppearanceTests();
             EvidenceReviewModelTests();
             EvidenceCoverageUiTests(Path.Combine(workDir, "evidence-coverage-ui"));

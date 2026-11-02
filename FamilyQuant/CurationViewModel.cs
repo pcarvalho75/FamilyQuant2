@@ -38,6 +38,7 @@ public sealed partial class CurationViewModel : ScreenViewModel
         // Stored evidence recipes address original positions. Legacy files retain the stable physical ordering.
         if (Document.EvidenceRecipe == null)
             Document.MyExtendedFastaItems = Document.MyExtendedFastaItems.OrderBy(p => p.UserID).ToList();
+        RefreshFamilyIndex();
         RefreshRows();
     }
     public void RefreshRows()
@@ -45,6 +46,7 @@ public sealed partial class CurationViewModel : ScreenViewModel
         Quantitation.RefreshFullXicShares();
         Rows = ReportView.Sort(FamilyFilter.Apply(Document.MyExtendedFastaItems.OrderBy(p => p.UserID),
             SearchText, OnlyQuantified, HideDecoys, HideContaminants), SortMemberPath, SortDescending);
+        RefreshFamilies();
         Changed(nameof(Rows)); Changed(nameof(FamilyCounter)); Changed(nameof(LockSummary)); Changed(nameof(CanUndo));
     }
     public void PushUndo(IEnumerable<FastaItemExtended>? annotations = null)

@@ -96,6 +96,7 @@ Finished steps, moved here from docs/ROADMAP.md. The board shows them as green.
 | C15 | The review window's architecture split works per group: each group has its own tick, so one group can leave while the rest of the family stays whole. Core already takes a choice per group | L | 0.5 | 🟢 | R2 | Ticking only the disintegrin-alone group keeps the rest together; recipe replay exact | RS | not started | 0% | 0% | T+0 |
 | C5 | Quantitation panel: Layers 2 and 3 merged; Full XIC first, PatternLab as a secondary source, options shown only when they apply | M | 1 | C1 | V3, C13, R2 | Every option kept; golden equal | RS | not started | 0% | 0% | T+3 |
 | C1 | Curation rebuilt: table always in view, actions in a side panel, no Controls and Data Browser tabs, no "Layer" words. USearch ID column hidden by default, data kept. Decoys hidden by default; Locus shows the accession. Long operations use the S6 host. `ClusterGenerationControl` (1,978 lines) replaced by a view model and a thin view | VH | 2 | 🟢 | C2, C5, V3, C13 | Pressing any action shows its result without changing view; every ledger row of the screen checked; golden equal | LK | not started | 0% | 0% | T+2 |
+| C2 | Family view: a table of families (name, proteins, shares, lock) with the proteins of the selected family beside it | H | 1.5 | 🟢 | N6, R2 | Selection, edit, lock and undo work on both tables; 39,996 families smooth | LK | not started | 0% | 0% | T+2 |
 
 ### W6 Core rewrite: copy what is good, rewrite what is better
 
@@ -113,6 +114,7 @@ Finished steps, moved here from docs/ROADMAP.md. The board shows them as green.
 | X9 | Move paper and talk figure code out of the installed app, but only code no screen calls. The Results screen calls `PresentationEvidencePack`, so that stays. Audit first, keeping the chart findings in `docs/housekeeping/H1-NOTES.md`; if little remains, close it small without a `FamilyQuant.Reports` project | H | 1 | 🟢 | R3 | Same evidence pack from the app, byte for byte except the existing `generatedUtc` field; no screen lost a function; what moved or stayed is listed | RS | not started | 0% | 0% | T+1 |
 | X15 | Bundled USEARCH: the binary's hash differs from upstream 11.0.667, so its origin is unproven. The author publishes versions 5 to 11 as CC0, and VSEARCH has no amino acid support, so it cannot replace it. Swap in the upstream file after a parity check (D6) | L | 0.5 | 🟢 | R3 | Same families on Bjararaca and Viperidae; hash and source recorded; publish rehearsal runs | AS | not started | 0% | 0% | T+0 |
 | X6 | De novo engine tidy: readers, reconciler and table builders, with the logic left in `DeNovoControl` moved into Core | H | 1 | 🟢 | R3 | Golden equal; real-data de novo sections green | FL | not started | 0% | 0% | T+1 |
+| X7 | Project and file formats: `ProjectStore` (1,083) split, schema versioned, and an `.fcf` export the frozen 1.5.0.6 opens | H | 1 | 🟢 | R2 | A file written by 2.0 opens in the reference build with the same families; old `.fqproj` rules kept | FL | not started | 0% | 0% | T+1 |
 
 ### W7 Releases (Paulo publishes each one)
 
