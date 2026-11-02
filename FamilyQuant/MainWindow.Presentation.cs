@@ -115,6 +115,7 @@ public partial class MainWindow
 
 
             owner.dnc = new DeNovoControl(owner.SharedDeNovoFilters());
+            owner.dnc.ViewModel.Operations = owner.Operations;
             owner.dnc.HomologyCompleted += owner.KeepHomologyResult;
 
             // Only a suggestion, and only into an empty box: the de novo screen reads nothing until its
@@ -126,16 +127,18 @@ public partial class MainWindow
             owner.UpdateGuide();
         }
 
-        public async void PresentResults()
+        public async void PresentResults() => await AppOperationHost.OnUi(owner, PresentResultsCoreAsync);
+        private async Task PresentResultsCoreAsync()
         {
             // The stored spectrum table's families first (its evidence pack exports them), then the view,
             // handed the curation screen's attribution so it runs no second homology search. Captured
             // before the swap, because building the view reads them and the field resets below must not
             // race the constructor.
-            if (owner.analyticsInProgress) return;
+            if (owner.analyticsInProgress || owner.Operations.IsBusy) return;
             owner.analyticsInProgress = true;
             owner.RefreshNavigationState();
             AnalyticsControl control;
+            using var operation = owner.Operations.Begin("Prepare results");
             try
             {
                 if (owner.loadedQuant.Count > 0)
@@ -145,7 +148,24 @@ public partial class MainWindow
                 }
                 PeptideFamilyAttribution? held = owner.cgc != null && owner.cgc.HasFullXic && ReferenceEquals(owner.cgc.fcf, owner.loadedCuration)
                     ? owner.cgc.CurrentFullXicAttribution() : null;
-                control = new AnalyticsControl(owner.loadedQuant, owner.loadedManifest, owner.loadedCuration, held, owner.latestHomologyResult);
+                var rows = owner.loadedQuant;
+                var manifest = owner.loadedManifest;
+                var curation = owner.loadedCuration;
+                var homology = owner.latestHomologyResult;
+                var model = rows.Count == 0 ? new AnalyticsViewModel(rows, manifest, curation, held, homology)
+                    : await Task.Run(() => new AnalyticsViewModel(rows, manifest, curation, held, homology));
+                operation.Context.ThrowIfCancellationRequested();
+                control = new AnalyticsControl(model);
+            }
+            catch (OperationCanceledException) when (operation.Context.IsCancellationRequested)
+            {
+                owner.StatusModel.ShowMessage("Cancelled. The previous view was kept.");
+                return;
+            }
+            catch (Exception ex)
+            {
+                owner.StatusModel.ShowMessage("The results could not be prepared. " + ex.Message);
+                return;
             }
             finally
             {

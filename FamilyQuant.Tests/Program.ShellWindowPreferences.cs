@@ -72,7 +72,7 @@ internal static partial class Program
         var main = new MainWindow();
         bool Finish(Task<bool> task)
         {
-            for (int i = 0; i < 100 && !task.IsCompleted; i++) PumpDispatcher();
+            FinishBusyTask(task);
             Check("guarded drop decision completes", task.IsCompleted);
             return task.IsCompleted && task.GetAwaiter().GetResult();
         }

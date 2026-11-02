@@ -25,6 +25,7 @@ public partial class ComputeXicWindow : Window
         InitializeComponent();
         Screen = new QuantifyControl(new ComputeXicViewModel(appVersion, existingManifest, familyCuration, filters));
         ScreenHost.Content = Screen;
+        OperationOverlay.DataContext = ViewModel.Operations;
         Closing += (_, e) => { if (ViewModel.IsBusy) { e.Cancel = true; ViewModel.CancelCommand.Execute(null); } };
     }
 }

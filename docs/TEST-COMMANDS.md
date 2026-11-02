@@ -65,3 +65,8 @@ was 2372 before C3 and the new routing checks. Two native catalog outputs were b
 The X11 and X14 focused flags passed 23/0/0 and 12/0/0 through the registry; frozen exports already
 produced for X14 passed `--golden-verify` at 4/0/0. This did not regenerate the pack, run the full
 suite or execute the heavy scientific commands.
+
+The S6/B3 integration adds four flags in Evidence and Shell providers. Its syntax audit preserved
+67 incoming predicates, handlers, phases and precedence rules, plus 221 ordinary-suite statements
+in order. Build had zero warnings/errors; dispatch passed 21/0/0, B3 18/0/0, S6 38/0/0 and the
+integrated quick suite 2454/0/17. The existing `--shell-checks` also retains S6's new busy check.

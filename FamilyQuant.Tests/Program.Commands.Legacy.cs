@@ -265,6 +265,7 @@ internal static partial class Program
         ShellProjectOperationTests(shellWork);
         ShellSavingTests(shellWork);
         ShellWindowPreferenceTests(shellWork);
+            BusyOperationTests(shellWork);
         BuildFamiliesScreenTests(shellWork);
         QuantifyShellTests(shellWork);
         SecondaryWindowTests(shellWork);

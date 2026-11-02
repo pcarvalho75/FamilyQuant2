@@ -73,6 +73,7 @@ namespace FamilyQuant.Tests
             Section("Word-based reclustering invariants");
             WordClusterTests();
             QuantifyViewModelTests(workDir);
+            BusyOperationTests(workDir);
             ResultsViewModelTests();
             DeNovoViewModelTests(workDir);
             HomologyResultsTests(workDir);
@@ -192,6 +193,7 @@ namespace FamilyQuant.Tests
             ProteinDomainsTests(workDir);
             EvidenceStorageTests(workDir);
             EvidenceFetchTests();
+            EvidenceTaskTests();
             EvidenceClassifierTests();
             EvidenceArchitectureTests();
             Section("Nearest reviewed protein and the outside panel - never itself, gated, deterministic, offline");
