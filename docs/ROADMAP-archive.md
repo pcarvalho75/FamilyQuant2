@@ -180,6 +180,7 @@ Finished steps, moved here from docs/ROADMAP.md. The board shows them as green.
 | N6f | Curation code (302 rows) | H | 1 | 🟢 | N6p | Each row proved or on the wording list | SH | not started | 0% | 0% | T+2 |
 | N6g | Curation screen (147 rows) | M | 0.5 | 🟢 | N6p | Each row proved or on the wording list | SH | not started | 0% | 0% | T+2 |
 | N6o | Report and CSV facts (19 rows) | L | 0.2 | 🟢 | N6p | Each row proved or on the wording list | SH | not started | 0% | 0% | T+3 |
+| N6c | De novo screen: commands, exports and handlers (290 rows today) | H | 1 | 🟢 | N6p | Each row proved or on the wording list | EV | not started | 0% | 0% | T+1 |
 
 ### W4 Look
 

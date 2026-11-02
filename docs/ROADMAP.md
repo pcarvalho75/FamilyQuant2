@@ -87,7 +87,7 @@ Columns: Diff = L, M, H, VH. Hrs = worker hours at measured speed: estimates are
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
 | Y6 | Lost facts restored: the rows where the old fact no longer reaches the user | M | 0.5 | 🟢 | R3a | Each fact shown again, or listed for Paulo with a reason | LK | not started | 0% | 0% | T+0 |
 | Y7 | Busy screen: a polished animated logo wherever the program computes, in the one shared busy overlay, with Cancel and progress kept | M | 0.5 | 🟢 | R3a | Shown in every long operation, both themes; animation stops when the work ends and costs no noticeable CPU; Paulo likes it | RS | not started | 0% | 0% | T+0 |
-| Y8 | Fetch the family world from the program: a screen action with the confirmed scope, Cancel and progress. Today only a command line reaches it | M | 0.7 | 🟢 | R3a | Real project walked through the buttons: fetch, Compute, Database gap, FASTA; Cancel leaves the file as it was | EV | not started | 0% | 0% | T+0 |
+| Y8 | Fetch the family world from the program: a screen action with the confirmed scope, Cancel and progress. Today only a command line reaches it | M | 0.7 | 🟢 | R3a | Real project walked through the buttons: fetch, Compute, Database gap, FASTA; Cancel leaves the file as it was | EV | not started | 0% | 0% | T+1 |
 
 ### W3 Ledger, screen by screen
 
@@ -95,11 +95,10 @@ Columns: Diff = L, M, H, VH. Hrs = worker hours at measured speed: estimates are
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
 | N6a | Text tool: closes rows whose 1.5 text is in the compiled 2.0 program, in the same feature, reachable from a real screen | M | 0.7 | 🟢 | N6b | Tool run on master; dead-code negative stays open; counts by kind | OP | not started | 0% | 0% | T+1 |
 | N6b | Reviewer samples the text tool's rows | L | 0.2 | N6a | N6r | GR's verdict; one failure reopens the kind | GR | not started | 0% | 0% | T+1 |
-| N6c | De novo screen: commands, exports and handlers (290 rows today) | H | 1 | 🟢 | N6p | Each row proved or on the wording list | EV | not started | 0% | 0% | T+1 |
 | N6d | Three-way window, chart and partition (30 rows) | L | 0.2 | 🟢 | N6p | Each row proved or on the wording list | EV | not started | 0% | 0% | T+1 |
-| N6p | Wording list assembled for Paulo: rows that changed on purpose, with old and new text | L | 0.2 | N6c, N6d | N6q | List grouped by reason | Orchestrator | not started | 0% | 0% | T+1 |
+| N6p | Wording list assembled for Paulo: rows that changed on purpose, with old and new text | L | 0.2 | N6d | N6q | List grouped by reason | Orchestrator | not started | 0% | 0% | T+1 |
 | N6q | Paulo rules on the wording list in one pass | L | 0 | N6p | N6r | Paulo's ruling recorded | Paulo | not started | 0% | 0% | T+1 |
-| N6r | Reviewer's 200-row random sample across the whole ledger | M | 0.3 | N6b, N6q | N6s | GR's verdict; one failure reopens the kind | GR | not started | 0% | 0% | T+2 |
+| N6r | Reviewer's 200-row random sample across the whole ledger | M | 0.3 | N6b, N6q | N6s | GR's verdict; one failure reopens the kind | GR | not started | 0% | 0% | T+1 |
 | N6s | Release check passes | L | 0.1 | N6r | R3a | `--feature-ledger-release-check` passes | Orchestrator | not started | 0% | 0% | T+2 |
 
 ### W4 Look
