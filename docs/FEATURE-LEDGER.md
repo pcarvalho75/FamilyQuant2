@@ -17,7 +17,7 @@ Render targets refer to `ScreenHarness.Screens`, captured with `--screens <outpu
 Release gate: `FamilyQuant.Tests.exe --feature-ledger-release-check` fails until every retained row is VERIFIED with evidence. Authorized DROP rows use APPROVED_DROP, which records a decision, not a completed UI removal. The normal quick suite permits OPEN rows during development. Regeneration resets retained rows to OPEN; preserve reviewed evidence when updating the scanner.
 
 Scan count: **5756**. Ledger rows: **5756**. Source files: **104**.
-Authorized DROP rows: **296**; proposed VERIFIED retained rows: **4465**; OPEN retained rows: **995**.
+Authorized DROP rows: **296**; proposed VERIFIED retained rows: **4467**; OPEN retained rows: **993**.
 
 | ID | Disposition | Kind | Frozen source | Fact or control | Planned check | State | Evidence |
 |---|---|---|---|---|---|---|---|
@@ -569,7 +569,7 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **4465**; OPEN r
 | FQ15-B3BB9EC8E1D5 | IMPROVE | code fact | FamilyQuant/ClusterGenerationControl.xaml.cs:488 | "in Layer 2. If it keeps happening, send this message and the project file to whoever " | render:03-curation | OPEN | pending |
 | FQ15-1CD0C5F7DAA3 | IMPROVE | code fact | FamilyQuant/ClusterGenerationControl.xaml.cs:489 | "maintains FamilyQuant." | render:03-curation | OPEN | pending |
 | FQ15-5DD58996A4C8 | IMPROVE | code fact | FamilyQuant/ClusterGenerationControl.xaml.cs:490 | "Could not recalculate" | render:03-curation | OPEN | pending |
-| FQ15-B3488AD4ABFA | KEEP | format/export | FamilyQuant/ClusterGenerationControl.xaml.cs:500 | "PatternLab project file (*.plp)&#124;*.plp" | test:CurationActionProbe | VERIFIED | evidence:SH-curation-actions:FQ15-B3488AD4ABFA |
+| FQ15-B3488AD4ABFA | KEEP | format/export | FamilyQuant/ClusterGenerationControl.xaml.cs:500 | "PatternLab project file (*.plp)&#124;*.plp" | test:InputFileCommand | VERIFIED | evidence:FL-input-file-contracts:FQ15-B3488AD4ABFA |
 | FQ15-97461E9E1C9C | IMPROVE | code fact | FamilyQuant/ClusterGenerationControl.xaml.cs:501 | "Choose the peptide-level PatternLab project to quantify these families with" | render:03-curation | OPEN | pending |
 | FQ15-F22385A4AE69 | IMPROVE | code fact | FamilyQuant/ClusterGenerationControl.xaml.cs:508 | "Loading quantitation data from the PatternLab project..." | render:03-curation | OPEN | pending |
 | FQ15-FB8695990F78 | IMPROVE | code fact | FamilyQuant/ClusterGenerationControl.xaml.cs:510 | "Loading Sparse Matrix" | render:03-curation | OPEN | pending |
@@ -1573,7 +1573,7 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **4465**; OPEN r
 | FQ15-21A441007726 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:845 | "Elapsed: -" | render:06-denovo-advanced | OPEN | pending |
 | FQ15-1FBDEC28B152 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:852 | "No SEPro package was chosen" | test:LedgerTextPreservedCommand | VERIFIED | evidence:N6a-text:FQ15-1FBDEC28B152 |
 | FQ15-24D4C98F5516 | KEEP | format/export | FamilyQuant/DeNovoControl.xaml.cs:853 | "type the path of the .sepr2 into the box beside the button instead." | render:06-denovo-advanced | OPEN | pending |
-| FQ15-C720AF6E4572 | KEEP | format/export | FamilyQuant/DeNovoControl.xaml.cs:857 | "SEPro 2.0 (*.sepr2)&#124;*.sepr2" | render:06-denovo-advanced | OPEN | pending |
+| FQ15-C720AF6E4572 | KEEP | format/export | FamilyQuant/DeNovoControl.xaml.cs:857 | "SEPro 2.0 (*.sepr2)&#124;*.sepr2" | test:InputFileCommand | VERIFIED | evidence:FL-input-file-contracts:FQ15-C720AF6E4572 |
 | FQ15-CB9F5E8A8C21 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:858 | "Choose a TRUSTED SEPro package (legacy unsafe deserialization)" | render:06-denovo-advanced | OPEN | pending |
 | FQ15-50D78F955352 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:865 | "Package chosen: " | test:DeNovoCommandEvidence | VERIFIED | evidence:EV-denovo-commands-1:FQ15-50D78F955352 |
 | FQ15-66E8A7C104BB | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:866 | ". Next step: press Reconcile. Reading a real package takes a while, and the " | test:DeNovoCommandEvidence | VERIFIED | evidence:EV-denovo-commands-1:FQ15-66E8A7C104BB |
@@ -1743,7 +1743,7 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **4465**; OPEN r
 | FQ15-CD09A4437ED9 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:1540 | "has no control to read its mapped fraction against" | test:DeNovoLedgerRefusalsCommand | VERIFIED | evidence:EV-denovo-refusals-1:FQ15-CD09A4437ED9 |
 | FQ15-B12F4283195C | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:1583 | "No Family Cluster File was chosen" | test:LedgerTextPreservedCommand | VERIFIED | evidence:N6a-text:FQ15-B12F4283195C |
 | FQ15-60C47023D6ED | KEEP | format/export | FamilyQuant/DeNovoControl.xaml.cs:1584 | "type the path of the .fcf into the box beside the button instead." | render:06-denovo-advanced | OPEN | pending |
-| FQ15-1DB39E9F341A | KEEP | format/export | FamilyQuant/DeNovoControl.xaml.cs:1588 | "FamilyClusterFile (*.fcf)&#124;*.fcf" | render:06-denovo-advanced | OPEN | pending |
+| FQ15-1DB39E9F341A | KEEP | format/export | FamilyQuant/DeNovoControl.xaml.cs:1588 | "FamilyClusterFile (*.fcf)&#124;*.fcf" | test:InputFileCommand | VERIFIED | evidence:FL-input-file-contracts:FQ15-1DB39E9F341A |
 | FQ15-910AE022A94A | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:1589 | "Choose the Family Cluster File to search against and map onto" | render:06-denovo-advanced | OPEN | pending |
 | FQ15-9A8A923BA90A | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:1596 | "Family Cluster File chosen: " | test:DeNovoCommandEvidence | VERIFIED | evidence:EV-denovo-commands-1:FQ15-9A8A923BA90A |
 | FQ15-CB1CCF968A7F | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:1597 | ". Next step: check the identity threshold and the two residue options, then press " | test:DeNovoCommandEvidence | VERIFIED | evidence:EV-denovo-commands-1:FQ15-CB1CCF968A7F |
