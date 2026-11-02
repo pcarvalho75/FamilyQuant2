@@ -1,216 +1,145 @@
-# CLAUDE.md
-
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
-
-## What this is
-
-This checkout is the new FamilyQuant application, built to install beside the frozen legacy app. It is a Windows-only WPF desktop app (.NET 10) for **protein-family clustering and quantitation** in bottom-up proteomics. It groups proteins from a FASTA database into families: first by sequence identity (via USEARCH), then optionally by description-word similarity or the reviewed Evidence workflow, and attributes peptide-level XIC quantitation from a PatternLab project to each family. It is part of the PatternLab / SEPro proteomics ecosystem.
-
-Current document and command catalog: [docs/INDEX.md](docs/INDEX.md). The roadmap remains the authority for unfinished work. Do not treat historical validation counts below as the current suite total.
-
-## Build & run
-
-Three projects in one solution: the WPF-free Core library, the App executable and the console Tests. Build and run from the **repo root**, where `FamilyQuant2.sln` lives:
-
-- `dotnet build FamilyQuant2.sln -c Release`
-- `dotnet run --project FamilyQuant/FamilyQuant.App.csproj`
-- Or open `FamilyQuant2.sln` in Visual Studio 2022.
-
-**Publish (ClickOnce).** The product is delivered by ClickOnce auto-update from
-`http://patternlabforproteomics.org/familyquant2/`. The rehearsal, which writes only into the local
-`PublishDir` / `PublishUrl` and uploads nothing:
-
-- **`dotnet publish` cannot do it.** With `BootstrapperEnabled=True` the profile reaches the `GenerateBootstrapper` task, which fails on the .NET Core MSBuild with `error MSB4803`. It fails **destructively**: by then it has already rebuilt `app.publish`, so the previous `FamilyQuant2.application` and `setup.exe` are gone and the folder is left without a deployable manifest (verified 2026-08-16). Re-run the .NET Framework MSBuild below to restore it. Use the **.NET Framework** MSBuild that ships with Visual Studio (locate it with `vswhere -latest -find "MSBuild\**\Bin\MSBuild.exe"`):
-  - `"<VS>\MSBuild\Current\Bin\MSBuild.exe" FamilyQuant/FamilyQuant.App.csproj -t:Publish -p:Configuration=Release -p:PublishProfile=Properties/PublishProfiles/ClickOnceProfile.pubxml`
-- Output goes to **`PublishDir`**, i.e. `FamilyQuant/bin/Release/net10.0-windows7.0/app.publish/`: `FamilyQuant2.application`, `Application Files/FamilyQuant2_<version>/` (every payload file with a `.deploy` suffix), `setup.exe`, and the loose copy of the build. The command line does **not** produce the `PublishUrl` copy or the `index.html` web page; Visual Studio's own Publish does that, and it is the owner who deploys.
-- **The version lives in TWO files and they must be bumped TOGETHER**: `Version` / `AssemblyVersion` / `FileVersion` in `FamilyQuant/FamilyQuant.App.csproj`, and `ApplicationVersion` in `FamilyQuant/Properties/PublishProfiles/ClickOnceProfile.pubxml`. The manifest takes its version from the **pubxml**, so a publish with the pubxml left behind ships new code under the old version and updates nobody. A review already caught that once. Visual Studio's Publish increments only the pubxml, so the title bar, the manifest's `AppVersion` and the Compute window read the **deployment** version through `AppVersionInfo` (the .NET ClickOnce launcher's `ClickOnce_CurrentVersion` environment variable), falling back to the assembly version outside ClickOnce; the title read 1.5.0.0 on an installed 1.5.0.2 before that.
-- The bootstrapper package is `Microsoft.NetCore.DesktopRuntime.10.0.x64`. The `ProductName` in the pubxml is only a label: the generated `setup.exe` carries whichever runtime package the machine's SDK has (rehearsed 2026-08-16 on 10.0.11 while the pubxml still said 10.0.10). The payload must carry the four `ThermoFisher.CommonCore.*` assemblies, `SeproPckg2.dll`, `PatternTools.dll`, `MAligner.dll`, `CSMSL.dll` and `alglibnet2.dll`. USEARCH is not a payload file: it is embedded in `MyResources.resx` and extracted on first use. `FamilyQuant.Tests` is `IsPublishable=false` and must never appear in the payload.
-
-Notes:
-
-- **Windows-only**: the solution targets `net10.0-windows7.0`; App and Tests use WPF, Core does not. Will not build or run on Linux/macOS.
-- **Tests are a console executable, not a `dotnet test` suite.** `FamilyQuant.Tests` has `OutputType=Exe` and no xUnit/NUnit/MSTest package, so `dotnet test` finds nothing to run. Run it directly:
-  - `dotnet run --project FamilyQuant.Tests -c Release --no-build` for the quick pass (no real data, every section that needs a file skips).
-  - **The four positional arguments, in order:** `[0]` a `.plp` project, `[1]` a protein database (`.fasta` or `.T-R`), `[2]` the de novo export root (PEAKS and/or DeepNovo), `[3]` the directory holding the real `.sepr2` / `.xic2` / `.raw` files. All four are optional and **positional**, so a missing one must still occupy its slot.
-  - **`"."` is the placeholder for an absent argument**, not an empty string: PowerShell 5.1 silently DROPS empty `""` arguments to a native executable, which shifts every later path into the wrong slot and turns real-data sections into silent skips. `Main` maps `"."` back to `""` on entry. Example: `dotnet run --project FamilyQuant.Tests -c Release --no-build -- . . C:/Users/paulo/Desktop/FamilyQuant/PEAKS-EXPORT_FamilyQuant C:/Users/paulo/Desktop/FamilyQuant`
-  - Every section that does not name a file builds its own fixtures and runs anywhere; the ones that need real data **skip** rather than fail when it is not supplied.
-  - Use the worktree-specific TEMP setup in the command catalog so fixtures do not collide across lanes. The quick pass has no Desktop fallback. The real exhaustive-clustering check uses the fourth positional argument, like the other acquisition-backed checks. `--test-inputs` runs only the two input-selection contract checks.
-  - The runner prints `PASS`/`FAIL`/`SKIP` per check and returns a non-zero exit code if anything failed.
-  - It is marked `IsPublishable=false`, so it never reaches a ClickOnce payload.
-  - Set `FAMILYQUANT_USEARCH` to a `usearch.exe` you control if the bundled one cannot be executed (AppLocker / antivirus blocking user-writable folders).
-- Depends on **vendored binary DLLs** in `FamilyQuant/DLLs/` (referenced by `HintPath`, no source in this repo): `PatternTools.dll` (refreshed 2026-08-16 from PL51 at `5a58727`), `SeproPckg2.dll`, `MAligner.dll`, plus PatternTools' own companions (`CSMSL.dll`, `alglibnet2.dll`, the Agilent `Base*.dll` set). They come from the wider PatternLab toolchain (the `PL51` repository); treat them as opaque externals. `XQuant2.dll` was REMOVED on 2026-08-16: the copy was 19 months stale and nothing referenced it; XIC extraction calls PatternTools directly (`FamilyQuant.Core/DeNovo/DeNovoXicExtractor.cs`), and RAW reading is supplied by the four `ThermoFisher.CommonCore.*` NuGet packages. The bundled `usearch11.0.667_win32.exe` sits in the same folder.
-  - `FamilyQuant.Core` and `FamilyQuant.Tests` name the vendor types they use directly: `HintPath` references do **not** flow through a `ProjectReference`.
-- NuGet dependencies include `LiteDB`, `OpenMcdf`, the serialization compatibility package and the Thermo reader packages. The project files are the authority for exact pins. `System.Text.Json` writes `.fcf` files and extraction caches. X11 removed Newtonsoft and Toolkit; native themed numeric controls retain their options. See [the dependency audit](docs/DEPENDENCIES.md) for compatibility checks and retained dependencies.
-
-## Keeping the vendored DLLs current
-
-`PatternTools.dll` parses the `.plp` sparse matrix. Before 2026-02-04 it parsed the invariant decimals with the **machine's** culture, so on a comma-decimal machine (pt-BR, de-DE, fr-FR…) `0.0009686085227719106` was read as `9.686e15`. The error is **not** a constant factor (it scales with the digit count), so it does not cancel in a ratio and cannot be corrected after the fact.
-
-The copy in `FamilyQuant/DLLs/` is current and carries the fix. If you refresh it from `PL51`, take a build dated **after 2026-02-04** and re-run the Locale section of `FamilyQuant.Tests`, which loads the same `.plp` under `InvariantCulture` and `pt-BR` and asserts the totals are identical.
-
-Do not judge a `PatternTools.dll` by its file timestamp alone. Timestamps on ClickOnce-installed copies are install times, not build times, so a stale binary can carry a recent date.
-
-## Core data flow
-
-FASTA → USEARCH clustering → FCF document → load PLP quant → attribute XIC → export CSV / reannotate SEPro.
-
-1. **USEARCH clustering** (`USearchTools.GenerateFCF`): a **two-stage identity clustering**. Stage one runs `usearch -cluster_fast` at a sequence-identity threshold and parses the `.uc` output. Stage two, the **exhaustive** pass (parameter `exhaustive`, default `true`, exposed as the `CheckBoxExhaustiveClustering` checkbox in the USearch panel, on by default), runs `usearch -allpairs_global` to align every pair and then **single-links** the first-pass families through every edge that passes the gate in `PassesExhaustiveGate`: `id >= identity` AND `alnlen >= (identity/100) * max(ql, tl)` (coverage vs the LONGER sequence, so a short motif matching inside a long protein does not merge them). Because it is single linkage, every pair at or above the threshold chains its two families together, so the grouping can chain a whole superfamily; that is the intended meaning of the threshold, and the identity value is the tightness knob. The gate closes holes the greedy, order-sensitive fast pass leaves (full-length homologues split into separate families). The native `-allpairs_global` table is memoised on disk by full input path and content SHA-256. Every identity streams its edges into the union-find, so a sweep or Divide-and-Conquer aligns only once without retaining every pair in memory; a failed/empty alignment is never cached and the call falls back to fast-only, with explicit provenance; cancellation propagates instead of becoming a fallback. The exhaustive pass runs regardless of database size (**never capped**); the USearch panel shows one confirm dialog, guarded by `PresentationSource`, before an exhaustive run on a database **over 10,000 sequences** (`USearchTools.CountSequences`), and proceeding runs the full alignment at any size. Turning the checkbox off restores the fast-first-pass-only clustering. `USearchTools.Align` runs `usearch -allpairs_global` for multiple-sequence alignment of selected proteins.
-2. **`FamilyClusterFile`** (`FamilyQuantFile.cs`), the central document, persisted as JSON with extension `.fcf`. Holds `MyExtendedFastaItems` plus lookup dictionaries mapping peptide ↔ locus (`SetLookupDictionary`), built from the PLP index descriptions.
-3. **`FastaItemExtended`** (extends PatternTools' `FastaItem`): one row per protein.
-
-   **There is one working grouping: `UserID`.** It is the editable/curated family id, the one the grid's "User ID" column writes, the one quantitation groups by, the one reclustering reads and writes, and the one the report and the CSV show. `XICUser` holds its quant.
-
-   `USearchID` is the **last automatic grouping**: USEARCH's at import, then whatever the automatic operations (word reclustering, keyword super cluster) last produced. It is read-only in the grid, and an automatic operation keeps it equal to `UserID` for every family it regroups (`WordCluster.SyncUnlockedIds`, called from `UpdateClusterIds`). It differs from `UserID` **only for a hand-renumbered family**, which is exactly a locked family: a lock is held out of every merge, so its `UserID` never moves and its `USearchID` stays at the pre-manual-edit number. The invariant, therefore: `USearchID == UserID` for every item unless that item's `UserID` is locked. `XIC` is legacy: old files still populate it on load, but new JSON writes omit it and no column shows it.
-
-   This used to be two parallel groupings, with `GroupingType` selecting one and most calculations running twice. That design caused a reported defect: reclustering read `USearchID`, where a manual split does not exist, and wrote its result into both ids, so any family the user had separated by hand was silently rejoined on the next reclustering, including reclusterings of unrelated families. `AttributeXICToGroups` now always follows `UserID`; the unused grouping selector and its legacy calculation branch were removed in F5. The persisted `USearchID` and `XIC` fields still load.
-4. **Quantitation** (`FamilyClusterFile.AttributeXICToGroups`): for each family, sums peptide XICs pulled from the PLP sparse matrix (`MyPLP.MySparseMatrix.ExtractDimValues`), then divides. Two independent choices, described below. This is the OPTIONAL PatternLab route (Layer 2, the "Share of signal" column).
-
-   **The Full XIC column** is the other route: the project's own quantitation (Compute / update full XIC) attributed to the CURRENT families by `ClusterGenerationControl.SetFullXicQuant(Async)`. The homology search (`FamilyEnvelopeQuant.SearchCuration`) and the peptide dedup (`PreparePeptides`) run once per quantitation, off the UI thread in the app; every regrouping redoes only `AttributeHits` + `BuildFromPeptides`, gated by an EXACT snapshot of every item's User ID (never a hash: an additive hash let a merge go unseen). Layer 3's "Shared peptides" applies to it at once, and "Full XIC share of" picks the quantified signal or the TIC of every run the computation recorded (refused, never narrowed, when a quantified run has no TIC). Users' rule (2026-10-25): in a composition a peptide shared by several families is counted ONCE in its own bucket (`FamilyEnvelopeQuantResult.Shared*`, the `FamilyUnique` reading), so unique parts + shared + unattributed close on `MeasuredTotalEnvelopeReferenceCalibrated`; the old count-in-every-family rows are kept beside it. Attribution never cuts at the mapper's top three (`TopHitsPerPeptide = int.MaxValue` inside `SearchCuration` only; the mapper's own default of three is untouched), because cutting at three called shared peptides unique. Then the two sides differ (2026-10-28, Ana's question, measured before the change): an IDENTIFIED peptide keeps only the hits tied at its best score (`HomologyOptions.BestScoreOnly`, PepExplorer's original rule), which are exactly the proteins containing it, because every PAM30MS diagonal strictly beats its row except L, which ties only with I, and the queries are I-to-L folded (`--attribution-rule-study` checks this on real data: 0 disagreements in 4,734 sequences, apart from 1 that a decoy also contains, which the decoy wins under either rule); a DE NOVO tag keeps every target protein past the identity gate. On Ana's curation the old every-past-gate rule made 218 of 4,720 identified sequences shared through homologs that do not contain them. `AttributionMethod` is v3, so a stored spectrum table mapped under v2 is kept and marked, never silently re-joined. The Analytics source-sequence census searches each side under the same rule (`PeptideFamilyAttribution.IdentifiedOptions`). The value is the PRIMARY estimate (identified observed envelope + de novo reference-calibrated estimate) and must be labelled so. The stored spectrum table's family columns are re-joined onto current numbers (`FamilyEnvelopeQuant.RefreshSpectrumFamilies`) only when `QuantManifest.FamilyMapping` (protein-set SHA-256, identity, method) still matches; otherwise they are kept and marked, and a failed refresh marks them unavailable. No provenance is recorded for a curation that repeats a protein identifier (the join keeps the first occurrence, which an order-free fingerprint cannot vouch for). The cached hits are compact (protein indices per peptide, `CurationHomologyHits`), never the mapper's hit objects. `MainWindow.RefreshSpectrumFamiliesAsync` awaits the curation screen's `FullXicReady` (repeating while a newer attach replaces it) and returns `Completed = false` when the project, quant or manifest changed meanwhile; Save captures ONE bundle (control, curation, quant, manifest) before it awaits and refuses to write if any of them changed, and Save, Analytics and the spectrum view are guarded against re-entry. Analytics still runs the source-sequence census search synchronously (pre-existing).
-5. **`WordCluster`** (`WordCluster.cs`), the second-stage reclustering that merges families by **TF-IDF cosine similarity** of their FASTA description words (stop-word removal + bigrams, IDF-weighted vectors, dot-product merge). `GroupByWords(threshold)` merges similar families. `MatchKeywords` is the one matcher used by the Super Cluster preview: `KeywordMatch.All` requires every keyword and `Any` at least one; the GUI passes `All`. Its `excludeWords` evidence identifies families and proteins carrying each exclude entry. A keyword holding a space is a **phrase** (from quotes in the box, parsed by `WordCluster.ParseKeywords`), matched as consecutive words of the element's `RawTokens` (the full description tokens, stop words kept); a single-word keyword still matches the indexed terms. `ParseKeywords` is the ONE parser of all three word boxes (keywords and both Exclude Words): the exclude box once split on whitespace alone, so a list typed with commas reached the matcher as "inhibitor," and excluded nothing but its last word (Ana, 2026-10-31). Keywords and exclude entries go through `MatchTokens` (`Tokenize` with the punctuation around each word removed, on both sides, never in the TF-IDF terms) and are matched on the element's `RawTokens` / `MatchWords`, so "domain-containing" is two consecutive words, "(Fragment)" is the word fragment, and an exclude word that is a stop word still counts while a stop word alone as a keyword still matches nothing. The Recluster box only drops whole tokens from the comparison, so a hyphenated or quoted entry does nothing there; matching stays on WHOLE words of the text before ` OS=`, because "adam" as a substring would remove the adamalysin SVMPs and read the species Crotalus adamanteus. The ADAM proteins themselves are named "Disintegrin and metalloproteinase domain-containing protein": the word is simply not in their names, and on Viperidae no entry has a `GN=ADAM` either (checked on UniProt 2026-10-31), so no search rule can find them.
-
-   **Super Cluster preview.** That last fact is why `SuperClusterPreview` (`SuperClusterPreview.cs`, pure) exists instead of a synonym table: Create Super Cluster opens `SuperClusterPreviewWindow` and changes nothing until Create is pressed. Keywords find the families through `WordCluster.MatchKeywords`; the rows are the PROTEINS of those families, each with a tick (`SuperClusterPreviewProtein`), because Ana asked to drop a disintegrin without losing the entries that carry her words. `HasKeyword` comes from `KeywordFamilies.MatchedProteins` (positions in the list the matcher was built from) and false paints the row red. A protein unticked, or carrying an exclude word (`ProteinsByExcludeEntry`, not the family), stays in its family; a family needs one protein carrying a keyword and no exclude word to be offered at all. `Join` carries out what is listed and nothing is matched again: a family joining whole keeps its number if it is the smallest and takes along whatever else carries that number (a decoy), and part of a family moves to one past every UserID, USearchID and lock, because taking a number in use would pull in the proteins left behind and a stale lock would mark the new family as hand curated. `SyncUnlockedIds` then runs on the moved proteins only. When any family gave only part, the NEW family is locked (`SuperClusterJoin.SplitFamilies`), so a Recluster cannot undo the choice while the proteins left behind stay free for the next super cluster. Keywords, exclude words and the match choice are editable there and recompute on every keystroke, 5 ms on 63,554 proteins. The preview searches the whole file and then applies the Search box's families, which is how it can report what the Search hid; `KeptOutByWord` counts proteins over the whole file for the same reason. `superClusterRunning` guards the handler, because the wait overlay stops the mouse and not Space or Enter on the focused button. `ConfirmSuperClusterOverride` is the suite's seam for the modal window; `PerformClustering(preview)` shows no message afterwards, and `PushUndoSnapshot` runs only after Create, so Cancel leaves nothing to undo. F5 removed the unused family-level keyword merge; its checks now exercise `MatchKeywords` and the active preview/join path directly. `FamilyFilter.SearchTerms` splits the Search box at commas/semicolons and `FamilyFilter.Apply` keeps a row matching ANY term, in the description, the identifier or the domains. `WordCluster.ScopeItems` is the family-wide scope.
-
-   **Domains.** `ProteinDomains` (`ProteinDomains.cs`) reads Pfam from UniProt's REST API (`/uniprotkb/accessions`, 500 per request, retried only on 429/5xx, written all or nothing, a reply naming nobody is a failure and entries it misses are counted and left as they were) into `FastaItemExtended.Domains`, with the release in `FamilyClusterFile.DomainSource`, so the file answers the same offline. Only well-formed accessions are asked, because UniProt refuses a whole request over one bad one. 31,777 entries take 85 s. `KeepDomains` unticks what has none of the named domains and never ticks anything; a protein with no domains at all stays if it carries a keyword, because 41-51 aa disintegrins and many fragments are too short for Pfam. `FetchDomainsHandlerOverride` is the seam.
-
-   **Copying.** `GridCopy.Attach` gives the preview's table and the Data Browser Ctrl+C on the clicked column, through a CommandBinding on the grid that runs before DataGrid's own Copy and reports a held clipboard (after a click on a row number it declines, so DataGrid's Copy gives the row with its table formats), and a right-click for the UniProt code (`FamilyNaming.Accession`), the description and the page (`FamilyNaming.UniProtUrl`); `ClipboardOverride` and `OpenUrlOverride` are its seams, so no test touches the clipboard or a browser.
-
-   **Undo.** `GroupingSnapshot` (`GroupingSnapshot.cs`) is a pure capture/restore of the whole curation state: every item's `(UserID, USearchID)` keyed by `SequenceIdentifier`, plus `LockedUserIds`, `WordSimilarity` and `IsKeywordSuperCluster`. `Restore` is literal (a locked family's id is put back like any other). The control keeps a bounded (50-step, session-only, no redo) `undoStack`; `PushUndoSnapshot` is called BEFORE every mutating curation op (Recluster by Words, Create Super Cluster, a User ID edit that changed a number, a lock removal via `LockManagerWindow`'s `onBeforeChange` hook), and `ButtonUndo_Click` pops one and restores without reloading the file.
-
-   **Batch edit.** "Apply to selected rows" in Layer 1 gives every selected grid row one User ID and/or one `UserAnnotation` through `BatchCuration.Apply` (pure, `BatchCuration.cs`): joining proteins, splitting some out, or gathering a class such as the cellular proteins into one labelled family. It follows the single-cell edit's lock rule with one deliberate difference: the joined family and every source family that still has members are locked, but a family the move EMPTIED is not (a batch can empty hundreds). `USearchID` is left alone. It is one undo step recorded by `PushUndoSnapshotWithAnnotations`, whose snapshot also carries the annotations of the touched rows only, so undoing it restores their annotations while a note typed by hand on another row survives. Keep `PushUndoSnapshot()` a single, non-overloaded method: the lock manager takes it as an `Action` and the suite finds it by reflection.
-
-   **Family names.** `FamilyNaming` (`FamilyNaming.cs`) is the one rule for a family's reported name: the members' `UserAnnotation` (most frequent if they differ), else the most frequent protein name (description before " OS=", trailing "(Fragment)" ignored, case-insensitive) reported as the full description of a non-fragment member bearing it, ties to the first in member order (stable: the curation's only re-sort is a stable sort by User ID). It feeds `PeptideFamilyAttribution.FamilyDescriptions` (so the Full XIC composition CSV, the Analytics family chart, the evidence pack and the spectrum table's family labels), `HomologyMapper.CountByFamily` (the de novo screen's family table) and `LockManagerWindow`. Callers pass TARGET members only. Because an annotation names a family, the curation screen's Full XIC regroup gate snapshots each item's User ID AND annotation. It used to be the first target member's description.
-
-## The two quantitation choices
-
-These are orthogonal. `AttributeXICToGroups(plp, mode, sharedPolicy)` takes both explicitly and always attributes to the curated `UserID` families.
-
-**`NormalizationMode`, what to divide by** (`NormalizationMode.cs`):
-
-| Value | Divisor | Families sum to 100%? |
-|---|---|---|
-| `IdentifiedSignal` (default) | the sum of all families | yes |
-| `TotalChromatogram` | the run's total ion current | no |
-| `IdentifiedPeptideSignal` | the run's extracted peptide areas | no |
-| `ChargeRestrictedSignal` | the charge-restricted peptide-like MS1 signal | no |
-
-The last three are only available when the `.plp` records that divisor. FamilyQuant **reads the denominator the project recorded** rather than inferring it; a mode whose divisor is absent is unavailable rather than silently substituted. `QuantitationProfile.Describe` reports what a loaded project actually contains.
-
-**`SharedPeptidePolicy`, what to do with a peptide that maps to several families** (`SharedPeptidePolicy.cs`): `FamilyUnique` (default, drop it), `SplitEqually` (divide it evenly), `CountInEveryFamily` (count it in full for each; values then overlap and must **not** be summed).
-
-There is no longer an `AttributeXICToGroupsUnbiased` method and no "unbiased normalization" anywhere in the code or the interface. If you find that phrase in a comment or a string, it is stale.
-
-## FDR / threshold tuning
-
-The compatibility API is named `FamilyClusterFile.CalculateFDR`, but it reports target/decoy family mixing, not a statistical false discovery rate. `DivideAndConquer` searches for the lowest identity satisfying the requested mixing bound; a positive bound is a heuristic because the ratio need not be monotone. It cannot measure unrelated target families being merged. See [the identity study](docs/IDENTITY-SEARCH-STUDY.md) for the current measured grid/probe comparison. The decoy prefix is defined once by `SequenceLabels.DecoyPrefix` in Core.
-
-`GroupingScore.MixedFamilies` names WHICH families mix (smallest first, each target with its residue count), `IdentityScanRow.MixedFamiliesSection` lists them per identity in the scan report, and `DivideAndConquerDetailed` returns the failing probe just below the answer so the panel can say why the search stopped. This matters with the exhaustive pass: on the Bjararaca T-R it answers 73% (fast-only answers 24%), and the only family mixing at 72% is the 11-residue bradykinin-potentiating peptides, which are nearly palindromic and align to their own reversed decoys (BPP 11d: 75% identity over 8 of 11 residues). The suite pins that on a BPP fixture.
-
-## The de novo engine (`FamilyQuant.Core/DeNovo/`, `FamilyQuant.Core/Homology/`)
-
-A second workflow, independent of the family one. Headless models and operations live in Core and are driven by the suite; chart/window adapters in the table below remain in App. `DeNovoControl` is a thin view over its view model/session.
-
-| File | What it owns |
-|---|---|
-| `PeaksDeNovoReader.cs` | source-aware parser for PEAKS `*.denovoOnly.csv` / `*.denovo.csv` and DeepNovo `*.deepnovo.csv`; each source retains its native score field and provenance; a truncated line is skipped, never misparsed |
-| `DeNovoFilter.cs` | `DeNovoFilterCriteria`: three filters, length, source-native score, and a local-confidence stretch (two inputs but one filter), plus `HasStretch` |
-| `DeNovoReconciler.cs` | the join and the five `ReconciliationVerdict` values; **`NormalizeRunName`** lives here |
-| `SeproPsmAdapter.cs` | `SeproPckg2.PSMSearchResult` → `PatternLabPsm`, adapting vendor PSMs to the headless model; carries `ChargeState` alongside the derived `PrecursorMz` |
-| `DeNovoXicExtractor.cs` | one precursor's chromatogram from a RAW, through PatternTools; credits a configurable **`DeNovoXicOptions.IsotopeCount`** of isotopes into `DeNovoXicResult.IsotopeAreas`, each gated by **`DeNovoXicOptions.MinPointsForQuant`** (`Classify` / `CreditIsotopes`, per isotope) |
-| `DeNovoBatchExtractor.cs` | one run at a time; produces `DeNovoBatchStats`, which is where the anchor/peak grain is defined |
-| `IdentifiedQuantExtractor.cs` | the Q1 engine: re-extracts the IDENTIFIED peptides' XICs from the RAW with the full isotope envelope, reusing `DeNovoXicExtractor` and the peak-collapse; produces `IdentifiedQuantStats` (per-run M+0 total, envelope total, identified fraction of TIC on both bases) |
-| `DeNovoXicCache.cs` | the per-run cache written into `familyquant_denovo_cache` beside the RAW files; stamps run / ppm / MS1 tolerance / **isotope count** / **minimum points per peak** and discards on any mismatch (schema v3) |
-| `HomologyScorer.cs` / `PamMatrix.cs` | identity prefilter (with the I/L and K/Q folds) and PAM30MS windows |
-| `HomologyDatabase.cs` | the seed index, used only where it provably cannot change the answer |
-| `HomologyMapper.cs` | `Search`, `SearchOne`, `MapToFamilies`; deterministic ordering by (score desc, identifier ordinal asc) |
-| `PatternLabRunQuants.cs` | the per-run PatternLab quants, `.plp` first and `.xic2` as the fall-back, with the branch note |
-| `SpectrumComparisonTable.cs` | the source-aware file/scan/compatible-precursor master table and streaming CSV; `FamilyUserId` is only for exactly one family, while `FamilyUserIds` / `FamilyAssignments` preserve many-to-many membership; `FamilyMappingMinimumIdentity` and `FamilyMappingStatus` make the mapping threshold and empty-list interpretation explicit |
-| `ThreeWayPartition.cs` | `PartitionValue` + `PartitionProvenance` (measured / recorded / derived), `Build`, `Grouped`, `BuildCsv` |
-| `ThreeWayChart.cs` / `ThreeWayWindow.cs` | the bar drawing (`OnRender`, no XAML) and its detached window |
-
-`HomologyMapper` is a port of PepExplorer's `ProgramEngine.AlignMAlign`; the deliberate departures (bounded windows, no exceptions on bad characters, deterministic ordering, ordinal decoy comparison, top hits by rank) are documented in the file's own header. Do not "restore" the original behaviour.
-
-## The Q-series: FamilyQuant as its own quantitation engine
-
-This section records the 1.4 implementation history. Its isotope-centred measurements remain available
-as diagnostics, but they are not the narrative of the source-aware 1.5 PEAKS/DeepNovo talk.
-
-A direction distinct from both the family and the de novo workflows. FamilyQuant's numbers have always come from PatternLab's stored quants, which are **monoisotopic** (they credit the M+0 peak alone). The Q-series makes FamilyQuant re-extract peptide XICs from the RAW with the full isotopic **envelope** instead.
-
-- **Q1 (done): the engine + tests, no UI, no new storage.** `DeNovoXicResult.IsotopeAreas` (index 0 = M+0, 1 = M+1, ...) is the single source of truth for the envelope; `AreaM0`/`AreaM1`/`AreaM2` are `[JsonIgnore]` accessors over indices 0..2, kept so every existing reader and pinned number is untouched. **`DeNovoXicOptions.IsotopeCount` (default 3) is the seam**: N isotopes are credited at `mz + i*(Carbon13Spacing/Charge)` (`DeNovoXicExtractor.IsotopeMz`), and at the default of 3 every de novo number is byte-identical. `EnvelopeSum` sums the credited isotopes with the -1 sentinel clamped; the M-1 control (`AreaMMinus1`) is never a credited isotope. `IdentifiedQuantExtractor` drives this over the identified PSMs of one run and reports the envelope total, the M+0 total and the identified fraction of the run's TIC on both bases. The **isotope-count POLICY** (a fixed N, an averagine count, an intensity-threshold cut-off) is a later scientific decision; Q1 only makes N a parameter.
-- **Later Q-phases** own the UI (Q2), the family quantitation / three-way partition rewire (Q3) and any new storage format (Q4). Q1 does **not** touch the family quantitation or the three-way partition; both sides of the three-way bar are still M+0 (invariant 3).
-- **Q7 (done): the capstone, shipped as 1.4.0.0.** The `.fqproj` project (Q2) is the through-line, the full-envelope XIC (Q1) is computed via File · Compute / update full XIC, the Analytics screen (Q4) reports the recovery, and the whole set is tied into one home-anchored task flow (`HomeControl`, reordered menu, persistent project banner) with the de novo screen folded to its two unique steps plus an optional standalone-advanced section. See the UI-structure section for the navigation and the de novo refold.
-
-Measured on run _01 at `C:/Users/paulo/Desktop/FamilyQuant` (the suite pins the bit-exact M+0 gate against `_curva/stored_quants.tsv` package 2): identified M+0 total 1.244e12, envelope total 2.928e12 at the 6-isotope ceiling (envelope/M+0 = 2.35). The per-anchor identified-fraction-of-TIC numbers exceed 100% because the stored rows are per MS2 anchor; that is Q3's per-peptide collapse, not a units artifact, and Q1 prints the fraction as a preview and never asserts its magnitude.
-
-**The two quantitation rules, and why they are set where they are.** `DeNovoXicExtractor.DefaultEnvelopeIsotopeCount` is 6 and is a **ceiling, not a floor**: each isotope is extracted at its own m/z and an absent one returns the sentinel and contributes 0. The crediting is EMPIRICAL - there is no averagine policy and none is wanted. `DeNovoXicExtractor.DefaultMinPointsForQuant` is 3 and is enforced **per cluster, therefore per isotope**, inside `Classify` (driven by `CreditIsotopes`): applied once per peptide instead, a single-point M+1 would still inject a raw intensity into an envelope whose M+0 is an integral. `LegacyMinPointsForQuant` (1) restores XQuant2's rule bit for bit and is what the parity gate in `DeNovoXicTests` runs at, deliberately and explicitly - it is the proof of faithful extraction, not the production setting. The point count is the ROWS OF THE ARRAY the area rule sees: PatternTools pads every cluster with a zero row before its first scan and one after its last (measured: 52,617 of 52,617 clusters on run _01 carry exactly two, and the shortest array is 3), so at the production minimum nothing on that acquisition is excluded and the rule is a guard on the one branch that is not an integral. A refused cluster is never dropped: its area is carried as `UnderSampledArea` (a real trapezoid at two or more points, an ESTIMATE of intensity x the run's median MS1 scan spacing at one, 0.005134 min on run _01), through `NativeQuantFractions` to the manifest, the recovery chart and the analytics CSV.
-
-Measured on run _01 at the 6-isotope ceiling and the 3-point minimum: identified envelope **27.84%** of the TIC, de novo envelope **22.82%**, recovered **50.67%**; identified M+0 **11.89%**, which does not move with the ceiling. Identified but not quantified: **0.0000%**, 0 peptides. The four-way decomposition closes: quantified 50.67% + not quantified 0.00% + peptide-like unidentified 10.23% + not peptide-like 39.10% = 100%. (At the earlier 4-isotope ceiling the three envelope numbers were 26.75 / 19.06 / 45.81.)
-
-**The detected peptide-like level is split by charge, because the evidence is not the same at every charge.** At charge 1 the isotope spacing is 1.00335 Da and "has a C13 isotope" is true of essentially any organic molecule, so a singly charged two-isotope feature is WEAK evidence of a peptide; at charge 2 or more the 0.5 or 0.33 Da spacing is something a singly charged small molecule cannot produce, so it is STRONG evidence. `Ms1EnvelopeDetector` therefore reports the detected area and feature count per charge and rolled up into those two groups, and `NativeQuantFractions`, the manifest, `RecoveryChart` and the analytics CSV all carry the split. The total is built AS the sum of the parts, so `detected = z>=2 part + z=1 part` holds bit for bit and is asserted on real data. **Weaker evidence is never reported as non-peptide**: venom peptides (the bradykinin-potentiating peptides, the angiotensin-like fragments) are frequently singly charged and this dataset carries identified charge-1 peptides. Measured on run _01: detected **60.90%** of the TIC (955,152 features), of which z >= 2 is **57.70%** (711,289 features) and z = 1 is **3.20%** (243,863 features); per charge, z1 3.20%, z2 28.72%, z3 21.24%, z4 6.33%, z5 1.40%.
-
-**Chart colours live in one place, `ChartPalette`, in two variants.** `Dark` carries exactly the values the six charts hardcoded before it existed and stays the default of every chart, so the screen is unchanged. `Light` is the slide palette and is NOT the dark one inverted: the dark blue (0x6FA8F0) and mint green (0x3FD39C) hold only about 2.2:1 and 1.7:1 against white and wash out on a projector, so every series is re-tuned to a darker, more saturated version of the same identity (deep blue 0x10428C, deep green 0x1F8F5A, burnt amber 0xA85F13, slate greys), near-black ink and a light grid. `ChartImageExporter` renders in `Light` by DEFAULT, because that is what goes into a talk; pass `ChartPaletteVariant.Dark` for the screen's colours in a file. The two main series are a blue/green pair and never a red/green one, and every pair of segments that sit side by side in a stacked bar is at least CIELAB 25 apart, which the suite measures rather than asserts by eye.
-
-## Invariants
-
-The legacy three-way M+0 diagnostic below is distinct from the primary full-envelope recovery. Historical acquisition measurements are not a fresh validation of this checkout.
-
-Break any of these and the numbers stay plausible, which is the whole problem.
-
-1. **Runs are matched BY FILE NAME, never by index.** `DeNovoReconciler.NormalizeRunName` is the single normalizer (it strips stacked extensions such as `.raw.sqt`), and it is used by the reconciliation, by the RAW matching, by the homology export and by the partition. A PEAKS export, a directory listing and a `.plp` are not in the same order; a positional pairing joins every spectrum against the wrong acquisition and never fails a check. The pairing is exact, so a renamed acquisition (`x_01-003.raw` for run `x_01`) pairs with nothing: `FullXicComputer.ComputeFullXic` builds a `FullXicRunMatch` first and throws `FullXicNoMatchedRunsException` when no run pairs, before any RAW is opened or file written, with a message listing both sides and a rename hint. It used to finish as a zero-row "success" that replaced the project's quant. A partial pairing proceeds, with `WARNING:` notes naming what was left unpaired.
-2. **Ion current is summed over DISTINCT PEAKS, never over anchors.** `DeNovoBatchStats` names the grain of every count it carries: everything up to `WithSignal` counts anchors (one per MS2 request), everything from `DistinctPeaks` down counts peaks. One elution peak sampled by several MS2 scans is several anchors and one peak, and the extractor hands the same peak back to each anchor. Summing per anchor inflates the total by a few percent, always upwards.
-3. **Both sides of the three-way bar are M+0.** The de novo isotope envelope is measured, but as a diagnostic only, and it is deliberately absent from the chart: PatternLab's stored quants are monoisotopic, and one bar cannot be built from two bases.
-4. **The remainder is never clamped.** It is `PartitionProvenance.Derived` by definition, and a negative one is a finding to be displayed, not a bug to be hidden.
-5. **Curation locks survive reclustering.** `FamilyClusterFile.LockedUserIds` is written by the User ID column and read by `WordCluster.GroupByWords` / `SuperClusterPreview`, which never merge a locked family. A lock can outlive its family (a merge can take the number out of use); `LockManagerWindow` lists such a lock rather than hiding it, because the number becomes live again the moment a family adopts it.
-6. **Decode, never guess.** Any number quoted in comments, tooltips, help or a presentation must come from the current persisted evidence pack for the exact selected sources and cutoffs. Do not copy a historical PEAKS-only census into a DeepNovo or union result. File + scan is audit context; sequence agreement requires the compatible source-reported charge and non-chaining 20-ppm precursor hypothesis used by the spectrum table. If the value cannot be regenerated from the current `.fqproj`, CSV and figure writer, do not quote it.
-7. **The de novo screen raises no `MessageBox`.** Refused inputs and failed operations are reported through its view model and status. Remaining dialogs and detached windows guard on a displayed visual before opening; retained test seams keep headless checks from blocking or leaking a window. The retired extraction/partition controls are compatibility seams, not current product navigation.
-8. **`InvariantCulture` for parsing and for every CSV; current culture for display.** The exports are meant to be read by a program.
-
-## Current application structure
-
-`MainWindow` is a facade over `ShellViewModel`, document commands, presentation and Help components. The File-first menu is File, Edit, View, Analysis, Help. The navigation rail exposes Start, Families, Quantify, Results and De novo, with Build from database as a separate action. The open curation/quantitation/manifest bundle is retained across views, and asynchronous completion checks that it is still the same bundle.
-
-- **Start** uses `HomeControl` and `HomeViewModel` for Open, New, recent files and the last saved result. Shell settings store recent paths, folder and window preferences outside scientific data.
-- **Build** uses `USearchLib`, `BuildFamiliesViewModel`, its action component and `BuildReportFormatter`. Choose database selects an input; Build families performs clustering. Check mixing (FDR), Scan identity range, Find lowest identity and Remove redundancy remain available. The two identity flows remain separate because their measured answers differ; see the identity study. `BuildOverride` and the existing chooser/confirmation seams remain.
-- **Families** remains `ClusterGenerationControl` over the open document. Its full layout rewrite remains in C1/C2/C5. The merged review window uses `GroupingReviewViewModel` with keyword, evidence and architecture presentation models. Curation, locks, word/keyword grouping and quantitation semantics remain governed by their Core services and tests.
-- **Quantify** is a hosted `QuantifyControl` over `ComputeXicViewModel`. `ComputeXicWindow` remains a compatibility wrapper used by tests and overrides. A completed result attaches only to the captured open project and marks it unsaved; a failed/cancelled computation keeps prior results.
-- **Results** uses `AnalyticsControl` and `AnalyticsViewModel` to read stored quantitation, charts and explicit export choices. It can also display a completed de novo homology result without inventing quantitation. Presentation exports still live in App until the planned Reports extraction.
-  The evidence pack writes the 12 core 1920 by 1080 figures plus persisted caller-agreement,
-  source-Venn, accepted-score, variant-comparison and compact source-effect figures. Each source
-  retains its own score panel and exact CSV. The exporter refuses a plot whose source study is absent.
-- **De novo** uses a thin `DeNovoControl`, `DeNovoViewModel`/`DeNovoSession` and headless `DeNovoScreenOperations`, `DeNovoSourceImport` and `DeNovoInspectionAudit`. Import, reconciliation, review and family attribution remain; retired extraction/partition sections are replaced by Quantify/Results. Quantify and De novo receive the shared `DeNovoFilterViewModel`; changing filters prepares the next request and does not rewrite stored quantitation. Historical test seams, including `ImportOverride` and `CachePathForRunOverride`, remain in the compatibility adapter. The screen raises no MessageBox.
-  Every long operation disables the whole screen through its shared `IsBusy`/`CanEdit` state,
-  not only the part it writes. This prevents homology or other work from starting on rows an
-  in-flight import is about to replace; readiness is restored after completion or refusal.
-  `HelpContent.Build` serves the family page; `HelpContent.BuildDeNovo(Criteria, ActiveDeNovoSource)`
-  serves De novo. Only the latter quotes the historical PEAKS de-novo-only census, and only when
-  that source and its default criteria are selected, so another caller's help never inherits that baseline.
-- **Secondary views** use the tested models in `SecondaryWindows.ViewModels.cs`. Lock manager changes only the open lock set, spectrum comparison delegates exact CSV output to Core, and Text report/Help keep selectable read-only text. On-screen identity charts use `ChartPalette.UiPalette` and follow theme changes; frozen export palettes remain separate.
-- **Saving** uses `ShellDocumentState`, guarded project snapshots and verified staged output. The persisted project also runs `SavedFileCheck` on reopen. Exporting an old FCF does not clear the project's dirty state. Save/Discard/Cancel protects replacement and closing.
-- **SEPro reannotation**, through Analysis > Reannotate SEPro, writes the curated `UserID` family
-  numbers into a separate `*_regrouped.sepr2` copy, leaving the original package file untouched.
-
-The shared Core operation context supplies outcome, progress, cancellation and one final commit. It does not itself schedule synchronous work off the UI thread. The common shell busy overlay is still the S6 roadmap task; do not infer universal UI cancellation from the merged Core contract. See [CORE-OPERATIONS.md](docs/CORE-OPERATIONS.md).
-
-## Evidence flow and boundaries
-
-The merged Core implementation is under `FamilyQuant.Core/Evidence/`. Its input facts and sequence-derived measurements are separate from curation choices:
-
-- `EvidenceFetcher`/`ProteinDomains` fetch and store source provenance; `ReferencePanelFetcher` adds reviewed references. `NearestReviewed` stores scoped sequence-search evidence with input/reference provenance.
-- `EvidenceClassifier.Propose` builds a proposal from reviewed memberships, learned markers and qualifying neighbours. `EvidenceArchitecture` describes domain-combination splits; `CoherenceCheck`, `MotifCheck` and `LeftOutList` expose review evidence. No protein-name exception is a scientific grouping rule.
-- `ValidationReport` and the test-program checkers measure the routes against explicit baselines. Their datasets, scopes and limitations are in [SCIENCE-GATE.md](docs/SCIENCE-GATE.md); historical counts are not universal accuracy claims.
-- `EvidenceApply` takes an explicit selection, checks current membership/provenance and stages the result before one undoable change. `EvidenceApply` session support and `EvidenceRecipe` retain the reviewed settings for replay. `SavedFileCheck` checks the reopened saved document; an ordinary green build does not replace that check or a science gate.
-- The merged C4 window presents keyword and Evidence modes, explicit selections and architecture choices before applying. `GroupingReviewViewModel`, `KeywordReviewViewModel`, `EvidenceReviewViewModel` and `ArchitectureReviewViewModel` own presentation state. Housekeeping must not change their scientific thresholds, defaults, scoring or stored formats.
-
-## Gotchas
-
-- The USEARCH executable is **embedded** as a resource in `MyResources.resx` and extracted on first use to `%LOCALAPPDATA%\FamilyQuant2\usearch11.0.667_win32_<SHA256>.exe`, deliberately not `%TEMP%`, which can be cleaned mid-session. It is re-extracted whenever it is missing or its size or SHA256 differs from the embedded copy (antivirus quarantine, truncated write). `FAMILYQUANT_USEARCH` overrides the whole mechanism. See `USearchTools.GetUSearchPath`.
-- USEARCH scratch files (`.fasta`, `.aln`, `.uc`) go to `%TEMP%\FamilyQuant2\` with GUID-stamped names so a leftover file from a crashed run cannot be read back as a stale result. The process working directory is **not** mutated.
-- PLP files must be exported at **peptide level** (not protein) for quant to resolve.
-- `<InvariantGlobalization>true</InvariantGlobalization>` makes LiteDB throw `CultureNotFoundException` when it **opens** a database: LiteDB v5 stores an LCID in the file header and rebuilds a `CultureInfo` from it, and under invariant globalization that lookup throws. This project references LiteDB, so leave the setting at its default (`false`). The symptom is a database that will not open at all, not one that sorts oddly.
-- **Tooltips are one or two plain sentences** (users, 2026-10-25: "too long and complicated"): what the control does, the usual value, and "Disabled until ..." when it can be disabled; the detail belongs in `HelpContent`. The shared implicit `ToolTip` style wraps string tooltips at 520 px. The suite still requires a tooltip of at least six words on every control, and pins a few phrases ("Disabled until", "Layer 2", "two rows", "1920").
-- `Nullable` is enabled, but CS8603 (possible null reference return) is suppressed repo-wide via `.editorconfig`.
-- The ClickOnce publish profile `FamilyQuant/Properties/PublishProfiles/ClickOnceProfile.pubxml` is **force-added** to git even though `.gitignore` excludes `*.pubxml`. It pins the target framework, so an un-tracked copy is how a profile survives a framework migration still carrying the old pins. Do not remove it from the index.
-
-Core boundary check: `FamilyQuant.Tests.exe --test-core-boundary` verifies engine ownership, WPF-free assembly references, library identity and the embedded resource namespace. The ordinary suite runs it too.
-
-The family document delegates target/decoy scoring and identity search to `FamilyClusterScoring`, and its per-document PatternLab caches and attribution to `PatternLabAttribution`. `--test-document` runs file compatibility, scoring and denominator/attribution fixtures without native alignment.
+# FamilyQuant working guide
+
+FamilyQuant 2.0 is a Windows/.NET 10 WPF program for protein-family clustering and quantitation.
+It installs beside frozen 1.5, opens its files and retains an old-compatible `.fcf` export.
+[ROADMAP.md](docs/ROADMAP.md) owns unfinished work; [INDEX.md](docs/INDEX.md) catalogs commands.
+The complete previous guide, measurements and implementation notes are in
+[HISTORY.md](docs/HISTORY.md). Historical counts are not current validation.
+
+## Rules
+
+- Only the program produces scientific results. Scratch scripts are not a delivery route.
+- Evidence and data determine grouping. No family, protein-name, domain-code or keyword
+  exception lists belong in an automatic rule. Store user choices in the project/recipe.
+- Preserve the [feature ledger](docs/FEATURE-LEDGER.md). Searches, planned checks and green
+  builds do not close rows; executed evidence and independent review do.
+- Preserve frozen numbers unless the roadmap authorizes a measured change. D14 retains
+  clustering defaults; D15 defines the exact common contaminant predicate.
+- Never tune a rule to recover a known answer. Report unsupported cases plainly.
+- Use InvariantCulture for parsing/exports, current culture for display. Repeat data outputs
+  byte-for-byte. Fixtures, stored-project parity and fresh RAW validation are different checks.
+- Keep protected presentation inputs/producers untouched. Paulo owns publishing, versions and
+  publish profiles. Workers do not push. The roadmap and mission own file/lane boundaries.
+- Use ordinary hyphens and plain language. Read a module and its checks before changing it.
+
+## Build and test
+
+Run from the checkout root, one build/test operation at a time. On the shared team machine:
+
+```powershell
+$env:DOTNET_PROCESSOR_COUNT = '4'
+dotnet build FamilyQuant2.sln -c Release -v q
+powershell -NoProfile -ExecutionPolicy Bypass -File D:/FamilyQuant-wt/desk/quick-suite.ps1
+```
+
+The desk runs the full suite at merges. During a step, run focused checks; quick/golden belong
+at READY. Merge master when its dependency is needed or at the READY checkpoint. Use the
+lane-specific TEMP setup in the catalog to avoid fixture collisions.
+
+Tests are a console executable, not a `dotnet test` project. Optional positional inputs are
+`.plp`, FASTA/`.T-R`, de novo export root, then the acquisition-backed data directory. Use `.`
+for an absent slot: Windows PowerShell 5.1 drops empty native arguments. Missing real data
+skips those checks; quick has no Desktop fallback. PASS/FAIL/SKIP and exit code are the result.
+Stored-project `--golden` normally compares four exports; 4/0/0 is not fresh extraction or a
+biological accuracy claim. Detailed commands are in [INDEX.md](docs/INDEX.md).
+
+## Projects and boundaries
+
+- `FamilyQuant.Core`: WPF-free clustering, evidence, quantitation, homology, de novo and files.
+- `FamilyQuant/FamilyQuant.App.csproj`: WPF views, view models, shell, dialogs and Help.
+- `FamilyQuant.Tests`: console checks, frozen comparison helpers and study-only checkers.
+
+Core raises no message boxes. Its operation context provides progress, cancellation and a
+final commit, not automatic background scheduling. See [CORE-OPERATIONS.md](docs/CORE-OPERATIONS.md).
+HintPath references do not flow through ProjectReference; each consumer names vendor types.
+
+## Clustering and curation
+
+`USearchTools.GenerateFCF` delegates the typed operation. Fast centroid clustering uses identity.
+The optional exhaustive pass single-links those families through edges satisfying identity and
+`alnlen >= identity/100 * max(query length, target length)`. It cannot undo a fast join. A connected
+component does not promise that every member pair meets the threshold. Production exhaustive
+clustering is not capped; confirmation above 10,000 records is not sampling. Pairwise tables are
+memoized on disk by path/content SHA256 and streamed; failed/empty tables retry and fallback is
+explicit. The diagnostic's optional all-pairs mode has a separate 1,000-record limit.
+See [IMPROVEMENTS.md](docs/IMPROVEMENTS.md) and [CLUSTERING-REFACTOR.md](docs/CLUSTERING-REFACTOR.md).
+
+`UserID` is the working grouping used by quantitation, tables and exports. `USearchID` tracks
+last automatic grouping and differs for hand-curated locked families. Old `XIC` loads but new
+writes omit it; `XICUser` is the PatternLab reading. Locks survive reclustering. Snapshots retain
+IDs, locks, word settings and, for batch undo, touched annotations. Keep `PushUndoSnapshot()`
+single and non-overloaded for retained delegate/reflection seams.
+
+Word grouping uses TF-IDF cosine similarity. Word boxes share `ParseKeywords` and whole-word/
+phrase matching before ` OS=`; Search uses comma/semicolon alternatives across descriptions,
+identifiers and domains. Locked families stay outside automatic merges. Family names come from
+user annotations or the stable most-frequent protein name. Details and old regressions remain
+in history and [CURATION-PRESENTATION.md](docs/CURATION-PRESENTATION.md).
+
+`SequenceLabels` owns prefixes. D15 unwraps one exact decoy prefix, then checks the exact-case
+database contaminant prefix. Names are not a contaminant rule. `CalculateFDR` is a compatibility
+name for target/decoy family mixing, not statistical FDR or a measure of over-merging.
+
+## Scientific contracts
+
+The optional PatternLab route attributes to current UserID families with an explicit denominator
+and shared-peptide policy. Recorded denominators are identified signal, TIC, extracted peptide
+signal and charge-restricted signal; missing values are unavailable, never substituted. Its
+policies are family-unique, equal splitting and full counting in every family. Overlapping full
+counts must not be summed. No "unbiased" normalization remains.
+
+The Full XIC primary estimate combines identified observed envelope and mass-stratified
+reference-calibrated de novo M+0. Keep primary, M+0 sensitivity and unadjusted diagnostics distinct.
+The legacy three-way partition compares M+0 on both sides and never clamps its remainder.
+Runs match by normalized file name, never index. Sum distinct peaks, not MS2 anchors. Six isotopes
+is an empirical ceiling; minimum points is per cluster/isotope. Refused areas and estimate flags
+survive. Do not introduce an averagine crediting policy or mix numeric bases in one chart.
+
+Identified attribution keeps target proteins tied at the best score, equivalent to exact
+containment with I/L folding. De novo keeps all targets past its identity gate. A decoy wins an
+exact tie. Family attribution must not use the mapper's ordinary top-three cutoff. Spectrum
+rows retain every family ID/label, mapping threshold and not-run/unavailable/unattributed state.
+See [SCIENTIFIC_METHOD.md](SCIENTIFIC_METHOD.md) and [QUANTITATION-PIPELINE.md](docs/QUANTITATION-PIPELINE.md).
+
+PEAKS ALC and DeepNovo SCORE are separate native scales; length/local-confidence gates also
+apply. Shared filter edits prepare the next request, not rewrite stored quantitation.
+[DENOVO-ENGINE.md](docs/DENOVO-ENGINE.md) maps readers, inspection and reports. Homology's deliberate
+PepExplorer departures are documented in its source; do not silently restore old orchestration.
+
+Evidence fetches retain source/reference provenance and fail without partial application.
+Neighbours exclude the same entry/accession. An unannotated protein needs a qualifying reviewed
+neighbour in user scope and compatible observed domains, with no conflicting learned marker.
+Preserve both conditions. Proposals, source labels and user selections are distinct. Explicit
+application checks membership/provenance and stages one undoable change. Recipes replay settings;
+SavedFileCheck verifies reopening. Reading a source family is not independent validation of it.
+See [SCIENCE-GATE.md](docs/SCIENCE-GATE.md).
+
+## UI, files and deployment
+
+MainWindow delegates to shell/document/presentation/Help components. The File-first menu and
+Start/Families/Quantify/Results/De novo rail retain one open bundle. Async completion checks that
+project, quantitation and manifest still match. Failure/cancellation retains prior results.
+Curation and secondary windows use tested models. Results reads persisted quantitation/studies;
+missing studies are not invented. Retired extraction/partition controls are compatibility seams.
+
+Save uses a captured, verified, staged `.fqproj` bundle. Old `.fcf` export does not clear dirty
+state. Save/Discard/Cancel protects replacement and closing. SEPro reannotation writes a separate
+`*_regrouped.sepr2` and leaves its input intact. Help holds detailed explanations; tooltips stay
+short. Colors belong in tokens/palettes, with screen and frozen export palettes kept separate.
+
+Vendored DLLs are opaque externals. PatternTools refreshes must retain its invariant-decimal
+parser fix and pass locale checks; installed timestamps do not prove build age. LiteDB remains
+for `.xic2`; InvariantGlobalization must remain false because it reconstructs file LCIDs.
+[DEPENDENCIES.md](docs/DEPENDENCIES.md) records pins and checks. Nullable is enabled; `.editorconfig`
+suppresses CS8603.
+
+USEARCH is embedded under `FamilyQuant.MyResources.resources`, verified and extracted to a
+payload-SHA256 filename in the per-user FamilyQuant2 folder. `FAMILYQUANT_USEARCH` overrides it.
+Scratch names are unique; process-wide current directory is unchanged. See
+[USEARCH-PROVENANCE.md](docs/USEARCH-PROVENANCE.md).
+
+ClickOnce rehearsal needs Visual Studio's .NET Framework MSBuild; `dotnet publish` cannot run
+the bootstrapper and can clear existing publish output before failing. Use fresh local
+PublishDir/PublishUrl. Only Paulo publishes. Assembly and deployment versions live in separate
+files and must agree when he changes them; keep the force-added profile tracked. Tests are not
+publishable. Full publishing commands/payload requirements are preserved in history.

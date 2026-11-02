@@ -7,6 +7,8 @@ This is the navigation index for the current checkout. The roadmap owns unfinish
 | Document | Purpose |
 |---|---|
 | [CLAUDE.md](../CLAUDE.md) | Current projects, build/test setup, scientific invariants and implementation guidance |
+| [Working history](HISTORY.md) | Complete archived working notes, measurements, publishing details and retained limitations |
+| [X13 document/test audit](X13-DOCUMENTS.md) | Fact retention, protected-path rulings, exact method splits and receipt validity |
 | [Architecture](ARCHITECTURE.md) | Current boundaries, planned Reports/operation host, budgets and historical destination inventory |
 | [Core operations](CORE-OPERATIONS.md) | Progress, cancellation, outcomes and atomic publication |
 | [App operations](APP-OPERATIONS.md) | Busy host, overlay and publication adapters |
@@ -41,7 +43,7 @@ This is the navigation index for the current checkout. The roadmap owns unfinish
 | [Release notes](../RELEASE_NOTES.md) | Historical release descriptions, not current publication status |
 | [Security](../SECURITY.md) | Trusted SEPro-input boundary and existing native-process policy |
 | [Scientific method](../SCIENTIFIC_METHOD.md) | Protected scientific reference; not edited by housekeeping |
-| [Scientific revision report](../SCIENTIFIC_REVISION_REPORT.md) | Historical validation account and limitations |
+| [Scientific revision report](history/SCIENTIFIC_REVISION_REPORT.md) | Historical validation account and limitations, moved by X13 |
 | [Talk script](../SCIENTIFIC_TALK_SCRIPT.md) | Protected presentation input |
 | [Screen harness](../FamilyQuant.Tests/SCREENS.md) | Capture matrix, isolation and what screenshots do not prove |
 | [Appearance](../FamilyQuant/Themes/README.md) | Theme/token behavior and historical migration context |
