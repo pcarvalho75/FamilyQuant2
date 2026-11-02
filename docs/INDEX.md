@@ -68,6 +68,7 @@ Invoke each flag with `& $testExe <flag>` after building. Dispatch and arity are
 | `--test-evidence-delivery` | Native default review, save, exports, exact app-session replay and app Open fixture |
 | `--test-inputs` | Real-data argument-selection contract, without choosing Desktop fallbacks |
 | `--test-operations` | Core outcomes, progress, cancellation and the owned native-child fixture |
+| `--test-busy` | App operation host, running-command cancellation, prior file bytes and guarded publication |
 | `--test-clustering-results` | Typed clustering/redundancy results and native synthetic fixtures |
 | `--test-identity-study` | Probe parser and grid-versus-probe interpretation |
 | `--test-results` | Results view-model readiness and export choices |
@@ -84,6 +85,7 @@ These commands create native WPF client captures or labelled synthetic fixtures,
 | Syntax after `$testExe` | Source |
 |---|---|
 | `--screens <output-dir>` | [ScreenHarness.cs](../FamilyQuant.Tests/ScreenHarness.cs) |
+| `--busy-screens <output-dir>` | [Program.BusyOperations.cs](../FamilyQuant.Tests/Program.BusyOperations.cs); six synthetic overlay states in both themes |
 | `--shell-menu-screens <output-dir>` | [Program.StandardMenu.cs](../FamilyQuant.Tests/Program.StandardMenu.cs) |
 | `--start-page-screens <output-dir>` | [Program.HomeStart.cs](../FamilyQuant.Tests/Program.HomeStart.cs) |
 | `--shell-save-screens <output-dir>` | [Program.ShellSaving.cs](../FamilyQuant.Tests/Program.ShellSaving.cs) |

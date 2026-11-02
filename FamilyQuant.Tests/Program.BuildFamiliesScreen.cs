@@ -108,7 +108,7 @@ internal static partial class Program
                 new FastaItemExtended { SequenceIdentifier = "build_one", Description = "Build fixture", Sequence = "PEPTIDEK", UserID = 1, USearchID = 1 }
             } };
             held.SetResult(generated);
-            PumpDispatcher();
+            FinishBusyOperation(AppOperationHost.For(view));
             string output = Path.ChangeExtension(input, ".fcf");
             Check("Build keeps its generated file and enables the existing FDR action", File.Exists(output)
                 && ReferenceEquals(view.fcf, generated) && !view.ViewModel.IsBusy && ((Button)view.FindName("ButtonCalculateFDR")).IsEnabled);

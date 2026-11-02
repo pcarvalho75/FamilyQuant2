@@ -21,6 +21,7 @@ public sealed class ComputeXicViewModel : ScreenViewModel
     private int? isotopes = DeNovoXicExtractor.DefaultEnvelopeIsotopeCount, points = DeNovoXicExtractor.DefaultMinPointsForQuant;
     private bool busy;
     private CancellationTokenSource? cancellation;
+    public AppOperationHost Operations { get; set; } = new();
     public DeNovoFilterViewModel Filters { get; }
     public string RawDirectory { get => raw; set => Set(ref raw, value); }
     public string SeproPackage { get => sepro; set => Set(ref sepro, value); }
@@ -53,14 +54,14 @@ public sealed class ComputeXicViewModel : ScreenViewModel
         Filters = filters ?? new(manifest);
         this.compute = compute ?? RunEngine;
         ComputeCommand = new(async () => await ComputeAsync(), () => !IsBusy);
-        CancelCommand = new(() => { cancellation?.Cancel(); Status = "Cancelling after the current phase..."; }, () => IsBusy);
+        CancelCommand = new(() => { Operations.Cancel(); Status = "Cancelling after the current phase..."; }, () => IsBusy);
     }
 
     public void ShowStatus(string message) => Status = message;
 
     public async Task ComputeAsync()
     {
-        if (IsBusy) return;
+        if (IsBusy || Operations.IsBusy) return;
         string rawPath = RawDirectory.Trim(), seproPath = SeproPackage.Trim(), deNovoPath = DeNovoDirectory.Trim();
         if (!Directory.Exists(rawPath)) { Status = "Choose an existing RAW folder."; return; }
         if (!File.Exists(seproPath)) { Status = "Choose an existing SEPro identification package (.sepr2)."; return; }
@@ -71,11 +72,18 @@ public sealed class ComputeXicViewModel : ScreenViewModel
             new FullXicOptions { IsotopeCount = IsotopeCount, MinPointsForQuant = MinPointsForQuant,
                 Ppm = DeNovoXicExtractor.ProductionPpm, Ms1Tolerance = DeNovoXicExtractor.ProductionMs1Tolerance,
                 AppVersion = appVersion, FamilyCuration = curation, DeNovoCriteria = criteria, DeNovoSelections = selections });
-        using var tokenSource = new CancellationTokenSource();
+        using var operation = Operations.Begin("Compute full XIC");
+        var tokenSource = CancellationTokenSource.CreateLinkedTokenSource(operation.Context.CancellationToken);
+        using var tokenLifetime = tokenSource;
         cancellation = tokenSource;
         IsBusy = true;
         Status = "Computing full XIC...";
-        var progress = new Progress<string>(message => { if (ReferenceEquals(cancellation, tokenSource) && !tokenSource.IsCancellationRequested) Status = message; });
+        var progress = new Progress<string>(message =>
+        {
+            if (!ReferenceEquals(cancellation, tokenSource) || tokenSource.IsCancellationRequested) return;
+            Status = message;
+            operation.Report(new("full-xic", message));
+        });
         try
         {
             FullXicComputeResult outcome = await compute(request, progress, tokenSource.Token);
@@ -92,6 +100,7 @@ public sealed class ComputeXicViewModel : ScreenViewModel
                 (string.IsNullOrWhiteSpace(outcome.SpectrumComparisonCsvError) ? "" : "\n" + outcome.SpectrumComparisonCsvError);
             Status = "Computed. Save the project to keep these results.";
             Changed(nameof(Result)); Changed(nameof(Computed));
+            operation.Dispose();
             Completed?.Invoke(outcome);
         }
         catch (OperationCanceledException) when (tokenSource.IsCancellationRequested) { Status = "Cancelled. The previous project results were kept."; }
