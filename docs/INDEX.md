@@ -131,6 +131,8 @@ Invoke each flag with `& $testExe <flag>` after building. Dispatch and arity are
 | `--test-results-tooltips [fresh-output date-timestamp]` | Two-sentence shared/normalization/chart tips retain every fact and dynamic default; optional semantic preservation receipts |
 | `--database-gap-screens <project.fqproj> <fresh-output> [--negative-fingerprint]` | Capture/export the stored table; a stored-world project must enable FASTA, and refusal fails the command |
 | `--test-database-gap-refusal <project.fqproj> <fresh-output>` | Native child plants the old fingerprint and must fail the availability gate without writing FASTA or changing input bytes |
+| `--test-database-gap-lengths <fresh-output>` | Whole native length chooser, result/CSV/FASTA consistency, repeated bytes, project roundtrip and shell Save/Cancel |
+| `--database-gap-lengths-screens <project.fqproj> <fresh-output>` | Real stored length table in both themes, all native length/CSV/FASTA choices and byte repeats; input unchanged |
 | `--prove-results-interactions <fresh-output> <date-timestamp>` | Native Results controls, displaced handlers, deterministic exports and observation receipts |
 | `--prove-results-members <frozen-root> <fresh-output> <date-timestamp>` | Shared scoped member comparison for assigned Results and quantitation declarations; changed members stay open |
 | `--prove-results-runtime <frozen-root> <own-frozen-host> <fresh-output> <date-timestamp> [--negative-control]` | Native frozen/current summary, CSV, User-header and chart-byte comparisons with repeated outputs and per-row receipts |

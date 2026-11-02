@@ -169,6 +169,11 @@ namespace FamilyQuant
         [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull)]
         public FamilyWorldSummary? FamilyWorldResult { get; set; }
 
+        /// <summary>The person's Database gap display/export choice. Null follows the Core default;
+        /// omitted from older/unchanged project JSON. This does not modify computed tables.</summary>
+        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull)]
+        public int? DatabaseGapMinimumTagLength { get; set; }
+
         /// <summary>The complete compute-time spectrum evidence table, including accepted source calls
         /// that did not yield a stored XIC and RAW-selected precursor metadata. Version-2 projects keep
         /// this collection in the streaming <c>spectrum_comparison.jsonl.gz</c> entry rather than in
