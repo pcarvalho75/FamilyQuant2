@@ -87,7 +87,7 @@ Columns: Diff = L, M, H, VH. Hrs = worker hours at measured speed: the 56 steps 
 | A1 | Make her file with 2.0 preview 1 on her original `.fcf`: Fetch Evidence, fetch the panel again so it keeps tissue text, review, Create, Save, Export. Provenance shows version, recipe and release | M | 0.5 | 🟢 | A2 | Recipe reapplied gives the same file; file check passed; no script touched it | EV | not started | 0% | 0% | T+2 |
 | A2 | Adversarial science review of the file: concepts, denominators, labels, red flags, comparison with what Ana already holds | H | 1 | A1 | A3 | GR's written verdict; every finding closed | GR | not started | 0% | 0% | T+2 |
 | A3 | Paulo sends Ana a second email, the same day if the team gets there: FamilyQuant 2.0 preview 1 and the program's file, with a short note that it replaces the file she received and that 1.5 stays installed | L | 0 | A2 | A4 | Sent by Paulo | Paulo | not started | 0% | 0% | T+2 |
-| A4 | Ana's answers: is the family list right; keep disintegrins separate (default yes, one click to reverse); does the scope stay `Toxin` and `venom gland`, given that it brings in 125 left-out calmodulin-like rows; a `.sepr2` on this database | L | 0 | A3 | A5 | Answers recorded in the recipe | Ana | not started | 0% | 0% | her pace |
+| A4 | Ana's answers: is the family list right; keep disintegrins separate (default yes, one click to reverse); does the scope stay `Toxin` and `venom gland`, given that it brings in 125 left-out calmodulin-like rows; is a family-level claim acceptable for a peptide absent from her database; a `.sepr2` on this database | L | 0 | A3 | A5 | Answers recorded in the recipe | Ana | not started | 0% | 0% | her pace |
 | A5 | Measure the shared-peptide effect on her data, through Compute full XIC | M | 0.5 | A4 | Paper numbers | Numbers exported by the program | EV | not started | 0% | 0% | her pace |
 
 ### W3 Look
@@ -168,9 +168,8 @@ Three lines run side by side from the restart. For Ana: R1, A1, A2, A3, which al
 
 | ID | Decision | Default if no answer | Needed by |
 |---|---|---|---|
-| D1 | With Ana: is a family-level claim acceptable for a peptide absent from the species database? | Yes, with the decoy rate and right rate printed beside it | Before B8 |
-| D7 | `LICENSE.txt`: rights holder, year and licence | None: R5 waits, only Paulo can name them | Before R5 |
-| D8 | Install 1.5 and 2.0 side by side on one Windows profile, by `docs/N1-IDENTITY.md` | None: A3 waits, Ana must not lose 1.5 | Before A3 |
+| D7 | `LICENSE.txt` is the MIT template with its name and year blank. Keep MIT, or change to all rights reserved? And who holds the rights, Paulo or Fiocruz? | None: R5 waits, only Paulo can name them | Before R5 |
+| D8 | Publish preview 1 at its own address, install 2.0 beside 1.5 on one Windows profile, open a file in each, and confirm 1.5 is unchanged. The update test follows at the next published revision (`docs/N1-IDENTITY.md`) | None: A3 waits, Ana must not lose 1.5 | Before A3 |
 
 ### Decisions taken
 
@@ -178,6 +177,7 @@ Paulo agreed these at the restart, 2026-11-01.
 
 | ID | Question | Taken |
 |---|---|---|
+| D1 | Is a family-level claim acceptable for a peptide absent from the species database? | Yes, with the decoy rate and right rate printed beside it. Ana's answer is in A4 |
 | D2 | Clade of the family world on Ana's file: Viperidae or all snakes? | The clade the program reads from the headers, Viperidae on her file |
 | D3 | Scope proposed by the program or typed by the person? | Proposed, the person confirms |
 | D4 | Does the "sequence next" ranking belong in the product or only in the paper? | In the product |
