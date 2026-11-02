@@ -5,16 +5,16 @@
   "runs": [
     {
       "id": "core-members",
-      "command": "C:\\FamilyQuant-wt2\\floater\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --ledger-core-relocation D:/FamilyQuant-data/out-floater/ledger/frozen-source D:/FamilyQuant-data/out-floater/ledger/X5-integrated-1 X5 \u00222026-11-02 02:03:54 -0800\u0022 D:/FamilyQuant-data/out-floater/ledger/X5-reviewed-relocations.json",
-      "executedAt": "2026-11-02 02:03:54 -0800",
-      "commit": "8b1dbb7c13399b5c3711335786e7154f29f6dffb",
+      "command": "C:\\FamilyQuant-gate\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --ledger-core-relocation D:/FamilyQuant-data/out-floater/ledger/frozen-source D:/FamilyQuant-data/out-refresh\\20261102-130357-FamilyQuant-gate\\core-relocation-x5 X5 \u00222026-11-02 13:04:48 -0800\u0022 D:/FamilyQuant-data/out-floater/ledger/X5-reviewed-relocations.json",
+      "executedAt": "2026-11-02 13:04:48 -0800",
+      "commit": "d3b71621ce6198f63f586cf062567a18103f9e72",
       "artifacts": [
         {
-          "path": "D:\\FamilyQuant-data\\out-floater\\ledger\\X5-integrated-1\\comparisons.log",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\core-relocation-x5\\comparisons.log",
           "sha256": "738EF6D5169173A1A0247B2C84D3DD76509AB2FDB4D9FDBA28D080B9CD50BCD9"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-floater\\ledger\\X5-integrated-1\\comparisons.json",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\core-relocation-x5\\comparisons.json",
           "sha256": "CC0C584CA3C99DB5F1C413487B03A23B0BE28CA98F24010407FEC9DD57A7D65A"
         },
         {
@@ -22,95 +22,103 @@
           "sha256": "D291745AD50BD292FCEE19DFEF731C3B6512CF4B426585C59CDF4134A15AB1C0"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-floater\\ledger\\X5-integrated-1\\executed\\FamilyQuant.Core/FamilyEnvelopeQuant.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\core-relocation-x5\\executed\\FamilyQuant.Core/FamilyEnvelopeQuant.cs",
           "sha256": "7B53E0420601A778C712575295B3386173DD7BF3ECBBB8BE88F2F9577ADBE19D"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-floater\\ledger\\X5-integrated-1\\executed\\FamilyQuant.Core/FullXicComputer.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\core-relocation-x5\\executed\\FamilyQuant.Core/FullXicComputer.cs",
           "sha256": "91538E7B748639873291B78FA96D7B5B3D5A24B3D387FA94127E38ED8B4266B5"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-floater\\ledger\\X5-integrated-1\\executed\\FamilyQuant.Core/Quantitation/FamilyCurationAttribution.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\core-relocation-x5\\executed\\FamilyQuant.Core/Quantitation/FamilyCurationAttribution.cs",
           "sha256": "BBDB92554934E6E7A9C57838CEBA36E6CDD3CD3F1B8A403B9EF1A39586855705"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-floater\\ledger\\X5-integrated-1\\executed\\FamilyQuant.Core/Quantitation/FamilyEnvelopeModels.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\core-relocation-x5\\executed\\FamilyQuant.Core/Quantitation/FamilyEnvelopeModels.cs",
           "sha256": "DEE5B85F58ED8CD6A64A168F318183BD2F479682155DAFA5C778F694D3674DBE"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-floater\\ledger\\X5-integrated-1\\executed\\FamilyQuant.Core/Quantitation/FamilyPeptideAttribution.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\core-relocation-x5\\executed\\FamilyQuant.Core/Quantitation/FamilyPeptideAttribution.cs",
           "sha256": "F22B5368BFA6B96DB20605D1A100B428538FB0E8A8ABD8AFD82B5B727FEE71E4"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-floater\\ledger\\X5-integrated-1\\executed\\FamilyQuant.Core/Quantitation/FamilySourceSequenceCensus.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\core-relocation-x5\\executed\\FamilyQuant.Core/Quantitation/FamilySourceSequenceCensus.cs",
           "sha256": "94F2FE128627D9D7E63177F69CA63FF558A60D5DEAF15C6415648D15A546ECA7"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-floater\\ledger\\X5-integrated-1\\executed\\FamilyQuant.Core/Quantitation/FamilyWorldPass.cs",
-          "sha256": "74D5A937ED915A10CF6F52EAD96E2BF10779ACFBDDEAF22514B6E269E5727ABF"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\core-relocation-x5\\executed\\FamilyQuant.Core/Quantitation/FamilyWorldAnalysis.cs",
+          "sha256": "8080697FF40B639D73CB85802B5074DD4059E3865BB9CD5BE452B7ABD37109D0"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-floater\\ledger\\X5-integrated-1\\executed\\FamilyQuant.Core/Quantitation/FullXicCompletionStage.cs",
-          "sha256": "6160E5FBF4D7B00EF8DE46821AA5E144842509064336D297B7303CD2676BFBA2"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\core-relocation-x5\\executed\\FamilyQuant.Core/Quantitation/FamilyWorldErrors.cs",
+          "sha256": "351DF614B79CAD5B3AF6C7F2B7815AEDE3BF23D6FE05CFC1206E5D35C958B7B6"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-floater\\ledger\\X5-integrated-1\\executed\\FamilyQuant.Core/Quantitation/FullXicInputStage.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\core-relocation-x5\\executed\\FamilyQuant.Core/Quantitation/FamilyWorldPass.cs",
+          "sha256": "13E32B67958D7643BC30141B4C7258A083A216F22C259BB370EB53C6F59A712D"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\core-relocation-x5\\executed\\FamilyQuant.Core/Quantitation/FullXicCompletionStage.cs",
+          "sha256": "46833AC645FE2CFC213AF3F6DAECA38E09FA7F798AB7D1B6F9C7FE856DB36FD7"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\core-relocation-x5\\executed\\FamilyQuant.Core/Quantitation/FullXicInputStage.cs",
           "sha256": "179D7B52396DE6617CB3D27AFB8CEC95A2AA7277B76E875EA52436E47A00EFA2"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-floater\\ledger\\X5-integrated-1\\executed\\FamilyQuant.Core/Quantitation/FullXicModels.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\core-relocation-x5\\executed\\FamilyQuant.Core/Quantitation/FullXicModels.cs",
           "sha256": "E1068B031EFF73E10D8CCAB17156015C98BC74EBC819C690512598744E8208EA"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-floater\\ledger\\X5-integrated-1\\executed\\FamilyQuant.Core/Quantitation/FullXicRunMatch.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\core-relocation-x5\\executed\\FamilyQuant.Core/Quantitation/FullXicRunMatch.cs",
           "sha256": "DBCF886A5B63A85F12623E21F87DE68C9B9C74370051DF13C0F5F0FAD4F7F12D"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-floater\\ledger\\X5-integrated-1\\executed\\FamilyQuant.Core/Quantitation/FullXicRunStage.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\core-relocation-x5\\executed\\FamilyQuant.Core/Quantitation/FullXicRunStage.cs",
           "sha256": "80FFC745239AABB43E036D21100311F2413909147F890135EB075C704448C6D4"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-floater\\ledger\\X5-integrated-1\\executed\\FamilyQuant.Core/Quantitation/FullXicSourceStage.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\core-relocation-x5\\executed\\FamilyQuant.Core/Quantitation/FullXicSourceStage.cs",
           "sha256": "1CB50531540941797A8856950254A7FD30836C7024EC9C25EABC1CFFE8051630"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-floater\\ledger\\X5-integrated-1\\executed\\FamilyQuant.Tests/FeatureLedgerEvidence.Reporting.cs",
-          "sha256": "71C826FB842E1F16FA53351281297472F6659B50C5FF638A8E1109BD93A0C77B"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\core-relocation-x5\\executed\\FamilyQuant.Tests/FeatureLedgerEvidence.Reporting.cs",
+          "sha256": "E9A4F3A2A671452283E1C28E155B81DEF97F9BAE907945607C1F16DD0078CC12"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-floater\\ledger\\X5-integrated-1\\executed\\FamilyQuant.Tests/FeatureLedgerEvidence.cs",
-          "sha256": "FCCFCE75E122616388FDD68B96AF3E3F7104DC809B61D1F48C3A4A07B9B1969C"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\core-relocation-x5\\executed\\FamilyQuant.Tests/FeatureLedgerEvidence.cs",
+          "sha256": "2060D409570285CEAE8FA6ADF3F4A5173924C80C2A6A99B1856294055365174C"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-floater\\ledger\\X5-integrated-1\\executed\\FamilyQuant.Tests/LedgerMemberFactComparison.cs",
-          "sha256": "AE18ABC01A916A43012F3E34F1B53798FC99346FFEB21CD179CA3D8ADE5834A7"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\core-relocation-x5\\executed\\FamilyQuant.Tests/LedgerMemberFactComparison.cs",
+          "sha256": "1F3254D635B40D22576E9F40347DBEB503A5FF661EFC18E743EAC35B097FC14C"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-floater\\ledger\\X5-integrated-1\\executed\\FamilyQuant.Tests/Program.Commands.CoreRelocation.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\core-relocation-x5\\executed\\FamilyQuant.Tests/Program.Commands.CoreRelocation.cs",
           "sha256": "632EA73117DFE589F8F209110D91A1431BCC97BFC7CA5BD009C60AE550725361"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-floater\\ledger\\X5-integrated-1\\executed\\FamilyQuant.Tests/Program.CoreRelocation.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\core-relocation-x5\\executed\\FamilyQuant.Tests/Program.CoreRelocation.cs",
           "sha256": "2CECC1BACB96EA489AFD3ED5EFD72373A762B6F08452048E6F4FC449B87E1367"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-floater\\ledger\\X5-integrated-1\\executed\\frozen\\FamilyQuant/FullXicComputer.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\core-relocation-x5\\executed\\frozen\\FamilyQuant/FullXicComputer.cs",
           "sha256": "ED72573B31BCFD68FEE783807A692C51452FD98B4B039B93E9BCBBC9A198BA58"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-floater\\ledger\\X5-integrated-1\\executed\\frozen\\FamilyQuant/FamilyEnvelopeQuant.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\core-relocation-x5\\executed\\frozen\\FamilyQuant/FamilyEnvelopeQuant.cs",
           "sha256": "258311C5951F41E3323C72016CCA6F0BF10AB0570D7B12D944DAC0F6DC5EA6FD"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-floater\\ledger\\X5-integrated-1\\executed\\FamilyQuant.Tests.dll",
-          "sha256": "29451CBE006967B06B45E935E399931B140C657C611481DD323A1F1E210CC001"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\core-relocation-x5\\executed\\FamilyQuant.Tests.dll",
+          "sha256": "338CB1ED8EE1B52F92368A79B99A6C1D2789A40AE07801AAB7226AA8B8A528A4"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-floater\\ledger\\X5-integrated-1\\executed\\FamilyQuant.Core.dll",
-          "sha256": "853393F990ACA87455F4FD68FFD68559AE6E514989B09765D2AE053CF3585F79"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\core-relocation-x5\\executed\\FamilyQuant.Core.dll",
+          "sha256": "B3DE904BB50477ACCB982BDE2CE437BA6962BB1DA44E7D260B992D1E188837BC"
         }
       ],
-      "workingDirectory": "C:\\FamilyQuant-wt2\\floater"
+      "workingDirectory": "C:\\FamilyQuant-gate"
     }
   ],
   "rows": [
@@ -118,7 +126,7 @@
       "observationId": "FQ15-04F19829B220",
       "implementation": [],
       "proofs": [],
-      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -154,7 +162,7 @@
       "observationId": "FQ15-0799A52C9394",
       "implementation": [],
       "proofs": [],
-      "note": "The exact literal multiplicity within the containing member changed.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -162,7 +170,7 @@
       "observationId": "FQ15-09CB0A3405D1",
       "implementation": [],
       "proofs": [],
-      "note": "The exact literal multiplicity within the containing member changed.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -170,7 +178,7 @@
       "observationId": "FQ15-0B83B7FAA554",
       "implementation": [],
       "proofs": [],
-      "note": "The exact literal multiplicity within the containing member changed.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -220,7 +228,7 @@
       "observationId": "FQ15-15D163FAA780",
       "implementation": [],
       "proofs": [],
-      "note": "The exact literal multiplicity within the containing member changed.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -284,7 +292,7 @@
       "observationId": "FQ15-1DF0CFAB7619",
       "implementation": [],
       "proofs": [],
-      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -306,7 +314,7 @@
       "observationId": "FQ15-1FD9127E0804",
       "implementation": [],
       "proofs": [],
-      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -314,7 +322,7 @@
       "observationId": "FQ15-222784EFA8AB",
       "implementation": [],
       "proofs": [],
-      "note": "The exact literal multiplicity within the containing member changed.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -322,7 +330,7 @@
       "observationId": "FQ15-228A4BFC8CC9",
       "implementation": [],
       "proofs": [],
-      "note": "The exact literal multiplicity within the containing member changed.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -330,7 +338,7 @@
       "observationId": "FQ15-22B52A5CAA4D",
       "implementation": [],
       "proofs": [],
-      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -352,7 +360,7 @@
       "observationId": "FQ15-238D7603CEBF",
       "implementation": [],
       "proofs": [],
-      "note": "The exact literal multiplicity within the containing member changed.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -374,7 +382,7 @@
       "observationId": "FQ15-282A1A6203D8",
       "implementation": [],
       "proofs": [],
-      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -424,7 +432,7 @@
       "observationId": "FQ15-304BFB289D54",
       "implementation": [],
       "proofs": [],
-      "note": "The exact literal multiplicity within the containing member changed.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -432,7 +440,7 @@
       "observationId": "FQ15-321BECF71001",
       "implementation": [],
       "proofs": [],
-      "note": "The exact literal multiplicity within the containing member changed.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -454,7 +462,7 @@
       "observationId": "FQ15-37B080CB2138",
       "implementation": [],
       "proofs": [],
-      "note": "The exact literal multiplicity within the containing member changed.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -490,7 +498,7 @@
       "observationId": "FQ15-3D4F77FDED0E",
       "implementation": [],
       "proofs": [],
-      "note": "The exact literal multiplicity within the containing member changed.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -512,7 +520,7 @@
       "observationId": "FQ15-3E32D8E2F780",
       "implementation": [],
       "proofs": [],
-      "note": "The exact literal multiplicity within the containing member changed.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -520,7 +528,7 @@
       "observationId": "FQ15-3F934B495038",
       "implementation": [],
       "proofs": [],
-      "note": "The exact literal multiplicity within the containing member changed.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -528,7 +536,7 @@
       "observationId": "FQ15-443CD5A9880B",
       "implementation": [],
       "proofs": [],
-      "note": "The exact literal multiplicity within the containing member changed.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -536,7 +544,7 @@
       "observationId": "FQ15-45ECA6780D7A",
       "implementation": [],
       "proofs": [],
-      "note": "The exact literal multiplicity within the containing member changed.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -544,7 +552,7 @@
       "observationId": "FQ15-4638873838EB",
       "implementation": [],
       "proofs": [],
-      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -566,7 +574,7 @@
       "observationId": "FQ15-4D6485AB908B",
       "implementation": [],
       "proofs": [],
-      "note": "The exact literal multiplicity within the containing member changed.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -574,7 +582,7 @@
       "observationId": "FQ15-4EDF29C15D37",
       "implementation": [],
       "proofs": [],
-      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -582,7 +590,7 @@
       "observationId": "FQ15-4FC26357EF95",
       "implementation": [],
       "proofs": [],
-      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -590,7 +598,7 @@
       "observationId": "FQ15-500EB2CCA45D",
       "implementation": [],
       "proofs": [],
-      "note": "The exact literal multiplicity within the containing member changed.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -598,7 +606,7 @@
       "observationId": "FQ15-52CECCEB7A37",
       "implementation": [],
       "proofs": [],
-      "note": "The exact literal multiplicity within the containing member changed.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -620,7 +628,7 @@
       "observationId": "FQ15-55D93E7970D7",
       "implementation": [],
       "proofs": [],
-      "note": "The exact literal multiplicity within the containing member changed.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -642,7 +650,7 @@
       "observationId": "FQ15-5734B771D380",
       "implementation": [],
       "proofs": [],
-      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -650,7 +658,7 @@
       "observationId": "FQ15-580CC33CCE5B",
       "implementation": [],
       "proofs": [],
-      "note": "The exact literal multiplicity within the containing member changed.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -686,7 +694,7 @@
       "observationId": "FQ15-5C60EB0FC31B",
       "implementation": [],
       "proofs": [],
-      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -708,7 +716,7 @@
       "observationId": "FQ15-5E612B6D4668",
       "implementation": [],
       "proofs": [],
-      "note": "The exact literal multiplicity within the containing member changed.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -758,7 +766,7 @@
       "observationId": "FQ15-6675FF32BA50",
       "implementation": [],
       "proofs": [],
-      "note": "The exact literal multiplicity within the containing member changed.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -766,7 +774,7 @@
       "observationId": "FQ15-697ECD6D0983",
       "implementation": [],
       "proofs": [],
-      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -788,7 +796,7 @@
       "observationId": "FQ15-72AC30937F60",
       "implementation": [],
       "proofs": [],
-      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -796,7 +804,7 @@
       "observationId": "FQ15-74FDFA70A6DD",
       "implementation": [],
       "proofs": [],
-      "note": "The exact literal multiplicity within the containing member changed.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -832,7 +840,7 @@
       "observationId": "FQ15-784ED2F5B9C6",
       "implementation": [],
       "proofs": [],
-      "note": "The exact literal multiplicity within the containing member changed.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -854,7 +862,7 @@
       "observationId": "FQ15-7D6127692F66",
       "implementation": [],
       "proofs": [],
-      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -862,7 +870,7 @@
       "observationId": "FQ15-7D7F4767477A",
       "implementation": [],
       "proofs": [],
-      "note": "The exact literal multiplicity within the containing member changed.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -870,7 +878,7 @@
       "observationId": "FQ15-81DF7ED5DAA6",
       "implementation": [],
       "proofs": [],
-      "note": "The exact literal multiplicity within the containing member changed.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -878,7 +886,7 @@
       "observationId": "FQ15-86EC167DFB43",
       "implementation": [],
       "proofs": [],
-      "note": "The exact literal multiplicity within the containing member changed.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -900,7 +908,7 @@
       "observationId": "FQ15-876B7393E318",
       "implementation": [],
       "proofs": [],
-      "note": "The exact literal multiplicity within the containing member changed.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -922,7 +930,7 @@
       "observationId": "FQ15-88F8C98DE5DC",
       "implementation": [],
       "proofs": [],
-      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -944,7 +952,7 @@
       "observationId": "FQ15-8A8A02F4D40B",
       "implementation": [],
       "proofs": [],
-      "note": "The exact literal multiplicity within the containing member changed.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -952,7 +960,7 @@
       "observationId": "FQ15-8BF6E74D83EA",
       "implementation": [],
       "proofs": [],
-      "note": "The exact literal multiplicity within the containing member changed.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -960,7 +968,7 @@
       "observationId": "FQ15-8C3F03F24F56",
       "implementation": [],
       "proofs": [],
-      "note": "The exact literal multiplicity within the containing member changed.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -968,7 +976,7 @@
       "observationId": "FQ15-8E3D6DC6122D",
       "implementation": [],
       "proofs": [],
-      "note": "The exact literal multiplicity within the containing member changed.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -990,7 +998,7 @@
       "observationId": "FQ15-8FBBDC8A26D1",
       "implementation": [],
       "proofs": [],
-      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -1012,7 +1020,7 @@
       "observationId": "FQ15-92898169E9DF",
       "implementation": [],
       "proofs": [],
-      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -1062,7 +1070,7 @@
       "observationId": "FQ15-9C1197CF6D0E",
       "implementation": [],
       "proofs": [],
-      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -1070,7 +1078,7 @@
       "observationId": "FQ15-9C2CBEFBC82D",
       "implementation": [],
       "proofs": [],
-      "note": "The exact literal multiplicity within the containing member changed.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -1078,7 +1086,7 @@
       "observationId": "FQ15-A2034757630E",
       "implementation": [],
       "proofs": [],
-      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -1100,7 +1108,7 @@
       "observationId": "FQ15-A391A3D8DA40",
       "implementation": [],
       "proofs": [],
-      "note": "The exact literal multiplicity within the containing member changed.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -1136,7 +1144,7 @@
       "observationId": "FQ15-A99DFFEBAC4B",
       "implementation": [],
       "proofs": [],
-      "note": "The exact literal multiplicity within the containing member changed.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -1144,7 +1152,7 @@
       "observationId": "FQ15-AABCD7E95D9F",
       "implementation": [],
       "proofs": [],
-      "note": "The exact literal multiplicity within the containing member changed.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -1166,7 +1174,7 @@
       "observationId": "FQ15-AE62D7A6D2D7",
       "implementation": [],
       "proofs": [],
-      "note": "The exact literal multiplicity within the containing member changed.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -1188,7 +1196,7 @@
       "observationId": "FQ15-B54429E92C62",
       "implementation": [],
       "proofs": [],
-      "note": "The exact literal multiplicity within the containing member changed.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -1196,7 +1204,7 @@
       "observationId": "FQ15-B5E4FE6CA170",
       "implementation": [],
       "proofs": [],
-      "note": "The exact literal multiplicity within the containing member changed.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -1218,7 +1226,7 @@
       "observationId": "FQ15-BB58DE7EB94F",
       "implementation": [],
       "proofs": [],
-      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -1226,7 +1234,7 @@
       "observationId": "FQ15-BD50B720132A",
       "implementation": [],
       "proofs": [],
-      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -1248,7 +1256,7 @@
       "observationId": "FQ15-BFDD375817E9",
       "implementation": [],
       "proofs": [],
-      "note": "The exact literal multiplicity within the containing member changed.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -1256,7 +1264,7 @@
       "observationId": "FQ15-C205445107B0",
       "implementation": [],
       "proofs": [],
-      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -1278,7 +1286,7 @@
       "observationId": "FQ15-C806E83A6C32",
       "implementation": [],
       "proofs": [],
-      "note": "The exact literal multiplicity within the containing member changed.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -1286,7 +1294,7 @@
       "observationId": "FQ15-CA7106BC1CC0",
       "implementation": [],
       "proofs": [],
-      "note": "The exact literal multiplicity within the containing member changed.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -1294,7 +1302,7 @@
       "observationId": "FQ15-CDB07CFC2A5D",
       "implementation": [],
       "proofs": [],
-      "note": "The exact literal multiplicity within the containing member changed.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -1358,7 +1366,7 @@
       "observationId": "FQ15-D6B128E39208",
       "implementation": [],
       "proofs": [],
-      "note": "The exact literal multiplicity within the containing member changed.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -1366,7 +1374,7 @@
       "observationId": "FQ15-D7018EEE5CCD",
       "implementation": [],
       "proofs": [],
-      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -1416,7 +1424,7 @@
       "observationId": "FQ15-DB38A84ED138",
       "implementation": [],
       "proofs": [],
-      "note": "The exact literal multiplicity within the containing member changed.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -1452,7 +1460,7 @@
       "observationId": "FQ15-DD54F44F3FE5",
       "implementation": [],
       "proofs": [],
-      "note": "The exact literal multiplicity within the containing member changed.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -1488,7 +1496,7 @@
       "observationId": "FQ15-E4BD1506B305",
       "implementation": [],
       "proofs": [],
-      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -1496,7 +1504,7 @@
       "observationId": "FQ15-E4E5BD980A42",
       "implementation": [],
       "proofs": [],
-      "note": "The exact literal multiplicity within the containing member changed.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -1518,7 +1526,7 @@
       "observationId": "FQ15-EA1840ABFA82",
       "implementation": [],
       "proofs": [],
-      "note": "The exact literal multiplicity within the containing member changed.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -1526,7 +1534,7 @@
       "observationId": "FQ15-EA864907E42D",
       "implementation": [],
       "proofs": [],
-      "note": "The exact literal multiplicity within the containing member changed.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -1534,7 +1542,7 @@
       "observationId": "FQ15-EB1982536C65",
       "implementation": [],
       "proofs": [],
-      "note": "The exact literal multiplicity within the containing member changed.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -1542,7 +1550,7 @@
       "observationId": "FQ15-EB6246AE57E2",
       "implementation": [],
       "proofs": [],
-      "note": "The exact literal multiplicity within the containing member changed.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -1606,7 +1614,7 @@
       "observationId": "FQ15-F9D985281FC3",
       "implementation": [],
       "proofs": [],
-      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -1628,7 +1636,7 @@
       "observationId": "FQ15-FAEEC621EEC6",
       "implementation": [],
       "proofs": [],
-      "note": "The exact literal multiplicity within the containing member changed.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -1636,7 +1644,7 @@
       "observationId": "FQ15-FC08F56D35C5",
       "implementation": [],
       "proofs": [],
-      "note": "The exact literal multiplicity within the containing member changed.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -1644,7 +1652,7 @@
       "observationId": "FQ15-FC97D1AB23B4",
       "implementation": [],
       "proofs": [],
-      "note": "The exact literal multiplicity within the containing member changed.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -1666,7 +1674,7 @@
       "observationId": "FQ15-FE4529678EAA",
       "implementation": [],
       "proofs": [],
-      "note": "The exact literal multiplicity within the containing member changed.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -1674,7 +1682,7 @@
       "observationId": "FQ15-FE69EB82A11F",
       "implementation": [],
       "proofs": [],
-      "note": "The exact literal multiplicity within the containing member changed.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -1703,7 +1711,7 @@
           "kind": "test",
           "target": "CoreRelocationCommand",
           "assertion": "Core member kind export/storage fact: all listed complete declarations retain exact literal syntax and multiplicity",
-          "artifact": "D:\\FamilyQuant-data\\out-floater\\ledger\\X5-integrated-1\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\core-relocation-x5\\comparisons.log",
           "inspectedBy": ""
         }
       ]
@@ -1717,7 +1725,7 @@
           "kind": "test",
           "target": "CoreRelocationCommand",
           "assertion": "Core member kind format/export: all listed complete declarations retain exact literal syntax and multiplicity",
-          "artifact": "D:\\FamilyQuant-data\\out-floater\\ledger\\X5-integrated-1\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\core-relocation-x5\\comparisons.log",
           "inspectedBy": ""
         }
       ]

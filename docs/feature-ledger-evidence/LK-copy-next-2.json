@@ -5,337 +5,337 @@
   "runs": [
     {
       "id": "LK-copy",
-      "command": "C:\\FamilyQuant-gate\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --refresh-look-registers D:/FamilyQuant-data/out-shell/N3/source D:/FamilyQuant-data/out-refresh\\20261102-123305-FamilyQuant-gate\\look-refresh \u00222026-11-02 12:33:55 -0800\u0022",
-      "executedAt": "2026-11-02 12:33:55 -0800",
-      "commit": "f4dc6b32acc4c159f4c7317b5e7a8cb7dd400d1c",
+      "command": "C:\\FamilyQuant-gate\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --refresh-look-registers D:/FamilyQuant-data/out-shell/N3/source D:/FamilyQuant-data/out-refresh\\20261102-130357-FamilyQuant-gate\\look-refresh \u00222026-11-02 13:05:42 -0800\u0022",
+      "executedAt": "2026-11-02 13:05:42 -0800",
+      "commit": "d3b71621ce6198f63f586cf062567a18103f9e72",
       "artifacts": [
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-123305-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\profile-NONE.plp",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\profile-NONE.plp",
           "sha256": "D89E4677E8B0DA29E68AC8E8C1A7FB2DE6C93461CEDDAD5E3B72391E77737470"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-123305-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\profile-TIC.plp",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\profile-TIC.plp",
           "sha256": "A95B6A2FAD8989547C939FDE4A5AC2AF9DDB32394547586B42BFEA5DEA0D5615"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-123305-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\profile-ID.plp",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\profile-ID.plp",
           "sha256": "D5CF8B6DC74B3C0B6483F830C0A858BC26833A34187209F3BDDBB3F58853A022"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-123305-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\help-00.txt",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\help-00.txt",
           "sha256": "B0F012AE90F5F4AAA07E84D044F00C72B807C458EB60A821C7FA4CF9BA506F14"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-123305-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\help-01.txt",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\help-01.txt",
           "sha256": "E5BA79FF671CFBA893F9EF8CB870193CFB935C69FC045B1B8C452BB3A7C3394C"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-123305-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\help-02.txt",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\help-02.txt",
           "sha256": "B91F57666B7EEF5C341B39BF99255048B79429469BC9F71E5CADF2811EF0AF3E"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-123305-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\help-03.txt",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\help-03.txt",
           "sha256": "226E0F17B1477D2CE1AF6EB70B414611AF2F28E0FEE48EB3B5BCB4ED468873A3"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-123305-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\help-04.txt",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\help-04.txt",
           "sha256": "A265F4E66D0FFFDE9496FA7707EC8981726A4894F0F372D016711FE2C9B641FB"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-123305-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\help-05.txt",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\help-05.txt",
           "sha256": "CB31DFF8A962AB1E7C2D749D3582F2F5CAED6BF9B04F988E07C766E5A3E646D2"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-123305-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\help-06.txt",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\help-06.txt",
           "sha256": "CE793721FCF6BECEFAD467757CD5955638069BF0B866724CFC2B0DEAC4944C6F"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-123305-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\help-07.txt",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\help-07.txt",
           "sha256": "FA84BE214261222895485D57681181A397CC5284C3FA03B1484D4AB04194B8C5"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-123305-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\help-08.txt",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\help-08.txt",
           "sha256": "D0427EE478979613CA771E6E7DDAF8AFF6F6A4A074900E58212A291DFA18CFF9"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-123305-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\help-09.txt",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\help-09.txt",
           "sha256": "8326FB15DDFCB9E3169FE1CFFFB3CC7B30848995DEBEF43D351F53FF3BB97ACA"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-123305-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\help-10.txt",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\help-10.txt",
           "sha256": "868ED831796018F6BC7F863A68AC3CDC4F0A96E595FCB519CC77C5A12197E36B"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-123305-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\help-11.txt",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\help-11.txt",
           "sha256": "8FAD5708BD13675719D057AC911D50716F46CE32C6C7014EBA047355DFF7D026"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-123305-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\help-12.txt",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\help-12.txt",
           "sha256": "126445B1D2B235CB556B832E44534C23479B355666EA0B9D71A29A347752CF2F"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-123305-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\help-13.txt",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\help-13.txt",
           "sha256": "D72ED48D7E3A17A51DD2E94A27C1AB70C58B0321F6304C8B0746F7A7F0DD41A4"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-123305-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\help-14.txt",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\help-14.txt",
           "sha256": "2334481B8BDCC37E2F07AF64F50C2925DBAD9CA4591B6D13938BE84A95E6FF8F"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-123305-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\help-15.txt",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\help-15.txt",
           "sha256": "22E57ED190DEDCE31986AD533E50E11D67F60B9234FB6DA8A77EC6E4EA60847A"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-123305-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\help-16.txt",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\help-16.txt",
           "sha256": "23051E25DE05092BD119D4FD2C4AD3831B93268225969CE4AE17E625A1B48F0E"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-123305-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\help-17.txt",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\help-17.txt",
           "sha256": "74B51A2FE4BC43473E89A398D634EBEDC4E7E451E541373C77CAA98E71A40A4F"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-123305-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\help-18.txt",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\help-18.txt",
           "sha256": "2E747A63F793A4F5F541DCE905E5AB1114F405916D781231A7144A06A6B59F4C"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-123305-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\help-19.txt",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\help-19.txt",
           "sha256": "FF0A00037E36B42858B6E939AB891D91076B54866B6B0B3A56215729384EFB2F"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-123305-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\help-20.txt",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\help-20.txt",
           "sha256": "542E24396C7A235A52DFE96462984DCF44DFA0484997DBBD0D1C37DA862CB7A1"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-123305-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\help-21.txt",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\help-21.txt",
           "sha256": "D9969FB6022272149FB62C9C03989767D55B8C6A3A836AD16EEB7B4B73981FB4"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-123305-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\help-22.txt",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\help-22.txt",
           "sha256": "FB43ED757DC3CA4E1F837BB79CE477EBFA9B49BD4A7834CD1F30D7BD86241052"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-123305-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\help-23.txt",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\help-23.txt",
           "sha256": "4950B3A85B3A9E575EC102356BFECBC9606EDEB22E8C0BF0EA24FD097CE75E2B"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-123305-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\help-24.txt",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\help-24.txt",
           "sha256": "126445B1D2B235CB556B832E44534C23479B355666EA0B9D71A29A347752CF2F"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-123305-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\help-25.txt",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\help-25.txt",
           "sha256": "D72ED48D7E3A17A51DD2E94A27C1AB70C58B0321F6304C8B0746F7A7F0DD41A4"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-123305-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\help-26.txt",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\help-26.txt",
           "sha256": "2334481B8BDCC37E2F07AF64F50C2925DBAD9CA4591B6D13938BE84A95E6FF8F"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-123305-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\help-27.txt",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\help-27.txt",
           "sha256": "22E57ED190DEDCE31986AD533E50E11D67F60B9234FB6DA8A77EC6E4EA60847A"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-123305-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\help-28.txt",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\help-28.txt",
           "sha256": "23051E25DE05092BD119D4FD2C4AD3831B93268225969CE4AE17E625A1B48F0E"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-123305-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\help-29.txt",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\help-29.txt",
           "sha256": "74B51A2FE4BC43473E89A398D634EBEDC4E7E451E541373C77CAA98E71A40A4F"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-123305-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\help-30.txt",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\help-30.txt",
           "sha256": "2E747A63F793A4F5F541DCE905E5AB1114F405916D781231A7144A06A6B59F4C"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-123305-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\help-31.txt",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\help-31.txt",
           "sha256": "FF0A00037E36B42858B6E939AB891D91076B54866B6B0B3A56215729384EFB2F"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-123305-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\help-32.txt",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\help-32.txt",
           "sha256": "542E24396C7A235A52DFE96462984DCF44DFA0484997DBBD0D1C37DA862CB7A1"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-123305-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\help-33.txt",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\help-33.txt",
           "sha256": "D9969FB6022272149FB62C9C03989767D55B8C6A3A836AD16EEB7B4B73981FB4"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-123305-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\help-34.txt",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\help-34.txt",
           "sha256": "FB43ED757DC3CA4E1F837BB79CE477EBFA9B49BD4A7834CD1F30D7BD86241052"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-123305-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\help-35.txt",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\help-35.txt",
           "sha256": "4950B3A85B3A9E575EC102356BFECBC9606EDEB22E8C0BF0EA24FD097CE75E2B"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-123305-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\help-36.txt",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\help-36.txt",
           "sha256": "126445B1D2B235CB556B832E44534C23479B355666EA0B9D71A29A347752CF2F"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-123305-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\help-37.txt",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\help-37.txt",
           "sha256": "D72ED48D7E3A17A51DD2E94A27C1AB70C58B0321F6304C8B0746F7A7F0DD41A4"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-123305-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\help-38.txt",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\help-38.txt",
           "sha256": "2334481B8BDCC37E2F07AF64F50C2925DBAD9CA4591B6D13938BE84A95E6FF8F"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-123305-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\help-39.txt",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\help-39.txt",
           "sha256": "22E57ED190DEDCE31986AD533E50E11D67F60B9234FB6DA8A77EC6E4EA60847A"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-123305-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\help-40.txt",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\help-40.txt",
           "sha256": "23051E25DE05092BD119D4FD2C4AD3831B93268225969CE4AE17E625A1B48F0E"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-123305-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\help-41.txt",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\help-41.txt",
           "sha256": "74B51A2FE4BC43473E89A398D634EBEDC4E7E451E541373C77CAA98E71A40A4F"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-123305-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\help-42.txt",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\help-42.txt",
           "sha256": "2E747A63F793A4F5F541DCE905E5AB1114F405916D781231A7144A06A6B59F4C"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-123305-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\help-43.txt",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\help-43.txt",
           "sha256": "FF0A00037E36B42858B6E939AB891D91076B54866B6B0B3A56215729384EFB2F"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-123305-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\help-44.txt",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\help-44.txt",
           "sha256": "542E24396C7A235A52DFE96462984DCF44DFA0484997DBBD0D1C37DA862CB7A1"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-123305-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\help-45.txt",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\help-45.txt",
           "sha256": "D9969FB6022272149FB62C9C03989767D55B8C6A3A836AD16EEB7B4B73981FB4"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-123305-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\help-46.txt",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\help-46.txt",
           "sha256": "FB43ED757DC3CA4E1F837BB79CE477EBFA9B49BD4A7834CD1F30D7BD86241052"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-123305-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\help-47.txt",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\help-47.txt",
           "sha256": "4950B3A85B3A9E575EC102356BFECBC9606EDEB22E8C0BF0EA24FD097CE75E2B"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-123305-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\help-48.txt",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\help-48.txt",
           "sha256": "A667772E1313C004378BDA282CB45DC365E631922E77BDED2E0077D2D766169A"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-123305-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\help-49.txt",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\help-49.txt",
           "sha256": "6CE922A12F07E850B0451FE5F67112EE6E42A90A7FFD43A9981A819246197C65"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-123305-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\help-50.txt",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\help-50.txt",
           "sha256": "9F90AAFB54D87D0BDE74E02D913E6768C3CAB4E237C91B38C54134E0970A1052"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-123305-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\help-51.txt",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\help-51.txt",
           "sha256": "E650D95D086F47445B8D5B69D2F082CDDF8917B5236C174A012FD60917EABE9F"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-123305-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\help-52.txt",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\help-52.txt",
           "sha256": "AD676BB117C96EFF112C2F02A45B51BED472235542D400A7CB913A4FE41D2015"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-123305-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\help-53.txt",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\help-53.txt",
           "sha256": "34214F9C2FC00595606B4DBC72811DED525AE9824309547B15CE0687D07927C2"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-123305-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\proofs.log",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\proofs.log",
           "sha256": "0EB9E8ACEC5731DEE0548CA30042B105F393944FAF4C27E2A615713C2BD9B6AC"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-123305-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\comparisons.json",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\comparisons.json",
           "sha256": "438B1E58F64F27BE608D75C3720CC2A81A78A82C510EE272CAB3324306F3652B"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-123305-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\executed\\FamilyQuant.Core_HelpContent.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\executed\\FamilyQuant.Core_HelpContent.cs",
           "sha256": "7FB07E60C4C75E69FB42F94FF0DF36563FB3BF474753543E53C857AA4A1CA086"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-123305-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\executed\\FamilyQuant_ClusterGenerationControl.xaml",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\executed\\FamilyQuant_ClusterGenerationControl.xaml",
           "sha256": "6933BE6F025D5150BAE4D3F893420C29024764B838A522722D257D525376276F"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-123305-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\executed\\FamilyQuant_CurationQuantitationPanel.xaml",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\executed\\FamilyQuant_CurationQuantitationPanel.xaml",
           "sha256": "0888694E19AD785E8D3EE32CC9BC45E12893F81B7C7C9BEADC34FF5B7029E8ED"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-123305-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\executed\\FamilyQuant_DeNovoControl.xaml",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\executed\\FamilyQuant_DeNovoControl.xaml",
           "sha256": "4782956D87A77EB08ECC8C5E574479F33E11F4BBCF3058BEBBF6ED7CF815BA4A"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-123305-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\executed\\FamilyQuant_DeNovoFilterControl.xaml",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\executed\\FamilyQuant_DeNovoFilterControl.xaml",
           "sha256": "C5F5FD8218E9862B6C3279B39686CBB8E287F809D11483BF4B20BD9EF6381E41"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-123305-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\executed\\FamilyQuant_HomeControl.xaml",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\executed\\FamilyQuant_HomeControl.xaml",
           "sha256": "418C26820B6D043B994FB3730DB44E933A93BD5023B9C25D29A69953F45A3E6D"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-123305-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\executed\\FamilyQuant_MainWindow.xaml",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\executed\\FamilyQuant_MainWindow.xaml",
           "sha256": "422DE48434233AA62B67BF4F37326A8F66C6C2771A45A828E40318E09A1806C5"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-123305-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\executed\\FamilyQuant_QuantifyControl.xaml",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\executed\\FamilyQuant_QuantifyControl.xaml",
           "sha256": "CEB8BFAF859F87F593628CD55D74C90869AABE22C0A098BB2D00D01F70DBC64C"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-123305-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\executed\\FamilyQuant_USearch.xaml",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\executed\\FamilyQuant_USearch.xaml",
           "sha256": "CFCD12EC58A094D0B5C3D8FE9CA0D07FB442F6DCFB5480F299D786E839BE0202"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-123305-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\executed\\FamilyQuant_TextReportWindow.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\executed\\FamilyQuant_TextReportWindow.cs",
           "sha256": "275E35B236EEC4C43FB54B6CC049E5C5E62A1767176D6F6410A3D69421106F96"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-123305-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\executed\\FamilyQuant_SecondaryWindowView.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\executed\\FamilyQuant_SecondaryWindowView.cs",
           "sha256": "5DDABCDF5F47F3CBCC271B0F04EB20CE51BA12353DD117C1A3EDE8684A742CDE"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-123305-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\executed\\FamilyQuant_ClusterGenerationControl.xaml.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\executed\\FamilyQuant_ClusterGenerationControl.xaml.cs",
           "sha256": "FC475D8417A728CC61528A1F8C49C467B1612D6C6E11462AA731A9284BFBCC48"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-123305-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\executed\\FamilyQuant_DeNovoControl.xaml.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\executed\\FamilyQuant_DeNovoControl.xaml.cs",
           "sha256": "4BB5BDADAE2498ADD500A9A5DBBE93748A1D7F8707950CD749EF0F3BD6B770A1"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-123305-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\executed\\FamilyQuant.Tests_Program.LookCopyReceipts.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\executed\\FamilyQuant.Tests_Program.LookCopyReceipts.cs",
           "sha256": "D07053DC0BC32DAB1496927D6F02B7A646411D4E7F78E68C28B01F9CABF4A5AE"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-123305-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\executed\\FamilyQuant.Tests_Program.LookCopyPreservation.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\executed\\FamilyQuant.Tests_Program.LookCopyPreservation.cs",
           "sha256": "7766CE167024DA05453F9728B01E06B04C92B554E9D29436244C808A856496FE"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-123305-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\executed\\FamilyQuant.Tests_LedgerPublishedCopyComparison.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\executed\\FamilyQuant.Tests_LedgerPublishedCopyComparison.cs",
           "sha256": "499C211615F1A4DB5C7F795FAB0DFE9C3306D5F04F51B487934A41AB7FFD1385"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-123305-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\executed\\FamilyQuant.Tests_LedgerMemberFactComparison.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\executed\\FamilyQuant.Tests_LedgerMemberFactComparison.cs",
           "sha256": "1F3254D635B40D22576E9F40347DBEB503A5FF661EFC18E743EAC35B097FC14C"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-123305-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\executed\\FamilyQuant.Tests_LedgerDeclarationComparison.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\executed\\FamilyQuant.Tests_LedgerDeclarationComparison.cs",
           "sha256": "78EC993565740269D572410A84584AF1D96488C1AE81F2455B1D9AA2D94BB4C3"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-123305-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\executed\\FamilyQuant.Tests_Program.Commands.LookLedger.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\executed\\FamilyQuant.Tests_Program.Commands.LookLedger.cs",
           "sha256": "720C18B4EFB51512A4DF2EEB3E25DFD58C9029105886C20E6072F27FD3396992"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-123305-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\executed\\FamilyQuant.Tests.dll",
-          "sha256": "8E553822814AE1B1F76A5F46D532D95C0C938EB96408A3C611FB8376A1136DEF"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\executed\\FamilyQuant.Tests.dll",
+          "sha256": "338CB1ED8EE1B52F92368A79B99A6C1D2789A40AE07801AAB7226AA8B8A528A4"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-123305-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\executed\\FamilyQuant2.dll",
-          "sha256": "E19C7BC2C7AB6A65D911A0918A17C9EACB7E65C506D0930D9144470494640DED"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\executed\\FamilyQuant2.dll",
+          "sha256": "C0FF8144D05014240713CC94900258E162FF2B6F51DB01CA13758C4E0BD9784D"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-123305-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\executed\\FamilyQuant.Core.dll",
-          "sha256": "52B70916AF4F6DB9AE6C949F0184D99A9F3E4196741F550AA568B3407E47B21F"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\executed\\FamilyQuant.Core.dll",
+          "sha256": "B3DE904BB50477ACCB982BDE2CE437BA6962BB1DA44E7D260B992D1E188837BC"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-123305-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\executed\\LK-copy-next-2.json",
-          "sha256": "9A8B74A94AAAD00D9180FC573720F0CAC14C50782172BB2045E367A2D80FF28A"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\executed\\LK-copy-next-2.json",
+          "sha256": "97DE7DF67D368BF14C3B6914816D88EBD3F022712A217D26E53A8AD7AF4A3AF5"
         }
       ],
       "workingDirectory": "C:\\FamilyQuant-gate"
@@ -5393,7 +5393,7 @@
           "kind": "test",
           "target": "LookCopyReceiptCommand",
           "assertion": "LK copy kind help fact / published-help: every listed comparison retains its scoped published fact or exact declaration",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-123305-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\proofs.log",
           "inspectedBy": ""
         }
       ]
@@ -5407,7 +5407,7 @@
           "kind": "test",
           "target": "LookCopyReceiptCommand",
           "assertion": "LK copy kind tooltip / tooltip-declaration: every listed comparison retains its scoped published fact or exact declaration",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-123305-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-next-2\\proofs.log",
           "inspectedBy": ""
         }
       ]

@@ -5,16 +5,16 @@
   "runs": [
     {
       "id": "core-members",
-      "command": "C:\\FamilyQuant-wt2\\results\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --ledger-core-relocation D:/FamilyQuant-data/out-floater/ledger/frozen-source D:/FamilyQuant-data/out-results/B7-2/core-x7 X7 \u00222026-11-02 03:36:42 -0800\u0022 D:/FamilyQuant-data/out-floater/ledger/X7-reviewed-relocations.json",
-      "executedAt": "2026-11-02 03:36:42 -0800",
-      "commit": "bef66db3951f2a77cb8a64c4aaeaa4f9f9e3989f",
+      "command": "C:\\FamilyQuant-gate\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --ledger-core-relocation D:/FamilyQuant-data/out-floater/ledger/frozen-source D:/FamilyQuant-data/out-refresh\\20261102-130357-FamilyQuant-gate\\core-relocation-x7 X7 \u00222026-11-02 13:04:57 -0800\u0022 D:/FamilyQuant-data/out-floater/ledger/X7-reviewed-relocations.json",
+      "executedAt": "2026-11-02 13:04:57 -0800",
+      "commit": "d3b71621ce6198f63f586cf062567a18103f9e72",
       "artifacts": [
         {
-          "path": "D:\\FamilyQuant-data\\out-results\\B7-2\\core-x7\\comparisons.log",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\core-relocation-x7\\comparisons.log",
           "sha256": "459A3E3FE822636AB311480D8241C5EEA6D54A8C22E776B8473B088B00853837"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-results\\B7-2\\core-x7\\comparisons.json",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\core-relocation-x7\\comparisons.json",
           "sha256": "CAA0B86E37FA5EEF15E1898EF2DACDCA959AED8F0A7AC48E96C5863D421858FA"
         },
         {
@@ -22,75 +22,75 @@
           "sha256": "B4CC366305F5DA2E471C22BEC0F4E939274577A1DAB992CF719967C6F01E9ECF"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-results\\B7-2\\core-x7\\executed\\FamilyQuant.Core/ProjectStore.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\core-relocation-x7\\executed\\FamilyQuant.Core/ProjectStore.cs",
           "sha256": "CF34F9F920078064A0F94CA8C3F1021ABFD2D1D6229A69C15E75C9ED899E8949"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-results\\B7-2\\core-x7\\executed\\FamilyQuant.Core/Storage/DerivedRunFraction.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\core-relocation-x7\\executed\\FamilyQuant.Core/Storage/DerivedRunFraction.cs",
           "sha256": "DB943BF669B6E133E4359C2FABF73502C482052C94E0694F5AC3BD6BF87E68F3"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-results\\B7-2\\core-x7\\executed\\FamilyQuant.Core/Storage/ProjectArchiveEntries.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\core-relocation-x7\\executed\\FamilyQuant.Core/Storage/ProjectArchiveEntries.cs",
           "sha256": "E6F5E379CA8B22948A63F9E8955AF7B5727E9963DA17C8637865504F8B31739C"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-results\\B7-2\\core-x7\\executed\\FamilyQuant.Core/Storage/ProjectFileSchema.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\core-relocation-x7\\executed\\FamilyQuant.Core/Storage/ProjectFileSchema.cs",
           "sha256": "CA83EE0B4B17D735F0C59EBDA615432F09856F7999CF885E40EBBC6173ED492B"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-results\\B7-2\\core-x7\\executed\\FamilyQuant.Core/Storage/ProjectManifestCodec.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\core-relocation-x7\\executed\\FamilyQuant.Core/Storage/ProjectManifestCodec.cs",
           "sha256": "CB22639FA210E2838BD5F760C071E23AF0A74E49291479D8EEC9997AB9D7FE55"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-results\\B7-2\\core-x7\\executed\\FamilyQuant.Core/Storage/ProjectQuantCodec.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\core-relocation-x7\\executed\\FamilyQuant.Core/Storage/ProjectQuantCodec.cs",
           "sha256": "A5097760D179973DCC6D29CEAA10208254C0B925D67E691F650B62A6BC97F1EC"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-results\\B7-2\\core-x7\\executed\\FamilyQuant.Core/Storage/ProjectSpectrumCodec.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\core-relocation-x7\\executed\\FamilyQuant.Core/Storage/ProjectSpectrumCodec.cs",
           "sha256": "5DC87F85CB5719C9B38FD3262909E9D764CA9251D263DDE77B7199A0448356C5"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-results\\B7-2\\core-x7\\executed\\FamilyQuant.Core/Storage/QuantManifest.cs",
-          "sha256": "14FD6DCB68E55BA89C8518DE71D1F23BAD4A48642E55CC274B038E6D7140AE98"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\core-relocation-x7\\executed\\FamilyQuant.Core/Storage/QuantManifest.cs",
+          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-results\\B7-2\\core-x7\\executed\\FamilyQuant.Core/Storage/QuantRow.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\core-relocation-x7\\executed\\FamilyQuant.Core/Storage/QuantRow.cs",
           "sha256": "7C8F6076F895F8935C09E72A8B12C79AB42886CA35F9132E026F77CE3DF307F1"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-results\\B7-2\\core-x7\\executed\\FamilyQuant.Tests/FeatureLedgerEvidence.Reporting.cs",
-          "sha256": "8633DCBB14E8DBF1746A1FD771AD4E9404900EB68BA46690A31EFC8DEDFA247B"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\core-relocation-x7\\executed\\FamilyQuant.Tests/FeatureLedgerEvidence.Reporting.cs",
+          "sha256": "E9A4F3A2A671452283E1C28E155B81DEF97F9BAE907945607C1F16DD0078CC12"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-results\\B7-2\\core-x7\\executed\\FamilyQuant.Tests/FeatureLedgerEvidence.cs",
-          "sha256": "FCCFCE75E122616388FDD68B96AF3E3F7104DC809B61D1F48C3A4A07B9B1969C"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\core-relocation-x7\\executed\\FamilyQuant.Tests/FeatureLedgerEvidence.cs",
+          "sha256": "2060D409570285CEAE8FA6ADF3F4A5173924C80C2A6A99B1856294055365174C"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-results\\B7-2\\core-x7\\executed\\FamilyQuant.Tests/LedgerMemberFactComparison.cs",
-          "sha256": "ECC25B1F5FE7A455C64C1C5ED21730BCAB6E7C1A726297E458957F70EC52FF6E"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\core-relocation-x7\\executed\\FamilyQuant.Tests/LedgerMemberFactComparison.cs",
+          "sha256": "1F3254D635B40D22576E9F40347DBEB503A5FF661EFC18E743EAC35B097FC14C"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-results\\B7-2\\core-x7\\executed\\FamilyQuant.Tests/Program.Commands.CoreRelocation.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\core-relocation-x7\\executed\\FamilyQuant.Tests/Program.Commands.CoreRelocation.cs",
           "sha256": "632EA73117DFE589F8F209110D91A1431BCC97BFC7CA5BD009C60AE550725361"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-results\\B7-2\\core-x7\\executed\\FamilyQuant.Tests/Program.CoreRelocation.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\core-relocation-x7\\executed\\FamilyQuant.Tests/Program.CoreRelocation.cs",
           "sha256": "2CECC1BACB96EA489AFD3ED5EFD72373A762B6F08452048E6F4FC449B87E1367"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-results\\B7-2\\core-x7\\executed\\frozen\\FamilyQuant/ProjectStore.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\core-relocation-x7\\executed\\frozen\\FamilyQuant/ProjectStore.cs",
           "sha256": "EC6F2C8603FDA27EB38ABA61686DD9CAA89B48968921925B83579F15A981DCA4"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-results\\B7-2\\core-x7\\executed\\FamilyQuant.Tests.dll",
-          "sha256": "C0708ECD79DECA7E34C1E33ECF8356757C8F43F5A9F37D717F2F4AFC020B76B2"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\core-relocation-x7\\executed\\FamilyQuant.Tests.dll",
+          "sha256": "338CB1ED8EE1B52F92368A79B99A6C1D2789A40AE07801AAB7226AA8B8A528A4"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-results\\B7-2\\core-x7\\executed\\FamilyQuant.Core.dll",
-          "sha256": "E0A93AB8C91C8EDD992583C5D919183C4BAC0D5FD06E8B21CECB2DF9EBA0BE3C"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\core-relocation-x7\\executed\\FamilyQuant.Core.dll",
+          "sha256": "B3DE904BB50477ACCB982BDE2CE437BA6962BB1DA44E7D260B992D1E188837BC"
         }
       ],
-      "workingDirectory": "C:\\FamilyQuant-wt2\\results"
+      "workingDirectory": "C:\\FamilyQuant-gate"
     }
   ],
   "rows": [
@@ -98,7 +98,7 @@
       "observationId": "FQ15-029B105F6856",
       "implementation": [],
       "proofs": [],
-      "note": "The exact literal multiplicity within the containing member changed.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -106,7 +106,7 @@
       "observationId": "FQ15-02FF78469D24",
       "implementation": [],
       "proofs": [],
-      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -114,7 +114,7 @@
       "observationId": "FQ15-060C197B2218",
       "implementation": [],
       "proofs": [],
-      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -124,7 +124,7 @@
         {
           "path": "FamilyQuant.Core/Storage/QuantManifest.cs",
           "symbol": "FamilyQuant.QuantManifest::public static Dictionary \u003C string , string \u003E DefaultProvenance ( )",
-          "sha256": "14FD6DCB68E55BA89C8518DE71D1F23BAD4A48642E55CC274B038E6D7140AE98"
+          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
         }
       ],
       "proofs": [],
@@ -136,7 +136,7 @@
       "observationId": "FQ15-0AB5206F94D3",
       "implementation": [],
       "proofs": [],
-      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -144,7 +144,7 @@
       "observationId": "FQ15-0BBAE8258341",
       "implementation": [],
       "proofs": [],
-      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -160,7 +160,7 @@
       "observationId": "FQ15-100DCCDBA61E",
       "implementation": [],
       "proofs": [],
-      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -168,7 +168,7 @@
       "observationId": "FQ15-106017DA66A2",
       "implementation": [],
       "proofs": [],
-      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -176,7 +176,7 @@
       "observationId": "FQ15-119CCB1BBC13",
       "implementation": [],
       "proofs": [],
-      "note": "The exact literal multiplicity within the containing member changed.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -184,7 +184,7 @@
       "observationId": "FQ15-12362AA6CA44",
       "implementation": [],
       "proofs": [],
-      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -200,7 +200,7 @@
       "observationId": "FQ15-16E8336412EC",
       "implementation": [],
       "proofs": [],
-      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -208,7 +208,7 @@
       "observationId": "FQ15-1978D68EB128",
       "implementation": [],
       "proofs": [],
-      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -216,7 +216,7 @@
       "observationId": "FQ15-1AAF7752845C",
       "implementation": [],
       "proofs": [],
-      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -224,7 +224,7 @@
       "observationId": "FQ15-1CEC4A73D52E",
       "implementation": [],
       "proofs": [],
-      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -234,7 +234,7 @@
         {
           "path": "FamilyQuant.Core/Storage/QuantManifest.cs",
           "symbol": "FamilyQuant.QuantManifest::public static Dictionary \u003C string , string \u003E DefaultProvenance ( )",
-          "sha256": "14FD6DCB68E55BA89C8518DE71D1F23BAD4A48642E55CC274B038E6D7140AE98"
+          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
         }
       ],
       "proofs": [],
@@ -246,7 +246,7 @@
       "observationId": "FQ15-1E795CD8C8EE",
       "implementation": [],
       "proofs": [],
-      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -262,7 +262,7 @@
       "observationId": "FQ15-24E5917D865F",
       "implementation": [],
       "proofs": [],
-      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -270,7 +270,7 @@
       "observationId": "FQ15-2A3D33C2CF57",
       "implementation": [],
       "proofs": [],
-      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -278,7 +278,7 @@
       "observationId": "FQ15-2EA3E4EF1D87",
       "implementation": [],
       "proofs": [],
-      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -286,7 +286,7 @@
       "observationId": "FQ15-337972828174",
       "implementation": [],
       "proofs": [],
-      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -294,7 +294,7 @@
       "observationId": "FQ15-3470ABF1B9A4",
       "implementation": [],
       "proofs": [],
-      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -302,7 +302,7 @@
       "observationId": "FQ15-361758343572",
       "implementation": [],
       "proofs": [],
-      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -310,7 +310,7 @@
       "observationId": "FQ15-36D968AEE3CE",
       "implementation": [],
       "proofs": [],
-      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -318,7 +318,7 @@
       "observationId": "FQ15-38482A968DDF",
       "implementation": [],
       "proofs": [],
-      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -326,7 +326,7 @@
       "observationId": "FQ15-390F986674E5",
       "implementation": [],
       "proofs": [],
-      "note": "The exact literal multiplicity within the containing member changed.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -336,7 +336,7 @@
         {
           "path": "FamilyQuant.Core/Storage/QuantManifest.cs",
           "symbol": "FamilyQuant.QuantManifest::public static Dictionary \u003C string , string \u003E DefaultProvenance ( )",
-          "sha256": "14FD6DCB68E55BA89C8518DE71D1F23BAD4A48642E55CC274B038E6D7140AE98"
+          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
         }
       ],
       "proofs": [],
@@ -348,7 +348,7 @@
       "observationId": "FQ15-3B98DF17339E",
       "implementation": [],
       "proofs": [],
-      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -364,7 +364,7 @@
       "observationId": "FQ15-417C196AACD0",
       "implementation": [],
       "proofs": [],
-      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -372,7 +372,7 @@
       "observationId": "FQ15-44434E3176D9",
       "implementation": [],
       "proofs": [],
-      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -380,7 +380,7 @@
       "observationId": "FQ15-449F0617966A",
       "implementation": [],
       "proofs": [],
-      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -388,7 +388,7 @@
       "observationId": "FQ15-46CB6F7608C3",
       "implementation": [],
       "proofs": [],
-      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -398,7 +398,7 @@
         {
           "path": "FamilyQuant.Core/Storage/QuantManifest.cs",
           "symbol": "FamilyQuant.QuantManifest::public static Dictionary \u003C string , string \u003E DefaultProvenance ( )",
-          "sha256": "14FD6DCB68E55BA89C8518DE71D1F23BAD4A48642E55CC274B038E6D7140AE98"
+          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
         }
       ],
       "proofs": [],
@@ -410,7 +410,7 @@
       "observationId": "FQ15-489648269F6C",
       "implementation": [],
       "proofs": [],
-      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -418,7 +418,7 @@
       "observationId": "FQ15-4977BCB41D11",
       "implementation": [],
       "proofs": [],
-      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -428,7 +428,7 @@
         {
           "path": "FamilyQuant.Core/Storage/QuantManifest.cs",
           "symbol": "FamilyQuant.QuantManifest::public static Dictionary \u003C string , string \u003E DefaultProvenance ( )",
-          "sha256": "14FD6DCB68E55BA89C8518DE71D1F23BAD4A48642E55CC274B038E6D7140AE98"
+          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
         }
       ],
       "proofs": [],
@@ -440,7 +440,7 @@
       "observationId": "FQ15-4DDEEB60D558",
       "implementation": [],
       "proofs": [],
-      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -450,7 +450,7 @@
         {
           "path": "FamilyQuant.Core/Storage/QuantManifest.cs",
           "symbol": "FamilyQuant.QuantManifest::public static Dictionary \u003C string , string \u003E DefaultProvenance ( )",
-          "sha256": "14FD6DCB68E55BA89C8518DE71D1F23BAD4A48642E55CC274B038E6D7140AE98"
+          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
         }
       ],
       "proofs": [],
@@ -464,7 +464,7 @@
         {
           "path": "FamilyQuant.Core/Storage/QuantManifest.cs",
           "symbol": "FamilyQuant.QuantManifest::public static Dictionary \u003C string , string \u003E DefaultProvenance ( )",
-          "sha256": "14FD6DCB68E55BA89C8518DE71D1F23BAD4A48642E55CC274B038E6D7140AE98"
+          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
         }
       ],
       "proofs": [],
@@ -476,7 +476,7 @@
       "observationId": "FQ15-5281F748E4AE",
       "implementation": [],
       "proofs": [],
-      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -486,7 +486,7 @@
         {
           "path": "FamilyQuant.Core/Storage/QuantManifest.cs",
           "symbol": "FamilyQuant.QuantManifest::public static Dictionary \u003C string , string \u003E DefaultProvenance ( )",
-          "sha256": "14FD6DCB68E55BA89C8518DE71D1F23BAD4A48642E55CC274B038E6D7140AE98"
+          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
         }
       ],
       "proofs": [],
@@ -498,7 +498,7 @@
       "observationId": "FQ15-564D92935A49",
       "implementation": [],
       "proofs": [],
-      "note": "The exact literal multiplicity within the containing member changed.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -506,7 +506,7 @@
       "observationId": "FQ15-579497562F21",
       "implementation": [],
       "proofs": [],
-      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -514,7 +514,7 @@
       "observationId": "FQ15-57F8D85DA5CB",
       "implementation": [],
       "proofs": [],
-      "note": "The exact literal multiplicity within the containing member changed.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -522,7 +522,7 @@
       "observationId": "FQ15-5BFE7DBB8806",
       "implementation": [],
       "proofs": [],
-      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -530,7 +530,7 @@
       "observationId": "FQ15-5E1C8237F1BF",
       "implementation": [],
       "proofs": [],
-      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -538,7 +538,7 @@
       "observationId": "FQ15-5F3574518383",
       "implementation": [],
       "proofs": [],
-      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -554,7 +554,7 @@
       "observationId": "FQ15-634074ADF222",
       "implementation": [],
       "proofs": [],
-      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -562,7 +562,7 @@
       "observationId": "FQ15-63A86C3B8020",
       "implementation": [],
       "proofs": [],
-      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -570,7 +570,7 @@
       "observationId": "FQ15-66F1A246432D",
       "implementation": [],
       "proofs": [],
-      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -580,7 +580,7 @@
         {
           "path": "FamilyQuant.Core/Storage/QuantManifest.cs",
           "symbol": "FamilyQuant.QuantManifest::public static Dictionary \u003C string , string \u003E DefaultProvenance ( )",
-          "sha256": "14FD6DCB68E55BA89C8518DE71D1F23BAD4A48642E55CC274B038E6D7140AE98"
+          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
         }
       ],
       "proofs": [],
@@ -622,7 +622,7 @@
       "observationId": "FQ15-6D31B5C68055",
       "implementation": [],
       "proofs": [],
-      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -630,7 +630,7 @@
       "observationId": "FQ15-75B92B0128A3",
       "implementation": [],
       "proofs": [],
-      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -646,7 +646,7 @@
       "observationId": "FQ15-7CD9F04BB558",
       "implementation": [],
       "proofs": [],
-      "note": "The exact literal multiplicity within the containing member changed.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -656,7 +656,7 @@
         {
           "path": "FamilyQuant.Core/Storage/QuantManifest.cs",
           "symbol": "FamilyQuant.QuantManifest::public static Dictionary \u003C string , string \u003E DefaultProvenance ( )",
-          "sha256": "14FD6DCB68E55BA89C8518DE71D1F23BAD4A48642E55CC274B038E6D7140AE98"
+          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
         }
       ],
       "proofs": [],
@@ -676,7 +676,7 @@
       "observationId": "FQ15-7FAD12DD7C58",
       "implementation": [],
       "proofs": [],
-      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -684,7 +684,7 @@
       "observationId": "FQ15-850B3A088C9A",
       "implementation": [],
       "proofs": [],
-      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -692,7 +692,7 @@
       "observationId": "FQ15-8F5236BA1CCA",
       "implementation": [],
       "proofs": [],
-      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -710,7 +710,7 @@
         {
           "path": "FamilyQuant.Core/Storage/QuantManifest.cs",
           "symbol": "FamilyQuant.QuantManifest::public static Dictionary \u003C string , string \u003E DefaultProvenance ( )",
-          "sha256": "14FD6DCB68E55BA89C8518DE71D1F23BAD4A48642E55CC274B038E6D7140AE98"
+          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
         }
       ],
       "proofs": [],
@@ -722,7 +722,7 @@
       "observationId": "FQ15-921AACC47484",
       "implementation": [],
       "proofs": [],
-      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -738,7 +738,7 @@
       "observationId": "FQ15-954F379760B1",
       "implementation": [],
       "proofs": [],
-      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -746,7 +746,7 @@
       "observationId": "FQ15-959631689015",
       "implementation": [],
       "proofs": [],
-      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -754,7 +754,7 @@
       "observationId": "FQ15-95AFABC5118B",
       "implementation": [],
       "proofs": [],
-      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -772,7 +772,7 @@
         {
           "path": "FamilyQuant.Core/Storage/QuantManifest.cs",
           "symbol": "FamilyQuant.QuantManifest::public static Dictionary \u003C string , string \u003E DefaultProvenance ( )",
-          "sha256": "14FD6DCB68E55BA89C8518DE71D1F23BAD4A48642E55CC274B038E6D7140AE98"
+          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
         }
       ],
       "proofs": [],
@@ -818,7 +818,7 @@
         {
           "path": "FamilyQuant.Core/Storage/QuantManifest.cs",
           "symbol": "FamilyQuant.QuantManifest::public static Dictionary \u003C string , string \u003E DefaultProvenance ( )",
-          "sha256": "14FD6DCB68E55BA89C8518DE71D1F23BAD4A48642E55CC274B038E6D7140AE98"
+          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
         }
       ],
       "proofs": [],
@@ -838,7 +838,7 @@
       "observationId": "FQ15-A0838DF41304",
       "implementation": [],
       "proofs": [],
-      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -846,7 +846,7 @@
       "observationId": "FQ15-A105F466A9CD",
       "implementation": [],
       "proofs": [],
-      "note": "The exact literal multiplicity within the containing member changed.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -856,7 +856,7 @@
         {
           "path": "FamilyQuant.Core/Storage/QuantManifest.cs",
           "symbol": "FamilyQuant.QuantManifest::public static Dictionary \u003C string , string \u003E DefaultProvenance ( )",
-          "sha256": "14FD6DCB68E55BA89C8518DE71D1F23BAD4A48642E55CC274B038E6D7140AE98"
+          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
         }
       ],
       "proofs": [],
@@ -868,7 +868,7 @@
       "observationId": "FQ15-A3B14FAEA8E8",
       "implementation": [],
       "proofs": [],
-      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -876,7 +876,7 @@
       "observationId": "FQ15-A40FDDAEE1CF",
       "implementation": [],
       "proofs": [],
-      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -884,7 +884,7 @@
       "observationId": "FQ15-A56641C76D11",
       "implementation": [],
       "proofs": [],
-      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -892,7 +892,7 @@
       "observationId": "FQ15-A7E3E21C8FD3",
       "implementation": [],
       "proofs": [],
-      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -900,7 +900,7 @@
       "observationId": "FQ15-A83E0CE728C5",
       "implementation": [],
       "proofs": [],
-      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -908,7 +908,7 @@
       "observationId": "FQ15-B0EB223573F7",
       "implementation": [],
       "proofs": [],
-      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -924,7 +924,7 @@
       "observationId": "FQ15-B41B7AB910B7",
       "implementation": [],
       "proofs": [],
-      "note": "The exact literal multiplicity within the containing member changed.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -932,7 +932,7 @@
       "observationId": "FQ15-B740395FE757",
       "implementation": [],
       "proofs": [],
-      "note": "The exact literal multiplicity within the containing member changed.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -940,7 +940,7 @@
       "observationId": "FQ15-B9A2B81609E8",
       "implementation": [],
       "proofs": [],
-      "note": "The exact literal multiplicity within the containing member changed.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -950,7 +950,7 @@
         {
           "path": "FamilyQuant.Core/Storage/QuantManifest.cs",
           "symbol": "FamilyQuant.QuantManifest::public static Dictionary \u003C string , string \u003E DefaultProvenance ( )",
-          "sha256": "14FD6DCB68E55BA89C8518DE71D1F23BAD4A48642E55CC274B038E6D7140AE98"
+          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
         }
       ],
       "proofs": [],
@@ -962,7 +962,7 @@
       "observationId": "FQ15-BB77721FB67D",
       "implementation": [],
       "proofs": [],
-      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -978,7 +978,7 @@
       "observationId": "FQ15-BD9A760CADD6",
       "implementation": [],
       "proofs": [],
-      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -986,7 +986,7 @@
       "observationId": "FQ15-BEA77AA30D0F",
       "implementation": [],
       "proofs": [],
-      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -994,7 +994,7 @@
       "observationId": "FQ15-C0CFC4F3C3DA",
       "implementation": [],
       "proofs": [],
-      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -1010,7 +1010,7 @@
       "observationId": "FQ15-C3B997CFE299",
       "implementation": [],
       "proofs": [],
-      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -1018,7 +1018,7 @@
       "observationId": "FQ15-C68AF367E588",
       "implementation": [],
       "proofs": [],
-      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -1034,7 +1034,7 @@
       "observationId": "FQ15-CAECA810C975",
       "implementation": [],
       "proofs": [],
-      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -1042,7 +1042,7 @@
       "observationId": "FQ15-CECEF4AD4D7B",
       "implementation": [],
       "proofs": [],
-      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -1050,7 +1050,7 @@
       "observationId": "FQ15-D0180B9F9B3D",
       "implementation": [],
       "proofs": [],
-      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -1060,7 +1060,7 @@
         {
           "path": "FamilyQuant.Core/Storage/QuantManifest.cs",
           "symbol": "FamilyQuant.QuantManifest::public static Dictionary \u003C string , string \u003E DefaultProvenance ( )",
-          "sha256": "14FD6DCB68E55BA89C8518DE71D1F23BAD4A48642E55CC274B038E6D7140AE98"
+          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
         }
       ],
       "proofs": [],
@@ -1072,7 +1072,7 @@
       "observationId": "FQ15-D2D71ADCCAE2",
       "implementation": [],
       "proofs": [],
-      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -1088,7 +1088,7 @@
       "observationId": "FQ15-D64911808F78",
       "implementation": [],
       "proofs": [],
-      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -1096,7 +1096,7 @@
       "observationId": "FQ15-D75945E29CF9",
       "implementation": [],
       "proofs": [],
-      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -1104,7 +1104,7 @@
       "observationId": "FQ15-D7946E4CE762",
       "implementation": [],
       "proofs": [],
-      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -1112,7 +1112,7 @@
       "observationId": "FQ15-DB5CE7330697",
       "implementation": [],
       "proofs": [],
-      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -1122,7 +1122,7 @@
         {
           "path": "FamilyQuant.Core/Storage/QuantManifest.cs",
           "symbol": "FamilyQuant.QuantManifest::public static Dictionary \u003C string , string \u003E DefaultProvenance ( )",
-          "sha256": "14FD6DCB68E55BA89C8518DE71D1F23BAD4A48642E55CC274B038E6D7140AE98"
+          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
         }
       ],
       "proofs": [],
@@ -1134,7 +1134,7 @@
       "observationId": "FQ15-E109CD077B06",
       "implementation": [],
       "proofs": [],
-      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -1144,7 +1144,7 @@
         {
           "path": "FamilyQuant.Core/Storage/QuantManifest.cs",
           "symbol": "FamilyQuant.QuantManifest::public static Dictionary \u003C string , string \u003E DefaultProvenance ( )",
-          "sha256": "14FD6DCB68E55BA89C8518DE71D1F23BAD4A48642E55CC274B038E6D7140AE98"
+          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
         }
       ],
       "proofs": [],
@@ -1156,7 +1156,7 @@
       "observationId": "FQ15-E1C839E36E6D",
       "implementation": [],
       "proofs": [],
-      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -1164,7 +1164,7 @@
       "observationId": "FQ15-E2025753B5DD",
       "implementation": [],
       "proofs": [],
-      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -1172,7 +1172,7 @@
       "observationId": "FQ15-E3B6BA04B462",
       "implementation": [],
       "proofs": [],
-      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -1180,7 +1180,7 @@
       "observationId": "FQ15-E6854EDE9409",
       "implementation": [],
       "proofs": [],
-      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -1188,7 +1188,7 @@
       "observationId": "FQ15-E7C1F3879F57",
       "implementation": [],
       "proofs": [],
-      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -1196,7 +1196,7 @@
       "observationId": "FQ15-E9AE069E2D57",
       "implementation": [],
       "proofs": [],
-      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -1212,7 +1212,7 @@
       "observationId": "FQ15-ED7B1FDDC2FA",
       "implementation": [],
       "proofs": [],
-      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -1222,7 +1222,7 @@
         {
           "path": "FamilyQuant.Core/Storage/QuantManifest.cs",
           "symbol": "FamilyQuant.QuantManifest::public static Dictionary \u003C string , string \u003E DefaultProvenance ( )",
-          "sha256": "14FD6DCB68E55BA89C8518DE71D1F23BAD4A48642E55CC274B038E6D7140AE98"
+          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
         }
       ],
       "proofs": [],
@@ -1234,7 +1234,7 @@
       "observationId": "FQ15-EE5B39EDA457",
       "implementation": [],
       "proofs": [],
-      "note": "The exact literal multiplicity within the containing member changed.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -1242,7 +1242,7 @@
       "observationId": "FQ15-F0C281196992",
       "implementation": [],
       "proofs": [],
-      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -1250,7 +1250,7 @@
       "observationId": "FQ15-F185C537A4D1",
       "implementation": [],
       "proofs": [],
-      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -1258,7 +1258,7 @@
       "observationId": "FQ15-F550A08FE59C",
       "implementation": [],
       "proofs": [],
-      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -1266,7 +1266,7 @@
       "observationId": "FQ15-F7CACF754CC1",
       "implementation": [],
       "proofs": [],
-      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -1274,7 +1274,7 @@
       "observationId": "FQ15-FF34FE1ACBDF",
       "implementation": [],
       "proofs": [],
-      "note": "The exact literal multiplicity within the containing member changed.",
+      "note": "An existing independent receipt remains authoritative; declaration comparison is retained in the report only.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -1284,7 +1284,7 @@
         {
           "path": "FamilyQuant.Core/Storage/QuantManifest.cs",
           "symbol": "FamilyQuant.QuantManifest::public static Dictionary \u003C string , string \u003E DefaultProvenance ( )",
-          "sha256": "14FD6DCB68E55BA89C8518DE71D1F23BAD4A48642E55CC274B038E6D7140AE98"
+          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
         }
       ],
       "proofs": [],
@@ -1303,7 +1303,7 @@
           "kind": "test",
           "target": "CoreRelocationCommand",
           "assertion": "Core member kind export/storage fact: all listed complete declarations retain exact literal syntax and multiplicity",
-          "artifact": "D:\\FamilyQuant-data\\out-results\\B7-2\\core-x7\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-130357-FamilyQuant-gate\\core-relocation-x7\\comparisons.log",
           "inspectedBy": ""
         }
       ]
