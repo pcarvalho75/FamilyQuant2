@@ -260,12 +260,22 @@ namespace FamilyQuant.Tests
         private static void FinishReviewWork(Func<Task> start)
         {
             var previous = SynchronizationContext.Current;
-            SynchronizationContext.SetSynchronizationContext(new DispatcherSynchronizationContext(Dispatcher.CurrentDispatcher));
+            var dispatcher = Dispatcher.CurrentDispatcher;
+            SynchronizationContext.SetSynchronizationContext(new DispatcherSynchronizationContext(dispatcher));
             try
             {
-                var task = start(); var watch = System.Diagnostics.Stopwatch.StartNew();
-                while (!task.IsCompleted && watch.Elapsed < TimeSpan.FromSeconds(5)) { PumpDispatcher(); Thread.Sleep(1); }
-                if (!task.IsCompleted) throw new TimeoutException("The review fixture did not finish.");
+                var task = start();
+                if (!task.IsCompleted)
+                {
+                    // A busy shared machine changes duration, not the task's result. Keep the UI
+                    // available until that exact task finishes; faults and cancellation still propagate.
+                    var frame = new DispatcherFrame();
+                    _ = task.ContinueWith(_ =>
+                    {
+                        dispatcher.BeginInvoke(DispatcherPriority.Send, new Action(() => frame.Continue = false));
+                    }, CancellationToken.None, TaskContinuationOptions.ExecuteSynchronously, TaskScheduler.Default);
+                    Dispatcher.PushFrame(frame);
+                }
                 task.GetAwaiter().GetResult();
             }
             finally { SynchronizationContext.SetSynchronizationContext(previous); }

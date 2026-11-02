@@ -69,6 +69,8 @@ Run the built test executable with these flags and explicit lane-owned outputs:
 | `--feature-ledger-kind-review <kind> REOPENED/ACCEPTED <reviewer> <reason> <date> <output>` | Record an independent kind verdict and reapply supported states |
 | `--test-ledger-declarations` | Exact XAML declaration and scoped C# member comparison fixtures |
 | `--ledger-declaration-compare <frozen-root> <current-root> <fresh-output> <step> <source-prefix> <date>` | Compare named explicit XAML properties and emit kind receipts |
+| `--ledger-core-relocation <frozen-root> <fresh-output> X5/X7 <date> [member-mappings.json]` | Compare complete scoped Core member declarations and retain per-row gaps; see [Core relocation ledger](CORE-RELOCATION-LEDGER.md) |
+| `--ledger-shell-compare <frozen-root> <fresh-output> <date>` | Compare SH/C1 declarations and run native curation interactions; emit separate candidate registers |
 
 For example, obtain the timestamp with `date '+%F %T %z'` immediately before the proof command.
 Neither the proof runner nor the audit invokes the frozen-source generator.
@@ -103,6 +105,23 @@ removing whitespace/comments. Explicitly reviewed `MemberMapping` values can ide
 relocated owner/file. Changed member bodies, ambiguous tokens/destinations and unsupported
 syntax remain unverified. It is a declaration comparison, not a runtime result calculation.
 Focused tests cover wrong-member borrowing, changed branches and changed multiplicity.
+
+The shell producer checks the frozen hashes before comparing and writes separate `SH.json`
+and `C1.json` candidates, complete comparison results and execution snapshots. Its source
+scope follows the assigned SH cohorts and the 557 curation observations. XAML properties
+cannot borrow a same-named control from another window. The three inspected individual curation
+literal relocations are explicit: `FullXicQuantity`, `PrepareFullXic` and `UpdateLockSummary`.
+Each still requires equal complete member tokens. Changed copy, unsupported syntax,
+handlers, shortcuts and control reachability need their own proof and remain OPEN.
+Same-type partial splits in MainWindow, curation, Build, lock manager and spectrum views
+also require the parsed frozen/primary/destination type declarations. A changed primary
+base or a changed complete member cannot pass as a neutral partial relocation.
+Candidate generation does not edit the ledger; import only after validating the receipts
+against the final source at READY. The final N6 gate still needs C2, C13 and independent review.
+The same execution runs `CurationScreenTests`: ten explicitly mapped table, identifier,
+annotation-binding and Undo observations get individual interaction receipts. Their
+implementation maps name the actual view/model classes and hash the executed test source.
+`curation-runtime.json` separates those observations from exact declaration matches.
 
 The N5 first pass executes synthetic project write/read, native ZIP and quant-column checks,
 source discovery, descriptor/cutoff checks and refusal paths. Each closed row has its own

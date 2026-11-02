@@ -16,6 +16,12 @@ Use the `FluentIcon` text style for icons, with a private-use glyph from the
 Windows Segoe Fluent Icons font. Keep a plain text label beside the icon. The
 suite rejects emoji in product C#/XAML, including Unicode escapes and entities.
 
+Colours in application source come from Tokens.xaml or ChartPalette. The V3
+guard rejects direct hex values, named brushes/colours and fixed RGB factories.
+Per the orchestrator's V3 ruling, PresentationFigures.cs is its one explicitly
+listed exception: those fixed colours draw exports and rule 9 protects the deck's
+feeders. The guard prints that exception; it is not a hidden UI exemption.
+
 Keep one short explanation line visible. Put detailed instructions and every
 displaced fact in Help or a tooltip. Name a command by what it does and explain
 disabled state in its tooltip. Do not add colour to plain values.

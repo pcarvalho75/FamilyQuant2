@@ -264,6 +264,7 @@ namespace FamilyQuant.Tests
             LogoResourceTests(workDir);
             TypographyRulesTests();
             UiIconTests();
+            UiColorTests();
             KeywordCommandTests();
             CurationScreenTests();
             CurationOperationTests();

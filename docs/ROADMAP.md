@@ -109,7 +109,7 @@ Columns: Diff = L, M, H, VH. Hrs = worker hours at measured speed: the 56 steps 
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| X13 | Documents: `CLAUDE.md` from 50 KB to a working guide, history to `docs/HISTORY.md`, talk documents out of the root, release notes for 2.0. `SCIENTIFIC_METHOD.md` gains the rule that an unannotated protein joins only through an in-scope neighbour, which the code has and the document lacks. The three test files over 1,000 lines split with no check lost | L | 1 | 🟢 | R3 | No fact lost, no line over 300 characters; suite count unchanged | AS | not started | 0% | 0% | T+1 |
+| X13 | Documents: `CLAUDE.md` from 50 KB to a working guide, history to `docs/HISTORY.md`, unprotected talk documents out of the root (`SCIENTIFIC_TALK_SCRIPT.md` stays where it is, untouched), release notes for 2.0. `SCIENTIFIC_METHOD.md` gains the rule that an unannotated protein joins only through an in-scope neighbour, which the code has and the document lacks. The three test files over 1,000 lines split with no check lost | L | 1 | 🟢 | R3 | No fact lost, no line over 300 characters; suite count unchanged | AS | not started | 0% | 0% | T+1 |
 
 ### W7 Releases (Paulo publishes each one)
 
@@ -126,7 +126,6 @@ The bet, from `docs/vision/VISION.md`: a de novo peptide your database cannot pl
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| B4 | Fetch the family world: the reviewed panel plus one clade query per family, unreviewed included, all or nothing, release recorded, stored with the project, offline afterwards | M | 1 | 🟢 | B5 | An interrupted fetch leaves the file as it was; offline rerun identical; size growth measured on Ana's file | EV | not started | 0% | 0% | T+1 |
 | B6 | The error beside every claim: for each family, the decoy rate and the known-answer right rate, stored in the project. A family with too little evidence shows that instead of a number | M | 1 | 🟢 | B7 | Every family row has both; reproducible; conserved families checked by hand | OP | not started | 0% | 0% | T+1 |
 | B7 | Result: three parts per family (identified, de novo in your database, de novo only in the family world) plus one global unexplained bucket, and the "Database gap" ranking: the families with the most signal missing from your database. An export writes a FASTA of the family-world proteins the tags hit, as suggested additions for the person to add and search again in PatternLab. The program never changes the database itself. The screen, the CSV and Help state the minimum tag length and the in-scope rule beside the result | M | 1 | B6 | B8 | Screen and CSV from one table; every number from the program; the rules in force are visible on the screen and in the export, and stored in the project; both themes | RS | not started | 0% | 0% | T+2 |
 | B8 | Science review on a real sample: labels, denominators, inflation of conserved families, and the wording of the claim | H | 1 | B7 | R3 | GR's verdict; findings closed; Paulo accepts the wording | GR | not started | 0% | 0% | T+3 |

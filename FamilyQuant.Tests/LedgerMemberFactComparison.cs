@@ -23,6 +23,13 @@ internal static class LedgerMemberFactComparison
     // The complete member declaration and body must still retain exactly the same tokens.
     internal sealed record MemberMapping(string FrozenMember, string CurrentPath, string CurrentMember);
 
+    internal static bool HasTypeDeclaration(string source, string owner, string declaration)
+    {
+        if (!TryRead(source, out var parsed, out _)) return false;
+        var members = parsed.Members.Where(member => member.Symbol.StartsWith(owner + "::", StringComparison.Ordinal)).ToArray();
+        return members.Length > 0 && members.All(member => member.TypeContext.Length == 1 && member.TypeContext[0] == declaration);
+    }
+
     internal static Result Compare(FeatureLedger.Observation observation, string frozenSource,
         IReadOnlyDictionary<string, string> currentSources, MemberMapping? mapping = null)
     {
