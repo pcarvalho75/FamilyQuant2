@@ -120,6 +120,7 @@ Invoke each flag with `& $testExe <flag>` after building. Dispatch and arity are
 | `--test-look-copy-preservation` | Scoped published-Help comparison negative controls, exact case and numeric boundaries |
 | `--prove-look-style-roles <frozen-source> <role-map> <new-output> <date-timestamp>` | Twenty-four explicit De novo role mappings, old/current values, native resolved properties and actual consumers in both themes |
 | `--probe-look-home-styles <new-output> [--negative-control]` | Native Home action/state checks, resolved style values and off-screen captures in both themes; optional planted lost-enablement regression; no focus or ledger closure by screenshot |
+| `--look-finish-focus <new-output> <date-timestamp>` | Native focus-state/template paint checks for four input types, both themes, three DPIs, without taking focus; creates a synthetic keyboard-check project |
 | `--prove-look-app-tokens <frozen-source> <new-output> <date-timestamp>` | Explicit frozen/current application palette roles and named native Home consumers in both themes; unsupported roles stay OPEN |
 | `--prove-look-copy <frozen-source> <native-audit> <new-output> <date-timestamp> [LK-prefix]` | Exact OPEN help/tooltip cohort, native published Help and named-tooltip comparisons, 200-row LK register batches |
 | `--refresh-look-registers <frozen-source> <new-output> <date-timestamp>` | Regenerates all five existing LK copy/style registers from their fixed ordered IDs, with no audit or hand preparation; leaves unsupported rows unproved |
