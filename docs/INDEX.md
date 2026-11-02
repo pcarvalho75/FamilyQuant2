@@ -124,6 +124,7 @@ Invoke each flag with `& $testExe <flag>` after building. Dispatch and arity are
 | `--test-curation-layout` | Retained chrome, tooltips and ancestor-clipping regression |
 | `--test-evidence-coverage-ui [output-dir]` | Recorded query-residue coverage, missing legacy facts, bounded display and native rule line |
 | `--test-database-gap [output-dir]` | Stored Core family parts/global buckets, sparse evidence, exact CSV/FASTA, offline reopen and native Results export routes |
+| `--test-results-tooltips [fresh-output date-timestamp]` | Two-sentence shared/normalization/chart tips retain every fact and dynamic default; optional semantic preservation receipts |
 | `--database-gap-screens <project.fqproj> <fresh-output>` | Read-only native Database gap captures in both themes, stored table CSV, and verified suggested FASTA when available |
 | `--prove-results-interactions <fresh-output> <date-timestamp>` | Native Results controls, displaced handlers, deterministic exports and observation receipts |
 | `--prove-results-members <frozen-root> <fresh-output> <date-timestamp>` | Shared scoped member comparison for assigned Results and quantitation declarations; changed members stay open |
@@ -187,6 +188,9 @@ Companion options for `--screens` are `--screen-fcf <input.fcf>`, `--screen-proj
 | `--feature-ledger-kind-review <kind> REOPENED/ACCEPTED <reviewer> <reason> <date> <output>` | Independent D13 kind-review decision and whole-kind reopening |
 | `--ledger-declaration-compare <frozen-root> <current-root> <fresh-output> <step> <source-prefix> <date>` | Frozen/current explicit XAML property comparisons and kind receipts |
 | `--ledger-assay-compare <frozen-root> <owner-map> <output> <step> <date>` | Shared C# member comparisons for the exact M22 OPEN cohorts; all nonmatches retained |
+| `--ledger-assay-cohort <frozen-root> <selection.json> <output> <step> <date>` | Scoped shared declaration comparisons; [receipt scope](ASSAY-LEDGER.md) |
+| `--ledger-assay-cache <frozen-root> <output> <date> [--negative-control]` | Frozen/current native cache wire and staging checks; frozen host build required |
+| `--assay-cache-snapshot <output>` | Shared synthetic native cache fixture; fresh output required |
 | `--ledger-core-relocation <frozen-root> <fresh-output> X5/X7 <date> [member-mappings.json]` | Scoped complete Core member comparisons, exact frozen hashes, retained source/checker snapshots and per-row gaps; [guide](CORE-RELOCATION-LEDGER.md) |
 | `--ledger-shell-compare <frozen-root> <fresh-output> <date>` | SH and C1 exact declarations/member tokens; separate candidate registers, unproven rows kept OPEN |
 | `--ledger-storage-runtime <frozen-root> <fresh-output> <date> [--negative-control]` | Public project reader/writer schema, codec and refusal observations; [runtime guide](CORE-RUNTIME-LEDGER.md) |

@@ -136,6 +136,8 @@ namespace FamilyQuant.Tests
                 return kept;
             }
             List<FamilyWorldProtein> withoutSpecies = Without(species, "species");
+            bool OwnSpecies(FamilyWorldProtein p) => species.Organisms.Contains(p.Taxon) || sampleTaxa.Contains(p.Taxon)
+                || species.Accessions.Contains(p.Accession) || sampleAccessions.Contains(p.Accession);
             Line("world_without_species", N0(withoutSpecies.Count));
 
             // ---------------------------------------------------------------- known answers
@@ -544,19 +546,19 @@ namespace FamilyQuant.Tests
             // ---------------------------------------------------------------- B6, the error beside every family
             // The product's known-answer engine (FamilyWorldErrors) must find the checker's own known answers and,
             // under D11, the same credits; then the stored table is written into a copy of the project and read back.
-            Dictionary<string, IReadOnlyList<string>> labelsOfWorld = FamilyWorldErrors.Labels(all, sample);
-            List<FamilyWorldKnownAnswer> answers = FamilyWorldErrors.KnownAnswers(manifest.SpectrumComparisonRows, sample, labelsOfWorld);
+            // The one call Compute makes (after the pass above), with the checker's species removal for this interim world.
+            FamilyWorldAnalysisResult analysis = FamilyWorldAnalysis.Complete(firstPass, pass, sample, manifest.SpectrumComparisonRows,
+                coverageWorld, panelRelease, OwnSpecies, d11, FamilyWorldErrors.DefaultMinimumKnownCredits);
+            List<FamilyWorldKnownAnswer> answers = analysis.KnownAnswers;
             check("family world (B6): the product's known answers are the checker's, pair for pair",
                 answers.Count == pairs.Count && answers.Zip(pairs.Values).All(x => x.First.Tag == x.Second.Tag && x.First.Identified == x.Second.Identified
                     && x.First.Calls == x.Second.Calls && x.First.Exclusion == x.Second.Exclusion && x.First.UnlabelledHolders == x.Second.UnlabelledHolders
                     && x.First.KnownFamilies.SetEquals(x.Second.Known)), N(answers.Count) + " vs " + N(pairs.Count));
-            FamilyWorldErrors.Credit(answers, knownWorld, knownWorld.ScopeFamilies, d11);
             check("family world (B6): the product credits every known answer as the checker does under D11",
                 answers.Where(a => a.IsKnown).All(a => a.Credit!.Outcome == d11Credits[a.Tag].Outcome
                     && a.Credit.Families.SetEquals(d11Credits[a.Tag].Families)) && answers.Count(a => a.Landed) == d11Landed
                 && answers.Count(a => a.Right) == d11Right, N(answers.Count(a => a.Right)) + " right");
-            FamilyWorldSummary errors = FamilyWorldErrors.Summarize(pass, answers, panelRelease, sampleTaxa);
-            FamilyWorldErrors.Compose(errors, firstPass, sample, labelsOfWorld);
+            FamilyWorldSummary errors = analysis.Summary;
             Console.WriteLine();
             Console.WriteLine("        THE ERROR BESIDE EVERY FAMILY (B6; right rate shown from " + N(errors.MinimumKnownCredits) + " known credits)");
             Console.WriteLine("          family: own share of the residual | decoy rate | known credits, truly the family | right rate or evidence");

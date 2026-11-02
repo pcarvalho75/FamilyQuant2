@@ -38,8 +38,10 @@ namespace FamilyQuant
         public string Accession { get; init; } = string.Empty;
         public string Sequence { get; init; } = string.Empty;
         public IReadOnlyList<string> Families { get; init; } = Array.Empty<string>();
-        /// <summary>The NCBI taxon read from the header's OX=, empty when the entry has no header (a panel entry).</summary>
+        /// <summary>The NCBI taxon read from the header's OX= (or stored by the fetch), empty when unknown.</summary>
         public string Taxon { get; init; } = string.Empty;
+        /// <summary>The taxa above <see cref="Taxon"/>, when the fetch stored them.</summary>
+        public IReadOnlyList<string> LineageTaxa { get; init; } = Array.Empty<string>();
         public bool FromPanel { get; init; }
     }
 
@@ -85,14 +87,15 @@ namespace FamilyQuant
         private static readonly Regex TaxonField = new Regex(@"(?:^|\s)OX=(\d+)", RegexOptions.CultureInvariant);
         private readonly Dictionary<string, FamilyWorldProtein> byId;
 
-        private FamilyWorld(List<FamilyWorldProtein> proteins, HomologyDatabase database, IEnumerable<string> scopeFamilies)
+        private FamilyWorld(List<FamilyWorldProtein> proteins, HomologyDatabase database, IEnumerable<string> scopeFamilies,
+            string? fingerprint = null)
         {
             Proteins = proteins;
             Database = database;
             byId = proteins.ToDictionary(p => p.Id, StringComparer.Ordinal);
             ScopeFamilies = Sorted(scopeFamilies);
             Families = Sorted(proteins.SelectMany(p => p.Families));
-            Fingerprint = FingerprintOf(proteins);
+            Fingerprint = fingerprint ?? FingerprintOf(proteins);
         }
 
         public IReadOnlyList<FamilyWorldProtein> Proteins { get; }
@@ -101,7 +104,8 @@ namespace FamilyQuant
         public IReadOnlyList<string> ScopeFamilies { get; }
         /// <summary>Every family any protein of the world carries.</summary>
         public IReadOnlyList<string> Families { get; }
-        /// <summary>SHA-256 over every target's identifier, sequence and families, in identifier order.</summary>
+        /// <summary>The world's identity: the stored snapshot's content hash (B4), or else SHA-256 over every target's
+        /// identifier, sequence and families, in identifier order.</summary>
         public string Fingerprint { get; }
 
         /// <summary>A target protein of the world by identifier, or null.</summary>
@@ -171,8 +175,36 @@ namespace FamilyQuant
         public static FamilyWorld FromFile(FamilyClusterFile file) =>
             Build(Collect(file), file.EvidenceSource?.ReferencePanel?.Families ?? new List<string>());
 
+        /// <summary>
+        /// The world B4 stored with the curation: each entry by its stored accession (so hit identifiers are B4's),
+        /// with its full family memberships, organism and lineage; the scope is the snapshot's families and the
+        /// fingerprint its content hash. The caller verifies the snapshot (<see cref="FamilyWorldFetcher.Stored"/>).
+        /// </summary>
+        public static FamilyWorld FromSnapshot(FamilyWorldSnapshot snapshot)
+        {
+            if (snapshot == null) throw new ArgumentNullException(nameof(snapshot));
+            List<FamilyWorldProtein> proteins = snapshot.Entries.Select(e => new FamilyWorldProtein
+            {
+                Id = e.Accession,
+                Accession = BaseAccession(e.Accession),
+                Sequence = e.Sequence ?? string.Empty,
+                Families = FamiliesOf(e.Evidence),
+                Taxon = e.TaxonId > 0 ? e.TaxonId.ToString(CultureInfo.InvariantCulture) : string.Empty,
+                LineageTaxa = e.LineageTaxonIds.Select(t => t.ToString(CultureInfo.InvariantCulture)).ToArray(),
+                FromPanel = e.FromReviewedPanel,
+            }).ToList();
+            return Build(proteins, snapshot.Families, snapshot.ContentSha256);
+        }
+
+        /// <summary>Whether a protein belongs to one of the taxa: its own taxon or any taxon of its lineage.</summary>
+        public static bool IsOfTaxa(FamilyWorldProtein protein, ICollection<string> taxa) =>
+            (protein.Taxon.Length > 0 && taxa.Contains(protein.Taxon)) || protein.LineageTaxa.Any(taxa.Contains);
+
         /// <summary>The searchable world: the kept proteins and one reversed copy of each.</summary>
-        public static FamilyWorld Build(IEnumerable<FamilyWorldProtein> proteins, IEnumerable<string> scopeFamilies)
+        public static FamilyWorld Build(IEnumerable<FamilyWorldProtein> proteins, IEnumerable<string> scopeFamilies) =>
+            Build(proteins, scopeFamilies, null);
+
+        private static FamilyWorld Build(IEnumerable<FamilyWorldProtein> proteins, IEnumerable<string> scopeFamilies, string? fingerprint)
         {
             if (proteins == null) throw new ArgumentNullException(nameof(proteins));
             if (scopeFamilies == null) throw new ArgumentNullException(nameof(scopeFamilies));
@@ -185,7 +217,7 @@ namespace FamilyQuant
                 Array.Reverse(reversed);
                 entries.Add((SequenceLabels.DecoyPrefix + p.Id, new string(reversed)));
             }
-            return new FamilyWorld(kept, HomologyDatabase.Build(entries), scopeFamilies);
+            return new FamilyWorld(kept, HomologyDatabase.Build(entries), scopeFamilies, fingerprint);
         }
 
         /// <summary>
