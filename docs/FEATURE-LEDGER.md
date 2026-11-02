@@ -17,7 +17,7 @@ Render targets refer to `ScreenHarness.Screens`, captured with `--screens <outpu
 Release gate: `FamilyQuant.Tests.exe --feature-ledger-release-check` fails until every retained row is VERIFIED with evidence. Authorized DROP rows use APPROVED_DROP, which records a decision, not a completed UI removal. The normal quick suite permits OPEN rows during development. Regeneration resets retained rows to OPEN; preserve reviewed evidence when updating the scanner.
 
 Scan count: **5756**. Ledger rows: **5756**. Source files: **104**.
-Authorized DROP rows: **296**; proposed VERIFIED retained rows: **3819**; OPEN retained rows: **1641**.
+Authorized DROP rows: **296**; proposed VERIFIED retained rows: **3821**; OPEN retained rows: **1639**.
 
 | ID | Disposition | Kind | Frozen source | Fact or control | Planned check | State | Evidence |
 |---|---|---|---|---|---|---|---|
@@ -5508,8 +5508,8 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **3819**; OPEN r
 | FQ15-49F5DF16DF47 | IMPROVE | code control | FamilyQuant/SuperClusterPreviewWindow.cs:125 | new TextBox | test:SecondaryRuntimeCommand | VERIFIED | evidence:FL-secondary-runtime:FQ15-49F5DF16DF47 |
 | FQ15-3A35F9FF994B | IMPROVE | code control | FamilyQuant/SuperClusterPreviewWindow.cs:134 | new ComboBox | test:SecondaryRuntimeCommand | VERIFIED | evidence:FL-secondary-runtime:FQ15-3A35F9FF994B |
 | FQ15-71E525ACF12F | IMPROVE | code control | FamilyQuant/SuperClusterPreviewWindow.cs:176 | new Button | test:SecondaryRuntimeCommand | VERIFIED | evidence:FL-secondary-runtime:FQ15-71E525ACF12F |
-| FQ15-B59C73CCEF4F | IMPROVE | code control | FamilyQuant/SuperClusterPreviewWindow.cs:183 | new Button | render:09-super-cluster-preview | OPEN | pending |
-| FQ15-91602ED7139C | IMPROVE | code control | FamilyQuant/SuperClusterPreviewWindow.cs:215 | new TextBox | render:09-super-cluster-preview | OPEN | pending |
+| FQ15-B59C73CCEF4F | IMPROVE | code control | FamilyQuant/SuperClusterPreviewWindow.cs:183 | new Button | test:SecondaryRuntimeCommand | VERIFIED | evidence:FL-secondary-runtime:FQ15-B59C73CCEF4F |
+| FQ15-91602ED7139C | IMPROVE | code control | FamilyQuant/SuperClusterPreviewWindow.cs:215 | new TextBox | test:SecondaryRuntimeCommand | VERIFIED | evidence:FL-secondary-runtime:FQ15-91602ED7139C |
 | FQ15-08C2383B8CDF | IMPROVE | code control | FamilyQuant/SuperClusterPreviewWindow.cs:243 | new Button | test:SecondaryRuntimeCommand | VERIFIED | evidence:FL-secondary-runtime:FQ15-08C2383B8CDF |
 | FQ15-DC76ACF83982 | IMPROVE | code control | FamilyQuant/SuperClusterPreviewWindow.cs:257 | new DataGrid | test:SecondaryRuntimeCommand | VERIFIED | evidence:FL-secondary-runtime:FQ15-DC76ACF83982 |
 | FQ15-91343967EB15 | IMPROVE | code control | FamilyQuant/SuperClusterPreviewWindow.cs:288 | new DataGridTemplateColumn | test:SecondaryRuntimeCommand | VERIFIED | evidence:FL-secondary-runtime:FQ15-91343967EB15 |
