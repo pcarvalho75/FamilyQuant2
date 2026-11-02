@@ -17,7 +17,7 @@ Render targets refer to `ScreenHarness.Screens`, captured with `--screens <outpu
 Release gate: `FamilyQuant.Tests.exe --feature-ledger-release-check` fails until every retained row is VERIFIED with evidence. Authorized DROP rows use APPROVED_DROP, which records a decision, not a completed UI removal. The normal quick suite permits OPEN rows during development. Regeneration resets retained rows to OPEN; preserve reviewed evidence when updating the scanner.
 
 Scan count: **5756**. Ledger rows: **5756**. Source files: **104**.
-Authorized DROP rows: **296**; proposed VERIFIED retained rows: **5232**; OPEN retained rows: **228**.
+Authorized DROP rows: **296**; proposed VERIFIED retained rows: **5251**; OPEN retained rows: **209**.
 
 | ID | Disposition | Kind | Frozen source | Fact or control | Planned check | State | Evidence |
 |---|---|---|---|---|---|---|---|
@@ -704,7 +704,7 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **5232**; OPEN r
 | FQ15-A87C7EF4639E | KEEP | format/export | FamilyQuant/ClusterGenerationControl.xaml.cs:1199 | "Optional: a PatternLab .plp, exported at peptide level, for the 'Share of signal' " | render:03-curation | OPEN | pending |
 | FQ15-A03420712329 | IMPROVE | code fact | FamilyQuant/ClusterGenerationControl.xaml.cs:1200 | "column. Not needed when the project has a full XIC (File \u00B7 Compute / update full XIC)." | render:03-curation | VERIFIED | evidence:Paulo-rulings:FQ15-A03420712329 |
 | FQ15-4F199D05A83B | IMPROVE | code fact | FamilyQuant/ClusterGenerationControl.xaml.cs:1208 | "Shared peptides and Full XIC share of apply to the Full XIC column at once. Report XIC " | render:03-curation | VERIFIED | evidence:Paulo-rulings:FQ15-4F199D05A83B |
-| FQ15-A9B61BDC02D3 | KEEP | format/export | FamilyQuant/ClusterGenerationControl.xaml.cs:1209 | "as and Recalculate apply only to a .plp loaded in Layer 2." | render:03-curation | OPEN | pending |
+| FQ15-A9B61BDC02D3 | KEEP | format/export | FamilyQuant/ClusterGenerationControl.xaml.cs:1209 | "as and Recalculate apply only to a .plp loaded in Layer 2." | test:FloaterBehaviourCommand | VERIFIED | evidence:FL-behaviour:FQ15-A9B61BDC02D3 |
 | FQ15-3EAF795C2FA1 | IMPROVE | code fact | FamilyQuant/ClusterGenerationControl.xaml.cs:1214 | "The full XIC is being attributed to the families. These options become live when it " | test:LedgerTextPreservedCommand | VERIFIED | evidence:N6a-text:FQ15-3EAF795C2FA1 |
 | FQ15-A23630C6573F | IMPROVE | code fact | FamilyQuant/ClusterGenerationControl.xaml.cs:1215 | "finishes." | test:LedgerTextPreservedCommand | VERIFIED | evidence:N6a-text:FQ15-A23630C6573F |
 | FQ15-4902FF4D182A | IMPROVE | code fact | FamilyQuant/ClusterGenerationControl.xaml.cs:1219 | "no quantitation yet" | test:LedgerTextPreservedCommand | VERIFIED | evidence:N6a-text:FQ15-4902FF4D182A |
@@ -979,7 +979,7 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **5232**; OPEN r
 | FQ15-D51BC8BFE0D7 | KEEP | format/export | FamilyQuant/ComputeXicWindow.xaml.cs:232 | "Choose the folder holding the .raw acquisitions" | render:08-compute | OPEN | pending |
 | FQ15-CFFB1E2E8ADA | IMPROVE | code fact | FamilyQuant/ComputeXicWindow.xaml.cs:240 | "No SEPro package was chosen" | render:08-compute | VERIFIED | evidence:Paulo-rulings:FQ15-CFFB1E2E8ADA |
 | FQ15-957BAE14D32A | KEEP | format/export | FamilyQuant/ComputeXicWindow.xaml.cs:241 | "type the path of the .sepr2 into the box beside the button." | render:08-compute | OPEN | pending |
-| FQ15-1E839DFF85FC | KEEP | format/export | FamilyQuant/ComputeXicWindow.xaml.cs:245 | "SEPro 2.0 (*.sepr2)&#124;*.sepr2" | render:08-compute | OPEN | pending |
+| FQ15-1E839DFF85FC | KEEP | format/export | FamilyQuant/ComputeXicWindow.xaml.cs:245 | "SEPro 2.0 (*.sepr2)&#124;*.sepr2" | test:FloaterBehaviourCommand | VERIFIED | evidence:FL-behaviour:FQ15-1E839DFF85FC |
 | FQ15-5715E31AD7B9 | IMPROVE | code fact | FamilyQuant/ComputeXicWindow.xaml.cs:246 | "Choose a TRUSTED SEPro package (legacy unsafe deserialization)" | render:08-compute | VERIFIED | evidence:Paulo-rulings:FQ15-5715E31AD7B9 |
 | FQ15-6D07970F2CDF | IMPROVE | code fact | FamilyQuant/ComputeXicWindow.xaml.cs:255 | "No folder was chosen" | render:08-compute | VERIFIED | evidence:Paulo-rulings:FQ15-6D07970F2CDF |
 | FQ15-2AF3C764B525 | IMPROVE | code fact | FamilyQuant/ComputeXicWindow.xaml.cs:256 | "type the de novo export root into the box beside the button, or leave it empty." | render:08-compute | VERIFIED | evidence:Paulo-rulings:FQ15-2AF3C764B525 |
@@ -1579,7 +1579,7 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **5232**; OPEN r
 | FQ15-66E8A7C104BB | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:866 | ". Next step: press Reconcile. Reading a real package takes a while, and the " | test:DeNovoCommandEvidence | VERIFIED | evidence:EV-denovo-commands-1:FQ15-66E8A7C104BB |
 | FQ15-8A3FE99F899F | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:867 | "screen is disabled while it is read." | test:DeNovoCommandEvidence | VERIFIED | evidence:EV-denovo-commands-1:FQ15-8A3FE99F899F |
 | FQ15-48FB6F4B7D66 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:912 | "Nothing was reconciled: no de novo rows have been kept, so there is nothing " | test:ShellBehaviour | VERIFIED | evidence:SH-behaviour:FQ15-48FB6F4B7D66 |
-| FQ15-EEAE18669485 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:913 | "to join. Next step: import the selected de novo export in Step 1 first." | render:06-denovo-advanced | OPEN | pending |
+| FQ15-EEAE18669485 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:913 | "to join. Next step: import the selected de novo export in Step 1 first." | test:FloaterBehaviourCommand | VERIFIED | evidence:FL-behaviour:FQ15-EEAE18669485 |
 | FQ15-4C022BBC59E5 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:922 | "Nothing was reconciled: " | render:06-denovo-advanced | VERIFIED | evidence:Paulo-rulings:FQ15-4C022BBC59E5 |
 | FQ15-881A29BF5EF9 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:923 | "no SEPro package has been chosen yet." | render:06-denovo-advanced | VERIFIED | evidence:Paulo-rulings:FQ15-881A29BF5EF9 |
 | FQ15-E1CDEEBACC3F | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:924 | "the file \"" | render:06-denovo-advanced | VERIFIED | evidence:Paulo-rulings:FQ15-E1CDEEBACC3F |
@@ -1634,7 +1634,7 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **5232**; OPEN r
 | FQ15-9FADDFA46BAD | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:1034 | "N0" | test:DeNovoLedgerRefusalsCommand | VERIFIED | evidence:EV-denovo-refusals-1:FQ15-9FADDFA46BAD |
 | FQ15-3A03B46544B3 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:1042 | "There is no reconciliation to export; run one in Layer 2 first." | render:06-denovo-advanced | VERIFIED | evidence:Paulo-rulings:FQ15-3A03B46544B3 |
 | FQ15-8504F0703DBD | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:1051 | "There is no reconciliation to export; run one in Layer 2 first." | render:06-denovo-advanced | OPEN | pending |
-| FQ15-14EF12F7CDE7 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:1059 | "There is no overlap study to export; run a reconciliation in Step 2 first." | render:06-denovo-advanced | OPEN | pending |
+| FQ15-14EF12F7CDE7 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:1059 | "There is no overlap study to export; run a reconciliation in Step 2 first." | test:FloaterBehaviourCommand | VERIFIED | evidence:FL-behaviour:FQ15-14EF12F7CDE7 |
 | FQ15-6CF0E14054FF | KEEP | format/export | FamilyQuant/DeNovoControl.xaml.cs:1068 | "FamilyQuant_DeNovo_Summary.csv" | test:DeNovoLedgerDeclarationsCommand | VERIFIED | evidence:EV-denovo-declarations-1:FQ15-6CF0E14054FF |
 | FQ15-40D8097A6172 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:1068 | "Save the per-run verdict summary as CSV" | test:DeNovoLedgerDeclarationsCommand | VERIFIED | evidence:EV-denovo-declarations-1:FQ15-40D8097A6172 |
 | FQ15-243D4BF4843F | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:1070 | "one line per run and verdict, with how many rows fell into each" | test:DeNovoLedgerDeclarationsCommand | VERIFIED | evidence:EV-denovo-declarations-1:FQ15-243D4BF4843F |
@@ -1644,7 +1644,7 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **5232**; OPEN r
 | FQ15-E9123BFAFC86 | KEEP | format/export | FamilyQuant/DeNovoControl.xaml.cs:1086 | "FamilyQuant_DeNovo_OverlapStudy.csv" | test:DeNovoLedgerDeclarationsCommand | VERIFIED | evidence:EV-denovo-declarations-1:FQ15-E9123BFAFC86 |
 | FQ15-26CEEF4D22CD | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:1086 | "Save the de novo/search-engine overlap study as CSV" | test:DeNovoLedgerDeclarationsCommand | VERIFIED | evidence:EV-denovo-declarations-1:FQ15-26CEEF4D22CD |
 | FQ15-DA7E63250AA8 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:1088 | "the nested scan, precursor, exact-sequence and divergence counts with their denominators" | test:DeNovoLedgerDeclarationsCommand | VERIFIED | evidence:EV-denovo-declarations-1:FQ15-DA7E63250AA8 |
-| FQ15-C38D751ECBB2 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:1095 | "Nothing was exported: no reconciliation has been run, so there are no " | render:06-denovo-advanced | OPEN | pending |
+| FQ15-C38D751ECBB2 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:1095 | "Nothing was exported: no reconciliation has been run, so there are no " | test:FloaterBehaviourCommand | VERIFIED | evidence:FL-behaviour:FQ15-C38D751ECBB2 |
 | FQ15-0097AA5ACE43 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:1096 | "verdicts to write. Next step: press Reconcile in Layer 2 first." | render:06-denovo-advanced | VERIFIED | evidence:Paulo-rulings:FQ15-0097AA5ACE43 |
 | FQ15-8C1BC14A9C37 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:1108 | "Nothing was exported" | test:LedgerTextPreservedCommand | VERIFIED | evidence:N6a-text:FQ15-8C1BC14A9C37 |
 | FQ15-2DD09D1FA976 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:1108 | "nothing. The same rows are on screen." | test:LedgerTextPreservedCommand | VERIFIED | evidence:N6a-text:FQ15-2DD09D1FA976 |
@@ -3304,9 +3304,9 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **5232**; OPEN r
 | FQ15-77BD9938227C | IMPROVE | help fact | FamilyQuant/HelpContent.cs:31 | "=========================" | test:LookCopyReceiptCommand | VERIFIED | evidence:LK-copy-next-1:FQ15-77BD9938227C |
 | FQ15-B723E515417F | IMPROVE | help fact | FamilyQuant/HelpContent.cs:34 | "THE ORDER OF WORK" | test:LookCopyReceiptCommand | VERIFIED | evidence:LK-copy-next-2:FQ15-B723E515417F |
 | FQ15-DDB5B82DAAD8 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:35 | "-----------------" | test:LookCopyReceiptCommand | VERIFIED | evidence:LK-copy-next-3:FQ15-DDB5B82DAAD8 |
-| FQ15-D498F9890B9B | KEEP | format/export | FamilyQuant/HelpContent.cs:36 | "1. Run USearch on a FASTA or target-decoy (.T-R) database. That writes a Family" | render:14-help | OPEN | pending |
-| FQ15-9D2713E3D10D | KEEP | format/export | FamilyQuant/HelpContent.cs:37 | "   Cluster File (.fcf) next to the database: proteins grouped into families." | render:14-help | OPEN | pending |
-| FQ15-A832A6193C72 | KEEP | format/export | FamilyQuant/HelpContent.cs:38 | "2. File -&gt; Load Family Cluster File opens that .fcf. You are now in Layer 1 and" | render:14-help | OPEN | pending |
+| FQ15-D498F9890B9B | KEEP | format/export | FamilyQuant/HelpContent.cs:36 | "1. Run USearch on a FASTA or target-decoy (.T-R) database. That writes a Family" | test:FloaterBehaviourCommand | VERIFIED | evidence:FL-behaviour:FQ15-D498F9890B9B |
+| FQ15-9D2713E3D10D | KEEP | format/export | FamilyQuant/HelpContent.cs:37 | "   Cluster File (.fcf) next to the database: proteins grouped into families." | test:FloaterBehaviourCommand | VERIFIED | evidence:FL-behaviour:FQ15-9D2713E3D10D |
+| FQ15-A832A6193C72 | KEEP | format/export | FamilyQuant/HelpContent.cs:38 | "2. File -&gt; Load Family Cluster File opens that .fcf. You are now in Layer 1 and" | test:FloaterBehaviourCommand | VERIFIED | evidence:FL-behaviour:FQ15-A832A6193C72 |
 | FQ15-1779F1A43941 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:39 | "   can merge families further by description words or by keyword." | test:LookCopyReceiptCommand | VERIFIED | evidence:LK-copy-1:FQ15-1779F1A43941 |
 | FQ15-E0967C11504D | KEEP | format/export | FamilyQuant/HelpContent.cs:40 | "3. Layer 2: load the PatternLab project (.plp) that holds the quantitation. It" | render:14-help | OPEN | pending |
 | FQ15-31DB88F2483C | IMPROVE | help fact | FamilyQuant/HelpContent.cs:41 | "   must have been exported at PEPTIDE level - a protein-level export has nothing" | test:LookCopyReceiptCommand | VERIFIED | evidence:LK-copy-1:FQ15-31DB88F2483C |
@@ -3316,10 +3316,10 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **5232**; OPEN r
 | FQ15-9490F7267E6D | IMPROVE | help fact | FamilyQuant/HelpContent.cs:45 | "5. Export to CSV, and/or File -&gt; Reanotate Sepro to stamp the family numbers back" | render:14-help | VERIFIED | evidence:Paulo-rulings:FQ15-9490F7267E6D |
 | FQ15-326E4D99426C | IMPROVE | help fact | FamilyQuant/HelpContent.cs:46 | "   into a SEPro result package." | test:LookCopyReceiptCommand | VERIFIED | evidence:LK-copy-1:FQ15-326E4D99426C |
 | FQ15-849590FAAE39 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:48 | "The families and the quantitation you keep live in one FamilyQuant project file, a" | test:LookCopyReceiptCommand | VERIFIED | evidence:LK-copy-next-1:FQ15-849590FAAE39 |
-| FQ15-D93D13EF5E70 | KEEP | format/export | FamilyQuant/HelpContent.cs:49 | ".fqproj, written by File -&gt; Save project. Beyond the share above, File -&gt; Compute /" | render:14-help | OPEN | pending |
+| FQ15-D93D13EF5E70 | KEEP | format/export | FamilyQuant/HelpContent.cs:49 | ".fqproj, written by File -&gt; Save project. Beyond the share above, File -&gt; Compute /" | test:FloaterBehaviourCommand | VERIFIED | evidence:FL-behaviour:FQ15-D93D13EF5E70 |
 | FQ15-5649DC0CCC44 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:50 | "update full XIC measures each peptide's full isotope envelope straight from the RAW" | render:14-help | VERIFIED | evidence:Paulo-rulings:FQ15-5649DC0CCC44 |
 | FQ15-B357472225FA | IMPROVE | help fact | FamilyQuant/HelpContent.cs:51 | "and stores it in that project, and the Analytics screen then reads the recovery" | render:14-help | VERIFIED | evidence:Paulo-rulings:FQ15-B357472225FA |
-| FQ15-5DE04A6489DF | KEEP | format/export | FamilyQuant/HelpContent.cs:52 | "from it. An old Family Cluster File (.fcf) still opens, with the quantitation empty" | render:14-help | OPEN | pending |
+| FQ15-5DE04A6489DF | KEEP | format/export | FamilyQuant/HelpContent.cs:52 | "from it. An old Family Cluster File (.fcf) still opens, with the quantitation empty" | test:FloaterBehaviourCommand | VERIFIED | evidence:FL-behaviour:FQ15-5DE04A6489DF |
 | FQ15-E90092829B15 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:53 | "until it is computed." | test:LookCopyReceiptCommand | VERIFIED | evidence:LK-copy-next-3:FQ15-E90092829B15 |
 | FQ15-C38783F5FD3F | IMPROVE | help fact | FamilyQuant/HelpContent.cs:56 | "WHAT THE PERCENTAGE IS OF (THE DENOMINATOR)" | test:LookCopyReceiptCommand | VERIFIED | evidence:LK-copy-next-2:FQ15-C38783F5FD3F |
 | FQ15-3EFB68F27578 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:57 | "-------------------------------------------" | test:LookCopyReceiptCommand | VERIFIED | evidence:LK-copy-1:FQ15-3EFB68F27578 |
@@ -3880,7 +3880,7 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **5232**; OPEN r
 | FQ15-7865E0712966 | IMPROVE | code fact | FamilyQuant/LockManagerWindow.cs:99 | "These are the families protected from automatic reclustering. A family is locked by " | render:10-lock-manager | VERIFIED | evidence:Paulo-rulings:FQ15-7865E0712966 |
 | FQ15-764AB6398161 | IMPROVE | code fact | FamilyQuant/LockManagerWindow.cs:100 | "typing its number into the User ID column, and by nothing else.\n\n" | render:10-lock-manager | VERIFIED | evidence:Paulo-rulings:FQ15-764AB6398161 |
 | FQ15-8D64D084F740 | IMPROVE | code fact | FamilyQuant/LockManagerWindow.cs:101 | "Removing a lock takes effect at once in the file you have open, and it is NOT " | render:10-lock-manager | VERIFIED | evidence:Paulo-rulings:FQ15-8D64D084F740 |
-| FQ15-F7CDF32FD8B8 | KEEP | format/export | FamilyQuant/LockManagerWindow.cs:102 | "written to disk here: the .fcf is saved from the main window, exactly as before. " | render:10-lock-manager | OPEN | pending |
+| FQ15-F7CDF32FD8B8 | KEEP | format/export | FamilyQuant/LockManagerWindow.cs:102 | "written to disk here: the .fcf is saved from the main window, exactly as before. " | test:FloaterBehaviourCommand | VERIFIED | evidence:FL-behaviour:FQ15-F7CDF32FD8B8 |
 | FQ15-DE90D9514C7C | IMPROVE | code fact | FamilyQuant/LockManagerWindow.cs:103 | "Close this window and save when you are ready.\n\n" | render:10-lock-manager | VERIFIED | evidence:Paulo-rulings:FQ15-DE90D9514C7C |
 | FQ15-D7FE5D86F829 | IMPROVE | code fact | FamilyQuant/LockManagerWindow.cs:104 | "What removal means: an unlocked family can be merged again, so the next \"Recluster " | render:10-lock-manager | VERIFIED | evidence:Paulo-rulings:FQ15-D7FE5D86F829 |
 | FQ15-8C8E3A24A12B | IMPROVE | code fact | FamilyQuant/LockManagerWindow.cs:105 | "by Words\" or \"Create Super Cluster\" may join it to another family, which is " | render:10-lock-manager | VERIFIED | evidence:Paulo-rulings:FQ15-8C8E3A24A12B |
@@ -4007,7 +4007,7 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **5232**; OPEN r
 | FQ15-16285CE0B5D8 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:226 | "File \u00B7 Compute / update full XIC gives the project its own quantitation, and Analytics " | render:01-home | VERIFIED | evidence:Paulo-rulings:FQ15-16285CE0B5D8 |
 | FQ15-B674BD0D6FB0 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:227 | "reads it. Help \u00B7 How to read these numbers explains every column." | render:01-home | VERIFIED | evidence:Paulo-rulings:FQ15-B674BD0D6FB0 |
 | FQ15-A08417F0591D | KEEP | format/export | FamilyQuant/MainWindow.xaml.cs:234 | "Step 1 of 4 \u00B7 Pick a FASTA or target-decoy (.T-R) database and press \"Input a FASTA " | render:01-home | OPEN | pending |
-| FQ15-22317F5CE7C2 | KEEP | format/export | FamilyQuant/MainWindow.xaml.cs:235 | "file\". That writes a Family Cluster File (.fcf) next to the database. Then open it " | render:01-home | OPEN | pending |
+| FQ15-22317F5CE7C2 | KEEP | format/export | FamilyQuant/MainWindow.xaml.cs:235 | "file\". That writes a Family Cluster File (.fcf) next to the database. Then open it " | test:FloaterBehaviourCommand | VERIFIED | evidence:FL-behaviour:FQ15-22317F5CE7C2 |
 | FQ15-FDB9DDABF7CB | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:236 | "with File \u00B7 Load project or Family Cluster File." | render:01-home | VERIFIED | evidence:Paulo-rulings:FQ15-FDB9DDABF7CB |
 | FQ15-ABD880D7E74F | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:241 | "Start here \u00B7 If you have never run this database before, use \"Run USearch\" to group its " | render:01-home | VERIFIED | evidence:Paulo-rulings:FQ15-ABD880D7E74F |
 | FQ15-D7C96185D723 | KEEP | format/export | FamilyQuant/MainWindow.xaml.cs:242 | "proteins into families. If you already have a project (.fqproj) or a Family Cluster File " | render:01-home | OPEN | pending |
@@ -4068,7 +4068,7 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **5232**; OPEN r
 | FQ15-BD8FCDF44947 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:569 | "The project was saved to\n" | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-BD8FCDF44947 |
 | FQ15-F17372AEAD0F | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:569 | "\n\n" | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-F17372AEAD0F |
 | FQ15-5E69DF58FFFE | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:570 | "The container holds the grouping, your User IDs and annotations, and " | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-5E69DF58FFFE |
-| FQ15-A0A334D576C6 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:571 | "N0" | render:01-home | VERIFIED | evidence:Paulo-rulings:FQ15-A0A334D576C6 |
+| FQ15-A0A334D576C6 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:571 | "N0" | test:FloaterBehaviourCommand | VERIFIED | evidence:FL-behaviour:FQ15-A0A334D576C6 |
 | FQ15-433A5AAC1117 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:572 | " stored quant row(s). Reopening it restores both.\n\n" | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-433A5AAC1117 |
 | FQ15-7A26DBC0417D | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:573 | "\n\n" | render:01-home | VERIFIED | evidence:Paulo-rulings:FQ15-7A26DBC0417D |
 | FQ15-1680DF391053 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:574 | "Next step: nothing. Carry on working, or open this file later to return to exactly " | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-1680DF391053 |
@@ -4089,7 +4089,7 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **5232**; OPEN r
 | FQ15-4EA6BDD226D3 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:644 | "The spectrum comparison CSV has already been written to\n" | test:LedgerTextPreservedCommand | VERIFIED | evidence:N6a-text:FQ15-4EA6BDD226D3 |
 | FQ15-2F79C92D9BDC | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:645 | "\n\n" | render:01-home | VERIFIED | evidence:Paulo-rulings:FQ15-2F79C92D9BDC |
 | FQ15-E81D4D8CC4E3 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:648 | "\n\n" | render:01-home | VERIFIED | evidence:Paulo-rulings:FQ15-E81D4D8CC4E3 |
-| FQ15-9A649BDCD31D | KEEP | format/export | FamilyQuant/MainWindow.xaml.cs:649 | "Next step: File \u00B7 Save project (.fqproj) to persist the quant rows and the complete " | render:01-home | OPEN | pending |
+| FQ15-9A649BDCD31D | KEEP | format/export | FamilyQuant/MainWindow.xaml.cs:649 | "Next step: File \u00B7 Save project (.fqproj) to persist the quant rows and the complete " | test:FloaterBehaviourCommand | VERIFIED | evidence:FL-behaviour:FQ15-9A649BDCD31D |
 | FQ15-776EFFB6D540 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:650 | "spectrum evidence table inside the project. The project itself has not been saved yet." | render:01-home | OPEN | pending |
 | FQ15-F0F954EF5FD4 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:651 | "Quantitation computed" | test:ShellMainMessageProbe | VERIFIED | evidence:SH-main-routes:FQ15-F0F954EF5FD4 |
 | FQ15-FF65BEA5BC8E | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:732 | "There is no spectrum comparison table to show yet.\n\n" | render:01-home | VERIFIED | evidence:Paulo-rulings:FQ15-FF65BEA5BC8E |
@@ -4144,7 +4144,7 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **5232**; OPEN r
 | FQ15-801501923567 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:880 | "STEP 1 \u00B7 Group the proteins into families\n" | render:01-home | VERIFIED | evidence:Paulo-rulings:FQ15-801501923567 |
 | FQ15-DB6D62004E8F | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:881 | "   Menu: Run USearch\n" | render:01-home | VERIFIED | evidence:Paulo-rulings:FQ15-DB6D62004E8F |
 | FQ15-CCF30AC529C7 | KEEP | format/export | FamilyQuant/MainWindow.xaml.cs:882 | "   Needs: a protein database, either a plain .fasta or a target-decoy .T-R file.\n" | render:01-home | OPEN | pending |
-| FQ15-66A98A8CF568 | KEEP | format/export | FamilyQuant/MainWindow.xaml.cs:883 | "   Produces: a Family Cluster File (.fcf) written next to the database.\n" | render:01-home | OPEN | pending |
+| FQ15-66A98A8CF568 | KEEP | format/export | FamilyQuant/MainWindow.xaml.cs:883 | "   Produces: a Family Cluster File (.fcf) written next to the database.\n" | test:FloaterBehaviourCommand | VERIFIED | evidence:FL-behaviour:FQ15-66A98A8CF568 |
 | FQ15-B5062F974B9D | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:884 | "   Choose the sequence identity first. 85% is the value the box starts at. \"Scan\n" | render:01-home | VERIFIED | evidence:Paulo-rulings:FQ15-B5062F974B9D |
 | FQ15-B35E0335E9E9 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:885 | "   identity range\" shows how the family count and the target/decoy mixing behave\n" | render:01-home | VERIFIED | evidence:Paulo-rulings:FQ15-B35E0335E9E9 |
 | FQ15-85DFBAFCD066 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:886 | "   across the whole range, which is a better basis for the choice than a single\n" | render:01-home | VERIFIED | evidence:Paulo-rulings:FQ15-85DFBAFCD066 |
@@ -4159,7 +4159,7 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **5232**; OPEN r
 | FQ15-62E15E6058E6 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:895 | "   under a new name if you want to keep the previous grouping.\n\n" | render:01-home | VERIFIED | evidence:Paulo-rulings:FQ15-62E15E6058E6 |
 | FQ15-DB93FC373C10 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:896 | "STEP 3 \u00B7 Attach the quantitation\n" | render:01-home | VERIFIED | evidence:Paulo-rulings:FQ15-DB93FC373C10 |
 | FQ15-5E0D804A009A | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:897 | "   Layer 2: Load PLP File\n" | render:01-home | VERIFIED | evidence:Paulo-rulings:FQ15-5E0D804A009A |
-| FQ15-5BC9BADDBD2B | KEEP | format/export | FamilyQuant/MainWindow.xaml.cs:898 | "   Needs: a PatternLab project (.plp) exported at PEPTIDE level. A protein-level\n" | render:01-home | OPEN | pending |
+| FQ15-5BC9BADDBD2B | KEEP | format/export | FamilyQuant/MainWindow.xaml.cs:898 | "   Needs: a PatternLab project (.plp) exported at PEPTIDE level. A protein-level\n" | test:FloaterBehaviourCommand | VERIFIED | evidence:FL-behaviour:FQ15-5BC9BADDBD2B |
 | FQ15-D244836D09DC | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:899 | "   export contains nothing that can be attributed to a family, and every row will\n" | render:01-home | VERIFIED | evidence:Paulo-rulings:FQ15-D244836D09DC |
 | FQ15-0E83C10F930D | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:900 | "   read 0.\n" | render:01-home | VERIFIED | evidence:Paulo-rulings:FQ15-0E83C10F930D |
 | FQ15-68AF10373704 | IMPROVE | code fact | FamilyQuant/MainWindow.xaml.cs:901 | "   Then in Layer 3 choose what the percentages are a share of, choose what to do with\n" | render:01-home | VERIFIED | evidence:Paulo-rulings:FQ15-68AF10373704 |
@@ -5591,9 +5591,9 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **5232**; OPEN r
 | FQ15-A5848F93B253 | IMPROVE | code fact | FamilyQuant/USearch.xaml.cs:55 | " This runs USEARCH and cannot be interrupted; " | render:02-build | OPEN | pending |
 | FQ15-7AC0BC9F0603 | IMPROVE | code fact | FamilyQuant/USearch.xaml.cs:56 | "the buttons come back when it finishes." | render:02-build | OPEN | pending |
 | FQ15-FEFB7367FD8C | IMPROVE | code fact | FamilyQuant/USearch.xaml.cs:79 | "Step 1 of 4 \u00B7 Pick a protein database and press \"Input a FASTA file\". That writes a " | render:02-build | VERIFIED | evidence:Paulo-rulings:FQ15-FEFB7367FD8C |
-| FQ15-5A8FC191A0CF | KEEP | format/export | FamilyQuant/USearch.xaml.cs:80 | "Family Cluster File (.fcf) beside it, which you then open with File \u00B7 Load Family " | render:02-build | OPEN | pending |
+| FQ15-5A8FC191A0CF | KEEP | format/export | FamilyQuant/USearch.xaml.cs:80 | "Family Cluster File (.fcf) beside it, which you then open with File \u00B7 Load Family " | test:FloaterBehaviourCommand | VERIFIED | evidence:FL-behaviour:FQ15-5A8FC191A0CF |
 | FQ15-F8E23411BA47 | IMPROVE | code fact | FamilyQuant/USearch.xaml.cs:81 | "Cluster File." | render:02-build | VERIFIED | evidence:Paulo-rulings:FQ15-F8E23411BA47 |
-| FQ15-7AFF0BB0CB70 | IMPROVE | code fact | FamilyQuant/USearch.xaml.cs:82 | "Step 1 done \u00B7 A Family Cluster File has been written. You can check the clustering with " | render:02-build | OPEN | pending |
+| FQ15-7AFF0BB0CB70 | IMPROVE | code fact | FamilyQuant/USearch.xaml.cs:82 | "Step 1 done \u00B7 A Family Cluster File has been written. You can check the clustering with " | test:FloaterBehaviourCommand | VERIFIED | evidence:FL-behaviour:FQ15-7AFF0BB0CB70 |
 | FQ15-89F5BF435E42 | IMPROVE | code fact | FamilyQuant/USearch.xaml.cs:83 | "\"Calculate FDR\", or go straight to File \u00B7 Load Family Cluster File to attach " | render:02-build | VERIFIED | evidence:Paulo-rulings:FQ15-89F5BF435E42 |
 | FQ15-6C549F606F53 | IMPROVE | code fact | FamilyQuant/USearch.xaml.cs:84 | "quantitation to these families." | render:02-build | VERIFIED | evidence:Paulo-rulings:FQ15-6C549F606F53 |
 | FQ15-25BFB8499E7C | IMPROVE | code fact | FamilyQuant/USearch.xaml.cs:113 | "\"" | render:02-build | OPEN | pending |
@@ -5606,7 +5606,7 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **5232**; OPEN r
 | FQ15-5CCDA0B631E7 | IMPROVE | code fact | FamilyQuant/USearch.xaml.cs:118 | "then either turn off \"Exhaustive clustering\" for the faster first-pass-only grouping, " | render:02-build | VERIFIED | evidence:Paulo-rulings:FQ15-5CCDA0B631E7 |
 | FQ15-52D8C74B4596 | IMPROVE | code fact | FamilyQuant/USearch.xaml.cs:119 | "or reduce the database first with \"Remove redundancy from FASTA\"." | render:02-build | VERIFIED | evidence:Paulo-rulings:FQ15-52D8C74B4596 |
 | FQ15-69A89EC19D12 | IMPROVE | code fact | FamilyQuant/USearch.xaml.cs:120 | "Run exhaustive clustering on a large database?" | render:02-build | VERIFIED | evidence:Paulo-rulings:FQ15-69A89EC19D12 |
-| FQ15-86A889C7F876 | KEEP | format/export | FamilyQuant/USearch.xaml.cs:130 | "FASTA or T-R (*.fasta or *.T-R)&#124;*.fasta;*.T-R;*.T" | render:02-build | OPEN | pending |
+| FQ15-86A889C7F876 | KEEP | format/export | FamilyQuant/USearch.xaml.cs:130 | "FASTA or T-R (*.fasta or *.T-R)&#124;*.fasta;*.T-R;*.T" | test:FloaterBehaviourCommand | VERIFIED | evidence:FL-behaviour:FQ15-86A889C7F876 |
 | FQ15-AD996DDF8498 | IMPROVE | code fact | FamilyQuant/USearch.xaml.cs:131 | "Choose the protein database to group into families" | render:02-build | VERIFIED | evidence:Paulo-rulings:FQ15-AD996DDF8498 |
 | FQ15-5CFE9A349CD9 | KEEP | format/export | FamilyQuant/USearch.xaml.cs:141 | ".fcf" | test:RunAssayRuntimeLedger | VERIFIED | evidence:AS-build-workflow:FQ15-5CFE9A349CD9 |
 | FQ15-E0CE19231C50 | IMPROVE | code fact | FamilyQuant/USearch.xaml.cs:148 | "\"" | render:02-build | OPEN | pending |
@@ -5639,7 +5639,7 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **5232**; OPEN r
 | FQ15-CE4848EB6432 | IMPROVE | code fact | FamilyQuant/USearch.xaml.cs:200 | "bundled USEARCH program. For the second, set the FAMILYQUANT_USEARCH environment " | render:02-build | VERIFIED | evidence:Paulo-rulings:FQ15-CE4848EB6432 |
 | FQ15-45309635C326 | IMPROVE | code fact | FamilyQuant/USearch.xaml.cs:201 | "variable to a copy of usearch.exe you control." | render:02-build | VERIFIED | evidence:Paulo-rulings:FQ15-45309635C326 |
 | FQ15-458FB5742A67 | IMPROVE | code fact | FamilyQuant/USearch.xaml.cs:202 | "Could not cluster the database" | render:02-build | VERIFIED | evidence:Paulo-rulings:FQ15-458FB5742A67 |
-| FQ15-54BB7A04AC1F | IMPROVE | code fact | FamilyQuant/USearch.xaml.cs:211 | "Nothing was measured: no Family Cluster File has been generated in this panel yet, " | render:02-build | OPEN | pending |
+| FQ15-54BB7A04AC1F | IMPROVE | code fact | FamilyQuant/USearch.xaml.cs:211 | "Nothing was measured: no Family Cluster File has been generated in this panel yet, " | test:FloaterBehaviourCommand | VERIFIED | evidence:FL-behaviour:FQ15-54BB7A04AC1F |
 | FQ15-2B8F9F3F57E3 | IMPROVE | code fact | FamilyQuant/USearch.xaml.cs:212 | "so there are no families to score.\n\n" | test:ShellBehaviour | VERIFIED | evidence:SH-behaviour:FQ15-2B8F9F3F57E3 |
 | FQ15-6590CE96EDAC | KEEP | format/export | FamilyQuant/USearch.xaml.cs:213 | "Next step: press \"Input a FASTA file\" above and choose a target-decoy (.T-R) " | render:02-build | OPEN | pending |
 | FQ15-A905C186DE39 | IMPROVE | code fact | FamilyQuant/USearch.xaml.cs:214 | "database." | render:02-build | VERIFIED | evidence:Paulo-rulings:FQ15-A905C186DE39 |
