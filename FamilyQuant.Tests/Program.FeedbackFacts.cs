@@ -83,6 +83,7 @@ internal static partial class Program
         Check("Y9 displayed Help restores legacy TIC recovery instructions", help.Contains("per-run totals", StringComparison.Ordinal)
             && help.Contains("Re-export", StringComparison.Ordinal) && help.Contains("XQuant", StringComparison.Ordinal));
         FeedbackFailureRoutes(output, observations);
+        PrefixDefinitionTests();
         if (failed == 0) WriteFeedbackFactRows(output, observations);
         Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
         return failed == 0 ? 0 : 1;

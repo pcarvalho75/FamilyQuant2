@@ -356,7 +356,8 @@ public partial class ClusterGenerationControl
                 "calculation.");
 
             ColumnLocus.HeaderStyle = HeaderTip(
-                "A UniProt accession where available, otherwise the database identifier; hover for the original; Reverse_ marks a decoy and contaminant marks a contaminant. " +
+                "A UniProt accession where available, otherwise the database identifier; hover for the original; " + SequenceLabels.DecoyPrefix
+                + " marks a decoy and " + SequenceLabels.ContaminantMarker + " marks a contaminant. " +
                 "Right-click for its UniProt code or page; Ctrl+C copies the clicked column.");
 
             ColumnDomains.HeaderStyle = HeaderTip(
