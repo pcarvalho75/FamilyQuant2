@@ -68,6 +68,7 @@ Finished steps, moved here from docs/ROADMAP.md. The board shows them as green.
 | V4 | Table style for all grids: rows, header, hover, selection, numbers right-aligned, cut-off text shown in a tooltip | M | 3 | V7 | C1, C2, C4 | Renders in both themes at both sizes; header readable | LK | not started | 0% | 0% | T+5 |
 | V5 | Emoji out, Segoe Fluent Icons in | L | 0.5 | 🟢 | C1, all screens | Suite check fails on an emoji in UI text | LK | not started | 0% | 0% | T+0 |
 | V6 | Charts follow the tokens in both themes; `ChartPalette` stays the one source; pinned contrast checks kept | M | 1 | 🟢 | V3, B7, C14 | Contrast check passes; exported PNGs unchanged in the Light palette | RS | not started | 0% | 0% | T+1 |
+| V3 | Zero hard-coded colours: a suite check fails on any colour outside tokens and the chart palette. Each rebuilt screen must pass it; this row closes when the last one does | H | 0.5 | 🟢 | C14 | Guard red on a planted colour; 0 sites left; golden equal | LK | not started | 0% | 0% | T+0 |
 
 ### W4 Shell
 
@@ -120,6 +121,7 @@ Finished steps, moved here from docs/ROADMAP.md. The board shows them as green.
 | X6 | De novo engine tidy: readers, reconciler and table builders, with the logic left in `DeNovoControl` moved into Core | H | 1 | 🟢 | R3 | Golden equal; real-data de novo sections green | FL | not started | 0% | 0% | T+1 |
 | X7 | Project and file formats: `ProjectStore` (1,083) split, schema versioned, and an `.fcf` export the frozen 1.5.0.6 opens | H | 1 | 🟢 | R2 | A file written by 2.0 opens in the reference build with the same families; old `.fqproj` rules kept | FL | not started | 0% | 0% | T+1 |
 | X12 | Improvements found on the way, listed in `docs/IMPROVEMENTS.md` with before and after. Known candidates: the fast clustering pass has no coverage gate (20.1% of its joins, 2,329 of 11,584, fail the second pass's gate); the decoy mixing score cannot see over-merging, so use identified peptides to test the grouping (a peptide identical in two identity families is evidence they are one); the evidence family as a veto on single-linkage merges; one contaminant rule (D5). Anything that changes a number goes to Paulo first | H | 1 | 🟢 | X13, R3 | Each change measured on real data; science review; golden snapshot updated only by Paulo's word | AS | not started | 0% | 0% | T+1 |
+| X13 | Documents: `CLAUDE.md` from 50 KB to a working guide, history to `docs/HISTORY.md`, unprotected talk documents out of the root (`SCIENTIFIC_TALK_SCRIPT.md` stays where it is, untouched), release notes for 2.0. `SCIENTIFIC_METHOD.md` gains the rule that an unannotated protein joins only through an in-scope neighbour, which the code has and the document lacks. The three test files over 1,000 lines split with no check lost | L | 1 | 🟢 | R3 | No fact lost, no line over 300 characters; suite count unchanged | AS | not started | 0% | 0% | T+1 |
 
 ### W7 Releases (Paulo publishes each one)
 

@@ -5,16 +5,16 @@
   "runs": [
     {
       "id": "core-members",
-      "command": "C:\\FamilyQuant-wt2\\floater\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --ledger-core-relocation D:/FamilyQuant-data/out-floater/ledger/frozen-source D:/FamilyQuant-data/out-floater/ledger/X7-integrated-1 X7 \u00222026-11-02 02:04:19 -0800\u0022 D:/FamilyQuant-data/out-floater/ledger/X7-reviewed-relocations.json",
-      "executedAt": "2026-11-02 02:04:19 -0800",
-      "commit": "8b1dbb7c13399b5c3711335786e7154f29f6dffb",
+      "command": "C:\\FamilyQuant-wt2\\results\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --ledger-core-relocation D:/FamilyQuant-data/out-floater/ledger/frozen-source D:/FamilyQuant-data/out-results/B7-2/core-x7 X7 \u00222026-11-02 03:36:42 -0800\u0022 D:/FamilyQuant-data/out-floater/ledger/X7-reviewed-relocations.json",
+      "executedAt": "2026-11-02 03:36:42 -0800",
+      "commit": "bef66db3951f2a77cb8a64c4aaeaa4f9f9e3989f",
       "artifacts": [
         {
-          "path": "D:\\FamilyQuant-data\\out-floater\\ledger\\X7-integrated-1\\comparisons.log",
+          "path": "D:\\FamilyQuant-data\\out-results\\B7-2\\core-x7\\comparisons.log",
           "sha256": "459A3E3FE822636AB311480D8241C5EEA6D54A8C22E776B8473B088B00853837"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-floater\\ledger\\X7-integrated-1\\comparisons.json",
+          "path": "D:\\FamilyQuant-data\\out-results\\B7-2\\core-x7\\comparisons.json",
           "sha256": "CAA0B86E37FA5EEF15E1898EF2DACDCA959AED8F0A7AC48E96C5863D421858FA"
         },
         {
@@ -22,75 +22,75 @@
           "sha256": "B4CC366305F5DA2E471C22BEC0F4E939274577A1DAB992CF719967C6F01E9ECF"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-floater\\ledger\\X7-integrated-1\\executed\\FamilyQuant.Core/ProjectStore.cs",
+          "path": "D:\\FamilyQuant-data\\out-results\\B7-2\\core-x7\\executed\\FamilyQuant.Core/ProjectStore.cs",
           "sha256": "CF34F9F920078064A0F94CA8C3F1021ABFD2D1D6229A69C15E75C9ED899E8949"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-floater\\ledger\\X7-integrated-1\\executed\\FamilyQuant.Core/Storage/DerivedRunFraction.cs",
+          "path": "D:\\FamilyQuant-data\\out-results\\B7-2\\core-x7\\executed\\FamilyQuant.Core/Storage/DerivedRunFraction.cs",
           "sha256": "DB943BF669B6E133E4359C2FABF73502C482052C94E0694F5AC3BD6BF87E68F3"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-floater\\ledger\\X7-integrated-1\\executed\\FamilyQuant.Core/Storage/ProjectArchiveEntries.cs",
+          "path": "D:\\FamilyQuant-data\\out-results\\B7-2\\core-x7\\executed\\FamilyQuant.Core/Storage/ProjectArchiveEntries.cs",
           "sha256": "E6F5E379CA8B22948A63F9E8955AF7B5727E9963DA17C8637865504F8B31739C"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-floater\\ledger\\X7-integrated-1\\executed\\FamilyQuant.Core/Storage/ProjectFileSchema.cs",
+          "path": "D:\\FamilyQuant-data\\out-results\\B7-2\\core-x7\\executed\\FamilyQuant.Core/Storage/ProjectFileSchema.cs",
           "sha256": "CA83EE0B4B17D735F0C59EBDA615432F09856F7999CF885E40EBBC6173ED492B"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-floater\\ledger\\X7-integrated-1\\executed\\FamilyQuant.Core/Storage/ProjectManifestCodec.cs",
+          "path": "D:\\FamilyQuant-data\\out-results\\B7-2\\core-x7\\executed\\FamilyQuant.Core/Storage/ProjectManifestCodec.cs",
           "sha256": "CB22639FA210E2838BD5F760C071E23AF0A74E49291479D8EEC9997AB9D7FE55"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-floater\\ledger\\X7-integrated-1\\executed\\FamilyQuant.Core/Storage/ProjectQuantCodec.cs",
+          "path": "D:\\FamilyQuant-data\\out-results\\B7-2\\core-x7\\executed\\FamilyQuant.Core/Storage/ProjectQuantCodec.cs",
           "sha256": "A5097760D179973DCC6D29CEAA10208254C0B925D67E691F650B62A6BC97F1EC"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-floater\\ledger\\X7-integrated-1\\executed\\FamilyQuant.Core/Storage/ProjectSpectrumCodec.cs",
+          "path": "D:\\FamilyQuant-data\\out-results\\B7-2\\core-x7\\executed\\FamilyQuant.Core/Storage/ProjectSpectrumCodec.cs",
           "sha256": "5DC87F85CB5719C9B38FD3262909E9D764CA9251D263DDE77B7199A0448356C5"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-floater\\ledger\\X7-integrated-1\\executed\\FamilyQuant.Core/Storage/QuantManifest.cs",
-          "sha256": "C7D7279B72B06CF2FCA21581DBBF5F3EDF086C4337294E68BC6FE2F49E0867DE"
+          "path": "D:\\FamilyQuant-data\\out-results\\B7-2\\core-x7\\executed\\FamilyQuant.Core/Storage/QuantManifest.cs",
+          "sha256": "14FD6DCB68E55BA89C8518DE71D1F23BAD4A48642E55CC274B038E6D7140AE98"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-floater\\ledger\\X7-integrated-1\\executed\\FamilyQuant.Core/Storage/QuantRow.cs",
+          "path": "D:\\FamilyQuant-data\\out-results\\B7-2\\core-x7\\executed\\FamilyQuant.Core/Storage/QuantRow.cs",
           "sha256": "7C8F6076F895F8935C09E72A8B12C79AB42886CA35F9132E026F77CE3DF307F1"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-floater\\ledger\\X7-integrated-1\\executed\\FamilyQuant.Tests/FeatureLedgerEvidence.Reporting.cs",
-          "sha256": "71C826FB842E1F16FA53351281297472F6659B50C5FF638A8E1109BD93A0C77B"
+          "path": "D:\\FamilyQuant-data\\out-results\\B7-2\\core-x7\\executed\\FamilyQuant.Tests/FeatureLedgerEvidence.Reporting.cs",
+          "sha256": "8633DCBB14E8DBF1746A1FD771AD4E9404900EB68BA46690A31EFC8DEDFA247B"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-floater\\ledger\\X7-integrated-1\\executed\\FamilyQuant.Tests/FeatureLedgerEvidence.cs",
+          "path": "D:\\FamilyQuant-data\\out-results\\B7-2\\core-x7\\executed\\FamilyQuant.Tests/FeatureLedgerEvidence.cs",
           "sha256": "FCCFCE75E122616388FDD68B96AF3E3F7104DC809B61D1F48C3A4A07B9B1969C"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-floater\\ledger\\X7-integrated-1\\executed\\FamilyQuant.Tests/LedgerMemberFactComparison.cs",
-          "sha256": "AE18ABC01A916A43012F3E34F1B53798FC99346FFEB21CD179CA3D8ADE5834A7"
+          "path": "D:\\FamilyQuant-data\\out-results\\B7-2\\core-x7\\executed\\FamilyQuant.Tests/LedgerMemberFactComparison.cs",
+          "sha256": "ECC25B1F5FE7A455C64C1C5ED21730BCAB6E7C1A726297E458957F70EC52FF6E"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-floater\\ledger\\X7-integrated-1\\executed\\FamilyQuant.Tests/Program.Commands.CoreRelocation.cs",
+          "path": "D:\\FamilyQuant-data\\out-results\\B7-2\\core-x7\\executed\\FamilyQuant.Tests/Program.Commands.CoreRelocation.cs",
           "sha256": "632EA73117DFE589F8F209110D91A1431BCC97BFC7CA5BD009C60AE550725361"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-floater\\ledger\\X7-integrated-1\\executed\\FamilyQuant.Tests/Program.CoreRelocation.cs",
+          "path": "D:\\FamilyQuant-data\\out-results\\B7-2\\core-x7\\executed\\FamilyQuant.Tests/Program.CoreRelocation.cs",
           "sha256": "2CECC1BACB96EA489AFD3ED5EFD72373A762B6F08452048E6F4FC449B87E1367"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-floater\\ledger\\X7-integrated-1\\executed\\frozen\\FamilyQuant/ProjectStore.cs",
+          "path": "D:\\FamilyQuant-data\\out-results\\B7-2\\core-x7\\executed\\frozen\\FamilyQuant/ProjectStore.cs",
           "sha256": "EC6F2C8603FDA27EB38ABA61686DD9CAA89B48968921925B83579F15A981DCA4"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-floater\\ledger\\X7-integrated-1\\executed\\FamilyQuant.Tests.dll",
-          "sha256": "29451CBE006967B06B45E935E399931B140C657C611481DD323A1F1E210CC001"
+          "path": "D:\\FamilyQuant-data\\out-results\\B7-2\\core-x7\\executed\\FamilyQuant.Tests.dll",
+          "sha256": "C0708ECD79DECA7E34C1E33ECF8356757C8F43F5A9F37D717F2F4AFC020B76B2"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-floater\\ledger\\X7-integrated-1\\executed\\FamilyQuant.Core.dll",
-          "sha256": "853393F990ACA87455F4FD68FFD68559AE6E514989B09765D2AE053CF3585F79"
+          "path": "D:\\FamilyQuant-data\\out-results\\B7-2\\core-x7\\executed\\FamilyQuant.Core.dll",
+          "sha256": "E0A93AB8C91C8EDD992583C5D919183C4BAC0D5FD06E8B21CECB2DF9EBA0BE3C"
         }
       ],
-      "workingDirectory": "C:\\FamilyQuant-wt2\\floater"
+      "workingDirectory": "C:\\FamilyQuant-wt2\\results"
     }
   ],
   "rows": [
@@ -124,7 +124,7 @@
         {
           "path": "FamilyQuant.Core/Storage/QuantManifest.cs",
           "symbol": "FamilyQuant.QuantManifest::public static Dictionary \u003C string , string \u003E DefaultProvenance ( )",
-          "sha256": "C7D7279B72B06CF2FCA21581DBBF5F3EDF086C4337294E68BC6FE2F49E0867DE"
+          "sha256": "14FD6DCB68E55BA89C8518DE71D1F23BAD4A48642E55CC274B038E6D7140AE98"
         }
       ],
       "proofs": [],
@@ -234,7 +234,7 @@
         {
           "path": "FamilyQuant.Core/Storage/QuantManifest.cs",
           "symbol": "FamilyQuant.QuantManifest::public static Dictionary \u003C string , string \u003E DefaultProvenance ( )",
-          "sha256": "C7D7279B72B06CF2FCA21581DBBF5F3EDF086C4337294E68BC6FE2F49E0867DE"
+          "sha256": "14FD6DCB68E55BA89C8518DE71D1F23BAD4A48642E55CC274B038E6D7140AE98"
         }
       ],
       "proofs": [],
@@ -336,7 +336,7 @@
         {
           "path": "FamilyQuant.Core/Storage/QuantManifest.cs",
           "symbol": "FamilyQuant.QuantManifest::public static Dictionary \u003C string , string \u003E DefaultProvenance ( )",
-          "sha256": "C7D7279B72B06CF2FCA21581DBBF5F3EDF086C4337294E68BC6FE2F49E0867DE"
+          "sha256": "14FD6DCB68E55BA89C8518DE71D1F23BAD4A48642E55CC274B038E6D7140AE98"
         }
       ],
       "proofs": [],
@@ -398,7 +398,7 @@
         {
           "path": "FamilyQuant.Core/Storage/QuantManifest.cs",
           "symbol": "FamilyQuant.QuantManifest::public static Dictionary \u003C string , string \u003E DefaultProvenance ( )",
-          "sha256": "C7D7279B72B06CF2FCA21581DBBF5F3EDF086C4337294E68BC6FE2F49E0867DE"
+          "sha256": "14FD6DCB68E55BA89C8518DE71D1F23BAD4A48642E55CC274B038E6D7140AE98"
         }
       ],
       "proofs": [],
@@ -428,7 +428,7 @@
         {
           "path": "FamilyQuant.Core/Storage/QuantManifest.cs",
           "symbol": "FamilyQuant.QuantManifest::public static Dictionary \u003C string , string \u003E DefaultProvenance ( )",
-          "sha256": "C7D7279B72B06CF2FCA21581DBBF5F3EDF086C4337294E68BC6FE2F49E0867DE"
+          "sha256": "14FD6DCB68E55BA89C8518DE71D1F23BAD4A48642E55CC274B038E6D7140AE98"
         }
       ],
       "proofs": [],
@@ -450,7 +450,7 @@
         {
           "path": "FamilyQuant.Core/Storage/QuantManifest.cs",
           "symbol": "FamilyQuant.QuantManifest::public static Dictionary \u003C string , string \u003E DefaultProvenance ( )",
-          "sha256": "C7D7279B72B06CF2FCA21581DBBF5F3EDF086C4337294E68BC6FE2F49E0867DE"
+          "sha256": "14FD6DCB68E55BA89C8518DE71D1F23BAD4A48642E55CC274B038E6D7140AE98"
         }
       ],
       "proofs": [],
@@ -464,7 +464,7 @@
         {
           "path": "FamilyQuant.Core/Storage/QuantManifest.cs",
           "symbol": "FamilyQuant.QuantManifest::public static Dictionary \u003C string , string \u003E DefaultProvenance ( )",
-          "sha256": "C7D7279B72B06CF2FCA21581DBBF5F3EDF086C4337294E68BC6FE2F49E0867DE"
+          "sha256": "14FD6DCB68E55BA89C8518DE71D1F23BAD4A48642E55CC274B038E6D7140AE98"
         }
       ],
       "proofs": [],
@@ -486,7 +486,7 @@
         {
           "path": "FamilyQuant.Core/Storage/QuantManifest.cs",
           "symbol": "FamilyQuant.QuantManifest::public static Dictionary \u003C string , string \u003E DefaultProvenance ( )",
-          "sha256": "C7D7279B72B06CF2FCA21581DBBF5F3EDF086C4337294E68BC6FE2F49E0867DE"
+          "sha256": "14FD6DCB68E55BA89C8518DE71D1F23BAD4A48642E55CC274B038E6D7140AE98"
         }
       ],
       "proofs": [],
@@ -580,7 +580,7 @@
         {
           "path": "FamilyQuant.Core/Storage/QuantManifest.cs",
           "symbol": "FamilyQuant.QuantManifest::public static Dictionary \u003C string , string \u003E DefaultProvenance ( )",
-          "sha256": "C7D7279B72B06CF2FCA21581DBBF5F3EDF086C4337294E68BC6FE2F49E0867DE"
+          "sha256": "14FD6DCB68E55BA89C8518DE71D1F23BAD4A48642E55CC274B038E6D7140AE98"
         }
       ],
       "proofs": [],
@@ -656,7 +656,7 @@
         {
           "path": "FamilyQuant.Core/Storage/QuantManifest.cs",
           "symbol": "FamilyQuant.QuantManifest::public static Dictionary \u003C string , string \u003E DefaultProvenance ( )",
-          "sha256": "C7D7279B72B06CF2FCA21581DBBF5F3EDF086C4337294E68BC6FE2F49E0867DE"
+          "sha256": "14FD6DCB68E55BA89C8518DE71D1F23BAD4A48642E55CC274B038E6D7140AE98"
         }
       ],
       "proofs": [],
@@ -710,7 +710,7 @@
         {
           "path": "FamilyQuant.Core/Storage/QuantManifest.cs",
           "symbol": "FamilyQuant.QuantManifest::public static Dictionary \u003C string , string \u003E DefaultProvenance ( )",
-          "sha256": "C7D7279B72B06CF2FCA21581DBBF5F3EDF086C4337294E68BC6FE2F49E0867DE"
+          "sha256": "14FD6DCB68E55BA89C8518DE71D1F23BAD4A48642E55CC274B038E6D7140AE98"
         }
       ],
       "proofs": [],
@@ -772,7 +772,7 @@
         {
           "path": "FamilyQuant.Core/Storage/QuantManifest.cs",
           "symbol": "FamilyQuant.QuantManifest::public static Dictionary \u003C string , string \u003E DefaultProvenance ( )",
-          "sha256": "C7D7279B72B06CF2FCA21581DBBF5F3EDF086C4337294E68BC6FE2F49E0867DE"
+          "sha256": "14FD6DCB68E55BA89C8518DE71D1F23BAD4A48642E55CC274B038E6D7140AE98"
         }
       ],
       "proofs": [],
@@ -818,7 +818,7 @@
         {
           "path": "FamilyQuant.Core/Storage/QuantManifest.cs",
           "symbol": "FamilyQuant.QuantManifest::public static Dictionary \u003C string , string \u003E DefaultProvenance ( )",
-          "sha256": "C7D7279B72B06CF2FCA21581DBBF5F3EDF086C4337294E68BC6FE2F49E0867DE"
+          "sha256": "14FD6DCB68E55BA89C8518DE71D1F23BAD4A48642E55CC274B038E6D7140AE98"
         }
       ],
       "proofs": [],
@@ -856,7 +856,7 @@
         {
           "path": "FamilyQuant.Core/Storage/QuantManifest.cs",
           "symbol": "FamilyQuant.QuantManifest::public static Dictionary \u003C string , string \u003E DefaultProvenance ( )",
-          "sha256": "C7D7279B72B06CF2FCA21581DBBF5F3EDF086C4337294E68BC6FE2F49E0867DE"
+          "sha256": "14FD6DCB68E55BA89C8518DE71D1F23BAD4A48642E55CC274B038E6D7140AE98"
         }
       ],
       "proofs": [],
@@ -950,7 +950,7 @@
         {
           "path": "FamilyQuant.Core/Storage/QuantManifest.cs",
           "symbol": "FamilyQuant.QuantManifest::public static Dictionary \u003C string , string \u003E DefaultProvenance ( )",
-          "sha256": "C7D7279B72B06CF2FCA21581DBBF5F3EDF086C4337294E68BC6FE2F49E0867DE"
+          "sha256": "14FD6DCB68E55BA89C8518DE71D1F23BAD4A48642E55CC274B038E6D7140AE98"
         }
       ],
       "proofs": [],
@@ -1060,7 +1060,7 @@
         {
           "path": "FamilyQuant.Core/Storage/QuantManifest.cs",
           "symbol": "FamilyQuant.QuantManifest::public static Dictionary \u003C string , string \u003E DefaultProvenance ( )",
-          "sha256": "C7D7279B72B06CF2FCA21581DBBF5F3EDF086C4337294E68BC6FE2F49E0867DE"
+          "sha256": "14FD6DCB68E55BA89C8518DE71D1F23BAD4A48642E55CC274B038E6D7140AE98"
         }
       ],
       "proofs": [],
@@ -1122,7 +1122,7 @@
         {
           "path": "FamilyQuant.Core/Storage/QuantManifest.cs",
           "symbol": "FamilyQuant.QuantManifest::public static Dictionary \u003C string , string \u003E DefaultProvenance ( )",
-          "sha256": "C7D7279B72B06CF2FCA21581DBBF5F3EDF086C4337294E68BC6FE2F49E0867DE"
+          "sha256": "14FD6DCB68E55BA89C8518DE71D1F23BAD4A48642E55CC274B038E6D7140AE98"
         }
       ],
       "proofs": [],
@@ -1144,7 +1144,7 @@
         {
           "path": "FamilyQuant.Core/Storage/QuantManifest.cs",
           "symbol": "FamilyQuant.QuantManifest::public static Dictionary \u003C string , string \u003E DefaultProvenance ( )",
-          "sha256": "C7D7279B72B06CF2FCA21581DBBF5F3EDF086C4337294E68BC6FE2F49E0867DE"
+          "sha256": "14FD6DCB68E55BA89C8518DE71D1F23BAD4A48642E55CC274B038E6D7140AE98"
         }
       ],
       "proofs": [],
@@ -1222,7 +1222,7 @@
         {
           "path": "FamilyQuant.Core/Storage/QuantManifest.cs",
           "symbol": "FamilyQuant.QuantManifest::public static Dictionary \u003C string , string \u003E DefaultProvenance ( )",
-          "sha256": "C7D7279B72B06CF2FCA21581DBBF5F3EDF086C4337294E68BC6FE2F49E0867DE"
+          "sha256": "14FD6DCB68E55BA89C8518DE71D1F23BAD4A48642E55CC274B038E6D7140AE98"
         }
       ],
       "proofs": [],
@@ -1284,7 +1284,7 @@
         {
           "path": "FamilyQuant.Core/Storage/QuantManifest.cs",
           "symbol": "FamilyQuant.QuantManifest::public static Dictionary \u003C string , string \u003E DefaultProvenance ( )",
-          "sha256": "C7D7279B72B06CF2FCA21581DBBF5F3EDF086C4337294E68BC6FE2F49E0867DE"
+          "sha256": "14FD6DCB68E55BA89C8518DE71D1F23BAD4A48642E55CC274B038E6D7140AE98"
         }
       ],
       "proofs": [],
@@ -1303,7 +1303,7 @@
           "kind": "test",
           "target": "CoreRelocationCommand",
           "assertion": "Core member kind export/storage fact: all listed complete declarations retain exact literal syntax and multiplicity",
-          "artifact": "D:\\FamilyQuant-data\\out-floater\\ledger\\X7-integrated-1\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-results\\B7-2\\core-x7\\comparisons.log",
           "inspectedBy": ""
         }
       ]

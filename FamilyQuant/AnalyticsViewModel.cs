@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace FamilyQuant;
 
-public enum ResultsExportKind { Summary, Peptides, Figures, EvidencePack, Homology }
+public enum ResultsExportKind { Summary, Peptides, Figures, EvidencePack, Homology, DatabaseGap, SuggestedAdditions }
 public sealed record ResultsSummaryCard(string Title, string Value, string Detail);
 
 /// <summary>Results derived from the held quantitation, with no RAW extraction or document mutation.</summary>
@@ -22,6 +22,7 @@ public sealed class AnalyticsViewModel : ScreenViewModel
     public AnalyticsData? Data { get; }
     public FamilyEnvelopeQuantResult? Families { get; }
     public DeNovoHomology? Homology { get; }
+    public DatabaseGapViewModel DatabaseGap { get; }
     public bool HasHomology => Homology != null;
     public string HomologySummary => Homology == null ? "" :
         $"Latest homology snapshot: {Homology.MappedToTargets:N0} of {Homology.PeptidesSearched:N0} distinct " +
@@ -36,8 +37,11 @@ public sealed class AnalyticsViewModel : ScreenViewModel
     public bool FamilyAsPercent { get => percent; set => Set(ref percent, value); }
     public string Status { get => status; private set => Set(ref status, value); }
     public ResultsExportKind ExportKind { get => exportKind; set { Set(ref exportKind, value); Changed(nameof(CanExport)); } }
-    public bool CanExport => ExportKind == ResultsExportKind.Homology ? HasHomology :
-        HasData && (ExportKind != ResultsExportKind.EvidencePack || manifest != null && curation != null && Families != null);
+    public bool CanExport => ExportKind switch {
+        ResultsExportKind.DatabaseGap => DatabaseGap.HasData,
+        ResultsExportKind.SuggestedAdditions => DatabaseGap.CanExportFasta,
+        ResultsExportKind.Homology => HasHomology,
+        _ => HasData && (ExportKind != ResultsExportKind.EvidencePack || manifest != null && curation != null && Families != null) };
 
     public AnalyticsViewModel(IReadOnlyList<QuantRow>? rows, QuantManifest? manifest,
         FamilyClusterFile? curation = null, PeptideFamilyAttribution? attribution = null, DeNovoHomology? homology = null)
@@ -45,6 +49,7 @@ public sealed class AnalyticsViewModel : ScreenViewModel
         this.manifest = manifest;
         this.curation = curation;
         Homology = homology;
+        DatabaseGap = new DatabaseGapViewModel(manifest?.FamilyWorldResult, curation);
         if (rows == null || rows.Count == 0)
         {
             if (homology != null)
@@ -54,6 +59,7 @@ public sealed class AnalyticsViewModel : ScreenViewModel
                     (homology.Families.Count == 1 ? " family" : " families"),
                     HomologySummary) };
             }
+            if (DatabaseGap.HasData) exportKind = ResultsExportKind.DatabaseGap;
             return;
         }
         Data = AnalyticsBuilder.Build(rows, manifest?.PerRunTic ?? new Dictionary<string, double>(StringComparer.OrdinalIgnoreCase));
@@ -122,6 +128,8 @@ public sealed class AnalyticsViewModel : ScreenViewModel
             ResultsExportKind.Figures => path => AnalyticsFigures.Save(Data!, Families, path, top, asPercent),
             ResultsExportKind.EvidencePack => path => PresentationEvidencePack.Save(Data!, manifest!, curation!, Families!, path),
             ResultsExportKind.Homology => path => HomologyCsv.Write(path, Homology!),
+            ResultsExportKind.DatabaseGap => path => File.WriteAllText(path, DatabaseGap.BuildCsv()),
+            ResultsExportKind.SuggestedAdditions => path => File.WriteAllText(path, DatabaseGap.BuildSuggestedFasta()),
             _ => throw new InvalidOperationException("Choose a supported export.")
         };
     }

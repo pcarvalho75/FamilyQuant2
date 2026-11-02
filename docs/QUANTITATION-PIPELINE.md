@@ -70,6 +70,17 @@ the rules in force (`RuleText`). No existing table, total or export changes. The
 B1 checker (`--family-world-check`) runs the same pass under B1's settings and
 asserts its numbers equal its own tally bit for bit, then runs it under D11.
 
+`FamilyWorldErrors` (B6) puts the error beside every family of the pass. It builds
+the project's known answers from the stored spectrum table (accepted de novo calls on
+identified scans; the family is the UniProt family of the database proteins holding
+the identified peptide), credits them in the world without the sample's own species
+under the pass's rules, and summarizes per family in scope: the decoy rate of its
+credits and the right rate of the known answers credited to it, shown only from 10
+such credits, with the counts always beside it; otherwise the row says why. The table,
+`FamilyWorldSummary`, is stored as the optional `QuantManifest.FamilyWorldResult`
+(absent from `manifest.json` when the pass never ran) and writes its own CSV. The
+reading of this table on the Bothrops jararaca project is in `docs/vision/B6-ERRORS.md`.
+
 ## Guide invariants and checks
 
 The eight invariants in `CLAUDE.md` retain their existing fixture coverage. The
