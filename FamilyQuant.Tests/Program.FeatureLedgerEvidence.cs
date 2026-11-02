@@ -52,10 +52,32 @@ internal static partial class Program
             new() { new(log, FeatureLedgerEvidence.Hash(log)), new(png, FeatureLedgerEvidence.Hash(png)) });
         FeatureLedgerEvidence.Registry Registry(FeatureLedgerEvidence.Row value, FeatureLedgerEvidence.Run? suppliedRun = null,
             string? reference = null) => FeatureLedgerEvidence.Load(root, inventory, new[]
-            { new FeatureLedgerEvidence.Register(1, "fixture", reference ?? FeatureLedger.ReferenceCommit, new() { suppliedRun ?? run }, new() { value }) });
+            { new FeatureLedgerEvidence.Register(1, "fixture", reference ?? FeatureLedger.ReferenceCommit, new() { suppliedRun ?? run }, new() { value }) },
+                Array.Empty<FeatureLedgerEvidence.KindReview>());
         bool Valid(FeatureLedgerEvidence.Row value, FeatureLedgerEvidence.Run? suppliedRun = null) =>
             Registry(value, suppliedRun).IsVerified(value.ObservationId, "evidence:fixture:" + value.ObservationId);
         Check("a well-formed current receipt with its exact green assertion is accepted", Valid(row));
+        var kindRow = row with { Proofs = new(), KindReceiptId = "same-kind", Compared = "frozen named property -> current named property" };
+        var sameKindObservation = inventory.Observations.First(other => other.Kind == observed.Kind && other.Id != observed.Id && !FeatureLedger.IsApprovedDrop(other));
+        var secondKindRow = kindRow with { ObservationId = sameKindObservation.Id, Compared = "second frozen property -> second current property" };
+        var kindRegister = new FeatureLedgerEvidence.Register(1, "fixture", FeatureLedger.ReferenceCommit, new() { run }, new() { kindRow, secondKindRow },
+            new() { new("same-kind", observed.Kind, new() { proof }) });
+        var kindRegistry = FeatureLedgerEvidence.Load(root, inventory, new[] { kindRegister }, Array.Empty<FeatureLedgerEvidence.KindReview>());
+        Check("one executed kind receipt can support separately named row comparisons", kindRegistry.IsVerified(observed.Id, "evidence:fixture:" + observed.Id)
+            && kindRegistry.IsVerified(sameKindObservation.Id, "evidence:fixture:" + sameKindObservation.Id));
+        Check("a kind receipt cannot close a row without its comparison description", !FeatureLedgerEvidence.Load(root, inventory,
+            new[] { kindRegister with { Rows = new() { kindRow with { Compared = "" } } } }, Array.Empty<FeatureLedgerEvidence.KindReview>())
+            .IsVerified(observed.Id, "evidence:fixture:" + observed.Id));
+        Check("a shared receipt cannot be borrowed by another kind", !FeatureLedgerEvidence.Load(root, inventory,
+            new[] { kindRegister with { KindReceipts = new() { new("same-kind", "invented kind", new() { proof }) } } }, Array.Empty<FeatureLedgerEvidence.KindReview>())
+            .IsVerified(observed.Id, "evidence:fixture:" + observed.Id));
+        var reopened = FeatureLedgerEvidence.Load(root, inventory, new[] { kindRegister }, new[]
+            { new FeatureLedgerEvidence.KindReview(observed.Kind, "REOPENED", "synthetic independent reviewer", "one sampled row failed", run.ExecutedAt) });
+        Check("one sampled failure reopens every row of its kind", !reopened.IsVerified(observed.Id, "evidence:fixture:" + observed.Id)
+            && !reopened.IsVerified(sameKindObservation.Id, "evidence:fixture:" + sameKindObservation.Id));
+        Check("a reopened kind stays excluded from automatic reapplication", !FeatureLedgerEvidence.Apply(
+            "| " + observed.Id + " | IMPROVE | " + observed.Kind + " | fixture | fact | test:FeatureLedgerEvidenceTests | OPEN | pending |\n", reopened)
+            .Contains(" | VERIFIED | ", StringComparison.Ordinal));
         Check("source relocation without execution stays OPEN", !Valid(row with { Proofs = new() }));
         Check("receipt rejects an unknown execution target", !Valid(row with { Proofs = new() { proof with { Target = "InventedMethod" } } }));
         Check("receipt rejects a missing assertion", !Valid(row with { Proofs = new() { proof with { Assertion = "not executed" } } }));

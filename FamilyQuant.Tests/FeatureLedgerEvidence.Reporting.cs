@@ -55,7 +55,7 @@ internal static partial class FeatureLedgerEvidence
     internal static string Apply(string markdown, Registry registry)
     {
         if (registry.FatalProblems.Count > 0) throw new InvalidDataException(string.Join("; ", registry.FatalProblems));
-        var best = registry.Entries.Values.Where(e => e.Valid).GroupBy(e => e.Row.ObservationId)
+        var best = registry.Entries.Values.Where(e => e.Valid && !registry.IsKindBlocked(e.Row.ObservationId)).GroupBy(e => e.Row.ObservationId)
             .ToDictionary(g => g.Key, g => g.OrderBy(e => e.Step, StringComparer.Ordinal).First(), StringComparer.Ordinal);
         var lines = markdown.Replace("\r\n", "\n").Split('\n');
         for (int i = 0; i < lines.Length; i++)
@@ -140,7 +140,7 @@ internal static partial class FeatureLedgerEvidence
             approvedDrop = group.Count(r => r.state == "APPROVED_DROP")
         }).ToArray();
         var sample = mappings.Where(r => r.state == "VERIFIED").OrderBy(r => Convert.ToHexString(SHA256.HashData(
-            Encoding.UTF8.GetBytes(FeatureLedger.ReferenceInventorySha256 + "|" + r.Id))), StringComparer.Ordinal).Take(50).ToArray();
+            Encoding.UTF8.GetBytes(FeatureLedger.ReferenceInventorySha256 + "|" + r.Id))), StringComparer.Ordinal).Take(200).ToArray();
         var report = new
         {
             frozenCommit = FeatureLedger.ReferenceCommit, inventorySha256 = FeatureLedger.Fingerprint(inventory),
@@ -149,12 +149,14 @@ internal static partial class FeatureLedgerEvidence
             retainedMovement = mappings.Where(r => r.state != "APPROVED_DROP").GroupBy(r => r.movement)
                 .OrderBy(g => g.Key, StringComparer.Ordinal).Select(g => new { movement = g.Key, count = g.Count() }).ToArray(),
             sampleSeed = FeatureLedger.ReferenceInventorySha256, sampleCount = sample.Length,
+            reopenedKinds = registry.ReopenedKinds.OrderBy(kind => kind, StringComparer.Ordinal).ToArray(),
             ledgerProblems = ledgerProblems.OrderBy(p => p, StringComparer.Ordinal).ToArray(),
             fatalProblems = registry.FatalProblems.OrderBy(p => p, StringComparer.Ordinal).ToArray()
         };
         WriteJson(Path.Combine(output, "report.json"), report);
         WriteJson(Path.Combine(output, "mapping.json"), mappings);
-        WriteJson(Path.Combine(output, "review-sample-50.json"), sample);
+        WriteJson(Path.Combine(output, "review-sample-50.json"), sample.Take(50).ToArray());
+        WriteJson(Path.Combine(output, "review-sample-200.json"), sample);
         WriteJson(Path.Combine(output, "source-files.json"), inventory.Files.Select(file => new
         { frozenPath = file.Path, frozenSha256 = file.Sha256, file.Observations, sourceFileNow = paths[file.Path] }).ToArray());
         var tsv = new StringBuilder("kind\tVERIFIED\tOPEN\tAPPROVED_DROP\n");
