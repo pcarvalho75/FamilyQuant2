@@ -109,7 +109,53 @@ the sequence meeting other proteins, not from misreads.
   measures.
 - I did not run the gate on a second sample.
 
-## What studying the gate would look at (for Paulo)
+## The gate study, and Paulo's decision (D11)
+
+The roadmap's answer to BETWEEN is to study the gate before building. The study (same checker, commit
+b0c6e42, output `D:/FamilyQuant-data/out-opus/b1/study2`) measures one candidate rule without applying it:
+a minimum tag length for the cross-species pass. To keep the choice from being made on the numbers it then
+reports, the known answers were split in two BEFORE anything was looked at, by SHA-256 of the identified
+peptide (every tag of one peptide stays in one half; the outcome plays no part): a table half of 2,304
+pairs (559 peptides) and a held-out half of 2,072 pairs (574 peptides). The bars did not move.
+
+| Minimum tag length | Table half: landed, right | Held-out half: landed, right | Residual landed | Decoys of landed | Credits to families with no known answer |
+|---:|---:|---:|---:|---:|---:|
+| 7 (none) | 1,044, 92.24% | 1,092, 92.67% | 26.34% | 7.14% | 232 to 170 families |
+| 8 | 1,010, 94.36% | 1,050, 95.05% | 23.34% | 1.49% | 68 to 46 families |
+| 9 | 965, 94.61% | 1,006, 96.02% | 21.58% | 0.74% | 44 to 23 families |
+| 10 | 918, 94.44% | 942, 95.97% | 19.52% | 0.82% | 43 to 22 families |
+| 11 | 821, 95.37% | 836, 97.49% | 18.23% | 0.02% | 22 to 10 families |
+| 12 | 739, 95.26% | 716, 97.77% | 16.41% | 0.02% | 16 to 7 families |
+| 13 | 653, 95.10% | 626, 98.08% | 12.41% | 0.01% | 12 to 4 families |
+| 14 | 560, 95.18% | 534, 98.13% | 9.09% | 0.01% | 9 to 4 families |
+| 15 | 496, 94.56% | 471, 98.09% | 7.72% | 0.00% | 8 to 4 families |
+
+**Paulo decided (D11): a tag needs at least 9 residues, and only families in scope can be credited.** At 9
+residues the table half is right in 94.61% of landings (913 of 965) and the held-out half in 96.02% (966 of
+1,006); pooled, 1,879 of 1,971, 95.33%. Coverage lands 21.58% of the residual with decoys at 0.74% of it.
+Against the unchanged bars, that is a pass on the held-out half and pooled, NOT on both halves: the table
+half stays between, 0.39 points under 95%. The landed share and the decoy rate pass.
+
+What the study did not measure: the in-scope rule. It counted only how many of the credits to families with
+no known answer fall outside the panel's families (29 of the 44 at 9 residues); the effect of crediting
+in-scope families only is B5's to measure, on the same known answers.
+
+By family at 9 residues (right among landed, table half / held-out half): metalloproteinase (M12B) 95/95,
+snaclec 91/97, peptidase S1 97/96, flavin monoamine oxidase 96/95, CRISP 98/98, true venom lectin 100/91,
+PDGF/VEGF 100/95, phospholipase A2 85/88, 5'-nucleotidase 100/100, NGF-beta 80/96, glutaminyl-peptide
+cyclotransferase 100/100, glycosyl hydrolase 56 100/100. Phospholipase A2 stays the weakest family: 67% to 85%
+in the table half at every length, 77% to 88% in the held-out half up to 14 residues. It must be reported with
+its own rate, never inside a mean.
+
+**Families with no known answer.** Without a length rule 170 such families took 232 credits, all wrong by
+construction, because no identified peptide of the sample vouches for them; at 9 residues 23 families take
+44. This test cannot tell whether a credit to such a family is right. What I would do: (1) credit only
+in-scope families, as D11 now says, which removes most of them (29 of the 44 at 9 residues fall outside the
+panel's families); (2) in B6, show a family with no known answer as "no known-answer evidence", never with a
+rate borrowed from the mean; (3) as a later proposal, measure those families on known answers from another
+sample, or from a project whose database search does identify them.
+
+## What the study was for (written before it ran)
 
 The errors sit in tags of 10 residues or fewer, where a fixed 80% fraction allows few identities. A study
 would measure, on these same known answers and decoys, a length or minimum-identities rule for the
