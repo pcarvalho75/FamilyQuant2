@@ -79,6 +79,7 @@ Run the built test executable with these flags and explicit lane-owned outputs:
 | `--ledger-secondary-compare <frozen-root> <native-master-audit> <fresh-output> <date> [--negative-control]` | Scoped exact secondary-view declarations for OPEN master IDs; [guide](SECONDARY-LEDGER.md) |
 | `--ledger-secondary-runtime <frozen-root> <native-master-audit> <frozen-app> <fresh-output> <date> [--negative-control]` | Native secondary controls, actions, values and cache contracts; [guide](SECONDARY-LEDGER.md) |
 | `--prove-shell-main <frozen-root> <fresh-output> <date>` | Execute native MainWindow route/dialog/message cases and compare scoped frozen frames; emit SH-main-routes without importing |
+| `--ledger-secondary-interactions <frozen-root> <native-master-audit> <frozen-app> <fresh-output> <date> [--negative-control]` | Quantify/close, native identity chooser outcomes and injected GridCopy failure/modifier contracts; [guide](SECONDARY-LEDGER.md) |
 
 For example, obtain the timestamp with `date '+%F %T %z'` immediately before the proof command.
 Neither the proof runner nor the audit invokes the frozen-source generator.
@@ -158,7 +159,10 @@ synchronization context. Owned synthetic files test chooser cancellation, FCF/FQ
 successful writes and retained previous bytes after refusal. Fake presenters capture native
 dialog fields and reports without opening a system dialog. Navigation receipts pin the old
 entry point, the current header and the executed view/document outcome. Quantify navigation
-does not execute extraction; SEPro cancellation does not prove its rewrite. Help/tooltips
+does not execute extraction. An owned synthetic SEPro package additionally exercises the
+actual reannotation success, one/eleven missing identifiers and controlled loader failure.
+The check verifies the separate copy's curated GroupNo and unchanged source package/curation.
+It uses the vendor constructors and Save/Load API, with no collaborator data or spectra. Help/tooltips
 and the transferred App/Home style rows are excluded.
 
 Message facts use the frozen handler's complete first/second MessageBox argument. Known
@@ -172,6 +176,11 @@ support the candidate register. Compare comparisons.json, comparisons.log and
 native-cases-canonical.json between two runs. Canonicalization replaces only the owned fixture
 root after all raw-value and file-state checks; raw captures remain retained. Native fixture
 project timestamps are not a scientific determinism or RAW-validation claim.
+Conditional message literals need the predicate recorded by their native case; skipped
+branches and inner format strings earn no credit. One obsolete Build-menu reference may
+follow the frozen named command to its executed current File path. That comparison requires
+one literal occurrence, excludes variable values and compares the complete resulting report.
+Its old/new text and the specific route remain explicit in each receipt.
 
 The N5 first pass executes synthetic project write/read, native ZIP and quant-column checks,
 source discovery, descriptor/cutoff checks and refusal paths. Each closed row has its own

@@ -68,7 +68,7 @@ public static class EvidenceTaskDiscovery
         var targets = file.MyExtendedFastaItems.Where(p => !NearestReviewed.IsDecoy(p)).ToList();
         var proteins = targets.Where(p => !IsContaminant(p)).ToList();
         if (proteins.Count == 0) throw new InvalidDataException("There are no non-contaminant target proteins to read.");
-        var headers = proteins.Select(Header).ToList();
+        var headers = proteins.SelectMany(Header).ToList();
         var taxa = headers.GroupBy(h => h.TaxonId).OrderBy(g => g.Key).Select(g => new EvidenceTaxon
         {
             TaxonId = g.Key, ScientificName = string.Join("; ", g.Select(h => h.ScientificName).Distinct(StringComparer.Ordinal).OrderBy(n => n, StringComparer.Ordinal)),
@@ -185,17 +185,22 @@ public static class EvidenceTaskDiscovery
     private static bool IsContaminant(FastaItemExtended protein) =>
         SequenceLabels.IsContaminant(protein.SequenceIdentifier);
 
-    private static EvidenceTaxon Header(FastaItemExtended protein)
+    private static IReadOnlyList<EvidenceTaxon> Header(FastaItemExtended protein)
     {
         string identifier = protein.SequenceIdentifier ?? string.Empty;
         MatchCollection matches = Organism.Matches(protein.Description ?? string.Empty);
         if (!(identifier.StartsWith("sp|", StringComparison.Ordinal) || identifier.StartsWith("tr|", StringComparison.Ordinal))
             || !FamilyNaming.IsUniProtAccession(FamilyNaming.Accession(identifier)) || matches.Count == 0
-            || !int.TryParse(matches[0].Groups["id"].Value, NumberStyles.None, CultureInfo.InvariantCulture, out int id)
             || matches.Cast<Match>().Any(match => !int.TryParse(match.Groups["id"].Value, NumberStyles.None,
-                CultureInfo.InvariantCulture, out int other) || other != id))
+                CultureInfo.InvariantCulture, out _)))
             throw new InvalidDataException("Cannot read a UniProt OS= and OX= header for '" + identifier + "'. No task was guessed; use UniProt headers or choose the scope manually.");
-        return new EvidenceTaxon { TaxonId = id, ScientificName = matches[0].Groups["name"].Value.Trim() };
+        // One sequence may retain several joined UniProt entries. Every distinct taxon participates
+        // in discovery, while duplicate same-taxon aliases keep the first source name as before.
+        return matches.Cast<Match>().Select(match => new EvidenceTaxon
+        {
+            TaxonId = int.Parse(match.Groups["id"].Value, NumberStyles.None, CultureInfo.InvariantCulture),
+            ScientificName = match.Groups["name"].Value.Trim(),
+        }).GroupBy(taxon => taxon.TaxonId).Select(group => group.First()).ToArray();
     }
 
     private static EvidenceTaxon ReadTaxon(JsonElement item)

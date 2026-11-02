@@ -25,7 +25,7 @@ namespace FamilyQuant
     {
         /// <summary>The sample's own taxa: the OX= of the curation's targets, decoys and contaminants left out.</summary>
         public static SortedSet<string> SampleTaxa(FamilyClusterFile curation) =>
-            new SortedSet<string>(SampleTargets(curation).Select(i => FamilyWorld.TaxonOf(i.Description)).Where(t => t.Length > 0), StringComparer.Ordinal);
+            new SortedSet<string>(SampleTargets(curation).SelectMany(i => FamilyWorld.TaxaOf(i.Description)), StringComparer.Ordinal);
 
         /// <summary>The accessions of the curation's targets: the sample's own database.</summary>
         public static HashSet<string> SampleAccessions(FamilyClusterFile curation) =>

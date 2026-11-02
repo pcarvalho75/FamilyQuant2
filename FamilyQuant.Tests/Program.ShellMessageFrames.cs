@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Xml.Linq;
 
 namespace FamilyQuant.Tests;
 
@@ -16,6 +17,8 @@ internal static partial class Program
         bool read = LedgerMemberFactComparison.TryMessageFrame(row, source, "Save", out var frame, out bool caption, out _);
         Check("frozen message frames keep their exact handler and argument", read && !caption && frame!.Member.Contains(" Save ("));
         Check("message frames cannot borrow another handler's same caption", !LedgerMemberFactComparison.TryMessageFrame(row, source, "Other", out _, out _, out _));
+        Check("scoped native facts retain exact frozen literal identity", LedgerMemberFactComparison.TryScopedMessageLiteral(row, source, "Save", out _, out _));
+        Check("a scoped native fact cannot borrow another handler's literal", !LedgerMemberFactComparison.TryScopedMessageLiteral(row, source, "Other", out _, out _));
         if (!read) return;
         var value = LedgerMemberFactComparison.EvaluateMessage(frame!.Text, new Dictionary<string, string> { ["path"] = negativeControl ? "other.fcf" : "fixture.fcf" });
         Check("frozen message evaluation substitutes only the supplied native variable", value.Supported && value.Value == "kept fixture.fcf done");
@@ -38,5 +41,30 @@ internal static partial class Program
         Check("renamed chooser labels preserve the complete ordered acceptance groups", SameFileFilterPatterns("Families|*.fcf|Projects|*.fqproj", "Family files|*.fcf|Project files|*.fqproj"));
         Check("a changed file extension cannot borrow the old chooser label", !SameFileFilterPatterns("Families|*.fcf", "Families|*.fqproj"));
         Check("invalid filters cannot earn a preservation receipt", !SameFileFilterPatterns("Families", "Families"));
+        var conditional = new[]
+        {
+            new LedgerMemberFactComparison.MessageToken("(", 4, false), new("condition", 4, false), new("?", 4, false),
+            new("\"chosen\"", 4, true), new(":", 4, false), new("\"other\"", 4, true), new(")", 4, false)
+        };
+        var selected = LedgerMemberFactComparison.EvaluateMessage(conditional, new Dictionary<string, string>(),
+            new Dictionary<string, bool> { ["condition"] = true });
+        Check("conditional message literals require their executed predicate", selected.Supported && selected.Value == "chosen"
+            && selected.Contributing.Single().Text == "\"chosen\"");
+        Check("an unrecorded predicate cannot prove either branch", !LedgerMemberFactComparison.EvaluateMessage(conditional, new Dictionary<string, string>()).Supported);
+        var menu = XDocument.Parse("<Window xmlns:x='http://schemas.microsoft.com/winfx/2006/xaml'><MenuItem x:Name='MenuItemRunUSearch' Header='Run USearch'/></Window>");
+        var old = new LedgerMemberFactComparison.MessageValue(true, "Use Run USearch.", [new("\"Use Run USearch.\"", 1, true)], "");
+        var routes = new[]
+        {
+            new ShellRouteCase("new", "MenuItemRunUSearch", "New from database", "RoutedCommand:New", "Build view", true, [], [], ""),
+            new ShellRouteCase("file-menu", "MenuFile", "File", "attached native MenuItem", "First menu", true, [], [], "")
+        };
+        Check("one report menu reference follows the executed renamed command", SameReportAfterMenuRename(old, "Use File > New from database.", new Dictionary<string, string>(), menu, routes));
+        Check("menu migration cannot change other report facts", !SameReportAfterMenuRename(old, "Different report File > New from database.", new Dictionary<string, string>(), menu, routes));
+        Check("native variable values are never rewritten as menu labels", !SameReportAfterMenuRename(old, "Use File > New from database.",
+            new Dictionary<string, string> { ["path"] = "Run USearch" }, menu, routes));
+        Check("a wrong current header cannot satisfy the menu-reference mapping", !SameReportAfterMenuRename(old, "Use File > Wrong.",
+            new Dictionary<string, string>(), menu, [routes[0] with { Header = "Wrong" }, routes[1]]));
+        Check("an unexecuted route cannot prove a report migration", !SameReportAfterMenuRename(old, "Use File > New from database.",
+            new Dictionary<string, string>(), menu, [routes[0] with { Passed = false }, routes[1]]));
     }
 }

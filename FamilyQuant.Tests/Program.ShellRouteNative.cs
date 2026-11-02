@@ -185,15 +185,58 @@ internal static partial class Program
             finally { File.SetAttributes(saved, File.GetAttributes(saved) & ~FileAttributes.ReadOnly); }
 
             Reset(); nextFile = corrupt; accept = true;
+            string? openError = null;
+            try { ShellProjectOperations.Read(corrupt); }
+            catch (Exception ex) { openError = ex.Message; }
             string previousView = CurrentView();
             dispatch = Dispatch("MenuItemLoadFQC");
             Record("open-failure", "MenuItemLoadFQC", dispatch, "Malformed input leaves the prior view, objects, curation and saved file intact",
                 ReferenceEquals(document, main.NavigationModel.Document) && document.ToJsonText() == documentBefore && CurrentView() == previousView
-                && originalProject.SequenceEqual(File.ReadAllBytes(saved)) && messages.Count == 1 && messages[0].Title == "Could not open the file");
+                && openError != null && originalProject.SequenceEqual(File.ReadAllBytes(saved)) && messages.Count == 1
+                && messages[0].Title == "Could not open the file", openError);
             Reset(); accept = false; nextFile = Path.Combine(root, "trusted-unused.sepr2");
             dispatch = Dispatch("MenuItemReanotateSEPro");
             Record("sepro-cancel", "MenuItemReanotateSEPro", dispatch, "SEPro chooser cancellation reads no package and retains curation",
                 dialogs.Count == 1 && dialogs[0].Id == "sepro.reannotate" && document.ToJsonText() == documentBefore && messages.Count == 0);
+
+            string packagePath = Path.Combine(root, "owned.sepr2"), regrouped = Path.Combine(root, "owned_regrouped.sepr2");
+            CreateShellSeproFixture([("shell_route_fixture", 1)]).Save(packagePath);
+            string packageHash = FeatureLedgerEvidence.Hash(packagePath);
+            Reset(); nextFile = packagePath; accept = true;
+            dispatch = Dispatch("MenuItemReanotateSEPro");
+            Record("sepro-success", "MenuItemReanotateSEPro", dispatch, "SEPro writes only the separate regrouped copy with the curated family ID",
+                File.Exists(regrouped) && FeatureLedgerEvidence.Hash(packagePath) == packageHash
+                && ShellSeproProteinGroups(SeproPckg2.ResultPackage.Load(regrouped)).SequenceEqual(new[] { ("shell_route_fixture", 7) })
+                && ShellSeproProteinGroups(SeproPckg2.ResultPackage.Load(packagePath)).SequenceEqual(new[] { ("shell_route_fixture", 1) })
+                && document.ToJsonText() == documentBefore && messages.Count == 1 && messages[0].Title == "SEPro package reannotated");
+
+            foreach (int missingCount in new[] { 1, 11 })
+            {
+                string missingPath = Path.Combine(root, "missing-" + missingCount + ".sepr2");
+                var absent = Enumerable.Range(0, missingCount).Select(index => ("absent_" + index.ToString("D2", CultureInfo.InvariantCulture), 1)).ToArray();
+                CreateShellSeproFixture(absent).Save(missingPath);
+                string before = FeatureLedgerEvidence.Hash(missingPath);
+                Reset(); nextFile = missingPath; accept = true;
+                dispatch = Dispatch("MenuItemReanotateSEPro");
+                bool ellipsis = messages.Count == 1 && messages[0].Text.EndsWith(", ...", StringComparison.Ordinal);
+                Record("sepro-missing-" + missingCount, "MenuItemReanotateSEPro", dispatch, "Missing package loci prevent publication and preserve the input package",
+                    FeatureLedgerEvidence.Hash(missingPath) == before && !File.Exists(Path.Combine(root, "missing-" + missingCount + "_regrouped.sepr2"))
+                    && document.ToJsonText() == documentBefore && messages.Count == 1
+                    && messages[0].Title == "The package and the database do not match" && ellipsis == (missingCount > 10)
+                    && messages[0].Text.Contains(missingCount.ToString("N0", CultureInfo.InvariantCulture) + " protein(s)", StringComparison.Ordinal));
+            }
+            string invalidPackage = Path.Combine(root, "invalid.sepr2");
+            File.WriteAllText(invalidPackage, "Owned invalid serialization fixture", new UTF8Encoding(false));
+            string invalidHash = FeatureLedgerEvidence.Hash(invalidPackage);
+            string? loadError = null;
+            try { SeproPckg2.ResultPackage.Load(invalidPackage); }
+            catch (Exception ex) { loadError = ex.Message; }
+            Reset(); nextFile = invalidPackage; accept = true;
+            dispatch = Dispatch("MenuItemReanotateSEPro");
+            Record("sepro-failure", "MenuItemReanotateSEPro", dispatch, "Invalid controlled package reports the loader refusal without writing or changing curation",
+                loadError != null && FeatureLedgerEvidence.Hash(invalidPackage) == invalidHash
+                && !File.Exists(Path.Combine(root, "invalid_regrouped.sepr2")) && document.ToJsonText() == documentBefore
+                && messages.Count == 1 && messages[0].Title == "Could not reannotate", loadError);
 
             Reset(); accept = true; nextFile = saved;
             dispatch = Dispatch("MenuItemLoadFQC");
