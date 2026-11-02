@@ -264,7 +264,8 @@ internal static class FeatureLedger
         return md.ToString().Replace("\r\n", "\n");
     }
 
-    internal static List<string> Validate(Inventory inventory, string markdown, bool requireClosed = false)
+    internal static List<string> Validate(Inventory inventory, string markdown, bool requireClosed = false,
+        FeatureLedgerEvidence.Registry? evidenceOverride = null)
     {
         var errors = new List<string>();
         string[][] rows = markdown.Split('\n').Where(s => s.StartsWith("| FQ15-", StringComparison.Ordinal))
@@ -277,8 +278,8 @@ internal static class FeatureLedger
         if (inventory.Observations.Select(r => r.Id).Distinct().Count() != inventory.Observations.Count) errors.Add("Duplicate scan ID.");
         var byId = inventory.Observations.GroupBy(r => r.Id).ToDictionary(g => g.Key, g => g.First());
         string? evidenceRoot = FeatureLedgerEvidence.FindRoot();
-        var evidence = evidenceRoot != null && rows.Any(r => r.Length == 10 && r[7] == "VERIFIED")
-            ? FeatureLedgerEvidence.Load(evidenceRoot, inventory) : null;
+        var evidence = evidenceOverride ?? (evidenceRoot != null && rows.Any(r => r.Length == 10 && r[7] == "VERIFIED")
+            ? FeatureLedgerEvidence.Load(evidenceRoot, inventory) : null);
         foreach (string[] row in rows)
         {
             if (row.Length != 10) { errors.Add("Malformed row."); continue; }
