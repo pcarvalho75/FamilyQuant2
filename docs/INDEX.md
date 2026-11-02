@@ -94,6 +94,7 @@ Invoke each flag with `& $testExe <flag>` after building. Dispatch and arity are
 | `--list-test-commands` | Deterministic command table; executes no test or scientific handler |
 | `--test-document` | Document round trip, scoring and denominator attribution fixtures |
 | `--test-evidence-task` | File-derived taxonomy, keyword counts, confirmation and recipe replay fixtures |
+| `--source-caption-check <fresh-output>` | Compiled source picker: all five frozen filename/Union facts, selected-source screenshots and native whole-control checks in both themes |
 | `--test-evidence-delivery` | Native default review, save, exports, exact app-session replay and app Open fixture |
 | `--test-evidence-fetch-atomic` | Combined evidence/panel staging, cancellation boundaries, failures and one final commit |
 | `--test-evidence-coverage` | Native alignment-row interpretation, counterfactual chooser and honest audit labels |
@@ -221,6 +222,8 @@ Companion options for `--screens` are `--screen-fcf <input.fcf>`, `--screen-proj
 | `--ledger-secondary-runtime <frozen-root> <native-master-audit> <frozen-app> <fresh-output> <date> [--negative-control]` | Native frozen/current secondary values and interactions; [guide](SECONDARY-LEDGER.md) |
 | `--ledger-secondary-interactions <frozen-root> <native-master-audit> <frozen-app> <fresh-output> <date> [--negative-control]` | Native Quantify/close, identity chooser and injected GridCopy IO/modifier contracts; [guide](SECONDARY-LEDGER.md) |
 | `--test-quantify-close` | Native styled Close button, modal result, retained result and no-focus checks in both themes; included in shell/quick checks |
+| `--secondary-wording-append <native-proof-output> <wording.tsv>` | Append native changed-wording candidates for Paulo; no semantic proof or ledger-state change |
+| `--secondary-box-audit <native-ledger-audit> <wording.tsv> N6k/N6l <output>` | Verify each retained box row has native proof or a lane wording entry; never changes ledger state |
 | `--prove-denovo-ledger <frozen-source-root> <fresh-output> <date>` | Scoped exact De novo declarations, retained snapshots and ledger receipts in batches of 250; [guide](DENOVO-PRESERVATION.md) |
 | `--prove-denovo-runtime <frozen-source-root> <frozen-app-folder> <fresh-output> <date>` | Native frozen/current controls and resolved values across both themes and three legacy sources |
 | `--prove-denovo-workflows <frozen-source-root> <frozen-app-folder> <fresh-output> <date>` | Native frozen/current projection, reconciliation, binding and legacy export fixtures; C13 style handoff |
