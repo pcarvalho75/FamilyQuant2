@@ -378,7 +378,9 @@ namespace FamilyQuant
             FamilyWorldCompositionRow CuratedRow(int group) => rows.TryGetValue("c\u001f" + group.ToString(CultureInfo.InvariantCulture), out FamilyWorldCompositionRow? row)
                 ? row : rows["c\u001f" + group.ToString(CultureInfo.InvariantCulture)] = new FamilyWorldCompositionRow
                 {
-                    Family = names.TryGetValue(group, out string? name) && name.Length > 0 ? name : "group " + group.ToString(CultureInfo.InvariantCulture),
+                    // A group with no description (a contaminant entry, say) is named by its first member's identifier.
+                    Family = names.TryGetValue(group, out string? name) && name.Length > 0 ? name
+                        : targets.First(t => t.UserID == group).SequenceIdentifier ?? "group " + group.ToString(CultureInfo.InvariantCulture),
                     Kind = FamilyWorldCompositionRow.CuratedKind,
                     CuratedUserIds = { group },
                 };
