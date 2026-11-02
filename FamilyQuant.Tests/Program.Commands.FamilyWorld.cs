@@ -12,6 +12,7 @@ internal static partial class Program
         new("--test-family-world", 9100, TestCommandPhase.Raw, FamilyWorldFixturesRequested, RunFamilyWorldFixtures),
         new(FamilyWorldCheck.Argument, 9101, TestCommandPhase.Normalized, FamilyWorldCheckRequested, RunFamilyWorldCheck),
         new(FamilyWorldB4Check.Argument, 9103, TestCommandPhase.Normalized, args => args.Contains(FamilyWorldB4Check.Argument), RunFamilyWorldB4),
+        new(FamilyWorldReport.Argument, 9104, TestCommandPhase.Normalized, args => args.Contains(FamilyWorldReport.Argument), RunFamilyWorldReport),
         new(FamilyWorldProject.Argument, 9102, TestCommandPhase.Normalized, FamilyWorldProjectRequested, (args, _) => FamilyWorldProject.Run(args)),
     ];
 
@@ -26,6 +27,13 @@ internal static partial class Program
         Section("Family world (B1) - a de novo tag credited to UniProt families, on a fixture");
         FamilyWorldCheck.RunFixtures(Check);
         FamilyWorldComputeTests();
+        Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
+        return failed == 0 ? 0 : 1;
+    }
+
+    private static int RunFamilyWorldReport(string[] args, string workDir)
+    {
+        FamilyWorldReport.Run(args, Check);
         Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
         return failed == 0 ? 0 : 1;
     }
