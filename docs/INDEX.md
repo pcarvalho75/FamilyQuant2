@@ -96,6 +96,7 @@ Invoke each flag with `& $testExe <flag>` after building. Dispatch and arity are
 | `--test-operations` | Core outcomes, progress, cancellation and the owned native-child fixture |
 | `--test-busy` | App operation host, running-command cancellation, prior file bytes and guarded publication |
 | `--test-shell-dialogs [--after-busy]` | Browse callers, folder preference, accept/cancel, owned windows and headless messages; optional busy-group setup first |
+| `--test-clustering-diagnostic-shell [fresh-output-dir]` | Analysis action, progress/Cancel guards, actual native reports on read-only saved FCF/FQPROJ fixtures and repeat packet parity |
 | `--test-clustering-results` | Typed clustering/redundancy results and native synthetic fixtures |
 | `--test-identity-study` | Probe parser and grid-versus-probe interpretation |
 | `--test-results` | Results view-model readiness and export choices |
@@ -172,6 +173,7 @@ Companion options for `--screens` are `--screen-fcf <input.fcf>`, `--screen-proj
 | `--feature-ledger-kind-review <kind> REOPENED/ACCEPTED <reviewer> <reason> <date> <output>` | Independent D13 kind-review decision and whole-kind reopening |
 | `--ledger-declaration-compare <frozen-root> <current-root> <fresh-output> <step> <source-prefix> <date>` | Frozen/current explicit XAML property comparisons and kind receipts |
 | `--ledger-core-relocation <frozen-root> <fresh-output> X5/X7 <date> [member-mappings.json]` | Scoped complete Core member comparisons, exact frozen hashes, retained source/checker snapshots and per-row gaps; [guide](CORE-RELOCATION-LEDGER.md) |
+| `--ledger-shell-compare <frozen-root> <fresh-output> <date>` | SH and C1 exact declarations/member tokens; separate candidate registers, unproven rows kept OPEN |
 | `--word-grouping-snapshot <input.fcf-or-fqproj> <output.txt>` | [WordGroupingSnapshot.cs](../FamilyQuant.Tests/WordGroupingSnapshot.cs), also linked into frozen host |
 | `--chart-export-snapshot <output-dir>` | [ChartExportSnapshot.cs](../FamilyQuant.Tests/ChartExportSnapshot.cs), synthetic chart parity fixtures |
 | `--clustering-snapshot <input.fasta> <output.tsv> <integer-identity> <fast-or-exhaustive>` | [ClusteringSnapshot.cs](../FamilyQuant.Tests/ClusteringSnapshot.cs) |

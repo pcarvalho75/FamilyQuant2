@@ -7,6 +7,18 @@ internal static partial class Program
 {
     private static void LedgerMemberFactComparisonTests()
     {
+        const string declaration = "public partial class View : BaseView";
+        const string declared = "namespace Fixture; public partial class View : BaseView { private string Copy = \"retained\"; }";
+        Check("a partial relocation can pin its parsed primary type declaration",
+            LedgerMemberFactComparison.HasTypeDeclaration(declared, "Fixture.View", declaration));
+        Check("primary type declaration parsing ignores harmless comments and whitespace",
+            LedgerMemberFactComparison.HasTypeDeclaration(declared.Replace("class View", "class /* primary */ View", StringComparison.Ordinal), "Fixture.View", declaration));
+        Check("a changed base type cannot authorize a partial relocation",
+            !LedgerMemberFactComparison.HasTypeDeclaration(declared.Replace("BaseView", "OtherBase", StringComparison.Ordinal), "Fixture.View", declaration));
+        Check("a string containing the former header cannot authorize a changed type",
+            !LedgerMemberFactComparison.HasTypeDeclaration("namespace Fixture; class View : OtherBase { string Copy = \"public partial class View : BaseView\"; }", "Fixture.View", declaration));
+        Check("an unrelated type cannot lend its primary type declaration",
+            !LedgerMemberFactComparison.HasTypeDeclaration(declared, "Fixture.Missing", declaration));
         const string old = "namespace Fixture;\npublic class View\n{\n    private string Export(int mode)\n    {\n        if (mode == 1) return \".csv\";\n        return \".csv\";\n    }\n    private string Other() => \"other\";\n}";
         var row = new FeatureLedger.Observation("fixture", "FamilyQuant/View.cs", 6, "format/export", "\".csv\"");
         LedgerMemberFactComparison.Result Compare(string current, FeatureLedger.Observation? supplied = null,
