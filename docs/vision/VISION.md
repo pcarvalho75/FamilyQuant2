@@ -4,6 +4,16 @@ Written 2026-11-01 under a hard stop (M2: 20:06). Companion notes: docs/vision/C
 tagged read (seen in the code), measured (run in this session on the real files), estimated (my judgement) or
 unverified (not checked). The App and the Tests checkers were NOT read (CODE-MAP.md section 6).
 
+## Desk notes, added after Fable's report
+
+Roadmap version 3 takes this direction with these corrections. Fable's text below is unchanged.
+
+1. The Bjararaca database is not 584 proteins: it has 171 targets, 121 contaminants and 292 decoys (measured in `scientific_results.fqproj`). That makes the argument stronger.
+2. Reversed decoys measure chance hits, not wrong-family hits, so they cannot test the risk under "Strongest case against": a conserved motif hits a real protein of the wrong family. B1 adds a known-answer test.
+3. "Why new" is not established. Only PubMed was searched and the closest papers were not read. B2 does the real search, and until then nothing we write says new or first.
+4. A bigger FASTA already widens the search today: Ana's Viperidae file does that. What is new here is the automatic family world, the credit at family level and the gap ranking.
+5. Part 4 overreaches: some de novo study files are called from the app project, so X9 moves only those no screen calls.
+
 ## Part 1. What we are trying to accomplish
 
 Who this is for. Ana Gisele and Richard quantify venoms. Their real question is not "which protein" but "how
