@@ -21,7 +21,8 @@ internal static partial class Program
         string DefaultExt, bool AddExtension, string FileName, bool Accepted);
     private sealed record ShellRouteCase(string Id, string Menu, string Header, string Dispatch, string Outcome,
         bool Passed, List<ShellRouteDialog> Dialogs, List<ShellMessage> Messages, string Status,
-        string? ExceptionMessage = null, string? SavedCheck = null);
+        string? ExceptionMessage = null, string? SavedCheck = null,
+        Dictionary<string, string>? Bindings = null, Dictionary<string, bool>? Branches = null, string ConsoleText = "");
 
     private static int ShellRouteProbe(string output)
     {
@@ -55,6 +56,7 @@ internal static partial class Program
         int uiThread = Environment.CurrentManagedThreadId;
         string nextFile = input;
         bool accept = false;
+        string consoleText = "";
         ShellDialogs.FilePresenter = (_, id, dialog) =>
         {
             dialog.FileName = nextFile;
@@ -72,6 +74,11 @@ internal static partial class Program
         string CurrentView() => Host().Children.Count == 1 ? Host().Children[0].GetType().FullName! : "ambiguous";
         string Dispatch(string menuName)
         {
+            var console = Console.Out;
+            using var capture = new StringWriter(CultureInfo.InvariantCulture);
+            Console.SetOut(new LedgerProofWriter(console, capture));
+            try
+            {
             if (!main.Dispatcher.CheckAccess() || SynchronizationContext.Current is not DispatcherSynchronizationContext)
                 throw new InvalidOperationException("Invoke native menu actions with their real dispatcher context.");
             var item = (MenuItem)main.FindName(menuName);
@@ -89,16 +96,26 @@ internal static partial class Program
             else item.RaiseEvent(new RoutedEventArgs(MenuItem.ClickEvent, item));
             FinishBusyOperation(main.Operations); PumpDispatcher();
             return item.Command is RoutedCommand route ? "RoutedCommand:" + route.Name : item.Command == null ? "native Click event" : "ICommand";
+            }
+            finally { Console.SetOut(console); consoleText = capture.ToString(); }
         }
-        void Reset() { dialogs.Clear(); messages.Clear(); messageThreads.Clear(); }
-        void Record(string id, string menu, string dispatch, string outcome, bool result, string? exception = null)
+        string InvokeGuard(string method)
+        {
+            typeof(MainWindow).GetMethod(method, BindingFlags.NonPublic | BindingFlags.Instance)!
+                .Invoke(main, [main, new RoutedEventArgs()]);
+            FinishBusyOperation(main.Operations); PumpDispatcher();
+            return "native handler guard (disabled menu bypassed):" + method;
+        }
+        void Reset() { dialogs.Clear(); messages.Clear(); messageThreads.Clear(); consoleText = ""; }
+        void Record(string id, string menu, string dispatch, string outcome, bool result, string? exception = null,
+            Dictionary<string, string>? bindings = null, Dictionary<string, bool>? branches = null)
         {
             var item = (MenuItem)main.FindName(menu);
             bool preserved = FeatureLedgerEvidence.Hash(input) == inputHash && messageThreads.All(thread => thread == uiThread);
             Check("native shell route " + id + ": " + outcome, result && preserved);
             cases.Add(new(id, menu, item.Header?.ToString() ?? "", dispatch, outcome, result && preserved,
                 dialogs.ToList(), messages.ToList(), main.StatusModel.ContextHelp, exception,
-                id == "project-success" ? main.DocumentState.SaveCheckText : null));
+                id == "project-success" ? main.DocumentState.SaveCheckText : null, bindings, branches, consoleText));
         }
         try
         {
@@ -108,6 +125,27 @@ internal static partial class Program
             var fileMenu = (MenuItem)main.FindName("MenuFile");
             Record("file-menu", "MenuFile", "attached native MenuItem", "File is the first attached menu and owns the project commands",
                 ReferenceEquals(((Menu)main.FindName("MainMenu")).Items[0], fileMenu) && fileMenu.Header.ToString() == "File");
+            foreach (var guard in new[]
+            {
+                ("fcf-empty", "MenuItemSaveFCF", "MenuItemSaveFCF_Click", "Nothing to save"),
+                ("project-empty", "MenuItemSaveProject", "MenuItemSaveProject_Click", "Nothing to save"),
+                ("sepro-empty", "MenuItemReanotateSEPro", "MenuItemReanotateSEPro_Click", "Load the families first"),
+                ("spectrum-empty", "MenuItemSpectrumComparison", "MenuItemSpectrumComparison_Click", "No spectrum table yet")
+            })
+            {
+                Reset();
+                string guardDispatch = InvokeGuard(guard.Item3);
+                Record(guard.Item1, guard.Item2, guardDispatch, "The actual no-project guard reports its refusal without a chooser or file write",
+                    main.NavigationModel.Document == null && dialogs.Count == 0 && messages.Count == 1
+                    && messages[0].Title == guard.Item4 && !File.Exists(saved) && !File.Exists(exported));
+            }
+            Reset();
+            MainWindow.ComputeDialogOverride = _ => throw new InvalidOperationException("A no-project refusal must never create a compatibility window.");
+            typeof(MainWindow).GetMethod("PresentCompute", BindingFlags.NonPublic | BindingFlags.Instance)!.Invoke(main, null);
+            Record("compute-empty", "MenuItemComputeXic", "native compatibility presenter no-project guard; disabled navigation bypassed",
+                "The retained compatibility presenter refuses a missing project before constructing a window",
+                main.NavigationModel.Document == null && messages.Count == 1 && messages[0].Title == "Load a project first" && dialogs.Count == 0);
+            MainWindow.ComputeDialogOverride = null;
             Reset(); accept = false;
             string dispatch = Dispatch("MenuItemLoadFQC");
             Record("open-cancel", "MenuItemLoadFQC", dispatch, "Open cancellation keeps the Start view and no document",
@@ -134,7 +172,46 @@ internal static partial class Program
             Record("quantify", "MenuItemComputeXic", dispatch, "Compute opens the native Quantify screen without running the engine",
                 quantify != null && !quantify.ViewModel.Computed && !quantify.ViewModel.IsBusy
                 && ReferenceEquals(document, main.NavigationModel.Document) && document.ToJsonText() == documentBefore);
+            var quantifyMenu = (MenuItem)main.FindName("MenuItemComputeXic");
+            var analysis = ((Menu)main.FindName("MainMenu")).Items.OfType<MenuItem>().Single(item => item.Items.Contains(quantifyMenu));
+            Reset();
+            Record("analysis-quantify", "MenuItemComputeXic", "actual attached parent menu", analysis.Header.ToString()!, analysis.Header.ToString() == "Analysis");
             Dispatch("MenuItemHome");
+
+            // Exercise only the retained shell completion adapter. This seeded typed result is not
+            // a computation or a secondary-window proof. The compatibility host is never shown.
+            foreach (bool csvFailed in new[] { false, true })
+            {
+                var completion = new FullXicComputeResult { Rows = new(), Manifest = new(),
+                    TicShareSummary = new() { "Owned synthetic TIC summary" } };
+                bool csvWritten = completion.TryExportSpectrumComparisonCsv(csvFailed ? root : Path.Combine(root, "owned-spectrum.csv"));
+                if (csvWritten == csvFailed) throw new InvalidOperationException("The owned optional CSV outcome differs from its intended branch.");
+                MainWindow.ComputeDialogOverride = window =>
+                {
+                    OffscreenProofWindow(window);
+                    typeof(ComputeXicViewModel).GetProperty(nameof(ComputeXicViewModel.Result))!.SetValue(window.ViewModel, completion);
+                    return null;
+                };
+                Reset(); dispatch = Dispatch("MenuItemComputeXic");
+                Record(csvFailed ? "compute-report-error" : "compute-report-csv", "MenuItemComputeXic", dispatch,
+                    "The retained compatibility adapter reports the supplied typed result, optional CSV outcome and unsaved state without showing a window",
+                    main.DocumentState.IsModified && ReferenceEquals(document, main.NavigationModel.Document)
+                    && document.ToJsonText() == documentBefore && messages.Count == 1 && messages[0].Title == "Quantitation computed",
+                    bindings: new()
+                    {
+                        ["window.ResultRows.Count.ToString(\"N0\",CultureInfo.CurrentCulture)"] = completion.Rows.Count.ToString("N0", CultureInfo.CurrentCulture),
+                        ["string.Join(\"\\n\",window.TicShareSummary)"] = string.Join("\n", completion.TicShareSummary),
+                        ["window.SpectrumComparisonCsvPath"] = completion.SpectrumComparisonCsvPath ?? "",
+                        ["window.SpectrumComparisonCsvError"] = completion.SpectrumComparisonCsvError ?? ""
+                    }, branches: new()
+                    {
+                        ["window.TicShareSummary.Count>0"] = completion.TicShareSummary.Count > 0,
+                        ["string.IsNullOrWhiteSpace(window.SpectrumComparisonCsvPath)"] = string.IsNullOrWhiteSpace(completion.SpectrumComparisonCsvPath),
+                        ["string.IsNullOrWhiteSpace(window.SpectrumComparisonCsvError)"] = string.IsNullOrWhiteSpace(completion.SpectrumComparisonCsvError)
+                    });
+                FinishBusyOperation(main.Operations);
+            }
+            MainWindow.ComputeDialogOverride = null;
 
             Reset(); nextFile = exported; accept = false;
             dispatch = Dispatch("MenuItemSaveFCF");
@@ -183,6 +260,55 @@ internal static partial class Program
                     && messages.Count == 1 && messages[0].Title == "Could not save", expectedError);
             }
             finally { File.SetAttributes(saved, File.GetAttributes(saved) & ~FileAttributes.ReadOnly); }
+
+            // A detached control has its own busy host. Its real queued empty attach publishes
+            // FullXicReady now, while the shell host remains idle and can legitimately enter Save.
+            // No readiness task is replaced by reflection, and no homology search is requested.
+            var pendingControl = new ClusterGenerationControl(fixture);
+            var detachedHost = pendingControl.Operations;
+            using (var blocker = detachedHost.Begin("Owned pending-attach fixture"))
+            {
+                Task attach = pendingControl.SetFullXicQuantAsync(new List<QuantRow>(), null);
+                void Field(string name, object? value) => typeof(MainWindow).GetField(name, BindingFlags.NonPublic | BindingFlags.Instance)!.SetValue(main, value);
+                Field("cgc", pendingControl); Field("loadedCuration", fixture);
+                Field("loadedQuant", new List<QuantRow> { new() });
+                Field("loadedManifest", new QuantManifest { SpectrumComparisonRows = new() { new() } });
+                Reset(); nextFile = saved; accept = true;
+                var saveTask = (Task)typeof(MainWindow).GetMethod("SaveProjectAsync", BindingFlags.NonPublic | BindingFlags.Instance)!.Invoke(main, [true])!;
+                bool actuallyWaited = !attach.IsCompleted && !pendingControl.FullXicReady.IsCompleted && !saveTask.IsCompleted && main.Operations.IsBusy;
+                bool replaced = main.OpenProjectPath(input); // Existing raw compatibility seam bypasses UI busy navigation.
+                blocker.Dispose(); FinishBusyTask(attach); FinishBusyTask(saveTask); PumpDispatcher();
+                Record("project-stale", "MenuItemSaveProject", "native SaveProjectAsync(saveAs:true), real pending detached attach, raw OpenProjectPath replacement",
+                    "Save waited for a real queued attach and refused the replaced bundle, preserving the previous project bytes",
+                    actuallyWaited && replaced && attach.IsCompletedSuccessfully && saveTask.IsCompletedSuccessfully
+                    && originalProject.SequenceEqual(File.ReadAllBytes(saved)) && main.NavigationModel.Document?.ToJsonText() == documentBefore
+                    && messages.Count == 1 && messages[0].Title == "Nothing saved");
+            }
+            document = main.NavigationModel.Document!;
+
+            // Prove the failure occurs in Build before any secondary-window call is reachable.
+            var badRows = new List<QuantRow> { new() { DeNovoEvidence = new() { null! } } };
+            string? buildError = null;
+            try { DeNovo.SpectrumComparisonTable.Build(badRows); }
+            catch (Exception ex) { buildError = ex.Message; }
+            if (buildError == null) throw new InvalidOperationException("The owned spectrum fixture must fail before a window can be shown.");
+            var quantField = typeof(MainWindow).GetField("loadedQuant", BindingFlags.NonPublic | BindingFlags.Instance)!;
+            var manifestField = typeof(MainWindow).GetField("loadedManifest", BindingFlags.NonPublic | BindingFlags.Instance)!;
+            var heldQuant = quantField.GetValue(main); var heldManifest = manifestField.GetValue(main);
+            try
+            {
+                quantField.SetValue(main, badRows); manifestField.SetValue(main, null);
+                typeof(MainWindow).GetMethod("RefreshProjectCommandAvailability", BindingFlags.NonPublic | BindingFlags.Instance)!
+                    .Invoke(main, [true, false]);
+                int windowCount = Application.Current.Windows.Count;
+                Reset(); dispatch = Dispatch("MenuItemSpectrumComparison");
+                Record("spectrum-failure", "MenuItemSpectrumComparison", dispatch,
+                    "The actual shell catches the controlled Build failure before creating any spectrum window and preserves the document and file",
+                    messages.Count == 1 && messages[0].Title == "Could not build spectrum table"
+                    && Application.Current.Windows.Count == windowCount && document.ToJsonText() == documentBefore
+                    && originalProject.SequenceEqual(File.ReadAllBytes(saved)), buildError);
+            }
+            finally { quantField.SetValue(main, heldQuant); manifestField.SetValue(main, heldManifest); }
 
             Reset(); nextFile = corrupt; accept = true;
             string? openError = null;

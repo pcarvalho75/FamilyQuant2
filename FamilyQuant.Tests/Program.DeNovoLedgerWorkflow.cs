@@ -278,14 +278,13 @@ internal static partial class Program
                 .Where(node => node != null).Distinct().ToArray();
             if (styles.Length != 1) continue;
             string[] cells = markdown.Single(line => line.StartsWith("| " + row.Id + " |", StringComparison.Ordinal)).Split('|');
-            bool open = cells[7].Trim() == "OPEN";
-            Check("C13 style handoff remains OPEN " + row.Id, open);
+            string state = cells[7].Trim();
             var style = styles[0]!;
             rows.Add(new { row.Id, row.Source, row.Line, row.Kind, row.Detail,
                 frozenStyleKey = style.Attributes().FirstOrDefault(attribute => attribute.Name.LocalName == "Key")?.Value,
-                frozenTargetType = style.Attribute("TargetType")?.Value, state = "OPEN", reason = "Current-role mapping reserved for FQLook; none supplied by EV." });
+                frozenTargetType = style.Attribute("TargetType")?.Value, state, reason = "Current ledger state reported only; style mapping and proof belong to FQLook." });
         }
         string path = Path.Combine(output, "c13-style-role-mapping-open.json"); FeatureLedgerEvidence.WriteJson(path, rows);
-        Console.WriteLine("C13 style handoff: " + rows.Count.ToString(CultureInfo.InvariantCulture) + " OPEN rows in " + path); return path;
+        Console.WriteLine("C13 style handoff: " + rows.Count.ToString(CultureInfo.InvariantCulture) + " style rows reported in " + path); return path;
     }
 }

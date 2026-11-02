@@ -77,6 +77,7 @@ namespace FamilyQuant.Tests
             ShellDialogTests(workDir);
             ResultsViewModelTests();
             DatabaseGapTests(Path.Combine(workDir, "database-gap"));
+            DatabaseGapLengthTests(Path.Combine(workDir, "database-gap-lengths"));
             ResultsPreservationTests(Path.Combine(workDir, "results-preservation"));
             ResultsTooltipTests();
             ResultsExportFactTests(Path.Combine(workDir, "results-export-facts"));

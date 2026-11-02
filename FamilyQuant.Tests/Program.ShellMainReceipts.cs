@@ -39,12 +39,14 @@ internal static partial class Program
             Status = Normalize(record.Status),
             Dialogs = record.Dialogs.Select(dialog => dialog with { FileName = Normalize(dialog.FileName) }).ToList(),
             Messages = record.Messages.Select(message => message with { Text = Normalize(message.Text) }).ToList(),
-            ExceptionMessage = record.ExceptionMessage == null ? null : Normalize(record.ExceptionMessage)
+            ExceptionMessage = record.ExceptionMessage == null ? null : Normalize(record.ExceptionMessage),
+            Bindings = record.Bindings?.ToDictionary(pair => pair.Key, pair => Normalize(pair.Value), StringComparer.Ordinal),
+            ConsoleText = Normalize(record.ConsoleText)
         }));
         var artifacts = new List<FeatureLedgerEvidence.Artifact>();
         void Artifact(string path) => artifacts.Add(new(path, FeatureLedgerEvidence.Hash(path)));
         foreach (string path in new[] { log, values, nativeCanonical, Path.Combine(output, "message-comparisons.json"),
-            Path.Combine(output, "native/native-cases.json") }) Artifact(path);
+            Path.Combine(output, "native/native-cases.json"), Path.Combine(output, "wording-for-paulo.tsv") }) Artifact(path);
         string executed = Path.Combine(output, "executed"); Directory.CreateDirectory(executed);
         foreach (string file in new[] { "LedgerMemberFactComparison.cs", "LedgerMemberFactComparison.Messages.cs", "Program.ShellRouteNative.cs",
             "Program.ShellMainMessages.cs", "Program.ShellMainReceipts.cs", "Program.ShellMessageFrames.cs", "Program.Commands.ShellRoutes.cs",

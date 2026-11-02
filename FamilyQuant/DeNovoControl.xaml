@@ -287,7 +287,7 @@
                     <Label x:Name="LabelHomologyDecoyOnly" Content="{Binding LabelHomologyDecoyOnly}" Style="{StaticResource ResultValue}"
                            ToolTip="Peptides that matched only decoy proteins: the false-match control. If it is close to the mapped count, the identity threshold is too low."/>
                     <Label x:Name="LabelHomologyUnmatched" Content="{Binding LabelHomologyUnmatched}" Style="{StaticResource ResultValue}"
-                           ToolTip="Peptides that matched no protein at this identity. In venom de novo data this is common, and it is not an error."/>
+                           ToolTip="Peptides that matched no protein at this identity. In de novo data this is common, and it is not an error."/>
                     <Label x:Name="LabelHomologyElapsed" Content="{Binding LabelHomologyElapsed}" Style="{StaticResource ResultValue}"
                            ToolTip="How long the search took, in seconds, so an unusually slow search can be noticed."/>
                 </WrapPanel>

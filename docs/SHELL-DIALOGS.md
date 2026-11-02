@@ -44,3 +44,25 @@ Lock management also refuses headless modal presentation.
 `FilePresenter`, `FolderPresenter`, `ShellMessages.Presenter` and the `Reported` event
 are test seams. Production keeps the presenters null and uses native Windows dialogs.
 The existing Open/Save path overrides and unsaved-decision override remain available.
+
+`--prove-shell-main <frozen-root> <fresh-output> <date>` executes 31 native shell
+scenarios and emits the 145-row `SH-main-routes` register. Its additional cases cover
+missing-project refusals, optional spectrum CSV success/refusal, a stale Save and
+the spectrum menu's caught Build failure. The compatibility completion uses an
+explicitly seeded typed result and never shows its window. It does not compute RAW
+results or prove secondary-window content. Every shown proof window is positioned
+at (-30000, -30000), uses manual placement, and disables activation and taskbar entry.
+
+The stale-save fixture queues a real empty attach on a detached control's own busy
+host. The shell host stays idle, so Save can enter and wait for that control's actual
+`FullXicReady`. The existing raw Open compatibility seam then replaces the project;
+releasing the detached host must make Save refuse without changing the prior file.
+No readiness task is replaced by reflection. The spectrum failure fixture first
+checks that its malformed synthetic evidence throws in Build, before any secondary
+window can be reached, then drives the enabled native menu and checks the refusal.
+
+The two screen runs supported 115 observations and left 30 OPEN. Their five comparison
+outputs were byte-identical after fixture-root canonicalization; raw captures remain
+beside them. This is fixture determinism, not a scientific-data claim. The producer
+also writes `wording-for-paulo.tsv`: unchanged comparisons still need executed evidence,
+while changed wording and unsupported inner expressions stay OPEN for Paulo's ruling.
