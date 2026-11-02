@@ -325,6 +325,9 @@ namespace FamilyQuant
             sb.AppendLine("between 0 and 1 and a dot as the decimal separator, whatever your machine's");
             sb.AppendLine("language is. That is on purpose: the file is meant to be read by a program.");
 
+            sb.AppendLine();
+            sb.AppendLine(HelpWorkflowFacts.FilesAndNavigation);
+            sb.AppendLine(HelpWorkflowFacts.Families);
             return sb.ToString();
         }
 
@@ -674,7 +677,8 @@ namespace FamilyQuant
             sb.AppendLine("Every inspection or Results CSV uses a dot for the decimal separator whatever your");
             sb.AppendLine("machine's language is. Legacy partition numbers are written in their shortest");
             sb.AppendLine("round-trippable form, so a value read back is the same bits that were plotted.");
-
+            sb.AppendLine();
+            sb.AppendLine(HelpWorkflowFacts.DeNovo);
             return sb.ToString();
         }
 
