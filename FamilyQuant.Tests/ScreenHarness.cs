@@ -78,7 +78,7 @@ namespace FamilyQuant.Tests
                 if (finish && projectPath == null)
                 {
                     project.quant.AddRange(Program.FinishQuantRows());
-                    project.manifest.PerRunTic = new() { ["ui_01"] = 5e8, ["ui_02"] = 4e8 };
+                    project.manifest = Program.FinishStoredManifest();
                 }
                 Console.WriteLine("Screens: curation " + (fcfPath ?? "synthetic fixture") +
                     "; analytics " + (projectPath ?? (finish ? "populated synthetic fixture" : "empty synthetic fixture")));
@@ -115,7 +115,7 @@ namespace FamilyQuant.Tests
                 }, new JsonSerializerOptions { WriteIndented = true }));
                 if (finish)
                 {
-                    bool accepted = finishCaptures.Count == 16 * 2 * 3 * 2 && finishCaptures.All(c => c.LayoutAccepted && c.TabStops.Count > 0);
+                    bool accepted = finishCaptures.Count == 18 * 2 * 3 * 2 && finishCaptures.All(c => c.LayoutAccepted && c.TabStops.Count > 0);
                     Console.WriteLine("C14: " + finishCaptures.Count + " client captures; layout accepted=" + accepted + "; actual keyboard traversal and OS monitor DPI require Paulo.");
                     return accepted ? 0 : 1;
                 }
@@ -211,6 +211,15 @@ namespace FamilyQuant.Tests
                 Set(main, "lastFcfPath", projectPath);
                 Present(main, analytics, "analytics");
                 Capture(Screens[6], main);
+                if (finish)
+                {
+                    var gap = new DatabaseGapControl(new DatabaseGapViewModel(manifest.FamilyWorldResult, projectFile));
+                    var gapWindow = new Window { Content = gap, Width = 900, Height = 600, MinWidth = 900, MinHeight = 600,
+                        Title = "Synthetic stored Database gap UI fixture" };
+                    ShowOffScreen(gapWindow);
+                    try { Capture("17-database-gap", gapWindow); Capture("18-database-gap-bottom", gapWindow); }
+                    finally { gapWindow.Close(); }
+                }
 
                 void Secondary(string name, Window window)
                 {
