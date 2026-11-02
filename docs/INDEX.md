@@ -235,6 +235,7 @@ Companion options for `--screens` are `--screen-fcf <input.fcf>`, `--screen-proj
 | `--test-wording-tsv <fresh-output>` | Leading quotes, embedded quotes and escaped multiline fields roundtrip through both shared-list readers |
 | `--ledger-curation-file-contracts <native-audit> <frozen-app> <fresh-output> <date> [--negative-control]` | Native curation CSV choosers/files and real no-decoy engine refusal; [guide](CURATION-FILE-CONTRACTS.md) |
 | `--ledger-input-file-contracts <frozen-app> <trusted-SEPro> <fresh-output> <date>` | Paired PLP, SEPro and FCF input choosers/readers on a private native desktop; [guide](INPUT-FILE-CONTRACTS.md) |
+| `--ledger-floater-behaviour <frozen-source> <frozen-app> <scope-json> <fresh-output> <date> [--negative-control]` | Paired native prerequisite, build, lock, PLP and project behavior for the fixed 22-row cohort; [guide](FLOATER-BEHAVIOUR.md) |
 | `--test-quantify-close` | Native styled Close button, modal result, retained result and no-focus checks in both themes; included in shell/quick checks |
 | `--secondary-wording-append <native-proof-output> <wording.tsv>` | Append native changed-wording candidates for Paulo; no semantic proof or ledger-state change |
 | `--secondary-box-audit <native-ledger-audit> <wording.tsv> N6k/N6l <output>` | Verify each retained box row has native proof or a lane wording entry; never changes ledger state |

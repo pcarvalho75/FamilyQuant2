@@ -27,5 +27,7 @@ internal static partial class Program
             args => args.Length > 0 && args[0] == "--ledger-curation-file-contracts", (args, _) => CurationFileCommand(args)),
         new("--ledger-input-file-contracts", 10480, TestCommandPhase.Raw,
             args => args.Length > 0 && args[0] == "--ledger-input-file-contracts", (args, _) => InputFileCommand(args)),
+        new("--ledger-floater-behaviour", 10490, TestCommandPhase.Raw,
+            args => args.Length > 0 && args[0] == "--ledger-floater-behaviour", (args, _) => FloaterBehaviourCommand(args)),
     ];
 }
