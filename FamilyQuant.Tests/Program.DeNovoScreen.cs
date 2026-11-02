@@ -77,25 +77,12 @@ namespace FamilyQuant.Tests
             Check("the review queue starts empty", queueGrid.ItemsSource == null);
 
             // --- Layers 3 to 5 open blocked, and each of them says why ----------------------------
-            var extract = UiField<Button>(screen, "ButtonExtractXic")!;
             var searchHomology = UiField<Button>(screen, "ButtonSearchHomology")!;
-            var exportHomology = UiField<Button>(screen, "ButtonExportHomologyCsv")!;
-            var buildPartition = UiField<Button>(screen, "ButtonBuildPartition")!;
-            var savePartition = UiField<Button>(screen, "ButtonSavePartitionCsv")!;
-            var openPartition = UiField<Button>(screen, "ButtonOpenPartitionWindow")!;
 
-            var layer3State = UiField<TextBlock>(screen, "TextBlockDeNovoLayer3State")!;
             var layer4State = UiField<TextBlock>(screen, "TextBlockDeNovoLayer4State")!;
-            var layer5State = UiField<TextBlock>(screen, "TextBlockDeNovoLayer5State")!;
 
-            var rawDirectory = UiField<TextBox>(screen, "TextBoxRawDirectory")!;
-            var rawPreview = UiField<TextBlock>(screen, "TextBlockRawMatchPreview")!;
-            var branchNote = UiField<TextBlock>(screen, "TextBlockBranchNote")!;
-            var xicStats = UiField<DataGrid>(screen, "DataGridXicStats")!;
             var familyGrid = UiField<DataGrid>(screen, "DataGridHomologyFamilies")!;
             var homologyMapped = UiField<Label>(screen, "LabelHomologyMapped")!;
-            var partitionGrid = UiField<DataGrid>(screen, "DataGridPartition")!;
-            var chartHost = UiField<Border>(screen, "BorderPartitionChart")!;
 
             var minIdentity = UiField<TextBox>(screen, "TextBoxMinIdentity")!;
             var topHits = UiField<TextBox>(screen, "TextBoxTopHits")!;
@@ -104,44 +91,36 @@ namespace FamilyQuant.Tests
             var decoyLabel = UiField<TextBox>(screen, "TextBoxDecoyLabel")!;
 
             Check("every action of Layers 3 to 5 is disabled before anything has been imported",
-                !extract.IsEnabled && !searchHomology.IsEnabled && !exportHomology.IsEnabled
-                && !buildPartition.IsEnabled && !savePartition.IsEnabled && !openPartition.IsEnabled);
+                !screen.ViewModel.CanExtract && !searchHomology.IsEnabled && !screen.ViewModel.CanExportHomology
+                && !screen.ViewModel.CanPartition && !(screen.LastPartition?.IsAvailable == true && !screen.ViewModel.IsBusy) && !(screen.LastPartition?.IsAvailable == true && !screen.ViewModel.IsBusy));
 
             Check("and the three badges say BLOCKED with a reason, not merely PENDING",
-                layer3State.Text.StartsWith("BLOCKED") && layer4State.Text.StartsWith("BLOCKED")
-                && layer5State.Text.StartsWith("BLOCKED"),
-                layer3State.Text + " | " + layer4State.Text + " | " + layer5State.Text);
+                screen.ViewModel.ExtractState.StartsWith("BLOCKED") && layer4State.Text.StartsWith("BLOCKED")
+                && screen.ViewModel.PartitionState.StartsWith("BLOCKED"),
+                screen.ViewModel.ExtractState + " | " + layer4State.Text + " | " + screen.ViewModel.PartitionState);
 
             Check("Layer 3 names the reconciliation as what would unblock it",
-                layer3State.Text.Contains("reconciliation"), layer3State.Text);
+                screen.ViewModel.ExtractState.Contains("reconciliation"), screen.ViewModel.ExtractState);
             Check("Layer 4 names the import as what would unblock it",
                 layer4State.Text.Contains("rows imported"), layer4State.Text);
             Check("Layer 5 names the extraction as what would unblock it",
-                layer5State.Text.Contains("extraction"), layer5State.Text);
+                screen.ViewModel.PartitionState.Contains("extraction"), screen.ViewModel.PartitionState);
 
             // Every disabled control must SAY why it is disabled, which the sweep cannot check: it
             // requires a tooltip, not a tooltip that names the thing that would enable the control.
-            foreach (var (control, name, mustSay) in new[]
-                     {
-                         ((Button)extract, "Extract", "Disabled until"),
-                         (searchHomology, "Search", "Disabled until"),
-                         (exportHomology, "Export assignments CSV", "Disabled until"),
-                         (buildPartition, "Build partition", "Disabled until"),
-                         (savePartition, "Save CSV", "Disabled until"),
-                         (openPartition, "Open as window", "Disabled until"),
-                     })
-            {
-                Check("the disabled " + name + " button's tooltip says what would enable it",
-                    (control.ToolTip as string ?? "").Contains(mustSay), control.ToolTip as string);
-            }
+            Check("the live homology action explains its readiness",
+                (searchHomology.ToolTip as string ?? "").Contains("Disabled until"));
+            Check("the retired actions are absent from the De novo view",
+                screen.FindName("ButtonExtractXic") == null && screen.FindName("ButtonBuildPartition") == null
+                && screen.FindName("ButtonExportHomologyCsv") == null);
 
-            Check("the three new tables and the chart start empty",
-                xicStats.ItemsSource == null && familyGrid.ItemsSource == null
-                && partitionGrid.ItemsSource == null && chartHost.Child == null);
+            Check("legacy extraction/partition state and the live family table start empty",
+                screen.ViewModel.XicStatsItems == null && familyGrid.ItemsSource == null
+                && screen.ViewModel.PartitionItems == null && screen.ViewModel.PartitionChartRows == null);
             Check("and the two notes say so rather than showing a stale sentence",
-                rawPreview.Text.Contains("No reconciliation yet")
-                && branchNote.Text.Contains("No partition yet"),
-                rawPreview.Text + " | " + branchNote.Text);
+                screen.ViewModel.RawMatchPreview.Contains("No reconciliation yet")
+                && screen.ViewModel.BranchNote.Contains("No partition yet"),
+                screen.ViewModel.RawMatchPreview + " | " + screen.ViewModel.BranchNote);
             Check("nothing has been extracted, searched or partitioned yet",
                 screen.LastExtraction == null && screen.LastHomology == null
                 && screen.LastPartition == null && screen.RawMatches.Count == 0);
@@ -415,30 +394,28 @@ namespace FamilyQuant.Tests
             File.WriteAllText(Path.Combine(rawComplete, "syntheticA.raw"), "");
             File.WriteAllText(Path.Combine(rawComplete, "syntheticB.raw"), "");
 
-            rawDirectory.Text = rawPartial;
+            screen.ViewModel.RawDirectory = rawPartial; screen.ViewModel.RawDirectoryChanged();
 
             Check("the run whose acquisition is missing is NAMED in the preview, not merely counted",
-                rawPreview.Text.Contains("syntheticB.raw") && rawPreview.Text.Contains("NOT FOUND"),
-                rawPreview.Text.Replace("\n", " | "));
+                screen.ViewModel.RawMatchPreview.Contains("syntheticB.raw") && screen.ViewModel.RawMatchPreview.Contains("NOT FOUND"),
+                screen.ViewModel.RawMatchPreview.Replace("\n", " | "));
             Check("and the run that was found is named with the file that answered for it",
-                rawPreview.Text.Contains("syntheticA · found syntheticA.raw"),
-                rawPreview.Text.Replace("\n", " | "));
-            Check("Extract stays disabled while one kept run has no acquisition", !extract.IsEnabled);
+                screen.ViewModel.RawMatchPreview.Contains("syntheticA · found syntheticA.raw"),
+                screen.ViewModel.RawMatchPreview.Replace("\n", " | "));
+            Check("Extract stays disabled while one kept run has no acquisition", !screen.ViewModel.CanExtract);
 
-            var extractHandler = typeof(DeNovoControl).GetMethod("ButtonExtractXic_Click",
-                BindingFlags.Instance | BindingFlags.NonPublic)!;
-            extractHandler.Invoke(screen, new object?[] { null, null });
+            screen.ViewModel.ExtractAsync().GetAwaiter().GetResult();
 
             Check("pressing it anyway refuses in the status line and names the missing acquisition",
                 status.Text.Contains("syntheticB.raw"), status.Text);
             Check("and nothing was extracted", screen.LastExtraction == null);
 
-            rawDirectory.Text = rawComplete;
+            screen.ViewModel.RawDirectory = rawComplete; screen.ViewModel.RawDirectoryChanged();
 
             Check("once every kept run has found its acquisition, Extract is offered",
-                extract.IsEnabled && !rawPreview.Text.Contains("NOT FOUND"),
-                rawPreview.Text.Replace("\n", " | "));
-            Check("and the Layer 3 badge turns READY", layer3State.Text == "READY", layer3State.Text);
+                screen.ViewModel.CanExtract && !screen.ViewModel.RawMatchPreview.Contains("NOT FOUND"),
+                screen.ViewModel.RawMatchPreview.Replace("\n", " | "));
+            Check("and the Layer 3 badge turns READY", screen.ViewModel.ExtractState == "READY", screen.ViewModel.ExtractState);
 
             // The cache belongs to the acquisitions, so in the application it goes beside them. The
             // seam exists so the suite can answer from caches it already has; it must not change the
@@ -463,13 +440,12 @@ namespace FamilyQuant.Tests
                 string.Join(",", screen.PeptidesForHomology()));
 
             // --- Layer 5: both inputs are required, and each absence says which -------------------
-            var plpBox = UiField<TextBox>(screen, "TextBoxPartitionPlp")!;
 
-            plpBox.Text = Path.Combine(workDir, "no_such_project.plp");
+            screen.ViewModel.PartitionPlp = Path.Combine(workDir, "no_such_project.plp");
             Check("naming a PatternLab project does not unblock Layer 5 while no run has an area",
-                !buildPartition.IsEnabled);
+                !screen.ViewModel.CanPartition);
             Check("and the badge still names the extraction as what is missing",
-                layer5State.Text.Contains("extraction"), layer5State.Text);
+                screen.ViewModel.PartitionState.Contains("extraction"), screen.ViewModel.PartitionState);
 
             var synthetic = new DeNovoXicExtraction { RawDirectory = rawComplete };
             foreach (string run in new[] { "syntheticA", "syntheticB" })
@@ -486,17 +462,17 @@ namespace FamilyQuant.Tests
             screen.ApplyExtraction(synthetic);
 
             Check("an extraction fills the per-run table and the totals beside it",
-                xicStats.ItemsSource != null
-                && xicStats.ItemsSource.Cast<DeNovoBatchStats>().Count() == 2
+                screen.ViewModel.XicStatsItems != null
+                && screen.ViewModel.XicStatsItems.Cast<DeNovoBatchStats>().Count() == 2
                 && Math.Abs(screen.LastExtraction!.TotalAreaM0 - 2000) < 1e-12,
                 screen.LastExtraction?.TotalAreaM0.ToString(CultureInfo.InvariantCulture));
             Check("and with a PatternLab project already named, Layer 5 is unblocked",
-                buildPartition.IsEnabled && layer5State.Text == "READY", layer5State.Text);
+                screen.ViewModel.CanPartition && screen.ViewModel.PartitionState == "READY", screen.ViewModel.PartitionState);
 
-            plpBox.Text = "";
+            screen.ViewModel.PartitionPlp = "";
             Check("taking the project away blocks it again, and the badge says it is waiting on you",
-                !buildPartition.IsEnabled && layer5State.Text == "PENDING", layer5State.Text);
-            plpBox.Text = Path.Combine(workDir, "no_such_project.plp");
+                !screen.ViewModel.CanPartition && screen.ViewModel.PartitionState == "PENDING", screen.ViewModel.PartitionState);
+            screen.ViewModel.PartitionPlp = Path.Combine(workDir, "no_such_project.plp");
 
             // A refusal is a first-class answer: it is shown word for word and nothing is drawn.
             const string refusal = "Neither source resolved per run. .plp: This project merged technical "
@@ -504,10 +480,10 @@ namespace FamilyQuant.Tests
             screen.ApplyPartition(new DeNovoPartition { BranchNote = refusal });
 
             Check("a partition that no source could answer shows the refusal word for word",
-                branchNote.Text == refusal, branchNote.Text);
+                screen.ViewModel.BranchNote == refusal, screen.ViewModel.BranchNote);
             Check("and draws nothing rather than an empty bar",
-                partitionGrid.ItemsSource == null && chartHost.Child == null
-                && !savePartition.IsEnabled && !openPartition.IsEnabled);
+                screen.ViewModel.PartitionItems == null && screen.ViewModel.PartitionChartRows == null
+                && !(screen.LastPartition?.IsAvailable == true && !screen.ViewModel.IsBusy) && !(screen.LastPartition?.IsAvailable == true && !screen.ViewModel.IsBusy));
 
             var ticFixture = new Dictionary<string, PartitionValue>(StringComparer.OrdinalIgnoreCase)
             {
@@ -534,29 +510,27 @@ namespace FamilyQuant.Tests
                 Grouped = ThreeWayPartition.Grouped(fixtureRows),
             });
 
-            var shown = partitionGrid.ItemsSource!.Cast<ThreeWayPartitionRow>().ToList();
+            var shown = screen.ViewModel.PartitionItems!.Cast<ThreeWayPartitionRow>().ToList();
             Check("a built partition shows one line per run with the aggregate last",
                 shown.Count == 3 && !shown[0].IsGrouped && !shown[1].IsGrouped && shown[2].IsGrouped
                 && shown[2].RunName == ThreeWayPartition.GroupedRunName,
                 string.Join(" | ", shown.Select(r => r.RunName)));
-            Check("the chart is drawn into the Layer rather than only into a separate window",
-                chartHost.Child is ThreeWayChart);
-            Check("and both of the buttons that reproduce it elsewhere are offered",
-                savePartition.IsEnabled && openPartition.IsEnabled);
-            Check("the branch note is shown word for word, refusal or not", branchNote.Text == branch,
-                branchNote.Text);
+            Check("legacy partition chart input is retained for independent rendering",
+                screen.ViewModel.PartitionChartRows != null);
+            Check("legacy partition export state remains available",
+                (screen.LastPartition?.IsAvailable == true && !screen.ViewModel.IsBusy));
+            Check("the branch note is shown word for word, refusal or not", screen.ViewModel.BranchNote == branch,
+                screen.ViewModel.BranchNote);
             Check("every line closes on 100%", shown.All(r => r.Closes),
                 string.Join(" | ", shown.Select(r => r.ShareSum.ToString("R", CultureInfo.InvariantCulture))));
 
-            // The column headings must carry the provenance the rows actually report, not a constant.
-            var ticHeader = UiField<DataGridTextColumn>(screen, "ColumnPartitionTic")!;
-            var plHeader = UiField<DataGridTextColumn>(screen, "ColumnPartitionPatternLab")!;
-            string ticTip = HeaderTooltipOf(ticHeader) ?? "";
-            string plTip = HeaderTooltipOf(plHeader) ?? "";
+            // C11 retires this screen table. Its retained compatibility state still carries the exact provenance.
+            string ticTip = screen.ViewModel.PartitionSample?.Tic.Label ?? "";
+            string plTip = screen.ViewModel.PartitionSample?.PatternLab.Label ?? "";
 
-            Check("the total-ion-current heading names where its numbers came from",
+            Check("legacy partition state names where total ion current came from",
                 ticTip.Contains("measured:" + ThreeWayPartition.SourceRawTic), ticTip);
-            Check("and the PatternLab heading names the source that actually answered",
+            Check("and legacy PatternLab state names the source that actually answered",
                 plTip.Contains("recorded:" + ThreeWayPartition.SourceXic2Quant), plTip);
 
             string partitionCsv = Path.Combine(workDir, "denovo_screen_synthetic_partition.csv");
@@ -586,7 +560,7 @@ namespace FamilyQuant.Tests
             screen.ApplyHomology(PretendPass());
 
             Check("a homology pass fills Layer 4 and offers the assignments export",
-                screen.LastHomology != null && familyGrid.ItemsSource != null && exportHomology.IsEnabled,
+                screen.LastHomology != null && familyGrid.ItemsSource != null && screen.ViewModel.CanExportHomology,
                 homologyMapped.Content as string);
 
             // A fresh import must not leave any of the four downstream Layers standing.
@@ -594,14 +568,14 @@ namespace FamilyQuant.Tests
 
             Check("importing again drops the extraction and the partition it fed",
                 screen.LastExtraction == null && screen.LastPartition == null
-                && xicStats.ItemsSource == null && partitionGrid.ItemsSource == null
-                && chartHost.Child == null);
+                && screen.ViewModel.XicStatsItems == null && screen.ViewModel.PartitionItems == null
+                && screen.ViewModel.PartitionChartRows == null);
             Check("and their buttons go back to being disabled",
-                !extract.IsEnabled && !buildPartition.IsEnabled && !savePartition.IsEnabled
-                && !openPartition.IsEnabled);
+                !screen.ViewModel.CanExtract && !screen.ViewModel.CanPartition && !(screen.LastPartition?.IsAvailable == true && !screen.ViewModel.IsBusy)
+                && !(screen.LastPartition?.IsAvailable == true && !screen.ViewModel.IsBusy));
             Check("importing again also drops the homology pass, which searched the replaced rows",
                 screen.LastHomology == null && familyGrid.ItemsSource == null
-                && !exportHomology.IsEnabled
+                && !screen.ViewModel.CanExportHomology
                 && (homologyMapped.Content as string) == "Mapped to targets: -",
                 homologyMapped.Content as string);
             Check("while Layer 4 itself stays open, because the new rows are peptides too",
@@ -615,7 +589,7 @@ namespace FamilyQuant.Tests
 
             Check("reconciling drops the homology pass too, since it searched the other set of rows",
                 screen.LastHomology == null && familyGrid.ItemsSource == null
-                && !exportHomology.IsEnabled
+                && !screen.ViewModel.CanExportHomology
                 && (homologyMapped.Content as string) == "Mapped to targets: -",
                 homologyMapped.Content as string);
 
@@ -626,10 +600,7 @@ namespace FamilyQuant.Tests
                      {
                          ("ButtonBrowsePeaksDirectory_Click", "No folder was chosen"),
                          ("ButtonBrowseSeproPackage_Click", "No SEPro package was chosen"),
-                         ("ButtonBrowseRawDirectory_Click", "No folder was chosen"),
                          ("ButtonBrowseHomologyFcf_Click", "No Family Cluster File was chosen"),
-                         ("ButtonBrowsePartitionPlp_Click", "No PatternLab project was chosen"),
-                         ("ButtonBrowsePartitionXic2_Click", "No stored quants file was chosen"),
                          ("ButtonExportSummary_Click", "Nothing was exported"),
                          ("ButtonExportReviewQueue_Click", "Nothing was exported"),
                      })
@@ -665,20 +636,20 @@ namespace FamilyQuant.Tests
             // --- editing the RAW folder drops what was measured in the previous one -----------------
             screen.ApplyExtraction(synthetic);
             Check("an extraction is on screen before the acquisitions folder is edited",
-                screen.LastExtraction != null && xicStats.ItemsSource != null);
+                screen.LastExtraction != null && screen.ViewModel.XicStatsItems != null);
 
-            rawDirectory.Text = Path.Combine(workDir, "denovo_screen_raw_elsewhere");
+            screen.ViewModel.RawDirectory = Path.Combine(workDir, "denovo_screen_raw_elsewhere"); screen.ViewModel.RawDirectoryChanged();
 
             Check("editing the acquisitions folder drops the extraction and any partition built on it",
                 screen.LastExtraction == null && screen.LastPartition == null
-                && xicStats.ItemsSource == null && partitionGrid.ItemsSource == null,
+                && screen.ViewModel.XicStatsItems == null && screen.ViewModel.PartitionItems == null,
                 screen.LastExtraction == null ? "dropped" : "still standing");
             Check("and the status line says what was dropped and why, rather than changing in silence",
                 status.Text.Contains("folder holding the acquisitions was changed"), status.Text);
             Check("Layer 4 is deliberately untouched by it, because no peptide comes from that box",
                 searchHomology.IsEnabled && screen.FilteredRows.Count == 2);
 
-            rawDirectory.Text = rawComplete;
+            screen.ViewModel.RawDirectory = rawComplete; screen.ViewModel.RawDirectoryChanged();
 
             // --- one busy discipline: a long operation disables ALL five Layers ---------------------
             // Driven through the real handler, with the import held in flight by a TaskCompletionSource
@@ -688,8 +659,7 @@ namespace FamilyQuant.Tests
             // was about to replace, landing after them.
             var groupBoxes = new[]
             {
-                "GroupBoxImportAndFilter", "GroupBoxReconcile", "GroupBoxExtractXic",
-                "GroupBoxHomology", "GroupBoxPartition",
+                "GroupBoxImportAndFilter", "GroupBoxReconcile", "GroupBoxHomology",
             }.Select(n => UiField<GroupBox>(screen, n)!).ToList();
 
             // Q7 folded Extract areas, Attribute to families and Partition ion current into a collapsed
@@ -710,8 +680,8 @@ namespace FamilyQuant.Tests
 
             screen.ApplyHomology(PretendPass());
 
-            Check("before the import all five Layers are enabled and Layer 4 offers its search",
-                groupBoxes.All(g => g.IsEnabled) && searchHomology.IsEnabled && exportHomology.IsEnabled,
+            Check("before the import all remaining panels are enabled and Layer 4 offers its search",
+                groupBoxes.All(g => g.IsEnabled) && searchHomology.IsEnabled && screen.ViewModel.CanExportHomology,
                 string.Join(",", groupBoxes.Select(g => g.IsEnabled)));
 
             var inFlight = new TaskCompletionSource<DeNovoImport>(
@@ -729,12 +699,12 @@ namespace FamilyQuant.Tests
 
                 loadHandler.Invoke(screen, new object?[] { null, null });
 
-                Check("while an import is in flight every one of the five Layers is disabled",
+                Check("while an import is in flight every remaining panel is disabled",
                     groupBoxes.All(g => !g.IsEnabled),
                     string.Join(",", groupBoxes.Select(g => g.IsEnabled)));
                 Check("so no later Layer can be started against the rows the import is about to replace",
-                    !reconcile.IsEnabled && !extract.IsEnabled && !searchHomology.IsEnabled
-                    && !exportHomology.IsEnabled && !buildPartition.IsEnabled,
+                    !reconcile.IsEnabled && !screen.ViewModel.CanExtract && !searchHomology.IsEnabled
+                    && !screen.ViewModel.CanExportHomology && !screen.ViewModel.CanPartition,
                     searchHomology.IsEnabled.ToString());
                 Check("and the status line says the import is running",
                     status.Text.Contains("Reading the de novo exports"), status.Text);
@@ -744,16 +714,16 @@ namespace FamilyQuant.Tests
                 inFlight.SetResult(DeNovoControl.ImportAndFilter(exportDir, screen.Criteria));
                 PumpDispatcher();
 
-                Check("once it lands all five Layers are enabled again",
+                Check("once it lands all remaining panels are enabled again",
                     groupBoxes.All(g => g.IsEnabled),
                     string.Join(",", groupBoxes.Select(g => g.IsEnabled)));
                 Check("and it is the state machine, not the busy flag, that decides what is offered",
                     reconcile.IsEnabled && searchHomology.IsEnabled
-                    && !extract.IsEnabled && !buildPartition.IsEnabled && !exportSummary.IsEnabled,
-                    reconcile.IsEnabled + " / " + extract.IsEnabled);
+                    && !screen.ViewModel.CanExtract && !screen.ViewModel.CanPartition && !exportSummary.IsEnabled,
+                    reconcile.IsEnabled + " / " + screen.ViewModel.CanExtract);
                 Check("the import that landed still dropped the pass describing the replaced rows",
                     screen.LastHomology == null && familyGrid.ItemsSource == null
-                    && !exportHomology.IsEnabled && screen.Reconciled.Count == 0,
+                    && !screen.ViewModel.CanExportHomology && screen.Reconciled.Count == 0,
                     screen.LastHomology == null ? "dropped" : "still standing");
                 Check("while the rows it imported are the ones now on screen",
                     screen.FilteredRows.Count == 2, screen.FilteredRows.Count.ToString());
@@ -1061,31 +1031,23 @@ namespace FamilyQuant.Tests
             }
 
             var status = UiField<TextBlock>(screen, "TextBlockDeNovoStatus")!;
-            var rawDirectory = UiField<TextBox>(screen, "TextBoxRawDirectory")!;
-            var rawPreview = UiField<TextBlock>(screen, "TextBlockRawMatchPreview")!;
-            var extract = UiField<Button>(screen, "ButtonExtractXic")!;
-            var xicStats = UiField<DataGrid>(screen, "DataGridXicStats")!;
-            var branchNote = UiField<TextBlock>(screen, "TextBlockBranchNote")!;
-            var partitionGrid = UiField<DataGrid>(screen, "DataGridPartition")!;
-            var chartHost = UiField<Border>(screen, "BorderPartitionChart")!;
-            var buildPartition = UiField<Button>(screen, "ButtonBuildPartition")!;
 
             // ---- Layer 3 ---------------------------------------------------------------------------
             // The PEAKS export sits one level under the acquisitions in this project, so the folder the
             // screen offered by itself is already the right one. Asserted rather than assumed, then set
             // explicitly so the rest of this pass does not depend on that layout.
             Check("the screen offered the PEAKS export's parent as the folder holding the acquisitions",
-                rawDirectory.Text.Trim().Length > 0
-                && Directory.Exists(rawDirectory.Text.Trim())
-                && Directory.GetFiles(rawDirectory.Text.Trim(), "*.raw").Length >= 3,
-                rawDirectory.Text);
+                screen.ViewModel.RawDirectory.Trim().Length > 0
+                && Directory.Exists(screen.ViewModel.RawDirectory.Trim())
+                && Directory.GetFiles(screen.ViewModel.RawDirectory.Trim(), "*.raw").Length >= 3,
+                screen.ViewModel.RawDirectory);
 
-            rawDirectory.Text = desktopDir;
+            screen.ViewModel.RawDirectory = desktopDir; screen.ViewModel.RawDirectoryChanged();
 
             Check("all three kept runs found their acquisition by file name",
                 screen.RawMatches.Count == 3 && screen.RawMatches.All(m => m.Found),
-                rawPreview.Text.Replace("\n", " | "));
-            Check("and Extract is offered only once every one of them has", extract.IsEnabled);
+                screen.ViewModel.RawMatchPreview.Replace("\n", " | "));
+            Check("and Extract is offered only once every one of them has", screen.ViewModel.CanExtract);
 
             var matches = screen.RawMatches.ToList();
             var keptByRun = screen.KeptRowsByRun();
@@ -1110,7 +1072,7 @@ namespace FamilyQuant.Tests
 
             screen.ApplyExtraction(extraction);
 
-            var shownStats = xicStats.ItemsSource!.Cast<DeNovoBatchStats>().ToList();
+            var shownStats = screen.ViewModel.XicStatsItems!.Cast<DeNovoBatchStats>().ToList();
 
             foreach (DeNovoBatchStats s in shownStats)
             {
@@ -1225,11 +1187,11 @@ namespace FamilyQuant.Tests
                 return;
             }
 
-            UiField<TextBox>(screen, "TextBoxPartitionPlp")!.Text = plpPath;
-            UiField<TextBox>(screen, "TextBoxPartitionXic2")!.Text = xic2Path;
+            screen.ViewModel.PartitionPlp = plpPath;
+            screen.ViewModel.PartitionXic2 = xic2Path;
 
             Check("with every run extracted and a PatternLab project named, Layer 5 is unblocked",
-                buildPartition.IsEnabled);
+                screen.ViewModel.CanPartition);
 
             DeNovoPartition partition = DeNovoControl.BuildPartition(
                 matches, extraction.ByRun, plpPath, xic2Path, m => Console.WriteLine("        " + m));
@@ -1248,25 +1210,25 @@ namespace FamilyQuant.Tests
             // applies is a property of the project file, and pinning one of them would make this check
             // fail the day the project is re-exported rather than the day the screen stops showing it.
             const string marker = "because the .plp cannot resolve per run: ";
-            int at = branchNote.Text.IndexOf(marker, StringComparison.Ordinal);
-            string plpRefusal = at < 0 ? "" : branchNote.Text.Substring(at + marker.Length);
+            int at = screen.ViewModel.BranchNote.IndexOf(marker, StringComparison.Ordinal);
+            string plpRefusal = at < 0 ? "" : screen.ViewModel.BranchNote.Substring(at + marker.Length);
 
             Check("the branch note is shown verbatim, the .plp's own refusal included",
-                branchNote.Text == partition.BranchNote
-                && branchNote.Text.Contains(".xic2")
+                screen.ViewModel.BranchNote == partition.BranchNote
+                && screen.ViewModel.BranchNote.Contains(".xic2")
                 && at > 0 && plpRefusal.Length > 40 && plpRefusal.EndsWith(".", StringComparison.Ordinal),
-                branchNote.Text);
+                screen.ViewModel.BranchNote);
             Check("and that refusal is the .plp branch's own sentence, not a summary of it",
                 plpRefusal.StartsWith("This project", StringComparison.Ordinal), plpRefusal);
 
-            var shownRows = partitionGrid.ItemsSource!.Cast<ThreeWayPartitionRow>().ToList();
+            var shownRows = screen.ViewModel.PartitionItems!.Cast<ThreeWayPartitionRow>().ToList();
 
             Check("the table holds the three runs and the aggregate, in that order",
                 shownRows.Count == 4 && shownRows[3].IsGrouped
                 && shownRows.Take(3).Select(r => r.RunName).SequenceEqual(
                     rawNames.Select(n => DeNovoReconciler.NormalizeRunName(n))),
                 string.Join(" | ", shownRows.Select(r => r.RunName)));
-            Check("and the chart was drawn into the Layer", chartHost.Child is ThreeWayChart);
+            Check("and legacy partition rows are available for chart drawing", screen.ViewModel.PartitionChartRows != null);
 
             ThreeWayPartitionRow grouped = shownRows[3];
 

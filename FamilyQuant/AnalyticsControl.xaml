@@ -13,6 +13,7 @@
      <ComboBoxItem Content="Peptide table (CSV)" ToolTip="Per-peptide run, sequence, charge, mass, isotope areas, envelope and family assignments." Tag="Peptides"/>
      <ComboBoxItem Content="Screen figures (PNG)" ToolTip="Every screen graph at 1920 by 1080 pixels in the Light palette." Tag="Figures"/>
      <ComboBoxItem Content="Presentation evidence pack" ToolTip="Complete figures, exact CSV and JSON numbers and cutoff README. Required studies must be present." Tag="EvidencePack"/>
+     <ComboBoxItem Content="Homology assignments (CSV)" ToolTip="Export the latest standalone homology snapshot. No full XIC or open project is required." Tag="Homology"/>
     </ComboBox>
     <Button x:Name="ButtonExport" Content="Export" Style="{DynamicResource PrimaryButton}" Click="ExportClicked"
      ToolTip="Save the selected result in CSV or PNG format with invariant decimals. Figures use 1920 by 1080 pixels in the Light palette."/>
@@ -55,6 +56,20 @@
      <TextBlock x:Name="TextBlockDetails" TextWrapping="Wrap" Margin="12"/>
     </Expander>
     <StackPanel x:Name="PanelCharts" Margin="0,12,0,0"/>
+    <Border Background="{DynamicResource SurfaceBrush}" Padding="16" CornerRadius="6" Margin="0,12,0,0"
+     Visibility="{Binding HasHomology, Converter={StaticResource VisibleWhenTrue}}">
+     <StackPanel>
+      <TextBlock Text="{Binding HomologySummary}" TextWrapping="Wrap" Margin="0,0,0,10"/>
+      <DataGrid ItemsSource="{Binding Homology.Families}" AutoGenerateColumns="False" IsReadOnly="True" Height="220"
+       ToolTip="Families reached by the latest standalone homology search. Its CSV contains every per-peptide assignment.">
+       <DataGrid.Columns>
+        <DataGridTextColumn Header="Family" Binding="{Binding FamilyId}" Width="90"/>
+        <DataGridTextColumn Header="Peptides" Binding="{Binding PeptideCount}" Width="100"/>
+        <DataGridTextColumn Header="Description" Binding="{Binding Description}" Width="*"/>
+       </DataGrid.Columns>
+      </DataGrid>
+     </StackPanel>
+    </Border>
    </StackPanel>
   </ScrollViewer>
  </Grid>

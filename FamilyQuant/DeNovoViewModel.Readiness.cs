@@ -18,13 +18,14 @@ public sealed partial class DeNovoViewModel
         }
         base.ChildChanged(name);
     }
-    public bool CanReconcile => FilteredRows.Count > 0;
+    public bool CanReconcile => !IsBusy && FilteredRows.Count > 0;
     public bool CanSearch => CanReconcile;
-    public bool CanExtract => LastReconciliation != null && KeptRunNames().Count > 0
+    public bool CanExportHomology => !IsBusy && LastHomology != null;
+    public bool CanExtract => !IsBusy && LastReconciliation != null && KeptRunNames().Count > 0
         && RawMatches.Count(m => m.Found) == KeptRunNames().Count;
     private bool EveryRunExtracted => LastExtraction != null && KeptRunNames().Count > 0
         && KeptRunNames().All(r => LastExtraction.ByRun.ContainsKey(r));
-    public bool CanPartition => EveryRunExtracted && (!string.IsNullOrWhiteSpace(PartitionPlp) || !string.IsNullOrWhiteSpace(PartitionXic2));
+    public bool CanPartition => !IsBusy && EveryRunExtracted && (!string.IsNullOrWhiteSpace(PartitionPlp) || !string.IsNullOrWhiteSpace(PartitionXic2));
     public string ReconcileState => ReportView.LayerState(CanReconcile, CanReconcile ? null : "no rows imported");
     public string ExtractState => ReportView.LayerState(CanExtract, LastReconciliation == null ? "no reconciliation yet"
         : KeptRunNames().Count == 0 ? "no rows survived the reconciliation" : null);
