@@ -27,7 +27,7 @@ HK1 removed uncalled shell forwarding methods/imports; its frozen golden compari
 | File over about 1,000 lines | Roadmap coverage or disposition |
 |---|---|
 | `FamilyQuant.Core/ProjectStore.cs` | X7 owns the schema/container split. Preserve stored formats and save semantics. |
-| `FamilyQuant/ClusterGenerationControl.xaml.cs` | C1/C2/C5 own the curation rewrite; C4 files remain held until released by the desk. |
+| `FamilyQuant/ClusterGenerationControl.xaml.cs` | C1/C2/C5 own the curation rewrite; C4 landed during the pass and its hold was released by M59; the larger curation rewrite remains planned. |
 | `FamilyQuant/PresentationFigures.cs` | X9 owns Reports extraction; protected presentation input. |
 | `FamilyQuant.Tests/TalkFigures.cs` | Protected scientific producer. Do not split it as incidental housekeeping. |
 | `FamilyQuant.Tests/Program.Charts.cs` | Test organization may be considered in the re-plan, retaining every check and fixture. |
@@ -40,7 +40,7 @@ FQOpus findings 4 and 5 stay with X9: the talk chart base, axis-rounding ladders
 
 ## Ledger status and source migration
 
-The published generator reproduced both committed ledger files byte for byte in scratch: 104 frozen source files and 5,756 observations. Dispositions are 2,009 KEEP, 3,451 IMPROVE and 296 Paulo-approved DROP. All 5,460 retained rows are OPEN; no row was promoted to VERIFIED by a search or a green build. The release guard intentionally remains unsatisfied until owner evidence and review close them.
+The published generator reproduced both Windows-checkout ledger files byte for byte in scratch. The Markdown also matches its Git blob; scan JSON has CRLF in the generated/working copy and LF in the Git blob, with identical normalized content. Inventory: 104 frozen source files and 5,756 observations. Dispositions are 2,009 KEEP, 3,451 IMPROVE and 296 Paulo-approved DROP. All 5,460 retained rows are OPEN; no row was promoted to VERIFIED by a search or a green build. The release guard intentionally remains unsatisfied until owner evidence and review close them.
 
 For retained observations, 3,446 still have their original source path and 2,014 belong to sources moved to Core. The source-file inventory maps 37 old paths directly and 66 to Core; removed `GroupingType.cs` has no observation rows and belongs to the completed F5 selector removal. Source-location categories are not behavior verdicts.
 

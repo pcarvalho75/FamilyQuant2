@@ -87,6 +87,7 @@ These commands create native WPF client captures or labelled synthetic fixtures,
 | `--denovo-screens <output-dir>` | [Program.DeNovoScreens.cs](../FamilyQuant.Tests/Program.DeNovoScreens.cs) |
 | `--homology-results-screens <output-dir>` | [Program.HomologyResultScreens.cs](../FamilyQuant.Tests/Program.HomologyResultScreens.cs) |
 | `--secondary-screens <output-dir>` | [Program.SecondaryWindows.cs](../FamilyQuant.Tests/Program.SecondaryWindows.cs) |
+| `--grouping-review-screens <output-dir> [evidence.fcf]` | [GroupingReviewScreens.cs](../FamilyQuant.Tests/GroupingReviewScreens.cs); merged keyword/evidence/architecture review captures |
 | `--logo-assets <output-dir> [--preview=<preview.png>]` | [LogoAssets.cs](../FamilyQuant.Tests/LogoAssets.cs); target scratch before replacing tracked assets |
 | `--shell-save-smoke <input.fcf> <output.fqproj>` | [Program.ShellSaving.cs](../FamilyQuant.Tests/Program.ShellSaving.cs); verified curation-only persistence, no RAW reproduction |
 | `--evidence-recipe-replay-check <recipe-bearing.fcf>` | [Program.ProteinDomains.cs](../FamilyQuant.Tests/Program.ProteinDomains.cs) |
@@ -172,6 +173,6 @@ The guarded `build_scientific_deck.mjs` is a historical, deprecated producer wit
 
 The committed scan is a frozen-source inventory, not a scan of current view names. It contains 5,756 observations from 104 source files: 2,009 KEEP, 3,451 IMPROVE and 296 Paulo-approved DROP. All 5,460 retained rows remain OPEN; the approved retirements use APPROVED_DROP. Source moves and command-backed replacements require a mapping and reviewed execution evidence before VERIFIED. A missing old handler name is not proof that the function is lost.
 
-Regenerate into scratch with the published command and compare both `docs/feature-ledger-scan.json` and `docs/FEATURE-LEDGER.md` byte for byte. Never overwrite acceptance evidence or scan moving source to make the counts pass. The release check intentionally fails while retained rows remain OPEN.
+Regenerate into scratch with the published command and compare both ledger files against the checkout and the Git blobs separately. On the audited Windows checkout both regenerated files are byte-identical to the working files; the scan JSON differs from its LF Git blob only by CRLF newlines, and normalized content is identical. The Markdown is also byte-identical to its Git blob. Never overwrite acceptance evidence or scan moving source to make the counts pass. The release check intentionally fails while retained rows remain OPEN.
 
 Housekeeping source-path audit: of the retained observations, 3,446 still have their original source path and 2,014 come from sources relocated to Core. Of the 104 frozen source files, 37 remain at their original path, 66 map to Core, and the removed `GroupingType.cs` has no observation rows. These are source-location categories, not VERIFIED feature mappings. Twenty-one old handler-name observations are absent literally after the view rewrites; eight are within approved DROP, while the others need command/view-model mapping. The source audit distinguishes those cases; no retained row is dropped on a name search.
