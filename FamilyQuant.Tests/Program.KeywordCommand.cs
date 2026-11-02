@@ -13,6 +13,7 @@ internal static partial class Program
     private static void KeywordCommandTests()
     {
         EnsureApplication();
+        ReviewWorkWaitTests();
         var control = new ClusterGenerationControl(new FamilyClusterFile { MyExtendedFastaItems = Vipers() });
         var button = UiField<Button>(control, "ButtonSuperCluster")!;
         bool ready = button.IsEnabled && button.Content as string == "Group by keywords";
