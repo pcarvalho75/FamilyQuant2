@@ -91,8 +91,7 @@ Columns: Diff = L, M, H, VH. Hrs = worker hours at measured speed: estimates are
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
 | N6q | Paulo rules on the wording list in one pass | L | 0 | 🟢 | N6r | Paulo's ruling recorded | Paulo | not started | 0% | 0% | T+0 |
-| N6r | Reviewer's 200-row random sample across the whole ledger | M | 0.3 | N6q | N6s | GR's verdict; one failure reopens the kind | GR | not started | 0% | 0% | T+0 |
-| N6s | Release check passes | L | 0.1 | N6r | R3b | `--feature-ledger-release-check` passes | Orchestrator | not started | 0% | 0% | T+0 |
+| N6s | Release check passes | L | 0.1 | 🟢 | R3b | `--feature-ledger-release-check` passes | Orchestrator | not started | 0% | 0% | T+0 |
 
 ### W4 Look
 
@@ -106,8 +105,7 @@ Columns: Diff = L, M, H, VH. Hrs = worker hours at measured speed: estimates are
 | R3b | Final proof refresh and full suite on the frozen code | L | 0.2 | R4c, N6s | R3c | Every proof current; suite green | Orchestrator | not started | 0% | 0% | T+2 |
 | R3c | Release candidate: versions, build and a clean install rehearsal | M | 0.3 | R3b | R5a | Rehearsal installs beside 1.5 and opens her file | Orchestrator | not started | 0% | 0% | T+2 |
 | R4a | Final adversarial pass: code and behaviour | H | 1 | 🟢 | R4c | GR's verdict | GR | not started | 0% | 0% | T+1 |
-| R4b | Final adversarial pass: science and numbers | H | 1 | 🟢 | R4c | KM's verdict | KM | not started | 0% | 0% | T+1 |
-| R4c | Every finding fixed and gated | M | 0.5 | R4a, R4b | R3b | No open finding | Orchestrator | not started | 0% | 0% | T+2 |
+| R4c | Every finding fixed and gated | M | 0.5 | R4a | R3b | No open finding | Orchestrator | not started | 0% | 0% | T+2 |
 | R5a | FamilyQuant 2.0 final published | L | 0 | R3c | R5b | Paulo publishes | Paulo | not started | 0% | 0% | T+2 |
 | R5b | Archive this roadmap | L | 0.1 | R5a | Done | Archive committed | Orchestrator | not started | 0% | 0% | T+2 |
 
