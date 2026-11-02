@@ -45,6 +45,9 @@ namespace FamilyQuant.Tests
             if (args.Contains("--test-dependencies", StringComparer.Ordinal))
             {
                 DependencyCacheTests(Path.Combine(Path.GetTempPath(), "FamilyQuant.Tests"));
+                Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
+                return failed == 0 ? 0 : 1;
+            }
             if (args.Contains("--test-ui-icons", StringComparer.Ordinal))
             {
                 UiIconTests();
