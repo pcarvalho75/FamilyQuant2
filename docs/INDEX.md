@@ -83,11 +83,12 @@ Invoke each flag with `& $testExe <flag>` after building. Dispatch and arity are
 | `--test-ui-icons` | No emoji in product source, escaped/entity regressions and Fluent glyphs in both themes |
 | `--test-keyword-command` | Single keyword command, empty review, Cancel and accepted-setting retention |
 | `--test-chart-themes [output-dir]` | Seven hosted chart types, live token refresh, contrast, subscription lifetime and frozen Light palette pins; labelled synthetic chart captures |
-| `--test-chart-themes [output-dir]` | Seven hosted chart types, live token refresh, contrast, subscription lifetime and frozen Light palette pins; labelled synthetic chart captures |
-| `--test-ui-icons` | No emoji in product source, escaped/entity regressions and Fluent glyphs in both themes |
 | `--test-evidence-task-scope [output-dir]` | Supplied task facts, editable scope, cancellation, native confirmation and both-theme synthetic captures |
 | `--test-architecture-group-split [output-dir]` | Native per-key split choices, retained bulk choice, unsplit members staying together, exact recipe replay and optional synthetic captures |
 | `--test-keyword-command` | Single keyword command, empty review, Cancel and accepted-setting retention |
+| `--test-curation-view` | Persistent table, accession/full identifier, hidden defaults and native annotation edit/Undo |
+| `--test-curation-layout` | Retained chrome, tooltips and ancestor-clipping regression |
+| `--test-curation-quantitation` | Full-XIC column, denominator changes, shared policy and unavailable-TIC fallback |
 | `--shell-checks` | Shell navigation, saving, preferences, Build/Quantify integration and secondary views |
 | `--feature-ledger-check` | Inventory, row coverage, dispositions and guard regressions |
 | `--feature-ledger-release-check` | Same inventory with all retained rows required VERIFIED; OPEN rows intentionally fail |
@@ -99,6 +100,7 @@ These commands create native WPF client captures or labelled synthetic fixtures,
 | Syntax after `$testExe` | Source |
 |---|---|
 | `--screens <output-dir>` | [ScreenHarness.cs](../FamilyQuant.Tests/ScreenHarness.cs) |
+| `--curation-screens <new-output-dir> <input.fcf>` | [Program.CurationScreens.cs](../FamilyQuant.Tests/Program.CurationScreens.cs); four native client captures with input hash |
 | `--busy-screens <output-dir>` | [Program.BusyOperations.cs](../FamilyQuant.Tests/Program.BusyOperations.cs); six synthetic overlay states in both themes |
 | `--shell-menu-screens <output-dir>` | [Program.StandardMenu.cs](../FamilyQuant.Tests/Program.StandardMenu.cs) |
 | `--start-page-screens <output-dir>` | [Program.HomeStart.cs](../FamilyQuant.Tests/Program.HomeStart.cs) |
