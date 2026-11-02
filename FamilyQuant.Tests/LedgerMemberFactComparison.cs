@@ -46,6 +46,14 @@ internal static class LedgerMemberFactComparison
         if (!TryRead(frozenSource, out var frozen, out string problem)) return No("Frozen source: " + problem);
         var literals = frozen.Tokens.Where(token => token.IsString && token.Line == observation.Line
             && token.Text == observation.Detail).ToArray();
+        if (literals.Length > 1)
+        {
+            // A real inventory ID binds path, exact character offset and kind. It may resolve
+            // a repeated same-line literal only when exactly one existing candidate owns it.
+            literals = literals.Where(token => observation.Id == "FQ15-" + Convert.ToHexString(SHA256.HashData(
+                Encoding.UTF8.GetBytes(observation.Source + "|" + token.Offset.ToString(CultureInfo.InvariantCulture)
+                    + "|" + observation.Kind)))[..12]).ToArray();
+        }
         if (literals.Length != 1) return No("The frozen line does not identify exactly one recorded literal token.");
         var owners = frozen.Members.Where(member => member.Tokens.Contains(literals[0])).ToArray();
         if (owners.Length != 1) return No("The frozen literal has no unique supported containing member.");
