@@ -96,6 +96,8 @@ internal static partial class Program
     private static void WriteDelivery(FamilyClusterFile file, DeliveryPreparation preparation, EvidenceReviewSelection choice,
         EvidenceReviewInput review, string leftOut, string directory)
     {
+        string coverageRule = NearestReviewed.CoverageRuleText(file.EvidenceRecipe!.Options.MinQueryAlignedPercent);
+        if (!review.RuleSummary.Contains(coverageRule, StringComparison.Ordinal)) review = review with { RuleSummary = coverageRule + "\n" + review.RuleSummary };
         Directory.CreateDirectory(directory);
         string path = Path.Combine(directory, "families.fcf");
         file.Save(path);
@@ -123,6 +125,7 @@ internal static partial class Program
         File.WriteAllText(Path.Combine(directory, "delivery-note.txt"),
             "FamilyQuant " + preparation.ProgramVersion + "\nUniProt release: " + file.EvidenceSource?.Release
             + "\nScope: " + string.Join("; ", file.EvidenceRecipe.Options.ScopeTerms)
+            + "\n" + coverageRule
             + "\nSelection: review window defaults, unflagged proposals selected and flagged rows left unselected."
             + "\nSelected proteins: " + Number(choice.ProteinIndices.Count)
             + "\nSelected groups: " + Number(file.EvidenceRecipe.Assignments.Select(a => a.FamilyId).Distinct().Count())
@@ -186,6 +189,7 @@ internal static partial class Program
             if (args.Length == 6 && args[1] == "prepare") PrepareEvidenceDelivery(args[2], args[3], args[4], args[5]).GetAwaiter().GetResult();
             else if (args.Length == 4 && args[1] == "refresh-coverage") RefreshDeliveryCoverage(args[2], args[3]);
             else if (args.Length == 4 && args[1] == "create") { EnsureApplication(); CompleteEvidenceDelivery(args[2], args[3]); }
+            else if (args.Length == 3 && args[1] == "verify-coverage") VerifyDeliveryCoverage(args[2]);
             else if (args.Length == 4 && args[1] == "verify-families")
             {
                 var first = FamilyClusterFile.Load(args[2]); var second = FamilyClusterFile.Load(args[3]);
@@ -264,6 +268,28 @@ internal static partial class Program
             SelectedProteins = review.SelectedCount, SourceRelease = file.EvidenceSource.Release, PanelRelease = file.EvidenceSource.ReferencePanel?.Release });
         Console.WriteLine(search.CoverageMethod);
         Console.WriteLine(changed.Length.ToString(CultureInfo.InvariantCulture) + " changed neighbours; " + review.Summary);
+    }
+
+    private static void VerifyDeliveryCoverage(string directory)
+    {
+        var file = FamilyClusterFile.Load(Path.Combine(directory, "families.fcf"));
+        var recipe = file.EvidenceRecipe ?? throw new InvalidDataException("The packet has no recipe.");
+        var review = ReadDelivery<EvidenceReviewInput>(Path.Combine(directory, "review.json"));
+        var search = recipe.SessionSearch ?? throw new InvalidDataException("The packet has no recorded session search.");
+        bool Bounded(string text) => System.Text.RegularExpressions.Regex.Matches(text, @"(?<value>\d+(?:\.\d+)?)%")
+            .All(match => double.Parse(match.Groups["value"].Value, CultureInfo.InvariantCulture) <= 100);
+        if (search.CoverageMethod != NearestReviewed.QueryCoverageMethod || search.Neighbours.Any(n => n.QueryCoveragePercent == null || n.QueryCoveragePercent > 100)
+            || review.Proteins.Any(p => !Bounded(p.Neighbour)) || recipe.Assignments.Any(a => !Bounded(a.Reason))
+            || !review.RuleSummary.Contains("inserted gap columns do not count", StringComparison.Ordinal))
+            throw new InvalidDataException("The packet has missing/unbounded coverage or does not state the query-residue rule.");
+        var neighbours = search.ByQuery();
+        foreach (var row in review.Proteins)
+            if (neighbours.TryGetValue(row.Identifier, out var neighbour)
+                && (!row.Neighbour.Contains(neighbour.QueryAlignedResidues!.Value.ToString(CultureInfo.CurrentCulture) + "/"
+                    + neighbour.QueryLength.ToString(CultureInfo.CurrentCulture), StringComparison.Ordinal)
+                    || row.Neighbour.Contains("not recorded", StringComparison.Ordinal)))
+                throw new InvalidDataException("A review row does not display its recorded aligned/full query residue counts.");
+        Check("A6 every recorded review/audit percentage is bounded and the rule/counts are visible", true);
     }
 
     private static void EvidenceDeliveryFixtureTests(string workDir)
