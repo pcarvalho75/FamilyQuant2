@@ -88,6 +88,17 @@ internal static partial class Program
                 new[] { LedgerTextControl.DeadLiteral }, controlFeature);
             Check("Text tool control: a row whose literal is reachable in its feature closes", live.Closed);
             Check("Text tool control: a row whose literal is only in dead code stays OPEN and names check 3", !dead.Closed && dead.Reason.StartsWith("3 failed", StringComparison.Ordinal));
+            // FQAssay's counterexamples (review of 330afa5), as controls that must hold before any row closes.
+            Check("Text tool control: a virtual method of a class nothing instantiates is not reachable",
+                control.MethodsByLiteral.GetValueOrDefault(LedgerTextControl.NeverInstantiatedLiteral)?.All(m => !control.Reached.ContainsKey(m)) == true);
+            Check("Text tool control: a literal overwritten later in the same call path does not close",
+                !DecideControl(control, "control-overwritten", LedgerTextControl.OverwrittenLiteral, "FamilyQuant.Tests.LedgerTextDeadStore", "Caption").Closed);
+            Check("Text tool control: a sentence held by its own frozen member closes",
+                DecideControl(control, "control-own", LedgerTextControl.OwnMemberLiteral, "FamilyQuant.Tests.LedgerTextLender", "Alpha").Closed);
+            Check("Text tool control: a sentence held by another member of the same class does not close",
+                !DecideControl(control, "control-lent", LedgerTextControl.LentLiteral, "FamilyQuant.Tests.LedgerTextLender", "Alpha").Closed);
+            Check("Text tool control: a format token does not close by text alone, even in its own member",
+                !DecideControl(control, "control-short", LedgerTextControl.ShortLiteral, "FamilyQuant.Tests.LedgerTextLender", "Alpha").Closed);
 
             var features = new Dictionary<string, Feature>(StringComparer.Ordinal);
             foreach (var row in cohort)
@@ -100,6 +111,9 @@ internal static partial class Program
                 if (result.Closed) Check("Text " + result.Id + ": " + result.Method, true);
                 else { skipped++; Console.WriteLine("  SKIP  " + result.Id + ": " + result.Reason); }
             }
+            var unsupported = results.Where(r => ReviewCounterexamples.Contains(r.Id) && r.Closed).Select(r => r.Id).ToList();
+            Check("Text tool counterexamples: the ten rows FQAssay found unsupported in 330afa5 stay OPEN", unsupported.Count == 0,
+                string.Join(" ", unsupported));
             foreach (var group in results.Where(r => r.Closed).GroupBy(r => r.Kind).OrderBy(g => g.Key, StringComparer.Ordinal))
                 Check(KindAssertion(group.Key), group.All(r => r.Closed && r.Path.Length > 0 && r.Entry.Length > 0));
             Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
@@ -148,6 +162,18 @@ internal static partial class Program
                 .OrderBy(g => g.Key, StringComparer.Ordinal).Select(g => g.Key + " " + g.Count().ToString(CultureInfo.InvariantCulture))));
         return failed == 0 ? 0 : 1;
     }
+
+    // Review counterexamples checked after the run; the rule never reads this list.
+    private static readonly HashSet<string> ReviewCounterexamples = new(StringComparer.Ordinal)
+    {
+        "FQ15-7696D63AAAAF", "FQ15-02D50AED453D", "FQ15-1ED341AE1494", "FQ15-0908BA69C203", "FQ15-0906BBD71270",
+        "FQ15-02C518935F28", "FQ15-1000D1800FFE", "FQ15-08A48106FA52", "FQ15-02E2055621DE", "FQ15-52B123DB1542",
+    };
+
+    /// <summary>A control row whose frozen literal sits in the named member of the named type.</summary>
+    private static TextResult DecideControl(LedgerTextProgram program, string id, string literal, string ownerType, string ownerMember) =>
+        Decide(program, new FeatureLedger.Observation(id, "control", 1, "code fact", "\"" + literal + "\""), new[] { literal },
+            new Feature(new HashSet<string>(StringComparer.OrdinalIgnoreCase), new HashSet<string>(StringComparer.Ordinal) { ownerType }, "control type"));
 
     private static string KindAssertion(string kind) =>
         "Text tool kind " + kind + ": every listed row holds its frozen literal verbatim in the compiled program, in its feature, reachable from the entry point";

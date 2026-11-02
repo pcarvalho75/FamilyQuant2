@@ -435,8 +435,40 @@ internal static class LedgerTextControl
 {
     internal const string LiveLiteral = "N6a control: this literal is reachable from the control entry";
     internal const string DeadLiteral = "N6a control: this literal is only in dead code";
-    internal static string Entry() => Live();
+    internal const string NeverInstantiatedLiteral = "N6a control: a virtual method of a class nothing instantiates";
+    internal const string OverwrittenLiteral = "N6a control: an initial caption overwritten before use";
+    internal const string OwnMemberLiteral = "N6a control: a sentence the Alpha member holds";
+    internal const string LentLiteral = "N6a control: a sentence another member holds";
+    internal const string ShortLiteral = "N0";
+    // The counterexamples of FQAssay's review of 330afa5: a type named but never constructed, a store overwritten in
+    // the same call path, text held by a different member of the right class, and a format token.
+    internal static string Entry() => Live() + typeof(LedgerTextNeverInstantiated).Name + LedgerTextDeadStore.Make()
+        + LedgerTextLender.Alpha() + LedgerTextLender.Beta();
     private static string Live() => string.Concat("N6a control: this literal is reachable ", "from the control entry") + LiveText();
     private static string LiveText() => "N6a control: this literal is reachable from the control entry";
     internal static string Dead() => "N6a control: this literal is only in dead code";
+}
+
+/// <summary>N6a control: named by the control entry, never constructed; its virtual method must stay unreachable.</summary>
+internal class LedgerTextNeverInstantiated
+{
+    private LedgerTextNeverInstantiated() { }
+    public virtual string Text() => "N6a control: a virtual method of a class nothing instantiates";
+}
+
+/// <summary>N6a control: the initial caption is overwritten by the constructor before anything reads it.</summary>
+internal sealed class LedgerTextDeadStore
+{
+    internal string Caption { get; private set; } = "N6a control: an initial caption overwritten before use";
+    private LedgerTextDeadStore() { Reset(); }
+    private void Reset() { Caption = "N6a control: the caption the screen shows"; }
+    internal static string Make() => new LedgerTextDeadStore().Caption;
+}
+
+/// <summary>N6a control: Alpha holds its own sentence and a format token; Beta holds a sentence of its own that must
+/// not close a row whose frozen member is Alpha.</summary>
+internal static class LedgerTextLender
+{
+    internal static string Alpha() => "N6a control: a sentence the Alpha member holds" + 12.ToString("N0", System.Globalization.CultureInfo.InvariantCulture);
+    internal static string Beta() => "N6a control: a sentence another member holds";
 }
