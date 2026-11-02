@@ -1,0 +1,276 @@
+{
+  "schemaVersion": 1,
+  "step": "RS-C13-tooltips",
+  "frozenCommit": "e9b73064d8ff19b2fde3e3231240b636a64c0a91",
+  "runs": [
+    {
+      "id": "RS-C13-native-tooltips",
+      "command": "C:\\FamilyQuant-wt2\\results\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --test-results-tooltips D:/FamilyQuant-data/out-results/C13-tips/restored \u00222026-11-02 04:03:43 -0800\u0022",
+      "executedAt": "2026-11-02 04:03:43 -0800",
+      "commit": "4ce15c3392c9b10f968a014a418bb7083bc46afc",
+      "artifacts": [
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\C13-tips\\restored\\proofs.log",
+          "sha256": "E7E2C6AF6AF69A862726494C6A4566240115C0B92612FF471822D2ECB93FB030"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\C13-tips\\restored\\executed\\FamilyQuant_ClusterGenerationControl.Presentation.cs",
+          "sha256": "4A37AE6590FDD3EFDB7591CD228AC380975B7E4DA005C1A647A3B085468E7581"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\C13-tips\\restored\\executed\\FamilyQuant_RecoveryChart.cs",
+          "sha256": "F39E00E4455E67A05AC77A8324D51819C3C343FB95B183DCD93D6A5B9D5FAB6A"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\C13-tips\\restored\\executed\\FamilyQuant_IsotopeCountChart.cs",
+          "sha256": "C18B470572D3647F4B9007B8170702C5F231BCB62989EBD6662825DCE7AF17EF"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\C13-tips\\restored\\executed\\FamilyQuant.Tests_Program.ResultsTooltips.cs",
+          "sha256": "AA3FE1F4457DA5717181D8AF46DC38300A83AB142D8CBFAE17D2A2275249C486"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\C13-tips\\restored\\executed\\FamilyQuant.Tests_Program.ResultsTooltipProof.cs",
+          "sha256": "D4282B196CBB0EE6B9EFB4C68ECB49536A3AC2B5C920CBD9BAD34ADA0EAB7AFE"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\C13-tips\\restored\\executed\\FamilyQuant.Tests_Program.Commands.ResultsTooltips.cs",
+          "sha256": "C5EED2A7A19CE30329501BEF6514E253025C2CA92CA90CBA05590D977331BF94"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\C13-tips\\restored\\executed\\FamilyQuant.Tests.dll",
+          "sha256": "F21CA55158DAB70A8CD8996C8F48D9760A78932D01B5288E1B91803B6FDF32BF"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\C13-tips\\restored\\executed\\FamilyQuant2.dll",
+          "sha256": "E4DDC7CE41B07677A08AAF96BFA85CB25813C06860D34CA1D52DBE9BC0410ED1"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\C13-tips\\restored\\executed\\FamilyQuant.Core.dll",
+          "sha256": "8FE06E99685FAED80B70F70AAAF9F3224ACA24FABD9B175D12FEBAE5ABD1F3E5"
+        }
+      ],
+      "workingDirectory": "C:\\FamilyQuant-wt2\\results"
+    }
+  ],
+  "rows": [
+    {
+      "observationId": "FQ15-3FD91852854B",
+      "implementation": [
+        {
+          "path": "FamilyQuant/IsotopeCountChart.cs",
+          "symbol": "isotope count constructor / ToolTip",
+          "sha256": "C18B470572D3647F4B9007B8170702C5F231BCB62989EBD6662825DCE7AF17EF"
+        }
+      ],
+      "proofs": [
+        {
+          "runId": "RS-C13-native-tooltips",
+          "kind": "test",
+          "target": "ResultsTooltipTests",
+          "assertion": "isotope count tooltip retains each required fact and its dynamic default",
+          "artifact": "D:\\FamilyQuant-data\\out-results\\C13-tips\\restored\\proofs.log",
+          "inspectedBy": ""
+        },
+        {
+          "runId": "RS-C13-native-tooltips",
+          "kind": "test",
+          "target": "ResultsTooltipTests",
+          "assertion": "isotope count tooltip has at most two sentences",
+          "artifact": "D:\\FamilyQuant-data\\out-results\\C13-tips\\restored\\proofs.log",
+          "inspectedBy": ""
+        }
+      ],
+      "note": "Explicit semantic wording comparison for C13, not an unchanged-literal declaration claim; independent review required.",
+      "kindReceiptId": null,
+      "compared": "\u0022Each bar counts the peptides credited that many isotopes, from 1 up to the \u0022 -\u003E native ToolTip: Each bar counts the peptides credited that many isotopes, from 1 up to the 6-isotope ceiling; an isotope is credited only where signal was found. The colours split each bar by peptide mass."
+    },
+    {
+      "observationId": "FQ15-19228B26B200",
+      "implementation": [
+        {
+          "path": "FamilyQuant/IsotopeCountChart.cs",
+          "symbol": "isotope count constructor / ToolTip",
+          "sha256": "C18B470572D3647F4B9007B8170702C5F231BCB62989EBD6662825DCE7AF17EF"
+        }
+      ],
+      "proofs": [
+        {
+          "runId": "RS-C13-native-tooltips",
+          "kind": "test",
+          "target": "ResultsTooltipTests",
+          "assertion": "isotope count tooltip retains each required fact and its dynamic default",
+          "artifact": "D:\\FamilyQuant-data\\out-results\\C13-tips\\restored\\proofs.log",
+          "inspectedBy": ""
+        },
+        {
+          "runId": "RS-C13-native-tooltips",
+          "kind": "test",
+          "target": "ResultsTooltipTests",
+          "assertion": "isotope count tooltip has at most two sentences",
+          "artifact": "D:\\FamilyQuant-data\\out-results\\C13-tips\\restored\\proofs.log",
+          "inspectedBy": ""
+        }
+      ],
+      "note": "Explicit semantic wording comparison for C13, not an unchanged-literal declaration claim; independent review required.",
+      "kindReceiptId": null,
+      "compared": "\u0022-isotope ceiling. An isotope is credited only where signal was found. The colours \u0022 -\u003E native ToolTip: Each bar counts the peptides credited that many isotopes, from 1 up to the 6-isotope ceiling; an isotope is credited only where signal was found. The colours split each bar by peptide mass."
+    },
+    {
+      "observationId": "FQ15-0A90D9115B97",
+      "implementation": [
+        {
+          "path": "FamilyQuant/IsotopeCountChart.cs",
+          "symbol": "isotope count constructor / ToolTip",
+          "sha256": "C18B470572D3647F4B9007B8170702C5F231BCB62989EBD6662825DCE7AF17EF"
+        }
+      ],
+      "proofs": [
+        {
+          "runId": "RS-C13-native-tooltips",
+          "kind": "test",
+          "target": "ResultsTooltipTests",
+          "assertion": "isotope count tooltip retains each required fact and its dynamic default",
+          "artifact": "D:\\FamilyQuant-data\\out-results\\C13-tips\\restored\\proofs.log",
+          "inspectedBy": ""
+        },
+        {
+          "runId": "RS-C13-native-tooltips",
+          "kind": "test",
+          "target": "ResultsTooltipTests",
+          "assertion": "isotope count tooltip has at most two sentences",
+          "artifact": "D:\\FamilyQuant-data\\out-results\\C13-tips\\restored\\proofs.log",
+          "inspectedBy": ""
+        }
+      ],
+      "note": "Explicit semantic wording comparison for C13, not an unchanged-literal declaration claim; independent review required.",
+      "kindReceiptId": null,
+      "compared": "\u0022split each bar by peptide mass.\u0022 -\u003E native ToolTip: Each bar counts the peptides credited that many isotopes, from 1 up to the 6-isotope ceiling; an isotope is credited only where signal was found. The colours split each bar by peptide mass."
+    },
+    {
+      "observationId": "FQ15-8D5A75F7EDC8",
+      "implementation": [
+        {
+          "path": "FamilyQuant/RecoveryChart.cs",
+          "symbol": "recovery constructor / ToolTip",
+          "sha256": "F39E00E4455E67A05AC77A8324D51819C3C343FB95B183DCD93D6A5B9D5FAB6A"
+        }
+      ],
+      "proofs": [
+        {
+          "runId": "RS-C13-native-tooltips",
+          "kind": "test",
+          "target": "ResultsTooltipTests",
+          "assertion": "recovery tooltip retains each required fact and its dynamic default",
+          "artifact": "D:\\FamilyQuant-data\\out-results\\C13-tips\\restored\\proofs.log",
+          "inspectedBy": ""
+        },
+        {
+          "runId": "RS-C13-native-tooltips",
+          "kind": "test",
+          "target": "ResultsTooltipTests",
+          "assertion": "recovery tooltip has at most two sentences",
+          "artifact": "D:\\FamilyQuant-data\\out-results\\C13-tips\\restored\\proofs.log",
+          "inspectedBy": ""
+        }
+      ],
+      "note": "Explicit semantic wording comparison for C13, not an unchanged-literal declaration claim; independent review required.",
+      "kindReceiptId": null,
+      "compared": "\u0022Top: recovered ion current read three ways, M\u002B0, the PRIMARY estimate and an \u0022 -\u003E native ToolTip: Top: recovered ion current read three ways, M\u002B0, the PRIMARY estimate and an unadjusted diagnostic. Bottom: TIC, isotope-series detector and primary estimate; the detector is not peptide-FDR calibrated and does not partition the TIC into biological classes."
+    },
+    {
+      "observationId": "FQ15-8E13A59E52AB",
+      "implementation": [
+        {
+          "path": "FamilyQuant/RecoveryChart.cs",
+          "symbol": "recovery constructor / ToolTip",
+          "sha256": "F39E00E4455E67A05AC77A8324D51819C3C343FB95B183DCD93D6A5B9D5FAB6A"
+        }
+      ],
+      "proofs": [
+        {
+          "runId": "RS-C13-native-tooltips",
+          "kind": "test",
+          "target": "ResultsTooltipTests",
+          "assertion": "recovery tooltip retains each required fact and its dynamic default",
+          "artifact": "D:\\FamilyQuant-data\\out-results\\C13-tips\\restored\\proofs.log",
+          "inspectedBy": ""
+        },
+        {
+          "runId": "RS-C13-native-tooltips",
+          "kind": "test",
+          "target": "ResultsTooltipTests",
+          "assertion": "recovery tooltip has at most two sentences",
+          "artifact": "D:\\FamilyQuant-data\\out-results\\C13-tips\\restored\\proofs.log",
+          "inspectedBy": ""
+        }
+      ],
+      "note": "Explicit semantic wording comparison for C13, not an unchanged-literal declaration claim; independent review required.",
+      "kindReceiptId": null,
+      "compared": "\u0022unadjusted diagnostic. Bottom: TIC, isotope-series detector and primary estimate. \u0022 -\u003E native ToolTip: Top: recovered ion current read three ways, M\u002B0, the PRIMARY estimate and an unadjusted diagnostic. Bottom: TIC, isotope-series detector and primary estimate; the detector is not peptide-FDR calibrated and does not partition the TIC into biological classes."
+    },
+    {
+      "observationId": "FQ15-CE35E95FCB45",
+      "implementation": [
+        {
+          "path": "FamilyQuant/RecoveryChart.cs",
+          "symbol": "recovery constructor / ToolTip",
+          "sha256": "F39E00E4455E67A05AC77A8324D51819C3C343FB95B183DCD93D6A5B9D5FAB6A"
+        }
+      ],
+      "proofs": [
+        {
+          "runId": "RS-C13-native-tooltips",
+          "kind": "test",
+          "target": "ResultsTooltipTests",
+          "assertion": "recovery tooltip retains each required fact and its dynamic default",
+          "artifact": "D:\\FamilyQuant-data\\out-results\\C13-tips\\restored\\proofs.log",
+          "inspectedBy": ""
+        },
+        {
+          "runId": "RS-C13-native-tooltips",
+          "kind": "test",
+          "target": "ResultsTooltipTests",
+          "assertion": "recovery tooltip has at most two sentences",
+          "artifact": "D:\\FamilyQuant-data\\out-results\\C13-tips\\restored\\proofs.log",
+          "inspectedBy": ""
+        }
+      ],
+      "note": "Explicit semantic wording comparison for C13, not an unchanged-literal declaration claim; independent review required.",
+      "kindReceiptId": null,
+      "compared": "\u0022The detector is not peptide-FDR calibrated and does not partition the TIC into \u0022 -\u003E native ToolTip: Top: recovered ion current read three ways, M\u002B0, the PRIMARY estimate and an unadjusted diagnostic. Bottom: TIC, isotope-series detector and primary estimate; the detector is not peptide-FDR calibrated and does not partition the TIC into biological classes."
+    },
+    {
+      "observationId": "FQ15-FD734D698920",
+      "implementation": [
+        {
+          "path": "FamilyQuant/RecoveryChart.cs",
+          "symbol": "recovery constructor / ToolTip",
+          "sha256": "F39E00E4455E67A05AC77A8324D51819C3C343FB95B183DCD93D6A5B9D5FAB6A"
+        }
+      ],
+      "proofs": [
+        {
+          "runId": "RS-C13-native-tooltips",
+          "kind": "test",
+          "target": "ResultsTooltipTests",
+          "assertion": "recovery tooltip retains each required fact and its dynamic default",
+          "artifact": "D:\\FamilyQuant-data\\out-results\\C13-tips\\restored\\proofs.log",
+          "inspectedBy": ""
+        },
+        {
+          "runId": "RS-C13-native-tooltips",
+          "kind": "test",
+          "target": "ResultsTooltipTests",
+          "assertion": "recovery tooltip has at most two sentences",
+          "artifact": "D:\\FamilyQuant-data\\out-results\\C13-tips\\restored\\proofs.log",
+          "inspectedBy": ""
+        }
+      ],
+      "note": "Explicit semantic wording comparison for C13, not an unchanged-literal declaration claim; independent review required.",
+      "kindReceiptId": null,
+      "compared": "\u0022biological classes.\u0022 -\u003E native ToolTip: Top: recovered ion current read three ways, M\u002B0, the PRIMARY estimate and an unadjusted diagnostic. Bottom: TIC, isotope-series detector and primary estimate; the detector is not peptide-FDR calibrated and does not partition the TIC into biological classes."
+    }
+  ],
+  "kindReceipts": null
+}

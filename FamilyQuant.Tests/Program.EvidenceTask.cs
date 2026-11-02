@@ -77,6 +77,35 @@ internal static partial class Program
             try { run(); }
             catch (Exception ex) { Check(name, false, ex.GetBaseException().Message); }
         }
+        foreach (int pairs in new[] { 2, 3 })
+            Verify("M48 accepts " + pairs.ToString(CultureInfo.InvariantCulture) + " joined same-taxon headers", () =>
+            {
+                var file = TaskFile();
+                file.MyExtendedFastaItems[0].Description += string.Concat(Enumerable.Range(1, pairs - 1)
+                    .Select(index => " : tr|P00991|ALIAS Fixture OS=Alternate label " + index.ToString(CultureInfo.InvariantCulture) + " OX=21 PE=1 SV=1"));
+                string before = file.ToJsonText(); using var handler = new TaskTaxonomyHandler();
+                var result = EvidenceTaskDiscovery.DiscoverAsync(file, handler).GetAwaiter().GetResult();
+                Check("M48 joined " + pairs.ToString(CultureInfo.InvariantCulture) + " same-taxon pairs remain one target and one taxon observation",
+                    result.TargetProteins == 3 && result.ReviewedProteins == 2 && result.Taxa.Select(t => t.TaxonId).SequenceEqual(new[] { 21, 22 })
+                    && result.Clade.TaxonId == 10 && handler.Requests == 3 && file.ToJsonText() == before);
+            });
+        Verify("M48 a conflicting joined target refuses the entire discovery", () =>
+        {
+            var file = TaskFile(); file.MyExtendedFastaItems[0].Description += " : tr|P00992|ALIAS Fixture OS=Other label OX=22 PE=1 SV=1";
+            string before = file.ToJsonText(); using var handler = new TaskTaxonomyHandler(); bool refused = false;
+            try { EvidenceTaskDiscovery.DiscoverAsync(file, handler).GetAwaiter().GetResult(); }
+            catch (InvalidDataException) { refused = true; }
+            Check("M48 one conflicting joined target refuses the whole file before HTTP and leaves it unchanged",
+                refused && handler.Requests == 0 && file.ToJsonText() == before);
+        });
+        Verify("M48 conflicting contaminant headers remain outside discovery", () =>
+        {
+            var file = TaskFile(); file.MyExtendedFastaItems[3].Description = "Fixture OS=First label OX=21 : Fixture OS=Second label OX=22";
+            string before = file.ToJsonText(); using var handler = new TaskTaxonomyHandler();
+            var result = EvidenceTaskDiscovery.DiscoverAsync(file, handler).GetAwaiter().GetResult();
+            Check("M48 discovery still ignores a conflicting contaminant target", result.TargetProteins == 3 && result.IgnoredContaminants == 1
+                && handler.Requests == 3 && file.ToJsonText() == before);
+        });
         Verify("B3 derives a clade and the leading keyword without a name rule, ignoring contaminants and decoys", () =>
         {
             var file = TaskFile(); string before = file.ToJsonText(); using var handler = new TaskTaxonomyHandler();
