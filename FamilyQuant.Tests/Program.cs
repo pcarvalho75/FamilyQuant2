@@ -44,6 +44,9 @@ namespace FamilyQuant.Tests
             {
                 Section("Family world (B1) - a de novo tag credited to UniProt families, on a fixture");
                 FamilyWorldCheck.RunFixtures(Check);
+                Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
+                return failed == 0 ? 0 : 1;
+            }
             if (args.Contains("--test-keyword-command", StringComparer.Ordinal))
             {
                 KeywordCommandTests();
