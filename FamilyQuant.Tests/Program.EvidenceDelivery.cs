@@ -184,6 +184,7 @@ internal static partial class Program
         try
         {
             if (args.Length == 6 && args[1] == "prepare") PrepareEvidenceDelivery(args[2], args[3], args[4], args[5]).GetAwaiter().GetResult();
+            else if (args.Length == 4 && args[1] == "refresh-coverage") RefreshDeliveryCoverage(args[2], args[3]);
             else if (args.Length == 4 && args[1] == "create") { EnsureApplication(); CompleteEvidenceDelivery(args[2], args[3]); }
             else if (args.Length == 4 && args[1] == "verify-families")
             {
@@ -197,6 +198,17 @@ internal static partial class Program
                 });
                 if (State(first) != State(second)) throw new InvalidDataException("Family membership, annotations, sequence or quantitative state differs.");
                 Check("A2 family membership, annotations, sequences, locks and quantitative values remain identical", true);
+                if (first.EvidenceRecipe != null && second.EvidenceRecipe != null)
+                {
+                    static string Selection(EvidenceRecipe recipe) => JsonSerializer.Serialize(new
+                    {
+                        Selected = recipe.SelectedProteinIndices,
+                        Assignments = recipe.Assignments.Select(a => new { a.ProteinIndex, a.Identifier, a.Family, a.GroupKey, a.Name, a.FamilyId, a.Tier }),
+                    });
+                    if (Selection(first.EvidenceRecipe) != Selection(second.EvidenceRecipe))
+                        throw new InvalidDataException("Default selection, evidence tiers or assignment groups differ.");
+                    Check("A6 default selection, evidence tiers and assignment groups remain identical", true);
+                }
             }
             else if (args.Length == 5 && args[1] == "split")
             {
@@ -212,6 +224,46 @@ internal static partial class Program
             return 0;
         }
         catch (Exception ex) { Console.WriteLine(ex.GetBaseException()); return 1; }
+    }
+
+    private static void RefreshDeliveryCoverage(string originalDirectory, string directory)
+    {
+        if (Directory.Exists(directory)) throw new IOException("Use a new preparation directory.");
+        var preparation = ReadDelivery<DeliveryPreparation>(Path.Combine(originalDirectory, "preparation.json"));
+        string path = Path.Combine(originalDirectory, "prepared.fcf");
+        if (TestFileHash.Upper(path) != preparation.PreparedSha256 || TestFileHash.Upper(preparation.Input) != preparation.InputSha256)
+            throw new InvalidDataException("The original input or prepared evidence changed.");
+        var file = FamilyClusterFile.Load(path);
+        var old = file.EvidenceSource?.NearestReviewed;
+        var scope = WordCluster.ParseKeywords(preparation.Scope);
+        var queries = NearestReviewed.Targets(file);
+        var references = NearestReviewed.References(file, e => EvidenceClassifier.IsInScope(e, scope));
+        var search = NearestReviewed.Search(queries, references);
+        file.EvidenceSource ??= new EvidenceProvenance();
+        file.EvidenceSource.NearestReviewed = search;
+        Directory.CreateDirectory(directory);
+        string prepared = Path.Combine(directory, "prepared.fcf");
+        file.Save(prepared);
+        var updated = new DeliveryPreparation { Input = preparation.Input, InputSha256 = preparation.InputSha256,
+            PreparedSha256 = TestFileHash.Upper(prepared), Scope = preparation.Scope, ProgramVersion = AppVersionInfo.Current() };
+        WriteDeliveryJson(directory, "preparation.json", updated);
+        var (_, review) = DeliveryReview(file, updated);
+        WriteDeliveryJson(directory, "review.json", review.Source);
+        WriteDeliveryJson(directory, "defaults.json", review.CaptureSelection());
+        string choice = Path.Combine(originalDirectory, "choice.json");
+        if (File.Exists(choice)) WriteDeliveryJson(directory, "choice.json", ReadDelivery<EvidenceReviewSelection>(choice));
+        string Identity(NearestNeighbour? n) => n == null ? string.Empty : JsonSerializer.Serialize(new
+        { n.Query, n.Accession, n.Reference, n.Family, n.IdentityPercent, n.AlignmentLength, n.QueryLength, n.ReferenceLength, n.TiedFamilies });
+        var before = old?.ByQuery() ?? new Dictionary<string, NearestNeighbour>(StringComparer.Ordinal);
+        var after = search.ByQuery();
+        var changed = before.Keys.Union(after.Keys, StringComparer.Ordinal).OrderBy(value => value, StringComparer.Ordinal)
+            .Where(id => Identity(before.GetValueOrDefault(id)) != Identity(after.GetValueOrDefault(id)))
+            .Select(id => new { Identifier = id, Previous = before.GetValueOrDefault(id), Current = after.GetValueOrDefault(id) }).ToArray();
+        WriteDeliveryJson(directory, "coverage-refresh.json", new { search.CoverageMethod, search.Queries, search.References,
+            PreviousNeighbours = old?.Neighbours.Count, CurrentNeighbours = search.Neighbours.Count, ChangedNeighbours = changed,
+            SelectedProteins = review.SelectedCount, SourceRelease = file.EvidenceSource.Release, PanelRelease = file.EvidenceSource.ReferencePanel?.Release });
+        Console.WriteLine(search.CoverageMethod);
+        Console.WriteLine(changed.Length.ToString(CultureInfo.InvariantCulture) + " changed neighbours; " + review.Summary);
     }
 
     private static void EvidenceDeliveryFixtureTests(string workDir)

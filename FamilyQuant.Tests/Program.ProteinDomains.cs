@@ -647,6 +647,7 @@ namespace FamilyQuant.Tests
                     Query = target.SequenceIdentifier, Reference = reference.SequenceIdentifier,
                     Accession = reference.Evidence!.Accession, Family = reference.Evidence.Family,
                     IdentityPercent = identity, AlignmentLength = aligned, QueryLength = 100, ReferenceLength = 100,
+                    QueryAlignedResidues = aligned,
                 };
         }
         private static Task<Evidence.EvidenceFetchResult> FetchEvidenceForTest(IReadOnlyCollection<FastaItemExtended> items,

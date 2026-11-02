@@ -41,6 +41,12 @@ namespace FamilyQuant.Evidence
         public int AlignmentLength { get; init; }
         public int QueryLength { get; init; }
         public int ReferenceLength { get; init; }
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public int? QueryAlignedResidues { get; init; }
+
+        [JsonIgnore]
+        public double? QueryCoveragePercent => QueryLength > 0 && QueryAlignedResidues is int count && count >= 0 && count <= QueryLength
+            ? 100.0 * count / QueryLength : null;
 
         /// <summary>The legacy alignment-column/query-length ratio read by the gate. Gap columns can
         /// make it exceed 100; it is not the percentage of query residues covered.</summary>
@@ -57,6 +63,8 @@ namespace FamilyQuant.Evidence
     public sealed class NeighbourSearch
     {
         public string Method { get; init; } = NearestReviewed.Method;
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string? CoverageMethod { get; init; }
         public double MinIdentityPercent { get; init; }
         public int MinQueryAlignedPercent { get; init; }
         public int Queries { get; init; }
@@ -85,6 +93,7 @@ namespace FamilyQuant.Evidence
     /// </summary>
     public static class NearestReviewed
     {
+        public const string QueryCoverageMethod = "Non-gap query letters in native qrow / full query length, v1";
         public const string Method = "USEARCH search_global, every pair aligned, best hit by identity, never the same entry";
         public const double DefaultMinIdentityPercent = 50.0;
         public const int DefaultMinQueryAlignedPercent = 70;
@@ -151,13 +160,17 @@ namespace FamilyQuant.Evidence
         /// <summary>Whether an alignment passes the gate: identity at least the minimum, and an alignment
         /// at least the given percentage of the query's length (integer arithmetic, so an alignment exactly
         /// on the line passes).</summary>
-        public static bool PassesGate(double identityPercent, int alignmentLength, int queryLength,
+        public static bool PassesGate(double identityPercent, int queryAlignedResidues, int queryLength,
             double minIdentityPercent, int minQueryAlignedPercent)
         {
             return identityPercent + IdentityEpsilon >= minIdentityPercent
-                && queryLength > 0
-                && 100L * alignmentLength >= (long)minQueryAlignedPercent * queryLength;
+                && queryLength > 0 && queryAlignedResidues >= 0 && queryAlignedResidues <= queryLength
+                && 100L * queryAlignedResidues >= (long)minQueryAlignedPercent * queryLength;
         }
+
+        internal static bool PassesLegacyColumnsGate(double identityPercent, int alignmentLength, int queryLength,
+            double minIdentityPercent, int minQueryAlignedPercent) => identityPercent + IdentityEpsilon >= minIdentityPercent
+                && queryLength > 0 && 100L * alignmentLength >= (long)minQueryAlignedPercent * queryLength;
 
         /// <summary>
         /// The neighbour among one query's hits, or null. A hit on the same entry or failing the gate is
@@ -165,13 +178,25 @@ namespace FamilyQuant.Evidence
         /// (ordinal), so the answer does not depend on the order USEARCH wrote the hits in.
         /// </summary>
         public static NearestNeighbour? Choose(string query, string queryAccession,
+            IEnumerable<(NeighbourReference Reference, double IdentityPercent, int AlignmentLength, int QueryLength, int ReferenceLength, int QueryAlignedResidues)> hits,
+            double minIdentityPercent = DefaultMinIdentityPercent, int minQueryAlignedPercent = DefaultMinQueryAlignedPercent) =>
+            ChooseCore(query, queryAccession, hits.Select(h => (h.Reference, h.IdentityPercent, h.AlignmentLength, h.QueryLength, h.ReferenceLength, (int?)h.QueryAlignedResidues)),
+                minIdentityPercent, minQueryAlignedPercent, legacy: false);
+
+        public static NearestNeighbour? Choose(string query, string queryAccession,
             IEnumerable<(NeighbourReference Reference, double IdentityPercent, int AlignmentLength, int QueryLength, int ReferenceLength)> hits,
-            double minIdentityPercent = DefaultMinIdentityPercent, int minQueryAlignedPercent = DefaultMinQueryAlignedPercent)
+            double minIdentityPercent = DefaultMinIdentityPercent, int minQueryAlignedPercent = DefaultMinQueryAlignedPercent) =>
+            ChooseCore(query, queryAccession, hits.Select(h => (h.Reference, h.IdentityPercent, h.AlignmentLength, h.QueryLength, h.ReferenceLength, (int?)null)),
+                minIdentityPercent, minQueryAlignedPercent, legacy: true);
+
+        private static NearestNeighbour? ChooseCore(string query, string queryAccession,
+            IEnumerable<(NeighbourReference Reference, double IdentityPercent, int AlignmentLength, int QueryLength, int ReferenceLength, int? QueryAlignedResidues)> hits,
+            double minIdentityPercent, int minQueryAlignedPercent, bool legacy)
         {
             var kept = hits
                 .Where(h => !string.Equals(h.Reference.Accession, queryAccession, StringComparison.Ordinal))
-                .Where(h => PassesGate(h.IdentityPercent, h.AlignmentLength, h.QueryLength,
-                    minIdentityPercent, minQueryAlignedPercent))
+                .Where(h => legacy ? PassesLegacyColumnsGate(h.IdentityPercent, h.AlignmentLength, h.QueryLength, minIdentityPercent, minQueryAlignedPercent)
+                    : h.QueryAlignedResidues is int covered && PassesGate(h.IdentityPercent, covered, h.QueryLength, minIdentityPercent, minQueryAlignedPercent))
                 .OrderByDescending(h => h.IdentityPercent)
                 .ThenByDescending(h => h.AlignmentLength)
                 .ThenBy(h => h.Reference.Accession, StringComparer.Ordinal)
@@ -197,6 +222,7 @@ namespace FamilyQuant.Evidence
                 AlignmentLength = best.AlignmentLength,
                 QueryLength = best.QueryLength,
                 ReferenceLength = best.ReferenceLength,
+                QueryAlignedResidues = best.QueryAlignedResidues,
                 TiedFamilies = tied,
             };
         }
@@ -229,6 +255,7 @@ namespace FamilyQuant.Evidence
             string queryHash = QueryFingerprint(searched, own);
             string referenceHash = ReferenceFingerprint(panel);
             string key = string.Join("|", Method,
+                QueryCoverageMethod,
                 minIdentityPercent.ToString("R", CultureInfo.InvariantCulture),
                 minQueryAlignedPercent.ToString(CultureInfo.InvariantCulture), queryHash, referenceHash);
 
@@ -245,6 +272,7 @@ namespace FamilyQuant.Evidence
 
             return new NeighbourSearch
             {
+                CoverageMethod = QueryCoverageMethod,
                 MinIdentityPercent = minIdentityPercent,
                 MinQueryAlignedPercent = minQueryAlignedPercent,
                 Queries = searched.Count,
@@ -304,9 +332,12 @@ namespace FamilyQuant.Evidence
         /// <summary>Whether a stored search still answers for these targets and references: same
         /// method, same gate, same sequences and the same reference labels.</summary>
         public static bool IsCurrent(NeighbourSearch? stored, IReadOnlyList<FastaItemExtended> queries,
-            IReadOnlyList<NeighbourReference> references, IReadOnlyDictionary<string, string>? ownAccessions = null)
+            IReadOnlyList<NeighbourReference> references, IReadOnlyDictionary<string, string>? ownAccessions = null, bool allowLegacyCoverage = false)
         {
             if (stored == null || !string.Equals(stored.Method, Method, StringComparison.Ordinal)) return false;
+            bool legacy = allowLegacyCoverage && stored.CoverageMethod == null;
+            if (!legacy && (stored.CoverageMethod != QueryCoverageMethod || stored.Neighbours.Any(n => n.QueryLength <= 0
+                || n.QueryAlignedResidues is not int covered || covered < 0 || covered > n.QueryLength))) return false;
             List<FastaItemExtended> searched = queries
                 .Where(q => !IsDecoy(q) && !string.IsNullOrEmpty(q.Sequence)).ToList();
             List<NeighbourReference> panel = references.Where(r => !string.IsNullOrEmpty(r.Sequence)).ToList();
@@ -341,7 +372,7 @@ namespace FamilyQuant.Evidence
                 Interlocked.Increment(ref searchRuns);
                 // Only hits past the gate and on another entry are kept, so a query with hundreds of
                 // short fragment hits does not hold them all in memory.
-                var hitsByQuery = new Dictionary<int, List<(NeighbourReference, double, int, int, int)>>();
+                var hitsByQuery = new Dictionary<int, List<(NeighbourReference, double, int, int, int, int)>>();
                 operation?.Report(ProgressStage, "Aligning " + Count(queries.Count) + " proteins with "
                     + Count(references.Count) + " reviewed proteins", 0, queries.Count);
                 for (int start = 0; start < queries.Count; start += queriesPerRun)
@@ -352,10 +383,10 @@ namespace FamilyQuant.Evidence
                     {
                         int q = LabelIndex(edge.QueryId, 'q', queries.Count);
                         int r = LabelIndex(edge.TargetId, 'r', references.Count);
-                        if (!PassesGate(edge.IdentityPercent, edge.AlignmentLength, edge.QueryLength,
+                        if (edge.QueryAlignedResidues is not int covered || !PassesGate(edge.IdentityPercent, covered, edge.QueryLength,
                                 minIdentityPercent, minQueryAlignedPercent)) return;
                         if (!hitsByQuery.TryGetValue(q, out var list)) hitsByQuery[q] = list = new();
-                        list.Add((references[r], edge.IdentityPercent, edge.AlignmentLength, edge.QueryLength, edge.TargetLength));
+                        list.Add((references[r], edge.IdentityPercent, edge.AlignmentLength, edge.QueryLength, edge.TargetLength, covered));
                     }, operation);
                     operation?.Report(ProgressStage, "Aligned " + Count(end) + " of " + Count(queries.Count) + " proteins",
                         end, queries.Count);

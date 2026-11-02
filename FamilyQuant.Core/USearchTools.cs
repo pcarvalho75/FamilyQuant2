@@ -40,9 +40,10 @@ namespace FamilyQuant
             public int AlignmentLength { get; }
             public int QueryLength { get; }
             public int TargetLength { get; }
+            public int? QueryAlignedResidues { get; }
 
             public PairwiseEdge(string queryId, string targetId, double identityPercent,
-                                int alignmentLength, int queryLength, int targetLength)
+                                int alignmentLength, int queryLength, int targetLength, int? queryAlignedResidues = null)
             {
                 QueryId = queryId;
                 TargetId = targetId;
@@ -50,6 +51,7 @@ namespace FamilyQuant
                 AlignmentLength = alignmentLength;
                 QueryLength = queryLength;
                 TargetLength = targetLength;
+                QueryAlignedResidues = queryAlignedResidues;
             }
         }
 
@@ -526,8 +528,8 @@ namespace FamilyQuant
             string tsvFile = Path.Combine(tempDir, "global_" + Guid.NewGuid().ToString("N") + ".tsv");
             string arguments = $"-search_global \"{queryFasta}\" -db \"{databaseFasta}\" " +
                                $"-id {minIdentity.ToString("0.######", CultureInfo.InvariantCulture)} " +
-                               $"-maxaccepts 0 -maxrejects 0 -userout \"{tsvFile}\" " +
-                               "-userfields query+target+id+alnlen+ql+tl";
+                               $"-maxaccepts 0 -maxrejects 0 -threads 4 -userout \"{tsvFile}\" " +
+                               "-userfields query+target+id+alnlen+ql+tl+qrow";
             try
             {
                 RunUSearch(usearchExe, arguments, tempDir, operation);
@@ -537,7 +539,7 @@ namespace FamilyQuant
                 {
                     if (string.IsNullOrWhiteSpace(line)) continue;
                     string[] cols = line.Split('	');
-                    if (cols.Length < 6
+                    if (cols.Length < 7
                         || !double.TryParse(cols[2], NumberStyles.Float, CultureInfo.InvariantCulture, out double id)
                         || !int.TryParse(cols[3], NumberStyles.Integer, CultureInfo.InvariantCulture, out int alnlen)
                         || !int.TryParse(cols[4], NumberStyles.Integer, CultureInfo.InvariantCulture, out int ql)
@@ -546,7 +548,10 @@ namespace FamilyQuant
                     // Every reported hit is at or above the threshold, so one at or under 1.0 can only be a
                     // build reporting the fraction; ParsePairwiseEdges guards the same way.
                     if (id <= 1.0 && minIdentity > 0.01) id *= 100.0;
-                    onHit(new PairwiseEdge(ExtractIdentifier(cols[0]), ExtractIdentifier(cols[1]), id, alnlen, ql, tl));
+                    int queryResidues = cols[6].Count(residue => residue != '-');
+                    if (cols[6].Length != alnlen || queryResidues <= 0 || queryResidues > ql)
+                        throw new InvalidDataException("USEARCH wrote inconsistent aligned query residues.");
+                    onHit(new PairwiseEdge(ExtractIdentifier(cols[0]), ExtractIdentifier(cols[1]), id, alnlen, ql, tl, queryResidues));
                 }
             }
             finally

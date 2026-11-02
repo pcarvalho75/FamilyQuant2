@@ -46,6 +46,8 @@ internal static partial class Program
         IEnumerable<CoverageHit> hits, double identity, int coverage, int reading)
     {
         var filtered = hits.Where(h => reading == 0 || 100L * (reading == 1 ? h.QuerySegment : h.LetterPairs) >= (long)coverage * h.QueryLength);
+        if (reading != 0) return NearestReviewed.Choose(identifier, own, filtered.Select(h =>
+            (references[h.Reference], h.Identity, h.Columns, h.QueryLength, h.ReferenceLength, reading == 1 ? h.QuerySegment : h.LetterPairs)), identity, coverage);
         return NearestReviewed.Choose(identifier, own, filtered.Select(h =>
             (references[h.Reference], h.Identity, h.Columns, h.QueryLength, h.ReferenceLength)), identity, coverage);
     }
@@ -67,7 +69,7 @@ internal static partial class Program
         var protein = new FastaItemExtended { SequenceIdentifier = "query", Sequence = new string('A', 103),
             Evidence = new ProteinEvidence { Keywords = new List<string> { "selected" } } };
         var neighbour = new NearestNeighbour { Query = "query", Accession = "reference", Reference = "reference", Family = "Fixture family",
-            IdentityPercent = 80, AlignmentLength = 132, QueryLength = 103, ReferenceLength = 132 };
+            IdentityPercent = 80, AlignmentLength = 132, QueryLength = 103, ReferenceLength = 132, QueryAlignedResidues = 103 };
         var proposal = EvidenceClassifier.Propose(new[] { protein }, new EvidenceClassificationOptions { ScopeTerms = new[] { "selected" } },
             new Dictionary<string, NearestNeighbour> { ["query"] = neighbour }, _ => new ProteinEvidence { Reviewed = true, Family = "Fixture family" });
         var row = proposal.Proteins.Single();
@@ -75,7 +77,7 @@ internal static partial class Program
             && row.Family == "Fixture family" && row.Reason.Contains("132 alignment columns", StringComparison.Ordinal)
             && row.Reason.Contains("query length 103 residues", StringComparison.Ordinal) && !row.Reason.Contains("128.16%", StringComparison.Ordinal)
             && !row.Reason.Contains("% query alignment.", StringComparison.Ordinal) && neighbour.QueryAlignedPercent > 100
-            && NearestReviewed.PassesGate(80, 132, 103, 60, 70));
+            && NearestReviewed.PassesGate(80, 103, 103, 60, 70));
     }
 
     private static int EvidenceCoverageCommand(string[] args)
@@ -93,11 +95,12 @@ internal static partial class Program
             var search = file.EvidenceSource?.NearestReviewed ?? throw new InvalidDataException("The prepared file has no stored search.");
             var queries = NearestReviewed.Targets(file).Where(q => !string.IsNullOrEmpty(q.Sequence)).ToList();
             var references = NearestReviewed.References(file, e => EvidenceClassifier.IsInScope(e, recipe.Options.ScopeTerms));
-            if (!NearestReviewed.IsCurrent(search, queries, references)) throw new InvalidDataException("The exact scoped reference set is not current.");
+            if (search.CoverageMethod != null || !NearestReviewed.IsCurrent(search, queries, references, allowLegacyCoverage: true))
+                throw new InvalidDataException("This historical comparison needs the original pre-A6 search and matching scoped inputs.");
             Directory.CreateDirectory(args[3]);
             string capture = replay ? args[4] : Path.Combine(args[3], "capture");
             if (!replay) CaptureCoverage(queries, references, search.MinIdentityPercent, capture).GetAwaiter().GetResult();
-            MeasureCoverage(file, applied, search, queries, references, capture, args[3]);
+            MeasureCoverage(file, applied, search, queries, references, capture, args[3], Path.GetDirectoryName(Path.GetFullPath(args[2]))!);
             return 0;
         }
         catch (Exception ex) { Console.WriteLine(ex.GetBaseException()); return 1; }
@@ -156,7 +159,7 @@ internal static partial class Program
         Encoding.UTF8.GetBytes(string.Join("\n", sequences))));
 
     private static void MeasureCoverage(FamilyClusterFile file, FamilyClusterFile applied, NeighbourSearch search,
-        IReadOnlyList<FastaItemExtended> queries, IReadOnlyList<NeighbourReference> references, string capture, string output)
+        IReadOnlyList<FastaItemExtended> queries, IReadOnlyList<NeighbourReference> references, string capture, string output, string baselineDirectory)
     {
         using var captured = JsonDocument.Parse(File.ReadAllText(Path.Combine(capture, "capture.json")));
         var root = captured.RootElement;
@@ -180,7 +183,8 @@ internal static partial class Program
                 if (hit.Identity <= 1 && search.MinIdentityPercent > 1) hit = hit with { Identity = hit.Identity * 100 };
                 if (NearestReviewed.EntryAccession(queries[hit.Query].SequenceIdentifier) == references[hit.Reference].Accession) continue;
                 nonSelf++;
-                if (!NearestReviewed.PassesGate(hit.Identity, hit.Columns, hit.QueryLength, search.MinIdentityPercent, search.MinQueryAlignedPercent)) continue;
+                if (!(hit.Identity + 1e-9 >= search.MinIdentityPercent && hit.QueryLength > 0
+                    && 100L * hit.Columns >= (long)search.MinQueryAlignedPercent * hit.QueryLength)) continue;
                 rawGate++;
                 if (100L * hit.QuerySegment >= (long)search.MinQueryAlignedPercent * hit.QueryLength) segmentGate++;
                 if (100L * hit.LetterPairs >= (long)search.MinQueryAlignedPercent * hit.QueryLength) pairedGate++;
@@ -193,13 +197,35 @@ internal static partial class Program
             throw new InvalidDataException("The captured baseline does not exactly reproduce the stored native neighbours. No counterfactual conclusion was made.");
         var options = applied.EvidenceRecipe!.Options;
         var profiles = CoherenceCheck.Learn(file);
-        var proposals = neighbours.Select(rows => CoherenceCheck.Flag(EvidenceClassifier.Propose(file.MyExtendedFastaItems,
-            options, rows.ToDictionary(n => n.Query, StringComparer.Ordinal), NearestReviewed.ReferenceEvidence(file)), file.MyExtendedFastaItems, profiles)).ToArray();
-        var selections = proposals.Select(proposal => new EvidenceReviewViewModel(EvidenceProposalPresentation.Present(proposal, file))
-            .Proteins.Where(p => p.Selected).Select(p => p.ProteinIndex).ToHashSet()).ToArray();
+        // The original review is a persisted program result from the old gate. Do not silently
+        // reinterpret its absent residue counts with the new classifier after A6.
+        var recordedReview = ReadDelivery<EvidenceReviewInput>(Path.Combine(baselineDirectory, "review.json"));
+        if (recordedReview.SourceFingerprint != applied.EvidenceRecipe.SourceFingerprint)
+            throw new InvalidDataException("The persisted historical review does not match the original recipe.");
+        var byQuery = search.ByQuery();
+        var proposals = new EvidenceProposal[3];
+        proposals[0] = new EvidenceProposal
+        {
+            SourceFingerprint = recordedReview.SourceFingerprint, Options = options,
+            Proteins = recordedReview.Proteins.Select(p => new EvidenceProteinProposal
+            {
+                ProteinIndex = p.ProteinIndex, Identifier = p.Identifier, PreviousFamilyId = p.PreviousFamilyId, Family = p.Family,
+                Tier = Enum.Parse<EvidenceTier>(p.Tier.Replace(" ", string.Empty), ignoreCase: true), Reason = p.Reason,
+                HasScopeAnnotation = p.HasScopeAnnotation, Neighbour = byQuery.GetValueOrDefault(p.Identifier),
+                Flags = p.Flags.Select(text => new EvidenceFlag { Code = "recorded", Message = text }).ToArray(),
+            }).ToArray(),
+        };
+        for (int reading = 1; reading < 3; reading++) proposals[reading] = CoherenceCheck.Flag(EvidenceClassifier.Propose(file.MyExtendedFastaItems,
+            options, neighbours[reading].ToDictionary(n => n.Query, StringComparer.Ordinal), NearestReviewed.ReferenceEvidence(file)), file.MyExtendedFastaItems, profiles);
+        var selections = new HashSet<int>[3];
+        selections[0] = new EvidenceReviewViewModel(recordedReview).Proteins.Where(p => p.Selected).Select(p => p.ProteinIndex).ToHashSet();
+        for (int reading = 1; reading < 3; reading++) selections[reading] = new EvidenceReviewViewModel(EvidenceProposalPresentation.Present(proposals[reading], file))
+            .Proteins.Where(p => p.Selected).Select(p => p.ProteinIndex).ToHashSet();
         if (!selections[0].SetEquals(applied.EvidenceRecipe.SelectedProteinIndices))
             throw new InvalidDataException("The reproduced default selection differs from the actual A1 recipe. No impact claim was made.");
         var baseline = proposals[0].Proteins.ToDictionary(p => p.ProteinIndex);
+        if (applied.EvidenceRecipe.Assignments.Any(a => baseline[a.ProteinIndex].Family != a.Family || baseline[a.ProteinIndex].Tier != a.Tier))
+            throw new InvalidDataException("The persisted historical review's selected families or tiers differ from its recipe.");
         var queryIndex = queries.Select((q, index) => (q.SequenceIdentifier, index)).ToDictionary(p => p.SequenceIdentifier, p => p.index, StringComparer.Ordinal);
         CoverageHit? ChosenHit(EvidenceProteinProposal row)
         {
@@ -220,7 +246,7 @@ internal static partial class Program
                     oldNeighbour = baseline[row.ProteinIndex].Neighbour, newNeighbour = row.Neighbour }), DeliveryJson));
             File.WriteAllText(Path.Combine(output, reading == 1 ? "query-segment-neighbour-changes.json" : "letter-pair-neighbour-changes.json"),
                 JsonSerializer.Serialize(proposals[reading].Proteins.Where(row =>
-                    JsonSerializer.Serialize(baseline[row.ProteinIndex].Neighbour) != JsonSerializer.Serialize(row.Neighbour)).Select(row => new
+                    NeighbourIdentity(baseline[row.ProteinIndex].Neighbour) != NeighbourIdentity(row.Neighbour)).Select(row => new
                     {
                         row.Identifier, row.Family, row.Tier, selected = selections[reading].Contains(row.ProteinIndex),
                         oldNeighbour = baseline[row.ProteinIndex].Neighbour, newNeighbour = row.Neighbour,
@@ -229,7 +255,7 @@ internal static partial class Program
             return new
             {
                 neighbours = neighbours[reading].Count,
-                neighbourChanges = proposals[reading].Proteins.Count(row => JsonSerializer.Serialize(baseline[row.ProteinIndex].Neighbour) != JsonSerializer.Serialize(row.Neighbour)),
+                neighbourChanges = proposals[reading].Proteins.Count(row => NeighbourIdentity(baseline[row.ProteinIndex].Neighbour) != NeighbourIdentity(row.Neighbour)),
                 proposedFamilyChanges = proposals[reading].Proteins.Count(row => baseline[row.ProteinIndex].Family != row.Family),
                 proposedTierChanges = proposals[reading].Proteins.Count(row => baseline[row.ProteinIndex].Tier != row.Tier),
                 defaultSelected = selections[reading].Count,
@@ -268,4 +294,7 @@ internal static partial class Program
         File.WriteAllText(Path.Combine(output, "coverage-report.json"), json);
         Console.WriteLine(json);
     }
+
+    private static string NeighbourIdentity(NearestNeighbour? n) => n == null ? string.Empty : JsonSerializer.Serialize(new
+    { n.Query, n.Accession, n.Reference, n.Family, n.IdentityPercent, n.AlignmentLength, n.QueryLength, n.ReferenceLength, n.TiedFamilies });
 }

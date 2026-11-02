@@ -23,6 +23,7 @@ internal static partial class Program
 {
     internal static readonly string[] PreservedCommandFlags =
     [
+        "--test-query-residue-coverage",
         "--evidence-coverage-check",
         "--test-evidence-coverage",
         "--test-evidence-fetch-atomic",

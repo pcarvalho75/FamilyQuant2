@@ -21,6 +21,7 @@ namespace FamilyQuant.Tests
             {
                 Query = query, Reference = reference, Accession = accession, Family = family,
                 IdentityPercent = 90, AlignmentLength = 20, QueryLength = 20, ReferenceLength = 20,
+                QueryAlignedResidues = 20,
             };
 
             // F1 and F2, through the classifier.
