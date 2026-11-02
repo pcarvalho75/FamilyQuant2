@@ -7,8 +7,10 @@ namespace FamilyQuant
             "', from the table and the CSV. Nothing is deleted and no percentage moves; keep them visible while judging the clustering.";
 
         public const string HideContaminantsToolTip =
-            "Hides entries whose identifier contains '" + SequenceLabels.ContaminantMarker +
-            "' (keratins, trypsin, serum proteins) from the table and the CSV. Percentages do not change, so in '% of identified signal' the visible ones no longer add up to 100%.";
+            "Hides entries whose identifier starts with '" + SequenceLabels.ContaminantPrefix +
+            "' after one optional '" + SequenceLabels.DecoyPrefix +
+            "' prefix. Both prefixes are case-sensitive. This filters the table and CSV, including labelled keratins, trypsin and serum proteins. " +
+            "Percentages do not change, so in '% of identified signal' the visible ones no longer add up to 100%.";
 
         public const string CalculateFdrToolTip =
             "Shows the fraction of families that mix real and decoy (" + SequenceLabels.DecoyPrefix +
