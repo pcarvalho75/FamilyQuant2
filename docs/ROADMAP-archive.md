@@ -211,4 +211,5 @@ Finished steps, moved here from docs/ROADMAP.md. The board shows them as green.
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
 | R3a | Code freeze: only review findings touch product code after this | L | 0 | 🟢 | R4a, R4b | Freeze noted; all lanes told | Orchestrator | not started | 0% | 0% | T+0 |
+| R4b | Final adversarial pass: science and numbers | H | 1 | 🟢 | R4c | KM's verdict | KM | not started | 0% | 0% | T+1 |
 
