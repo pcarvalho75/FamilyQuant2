@@ -5,200 +5,200 @@
   "runs": [
     {
       "id": "EV-results-assignment-export",
-      "command": "D:\\FamilyQuant-wt\\evidence\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --isolated-native-proof --prove-denovo-results-export D:/FamilyQuant-data/out-shell/N3/source D:/FamilyQuant-data/reference-1.5.0.6/app D:/FamilyQuant-data/out-evidence/n6c-behavior-repeat \u00222026-11-02 09:39:07 -0800\u0022",
-      "executedAt": "2026-11-02 09:39:07 -0800",
-      "commit": "09f1ab2950a10400519fd9cec94a5dfe6c65bba5",
+      "command": "C:\\FamilyQuant-gate\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --isolated-native-proof --prove-denovo-results-export D:/FamilyQuant-data/out-shell/N3/source D:/FamilyQuant-data/reference-1.5.0.6/app D:/FamilyQuant-data/out-refresh\\20261102-112902-FamilyQuant-gate\\denovo-results-export \u00222026-11-02 11:29:13 -0800\u0022",
+      "executedAt": "2026-11-02 11:29:13 -0800",
+      "commit": "28b7ea6bdb70b93d7d281c1051da738d7179f528",
       "artifacts": [
         {
-          "path": "D:\\FamilyQuant-data\\out-evidence\\n6c-behavior-repeat\\execution.log",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-112902-FamilyQuant-gate\\denovo-results-export\\execution.log",
           "sha256": "369FFB76753E10FBE8B0DBEF5A6696AAB803398F3AC00C034B64AFE9F3D99E28"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-evidence\\n6c-behavior-repeat\\results-export-data.json",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-112902-FamilyQuant-gate\\denovo-results-export\\results-export-data.json",
           "sha256": "EE507B0F05C6EAA8BFDF221A2A7CCB22F9FE995514CC95F0E65FA97CE6E952F6"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-evidence\\n6c-behavior-repeat\\en-US-assigned-current.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-112902-FamilyQuant-gate\\denovo-results-export\\en-US-assigned-current.csv",
           "sha256": "A4AD0CC1CD1415338BD0C592DACB876081940121C9667BB1643E4E7F1D1D6D92"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-evidence\\n6c-behavior-repeat\\en-US-assigned-frozen.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-112902-FamilyQuant-gate\\denovo-results-export\\en-US-assigned-frozen.csv",
           "sha256": "A4AD0CC1CD1415338BD0C592DACB876081940121C9667BB1643E4E7F1D1D6D92"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-evidence\\n6c-behavior-repeat\\en-US-empty-current.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-112902-FamilyQuant-gate\\denovo-results-export\\en-US-empty-current.csv",
           "sha256": "1E86218D2308B0997A06BE5C20CAFB7828938E06EBCB1E3C7FCF8A247D6B077D"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-evidence\\n6c-behavior-repeat\\en-US-empty-frozen.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-112902-FamilyQuant-gate\\denovo-results-export\\en-US-empty-frozen.csv",
           "sha256": "1E86218D2308B0997A06BE5C20CAFB7828938E06EBCB1E3C7FCF8A247D6B077D"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-evidence\\n6c-behavior-repeat\\fr-FR-assigned-current.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-112902-FamilyQuant-gate\\denovo-results-export\\fr-FR-assigned-current.csv",
           "sha256": "A4AD0CC1CD1415338BD0C592DACB876081940121C9667BB1643E4E7F1D1D6D92"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-evidence\\n6c-behavior-repeat\\fr-FR-assigned-frozen.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-112902-FamilyQuant-gate\\denovo-results-export\\fr-FR-assigned-frozen.csv",
           "sha256": "A4AD0CC1CD1415338BD0C592DACB876081940121C9667BB1643E4E7F1D1D6D92"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-evidence\\n6c-behavior-repeat\\fr-FR-empty-current.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-112902-FamilyQuant-gate\\denovo-results-export\\fr-FR-empty-current.csv",
           "sha256": "1E86218D2308B0997A06BE5C20CAFB7828938E06EBCB1E3C7FCF8A247D6B077D"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-evidence\\n6c-behavior-repeat\\fr-FR-empty-frozen.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-112902-FamilyQuant-gate\\denovo-results-export\\fr-FR-empty-frozen.csv",
           "sha256": "1E86218D2308B0997A06BE5C20CAFB7828938E06EBCB1E3C7FCF8A247D6B077D"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-evidence\\n6c-behavior-repeat\\executed\\FamilyQuant_AnalyticsControl.xaml",
-          "sha256": "4C1D695B6A6A770B5E2116E7D47688C79E45C0B0ACD0D7A61754E7E590A77BFA"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-112902-FamilyQuant-gate\\denovo-results-export\\executed\\FamilyQuant_AnalyticsControl.xaml",
+          "sha256": "4DD2D03A4C04806C2C428FE581C8F7543103982B3E5448A46F6BEF4906110A74"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-evidence\\n6c-behavior-repeat\\executed\\FamilyQuant_AnalyticsControl.xaml.cs",
-          "sha256": "DE812D53119D595B481FF77CA7A3BC6CEF6F61C4DD625B7948B8E3186F31F0B5"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-112902-FamilyQuant-gate\\denovo-results-export\\executed\\FamilyQuant_AnalyticsControl.xaml.cs",
+          "sha256": "30220082877E6D162166596400883E6220F8C3C0F09FE86DD8D2F6B350B7C832"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-evidence\\n6c-behavior-repeat\\executed\\FamilyQuant_AnalyticsViewModel.cs",
-          "sha256": "5FE6334E06092E439C3790070E7A939A87B5793E60F4CF38F5D9A088C13025AA"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-112902-FamilyQuant-gate\\denovo-results-export\\executed\\FamilyQuant_AnalyticsViewModel.cs",
+          "sha256": "106080427A4AD78C9256E979E6A8B59BB01825637F7D8CAB9B30631CB1D1DECC"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-evidence\\n6c-behavior-repeat\\executed\\FamilyQuant_MainWindow.HomologyResults.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-112902-FamilyQuant-gate\\denovo-results-export\\executed\\FamilyQuant_MainWindow.HomologyResults.cs",
           "sha256": "0962B205512B2255B387ABA2FD88DE05A82DA341540BA4780AADB76862FC204D"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-evidence\\n6c-behavior-repeat\\executed\\FamilyQuant_MainWindow.Presentation.cs",
-          "sha256": "F35208CDB0DB66C153D089B6373E8252680562A553D1FACA6BB61A61E063B8A6"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-112902-FamilyQuant-gate\\denovo-results-export\\executed\\FamilyQuant_MainWindow.Presentation.cs",
+          "sha256": "742C5AF1E9CA9B98C3F2F601B0C4218486A92220892E04B6D1FDC2706CF6EA28"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-evidence\\n6c-behavior-repeat\\executed\\FamilyQuant_MainWindow.Navigation.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-112902-FamilyQuant-gate\\denovo-results-export\\executed\\FamilyQuant_MainWindow.Navigation.cs",
           "sha256": "8EDC36FB29E29B1866731D8AB580042248FAF75CEB84DCE5F37F68AA730F1A76"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-evidence\\n6c-behavior-repeat\\executed\\FamilyQuant_DeNovoControl.xaml.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-112902-FamilyQuant-gate\\denovo-results-export\\executed\\FamilyQuant_DeNovoControl.xaml.cs",
           "sha256": "99FC1066E85361D8BCA7BDDC16FBA2B172DF2E8932268731E91F4B01854CECD8"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-evidence\\n6c-behavior-repeat\\executed\\FamilyQuant_DeNovoSession.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-112902-FamilyQuant-gate\\denovo-results-export\\executed\\FamilyQuant_DeNovoSession.cs",
           "sha256": "AA3D0D76B6CB1FEF2E0D3D40A24DB834BA7E485BEDC3DC97A6653B89FA0700B4"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-evidence\\n6c-behavior-repeat\\executed\\FamilyQuant.Core_HomologyCsv.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-112902-FamilyQuant-gate\\denovo-results-export\\executed\\FamilyQuant.Core_HomologyCsv.cs",
           "sha256": "BEAEC2438CC98B7D359C5225B38129C4E2397372CCEBE0A33F95ACA8345F17DF"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-evidence\\n6c-behavior-repeat\\executed\\FamilyQuant.Core_CsvFormatting.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-112902-FamilyQuant-gate\\denovo-results-export\\executed\\FamilyQuant.Core_CsvFormatting.cs",
           "sha256": "D70EFC4C06C7E81C9215555102B5AF238781B734B8BB81E825A25140A268C57A"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-evidence\\n6c-behavior-repeat\\executed\\FamilyQuant_ShellDialogs.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-112902-FamilyQuant-gate\\denovo-results-export\\executed\\FamilyQuant_ShellDialogs.cs",
           "sha256": "BADA9EAE7CCA3011F34E56A17D71DA7304EAB666D61D06E0C53DA532589AAA76"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-evidence\\n6c-behavior-repeat\\executed\\FamilyQuant_AppOperationFiles.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-112902-FamilyQuant-gate\\denovo-results-export\\executed\\FamilyQuant_AppOperationFiles.cs",
           "sha256": "6E1FB949218EADF56A159B520AFD6912D6322578C32FA8BF70DB0000E6D72BD6"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-evidence\\n6c-behavior-repeat\\executed\\FamilyQuant_AppOperationHost.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-112902-FamilyQuant-gate\\denovo-results-export\\executed\\FamilyQuant_AppOperationHost.cs",
           "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-evidence\\n6c-behavior-repeat\\executed\\FamilyQuant_TextReportWindow.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-112902-FamilyQuant-gate\\denovo-results-export\\executed\\FamilyQuant_TextReportWindow.cs",
           "sha256": "275E35B236EEC4C43FB54B6CC049E5C5E62A1767176D6F6410A3D69421106F96"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-evidence\\n6c-behavior-repeat\\executed\\FamilyQuant_SecondaryWindowView.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-112902-FamilyQuant-gate\\denovo-results-export\\executed\\FamilyQuant_SecondaryWindowView.cs",
           "sha256": "5DDABCDF5F47F3CBCC271B0F04EB20CE51BA12353DD117C1A3EDE8684A742CDE"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-evidence\\n6c-behavior-repeat\\executed\\FamilyQuant_SecondaryWindows.ViewModels.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-112902-FamilyQuant-gate\\denovo-results-export\\executed\\FamilyQuant_SecondaryWindows.ViewModels.cs",
           "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-evidence\\n6c-behavior-repeat\\executed\\FamilyQuant.Core_HelpContent.cs",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-112902-FamilyQuant-gate\\denovo-results-export\\executed\\FamilyQuant.Core_HelpContent.cs",
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-evidence\\n6c-behavior-repeat\\executed\\FamilyQuant.Core_DeNovo_DeNovoSource.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-112902-FamilyQuant-gate\\denovo-results-export\\executed\\FamilyQuant.Core_DeNovo_DeNovoSource.cs",
           "sha256": "F5D28EB3D7DC60C34D4288ED4C55EBB7C8878D8ECC015842B907469BC4267D3C"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-evidence\\n6c-behavior-repeat\\executed\\FamilyQuant_DeNovoControl.Compatibility.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-112902-FamilyQuant-gate\\denovo-results-export\\executed\\FamilyQuant_DeNovoControl.Compatibility.cs",
           "sha256": "BB45BCACC7C63869B4B22F63EE16C6572D12F7F2A2C9B589686B2DE2BC15479C"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-evidence\\n6c-behavior-repeat\\executed\\FamilyQuant_DeNovoControl.Dialogs.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-112902-FamilyQuant-gate\\denovo-results-export\\executed\\FamilyQuant_DeNovoControl.Dialogs.cs",
           "sha256": "B714D7D9AA689F30D9EDFA2479D373824358521783DBBD267E209E34E91884A1"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-evidence\\n6c-behavior-repeat\\executed\\FamilyQuant_DeNovoControl.Files.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-112902-FamilyQuant-gate\\denovo-results-export\\executed\\FamilyQuant_DeNovoControl.Files.cs",
           "sha256": "A894899A775DE9BC762B0069DCE26314631BE060B82892F480A5EA3D88B7CD14"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-evidence\\n6c-behavior-repeat\\executed\\FamilyQuant_DeNovoControl.Tables.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-112902-FamilyQuant-gate\\denovo-results-export\\executed\\FamilyQuant_DeNovoControl.Tables.cs",
           "sha256": "5B2292689F03600BD8FB482588343C0A24DF674B1A4D909588FD9BF747BA296A"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-evidence\\n6c-behavior-repeat\\executed\\FamilyQuant_DeNovoFilterControl.xaml.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-112902-FamilyQuant-gate\\denovo-results-export\\executed\\FamilyQuant_DeNovoFilterControl.xaml.cs",
           "sha256": "40DA440AE1CCBE68A7A99D261D7BAE87B103D6EB11DFC862CA26B309BA018108"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-evidence\\n6c-behavior-repeat\\executed\\FamilyQuant_DeNovoFilterViewModel.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-112902-FamilyQuant-gate\\denovo-results-export\\executed\\FamilyQuant_DeNovoFilterViewModel.cs",
           "sha256": "8F34872C345515C7D40A1D068628195740FF7C7C3832E2B598976BB230B20F10"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-evidence\\n6c-behavior-repeat\\executed\\FamilyQuant_DeNovoViewModel.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-112902-FamilyQuant-gate\\denovo-results-export\\executed\\FamilyQuant_DeNovoViewModel.cs",
           "sha256": "2FFF30BF700616645D36D91A25F12D038DDD10442BE65A6288CE06B5855B35C0"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-evidence\\n6c-behavior-repeat\\executed\\FamilyQuant_DeNovoViewModel.Readiness.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-112902-FamilyQuant-gate\\denovo-results-export\\executed\\FamilyQuant_DeNovoViewModel.Readiness.cs",
           "sha256": "4AD40C6B4500D1BFE99073A01FFB0D108954FAD4EF281B4EA9C8790C6EBC386B"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-evidence\\n6c-behavior-repeat\\executed\\FamilyQuant.Tests_Program.DeNovoResultsExport.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-112902-FamilyQuant-gate\\denovo-results-export\\executed\\FamilyQuant.Tests_Program.DeNovoResultsExport.cs",
           "sha256": "478C81888C557FF5CA2264B0F699F8F69DA286E54A2EDF80D8ADDA8BB4C35466"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-evidence\\n6c-behavior-repeat\\executed\\FamilyQuant.Tests_NativeOwnedDialogDriver.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-112902-FamilyQuant-gate\\denovo-results-export\\executed\\FamilyQuant.Tests_NativeOwnedDialogDriver.cs",
           "sha256": "69B79A7DED9DAABE175EC5FA4DE5F1C6BA8EEC63B12BFD0D035D299DC618701F"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-evidence\\n6c-behavior-repeat\\executed\\FamilyQuant.Tests_Program.DeNovoLedgerWorkflow.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-112902-FamilyQuant-gate\\denovo-results-export\\executed\\FamilyQuant.Tests_Program.DeNovoLedgerWorkflow.cs",
           "sha256": "10CE2ADF8BCDDA54E5E42D43D9E0F29623CFE6583229B8E6EE2585F3D966D6E5"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-evidence\\n6c-behavior-repeat\\executed\\FamilyQuant.Tests_Program.Commands.DeNovoLedger.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-112902-FamilyQuant-gate\\denovo-results-export\\executed\\FamilyQuant.Tests_Program.Commands.DeNovoLedger.cs",
           "sha256": "CC43F5E421638017958573330BCFBA22C1A903492F59FF0721021163E953EEE5"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-evidence\\n6c-behavior-repeat\\executed\\FamilyQuant.Tests_NativeProofDesktop.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-112902-FamilyQuant-gate\\denovo-results-export\\executed\\FamilyQuant.Tests_NativeProofDesktop.cs",
           "sha256": "545F022CDD0A6542532E70525CCFFDC1FC83AF44FDDF17130440A1DA7AB7CD28"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-evidence\\n6c-behavior-repeat\\executed\\FamilyQuant.Tests.dll",
-          "sha256": "F4DF437112F54F012EF49C4BAAF71658419334168767E7F892E36BFFE758AC0A"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-112902-FamilyQuant-gate\\denovo-results-export\\executed\\FamilyQuant.Tests.dll",
+          "sha256": "C5C089FD6C55191ED291694DACEFC3CC2112FF7B210E8B49FB3839FE68835906"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-evidence\\n6c-behavior-repeat\\executed\\FamilyQuant2.dll",
-          "sha256": "18EA5144D089E3010912A693F9C8BE62DC78E686846D1391FBD503C8E5052C2A"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-112902-FamilyQuant-gate\\denovo-results-export\\executed\\FamilyQuant2.dll",
+          "sha256": "C824FCD4A1F74A2841B5F874BB1B8117CB26FFBD01DBE19E685EB3284201A249"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-evidence\\n6c-behavior-repeat\\executed\\FamilyQuant.Core.dll",
-          "sha256": "F16DA03382739359850855C48C0C8298832244BBE04454188E0F2AE5EE226B18"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-112902-FamilyQuant-gate\\denovo-results-export\\executed\\FamilyQuant.Core.dll",
+          "sha256": "28EFC9F3E4AED1E35607D5464523EF4325300AC09FA62C8A64093A7EA02233E1"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-evidence\\n6c-behavior-repeat\\executed\\frozen_FamilyQuant.dll",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-112902-FamilyQuant-gate\\denovo-results-export\\executed\\frozen_FamilyQuant.dll",
           "sha256": "D764488C923945285E03B338E5A91BF28106A35B11AB465D8E2B23D125F03FD8"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-evidence\\n6c-behavior-repeat\\executed\\frozen_FamilyQuant_DeNovoControl.xaml",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-112902-FamilyQuant-gate\\denovo-results-export\\executed\\frozen_FamilyQuant_DeNovoControl.xaml",
           "sha256": "E7F6B72A22E658A4CFCBD4BD6FDC3DF42AAC0F0DEBAA5EF8B3CA337B736F51BF"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-evidence\\n6c-behavior-repeat\\executed\\frozen_FamilyQuant_DeNovoControl.xaml.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-112902-FamilyQuant-gate\\denovo-results-export\\executed\\frozen_FamilyQuant_DeNovoControl.xaml.cs",
           "sha256": "16D617F16382298A4A60238100D58B65CE03A6562C4B3F0B5B37C629E70A40BF"
         }
       ],
-      "workingDirectory": "D:\\FamilyQuant-wt\\evidence"
+      "workingDirectory": "C:\\FamilyQuant-gate"
     }
   ],
   "rows": [
@@ -208,17 +208,17 @@
         {
           "path": "FamilyQuant/AnalyticsControl.xaml",
           "symbol": "Native Results route dependency",
-          "sha256": "4C1D695B6A6A770B5E2116E7D47688C79E45C0B0ACD0D7A61754E7E590A77BFA"
+          "sha256": "4DD2D03A4C04806C2C428FE581C8F7543103982B3E5448A46F6BEF4906110A74"
         },
         {
           "path": "FamilyQuant/AnalyticsControl.xaml.cs",
           "symbol": "FamilyQuant.AnalyticsControl.ExportClicked",
-          "sha256": "DE812D53119D595B481FF77CA7A3BC6CEF6F61C4DD625B7948B8E3186F31F0B5"
+          "sha256": "30220082877E6D162166596400883E6220F8C3C0F09FE86DD8D2F6B350B7C832"
         },
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
           "symbol": "Native Results route dependency",
-          "sha256": "5FE6334E06092E439C3790070E7A939A87B5793E60F4CF38F5D9A088C13025AA"
+          "sha256": "106080427A4AD78C9256E979E6A8B59BB01825637F7D8CAB9B30631CB1D1DECC"
         },
         {
           "path": "FamilyQuant/MainWindow.HomologyResults.cs",
@@ -228,7 +228,7 @@
         {
           "path": "FamilyQuant/MainWindow.Presentation.cs",
           "symbol": "Native Results route dependency",
-          "sha256": "F35208CDB0DB66C153D089B6373E8252680562A553D1FACA6BB61A61E063B8A6"
+          "sha256": "742C5AF1E9CA9B98C3F2F601B0C4218486A92220892E04B6D1FDC2706CF6EA28"
         },
         {
           "path": "FamilyQuant/MainWindow.Navigation.cs",
@@ -288,7 +288,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "Native Results route dependency",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         },
         {
           "path": "FamilyQuant.Core/DeNovo/DeNovoSource.cs",
@@ -342,7 +342,7 @@
           "kind": "test",
           "target": "DeNovoResultsExportProof",
           "assertion": "Whole De novo and Results screen interactions preserve source selection, Help, chosen CSV bytes, snapshot state and cancellation in both cultures",
-          "artifact": "D:\\FamilyQuant-data\\out-evidence\\n6c-behavior-repeat\\execution.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-112902-FamilyQuant-gate\\denovo-results-export\\execution.log",
           "inspectedBy": ""
         }
       ],
@@ -356,17 +356,17 @@
         {
           "path": "FamilyQuant/AnalyticsControl.xaml",
           "symbol": "Native Results route dependency",
-          "sha256": "4C1D695B6A6A770B5E2116E7D47688C79E45C0B0ACD0D7A61754E7E590A77BFA"
+          "sha256": "4DD2D03A4C04806C2C428FE581C8F7543103982B3E5448A46F6BEF4906110A74"
         },
         {
           "path": "FamilyQuant/AnalyticsControl.xaml.cs",
           "symbol": "FamilyQuant.AnalyticsControl.ExportClicked",
-          "sha256": "DE812D53119D595B481FF77CA7A3BC6CEF6F61C4DD625B7948B8E3186F31F0B5"
+          "sha256": "30220082877E6D162166596400883E6220F8C3C0F09FE86DD8D2F6B350B7C832"
         },
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
           "symbol": "Native Results route dependency",
-          "sha256": "5FE6334E06092E439C3790070E7A939A87B5793E60F4CF38F5D9A088C13025AA"
+          "sha256": "106080427A4AD78C9256E979E6A8B59BB01825637F7D8CAB9B30631CB1D1DECC"
         },
         {
           "path": "FamilyQuant/MainWindow.HomologyResults.cs",
@@ -376,7 +376,7 @@
         {
           "path": "FamilyQuant/MainWindow.Presentation.cs",
           "symbol": "Native Results route dependency",
-          "sha256": "F35208CDB0DB66C153D089B6373E8252680562A553D1FACA6BB61A61E063B8A6"
+          "sha256": "742C5AF1E9CA9B98C3F2F601B0C4218486A92220892E04B6D1FDC2706CF6EA28"
         },
         {
           "path": "FamilyQuant/MainWindow.Navigation.cs",
@@ -436,7 +436,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "Native Results route dependency",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         },
         {
           "path": "FamilyQuant.Core/DeNovo/DeNovoSource.cs",
@@ -490,7 +490,7 @@
           "kind": "test",
           "target": "DeNovoResultsExportProof",
           "assertion": "Whole De novo and Results screen interactions preserve source selection, Help, chosen CSV bytes, snapshot state and cancellation in both cultures",
-          "artifact": "D:\\FamilyQuant-data\\out-evidence\\n6c-behavior-repeat\\execution.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-112902-FamilyQuant-gate\\denovo-results-export\\execution.log",
           "inspectedBy": ""
         }
       ],
@@ -504,17 +504,17 @@
         {
           "path": "FamilyQuant/AnalyticsControl.xaml",
           "symbol": "Native Results route dependency",
-          "sha256": "4C1D695B6A6A770B5E2116E7D47688C79E45C0B0ACD0D7A61754E7E590A77BFA"
+          "sha256": "4DD2D03A4C04806C2C428FE581C8F7543103982B3E5448A46F6BEF4906110A74"
         },
         {
           "path": "FamilyQuant/AnalyticsControl.xaml.cs",
           "symbol": "FamilyQuant.AnalyticsControl.ExportClicked",
-          "sha256": "DE812D53119D595B481FF77CA7A3BC6CEF6F61C4DD625B7948B8E3186F31F0B5"
+          "sha256": "30220082877E6D162166596400883E6220F8C3C0F09FE86DD8D2F6B350B7C832"
         },
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
           "symbol": "Native Results route dependency",
-          "sha256": "5FE6334E06092E439C3790070E7A939A87B5793E60F4CF38F5D9A088C13025AA"
+          "sha256": "106080427A4AD78C9256E979E6A8B59BB01825637F7D8CAB9B30631CB1D1DECC"
         },
         {
           "path": "FamilyQuant/MainWindow.HomologyResults.cs",
@@ -524,7 +524,7 @@
         {
           "path": "FamilyQuant/MainWindow.Presentation.cs",
           "symbol": "Native Results route dependency",
-          "sha256": "F35208CDB0DB66C153D089B6373E8252680562A553D1FACA6BB61A61E063B8A6"
+          "sha256": "742C5AF1E9CA9B98C3F2F601B0C4218486A92220892E04B6D1FDC2706CF6EA28"
         },
         {
           "path": "FamilyQuant/MainWindow.Navigation.cs",
@@ -584,7 +584,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "Native Results route dependency",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         },
         {
           "path": "FamilyQuant.Core/DeNovo/DeNovoSource.cs",
@@ -638,7 +638,7 @@
           "kind": "test",
           "target": "DeNovoResultsExportProof",
           "assertion": "Whole De novo and Results screen interactions preserve source selection, Help, chosen CSV bytes, snapshot state and cancellation in both cultures",
-          "artifact": "D:\\FamilyQuant-data\\out-evidence\\n6c-behavior-repeat\\execution.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-112902-FamilyQuant-gate\\denovo-results-export\\execution.log",
           "inspectedBy": ""
         }
       ],
@@ -652,17 +652,17 @@
         {
           "path": "FamilyQuant/AnalyticsControl.xaml",
           "symbol": "Native Results route dependency",
-          "sha256": "4C1D695B6A6A770B5E2116E7D47688C79E45C0B0ACD0D7A61754E7E590A77BFA"
+          "sha256": "4DD2D03A4C04806C2C428FE581C8F7543103982B3E5448A46F6BEF4906110A74"
         },
         {
           "path": "FamilyQuant/AnalyticsControl.xaml.cs",
           "symbol": "Native Results route dependency",
-          "sha256": "DE812D53119D595B481FF77CA7A3BC6CEF6F61C4DD625B7948B8E3186F31F0B5"
+          "sha256": "30220082877E6D162166596400883E6220F8C3C0F09FE86DD8D2F6B350B7C832"
         },
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
           "symbol": "Native Results route dependency",
-          "sha256": "5FE6334E06092E439C3790070E7A939A87B5793E60F4CF38F5D9A088C13025AA"
+          "sha256": "106080427A4AD78C9256E979E6A8B59BB01825637F7D8CAB9B30631CB1D1DECC"
         },
         {
           "path": "FamilyQuant/MainWindow.HomologyResults.cs",
@@ -672,7 +672,7 @@
         {
           "path": "FamilyQuant/MainWindow.Presentation.cs",
           "symbol": "Native Results route dependency",
-          "sha256": "F35208CDB0DB66C153D089B6373E8252680562A553D1FACA6BB61A61E063B8A6"
+          "sha256": "742C5AF1E9CA9B98C3F2F601B0C4218486A92220892E04B6D1FDC2706CF6EA28"
         },
         {
           "path": "FamilyQuant/MainWindow.Navigation.cs",
@@ -732,7 +732,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "Native Results route dependency",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         },
         {
           "path": "FamilyQuant.Core/DeNovo/DeNovoSource.cs",
@@ -786,7 +786,7 @@
           "kind": "test",
           "target": "DeNovoResultsExportProof",
           "assertion": "Whole De novo and Results screen interactions preserve source selection, Help, chosen CSV bytes, snapshot state and cancellation in both cultures",
-          "artifact": "D:\\FamilyQuant-data\\out-evidence\\n6c-behavior-repeat\\execution.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-112902-FamilyQuant-gate\\denovo-results-export\\execution.log",
           "inspectedBy": ""
         }
       ],
@@ -800,17 +800,17 @@
         {
           "path": "FamilyQuant/AnalyticsControl.xaml",
           "symbol": "Native Results route dependency",
-          "sha256": "4C1D695B6A6A770B5E2116E7D47688C79E45C0B0ACD0D7A61754E7E590A77BFA"
+          "sha256": "4DD2D03A4C04806C2C428FE581C8F7543103982B3E5448A46F6BEF4906110A74"
         },
         {
           "path": "FamilyQuant/AnalyticsControl.xaml.cs",
           "symbol": "Native Results route dependency",
-          "sha256": "DE812D53119D595B481FF77CA7A3BC6CEF6F61C4DD625B7948B8E3186F31F0B5"
+          "sha256": "30220082877E6D162166596400883E6220F8C3C0F09FE86DD8D2F6B350B7C832"
         },
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
           "symbol": "Native Results route dependency",
-          "sha256": "5FE6334E06092E439C3790070E7A939A87B5793E60F4CF38F5D9A088C13025AA"
+          "sha256": "106080427A4AD78C9256E979E6A8B59BB01825637F7D8CAB9B30631CB1D1DECC"
         },
         {
           "path": "FamilyQuant/MainWindow.HomologyResults.cs",
@@ -820,7 +820,7 @@
         {
           "path": "FamilyQuant/MainWindow.Presentation.cs",
           "symbol": "Native Results route dependency",
-          "sha256": "F35208CDB0DB66C153D089B6373E8252680562A553D1FACA6BB61A61E063B8A6"
+          "sha256": "742C5AF1E9CA9B98C3F2F601B0C4218486A92220892E04B6D1FDC2706CF6EA28"
         },
         {
           "path": "FamilyQuant/MainWindow.Navigation.cs",
@@ -880,7 +880,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "Native Results route dependency",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         },
         {
           "path": "FamilyQuant.Core/DeNovo/DeNovoSource.cs",
@@ -934,7 +934,7 @@
           "kind": "test",
           "target": "DeNovoResultsExportProof",
           "assertion": "Whole De novo and Results screen interactions preserve source selection, Help, chosen CSV bytes, snapshot state and cancellation in both cultures",
-          "artifact": "D:\\FamilyQuant-data\\out-evidence\\n6c-behavior-repeat\\execution.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-112902-FamilyQuant-gate\\denovo-results-export\\execution.log",
           "inspectedBy": ""
         }
       ],
@@ -948,17 +948,17 @@
         {
           "path": "FamilyQuant/AnalyticsControl.xaml",
           "symbol": "Native Results route dependency",
-          "sha256": "4C1D695B6A6A770B5E2116E7D47688C79E45C0B0ACD0D7A61754E7E590A77BFA"
+          "sha256": "4DD2D03A4C04806C2C428FE581C8F7543103982B3E5448A46F6BEF4906110A74"
         },
         {
           "path": "FamilyQuant/AnalyticsControl.xaml.cs",
           "symbol": "Native Results route dependency",
-          "sha256": "DE812D53119D595B481FF77CA7A3BC6CEF6F61C4DD625B7948B8E3186F31F0B5"
+          "sha256": "30220082877E6D162166596400883E6220F8C3C0F09FE86DD8D2F6B350B7C832"
         },
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
           "symbol": "Native Results route dependency",
-          "sha256": "5FE6334E06092E439C3790070E7A939A87B5793E60F4CF38F5D9A088C13025AA"
+          "sha256": "106080427A4AD78C9256E979E6A8B59BB01825637F7D8CAB9B30631CB1D1DECC"
         },
         {
           "path": "FamilyQuant/MainWindow.HomologyResults.cs",
@@ -968,7 +968,7 @@
         {
           "path": "FamilyQuant/MainWindow.Presentation.cs",
           "symbol": "Native Results route dependency",
-          "sha256": "F35208CDB0DB66C153D089B6373E8252680562A553D1FACA6BB61A61E063B8A6"
+          "sha256": "742C5AF1E9CA9B98C3F2F601B0C4218486A92220892E04B6D1FDC2706CF6EA28"
         },
         {
           "path": "FamilyQuant/MainWindow.Navigation.cs",
@@ -1028,7 +1028,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "Native Results route dependency",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         },
         {
           "path": "FamilyQuant.Core/DeNovo/DeNovoSource.cs",
@@ -1082,7 +1082,7 @@
           "kind": "test",
           "target": "DeNovoResultsExportProof",
           "assertion": "Whole De novo and Results screen interactions preserve source selection, Help, chosen CSV bytes, snapshot state and cancellation in both cultures",
-          "artifact": "D:\\FamilyQuant-data\\out-evidence\\n6c-behavior-repeat\\execution.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-112902-FamilyQuant-gate\\denovo-results-export\\execution.log",
           "inspectedBy": ""
         }
       ],
@@ -1096,17 +1096,17 @@
         {
           "path": "FamilyQuant/AnalyticsControl.xaml",
           "symbol": "Native Results route dependency",
-          "sha256": "4C1D695B6A6A770B5E2116E7D47688C79E45C0B0ACD0D7A61754E7E590A77BFA"
+          "sha256": "4DD2D03A4C04806C2C428FE581C8F7543103982B3E5448A46F6BEF4906110A74"
         },
         {
           "path": "FamilyQuant/AnalyticsControl.xaml.cs",
           "symbol": "Native Results route dependency",
-          "sha256": "DE812D53119D595B481FF77CA7A3BC6CEF6F61C4DD625B7948B8E3186F31F0B5"
+          "sha256": "30220082877E6D162166596400883E6220F8C3C0F09FE86DD8D2F6B350B7C832"
         },
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
           "symbol": "Native Results route dependency",
-          "sha256": "5FE6334E06092E439C3790070E7A939A87B5793E60F4CF38F5D9A088C13025AA"
+          "sha256": "106080427A4AD78C9256E979E6A8B59BB01825637F7D8CAB9B30631CB1D1DECC"
         },
         {
           "path": "FamilyQuant/MainWindow.HomologyResults.cs",
@@ -1116,7 +1116,7 @@
         {
           "path": "FamilyQuant/MainWindow.Presentation.cs",
           "symbol": "Native Results route dependency",
-          "sha256": "F35208CDB0DB66C153D089B6373E8252680562A553D1FACA6BB61A61E063B8A6"
+          "sha256": "742C5AF1E9CA9B98C3F2F601B0C4218486A92220892E04B6D1FDC2706CF6EA28"
         },
         {
           "path": "FamilyQuant/MainWindow.Navigation.cs",
@@ -1176,7 +1176,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "Native Results route dependency",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         },
         {
           "path": "FamilyQuant.Core/DeNovo/DeNovoSource.cs",
@@ -1230,7 +1230,7 @@
           "kind": "test",
           "target": "DeNovoResultsExportProof",
           "assertion": "Whole De novo and Results screen interactions preserve source selection, Help, chosen CSV bytes, snapshot state and cancellation in both cultures",
-          "artifact": "D:\\FamilyQuant-data\\out-evidence\\n6c-behavior-repeat\\execution.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-112902-FamilyQuant-gate\\denovo-results-export\\execution.log",
           "inspectedBy": ""
         }
       ],
@@ -1244,17 +1244,17 @@
         {
           "path": "FamilyQuant/AnalyticsControl.xaml",
           "symbol": "Native Results route dependency",
-          "sha256": "4C1D695B6A6A770B5E2116E7D47688C79E45C0B0ACD0D7A61754E7E590A77BFA"
+          "sha256": "4DD2D03A4C04806C2C428FE581C8F7543103982B3E5448A46F6BEF4906110A74"
         },
         {
           "path": "FamilyQuant/AnalyticsControl.xaml.cs",
           "symbol": "Native Results route dependency",
-          "sha256": "DE812D53119D595B481FF77CA7A3BC6CEF6F61C4DD625B7948B8E3186F31F0B5"
+          "sha256": "30220082877E6D162166596400883E6220F8C3C0F09FE86DD8D2F6B350B7C832"
         },
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
           "symbol": "Native Results route dependency",
-          "sha256": "5FE6334E06092E439C3790070E7A939A87B5793E60F4CF38F5D9A088C13025AA"
+          "sha256": "106080427A4AD78C9256E979E6A8B59BB01825637F7D8CAB9B30631CB1D1DECC"
         },
         {
           "path": "FamilyQuant/MainWindow.HomologyResults.cs",
@@ -1264,7 +1264,7 @@
         {
           "path": "FamilyQuant/MainWindow.Presentation.cs",
           "symbol": "Native Results route dependency",
-          "sha256": "F35208CDB0DB66C153D089B6373E8252680562A553D1FACA6BB61A61E063B8A6"
+          "sha256": "742C5AF1E9CA9B98C3F2F601B0C4218486A92220892E04B6D1FDC2706CF6EA28"
         },
         {
           "path": "FamilyQuant/MainWindow.Navigation.cs",
@@ -1324,7 +1324,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "Native Results route dependency",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         },
         {
           "path": "FamilyQuant.Core/DeNovo/DeNovoSource.cs",
@@ -1378,7 +1378,7 @@
           "kind": "test",
           "target": "DeNovoResultsExportProof",
           "assertion": "Whole De novo and Results screen interactions preserve source selection, Help, chosen CSV bytes, snapshot state and cancellation in both cultures",
-          "artifact": "D:\\FamilyQuant-data\\out-evidence\\n6c-behavior-repeat\\execution.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-112902-FamilyQuant-gate\\denovo-results-export\\execution.log",
           "inspectedBy": ""
         }
       ],
@@ -1392,17 +1392,17 @@
         {
           "path": "FamilyQuant/AnalyticsControl.xaml",
           "symbol": "Native Results route dependency",
-          "sha256": "4C1D695B6A6A770B5E2116E7D47688C79E45C0B0ACD0D7A61754E7E590A77BFA"
+          "sha256": "4DD2D03A4C04806C2C428FE581C8F7543103982B3E5448A46F6BEF4906110A74"
         },
         {
           "path": "FamilyQuant/AnalyticsControl.xaml.cs",
           "symbol": "Native Results route dependency",
-          "sha256": "DE812D53119D595B481FF77CA7A3BC6CEF6F61C4DD625B7948B8E3186F31F0B5"
+          "sha256": "30220082877E6D162166596400883E6220F8C3C0F09FE86DD8D2F6B350B7C832"
         },
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
           "symbol": "Native Results route dependency",
-          "sha256": "5FE6334E06092E439C3790070E7A939A87B5793E60F4CF38F5D9A088C13025AA"
+          "sha256": "106080427A4AD78C9256E979E6A8B59BB01825637F7D8CAB9B30631CB1D1DECC"
         },
         {
           "path": "FamilyQuant/MainWindow.HomologyResults.cs",
@@ -1412,7 +1412,7 @@
         {
           "path": "FamilyQuant/MainWindow.Presentation.cs",
           "symbol": "Native Results route dependency",
-          "sha256": "F35208CDB0DB66C153D089B6373E8252680562A553D1FACA6BB61A61E063B8A6"
+          "sha256": "742C5AF1E9CA9B98C3F2F601B0C4218486A92220892E04B6D1FDC2706CF6EA28"
         },
         {
           "path": "FamilyQuant/MainWindow.Navigation.cs",
@@ -1472,7 +1472,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "Native Results route dependency",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         },
         {
           "path": "FamilyQuant.Core/DeNovo/DeNovoSource.cs",
@@ -1526,7 +1526,7 @@
           "kind": "test",
           "target": "DeNovoResultsExportProof",
           "assertion": "Whole De novo and Results screen interactions preserve source selection, Help, chosen CSV bytes, snapshot state and cancellation in both cultures",
-          "artifact": "D:\\FamilyQuant-data\\out-evidence\\n6c-behavior-repeat\\execution.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-112902-FamilyQuant-gate\\denovo-results-export\\execution.log",
           "inspectedBy": ""
         }
       ],
@@ -1540,17 +1540,17 @@
         {
           "path": "FamilyQuant/AnalyticsControl.xaml",
           "symbol": "Native Results route dependency",
-          "sha256": "4C1D695B6A6A770B5E2116E7D47688C79E45C0B0ACD0D7A61754E7E590A77BFA"
+          "sha256": "4DD2D03A4C04806C2C428FE581C8F7543103982B3E5448A46F6BEF4906110A74"
         },
         {
           "path": "FamilyQuant/AnalyticsControl.xaml.cs",
           "symbol": "Native Results route dependency",
-          "sha256": "DE812D53119D595B481FF77CA7A3BC6CEF6F61C4DD625B7948B8E3186F31F0B5"
+          "sha256": "30220082877E6D162166596400883E6220F8C3C0F09FE86DD8D2F6B350B7C832"
         },
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
           "symbol": "Native Results route dependency",
-          "sha256": "5FE6334E06092E439C3790070E7A939A87B5793E60F4CF38F5D9A088C13025AA"
+          "sha256": "106080427A4AD78C9256E979E6A8B59BB01825637F7D8CAB9B30631CB1D1DECC"
         },
         {
           "path": "FamilyQuant/MainWindow.HomologyResults.cs",
@@ -1560,7 +1560,7 @@
         {
           "path": "FamilyQuant/MainWindow.Presentation.cs",
           "symbol": "Native Results route dependency",
-          "sha256": "F35208CDB0DB66C153D089B6373E8252680562A553D1FACA6BB61A61E063B8A6"
+          "sha256": "742C5AF1E9CA9B98C3F2F601B0C4218486A92220892E04B6D1FDC2706CF6EA28"
         },
         {
           "path": "FamilyQuant/MainWindow.Navigation.cs",
@@ -1620,7 +1620,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "Native Results route dependency",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         },
         {
           "path": "FamilyQuant.Core/DeNovo/DeNovoSource.cs",
@@ -1674,7 +1674,7 @@
           "kind": "test",
           "target": "DeNovoResultsExportProof",
           "assertion": "Whole De novo and Results screen interactions preserve source selection, Help, chosen CSV bytes, snapshot state and cancellation in both cultures",
-          "artifact": "D:\\FamilyQuant-data\\out-evidence\\n6c-behavior-repeat\\execution.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-112902-FamilyQuant-gate\\denovo-results-export\\execution.log",
           "inspectedBy": ""
         }
       ],
@@ -1688,17 +1688,17 @@
         {
           "path": "FamilyQuant/AnalyticsControl.xaml",
           "symbol": "Native Results route dependency",
-          "sha256": "4C1D695B6A6A770B5E2116E7D47688C79E45C0B0ACD0D7A61754E7E590A77BFA"
+          "sha256": "4DD2D03A4C04806C2C428FE581C8F7543103982B3E5448A46F6BEF4906110A74"
         },
         {
           "path": "FamilyQuant/AnalyticsControl.xaml.cs",
           "symbol": "Native Results route dependency",
-          "sha256": "DE812D53119D595B481FF77CA7A3BC6CEF6F61C4DD625B7948B8E3186F31F0B5"
+          "sha256": "30220082877E6D162166596400883E6220F8C3C0F09FE86DD8D2F6B350B7C832"
         },
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
           "symbol": "Native Results route dependency",
-          "sha256": "5FE6334E06092E439C3790070E7A939A87B5793E60F4CF38F5D9A088C13025AA"
+          "sha256": "106080427A4AD78C9256E979E6A8B59BB01825637F7D8CAB9B30631CB1D1DECC"
         },
         {
           "path": "FamilyQuant/MainWindow.HomologyResults.cs",
@@ -1708,7 +1708,7 @@
         {
           "path": "FamilyQuant/MainWindow.Presentation.cs",
           "symbol": "Native Results route dependency",
-          "sha256": "F35208CDB0DB66C153D089B6373E8252680562A553D1FACA6BB61A61E063B8A6"
+          "sha256": "742C5AF1E9CA9B98C3F2F601B0C4218486A92220892E04B6D1FDC2706CF6EA28"
         },
         {
           "path": "FamilyQuant/MainWindow.Navigation.cs",
@@ -1768,7 +1768,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "Native Results route dependency",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         },
         {
           "path": "FamilyQuant.Core/DeNovo/DeNovoSource.cs",
@@ -1822,7 +1822,7 @@
           "kind": "test",
           "target": "DeNovoResultsExportProof",
           "assertion": "Whole De novo and Results screen interactions preserve source selection, Help, chosen CSV bytes, snapshot state and cancellation in both cultures",
-          "artifact": "D:\\FamilyQuant-data\\out-evidence\\n6c-behavior-repeat\\execution.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-112902-FamilyQuant-gate\\denovo-results-export\\execution.log",
           "inspectedBy": ""
         }
       ],
@@ -1836,17 +1836,17 @@
         {
           "path": "FamilyQuant/AnalyticsControl.xaml",
           "symbol": "Native Results route dependency",
-          "sha256": "4C1D695B6A6A770B5E2116E7D47688C79E45C0B0ACD0D7A61754E7E590A77BFA"
+          "sha256": "4DD2D03A4C04806C2C428FE581C8F7543103982B3E5448A46F6BEF4906110A74"
         },
         {
           "path": "FamilyQuant/AnalyticsControl.xaml.cs",
           "symbol": "Native Results route dependency",
-          "sha256": "DE812D53119D595B481FF77CA7A3BC6CEF6F61C4DD625B7948B8E3186F31F0B5"
+          "sha256": "30220082877E6D162166596400883E6220F8C3C0F09FE86DD8D2F6B350B7C832"
         },
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
           "symbol": "Native Results route dependency",
-          "sha256": "5FE6334E06092E439C3790070E7A939A87B5793E60F4CF38F5D9A088C13025AA"
+          "sha256": "106080427A4AD78C9256E979E6A8B59BB01825637F7D8CAB9B30631CB1D1DECC"
         },
         {
           "path": "FamilyQuant/MainWindow.HomologyResults.cs",
@@ -1856,7 +1856,7 @@
         {
           "path": "FamilyQuant/MainWindow.Presentation.cs",
           "symbol": "Native Results route dependency",
-          "sha256": "F35208CDB0DB66C153D089B6373E8252680562A553D1FACA6BB61A61E063B8A6"
+          "sha256": "742C5AF1E9CA9B98C3F2F601B0C4218486A92220892E04B6D1FDC2706CF6EA28"
         },
         {
           "path": "FamilyQuant/MainWindow.Navigation.cs",
@@ -1916,7 +1916,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "Native Results route dependency",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         },
         {
           "path": "FamilyQuant.Core/DeNovo/DeNovoSource.cs",
@@ -1970,7 +1970,7 @@
           "kind": "test",
           "target": "DeNovoResultsExportProof",
           "assertion": "Whole De novo and Results screen interactions preserve source selection, Help, chosen CSV bytes, snapshot state and cancellation in both cultures",
-          "artifact": "D:\\FamilyQuant-data\\out-evidence\\n6c-behavior-repeat\\execution.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-112902-FamilyQuant-gate\\denovo-results-export\\execution.log",
           "inspectedBy": ""
         }
       ],
@@ -1984,17 +1984,17 @@
         {
           "path": "FamilyQuant/AnalyticsControl.xaml",
           "symbol": "Native Results route dependency",
-          "sha256": "4C1D695B6A6A770B5E2116E7D47688C79E45C0B0ACD0D7A61754E7E590A77BFA"
+          "sha256": "4DD2D03A4C04806C2C428FE581C8F7543103982B3E5448A46F6BEF4906110A74"
         },
         {
           "path": "FamilyQuant/AnalyticsControl.xaml.cs",
           "symbol": "Native Results route dependency",
-          "sha256": "DE812D53119D595B481FF77CA7A3BC6CEF6F61C4DD625B7948B8E3186F31F0B5"
+          "sha256": "30220082877E6D162166596400883E6220F8C3C0F09FE86DD8D2F6B350B7C832"
         },
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
           "symbol": "Native Results route dependency",
-          "sha256": "5FE6334E06092E439C3790070E7A939A87B5793E60F4CF38F5D9A088C13025AA"
+          "sha256": "106080427A4AD78C9256E979E6A8B59BB01825637F7D8CAB9B30631CB1D1DECC"
         },
         {
           "path": "FamilyQuant/MainWindow.HomologyResults.cs",
@@ -2004,7 +2004,7 @@
         {
           "path": "FamilyQuant/MainWindow.Presentation.cs",
           "symbol": "Native Results route dependency",
-          "sha256": "F35208CDB0DB66C153D089B6373E8252680562A553D1FACA6BB61A61E063B8A6"
+          "sha256": "742C5AF1E9CA9B98C3F2F601B0C4218486A92220892E04B6D1FDC2706CF6EA28"
         },
         {
           "path": "FamilyQuant/MainWindow.Navigation.cs",
@@ -2064,7 +2064,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "Native Results route dependency",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         },
         {
           "path": "FamilyQuant.Core/DeNovo/DeNovoSource.cs",
@@ -2118,7 +2118,7 @@
           "kind": "test",
           "target": "DeNovoResultsExportProof",
           "assertion": "Whole De novo and Results screen interactions preserve source selection, Help, chosen CSV bytes, snapshot state and cancellation in both cultures",
-          "artifact": "D:\\FamilyQuant-data\\out-evidence\\n6c-behavior-repeat\\execution.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-112902-FamilyQuant-gate\\denovo-results-export\\execution.log",
           "inspectedBy": ""
         }
       ],
@@ -2132,17 +2132,17 @@
         {
           "path": "FamilyQuant/AnalyticsControl.xaml",
           "symbol": "Native Results route dependency",
-          "sha256": "4C1D695B6A6A770B5E2116E7D47688C79E45C0B0ACD0D7A61754E7E590A77BFA"
+          "sha256": "4DD2D03A4C04806C2C428FE581C8F7543103982B3E5448A46F6BEF4906110A74"
         },
         {
           "path": "FamilyQuant/AnalyticsControl.xaml.cs",
           "symbol": "Native Results route dependency",
-          "sha256": "DE812D53119D595B481FF77CA7A3BC6CEF6F61C4DD625B7948B8E3186F31F0B5"
+          "sha256": "30220082877E6D162166596400883E6220F8C3C0F09FE86DD8D2F6B350B7C832"
         },
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
           "symbol": "Native Results route dependency",
-          "sha256": "5FE6334E06092E439C3790070E7A939A87B5793E60F4CF38F5D9A088C13025AA"
+          "sha256": "106080427A4AD78C9256E979E6A8B59BB01825637F7D8CAB9B30631CB1D1DECC"
         },
         {
           "path": "FamilyQuant/MainWindow.HomologyResults.cs",
@@ -2152,7 +2152,7 @@
         {
           "path": "FamilyQuant/MainWindow.Presentation.cs",
           "symbol": "Native Results route dependency",
-          "sha256": "F35208CDB0DB66C153D089B6373E8252680562A553D1FACA6BB61A61E063B8A6"
+          "sha256": "742C5AF1E9CA9B98C3F2F601B0C4218486A92220892E04B6D1FDC2706CF6EA28"
         },
         {
           "path": "FamilyQuant/MainWindow.Navigation.cs",
@@ -2212,7 +2212,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "Native Results route dependency",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         },
         {
           "path": "FamilyQuant.Core/DeNovo/DeNovoSource.cs",
@@ -2266,7 +2266,7 @@
           "kind": "test",
           "target": "DeNovoResultsExportProof",
           "assertion": "Whole De novo and Results screen interactions preserve source selection, Help, chosen CSV bytes, snapshot state and cancellation in both cultures",
-          "artifact": "D:\\FamilyQuant-data\\out-evidence\\n6c-behavior-repeat\\execution.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-112902-FamilyQuant-gate\\denovo-results-export\\execution.log",
           "inspectedBy": ""
         }
       ],
@@ -2280,17 +2280,17 @@
         {
           "path": "FamilyQuant/AnalyticsControl.xaml",
           "symbol": "Native Results route dependency",
-          "sha256": "4C1D695B6A6A770B5E2116E7D47688C79E45C0B0ACD0D7A61754E7E590A77BFA"
+          "sha256": "4DD2D03A4C04806C2C428FE581C8F7543103982B3E5448A46F6BEF4906110A74"
         },
         {
           "path": "FamilyQuant/AnalyticsControl.xaml.cs",
           "symbol": "Native Results route dependency",
-          "sha256": "DE812D53119D595B481FF77CA7A3BC6CEF6F61C4DD625B7948B8E3186F31F0B5"
+          "sha256": "30220082877E6D162166596400883E6220F8C3C0F09FE86DD8D2F6B350B7C832"
         },
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
           "symbol": "Native Results route dependency",
-          "sha256": "5FE6334E06092E439C3790070E7A939A87B5793E60F4CF38F5D9A088C13025AA"
+          "sha256": "106080427A4AD78C9256E979E6A8B59BB01825637F7D8CAB9B30631CB1D1DECC"
         },
         {
           "path": "FamilyQuant/MainWindow.HomologyResults.cs",
@@ -2300,7 +2300,7 @@
         {
           "path": "FamilyQuant/MainWindow.Presentation.cs",
           "symbol": "Native Results route dependency",
-          "sha256": "F35208CDB0DB66C153D089B6373E8252680562A553D1FACA6BB61A61E063B8A6"
+          "sha256": "742C5AF1E9CA9B98C3F2F601B0C4218486A92220892E04B6D1FDC2706CF6EA28"
         },
         {
           "path": "FamilyQuant/MainWindow.Navigation.cs",
@@ -2360,7 +2360,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "Native Results route dependency",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         },
         {
           "path": "FamilyQuant.Core/DeNovo/DeNovoSource.cs",
@@ -2414,7 +2414,7 @@
           "kind": "test",
           "target": "DeNovoResultsExportProof",
           "assertion": "Whole De novo and Results screen interactions preserve source selection, Help, chosen CSV bytes, snapshot state and cancellation in both cultures",
-          "artifact": "D:\\FamilyQuant-data\\out-evidence\\n6c-behavior-repeat\\execution.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-112902-FamilyQuant-gate\\denovo-results-export\\execution.log",
           "inspectedBy": ""
         }
       ],
@@ -2428,17 +2428,17 @@
         {
           "path": "FamilyQuant/AnalyticsControl.xaml",
           "symbol": "Native Results route dependency",
-          "sha256": "4C1D695B6A6A770B5E2116E7D47688C79E45C0B0ACD0D7A61754E7E590A77BFA"
+          "sha256": "4DD2D03A4C04806C2C428FE581C8F7543103982B3E5448A46F6BEF4906110A74"
         },
         {
           "path": "FamilyQuant/AnalyticsControl.xaml.cs",
           "symbol": "Native Results route dependency",
-          "sha256": "DE812D53119D595B481FF77CA7A3BC6CEF6F61C4DD625B7948B8E3186F31F0B5"
+          "sha256": "30220082877E6D162166596400883E6220F8C3C0F09FE86DD8D2F6B350B7C832"
         },
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
           "symbol": "Native Results route dependency",
-          "sha256": "5FE6334E06092E439C3790070E7A939A87B5793E60F4CF38F5D9A088C13025AA"
+          "sha256": "106080427A4AD78C9256E979E6A8B59BB01825637F7D8CAB9B30631CB1D1DECC"
         },
         {
           "path": "FamilyQuant/MainWindow.HomologyResults.cs",
@@ -2448,7 +2448,7 @@
         {
           "path": "FamilyQuant/MainWindow.Presentation.cs",
           "symbol": "Native Results route dependency",
-          "sha256": "F35208CDB0DB66C153D089B6373E8252680562A553D1FACA6BB61A61E063B8A6"
+          "sha256": "742C5AF1E9CA9B98C3F2F601B0C4218486A92220892E04B6D1FDC2706CF6EA28"
         },
         {
           "path": "FamilyQuant/MainWindow.Navigation.cs",
@@ -2508,7 +2508,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "Native Results route dependency",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         },
         {
           "path": "FamilyQuant.Core/DeNovo/DeNovoSource.cs",
@@ -2562,7 +2562,7 @@
           "kind": "test",
           "target": "DeNovoResultsExportProof",
           "assertion": "Whole De novo and Results screen interactions preserve source selection, Help, chosen CSV bytes, snapshot state and cancellation in both cultures",
-          "artifact": "D:\\FamilyQuant-data\\out-evidence\\n6c-behavior-repeat\\execution.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-112902-FamilyQuant-gate\\denovo-results-export\\execution.log",
           "inspectedBy": ""
         }
       ],
@@ -2576,17 +2576,17 @@
         {
           "path": "FamilyQuant/AnalyticsControl.xaml",
           "symbol": "Native Results route dependency",
-          "sha256": "4C1D695B6A6A770B5E2116E7D47688C79E45C0B0ACD0D7A61754E7E590A77BFA"
+          "sha256": "4DD2D03A4C04806C2C428FE581C8F7543103982B3E5448A46F6BEF4906110A74"
         },
         {
           "path": "FamilyQuant/AnalyticsControl.xaml.cs",
           "symbol": "Native Results route dependency",
-          "sha256": "DE812D53119D595B481FF77CA7A3BC6CEF6F61C4DD625B7948B8E3186F31F0B5"
+          "sha256": "30220082877E6D162166596400883E6220F8C3C0F09FE86DD8D2F6B350B7C832"
         },
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
           "symbol": "Native Results route dependency",
-          "sha256": "5FE6334E06092E439C3790070E7A939A87B5793E60F4CF38F5D9A088C13025AA"
+          "sha256": "106080427A4AD78C9256E979E6A8B59BB01825637F7D8CAB9B30631CB1D1DECC"
         },
         {
           "path": "FamilyQuant/MainWindow.HomologyResults.cs",
@@ -2596,7 +2596,7 @@
         {
           "path": "FamilyQuant/MainWindow.Presentation.cs",
           "symbol": "Native Results route dependency",
-          "sha256": "F35208CDB0DB66C153D089B6373E8252680562A553D1FACA6BB61A61E063B8A6"
+          "sha256": "742C5AF1E9CA9B98C3F2F601B0C4218486A92220892E04B6D1FDC2706CF6EA28"
         },
         {
           "path": "FamilyQuant/MainWindow.Navigation.cs",
@@ -2656,7 +2656,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "Native Results route dependency",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         },
         {
           "path": "FamilyQuant.Core/DeNovo/DeNovoSource.cs",
@@ -2710,7 +2710,7 @@
           "kind": "test",
           "target": "DeNovoResultsExportProof",
           "assertion": "Whole De novo and Results screen interactions preserve source selection, Help, chosen CSV bytes, snapshot state and cancellation in both cultures",
-          "artifact": "D:\\FamilyQuant-data\\out-evidence\\n6c-behavior-repeat\\execution.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-112902-FamilyQuant-gate\\denovo-results-export\\execution.log",
           "inspectedBy": ""
         }
       ],
@@ -2724,17 +2724,17 @@
         {
           "path": "FamilyQuant/AnalyticsControl.xaml",
           "symbol": "Native Results route dependency",
-          "sha256": "4C1D695B6A6A770B5E2116E7D47688C79E45C0B0ACD0D7A61754E7E590A77BFA"
+          "sha256": "4DD2D03A4C04806C2C428FE581C8F7543103982B3E5448A46F6BEF4906110A74"
         },
         {
           "path": "FamilyQuant/AnalyticsControl.xaml.cs",
           "symbol": "Native Results route dependency",
-          "sha256": "DE812D53119D595B481FF77CA7A3BC6CEF6F61C4DD625B7948B8E3186F31F0B5"
+          "sha256": "30220082877E6D162166596400883E6220F8C3C0F09FE86DD8D2F6B350B7C832"
         },
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
           "symbol": "Native Results route dependency",
-          "sha256": "5FE6334E06092E439C3790070E7A939A87B5793E60F4CF38F5D9A088C13025AA"
+          "sha256": "106080427A4AD78C9256E979E6A8B59BB01825637F7D8CAB9B30631CB1D1DECC"
         },
         {
           "path": "FamilyQuant/MainWindow.HomologyResults.cs",
@@ -2744,7 +2744,7 @@
         {
           "path": "FamilyQuant/MainWindow.Presentation.cs",
           "symbol": "Native Results route dependency",
-          "sha256": "F35208CDB0DB66C153D089B6373E8252680562A553D1FACA6BB61A61E063B8A6"
+          "sha256": "742C5AF1E9CA9B98C3F2F601B0C4218486A92220892E04B6D1FDC2706CF6EA28"
         },
         {
           "path": "FamilyQuant/MainWindow.Navigation.cs",
@@ -2804,7 +2804,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "Native Results route dependency",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         },
         {
           "path": "FamilyQuant.Core/DeNovo/DeNovoSource.cs",
@@ -2858,7 +2858,7 @@
           "kind": "test",
           "target": "DeNovoResultsExportProof",
           "assertion": "Whole De novo and Results screen interactions preserve source selection, Help, chosen CSV bytes, snapshot state and cancellation in both cultures",
-          "artifact": "D:\\FamilyQuant-data\\out-evidence\\n6c-behavior-repeat\\execution.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-112902-FamilyQuant-gate\\denovo-results-export\\execution.log",
           "inspectedBy": ""
         }
       ],
@@ -2872,17 +2872,17 @@
         {
           "path": "FamilyQuant/AnalyticsControl.xaml",
           "symbol": "Native Results route dependency",
-          "sha256": "4C1D695B6A6A770B5E2116E7D47688C79E45C0B0ACD0D7A61754E7E590A77BFA"
+          "sha256": "4DD2D03A4C04806C2C428FE581C8F7543103982B3E5448A46F6BEF4906110A74"
         },
         {
           "path": "FamilyQuant/AnalyticsControl.xaml.cs",
           "symbol": "Native Results route dependency",
-          "sha256": "DE812D53119D595B481FF77CA7A3BC6CEF6F61C4DD625B7948B8E3186F31F0B5"
+          "sha256": "30220082877E6D162166596400883E6220F8C3C0F09FE86DD8D2F6B350B7C832"
         },
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
           "symbol": "Native Results route dependency",
-          "sha256": "5FE6334E06092E439C3790070E7A939A87B5793E60F4CF38F5D9A088C13025AA"
+          "sha256": "106080427A4AD78C9256E979E6A8B59BB01825637F7D8CAB9B30631CB1D1DECC"
         },
         {
           "path": "FamilyQuant/MainWindow.HomologyResults.cs",
@@ -2892,7 +2892,7 @@
         {
           "path": "FamilyQuant/MainWindow.Presentation.cs",
           "symbol": "Native Results route dependency",
-          "sha256": "F35208CDB0DB66C153D089B6373E8252680562A553D1FACA6BB61A61E063B8A6"
+          "sha256": "742C5AF1E9CA9B98C3F2F601B0C4218486A92220892E04B6D1FDC2706CF6EA28"
         },
         {
           "path": "FamilyQuant/MainWindow.Navigation.cs",
@@ -2952,7 +2952,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "Native Results route dependency",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         },
         {
           "path": "FamilyQuant.Core/DeNovo/DeNovoSource.cs",
@@ -3006,7 +3006,7 @@
           "kind": "test",
           "target": "DeNovoResultsExportProof",
           "assertion": "Whole De novo and Results screen interactions preserve source selection, Help, chosen CSV bytes, snapshot state and cancellation in both cultures",
-          "artifact": "D:\\FamilyQuant-data\\out-evidence\\n6c-behavior-repeat\\execution.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-112902-FamilyQuant-gate\\denovo-results-export\\execution.log",
           "inspectedBy": ""
         }
       ],
@@ -3020,17 +3020,17 @@
         {
           "path": "FamilyQuant/AnalyticsControl.xaml",
           "symbol": "Native Results route dependency",
-          "sha256": "4C1D695B6A6A770B5E2116E7D47688C79E45C0B0ACD0D7A61754E7E590A77BFA"
+          "sha256": "4DD2D03A4C04806C2C428FE581C8F7543103982B3E5448A46F6BEF4906110A74"
         },
         {
           "path": "FamilyQuant/AnalyticsControl.xaml.cs",
           "symbol": "Native Results route dependency",
-          "sha256": "DE812D53119D595B481FF77CA7A3BC6CEF6F61C4DD625B7948B8E3186F31F0B5"
+          "sha256": "30220082877E6D162166596400883E6220F8C3C0F09FE86DD8D2F6B350B7C832"
         },
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
           "symbol": "Native Results route dependency",
-          "sha256": "5FE6334E06092E439C3790070E7A939A87B5793E60F4CF38F5D9A088C13025AA"
+          "sha256": "106080427A4AD78C9256E979E6A8B59BB01825637F7D8CAB9B30631CB1D1DECC"
         },
         {
           "path": "FamilyQuant/MainWindow.HomologyResults.cs",
@@ -3040,7 +3040,7 @@
         {
           "path": "FamilyQuant/MainWindow.Presentation.cs",
           "symbol": "Native Results route dependency",
-          "sha256": "F35208CDB0DB66C153D089B6373E8252680562A553D1FACA6BB61A61E063B8A6"
+          "sha256": "742C5AF1E9CA9B98C3F2F601B0C4218486A92220892E04B6D1FDC2706CF6EA28"
         },
         {
           "path": "FamilyQuant/MainWindow.Navigation.cs",
@@ -3100,7 +3100,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "Native Results route dependency",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         },
         {
           "path": "FamilyQuant.Core/DeNovo/DeNovoSource.cs",
@@ -3154,7 +3154,7 @@
           "kind": "test",
           "target": "DeNovoResultsExportProof",
           "assertion": "Whole De novo and Results screen interactions preserve source selection, Help, chosen CSV bytes, snapshot state and cancellation in both cultures",
-          "artifact": "D:\\FamilyQuant-data\\out-evidence\\n6c-behavior-repeat\\execution.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-112902-FamilyQuant-gate\\denovo-results-export\\execution.log",
           "inspectedBy": ""
         }
       ],
@@ -3168,17 +3168,17 @@
         {
           "path": "FamilyQuant/AnalyticsControl.xaml",
           "symbol": "Native Results route dependency",
-          "sha256": "4C1D695B6A6A770B5E2116E7D47688C79E45C0B0ACD0D7A61754E7E590A77BFA"
+          "sha256": "4DD2D03A4C04806C2C428FE581C8F7543103982B3E5448A46F6BEF4906110A74"
         },
         {
           "path": "FamilyQuant/AnalyticsControl.xaml.cs",
           "symbol": "Native Results route dependency",
-          "sha256": "DE812D53119D595B481FF77CA7A3BC6CEF6F61C4DD625B7948B8E3186F31F0B5"
+          "sha256": "30220082877E6D162166596400883E6220F8C3C0F09FE86DD8D2F6B350B7C832"
         },
         {
           "path": "FamilyQuant/AnalyticsViewModel.cs",
           "symbol": "Native Results route dependency",
-          "sha256": "5FE6334E06092E439C3790070E7A939A87B5793E60F4CF38F5D9A088C13025AA"
+          "sha256": "106080427A4AD78C9256E979E6A8B59BB01825637F7D8CAB9B30631CB1D1DECC"
         },
         {
           "path": "FamilyQuant/MainWindow.HomologyResults.cs",
@@ -3188,7 +3188,7 @@
         {
           "path": "FamilyQuant/MainWindow.Presentation.cs",
           "symbol": "Native Results route dependency",
-          "sha256": "F35208CDB0DB66C153D089B6373E8252680562A553D1FACA6BB61A61E063B8A6"
+          "sha256": "742C5AF1E9CA9B98C3F2F601B0C4218486A92220892E04B6D1FDC2706CF6EA28"
         },
         {
           "path": "FamilyQuant/MainWindow.Navigation.cs",
@@ -3248,7 +3248,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "Native Results route dependency",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         },
         {
           "path": "FamilyQuant.Core/DeNovo/DeNovoSource.cs",
@@ -3302,7 +3302,7 @@
           "kind": "test",
           "target": "DeNovoResultsExportProof",
           "assertion": "Whole De novo and Results screen interactions preserve source selection, Help, chosen CSV bytes, snapshot state and cancellation in both cultures",
-          "artifact": "D:\\FamilyQuant-data\\out-evidence\\n6c-behavior-repeat\\execution.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-112902-FamilyQuant-gate\\denovo-results-export\\execution.log",
           "inspectedBy": ""
         }
       ],
