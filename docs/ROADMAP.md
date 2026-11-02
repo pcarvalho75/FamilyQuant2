@@ -79,7 +79,7 @@ Columns: Diff = L, M, H, VH. Hrs = worker hours at measured speed: the 56 steps 
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| N6 | Close the ledger by kind of row (D13): one executed check per kind, such as frozen 1.5.0.6 text compared with 2.0, with each row naming what was compared. A row no kind covers gets its own proof or stays open | H | 1.5 | C13 | C14 | `--feature-ledger-release-check` passes; a reviewer samples 200 rows at random across all kinds and agrees; any sample failure reopens that whole kind | SH | not started | 0% | 0% | T+2 |
+| N6 | Close the ledger by kind of row (D13): one executed check per kind, such as frozen 1.5.0.6 text compared with 2.0, with each row naming what was compared. A row no kind covers gets its own proof or stays open | H | 1.5 | 🟢 | C14 | `--feature-ledger-release-check` passes; a reviewer samples 200 rows at random across all kinds and agrees; any sample failure reopens that whole kind | SH | not started | 0% | 0% | T+2 |
 
 ### W2 Ana's result, through the software
 
@@ -101,8 +101,7 @@ Columns: Diff = L, M, H, VH. Hrs = worker hours at measured speed: the 56 steps 
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| C13 | Wording pass: labels, tooltips (one or two sentences) and Help match the new screens | M | 1 | 🟢 | N6, C14 | Suite's tooltip checks green; no old screen named anywhere | LK | not started | 0% | 0% | T+1 |
-| C14 | Finish: 100, 125 and 150% scaling, smallest window, Tab order, focus visible, both themes | M | 0.5 | C13, N6 | R2 | Harness renders at each scale; Paulo's final look sign-off | LK | not started | 0% | 0% | T+3 |
+| C14 | Finish: 100, 125 and 150% scaling, smallest window, Tab order, focus visible, both themes | M | 0.5 | N6 | R2 | Harness renders at each scale; Paulo's final look sign-off | LK | not started | 0% | 0% | T+2 |
 
 ### W6 Core rewrite: copy what is good, rewrite what is better
 
@@ -113,10 +112,10 @@ Columns: Diff = L, M, H, VH. Hrs = worker hours at measured speed: the 56 steps 
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| R2 | 2.0 preview 2: new look and shell | M | 0.5 | C14 | R3 | Same, plus Paulo's sign-off on renders, and a published update reaches an installed 2.0 | Orchestrator | not started | 0% | 0% | T+4 |
+| R2 | 2.0 preview 2: new look and shell | M | 0.5 | C14 | R3 | Same, plus Paulo's sign-off on renders, and a published update reaches an installed 2.0 | Orchestrator | not started | 0% | 0% | T+3 |
 | R3 | 2.0 release candidate: rewrite finished, every ledger row closed, the family world in if B1 passed | M | 0.5 | R2, B8, B10, B11 | R4 | Same, plus the ledger check | Orchestrator | not started | 0% | 0% | T+4 |
-| R4 | Final adversarial pass on the whole product | H | 1 | R3 | R5 | GR's verdict; all findings closed | GR | not started | 0% | 0% | T+5 |
-| R5 | FamilyQuant 2.0 final, then the archive of this roadmap | L | 0.5 | R4 | Done | Paulo publishes | Orchestrator | not started | 0% | 0% | T+6 |
+| R4 | Final adversarial pass on the whole product | H | 1 | R3 | R5 | GR's verdict; all findings closed | GR | not started | 0% | 0% | T+4 |
+| R5 | FamilyQuant 2.0 final, then the archive of this roadmap | L | 0.5 | R4 | Done | Paulo publishes | Orchestrator | not started | 0% | 0% | T+5 |
 
 ### W8 Breakthrough: the family world
 
@@ -125,8 +124,8 @@ The bet, from `docs/vision/VISION.md`: a de novo peptide your database cannot pl
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
 | B8 | Science review on a real sample: labels, denominators, inflation of conserved families, and the wording of the claim | H | 1 | 🟢 | R3 | GR's verdict; findings closed; Paulo accepts the wording | GR | not started | 0% | 0% | T+1 |
-| B10 | Minimum tag length the user can change, with a quick error table: on the Database gap screen, for lengths 7 to 15, the signal that lands, the decoy rate and the known-answer right rate on that project, with no new fetch. Choosing a length updates the result, the CSV and the FASTA and is stored in the project. 9 stays the default | M | 1 | 🟢 | R3 | Table from the program on the real project; the chosen length changes screen, CSV and FASTA and is stored; 9 reproduces today's output; time measured | OP | not started | 0% | 0% | T+2 |
-| B11 | Several taxa on one target: a joined header naming different taxa keeps all of them, and one such target no longer stops the whole file. No guessed taxon | L | 0.5 | 🟢 | R3 | Fixture of a two-species joined header passes; own-species removal covers each taxon; Ana and Bothrops audits unchanged | EV | not started | 0% | 0% | T+1 |
+| B10 | Minimum tag length the user can change, with a quick error table: on the Database gap screen, for lengths 7 to 15, the signal that lands, the decoy rate and the known-answer right rate on that project, with no new fetch. Choosing a length updates the result, the CSV and the FASTA and is stored in the project. 8 is the default (D22) | M | 1 | 🟢 | R3 | Table from the program on the real project; the chosen length changes screen, CSV and FASTA and is stored; choosing 9 reproduces the B6 output; time measured | OP | not started | 0% | 0% | T+1 |
+| B11 | Several taxa on one target: a joined header naming different taxa keeps all of them, and one such target no longer stops the whole file. No guessed taxon | L | 0.5 | 🟢 | R3 | Fixture of a two-species joined header passes; own-species removal covers each taxon; Ana and Bothrops audits unchanged | EV | not started | 0% | 0% | T+0 |
 
 ## Cooldown
 
@@ -148,6 +147,7 @@ Paulo agreed these at the restart, 2026-11-01.
 | ID | Question | Taken |
 |---|---|---|
 | D14 | Should identity clustering change its coverage rule, merge on shared peptides, or use a reviewed-family veto? | No. Clustering stays as it is, and the measurements ship as a diagnostic the user can see |
+| D22 | Default minimum tag length | 8, and the user can choose 7 to 15. Replaces the 9 in D11. Paulo, 11-02 |
 | D21 | Is the program general? | Yes. It must work with any database, so nothing the user sees names an organism, a venom or a sample's numbers. Paulo, 11-02 |
 | D20 | Minimum tag length | The user can change it and see the error by length on their own project; 9 stays the default. Paulo, 11-02. Step B10 |
 | D19 | A joined header with different taxa | The target keeps all its taxa and the file is not refused. Paulo, 11-02. Step B11 |

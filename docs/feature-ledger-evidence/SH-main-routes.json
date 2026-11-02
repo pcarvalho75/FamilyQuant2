@@ -5,72 +5,72 @@
   "runs": [
     {
       "id": "native-shell-main",
-      "command": "D:\\FamilyQuant-wt\\shell\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --prove-shell-main D:/FamilyQuant-data/out-shell/N3/source D:/FamilyQuant-data/out-shell/D13-main-ready-20261102-055543/run2 \u00222026-11-02 05:56:05 -0800\u0022",
-      "executedAt": "2026-11-02 05:56:05 -0800",
-      "commit": "2e56506b25760d5b8b1776ac163913d59082d8da",
+      "command": "C:\\FamilyQuant-gate\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --prove-shell-main D:/FamilyQuant-data/out-shell/N3/source D:/FamilyQuant-data/out-refresh\\20261102-064527-FamilyQuant-gate\\shell-main \u00222026-11-02 06:46:18 -0800\u0022",
+      "executedAt": "2026-11-02 06:46:18 -0800",
+      "commit": "bdd77ae8411f95752d74c8779e4c7c223b577ab2",
       "artifacts": [
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\D13-main-ready-20261102-055543\\run2\\comparisons.log",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-064527-FamilyQuant-gate\\shell-main\\comparisons.log",
           "sha256": "AC7B5E8F0C82C45C516FEB571302ABFF19C6DDBCFA81B343A156A8F9611C2087"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\D13-main-ready-20261102-055543\\run2\\comparisons.json",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-064527-FamilyQuant-gate\\shell-main\\comparisons.json",
           "sha256": "E20D20E71533E9CBB53F3091849CF74B0DC0E9F5765CB7FB9D41C39EF4217773"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\D13-main-ready-20261102-055543\\run2\\native-cases-canonical.json",
-          "sha256": "AC27C3F4800390EA68710BA436BC7BD9E70E7633095E3380781A8046463775B0"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-064527-FamilyQuant-gate\\shell-main\\native-cases-canonical.json",
+          "sha256": "6861287E539216669A046B5DFEDC1B66A1A093D93CFBCBC7CB3A94C7AB44DFBF"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\D13-main-ready-20261102-055543\\run2\\message-comparisons.json",
-          "sha256": "C76B439ADDD4DF2C9F2B20412422BB903E73E3EB8426075A2906053F559A3822"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-064527-FamilyQuant-gate\\shell-main\\message-comparisons.json",
+          "sha256": "C3E394F36BC0BC824674D33D988DCBFC52DAA5D72427CC0A33C8F4303BDFF609"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\D13-main-ready-20261102-055543\\run2\\native/native-cases.json",
-          "sha256": "48554013372A722180D274D24D870186FC81E7257FC5ACD8CBCD61861BCD3ED4"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-064527-FamilyQuant-gate\\shell-main\\native/native-cases.json",
+          "sha256": "FA130C70884EA3117CF5E55DAA4823FFD40CF8A840CFD982FB39AA74EF0C63F7"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\D13-main-ready-20261102-055543\\run2\\executed\\LedgerMemberFactComparison.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-064527-FamilyQuant-gate\\shell-main\\executed\\LedgerMemberFactComparison.cs",
           "sha256": "1F3254D635B40D22576E9F40347DBEB503A5FF661EFC18E743EAC35B097FC14C"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\D13-main-ready-20261102-055543\\run2\\executed\\LedgerMemberFactComparison.Messages.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-064527-FamilyQuant-gate\\shell-main\\executed\\LedgerMemberFactComparison.Messages.cs",
           "sha256": "CDA3D535B9AAB2A3E5599793FE35F00EDB8B76154D562AC0D0BDF13C2EE26461"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\D13-main-ready-20261102-055543\\run2\\executed\\Program.ShellRouteNative.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-064527-FamilyQuant-gate\\shell-main\\executed\\Program.ShellRouteNative.cs",
           "sha256": "BC50392C3C96AB3F01F4E78D8FCCDEF9283597C50F137B4B00E3FB73F6EE3CAC"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\D13-main-ready-20261102-055543\\run2\\executed\\Program.ShellMainMessages.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-064527-FamilyQuant-gate\\shell-main\\executed\\Program.ShellMainMessages.cs",
           "sha256": "AA53EFB734139205AAC16D54EEF8211500524A6138EF98F8DAE6E918CDDD2A91"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\D13-main-ready-20261102-055543\\run2\\executed\\Program.ShellMainReceipts.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-064527-FamilyQuant-gate\\shell-main\\executed\\Program.ShellMainReceipts.cs",
           "sha256": "D5380DD626E0001BEF2BD19ACCDB5AEE93D4B45D97EB2E6EFB4B6701D0DC71DC"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\D13-main-ready-20261102-055543\\run2\\executed\\Program.ShellMessageFrames.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-064527-FamilyQuant-gate\\shell-main\\executed\\Program.ShellMessageFrames.cs",
           "sha256": "772A1FEC203E494854BA47FC55942088A872143F1558E172BABED9A3015DC8AA"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\D13-main-ready-20261102-055543\\run2\\executed\\Program.Commands.ShellRoutes.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-064527-FamilyQuant-gate\\shell-main\\executed\\Program.Commands.ShellRoutes.cs",
           "sha256": "7AE2F33E02B447E30AE57AB3A5913A2F748B3B997407BDD08A68047DE9AEEDDE"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\D13-main-ready-20261102-055543\\run2\\executed\\FamilyQuant.Tests.dll",
-          "sha256": "601425B370B2A6E94B54E9D488F91B3010C92DAB512700579ACB0B1BADF150B7"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-064527-FamilyQuant-gate\\shell-main\\executed\\FamilyQuant.Tests.dll",
+          "sha256": "BE4AFE7AFCCB5FCED49CA823DF90459D801AA6342A72B5ABD7F4DADB4CE0955B"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\D13-main-ready-20261102-055543\\run2\\executed\\FamilyQuant2.dll",
-          "sha256": "86B20C7BBD911A078FBA4D361CC2C85485D7FA446C645746A9B4D25C42511D7C"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-064527-FamilyQuant-gate\\shell-main\\executed\\FamilyQuant2.dll",
+          "sha256": "FF02C5678FFD09236674E5348A280FC32DEEC0E7168E14C04E2F9318F82735D0"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\D13-main-ready-20261102-055543\\run2\\executed\\FamilyQuant.Core.dll",
-          "sha256": "36E6A5244DA528E32057D739193E61A111DBCE98950545ACD32F81E2265029E2"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-064527-FamilyQuant-gate\\shell-main\\executed\\FamilyQuant.Core.dll",
+          "sha256": "57E9E7DAD845F3BC2101EC18B6C48ACA2340E9AF80B49DF7F63E2FA168BB4B02"
         }
       ],
-      "workingDirectory": "D:\\FamilyQuant-wt\\shell"
+      "workingDirectory": "C:\\FamilyQuant-gate"
     }
   ],
   "rows": [
@@ -285,7 +285,7 @@
         {
           "path": "FamilyQuant/QuantifyControl.xaml",
           "symbol": "fcf-success: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "C1E31170F782A4C172F05BFC5F750D3B2053F9AB409DE15C0F1ED0A216DB5DA1"
+          "sha256": "D38B0EB9B479D201C1C79FCF1C6957B480EC734C91FFC3B31235D94CF0A010F1"
         },
         {
           "path": "FamilyQuant/QuantifyControl.xaml.cs",
@@ -304,7 +304,7 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell message FQ15-003CB3619980: fcf-success at frozen line 482",
-          "artifact": "D:\\FamilyQuant-data\\out-shell\\D13-main-ready-20261102-055543\\run2\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-064527-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -523,7 +523,7 @@
         {
           "path": "FamilyQuant/QuantifyControl.xaml",
           "symbol": "open-project: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "C1E31170F782A4C172F05BFC5F750D3B2053F9AB409DE15C0F1ED0A216DB5DA1"
+          "sha256": "D38B0EB9B479D201C1C79FCF1C6957B480EC734C91FFC3B31235D94CF0A010F1"
         },
         {
           "path": "FamilyQuant/QuantifyControl.xaml.cs",
@@ -542,7 +542,7 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell message FQ15-015C529AFCCA: open-project at frozen line 278",
-          "artifact": "D:\\FamilyQuant-data\\out-shell\\D13-main-ready-20261102-055543\\run2\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-064527-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -777,7 +777,7 @@
         {
           "path": "FamilyQuant/QuantifyControl.xaml",
           "symbol": "open-project: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "C1E31170F782A4C172F05BFC5F750D3B2053F9AB409DE15C0F1ED0A216DB5DA1"
+          "sha256": "D38B0EB9B479D201C1C79FCF1C6957B480EC734C91FFC3B31235D94CF0A010F1"
         },
         {
           "path": "FamilyQuant/QuantifyControl.xaml.cs",
@@ -796,7 +796,7 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell message FQ15-098012E95BE9: open-project at frozen line 279",
-          "artifact": "D:\\FamilyQuant-data\\out-shell\\D13-main-ready-20261102-055543\\run2\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-064527-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -1055,7 +1055,7 @@
         {
           "path": "FamilyQuant/QuantifyControl.xaml",
           "symbol": "project-success: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "C1E31170F782A4C172F05BFC5F750D3B2053F9AB409DE15C0F1ED0A216DB5DA1"
+          "sha256": "D38B0EB9B479D201C1C79FCF1C6957B480EC734C91FFC3B31235D94CF0A010F1"
         },
         {
           "path": "FamilyQuant/QuantifyControl.xaml.cs",
@@ -1074,13 +1074,13 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell message FQ15-1680DF391053: project-success at frozen line 574",
-          "artifact": "D:\\FamilyQuant-data\\out-shell\\D13-main-ready-20261102-055543\\run2\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-064527-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
       "note": "Complete frozen message expression equals the executed native report; dynamic inner literals are not credited.",
       "kindReceiptId": null,
-      "compared": "FamilyQuant/MainWindow.xaml.cs:574 \u0022Next step: nothing. Carry on working, or open this file later to return to exactly \u0022; frozen handler FamilyQuant.MainWindow::private async void MenuItemSaveProject_Click ( object sender , RoutedEventArgs e ) SHA256=810F5EAA567670C00E38AA106ACC95AFC9BA922B7CE7642AFB1C77BF3214E1BB; native case project-success; before=The project was saved to\nD:\\FamilyQuant-data\\out-shell\\D13-main-ready-20261102-055543\\run2\\native\\saved.fqproj\n\nThe container holds the grouping, your User IDs and annotations, and 0 stored quant row(s). Reopening it restores both.\n\nNext step: nothing. Carry on working, or open this file later to return to exactly this project.; actual=The project was saved to\nD:\\FamilyQuant-data\\out-shell\\D13-main-ready-20261102-055543\\run2\\native\\saved.fqproj\n\nThe container holds the grouping, your User IDs and annotations, and 0 stored quant row(s). Reopening it restores both.\n\nNext step: nothing. Carry on working, or open this file later to return to exactly this project."
+      "compared": "FamilyQuant/MainWindow.xaml.cs:574 \u0022Next step: nothing. Carry on working, or open this file later to return to exactly \u0022; frozen handler FamilyQuant.MainWindow::private async void MenuItemSaveProject_Click ( object sender , RoutedEventArgs e ) SHA256=810F5EAA567670C00E38AA106ACC95AFC9BA922B7CE7642AFB1C77BF3214E1BB; native case project-success; before=The project was saved to\nD:\\FamilyQuant-data\\out-refresh\\20261102-064527-FamilyQuant-gate\\shell-main\\native\\saved.fqproj\n\nThe container holds the grouping, your User IDs and annotations, and 0 stored quant row(s). Reopening it restores both.\n\nNext step: nothing. Carry on working, or open this file later to return to exactly this project.; actual=The project was saved to\nD:\\FamilyQuant-data\\out-refresh\\20261102-064527-FamilyQuant-gate\\shell-main\\native\\saved.fqproj\n\nThe container holds the grouping, your User IDs and annotations, and 0 stored quant row(s). Reopening it restores both.\n\nNext step: nothing. Carry on working, or open this file later to return to exactly this project."
     },
     {
       "observationId": "FQ15-1BB85E29A291",
@@ -1309,7 +1309,7 @@
         {
           "path": "FamilyQuant/QuantifyControl.xaml",
           "symbol": "fcf-success: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "C1E31170F782A4C172F05BFC5F750D3B2053F9AB409DE15C0F1ED0A216DB5DA1"
+          "sha256": "D38B0EB9B479D201C1C79FCF1C6957B480EC734C91FFC3B31235D94CF0A010F1"
         },
         {
           "path": "FamilyQuant/QuantifyControl.xaml.cs",
@@ -1328,13 +1328,13 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell message FQ15-1DA6DACF8438: fcf-success at frozen line 478",
-          "artifact": "D:\\FamilyQuant-data\\out-shell\\D13-main-ready-20261102-055543\\run2\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-064527-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
       "note": "Complete frozen message expression equals the executed native report; dynamic inner literals are not credited.",
       "kindReceiptId": null,
-      "compared": "FamilyQuant/MainWindow.xaml.cs:478 \u0022quantitation: reopening it restores the families, and the percentages come back when \u0022; frozen handler FamilyQuant.MainWindow::private void MenuItemSaveFCF_Click ( object sender , RoutedEventArgs e ) SHA256=ECD06FF91E5D1BB955D661F429286ABA8D90A75467B5F581038DCD6FCABF18E9; native case fcf-success; before=The families were saved to\nD:\\FamilyQuant-data\\out-shell\\D13-main-ready-20261102-055543\\run2\\native\\export.fcf\n\nThe file holds the grouping, your User IDs and your annotations. It does not hold the quantitation: reopening it restores the families, and the percentages come back when you load a PatternLab project again.\n\nNext step: nothing. Carry on working, or open this file later to return to exactly this grouping.; actual=The families were saved to\nD:\\FamilyQuant-data\\out-shell\\D13-main-ready-20261102-055543\\run2\\native\\export.fcf\n\nThe file holds the grouping, your User IDs and your annotations. It does not hold the quantitation: reopening it restores the families, and the percentages come back when you load a PatternLab project again.\n\nNext step: nothing. Carry on working, or open this file later to return to exactly this grouping."
+      "compared": "FamilyQuant/MainWindow.xaml.cs:478 \u0022quantitation: reopening it restores the families, and the percentages come back when \u0022; frozen handler FamilyQuant.MainWindow::private void MenuItemSaveFCF_Click ( object sender , RoutedEventArgs e ) SHA256=ECD06FF91E5D1BB955D661F429286ABA8D90A75467B5F581038DCD6FCABF18E9; native case fcf-success; before=The families were saved to\nD:\\FamilyQuant-data\\out-refresh\\20261102-064527-FamilyQuant-gate\\shell-main\\native\\export.fcf\n\nThe file holds the grouping, your User IDs and your annotations. It does not hold the quantitation: reopening it restores the families, and the percentages come back when you load a PatternLab project again.\n\nNext step: nothing. Carry on working, or open this file later to return to exactly this grouping.; actual=The families were saved to\nD:\\FamilyQuant-data\\out-refresh\\20261102-064527-FamilyQuant-gate\\shell-main\\native\\export.fcf\n\nThe file holds the grouping, your User IDs and your annotations. It does not hold the quantitation: reopening it restores the families, and the percentages come back when you load a PatternLab project again.\n\nNext step: nothing. Carry on working, or open this file later to return to exactly this grouping."
     },
     {
       "observationId": "FQ15-1EC0FFA1496F",
@@ -1547,7 +1547,7 @@
         {
           "path": "FamilyQuant/QuantifyControl.xaml",
           "symbol": "project-failure: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "C1E31170F782A4C172F05BFC5F750D3B2053F9AB409DE15C0F1ED0A216DB5DA1"
+          "sha256": "D38B0EB9B479D201C1C79FCF1C6957B480EC734C91FFC3B31235D94CF0A010F1"
         },
         {
           "path": "FamilyQuant/QuantifyControl.xaml.cs",
@@ -1566,7 +1566,7 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell message FQ15-1EC0FFA1496F: project-failure at frozen line 581",
-          "artifact": "D:\\FamilyQuant-data\\out-shell\\D13-main-ready-20261102-055543\\run2\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-064527-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -1809,7 +1809,7 @@
         {
           "path": "FamilyQuant/QuantifyControl.xaml",
           "symbol": "open-failure: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "C1E31170F782A4C172F05BFC5F750D3B2053F9AB409DE15C0F1ED0A216DB5DA1"
+          "sha256": "D38B0EB9B479D201C1C79FCF1C6957B480EC734C91FFC3B31235D94CF0A010F1"
         },
         {
           "path": "FamilyQuant/QuantifyControl.xaml.cs",
@@ -1828,7 +1828,7 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell message FQ15-29290A1DEF52: open-failure at frozen line 341",
-          "artifact": "D:\\FamilyQuant-data\\out-shell\\D13-main-ready-20261102-055543\\run2\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-064527-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -2047,7 +2047,7 @@
         {
           "path": "FamilyQuant/QuantifyControl.xaml",
           "symbol": "fcf-success: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "C1E31170F782A4C172F05BFC5F750D3B2053F9AB409DE15C0F1ED0A216DB5DA1"
+          "sha256": "D38B0EB9B479D201C1C79FCF1C6957B480EC734C91FFC3B31235D94CF0A010F1"
         },
         {
           "path": "FamilyQuant/QuantifyControl.xaml.cs",
@@ -2066,13 +2066,13 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell message FQ15-29EB32BD76B6: fcf-success at frozen line 476",
-          "artifact": "D:\\FamilyQuant-data\\out-shell\\D13-main-ready-20261102-055543\\run2\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-064527-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
       "note": "Complete frozen message expression equals the executed native report; dynamic inner literals are not credited.",
       "kindReceiptId": null,
-      "compared": "FamilyQuant/MainWindow.xaml.cs:476 \u0022The families were saved to\\n\u0022; frozen handler FamilyQuant.MainWindow::private void MenuItemSaveFCF_Click ( object sender , RoutedEventArgs e ) SHA256=ECD06FF91E5D1BB955D661F429286ABA8D90A75467B5F581038DCD6FCABF18E9; native case fcf-success; before=The families were saved to\nD:\\FamilyQuant-data\\out-shell\\D13-main-ready-20261102-055543\\run2\\native\\export.fcf\n\nThe file holds the grouping, your User IDs and your annotations. It does not hold the quantitation: reopening it restores the families, and the percentages come back when you load a PatternLab project again.\n\nNext step: nothing. Carry on working, or open this file later to return to exactly this grouping.; actual=The families were saved to\nD:\\FamilyQuant-data\\out-shell\\D13-main-ready-20261102-055543\\run2\\native\\export.fcf\n\nThe file holds the grouping, your User IDs and your annotations. It does not hold the quantitation: reopening it restores the families, and the percentages come back when you load a PatternLab project again.\n\nNext step: nothing. Carry on working, or open this file later to return to exactly this grouping."
+      "compared": "FamilyQuant/MainWindow.xaml.cs:476 \u0022The families were saved to\\n\u0022; frozen handler FamilyQuant.MainWindow::private void MenuItemSaveFCF_Click ( object sender , RoutedEventArgs e ) SHA256=ECD06FF91E5D1BB955D661F429286ABA8D90A75467B5F581038DCD6FCABF18E9; native case fcf-success; before=The families were saved to\nD:\\FamilyQuant-data\\out-refresh\\20261102-064527-FamilyQuant-gate\\shell-main\\native\\export.fcf\n\nThe file holds the grouping, your User IDs and your annotations. It does not hold the quantitation: reopening it restores the families, and the percentages come back when you load a PatternLab project again.\n\nNext step: nothing. Carry on working, or open this file later to return to exactly this grouping.; actual=The families were saved to\nD:\\FamilyQuant-data\\out-refresh\\20261102-064527-FamilyQuant-gate\\shell-main\\native\\export.fcf\n\nThe file holds the grouping, your User IDs and your annotations. It does not hold the quantitation: reopening it restores the families, and the percentages come back when you load a PatternLab project again.\n\nNext step: nothing. Carry on working, or open this file later to return to exactly this grouping."
     },
     {
       "observationId": "FQ15-2CDDE5EC105D",
@@ -2301,7 +2301,7 @@
         {
           "path": "FamilyQuant/QuantifyControl.xaml",
           "symbol": "project-success: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "C1E31170F782A4C172F05BFC5F750D3B2053F9AB409DE15C0F1ED0A216DB5DA1"
+          "sha256": "D38B0EB9B479D201C1C79FCF1C6957B480EC734C91FFC3B31235D94CF0A010F1"
         },
         {
           "path": "FamilyQuant/QuantifyControl.xaml.cs",
@@ -2320,13 +2320,13 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell message FQ15-433A5AAC1117: project-success at frozen line 572",
-          "artifact": "D:\\FamilyQuant-data\\out-shell\\D13-main-ready-20261102-055543\\run2\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-064527-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
       "note": "Complete frozen message expression equals the executed native report; dynamic inner literals are not credited.",
       "kindReceiptId": null,
-      "compared": "FamilyQuant/MainWindow.xaml.cs:572 \u0022 stored quant row(s). Reopening it restores both.\\n\\n\u0022; frozen handler FamilyQuant.MainWindow::private async void MenuItemSaveProject_Click ( object sender , RoutedEventArgs e ) SHA256=810F5EAA567670C00E38AA106ACC95AFC9BA922B7CE7642AFB1C77BF3214E1BB; native case project-success; before=The project was saved to\nD:\\FamilyQuant-data\\out-shell\\D13-main-ready-20261102-055543\\run2\\native\\saved.fqproj\n\nThe container holds the grouping, your User IDs and annotations, and 0 stored quant row(s). Reopening it restores both.\n\nNext step: nothing. Carry on working, or open this file later to return to exactly this project.; actual=The project was saved to\nD:\\FamilyQuant-data\\out-shell\\D13-main-ready-20261102-055543\\run2\\native\\saved.fqproj\n\nThe container holds the grouping, your User IDs and annotations, and 0 stored quant row(s). Reopening it restores both.\n\nNext step: nothing. Carry on working, or open this file later to return to exactly this project."
+      "compared": "FamilyQuant/MainWindow.xaml.cs:572 \u0022 stored quant row(s). Reopening it restores both.\\n\\n\u0022; frozen handler FamilyQuant.MainWindow::private async void MenuItemSaveProject_Click ( object sender , RoutedEventArgs e ) SHA256=810F5EAA567670C00E38AA106ACC95AFC9BA922B7CE7642AFB1C77BF3214E1BB; native case project-success; before=The project was saved to\nD:\\FamilyQuant-data\\out-refresh\\20261102-064527-FamilyQuant-gate\\shell-main\\native\\saved.fqproj\n\nThe container holds the grouping, your User IDs and annotations, and 0 stored quant row(s). Reopening it restores both.\n\nNext step: nothing. Carry on working, or open this file later to return to exactly this project.; actual=The project was saved to\nD:\\FamilyQuant-data\\out-refresh\\20261102-064527-FamilyQuant-gate\\shell-main\\native\\saved.fqproj\n\nThe container holds the grouping, your User IDs and annotations, and 0 stored quant row(s). Reopening it restores both.\n\nNext step: nothing. Carry on working, or open this file later to return to exactly this project."
     },
     {
       "observationId": "FQ15-46C7EDAE6F70",
@@ -2555,7 +2555,7 @@
         {
           "path": "FamilyQuant/QuantifyControl.xaml",
           "symbol": "project-failure: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "C1E31170F782A4C172F05BFC5F750D3B2053F9AB409DE15C0F1ED0A216DB5DA1"
+          "sha256": "D38B0EB9B479D201C1C79FCF1C6957B480EC734C91FFC3B31235D94CF0A010F1"
         },
         {
           "path": "FamilyQuant/QuantifyControl.xaml.cs",
@@ -2574,7 +2574,7 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell message FQ15-490DB1A37514: project-failure at frozen line 584",
-          "artifact": "D:\\FamilyQuant-data\\out-shell\\D13-main-ready-20261102-055543\\run2\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-064527-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -2801,7 +2801,7 @@
         {
           "path": "FamilyQuant/QuantifyControl.xaml",
           "symbol": "fcf-success: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "C1E31170F782A4C172F05BFC5F750D3B2053F9AB409DE15C0F1ED0A216DB5DA1"
+          "sha256": "D38B0EB9B479D201C1C79FCF1C6957B480EC734C91FFC3B31235D94CF0A010F1"
         },
         {
           "path": "FamilyQuant/QuantifyControl.xaml.cs",
@@ -2820,13 +2820,13 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell message FQ15-4EF7F04BBFA8: fcf-success at frozen line 480",
-          "artifact": "D:\\FamilyQuant-data\\out-shell\\D13-main-ready-20261102-055543\\run2\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-064527-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
       "note": "Complete frozen message expression equals the executed native report; dynamic inner literals are not credited.",
       "kindReceiptId": null,
-      "compared": "FamilyQuant/MainWindow.xaml.cs:480 \u0022Next step: nothing. Carry on working, or open this file later to return to exactly \u0022; frozen handler FamilyQuant.MainWindow::private void MenuItemSaveFCF_Click ( object sender , RoutedEventArgs e ) SHA256=ECD06FF91E5D1BB955D661F429286ABA8D90A75467B5F581038DCD6FCABF18E9; native case fcf-success; before=The families were saved to\nD:\\FamilyQuant-data\\out-shell\\D13-main-ready-20261102-055543\\run2\\native\\export.fcf\n\nThe file holds the grouping, your User IDs and your annotations. It does not hold the quantitation: reopening it restores the families, and the percentages come back when you load a PatternLab project again.\n\nNext step: nothing. Carry on working, or open this file later to return to exactly this grouping.; actual=The families were saved to\nD:\\FamilyQuant-data\\out-shell\\D13-main-ready-20261102-055543\\run2\\native\\export.fcf\n\nThe file holds the grouping, your User IDs and your annotations. It does not hold the quantitation: reopening it restores the families, and the percentages come back when you load a PatternLab project again.\n\nNext step: nothing. Carry on working, or open this file later to return to exactly this grouping."
+      "compared": "FamilyQuant/MainWindow.xaml.cs:480 \u0022Next step: nothing. Carry on working, or open this file later to return to exactly \u0022; frozen handler FamilyQuant.MainWindow::private void MenuItemSaveFCF_Click ( object sender , RoutedEventArgs e ) SHA256=ECD06FF91E5D1BB955D661F429286ABA8D90A75467B5F581038DCD6FCABF18E9; native case fcf-success; before=The families were saved to\nD:\\FamilyQuant-data\\out-refresh\\20261102-064527-FamilyQuant-gate\\shell-main\\native\\export.fcf\n\nThe file holds the grouping, your User IDs and your annotations. It does not hold the quantitation: reopening it restores the families, and the percentages come back when you load a PatternLab project again.\n\nNext step: nothing. Carry on working, or open this file later to return to exactly this grouping.; actual=The families were saved to\nD:\\FamilyQuant-data\\out-refresh\\20261102-064527-FamilyQuant-gate\\shell-main\\native\\export.fcf\n\nThe file holds the grouping, your User IDs and your annotations. It does not hold the quantitation: reopening it restores the families, and the percentages come back when you load a PatternLab project again.\n\nNext step: nothing. Carry on working, or open this file later to return to exactly this grouping."
     },
     {
       "observationId": "FQ15-5165C52E6F76",
@@ -3039,7 +3039,7 @@
         {
           "path": "FamilyQuant/QuantifyControl.xaml",
           "symbol": "fcf-success: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "C1E31170F782A4C172F05BFC5F750D3B2053F9AB409DE15C0F1ED0A216DB5DA1"
+          "sha256": "D38B0EB9B479D201C1C79FCF1C6957B480EC734C91FFC3B31235D94CF0A010F1"
         },
         {
           "path": "FamilyQuant/QuantifyControl.xaml.cs",
@@ -3058,13 +3058,13 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell message FQ15-5165C52E6F76: fcf-success at frozen line 481",
-          "artifact": "D:\\FamilyQuant-data\\out-shell\\D13-main-ready-20261102-055543\\run2\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-064527-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
       "note": "Complete frozen message expression equals the executed native report; dynamic inner literals are not credited.",
       "kindReceiptId": null,
-      "compared": "FamilyQuant/MainWindow.xaml.cs:481 \u0022this grouping.\u0022; frozen handler FamilyQuant.MainWindow::private void MenuItemSaveFCF_Click ( object sender , RoutedEventArgs e ) SHA256=ECD06FF91E5D1BB955D661F429286ABA8D90A75467B5F581038DCD6FCABF18E9; native case fcf-success; before=The families were saved to\nD:\\FamilyQuant-data\\out-shell\\D13-main-ready-20261102-055543\\run2\\native\\export.fcf\n\nThe file holds the grouping, your User IDs and your annotations. It does not hold the quantitation: reopening it restores the families, and the percentages come back when you load a PatternLab project again.\n\nNext step: nothing. Carry on working, or open this file later to return to exactly this grouping.; actual=The families were saved to\nD:\\FamilyQuant-data\\out-shell\\D13-main-ready-20261102-055543\\run2\\native\\export.fcf\n\nThe file holds the grouping, your User IDs and your annotations. It does not hold the quantitation: reopening it restores the families, and the percentages come back when you load a PatternLab project again.\n\nNext step: nothing. Carry on working, or open this file later to return to exactly this grouping."
+      "compared": "FamilyQuant/MainWindow.xaml.cs:481 \u0022this grouping.\u0022; frozen handler FamilyQuant.MainWindow::private void MenuItemSaveFCF_Click ( object sender , RoutedEventArgs e ) SHA256=ECD06FF91E5D1BB955D661F429286ABA8D90A75467B5F581038DCD6FCABF18E9; native case fcf-success; before=The families were saved to\nD:\\FamilyQuant-data\\out-refresh\\20261102-064527-FamilyQuant-gate\\shell-main\\native\\export.fcf\n\nThe file holds the grouping, your User IDs and your annotations. It does not hold the quantitation: reopening it restores the families, and the percentages come back when you load a PatternLab project again.\n\nNext step: nothing. Carry on working, or open this file later to return to exactly this grouping.; actual=The families were saved to\nD:\\FamilyQuant-data\\out-refresh\\20261102-064527-FamilyQuant-gate\\shell-main\\native\\export.fcf\n\nThe file holds the grouping, your User IDs and your annotations. It does not hold the quantitation: reopening it restores the families, and the percentages come back when you load a PatternLab project again.\n\nNext step: nothing. Carry on working, or open this file later to return to exactly this grouping."
     },
     {
       "observationId": "FQ15-51D93C9A42D7",
@@ -3293,7 +3293,7 @@
         {
           "path": "FamilyQuant/QuantifyControl.xaml",
           "symbol": "project-success: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "C1E31170F782A4C172F05BFC5F750D3B2053F9AB409DE15C0F1ED0A216DB5DA1"
+          "sha256": "D38B0EB9B479D201C1C79FCF1C6957B480EC734C91FFC3B31235D94CF0A010F1"
         },
         {
           "path": "FamilyQuant/QuantifyControl.xaml.cs",
@@ -3312,13 +3312,13 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell message FQ15-5A8060C351E2: project-success at frozen line 575",
-          "artifact": "D:\\FamilyQuant-data\\out-shell\\D13-main-ready-20261102-055543\\run2\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-064527-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
       "note": "Complete frozen message expression equals the executed native report; dynamic inner literals are not credited.",
       "kindReceiptId": null,
-      "compared": "FamilyQuant/MainWindow.xaml.cs:575 \u0022this project.\u0022; frozen handler FamilyQuant.MainWindow::private async void MenuItemSaveProject_Click ( object sender , RoutedEventArgs e ) SHA256=810F5EAA567670C00E38AA106ACC95AFC9BA922B7CE7642AFB1C77BF3214E1BB; native case project-success; before=The project was saved to\nD:\\FamilyQuant-data\\out-shell\\D13-main-ready-20261102-055543\\run2\\native\\saved.fqproj\n\nThe container holds the grouping, your User IDs and annotations, and 0 stored quant row(s). Reopening it restores both.\n\nNext step: nothing. Carry on working, or open this file later to return to exactly this project.; actual=The project was saved to\nD:\\FamilyQuant-data\\out-shell\\D13-main-ready-20261102-055543\\run2\\native\\saved.fqproj\n\nThe container holds the grouping, your User IDs and annotations, and 0 stored quant row(s). Reopening it restores both.\n\nNext step: nothing. Carry on working, or open this file later to return to exactly this project."
+      "compared": "FamilyQuant/MainWindow.xaml.cs:575 \u0022this project.\u0022; frozen handler FamilyQuant.MainWindow::private async void MenuItemSaveProject_Click ( object sender , RoutedEventArgs e ) SHA256=810F5EAA567670C00E38AA106ACC95AFC9BA922B7CE7642AFB1C77BF3214E1BB; native case project-success; before=The project was saved to\nD:\\FamilyQuant-data\\out-refresh\\20261102-064527-FamilyQuant-gate\\shell-main\\native\\saved.fqproj\n\nThe container holds the grouping, your User IDs and annotations, and 0 stored quant row(s). Reopening it restores both.\n\nNext step: nothing. Carry on working, or open this file later to return to exactly this project.; actual=The project was saved to\nD:\\FamilyQuant-data\\out-refresh\\20261102-064527-FamilyQuant-gate\\shell-main\\native\\saved.fqproj\n\nThe container holds the grouping, your User IDs and annotations, and 0 stored quant row(s). Reopening it restores both.\n\nNext step: nothing. Carry on working, or open this file later to return to exactly this project."
     },
     {
       "observationId": "FQ15-5E69DF58FFFE",
@@ -3531,7 +3531,7 @@
         {
           "path": "FamilyQuant/QuantifyControl.xaml",
           "symbol": "project-success: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "C1E31170F782A4C172F05BFC5F750D3B2053F9AB409DE15C0F1ED0A216DB5DA1"
+          "sha256": "D38B0EB9B479D201C1C79FCF1C6957B480EC734C91FFC3B31235D94CF0A010F1"
         },
         {
           "path": "FamilyQuant/QuantifyControl.xaml.cs",
@@ -3550,13 +3550,13 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell message FQ15-5E69DF58FFFE: project-success at frozen line 570",
-          "artifact": "D:\\FamilyQuant-data\\out-shell\\D13-main-ready-20261102-055543\\run2\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-064527-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
       "note": "Complete frozen message expression equals the executed native report; dynamic inner literals are not credited.",
       "kindReceiptId": null,
-      "compared": "FamilyQuant/MainWindow.xaml.cs:570 \u0022The container holds the grouping, your User IDs and annotations, and \u0022; frozen handler FamilyQuant.MainWindow::private async void MenuItemSaveProject_Click ( object sender , RoutedEventArgs e ) SHA256=810F5EAA567670C00E38AA106ACC95AFC9BA922B7CE7642AFB1C77BF3214E1BB; native case project-success; before=The project was saved to\nD:\\FamilyQuant-data\\out-shell\\D13-main-ready-20261102-055543\\run2\\native\\saved.fqproj\n\nThe container holds the grouping, your User IDs and annotations, and 0 stored quant row(s). Reopening it restores both.\n\nNext step: nothing. Carry on working, or open this file later to return to exactly this project.; actual=The project was saved to\nD:\\FamilyQuant-data\\out-shell\\D13-main-ready-20261102-055543\\run2\\native\\saved.fqproj\n\nThe container holds the grouping, your User IDs and annotations, and 0 stored quant row(s). Reopening it restores both.\n\nNext step: nothing. Carry on working, or open this file later to return to exactly this project."
+      "compared": "FamilyQuant/MainWindow.xaml.cs:570 \u0022The container holds the grouping, your User IDs and annotations, and \u0022; frozen handler FamilyQuant.MainWindow::private async void MenuItemSaveProject_Click ( object sender , RoutedEventArgs e ) SHA256=810F5EAA567670C00E38AA106ACC95AFC9BA922B7CE7642AFB1C77BF3214E1BB; native case project-success; before=The project was saved to\nD:\\FamilyQuant-data\\out-refresh\\20261102-064527-FamilyQuant-gate\\shell-main\\native\\saved.fqproj\n\nThe container holds the grouping, your User IDs and annotations, and 0 stored quant row(s). Reopening it restores both.\n\nNext step: nothing. Carry on working, or open this file later to return to exactly this project.; actual=The project was saved to\nD:\\FamilyQuant-data\\out-refresh\\20261102-064527-FamilyQuant-gate\\shell-main\\native\\saved.fqproj\n\nThe container holds the grouping, your User IDs and annotations, and 0 stored quant row(s). Reopening it restores both.\n\nNext step: nothing. Carry on working, or open this file later to return to exactly this project."
     },
     {
       "observationId": "FQ15-63177F1FB3F4",
@@ -3769,7 +3769,7 @@
         {
           "path": "FamilyQuant/QuantifyControl.xaml",
           "symbol": "fcf-success: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "C1E31170F782A4C172F05BFC5F750D3B2053F9AB409DE15C0F1ED0A216DB5DA1"
+          "sha256": "D38B0EB9B479D201C1C79FCF1C6957B480EC734C91FFC3B31235D94CF0A010F1"
         },
         {
           "path": "FamilyQuant/QuantifyControl.xaml.cs",
@@ -3788,13 +3788,13 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell message FQ15-63177F1FB3F4: fcf-success at frozen line 479",
-          "artifact": "D:\\FamilyQuant-data\\out-shell\\D13-main-ready-20261102-055543\\run2\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-064527-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
       "note": "Complete frozen message expression equals the executed native report; dynamic inner literals are not credited.",
       "kindReceiptId": null,
-      "compared": "FamilyQuant/MainWindow.xaml.cs:479 \u0022you load a PatternLab project again.\\n\\n\u0022; frozen handler FamilyQuant.MainWindow::private void MenuItemSaveFCF_Click ( object sender , RoutedEventArgs e ) SHA256=ECD06FF91E5D1BB955D661F429286ABA8D90A75467B5F581038DCD6FCABF18E9; native case fcf-success; before=The families were saved to\nD:\\FamilyQuant-data\\out-shell\\D13-main-ready-20261102-055543\\run2\\native\\export.fcf\n\nThe file holds the grouping, your User IDs and your annotations. It does not hold the quantitation: reopening it restores the families, and the percentages come back when you load a PatternLab project again.\n\nNext step: nothing. Carry on working, or open this file later to return to exactly this grouping.; actual=The families were saved to\nD:\\FamilyQuant-data\\out-shell\\D13-main-ready-20261102-055543\\run2\\native\\export.fcf\n\nThe file holds the grouping, your User IDs and your annotations. It does not hold the quantitation: reopening it restores the families, and the percentages come back when you load a PatternLab project again.\n\nNext step: nothing. Carry on working, or open this file later to return to exactly this grouping."
+      "compared": "FamilyQuant/MainWindow.xaml.cs:479 \u0022you load a PatternLab project again.\\n\\n\u0022; frozen handler FamilyQuant.MainWindow::private void MenuItemSaveFCF_Click ( object sender , RoutedEventArgs e ) SHA256=ECD06FF91E5D1BB955D661F429286ABA8D90A75467B5F581038DCD6FCABF18E9; native case fcf-success; before=The families were saved to\nD:\\FamilyQuant-data\\out-refresh\\20261102-064527-FamilyQuant-gate\\shell-main\\native\\export.fcf\n\nThe file holds the grouping, your User IDs and your annotations. It does not hold the quantitation: reopening it restores the families, and the percentages come back when you load a PatternLab project again.\n\nNext step: nothing. Carry on working, or open this file later to return to exactly this grouping.; actual=The families were saved to\nD:\\FamilyQuant-data\\out-refresh\\20261102-064527-FamilyQuant-gate\\shell-main\\native\\export.fcf\n\nThe file holds the grouping, your User IDs and your annotations. It does not hold the quantitation: reopening it restores the families, and the percentages come back when you load a PatternLab project again.\n\nNext step: nothing. Carry on working, or open this file later to return to exactly this grouping."
     },
     {
       "observationId": "FQ15-6379736D2F52",
@@ -4007,7 +4007,7 @@
         {
           "path": "FamilyQuant/QuantifyControl.xaml",
           "symbol": "sepro-cancel: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "C1E31170F782A4C172F05BFC5F750D3B2053F9AB409DE15C0F1ED0A216DB5DA1"
+          "sha256": "D38B0EB9B479D201C1C79FCF1C6957B480EC734C91FFC3B31235D94CF0A010F1"
         },
         {
           "path": "FamilyQuant/QuantifyControl.xaml.cs",
@@ -4026,7 +4026,7 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell message FQ15-6379736D2F52: sepro-cancel at frozen line 773",
-          "artifact": "D:\\FamilyQuant-data\\out-shell\\D13-main-ready-20261102-055543\\run2\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-064527-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -4253,7 +4253,7 @@
         {
           "path": "FamilyQuant/QuantifyControl.xaml",
           "symbol": "project-failure: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "C1E31170F782A4C172F05BFC5F750D3B2053F9AB409DE15C0F1ED0A216DB5DA1"
+          "sha256": "D38B0EB9B479D201C1C79FCF1C6957B480EC734C91FFC3B31235D94CF0A010F1"
         },
         {
           "path": "FamilyQuant/QuantifyControl.xaml.cs",
@@ -4272,7 +4272,7 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell message FQ15-69AA92E0C13D: project-failure at frozen line 583",
-          "artifact": "D:\\FamilyQuant-data\\out-shell\\D13-main-ready-20261102-055543\\run2\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-064527-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -4499,7 +4499,7 @@
         {
           "path": "FamilyQuant/QuantifyControl.xaml",
           "symbol": "project-success: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "C1E31170F782A4C172F05BFC5F750D3B2053F9AB409DE15C0F1ED0A216DB5DA1"
+          "sha256": "D38B0EB9B479D201C1C79FCF1C6957B480EC734C91FFC3B31235D94CF0A010F1"
         },
         {
           "path": "FamilyQuant/QuantifyControl.xaml.cs",
@@ -4518,7 +4518,7 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell message FQ15-71A448372328: project-success at frozen line 519",
-          "artifact": "D:\\FamilyQuant-data\\out-shell\\D13-main-ready-20261102-055543\\run2\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-064527-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -4737,7 +4737,7 @@
         {
           "path": "FamilyQuant/QuantifyControl.xaml",
           "symbol": "project-failure: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "C1E31170F782A4C172F05BFC5F750D3B2053F9AB409DE15C0F1ED0A216DB5DA1"
+          "sha256": "D38B0EB9B479D201C1C79FCF1C6957B480EC734C91FFC3B31235D94CF0A010F1"
         },
         {
           "path": "FamilyQuant/QuantifyControl.xaml.cs",
@@ -4756,7 +4756,7 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell message FQ15-7206BF98F2B5: project-failure at frozen line 585",
-          "artifact": "D:\\FamilyQuant-data\\out-shell\\D13-main-ready-20261102-055543\\run2\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-064527-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -4983,7 +4983,7 @@
         {
           "path": "FamilyQuant/QuantifyControl.xaml",
           "symbol": "fcf-failure: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "C1E31170F782A4C172F05BFC5F750D3B2053F9AB409DE15C0F1ED0A216DB5DA1"
+          "sha256": "D38B0EB9B479D201C1C79FCF1C6957B480EC734C91FFC3B31235D94CF0A010F1"
         },
         {
           "path": "FamilyQuant/QuantifyControl.xaml.cs",
@@ -5002,7 +5002,7 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell message FQ15-749394F72DDE: fcf-failure at frozen line 488",
-          "artifact": "D:\\FamilyQuant-data\\out-shell\\D13-main-ready-20261102-055543\\run2\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-064527-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -5253,7 +5253,7 @@
         {
           "path": "FamilyQuant/QuantifyControl.xaml",
           "symbol": "fcf-failure: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "C1E31170F782A4C172F05BFC5F750D3B2053F9AB409DE15C0F1ED0A216DB5DA1"
+          "sha256": "D38B0EB9B479D201C1C79FCF1C6957B480EC734C91FFC3B31235D94CF0A010F1"
         },
         {
           "path": "FamilyQuant/QuantifyControl.xaml.cs",
@@ -5272,7 +5272,7 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell message FQ15-822AB951DC48: fcf-failure at frozen line 490",
-          "artifact": "D:\\FamilyQuant-data\\out-shell\\D13-main-ready-20261102-055543\\run2\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-064527-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -5491,7 +5491,7 @@
         {
           "path": "FamilyQuant/QuantifyControl.xaml",
           "symbol": "fcf-failure: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "C1E31170F782A4C172F05BFC5F750D3B2053F9AB409DE15C0F1ED0A216DB5DA1"
+          "sha256": "D38B0EB9B479D201C1C79FCF1C6957B480EC734C91FFC3B31235D94CF0A010F1"
         },
         {
           "path": "FamilyQuant/QuantifyControl.xaml.cs",
@@ -5510,7 +5510,7 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell message FQ15-823926A0CCF5: fcf-failure at frozen line 487",
-          "artifact": "D:\\FamilyQuant-data\\out-shell\\D13-main-ready-20261102-055543\\run2\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-064527-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -5729,7 +5729,7 @@
         {
           "path": "FamilyQuant/QuantifyControl.xaml",
           "symbol": "open-project: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "C1E31170F782A4C172F05BFC5F750D3B2053F9AB409DE15C0F1ED0A216DB5DA1"
+          "sha256": "D38B0EB9B479D201C1C79FCF1C6957B480EC734C91FFC3B31235D94CF0A010F1"
         },
         {
           "path": "FamilyQuant/QuantifyControl.xaml.cs",
@@ -5748,7 +5748,7 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell message FQ15-84741041780F: open-project at frozen line 277",
-          "artifact": "D:\\FamilyQuant-data\\out-shell\\D13-main-ready-20261102-055543\\run2\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-064527-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -5983,7 +5983,7 @@
         {
           "path": "FamilyQuant/QuantifyControl.xaml",
           "symbol": "fcf-failure: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "C1E31170F782A4C172F05BFC5F750D3B2053F9AB409DE15C0F1ED0A216DB5DA1"
+          "sha256": "D38B0EB9B479D201C1C79FCF1C6957B480EC734C91FFC3B31235D94CF0A010F1"
         },
         {
           "path": "FamilyQuant/QuantifyControl.xaml.cs",
@@ -6002,7 +6002,7 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell message FQ15-891E975B730E: fcf-failure at frozen line 465",
-          "artifact": "D:\\FamilyQuant-data\\out-shell\\D13-main-ready-20261102-055543\\run2\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-064527-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -6221,7 +6221,7 @@
         {
           "path": "FamilyQuant/QuantifyControl.xaml",
           "symbol": "fcf-failure: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "C1E31170F782A4C172F05BFC5F750D3B2053F9AB409DE15C0F1ED0A216DB5DA1"
+          "sha256": "D38B0EB9B479D201C1C79FCF1C6957B480EC734C91FFC3B31235D94CF0A010F1"
         },
         {
           "path": "FamilyQuant/QuantifyControl.xaml.cs",
@@ -6240,7 +6240,7 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell message FQ15-896FD56FF1F3: fcf-failure at frozen line 466",
-          "artifact": "D:\\FamilyQuant-data\\out-shell\\D13-main-ready-20261102-055543\\run2\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-064527-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -6459,7 +6459,7 @@
         {
           "path": "FamilyQuant/QuantifyControl.xaml",
           "symbol": "fcf-success: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "C1E31170F782A4C172F05BFC5F750D3B2053F9AB409DE15C0F1ED0A216DB5DA1"
+          "sha256": "D38B0EB9B479D201C1C79FCF1C6957B480EC734C91FFC3B31235D94CF0A010F1"
         },
         {
           "path": "FamilyQuant/QuantifyControl.xaml.cs",
@@ -6478,13 +6478,13 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell message FQ15-8D6A1F9ED763: fcf-success at frozen line 476",
-          "artifact": "D:\\FamilyQuant-data\\out-shell\\D13-main-ready-20261102-055543\\run2\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-064527-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
       "note": "Complete frozen message expression equals the executed native report; dynamic inner literals are not credited.",
       "kindReceiptId": null,
-      "compared": "FamilyQuant/MainWindow.xaml.cs:476 \u0022\\n\\n\u0022; frozen handler FamilyQuant.MainWindow::private void MenuItemSaveFCF_Click ( object sender , RoutedEventArgs e ) SHA256=ECD06FF91E5D1BB955D661F429286ABA8D90A75467B5F581038DCD6FCABF18E9; native case fcf-success; before=The families were saved to\nD:\\FamilyQuant-data\\out-shell\\D13-main-ready-20261102-055543\\run2\\native\\export.fcf\n\nThe file holds the grouping, your User IDs and your annotations. It does not hold the quantitation: reopening it restores the families, and the percentages come back when you load a PatternLab project again.\n\nNext step: nothing. Carry on working, or open this file later to return to exactly this grouping.; actual=The families were saved to\nD:\\FamilyQuant-data\\out-shell\\D13-main-ready-20261102-055543\\run2\\native\\export.fcf\n\nThe file holds the grouping, your User IDs and your annotations. It does not hold the quantitation: reopening it restores the families, and the percentages come back when you load a PatternLab project again.\n\nNext step: nothing. Carry on working, or open this file later to return to exactly this grouping."
+      "compared": "FamilyQuant/MainWindow.xaml.cs:476 \u0022\\n\\n\u0022; frozen handler FamilyQuant.MainWindow::private void MenuItemSaveFCF_Click ( object sender , RoutedEventArgs e ) SHA256=ECD06FF91E5D1BB955D661F429286ABA8D90A75467B5F581038DCD6FCABF18E9; native case fcf-success; before=The families were saved to\nD:\\FamilyQuant-data\\out-refresh\\20261102-064527-FamilyQuant-gate\\shell-main\\native\\export.fcf\n\nThe file holds the grouping, your User IDs and your annotations. It does not hold the quantitation: reopening it restores the families, and the percentages come back when you load a PatternLab project again.\n\nNext step: nothing. Carry on working, or open this file later to return to exactly this grouping.; actual=The families were saved to\nD:\\FamilyQuant-data\\out-refresh\\20261102-064527-FamilyQuant-gate\\shell-main\\native\\export.fcf\n\nThe file holds the grouping, your User IDs and your annotations. It does not hold the quantitation: reopening it restores the families, and the percentages come back when you load a PatternLab project again.\n\nNext step: nothing. Carry on working, or open this file later to return to exactly this grouping."
     },
     {
       "observationId": "FQ15-8E7C9D4B893F",
@@ -6705,7 +6705,7 @@
         {
           "path": "FamilyQuant/QuantifyControl.xaml",
           "symbol": "project-success: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "C1E31170F782A4C172F05BFC5F750D3B2053F9AB409DE15C0F1ED0A216DB5DA1"
+          "sha256": "D38B0EB9B479D201C1C79FCF1C6957B480EC734C91FFC3B31235D94CF0A010F1"
         },
         {
           "path": "FamilyQuant/QuantifyControl.xaml.cs",
@@ -6724,7 +6724,7 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell message FQ15-9085ACC92A5A: project-success at frozen line 517",
-          "artifact": "D:\\FamilyQuant-data\\out-shell\\D13-main-ready-20261102-055543\\run2\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-064527-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -6943,7 +6943,7 @@
         {
           "path": "FamilyQuant/QuantifyControl.xaml",
           "symbol": "fcf-success: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "C1E31170F782A4C172F05BFC5F750D3B2053F9AB409DE15C0F1ED0A216DB5DA1"
+          "sha256": "D38B0EB9B479D201C1C79FCF1C6957B480EC734C91FFC3B31235D94CF0A010F1"
         },
         {
           "path": "FamilyQuant/QuantifyControl.xaml.cs",
@@ -6962,13 +6962,13 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell message FQ15-91DF62AD5796: fcf-success at frozen line 477",
-          "artifact": "D:\\FamilyQuant-data\\out-shell\\D13-main-ready-20261102-055543\\run2\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-064527-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
       "note": "Complete frozen message expression equals the executed native report; dynamic inner literals are not credited.",
       "kindReceiptId": null,
-      "compared": "FamilyQuant/MainWindow.xaml.cs:477 \u0022The file holds the grouping, your User IDs and your annotations. It does not hold the \u0022; frozen handler FamilyQuant.MainWindow::private void MenuItemSaveFCF_Click ( object sender , RoutedEventArgs e ) SHA256=ECD06FF91E5D1BB955D661F429286ABA8D90A75467B5F581038DCD6FCABF18E9; native case fcf-success; before=The families were saved to\nD:\\FamilyQuant-data\\out-shell\\D13-main-ready-20261102-055543\\run2\\native\\export.fcf\n\nThe file holds the grouping, your User IDs and your annotations. It does not hold the quantitation: reopening it restores the families, and the percentages come back when you load a PatternLab project again.\n\nNext step: nothing. Carry on working, or open this file later to return to exactly this grouping.; actual=The families were saved to\nD:\\FamilyQuant-data\\out-shell\\D13-main-ready-20261102-055543\\run2\\native\\export.fcf\n\nThe file holds the grouping, your User IDs and your annotations. It does not hold the quantitation: reopening it restores the families, and the percentages come back when you load a PatternLab project again.\n\nNext step: nothing. Carry on working, or open this file later to return to exactly this grouping."
+      "compared": "FamilyQuant/MainWindow.xaml.cs:477 \u0022The file holds the grouping, your User IDs and your annotations. It does not hold the \u0022; frozen handler FamilyQuant.MainWindow::private void MenuItemSaveFCF_Click ( object sender , RoutedEventArgs e ) SHA256=ECD06FF91E5D1BB955D661F429286ABA8D90A75467B5F581038DCD6FCABF18E9; native case fcf-success; before=The families were saved to\nD:\\FamilyQuant-data\\out-refresh\\20261102-064527-FamilyQuant-gate\\shell-main\\native\\export.fcf\n\nThe file holds the grouping, your User IDs and your annotations. It does not hold the quantitation: reopening it restores the families, and the percentages come back when you load a PatternLab project again.\n\nNext step: nothing. Carry on working, or open this file later to return to exactly this grouping.; actual=The families were saved to\nD:\\FamilyQuant-data\\out-refresh\\20261102-064527-FamilyQuant-gate\\shell-main\\native\\export.fcf\n\nThe file holds the grouping, your User IDs and your annotations. It does not hold the quantitation: reopening it restores the families, and the percentages come back when you load a PatternLab project again.\n\nNext step: nothing. Carry on working, or open this file later to return to exactly this grouping."
     },
     {
       "observationId": "FQ15-92991B8F6A93",
@@ -7181,7 +7181,7 @@
         {
           "path": "FamilyQuant/QuantifyControl.xaml",
           "symbol": "fcf-failure: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "C1E31170F782A4C172F05BFC5F750D3B2053F9AB409DE15C0F1ED0A216DB5DA1"
+          "sha256": "D38B0EB9B479D201C1C79FCF1C6957B480EC734C91FFC3B31235D94CF0A010F1"
         },
         {
           "path": "FamilyQuant/QuantifyControl.xaml.cs",
@@ -7200,7 +7200,7 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell message FQ15-92991B8F6A93: fcf-failure at frozen line 488",
-          "artifact": "D:\\FamilyQuant-data\\out-shell\\D13-main-ready-20261102-055543\\run2\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-064527-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -7467,7 +7467,7 @@
         {
           "path": "FamilyQuant/QuantifyControl.xaml",
           "symbol": "fcf-failure: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "C1E31170F782A4C172F05BFC5F750D3B2053F9AB409DE15C0F1ED0A216DB5DA1"
+          "sha256": "D38B0EB9B479D201C1C79FCF1C6957B480EC734C91FFC3B31235D94CF0A010F1"
         },
         {
           "path": "FamilyQuant/QuantifyControl.xaml.cs",
@@ -7486,7 +7486,7 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell message FQ15-9F5CB9B18BB0: fcf-failure at frozen line 491",
-          "artifact": "D:\\FamilyQuant-data\\out-shell\\D13-main-ready-20261102-055543\\run2\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-064527-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -7793,7 +7793,7 @@
         {
           "path": "FamilyQuant/QuantifyControl.xaml",
           "symbol": "project-success: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "C1E31170F782A4C172F05BFC5F750D3B2053F9AB409DE15C0F1ED0A216DB5DA1"
+          "sha256": "D38B0EB9B479D201C1C79FCF1C6957B480EC734C91FFC3B31235D94CF0A010F1"
         },
         {
           "path": "FamilyQuant/QuantifyControl.xaml.cs",
@@ -7812,13 +7812,13 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell message FQ15-BD8FCDF44947: project-success at frozen line 569",
-          "artifact": "D:\\FamilyQuant-data\\out-shell\\D13-main-ready-20261102-055543\\run2\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-064527-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
       "note": "Complete frozen message expression equals the executed native report; dynamic inner literals are not credited.",
       "kindReceiptId": null,
-      "compared": "FamilyQuant/MainWindow.xaml.cs:569 \u0022The project was saved to\\n\u0022; frozen handler FamilyQuant.MainWindow::private async void MenuItemSaveProject_Click ( object sender , RoutedEventArgs e ) SHA256=810F5EAA567670C00E38AA106ACC95AFC9BA922B7CE7642AFB1C77BF3214E1BB; native case project-success; before=The project was saved to\nD:\\FamilyQuant-data\\out-shell\\D13-main-ready-20261102-055543\\run2\\native\\saved.fqproj\n\nThe container holds the grouping, your User IDs and annotations, and 0 stored quant row(s). Reopening it restores both.\n\nNext step: nothing. Carry on working, or open this file later to return to exactly this project.; actual=The project was saved to\nD:\\FamilyQuant-data\\out-shell\\D13-main-ready-20261102-055543\\run2\\native\\saved.fqproj\n\nThe container holds the grouping, your User IDs and annotations, and 0 stored quant row(s). Reopening it restores both.\n\nNext step: nothing. Carry on working, or open this file later to return to exactly this project."
+      "compared": "FamilyQuant/MainWindow.xaml.cs:569 \u0022The project was saved to\\n\u0022; frozen handler FamilyQuant.MainWindow::private async void MenuItemSaveProject_Click ( object sender , RoutedEventArgs e ) SHA256=810F5EAA567670C00E38AA106ACC95AFC9BA922B7CE7642AFB1C77BF3214E1BB; native case project-success; before=The project was saved to\nD:\\FamilyQuant-data\\out-refresh\\20261102-064527-FamilyQuant-gate\\shell-main\\native\\saved.fqproj\n\nThe container holds the grouping, your User IDs and annotations, and 0 stored quant row(s). Reopening it restores both.\n\nNext step: nothing. Carry on working, or open this file later to return to exactly this project.; actual=The project was saved to\nD:\\FamilyQuant-data\\out-refresh\\20261102-064527-FamilyQuant-gate\\shell-main\\native\\saved.fqproj\n\nThe container holds the grouping, your User IDs and annotations, and 0 stored quant row(s). Reopening it restores both.\n\nNext step: nothing. Carry on working, or open this file later to return to exactly this project."
     },
     {
       "observationId": "FQ15-BE500CA08363",
@@ -8039,7 +8039,7 @@
         {
           "path": "FamilyQuant/QuantifyControl.xaml",
           "symbol": "fcf-failure: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "C1E31170F782A4C172F05BFC5F750D3B2053F9AB409DE15C0F1ED0A216DB5DA1"
+          "sha256": "D38B0EB9B479D201C1C79FCF1C6957B480EC734C91FFC3B31235D94CF0A010F1"
         },
         {
           "path": "FamilyQuant/QuantifyControl.xaml.cs",
@@ -8058,7 +8058,7 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell message FQ15-BE8A76C73E91: fcf-failure at frozen line 489",
-          "artifact": "D:\\FamilyQuant-data\\out-shell\\D13-main-ready-20261102-055543\\run2\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-064527-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -8389,7 +8389,7 @@
         {
           "path": "FamilyQuant/QuantifyControl.xaml",
           "symbol": "project-failure: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "C1E31170F782A4C172F05BFC5F750D3B2053F9AB409DE15C0F1ED0A216DB5DA1"
+          "sha256": "D38B0EB9B479D201C1C79FCF1C6957B480EC734C91FFC3B31235D94CF0A010F1"
         },
         {
           "path": "FamilyQuant/QuantifyControl.xaml.cs",
@@ -8408,7 +8408,7 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell message FQ15-D41E82F7EE50: project-failure at frozen line 582",
-          "artifact": "D:\\FamilyQuant-data\\out-shell\\D13-main-ready-20261102-055543\\run2\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-064527-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -8635,7 +8635,7 @@
         {
           "path": "FamilyQuant/QuantifyControl.xaml",
           "symbol": "project-failure: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "C1E31170F782A4C172F05BFC5F750D3B2053F9AB409DE15C0F1ED0A216DB5DA1"
+          "sha256": "D38B0EB9B479D201C1C79FCF1C6957B480EC734C91FFC3B31235D94CF0A010F1"
         },
         {
           "path": "FamilyQuant/QuantifyControl.xaml.cs",
@@ -8654,7 +8654,7 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell message FQ15-D5987DF13F28: project-failure at frozen line 582",
-          "artifact": "D:\\FamilyQuant-data\\out-shell\\D13-main-ready-20261102-055543\\run2\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-064527-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -8889,7 +8889,7 @@
         {
           "path": "FamilyQuant/QuantifyControl.xaml",
           "symbol": "sepro-cancel: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "C1E31170F782A4C172F05BFC5F750D3B2053F9AB409DE15C0F1ED0A216DB5DA1"
+          "sha256": "D38B0EB9B479D201C1C79FCF1C6957B480EC734C91FFC3B31235D94CF0A010F1"
         },
         {
           "path": "FamilyQuant/QuantifyControl.xaml.cs",
@@ -8908,7 +8908,7 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell message FQ15-D9B5F67123FE: sepro-cancel at frozen line 774",
-          "artifact": "D:\\FamilyQuant-data\\out-shell\\D13-main-ready-20261102-055543\\run2\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-064527-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -9199,7 +9199,7 @@
         {
           "path": "FamilyQuant/QuantifyControl.xaml",
           "symbol": "project-success: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "C1E31170F782A4C172F05BFC5F750D3B2053F9AB409DE15C0F1ED0A216DB5DA1"
+          "sha256": "D38B0EB9B479D201C1C79FCF1C6957B480EC734C91FFC3B31235D94CF0A010F1"
         },
         {
           "path": "FamilyQuant/QuantifyControl.xaml.cs",
@@ -9218,13 +9218,13 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell message FQ15-F17372AEAD0F: project-success at frozen line 569",
-          "artifact": "D:\\FamilyQuant-data\\out-shell\\D13-main-ready-20261102-055543\\run2\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-064527-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
       "note": "Complete frozen message expression equals the executed native report; dynamic inner literals are not credited.",
       "kindReceiptId": null,
-      "compared": "FamilyQuant/MainWindow.xaml.cs:569 \u0022\\n\\n\u0022; frozen handler FamilyQuant.MainWindow::private async void MenuItemSaveProject_Click ( object sender , RoutedEventArgs e ) SHA256=810F5EAA567670C00E38AA106ACC95AFC9BA922B7CE7642AFB1C77BF3214E1BB; native case project-success; before=The project was saved to\nD:\\FamilyQuant-data\\out-shell\\D13-main-ready-20261102-055543\\run2\\native\\saved.fqproj\n\nThe container holds the grouping, your User IDs and annotations, and 0 stored quant row(s). Reopening it restores both.\n\nNext step: nothing. Carry on working, or open this file later to return to exactly this project.; actual=The project was saved to\nD:\\FamilyQuant-data\\out-shell\\D13-main-ready-20261102-055543\\run2\\native\\saved.fqproj\n\nThe container holds the grouping, your User IDs and annotations, and 0 stored quant row(s). Reopening it restores both.\n\nNext step: nothing. Carry on working, or open this file later to return to exactly this project."
+      "compared": "FamilyQuant/MainWindow.xaml.cs:569 \u0022\\n\\n\u0022; frozen handler FamilyQuant.MainWindow::private async void MenuItemSaveProject_Click ( object sender , RoutedEventArgs e ) SHA256=810F5EAA567670C00E38AA106ACC95AFC9BA922B7CE7642AFB1C77BF3214E1BB; native case project-success; before=The project was saved to\nD:\\FamilyQuant-data\\out-refresh\\20261102-064527-FamilyQuant-gate\\shell-main\\native\\saved.fqproj\n\nThe container holds the grouping, your User IDs and annotations, and 0 stored quant row(s). Reopening it restores both.\n\nNext step: nothing. Carry on working, or open this file later to return to exactly this project.; actual=The project was saved to\nD:\\FamilyQuant-data\\out-refresh\\20261102-064527-FamilyQuant-gate\\shell-main\\native\\saved.fqproj\n\nThe container holds the grouping, your User IDs and annotations, and 0 stored quant row(s). Reopening it restores both.\n\nNext step: nothing. Carry on working, or open this file later to return to exactly this project."
     },
     {
       "observationId": "FQ15-F37BABACE038",
@@ -9477,7 +9477,7 @@
         {
           "path": "FamilyQuant/QuantifyControl.xaml",
           "symbol": "home: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "C1E31170F782A4C172F05BFC5F750D3B2053F9AB409DE15C0F1ED0A216DB5DA1"
+          "sha256": "D38B0EB9B479D201C1C79FCF1C6957B480EC734C91FFC3B31235D94CF0A010F1"
         },
         {
           "path": "FamilyQuant/QuantifyControl.xaml.cs",
@@ -9496,7 +9496,7 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell route mapping FQ15-04C00B4757B5: home",
-          "artifact": "D:\\FamilyQuant-data\\out-shell\\D13-main-ready-20261102-055543\\run2\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-064527-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -9715,7 +9715,7 @@
         {
           "path": "FamilyQuant/QuantifyControl.xaml",
           "symbol": "home: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "C1E31170F782A4C172F05BFC5F750D3B2053F9AB409DE15C0F1ED0A216DB5DA1"
+          "sha256": "D38B0EB9B479D201C1C79FCF1C6957B480EC734C91FFC3B31235D94CF0A010F1"
         },
         {
           "path": "FamilyQuant/QuantifyControl.xaml.cs",
@@ -9734,7 +9734,7 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell route mapping FQ15-45662E0D334E: home",
-          "artifact": "D:\\FamilyQuant-data\\out-shell\\D13-main-ready-20261102-055543\\run2\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-064527-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -9953,7 +9953,7 @@
         {
           "path": "FamilyQuant/QuantifyControl.xaml",
           "symbol": "home: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "C1E31170F782A4C172F05BFC5F750D3B2053F9AB409DE15C0F1ED0A216DB5DA1"
+          "sha256": "D38B0EB9B479D201C1C79FCF1C6957B480EC734C91FFC3B31235D94CF0A010F1"
         },
         {
           "path": "FamilyQuant/QuantifyControl.xaml.cs",
@@ -9972,7 +9972,7 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell route mapping FQ15-8952FD454F0F: home",
-          "artifact": "D:\\FamilyQuant-data\\out-shell\\D13-main-ready-20261102-055543\\run2\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-064527-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -10191,7 +10191,7 @@
         {
           "path": "FamilyQuant/QuantifyControl.xaml",
           "symbol": "new: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "C1E31170F782A4C172F05BFC5F750D3B2053F9AB409DE15C0F1ED0A216DB5DA1"
+          "sha256": "D38B0EB9B479D201C1C79FCF1C6957B480EC734C91FFC3B31235D94CF0A010F1"
         },
         {
           "path": "FamilyQuant/QuantifyControl.xaml.cs",
@@ -10210,7 +10210,7 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell route mapping FQ15-46EB4E24AC7D: new",
-          "artifact": "D:\\FamilyQuant-data\\out-shell\\D13-main-ready-20261102-055543\\run2\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-064527-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -10429,7 +10429,7 @@
         {
           "path": "FamilyQuant/QuantifyControl.xaml",
           "symbol": "new: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "C1E31170F782A4C172F05BFC5F750D3B2053F9AB409DE15C0F1ED0A216DB5DA1"
+          "sha256": "D38B0EB9B479D201C1C79FCF1C6957B480EC734C91FFC3B31235D94CF0A010F1"
         },
         {
           "path": "FamilyQuant/QuantifyControl.xaml.cs",
@@ -10448,7 +10448,7 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell route mapping FQ15-085E5B81E35D: new",
-          "artifact": "D:\\FamilyQuant-data\\out-shell\\D13-main-ready-20261102-055543\\run2\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-064527-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -10667,7 +10667,7 @@
         {
           "path": "FamilyQuant/QuantifyControl.xaml",
           "symbol": "new: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "C1E31170F782A4C172F05BFC5F750D3B2053F9AB409DE15C0F1ED0A216DB5DA1"
+          "sha256": "D38B0EB9B479D201C1C79FCF1C6957B480EC734C91FFC3B31235D94CF0A010F1"
         },
         {
           "path": "FamilyQuant/QuantifyControl.xaml.cs",
@@ -10686,7 +10686,7 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell route mapping FQ15-3997625A78A4: new",
-          "artifact": "D:\\FamilyQuant-data\\out-shell\\D13-main-ready-20261102-055543\\run2\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-064527-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -10905,7 +10905,7 @@
         {
           "path": "FamilyQuant/QuantifyControl.xaml",
           "symbol": "open-fcf: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "C1E31170F782A4C172F05BFC5F750D3B2053F9AB409DE15C0F1ED0A216DB5DA1"
+          "sha256": "D38B0EB9B479D201C1C79FCF1C6957B480EC734C91FFC3B31235D94CF0A010F1"
         },
         {
           "path": "FamilyQuant/QuantifyControl.xaml.cs",
@@ -10924,7 +10924,7 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell route mapping FQ15-C2500D2F7285: open-fcf",
-          "artifact": "D:\\FamilyQuant-data\\out-shell\\D13-main-ready-20261102-055543\\run2\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-064527-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -11143,7 +11143,7 @@
         {
           "path": "FamilyQuant/QuantifyControl.xaml",
           "symbol": "open-fcf: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "C1E31170F782A4C172F05BFC5F750D3B2053F9AB409DE15C0F1ED0A216DB5DA1"
+          "sha256": "D38B0EB9B479D201C1C79FCF1C6957B480EC734C91FFC3B31235D94CF0A010F1"
         },
         {
           "path": "FamilyQuant/QuantifyControl.xaml.cs",
@@ -11162,7 +11162,7 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell route mapping FQ15-D88E5CED913A: open-fcf",
-          "artifact": "D:\\FamilyQuant-data\\out-shell\\D13-main-ready-20261102-055543\\run2\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-064527-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -11381,7 +11381,7 @@
         {
           "path": "FamilyQuant/QuantifyControl.xaml",
           "symbol": "open-fcf: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "C1E31170F782A4C172F05BFC5F750D3B2053F9AB409DE15C0F1ED0A216DB5DA1"
+          "sha256": "D38B0EB9B479D201C1C79FCF1C6957B480EC734C91FFC3B31235D94CF0A010F1"
         },
         {
           "path": "FamilyQuant/QuantifyControl.xaml.cs",
@@ -11400,7 +11400,7 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell route mapping FQ15-77AB63820143: open-fcf",
-          "artifact": "D:\\FamilyQuant-data\\out-shell\\D13-main-ready-20261102-055543\\run2\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-064527-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -11619,7 +11619,7 @@
         {
           "path": "FamilyQuant/QuantifyControl.xaml",
           "symbol": "project-success: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "C1E31170F782A4C172F05BFC5F750D3B2053F9AB409DE15C0F1ED0A216DB5DA1"
+          "sha256": "D38B0EB9B479D201C1C79FCF1C6957B480EC734C91FFC3B31235D94CF0A010F1"
         },
         {
           "path": "FamilyQuant/QuantifyControl.xaml.cs",
@@ -11638,7 +11638,7 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell route mapping FQ15-67E9A390B4D4: project-success",
-          "artifact": "D:\\FamilyQuant-data\\out-shell\\D13-main-ready-20261102-055543\\run2\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-064527-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -11857,7 +11857,7 @@
         {
           "path": "FamilyQuant/QuantifyControl.xaml",
           "symbol": "project-success: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "C1E31170F782A4C172F05BFC5F750D3B2053F9AB409DE15C0F1ED0A216DB5DA1"
+          "sha256": "D38B0EB9B479D201C1C79FCF1C6957B480EC734C91FFC3B31235D94CF0A010F1"
         },
         {
           "path": "FamilyQuant/QuantifyControl.xaml.cs",
@@ -11876,7 +11876,7 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell route mapping FQ15-D11D9392E890: project-success",
-          "artifact": "D:\\FamilyQuant-data\\out-shell\\D13-main-ready-20261102-055543\\run2\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-064527-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -12095,7 +12095,7 @@
         {
           "path": "FamilyQuant/QuantifyControl.xaml",
           "symbol": "project-success: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "C1E31170F782A4C172F05BFC5F750D3B2053F9AB409DE15C0F1ED0A216DB5DA1"
+          "sha256": "D38B0EB9B479D201C1C79FCF1C6957B480EC734C91FFC3B31235D94CF0A010F1"
         },
         {
           "path": "FamilyQuant/QuantifyControl.xaml.cs",
@@ -12114,7 +12114,7 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell route mapping FQ15-7526DED77FA2: project-success",
-          "artifact": "D:\\FamilyQuant-data\\out-shell\\D13-main-ready-20261102-055543\\run2\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-064527-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -12333,7 +12333,7 @@
         {
           "path": "FamilyQuant/QuantifyControl.xaml",
           "symbol": "fcf-success: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "C1E31170F782A4C172F05BFC5F750D3B2053F9AB409DE15C0F1ED0A216DB5DA1"
+          "sha256": "D38B0EB9B479D201C1C79FCF1C6957B480EC734C91FFC3B31235D94CF0A010F1"
         },
         {
           "path": "FamilyQuant/QuantifyControl.xaml.cs",
@@ -12352,7 +12352,7 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell route mapping FQ15-34318E61C997: fcf-success",
-          "artifact": "D:\\FamilyQuant-data\\out-shell\\D13-main-ready-20261102-055543\\run2\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-064527-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -12571,7 +12571,7 @@
         {
           "path": "FamilyQuant/QuantifyControl.xaml",
           "symbol": "fcf-success: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "C1E31170F782A4C172F05BFC5F750D3B2053F9AB409DE15C0F1ED0A216DB5DA1"
+          "sha256": "D38B0EB9B479D201C1C79FCF1C6957B480EC734C91FFC3B31235D94CF0A010F1"
         },
         {
           "path": "FamilyQuant/QuantifyControl.xaml.cs",
@@ -12590,7 +12590,7 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell route mapping FQ15-CFD1302DD85B: fcf-success",
-          "artifact": "D:\\FamilyQuant-data\\out-shell\\D13-main-ready-20261102-055543\\run2\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-064527-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -12809,7 +12809,7 @@
         {
           "path": "FamilyQuant/QuantifyControl.xaml",
           "symbol": "fcf-success: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "C1E31170F782A4C172F05BFC5F750D3B2053F9AB409DE15C0F1ED0A216DB5DA1"
+          "sha256": "D38B0EB9B479D201C1C79FCF1C6957B480EC734C91FFC3B31235D94CF0A010F1"
         },
         {
           "path": "FamilyQuant/QuantifyControl.xaml.cs",
@@ -12828,7 +12828,7 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell route mapping FQ15-BEE9CF7ACF93: fcf-success",
-          "artifact": "D:\\FamilyQuant-data\\out-shell\\D13-main-ready-20261102-055543\\run2\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-064527-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -13047,7 +13047,7 @@
         {
           "path": "FamilyQuant/QuantifyControl.xaml",
           "symbol": "quantify: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "C1E31170F782A4C172F05BFC5F750D3B2053F9AB409DE15C0F1ED0A216DB5DA1"
+          "sha256": "D38B0EB9B479D201C1C79FCF1C6957B480EC734C91FFC3B31235D94CF0A010F1"
         },
         {
           "path": "FamilyQuant/QuantifyControl.xaml.cs",
@@ -13066,7 +13066,7 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell route mapping FQ15-1BA879330EBB: quantify",
-          "artifact": "D:\\FamilyQuant-data\\out-shell\\D13-main-ready-20261102-055543\\run2\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-064527-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -13285,7 +13285,7 @@
         {
           "path": "FamilyQuant/QuantifyControl.xaml",
           "symbol": "quantify: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "C1E31170F782A4C172F05BFC5F750D3B2053F9AB409DE15C0F1ED0A216DB5DA1"
+          "sha256": "D38B0EB9B479D201C1C79FCF1C6957B480EC734C91FFC3B31235D94CF0A010F1"
         },
         {
           "path": "FamilyQuant/QuantifyControl.xaml.cs",
@@ -13304,7 +13304,7 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell route mapping FQ15-0CA40EFF5B28: quantify",
-          "artifact": "D:\\FamilyQuant-data\\out-shell\\D13-main-ready-20261102-055543\\run2\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-064527-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -13523,7 +13523,7 @@
         {
           "path": "FamilyQuant/QuantifyControl.xaml",
           "symbol": "quantify: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "C1E31170F782A4C172F05BFC5F750D3B2053F9AB409DE15C0F1ED0A216DB5DA1"
+          "sha256": "D38B0EB9B479D201C1C79FCF1C6957B480EC734C91FFC3B31235D94CF0A010F1"
         },
         {
           "path": "FamilyQuant/QuantifyControl.xaml.cs",
@@ -13542,7 +13542,7 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell route mapping FQ15-0AD0CE6F978B: quantify",
-          "artifact": "D:\\FamilyQuant-data\\out-shell\\D13-main-ready-20261102-055543\\run2\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-064527-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -13761,7 +13761,7 @@
         {
           "path": "FamilyQuant/QuantifyControl.xaml",
           "symbol": "denovo: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "C1E31170F782A4C172F05BFC5F750D3B2053F9AB409DE15C0F1ED0A216DB5DA1"
+          "sha256": "D38B0EB9B479D201C1C79FCF1C6957B480EC734C91FFC3B31235D94CF0A010F1"
         },
         {
           "path": "FamilyQuant/QuantifyControl.xaml.cs",
@@ -13780,7 +13780,7 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell route mapping FQ15-ED964B3D45AE: denovo",
-          "artifact": "D:\\FamilyQuant-data\\out-shell\\D13-main-ready-20261102-055543\\run2\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-064527-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -13999,7 +13999,7 @@
         {
           "path": "FamilyQuant/QuantifyControl.xaml",
           "symbol": "denovo: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "C1E31170F782A4C172F05BFC5F750D3B2053F9AB409DE15C0F1ED0A216DB5DA1"
+          "sha256": "D38B0EB9B479D201C1C79FCF1C6957B480EC734C91FFC3B31235D94CF0A010F1"
         },
         {
           "path": "FamilyQuant/QuantifyControl.xaml.cs",
@@ -14018,7 +14018,7 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell route mapping FQ15-185E1DC40B89: denovo",
-          "artifact": "D:\\FamilyQuant-data\\out-shell\\D13-main-ready-20261102-055543\\run2\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-064527-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -14237,7 +14237,7 @@
         {
           "path": "FamilyQuant/QuantifyControl.xaml",
           "symbol": "denovo: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "C1E31170F782A4C172F05BFC5F750D3B2053F9AB409DE15C0F1ED0A216DB5DA1"
+          "sha256": "D38B0EB9B479D201C1C79FCF1C6957B480EC734C91FFC3B31235D94CF0A010F1"
         },
         {
           "path": "FamilyQuant/QuantifyControl.xaml.cs",
@@ -14256,7 +14256,7 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell route mapping FQ15-84F3ED74E32D: denovo",
-          "artifact": "D:\\FamilyQuant-data\\out-shell\\D13-main-ready-20261102-055543\\run2\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-064527-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -14475,7 +14475,7 @@
         {
           "path": "FamilyQuant/QuantifyControl.xaml",
           "symbol": "results: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "C1E31170F782A4C172F05BFC5F750D3B2053F9AB409DE15C0F1ED0A216DB5DA1"
+          "sha256": "D38B0EB9B479D201C1C79FCF1C6957B480EC734C91FFC3B31235D94CF0A010F1"
         },
         {
           "path": "FamilyQuant/QuantifyControl.xaml.cs",
@@ -14494,7 +14494,7 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell route mapping FQ15-D373CC8B2236: results",
-          "artifact": "D:\\FamilyQuant-data\\out-shell\\D13-main-ready-20261102-055543\\run2\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-064527-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -14713,7 +14713,7 @@
         {
           "path": "FamilyQuant/QuantifyControl.xaml",
           "symbol": "results: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "C1E31170F782A4C172F05BFC5F750D3B2053F9AB409DE15C0F1ED0A216DB5DA1"
+          "sha256": "D38B0EB9B479D201C1C79FCF1C6957B480EC734C91FFC3B31235D94CF0A010F1"
         },
         {
           "path": "FamilyQuant/QuantifyControl.xaml.cs",
@@ -14732,7 +14732,7 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell route mapping FQ15-A33C172644F1: results",
-          "artifact": "D:\\FamilyQuant-data\\out-shell\\D13-main-ready-20261102-055543\\run2\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-064527-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -14951,7 +14951,7 @@
         {
           "path": "FamilyQuant/QuantifyControl.xaml",
           "symbol": "results: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "C1E31170F782A4C172F05BFC5F750D3B2053F9AB409DE15C0F1ED0A216DB5DA1"
+          "sha256": "D38B0EB9B479D201C1C79FCF1C6957B480EC734C91FFC3B31235D94CF0A010F1"
         },
         {
           "path": "FamilyQuant/QuantifyControl.xaml.cs",
@@ -14970,7 +14970,7 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell route mapping FQ15-37054BF5BA1E: results",
-          "artifact": "D:\\FamilyQuant-data\\out-shell\\D13-main-ready-20261102-055543\\run2\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-064527-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -15189,7 +15189,7 @@
         {
           "path": "FamilyQuant/QuantifyControl.xaml",
           "symbol": "sepro-cancel: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "C1E31170F782A4C172F05BFC5F750D3B2053F9AB409DE15C0F1ED0A216DB5DA1"
+          "sha256": "D38B0EB9B479D201C1C79FCF1C6957B480EC734C91FFC3B31235D94CF0A010F1"
         },
         {
           "path": "FamilyQuant/QuantifyControl.xaml.cs",
@@ -15208,7 +15208,7 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell route mapping FQ15-C07C8EF91D69: sepro-cancel",
-          "artifact": "D:\\FamilyQuant-data\\out-shell\\D13-main-ready-20261102-055543\\run2\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-064527-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -15427,7 +15427,7 @@
         {
           "path": "FamilyQuant/QuantifyControl.xaml",
           "symbol": "sepro-cancel: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "C1E31170F782A4C172F05BFC5F750D3B2053F9AB409DE15C0F1ED0A216DB5DA1"
+          "sha256": "D38B0EB9B479D201C1C79FCF1C6957B480EC734C91FFC3B31235D94CF0A010F1"
         },
         {
           "path": "FamilyQuant/QuantifyControl.xaml.cs",
@@ -15446,7 +15446,7 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell route mapping FQ15-DD7878AEE818: sepro-cancel",
-          "artifact": "D:\\FamilyQuant-data\\out-shell\\D13-main-ready-20261102-055543\\run2\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-064527-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -15665,7 +15665,7 @@
         {
           "path": "FamilyQuant/QuantifyControl.xaml",
           "symbol": "file-menu: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "C1E31170F782A4C172F05BFC5F750D3B2053F9AB409DE15C0F1ED0A216DB5DA1"
+          "sha256": "D38B0EB9B479D201C1C79FCF1C6957B480EC734C91FFC3B31235D94CF0A010F1"
         },
         {
           "path": "FamilyQuant/QuantifyControl.xaml.cs",
@@ -15684,7 +15684,7 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell route mapping FQ15-D7A1D45E49F5: file-menu",
-          "artifact": "D:\\FamilyQuant-data\\out-shell\\D13-main-ready-20261102-055543\\run2\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-064527-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -15903,7 +15903,7 @@
         {
           "path": "FamilyQuant/QuantifyControl.xaml",
           "symbol": "file-menu: actual MainWindow dispatch, dialog or report frame",
-          "sha256": "C1E31170F782A4C172F05BFC5F750D3B2053F9AB409DE15C0F1ED0A216DB5DA1"
+          "sha256": "D38B0EB9B479D201C1C79FCF1C6957B480EC734C91FFC3B31235D94CF0A010F1"
         },
         {
           "path": "FamilyQuant/QuantifyControl.xaml.cs",
@@ -15922,7 +15922,7 @@
           "kind": "test",
           "target": "ShellMainMessageProbe",
           "assertion": "native shell route mapping FQ15-21D9A55B91A6: file-menu",
-          "artifact": "D:\\FamilyQuant-data\\out-shell\\D13-main-ready-20261102-055543\\run2\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-064527-FamilyQuant-gate\\shell-main\\comparisons.log",
           "inspectedBy": ""
         }
       ],
