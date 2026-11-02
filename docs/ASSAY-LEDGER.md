@@ -159,3 +159,38 @@ The register is `docs/feature-ledger-evidence/AS-presentation-figures.json`, wit
 the Release build is clean, quick suite is 3,013/0/17, stored-project golden is 4/0/0, and the
 native ledger check passes. The local audit proposes 2,718 VERIFIED, 2,742 OPEN and 296 DROP
 rows, including other lanes' merged work. No full suite or fresh RAW validation was run.
+
+## M48 runtime spectrum properties
+
+The strict source-only passes close no additional USEARCH or spectrum declarations: 224 and
+195 observations respectively remain outside that proof. The dedicated spectrum fixture
+constructs the actual frozen and current windows without showing them. A shared source file
+captures each column's binding, header, tooltip setter and format from the product objects.
+
+The checker binds each frozen observation ID to its exact literal offset inside a supported
+column argument. It then requires the complete source argument, frozen native property and
+current native property to agree at that same binding path. It never searches another column
+for matching text. Six fixtures cover exact values, repeated same-line literals, a missing
+binding, a changed character, a mismatched frozen object and rejection of handler claims.
+They were red at 4/2/0 before implementation and green at 6/0/0 afterwards.
+
+This proves 130 code facts. Native positive runs report 131/0/65; deliberately altered current
+values produce 0/131/65. The extra assertion is the kind receipt. The remaining 65 spectrum
+facts stay OPEN, including actions and exports beyond these constructed column properties.
+No CSV write, displayed-window interaction, app navigation, scientific result or render is
+inferred from this packet. The shared fixture also captures build-view defaults for later
+checks, but no USEARCH row closes merely because its snapshot exists.
+
+The complete runs at `D:/FamilyQuant-data/out-assay/m48-spectrum-properties-green-4` and
+`m48-spectrum-properties-green-5` produce byte-identical property snapshots, source anchors, actual values and proof
+logs. An earlier run passed its comparisons but refused an incorrect dependency source path
+while archiving; no register from that failed run was imported. The corrected packet pins
+the actual `SecondaryWindows.ViewModels.cs` and `SecondaryWindowView.cs` dependencies,
+alongside the window parts, executed checker sources and both product assemblies.
+
+The imported register is `docs/feature-ledger-evidence/AS-spectrum-properties.json`. READY
+validation on master `9f135c2`: clean Release build, focused fixtures 6/0/0, quick suite
+3,021/0/17, stored-project golden 4/0/0 and native ledger check passed. The combined local
+audit reports 3,039 VERIFIED, 2,421 OPEN and 296 DROP rows. These remain proposed states
+pending independent review. No full suite, fresh RAW, displayed window or producer run
+was performed for this packet.

@@ -14,7 +14,8 @@ internal static partial class Program
     private sealed record AssayRuntimeCase(string Id, string Operation, string Expected, string Actual, bool Passed);
 
     private static int RunAssayRuntimeLedger(string[] args, string step, string[] sources, string[] implementations,
-        Func<string, FeatureLedger.Observation[], bool, List<AssayRuntimeCase>> execute)
+        Func<string, FeatureLedger.Observation[], bool, List<AssayRuntimeCase>> execute,
+        string mappingSymbol = "Native frozen/current cache wire and staging comparison", string[]? extraProofSources = null)
     {
         if (args.Length is not (4 or 5) || args.Length == 5 && args[4] != "--negative-control")
             throw new ArgumentException("Supply frozen source root, fresh output, date timestamp and optional --negative-control.");
@@ -78,11 +79,13 @@ internal static partial class Program
             "FamilyQuant.Tests/Program.AssayRuntimeLedger.cs", "FamilyQuant.Tests/Program.AssayCacheLedger.cs", "FamilyQuant.Tests/AssayCacheSnapshot.cs",
             "FamilyQuant.Tests/Program.Commands.AssayLedger.cs", "FamilyQuant.Tests/FeatureLedgerEvidence.cs",
             "FamilyQuant.Tests/FeatureLedgerEvidence.Reporting.cs",
-        }).Distinct(StringComparer.Ordinal).OrderBy(path => path, StringComparer.Ordinal))
+        }).Concat(extraProofSources ?? Array.Empty<string>()).Distinct(StringComparer.Ordinal).OrderBy(path => path, StringComparer.Ordinal))
             Retain(Path.Combine(root, path), path);
         foreach (string source in sources) Retain(Path.Combine(frozenRoot, source), Path.Combine("frozen", source));
         Retain(typeof(Program).Assembly.Location, "FamilyQuant.Tests.dll");
         Retain(typeof(FamilyQuant.DeNovo.DeNovoXicCache).Assembly.Location, "FamilyQuant.Core.dll");
+        if (implementations.Any(path => path.StartsWith("FamilyQuant/", StringComparison.Ordinal)))
+            Retain(typeof(App).Assembly.Location, "FamilyQuant.dll");
         foreach (string path in Directory.GetFiles(output, "*", SearchOption.TopDirectoryOnly)
             .Where(path => path != log && path != values).OrderBy(path => path, StringComparer.Ordinal))
             artifacts.Add(new(path, FeatureLedgerEvidence.Hash(path)));
@@ -91,7 +94,7 @@ internal static partial class Program
             .OrderBy(path => path, StringComparer.Ordinal))
             if (artifacts.All(artifact => artifact.Path != path)) artifacts.Add(new(path, FeatureLedgerEvidence.Hash(path)));
         var mappings = implementations.OrderBy(path => path, StringComparer.Ordinal)
-            .Select(path => new FeatureLedgerEvidence.Implementation(path, "Native frozen/current cache wire and staging comparison",
+            .Select(path => new FeatureLedgerEvidence.Implementation(path, mappingSymbol,
                 FeatureLedgerEvidence.Hash(Path.Combine(root, path)))).ToList();
         var rows = cohort.Select(row =>
         {

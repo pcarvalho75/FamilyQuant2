@@ -7,6 +7,7 @@ namespace FamilyQuant.Tests
         [STAThread]
         private static int Main(string[] args)
         {
+            if (args.Length > 0 && args[0] == AssayViewSnapshot.Argument) return AssayViewSnapshot.Run(args);
             if (args.Length > 0 && args[0] == AssayCacheSnapshot.Argument) return AssayCacheSnapshot.Run(args);
             if (args.Length > 0 && args[0] == FcfCompatibilitySnapshot.Argument)
                 return FcfCompatibilitySnapshot.Run(args);
