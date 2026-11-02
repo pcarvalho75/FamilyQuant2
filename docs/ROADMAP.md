@@ -91,8 +91,7 @@ Columns: Diff = L, M, H, VH. Hrs = worker hours at measured speed: estimates are
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
 | N6q | Paulo rules on the wording list in one pass | L | 0 | 🟢 | N6r | Paulo's ruling recorded | Paulo | not started | 0% | 0% | T+0 |
-| N6r | Reviewer's 200-row random sample across the whole ledger | M | 0.3 | N6q | N6s | GR's verdict; one failure reopens the kind | GR | not started | 0% | 0% | T+0 |
-| N6s | Release check passes | L | 0.1 | N6r | R3b | `--feature-ledger-release-check` passes | Orchestrator | not started | 0% | 0% | T+0 |
+| N6s | Release check passes | L | 0.1 | 🟢 | R3b | `--feature-ledger-release-check` passes | Orchestrator | not started | 0% | 0% | T+0 |
 
 ### W4 Look
 

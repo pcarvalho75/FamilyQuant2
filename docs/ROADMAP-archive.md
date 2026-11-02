@@ -189,6 +189,7 @@ Finished steps, moved here from docs/ROADMAP.md. The board shows them as green.
 | N6a | Text tool: closes rows whose 1.5 text is in the compiled 2.0 program, in the same feature, reachable from a real screen | M | 0.7 | 🟢 | N6b | Tool run on master; dead-code negative stays open; counts by kind | OP | not started | 0% | 0% | T+1 |
 | N6b | Reviewer samples the text tool's rows | L | 0.2 | N6a | N6r | GR's verdict; one failure reopens the kind | GR | not started | 0% | 0% | T+1 |
 | N6p | Wording list assembled for Paulo: rows that changed on purpose, with old and new text | L | 0.2 | 🟢 | N6q | List grouped by reason | Orchestrator | not started | 0% | 0% | T+0 |
+| N6r | Reviewer's 200-row random sample across the whole ledger | M | 0.3 | N6q | N6s | GR's verdict; one failure reopens the kind | GR | not started | 0% | 0% | T+0 |
 
 ### W4 Look
 
