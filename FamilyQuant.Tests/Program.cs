@@ -74,6 +74,9 @@ namespace FamilyQuant.Tests
                 Directory.CreateDirectory(busyWork);
                 EnsureApplication();
                 BusyOperationTests(busyWork);
+                Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
+                return failed == 0 ? 0 : 1;
+            }
             if (args.Contains("--test-evidence-task-scope", StringComparer.Ordinal))
             {
                 EnsureApplication();
