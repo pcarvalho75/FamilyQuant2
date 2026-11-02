@@ -2,7 +2,10 @@ using FamilyQuant.Evidence;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Globalization;
 using System.Text.Json;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace FamilyQuant;
 
@@ -15,13 +18,17 @@ public sealed class EvidenceGroupingSession
     private readonly string sourceMetadata;
     private readonly HashSet<int> sourceLocks;
     private readonly Func<IReadOnlyList<FastaItemExtended>, IReadOnlyList<NeighbourReference>, NeighbourSearch> search;
+    private readonly Func<FamilyClusterFile, CancellationToken, Task<EvidenceTaskProposal>> discoverTask;
+    private EvidenceTaskProposal? taskProposal;
+    private EvidenceTaskChoice? confirmedTask;
     public EvidenceProposal? Proposal { get; private set; }
     public NeighbourSearch? Search { get; private set; }
     public IReadOnlyList<NeighbourReference>? References { get; private set; }
     private string? checkedMotif;
 
     public EvidenceGroupingSession(FamilyClusterFile file, string programVersion,
-        Func<IReadOnlyList<FastaItemExtended>, IReadOnlyList<NeighbourReference>, NeighbourSearch>? search = null)
+        Func<IReadOnlyList<FastaItemExtended>, IReadOnlyList<NeighbourReference>, NeighbourSearch>? search = null,
+        Func<FamilyClusterFile, CancellationToken, Task<EvidenceTaskProposal>>? discoverTask = null)
     {
         this.file = file ?? throw new ArgumentNullException(nameof(file));
         this.programVersion = programVersion;
@@ -29,6 +36,23 @@ public sealed class EvidenceGroupingSession
         sourceMetadata = JsonSerializer.Serialize(file.EvidenceSource);
         sourceLocks = new HashSet<int>(file.LockedUserIds);
         this.search = search ?? ((queries, references) => NearestReviewed.Search(queries, references));
+        this.discoverTask = discoverTask ?? ((source, token) => EvidenceTaskDiscovery.DiscoverAsync(source, cancellationToken: token));
+    }
+
+    public async Task<EvidenceTaskScopeInput> DiscoverTaskAsync(CancellationToken cancellationToken = default)
+    {
+        EnsureCurrent();
+        var task = await discoverTask(file, cancellationToken).ConfigureAwait(false);
+        cancellationToken.ThrowIfCancellationRequested();
+        EnsureCurrent();
+        taskProposal = task;
+        return new EvidenceTaskScopeInput(task.Clade.ScientificName + " (" + task.Clade.Rank + ", "
+            + task.Clade.TaxonId.ToString(CultureInfo.CurrentCulture) + ")",
+            task.Taxa.Select(t => new ReviewTaskTaxon(t.ScientificName, t.TaxonId)).ToArray(),
+            task.Keywords.Select(k => new ReviewTaskKeyword(k.Keyword, k.ReviewedProteins)).ToArray(),
+            task.ReviewedProteins, task.ProposedScopeTerms.ToArray(), task.Release,
+            "Keyword evidence releases: " + string.Join(", ", task.KeywordEvidenceReleases),
+            task.TargetProteins, task.IgnoredContaminants);
     }
 
     public EvidenceReviewInput Propose(string scope)
@@ -36,13 +60,14 @@ public sealed class EvidenceGroupingSession
         EnsureCurrent();
         var options = new EvidenceClassificationOptions { ScopeTerms = WordCluster.ParseKeywords(scope) };
         if (options.ScopeTerms.Count == 0) throw new ArgumentException("Type at least one scope word or phrase.", nameof(scope));
+        var taskChoice = taskProposal == null ? null : EvidenceTaskDiscovery.Confirm(file, taskProposal, options.ScopeTerms);
         var references = NearestReviewed.References(file, e => EvidenceClassifier.IsInScope(e, options.ScopeTerms));
         var result = search(NearestReviewed.Targets(file), references);
         var proposal = EvidenceClassifier.Propose(file.MyExtendedFastaItems, options, result.ByQuery(), NearestReviewed.ReferenceEvidence(file));
         proposal = CoherenceCheck.Flag(proposal, file.MyExtendedFastaItems, CoherenceCheck.Learn(file));
         var presentation = EvidenceProposalPresentation.Present(proposal, file);
         EnsureCurrent();
-        Search = result; References = references.ToArray(); Proposal = proposal; checkedMotif = null;
+        Search = result; References = references.ToArray(); Proposal = proposal; checkedMotif = null; confirmedTask = taskChoice;
         return presentation;
     }
 
@@ -77,6 +102,7 @@ public sealed class EvidenceGroupingSession
             SessionSearch = Search,
             SessionReferences = References,
             CheckedMotifs = motifs,
+            ConfirmedTask = confirmedTask,
             ArchitectureChoices = (selection.ArchitectureChoices ?? Array.Empty<ReviewArchitectureChoice>()).Select(a =>
                 new EvidenceArchitectureChoice { Family = a.Family, ArchitectureKey = a.ArchitectureKey, Name = a.Name, Split = a.Split }).ToArray()
         };
