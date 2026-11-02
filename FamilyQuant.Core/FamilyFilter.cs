@@ -14,15 +14,14 @@ namespace FamilyQuant
         public const string DecoyPrefix = SequenceLabels.DecoyPrefix;
 
         /// <summary>
-        /// Matched anywhere in the identifier, case-insensitively, so both "contaminant_KRT1" and its
-        /// decoy "Reverse_contaminant_KRT1" are recognised.
+        /// The database marker is retained for compatibility. Classification uses the exact database
+        /// prefix after unwrapping one exact decoy prefix, through SequenceLabels.IsContaminant.
         /// </summary>
         public const string ContaminantMarker = SequenceLabels.ContaminantMarker;
 
         public static bool IsContaminant(FastaItemExtended item)
         {
-            return (item.SequenceIdentifier ?? string.Empty)
-                .IndexOf(ContaminantMarker, StringComparison.OrdinalIgnoreCase) >= 0;
+            return SequenceLabels.IsContaminant(item.SequenceIdentifier);
         }
 
         /// <summary>

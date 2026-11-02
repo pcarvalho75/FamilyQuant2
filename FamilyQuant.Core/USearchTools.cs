@@ -129,7 +129,7 @@ namespace FamilyQuant
             }
         }
 
-        private static string GetUSearchPath()
+        internal static string GetUSearchPath()
         {
             // Escape hatch for locked-down machines (AppLocker / AV that block execution from
             // user-writable folders): point FAMILYQUANT_USEARCH at a usearch.exe you control.
@@ -639,7 +639,7 @@ namespace FamilyQuant
         /// WaitForExit deadlock when USEARCH is chatty, and a failure to launch (blocked/removed exe) is
         /// translated into an actionable message.
         /// </summary>
-        private static void RunUSearch(string exePath, string arguments, string workingDirectory, OperationContext? operation = null)
+        internal static void RunUSearch(string exePath, string arguments, string workingDirectory, OperationContext? operation = null)
         {
             operation?.Report("usearch", "Running sequence alignment");
             ProcessStartInfo psi = new ProcessStartInfo(exePath, arguments)

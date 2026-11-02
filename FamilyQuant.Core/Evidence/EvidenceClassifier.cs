@@ -211,7 +211,7 @@ namespace FamilyQuant.Evidence
         private static HashSet<string> Domains(ProteinEvidence? evidence) => EvidenceDomains.Ordered(evidence).ToHashSet(StringComparer.Ordinal);
 
         private static bool IsContaminant(FastaItemExtended protein) =>
-            (protein.SequenceIdentifier ?? string.Empty).StartsWith(SequenceLabels.ContaminantPrefix, StringComparison.Ordinal);
+            SequenceLabels.IsContaminant(protein.SequenceIdentifier);
 
         private static bool HasMultipleFamilies(ProteinEvidence? evidence) => evidence?.FamilyMemberships != null
             && evidence.FamilyMemberships.Select(m => m.Family).Where(f => !string.IsNullOrWhiteSpace(f))

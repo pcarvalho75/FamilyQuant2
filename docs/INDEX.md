@@ -28,6 +28,7 @@ This is the navigation index for the current checkout. The roadmap owns unfinish
 | [Code map](vision/CODE-MAP.md) | How a FASTA and a RAW file become a family number, and what that read did not cover |
 | [Feature ledger](FEATURE-LEDGER.md) | Frozen preservation contract, dispositions and acceptance state |
 | [Feature evidence](FEATURE-EVIDENCE.md) | Per-observation receipts, native proof runner, audit and review sample |
+| [Measured improvement candidates](IMPROVEMENTS.md) | X12 clustering coverage, peptide ambiguity, evidence veto and contaminant measurements |
 | [Ledger scan](feature-ledger-scan.json) | Exact frozen observations and source hashes |
 | [Roadmap](ROADMAP.md) | Current work and acceptance gates; orchestrator owned |
 | [Roadmap archive](ROADMAP-archive.md) | Historical step records; orchestrator owned |
@@ -106,6 +107,9 @@ Invoke each flag with `& $testExe <flag>` after building. Dispatch and arity are
 | `--report-study-snapshot <new-output-dir>` | Six native synthetic text/PNG fixtures for source-move parity |
 | `--shell-checks` | Shell navigation, saving, preferences, Build/Quantify integration and secondary views |
 | `--feature-ledger-check` | Inventory, row coverage, dispositions and guard regressions |
+| `--test-clustering-improvements` | X12 paired-letter, component-veto, native parse and contaminant diagnostic guards |
+| `--clustering-improvements <document> <FASTA> <output> <identity> [--small-exhaustive]` | Real-data diagnostic candidates; no product numerical change; bounded all-pairs only |
+| `--clustering-improvements-replay <document> <FASTA> <packet> <output> <identity> [--small-exhaustive]` | Recompute a report from recorded native alignments after exact input/executable fingerprint checks |
 | `--feature-ledger-release-check` | Same inventory with all retained rows required VERIFIED; OPEN rows intentionally fail |
 | `--test-ledger-evidence` | Adversarial receipt, source/artifact hash, assertion and render checks |
 | `--test-ledger-declarations` | Exact named-XAML and C# member comparison checks |
