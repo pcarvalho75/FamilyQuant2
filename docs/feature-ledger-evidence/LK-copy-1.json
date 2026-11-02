@@ -5,344 +5,340 @@
   "runs": [
     {
       "id": "LK-copy",
-      "command": "D:\\FamilyQuant-wt\\look\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --prove-look-copy D:/FamilyQuant-data/out-shell/N3/source D:/FamilyQuant-data/out-look/ledger/audit-initial-24edfd3 D:/FamilyQuant-data/out-look/ledger/packet-1 \u00222026-11-02 03:38:39 -0800\u0022",
-      "executedAt": "2026-11-02 03:38:39 -0800",
-      "commit": "24edfd3807dd45a28eb1d5a4fb5f5aa743fb9709",
+      "command": "C:\\FamilyQuant-gate\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --refresh-look-registers D:/FamilyQuant-data/out-shell/N3/source D:/FamilyQuant-data/out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh \u00222026-11-02 08:34:42 -0800\u0022",
+      "executedAt": "2026-11-02 08:34:42 -0800",
+      "commit": "c5cbd921a9328e18951ccef645a0966f1c658f7f",
       "artifacts": [
         {
-          "path": "D:\\FamilyQuant-data\\out-look\\ledger\\packet-1\\profile-NONE.plp",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-1\\profile-NONE.plp",
           "sha256": "D89E4677E8B0DA29E68AC8E8C1A7FB2DE6C93461CEDDAD5E3B72391E77737470"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-look\\ledger\\packet-1\\profile-TIC.plp",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-1\\profile-TIC.plp",
           "sha256": "A95B6A2FAD8989547C939FDE4A5AC2AF9DDB32394547586B42BFEA5DEA0D5615"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-look\\ledger\\packet-1\\profile-ID.plp",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-1\\profile-ID.plp",
           "sha256": "D5CF8B6DC74B3C0B6483F830C0A858BC26833A34187209F3BDDBB3F58853A022"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-look\\ledger\\packet-1\\help-00.txt",
-          "sha256": "B91BDC4DB7A3ED841BF14E7C943A2F27CDED65EE45EEAE1481A2AA254FC11DCB"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-1\\help-00.txt",
+          "sha256": "A24EBC6A6FEF0D0CF520432F8B2764C9665307B997FF64D1047CBA12CCF2C40E"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-look\\ledger\\packet-1\\help-01.txt",
-          "sha256": "6AEE3E5418AF92AE57F88216145E4D425163B67B065D3AAF6673885214E2111B"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-1\\help-01.txt",
+          "sha256": "69CFD868CAE3063D64DAC2A724847ED17BA94C549A1098D4CCBF3E3BC645C2A1"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-look\\ledger\\packet-1\\help-02.txt",
-          "sha256": "8C9A9AD38D1A9CA551CA84B3A0ABABF325FD61C3C3F4C3F238BB987287DDCAE7"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-1\\help-02.txt",
+          "sha256": "ADB0532000780F9A5FFAA8E27DC187BC66227FD0C3DF3FE4C3F13FA2051D120F"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-look\\ledger\\packet-1\\help-03.txt",
-          "sha256": "42CBD2B167C4521828915FAA64B29393E3BC07467E90E10DDE2079DD1DBD48FF"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-1\\help-03.txt",
+          "sha256": "38983B45A50039981EF5557368E3E4BD89004F845FC33E8375995B99A1319CAB"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-look\\ledger\\packet-1\\help-04.txt",
-          "sha256": "1920184CDD5E359C2989505575883952A906B6E3FCA0A37F3EFA7AEE18CDF05C"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-1\\help-04.txt",
+          "sha256": "7C6509AC4077FD9A4E622E976AAAAB94A200C37D2DFA25886ED4EE837229AB3D"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-look\\ledger\\packet-1\\help-05.txt",
-          "sha256": "43CA9EAB97C68672C4ED0FD131AE85F90AC5C98F95C5144680D6A42F8CDF34D5"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-1\\help-05.txt",
+          "sha256": "C887081DD562A9B0F3992AE19693E6A7411EDC62E81D8815D172337EF65B2C9A"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-look\\ledger\\packet-1\\help-06.txt",
-          "sha256": "0E048739379D05FAC8E0C0464BDE5D77BC53FCC721578330AF7B94FE9664F8F3"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-1\\help-06.txt",
+          "sha256": "7F7958C9E1FDE95693D859D9B533F30E66856E942F33C72689EE1D3EA9389D53"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-look\\ledger\\packet-1\\help-07.txt",
-          "sha256": "FF9DE43C5583BC3D6FE6C5D187021C7A26FBE2A05A2B0984C88D9E7D7F74BD83"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-1\\help-07.txt",
+          "sha256": "BDA7C64968B021C80116128812CBCAFE6894CAB968A34D400E48DE6B188B3DA2"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-look\\ledger\\packet-1\\help-08.txt",
-          "sha256": "5B311352459455396814C10570FDD81EB83A8375860BB3610D79549E1CA5B6DB"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-1\\help-08.txt",
+          "sha256": "F194B16F25AACBC6B6BC1EC66298501555041BBC81E8328E9E3B1700D002E06E"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-look\\ledger\\packet-1\\help-09.txt",
-          "sha256": "C145BFB4DB06F5FA02137C7A13892D6FC129087845D94483C0B07976C5D1CC7F"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-1\\help-09.txt",
+          "sha256": "0972AAE7E975B7553CDC1C985C3792EA8A594A8B7B9C22AC450399F375CEA6CF"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-look\\ledger\\packet-1\\help-10.txt",
-          "sha256": "8E4F5B47FB7066D611C3B17EB9A26C3D26F7098E64E53C20ACEBE9B1214C31D9"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-1\\help-10.txt",
+          "sha256": "1A966F4F3C147AC68D9DA9EF80B76F467A725E6BC3CA3EDCFD833DD31508398D"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-look\\ledger\\packet-1\\help-11.txt",
-          "sha256": "D7781B24973EC35E231DA6EF327FEEF5FDE5E722F0EBBF20ACC2FE73001727A5"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-1\\help-11.txt",
+          "sha256": "9A288401F0D799B4790206E7C39079CE469827B9DB4AA6A1CF16EAA514A0DC82"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-look\\ledger\\packet-1\\help-12.txt",
-          "sha256": "12E1EFF9A716AC1A5530E104F70666989BC7DC328C74C6D8B213800C837FE880"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-1\\help-12.txt",
+          "sha256": "AE72E9F2D75E21E3848482ECDDDA60B57F456AFA9A047A7ECBA623A67ADAC297"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-look\\ledger\\packet-1\\help-13.txt",
-          "sha256": "B78ADCE0C7683588BDC5FA874AFA48A99A2C89F956FD800FCAE50704FACC3072"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-1\\help-13.txt",
+          "sha256": "CB608C5ABCCD3379FEE3E582A0EF50261EECAC6B27F2F1AA92011029D413100E"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-look\\ledger\\packet-1\\help-14.txt",
-          "sha256": "CC8D7D47ACAD484A3E71F5A1060F6E06D0D37C6C39D18B82DDE4FD94EE4B4C5A"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-1\\help-14.txt",
+          "sha256": "09A70380983116B96584F02B3F11353716F00FECBB4CD13D2FFADE14BAC489F5"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-look\\ledger\\packet-1\\help-15.txt",
-          "sha256": "1CA78C3741B8A5C6F696072D83E2F2430C593818965867A1AE287BD3BFF3ECF5"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-1\\help-15.txt",
+          "sha256": "BE7E8CB021B8BF945F6C50154EA138E986EE07621893194BE0A0D7F72F77EBE8"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-look\\ledger\\packet-1\\help-16.txt",
-          "sha256": "E8304E59D0EC7243814DAD546F5B6A39D1D177B77BB5456E56481E052399ADE6"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-1\\help-16.txt",
+          "sha256": "C7671E1442629C26E55B866F3FB113544BD1F5A795D2AC59F8016B377B91B84D"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-look\\ledger\\packet-1\\help-17.txt",
-          "sha256": "68A5A989FB9BB99D750276084C97A4CDCCB95BD604A4A5DF08BF54DDBB4D89B4"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-1\\help-17.txt",
+          "sha256": "95C5EB23E49202273E079D1BCFA97D907DA17CE9C92423B419D6E8A859207253"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-look\\ledger\\packet-1\\help-18.txt",
-          "sha256": "DB173550D7D97924480AAD25E95611B1C2E52C7A2ED5693A71A3E7FE77E3C138"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-1\\help-18.txt",
+          "sha256": "3C694DF103D2B6BF6DF4F41D42AFD95F447845BAE196C95D75A58103FC047058"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-look\\ledger\\packet-1\\help-19.txt",
-          "sha256": "0147112F827B95B96D86BD502BF5535D9B86639EABFBBBA96A42775AA1E718A9"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-1\\help-19.txt",
+          "sha256": "AAF9CA41C408FAB203060B48F3F7C22F55F556D319C751337E6368CE47DE4C05"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-look\\ledger\\packet-1\\help-20.txt",
-          "sha256": "96BCF85FC90BFFEE4A293D00A91CD80514E0211C6524F79E5AA9C063AF625446"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-1\\help-20.txt",
+          "sha256": "9CCE2A93D25B9411324A0BCB6086F36E73983A73693303C291C1A6245D693AAC"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-look\\ledger\\packet-1\\help-21.txt",
-          "sha256": "D8ECC03B1BCD351AD2ACB44691C43E00194DE26787FDE9A35D61E0C10775235A"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-1\\help-21.txt",
+          "sha256": "03CDEA5E1C140F1AB413FD918B109367A4C986BA0E7E18CC2744A3FE459D7673"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-look\\ledger\\packet-1\\help-22.txt",
-          "sha256": "ED4F4BE14020F2A4F08D627E003C631AAA6F92860FE41A4F6782BE96AB236DE5"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-1\\help-22.txt",
+          "sha256": "C61783BE30346654EC1F0F8EACA0EBCC55A13ECD6F0767E39EF76CB67447D11D"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-look\\ledger\\packet-1\\help-23.txt",
-          "sha256": "21C6F49224DE233FC567A7DC1A569CE9A64A1CB760A86F7D957E7AAA53A07546"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-1\\help-23.txt",
+          "sha256": "5F8DBA194E5F68EDD9359F1811E94EA6D3151A349B4AAC9A7B881BB38ED8D670"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-look\\ledger\\packet-1\\help-24.txt",
-          "sha256": "12E1EFF9A716AC1A5530E104F70666989BC7DC328C74C6D8B213800C837FE880"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-1\\help-24.txt",
+          "sha256": "AE72E9F2D75E21E3848482ECDDDA60B57F456AFA9A047A7ECBA623A67ADAC297"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-look\\ledger\\packet-1\\help-25.txt",
-          "sha256": "B78ADCE0C7683588BDC5FA874AFA48A99A2C89F956FD800FCAE50704FACC3072"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-1\\help-25.txt",
+          "sha256": "CB608C5ABCCD3379FEE3E582A0EF50261EECAC6B27F2F1AA92011029D413100E"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-look\\ledger\\packet-1\\help-26.txt",
-          "sha256": "CC8D7D47ACAD484A3E71F5A1060F6E06D0D37C6C39D18B82DDE4FD94EE4B4C5A"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-1\\help-26.txt",
+          "sha256": "09A70380983116B96584F02B3F11353716F00FECBB4CD13D2FFADE14BAC489F5"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-look\\ledger\\packet-1\\help-27.txt",
-          "sha256": "1CA78C3741B8A5C6F696072D83E2F2430C593818965867A1AE287BD3BFF3ECF5"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-1\\help-27.txt",
+          "sha256": "BE7E8CB021B8BF945F6C50154EA138E986EE07621893194BE0A0D7F72F77EBE8"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-look\\ledger\\packet-1\\help-28.txt",
-          "sha256": "E8304E59D0EC7243814DAD546F5B6A39D1D177B77BB5456E56481E052399ADE6"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-1\\help-28.txt",
+          "sha256": "C7671E1442629C26E55B866F3FB113544BD1F5A795D2AC59F8016B377B91B84D"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-look\\ledger\\packet-1\\help-29.txt",
-          "sha256": "68A5A989FB9BB99D750276084C97A4CDCCB95BD604A4A5DF08BF54DDBB4D89B4"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-1\\help-29.txt",
+          "sha256": "95C5EB23E49202273E079D1BCFA97D907DA17CE9C92423B419D6E8A859207253"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-look\\ledger\\packet-1\\help-30.txt",
-          "sha256": "DB173550D7D97924480AAD25E95611B1C2E52C7A2ED5693A71A3E7FE77E3C138"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-1\\help-30.txt",
+          "sha256": "3C694DF103D2B6BF6DF4F41D42AFD95F447845BAE196C95D75A58103FC047058"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-look\\ledger\\packet-1\\help-31.txt",
-          "sha256": "0147112F827B95B96D86BD502BF5535D9B86639EABFBBBA96A42775AA1E718A9"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-1\\help-31.txt",
+          "sha256": "AAF9CA41C408FAB203060B48F3F7C22F55F556D319C751337E6368CE47DE4C05"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-look\\ledger\\packet-1\\help-32.txt",
-          "sha256": "96BCF85FC90BFFEE4A293D00A91CD80514E0211C6524F79E5AA9C063AF625446"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-1\\help-32.txt",
+          "sha256": "9CCE2A93D25B9411324A0BCB6086F36E73983A73693303C291C1A6245D693AAC"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-look\\ledger\\packet-1\\help-33.txt",
-          "sha256": "D8ECC03B1BCD351AD2ACB44691C43E00194DE26787FDE9A35D61E0C10775235A"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-1\\help-33.txt",
+          "sha256": "03CDEA5E1C140F1AB413FD918B109367A4C986BA0E7E18CC2744A3FE459D7673"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-look\\ledger\\packet-1\\help-34.txt",
-          "sha256": "ED4F4BE14020F2A4F08D627E003C631AAA6F92860FE41A4F6782BE96AB236DE5"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-1\\help-34.txt",
+          "sha256": "C61783BE30346654EC1F0F8EACA0EBCC55A13ECD6F0767E39EF76CB67447D11D"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-look\\ledger\\packet-1\\help-35.txt",
-          "sha256": "21C6F49224DE233FC567A7DC1A569CE9A64A1CB760A86F7D957E7AAA53A07546"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-1\\help-35.txt",
+          "sha256": "5F8DBA194E5F68EDD9359F1811E94EA6D3151A349B4AAC9A7B881BB38ED8D670"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-look\\ledger\\packet-1\\help-36.txt",
-          "sha256": "12E1EFF9A716AC1A5530E104F70666989BC7DC328C74C6D8B213800C837FE880"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-1\\help-36.txt",
+          "sha256": "AE72E9F2D75E21E3848482ECDDDA60B57F456AFA9A047A7ECBA623A67ADAC297"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-look\\ledger\\packet-1\\help-37.txt",
-          "sha256": "B78ADCE0C7683588BDC5FA874AFA48A99A2C89F956FD800FCAE50704FACC3072"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-1\\help-37.txt",
+          "sha256": "CB608C5ABCCD3379FEE3E582A0EF50261EECAC6B27F2F1AA92011029D413100E"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-look\\ledger\\packet-1\\help-38.txt",
-          "sha256": "CC8D7D47ACAD484A3E71F5A1060F6E06D0D37C6C39D18B82DDE4FD94EE4B4C5A"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-1\\help-38.txt",
+          "sha256": "09A70380983116B96584F02B3F11353716F00FECBB4CD13D2FFADE14BAC489F5"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-look\\ledger\\packet-1\\help-39.txt",
-          "sha256": "1CA78C3741B8A5C6F696072D83E2F2430C593818965867A1AE287BD3BFF3ECF5"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-1\\help-39.txt",
+          "sha256": "BE7E8CB021B8BF945F6C50154EA138E986EE07621893194BE0A0D7F72F77EBE8"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-look\\ledger\\packet-1\\help-40.txt",
-          "sha256": "E8304E59D0EC7243814DAD546F5B6A39D1D177B77BB5456E56481E052399ADE6"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-1\\help-40.txt",
+          "sha256": "C7671E1442629C26E55B866F3FB113544BD1F5A795D2AC59F8016B377B91B84D"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-look\\ledger\\packet-1\\help-41.txt",
-          "sha256": "68A5A989FB9BB99D750276084C97A4CDCCB95BD604A4A5DF08BF54DDBB4D89B4"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-1\\help-41.txt",
+          "sha256": "95C5EB23E49202273E079D1BCFA97D907DA17CE9C92423B419D6E8A859207253"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-look\\ledger\\packet-1\\help-42.txt",
-          "sha256": "DB173550D7D97924480AAD25E95611B1C2E52C7A2ED5693A71A3E7FE77E3C138"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-1\\help-42.txt",
+          "sha256": "3C694DF103D2B6BF6DF4F41D42AFD95F447845BAE196C95D75A58103FC047058"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-look\\ledger\\packet-1\\help-43.txt",
-          "sha256": "0147112F827B95B96D86BD502BF5535D9B86639EABFBBBA96A42775AA1E718A9"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-1\\help-43.txt",
+          "sha256": "AAF9CA41C408FAB203060B48F3F7C22F55F556D319C751337E6368CE47DE4C05"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-look\\ledger\\packet-1\\help-44.txt",
-          "sha256": "96BCF85FC90BFFEE4A293D00A91CD80514E0211C6524F79E5AA9C063AF625446"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-1\\help-44.txt",
+          "sha256": "9CCE2A93D25B9411324A0BCB6086F36E73983A73693303C291C1A6245D693AAC"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-look\\ledger\\packet-1\\help-45.txt",
-          "sha256": "D8ECC03B1BCD351AD2ACB44691C43E00194DE26787FDE9A35D61E0C10775235A"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-1\\help-45.txt",
+          "sha256": "03CDEA5E1C140F1AB413FD918B109367A4C986BA0E7E18CC2744A3FE459D7673"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-look\\ledger\\packet-1\\help-46.txt",
-          "sha256": "ED4F4BE14020F2A4F08D627E003C631AAA6F92860FE41A4F6782BE96AB236DE5"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-1\\help-46.txt",
+          "sha256": "C61783BE30346654EC1F0F8EACA0EBCC55A13ECD6F0767E39EF76CB67447D11D"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-look\\ledger\\packet-1\\help-47.txt",
-          "sha256": "21C6F49224DE233FC567A7DC1A569CE9A64A1CB760A86F7D957E7AAA53A07546"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-1\\help-47.txt",
+          "sha256": "5F8DBA194E5F68EDD9359F1811E94EA6D3151A349B4AAC9A7B881BB38ED8D670"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-look\\ledger\\packet-1\\help-48.txt",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-1\\help-48.txt",
           "sha256": "5124886CF5EC22FC8640FE1982EE53E54D24C46B0CB6B1074B6544F353DCB364"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-look\\ledger\\packet-1\\help-49.txt",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-1\\help-49.txt",
           "sha256": "C7EBE59AF3FCF6FDDAE0FDABF26C588505133F86502A87E3B6E9797C5C645E00"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-look\\ledger\\packet-1\\help-50.txt",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-1\\help-50.txt",
           "sha256": "72DBDA8EE3A8AA1F2B8FBA1F3BC32D8B3158222A7F2C3E32E9361A2B32A65D94"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-look\\ledger\\packet-1\\help-51.txt",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-1\\help-51.txt",
           "sha256": "AC4BA95F84C1013D1C5501D667EE2B98ADA0911CDC816ECAFA630B1E611D10E7"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-look\\ledger\\packet-1\\help-52.txt",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-1\\help-52.txt",
           "sha256": "FEA779ADB7AD97359A3DB812E31631EB7B1D9C7CBB133744B64E910FA3D3CA21"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-look\\ledger\\packet-1\\help-53.txt",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-1\\help-53.txt",
           "sha256": "AE04F7D7C1FDD5DCCCC6D8BB56CED6A1CD807F2CFD7499D363B2CFAEB3F012B0"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-look\\ledger\\packet-1\\proofs.log",
-          "sha256": "DABC719BB09BCB978F348502E2E8C454885C593DBD0866018D25233259429FB5"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-1\\proofs.log",
+          "sha256": "74ACC60C626D3BC962C69DB83FBBDF4D1321B6D76374BCC3EB416762AAF5F11A"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-look\\ledger\\packet-1\\comparisons.json",
-          "sha256": "982D0524028449CCEBAA1937B83539D793EEE720C662CB0FD06629FA68586A24"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-1\\comparisons.json",
+          "sha256": "2C93DA8B0B95FD55D7D01E5384F6AD09DCC848EDF2CC552323B679A15424518B"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-look\\ledger\\packet-1\\executed\\FamilyQuant.Core_HelpContent.cs",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-1\\executed\\FamilyQuant.Core_HelpContent.cs",
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-look\\ledger\\packet-1\\executed\\FamilyQuant_ClusterGenerationControl.xaml",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-1\\executed\\FamilyQuant_ClusterGenerationControl.xaml",
           "sha256": "884EFCF6A38C661CFA90A0EFE674287FCED626D78A526803BA93DB9F15D5A860"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-look\\ledger\\packet-1\\executed\\FamilyQuant_CurationQuantitationPanel.xaml",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-1\\executed\\FamilyQuant_CurationQuantitationPanel.xaml",
           "sha256": "0888694E19AD785E8D3EE32CC9BC45E12893F81B7C7C9BEADC34FF5B7029E8ED"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-look\\ledger\\packet-1\\executed\\FamilyQuant_DeNovoControl.xaml",
-          "sha256": "C64BA87F386ED38607C988542429882451BF749DFA54D8C9F359145F79422806"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-1\\executed\\FamilyQuant_DeNovoControl.xaml",
+          "sha256": "024AB577E3E28F445C6B4761C3F093510532E25933AA8B5A036D8AD8B2DFB6BC"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-look\\ledger\\packet-1\\executed\\FamilyQuant_DeNovoFilterControl.xaml",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-1\\executed\\FamilyQuant_DeNovoFilterControl.xaml",
           "sha256": "F071C396E8C1569A4D5D90280432F0C81E34E78453DBB57B9107C8AC4743CCAE"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-look\\ledger\\packet-1\\executed\\FamilyQuant_HomeControl.xaml",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-1\\executed\\FamilyQuant_HomeControl.xaml",
           "sha256": "6F1E11235C84A5C91032FB1AAF08E29BE2858D714B80B29C91B8BBF1BC94D860"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-look\\ledger\\packet-1\\executed\\FamilyQuant_MainWindow.xaml",
-          "sha256": "C34B6B3C4A8CC070F8CE85F79EBD1028CB595CA97984247DA5825BA5AFD06F86"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-1\\executed\\FamilyQuant_MainWindow.xaml",
+          "sha256": "422DE48434233AA62B67BF4F37326A8F66C6C2771A45A828E40318E09A1806C5"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-look\\ledger\\packet-1\\executed\\FamilyQuant_QuantifyControl.xaml",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-1\\executed\\FamilyQuant_QuantifyControl.xaml",
           "sha256": "D38B0EB9B479D201C1C79FCF1C6957B480EC734C91FFC3B31235D94CF0A010F1"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-look\\ledger\\packet-1\\executed\\FamilyQuant_USearch.xaml",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-1\\executed\\FamilyQuant_USearch.xaml",
           "sha256": "CFCD12EC58A094D0B5C3D8FE9CA0D07FB442F6DCFB5480F299D786E839BE0202"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-look\\ledger\\packet-1\\executed\\FamilyQuant_TextReportWindow.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-1\\executed\\FamilyQuant_TextReportWindow.cs",
           "sha256": "275E35B236EEC4C43FB54B6CC049E5C5E62A1767176D6F6410A3D69421106F96"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-look\\ledger\\packet-1\\executed\\FamilyQuant_SecondaryWindowView.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-1\\executed\\FamilyQuant_SecondaryWindowView.cs",
           "sha256": "5DDABCDF5F47F3CBCC271B0F04EB20CE51BA12353DD117C1A3EDE8684A742CDE"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-look\\ledger\\packet-1\\executed\\FamilyQuant_ClusterGenerationControl.xaml.cs",
-          "sha256": "073DE60DAA4FAFE50DFD4BB47CA697034B20CA3A408CB9A72A65E20BE0DCF7E5"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-1\\executed\\FamilyQuant_ClusterGenerationControl.xaml.cs",
+          "sha256": "FC475D8417A728CC61528A1F8C49C467B1612D6C6E11462AA731A9284BFBCC48"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-look\\ledger\\packet-1\\executed\\FamilyQuant_DeNovoControl.xaml.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-1\\executed\\FamilyQuant_DeNovoControl.xaml.cs",
           "sha256": "99FC1066E85361D8BCA7BDDC16FBA2B172DF2E8932268731E91F4B01854CECD8"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-look\\ledger\\packet-1\\executed\\FamilyQuant.Tests_Program.LookCopyReceipts.cs",
-          "sha256": "51370573C09CE299D09CE8082536F0FB51256C0E5B781A4E4DBC95CB5C9FC2E0"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-1\\executed\\FamilyQuant.Tests_Program.LookCopyReceipts.cs",
+          "sha256": "D07053DC0BC32DAB1496927D6F02B7A646411D4E7F78E68C28B01F9CABF4A5AE"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-look\\ledger\\packet-1\\executed\\FamilyQuant.Tests_Program.LookCopyPreservation.cs",
-          "sha256": "195BA483B06731A12B3115CD7B3BDD4C95B4F26AFA1AFF2C0D34162F25DE3CF7"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-1\\executed\\FamilyQuant.Tests_Program.LookCopyPreservation.cs",
+          "sha256": "7766CE167024DA05453F9728B01E06B04C92B554E9D29436244C808A856496FE"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-look\\ledger\\packet-1\\executed\\FamilyQuant.Tests_LedgerPublishedCopyComparison.cs",
-          "sha256": "779BA0D85542A960F2BA869EF2BC585127F26EE5787A38CC1C53D6881AA08BF1"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-1\\executed\\FamilyQuant.Tests_LedgerPublishedCopyComparison.cs",
+          "sha256": "499C211615F1A4DB5C7F795FAB0DFE9C3306D5F04F51B487934A41AB7FFD1385"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-look\\ledger\\packet-1\\executed\\FamilyQuant.Tests_LedgerMemberFactComparison.cs",
-          "sha256": "AE18ABC01A916A43012F3E34F1B53798FC99346FFEB21CD179CA3D8ADE5834A7"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-1\\executed\\FamilyQuant.Tests_LedgerMemberFactComparison.cs",
+          "sha256": "1F3254D635B40D22576E9F40347DBEB503A5FF661EFC18E743EAC35B097FC14C"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-look\\ledger\\packet-1\\executed\\FamilyQuant.Tests_LedgerDeclarationComparison.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-1\\executed\\FamilyQuant.Tests_LedgerDeclarationComparison.cs",
           "sha256": "78EC993565740269D572410A84584AF1D96488C1AE81F2455B1D9AA2D94BB4C3"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-look\\ledger\\packet-1\\executed\\FamilyQuant.Tests_Program.Commands.LookLedger.cs",
-          "sha256": "E7A532F8244E50197AFF12B3F935619EF172FF4C1562162CD878CE39DFBBCEE5"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-1\\executed\\FamilyQuant.Tests_Program.Commands.LookLedger.cs",
+          "sha256": "720C18B4EFB51512A4DF2EEB3E25DFD58C9029105886C20E6072F27FD3396992"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-look\\ledger\\packet-1\\executed\\FamilyQuant.Tests.dll",
-          "sha256": "4228FF0727D561FEEE22AEFD1E089D00669F07F3D2F8CD2CB3F4E07B4C4839A5"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-1\\executed\\FamilyQuant.Tests.dll",
+          "sha256": "9A01C4E961B1B9331249F83D454CD0D9EDE4E50B17D923CF7E0EBC917751C350"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-look\\ledger\\packet-1\\executed\\FamilyQuant2.dll",
-          "sha256": "D38801ACCD5C5DD5B289B68CEB13489FB30B3E7C04B6FA43670A5DA5AF32F80A"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-1\\executed\\FamilyQuant2.dll",
+          "sha256": "A062FA792C8BCC2C058A656D85EE046B4B11698AE1A93C43A0898B8D021F6CE2"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-look\\ledger\\packet-1\\executed\\FamilyQuant.Core.dll",
-          "sha256": "BBDDA6180AC49BF627066DACE2C71B65E1E2DBEBC35D8EF21FF6C389472C7896"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-1\\executed\\FamilyQuant.Core.dll",
+          "sha256": "F134CF23D6BD421822928B3419FF96FE425093781C645DA7AAA965F4BE639843"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-look\\ledger\\packet-1\\executed\\mapping.json",
-          "sha256": "64A930160C2DD93613D82E94A603527DC101DFB3D6E220C6F58DC201249B9E8C"
-        },
-        {
-          "path": "D:\\FamilyQuant-data\\out-look\\ledger\\packet-1\\executed\\report.json",
-          "sha256": "6021E5FC6227F2C927AACFEA83EA0F4E9FC4DB69E29D52E04A643446CA941209"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-1\\executed\\LK-copy-1.json",
+          "sha256": "AF716825C89CE1E7BA0F578CEFCEFFBC0A329A1F4AA4C2AEF4A75B97A7DA0300"
         }
       ],
-      "workingDirectory": "D:\\FamilyQuant-wt\\look"
+      "workingDirectory": "C:\\FamilyQuant-gate"
     }
   ],
   "rows": [
@@ -360,7 +356,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "HelpContent.BuildDeNovo -\u003E TextReportWindow report.Text",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         },
         {
           "path": "FamilyQuant/TextReportWindow.cs",
@@ -375,7 +371,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "Published Help text route",
-          "sha256": "073DE60DAA4FAFE50DFD4BB47CA697034B20CA3A408CB9A72A65E20BE0DCF7E5"
+          "sha256": "FC475D8417A728CC61528A1F8C49C467B1612D6C6E11462AA731A9284BFBCC48"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -394,7 +390,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "HelpContent.Build -\u003E TextReportWindow report.Text",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         },
         {
           "path": "FamilyQuant/TextReportWindow.cs",
@@ -409,7 +405,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "Published Help text route",
-          "sha256": "073DE60DAA4FAFE50DFD4BB47CA697034B20CA3A408CB9A72A65E20BE0DCF7E5"
+          "sha256": "FC475D8417A728CC61528A1F8C49C467B1612D6C6E11462AA731A9284BFBCC48"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -428,7 +424,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "HelpContent.BuildDeNovo -\u003E TextReportWindow report.Text",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         },
         {
           "path": "FamilyQuant/TextReportWindow.cs",
@@ -443,7 +439,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "Published Help text route",
-          "sha256": "073DE60DAA4FAFE50DFD4BB47CA697034B20CA3A408CB9A72A65E20BE0DCF7E5"
+          "sha256": "FC475D8417A728CC61528A1F8C49C467B1612D6C6E11462AA731A9284BFBCC48"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -462,7 +458,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "HelpContent.BuildDeNovo -\u003E TextReportWindow report.Text",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         },
         {
           "path": "FamilyQuant/TextReportWindow.cs",
@@ -477,7 +473,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "Published Help text route",
-          "sha256": "073DE60DAA4FAFE50DFD4BB47CA697034B20CA3A408CB9A72A65E20BE0DCF7E5"
+          "sha256": "FC475D8417A728CC61528A1F8C49C467B1612D6C6E11462AA731A9284BFBCC48"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -504,7 +500,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "HelpContent.BuildDeNovo -\u003E TextReportWindow report.Text",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         },
         {
           "path": "FamilyQuant/TextReportWindow.cs",
@@ -519,7 +515,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "Published Help text route",
-          "sha256": "073DE60DAA4FAFE50DFD4BB47CA697034B20CA3A408CB9A72A65E20BE0DCF7E5"
+          "sha256": "FC475D8417A728CC61528A1F8C49C467B1612D6C6E11462AA731A9284BFBCC48"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -538,7 +534,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "HelpContent.BuildDeNovo -\u003E TextReportWindow report.Text",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         },
         {
           "path": "FamilyQuant/TextReportWindow.cs",
@@ -553,7 +549,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "Published Help text route",
-          "sha256": "073DE60DAA4FAFE50DFD4BB47CA697034B20CA3A408CB9A72A65E20BE0DCF7E5"
+          "sha256": "FC475D8417A728CC61528A1F8C49C467B1612D6C6E11462AA731A9284BFBCC48"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -572,7 +568,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "HelpContent.BuildDeNovo -\u003E TextReportWindow report.Text",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         },
         {
           "path": "FamilyQuant/TextReportWindow.cs",
@@ -587,7 +583,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "Published Help text route",
-          "sha256": "073DE60DAA4FAFE50DFD4BB47CA697034B20CA3A408CB9A72A65E20BE0DCF7E5"
+          "sha256": "FC475D8417A728CC61528A1F8C49C467B1612D6C6E11462AA731A9284BFBCC48"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -614,7 +610,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "HelpContent.BuildDeNovo -\u003E TextReportWindow report.Text",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         },
         {
           "path": "FamilyQuant/TextReportWindow.cs",
@@ -629,7 +625,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "Published Help text route",
-          "sha256": "073DE60DAA4FAFE50DFD4BB47CA697034B20CA3A408CB9A72A65E20BE0DCF7E5"
+          "sha256": "FC475D8417A728CC61528A1F8C49C467B1612D6C6E11462AA731A9284BFBCC48"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -656,7 +652,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "HelpContent.BuildDeNovo -\u003E TextReportWindow report.Text",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         },
         {
           "path": "FamilyQuant/TextReportWindow.cs",
@@ -671,7 +667,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "Published Help text route",
-          "sha256": "073DE60DAA4FAFE50DFD4BB47CA697034B20CA3A408CB9A72A65E20BE0DCF7E5"
+          "sha256": "FC475D8417A728CC61528A1F8C49C467B1612D6C6E11462AA731A9284BFBCC48"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -698,7 +694,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "FamilyQuant.DeNovoControl.TextBoxStretchLength.ToolTip",
-          "sha256": "C64BA87F386ED38607C988542429882451BF749DFA54D8C9F359145F79422806"
+          "sha256": "024AB577E3E28F445C6B4761C3F093510532E25933AA8B5A036D8AD8B2DFB6BC"
         }
       ],
       "proofs": [],
@@ -712,7 +708,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "HelpContent.BuildDeNovo -\u003E TextReportWindow report.Text",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         },
         {
           "path": "FamilyQuant/TextReportWindow.cs",
@@ -727,7 +723,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "Published Help text route",
-          "sha256": "073DE60DAA4FAFE50DFD4BB47CA697034B20CA3A408CB9A72A65E20BE0DCF7E5"
+          "sha256": "FC475D8417A728CC61528A1F8C49C467B1612D6C6E11462AA731A9284BFBCC48"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -746,7 +742,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "FamilyQuant.HelpContent::public static string BuildDeNovo ( DeNovoFilterCriteria ? criteria = null , DeNovoSource ? source = null )",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         }
       ],
       "proofs": [],
@@ -768,7 +764,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "HelpContent.Build -\u003E TextReportWindow report.Text",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         },
         {
           "path": "FamilyQuant/TextReportWindow.cs",
@@ -783,7 +779,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "Published Help text route",
-          "sha256": "073DE60DAA4FAFE50DFD4BB47CA697034B20CA3A408CB9A72A65E20BE0DCF7E5"
+          "sha256": "FC475D8417A728CC61528A1F8C49C467B1612D6C6E11462AA731A9284BFBCC48"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -810,7 +806,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "FamilyQuant.DeNovoControl.ButtonLoadAndFilter.ToolTip",
-          "sha256": "C64BA87F386ED38607C988542429882451BF749DFA54D8C9F359145F79422806"
+          "sha256": "024AB577E3E28F445C6B4761C3F093510532E25933AA8B5A036D8AD8B2DFB6BC"
         }
       ],
       "proofs": [],
@@ -832,7 +828,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "HelpContent.Build -\u003E TextReportWindow report.Text",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         },
         {
           "path": "FamilyQuant/TextReportWindow.cs",
@@ -847,7 +843,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "Published Help text route",
-          "sha256": "073DE60DAA4FAFE50DFD4BB47CA697034B20CA3A408CB9A72A65E20BE0DCF7E5"
+          "sha256": "FC475D8417A728CC61528A1F8C49C467B1612D6C6E11462AA731A9284BFBCC48"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -866,7 +862,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "HelpContent.Build -\u003E TextReportWindow report.Text",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         },
         {
           "path": "FamilyQuant/TextReportWindow.cs",
@@ -881,7 +877,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "Published Help text route",
-          "sha256": "073DE60DAA4FAFE50DFD4BB47CA697034B20CA3A408CB9A72A65E20BE0DCF7E5"
+          "sha256": "FC475D8417A728CC61528A1F8C49C467B1612D6C6E11462AA731A9284BFBCC48"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -900,7 +896,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "HelpContent.BuildDeNovo -\u003E TextReportWindow report.Text",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         },
         {
           "path": "FamilyQuant/TextReportWindow.cs",
@@ -915,7 +911,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "Published Help text route",
-          "sha256": "073DE60DAA4FAFE50DFD4BB47CA697034B20CA3A408CB9A72A65E20BE0DCF7E5"
+          "sha256": "FC475D8417A728CC61528A1F8C49C467B1612D6C6E11462AA731A9284BFBCC48"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -934,7 +930,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "HelpContent.BuildDeNovo -\u003E TextReportWindow report.Text",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         },
         {
           "path": "FamilyQuant/TextReportWindow.cs",
@@ -949,7 +945,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "Published Help text route",
-          "sha256": "073DE60DAA4FAFE50DFD4BB47CA697034B20CA3A408CB9A72A65E20BE0DCF7E5"
+          "sha256": "FC475D8417A728CC61528A1F8C49C467B1612D6C6E11462AA731A9284BFBCC48"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -968,7 +964,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "HelpContent.Build -\u003E TextReportWindow report.Text",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         },
         {
           "path": "FamilyQuant/TextReportWindow.cs",
@@ -983,7 +979,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "Published Help text route",
-          "sha256": "073DE60DAA4FAFE50DFD4BB47CA697034B20CA3A408CB9A72A65E20BE0DCF7E5"
+          "sha256": "FC475D8417A728CC61528A1F8C49C467B1612D6C6E11462AA731A9284BFBCC48"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -1002,7 +998,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "HelpContent.BuildDeNovo -\u003E TextReportWindow report.Text",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         },
         {
           "path": "FamilyQuant/TextReportWindow.cs",
@@ -1017,7 +1013,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "Published Help text route",
-          "sha256": "073DE60DAA4FAFE50DFD4BB47CA697034B20CA3A408CB9A72A65E20BE0DCF7E5"
+          "sha256": "FC475D8417A728CC61528A1F8C49C467B1612D6C6E11462AA731A9284BFBCC48"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -1044,7 +1040,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "HelpContent.Build -\u003E TextReportWindow report.Text",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         },
         {
           "path": "FamilyQuant/TextReportWindow.cs",
@@ -1059,7 +1055,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "Published Help text route",
-          "sha256": "073DE60DAA4FAFE50DFD4BB47CA697034B20CA3A408CB9A72A65E20BE0DCF7E5"
+          "sha256": "FC475D8417A728CC61528A1F8C49C467B1612D6C6E11462AA731A9284BFBCC48"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -1078,7 +1074,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "HelpContent.BuildDeNovo -\u003E TextReportWindow report.Text",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         },
         {
           "path": "FamilyQuant/TextReportWindow.cs",
@@ -1093,7 +1089,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "Published Help text route",
-          "sha256": "073DE60DAA4FAFE50DFD4BB47CA697034B20CA3A408CB9A72A65E20BE0DCF7E5"
+          "sha256": "FC475D8417A728CC61528A1F8C49C467B1612D6C6E11462AA731A9284BFBCC48"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -1120,7 +1116,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "HelpContent.BuildDeNovo -\u003E TextReportWindow report.Text",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         },
         {
           "path": "FamilyQuant/TextReportWindow.cs",
@@ -1135,7 +1131,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "Published Help text route",
-          "sha256": "073DE60DAA4FAFE50DFD4BB47CA697034B20CA3A408CB9A72A65E20BE0DCF7E5"
+          "sha256": "FC475D8417A728CC61528A1F8C49C467B1612D6C6E11462AA731A9284BFBCC48"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -1162,7 +1158,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "FamilyQuant.DeNovoControl.TextBoxMinLength.ToolTip",
-          "sha256": "C64BA87F386ED38607C988542429882451BF749DFA54D8C9F359145F79422806"
+          "sha256": "024AB577E3E28F445C6B4761C3F093510532E25933AA8B5A036D8AD8B2DFB6BC"
         }
       ],
       "proofs": [],
@@ -1184,7 +1180,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "HelpContent.BuildDeNovo -\u003E TextReportWindow report.Text",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         },
         {
           "path": "FamilyQuant/TextReportWindow.cs",
@@ -1199,7 +1195,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "Published Help text route",
-          "sha256": "073DE60DAA4FAFE50DFD4BB47CA697034B20CA3A408CB9A72A65E20BE0DCF7E5"
+          "sha256": "FC475D8417A728CC61528A1F8C49C467B1612D6C6E11462AA731A9284BFBCC48"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -1226,7 +1222,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "HelpContent.Build -\u003E TextReportWindow report.Text",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         },
         {
           "path": "FamilyQuant/TextReportWindow.cs",
@@ -1241,7 +1237,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "Published Help text route",
-          "sha256": "073DE60DAA4FAFE50DFD4BB47CA697034B20CA3A408CB9A72A65E20BE0DCF7E5"
+          "sha256": "FC475D8417A728CC61528A1F8C49C467B1612D6C6E11462AA731A9284BFBCC48"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -1260,7 +1256,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "HelpContent.BuildDeNovo -\u003E TextReportWindow report.Text",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         },
         {
           "path": "FamilyQuant/TextReportWindow.cs",
@@ -1275,7 +1271,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "Published Help text route",
-          "sha256": "073DE60DAA4FAFE50DFD4BB47CA697034B20CA3A408CB9A72A65E20BE0DCF7E5"
+          "sha256": "FC475D8417A728CC61528A1F8C49C467B1612D6C6E11462AA731A9284BFBCC48"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -1302,7 +1298,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "HelpContent.BuildDeNovo -\u003E TextReportWindow report.Text",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         },
         {
           "path": "FamilyQuant/TextReportWindow.cs",
@@ -1317,7 +1313,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "Published Help text route",
-          "sha256": "073DE60DAA4FAFE50DFD4BB47CA697034B20CA3A408CB9A72A65E20BE0DCF7E5"
+          "sha256": "FC475D8417A728CC61528A1F8C49C467B1612D6C6E11462AA731A9284BFBCC48"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -1336,7 +1332,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "HelpContent.BuildDeNovo -\u003E TextReportWindow report.Text",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         },
         {
           "path": "FamilyQuant/TextReportWindow.cs",
@@ -1351,7 +1347,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "Published Help text route",
-          "sha256": "073DE60DAA4FAFE50DFD4BB47CA697034B20CA3A408CB9A72A65E20BE0DCF7E5"
+          "sha256": "FC475D8417A728CC61528A1F8C49C467B1612D6C6E11462AA731A9284BFBCC48"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -1370,7 +1366,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "HelpContent.BuildDeNovo -\u003E TextReportWindow report.Text",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         },
         {
           "path": "FamilyQuant/TextReportWindow.cs",
@@ -1385,7 +1381,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "Published Help text route",
-          "sha256": "073DE60DAA4FAFE50DFD4BB47CA697034B20CA3A408CB9A72A65E20BE0DCF7E5"
+          "sha256": "FC475D8417A728CC61528A1F8C49C467B1612D6C6E11462AA731A9284BFBCC48"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -1404,7 +1400,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "FamilyQuant.HelpContent::public static string Build ( QuantitationProfile ? profile , NormalizationMode mode , SharedPeptidePolicy policy )",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         }
       ],
       "proofs": [],
@@ -1417,34 +1413,14 @@
       "implementation": [
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
-          "symbol": "HelpContent.Build -\u003E TextReportWindow report.Text",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
-        },
-        {
-          "path": "FamilyQuant/TextReportWindow.cs",
-          "symbol": "Published Help text route",
-          "sha256": "275E35B236EEC4C43FB54B6CC049E5C5E62A1767176D6F6410A3D69421106F96"
-        },
-        {
-          "path": "FamilyQuant/SecondaryWindowView.cs",
-          "symbol": "Published Help text route",
-          "sha256": "5DDABCDF5F47F3CBCC271B0F04EB20CE51BA12353DD117C1A3EDE8684A742CDE"
-        },
-        {
-          "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
-          "symbol": "Published Help text route",
-          "sha256": "073DE60DAA4FAFE50DFD4BB47CA697034B20CA3A408CB9A72A65E20BE0DCF7E5"
-        },
-        {
-          "path": "FamilyQuant/DeNovoControl.xaml.cs",
-          "symbol": "Published Help text route",
-          "sha256": "99FC1066E85361D8BCA7BDDC16FBA2B172DF2E8932268731E91F4B01854CECD8"
+          "symbol": "FamilyQuant.HelpContent::public static string Build ( QuantitationProfile ? profile , NormalizationMode mode , SharedPeptidePolicy policy )",
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         }
       ],
       "proofs": [],
-      "note": "Exact case-sensitive frozen literal is present in the same Help member\u0027s resolved text control; whitespace only is normalized. No handler, new scientific result or DPI claim.",
-      "kindReceiptId": "copy-help-fact-published-help",
-      "compared": "FamilyQuant.HelpContent::public static string Build ( QuantitationProfile ? profile , NormalizationMode mode , SharedPeptidePolicy policy ): \u0022A peptide whose sequence occurs in proteins of more than one family. In a venom\u0022 -\u003E FamilyQuant.Core/HelpContent.cs: HelpContent.Build -\u003E TextReportWindow report.Text; no-PatternLab/ChargeRestrictedSignal/CountInEveryFamily; actual A peptide whose sequence occurs in proteins of more than one family. In a venom"
+      "note": "The exact frozen fact is absent from its published Help member; changed wording needs a specific preservation proof. The exact literal multiplicity within the containing member changed. No handler, new scientific result or DPI claim.",
+      "kindReceiptId": null,
+      "compared": null
     },
     {
       "observationId": "FQ15-15A3347E96DE",
@@ -1452,7 +1428,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "HelpContent.Build -\u003E TextReportWindow report.Text",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         },
         {
           "path": "FamilyQuant/TextReportWindow.cs",
@@ -1467,7 +1443,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "Published Help text route",
-          "sha256": "073DE60DAA4FAFE50DFD4BB47CA697034B20CA3A408CB9A72A65E20BE0DCF7E5"
+          "sha256": "FC475D8417A728CC61528A1F8C49C467B1612D6C6E11462AA731A9284BFBCC48"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -1494,7 +1470,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "FamilyQuant.HelpContent::public static string Build ( QuantitationProfile ? profile , NormalizationMode mode , SharedPeptidePolicy policy )",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         }
       ],
       "proofs": [],
@@ -1508,7 +1484,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "HelpContent.BuildDeNovo -\u003E TextReportWindow report.Text",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         },
         {
           "path": "FamilyQuant/TextReportWindow.cs",
@@ -1523,7 +1499,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "Published Help text route",
-          "sha256": "073DE60DAA4FAFE50DFD4BB47CA697034B20CA3A408CB9A72A65E20BE0DCF7E5"
+          "sha256": "FC475D8417A728CC61528A1F8C49C467B1612D6C6E11462AA731A9284BFBCC48"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -1542,7 +1518,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "HelpContent.BuildDeNovo -\u003E TextReportWindow report.Text",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         },
         {
           "path": "FamilyQuant/TextReportWindow.cs",
@@ -1557,7 +1533,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "Published Help text route",
-          "sha256": "073DE60DAA4FAFE50DFD4BB47CA697034B20CA3A408CB9A72A65E20BE0DCF7E5"
+          "sha256": "FC475D8417A728CC61528A1F8C49C467B1612D6C6E11462AA731A9284BFBCC48"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -1576,7 +1552,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "HelpContent.Build -\u003E TextReportWindow report.Text",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         },
         {
           "path": "FamilyQuant/TextReportWindow.cs",
@@ -1591,7 +1567,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "Published Help text route",
-          "sha256": "073DE60DAA4FAFE50DFD4BB47CA697034B20CA3A408CB9A72A65E20BE0DCF7E5"
+          "sha256": "FC475D8417A728CC61528A1F8C49C467B1612D6C6E11462AA731A9284BFBCC48"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -1610,7 +1586,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "HelpContent.Build -\u003E TextReportWindow report.Text",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         },
         {
           "path": "FamilyQuant/TextReportWindow.cs",
@@ -1625,7 +1601,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "Published Help text route",
-          "sha256": "073DE60DAA4FAFE50DFD4BB47CA697034B20CA3A408CB9A72A65E20BE0DCF7E5"
+          "sha256": "FC475D8417A728CC61528A1F8C49C467B1612D6C6E11462AA731A9284BFBCC48"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -1644,7 +1620,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "HelpContent.BuildDeNovo -\u003E TextReportWindow report.Text",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         },
         {
           "path": "FamilyQuant/TextReportWindow.cs",
@@ -1659,7 +1635,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "Published Help text route",
-          "sha256": "073DE60DAA4FAFE50DFD4BB47CA697034B20CA3A408CB9A72A65E20BE0DCF7E5"
+          "sha256": "FC475D8417A728CC61528A1F8C49C467B1612D6C6E11462AA731A9284BFBCC48"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -1678,7 +1654,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "HelpContent.BuildDeNovo -\u003E TextReportWindow report.Text",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         },
         {
           "path": "FamilyQuant/TextReportWindow.cs",
@@ -1693,7 +1669,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "Published Help text route",
-          "sha256": "073DE60DAA4FAFE50DFD4BB47CA697034B20CA3A408CB9A72A65E20BE0DCF7E5"
+          "sha256": "FC475D8417A728CC61528A1F8C49C467B1612D6C6E11462AA731A9284BFBCC48"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -1712,7 +1688,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "HelpContent.BuildDeNovo -\u003E TextReportWindow report.Text",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         },
         {
           "path": "FamilyQuant/TextReportWindow.cs",
@@ -1727,7 +1703,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "Published Help text route",
-          "sha256": "073DE60DAA4FAFE50DFD4BB47CA697034B20CA3A408CB9A72A65E20BE0DCF7E5"
+          "sha256": "FC475D8417A728CC61528A1F8C49C467B1612D6C6E11462AA731A9284BFBCC48"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -1778,7 +1754,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "HelpContent.BuildDeNovo -\u003E TextReportWindow report.Text",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         },
         {
           "path": "FamilyQuant/TextReportWindow.cs",
@@ -1793,7 +1769,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "Published Help text route",
-          "sha256": "073DE60DAA4FAFE50DFD4BB47CA697034B20CA3A408CB9A72A65E20BE0DCF7E5"
+          "sha256": "FC475D8417A728CC61528A1F8C49C467B1612D6C6E11462AA731A9284BFBCC48"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -1812,7 +1788,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "HelpContent.BuildDeNovo -\u003E TextReportWindow report.Text",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         },
         {
           "path": "FamilyQuant/TextReportWindow.cs",
@@ -1827,7 +1803,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "Published Help text route",
-          "sha256": "073DE60DAA4FAFE50DFD4BB47CA697034B20CA3A408CB9A72A65E20BE0DCF7E5"
+          "sha256": "FC475D8417A728CC61528A1F8C49C467B1612D6C6E11462AA731A9284BFBCC48"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -1846,7 +1822,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "FamilyQuant.HelpContent::public static string Build ( QuantitationProfile ? profile , NormalizationMode mode , SharedPeptidePolicy policy )",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         }
       ],
       "proofs": [],
@@ -1860,7 +1836,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "HelpContent.BuildDeNovo -\u003E TextReportWindow report.Text",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         },
         {
           "path": "FamilyQuant/TextReportWindow.cs",
@@ -1875,7 +1851,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "Published Help text route",
-          "sha256": "073DE60DAA4FAFE50DFD4BB47CA697034B20CA3A408CB9A72A65E20BE0DCF7E5"
+          "sha256": "FC475D8417A728CC61528A1F8C49C467B1612D6C6E11462AA731A9284BFBCC48"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -1902,7 +1878,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "FamilyQuant.HelpContent::public static string BuildDeNovo ( DeNovoFilterCriteria ? criteria = null , DeNovoSource ? source = null )",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         }
       ],
       "proofs": [],
@@ -1916,7 +1892,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "HelpContent.Build -\u003E TextReportWindow report.Text",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         },
         {
           "path": "FamilyQuant/TextReportWindow.cs",
@@ -1931,7 +1907,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "Published Help text route",
-          "sha256": "073DE60DAA4FAFE50DFD4BB47CA697034B20CA3A408CB9A72A65E20BE0DCF7E5"
+          "sha256": "FC475D8417A728CC61528A1F8C49C467B1612D6C6E11462AA731A9284BFBCC48"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -1950,7 +1926,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "HelpContent.Build -\u003E TextReportWindow report.Text",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         },
         {
           "path": "FamilyQuant/TextReportWindow.cs",
@@ -1965,7 +1941,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "Published Help text route",
-          "sha256": "073DE60DAA4FAFE50DFD4BB47CA697034B20CA3A408CB9A72A65E20BE0DCF7E5"
+          "sha256": "FC475D8417A728CC61528A1F8C49C467B1612D6C6E11462AA731A9284BFBCC48"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -1984,7 +1960,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "FamilyQuant.HelpContent::public static string BuildDeNovo ( DeNovoFilterCriteria ? criteria = null , DeNovoSource ? source = null )",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         }
       ],
       "proofs": [],
@@ -1998,7 +1974,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "FamilyQuant.HelpContent::public static string BuildDeNovo ( DeNovoFilterCriteria ? criteria = null , DeNovoSource ? source = null )",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         }
       ],
       "proofs": [],
@@ -2012,7 +1988,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "HelpContent.Build -\u003E TextReportWindow report.Text",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         },
         {
           "path": "FamilyQuant/TextReportWindow.cs",
@@ -2027,7 +2003,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "Published Help text route",
-          "sha256": "073DE60DAA4FAFE50DFD4BB47CA697034B20CA3A408CB9A72A65E20BE0DCF7E5"
+          "sha256": "FC475D8417A728CC61528A1F8C49C467B1612D6C6E11462AA731A9284BFBCC48"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -2046,7 +2022,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "FamilyQuant.HelpContent::public static string BuildDeNovo ( DeNovoFilterCriteria ? criteria = null , DeNovoSource ? source = null )",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         }
       ],
       "proofs": [],
@@ -2068,7 +2044,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "HelpContent.Build -\u003E TextReportWindow report.Text",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         },
         {
           "path": "FamilyQuant/TextReportWindow.cs",
@@ -2083,7 +2059,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "Published Help text route",
-          "sha256": "073DE60DAA4FAFE50DFD4BB47CA697034B20CA3A408CB9A72A65E20BE0DCF7E5"
+          "sha256": "FC475D8417A728CC61528A1F8C49C467B1612D6C6E11462AA731A9284BFBCC48"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -2102,7 +2078,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "HelpContent.BuildDeNovo -\u003E TextReportWindow report.Text",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         },
         {
           "path": "FamilyQuant/TextReportWindow.cs",
@@ -2117,7 +2093,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "Published Help text route",
-          "sha256": "073DE60DAA4FAFE50DFD4BB47CA697034B20CA3A408CB9A72A65E20BE0DCF7E5"
+          "sha256": "FC475D8417A728CC61528A1F8C49C467B1612D6C6E11462AA731A9284BFBCC48"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -2160,7 +2136,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "FamilyQuant.HelpContent::public static string Build ( QuantitationProfile ? profile , NormalizationMode mode , SharedPeptidePolicy policy )",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         }
       ],
       "proofs": [],
@@ -2174,7 +2150,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "HelpContent.BuildDeNovo -\u003E TextReportWindow report.Text",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         },
         {
           "path": "FamilyQuant/TextReportWindow.cs",
@@ -2189,7 +2165,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "Published Help text route",
-          "sha256": "073DE60DAA4FAFE50DFD4BB47CA697034B20CA3A408CB9A72A65E20BE0DCF7E5"
+          "sha256": "FC475D8417A728CC61528A1F8C49C467B1612D6C6E11462AA731A9284BFBCC48"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -2208,7 +2184,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "FamilyQuant.HelpContent::public static string BuildDeNovo ( DeNovoFilterCriteria ? criteria = null , DeNovoSource ? source = null )",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         }
       ],
       "proofs": [],
@@ -2230,7 +2206,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "HelpContent.BuildDeNovo -\u003E TextReportWindow report.Text",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         },
         {
           "path": "FamilyQuant/TextReportWindow.cs",
@@ -2245,7 +2221,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "Published Help text route",
-          "sha256": "073DE60DAA4FAFE50DFD4BB47CA697034B20CA3A408CB9A72A65E20BE0DCF7E5"
+          "sha256": "FC475D8417A728CC61528A1F8C49C467B1612D6C6E11462AA731A9284BFBCC48"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -2264,7 +2240,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "HelpContent.Build -\u003E TextReportWindow report.Text",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         },
         {
           "path": "FamilyQuant/TextReportWindow.cs",
@@ -2279,7 +2255,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "Published Help text route",
-          "sha256": "073DE60DAA4FAFE50DFD4BB47CA697034B20CA3A408CB9A72A65E20BE0DCF7E5"
+          "sha256": "FC475D8417A728CC61528A1F8C49C467B1612D6C6E11462AA731A9284BFBCC48"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -2306,7 +2282,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "HelpContent.Build -\u003E TextReportWindow report.Text",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         },
         {
           "path": "FamilyQuant/TextReportWindow.cs",
@@ -2321,7 +2297,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "Published Help text route",
-          "sha256": "073DE60DAA4FAFE50DFD4BB47CA697034B20CA3A408CB9A72A65E20BE0DCF7E5"
+          "sha256": "FC475D8417A728CC61528A1F8C49C467B1612D6C6E11462AA731A9284BFBCC48"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -2348,7 +2324,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "FamilyQuant.DeNovoControl.LabelVerdictRedundant.ToolTip",
-          "sha256": "C64BA87F386ED38607C988542429882451BF749DFA54D8C9F359145F79422806"
+          "sha256": "024AB577E3E28F445C6B4761C3F093510532E25933AA8B5A036D8AD8B2DFB6BC"
         }
       ],
       "proofs": [],
@@ -2362,7 +2338,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "FamilyQuant.HelpContent::public static string Build ( QuantitationProfile ? profile , NormalizationMode mode , SharedPeptidePolicy policy )",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         }
       ],
       "proofs": [],
@@ -2376,7 +2352,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "FamilyQuant.HelpContent::public static string Build ( QuantitationProfile ? profile , NormalizationMode mode , SharedPeptidePolicy policy )",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         }
       ],
       "proofs": [],
@@ -2390,7 +2366,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "FamilyQuant.HelpContent::public static string Build ( QuantitationProfile ? profile , NormalizationMode mode , SharedPeptidePolicy policy )",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         }
       ],
       "proofs": [],
@@ -2404,7 +2380,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "HelpContent.Build -\u003E TextReportWindow report.Text",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         },
         {
           "path": "FamilyQuant/TextReportWindow.cs",
@@ -2419,7 +2395,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "Published Help text route",
-          "sha256": "073DE60DAA4FAFE50DFD4BB47CA697034B20CA3A408CB9A72A65E20BE0DCF7E5"
+          "sha256": "FC475D8417A728CC61528A1F8C49C467B1612D6C6E11462AA731A9284BFBCC48"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -2438,7 +2414,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "FamilyQuant.DeNovoControl.LabelFilesFound.ToolTip",
-          "sha256": "C64BA87F386ED38607C988542429882451BF749DFA54D8C9F359145F79422806"
+          "sha256": "024AB577E3E28F445C6B4761C3F093510532E25933AA8B5A036D8AD8B2DFB6BC"
         }
       ],
       "proofs": [],
@@ -2452,7 +2428,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "HelpContent.BuildDeNovo -\u003E TextReportWindow report.Text",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         },
         {
           "path": "FamilyQuant/TextReportWindow.cs",
@@ -2467,7 +2443,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "Published Help text route",
-          "sha256": "073DE60DAA4FAFE50DFD4BB47CA697034B20CA3A408CB9A72A65E20BE0DCF7E5"
+          "sha256": "FC475D8417A728CC61528A1F8C49C467B1612D6C6E11462AA731A9284BFBCC48"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -2486,7 +2462,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "FamilyQuant.DeNovoControl.ButtonBrowseHomologyFcf.ToolTip",
-          "sha256": "C64BA87F386ED38607C988542429882451BF749DFA54D8C9F359145F79422806"
+          "sha256": "024AB577E3E28F445C6B4761C3F093510532E25933AA8B5A036D8AD8B2DFB6BC"
         }
       ],
       "proofs": [],
@@ -2500,7 +2476,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "HelpContent.BuildDeNovo -\u003E TextReportWindow report.Text",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         },
         {
           "path": "FamilyQuant/TextReportWindow.cs",
@@ -2515,7 +2491,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "Published Help text route",
-          "sha256": "073DE60DAA4FAFE50DFD4BB47CA697034B20CA3A408CB9A72A65E20BE0DCF7E5"
+          "sha256": "FC475D8417A728CC61528A1F8C49C467B1612D6C6E11462AA731A9284BFBCC48"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -2542,7 +2518,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "FamilyQuant.DeNovoControl.DataGridHomologyFamilies.ToolTip",
-          "sha256": "C64BA87F386ED38607C988542429882451BF749DFA54D8C9F359145F79422806"
+          "sha256": "024AB577E3E28F445C6B4761C3F093510532E25933AA8B5A036D8AD8B2DFB6BC"
         }
       ],
       "proofs": [],
@@ -2556,7 +2532,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "HelpContent.BuildDeNovo -\u003E TextReportWindow report.Text",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         },
         {
           "path": "FamilyQuant/TextReportWindow.cs",
@@ -2571,7 +2547,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "Published Help text route",
-          "sha256": "073DE60DAA4FAFE50DFD4BB47CA697034B20CA3A408CB9A72A65E20BE0DCF7E5"
+          "sha256": "FC475D8417A728CC61528A1F8C49C467B1612D6C6E11462AA731A9284BFBCC48"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -2590,7 +2566,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "FamilyQuant.HelpContent::public static string BuildDeNovo ( DeNovoFilterCriteria ? criteria = null , DeNovoSource ? source = null )",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         }
       ],
       "proofs": [],
@@ -2604,7 +2580,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "HelpContent.BuildDeNovo -\u003E TextReportWindow report.Text",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         },
         {
           "path": "FamilyQuant/TextReportWindow.cs",
@@ -2619,7 +2595,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "Published Help text route",
-          "sha256": "073DE60DAA4FAFE50DFD4BB47CA697034B20CA3A408CB9A72A65E20BE0DCF7E5"
+          "sha256": "FC475D8417A728CC61528A1F8C49C467B1612D6C6E11462AA731A9284BFBCC48"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -2638,7 +2614,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "HelpContent.BuildDeNovo -\u003E TextReportWindow report.Text",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         },
         {
           "path": "FamilyQuant/TextReportWindow.cs",
@@ -2653,7 +2629,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "Published Help text route",
-          "sha256": "073DE60DAA4FAFE50DFD4BB47CA697034B20CA3A408CB9A72A65E20BE0DCF7E5"
+          "sha256": "FC475D8417A728CC61528A1F8C49C467B1612D6C6E11462AA731A9284BFBCC48"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -2672,7 +2648,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "HelpContent.BuildDeNovo -\u003E TextReportWindow report.Text",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         },
         {
           "path": "FamilyQuant/TextReportWindow.cs",
@@ -2687,7 +2663,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "Published Help text route",
-          "sha256": "073DE60DAA4FAFE50DFD4BB47CA697034B20CA3A408CB9A72A65E20BE0DCF7E5"
+          "sha256": "FC475D8417A728CC61528A1F8C49C467B1612D6C6E11462AA731A9284BFBCC48"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -2706,7 +2682,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "HelpContent.BuildDeNovo -\u003E TextReportWindow report.Text",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         },
         {
           "path": "FamilyQuant/TextReportWindow.cs",
@@ -2721,7 +2697,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "Published Help text route",
-          "sha256": "073DE60DAA4FAFE50DFD4BB47CA697034B20CA3A408CB9A72A65E20BE0DCF7E5"
+          "sha256": "FC475D8417A728CC61528A1F8C49C467B1612D6C6E11462AA731A9284BFBCC48"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -2740,7 +2716,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "HelpContent.BuildDeNovo -\u003E TextReportWindow report.Text",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         },
         {
           "path": "FamilyQuant/TextReportWindow.cs",
@@ -2755,7 +2731,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "Published Help text route",
-          "sha256": "073DE60DAA4FAFE50DFD4BB47CA697034B20CA3A408CB9A72A65E20BE0DCF7E5"
+          "sha256": "FC475D8417A728CC61528A1F8C49C467B1612D6C6E11462AA731A9284BFBCC48"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -2774,7 +2750,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "HelpContent.Build -\u003E TextReportWindow report.Text",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         },
         {
           "path": "FamilyQuant/TextReportWindow.cs",
@@ -2789,7 +2765,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "Published Help text route",
-          "sha256": "073DE60DAA4FAFE50DFD4BB47CA697034B20CA3A408CB9A72A65E20BE0DCF7E5"
+          "sha256": "FC475D8417A728CC61528A1F8C49C467B1612D6C6E11462AA731A9284BFBCC48"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -2808,7 +2784,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "FamilyQuant.DeNovoControl.TextBlockNativeConfidence.ToolTip",
-          "sha256": "C64BA87F386ED38607C988542429882451BF749DFA54D8C9F359145F79422806"
+          "sha256": "024AB577E3E28F445C6B4761C3F093510532E25933AA8B5A036D8AD8B2DFB6BC"
         }
       ],
       "proofs": [],
@@ -2830,7 +2806,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "HelpContent.Build -\u003E TextReportWindow report.Text",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         },
         {
           "path": "FamilyQuant/TextReportWindow.cs",
@@ -2845,7 +2821,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "Published Help text route",
-          "sha256": "073DE60DAA4FAFE50DFD4BB47CA697034B20CA3A408CB9A72A65E20BE0DCF7E5"
+          "sha256": "FC475D8417A728CC61528A1F8C49C467B1612D6C6E11462AA731A9284BFBCC48"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -2864,7 +2840,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "HelpContent.Build -\u003E TextReportWindow report.Text",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         },
         {
           "path": "FamilyQuant/TextReportWindow.cs",
@@ -2879,7 +2855,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "Published Help text route",
-          "sha256": "073DE60DAA4FAFE50DFD4BB47CA697034B20CA3A408CB9A72A65E20BE0DCF7E5"
+          "sha256": "FC475D8417A728CC61528A1F8C49C467B1612D6C6E11462AA731A9284BFBCC48"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -2898,7 +2874,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "HelpContent.Build -\u003E TextReportWindow report.Text",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         },
         {
           "path": "FamilyQuant/TextReportWindow.cs",
@@ -2913,7 +2889,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "Published Help text route",
-          "sha256": "073DE60DAA4FAFE50DFD4BB47CA697034B20CA3A408CB9A72A65E20BE0DCF7E5"
+          "sha256": "FC475D8417A728CC61528A1F8C49C467B1612D6C6E11462AA731A9284BFBCC48"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -2932,7 +2908,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "HelpContent.BuildDeNovo -\u003E TextReportWindow report.Text",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         },
         {
           "path": "FamilyQuant/TextReportWindow.cs",
@@ -2947,7 +2923,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "Published Help text route",
-          "sha256": "073DE60DAA4FAFE50DFD4BB47CA697034B20CA3A408CB9A72A65E20BE0DCF7E5"
+          "sha256": "FC475D8417A728CC61528A1F8C49C467B1612D6C6E11462AA731A9284BFBCC48"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -2966,7 +2942,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "HelpContent.Build -\u003E TextReportWindow report.Text",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         },
         {
           "path": "FamilyQuant/TextReportWindow.cs",
@@ -2981,7 +2957,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "Published Help text route",
-          "sha256": "073DE60DAA4FAFE50DFD4BB47CA697034B20CA3A408CB9A72A65E20BE0DCF7E5"
+          "sha256": "FC475D8417A728CC61528A1F8C49C467B1612D6C6E11462AA731A9284BFBCC48"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -3000,7 +2976,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "HelpContent.Build -\u003E TextReportWindow report.Text",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         },
         {
           "path": "FamilyQuant/TextReportWindow.cs",
@@ -3015,7 +2991,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "Published Help text route",
-          "sha256": "073DE60DAA4FAFE50DFD4BB47CA697034B20CA3A408CB9A72A65E20BE0DCF7E5"
+          "sha256": "FC475D8417A728CC61528A1F8C49C467B1612D6C6E11462AA731A9284BFBCC48"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -3034,7 +3010,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "FamilyQuant.HelpContent::public static string Build ( QuantitationProfile ? profile , NormalizationMode mode , SharedPeptidePolicy policy )",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         }
       ],
       "proofs": [],
@@ -3048,7 +3024,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "HelpContent.BuildDeNovo -\u003E TextReportWindow report.Text",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         },
         {
           "path": "FamilyQuant/TextReportWindow.cs",
@@ -3063,7 +3039,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "Published Help text route",
-          "sha256": "073DE60DAA4FAFE50DFD4BB47CA697034B20CA3A408CB9A72A65E20BE0DCF7E5"
+          "sha256": "FC475D8417A728CC61528A1F8C49C467B1612D6C6E11462AA731A9284BFBCC48"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -3082,7 +3058,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "HelpContent.BuildDeNovo -\u003E TextReportWindow report.Text",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         },
         {
           "path": "FamilyQuant/TextReportWindow.cs",
@@ -3097,7 +3073,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "Published Help text route",
-          "sha256": "073DE60DAA4FAFE50DFD4BB47CA697034B20CA3A408CB9A72A65E20BE0DCF7E5"
+          "sha256": "FC475D8417A728CC61528A1F8C49C467B1612D6C6E11462AA731A9284BFBCC48"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -3116,7 +3092,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "FamilyQuant.HelpContent::public static string Build ( QuantitationProfile ? profile , NormalizationMode mode , SharedPeptidePolicy policy )",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         }
       ],
       "proofs": [],
@@ -3130,7 +3106,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "FamilyQuant.DeNovoControl.LabelOverlapDivergent.ToolTip",
-          "sha256": "C64BA87F386ED38607C988542429882451BF749DFA54D8C9F359145F79422806"
+          "sha256": "024AB577E3E28F445C6B4761C3F093510532E25933AA8B5A036D8AD8B2DFB6BC"
         }
       ],
       "proofs": [],
@@ -3144,7 +3120,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "HelpContent.Build -\u003E TextReportWindow report.Text",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         },
         {
           "path": "FamilyQuant/TextReportWindow.cs",
@@ -3159,7 +3135,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "Published Help text route",
-          "sha256": "073DE60DAA4FAFE50DFD4BB47CA697034B20CA3A408CB9A72A65E20BE0DCF7E5"
+          "sha256": "FC475D8417A728CC61528A1F8C49C467B1612D6C6E11462AA731A9284BFBCC48"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -3194,7 +3170,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "HelpContent.BuildDeNovo -\u003E TextReportWindow report.Text",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         },
         {
           "path": "FamilyQuant/TextReportWindow.cs",
@@ -3209,7 +3185,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "Published Help text route",
-          "sha256": "073DE60DAA4FAFE50DFD4BB47CA697034B20CA3A408CB9A72A65E20BE0DCF7E5"
+          "sha256": "FC475D8417A728CC61528A1F8C49C467B1612D6C6E11462AA731A9284BFBCC48"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -3228,7 +3204,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "HelpContent.Build -\u003E TextReportWindow report.Text",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         },
         {
           "path": "FamilyQuant/TextReportWindow.cs",
@@ -3243,7 +3219,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "Published Help text route",
-          "sha256": "073DE60DAA4FAFE50DFD4BB47CA697034B20CA3A408CB9A72A65E20BE0DCF7E5"
+          "sha256": "FC475D8417A728CC61528A1F8C49C467B1612D6C6E11462AA731A9284BFBCC48"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -3262,7 +3238,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "FamilyQuant.HelpContent::public static string BuildDeNovo ( DeNovoFilterCriteria ? criteria = null , DeNovoSource ? source = null )",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         }
       ],
       "proofs": [],
@@ -3276,7 +3252,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "HelpContent.BuildDeNovo -\u003E TextReportWindow report.Text",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         },
         {
           "path": "FamilyQuant/TextReportWindow.cs",
@@ -3291,7 +3267,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "Published Help text route",
-          "sha256": "073DE60DAA4FAFE50DFD4BB47CA697034B20CA3A408CB9A72A65E20BE0DCF7E5"
+          "sha256": "FC475D8417A728CC61528A1F8C49C467B1612D6C6E11462AA731A9284BFBCC48"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -3310,7 +3286,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "HelpContent.BuildDeNovo -\u003E TextReportWindow report.Text",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         },
         {
           "path": "FamilyQuant/TextReportWindow.cs",
@@ -3325,7 +3301,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "Published Help text route",
-          "sha256": "073DE60DAA4FAFE50DFD4BB47CA697034B20CA3A408CB9A72A65E20BE0DCF7E5"
+          "sha256": "FC475D8417A728CC61528A1F8C49C467B1612D6C6E11462AA731A9284BFBCC48"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -3352,7 +3328,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "HelpContent.Build -\u003E TextReportWindow report.Text",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         },
         {
           "path": "FamilyQuant/TextReportWindow.cs",
@@ -3367,7 +3343,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "Published Help text route",
-          "sha256": "073DE60DAA4FAFE50DFD4BB47CA697034B20CA3A408CB9A72A65E20BE0DCF7E5"
+          "sha256": "FC475D8417A728CC61528A1F8C49C467B1612D6C6E11462AA731A9284BFBCC48"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -3394,7 +3370,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "HelpContent.Build -\u003E TextReportWindow report.Text",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         },
         {
           "path": "FamilyQuant/TextReportWindow.cs",
@@ -3409,7 +3385,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "Published Help text route",
-          "sha256": "073DE60DAA4FAFE50DFD4BB47CA697034B20CA3A408CB9A72A65E20BE0DCF7E5"
+          "sha256": "FC475D8417A728CC61528A1F8C49C467B1612D6C6E11462AA731A9284BFBCC48"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -3428,7 +3404,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "HelpContent.BuildDeNovo -\u003E TextReportWindow report.Text",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         },
         {
           "path": "FamilyQuant/TextReportWindow.cs",
@@ -3443,7 +3419,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "Published Help text route",
-          "sha256": "073DE60DAA4FAFE50DFD4BB47CA697034B20CA3A408CB9A72A65E20BE0DCF7E5"
+          "sha256": "FC475D8417A728CC61528A1F8C49C467B1612D6C6E11462AA731A9284BFBCC48"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -3462,7 +3438,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "HelpContent.BuildDeNovo -\u003E TextReportWindow report.Text",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         },
         {
           "path": "FamilyQuant/TextReportWindow.cs",
@@ -3477,7 +3453,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "Published Help text route",
-          "sha256": "073DE60DAA4FAFE50DFD4BB47CA697034B20CA3A408CB9A72A65E20BE0DCF7E5"
+          "sha256": "FC475D8417A728CC61528A1F8C49C467B1612D6C6E11462AA731A9284BFBCC48"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -3496,7 +3472,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "HelpContent.Build -\u003E TextReportWindow report.Text",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         },
         {
           "path": "FamilyQuant/TextReportWindow.cs",
@@ -3511,7 +3487,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "Published Help text route",
-          "sha256": "073DE60DAA4FAFE50DFD4BB47CA697034B20CA3A408CB9A72A65E20BE0DCF7E5"
+          "sha256": "FC475D8417A728CC61528A1F8C49C467B1612D6C6E11462AA731A9284BFBCC48"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -3530,7 +3506,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "HelpContent.BuildDeNovo -\u003E TextReportWindow report.Text",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         },
         {
           "path": "FamilyQuant/TextReportWindow.cs",
@@ -3545,7 +3521,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "Published Help text route",
-          "sha256": "073DE60DAA4FAFE50DFD4BB47CA697034B20CA3A408CB9A72A65E20BE0DCF7E5"
+          "sha256": "FC475D8417A728CC61528A1F8C49C467B1612D6C6E11462AA731A9284BFBCC48"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -3564,7 +3540,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "HelpContent.BuildDeNovo -\u003E TextReportWindow report.Text",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         },
         {
           "path": "FamilyQuant/TextReportWindow.cs",
@@ -3579,7 +3555,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "Published Help text route",
-          "sha256": "073DE60DAA4FAFE50DFD4BB47CA697034B20CA3A408CB9A72A65E20BE0DCF7E5"
+          "sha256": "FC475D8417A728CC61528A1F8C49C467B1612D6C6E11462AA731A9284BFBCC48"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -3598,7 +3574,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "HelpContent.Build -\u003E TextReportWindow report.Text",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         },
         {
           "path": "FamilyQuant/TextReportWindow.cs",
@@ -3613,7 +3589,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "Published Help text route",
-          "sha256": "073DE60DAA4FAFE50DFD4BB47CA697034B20CA3A408CB9A72A65E20BE0DCF7E5"
+          "sha256": "FC475D8417A728CC61528A1F8C49C467B1612D6C6E11462AA731A9284BFBCC48"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -3632,7 +3608,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "HelpContent.BuildDeNovo -\u003E TextReportWindow report.Text",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         },
         {
           "path": "FamilyQuant/TextReportWindow.cs",
@@ -3647,7 +3623,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "Published Help text route",
-          "sha256": "073DE60DAA4FAFE50DFD4BB47CA697034B20CA3A408CB9A72A65E20BE0DCF7E5"
+          "sha256": "FC475D8417A728CC61528A1F8C49C467B1612D6C6E11462AA731A9284BFBCC48"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -3666,7 +3642,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "HelpContent.Build -\u003E TextReportWindow report.Text",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         },
         {
           "path": "FamilyQuant/TextReportWindow.cs",
@@ -3681,7 +3657,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "Published Help text route",
-          "sha256": "073DE60DAA4FAFE50DFD4BB47CA697034B20CA3A408CB9A72A65E20BE0DCF7E5"
+          "sha256": "FC475D8417A728CC61528A1F8C49C467B1612D6C6E11462AA731A9284BFBCC48"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -3700,7 +3676,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "HelpContent.BuildDeNovo -\u003E TextReportWindow report.Text",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         },
         {
           "path": "FamilyQuant/TextReportWindow.cs",
@@ -3715,7 +3691,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "Published Help text route",
-          "sha256": "073DE60DAA4FAFE50DFD4BB47CA697034B20CA3A408CB9A72A65E20BE0DCF7E5"
+          "sha256": "FC475D8417A728CC61528A1F8C49C467B1612D6C6E11462AA731A9284BFBCC48"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -3734,7 +3710,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "HelpContent.BuildDeNovo -\u003E TextReportWindow report.Text",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         },
         {
           "path": "FamilyQuant/TextReportWindow.cs",
@@ -3749,7 +3725,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "Published Help text route",
-          "sha256": "073DE60DAA4FAFE50DFD4BB47CA697034B20CA3A408CB9A72A65E20BE0DCF7E5"
+          "sha256": "FC475D8417A728CC61528A1F8C49C467B1612D6C6E11462AA731A9284BFBCC48"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -3768,7 +3744,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "HelpContent.Build -\u003E TextReportWindow report.Text",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         },
         {
           "path": "FamilyQuant/TextReportWindow.cs",
@@ -3783,7 +3759,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "Published Help text route",
-          "sha256": "073DE60DAA4FAFE50DFD4BB47CA697034B20CA3A408CB9A72A65E20BE0DCF7E5"
+          "sha256": "FC475D8417A728CC61528A1F8C49C467B1612D6C6E11462AA731A9284BFBCC48"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -3802,7 +3778,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "FamilyQuant.DeNovoControl.LabelOverlapScan.ToolTip",
-          "sha256": "C64BA87F386ED38607C988542429882451BF749DFA54D8C9F359145F79422806"
+          "sha256": "024AB577E3E28F445C6B4761C3F093510532E25933AA8B5A036D8AD8B2DFB6BC"
         }
       ],
       "proofs": [],
@@ -3816,7 +3792,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "FamilyQuant.DeNovoControl.ButtonBrowseSeproPackage.ToolTip",
-          "sha256": "C64BA87F386ED38607C988542429882451BF749DFA54D8C9F359145F79422806"
+          "sha256": "024AB577E3E28F445C6B4761C3F093510532E25933AA8B5A036D8AD8B2DFB6BC"
         }
       ],
       "proofs": [],
@@ -3830,7 +3806,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "HelpContent.Build -\u003E TextReportWindow report.Text",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         },
         {
           "path": "FamilyQuant/TextReportWindow.cs",
@@ -3845,7 +3821,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "Published Help text route",
-          "sha256": "073DE60DAA4FAFE50DFD4BB47CA697034B20CA3A408CB9A72A65E20BE0DCF7E5"
+          "sha256": "FC475D8417A728CC61528A1F8C49C467B1612D6C6E11462AA731A9284BFBCC48"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -3864,7 +3840,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "HelpContent.BuildDeNovo -\u003E TextReportWindow report.Text",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         },
         {
           "path": "FamilyQuant/TextReportWindow.cs",
@@ -3879,7 +3855,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "Published Help text route",
-          "sha256": "073DE60DAA4FAFE50DFD4BB47CA697034B20CA3A408CB9A72A65E20BE0DCF7E5"
+          "sha256": "FC475D8417A728CC61528A1F8C49C467B1612D6C6E11462AA731A9284BFBCC48"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -3898,7 +3874,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "FamilyQuant.HelpContent::public static string BuildDeNovo ( DeNovoFilterCriteria ? criteria = null , DeNovoSource ? source = null )",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         }
       ],
       "proofs": [],
@@ -3912,7 +3888,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "FamilyQuant.HelpContent::public static string Build ( QuantitationProfile ? profile , NormalizationMode mode , SharedPeptidePolicy policy )",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         }
       ],
       "proofs": [],
@@ -3926,7 +3902,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "HelpContent.BuildDeNovo -\u003E TextReportWindow report.Text",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         },
         {
           "path": "FamilyQuant/TextReportWindow.cs",
@@ -3941,7 +3917,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "Published Help text route",
-          "sha256": "073DE60DAA4FAFE50DFD4BB47CA697034B20CA3A408CB9A72A65E20BE0DCF7E5"
+          "sha256": "FC475D8417A728CC61528A1F8C49C467B1612D6C6E11462AA731A9284BFBCC48"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -3960,7 +3936,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "FamilyQuant.HelpContent::public static string BuildDeNovo ( DeNovoFilterCriteria ? criteria = null , DeNovoSource ? source = null )",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         }
       ],
       "proofs": [],
@@ -3974,7 +3950,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "HelpContent.BuildDeNovo -\u003E TextReportWindow report.Text",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         },
         {
           "path": "FamilyQuant/TextReportWindow.cs",
@@ -3989,7 +3965,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "Published Help text route",
-          "sha256": "073DE60DAA4FAFE50DFD4BB47CA697034B20CA3A408CB9A72A65E20BE0DCF7E5"
+          "sha256": "FC475D8417A728CC61528A1F8C49C467B1612D6C6E11462AA731A9284BFBCC48"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -4015,34 +3991,14 @@
       "implementation": [
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
-          "symbol": "HelpContent.Build -\u003E TextReportWindow report.Text",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
-        },
-        {
-          "path": "FamilyQuant/TextReportWindow.cs",
-          "symbol": "Published Help text route",
-          "sha256": "275E35B236EEC4C43FB54B6CC049E5C5E62A1767176D6F6410A3D69421106F96"
-        },
-        {
-          "path": "FamilyQuant/SecondaryWindowView.cs",
-          "symbol": "Published Help text route",
-          "sha256": "5DDABCDF5F47F3CBCC271B0F04EB20CE51BA12353DD117C1A3EDE8684A742CDE"
-        },
-        {
-          "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
-          "symbol": "Published Help text route",
-          "sha256": "073DE60DAA4FAFE50DFD4BB47CA697034B20CA3A408CB9A72A65E20BE0DCF7E5"
-        },
-        {
-          "path": "FamilyQuant/DeNovoControl.xaml.cs",
-          "symbol": "Published Help text route",
-          "sha256": "99FC1066E85361D8BCA7BDDC16FBA2B172DF2E8932268731E91F4B01854CECD8"
+          "symbol": "FamilyQuant.HelpContent::public static string Build ( QuantitationProfile ? profile , NormalizationMode mode , SharedPeptidePolicy policy )",
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         }
       ],
       "proofs": [],
-      "note": "Exact case-sensitive frozen literal is present in the same Help member\u0027s resolved text control; whitespace only is normalized. No handler, new scientific result or DPI claim.",
-      "kindReceiptId": "copy-help-fact-published-help",
-      "compared": "FamilyQuant.HelpContent::public static string Build ( QuantitationProfile ? profile , NormalizationMode mode , SharedPeptidePolicy policy ): \u0022carries one, which is how a venom disintegrin comes along with a metalloproteinase.\u0022 -\u003E FamilyQuant.Core/HelpContent.cs: HelpContent.Build -\u003E TextReportWindow report.Text; no-PatternLab/ChargeRestrictedSignal/CountInEveryFamily; actual carries one, which is how a venom disintegrin comes along with a metalloproteinase."
+      "note": "The exact frozen fact is absent from its published Help member; changed wording needs a specific preservation proof. The exact literal multiplicity within the containing member changed. No handler, new scientific result or DPI claim.",
+      "kindReceiptId": null,
+      "compared": null
     },
     {
       "observationId": "FQ15-45A20ED85C9C",
@@ -4066,7 +4022,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "FamilyQuant.DeNovoControl.ButtonDeNovoHelp.ToolTip",
-          "sha256": "C64BA87F386ED38607C988542429882451BF749DFA54D8C9F359145F79422806"
+          "sha256": "024AB577E3E28F445C6B4761C3F093510532E25933AA8B5A036D8AD8B2DFB6BC"
         }
       ],
       "proofs": [],
@@ -4088,7 +4044,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "HelpContent.BuildDeNovo -\u003E TextReportWindow report.Text",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         },
         {
           "path": "FamilyQuant/TextReportWindow.cs",
@@ -4103,7 +4059,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "Published Help text route",
-          "sha256": "073DE60DAA4FAFE50DFD4BB47CA697034B20CA3A408CB9A72A65E20BE0DCF7E5"
+          "sha256": "FC475D8417A728CC61528A1F8C49C467B1612D6C6E11462AA731A9284BFBCC48"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -4122,7 +4078,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "HelpContent.BuildDeNovo -\u003E TextReportWindow report.Text",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         },
         {
           "path": "FamilyQuant/TextReportWindow.cs",
@@ -4137,7 +4093,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "Published Help text route",
-          "sha256": "073DE60DAA4FAFE50DFD4BB47CA697034B20CA3A408CB9A72A65E20BE0DCF7E5"
+          "sha256": "FC475D8417A728CC61528A1F8C49C467B1612D6C6E11462AA731A9284BFBCC48"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -4164,7 +4120,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "HelpContent.BuildDeNovo -\u003E TextReportWindow report.Text",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         },
         {
           "path": "FamilyQuant/TextReportWindow.cs",
@@ -4179,7 +4135,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "Published Help text route",
-          "sha256": "073DE60DAA4FAFE50DFD4BB47CA697034B20CA3A408CB9A72A65E20BE0DCF7E5"
+          "sha256": "FC475D8417A728CC61528A1F8C49C467B1612D6C6E11462AA731A9284BFBCC48"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -4214,7 +4170,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "FamilyQuant.HelpContent::public static string Build ( QuantitationProfile ? profile , NormalizationMode mode , SharedPeptidePolicy policy )",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         }
       ],
       "proofs": [],
@@ -4228,7 +4184,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "HelpContent.Build -\u003E TextReportWindow report.Text",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         },
         {
           "path": "FamilyQuant/TextReportWindow.cs",
@@ -4243,7 +4199,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "Published Help text route",
-          "sha256": "073DE60DAA4FAFE50DFD4BB47CA697034B20CA3A408CB9A72A65E20BE0DCF7E5"
+          "sha256": "FC475D8417A728CC61528A1F8C49C467B1612D6C6E11462AA731A9284BFBCC48"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -4262,7 +4218,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "HelpContent.BuildDeNovo -\u003E TextReportWindow report.Text",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         },
         {
           "path": "FamilyQuant/TextReportWindow.cs",
@@ -4277,7 +4233,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "Published Help text route",
-          "sha256": "073DE60DAA4FAFE50DFD4BB47CA697034B20CA3A408CB9A72A65E20BE0DCF7E5"
+          "sha256": "FC475D8417A728CC61528A1F8C49C467B1612D6C6E11462AA731A9284BFBCC48"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -4296,7 +4252,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "HelpContent.BuildDeNovo -\u003E TextReportWindow report.Text",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         },
         {
           "path": "FamilyQuant/TextReportWindow.cs",
@@ -4311,7 +4267,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "Published Help text route",
-          "sha256": "073DE60DAA4FAFE50DFD4BB47CA697034B20CA3A408CB9A72A65E20BE0DCF7E5"
+          "sha256": "FC475D8417A728CC61528A1F8C49C467B1612D6C6E11462AA731A9284BFBCC48"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -4330,7 +4286,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "HelpContent.Build -\u003E TextReportWindow report.Text",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         },
         {
           "path": "FamilyQuant/TextReportWindow.cs",
@@ -4345,7 +4301,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "Published Help text route",
-          "sha256": "073DE60DAA4FAFE50DFD4BB47CA697034B20CA3A408CB9A72A65E20BE0DCF7E5"
+          "sha256": "FC475D8417A728CC61528A1F8C49C467B1612D6C6E11462AA731A9284BFBCC48"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -4364,7 +4320,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "HelpContent.Build -\u003E TextReportWindow report.Text",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         },
         {
           "path": "FamilyQuant/TextReportWindow.cs",
@@ -4379,7 +4335,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "Published Help text route",
-          "sha256": "073DE60DAA4FAFE50DFD4BB47CA697034B20CA3A408CB9A72A65E20BE0DCF7E5"
+          "sha256": "FC475D8417A728CC61528A1F8C49C467B1612D6C6E11462AA731A9284BFBCC48"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -4398,7 +4354,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "HelpContent.BuildDeNovo -\u003E TextReportWindow report.Text",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         },
         {
           "path": "FamilyQuant/TextReportWindow.cs",
@@ -4413,7 +4369,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "Published Help text route",
-          "sha256": "073DE60DAA4FAFE50DFD4BB47CA697034B20CA3A408CB9A72A65E20BE0DCF7E5"
+          "sha256": "FC475D8417A728CC61528A1F8C49C467B1612D6C6E11462AA731A9284BFBCC48"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -4440,7 +4396,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "FamilyQuant.HelpContent::public static string BuildDeNovo ( DeNovoFilterCriteria ? criteria = null , DeNovoSource ? source = null )",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         }
       ],
       "proofs": [],
@@ -4454,7 +4410,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "HelpContent.Build -\u003E TextReportWindow report.Text",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         },
         {
           "path": "FamilyQuant/TextReportWindow.cs",
@@ -4469,7 +4425,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "Published Help text route",
-          "sha256": "073DE60DAA4FAFE50DFD4BB47CA697034B20CA3A408CB9A72A65E20BE0DCF7E5"
+          "sha256": "FC475D8417A728CC61528A1F8C49C467B1612D6C6E11462AA731A9284BFBCC48"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -4488,7 +4444,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "HelpContent.Build -\u003E TextReportWindow report.Text",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         },
         {
           "path": "FamilyQuant/TextReportWindow.cs",
@@ -4503,7 +4459,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "Published Help text route",
-          "sha256": "073DE60DAA4FAFE50DFD4BB47CA697034B20CA3A408CB9A72A65E20BE0DCF7E5"
+          "sha256": "FC475D8417A728CC61528A1F8C49C467B1612D6C6E11462AA731A9284BFBCC48"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -4522,7 +4478,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "HelpContent.BuildDeNovo -\u003E TextReportWindow report.Text",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         },
         {
           "path": "FamilyQuant/TextReportWindow.cs",
@@ -4537,7 +4493,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "Published Help text route",
-          "sha256": "073DE60DAA4FAFE50DFD4BB47CA697034B20CA3A408CB9A72A65E20BE0DCF7E5"
+          "sha256": "FC475D8417A728CC61528A1F8C49C467B1612D6C6E11462AA731A9284BFBCC48"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -4556,7 +4512,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "HelpContent.Build -\u003E TextReportWindow report.Text",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         },
         {
           "path": "FamilyQuant/TextReportWindow.cs",
@@ -4571,7 +4527,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "Published Help text route",
-          "sha256": "073DE60DAA4FAFE50DFD4BB47CA697034B20CA3A408CB9A72A65E20BE0DCF7E5"
+          "sha256": "FC475D8417A728CC61528A1F8C49C467B1612D6C6E11462AA731A9284BFBCC48"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -4590,7 +4546,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "HelpContent.Build -\u003E TextReportWindow report.Text",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         },
         {
           "path": "FamilyQuant/TextReportWindow.cs",
@@ -4605,7 +4561,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "Published Help text route",
-          "sha256": "073DE60DAA4FAFE50DFD4BB47CA697034B20CA3A408CB9A72A65E20BE0DCF7E5"
+          "sha256": "FC475D8417A728CC61528A1F8C49C467B1612D6C6E11462AA731A9284BFBCC48"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -4632,7 +4588,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "HelpContent.BuildDeNovo -\u003E TextReportWindow report.Text",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         },
         {
           "path": "FamilyQuant/TextReportWindow.cs",
@@ -4647,7 +4603,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "Published Help text route",
-          "sha256": "073DE60DAA4FAFE50DFD4BB47CA697034B20CA3A408CB9A72A65E20BE0DCF7E5"
+          "sha256": "FC475D8417A728CC61528A1F8C49C467B1612D6C6E11462AA731A9284BFBCC48"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -4674,7 +4630,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "HelpContent.Build -\u003E TextReportWindow report.Text",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         },
         {
           "path": "FamilyQuant/TextReportWindow.cs",
@@ -4689,7 +4645,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "Published Help text route",
-          "sha256": "073DE60DAA4FAFE50DFD4BB47CA697034B20CA3A408CB9A72A65E20BE0DCF7E5"
+          "sha256": "FC475D8417A728CC61528A1F8C49C467B1612D6C6E11462AA731A9284BFBCC48"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -4708,7 +4664,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "HelpContent.BuildDeNovo -\u003E TextReportWindow report.Text",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         },
         {
           "path": "FamilyQuant/TextReportWindow.cs",
@@ -4723,7 +4679,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "Published Help text route",
-          "sha256": "073DE60DAA4FAFE50DFD4BB47CA697034B20CA3A408CB9A72A65E20BE0DCF7E5"
+          "sha256": "FC475D8417A728CC61528A1F8C49C467B1612D6C6E11462AA731A9284BFBCC48"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -4742,7 +4698,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "HelpContent.BuildDeNovo -\u003E TextReportWindow report.Text",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         },
         {
           "path": "FamilyQuant/TextReportWindow.cs",
@@ -4757,7 +4713,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "Published Help text route",
-          "sha256": "073DE60DAA4FAFE50DFD4BB47CA697034B20CA3A408CB9A72A65E20BE0DCF7E5"
+          "sha256": "FC475D8417A728CC61528A1F8C49C467B1612D6C6E11462AA731A9284BFBCC48"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -4792,7 +4748,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "HelpContent.Build -\u003E TextReportWindow report.Text",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         },
         {
           "path": "FamilyQuant/TextReportWindow.cs",
@@ -4807,7 +4763,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "Published Help text route",
-          "sha256": "073DE60DAA4FAFE50DFD4BB47CA697034B20CA3A408CB9A72A65E20BE0DCF7E5"
+          "sha256": "FC475D8417A728CC61528A1F8C49C467B1612D6C6E11462AA731A9284BFBCC48"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -4826,7 +4782,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "HelpContent.BuildDeNovo -\u003E TextReportWindow report.Text",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         },
         {
           "path": "FamilyQuant/TextReportWindow.cs",
@@ -4841,7 +4797,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "Published Help text route",
-          "sha256": "073DE60DAA4FAFE50DFD4BB47CA697034B20CA3A408CB9A72A65E20BE0DCF7E5"
+          "sha256": "FC475D8417A728CC61528A1F8C49C467B1612D6C6E11462AA731A9284BFBCC48"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -4860,7 +4816,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "HelpContent.BuildDeNovo -\u003E TextReportWindow report.Text",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         },
         {
           "path": "FamilyQuant/TextReportWindow.cs",
@@ -4875,7 +4831,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "Published Help text route",
-          "sha256": "073DE60DAA4FAFE50DFD4BB47CA697034B20CA3A408CB9A72A65E20BE0DCF7E5"
+          "sha256": "FC475D8417A728CC61528A1F8C49C467B1612D6C6E11462AA731A9284BFBCC48"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -4894,7 +4850,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "HelpContent.BuildDeNovo -\u003E TextReportWindow report.Text",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         },
         {
           "path": "FamilyQuant/TextReportWindow.cs",
@@ -4909,7 +4865,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "Published Help text route",
-          "sha256": "073DE60DAA4FAFE50DFD4BB47CA697034B20CA3A408CB9A72A65E20BE0DCF7E5"
+          "sha256": "FC475D8417A728CC61528A1F8C49C467B1612D6C6E11462AA731A9284BFBCC48"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -4928,7 +4884,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "HelpContent.Build -\u003E TextReportWindow report.Text",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         },
         {
           "path": "FamilyQuant/TextReportWindow.cs",
@@ -4943,7 +4899,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "Published Help text route",
-          "sha256": "073DE60DAA4FAFE50DFD4BB47CA697034B20CA3A408CB9A72A65E20BE0DCF7E5"
+          "sha256": "FC475D8417A728CC61528A1F8C49C467B1612D6C6E11462AA731A9284BFBCC48"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -4962,7 +4918,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "FamilyQuant.DeNovoControl.LabelOverlapPrecursor.ToolTip",
-          "sha256": "C64BA87F386ED38607C988542429882451BF749DFA54D8C9F359145F79422806"
+          "sha256": "024AB577E3E28F445C6B4761C3F093510532E25933AA8B5A036D8AD8B2DFB6BC"
         }
       ],
       "proofs": [],
@@ -4984,7 +4940,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "HelpContent.BuildDeNovo -\u003E TextReportWindow report.Text",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         },
         {
           "path": "FamilyQuant/TextReportWindow.cs",
@@ -4999,7 +4955,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "Published Help text route",
-          "sha256": "073DE60DAA4FAFE50DFD4BB47CA697034B20CA3A408CB9A72A65E20BE0DCF7E5"
+          "sha256": "FC475D8417A728CC61528A1F8C49C467B1612D6C6E11462AA731A9284BFBCC48"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -5018,7 +4974,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "HelpContent.BuildDeNovo -\u003E TextReportWindow report.Text",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         },
         {
           "path": "FamilyQuant/TextReportWindow.cs",
@@ -5033,7 +4989,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "Published Help text route",
-          "sha256": "073DE60DAA4FAFE50DFD4BB47CA697034B20CA3A408CB9A72A65E20BE0DCF7E5"
+          "sha256": "FC475D8417A728CC61528A1F8C49C467B1612D6C6E11462AA731A9284BFBCC48"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -5060,7 +5016,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "HelpContent.Build -\u003E TextReportWindow report.Text",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         },
         {
           "path": "FamilyQuant/TextReportWindow.cs",
@@ -5075,7 +5031,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "Published Help text route",
-          "sha256": "073DE60DAA4FAFE50DFD4BB47CA697034B20CA3A408CB9A72A65E20BE0DCF7E5"
+          "sha256": "FC475D8417A728CC61528A1F8C49C467B1612D6C6E11462AA731A9284BFBCC48"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -5094,7 +5050,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "HelpContent.Build -\u003E TextReportWindow report.Text",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         },
         {
           "path": "FamilyQuant/TextReportWindow.cs",
@@ -5109,7 +5065,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "Published Help text route",
-          "sha256": "073DE60DAA4FAFE50DFD4BB47CA697034B20CA3A408CB9A72A65E20BE0DCF7E5"
+          "sha256": "FC475D8417A728CC61528A1F8C49C467B1612D6C6E11462AA731A9284BFBCC48"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -5128,7 +5084,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "FamilyQuant.HelpContent::public static string BuildDeNovo ( DeNovoFilterCriteria ? criteria = null , DeNovoSource ? source = null )",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         }
       ],
       "proofs": [],
@@ -5142,7 +5098,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "FamilyQuant.HelpContent::public static string Build ( QuantitationProfile ? profile , NormalizationMode mode , SharedPeptidePolicy policy )",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         }
       ],
       "proofs": [],
@@ -5156,7 +5112,7 @@
         {
           "path": "FamilyQuant.Core/HelpContent.cs",
           "symbol": "HelpContent.BuildDeNovo -\u003E TextReportWindow report.Text",
-          "sha256": "F1970B14AE2DD533162DA57F9B32C4C9FA09330DEC5E1122573F178E4D7ABC7D"
+          "sha256": "54C0DE5F32C6DEAC72183605C49AE314DAE085A05CF084CD20048AE0EB3BC38E"
         },
         {
           "path": "FamilyQuant/TextReportWindow.cs",
@@ -5171,7 +5127,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "Published Help text route",
-          "sha256": "073DE60DAA4FAFE50DFD4BB47CA697034B20CA3A408CB9A72A65E20BE0DCF7E5"
+          "sha256": "FC475D8417A728CC61528A1F8C49C467B1612D6C6E11462AA731A9284BFBCC48"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -5195,7 +5151,7 @@
           "kind": "test",
           "target": "LookCopyReceiptCommand",
           "assertion": "LK copy kind help fact / published-help: every listed comparison retains its scoped published fact or exact declaration",
-          "artifact": "D:\\FamilyQuant-data\\out-look\\ledger\\packet-1\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-1\\proofs.log",
           "inspectedBy": ""
         }
       ]
@@ -5209,7 +5165,7 @@
           "kind": "test",
           "target": "LookCopyReceiptCommand",
           "assertion": "LK copy kind tooltip / tooltip-declaration: every listed comparison retains its scoped published fact or exact declaration",
-          "artifact": "D:\\FamilyQuant-data\\out-look\\ledger\\packet-1\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-083342-FamilyQuant-gate\\look-refresh\\runs\\LK-copy-1\\proofs.log",
           "inspectedBy": ""
         }
       ]
