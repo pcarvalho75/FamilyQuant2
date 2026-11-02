@@ -74,6 +74,12 @@ namespace FamilyQuant.Tests
                 Directory.CreateDirectory(busyWork);
                 EnsureApplication();
                 BusyOperationTests(busyWork);
+            if (args.Contains("--test-evidence-task-scope", StringComparer.Ordinal))
+            {
+                EnsureApplication();
+                EvidenceTaskScopeTests();
+                EvidenceTaskScopeRecipeTests();
+                EvidenceTaskScopeWindowTests(args.Length == 2 ? args[1] : Path.Combine(Path.GetTempPath(), "FamilyQuant.Tests.TaskScope"));
                 Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
                 return failed == 0 ? 0 : 1;
             }
@@ -82,6 +88,19 @@ namespace FamilyQuant.Tests
                 string chartWork = args.Length == 2 ? args[1] : Path.Combine(Path.GetTempPath(), "FamilyQuant.Tests.ChartThemes");
                 ChartThemeTests(chartWork);
                 UiChartPaletteTests(chartWork);
+                Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
+                return failed == 0 ? 0 : 1;
+            }
+            if (args.Contains("--test-ui-icons", StringComparer.Ordinal))
+            {
+                UiIconTests();
+                Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
+                return failed == 0 ? 0 : 1;
+            }
+            if (args.Length > 0 && args[0] == "--evidence-task-check") return EvidenceTaskCheck(args);
+            if (args.Contains("--test-evidence-task", StringComparer.Ordinal))
+            {
+                EvidenceTaskTests();
                 Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
                 return failed == 0 ? 0 : 1;
             }
@@ -835,6 +854,9 @@ namespace FamilyQuant.Tests
             KeywordCommandTests();
             TableAppearanceTests();
             EvidenceReviewModelTests();
+            EvidenceTaskScopeTests();
+            EvidenceTaskScopeRecipeTests();
+            EvidenceTaskScopeWindowTests(Path.Combine(workDir, "task-scope"));
             GroupingReviewInteractionTests();
             EvidenceGroupingFlowTests();
             ArchitectureMemberViewTests();
