@@ -63,6 +63,7 @@ Finished steps, moved here from docs/ROADMAP.md. The board shows them as green.
 | V7 | Type scale, spacing and copy rules applied to shared styles; sentence case; one primary button per panel | M | 2 | V2 | V4, all screens | Renders checked against design rules 1 to 7 | LK | not started | 0% | 0% | T+2 |
 | V4 | Table style for all grids: rows, header, hover, selection, numbers right-aligned, cut-off text shown in a tooltip | M | 3 | V7 | C1, C2, C4 | Renders in both themes at both sizes; header readable | LK | not started | 0% | 0% | T+5 |
 | V5 | Emoji out, Segoe Fluent Icons in | L | 0.5 | 🟢 | C1, all screens | Suite check fails on an emoji in UI text | LK | not started | 0% | 0% | T+0 |
+| V6 | Charts follow the tokens in both themes; `ChartPalette` stays the one source; pinned contrast checks kept | M | 1 | 🟢 | V3, B7, C14 | Contrast check passes; exported PNGs unchanged in the Light palette | RS | not started | 0% | 0% | T+1 |
 
 ### W4 Shell
 
@@ -100,6 +101,8 @@ Finished steps, moved here from docs/ROADMAP.md. The board shows them as green.
 | X8 | Charts: one shared base for the 8 chart classes, so axes, labels and PNG export are written once | H | 4 | F6, V2 | V6, X9 | Exported PNGs unchanged; line count reported | AS | RS | 0% | 0% | T+7 |
 | X10 | One path for errors, progress and cancel in Core; no message box below the App layer | M | 3 | F6 | X3, X5, S6 | A suite check fails on `MessageBox` in Core; each long operation cancels cleanly | AS | not started | 0% | 0% | T+3 |
 | X3 | Clustering: `USearchTools` and `RedundancyTools` with clear result types, cancel and progress | H | 3 | X2, X10 | C6 | Same families frozen against current: Bjararaca exhaustive, Viperidae fast at identity 85 (exhaustive is about 2 billion pairs, ruled out on 2026-11-01); memo and gate tests kept | AS | not started | 0% | 0% | T+3 |
+| X11 | Dependencies: `Extended.Wpf.Toolkit` (6 uses), `Newtonsoft.Json` (3 files, the rest is `System.Text.Json`), `OpenMcdf` (no reference in this repo), `LiteDB`. Each goes only if a real RAW and `.xic2` still open | M | 1 | 🟢 | R3 | Publish rehearsal runs; real files open | AS | not started | 0% | 0% | T+1 |
+| X14 | Exhaustive clustering stops holding every pair in memory: `USearchTools` streams its edges through the union-find. The all-pairs alignment itself stays as it is | M | 1 | 🟢 | R3 | Same families on Bjararaca exhaustive; peak memory measured before and after; the memo tests kept | AS | not started | 0% | 0% | T+2 |
 
 ### W7 Releases (Paulo publishes each one)
 
@@ -113,4 +116,5 @@ Finished steps, moved here from docs/ROADMAP.md. The board shows them as green.
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
 | B3 | The program reads the task from the file: taxon from OS= and OX=, the clade from UniProt taxonomy, and a proposed scope from the UniProt keyword counts of the reviewed proteins in the file. The person confirms; the choice goes in the recipe. No word table in the code | M | 1 | 🟢 | B4 | On Ana's file it names Viperidae and proposes `Toxin` with its count, with no literal in `Evidence/`; recipe replay exact; contaminants ignored; non-UniProt headers refused plainly | EV | not started | 0% | 0% | T+1 |
+| B9 | The evidence window shows the taxon, clade and proposed scope with their counts, and the person confirms or edits them. A thin view over the B3 API | M | 0.5 | 🟢 | B4 | Confirmed scope reaches the recipe; both themes; no science in the view | RS | not started | 0% | 0% | T+2 |
 

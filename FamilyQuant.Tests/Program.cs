@@ -76,6 +76,14 @@ namespace FamilyQuant.Tests
                 Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
                 return failed == 0 ? 0 : 1;
             }
+            if (args.Length > 0 && args[0] == "--dependency-file-check")
+                return DependencyFileCheck(args);
+            if (args.Contains("--test-dependencies", StringComparer.Ordinal))
+            {
+                DependencyCacheTests(Path.Combine(Path.GetTempPath(), "FamilyQuant.Tests"));
+                Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
+                return failed == 0 ? 0 : 1;
+            }
             if (args.Contains("--test-ui-icons", StringComparer.Ordinal))
             {
                 UiIconTests();
@@ -89,6 +97,36 @@ namespace FamilyQuant.Tests
                 Directory.CreateDirectory(busyWork);
                 EnsureApplication();
                 BusyOperationTests(busyWork);
+                Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
+                return failed == 0 ? 0 : 1;
+            }
+            if (args.Contains("--test-evidence-task-scope", StringComparer.Ordinal))
+            {
+                EnsureApplication();
+                EvidenceTaskScopeTests();
+                EvidenceTaskScopeRecipeTests();
+                EvidenceTaskScopeWindowTests(args.Length == 2 ? args[1] : Path.Combine(Path.GetTempPath(), "FamilyQuant.Tests.TaskScope"));
+                Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
+                return failed == 0 ? 0 : 1;
+            }
+            if (args.Contains("--test-chart-themes", StringComparer.Ordinal))
+            {
+                string chartWork = args.Length == 2 ? args[1] : Path.Combine(Path.GetTempPath(), "FamilyQuant.Tests.ChartThemes");
+                ChartThemeTests(chartWork);
+                UiChartPaletteTests(chartWork);
+                Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
+                return failed == 0 ? 0 : 1;
+            }
+            if (args.Contains("--test-ui-icons", StringComparer.Ordinal))
+            {
+                UiIconTests();
+                Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
+                return failed == 0 ? 0 : 1;
+            }
+            if (args.Length > 0 && args[0] == "--evidence-task-check") return EvidenceTaskCheck(args);
+            if (args.Contains("--test-evidence-task", StringComparer.Ordinal))
+            {
+                EvidenceTaskTests();
                 Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
                 return failed == 0 ? 0 : 1;
             }
@@ -649,6 +687,7 @@ namespace FamilyQuant.Tests
 
             Section("Isotope envelope engine (Q1) - configurable isotope count, unit invariants");
             IsotopeEnvelopeUnitTests();
+            DependencyCacheTests(workDir);
 
             Section("Minimum points per peak and the isotope ceiling - the rule, per isotope, and legacy mode");
             MinimumPointsAndCeilingUnitTests();
@@ -843,6 +882,9 @@ namespace FamilyQuant.Tests
             KeywordCommandTests();
             TableAppearanceTests();
             EvidenceReviewModelTests();
+            EvidenceTaskScopeTests();
+            EvidenceTaskScopeRecipeTests();
+            EvidenceTaskScopeWindowTests(Path.Combine(workDir, "task-scope"));
             GroupingReviewInteractionTests();
             EvidenceGroupingFlowTests();
             ArchitectureMemberViewTests();

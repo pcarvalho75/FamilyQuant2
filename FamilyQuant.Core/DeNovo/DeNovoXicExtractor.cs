@@ -1,4 +1,3 @@
-using Newtonsoft.Json;
 using PatternTools.MSParserLight;
 using PatternTools.XIC;
 using System;
@@ -79,18 +78,15 @@ namespace FamilyQuant.DeNovo
         /// must reproduce the stored quant bit for bit; if it does not, the machinery is not the same
         /// one and nothing else here is comparable. An accessor, not a field, so it can never drift
         /// out of step with the array it names.</summary>
-        [JsonIgnore]
         public double AreaM0 { get => GetIsotope(0); set => SetIsotope(0, value); }
 
         /// <summary>M+1 area, i.e. <see cref="IsotopeAreas"/>[1] when the configured isotope count
         /// credits it. Returns 0 when it was not credited (IsotopeCount &lt; 2), the same value the
         /// field defaulted to before this became an accessor.</summary>
-        [JsonIgnore]
         public double AreaM1 { get => GetIsotope(1); set => SetIsotope(1, value); }
 
         /// <summary>M+2 area, i.e. <see cref="IsotopeAreas"/>[2] when the configured isotope count
         /// credits it. Returns 0 when it was not credited (IsotopeCount &lt; 3).</summary>
-        [JsonIgnore]
         public double AreaM2 { get => GetIsotope(2); set => SetIsotope(2, value); }
 
         private double GetIsotope(int i) =>
@@ -158,7 +154,6 @@ namespace FamilyQuant.DeNovo
         /// subtracting one count. Computed, never stored, so it can never drift out of step with its
         /// parts. At the default isotope count of 3 this is M+0 + M+1 + M+2, bit for bit as before.
         /// M-1 is deliberately NOT in this sum: it is the control, not a channel.</summary>
-        [JsonIgnore]
         public double EnvelopeSum
         {
             get

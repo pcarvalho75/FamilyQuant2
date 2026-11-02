@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:core="clr-namespace:FamilyQuant;assembly=FamilyQuant.Core"
              xmlns:local="clr-namespace:FamilyQuant"
-             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+             xmlns:numeric="clr-namespace:FamilyQuant"
              mc:Ignorable="d" FontSize="{DynamicResource BodySize}"
              d:DesignHeight="450" d:DesignWidth="1024">
     <UserControl.Resources>
@@ -140,7 +140,7 @@
                                             <Label Content="Similarity:"
                                                    ToolTip="How alike two families' descriptions must be before they are merged into one."
                                                    Foreground="{DynamicResource TextBrush}" VerticalAlignment="Center"/>
-                                            <xctk:DecimalUpDown x:Name="DecimalUpDownWordReCluster" Value="0.95"
+                                            <numeric:DecimalUpDown x:Name="DecimalUpDownWordReCluster" Value="0.95"
                                                                 Increment="0.01" Maximum="1" Minimum="0.10"
                                                                 ToolTip="Families whose description words score at or above this value are merged (0.10 to 1.00). Default 0.95 merges only near-identical wording; lower it towards 0.90 to gather related families."
                                                                 Background="{DynamicResource InputBrush}" Foreground="{DynamicResource TextBrush}" Width="60" Margin="5" VerticalAlignment="Center"/>

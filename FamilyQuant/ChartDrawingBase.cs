@@ -1,3 +1,4 @@
+using System;
 using System.Globalization;
 using System.Windows;
 using System.Windows.Media;
@@ -8,6 +9,26 @@ namespace FamilyQuant;
 public abstract class ChartDrawingBase : FrameworkElement
 {
     protected ChartPalette palette = ChartPalette.Dark;
+
+    protected ChartDrawingBase()
+    {
+        Loaded += ChartLoaded;
+        Unloaded += ChartUnloaded;
+    }
+
+    private void ChartLoaded(object sender, RoutedEventArgs e)
+    {
+        // Detached charts retain the historical palettes for deterministic exports.
+        // Only a chart hosted in a view follows the application tokens.
+        Themes.ThemeManager.ThemeChanged -= RefreshTheme;
+        Themes.ThemeManager.ThemeChanged += RefreshTheme;
+        RefreshTheme(null, EventArgs.Empty);
+    }
+
+    private void ChartUnloaded(object sender, RoutedEventArgs e) =>
+        Themes.ThemeManager.ThemeChanged -= RefreshTheme;
+
+    private void RefreshTheme(object? sender, EventArgs e) => Palette = ChartPalette.UiPalette;
 
     public ChartPalette Palette
     {

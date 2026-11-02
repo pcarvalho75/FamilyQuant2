@@ -1,18 +1,37 @@
 <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+                    xmlns:local="clr-namespace:FamilyQuant"
                     xmlns:theme="clr-namespace:FamilyQuant.Themes"
                     xmlns:sys="clr-namespace:System;assembly=mscorlib">
     <!-- Inherit the built-in Fluent templates. These styles supply only app typography and roles. -->
-    <Style TargetType="xctk:DecimalUpDown">
-        <Setter Property="theme:NumericPalette.Enabled" Value="True"/>
+    <Style TargetType="local:NumericUpDown">
+        <Setter Property="Focusable" Value="False"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="local:NumericUpDown">
+                    <Grid>
+                        <Grid.ColumnDefinitions><ColumnDefinition/><ColumnDefinition Width="18"/></Grid.ColumnDefinitions>
+                        <TextBox x:Name="PART_Text" MinWidth="30" Padding="4,2" VerticalContentAlignment="Center"
+                                 ToolTip="{TemplateBinding ToolTip}" IsEnabled="{TemplateBinding IsEnabled}"/>
+                        <Grid Grid.Column="1">
+                            <Grid.RowDefinitions><RowDefinition/><RowDefinition/></Grid.RowDefinitions>
+                            <RepeatButton x:Name="PART_Up" Focusable="False" Padding="0" Margin="0" FontSize="8"
+                                          FontFamily="Segoe Fluent Icons" Content="&#xE70E;"
+                                          Background="{DynamicResource InputBrush}" Foreground="{DynamicResource TextBrush}"
+                                          ToolTip="Increase this value by one configured step."/>
+                            <RepeatButton x:Name="PART_Down" Grid.Row="1" Focusable="False" Padding="0" Margin="0" FontSize="8"
+                                          FontFamily="Segoe Fluent Icons" Content="&#xE70D;"
+                                          Background="{DynamicResource InputBrush}" Foreground="{DynamicResource TextBrush}"
+                                          ToolTip="Decrease this value by one configured step."/>
+                        </Grid>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
     </Style>
-    <Style TargetType="xctk:IntegerUpDown">
-        <Setter Property="theme:NumericPalette.Enabled" Value="True"/>
-    </Style>
-    <Style TargetType="xctk:DoubleUpDown">
-        <Setter Property="theme:NumericPalette.Enabled" Value="True"/>
-    </Style>
+    <Style TargetType="local:DecimalUpDown" BasedOn="{StaticResource {x:Type local:NumericUpDown}}"/>
+    <Style TargetType="local:IntegerUpDown" BasedOn="{StaticResource {x:Type local:NumericUpDown}}"/>
     <Style TargetType="Window">
         <Setter Property="Icon" Value="{DynamicResource AppWindowIcon}"/>
         <Setter Property="FontFamily" Value="{DynamicResource UiFont}"/>
