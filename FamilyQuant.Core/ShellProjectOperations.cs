@@ -16,29 +16,46 @@ public sealed record ShellReannotationResult(int Updated, IReadOnlyList<string> 
 public static class ShellProjectOperations
 {
     public static string WriteVerifiedProject(string path, FamilyClusterFile curation, List<QuantRow> rows, QuantManifest manifest,
-        Action<string>? validateStaged = null)
+        Action<string>? validateStaged = null, OperationContext? operation = null)
     {
+        operation?.Report("verified-save", "Preparing the project copy");
         if (!ProjectStore.IsProjectPath(path))
             throw new ArgumentException("Save projects with a .fqproj filename. Use Export for a legacy Family Cluster File.", nameof(path));
         string full = Path.GetFullPath(path);
         string staged = full + ".saving-" + Guid.NewGuid().ToString("N") + ".fqproj";
         string expected = Convert.ToHexString(SHA256.HashData(Encoding.UTF8.GetBytes(curation.ToJsonText())));
         var snapshot = Evidence.SavedFileCheck.Capture(curation);
+        var previousCheck = curation.LastSaveCheck;
+        int previousVersion = manifest.FormatVersion;
+        int? previousCount = manifest.SpectrumComparisonRowCount;
+        bool published = false;
         try
         {
+            // This is intermediate output. Only the final rename below commits the user's file.
+            operation?.ThrowIfCancellationRequested();
             ProjectStore.WriteFqproj(staged, curation, rows, manifest);
+            operation?.Report("verified-save", "Checking the prepared project");
             validateStaged?.Invoke(staged);
-            curation.LastSaveCheck = Evidence.SavedFileCheck.Verify(snapshot, staged, project: true);
+            curation.LastSaveCheck = Evidence.SavedFileCheck.Verify(snapshot, staged, project: true, operation);
             Evidence.SavedFileCheck.RequirePassed(curation.LastSaveCheck);
-            var reopened = ProjectStore.ReadFqproj(staged);
+            var reopened = ProjectStore.ReadFqproj(staged, operation);
             string actual = Convert.ToHexString(SHA256.HashData(Encoding.UTF8.GetBytes(reopened.fcf.ToJsonText())));
             if (!string.Equals(expected, actual, StringComparison.Ordinal) || reopened.quant.Count != rows.Count)
                 throw new InvalidDataException("The saved project did not reproduce its curation and stored row count.");
-            File.Move(staged, full, true);
+            operation?.Report("verified-save", "Publishing the checked project", 1, 1);
+            void Publish() { File.Move(staged, full, true); published = true; }
+            if (operation == null) Publish();
+            else operation.Commit(Publish);
             return curation.LastSaveCheck.Message;
         }
         finally
         {
+            if (!published)
+            {
+                curation.LastSaveCheck = previousCheck;
+                manifest.FormatVersion = previousVersion;
+                manifest.SpectrumComparisonRowCount = previousCount;
+            }
             foreach (string temporary in new[] { staged, staged + ".tmp" })
             {
                 try { if (File.Exists(temporary)) File.Delete(temporary); }
@@ -46,6 +63,7 @@ public static class ShellProjectOperations
             }
         }
     }
+
 
     public static ShellProjectContent Read(string path, OperationContext? operation = null)
     {

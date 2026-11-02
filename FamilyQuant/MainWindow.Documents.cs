@@ -32,6 +32,33 @@ public partial class MainWindow
                 // leaves the previous view in place instead of an empty window. A .fqproj restores the
                 // stored quant too; an old .fcf loads exactly as it always did, with the quant empty.
                 ShellProjectContent content = ShellProjectOperations.Read(path);
+                return AttachProject(path, content);
+            }
+            catch (Exception ex) { return ReportOpenFailure(ex); }
+        }
+
+        public Task<bool> OpenProjectPathAsync(string path) => AppOperationHost.OnUi(owner, () => OpenProjectCoreAsync(path));
+        private async Task<bool> OpenProjectCoreAsync(string path)
+        {
+            if (owner.Operations.IsBusy) return false;
+            using var operation = owner.Operations.Begin("Open project");
+            try
+            {
+                ShellProjectContent content = await Task.Run(() => ShellProjectOperations.Read(path, operation.Context));
+                operation.Context.ThrowIfCancellationRequested();
+                operation.Dispose();
+                return AttachProject(path, content);
+            }
+            catch (OperationCanceledException) when (operation.Context.IsCancellationRequested)
+            {
+                owner.StatusModel.ShowMessage("Cancelled. The previous project was kept.");
+                return false;
+            }
+            catch (Exception ex) { return ReportOpenFailure(ex); }
+        }
+
+        private bool AttachProject(string path, ShellProjectContent content)
+        {
                 var loaded = new ClusterGenerationControl(content.Curation) { Name = "MyClusterGenerationControl" };
                 List<QuantRow> quant = content.Rows;
                 QuantManifest? manifest = content.Manifest;
@@ -59,9 +86,10 @@ public partial class MainWindow
                 owner.UpdateGuide();
                 owner.RememberProject(path);
                 return true;
-            }
-            catch (Exception ex)
-            {
+        }
+
+        private bool ReportOpenFailure(Exception ex)
+        {
                 owner.ReportShellMessage(
                     "The project could not be opened, and what was on screen has been left alone.\n\n" +
                     "Reason given by the program: " + ex.Message + "\n\n" +
@@ -70,11 +98,11 @@ public partial class MainWindow
                     "will have to be generated again from the database with File > New from database.",
                     "Could not open the file", MessageBoxImage.Error);
                 return false;
-            }
         }
 
-        public void MenuItemSaveFCF_Click(object sender, RoutedEventArgs e)
+        public async void MenuItemSaveFCF_Click(object sender, RoutedEventArgs e)
         {
+            if (owner.Operations.IsBusy) return;
             // Use the control we created in MenuItemCluster_Click. Reading GridApp.Children[0] and casting
             // it threw an InvalidCastException whenever the USearch panel was the one on screen.
             if (owner.cgc == null || owner.cgc.fcf == null)
@@ -96,10 +124,13 @@ public partial class MainWindow
             owner.PrepareFileDialog(sfd);
             if (sfd.ShowDialog() != true) return;
             owner.RememberFolder(sfd.FileName);
+            using var operation = owner.Operations.Begin("Export families");
 
             try
             {
-                owner.cgc.SaveFamilyClusterFile(sfd.FileName);
+                var document = owner.cgc.fcf;
+                await Task.Run(() => document.Save(sfd.FileName, operation.Context));
+                operation.Dispose();
 
                 MessageBox.Show(
                     "The families were saved to\n" + sfd.FileName + "\n\n" +
@@ -109,6 +140,10 @@ public partial class MainWindow
                     "Next step: nothing. Carry on working, or open this file later to return to exactly " +
                     "this grouping.",
                     "Saved", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            catch (OperationCanceledException) when (operation.Context.IsCancellationRequested)
+            {
+                owner.StatusModel.ShowMessage("Cancelled. The previous family file was kept.");
             }
             catch (Exception ex)
             {
@@ -124,9 +159,10 @@ public partial class MainWindow
         public async void MenuItemSaveProject_Click(object sender, RoutedEventArgs e)
             => await owner.SaveProjectAsync(saveAs: false);
 
-        public async Task SaveProjectAsync(bool saveAs)
+        public Task SaveProjectAsync(bool saveAs) => AppOperationHost.OnUi(owner, () => SaveProjectCoreAsync(saveAs));
+        private async Task SaveProjectCoreAsync(bool saveAs)
         {
-            if (owner.saveInProgress) return;   // a Save already waiting; it will report when it finishes
+            if (owner.saveInProgress || owner.Operations.IsBusy) return;
 
             if (owner.cgc == null || owner.cgc.fcf == null)
             {
@@ -140,6 +176,7 @@ public partial class MainWindow
 
             string? savePath = owner.ChooseSaveProjectPath(saveAs);
             if (savePath == null) return;
+            using var operation = owner.Operations.Begin("Save project");
 
             // ONE project bundle, captured now and written as captured: the refresh below can wait for a
             // background attach, and a project opened or recomputed meanwhile must never be mixed with
@@ -158,7 +195,7 @@ public partial class MainWindow
                 // on every save. A project with no computed quant carries the default provenance and the
                 // go-forward isotope basis, both describing what a later Compute would fill.
                 QuantManifest manifest = heldManifest ?? ShellProjectOperations.CreateManifest(MainWindow.AppVersion());
-                manifest.UpdatedUtc = DateTime.UtcNow;
+                // Timestamp the prepared manifest only after cancellation-sensitive work completes.
 
                 var (completed, familyNote) = await owner.RefreshSpectrumFamiliesAsync();
                 if (!completed || !ReferenceEquals(project, owner.cgc) || !ReferenceEquals(curation, owner.cgc?.fcf)
@@ -172,7 +209,15 @@ public partial class MainWindow
                     return;
                 }
 
-                string checkText = ShellProjectOperations.WriteVerifiedProject(savePath, curation, quant, manifest);
+                operation.Context.ThrowIfCancellationRequested();
+                DateTime previousUpdated = manifest.UpdatedUtc;
+                string checkText;
+                try
+                {
+                    manifest.UpdatedUtc = DateTime.UtcNow;
+                    checkText = await Task.Run(() => ShellProjectOperations.WriteVerifiedProject(savePath, curation, quant, manifest, operation: operation.Context));
+                }
+                catch { manifest.UpdatedUtc = previousUpdated; throw; }
                 owner.loadedManifest = manifest;
                 owner.lastFcfPath = Path.GetFullPath(savePath);
                 owner.DocumentState.Saved(curation, owner.lastFcfPath, checkText);
@@ -187,6 +232,10 @@ public partial class MainWindow
                     (familyNote != null ? familyNote + "\n\n" : string.Empty) +
                     "Next step: nothing. Carry on working, or open this file later to return to exactly " +
                     "this project.\n\n" + checkText);
+            }
+            catch (OperationCanceledException) when (operation.Context.IsCancellationRequested)
+            {
+                owner.StatusModel.ShowMessage("Cancelled. The previous project file was kept.");
             }
             catch (Exception ex)
             {
@@ -234,12 +283,19 @@ public partial class MainWindow
 
         public async void MenuItemSpectrumComparison_Click(object sender, RoutedEventArgs e)
         {
-            if (owner.spectrumViewInProgress) return;
+            if (owner.spectrumViewInProgress || owner.Operations.IsBusy) return;
             owner.spectrumViewInProgress = true;
+            using var operation = owner.Operations.Begin("Prepare spectrum comparison");
             try
             {
                 var (completed, _) = await owner.RefreshSpectrumFamiliesAsync();
                 if (!completed) return;
+                operation.Context.ThrowIfCancellationRequested();
+            }
+            catch (OperationCanceledException) when (operation.Context.IsCancellationRequested)
+            {
+                owner.StatusModel.ShowMessage("Cancelled. The previous view was kept.");
+                return;
             }
             finally
             {
@@ -263,7 +319,9 @@ public partial class MainWindow
                 IReadOnlyList<SpectrumComparisonRow> rows =
                     havePersistedRows
                         ? owner.loadedManifest!.SpectrumComparisonRows
-                        : SpectrumComparisonTable.Build(owner.loadedQuant);
+                        : await Task.Run(() => SpectrumComparisonTable.Build(owner.loadedQuant));
+                operation.Context.ThrowIfCancellationRequested();
+                operation.Dispose();
                 SpectrumComparisonWindow.Show(rows, owner, owner.lastSpectrumComparisonCsvPath,
                     owner.loadedManifest?.DeNovoAcceptedScoreScatter);
             }
@@ -278,8 +336,9 @@ public partial class MainWindow
             }
         }
 
-        public void MenuItemReanotateSEPro_Click(object sender, RoutedEventArgs e)
+        public async void MenuItemReanotateSEPro_Click(object sender, RoutedEventArgs e)
         {
+            if (owner.Operations.IsBusy) return;
             if (owner.cgc == null || owner.cgc.fcf == null)
             {
                 MessageBox.Show(
@@ -299,10 +358,12 @@ public partial class MainWindow
             owner.PrepareFileDialog(ofd);
             if (ofd.ShowDialog() != true) return;
             owner.RememberFolder(ofd.FileName);
+            using var operation = owner.Operations.Begin("Reannotate SEPro");
 
             try
             {
-                var spckg = SeproPckg2.ResultPackage.Load(ofd.FileName);
+                var spckg = await Task.Run(() => SeproPckg2.ResultPackage.Load(ofd.FileName));
+                operation.Context.ThrowIfCancellationRequested();
                 Console.WriteLine("SEPro Package loaded");
 
                 ShellReannotationResult reannotation = ShellProjectOperations.Reannotate(owner.cgc.fcf, spckg);
@@ -325,7 +386,8 @@ public partial class MainWindow
                 }
 
                 var newFileName = ofd.FileName.Remove(ofd.FileName.Length - 6, 6) + "_regrouped.sepr2";
-                spckg.Save(newFileName);
+                await Task.Run(() => AppOperationFiles.WriteFile(newFileName, spckg.Save, operation.Context));
+                operation.Dispose();
 
                 MessageBox.Show(
                     spckg.MyProteins.MyProteinList.Count.ToString("N0", CultureInfo.CurrentCulture) +
@@ -334,6 +396,10 @@ public partial class MainWindow
                     "went in. The file you chose was not modified.\n\n" +
                     "Next step: use the _regrouped package in the rest of the PatternLab pipeline.",
                     "SEPro package reannotated", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            catch (OperationCanceledException) when (operation.Context.IsCancellationRequested)
+            {
+                owner.StatusModel.ShowMessage("Cancelled. The original package and previous copy were kept.");
             }
             catch (Exception ex)
             {

@@ -88,7 +88,7 @@ namespace FamilyQuant
         /// close, so a button pressed by a headless harness reports the refusal in the status line instead,
         /// exactly as the analytics exports do.
         /// </summary>
-        private static void SaveFigureFromDialog(Button button, TextBlock status,
+        private static async void SaveFigureFromDialog(Button button, TextBlock status,
                                                  List<IdentityScanRow> rows, int? currentIdentity)
         {
             if (PresentationSource.FromVisual(button) == null)
@@ -109,16 +109,22 @@ namespace FamilyQuant
             };
 
             if (sfd.ShowDialog() != true) return;
+            using var operation = AppOperationHost.For(button).Begin("Export identity figure");
 
             try
             {
-                SaveFigure(rows, sfd.FileName, currentIdentity);
+                await AppOperationFiles.RunSta(() => AppOperationFiles.WriteFile(sfd.FileName,
+                    path => SaveFigure(rows, path, currentIdentity), operation.Context));
                 status.Text = "Written to " + Path.GetFileName(sfd.FileName) + ", " +
                     ((int)(ChartImageExporter.DefaultLayoutWidth * ChartImageExporter.DefaultScale))
                         .ToString("N0", CultureInfo.CurrentCulture) + " by " +
                     ((int)(ChartImageExporter.DefaultLayoutHeight * ChartImageExporter.DefaultScale))
                         .ToString("N0", CultureInfo.CurrentCulture) +
                     " device pixels. Nothing on screen changed.";
+            }
+            catch (OperationCanceledException) when (operation.Context.IsCancellationRequested)
+            {
+                status.Text = "Cancelled. The previous figure was kept.";
             }
             catch (Exception ex)
             {

@@ -133,7 +133,7 @@ internal static partial class Program
         void Save(bool saveAs)
         {
             var task = (Task)typeof(MainWindow).GetMethod("SaveProjectAsync", fields)!.Invoke(main, new object[] { saveAs })!;
-            for (int i = 0; i < 100 && !task.IsCompleted; i++) PumpDispatcher();
+            FinishBusyTask(task);
             Check("shell save completes for an empty-quant project", task.IsCompleted);
             if (task.IsCompleted) task.GetAwaiter().GetResult();
         }
@@ -160,6 +160,7 @@ internal static partial class Program
             ApplicationCommands.New.Execute(null, main);
             Check("New command opens the existing Build families flow", Field<Grid>("GridApp").Children.OfType<USearchLib>().Any());
             ApplicationCommands.Open.Execute(null, main);
+            FinishBusyOperation(main.Operations);
             var project = Field<ClusterGenerationControl>("cgc");
             Check("Open command opens the selected legacy FCF through the existing loader", project.fcf.MyExtendedFastaItems.Count == 2
                 && ApplicationCommands.Save.CanExecute(null, main));
