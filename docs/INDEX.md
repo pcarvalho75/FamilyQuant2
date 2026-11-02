@@ -242,8 +242,7 @@ and output must be separate. None is executed merely to maintain this catalog.
 | `--evidence-architecture-check [searched.fcf] [report.json] [scope-terms]` | Same helper, architecture suggestions |
 | `--evidence-apply-check [searched.fcf] [report.json] [scope-terms]` | Same helper, explicit apply/undo/reopen checks in separate outputs |
 | `--evidence-session-apply-check [searched.fcf] [report.json] [scope-terms]` | Same helper, session preparation and recipe replay |
-| `--family-world-check [project.fqproj] [world.fcf] [output-dir]` | [FamilyWorldCheck.cs](../FamilyQuant.Tests/FamilyWorldCheck.cs); B1 gate, gate study and B5 product pass under D11 (`family_world_pass.csv`); live UniProt taxonomy lists in the output folder |
-| `--family-world-check [project.fqproj] [world.fcf] [output-dir]` | [FamilyWorldCheck.cs](../FamilyQuant.Tests/FamilyWorldCheck.cs), the B1 gate: known answers without the sample's species (and, ungated, its genus) and coverage of the unattributed de novo envelope, the gate study, and the B5 product pass under D11 (`family_world_pass.csv`) and B6's per-family errors (`family_world_errors.csv`, stored in a project copy and read back); live UniProt taxonomy lists, kept in the output folder |
+| `--family-world-check [project.fqproj] [world.fcf] [output-dir]` | [FamilyWorldCheck.cs](../FamilyQuant.Tests/FamilyWorldCheck.cs); B1 gate, gate study, B5 product pass under D11 and B6 per-family errors; live taxonomy lists in output |
 | `--coherence-check [panel.fcf] [classes.tsv] [output-dir]` | [CoherenceCheckRun.cs](../FamilyQuant.Tests/CoherenceCheckRun.cs) |
 | `--motif-check [evidence.fcf] [classes.tsv] [expected.tsv] [output-dir]` | [MotifCheckRun.cs](../FamilyQuant.Tests/MotifCheckRun.cs) |
 | `--left-out-check [searched.fcf] [baseline.csv] [classes.tsv] [output-dir] [scope-terms]` | [LeftOutCheckRun.cs](../FamilyQuant.Tests/LeftOutCheckRun.cs) |
@@ -253,6 +252,8 @@ and output must be separate. None is executed merely to maintain this catalog.
 
 The B1 family-world gate checks known answers without the sample's species (and, ungated, its genus)
 and coverage of the unattributed de novo envelope.
+B5 writes `family_world_pass.csv`. B6 writes per-family errors to `family_world_errors.csv`,
+stores them in a project copy and reads them back.
 
 Quote semicolon-separated scope text, for example `'Toxin;venom gland'`.
 
