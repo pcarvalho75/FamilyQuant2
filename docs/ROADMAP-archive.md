@@ -171,4 +171,5 @@ Finished steps, moved here from docs/ROADMAP.md. The board shows them as green.
 | N6i | Spectrum window (195 rows, 130 of them waiting on the producer fix) | M | 0.5 | 🟢 | N6p | Each row proved or on the wording list | AS | not started | 0% | 0% | T+0 |
 | N6n | Help gaps (88 rows) | M | 0.5 | 🟢 | N6p | Each row proved or on the wording list | LK | not started | 0% | 0% | T+0 |
 | N6h | USearch window (224 rows) | M | 1 | 🟢 | N6p | Each row proved or on the wording list | AS | not started | 0% | 0% | T+1 |
+| N6l | Preview, lock and identity windows (71 rows) | M | 0.5 | 🟢 | N6p | Each row proved or on the wording list | FL | not started | 0% | 0% | T+1 |
 

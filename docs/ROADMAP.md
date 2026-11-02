@@ -101,9 +101,8 @@ Columns: Diff = L, M, H, VH. Hrs = worker hours at measured speed: estimates are
 | N6g | Curation screen (147 rows) | M | 0.5 | 🟢 | N6p | Each row proved or on the wording list | SH | not started | 0% | 0% | T+2 |
 | N6j | Deck producers: the last five rows | L | 0.1 | 🟢 | N6p | Each row proved or on the wording list | AS | not started | 0% | 0% | T+0 |
 | N6k | Compute window (79 rows) | M | 0.5 | 🟢 | N6p | Each row proved or on the wording list | FL | not started | 0% | 0% | T+0 |
-| N6l | Preview, lock and identity windows (71 rows) | M | 0.5 | 🟢 | N6p | Each row proved or on the wording list | FL | not started | 0% | 0% | T+1 |
 | N6o | Report and CSV facts (19 rows) | L | 0.2 | 🟢 | N6p | Each row proved or on the wording list | SH | not started | 0% | 0% | T+3 |
-| N6p | Wording list assembled for Paulo: rows that changed on purpose, with old and new text | L | 0.2 | N6c, N6d, N6e, N6g, N6j, N6k, N6l, N6o | N6q | List grouped by reason | Orchestrator | not started | 0% | 0% | T+3 |
+| N6p | Wording list assembled for Paulo: rows that changed on purpose, with old and new text | L | 0.2 | N6c, N6d, N6e, N6g, N6j, N6k, N6o | N6q | List grouped by reason | Orchestrator | not started | 0% | 0% | T+3 |
 | N6q | Paulo rules on the wording list in one pass | L | 0 | N6p | N6r | Paulo's ruling recorded | Paulo | not started | 0% | 0% | T+3 |
 | N6r | Reviewer's 200-row random sample across the whole ledger | M | 0.3 | N6b, N6q | N6s | GR's verdict; one failure reopens the kind | GR | not started | 0% | 0% | T+3 |
 | N6s | Release check passes | L | 0.1 | N6r | R3a | `--feature-ledger-release-check` passes | Orchestrator | not started | 0% | 0% | T+3 |
