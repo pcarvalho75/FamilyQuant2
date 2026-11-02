@@ -44,6 +44,7 @@ Finished steps, moved here from docs/ROADMAP.md. The board shows them as green.
 | E16 | The science gate's three findings as general rules: the contaminant prefix treated like a decoy, the unannotated-neighbour tier joins only through a neighbour with the scope words, a member with no domain call takes its nearest reviewed neighbour's architecture group or a learned subclass. Then rerun the gate on master | M | 2 | E6, E14 | A1 | All 256 reviewed entries consistent, or each one left has a written verdict; C4 shows it on the screen | OP | not started | 0% | 0% | T+4 |
 | E13 | Exports from the program: audit CSV (family, number, previous family, accession, locus, description, reason, domains, length, cysteines, reviewed, fragment, annotated, UniProt family) and left-out CSV. RFC-4180, InvariantCulture | L | 2 | E10, E11 | A1 | Columns match the delivered CSVs; suite pins them | EV | OP | 0% | 0% | T+2 |
 | E11b | Apply takes the session search and checked motifs: validated, attached inside the transaction, in the recipe, restored by the same single undo | M | 1 | E11 | C4, A1 | Cancel and a failed apply leave the file as it was; replay stays an exact no-op | EV | not started | 0% | 0% | T+1 |
+| OP1 | Long evidence steps on the operation path: the neighbour search and the panel fetch get progress and Cancel. Ana's file takes 398 s with neither | M | 1 | X10 | S6, A1 | Cancel leaves the file as it was; progress shown on her real file | OP | not started | 0% | 0% | T+1 |
 
 ### W2 Ana's result, through the software
 

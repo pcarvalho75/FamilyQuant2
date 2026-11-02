@@ -93,7 +93,6 @@ Where the Python broke rule 2 and the program must not: the 27-row family table,
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| OP1 | Long evidence steps on the operation path: the neighbour search and the panel fetch get progress and Cancel. Ana's file takes 398 s with neither | M | 1 | X10 | S6, A1 | Cancel leaves the file as it was; progress shown on her real file | OP | not started | 0% | 0% | T+1 |
 
 ### W2 Ana's result, through the software
 
@@ -135,13 +134,13 @@ Where the Python broke rule 2 and the program must not: the 27-row family table,
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| X5 | Quantitation pipeline: `FullXicComputer` (997) and `FamilyEnvelopeQuant` (968) restructured into stages with clear inputs and outputs. The studies Compute calls stay and get their own folder | VH | 6 | F6, X10, C8 | R3 | Golden equal on the full project; every invariant in the guide has a test; run time not worse | EV | OP | 0% | 0% | T+7 |
+| X5 | Quantitation pipeline: `FullXicComputer` (997) and `FamilyEnvelopeQuant` (968) restructured into stages with clear inputs and outputs. The studies Compute calls stay and get their own folder | VH | 6 | F6, X10, C8 | R3 | Golden equal on the full project; every invariant in the guide has a test; run time not worse | EV | OP | 0% | 0% | T+6 |
 | X6 | De novo engine tidy: readers, reconciler and table builders, with the logic left in `DeNovoControl` moved into Core | H | 3 | C10 | R3 | Golden equal; real-data de novo sections green | EV | not started | 0% | 0% | T+17 |
 | X7 | Project and file formats: `ProjectStore` (1,083) split, schema versioned, and an `.fcf` export the frozen 1.5.0.6 opens | H | 4 | X2, E12 | S5, R2 | A file written by 2.0 opens in the reference build with the same families; old `.fqproj` rules kept | EV | not started | 0% | 0% | T+14 |
 | X9 | Paper and talk figures (`PresentationFigures`, `PresentationEvidencePack`, 3,703 lines) move to `FamilyQuant.Reports`, a separate tool reading a `.fqproj` | H | 4 | C9, X8 | R3 | Same evidence pack, byte for byte, from the tool; not in the ClickOnce payload | EV | not started | 0% | 0% | T+21 |
 | X11 | Dependencies: `Extended.Wpf.Toolkit` (6 uses), `Newtonsoft.Json` (3 files, the rest is `System.Text.Json`), `OpenMcdf` (no reference in this repo), `LiteDB` (after C11). Each goes only if a real RAW and `.xic2` still open | M | 3 | C11, C12 | R3 | Publish rehearsal runs; real files open | AS | not started | 0% | 0% | T+3 |
-| X12 | Improvements found on the way, listed in `docs/IMPROVEMENTS.md` with before and after. Known candidates: the fast clustering pass has no coverage gate (20.1% of its joins, 2,329 of 11,584, fail the second pass's gate); the decoy mixing score cannot see over-merging; whether the embedded USEARCH 11 binary can be replaced by open-source VSEARCH, because the USEARCH licence restricts sharing copies and a swap may change families. Anything that changes a number goes to Paulo first | H | 4 | X3, X4, X5 | R3 | Each change measured on real data; science review; golden snapshot updated only by Paulo's word | AS | not started | 0% | 0% | T+11 |
-| X13 | Documents: `CLAUDE.md` from 50 KB to a working guide, history to `docs/HISTORY.md`, talk documents out of the root, release notes for 2.0 | L | 2 | X12 | R3 | No fact lost, no line over 300 characters | AS | not started | 0% | 0% | T+13 |
+| X12 | Improvements found on the way, listed in `docs/IMPROVEMENTS.md` with before and after. Known candidates: the fast clustering pass has no coverage gate (20.1% of its joins, 2,329 of 11,584, fail the second pass's gate); the decoy mixing score cannot see over-merging; whether the embedded USEARCH 11 binary can be replaced by open-source VSEARCH, because the USEARCH licence restricts sharing copies and a swap may change families. Anything that changes a number goes to Paulo first | H | 4 | X3, X4, X5 | R3 | Each change measured on real data; science review; golden snapshot updated only by Paulo's word | AS | not started | 0% | 0% | T+10 |
+| X13 | Documents: `CLAUDE.md` from 50 KB to a working guide, history to `docs/HISTORY.md`, talk documents out of the root, release notes for 2.0 | L | 2 | X12 | R3 | No fact lost, no line over 300 characters | AS | not started | 0% | 0% | T+12 |
 
 ### W7 Releases (Paulo publishes each one)
 
