@@ -397,15 +397,11 @@ namespace FamilyQuant.DeNovo
             return string.Join(",", cells);
         }
 
-        private static string Number(double value) => value.ToString("R", CultureInfo.InvariantCulture);
+        private static string Number(double value) => CsvFormatting.RoundTrip(value);
 
         /// <summary>Quotes and doubles embedded quotes, RFC 4180, as the family export does. Run names
         /// come off a disk and may hold anything.</summary>
-        private static string Field(string? value)
-        {
-            string v = value ?? string.Empty;
-            return "\"" + v.Replace("\"", "\"\"") + "\"";
-        }
+        private static string Field(string? value) => CsvFormatting.AlwaysQuoted(value);
 
         // ---- validation ------------------------------------------------------------------------
 

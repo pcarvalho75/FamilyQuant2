@@ -78,7 +78,7 @@ public partial class AnalyticsControl : UserControl
         }
         else
         {
-            var dialog = new SaveFileDialog { Filter = "CSV files (*.csv)|*.csv|All files (*.*)|*.*", AddExtension = true,
+            var dialog = new SaveFileDialog { Filter = FileDialogFilters.Csv, AddExtension = true,
                 DefaultExt = ".csv", FileName = ViewModel.ExportKind switch {
                     ResultsExportKind.Summary => "familyquant_analytics_summary.csv",
                     ResultsExportKind.Homology => "FamilyQuant_DeNovo_Homology.csv",

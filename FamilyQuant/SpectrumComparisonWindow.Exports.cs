@@ -81,7 +81,7 @@ namespace FamilyQuant
 
             var dialog = new SaveFileDialog
             {
-                Filter = "CSV files (*.csv)|*.csv|All files (*.*)|*.*",
+                Filter = FileDialogFilters.Csv,
                 FileName = SuggestedFileName,
                 Title = "Save the spectrum comparison table",
                 AddExtension = true,

@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Text;
@@ -123,9 +123,6 @@ namespace FamilyQuant
         /// Quotes a field and escapes embedded quotes by doubling them (RFC 4180). Protein descriptions
         /// routinely contain commas and quotes, which previously broke the column layout.
         /// </summary>
-        private static string Field(string value)
-        {
-            return "\"" + (value ?? string.Empty).Replace("\"", "\"\"") + "\"";
-        }
+        private static string Field(string value) => CsvFormatting.AlwaysQuoted(value);
     }
 }

@@ -224,14 +224,9 @@ namespace FamilyQuant.Evidence
                 .OrderByDescending(r => r.Count).ThenBy(r => r.Families, StringComparer.Ordinal)
                 .ThenBy(r => r.NeighbourFamilies, StringComparer.Ordinal).ToList();
 
-        private static string Number(int value) => value.ToString(CultureInfo.InvariantCulture);
+        private static string Number(int value) => CsvFormatting.Number(value);
 
         /// <summary>RFC 4180, and a leading formula character is quoted out so a spreadsheet shows text.</summary>
-        private static string Field(string? value)
-        {
-            string text = value ?? string.Empty;
-            if (text.Length > 0 && "=+-@".IndexOf(text[0]) >= 0) text = "'" + text;
-            return text.IndexOfAny(new[] { ',', '"', '\r', '\n' }) >= 0 ? "\"" + text.Replace("\"", "\"\"") + "\"" : text;
-        }
+        private static string Field(string? value) => CsvFormatting.Guarded(value);
     }
 }

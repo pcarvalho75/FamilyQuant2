@@ -2,8 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
 using System.Text.Json;
 using System.Text.RegularExpressions;
 
@@ -160,19 +158,15 @@ namespace FamilyQuant.Evidence
 
         public static string Fingerprint(IReadOnlyList<FastaItemExtended> proteins)
         {
-            using var hash = IncrementalHash.CreateHash(HashAlgorithmName.SHA256);
+            using var hash = new LengthPrefixedSha256();
             foreach (FastaItemExtended item in proteins)
             {
                 Append(item.SequenceIdentifier); Append(item.Sequence); Append(item.UserID.ToString(CultureInfo.InvariantCulture));
                 Append(item.USearchID.ToString(CultureInfo.InvariantCulture)); Append(item.UserAnnotation);
                 Append(JsonSerializer.Serialize(item.Evidence));
             }
-            return Convert.ToHexString(hash.GetHashAndReset());
-            void Append(string? value)
-            {
-                byte[] bytes = Encoding.UTF8.GetBytes(value ?? string.Empty);
-                hash.AppendData(BitConverter.GetBytes(bytes.Length)); hash.AppendData(bytes);
-            }
+            return hash.Finish();
+            void Append(string? value) => hash.Append(value ?? string.Empty);
         }
 
         private static List<EvidenceDomainMarker> LearnMarkers(IReadOnlyList<FastaItemExtended> proteins, List<int> targets,
@@ -214,9 +208,7 @@ namespace FamilyQuant.Evidence
             return result;
         }
 
-        private static HashSet<string> Domains(ProteinEvidence? evidence) => evidence?.Pfam == null
-            ? new HashSet<string>(StringComparer.Ordinal)
-            : evidence.Pfam.Select(p => p.Accession).Where(a => !string.IsNullOrWhiteSpace(a)).ToHashSet(StringComparer.Ordinal);
+        private static HashSet<string> Domains(ProteinEvidence? evidence) => EvidenceDomains.Ordered(evidence).ToHashSet(StringComparer.Ordinal);
 
         private static bool IsContaminant(FastaItemExtended protein) =>
             (protein.SequenceIdentifier ?? string.Empty).StartsWith(SequenceLabels.ContaminantPrefix, StringComparison.Ordinal);

@@ -614,9 +614,6 @@ public abstract class DeNovoSession : ScreenViewModel
             HomologyCsv.Write(path, LastHomology);
         }
 
-        protected static string CsvField(string? value) =>
-            "\"" + (value ?? string.Empty).Replace("\"", "\"\"") + "\"";
-
         public void ApplyPartition(DeNovoPartition outcome)
         {
             if (outcome == null) throw new ArgumentNullException(nameof(outcome));

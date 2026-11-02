@@ -1,5 +1,7 @@
 # Identity scan and Divide comparison
 
+Validation counts in this note are the recorded milestone results, not a live suite total. Use the [command catalog](INDEX.md) for current invocations and report the exact tested commit.
+
 C7 keeps both identity-selection flows. Bjararaca alone disproves equivalence:
 at the default acceptable target/decoy mixing score of zero, the lowest acceptable
 point in Scan's five-percent grid is 75%, while Divide returns 73%.
