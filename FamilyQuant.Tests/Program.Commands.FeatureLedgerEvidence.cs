@@ -12,6 +12,7 @@ internal static partial class Program
         new("--feature-ledger-evidence", 10020, TestCommandPhase.Raw, args => LedgerFlag(args, "--feature-ledger-evidence"), (args, _) => FeatureLedgerEvidence.Command(args)),
         new("--feature-ledger-evidence-import", 10030, TestCommandPhase.Raw, args => LedgerFlag(args, "--feature-ledger-evidence-import"), (args, _) => FeatureLedgerEvidence.Command(args)),
         new("--test-ledger-evidence", 10040, TestCommandPhase.Raw, args => LedgerFlag(args, "--test-ledger-evidence"), RunLedgerEvidenceChecks),
+        new("--feature-ledger-kind-review", 10045, TestCommandPhase.Raw, args => LedgerFlag(args, "--feature-ledger-kind-review"), (args, _) => FeatureLedgerEvidence.ReviewCommand(args)),
     ];
 
     private static bool LedgerFlag(string[] args, string flag) => args.Length > 0 && args[0] == flag;
