@@ -124,8 +124,7 @@ The bet, from `docs/vision/VISION.md`: a de novo peptide your database cannot pl
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| B7 | Result: three parts per family (identified, de novo in your database, de novo only in the family world) plus one global unexplained bucket, and the "Database gap" ranking: the families with the most signal missing from your database. An export writes a FASTA of the family-world proteins the tags hit, as suggested additions for the person to add and search again in PatternLab. The program never changes the database itself. The screen, the CSV and Help state the minimum tag length and the in-scope rule beside the result | M | 1 | 🟢 | B8 | Screen and CSV from one table; every number from the program; the rules in force are visible on the screen and in the export, and stored in the project; both themes | RS | not started | 0% | 0% | T+1 |
-| B8 | Science review on a real sample: labels, denominators, inflation of conserved families, and the wording of the claim | H | 1 | B7 | R3 | GR's verdict; findings closed; Paulo accepts the wording | GR | not started | 0% | 0% | T+2 |
+| B8 | Science review on a real sample: labels, denominators, inflation of conserved families, and the wording of the claim | H | 1 | 🟢 | R3 | GR's verdict; findings closed; Paulo accepts the wording | GR | not started | 0% | 0% | T+1 |
 
 ## Cooldown
 
