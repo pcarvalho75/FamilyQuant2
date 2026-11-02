@@ -1058,7 +1058,18 @@ namespace FamilyQuant.Tests
         {
             LayoutAt(root, size, tabIndex);
 
-            var elements = WalkTree(root).OfType<FrameworkElement>().ToList();
+            // Collapsed controls can retain a previous template size. They paint no pixels and cannot
+            // cover a visible header, even when the harness measures a root without showing a Window.
+            bool Displayed(FrameworkElement element)
+            {
+                for (DependencyObject? node = element; node != null; node = VisualParentOf(node))
+                {
+                    if (node is UIElement ui && ui.Visibility != Visibility.Visible) return false;
+                    if (ReferenceEquals(node, root)) return true;
+                }
+                return false;
+            }
+            var elements = WalkTree(root).OfType<FrameworkElement>().Where(Displayed).ToList();
 
             // WPF's own answer to "is this element bigger than the space it was given". Comparing
             // ActualWidth against a re-measurement does NOT work: a TextBlock that overflows reports the

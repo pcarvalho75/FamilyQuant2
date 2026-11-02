@@ -21,6 +21,41 @@ namespace FamilyQuant.Tests
 {
     internal static partial class Program
     {
+        private static void CurationSaveResultTests(string workDir)
+        {
+            var file = new FamilyClusterFile { MyExtendedFastaItems = new List<FastaItemExtended>
+            {
+                new() { SequenceIdentifier = "save_fixture", Sequence = "PEPTIDE", Description = "Save fixture", UserID = 7, USearchID = 7 }
+            } };
+            var control = new ClusterGenerationControl(file) { UseShellStatusBar = true };
+            var status = UiField<TextBlock>(control, "TextBlockStatusLine")!;
+            string originalFact = (string)status.ToolTip;
+            int changed = 0; control.ShellStatusChanged += (_, _) => changed++;
+            string path = Path.Combine(workDir, "curation-save-result.fcf");
+            control.SaveFamilyClusterFile(path);
+            Check("curation save receives the native E12 verification result", file.LastSaveCheck?.Passed == true);
+            Check("curation save reports its result through the shell status and retains the written document",
+                control.ShellStatusText == file.LastSaveCheck!.Message && changed == 1
+                && UiField<TextBlock>(control, "TextBlockStatusLine")!.Text == control.ShellStatusText
+                && ((string)status.ToolTip).Contains(originalFact, StringComparison.Ordinal)
+                && FamilyClusterFile.Load(path).MyExtendedFastaItems.Single().UserID == 7);
+            control.UseShellStatusBar = false;
+            var host = new Window { Content = control, Width = 1366, Height = 820, Left = -30000, Top = -30000,
+                WindowStartupLocation = WindowStartupLocation.Manual, WindowStyle = WindowStyle.None,
+                ShowActivated = false, ShowInTaskbar = false };
+            host.Show();
+            try
+            {
+                foreach (var theme in new[] { FamilyQuant.Themes.AppTheme.Dark, FamilyQuant.Themes.AppTheme.Light })
+                {
+                    FamilyQuant.Themes.ThemeManager.Apply(theme); PumpDispatcher(); host.UpdateLayout();
+                    ScreenHarness.Save(host, Path.Combine(workDir, "curation-save-result-" + theme.ToString().ToLowerInvariant() + ".png"), 1366, 820);
+                }
+            }
+            finally { host.Close(); FamilyQuant.Themes.ThemeManager.Apply(FamilyQuant.Themes.AppTheme.Dark); }
+            typeof(ClusterGenerationControl).GetMethod("UpdateStatusLine", BindingFlags.Instance | BindingFlags.NonPublic)!.Invoke(control, null);
+            Check("the ordinary curation status restores its tooltip fact after a save result", status.ToolTip as string == originalFact && changed == 2);
+        }
 
         // ========================================================= round trip
 
