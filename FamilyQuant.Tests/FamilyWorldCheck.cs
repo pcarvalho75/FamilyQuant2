@@ -774,7 +774,7 @@ namespace FamilyQuant.Tests
 
         /// <summary>The genus above a taxon in UniProt's taxonomy lineage, or empty when there is none. Kept in the
         /// output folder so a rerun answers offline.</summary>
-        private static (string Id, string Name) Genus(HttpClient client, string taxon, string outDir, Action<string> log)
+        internal static (string Id, string Name) Genus(HttpClient client, string taxon, string outDir, Action<string> log)
         {
             string cache = Path.Combine(outDir, "family_world_lineage_" + taxon + ".tsv");
             if (File.Exists(cache))
