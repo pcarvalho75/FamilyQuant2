@@ -17,6 +17,7 @@ internal static partial class Program
         new("--test-curation-operations", 45, TestCommandPhase.Raw, args => args.Contains("--test-curation-operations", StringComparer.Ordinal), RunCurationOperationChecks),
         new("--test-family-view", 46, TestCommandPhase.Raw, args => args.Contains("--test-family-view", StringComparer.Ordinal), RunFamilyViewChecks),
         new("--family-view-screens", 47, TestCommandPhase.Raw, args => args.Length == 3 && args[0] == "--family-view-screens", (args, _) => CurationScreens(args[1], args[2], selectFamily: true)),
+        new("--test-ui-colors", 48, TestCommandPhase.Raw, args => args.Contains("--test-ui-colors", StringComparer.Ordinal), RunUiColorChecks),
     ];
 
     private static int RunCurationLayoutChecks(string[] args, string workDir)
@@ -54,6 +55,13 @@ internal static partial class Program
     private static int RunFamilyViewChecks(string[] args, string workDir)
     {
         FamilyViewTests();
+        Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
+        return failed == 0 ? 0 : 1;
+    }
+
+    private static int RunUiColorChecks(string[] args, string workDir)
+    {
+        UiColorTests();
         Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
         return failed == 0 ? 0 : 1;
     }
