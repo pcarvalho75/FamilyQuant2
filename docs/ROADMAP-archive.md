@@ -173,3 +173,9 @@ Finished steps, moved here from docs/ROADMAP.md. The board shows them as green.
 | N6h | USearch window (224 rows) | M | 1 | 🟢 | N6p | Each row proved or on the wording list | AS | not started | 0% | 0% | T+1 |
 | N6l | Preview, lock and identity windows (71 rows) | M | 0.5 | 🟢 | N6p | Each row proved or on the wording list | FL | not started | 0% | 0% | T+1 |
 
+### W4 Look
+
+| ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
+|---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
+| C14a | Scaling at 100, 125 and 150% | L | 0.2 | 🟢 | C14e | Harness renders at each scale | LK | not started | 0% | 0% | T+0 |
+
