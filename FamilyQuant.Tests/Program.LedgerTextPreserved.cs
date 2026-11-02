@@ -123,6 +123,11 @@ internal static partial class Program
                 !DecideControl(control, "control-lent", LedgerTextControl.LentLiteral, "FamilyQuant.Tests.LedgerTextLender", "Alpha").Closed);
             Check("Text tool control: a format token does not close by text alone, even in its own member",
                 !DecideControl(control, "control-short", LedgerTextControl.ShortLiteral, "FamilyQuant.Tests.LedgerTextLender", "Alpha").Closed);
+            // FQAssay's review of b3f5540: structured operands with two letter runs, held by their own member.
+            Check("Text tool control (review-field-path): a dotted binding path held only as a caption in its member does not close",
+                !DecideControl(control, "review-field-path", LedgerTextControl.FieldPathLiteral, "FamilyQuant.Tests.LedgerTextOperands", "Display").Closed);
+            Check("Text tool control (review-format-operand): a numeric format with a quoted unit does not close by text",
+                !DecideControl(control, "review-format-operand", LedgerTextControl.FormatOperandLiteral, "FamilyQuant.Tests.LedgerTextOperands", "Display").Closed);
 
             foreach (var row in cohort)
             {
@@ -266,8 +271,22 @@ internal static partial class Program
     }
 
     /// <summary>Text alone identifies a fact only when it is prose: two or more words of two or more letters. A format string,
-    /// separator, single word or identifier does not.</summary>
-    private static bool IsProse(string text) => Regex.Matches(text, @"\p{L}{2,}").Count >= 2;
+    /// separator, single word or identifier does not, nor a dotted identifier path (a binding or member path) or a numeric or
+    /// date format operand, quoted unit words included.</summary>
+    private static bool IsProse(string text) => !DottedPath.IsMatch(text) && !IsFormatOperand(text)
+        && Regex.Matches(text, @"\p{L}{2,}").Count >= 2;
+
+    private static readonly Regex DottedPath = new(@"^\s*[\p{L}_][\p{L}\p{Nd}_]*(\[[^\]]*\])?(\.[\p{L}_][\p{L}\p{Nd}_]*(\[[^\]]*\])?)+\s*$", RegexOptions.Compiled);
+
+    /// <summary>Whether the text is a .NET numeric or date and time format: with its quoted parts and escaped characters set
+    /// aside, what remains is a standard numeric specifier, a custom numeric pattern, or a custom date and time pattern.</summary>
+    private static bool IsFormatOperand(string text)
+    {
+        string rest = Regex.Replace(text, @"'[^']*'|""[^""]*""|\\.", " ").Trim();
+        return rest.Length > 0 && (Regex.IsMatch(rest, @"^[NnFfCcDdPpXxGgRrEe]\d{0,2}$")
+            || Regex.IsMatch(rest, @"^[0#.,%\u2030;Ee+\-\s]*[0#][0#.,%\u2030;Ee+\-\s]*$")
+            || Regex.IsMatch(rest, @"^[yMdHhmsfFtzKg:/\-.,\s]*(yy|MM|dd|HH|hh|mm|ss)[yMdHhmsfFtzKg:/\-.,\s]*$"));
+    }
 
     private static string BamlOf(string xamlPath)
     {

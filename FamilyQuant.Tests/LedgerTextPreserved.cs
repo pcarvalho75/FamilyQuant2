@@ -633,10 +633,12 @@ internal static class LedgerTextControl
     internal const string OwnMemberLiteral = "N6a control: a sentence the Alpha member holds";
     internal const string LentLiteral = "N6a control: a sentence another member holds";
     internal const string ShortLiteral = "N0";
+    internal const string FieldPathLiteral = "Source.DisplayName";
+    internal const string FormatOperandLiteral = "0.0 'counts per second'";
     // The counterexamples of FQAssay's review of 330afa5: a type named but never constructed, a store overwritten in
     // the same call path, text held by a different member of the right class, and a format token.
     internal static string Entry() => Live() + typeof(LedgerTextNeverInstantiated).Name + LedgerTextDeadStore.Make()
-        + LedgerTextLender.Alpha() + LedgerTextLender.Beta();
+        + LedgerTextLender.Alpha() + LedgerTextLender.Beta() + LedgerTextOperands.Display(1.25, 3.5);
     private static string Live() => string.Concat("N6a control: this literal is reachable ", "from the control entry") + LiveText();
     private static string LiveText() => "N6a control: this literal is reachable from the control entry";
     internal static string Dead() => "N6a control: this literal is only in dead code";
@@ -664,4 +666,16 @@ internal static class LedgerTextLender
 {
     internal static string Alpha() => "N6a control: a sentence the Alpha member holds" + 12.ToString("N0", System.Globalization.CultureInfo.InvariantCulture);
     internal static string Beta() => "N6a control: a sentence another member holds";
+}
+
+/// <summary>N6a control (FQAssay's review of b3f5540): one member binds a changed path and keeps the old dotted path only as a
+/// caption, and formats its original quantity with N1 while another quantity keeps a numeric format with a quoted unit. Neither
+/// the dotted path nor the format operand is prose, so neither may close a row by text.</summary>
+internal static class LedgerTextOperands
+{
+    private static string Caption(string text) => text;
+    internal static string Display(double original, double other) =>
+        new System.Windows.Data.Binding("Source.ChangedValue").Path.Path + Caption("Source.DisplayName")
+        + original.ToString("N1", System.Globalization.CultureInfo.InvariantCulture)
+        + other.ToString("0.0 'counts per second'", System.Globalization.CultureInfo.InvariantCulture);
 }
