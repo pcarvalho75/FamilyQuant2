@@ -85,9 +85,8 @@ Columns: Diff = L, M, H, VH. Hrs = worker hours at measured speed: the 56 steps 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
 | A1 | Make her file with 2.0 preview 1 on her original `.fcf`: Fetch Evidence, fetch the panel again so it keeps tissue text, review, Create, Save, Export. Provenance shows version, recipe and release | M | 0.5 | 🟢 | A2 | Recipe reapplied gives the same file; file check passed; no script touched it | EV | not started | 0% | 0% | T+2 |
-| A2 | Adversarial science review of the file: concepts, denominators, labels, red flags, comparison with what Ana already holds | H | 1 | A1 | A3 | GR's written verdict; every finding closed | GR | not started | 0% | 0% | T+2 |
-| A3 | Paulo sends Ana a second email, the same day if the team gets there: FamilyQuant 2.0 preview 1 and the program's file, with a short note that it replaces the file she received and that 1.5 stays installed | L | 0 | A2 | A4 | Sent by Paulo | Paulo | not started | 0% | 0% | T+2 |
-| A4 | Ana's answers: is the family list right; keep disintegrins separate (default yes, one click to reverse); does the scope stay `Toxin` and `venom gland`, given that it brings in 125 left-out calmodulin-like rows; is a family-level claim acceptable for a peptide absent from her database; a `.sepr2` on this database | L | 0 | A3 | A5 | Answers recorded in the recipe | Ana | not started | 0% | 0% | her pace |
+| A2 | Adversarial science review of the file: concepts, denominators, labels, red flags, comparison with what Ana already holds | H | 1 | A1 | A4 | GR's written verdict; every finding closed | GR | not started | 0% | 0% | T+2 |
+| A4 | Ana's answers, when Paulo raises them: is the family list right; keep disintegrins separate (default yes, one click to reverse); does the scope stay `Toxin` and `venom gland`, given that it brings in 125 left-out calmodulin-like rows; is a family-level claim acceptable for a peptide absent from her database; a `.sepr2` on this database | L | 0 | A2 | A5 | Answers recorded in the recipe | Ana | not started | 0% | 0% | her pace |
 | A5 | Measure the shared-peptide effect on her data, through Compute full XIC | M | 0.5 | A4 | Paper numbers | Numbers exported by the program | EV | not started | 0% | 0% | her pace |
 
 ### W3 Look
@@ -135,7 +134,7 @@ Columns: Diff = L, M, H, VH. Hrs = worker hours at measured speed: the 56 steps 
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| R2 | 2.0 preview 2: new look and shell | M | 0.5 | C2, C5, S6, X7, C14 | R3 | Same, plus Paulo's sign-off on renders | Orchestrator | not started | 0% | 0% | T+8 |
+| R2 | 2.0 preview 2: new look and shell | M | 0.5 | C2, C5, S6, X7, C14 | R3 | Same, plus Paulo's sign-off on renders, and a published update reaches an installed 2.0 | Orchestrator | not started | 0% | 0% | T+8 |
 | R3 | 2.0 release candidate: rewrite finished, every ledger row closed, the family world in if B1 passed | M | 0.5 | R2, B8, X5, X6, X9, X11, X12, X13, X14, X15 | R4 | Same, plus the ledger check | Orchestrator | not started | 0% | 0% | T+9 |
 | R4 | Final adversarial pass on the whole product | H | 1 | R3 | R5 | GR's verdict; all findings closed | GR | not started | 0% | 0% | T+10 |
 | R5 | FamilyQuant 2.0 final, then the archive of this roadmap | L | 0.5 | R4 | Done | Paulo publishes | Orchestrator | not started | 0% | 0% | T+10 |
@@ -162,14 +161,13 @@ H1 ran at the middle of the project and is finished: 56 steps landed, housekeepi
 
 ## Critical path
 
-Three lines run side by side from the restart. For Ana: R1, A1, A2, A3, which also needs D8. For the breakthrough: B1, then B4, X5, B5, B6, B7, B8. For the look: V5, C3, C1, then C2, C5, C13, N6, C14, R2. R3 waits for all of them. X5 is the seam: it opens both B5 and X12.
+Three lines run side by side from the restart. For Ana's file: A1, A2. For the breakthrough: B1, then B4, X5, B5, B6, B7, B8. For the look: V5, C3, C1, then C2, C5, C13, N6, C14, R2. R3 waits for all of them. X5 is the seam: it opens both B5 and X12.
 
 ## Paulo's decisions
 
 | ID | Decision | Default if no answer | Needed by |
 |---|---|---|---|
-| D7 | `LICENSE.txt` is the MIT template with its name and year blank. Keep MIT, or change to all rights reserved? And who holds the rights, Paulo or Fiocruz? | None: R5 waits, only Paulo can name them | Before R5 |
-| D8 | Publish preview 1 at its own address, install 2.0 beside 1.5 on one Windows profile, open a file in each, and confirm 1.5 is unchanged. The update test follows at the next published revision (`docs/N1-IDENTITY.md`) | None: A3 waits, Ana must not lose 1.5 | Before A3 |
+| D7 | `LICENSE.txt` changes from the blank MIT template to all rights reserved, 2026 (Paulo agreed). Who holds the rights, Paulo or Fiocruz? | None: R5 waits, only Paulo can name the holder | Before R5 |
 
 ### Decisions taken
 
@@ -177,6 +175,7 @@ Paulo agreed these at the restart, 2026-11-01.
 
 | ID | Question | Taken |
 |---|---|---|
+| D8 | Test 1.5 and 2.0 side by side before Ana gets 2.0? | Not needed. Paulo: it is safe, she already uses 1.5 and will have 2.0 beside it |
 | D1 | Is a family-level claim acceptable for a peptide absent from the species database? | Yes, with the decoy rate and right rate printed beside it. Ana's answer is in A4 |
 | D2 | Clade of the family world on Ana's file: Viperidae or all snakes? | The clade the program reads from the headers, Viperidae on her file |
 | D3 | Scope proposed by the program or typed by the person? | Proposed, the person confirms |
