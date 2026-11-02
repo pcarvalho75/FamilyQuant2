@@ -276,6 +276,9 @@ internal static class FeatureLedger
         if (rows.Select(r => r[1]).Distinct().Count() != rows.Length) errors.Add("Duplicate ledger ID.");
         if (inventory.Observations.Select(r => r.Id).Distinct().Count() != inventory.Observations.Count) errors.Add("Duplicate scan ID.");
         var byId = inventory.Observations.GroupBy(r => r.Id).ToDictionary(g => g.Key, g => g.First());
+        string? evidenceRoot = FeatureLedgerEvidence.FindRoot();
+        var evidence = evidenceRoot != null && rows.Any(r => r.Length == 10 && r[7] == "VERIFIED")
+            ? FeatureLedgerEvidence.Load(evidenceRoot, inventory) : null;
         foreach (string[] row in rows)
         {
             if (row.Length != 10) { errors.Add("Malformed row."); continue; }
@@ -297,6 +300,8 @@ internal static class FeatureLedger
             if (requireClosed && row[7] is not ("VERIFIED" or "APPROVED_DROP")) errors.Add("Release has an open row: " + row[1]);
             if (row[7] == "VERIFIED" && (row[8] == "pending" || row[8].Length < 12))
                 errors.Add("Verified row lacks behavioral evidence: " + row[1]);
+            if (row[7] == "VERIFIED" && evidence?.IsVerified(row[1], row[8]) != true)
+                errors.Add("Verified row lacks a current executed receipt: " + row[1]);
         }
         foreach (SourceFile file in inventory.Files)
             if (file.Observations != inventory.Observations.Count(o => o.Source == file.Path)) errors.Add("File count differs: " + file.Path);

@@ -25,6 +25,7 @@ This is the navigation index for the current checkout. The roadmap owns unfinish
 | [Vision](vision/VISION.md) | Fable's study: the family world proposal behind workstream W8, with the desk's corrections |
 | [Code map](vision/CODE-MAP.md) | How a FASTA and a RAW file become a family number, and what that read did not cover |
 | [Feature ledger](FEATURE-LEDGER.md) | Frozen preservation contract, dispositions and acceptance state |
+| [Feature evidence](FEATURE-EVIDENCE.md) | Per-observation receipts, native proof runner, audit and review sample |
 | [Ledger scan](feature-ledger-scan.json) | Exact frozen observations and source hashes |
 | [Roadmap](ROADMAP.md) | Current work and acceptance gates; orchestrator owned |
 | [Roadmap archive](ROADMAP-archive.md) | Historical step records; orchestrator owned |
@@ -97,6 +98,7 @@ Invoke each flag with `& $testExe <flag>` after building. Dispatch and arity are
 | `--shell-checks` | Shell navigation, saving, preferences, Build/Quantify integration and secondary views |
 | `--feature-ledger-check` | Inventory, row coverage, dispositions and guard regressions |
 | `--feature-ledger-release-check` | Same inventory with all retained rows required VERIFIED; OPEN rows intentionally fail |
+| `--test-ledger-evidence` | Adversarial receipt, source/artifact hash, assertion and render checks |
 
 ## Screens and UI metadata
 
@@ -133,6 +135,9 @@ Companion options for `--screens` are `--screen-fcf <input.fcf>`, `--screen-proj
 | `--golden-verify <stored.fqproj> <frozen-snapshot-dir> <existing-output-dir>` | Verify source and compare existing exports without generating a new pack |
 | `--golden-record <stored.fqproj> <empty-snapshot-dir> <output-dir>` | Snapshot-owner maintenance only, through [ReferenceGoldenHost](../FamilyQuant.Tests/ReferenceGoldenHost/ReferenceGoldenHost.csproj) with frozen assemblies; current App is rejected and existing snapshots are never replaced |
 | `--feature-ledger-generate <frozen-source-root> <scratch-root>` | [FeatureLedger.cs](../FamilyQuant.Tests/FeatureLedger.cs); writes `scratch-root/docs`, never scan moving product source |
+| `--feature-ledger-prove <fresh-output> <date-timestamp>` | Native observation-specific storage/source proofs and register, no ledger edit |
+| `--feature-ledger-evidence-import <register> <output> [--replace-existing]` | Validate receipts, preserve an explicitly replaced register and apply evidenced states |
+| `--feature-ledger-evidence <output>` | Read-only counts by kind, source mappings and reproducible 50-row sample |
 | `--word-grouping-snapshot <input.fcf-or-fqproj> <output.txt>` | [WordGroupingSnapshot.cs](../FamilyQuant.Tests/WordGroupingSnapshot.cs), also linked into frozen host |
 | `--chart-export-snapshot <output-dir>` | [ChartExportSnapshot.cs](../FamilyQuant.Tests/ChartExportSnapshot.cs), synthetic chart parity fixtures |
 | `--clustering-snapshot <input.fasta> <output.tsv> <integer-identity> <fast-or-exhaustive>` | [ClusteringSnapshot.cs](../FamilyQuant.Tests/ClusteringSnapshot.cs) |
@@ -204,7 +209,12 @@ The guarded `build_scientific_deck.mjs` is a historical, deprecated producer wit
 
 ## Generated-ledger status
 
-The committed scan is a frozen-source inventory, not a scan of current view names. It contains 5,756 observations from 104 source files: 2,009 KEEP, 3,451 IMPROVE and 296 Paulo-approved DROP. All 5,460 retained rows remain OPEN; the approved retirements use APPROVED_DROP. Source moves and command-backed replacements require a mapping and reviewed execution evidence before VERIFIED. A missing old handler name is not proof that the function is lost.
+The committed scan is a frozen-source inventory, not a scan of current view names.
+It contains 5,756 observations from 104 source files: 2,009 KEEP, 3,451 IMPROVE
+and 296 Paulo-approved DROP. N5's first native proof pass proposes 72 VERIFIED retained
+rows and leaves 5,388 OPEN; the retirements remain APPROVED_DROP. The proposal still
+requires the independent review sample and merge gate. The evidence audit reports the
+current counts and rejects stale receipts. A missing old handler name is not proof of loss.
 
 Regenerate into scratch with the published command and compare both ledger files against the checkout and the Git blobs separately. On the audited Windows checkout both regenerated files are byte-identical to the working files; the scan JSON differs from its LF Git blob only by CRLF newlines, and normalized content is identical. The Markdown is also byte-identical to its Git blob. Never overwrite acceptance evidence or scan moving source to make the counts pass. The release check intentionally fails while retained rows remain OPEN.
 
