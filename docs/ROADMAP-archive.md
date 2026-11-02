@@ -180,6 +180,8 @@ Finished steps, moved here from docs/ROADMAP.md. The board shows them as green.
 | N6f | Curation code (302 rows) | H | 1 | 🟢 | N6p | Each row proved or on the wording list | SH | not started | 0% | 0% | T+2 |
 | N6g | Curation screen (147 rows) | M | 0.5 | 🟢 | N6p | Each row proved or on the wording list | SH | not started | 0% | 0% | T+2 |
 | N6o | Report and CSV facts (19 rows) | L | 0.2 | 🟢 | N6p | Each row proved or on the wording list | SH | not started | 0% | 0% | T+3 |
+| N6c | De novo screen: commands, exports and handlers (290 rows today) | H | 1 | 🟢 | N6p | Each row proved or on the wording list | EV | not started | 0% | 0% | T+1 |
+| N6d | Three-way window, chart and partition (30 rows) | L | 0.2 | 🟢 | N6p | Each row proved or on the wording list | EV | not started | 0% | 0% | T+1 |
 
 ### W4 Look
 
@@ -188,6 +190,8 @@ Finished steps, moved here from docs/ROADMAP.md. The board shows them as green.
 | C14a | Scaling at 100, 125 and 150% | L | 0.2 | 🟢 | C14e | Harness renders at each scale | LK | not started | 0% | 0% | T+0 |
 | C14b | Smallest window | L | 0.2 | 🟢 | C14e | Every screen usable at the smallest size | LK | not started | 0% | 0% | T+0 |
 | C14c | Tab order and visible focus | L | 0.2 | 🟢 | C14e | Whole flow by keyboard | LK | not started | 0% | 0% | T+0 |
+| C14d | Both themes, every screen | L | 0.2 | 🟢 | C14e | Renders inspected | LK | not started | 0% | 0% | T+0 |
+| C14e | Paulo's final look sign-off | L | 0 | 🟢 | R3a | Paulo's word | Paulo | not started | 0% | 0% | T+1 |
 
 ### W6 Paper numbers (no release depends on these)
 

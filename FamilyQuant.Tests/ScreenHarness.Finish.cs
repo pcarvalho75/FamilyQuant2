@@ -18,7 +18,7 @@ internal static partial class ScreenHarness
     private sealed record FinishCapture(string File, string Theme, string Screen, double Scale,
         double NativeRootScale, double NativeContentScale, int DipWidth, int DipHeight, int PixelWidth,
         int PixelHeight, double MinimumWidth, double MinimumHeight, bool LayoutAccepted,
-        List<FinishTabStop> TabStops, bool KeyboardTraversalExecuted = false);
+        List<FinishTabStop> TabStops, bool MinimumScenario = false, bool KeyboardTraversalExecuted = false);
 
     private static void CaptureFinish(string theme, string screen, Window window, string output, List<FinishCapture> captures)
     {
@@ -32,6 +32,11 @@ internal static partial class ScreenHarness
             // Set actual WPF DPI metadata and propagate it to native child visuals. This does
             // not change Windows settings or pretend the display's monitor DPI changed.
             VisualTreeHelper.SetRootDpi(window, new DpiScale(scale, scale));
+            if (screen.EndsWith("-bottom", StringComparison.Ordinal) || screen == "06-denovo-advanced")
+            {
+                ((FrameworkElement)window.Content).UpdateLayout();
+                Walk((FrameworkElement)window.Content).OfType<ScrollViewer>().First().ScrollToBottom(); Pump();
+            }
             SettleFinish();
             var content = (FrameworkElement)window.Content;
             bool layout = Program.VerifyFinishLayout(theme + "/" + screen + "/" + scale.ToString(CultureInfo.InvariantCulture)
@@ -55,7 +60,7 @@ internal static partial class ScreenHarness
             int pixelWidth = (int)Math.Ceiling(width * scale), pixelHeight = (int)Math.Ceiling(height * scale);
             RenderFinish(content, window.Background, width, height, scale, path);
             captures.Add(new(relative.Replace('\\', '/'), theme, screen, scale, rootScale, contentScale,
-                width, height, pixelWidth, pixelHeight, window.MinWidth, window.MinHeight, layout, tabStops));
+                width, height, pixelWidth, pixelHeight, window.MinWidth, window.MinHeight, layout, tabStops, requested.Width == 900));
             Console.WriteLine("  C14 " + relative + "; WPF DPI=" + (96 * scale).ToString(CultureInfo.InvariantCulture)
                 + "; native tab candidates=" + tabStops.Count);
         }

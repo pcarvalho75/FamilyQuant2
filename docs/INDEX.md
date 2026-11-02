@@ -122,6 +122,7 @@ Invoke each flag with `& $testExe <flag>` after building. Dispatch and arity are
 | `--prove-look-style-roles <frozen-source> <role-map> <new-output> <date-timestamp>` | Twenty-four explicit De novo role mappings, old/current values, native resolved properties and actual consumers in both themes |
 | `--probe-look-home-styles <new-output> [--negative-control]` | Native Home action/state checks, resolved style values and off-screen captures in both themes; optional planted lost-enablement regression; no focus or ledger closure by screenshot |
 | `--look-finish-focus <new-output> <date-timestamp>` | Native focus-state/template paint checks for four input types, both themes, three DPIs, without taking focus; creates a synthetic keyboard-check project |
+| `--look-finish-gallery <existing-native-capture-dir>` | Native review sheets assembled from unchanged C14 source PNGs; originals stay intact |
 | `--prove-look-app-tokens <frozen-source> <new-output> <date-timestamp>` | Explicit frozen/current application palette roles and named native Home consumers in both themes; unsupported roles stay OPEN |
 | `--prove-look-copy <frozen-source> <native-audit> <new-output> <date-timestamp> [LK-prefix]` | Exact OPEN help/tooltip cohort, native published Help and named-tooltip comparisons, 200-row LK register batches |
 | `--refresh-look-registers <frozen-source> <new-output> <date-timestamp>` | Regenerates all five existing LK copy/style registers from their fixed ordered IDs, with no audit or hand preparation; leaves unsupported rows unproved |
@@ -232,6 +233,9 @@ Companion options for `--screens` are `--screen-fcf <input.fcf>`, `--screen-proj
 | `--prove-denovo-workflows <frozen-source-root> <frozen-app-folder> <fresh-output> <date>` | Native frozen/current projection, reconciliation, binding and legacy export fixtures; C13 style handoff |
 | `--prove-denovo-refusals <frozen-source-root> <frozen-app-folder> <fresh-output> <date>` | Native parser/refusal callback feedback, homology setting restoration, formatting and file-name lookup comparisons |
 | `--prove-denovo-commands <frozen-source> <frozen-app> <trusted-sepr2> <fresh-output> <date>` | Actual old/current command/data/status and native chooser/export success/cancel/failure receipts; 41-row semantic fact inventory |
+| `--prove-denovo-results-export <frozen-source> <frozen-app> <fresh-output> <date> [--negative-control]` | Whole-screen native source/Help and Results assignment export interactions; private desktop, selected CSV bytes, state retention and cancellation |
+| `--isolated-native-proof <native-proof-command> <arguments...>` | Private, never-selected Windows desktop for native-dialog proof commands; the dialog proof entry points isolate automatically |
+| `--prove-threeway <frozen-source> <frozen-app> <fresh-output> <date>` | Frozen/current three-way numeric/CSV and actual Save/cancel, empty/positive window states in two cultures on the private desktop |
 | `--denovo-command-probe <frozen-app> <trusted-sepr2> <fresh-output>` | Actual command trace without ledger import |
 | `--native-dialog-probe <fresh-output>` | Owned-process native Open/Folder/Save selection driver check |
 | `--ledger-shell-compare <frozen-root> <fresh-output> <date>` | SH and C1 exact declarations/member tokens; separate candidate registers, unproven rows kept OPEN |

@@ -1,6 +1,7 @@
 using Microsoft.Win32;
 using System;
 using System.IO;
+using System.Linq;
 using System.Windows;
 
 namespace FamilyQuant.Tests;
@@ -10,6 +11,7 @@ internal static partial class Program
     private static int NativeDialogProbe(string[] args)
     {
         if (args.Length != 2) throw new ArgumentException("Supply a fresh lane-owned fixture directory.");
+        if (!NativeProofDesktop.IsPrivate) return IsolatedNativeProof(new[] { "--isolated-native-proof" }.Concat(args).ToArray());
         string output = Path.GetFullPath(args[1]);
         if (Directory.Exists(output)) throw new IOException("Use a new output directory.");
         Directory.CreateDirectory(output); string input = Path.Combine(output, "input.txt"); File.WriteAllText(input, "native chooser fixture");
