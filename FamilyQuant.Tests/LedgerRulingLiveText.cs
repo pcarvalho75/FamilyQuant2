@@ -81,11 +81,15 @@ internal static class LedgerRulingLiveText
                         ReadBaml(name, key, baml, result);
             }
         }
-        // Resolved Help joins compiled fragments and formats current enum labels. No window is shown.
+        // Resolved Help joins compiled fragments and formats current enum labels. No window is shown. The De novo Help
+        // page is resolved for each preset source with the default filters, as its Help button first shows it.
         foreach (var mode in Enum.GetValues<NormalizationMode>())
         foreach (var shared in Enum.GetValues<SharedPeptidePolicy>())
             result.Add(new(typeof(FamilyClusterFile).Assembly.GetName().Name!, "FamilyQuant.HelpContent::Build/" + mode + "/" + shared,
                 HelpContent.Build(null, mode, shared)));
+        foreach (var source in FamilyQuant.DeNovo.DeNovoSource.Presets)
+            result.Add(new(typeof(FamilyClusterFile).Assembly.GetName().Name!, "FamilyQuant.HelpContent::BuildDeNovo/" + source.Id,
+                HelpContent.BuildDeNovo(null, source)));
         return result.Where(value => value.Text.Length > 0).Distinct().OrderBy(value => value.AssemblyName, StringComparer.Ordinal)
             .ThenBy(value => value.Symbol, StringComparer.Ordinal).ThenBy(value => value.Text, StringComparer.Ordinal).ToArray();
     }

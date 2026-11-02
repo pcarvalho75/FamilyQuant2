@@ -18,6 +18,8 @@ internal static partial class Program
             LedgerPauloRulings.Evaluate(value, observed, LedgerRulingLiveText.Find, facts);
         var accepted = Decide(input, row);
         Check("a real compiled current caption can support recorded Rule 1", accepted.Closed && accepted.Rule == "1");
+        Check("each resolved De novo Help page, as its Help button shows it for a preset source, is a live witness",
+            FamilyQuant.DeNovo.DeNovoSource.Presets.All(source => LedgerRulingLiveText.Find(HelpContent.BuildDeNovo(null, source)).Found));
         Check("test-only strings cannot serve as current program text", !LedgerRulingLiveText.Find("Synthetic ruling sentinel 710928399 - absent from installed code").Found);
         Check("empty new text cannot close a ruling row", !Decide(input with { NewText = "" }, row).Closed);
         Check("bare newline cannot close a ruling row", !Decide(input with { NewText = "\r\n" }, row).Closed);
@@ -159,16 +161,30 @@ internal static partial class Program
         File.WriteAllText(tsv, "lane\trow_id\told_text\tnew_text\treason\nfixture\t" + row.Id + "\t" + input.OldText + "\tSome other text\tNot this decision\n");
         FeatureLedgerEvidence.WriteJson(packetFile, packet with { TsvSha256 = FeatureLedgerEvidence.Hash(tsv) });
         Check("a row/text pair absent from the pinned TSV cannot close", !Valid(receipt));
-        var forgedFacts = new Dictionary<string, LedgerPauloRulings.FactCheck>(facts, StringComparer.Ordinal)
-            { [rejectedInput.Id] = new("kept", "Synthetic private forgery, never a reviewer verdict.") };
-        var forged = LedgerPauloRulings.Evaluate(rejectedInput, rejectedRow, LedgerRulingLiveText.Find, forgedFacts);
-        Check("forgery fixture preserves the formerly accepted compiled Rule 3 witness", forged.Closed && forged.Rule == "3");
-        File.WriteAllText(tsv, "lane\trow_id\told_text\tnew_text\treason\nfixture\t" + rejectedInput.Id + "\t" + rejectedInput.OldText + "\t" + rejectedInput.NewText + "\tSynthetic guard\n");
-        File.WriteAllText(factFile, "row_id\tverdict\tnote\n" + rejectedInput.Id + "\tkept\t" + forged.FactCheckNote + "\n");
+        // The forgery fixture is any listed row whose canonical verdict is lost and whose compiled witness would close it under
+        // Rule 1 or 3 if a private verdict said kept (first by ID), so the guard does not lean on one production row.
+        Dictionary<string, LedgerPauloRulings.FactCheck> Forge(string id) => new(facts, StringComparer.Ordinal)
+            { [id] = new("kept", "Synthetic private forgery, never a reviewer verdict.") };
+        var forgery = LedgerPauloRulings.ReadInputs(LedgerPauloRulings.InputPath)
+            .Where(candidate => facts.TryGetValue(candidate.Id, out var fact) && fact.Verdict == "lost")
+            .OrderBy(candidate => candidate.Id, StringComparer.Ordinal).ThenBy(candidate => candidate.Line)
+            .Select(candidate => (Input: candidate, Row: inventory.Observations.FirstOrDefault(observation => observation.Id == candidate.Id)))
+            .Where(pair => pair.Row != null)
+            .Select(pair => (pair.Input, Row: pair.Row!, Decision: LedgerPauloRulings.Evaluate(pair.Input, pair.Row!, LedgerRulingLiveText.Find, Forge(pair.Input.Id))))
+            .FirstOrDefault(candidate => candidate.Decision.Closed && candidate.Decision.Rule is "1" or "3");
+        Check("forgery fixture finds a canonically lost row that a forged kept verdict would close under Rule 1 or 3",
+            forgery.Row != null && !Decide(forgery.Input, forgery.Row).Closed);
+        var forged = forgery.Decision;
+        File.WriteAllText(tsv, "lane\trow_id\told_text\tnew_text\treason\nfixture\t" + forgery.Input.Id + "\t" + forgery.Input.OldText.Replace("\n", "\\n")
+            + "\t" + forgery.Input.NewText.Replace("\n", "\\n") + "\tSynthetic guard\n");
+        Check("the forgery fixture TSV holds exactly the forged row and wording", LedgerPauloRulings.ReadInputs(tsv) is [var only]
+            && only.Id == forged.Id && only.OldText == forged.OldText && only.NewText == forged.NewText);
+        File.WriteAllText(factFile, "row_id\tverdict\tnote\n" + forgery.Input.Id + "\tkept\t" + forged.FactCheckNote + "\n");
         FeatureLedgerEvidence.WriteJson(packetFile, packet with { Decisions = new() { forged }, TsvSha256 = FeatureLedgerEvidence.Hash(tsv), FactChecksSha256 = FeatureLedgerEvidence.Hash(factFile) });
-        string rejectedCurrent = FeatureLedgerEvidence.CurrentPath(root, rejectedRow.Source);
-        var rejectedReceipt = new FeatureLedgerEvidence.Row(rejectedRow.Id, new() { new(rejectedCurrent, "Synthetic rejected fact", FeatureLedgerEvidence.Hash(Path.Combine(root, rejectedCurrent))) },
-            new() { proof with { Target = "Rule 3", Assertion = FeatureLedgerEvidence.RulingAssertion(File.ReadAllLines(rules)[2], forged) } }, Compared: FeatureLedgerEvidence.RulingComparison(forged));
+        string forgedCurrent = FeatureLedgerEvidence.CurrentPath(root, forgery.Row.Source);
+        string forgedRule = File.ReadAllLines(rules).First(line => line.StartsWith("Rule " + forged.Rule + ",", StringComparison.Ordinal));
+        var rejectedReceipt = new FeatureLedgerEvidence.Row(forgery.Row.Id, new() { new(forgedCurrent, "Synthetic rejected fact", FeatureLedgerEvidence.Hash(Path.Combine(root, forgedCurrent))) },
+            new() { proof with { Target = "Rule " + forged.Rule, Assertion = FeatureLedgerEvidence.RulingAssertion(forgedRule, forged) } }, Compared: FeatureLedgerEvidence.RulingComparison(forged));
         Check("a private forged kept verdict cannot override the canonical lost verdict", !Valid(rejectedReceipt));
 
         // A rule-4 receipt is valid only with its group ruling pinned as an execution artifact.
