@@ -17,7 +17,7 @@ Render targets refer to `ScreenHarness.Screens`, captured with `--screens <outpu
 Release gate: `FamilyQuant.Tests.exe --feature-ledger-release-check` fails until every retained row is VERIFIED with evidence. Authorized DROP rows use APPROVED_DROP, which records a decision, not a completed UI removal. The normal quick suite permits OPEN rows during development. Regeneration resets retained rows to OPEN; preserve reviewed evidence when updating the scanner.
 
 Scan count: **5756**. Ledger rows: **5756**. Source files: **104**.
-Authorized DROP rows: **296**; proposed VERIFIED retained rows: **3678**; OPEN retained rows: **1782**.
+Authorized DROP rows: **296**; proposed VERIFIED retained rows: **3705**; OPEN retained rows: **1755**.
 
 | ID | Disposition | Kind | Frozen source | Fact or control | Planned check | State | Evidence |
 |---|---|---|---|---|---|---|---|
@@ -884,15 +884,15 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **3678**; OPEN r
 | FQ15-30F00E897498 | KEEP | handler | FamilyQuant/ComputeXicWindow.xaml:69 | ComboBoxDeNovoSource.SelectionChanged = ComboBoxDeNovoSource_SelectionChanged | test:SecondaryRuntimeCommand | VERIFIED | evidence:FL-secondary-runtime:FQ15-30F00E897498 |
 | FQ15-7E41F521629C | IMPROVE | tooltip | FamilyQuant/ComputeXicWindow.xaml:70 | ComboBoxDeNovoSource.ToolTip = The de novo source to read, or a union of PEAKS and DeepNovo. In a union, a precursor called by both is measured once under the PEAKS call, and the DeepNovo call is kept beside it. | render:08-compute | OPEN | pending |
 | FQ15-58353DB887F3 | IMPROVE | control | FamilyQuant/ComputeXicWindow.xaml:71 | ComboBoxItem ComboBoxItem | test:SecondaryRuntimeCommand | VERIFIED | evidence:FL-secondary-runtime:FQ15-58353DB887F3 |
-| FQ15-E710DB6ACB71 | IMPROVE | option/copy | FamilyQuant/ComputeXicWindow.xaml:71 | ComboBoxItem.Content = PEAKS de novo only (*.denovoOnly.csv) | render:08-compute | OPEN | pending |
+| FQ15-E710DB6ACB71 | IMPROVE | option/copy | FamilyQuant/ComputeXicWindow.xaml:71 | ComboBoxItem.Content = PEAKS de novo only (*.denovoOnly.csv) | test:SecondaryRuntimeCommand | VERIFIED | evidence:FL-secondary-runtime:FQ15-E710DB6ACB71 |
 | FQ15-49B91291BA08 | IMPROVE | control | FamilyQuant/ComputeXicWindow.xaml:72 | ComboBoxItem ComboBoxItem | test:SecondaryRuntimeCommand | VERIFIED | evidence:FL-secondary-runtime:FQ15-49B91291BA08 |
-| FQ15-883A4216AD4A | IMPROVE | option/copy | FamilyQuant/ComputeXicWindow.xaml:72 | ComboBoxItem.Content = PEAKS de novo all (*.denovo.csv) | render:08-compute | OPEN | pending |
+| FQ15-883A4216AD4A | IMPROVE | option/copy | FamilyQuant/ComputeXicWindow.xaml:72 | ComboBoxItem.Content = PEAKS de novo all (*.denovo.csv) | test:SecondaryRuntimeCommand | VERIFIED | evidence:FL-secondary-runtime:FQ15-883A4216AD4A |
 | FQ15-F1F776B38BAD | IMPROVE | control | FamilyQuant/ComputeXicWindow.xaml:73 | ComboBoxItem ComboBoxItem | test:SecondaryRuntimeCommand | VERIFIED | evidence:FL-secondary-runtime:FQ15-F1F776B38BAD |
-| FQ15-78E657532626 | IMPROVE | option/copy | FamilyQuant/ComputeXicWindow.xaml:73 | ComboBoxItem.Content = DeepNovo (*.deepnovo.csv) | render:08-compute | OPEN | pending |
+| FQ15-78E657532626 | IMPROVE | option/copy | FamilyQuant/ComputeXicWindow.xaml:73 | ComboBoxItem.Content = DeepNovo (*.deepnovo.csv) | test:SecondaryRuntimeCommand | VERIFIED | evidence:FL-secondary-runtime:FQ15-78E657532626 |
 | FQ15-15EC38CA0762 | IMPROVE | control | FamilyQuant/ComputeXicWindow.xaml:74 | ComboBoxItem ComboBoxItem | test:SecondaryRuntimeCommand | VERIFIED | evidence:FL-secondary-runtime:FQ15-15EC38CA0762 |
-| FQ15-F7D6D6F41346 | IMPROVE | option/copy | FamilyQuant/ComputeXicWindow.xaml:74 | ComboBoxItem.Content = Union: PEAKS de novo only + DeepNovo | render:08-compute | OPEN | pending |
+| FQ15-F7D6D6F41346 | IMPROVE | option/copy | FamilyQuant/ComputeXicWindow.xaml:74 | ComboBoxItem.Content = Union: PEAKS de novo only + DeepNovo | test:SecondaryRuntimeCommand | VERIFIED | evidence:FL-secondary-runtime:FQ15-F7D6D6F41346 |
 | FQ15-67E17DC96003 | IMPROVE | control | FamilyQuant/ComputeXicWindow.xaml:75 | ComboBoxItem ComboBoxItem | test:SecondaryRuntimeCommand | VERIFIED | evidence:FL-secondary-runtime:FQ15-67E17DC96003 |
-| FQ15-88CE928F642E | IMPROVE | option/copy | FamilyQuant/ComputeXicWindow.xaml:75 | ComboBoxItem.Content = Union: PEAKS de novo all + DeepNovo | render:08-compute | OPEN | pending |
+| FQ15-88CE928F642E | IMPROVE | option/copy | FamilyQuant/ComputeXicWindow.xaml:75 | ComboBoxItem.Content = Union: PEAKS de novo all + DeepNovo | test:SecondaryRuntimeCommand | VERIFIED | evidence:FL-secondary-runtime:FQ15-88CE928F642E |
 | FQ15-4B912FDD995D | IMPROVE | option/copy | FamilyQuant/ComputeXicWindow.xaml:79 | Label.Content = PEAKS minimum ALC (%) | test:SecondaryRuntimeCommand | VERIFIED | evidence:FL-secondary-interactions:FQ15-4B912FDD995D |
 | FQ15-D906ED9DC61C | IMPROVE | tooltip | FamilyQuant/ComputeXicWindow.xaml:80 | Label.ToolTip = The minimum PEAKS ALC (average local confidence) a call needs to be kept. Used only when a PEAKS source is selected. | render:08-compute | OPEN | pending |
 | FQ15-D0E4AF907B7D | IMPROVE | control | FamilyQuant/ComputeXicWindow.xaml:81 | TextBox TextBoxPeaksMinimumAlc | test:SecondaryRuntimeCommand | VERIFIED | evidence:FL-secondary-runtime:FQ15-D0E4AF907B7D |
@@ -929,7 +929,7 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **3678**; OPEN r
 | FQ15-9D83E10BE70B | IMPROVE | tooltip | FamilyQuant/ComputeXicWindow.xaml:126 | TextBlockSpectrumComparisonPath.ToolTip = Where the latest computation saved the spectrum comparison CSV. It holds the same rows as the table. | render:08-compute | OPEN | pending |
 | FQ15-6BBBE800E500 | IMPROVE | tooltip | FamilyQuant/ComputeXicWindow.xaml:133 | TextBlockStatus.ToolTip = Shows what the computation is doing and what it found: progress, per-run counts and any refusal. | render:08-compute | OPEN | pending |
 | FQ15-D22FD31240E7 | IMPROVE | control | FamilyQuant/ComputeXicWindow.xaml:137 | Button ButtonClose | test:SecondaryRuntimeCommand | VERIFIED | evidence:FL-secondary-interactions:FQ15-D22FD31240E7 |
-| FQ15-91271C1193AE | IMPROVE | option/copy | FamilyQuant/ComputeXicWindow.xaml:137 | ButtonClose.Content = Close | test:SecondaryRuntimeCommand | VERIFIED | evidence:FL-secondary-interactions:FQ15-91271C1193AE |
+| FQ15-91271C1193AE | IMPROVE | option/copy | FamilyQuant/ComputeXicWindow.xaml:137 | ButtonClose.Content = Close | test:ShellLedgerComparisonCommand | VERIFIED | evidence:SH:FQ15-91271C1193AE |
 | FQ15-E6FC69103914 | KEEP | handler | FamilyQuant/ComputeXicWindow.xaml:138 | ButtonClose.Click = ButtonClose_Click | test:SecondaryRuntimeCommand | VERIFIED | evidence:FL-secondary-interactions:FQ15-E6FC69103914 |
 | FQ15-D416700A21F4 | IMPROVE | tooltip | FamilyQuant/ComputeXicWindow.xaml:139 | ButtonClose.ToolTip = Close this window. A finished computation is kept in the project; Save the project to write it to disk. | test:ShellLedgerComparisonCommand | VERIFIED | evidence:SH:FQ15-D416700A21F4 |
 | FQ15-7490E8A34AF5 | KEEP | format/export | FamilyQuant/ComputeXicWindow.xaml.cs:81 | "Nothing computed yet. Choose the folder holding the .raw acquisitions and the SEPro " | render:08-compute | OPEN | pending |
@@ -3032,11 +3032,11 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **3678**; OPEN r
 | FQ15-AC36467B01E0 | KEEP | export/storage fact | FamilyQuant/DeNovo/ThreeWayPartition.cs:393 | "true" | test:LedgerAssayCompareCommand | VERIFIED | evidence:AS-retained:FQ15-AC36467B01E0 |
 | FQ15-E17DE394C3EF | KEEP | export/storage fact | FamilyQuant/DeNovo/ThreeWayPartition.cs:393 | "false" | test:LedgerAssayCompareCommand | VERIFIED | evidence:AS-retained:FQ15-E17DE394C3EF |
 | FQ15-257E9627C92D | KEEP | export/storage fact | FamilyQuant/DeNovo/ThreeWayPartition.cs:397 | "," | test:LedgerAssayCompareCommand | VERIFIED | evidence:AS-retained:FQ15-257E9627C92D |
-| FQ15-DF75D56E6E5E | KEEP | export/storage fact | FamilyQuant/DeNovo/ThreeWayPartition.cs:400 | "R" | test:ThreeWayPartitionTests | OPEN | pending |
-| FQ15-B3686CCA5BFE | KEEP | export/storage fact | FamilyQuant/DeNovo/ThreeWayPartition.cs:407 | "\"" | test:ThreeWayPartitionTests | OPEN | pending |
-| FQ15-399C3233EFA4 | KEEP | export/storage fact | FamilyQuant/DeNovo/ThreeWayPartition.cs:407 | "\"" | test:ThreeWayPartitionTests | OPEN | pending |
-| FQ15-3F845CD11BCD | KEEP | export/storage fact | FamilyQuant/DeNovo/ThreeWayPartition.cs:407 | "\"\"" | test:ThreeWayPartitionTests | OPEN | pending |
-| FQ15-7418B217FD10 | KEEP | export/storage fact | FamilyQuant/DeNovo/ThreeWayPartition.cs:407 | "\"" | test:ThreeWayPartitionTests | OPEN | pending |
+| FQ15-DF75D56E6E5E | KEEP | export/storage fact | FamilyQuant/DeNovo/ThreeWayPartition.cs:400 | "R" | test:RunAssayRuntimeLedger | VERIFIED | evidence:AS-partition-format:FQ15-DF75D56E6E5E |
+| FQ15-B3686CCA5BFE | KEEP | export/storage fact | FamilyQuant/DeNovo/ThreeWayPartition.cs:407 | "\"" | test:RunAssayRuntimeLedger | VERIFIED | evidence:AS-partition-format:FQ15-B3686CCA5BFE |
+| FQ15-399C3233EFA4 | KEEP | export/storage fact | FamilyQuant/DeNovo/ThreeWayPartition.cs:407 | "\"" | test:RunAssayRuntimeLedger | VERIFIED | evidence:AS-partition-format:FQ15-399C3233EFA4 |
+| FQ15-3F845CD11BCD | KEEP | export/storage fact | FamilyQuant/DeNovo/ThreeWayPartition.cs:407 | "\"\"" | test:RunAssayRuntimeLedger | VERIFIED | evidence:AS-partition-format:FQ15-3F845CD11BCD |
+| FQ15-7418B217FD10 | KEEP | export/storage fact | FamilyQuant/DeNovo/ThreeWayPartition.cs:407 | "\"" | test:RunAssayRuntimeLedger | VERIFIED | evidence:AS-partition-format:FQ15-7418B217FD10 |
 | FQ15-9BB705F02458 | KEEP | export/storage fact | FamilyQuant/DeNovo/ThreeWayPartition.cs:421 | "The " | test:LedgerAssayCompareCommand | VERIFIED | evidence:AS-retained:FQ15-9BB705F02458 |
 | FQ15-5262F0CD6FE4 | KEEP | export/storage fact | FamilyQuant/DeNovo/ThreeWayPartition.cs:421 | " carry an entry with no run name." | test:LedgerAssayCompareCommand | VERIFIED | evidence:AS-retained:FQ15-5262F0CD6FE4 |
 | FQ15-78FB3073005F | KEEP | export/storage fact | FamilyQuant/DeNovo/ThreeWayPartition.cs:424 | "Two entries of the " | test:LedgerAssayCompareCommand | VERIFIED | evidence:AS-retained:FQ15-78FB3073005F |
@@ -5529,22 +5529,22 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **3678**; OPEN r
 | FQ15-7F1522E909F4 | IMPROVE | option/copy | FamilyQuant/USearch.xaml:28 | GroupBox.Header = \uD83D\uDD0D Family Cluster File Generation | render:02-build | OPEN | pending |
 | FQ15-35FBEDEA7583 | IMPROVE | option/copy | FamilyQuant/USearch.xaml:32 | Label.Content = Identity: | render:02-build | OPEN | pending |
 | FQ15-1F77DB04853A | IMPROVE | tooltip | FamilyQuant/USearch.xaml:33 | Label.ToolTip = How similar two sequences must be before USEARCH puts them in the same family. | render:02-build | OPEN | pending |
-| FQ15-00014F7B5211 | IMPROVE | control | FamilyQuant/USearch.xaml:34 | IntegerUpDown IntegerUpDownIdentity | render:02-build | OPEN | pending |
-| FQ15-A9056D654142 | IMPROVE | option/copy | FamilyQuant/USearch.xaml:34 | IntegerUpDownIdentity.Value = 85 | render:02-build | OPEN | pending |
+| FQ15-00014F7B5211 | IMPROVE | control | FamilyQuant/USearch.xaml:34 | IntegerUpDown IntegerUpDownIdentity | test:RunAssayRuntimeLedger | VERIFIED | evidence:AS-build-properties:FQ15-00014F7B5211 |
+| FQ15-A9056D654142 | IMPROVE | option/copy | FamilyQuant/USearch.xaml:34 | IntegerUpDownIdentity.Value = 85 | test:RunAssayRuntimeLedger | VERIFIED | evidence:AS-build-properties:FQ15-A9056D654142 |
 | FQ15-C94EDE66704E | IMPROVE | option/copy | FamilyQuant/USearch.xaml:34 | IntegerUpDownIdentity.Minimum = 1 | test:ShellLedgerComparisonCommand | VERIFIED | evidence:SH:FQ15-C94EDE66704E |
 | FQ15-658752C24A20 | IMPROVE | option/copy | FamilyQuant/USearch.xaml:34 | IntegerUpDownIdentity.Maximum = 100 | test:ShellLedgerComparisonCommand | VERIFIED | evidence:SH:FQ15-658752C24A20 |
 | FQ15-C55639A5A0BE | IMPROVE | tooltip | FamilyQuant/USearch.xaml:37 | IntegerUpDownIdentity.ToolTip = Percent identity two sequences need to join the same family (default 85). Higher gives more, smaller families; lower gives fewer, larger ones. Use "Scan identity range" to compare values. | render:02-build | OPEN | pending |
 | FQ15-2E0859E53C03 | IMPROVE | option/copy | FamilyQuant/USearch.xaml:38 | Label.Content = % | render:02-build | OPEN | pending |
 | FQ15-235DB133A2D5 | IMPROVE | tooltip | FamilyQuant/USearch.xaml:39 | Label.ToolTip = The identity is a percentage, from 1 to 100. | render:02-build | OPEN | pending |
-| FQ15-2751E8205ED5 | IMPROVE | control | FamilyQuant/USearch.xaml:42 | CheckBox CheckBoxExhaustiveClustering | render:02-build | OPEN | pending |
+| FQ15-2751E8205ED5 | IMPROVE | control | FamilyQuant/USearch.xaml:42 | CheckBox CheckBoxExhaustiveClustering | test:RunAssayRuntimeLedger | VERIFIED | evidence:AS-build-properties:FQ15-2751E8205ED5 |
 | FQ15-CA5C120170D4 | IMPROVE | option/copy | FamilyQuant/USearch.xaml:43 | CheckBoxExhaustiveClustering.Content = Exhaustive clustering (close the gaps the fast pass leaves) | render:02-build | OPEN | pending |
-| FQ15-9010A5C31951 | IMPROVE | option/copy | FamilyQuant/USearch.xaml:44 | CheckBoxExhaustiveClustering.IsChecked = True | render:02-build | OPEN | pending |
+| FQ15-9010A5C31951 | IMPROVE | option/copy | FamilyQuant/USearch.xaml:44 | CheckBoxExhaustiveClustering.IsChecked = True | test:RunAssayRuntimeLedger | VERIFIED | evidence:AS-build-properties:FQ15-9010A5C31951 |
 | FQ15-DF72D3E013B6 | IMPROVE | tooltip | FamilyQuant/USearch.xaml:45 | CheckBoxExhaustiveClustering.ToolTip = Aligns every pair of sequences after the fast pass and rejoins families the fast pass split. Leave it on; turn it off only for speed. Databases over 10,000 sequences take longer, and you are asked first. | render:02-build | OPEN | pending |
-| FQ15-961F39A7C9EB | IMPROVE | control | FamilyQuant/USearch.xaml:47 | Button ButtonInput | render:02-build | OPEN | pending |
+| FQ15-961F39A7C9EB | IMPROVE | control | FamilyQuant/USearch.xaml:47 | Button ButtonInput | test:RunAssayRuntimeLedger | VERIFIED | evidence:AS-build-properties:FQ15-961F39A7C9EB |
 | FQ15-26F90004D374 | IMPROVE | option/copy | FamilyQuant/USearch.xaml:47 | ButtonInput.Content = Input a FASTA file | render:02-build | OPEN | pending |
 | FQ15-5070AE0ACBCE | KEEP | handler | FamilyQuant/USearch.xaml:47 | ButtonInput.Click = ButtonInput_Click | render:02-build | OPEN | pending |
 | FQ15-5A6CA2000AEA | IMPROVE | tooltip | FamilyQuant/USearch.xaml:49 | ButtonInput.ToolTip = Step 1: clusters the database you pick at the identity above and saves a Family Cluster File (.fcf) beside it. You are asked before an existing .fcf is replaced. | render:02-build | OPEN | pending |
-| FQ15-6065665A6950 | IMPROVE | control | FamilyQuant/USearch.xaml:50 | Button ButtonCalculateFDR | render:02-build | OPEN | pending |
+| FQ15-6065665A6950 | IMPROVE | control | FamilyQuant/USearch.xaml:50 | Button ButtonCalculateFDR | test:RunAssayRuntimeLedger | VERIFIED | evidence:AS-build-properties:FQ15-6065665A6950 |
 | FQ15-3C6A779987F9 | IMPROVE | option/copy | FamilyQuant/USearch.xaml:50 | ButtonCalculateFDR.Content = Calculate FDR | render:02-build | OPEN | pending |
 | FQ15-E3960ECBE389 | KEEP | handler | FamilyQuant/USearch.xaml:50 | ButtonCalculateFDR.Click = ButtonCalculateFDR_Click | render:02-build | OPEN | pending |
 | FQ15-39E956DE650F | IMPROVE | option/copy | FamilyQuant/USearch.xaml:51 | ButtonCalculateFDR.IsEnabled = False | test:ShellLedgerComparisonCommand | VERIFIED | evidence:SH:FQ15-39E956DE650F |
@@ -5552,17 +5552,17 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **3678**; OPEN r
 | FQ15-9B7D3F11FB58 | IMPROVE | option/copy | FamilyQuant/USearch.xaml:57 | GroupBox.Header = \uD83C\uDFAF Divide and Conquer (auto-tune identity) | render:02-build | OPEN | pending |
 | FQ15-7C72457C77F9 | IMPROVE | option/copy | FamilyQuant/USearch.xaml:61 | Label.Content = Max acceptable mixing score: | render:02-build | OPEN | pending |
 | FQ15-0D784C392D23 | IMPROVE | tooltip | FamilyQuant/USearch.xaml:62 | Label.ToolTip = How much target/decoy mixing the automatic search is allowed to accept. Keep it at 0. | render:02-build | OPEN | pending |
-| FQ15-9EA401129802 | IMPROVE | option/copy | FamilyQuant/USearch.xaml:63 | DecimalUpDownMaxFDR.Value = 0 | render:02-build | OPEN | pending |
+| FQ15-9EA401129802 | IMPROVE | option/copy | FamilyQuant/USearch.xaml:63 | DecimalUpDownMaxFDR.Value = 0 | test:RunAssayRuntimeLedger | VERIFIED | evidence:AS-build-properties:FQ15-9EA401129802 |
 | FQ15-41F9C5320389 | IMPROVE | option/copy | FamilyQuant/USearch.xaml:63 | DecimalUpDownMaxFDR.Minimum = 0 | test:ShellLedgerComparisonCommand | VERIFIED | evidence:SH:FQ15-41F9C5320389 |
 | FQ15-20CFCAD9785B | IMPROVE | option/copy | FamilyQuant/USearch.xaml:63 | DecimalUpDownMaxFDR.Maximum = 0.5 | test:ShellLedgerComparisonCommand | VERIFIED | evidence:SH:FQ15-20CFCAD9785B |
 | FQ15-E54683D1109F | IMPROVE | tooltip | FamilyQuant/USearch.xaml:66 | DecimalUpDownMaxFDR.ToolTip = Largest fraction of families allowed to mix target and decoy sequences. Default 0; leave it there, because any higher value lets alignments that are only noise merge families. | render:02-build | OPEN | pending |
 | FQ15-71AA63BB9816 | IMPROVE | tooltip | FamilyQuant/USearch.xaml:70 | TextBlock.ToolTip = Why the automatic answer is a lower bound, not a recommendation. Help \u00B7 How to read these numbers explains more. | render:02-build | OPEN | pending |
 | FQ15-C8FFCC2A4667 | IMPROVE | option/copy | FamilyQuant/USearch.xaml:71 | TextBlock.Text = The target/decoy score only detects a target aligning to a decoy, which marks where alignment becomes noise. It cannot see two unrelated target families being fused, so use it as a floor - not as a budget. | render:02-build | OPEN | pending |
-| FQ15-BB5437376059 | IMPROVE | control | FamilyQuant/USearch.xaml:73 | Button ButtonDivideAndConquer | render:02-build | OPEN | pending |
+| FQ15-BB5437376059 | IMPROVE | control | FamilyQuant/USearch.xaml:73 | Button ButtonDivideAndConquer | test:RunAssayRuntimeLedger | VERIFIED | evidence:AS-build-properties:FQ15-BB5437376059 |
 | FQ15-04FFDD6B6BF9 | IMPROVE | option/copy | FamilyQuant/USearch.xaml:73 | ButtonDivideAndConquer.Content = Run Divide & Conquer | render:02-build | OPEN | pending |
 | FQ15-6DBF9740F722 | KEEP | handler | FamilyQuant/USearch.xaml:73 | ButtonDivideAndConquer.Click = ButtonDivideAndConquer_Click | render:02-build | OPEN | pending |
 | FQ15-5C14D092A72E | IMPROVE | tooltip | FamilyQuant/USearch.xaml:75 | ButtonDivideAndConquer.ToolTip = Finds the lowest identity that keeps the mixing score within the limit above. It only reports a number: type it into Identity and press "Input a FASTA file". Treat it as a floor. | render:02-build | OPEN | pending |
-| FQ15-25C42617BBA4 | IMPROVE | control | FamilyQuant/USearch.xaml:77 | Button ButtonScanIdentities | render:02-build | OPEN | pending |
+| FQ15-25C42617BBA4 | IMPROVE | control | FamilyQuant/USearch.xaml:77 | Button ButtonScanIdentities | test:RunAssayRuntimeLedger | VERIFIED | evidence:AS-build-properties:FQ15-25C42617BBA4 |
 | FQ15-9B01394529F6 | IMPROVE | option/copy | FamilyQuant/USearch.xaml:77 | ButtonScanIdentities.Content = Scan identity range | test:ShellLedgerComparisonCommand | VERIFIED | evidence:SH:FQ15-9B01394529F6 |
 | FQ15-032C14B46507 | KEEP | handler | FamilyQuant/USearch.xaml:77 | ButtonScanIdentities.Click = ButtonScanIdentities_Click | render:02-build | OPEN | pending |
 | FQ15-67C18A2317D7 | IMPROVE | tooltip | FamilyQuant/USearch.xaml:80 | ButtonScanIdentities.ToolTip = Clusters at every identity from 95% down to 10% and tabulates the family count and target/decoy mixing. Use it before choosing a threshold. Nothing is saved; large databases take a while. | render:02-build | OPEN | pending |
@@ -5571,14 +5571,14 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **3678**; OPEN r
 | FQ15-7F693FC0BCB9 | IMPROVE | tooltip | FamilyQuant/USearch.xaml:89 | TextBlock.ToolTip = Like PatternLab's 'Eliminate subset sequences', but this one keeps the original sequence order, which matters because USEARCH is order-sensitive. | render:02-build | OPEN | pending |
 | FQ15-A7D75E41769F | IMPROVE | option/copy | FamilyQuant/USearch.xaml:91 | Label.Content = Identity: | render:02-build | OPEN | pending |
 | FQ15-4D640F0B5E15 | IMPROVE | tooltip | FamilyQuant/USearch.xaml:92 | Label.ToolTip = 100 removes only exact subset sequences (a sequence wholly contained in another). Below 100 removes near-identical sequences by alignment. | render:02-build | OPEN | pending |
-| FQ15-C1BFB140777A | IMPROVE | control | FamilyQuant/USearch.xaml:93 | IntegerUpDown IntegerUpDownRedundancyIdentity | render:02-build | OPEN | pending |
-| FQ15-23F4B3B559C2 | IMPROVE | option/copy | FamilyQuant/USearch.xaml:93 | IntegerUpDownRedundancyIdentity.Value = 100 | render:02-build | OPEN | pending |
+| FQ15-C1BFB140777A | IMPROVE | control | FamilyQuant/USearch.xaml:93 | IntegerUpDown IntegerUpDownRedundancyIdentity | test:RunAssayRuntimeLedger | VERIFIED | evidence:AS-build-properties:FQ15-C1BFB140777A |
+| FQ15-23F4B3B559C2 | IMPROVE | option/copy | FamilyQuant/USearch.xaml:93 | IntegerUpDownRedundancyIdentity.Value = 100 | test:RunAssayRuntimeLedger | VERIFIED | evidence:AS-build-properties:FQ15-23F4B3B559C2 |
 | FQ15-A2928884051F | IMPROVE | option/copy | FamilyQuant/USearch.xaml:93 | IntegerUpDownRedundancyIdentity.Minimum = 50 | test:ShellLedgerComparisonCommand | VERIFIED | evidence:SH:FQ15-A2928884051F |
 | FQ15-4F46770C5322 | IMPROVE | option/copy | FamilyQuant/USearch.xaml:93 | IntegerUpDownRedundancyIdentity.Maximum = 100 | test:ShellLedgerComparisonCommand | VERIFIED | evidence:SH:FQ15-4F46770C5322 |
 | FQ15-19C5DB33694C | IMPROVE | tooltip | FamilyQuant/USearch.xaml:96 | IntegerUpDownRedundancyIdentity.ToolTip = Identity above which two sequences count as redundant (default 100). At 100 only fragments and exact duplicates go; below 100, near-identical sequences go too, which is slower. | render:02-build | OPEN | pending |
 | FQ15-3A16887AED27 | IMPROVE | option/copy | FamilyQuant/USearch.xaml:97 | Label.Content = % | render:02-build | OPEN | pending |
 | FQ15-BE7BFC4196C9 | IMPROVE | tooltip | FamilyQuant/USearch.xaml:98 | Label.ToolTip = The identity is a percentage of aligned residues. | render:02-build | OPEN | pending |
-| FQ15-21F35F2A9566 | IMPROVE | control | FamilyQuant/USearch.xaml:99 | Button ButtonRemoveRedundancy | render:02-build | OPEN | pending |
+| FQ15-21F35F2A9566 | IMPROVE | control | FamilyQuant/USearch.xaml:99 | Button ButtonRemoveRedundancy | test:RunAssayRuntimeLedger | VERIFIED | evidence:AS-build-properties:FQ15-21F35F2A9566 |
 | FQ15-5DF089148055 | IMPROVE | option/copy | FamilyQuant/USearch.xaml:99 | ButtonRemoveRedundancy.Content = Remove redundancy from FASTA... | render:02-build | OPEN | pending |
 | FQ15-6093D76BEEB0 | KEEP | handler | FamilyQuant/USearch.xaml:100 | ButtonRemoveRedundancy.Click = ButtonRemoveRedundancy_Click | render:02-build | OPEN | pending |
 | FQ15-F512518204F4 | IMPROVE | tooltip | FamilyQuant/USearch.xaml:101 | ButtonRemoveRedundancy.ToolTip = Saves a copy of a FASTA without subset or near-identical sequences, as &lt;name&gt;_NO_REDUNDANCY.fasta beside it. Order and headers are kept; the original file is never changed. | render:02-build | OPEN | pending |
@@ -5756,11 +5756,11 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **3678**; OPEN r
 | FQ15-2E08B8B417C6 | KEEP | handler definition | FamilyQuant/USearch.xaml.cs:244 | private async void ButtonDivideAndConquer_Click(object sender, RoutedEventArgs e) | render:02-build | OPEN | pending |
 | FQ15-742D7AA226AF | KEEP | handler definition | FamilyQuant/USearch.xaml.cs:310 | private async void ButtonScanIdentities_Click(object sender, RoutedEventArgs e) | render:02-build | OPEN | pending |
 | FQ15-0FFD53E0F489 | KEEP | handler definition | FamilyQuant/USearch.xaml.cs:354 | private async void ButtonRemoveRedundancy_Click(object sender, RoutedEventArgs e) | render:02-build | OPEN | pending |
-| FQ15-ABA539F0E87C | KEEP | format/export | FamilyQuant/USearchTools.cs:78 | ".fasta" | test:DatabaseTests | OPEN | pending |
-| FQ15-0858D5BCC3DD | KEEP | format/export | FamilyQuant/USearchTools.cs:79 | ".aln" | test:DatabaseTests | OPEN | pending |
-| FQ15-343852E54626 | KEEP | format/export | FamilyQuant/USearchTools.cs:204 | ".uc" | test:DatabaseTests | OPEN | pending |
-| FQ15-61B679CA9B47 | KEEP | format/export | FamilyQuant/USearchTools.cs:218 | "USEARCH produced no cluster (.uc) file for " | test:DatabaseTests | OPEN | pending |
-| FQ15-27FA37092FAE | KEEP | format/export | FamilyQuant/USearchTools.cs:433 | ".tsv" | test:DatabaseTests | OPEN | pending |
+| FQ15-ABA539F0E87C | KEEP | format/export | FamilyQuant/USearchTools.cs:78 | ".fasta" | test:RunAssayRuntimeLedger | VERIFIED | evidence:AS-native-paths:FQ15-ABA539F0E87C |
+| FQ15-0858D5BCC3DD | KEEP | format/export | FamilyQuant/USearchTools.cs:79 | ".aln" | test:RunAssayRuntimeLedger | VERIFIED | evidence:AS-native-paths:FQ15-0858D5BCC3DD |
+| FQ15-343852E54626 | KEEP | format/export | FamilyQuant/USearchTools.cs:204 | ".uc" | test:RunAssayRuntimeLedger | VERIFIED | evidence:AS-native-paths:FQ15-343852E54626 |
+| FQ15-61B679CA9B47 | KEEP | format/export | FamilyQuant/USearchTools.cs:218 | "USEARCH produced no cluster (.uc) file for " | test:RunAssayRuntimeLedger | VERIFIED | evidence:AS-native-paths:FQ15-61B679CA9B47 |
+| FQ15-27FA37092FAE | KEEP | format/export | FamilyQuant/USearchTools.cs:433 | ".tsv" | test:RunAssayRuntimeLedger | VERIFIED | evidence:AS-native-paths:FQ15-27FA37092FAE |
 | FQ15-4DECEB0D8774 | IMPROVE | code fact | FamilyQuant/XicMassChart.cs:34 | "One dot per peptide: its extracted isotope envelope (log10 area, up the side) " | test:ResultsMemberComparisonCommand | VERIFIED | evidence:RS-members:FQ15-4DECEB0D8774 |
 | FQ15-60554875A19A | IMPROVE | code fact | FamilyQuant/XicMassChart.cs:35 | "against its mass (along the bottom). Blue dots are identified peptides; green dots " | test:ResultsMemberComparisonCommand | VERIFIED | evidence:RS-members:FQ15-60554875A19A |
 | FQ15-45C4F2A2837C | IMPROVE | code fact | FamilyQuant/XicMassChart.cs:36 | "are the de novo additions." | test:ResultsMemberComparisonCommand | VERIFIED | evidence:RS-members:FQ15-45C4F2A2837C |
