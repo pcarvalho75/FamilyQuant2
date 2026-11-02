@@ -279,7 +279,7 @@ namespace FamilyQuant.Tests
             basisBox.SelectedIndex = 1;
             Check("the TIC basis sums every recorded run (a run with no quant rows included), names normalized",
                 p1.FullXicShare is double tAll && Math.Abs(tAll - 200.0 / 1500) < 1e-9, p1.FullXicShare?.ToString());
-            basisBox.SelectedIndex = 0;
+            basisBox.SelectedIndex = 1;
             control.SetFullXicQuant(rows, new Dictionary<string, double> { ["r9"] = 1000 });
             var ticItem = UiField<ComboBoxItem>(control, "FullXicBasisTic")!;
             Check("a quantified run with no recorded TIC switches the TIC basis off and says why",

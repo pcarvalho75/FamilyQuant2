@@ -40,6 +40,9 @@ FQOpus findings 4 and 5 stay with X9: the talk chart base, axis-rounding ladders
 
 ## Ledger status and source migration
 
+The counts below record the H1 audit. N5 later adds per-observation receipts and native
+proofs; use `docs/FEATURE-EVIDENCE.md` and the evidence audit for current states.
+
 The published generator reproduced both Windows-checkout ledger files byte for byte in scratch. The Markdown also matches its Git blob; scan JSON has CRLF in the generated/working copy and LF in the Git blob, with identical normalized content. Inventory: 104 frozen source files and 5,756 observations. Dispositions are 2,009 KEEP, 3,451 IMPROVE and 296 Paulo-approved DROP. All 5,460 retained rows are OPEN; no row was promoted to VERIFIED by a search or a green build. The release guard intentionally remains unsatisfied until owner evidence and review close them.
 
 For retained observations, 3,446 still have their original source path and 2,014 belong to sources moved to Core. The source-file inventory maps 37 old paths directly and 66 to Core; removed `GroupingType.cs` has no observation rows and belongs to the completed F5 selector removal. Source-location categories are not behavior verdicts.

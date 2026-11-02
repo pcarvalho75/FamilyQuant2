@@ -50,6 +50,18 @@ internal static partial class Program
             MutateCell(7, "OPEN"), true).Count > 0);
         Check("feature ledger rejects a changed inventory even if row counts are changed with it",
             FeatureLedger.Validate(inventory with { Scanner = "unapproved" }, markdown).Count > 0);
+        FeatureLedgerEvidenceTests();
+        string liveOutput = Path.Combine(Path.GetTempPath(), "FamilyQuant.Ledger.Live", Guid.NewGuid().ToString("N"));
+        Directory.CreateDirectory(liveOutput);
+        var live = LedgerPreservationTests(root, liveOutput, inventory);
+        string nativeRegister = Path.Combine(root, "docs/feature-ledger-evidence/N5.json");
+        if (File.Exists(nativeRegister))
+        {
+            var register = JsonSerializer.Deserialize<FeatureLedgerEvidence.Register>(File.ReadAllText(nativeRegister), FeatureLedgerEvidence.JsonOptions)!;
+            var registered = register.Rows.Where(row => row.Proofs.Any(proof => proof.Target == nameof(LedgerPreservationTests)))
+                .Select(row => row.ObservationId).ToHashSet(StringComparer.Ordinal);
+            Check("live preservation cases cover every registered native observation", registered.SetEquals(live.Select(proof => proof.ObservationId)));
+        }
         string? reference = Environment.GetEnvironmentVariable("FAMILYQUANT_LEDGER_REFERENCE_SOURCE");
         if (!string.IsNullOrWhiteSpace(reference))
         {
