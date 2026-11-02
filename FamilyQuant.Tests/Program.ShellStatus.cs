@@ -46,6 +46,22 @@ internal static partial class Program
             }
             finally { end.Invoke(build, null); }
             string workflow = (string)typeof(MainWindow).GetMethod("WorkflowText", any)!.Invoke(main, null)!;
+            int quantitationStart = workflow.IndexOf("STEP 3", StringComparison.Ordinal);
+            int quantitationEnd = workflow.IndexOf("STEP 4", StringComparison.Ordinal);
+            string quantitation = quantitationStart >= 0 && quantitationEnd > quantitationStart
+                ? Flatten(workflow[quantitationStart..quantitationEnd]) : "";
+            Check("workflow quantitation directions name the current screens and optional PatternLab source",
+                quantitation.Contains("Quantify", StringComparison.Ordinal)
+                && quantitation.Contains("Families > Quantitation", StringComparison.Ordinal)
+                && quantitation.Contains("PatternLab (optional)", StringComparison.Ordinal)
+                && quantitation.Contains("Load PatternLab project", StringComparison.Ordinal));
+            Check("workflow quantitation directions retire the Layer 2 and Layer 3 steps",
+                !quantitation.Contains("Layer 2", StringComparison.Ordinal) && !quantitation.Contains("Layer 3", StringComparison.Ordinal));
+            Check("workflow keeps the peptide-level input, denominator, shared-peptide and unsupported-mode facts",
+                quantitation.Contains("PEPTIDE level", StringComparison.Ordinal) && quantitation.Contains("protein-level", StringComparison.Ordinal)
+                && quantitation.Contains("every row will read 0", StringComparison.Ordinal) && quantitation.Contains("share of", StringComparison.Ordinal)
+                && quantitation.Contains("peptides that belong to several families", StringComparison.Ordinal)
+                && quantitation.Contains("cannot support", StringComparison.Ordinal) && quantitation.Contains("tooltip", StringComparison.Ordinal));
             Check("the former Build banner facts remain reachable in Help", workflow.Contains("Family Cluster File")
                 && workflow.Contains("Build families") && workflow.Contains(build.ShellHelpText));
             typeof(MainWindow).GetMethod("MenuItemDeNovo_Click", any)!.Invoke(main, new object[] { main, new RoutedEventArgs() });
