@@ -19,5 +19,11 @@ internal static partial class Program
             args => args.Length > 0 && args[0] == "--secondary-wording-append", (args, _) => SecondaryAppendWording(args)),
         new("--secondary-box-audit", 10450, TestCommandPhase.Raw,
             args => args.Length > 0 && args[0] == "--secondary-box-audit", (args, _) => SecondaryBoxAudit(args)),
+        new("--ledger-file-contracts", 10460, TestCommandPhase.Raw,
+            args => args.Length > 0 && args[0] == "--ledger-file-contracts", (args, _) => FileContractCommand(args)),
+        new("--test-wording-tsv", 10465, TestCommandPhase.Raw,
+            args => args.Length > 0 && args[0] == "--test-wording-tsv", (args, _) => WordingTsvRoundTripCommand(args)),
+        new("--ledger-curation-file-contracts", 10470, TestCommandPhase.Raw,
+            args => args.Length > 0 && args[0] == "--ledger-curation-file-contracts", (args, _) => CurationFileCommand(args)),
     ];
 }

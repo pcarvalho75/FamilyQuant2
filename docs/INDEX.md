@@ -210,6 +210,8 @@ Companion options for `--screens` are `--screen-fcf <input.fcf>`, `--screen-proj
 | `--feature-ledger-generate <frozen-source-root> <scratch-root>` | [FeatureLedger.cs](../FamilyQuant.Tests/FeatureLedger.cs); writes `scratch-root/docs`, never scan moving product source |
 | `--feature-ledger-prove <fresh-output> <date-timestamp>` | Native observation-specific storage/source proofs and register, no ledger edit |
 | `--feature-ledger-evidence-import <register> <output> [--replace-existing]` | Validate receipts, preserve an explicitly replaced register and apply evidenced states |
+| `--feature-ledger-evidence-import-batch <output> <register1> [<register2> ...] [--replace-existing]` | Import in order with the same guards, atomic refusal and one final report |
+| `--test-ledger-import-batch` | Check ordered replacement and atomic batch refusal with synthetic validator inputs |
 | `--ledger-apply-rulings <fresh-output> <date>` | Apply the three pinned Paulo wording rules to listed TSV rows; compiled App/Core/Help text witnesses, visual Style/Setter anchors, adversarial guards and remaining review list; [scope](LEDGER-RULINGS.md) |
 | `--feature-ledger-evidence <output>` | Read-only counts by kind, source mappings and reproducible 50-row sample |
 | `--feature-ledger-kind-review <kind> REOPENED/ACCEPTED <reviewer> <reason> <date> <output>` | Independent D13 kind-review decision and whole-kind reopening |
@@ -228,6 +230,9 @@ Companion options for `--screens` are `--screen-fcf <input.fcf>`, `--screen-proj
 | `--ledger-secondary-compare <frozen-root> <native-master-audit> <fresh-output> <date> [--negative-control]` | Shared exact secondary declarations from native OPEN master IDs; [guide](SECONDARY-LEDGER.md) |
 | `--ledger-secondary-runtime <frozen-root> <native-master-audit> <frozen-app> <fresh-output> <date> [--negative-control]` | Native frozen/current secondary values and interactions; [guide](SECONDARY-LEDGER.md) |
 | `--ledger-secondary-interactions <frozen-root> <native-master-audit> <frozen-app> <fresh-output> <date> [--negative-control]` | Native Quantify/close, identity chooser and injected GridCopy IO/modifier contracts; [guide](SECONDARY-LEDGER.md) |
+| `--ledger-file-contracts <native-audit> <frozen-app> <fresh-output> <date> [--negative-control]` | Actual frozen/current FCF and CSV writes, partition/homology export routes, and explicit unproved format rows; [guide](FILE-CONTRACT-LEDGER.md) |
+| `--test-wording-tsv <fresh-output>` | Leading quotes, embedded quotes and escaped multiline fields roundtrip through both shared-list readers |
+| `--ledger-curation-file-contracts <native-audit> <frozen-app> <fresh-output> <date> [--negative-control]` | Native curation CSV choosers/files and real no-decoy engine refusal; [guide](CURATION-FILE-CONTRACTS.md) |
 | `--test-quantify-close` | Native styled Close button, modal result, retained result and no-focus checks in both themes; included in shell/quick checks |
 | `--secondary-wording-append <native-proof-output> <wording.tsv>` | Append native changed-wording candidates for Paulo; no semantic proof or ledger-state change |
 | `--secondary-box-audit <native-ledger-audit> <wording.tsv> N6k/N6l <output>` | Verify each retained box row has native proof or a lane wording entry; never changes ledger state |
@@ -243,6 +248,7 @@ Companion options for `--screens` are `--screen-fcf <input.fcf>`, `--screen-proj
 | `--native-dialog-probe <fresh-output>` | Owned-process native Open/Folder/Save selection driver check |
 | `--ledger-shell-compare <frozen-root> <fresh-output> <date>` | SH and C1 exact declarations/member tokens; separate candidate registers, unproven rows kept OPEN |
 | `--ledger-core-relocation <frozen-root> <fresh-output> X5/X7 <date> [member-mappings.json]` | Scoped complete Core member comparisons, exact frozen hashes, retained source/checker snapshots and per-row gaps; [guide](CORE-RELOCATION-LEDGER.md) |
+| `--ledger-text-preserved <frozen-root> <fresh-output> <date>` | N6a: closes OPEN rows whose frozen literal is compiled into 2.0 (IL and BAML), in the same feature (PDB file, relocation, reviewed mappings, class), reachable from the entry point; never export/storage or format kinds; dead-code control; one kind receipt per kind; [guide](TEXT-PRESERVED-LEDGER.md) |
 | `--ledger-xic-runtime <frozen-root> <fresh-output> <date> <stored-project> <validated-cache> [--negative-control]` | Native XIC refusal/source/completion facts plus bounded validated cache replay; [runtime guide](CORE-RUNTIME-LEDGER.md) |
 | `--shell-metadata-snapshot <frozen-root> <inventory> <fresh-output.json>` | Same native metadata helper in current and frozen hosts; assigned views remain unshown |
 | `--ledger-shell-native <frozen-root> <frozen-host.exe> <fresh-output> <date> [C1-cohort-register]` | Execute compiled SH/C1 metadata and isolated Home clicks; own candidate registers and complete comparison gaps |

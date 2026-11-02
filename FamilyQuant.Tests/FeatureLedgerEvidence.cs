@@ -59,7 +59,7 @@ internal static partial class FeatureLedgerEvidence
         JsonSerializer.Serialize(value, JsonOptions) + "\n", new UTF8Encoding(false));
 
     internal static Registry Load(string root, FeatureLedger.Inventory inventory, IEnumerable<Register>? supplied = null,
-        IEnumerable<KindReview>? suppliedReviews = null)
+        IEnumerable<KindReview>? suppliedReviews = null, ValidationReadCache? reads = null)
     {
         var registry = new Registry();
         foreach (var observation in inventory.Observations) registry.KindsById[observation.Id] = observation.Kind;
@@ -80,8 +80,8 @@ internal static partial class FeatureLedgerEvidence
             }
         }
         catch (Exception ex) when (ex is IOException or JsonException) { registry.FatalProblems.Add("Kind review history: " + ex.Message); }
-        var hashes = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
-        var logs = new Dictionary<string, string[]>(StringComparer.OrdinalIgnoreCase);
+        var hashes = reads?.Hashes ?? new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+        var logs = reads?.Logs ?? new Dictionary<string, string[]>(StringComparer.OrdinalIgnoreCase);
         var rulingContexts = new Dictionary<string, RulingContext>(StringComparer.OrdinalIgnoreCase);
         string CachedHash(string path)
         {
@@ -90,7 +90,7 @@ internal static partial class FeatureLedgerEvidence
         }
         bool Matches(string path, string expected) => Regex.IsMatch(expected ?? "", "^[0-9A-Fa-f]{64}$")
             && File.Exists(path) && string.Equals(CachedHash(path), expected, StringComparison.OrdinalIgnoreCase);
-        var sourceEolHashes = new Dictionary<string, HashSet<string>>(StringComparer.OrdinalIgnoreCase);
+        var sourceEolHashes = reads?.SourceEolHashes ?? new Dictionary<string, HashSet<string>>(StringComparer.OrdinalIgnoreCase);
         bool MatchesCurrentSource(string path, string expected)
         {
             if (Matches(path, expected)) return true;

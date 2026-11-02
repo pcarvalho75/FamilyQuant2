@@ -23,6 +23,12 @@ internal static partial class Program
         File.Copy(LedgerPauloRulings.InputPath, tsv); File.Copy(LedgerPauloRulings.RulesPath, rules);
         string factFile = Path.Combine(output, "rulings-fact-check.tsv"); File.Copy(LedgerPauloRulings.FactChecksPath, factFile);
         var factChecks = LedgerPauloRulings.ReadFactChecks(factFile);
+        // Paulo's group ruling is optional: until he rules the file is absent or empty, nothing closes under rule 4, and the
+        // packet records no group artifact.
+        string groupFile = "";
+        if (File.Exists(LedgerPauloRulings.GroupRulingPath))
+        { groupFile = Path.Combine(output, "paulo-group-ruling.tsv"); File.Copy(LedgerPauloRulings.GroupRulingPath, groupFile); }
+        var groupRulings = groupFile.Length > 0 ? LedgerPauloRulings.ReadGroupRulings(groupFile) : new Dictionary<string, LedgerPauloRulings.GroupRuling>(StringComparer.Ordinal);
         var inventory = JsonSerializer.Deserialize<FeatureLedger.Inventory>(File.ReadAllText(Path.Combine(root, "docs/feature-ledger-scan.json")))!;
         var byId = inventory.Observations.ToDictionary(row => row.Id, StringComparer.Ordinal);
         var inputs = LedgerPauloRulings.ReadInputs(tsv);
@@ -30,7 +36,7 @@ internal static partial class Program
         {
             byId.TryGetValue(group.Key, out var observation);
             var evaluated = group.OrderBy(input => input.Lane, StringComparer.Ordinal).ThenBy(input => input.OldText, StringComparer.Ordinal)
-                .ThenBy(input => input.NewText, StringComparer.Ordinal).Select(input => LedgerPauloRulings.Evaluate(input, observation, LedgerRulingLiveText.Find, factChecks)).ToArray();
+                .ThenBy(input => input.NewText, StringComparer.Ordinal).Select(input => LedgerPauloRulings.Evaluate(input, observation, LedgerRulingLiveText.Find, factChecks, groupRulings)).ToArray();
             return evaluated.Where(decision => decision.Closed).OrderBy(decision => decision.Rule, StringComparer.Ordinal)
                 .ThenBy(decision => decision.NewText, StringComparer.Ordinal).FirstOrDefault() ?? evaluated[0];
         }).OrderBy(decision => decision.Id, StringComparer.Ordinal).ToList();
@@ -47,7 +53,15 @@ internal static partial class Program
             { byId.TryGetValue(input.Id, out var row); return !LedgerPauloRulings.Evaluate(input with { NewText = "" }, row, LedgerRulingLiveText.Find, factChecks).Closed; }));
             Check("every accepted wording ruling has an independent kept fact verdict", decisions.Where(decision => decision.Closed && decision.Rule is "1" or "3")
                 .All(decision => factChecks.TryGetValue(decision.Id, out var fact) && fact.Verdict == "kept"));
-            foreach (string rule in new[] { "1", "2", "3" })
+            Check("every rule-4 closure is listed in the pinned group ruling and is no DROP or execution row", decisions.Where(decision => decision.Closed && decision.Rule == "4")
+                .All(decision => groupRulings.ContainsKey(decision.Id) && byId.TryGetValue(decision.Id, out var observed) && !FeatureLedger.IsApprovedDrop(observed)
+                    && observed.Kind is not ("export/storage fact" or "format/export")));
+            if (groupRulings.Count == 0)
+                Check("with no group ruling from Paulo, no row closes under rule 4", decisions.All(decision => decision.Rule != "4"));
+            Console.WriteLine("Group ruling: " + (groupFile.Length > 0 ? groupRulings.Count.ToString(CultureInfo.InvariantCulture) + " listed rows, "
+                + groupRulings.Keys.Count(id => !inputs.Any(input => input.Id == id)).ToString(CultureInfo.InvariantCulture) + " of them absent from the wording input"
+                : "absent; rule 4 closes nothing") + ".");
+            foreach (string rule in new[] { "1", "2", "3", "4" })
                 Console.WriteLine("Rule " + rule + ": " + decisions.Count(decision => decision.Closed && decision.Rule == rule).ToString(CultureInfo.InvariantCulture) + " accepted rows.");
             foreach (var group in decisions.Where(decision => !decision.Closed).GroupBy(decision => decision.Reason).OrderBy(group => group.Key, StringComparer.Ordinal))
                 Console.WriteLine("OPEN " + group.Count().ToString(CultureInfo.InvariantCulture) + ": " + group.Key);
@@ -59,7 +73,8 @@ internal static partial class Program
         string values = Path.Combine(output, "decisions.json"); FeatureLedgerEvidence.WriteJson(values, decisions);
         string packetPath = Path.Combine(output, "ruling-packet.json");
         FeatureLedgerEvidence.WriteJson(packetPath, new LedgerPauloRulings.Packet(2, LedgerPauloRulings.Command, tsv, rules,
-            FeatureLedgerEvidence.Hash(tsv), LedgerPauloRulings.RulesSha256, decisions, factFile, FeatureLedgerEvidence.Hash(factFile)));
+            FeatureLedgerEvidence.Hash(tsv), LedgerPauloRulings.RulesSha256, decisions, factFile, FeatureLedgerEvidence.Hash(factFile),
+            groupFile, groupFile.Length > 0 ? FeatureLedgerEvidence.Hash(groupFile) : ""));
         string left = Path.Combine(output, "wording-left-for-paulo.tsv");
         static string Clean(string text)
         {
@@ -93,9 +108,11 @@ internal static partial class Program
         {
             var observed = byId[decision.Id]; string current = FeatureLedgerEvidence.CurrentPath(root, observed.Source);
             if (current.Length == 0) throw new InvalidDataException("No current implementation for ruling: " + decision.Id);
-            return new FeatureLedgerEvidence.Row(decision.Id, new() { new(current, decision.WitnessSymbol.Length > 0 ? decision.WitnessSymbol : "Current theme; frozen Style/Setter anchor",
-                FeatureLedgerEvidence.Hash(Path.Combine(root, current))) },
-                new() { new("rulings", "ruling", "Rule " + decision.Rule, FeatureLedgerEvidence.RulingAssertion(ruleText[int.Parse(decision.Rule, CultureInfo.InvariantCulture) - 1], decision), packetPath, "Paulo") },
+            string symbol = decision.WitnessSymbol.Length > 0 ? decision.WitnessSymbol
+                : decision.Rule == "4" ? "Paulo group ruling" : "Current theme; frozen Style/Setter anchor";
+            string ruleCited = decision.Rule == "4" ? LedgerPauloRulings.GroupRule(decision) : ruleText[int.Parse(decision.Rule, CultureInfo.InvariantCulture) - 1];
+            return new FeatureLedgerEvidence.Row(decision.Id, new() { new(current, symbol, FeatureLedgerEvidence.Hash(Path.Combine(root, current))) },
+                new() { new("rulings", "ruling", "Rule " + decision.Rule, FeatureLedgerEvidence.RulingAssertion(ruleCited, decision), packetPath, "Paulo") },
                 "Paulo's recorded ruling; not a behavioral/export test. Reviewer samples accepted rows.", Compared: FeatureLedgerEvidence.RulingComparison(decision));
         }).ToList();
         FeatureLedgerEvidence.WriteJson(Path.Combine(output, LedgerPauloRulings.Step + ".json"), new FeatureLedgerEvidence.Register(1, LedgerPauloRulings.Step,
