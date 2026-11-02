@@ -5,92 +5,92 @@
   "runs": [
     {
       "id": "native-shell-metadata",
-      "command": "D:\\FamilyQuant-wt\\shell\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --ledger-shell-native D:/FamilyQuant-data/out-shell/N3/source ./FamilyQuant.Tests/ReferenceGoldenHost/bin/Release/net10.0-windows7.0/ReferenceGoldenHost.exe D:/FamilyQuant-data/out-shell/D13-native-shell-2-20261102-052950/run2 \u00222026-11-02 05:34:15 -0800\u0022 D:/FamilyQuant-data/out-shell/D13-v5-ready-20261102-041942/run2/C1-runtime.json",
-      "executedAt": "2026-11-02 05:34:15 -0800",
-      "commit": "d6eba75a5016e251faa7e84da85081aaeab62570",
+      "command": "C:\\FamilyQuant-gate\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --ledger-shell-native D:/FamilyQuant-data/out-shell/N3/source C:\\FamilyQuant-gate\\FamilyQuant.Tests\\ReferenceGoldenHost\\bin\\Release\\net10.0-windows7.0\\ReferenceGoldenHost.exe D:/FamilyQuant-data/out-refresh\\20261102-064527-FamilyQuant-gate\\shell-native \u00222026-11-02 06:46:13 -0800\u0022 D:/FamilyQuant-data/out-refresh\\20261102-064527-FamilyQuant-gate\\inputs\\C1-runtime.json",
+      "executedAt": "2026-11-02 06:46:13 -0800",
+      "commit": "bdd77ae8411f95752d74c8779e4c7c223b577ab2",
       "artifacts": [
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\D13-native-shell-2-20261102-052950\\run2\\comparisons.log",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-064527-FamilyQuant-gate\\shell-native\\comparisons.log",
           "sha256": "4B45E35C1E8B88506960E568CE701DB57D75F01B8CA1C92368CE61C2894C463F"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\D13-native-shell-2-20261102-052950\\run2\\frozen.json",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-064527-FamilyQuant-gate\\shell-native\\frozen.json",
           "sha256": "49A31F693A6AD63BC47DC370CA9BDA06BD5E85F6D032DBCC05CC4A724759CAC4"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\D13-native-shell-2-20261102-052950\\run2\\current.json",
-          "sha256": "EA5EAB393B669288923401844713CA444F833E5E7F256198B21D1B893062767D"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-064527-FamilyQuant-gate\\shell-native\\current.json",
+          "sha256": "AB3F8C7909F84D47EA8244F07708CB6E78DCAD7604DA3FD4B36CAA08A1FCE548"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\D13-native-shell-2-20261102-052950\\run2\\comparisons.json",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-064527-FamilyQuant-gate\\shell-native\\comparisons.json",
           "sha256": "B6CDC4DB6097BB8B3CFE6BA9B358DB76C2C1835C332AD5BDBA555B0F0C99D4DF"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\D13-native-shell-2-20261102-052950\\run2\\frozen.log",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-064527-FamilyQuant-gate\\shell-native\\frozen.log",
           "sha256": "4104A3EC66E1C8FA2AF2A8105ACC570C9B6EDB3AC01DA030B45E8BCB97542C6B"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\D13-v5-ready-20261102-041942\\run2\\C1-runtime.json",
-          "sha256": "9AEDB3350B767D5506B680794EB4939BDFC9948C136CD748833384157E3D9953"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-064527-FamilyQuant-gate\\inputs\\C1-runtime.json",
+          "sha256": "012585D67FD2A32739455568EBCA409A49F6B8F05C66ECC6EAAC544511D1B0CE"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\D13-native-shell-2-20261102-052950\\run2\\executed\\FamilyQuant.Tests_ShellMetadataSnapshot.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-064527-FamilyQuant-gate\\shell-native\\executed\\FamilyQuant.Tests_ShellMetadataSnapshot.cs",
           "sha256": "D4137C4B065B9A17722B4CE3EADE8B8EBEB28D86195300F4C598967A0AA80363"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\D13-native-shell-2-20261102-052950\\run2\\executed\\FamilyQuant.Tests_ShellMetadataSnapshot.Home.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-064527-FamilyQuant-gate\\shell-native\\executed\\FamilyQuant.Tests_ShellMetadataSnapshot.Home.cs",
           "sha256": "B6638F24407CBD00BDA4EC05C339B4BA5ACCC96705B0C69C829128833A1E8B2C"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\D13-native-shell-2-20261102-052950\\run2\\executed\\FamilyQuant.Tests_ShellMetadataComparison.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-064527-FamilyQuant-gate\\shell-native\\executed\\FamilyQuant.Tests_ShellMetadataComparison.cs",
           "sha256": "9C63F9AF014EDD2F6B6A8D00095475832C3E59AADC9229FDB6A4EA17AD84159B"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\D13-native-shell-2-20261102-052950\\run2\\executed\\FamilyQuant.Tests_Program.ShellMetadata.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-064527-FamilyQuant-gate\\shell-native\\executed\\FamilyQuant.Tests_Program.ShellMetadata.cs",
           "sha256": "6AD7281C3B583750E33E151A82F6B5F001E2FC382F90D0A0FDD9AAE5A571AB00"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\D13-native-shell-2-20261102-052950\\run2\\executed\\FamilyQuant.Tests_Program.ShellMetadataReceipts.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-064527-FamilyQuant-gate\\shell-native\\executed\\FamilyQuant.Tests_Program.ShellMetadataReceipts.cs",
           "sha256": "090760DA59AE80A322F8A36C300DB790E3AFF4740EA31F3AF9CB9EB72D47E0E9"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\D13-native-shell-2-20261102-052950\\run2\\executed\\FamilyQuant.Tests_Program.Commands.ShellMetadata.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-064527-FamilyQuant-gate\\shell-native\\executed\\FamilyQuant.Tests_Program.Commands.ShellMetadata.cs",
           "sha256": "9333F90441B310A545C0EF69B28F3EE6BB8EEC195846EB0950519FB7E129A4B9"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\D13-native-shell-2-20261102-052950\\run2\\executed\\FamilyQuant.Tests_ReferenceGoldenHost_Program.cs",
-          "sha256": "2CFB947A2D55FD9387CCA9FBD950D4DE3291698B1ECCDDC2FE7590142FC8ABE8"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-064527-FamilyQuant-gate\\shell-native\\executed\\FamilyQuant.Tests_ReferenceGoldenHost_Program.cs",
+          "sha256": "5A6CB7434ED2F933F3DA3A5F4E7D21138CC72E3E6E79DB5BCEE64563952D3D6E"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\D13-native-shell-2-20261102-052950\\run2\\executed\\FamilyQuant.Tests_ReferenceGoldenHost_ReferenceGoldenHost.csproj",
-          "sha256": "1C9E60D1F50F5D20FB172E491316F96E871226F3479F40DD663F62075719640D"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-064527-FamilyQuant-gate\\shell-native\\executed\\FamilyQuant.Tests_ReferenceGoldenHost_ReferenceGoldenHost.csproj",
+          "sha256": "716024507E7435B78883A210A70A1A2433A94F039A9442D9B1C2B81E377E494C"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\D13-native-shell-2-20261102-052950\\run2\\executed\\FamilyQuant.Tests.dll",
-          "sha256": "47E4B47F712941F578FEBC627A785DACCCEE4A9E9D99DFA450A42AAE7BC74145"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-064527-FamilyQuant-gate\\shell-native\\executed\\FamilyQuant.Tests.dll",
+          "sha256": "BE4AFE7AFCCB5FCED49CA823DF90459D801AA6342A72B5ABD7F4DADB4CE0955B"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\D13-native-shell-2-20261102-052950\\run2\\executed\\FamilyQuant2.dll",
-          "sha256": "AABFB04282A898A031BEDA96ADE317B7C1E607229DC493EBCEE91D96E1CE9E28"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-064527-FamilyQuant-gate\\shell-native\\executed\\FamilyQuant2.dll",
+          "sha256": "FF02C5678FFD09236674E5348A280FC32DEEC0E7168E14C04E2F9318F82735D0"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\D13-native-shell-2-20261102-052950\\run2\\executed\\FamilyQuant.Core.dll",
-          "sha256": "23D3D3A0B15026302879F3B5C845136206CD98993429EFD64DCC2A0A27A6270D"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-064527-FamilyQuant-gate\\shell-native\\executed\\FamilyQuant.Core.dll",
+          "sha256": "57E9E7DAD845F3BC2101EC18B6C48ACA2340E9AF80B49DF7F63E2FA168BB4B02"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\D13-native-shell-2-20261102-052950\\run2\\executed\\ReferenceGoldenHost.exe",
-          "sha256": "D3773B0B91A4F214899068B6278CDB7C60C70F6CFC9B04E7DDB170210640AD25"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-064527-FamilyQuant-gate\\shell-native\\executed\\ReferenceGoldenHost.exe",
+          "sha256": "5CA8A5DFED1E9A51714A4E8017DFF8AA6625F207FF7A7BC4A17753DAAC6CE016"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\D13-native-shell-2-20261102-052950\\run2\\executed\\ReferenceGoldenHost.dll",
-          "sha256": "F5431528A03C432E5CBE4CAD972CE4B453DD87B6A410B2C47E703C59EF12855A"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-064527-FamilyQuant-gate\\shell-native\\executed\\ReferenceGoldenHost.dll",
+          "sha256": "B6086551D4A3D79731CCDF8AEDC383E41C6F774A8C3A18312D5CEB419F26C006"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\D13-native-shell-2-20261102-052950\\run2\\executed\\FamilyQuant.dll",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-064527-FamilyQuant-gate\\shell-native\\executed\\FamilyQuant.dll",
           "sha256": "D764488C923945285E03B338E5A91BF28106A35B11AB465D8E2B23D125F03FD8"
         }
       ],
-      "workingDirectory": "D:\\FamilyQuant-wt\\shell"
+      "workingDirectory": "C:\\FamilyQuant-gate"
     }
   ],
   "rows": [
@@ -6657,7 +6657,7 @@
           "kind": "test",
           "target": "ShellMetadataReceipts",
           "assertion": "native shell kind option/copy: every listed frozen/current observation has equal native metadata or executed event outcome",
-          "artifact": "D:\\FamilyQuant-data\\out-shell\\D13-native-shell-2-20261102-052950\\run2\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-064527-FamilyQuant-gate\\shell-native\\comparisons.log",
           "inspectedBy": ""
         }
       ]
@@ -6671,7 +6671,7 @@
           "kind": "test",
           "target": "ShellMetadataReceipts",
           "assertion": "native shell kind handler: every listed frozen/current observation has equal native metadata or executed event outcome",
-          "artifact": "D:\\FamilyQuant-data\\out-shell\\D13-native-shell-2-20261102-052950\\run2\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-064527-FamilyQuant-gate\\shell-native\\comparisons.log",
           "inspectedBy": ""
         }
       ]
@@ -6685,7 +6685,7 @@
           "kind": "test",
           "target": "ShellMetadataReceipts",
           "assertion": "native shell kind control: every listed frozen/current observation has equal native metadata or executed event outcome",
-          "artifact": "D:\\FamilyQuant-data\\out-shell\\D13-native-shell-2-20261102-052950\\run2\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-064527-FamilyQuant-gate\\shell-native\\comparisons.log",
           "inspectedBy": ""
         }
       ]
@@ -6699,7 +6699,7 @@
           "kind": "test",
           "target": "ShellMetadataReceipts",
           "assertion": "native shell kind code fact: every listed frozen/current observation has equal native metadata or executed event outcome",
-          "artifact": "D:\\FamilyQuant-data\\out-shell\\D13-native-shell-2-20261102-052950\\run2\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-064527-FamilyQuant-gate\\shell-native\\comparisons.log",
           "inspectedBy": ""
         }
       ]
@@ -6713,7 +6713,7 @@
           "kind": "test",
           "target": "ShellMetadataReceipts",
           "assertion": "native shell kind handler definition: every listed frozen/current observation has equal native metadata or executed event outcome",
-          "artifact": "D:\\FamilyQuant-data\\out-shell\\D13-native-shell-2-20261102-052950\\run2\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-064527-FamilyQuant-gate\\shell-native\\comparisons.log",
           "inspectedBy": ""
         }
       ]
