@@ -94,6 +94,7 @@ Invoke each flag with `& $testExe <flag>` after building. Dispatch and arity are
 | `--list-test-commands` | Deterministic command table; executes no test or scientific handler |
 | `--test-document` | Document round trip, scoring and denominator attribution fixtures |
 | `--test-evidence-task` | File-derived taxonomy, keyword counts, confirmation and recipe replay fixtures |
+| `--source-caption-check <fresh-output>` | Compiled source picker: all five frozen filename/Union facts, selected-source screenshots and native whole-control checks in both themes |
 | `--test-evidence-delivery` | Native default review, save, exports, exact app-session replay and app Open fixture |
 | `--test-evidence-fetch-atomic` | Combined evidence/panel staging, cancellation boundaries, failures and one final commit |
 | `--test-evidence-coverage` | Native alignment-row interpretation, counterfactual chooser and honest audit labels |

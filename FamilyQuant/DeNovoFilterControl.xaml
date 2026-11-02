@@ -8,11 +8,11 @@
   <ComboBox x:Name="ComboBoxDeNovoSource" Grid.Column="1" SelectedValuePath="Tag"
    SelectedValue="{Binding ModeTag, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
    ToolTip="Choose a source or union. Each source keeps its own native confidence cutoff.">
-   <ComboBoxItem Content="PEAKS de novo only" Tag="peaks-only"/>
-   <ComboBoxItem Content="PEAKS de novo all" Tag="peaks-all"/>
-   <ComboBoxItem Content="DeepNovo" Tag="deepnovo"/>
-   <ComboBoxItem Content="PEAKS de novo only + DeepNovo" Tag="union-only-deepnovo"/>
-   <ComboBoxItem Content="PEAKS de novo all + DeepNovo" Tag="union-all-deepnovo"/>
+   <ComboBoxItem Content="PEAKS de novo only (*.denovoOnly.csv)" Tag="peaks-only"/>
+   <ComboBoxItem Content="PEAKS de novo all (*.denovo.csv)" Tag="peaks-all"/>
+   <ComboBoxItem Content="DeepNovo (*.deepnovo.csv)" Tag="deepnovo"/>
+   <ComboBoxItem Content="Union: PEAKS de novo only + DeepNovo" Tag="union-only-deepnovo"/>
+   <ComboBoxItem Content="Union: PEAKS de novo all + DeepNovo" Tag="union-all-deepnovo"/>
   </ComboBox>
   <Label Grid.Row="1" Content="PEAKS minimum ALC (%)" ToolTip="Minimum average local confidence for PEAKS calls, from 0 to 100."/>
   <TextBox Grid.Row="1" Grid.Column="1" Width="80" HorizontalAlignment="Left"

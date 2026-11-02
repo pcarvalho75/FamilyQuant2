@@ -24,6 +24,7 @@ internal static partial class Program
     internal static readonly string[] PreservedCommandFlags =
     [
         "--evidence-task-header-audit",
+        "--source-caption-check",
         "--prove-denovo-ledger",
         "--prove-denovo-runtime",
         "--prove-denovo-workflows",
