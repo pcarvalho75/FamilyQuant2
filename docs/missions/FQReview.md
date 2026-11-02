@@ -31,6 +31,10 @@ Stay in the session while the team works.
 
 Your queue also holds B2, A2, B8 and R4. Between reviews, take them in that order. Start B2 now, between claims: read the closest work on de novo tags mapped by homology and on family-level quantitation, and write `docs/vision/PRIOR-ART.md` as a review file in `D:/FamilyQuant-data/reviews/` for the orchestrator to commit, since you never commit. If you cannot reach a paper, say so; never cite one you did not read. A2 opens when FQEvidence finishes A1, and it is the review of what Ana receives, so it goes ahead of everything. Otherwise claimed reviews come before your own steps.
 
+## Depth follows risk
+
+Take the tier from the Diff column. L: read the diff, check the done-check, plant one break, about 10 minutes. M: the same plus scope and touched files, about 20 minutes. H and VH: the full list below. Every B, A and N step, and anything that can move a number or close a ledger row, gets the full list whatever its tier. If you hold several open claims from one builder, review them together on the newest commit and post one verdict line per step. Reuse the builder's logs in `D:/FamilyQuant-data/out-<worker>/<step>`; the gate runs the full suite at every merge, so rebuild only for your planted break or when you doubt the evidence.
+
 ## What to attack
 
 Check the row's done-check yourself; do not take the builder's word. Then look for what would fool someone:
