@@ -81,7 +81,7 @@
                            ToolTip="Which de novo program made the export. Each keeps its own confidence score: PEAKS uses ALC, DeepNovo uses SCORE."/>
                     <ComboBox x:Name="ComboBoxDeNovoSource" Width="300" Margin="5" SelectedIndex="0"
                               SelectionChanged="ComboBoxDeNovoSource_SelectionChanged"
-                              ToolTip="PEAKS de novo only is the default. PEAKS de novo all also includes identified spectra. DeepNovo is filtered on its SCORE (%). Quantify and De novo use these same source-native cutoffs.">
+                              ToolTip="Choose PEAKS de novo only (default), PEAKS de novo all (including identified spectra), or DeepNovo filtered on SCORE (%). Quantify and De novo use these same source-native cutoffs.">
                         <ComboBoxItem Content="PEAKS de novo only (*.denovoOnly.csv)" Tag="peaks-denovo-only"/>
                         <ComboBoxItem Content="PEAKS de novo all (*.denovo.csv)" Tag="peaks-denovo-all"/>
                         <ComboBoxItem Content="DeepNovo (*.deepnovo.csv)" Tag="deepnovo"/>
@@ -94,23 +94,23 @@
                 </WrapPanel>
                 <WrapPanel Grid.Row="2" Margin="5,8,5,0">
                     <Label Content="Minimum length:" VerticalAlignment="Center"
-                           ToolTip="Shortest de novo sequence kept, in residues. Short sequences match proteins by chance, so lower it only with a reason. Default 7."/>
+                           ToolTip="Shortest de novo sequence kept, in residues; default 7. Short sequences match proteins by chance, so lower it only with a reason."/>
                     <TextBox x:Name="TextBoxMinLength" Text="{Binding Filters.MinimumLength, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="55" Margin="5" VerticalAlignment="Center"
                              ToolTip="A whole number from 1 to 100. A value out of range is refused when you press Load and filter, and the previous value stays."/>
                     <Label x:Name="LabelMinimumSourceConfidence" Content="Minimum ALC (%):" Margin="12,0,0,0" VerticalAlignment="Center"
-                           ToolTip="Lowest overall confidence kept (PEAKS ALC or DeepNovo SCORE). The two scales are not equivalent, and neither is a calibrated FDR. Default 80%."/>
+                           ToolTip="Lowest overall confidence kept, PEAKS ALC or DeepNovo SCORE; default 80%. These scales are not equivalent, and neither is a calibrated FDR."/>
                     <TextBox x:Name="TextBoxMinAlc" Text="{Binding ActiveConfidenceText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="55" Margin="5" VerticalAlignment="Center"
-                             ToolTip="A number from 0 to 100, decimals allowed. Spectra scoring below it are dropped. A value out of range is refused when you press Load and filter."/>
+                             ToolTip="Accepts 0 to 100, including decimals, and drops spectra below the cutoff. Load and filter refuses an out-of-range value."/>
                     <Label x:Name="LabelDeepNovoCutoff" Content="DeepNovo SCORE (%):" Visibility="Collapsed" VerticalAlignment="Center"
                            ToolTip="A separate native SCORE cutoff for DeepNovo in a union. It is never converted into PEAKS ALC."/>
                     <TextBox x:Name="TextBoxDeepNovoCutoff" Text="{Binding Filters.DeepNovoMinimumScore, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="55" Margin="5" Visibility="Collapsed"
                              ToolTip="DeepNovo SCORE cutoff from 0 to 100. This value is shared with Quantify."/>
                     <Label Content="Stretch length:" Margin="12,0,0,0" VerticalAlignment="Center"
-                           ToolTip="How many consecutive residues must each reach the stretch floor. This keeps a sequence with one clearly read region and drops a uniformly mediocre one. Default 5."/>
+                           ToolTip="Consecutive residues required to reach the stretch floor; default 5. This keeps a sequence with one clearly read region and drops a uniformly mediocre one."/>
                     <TextBox x:Name="TextBoxStretchLength" Text="{Binding Filters.StretchLength, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="55" Margin="5" VerticalAlignment="Center"
                              ToolTip="A whole number from 1 to 100; a longer stretch is stricter. A value out of range is refused when you press Load and filter."/>
                     <Label Content="Stretch floor (%):" Margin="12,0,0,0" VerticalAlignment="Center"
-                           ToolTip="The confidence every residue in the stretch must reach; a lower residue breaks the run. Keep it high. Default 90%."/>
+                           ToolTip="Confidence each stretch residue must reach, default 90%. A lower residue breaks the run; keep the floor high."/>
                     <TextBox x:Name="TextBoxStretchFloor" Text="{Binding Filters.StretchFloor, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="55" Margin="5" VerticalAlignment="Center"
                              ToolTip="A number from 0 to 100, rounded to a whole number. A value out of range is refused when you press Load and filter."/>
                     <Button x:Name="ButtonLoadAndFilter" Style="{DynamicResource PrimaryButton}" Content="Load and filter" Margin="16,0,0,0" Padding="14,6"
@@ -126,7 +126,7 @@
                            ToolTip="Rows that passed all three filters, and their share of the rows read. Every later step works from these rows."/>
                 </WrapPanel>
                 <TextBlock Grid.Row="4" x:Name="TextBlockPerRunBreakdown" Text="{Binding PerRunBreakdown}" Style="{StaticResource Note}"
-                           ToolTip="Rows read and kept for each run. Runs are named by file name, not by order. A run keeping far fewer rows than the others is worth checking."/>
+                           ToolTip="Rows read and kept per run, named by file rather than order. Check a run that keeps far fewer rows than the others."/>
             </Grid>
         </GroupBox>
         <GroupBox x:Name="GroupBoxReconcile" Margin="5" Padding="5">
@@ -257,7 +257,7 @@
                             ToolTip="Pick the .fcf file. Nothing is read until you press Search."/>
                     <Button Grid.Column="3" x:Name="ButtonSearchHomology" Style="{DynamicResource PrimaryButton}" Content="Search" Margin="10,4,4,4" Padding="14,6"
                             Click="ButtonSearchHomology_Click" IsEnabled="False" FontSize="13"
-                            ToolTip="Aligns each distinct kept peptide to the family file's proteins and assigns the hits to families. It does not need extracted areas. Disabled until Step 1 has kept at least one row."/>
+                            ToolTip="Aligns each distinct kept peptide to the family file's proteins and assigns hits to families without requiring extracted areas. Disabled until Step 1 has kept at least one row."/>
                 </Grid>
                 <WrapPanel Grid.Row="1" Margin="5,8,5,0">
                     <Label Content="Minimum identity (0 to 1):" VerticalAlignment="Center"
@@ -265,7 +265,7 @@
                     <TextBox x:Name="TextBoxMinIdentity" Text="{Binding MinimumIdentity, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="60" Margin="5" VerticalAlignment="Center"
                              ToolTip="A number from 0 to 1, with a dot as the decimal separator. A value out of range is refused when you press Search."/>
                     <Label Content="Top hits per peptide:" Margin="12,0,0,0" VerticalAlignment="Center"
-                           ToolTip="How many proteins one peptide may be assigned to, best scores first. Default 3. Raising it spreads shared peptides over more families."/>
+                             ToolTip="Maximum proteins assigned per peptide, best scores first; default 3. Raising it spreads shared peptides over more families."/>
                     <TextBox x:Name="TextBoxTopHits" Text="{Binding TopHits, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="55" Margin="5" VerticalAlignment="Center"
                              ToolTip="A whole number, 1 or more. A value below 1 is refused when you press Search."/>
                     <CheckBox x:Name="CheckBoxConsiderILSame" IsChecked="{Binding ConsiderILSame, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Content="I and L are one residue"

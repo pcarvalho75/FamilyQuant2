@@ -100,8 +100,8 @@ public partial class DeNovoControl : UserControl
             LabelMinimumSourceConfidence.ToolTip = "Lowest " + source.ConfidenceColumn +
                 " kept for " + source.DisplayName + ". This score belongs to this program and is " +
                 "not converted to any other program's scale.";
-            TextBoxMinAlc.ToolTip = "A number from 0 to 100, decimals allowed. Spectra with a lower " +
-                source.ConfidenceColumn + " are dropped. " +
+            TextBoxMinAlc.ToolTip = "Accepts 0 to 100, including decimals, and drops spectra with a lower " +
+                source.ConfidenceColumn + ". " +
                 (source == DeNovoSource.DeepNovo
                     ? "DeepNovo SCORE is not PEAKS ALC."
                     : "PEAKS ALC is not a calibrated FDR.");

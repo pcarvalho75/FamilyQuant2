@@ -31,7 +31,7 @@ public partial class LockManagerWindow
         var close = new Button { Content = "Close", IsCancel = true, ToolTip = "Close this window. Save from the main window to keep lock changes." };
         close.Click += (_, _) => Close(); DockPanel.SetDock(close, Dock.Right); bar.Children.Add(close);
         var remove = new Button { Content = "Remove selected locks", IsEnabled = false,
-            ToolTip = "Unlock the selected families so reclustering may merge them. Nothing is saved here. Disabled until a row is selected." };
+            ToolTip = "Unlock selected families for future reclustering without saving to disk. Disabled until a row is selected." };
         remove.SetResourceReference(StyleProperty, "PrimaryButton");
         remove.Click += (_, _) => RemoveSelectedLocks(); DockPanel.SetDock(remove, Dock.Right); bar.Children.Add(remove);
         table.SelectionChanged += (_, _) => remove.IsEnabled = table.SelectedItems.Count > 0;

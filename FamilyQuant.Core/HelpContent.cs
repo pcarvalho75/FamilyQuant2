@@ -34,10 +34,10 @@ namespace FamilyQuant
             sb.AppendLine("HOW QUANTITATION WORKS");
             sb.AppendLine("Two sources: the Full XIC column comes from Analysis > Compute full XIC (Quantify).");
             sb.AppendLine("The optional PatternLab .plp supplies the 'Share of signal' column.");
-            sb.AppendLine("Shared peptides applies to both columns; Report XIC as and Recalculate apply");
-            sb.AppendLine("to the .plp column, Full XIC share of to the Full XIC column.");
-            sb.AppendLine("The two lists answer different questions, and the bottom status line");
-            sb.AppendLine("always says which one is on screen.");
+            sb.AppendLine("Shared peptides applies to both columns; PatternLab share of and Recalculate apply");
+            sb.AppendLine("to the .plp column. Share of under Full XIC changes that column immediately.");
+            sb.AppendLine("Each share column names its denominator; Full XIC details and PatternLab details");
+            sb.AppendLine("retain the source facts. The bottom status line describes the PatternLab calculation.");
             sb.AppendLine();
 
             sb.AppendLine("THE ORDER OF WORK");
@@ -47,11 +47,12 @@ namespace FamilyQuant
             sb.AppendLine("   Cluster File (.fcf) next to the database: proteins grouped into families.");
             sb.AppendLine("2. File > Open opens that .fcf in Families, where you");
             sb.AppendLine("   can merge families further by description words or by keyword.");
-            sb.AppendLine("3. In Families, load the PatternLab project (.plp) that holds the quantitation. It");
+            sb.AppendLine("3. Analysis > Compute full XIC opens Quantify for the primary quantitation route.");
+            sb.AppendLine("   In Families, PatternLab (optional) offers Load PatternLab project for a .plp. It");
             sb.AppendLine("   must have been exported at PEPTIDE level - a protein-level export has nothing");
             sb.AppendLine("   this program can attribute to a family.");
-            sb.AppendLine("4. In Families, choose what the percentage is OF, choose what to do with shared");
-            sb.AppendLine("   peptides, then press Recalculate.");
+            sb.AppendLine("4. In Quantitation, choose Shared peptides for either source. Share of applies to");
+            sb.AppendLine("   Full XIC immediately; PatternLab share of needs Recalculate for the .plp column.");
             sb.AppendLine("5. File > Export writes CSV; Analysis > Reannotate SEPro stamps the family numbers back");
             sb.AppendLine("   into a SEPro result package.");
             sb.AppendLine();
@@ -66,7 +67,7 @@ namespace FamilyQuant
             sb.AppendLine("WHAT THE PERCENTAGE IS OF (THE DENOMINATOR)");
             sb.AppendLine("-------------------------------------------");
             sb.AppendLine("A family's number is a share, and a share is meaningless until you know of what.");
-            sb.AppendLine("The list called \"Report XIC as\" is that choice. It currently reads:");
+            sb.AppendLine("For the optional .plp column, PatternLab share of is that choice. It currently reads:");
             sb.AppendLine();
             sb.AppendLine("    " + mode.DisplayName());
             sb.AppendLine();
@@ -75,8 +76,8 @@ namespace FamilyQuant
 
             if (profile == null)
             {
-                sb.AppendLine("No project is loaded, so the program cannot yet say which denominators this");
-                sb.AppendLine("data supports. Load its quantitation in Families: unsupported modes are greyed out,");
+                sb.AppendLine("No PatternLab project is loaded, so the program cannot yet say which .plp denominators");
+                sb.AppendLine("are available. Use Load PatternLab project: unsupported modes are greyed out,");
                 sb.AppendLine("each with the reason in its tooltip.");
             }
             else
@@ -173,27 +174,42 @@ namespace FamilyQuant
             sb.AppendLine("clustering, which is quicker but leaves the holes.");
             sb.AppendLine();
 
-            sb.AppendLine("CURATING BY HAND: UNDO, SUPER CLUSTER OPTIONS, SEARCH-SCOPED RECLUSTERING");
+            sb.AppendLine("THE FAMILY OVERVIEW AND PROTEIN TABLE");
+            sb.AppendLine("-------------------------------------");
+            sb.AppendLine("Families keeps the family overview, protein table and actions beside one another.");
+            sb.AppendLine("Select a family to show its proteins; All proteins restores the filtered protein");
+            sb.AppendLine("list. Each overview row shows its whole-family target count and one family share,");
+            sb.AppendLine("including members hidden by display filters; it never adds the repeated protein");
+            sb.AppendLine("shares together. Column headings name the current denominator.");
+            sb.AppendLine();
+            sb.AppendLine("Edit the family name to annotate every target member, including hidden members.");
+            sb.AppendLine("The family checkbox protects it from automatic grouping or removes that protection.");
+            sb.AppendLine("Each committed name or checkbox edit is one Undo step. Edit selected proteins can");
+            sb.AppendLine("join or split selected rows and set their annotation in one batch; destination and");
+            sb.AppendLine("surviving source families are locked, while emptied source families are not.");
+            sb.AppendLine();
+            sb.AppendLine("CURATING BY HAND: UNDO, KEYWORD REVIEW, SEARCH-SCOPED RECLUSTERING");
             sb.AppendLine("------------------------------------------------------------------------");
             sb.AppendLine("Undo steps back through the changes you make in Families, one at a time, without");
-            sb.AppendLine("reloading the file. It reverses a Recluster by Words, a Create Super Cluster, a");
-            sb.AppendLine("User ID number you changed, or a lock you removed, putting the family numbers and");
+            sb.AppendLine("reloading the file. It reverses Recluster by words, Group by keywords, evidence");
+            sb.AppendLine("grouping, a family name or checkbox edit, a batch edit, a User ID edit or lock removal,");
+            sb.AppendLine("putting the changed family numbers, annotations and");
             sb.AppendLine("the locks back exactly as they were just before. It remembers the last 50 steps of");
             sb.AppendLine("this session, does not survive closing the file, and there is no redo.");
             sb.AppendLine();
-            sb.AppendLine("Create Super Cluster now offers two choices. \"Match\" decides whether one description");
+            sb.AppendLine("Group by keywords opens Review grouping. \"Match\" decides whether one description");
             sb.AppendLine("must contain ALL of your keywords or just ANY one of them; the default is \"match all");
             sb.AppendLine("words\", so a phrase such as \"acidic phospholipase\" gathers only the acidic");
             sb.AppendLine("phospholipases and leaves the plain ones alone, while \"match any word\" gathers");
             sb.AppendLine("every family carrying even one keyword. A single keyword behaves the same either");
-            sb.AppendLine("way. The super cluster's own \"Exclude Words\" box keeps a protein OUT even when its");
+            sb.AppendLine("way. The review's own \"Exclude words\" box keeps a protein OUT even when its");
             sb.AppendLine("family matches: exclude \"inhibitor\" to gather the phospholipases without the");
-            sb.AppendLine("phospholipase inhibitor. It is separate from the Recluster by Words exclude box,");
+            sb.AppendLine("phospholipase inhibitor. It is separate from the Recluster by words Ignore words box,");
             sb.AppendLine("which drops words from the comparison rather than dropping a protein.");
             sb.AppendLine("Separate its words with commas or spaces. It matches WHOLE words of the description");
             sb.AppendLine("before OS=, and keeps out the proteins carrying the word; the rest of the family joins.");
             sb.AppendLine();
-            sb.AppendLine("Create Super Cluster first shows a preview and changes nothing until you confirm.");
+            sb.AppendLine("Group by keywords changes nothing until you confirm Apply grouping in the review.");
             sb.AppendLine("Keywords find the families; every protein of those families is listed, each with a");
             sb.AppendLine("tick, its Locus, its description as the database has it, and its domains. A protein");
             sb.AppendLine("with none of your words is in red: it is here because another protein of its family");
@@ -201,7 +217,7 @@ namespace FamilyQuant
             sb.AppendLine("Untick a protein and it stays in its family, while the rest of that family joins.");
             sb.AppendLine("\"Untick the red ones\" does that for all of them at once. To untick many by hand,");
             sb.AppendLine("click a heading to sort, Shift+click to select, and press Untick selected. When part");
-            sb.AppendLine("of a family leaves, the new family is locked, so that a Recluster by Words cannot put");
+            sb.AppendLine("of a family leaves, the new family is locked, so that Recluster by words cannot put");
             sb.AppendLine("back what you left out; the lock manager removes it. An annotation stays on each protein.");
             sb.AppendLine();
             sb.AppendLine("You do not have to know how a protein is named. The ADAM proteins, for example, are");
@@ -210,8 +226,10 @@ namespace FamilyQuant
             sb.AppendLine("The keywords and exclude words can be edited there and everything follows as you");
             sb.AppendLine("type. If the Search box hides families that match, one tick brings them in.");
             sb.AppendLine();
-            sb.AppendLine("Fetch evidence asks UniProt once for each protein's Pfam domains and saving keeps them");
-            sb.AppendLine("in the file, with the UniProt release. They fill the Domains column, the Search box");
+            sb.AppendLine("Fetch evidence asks UniProt for protein evidence, including Pfam domains, family,");
+            sb.AppendLine("keyword and tissue annotations, plus reviewed references for the families found.");
+            sb.AppendLine("The operation publishes the completed evidence and panel together; saving keeps them");
+            sb.AppendLine("in the file with their release for offline review. Pfam domains fill the Domains column; the Search box");
             sb.AppendLine("finds them, and in the preview Keep domains unticks the proteins with none of the");
             sb.AppendLine("domains you name: Reprolysin keeps those with the metalloproteinase domain whatever");
             sb.AppendLine("they are called, and leaves out inhibitors and matrix metalloproteinases without a");
@@ -219,7 +237,12 @@ namespace FamilyQuant
             sb.AppendLine("keyword: the short disintegrins and many fragments are too short for Pfam. Domains do");
             sb.AppendLine("not separate everything: most ADAMs have the same ones as a P-III SVMP.");
             sb.AppendLine();
-            sb.AppendLine("In the preview and the Data Browser, right-click a row to copy its UniProt code or");
+            sb.AppendLine("Group by evidence opens the Evidence tab of Review grouping. Confirm the scope,");
+            sb.AppendLine("then review the supplied families, reasons, flags and protein ticks before Apply");
+            sb.AppendLine("grouping; the review's Help explains its architecture, motif and left-out views.");
+            sb.AppendLine("Cancelling leaves the open grouping unchanged and adds no Undo step.");
+            sb.AppendLine();
+            sb.AppendLine("In Review grouping and the Families protein table, right-click to copy a UniProt code or");
             sb.AppendLine("description or to open its UniProt page. Ctrl+C copies the column you clicked, for");
             sb.AppendLine("every selected row, or the whole row after a click on a row number.");
             sb.AppendLine();
@@ -231,12 +254,12 @@ namespace FamilyQuant
             sb.AppendLine("The Search box takes several terms separated by commas, for example");
             sb.AppendLine("\"metalloprotease, SVMP\": a row is shown when it carries ANY of them.");
             sb.AppendLine();
-            sb.AppendLine("Typing in the Search box now limits BOTH Recluster by Words and Create Super");
-            sb.AppendLine("Cluster to the families the search shows: every family the search hides keeps its");
+            sb.AppendLine("Typing in the Search box limits both Recluster by words and Group by keywords");
+            sb.AppendLine("to the families the search shows: every family the search hides keeps its");
             sb.AppendLine("numbers untouched, so you can organise one subgroup at a time. The word vectors are");
             sb.AppendLine("then computed within the shown families, which is the intended \"organise just this");
-            sb.AppendLine("subgroup\" behaviour. The scope follows the SEARCH TEXT only, not the Hide Reverse");
-            sb.AppendLine("or Hide Contaminants checkboxes, so hiding rows for display never silently drops a");
+            sb.AppendLine("subgroup\" behaviour. The scope follows the SEARCH TEXT only, not the Hide decoys");
+            sb.AppendLine("or Hide contaminants checkboxes, so hiding rows for display never silently drops a");
             sb.AppendLine("family from a recluster. Clear the Search box and both act on the whole database");
             sb.AppendLine("again, exactly as before. Locks still hold within the subgroup.");
             sb.AppendLine();
@@ -270,13 +293,14 @@ namespace FamilyQuant
             sb.AppendLine("                 renumbered a family by hand.");
             sb.AppendLine("User ID          your own family number. Editable: change it and the families are");
             sb.AppendLine("                 regrouped, the User column recalculated, and it is the number");
-            sb.AppendLine("                 written back by Reanotate Sepro.");
+            sb.AppendLine("                 written back by Analysis > Reannotate SEPro.");
             sb.AppendLine("User Annotation  free text, saved in the .fcf and exported. It also NAMES the family");
             sb.AppendLine("                 in the Full XIC composition CSV, the Results chart and the");
             sb.AppendLine("                 evidence pack. A family without one is named by the protein name");
             sb.AppendLine("                 most of its members share (read before \"OS=\", \"(Fragment)\"");
-            sb.AppendLine("                 ignored); a tie goes to the first member in the table's order.");
-            sb.AppendLine("Locus            the protein identifier as it appears in the database.");
+            sb.AppendLine("                 ignored); a tie follows the stored member order, not the grid sort.");
+            sb.AppendLine("Locus            a UniProt accession where available, otherwise the database identifier.");
+            sb.AppendLine("                 Hover over a cell for the full original identifier, kept in the file.");
             sb.AppendLine("Residue mass     the sum of the protein's amino-acid residue masses, in daltons.");
             sb.AppendLine("                 It does NOT include the terminal water: add 18.011 Da for the");
             sb.AppendLine("                 neutral protein, and 1.007 Da more for the protonated (MH+) mass.");
@@ -285,12 +309,17 @@ namespace FamilyQuant
             sb.AppendLine();
             sb.AppendLine("THE FAMILY COUNTER AND THE FILTERS");
             sb.AppendLine("----------------------------------");
-            sb.AppendLine("The counter reads \"N visible · M in file\". The filters below the table hide rows,");
+            sb.AppendLine("The counter reads \"N visible · M in file\". Display and export filters hide rows,");
             sb.AppendLine("they never change a number: hiding decoys or contaminants lowers the visible count");
             sb.AppendLine("and leaves every percentage exactly as it was. In \"" +
                           NormalizationMode.IdentifiedSignal.ShortName() + "\" the hidden rows");
             sb.AppendLine("are still inside the denominator, because that denominator is the sum over all");
             sb.AppendLine("families, filtered or not.");
+            sb.AppendLine("Decoys are hidden by default; Show automatic IDs reveals the retained USearch ID.");
+            sb.AppendLine("Hide contaminants matches the case-sensitive prefix '" + SequenceLabels.ContaminantPrefix +
+                          "', after one optional '" + SequenceLabels.DecoyPrefix + "' prefix.");
+            sb.AppendLine("It includes labelled keratins, trypsin and serum proteins; hiding them affects the");
+            sb.AppendLine("table and visible-row CSV only, so visible identified-signal shares can total below 100%.");
             sb.AppendLine();
             sb.AppendLine("Export to CSV writes exactly the rows you can see, with the values as fractions");
             sb.AppendLine("between 0 and 1 and a dot as the decimal separator, whatever your machine's");
@@ -450,7 +479,7 @@ namespace FamilyQuant
 
             sb.AppendLine("THE FIVE VERDICTS, IN PLAIN LANGUAGE");
             sb.AppendLine("------------------------------------");
-            sb.AppendLine("Layer 2 first joins by normalized acquisition file and MS2 scan. It then requires");
+            sb.AppendLine("Reconcile first joins by normalized acquisition file and MS2 scan. It then requires");
             sb.AppendLine("the same reported charge and precursor m/z within 20 ppm, isotope-error-aware so");
             sb.AppendLine("the M, M+-1 and M+-2 selections of one precursor match, before comparing sequences.");
             sb.AppendLine("Each filtered row from the selected source receives one of five verdicts:");
