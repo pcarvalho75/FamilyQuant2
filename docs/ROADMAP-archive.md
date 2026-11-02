@@ -152,6 +152,7 @@ Finished steps, moved here from docs/ROADMAP.md. The board shows them as green.
 | B10a | Core: complete tables for minimum tag lengths 7 to 15, stored with the result | M | 0.1 | 🟢 | B10b, B10c | Each length equals a run at that length alone; on master | OP | not started | 0% | 0% | T+0 |
 | B10c | Database gap screen: table by length, 7 to 15 | M | 0.5 | 🟢 | B10d | Both themes; every number read from Core | RS | not started | 0% | 0% | T+1 |
 | B10d | The chosen length drives the result, the CSV and the FASTA, and is stored in the project | M | 0.5 | B10c | B10e | Save, close and reopen keep the choice | RS | not started | 0% | 0% | T+1 |
+| B10b | Default length 8 in Core, tests, rule text and docs | L | 0.3 | 🟢 | B10e | Choosing 9 reproduces the B6 table byte for byte | OP | not started | 0% | 0% | T+0 |
 
 ### W2 Port gaps found by the proofs
 
