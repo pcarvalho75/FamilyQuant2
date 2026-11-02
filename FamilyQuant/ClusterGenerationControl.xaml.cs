@@ -117,6 +117,7 @@ namespace FamilyQuant
             ViewModel = new CurationViewModel(fcf);
             undoStack = ViewModel.UndoStack;
             DataContext = ViewModel;
+            InitializeFamilyView();
             QuantitationPanel.DataContext = Quantitation;
             ViewModel.DocumentChanged += (_, _) => DocumentChanged?.Invoke(this, EventArgs.Empty);
             Quantitation.Refreshed += (_, _) => UpdateGUI();

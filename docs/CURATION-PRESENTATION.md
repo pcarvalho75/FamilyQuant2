@@ -51,3 +51,25 @@ status/Help record. Disconnected controls never open a native dialog.
 staged PatternLab publication, stale membership, native browse preferences,
 headless refusal and one shared standalone overlay. These fixture checks do not
 replace fresh RAW validation or prove every ledger observation.
+
+## Family overview
+
+C2 projects the current families beside the protein table. Selecting a family
+shows its currently filtered protein rows; All proteins removes that selection.
+These display choices raise no document-change event. The protein count is the
+whole family's target count; its tooltip also gives the visible row count.
+
+Names use `FamilyNaming`, with the same membership order and annotation rule as
+the production exports. Editing a family name annotates all its target members,
+including filtered members, in one Undo step. Lock changes are bound to the
+stored lock set, so mouse, keyboard and accessibility toggles share one operation.
+
+Family shares use the existing per-family values once, rather than summing the
+same share repeated on its protein rows. PatternLab's column appears only after
+its displayed calculation has a known mode. Both column headings follow the
+protein table's actual denominator. This view introduces no quantitation rule.
+
+The family/member dictionaries are rebuilt after document changes or display
+filters; selection looks up the already indexed rows. `--test-family-view`
+exercises the native actions and scrolls/selects the last of 39,996 fixture families
+while checking recycling virtualization and the realized row count.
