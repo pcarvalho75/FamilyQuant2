@@ -766,20 +766,27 @@ namespace FamilyQuant.Tests
             Check("Align Selected is disabled until rows are selected", !align.IsEnabled);
             Check("and its tooltip says so",
                 (align.ToolTip as string ?? "").Contains("two rows"), align.ToolTip as string);
-            Check("Create Super Cluster is disabled until a keyword is typed", !superCluster.IsEnabled);
+            Check("Group by keywords is available before any keyword is typed", superCluster.IsEnabled
+                && superCluster.Content as string == "Group by keywords");
             Check("Calculate FDR is disabled until a Family Cluster File has been generated", !fdr.IsEnabled);
 
-            var keywords = UiField<TextBox>(cluster, "TextBoxSuperClusterWording")!;
+            var keywordPreview = new SuperClusterPreview(Vipers(), null, "", "", KeywordMatch.All, null, null);
+            var keywordWindow = new SuperClusterPreviewWindow(keywordPreview);
+            LayoutAt((FrameworkElement)keywordWindow.Content, new Size(keywordWindow.Width, keywordWindow.Height), -1);
+            var keywordInputs = WalkTree((FrameworkElement)keywordWindow.Content).OfType<TextBox>()
+                .Where(t => t.TemplatedParent == null).ToList();
+            var keywords = keywordInputs.Single(t => (System.Windows.Data.BindingOperations.GetBinding(t, TextBox.TextProperty)?.Path.Path) == "KeywordsText");
             keywords.Text = "metalloproteinase";
-            Check("typing a keyword enables the super-cluster button", superCluster.IsEnabled);
+            Check("typing a keyword in review updates the preview", keywordPreview.KeywordsText == "metalloproteinase");
             keywords.Text = "";
-            Check("clearing it disables the button again", !superCluster.IsEnabled);
+            Check("clearing the review keywords disables Apply", !((GroupingReviewViewModel)keywordWindow.DataContext).CanConfirm);
 
             // The three new Layer-1 controls exist, carry tooltips (also enforced by the sweep above), and
             // start in the right state.
             var undo = UiField<Button>(cluster, "ButtonUndo")!;
-            var matchMode = UiField<ComboBox>(cluster, "ComboBoxSuperClusterMatch")!;
-            var superExclude = UiField<TextBox>(cluster, "TextBoxSuperClusterExclude")!;
+            var matchMode = WalkTree((FrameworkElement)keywordWindow.Content).OfType<ComboBox>()
+                .Single(t => System.Windows.Data.BindingOperations.GetBinding(t, System.Windows.Controls.Primitives.Selector.SelectedIndexProperty)?.Path.Path == "MatchIndex");
+            var superExclude = keywordInputs.Single(t => System.Windows.Data.BindingOperations.GetBinding(t, TextBox.TextProperty)?.Path.Path == "ExcludeText");
 
             Check("Undo starts disabled and explains what would enable it",
                 !undo.IsEnabled && (undo.ToolTip as string ?? "").Length > 100, undo.ToolTip as string);
@@ -806,6 +813,7 @@ namespace FamilyQuant.Tests
                 && (reclusterExclude.ToolTip as string ?? "").Contains("commas", StringComparison.Ordinal));
             superExclude.Text = "";
             reclusterExclude.Text = "";
+            keywordWindow.Close();
 
             // The headings must name the denominator, and must not claim one before anything is computed.
             var xicColumn = UiField<DataGridTextColumn>(cluster, "ColumnXicUser")!;
