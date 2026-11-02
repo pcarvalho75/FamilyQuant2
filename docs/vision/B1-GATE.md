@@ -140,12 +140,32 @@ What the study did not measure: the in-scope rule. It counted only how many of t
 no known answer fall outside the panel's families (29 of the 44 at 9 residues); the effect of crediting
 in-scope families only is B5's to measure, on the same known answers.
 
-By family at 9 residues (right among landed, table half / held-out half): metalloproteinase (M12B) 95/95,
-snaclec 91/97, peptidase S1 97/96, flavin monoamine oxidase 96/95, CRISP 98/98, true venom lectin 100/91,
-PDGF/VEGF 100/95, phospholipase A2 85/88, 5'-nucleotidase 100/100, NGF-beta 80/96, glutaminyl-peptide
-cyclotransferase 100/100, glycosyl hydrolase 56 100/100. Phospholipase A2 stays the weakest family: 67% to 85%
-in the table half at every length, 77% to 88% in the held-out half up to 14 residues. It must be reported with
-its own rate, never inside a mean.
+By family at 9 residues, right among landed, table half then held-out half (from
+`family_world_gate_study_by_family.csv`):
+
+| Family | Table half | Held-out half |
+|---|---:|---:|
+| venom metalloproteinase (M12B) | 243 of 256 (95%) | 273 of 286 (95%) |
+| peptidase S1 | 223 of 231 (97%) | 271 of 283 (96%) |
+| snaclec | 179 of 196 (91%) | 184 of 189 (97%) |
+| flavin monoamine oxidase | 97 of 101 (96%) | 71 of 75 (95%) |
+| CRISP | 44 of 45 (98%) | 47 of 48 (98%) |
+| true venom lectin | 47 of 47 (100%) | 20 of 22 (91%) |
+| PDGF/VEGF growth factor | 20 of 20 (100%) | 20 of 21 (95%) |
+| phospholipase A2 | 22 of 26 (85%) | 7 of 8 (88%) |
+| 5'-nucleotidase | 19 of 19 (100%) | 29 of 29 (100%) |
+| glutaminyl-peptide cyclotransferase | 11 of 11 (100%) | 14 of 14 (100%) |
+| NGF-beta | 4 of 5 (80%) | 23 of 24 (96%) |
+| glycosyl hydrolase 56 | 3 of 3 | 6 of 6 |
+| sorting nexin | 0 of 4 | none landed |
+| fetuin, CNF-like-inhibitor, ERCC1/RAD10/SWI10 | 1 pair or none | 1 pair or none |
+
+Among the families with at least 20 landings in a half, phospholipase A2 is the weakest: 67% to 85% in
+the table half at every length, 77% to 88% in the held-out half up to 14 residues. It must be reported
+with its own rate, never inside a mean. The small families are worse on paper and say little: NGF-beta
+is 4 of 5 in the table half, and sorting nexin is wrong in all 4 of its landings (each credited to
+snaclec instead) and has none in the held-out half. On 5 or fewer pairs a rate means little either way;
+those families need more known answers before any rate is shown for them (B6).
 
 **Families with no known answer.** Without a length rule 170 such families took 232 credits, all wrong by
 construction, because no identified peptide of the sample vouches for them; at 9 residues 23 families take
