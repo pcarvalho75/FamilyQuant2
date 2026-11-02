@@ -131,6 +131,8 @@ Invoke each flag with `& $testExe <flag>` after building. Dispatch and arity are
 | `--test-report-study-boundary` | Report-only operation ownership, retained Core models and screen dependencies |
 | `--report-study-snapshot <new-output-dir>` | Six native synthetic text/PNG fixtures for source-move parity |
 | `--shell-checks` | Shell navigation, saving, preferences, Build/Quantify integration and secondary views |
+| `--test-shell-workflow` | Current workflow Help routes and retained quantitation facts through the shell status checks |
+| `--test-shell-evidence-cancel` | Shared Cancel reaches active protein/panel HTTP requests; staged publication, failure and late Cancel |
 | `--feature-ledger-check` | Inventory, row coverage, dispositions and guard regressions |
 | `--test-clustering-improvements` | X12 paired-letter, component-veto, native parse and contaminant diagnostic guards |
 | `--clustering-improvements <document> <FASTA> <output> <identity> [--small-exhaustive]` | Real-data diagnostic candidates; no product numerical change; bounded all-pairs only |
@@ -184,6 +186,12 @@ Companion options for `--screens` are `--screen-fcf <input.fcf>`, `--screen-proj
 | `--ledger-core-relocation <frozen-root> <fresh-output> X5/X7 <date> [member-mappings.json]` | Scoped complete Core member comparisons, exact frozen hashes, retained source/checker snapshots and per-row gaps; [guide](CORE-RELOCATION-LEDGER.md) |
 | `--ledger-shell-compare <frozen-root> <fresh-output> <date>` | SH and C1 exact declarations/member tokens; separate candidate registers, unproven rows kept OPEN |
 | `--ledger-storage-runtime <frozen-root> <fresh-output> <date> [--negative-control]` | Public project reader/writer schema, codec and refusal observations; [runtime guide](CORE-RUNTIME-LEDGER.md) |
+| `--prove-denovo-ledger <frozen-source-root> <fresh-output> <date>` | Scoped exact De novo declarations, retained snapshots and ledger receipts in batches of 250; [guide](DENOVO-PRESERVATION.md) |
+| `--prove-denovo-runtime <frozen-source-root> <frozen-app-folder> <fresh-output> <date>` | Native frozen/current controls and resolved values across both themes and three legacy sources |
+| `--ledger-shell-compare <frozen-root> <fresh-output> <date>` | SH and C1 exact declarations/member tokens; separate candidate registers, unproven rows kept OPEN |
+| `--ledger-core-relocation <frozen-root> <fresh-output> X5/X7 <date> [member-mappings.json]` | Scoped complete Core member comparisons, exact frozen hashes, retained source/checker snapshots and per-row gaps; [guide](CORE-RELOCATION-LEDGER.md) |
+| `--ledger-core-relocation <frozen-root> <fresh-output> X5/X7 <date> [member-mappings.json]` | Scoped complete Core member comparisons, exact frozen hashes, retained source/checker snapshots and per-row gaps; [guide](CORE-RELOCATION-LEDGER.md) |
+| `--ledger-shell-compare <frozen-root> <fresh-output> <date>` | SH and C1 exact declarations/member tokens; separate candidate registers, unproven rows kept OPEN |
 | `--word-grouping-snapshot <input.fcf-or-fqproj> <output.txt>` | [WordGroupingSnapshot.cs](../FamilyQuant.Tests/WordGroupingSnapshot.cs), also linked into frozen host |
 | `--chart-export-snapshot <output-dir>` | [ChartExportSnapshot.cs](../FamilyQuant.Tests/ChartExportSnapshot.cs), synthetic chart parity fixtures |
 | `--clustering-snapshot <input.fasta> <output.tsv> <integer-identity> <fast-or-exhaustive>` | [ClusteringSnapshot.cs](../FamilyQuant.Tests/ClusteringSnapshot.cs) |
