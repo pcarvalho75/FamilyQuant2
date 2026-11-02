@@ -164,6 +164,7 @@ Finished steps, moved here from docs/ROADMAP.md. The board shows them as green.
 | Y4 | Homology tooltip gets its output-row fact back | L | 0.2 | 🟢 | R3a | Fact shown; two sentences at most | RS | not started | 0% | 0% | T+2 |
 | Y5 | No organism or venom wording in anything the user sees, with a guard | L | 0.3 | 🟢 | R3a | Guard red on a planted word; facts kept | LK | not started | 0% | 0% | T+0 |
 | Y3 | Five source captions get their filename patterns and Union prefixes back | L | 0.2 | 🟢 | R3a | Five facts shown in both themes | EV | not started | 0% | 0% | T+0 |
+| Y6 | Lost facts restored: the rows where the old fact no longer reaches the user | M | 0.5 | 🟢 | R3a | Each fact shown again, or listed for Paulo with a reason | LK | not started | 0% | 0% | T+0 |
 
 ### W3 Ledger, screen by screen
 
