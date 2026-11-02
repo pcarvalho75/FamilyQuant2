@@ -9,6 +9,8 @@ This is the navigation index for the current checkout. The roadmap owns unfinish
 | [CLAUDE.md](../CLAUDE.md) | Current projects, build/test setup, scientific invariants and implementation guidance |
 | [Architecture](ARCHITECTURE.md) | Current boundaries, planned Reports/operation host, budgets and historical destination inventory |
 | [Core operations](CORE-OPERATIONS.md) | Progress, cancellation, outcomes and atomic publication |
+| [App operations](APP-OPERATIONS.md) | Busy host, overlay and publication adapters |
+| [Shell dialogs](SHELL-DIALOGS.md) | Headless messages, browse preferences and protected C1 adoption |
 | [Clustering refactor](CLUSTERING-REFACTOR.md) | Result contracts and bounded frozen/current comparison |
 | [Dependencies](DEPENDENCIES.md) | Package decisions, cache compatibility and real-file opening checks |
 | [Test commands](TEST-COMMANDS.md) | Feature-owned command tables and adding a flag without editing Main |
@@ -72,6 +74,7 @@ Invoke each flag with `& $testExe <flag>` after building. Dispatch and arity are
 | `--test-inputs` | Real-data argument-selection contract, without choosing Desktop fallbacks |
 | `--test-operations` | Core outcomes, progress, cancellation and the owned native-child fixture |
 | `--test-busy` | App operation host, running-command cancellation, prior file bytes and guarded publication |
+| `--test-shell-dialogs [--after-busy]` | Browse callers, folder preference, accept/cancel, owned windows and headless messages; optional busy-group setup first |
 | `--test-clustering-results` | Typed clustering/redundancy results and native synthetic fixtures |
 | `--test-identity-study` | Probe parser and grid-versus-probe interpretation |
 | `--test-results` | Results view-model readiness and export choices |
@@ -82,6 +85,7 @@ Invoke each flag with `& $testExe <flag>` after building. Dispatch and arity are
 | `--test-curation-view` | Persistent table, accession/full identifier, hidden defaults and native annotation edit/Undo |
 | `--test-curation-layout` | Retained chrome, tooltips and ancestor-clipping regression |
 | `--test-curation-quantitation` | Full-XIC column, denominator changes, shared policy and unavailable-TIC fallback |
+| `--test-architecture-group-split [output-dir]` | Native per-key split choices, retained bulk choice, unsplit members staying together, exact recipe replay and optional synthetic captures |
 | `--shell-checks` | Shell navigation, saving, preferences, Build/Quantify integration and secondary views |
 | `--feature-ledger-check` | Inventory, row coverage, dispositions and guard regressions |
 | `--feature-ledger-release-check` | Same inventory with all retained rows required VERIFIED; OPEN rows intentionally fail |

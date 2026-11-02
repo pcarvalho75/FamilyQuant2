@@ -74,6 +74,7 @@ namespace FamilyQuant.Tests
             WordClusterTests();
             QuantifyViewModelTests(workDir);
             BusyOperationTests(workDir);
+            ShellDialogTests(workDir);
             ResultsViewModelTests();
             DeNovoViewModelTests(workDir);
             HomologyResultsTests(workDir);
@@ -260,6 +261,7 @@ namespace FamilyQuant.Tests
             EvidenceTaskScopeWindowTests(Path.Combine(workDir, "task-scope"));
             GroupingReviewInteractionTests();
             EvidenceGroupingFlowTests();
+            ArchitectureGroupSplitTests();
             ArchitectureMemberViewTests();
             EvidenceFetchCoordinatorTests();
             CurationSaveResultTests(workDir);
