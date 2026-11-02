@@ -232,6 +232,7 @@ namespace FamilyQuant.Tests
             FamilyNamingTests();
             Section("Family composition - shared peptides counted once; the Full XIC column, its options and export");
             FamilyCompositionTests();
+            QuantitationStageTests();
             EnsureApplication();
             FullXicColumnUiTests(workDir);
             Section("De Novo screen - import, filter, reconcile and the review queue");

@@ -11,6 +11,7 @@ This is the navigation index for the current checkout. The roadmap owns unfinish
 | [Core operations](CORE-OPERATIONS.md) | Progress, cancellation, outcomes and atomic publication |
 | [App operations](APP-OPERATIONS.md) | Busy host, overlay and publication adapters |
 | [Shell dialogs](SHELL-DIALOGS.md) | Headless messages, browse preferences and protected C1 adoption |
+| [Quantitation stages](QUANTITATION-PIPELINE.md) | Full-XIC stage contracts, second-pass residual seam and focused parity checker |
 | [Clustering refactor](CLUSTERING-REFACTOR.md) | Result contracts and bounded frozen/current comparison |
 | [Dependencies](DEPENDENCIES.md) | Package decisions, cache compatibility and real-file opening checks |
 | [Test commands](TEST-COMMANDS.md) | Feature-owned command tables and adding a flag without editing Main |
@@ -71,6 +72,7 @@ Invoke each flag with `& $testExe <flag>` after building. Dispatch and arity are
 | `--list-test-commands` | Deterministic command table; executes no test or scientific handler |
 | `--test-document` | Document round trip, scoring and denominator attribution fixtures |
 | `--test-evidence-task` | File-derived taxonomy, keyword counts, confirmation and recipe replay fixtures |
+| `--test-quantitation-stages` | Prepared-peptide assignments, cross-side suppression, residual calibration, rollup and deterministic CSV |
 | `--test-inputs` | Real-data argument-selection contract, without choosing Desktop fallbacks |
 | `--test-operations` | Core outcomes, progress, cancellation and the owned native-child fixture |
 | `--test-busy` | App operation host, running-command cancellation, prior file bytes and guarded publication |
