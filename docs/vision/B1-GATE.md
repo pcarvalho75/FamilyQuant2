@@ -136,6 +136,13 @@ residues the table half is right in 94.61% of landings (913 of 965) and the held
 Against the unchanged bars, that is a pass on the held-out half and pooled, NOT on both halves: the table
 half stays between, 0.39 points under 95%. The landed share and the decoy rate pass.
 
+**Later, D22 (Paulo, 2026-11-02): the default moved to 8, and a person can choose any length from 7 to 15.**
+This page stays the record of the study at 9. Paulo chose 8 after the table by length on both worlds (B10,
+known answers searched in the world without the sample's species). Going from 9 to 8 added 1.06% of the
+residual on the 12-family world and 1.57% on the 40-family world. Decoys were 0.04% and 0.06% of what it
+added, and the known answers it added were 95.89% and 95.06% right. Going from 8 to 7 added more, but decoys
+were 8.81% and 24.87% of it, and its known answers were 88.24% and 73.24% right.
+
 What the study did not measure: the in-scope rule. It counted only how many of the credits to families with
 no known answer fall outside the panel's families (29 of the 44 at 9 residues); the effect of crediting
 in-scope families only is B5's to measure, on the same known answers.

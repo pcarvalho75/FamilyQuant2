@@ -41,7 +41,7 @@ internal static partial class Program
             Rows = new List<QuantRow>
             {
                 Row(NativeQuantFractions.SideIdentified, "ACDEFGHIK", 10, 30),
-                Row(NativeQuantFractions.SideDeNovo, "PEPTIDEK", 5, 11),
+                Row(NativeQuantFractions.SideDeNovo, "PEPTIDK", 5, 11),
                 Row(NativeQuantFractions.SideDeNovo, "WWWWWWWWWWK", 4, 9),
             },
             Manifest = new QuantManifest(),

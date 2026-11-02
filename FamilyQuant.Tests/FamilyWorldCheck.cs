@@ -458,10 +458,11 @@ namespace FamilyQuant.Tests
             Write(outDir, "family_world_gate_study_by_family.csv", studyFamilyCsv.ToString());
 
             // ---------------------------------------------------------------- the product pass under D11
-            // What B5 ships: a tag needs at least 9 residues and only the families in scope can be credited. The
+            // What B5 shipped: a tag needs at least 9 residues and only the families in scope can be credited. The
             // coverage is the product pass itself. The known answers are credited again under the same rule from the
-            // searches above, because a search does not depend on the rule that reads it.
-            var d11 = new FamilyWorldOptions();
+            // searches above, because a search does not depend on the rule that reads it. D11's 9 is kept here so this
+            // checker still reproduces the B1 record; the product default is now D22's 8.
+            var d11 = new FamilyWorldOptions { MinimumTagLength = 9 };
             Console.WriteLine();
             Log("product pass (D11): tags of at least " + N(d11.MinimumTagLength) + " residues, " + N(coverageWorld.ScopeFamilies.Count) +
                 " families in scope; searching");
@@ -932,7 +933,7 @@ namespace FamilyQuant.Tests
             FamilyWorld world = FamilyWorld.Build(all, new[] { "alpha family" });
             HomologyResult Find(FamilyWorld w, string tag) => HomologyMapper.SearchOne(tag, w.Database, new FamilyWorldOptions().SearchOptions());
             FamilyWorldCredit Search(FamilyWorld w, string tag) => w.Credit(Find(w, tag), w.Families, 0);
-            FamilyWorldCredit D11(FamilyWorld w, string tag) => w.Credit(Find(w, tag), w.ScopeFamilies, FamilyWorldOptions.DefaultMinimumTagLength);
+            FamilyWorldCredit Shipped(FamilyWorld w, string tag) => w.Credit(Find(w, tag), w.ScopeFamilies, FamilyWorldOptions.DefaultMinimumTagLength);
             string alphaTag = alpha.Substring(30, 12);
             string betaTag = beta.Substring(20, 12);
             string orphanTag = orphan.Substring(10, 12);
@@ -961,16 +962,17 @@ namespace FamilyQuant.Tests
                 FamilyWorld.IsRight(a, new[] { "Alpha family" }) && !FamilyWorld.IsRight(twoFamilies, new[] { "alpha family" })
                 && FamilyWorld.IsRight(twoFamilies, new[] { "alpha family", "beta family" }) && !FamilyWorld.IsRight(a, Array.Empty<string>()), null);
 
-            // ---- D11: a tag needs 9 residues, and only families in scope are credited (scope here: alpha)
-            check("family world fixture (D11): a 9-residue alpha tag is credited, an 8-residue one is too short",
-                D11(world, alpha.Substring(40, 9)).Outcome == FamilyWorldOutcome.Credited
-                && D11(world, alpha.Substring(60, 8)).Outcome == FamilyWorldOutcome.TooShort, null);
-            FamilyWorldCredit outOfScope = D11(world, betaTag);
+            // ---- D22: a tag needs 8 residues by default; D11: only families in scope are credited (scope here: alpha)
+            check("family world fixture (D22): the default minimum tag length is 8; an 8-residue alpha tag is credited, a 7-residue one is too short",
+                FamilyWorldOptions.DefaultMinimumTagLength == 8 && new FamilyWorldOptions().MinimumTagLength == 8
+                && Shipped(world, alpha.Substring(40, 8)).Outcome == FamilyWorldOutcome.Credited
+                && Shipped(world, alpha.Substring(60, 7)).Outcome == FamilyWorldOutcome.TooShort, null);
+            FamilyWorldCredit outOfScope = Shipped(world, betaTag);
             check("family world fixture (D11): a tag landing only on a family out of scope credits nothing and names it",
                 outOfScope.Outcome == FamilyWorldOutcome.OutOfScope && outOfScope.Families.Count == 0
                 && FamilyWorld.Join(outOfScope.OutOfScopeFamilies) == "beta family", outOfScope.Outcome.ToString());
             string dualTag = alpha.Substring(160, 12);
-            FamilyWorldCredit dual = D11(world, dualTag);
+            FamilyWorldCredit dual = Shipped(world, dualTag);
             check("family world fixture (D11): a tag reaching alpha and an out-of-scope family credits alpha alone and keeps the other apart",
                 dual.Outcome == FamilyWorldOutcome.Credited && FamilyWorld.Join(dual.Families) == "alpha family"
                 && FamilyWorld.Join(dual.OutOfScopeFamilies) == "gamma family"
@@ -995,7 +997,7 @@ namespace FamilyQuant.Tests
                 Row(NativeQuantFractions.SideDeNovo, "RRRRMMMMNNNNK", 4, 9),        // first pass: the sample's own family
                 Row(NativeQuantFractions.SideDeNovo, alpha.Substring(40, 9), 5, 11), // credited to alpha
                 Row(NativeQuantFractions.SideDeNovo, dualTag, 6, 13),                // credited to alpha, gamma kept apart
-                Row(NativeQuantFractions.SideDeNovo, alpha.Substring(60, 8), 7, 15), // too short
+                Row(NativeQuantFractions.SideDeNovo, alpha.Substring(60, 7), 7, 15), // too short
                 Row(NativeQuantFractions.SideDeNovo, betaTag, 8, 17),                // out of scope
                 Row(NativeQuantFractions.SideDeNovo, decoyTag, 9, 19),               // won by a reversed copy
                 Row(NativeQuantFractions.SideDeNovo, "DDDDDDDDDDDD", 3, 7),          // not in the world
@@ -1004,7 +1006,7 @@ namespace FamilyQuant.Tests
             List<NativePeptideQuant> prepared = FamilyEnvelopeQuant.PreparePeptides(rows);
             double EnvelopeOf(params string[] sequences) => prepared.Where(p => p.Side == NativeQuantFractions.SideDeNovo
                 && sequences.Select(DeNovoReconciler.NormalizeSequence).Contains(DeNovoReconciler.NormalizeSequence(p.Sequence))).Sum(p => p.ReferenceCalibratedEnvelope);
-            string[] residualSequences = { alpha.Substring(40, 9), dualTag, alpha.Substring(60, 8), betaTag, decoyTag, "DDDDDDDDDDDD" };
+            string[] residualSequences = { alpha.Substring(40, 9), dualTag, alpha.Substring(60, 7), betaTag, decoyTag, "DDDDDDDDDDDD" };
             check("family world pass fixture: the first pass keeps its own family and the second pass gets the other six de novo peptides",
                 pass.ResidualPeptides == 6 && Math.Abs(pass.ResidualEnvelope - EnvelopeOf(residualSequences)) < 1e-9,
                 pass.ResidualPeptides.ToString(CultureInfo.InvariantCulture));
@@ -1027,11 +1029,11 @@ namespace FamilyQuant.Tests
             double closed = pass.Families.Sum(f => f.UniqueEnvelope) + pass.SharedEnvelope
                 + Enum.GetValues<FamilyWorldOutcome>().Where(o => o != FamilyWorldOutcome.Credited).Sum(o => pass.Envelope(o));
             check("family world pass fixture: family parts, shared row and the other outcomes close on the residual",
-                Math.Abs(closed - pass.ResidualEnvelope) < 1e-9 && pass.MinimumTagLength == 9 && pass.CreditableFamilies.SequenceEqual(new[] { "alpha family" }), null);
+                Math.Abs(closed - pass.ResidualEnvelope) < 1e-9 && pass.MinimumTagLength == 8 && pass.CreditableFamilies.SequenceEqual(new[] { "alpha family" }), null);
             string csv = FamilyWorldPass.BuildCsv(pass);
             string[] csvLines = csv.TrimEnd('\n').Split('\n');
             check("family world pass fixture: the export has one family row, seven closing rows and the rules on every row",
-                csvLines.Length == 9 && csvLines.Skip(1).All(l => l.Contains("tags of at least 9 residues", StringComparison.Ordinal)
+                csvLines.Length == 9 && csvLines.Skip(1).All(l => l.Contains("tags of at least 8 residues", StringComparison.Ordinal)
                     && l.Contains("only families in scope can be credited (1)", StringComparison.Ordinal)), csvLines.Length.ToString(CultureInfo.InvariantCulture));
             CultureInfo culture = CultureInfo.CurrentCulture;
             string again, brazil;
@@ -1067,7 +1069,7 @@ namespace FamilyQuant.Tests
             {
                 Spectrum(alpha.Substring(30, 12), alpha.Substring(30, 12), null),             // alpha, right through the other species
                 Spectrum(alpha.Substring(30, 12), alpha.Substring(30, 12), alpha.Substring(30, 12)), // the same pair again, two more calls
-                Spectrum(alpha.Substring(40, 12), null, alpha.Substring(40, 8)),              // too short under D11
+                Spectrum(alpha.Substring(40, 12), null, alpha.Substring(40, 7)),              // too short by default
                 Spectrum(beta.Substring(20, 12), beta.Substring(20, 12), null),               // beta is out of scope
                 Spectrum(beta.Substring(20, 12), alpha.Substring(50, 12), null),              // a wrong call: credited alpha, truly beta
                 Spectrum(alpha.Substring(70, 12), alpha.Substring(70, 12), null, accepted: false), // not accepted: no answer
@@ -1082,7 +1084,7 @@ namespace FamilyQuant.Tests
             FamilyWorldErrors.Credit(answers, withoutOne, withoutOne.ScopeFamilies, new FamilyWorldOptions());
             FamilyWorldKnownAnswer Answer(string tag) => answers.Single(a => a.Tag == DeNovoReconciler.NormalizeSequence(tag));
             check("family world errors fixture: each known answer is credited under D11 in the world without its species",
-                Answer(alpha.Substring(30, 12)).Right && Answer(alpha.Substring(40, 8)).Credit!.Outcome == FamilyWorldOutcome.TooShort
+                Answer(alpha.Substring(30, 12)).Right && Answer(alpha.Substring(40, 7)).Credit!.Outcome == FamilyWorldOutcome.TooShort
                 && Answer(beta.Substring(20, 12)).Credit!.Outcome == FamilyWorldOutcome.OutOfScope
                 && Answer(alpha.Substring(50, 12)).Landed && !Answer(alpha.Substring(50, 12)).Right, null);
             FamilyWorldSummary floor10 = FamilyWorldErrors.Summarize(pass, answers, "fixture", new[] { "111" });
@@ -1193,8 +1195,8 @@ namespace FamilyQuant.Tests
             List<FamilyWorldLengthEstimate>? estimates = chosenTable.LengthEstimates;
             chosenTable.Lengths = null;
             chosenTable.LengthEstimates = null;
-            check("family world lengths fixture (B10): the default table is the one-length analysis at 9, byte for byte",
-                chosenTable.MinimumTagLength == 9 && Json(chosenTable) == Json(Single(9).Summary), null);
+            check("family world lengths fixture (B10): the default table is the one-length analysis at 8, byte for byte",
+                chosenTable.MinimumTagLength == 8 && Json(chosenTable) == Json(Single(8).Summary), null);
             chosenTable.Lengths = lengthTables;
             chosenTable.LengthEstimates = estimates;
             check("family world lengths fixture (B10): every length 7 to 15 has its complete table, equal to an analysis at that length alone",
