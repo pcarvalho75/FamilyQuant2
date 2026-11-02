@@ -84,6 +84,31 @@ internal static partial class Program
         Check("receipt rejects an unknown run", !Valid(row with { Proofs = new() { proof with { RunId = "missing" } } }));
         Check("receipt rejects a missing implementation", !Valid(row with { Implementation = new() }));
         Check("receipt rejects an altered implementation hash", !Valid(row with { Implementation = new() { source with { Sha256 = new string('0', 64) } } }));
+        byte[] implementationBytes = File.ReadAllBytes(Path.Combine(root, source.Path));
+        byte[] Eol(byte[] bytes, bool crlf)
+        {
+            using var result = new MemoryStream();
+            for (int i = 0; i < bytes.Length; i++)
+            {
+                if (bytes[i] == 13 && i + 1 < bytes.Length && bytes[i + 1] == 10) continue;
+                if (bytes[i] == 10 && crlf) result.WriteByte(13);
+                result.WriteByte(bytes[i]);
+            }
+            return result.ToArray();
+        }
+        string ByteHash(byte[] bytes) => Convert.ToHexString(System.Security.Cryptography.SHA256.HashData(bytes));
+        var lfSource = source with { Sha256 = ByteHash(Eol(implementationBytes, false)) };
+        var crlfSource = source with { Sha256 = ByteHash(Eol(implementationBytes, true)) };
+        Check("current source receipt accepts the same bytes with LF line endings", Valid(row with { Implementation = new() { lfSource } }));
+        Check("current source receipt accepts the same bytes with CRLF line endings", Valid(row with { Implementation = new() { crlfSource } }));
+        byte[] changedCharacter = Eol(implementationBytes, false);
+        changedCharacter[Array.IndexOf(changedCharacter, (byte)'u')] = (byte)'v';
+        Check("current source EOL tolerance still rejects one changed character", !Valid(row with
+            { Implementation = new() { source with { Sha256 = ByteHash(changedCharacter) } } }));
+        Check("retained assertion artifacts still require exact line-ending bytes", !Valid(row, run with
+            { Artifacts = new() { new(log, ByteHash(Eol(File.ReadAllBytes(log), true))), new(png, FeatureLedgerEvidence.Hash(png)) } }));
+        Check("the shared frozen and artifact hash remains byte-exact", FeatureLedgerEvidence.Hash(Path.Combine(root, source.Path))
+            == ByteHash(implementationBytes) && ByteHash(Eol(implementationBytes, false)) != ByteHash(Eol(implementationBytes, true)));
         Check("receipt rejects an implementation outside this worktree", !Valid(row with
             { Implementation = new() { source with { Path = "../outside.cs" } } }));
         Check("receipt rejects a missing artifact", !Valid(row with { Proofs = new() { proof with { Artifact = log + ".missing" } } }));
