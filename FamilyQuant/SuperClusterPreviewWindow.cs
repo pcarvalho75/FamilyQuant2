@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -19,10 +21,12 @@ namespace FamilyQuant
         public SuperClusterPreviewWindow(SuperClusterPreview preview) : this(preview, null, null) { }
         public SuperClusterPreviewWindow(SuperClusterPreview preview, EvidenceReviewInput? input,
             Func<string, EvidenceReviewInput>? propose, Func<string, string>? motif = null,
-            string initialScope = "", bool evidenceMode = false)
+            string initialScope = "", bool evidenceMode = false,
+            Func<CancellationToken, Task<EvidenceTaskScopeInput>>? discoverTask = null)
         {
             InitializeComponent();
-            model = new GroupingReviewViewModel(preview, input, propose, motif, initialScope, evidenceMode);
+            model = new GroupingReviewViewModel(preview, input, propose, motif, initialScope, evidenceMode, discoverTask);
+            Loaded += async (_, _) => await DiscoverInitialTaskAsync();
             Closed += (_, _) => model.CancelPending();
             DataContext = model;
             model.Keyword.Refreshing += (_, _) => sorts = grid.Items.SortDescriptions.ToList();
@@ -34,6 +38,16 @@ namespace FamilyQuant
             InstallKeywordHeaders();
             model.Keyword.Refresh();
         }
+        private async Task DiscoverInitialTaskAsync()
+        {
+            if (model.ModeIndex == 1 && model.TaskDiscoveryAvailable && !model.HasTaskScope)
+                await model.DiscoverTaskAsync();
+        }
+        private async void ReviewModeChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (IsLoaded && ReferenceEquals(e.OriginalSource, sender)) await DiscoverInitialTaskAsync();
+        }
+        private async void DiscoverTask_Click(object sender, RoutedEventArgs e) => await model.DiscoverTaskAsync();
         private void RestoreSort()
         {
             grid.Items.SortDescriptions.Clear();

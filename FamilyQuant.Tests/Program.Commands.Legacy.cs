@@ -24,7 +24,7 @@ internal static partial class Program
     [TestCommandTable]
     private static IEnumerable<TestCommand> LegacyCommandTable() =>
     [
-        new("--test-keyword-command", 300, TestCommandPhase.Raw, MatchesCommand003, RunCommand003),
+        new("--test-keyword-command", 50, TestCommandPhase.Raw, MatchesCommand003, RunCommand003),
         new("--test-ui-icons", 400, TestCommandPhase.Raw, MatchesCommand004, RunCommand004),
         new(IdentitySearchStudy.Argument, 500, TestCommandPhase.Raw, MatchesCommand005, RunCommand005),
         new("--test-identity-study", 600, TestCommandPhase.Raw, MatchesCommand006, RunCommand006),

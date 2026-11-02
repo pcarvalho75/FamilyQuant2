@@ -1,5 +1,7 @@
 using System;
 using System.ComponentModel;
+using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace FamilyQuant
@@ -12,13 +14,22 @@ namespace FamilyQuant
         private string proposalScope = "";
         private string checkedMotifPattern = "", motifReport = "";
         private bool isBusy;
+        private bool taskScopeExpanded = true;
         private int generation;
         private readonly Func<string, EvidenceReviewInput>? propose;
         private readonly Func<string, string>? motif;
+        private readonly Func<CancellationToken, Task<EvidenceTaskScopeInput>>? discoverTask;
+        private CancellationTokenSource? discoveryCancellation;
+        public EvidenceTaskScopeInput? TaskScope { get; private set; }
+        public bool TaskDiscoveryAvailable => discoverTask != null;
+        public bool HasTaskScope => TaskScope != null;
+        public bool CanDiscoverTask => discoverTask != null && !IsBusy;
+        public bool CanEdit => !IsBusy;
+        public bool TaskScopeExpanded { get => taskScopeExpanded; set => Set(ref taskScopeExpanded, value); }
         public KeywordReviewViewModel Keyword { get; }
         public EvidenceReviewViewModel? Evidence => evidence;
         public bool EvidenceAvailable => evidence != null || propose != null;
-        public bool IsBusy { get => isBusy; private set { isBusy = value; Changed(); Changed(nameof(CanUpdateProposal)); Changed(nameof(CanCheckMotif)); NotifySummary(); } }
+        public bool IsBusy { get => isBusy; private set { isBusy = value; Changed(); Changed(nameof(CanEdit)); Changed(nameof(CanDiscoverTask)); Changed(nameof(CanUpdateProposal)); Changed(nameof(CanCheckMotif)); NotifySummary(); } }
         public bool CanUpdateProposal => propose != null && !IsBusy && !string.IsNullOrWhiteSpace(ScopeText);
         public bool CanCheckMotif => motif != null && !IsBusy && Evidence != null && !string.IsNullOrWhiteSpace(MotifPattern);
         public int ModeIndex { get => modeIndex; set { modeIndex = value; Changed(); NotifySummary(); } }
@@ -31,13 +42,41 @@ namespace FamilyQuant
             && (MotifPattern.Length == 0 || checkedMotifPattern == MotifPattern) : Keyword.CanCreate);
         public GroupingReviewViewModel(SuperClusterPreview keyword, EvidenceReviewInput? input = null,
             Func<string, EvidenceReviewInput>? propose = null, Func<string, string>? motif = null,
-            string initialScope = "", bool evidenceMode = false)
+            string initialScope = "", bool evidenceMode = false,
+            Func<CancellationToken, Task<EvidenceTaskScopeInput>>? discoverTask = null)
         {
             Keyword = new KeywordReviewViewModel(keyword); this.propose = propose; this.motif = motif;
+            this.discoverTask = discoverTask;
             scopeText = initialScope; proposalScope = initialScope;
             Keyword.PropertyChanged += (_, _) => NotifySummary();
             SetEvidence(input);
             modeIndex = input != null || evidenceMode ? 1 : 0;
+        }
+        public async Task DiscoverTaskAsync()
+        {
+            if (!CanDiscoverTask) return;
+            int request = ++generation;
+            using var cancellation = new CancellationTokenSource();
+            discoveryCancellation = cancellation;
+            IsBusy = true; Status = "Reading the database taxonomy and reviewed keyword counts...";
+            try
+            {
+                var facts = await discoverTask!(cancellation.Token);
+                if (request != generation || cancellation.IsCancellationRequested) return;
+                TaskScope = facts; Changed(nameof(TaskScope)); Changed(nameof(HasTaskScope));
+                TaskScopeExpanded = true;
+                // Preserve every supplied phrase through the same parser used by the grouping command.
+                string suggested = string.Join(", ", facts.ProposedScopeTerms.Select(t => "\"" + t + "\""));
+                if (string.IsNullOrWhiteSpace(ScopeText)) ScopeText = suggested;
+                Status = "Review the database taxa and keyword counts, then confirm or edit the scope with Update proposal.";
+            }
+            catch (OperationCanceledException) { if (request == generation) Status = "Task discovery cancelled. You may enter a manual scope."; }
+            catch (Exception ex) { if (request == generation) Status = ex.Message; }
+            finally
+            {
+                if (ReferenceEquals(discoveryCancellation, cancellation)) discoveryCancellation = null;
+                if (request == generation) IsBusy = false;
+            }
         }
         public async Task UpdateProposalAsync()
         {
@@ -51,12 +90,13 @@ namespace FamilyQuant
                 if (request != generation) return;
                 if (ScopeText != requestedScope) { Status = "Scope changed. Update the proposal before applying."; return; }
                 proposalScope = requestedScope; SetEvidence(input);
+                TaskScopeExpanded = false;
                 Status = "Proposal updated. Review the ticks before applying.";
             }
             catch (Exception ex) { if (request == generation) Status = ex.Message; }
             finally { if (request == generation) IsBusy = false; }
         }
-        public void CancelPending() { generation++; IsBusy = false; }
+        public void CancelPending() { generation++; discoveryCancellation?.Cancel(); IsBusy = false; }
         public async Task CheckMotifAsync()
         {
             if (!CanCheckMotif) return;

@@ -55,8 +55,7 @@ public partial class AnalyticsControl : UserControl
         if (Data == null) return;
         foreach (var figure in AnalyticsFigures.Build(Data, Families, FamilyTopN, FamilyAsPercent))
         {
-            if (figure.Chart is IPalettedChart chart) chart.Palette = ChartPalette.For(Themes.ThemeManager.Effective == Themes.AppTheme.Light
-                ? ChartPaletteVariant.Light : ChartPaletteVariant.Dark);
+            if (figure.Chart is IPalettedChart chart) chart.Palette = ChartPalette.UiPalette;
             PanelCharts.Children.Add(new Border { Height = figure.ScreenHeight, Margin = new Thickness(0, 0, 0, 12), Child = figure.Chart });
         }
     }

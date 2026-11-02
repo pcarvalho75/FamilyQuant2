@@ -7,6 +7,12 @@ values use the same ink as labels; small status text can indicate readiness or a
 problem. Dark is the default, selected by Paulo.
 The View menu keeps Light, Dark and the Windows setting available. Shared typography/table roles are described in [STYLE-GUIDE.md](STYLE-GUIDE.md). `ChartPalette.UiPalette` snapshots current tokens for on-screen charts, while export palettes remain pinned.
 
+Every hosted chart refreshes that snapshot on load and theme changes, and detaches
+its theme subscription on unload. Reopening a chart takes the current tokens.
+Results also applies tokens when it creates or replaces a chart. Detached chart
+defaults and explicit PNG export palettes retain their historical colours and
+geometry, including the legacy three-way diagnostic.
+
 `Tokens.xaml` is the one place for colour values and the shared spacing, type and
 radius scale. `Controls.xaml` inherits the built-in Fluent control styles. It does
 not copy their templates. `ThemeManager.Apply` switches both Fluent `ThemeMode`

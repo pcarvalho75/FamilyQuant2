@@ -254,6 +254,9 @@ namespace FamilyQuant.Tests
             KeywordCommandTests();
             TableAppearanceTests();
             EvidenceReviewModelTests();
+            EvidenceTaskScopeTests();
+            EvidenceTaskScopeRecipeTests();
+            EvidenceTaskScopeWindowTests(Path.Combine(workDir, "task-scope"));
             GroupingReviewInteractionTests();
             EvidenceGroupingFlowTests();
             ArchitectureMemberViewTests();

@@ -24,6 +24,8 @@ internal static partial class Program
     internal static readonly string[] PreservedCommandFlags =
     [
         "--list-test-commands",
+        "--test-evidence-task-scope",
+        "--test-chart-themes",
         "--evidence-task-check",
         "--test-evidence-task",
         "--busy-screens",

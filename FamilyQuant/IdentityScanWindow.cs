@@ -39,9 +39,6 @@ namespace FamilyQuant
             grid.RowDefinitions.Add(new() { Height = new GridLength(1, GridUnitType.Star) });
             grid.Children.Add(SecondaryWindowView.Text("Compare family counts and target-decoy mixing across the tested identities.", true));
             var chart = new IdentityScanChart(model.Rows, model.CurrentIdentity, ChartPalette.UiPalette);
-            EventHandler updatePalette = (_, _) => chart.Palette = ChartPalette.UiPalette;
-            Themes.ThemeManager.ThemeChanged += updatePalette;
-            window.Closed += (_, _) => Themes.ThemeManager.ThemeChanged -= updatePalette;
             Grid.SetRow(chart, 1); grid.Children.Add(chart);
             var status = SecondaryWindowView.Text("", true);
             status.Margin = new Thickness(12, 0, 0, 0); status.VerticalAlignment = VerticalAlignment.Center;

@@ -38,3 +38,13 @@ Discovery changes no file state. Cancellation, service failure, incomplete taxon
 release or a source edit during fetching returns no proposal. The native fixture command is
 `--test-evidence-task`; `--evidence-task-check <evidence.fcf> <new-report.json>` writes a read-only
 live discovery report. Neither command creates an applied grouping.
+
+In the grouping review window, the Evidence tab reads database taxa and the scope proposal.
+It shows supplied taxon identifiers, the clade, total targets, ignored contaminants, keyword
+counts and their distinct reviewed-accession denominator. Stored keyword-evidence releases
+remain separate from the taxonomy/vocabulary release. No per-taxon protein count is inferred.
+Edit or keep the suggested scope and choose Update proposal to confirm it through Core.
+Apply grouping stores that confirmation with the recipe. Editing the scope again disables
+Apply until the proposal is updated. Discovery failure leaves manual scope entry available;
+closing the window cancels discovery and rejects late facts. `--test-evidence-task-scope`
+checks the native edit/confirmation path, saved recipe replay and both themes.
