@@ -1609,13 +1609,6 @@ namespace FamilyQuant
             UpdateFilteredResults();
         }
 
-        private void TextBoxSuperClusterWording_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            if (ButtonSuperCluster == null) return;
-
-            ButtonSuperCluster.IsEnabled = !string.IsNullOrWhiteSpace(TextBoxSuperClusterWording.Text);
-        }
-
         // ===================================================================== help
 
         private void ButtonHelp_Click(object sender, RoutedEventArgs e)
@@ -1774,30 +1767,13 @@ namespace FamilyQuant
         }
 
         private bool superClusterRunning;
+        private string keywordReviewText = string.Empty;
+        private string keywordReviewExclude = string.Empty;
+        private KeywordMatch keywordReviewMatch = KeywordMatch.All;
 
         private async Task RunSuperCluster()
         {
-            // Single words as before; a "quoted phrase" is one keyword matched as consecutive words.
-            List<string> keywords = WordCluster.ParseKeywords(TextBoxSuperClusterWording.Text);
-
             List<string> wordsToExclude = ReclusterExcludeWords();
-
-            // Default is "match all words" (the first item is selected in XAML): a multi-word phrase then
-            // pins one class instead of gathering everything that shares a single common word.
-            KeywordMatch match = ComboBoxSuperClusterMatch.SelectedIndex == 1
-                ? KeywordMatch.Any
-                : KeywordMatch.All;
-
-            if (keywords.Count == 0)
-            {
-                MessageBox.Show(
-                    "No super cluster was created: the keyword box is empty, so there is nothing to " +
-                    "match families against.\n\n" +
-                    "Next step: type one or more words that appear in the descriptions of the families you " +
-                    "want joined, separated by commas or spaces, for example: metalloproteinase, SVMP",
-                    "Type at least one keyword", MessageBoxButton.OK, MessageBoxImage.Information);
-                return;
-            }
 
             // Worked out on copies, off the interface thread: indexing a large file's descriptions takes
             // a moment, and the grid stays keyboard-reachable meanwhile.
@@ -1805,8 +1781,9 @@ namespace FamilyQuant
             HashSet<int>? searchFamilies = scoped ? new HashSet<int>(scopeItems.Select(i => i.UserID)) : null;
             List<FastaItemExtended> allItems = fcf.MyExtendedFastaItems.ToList();
             var lockedNow = new HashSet<int>(fcf.LockedUserIds);
-            string keywordsText = TextBoxSuperClusterWording.Text;
-            string excludeText = TextBoxSuperClusterExclude.Text;
+            string keywordsText = keywordReviewText;
+            string excludeText = keywordReviewExclude;
+            KeywordMatch match = keywordReviewMatch;
 
             SuperClusterPreview preview;
             BeginWait("Reading the descriptions for the preview...");
@@ -1824,10 +1801,10 @@ namespace FamilyQuant
 
             if (!ConfirmSuperCluster(preview)) return;
 
-            // What was settled in the preview stays in the boxes, so the next run starts from it.
-            TextBoxSuperClusterWording.Text = preview.KeywordsText;
-            TextBoxSuperClusterExclude.Text = preview.ExcludeText;
-            ComboBoxSuperClusterMatch.SelectedIndex = preview.Match == KeywordMatch.Any ? 1 : 0;
+            // Only accepted review settings become the starting point of the next review.
+            keywordReviewText = preview.KeywordsText;
+            keywordReviewExclude = preview.ExcludeText;
+            keywordReviewMatch = preview.Match;
 
             PerformClustering(preview);
         }
