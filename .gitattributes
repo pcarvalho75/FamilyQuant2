@@ -62,5 +62,4 @@
 #*.rtf   diff=astextplain
 #*.RTF   diff=astextplain
 
-# Each step adds its own lines to the test entry point: keep both sides instead of conflicting.
-FamilyQuant.Tests/Program.cs merge=union
+# Test commands register in feature-owned tables. Keep normal conflict detection for C#.

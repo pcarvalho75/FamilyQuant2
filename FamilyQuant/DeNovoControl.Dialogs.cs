@@ -38,7 +38,7 @@ public partial class DeNovoControl
                 Title = "Choose the folder holding the selected de novo export"
             };
 
-            if (ofd.ShowDialog() != true) return;
+            if (!ShellDialogs.ShowFolder(this, "denovo.import", ofd)) return;
 
             TextBoxPeaksDirectory.Text = ofd.FolderName;
 
@@ -68,7 +68,7 @@ public partial class DeNovoControl
                 Title = "Choose a TRUSTED SEPro package (legacy unsafe deserialization)"
             };
 
-            if (ofd.ShowDialog() != true) return;
+            if (!ShellDialogs.ShowFile(this, "denovo.sepro", ofd)) return;
 
             TextBoxSeproPackage.Text = ofd.FileName;
 
@@ -90,7 +90,7 @@ public partial class DeNovoControl
                 Title = "Choose the project or family file to search against and map onto"
             };
 
-            if (ofd.ShowDialog() != true) return;
+            if (!ShellDialogs.ShowFile(this, "denovo.curation", ofd)) return;
 
             TextBoxHomologyFcf.Text = ofd.FileName;
 
@@ -151,7 +151,7 @@ public partial class DeNovoControl
                 Title = title
             };
 
-            if (sfd.ShowDialog() != true) return;
+            if (!ShellDialogs.ShowFile(this, "denovo.export." + suggestedName, sfd)) return;
             using var operation = AppOperationHost.For(this).Begin("Export de novo evidence");
 
             try

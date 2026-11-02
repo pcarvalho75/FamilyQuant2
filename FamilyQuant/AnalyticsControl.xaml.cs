@@ -55,8 +55,7 @@ public partial class AnalyticsControl : UserControl
         if (Data == null) return;
         foreach (var figure in AnalyticsFigures.Build(Data, Families, FamilyTopN, FamilyAsPercent))
         {
-            if (figure.Chart is IPalettedChart chart) chart.Palette = ChartPalette.For(Themes.ThemeManager.Effective == Themes.AppTheme.Light
-                ? ChartPaletteVariant.Light : ChartPaletteVariant.Dark);
+            if (figure.Chart is IPalettedChart chart) chart.Palette = ChartPalette.UiPalette;
             PanelCharts.Children.Add(new Border { Height = figure.ScreenHeight, Margin = new Thickness(0, 0, 0, 12), Child = figure.Chart });
         }
     }
@@ -74,7 +73,7 @@ public partial class AnalyticsControl : UserControl
         if (ViewModel.ExportKind is ResultsExportKind.Figures or ResultsExportKind.EvidencePack)
         {
             var dialog = new OpenFolderDialog { Title = "Choose the export folder" };
-            path = dialog.ShowDialog() == true ? dialog.FolderName : null;
+            path = ShellDialogs.ShowFolder(this, "results." + ViewModel.ExportKind, dialog) ? dialog.FolderName : null;
         }
         else
         {
@@ -83,7 +82,7 @@ public partial class AnalyticsControl : UserControl
                     ResultsExportKind.Summary => "familyquant_analytics_summary.csv",
                     ResultsExportKind.Homology => "FamilyQuant_DeNovo_Homology.csv",
                     _ => "familyquant_analytics_peptides.csv" }, Title = "Export results" };
-            path = dialog.ShowDialog() == true ? dialog.FileName : null;
+            path = ShellDialogs.ShowFile(this, "results." + ViewModel.ExportKind, dialog) ? dialog.FileName : null;
         }
         if (path != null) await ViewModel.ExportAsync(path, AppOperationHost.For(this));
     }

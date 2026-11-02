@@ -117,9 +117,7 @@ public partial class MainWindow
                 "FamilyQuant project (*.fqproj)|*.fqproj|Family Cluster File (*.fcf)|*.fcf",
             Title = "Open a project or Family Cluster File"
         };
-        PrepareFileDialog(dialog);
-        if (dialog.ShowDialog(this) != true) return null;
-        RememberFolder(dialog.FileName);
+        if (!ShellDialogs.ShowFile(this, "project.open", dialog)) return null;
         return dialog.FileName;
     }
 
@@ -134,17 +132,13 @@ public partial class MainWindow
             Title = "Save project as", FileName = string.IsNullOrWhiteSpace(lastFcfPath) ? "project.fqproj"
                 : Path.GetFileNameWithoutExtension(lastFcfPath) + ".fqproj"
         };
-        PrepareFileDialog(dialog);
-        if (dialog.ShowDialog(this) != true) return null;
-        RememberFolder(dialog.FileName);
+        if (!ShellDialogs.ShowFile(this, "project.save", dialog)) return null;
         return dialog.FileName;
     }
 
     private void ReportShellMessage(string message, string title, MessageBoxImage image)
     {
-        StatusModel.ShowMessage(message);
-        if (PresentationSource.FromVisual(this) != null)
-            MessageBox.Show(this, message, title, MessageBoxButton.OK, image);
+        ShellMessages.Report(this, message, title, image: image);
     }
 
     private void MenuItemRecent_SubmenuOpened(object sender, RoutedEventArgs e) => RefreshRecentMenu();

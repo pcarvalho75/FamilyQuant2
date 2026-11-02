@@ -46,6 +46,7 @@ internal static partial class Program
 
     private static void BusyOperationTests(string workDir)
     {
+        EnsureApplication();
         Section("Shared busy operation path");
         Check("shell exposes its shared operation host", typeof(MainWindow).GetProperty("Operations") != null);
         var build = new USearchLib();

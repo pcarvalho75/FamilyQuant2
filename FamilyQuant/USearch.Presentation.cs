@@ -34,10 +34,7 @@ public partial class USearchLib
             Filter = "Protein database (*.fasta;*.fa;*.fas;*.T-R;*.T)|*.fasta;*.fa;*.fas;*.T-R;*.T",
             Title = "Choose the protein database"
         };
-        var shell = Window.GetWindow(this) as MainWindow;
-        shell?.PrepareFileDialog(dialog);
-        if (dialog.ShowDialog() != true) return null;
-        shell?.RememberFolder(dialog.FileName);
+        if (!ShellDialogs.ShowFile(this, "build.database", dialog)) return null;
         return dialog.FileName;
     }
 
@@ -54,9 +51,8 @@ public partial class USearchLib
         ViewModel.Report(message.Split('\n')[0], message);
         TextBlockUSearchState.Text = ViewModel.Status;
         ShellStatusChanged?.Invoke(this, EventArgs.Empty);
-        if (buttons == MessageBoxButton.OK && image == MessageBoxImage.Information) return MessageBoxResult.OK;
-        if (PresentationSource.FromVisual(this) == null) return buttons == MessageBoxButton.YesNo ? MessageBoxResult.No : MessageBoxResult.Cancel;
-        return MessageBox.Show(message, title, buttons, image, defaultResult);
+        return ShellMessages.Report(this, message, title, buttons, image, defaultResult,
+            showDialog: !(buttons == MessageBoxButton.OK && image == MessageBoxImage.Information));
     }
 
     private void ButtonBuildHelp_Click(object sender, RoutedEventArgs args)

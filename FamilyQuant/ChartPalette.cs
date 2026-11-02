@@ -38,8 +38,8 @@ namespace FamilyQuant
     /// editing every chart. The brushes are named for what they MEAN (the identified series, the grid,
     /// the ink) and not for what they look like, so the same chart code draws either variant.
     ///
-    /// DARK is the screen palette and carries EXACTLY the values the charts hardcoded before this type
-    /// existed, so nothing on screen changes. It stays the default of every chart.
+    /// DARK carries EXACTLY the values the charts hardcoded before this type existed. Detached charts
+    /// keep it as their default; hosted charts follow UiPalette through ChartDrawingBase.
     ///
     /// LIGHT is the slide palette, and it is NOT the dark one with the background inverted. On white the
     /// dark palette's light blue (0x6FA8F0) and mint green (0x3FD39C) wash out - they carry about 2:1
@@ -152,6 +152,9 @@ namespace FamilyQuant
         /// unattributed residual.</summary>
         public Brush NotAFamily { get; private set; } = Brushes.Transparent;
 
+        /// <summary>A negative diagnostic remainder. Historical exports keep their original red.</summary>
+        public Brush Negative { get; private set; } = Brushes.Transparent;
+
         /// <summary>The percent-of-ion-current chart's solid "share of the credited envelope" bar.</summary>
         public Brush Found { get; private set; } = Brushes.Transparent;
 
@@ -208,8 +211,9 @@ namespace FamilyQuant
                     Remainder = Token("ChartRemainderBrush"), Detected = detected, DetectedMultiplyCharged = detected,
                     DetectedSinglyCharged = Token("ChartSinglyBrush"), Tic = Token("ChartTicBrush"),
                     Families = identified, Mixing = mixing, Floor = Token("SuccessBrush"),
+                    Negative = mixing,
                     NotAFamily = Token("ChartPeptideLikeBrush"), Found = identified, OfTic = deNovo,
-                    MassBands = new[] { identified, deNovo, mixing }
+                    MassBands = new[] { identified, deNovo, Token("ChartPeptideLikeBrush") }
                 };
             }
         }
@@ -256,6 +260,7 @@ namespace FamilyQuant
                 Mixing = mixing,
                 Floor = deNovo,
                 NotAFamily = peptideLike,
+                Negative = Frozen(0xE0, 0x4F, 0x5F),
                 Found = identified,
                 OfTic = deNovo,
                 MassBands = new[] { identified, deNovo, mixing },
@@ -307,6 +312,7 @@ namespace FamilyQuant
                 Mixing = mixing,
                 Floor = deNovo,
                 NotAFamily = peptideLike,
+                Negative = Frozen(0xC4, 0x2B, 0x1C),
                 Found = identified,
                 OfTic = deNovo,
                 MassBands = new[] { identified, deNovo, mixing },

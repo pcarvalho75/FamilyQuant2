@@ -9,7 +9,11 @@ This is the navigation index for the current checkout. The roadmap owns unfinish
 | [CLAUDE.md](../CLAUDE.md) | Current projects, build/test setup, scientific invariants and implementation guidance |
 | [Architecture](ARCHITECTURE.md) | Current boundaries, planned Reports/operation host, budgets and historical destination inventory |
 | [Core operations](CORE-OPERATIONS.md) | Progress, cancellation, outcomes and atomic publication |
+| [App operations](APP-OPERATIONS.md) | Busy host, overlay and publication adapters |
+| [Shell dialogs](SHELL-DIALOGS.md) | Headless messages, browse preferences and protected C1 adoption |
 | [Clustering refactor](CLUSTERING-REFACTOR.md) | Result contracts and bounded frozen/current comparison |
+| [Dependencies](DEPENDENCIES.md) | Package decisions, cache compatibility and real-file opening checks |
+| [Test commands](TEST-COMMANDS.md) | Feature-owned command tables and adding a flag without editing Main |
 | [Identity study](IDENTITY-SEARCH-STUDY.md) | Why Scan and Divide remain separate, exact measured scope |
 | [Identity/deployment](N1-IDENTITY.md) | Separate application identity and the installed-profile check still owned by Paulo |
 | [Science gate](SCIENCE-GATE.md) | Recorded evidence-rule comparison, verdicts and limitations |
@@ -62,16 +66,26 @@ Invoke each flag with `& $testExe <flag>` after building. Dispatch and arity are
 | Flag | Coverage |
 |---|---|
 | `--test-core-boundary` | Core/App ownership, references and resource contract |
+| `--test-dependencies` | Cache compatibility, package removal and shared numeric control contracts |
+| `--test-dispatch` | Flag inventory, routing, precedence, argument forwarding and merge guards |
+| `--list-test-commands` | Deterministic command table; executes no test or scientific handler |
 | `--test-document` | Document round trip, scoring and denominator attribution fixtures |
 | `--test-evidence-task` | File-derived taxonomy, keyword counts, confirmation and recipe replay fixtures |
 | `--test-inputs` | Real-data argument-selection contract, without choosing Desktop fallbacks |
 | `--test-operations` | Core outcomes, progress, cancellation and the owned native-child fixture |
 | `--test-busy` | App operation host, running-command cancellation, prior file bytes and guarded publication |
+| `--test-shell-dialogs [--after-busy]` | Browse callers, folder preference, accept/cancel, owned windows and headless messages; optional busy-group setup first |
 | `--test-clustering-results` | Typed clustering/redundancy results and native synthetic fixtures |
 | `--test-identity-study` | Probe parser and grid-versus-probe interpretation |
 | `--test-results` | Results view-model readiness and export choices |
 | `--test-family-world` | The family world's crediting rule, species removal and the B1 verdict bars, on a hand-made world |
 | `--test-ui-icons` | No emoji in product source, escaped/entity regressions and Fluent glyphs in both themes |
+| `--test-keyword-command` | Single keyword command, empty review, Cancel and accepted-setting retention |
+| `--test-chart-themes [output-dir]` | Seven hosted chart types, live token refresh, contrast, subscription lifetime and frozen Light palette pins; labelled synthetic chart captures |
+| `--test-chart-themes [output-dir]` | Seven hosted chart types, live token refresh, contrast, subscription lifetime and frozen Light palette pins; labelled synthetic chart captures |
+| `--test-ui-icons` | No emoji in product source, escaped/entity regressions and Fluent glyphs in both themes |
+| `--test-evidence-task-scope [output-dir]` | Supplied task facts, editable scope, cancellation, native confirmation and both-theme synthetic captures |
+| `--test-architecture-group-split [output-dir]` | Native per-key split choices, retained bulk choice, unsplit members staying together, exact recipe replay and optional synthetic captures |
 | `--test-keyword-command` | Single keyword command, empty review, Cancel and accepted-setting retention |
 | `--shell-checks` | Shell navigation, saving, preferences, Build/Quantify integration and secondary views |
 | `--feature-ledger-check` | Inventory, row coverage, dispositions and guard regressions |
@@ -114,6 +128,7 @@ Companion options for `--screens` are `--screen-fcf <input.fcf>`, `--screen-proj
 | `--word-grouping-snapshot <input.fcf-or-fqproj> <output.txt>` | [WordGroupingSnapshot.cs](../FamilyQuant.Tests/WordGroupingSnapshot.cs), also linked into frozen host |
 | `--chart-export-snapshot <output-dir>` | [ChartExportSnapshot.cs](../FamilyQuant.Tests/ChartExportSnapshot.cs), synthetic chart parity fixtures |
 | `--clustering-snapshot <input.fasta> <output.tsv> <integer-identity> <fast-or-exhaustive>` | [ClusteringSnapshot.cs](../FamilyQuant.Tests/ClusteringSnapshot.cs) |
+| `--dependency-file-check <real.raw> <real.xic2> <new-report.json>` | [Program.Dependencies.cs](../FamilyQuant.Tests/Program.Dependencies.cs); read-only input-opening check |
 | `--clustering-export-fcf <input.fcf> <new-output.fasta>` | Same helper, ordered stored-sequence export; never replaces an existing output |
 | `--clustering-verify-fcf <input.fcf> <existing-export.fasta>` | Same helper, verifies every identifier/sequence and EOF |
 | `--identity-search-study <input.fasta> <empty-output-dir> <fast-or-exhaustive>` | [IdentitySearchStudy.cs](../FamilyQuant.Tests/IdentitySearchStudy.cs); use the bounded study scope, not a new Viperidae exhaustive run |

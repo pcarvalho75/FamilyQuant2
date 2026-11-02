@@ -1,7 +1,7 @@
 <UserControl x:Class="FamilyQuant.USearchLib"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+             xmlns:numeric="clr-namespace:FamilyQuant"
              xmlns:core="clr-namespace:FamilyQuant;assembly=FamilyQuant.Core"
              Background="{DynamicResource CanvasBrush}" FontFamily="{DynamicResource UiFont}" FontSize="{DynamicResource BodySize}">
     <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
@@ -20,7 +20,7 @@
                     </Grid>
                     <WrapPanel Margin="0,14,0,12">
                         <Label Content="Identity (%)" VerticalAlignment="Center" ToolTip="Percent identity two sequences need to join a family. Higher values produce smaller families."/>
-                        <xctk:IntegerUpDown x:Name="IntegerUpDownIdentity" Value="{Binding Identity, Mode=TwoWay}" Minimum="1" Maximum="100" Width="76" Margin="8,0,18,0"
+                        <numeric:IntegerUpDown x:Name="IntegerUpDownIdentity" Value="{Binding Identity, Mode=TwoWay}" Minimum="1" Maximum="100" Width="76" Margin="8,0,18,0"
                                            ToolTip="Sequence identity for building families, from 1 to 100 percent. The usual starting value is 85."/>
                         <CheckBox x:Name="CheckBoxExhaustiveClustering" Content="Exhaustive second pass" IsChecked="{Binding Exhaustive, Mode=TwoWay}" VerticalAlignment="Center"
                                   ToolTip="Aligns every sequence pair to close gaps left by the fast pass. On by default; large databases require confirmation."/>
@@ -39,7 +39,7 @@
                     <TextBlock Text="Choose identity" FontWeight="SemiBold" Foreground="{DynamicResource TextBrush}"/>
                     <WrapPanel Margin="0,10,0,12">
                         <Label Content="Allowed mixing" VerticalAlignment="Center" ToolTip="Largest accepted fraction of families mixing targets and decoys. Keep the usual value of zero."/>
-                        <xctk:DecimalUpDown x:Name="DecimalUpDownMaxFDR" Value="{Binding MaximumMixing, Mode=TwoWay}" Minimum="0" Maximum="0.5" Increment="0.01" Width="76" Margin="8,0,0,0"
+                        <numeric:DecimalUpDown x:Name="DecimalUpDownMaxFDR" Value="{Binding MaximumMixing, Mode=TwoWay}" Minimum="0" Maximum="0.5" Increment="0.01" Width="76" Margin="8,0,0,0"
                                            ToolTip="Target-decoy mixing fraction accepted by the lowest-identity search. Default zero; a nonzero allowance can admit noisy joins."/>
                     </WrapPanel>
                     <WrapPanel>
@@ -54,7 +54,7 @@
                 <Border Background="{DynamicResource SurfaceBrush}" Padding="16">
                     <WrapPanel>
                         <Label Content="Redundancy identity (%)" VerticalAlignment="Center" ToolTip="At 100 percent, removes exact subsets and duplicates. Lower values remove near-identical sequences too."/>
-                        <xctk:IntegerUpDown x:Name="IntegerUpDownRedundancyIdentity" Value="{Binding RedundancyIdentity, Mode=TwoWay}" Minimum="50" Maximum="100" Width="76" Margin="8,0,12,0"
+                        <numeric:IntegerUpDown x:Name="IntegerUpDownRedundancyIdentity" Value="{Binding RedundancyIdentity, Mode=TwoWay}" Minimum="50" Maximum="100" Width="76" Margin="8,0,12,0"
                                            ToolTip="Identity above which sequences count as redundant. Default 100 preserves original order and removes exact subsets and duplicates."/>
                         <Button x:Name="ButtonRemoveRedundancy" Content="Remove redundancy" Click="ButtonRemoveRedundancy_Click" IsEnabled="False"
                                 ToolTip="Writes a separate FASTA without redundant sequences, preserving order and headers. Disabled until a database is chosen; the original stays unchanged."/>

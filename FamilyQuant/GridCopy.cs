@@ -58,7 +58,7 @@ namespace FamilyQuant
             // clipboard held by another program, fail without a word. Declining hands the row case to that
             // Copy, which already gives rows as text and as a table.
             grid.CommandBindings.Add(new CommandBinding(ApplicationCommands.Copy,
-                (_, _) => ToClipboard(ColumnText(grid, grid.CurrentColumn)),
+                (_, _) => ToClipboard(ColumnText(grid, grid.CurrentColumn), grid),
                 (_, e) => e.CanExecute = !rowNumberClicked && grid.CurrentColumn != null && grid.SelectedItems.Count > 0));
 
             // What was selected when the menu opened, not when an item is pressed: opening it commits any
@@ -73,16 +73,16 @@ namespace FamilyQuant
             {
                 code = NewItem("Copy UniProt code",
                     "Copies the code alone, P31982 from sp|P31982|VM2I_CROCC, one line per selected row.",
-                    () => ToClipboard(Codes(rows.Select(locusOf))));
+                    () => ToClipboard(Codes(rows.Select(locusOf)), grid));
                 menu.Items.Add(code);
             }
             MenuItem text = NewItem(textLabel, "Copies this text as the database has it, one line per selected row.",
-                () => ToClipboard(Lines(rows.Select(textOf))));
+                () => ToClipboard(Lines(rows.Select(textOf)), grid));
             menu.Items.Add(text);
             if (locusOf != null)
             {
                 open = NewItem("Open in UniProt", "Opens the UniProt page of the row you clicked in your browser.",
-                    () => OpenUrl(FamilyNaming.UniProtUrl(FamilyNaming.Accession(locusOf(clicked!)))));
+                    () => OpenUrl(FamilyNaming.UniProtUrl(FamilyNaming.Accession(locusOf(clicked!))), grid));
                 menu.Items.Add(open);
             }
             grid.ContextMenu = menu;
@@ -158,7 +158,7 @@ namespace FamilyQuant
         }
 
         /// <summary>A blank selection empties the clipboard, so the next paste cannot be the previous protein's.</summary>
-        private static void ToClipboard(string text)
+        private static void ToClipboard(string text, DependencyObject origin)
         {
             if (ClipboardOverride != null) { ClipboardOverride(text); return; }
 
@@ -169,13 +169,13 @@ namespace FamilyQuant
             }
             catch (ExternalException)
             {
-                MessageBox.Show("Nothing was copied: another program is holding the clipboard.\n\n" +
+                ShellMessages.Report(origin, "Nothing was copied: another program is holding the clipboard.\n\n" +
                                 "Next step: try again in a moment.", "Copy",
                                 MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
 
-        private static void OpenUrl(string url)
+        private static void OpenUrl(string url, DependencyObject origin)
         {
             if (url.Length == 0) return;
             if (OpenUrlOverride != null) { OpenUrlOverride(url); return; }
@@ -183,7 +183,7 @@ namespace FamilyQuant
             try { Process.Start(new ProcessStartInfo(url) { UseShellExecute = true }); }
             catch (Exception ex) when (ex is System.ComponentModel.Win32Exception || ex is InvalidOperationException)
             {
-                MessageBox.Show("The UniProt page could not be opened: " + ex.Message + "\n\n" +
+                ShellMessages.Report(origin, "The UniProt page could not be opened: " + ex.Message + "\n\n" +
                                 "Next step: copy the UniProt code and paste it into uniprot.org.", "Open in UniProt",
                                 MessageBoxButton.OK, MessageBoxImage.Warning);
             }

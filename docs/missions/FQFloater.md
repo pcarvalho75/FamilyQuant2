@@ -18,7 +18,7 @@ This is a fresh session on roadmap version 3. Version 2 closed 56 steps today, s
 
 ## Off limits
 
-- `FamilyQuant.Core/Evidence/` (FQEvidence), `FamilyQuant.Core/Homology/` (FQOpus), all screens.
+- `FamilyQuant.Core/Evidence/` (FQEvidence), `FamilyQuant.Core/Homology/` (FQOpus), all screens except `DeNovoControl` and `DeNovoViewModel`, which are yours for X6 only.
 - Version numbers and `FamilyQuant/Properties/PublishProfiles/`.
 - The deck `BrProt_FamilyQuant_FourPart_Source_Decomposition.pptx` and anything feeding it, including `FamilyQuant.Tests/TalkFigures.cs`.
 - `C:\Users\paulo\Desktop\AnaG`: never write there. `docs/ROADMAP.md`: the orchestrator owns it.
@@ -26,9 +26,9 @@ This is a fresh session on roadmap version 3. Version 2 closed 56 steps today, s
 
 ## Your queue, in order
 
-X5, X7, then whatever the orchestrator names. Each row in `docs/ROADMAP.md` gives the work and its done-check. Do the whole row, not a safe part of it. If a step is blocked, post why and take the next open one; never stop while a step is open. If your queue runs out, tell the orchestrator and propose the next useful step.
+X5, X6, then whatever the orchestrator names. Each row in `docs/ROADMAP.md` gives the work and its done-check. Do the whole row, not a safe part of it. If a step is blocked, post why and take the next open one; never stop while a step is open. If your queue runs out, tell the orchestrator and propose the next useful step.
 
-Start with X5, a very hard step that blocks both B5 and X12. FQOpus held it and has moved to B1, so read its handover and how `FamilyEnvelopeQuant` and `FullXicComputer` fit in `docs/vision/CODE-MAP.md`. X5 is a restructure with no change to any number: the golden check stays 4/0/0. Leave one clean seam where a second attribution pass can run on the de novo peptides left unattributed (B5, FQOpus), and post that seam as a `## Q` as soon as its shape is known, so FQOpus can plan on it. FQResults calls the current full-XIC APIs for C5, so keep them or tell the orchestrator. Then X7.
+Start with X5, a very hard step that blocks both B5 and X12. FQOpus held it and has moved to B1, so read its handover and how `FamilyEnvelopeQuant` and `FullXicComputer` fit in `docs/vision/CODE-MAP.md`. X5 is a restructure with no change to any number: the golden check stays 4/0/0. Leave one clean seam where a second attribution pass can run on the de novo peptides left unattributed (B5, FQOpus), and post that seam as a `## Q` as soon as its shape is known, so FQOpus can plan on it. FQResults calls the current full-XIC APIs for C5, so keep them or tell the orchestrator. Then X6.
 
 ## The rules that matter most
 
