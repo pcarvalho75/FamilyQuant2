@@ -17,7 +17,7 @@ Render targets refer to `ScreenHarness.Screens`, captured with `--screens <outpu
 Release gate: `FamilyQuant.Tests.exe --feature-ledger-release-check` fails until every retained row is VERIFIED with evidence. Authorized DROP rows use APPROVED_DROP, which records a decision, not a completed UI removal. The normal quick suite permits OPEN rows during development. Regeneration resets retained rows to OPEN; preserve reviewed evidence when updating the scanner.
 
 Scan count: **5756**. Ledger rows: **5756**. Source files: **104**.
-Authorized DROP rows: **296**; proposed VERIFIED retained rows: **4343**; OPEN retained rows: **1117**.
+Authorized DROP rows: **296**; proposed VERIFIED retained rows: **4345**; OPEN retained rows: **1115**.
 
 | ID | Disposition | Kind | Frozen source | Fact or control | Planned check | State | Evidence |
 |---|---|---|---|---|---|---|---|
@@ -3078,8 +3078,8 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **4343**; OPEN r
 | FQ15-05B931C7E81A | KEEP | format/export | FamilyQuant/DeNovo/ThreeWayWindow.cs:126 | ".csv" | test:ThreeWayPartitionTests | OPEN | pending |
 | FQ15-FB44CE7084AF | IMPROVE | code fact | FamilyQuant/DeNovo/ThreeWayWindow.cs:137 | "The file could not be written: " | test:ThreeWayPartitionTests | OPEN | pending |
 | FQ15-1A310DFE13FA | IMPROVE | code fact | FamilyQuant/DeNovo/ThreeWayWindow.cs:138 | "Save the three-way partition" | test:ThreeWayPartitionTests | OPEN | pending |
-| FQ15-E0D87026DC21 | IMPROVE | code control | FamilyQuant/DeNovo/ThreeWayWindow.cs:63 | new Button | test:ThreeWayPartitionTests | OPEN | pending |
-| FQ15-DF0811D8E3F3 | KEEP | handler | FamilyQuant/DeNovo/ThreeWayWindow.cs:72 | save.Click += (_, __) =&gt; SaveCsv(perRun); | test:ThreeWayPartitionTests | OPEN | pending |
+| FQ15-E0D87026DC21 | IMPROVE | code control | FamilyQuant/DeNovo/ThreeWayWindow.cs:63 | new Button | test:ThreeWayLedgerProof | VERIFIED | evidence:EV-threeway-1:FQ15-E0D87026DC21 |
+| FQ15-DF0811D8E3F3 | KEEP | handler | FamilyQuant/DeNovo/ThreeWayWindow.cs:72 | save.Click += (_, __) =&gt; SaveCsv(perRun); | test:ThreeWayLedgerProof | VERIFIED | evidence:EV-threeway-1:FQ15-DF0811D8E3F3 |
 | FQ15-E6A7061D70BF | IMPROVE | code fact | FamilyQuant/FamilyContributionChart.cs:127 | "other families (" | test:ResultsMemberComparisonCommand | VERIFIED | evidence:RS-members:FQ15-E6A7061D70BF |
 | FQ15-E2841E07BFDE | IMPROVE | code fact | FamilyQuant/FamilyContributionChart.cs:127 | "N0" | test:ResultsMemberComparisonCommand | VERIFIED | evidence:RS-members:FQ15-E2841E07BFDE |
 | FQ15-60CDE90FAAD1 | IMPROVE | code fact | FamilyQuant/FamilyContributionChart.cs:127 | ")" | test:ResultsMemberComparisonCommand | VERIFIED | evidence:RS-members:FQ15-60CDE90FAAD1 |
