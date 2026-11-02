@@ -114,7 +114,7 @@ Columns: Diff = L, M, H, VH. Hrs = worker hours at measured speed: the 56 steps 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
 | R2 | 2.0 preview 2: new look and shell | M | 0.5 | C14 | R3 | Same, plus Paulo's sign-off on renders, and a published update reaches an installed 2.0 | Orchestrator | not started | 0% | 0% | T+4 |
-| R3 | 2.0 release candidate: rewrite finished, every ledger row closed, the family world in if B1 passed | M | 0.5 | R2, B8 | R4 | Same, plus the ledger check | Orchestrator | not started | 0% | 0% | T+4 |
+| R3 | 2.0 release candidate: rewrite finished, every ledger row closed, the family world in if B1 passed | M | 0.5 | R2, B8, B10, B11 | R4 | Same, plus the ledger check | Orchestrator | not started | 0% | 0% | T+4 |
 | R4 | Final adversarial pass on the whole product | H | 1 | R3 | R5 | GR's verdict; all findings closed | GR | not started | 0% | 0% | T+5 |
 | R5 | FamilyQuant 2.0 final, then the archive of this roadmap | L | 0.5 | R4 | Done | Paulo publishes | Orchestrator | not started | 0% | 0% | T+6 |
 
@@ -124,8 +124,9 @@ The bet, from `docs/vision/VISION.md`: a de novo peptide your database cannot pl
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| B7 | Result: three parts per family (identified, de novo in your database, de novo only in the family world) plus one global unexplained bucket, and the "Database gap" ranking: the families with the most signal missing from your database. An export writes a FASTA of the family-world proteins the tags hit, as suggested additions for the person to add and search again in PatternLab. The program never changes the database itself. The screen, the CSV and Help state the minimum tag length and the in-scope rule beside the result | M | 1 | 🟢 | B8 | Screen and CSV from one table; every number from the program; the rules in force are visible on the screen and in the export, and stored in the project; both themes | RS | not started | 0% | 0% | T+1 |
-| B8 | Science review on a real sample: labels, denominators, inflation of conserved families, and the wording of the claim | H | 1 | B7 | R3 | GR's verdict; findings closed; Paulo accepts the wording | GR | not started | 0% | 0% | T+2 |
+| B8 | Science review on a real sample: labels, denominators, inflation of conserved families, and the wording of the claim | H | 1 | 🟢 | R3 | GR's verdict; findings closed; Paulo accepts the wording | GR | not started | 0% | 0% | T+1 |
+| B10 | Minimum tag length the user can change, with a quick error table: on the Database gap screen, for lengths 7 to 15, the signal that lands, the decoy rate and the known-answer right rate on that project, with no new fetch. Choosing a length updates the result, the CSV and the FASTA and is stored in the project. 9 stays the default | M | 1 | 🟢 | R3 | Table from the program on the real project; the chosen length changes screen, CSV and FASTA and is stored; 9 reproduces today's output; time measured | OP | not started | 0% | 0% | T+2 |
+| B11 | Several taxa on one target: a joined header naming different taxa keeps all of them, and one such target no longer stops the whole file. No guessed taxon | L | 0.5 | 🟢 | R3 | Fixture of a two-species joined header passes; own-species removal covers each taxon; Ana and Bothrops audits unchanged | EV | not started | 0% | 0% | T+1 |
 
 ## Cooldown
 
@@ -147,6 +148,12 @@ Paulo agreed these at the restart, 2026-11-01.
 | ID | Question | Taken |
 |---|---|---|
 | D14 | Should identity clustering change its coverage rule, merge on shared peptides, or use a reviewed-family veto? | No. Clustering stays as it is, and the measurements ship as a diagnostic the user can see |
+| D21 | Is the program general? | Yes. It must work with any database, so nothing the user sees names an organism, a venom or a sample's numbers. Paulo, 11-02 |
+| D20 | Minimum tag length | The user can change it and see the error by length on their own project; 9 stays the default. Paulo, 11-02. Step B10 |
+| D19 | A joined header with different taxa | The target keeps all its taxa and the file is not refused. Paulo, 11-02. Step B11 |
+| D18 | Does the family world ship on one sample? | Yes. Every project shows its own measured rates, and it stays optional. Paulo, 11-02 |
+| D17 | Row FQ15-0061551CF9D6 | The clause on Layer 5 goes with the retired partition screen; the assignment fact stays. Paulo, 11-02 |
+| D16 | Where the claim sentence goes | To Ana, papers and project records only, never into the program. It also states that the program has been tested only on venom. Paulo, 11-02 |
 | D15 | Does the contaminant rule look past `Reverse_`? | Yes, one exact unwrap, then the database prefix in exact case. Target classes do not change; golden stays 4/0/0 |
 | D13 | How the ledger is proven | By kind of row, one executed check per kind, plus a reviewer's random sample, instead of hand work per row |
 | D11 | Minimum tag length for the family world | 9 residues, and only families in scope can be credited. Paulo: the program must show this to the user |

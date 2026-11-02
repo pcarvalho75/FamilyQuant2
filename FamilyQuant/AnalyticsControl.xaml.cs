@@ -76,11 +76,13 @@ public partial class AnalyticsControl : UserControl
     {
         if (!ViewModel.CanExport) return;
         if (PresentationSource.FromVisual(this) == null)
-        { ViewModel.ShowStatus("Nothing was exported, because this screen is not on a display. Open the project in the application to export."); return; }
+        { ViewModel.ShowStatus("Nothing was exported, because this screen is not on a display. Export dialogs need an open application window; " +
+            "open the complete project in the application to export from Results."); return; }
         string? path;
         if (ViewModel.ExportKind is ResultsExportKind.Figures or ResultsExportKind.EvidencePack)
         {
-            var dialog = new OpenFolderDialog { Title = "Choose the export folder" };
+            var dialog = new OpenFolderDialog { Title = ViewModel.ExportKind == ResultsExportKind.Figures
+                ? "Choose the folder for screen figures" : "Choose the folder for the presentation evidence pack" };
             path = ShellDialogs.ShowFolder(this, "results." + ViewModel.ExportKind, dialog) ? dialog.FolderName : null;
         }
         else
@@ -92,7 +94,8 @@ public partial class AnalyticsControl : UserControl
                     ResultsExportKind.Homology => "FamilyQuant_DeNovo_Homology.csv",
                     ResultsExportKind.DatabaseGap => "familyquant_database_gap.csv",
                     ResultsExportKind.SuggestedAdditions => "familyquant_suggested_additions.fasta",
-                    _ => "familyquant_analytics_peptides.csv" }, Title = "Export results" };
+                    _ => "familyquant_analytics_peptides.csv" }, Title = ViewModel.ExportKind switch {
+                        ResultsExportKind.Peptides => "Export peptide table", ResultsExportKind.Summary => "Export run summary", _ => "Export results" } };
             path = ShellDialogs.ShowFile(this, "results." + ViewModel.ExportKind, dialog) ? dialog.FileName : null;
         }
         if (path != null) await ViewModel.ExportAsync(path, AppOperationHost.For(this));

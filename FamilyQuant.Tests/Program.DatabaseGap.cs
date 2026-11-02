@@ -21,6 +21,9 @@ internal static partial class Program
         Check("the composition CSV has a dedicated export choice", Enum.GetNames<ResultsExportKind>().Contains("DatabaseGap"));
         Check("suggested FASTA additions have a dedicated export choice", Enum.GetNames<ResultsExportKind>().Contains("SuggestedAdditions"));
         Check("Database gap has specific Help for its stored rules", typeof(App).Assembly.GetType("FamilyQuant.DatabaseGapHelp") != null);
+        string help = (string)typeof(App).Assembly.GetType("FamilyQuant.DatabaseGapHelp")!.GetField("Text")!.GetValue(null)!;
+        Check("Database gap Help defines right per family even with additional credited families", help.Contains(
+            "A credit counts as right for a family when that family is among the known answers, even if the peptide was also credited to another family.", StringComparison.Ordinal));
         EnsureApplication(); Directory.CreateDirectory(output);
         var missing = new DatabaseGapViewModel(null);
         var legacy = new DatabaseGapViewModel(new FamilyWorldSummary());
@@ -37,9 +40,7 @@ internal static partial class Program
         var stored = FamilyWorldFetcher.Stored(file);
         foreach (var entry in stored.Entries) entry.Sequence = string.Concat(Enumerable.Repeat("ACDEFGHIKLMNPQRSTVWY", 7));
         stored.ContentSha256 = FamilyWorldFetcher.ContentHash(stored);
-        var world = FamilyWorld.Build(stored.Entries.Select(entry => new FamilyWorldProtein { Id = entry.Accession, Accession = entry.Accession,
-            Sequence = entry.Sequence, Families = FamilyWorld.FamiliesOf(entry.Evidence), Taxon = entry.TaxonId.ToString(CultureInfo.InvariantCulture),
-            FromPanel = entry.FromReviewedPanel }), stored.Families);
+        var world = FamilyWorld.FromSnapshot(stored);
         var summary = new FamilyWorldSummary { CompositionRules = FamilyWorldErrors.CompositionRule, MinimumTagLength = 9,
             MinIdentity = .8, MinimumKnownCredits = 10, ScopeFamilies = stored.Families.ToList(), WorldFingerprint = world.Fingerprint,
             WorldRelease = stored.Release, MeasuredIdentifiedEnvelope = 1000, MeasuredDeNovoEnvelope = 500,

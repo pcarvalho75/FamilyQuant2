@@ -78,6 +78,7 @@ Run the built test executable with these flags and explicit lane-owned outputs:
 | `--ledger-shell-native <frozen-root> <frozen-host.exe> <fresh-output> <date> [C1-cohort-register]` | Execute frozen/current view metadata and isolated Home clicks; emit SH-runtime and the bounded C1-runtime candidates |
 | `--ledger-secondary-compare <frozen-root> <native-master-audit> <fresh-output> <date> [--negative-control]` | Scoped exact secondary-view declarations for OPEN master IDs; [guide](SECONDARY-LEDGER.md) |
 | `--ledger-secondary-runtime <frozen-root> <native-master-audit> <frozen-app> <fresh-output> <date> [--negative-control]` | Native secondary controls, actions, values and cache contracts; [guide](SECONDARY-LEDGER.md) |
+| `--prove-shell-main <frozen-root> <fresh-output> <date>` | Execute native MainWindow route/dialog/message cases and compare scoped frozen frames; emit SH-main-routes without importing |
 
 For example, obtain the timestamp with `date '+%F %T %z'` immediately before the proof command.
 Neither the proof runner nor the audit invokes the frozen-source generator.
@@ -151,6 +152,26 @@ The complete native packets and comparison gaps remain in the output. No window 
 no dialog, clipboard or browser is used, and no project, evidence or quantitation is written.
 Run twice and compare frozen.json, current.json, comparisons.json and comparisons.log before
 import. Preserve the executed checker sources and assemblies with each packet.
+
+The MainWindow producer dispatches the actual menu command or Click event under a dispatcher
+synchronization context. Owned synthetic files test chooser cancellation, FCF/FQPROJ reads,
+successful writes and retained previous bytes after refusal. Fake presenters capture native
+dialog fields and reports without opening a system dialog. Navigation receipts pin the old
+entry point, the current header and the executed view/document outcome. Quantify navigation
+does not execute extraction; SEPro cancellation does not prove its rewrite. Help/tooltips
+and the transferred App/Home style rows are excluded.
+
+Message facts use the frozen handler's complete first/second MessageBox argument. Known
+variables come from the native selected file or an independently executed controlled failure.
+The complete evaluated message or caption must match its native report. Literals hidden
+inside a bound dynamic term are never credited; unsupported or unexecuted terms stay OPEN.
+Project-save status is compared after checking its explicit saved-file-check wrapper.
+Chooser filters compare complete ordered acceptance groups while recording renamed human
+labels in full. Source hashes, archived checker sources/binaries and individual PASS assertions
+support the candidate register. Compare comparisons.json, comparisons.log and
+native-cases-canonical.json between two runs. Canonicalization replaces only the owned fixture
+root after all raw-value and file-state checks; raw captures remain retained. Native fixture
+project timestamps are not a scientific determinism or RAW-validation claim.
 
 The N5 first pass executes synthetic project write/read, native ZIP and quant-column checks,
 source discovery, descriptor/cutoff checks and refusal paths. Each closed row has its own
