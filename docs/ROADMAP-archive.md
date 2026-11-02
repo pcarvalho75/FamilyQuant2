@@ -106,6 +106,7 @@ Finished steps, moved here from docs/ROADMAP.md. The board shows them as green.
 | X11 | Dependencies: `Extended.Wpf.Toolkit` (6 uses), `Newtonsoft.Json` (3 files, the rest is `System.Text.Json`), `OpenMcdf` (no reference in this repo), `LiteDB`. Each goes only if a real RAW and `.xic2` still open | M | 1 | 🟢 | R3 | Publish rehearsal runs; real files open | AS | not started | 0% | 0% | T+1 |
 | X14 | Exhaustive clustering stops holding every pair in memory: `USearchTools` streams its edges through the union-find. The all-pairs alignment itself stays as it is | M | 1 | 🟢 | R3 | Same families on Bjararaca exhaustive; peak memory measured before and after; the memo tests kept | AS | not started | 0% | 0% | T+2 |
 | X16 | Test flags register one line each in a table, so a merge cannot drop part of a dispatch block and two lanes adding flags never touch the same lines | L | 0.5 | 🟢 | R3 | Every flag and every check kept; the count does not fall; a planted missing flag fails | AS | not started | 0% | 0% | T+0 |
+| X5 | Quantitation pipeline: `FullXicComputer` (997) and `FamilyEnvelopeQuant` (968) restructured into stages with clear inputs and outputs, leaving one clean seam for the second attribution pass (B5). The studies Compute calls stay and get their own folder | VH | 1.5 | 🟢 | B5, X12, R3 | Golden equal on the full project; every invariant in the guide has a test; run time not worse | FL | not started | 0% | 0% | T+2 |
 
 ### W7 Releases (Paulo publishes each one)
 
