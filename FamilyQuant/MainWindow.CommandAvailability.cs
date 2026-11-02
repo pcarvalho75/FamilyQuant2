@@ -20,6 +20,7 @@ public partial class MainWindow
         bool reannotate = IsQuantifyVisible ? ExplicitAvailability(MenuItemReanotateSEPro) : project && familyOrHome;
         MenuItemSaveFCF.IsEnabled = MenuItemSaveProject.IsEnabled = project;
         MenuItemComputeXic.IsEnabled = project && familyOrHome;
+        MenuItemClusteringDiagnostic.IsEnabled = CanRunClusteringDiagnostic;
         MenuItemSpectrumComparison.IsEnabled = spectrum;
         MenuItemReanotateSEPro.IsEnabled = reannotate;
     }

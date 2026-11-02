@@ -6,7 +6,9 @@
 
 ## Outcome
 
-The codebase now compiles with **0 warnings and 0 errors**, the full regression passes **1,124 / 1,124 tests** with **0 failures** and 15 optional-data skips, and the real-data talk lane passes **48 / 48 scientific gates** after a fresh extraction of all three RAW files.
+The codebase now compiles with **0 warnings and 0 errors**, the full regression passes **1,124 / 1,124 tests** with **0
+failures** and 15 optional-data skips, and the real-data talk lane passes **48 / 48 scientific gates** after a fresh
+extraction of all three RAW files.
 
 The defensible pooled result is:
 
@@ -46,22 +48,37 @@ The defensible pooled result is:
 - De novo reference-calibrated envelope: 14.48% of TIC.
 - Primary per-run values: 41.57%, 43.06%, 43.24%.
 - Exact/I-L cross-side overlaps suppressed: 0 in this dataset.
-- Curation: 312 all-database connected components, 154 target-bearing, 67 non-contaminant target, 88 contaminant-bearing target, 158 pure-decoy.
+- Curation: 312 all-database connected components, 154 target-bearing, 67 non-contaminant target, 88 contaminant-bearing
+  target, 158 pure-decoy.
 - Final machine-readable project round-tripped successfully.
 
 ## Remaining red flags and limitations
 
 These are not silent defects; they are the limits that should accompany any scientific claim.
 
-1. **High: untrusted `.sepr2` files are unsafe.** The external SEPro reader uses BinaryFormatter. FamilyQuant cannot safely deserialize a malicious package. Only trusted local SEPro output should be opened.
-2. **High scientific: 42.64% is model-based, not externally calibrated truth.** Mass strata do not capture every composition-dependent isotope pattern. A labelled standard or independent all-peptide feature workflow is needed for external validation and uncertainty estimation.
-3. **Medium scientific: de novo filtering and homology are heuristic.** The PEAKS confidence rules and 80% family-homology attribution do not constitute a peptide-level FDR procedure. Target-decoy competition is conservative but does not convert the mapping into a calibrated FDR.
-4. **Medium scientific: 70% is below the zero-mixing floor.** The identity sweep finds a target/decoy-clean floor of 75%; the pre-specified 70% curation contains one mixed component. Family conclusions should include 75% as a sensitivity analysis.
-5. **Medium scientific: single linkage can chain.** A 70% connected component does not guarantee all member pairs are 70% identical. These are database components, not necessarily biological families.
-6. **Medium scientific: peptide collapse can undercount multiple chromatographic forms.** The largest-M+0 representative is the defensible antidote to repeated MS2 anchors, but the same sequence/charge can in principle form multiple true chromatographic peaks. A future feature-ID layer should distinguish re-anchors from separable elution features.
-7. **Medium interpretive: family bars overlap.** Count-in-every-family attribution means the family bars can exceed the primary total and must not be read as a composition that sums to 100%.
-8. **Low maintainability: legacy field names remain.** Stored/API names such as `DetectedPeptideLikeArea` remain for backwards compatibility, although their exported labels and documentation now say “resolved isotope-series diagnostic.” A future file-format major version can rename them cleanly.
-9. **Operational/legal: USEARCH licensing remains external.** The bundled personal-use binary has a trust and licensing boundary that should be reviewed before redistribution or commercial deployment.
+1. **High: untrusted `.sepr2` files are unsafe.** The external SEPro reader uses BinaryFormatter. FamilyQuant cannot
+  safely deserialize a malicious package. Only trusted local SEPro output should be opened.
+2. **High scientific: 42.64% is model-based, not externally calibrated truth.** Mass strata do not capture every
+  composition-dependent isotope pattern. A labelled standard or independent all-peptide feature workflow is needed for
+  external validation and uncertainty estimation.
+3. **Medium scientific: de novo filtering and homology are heuristic.** The PEAKS confidence rules and 80%
+  family-homology attribution do not constitute a peptide-level FDR procedure. Target-decoy competition is conservative
+  but does not convert the mapping into a calibrated FDR.
+4. **Medium scientific: 70% is below the zero-mixing floor.** The identity sweep finds a target/decoy-clean floor of
+  75%; the pre-specified 70% curation contains one mixed component. Family conclusions should include 75% as a
+  sensitivity analysis.
+5. **Medium scientific: single linkage can chain.** A 70% connected component does not guarantee all member pairs are
+  70% identical. These are database components, not necessarily biological families.
+6. **Medium scientific: peptide collapse can undercount multiple chromatographic forms.** The largest-M+0 representative
+  is the defensible antidote to repeated MS2 anchors, but the same sequence/charge can in principle form multiple true
+  chromatographic peaks. A future feature-ID layer should distinguish re-anchors from separable elution features.
+7. **Medium interpretive: family bars overlap.** Count-in-every-family attribution means the family bars can exceed the
+  primary total and must not be read as a composition that sums to 100%.
+8. **Low maintainability: legacy field names remain.** Stored/API names such as `DetectedPeptideLikeArea` remain for
+  backwards compatibility, although their exported labels and documentation now say “resolved isotope-series
+  diagnostic.” A future file-format major version can rename them cleanly.
+9. **Operational/legal: USEARCH licensing remains external.** The bundled personal-use binary has a trust and licensing
+  boundary that should be reviewed before redistribution or commercial deployment.
 
 ## Code-review assessment
 

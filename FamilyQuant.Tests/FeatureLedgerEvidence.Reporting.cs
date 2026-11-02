@@ -87,7 +87,7 @@ internal static partial class FeatureLedgerEvidence
         string core = source.Replace("FamilyQuant/", "FamilyQuant.Core/", StringComparison.Ordinal);
         return File.Exists(Path.Combine(root, core)) ? core : "";
     }
-    private static string Owner(FeatureLedger.Observation row) => row.Source switch
+    internal static string Owner(FeatureLedger.Observation row) => row.Source switch
     {
         var source when source.Contains("ClusterGenerationControl", StringComparison.Ordinal) => "C1/C5/C13",
         var source when source.Contains("HelpContent", StringComparison.Ordinal) => "C13",

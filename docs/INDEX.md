@@ -7,6 +7,8 @@ This is the navigation index for the current checkout. The roadmap owns unfinish
 | Document | Purpose |
 |---|---|
 | [CLAUDE.md](../CLAUDE.md) | Current projects, build/test setup, scientific invariants and implementation guidance |
+| [Working history](HISTORY.md) | Complete archived working notes, measurements, publishing details and retained limitations |
+| [X13 document/test audit](X13-DOCUMENTS.md) | Fact retention, protected-path rulings, exact method splits and receipt validity |
 | [Architecture](ARCHITECTURE.md) | Current boundaries, planned Reports/operation host, budgets and historical destination inventory |
 | [Core operations](CORE-OPERATIONS.md) | Progress, cancellation, outcomes and atomic publication |
 | [App operations](APP-OPERATIONS.md) | Busy host, overlay and publication adapters |
@@ -33,6 +35,7 @@ This is the navigation index for the current checkout. The roadmap owns unfinish
 | [Code map](vision/CODE-MAP.md) | How a FASTA and a RAW file become a family number, and what that read did not cover |
 | [Feature ledger](FEATURE-LEDGER.md) | Frozen preservation contract, dispositions and acceptance state |
 | [Feature evidence](FEATURE-EVIDENCE.md) | Per-observation receipts, native proof runner, audit and review sample |
+| [AS ledger receipt](ASSAY-LEDGER.md) | Exact M22 cohort, executed C# declaration comparisons and remaining proof requirements |
 | [Measured improvement candidates](IMPROVEMENTS.md) | X12 clustering coverage, peptide ambiguity, evidence veto and contaminant measurements |
 | [Ledger scan](feature-ledger-scan.json) | Exact frozen observations and source hashes |
 | [Roadmap](ROADMAP.md) | Current work and acceptance gates; orchestrator owned |
@@ -40,7 +43,7 @@ This is the navigation index for the current checkout. The roadmap owns unfinish
 | [Release notes](../RELEASE_NOTES.md) | Historical release descriptions, not current publication status |
 | [Security](../SECURITY.md) | Trusted SEPro-input boundary and existing native-process policy |
 | [Scientific method](../SCIENTIFIC_METHOD.md) | Protected scientific reference; not edited by housekeeping |
-| [Scientific revision report](../SCIENTIFIC_REVISION_REPORT.md) | Historical validation account and limitations |
+| [Scientific revision report](history/SCIENTIFIC_REVISION_REPORT.md) | Historical validation account and limitations, moved by X13 |
 | [Talk script](../SCIENTIFIC_TALK_SCRIPT.md) | Protected presentation input |
 | [Screen harness](../FamilyQuant.Tests/SCREENS.md) | Capture matrix, isolation and what screenshots do not prove |
 | [Appearance](../FamilyQuant/Themes/README.md) | Theme/token behavior and historical migration context |
@@ -65,11 +68,16 @@ $testExe = Join-Path (Get-Location) 'FamilyQuant.Tests/bin/Release/net10.0-windo
 & $testExe
 ```
 
-On the team machine, the equivalent launcher is `powershell -NoProfile -ExecutionPolicy Bypass -File D:/FamilyQuant-wt/desk/quick-suite.ps1`. It sets the same processor limit and isolated TEMP, runs at normal priority and reports the exit status. Its `-Full` mode belongs to the gate and supplies the real-data arguments.
+On the team machine, the equivalent launcher is `powershell -NoProfile -ExecutionPolicy Bypass -File
+D:/FamilyQuant-wt/desk/quick-suite.ps1`. It sets the same processor limit and isolated TEMP, runs at normal priority and
+reports the exit status. Its `-Full` mode belongs to the gate and supplies the real-data arguments.
 
 The ordinary data slots are `[plp] [database] [deNovoRoot] [acquisitionRoot]`. Use `.` for an absent slot; do not pass empty strings from PowerShell. No-data sections use fixtures; data-dependent sections report skips. A quick green result is not a fresh RAW or installed-product validation.
 
-The syntax tables below use `<name>` for a required supplied path/value and `[name]` for an optional argument. Replace those markers before execution. Paths containing spaces must be quoted. Use explicit output paths outside the repository and outside read-only inputs; many native checkers have shared-machine defaults. The tables are source-audited syntax, not a claim that every expensive or data-specific command was run during housekeeping.
+The syntax tables below use `<name>` for a required supplied path/value and `[name]` for an optional argument. Replace
+those markers before execution. Paths containing spaces must be quoted. Use explicit output paths outside the repository
+and outside read-only inputs; many native checkers have shared-machine defaults. The tables are source-audited syntax,
+not a claim that every expensive or data-specific command was run during housekeeping.
 
 ## Fixture and contract commands
 
@@ -96,6 +104,7 @@ Invoke each flag with `& $testExe <flag>` after building. Dispatch and arity are
 | `--test-operations` | Core outcomes, progress, cancellation and the owned native-child fixture |
 | `--test-busy` | App operation host, running-command cancellation, prior file bytes and guarded publication |
 | `--test-shell-dialogs [--after-busy]` | Browse callers, folder preference, accept/cancel, owned windows and headless messages; optional busy-group setup first |
+| `--test-clustering-diagnostic-shell [fresh-output-dir]` | Analysis action, progress/Cancel guards, actual native reports on read-only saved FCF/FQPROJ fixtures and repeat packet parity |
 | `--test-clustering-results` | Typed clustering/redundancy results and native synthetic fixtures |
 | `--test-identity-study` | Probe parser and grid-versus-probe interpretation |
 | `--test-results` | Results view-model readiness and export choices |
@@ -125,6 +134,8 @@ Invoke each flag with `& $testExe <flag>` after building. Dispatch and arity are
 | `--test-report-study-boundary` | Report-only operation ownership, retained Core models and screen dependencies |
 | `--report-study-snapshot <new-output-dir>` | Six native synthetic text/PNG fixtures for source-move parity |
 | `--shell-checks` | Shell navigation, saving, preferences, Build/Quantify integration and secondary views |
+| `--test-shell-workflow` | Current workflow Help routes and retained quantitation facts through the shell status checks |
+| `--test-shell-evidence-cancel` | Shared Cancel reaches active protein/panel HTTP requests; staged publication, failure and late Cancel |
 | `--feature-ledger-check` | Inventory, row coverage, dispositions and guard regressions |
 | `--test-clustering-improvements` | X12 paired-letter, component-veto, native parse and contaminant diagnostic guards |
 | `--clustering-improvements <document> <FASTA> <output> <identity> [--small-exhaustive]` | Real-data diagnostic candidates; no product numerical change; bounded all-pairs only |
@@ -174,7 +185,16 @@ Companion options for `--screens` are `--screen-fcf <input.fcf>`, `--screen-proj
 | `--feature-ledger-evidence <output>` | Read-only counts by kind, source mappings and reproducible 50-row sample |
 | `--feature-ledger-kind-review <kind> REOPENED/ACCEPTED <reviewer> <reason> <date> <output>` | Independent D13 kind-review decision and whole-kind reopening |
 | `--ledger-declaration-compare <frozen-root> <current-root> <fresh-output> <step> <source-prefix> <date>` | Frozen/current explicit XAML property comparisons and kind receipts |
+| `--ledger-assay-compare <frozen-root> <owner-map> <output> <step> <date>` | Shared C# member comparisons for the exact M22 OPEN cohorts; all nonmatches retained |
 | `--ledger-core-relocation <frozen-root> <fresh-output> X5/X7 <date> [member-mappings.json]` | Scoped complete Core member comparisons, exact frozen hashes, retained source/checker snapshots and per-row gaps; [guide](CORE-RELOCATION-LEDGER.md) |
+| `--ledger-shell-compare <frozen-root> <fresh-output> <date>` | SH and C1 exact declarations/member tokens; separate candidate registers, unproven rows kept OPEN |
+| `--ledger-storage-runtime <frozen-root> <fresh-output> <date> [--negative-control]` | Public project reader/writer schema, codec and refusal observations; [runtime guide](CORE-RUNTIME-LEDGER.md) |
+| `--prove-denovo-ledger <frozen-source-root> <fresh-output> <date>` | Scoped exact De novo declarations, retained snapshots and ledger receipts in batches of 250; [guide](DENOVO-PRESERVATION.md) |
+| `--prove-denovo-runtime <frozen-source-root> <frozen-app-folder> <fresh-output> <date>` | Native frozen/current controls and resolved values across both themes and three legacy sources |
+| `--ledger-shell-compare <frozen-root> <fresh-output> <date>` | SH and C1 exact declarations/member tokens; separate candidate registers, unproven rows kept OPEN |
+| `--ledger-core-relocation <frozen-root> <fresh-output> X5/X7 <date> [member-mappings.json]` | Scoped complete Core member comparisons, exact frozen hashes, retained source/checker snapshots and per-row gaps; [guide](CORE-RELOCATION-LEDGER.md) |
+| `--ledger-core-relocation <frozen-root> <fresh-output> X5/X7 <date> [member-mappings.json]` | Scoped complete Core member comparisons, exact frozen hashes, retained source/checker snapshots and per-row gaps; [guide](CORE-RELOCATION-LEDGER.md) |
+| `--ledger-shell-compare <frozen-root> <fresh-output> <date>` | SH and C1 exact declarations/member tokens; separate candidate registers, unproven rows kept OPEN |
 | `--word-grouping-snapshot <input.fcf-or-fqproj> <output.txt>` | [WordGroupingSnapshot.cs](../FamilyQuant.Tests/WordGroupingSnapshot.cs), also linked into frozen host |
 | `--chart-export-snapshot <output-dir>` | [ChartExportSnapshot.cs](../FamilyQuant.Tests/ChartExportSnapshot.cs), synthetic chart parity fixtures |
 | `--clustering-snapshot <input.fasta> <output.tsv> <integer-identity> <fast-or-exhaustive>` | [ClusteringSnapshot.cs](../FamilyQuant.Tests/ClusteringSnapshot.cs) |
@@ -193,7 +213,9 @@ Choose a fresh lane-owned output for a new validation. This reads a stored proje
 
 ## Evidence checkers
 
-Optional positional values following each flag override its native defaults. These are dataset-specific checks; use the same baseline/provenance packet as the owning scientific step. Some fetch live data or run long native searches. Input and output must be separate. None is executed merely to maintain this catalog.
+Optional positional values following each flag override its native defaults. These are dataset-specific checks; use the
+same baseline/provenance packet as the owning scientific step. Some fetch live data or run long native searches. Input
+and output must be separate. None is executed merely to maintain this catalog.
 
 | Syntax after `$testExe` | Source and prerequisites |
 |---|---|
@@ -212,7 +234,7 @@ Optional positional values following each flag override its native defaults. The
 | `--evidence-architecture-check [searched.fcf] [report.json] [scope-terms]` | Same helper, architecture suggestions |
 | `--evidence-apply-check [searched.fcf] [report.json] [scope-terms]` | Same helper, explicit apply/undo/reopen checks in separate outputs |
 | `--evidence-session-apply-check [searched.fcf] [report.json] [scope-terms]` | Same helper, session preparation and recipe replay |
-| `--family-world-check [project.fqproj] [world.fcf] [output-dir]` | [FamilyWorldCheck.cs](../FamilyQuant.Tests/FamilyWorldCheck.cs), the B1 gate: known answers without the sample's species (and, ungated, its genus) and coverage of the unattributed de novo envelope, the gate study, and the B5 product pass under D11 (`family_world_pass.csv`); live UniProt taxonomy lists, kept in the output folder |
+| `--family-world-check [project.fqproj] [world.fcf] [output-dir]` | [FamilyWorldCheck.cs](../FamilyQuant.Tests/FamilyWorldCheck.cs); B1 gate, gate study and B5 product pass under D11 (`family_world_pass.csv`); live UniProt taxonomy lists in the output folder |
 | `--coherence-check [panel.fcf] [classes.tsv] [output-dir]` | [CoherenceCheckRun.cs](../FamilyQuant.Tests/CoherenceCheckRun.cs) |
 | `--motif-check [evidence.fcf] [classes.tsv] [expected.tsv] [output-dir]` | [MotifCheckRun.cs](../FamilyQuant.Tests/MotifCheckRun.cs) |
 | `--left-out-check [searched.fcf] [baseline.csv] [classes.tsv] [output-dir] [scope-terms]` | [LeftOutCheckRun.cs](../FamilyQuant.Tests/LeftOutCheckRun.cs) |
@@ -220,11 +242,17 @@ Optional positional values following each flag override its native defaults. The
 | `--science-gate-list [searched.fcf] [classes_all.tsv] [output-dir] [scope-terms]` | [ScienceGateListRun.cs](../FamilyQuant.Tests/ScienceGateListRun.cs); sibling `classes.tsv` also required |
 | `--evidence-operations-check [panel.fcf]` | [EvidenceOperationsCheck.cs](../FamilyQuant.Tests/EvidenceOperationsCheck.cs); live fetch/search and cancellation, not an ordinary fixture pass |
 
+The B1 family-world gate checks known answers without the sample's species (and, ungated, its genus)
+and coverage of the unattributed de novo envelope.
+
 Quote semicolon-separated scope text, for example `'Toxin;venom gland'`.
 
 ## Scientific and presentation lanes retained for their owners
 
-These entries remain discoverable because they are real dispatch paths, not because housekeeping authorizes running them. They can write data, caches, figures and study packets at their existing configured destinations. Presentation inputs and canonical slide PNGs remain protected. Read the linked producer and select the exact source/cutoff packet before an authorized run.
+These entries remain discoverable because they are real dispatch paths, not because housekeeping authorizes running
+them. They can write data, caches, figures and study packets at their existing configured destinations. Presentation
+inputs and canonical slide PNGs remain protected. Read the linked producer and select the exact source/cutoff packet
+before an authorized run.
 
 | Flag and invocation convention | Source/scope |
 |---|---|
@@ -257,6 +285,15 @@ rows and leaves 5,388 OPEN; the retirements remain APPROVED_DROP. The proposal s
 requires the independent review sample and merge gate. The evidence audit reports the
 current counts and rejects stale receipts. A missing old handler name is not proof of loss.
 
-Regenerate into scratch with the published command and compare both ledger files against the checkout and the Git blobs separately. On the audited Windows checkout both regenerated files are byte-identical to the working files; the scan JSON differs from its LF Git blob only by CRLF newlines, and normalized content is identical. The Markdown is also byte-identical to its Git blob. Never overwrite acceptance evidence or scan moving source to make the counts pass. The release check intentionally fails while retained rows remain OPEN.
+Regenerate into scratch with the published command and compare both ledger files against the checkout and the Git blobs
+separately. On the audited Windows checkout both regenerated files are byte-identical to the working files; the scan
+JSON differs from its LF Git blob only by CRLF newlines, and normalized content is identical. The Markdown is also
+byte-identical to its Git blob. Never overwrite acceptance evidence or scan moving source to make the counts pass. The
+release check intentionally fails while retained rows remain OPEN.
 
-Housekeeping source-path audit: of the retained observations, 3,446 still have their original source path and 2,014 come from sources relocated to Core. Of the 104 frozen source files, 37 remain at their original path, 66 map to Core, and the removed `GroupingType.cs` has no observation rows. These are source-location categories, not VERIFIED feature mappings. Twenty-one old handler-name observations are absent literally after the view rewrites; eight are within approved DROP, while the others need command/view-model mapping. The source audit distinguishes those cases; no retained row is dropped on a name search.
+Housekeeping source-path audit: of the retained observations, 3,446 still have their original source path and 2,014 come
+from sources relocated to Core. Of the 104 frozen source files, 37 remain at their original path, 66 map to Core, and
+the removed `GroupingType.cs` has no observation rows. These are source-location categories, not VERIFIED feature
+mappings. Twenty-one old handler-name observations are absent literally after the view rewrites; eight are within
+approved DROP, while the others need command/view-model mapping. The source audit distinguishes those cases; no retained
+row is dropped on a name search.

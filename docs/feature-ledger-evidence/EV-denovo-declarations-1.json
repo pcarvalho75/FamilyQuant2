@@ -1,0 +1,1462 @@
+{
+  "schemaVersion": 1,
+  "step": "EV-denovo-declarations-1",
+  "frozenCommit": "e9b73064d8ff19b2fde3e3231240b636a64c0a91",
+  "runs": [
+    {
+      "id": "EV-denovo-declarations",
+      "command": "D:\\FamilyQuant-wt\\evidence\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --prove-denovo-ledger D:/FamilyQuant-data/out-shell/N3/source D:/FamilyQuant-data/out-evidence/ledger-denovo-exact-ready \u00222026-11-02 02:44:16 -0800\u0022",
+      "executedAt": "2026-11-02 02:44:16 -0800",
+      "commit": "f91c0aab3c79a65a6b9ea301225a230ce878e247",
+      "artifacts": [
+        {
+          "path": "D:\\FamilyQuant-data\\out-evidence\\ledger-denovo-exact-ready\\comparisons.log",
+          "sha256": "C16C189F123AAC2CD42CA7ABAEE8A292E92DCEA1CE8394742C39E26F5836A8CF"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-evidence\\ledger-denovo-exact-ready\\comparisons.json",
+          "sha256": "F357624314AA8BE2B7BA9D02C8D6DF1B2EE07ABEA0F52F949275B3854349AA8A"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-evidence\\ledger-denovo-exact-ready\\executed\\FamilyQuant_DeNovoControl.Compatibility.cs",
+          "sha256": "BB45BCACC7C63869B4B22F63EE16C6572D12F7F2A2C9B589686B2DE2BC15479C"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-evidence\\ledger-denovo-exact-ready\\executed\\FamilyQuant_DeNovoControl.Dialogs.cs",
+          "sha256": "B714D7D9AA689F30D9EDFA2479D373824358521783DBBD267E209E34E91884A1"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-evidence\\ledger-denovo-exact-ready\\executed\\FamilyQuant_DeNovoControl.Files.cs",
+          "sha256": "A894899A775DE9BC762B0069DCE26314631BE060B82892F480A5EA3D88B7CD14"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-evidence\\ledger-denovo-exact-ready\\executed\\FamilyQuant_DeNovoControl.Tables.cs",
+          "sha256": "5B2292689F03600BD8FB482588343C0A24DF674B1A4D909588FD9BF747BA296A"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-evidence\\ledger-denovo-exact-ready\\executed\\FamilyQuant_DeNovoControl.xaml.cs",
+          "sha256": "E859BE451A408FF1FCEE9182415A2E0BFCA1F34D192A8E9F1DCE5FCA8C9C1E0B"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-evidence\\ledger-denovo-exact-ready\\executed\\FamilyQuant_DeNovoControl.xaml",
+          "sha256": "F814FE8B8B34A41BBE257DC5809BF9B97B6D51DF6EBED74C437A11D101508A76"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-evidence\\ledger-denovo-exact-ready\\executed\\FamilyQuant_DeNovoFilterControl.xaml",
+          "sha256": "A28193077AB8983D1A799DFAC9DB339DF9A7B226FC6AB610FC797F4A42A5EE85"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-evidence\\ledger-denovo-exact-ready\\executed\\FamilyQuant.Tests_Program.DeNovoLedger.cs",
+          "sha256": "D39B073D593068DDBFD3AA8C770379894E2AFAE77BBFC4F44E5FB90F29290F95"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-evidence\\ledger-denovo-exact-ready\\executed\\FamilyQuant.Tests_Program.Commands.DeNovoLedger.cs",
+          "sha256": "BE0F97E648CE2679C1F7A171094F8F904AAD2C7C36157323E37F368D8EAA650C"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-evidence\\ledger-denovo-exact-ready\\executed\\FamilyQuant.Tests_Program.DeNovoLedgerRuntime.cs",
+          "sha256": "B666074FDE7CF04EC393EB13189FF2CF73A649AF27775BFD932FEEE695852853"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-evidence\\ledger-denovo-exact-ready\\executed\\FamilyQuant.Tests_LedgerMemberFactComparison.cs",
+          "sha256": "AE18ABC01A916A43012F3E34F1B53798FC99346FFEB21CD179CA3D8ADE5834A7"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-evidence\\ledger-denovo-exact-ready\\executed\\FamilyQuant.Tests_LedgerDeclarationComparison.cs",
+          "sha256": "78EC993565740269D572410A84584AF1D96488C1AE81F2455B1D9AA2D94BB4C3"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-evidence\\ledger-denovo-exact-ready\\executed\\FamilyQuant.Tests_FeatureLedger.cs",
+          "sha256": "4ED1D1D467EEE05E77DE325D35BD42FCD0409D3DF1CFF72AC5F7CE1FDAAE8A39"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-evidence\\ledger-denovo-exact-ready\\executed\\FamilyQuant.Tests_FeatureLedgerEvidence.cs",
+          "sha256": "FCCFCE75E122616388FDD68B96AF3E3F7104DC809B61D1F48C3A4A07B9B1969C"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-evidence\\ledger-denovo-exact-ready\\executed\\frozen_FamilyQuant_DeNovoControl.xaml",
+          "sha256": "E7F6B72A22E658A4CFCBD4BD6FDC3DF42AAC0F0DEBAA5EF8B3CA337B736F51BF"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-evidence\\ledger-denovo-exact-ready\\executed\\frozen_FamilyQuant_DeNovoControl.xaml.cs",
+          "sha256": "16D617F16382298A4A60238100D58B65CE03A6562C4B3F0B5B37C629E70A40BF"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-evidence\\ledger-denovo-exact-ready\\executed\\FamilyQuant.Tests.dll",
+          "sha256": "A227245399A71784E1A29A30C39CCA005D53BB31826A61D3378CB294D0AD0CAF"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-evidence\\ledger-denovo-exact-ready\\executed\\FamilyQuant2.dll",
+          "sha256": "E8C50EF1C71166E9BA82968E3F8475930257096C1108FBA7BAFA5F8C1F591611"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-evidence\\ledger-denovo-exact-ready\\executed\\FamilyQuant.Core.dll",
+          "sha256": "EF11103B562AA23DF9F3CC72472BE875581C35E72728AF04EB044C97669FCC20"
+        }
+      ],
+      "workingDirectory": "D:\\FamilyQuant-wt\\evidence"
+    }
+  ],
+  "rows": [
+    {
+      "observationId": "FQ15-9D2697CC6412",
+      "implementation": [
+        {
+          "path": "FamilyQuant/DeNovoControl.xaml",
+          "symbol": "FamilyQuant.DeNovoControl.TextBlockDeNovoLayer1State.Text",
+          "sha256": "F814FE8B8B34A41BBE257DC5809BF9B97B6D51DF6EBED74C437A11D101508A76"
+        }
+      ],
+      "proofs": [],
+      "note": "Declaration preservation only. Reachability, handlers and runtime outputs require executed behaviour checks.",
+      "kindReceiptId": "decl-option-copy",
+      "compared": "FamilyQuant/DeNovoControl.xaml:72 TextBlockDeNovoLayer1State.Text = READY -\u003E FamilyQuant/DeNovoControl.xaml: FamilyQuant.DeNovoControl.TextBlockDeNovoLayer1State.Text = READY"
+    },
+    {
+      "observationId": "FQ15-E79B887CE491",
+      "implementation": [
+        {
+          "path": "FamilyQuant/DeNovoControl.xaml",
+          "symbol": "FamilyQuant.DeNovoControl.TextBoxPeaksDirectory.ToolTip",
+          "sha256": "F814FE8B8B34A41BBE257DC5809BF9B97B6D51DF6EBED74C437A11D101508A76"
+        }
+      ],
+      "proofs": [],
+      "note": "Declaration preservation only. Reachability, handlers and runtime outputs require executed behaviour checks.",
+      "kindReceiptId": "decl-tooltip",
+      "compared": "FamilyQuant/DeNovoControl.xaml:99 TextBoxPeaksDirectory.ToolTip = Type or paste the export folder\u0027s full path. Nothing is read until you press Load and filter. -\u003E FamilyQuant/DeNovoControl.xaml: FamilyQuant.DeNovoControl.TextBoxPeaksDirectory.ToolTip = Type or paste the export folder\u0027s full path. Nothing is read until you press Load and filter."
+    },
+    {
+      "observationId": "FQ15-B2D287A05691",
+      "implementation": [
+        {
+          "path": "FamilyQuant/DeNovoControl.xaml",
+          "symbol": "FamilyQuant.DeNovoControl.ButtonBrowsePeaksDirectory.Content",
+          "sha256": "F814FE8B8B34A41BBE257DC5809BF9B97B6D51DF6EBED74C437A11D101508A76"
+        }
+      ],
+      "proofs": [],
+      "note": "Declaration preservation only. Reachability, handlers and runtime outputs require executed behaviour checks.",
+      "kindReceiptId": "decl-option-copy",
+      "compared": "FamilyQuant/DeNovoControl.xaml:101 ButtonBrowsePeaksDirectory.Content = Browse... -\u003E FamilyQuant/DeNovoControl.xaml: FamilyQuant.DeNovoControl.ButtonBrowsePeaksDirectory.Content = Browse..."
+    },
+    {
+      "observationId": "FQ15-AE8353E0B55A",
+      "implementation": [
+        {
+          "path": "FamilyQuant/DeNovoControl.xaml",
+          "symbol": "FamilyQuant.DeNovoControl.ButtonBrowsePeaksDirectory.ToolTip",
+          "sha256": "F814FE8B8B34A41BBE257DC5809BF9B97B6D51DF6EBED74C437A11D101508A76"
+        }
+      ],
+      "proofs": [],
+      "note": "Declaration preservation only. Reachability, handlers and runtime outputs require executed behaviour checks.",
+      "kindReceiptId": "decl-tooltip",
+      "compared": "FamilyQuant/DeNovoControl.xaml:103 ButtonBrowsePeaksDirectory.ToolTip = Pick the export folder. Its matching files are counted at once, but nothing is imported until you press Load and filter. -\u003E FamilyQuant/DeNovoControl.xaml: FamilyQuant.DeNovoControl.ButtonBrowsePeaksDirectory.ToolTip = Pick the export folder. Its matching files are counted at once, but nothing is imported until you press Load and filter."
+    },
+    {
+      "observationId": "FQ15-94580B062C26",
+      "implementation": [
+        {
+          "path": "FamilyQuant/DeNovoControl.xaml",
+          "symbol": "FamilyQuant.DeNovoControl.TextBlockNativeConfidence.Text",
+          "sha256": "F814FE8B8B34A41BBE257DC5809BF9B97B6D51DF6EBED74C437A11D101508A76"
+        }
+      ],
+      "proofs": [],
+      "note": "Declaration preservation only. Reachability, handlers and runtime outputs require executed behaviour checks.",
+      "kindReceiptId": "decl-option-copy",
+      "compared": "FamilyQuant/DeNovoControl.xaml:117 TextBlockNativeConfidence.Text = Native confidence: PEAKS ALC (%) -\u003E FamilyQuant/DeNovoControl.xaml: FamilyQuant.DeNovoControl.TextBlockNativeConfidence.Text = Native confidence: PEAKS ALC (%)"
+    },
+    {
+      "observationId": "FQ15-30B6355FEB66",
+      "implementation": [
+        {
+          "path": "FamilyQuant/DeNovoControl.xaml",
+          "symbol": "FamilyQuant.DeNovoControl.TextBlockNativeConfidence.ToolTip",
+          "sha256": "F814FE8B8B34A41BBE257DC5809BF9B97B6D51DF6EBED74C437A11D101508A76"
+        }
+      ],
+      "proofs": [],
+      "note": "Declaration preservation only. Reachability, handlers and runtime outputs require executed behaviour checks.",
+      "kindReceiptId": "decl-tooltip",
+      "compared": "FamilyQuant/DeNovoControl.xaml:118 TextBlockNativeConfidence.ToolTip = The confidence score that is read and filtered. PEAKS ALC and DeepNovo SCORE are different scales and are not interchangeable. -\u003E FamilyQuant/DeNovoControl.xaml: FamilyQuant.DeNovoControl.TextBlockNativeConfidence.ToolTip = The confidence score that is read and filtered. PEAKS ALC and DeepNovo SCORE are different scales and are not interchangeable."
+    },
+    {
+      "observationId": "FQ15-0EE063D7800F",
+      "implementation": [
+        {
+          "path": "FamilyQuant/DeNovoControl.xaml",
+          "symbol": "FamilyQuant.DeNovoControl.TextBoxMinLength.ToolTip",
+          "sha256": "F814FE8B8B34A41BBE257DC5809BF9B97B6D51DF6EBED74C437A11D101508A76"
+        }
+      ],
+      "proofs": [],
+      "note": "Declaration preservation only. Reachability, handlers and runtime outputs require executed behaviour checks.",
+      "kindReceiptId": "decl-tooltip",
+      "compared": "FamilyQuant/DeNovoControl.xaml:128 TextBoxMinLength.ToolTip = A whole number from 1 to 100. A value out of range is refused when you press Load and filter, and the previous value stays. -\u003E FamilyQuant/DeNovoControl.xaml: FamilyQuant.DeNovoControl.TextBoxMinLength.ToolTip = A whole number from 1 to 100. A value out of range is refused when you press Load and filter, and the previous value stays."
+    },
+    {
+      "observationId": "FQ15-DE567F4F9532",
+      "implementation": [
+        {
+          "path": "FamilyQuant/DeNovoControl.xaml",
+          "symbol": "FamilyQuant.DeNovoControl.LabelMinimumSourceConfidence.Content",
+          "sha256": "F814FE8B8B34A41BBE257DC5809BF9B97B6D51DF6EBED74C437A11D101508A76"
+        }
+      ],
+      "proofs": [],
+      "note": "Declaration preservation only. Reachability, handlers and runtime outputs require executed behaviour checks.",
+      "kindReceiptId": "decl-option-copy",
+      "compared": "FamilyQuant/DeNovoControl.xaml:130 LabelMinimumSourceConfidence.Content = Minimum ALC (%): -\u003E FamilyQuant/DeNovoControl.xaml: FamilyQuant.DeNovoControl.LabelMinimumSourceConfidence.Content = Minimum ALC (%):"
+    },
+    {
+      "observationId": "FQ15-18FEE4C4A624",
+      "implementation": [
+        {
+          "path": "FamilyQuant/DeNovoControl.xaml",
+          "symbol": "FamilyQuant.DeNovoControl.LabelMinimumSourceConfidence.ToolTip",
+          "sha256": "F814FE8B8B34A41BBE257DC5809BF9B97B6D51DF6EBED74C437A11D101508A76"
+        }
+      ],
+      "proofs": [],
+      "note": "Declaration preservation only. Reachability, handlers and runtime outputs require executed behaviour checks.",
+      "kindReceiptId": "decl-tooltip",
+      "compared": "FamilyQuant/DeNovoControl.xaml:131 LabelMinimumSourceConfidence.ToolTip = Lowest overall confidence kept (PEAKS ALC or DeepNovo SCORE). The two scales are not equivalent, and neither is a calibrated FDR. Default 80%. -\u003E FamilyQuant/DeNovoControl.xaml: FamilyQuant.DeNovoControl.LabelMinimumSourceConfidence.ToolTip = Lowest overall confidence kept (PEAKS ALC or DeepNovo SCORE). The two scales are not equivalent, and neither is a calibrated FDR. Default 80%."
+    },
+    {
+      "observationId": "FQ15-08D1A96A6B66",
+      "implementation": [
+        {
+          "path": "FamilyQuant/DeNovoControl.xaml",
+          "symbol": "FamilyQuant.DeNovoControl.TextBoxMinAlc.ToolTip",
+          "sha256": "F814FE8B8B34A41BBE257DC5809BF9B97B6D51DF6EBED74C437A11D101508A76"
+        }
+      ],
+      "proofs": [],
+      "note": "Declaration preservation only. Reachability, handlers and runtime outputs require executed behaviour checks.",
+      "kindReceiptId": "decl-tooltip",
+      "compared": "FamilyQuant/DeNovoControl.xaml:134 TextBoxMinAlc.ToolTip = A number from 0 to 100, decimals allowed. Spectra scoring below it are dropped. A value out of range is refused when you press Load and filter. -\u003E FamilyQuant/DeNovoControl.xaml: FamilyQuant.DeNovoControl.TextBoxMinAlc.ToolTip = A number from 0 to 100, decimals allowed. Spectra scoring below it are dropped. A value out of range is refused when you press Load and filter."
+    },
+    {
+      "observationId": "FQ15-0727E7F538A0",
+      "implementation": [
+        {
+          "path": "FamilyQuant/DeNovoControl.xaml",
+          "symbol": "FamilyQuant.DeNovoControl.TextBoxStretchLength.ToolTip",
+          "sha256": "F814FE8B8B34A41BBE257DC5809BF9B97B6D51DF6EBED74C437A11D101508A76"
+        }
+      ],
+      "proofs": [],
+      "note": "Declaration preservation only. Reachability, handlers and runtime outputs require executed behaviour checks.",
+      "kindReceiptId": "decl-tooltip",
+      "compared": "FamilyQuant/DeNovoControl.xaml:140 TextBoxStretchLength.ToolTip = A whole number from 1 to 100; a longer stretch is stricter. A value out of range is refused when you press Load and filter. -\u003E FamilyQuant/DeNovoControl.xaml: FamilyQuant.DeNovoControl.TextBoxStretchLength.ToolTip = A whole number from 1 to 100; a longer stretch is stricter. A value out of range is refused when you press Load and filter."
+    },
+    {
+      "observationId": "FQ15-FCEAF2EAEEE5",
+      "implementation": [
+        {
+          "path": "FamilyQuant/DeNovoControl.xaml",
+          "symbol": "FamilyQuant.DeNovoControl.TextBoxStretchFloor.ToolTip",
+          "sha256": "F814FE8B8B34A41BBE257DC5809BF9B97B6D51DF6EBED74C437A11D101508A76"
+        }
+      ],
+      "proofs": [],
+      "note": "Declaration preservation only. Reachability, handlers and runtime outputs require executed behaviour checks.",
+      "kindReceiptId": "decl-tooltip",
+      "compared": "FamilyQuant/DeNovoControl.xaml:146 TextBoxStretchFloor.ToolTip = A number from 0 to 100, rounded to a whole number. A value out of range is refused when you press Load and filter. -\u003E FamilyQuant/DeNovoControl.xaml: FamilyQuant.DeNovoControl.TextBoxStretchFloor.ToolTip = A number from 0 to 100, rounded to a whole number. A value out of range is refused when you press Load and filter."
+    },
+    {
+      "observationId": "FQ15-ECDFCF5DC9AC",
+      "implementation": [
+        {
+          "path": "FamilyQuant/DeNovoControl.xaml",
+          "symbol": "FamilyQuant.DeNovoControl.ButtonLoadAndFilter.Content",
+          "sha256": "F814FE8B8B34A41BBE257DC5809BF9B97B6D51DF6EBED74C437A11D101508A76"
+        }
+      ],
+      "proofs": [],
+      "note": "Declaration preservation only. Reachability, handlers and runtime outputs require executed behaviour checks.",
+      "kindReceiptId": "decl-option-copy",
+      "compared": "FamilyQuant/DeNovoControl.xaml:148 ButtonLoadAndFilter.Content = Load and filter -\u003E FamilyQuant/DeNovoControl.xaml: FamilyQuant.DeNovoControl.ButtonLoadAndFilter.Content = Load and filter"
+    },
+    {
+      "observationId": "FQ15-0909914D6EE8",
+      "implementation": [
+        {
+          "path": "FamilyQuant/DeNovoControl.xaml",
+          "symbol": "FamilyQuant.DeNovoControl.ButtonLoadAndFilter.ToolTip",
+          "sha256": "F814FE8B8B34A41BBE257DC5809BF9B97B6D51DF6EBED74C437A11D101508A76"
+        }
+      ],
+      "proofs": [],
+      "note": "Declaration preservation only. Reachability, handlers and runtime outputs require executed behaviour checks.",
+      "kindReceiptId": "decl-tooltip",
+      "compared": "FamilyQuant/DeNovoControl.xaml:150 ButtonLoadAndFilter.ToolTip = Reads every export file of the chosen source in the folder and keeps the rows that pass the length, confidence and stretch filters. -\u003E FamilyQuant/DeNovoControl.xaml: FamilyQuant.DeNovoControl.ButtonLoadAndFilter.ToolTip = Reads every export file of the chosen source in the folder and keeps the rows that pass the length, confidence and stretch filters."
+    },
+    {
+      "observationId": "FQ15-28F91A2BB058",
+      "implementation": [
+        {
+          "path": "FamilyQuant/DeNovoControl.xaml",
+          "symbol": "FamilyQuant.DeNovoControl.LabelFilesFound.ToolTip",
+          "sha256": "F814FE8B8B34A41BBE257DC5809BF9B97B6D51DF6EBED74C437A11D101508A76"
+        }
+      ],
+      "proofs": [],
+      "note": "Declaration preservation only. Reachability, handlers and runtime outputs require executed behaviour checks.",
+      "kindReceiptId": "decl-tooltip",
+      "compared": "FamilyQuant/DeNovoControl.xaml:156 LabelFilesFound.ToolTip = Export files of the chosen source found in the folder and its sub-folders. Zero means the wrong folder or the wrong source. -\u003E FamilyQuant/DeNovoControl.xaml: FamilyQuant.DeNovoControl.LabelFilesFound.ToolTip = Export files of the chosen source found in the folder and its sub-folders. Zero means the wrong folder or the wrong source."
+    },
+    {
+      "observationId": "FQ15-FDC9409D009C",
+      "implementation": [
+        {
+          "path": "FamilyQuant/DeNovoControl.xaml",
+          "symbol": "FamilyQuant.DeNovoControl.LabelRowsRead.ToolTip",
+          "sha256": "F814FE8B8B34A41BBE257DC5809BF9B97B6D51DF6EBED74C437A11D101508A76"
+        }
+      ],
+      "proofs": [],
+      "note": "Declaration preservation only. Reachability, handlers and runtime outputs require executed behaviour checks.",
+      "kindReceiptId": "decl-tooltip",
+      "compared": "FamilyQuant/DeNovoControl.xaml:158 LabelRowsRead.ToolTip = De novo rows read from the files, before filtering. Truncated lines are skipped. -\u003E FamilyQuant/DeNovoControl.xaml: FamilyQuant.DeNovoControl.LabelRowsRead.ToolTip = De novo rows read from the files, before filtering. Truncated lines are skipped."
+    },
+    {
+      "observationId": "FQ15-95130551D8D7",
+      "implementation": [
+        {
+          "path": "FamilyQuant/DeNovoControl.xaml",
+          "symbol": "FamilyQuant.DeNovoControl.LabelRowsKept.ToolTip",
+          "sha256": "F814FE8B8B34A41BBE257DC5809BF9B97B6D51DF6EBED74C437A11D101508A76"
+        }
+      ],
+      "proofs": [],
+      "note": "Declaration preservation only. Reachability, handlers and runtime outputs require executed behaviour checks.",
+      "kindReceiptId": "decl-tooltip",
+      "compared": "FamilyQuant/DeNovoControl.xaml:160 LabelRowsKept.ToolTip = Rows that passed all three filters, and their share of the rows read. Every later step works from these rows. -\u003E FamilyQuant/DeNovoControl.xaml: FamilyQuant.DeNovoControl.LabelRowsKept.ToolTip = Rows that passed all three filters, and their share of the rows read. Every later step works from these rows."
+    },
+    {
+      "observationId": "FQ15-6BF8CB652D82",
+      "implementation": [
+        {
+          "path": "FamilyQuant/DeNovoControl.xaml",
+          "symbol": "FamilyQuant.DeNovoControl.TextBlockPerRunBreakdown.ToolTip",
+          "sha256": "F814FE8B8B34A41BBE257DC5809BF9B97B6D51DF6EBED74C437A11D101508A76"
+        }
+      ],
+      "proofs": [],
+      "note": "Declaration preservation only. Reachability, handlers and runtime outputs require executed behaviour checks.",
+      "kindReceiptId": "decl-tooltip",
+      "compared": "FamilyQuant/DeNovoControl.xaml:165 TextBlockPerRunBreakdown.ToolTip = Rows read and kept for each run. Runs are named by file name, not by order. A run keeping far fewer rows than the others is worth checking. -\u003E FamilyQuant/DeNovoControl.xaml: FamilyQuant.DeNovoControl.TextBlockPerRunBreakdown.ToolTip = Rows read and kept for each run. Runs are named by file name, not by order. A run keeping far fewer rows than the others is worth checking."
+    },
+    {
+      "observationId": "FQ15-437152D36BD7",
+      "implementation": [
+        {
+          "path": "FamilyQuant/DeNovoControl.xaml",
+          "symbol": "FamilyQuant.DeNovoControl.TextBlockDeNovoLayer2State.Text",
+          "sha256": "F814FE8B8B34A41BBE257DC5809BF9B97B6D51DF6EBED74C437A11D101508A76"
+        }
+      ],
+      "proofs": [],
+      "note": "Declaration preservation only. Reachability, handlers and runtime outputs require executed behaviour checks.",
+      "kindReceiptId": "decl-option-copy",
+      "compared": "FamilyQuant/DeNovoControl.xaml:180 TextBlockDeNovoLayer2State.Text = BLOCKED -\u003E FamilyQuant/DeNovoControl.xaml: FamilyQuant.DeNovoControl.TextBlockDeNovoLayer2State.Text = BLOCKED"
+    },
+    {
+      "observationId": "FQ15-D11C61A63122",
+      "implementation": [
+        {
+          "path": "FamilyQuant/DeNovoControl.xaml",
+          "symbol": "FamilyQuant.DeNovoControl.TextBoxSeproPackage.ToolTip",
+          "sha256": "F814FE8B8B34A41BBE257DC5809BF9B97B6D51DF6EBED74C437A11D101508A76"
+        }
+      ],
+      "proofs": [],
+      "note": "Declaration preservation only. Reachability, handlers and runtime outputs require executed behaviour checks.",
+      "kindReceiptId": "decl-tooltip",
+      "compared": "FamilyQuant/DeNovoControl.xaml:207 TextBoxSeproPackage.ToolTip = Type or paste the .sepr2 file\u0027s full path. It is only read when you press Reconcile. -\u003E FamilyQuant/DeNovoControl.xaml: FamilyQuant.DeNovoControl.TextBoxSeproPackage.ToolTip = Type or paste the .sepr2 file\u0027s full path. It is only read when you press Reconcile."
+    },
+    {
+      "observationId": "FQ15-1C187D8E6472",
+      "implementation": [
+        {
+          "path": "FamilyQuant/DeNovoControl.xaml",
+          "symbol": "FamilyQuant.DeNovoControl.ButtonBrowseSeproPackage.Content",
+          "sha256": "F814FE8B8B34A41BBE257DC5809BF9B97B6D51DF6EBED74C437A11D101508A76"
+        }
+      ],
+      "proofs": [],
+      "note": "Declaration preservation only. Reachability, handlers and runtime outputs require executed behaviour checks.",
+      "kindReceiptId": "decl-option-copy",
+      "compared": "FamilyQuant/DeNovoControl.xaml:209 ButtonBrowseSeproPackage.Content = Browse... -\u003E FamilyQuant/DeNovoControl.xaml: FamilyQuant.DeNovoControl.ButtonBrowseSeproPackage.Content = Browse..."
+    },
+    {
+      "observationId": "FQ15-402A907D22A2",
+      "implementation": [
+        {
+          "path": "FamilyQuant/DeNovoControl.xaml",
+          "symbol": "FamilyQuant.DeNovoControl.ButtonBrowseSeproPackage.ToolTip",
+          "sha256": "F814FE8B8B34A41BBE257DC5809BF9B97B6D51DF6EBED74C437A11D101508A76"
+        }
+      ],
+      "proofs": [],
+      "note": "Declaration preservation only. Reachability, handlers and runtime outputs require executed behaviour checks.",
+      "kindReceiptId": "decl-tooltip",
+      "compared": "FamilyQuant/DeNovoControl.xaml:211 ButtonBrowseSeproPackage.ToolTip = Pick the .sepr2 file. Nothing is read until you press Reconcile. -\u003E FamilyQuant/DeNovoControl.xaml: FamilyQuant.DeNovoControl.ButtonBrowseSeproPackage.ToolTip = Pick the .sepr2 file. Nothing is read until you press Reconcile."
+    },
+    {
+      "observationId": "FQ15-3FD302C9CB33",
+      "implementation": [
+        {
+          "path": "FamilyQuant/DeNovoControl.xaml",
+          "symbol": "FamilyQuant.DeNovoControl.ButtonReconcile.Content",
+          "sha256": "F814FE8B8B34A41BBE257DC5809BF9B97B6D51DF6EBED74C437A11D101508A76"
+        }
+      ],
+      "proofs": [],
+      "note": "Declaration preservation only. Reachability, handlers and runtime outputs require executed behaviour checks.",
+      "kindReceiptId": "decl-option-copy",
+      "compared": "FamilyQuant/DeNovoControl.xaml:213 ButtonReconcile.Content = Reconcile -\u003E FamilyQuant/DeNovoControl.xaml: FamilyQuant.DeNovoControl.ButtonReconcile.Content = Reconcile"
+    },
+    {
+      "observationId": "FQ15-D6DE89DF675B",
+      "implementation": [
+        {
+          "path": "FamilyQuant/DeNovoControl.xaml",
+          "symbol": "FamilyQuant.DeNovoControl.ButtonReconcile.IsEnabled",
+          "sha256": "F814FE8B8B34A41BBE257DC5809BF9B97B6D51DF6EBED74C437A11D101508A76"
+        }
+      ],
+      "proofs": [],
+      "note": "Declaration preservation only. Reachability, handlers and runtime outputs require executed behaviour checks.",
+      "kindReceiptId": "decl-option-copy",
+      "compared": "FamilyQuant/DeNovoControl.xaml:214 ButtonReconcile.IsEnabled = False -\u003E FamilyQuant/DeNovoControl.xaml: FamilyQuant.DeNovoControl.ButtonReconcile.IsEnabled = False"
+    },
+    {
+      "observationId": "FQ15-7179A41C3C03",
+      "implementation": [
+        {
+          "path": "FamilyQuant/DeNovoControl.xaml",
+          "symbol": "FamilyQuant.DeNovoControl.ButtonReconcile.ToolTip",
+          "sha256": "F814FE8B8B34A41BBE257DC5809BF9B97B6D51DF6EBED74C437A11D101508A76"
+        }
+      ],
+      "proofs": [],
+      "note": "Declaration preservation only. Reachability, handlers and runtime outputs require executed behaviour checks.",
+      "kindReceiptId": "decl-tooltip",
+      "compared": "FamilyQuant/DeNovoControl.xaml:215 ButtonReconcile.ToolTip = Joins the kept de novo rows to PatternLab by file name and scan. Sequences are compared only when the charge matches and the precursor m/z is within 20 ppm. -\u003E FamilyQuant/DeNovoControl.xaml: FamilyQuant.DeNovoControl.ButtonReconcile.ToolTip = Joins the kept de novo rows to PatternLab by file name and scan. Sequences are compared only when the charge matches and the precursor m/z is within 20 ppm."
+    },
+    {
+      "observationId": "FQ15-89122E4A961B",
+      "implementation": [
+        {
+          "path": "FamilyQuant/DeNovoControl.xaml",
+          "symbol": "FamilyQuant.DeNovoControl.LabelVerdictDeNovoOnly.ToolTip",
+          "sha256": "F814FE8B8B34A41BBE257DC5809BF9B97B6D51DF6EBED74C437A11D101508A76"
+        }
+      ],
+      "proofs": [],
+      "note": "Declaration preservation only. Reachability, handlers and runtime outputs require executed behaviour checks.",
+      "kindReceiptId": "decl-tooltip",
+      "compared": "FamilyQuant/DeNovoControl.xaml:221 LabelVerdictDeNovoOnly.ToolTip = Kept de novo spectra with no PatternLab identification in the same run and scan. This is the new evidence the later steps work on. -\u003E FamilyQuant/DeNovoControl.xaml: FamilyQuant.DeNovoControl.LabelVerdictDeNovoOnly.ToolTip = Kept de novo spectra with no PatternLab identification in the same run and scan. This is the new evidence the later steps work on."
+    },
+    {
+      "observationId": "FQ15-5F51CDE49107",
+      "implementation": [
+        {
+          "path": "FamilyQuant/DeNovoControl.xaml",
+          "symbol": "FamilyQuant.DeNovoControl.LabelVerdictCoIsolated.ToolTip",
+          "sha256": "F814FE8B8B34A41BBE257DC5809BF9B97B6D51DF6EBED74C437A11D101508A76"
+        }
+      ],
+      "proofs": [],
+      "note": "Declaration preservation only. Reachability, handlers and runtime outputs require executed behaviour checks.",
+      "kindReceiptId": "decl-tooltip",
+      "compared": "FamilyQuant/DeNovoControl.xaml:223 LabelVerdictCoIsolated.ToolTip = PatternLab identified this scan, but not at the same charge and precursor m/z (within 20 ppm). This may be co-isolation; it is not a sequence disagreement. -\u003E FamilyQuant/DeNovoControl.xaml: FamilyQuant.DeNovoControl.LabelVerdictCoIsolated.ToolTip = PatternLab identified this scan, but not at the same charge and precursor m/z (within 20 ppm). This may be co-isolation; it is not a sequence disagreement."
+    },
+    {
+      "observationId": "FQ15-270FCB1F50FE",
+      "implementation": [
+        {
+          "path": "FamilyQuant/DeNovoControl.xaml",
+          "symbol": "FamilyQuant.DeNovoControl.LabelVerdictRedundant.ToolTip",
+          "sha256": "F814FE8B8B34A41BBE257DC5809BF9B97B6D51DF6EBED74C437A11D101508A76"
+        }
+      ],
+      "proofs": [],
+      "note": "Declaration preservation only. Reachability, handlers and runtime outputs require executed behaviour checks.",
+      "kindReceiptId": "decl-tooltip",
+      "compared": "FamilyQuant/DeNovoControl.xaml:225 LabelVerdictRedundant.ToolTip = Same scan, precursor and sequence as a PatternLab identification, so it adds nothing new. None at all usually means the search is not of the same runs. -\u003E FamilyQuant/DeNovoControl.xaml: FamilyQuant.DeNovoControl.LabelVerdictRedundant.ToolTip = Same scan, precursor and sequence as a PatternLab identification, so it adds nothing new. None at all usually means the search is not of the same runs."
+    },
+    {
+      "observationId": "FQ15-846D5F3404C7",
+      "implementation": [
+        {
+          "path": "FamilyQuant/DeNovoControl.xaml",
+          "symbol": "FamilyQuant.DeNovoControl.LabelVerdictWeakPsm.ToolTip",
+          "sha256": "F814FE8B8B34A41BBE257DC5809BF9B97B6D51DF6EBED74C437A11D101508A76"
+        }
+      ],
+      "proofs": [],
+      "note": "Declaration preservation only. Reachability, handlers and runtime outputs require executed behaviour checks.",
+      "kindReceiptId": "decl-tooltip",
+      "compared": "FamilyQuant/DeNovoControl.xaml:227 LabelVerdictWeakPsm.ToolTip = Same sequence as PatternLab, but the PatternLab XCorr is below the threshold. Kept for review, not counted as new signal. -\u003E FamilyQuant/DeNovoControl.xaml: FamilyQuant.DeNovoControl.LabelVerdictWeakPsm.ToolTip = Same sequence as PatternLab, but the PatternLab XCorr is below the threshold. Kept for review, not counted as new signal."
+    },
+    {
+      "observationId": "FQ15-8678D35E92E2",
+      "implementation": [
+        {
+          "path": "FamilyQuant/DeNovoControl.xaml",
+          "symbol": "FamilyQuant.DeNovoControl.LabelVerdictConflict.ToolTip",
+          "sha256": "F814FE8B8B34A41BBE257DC5809BF9B97B6D51DF6EBED74C437A11D101508A76"
+        }
+      ],
+      "proofs": [],
+      "note": "Declaration preservation only. Reachability, handlers and runtime outputs require executed behaviour checks.",
+      "kindReceiptId": "decl-tooltip",
+      "compared": "FamilyQuant/DeNovoControl.xaml:229 LabelVerdictConflict.ToolTip = Same scan, charge and precursor m/z (within 20 ppm), but a different sequence. Kept for review and left out of the de novo quantitation. -\u003E FamilyQuant/DeNovoControl.xaml: FamilyQuant.DeNovoControl.LabelVerdictConflict.ToolTip = Same scan, charge and precursor m/z (within 20 ppm), but a different sequence. Kept for review and left out of the de novo quantitation."
+    },
+    {
+      "observationId": "FQ15-64CF95ED48B1",
+      "implementation": [
+        {
+          "path": "FamilyQuant/DeNovoControl.xaml",
+          "symbol": "FamilyQuant.DeNovoControl.LabelReviewQueueCount.ToolTip",
+          "sha256": "F814FE8B8B34A41BBE257DC5809BF9B97B6D51DF6EBED74C437A11D101508A76"
+        }
+      ],
+      "proofs": [],
+      "note": "Declaration preservation only. Reachability, handlers and runtime outputs require executed behaviour checks.",
+      "kindReceiptId": "decl-tooltip",
+      "compared": "FamilyQuant/DeNovoControl.xaml:235 LabelReviewQueueCount.ToolTip = Rows kept for review: alternative sequences plus matches whose PatternLab XCorr is below the threshold. -\u003E FamilyQuant/DeNovoControl.xaml: FamilyQuant.DeNovoControl.LabelReviewQueueCount.ToolTip = Rows kept for review: alternative sequences plus matches whose PatternLab XCorr is below the threshold."
+    },
+    {
+      "observationId": "FQ15-401240DA39D0",
+      "implementation": [
+        {
+          "path": "FamilyQuant/DeNovoControl.xaml",
+          "symbol": "FamilyQuant.DeNovoControl.LabelOverlapScan.ToolTip",
+          "sha256": "F814FE8B8B34A41BBE257DC5809BF9B97B6D51DF6EBED74C437A11D101508A76"
+        }
+      ],
+      "proofs": [],
+      "note": "Declaration preservation only. Reachability, handlers and runtime outputs require executed behaviour checks.",
+      "kindReceiptId": "decl-tooltip",
+      "compared": "FamilyQuant/DeNovoControl.xaml:238 LabelOverlapScan.ToolTip = Spectra both programs reported in the same file and scan. This does not yet mean the same precursor, since one scan can hold several. -\u003E FamilyQuant/DeNovoControl.xaml: FamilyQuant.DeNovoControl.LabelOverlapScan.ToolTip = Spectra both programs reported in the same file and scan. This does not yet mean the same precursor, since one scan can hold several."
+    },
+    {
+      "observationId": "FQ15-50ECC10B42CE",
+      "implementation": [
+        {
+          "path": "FamilyQuant/DeNovoControl.xaml",
+          "symbol": "FamilyQuant.DeNovoControl.LabelOverlapPrecursor.ToolTip",
+          "sha256": "F814FE8B8B34A41BBE257DC5809BF9B97B6D51DF6EBED74C437A11D101508A76"
+        }
+      ],
+      "proofs": [],
+      "note": "Declaration preservation only. Reachability, handlers and runtime outputs require executed behaviour checks.",
+      "kindReceiptId": "decl-tooltip",
+      "compared": "FamilyQuant/DeNovoControl.xaml:240 LabelOverlapPrecursor.ToolTip = Same file, scan and charge, with precursor m/z within 20 ppm. Sequences are compared only inside this group. -\u003E FamilyQuant/DeNovoControl.xaml: FamilyQuant.DeNovoControl.LabelOverlapPrecursor.ToolTip = Same file, scan and charge, with precursor m/z within 20 ppm. Sequences are compared only inside this group."
+    },
+    {
+      "observationId": "FQ15-A0FE5CF345D7",
+      "implementation": [
+        {
+          "path": "FamilyQuant/DeNovoControl.xaml",
+          "symbol": "FamilyQuant.DeNovoControl.LabelOverlapExact.ToolTip",
+          "sha256": "F814FE8B8B34A41BBE257DC5809BF9B97B6D51DF6EBED74C437A11D101508A76"
+        }
+      ],
+      "proofs": [],
+      "note": "Declaration preservation only. Reachability, handlers and runtime outputs require executed behaviour checks.",
+      "kindReceiptId": "decl-tooltip",
+      "compared": "FamilyQuant/DeNovoControl.xaml:242 LabelOverlapExact.ToolTip = Same file, scan and charge, and the same sequence as the best PatternLab match once modifications are removed. I and L count as different here. -\u003E FamilyQuant/DeNovoControl.xaml: FamilyQuant.DeNovoControl.LabelOverlapExact.ToolTip = Same file, scan and charge, and the same sequence as the best PatternLab match once modifications are removed. I and L count as different here."
+    },
+    {
+      "observationId": "FQ15-33CC4C6EE110",
+      "implementation": [
+        {
+          "path": "FamilyQuant/DeNovoControl.xaml",
+          "symbol": "FamilyQuant.DeNovoControl.LabelOverlapDivergent.ToolTip",
+          "sha256": "F814FE8B8B34A41BBE257DC5809BF9B97B6D51DF6EBED74C437A11D101508A76"
+        }
+      ],
+      "proofs": [],
+      "note": "Declaration preservation only. Reachability, handlers and runtime outputs require executed behaviour checks.",
+      "kindReceiptId": "decl-tooltip",
+      "compared": "FamilyQuant/DeNovoControl.xaml:244 LabelOverlapDivergent.ToolTip = Same file, scan and charge, but a different sequence once modifications are removed. The stricter m/z-matched count is shown separately. -\u003E FamilyQuant/DeNovoControl.xaml: FamilyQuant.DeNovoControl.LabelOverlapDivergent.ToolTip = Same file, scan and charge, but a different sequence once modifications are removed. The stricter m/z-matched count is shown separately."
+    },
+    {
+      "observationId": "FQ15-8EB3E299BF85",
+      "implementation": [
+        {
+          "path": "FamilyQuant/DeNovoControl.xaml",
+          "symbol": "FamilyQuant.DeNovoControl.ButtonExportSummary.IsEnabled",
+          "sha256": "F814FE8B8B34A41BBE257DC5809BF9B97B6D51DF6EBED74C437A11D101508A76"
+        }
+      ],
+      "proofs": [],
+      "note": "Declaration preservation only. Reachability, handlers and runtime outputs require executed behaviour checks.",
+      "kindReceiptId": "decl-option-copy",
+      "compared": "FamilyQuant/DeNovoControl.xaml:247 ButtonExportSummary.IsEnabled = False -\u003E FamilyQuant/DeNovoControl.xaml: FamilyQuant.DeNovoControl.ButtonExportSummary.IsEnabled = False"
+    },
+    {
+      "observationId": "FQ15-D145D58132EC",
+      "implementation": [
+        {
+          "path": "FamilyQuant/DeNovoControl.xaml",
+          "symbol": "FamilyQuant.DeNovoControl.ButtonExportSummary.ToolTip",
+          "sha256": "F814FE8B8B34A41BBE257DC5809BF9B97B6D51DF6EBED74C437A11D101508A76"
+        }
+      ],
+      "proofs": [],
+      "note": "Declaration preservation only. Reachability, handlers and runtime outputs require executed behaviour checks.",
+      "kindReceiptId": "decl-tooltip",
+      "compared": "FamilyQuant/DeNovoControl.xaml:248 ButtonExportSummary.ToolTip = Saves a small CSV with the counts above for each run. Disabled until a reconciliation has been run. -\u003E FamilyQuant/DeNovoControl.xaml: FamilyQuant.DeNovoControl.ButtonExportSummary.ToolTip = Saves a small CSV with the counts above for each run. Disabled until a reconciliation has been run."
+    },
+    {
+      "observationId": "FQ15-B51155691A5E",
+      "implementation": [
+        {
+          "path": "FamilyQuant/DeNovoControl.xaml",
+          "symbol": "FamilyQuant.DeNovoControl.ButtonExportReviewQueue.IsEnabled",
+          "sha256": "F814FE8B8B34A41BBE257DC5809BF9B97B6D51DF6EBED74C437A11D101508A76"
+        }
+      ],
+      "proofs": [],
+      "note": "Declaration preservation only. Reachability, handlers and runtime outputs require executed behaviour checks.",
+      "kindReceiptId": "decl-option-copy",
+      "compared": "FamilyQuant/DeNovoControl.xaml:251 ButtonExportReviewQueue.IsEnabled = False -\u003E FamilyQuant/DeNovoControl.xaml: FamilyQuant.DeNovoControl.ButtonExportReviewQueue.IsEnabled = False"
+    },
+    {
+      "observationId": "FQ15-B51734A048F9",
+      "implementation": [
+        {
+          "path": "FamilyQuant/DeNovoControl.xaml",
+          "symbol": "FamilyQuant.DeNovoControl.ButtonExportReviewQueue.ToolTip",
+          "sha256": "F814FE8B8B34A41BBE257DC5809BF9B97B6D51DF6EBED74C437A11D101508A76"
+        }
+      ],
+      "proofs": [],
+      "note": "Declaration preservation only. Reachability, handlers and runtime outputs require executed behaviour checks.",
+      "kindReceiptId": "decl-tooltip",
+      "compared": "FamilyQuant/DeNovoControl.xaml:252 ButtonExportReviewQueue.ToolTip = Saves the review queue as a CSV, with both sequences and every matching field, for checking by hand. -\u003E FamilyQuant/DeNovoControl.xaml: FamilyQuant.DeNovoControl.ButtonExportReviewQueue.ToolTip = Saves the review queue as a CSV, with both sequences and every matching field, for checking by hand."
+    },
+    {
+      "observationId": "FQ15-A2F20AC72380",
+      "implementation": [
+        {
+          "path": "FamilyQuant/DeNovoControl.xaml",
+          "symbol": "FamilyQuant.DeNovoControl.ButtonExportOverlapStudy.IsEnabled",
+          "sha256": "F814FE8B8B34A41BBE257DC5809BF9B97B6D51DF6EBED74C437A11D101508A76"
+        }
+      ],
+      "proofs": [],
+      "note": "Declaration preservation only. Reachability, handlers and runtime outputs require executed behaviour checks.",
+      "kindReceiptId": "decl-option-copy",
+      "compared": "FamilyQuant/DeNovoControl.xaml:255 ButtonExportOverlapStudy.IsEnabled = False -\u003E FamilyQuant/DeNovoControl.xaml: FamilyQuant.DeNovoControl.ButtonExportOverlapStudy.IsEnabled = False"
+    },
+    {
+      "observationId": "FQ15-F8E234DCF327",
+      "implementation": [
+        {
+          "path": "FamilyQuant/DeNovoControl.xaml",
+          "symbol": "FamilyQuant.DeNovoControl.ButtonExportOverlapStudy.ToolTip",
+          "sha256": "F814FE8B8B34A41BBE257DC5809BF9B97B6D51DF6EBED74C437A11D101508A76"
+        }
+      ],
+      "proofs": [],
+      "note": "Declaration preservation only. Reachability, handlers and runtime outputs require executed behaviour checks.",
+      "kindReceiptId": "decl-tooltip",
+      "compared": "FamilyQuant/DeNovoControl.xaml:256 ButtonExportOverlapStudy.ToolTip = Saves the full overlap study as a CSV: same-scan matches and differences, then the split by precursor. Each row states its definition. -\u003E FamilyQuant/DeNovoControl.xaml: FamilyQuant.DeNovoControl.ButtonExportOverlapStudy.ToolTip = Saves the full overlap study as a CSV: same-scan matches and differences, then the split by precursor. Each row states its definition."
+    },
+    {
+      "observationId": "FQ15-B52ECAB50344",
+      "implementation": [
+        {
+          "path": "FamilyQuant/DeNovoControl.xaml",
+          "symbol": "FamilyQuant.DeNovoControl.DataGridReviewQueue.IsReadOnly",
+          "sha256": "F814FE8B8B34A41BBE257DC5809BF9B97B6D51DF6EBED74C437A11D101508A76"
+        }
+      ],
+      "proofs": [],
+      "note": "Declaration preservation only. Reachability, handlers and runtime outputs require executed behaviour checks.",
+      "kindReceiptId": "decl-option-copy",
+      "compared": "FamilyQuant/DeNovoControl.xaml:263 DataGridReviewQueue.IsReadOnly = True -\u003E FamilyQuant/DeNovoControl.xaml: FamilyQuant.DeNovoControl.DataGridReviewQueue.IsReadOnly = True"
+    },
+    {
+      "observationId": "FQ15-A1AD5039E557",
+      "implementation": [
+        {
+          "path": "FamilyQuant/DeNovoControl.xaml",
+          "symbol": "FamilyQuant.DeNovoControl.DataGridReviewQueue.ToolTip",
+          "sha256": "F814FE8B8B34A41BBE257DC5809BF9B97B6D51DF6EBED74C437A11D101508A76"
+        }
+      ],
+      "proofs": [],
+      "note": "Declaration preservation only. Reachability, handlers and runtime outputs require executed behaviour checks.",
+      "kindReceiptId": "decl-tooltip",
+      "compared": "FamilyQuant/DeNovoControl.xaml:266 DataGridReviewQueue.ToolTip = Rows with a comparable precursor but a different sequence, plus matches with a low PatternLab XCorr. They are left out of the de novo quantitation and listed here for review. -\u003E FamilyQuant/DeNovoControl.xaml: FamilyQuant.DeNovoControl.DataGridReviewQueue.ToolTip = Rows with a comparable precursor but a different sequence, plus matches with a low PatternLab XCorr. They are left out of the de novo quantitation and listed here for review."
+    },
+    {
+      "observationId": "FQ15-B33E5DC1B245",
+      "implementation": [
+        {
+          "path": "FamilyQuant/DeNovoControl.xaml",
+          "symbol": "FamilyQuant.DeNovoControl.ColumnQueueRun.Header",
+          "sha256": "F814FE8B8B34A41BBE257DC5809BF9B97B6D51DF6EBED74C437A11D101508A76"
+        }
+      ],
+      "proofs": [],
+      "note": "Declaration preservation only. Reachability, handlers and runtime outputs require executed behaviour checks.",
+      "kindReceiptId": "decl-column",
+      "compared": "FamilyQuant/DeNovoControl.xaml:268 ColumnQueueRun.Header = Run -\u003E FamilyQuant/DeNovoControl.xaml: FamilyQuant.DeNovoControl.ColumnQueueRun.Header = Run"
+    },
+    {
+      "observationId": "FQ15-89C7BC04EF36",
+      "implementation": [
+        {
+          "path": "FamilyQuant/DeNovoControl.xaml",
+          "symbol": "FamilyQuant.DeNovoControl.ColumnQueueScan.Header",
+          "sha256": "F814FE8B8B34A41BBE257DC5809BF9B97B6D51DF6EBED74C437A11D101508A76"
+        }
+      ],
+      "proofs": [],
+      "note": "Declaration preservation only. Reachability, handlers and runtime outputs require executed behaviour checks.",
+      "kindReceiptId": "decl-column",
+      "compared": "FamilyQuant/DeNovoControl.xaml:269 ColumnQueueScan.Header = Scan -\u003E FamilyQuant/DeNovoControl.xaml: FamilyQuant.DeNovoControl.ColumnQueueScan.Header = Scan"
+    },
+    {
+      "observationId": "FQ15-0AC806A0BA09",
+      "implementation": [
+        {
+          "path": "FamilyQuant/DeNovoControl.xaml",
+          "symbol": "FamilyQuant.DeNovoControl.ColumnQueueMz.Header",
+          "sha256": "F814FE8B8B34A41BBE257DC5809BF9B97B6D51DF6EBED74C437A11D101508A76"
+        }
+      ],
+      "proofs": [],
+      "note": "Declaration preservation only. Reachability, handlers and runtime outputs require executed behaviour checks.",
+      "kindReceiptId": "decl-column",
+      "compared": "FamilyQuant/DeNovoControl.xaml:270 ColumnQueueMz.Header = m/z -\u003E FamilyQuant/DeNovoControl.xaml: FamilyQuant.DeNovoControl.ColumnQueueMz.Header = m/z"
+    },
+    {
+      "observationId": "FQ15-9176458E27D6",
+      "implementation": [
+        {
+          "path": "FamilyQuant/DeNovoControl.xaml",
+          "symbol": "FamilyQuant.DeNovoControl.ColumnQueueCharge.Header",
+          "sha256": "F814FE8B8B34A41BBE257DC5809BF9B97B6D51DF6EBED74C437A11D101508A76"
+        }
+      ],
+      "proofs": [],
+      "note": "Declaration preservation only. Reachability, handlers and runtime outputs require executed behaviour checks.",
+      "kindReceiptId": "decl-column",
+      "compared": "FamilyQuant/DeNovoControl.xaml:271 ColumnQueueCharge.Header = z -\u003E FamilyQuant/DeNovoControl.xaml: FamilyQuant.DeNovoControl.ColumnQueueCharge.Header = z"
+    },
+    {
+      "observationId": "FQ15-8A4BA1BC7EE7",
+      "implementation": [
+        {
+          "path": "FamilyQuant/DeNovoControl.xaml",
+          "symbol": "FamilyQuant.DeNovoControl.ColumnQueueDeNovoSequence.Header",
+          "sha256": "F814FE8B8B34A41BBE257DC5809BF9B97B6D51DF6EBED74C437A11D101508A76"
+        }
+      ],
+      "proofs": [],
+      "note": "Declaration preservation only. Reachability, handlers and runtime outputs require executed behaviour checks.",
+      "kindReceiptId": "decl-column",
+      "compared": "FamilyQuant/DeNovoControl.xaml:272 ColumnQueueDeNovoSequence.Header = De novo sequence -\u003E FamilyQuant/DeNovoControl.xaml: FamilyQuant.DeNovoControl.ColumnQueueDeNovoSequence.Header = De novo sequence"
+    },
+    {
+      "observationId": "FQ15-3321E31B9696",
+      "implementation": [
+        {
+          "path": "FamilyQuant/DeNovoControl.xaml",
+          "symbol": "FamilyQuant.DeNovoControl.ColumnQueuePatternLabSequence.Header",
+          "sha256": "F814FE8B8B34A41BBE257DC5809BF9B97B6D51DF6EBED74C437A11D101508A76"
+        }
+      ],
+      "proofs": [],
+      "note": "Declaration preservation only. Reachability, handlers and runtime outputs require executed behaviour checks.",
+      "kindReceiptId": "decl-column",
+      "compared": "FamilyQuant/DeNovoControl.xaml:273 ColumnQueuePatternLabSequence.Header = PatternLab sequence -\u003E FamilyQuant/DeNovoControl.xaml: FamilyQuant.DeNovoControl.ColumnQueuePatternLabSequence.Header = PatternLab sequence"
+    },
+    {
+      "observationId": "FQ15-78E36C23F807",
+      "implementation": [
+        {
+          "path": "FamilyQuant/DeNovoControl.xaml",
+          "symbol": "FamilyQuant.DeNovoControl.ColumnQueueXCorr.Header",
+          "sha256": "F814FE8B8B34A41BBE257DC5809BF9B97B6D51DF6EBED74C437A11D101508A76"
+        }
+      ],
+      "proofs": [],
+      "note": "Declaration preservation only. Reachability, handlers and runtime outputs require executed behaviour checks.",
+      "kindReceiptId": "decl-column",
+      "compared": "FamilyQuant/DeNovoControl.xaml:274 ColumnQueueXCorr.Header = XCorr -\u003E FamilyQuant/DeNovoControl.xaml: FamilyQuant.DeNovoControl.ColumnQueueXCorr.Header = XCorr"
+    },
+    {
+      "observationId": "FQ15-DD3825DDEE32",
+      "implementation": [
+        {
+          "path": "FamilyQuant/DeNovoControl.xaml",
+          "symbol": "FamilyQuant.DeNovoControl.ColumnQueueAlc.Header",
+          "sha256": "F814FE8B8B34A41BBE257DC5809BF9B97B6D51DF6EBED74C437A11D101508A76"
+        }
+      ],
+      "proofs": [],
+      "note": "Declaration preservation only. Reachability, handlers and runtime outputs require executed behaviour checks.",
+      "kindReceiptId": "decl-column",
+      "compared": "FamilyQuant/DeNovoControl.xaml:275 ColumnQueueAlc.Header = ALC (%) -\u003E FamilyQuant/DeNovoControl.xaml: FamilyQuant.DeNovoControl.ColumnQueueAlc.Header = ALC (%)"
+    },
+    {
+      "observationId": "FQ15-2E242798AF3C",
+      "implementation": [
+        {
+          "path": "FamilyQuant/DeNovoControl.xaml",
+          "symbol": "FamilyQuant.DeNovoControl.ColumnQueueMinConfidence.Header",
+          "sha256": "F814FE8B8B34A41BBE257DC5809BF9B97B6D51DF6EBED74C437A11D101508A76"
+        }
+      ],
+      "proofs": [],
+      "note": "Declaration preservation only. Reachability, handlers and runtime outputs require executed behaviour checks.",
+      "kindReceiptId": "decl-column",
+      "compared": "FamilyQuant/DeNovoControl.xaml:276 ColumnQueueMinConfidence.Header = Min residue conf. -\u003E FamilyQuant/DeNovoControl.xaml: FamilyQuant.DeNovoControl.ColumnQueueMinConfidence.Header = Min residue conf."
+    },
+    {
+      "observationId": "FQ15-4E88263CFD0D",
+      "implementation": [
+        {
+          "path": "FamilyQuant/DeNovoControl.xaml",
+          "symbol": "FamilyQuant.DeNovoControl.ColumnQueuePpm.Header",
+          "sha256": "F814FE8B8B34A41BBE257DC5809BF9B97B6D51DF6EBED74C437A11D101508A76"
+        }
+      ],
+      "proofs": [],
+      "note": "Declaration preservation only. Reachability, handlers and runtime outputs require executed behaviour checks.",
+      "kindReceiptId": "decl-column",
+      "compared": "FamilyQuant/DeNovoControl.xaml:277 ColumnQueuePpm.Header = ppm apart -\u003E FamilyQuant/DeNovoControl.xaml: FamilyQuant.DeNovoControl.ColumnQueuePpm.Header = ppm apart"
+    },
+    {
+      "observationId": "FQ15-567836704F7E",
+      "implementation": [
+        {
+          "path": "FamilyQuant/DeNovoControl.xaml",
+          "symbol": "FamilyQuant.DeNovoControl.ColumnQueueVerdict.Header",
+          "sha256": "F814FE8B8B34A41BBE257DC5809BF9B97B6D51DF6EBED74C437A11D101508A76"
+        }
+      ],
+      "proofs": [],
+      "note": "Declaration preservation only. Reachability, handlers and runtime outputs require executed behaviour checks.",
+      "kindReceiptId": "decl-column",
+      "compared": "FamilyQuant/DeNovoControl.xaml:278 ColumnQueueVerdict.Header = Verdict -\u003E FamilyQuant/DeNovoControl.xaml: FamilyQuant.DeNovoControl.ColumnQueueVerdict.Header = Verdict"
+    },
+    {
+      "observationId": "FQ15-295EECEDBDE2",
+      "implementation": [
+        {
+          "path": "FamilyQuant/DeNovoControl.xaml",
+          "symbol": "FamilyQuant.DeNovoControl.TextBlockDeNovoLayer4State.Text",
+          "sha256": "F814FE8B8B34A41BBE257DC5809BF9B97B6D51DF6EBED74C437A11D101508A76"
+        }
+      ],
+      "proofs": [],
+      "note": "Declaration preservation only. Reachability, handlers and runtime outputs require executed behaviour checks.",
+      "kindReceiptId": "decl-option-copy",
+      "compared": "FamilyQuant/DeNovoControl.xaml:402 TextBlockDeNovoLayer4State.Text = BLOCKED -\u003E FamilyQuant/DeNovoControl.xaml: FamilyQuant.DeNovoControl.TextBlockDeNovoLayer4State.Text = BLOCKED"
+    },
+    {
+      "observationId": "FQ15-16B36F68CEA2",
+      "implementation": [
+        {
+          "path": "FamilyQuant/DeNovoControl.xaml",
+          "symbol": "FamilyQuant.DeNovoControl.ButtonBrowseHomologyFcf.Content",
+          "sha256": "F814FE8B8B34A41BBE257DC5809BF9B97B6D51DF6EBED74C437A11D101508A76"
+        }
+      ],
+      "proofs": [],
+      "note": "Declaration preservation only. Reachability, handlers and runtime outputs require executed behaviour checks.",
+      "kindReceiptId": "decl-option-copy",
+      "compared": "FamilyQuant/DeNovoControl.xaml:430 ButtonBrowseHomologyFcf.Content = Browse... -\u003E FamilyQuant/DeNovoControl.xaml: FamilyQuant.DeNovoControl.ButtonBrowseHomologyFcf.Content = Browse..."
+    },
+    {
+      "observationId": "FQ15-2A13FAA50E49",
+      "implementation": [
+        {
+          "path": "FamilyQuant/DeNovoControl.xaml",
+          "symbol": "FamilyQuant.DeNovoControl.ButtonBrowseHomologyFcf.ToolTip",
+          "sha256": "F814FE8B8B34A41BBE257DC5809BF9B97B6D51DF6EBED74C437A11D101508A76"
+        }
+      ],
+      "proofs": [],
+      "note": "Declaration preservation only. Reachability, handlers and runtime outputs require executed behaviour checks.",
+      "kindReceiptId": "decl-tooltip",
+      "compared": "FamilyQuant/DeNovoControl.xaml:432 ButtonBrowseHomologyFcf.ToolTip = Pick the .fcf file. Nothing is read until you press Search. -\u003E FamilyQuant/DeNovoControl.xaml: FamilyQuant.DeNovoControl.ButtonBrowseHomologyFcf.ToolTip = Pick the .fcf file. Nothing is read until you press Search."
+    },
+    {
+      "observationId": "FQ15-F4A71CC1B150",
+      "implementation": [
+        {
+          "path": "FamilyQuant/DeNovoControl.xaml",
+          "symbol": "FamilyQuant.DeNovoControl.ButtonSearchHomology.Content",
+          "sha256": "F814FE8B8B34A41BBE257DC5809BF9B97B6D51DF6EBED74C437A11D101508A76"
+        }
+      ],
+      "proofs": [],
+      "note": "Declaration preservation only. Reachability, handlers and runtime outputs require executed behaviour checks.",
+      "kindReceiptId": "decl-option-copy",
+      "compared": "FamilyQuant/DeNovoControl.xaml:434 ButtonSearchHomology.Content = Search -\u003E FamilyQuant/DeNovoControl.xaml: FamilyQuant.DeNovoControl.ButtonSearchHomology.Content = Search"
+    },
+    {
+      "observationId": "FQ15-BC7C4457BF5A",
+      "implementation": [
+        {
+          "path": "FamilyQuant/DeNovoControl.xaml",
+          "symbol": "FamilyQuant.DeNovoControl.ButtonSearchHomology.IsEnabled",
+          "sha256": "F814FE8B8B34A41BBE257DC5809BF9B97B6D51DF6EBED74C437A11D101508A76"
+        }
+      ],
+      "proofs": [],
+      "note": "Declaration preservation only. Reachability, handlers and runtime outputs require executed behaviour checks.",
+      "kindReceiptId": "decl-option-copy",
+      "compared": "FamilyQuant/DeNovoControl.xaml:435 ButtonSearchHomology.IsEnabled = False -\u003E FamilyQuant/DeNovoControl.xaml: FamilyQuant.DeNovoControl.ButtonSearchHomology.IsEnabled = False"
+    },
+    {
+      "observationId": "FQ15-7C8A7E1F85A3",
+      "implementation": [
+        {
+          "path": "FamilyQuant/DeNovoControl.xaml",
+          "symbol": "FamilyQuant.DeNovoControl.ButtonSearchHomology.ToolTip",
+          "sha256": "F814FE8B8B34A41BBE257DC5809BF9B97B6D51DF6EBED74C437A11D101508A76"
+        }
+      ],
+      "proofs": [],
+      "note": "Declaration preservation only. Reachability, handlers and runtime outputs require executed behaviour checks.",
+      "kindReceiptId": "decl-tooltip",
+      "compared": "FamilyQuant/DeNovoControl.xaml:436 ButtonSearchHomology.ToolTip = Aligns each distinct kept peptide to the family file\u0027s proteins and assigns the hits to families. It does not need extracted areas. Disabled until Step 1 has kept at least one row. -\u003E FamilyQuant/DeNovoControl.xaml: FamilyQuant.DeNovoControl.ButtonSearchHomology.ToolTip = Aligns each distinct kept peptide to the family file\u0027s proteins and assigns the hits to families. It does not need extracted areas. Disabled until Step 1 has kept at least one row."
+    },
+    {
+      "observationId": "FQ15-8B0F67EE1930",
+      "implementation": [
+        {
+          "path": "FamilyQuant/DeNovoControl.xaml",
+          "symbol": "FamilyQuant.DeNovoControl.TextBoxMinIdentity.ToolTip",
+          "sha256": "F814FE8B8B34A41BBE257DC5809BF9B97B6D51DF6EBED74C437A11D101508A76"
+        }
+      ],
+      "proofs": [],
+      "note": "Declaration preservation only. Reachability, handlers and runtime outputs require executed behaviour checks.",
+      "kindReceiptId": "decl-tooltip",
+      "compared": "FamilyQuant/DeNovoControl.xaml:444 TextBoxMinIdentity.ToolTip = A number from 0 to 1, with a dot as the decimal separator. A value out of range is refused when you press Search. -\u003E FamilyQuant/DeNovoControl.xaml: FamilyQuant.DeNovoControl.TextBoxMinIdentity.ToolTip = A number from 0 to 1, with a dot as the decimal separator. A value out of range is refused when you press Search."
+    },
+    {
+      "observationId": "FQ15-C446E6922FE2",
+      "implementation": [
+        {
+          "path": "FamilyQuant/DeNovoControl.xaml",
+          "symbol": "FamilyQuant.DeNovoControl.TextBoxTopHits.ToolTip",
+          "sha256": "F814FE8B8B34A41BBE257DC5809BF9B97B6D51DF6EBED74C437A11D101508A76"
+        }
+      ],
+      "proofs": [],
+      "note": "Declaration preservation only. Reachability, handlers and runtime outputs require executed behaviour checks.",
+      "kindReceiptId": "decl-tooltip",
+      "compared": "FamilyQuant/DeNovoControl.xaml:450 TextBoxTopHits.ToolTip = A whole number, 1 or more. A value below 1 is refused when you press Search. -\u003E FamilyQuant/DeNovoControl.xaml: FamilyQuant.DeNovoControl.TextBoxTopHits.ToolTip = A whole number, 1 or more. A value below 1 is refused when you press Search."
+    },
+    {
+      "observationId": "FQ15-84D30CFD22B8",
+      "implementation": [
+        {
+          "path": "FamilyQuant/DeNovoControl.xaml",
+          "symbol": "FamilyQuant.DeNovoControl.CheckBoxConsiderILSame.Content",
+          "sha256": "F814FE8B8B34A41BBE257DC5809BF9B97B6D51DF6EBED74C437A11D101508A76"
+        }
+      ],
+      "proofs": [],
+      "note": "Declaration preservation only. Reachability, handlers and runtime outputs require executed behaviour checks.",
+      "kindReceiptId": "decl-option-copy",
+      "compared": "FamilyQuant/DeNovoControl.xaml:452 CheckBoxConsiderILSame.Content = I and L are one residue -\u003E FamilyQuant/DeNovoControl.xaml: FamilyQuant.DeNovoControl.CheckBoxConsiderILSame.Content = I and L are one residue"
+    },
+    {
+      "observationId": "FQ15-D00AEB743B9F",
+      "implementation": [
+        {
+          "path": "FamilyQuant/DeNovoControl.xaml",
+          "symbol": "FamilyQuant.DeNovoControl.CheckBoxConsiderILSame.ToolTip",
+          "sha256": "F814FE8B8B34A41BBE257DC5809BF9B97B6D51DF6EBED74C437A11D101508A76"
+        }
+      ],
+      "proofs": [],
+      "note": "Declaration preservation only. Reachability, handlers and runtime outputs require executed behaviour checks.",
+      "kindReceiptId": "decl-tooltip",
+      "compared": "FamilyQuant/DeNovoControl.xaml:454 CheckBoxConsiderILSame.ToolTip = Treat isoleucine and leucine as the same residue when matching, since they have identical mass. On by default; leave it on. -\u003E FamilyQuant/DeNovoControl.xaml: FamilyQuant.DeNovoControl.CheckBoxConsiderILSame.ToolTip = Treat isoleucine and leucine as the same residue when matching, since they have identical mass. On by default; leave it on."
+    },
+    {
+      "observationId": "FQ15-DFF0E436F514",
+      "implementation": [
+        {
+          "path": "FamilyQuant/DeNovoControl.xaml",
+          "symbol": "FamilyQuant.DeNovoControl.CheckBoxKQEquivalent.Content",
+          "sha256": "F814FE8B8B34A41BBE257DC5809BF9B97B6D51DF6EBED74C437A11D101508A76"
+        }
+      ],
+      "proofs": [],
+      "note": "Declaration preservation only. Reachability, handlers and runtime outputs require executed behaviour checks.",
+      "kindReceiptId": "decl-option-copy",
+      "compared": "FamilyQuant/DeNovoControl.xaml:456 CheckBoxKQEquivalent.Content = K and Q are one residue -\u003E FamilyQuant/DeNovoControl.xaml: FamilyQuant.DeNovoControl.CheckBoxKQEquivalent.Content = K and Q are one residue"
+    },
+    {
+      "observationId": "FQ15-6ED547E8548E",
+      "implementation": [
+        {
+          "path": "FamilyQuant/DeNovoControl.xaml",
+          "symbol": "FamilyQuant.DeNovoControl.CheckBoxKQEquivalent.ToolTip",
+          "sha256": "F814FE8B8B34A41BBE257DC5809BF9B97B6D51DF6EBED74C437A11D101508A76"
+        }
+      ],
+      "proofs": [],
+      "note": "Declaration preservation only. Reachability, handlers and runtime outputs require executed behaviour checks.",
+      "kindReceiptId": "decl-tooltip",
+      "compared": "FamilyQuant/DeNovoControl.xaml:458 CheckBoxKQEquivalent.ToolTip = Treat lysine and glutamine as the same residue when matching (they differ by 0.036 Da). Off by default; turning it on widens every family. -\u003E FamilyQuant/DeNovoControl.xaml: FamilyQuant.DeNovoControl.CheckBoxKQEquivalent.ToolTip = Treat lysine and glutamine as the same residue when matching (they differ by 0.036 Da). Off by default; turning it on widens every family."
+    },
+    {
+      "observationId": "FQ15-C6E0C6A507C2",
+      "implementation": [
+        {
+          "path": "FamilyQuant/DeNovoControl.xaml",
+          "symbol": "FamilyQuant.DeNovoControl.LabelHomologyPeptides.ToolTip",
+          "sha256": "F814FE8B8B34A41BBE257DC5809BF9B97B6D51DF6EBED74C437A11D101508A76"
+        }
+      ],
+      "proofs": [],
+      "note": "Declaration preservation only. Reachability, handlers and runtime outputs require executed behaviour checks.",
+      "kindReceiptId": "decl-tooltip",
+      "compared": "FamilyQuant/DeNovoControl.xaml:469 LabelHomologyPeptides.ToolTip = Distinct peptide sequences searched. A sequence read in many spectra is searched once, so this is below the kept row count. -\u003E FamilyQuant/DeNovoControl.xaml: FamilyQuant.DeNovoControl.LabelHomologyPeptides.ToolTip = Distinct peptide sequences searched. A sequence read in many spectra is searched once, so this is below the kept row count."
+    },
+    {
+      "observationId": "FQ15-D46CFCF72992",
+      "implementation": [
+        {
+          "path": "FamilyQuant/DeNovoControl.xaml",
+          "symbol": "FamilyQuant.DeNovoControl.LabelHomologyMapped.ToolTip",
+          "sha256": "F814FE8B8B34A41BBE257DC5809BF9B97B6D51DF6EBED74C437A11D101508A76"
+        }
+      ],
+      "proofs": [],
+      "note": "Declaration preservation only. Reachability, handlers and runtime outputs require executed behaviour checks.",
+      "kindReceiptId": "decl-tooltip",
+      "compared": "FamilyQuant/DeNovoControl.xaml:471 LabelHomologyMapped.ToolTip = Peptides assigned to at least one target protein, and their share of those searched. Read it next to the decoy-only count. -\u003E FamilyQuant/DeNovoControl.xaml: FamilyQuant.DeNovoControl.LabelHomologyMapped.ToolTip = Peptides assigned to at least one target protein, and their share of those searched. Read it next to the decoy-only count."
+    },
+    {
+      "observationId": "FQ15-B8F0E3277FDD",
+      "implementation": [
+        {
+          "path": "FamilyQuant/DeNovoControl.xaml",
+          "symbol": "FamilyQuant.DeNovoControl.LabelHomologyDecoyOnly.ToolTip",
+          "sha256": "F814FE8B8B34A41BBE257DC5809BF9B97B6D51DF6EBED74C437A11D101508A76"
+        }
+      ],
+      "proofs": [],
+      "note": "Declaration preservation only. Reachability, handlers and runtime outputs require executed behaviour checks.",
+      "kindReceiptId": "decl-tooltip",
+      "compared": "FamilyQuant/DeNovoControl.xaml:473 LabelHomologyDecoyOnly.ToolTip = Peptides that matched only decoy proteins: the false-match control. If it is close to the mapped count, the identity threshold is too low. -\u003E FamilyQuant/DeNovoControl.xaml: FamilyQuant.DeNovoControl.LabelHomologyDecoyOnly.ToolTip = Peptides that matched only decoy proteins: the false-match control. If it is close to the mapped count, the identity threshold is too low."
+    },
+    {
+      "observationId": "FQ15-6D4F0CD4C238",
+      "implementation": [
+        {
+          "path": "FamilyQuant/DeNovoControl.xaml",
+          "symbol": "FamilyQuant.DeNovoControl.LabelHomologyUnmatched.ToolTip",
+          "sha256": "F814FE8B8B34A41BBE257DC5809BF9B97B6D51DF6EBED74C437A11D101508A76"
+        }
+      ],
+      "proofs": [],
+      "note": "Declaration preservation only. Reachability, handlers and runtime outputs require executed behaviour checks.",
+      "kindReceiptId": "decl-tooltip",
+      "compared": "FamilyQuant/DeNovoControl.xaml:475 LabelHomologyUnmatched.ToolTip = Peptides that matched no protein at this identity. In venom de novo data this is common, and it is not an error. -\u003E FamilyQuant/DeNovoControl.xaml: FamilyQuant.DeNovoControl.LabelHomologyUnmatched.ToolTip = Peptides that matched no protein at this identity. In venom de novo data this is common, and it is not an error."
+    },
+    {
+      "observationId": "FQ15-7B3150790301",
+      "implementation": [
+        {
+          "path": "FamilyQuant/DeNovoControl.xaml",
+          "symbol": "FamilyQuant.DeNovoControl.LabelHomologyElapsed.ToolTip",
+          "sha256": "F814FE8B8B34A41BBE257DC5809BF9B97B6D51DF6EBED74C437A11D101508A76"
+        }
+      ],
+      "proofs": [],
+      "note": "Declaration preservation only. Reachability, handlers and runtime outputs require executed behaviour checks.",
+      "kindReceiptId": "decl-tooltip",
+      "compared": "FamilyQuant/DeNovoControl.xaml:477 LabelHomologyElapsed.ToolTip = How long the search took, in seconds, so an unusually slow search can be noticed. -\u003E FamilyQuant/DeNovoControl.xaml: FamilyQuant.DeNovoControl.LabelHomologyElapsed.ToolTip = How long the search took, in seconds, so an unusually slow search can be noticed."
+    },
+    {
+      "observationId": "FQ15-059DF4DD48B2",
+      "implementation": [
+        {
+          "path": "FamilyQuant/DeNovoControl.xaml",
+          "symbol": "FamilyQuant.DeNovoControl.DataGridHomologyFamilies.IsReadOnly",
+          "sha256": "F814FE8B8B34A41BBE257DC5809BF9B97B6D51DF6EBED74C437A11D101508A76"
+        }
+      ],
+      "proofs": [],
+      "note": "Declaration preservation only. Reachability, handlers and runtime outputs require executed behaviour checks.",
+      "kindReceiptId": "decl-option-copy",
+      "compared": "FamilyQuant/DeNovoControl.xaml:485 DataGridHomologyFamilies.IsReadOnly = True -\u003E FamilyQuant/DeNovoControl.xaml: FamilyQuant.DeNovoControl.DataGridHomologyFamilies.IsReadOnly = True"
+    },
+    {
+      "observationId": "FQ15-2A6660087265",
+      "implementation": [
+        {
+          "path": "FamilyQuant/DeNovoControl.xaml",
+          "symbol": "FamilyQuant.DeNovoControl.DataGridHomologyFamilies.ToolTip",
+          "sha256": "F814FE8B8B34A41BBE257DC5809BF9B97B6D51DF6EBED74C437A11D101508A76"
+        }
+      ],
+      "proofs": [],
+      "note": "Declaration preservation only. Reachability, handlers and runtime outputs require executed behaviour checks.",
+      "kindReceiptId": "decl-tooltip",
+      "compared": "FamilyQuant/DeNovoControl.xaml:488 DataGridHomologyFamilies.ToolTip = One line per family reached, most peptides first, target hits only. A peptide in two families counts in both, so the column does not sum to the peptides searched. -\u003E FamilyQuant/DeNovoControl.xaml: FamilyQuant.DeNovoControl.DataGridHomologyFamilies.ToolTip = One line per family reached, most peptides first, target hits only. A peptide in two families counts in both, so the column does not sum to the peptides searched."
+    },
+    {
+      "observationId": "FQ15-1E75F228EDC2",
+      "implementation": [
+        {
+          "path": "FamilyQuant/DeNovoControl.xaml",
+          "symbol": "FamilyQuant.DeNovoControl.ColumnFamilyId.Header",
+          "sha256": "F814FE8B8B34A41BBE257DC5809BF9B97B6D51DF6EBED74C437A11D101508A76"
+        }
+      ],
+      "proofs": [],
+      "note": "Declaration preservation only. Reachability, handlers and runtime outputs require executed behaviour checks.",
+      "kindReceiptId": "decl-column",
+      "compared": "FamilyQuant/DeNovoControl.xaml:490 ColumnFamilyId.Header = Family (User ID) -\u003E FamilyQuant/DeNovoControl.xaml: FamilyQuant.DeNovoControl.ColumnFamilyId.Header = Family (User ID)"
+    },
+    {
+      "observationId": "FQ15-7A7F566E7093",
+      "implementation": [
+        {
+          "path": "FamilyQuant/DeNovoControl.xaml",
+          "symbol": "FamilyQuant.DeNovoControl.ColumnFamilyPeptides.Header",
+          "sha256": "F814FE8B8B34A41BBE257DC5809BF9B97B6D51DF6EBED74C437A11D101508A76"
+        }
+      ],
+      "proofs": [],
+      "note": "Declaration preservation only. Reachability, handlers and runtime outputs require executed behaviour checks.",
+      "kindReceiptId": "decl-column",
+      "compared": "FamilyQuant/DeNovoControl.xaml:491 ColumnFamilyPeptides.Header = Peptides -\u003E FamilyQuant/DeNovoControl.xaml: FamilyQuant.DeNovoControl.ColumnFamilyPeptides.Header = Peptides"
+    },
+    {
+      "observationId": "FQ15-2E4524F17680",
+      "implementation": [
+        {
+          "path": "FamilyQuant/DeNovoControl.xaml",
+          "symbol": "FamilyQuant.DeNovoControl.ColumnFamilyDescription.Header",
+          "sha256": "F814FE8B8B34A41BBE257DC5809BF9B97B6D51DF6EBED74C437A11D101508A76"
+        }
+      ],
+      "proofs": [],
+      "note": "Declaration preservation only. Reachability, handlers and runtime outputs require executed behaviour checks.",
+      "kindReceiptId": "decl-column",
+      "compared": "FamilyQuant/DeNovoControl.xaml:492 ColumnFamilyDescription.Header = Representative description -\u003E FamilyQuant/DeNovoControl.xaml: FamilyQuant.DeNovoControl.ColumnFamilyDescription.Header = Representative description"
+    },
+    {
+      "observationId": "FQ15-4712D0663AE7",
+      "implementation": [
+        {
+          "path": "FamilyQuant/DeNovoControl.xaml",
+          "symbol": "FamilyQuant.DeNovoControl.ButtonDeNovoHelp.ToolTip",
+          "sha256": "F814FE8B8B34A41BBE257DC5809BF9B97B6D51DF6EBED74C437A11D101508A76"
+        }
+      ],
+      "proofs": [],
+      "note": "Declaration preservation only. Reachability, handlers and runtime outputs require executed behaviour checks.",
+      "kindReceiptId": "decl-tooltip",
+      "compared": "FamilyQuant/DeNovoControl.xaml:626 ButtonDeNovoHelp.ToolTip = Opens the help page for this screen in a window you can keep open. It explains the source, the three filters, the reconciliation and the review queue. -\u003E FamilyQuant/DeNovoControl.xaml: FamilyQuant.DeNovoControl.ButtonDeNovoHelp.ToolTip = Opens the help page for this screen in a window you can keep open. It explains the source, the three filters, the reconciliation and the review queue."
+    },
+    {
+      "observationId": "FQ15-E97749D4FBD7",
+      "implementation": [
+        {
+          "path": "FamilyQuant/DeNovoControl.xaml",
+          "symbol": "FamilyQuant.DeNovoControl.TextBlockDeNovoStatus.ToolTip",
+          "sha256": "F814FE8B8B34A41BBE257DC5809BF9B97B6D51DF6EBED74C437A11D101508A76"
+        }
+      ],
+      "proofs": [],
+      "note": "Declaration preservation only. Reachability, handlers and runtime outputs require executed behaviour checks.",
+      "kindReceiptId": "decl-tooltip",
+      "compared": "FamilyQuant/DeNovoControl.xaml:630 TextBlockDeNovoStatus.ToolTip = What is on screen and what to do next. Refused values, empty folders and unreadable files are reported here, not in pop-ups. -\u003E FamilyQuant/DeNovoControl.xaml: FamilyQuant.DeNovoControl.TextBlockDeNovoStatus.ToolTip = What is on screen and what to do next. Refused values, empty folders and unreadable files are reported here, not in pop-ups."
+    },
+    {
+      "observationId": "FQ15-A93D5B9528C3",
+      "implementation": [
+        {
+          "path": "FamilyQuant/DeNovoControl.Dialogs.cs",
+          "symbol": "FamilyQuant.DeNovoControl::private bool CanShowDialog ( string refusal , string nextStep )",
+          "sha256": "B714D7D9AA689F30D9EDFA2479D373824358521783DBBD267E209E34E91884A1"
+        }
+      ],
+      "proofs": [],
+      "note": "Declaration preservation only. Reachability, handlers and runtime outputs require executed behaviour checks.",
+      "kindReceiptId": "decl-code-fact",
+      "compared": "FamilyQuant.DeNovoControl::private bool CanShowDialog ( string refusal , string nextStep ): \u0022, because this screen is not on a display and a file dialog there is \u0022 -\u003E FamilyQuant/DeNovoControl.Dialogs.cs: FamilyQuant.DeNovoControl::private bool CanShowDialog ( string refusal , string nextStep ); complete member tokens SHA256 63EE564A6A6DF30A51E423E58D8D2F36E911AB76A3A85EA86ACD7B048A08571E; literal occurrences 1"
+    },
+    {
+      "observationId": "FQ15-A1AA72FFC758",
+      "implementation": [
+        {
+          "path": "FamilyQuant/DeNovoControl.Dialogs.cs",
+          "symbol": "FamilyQuant.DeNovoControl::private bool CanShowDialog ( string refusal , string nextStep )",
+          "sha256": "B714D7D9AA689F30D9EDFA2479D373824358521783DBBD267E209E34E91884A1"
+        }
+      ],
+      "proofs": [],
+      "note": "Declaration preservation only. Reachability, handlers and runtime outputs require executed behaviour checks.",
+      "kindReceiptId": "decl-code-fact",
+      "compared": "FamilyQuant.DeNovoControl::private bool CanShowDialog ( string refusal , string nextStep ): \u0022a window nothing can close. Next step: \u0022 -\u003E FamilyQuant/DeNovoControl.Dialogs.cs: FamilyQuant.DeNovoControl::private bool CanShowDialog ( string refusal , string nextStep ); complete member tokens SHA256 63EE564A6A6DF30A51E423E58D8D2F36E911AB76A3A85EA86ACD7B048A08571E; literal occurrences 1"
+    },
+    {
+      "observationId": "FQ15-6CF0E14054FF",
+      "implementation": [
+        {
+          "path": "FamilyQuant/DeNovoControl.Dialogs.cs",
+          "symbol": "FamilyQuant.DeNovoControl::private void ButtonExportSummary_Click ( object sender , RoutedEventArgs e )",
+          "sha256": "B714D7D9AA689F30D9EDFA2479D373824358521783DBBD267E209E34E91884A1"
+        }
+      ],
+      "proofs": [],
+      "note": "Declaration preservation only. Reachability, handlers and runtime outputs require executed behaviour checks.",
+      "kindReceiptId": "decl-format-export",
+      "compared": "FamilyQuant.DeNovoControl::private void ButtonExportSummary_Click ( object sender , RoutedEventArgs e ): \u0022FamilyQuant_DeNovo_Summary.csv\u0022 -\u003E FamilyQuant/DeNovoControl.Dialogs.cs: FamilyQuant.DeNovoControl::private void ButtonExportSummary_Click ( object sender , RoutedEventArgs e ); complete member tokens SHA256 5963DBBCD3A3AEAC1109D7DC3C4372431A652C7BB7931D13F96BCE01EFA2FBFF; literal occurrences 1"
+    },
+    {
+      "observationId": "FQ15-40D8097A6172",
+      "implementation": [
+        {
+          "path": "FamilyQuant/DeNovoControl.Dialogs.cs",
+          "symbol": "FamilyQuant.DeNovoControl::private void ButtonExportSummary_Click ( object sender , RoutedEventArgs e )",
+          "sha256": "B714D7D9AA689F30D9EDFA2479D373824358521783DBBD267E209E34E91884A1"
+        }
+      ],
+      "proofs": [],
+      "note": "Declaration preservation only. Reachability, handlers and runtime outputs require executed behaviour checks.",
+      "kindReceiptId": "decl-code-fact",
+      "compared": "FamilyQuant.DeNovoControl::private void ButtonExportSummary_Click ( object sender , RoutedEventArgs e ): \u0022Save the per-run verdict summary as CSV\u0022 -\u003E FamilyQuant/DeNovoControl.Dialogs.cs: FamilyQuant.DeNovoControl::private void ButtonExportSummary_Click ( object sender , RoutedEventArgs e ); complete member tokens SHA256 5963DBBCD3A3AEAC1109D7DC3C4372431A652C7BB7931D13F96BCE01EFA2FBFF; literal occurrences 1"
+    },
+    {
+      "observationId": "FQ15-243D4BF4843F",
+      "implementation": [
+        {
+          "path": "FamilyQuant/DeNovoControl.Dialogs.cs",
+          "symbol": "FamilyQuant.DeNovoControl::private void ButtonExportSummary_Click ( object sender , RoutedEventArgs e )",
+          "sha256": "B714D7D9AA689F30D9EDFA2479D373824358521783DBBD267E209E34E91884A1"
+        }
+      ],
+      "proofs": [],
+      "note": "Declaration preservation only. Reachability, handlers and runtime outputs require executed behaviour checks.",
+      "kindReceiptId": "decl-code-fact",
+      "compared": "FamilyQuant.DeNovoControl::private void ButtonExportSummary_Click ( object sender , RoutedEventArgs e ): \u0022one line per run and verdict, with how many rows fell into each\u0022 -\u003E FamilyQuant/DeNovoControl.Dialogs.cs: FamilyQuant.DeNovoControl::private void ButtonExportSummary_Click ( object sender , RoutedEventArgs e ); complete member tokens SHA256 5963DBBCD3A3AEAC1109D7DC3C4372431A652C7BB7931D13F96BCE01EFA2FBFF; literal occurrences 1"
+    },
+    {
+      "observationId": "FQ15-68806440DE16",
+      "implementation": [
+        {
+          "path": "FamilyQuant/DeNovoControl.Dialogs.cs",
+          "symbol": "FamilyQuant.DeNovoControl::private void ButtonExportReviewQueue_Click ( object sender , RoutedEventArgs e )",
+          "sha256": "B714D7D9AA689F30D9EDFA2479D373824358521783DBBD267E209E34E91884A1"
+        }
+      ],
+      "proofs": [],
+      "note": "Declaration preservation only. Reachability, handlers and runtime outputs require executed behaviour checks.",
+      "kindReceiptId": "decl-format-export",
+      "compared": "FamilyQuant.DeNovoControl::private void ButtonExportReviewQueue_Click ( object sender , RoutedEventArgs e ): \u0022FamilyQuant_DeNovo_ReviewQueue.csv\u0022 -\u003E FamilyQuant/DeNovoControl.Dialogs.cs: FamilyQuant.DeNovoControl::private void ButtonExportReviewQueue_Click ( object sender , RoutedEventArgs e ); complete member tokens SHA256 3FB006C1375604AD7AA3D276829708D3B119F88062AB9F57896EE28FAE94D48A; literal occurrences 1"
+    },
+    {
+      "observationId": "FQ15-3ED230B3108E",
+      "implementation": [
+        {
+          "path": "FamilyQuant/DeNovoControl.Dialogs.cs",
+          "symbol": "FamilyQuant.DeNovoControl::private void ButtonExportReviewQueue_Click ( object sender , RoutedEventArgs e )",
+          "sha256": "B714D7D9AA689F30D9EDFA2479D373824358521783DBBD267E209E34E91884A1"
+        }
+      ],
+      "proofs": [],
+      "note": "Declaration preservation only. Reachability, handlers and runtime outputs require executed behaviour checks.",
+      "kindReceiptId": "decl-code-fact",
+      "compared": "FamilyQuant.DeNovoControl::private void ButtonExportReviewQueue_Click ( object sender , RoutedEventArgs e ): \u0022Save the review queue as CSV\u0022 -\u003E FamilyQuant/DeNovoControl.Dialogs.cs: FamilyQuant.DeNovoControl::private void ButtonExportReviewQueue_Click ( object sender , RoutedEventArgs e ); complete member tokens SHA256 3FB006C1375604AD7AA3D276829708D3B119F88062AB9F57896EE28FAE94D48A; literal occurrences 1"
+    },
+    {
+      "observationId": "FQ15-31A63AC1C1A0",
+      "implementation": [
+        {
+          "path": "FamilyQuant/DeNovoControl.Dialogs.cs",
+          "symbol": "FamilyQuant.DeNovoControl::private void ButtonExportReviewQueue_Click ( object sender , RoutedEventArgs e )",
+          "sha256": "B714D7D9AA689F30D9EDFA2479D373824358521783DBBD267E209E34E91884A1"
+        }
+      ],
+      "proofs": [],
+      "note": "Declaration preservation only. Reachability, handlers and runtime outputs require executed behaviour checks.",
+      "kindReceiptId": "decl-code-fact",
+      "compared": "FamilyQuant.DeNovoControl::private void ButtonExportReviewQueue_Click ( object sender , RoutedEventArgs e ): \u0022one line per row of the table, both sequences side by side\u0022 -\u003E FamilyQuant/DeNovoControl.Dialogs.cs: FamilyQuant.DeNovoControl::private void ButtonExportReviewQueue_Click ( object sender , RoutedEventArgs e ); complete member tokens SHA256 3FB006C1375604AD7AA3D276829708D3B119F88062AB9F57896EE28FAE94D48A; literal occurrences 1"
+    },
+    {
+      "observationId": "FQ15-E9123BFAFC86",
+      "implementation": [
+        {
+          "path": "FamilyQuant/DeNovoControl.Dialogs.cs",
+          "symbol": "FamilyQuant.DeNovoControl::private void ButtonExportOverlapStudy_Click ( object sender , RoutedEventArgs e )",
+          "sha256": "B714D7D9AA689F30D9EDFA2479D373824358521783DBBD267E209E34E91884A1"
+        }
+      ],
+      "proofs": [],
+      "note": "Declaration preservation only. Reachability, handlers and runtime outputs require executed behaviour checks.",
+      "kindReceiptId": "decl-format-export",
+      "compared": "FamilyQuant.DeNovoControl::private void ButtonExportOverlapStudy_Click ( object sender , RoutedEventArgs e ): \u0022FamilyQuant_DeNovo_OverlapStudy.csv\u0022 -\u003E FamilyQuant/DeNovoControl.Dialogs.cs: FamilyQuant.DeNovoControl::private void ButtonExportOverlapStudy_Click ( object sender , RoutedEventArgs e ); complete member tokens SHA256 DB1AA5CED7FF4325D898D64E3A2DDC69D3FE02BEC6D695E8E29350CD1F9948C9; literal occurrences 1"
+    },
+    {
+      "observationId": "FQ15-26CEEF4D22CD",
+      "implementation": [
+        {
+          "path": "FamilyQuant/DeNovoControl.Dialogs.cs",
+          "symbol": "FamilyQuant.DeNovoControl::private void ButtonExportOverlapStudy_Click ( object sender , RoutedEventArgs e )",
+          "sha256": "B714D7D9AA689F30D9EDFA2479D373824358521783DBBD267E209E34E91884A1"
+        }
+      ],
+      "proofs": [],
+      "note": "Declaration preservation only. Reachability, handlers and runtime outputs require executed behaviour checks.",
+      "kindReceiptId": "decl-code-fact",
+      "compared": "FamilyQuant.DeNovoControl::private void ButtonExportOverlapStudy_Click ( object sender , RoutedEventArgs e ): \u0022Save the de novo/search-engine overlap study as CSV\u0022 -\u003E FamilyQuant/DeNovoControl.Dialogs.cs: FamilyQuant.DeNovoControl::private void ButtonExportOverlapStudy_Click ( object sender , RoutedEventArgs e ); complete member tokens SHA256 DB1AA5CED7FF4325D898D64E3A2DDC69D3FE02BEC6D695E8E29350CD1F9948C9; literal occurrences 1"
+    },
+    {
+      "observationId": "FQ15-DA7E63250AA8",
+      "implementation": [
+        {
+          "path": "FamilyQuant/DeNovoControl.Dialogs.cs",
+          "symbol": "FamilyQuant.DeNovoControl::private void ButtonExportOverlapStudy_Click ( object sender , RoutedEventArgs e )",
+          "sha256": "B714D7D9AA689F30D9EDFA2479D373824358521783DBBD267E209E34E91884A1"
+        }
+      ],
+      "proofs": [],
+      "note": "Declaration preservation only. Reachability, handlers and runtime outputs require executed behaviour checks.",
+      "kindReceiptId": "decl-code-fact",
+      "compared": "FamilyQuant.DeNovoControl::private void ButtonExportOverlapStudy_Click ( object sender , RoutedEventArgs e ): \u0022the nested scan, precursor, exact-sequence and divergence counts with their denominators\u0022 -\u003E FamilyQuant/DeNovoControl.Dialogs.cs: FamilyQuant.DeNovoControl::private void ButtonExportOverlapStudy_Click ( object sender , RoutedEventArgs e ); complete member tokens SHA256 DB1AA5CED7FF4325D898D64E3A2DDC69D3FE02BEC6D695E8E29350CD1F9948C9; literal occurrences 1"
+    },
+    {
+      "observationId": "FQ15-715E0DF35435",
+      "implementation": [
+        {
+          "path": "FamilyQuant/DeNovoControl.Dialogs.cs",
+          "symbol": "FamilyQuant.DeNovoControl::public void ShowHelp ( )",
+          "sha256": "B714D7D9AA689F30D9EDFA2479D373824358521783DBBD267E209E34E91884A1"
+        }
+      ],
+      "proofs": [],
+      "note": "Declaration preservation only. Reachability, handlers and runtime outputs require executed behaviour checks.",
+      "kindReceiptId": "decl-code-fact",
+      "compared": "FamilyQuant.DeNovoControl::public void ShowHelp ( ): \u0022The help window was not opened, because this screen is not on a display. \u0022 -\u003E FamilyQuant/DeNovoControl.Dialogs.cs: FamilyQuant.DeNovoControl::public void ShowHelp ( ); complete member tokens SHA256 1BA44734A7FF0B3E88380B1E0012204FB852FC578CA0489401838225E4E95F6C; literal occurrences 1"
+    },
+    {
+      "observationId": "FQ15-CE431EC1A8D0",
+      "implementation": [
+        {
+          "path": "FamilyQuant/DeNovoControl.Dialogs.cs",
+          "symbol": "FamilyQuant.DeNovoControl::public void ShowHelp ( )",
+          "sha256": "B714D7D9AA689F30D9EDFA2479D373824358521783DBBD267E209E34E91884A1"
+        }
+      ],
+      "proofs": [],
+      "note": "Declaration preservation only. Reachability, handlers and runtime outputs require executed behaviour checks.",
+      "kindReceiptId": "decl-code-fact",
+      "compared": "FamilyQuant.DeNovoControl::public void ShowHelp ( ): \u0022Next step: nothing.\u0022 -\u003E FamilyQuant/DeNovoControl.Dialogs.cs: FamilyQuant.DeNovoControl::public void ShowHelp ( ); complete member tokens SHA256 1BA44734A7FF0B3E88380B1E0012204FB852FC578CA0489401838225E4E95F6C; literal occurrences 1"
+    },
+    {
+      "observationId": "FQ15-2A1E62E79670",
+      "implementation": [
+        {
+          "path": "FamilyQuant/DeNovoControl.Dialogs.cs",
+          "symbol": "FamilyQuant.DeNovoControl::public void ShowHelp ( )",
+          "sha256": "B714D7D9AA689F30D9EDFA2479D373824358521783DBBD267E209E34E91884A1"
+        }
+      ],
+      "proofs": [],
+      "note": "Declaration preservation only. Reachability, handlers and runtime outputs require executed behaviour checks.",
+      "kindReceiptId": "decl-code-fact",
+      "compared": "FamilyQuant.DeNovoControl::public void ShowHelp ( ): \u0022FamilyQuant \u00B7 De novo evidence\u0022 -\u003E FamilyQuant/DeNovoControl.Dialogs.cs: FamilyQuant.DeNovoControl::public void ShowHelp ( ); complete member tokens SHA256 1BA44734A7FF0B3E88380B1E0012204FB852FC578CA0489401838225E4E95F6C; literal occurrences 1"
+    }
+  ],
+  "kindReceipts": [
+    {
+      "id": "decl-option-copy",
+      "kind": "option/copy",
+      "proofs": [
+        {
+          "runId": "EV-denovo-declarations",
+          "kind": "test",
+          "target": "DeNovoLedgerDeclarationsCommand",
+          "assertion": "De novo declaration kind option/copy: every listed frozen/current declaration agrees",
+          "artifact": "D:\\FamilyQuant-data\\out-evidence\\ledger-denovo-exact-ready\\comparisons.log",
+          "inspectedBy": ""
+        }
+      ]
+    },
+    {
+      "id": "decl-tooltip",
+      "kind": "tooltip",
+      "proofs": [
+        {
+          "runId": "EV-denovo-declarations",
+          "kind": "test",
+          "target": "DeNovoLedgerDeclarationsCommand",
+          "assertion": "De novo declaration kind tooltip: every listed frozen/current declaration agrees",
+          "artifact": "D:\\FamilyQuant-data\\out-evidence\\ledger-denovo-exact-ready\\comparisons.log",
+          "inspectedBy": ""
+        }
+      ]
+    },
+    {
+      "id": "decl-column",
+      "kind": "column",
+      "proofs": [
+        {
+          "runId": "EV-denovo-declarations",
+          "kind": "test",
+          "target": "DeNovoLedgerDeclarationsCommand",
+          "assertion": "De novo declaration kind column: every listed frozen/current declaration agrees",
+          "artifact": "D:\\FamilyQuant-data\\out-evidence\\ledger-denovo-exact-ready\\comparisons.log",
+          "inspectedBy": ""
+        }
+      ]
+    },
+    {
+      "id": "decl-code-fact",
+      "kind": "code fact",
+      "proofs": [
+        {
+          "runId": "EV-denovo-declarations",
+          "kind": "test",
+          "target": "DeNovoLedgerDeclarationsCommand",
+          "assertion": "De novo declaration kind code fact: every listed frozen/current declaration agrees",
+          "artifact": "D:\\FamilyQuant-data\\out-evidence\\ledger-denovo-exact-ready\\comparisons.log",
+          "inspectedBy": ""
+        }
+      ]
+    },
+    {
+      "id": "decl-format-export",
+      "kind": "format/export",
+      "proofs": [
+        {
+          "runId": "EV-denovo-declarations",
+          "kind": "test",
+          "target": "DeNovoLedgerDeclarationsCommand",
+          "assertion": "De novo declaration kind format/export: every listed frozen/current declaration agrees",
+          "artifact": "D:\\FamilyQuant-data\\out-evidence\\ledger-denovo-exact-ready\\comparisons.log",
+          "inspectedBy": ""
+        }
+      ]
+    }
+  ]
+}
