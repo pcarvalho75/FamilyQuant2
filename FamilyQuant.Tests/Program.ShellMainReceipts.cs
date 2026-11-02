@@ -48,7 +48,8 @@ internal static partial class Program
         string executed = Path.Combine(output, "executed"); Directory.CreateDirectory(executed);
         foreach (string file in new[] { "LedgerMemberFactComparison.cs", "LedgerMemberFactComparison.Messages.cs", "Program.ShellRouteNative.cs",
             "Program.ShellMainMessages.cs", "Program.ShellMainReceipts.cs", "Program.ShellMessageFrames.cs", "Program.Commands.ShellRoutes.cs",
-            "Program.ShellSeproFixture.cs", "Program.Commands.ShellSeproFixture.cs", "FamilyQuant.Tests.csproj" })
+            "Program.ShellSeproFixture.cs", "Program.Commands.ShellSeproFixture.cs", "Program.ShellProofWindows.cs",
+            "Program.Commands.ShellProofWindows.cs", "FamilyQuant.Tests.csproj" })
         {
             string target = Path.Combine(executed, file); File.Copy(Path.Combine(root, "FamilyQuant.Tests", file), target); Artifact(target);
         }
@@ -100,7 +101,7 @@ internal static partial class Program
     private static string[] ShellMainImplementation(string root)
     {
         string[] appNames = ["MainWindow", "ShellDialogs", "ShellDocumentState", "HomeControl", "ComputeXicViewModel", "QuantifyControl"];
-        string[] testNames = ["LedgerMemberFactComparison", "Program.ShellRouteNative", "Program.ShellMainMessages", "Program.ShellMainReceipts", "Program.ShellSeproFixture"];
+        string[] testNames = ["LedgerMemberFactComparison", "Program.ShellRouteNative", "Program.ShellMainMessages", "Program.ShellMainReceipts", "Program.ShellSeproFixture", "Program.ShellProofWindows"];
         var app = Directory.GetFiles(Path.Combine(root, "FamilyQuant"), "*", SearchOption.TopDirectoryOnly)
             .Where(path => path.EndsWith(".cs", StringComparison.Ordinal) || path.EndsWith(".xaml", StringComparison.Ordinal))
             .Where(path => appNames.Any(name => Path.GetFileName(path).StartsWith(name + ".", StringComparison.Ordinal)));
