@@ -52,6 +52,7 @@ public partial class MainWindow
     {
         if (Directory.Exists(shellState.LastFolder)) dialog.InitialDirectory = shellState.LastFolder;
     }
+    public string? PreferredFolder => shellState.LastFolder;
     public void RememberFolder(string path)
     {
         string? folder = Directory.Exists(path) ? Path.GetFullPath(path) : Path.GetDirectoryName(Path.GetFullPath(path));

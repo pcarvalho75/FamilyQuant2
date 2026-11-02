@@ -60,6 +60,16 @@ namespace FamilyQuant.Tests
                 return failed == 0 ? 0 : 1;
             }
             if (args.Length == 2 && args[0] == "--busy-screens") return BusyScreens(args[1]);
+            if (args.Contains("--test-shell-dialogs", StringComparer.Ordinal))
+            {
+                string dialogWork = Path.Combine(Path.GetTempPath(), "FamilyQuant.Dialog.Tests");
+                Directory.CreateDirectory(dialogWork);
+                EnsureApplication();
+                if (args.Contains("--after-busy", StringComparer.Ordinal)) BusyOperationTests(dialogWork);
+                ShellDialogTests(dialogWork);
+                Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
+                return failed == 0 ? 0 : 1;
+            }
             if (args.Contains("--test-busy", StringComparer.Ordinal))
             {
                 string busyWork = Path.Combine(Path.GetTempPath(), "FamilyQuant.Busy.Tests");
@@ -159,6 +169,7 @@ namespace FamilyQuant.Tests
                 ShellProjectOperationTests(shellWork);
                 ShellSavingTests(shellWork);
                 ShellWindowPreferenceTests(shellWork);
+                ShellDialogTests(shellWork);
                 BusyOperationTests(shellWork);
                 BuildFamiliesScreenTests(shellWork);
                 QuantifyShellTests(shellWork);
@@ -581,6 +592,7 @@ namespace FamilyQuant.Tests
             WordClusterTests();
             QuantifyViewModelTests(workDir);
             BusyOperationTests(workDir);
+            ShellDialogTests(workDir);
             ResultsViewModelTests();
             DeNovoViewModelTests(workDir);
             HomologyResultsTests(workDir);

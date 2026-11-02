@@ -74,7 +74,7 @@ public partial class AnalyticsControl : UserControl
         if (ViewModel.ExportKind is ResultsExportKind.Figures or ResultsExportKind.EvidencePack)
         {
             var dialog = new OpenFolderDialog { Title = "Choose the export folder" };
-            path = dialog.ShowDialog() == true ? dialog.FolderName : null;
+            path = ShellDialogs.ShowFolder(this, "results." + ViewModel.ExportKind, dialog) ? dialog.FolderName : null;
         }
         else
         {
@@ -83,7 +83,7 @@ public partial class AnalyticsControl : UserControl
                     ResultsExportKind.Summary => "familyquant_analytics_summary.csv",
                     ResultsExportKind.Homology => "FamilyQuant_DeNovo_Homology.csv",
                     _ => "familyquant_analytics_peptides.csv" }, Title = "Export results" };
-            path = dialog.ShowDialog() == true ? dialog.FileName : null;
+            path = ShellDialogs.ShowFile(this, "results." + ViewModel.ExportKind, dialog) ? dialog.FileName : null;
         }
         if (path != null) await ViewModel.ExportAsync(path, AppOperationHost.For(this));
     }

@@ -69,7 +69,7 @@ namespace FamilyQuant.DeNovo
                 ToolTip = "Saves every number behind this chart as a CSV, with where each one came " +
                           "from. Numbers use a dot as the decimal separator."
             };
-            save.Click += (_, __) => SaveCsv(perRun);
+            save.Click += (_, __) => SaveCsv(save, perRun);
             Grid.SetRow(save, 2);
             grid.Children.Add(save);
 
@@ -115,7 +115,7 @@ namespace FamilyQuant.DeNovo
                 : common;
         }
 
-        private static void SaveCsv(IReadOnlyList<ThreeWayPartitionRow> rows)
+        private static void SaveCsv(Button origin, IReadOnlyList<ThreeWayPartitionRow> rows)
         {
             var dialog = new SaveFileDialog
             {
@@ -126,7 +126,7 @@ namespace FamilyQuant.DeNovo
                 DefaultExt = ".csv"
             };
 
-            if (dialog.ShowDialog() != true) return;
+            if (!ShellDialogs.ShowFile(origin, "partition.csv", dialog)) return;
 
             try
             {
@@ -134,7 +134,7 @@ namespace FamilyQuant.DeNovo
             }
             catch (Exception ex)
             {
-                MessageBox.Show("The file could not be written: " + ex.Message,
+                ShellMessages.Report(origin, "The file could not be written: " + ex.Message,
                     "Save the three-way partition", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
