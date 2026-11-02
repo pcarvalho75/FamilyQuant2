@@ -14,7 +14,7 @@ namespace FamilyQuant
 {
     public static partial class SpectrumComparisonWindow
     {
-        private static void SaveAcceptedScoreScatter(Button button, TextBlock status,
+        private static async void SaveAcceptedScoreScatter(Button button, TextBlock status,
             DeNovoAcceptedScoreScatter scatter, string? existingCsvPath)
         {
             if (PresentationSource.FromVisual(button) == null)
@@ -38,15 +38,18 @@ namespace FamilyQuant
             if (!string.IsNullOrWhiteSpace(folder) && Directory.Exists(folder))
                 dialog.InitialDirectory = folder;
             if (dialog.ShowDialog() != true) return;
+            using var operation = AppOperationHost.For(button).Begin("Export accepted-call score plot");
 
             try
             {
                 scatter.Validate();
-                ChartImageExporter.Save(new DeNovoAcceptedScoreScatterChart(scatter),
-                    dialog.FileName);
                 string csvPath = Path.ChangeExtension(dialog.FileName, ".csv");
-                File.WriteAllText(csvPath,
-                    DeNovoAcceptedScoreScatterStudy.ToCsv(scatter), new UTF8Encoding(false));
+                await AppOperationFiles.RunSta(() => AppOperationFiles.WriteFolder(Path.GetDirectoryName(dialog.FileName)!, directory =>
+                {
+                    ChartImageExporter.Save(new DeNovoAcceptedScoreScatterChart(scatter), Path.Combine(directory, Path.GetFileName(dialog.FileName)));
+                    File.WriteAllText(Path.Combine(directory, Path.GetFileName(csvPath)),
+                        DeNovoAcceptedScoreScatterStudy.ToCsv(scatter), new UTF8Encoding(false));
+                }, operation.Context));
                 status.Text = "Saved " + dialog.FileName + " and " + csvPath + ". " +
                               scatter.Total.ToString("N0", CultureInfo.CurrentCulture) +
                               " jointly accepted precursor-hypothesis row(s): " +
@@ -55,13 +58,17 @@ namespace FamilyQuant
                               scatter.Mismatches.ToString("N0", CultureInfo.CurrentCulture) +
                               " mismatches.";
             }
+            catch (OperationCanceledException) when (operation.Context.IsCancellationRequested)
+            {
+                status.Text = "Cancelled. The previous plot and CSV were kept.";
+            }
             catch (Exception ex)
             {
                 status.Text = "The accepted-call score plot was not saved. " + ex.Message;
             }
         }
 
-        private static void SaveCopy(Button button, TextBlock status, SpectrumComparisonViewModel model)
+        private static async void SaveCopy(Button button, TextBlock status, SpectrumComparisonViewModel model)
         {
             var rows = model.Rows;
             string? existingCsvPath = model.ExistingCsvPath;
@@ -89,13 +96,18 @@ namespace FamilyQuant
                 InitialDirectory = initialDirectory,
             };
             if (dialog.ShowDialog() != true) return;
+            using var operation = AppOperationHost.For(button).Begin("Export spectrum comparison");
 
             try
             {
-                model.SaveCsv(dialog.FileName);
+                await System.Threading.Tasks.Task.Run(() => AppOperationFiles.WriteFile(dialog.FileName, model.SaveCsv, operation.Context));
                 status.Text = "Written " + rows.Count.ToString("N0", CultureInfo.CurrentCulture) +
                               " spectrum row(s) to " + dialog.FileName +
                               ". The project and its quantitation were not changed.";
+            }
+            catch (OperationCanceledException) when (operation.Context.IsCancellationRequested)
+            {
+                status.Text = "Cancelled. The previous CSV was kept.";
             }
             catch (Exception ex)
             {

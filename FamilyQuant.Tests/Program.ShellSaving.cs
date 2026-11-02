@@ -47,7 +47,7 @@ internal static partial class Program
                         ScreenHarness.Save(main, Path.Combine(folder, "unsaved.png"), size.Item1, size.Item2);
                         var task = (Task)typeof(MainWindow).GetMethod("SaveProjectAsync",
                             System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)!.Invoke(main, new object[] { false })!;
-                        for (int i = 0; i < 100 && !task.IsCompleted; i++) PumpDispatcher();
+                        FinishBusyTask(task);
                         if (!task.IsCompleted) throw new InvalidOperationException("Fixture save did not finish.");
                         task.GetAwaiter().GetResult();
                         PumpDispatcher();
@@ -147,7 +147,7 @@ internal static partial class Program
         var main = new MainWindow();
         bool Finish(Task<bool> task)
         {
-            for (int i = 0; i < 100 && !task.IsCompleted; i++) PumpDispatcher();
+            FinishBusyTask(task);
             Check("unsaved decision completes for the fixture", task.IsCompleted);
             return task.IsCompleted && task.GetAwaiter().GetResult();
         }

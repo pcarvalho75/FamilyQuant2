@@ -69,16 +69,26 @@ namespace FamilyQuant.Tests
                 Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
                 return failed == 0 ? 0 : 1;
             }
+            if (args.Length > 0 && args[0] == "--evidence-task-check") return EvidenceTaskCheck(args);
+            if (args.Contains("--test-evidence-task", StringComparer.Ordinal))
+            {
+                EvidenceTaskTests();
+                Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
+                return failed == 0 ? 0 : 1;
+            }
             if (args.Contains("--test-ui-icons", StringComparer.Ordinal))
             {
                 UiIconTests();
                 Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
                 return failed == 0 ? 0 : 1;
             }
-            if (args.Length > 0 && args[0] == "--evidence-task-check") return EvidenceTaskCheck(args);
-            if (args.Contains("--test-evidence-task", StringComparer.Ordinal))
+            if (args.Length == 2 && args[0] == "--busy-screens") return BusyScreens(args[1]);
+            if (args.Contains("--test-busy", StringComparer.Ordinal))
             {
-                EvidenceTaskTests();
+                string busyWork = Path.Combine(Path.GetTempPath(), "FamilyQuant.Busy.Tests");
+                Directory.CreateDirectory(busyWork);
+                EnsureApplication();
+                BusyOperationTests(busyWork);
                 Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
                 return failed == 0 ? 0 : 1;
             }
@@ -172,6 +182,7 @@ namespace FamilyQuant.Tests
                 ShellProjectOperationTests(shellWork);
                 ShellSavingTests(shellWork);
                 ShellWindowPreferenceTests(shellWork);
+                BusyOperationTests(shellWork);
                 BuildFamiliesScreenTests(shellWork);
                 QuantifyShellTests(shellWork);
                 SecondaryWindowTests(shellWork);
@@ -592,6 +603,7 @@ namespace FamilyQuant.Tests
             Section("Word-based reclustering invariants");
             WordClusterTests();
             QuantifyViewModelTests(workDir);
+            BusyOperationTests(workDir);
             ResultsViewModelTests();
             DeNovoViewModelTests(workDir);
             HomologyResultsTests(workDir);

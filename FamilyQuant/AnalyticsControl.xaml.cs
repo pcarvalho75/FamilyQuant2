@@ -64,7 +64,7 @@ public partial class AnalyticsControl : UserControl
         if (ready && Enum.TryParse((ComboBoxExportKind.SelectedItem as ComboBoxItem)?.Tag as string, out ResultsExportKind kind))
             ViewModel.ExportKind = kind;
     }
-    private void ExportClicked(object sender, RoutedEventArgs e)
+    private async void ExportClicked(object sender, RoutedEventArgs e)
     {
         if (!ViewModel.CanExport) return;
         if (PresentationSource.FromVisual(this) == null)
@@ -84,6 +84,6 @@ public partial class AnalyticsControl : UserControl
                     _ => "familyquant_analytics_peptides.csv" }, Title = "Export results" };
             path = dialog.ShowDialog() == true ? dialog.FileName : null;
         }
-        if (path != null) ViewModel.Export(path);
+        if (path != null) await ViewModel.ExportAsync(path, AppOperationHost.For(this));
     }
 }

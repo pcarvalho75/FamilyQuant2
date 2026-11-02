@@ -57,6 +57,7 @@ internal static partial class Program
                     && binding.Command == MainWindow.NavigateShellCommand)));
             Check("keyboard Quantify is disabled before a project is open", !MainWindow.NavigateShellCommand.CanExecute(ShellDestination.Quantify, main));
             Route(ShellDestination.Families);
+            FinishBusyOperation(main.Operations);
             var project = host.Children.OfType<ClusterGenerationControl>().Single();
             Check("rail Families uses the existing Open flow", main.NavigationModel.Current == ShellDestination.Families
                 && main.NavigationModel.HasProject);
