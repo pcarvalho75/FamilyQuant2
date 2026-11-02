@@ -1,4 +1,4 @@
-﻿using Microsoft.Win32;
+using Microsoft.Win32;
 using PatternTools;
 using PatternTools.PLP;
 using System;
@@ -651,7 +651,7 @@ namespace FamilyQuant
 
             SaveFileDialog saveFileDialog = new SaveFileDialog
             {
-                Filter = "CSV files (*.csv)|*.csv|All files (*.*)|*.*",
+                Filter = FileDialogFilters.Csv,
                 FileName = "FamilyQuant_Report.csv",
                 Title = "Save the visible rows as CSV"
             };
@@ -1057,7 +1057,7 @@ namespace FamilyQuant
 
             var sfd = new SaveFileDialog
             {
-                Filter = "CSV files (*.csv)|*.csv|All files (*.*)|*.*",
+                Filter = FileDialogFilters.Csv,
                 FileName = "FamilyQuant_family_composition.csv",
                 Title = "Save the family composition as CSV"
             };

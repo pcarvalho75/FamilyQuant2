@@ -24,7 +24,7 @@ namespace FamilyQuant.Evidence
             ArgumentNullException.ThrowIfNull(file);
             var assigned = file.EvidenceRecipe?.Assignments.Select(a => a.ProteinIndex).ToHashSet() ?? new HashSet<int>();
             int[] decoys = Enumerable.Range(0, file.MyExtendedFastaItems.Count)
-                .Where(i => file.MyExtendedFastaItems[i].SequenceIdentifier.StartsWith(SequenceLabels.DecoyPrefix, StringComparison.Ordinal)).ToArray();
+                .Where(i => SequenceLabels.IsDecoy(file.MyExtendedFastaItems[i].SequenceIdentifier)).ToArray();
             int[] unassigned = Enumerable.Range(0, file.MyExtendedFastaItems.Count).Except(decoys).Where(i => !assigned.Contains(i)).ToArray();
             return new Snapshot(Sequences(file), Rows(file, decoys), Rows(file, unassigned), Locks(file), Source(file), Curation(file), decoys, unassigned);
         }

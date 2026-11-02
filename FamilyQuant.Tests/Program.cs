@@ -126,6 +126,7 @@ namespace FamilyQuant.Tests
                 ShellStatusBridgeTests();
                 HomeStartTests(shellWork);
                 ShellNavigationTests(shellWork);
+                AppCommandReuseTests(shellWork);
                 ShellProjectOperationTests(shellWork);
                 ShellSavingTests(shellWork);
                 ShellWindowPreferenceTests(shellWork);
@@ -797,6 +798,7 @@ namespace FamilyQuant.Tests
             ShellStatusTests(workDir);
             HomeStartTests(workDir);
             ShellNavigationTests(workDir);
+            AppCommandReuseTests(workDir);
             ShellProjectOperationTests(workDir);
             ShellSavingTests(workDir);
             ShellWindowPreferenceTests(workDir);
