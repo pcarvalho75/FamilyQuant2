@@ -74,6 +74,7 @@ namespace FamilyQuant.Tests
             WordClusterTests();
             QuantifyViewModelTests(workDir);
             BusyOperationTests(workDir);
+            ShellDialogTests(workDir);
             ResultsViewModelTests();
             DeNovoViewModelTests(workDir);
             HomologyResultsTests(workDir);
