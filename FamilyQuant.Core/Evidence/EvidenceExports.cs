@@ -34,10 +34,15 @@ namespace FamilyQuant.Evidence
                 if (!string.Equals(item.SequenceIdentifier, a.Identifier, StringComparison.Ordinal)) continue;
                 ProteinEvidence? evidence = item.Evidence;
                 string sequence = item.Sequence ?? string.Empty;
+                string reason = a.Reason;
+                if (a.Tier is EvidenceTier.ReviewedNeighbour or EvidenceTier.UnannotatedNeighbour)
+                    reason += " " + ((recipe.SessionSearch ?? file.EvidenceSource?.NearestReviewed)?.CoverageMethod == NearestReviewed.QueryCoverageMethod
+                        ? NearestReviewed.CoverageRuleText(recipe.Options.MinQueryAlignedPercent)
+                        : "Aligned query residue coverage was not recorded for this historical assignment.");
                 csv.Append(string.Join(",", new[]
                 {
                     a.Name, Number(a.FamilyId), Number(a.PreviousFamilyId), NearestReviewed.EntryAccession(item.SequenceIdentifier),
-                    item.SequenceIdentifier, item.Description, a.Reason, item.Domains, Number(sequence.Length),
+                    item.SequenceIdentifier, item.Description, reason, item.Domains, Number(sequence.Length),
                     Number(CoherenceCheck.Cysteines(sequence)), YesNo(evidence?.Reviewed), MotifCheck.IsComplete(item) ? "no" : "yes",
                     EvidenceClassifier.IsInScope(evidence, scope) ? "yes" : "no", evidence?.FamilyAnnotation ?? string.Empty,
                 }.Select(Field))).Append("\r\n");
