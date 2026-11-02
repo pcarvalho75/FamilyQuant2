@@ -260,6 +260,7 @@ namespace FamilyQuant.Tests
             EvidenceTaskScopeWindowTests(Path.Combine(workDir, "task-scope"));
             GroupingReviewInteractionTests();
             EvidenceGroupingFlowTests();
+            ArchitectureGroupSplitTests();
             ArchitectureMemberViewTests();
             EvidenceFetchCoordinatorTests();
             CurationSaveResultTests(workDir);
