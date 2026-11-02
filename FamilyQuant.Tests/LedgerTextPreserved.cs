@@ -635,6 +635,7 @@ internal static class LedgerTextControl
     internal const string ShortLiteral = "N0";
     internal const string FieldPathLiteral = "Source.DisplayName";
     internal const string FormatOperandLiteral = "0.0 'counts per second'";
+    internal const string AttachedPathLiteral = "(Grid.Column)";
     // The counterexamples of FQAssay's review of 330afa5: a type named but never constructed, a store overwritten in
     // the same call path, text held by a different member of the right class, and a format token.
     internal static string Entry() => Live() + typeof(LedgerTextNeverInstantiated).Name + LedgerTextDeadStore.Make()
@@ -675,7 +676,7 @@ internal static class LedgerTextOperands
 {
     private static string Caption(string text) => text;
     internal static string Display(double original, double other) =>
-        new System.Windows.Data.Binding("Source.ChangedValue").Path.Path + Caption("Source.DisplayName")
+        new System.Windows.Data.Binding("Source.ChangedValue").Path.Path + Caption("Source.DisplayName") + Caption("(Grid.Column)")
         + original.ToString("N1", System.Globalization.CultureInfo.InvariantCulture)
         + other.ToString("0.0 'counts per second'", System.Globalization.CultureInfo.InvariantCulture);
 }

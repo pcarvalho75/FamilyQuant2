@@ -128,6 +128,8 @@ internal static partial class Program
                 !DecideControl(control, "review-field-path", LedgerTextControl.FieldPathLiteral, "FamilyQuant.Tests.LedgerTextOperands", "Display").Closed);
             Check("Text tool control (review-format-operand): a numeric format with a quoted unit does not close by text",
                 !DecideControl(control, "review-format-operand", LedgerTextControl.FormatOperandLiteral, "FamilyQuant.Tests.LedgerTextOperands", "Display").Closed);
+            Check("Text tool control (review-attached-path): a parenthesized attached property path held only as a caption does not close",
+                !DecideControl(control, "review-attached-path", LedgerTextControl.AttachedPathLiteral, "FamilyQuant.Tests.LedgerTextOperands", "Display").Closed);
 
             foreach (var row in cohort)
             {
@@ -270,13 +272,11 @@ internal static partial class Program
         return constructor && owner.Field && storedInto != null && storedInto.EndsWith("::" + owner.Member, StringComparison.Ordinal);
     }
 
-    /// <summary>Text alone identifies a fact only when it is prose: two or more words of two or more letters. A format string,
-    /// separator, single word or identifier does not, nor a dotted identifier path (a binding or member path) or a numeric or
-    /// date format operand, quoted unit words included.</summary>
-    private static bool IsProse(string text) => !DottedPath.IsMatch(text) && !IsFormatOperand(text)
-        && Regex.Matches(text, @"\p{L}{2,}").Count >= 2;
-
-    private static readonly Regex DottedPath = new(@"^\s*[\p{L}_][\p{L}\p{Nd}_]*(\[[^\]]*\])?(\.[\p{L}_][\p{L}\p{Nd}_]*(\[[^\]]*\])?)+\s*$", RegexOptions.Compiled);
+    /// <summary>Text alone identifies a fact only when it is prose: at least two words of letters separated by whitespace (N6a-4).
+    /// A token with no whitespace, whatever its punctuation (an identifier, a binding or attached property path, a format
+    /// token, a separator), is never prose, and neither is a numeric or date format operand, quoted unit words included.</summary>
+    private static bool IsProse(string text) => !IsFormatOperand(text)
+        && Regex.Split(text.Trim(), @"\s+").Count(token => Regex.IsMatch(token, @"\p{L}{2,}")) >= 2;
 
     /// <summary>Whether the text is a .NET numeric or date and time format: with its quoted parts and escaped characters set
     /// aside, what remains is a standard numeric specifier, a custom numeric pattern, or a custom date and time pattern.</summary>

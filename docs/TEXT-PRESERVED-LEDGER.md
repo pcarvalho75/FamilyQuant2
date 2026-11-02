@@ -19,9 +19,10 @@ A row closes only when all three checks hold (N6a-2, after FQAssay's review of 3
 1. **The frozen literal is compiled into the program, live.** For a C# literal, the frozen source is read around
    it. A run of constant literals joined by `+` compiles to one string, so the run's value must be one `ldstr`
    of a method. An interpolated literal must have its constant pieces, in order, in one method. Text alone
-   identifies a fact only when it is prose: two or more words of two or more letters. A format string,
-   separator, single word or identifier never closes by text, nor a dotted identifier path (a binding or
-   member path) or a numeric or date format operand, quoted unit words included (N6a-3). A literal stored into a field or property is
+   identifies a fact only when it is prose: at least two words of letters separated by whitespace (N6a-4). A
+   token with no whitespace, whatever its punctuation (an identifier, a binding or attached property path, a
+   format token, a separator), never closes by text, nor does a numeric or date format operand, quoted unit
+   words included. A literal stored into a field or property is
    skipped when the same member is stored again later in the same method, directly or through a method it
    calls afterwards (a dead store).
    A XAML attribute must be held by its own screen's compiled XAML (BAML) on an element of the same name, or,
@@ -52,8 +53,9 @@ reopens the kind.
 Before any row, the log shows the controls in the test assembly. A literal reached from the control entry
 closes. These stay OPEN: a literal held only by dead code, a virtual method of a class only named by `typeof`,
 a caption overwritten later in the same constructor, a sentence held by another member of the right class, a
-format token in its own member, a dotted binding path kept only as a caption (review-field-path), and a numeric
-format with a quoted unit (review-format-operand). After the rows, a check confirms that the ten rows FQAssay found unsupported in
+format token in its own member, a dotted binding path kept only as a caption (review-field-path), a numeric
+format with a quoted unit (review-format-operand), and a parenthesized attached property path kept only as a
+caption (review-attached-path). After the rows, a check confirms that the ten rows FQAssay found unsupported in
 330afa5 stay OPEN. The rule never reads that list.
 
 What it does not claim: behaviour, numbers, layout or a render. Text reached only through data binding
