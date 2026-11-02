@@ -86,7 +86,7 @@ namespace FamilyQuant
                 GroupingScore score = clustered.CalculateGroupingScore(decoyTag);
                 int nonContaminantTargets = clustered.GroupedFastaItems.Count(g => g.Any(i =>
                     !(i.SequenceIdentifier ?? string.Empty).StartsWith(decoyTag, StringComparison.Ordinal)
-                    && !(i.SequenceIdentifier ?? string.Empty).StartsWith(SequenceLabels.ContaminantPrefix, StringComparison.OrdinalIgnoreCase)));
+                    && !SequenceLabels.IsContaminant(i.SequenceIdentifier)));
 
                 rows.Add(new IdentityScanRow()
                 {

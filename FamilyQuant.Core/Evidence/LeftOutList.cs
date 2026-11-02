@@ -42,7 +42,7 @@ namespace FamilyQuant.Evidence
             {
                 FastaItemExtended protein = proteins[index];
                 string identifier = protein.SequenceIdentifier ?? string.Empty;
-                if (NearestReviewed.IsDecoy(protein) || identifier.StartsWith(SequenceLabels.ContaminantPrefix, StringComparison.Ordinal)) continue;
+                if (NearestReviewed.IsDecoy(protein) || SequenceLabels.IsContaminant(identifier)) continue;
                 if (!byIndex.TryGetValue(index, out EvidenceProteinProposal? proposed) || protein.Evidence == null) continue;
 
                 // The strongest marker of each family the protein carries.
