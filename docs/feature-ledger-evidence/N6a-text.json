@@ -5,52 +5,52 @@
   "runs": [
     {
       "id": "text-tool",
-      "command": "D:\\FamilyQuant-wt\\opus\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --ledger-text-preserved D:/FamilyQuant-data/out-shell/N3/source D:/FamilyQuant-data/out-refresh\\20261102-114436-opus\\text-preserved \u00222026-11-02 11:44:52 -0800\u0022",
-      "executedAt": "2026-11-02 11:44:52 -0800",
-      "commit": "92db542296bba7f8990b12ae3a8135889132770e",
+      "command": "D:\\FamilyQuant-wt\\opus\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --ledger-text-preserved D:/FamilyQuant-data/out-shell/N3/source D:/FamilyQuant-data/out-refresh\\20261102-121745-opus\\text-preserved \u00222026-11-02 12:18:07 -0800\u0022",
+      "executedAt": "2026-11-02 12:18:07 -0800",
+      "commit": "f887dc8c0aaa76867823687902d63e317a413e3c",
       "artifacts": [
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-114436-opus\\text-preserved\\text.log",
-          "sha256": "6EB228A83101C3EF07EEC7E54755D368D9A301EEF3AC7E0B1FE3C1693FCD121E"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-121745-opus\\text-preserved\\text.log",
+          "sha256": "0947FA6413F8F5A30898F73D246C10D1619082978212735030B188E1C0551334"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-114436-opus\\text-preserved\\text.json",
-          "sha256": "B20D60875F1F66526D31B74190F2D6E636C3C961AA6F00D6D58013F7ABE1E288"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-121745-opus\\text-preserved\\text.json",
+          "sha256": "E298F78D722BEA78065D4DD740701CD594E1032B56B7D45C464E8961694678BA"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-114436-opus\\text-preserved\\executed\\FamilyQuant2.dll",
-          "sha256": "249363789B685584034AF3B8FC35D9ACEF1BC1B06304D9D9FA56CBE8A21DD3BC"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-121745-opus\\text-preserved\\executed\\FamilyQuant2.dll",
+          "sha256": "77BB5C724BFE23E88F738EC5C0A20DC0A6A79A64097E94D6AAFFFCE67367617C"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-114436-opus\\text-preserved\\executed\\FamilyQuant2.pdb",
-          "sha256": "CC7B2657CDE7F58A9A0E995989659A1756E11251325B9F6B9E45F8CF212BC8EF"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-121745-opus\\text-preserved\\executed\\FamilyQuant2.pdb",
+          "sha256": "D4B71F44BAACE9EF0E26DE37ADEAA782B27C0327DD5113CBC7E11D48D891928E"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-114436-opus\\text-preserved\\executed\\FamilyQuant.Core.dll",
-          "sha256": "BF9F16594E41FC1DE67CB964359F856E39AB81A6625CAA958AE659D2E0585422"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-121745-opus\\text-preserved\\executed\\FamilyQuant.Core.dll",
+          "sha256": "E7D60418171D53A720B3D8FF9DA89E2B0A65427F0F7035BD76608D78A3A5F08F"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-114436-opus\\text-preserved\\executed\\FamilyQuant.Core.pdb",
-          "sha256": "33032938DAA82B3C84BC2E5784053BC3297E211BEBECAEDB0481D14CFC2C49DE"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-121745-opus\\text-preserved\\executed\\FamilyQuant.Core.pdb",
+          "sha256": "A8A37DAEDB4EE2B0C4E89641C95A1FB00794123BA82234A513B3D2DF193D8630"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-114436-opus\\text-preserved\\executed\\FamilyQuant.Tests.dll",
-          "sha256": "83B67E3C9DC4787A5BCA5CCB6753C5E602C4CE03C14A5F7E0EE915074C7717CF"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-121745-opus\\text-preserved\\executed\\FamilyQuant.Tests.dll",
+          "sha256": "BB3790B5B293659D5BB2616E2D98B9D4CD0266D2BA0CD03957E8E809AF27D2B8"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-114436-opus\\text-preserved\\executed\\FamilyQuant.Tests/LedgerTextPreserved.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-121745-opus\\text-preserved\\executed\\FamilyQuant.Tests/LedgerTextPreserved.cs",
           "sha256": "1C4E4F16D23EDBD018AB198EF23D28AFE64490FAAEAF9F4563DD0F8B8AB10F73"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-114436-opus\\text-preserved\\executed\\FamilyQuant.Tests/Program.LedgerTextPreserved.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-121745-opus\\text-preserved\\executed\\FamilyQuant.Tests/Program.LedgerTextPreserved.cs",
           "sha256": "03EE5968A6BEEFD3744654BFA5E8E9B4F678F981D3A3062D6DD50564B5D28621"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-114436-opus\\text-preserved\\executed\\FamilyQuant.Tests/Program.Commands.LedgerTextPreserved.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-121745-opus\\text-preserved\\executed\\FamilyQuant.Tests/Program.Commands.LedgerTextPreserved.cs",
           "sha256": "76B82F938173EA4E342000A363089B287BD5B2A897FDC8872B5EDB5319BB2F12"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-114436-opus\\text-preserved\\executed\\FamilyQuant.Tests/FeatureLedgerEvidence.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-121745-opus\\text-preserved\\executed\\FamilyQuant.Tests/FeatureLedgerEvidence.cs",
           "sha256": "A5C398B39A4DD93FA74401F7FA48A6302E25168A9A297B69FD5651CA621C0F43"
         }
       ],
@@ -239,6 +239,14 @@
       "compared": null
     },
     {
+      "observationId": "FQ15-062AEC007917",
+      "implementation": [],
+      "proofs": [],
+      "note": "1 failed: no compiled XAML of its screen holds this element, property and value",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
       "observationId": "FQ15-06517578D570",
       "implementation": [],
       "proofs": [],
@@ -269,6 +277,14 @@
       "compared": "frozen literal \u0022. Numbers use a dot for the decimal separator whatever your machine\u0027s language is, so any program ca...\u0022 (SHA256 3DDA587DA614A161) verbatim in FamilyQuant2.dll FamilyQuant.DeNovoControl/\u003CExport\u003Ed__62::MoveNext() [FamilyQuant/DeNovoControl.Dialogs.cs]; feature member DeNovoControl.Export; reached as xaml handler FamilyQuant.DeNovoControl::ButtonExportSummary_Click(Object,System.Windows.RoutedEventArgs), 2 steps from the entry point"
     },
     {
+      "observationId": "FQ15-06B2D227813F",
+      "implementation": [],
+      "proofs": [],
+      "note": "1 failed: no compiled XAML of its screen holds this element, property and value",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
       "observationId": "FQ15-070EBFCAD535",
       "implementation": [],
       "proofs": [],
@@ -280,7 +296,7 @@
       "observationId": "FQ15-07183E694AAF",
       "implementation": [],
       "proofs": [],
-      "note": "2 failed: the literal is compiled only in other members (FamilyQuant.USearchLib/BuildActions/\u003CButtonDivideAndConquer_ClickAsync\u003Ed__8::MoveNext()), not in member USearchLib.ButtonDivideAndConquer_Click or USearchLib.ChooseDatabasePath",
+      "note": "2 failed: the literal is compiled only in other members (FamilyQuant.USearchLib/BuildActions/\u003CButtonDivideAndConquer_ClickAsync\u003Ed__8::MoveNext()), not in member USearchLib.ButtonDivideAndConquer_Click",
       "kindReceiptId": null,
       "compared": null
     },
@@ -334,14 +350,6 @@
     },
     {
       "observationId": "FQ15-07F64705D40E",
-      "implementation": [],
-      "proofs": [],
-      "note": "1 failed: no compiled XAML of its screen holds this element, property and value",
-      "kindReceiptId": null,
-      "compared": null
-    },
-    {
-      "observationId": "FQ15-07FF270A92E6",
       "implementation": [],
       "proofs": [],
       "note": "1 failed: no compiled XAML of its screen holds this element, property and value",
@@ -504,7 +512,7 @@
       "observationId": "FQ15-0CDE069B156D",
       "implementation": [],
       "proofs": [],
-      "note": "2 failed: the literal is compiled only in other members (FamilyQuant.USearchLib/BuildActions/\u003CButtonDivideAndConquer_ClickAsync\u003Ed__8::MoveNext()), not in member USearchLib.ButtonDivideAndConquer_Click or USearchLib.ChooseDatabasePath",
+      "note": "2 failed: the literal is compiled only in other members (FamilyQuant.USearchLib/BuildActions/\u003CButtonDivideAndConquer_ClickAsync\u003Ed__8::MoveNext()), not in member USearchLib.ButtonDivideAndConquer_Click",
       "kindReceiptId": null,
       "compared": null
     },
@@ -537,6 +545,14 @@
       "implementation": [],
       "proofs": [],
       "note": "1 failed: the frozen literal is not in the compiled program",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-0E8F41C31827",
+      "implementation": [],
+      "proofs": [],
+      "note": "1 failed: no compiled XAML of its screen holds this element, property and value",
       "kindReceiptId": null,
       "compared": null
     },
@@ -611,10 +627,18 @@
       "compared": null
     },
     {
+      "observationId": "FQ15-118B59DFACD0",
+      "implementation": [],
+      "proofs": [],
+      "note": "1 failed: no compiled XAML of its screen holds this element, property and value",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
       "observationId": "FQ15-119A885FF42C",
       "implementation": [],
       "proofs": [],
-      "note": "2 failed: the literal is compiled only in other members (FamilyQuant.USearchLib/BuildActions/\u003CButtonDivideAndConquer_ClickAsync\u003Ed__8::MoveNext()), not in member USearchLib.ButtonDivideAndConquer_Click or USearchLib.ChooseDatabasePath",
+      "note": "2 failed: the literal is compiled only in other members (FamilyQuant.USearchLib/BuildActions/\u003CButtonDivideAndConquer_ClickAsync\u003Ed__8::MoveNext()), not in member USearchLib.ButtonDivideAndConquer_Click",
       "kindReceiptId": null,
       "compared": null
     },
@@ -647,6 +671,14 @@
       "implementation": [],
       "proofs": [],
       "note": "1 failed: the row records no literal text (kind handler definition)",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-1289ECC17F86",
+      "implementation": [],
+      "proofs": [],
+      "note": "1 failed: no compiled XAML of its screen holds this element, property and value",
       "kindReceiptId": null,
       "compared": null
     },
@@ -913,6 +945,14 @@
       "compared": null
     },
     {
+      "observationId": "FQ15-18DC9493B812",
+      "implementation": [],
+      "proofs": [],
+      "note": "1 failed: no compiled XAML of its screen holds this element, property and value",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
       "observationId": "FQ15-18EA799D7C2D",
       "implementation": [],
       "proofs": [],
@@ -945,6 +985,14 @@
       "compared": null
     },
     {
+      "observationId": "FQ15-19C5DB33694C",
+      "implementation": [],
+      "proofs": [],
+      "note": "1 failed: no compiled XAML of its screen holds this element, property and value",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
       "observationId": "FQ15-19CC4B30AE9F",
       "implementation": [],
       "proofs": [],
@@ -965,14 +1013,6 @@
       "implementation": [],
       "proofs": [],
       "note": "1 failed: the frozen literal is not in the compiled program",
-      "kindReceiptId": null,
-      "compared": null
-    },
-    {
-      "observationId": "FQ15-1A5AD284F7BF",
-      "implementation": [],
-      "proofs": [],
-      "note": "1 failed: no compiled XAML of its screen holds this element, property and value",
       "kindReceiptId": null,
       "compared": null
     },
@@ -1030,7 +1070,7 @@
       "observationId": "FQ15-1BA7746EB38B",
       "implementation": [],
       "proofs": [],
-      "note": "2 failed: the literal is compiled only in other members (FamilyQuant.USearchLib/BuildActions/\u003CButtonDivideAndConquer_ClickAsync\u003Ed__8::MoveNext()), not in member USearchLib.ButtonDivideAndConquer_Click or USearchLib.ChooseDatabasePath",
+      "note": "2 failed: the literal is compiled only in other members (FamilyQuant.USearchLib/BuildActions/\u003CButtonDivideAndConquer_ClickAsync\u003Ed__8::MoveNext()), not in member USearchLib.ButtonDivideAndConquer_Click",
       "kindReceiptId": null,
       "compared": null
     },
@@ -1054,7 +1094,7 @@
       "observationId": "FQ15-1C43E8AF06A9",
       "implementation": [],
       "proofs": [],
-      "note": "2 failed: the literal is compiled only in other members (FamilyQuant.USearchLib/BuildActions/\u003CButtonDivideAndConquer_ClickAsync\u003Ed__8::MoveNext()), not in member USearchLib.ButtonDivideAndConquer_Click or USearchLib.ChooseDatabasePath",
+      "note": "2 failed: the literal is compiled only in other members (FamilyQuant.USearchLib/BuildActions/\u003CButtonDivideAndConquer_ClickAsync\u003Ed__8::MoveNext()), not in member USearchLib.ButtonDivideAndConquer_Click",
       "kindReceiptId": null,
       "compared": null
     },
@@ -1126,7 +1166,7 @@
       "observationId": "FQ15-1E099C4C1CAA",
       "implementation": [],
       "proofs": [],
-      "note": "2 failed: the literal is compiled only in other members (FamilyQuant.USearchLib/BuildActions/\u003CButtonDivideAndConquer_ClickAsync\u003Ed__8::MoveNext()), not in member USearchLib.ButtonDivideAndConquer_Click or USearchLib.ChooseDatabasePath",
+      "note": "2 failed: the literal is compiled only in other members (FamilyQuant.USearchLib/BuildActions/\u003CButtonDivideAndConquer_ClickAsync\u003Ed__8::MoveNext()), not in member USearchLib.ButtonDivideAndConquer_Click",
       "kindReceiptId": null,
       "compared": null
     },
@@ -1199,14 +1239,6 @@
       "compared": null
     },
     {
-      "observationId": "FQ15-1EE960C38226",
-      "implementation": [],
-      "proofs": [],
-      "note": "1 failed: no compiled XAML of its screen holds this element, property and value",
-      "kindReceiptId": null,
-      "compared": null
-    },
-    {
       "observationId": "FQ15-1EEC74BA5E8B",
       "implementation": [],
       "proofs": [],
@@ -1218,7 +1250,7 @@
       "observationId": "FQ15-1F6C22FA3D47",
       "implementation": [],
       "proofs": [],
-      "note": "2 failed: the literal is compiled only in other members (FamilyQuant.USearchLib/BuildActions/\u003CButtonDivideAndConquer_ClickAsync\u003Ed__8::MoveNext()), not in member USearchLib.ButtonDivideAndConquer_Click or USearchLib.ChooseDatabasePath",
+      "note": "2 failed: the literal is compiled only in other members (FamilyQuant.USearchLib/BuildActions/\u003CButtonDivideAndConquer_ClickAsync\u003Ed__8::MoveNext()), not in member USearchLib.ButtonDivideAndConquer_Click",
       "kindReceiptId": null,
       "compared": null
     },
@@ -1367,6 +1399,14 @@
       "implementation": [],
       "proofs": [],
       "note": "2 failed: the literal is compiled only in other members (FamilyQuant.USearchLib/BuildActions/\u003CButtonBuildFamilies_ClickAsync\u003Ed__5::MoveNext()), not in member USearchLib.ButtonInput_Click or USearchLib.ChooseDatabasePath",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-23119F2306E1",
+      "implementation": [],
+      "proofs": [],
+      "note": "1 failed: the frozen literal is not in the compiled program",
       "kindReceiptId": null,
       "compared": null
     },
@@ -1639,6 +1679,14 @@
       "compared": null
     },
     {
+      "observationId": "FQ15-2AF3C764B525",
+      "implementation": [],
+      "proofs": [],
+      "note": "1 failed: the frozen literal is not in the compiled program",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
       "observationId": "FQ15-2B5E08CFF190",
       "implementation": [],
       "proofs": [],
@@ -1790,7 +1838,7 @@
       "observationId": "FQ15-2E609FD91EF2",
       "implementation": [],
       "proofs": [],
-      "note": "2 failed: the literal is compiled only in other members (FamilyQuant.USearchLib/BuildActions/\u003CButtonDivideAndConquer_ClickAsync\u003Ed__8::MoveNext()), not in member USearchLib.ButtonDivideAndConquer_Click or USearchLib.ChooseDatabasePath",
+      "note": "2 failed: the literal is compiled only in other members (FamilyQuant.USearchLib/BuildActions/\u003CButtonDivideAndConquer_ClickAsync\u003Ed__8::MoveNext()), not in member USearchLib.ButtonDivideAndConquer_Click",
       "kindReceiptId": null,
       "compared": null
     },
@@ -1852,7 +1900,7 @@
       "observationId": "FQ15-314DD5AC7F57",
       "implementation": [],
       "proofs": [],
-      "note": "2 failed: the literal is compiled only in other members (FamilyQuant.USearchLib/BuildActions/\u003CButtonDivideAndConquer_ClickAsync\u003Ed__8::MoveNext()), not in member USearchLib.ButtonDivideAndConquer_Click or USearchLib.ChooseDatabasePath",
+      "note": "2 failed: the literal is compiled only in other members (FamilyQuant.USearchLib/BuildActions/\u003CButtonDivideAndConquer_ClickAsync\u003Ed__8::MoveNext()), not in member USearchLib.ButtonDivideAndConquer_Click",
       "kindReceiptId": null,
       "compared": null
     },
@@ -1865,10 +1913,26 @@
       "compared": null
     },
     {
+      "observationId": "FQ15-31C956AA7FF7",
+      "implementation": [],
+      "proofs": [],
+      "note": "1 failed: no compiled XAML of its screen holds this element, property and value",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
       "observationId": "FQ15-323D61F5324B",
       "implementation": [],
       "proofs": [],
       "note": "2 failed: the literal is compiled only in other members (FamilyQuant.CurationQuantitationViewModel::get_TicHelp()), not in member ClusterGenerationControl.ApplyFullXic",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-3261F961544B",
+      "implementation": [],
+      "proofs": [],
+      "note": "1 failed: the frozen literal is not in the compiled program",
       "kindReceiptId": null,
       "compared": null
     },
@@ -2021,6 +2085,14 @@
       "implementation": [],
       "proofs": [],
       "note": "2 failed: the literal is compiled only in other members (FamilyQuant.DeNovoViewModel/\u003CReconcileAsync\u003Ed__7::MoveNext()), not in member DeNovoControl.ButtonReconcile_Click",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-362B3F07B111",
+      "implementation": [],
+      "proofs": [],
+      "note": "1 failed: the frozen literal is not in the compiled program",
       "kindReceiptId": null,
       "compared": null
     },
@@ -2661,10 +2733,34 @@
       "compared": null
     },
     {
+      "observationId": "FQ15-45A20ED85C9C",
+      "implementation": [],
+      "proofs": [],
+      "note": "1 failed: no compiled XAML of its screen holds this element, property and value",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-46CE2FA5AF20",
+      "implementation": [],
+      "proofs": [],
+      "note": "1 failed: no compiled XAML of its screen holds this element, property and value",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
       "observationId": "FQ15-46D629490566",
       "implementation": [],
       "proofs": [],
       "note": "1 failed: the frozen literal is not in the compiled program",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-4720C0B9E655",
+      "implementation": [],
+      "proofs": [],
+      "note": "1 failed: no compiled XAML of its screen holds this element, property and value",
       "kindReceiptId": null,
       "compared": null
     },
@@ -2793,6 +2889,22 @@
       "compared": "frozen literal \u0022no quantitation yet\u0022 (SHA256 9026DAD7EA31679B) verbatim in FamilyQuant2.dll FamilyQuant.ClusterGenerationControl::UpdateLayerStates() [FamilyQuant/ClusterGenerationControl.Presentation.cs]; feature member ClusterGenerationControl.UpdateLayerStates; reached as delegate FamilyQuant.MainWindow/ShellDocumentCommands/\u003C\u003Ec__DisplayClass4_0::\u003COpenProjectPathAsync\u003Eb__0(), 7 steps from the entry point"
     },
     {
+      "observationId": "FQ15-49AD89759235",
+      "implementation": [],
+      "proofs": [],
+      "note": "1 failed: no compiled XAML of its screen holds this element, property and value",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-49C4C609A5AF",
+      "implementation": [],
+      "proofs": [],
+      "note": "1 failed: no compiled XAML of its screen holds this element, property and value",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
       "observationId": "FQ15-49E5CB397E81",
       "implementation": [],
       "proofs": [],
@@ -2889,6 +3001,14 @@
       "compared": null
     },
     {
+      "observationId": "FQ15-4BD0128914A0",
+      "implementation": [],
+      "proofs": [],
+      "note": "1 failed: no compiled XAML of its screen holds this element, property and value",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
       "observationId": "FQ15-4BEB9EB6F4D6",
       "implementation": [],
       "proofs": [],
@@ -2949,6 +3069,14 @@
       "implementation": [],
       "proofs": [],
       "note": "1 failed: no compiled XAML of its screen holds this element, property and value",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-4D8AD15D02A1",
+      "implementation": [],
+      "proofs": [],
+      "note": "1 failed: the frozen literal is not in the compiled program",
       "kindReceiptId": null,
       "compared": null
     },
@@ -3015,6 +3143,14 @@
       "implementation": [],
       "proofs": [],
       "note": "1 failed: the frozen literal is not in the compiled program",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-4F4B00828280",
+      "implementation": [],
+      "proofs": [],
+      "note": "1 failed: no compiled XAML of its screen holds this element, property and value",
       "kindReceiptId": null,
       "compared": null
     },
@@ -3093,6 +3229,14 @@
       "note": "Frozen text in the compiled program, in its feature, reachable; no behavior, number or file claim.",
       "kindReceiptId": "text-code-fact",
       "compared": "frozen literal \u0022Package chosen: \u0022 (SHA256 A24BFDA7A38D04EC) verbatim in FamilyQuant2.dll FamilyQuant.DeNovoControl::ButtonBrowseSeproPackage_Click(Object,System.Windows.RoutedEventArgs) [FamilyQuant/DeNovoControl.Dialogs.cs]; feature member DeNovoControl.ButtonBrowseSeproPackage_Click; reached as xaml handler FamilyQuant.DeNovoControl::ButtonBrowseSeproPackage_Click(Object,System.Windows.RoutedEventArgs), 0 steps from the entry point"
+    },
+    {
+      "observationId": "FQ15-51763E712D19",
+      "implementation": [],
+      "proofs": [],
+      "note": "1 failed: no compiled XAML of its screen holds this element, property and value",
+      "kindReceiptId": null,
+      "compared": null
     },
     {
       "observationId": "FQ15-51EF603F2E85",
@@ -3245,6 +3389,14 @@
       "compared": null
     },
     {
+      "observationId": "FQ15-5715E31AD7B9",
+      "implementation": [],
+      "proofs": [],
+      "note": "2 failed: the literal is compiled only in other members (FamilyQuant.DeNovoControl::ButtonBrowseSeproPackage_Click(Object,System.Windows.RoutedEventArgs)), not in member ComputeXicWindow.ButtonBrowseSepro_Click",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
       "observationId": "FQ15-572E1ED93F11",
       "implementation": [],
       "proofs": [],
@@ -3355,6 +3507,14 @@
       "compared": null
     },
     {
+      "observationId": "FQ15-5A6CA2000AEA",
+      "implementation": [],
+      "proofs": [],
+      "note": "1 failed: no compiled XAML of its screen holds this element, property and value",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
       "observationId": "FQ15-5A7519A2287A",
       "implementation": [],
       "proofs": [],
@@ -3405,6 +3565,14 @@
       "implementation": [],
       "proofs": [],
       "note": "1 failed: the row records no literal text (kind handler)",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-5C14D092A72E",
+      "implementation": [],
+      "proofs": [],
+      "note": "1 failed: no compiled XAML of its screen holds this element, property and value",
       "kindReceiptId": null,
       "compared": null
     },
@@ -3469,6 +3637,22 @@
       "implementation": [],
       "proofs": [],
       "note": "1 failed: the frozen literal is not in the compiled program",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-5D851DA8FF1E",
+      "implementation": [],
+      "proofs": [],
+      "note": "1 failed: no compiled XAML of its screen holds this element, property and value",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-5DD50C3323AD",
+      "implementation": [],
+      "proofs": [],
+      "note": "1 failed: no compiled XAML of its screen holds this element, property and value",
       "kindReceiptId": null,
       "compared": null
     },
@@ -3613,6 +3797,14 @@
       "compared": null
     },
     {
+      "observationId": "FQ15-6297AF326621",
+      "implementation": [],
+      "proofs": [],
+      "note": "1 failed: the frozen literal is not in the compiled program",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
       "observationId": "FQ15-62C82720124A",
       "implementation": [],
       "proofs": [],
@@ -3712,7 +3904,7 @@
       "observationId": "FQ15-654B62BB2E29",
       "implementation": [],
       "proofs": [],
-      "note": "2 failed: the literal is compiled only in other members (FamilyQuant.USearchLib/BuildActions/\u003CButtonDivideAndConquer_ClickAsync\u003Ed__8::MoveNext()), not in member USearchLib.ButtonDivideAndConquer_Click or USearchLib.ChooseDatabasePath",
+      "note": "2 failed: the literal is compiled only in other members (FamilyQuant.USearchLib/BuildActions/\u003CButtonDivideAndConquer_ClickAsync\u003Ed__8::MoveNext()), not in member USearchLib.ButtonDivideAndConquer_Click",
       "kindReceiptId": null,
       "compared": null
     },
@@ -3789,6 +3981,14 @@
       "implementation": [],
       "proofs": [],
       "note": "1 failed: a format string, separator or single word does not identify a fact by text alone",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-67C18A2317D7",
+      "implementation": [],
+      "proofs": [],
+      "note": "1 failed: no compiled XAML of its screen holds this element, property and value",
       "kindReceiptId": null,
       "compared": null
     },
@@ -3977,6 +4177,14 @@
       "compared": null
     },
     {
+      "observationId": "FQ15-6D07970F2CDF",
+      "implementation": [],
+      "proofs": [],
+      "note": "2 failed: the literal is compiled only in other members (FamilyQuant.DeNovoControl::ButtonBrowsePeaksDirectory_Click(Object,System.Windows.RoutedEventArgs)), not in member ComputeXicWindow.ButtonBrowseDeNovo_Click",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
       "observationId": "FQ15-6D49EFE30E0E",
       "implementation": [],
       "proofs": [],
@@ -4159,18 +4367,10 @@
       "compared": null
     },
     {
-      "observationId": "FQ15-72C60A8B5C5E",
-      "implementation": [],
-      "proofs": [],
-      "note": "1 failed: no compiled XAML of its screen holds this element, property and value",
-      "kindReceiptId": null,
-      "compared": null
-    },
-    {
       "observationId": "FQ15-72CD165B428B",
       "implementation": [],
       "proofs": [],
-      "note": "2 failed: the literal is compiled only in other members (FamilyQuant.USearchLib/BuildActions/\u003CButtonDivideAndConquer_ClickAsync\u003Ed__8::MoveNext()), not in member USearchLib.ButtonDivideAndConquer_Click or USearchLib.ChooseDatabasePath",
+      "note": "2 failed: the literal is compiled only in other members (FamilyQuant.USearchLib/BuildActions/\u003CButtonDivideAndConquer_ClickAsync\u003Ed__8::MoveNext()), not in member USearchLib.ButtonDivideAndConquer_Click",
       "kindReceiptId": null,
       "compared": null
     },
@@ -4211,6 +4411,14 @@
       "implementation": [],
       "proofs": [],
       "note": "1 failed: the frozen literal is not in the compiled program",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-743E1845215D",
+      "implementation": [],
+      "proofs": [],
+      "note": "1 failed: no compiled XAML of its screen holds this element, property and value",
       "kindReceiptId": null,
       "compared": null
     },
@@ -4351,6 +4559,14 @@
       "compared": null
     },
     {
+      "observationId": "FQ15-77FE5B3A0820",
+      "implementation": [],
+      "proofs": [],
+      "note": "1 failed: the frozen literal is not in the compiled program",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
       "observationId": "FQ15-7823248CE671",
       "implementation": [],
       "proofs": [],
@@ -4363,6 +4579,14 @@
       "implementation": [],
       "proofs": [],
       "note": "2 failed: the literal is compiled only in other members (FamilyQuant.BuildReportFormatter::Format(System.Collections.Generic.List\u00601{FamilyQuant.IdentityScanRow})), not in member USearchLib.FormatScanReport",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-78968F255E60",
+      "implementation": [],
+      "proofs": [],
+      "note": "1 failed: no compiled XAML of its screen holds this element, property and value",
       "kindReceiptId": null,
       "compared": null
     },
@@ -4419,14 +4643,6 @@
       "compared": null
     },
     {
-      "observationId": "FQ15-79B5980B9F83",
-      "implementation": [],
-      "proofs": [],
-      "note": "1 failed: no compiled XAML of its screen holds this element, property and value",
-      "kindReceiptId": null,
-      "compared": null
-    },
-    {
       "observationId": "FQ15-79D69E00F881",
       "implementation": [],
       "proofs": [],
@@ -4438,7 +4654,7 @@
       "observationId": "FQ15-7A09E27E3389",
       "implementation": [],
       "proofs": [],
-      "note": "2 failed: the literal is compiled only in other members (FamilyQuant.USearchLib/BuildActions/\u003CButtonDivideAndConquer_ClickAsync\u003Ed__8::MoveNext()), not in member USearchLib.ButtonDivideAndConquer_Click or USearchLib.ChooseDatabasePath",
+      "note": "2 failed: the literal is compiled only in other members (FamilyQuant.USearchLib/BuildActions/\u003CButtonDivideAndConquer_ClickAsync\u003Ed__8::MoveNext()), not in member USearchLib.ButtonDivideAndConquer_Click",
       "kindReceiptId": null,
       "compared": null
     },
@@ -4593,6 +4809,30 @@
       "compared": null
     },
     {
+      "observationId": "FQ15-7DF6C2BE3CC0",
+      "implementation": [],
+      "proofs": [],
+      "note": "1 failed: no compiled XAML of its screen holds this element, property and value",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-7E3654032666",
+      "implementation": [],
+      "proofs": [],
+      "note": "1 failed: no compiled XAML of its screen holds this element, property and value",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-7E41F521629C",
+      "implementation": [],
+      "proofs": [],
+      "note": "1 failed: no compiled XAML of its screen holds this element, property and value",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
       "observationId": "FQ15-7E8B9FAD3F78",
       "implementation": [],
       "proofs": [],
@@ -4697,6 +4937,14 @@
       "compared": null
     },
     {
+      "observationId": "FQ15-8092F0662CDB",
+      "implementation": [],
+      "proofs": [],
+      "note": "1 failed: no compiled XAML of its screen holds this element, property and value",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
       "observationId": "FQ15-80A92E4EC4C1",
       "implementation": [],
       "proofs": [],
@@ -4772,7 +5020,15 @@
       "proofs": [],
       "note": "Frozen text in the compiled program, in its feature, reachable; no behavior, number or file claim.",
       "kindReceiptId": "text-code-fact",
-      "compared": "frozen literal \u0022Free text of your own. It is saved in the .fcf and written to the CSV, and it affects no calculation...\u0022 (SHA256 2044478F94DDB604) verbatim in FamilyQuant2.dll FamilyQuant.ClusterGenerationControl::ApplyColumnHeaderTooltips() [FamilyQuant/ClusterGenerationControl.Presentation.cs]; feature member ClusterGenerationControl.ApplyColumnHeaderTooltips; reached as delegate FamilyQuant.MainWindow/ShellDocumentCommands/\u003C\u003Ec__DisplayClass4_0::\u003COpenProjectPathAsync\u003Eb__0(), 6 steps from the entry point"
+      "compared": "frozen literal \u0022Free text of your own. It is saved in the .fcf and written to the CSV, and it affects no calculation...\u0022 (SHA256 2044478F94DDB604) verbatim in FamilyQuant2.dll FamilyQuant.ClusterGenerationControl::ApplyColumnHeaderTooltips() [FamilyQuant/ClusterGenerationControl.Presentation.cs]; feature member ClusterGenerationControl.ApplyColumnHeaderTooltips or ClusterGenerationControl.ApplyColumnHeaderTooltips; reached as delegate FamilyQuant.MainWindow/ShellDocumentCommands/\u003C\u003Ec__DisplayClass4_0::\u003COpenProjectPathAsync\u003Eb__0(), 6 steps from the entry point"
+    },
+    {
+      "observationId": "FQ15-826441F668F3",
+      "implementation": [],
+      "proofs": [],
+      "note": "1 failed: no compiled XAML of its screen holds this element, property and value",
+      "kindReceiptId": null,
+      "compared": null
     },
     {
       "observationId": "FQ15-828C4C669760",
@@ -4840,13 +5096,21 @@
       "proofs": [],
       "note": "Frozen text in the compiled program, in its feature, reachable; no behavior, number or file claim.",
       "kindReceiptId": "text-code-fact",
-      "compared": "frozen literal \u0022Your own family number, the only editable id. Type the same number in two rows to merge their famili...\u0022 (SHA256 C6A3DF6D916ECE40) verbatim in FamilyQuant2.dll FamilyQuant.ClusterGenerationControl::ApplyColumnHeaderTooltips() [FamilyQuant/ClusterGenerationControl.Presentation.cs]; feature member ClusterGenerationControl.ApplyColumnHeaderTooltips; reached as delegate FamilyQuant.MainWindow/ShellDocumentCommands/\u003C\u003Ec__DisplayClass4_0::\u003COpenProjectPathAsync\u003Eb__0(), 6 steps from the entry point"
+      "compared": "frozen literal \u0022Your own family number, the only editable id. Type the same number in two rows to merge their famili...\u0022 (SHA256 C6A3DF6D916ECE40) verbatim in FamilyQuant2.dll FamilyQuant.ClusterGenerationControl::ApplyColumnHeaderTooltips() [FamilyQuant/ClusterGenerationControl.Presentation.cs]; feature member ClusterGenerationControl.ApplyColumnHeaderTooltips or ClusterGenerationControl.ApplyColumnHeaderTooltips; reached as delegate FamilyQuant.MainWindow/ShellDocumentCommands/\u003C\u003Ec__DisplayClass4_0::\u003COpenProjectPathAsync\u003Eb__0(), 6 steps from the entry point"
     },
     {
       "observationId": "FQ15-8504F0703DBD",
       "implementation": [],
       "proofs": [],
       "note": "1 failed: the frozen literal is not in the compiled program",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-853CE1DB7A64",
+      "implementation": [],
+      "proofs": [],
+      "note": "1 failed: no compiled XAML of its screen holds this element, property and value",
       "kindReceiptId": null,
       "compared": null
     },
@@ -5006,7 +5270,7 @@
       "observationId": "FQ15-8A2D8E2ACE57",
       "implementation": [],
       "proofs": [],
-      "note": "2 failed: the literal is compiled only in other members (FamilyQuant.USearchLib/BuildActions/\u003CButtonDivideAndConquer_ClickAsync\u003Ed__8::MoveNext()), not in member USearchLib.ButtonDivideAndConquer_Click or USearchLib.ChooseDatabasePath",
+      "note": "2 failed: the literal is compiled only in other members (FamilyQuant.USearchLib/BuildActions/\u003CButtonDivideAndConquer_ClickAsync\u003Ed__8::MoveNext()), not in member USearchLib.ButtonDivideAndConquer_Click",
       "kindReceiptId": null,
       "compared": null
     },
@@ -5025,7 +5289,7 @@
       "compared": "frozen literal \u0022. Next step: press Reconcile. Reading a real package takes a while, and the screen is disabled while...\u0022 (SHA256 D330774ADFEAB493) verbatim in FamilyQuant2.dll FamilyQuant.DeNovoControl::ButtonBrowseSeproPackage_Click(Object,System.Windows.RoutedEventArgs) [FamilyQuant/DeNovoControl.Dialogs.cs]; feature member DeNovoControl.ButtonBrowseSeproPackage_Click; reached as xaml handler FamilyQuant.DeNovoControl::ButtonBrowseSeproPackage_Click(Object,System.Windows.RoutedEventArgs), 0 steps from the entry point"
     },
     {
-      "observationId": "FQ15-8A88D54E4A5B",
+      "observationId": "FQ15-8A8526A9016B",
       "implementation": [],
       "proofs": [],
       "note": "1 failed: no compiled XAML of its screen holds this element, property and value",
@@ -5058,6 +5322,14 @@
     },
     {
       "observationId": "FQ15-8AEF76927237",
+      "implementation": [],
+      "proofs": [],
+      "note": "1 failed: no compiled XAML of its screen holds this element, property and value",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-8AF2BD7E4C9F",
       "implementation": [],
       "proofs": [],
       "note": "1 failed: no compiled XAML of its screen holds this element, property and value",
@@ -5149,7 +5421,15 @@
       "compared": "frozen literal \u0022Nothing was exported\u0022 (SHA256 D9DD2F3ED6507BD0) verbatim in FamilyQuant2.dll FamilyQuant.DeNovoControl/\u003CExport\u003Ed__62::MoveNext() [FamilyQuant/DeNovoControl.Dialogs.cs]; feature member DeNovoControl.Export; reached as xaml handler FamilyQuant.DeNovoControl::ButtonExportSummary_Click(Object,System.Windows.RoutedEventArgs), 2 steps from the entry point"
     },
     {
-      "observationId": "FQ15-8CF846C87F21",
+      "observationId": "FQ15-8C6F17A7AD3A",
+      "implementation": [],
+      "proofs": [],
+      "note": "2 failed: the literal is compiled only in other members (FamilyQuant.DeNovoControl::ButtonBrowsePeaksDirectory_Click(Object,System.Windows.RoutedEventArgs)), not in member ComputeXicWindow.ButtonBrowseRaw_Click",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-8CF463172DFA",
       "implementation": [],
       "proofs": [],
       "note": "1 failed: no compiled XAML of its screen holds this element, property and value",
@@ -5270,10 +5550,18 @@
       "proofs": [],
       "note": "Frozen text in the compiled program, in its feature, reachable; no behavior, number or file claim.",
       "kindReceiptId": "text-code-fact",
-      "compared": "frozen literal \u0022The sum of the protein\u0027s residue masses in daltons, without the terminal water. Add 18.011 Da for th...\u0022 (SHA256 B7FBBD75E6982B71) verbatim in FamilyQuant2.dll FamilyQuant.ClusterGenerationControl::ApplyColumnHeaderTooltips() [FamilyQuant/ClusterGenerationControl.Presentation.cs]; feature member ClusterGenerationControl.ApplyColumnHeaderTooltips; reached as delegate FamilyQuant.MainWindow/ShellDocumentCommands/\u003C\u003Ec__DisplayClass4_0::\u003COpenProjectPathAsync\u003Eb__0(), 6 steps from the entry point"
+      "compared": "frozen literal \u0022The sum of the protein\u0027s residue masses in daltons, without the terminal water. Add 18.011 Da for th...\u0022 (SHA256 B7FBBD75E6982B71) verbatim in FamilyQuant2.dll FamilyQuant.ClusterGenerationControl::ApplyColumnHeaderTooltips() [FamilyQuant/ClusterGenerationControl.Presentation.cs]; feature member ClusterGenerationControl.ApplyColumnHeaderTooltips or ClusterGenerationControl.ApplyColumnHeaderTooltips; reached as delegate FamilyQuant.MainWindow/ShellDocumentCommands/\u003C\u003Ec__DisplayClass4_0::\u003COpenProjectPathAsync\u003Eb__0(), 6 steps from the entry point"
     },
     {
       "observationId": "FQ15-8F7963BD883F",
+      "implementation": [],
+      "proofs": [],
+      "note": "1 failed: no compiled XAML of its screen holds this element, property and value",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-8FCD469AC3D0",
       "implementation": [],
       "proofs": [],
       "note": "1 failed: no compiled XAML of its screen holds this element, property and value",
@@ -5290,6 +5578,14 @@
     },
     {
       "observationId": "FQ15-903128CECC6E",
+      "implementation": [],
+      "proofs": [],
+      "note": "1 failed: no compiled XAML of its screen holds this element, property and value",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-903BC9DCDC73",
       "implementation": [],
       "proofs": [],
       "note": "1 failed: no compiled XAML of its screen holds this element, property and value",
@@ -5353,6 +5649,14 @@
       "compared": null
     },
     {
+      "observationId": "FQ15-9150094342D9",
+      "implementation": [],
+      "proofs": [],
+      "note": "1 failed: the frozen literal is not in the compiled program",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
       "observationId": "FQ15-91BC81E5F2FB",
       "implementation": [
         {
@@ -5364,7 +5668,7 @@
       "proofs": [],
       "note": "Frozen text in the compiled program, in its feature, reachable; no behavior, number or file claim.",
       "kindReceiptId": "text-code-fact",
-      "compared": "frozen literal \u0022The last automatic grouping, from USEARCH and any word or keyword merge. Read-only; it equals User I...\u0022 (SHA256 85498388F5C8F8DF) verbatim in FamilyQuant2.dll FamilyQuant.ClusterGenerationControl::ApplyColumnHeaderTooltips() [FamilyQuant/ClusterGenerationControl.Presentation.cs]; feature member ClusterGenerationControl.ApplyColumnHeaderTooltips; reached as delegate FamilyQuant.MainWindow/ShellDocumentCommands/\u003C\u003Ec__DisplayClass4_0::\u003COpenProjectPathAsync\u003Eb__0(), 6 steps from the entry point"
+      "compared": "frozen literal \u0022The last automatic grouping, from USEARCH and any word or keyword merge. Read-only; it equals User I...\u0022 (SHA256 85498388F5C8F8DF) verbatim in FamilyQuant2.dll FamilyQuant.ClusterGenerationControl::ApplyColumnHeaderTooltips() [FamilyQuant/ClusterGenerationControl.Presentation.cs]; feature member ClusterGenerationControl.ApplyColumnHeaderTooltips or ClusterGenerationControl.ApplyColumnHeaderTooltips; reached as delegate FamilyQuant.MainWindow/ShellDocumentCommands/\u003C\u003Ec__DisplayClass4_0::\u003COpenProjectPathAsync\u003Eb__0(), 6 steps from the entry point"
     },
     {
       "observationId": "FQ15-91DFEE84C0F4",
@@ -5471,6 +5775,14 @@
       "implementation": [],
       "proofs": [],
       "note": "1 failed: a format string, separator or single word does not identify a fact by text alone",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-93776868FAB5",
+      "implementation": [],
+      "proofs": [],
+      "note": "1 failed: no compiled XAML of its screen holds this element, property and value",
       "kindReceiptId": null,
       "compared": null
     },
@@ -5749,6 +6061,14 @@
       "note": "Frozen text in the compiled program, in its feature, reachable; no behavior, number or file claim.",
       "kindReceiptId": "text-code-fact",
       "compared": "frozen literal \u0022Family Cluster File chosen: \u0022 (SHA256 B8F8EACC92F5D25B) verbatim in FamilyQuant2.dll FamilyQuant.DeNovoControl::ButtonBrowseHomologyFcf_Click(Object,System.Windows.RoutedEventArgs) [FamilyQuant/DeNovoControl.Dialogs.cs]; feature member DeNovoControl.ButtonBrowseHomologyFcf_Click; reached as xaml handler FamilyQuant.DeNovoControl::ButtonBrowseHomologyFcf_Click(Object,System.Windows.RoutedEventArgs), 0 steps from the entry point"
+    },
+    {
+      "observationId": "FQ15-9AAA02CA37D2",
+      "implementation": [],
+      "proofs": [],
+      "note": "1 failed: the frozen literal is not in the compiled program",
+      "kindReceiptId": null,
+      "compared": null
     },
     {
       "observationId": "FQ15-9ABDA7ECA316",
@@ -6051,6 +6371,14 @@
       "compared": "frozen literal \u0022The full XIC is being attributed to the families. These options become live when it finishes.\u0022 (SHA256 D9C5B4F5AAF06320) verbatim in FamilyQuant2.dll FamilyQuant.ClusterGenerationControl::UpdateLayerStates() [FamilyQuant/ClusterGenerationControl.Presentation.cs]; feature member ClusterGenerationControl.UpdateLayerStates; reached as delegate FamilyQuant.MainWindow/ShellDocumentCommands/\u003C\u003Ec__DisplayClass4_0::\u003COpenProjectPathAsync\u003Eb__0(), 7 steps from the entry point"
     },
     {
+      "observationId": "FQ15-A29D8F6604C1",
+      "implementation": [],
+      "proofs": [],
+      "note": "1 failed: no compiled XAML of its screen holds this element, property and value",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
       "observationId": "FQ15-A2ABD844B1FB",
       "implementation": [],
       "proofs": [],
@@ -6127,6 +6455,14 @@
       "compared": null
     },
     {
+      "observationId": "FQ15-A4190B6774C6",
+      "implementation": [],
+      "proofs": [],
+      "note": "1 failed: no compiled XAML of its screen holds this element, property and value",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
       "observationId": "FQ15-A487680101CE",
       "implementation": [],
       "proofs": [],
@@ -6144,6 +6480,14 @@
     },
     {
       "observationId": "FQ15-A53FD46685C6",
+      "implementation": [],
+      "proofs": [],
+      "note": "1 failed: no compiled XAML of its screen holds this element, property and value",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-A563CB795779",
       "implementation": [],
       "proofs": [],
       "note": "1 failed: no compiled XAML of its screen holds this element, property and value",
@@ -6199,6 +6543,14 @@
       "compared": null
     },
     {
+      "observationId": "FQ15-A7D40F57CABA",
+      "implementation": [],
+      "proofs": [],
+      "note": "1 failed: no compiled XAML of its screen holds this element, property and value",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
       "observationId": "FQ15-A7D75E41769F",
       "implementation": [],
       "proofs": [],
@@ -6242,7 +6594,7 @@
       "observationId": "FQ15-A8892409CC81",
       "implementation": [],
       "proofs": [],
-      "note": "2 failed: the literal is compiled only in other members (FamilyQuant.USearchLib/BuildActions/\u003CButtonDivideAndConquer_ClickAsync\u003Ed__8::MoveNext()), not in member USearchLib.ButtonDivideAndConquer_Click or USearchLib.ChooseDatabasePath",
+      "note": "2 failed: the literal is compiled only in other members (FamilyQuant.USearchLib/BuildActions/\u003CButtonDivideAndConquer_ClickAsync\u003Ed__8::MoveNext()), not in member USearchLib.ButtonDivideAndConquer_Click",
       "kindReceiptId": null,
       "compared": null
     },
@@ -6599,14 +6951,6 @@
       "compared": null
     },
     {
-      "observationId": "FQ15-B365C4DF8F18",
-      "implementation": [],
-      "proofs": [],
-      "note": "1 failed: no compiled XAML of its screen holds this element, property and value",
-      "kindReceiptId": null,
-      "compared": null
-    },
-    {
       "observationId": "FQ15-B39510568486",
       "implementation": [],
       "proofs": [],
@@ -6690,7 +7034,7 @@
       "proofs": [],
       "note": "Frozen text in the compiled program, in its feature, reachable; no behavior, number or file claim.",
       "kindReceiptId": "text-code-fact",
-      "compared": "frozen literal \u0022Your own family number, the only editable id. Type the same number in two rows to merge their famili...\u0022 (SHA256 C6A3DF6D916ECE40) verbatim in FamilyQuant2.dll FamilyQuant.ClusterGenerationControl::ApplyColumnHeaderTooltips() [FamilyQuant/ClusterGenerationControl.Presentation.cs]; feature member ClusterGenerationControl.ApplyColumnHeaderTooltips; reached as delegate FamilyQuant.MainWindow/ShellDocumentCommands/\u003C\u003Ec__DisplayClass4_0::\u003COpenProjectPathAsync\u003Eb__0(), 6 steps from the entry point"
+      "compared": "frozen literal \u0022Your own family number, the only editable id. Type the same number in two rows to merge their famili...\u0022 (SHA256 C6A3DF6D916ECE40) verbatim in FamilyQuant2.dll FamilyQuant.ClusterGenerationControl::ApplyColumnHeaderTooltips() [FamilyQuant/ClusterGenerationControl.Presentation.cs]; feature member ClusterGenerationControl.ApplyColumnHeaderTooltips or ClusterGenerationControl.ApplyColumnHeaderTooltips; reached as delegate FamilyQuant.MainWindow/ShellDocumentCommands/\u003C\u003Ec__DisplayClass4_0::\u003COpenProjectPathAsync\u003Eb__0(), 6 steps from the entry point"
     },
     {
       "observationId": "FQ15-B5062F974B9D",
@@ -6704,7 +7048,7 @@
       "observationId": "FQ15-B5453DB83738",
       "implementation": [],
       "proofs": [],
-      "note": "2 failed: the literal is compiled only in other members (FamilyQuant.USearchLib/BuildActions/\u003CButtonDivideAndConquer_ClickAsync\u003Ed__8::MoveNext()), not in member USearchLib.ButtonDivideAndConquer_Click or USearchLib.ChooseDatabasePath",
+      "note": "2 failed: the literal is compiled only in other members (FamilyQuant.USearchLib/BuildActions/\u003CButtonDivideAndConquer_ClickAsync\u003Ed__8::MoveNext()), not in member USearchLib.ButtonDivideAndConquer_Click",
       "kindReceiptId": null,
       "compared": null
     },
@@ -6784,7 +7128,7 @@
       "proofs": [],
       "note": "Frozen text in the compiled program, in its feature, reachable; no behavior, number or file claim.",
       "kindReceiptId": "text-code-fact",
-      "compared": "frozen literal \u0022The last automatic grouping, from USEARCH and any word or keyword merge. Read-only; it equals User I...\u0022 (SHA256 85498388F5C8F8DF) verbatim in FamilyQuant2.dll FamilyQuant.ClusterGenerationControl::ApplyColumnHeaderTooltips() [FamilyQuant/ClusterGenerationControl.Presentation.cs]; feature member ClusterGenerationControl.ApplyColumnHeaderTooltips; reached as delegate FamilyQuant.MainWindow/ShellDocumentCommands/\u003C\u003Ec__DisplayClass4_0::\u003COpenProjectPathAsync\u003Eb__0(), 6 steps from the entry point"
+      "compared": "frozen literal \u0022The last automatic grouping, from USEARCH and any word or keyword merge. Read-only; it equals User I...\u0022 (SHA256 85498388F5C8F8DF) verbatim in FamilyQuant2.dll FamilyQuant.ClusterGenerationControl::ApplyColumnHeaderTooltips() [FamilyQuant/ClusterGenerationControl.Presentation.cs]; feature member ClusterGenerationControl.ApplyColumnHeaderTooltips or ClusterGenerationControl.ApplyColumnHeaderTooltips; reached as delegate FamilyQuant.MainWindow/ShellDocumentCommands/\u003C\u003Ec__DisplayClass4_0::\u003COpenProjectPathAsync\u003Eb__0(), 6 steps from the entry point"
     },
     {
       "observationId": "FQ15-B7A8EB1EE831",
@@ -7023,6 +7367,14 @@
       "compared": null
     },
     {
+      "observationId": "FQ15-BEF6F613076C",
+      "implementation": [],
+      "proofs": [],
+      "note": "1 failed: no compiled XAML of its screen holds this element, property and value",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
       "observationId": "FQ15-BF0FA6F1D889",
       "implementation": [],
       "proofs": [],
@@ -7063,6 +7415,14 @@
       "compared": null
     },
     {
+      "observationId": "FQ15-C1232C569E84",
+      "implementation": [],
+      "proofs": [],
+      "note": "1 failed: no compiled XAML of its screen holds this element, property and value",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
       "observationId": "FQ15-C13ED755EBC7",
       "implementation": [],
       "proofs": [],
@@ -7090,7 +7450,15 @@
       "observationId": "FQ15-C21A8F76D6F3",
       "implementation": [],
       "proofs": [],
-      "note": "2 failed: the literal is compiled only in other members (FamilyQuant.USearchLib/BuildActions/\u003CButtonDivideAndConquer_ClickAsync\u003Ed__8::MoveNext()), not in member USearchLib.ButtonDivideAndConquer_Click or USearchLib.ChooseDatabasePath",
+      "note": "2 failed: the literal is compiled only in other members (FamilyQuant.USearchLib/BuildActions/\u003CButtonDivideAndConquer_ClickAsync\u003Ed__8::MoveNext()), not in member USearchLib.ButtonDivideAndConquer_Click",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-C21CBBA6DC47",
+      "implementation": [],
+      "proofs": [],
+      "note": "1 failed: the frozen literal is not in the compiled program",
       "kindReceiptId": null,
       "compared": null
     },
@@ -7129,14 +7497,6 @@
       "implementation": [],
       "proofs": [],
       "note": "1 failed: a format string, separator or single word does not identify a fact by text alone",
-      "kindReceiptId": null,
-      "compared": null
-    },
-    {
-      "observationId": "FQ15-C2AA8A21C878",
-      "implementation": [],
-      "proofs": [],
-      "note": "1 failed: no compiled XAML of its screen holds this element, property and value",
       "kindReceiptId": null,
       "compared": null
     },
@@ -7249,6 +7609,14 @@
       "compared": null
     },
     {
+      "observationId": "FQ15-C55639A5A0BE",
+      "implementation": [],
+      "proofs": [],
+      "note": "1 failed: no compiled XAML of its screen holds this element, property and value",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
       "observationId": "FQ15-C55C06BF994E",
       "implementation": [],
       "proofs": [],
@@ -7340,7 +7708,7 @@
       "proofs": [],
       "note": "Frozen text in the compiled program, in its feature, reachable; no behavior, number or file claim.",
       "kindReceiptId": "text-code-fact",
-      "compared": "frozen literal \u0022The sum of the protein\u0027s residue masses in daltons, without the terminal water. Add 18.011 Da for th...\u0022 (SHA256 B7FBBD75E6982B71) verbatim in FamilyQuant2.dll FamilyQuant.ClusterGenerationControl::ApplyColumnHeaderTooltips() [FamilyQuant/ClusterGenerationControl.Presentation.cs]; feature member ClusterGenerationControl.ApplyColumnHeaderTooltips; reached as delegate FamilyQuant.MainWindow/ShellDocumentCommands/\u003C\u003Ec__DisplayClass4_0::\u003COpenProjectPathAsync\u003Eb__0(), 6 steps from the entry point"
+      "compared": "frozen literal \u0022The sum of the protein\u0027s residue masses in daltons, without the terminal water. Add 18.011 Da for th...\u0022 (SHA256 B7FBBD75E6982B71) verbatim in FamilyQuant2.dll FamilyQuant.ClusterGenerationControl::ApplyColumnHeaderTooltips() [FamilyQuant/ClusterGenerationControl.Presentation.cs]; feature member ClusterGenerationControl.ApplyColumnHeaderTooltips or ClusterGenerationControl.ApplyColumnHeaderTooltips; reached as delegate FamilyQuant.MainWindow/ShellDocumentCommands/\u003C\u003Ec__DisplayClass4_0::\u003COpenProjectPathAsync\u003Eb__0(), 6 steps from the entry point"
     },
     {
       "observationId": "FQ15-C8FFCC2A4667",
@@ -7483,6 +7851,14 @@
       "compared": null
     },
     {
+      "observationId": "FQ15-CCAA30726B68",
+      "implementation": [],
+      "proofs": [],
+      "note": "2 failed: the literal is compiled only in other members (FamilyQuant.DeNovoViewModel/\u003CReconcileAsync\u003Ed__7::MoveNext(), FamilyQuant.DeNovoViewModel/\u003CSearchAsync\u003Ed__9::MoveNext()), not in member ComputeXicWindow.ButtonCompute_Click",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
       "observationId": "FQ15-CCDA7E2075A7",
       "implementation": [],
       "proofs": [],
@@ -7494,15 +7870,7 @@
       "observationId": "FQ15-CCF050BC91EC",
       "implementation": [],
       "proofs": [],
-      "note": "2 failed: the literal is compiled only in other members (FamilyQuant.USearchLib/BuildActions/\u003CButtonDivideAndConquer_ClickAsync\u003Ed__8::MoveNext()), not in member USearchLib.ButtonDivideAndConquer_Click or USearchLib.ChooseDatabasePath",
-      "kindReceiptId": null,
-      "compared": null
-    },
-    {
-      "observationId": "FQ15-CD55996A10F7",
-      "implementation": [],
-      "proofs": [],
-      "note": "1 failed: the frozen literal is not in the compiled program",
+      "note": "2 failed: the literal is compiled only in other members (FamilyQuant.USearchLib/BuildActions/\u003CButtonDivideAndConquer_ClickAsync\u003Ed__8::MoveNext()), not in member USearchLib.ButtonDivideAndConquer_Click",
       "kindReceiptId": null,
       "compared": null
     },
@@ -7571,6 +7939,14 @@
       "compared": null
     },
     {
+      "observationId": "FQ15-CFFB1E2E8ADA",
+      "implementation": [],
+      "proofs": [],
+      "note": "2 failed: the literal is compiled only in other members (FamilyQuant.DeNovoControl::ButtonBrowseSeproPackage_Click(Object,System.Windows.RoutedEventArgs)), not in member ComputeXicWindow.ButtonBrowseSepro_Click",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
       "observationId": "FQ15-D01ACA90B914",
       "implementation": [],
       "proofs": [],
@@ -7583,6 +7959,14 @@
       "implementation": [],
       "proofs": [],
       "note": "1 failed: the frozen literal is not in the compiled program",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-D0BF89961A6A",
+      "implementation": [],
+      "proofs": [],
+      "note": "1 failed: no compiled XAML of its screen holds this element, property and value",
       "kindReceiptId": null,
       "compared": null
     },
@@ -7651,14 +8035,6 @@
       "implementation": [],
       "proofs": [],
       "note": "1 failed: the frozen literal is not in the compiled program",
-      "kindReceiptId": null,
-      "compared": null
-    },
-    {
-      "observationId": "FQ15-D245A9F78749",
-      "implementation": [],
-      "proofs": [],
-      "note": "1 failed: no compiled XAML of its screen holds this element, property and value",
       "kindReceiptId": null,
       "compared": null
     },
@@ -7791,14 +8167,6 @@
       "compared": null
     },
     {
-      "observationId": "FQ15-D6865B3843D0",
-      "implementation": [],
-      "proofs": [],
-      "note": "1 failed: no compiled XAML of its screen holds this element, property and value",
-      "kindReceiptId": null,
-      "compared": null
-    },
-    {
       "observationId": "FQ15-D6960476657D",
       "implementation": [],
       "proofs": [],
@@ -7899,10 +8267,26 @@
       "compared": null
     },
     {
+      "observationId": "FQ15-D96F3083D0A8",
+      "implementation": [],
+      "proofs": [],
+      "note": "1 failed: no compiled XAML of its screen holds this element, property and value",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
       "observationId": "FQ15-D982BDC93119",
       "implementation": [],
       "proofs": [],
       "note": "1 failed: the frozen literal is not in the compiled program",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-D98DFA6C28C6",
+      "implementation": [],
+      "proofs": [],
+      "note": "1 failed: no compiled XAML of its screen holds this element, property and value",
       "kindReceiptId": null,
       "compared": null
     },
@@ -8089,6 +8473,14 @@
       "compared": null
     },
     {
+      "observationId": "FQ15-DF72D3E013B6",
+      "implementation": [],
+      "proofs": [],
+      "note": "1 failed: no compiled XAML of its screen holds this element, property and value",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
       "observationId": "FQ15-DFE9FC3F4983",
       "implementation": [],
       "proofs": [],
@@ -8162,7 +8554,7 @@
       "observationId": "FQ15-E21BCE6B5211",
       "implementation": [],
       "proofs": [],
-      "note": "2 failed: the literal is compiled only in other members (FamilyQuant.USearchLib/BuildActions/\u003CButtonDivideAndConquer_ClickAsync\u003Ed__8::MoveNext()), not in member USearchLib.ButtonDivideAndConquer_Click or USearchLib.ChooseDatabasePath",
+      "note": "2 failed: the literal is compiled only in other members (FamilyQuant.USearchLib/BuildActions/\u003CButtonDivideAndConquer_ClickAsync\u003Ed__8::MoveNext()), not in member USearchLib.ButtonDivideAndConquer_Click",
       "kindReceiptId": null,
       "compared": null
     },
@@ -8170,7 +8562,7 @@
       "observationId": "FQ15-E2E03FCD1EB1",
       "implementation": [],
       "proofs": [],
-      "note": "2 failed: the literal is compiled only in other members (FamilyQuant.DeNovoViewModel/\u003CImportAsync\u003Ed__6::MoveNext(), FamilyQuant.DeNovoViewModel/\u003CReconcileAsync\u003Ed__7::MoveNext()), not in member ComputeXicWindow.ButtonCompute_Click or \u003CComputeAsync\u003Ed__74.MoveNext",
+      "note": "2 failed: the literal is compiled only in other members (FamilyQuant.DeNovoViewModel/\u003CImportAsync\u003Ed__6::MoveNext(), FamilyQuant.DeNovoViewModel/\u003CReconcileAsync\u003Ed__7::MoveNext()), not in member ComputeXicWindow.ButtonCompute_Click",
       "kindReceiptId": null,
       "compared": null
     },
@@ -8215,10 +8607,18 @@
       "compared": null
     },
     {
+      "observationId": "FQ15-E3F02429AD10",
+      "implementation": [],
+      "proofs": [],
+      "note": "1 failed: the frozen literal is not in the compiled program",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
       "observationId": "FQ15-E40A2F71D56E",
       "implementation": [],
       "proofs": [],
-      "note": "2 failed: the literal is compiled only in other members (FamilyQuant.USearchLib/BuildActions/\u003CButtonDivideAndConquer_ClickAsync\u003Ed__8::MoveNext()), not in member USearchLib.ButtonDivideAndConquer_Click or USearchLib.ChooseDatabasePath",
+      "note": "2 failed: the literal is compiled only in other members (FamilyQuant.USearchLib/BuildActions/\u003CButtonDivideAndConquer_ClickAsync\u003Ed__8::MoveNext()), not in member USearchLib.ButtonDivideAndConquer_Click",
       "kindReceiptId": null,
       "compared": null
     },
@@ -8242,7 +8642,7 @@
       "observationId": "FQ15-E475B9080C1B",
       "implementation": [],
       "proofs": [],
-      "note": "2 failed: the literal is compiled only in other members (FamilyQuant.USearchLib/BuildActions/\u003CButtonDivideAndConquer_ClickAsync\u003Ed__8::MoveNext()), not in member USearchLib.ButtonDivideAndConquer_Click or USearchLib.ChooseDatabasePath",
+      "note": "2 failed: the literal is compiled only in other members (FamilyQuant.USearchLib/BuildActions/\u003CButtonDivideAndConquer_ClickAsync\u003Ed__8::MoveNext()), not in member USearchLib.ButtonDivideAndConquer_Click",
       "kindReceiptId": null,
       "compared": null
     },
@@ -8279,26 +8679,10 @@
       "compared": null
     },
     {
-      "observationId": "FQ15-E55DBD620B7F",
-      "implementation": [],
-      "proofs": [],
-      "note": "1 failed: no compiled XAML of its screen holds this element, property and value",
-      "kindReceiptId": null,
-      "compared": null
-    },
-    {
       "observationId": "FQ15-E600191604B2",
       "implementation": [],
       "proofs": [],
       "note": "1 failed: the frozen literal is not in the compiled program",
-      "kindReceiptId": null,
-      "compared": null
-    },
-    {
-      "observationId": "FQ15-E60A697ED2AE",
-      "implementation": [],
-      "proofs": [],
-      "note": "1 failed: no compiled XAML of its screen holds this element, property and value",
       "kindReceiptId": null,
       "compared": null
     },
@@ -8323,6 +8707,14 @@
       "implementation": [],
       "proofs": [],
       "note": "1 failed: no compiled XAML of its screen holds this element, property and value",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-E728F4047657",
+      "implementation": [],
+      "proofs": [],
+      "note": "1 failed: the frozen literal is not in the compiled program",
       "kindReceiptId": null,
       "compared": null
     },
@@ -8381,6 +8773,14 @@
       "compared": null
     },
     {
+      "observationId": "FQ15-E911CE9EA6C6",
+      "implementation": [],
+      "proofs": [],
+      "note": "1 failed: no compiled XAML of its screen holds this element, property and value",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
       "observationId": "FQ15-E99BD933BC15",
       "implementation": [],
       "proofs": [],
@@ -8398,6 +8798,14 @@
     },
     {
       "observationId": "FQ15-EAE48FA17375",
+      "implementation": [],
+      "proofs": [],
+      "note": "1 failed: no compiled XAML of its screen holds this element, property and value",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-EAFC1F85EBD6",
       "implementation": [],
       "proofs": [],
       "note": "1 failed: no compiled XAML of its screen holds this element, property and value",
@@ -8467,6 +8875,14 @@
       "compared": null
     },
     {
+      "observationId": "FQ15-EE4958C97B22",
+      "implementation": [],
+      "proofs": [],
+      "note": "1 failed: no compiled XAML of its screen holds this element, property and value",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
       "observationId": "FQ15-EE6A1F6346D5",
       "implementation": [],
       "proofs": [],
@@ -8511,6 +8927,14 @@
       "implementation": [],
       "proofs": [],
       "note": "1 failed: a format string, separator or single word does not identify a fact by text alone",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-EF96CD28B8C0",
+      "implementation": [],
+      "proofs": [],
+      "note": "1 failed: no compiled XAML of its screen holds this element, property and value",
       "kindReceiptId": null,
       "compared": null
     },
@@ -8643,6 +9067,14 @@
       "compared": null
     },
     {
+      "observationId": "FQ15-F512518204F4",
+      "implementation": [],
+      "proofs": [],
+      "note": "1 failed: no compiled XAML of its screen holds this element, property and value",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
       "observationId": "FQ15-F51D867CF9B2",
       "implementation": [],
       "proofs": [],
@@ -8713,6 +9145,14 @@
       "compared": null
     },
     {
+      "observationId": "FQ15-F70843F20494",
+      "implementation": [],
+      "proofs": [],
+      "note": "1 failed: the frozen literal is not in the compiled program",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
       "observationId": "FQ15-F777A1A760B9",
       "implementation": [],
       "proofs": [],
@@ -8776,6 +9216,22 @@
     },
     {
       "observationId": "FQ15-F9B01DCA7ADF",
+      "implementation": [],
+      "proofs": [],
+      "note": "1 failed: the frozen literal is not in the compiled program",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-F9E8273066A4",
+      "implementation": [],
+      "proofs": [],
+      "note": "1 failed: no compiled XAML of its screen holds this element, property and value",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-F9FD4FC51810",
       "implementation": [],
       "proofs": [],
       "note": "1 failed: the frozen literal is not in the compiled program",
@@ -8904,7 +9360,7 @@
       "observationId": "FQ15-FD1CE3C4E856",
       "implementation": [],
       "proofs": [],
-      "note": "2 failed: the literal is compiled only in other members (FamilyQuant.USearchLib/BuildActions/\u003CButtonDivideAndConquer_ClickAsync\u003Ed__8::MoveNext()), not in member USearchLib.ButtonDivideAndConquer_Click or USearchLib.ChooseDatabasePath",
+      "note": "2 failed: the literal is compiled only in other members (FamilyQuant.USearchLib/BuildActions/\u003CButtonDivideAndConquer_ClickAsync\u003Ed__8::MoveNext()), not in member USearchLib.ButtonDivideAndConquer_Click",
       "kindReceiptId": null,
       "compared": null
     },
@@ -8936,7 +9392,7 @@
       "observationId": "FQ15-FDC9BA92E9E2",
       "implementation": [],
       "proofs": [],
-      "note": "2 failed: the literal is compiled only in other members (FamilyQuant.USearchLib/BuildActions/\u003CButtonDivideAndConquer_ClickAsync\u003Ed__8::MoveNext()), not in member USearchLib.ButtonDivideAndConquer_Click or USearchLib.ChooseDatabasePath",
+      "note": "2 failed: the literal is compiled only in other members (FamilyQuant.USearchLib/BuildActions/\u003CButtonDivideAndConquer_ClickAsync\u003Ed__8::MoveNext()), not in member USearchLib.ButtonDivideAndConquer_Click",
       "kindReceiptId": null,
       "compared": null
     },
@@ -9035,6 +9491,14 @@
       "compared": null
     },
     {
+      "observationId": "FQ15-FF8997D11E58",
+      "implementation": [],
+      "proofs": [],
+      "note": "1 failed: no compiled XAML of its screen holds this element, property and value",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
       "observationId": "FQ15-FFA3AC710841",
       "implementation": [],
       "proofs": [],
@@ -9067,7 +9531,7 @@
           "kind": "test",
           "target": "LedgerTextPreservedCommand",
           "assertion": "Text tool kind code fact: every listed row holds its frozen literal verbatim in the compiled program, in its feature, reachable from the entry point",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-114436-opus\\text-preserved\\text.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-121745-opus\\text-preserved\\text.log",
           "inspectedBy": ""
         }
       ]
@@ -9081,7 +9545,7 @@
           "kind": "test",
           "target": "LedgerTextPreservedCommand",
           "assertion": "Text tool kind control: every listed row holds its frozen literal verbatim in the compiled program, in its feature, reachable from the entry point",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-114436-opus\\text-preserved\\text.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-121745-opus\\text-preserved\\text.log",
           "inspectedBy": ""
         }
       ]
@@ -9095,7 +9559,7 @@
           "kind": "test",
           "target": "LedgerTextPreservedCommand",
           "assertion": "Text tool kind help fact: every listed row holds its frozen literal verbatim in the compiled program, in its feature, reachable from the entry point",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-114436-opus\\text-preserved\\text.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-121745-opus\\text-preserved\\text.log",
           "inspectedBy": ""
         }
       ]
@@ -9109,7 +9573,7 @@
           "kind": "test",
           "target": "LedgerTextPreservedCommand",
           "assertion": "Text tool kind option/copy: every listed row holds its frozen literal verbatim in the compiled program, in its feature, reachable from the entry point",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-114436-opus\\text-preserved\\text.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-121745-opus\\text-preserved\\text.log",
           "inspectedBy": ""
         }
       ]
@@ -9123,7 +9587,7 @@
           "kind": "test",
           "target": "LedgerTextPreservedCommand",
           "assertion": "Text tool kind tooltip: every listed row holds its frozen literal verbatim in the compiled program, in its feature, reachable from the entry point",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-114436-opus\\text-preserved\\text.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-121745-opus\\text-preserved\\text.log",
           "inspectedBy": ""
         }
       ]
