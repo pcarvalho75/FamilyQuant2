@@ -13,10 +13,12 @@ namespace FamilyQuant.Tests
 {
     /// <summary>
     /// B10 on a real project: the analysis Compute now runs (every minimum tag length from one search) against an
-    /// analysis at 9 alone and, when the project stores one, its stored 9 table; and each length's table against an
-    /// analysis at that length alone. It times both and writes the quick estimate per length, what each step down in
-    /// length adds, and the known-answer halves of the B1 study at 7, 8 and 9. Without a world file the project's own
-    /// stored world is read; with one (B4's file, for a project that stores none) the same analysis runs on that world.
+    /// analysis at the default length alone and, when the project stores a result, against it; and each length's table
+    /// against an analysis at that length alone. A reference project (one computed earlier, such as B6's at D11's 9)
+    /// must be reproduced by choosing its length in this project's stored result. It times the searches and writes the
+    /// quick estimate per length, what each step down in length adds, and the known-answer halves of the B1 study at
+    /// 7, 8 and 9. Without a world file the project's own stored world is read; with one (B4's file, for a project
+    /// that stores none) the same analysis runs on that world.
     /// </summary>
     internal static class FamilyWorldLengthsCheck
     {
@@ -32,8 +34,9 @@ namespace FamilyQuant.Tests
                 string projectPath = At(1, "D:/FamilyQuant-data/out-opus/b6/bothrops-jararaca-family-world.fqproj");
                 string outDir = At(2, "D:/FamilyQuant-data/out-opus/b10/lengths");
                 string worldPath = At(3, ".");
+                string referencePath = At(4, ".");
                 Directory.CreateDirectory(outDir);
-                RunOn(projectPath, worldPath == "." ? null : worldPath, outDir, check);
+                RunOn(projectPath, worldPath == "." ? null : worldPath, referencePath == "." ? null : referencePath, outDir, check);
             }
             catch (Exception ex) { check("family world lengths check completed", false, ex.GetBaseException().ToString()); }
         }
@@ -45,7 +48,7 @@ namespace FamilyQuant.Tests
         private static string Seconds(double v) => v.ToString("F1", CultureInfo.InvariantCulture) + " s";
         private static int HalfOf(FamilyWorldKnownAnswer a) => SHA256.HashData(Encoding.UTF8.GetBytes(a.Identified))[0] & 1;
 
-        private static void RunOn(string projectPath, string? worldPath, string outDir, Action<string, bool, string?> check)
+        private static void RunOn(string projectPath, string? worldPath, string? referencePath, string outDir, Action<string, bool, string?> check)
         {
             var (curation, quant, manifest) = ProjectStore.ReadFqproj(projectPath);
             FamilyWorldSummary? stored = worldPath != null ? null
@@ -62,21 +65,37 @@ namespace FamilyQuant.Tests
                     lengths: FamilyWorldOptions.LengthChoices)).Summary;
             double everySeconds = watch.Elapsed.TotalSeconds;
             watch.Restart();
-            FamilyWorldSummary nine = FamilyWorldAnalysis.Run(quant, curation, manifest.SpectrumComparisonRows, world, snapshot.Release).Summary;
-            double nineSeconds = watch.Elapsed.TotalSeconds;
-            Console.WriteLine("        every length 7 to 15 from one search: " + Seconds(everySeconds) + "; length 9 alone, as before B10: " + Seconds(nineSeconds));
+            FamilyWorldSummary single = FamilyWorldAnalysis.Run(quant, curation, manifest.SpectrumComparisonRows, world, snapshot.Release).Summary;
+            double singleSeconds = watch.Elapsed.TotalSeconds;
+            Console.WriteLine("        every length 7 to 15 from one search: " + Seconds(everySeconds) + "; the default length alone, as before B10: " + Seconds(singleSeconds));
 
             List<FamilyWorldSummary> tables = every.Lengths ?? new List<FamilyWorldSummary>();
             List<FamilyWorldLengthEstimate> estimates = every.LengthEstimates ?? new List<FamilyWorldLengthEstimate>();
             every.Lengths = null;
             every.LengthEstimates = null;
-            check("family world lengths: the default table is the 9 table of an analysis at 9 alone, byte for byte",
-                every.MinimumTagLength == 9 && Json(every) == Json(nine), null);
-            if (stored != null)
-                check("family world lengths: the default table is the 9 table the project already stores, byte for byte",
-                    Json(every) == Json(stored) && Json(nine) == Json(stored), null);
+            check("family world lengths: the default table is at the default length " + FamilyWorldOptions.DefaultMinimumTagLength.ToString(CultureInfo.InvariantCulture) +
+                " and equals an analysis at that length alone, byte for byte",
+                every.MinimumTagLength == FamilyWorldOptions.DefaultMinimumTagLength && Json(every) == Json(single), null);
             every.Lengths = tables;
             every.LengthEstimates = estimates;
+            if (stored != null)
+            {
+                // A result computed for one length (before B10) is that length's table; one computed for every length is
+                // the whole result.
+                FamilyWorldSummary? same = stored.Lengths == null ? every.ForLength(stored.MinimumTagLength) : every;
+                check("family world lengths: the analysis reproduces the result the project stores (" +
+                    (stored.Lengths == null ? "one length, " + stored.MinimumTagLength.ToString(CultureInfo.InvariantCulture) : "every length") + "), byte for byte",
+                    same != null && Json(same) == Json(stored), null);
+            }
+            if (referencePath != null)
+            {
+                FamilyWorldSummary reference = ProjectStore.ReadFqproj(referencePath).manifest.FamilyWorldResult
+                    ?? throw new InvalidDataException("The reference project stores no family-world table.");
+                FamilyWorldSummary? chosenStored = stored?.ForLength(reference.MinimumTagLength);
+                check("family world lengths: choosing " + reference.MinimumTagLength.ToString(CultureInfo.InvariantCulture) +
+                    " in the stored result reproduces the reference project's table, byte for byte",
+                    reference.Lengths == null && chosenStored != null && Json(chosenStored) == Json(reference), referencePath);
+            }
 
             watch.Restart();
             var direct = new List<FamilyWorldAnalysisResult>();
