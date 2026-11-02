@@ -17,7 +17,7 @@ Render targets refer to `ScreenHarness.Screens`, captured with `--screens <outpu
 Release gate: `FamilyQuant.Tests.exe --feature-ledger-release-check` fails until every retained row is VERIFIED with evidence. Authorized DROP rows use APPROVED_DROP, which records a decision, not a completed UI removal. The normal quick suite permits OPEN rows during development. Regeneration resets retained rows to OPEN; preserve reviewed evidence when updating the scanner.
 
 Scan count: **5756**. Ledger rows: **5756**. Source files: **104**.
-Authorized DROP rows: **296**; proposed VERIFIED retained rows: **1831**; OPEN retained rows: **3629**.
+Authorized DROP rows: **296**; proposed VERIFIED retained rows: **1911**; OPEN retained rows: **3549**.
 
 | ID | Disposition | Kind | Frozen source | Fact or control | Planned check | State | Evidence |
 |---|---|---|---|---|---|---|---|
@@ -3174,62 +3174,62 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **1831**; OPEN r
 | FQ15-557DC906A604 | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:308 | " and " | test:CoreRelocationCommand | VERIFIED | evidence:Core-X5:FQ15-557DC906A604 |
 | FQ15-23519AE65774 | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:308 | " more" | test:CoreRelocationCommand | VERIFIED | evidence:Core-X5:FQ15-23519AE65774 |
 | FQ15-AB1577966CF9 | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:349 | "familyquant_fullxic_cache" | test:CoreRelocationCommand | VERIFIED | evidence:Core-X5:FQ15-AB1577966CF9 |
-| FQ15-B54429E92C62 | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:379 | "The RAW folder does not exist: " | test:FullXicRunMatchTests | OPEN | pending |
-| FQ15-EA864907E42D | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:381 | "The SEPro package was not found: " | test:FullXicRunMatchTests | OPEN | pending |
-| FQ15-8C3F03F24F56 | KEEP | format/export | FamilyQuant/FullXicComputer.cs:391 | "*.raw" | test:FullXicRunMatchTests | OPEN | pending |
-| FQ15-3F934B495038 | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:398 | "Reading identifications from " | test:FullXicRunMatchTests | OPEN | pending |
-| FQ15-FAEEC621EEC6 | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:398 | "..." | test:FullXicRunMatchTests | OPEN | pending |
-| FQ15-EA1840ABFA82 | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:467 | ": fingerprinting RAW input..." | test:FullXicRunMatchTests | OPEN | pending |
-| FQ15-AABCD7E95D9F | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:487 | " RAW precursor metadata could not be read (" | test:FullXicRunMatchTests | OPEN | pending |
-| FQ15-EB6246AE57E2 | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:488 | ": " | test:FullXicRunMatchTests | OPEN | pending |
-| FQ15-AE62D7A6D2D7 | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:489 | "); the spectrum table labels source-reported charge/mz as a fallback." | test:FullXicRunMatchTests | OPEN | pending |
-| FQ15-7D7F4767477A | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:501 | "identified" | test:FullXicRunMatchTests | OPEN | pending |
-| FQ15-DB38A84ED138 | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:506 | ": extracting " | test:FullXicRunMatchTests | OPEN | pending |
-| FQ15-580CC33CCE5B | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:507 | "N0" | test:FullXicRunMatchTests | OPEN | pending |
-| FQ15-228A4BFC8CC9 | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:507 | " identified PSM(s)..." | test:FullXicRunMatchTests | OPEN | pending |
-| FQ15-09CB0A3405D1 | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:511 | "identified" | test:FullXicRunMatchTests | OPEN | pending |
-| FQ15-81DF7ED5DAA6 | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:518 | " identified: " | test:FullXicRunMatchTests | OPEN | pending |
-| FQ15-BFDD375817E9 | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:519 | "N0" | test:FullXicRunMatchTests | OPEN | pending |
-| FQ15-A391A3D8DA40 | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:519 | " row(s) with signal of " | test:FullXicRunMatchTests | OPEN | pending |
-| FQ15-FC97D1AB23B4 | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:520 | "N0" | test:FullXicRunMatchTests | OPEN | pending |
-| FQ15-52CECCEB7A37 | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:520 | " unique precursor(s)" | test:FullXicRunMatchTests | OPEN | pending |
-| FQ15-784ED2F5B9C6 | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:532 | "denovo" | test:FullXicRunMatchTests | OPEN | pending |
-| FQ15-EB1982536C65 | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:537 | ": extracting " | test:FullXicRunMatchTests | OPEN | pending |
-| FQ15-37B080CB2138 | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:538 | "N0" | test:FullXicRunMatchTests | OPEN | pending |
-| FQ15-C806E83A6C32 | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:538 | " kept de novo row(s)..." | test:FullXicRunMatchTests | OPEN | pending |
-| FQ15-45ECA6780D7A | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:542 | "denovo" | test:FullXicRunMatchTests | OPEN | pending |
-| FQ15-FC08F56D35C5 | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:546 | " de novo: " | test:FullXicRunMatchTests | OPEN | pending |
-| FQ15-FE4529678EAA | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:547 | "N0" | test:FullXicRunMatchTests | OPEN | pending |
-| FQ15-222784EFA8AB | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:547 | " row(s) with signal" | test:FullXicRunMatchTests | OPEN | pending |
-| FQ15-321BECF71001 | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:565 | "ms1envelope_" | test:FullXicRunMatchTests | OPEN | pending |
-| FQ15-5E612B6D4668 | KEEP | format/export | FamilyQuant/FullXicComputer.cs:565 | ".json" | test:FullXicRunMatchTests | OPEN | pending |
-| FQ15-500EB2CCA45D | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:572 | " resolved isotope-series diagnostic, identified or not (NOT the share " | test:FullXicRunMatchTests | OPEN | pending |
-| FQ15-9C2CBEFBC82D | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:573 | "explained; not peptide-FDR calibrated): " | test:FullXicRunMatchTests | OPEN | pending |
-| FQ15-15D163FAA780 | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:574 | "N0" | test:FullXicRunMatchTests | OPEN | pending |
-| FQ15-FE69EB82A11F | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:574 | " envelope(s), area " | test:FullXicRunMatchTests | OPEN | pending |
-| FQ15-A99DFFEBAC4B | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:575 | "E4" | test:FullXicRunMatchTests | OPEN | pending |
-| FQ15-8A8A02F4D40B | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:577 | " (" | test:FullXicRunMatchTests | OPEN | pending |
-| FQ15-E4E5BD980A42 | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:577 | "P2" | test:FullXicRunMatchTests | OPEN | pending |
-| FQ15-DD54F44F3FE5 | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:577 | " of TIC)" | test:FullXicRunMatchTests | OPEN | pending |
-| FQ15-0799A52C9394 | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:582 | " resolved isotope-series diagnostic did not run (" | test:FullXicRunMatchTests | OPEN | pending |
-| FQ15-238D7603CEBF | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:583 | ": " | test:FullXicRunMatchTests | OPEN | pending |
-| FQ15-3E32D8E2F780 | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:583 | "); the per-peptide quant is unaffected." | test:FullXicRunMatchTests | OPEN | pending |
-| FQ15-8BF6E74D83EA | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:617 | "Spectrum-table family attribution: every matching User family at " | test:FullXicRunMatchTests | OPEN | pending |
-| FQ15-74FDFA70A6DD | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:618 | "P0" | test:FullXicRunMatchTests | OPEN | pending |
-| FQ15-55D93E7970D7 | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:619 | " homology identity; shared peptides retain all memberships." | test:FullXicRunMatchTests | OPEN | pending |
-| FQ15-86EC167DFB43 | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:623 | "WARNING: family attribution for the spectrum table did not run (" | test:FullXicRunMatchTests | OPEN | pending |
-| FQ15-3D4F77FDED0E | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:624 | ": " | test:FullXicRunMatchTests | OPEN | pending |
-| FQ15-4D6485AB908B | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:624 | "). Quantitation completed; the table " | test:FullXicRunMatchTests | OPEN | pending |
-| FQ15-B5E4FE6CA170 | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:625 | "marks family mapping as unavailable and the project curation remains intact." | test:FullXicRunMatchTests | OPEN | pending |
-| FQ15-6675FF32BA50 | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:659 | " identified but not quantified (minimum " | test:FullXicRunMatchTests | OPEN | pending |
-| FQ15-8E3D6DC6122D | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:661 | " point(s) per peak): " | test:FullXicRunMatchTests | OPEN | pending |
-| FQ15-0B83B7FAA554 | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:663 | "N0" | test:FullXicRunMatchTests | OPEN | pending |
-| FQ15-876B7393E318 | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:663 | " peptide(s), area " | test:FullXicRunMatchTests | OPEN | pending |
-| FQ15-443CD5A9880B | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:664 | "E4" | test:FullXicRunMatchTests | OPEN | pending |
-| FQ15-D6B128E39208 | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:666 | " (" | test:FullXicRunMatchTests | OPEN | pending |
-| FQ15-CDB07CFC2A5D | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:666 | "P4" | test:FullXicRunMatchTests | OPEN | pending |
-| FQ15-304BFB289D54 | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:666 | " of TIC)" | test:FullXicRunMatchTests | OPEN | pending |
-| FQ15-CA7106BC1CC0 | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:668 | " - includes an ESTIMATE for single-point clusters" | test:FullXicRunMatchTests | OPEN | pending |
+| FQ15-B54429E92C62 | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:379 | "The RAW folder does not exist: " | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X5-runtime:FQ15-B54429E92C62 |
+| FQ15-EA864907E42D | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:381 | "The SEPro package was not found: " | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X5-runtime:FQ15-EA864907E42D |
+| FQ15-8C3F03F24F56 | KEEP | format/export | FamilyQuant/FullXicComputer.cs:391 | "*.raw" | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X5-runtime:FQ15-8C3F03F24F56 |
+| FQ15-3F934B495038 | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:398 | "Reading identifications from " | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X5-runtime:FQ15-3F934B495038 |
+| FQ15-FAEEC621EEC6 | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:398 | "..." | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X5-runtime:FQ15-FAEEC621EEC6 |
+| FQ15-EA1840ABFA82 | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:467 | ": fingerprinting RAW input..." | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X5-runtime:FQ15-EA1840ABFA82 |
+| FQ15-AABCD7E95D9F | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:487 | " RAW precursor metadata could not be read (" | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X5-runtime:FQ15-AABCD7E95D9F |
+| FQ15-EB6246AE57E2 | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:488 | ": " | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X5-runtime:FQ15-EB6246AE57E2 |
+| FQ15-AE62D7A6D2D7 | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:489 | "); the spectrum table labels source-reported charge/mz as a fallback." | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X5-runtime:FQ15-AE62D7A6D2D7 |
+| FQ15-7D7F4767477A | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:501 | "identified" | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X5-runtime:FQ15-7D7F4767477A |
+| FQ15-DB38A84ED138 | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:506 | ": extracting " | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X5-runtime:FQ15-DB38A84ED138 |
+| FQ15-580CC33CCE5B | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:507 | "N0" | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X5-runtime:FQ15-580CC33CCE5B |
+| FQ15-228A4BFC8CC9 | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:507 | " identified PSM(s)..." | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X5-runtime:FQ15-228A4BFC8CC9 |
+| FQ15-09CB0A3405D1 | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:511 | "identified" | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X5-runtime:FQ15-09CB0A3405D1 |
+| FQ15-81DF7ED5DAA6 | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:518 | " identified: " | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X5-runtime:FQ15-81DF7ED5DAA6 |
+| FQ15-BFDD375817E9 | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:519 | "N0" | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X5-runtime:FQ15-BFDD375817E9 |
+| FQ15-A391A3D8DA40 | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:519 | " row(s) with signal of " | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X5-runtime:FQ15-A391A3D8DA40 |
+| FQ15-FC97D1AB23B4 | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:520 | "N0" | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X5-runtime:FQ15-FC97D1AB23B4 |
+| FQ15-52CECCEB7A37 | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:520 | " unique precursor(s)" | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X5-runtime:FQ15-52CECCEB7A37 |
+| FQ15-784ED2F5B9C6 | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:532 | "denovo" | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X5-runtime:FQ15-784ED2F5B9C6 |
+| FQ15-EB1982536C65 | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:537 | ": extracting " | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X5-runtime:FQ15-EB1982536C65 |
+| FQ15-37B080CB2138 | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:538 | "N0" | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X5-runtime:FQ15-37B080CB2138 |
+| FQ15-C806E83A6C32 | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:538 | " kept de novo row(s)..." | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X5-runtime:FQ15-C806E83A6C32 |
+| FQ15-45ECA6780D7A | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:542 | "denovo" | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X5-runtime:FQ15-45ECA6780D7A |
+| FQ15-FC08F56D35C5 | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:546 | " de novo: " | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X5-runtime:FQ15-FC08F56D35C5 |
+| FQ15-FE4529678EAA | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:547 | "N0" | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X5-runtime:FQ15-FE4529678EAA |
+| FQ15-222784EFA8AB | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:547 | " row(s) with signal" | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X5-runtime:FQ15-222784EFA8AB |
+| FQ15-321BECF71001 | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:565 | "ms1envelope_" | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X5-runtime:FQ15-321BECF71001 |
+| FQ15-5E612B6D4668 | KEEP | format/export | FamilyQuant/FullXicComputer.cs:565 | ".json" | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X5-runtime:FQ15-5E612B6D4668 |
+| FQ15-500EB2CCA45D | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:572 | " resolved isotope-series diagnostic, identified or not (NOT the share " | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X5-runtime:FQ15-500EB2CCA45D |
+| FQ15-9C2CBEFBC82D | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:573 | "explained; not peptide-FDR calibrated): " | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X5-runtime:FQ15-9C2CBEFBC82D |
+| FQ15-15D163FAA780 | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:574 | "N0" | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X5-runtime:FQ15-15D163FAA780 |
+| FQ15-FE69EB82A11F | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:574 | " envelope(s), area " | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X5-runtime:FQ15-FE69EB82A11F |
+| FQ15-A99DFFEBAC4B | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:575 | "E4" | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X5-runtime:FQ15-A99DFFEBAC4B |
+| FQ15-8A8A02F4D40B | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:577 | " (" | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X5-runtime:FQ15-8A8A02F4D40B |
+| FQ15-E4E5BD980A42 | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:577 | "P2" | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X5-runtime:FQ15-E4E5BD980A42 |
+| FQ15-DD54F44F3FE5 | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:577 | " of TIC)" | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X5-runtime:FQ15-DD54F44F3FE5 |
+| FQ15-0799A52C9394 | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:582 | " resolved isotope-series diagnostic did not run (" | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X5-runtime:FQ15-0799A52C9394 |
+| FQ15-238D7603CEBF | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:583 | ": " | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X5-runtime:FQ15-238D7603CEBF |
+| FQ15-3E32D8E2F780 | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:583 | "); the per-peptide quant is unaffected." | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X5-runtime:FQ15-3E32D8E2F780 |
+| FQ15-8BF6E74D83EA | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:617 | "Spectrum-table family attribution: every matching User family at " | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X5-runtime:FQ15-8BF6E74D83EA |
+| FQ15-74FDFA70A6DD | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:618 | "P0" | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X5-runtime:FQ15-74FDFA70A6DD |
+| FQ15-55D93E7970D7 | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:619 | " homology identity; shared peptides retain all memberships." | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X5-runtime:FQ15-55D93E7970D7 |
+| FQ15-86EC167DFB43 | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:623 | "WARNING: family attribution for the spectrum table did not run (" | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X5-runtime:FQ15-86EC167DFB43 |
+| FQ15-3D4F77FDED0E | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:624 | ": " | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X5-runtime:FQ15-3D4F77FDED0E |
+| FQ15-4D6485AB908B | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:624 | "). Quantitation completed; the table " | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X5-runtime:FQ15-4D6485AB908B |
+| FQ15-B5E4FE6CA170 | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:625 | "marks family mapping as unavailable and the project curation remains intact." | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X5-runtime:FQ15-B5E4FE6CA170 |
+| FQ15-6675FF32BA50 | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:659 | " identified but not quantified (minimum " | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X5-runtime:FQ15-6675FF32BA50 |
+| FQ15-8E3D6DC6122D | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:661 | " point(s) per peak): " | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X5-runtime:FQ15-8E3D6DC6122D |
+| FQ15-0B83B7FAA554 | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:663 | "N0" | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X5-runtime:FQ15-0B83B7FAA554 |
+| FQ15-876B7393E318 | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:663 | " peptide(s), area " | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X5-runtime:FQ15-876B7393E318 |
+| FQ15-443CD5A9880B | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:664 | "E4" | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X5-runtime:FQ15-443CD5A9880B |
+| FQ15-D6B128E39208 | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:666 | " (" | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X5-runtime:FQ15-D6B128E39208 |
+| FQ15-CDB07CFC2A5D | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:666 | "P4" | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X5-runtime:FQ15-CDB07CFC2A5D |
+| FQ15-304BFB289D54 | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:666 | " of TIC)" | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X5-runtime:FQ15-304BFB289D54 |
+| FQ15-CA7106BC1CC0 | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:668 | " - includes an ESTIMATE for single-point clusters" | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X5-runtime:FQ15-CA7106BC1CC0 |
 | FQ15-24913E8BD1DE | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:692 | "P2" | test:CoreRelocationCommand | VERIFIED | evidence:Core-X5:FQ15-24913E8BD1DE |
 | FQ15-7784DBE88B53 | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:696 | "Share of the TIC explained by the quantified peptides (identified observed envelope + " | test:CoreRelocationCommand | VERIFIED | evidence:Core-X5:FQ15-7784DBE88B53 |
 | FQ15-95ED42C90BCE | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:697 | "de novo reference-calibrated estimate, one area per peptide):" | test:CoreRelocationCommand | VERIFIED | evidence:Core-X5:FQ15-95ED42C90BCE |
@@ -3249,30 +3249,30 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **1831**; OPEN r
 | FQ15-777FDD693C76 | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:723 | " of the TIC) is how " | test:CoreRelocationCommand | VERIFIED | evidence:Core-X5:FQ15-777FDD693C76 |
 | FQ15-CF4E00860F4A | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:724 | "much of the TIC looks like peptide isotope series, identified or not. It is a reference " | test:CoreRelocationCommand | VERIFIED | evidence:Core-X5:FQ15-CF4E00860F4A |
 | FQ15-FCFBA87AB6F9 | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:725 | "for what could still be explained, not signal already explained." | test:CoreRelocationCommand | VERIFIED | evidence:Core-X5:FQ15-FCFBA87AB6F9 |
-| FQ15-4FC26357EF95 | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:774 | "Reading the " | test:FullXicRunMatchTests | OPEN | pending |
-| FQ15-9C1197CF6D0E | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:774 | " export (" | test:FullXicRunMatchTests | OPEN | pending |
-| FQ15-4638873838EB | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:775 | ") under " | test:FullXicRunMatchTests | OPEN | pending |
-| FQ15-E4BD1506B305 | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:775 | "; " | test:FullXicRunMatchTests | OPEN | pending |
-| FQ15-D7018EEE5CCD | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:775 | "..." | test:FullXicRunMatchTests | OPEN | pending |
-| FQ15-88F8C98DE5DC | KEEP | format/export | FamilyQuant/FullXicComputer.cs:854 | "db.psms.csv" | test:FullXicRunMatchTests | OPEN | pending |
-| FQ15-282A1A6203D8 | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:887 | " + " | test:FullXicRunMatchTests | OPEN | pending |
-| FQ15-697ECD6D0983 | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:888 | " (" | test:FullXicRunMatchTests | OPEN | pending |
-| FQ15-7D6127692F66 | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:888 | ")" | test:FullXicRunMatchTests | OPEN | pending |
-| FQ15-22B52A5CAA4D | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:889 | "source-aware acceptance: " | test:FullXicRunMatchTests | OPEN | pending |
-| FQ15-BD50B720132A | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:889 | "; " | test:FullXicRunMatchTests | OPEN | pending |
-| FQ15-5734B771D380 | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:891 | " &gt;= " | test:FullXicRunMatchTests | OPEN | pending |
-| FQ15-5C60EB0FC31B | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:892 | "0.###" | test:FullXicRunMatchTests | OPEN | pending |
-| FQ15-C205445107B0 | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:893 | "; peptide length &gt;= " | test:FullXicRunMatchTests | OPEN | pending |
-| FQ15-1FD9127E0804 | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:894 | "; &gt;= " | test:FullXicRunMatchTests | OPEN | pending |
-| FQ15-92898169E9DF | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:895 | " consecutive local-confidence residues &gt;= " | test:FullXicRunMatchTests | OPEN | pending |
-| FQ15-A2034757630E | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:896 | "%" | test:FullXicRunMatchTests | OPEN | pending |
-| FQ15-8FBBDC8A26D1 | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:947 | "Parsed de novo rows from " | test:FullXicRunMatchTests | OPEN | pending |
-| FQ15-4EDF29C15D37 | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:948 | " do not all carry the configured source id " | test:FullXicRunMatchTests | OPEN | pending |
-| FQ15-BB58DE7EB94F | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:948 | "." | test:FullXicRunMatchTests | OPEN | pending |
-| FQ15-04F19829B220 | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:973 | "\u001f" | test:FullXicRunMatchTests | OPEN | pending |
-| FQ15-F9D985281FC3 | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:986 | "fullxic_" | test:FullXicRunMatchTests | OPEN | pending |
-| FQ15-72AC30937F60 | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:986 | "_" | test:FullXicRunMatchTests | OPEN | pending |
-| FQ15-1DF0CFAB7619 | KEEP | format/export | FamilyQuant/FullXicComputer.cs:986 | ".json" | test:FullXicRunMatchTests | OPEN | pending |
+| FQ15-4FC26357EF95 | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:774 | "Reading the " | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X5-runtime:FQ15-4FC26357EF95 |
+| FQ15-9C1197CF6D0E | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:774 | " export (" | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X5-runtime:FQ15-9C1197CF6D0E |
+| FQ15-4638873838EB | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:775 | ") under " | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X5-runtime:FQ15-4638873838EB |
+| FQ15-E4BD1506B305 | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:775 | "; " | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X5-runtime:FQ15-E4BD1506B305 |
+| FQ15-D7018EEE5CCD | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:775 | "..." | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X5-runtime:FQ15-D7018EEE5CCD |
+| FQ15-88F8C98DE5DC | KEEP | format/export | FamilyQuant/FullXicComputer.cs:854 | "db.psms.csv" | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X5-runtime:FQ15-88F8C98DE5DC |
+| FQ15-282A1A6203D8 | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:887 | " + " | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X5-runtime:FQ15-282A1A6203D8 |
+| FQ15-697ECD6D0983 | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:888 | " (" | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X5-runtime:FQ15-697ECD6D0983 |
+| FQ15-7D6127692F66 | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:888 | ")" | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X5-runtime:FQ15-7D6127692F66 |
+| FQ15-22B52A5CAA4D | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:889 | "source-aware acceptance: " | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X5-runtime:FQ15-22B52A5CAA4D |
+| FQ15-BD50B720132A | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:889 | "; " | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X5-runtime:FQ15-BD50B720132A |
+| FQ15-5734B771D380 | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:891 | " &gt;= " | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X5-runtime:FQ15-5734B771D380 |
+| FQ15-5C60EB0FC31B | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:892 | "0.###" | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X5-runtime:FQ15-5C60EB0FC31B |
+| FQ15-C205445107B0 | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:893 | "; peptide length &gt;= " | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X5-runtime:FQ15-C205445107B0 |
+| FQ15-1FD9127E0804 | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:894 | "; &gt;= " | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X5-runtime:FQ15-1FD9127E0804 |
+| FQ15-92898169E9DF | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:895 | " consecutive local-confidence residues &gt;= " | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X5-runtime:FQ15-92898169E9DF |
+| FQ15-A2034757630E | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:896 | "%" | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X5-runtime:FQ15-A2034757630E |
+| FQ15-8FBBDC8A26D1 | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:947 | "Parsed de novo rows from " | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X5-runtime:FQ15-8FBBDC8A26D1 |
+| FQ15-4EDF29C15D37 | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:948 | " do not all carry the configured source id " | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X5-runtime:FQ15-4EDF29C15D37 |
+| FQ15-BB58DE7EB94F | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:948 | "." | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X5-runtime:FQ15-BB58DE7EB94F |
+| FQ15-04F19829B220 | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:973 | "\u001f" | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X5-runtime:FQ15-04F19829B220 |
+| FQ15-F9D985281FC3 | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:986 | "fullxic_" | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X5-runtime:FQ15-F9D985281FC3 |
+| FQ15-72AC30937F60 | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:986 | "_" | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X5-runtime:FQ15-72AC30937F60 |
+| FQ15-1DF0CFAB7619 | KEEP | format/export | FamilyQuant/FullXicComputer.cs:986 | ".json" | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X5-runtime:FQ15-1DF0CFAB7619 |
 | FQ15-467B1BA865EB | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:994 | "run" | test:CoreRelocationCommand | VERIFIED | evidence:Core-X5:FQ15-467B1BA865EB |
 | FQ15-21E2C567A4FA | IMPROVE | code fact | FamilyQuant/GridCopy.cs:35 | "Copy description" | render:03-curation | OPEN | pending |
 | FQ15-28F12314F396 | IMPROVE | code fact | FamilyQuant/GridCopy.cs:74 | "Copy UniProt code" | render:03-curation | OPEN | pending |
