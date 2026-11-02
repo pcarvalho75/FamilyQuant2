@@ -19,7 +19,7 @@ Version 2 closed 56 steps and the H1 cooldown: the evidence engine, the new shel
 
 1. **Only the program makes results.** Python may be used to investigate or to check a number, never to make one that reaches a person. Scratch probes count as scripts: nothing built from a probe is delivered.
 2. **No exception lists.** No table of families, no protein names, no Pfam, PANTHER or keyword literal in the rule. Evidence and data decide; what a user chooses is stored in the project. For anything automatic, in this order: public databases alone, then the program suggests how to proceed, then an LLM, only if it does what data could not (Paulo, 2026-11-01). The family world (W8) needs no LLM.
-3. **No function is lost.** The feature ledger (N3) lists everything 1.5.0.6 does. It is the contract: a release cannot pass with a row open, and only Paulo can drop a row.
+3. **No function is lost.** The feature ledger (N3) lists everything 1.5.0.6 does. It is the contract: a release cannot pass with a row open, and only Paulo can drop a row. Rows close by kind: one executed check may close every row of a kind when each row names what was compared, and a reviewer samples the result (D13). 1.5 stays installed as the safety net.
 4. **Numbers stay equal to 1.5.0.6 unless a step says otherwise.** Any module may be rewritten. The golden check (F2) must stay byte-identical against the frozen reference. A step that means to change a number says so in its row, shows before and after on real data, and passes a science review.
 5. **Copy what is good, rewrite what is better.** Every file is read as it moves. Simpler, faster or clearer code replaces it when the tests pin the behaviour first. Rewriting for its own sake is not a goal.
 6. **1.5 stays available.** 2.0 is a separate project that installs beside 1.5 and never touches it. 2.0 opens every old file, and it can export a `.fcf` that 1.5 opens, so Ana can go back at any moment. Old repository: `pcarvalho75/FamilyQuant`, frozen as the 1.x reference. The 2.0 repository `pcarvalho75/FamilyQuant2` is private, like the old one, and stays private: it carries third-party binaries, collaborator names and working notes.
@@ -80,7 +80,7 @@ Columns: Diff = L, M, H, VH. Hrs = worker hours at measured speed: the 56 steps 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
 | N5 | Ledger evidence: all 5,460 kept rows are still OPEN, so "no function lost" is not yet proven. A tool groups the rows by kind, ties each to an executed test or an inspected render, and takes the first pass on what can be proven now: the sources moved to Core and the 13 handlers mapped in `docs/housekeeping/H1-NOTES.md` | H | 1.5 | 🟢 | N6 | Counts of VERIFIED and OPEN by kind; no row closes without recorded evidence; a reviewer samples 50 closed rows at random and agrees | SH | not started | 0% | 0% | T+2 |
-| N6 | Close the ledger: every kept row VERIFIED once the screens are rebuilt | H | 1.5 | N5, C2, C13 | C14 | `--feature-ledger-release-check` passes; reviewer sample agrees; any row with no evidence goes back to the step that owns it | SH | not started | 0% | 0% | T+6 |
+| N6 | Close the ledger by kind of row (D13): one executed check per kind, such as frozen 1.5.0.6 text compared with 2.0, with each row naming what was compared. A row no kind covers gets its own proof or stays open | H | 1.5 | C2, C13 | C14 | `--feature-ledger-release-check` passes; a reviewer samples 200 rows at random across all kinds and agrees; any sample failure reopens that whole kind | SH | not started | 0% | 0% | T+0 |
 
 ### W2 Ana's result, through the software
 
@@ -163,6 +163,7 @@ Paulo agreed these at the restart, 2026-11-01.
 
 | ID | Question | Taken |
 |---|---|---|
+| D13 | How the ledger is proven | By kind of row, one executed check per kind, plus a reviewer's random sample, instead of hand work per row |
 | D11 | Minimum tag length for the family world | 9 residues, and only families in scope can be credited. Paulo: the program must show this to the user |
 | D12 | How the 70% coverage gate is counted | Query letters actually aligned, so gaps earn no credit. Paulo: the program must show this to the user |
 | D7 | `LICENSE.txt` | Changed from the blank MIT template to all rights reserved, 2026, holder Fiocruz |
