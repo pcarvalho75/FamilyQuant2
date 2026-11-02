@@ -3,7 +3,7 @@
 Version 3, 2026-11-01. Owner: Paulo. Orchestrator: the Claude session "Family Quant codebase review".
 Finished rows leave this file at the next refresh and go to `docs/ROADMAP-archive.md`.
 
-Version 2 closed 56 steps and the H1 cooldown: the evidence engine, the new shell, the rebuilt Build, Quantify, Results and De novo screens, the Core split and housekeeping. Master `7a54be1` passed a clean clone at 2,525 passed, 0 failed, 3 skipped. This version starts the count again from zero. The team restarts only on Paulo's word.
+Version 2 closed 56 steps and the H1 cooldown: the evidence engine, the new shell, the rebuilt Build, Quantify, Results and De novo screens, the Core split and housekeeping. Master `7a54be1` passed a clean clone at 2,525 passed, 0 failed, 3 skipped. This version starts the count again from zero. Paulo restarted the team on 2026-11-01.
 
 ## The goal, in Paulo's words
 
@@ -30,7 +30,7 @@ Version 2 closed 56 steps and the H1 cooldown: the evidence engine, the new shel
 
 ## The team
 
-This team is exclusive to FamilyQuant: five Sol workers, one Opus worker and two reviewers, Grok and Gemini, sharing no workers, folders or tools with Project Orion.
+This team is exclusive to FamilyQuant: five Sol workers, one Opus worker, Grok as reviewer and Gemini back when its quota returns, sharing no workers, folders or tools with Project Orion.
 
 | Name | Engine | Role | Worktree | Branch |
 |---|---|---|---|---|
@@ -41,7 +41,7 @@ This team is exclusive to FamilyQuant: five Sol workers, one Opus worker and two
 | FQAssay (AS) | Sol 6.1 xhigh | Dependencies, clustering, improvements, documents | `D:/FamilyQuant-wt/assay` | `fq/assay` |
 | FQResults (RS) | Sol 6.1 xhigh | Charts, quantitation panel, family-world results | `C:/FamilyQuant-wt2/results` | `fq/results` |
 | FQOpus (OP) | Opus 5.5 xhigh | The gate experiment, quantitation pipeline, second attribution pass. Second reviewer of others' work until FQArgon returns | `D:/FamilyQuant-wt/opus` | `fq/opus` |
-| FQReview (GR) | Grok 4.7 xhigh | Reviews steps in turn with FQArgon, code and science. Never edits product code. | `D:/FamilyQuant-wt/review` | detached |
+| FQReview (GR) | Grok 4.7 xhigh | Main reviewer, code and science, with FQOpus second, and owns B2, A2, B8 and R4. Never edits product code. | `D:/FamilyQuant-wt/review` | detached |
 | FQArgon (AR) | Gemini 4 Argon high | Reviews steps in turn with FQReview. Out of quota until about 2026-11-07. | `D:/FamilyQuant-wt/argon` | detached |
 | FQFable | Fable 5.1 xhigh | Architect, only on Paulo's request, in short sessions. Not in the queues. | `C:/FamilyQuant-wt2/fable` | `fable/vision` |
 
@@ -168,15 +168,22 @@ Three lines run side by side from the restart. For Ana: R1, A1, A2, A3, which al
 | ID | Decision | Default if no answer | Needed by |
 |---|---|---|---|
 | D1 | With Ana: is a family-level claim acceptable for a peptide absent from the species database? | Yes, with the decoy rate and right rate printed beside it | Before B8 |
-| D2 | Clade of the family world on Ana's file: Viperidae or all snakes? | The clade the program reads from the headers, Viperidae on her file | Before B4 |
-| D3 | Scope proposed by the program or typed by the person? | Proposed, the person confirms | Before B3 |
-| D4 | Does the "sequence next" ranking belong in the product or only in the paper? | In the product | Before B7 |
-| D5 | One contaminant rule: three places differ today (prefix or anywhere, exact case or not) | The database's own label, prefix and exact case, measured before and after | Before X12 |
-| D6 | Replace the bundled USEARCH with the upstream CC0 file after a parity check? | Yes | Before X15 |
 | D7 | `LICENSE.txt`: rights holder, year and licence | None: R5 waits, only Paulo can name them | Before R5 |
 | D8 | Install 1.5 and 2.0 side by side on one Windows profile, by `docs/N1-IDENTITY.md` | None: A3 waits, Ana must not lose 1.5 | Before A3 |
-| D9 | Does the desk keep pushing master to the private repository? | Yes, as a backup | At the restart |
-| D10 | Retire the deprecated `build_scientific_deck.mjs`? | Keep it untouched as history | Before X13 |
+
+### Decisions taken
+
+Paulo agreed these at the restart, 2026-11-01.
+
+| ID | Question | Taken |
+|---|---|---|
+| D2 | Clade of the family world on Ana's file: Viperidae or all snakes? | The clade the program reads from the headers, Viperidae on her file |
+| D3 | Scope proposed by the program or typed by the person? | Proposed, the person confirms |
+| D4 | Does the "sequence next" ranking belong in the product or only in the paper? | In the product |
+| D5 | One contaminant rule: three places differ today (prefix or anywhere, exact case or not) | The database's own label, prefix and exact case, measured before and after |
+| D6 | Replace the bundled USEARCH with the upstream CC0 file after a parity check? | Yes |
+| D9 | Does the desk keep pushing master to the private repository? | Yes, as a backup |
+| D10 | Retire the deprecated `build_scientific_deck.mjs`? | Keep it untouched as history |
 
 ## Risks and triggers
 
