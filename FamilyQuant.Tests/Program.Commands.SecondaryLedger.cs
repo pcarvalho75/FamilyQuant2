@@ -19,5 +19,7 @@ internal static partial class Program
             args => args.Length > 0 && args[0] == "--secondary-wording-append", (args, _) => SecondaryAppendWording(args)),
         new("--secondary-box-audit", 10450, TestCommandPhase.Raw,
             args => args.Length > 0 && args[0] == "--secondary-box-audit", (args, _) => SecondaryBoxAudit(args)),
+        new("--ledger-file-contracts", 10460, TestCommandPhase.Raw,
+            args => args.Length > 0 && args[0] == "--ledger-file-contracts", (args, _) => FileContractCommand(args)),
     ];
 }

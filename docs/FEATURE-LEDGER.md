@@ -17,7 +17,7 @@ Render targets refer to `ScreenHarness.Screens`, captured with `--screens <outpu
 Release gate: `FamilyQuant.Tests.exe --feature-ledger-release-check` fails until every retained row is VERIFIED with evidence. Authorized DROP rows use APPROVED_DROP, which records a decision, not a completed UI removal. The normal quick suite permits OPEN rows during development. Regeneration resets retained rows to OPEN; preserve reviewed evidence when updating the scanner.
 
 Scan count: **5756**. Ledger rows: **5756**. Source files: **104**.
-Authorized DROP rows: **296**; proposed VERIFIED retained rows: **4345**; OPEN retained rows: **1115**.
+Authorized DROP rows: **296**; proposed VERIFIED retained rows: **4353**; OPEN retained rows: **1107**.
 
 | ID | Disposition | Kind | Frozen source | Fact or control | Planned check | State | Evidence |
 |---|---|---|---|---|---|---|---|
@@ -753,7 +753,7 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **4345**; OPEN r
 | FQ15-B6DF500A0081 | IMPROVE | code fact | FamilyQuant/ClusterGenerationControl.xaml.cs:1484 | "equals User ID except where you renumbered a family by hand." | render:03-curation | OPEN | pending |
 | FQ15-B4D65986AE2D | IMPROVE | code fact | FamilyQuant/ClusterGenerationControl.xaml.cs:1487 | "Your own family number, the only editable id. Type the same number in two rows to merge " | render:03-curation | OPEN | pending |
 | FQ15-84CD85B9D9B1 | IMPROVE | code fact | FamilyQuant/ClusterGenerationControl.xaml.cs:1488 | "their families, or an unused one to split a protein off; editing locks the families involved." | render:03-curation | OPEN | pending |
-| FQ15-B2F050B733BC | KEEP | format/export | FamilyQuant/ClusterGenerationControl.xaml.cs:1491 | "Free text of your own. It is saved in the .fcf and written to the CSV, and it affects no " | render:03-curation | OPEN | pending |
+| FQ15-B2F050B733BC | KEEP | format/export | FamilyQuant/ClusterGenerationControl.xaml.cs:1491 | "Free text of your own. It is saved in the .fcf and written to the CSV, and it affects no " | test:FileContractCommand | VERIFIED | evidence:FL-file-contracts:FQ15-B2F050B733BC |
 | FQ15-8226A2B59947 | IMPROVE | code fact | FamilyQuant/ClusterGenerationControl.xaml.cs:1492 | "calculation." | render:03-curation | OPEN | pending |
 | FQ15-76C287F5EE63 | IMPROVE | code fact | FamilyQuant/ClusterGenerationControl.xaml.cs:1495 | "The protein identifier as in the database. \"Reverse_\" marks a decoy and \"contaminant\" a " | render:03-curation | OPEN | pending |
 | FQ15-5E1FE758C300 | IMPROVE | code fact | FamilyQuant/ClusterGenerationControl.xaml.cs:1496 | "laboratory contaminant; both can be hidden in the Display and Export panel. Right-click a " | render:03-curation | OPEN | pending |
@@ -1648,7 +1648,7 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **4345**; OPEN r
 | FQ15-0097AA5ACE43 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:1096 | "verdicts to write. Next step: press Reconcile in Layer 2 first." | render:06-denovo-advanced | OPEN | pending |
 | FQ15-8C1BC14A9C37 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:1108 | "Nothing was exported" | render:06-denovo-advanced | OPEN | pending |
 | FQ15-2DD09D1FA976 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:1108 | "nothing. The same rows are on screen." | render:06-denovo-advanced | OPEN | pending |
-| FQ15-ED1E9E42C422 | KEEP | format/export | FamilyQuant/DeNovoControl.xaml.cs:1112 | "CSV files (*.csv)&#124;*.csv&#124;All files (*.*)&#124;*.*" | render:06-denovo-advanced | OPEN | pending |
+| FQ15-ED1E9E42C422 | KEEP | format/export | FamilyQuant/DeNovoControl.xaml.cs:1112 | "CSV files (*.csv)&#124;*.csv&#124;All files (*.*)&#124;*.*" | test:FileContractCommand | VERIFIED | evidence:FL-file-contracts:FQ15-ED1E9E42C422 |
 | FQ15-745332D47B0C | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:1123 | "Written to " | render:06-denovo-advanced | OPEN | pending |
 | FQ15-9E73EC365DDF | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:1123 | ": " | render:06-denovo-advanced | OPEN | pending |
 | FQ15-D8088C6F3110 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:1123 | ". Numbers use a dot for the " | render:06-denovo-advanced | OPEN | pending |
@@ -1810,7 +1810,7 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **4345**; OPEN r
 | FQ15-293FACC88CFB | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:1769 | "\"" | test:DeNovoResultsExportProof | VERIFIED | evidence:EV-denovo-results-export-1:FQ15-293FACC88CFB |
 | FQ15-B84C0E820934 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:1775 | "Nothing was exported: no homology search has been run, so there are no " | render:06-denovo-advanced | OPEN | pending |
 | FQ15-AFA02F4AA37B | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:1776 | "assignments to write. Next step: press Search in Layer 4 first." | render:06-denovo-advanced | OPEN | pending |
-| FQ15-AF4D69FA96D6 | KEEP | format/export | FamilyQuant/DeNovoControl.xaml.cs:1780 | "FamilyQuant_DeNovo_Homology.csv" | render:06-denovo-advanced | OPEN | pending |
+| FQ15-AF4D69FA96D6 | KEEP | format/export | FamilyQuant/DeNovoControl.xaml.cs:1780 | "FamilyQuant_DeNovo_Homology.csv" | test:FileContractCommand | VERIFIED | evidence:FL-file-contracts:FQ15-AF4D69FA96D6 |
 | FQ15-3261F961544B | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:1780 | "Save the per-peptide family assignments as CSV" | render:06-denovo-advanced | VERIFIED | evidence:Paulo-rulings:FQ15-3261F961544B |
 | FQ15-BF6844C292B3 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:1782 | "one line per searched peptide, with its family ids, its protein ids and whether it " | render:06-denovo-advanced | OPEN | pending |
 | FQ15-A872F13CDDF7 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:1783 | "is ambiguous" | render:06-denovo-advanced | OPEN | pending |
@@ -3073,9 +3073,9 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **4345**; OPEN r
 | FQ15-A83400E5288B | IMPROVE | code fact | FamilyQuant/DeNovo/ThreeWayWindow.cs:113 | "counted twice or the totals do not belong to the same acquisition. The value " | test:LedgerAssayCompareCommand | VERIFIED | evidence:AS-retained:FQ15-A83400E5288B |
 | FQ15-07A19997F094 | IMPROVE | code fact | FamilyQuant/DeNovo/ThreeWayWindow.cs:114 | "is reported with its sign and is never clamped to zero." | test:LedgerAssayCompareCommand | VERIFIED | evidence:AS-retained:FQ15-07A19997F094 |
 | FQ15-34B1621B5569 | IMPROVE | code fact | FamilyQuant/DeNovo/ThreeWayWindow.cs:122 | "Save the three-way partition" | test:ThreeWayPartitionTests | OPEN | pending |
-| FQ15-1B3D1FDBC771 | KEEP | format/export | FamilyQuant/DeNovo/ThreeWayWindow.cs:123 | "Comma-separated values (*.csv)&#124;*.csv&#124;All files (*.*)&#124;*.*" | test:ThreeWayPartitionTests | OPEN | pending |
-| FQ15-7DE5A8BF2E6E | KEEP | format/export | FamilyQuant/DeNovo/ThreeWayWindow.cs:124 | "three_way_partition.csv" | test:ThreeWayPartitionTests | OPEN | pending |
-| FQ15-05B931C7E81A | KEEP | format/export | FamilyQuant/DeNovo/ThreeWayWindow.cs:126 | ".csv" | test:ThreeWayPartitionTests | OPEN | pending |
+| FQ15-1B3D1FDBC771 | KEEP | format/export | FamilyQuant/DeNovo/ThreeWayWindow.cs:123 | "Comma-separated values (*.csv)&#124;*.csv&#124;All files (*.*)&#124;*.*" | test:FileContractCommand | VERIFIED | evidence:FL-file-contracts:FQ15-1B3D1FDBC771 |
+| FQ15-7DE5A8BF2E6E | KEEP | format/export | FamilyQuant/DeNovo/ThreeWayWindow.cs:124 | "three_way_partition.csv" | test:FileContractCommand | VERIFIED | evidence:FL-file-contracts:FQ15-7DE5A8BF2E6E |
+| FQ15-05B931C7E81A | KEEP | format/export | FamilyQuant/DeNovo/ThreeWayWindow.cs:126 | ".csv" | test:FileContractCommand | VERIFIED | evidence:FL-file-contracts:FQ15-05B931C7E81A |
 | FQ15-FB44CE7084AF | IMPROVE | code fact | FamilyQuant/DeNovo/ThreeWayWindow.cs:137 | "The file could not be written: " | test:ThreeWayPartitionTests | OPEN | pending |
 | FQ15-1A310DFE13FA | IMPROVE | code fact | FamilyQuant/DeNovo/ThreeWayWindow.cs:138 | "Save the three-way partition" | test:ThreeWayPartitionTests | OPEN | pending |
 | FQ15-E0D87026DC21 | IMPROVE | code control | FamilyQuant/DeNovo/ThreeWayWindow.cs:63 | new Button | test:ThreeWayLedgerProof | VERIFIED | evidence:EV-threeway-1:FQ15-E0D87026DC21 |
@@ -3120,7 +3120,7 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **4345**; OPEN r
 | FQ15-E4519EF36AE9 | KEEP | export/storage fact | FamilyQuant/FamilyNaming.cs:66 | "(Fragments)" | test:ShellLedgerComparisonCommand | VERIFIED | evidence:SH:FQ15-E4519EF36AE9 |
 | FQ15-68104BE9A948 | KEEP | export/storage fact | FamilyQuant/FamilyNaming.cs:66 | "(Fragment)" | test:ShellLedgerComparisonCommand | VERIFIED | evidence:SH:FQ15-68104BE9A948 |
 | FQ15-4BD825C14A93 | KEEP | export/storage fact | FamilyQuant/FamilyNaming.cs:79 | @"^([OPQ][0-9][A-Z0-9]{3}[0-9]&#124;[A-NR-Z][0-9]([A-Z][A-Z0-9]{2}[0-9]){1,2})(-\d+)?$" | test:ShellLedgerComparisonCommand | VERIFIED | evidence:SH:FQ15-4BD825C14A93 |
-| FQ15-57DFC76ED641 | KEEP | export/storage fact | FamilyQuant/FamilyNaming.cs:81 | "contaminant_" | test:DeNovoAgreementUnitTests | OPEN | pending |
+| FQ15-57DFC76ED641 | KEEP | export/storage fact | FamilyQuant/FamilyNaming.cs:81 | "contaminant_" | test:FileContractCommand | VERIFIED | evidence:FL-file-contracts:FQ15-57DFC76ED641 |
 | FQ15-629AF29BDF09 | KEEP | export/storage fact | FamilyQuant/FamilyNaming.cs:106 | "https://www.uniprot.org/uniprotkb/" | test:ShellLedgerComparisonCommand | VERIFIED | evidence:SH:FQ15-629AF29BDF09 |
 | FQ15-CFD05C68EDDC | KEEP | export/storage fact | FamilyQuant/FamilyNaming.cs:106 | "/entry" | test:ShellLedgerComparisonCommand | VERIFIED | evidence:SH:FQ15-CFD05C68EDDC |
 | FQ15-382C4A47D494 | KEEP | export/storage fact | FamilyQuant/FamilyNaming.cs:114 | " OS=" | test:ShellLedgerComparisonCommand | VERIFIED | evidence:SH:FQ15-382C4A47D494 |
@@ -3473,7 +3473,7 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **4345**; OPEN r
 | FQ15-6ED299CE8CC3 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:261 | "User ID          your own family number. Editable: change it and the families are" | test:LookCopyReceiptCommand | VERIFIED | evidence:LK-copy-next-1:FQ15-6ED299CE8CC3 |
 | FQ15-707566DD1136 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:262 | "                 regrouped, the User column recalculated, and it is the number" | test:LookCopyReceiptCommand | VERIFIED | evidence:LK-copy-next-1:FQ15-707566DD1136 |
 | FQ15-A4C9D9FDCD6A | IMPROVE | help fact | FamilyQuant/HelpContent.cs:263 | "                 written back by Reanotate Sepro." | render:14-help | VERIFIED | evidence:Paulo-rulings:FQ15-A4C9D9FDCD6A |
-| FQ15-75C7BA6D7654 | KEEP | format/export | FamilyQuant/HelpContent.cs:264 | "User Annotation  free text, saved in the .fcf and exported. It also NAMES the family" | render:14-help | OPEN | pending |
+| FQ15-75C7BA6D7654 | KEEP | format/export | FamilyQuant/HelpContent.cs:264 | "User Annotation  free text, saved in the .fcf and exported. It also NAMES the family" | test:FileContractCommand | VERIFIED | evidence:FL-file-contracts:FQ15-75C7BA6D7654 |
 | FQ15-E6EB8AD97077 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:265 | "                 in the Full XIC composition CSV, the Analytics chart and the" | render:14-help | VERIFIED | evidence:Paulo-rulings:FQ15-E6EB8AD97077 |
 | FQ15-C3B10D64E2A2 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:266 | "                 evidence pack. A family without one is named by the protein name" | test:LookCopyReceiptCommand | VERIFIED | evidence:LK-copy-next-2:FQ15-C3B10D64E2A2 |
 | FQ15-5E4BD38B7B84 | IMPROVE | help fact | FamilyQuant/HelpContent.cs:267 | "                 most of its members share (read before \"OS=\", \"(Fragment)\"" | test:LookCopyReceiptCommand | VERIFIED | evidence:LK-copy-next-1:FQ15-5E4BD38B7B84 |
