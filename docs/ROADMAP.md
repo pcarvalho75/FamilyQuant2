@@ -85,7 +85,6 @@ Columns: Diff = L, M, H, VH. Hrs = worker hours at measured speed: estimates are
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| Y9 | Failure guidance restored: the 46 rows where a user would miss what 1.5 said, such as the share column warning after a failed recalculation | M | 0.7 | 🟢 | R3a | Each fact shown on the normal route, its row closes on an independent read, or it is listed for Paulo | EV | not started | 0% | 0% | T+1 |
 
 ### W3 Ledger, screen by screen
 
@@ -104,14 +103,14 @@ Columns: Diff = L, M, H, VH. Hrs = worker hours at measured speed: estimates are
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| R3a | Code freeze: only review findings touch product code after this | L | 0 | Y9 | R4a, R4b | Freeze noted; all lanes told | Orchestrator | not started | 0% | 0% | T+1 |
-| R3b | Final proof refresh and full suite on the frozen code | L | 0.2 | R4c, N6s | R3c | Every proof current; suite green | Orchestrator | not started | 0% | 0% | T+1 |
-| R3c | Release candidate: versions, build and a clean install rehearsal | M | 0.3 | R3b | R5a | Rehearsal installs beside 1.5 and opens her file | Orchestrator | not started | 0% | 0% | T+1 |
-| R4a | Final adversarial pass: code and behaviour | H | 1 | R3a | R4c | GR's verdict | GR | not started | 0% | 0% | T+2 |
-| R4b | Final adversarial pass: science and numbers | H | 1 | R3a | R4c | KM's verdict | KM | not started | 0% | 0% | T+2 |
-| R4c | Every finding fixed and gated | M | 0.5 | R4a, R4b | R3b | No open finding | Orchestrator | not started | 0% | 0% | T+3 |
-| R5a | FamilyQuant 2.0 final published | L | 0 | R3c | R5b | Paulo publishes | Paulo | not started | 0% | 0% | T+3 |
-| R5b | Archive this roadmap | L | 0.1 | R5a | Done | Archive committed | Orchestrator | not started | 0% | 0% | T+3 |
+| R3a | Code freeze: only review findings touch product code after this | L | 0 | 🟢 | R4a, R4b | Freeze noted; all lanes told | Orchestrator | not started | 0% | 0% | T+0 |
+| R3b | Final proof refresh and full suite on the frozen code | L | 0.2 | R4c, N6s | R3c | Every proof current; suite green | Orchestrator | not started | 0% | 0% | T+2 |
+| R3c | Release candidate: versions, build and a clean install rehearsal | M | 0.3 | R3b | R5a | Rehearsal installs beside 1.5 and opens her file | Orchestrator | not started | 0% | 0% | T+2 |
+| R4a | Final adversarial pass: code and behaviour | H | 1 | R3a | R4c | GR's verdict | GR | not started | 0% | 0% | T+1 |
+| R4b | Final adversarial pass: science and numbers | H | 1 | R3a | R4c | KM's verdict | KM | not started | 0% | 0% | T+1 |
+| R4c | Every finding fixed and gated | M | 0.5 | R4a, R4b | R3b | No open finding | Orchestrator | not started | 0% | 0% | T+2 |
+| R5a | FamilyQuant 2.0 final published | L | 0 | R3c | R5b | Paulo publishes | Paulo | not started | 0% | 0% | T+2 |
+| R5b | Archive this roadmap | L | 0.1 | R5a | Done | Archive committed | Orchestrator | not started | 0% | 0% | T+2 |
 
 ### W6 Paper numbers (no release depends on these)
 
