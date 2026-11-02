@@ -24,8 +24,8 @@ safe to edit and save and contains synthetic UI data.
    name with F2, Enter, then Ctrl+Z to restore it.
 4. Alt+2 opens Quantify. Tab through its inputs and browse actions. Missing
    inputs keep Compute unavailable. Alt+3 opens Results; Tab to Minimum tag
-   length, choose 9, then Ctrl+S. Reopen the fixture with Ctrl+O, Alt+3, and check
-   that the stored choice is 9.
+   length, choose 7, then Ctrl+S. Reopen the fixture with Ctrl+O, Alt+3, and check
+   that the stored choice is 7.
 5. Alt+4 opens De novo. Tab through source and filter controls and expand the
    advanced section with the keyboard. F1 opens Help; Page Down, select/copy text
    and Alt+F4 return to the application.
