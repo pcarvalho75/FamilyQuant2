@@ -38,6 +38,7 @@ namespace FamilyQuant.Tests
         private static void UiExplanationTests(string? databasePath, string workDir)
         {
             EnsureApplication();
+            CurationWordingTests();
 
             ClippingDetectorSelfTest();
 
@@ -588,6 +589,18 @@ namespace FamilyQuant.Tests
 
             Check($"{what}: no tooltip is a bare restatement of the label",
                 terse.Count == 0, string.Join(", ", terse.Select(Describe).Take(6)));
+
+            CheckWordingRules(what, root);
+        }
+
+        private static void CheckWordingRules(string what, FrameworkElement root)
+        {
+            var tips = AllTooltips(root).Concat(WalkTree(root).OfType<DataGrid>()
+                .SelectMany(grid => grid.Columns).Select(HeaderTooltipOf).OfType<string>()).Distinct().ToArray();
+            var longTips = tips.Where(tip => TooltipSentenceCount(tip) > 2).ToArray();
+            Check($"{what}: tooltips use one or two sentences", longTips.Length == 0, string.Join(" | ", longTips.Take(6)));
+            var oldNames = ScreenWording(root).Where(text => RetiredUiTerms.IsMatch(text)).Distinct().ToArray();
+            Check($"{what}: visible text and tooltips use current screen names", oldNames.Length == 0, string.Join(" | ", oldNames.Take(6)));
         }
 
         private static void MenuCommandPreservationTests(MainWindow main)
@@ -617,6 +630,7 @@ namespace FamilyQuant.Tests
 
             Check($"{what}: all {leaves.Count} menu commands carry a tooltip",
                 silent.Count == 0, string.Join(", ", silent.Select(Describe).Take(6)));
+            CheckWordingRules(what, root);
         }
 
         private static IEnumerable<string> AllTooltips(FrameworkElement root)

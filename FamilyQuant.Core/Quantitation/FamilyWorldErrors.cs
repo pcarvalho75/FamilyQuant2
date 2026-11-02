@@ -35,6 +35,21 @@ namespace FamilyQuant
         public bool Landed => Credit?.Outcome == FamilyWorldOutcome.Credited;
         /// <summary>Strict: every credited family is a known one.</summary>
         public bool Right => Credit != null && FamilyWorld.IsRight(Credit, KnownFamilies);
+
+        /// <summary>This answer as it reads under a higher minimum tag length: a tag shorter than it is too short,
+        /// any other keeps its credit (B10; a tag's search does not depend on the minimum).</summary>
+        public FamilyWorldKnownAnswer AtMinimumLength(int minimumTagLength)
+        {
+            var copy = new FamilyWorldKnownAnswer
+            {
+                Tag = Tag, Identified = Identified, Calls = Calls, UnlabelledHolders = UnlabelledHolders, Exclusion = Exclusion,
+                Credit = Credit == null || !IsKnown || Tag.Length >= minimumTagLength ? Credit
+                    : new FamilyWorldCredit { Outcome = FamilyWorldOutcome.TooShort },
+            };
+            copy.Sources.UnionWith(Sources);
+            copy.KnownFamilies.UnionWith(KnownFamilies);
+            return copy;
+        }
     }
 
     /// <summary>One outcome of the second pass, as stored.</summary>
@@ -105,6 +120,26 @@ namespace FamilyQuant
         public double TotalEnvelope => IdentifiedEnvelope + DatabaseDeNovoEnvelope + WorldDeNovoEnvelope;
     }
 
+    /// <summary>The quick estimate for one minimum tag length (B10): how much signal lands, how much the reversed
+    /// copies win, and how often a landed known answer is right.</summary>
+    public sealed class FamilyWorldLengthEstimate
+    {
+        public int MinimumTagLength { get; set; }
+        public double ResidualEnvelope { get; set; }
+        public double CreditedEnvelope { get; set; }
+        /// <summary>CreditedEnvelope over ResidualEnvelope.</summary>
+        public double LandedFraction { get; set; }
+        public double DecoyEnvelope { get; set; }
+        /// <summary>DecoyEnvelope over CreditedEnvelope; null when nothing was credited.</summary>
+        public double? DecoyRate { get; set; }
+        public int KnownLanded { get; set; }
+        public int KnownRight { get; set; }
+        /// <summary>KnownRight over KnownLanded; null when no known answer landed.</summary>
+        public double? RightRate { get; set; }
+        /// <summary>Families whose right rate is shown (at least the evidence floor of known credits).</summary>
+        public int FamiliesMeasured { get; set; }
+    }
+
     /// <summary>The stored table of the family world: the second pass, its rules and, per family, the error beside
     /// every number. It is what the result screen and its export read.</summary>
     public sealed class FamilyWorldSummary
@@ -129,6 +164,22 @@ namespace FamilyQuant
         public int KnownLanded { get; set; }
         public int KnownRight { get; set; }
         public List<FamilyWorldFamilySummary> Families { get; set; } = new List<FamilyWorldFamilySummary>();
+
+        /// <summary>B10: the complete table for every minimum tag length a person can choose (ascending, the default's
+        /// included and equal to this one), so choosing a length needs no fetch and no new Compute. Null on a table
+        /// computed for one length only, and then absent from the stored JSON.</summary>
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public List<FamilyWorldSummary>? Lengths { get; set; }
+
+        /// <summary>B10: the quick estimate per minimum tag length, in the order of <see cref="Lengths"/>.</summary>
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public List<FamilyWorldLengthEstimate>? LengthEstimates { get; set; }
+
+        /// <summary>The complete table at a minimum tag length: one of <see cref="Lengths"/>, or this table itself when it
+        /// was computed for that length only; null when the length was not computed.</summary>
+        public FamilyWorldSummary? ForLength(int minimumTagLength) =>
+            Lengths?.FirstOrDefault(t => t.MinimumTagLength == minimumTagLength)
+            ?? (Lengths == null && MinimumTagLength == minimumTagLength ? this : null);
 
         /// <summary>The first pass's rule, in plain words, beside <see cref="Rules"/>.</summary>
         public string CompositionRules { get; set; } = string.Empty;
@@ -235,6 +286,27 @@ namespace FamilyQuant
             "(the proteins tied at the best score); the tag is searched in the family world without the sample's " +
             "own species under the pass's rules; a credit to a family is right when the identified peptide's " +
             "holders carry it; 2026-11-02";
+
+        /// <summary>The quick estimate of one complete table.</summary>
+        public static FamilyWorldLengthEstimate Estimate(FamilyWorldSummary table)
+        {
+            if (table == null) throw new ArgumentNullException(nameof(table));
+            double credited = table.Outcomes.Where(o => o.Outcome == nameof(FamilyWorldOutcome.Credited)).Sum(o => o.Envelope);
+            double decoy = table.Outcomes.Where(o => o.Outcome == nameof(FamilyWorldOutcome.Decoy)).Sum(o => o.Envelope);
+            return new FamilyWorldLengthEstimate
+            {
+                MinimumTagLength = table.MinimumTagLength,
+                ResidualEnvelope = table.ResidualEnvelope,
+                CreditedEnvelope = credited,
+                LandedFraction = table.ResidualEnvelope > 0 ? credited / table.ResidualEnvelope : 0,
+                DecoyEnvelope = decoy,
+                DecoyRate = credited > 0 ? decoy / credited : null,
+                KnownLanded = table.KnownLanded,
+                KnownRight = table.KnownRight,
+                RightRate = table.KnownLanded > 0 ? table.KnownRight / (double)table.KnownLanded : null,
+                FamiliesMeasured = table.Families.Count(f => f.RightRate.HasValue),
+            };
+        }
 
         /// <summary>The label of an outcome in the export and on screen.</summary>
         public static string OutcomeLabel(string outcome) => outcome switch
@@ -380,7 +452,7 @@ namespace FamilyQuant
                 {
                     // A group with no description (a contaminant entry, say) is named by its first member's identifier.
                     Family = names.TryGetValue(group, out string? name) && name.Length > 0 ? name
-                        : targets.First(t => t.UserID == group).SequenceIdentifier ?? "group " + group.ToString(CultureInfo.InvariantCulture),
+                        : targets.FirstOrDefault(t => t.UserID == group)?.SequenceIdentifier ?? "group " + group.ToString(CultureInfo.InvariantCulture),
                     Kind = FamilyWorldCompositionRow.CuratedKind,
                     CuratedUserIds = { group },
                 };

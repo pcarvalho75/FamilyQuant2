@@ -117,8 +117,8 @@ namespace FamilyQuant
                 "it is never shared with another row or counted once per tool.",
                 "0.######E+0"));
             grid.Columns.Add(Column("Primary assigned quant", nameof(SpectrumComparisonRow.QuantPrimaryAssigned), 155,
-                "The main quantity used in the plots. It can differ from the M+0 XIC; the next column " +
-                "says how it was obtained. In the CSV it is also called PrimaryQuantValue.", "0.######E+0"));
+                "The main plot quantity, called PrimaryQuantValue in the CSV. It can differ from M+0 XIC; " +
+                "the next column says how it was obtained.", "0.######E+0"));
             grid.Columns.Add(Column("Primary quant basis", nameof(SpectrumComparisonRow.QuantPrimaryBasis), 185,
                 "How Primary assigned quant was obtained, so a measured area is not confused with a " +
                 "model estimate."));

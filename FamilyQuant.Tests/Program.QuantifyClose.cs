@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Interop;
@@ -14,9 +13,6 @@ internal static partial class Program
 {
     private sealed record QuantifyCloseReading(bool HasButton, string? Caption, bool Displayed, bool HasStyle,
         int Clicks, bool Closed, bool? ModalResult, bool Offscreen, bool TookFocus);
-
-    [DllImport("user32.dll")]
-    private static extern IntPtr GetForegroundWindow();
 
     private static QuantifyCloseReading ReadQuantifyClose(Window window, bool modal)
     {

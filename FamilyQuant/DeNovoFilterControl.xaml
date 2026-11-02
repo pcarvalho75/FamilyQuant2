@@ -30,7 +30,7 @@
     <Label Content="Consecutive residues" ToolTip="Number of consecutive residues required above the local confidence floor."/><TextBox Width="54" Margin="{DynamicResource ControlPadding}" Text="{Binding StretchLength, UpdateSourceTrigger=PropertyChanged}"
      ToolTip="Required consecutive residues above the local confidence floor, from 1 to 100. Default 5."/>
     <Label Content="At least (%)" ToolTip="Minimum local confidence of each residue in the requested stretch."/><TextBox Width="54" Margin="{DynamicResource ControlPadding}" Text="{Binding StretchFloor, UpdateSourceTrigger=PropertyChanged}"
-     ToolTip="Local confidence floor from 0 to 100. Rounded to the nearest whole number. Default 90."/>
+     ToolTip="Local confidence floor from 0 to 100, rounded to the nearest whole number. Default 90."/>
    </WrapPanel>
   </Expander>
  </Grid>

@@ -50,7 +50,8 @@ internal static partial class ShellMetadataSnapshot
         { SequenceIdentifier = "shell_metadata_fixture", Description = "Synthetic shell metadata fixture", Sequence = "PEPTIDEK", UserID = 1, USearchID = 1 } } };
         // New shells explicitly disable profile persistence outside their own entry assembly.
         // The frozen constructor only calls InitializeComponent, AppVersion and ShowHome.
-        var main = new MainWindow();
+        var main = new MainWindow { Left = -30000, Top = -30000, ShowActivated = false, ShowInTaskbar = false,
+            WindowStartupLocation = WindowStartupLocation.Manual };
         var home = new HomeControl();
         var families = new ClusterGenerationControl(curation);
         var views = new Dictionary<string, FrameworkElement>(StringComparer.Ordinal)
