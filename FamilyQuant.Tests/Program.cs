@@ -40,6 +40,12 @@ namespace FamilyQuant.Tests
         [STAThread]   // required: the UI smoke section constructs WPF controls
         private static int Main(string[] args)
         {
+            if (args.Contains("--test-keyword-command", StringComparer.Ordinal))
+            {
+                KeywordCommandTests();
+                Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
+                return failed == 0 ? 0 : 1;
+            }
             if (args.Contains("--test-ui-icons", StringComparer.Ordinal))
             {
                 UiIconTests();
@@ -789,6 +795,7 @@ namespace FamilyQuant.Tests
             LogoResourceTests(workDir);
             TypographyRulesTests();
             UiIconTests();
+            KeywordCommandTests();
             TableAppearanceTests();
             EvidenceReviewModelTests();
             GroupingReviewInteractionTests();
