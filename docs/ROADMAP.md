@@ -132,7 +132,7 @@ Columns: Diff = L, M, H, VH. Hrs = worker hours at measured speed: the 56 steps 
 
 ### W8 Breakthrough: the family world
 
-The bet, from `docs/vision/VISION.md`: a de novo peptide your database cannot place is searched against every reviewed member of the family, from all species, plus the unreviewed entries of the sample's clade, and is credited to the family, never to a protein. The family becomes the unit that reaches past the database. The result says, per family: identified, de novo in your database, de novo only in the family world (the database gap), and still unexplained, and the program says which families to sequence next. B1 decides it. If B1 is killed, B4 to B8 leave the roadmap and R3 stops waiting for them; B2 and B3 stand either way.
+The bet, from `docs/vision/VISION.md`: a de novo peptide your database cannot place is searched against every reviewed member of the family, from all species, plus the unreviewed entries of the sample's clade, and is credited to the family, never to a protein. The family becomes the unit that reaches past the database. The result says, per family: identified, de novo in your database, de novo only in the family world (the database gap), and still unexplained, and the program ranks the families by that gap and offers the proteins the tags hit as suggested additions to the database. B1 decides it. If B1 is killed, B4 to B8 leave the roadmap and R3 stops waiting for them; B2 and B3 stand either way.
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
@@ -140,7 +140,7 @@ The bet, from `docs/vision/VISION.md`: a de novo peptide your database cannot pl
 | B4 | Fetch the family world: the reviewed panel plus one clade query per family, unreviewed included, all or nothing, release recorded, stored with the project, offline afterwards | M | 1 | B1 | B5 | An interrupted fetch leaves the file as it was; offline rerun identical; size growth measured on Ana's file | EV | not started | 0% | 0% | T+4 |
 | B5 | Second attribution pass: de novo peptides left unattributed go to `HomologyMapper.Search` against the family world with reversed decoys. A tag needs at least 9 residues and only families in scope can be credited (D11). A hit credits the UniProt family, never a protein | H | 1.5 | B4 | B6 | Existing exports byte-identical (golden 4/0/0), new columns in a new export only; two runs byte-identical; same numbers as B1's checker | OP | not started | 0% | 0% | T+5 |
 | B6 | The error beside every claim: for each family, the decoy rate and the known-answer right rate, stored in the project. A family with too little evidence shows that instead of a number | M | 1 | B5 | B7 | Every family row has both; reproducible; conserved families checked by hand | OP | not started | 0% | 0% | T+6 |
-| B7 | Result: the four-part bar per family and the database gap ranking, "families to sequence next". The screen, the CSV and Help state the minimum tag length and the in-scope rule beside the result | M | 1 | B6 | B8 | Screen and CSV from one table; every number from the program; the rules in force are visible on the screen and in the export, and stored in the project; both themes | RS | not started | 0% | 0% | T+7 |
+| B7 | Result: the four-part bar per family and the "Database gap" ranking: the families with the most signal missing from your database. An export writes a FASTA of the family-world proteins the tags hit, as suggested additions for the person to add and search again in PatternLab. The program never changes the database itself. The screen, the CSV and Help state the minimum tag length and the in-scope rule beside the result | M | 1 | B6 | B8 | Screen and CSV from one table; every number from the program; the rules in force are visible on the screen and in the export, and stored in the project; both themes | RS | not started | 0% | 0% | T+7 |
 | B8 | Science review on a real sample: labels, denominators, inflation of conserved families, and the wording of the claim | H | 1 | B7 | R3 | GR's verdict; findings closed; Paulo accepts the wording | GR | not started | 0% | 0% | T+8 |
 
 ## Cooldown
@@ -170,7 +170,7 @@ Paulo agreed these at the restart, 2026-11-01.
 | D1 | Is a family-level claim acceptable for a peptide absent from the species database? | Yes, with the decoy rate and right rate printed beside it. |
 | D2 | Clade of the family world on Ana's file: Viperidae or all snakes? | The clade the program reads from the headers, Viperidae on her file |
 | D3 | Scope proposed by the program or typed by the person? | Proposed, the person confirms |
-| D4 | Does the "sequence next" ranking belong in the product or only in the paper? | In the product |
+| D4 | Does the database gap ranking belong in the product or only in the paper? | In the product, named "Database gap", with a FASTA of suggested additions |
 | D5 | One contaminant rule: three places differ today (prefix or anywhere, exact case or not) | The database's own label, prefix and exact case, measured before and after |
 | D6 | Replace the bundled USEARCH with the upstream CC0 file after a parity check? | Yes |
 | D9 | Does the desk keep pushing master to the private repository? | Yes, as a backup |
