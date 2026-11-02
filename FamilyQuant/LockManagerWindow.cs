@@ -38,6 +38,11 @@ public partial class LockManagerWindow : Window
     }
     public void ShowFor(Window? owner)
     {
+        if (!ShellDialogs.IsDisplayed(owner))
+        {
+            ShellMessages.Report(owner, "Lock management needs a displayed application window.", "Curation locks", showDialog: false);
+            return;
+        }
         if (owner != null && owner.IsLoaded) Owner = owner;
         ShowDialog();
     }

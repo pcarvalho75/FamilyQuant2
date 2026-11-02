@@ -105,7 +105,7 @@ namespace FamilyQuant
                 DefaultExt = ".png",
             };
 
-            if (sfd.ShowDialog() != true) return;
+            if (!ShellDialogs.ShowFile(button, "identity.figure", sfd)) return;
             using var operation = AppOperationHost.For(button).Begin("Export identity figure");
 
             try
