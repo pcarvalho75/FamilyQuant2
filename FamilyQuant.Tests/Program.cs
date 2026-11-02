@@ -48,6 +48,10 @@ namespace FamilyQuant.Tests
             if (args.Contains("--test-ui-icons", StringComparer.Ordinal))
             {
                 UiIconTests();
+            if (args.Length > 0 && args[0] == "--evidence-task-check") return EvidenceTaskCheck(args);
+            if (args.Contains("--test-evidence-task", StringComparer.Ordinal))
+            {
+                EvidenceTaskTests();
                 Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
                 return failed == 0 ? 0 : 1;
             }
@@ -720,6 +724,7 @@ namespace FamilyQuant.Tests
             ProteinDomainsTests(workDir);
             EvidenceStorageTests(workDir);
             EvidenceFetchTests();
+            EvidenceTaskTests();
             EvidenceClassifierTests();
             EvidenceArchitectureTests();
 

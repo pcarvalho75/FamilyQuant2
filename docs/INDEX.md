@@ -13,6 +13,7 @@ This is the navigation index for the current checkout. The roadmap owns unfinish
 | [Identity study](IDENTITY-SEARCH-STUDY.md) | Why Scan and Divide remain separate, exact measured scope |
 | [Identity/deployment](N1-IDENTITY.md) | Separate application identity and the installed-profile check still owned by Paulo |
 | [Science gate](SCIENCE-GATE.md) | Recorded evidence-rule comparison, verdicts and limitations |
+| [Task discovery](EVIDENCE-TASK.md) | Header-derived taxonomy, functional keyword proposal and confirmed recipe contract |
 | [H1 findings](housekeeping/H1-NOTES.md) | Behavior decisions, protected work, ledger migration and remaining reuse scope |
 | [Vision](vision/VISION.md) | Fable's study: the family world proposal behind workstream W8, with the desk's corrections |
 | [Code map](vision/CODE-MAP.md) | How a FASTA and a RAW file become a family number, and what that read did not cover |
@@ -62,6 +63,7 @@ Invoke each flag with `& $testExe <flag>` after building. Dispatch and arity are
 |---|---|
 | `--test-core-boundary` | Core/App ownership, references and resource contract |
 | `--test-document` | Document round trip, scoring and denominator attribution fixtures |
+| `--test-evidence-task` | File-derived taxonomy, keyword counts, confirmation and recipe replay fixtures |
 | `--test-inputs` | Real-data argument-selection contract, without choosing Desktop fallbacks |
 | `--test-operations` | Core outcomes, progress, cancellation and the owned native-child fixture |
 | `--test-clustering-results` | Typed clustering/redundancy results and native synthetic fixtures |
@@ -128,6 +130,7 @@ Optional positional values following each flag override its native defaults. The
 | Syntax after `$testExe` | Source and prerequisites |
 |---|---|
 | `--evidence-storage-check [input.fcf] [reference.tsv] [report.json]` | [EvidenceStorageCheck.cs](../FamilyQuant.Tests/EvidenceStorageCheck.cs) |
+| `--evidence-task-check <evidence.fcf> <new-report.json>` | [Program.EvidenceTask.cs](../FamilyQuant.Tests/Program.EvidenceTask.cs); read-only live taxonomy discovery, native JSON report |
 | `--evidence-fetch-check [input.fcf] [reference.tsv] [output.fcf]` | [EvidenceFetchCheck.cs](../FamilyQuant.Tests/EvidenceFetchCheck.cs); live fetch |
 | `--evidence-fetch-verify [input.fcf] [reference.tsv] [existing-output.fcf]` | Same helper, verifies the existing native evidence copy |
 | `--reference-panel-check [evidence.fcf] [output-dir]` | [ReferencePanelCheck.cs](../FamilyQuant.Tests/ReferencePanelCheck.cs); live panel and validation |
