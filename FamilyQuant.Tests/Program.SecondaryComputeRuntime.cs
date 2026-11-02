@@ -110,6 +110,7 @@ internal static partial class Program
             }
             model.DeNovoDirectory = "";
             SecondaryClick(compute); Wait(() => model.IsBusy);
+            SecondaryWording(output, "compute-busy-" + theme, cs, new Dictionary<int, string> { [312] = model.Status });
             bool busy = !model.CanEdit && !compute.IsEnabled && !model.ComputeCommand.CanExecute(null) && engineCalls == 1;
             progress!.Report("Native synthetic progress phase"); Wait(() => model.Status.Contains("Native synthetic progress phase", StringComparison.Ordinal));
             add(cs, 313, 315, "actual Compute command enters busy state and preserves the previous result until completion", true, busy, busy,

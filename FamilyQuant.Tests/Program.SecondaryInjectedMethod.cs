@@ -36,6 +36,7 @@ internal static partial class Program
         int Token(MemberInfo member) => member switch
         {
             Type type => info.GetTokenFor(type.TypeHandle),
+            DynamicMethod dynamic => info.GetTokenFor(dynamic),
             MethodBase call => info.GetTokenFor(call.MethodHandle, call.DeclaringType!.TypeHandle),
             FieldInfo field => info.GetTokenFor(field.FieldHandle, field.DeclaringType!.TypeHandle),
             _ => throw new InvalidDataException("Unsupported compiled token: " + member),

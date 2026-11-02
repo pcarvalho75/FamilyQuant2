@@ -238,3 +238,23 @@ non-receipt files identical. Native combined import: 3,770 VERIFIED, 1,690 OPEN,
 unfinished at this checkpoint. Tests/receipts/docs only, so worker quick/golden
 were not run. The M47 dependency merge and helper collision fix are already recorded
 separately in Y2 commit `cb0715c`.
+
+## N6k box coverage
+
+The Compute screen's attached spectrum-button handlers are executed with their
+compiled control flow preserved. The static table builder is retained; only its
+last `Window.Show` call is replaced with the offscreen proof presenter. The test
+verifies disabled/no-result behavior, an empty-state refusal with no child window,
+then a completed synthetic result opening the native table with its exact one-row
+fixture and retained CSV path. Both frozen and current child windows are offscreen
+and inactive. Dynamic-method references are relocated through the runtime's own
+token API; no loaded assembly or product file is patched.
+
+The accepted first-producer packet is `secondary/n6k-native-1`, repeated by `-2`:
+188/0/118 with every one of 107 non-receipt files byte-identical. Four additional
+control/event observations are supported. Current tooltips, explanatory text and
+messages go to the shared wording list without semantic closure. The native N6k
+box audit covers 185 retained observations: 114 verified, 71 listed, zero missing.
+The native ledger guard passes; combined import is 3,774 VERIFIED, 1,686 OPEN and
+296 approved drops. N6k's list-routing completion does not approve wording or pass
+the release gate. This is test-only work, with no worker quick/golden or new merge.

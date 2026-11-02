@@ -17,7 +17,7 @@ Render targets refer to `ScreenHarness.Screens`, captured with `--screens <outpu
 Release gate: `FamilyQuant.Tests.exe --feature-ledger-release-check` fails until every retained row is VERIFIED with evidence. Authorized DROP rows use APPROVED_DROP, which records a decision, not a completed UI removal. The normal quick suite permits OPEN rows during development. Regeneration resets retained rows to OPEN; preserve reviewed evidence when updating the scanner.
 
 Scan count: **5756**. Ledger rows: **5756**. Source files: **104**.
-Authorized DROP rows: **296**; proposed VERIFIED retained rows: **3770**; OPEN retained rows: **1690**.
+Authorized DROP rows: **296**; proposed VERIFIED retained rows: **3774**; OPEN retained rows: **1686**.
 
 | ID | Disposition | Kind | Frozen source | Fact or control | Planned check | State | Evidence |
 |---|---|---|---|---|---|---|---|
@@ -920,10 +920,10 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **3770**; OPEN r
 | FQ15-81E9937ED1C5 | IMPROVE | option/copy | FamilyQuant/ComputeXicWindow.xaml:111 | ButtonCompute.Content = Compute / update full XIC | test:SecondaryRuntimeCommand | VERIFIED | evidence:FL-secondary-interactions:FQ15-81E9937ED1C5 |
 | FQ15-804F299CF330 | KEEP | handler | FamilyQuant/ComputeXicWindow.xaml:112 | ButtonCompute.Click = ButtonCompute_Click | test:SecondaryRuntimeCommand | VERIFIED | evidence:FL-secondary-interactions:FQ15-804F299CF330 |
 | FQ15-46CE2FA5AF20 | IMPROVE | tooltip | FamilyQuant/ComputeXicWindow.xaml:113 | ButtonCompute.ToolTip = Measures every identified peptide, and any kept de novo precursor, from the RAW files and stores the numbers in this project. Needs at least the RAW folder and the .sepr2 file; Save the project afterwards to keep them. | render:08-compute | OPEN | pending |
-| FQ15-E0BC587D82A8 | IMPROVE | control | FamilyQuant/ComputeXicWindow.xaml:120 | Button ButtonViewSpectrumComparison | render:08-compute | OPEN | pending |
+| FQ15-E0BC587D82A8 | IMPROVE | control | FamilyQuant/ComputeXicWindow.xaml:120 | Button ButtonViewSpectrumComparison | test:SecondaryRuntimeCommand | VERIFIED | evidence:FL-secondary-runtime:FQ15-E0BC587D82A8 |
 | FQ15-0D3660313B33 | IMPROVE | option/copy | FamilyQuant/ComputeXicWindow.xaml:120 | ButtonViewSpectrumComparison.Content = View spectrum comparison table | render:08-compute | OPEN | pending |
-| FQ15-94EB2F0BBD4E | IMPROVE | option/copy | FamilyQuant/ComputeXicWindow.xaml:121 | ButtonViewSpectrumComparison.IsEnabled = False | render:08-compute | OPEN | pending |
-| FQ15-68E49CE81764 | KEEP | handler | FamilyQuant/ComputeXicWindow.xaml:121 | ButtonViewSpectrumComparison.Click = ButtonViewSpectrumComparison_Click | render:08-compute | OPEN | pending |
+| FQ15-94EB2F0BBD4E | IMPROVE | option/copy | FamilyQuant/ComputeXicWindow.xaml:121 | ButtonViewSpectrumComparison.IsEnabled = False | test:SecondaryRuntimeCommand | VERIFIED | evidence:FL-secondary-runtime:FQ15-94EB2F0BBD4E |
+| FQ15-68E49CE81764 | KEEP | handler | FamilyQuant/ComputeXicWindow.xaml:121 | ButtonViewSpectrumComparison.Click = ButtonViewSpectrumComparison_Click | test:SecondaryRuntimeCommand | VERIFIED | evidence:FL-secondary-runtime:FQ15-68E49CE81764 |
 | FQ15-826441F668F3 | IMPROVE | tooltip | FamilyQuant/ComputeXicWindow.xaml:122 | ButtonViewSpectrumComparison.ToolTip = Opens a read-only table with one row per file, scan and precursor, comparing the PEAKS, DeepNovo and PatternLab calls, and can save it as CSV. Disabled until a computation finishes. | render:08-compute | OPEN | pending |
 | FQ15-2C6730EC8F52 | IMPROVE | option/copy | FamilyQuant/ComputeXicWindow.xaml:125 | TextBlockSpectrumComparisonPath.Text = The spectrum comparison CSV is written after a successful computation. | render:08-compute | OPEN | pending |
 | FQ15-9D83E10BE70B | IMPROVE | tooltip | FamilyQuant/ComputeXicWindow.xaml:126 | TextBlockSpectrumComparisonPath.ToolTip = Where the latest computation saved the spectrum comparison CSV. It holds the same rows as the table. | render:08-compute | OPEN | pending |
@@ -1035,7 +1035,7 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **3770**; OPEN r
 | FQ15-0D99473EB41B | KEEP | handler definition | FamilyQuant/ComputeXicWindow.xaml.cs:238 | private void ButtonBrowseSepro_Click(object sender, RoutedEventArgs e) | test:SecondaryRuntimeCommand | VERIFIED | evidence:FL-secondary-runtime:FQ15-0D99473EB41B |
 | FQ15-A497399D2AB1 | KEEP | handler definition | FamilyQuant/ComputeXicWindow.xaml.cs:253 | private void ButtonBrowseDeNovo_Click(object sender, RoutedEventArgs e) | test:SecondaryRuntimeCommand | VERIFIED | evidence:FL-secondary-runtime:FQ15-A497399D2AB1 |
 | FQ15-452A85384C72 | KEEP | handler definition | FamilyQuant/ComputeXicWindow.xaml.cs:264 | private async void ButtonCompute_Click(object sender, RoutedEventArgs e) | test:SecondaryRuntimeCommand | VERIFIED | evidence:FL-secondary-runtime:FQ15-452A85384C72 |
-| FQ15-7BB37DBBE52F | KEEP | handler definition | FamilyQuant/ComputeXicWindow.xaml.cs:384 | private void ButtonViewSpectrumComparison_Click(object sender, RoutedEventArgs e) | render:08-compute | OPEN | pending |
+| FQ15-7BB37DBBE52F | KEEP | handler definition | FamilyQuant/ComputeXicWindow.xaml.cs:384 | private void ButtonViewSpectrumComparison_Click(object sender, RoutedEventArgs e) | test:SecondaryRuntimeCommand | VERIFIED | evidence:FL-secondary-runtime:FQ15-7BB37DBBE52F |
 | FQ15-B61F52952457 | KEEP | handler definition | FamilyQuant/ComputeXicWindow.xaml.cs:397 | private void ButtonClose_Click(object sender, RoutedEventArgs e) | test:SecondaryRuntimeCommand | VERIFIED | evidence:FL-secondary-interactions:FQ15-B61F52952457 |
 | FQ15-C421B41B6A87 | KEEP | export/storage fact | FamilyQuant/CsvReport.cs:28 | "USearch ID" | test:DeNovoAgreementUnitTests | OPEN | pending |
 | FQ15-D2361FE28E57 | KEEP | export/storage fact | FamilyQuant/CsvReport.cs:29 | "User ID" | test:DeNovoAgreementUnitTests | OPEN | pending |
