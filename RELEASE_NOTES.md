@@ -1,19 +1,61 @@
 # FamilyQuant release notes
 
-This file preserves historical release notes, including their original pending-publish labels. It is not the current checkout release status. Current work and release gates are in [the roadmap](docs/ROADMAP.md), with build/test commands in [the catalog](docs/INDEX.md). No historical version heading is changed by this note.
+This file preserves historical release notes, including their original pending-publish labels. It is not the current
+checkout release status. Current work and release gates are in [the roadmap](docs/ROADMAP.md), with build/test commands
+in [the catalog](docs/INDEX.md). No historical version heading is changed by this note.
+
+## 2.0 development update (not published)
+
+FamilyQuant 2.0 continues as a separate installation beside 1.5. Release acceptance remains
+with the roadmap's science, preservation and deployment gates; these notes do not announce
+a published final release.
+
+- **A separated engine and desktop application.** Clustering, evidence, quantitation, homology,
+  de novo readers and project formats live behind headless, cancellable operation boundaries.
+  Existing file and override seams remain available.
+- **Rebuilt family work.** Curation and family inspection retain editable IDs, locks, grouping,
+  annotations, copy/export and undo through tested view models and operation services.
+  The File-first shell, shared busy handling and saved-file checks keep one project bundle.
+- **Quantitation stays explicit.** Source-native PEAKS/DeepNovo filters remain distinct; the
+  primary envelope estimate, M+0 sensitivity and unadjusted diagnostics retain separate labels.
+  Shared-family membership and attribution provenance survive saving and export.
+- **Evidence stays reviewable.** Scope, direct source labels, reviewed-neighbour measurements,
+  domain compatibility, flags and user choices remain separate. An unannotated assignment
+  requires a qualifying in-scope reviewed neighbour and compatible observed domains.
+- **Compatibility and dependencies.** Old projects remain readable, old-compatible FCF export
+  is retained, unused JSON/theme packages were removed, and the bundled USEARCH source/hash
+  is recorded with real-data parity evidence.
+- **Measured clustering diagnostics.** D14 preserves existing clustering defaults and avoids
+  automatic merging from shared peptides or an automatic reviewed-family veto. The diagnostic
+  records the counterfactual measurements. D15 uses one exact contaminant-prefix rule, with
+  one exact decoy unwrap. See [the measured candidates](docs/IMPROVEMENTS.md).
+
+The family-world work remains subject to its own gate and result-stage acceptance. A green
+build, a stored-project golden check or declaration receipts alone do not establish fresh
+RAW reproduction, universal accuracy or completion of the feature ledger. The protected
+presentation and its frozen producers retain their separate acceptance boundary.
 
 ## 2.0 preview 1 (pending publish)
 
-FamilyQuant 2.0 is a new program that installs beside 1.5, with its own install address and data folder. 1.5 stays installed and untouched, and 2.0 opens its files.
+FamilyQuant 2.0 is a new program that installs beside 1.5, with its own install address and data folder. 1.5 stays
+installed and untouched, and 2.0 opens its files.
 
-- **Group by evidence.** Each protein is placed in a family from UniProt annotation, its nearest reviewed protein and its domains, never from the words of its name. Each one gets a family or none, with a tier and a reason, and the recipe is stored so the result can be reproduced. Against the 224 reviewed venom metalloproteinases on the Viperidae file, the evidence route took 224 and no other reviewed protein; the words route took 213 and 12 others.
-- **A review window.** Families with ticks, proteins with reasons and flags, domain-architecture splits, motifs and a left-out list. Nothing changes until Create, and one Undo reverses it.
-- **Checks you can read.** Leave-one-out validation, a check of the file after every save, and audit and left-out CSV files from the program.
-- **A new look.** Dark by default, light in View. File menu first, a navigation rail, one quiet status bar, and rebuilt Build, Quantify, Results, De novo and secondary screens. New logo.
+- **Group by evidence.** Each protein is placed in a family from UniProt annotation, its nearest reviewed protein and
+  its domains, never from the words of its name. Each one gets a family or none, with a tier and a reason, and the
+  recipe is stored so the result can be reproduced. Against the 224 reviewed venom metalloproteinases on the Viperidae
+  file, the evidence route took 224 and no other reviewed protein; the words route took 213 and 12 others.
+- **A review window.** Families with ticks, proteins with reasons and flags, domain-architecture splits, motifs and a
+  left-out list. Nothing changes until Create, and one Undo reverses it.
+- **Checks you can read.** Leave-one-out validation, a check of the file after every save, and audit and left-out CSV
+  files from the program.
+- **A new look.** Dark by default, light in View. File menu first, a navigation rail, one quiet status bar, and rebuilt
+  Build, Quantify, Results, De novo and secondary screens. New logo.
 - **One Save.** `.fqproj` is the file. `.fcf` still opens and stays as an export.
-- **Retired from the De novo screen:** Extract areas and Partition ion current. 1.5 keeps them. The homology CSV moved to Results.
+- **Retired from the De novo screen:** Extract areas and Partition ion current. 1.5 keeps them. The homology CSV moved
+  to Results.
 
-Not in this preview: the rebuilt curation screen and family view, an `.fcf` export that 1.5 can open, and the proof that every function of 1.5 is kept. Those arrive before the final release.
+Not in this preview: the rebuilt curation screen and family view, an `.fcf` export that 1.5 can open, and the proof that
+every function of 1.5 is kept. Those arrive before the final release.
 
 ## 1.5.0.0 (pending publish)
 
@@ -105,7 +147,8 @@ venom-family analysis reproducible from a saved FamilyQuant project plus its gen
   file with the UniProt release, so the answer does not change afterwards and needs no internet. They fill a new
   Domains column, the Search box finds them, and Keep domains in the preview unticks the proteins with none of the
   domains you name, whatever those proteins are called. On a Viperidae database of 31,777 entries the fetch took
-  85 seconds. Entries UniProt no longer has are counted and left as they were. A protein with no domains stays ticked if it carries a keyword, because the short disintegrins and many
+  85 seconds. Entries UniProt no longer has are counted and left as they were. A protein with no domains stays ticked if
+  it carries a keyword, because the short disintegrins and many
   fragments are too short for Pfam. Domains do not separate everything: most ADAMs have the same ones as a P-III SVMP.
 - **Copy from the tables.** In the preview and the Data Browser a right-click copies the UniProt code (P31982
   from sp|P31982|VM2I_CROCC) or the description, or opens the UniProt page. Every selected row gets one line,

@@ -23,6 +23,8 @@ internal static partial class Program
 {
     internal static readonly string[] PreservedCommandFlags =
     [
+        "--prove-denovo-ledger",
+        "--prove-denovo-runtime",
         "--test-family-world-fetch",
         "--family-world-fetch",
         "--test-query-residue-coverage",

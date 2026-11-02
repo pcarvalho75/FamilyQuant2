@@ -160,13 +160,16 @@ public partial class MainWindow
                 "   from a keyword list. Curation changes can be undone in this session. Use Save as\n" +
                 "   to keep the previous grouping in a separate project.\n\n" +
                 "STEP 3 · Attach the quantitation\n" +
-                "   Layer 2: Load PLP File\n" +
-                "   Needs: a PatternLab project (.plp) exported at PEPTIDE level. A protein-level\n" +
+                "   Open Quantify to compute or update full XIC for this project.\n" +
+                "   In Families > Quantitation use Full XIC > Share of and Shared peptides.\n" +
+                "   For the secondary source, open PatternLab (optional) and Load PatternLab project.\n" +
+                "   PatternLab needs a project (.plp) exported at PEPTIDE level. A protein-level\n" +
                 "   export contains nothing that can be attributed to a family, and every row will\n" +
                 "   read 0.\n" +
-                "   Then in Layer 3 choose what the percentages are a share of, choose what to do with\n" +
-                "   peptides that belong to several families, and press Recalculate. Modes the project\n" +
-                "   cannot support are greyed out, each with the reason in its own tooltip.\n\n" +
+                "   In PatternLab (optional), PatternLab share of chooses what the percentages are a\n" +
+                "   share of. Choose what to do with peptides that belong to several families, then\n" +
+                "   press Recalculate. Modes the project cannot support are greyed out, each with\n" +
+                "   the reason in its own tooltip.\n\n" +
                 "STEP 4 · Take the result away\n" +
                 "   Export to CSV writes exactly the rows on screen, with the shares as fractions\n" +
                 "   between 0 and 1 and a dot for the decimal separator, so any program can read them.\n" +
@@ -177,7 +180,7 @@ public partial class MainWindow
 
                 // The de novo screen is a separate workflow and is written as one: it is numbered
                 // OPTIONAL rather than as a fifth step, because nothing above it needs it and it needs
-                // nothing above it except, for its Layer 4, a Family Cluster File.
+                // nothing above it except, for family attribution, a Family Cluster File.
                 "OPTIONAL · Review de novo evidence\n" +
                 "   Menu: Analysis > De novo evidence\n" +
                 "   A separate workflow, not a step of the four above. It changes no family, no User ID\n" +

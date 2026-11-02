@@ -109,14 +109,13 @@ Columns: Diff = L, M, H, VH. Hrs = worker hours at measured speed: the 56 steps 
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| X13 | Documents: `CLAUDE.md` from 50 KB to a working guide, history to `docs/HISTORY.md`, unprotected talk documents out of the root (`SCIENTIFIC_TALK_SCRIPT.md` stays where it is, untouched), release notes for 2.0. `SCIENTIFIC_METHOD.md` gains the rule that an unannotated protein joins only through an in-scope neighbour, which the code has and the document lacks. The three test files over 1,000 lines split with no check lost | L | 1 | 🟢 | R3 | No fact lost, no line over 300 characters; suite count unchanged | AS | not started | 0% | 0% | T+1 |
 
 ### W7 Releases (Paulo publishes each one)
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
 | R2 | 2.0 preview 2: new look and shell | M | 0.5 | C14 | R3 | Same, plus Paulo's sign-off on renders, and a published update reaches an installed 2.0 | Orchestrator | not started | 0% | 0% | T+4 |
-| R3 | 2.0 release candidate: rewrite finished, every ledger row closed, the family world in if B1 passed | M | 0.5 | R2, B8, X13 | R4 | Same, plus the ledger check | Orchestrator | not started | 0% | 0% | T+4 |
+| R3 | 2.0 release candidate: rewrite finished, every ledger row closed, the family world in if B1 passed | M | 0.5 | R2, B8 | R4 | Same, plus the ledger check | Orchestrator | not started | 0% | 0% | T+4 |
 | R4 | Final adversarial pass on the whole product | H | 1 | R3 | R5 | GR's verdict; all findings closed | GR | not started | 0% | 0% | T+6 |
 | R5 | FamilyQuant 2.0 final, then the archive of this roadmap | L | 0.5 | R4 | Done | Paulo publishes | Orchestrator | not started | 0% | 0% | T+6 |
 
