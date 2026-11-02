@@ -11,11 +11,14 @@ internal static partial class Program
     [
         new("--test-family-world", 9100, TestCommandPhase.Raw, FamilyWorldFixturesRequested, RunFamilyWorldFixtures),
         new(FamilyWorldCheck.Argument, 9101, TestCommandPhase.Normalized, FamilyWorldCheckRequested, RunFamilyWorldCheck),
+        new(FamilyWorldProject.Argument, 9102, TestCommandPhase.Normalized, FamilyWorldProjectRequested, (args, _) => FamilyWorldProject.Run(args)),
     ];
 
     private static bool FamilyWorldFixturesRequested(string[] args) => args.Contains("--test-family-world", StringComparer.Ordinal);
 
     private static bool FamilyWorldCheckRequested(string[] args) => args.Contains(FamilyWorldCheck.Argument);
+
+    private static bool FamilyWorldProjectRequested(string[] args) => args.Contains(FamilyWorldProject.Argument);
 
     private static int RunFamilyWorldFixtures(string[] args, string workDir)
     {
