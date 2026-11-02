@@ -42,7 +42,7 @@ internal static partial class Program
                 begin.Invoke(build, new object[] { "fixture status notification" });
                 Check("Build status changes reach the shell without starting computation", guide.Text.Contains("Running USEARCH")
                     && main.StatusModel.ContextHelp.Contains("fixture status notification")
-                    && main.StatusModel.ContextHelp.Contains("cannot be interrupted"), guide.Text);
+                    && main.StatusModel.ContextHelp.Contains("Cancel stops after the current phase"), guide.Text);
             }
             finally { end.Invoke(build, null); }
             string workflow = (string)typeof(MainWindow).GetMethod("WorkflowText", any)!.Invoke(main, null)!;

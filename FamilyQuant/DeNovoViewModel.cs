@@ -14,11 +14,19 @@ namespace FamilyQuant;
 /// <summary>De novo commands over a tested session, common filters and Core workflows.</summary>
 public sealed partial class DeNovoViewModel : DeNovoSession
 {
+    public AppOperationHost Operations { get; set; } = new();
+    private static Task<T> RunPhase<T>(FamilyQuant.Operations.OperationContext operation, Func<T> work) => Task.Run(() =>
+    {
+        operation.ThrowIfCancellationRequested();
+        T result = work();
+        operation.ThrowIfCancellationRequested();
+        return result;
+    });
     public DeNovoViewModel(DeNovoFilterViewModel? filters = null) : base(filters) => observedMode = Filters.ModeTag;
 
         public async Task ImportAsync()
         {
-            if (IsBusy) return;
+            if (IsBusy || Operations.IsBusy) return;
             // The criteria in force before this pass. A pass that imports nothing puts them back:
             // see RestoreCriteria.
             DeNovoFilterCriteria previousCriteria = Criteria;
@@ -40,6 +48,7 @@ public sealed partial class DeNovoViewModel : DeNovoSession
             }
 
             // Every Layer, not only the two this operation writes: see SetScreenEnabled.
+            using var operation = Operations.Begin("Load and filter de novo");
             SetScreenEnabled(false);
 
             SetStatus("Reading the de novo exports (source: " + source.DisplayName + ") under " + directory + " and applying " +
@@ -56,7 +65,7 @@ public sealed partial class DeNovoViewModel : DeNovoSession
                 // the window; the whole screen is disabled meanwhile so nothing can be pressed twice.
                 DeNovoImport import = seam != null
                     ? await seam(directory, criteria)
-                    : await Task.Run(() => DeNovoSourceImport.Run(directory, criteria, selections));
+                    : await RunPhase(operation.Context, () => DeNovoSourceImport.Run(directory, criteria, selections));
 
                 // The test seam predates source selection. Stamp its value object with the source the UI
                 // actually showed so ApplyImport/status never mislabels the rows.
@@ -68,7 +77,12 @@ public sealed partial class DeNovoViewModel : DeNovoSession
                 }
 
                 // Explicitly back onto the UI thread: everything below writes controls.
+                operation.Context.ThrowIfCancellationRequested();
                 ApplyImport(import);
+            }
+            catch (OperationCanceledException) when (operation.Context.IsCancellationRequested)
+            {
+                SetStatus("Cancelled. Previous evidence and results were kept." + RestoreCriteria(previousCriteria));
             }
             catch (Exception ex)
             {
@@ -90,7 +104,7 @@ public sealed partial class DeNovoViewModel : DeNovoSession
 
         public async Task ReconcileAsync()
         {
-            if (IsBusy) return;
+            if (IsBusy || Operations.IsBusy) return;
             if (FilteredRows.Count == 0)
             {
                 SetStatus("Nothing was reconciled: no de novo rows have been kept, so there is nothing " +
@@ -111,6 +125,7 @@ public sealed partial class DeNovoViewModel : DeNovoSession
             }
 
             // Every Layer, not only the two this operation writes: see SetScreenEnabled.
+            using var operation = Operations.Begin("Reconcile de novo");
             SetScreenEnabled(false);
 
             SetStatus("Reading " + Path.GetFileName(path) + " and joining it to " +
@@ -125,10 +140,15 @@ public sealed partial class DeNovoViewModel : DeNovoSession
                 int rawRows = LastImport?.RowsRead ?? filtered.Count;
                 DeNovoFilterCriteria criteria = Criteria;
                 DeNovoImport? imported = LastImport;
-                DeNovoReconciliation outcome = await Task.Run(() =>
+                DeNovoReconciliation outcome = await RunPhase(operation.Context, () =>
                     DeNovoInspectionAudit.AttachSources(Reconcile(filtered, path, rawRows, criteria), imported));
 
+                operation.Context.ThrowIfCancellationRequested();
                 ApplyReconciliation(outcome);
+            }
+            catch (OperationCanceledException) when (operation.Context.IsCancellationRequested)
+            {
+                SetStatus("Cancelled. Previous evidence and results were kept.");
             }
             catch (Exception ex)
             {
@@ -147,7 +167,7 @@ public sealed partial class DeNovoViewModel : DeNovoSession
 
         public async Task ExtractAsync()
         {
-            if (IsBusy) return;
+            if (IsBusy || Operations.IsBusy) return;
             if (LastReconciliation == null)
             {
                 SetStatus("Nothing was extracted: no reconciliation has been run, so it is not known " +
@@ -171,6 +191,7 @@ public sealed partial class DeNovoViewModel : DeNovoSession
             var keptByRun = KeptRowsByRun();
             string rawDirectory = RawDirectory.Trim();
 
+            using var operation = Operations.Begin("Extract de novo XIC");
             SetScreenEnabled(false);
             SetStatus("Extracting " + matches.Count.ToString("N0", CultureInfo.CurrentCulture) +
                       " run(s), one at a time. Each acquisition is opened once and its MS1 spectra take " +
@@ -181,12 +202,17 @@ public sealed partial class DeNovoViewModel : DeNovoSession
             {
                 // Progress arrives from the background thread, so it is marshalled rather than written
                 // straight into a control.
-                Action<string> progress = m => Progress.Report("Extracting: " + m);
+                Action<string> progress = operation.Context.Messages("de-novo-extraction");
 
-                DeNovoXicExtraction outcome = await Task.Run(
+                DeNovoXicExtraction outcome = await RunPhase(operation.Context,
                     () => ExtractXic(matches, keptByRun, rawDirectory, progress));
 
+                operation.Context.ThrowIfCancellationRequested();
                 ApplyExtraction(outcome);
+            }
+            catch (OperationCanceledException) when (operation.Context.IsCancellationRequested)
+            {
+                SetStatus("Cancelled. Previous evidence and results were kept.");
             }
             catch (Exception ex)
             {
@@ -205,7 +231,7 @@ public sealed partial class DeNovoViewModel : DeNovoSession
 
         public async Task SearchAsync()
         {
-            if (IsBusy) return;
+            if (IsBusy || Operations.IsBusy) return;
             if (!ReadHomologySettingsFromBoxes()) return;   // Refuse() has already said which box, and why
 
             List<string> peptides = PeptidesForHomology();
@@ -232,6 +258,7 @@ public sealed partial class DeNovoViewModel : DeNovoSession
 
             var options = HomologySettings;
 
+            using var operation = Operations.Begin("Search peptide families");
             SetScreenEnabled(false);
             SetStatus("Searching " + peptides.Count.ToString("N0", CultureInfo.CurrentCulture) +
                       " distinct peptide(s) against " + Path.GetFileName(fcfPath) + " at " +
@@ -240,13 +267,18 @@ public sealed partial class DeNovoViewModel : DeNovoSession
 
             try
             {
-                DeNovoHomology outcome = await Task.Run(() =>
+                DeNovoHomology outcome = await RunPhase(operation.Context, () =>
                 {
                     FamilyClusterFile fcf = LoadHomologyCuration(fcfPath);
-                    return SearchHomology(peptides, fcf, options, fcfPath);
+                    return SearchHomology(peptides, fcf, options, fcfPath, operation.Context);
                 });
 
+                operation.Context.ThrowIfCancellationRequested();
                 ApplyHomology(outcome);
+            }
+            catch (OperationCanceledException) when (operation.Context.IsCancellationRequested)
+            {
+                SetStatus("Cancelled. Previous evidence and results were kept.");
             }
             catch (Exception ex)
             {
@@ -265,7 +297,7 @@ public sealed partial class DeNovoViewModel : DeNovoSession
 
         public async Task PartitionAsync()
         {
-            if (IsBusy) return;
+            if (IsBusy || Operations.IsBusy) return;
             if (LastExtraction == null)
             {
                 SetStatus("Nothing was partitioned: no run has been extracted, so there is no de novo " +
@@ -296,6 +328,7 @@ public sealed partial class DeNovoViewModel : DeNovoSession
             var xicByRun = new Dictionary<string, DeNovoBatchStats>(LastExtraction.ByRun,
                                                                     StringComparer.OrdinalIgnoreCase);
 
+            using var operation = Operations.Begin("Build de novo partition");
             SetScreenEnabled(false);
             SetStatus("Measuring the whole chromatogram of " +
                       matches.Count.ToString("N0", CultureInfo.CurrentCulture) +
@@ -304,13 +337,18 @@ public sealed partial class DeNovoViewModel : DeNovoSession
 
             try
             {
-                Action<string> progress = m => Progress.Report("Building the partition: " + m);
+                Action<string> progress = operation.Context.Messages("de-novo-partition");
 
-                DeNovoPartition outcome = await Task.Run(
+                DeNovoPartition outcome = await RunPhase(operation.Context,
                     () => BuildPartition(matches, xicByRun, plpPath, xic2Path.Length == 0 ? null : xic2Path,
                                          progress));
 
+                operation.Context.ThrowIfCancellationRequested();
                 ApplyPartition(outcome);
+            }
+            catch (OperationCanceledException) when (operation.Context.IsCancellationRequested)
+            {
+                SetStatus("Cancelled. Previous evidence and results were kept.");
             }
             catch (Exception ex)
             {

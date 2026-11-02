@@ -140,7 +140,7 @@ public partial class DeNovoControl
             return false;
         }
 
-        private void Export(string suggestedName, string title, Action<string> write, string what)
+        private async void Export(string suggestedName, string title, Action<string> write, string what)
         {
             if (!CanShowDialog("Nothing was exported", "nothing. The same rows are on screen.")) return;
 
@@ -152,14 +152,19 @@ public partial class DeNovoControl
             };
 
             if (sfd.ShowDialog() != true) return;
+            using var operation = AppOperationHost.For(this).Begin("Export de novo evidence");
 
             try
             {
-                write(sfd.FileName);
+                await Task.Run(() => AppOperationFiles.WriteFile(sfd.FileName, write, operation.Context));
 
                 SetStatus("Written to " + sfd.FileName + ": " + what + ". Numbers use a dot for the " +
                           "decimal separator whatever your machine's language is, so any program can " +
                           "read them. Nothing on screen changed. Next step: nothing.");
+            }
+            catch (OperationCanceledException) when (operation.Context.IsCancellationRequested)
+            {
+                SetStatus("Cancelled. The previous export file was kept.");
             }
             catch (Exception ex)
             {

@@ -57,7 +57,8 @@ public partial class USearchLib
             }
         }
 
-        public async void ButtonBuildFamilies_Click(object sender, RoutedEventArgs e)
+        public async void ButtonBuildFamilies_Click(object sender, RoutedEventArgs e) => await AppOperationHost.OnUi(owner, () => ButtonBuildFamilies_ClickAsync(sender, e));
+        private async Task ButtonBuildFamilies_ClickAsync(object sender, RoutedEventArgs e)
         {
             if (!owner.RequireDatabase()) return;
             int identity = owner.IntegerUpDownIdentity.Value ?? 85;
@@ -97,9 +98,10 @@ public partial class USearchLib
                 // GenerateFCF runs USEARCH; do it off the UI thread so the window stays responsive
                 // and any failure becomes a dialog rather than a crash.
                 FamilyClusterFile generated = USearchLib.BuildOverride != null ? await USearchLib.BuildOverride(inputFile, identity, exhaustive)
-                    : await Task.Run(() => USearchTools.GenerateFCF(new FileInfo(inputFile), identity, exhaustive));
+                    : await Task.Run(() => USearchTools.GenerateFCF(new FileInfo(inputFile), identity, exhaustive, owner.Operation));
 
-                generated.Save(fcfPath);
+                owner.Operation!.ThrowIfCancellationRequested();
+                await Task.Run(() => generated.Save(fcfPath, owner.Operation));
 
                 owner.fcf = generated;
                 owner.ButtonCalculateFDR.IsEnabled = true;
@@ -116,6 +118,11 @@ public partial class USearchLib
                     "and attach quantitation. You can also press \"Check mixing (FDR)\" here first to check " +
                     "whether this identity keeps real and decoy sequences apart.",
                     "Family Cluster File generated", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            catch (OperationCanceledException) when (owner.Operation?.IsCancellationRequested == true)
+            {
+                owner.EndRun();
+                owner.ShowBuildMessage("Cancelled. The previous files and results were kept.", "Cancelled");
             }
             catch (Exception ex)
             {
@@ -169,7 +176,8 @@ public partial class USearchLib
                 "Target/decoy mixing", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
-        public async void ButtonDivideAndConquer_Click(object sender, RoutedEventArgs e)
+        public async void ButtonDivideAndConquer_Click(object sender, RoutedEventArgs e) => await AppOperationHost.OnUi(owner, () => ButtonDivideAndConquer_ClickAsync(sender, e));
+        private async Task ButtonDivideAndConquer_ClickAsync(object sender, RoutedEventArgs e)
         {
             if (!owner.RequireDatabase()) return;
             string inputFile = owner.ViewModel.DatabasePath;
@@ -185,7 +193,8 @@ public partial class USearchLib
             {
                 // Runs USEARCH several times; keep it off the UI thread.
                 DivideAndConquerResult outcome = await Task.Run(() =>
-                    FamilyClusterFile.DivideAndConquerDetailed(inputFile, acceptableScore, exhaustive: exhaustive));
+                    FamilyClusterFile.DivideAndConquerDetailed(inputFile, acceptableScore, exhaustive: exhaustive, operation: owner.Operation));
+                owner.Operation!.ThrowIfCancellationRequested();
                 double optimumIdentity = outcome.Identity;
                 string stopReason = outcome.StopReason();
 
@@ -215,6 +224,11 @@ public partial class USearchLib
                     "identity range\" first to see the whole curve.",
                     "Divide and Conquer finished", MessageBoxButton.OK, MessageBoxImage.Information);
             }
+            catch (OperationCanceledException) when (owner.Operation?.IsCancellationRequested == true)
+            {
+                owner.EndRun();
+                owner.ShowBuildMessage("Cancelled. The previous files and results were kept.", "Cancelled");
+            }
             catch (Exception ex)
             {
                 owner.EndRun();
@@ -228,7 +242,8 @@ public partial class USearchLib
             }
         }
 
-        public async void ButtonScanIdentities_Click(object sender, RoutedEventArgs e)
+        public async void ButtonScanIdentities_Click(object sender, RoutedEventArgs e) => await AppOperationHost.OnUi(owner, () => ButtonScanIdentities_ClickAsync(sender, e));
+        private async Task ButtonScanIdentities_ClickAsync(object sender, RoutedEventArgs e)
         {
             if (!owner.RequireDatabase()) return;
             string inputFile = owner.ViewModel.DatabasePath;
@@ -241,7 +256,8 @@ public partial class USearchLib
 
             try
             {
-                List<IdentityScanRow> rows = await Task.Run(() => FamilyClusterFile.ScanIdentities(inputFile, exhaustive: exhaustive));
+                List<IdentityScanRow> rows = await Task.Run(() => FamilyClusterFile.ScanIdentities(inputFile, exhaustive: exhaustive, operation: owner.Operation));
+                owner.Operation!.ThrowIfCancellationRequested();
 
                 owner.EndRun();
 
@@ -252,6 +268,11 @@ public partial class USearchLib
                 IdentityScanWindow.Show("Identity scan · " + Path.GetFileName(inputFile),
                                         rows, BuildReportFormatter.Format(rows), Window.GetWindow(owner),
                                         owner.fcf?.ClusteringIdentity);
+            }
+            catch (OperationCanceledException) when (owner.Operation?.IsCancellationRequested == true)
+            {
+                owner.EndRun();
+                owner.ShowBuildMessage("Cancelled. The previous files and results were kept.", "Cancelled");
             }
             catch (Exception ex)
             {
@@ -265,7 +286,8 @@ public partial class USearchLib
             }
         }
 
-        public async void ButtonRemoveRedundancy_Click(object sender, RoutedEventArgs e)
+        public async void ButtonRemoveRedundancy_Click(object sender, RoutedEventArgs e) => await AppOperationHost.OnUi(owner, () => ButtonRemoveRedundancy_ClickAsync(sender, e));
+        private async Task ButtonRemoveRedundancy_ClickAsync(object sender, RoutedEventArgs e)
         {
             if (owner.busy)
             {
@@ -285,7 +307,7 @@ public partial class USearchLib
             if (!owner.BeginRun("removing redundant sequences from " + Path.GetFileName(inputFile))) return;
             try
             {
-                var result = await Task.Run(() => RedundancyTools.RemoveRedundancy(new FileInfo(inputFile), identity, outputFile));
+                var result = await Task.Run(() => RedundancyTools.RemoveRedundancy(new FileInfo(inputFile), identity, outputFile, owner.Operation));
 
                 owner.EndRun();
 
@@ -300,6 +322,11 @@ public partial class USearchLib
                     "Next step: cluster this non-redundant file with \"Build families\" above, so near-duplicate " +
                     "entries do not split a family.",
                     "Redundancy removed", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            catch (OperationCanceledException) when (owner.Operation?.IsCancellationRequested == true)
+            {
+                owner.EndRun();
+                owner.ShowBuildMessage("Cancelled. The previous files and results were kept.", "Cancelled");
             }
             catch (Exception ex)
             {
