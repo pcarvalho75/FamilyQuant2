@@ -12,10 +12,10 @@
     <UserControl.Resources><local:AccessionTextConverter x:Key="AccessionText"/></UserControl.Resources>
 
     <Grid Background="{DynamicResource CanvasBrush}" Margin="12">
-        <Grid.ColumnDefinitions><ColumnDefinition/><ColumnDefinition Width="12"/><ColumnDefinition Width="360"/></Grid.ColumnDefinitions>
+        <Grid.ColumnDefinitions><ColumnDefinition/><ColumnDefinition Width="12"/><ColumnDefinition Width="340"/></Grid.ColumnDefinitions>
         <Grid><Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
             <DockPanel Margin="0,0,0,10">
-                <TextBlock Text="Proteins" Style="{StaticResource PageTitle}" DockPanel.Dock="Left"/>
+                <TextBlock Text="Families" Style="{StaticResource PageTitle}" DockPanel.Dock="Left"/>
                 <Label x:Name="LabelNumberOfGroups" HorizontalAlignment="Right" ToolTip="Visible families and families in the file. Display filters never change the saved grouping or percentages."/>
             </DockPanel>
             <DockPanel Grid.Row="1" Margin="0,0,0,10">
@@ -24,7 +24,33 @@
                 <TextBox x:Name="TextBoxSearch" KeyUp="TextBoxSearch_KeyUp" AutomationProperties.Name="Search proteins"
                          ToolTip="Filter by accession, description or domain, using commas between alternatives. Filtering never changes a percentage."/>
             </DockPanel>
-<DataGrid Grid.Row="2" x:Name="DataGridResultGrid" AutoGenerateColumns="False" LoadingRow="DataGridResultGrid_LoadingRow" ClipToBounds="True"
+<Grid Grid.Row="2">
+                <Grid.ColumnDefinitions><ColumnDefinition Width="1.1*" MinWidth="220"/><ColumnDefinition Width="8"/><ColumnDefinition Width="1.2*" MinWidth="220"/></Grid.ColumnDefinitions>
+                <DockPanel Grid.Column="0">
+                    <Button DockPanel.Dock="Top" Content="All proteins" Click="AllFamilyProteins_Click" HorizontalAlignment="Left" Margin="0,0,0,8"
+                            ToolTip="Show every visible protein instead of one selected family. Your display filters and curation stay unchanged."/>
+                    <DataGrid x:Name="DataGridFamilies" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" SelectionMode="Single"
+                              ItemsSource="{Binding Families}" SelectedItem="{Binding SelectedFamily, Mode=TwoWay}"
+                              SelectionChanged="FamilySelection_Changed" CellEditEnding="FamilyName_EditEnding"
+                              ToolTip="Select a family to show its proteins beside this table. Edit the name or lock; Undo reverses each committed change.">
+                        <DataGrid.Columns>
+                            <DataGridTemplateColumn Header="Lock" Width="64" MinWidth="64" IsReadOnly="True" SortMemberPath="IsLocked">
+                                <DataGridTemplateColumn.CellTemplate><DataTemplate>
+                                    <CheckBox IsChecked="{Binding IsLocked, UpdateSourceTrigger=PropertyChanged}" IsEnabled="{Binding CanEdit}" Click="FamilyLock_Click" HorizontalAlignment="Center"
+                                              ToolTip="Protect this family from automatic grouping, or remove that protection. Undo reverses this lock change."/>
+                                </DataTemplate></DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTextColumn Header="ID" Width="50" MinWidth="50" IsReadOnly="True" Binding="{Binding FamilyId}"/>
+                            <DataGridTextColumn x:Name="ColumnFamilyName" Header="Family name" Width="*" MinWidth="160" Binding="{Binding Name}"/>
+                            <DataGridTextColumn x:Name="ColumnFamilyProteins" Header="Proteins" Width="70" MinWidth="70" theme:TableAppearance.FullTextPath="CountHelp" IsReadOnly="True" Binding="{Binding Proteins}"/>
+                            <DataGridTextColumn x:Name="ColumnFamilyFullXic" Header="Full XIC share" Width="110" MinWidth="110" IsReadOnly="True" Binding="{Binding FullXicShare, StringFormat=P3}"/>
+                            <DataGridTextColumn x:Name="ColumnFamilyPatternLab" Header="PatternLab share" Width="110" MinWidth="110" IsReadOnly="True" Binding="{Binding PatternLabShare, StringFormat=P3}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </DockPanel>
+                <GridSplitter Grid.Column="1" Width="6" HorizontalAlignment="Center" ResizeDirection="Columns" ResizeBehavior="PreviousAndNext"
+                              Focusable="True" ToolTip="Resize the family overview and protein table. Focus here and use the arrow keys for keyboard resizing."/>
+                <DataGrid Grid.Column="2" x:Name="DataGridResultGrid" AutoGenerateColumns="False" LoadingRow="DataGridResultGrid_LoadingRow" ClipToBounds="True"
                           CanUserAddRows="False" CanUserDeleteRows="False"
                           CellEditEnding="DataGridResultGrid_CellEditEnding"
                           SelectionChanged="DataGridResultGrid_SelectionChanged"
@@ -53,6 +79,7 @@
                                             Header="Residue mass (Da)" Width="110" MinWidth="110" Binding="{Binding Path=MonoisotopicMass, StringFormat=N3}"/>
                     </DataGrid.Columns>
                 </DataGrid>
+            </Grid>
 <Border x:Name="BorderCurationStatus" Grid.Row="3" Background="{DynamicResource SubtleBrush}" BorderBrush="{DynamicResource EdgeBrush}" BorderThickness="0,0,0,1" Padding="10,6">
             <DockPanel LastChildFill="True">
                 <Button x:Name="ButtonHelp" DockPanel.Dock="Right" Content="?  How to read these numbers"

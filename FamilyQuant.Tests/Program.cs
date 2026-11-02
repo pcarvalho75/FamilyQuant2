@@ -259,6 +259,7 @@ namespace FamilyQuant.Tests
             KeywordCommandTests();
             CurationScreenTests();
             CurationOperationTests();
+            FamilyViewTests();
             TableAppearanceTests();
             EvidenceReviewModelTests();
             EvidenceTaskScopeTests();
