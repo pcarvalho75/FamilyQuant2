@@ -176,6 +176,10 @@ Finished steps, moved here from docs/ROADMAP.md. The board shows them as green.
 | N6l | Preview, lock and identity windows (71 rows) | M | 0.5 | 🟢 | N6p | Each row proved or on the wording list | FL | not started | 0% | 0% | T+1 |
 | N6j | Deck producers: the last five rows | L | 0.1 | 🟢 | N6p | Each row proved or on the wording list | AS | not started | 0% | 0% | T+0 |
 | N6k | Compute window (79 rows) | M | 0.5 | 🟢 | N6p | Each row proved or on the wording list | FL | not started | 0% | 0% | T+0 |
+| N6e | Main window: routes, dialogs and messages (158 rows) | M | 1 | 🟢 | N6p | Each row proved or on the wording list | SH | not started | 0% | 0% | T+1 |
+| N6f | Curation code (302 rows) | H | 1 | 🟢 | N6p | Each row proved or on the wording list | SH | not started | 0% | 0% | T+2 |
+| N6g | Curation screen (147 rows) | M | 0.5 | 🟢 | N6p | Each row proved or on the wording list | SH | not started | 0% | 0% | T+2 |
+| N6o | Report and CSV facts (19 rows) | L | 0.2 | 🟢 | N6p | Each row proved or on the wording list | SH | not started | 0% | 0% | T+3 |
 
 ### W4 Look
 
