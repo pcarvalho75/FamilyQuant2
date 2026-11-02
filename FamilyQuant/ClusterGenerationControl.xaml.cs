@@ -120,6 +120,7 @@ namespace FamilyQuant
             QuantitationPanel.DataContext = Quantitation;
             ViewModel.DocumentChanged += (_, _) => DocumentChanged?.Invoke(this, EventArgs.Empty);
             Quantitation.Refreshed += (_, _) => UpdateGUI();
+            Loaded += (_, _) => { _ = Operations; };
 
             GridCopy.Attach(DataGridResultGrid, row => (row as FastaItemExtended)?.SequenceIdentifier,
                             row => (row as FastaItemExtended)?.Description);
@@ -144,17 +145,12 @@ namespace FamilyQuant
         /// </summary>
         private void BeginWait(string message)
         {
-            WaitScreenMessage.Text = message;
-            WaitScreen.Visibility = Visibility.Visible;
-
-            if (PresentationSource.FromVisual(this) == null) return;
-
-            Dispatcher.Invoke(() => { }, System.Windows.Threading.DispatcherPriority.Loaded);
+            BeginSharedWait(message);
         }
 
         private void EndWait()
         {
-            WaitScreen.Visibility = Visibility.Collapsed;
+            EndSharedWait();
         }
 
         // ===================================================================== filters
@@ -288,7 +284,7 @@ namespace FamilyQuant
                     // hangs the run forever. The cancel above is the protection; this is the courtesy.
                     if (PresentationSource.FromVisual(this) != null)
                     {
-                        MessageBox.Show(
+                        ShowCurationMessage(
                             "Family numbers cannot be negative, so nothing was changed.\n\n" +
                             "Next step: type a whole number, 0 or higher.",
                             "Negative family number", MessageBoxButton.OK, MessageBoxImage.Information);
@@ -363,21 +359,20 @@ namespace FamilyQuant
             UpdateFilteredResults();
         }
 
-        private void ButtonRecalculateQuantitation_Click(object sender, RoutedEventArgs e)
+        private async void ButtonRecalculateQuantitation_Click(object sender, RoutedEventArgs e)
         {
-            if (CurrentPLP == null)
+            if (CurrentPLP == null) { ShowCurationOperationResult("Load a PatternLab project before recalculating its shares."); return; }
+            await RunCurationAsync("Recalculate family shares", async operation =>
             {
-                MessageBox.Show(
-                    "Nothing was recalculated: no quantitation is loaded.\n\n" +
-                    "The percentages come from a PatternLab project, and none has been opened yet, so " +
-                    "there is nothing to divide.\n\n" +
-                    "Next step: go to PatternLab source and press \"Load PLP File\".",
-                    "Load a project first", MessageBoxButton.OK, MessageBoxImage.Information);
-                return;
-            }
-
-            RecalculateQuantitationInternal();
-
+                var prepared = await Quantitation.PrepareRecalculationAsync(SelectedMode, SelectedSharedPolicy, operation);
+                operation.Commit(() =>
+                {
+                    Quantitation.PublishRecalculation(prepared);
+                    DataGridResultGrid.Items.Refresh(); UpdateColumnHeaders(); UpdateFilteredResults(); UpdateLayerStates();
+                    ViewModel.NotifyDocumentChanged();
+                });
+                ShowCurationOperationResult("Family shares recalculated using the selected denominator and shared-peptide rule.");
+            });
         }
 
         private void RecalculateQuantitationInternal()
@@ -395,85 +390,49 @@ namespace FamilyQuant
 
         private async void ButtonLoadQuantData_Click(object sender, RoutedEventArgs e)
         {
-            if (PresentationSource.FromVisual(this) == null)
-            {
-                ShowCurationOperationResult("Choose a PatternLab file from a displayed application window."); return;
-            }
+            if (Operations.IsBusy) return;
             var dialog = new OpenFileDialog { Filter = "PatternLab project (*.plp)|*.plp", Title = "Choose the peptide-level PatternLab project" };
-            if (dialog.ShowDialog() != true) return;
-            BeginWait("Loading PatternLab quantitation..."); IsEnabled = false;
-            try
+            if (!ShellDialogs.ShowFile(this, "curation.patternlab", dialog)) return;
+            await RunCurationAsync("Load PatternLab quantitation", async operation =>
             {
-                var prepared = await Quantitation.PreparePatternLabAsync(dialog.FileName, SelectedMode, SelectedSharedPolicy, System.Threading.CancellationToken.None);
-                Quantitation.PublishPatternLab(prepared);
-                UpdateReportingModeAvailability(prepared.Profile);
-                QuantitationPanel.TextBlockQuantProfile.Text = prepared.Profile.Summary();
-                QuantitationPanel.TextBlockPLPStatus.Text = "Loaded: " + Path.GetFileName(dialog.FileName);
-                QuantitationPanel.IconPLPStatus.Visibility = Visibility.Visible;
-                QuantitationPanel.TextBlockPLPStatus.SetResourceReference(TextBlock.ForegroundProperty, "TextBrush");
-                QuantitationPanel.ButtonRecalculateQuantitation.IsEnabled = true;
-                ViewModel.NotifyDocumentChanged(); UpdateGUI();
+                operation.Report("load", "Loading the peptide-level PatternLab project");
+                var prepared = await Quantitation.PreparePatternLabAsync(dialog.FileName, SelectedMode, SelectedSharedPolicy, operation.CancellationToken);
+                operation.Commit(() =>
+                {
+                    Quantitation.PublishPatternLab(prepared);
+                    UpdateReportingModeAvailability(prepared.Profile);
+                    QuantitationPanel.TextBlockQuantProfile.Text = prepared.Profile.Summary();
+                    QuantitationPanel.TextBlockPLPStatus.Text = "Loaded: " + Path.GetFileName(dialog.FileName);
+                    QuantitationPanel.IconPLPStatus.Visibility = Visibility.Visible;
+                    QuantitationPanel.TextBlockPLPStatus.SetResourceReference(TextBlock.ForegroundProperty, "TextBrush");
+                    QuantitationPanel.ButtonRecalculateQuantitation.IsEnabled = true;
+                    ViewModel.NotifyDocumentChanged(); UpdateGUI();
+                });
                 ShowCurationOperationResult("PatternLab project loaded. " + prepared.Profile.DenominatorSentence()
                     + (prepared.Profile.CanReportTotalChromatogram ? "" : " TIC reporting is unavailable; hover the mode for its reason."));
-            }
-            catch (Exception ex) { ShowCurationOperationResult("The PatternLab project could not be loaded: " + ex.Message); }
-            finally { IsEnabled = true; EndWait(); }
+            });
         }
 
         // ===================================================================== export
 
-        private void ButtonSaveReport_Click(object sender, RoutedEventArgs e)
+        private async void ButtonSaveReport_Click(object sender, RoutedEventArgs e)
         {
-            var rows = VisibleRows();
-
-            if (rows.Count == 0)
+            if (Operations.IsBusy) return;
+            if (VisibleRows().Count == 0) { ShowCurationOperationResult("Nothing was exported: no protein row is visible. Clear the search or display filters, then export again."); return; }
+            var dialog = new SaveFileDialog { Filter = FileDialogFilters.Csv, FileName = "FamilyQuant_Report.csv", Title = "Save the visible rows as CSV" };
+            if (!ShellDialogs.ShowFile(this, "curation.proteins-csv", dialog)) return;
+            await RunCurationAsync("Export visible protein rows", async operation =>
             {
-                MessageBox.Show(
-                    "Nothing was exported: the table has no rows to write.\n\n" +
-                    "Every row is currently hidden by a filter, or the Family Cluster File is empty.\n\n" +
-                    "Next step: clear the Search box and untick the filters in this panel, then export again.",
-                    "Nothing to export", MessageBoxButton.OK, MessageBoxImage.Information);
-                return;
-            }
-
-            SaveFileDialog saveFileDialog = new SaveFileDialog
-            {
-                Filter = FileDialogFilters.Csv,
-                FileName = "FamilyQuant_Report.csv",
-                Title = "Save the visible rows as CSV"
-            };
-
-            if (saveFileDialog.ShowDialog() != true) return;
-
-            try
-            {
-                File.WriteAllText(saveFileDialog.FileName, CsvReport.Build(rows, DisplayedMode, FullXicCsvHeader()),
-                    Encoding.UTF8);
-
-                string what = DisplayedMode == null
-                    ? "The share column is empty, because no quantitation was loaded."
-                    : "The share column holds " + DisplayedMode.Value.ShortName().Replace("% of", "the share of") +
-                      ", computed with " + DisplayedSharedPolicy.ShortName() + ".";
-
-                MessageBox.Show(
-                    rows.Count.ToString("N0", CultureInfo.CurrentCulture) + " rows were written to\n" +
-                    saveFileDialog.FileName + "\n\n" +
-                    what + "\n\n" +
-                    "In the file the shares are fractions between 0 and 1, not percentages, and the decimal " +
-                    "separator is always a dot so that any program can read them. The table on screen shows " +
-                    "the same numbers as percentages in your own language.\n\n" +
-                    "Next step: open it in a spreadsheet, or read it straight into R or Python.",
-                    "Export complete", MessageBoxButton.OK, MessageBoxImage.Information);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(
-                    "The file could not be written, so nothing was exported.\n\n" +
-                    "Reason given by the program: " + ex.Message + "\n\n" +
-                    "Next step: check that the file is not already open in Excel and that you can write to " +
-                    "that folder, then export again.",
-                    "Could not export", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
+                var rows = VisibleRows(); var mode = DisplayedMode; string heading = FullXicCsvHeader();
+                operation.Report("export", "Preparing the visible protein report");
+                await Task.Run(() =>
+                {
+                    string csv = CsvReport.Build(rows, mode, heading);
+                    AppOperationFiles.WriteFile(dialog.FileName, temporary => File.WriteAllText(temporary, csv, Encoding.UTF8), operation);
+                }, operation.CancellationToken);
+                ShowCurationOperationResult(rows.Count.ToString("N0", CultureInfo.CurrentCulture) + " protein rows exported to " + dialog.FileName
+                    + ". Shares are fractional values with an invariant decimal point.");
+            });
         }
 
         /// <summary>Exactly the rows the grid is showing, i.e. exactly what an export writes.</summary>
@@ -498,7 +457,7 @@ namespace FamilyQuant
         public string? FullXicProteinFingerprint => Quantitation.FullXicProteinFingerprint;
         public bool HasFullXic => ViewModel != null && Quantitation.HasFullXic;
         public FamilyEnvelopeQuantResult? FullXicFamilies => Quantitation.FullXicFamilies;
-        public Task FullXicReady => Quantitation.FullXicReady;
+        public Task FullXicReady => projectionDone?.Task ?? Quantitation.FullXicReady;
         private bool fullXicPending => ViewModel != null && Quantitation.IsPending;
         private bool FullXicOverTic => Quantitation.FullXicOverTic;
         private string FullXicBasisLabel => Quantitation.FullXicBasisLabel;
@@ -517,7 +476,7 @@ namespace FamilyQuant
         }
         public Task SetFullXicQuantAsync(IReadOnlyList<QuantRow>? rows, IReadOnlyDictionary<string, double>? perRunTic)
         {
-            SyncQuantitationChoices(); return Quantitation.SetFullXicQuantAsync(rows, perRunTic);
+            return QueueFullXicAsync(rows, perRunTic);
         }
         public string? FullXicCompositionCsv()
         {
@@ -535,40 +494,20 @@ namespace FamilyQuant
             ButtonExportComposition.IsEnabled = HasFullXic;
         }
 
-        private void ButtonExportComposition_Click(object sender, RoutedEventArgs e)
+        private async void ButtonExportComposition_Click(object sender, RoutedEventArgs e)
         {
-            string? csv = FullXicCompositionCsv();
-            if (csv == null || PresentationSource.FromVisual(this) == null) return;
-
-            var sfd = new SaveFileDialog
+            if (Operations.IsBusy || !HasFullXic) return;
+            var dialog = new SaveFileDialog { Filter = FileDialogFilters.Csv, FileName = "FamilyQuant_family_composition.csv", Title = "Save the family composition as CSV" };
+            if (!ShellDialogs.ShowFile(this, "curation.composition-csv", dialog)) return;
+            await RunCurationAsync("Export family composition", async operation =>
             {
-                Filter = FileDialogFilters.Csv,
-                FileName = "FamilyQuant_family_composition.csv",
-                Title = "Save the family composition as CSV"
-            };
-            if (sfd.ShowDialog() != true) return;
-
-            // The closure stated is the one that holds for the choices in use, never a blanket promise.
-            string closure = SelectedSharedPolicy == SharedPeptidePolicy.CountInEveryFamily
-                ? "The families are counted with every shared peptide in each, so they overlap and must not be added up."
-                : FullXicOverTic
-                    ? "The fractions are of the TIC, so together they give the share of the TIC the quantified peptides explain."
-                    : "The fractions add up to 1.";
-
-            try
-            {
-                File.WriteAllText(sfd.FileName, csv, Encoding.UTF8);
-                MessageBox.Show(
-                    "The family composition was written to\n" + sfd.FileName + "\n\n" +
-                    "One row per family, plus the shared-between-families row (with 'Family-unique only') and the " +
-                    "not-attributed row. " + closure + " The basis and the shared-peptide rule are named in the last column.",
-                    "Composition exported", MessageBoxButton.OK, MessageBoxImage.Information);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Nothing was written. Reason given by the program: " + ex.Message,
-                    "Could not export", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
+                operation.Report("export", "Preparing the full-XIC family composition");
+                string csv = FullXicCompositionCsv() ?? throw new InvalidOperationException("Full XIC is unavailable for the current families.");
+                await Task.Run(() => AppOperationFiles.WriteFile(dialog.FileName,
+                    temporary => File.WriteAllText(temporary, csv, Encoding.UTF8), operation), operation.CancellationToken);
+                ShowCurationOperationResult("Family composition exported to " + dialog.FileName
+                    + ". The CSV names the denominator and shared-peptide rule; shared and unattributed signal keep their own rows when applicable.");
+            });
         }
 
         private void ComboBoxFullXicBasis_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -682,46 +621,23 @@ namespace FamilyQuant
 
         // ===================================================================== clustering
 
-        private async void ButtonAlignSelected_Click(object sender, RoutedEventArgs e)
+        private async void ButtonAlignSelected_Click(object sender, RoutedEventArgs e) => await AlignSelectedAsync();
+
+        public Task AlignSelectedAsync() => AppOperationHost.OnUi(this, AlignSelectedAsyncCore);
+
+        private async Task AlignSelectedAsyncCore()
         {
-            var selectedItems = DataGridResultGrid.SelectedItems.Cast<FastaItemExtended>().ToList();
-
-            if (selectedItems.Count < 2)
+            var selected = DataGridResultGrid.SelectedItems.OfType<FastaItemExtended>().ToList();
+            if (selected.Count < 2) { ShowCurationOperationResult("Select at least two proteins before aligning their sequences."); return; }
+            string? alignment = null;
+            bool completed = await RunCurationAsync("Align selected proteins", async operation =>
             {
-                MessageBox.Show(
-                    "Nothing was aligned: an alignment needs at least two sequences and " +
-                    selectedItems.Count + " row(s) are selected.\n\n" +
-                    "Next step: open the protein table and select two or more rows, holding Ctrl to " +
-                    "pick them one by one or Shift to take a range.",
-                    "Select at least two proteins", MessageBoxButton.OK, MessageBoxImage.Information);
-                return;
-            }
-
-            try
-            {
-                BeginWait("Aligning " + selectedItems.Count + " selected sequences...");
-
-                // Run USEARCH off the UI thread so a large alignment can't freeze (or appear to hang) the app.
-                string alignment = await Task.Run(() => USearchTools.Align(selectedItems));
-
-                EndWait();
-
-                TextReportWindow.Show(
-                    "Multiple sequence alignment · " + selectedItems.Count + " sequences",
-                    alignment,
-                    Window.GetWindow(this));
-            }
-            catch (Exception ex)
-            {
-                EndWait();
-                MessageBox.Show(
-                    "The selected sequences could not be aligned, and nothing in your file was changed.\n\n" +
-                    "Reason given by the program: " + ex.Message + "\n\n" +
-                    "Next step: this step runs the bundled USEARCH program, which antivirus software " +
-                    "sometimes blocks. Try again with fewer sequences, and if it keeps failing set the " +
-                    "FAMILYQUANT_USEARCH environment variable to a copy of usearch.exe you control.",
-                    "Could not align", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
+                operation.Report("alignment", "Aligning the selected protein sequences");
+                alignment = await ViewModel.AlignAsync(selected, operation);
+                operation.ThrowIfCancellationRequested();
+            });
+            if (completed && alignment != null)
+                TextReportWindow.Show("Multiple sequence alignment", alignment, Window.GetWindow(this));
         }
 
         private async void ButtonWordCluster_Click(object sender, RoutedEventArgs e)
@@ -736,77 +652,27 @@ namespace FamilyQuant
         public System.Net.Http.HttpMessageHandler? FetchDomainsHandlerOverride { get; set; }
 
         /// <summary>Fills every protein's Pfam domains from UniProt. They reach the file on the next save.</summary>
-        private async void ButtonFetchDomains_Click(object sender, RoutedEventArgs e)
+        private async void ButtonFetchDomains_Click(object sender, RoutedEventArgs e) => await FetchProteinEvidenceAsync();
+
+        public Task FetchProteinEvidenceAsync() => AppOperationHost.OnUi(this, FetchProteinEvidenceAsyncCore);
+
+        private async Task FetchProteinEvidenceAsyncCore()
         {
             if (evidenceFetchRunning) return;
-            // Layer 1 can be pressed with a cell of the other tab still open, and a table in edit refuses
-            // the refresh that follows.
-            DataGridResultGrid.CommitEdit(DataGridEditingUnit.Row, true);
             evidenceFetchRunning = true;
-
-            string title = "Fetch evidence";
-            string message;
-            MessageBoxImage icon = MessageBoxImage.Information;
-            bool fetched = false;
-
-            BeginWait("Fetching protein evidence and reviewed references...");
-            IsEnabled = false;
             try
             {
-                var progress = new Progress<Evidence.FetchProgress>(p => Dispatcher.BeginInvoke(new Action(() =>
+                await RunCurationAsync("Fetch evidence", async operation =>
                 {
-                    if (evidenceFetchRunning) WaitScreenMessage.Text = "Fetching evidence: " + p.CompletedBatches + " of " + p.TotalBatches
-                        + " batches or families; " + p.Found.ToString("N0", CultureInfo.CurrentCulture) + " entries received.";
-                })));
-                var outcome = await EvidenceFetchSession.FetchAsync(fcf, FetchDomainsHandlerOverride, progress);
-                Evidence.EvidenceFetchResult result = outcome.Evidence;
-                fetched = outcome.Changed;
-
-                int notFound = result.Asked - result.Found;
-                message = result.Asked == 0
-                    ? "No protein in this file has a UniProt code, so UniProt has nothing to say about them.\n\n" +
-                      "Domains come from UniProt's annotation, so a database of another origin stays without them."
-                    : result.WithDomains.ToString("N0", CultureInfo.CurrentCulture) + " of " +
-                      result.Asked.ToString("N0", CultureInfo.CurrentCulture) + " proteins have Pfam domains in " + result.Source + ".\n\n" +
-                      (notFound > 0 ? notFound.ToString("N0", CultureInfo.CurrentCulture) +
-                                      " of them were not found in UniProt, probably withdrawn or merged entries, and were left as they were.\n\n" : "") +
-                      "They are in the Domains column, the Search box finds them, and the super cluster preview can " +
-                      "choose by them. A protein too short for Pfam has none.\n\n" +
-                      "Next step: save the file to keep them.";
-                if (outcome.Panel != null)
-                    message += "\n\nReviewed reference panel: " + outcome.Panel.Entries.Count.ToString("N0", CultureInfo.CurrentCulture)
-                        + " entries from " + outcome.Panel.Families.Count.ToString("N0", CultureInfo.CurrentCulture)
-                        + " families, " + outcome.Panel.Release + ". It is stored for offline grouping.";
-                if (outcome.PanelFailure != null)
-                {
-                    icon = MessageBoxImage.Warning;
-                    title = result.Asked > 0 ? "Evidence fetched; reference panel unchanged" : "Reference panel unchanged";
-                    message += (result.Asked > 0 ? "\n\nThe protein evidence was fetched, but the reviewed reference panel could not be updated. Reason given: "
-                        : "\n\nThe reviewed reference panel could not be updated. Stored protein evidence is unchanged. Reason given: ")
-                        + outcome.PanelFailure.Message + "\n\nNext step: check the internet connection and press Fetch evidence again.";
-                }
+                    var outcome = await ViewModel.FetchEvidenceAsync(FetchDomainsHandlerOverride, operation);
+                    UpdateFilteredResults();
+                    string title = "Fetch evidence";
+                    ShellMessages.Report(this, CurationViewModel.DescribeEvidenceFetch(outcome), title,
+                        image: outcome.PanelFailure == null ? MessageBoxImage.Information : MessageBoxImage.Warning,
+                        status: SetCurationOperationStatus, showDialog: false);
+                });
             }
-            catch (Exception ex) when (ex is System.Net.Http.HttpRequestException || ex is TaskCanceledException
-                                       || ex is System.Text.Json.JsonException || ex is System.IO.InvalidDataException)
-            {
-                icon = MessageBoxImage.Warning;
-                title = "No domains fetched";
-                message = "No domains were fetched and the file is as it was: UniProt could not be reached or " +
-                          "gave an answer the program could not read.\n\nReason given: " + ex.Message + "\n\n" +
-                          "Next step: check the internet connection and press Fetch evidence again.";
-            }
-            finally
-            {
-                IsEnabled = true;
-                EndWait();
-                evidenceFetchRunning = false;
-            }
-
-            if (fetched) { UpdateFilteredResults(); DocumentChanged?.Invoke(this, EventArgs.Empty); }
-
-            // Only with a person to answer it: in the test harness a modal box hangs the run.
-            if (FetchDomainsHandlerOverride == null && PresentationSource.FromVisual(this) != null)
-                MessageBox.Show(message, title, MessageBoxButton.OK, icon);
+            finally { evidenceFetchRunning = false; }
         }
 
         private async void ButtonSuperCluster_Click(object sender, RoutedEventArgs e)
@@ -816,6 +682,7 @@ namespace FamilyQuant
             if (superClusterRunning) return;
             superClusterRunning = true;
             try { await RunSuperCluster(); }
+            catch (Exception ex) { ShowCurationOperationResult("Keyword grouping could not finish: " + ex.Message); }
             finally { superClusterRunning = false; }
         }
 
@@ -823,13 +690,16 @@ namespace FamilyQuant
 
         private async Task RunSuperCluster()
         {
-            ViewModel.SearchText = TextBoxSearch.Text;
-            var ignored = ReclusterExcludeWords();
-            BeginWait("Reading descriptions for the grouping review..."); IsEnabled = false;
-            SuperClusterPreview preview;
-            try { preview = await Task.Run(() => ViewModel.PrepareKeywordReview(ignored)); }
-            finally { IsEnabled = true; EndWait(); }
-            if (ConfirmSuperCluster(preview)) PerformClustering(preview);
+            SuperClusterPreview? preview = null;
+            bool prepared = await RunCurationAsync("Prepare keyword grouping review", async operation =>
+            {
+                ViewModel.SearchText = TextBoxSearch.Text;
+                var ignored = ReclusterExcludeWords();
+                operation.Report("review", "Reading descriptions for the grouping review");
+                preview = await Task.Run(() => ViewModel.PrepareKeywordReview(ignored), operation.CancellationToken);
+                operation.ThrowIfCancellationRequested();
+            });
+            if (prepared && preview != null && ConfirmSuperCluster(preview)) PerformClustering(preview);
         }
 
         /// <summary>Seam for the suite only, like <see cref="DeNovoControl.ImportOverride"/>: stands in for the
@@ -856,15 +726,15 @@ namespace FamilyQuant
 
         private async Task PerformClustering(double threshold, List<string> wordsToExclude)
         {
-            ViewModel.SearchText = TextBoxSearch.Text;
-            BeginWait("Grouping families by description words..."); IsEnabled = false;
-            try
+            await RunCurationAsync("Group by description words", async operation =>
             {
-                string message = await ViewModel.ReclusterByWordsAsync(threshold, wordsToExclude);
+                ViewModel.SearchText = TextBoxSearch.Text;
+                operation.Report("grouping", "Reading the description words");
+                string message = await ViewModel.ReclusterByWordsAsync(threshold, wordsToExclude,
+                    operation.CancellationToken, operation.Commit);
+                operation.Report("grouping", "Refreshing the family shares");
                 AfterRegrouping(); ShowCurationOperationResult(message);
-            }
-            catch (Exception ex) { ShowCurationOperationResult("Grouping could not finish: " + ex.Message); }
-            finally { IsEnabled = true; EndWait(); }
+            });
         }
 
         /// <summary>Carries out what the preview showed: the listed proteins move, and nothing is matched again,
@@ -872,9 +742,13 @@ namespace FamilyQuant
         /// afterwards, so there is none.</summary>
         private void PerformClustering(SuperClusterPreview preview)
         {
-            ViewModel.ApplyKeywordReview(preview);
-            AfterRegrouping();
-            ShowCurationOperationResult("Keyword grouping applied. Undo restores the previous families.");
+            BeginWait("Apply keyword grouping");
+            try
+            {
+                CurationOperation.Commit(() => { ViewModel.ApplyKeywordReview(preview); AfterRegrouping(); });
+                ShowCurationOperationResult("Keyword grouping applied. Undo restores the previous families.");
+            }
+            finally { EndWait(); }
         }
 
         /// <summary>
@@ -915,7 +789,7 @@ namespace FamilyQuant
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(
+                    ShowCurationMessage(
                         "The families were regrouped, but their percentages could not be recalculated, so " +
                         "the share column still holds the numbers from the previous grouping and must " +
                         "not be read.\n\n" +

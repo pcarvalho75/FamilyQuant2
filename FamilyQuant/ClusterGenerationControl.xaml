@@ -9,29 +9,7 @@
              xmlns:numeric="clr-namespace:FamilyQuant"
              mc:Ignorable="d" FontSize="{DynamicResource BodySize}"
              d:DesignHeight="450" d:DesignWidth="1024">
-    <UserControl.Resources>
-
-        <!-- The state badge on each Layer header. One style, so "READY" looks the same everywhere and a
-             blocked Layer cannot be mistaken for a ready one. -->
-        <Style x:Key="LayerBadge" TargetType="Border">
-            <Setter Property="CornerRadius" Value="3"/>
-            <Setter Property="Padding" Value="7,1"/>
-            <Setter Property="Margin" Value="10,0,0,0"/>
-            <Setter Property="VerticalAlignment" Value="Center"/>
-        </Style>
-
-        <Style x:Key="LayerBadgeText" TargetType="TextBlock">
-            <Setter Property="FontSize" Value="10"/>
-            <Setter Property="FontWeight" Value="Bold"/>
-            <Setter Property="Foreground" Value="{DynamicResource TextBrush}"/>
-        </Style>
-
-        <Style x:Key="LayerTitle" TargetType="TextBlock" BasedOn="{StaticResource SectionTitle}">
-            <Setter Property="VerticalAlignment" Value="Center"/>
-        </Style>
-
-        <local:AccessionTextConverter x:Key="AccessionText"/>
-    </UserControl.Resources>
+    <UserControl.Resources><local:AccessionTextConverter x:Key="AccessionText"/></UserControl.Resources>
 
     <Grid Background="{DynamicResource CanvasBrush}" Margin="12">
         <Grid.ColumnDefinitions><ColumnDefinition/><ColumnDefinition Width="12"/><ColumnDefinition Width="360"/></Grid.ColumnDefinitions>
@@ -40,8 +18,12 @@
                 <TextBlock Text="Proteins" Style="{StaticResource PageTitle}" DockPanel.Dock="Left"/>
                 <Label x:Name="LabelNumberOfGroups" HorizontalAlignment="Right" ToolTip="Visible families and families in the file. Display filters never change the saved grouping or percentages."/>
             </DockPanel>
-            <TextBox Grid.Row="1" x:Name="TextBoxSearch" KeyUp="TextBoxSearch_KeyUp" Margin="0,0,0,10"
-                     ToolTip="Filter by accession, description or domain, using commas between alternatives. Filtering never changes a percentage."/>
+            <DockPanel Grid.Row="1" Margin="0,0,0,10">
+                <Label Content="Search" Target="{Binding ElementName=TextBoxSearch}" VerticalAlignment="Center" Margin="0,0,8,0"
+                       ToolTip="Filter the protein table without changing the stored families or shares."/>
+                <TextBox x:Name="TextBoxSearch" KeyUp="TextBoxSearch_KeyUp" AutomationProperties.Name="Search proteins"
+                         ToolTip="Filter by accession, description or domain, using commas between alternatives. Filtering never changes a percentage."/>
+            </DockPanel>
 <DataGrid Grid.Row="2" x:Name="DataGridResultGrid" AutoGenerateColumns="False" LoadingRow="DataGridResultGrid_LoadingRow" ClipToBounds="True"
                           CanUserAddRows="False" CanUserDeleteRows="False"
                           CellEditEnding="DataGridResultGrid_CellEditEnding"
@@ -57,7 +39,7 @@
                                             Header="Locus" Width="120" MinWidth="120" theme:TableAppearance.FullTextPath="SequenceIdentifier"
                                             Binding="{Binding Path=SequenceIdentifier, Converter={StaticResource AccessionText}}"/>
                         <DataGridTextColumn x:Name="ColumnDescription" CanUserReorder="True" IsReadOnly="True" CanUserResize="True" CanUserSort="True"
-                                            Header="Description" Width="*" MinWidth="120" Binding="{Binding Path=Description}"/>
+                                            Header="Description" Width="*" MinWidth="220" Binding="{Binding Path=Description}"/>
                         <DataGridTextColumn x:Name="ColumnFullXic" CanUserReorder="True" IsReadOnly="True" CanUserResize="True" CanUserSort="True"
                                             SortMemberPath="FullXicShare"
                                             Header="Full XIC share" Width="170" MinWidth="170" Binding="{Binding Path=FullXicShare, StringFormat=P3}"/>
@@ -174,16 +156,5 @@
             </StackPanel>
         </ScrollViewer>
 
-<Grid x:Name="WaitScreen" Grid.ColumnSpan="3" Background="{DynamicResource OverlayBrush}" Visibility="Collapsed">
-            <Border Background="{DynamicResource SurfaceBrush}" CornerRadius="10" Padding="30" HorizontalAlignment="Center" VerticalAlignment="Center"
-                    BorderBrush="{DynamicResource EdgeBrush}" BorderThickness="2">
-                <StackPanel>
-                    <TextBlock Text="Processing..." Foreground="{DynamicResource TextBrush}" FontSize="24" FontWeight="Bold" HorizontalAlignment="Center"/>
-                    <ProgressBar IsIndeterminate="True" Width="300" Height="20" Margin="0,15,0,10"/>
-                    <TextBlock x:Name="WaitScreenMessage" Text="Please wait..." Foreground="{DynamicResource MutedBrush}" FontSize="14"
-                               HorizontalAlignment="Center" TextAlignment="Center" TextWrapping="Wrap" MaxWidth="300"/>
-                </StackPanel>
-            </Border>
-        </Grid>
     </Grid>
 </UserControl>
