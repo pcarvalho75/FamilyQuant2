@@ -90,7 +90,6 @@ Columns: Diff = L, M, H, VH. Hrs = worker hours at measured speed: estimates are
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| Y3 | Five source captions get their filename patterns and Union prefixes back | L | 0.2 | 🟢 | R3a | Five facts shown in both themes | EV | not started | 0% | 0% | T+0 |
 
 ### W3 Ledger, screen by screen
 
@@ -103,14 +102,12 @@ Columns: Diff = L, M, H, VH. Hrs = worker hours at measured speed: estimates are
 | N6e | Main window: routes, dialogs and messages (158 rows) | M | 1 | 🟢 | N6p | Each row proved or on the wording list | SH | not started | 0% | 0% | T+1 |
 | N6f | Curation code (302 rows) | H | 1 | 🟢 | N6p | Each row proved or on the wording list | SH | not started | 0% | 0% | T+2 |
 | N6g | Curation screen (147 rows) | M | 0.5 | 🟢 | N6p | Each row proved or on the wording list | SH | not started | 0% | 0% | T+2 |
-| N6h | USearch window (224 rows) | M | 1 | 🟢 | N6p | Each row proved or on the wording list | AS | not started | 0% | 0% | T+2 |
-| N6i | Spectrum window (195 rows, 130 of them waiting on the producer fix) | M | 0.5 | 🟢 | N6p | Each row proved or on the wording list | AS | not started | 0% | 0% | T+0 |
-| N6j | Deck producers: the last five rows | L | 0.1 | 🟢 | N6p | Each row proved or on the wording list | AS | not started | 0% | 0% | T+2 |
+| N6h | USearch window (224 rows) | M | 1 | 🟢 | N6p | Each row proved or on the wording list | AS | not started | 0% | 0% | T+1 |
+| N6j | Deck producers: the last five rows | L | 0.1 | 🟢 | N6p | Each row proved or on the wording list | AS | not started | 0% | 0% | T+1 |
 | N6k | Compute window (79 rows) | M | 0.5 | 🟢 | N6p | Each row proved or on the wording list | FL | not started | 0% | 0% | T+0 |
 | N6l | Preview, lock and identity windows (71 rows) | M | 0.5 | 🟢 | N6p | Each row proved or on the wording list | FL | not started | 0% | 0% | T+1 |
-| N6n | Help gaps (88 rows) | M | 0.5 | 🟢 | N6p | Each row proved or on the wording list | LK | not started | 0% | 0% | T+0 |
 | N6o | Report and CSV facts (19 rows) | L | 0.2 | 🟢 | N6p | Each row proved or on the wording list | SH | not started | 0% | 0% | T+3 |
-| N6p | Wording list assembled for Paulo: rows that changed on purpose, with old and new text | L | 0.2 | N6c, N6d, N6e, N6g, N6h, N6i, N6j, N6k, N6l, N6n, N6o | N6q | List grouped by reason | Orchestrator | not started | 0% | 0% | T+3 |
+| N6p | Wording list assembled for Paulo: rows that changed on purpose, with old and new text | L | 0.2 | N6c, N6d, N6e, N6g, N6h, N6j, N6k, N6l, N6o | N6q | List grouped by reason | Orchestrator | not started | 0% | 0% | T+3 |
 | N6q | Paulo rules on the wording list in one pass | L | 0 | N6p | N6r | Paulo's ruling recorded | Paulo | not started | 0% | 0% | T+3 |
 | N6r | Reviewer's 200-row random sample across the whole ledger | M | 0.3 | N6b, N6q | N6s | GR's verdict; one failure reopens the kind | GR | not started | 0% | 0% | T+3 |
 | N6s | Release check passes | L | 0.1 | N6r | R3a | `--feature-ledger-release-check` passes | Orchestrator | not started | 0% | 0% | T+3 |
@@ -119,8 +116,8 @@ Columns: Diff = L, M, H, VH. Hrs = worker hours at measured speed: estimates are
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| C14a | Scaling at 100, 125 and 150% | L | 0.2 | 🟢 | C14e | Harness renders at each scale | LK | not started | 0% | 0% | T+1 |
-| C14b | Smallest window | L | 0.2 | 🟢 | C14e | Every screen usable at the smallest size | LK | not started | 0% | 0% | T+1 |
+| C14a | Scaling at 100, 125 and 150% | L | 0.2 | 🟢 | C14e | Harness renders at each scale | LK | not started | 0% | 0% | T+0 |
+| C14b | Smallest window | L | 0.2 | 🟢 | C14e | Every screen usable at the smallest size | LK | not started | 0% | 0% | T+0 |
 | C14c | Tab order and visible focus | L | 0.2 | 🟢 | C14e | Whole flow by keyboard | LK | not started | 0% | 0% | T+1 |
 | C14d | Both themes, every screen | L | 0.2 | 🟢 | C14e | Renders inspected | LK | not started | 0% | 0% | T+1 |
 | C14e | Paulo's final look sign-off | L | 0 | C14a, C14b, C14c, C14d | R3a | Paulo's word | Paulo | not started | 0% | 0% | T+3 |
@@ -129,7 +126,7 @@ Columns: Diff = L, M, H, VH. Hrs = worker hours at measured speed: estimates are
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| R3a | Code freeze: only review findings touch product code after this | L | 0 | N6s, C14e, B8c, B10e, Y3 | R3b | Freeze noted; all lanes told | Orchestrator | not started | 0% | 0% | T+3 |
+| R3a | Code freeze: only review findings touch product code after this | L | 0 | N6s, C14e, B8c, B10e | R3b | Freeze noted; all lanes told | Orchestrator | not started | 0% | 0% | T+3 |
 | R3b | Final proof refresh and full suite on the frozen code | L | 0.2 | R3a | R3c | Every proof current; suite green | Orchestrator | not started | 0% | 0% | T+4 |
 | R3c | Release candidate: versions, build and a clean install rehearsal | M | 0.3 | R3b | R4a, R4b | Rehearsal installs beside 1.5 and opens her file | Orchestrator | not started | 0% | 0% | T+4 |
 | R4a | Final adversarial pass: code and behaviour | H | 1 | R3c | R4c | GR's verdict | GR | not started | 0% | 0% | T+5 |

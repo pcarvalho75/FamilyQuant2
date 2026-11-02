@@ -161,10 +161,13 @@ Finished steps, moved here from docs/ROADMAP.md. The board shows them as green.
 | Y2 | Compute window Close restored, with the same result to a modal caller | L | 0.1 | 🟢 | R3a | Native regression red, then green | FL | not started | 0% | 0% | T+0 |
 | Y4 | Homology tooltip gets its output-row fact back | L | 0.2 | 🟢 | R3a | Fact shown; two sentences at most | RS | not started | 0% | 0% | T+2 |
 | Y5 | No organism or venom wording in anything the user sees, with a guard | L | 0.3 | 🟢 | R3a | Guard red on a planted word; facts kept | LK | not started | 0% | 0% | T+0 |
+| Y3 | Five source captions get their filename patterns and Union prefixes back | L | 0.2 | 🟢 | R3a | Five facts shown in both themes | EV | not started | 0% | 0% | T+0 |
 
 ### W3 Ledger, screen by screen
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
 | N6m | Home and App (73 rows) | M | 0.5 | 🟢 | N6p | Each row proved or on the wording list | LK | not started | 0% | 0% | T+1 |
+| N6i | Spectrum window (195 rows, 130 of them waiting on the producer fix) | M | 0.5 | 🟢 | N6p | Each row proved or on the wording list | AS | not started | 0% | 0% | T+0 |
+| N6n | Help gaps (88 rows) | M | 0.5 | 🟢 | N6p | Each row proved or on the wording list | LK | not started | 0% | 0% | T+0 |
 
