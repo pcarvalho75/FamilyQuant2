@@ -29,6 +29,8 @@ namespace FamilyQuant
             Loaded += async (_, _) => await DiscoverInitialTaskAsync();
             Closed += (_, _) => model.CancelPending();
             DataContext = model;
+            AppOperationHost.SetScope(this, Operations);
+            BusyOverlay.AttachWindow(this, Operations);
             model.Keyword.Refreshing += (_, _) => sorts = grid.Items.SortDescriptions.ToList();
             model.Keyword.Refreshed += (_, _) => Dispatcher.BeginInvoke(DispatcherPriority.DataBind, new Action(RestoreSort));
             GridCopy.Attach(grid, row => (row as SuperClusterPreviewProtein)?.Locus, row => (row as SuperClusterPreviewProtein)?.Description);
@@ -41,13 +43,13 @@ namespace FamilyQuant
         private async Task DiscoverInitialTaskAsync()
         {
             if (model.ModeIndex == 1 && model.TaskDiscoveryAvailable && !model.HasTaskScope)
-                await model.DiscoverTaskAsync();
+                await RunReviewAsync("Read grouping task", model.DiscoverTaskAsync);
         }
         private async void ReviewModeChanged(object sender, SelectionChangedEventArgs e)
         {
             if (IsLoaded && ReferenceEquals(e.OriginalSource, sender)) await DiscoverInitialTaskAsync();
         }
-        private async void DiscoverTask_Click(object sender, RoutedEventArgs e) => await model.DiscoverTaskAsync();
+        private async void DiscoverTask_Click(object sender, RoutedEventArgs e) => await RunReviewAsync("Read grouping task", model.DiscoverTaskAsync);
         private void RestoreSort()
         {
             grid.Items.SortDescriptions.Clear();
@@ -68,8 +70,8 @@ namespace FamilyQuant
         private void AllEvidenceProteins_Click(object sender, RoutedEventArgs e) { if (model.Evidence != null) model.Evidence.SelectedFamily = null; }
         private void EvidenceTickSelected_Click(object sender, RoutedEventArgs e) => model.Evidence?.SetSelected(evidenceGrid.SelectedItems.Cast<ReviewProteinRow>().ToArray(), true);
         private void EvidenceUntickSelected_Click(object sender, RoutedEventArgs e) => model.Evidence?.SetSelected(evidenceGrid.SelectedItems.Cast<ReviewProteinRow>().ToArray(), false);
-        private async void UpdateProposal_Click(object sender, RoutedEventArgs e) => await model.UpdateProposalAsync();
-        private async void Motif_Click(object sender, RoutedEventArgs e) => await model.CheckMotifAsync();
+        private async void UpdateProposal_Click(object sender, RoutedEventArgs e) => await RunReviewAsync("Update grouping proposal", model.UpdateProposalAsync);
+        private async void Motif_Click(object sender, RoutedEventArgs e) => await RunReviewAsync("Count motif", model.CheckMotifAsync);
         private void Create_Click(object sender, RoutedEventArgs e)
         {
             familyGrid.CommitEdit(DataGridEditingUnit.Cell, true); familyGrid.CommitEdit(DataGridEditingUnit.Row, true);
