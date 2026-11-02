@@ -30,7 +30,7 @@ Version 2 closed 56 steps and the H1 cooldown: the evidence engine, the new shel
 
 ## The team
 
-This team is exclusive to FamilyQuant: six Sol workers, one Opus worker, Grok as reviewer and Gemini back when its quota returns, sharing no workers, folders or tools with Project Orion.
+This team is exclusive to FamilyQuant: six Sol workers, one Opus worker, Grok and Kimi as reviewers, and Gemini back when its quota returns, sharing no workers, folders or tools with Project Orion.
 
 | Name | Engine | Role | Worktree | Branch |
 |---|---|---|---|---|
@@ -40,9 +40,10 @@ This team is exclusive to FamilyQuant: six Sol workers, one Opus worker, Grok as
 | FQShell (SH) | Sol 6.1 xhigh | Busy overlay, shell messages, closing the feature ledger | `D:/FamilyQuant-wt/shell` | `fq/shell` |
 | FQAssay (AS) | Sol 6.1 xhigh | Dependencies, clustering, de novo tidy, improvements, documents | `D:/FamilyQuant-wt/assay` | `fq/assay` |
 | FQResults (RS) | Sol 6.1 xhigh | Charts, quantitation panel, figures, family-world results | `C:/FamilyQuant-wt2/results` | `fq/results` |
-| FQOpus (OP) | Opus 5.5 xhigh | The gate experiment and the second attribution pass. Second reviewer of others' work until FQArgon returns | `D:/FamilyQuant-wt/opus` | `fq/opus` |
+| FQOpus (OP) | Opus 5.5 xhigh | The gate experiment and the second attribution pass | `D:/FamilyQuant-wt/opus` | `fq/opus` |
 | FQFloater (FL) | Sol 6.1 xhigh | Floater: quantitation pipeline, project formats, then whatever waits longest | `C:/FamilyQuant-wt2/floater` | `fq/floater` |
-| FQReview (GR) | Grok 4.7 xhigh | Main reviewer, code and science, with FQOpus second, and owns B2, A2, B8 and R4. Never edits product code. | `D:/FamilyQuant-wt/review` | detached |
+| FQReview (GR) | Grok 4.7 xhigh | Main reviewer, keeps every B, A and N step, and owns B2, A2, B8 and R4. Never edits product code. | `D:/FamilyQuant-wt/review` | detached |
+| FQKimi (KM) | Kimi | Second reviewer of everything else, in batches of at most 8, one instance, no subagents, at most 15 calls in 5 hours. Never edits product code. | `D:/FamilyQuant-wt/kimi` | detached |
 | FQArgon (AR) | Gemini 4 Argon high | Reviews steps in turn with FQReview. Out of quota until about 2026-11-07. | `D:/FamilyQuant-wt/argon` | detached |
 | FQFable | Fable 5.1 xhigh | Architect, only on Paulo's request, in short sessions. Not in the queues. | `C:/FamilyQuant-wt2/fable` | `fable/vision` |
 
@@ -72,7 +73,7 @@ Flow of one step: owner posts `READY <step> <commit>`; the orchestrator assigns 
 
 ## Workstreams
 
-Columns: Diff = L, M, H, VH. Hrs = worker hours at measured speed: the 56 steps of version 2 were estimated at 155 hours and took at most about 41 worker hours (6.8 hours on the clock, at most six builders), so every estimate here is divided by 4. Blocked by: 🟢 = open now. ETA = hours after the restart in that worker's queue, never a promise. Prog = my estimate of work done. Cred = counted only after approval and merge. EV, LK, AS, SH, RS, OP, FL, GR and AR are the workers above.
+Columns: Diff = L, M, H, VH. Hrs = worker hours at measured speed: the 56 steps of version 2 were estimated at 155 hours and took at most about 41 worker hours (6.8 hours on the clock, at most six builders), so every estimate here is divided by 4. Blocked by: 🟢 = open now. ETA = hours after the restart in that worker's queue, never a promise. Prog = my estimate of work done. Cred = counted only after approval and merge. EV, LK, AS, SH, RS, OP, FL, GR, KM and AR are the workers above.
 
 ### W0 Foundation and the new project
 
@@ -193,7 +194,7 @@ Paulo agreed these at the restart, 2026-11-01.
 | The claim is not new | B2 finds the same method published | Say so plainly, cite it, and keep what is still ours: the automatic flow and the gap ranking |
 | The clade fetch is too large | B4 measures a project size or fetch time Ana cannot use | Fetch only the families found in scope. Report the size |
 | Two steps collide in `FamilyEnvelopeQuant` | B5 starts before X5 merges | B5 waits. X5 leaves the seam |
-| Too few reviewers | FQArgon stays out of quota and FQOpus is building | The orchestrator tells Paulo the same hour. A step never goes to its own author |
+| Kimi runs out of quota | A Kimi call returns 403 or a limit | FQOpus takes reviews again until a short test call succeeds. The orchestrator tells Paulo the same hour. A step never goes to its own author |
 | A rewrite loses a function | A ledger row has no check, or a user finds a gap | No release passes; the row goes back to the step that dropped it |
 | A rewrite moves a number | Golden check red | No merge; the step goes back to its owner, or follows rule 4 if the change is meant |
 | Ana needs 1.5 while 2.0 is unfinished | She asks | 1.5 stays installed and untouched, and `.fcf` export (X7) carries her work back |
