@@ -53,7 +53,7 @@ Flow of one step: owner posts `READY <step> <commit>`; the orchestrator assigns 
 |---|---|---|
 | `FamilyQuant.Core` | Everything without WPF: families, clustering, grouping, evidence, quantitation, de novo, homology, project files | No WPF, no message boxes, reports progress and accepts cancel |
 | `FamilyQuant.App` | WPF screens, each a thin view over a tested view model; assembly `FamilyQuant2` | No science in the UI |
-| `FamilyQuant.Reports` | Paper and talk figures, a separate tool reading a `.fqproj`. Planned, X9 | Never in the installed app |
+| `FamilyQuant.Reports` | Paper and talk figure code no screen calls, a separate tool reading a `.fqproj`. Only if X9 finds enough to move | Never in the installed app |
 | `FamilyQuant.Tests` | The suite, split by area | Runs headless |
 
 ## Design rules for the new look (hard requirements)
@@ -92,7 +92,6 @@ Columns: Diff = L, M, H, VH. Hrs = worker hours at measured speed: the 56 steps 
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| V5 | Emoji out, Segoe Fluent Icons in | L | 0.5 | 🟢 | C1, all screens | Suite check fails on an emoji in UI text | LK | not started | 0% | 0% | T+0 |
 | V6 | Charts follow the tokens in both themes; `ChartPalette` stays the one source; pinned contrast checks kept | M | 1 | 🟢 | V3, B7, C14 | Contrast check passes; exported PNGs unchanged in the Light palette | RS | not started | 0% | 0% | T+1 |
 | V3 | Zero hard-coded colours: a suite check fails on any colour outside tokens and the chart palette. Each rebuilt screen must pass it; this row closes when the last one does | H | 0.5 | C1, C5 | C14 | Guard red on a planted colour; 0 sites left; golden equal | LK | not started | 0% | 0% | T+5 |
 
@@ -108,11 +107,12 @@ Columns: Diff = L, M, H, VH. Hrs = worker hours at measured speed: the 56 steps 
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| C3 | Keyword boxes only in that window: one "Group by keywords" command on the screen | L | 0.5 | 🟢 | C1 | Three duplicate inputs gone; suite re-pointed | LK | not started | 0% | 0% | T+1 |
-| C1 | Curation rebuilt: table always in view, actions in a side panel, no Controls and Data Browser tabs, no "Layer" words. USearch ID column hidden by default, data kept. Decoys hidden by default; Locus shows the accession. Long operations use the S6 host. `ClusterGenerationControl` (1,978 lines) replaced by a view model and a thin view | VH | 2 | C3, V5, S6 | C2, C5, V3, C13 | Pressing any action shows its result without changing view; every ledger row of the screen checked; golden equal | LK | not started | 0% | 0% | T+3 |
+| C3 | Keyword boxes only in that window: one "Group by keywords" command on the screen | L | 0.5 | 🟢 | C1 | Three duplicate inputs gone; suite re-pointed | LK | not started | 0% | 0% | T+0 |
+| C1 | Curation rebuilt: table always in view, actions in a side panel, no Controls and Data Browser tabs, no "Layer" words. USearch ID column hidden by default, data kept. Decoys hidden by default; Locus shows the accession. Long operations use the S6 host. `ClusterGenerationControl` (1,978 lines) replaced by a view model and a thin view | VH | 2 | C3, S6 | C2, C5, V3, C13 | Pressing any action shows its result without changing view; every ledger row of the screen checked; golden equal | LK | not started | 0% | 0% | T+3 |
 | C2 | Family view: a table of families (name, proteins, shares, lock) with the proteins of the selected family beside it | H | 1.5 | C1 | N6, R2 | Selection, edit, lock and undo work on both tables; 39,996 families smooth | LK | not started | 0% | 0% | T+4 |
 | C5 | Quantitation panel: Layers 2 and 3 merged; Full XIC first, PatternLab as a secondary source, options shown only when they apply | M | 1 | C1 | V3, C13, R2 | Every option kept; golden equal | RS | not started | 0% | 0% | T+4 |
 | C13 | Wording pass: labels, tooltips (one or two sentences) and Help match the new screens | M | 1 | C1, C5 | N6, C14 | Suite's tooltip checks green; no old screen named anywhere | LK | not started | 0% | 0% | T+6 |
+| C15 | The review window's architecture split works per group: each group has its own tick, so one group can leave while the rest of the family stays whole. Core already takes a choice per group | L | 0.5 | 🟢 | R2 | Ticking only the disintegrin-alone group keeps the rest together; recipe replay exact | RS | not started | 0% | 0% | T+2 |
 | C14 | Finish: 100, 125 and 150% scaling, smallest window, Tab order, focus visible, both themes | M | 0.5 | C13, V3, V6, N6, S8 | R2 | Harness renders at each scale; Paulo's final look sign-off | LK | not started | 0% | 0% | T+8 |
 
 ### W6 Core rewrite: copy what is good, rewrite what is better
@@ -122,7 +122,7 @@ Columns: Diff = L, M, H, VH. Hrs = worker hours at measured speed: the 56 steps 
 | X5 | Quantitation pipeline: `FullXicComputer` (997) and `FamilyEnvelopeQuant` (968) restructured into stages with clear inputs and outputs, leaving one clean seam for the second attribution pass (B5). The studies Compute calls stay and get their own folder | VH | 1.5 | 🟢 | B5, X12, R3 | Golden equal on the full project; every invariant in the guide has a test; run time not worse | OP | not started | 0% | 0% | T+3 |
 | X6 | De novo engine tidy: readers, reconciler and table builders, with the logic left in `DeNovoControl` moved into Core | H | 1 | 🟢 | R3 | Golden equal; real-data de novo sections green | AS | not started | 0% | 0% | T+4 |
 | X7 | Project and file formats: `ProjectStore` (1,083) split, schema versioned, and an `.fcf` export the frozen 1.5.0.6 opens | H | 1 | 🟢 | R2 | A file written by 2.0 opens in the reference build with the same families; old `.fqproj` rules kept | EV | not started | 0% | 0% | T+4 |
-| X9 | Paper and talk figures (`PresentationFigures`, `PresentationEvidencePack`, 3,703 lines) move to `FamilyQuant.Reports`, a separate tool reading a `.fqproj`, with the chart findings kept in `docs/housekeeping/H1-NOTES.md`. De novo study files go too, but only those no screen calls: some are called from the app project today, so check each one first | H | 1 | 🟢 | R3 | Same evidence pack, byte for byte, from the tool; not in the ClickOnce payload; no screen lost a function | RS | not started | 0% | 0% | T+2 |
+| X9 | Move paper and talk figure code out of the installed app, but only code no screen calls. The Results screen calls `PresentationEvidencePack`, so that stays. Audit first, keeping the chart findings in `docs/housekeeping/H1-NOTES.md`; if little remains, close it small without a `FamilyQuant.Reports` project | H | 1 | 🟢 | R3 | Same evidence pack from the app, byte for byte except the existing `generatedUtc` field; no screen lost a function; what moved or stayed is listed | RS | not started | 0% | 0% | T+3 |
 | X11 | Dependencies: `Extended.Wpf.Toolkit` (6 uses), `Newtonsoft.Json` (3 files, the rest is `System.Text.Json`), `OpenMcdf` (no reference in this repo), `LiteDB`. Each goes only if a real RAW and `.xic2` still open | M | 1 | 🟢 | R3 | Publish rehearsal runs; real files open | AS | not started | 0% | 0% | T+1 |
 | X12 | Improvements found on the way, listed in `docs/IMPROVEMENTS.md` with before and after. Known candidates: the fast clustering pass has no coverage gate (20.1% of its joins, 2,329 of 11,584, fail the second pass's gate); the decoy mixing score cannot see over-merging, so use identified peptides to test the grouping (a peptide identical in two identity families is evidence they are one); the evidence family as a veto on single-linkage merges; one contaminant rule (D5). Anything that changes a number goes to Paulo first | H | 1 | X5 | X13, R3 | Each change measured on real data; science review; golden snapshot updated only by Paulo's word | AS | not started | 0% | 0% | T+4 |
 | X13 | Documents: `CLAUDE.md` from 50 KB to a working guide, history to `docs/HISTORY.md`, talk documents out of the root, release notes for 2.0. `SCIENTIFIC_METHOD.md` gains the rule that an unannotated protein joins only through an in-scope neighbour, which the code has and the document lacks. The three test files over 1,000 lines split with no check lost; `dotnet format` differences cleared | L | 1 | X12 | R3 | No fact lost, no line over 300 characters; suite count unchanged; `dotnet format --verify-no-changes` clean | AS | not started | 0% | 0% | T+6 |
@@ -133,7 +133,7 @@ Columns: Diff = L, M, H, VH. Hrs = worker hours at measured speed: the 56 steps 
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| R2 | 2.0 preview 2: new look and shell | M | 0.5 | C2, C5, S6, X7, C14 | R3 | Same, plus Paulo's sign-off on renders, and a published update reaches an installed 2.0 | Orchestrator | not started | 0% | 0% | T+8 |
+| R2 | 2.0 preview 2: new look and shell | M | 0.5 | C2, C5, S6, X7, C14, C15 | R3 | Same, plus Paulo's sign-off on renders, and a published update reaches an installed 2.0 | Orchestrator | not started | 0% | 0% | T+8 |
 | R3 | 2.0 release candidate: rewrite finished, every ledger row closed, the family world in if B1 passed | M | 0.5 | R2, B8, X5, X6, X9, X11, X12, X13, X14, X15 | R4 | Same, plus the ledger check | Orchestrator | not started | 0% | 0% | T+9 |
 | R4 | Final adversarial pass on the whole product | H | 1 | R3 | R5 | GR's verdict; all findings closed | GR | not started | 0% | 0% | T+10 |
 | R5 | FamilyQuant 2.0 final, then the archive of this roadmap | L | 0.5 | R4 | Done | Paulo publishes | Orchestrator | not started | 0% | 0% | T+10 |

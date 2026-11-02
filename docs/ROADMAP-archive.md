@@ -62,6 +62,7 @@ Finished steps, moved here from docs/ROADMAP.md. The board shows them as green.
 | L1 | New logo, Paulo's choice on 2026-11-01: Grok 3, three bars in a rounded tile with the centre bar marked, source in `D:/FamilyQuant-data/logos/chosen`. Redraw it as clean vector, transparent background, working on dark and light; produce PNG sizes, a multi-size `.ico` for the app, window and installer, and the start page image. The DNA logo goes from 2.0 | M | 2 | V2 | S4, R1 | Reads at 16, 32 and 256 pixels on dark and light; app, taskbar and installer show it; name spelled FamilyQuant | LK | not started | 0% | 0% | T+14 |
 | V7 | Type scale, spacing and copy rules applied to shared styles; sentence case; one primary button per panel | M | 2 | V2 | V4, all screens | Renders checked against design rules 1 to 7 | LK | not started | 0% | 0% | T+2 |
 | V4 | Table style for all grids: rows, header, hover, selection, numbers right-aligned, cut-off text shown in a tooltip | M | 3 | V7 | C1, C2, C4 | Renders in both themes at both sizes; header readable | LK | not started | 0% | 0% | T+5 |
+| V5 | Emoji out, Segoe Fluent Icons in | L | 0.5 | 🟢 | C1, all screens | Suite check fails on an emoji in UI text | LK | not started | 0% | 0% | T+0 |
 
 ### W4 Shell
 
