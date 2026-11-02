@@ -53,3 +53,25 @@ FamilyQuant.Tests.exe --feature-ledger-evidence-import <generated-register> <fre
 
 The fixtures establish text/declaration preservation. They are not fresh RAW
 validation, an Ana-file reproduction, DPI verification or installed-product proof.
+
+## Fixed-cohort refresh
+
+The gate refreshes existing LK receipts without an OPEN-row audit or hand work:
+
+```text
+FamilyQuant.Tests.exe --refresh-look-registers D:/FamilyQuant-data/out-shell/N3/source <fresh-output> <timestamp-from-date>
+FamilyQuant.Tests.exe --test-look-refresh-cohort
+```
+
+The first command reads the current tree's `LK-copy-1`, `LK-copy-next-1`,
+`LK-copy-next-2`, `LK-copy-next-3` and `LK-style-roles` registers. It snapshots
+those inputs, re-executes the original native copy/style comparisons for their
+fixed frozen IDs, and checks that each result retains exactly the same ordered
+rows and register name. A valid or stale receipt and a changed ledger state cannot
+remove a row from refresh. No new cohort is selected from an OPEN-row audit.
+
+All five regenerated JSON files appear directly in the fresh output directory.
+Their native logs, source snapshots, input registers and compiled artifacts stay
+under `runs/`. The command does not import or edit the ledger. The gate imports
+its outputs with `--replace-existing`. Changed wording and other unsupported
+observations remain present without a preservation proof.

@@ -1,0 +1,2089 @@
+{
+  "schemaVersion": 1,
+  "step": "AS-spectrum-details",
+  "frozenCommit": "e9b73064d8ff19b2fde3e3231240b636a64c0a91",
+  "runs": [
+    {
+      "id": "native",
+      "command": "D:\\FamilyQuant-wt\\assay\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --ledger-assay-spectrum-details D:/FamilyQuant-data/out-shell/N3/source D:/FamilyQuant-data/out-assay/m72-spectrum-details-2 \u00222026-11-02 09:10:19 -0800\u0022",
+      "executedAt": "2026-11-02 09:10:19 -0800",
+      "commit": "809abcb7d2939624f557e42a1cb393102a6b0556",
+      "artifacts": [
+        {
+          "path": "D:\\FamilyQuant-data\\out-assay\\m72-spectrum-details-2\\proofs.log",
+          "sha256": "179956653EF390C95855BF22106FD0C137A0F22353AE8CC0F4A56497A87E223C"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-assay\\m72-spectrum-details-2\\actual-values.json",
+          "sha256": "CE96DEDFAC1EEF051F5159E0A9B539B2DE134F0D346AEF160DDBAAD7B3E0DD90"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-assay\\m72-spectrum-details-2\\executed\\FamilyQuant.Tests/AssayCacheSnapshot.cs",
+          "sha256": "9E0CD15CD1616F7A312E6A14209E745CF8C4ADB6EEF1A3D6125690A9602CCC1B"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-assay\\m72-spectrum-details-2\\executed\\FamilyQuant.Tests/AssaySpectrumDetailComparison.cs",
+          "sha256": "7DB7751662A4457DA7CD8C88A78C17EFDD9F2967DBC6E87ACD001FBBCC4CE05E"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-assay\\m72-spectrum-details-2\\executed\\FamilyQuant.Tests/AssaySpectrumPropertyComparison.cs",
+          "sha256": "157C955F947789AA5BA5759EA3B37D762EA6A5E693AB49345BDE540C420CC036"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-assay\\m72-spectrum-details-2\\executed\\FamilyQuant.Tests/AssayViewSnapshot.cs",
+          "sha256": "A6F968F2ADEF225690DBCD30373E1150E513E07B2D6D0CAC0C30AB4EA2B66001"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-assay\\m72-spectrum-details-2\\executed\\FamilyQuant.Tests/FeatureLedgerEvidence.Reporting.cs",
+          "sha256": "8633DCBB14E8DBF1746A1FD771AD4E9404900EB68BA46690A31EFC8DEDFA247B"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-assay\\m72-spectrum-details-2\\executed\\FamilyQuant.Tests/FeatureLedgerEvidence.cs",
+          "sha256": "370FC41121F164A0C2495B260A62149FAD53F6F353203A97488423F2E6FA8738"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-assay\\m72-spectrum-details-2\\executed\\FamilyQuant.Tests/Program.AssayCacheLedger.cs",
+          "sha256": "7D3B175CC9824DA443DC369CF9C8983E1C59004FD15F080951BCEEF72B5449C9"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-assay\\m72-spectrum-details-2\\executed\\FamilyQuant.Tests/Program.AssayRuntimeLedger.cs",
+          "sha256": "24F4A0BACCC044156A198BDE8790FCDE12BF0A995641CA359FCB1AFEB3009CB7"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-assay\\m72-spectrum-details-2\\executed\\FamilyQuant.Tests/Program.AssaySpectrumDetails.cs",
+          "sha256": "808DE3FD0BBEA40E3DA3CFABA43763693167113938C247DC8DE3B0B99B686E87"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-assay\\m72-spectrum-details-2\\executed\\FamilyQuant.Tests/Program.AssaySpectrumLedger.cs",
+          "sha256": "03817FFBD5BCE472DFE27AE69711ACC589854EEFE783711170DA44EF848B77FB"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-assay\\m72-spectrum-details-2\\executed\\FamilyQuant.Tests/Program.Commands.AssayLedger.cs",
+          "sha256": "46DA029D0DBAA113B736A5E3B2BE7D29C486565EAE0063281F58F292ECC8112E"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-assay\\m72-spectrum-details-2\\executed\\FamilyQuant/SecondaryWindowView.cs",
+          "sha256": "5DDABCDF5F47F3CBCC271B0F04EB20CE51BA12353DD117C1A3EDE8684A742CDE"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-assay\\m72-spectrum-details-2\\executed\\FamilyQuant/SecondaryWindows.ViewModels.cs",
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-assay\\m72-spectrum-details-2\\executed\\FamilyQuant/SpectrumComparisonWindow.Columns.cs",
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-assay\\m72-spectrum-details-2\\executed\\FamilyQuant/SpectrumComparisonWindow.Exports.cs",
+          "sha256": "5FC458F9AA92ED3D24354ACB8BBDEB4EBB37CC2F968833C1A2AEF52DAB60E2CD"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-assay\\m72-spectrum-details-2\\executed\\FamilyQuant/SpectrumComparisonWindow.View.cs",
+          "sha256": "B7D8E01139E0E190F7BBDFBA5973AE012B55B56547BF3FDC78702D0B157F2E35"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-assay\\m72-spectrum-details-2\\executed\\FamilyQuant/SpectrumComparisonWindow.cs",
+          "sha256": "025C5824B534894B311B6AF36963182831EB0F663FD84AAC0D2399520E08FF0F"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-assay\\m72-spectrum-details-2\\executed\\frozen\\FamilyQuant/SpectrumComparisonWindow.cs",
+          "sha256": "76DD3FE0949EFB7239FDBBCF9163FB78F06EDE5F008D3CC6CC391D9734C88BF2"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-assay\\m72-spectrum-details-2\\executed\\FamilyQuant.Tests.dll",
+          "sha256": "340CADF90108FDC93ECBEDA4777E4275F4DC2E9D66203CE394B3CE2C03283BA8"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-assay\\m72-spectrum-details-2\\executed\\FamilyQuant.Core.dll",
+          "sha256": "153873484AA98E30EDB6E1F31266817151C151A909CCB575158FD78DCB93F3A0"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-assay\\m72-spectrum-details-2\\executed\\FamilyQuant.dll",
+          "sha256": "75DCE9DE8412A387840E3835C1F673B07121A21D958F9D5138175605491AB247"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-assay\\m72-spectrum-details-2\\detail-anchors.json",
+          "sha256": "7C044C584EAA9B6F5479FA18CCF56C4FAF85D3BA6FBBE80A1979903421BA5E8C"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-assay\\m72-spectrum-details-2\\empty\\current-view\\properties.json",
+          "sha256": "88DB48F37D9DF7B06E90EFB81C7EBCF733031EAFD400A542D2AD79E9D888612B"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-assay\\m72-spectrum-details-2\\empty\\frozen-FamilyQuant.dll",
+          "sha256": "D764488C923945285E03B338E5A91BF28106A35B11AB465D8E2B23D125F03FD8"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-assay\\m72-spectrum-details-2\\empty\\frozen-ReferenceGoldenHost.dll",
+          "sha256": "0507018AAEC2E98B9B3F658F7440B010F5BA52785D92940C29AF8F137127CD80"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-assay\\m72-spectrum-details-2\\empty\\frozen-ReferenceGoldenHost.exe",
+          "sha256": "0BADE6FFA491ABB6EC3AAB5BB50A2BBF06966133F96EAAE2659996A4E49EC22C"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-assay\\m72-spectrum-details-2\\empty\\frozen-view.log",
+          "sha256": "DA9B7A4537A8AB78DDFD8B3C2E03EDA89663A158A0E823C8E336F8CA9211E1D0"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-assay\\m72-spectrum-details-2\\empty\\frozen-view\\properties.json",
+          "sha256": "D4AE967D1725BECBE7D6BF6561811172D16A2B6D2CB784BECE193872E33EE413"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-assay\\m72-spectrum-details-2\\populated\\current-view\\properties.json",
+          "sha256": "E8DA14D4A9B924670500AFB0F7179F225D305FED8B6EA80BDB949D016A35FD27"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-assay\\m72-spectrum-details-2\\populated\\frozen-FamilyQuant.dll",
+          "sha256": "D764488C923945285E03B338E5A91BF28106A35B11AB465D8E2B23D125F03FD8"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-assay\\m72-spectrum-details-2\\populated\\frozen-ReferenceGoldenHost.dll",
+          "sha256": "0507018AAEC2E98B9B3F658F7440B010F5BA52785D92940C29AF8F137127CD80"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-assay\\m72-spectrum-details-2\\populated\\frozen-ReferenceGoldenHost.exe",
+          "sha256": "0BADE6FFA491ABB6EC3AAB5BB50A2BBF06966133F96EAAE2659996A4E49EC22C"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-assay\\m72-spectrum-details-2\\populated\\frozen-view.log",
+          "sha256": "45133D804E47DE2AA9802E01D52441BA8D4AAB8E2DC5CC685E9FFDE9CA098099"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-assay\\m72-spectrum-details-2\\populated\\frozen-view\\properties.json",
+          "sha256": "9539B37B358669CA8659CF3A64387FA1B6444EE5A7F7B242AFE3065CBB74BEFE"
+        }
+      ],
+      "workingDirectory": "D:\\FamilyQuant-wt\\assay"
+    }
+  ],
+  "rows": [
+    {
+      "observationId": "FQ15-0738B8F2C7DD",
+      "implementation": [
+        {
+          "path": "FamilyQuant/SecondaryWindowView.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "5DDABCDF5F47F3CBCC271B0F04EB20CE51BA12353DD117C1A3EDE8684A742CDE"
+        },
+        {
+          "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "5FC458F9AA92ED3D24354ACB8BBDEB4EBB37CC2F968833C1A2AEF52DAB60E2CD"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.View.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "B7D8E01139E0E190F7BBDFBA5973AE012B55B56547BF3FDC78702D0B157F2E35"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "025C5824B534894B311B6AF36963182831EB0F663FD84AAC0D2399520E08FF0F"
+        }
+      ],
+      "proofs": [],
+      "note": "No observation-specific native check; remains OPEN.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-0908BA69C203",
+      "implementation": [
+        {
+          "path": "FamilyQuant/SecondaryWindowView.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "5DDABCDF5F47F3CBCC271B0F04EB20CE51BA12353DD117C1A3EDE8684A742CDE"
+        },
+        {
+          "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "5FC458F9AA92ED3D24354ACB8BBDEB4EBB37CC2F968833C1A2AEF52DAB60E2CD"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.View.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "B7D8E01139E0E190F7BBDFBA5973AE012B55B56547BF3FDC78702D0B157F2E35"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "025C5824B534894B311B6AF36963182831EB0F663FD84AAC0D2399520E08FF0F"
+        }
+      ],
+      "proofs": [],
+      "note": "Executed native value/refusal check, with the specific comparison recorded below.",
+      "kindReceiptId": "native-code-fact",
+      "compared": "FamilyQuant/SpectrumComparisonWindow.cs:64 \u0022N0\u0022; view/count: Complete native view detail agrees for zero/1234 rows and missing/present CSV path; help text is captured from the actual callback when relocated.; expected 0 precursor-hypothesis row(s) / 1,234 precursor-hypothesis row(s); actual 0 precursor-hypothesis row(s) / 1,234 precursor-hypothesis row(s)"
+    },
+    {
+      "observationId": "FQ15-114E3BB905DB",
+      "implementation": [
+        {
+          "path": "FamilyQuant/SecondaryWindowView.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "5DDABCDF5F47F3CBCC271B0F04EB20CE51BA12353DD117C1A3EDE8684A742CDE"
+        },
+        {
+          "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "5FC458F9AA92ED3D24354ACB8BBDEB4EBB37CC2F968833C1A2AEF52DAB60E2CD"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.View.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "B7D8E01139E0E190F7BBDFBA5973AE012B55B56547BF3FDC78702D0B157F2E35"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "025C5824B534894B311B6AF36963182831EB0F663FD84AAC0D2399520E08FF0F"
+        }
+      ],
+      "proofs": [],
+      "note": "No observation-specific native check; remains OPEN.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-2539856F1EAD",
+      "implementation": [
+        {
+          "path": "FamilyQuant/SecondaryWindowView.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "5DDABCDF5F47F3CBCC271B0F04EB20CE51BA12353DD117C1A3EDE8684A742CDE"
+        },
+        {
+          "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "5FC458F9AA92ED3D24354ACB8BBDEB4EBB37CC2F968833C1A2AEF52DAB60E2CD"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.View.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "B7D8E01139E0E190F7BBDFBA5973AE012B55B56547BF3FDC78702D0B157F2E35"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "025C5824B534894B311B6AF36963182831EB0F663FD84AAC0D2399520E08FF0F"
+        }
+      ],
+      "proofs": [],
+      "note": "No observation-specific native check; remains OPEN.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-2837FB9B6E15",
+      "implementation": [
+        {
+          "path": "FamilyQuant/SecondaryWindowView.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "5DDABCDF5F47F3CBCC271B0F04EB20CE51BA12353DD117C1A3EDE8684A742CDE"
+        },
+        {
+          "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "5FC458F9AA92ED3D24354ACB8BBDEB4EBB37CC2F968833C1A2AEF52DAB60E2CD"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.View.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "B7D8E01139E0E190F7BBDFBA5973AE012B55B56547BF3FDC78702D0B157F2E35"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "025C5824B534894B311B6AF36963182831EB0F663FD84AAC0D2399520E08FF0F"
+        }
+      ],
+      "proofs": [],
+      "note": "Executed native value/refusal check, with the specific comparison recorded below.",
+      "kindReceiptId": "native-code-fact",
+      "compared": "FamilyQuant/SpectrumComparisonWindow.cs:111 \u0022The CSV saved automatically by the latest computation, if any. Saving a copy \u0022; view/pathTooltip: Complete native view detail agrees for zero/1234 rows and missing/present CSV path; help text is captured from the actual callback when relocated.; expected The CSV saved automatically by the latest computation, if any. Saving a copy does not change the project. / The CSV saved automatically by the latest computation, if any. Saving a copy does not change the project.; actual The CSV saved automatically by the latest computation, if any. Saving a copy does not change the project. / The CSV saved automatically by the latest computation, if any. Saving a copy does not change the project."
+    },
+    {
+      "observationId": "FQ15-2AB23E3CEF2C",
+      "implementation": [
+        {
+          "path": "FamilyQuant/SecondaryWindowView.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "5DDABCDF5F47F3CBCC271B0F04EB20CE51BA12353DD117C1A3EDE8684A742CDE"
+        },
+        {
+          "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "5FC458F9AA92ED3D24354ACB8BBDEB4EBB37CC2F968833C1A2AEF52DAB60E2CD"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.View.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "B7D8E01139E0E190F7BBDFBA5973AE012B55B56547BF3FDC78702D0B157F2E35"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "025C5824B534894B311B6AF36963182831EB0F663FD84AAC0D2399520E08FF0F"
+        }
+      ],
+      "proofs": [],
+      "note": "No observation-specific native check; remains OPEN.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-36394D283051",
+      "implementation": [
+        {
+          "path": "FamilyQuant/SecondaryWindowView.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "5DDABCDF5F47F3CBCC271B0F04EB20CE51BA12353DD117C1A3EDE8684A742CDE"
+        },
+        {
+          "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "5FC458F9AA92ED3D24354ACB8BBDEB4EBB37CC2F968833C1A2AEF52DAB60E2CD"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.View.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "B7D8E01139E0E190F7BBDFBA5973AE012B55B56547BF3FDC78702D0B157F2E35"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "025C5824B534894B311B6AF36963182831EB0F663FD84AAC0D2399520E08FF0F"
+        }
+      ],
+      "proofs": [],
+      "note": "No observation-specific native check; remains OPEN.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-3AF889D02C38",
+      "implementation": [
+        {
+          "path": "FamilyQuant/SecondaryWindowView.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "5DDABCDF5F47F3CBCC271B0F04EB20CE51BA12353DD117C1A3EDE8684A742CDE"
+        },
+        {
+          "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "5FC458F9AA92ED3D24354ACB8BBDEB4EBB37CC2F968833C1A2AEF52DAB60E2CD"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.View.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "B7D8E01139E0E190F7BBDFBA5973AE012B55B56547BF3FDC78702D0B157F2E35"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "025C5824B534894B311B6AF36963182831EB0F663FD84AAC0D2399520E08FF0F"
+        }
+      ],
+      "proofs": [],
+      "note": "No observation-specific native check; remains OPEN.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-3F95C93169BF",
+      "implementation": [
+        {
+          "path": "FamilyQuant/SecondaryWindowView.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "5DDABCDF5F47F3CBCC271B0F04EB20CE51BA12353DD117C1A3EDE8684A742CDE"
+        },
+        {
+          "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "5FC458F9AA92ED3D24354ACB8BBDEB4EBB37CC2F968833C1A2AEF52DAB60E2CD"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.View.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "B7D8E01139E0E190F7BBDFBA5973AE012B55B56547BF3FDC78702D0B157F2E35"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "025C5824B534894B311B6AF36963182831EB0F663FD84AAC0D2399520E08FF0F"
+        }
+      ],
+      "proofs": [],
+      "note": "No observation-specific native check; remains OPEN.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-402DAF4CB80B",
+      "implementation": [
+        {
+          "path": "FamilyQuant/SecondaryWindowView.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "5DDABCDF5F47F3CBCC271B0F04EB20CE51BA12353DD117C1A3EDE8684A742CDE"
+        },
+        {
+          "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "5FC458F9AA92ED3D24354ACB8BBDEB4EBB37CC2F968833C1A2AEF52DAB60E2CD"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.View.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "B7D8E01139E0E190F7BBDFBA5973AE012B55B56547BF3FDC78702D0B157F2E35"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "025C5824B534894B311B6AF36963182831EB0F663FD84AAC0D2399520E08FF0F"
+        }
+      ],
+      "proofs": [],
+      "note": "No observation-specific native check; remains OPEN.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-4A6FF7FC7BB3",
+      "implementation": [
+        {
+          "path": "FamilyQuant/SecondaryWindowView.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "5DDABCDF5F47F3CBCC271B0F04EB20CE51BA12353DD117C1A3EDE8684A742CDE"
+        },
+        {
+          "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "5FC458F9AA92ED3D24354ACB8BBDEB4EBB37CC2F968833C1A2AEF52DAB60E2CD"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.View.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "B7D8E01139E0E190F7BBDFBA5973AE012B55B56547BF3FDC78702D0B157F2E35"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "025C5824B534894B311B6AF36963182831EB0F663FD84AAC0D2399520E08FF0F"
+        }
+      ],
+      "proofs": [],
+      "note": "No observation-specific native check; remains OPEN.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-4DE8597B3173",
+      "implementation": [
+        {
+          "path": "FamilyQuant/SecondaryWindowView.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "5DDABCDF5F47F3CBCC271B0F04EB20CE51BA12353DD117C1A3EDE8684A742CDE"
+        },
+        {
+          "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "5FC458F9AA92ED3D24354ACB8BBDEB4EBB37CC2F968833C1A2AEF52DAB60E2CD"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.View.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "B7D8E01139E0E190F7BBDFBA5973AE012B55B56547BF3FDC78702D0B157F2E35"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "025C5824B534894B311B6AF36963182831EB0F663FD84AAC0D2399520E08FF0F"
+        }
+      ],
+      "proofs": [],
+      "note": "No observation-specific native check; remains OPEN.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-4EBD6A8069C3",
+      "implementation": [
+        {
+          "path": "FamilyQuant/SecondaryWindowView.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "5DDABCDF5F47F3CBCC271B0F04EB20CE51BA12353DD117C1A3EDE8684A742CDE"
+        },
+        {
+          "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "5FC458F9AA92ED3D24354ACB8BBDEB4EBB37CC2F968833C1A2AEF52DAB60E2CD"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.View.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "B7D8E01139E0E190F7BBDFBA5973AE012B55B56547BF3FDC78702D0B157F2E35"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "025C5824B534894B311B6AF36963182831EB0F663FD84AAC0D2399520E08FF0F"
+        }
+      ],
+      "proofs": [],
+      "note": "Executed native value/refusal check, with the specific comparison recorded below.",
+      "kindReceiptId": "native-code-fact",
+      "compared": "FamilyQuant/SpectrumComparisonWindow.cs:51 \u0022diagnostic evidence, not a rule that forces all claims in one scan together. \u0022; view/explanation: Complete native view detail agrees for zero/1234 rows and missing/present CSV path; help text is captured from the actual callback when relocated.; expected One row per normalized file \u002B MS2 scan \u002B compatible source-reported charge and non-chaining 20-ppm m/z cluster. Alternative sequences share ONE XIC only inside that compatible precursor-hypothesis row; incompatible same-scan metadata stays on separate flagged rows. RAW-selected z/mz remains visible as diagnostic evidence, not a rule that forces all claims in one scan together. Direct M\u002B0 and plot-parity primary quant remain separate. / One row per normalized file \u002B MS2 scan \u002B compatible source-reported charge and non-chaining 20-ppm m/z cluster. Alternative sequences share ONE XIC only inside that compatible precursor-hypothesis row; incompatible same-scan metadata stays on separate flagged rows. RAW-selected z/mz remains visible as diagnostic evidence, not a rule that forces all claims in one scan together. Direct M\u002B0 and plot-parity primary quant remain separate.; actual One row per normalized file \u002B MS2 scan \u002B compatible source-reported charge and non-chaining 20-ppm m/z cluster. Alternative sequences share ONE XIC only inside that compatible precursor-hypothesis row; incompatible same-scan metadata stays on separate flagged rows. RAW-selected z/mz remains visible as diagnostic evidence, not a rule that forces all claims in one scan together. Direct M\u002B0 and plot-parity primary quant remain separate. / One row per normalized file \u002B MS2 scan \u002B compatible source-reported charge and non-chaining 20-ppm m/z cluster. Alternative sequences share ONE XIC only inside that compatible precursor-hypothesis row; incompatible same-scan metadata stays on separate flagged rows. RAW-selected z/mz remains visible as diagnostic evidence, not a rule that forces all claims in one scan together. Direct M\u002B0 and plot-parity primary quant remain separate."
+    },
+    {
+      "observationId": "FQ15-555A43340658",
+      "implementation": [
+        {
+          "path": "FamilyQuant/SecondaryWindowView.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "5DDABCDF5F47F3CBCC271B0F04EB20CE51BA12353DD117C1A3EDE8684A742CDE"
+        },
+        {
+          "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "5FC458F9AA92ED3D24354ACB8BBDEB4EBB37CC2F968833C1A2AEF52DAB60E2CD"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.View.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "B7D8E01139E0E190F7BBDFBA5973AE012B55B56547BF3FDC78702D0B157F2E35"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "025C5824B534894B311B6AF36963182831EB0F663FD84AAC0D2399520E08FF0F"
+        }
+      ],
+      "proofs": [],
+      "note": "No observation-specific native check; remains OPEN.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-68E7DEC99B44",
+      "implementation": [
+        {
+          "path": "FamilyQuant/SecondaryWindowView.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "5DDABCDF5F47F3CBCC271B0F04EB20CE51BA12353DD117C1A3EDE8684A742CDE"
+        },
+        {
+          "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "5FC458F9AA92ED3D24354ACB8BBDEB4EBB37CC2F968833C1A2AEF52DAB60E2CD"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.View.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "B7D8E01139E0E190F7BBDFBA5973AE012B55B56547BF3FDC78702D0B157F2E35"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "025C5824B534894B311B6AF36963182831EB0F663FD84AAC0D2399520E08FF0F"
+        }
+      ],
+      "proofs": [],
+      "note": "Executed native value/refusal check, with the specific comparison recorded below.",
+      "kindReceiptId": "native-code-fact",
+      "compared": "FamilyQuant/SpectrumComparisonWindow.cs:48 \u0022non-chaining 20-ppm m/z cluster. Alternative sequences share ONE XIC only \u0022; view/explanation: Complete native view detail agrees for zero/1234 rows and missing/present CSV path; help text is captured from the actual callback when relocated.; expected One row per normalized file \u002B MS2 scan \u002B compatible source-reported charge and non-chaining 20-ppm m/z cluster. Alternative sequences share ONE XIC only inside that compatible precursor-hypothesis row; incompatible same-scan metadata stays on separate flagged rows. RAW-selected z/mz remains visible as diagnostic evidence, not a rule that forces all claims in one scan together. Direct M\u002B0 and plot-parity primary quant remain separate. / One row per normalized file \u002B MS2 scan \u002B compatible source-reported charge and non-chaining 20-ppm m/z cluster. Alternative sequences share ONE XIC only inside that compatible precursor-hypothesis row; incompatible same-scan metadata stays on separate flagged rows. RAW-selected z/mz remains visible as diagnostic evidence, not a rule that forces all claims in one scan together. Direct M\u002B0 and plot-parity primary quant remain separate.; actual One row per normalized file \u002B MS2 scan \u002B compatible source-reported charge and non-chaining 20-ppm m/z cluster. Alternative sequences share ONE XIC only inside that compatible precursor-hypothesis row; incompatible same-scan metadata stays on separate flagged rows. RAW-selected z/mz remains visible as diagnostic evidence, not a rule that forces all claims in one scan together. Direct M\u002B0 and plot-parity primary quant remain separate. / One row per normalized file \u002B MS2 scan \u002B compatible source-reported charge and non-chaining 20-ppm m/z cluster. Alternative sequences share ONE XIC only inside that compatible precursor-hypothesis row; incompatible same-scan metadata stays on separate flagged rows. RAW-selected z/mz remains visible as diagnostic evidence, not a rule that forces all claims in one scan together. Direct M\u002B0 and plot-parity primary quant remain separate."
+    },
+    {
+      "observationId": "FQ15-7C8FB9F25D48",
+      "implementation": [
+        {
+          "path": "FamilyQuant/SecondaryWindowView.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "5DDABCDF5F47F3CBCC271B0F04EB20CE51BA12353DD117C1A3EDE8684A742CDE"
+        },
+        {
+          "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "5FC458F9AA92ED3D24354ACB8BBDEB4EBB37CC2F968833C1A2AEF52DAB60E2CD"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.View.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "B7D8E01139E0E190F7BBDFBA5973AE012B55B56547BF3FDC78702D0B157F2E35"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "025C5824B534894B311B6AF36963182831EB0F663FD84AAC0D2399520E08FF0F"
+        }
+      ],
+      "proofs": [],
+      "note": "Executed native value/refusal check, with the specific comparison recorded below.",
+      "kindReceiptId": "native-code-fact",
+      "compared": "FamilyQuant/SpectrumComparisonWindow.cs:52 \u0022Direct M\u002B0 and plot-parity primary quant remain separate.\u0022; view/explanation: Complete native view detail agrees for zero/1234 rows and missing/present CSV path; help text is captured from the actual callback when relocated.; expected One row per normalized file \u002B MS2 scan \u002B compatible source-reported charge and non-chaining 20-ppm m/z cluster. Alternative sequences share ONE XIC only inside that compatible precursor-hypothesis row; incompatible same-scan metadata stays on separate flagged rows. RAW-selected z/mz remains visible as diagnostic evidence, not a rule that forces all claims in one scan together. Direct M\u002B0 and plot-parity primary quant remain separate. / One row per normalized file \u002B MS2 scan \u002B compatible source-reported charge and non-chaining 20-ppm m/z cluster. Alternative sequences share ONE XIC only inside that compatible precursor-hypothesis row; incompatible same-scan metadata stays on separate flagged rows. RAW-selected z/mz remains visible as diagnostic evidence, not a rule that forces all claims in one scan together. Direct M\u002B0 and plot-parity primary quant remain separate.; actual One row per normalized file \u002B MS2 scan \u002B compatible source-reported charge and non-chaining 20-ppm m/z cluster. Alternative sequences share ONE XIC only inside that compatible precursor-hypothesis row; incompatible same-scan metadata stays on separate flagged rows. RAW-selected z/mz remains visible as diagnostic evidence, not a rule that forces all claims in one scan together. Direct M\u002B0 and plot-parity primary quant remain separate. / One row per normalized file \u002B MS2 scan \u002B compatible source-reported charge and non-chaining 20-ppm m/z cluster. Alternative sequences share ONE XIC only inside that compatible precursor-hypothesis row; incompatible same-scan metadata stays on separate flagged rows. RAW-selected z/mz remains visible as diagnostic evidence, not a rule that forces all claims in one scan together. Direct M\u002B0 and plot-parity primary quant remain separate."
+    },
+    {
+      "observationId": "FQ15-836428C77D50",
+      "implementation": [
+        {
+          "path": "FamilyQuant/SecondaryWindowView.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "5DDABCDF5F47F3CBCC271B0F04EB20CE51BA12353DD117C1A3EDE8684A742CDE"
+        },
+        {
+          "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "5FC458F9AA92ED3D24354ACB8BBDEB4EBB37CC2F968833C1A2AEF52DAB60E2CD"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.View.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "B7D8E01139E0E190F7BBDFBA5973AE012B55B56547BF3FDC78702D0B157F2E35"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "025C5824B534894B311B6AF36963182831EB0F663FD84AAC0D2399520E08FF0F"
+        }
+      ],
+      "proofs": [],
+      "note": "Executed native value/refusal check, with the specific comparison recorded below.",
+      "kindReceiptId": "native-code-fact",
+      "compared": "FamilyQuant/SpectrumComparisonWindow.cs:105 \u0022No automatic CSV path is available for this view.\u0022; view/path: Complete native view detail agrees for zero/1234 rows and missing/present CSV path; help text is captured from the actual callback when relocated.; expected No automatic CSV path is available for this view. / CSV: fixture/comparison.csv; actual No automatic CSV path is available for this view. / CSV: fixture/comparison.csv"
+    },
+    {
+      "observationId": "FQ15-8A683CC9FA21",
+      "implementation": [
+        {
+          "path": "FamilyQuant/SecondaryWindowView.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "5DDABCDF5F47F3CBCC271B0F04EB20CE51BA12353DD117C1A3EDE8684A742CDE"
+        },
+        {
+          "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "5FC458F9AA92ED3D24354ACB8BBDEB4EBB37CC2F968833C1A2AEF52DAB60E2CD"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.View.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "B7D8E01139E0E190F7BBDFBA5973AE012B55B56547BF3FDC78702D0B157F2E35"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "025C5824B534894B311B6AF36963182831EB0F663FD84AAC0D2399520E08FF0F"
+        }
+      ],
+      "proofs": [],
+      "note": "No observation-specific native check; remains OPEN.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-8D578029BC46",
+      "implementation": [
+        {
+          "path": "FamilyQuant/SecondaryWindowView.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "5DDABCDF5F47F3CBCC271B0F04EB20CE51BA12353DD117C1A3EDE8684A742CDE"
+        },
+        {
+          "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "5FC458F9AA92ED3D24354ACB8BBDEB4EBB37CC2F968833C1A2AEF52DAB60E2CD"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.View.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "B7D8E01139E0E190F7BBDFBA5973AE012B55B56547BF3FDC78702D0B157F2E35"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "025C5824B534894B311B6AF36963182831EB0F663FD84AAC0D2399520E08FF0F"
+        }
+      ],
+      "proofs": [],
+      "note": "No observation-specific native check; remains OPEN.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-910777A7C13F",
+      "implementation": [
+        {
+          "path": "FamilyQuant/SecondaryWindowView.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "5DDABCDF5F47F3CBCC271B0F04EB20CE51BA12353DD117C1A3EDE8684A742CDE"
+        },
+        {
+          "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "5FC458F9AA92ED3D24354ACB8BBDEB4EBB37CC2F968833C1A2AEF52DAB60E2CD"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.View.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "B7D8E01139E0E190F7BBDFBA5973AE012B55B56547BF3FDC78702D0B157F2E35"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "025C5824B534894B311B6AF36963182831EB0F663FD84AAC0D2399520E08FF0F"
+        }
+      ],
+      "proofs": [],
+      "note": "Executed native value/refusal check, with the specific comparison recorded below.",
+      "kindReceiptId": "native-code-fact",
+      "compared": "FamilyQuant/SpectrumComparisonWindow.cs:106 \u0022CSV: \u0022; view/path: Complete native view detail agrees for zero/1234 rows and missing/present CSV path; help text is captured from the actual callback when relocated.; expected No automatic CSV path is available for this view. / CSV: fixture/comparison.csv; actual No automatic CSV path is available for this view. / CSV: fixture/comparison.csv"
+    },
+    {
+      "observationId": "FQ15-91DAD8FD3427",
+      "implementation": [
+        {
+          "path": "FamilyQuant/SecondaryWindowView.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "5DDABCDF5F47F3CBCC271B0F04EB20CE51BA12353DD117C1A3EDE8684A742CDE"
+        },
+        {
+          "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "5FC458F9AA92ED3D24354ACB8BBDEB4EBB37CC2F968833C1A2AEF52DAB60E2CD"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.View.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "B7D8E01139E0E190F7BBDFBA5973AE012B55B56547BF3FDC78702D0B157F2E35"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "025C5824B534894B311B6AF36963182831EB0F663FD84AAC0D2399520E08FF0F"
+        }
+      ],
+      "proofs": [],
+      "note": "No observation-specific native check; remains OPEN.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-932F74108F0A",
+      "implementation": [
+        {
+          "path": "FamilyQuant/SecondaryWindowView.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "5DDABCDF5F47F3CBCC271B0F04EB20CE51BA12353DD117C1A3EDE8684A742CDE"
+        },
+        {
+          "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "5FC458F9AA92ED3D24354ACB8BBDEB4EBB37CC2F968833C1A2AEF52DAB60E2CD"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.View.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "B7D8E01139E0E190F7BBDFBA5973AE012B55B56547BF3FDC78702D0B157F2E35"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "025C5824B534894B311B6AF36963182831EB0F663FD84AAC0D2399520E08FF0F"
+        }
+      ],
+      "proofs": [],
+      "note": "No observation-specific native check; remains OPEN.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-94F2AA49C7AB",
+      "implementation": [
+        {
+          "path": "FamilyQuant/SecondaryWindowView.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "5DDABCDF5F47F3CBCC271B0F04EB20CE51BA12353DD117C1A3EDE8684A742CDE"
+        },
+        {
+          "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "5FC458F9AA92ED3D24354ACB8BBDEB4EBB37CC2F968833C1A2AEF52DAB60E2CD"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.View.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "B7D8E01139E0E190F7BBDFBA5973AE012B55B56547BF3FDC78702D0B157F2E35"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "025C5824B534894B311B6AF36963182831EB0F663FD84AAC0D2399520E08FF0F"
+        }
+      ],
+      "proofs": [],
+      "note": "No observation-specific native check; remains OPEN.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-95EA301403F7",
+      "implementation": [
+        {
+          "path": "FamilyQuant/SecondaryWindowView.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "5DDABCDF5F47F3CBCC271B0F04EB20CE51BA12353DD117C1A3EDE8684A742CDE"
+        },
+        {
+          "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "5FC458F9AA92ED3D24354ACB8BBDEB4EBB37CC2F968833C1A2AEF52DAB60E2CD"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.View.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "B7D8E01139E0E190F7BBDFBA5973AE012B55B56547BF3FDC78702D0B157F2E35"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "025C5824B534894B311B6AF36963182831EB0F663FD84AAC0D2399520E08FF0F"
+        }
+      ],
+      "proofs": [],
+      "note": "No observation-specific native check; remains OPEN.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-9720CE3BA4BA",
+      "implementation": [
+        {
+          "path": "FamilyQuant/SecondaryWindowView.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "5DDABCDF5F47F3CBCC271B0F04EB20CE51BA12353DD117C1A3EDE8684A742CDE"
+        },
+        {
+          "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "5FC458F9AA92ED3D24354ACB8BBDEB4EBB37CC2F968833C1A2AEF52DAB60E2CD"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.View.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "B7D8E01139E0E190F7BBDFBA5973AE012B55B56547BF3FDC78702D0B157F2E35"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "025C5824B534894B311B6AF36963182831EB0F663FD84AAC0D2399520E08FF0F"
+        }
+      ],
+      "proofs": [],
+      "note": "No observation-specific native check; remains OPEN.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-9A71BF62E6A0",
+      "implementation": [
+        {
+          "path": "FamilyQuant/SecondaryWindowView.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "5DDABCDF5F47F3CBCC271B0F04EB20CE51BA12353DD117C1A3EDE8684A742CDE"
+        },
+        {
+          "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "5FC458F9AA92ED3D24354ACB8BBDEB4EBB37CC2F968833C1A2AEF52DAB60E2CD"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.View.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "B7D8E01139E0E190F7BBDFBA5973AE012B55B56547BF3FDC78702D0B157F2E35"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "025C5824B534894B311B6AF36963182831EB0F663FD84AAC0D2399520E08FF0F"
+        }
+      ],
+      "proofs": [],
+      "note": "No observation-specific native check; remains OPEN.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-9BF3481B1263",
+      "implementation": [
+        {
+          "path": "FamilyQuant/SecondaryWindowView.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "5DDABCDF5F47F3CBCC271B0F04EB20CE51BA12353DD117C1A3EDE8684A742CDE"
+        },
+        {
+          "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "5FC458F9AA92ED3D24354ACB8BBDEB4EBB37CC2F968833C1A2AEF52DAB60E2CD"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.View.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "B7D8E01139E0E190F7BBDFBA5973AE012B55B56547BF3FDC78702D0B157F2E35"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "025C5824B534894B311B6AF36963182831EB0F663FD84AAC0D2399520E08FF0F"
+        }
+      ],
+      "proofs": [],
+      "note": "No observation-specific native check; remains OPEN.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-ABD2FD522C2F",
+      "implementation": [
+        {
+          "path": "FamilyQuant/SecondaryWindowView.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "5DDABCDF5F47F3CBCC271B0F04EB20CE51BA12353DD117C1A3EDE8684A742CDE"
+        },
+        {
+          "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "5FC458F9AA92ED3D24354ACB8BBDEB4EBB37CC2F968833C1A2AEF52DAB60E2CD"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.View.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "B7D8E01139E0E190F7BBDFBA5973AE012B55B56547BF3FDC78702D0B157F2E35"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "025C5824B534894B311B6AF36963182831EB0F663FD84AAC0D2399520E08FF0F"
+        }
+      ],
+      "proofs": [],
+      "note": "No observation-specific native check; remains OPEN.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-AF48139BCAFB",
+      "implementation": [
+        {
+          "path": "FamilyQuant/SecondaryWindowView.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "5DDABCDF5F47F3CBCC271B0F04EB20CE51BA12353DD117C1A3EDE8684A742CDE"
+        },
+        {
+          "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "5FC458F9AA92ED3D24354ACB8BBDEB4EBB37CC2F968833C1A2AEF52DAB60E2CD"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.View.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "B7D8E01139E0E190F7BBDFBA5973AE012B55B56547BF3FDC78702D0B157F2E35"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "025C5824B534894B311B6AF36963182831EB0F663FD84AAC0D2399520E08FF0F"
+        }
+      ],
+      "proofs": [],
+      "note": "No observation-specific native check; remains OPEN.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-B2090253E404",
+      "implementation": [
+        {
+          "path": "FamilyQuant/SecondaryWindowView.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "5DDABCDF5F47F3CBCC271B0F04EB20CE51BA12353DD117C1A3EDE8684A742CDE"
+        },
+        {
+          "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "5FC458F9AA92ED3D24354ACB8BBDEB4EBB37CC2F968833C1A2AEF52DAB60E2CD"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.View.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "B7D8E01139E0E190F7BBDFBA5973AE012B55B56547BF3FDC78702D0B157F2E35"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "025C5824B534894B311B6AF36963182831EB0F663FD84AAC0D2399520E08FF0F"
+        }
+      ],
+      "proofs": [],
+      "note": "No observation-specific native check; remains OPEN.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-B54161CBD937",
+      "implementation": [
+        {
+          "path": "FamilyQuant/SecondaryWindowView.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "5DDABCDF5F47F3CBCC271B0F04EB20CE51BA12353DD117C1A3EDE8684A742CDE"
+        },
+        {
+          "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "5FC458F9AA92ED3D24354ACB8BBDEB4EBB37CC2F968833C1A2AEF52DAB60E2CD"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.View.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "B7D8E01139E0E190F7BBDFBA5973AE012B55B56547BF3FDC78702D0B157F2E35"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "025C5824B534894B311B6AF36963182831EB0F663FD84AAC0D2399520E08FF0F"
+        }
+      ],
+      "proofs": [],
+      "note": "No observation-specific native check; remains OPEN.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-B69CD9176B5D",
+      "implementation": [
+        {
+          "path": "FamilyQuant/SecondaryWindowView.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "5DDABCDF5F47F3CBCC271B0F04EB20CE51BA12353DD117C1A3EDE8684A742CDE"
+        },
+        {
+          "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "5FC458F9AA92ED3D24354ACB8BBDEB4EBB37CC2F968833C1A2AEF52DAB60E2CD"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.View.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "B7D8E01139E0E190F7BBDFBA5973AE012B55B56547BF3FDC78702D0B157F2E35"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "025C5824B534894B311B6AF36963182831EB0F663FD84AAC0D2399520E08FF0F"
+        }
+      ],
+      "proofs": [],
+      "note": "No observation-specific native check; remains OPEN.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-C08CBBFA8D5A",
+      "implementation": [
+        {
+          "path": "FamilyQuant/SecondaryWindowView.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "5DDABCDF5F47F3CBCC271B0F04EB20CE51BA12353DD117C1A3EDE8684A742CDE"
+        },
+        {
+          "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "5FC458F9AA92ED3D24354ACB8BBDEB4EBB37CC2F968833C1A2AEF52DAB60E2CD"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.View.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "B7D8E01139E0E190F7BBDFBA5973AE012B55B56547BF3FDC78702D0B157F2E35"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "025C5824B534894B311B6AF36963182831EB0F663FD84AAC0D2399520E08FF0F"
+        }
+      ],
+      "proofs": [],
+      "note": "Executed native value/refusal check, with the specific comparison recorded below.",
+      "kindReceiptId": "native-code-fact",
+      "compared": "FamilyQuant/SpectrumComparisonWindow.cs:49 \u0022inside that compatible precursor-hypothesis row; incompatible same-scan \u0022; view/explanation: Complete native view detail agrees for zero/1234 rows and missing/present CSV path; help text is captured from the actual callback when relocated.; expected One row per normalized file \u002B MS2 scan \u002B compatible source-reported charge and non-chaining 20-ppm m/z cluster. Alternative sequences share ONE XIC only inside that compatible precursor-hypothesis row; incompatible same-scan metadata stays on separate flagged rows. RAW-selected z/mz remains visible as diagnostic evidence, not a rule that forces all claims in one scan together. Direct M\u002B0 and plot-parity primary quant remain separate. / One row per normalized file \u002B MS2 scan \u002B compatible source-reported charge and non-chaining 20-ppm m/z cluster. Alternative sequences share ONE XIC only inside that compatible precursor-hypothesis row; incompatible same-scan metadata stays on separate flagged rows. RAW-selected z/mz remains visible as diagnostic evidence, not a rule that forces all claims in one scan together. Direct M\u002B0 and plot-parity primary quant remain separate.; actual One row per normalized file \u002B MS2 scan \u002B compatible source-reported charge and non-chaining 20-ppm m/z cluster. Alternative sequences share ONE XIC only inside that compatible precursor-hypothesis row; incompatible same-scan metadata stays on separate flagged rows. RAW-selected z/mz remains visible as diagnostic evidence, not a rule that forces all claims in one scan together. Direct M\u002B0 and plot-parity primary quant remain separate. / One row per normalized file \u002B MS2 scan \u002B compatible source-reported charge and non-chaining 20-ppm m/z cluster. Alternative sequences share ONE XIC only inside that compatible precursor-hypothesis row; incompatible same-scan metadata stays on separate flagged rows. RAW-selected z/mz remains visible as diagnostic evidence, not a rule that forces all claims in one scan together. Direct M\u002B0 and plot-parity primary quant remain separate."
+    },
+    {
+      "observationId": "FQ15-C1162895D157",
+      "implementation": [
+        {
+          "path": "FamilyQuant/SecondaryWindowView.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "5DDABCDF5F47F3CBCC271B0F04EB20CE51BA12353DD117C1A3EDE8684A742CDE"
+        },
+        {
+          "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "5FC458F9AA92ED3D24354ACB8BBDEB4EBB37CC2F968833C1A2AEF52DAB60E2CD"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.View.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "B7D8E01139E0E190F7BBDFBA5973AE012B55B56547BF3FDC78702D0B157F2E35"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "025C5824B534894B311B6AF36963182831EB0F663FD84AAC0D2399520E08FF0F"
+        }
+      ],
+      "proofs": [],
+      "note": "No observation-specific native check; remains OPEN.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-C12FDBFF007E",
+      "implementation": [
+        {
+          "path": "FamilyQuant/SecondaryWindowView.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "5DDABCDF5F47F3CBCC271B0F04EB20CE51BA12353DD117C1A3EDE8684A742CDE"
+        },
+        {
+          "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "5FC458F9AA92ED3D24354ACB8BBDEB4EBB37CC2F968833C1A2AEF52DAB60E2CD"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.View.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "B7D8E01139E0E190F7BBDFBA5973AE012B55B56547BF3FDC78702D0B157F2E35"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "025C5824B534894B311B6AF36963182831EB0F663FD84AAC0D2399520E08FF0F"
+        }
+      ],
+      "proofs": [],
+      "note": "Executed native value/refusal check, with the specific comparison recorded below.",
+      "kindReceiptId": "native-code-fact",
+      "compared": "FamilyQuant/SpectrumComparisonWindow.cs:65 \u0022 precursor-hypothesis row(s)\u0022; view/count: Complete native view detail agrees for zero/1234 rows and missing/present CSV path; help text is captured from the actual callback when relocated.; expected 0 precursor-hypothesis row(s) / 1,234 precursor-hypothesis row(s); actual 0 precursor-hypothesis row(s) / 1,234 precursor-hypothesis row(s)"
+    },
+    {
+      "observationId": "FQ15-C568758251BF",
+      "implementation": [
+        {
+          "path": "FamilyQuant/SecondaryWindowView.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "5DDABCDF5F47F3CBCC271B0F04EB20CE51BA12353DD117C1A3EDE8684A742CDE"
+        },
+        {
+          "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "5FC458F9AA92ED3D24354ACB8BBDEB4EBB37CC2F968833C1A2AEF52DAB60E2CD"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.View.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "B7D8E01139E0E190F7BBDFBA5973AE012B55B56547BF3FDC78702D0B157F2E35"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "025C5824B534894B311B6AF36963182831EB0F663FD84AAC0D2399520E08FF0F"
+        }
+      ],
+      "proofs": [],
+      "note": "No observation-specific native check; remains OPEN.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-C6852B87CA79",
+      "implementation": [
+        {
+          "path": "FamilyQuant/SecondaryWindowView.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "5DDABCDF5F47F3CBCC271B0F04EB20CE51BA12353DD117C1A3EDE8684A742CDE"
+        },
+        {
+          "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "5FC458F9AA92ED3D24354ACB8BBDEB4EBB37CC2F968833C1A2AEF52DAB60E2CD"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.View.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "B7D8E01139E0E190F7BBDFBA5973AE012B55B56547BF3FDC78702D0B157F2E35"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "025C5824B534894B311B6AF36963182831EB0F663FD84AAC0D2399520E08FF0F"
+        }
+      ],
+      "proofs": [],
+      "note": "Executed native value/refusal check, with the specific comparison recorded below.",
+      "kindReceiptId": "native-code-fact",
+      "compared": "FamilyQuant/SpectrumComparisonWindow.cs:50 \u0022metadata stays on separate flagged rows. RAW-selected z/mz remains visible as \u0022; view/explanation: Complete native view detail agrees for zero/1234 rows and missing/present CSV path; help text is captured from the actual callback when relocated.; expected One row per normalized file \u002B MS2 scan \u002B compatible source-reported charge and non-chaining 20-ppm m/z cluster. Alternative sequences share ONE XIC only inside that compatible precursor-hypothesis row; incompatible same-scan metadata stays on separate flagged rows. RAW-selected z/mz remains visible as diagnostic evidence, not a rule that forces all claims in one scan together. Direct M\u002B0 and plot-parity primary quant remain separate. / One row per normalized file \u002B MS2 scan \u002B compatible source-reported charge and non-chaining 20-ppm m/z cluster. Alternative sequences share ONE XIC only inside that compatible precursor-hypothesis row; incompatible same-scan metadata stays on separate flagged rows. RAW-selected z/mz remains visible as diagnostic evidence, not a rule that forces all claims in one scan together. Direct M\u002B0 and plot-parity primary quant remain separate.; actual One row per normalized file \u002B MS2 scan \u002B compatible source-reported charge and non-chaining 20-ppm m/z cluster. Alternative sequences share ONE XIC only inside that compatible precursor-hypothesis row; incompatible same-scan metadata stays on separate flagged rows. RAW-selected z/mz remains visible as diagnostic evidence, not a rule that forces all claims in one scan together. Direct M\u002B0 and plot-parity primary quant remain separate. / One row per normalized file \u002B MS2 scan \u002B compatible source-reported charge and non-chaining 20-ppm m/z cluster. Alternative sequences share ONE XIC only inside that compatible precursor-hypothesis row; incompatible same-scan metadata stays on separate flagged rows. RAW-selected z/mz remains visible as diagnostic evidence, not a rule that forces all claims in one scan together. Direct M\u002B0 and plot-parity primary quant remain separate."
+    },
+    {
+      "observationId": "FQ15-C6ED0DC284EB",
+      "implementation": [
+        {
+          "path": "FamilyQuant/SecondaryWindowView.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "5DDABCDF5F47F3CBCC271B0F04EB20CE51BA12353DD117C1A3EDE8684A742CDE"
+        },
+        {
+          "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "5FC458F9AA92ED3D24354ACB8BBDEB4EBB37CC2F968833C1A2AEF52DAB60E2CD"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.View.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "B7D8E01139E0E190F7BBDFBA5973AE012B55B56547BF3FDC78702D0B157F2E35"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "025C5824B534894B311B6AF36963182831EB0F663FD84AAC0D2399520E08FF0F"
+        }
+      ],
+      "proofs": [],
+      "note": "No observation-specific native check; remains OPEN.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-CC2E78AF38A6",
+      "implementation": [
+        {
+          "path": "FamilyQuant/SecondaryWindowView.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "5DDABCDF5F47F3CBCC271B0F04EB20CE51BA12353DD117C1A3EDE8684A742CDE"
+        },
+        {
+          "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "5FC458F9AA92ED3D24354ACB8BBDEB4EBB37CC2F968833C1A2AEF52DAB60E2CD"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.View.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "B7D8E01139E0E190F7BBDFBA5973AE012B55B56547BF3FDC78702D0B157F2E35"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "025C5824B534894B311B6AF36963182831EB0F663FD84AAC0D2399520E08FF0F"
+        }
+      ],
+      "proofs": [],
+      "note": "No observation-specific native check; remains OPEN.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-D35FA6C8D0E1",
+      "implementation": [
+        {
+          "path": "FamilyQuant/SecondaryWindowView.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "5DDABCDF5F47F3CBCC271B0F04EB20CE51BA12353DD117C1A3EDE8684A742CDE"
+        },
+        {
+          "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "5FC458F9AA92ED3D24354ACB8BBDEB4EBB37CC2F968833C1A2AEF52DAB60E2CD"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.View.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "B7D8E01139E0E190F7BBDFBA5973AE012B55B56547BF3FDC78702D0B157F2E35"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "025C5824B534894B311B6AF36963182831EB0F663FD84AAC0D2399520E08FF0F"
+        }
+      ],
+      "proofs": [],
+      "note": "No observation-specific native check; remains OPEN.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-D4F6DCC3BE8E",
+      "implementation": [
+        {
+          "path": "FamilyQuant/SecondaryWindowView.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "5DDABCDF5F47F3CBCC271B0F04EB20CE51BA12353DD117C1A3EDE8684A742CDE"
+        },
+        {
+          "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "5FC458F9AA92ED3D24354ACB8BBDEB4EBB37CC2F968833C1A2AEF52DAB60E2CD"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.View.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "B7D8E01139E0E190F7BBDFBA5973AE012B55B56547BF3FDC78702D0B157F2E35"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "025C5824B534894B311B6AF36963182831EB0F663FD84AAC0D2399520E08FF0F"
+        }
+      ],
+      "proofs": [],
+      "note": "Executed native value/refusal check, with the specific comparison recorded below.",
+      "kindReceiptId": "native-code-fact",
+      "compared": "FamilyQuant/SpectrumComparisonWindow.cs:112 \u0022does not change the project.\u0022; view/pathTooltip: Complete native view detail agrees for zero/1234 rows and missing/present CSV path; help text is captured from the actual callback when relocated.; expected The CSV saved automatically by the latest computation, if any. Saving a copy does not change the project. / The CSV saved automatically by the latest computation, if any. Saving a copy does not change the project.; actual The CSV saved automatically by the latest computation, if any. Saving a copy does not change the project. / The CSV saved automatically by the latest computation, if any. Saving a copy does not change the project."
+    },
+    {
+      "observationId": "FQ15-DA5178732418",
+      "implementation": [
+        {
+          "path": "FamilyQuant/SecondaryWindowView.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "5DDABCDF5F47F3CBCC271B0F04EB20CE51BA12353DD117C1A3EDE8684A742CDE"
+        },
+        {
+          "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "5FC458F9AA92ED3D24354ACB8BBDEB4EBB37CC2F968833C1A2AEF52DAB60E2CD"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.View.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "B7D8E01139E0E190F7BBDFBA5973AE012B55B56547BF3FDC78702D0B157F2E35"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "025C5824B534894B311B6AF36963182831EB0F663FD84AAC0D2399520E08FF0F"
+        }
+      ],
+      "proofs": [],
+      "note": "No observation-specific native check; remains OPEN.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-DA9285380A90",
+      "implementation": [
+        {
+          "path": "FamilyQuant/SecondaryWindowView.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "5DDABCDF5F47F3CBCC271B0F04EB20CE51BA12353DD117C1A3EDE8684A742CDE"
+        },
+        {
+          "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "5FC458F9AA92ED3D24354ACB8BBDEB4EBB37CC2F968833C1A2AEF52DAB60E2CD"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.View.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "B7D8E01139E0E190F7BBDFBA5973AE012B55B56547BF3FDC78702D0B157F2E35"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "025C5824B534894B311B6AF36963182831EB0F663FD84AAC0D2399520E08FF0F"
+        }
+      ],
+      "proofs": [],
+      "note": "No observation-specific native check; remains OPEN.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-E06AECC2FE8F",
+      "implementation": [
+        {
+          "path": "FamilyQuant/SecondaryWindowView.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "5DDABCDF5F47F3CBCC271B0F04EB20CE51BA12353DD117C1A3EDE8684A742CDE"
+        },
+        {
+          "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "5FC458F9AA92ED3D24354ACB8BBDEB4EBB37CC2F968833C1A2AEF52DAB60E2CD"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.View.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "B7D8E01139E0E190F7BBDFBA5973AE012B55B56547BF3FDC78702D0B157F2E35"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "025C5824B534894B311B6AF36963182831EB0F663FD84AAC0D2399520E08FF0F"
+        }
+      ],
+      "proofs": [],
+      "note": "Executed native value/refusal check, with the specific comparison recorded below.",
+      "kindReceiptId": "native-code-fact",
+      "compared": "FamilyQuant/SpectrumComparisonWindow.cs:47 \u0022One row per normalized file \u002B MS2 scan \u002B compatible source-reported charge and \u0022; view/explanation: Complete native view detail agrees for zero/1234 rows and missing/present CSV path; help text is captured from the actual callback when relocated.; expected One row per normalized file \u002B MS2 scan \u002B compatible source-reported charge and non-chaining 20-ppm m/z cluster. Alternative sequences share ONE XIC only inside that compatible precursor-hypothesis row; incompatible same-scan metadata stays on separate flagged rows. RAW-selected z/mz remains visible as diagnostic evidence, not a rule that forces all claims in one scan together. Direct M\u002B0 and plot-parity primary quant remain separate. / One row per normalized file \u002B MS2 scan \u002B compatible source-reported charge and non-chaining 20-ppm m/z cluster. Alternative sequences share ONE XIC only inside that compatible precursor-hypothesis row; incompatible same-scan metadata stays on separate flagged rows. RAW-selected z/mz remains visible as diagnostic evidence, not a rule that forces all claims in one scan together. Direct M\u002B0 and plot-parity primary quant remain separate.; actual One row per normalized file \u002B MS2 scan \u002B compatible source-reported charge and non-chaining 20-ppm m/z cluster. Alternative sequences share ONE XIC only inside that compatible precursor-hypothesis row; incompatible same-scan metadata stays on separate flagged rows. RAW-selected z/mz remains visible as diagnostic evidence, not a rule that forces all claims in one scan together. Direct M\u002B0 and plot-parity primary quant remain separate. / One row per normalized file \u002B MS2 scan \u002B compatible source-reported charge and non-chaining 20-ppm m/z cluster. Alternative sequences share ONE XIC only inside that compatible precursor-hypothesis row; incompatible same-scan metadata stays on separate flagged rows. RAW-selected z/mz remains visible as diagnostic evidence, not a rule that forces all claims in one scan together. Direct M\u002B0 and plot-parity primary quant remain separate."
+    },
+    {
+      "observationId": "FQ15-F38FD070BACB",
+      "implementation": [
+        {
+          "path": "FamilyQuant/SecondaryWindowView.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "5DDABCDF5F47F3CBCC271B0F04EB20CE51BA12353DD117C1A3EDE8684A742CDE"
+        },
+        {
+          "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "5FC458F9AA92ED3D24354ACB8BBDEB4EBB37CC2F968833C1A2AEF52DAB60E2CD"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.View.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "B7D8E01139E0E190F7BBDFBA5973AE012B55B56547BF3FDC78702D0B157F2E35"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "025C5824B534894B311B6AF36963182831EB0F663FD84AAC0D2399520E08FF0F"
+        }
+      ],
+      "proofs": [],
+      "note": "No observation-specific native check; remains OPEN.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-F3BDBF95C557",
+      "implementation": [
+        {
+          "path": "FamilyQuant/SecondaryWindowView.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "5DDABCDF5F47F3CBCC271B0F04EB20CE51BA12353DD117C1A3EDE8684A742CDE"
+        },
+        {
+          "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "5FC458F9AA92ED3D24354ACB8BBDEB4EBB37CC2F968833C1A2AEF52DAB60E2CD"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.View.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "B7D8E01139E0E190F7BBDFBA5973AE012B55B56547BF3FDC78702D0B157F2E35"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "025C5824B534894B311B6AF36963182831EB0F663FD84AAC0D2399520E08FF0F"
+        }
+      ],
+      "proofs": [],
+      "note": "No observation-specific native check; remains OPEN.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-F68CC59DBB0D",
+      "implementation": [
+        {
+          "path": "FamilyQuant/SecondaryWindowView.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "5DDABCDF5F47F3CBCC271B0F04EB20CE51BA12353DD117C1A3EDE8684A742CDE"
+        },
+        {
+          "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "5FC458F9AA92ED3D24354ACB8BBDEB4EBB37CC2F968833C1A2AEF52DAB60E2CD"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.View.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "B7D8E01139E0E190F7BBDFBA5973AE012B55B56547BF3FDC78702D0B157F2E35"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "025C5824B534894B311B6AF36963182831EB0F663FD84AAC0D2399520E08FF0F"
+        }
+      ],
+      "proofs": [],
+      "note": "No observation-specific native check; remains OPEN.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-F95421050019",
+      "implementation": [
+        {
+          "path": "FamilyQuant/SecondaryWindowView.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "5DDABCDF5F47F3CBCC271B0F04EB20CE51BA12353DD117C1A3EDE8684A742CDE"
+        },
+        {
+          "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "5FC458F9AA92ED3D24354ACB8BBDEB4EBB37CC2F968833C1A2AEF52DAB60E2CD"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.View.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "B7D8E01139E0E190F7BBDFBA5973AE012B55B56547BF3FDC78702D0B157F2E35"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "025C5824B534894B311B6AF36963182831EB0F663FD84AAC0D2399520E08FF0F"
+        }
+      ],
+      "proofs": [],
+      "note": "No observation-specific native check; remains OPEN.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-FD84AF423A40",
+      "implementation": [
+        {
+          "path": "FamilyQuant/SecondaryWindowView.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "5DDABCDF5F47F3CBCC271B0F04EB20CE51BA12353DD117C1A3EDE8684A742CDE"
+        },
+        {
+          "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "5FC458F9AA92ED3D24354ACB8BBDEB4EBB37CC2F968833C1A2AEF52DAB60E2CD"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.View.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "B7D8E01139E0E190F7BBDFBA5973AE012B55B56547BF3FDC78702D0B157F2E35"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.cs",
+          "symbol": "Actual empty/populated view count/path and explanation relocated into its live help callback",
+          "sha256": "025C5824B534894B311B6AF36963182831EB0F663FD84AAC0D2399520E08FF0F"
+        }
+      ],
+      "proofs": [],
+      "note": "No observation-specific native check; remains OPEN.",
+      "kindReceiptId": null,
+      "compared": null
+    }
+  ],
+  "kindReceipts": [
+    {
+      "id": "native-code-fact",
+      "kind": "code fact",
+      "proofs": [
+        {
+          "runId": "native",
+          "kind": "test",
+          "target": "RunAssayRuntimeLedger",
+          "assertion": "AS-spectrum-details kind code fact: every listed native value and branch check passed",
+          "artifact": "D:\\FamilyQuant-data\\out-assay\\m72-spectrum-details-2\\proofs.log",
+          "inspectedBy": ""
+        }
+      ]
+    }
+  ]
+}

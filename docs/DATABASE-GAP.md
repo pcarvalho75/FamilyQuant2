@@ -5,6 +5,19 @@ identified envelope, de novo placed by the database, and de novo placed only by 
 family world. Ranking uses the last amount. The view retains the Core row objects;
 it performs no peptide attribution, family allocation or rate calculation.
 
+The minimum-tag-length chooser and estimate table read Core's `LengthChoices`,
+`LengthEstimates` and `ForLength`. Landed share, decoy rate and right/landed counts
+are stored values. The screen formats them without estimating a new rate. Its
+default comes from `FamilyWorldOptions.DefaultMinimumTagLength`.
+
+Choosing a length changes the family table, chart, global buckets, rules, CSV and
+suggested FASTA together. `QuantManifest.DatabaseGapMinimumTagLength` records a
+nondefault choice; null is omitted and follows the Core default. Selection marks
+the open project dirty, so Save, Discard and Cancel retain their normal meaning.
+Reopen restores the recorded choice. Older projects can show an uncomputed-length
+message and still choose their stored table; no missing result is replaced by zero
+or silently borrowed from another length.
+
 The five global amounts remain separate: unexplained de novo, the three shared
 buckets, and identified signal in no family. Unexplained signal never enters a
 family bar. The basis is identified observed envelope plus de novo reference-calibrated
@@ -45,6 +58,8 @@ For a retained project, run the program's checker with a fresh lane-owned output
 
 ```text
 FamilyQuant.Tests.exe --database-gap-screens <project.fqproj> <fresh-output>
+FamilyQuant.Tests.exe --test-database-gap-lengths <fresh-output>
+FamilyQuant.Tests.exe --database-gap-lengths-screens <project.fqproj> <fresh-output>
 ```
 
 It reads the supplied project without changing its bytes, captures both themes,

@@ -10,9 +10,35 @@
    <Setter Property="ToolTip" Value="{Binding Content, RelativeSource={RelativeSource Self}, StringFormat='The recorded {0} for this family row.'}"/>
    <Setter Property="ContentTemplate"><Setter.Value><DataTemplate><TextBlock Text="{Binding}" TextWrapping="Wrap"/></DataTemplate></Setter.Value></Setter>
   </Style>
+  <Style x:Key="GapLengthHeader" TargetType="DataGridColumnHeader" BasedOn="{StaticResource GapHeader}">
+   <Setter Property="ToolTip" Value="{Binding Content, RelativeSource={RelativeSource Self}, StringFormat='The stored {0} for this minimum tag length.'}"/>
+  </Style>
  </UserControl.Resources>
+ <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
  <StackPanel>
   <TextBlock Text="Database gap" FontSize="20" FontWeight="SemiBold" Margin="0,0,0,8"/>
+  <StackPanel Visibility="{Binding HasStoredResult, Converter={StaticResource VisibleWhenTrue}}" Margin="0,0,0,12">
+   <DockPanel Margin="0,0,0,8">
+    <ComboBox x:Name="ComboBoxMinimumTagLength" DockPanel.Dock="Right" Width="80" ItemsSource="{Binding LengthChoices}"
+     SelectedItem="{Binding MinimumTagLength, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+     ToolTip="Choose a stored minimum tag length. The table and exports follow this project choice."/>
+    <TextBlock Text="Minimum tag length" FontWeight="SemiBold" VerticalAlignment="Center"/>
+   </DockPanel>
+   <TextBlock Text="Stored estimates by minimum tag length" FontWeight="SemiBold" Margin="0,0,0,6"/>
+   <TextBlock Text="Landed share uses the unattributed de novo envelope; decoy rate uses credited envelope. Known-answer right rates show right/landed counts."
+    TextWrapping="Wrap" Foreground="{DynamicResource MutedBrush}" Margin="0,0,0,6"/>
+   <DataGrid x:Name="DataGridLengths" ItemsSource="{Binding LengthRows}" AutoGenerateColumns="False" IsReadOnly="True" CanUserAddRows="False"
+    MaxHeight="360" ColumnHeaderStyle="{StaticResource GapLengthHeader}"
+    ToolTip="Every value is the stored Core estimate for this length. This screen does not search or calculate an estimate.">
+    <DataGrid.Columns>
+     <DataGridTextColumn Header="Minimum tag length" Binding="{Binding MinimumTagLength}" ElementStyle="{StaticResource GapNumber}" Width="110"/>
+     <DataGridTextColumn Header="Landed share" Binding="{Binding LandedShare}" ElementStyle="{StaticResource GapNumber}" Width="140"/>
+     <DataGridTextColumn Header="Decoy rate" Binding="{Binding DecoyRate}" ElementStyle="{StaticResource GapNumber}" Width="140"/>
+     <DataGridTextColumn Header="Known answers right (right/landed)" Binding="{Binding KnownAnswerRight}" Width="*" MinWidth="240"/>
+     <DataGridTextColumn Header="Result" Binding="{Binding Availability}" Width="120"/>
+    </DataGrid.Columns>
+   </DataGrid>
+  </StackPanel>
   <TextBlock x:Name="TextBlockEmpty" Text="{Binding EmptyMessage}" TextWrapping="Wrap"/>
   <StackPanel x:Name="PanelResult" Visibility="{Binding HasData, Converter={StaticResource VisibleWhenTrue}}">
    <TextBlock x:Name="TextBlockRules" Text="{Binding Rules}" TextWrapping="Wrap" Margin="0,0,0,6"/>
@@ -57,4 +83,5 @@
    <TextBlock x:Name="TextBlockFastaState" Text="{Binding FastaState}" TextWrapping="Wrap" Margin="0,10,0,0"/>
   </StackPanel>
  </StackPanel>
+ </ScrollViewer>
 </UserControl>

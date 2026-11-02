@@ -155,3 +155,106 @@ The build has zero warnings/errors; receipt fixtures are 33/0/0 and shared compa
 fixtures 52/0/0. The final quick suite is 3,058/0/17 in 103 seconds. Stored-project
 golden comparisons are 4/0/0 at `secondary/interactions-golden-final`. The worker
 did not run the desk's full suite, fresh RAW extraction or Ana-file reproduction.
+
+## Restored Quantify Close contract
+
+M40 assigns the product repair solely to `ComputeXicWindow.xaml` and its code behind.
+The compatibility host again offers a bottom-right Close button using the current
+implicit button style. Its existing frozen handler pattern sets `DialogResult = true`
+for modal callers and closes a nonmodal host when that property refuses the assignment.
+The busy overlay covers both the Quantify content and the Close footer.
+
+`--test-quantify-close`, also called by the ordinary shell checks, first failed
+8 assertions before the product edit. Afterward all 16 checks pass across dark/light
+themes and modal/nonmodal hosts. Actual Close clicks close once, preserve the exact
+completed rows and manifest, and return true to modal callers. Each host starts at
+Left/Top -30000, with ShowActivated and ShowInTaskbar false. The checker reads the
+foreground handle and native active state before clicking; every host stays inactive.
+It never changes the real clipboard or foreground window.
+
+The secondary interaction producer now compares all four restored rows by executing
+the frozen and current buttons in both host modes. It retains the button, caption,
+Click count, Closed result, modal return, position and activation readings per row.
+The earlier modal gap above describes the pre-fix packet, not the repaired behavior.
+
+Accepted Close-fix runs are `secondary/close-interactions-1` and `-2`: 56/0/124,
+with all 84 non-receipt files identical. The same receipt now supports 48 rows,
+including the four restored Close rows. Its deliberate Shift negative is 54/1/124,
+and importing it fails before mutation, leaving the accepted receipt unchanged.
+The affected first packet was refreshed with current host hashes at `close-first-1`
+and `-2`, 172/0/172 with all 74 non-receipt files identical and the same 163 proofs.
+Native ledger import reports 3,470 VERIFIED, 1,990 OPEN and 296 approved drops.
+
+The product READY merge is `e257948` with master `ada6c23`. The final build has zero
+warnings/errors, quick passes 3,135/0/17 in 183 seconds, and stored-project golden
+passes 4/0/0 at `secondary/close-golden`. The desk's full suite was not run here.
+Subsequent tests/receipts/docs-only batches follow M41: focused/native ledger checks,
+no routine READY merge and no worker quick/golden. Producers remain the documented
+`--ledger-secondary-runtime` and `--ledger-secondary-interactions` commands.
+
+## M44 behavior checks and wording decisions
+
+The next extension adds whole-screen Quantify checks for all three chooser kinds,
+accepted paths, cancellation retaining previous input, disconnected refusal/manual
+entry, both native confidence gates and missing-package refusal. It injects only
+the frozen chooser boundary and the existing current dialog presenters; no native
+chooser is opened. The grouping run also covers actual Cancel without confirmation
+or source mutation, and edits reaching the keyword/exclusion models.
+
+Only the two previously unsupported grouping control observations receive new
+control evidence. Plain-text rows are left to FQOpus. Changed titles, labels,
+filters and messages are captured as `wording-*.tsv` alongside native run artifacts.
+`--secondary-wording-append <run-output> <shared-list>` appends distinct candidates
+to `D:/FamilyQuant-data/reviews/wording-for-paulo.tsv` without rewriting prior rows.
+The list records decisions needed from Paulo, not judgments of equivalence, and
+never changes a ledger state. The abandoned pre-M44 semantic prototype stays in
+scratch as non-evidence and its register was never imported.
+
+This is a tests/receipts/docs extension: focused native runs and native ledger
+validation apply, with no worker quick/golden or routine master merge. The existing
+`FL-secondary-runtime` producer is sufficient; no new register is introduced.
+
+## N6l box coverage
+
+Roadmap v4 assigns preview, lock and identity observations to N6l. The native box
+audit covers all 161 retained observations in those source modules: 92 have current
+proof and 69 have old/live text plus a reason in the shared Paulo list. Missing: 0.
+This satisfies the box's routing check; wording rows remain OPEN in the ledger until
+the required ruling. Identical current copy is explicitly labeled for N6a or Paulo,
+without a new semantic proof. No DROP or global release-check waiver is introduced.
+
+The accepted refreshed first producer is `secondary/n6l-native-2`, repeated by `-3`,
+182/0/170 with all 91 non-receipt files identical. Its grouping run now includes
+native text edits and modal Cancel; frozen Cancel relies on modal `IsCancel`.
+The test waits for dispatcher unloading after the actual Closed event. A cancelled
+Closing event is injected in the negative, which also collapses the RAW field:
+180/2/122, rejected before import mutation. The accepted register stays unchanged.
+The interaction receipt refresh is `n6-interactions-1` and `-2`, 56/0/122, all 86
+non-receipt files identical. Native combined import: 3,770 VERIFIED, 1,690 OPEN,
+296 approved drops. These global counts include other lanes' merged receipts.
+
+`--secondary-box-audit <native-audit> <shared-wording-list> N6l <output>` reports
+92 verified, 69 listed and zero missing; N6k is audited separately and remains
+unfinished at this checkpoint. Tests/receipts/docs only, so worker quick/golden
+were not run. The M47 dependency merge and helper collision fix are already recorded
+separately in Y2 commit `cb0715c`.
+
+## N6k box coverage
+
+The Compute screen's attached spectrum-button handlers are executed with their
+compiled control flow preserved. The static table builder is retained; only its
+last `Window.Show` call is replaced with the offscreen proof presenter. The test
+verifies disabled/no-result behavior, an empty-state refusal with no child window,
+then a completed synthetic result opening the native table with its exact one-row
+fixture and retained CSV path. Both frozen and current child windows are offscreen
+and inactive. Dynamic-method references are relocated through the runtime's own
+token API; no loaded assembly or product file is patched.
+
+The accepted first-producer packet is `secondary/n6k-native-1`, repeated by `-2`:
+188/0/118 with every one of 107 non-receipt files byte-identical. Four additional
+control/event observations are supported. Current tooltips, explanatory text and
+messages go to the shared wording list without semantic closure. The native N6k
+box audit covers 185 retained observations: 114 verified, 71 listed, zero missing.
+The native ledger guard passes; combined import is 3,774 VERIFIED, 1,686 OPEN and
+296 approved drops. N6k's list-routing completion does not approve wording or pass
+the release gate. This is test-only work, with no worker quick/golden or new merge.

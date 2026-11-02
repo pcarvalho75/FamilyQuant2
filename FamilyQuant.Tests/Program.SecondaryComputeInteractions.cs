@@ -118,29 +118,25 @@ internal static partial class Program
 
     private static void SecondaryComputeClose(Assembly legacy, SecondaryAdd add)
     {
-        var old = (Window)Activator.CreateInstance(legacy.GetType("FamilyQuant.ComputeXicWindow", true)!, new object?[] { "native close", null, null })!;
-        var current = new ComputeXicWindow("native close"); SecondaryHost(old); SecondaryHost(current);
-        bool oldClosed = false, closed = false; old.Closed += (_, _) => oldClosed = true; current.Closed += (_, _) => closed = true;
-        try
+        var before = new List<QuantifyCloseReading>(); var actual = new List<QuantifyCloseReading>();
+        foreach (bool modal in new[] { false, true })
         {
-            SecondaryClick((Button)old.FindName("ButtonClose")); current.Close(); PumpDispatcher();
-            var oldModal = (Window)Activator.CreateInstance(legacy.GetType("FamilyQuant.ComputeXicWindow", true)!, new object?[] { "native modal close", null, null })!;
-            var modal = new ComputeXicWindow("native modal close");
-            bool? ShowAndClose(Window window, bool frozen)
-            {
-                window.Left = -30000; window.Top = -30000; window.ShowInTaskbar = false; window.ShowActivated = false;
-                window.WindowStartupLocation = WindowStartupLocation.Manual;
-                window.Loaded += (_, _) => window.Dispatcher.BeginInvoke(new Action(() =>
-                { if (frozen) SecondaryClick((Button)window.FindName("ButtonClose")); else window.Close(); }));
-                return window.ShowDialog();
-            }
-            bool? beforeModal = ShowAndClose(oldModal, true), actualModal = ShowAndClose(modal, false);
-            add("FamilyQuant/ComputeXicWindow.xaml.cs", 397, 397, "nonmodal close releases the host; modal close must also preserve the frozen DialogResult",
-                new { Closed = oldClosed, Computed = (bool)SecondaryRead(old, "Computed")!, ModalResult = beforeModal },
-                new { Closed = closed, current.Computed, ModalResult = actualModal },
-                oldClosed && closed && !(bool)SecondaryRead(old, "Computed")! && !current.Computed && beforeModal == actualModal,
-                "ComputeXicWindow standard Close lifecycle; a changed modal result or absent custom Close control remains an OPEN port gap");
+            var old = (Window)Activator.CreateInstance(legacy.GetType("FamilyQuant.ComputeXicWindow", true)!, new object?[] { "native close", null, null })!;
+            before.Add(ReadQuantifyClose(old, modal));
+            actual.Add(ReadQuantifyClose(new ComputeXicWindow("native close"), modal));
         }
-        finally { if (!closed) current.Close(); if (!oldClosed) old.Close(); }
+        bool safe = before.Concat(actual).All(value => value.Offscreen && !value.TookFocus);
+        bool control = safe && before.Concat(actual).All(value => value.HasButton && value.Displayed) && actual.All(value => value.HasStyle);
+        bool caption = control && before.Concat(actual).All(value => value.Caption == "Close");
+        bool action = caption && before.Concat(actual).All(value => value.Clicks == 1 && value.Closed)
+            && before[1].ModalResult == true && actual[1].ModalResult == before[1].ModalResult;
+        add("FamilyQuant/ComputeXicWindow.xaml", 137, 137, "displayed native Close control is present in both host modes and uses the current button style", before, actual,
+            control, "ComputeXicWindow.ButtonClose", row => row.Kind == "control");
+        add("FamilyQuant/ComputeXicWindow.xaml", 137, 137, "displayed native Close caption preserves the frozen action", before, actual,
+            caption, "ComputeXicWindow.ButtonClose.Content", row => row.Kind == "option/copy");
+        add("FamilyQuant/ComputeXicWindow.xaml", 138, 138, "actual Close click closes nonmodal hosts and returns true to modal callers", before, actual,
+            action, "ComputeXicWindow.ButtonClose_Click", row => row.Kind == "handler");
+        add("FamilyQuant/ComputeXicWindow.xaml.cs", 397, 397, "frozen and current Close handlers preserve modal true and nonmodal close through actual button clicks", before, actual,
+            action, "ComputeXicWindow.ButtonClose_Click; offscreen, no activation or taskbar entry");
     }
 }

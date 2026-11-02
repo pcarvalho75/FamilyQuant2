@@ -117,7 +117,7 @@ namespace FamilyQuant
 
             sb.AppendLine("WHAT A SHARED PEPTIDE IS");
             sb.AppendLine("------------------------");
-            sb.AppendLine("A peptide whose sequence occurs in proteins of more than one family. In a venom");
+            sb.AppendLine("A peptide whose sequence occurs in proteins of more than one family. In a redundant");
             sb.AppendLine("database, where whole families differ by a handful of residues, this is not a");
             sb.AppendLine("corner case: most of the signal can sit on shared peptides. Nothing can say which");
             sb.AppendLine("family such a peptide came from, so the program does not pretend to. In the Full");
@@ -213,7 +213,7 @@ namespace FamilyQuant
             sb.AppendLine("Keywords find the families; every protein of those families is listed, each with a");
             sb.AppendLine("tick, its Locus, its description as the database has it, and its domains. A protein");
             sb.AppendLine("with none of your words is in red: it is here because another protein of its family");
-            sb.AppendLine("carries one, which is how a venom disintegrin comes along with a metalloproteinase.");
+            sb.AppendLine("carries one, so a protein without a keyword can come along with a matching protein.");
             sb.AppendLine("Untick a protein and it stays in its family, while the rest of that family joins.");
             sb.AppendLine("\"Untick the red ones\" does that for all of them at once. To untick many by hand,");
             sb.AppendLine("click a heading to sort, Shift+click to select, and press Untick selected. When part");

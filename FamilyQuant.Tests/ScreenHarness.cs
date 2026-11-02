@@ -20,7 +20,7 @@ namespace FamilyQuant.Tests
     /// No Run(), file dialogs, computation, data exports or writes to the supplied projects occur.
     /// Omitted input paths select a labelled synthetic fixture, never a scientific deliverable.
     /// </summary>
-    internal static class ScreenHarness
+    internal static partial class ScreenHarness
     {
         internal const string Argument = "--screens";
         private const BindingFlags Any = BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public;
@@ -54,6 +54,9 @@ namespace FamilyQuant.Tests
                 string? fcfPath = Option(args, "--screen-fcf");
                 string? projectPath = Option(args, "--screen-project");
                 bool shellStatus = args.Contains("--screen-shell-status", StringComparer.OrdinalIgnoreCase);
+                bool finish = args.Contains("--screen-finish", StringComparer.Ordinal);
+                var finishCaptures = new List<FinishCapture>();
+                if (finish) RenderOptions.ProcessRenderMode = System.Windows.Interop.RenderMode.SoftwareOnly;
                 var inputHashes = new Dictionary<string, string>();
                 foreach (string path in new[] { fcfPath, projectPath }.OfType<string>())
                 {
@@ -72,8 +75,13 @@ namespace FamilyQuant.Tests
                 var project = projectPath == null
                     ? (fcf: Fixture(), quant: new List<QuantRow>(), manifest: new QuantManifest())
                     : ProjectStore.ReadFqproj(projectPath);
+                if (finish && projectPath == null)
+                {
+                    project.quant.AddRange(Program.FinishQuantRows());
+                    project.manifest = Program.FinishStoredManifest();
+                }
                 Console.WriteLine("Screens: curation " + (fcfPath ?? "synthetic fixture") +
-                    "; analytics " + (projectPath ?? "empty synthetic fixture"));
+                    "; analytics " + (projectPath ?? (finish ? "populated synthetic fixture" : "empty synthetic fixture")));
 
                 app = new App { ShutdownMode = ShutdownMode.OnExplicitShutdown };
                 app.InitializeComponent();
@@ -86,7 +94,7 @@ namespace FamilyQuant.Tests
                     Themes.ThemeManager.Apply(theme == "system" ? Themes.AppTheme.System
                         : theme == "dark" ? Themes.AppTheme.Dark : Themes.AppTheme.Light);
                     CaptureTheme(theme, source, project.fcf, project.quant, project.manifest, output, captures,
-                        fcfPath ?? "synthetic fixture.fcf", projectPath ?? "synthetic fixture.fqproj", shellStatus);
+                        fcfPath ?? "synthetic fixture.fcf", projectPath ?? "synthetic fixture.fqproj", shellStatus, finish, finishCaptures);
                 }
                 foreach (var input in inputHashes)
                     if (FileHash(input.Key) != input.Value)
@@ -94,15 +102,23 @@ namespace FamilyQuant.Tests
                 File.WriteAllText(manifestPath, JsonSerializer.Serialize(new
                 {
                     CurationSource = fcfPath == null ? "synthetic fixture" : Path.GetFullPath(fcfPath),
-                    AnalyticsSource = projectPath == null ? "empty synthetic fixture" : Path.GetFullPath(projectPath),
+                    AnalyticsSource = projectPath == null ? (finish ? "populated synthetic fixture" : "empty synthetic fixture") : Path.GetFullPath(projectPath),
                     InputSha256 = inputHashes,
                     InputsUnchanged = true,
                     UseShellStatusBar = shellStatus,
                     OperatingSystem = Environment.OSVersion.VersionString,
                     Runtime = Environment.Version.ToString(),
-                    Capture = "Client area only, 96 DPI, off-screen real WPF windows; no native title bar.",
-                    Captures = captures
+                    Capture = finish ? "C14 native WPF root DPI 100/125/150%; off-screen client captures; OS monitor DPI unchanged; no keyboard focus requested."
+                        : "Client area only, 96 DPI, off-screen real WPF windows; no native title bar.",
+                    Captures = captures,
+                    FinishCaptures = finish ? finishCaptures : null
                 }, new JsonSerializerOptions { WriteIndented = true }));
+                if (finish)
+                {
+                    bool accepted = finishCaptures.Count == 18 * 2 * 3 * 2 && finishCaptures.All(c => c.LayoutAccepted && c.TabStops.Count > 0);
+                    Console.WriteLine("C14: " + finishCaptures.Count + " client captures; layout accepted=" + accepted + "; actual keyboard traversal and OS monitor DPI require Paulo.");
+                    return accepted ? 0 : 1;
+                }
                 Console.WriteLine("Screens: " + captures.Count + " PNGs; input hashes unchanged; " + output);
                 return captures.Count == Screens.Length * Sizes.Length * themeNames.Length ? 0 : 1;
             }
@@ -123,7 +139,7 @@ namespace FamilyQuant.Tests
 
         private static void CaptureTheme(string theme, FamilyClusterFile source, FamilyClusterFile projectFile,
             List<QuantRow> quant, QuantManifest manifest, string output, List<CaptureInfo> captures,
-            string curationPath, string projectPath, bool shellStatus)
+            string curationPath, string projectPath, bool shellStatus, bool finish, List<FinishCapture> finishCaptures)
         {
             var main = new MainWindow();
             ShowOffScreen(main);
@@ -131,6 +147,11 @@ namespace FamilyQuant.Tests
             {
                 void Capture(string name, Window window)
                 {
+                    if (finish)
+                    {
+                        CaptureFinish(theme, name, window, output, finishCaptures);
+                        return;
+                    }
                     foreach (var size in Sizes)
                     {
                         string relative = Path.Combine(theme, size.Width + "x" + size.Height, name + ".png");
@@ -175,6 +196,13 @@ namespace FamilyQuant.Tests
                 var tabs = Walk(curation).OfType<TabControl>().FirstOrDefault();
                 if (tabs != null) tabs.SelectedIndex = 1;
                 Capture(Screens[3], main);
+                if (finish)
+                {
+                    curation.ViewModel.SelectedFamily = curation.ViewModel.Families.FirstOrDefault();
+                    Pump(); Capture("16-family-members", main);
+                    Call(main, "PresentQuantifyScreen");
+                    Capture("15-quantify", main);
+                }
 
                 var analytics = new AnalyticsControl(quant, manifest, projectFile);
                 Set(main, "loadedManifest", manifest);
@@ -183,6 +211,15 @@ namespace FamilyQuant.Tests
                 Set(main, "lastFcfPath", projectPath);
                 Present(main, analytics, "analytics");
                 Capture(Screens[6], main);
+                if (finish)
+                {
+                    var gap = new DatabaseGapControl(new DatabaseGapViewModel(manifest.FamilyWorldResult, projectFile));
+                    var gapWindow = new Window { Content = gap, Width = 900, Height = 600, MinWidth = 900, MinHeight = 600,
+                        Title = "Synthetic stored Database gap UI fixture" };
+                    ShowOffScreen(gapWindow);
+                    try { Capture("17-database-gap", gapWindow); Capture("18-database-gap-bottom", gapWindow); }
+                    finally { gapWindow.Close(); }
+                }
 
                 void Secondary(string name, Window window)
                 {

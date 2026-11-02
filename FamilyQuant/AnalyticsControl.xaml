@@ -14,7 +14,7 @@
      <ComboBoxItem Content="Peptide table (CSV)" ToolTip="Per-peptide run, sequence, charge, mass, isotope areas, envelope and family assignments." Tag="Peptides"/>
      <ComboBoxItem Content="Screen figures (PNG)" ToolTip="Every screen graph at 1920 by 1080 pixels in the Light palette." Tag="Figures"/>
      <ComboBoxItem Content="Presentation evidence pack" ToolTip="Complete figures, exact CSV and JSON numbers and cutoff README. Required studies must be present." Tag="EvidencePack"/>
-     <ComboBoxItem Content="Homology assignments (CSV)" ToolTip="Export the latest standalone homology snapshot. No full XIC or open project is required." Tag="Homology"/>
+     <ComboBoxItem Content="Homology assignments (CSV)" ToolTip="Export the latest standalone homology snapshot, with one row per searched peptide recording family IDs, protein IDs and ambiguity. No full XIC or open project is required." Tag="Homology"/>
      <ComboBoxItem Content="Database gap (CSV)" ToolTip="The stored three-part family table, every global bucket and the rules in force." Tag="DatabaseGap"/>
      <ComboBoxItem Content="Suggested additions (FASTA)" ToolTip="Exact stored world proteins hit by credited tags, for you to add and search again in PatternLab." Tag="SuggestedAdditions"/>
     </ComboBox>

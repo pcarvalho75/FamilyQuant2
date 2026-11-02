@@ -70,9 +70,11 @@ internal static partial class Program
                     SecondaryControlsRuntime(legacy, output, theme, args.Length == 7, Add);
                     SecondaryLockRuntime(legacy, output, theme, Add);
                     SecondaryIdentityRuntime(legacy, output, theme, Add);
-                    SecondarySuperRuntime(legacy, output, theme, Add);
+                    SecondarySuperRuntime(legacy, output, theme, Add, args.Length == 7);
                     SecondaryGridRuntime(legacy, output, theme, Add);
                     SecondaryComputeRuntime(legacy, output, theme, Add);
+                    SecondaryDialogScreenRuntime(legacy, output, theme);
+                    SecondaryComputeSpectrumRuntime(legacy, output, theme, Add);
                 }
                 if (theme == Themes.AppTheme.Dark)
                 {
@@ -96,7 +98,8 @@ internal static partial class Program
                 {
                     bool negativeProbe = args.Length == 7 && (interactions
                         ? row.Source == "FamilyQuant/GridCopy.cs" && row.Line == 51
-                        : row.Source == "FamilyQuant/ComputeXicWindow.xaml" && row.Line == 37);
+                        : row.Source == "FamilyQuant/ComputeXicWindow.xaml" && row.Line == 37
+                            || row.Source == "FamilyQuant/SuperClusterPreviewWindow.cs" && row.Line == 183);
                     if (fact.Passed || negativeProbe) Check("secondary runtime " + row.Id + ": " + fact.Operation, fact.Passed, fact.Actual);
                     else { skipped++; Console.WriteLine("  SKIP  " + row.Id + ": native values differ or the required action was not established; remains OPEN."); }
                     results.Add(new(row.Id, row.Kind, row.Source, row.Line, fact.Passed, fact.Before, fact.Actual,
@@ -129,7 +132,7 @@ internal static partial class Program
             .Distinct(StringComparer.Ordinal).ToArray();
         SecondaryLedgerRegister(root, frozenRoot, audit, output, args[5], step, nameof(SecondaryRuntimeCommand), results, assertions, log, data,
             sources, Directory.GetFiles(Path.Combine(root, "FamilyQuant.Tests"), "Program.Secondary*.cs").Select(path => Path.GetRelativePath(root, path))
-                .Append("FamilyQuant.Tests/Program.Commands.SecondaryLedger.cs"), runtime: true);
+                .Append("FamilyQuant.Tests/Program.Commands.SecondaryLedger.cs").Append("FamilyQuant.Tests/Program.QuantifyClose.cs"), runtime: true);
         return failed == 0 ? 0 : 1;
     }
 
