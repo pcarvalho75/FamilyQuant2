@@ -15,6 +15,8 @@ internal static partial class Program
         new("--test-curation-view", 30, TestCommandPhase.Raw, args => args.Contains("--test-curation-view", StringComparer.Ordinal), RunCurationViewChecks),
         new("--test-curation-quantitation", 40, TestCommandPhase.Raw, args => args.Contains("--test-curation-quantitation", StringComparer.Ordinal), RunCurationQuantitationChecks),
         new("--test-curation-operations", 45, TestCommandPhase.Raw, args => args.Contains("--test-curation-operations", StringComparer.Ordinal), RunCurationOperationChecks),
+        new("--test-family-view", 46, TestCommandPhase.Raw, args => args.Contains("--test-family-view", StringComparer.Ordinal), RunFamilyViewChecks),
+        new("--family-view-screens", 47, TestCommandPhase.Raw, args => args.Length == 3 && args[0] == "--family-view-screens", (args, _) => CurationScreens(args[1], args[2], selectFamily: true)),
     ];
 
     private static int RunCurationLayoutChecks(string[] args, string workDir)
@@ -45,6 +47,13 @@ internal static partial class Program
     private static int RunCurationOperationChecks(string[] args, string workDir)
     {
         CurationOperationTests();
+        Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
+        return failed == 0 ? 0 : 1;
+    }
+
+    private static int RunFamilyViewChecks(string[] args, string workDir)
+    {
+        FamilyViewTests();
         Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
         return failed == 0 ? 0 : 1;
     }
