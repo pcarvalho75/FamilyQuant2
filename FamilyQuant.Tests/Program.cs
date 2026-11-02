@@ -45,6 +45,9 @@ namespace FamilyQuant.Tests
                 string chartWork = args.Length == 2 ? args[1] : Path.Combine(Path.GetTempPath(), "FamilyQuant.Tests.ChartThemes");
                 ChartThemeTests(chartWork);
                 UiChartPaletteTests(chartWork);
+            if (args.Contains("--test-ui-icons", StringComparer.Ordinal))
+            {
+                UiIconTests();
                 Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
                 return failed == 0 ? 0 : 1;
             }
@@ -790,6 +793,7 @@ namespace FamilyQuant.Tests
             ShellStatusBridgeTests();
             LogoResourceTests(workDir);
             TypographyRulesTests();
+            UiIconTests();
             TableAppearanceTests();
             EvidenceReviewModelTests();
             GroupingReviewInteractionTests();
