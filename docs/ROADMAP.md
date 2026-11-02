@@ -80,7 +80,6 @@ Columns: Diff = L, M, H, VH. Hrs = worker hours at measured speed: estimates are
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| B10e | Real project at the default length: screen, CSV and FASTA | L | 0.2 | 🟢 | R3a | Repeats byte for byte; inspected in both themes | RS | not started | 0% | 0% | T+0 |
 
 ### W2 Port gaps found by the proofs
 
@@ -115,7 +114,7 @@ Columns: Diff = L, M, H, VH. Hrs = worker hours at measured speed: estimates are
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| R3a | Code freeze: only review findings touch product code after this | L | 0 | N6s, C14e, B10e | R3b | Freeze noted; all lanes told | Orchestrator | not started | 0% | 0% | T+3 |
+| R3a | Code freeze: only review findings touch product code after this | L | 0 | N6s, C14e | R3b | Freeze noted; all lanes told | Orchestrator | not started | 0% | 0% | T+3 |
 | R3b | Final proof refresh and full suite on the frozen code | L | 0.2 | R3a | R3c | Every proof current; suite green | Orchestrator | not started | 0% | 0% | T+4 |
 | R3c | Release candidate: versions, build and a clean install rehearsal | M | 0.3 | R3b | R4a, R4b | Rehearsal installs beside 1.5 and opens her file | Orchestrator | not started | 0% | 0% | T+4 |
 | R4a | Final adversarial pass: code and behaviour | H | 1 | R3c | R4c | GR's verdict | GR | not started | 0% | 0% | T+5 |
