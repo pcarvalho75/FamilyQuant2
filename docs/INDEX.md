@@ -29,7 +29,7 @@ This is the navigation index for the current checkout. The roadmap owns unfinish
 | [Appearance](../FamilyQuant/Themes/README.md) | Theme/token behavior and historical migration context |
 | [Screen rules](../FamilyQuant/Themes/STYLE-GUIDE.md) | Shared typography, tables and action roles |
 | [Brand assets](../FamilyQuant/Assets/Brand/README.md) | Geometry, generated assets and regeneration command |
-| [License](../LICENSE.txt) | Existing license text; unresolved identity placeholders require the owner |
+| [License](../LICENSE.txt) | All rights reserved, Fiocruz |
 
 Worker mission instructions and consult history are intentionally outside this maintained index.
 

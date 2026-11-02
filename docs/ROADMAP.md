@@ -85,9 +85,8 @@ Columns: Diff = L, M, H, VH. Hrs = worker hours at measured speed: the 56 steps 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
 | A1 | Make her file with 2.0 preview 1 on her original `.fcf`: Fetch Evidence, fetch the panel again so it keeps tissue text, review, Create, Save, Export. Provenance shows version, recipe and release | M | 0.5 | 🟢 | A2 | Recipe reapplied gives the same file; file check passed; no script touched it | EV | not started | 0% | 0% | T+2 |
-| A2 | Adversarial science review of the file: concepts, denominators, labels, red flags, comparison with what Ana already holds | H | 1 | A1 | A4 | GR's written verdict; every finding closed | GR | not started | 0% | 0% | T+2 |
-| A4 | Ana's answers, when Paulo raises them: is the family list right; keep disintegrins separate (default yes, one click to reverse); does the scope stay `Toxin` and `venom gland`, given that it brings in 125 left-out calmodulin-like rows; is a family-level claim acceptable for a peptide absent from her database; a `.sepr2` on this database | L | 0 | A2 | A5 | Answers recorded in the recipe | Ana | not started | 0% | 0% | her pace |
-| A5 | Measure the shared-peptide effect on her data, through Compute full XIC | M | 0.5 | A4 | Paper numbers | Numbers exported by the program | EV | not started | 0% | 0% | her pace |
+| A2 | Adversarial science review of the file: concepts, denominators, labels, red flags, comparison with what Ana already holds | H | 1 | A1 | Ana's file ready | GR's written verdict; every finding closed | GR | not started | 0% | 0% | T+2 |
+| A5 | Measure the shared-peptide effect on her data, through Compute full XIC. It needs a `.sepr2` on this database: if none exists when you reach it, post that and leave the step open | M | 0.5 | A2 | Paper numbers | Numbers exported by the program | EV | not started | 0% | 0% | her pace |
 
 ### W3 Look
 
@@ -153,7 +152,7 @@ The bet, from `docs/vision/VISION.md`: a de novo peptide your database cannot pl
 | B5 | Second attribution pass: de novo peptides left unattributed go to `HomologyMapper.Search` against the family world with reversed decoys. A hit credits the UniProt family, never a protein | H | 1.5 | B4, X5 | B6 | Existing exports byte-identical (golden 4/0/0), new columns in a new export only; two runs byte-identical; same numbers as B1's checker | OP | not started | 0% | 0% | T+4 |
 | B6 | The error beside every claim: for each family, the decoy rate and the known-answer right rate, stored in the project. A family with too little evidence shows that instead of a number | M | 1 | B5 | B7 | Every family row has both; reproducible; conserved families checked by hand | OP | not started | 0% | 0% | T+6 |
 | B7 | Result: the four-part bar per family and the database gap ranking, "families to sequence next" | M | 1 | B6, V6 | B8 | Screen and CSV from one table; every number from the program; both themes | RS | not started | 0% | 0% | T+6 |
-| B8 | Science review on a real sample: labels, denominators, inflation of conserved families, and the wording of the claim | H | 1 | B7, B2 | R3 | GR's verdict; findings closed; Paulo and Ana accept the wording | GR | not started | 0% | 0% | T+8 |
+| B8 | Science review on a real sample: labels, denominators, inflation of conserved families, and the wording of the claim | H | 1 | B7, B2 | R3 | GR's verdict; findings closed; Paulo accepts the wording | GR | not started | 0% | 0% | T+8 |
 
 ## Cooldown
 
@@ -167,7 +166,6 @@ Three lines run side by side from the restart. For Ana's file: A1, A2. For the b
 
 | ID | Decision | Default if no answer | Needed by |
 |---|---|---|---|
-| D7 | `LICENSE.txt` changes from the blank MIT template to all rights reserved, 2026 (Paulo agreed). Who holds the rights, Paulo or Fiocruz? | None: R5 waits, only Paulo can name the holder | Before R5 |
 
 ### Decisions taken
 
@@ -175,8 +173,9 @@ Paulo agreed these at the restart, 2026-11-01.
 
 | ID | Question | Taken |
 |---|---|---|
+| D7 | `LICENSE.txt` | Changed from the blank MIT template to all rights reserved, 2026, holder Fiocruz |
 | D8 | Test 1.5 and 2.0 side by side before Ana gets 2.0? | Not needed. Paulo: it is safe, she already uses 1.5 and will have 2.0 beside it |
-| D1 | Is a family-level claim acceptable for a peptide absent from the species database? | Yes, with the decoy rate and right rate printed beside it. Ana's answer is in A4 |
+| D1 | Is a family-level claim acceptable for a peptide absent from the species database? | Yes, with the decoy rate and right rate printed beside it. |
 | D2 | Clade of the family world on Ana's file: Viperidae or all snakes? | The clade the program reads from the headers, Viperidae on her file |
 | D3 | Scope proposed by the program or typed by the person? | Proposed, the person confirms |
 | D4 | Does the "sequence next" ranking belong in the product or only in the paper? | In the product |
