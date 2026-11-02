@@ -80,11 +80,8 @@ Columns: Diff = L, M, H, VH. Hrs = worker hours at measured speed: estimates are
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| B10b | Default length 8 in Core, tests, rule text and docs | L | 0.3 | 🟢 | B10e, B8a | Choosing 9 reproduces the B6 table byte for byte | OP | not started | 0% | 0% | T+0 |
+| B10b | Default length 8 in Core, tests, rule text and docs | L | 0.3 | 🟢 | B10e | Choosing 9 reproduces the B6 table byte for byte | OP | not started | 0% | 0% | T+0 |
 | B10e | Real project at the default length: screen, CSV and FASTA | L | 0.2 | B10b | R3a | Repeats byte for byte; inspected in both themes | RS | not started | 0% | 0% | T+0 |
-| B8a | Claim numbers redone at length 8 on both worlds | L | 0.2 | B10b | B8b | Numbers from the program | OP | not started | 0% | 0% | T+0 |
-| B8b | Reviewer checks the claim sentence against the stored files | L | 0.2 | B8a | B8c | GR's verdict | GR | not started | 0% | 0% | T+2 |
-| B8c | Paulo accepts the claim sentence, for Ana and records only | L | 0 | B8b | R3a | Paulo's word | Paulo | not started | 0% | 0% | T+2 |
 
 ### W2 Port gaps found by the proofs
 
@@ -126,7 +123,7 @@ Columns: Diff = L, M, H, VH. Hrs = worker hours at measured speed: estimates are
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| R3a | Code freeze: only review findings touch product code after this | L | 0 | N6s, C14e, B8c, B10e | R3b | Freeze noted; all lanes told | Orchestrator | not started | 0% | 0% | T+3 |
+| R3a | Code freeze: only review findings touch product code after this | L | 0 | N6s, C14e, B10e | R3b | Freeze noted; all lanes told | Orchestrator | not started | 0% | 0% | T+3 |
 | R3b | Final proof refresh and full suite on the frozen code | L | 0.2 | R3a | R3c | Every proof current; suite green | Orchestrator | not started | 0% | 0% | T+4 |
 | R3c | Release candidate: versions, build and a clean install rehearsal | M | 0.3 | R3b | R4a, R4b | Rehearsal installs beside 1.5 and opens her file | Orchestrator | not started | 0% | 0% | T+4 |
 | R4a | Final adversarial pass: code and behaviour | H | 1 | R3c | R4c | GR's verdict | GR | not started | 0% | 0% | T+5 |
@@ -147,7 +144,7 @@ H1 ran at the middle of the project and is finished: 56 steps landed, housekeepi
 
 ## Critical path
 
-Everything meets at R3a, the code freeze. The family world runs B10a, B10b, then the screen B10c, B10d, B10e, then the claim B8a, B8b, B8c. The ledger runs side by side, screen by screen, N6a to N6o, then Paulo's one ruling N6q, the sample N6r and the release check N6s. The look runs C14a to C14e. After the freeze the chain is R3b, R3c, R4a and R4b, R4c, R5a.
+Everything meets at R3a, the code freeze. The family world runs B10a, B10b, then the screen B10c, B10d, B10e. The ledger runs side by side, screen by screen, N6a to N6o, then Paulo's one ruling N6q, the sample N6r and the release check N6s. The look runs C14a to C14e. After the freeze the chain is R3b, R3c, R4a and R4b, R4c, R5a.
 
 ## Paulo's decisions
 
@@ -161,6 +158,7 @@ Paulo agreed these at the restart, 2026-11-01.
 | ID | Question | Taken |
 |---|---|---|
 | D14 | Should identity clustering change its coverage rule, merge on shared peptides, or use a reviewed-family veto? | No. Clustering stays as it is, and the measurements ship as a diagnostic the user can see |
+| D24 | Is the claim sentence roadmap work? | No. It is Paulo's own message to Ana, so its boxes left the roadmap. Paulo, 11-02 |
 | D23 | Finish today | Yes. C14 runs beside the ledger, preview 2 folds into the release candidate, and rows that only changed wording get one ruling from Paulo at the end. Paulo, 11-02 |
 | D22 | Default minimum tag length | 8, and the user can choose 7 to 15. Replaces the 9 in D11. Paulo, 11-02 |
 | D21 | Is the program general? | Yes. It must work with any database, so nothing the user sees names an organism, a venom or a sample's numbers. Paulo, 11-02 |
