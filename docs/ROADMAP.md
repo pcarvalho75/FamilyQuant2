@@ -79,8 +79,7 @@ Columns: Diff = L, M, H, VH. Hrs = worker hours at measured speed: the 56 steps 
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| N5 | Ledger evidence: all 5,460 kept rows are still OPEN, so "no function lost" is not yet proven. A tool groups the rows by kind, ties each to an executed test or an inspected render, and takes the first pass on what can be proven now: the sources moved to Core and the 13 handlers mapped in `docs/housekeeping/H1-NOTES.md` | H | 1.5 | 🟢 | N6 | Counts of VERIFIED and OPEN by kind; no row closes without recorded evidence; a reviewer samples 50 closed rows at random and agrees | SH | not started | 0% | 0% | T+2 |
-| N6 | Close the ledger by kind of row (D13): one executed check per kind, such as frozen 1.5.0.6 text compared with 2.0, with each row naming what was compared. A row no kind covers gets its own proof or stays open | H | 1.5 | C2, C13 | C14 | `--feature-ledger-release-check` passes; a reviewer samples 200 rows at random across all kinds and agrees; any sample failure reopens that whole kind | SH | not started | 0% | 0% | T+0 |
+| N6 | Close the ledger by kind of row (D13): one executed check per kind, such as frozen 1.5.0.6 text compared with 2.0, with each row naming what was compared. A row no kind covers gets its own proof or stays open | H | 1.5 | C2, C13 | C14 | `--feature-ledger-release-check` passes; a reviewer samples 200 rows at random across all kinds and agrees; any sample failure reopens that whole kind | SH | not started | 0% | 0% | T+6 |
 
 ### W2 Ana's result, through the software
 
