@@ -145,6 +145,7 @@ Invoke each flag with `& $testExe <flag>` after building. Dispatch and arity are
 | `--feature-ledger-release-check` | Same inventory with all retained rows required VERIFIED; OPEN rows intentionally fail |
 | `--test-ledger-evidence` | Adversarial receipt, source/artifact hash, assertion and render checks |
 | `--test-ledger-declarations` | Exact named-XAML and C# member comparison checks |
+| `--test-shell-metadata` | Compiled shell-metadata and isolated Home-event comparison guards; included in the ordinary ledger guard |
 
 ## Screens and UI metadata
 
@@ -195,9 +196,9 @@ Companion options for `--screens` are `--screen-fcf <input.fcf>`, `--screen-proj
 | `--prove-denovo-runtime <frozen-source-root> <frozen-app-folder> <fresh-output> <date>` | Native frozen/current controls and resolved values across both themes and three legacy sources |
 | `--ledger-shell-compare <frozen-root> <fresh-output> <date>` | SH and C1 exact declarations/member tokens; separate candidate registers, unproven rows kept OPEN |
 | `--ledger-core-relocation <frozen-root> <fresh-output> X5/X7 <date> [member-mappings.json]` | Scoped complete Core member comparisons, exact frozen hashes, retained source/checker snapshots and per-row gaps; [guide](CORE-RELOCATION-LEDGER.md) |
-| `--ledger-core-relocation <frozen-root> <fresh-output> X5/X7 <date> [member-mappings.json]` | Scoped complete Core member comparisons, exact frozen hashes, retained source/checker snapshots and per-row gaps; [guide](CORE-RELOCATION-LEDGER.md) |
-| `--ledger-shell-compare <frozen-root> <fresh-output> <date>` | SH and C1 exact declarations/member tokens; separate candidate registers, unproven rows kept OPEN |
 | `--ledger-xic-runtime <frozen-root> <fresh-output> <date> <stored-project> <validated-cache> [--negative-control]` | Native XIC refusal/source/completion facts plus bounded validated cache replay; [runtime guide](CORE-RUNTIME-LEDGER.md) |
+| `--shell-metadata-snapshot <frozen-root> <inventory> <fresh-output.json>` | Same native metadata helper in current and frozen hosts; assigned views remain unshown |
+| `--ledger-shell-native <frozen-root> <frozen-host.exe> <fresh-output> <date> [C1-cohort-register]` | Execute compiled SH/C1 metadata and isolated Home clicks; own candidate registers and complete comparison gaps |
 | `--word-grouping-snapshot <input.fcf-or-fqproj> <output.txt>` | [WordGroupingSnapshot.cs](../FamilyQuant.Tests/WordGroupingSnapshot.cs), also linked into frozen host |
 | `--chart-export-snapshot <output-dir>` | [ChartExportSnapshot.cs](../FamilyQuant.Tests/ChartExportSnapshot.cs), synthetic chart parity fixtures |
 | `--clustering-snapshot <input.fasta> <output.tsv> <integer-identity> <fast-or-exhaustive>` | [ClusteringSnapshot.cs](../FamilyQuant.Tests/ClusteringSnapshot.cs) |

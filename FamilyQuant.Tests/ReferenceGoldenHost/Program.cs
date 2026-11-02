@@ -7,6 +7,7 @@ namespace FamilyQuant.Tests
         [STAThread]
         private static int Main(string[] args)
         {
+            if (args.Length > 0 && args[0] == ShellMetadataSnapshot.Argument) return ShellMetadataSnapshot.Run(args);
             if (args.Length > 0 && args[0] == FcfCompatibilitySnapshot.Argument)
                 return FcfCompatibilitySnapshot.Run(args);
             if (args.Length > 0 && (args[0] == ClusteringSnapshot.Argument || args[0] == ClusteringSnapshot.ExportArgument || args[0] == ClusteringSnapshot.VerifyExportArgument))
