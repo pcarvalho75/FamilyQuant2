@@ -20,6 +20,10 @@ namespace FamilyQuant.Themes
             "State", typeof(State), typeof(TableAppearance));
         public static readonly DependencyProperty NumericProperty = DependencyProperty.RegisterAttached(
             "Numeric", typeof(bool), typeof(TableAppearance), new PropertyMetadata(false));
+        public static readonly DependencyProperty FullTextPathProperty = DependencyProperty.RegisterAttached(
+            "FullTextPath", typeof(string), typeof(TableAppearance), new PropertyMetadata(null));
+        public static string? GetFullTextPath(DependencyObject target) => (string?)target.GetValue(FullTextPathProperty);
+        public static void SetFullTextPath(DependencyObject target, string? value) => target.SetValue(FullTextPathProperty, value);
         public static bool GetEnabled(DependencyObject target) => (bool)target.GetValue(EnabledProperty);
         public static void SetEnabled(DependencyObject target, bool value) => target.SetValue(EnabledProperty, value);
         public static bool GetNumeric(DependencyObject target) => (bool)target.GetValue(NumericProperty);
@@ -122,7 +126,8 @@ namespace FamilyQuant.Themes
                     style.Setters.Add(new Setter(TextBlock.TextTrimmingProperty, TextTrimming.CharacterEllipsis));
                     style.Setters.Add(new Setter(TextBlock.TextWrappingProperty, TextWrapping.NoWrap));
                     style.Setters.Add(new Setter(FrameworkElement.ToolTipProperty,
-                        new Binding(nameof(TextBlock.Text)) { RelativeSource = RelativeSource.Self }));
+                        GetFullTextPath(column) is string path ? new Binding(path)
+                            : new Binding(nameof(TextBlock.Text)) { RelativeSource = RelativeSource.Self }));
                     if (numeric) style.Setters.Add(new Setter(TextBlock.TextAlignmentProperty, TextAlignment.Right));
                     text.ElementStyle = style;
                 }

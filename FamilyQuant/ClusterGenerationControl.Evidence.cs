@@ -34,9 +34,6 @@ public partial class ClusterGenerationControl
             finally { IsEnabled = true; EndWait(); }
             if (OpenGroupingReview(preview, true))
             {
-                keywordReviewText = preview.KeywordsText;
-                keywordReviewExclude = preview.ExcludeText;
-                keywordReviewMatch = preview.Match;
                 PerformClustering(preview);
             }
         }
