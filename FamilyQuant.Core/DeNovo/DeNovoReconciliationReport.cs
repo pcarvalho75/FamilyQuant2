@@ -8,39 +8,6 @@ using System.Text;
 namespace FamilyQuant.DeNovo
 {
     /// <summary>
-    /// One comparable precursor shaped for reading: overlapping de-novo-only alternatives and the
-    /// equal-but-weak-PSM rows retained for review.
-    ///
-    /// The CSV and the on-screen review queue are the SAME rows. Shaping them here rather than in each
-    /// consumer is what stops the two from drifting, which is how a table and its export end up
-    /// disagreeing about what is in the queue.
-    /// </summary>
-    public class ReviewQueueRow
-    {
-        public string Run { get; set; } = string.Empty;
-        public int Scan { get; set; }
-        public ReconciliationVerdict Verdict { get; set; }
-        public string VerdictLabel => DeNovoReconciliationReport.DisplayVerdict(Verdict);
-
-        public string DeNovoSequence { get; set; } = string.Empty;
-        public double Alc { get; set; }
-
-        /// <summary>The weakest residue of the de novo call, 0 when the export carried no trace.</summary>
-        public int MinResidueConfidence { get; set; }
-
-        public double DeNovoMz { get; set; }
-        public int Charge { get; set; }
-
-        public string PatternLabSequence { get; set; } = string.Empty;
-        public double XCorr { get; set; }
-        public double PatternLabMz { get; set; }
-
-        /// <summary>How far apart the two precursors are. Within the join tolerance by construction,
-        /// so it is a measure of agreement rather than a filter.</summary>
-        public double PpmApart { get; set; }
-    }
-
-    /// <summary>
     /// The reconciliation as files a collaborator can open: a per-run verdict summary, and the review
     /// queue holding every comparable precursor requiring review (alternative sequence, plus the
     /// equal-but-weak-PSM rows the request said to keep). Numbers are InvariantCulture and fields are
@@ -70,37 +37,8 @@ namespace FamilyQuant.DeNovo
         /// The review queue: every row where both engines saw the same precursor, ordered by run and
         /// then by scan so the same reconciliation always lists the same way.
         /// </summary>
-        public static List<ReviewQueueRow> BuildReviewQueue(IEnumerable<ReconciledRow> rows)
-        {
-            var queue = new List<ReviewQueueRow>();
-
-            foreach (var r in rows.Where(x => x.Verdict == ReconciliationVerdict.Conflict
-                                           || x.Verdict == ReconciliationVerdict.EqualButWeakPsm)
-                                  .OrderBy(x => x.DeNovo.RunName, StringComparer.Ordinal)
-                                  .ThenBy(x => x.DeNovo.Scan))
-            {
-                var dn = r.DeNovo;
-                var ps = r.CounterpartPsm!;
-
-                queue.Add(new ReviewQueueRow
-                {
-                    Run = dn.RunName,
-                    Scan = dn.Scan,
-                    Verdict = r.Verdict,
-                    DeNovoSequence = dn.Peptide,
-                    Alc = dn.Alc,
-                    MinResidueConfidence = dn.LocalConfidence.Length > 0 ? dn.LocalConfidence.Min() : 0,
-                    DeNovoMz = dn.Mz,
-                    Charge = dn.Charge,
-                    PatternLabSequence = ps.Sequence,
-                    XCorr = ps.XCorr,
-                    PatternLabMz = ps.PrecursorMz,
-                    PpmApart = Math.Abs(ps.PrecursorMz - dn.Mz) / dn.Mz * 1e6,
-                });
-            }
-
-            return queue;
-        }
+        public static List<ReviewQueueRow> BuildReviewQueue(IEnumerable<ReconciledRow> rows) =>
+            DeNovoReviewTableBuilder.Build(rows);
 
         public static void WriteSummaryCsv(string path, IReadOnlyList<ReconciledRow> rows)
         {

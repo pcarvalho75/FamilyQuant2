@@ -95,6 +95,7 @@ namespace FamilyQuant.Tests
             DeNovoRealExportTests(args.Length > 2 ? args[2] : null);
             Section("De novo source provenance - separate score semantics, deterministic union and project round trip");
             SourceAwareDeNovoTests.Run(Check, workDir);
+            DeNovoEngineTidyTests();
             Section("Isotope-aware precursor equivalence - the JOIN/matching paths pair M, M+-1, M+-2 of one precursor");
             IsotopePrecursorEquivalenceTests.Run(Check);
             Section("De novo XIC - stored quants reproduced bit for bit from the RAW");
