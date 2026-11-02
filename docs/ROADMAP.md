@@ -85,16 +85,15 @@ Columns: Diff = L, M, H, VH. Hrs = worker hours at measured speed: estimates are
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| Y9 | Failure guidance restored: the 46 rows where a user would miss what 1.5 said, such as the share column warning after a failed recalculation | M | 0.7 | 🟢 | R3a | Each fact shown on the normal route, its row closes on an independent read, or it is listed for Paulo | EV | not started | 0% | 0% | T+0 |
+| Y9 | Failure guidance restored: the 46 rows where a user would miss what 1.5 said, such as the share column warning after a failed recalculation | M | 0.7 | 🟢 | R3a | Each fact shown on the normal route, its row closes on an independent read, or it is listed for Paulo | EV | not started | 0% | 0% | T+1 |
 
 ### W3 Ledger, screen by screen
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| N6p | Wording list assembled for Paulo: rows that changed on purpose, with old and new text | L | 0.2 | 🟢 | N6q | List grouped by reason | Orchestrator | not started | 0% | 0% | T+0 |
-| N6q | Paulo rules on the wording list in one pass | L | 0 | N6p | N6r | Paulo's ruling recorded | Paulo | not started | 0% | 0% | T+0 |
+| N6q | Paulo rules on the wording list in one pass | L | 0 | 🟢 | N6r | Paulo's ruling recorded | Paulo | not started | 0% | 0% | T+0 |
 | N6r | Reviewer's 200-row random sample across the whole ledger | M | 0.3 | N6q | N6s | GR's verdict; one failure reopens the kind | GR | not started | 0% | 0% | T+0 |
-| N6s | Release check passes | L | 0.1 | N6r | R3a | `--feature-ledger-release-check` passes | Orchestrator | not started | 0% | 0% | T+1 |
+| N6s | Release check passes | L | 0.1 | N6r | R3a | `--feature-ledger-release-check` passes | Orchestrator | not started | 0% | 0% | T+0 |
 
 ### W4 Look
 
