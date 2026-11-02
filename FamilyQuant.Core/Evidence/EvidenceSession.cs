@@ -40,7 +40,8 @@ namespace FamilyQuant.Evidence
         }
 
         private static List<NeighbourReference>? ValidateSearch(FamilyClusterFile file, NeighbourSearch? search,
-            IReadOnlyList<NeighbourReference>? suppliedReferences, EvidenceClassificationOptions options, Operations.OperationContext? operation)
+            IReadOnlyList<NeighbourReference>? suppliedReferences, EvidenceClassificationOptions options, Operations.OperationContext? operation,
+            bool allowLegacyCoverage = false)
         {
             if (search == null)
             {
@@ -58,12 +59,12 @@ namespace FamilyQuant.Evidence
                     NearestReviewed.References(file, e => EvidenceClassifier.IsInScope(e, options.ScopeTerms)),
                     NearestReviewed.References(file, e => e.FamilyAnnotation.Length > 0 && EvidenceClassifier.IsInScope(e, options.ScopeTerms)),
                 };
-                references = candidates.FirstOrDefault(r => NearestReviewed.IsCurrent(search, queries, r));
+                references = candidates.FirstOrDefault(r => NearestReviewed.IsCurrent(search, queries, r, allowLegacyCoverage: allowLegacyCoverage));
             }
             var known = current.Select(r => Hash(r)).ToHashSet(StringComparer.Ordinal);
             if (references == null || references.Any(r => r == null || !known.Contains(Hash(r)))
                 || references.Select(r => Hash(r)).Distinct(StringComparer.Ordinal).Count() != references.Count
-                || !NearestReviewed.IsCurrent(search, queries, references) || search.Queries != queries.Count || search.References != references.Count)
+                || !NearestReviewed.IsCurrent(search, queries, references, allowLegacyCoverage: allowLegacyCoverage) || search.Queries != queries.Count || search.References != references.Count)
                 throw new InvalidOperationException("The session search no longer matches the current queries and reviewed references.");
             if (!double.IsFinite(search.MinIdentityPercent) || search.MinIdentityPercent <= 0 || search.MinIdentityPercent > 100
                 || search.MinIdentityPercent > Math.Min(options.AnnotatedIdentityPercent, options.UnannotatedIdentityPercent)
@@ -74,6 +75,7 @@ namespace FamilyQuant.Evidence
                 .ToDictionary(g => g.Key, g => g.ToList(), StringComparer.Ordinal);
             var seen = new HashSet<string>(StringComparer.Ordinal);
             var families = references.Select(r => r.Family).ToHashSet(StringComparer.Ordinal);
+            bool legacyCoverage = allowLegacyCoverage && search.CoverageMethod == null;
             foreach (NearestNeighbour neighbour in search.Neighbours)
             {
                 operation?.ThrowIfCancellationRequested();
@@ -82,8 +84,11 @@ namespace FamilyQuant.Evidence
                     || neighbour.Accession == NearestReviewed.EntryAccession(query.SequenceIdentifier)
                     || neighbour.QueryLength != query.Sequence.Length || !matches.Any(r => r.Sequence.Length == neighbour.ReferenceLength)
                     || !double.IsFinite(neighbour.IdentityPercent) || neighbour.IdentityPercent > 100 || neighbour.AlignmentLength <= 0
-                    || !NearestReviewed.PassesGate(neighbour.IdentityPercent, neighbour.AlignmentLength, neighbour.QueryLength,
-                        search.MinIdentityPercent, search.MinQueryAlignedPercent) || neighbour.TiedFamilies.Any(f => !families.Contains(f)))
+                    || !(legacyCoverage
+                        ? NearestReviewed.PassesLegacyColumnsGate(neighbour.IdentityPercent, neighbour.AlignmentLength, neighbour.QueryLength,
+                            search.MinIdentityPercent, search.MinQueryAlignedPercent)
+                        : neighbour.QueryAlignedResidues is int covered && NearestReviewed.PassesGate(neighbour.IdentityPercent, covered, neighbour.QueryLength,
+                            search.MinIdentityPercent, search.MinQueryAlignedPercent)) || neighbour.TiedFamilies.Any(f => !families.Contains(f)))
                     throw new InvalidOperationException("A session neighbour is inconsistent with its current query, reference or search gate.");
             }
             return references;

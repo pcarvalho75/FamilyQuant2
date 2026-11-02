@@ -194,8 +194,12 @@ namespace FamilyQuant.Tests
             ProteinDomainsTests(workDir);
             EvidenceStorageTests(workDir);
             EvidenceFetchTests();
+            EvidenceFetchAtomicTests();
+            EvidenceCoverageTests();
+            QueryResidueCoverageTests();
             EvidenceTaskTests();
             EvidenceClassifierTests();
+            EvidenceDeliveryFixtureTests(workDir);
             EvidenceArchitectureTests();
             Section("Nearest reviewed protein and the outside panel - never itself, gated, deterministic, offline");
             NearestReviewedTests(workDir);

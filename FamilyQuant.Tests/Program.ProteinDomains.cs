@@ -24,17 +24,20 @@ namespace FamilyQuant.Tests
         private sealed class EvidenceAndPanelHandler(bool failPanel = false) : System.Net.Http.HttpMessageHandler
         {
             internal int ProteinRequests, PanelRequests;
+            internal Action<bool, CancellationToken>? DuringRequest;
+            internal string PanelRelease = "2026_03";
             protected override Task<System.Net.Http.HttpResponseMessage> SendAsync(System.Net.Http.HttpRequestMessage request, CancellationToken token)
             {
                 bool panel = Uri.UnescapeDataString(request.RequestUri!.Query).Contains("reviewed:true", StringComparison.Ordinal);
                 if (panel) PanelRequests++; else ProteinRequests++;
+                DuringRequest?.Invoke(panel, token);
                 string json = """
                 {"results":[{"primaryAccession":"A0A710","entryType":"UniProtKB unreviewed (TrEMBL)","sequence":{"value":"PEPTIDEK"},"keywords":[{"name":"Scope"}],"comments":[{"commentType":"SIMILARITY","texts":[{"value":"Belongs to the fixture family."}]},{"commentType":"TISSUE SPECIFICITY","texts":[{"value":"Supplied tissue fact."}]}],"uniProtKBCrossReferences":[{"database":"Pfam","id":"PF00001","properties":[{"key":"EntryName","value":"Supplied domain"}]}]}]}
                 """;
                 if (panel) json = json.Replace("A0A710", "P00001", StringComparison.Ordinal).Replace("UniProtKB unreviewed (TrEMBL)", "UniProtKB reviewed (Swiss-Prot)", StringComparison.Ordinal);
                 var response = new System.Net.Http.HttpResponseMessage(panel && failPanel ? System.Net.HttpStatusCode.BadRequest : System.Net.HttpStatusCode.OK)
                     { Content = new System.Net.Http.StringContent(json) };
-                response.Headers.Add("x-uniprot-release", "2026_03"); response.Headers.Add("x-total-results", "1");
+                response.Headers.Add("x-uniprot-release", panel ? PanelRelease : "2026_03"); response.Headers.Add("x-total-results", "1");
                 return Task.FromResult(response);
             }
         }
@@ -50,10 +53,10 @@ namespace FamilyQuant.Tests
                 && file.MyExtendedFastaItems[0].Evidence != null && file.EvidenceSource?.ReferencePanel?.Entries.Count == 1
                 && file.MyExtendedFastaItems[0].UserID == 71 && file.MyExtendedFastaItems[0].USearchID == 71);
             var partial = File(); using var failing = new EvidenceAndPanelHandler(failPanel: true);
-            var failedPanel = Task.Run(() => EvidenceFetchSession.FetchAsync(partial, failing)).GetAwaiter().GetResult();
-            Check("a panel failure preserves successful protein evidence and reports the partial result truthfully",
-                failedPanel.Changed && failedPanel.PanelFailure != null && partial.MyExtendedFastaItems[0].Evidence != null
-                && partial.EvidenceSource?.ReferencePanel == null && partial.MyExtendedFastaItems[0].UserID == 71);
+            string beforeFailure = partial.ToJsonText(); bool refused = false;
+            try { Task.Run(() => EvidenceFetchSession.FetchAsync(partial, failing)).GetAwaiter().GetResult(); }
+            catch (System.Net.Http.HttpRequestException) { refused = true; }
+            Check("a panel failure publishes neither protein evidence nor a partial result", refused && partial.ToJsonText() == beforeFailure);
             var control = new ClusterGenerationControl(File()); using var uiHandler = new EvidenceAndPanelHandler();
             control.FetchDomainsHandlerOverride = uiHandler;
             int changed = 0; control.DocumentChanged += (_, _) => changed++;
@@ -644,6 +647,7 @@ namespace FamilyQuant.Tests
                     Query = target.SequenceIdentifier, Reference = reference.SequenceIdentifier,
                     Accession = reference.Evidence!.Accession, Family = reference.Evidence.Family,
                     IdentityPercent = identity, AlignmentLength = aligned, QueryLength = 100, ReferenceLength = 100,
+                    QueryAlignedResidues = aligned,
                 };
         }
         private static Task<Evidence.EvidenceFetchResult> FetchEvidenceForTest(IReadOnlyCollection<FastaItemExtended> items,
