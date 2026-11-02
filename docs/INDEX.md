@@ -223,6 +223,7 @@ and output must be separate. None is executed merely to maintain this catalog.
 |---|---|
 | `--evidence-storage-check [input.fcf] [reference.tsv] [report.json]` | [EvidenceStorageCheck.cs](../FamilyQuant.Tests/EvidenceStorageCheck.cs) |
 | `--evidence-task-check <evidence.fcf> <new-report.json>` | [Program.EvidenceTask.cs](../FamilyQuant.Tests/Program.EvidenceTask.cs); read-only live taxonomy discovery, native JSON report |
+| `--evidence-task-header-audit <input.fcf-or-fqproj> <new-report.json>` | Production header-parser audit, joined-taxon counts, input byte hash and refusal boundary; no fetch or save |
 | `--evidence-delivery prepare/split/create ...` | [Program.EvidenceDelivery.cs](../FamilyQuant.Tests/Program.EvidenceDelivery.cs); [native delivery syntax](EVIDENCE-DELIVERY.md) |
 | `--evidence-coverage-check <prepared.fcf> <applied.fcf> <new-output-directory> [existing-capture-directory]` | [Program.EvidenceCoverage.cs](../FamilyQuant.Tests/Program.EvidenceCoverage.cs); native capture or deterministic offline replay, without applying a counterfactual |
 | `--family-world-fetch <input.fcf> <new-output.fcf> <confirmed-scope>` | [Program.FamilyWorldNative.cs](../FamilyQuant.Tests/Program.FamilyWorldNative.cs); live fetch, size report and offline byte proof |
