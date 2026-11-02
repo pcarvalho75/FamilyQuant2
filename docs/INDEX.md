@@ -97,6 +97,10 @@ Invoke each flag with `& $testExe <flag>` after building. Dispatch and arity are
 | `--test-curation-layout` | Retained chrome, tooltips and ancestor-clipping regression |
 | `--test-quantitation-panel [output-dir]` | Full XIC first, conditional source options, retained selectors and both-theme native captures |
 | `--test-curation-quantitation` | Full-XIC column, denominator changes, shared policy and unavailable-TIC fallback |
+| `--test-curation-operations` | Shared host queue/cancel paths, staged PatternLab publication, stale membership, browse preferences and headless refusal |
+| `--test-architecture-group-split [output-dir]` | Native per-key split choices, retained bulk choice, unsplit members staying together, exact recipe replay and optional synthetic captures |
+| `--test-report-study-boundary` | Report-only operation ownership, retained Core models and screen dependencies |
+| `--report-study-snapshot <new-output-dir>` | Six native synthetic text/PNG fixtures for source-move parity |
 | `--shell-checks` | Shell navigation, saving, preferences, Build/Quantify integration and secondary views |
 | `--feature-ledger-check` | Inventory, row coverage, dispositions and guard regressions |
 | `--feature-ledger-release-check` | Same inventory with all retained rows required VERIFIED; OPEN rows intentionally fail |

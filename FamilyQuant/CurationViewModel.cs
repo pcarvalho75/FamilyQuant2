@@ -4,10 +4,11 @@ using System.Globalization;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using FamilyQuant.Operations;
 
 namespace FamilyQuant;
 
-public sealed class CurationViewModel : ScreenViewModel
+public sealed partial class CurationViewModel : ScreenViewModel
 {
     public FamilyClusterFile Document { get; }
     public CurationQuantitationViewModel Quantitation { get; }
@@ -122,7 +123,8 @@ public sealed class CurationViewModel : ScreenViewModel
         NotifyDocumentChanged();
     }
 
-    public async Task<string> ReclusterByWordsAsync(double threshold, IReadOnlyList<string> ignored, CancellationToken cancellation = default)
+    public async Task<string> ReclusterByWordsAsync(double threshold, IReadOnlyList<string> ignored,
+        CancellationToken cancellation = default, Action<Action>? publish = null)
     {
         var scope = WordCluster.ScopeItems(Document.MyExtendedFastaItems, SearchText);
         bool scoped = !string.IsNullOrWhiteSpace(SearchText);
@@ -131,9 +133,13 @@ public sealed class CurationViewModel : ScreenViewModel
         var locks = new HashSet<int>(Document.LockedUserIds);
         var groups = await Task.Run(() => words.GroupByWords(threshold, locks), cancellation);
         cancellation.ThrowIfCancellationRequested();
-        ApplyWordGrouping(groups, scoped ? scope : null, threshold);
+        void Apply() => ApplyWordGrouping(groups, scoped ? scope : null, threshold);
+        if (publish == null) Apply(); else publish(Apply);
         return before.ToString("N0", CultureInfo.CurrentCulture) + (scoped ? " matching families became " : " families became ")
             + groups.Count.ToString("N0", CultureInfo.CurrentCulture) + ". Undo reverses the grouping."
             + (scoped ? " Hidden families kept their numbers." : "");
     }
+
+    public Task<string> AlignAsync(IReadOnlyList<FastaItemExtended> proteins, OperationContext operation) =>
+        Task.Run(() => USearchTools.Align(proteins.ToList(), operation), operation.CancellationToken);
 }
