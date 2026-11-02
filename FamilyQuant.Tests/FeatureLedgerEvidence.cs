@@ -82,6 +82,7 @@ internal static partial class FeatureLedgerEvidence
         catch (Exception ex) when (ex is IOException or JsonException) { registry.FatalProblems.Add("Kind review history: " + ex.Message); }
         var hashes = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
         var logs = new Dictionary<string, string[]>(StringComparer.OrdinalIgnoreCase);
+        var rulingContexts = new Dictionary<string, RulingContext>(StringComparer.OrdinalIgnoreCase);
         string CachedHash(string path)
         {
             if (!hashes.TryGetValue(path, out string? value)) hashes[path] = value = Hash(path);
@@ -223,9 +224,11 @@ internal static partial class FeatureLedgerEvidence
                             if (!row.Proofs.Any(p => p.Kind == "test") && observation?.Kind is ("handler" or "handler definition" or "shortcut" or "format/export" or "export/storage fact"))
                                 problems.Add("This observation requires an executed behavior/format test, not a render alone.");
                         }
+                        else if (proof.Kind == "ruling")
+                            ValidateRuling(root, inventory, register, row, observation, proof, run, full, rulingContexts, ResolveArtifact, problems);
                         else problems.Add("Unknown proof kind: " + proof.Kind);
                     }
-                    catch (Exception ex) when (ex is IOException or ArgumentException or InvalidDataException or InvalidOperationException or UnauthorizedAccessException)
+                    catch (Exception ex) when (ex is IOException or ArgumentException or InvalidDataException or InvalidOperationException or UnauthorizedAccessException or JsonException)
                     { problems.Add(ex.Message); }
                 }
                 var entry = new Entry(register.Step!, row, problems.Distinct(StringComparer.Ordinal).ToList());
