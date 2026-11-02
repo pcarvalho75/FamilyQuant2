@@ -21,6 +21,56 @@ namespace FamilyQuant.Tests
 {
     internal static partial class Program
     {
+        private sealed class EvidenceAndPanelHandler(bool failPanel = false) : System.Net.Http.HttpMessageHandler
+        {
+            internal int ProteinRequests, PanelRequests;
+            protected override Task<System.Net.Http.HttpResponseMessage> SendAsync(System.Net.Http.HttpRequestMessage request, CancellationToken token)
+            {
+                bool panel = Uri.UnescapeDataString(request.RequestUri!.Query).Contains("reviewed:true", StringComparison.Ordinal);
+                if (panel) PanelRequests++; else ProteinRequests++;
+                string json = """
+                {"results":[{"primaryAccession":"A0A710","entryType":"UniProtKB unreviewed (TrEMBL)","sequence":{"value":"PEPTIDEK"},"keywords":[{"name":"Scope"}],"comments":[{"commentType":"SIMILARITY","texts":[{"value":"Belongs to the fixture family."}]},{"commentType":"TISSUE SPECIFICITY","texts":[{"value":"Supplied tissue fact."}]}],"uniProtKBCrossReferences":[{"database":"Pfam","id":"PF00001","properties":[{"key":"EntryName","value":"Supplied domain"}]}]}]}
+                """;
+                if (panel) json = json.Replace("A0A710", "P00001", StringComparison.Ordinal).Replace("UniProtKB unreviewed (TrEMBL)", "UniProtKB reviewed (Swiss-Prot)", StringComparison.Ordinal);
+                var response = new System.Net.Http.HttpResponseMessage(panel && failPanel ? System.Net.HttpStatusCode.BadRequest : System.Net.HttpStatusCode.OK)
+                    { Content = new System.Net.Http.StringContent(json) };
+                response.Headers.Add("x-uniprot-release", "2026_03"); response.Headers.Add("x-total-results", "1");
+                return Task.FromResult(response);
+            }
+        }
+
+        private static void EvidenceFetchCoordinatorTests()
+        {
+            static FamilyClusterFile File() => new() { MyExtendedFastaItems = new List<FastaItemExtended>
+            { new() { SequenceIdentifier = "tr|A0A710|FIXTURE", Sequence = "PEPTIDEK", Description = "Fetch fixture", UserID = 71, USearchID = 71 } } };
+            var file = File(); using var handler = new EvidenceAndPanelHandler();
+            var result = Task.Run(() => EvidenceFetchSession.FetchAsync(file, handler)).GetAwaiter().GetResult();
+            Check("the explicit fetch coordinator calls E2 and E4 and stores the reviewed panel without moving IDs",
+                handler.ProteinRequests == 1 && handler.PanelRequests == 1 && result.Changed && result.PanelFailure == null
+                && file.MyExtendedFastaItems[0].Evidence != null && file.EvidenceSource?.ReferencePanel?.Entries.Count == 1
+                && file.MyExtendedFastaItems[0].UserID == 71 && file.MyExtendedFastaItems[0].USearchID == 71);
+            var partial = File(); using var failing = new EvidenceAndPanelHandler(failPanel: true);
+            var failedPanel = Task.Run(() => EvidenceFetchSession.FetchAsync(partial, failing)).GetAwaiter().GetResult();
+            Check("a panel failure preserves successful protein evidence and reports the partial result truthfully",
+                failedPanel.Changed && failedPanel.PanelFailure != null && partial.MyExtendedFastaItems[0].Evidence != null
+                && partial.EvidenceSource?.ReferencePanel == null && partial.MyExtendedFastaItems[0].UserID == 71);
+            var control = new ClusterGenerationControl(File()); using var uiHandler = new EvidenceAndPanelHandler();
+            control.FetchDomainsHandlerOverride = uiHandler;
+            int changed = 0; control.DocumentChanged += (_, _) => changed++;
+            var previous = SynchronizationContext.Current;
+            SynchronizationContext.SetSynchronizationContext(new DispatcherSynchronizationContext(Dispatcher.CurrentDispatcher));
+            try
+            {
+                typeof(ClusterGenerationControl).GetMethod("ButtonFetchDomains_Click", BindingFlags.Instance | BindingFlags.NonPublic)!
+                    .Invoke(control, new object?[] { null, null });
+                var watch = System.Diagnostics.Stopwatch.StartNew();
+                while (!control.IsEnabled && watch.Elapsed < TimeSpan.FromSeconds(5)) { PumpDispatcher(); Thread.Sleep(1); }
+                PumpDispatcher();
+                Check("the real Fetch evidence button reaches the panel service and emits one document change",
+                    control.IsEnabled && uiHandler.PanelRequests == 1 && control.fcf.EvidenceSource?.ReferencePanel?.Entries.Count == 1 && changed == 1);
+            }
+            finally { SynchronizationContext.SetSynchronizationContext(previous); control.FetchDomainsHandlerOverride = null; }
+        }
         private static void EvidenceArchitectureTests()
         {
             EvidenceApplyTests();
