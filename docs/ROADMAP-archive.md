@@ -74,6 +74,7 @@ Finished steps, moved here from docs/ROADMAP.md. The board shows them as green.
 | S2 | Left navigation rail in place of the Home card grid: Families, Quantify, Results, De novo, with state marks. `MainWindow` becomes a thin shell over a view model | H | 4 | S1, S4 | C1, C6, C8, C9, C10 | Every screen reachable by keyboard; disabled steps readable with the reason | LK | SH | 0% | 0% | T+4 |
 | S5 | One Save: `.fqproj` is the file, `.fcf` stays as Export and still opens. Unsaved mark, prompt on close. Ana's file goes from 70 MB to about 16 MB | H | 4 | S1, E12, X7 | R2 | Old `.fcf` opens; project round trip byte-equal in curation; a curation-only project opens with no quant | LK | SH | 0% | 0% | T+35 |
 | S7 | Window size and last folder remembered; drag a file to open | L | 1 | S1 | R2 | Survives restart | LK | SH | 0% | 0% | T+7 |
+| S6 | One busy overlay with progress and Cancel for every long operation outside the curation screen, on the operation path, and a host C1 adopts for the curation paths | M | 1 | 🟢 | R2, C1 | Cancel leaves the file as it was; suite covers each operation | SH | not started | 0% | 0% | T+1 |
 
 ### W5 Screens: each rebuilt as a thin view over a tested view model
 
@@ -106,4 +107,10 @@ Finished steps, moved here from docs/ROADMAP.md. The board shows them as green.
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
 | H1 | Cooldown at the middle, by the `halt-team-for-regroup` skill: everyone finished the step in hand, all branches merged, housekeeping, duplicate-code review, roadmap readjusted from measured speed | H | 2 | | R2, R3 | All worker branches merged; full suite and golden green; ledger status reported; roadmap version 3 written | Orchestrator | done | 100% | 100% | done |
 | R1 | 2.0 preview 1: evidence engine and review window, for Ana's file; installs beside 1.5 | M | 0.5 | 🟢 | A1 | Full suite, golden, publish rehearsal, release notes | Orchestrator | not started | 0% | 0% | T+0 |
+
+### W8 Breakthrough: the family world
+
+| ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
+|---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
+| B3 | The program reads the task from the file: taxon from OS= and OX=, the clade from UniProt taxonomy, and a proposed scope from the UniProt keyword counts of the reviewed proteins in the file. The person confirms; the choice goes in the recipe. No word table in the code | M | 1 | 🟢 | B4 | On Ana's file it names Viperidae and proposes `Toxin` with its count, with no literal in `Evidence/`; recipe replay exact; contaminants ignored; non-UniProt headers refused plainly | EV | not started | 0% | 0% | T+1 |
 
