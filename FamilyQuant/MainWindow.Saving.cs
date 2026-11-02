@@ -66,15 +66,16 @@ public partial class MainWindow
         }));
     }
 
-    public async Task<bool> OpenProjectSafelyAsync(string path)
+    public Task<bool> OpenProjectSafelyAsync(string path) => AppOperationHost.OnUi(this, () => OpenProjectSafelyCoreAsync(path));
+    private async Task<bool> OpenProjectSafelyCoreAsync(string path)
     {
         if (!await ConfirmCanReplaceAsync()) return false;
-        return OpenProjectPath(path);
+        return await documentCommands.OpenProjectPathAsync(path);
     }
 
     private async Task<bool> ConfirmCanReplaceAsync()
     {
-        if (leavePromptRunning || saveInProgress || IsQuantifyBusy) return false;
+        if (leavePromptRunning || saveInProgress || IsQuantifyBusy || Operations.IsBusy) return false;
         if (cgc == null || !DocumentState.CheckForChanges(cgc.fcf)) return true;
         leavePromptRunning = true;
         try
@@ -99,6 +100,13 @@ public partial class MainWindow
 
     private async void WindowClosing(object? sender, CancelEventArgs args)
     {
+        if (Operations.IsBusy)
+        {
+            args.Cancel = true;
+            Operations.Cancel();
+            StatusModel.ShowMessage("Cancelling the current operation. Close again after it finishes.");
+            return;
+        }
         if (IsQuantifyBusy)
         {
             args.Cancel = true;

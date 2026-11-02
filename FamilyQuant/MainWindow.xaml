@@ -103,5 +103,6 @@
             <local:ShellNavigationRail x:Name="NavigationRail"/>
             <Grid x:Name="GridApp" Grid.Column="1" Background="{DynamicResource CanvasBrush}"/>
         </Grid>
+        <local:BusyOverlay x:Name="ShellBusyOverlay" Grid.RowSpan="3" Panel.ZIndex="100"/>
     </Grid>
 </Window>

@@ -341,16 +341,16 @@ namespace FamilyQuant
         }
 
         public static DeNovoHomology SearchHomology(IReadOnlyList<string> peptides, FamilyClusterFile fcf,
-                                                    HomologyOptions options, string fcfPath)
+                                                    HomologyOptions options, string fcfPath, FamilyQuant.Operations.OperationContext? operation = null)
         {
             if (peptides == null) throw new ArgumentNullException(nameof(peptides));
             if (fcf == null) throw new ArgumentNullException(nameof(fcf));
             if (options == null) throw new ArgumentNullException(nameof(options));
 
-            var database = HomologyDatabase.Build(fcf.MyExtendedFastaItems);
+            var database = HomologyDatabase.Build(fcf.MyExtendedFastaItems, operation: operation);
 
             DateTime started = DateTime.UtcNow;
-            List<HomologyResult> results = HomologyMapper.Search(peptides, database, options);
+            List<HomologyResult> results = HomologyMapper.Search(peptides, database, options, operation: operation);
             double seconds = (DateTime.UtcNow - started).TotalSeconds;
 
             List<FamilyAssignment> assignments = HomologyMapper.MapToFamilies(results, fcf.MyExtendedFastaItems);

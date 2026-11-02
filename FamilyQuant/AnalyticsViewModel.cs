@@ -85,17 +85,45 @@ public sealed class AnalyticsViewModel : ScreenViewModel
         if (!CanExport) { Status = "The selected export needs its stored result and required project evidence."; return; }
         try
         {
-            switch (ExportKind)
-            {
-                case ResultsExportKind.Summary: File.WriteAllText(path, AnalyticsCsv.BuildSummaryCsv(Data!.Fractions, Data.Grouped)); break;
-                case ResultsExportKind.Peptides: File.WriteAllText(path, AnalyticsCsv.BuildPeptideCsv(Data!.Peptides)); break;
-                case ResultsExportKind.Figures: AnalyticsFigures.Save(Data!, Families, path, FamilyTopN, FamilyAsPercent); break;
-                case ResultsExportKind.EvidencePack: PresentationEvidencePack.Save(Data!, manifest!, curation!, Families!, path); break;
-                case ResultsExportKind.Homology: HomologyCsv.Write(path, Homology!); break;
-            }
+            ExportWriter()(path);
             Status = "Written to " + path + ".";
         }
         catch (Exception ex) { Status = "The export did not finish. " + ex.Message; }
+    }
+
+    public async System.Threading.Tasks.Task ExportAsync(string path, AppOperationHost operations)
+    {
+        if (!CanExport || operations.IsBusy) return;
+        using var operation = operations.Begin("Export results");
+        var writer = ExportWriter();
+        bool folder = ExportKind is ResultsExportKind.Figures or ResultsExportKind.EvidencePack;
+        try
+        {
+            await AppOperationFiles.RunSta(() =>
+            {
+                if (folder) AppOperationFiles.WriteFolder(path, writer, operation.Context);
+                else AppOperationFiles.WriteFile(path, writer, operation.Context);
+            });
+            Status = "Written to " + path + ".";
+        }
+        catch (OperationCanceledException) when (operation.Context.IsCancellationRequested)
+        { Status = "Cancelled. The previous export files were kept."; }
+        catch (Exception ex) { Status = "The export did not finish. " + ex.Message; }
+    }
+
+    private Action<string> ExportWriter()
+    {
+        int top = FamilyTopN;
+        bool asPercent = FamilyAsPercent;
+        return ExportKind switch
+        {
+            ResultsExportKind.Summary => path => File.WriteAllText(path, AnalyticsCsv.BuildSummaryCsv(Data!.Fractions, Data.Grouped)),
+            ResultsExportKind.Peptides => path => File.WriteAllText(path, AnalyticsCsv.BuildPeptideCsv(Data!.Peptides)),
+            ResultsExportKind.Figures => path => AnalyticsFigures.Save(Data!, Families, path, top, asPercent),
+            ResultsExportKind.EvidencePack => path => PresentationEvidencePack.Save(Data!, manifest!, curation!, Families!, path),
+            ResultsExportKind.Homology => path => HomologyCsv.Write(path, Homology!),
+            _ => throw new InvalidOperationException("Choose a supported export.")
+        };
     }
 
         internal static string SummaryLine(AnalyticsData d, FamilyEnvelopeQuantResult? fam,

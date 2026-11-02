@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using FamilyQuant.Operations;
 
 namespace FamilyQuant
 {
@@ -15,6 +16,9 @@ namespace FamilyQuant
         public static Func<string, int, bool, Task<FamilyClusterFile>>? BuildOverride { get; set; }
         private bool busy => ViewModel.IsBusy;
         private readonly BuildActions actions;
+        private AppOperationHost.OperationLease? runningOperation;
+        private OperationContext? Operation => runningOperation?.Context;
+        public void CancelOperation() => AppOperationHost.For(this).Cancel();
         public string ShellStatusText => busy ? "Running USEARCH" : ViewModel.Status;
         public string ShellHelpText => BuildHelpText() + "\n\n" + TextBlockUSearchState.Text;
         public event EventHandler? ShellStatusChanged;
@@ -34,13 +38,17 @@ namespace FamilyQuant
         private bool BeginRun(string what)
         {
             if (!ViewModel.TryBegin(what)) return false;
+            try { runningOperation = AppOperationHost.For(this).Begin(what); }
+            catch { ViewModel.End(fcf != null); throw; }
             Mouse.OverrideCursor = Cursors.Wait;
-            TextBlockUSearchState.Text = "Working: " + what + " This runs USEARCH and cannot be interrupted; the buttons return when it finishes.";
+            TextBlockUSearchState.Text = "Working: " + what + " Cancel stops after the current phase.";
             ShellStatusChanged?.Invoke(this, EventArgs.Empty);
             return true;
         }
         private void EndRun()
         {
+            runningOperation?.Dispose();
+            runningOperation = null;
             ViewModel.End(fcf != null);
             Mouse.OverrideCursor = null;
             UpdateState();
