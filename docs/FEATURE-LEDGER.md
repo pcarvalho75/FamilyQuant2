@@ -17,7 +17,7 @@ Render targets refer to `ScreenHarness.Screens`, captured with `--screens <outpu
 Release gate: `FamilyQuant.Tests.exe --feature-ledger-release-check` fails until every retained row is VERIFIED with evidence. Authorized DROP rows use APPROVED_DROP, which records a decision, not a completed UI removal. The normal quick suite permits OPEN rows during development. Regeneration resets retained rows to OPEN; preserve reviewed evidence when updating the scanner.
 
 Scan count: **5756**. Ledger rows: **5756**. Source files: **104**.
-Authorized DROP rows: **296**; proposed VERIFIED retained rows: **1911**; OPEN retained rows: **3549**.
+Authorized DROP rows: **296**; proposed VERIFIED retained rows: **2015**; OPEN retained rows: **3445**.
 
 | ID | Disposition | Kind | Frozen source | Fact or control | Planned check | State | Evidence |
 |---|---|---|---|---|---|---|---|
@@ -1194,37 +1194,37 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **1911**; OPEN r
 | FQ15-A1AD5039E557 | IMPROVE | tooltip | FamilyQuant/DeNovoControl.xaml:266 | DataGridReviewQueue.ToolTip = Rows with a comparable precursor but a different sequence, plus matches with a low PatternLab XCorr. They are left out of the de novo quantitation and listed here for review. | test:DeNovoLedgerDeclarationsCommand | VERIFIED | evidence:EV-denovo-declarations-1:FQ15-A1AD5039E557 |
 | FQ15-59C09081F133 | IMPROVE | control | FamilyQuant/DeNovoControl.xaml:268 | DataGridTextColumn ColumnQueueRun | test:DeNovoLedgerRuntimeCommand | VERIFIED | evidence:EV-denovo-runtime-1:FQ15-59C09081F133 |
 | FQ15-B33E5DC1B245 | IMPROVE | column | FamilyQuant/DeNovoControl.xaml:268 | ColumnQueueRun.Header = Run | test:DeNovoLedgerDeclarationsCommand | VERIFIED | evidence:EV-denovo-declarations-1:FQ15-B33E5DC1B245 |
-| FQ15-F0F2808B13C4 | IMPROVE | column | FamilyQuant/DeNovoControl.xaml:268 | ColumnQueueRun.Binding = {Binding Path=Run} | render:06-denovo-advanced | OPEN | pending |
+| FQ15-F0F2808B13C4 | IMPROVE | column | FamilyQuant/DeNovoControl.xaml:268 | ColumnQueueRun.Binding = {Binding Path=Run} | test:DeNovoLedgerWorkflowCommand | VERIFIED | evidence:EV-denovo-workflows-1:FQ15-F0F2808B13C4 |
 | FQ15-C97082B2FFD4 | IMPROVE | control | FamilyQuant/DeNovoControl.xaml:269 | DataGridTextColumn ColumnQueueScan | test:DeNovoLedgerRuntimeCommand | VERIFIED | evidence:EV-denovo-runtime-1:FQ15-C97082B2FFD4 |
 | FQ15-89C7BC04EF36 | IMPROVE | column | FamilyQuant/DeNovoControl.xaml:269 | ColumnQueueScan.Header = Scan | test:DeNovoLedgerDeclarationsCommand | VERIFIED | evidence:EV-denovo-declarations-1:FQ15-89C7BC04EF36 |
-| FQ15-A18FCFA91A05 | IMPROVE | column | FamilyQuant/DeNovoControl.xaml:269 | ColumnQueueScan.Binding = {Binding Path=Scan} | render:06-denovo-advanced | OPEN | pending |
+| FQ15-A18FCFA91A05 | IMPROVE | column | FamilyQuant/DeNovoControl.xaml:269 | ColumnQueueScan.Binding = {Binding Path=Scan} | test:DeNovoLedgerWorkflowCommand | VERIFIED | evidence:EV-denovo-workflows-1:FQ15-A18FCFA91A05 |
 | FQ15-3A49B18E43EF | IMPROVE | control | FamilyQuant/DeNovoControl.xaml:270 | DataGridTextColumn ColumnQueueMz | test:DeNovoLedgerRuntimeCommand | VERIFIED | evidence:EV-denovo-runtime-1:FQ15-3A49B18E43EF |
 | FQ15-0AC806A0BA09 | IMPROVE | column | FamilyQuant/DeNovoControl.xaml:270 | ColumnQueueMz.Header = m/z | test:DeNovoLedgerDeclarationsCommand | VERIFIED | evidence:EV-denovo-declarations-1:FQ15-0AC806A0BA09 |
-| FQ15-B3BB74910310 | IMPROVE | column | FamilyQuant/DeNovoControl.xaml:270 | ColumnQueueMz.Binding = {Binding Path=DeNovoMz, StringFormat=N4} | render:06-denovo-advanced | OPEN | pending |
+| FQ15-B3BB74910310 | IMPROVE | column | FamilyQuant/DeNovoControl.xaml:270 | ColumnQueueMz.Binding = {Binding Path=DeNovoMz, StringFormat=N4} | test:DeNovoLedgerWorkflowCommand | VERIFIED | evidence:EV-denovo-workflows-1:FQ15-B3BB74910310 |
 | FQ15-0D3EE3DBB396 | IMPROVE | control | FamilyQuant/DeNovoControl.xaml:271 | DataGridTextColumn ColumnQueueCharge | test:DeNovoLedgerRuntimeCommand | VERIFIED | evidence:EV-denovo-runtime-1:FQ15-0D3EE3DBB396 |
 | FQ15-9176458E27D6 | IMPROVE | column | FamilyQuant/DeNovoControl.xaml:271 | ColumnQueueCharge.Header = z | test:DeNovoLedgerDeclarationsCommand | VERIFIED | evidence:EV-denovo-declarations-1:FQ15-9176458E27D6 |
-| FQ15-A443E5CB3D93 | IMPROVE | column | FamilyQuant/DeNovoControl.xaml:271 | ColumnQueueCharge.Binding = {Binding Path=Charge} | render:06-denovo-advanced | OPEN | pending |
+| FQ15-A443E5CB3D93 | IMPROVE | column | FamilyQuant/DeNovoControl.xaml:271 | ColumnQueueCharge.Binding = {Binding Path=Charge} | test:DeNovoLedgerWorkflowCommand | VERIFIED | evidence:EV-denovo-workflows-1:FQ15-A443E5CB3D93 |
 | FQ15-1A6A88F5B56A | IMPROVE | control | FamilyQuant/DeNovoControl.xaml:272 | DataGridTextColumn ColumnQueueDeNovoSequence | test:DeNovoLedgerRuntimeCommand | VERIFIED | evidence:EV-denovo-runtime-1:FQ15-1A6A88F5B56A |
 | FQ15-8A4BA1BC7EE7 | IMPROVE | column | FamilyQuant/DeNovoControl.xaml:272 | ColumnQueueDeNovoSequence.Header = De novo sequence | test:DeNovoLedgerDeclarationsCommand | VERIFIED | evidence:EV-denovo-declarations-1:FQ15-8A4BA1BC7EE7 |
-| FQ15-A7DB7044FD1B | IMPROVE | column | FamilyQuant/DeNovoControl.xaml:272 | ColumnQueueDeNovoSequence.Binding = {Binding Path=DeNovoSequence} | render:06-denovo-advanced | OPEN | pending |
+| FQ15-A7DB7044FD1B | IMPROVE | column | FamilyQuant/DeNovoControl.xaml:272 | ColumnQueueDeNovoSequence.Binding = {Binding Path=DeNovoSequence} | test:DeNovoLedgerWorkflowCommand | VERIFIED | evidence:EV-denovo-workflows-1:FQ15-A7DB7044FD1B |
 | FQ15-59CA46A409C4 | IMPROVE | control | FamilyQuant/DeNovoControl.xaml:273 | DataGridTextColumn ColumnQueuePatternLabSequence | test:DeNovoLedgerRuntimeCommand | VERIFIED | evidence:EV-denovo-runtime-1:FQ15-59CA46A409C4 |
 | FQ15-3321E31B9696 | IMPROVE | column | FamilyQuant/DeNovoControl.xaml:273 | ColumnQueuePatternLabSequence.Header = PatternLab sequence | test:DeNovoLedgerDeclarationsCommand | VERIFIED | evidence:EV-denovo-declarations-1:FQ15-3321E31B9696 |
-| FQ15-0F12AE3AEC18 | IMPROVE | column | FamilyQuant/DeNovoControl.xaml:273 | ColumnQueuePatternLabSequence.Binding = {Binding Path=PatternLabSequence} | render:06-denovo-advanced | OPEN | pending |
+| FQ15-0F12AE3AEC18 | IMPROVE | column | FamilyQuant/DeNovoControl.xaml:273 | ColumnQueuePatternLabSequence.Binding = {Binding Path=PatternLabSequence} | test:DeNovoLedgerWorkflowCommand | VERIFIED | evidence:EV-denovo-workflows-1:FQ15-0F12AE3AEC18 |
 | FQ15-7C6EE5583862 | IMPROVE | control | FamilyQuant/DeNovoControl.xaml:274 | DataGridTextColumn ColumnQueueXCorr | test:DeNovoLedgerRuntimeCommand | VERIFIED | evidence:EV-denovo-runtime-1:FQ15-7C6EE5583862 |
 | FQ15-78E36C23F807 | IMPROVE | column | FamilyQuant/DeNovoControl.xaml:274 | ColumnQueueXCorr.Header = XCorr | test:DeNovoLedgerDeclarationsCommand | VERIFIED | evidence:EV-denovo-declarations-1:FQ15-78E36C23F807 |
-| FQ15-95BD2E59EC6E | IMPROVE | column | FamilyQuant/DeNovoControl.xaml:274 | ColumnQueueXCorr.Binding = {Binding Path=XCorr, StringFormat=N3} | render:06-denovo-advanced | OPEN | pending |
+| FQ15-95BD2E59EC6E | IMPROVE | column | FamilyQuant/DeNovoControl.xaml:274 | ColumnQueueXCorr.Binding = {Binding Path=XCorr, StringFormat=N3} | test:DeNovoLedgerWorkflowCommand | VERIFIED | evidence:EV-denovo-workflows-1:FQ15-95BD2E59EC6E |
 | FQ15-CB1597669839 | IMPROVE | control | FamilyQuant/DeNovoControl.xaml:275 | DataGridTextColumn ColumnQueueAlc | test:DeNovoLedgerRuntimeCommand | VERIFIED | evidence:EV-denovo-runtime-1:FQ15-CB1597669839 |
 | FQ15-DD3825DDEE32 | IMPROVE | column | FamilyQuant/DeNovoControl.xaml:275 | ColumnQueueAlc.Header = ALC (%) | test:DeNovoLedgerDeclarationsCommand | VERIFIED | evidence:EV-denovo-declarations-1:FQ15-DD3825DDEE32 |
-| FQ15-D65152B21C64 | IMPROVE | column | FamilyQuant/DeNovoControl.xaml:275 | ColumnQueueAlc.Binding = {Binding Path=Alc, StringFormat=N1} | render:06-denovo-advanced | OPEN | pending |
+| FQ15-D65152B21C64 | IMPROVE | column | FamilyQuant/DeNovoControl.xaml:275 | ColumnQueueAlc.Binding = {Binding Path=Alc, StringFormat=N1} | test:DeNovoLedgerWorkflowCommand | VERIFIED | evidence:EV-denovo-workflows-1:FQ15-D65152B21C64 |
 | FQ15-5F2C65BFA5E0 | IMPROVE | control | FamilyQuant/DeNovoControl.xaml:276 | DataGridTextColumn ColumnQueueMinConfidence | test:DeNovoLedgerRuntimeCommand | VERIFIED | evidence:EV-denovo-runtime-1:FQ15-5F2C65BFA5E0 |
 | FQ15-2E242798AF3C | IMPROVE | column | FamilyQuant/DeNovoControl.xaml:276 | ColumnQueueMinConfidence.Header = Min residue conf. | test:DeNovoLedgerDeclarationsCommand | VERIFIED | evidence:EV-denovo-declarations-1:FQ15-2E242798AF3C |
-| FQ15-EC0C2D942DA5 | IMPROVE | column | FamilyQuant/DeNovoControl.xaml:276 | ColumnQueueMinConfidence.Binding = {Binding Path=MinResidueConfidence} | render:06-denovo-advanced | OPEN | pending |
+| FQ15-EC0C2D942DA5 | IMPROVE | column | FamilyQuant/DeNovoControl.xaml:276 | ColumnQueueMinConfidence.Binding = {Binding Path=MinResidueConfidence} | test:DeNovoLedgerWorkflowCommand | VERIFIED | evidence:EV-denovo-workflows-1:FQ15-EC0C2D942DA5 |
 | FQ15-58715EBCE564 | IMPROVE | control | FamilyQuant/DeNovoControl.xaml:277 | DataGridTextColumn ColumnQueuePpm | test:DeNovoLedgerRuntimeCommand | VERIFIED | evidence:EV-denovo-runtime-1:FQ15-58715EBCE564 |
 | FQ15-4E88263CFD0D | IMPROVE | column | FamilyQuant/DeNovoControl.xaml:277 | ColumnQueuePpm.Header = ppm apart | test:DeNovoLedgerDeclarationsCommand | VERIFIED | evidence:EV-denovo-declarations-1:FQ15-4E88263CFD0D |
-| FQ15-CD8ECA2F07A6 | IMPROVE | column | FamilyQuant/DeNovoControl.xaml:277 | ColumnQueuePpm.Binding = {Binding Path=PpmApart, StringFormat=N2} | render:06-denovo-advanced | OPEN | pending |
+| FQ15-CD8ECA2F07A6 | IMPROVE | column | FamilyQuant/DeNovoControl.xaml:277 | ColumnQueuePpm.Binding = {Binding Path=PpmApart, StringFormat=N2} | test:DeNovoLedgerWorkflowCommand | VERIFIED | evidence:EV-denovo-workflows-1:FQ15-CD8ECA2F07A6 |
 | FQ15-5F995EC5624B | IMPROVE | control | FamilyQuant/DeNovoControl.xaml:278 | DataGridTextColumn ColumnQueueVerdict | test:DeNovoLedgerRuntimeCommand | VERIFIED | evidence:EV-denovo-runtime-1:FQ15-5F995EC5624B |
 | FQ15-567836704F7E | IMPROVE | column | FamilyQuant/DeNovoControl.xaml:278 | ColumnQueueVerdict.Header = Verdict | test:DeNovoLedgerDeclarationsCommand | VERIFIED | evidence:EV-denovo-declarations-1:FQ15-567836704F7E |
-| FQ15-8C179D3F7DA0 | IMPROVE | column | FamilyQuant/DeNovoControl.xaml:278 | ColumnQueueVerdict.Binding = {Binding Path=VerdictLabel} | render:06-denovo-advanced | OPEN | pending |
+| FQ15-8C179D3F7DA0 | IMPROVE | column | FamilyQuant/DeNovoControl.xaml:278 | ColumnQueueVerdict.Binding = {Binding Path=VerdictLabel} | test:DeNovoLedgerWorkflowCommand | VERIFIED | evidence:EV-denovo-workflows-1:FQ15-8C179D3F7DA0 |
 | FQ15-681C6934C297 | IMPROVE | control | FamilyQuant/DeNovoControl.xaml:293 | Expander ExpanderStandalone | test:DeNovoLedgerRuntimeCommand | VERIFIED | evidence:EV-denovo-runtime-1:FQ15-681C6934C297 |
 | FQ15-C1232C569E84 | IMPROVE | tooltip | FamilyQuant/DeNovoControl.xaml:294 | ExpanderStandalone.ToolTip = Advanced: extract areas, attribute to families and partition ion current without a project. If you have a .fqproj, use steps 3 and 4 on the Home instead. | render:06-denovo-advanced | OPEN | pending |
 | FQ15-E48653838261 | IMPROVE | option/copy | FamilyQuant/DeNovoControl.xaml:296 | TextBlock.Text = Standalone run (advanced): extract, attribute, partition without a project | render:06-denovo-advanced | OPEN | pending |
@@ -1340,13 +1340,13 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **1911**; OPEN r
 | FQ15-2A6660087265 | IMPROVE | tooltip | FamilyQuant/DeNovoControl.xaml:488 | DataGridHomologyFamilies.ToolTip = One line per family reached, most peptides first, target hits only. A peptide in two families counts in both, so the column does not sum to the peptides searched. | test:DeNovoLedgerDeclarationsCommand | VERIFIED | evidence:EV-denovo-declarations-1:FQ15-2A6660087265 |
 | FQ15-72DA7BDE514D | IMPROVE | control | FamilyQuant/DeNovoControl.xaml:490 | DataGridTextColumn ColumnFamilyId | test:DeNovoLedgerRuntimeCommand | VERIFIED | evidence:EV-denovo-runtime-1:FQ15-72DA7BDE514D |
 | FQ15-1E75F228EDC2 | IMPROVE | column | FamilyQuant/DeNovoControl.xaml:490 | ColumnFamilyId.Header = Family (User ID) | test:DeNovoLedgerDeclarationsCommand | VERIFIED | evidence:EV-denovo-declarations-1:FQ15-1E75F228EDC2 |
-| FQ15-6A8E8F9D6E32 | IMPROVE | column | FamilyQuant/DeNovoControl.xaml:490 | ColumnFamilyId.Binding = {Binding Path=FamilyId} | render:06-denovo-advanced | OPEN | pending |
+| FQ15-6A8E8F9D6E32 | IMPROVE | column | FamilyQuant/DeNovoControl.xaml:490 | ColumnFamilyId.Binding = {Binding Path=FamilyId} | test:DeNovoLedgerWorkflowCommand | VERIFIED | evidence:EV-denovo-workflows-1:FQ15-6A8E8F9D6E32 |
 | FQ15-B6EFF1356DD8 | IMPROVE | control | FamilyQuant/DeNovoControl.xaml:491 | DataGridTextColumn ColumnFamilyPeptides | test:DeNovoLedgerRuntimeCommand | VERIFIED | evidence:EV-denovo-runtime-1:FQ15-B6EFF1356DD8 |
 | FQ15-7A7F566E7093 | IMPROVE | column | FamilyQuant/DeNovoControl.xaml:491 | ColumnFamilyPeptides.Header = Peptides | test:DeNovoLedgerDeclarationsCommand | VERIFIED | evidence:EV-denovo-declarations-1:FQ15-7A7F566E7093 |
-| FQ15-48D618DFD46A | IMPROVE | column | FamilyQuant/DeNovoControl.xaml:491 | ColumnFamilyPeptides.Binding = {Binding Path=PeptideCount, StringFormat=N0} | render:06-denovo-advanced | OPEN | pending |
+| FQ15-48D618DFD46A | IMPROVE | column | FamilyQuant/DeNovoControl.xaml:491 | ColumnFamilyPeptides.Binding = {Binding Path=PeptideCount, StringFormat=N0} | test:DeNovoLedgerWorkflowCommand | VERIFIED | evidence:EV-denovo-workflows-1:FQ15-48D618DFD46A |
 | FQ15-88FCD43C87A2 | IMPROVE | control | FamilyQuant/DeNovoControl.xaml:492 | DataGridTextColumn ColumnFamilyDescription | test:DeNovoLedgerRuntimeCommand | VERIFIED | evidence:EV-denovo-runtime-1:FQ15-88FCD43C87A2 |
 | FQ15-2E4524F17680 | IMPROVE | column | FamilyQuant/DeNovoControl.xaml:492 | ColumnFamilyDescription.Header = Representative description | test:DeNovoLedgerDeclarationsCommand | VERIFIED | evidence:EV-denovo-declarations-1:FQ15-2E4524F17680 |
-| FQ15-D3A3BEACFF77 | IMPROVE | column | FamilyQuant/DeNovoControl.xaml:492 | ColumnFamilyDescription.Binding = {Binding Path=Description} | render:06-denovo-advanced | OPEN | pending |
+| FQ15-D3A3BEACFF77 | IMPROVE | column | FamilyQuant/DeNovoControl.xaml:492 | ColumnFamilyDescription.Binding = {Binding Path=Description} | test:DeNovoLedgerWorkflowCommand | VERIFIED | evidence:EV-denovo-workflows-1:FQ15-D3A3BEACFF77 |
 | FQ15-5DFAC1A9C8A3 | DROP | option/copy | FamilyQuant/DeNovoControl.xaml:509 | TextBlock.Text = \uD83D\uDCCA Partition ion current | render:06-denovo-advanced | APPROVED_DROP | Paulo via orchestrator M4, 2026-11-01 11:20:38: retire the De Novo Extract areas and Partition ion current sections in 2.0; 1.5 keeps them. Attribute to families stays and its CSV moves to Results in C11. |
 | FQ15-69BF64F22CE0 | DROP | option/copy | FamilyQuant/DeNovoControl.xaml:511 | TextBlockDeNovoLayer5State.Text = BLOCKED | render:06-denovo-advanced | APPROVED_DROP | Paulo via orchestrator M4, 2026-11-01 11:20:38: retire the De Novo Extract areas and Partition ion current sections in 2.0; 1.5 keeps them. Attribute to families stays and its CSV moves to Results in C11. |
 | FQ15-06C773438168 | DROP | option/copy | FamilyQuant/DeNovoControl.xaml:533 | Label.Content = PatternLab project (.plp): | render:06-denovo-advanced | APPROVED_DROP | Paulo via orchestrator M4, 2026-11-01 11:20:38: retire the De Novo Extract areas and Partition ion current sections in 2.0; 1.5 keeps them. Attribute to families stays and its CSV moves to Results in C11. |
@@ -1452,15 +1452,15 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **1911**; OPEN r
 | FQ15-EFF91AFC09AA | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:423 | " for " | render:06-denovo-advanced | OPEN | pending |
 | FQ15-9D92BB7C8A56 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:424 | ", so the previous settings are still in force and the boxes have been put back to them. " | render:06-denovo-advanced | OPEN | pending |
 | FQ15-01DB999131BB | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:425 | "Next step: correct that box and press the button again." | render:06-denovo-advanced | OPEN | pending |
-| FQ15-99E6A0990736 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:431 | "length " | render:06-denovo-advanced | OPEN | pending |
-| FQ15-31B7E1D2657E | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:431 | "N0" | render:06-denovo-advanced | OPEN | pending |
-| FQ15-A4D2400393A5 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:432 | " or more, " | render:06-denovo-advanced | OPEN | pending |
-| FQ15-0C370E95FB28 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:433 | "N0" | render:06-denovo-advanced | OPEN | pending |
-| FQ15-73C22E1FBAC8 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:434 | "% or more, and " | render:06-denovo-advanced | OPEN | pending |
-| FQ15-5D8C8360E58F | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:434 | "N0" | render:06-denovo-advanced | OPEN | pending |
-| FQ15-6490BC5165A5 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:435 | " consecutive residues at " | render:06-denovo-advanced | OPEN | pending |
-| FQ15-FA40196475E3 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:435 | "N0" | render:06-denovo-advanced | OPEN | pending |
-| FQ15-42530CDD5D29 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:436 | "% or better" | render:06-denovo-advanced | OPEN | pending |
+| FQ15-99E6A0990736 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:431 | "length " | test:DeNovoLedgerWorkflowCommand | VERIFIED | evidence:EV-denovo-workflows-1:FQ15-99E6A0990736 |
+| FQ15-31B7E1D2657E | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:431 | "N0" | test:DeNovoLedgerWorkflowCommand | VERIFIED | evidence:EV-denovo-workflows-1:FQ15-31B7E1D2657E |
+| FQ15-A4D2400393A5 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:432 | " or more, " | test:DeNovoLedgerWorkflowCommand | VERIFIED | evidence:EV-denovo-workflows-1:FQ15-A4D2400393A5 |
+| FQ15-0C370E95FB28 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:433 | "N0" | test:DeNovoLedgerWorkflowCommand | VERIFIED | evidence:EV-denovo-workflows-1:FQ15-0C370E95FB28 |
+| FQ15-73C22E1FBAC8 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:434 | "% or more, and " | test:DeNovoLedgerWorkflowCommand | VERIFIED | evidence:EV-denovo-workflows-1:FQ15-73C22E1FBAC8 |
+| FQ15-5D8C8360E58F | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:434 | "N0" | test:DeNovoLedgerWorkflowCommand | VERIFIED | evidence:EV-denovo-workflows-1:FQ15-5D8C8360E58F |
+| FQ15-6490BC5165A5 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:435 | " consecutive residues at " | test:DeNovoLedgerWorkflowCommand | VERIFIED | evidence:EV-denovo-workflows-1:FQ15-6490BC5165A5 |
+| FQ15-FA40196475E3 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:435 | "N0" | test:DeNovoLedgerWorkflowCommand | VERIFIED | evidence:EV-denovo-workflows-1:FQ15-FA40196475E3 |
+| FQ15-42530CDD5D29 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:436 | "% or better" | test:DeNovoLedgerWorkflowCommand | VERIFIED | evidence:EV-denovo-workflows-1:FQ15-42530CDD5D29 |
 | FQ15-A93D5B9528C3 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:453 | ", because this screen is not on a display and a file dialog there is " | test:DeNovoLedgerDeclarationsCommand | VERIFIED | evidence:EV-denovo-declarations-1:FQ15-A93D5B9528C3 |
 | FQ15-A1AA72FFC758 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:454 | "a window nothing can close. Next step: " | test:DeNovoLedgerDeclarationsCommand | VERIFIED | evidence:EV-denovo-declarations-1:FQ15-A1AA72FFC758 |
 | FQ15-FB6F29A1A879 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:460 | "No folder was chosen" | render:06-denovo-advanced | OPEN | pending |
@@ -1477,8 +1477,8 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **1911**; OPEN r
 | FQ15-372244CC78BC | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:483 | " de novo export file(s) found under " | render:06-denovo-advanced | OPEN | pending |
 | FQ15-65D20791C824 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:484 | "that folder. Next step: check the three filters and press \"Load and filter\"." | render:06-denovo-advanced | OPEN | pending |
 | FQ15-B212EA13BC67 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:507 | " (%)" | render:06-denovo-advanced | OPEN | pending |
-| FQ15-3FA31BF26BCD | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:509 | "Minimum " | render:06-denovo-advanced | OPEN | pending |
-| FQ15-B633A58D47CD | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:509 | " (%):" | render:06-denovo-advanced | OPEN | pending |
+| FQ15-3FA31BF26BCD | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:509 | "Minimum " | test:DeNovoLedgerWorkflowCommand | VERIFIED | evidence:EV-denovo-workflows-1:FQ15-3FA31BF26BCD |
+| FQ15-B633A58D47CD | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:509 | " (%):" | test:DeNovoLedgerWorkflowCommand | VERIFIED | evidence:EV-denovo-workflows-1:FQ15-B633A58D47CD |
 | FQ15-3D9C45BC6072 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:510 | "Lowest " | render:06-denovo-advanced | OPEN | pending |
 | FQ15-AA44039ABC34 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:511 | " kept for " | render:06-denovo-advanced | OPEN | pending |
 | FQ15-595D4B5CE071 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:511 | ". This score belongs to this program and is " | render:06-denovo-advanced | OPEN | pending |
@@ -1487,14 +1487,14 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **1911**; OPEN r
 | FQ15-D982BDC93119 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:514 | " are dropped. " | render:06-denovo-advanced | OPEN | pending |
 | FQ15-B1071139578E | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:516 | "DeepNovo SCORE is not PEAKS ALC." | render:06-denovo-advanced | OPEN | pending |
 | FQ15-47E6689D468D | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:517 | "PEAKS ALC is not a calibrated FDR." | render:06-denovo-advanced | OPEN | pending |
-| FQ15-B27DDA193AAD | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:518 | "Native confidence: " | render:06-denovo-advanced | OPEN | pending |
+| FQ15-B27DDA193AAD | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:518 | "Native confidence: " | test:DeNovoLedgerWorkflowCommand | VERIFIED | evidence:EV-denovo-workflows-1:FQ15-B27DDA193AAD |
 | FQ15-93EA3DE85A9A | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:519 | "Reads every " | render:06-denovo-advanced | OPEN | pending |
 | FQ15-91DFEE84C0F4 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:519 | " file in the folder and " | render:06-denovo-advanced | OPEN | pending |
 | FQ15-74E8508976B9 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:520 | "keeps the rows that pass the length, " | render:06-denovo-advanced | OPEN | pending |
 | FQ15-7625A7105D8F | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:520 | " and stretch filters." | render:06-denovo-advanced | OPEN | pending |
-| FQ15-05AA92D8B5A1 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:527 | "Files found: " | render:06-denovo-advanced | OPEN | pending |
-| FQ15-4D98848520CE | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:528 | "N0" | render:06-denovo-advanced | OPEN | pending |
-| FQ15-B11F27768C7D | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:535 | "Rows read: 0" | render:06-denovo-advanced | OPEN | pending |
+| FQ15-05AA92D8B5A1 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:527 | "Files found: " | test:DeNovoLedgerWorkflowCommand | VERIFIED | evidence:EV-denovo-workflows-1:FQ15-05AA92D8B5A1 |
+| FQ15-4D98848520CE | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:528 | "N0" | test:DeNovoLedgerWorkflowCommand | VERIFIED | evidence:EV-denovo-workflows-1:FQ15-4D98848520CE |
+| FQ15-B11F27768C7D | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:535 | "Rows read: 0" | test:DeNovoLedgerWorkflowCommand | VERIFIED | evidence:EV-denovo-workflows-1:FQ15-B11F27768C7D |
 | FQ15-48A19048BFEA | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:536 | "Rows kept: 0" | render:06-denovo-advanced | OPEN | pending |
 | FQ15-5613D727F9F4 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:537 | "No import yet. The breakdown per run appears here." | render:06-denovo-advanced | OPEN | pending |
 | FQ15-1E61FC693B2F | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:539 | "The source changed to " | render:06-denovo-advanced | OPEN | pending |
@@ -1517,21 +1517,21 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **1911**; OPEN r
 | FQ15-48884BD79966 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:685 | "not open in another program, then press \"Load and filter\" again." | render:06-denovo-advanced | OPEN | pending |
 | FQ15-E8F0E30007E2 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:712 | " The criteria have been put back to " | render:06-denovo-advanced | OPEN | pending |
 | FQ15-F0A362E52184 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:713 | ", which is what the rows now on screen were kept by." | render:06-denovo-advanced | OPEN | pending |
-| FQ15-C4E3DC073797 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:736 | "Files found: " | render:06-denovo-advanced | OPEN | pending |
-| FQ15-BA9D615170EF | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:737 | "N0" | render:06-denovo-advanced | OPEN | pending |
-| FQ15-BAFDB6DE5394 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:738 | "Rows read: " | render:06-denovo-advanced | OPEN | pending |
-| FQ15-10A6CCEEC1A0 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:739 | "N0" | render:06-denovo-advanced | OPEN | pending |
-| FQ15-7498F61C12FE | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:742 | "Rows kept: " | render:06-denovo-advanced | OPEN | pending |
-| FQ15-EE7D4F87E07C | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:743 | "N0" | render:06-denovo-advanced | OPEN | pending |
-| FQ15-AF1086999B88 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:744 | " (" | render:06-denovo-advanced | OPEN | pending |
-| FQ15-04245D6F0E75 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:744 | "P1" | render:06-denovo-advanced | OPEN | pending |
-| FQ15-E670D0E69935 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:744 | " of rows read)" | render:06-denovo-advanced | OPEN | pending |
-| FQ15-5DDCAAA158F8 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:747 | "No run could be read from that folder." | render:06-denovo-advanced | OPEN | pending |
-| FQ15-0B9ED0262527 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:749 | " \u00B7 " | render:06-denovo-advanced | OPEN | pending |
-| FQ15-F565DF73BA68 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:749 | "N0" | render:06-denovo-advanced | OPEN | pending |
-| FQ15-71A4CB782D71 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:749 | " read \u00B7 " | render:06-denovo-advanced | OPEN | pending |
-| FQ15-A8B81BF8C810 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:750 | "N0" | render:06-denovo-advanced | OPEN | pending |
-| FQ15-3CB4C8224C0B | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:750 | " kept" | render:06-denovo-advanced | OPEN | pending |
+| FQ15-C4E3DC073797 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:736 | "Files found: " | test:DeNovoLedgerWorkflowCommand | VERIFIED | evidence:EV-denovo-workflows-1:FQ15-C4E3DC073797 |
+| FQ15-BA9D615170EF | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:737 | "N0" | test:DeNovoLedgerWorkflowCommand | VERIFIED | evidence:EV-denovo-workflows-1:FQ15-BA9D615170EF |
+| FQ15-BAFDB6DE5394 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:738 | "Rows read: " | test:DeNovoLedgerWorkflowCommand | VERIFIED | evidence:EV-denovo-workflows-1:FQ15-BAFDB6DE5394 |
+| FQ15-10A6CCEEC1A0 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:739 | "N0" | test:DeNovoLedgerWorkflowCommand | VERIFIED | evidence:EV-denovo-workflows-1:FQ15-10A6CCEEC1A0 |
+| FQ15-7498F61C12FE | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:742 | "Rows kept: " | test:DeNovoLedgerWorkflowCommand | VERIFIED | evidence:EV-denovo-workflows-1:FQ15-7498F61C12FE |
+| FQ15-EE7D4F87E07C | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:743 | "N0" | test:DeNovoLedgerWorkflowCommand | VERIFIED | evidence:EV-denovo-workflows-1:FQ15-EE7D4F87E07C |
+| FQ15-AF1086999B88 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:744 | " (" | test:DeNovoLedgerWorkflowCommand | VERIFIED | evidence:EV-denovo-workflows-1:FQ15-AF1086999B88 |
+| FQ15-04245D6F0E75 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:744 | "P1" | test:DeNovoLedgerWorkflowCommand | VERIFIED | evidence:EV-denovo-workflows-1:FQ15-04245D6F0E75 |
+| FQ15-E670D0E69935 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:744 | " of rows read)" | test:DeNovoLedgerWorkflowCommand | VERIFIED | evidence:EV-denovo-workflows-1:FQ15-E670D0E69935 |
+| FQ15-5DDCAAA158F8 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:747 | "No run could be read from that folder." | test:DeNovoLedgerWorkflowCommand | VERIFIED | evidence:EV-denovo-workflows-1:FQ15-5DDCAAA158F8 |
+| FQ15-0B9ED0262527 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:749 | " \u00B7 " | test:DeNovoLedgerWorkflowCommand | VERIFIED | evidence:EV-denovo-workflows-1:FQ15-0B9ED0262527 |
+| FQ15-F565DF73BA68 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:749 | "N0" | test:DeNovoLedgerWorkflowCommand | VERIFIED | evidence:EV-denovo-workflows-1:FQ15-F565DF73BA68 |
+| FQ15-71A4CB782D71 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:749 | " read \u00B7 " | test:DeNovoLedgerWorkflowCommand | VERIFIED | evidence:EV-denovo-workflows-1:FQ15-71A4CB782D71 |
+| FQ15-A8B81BF8C810 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:750 | "N0" | test:DeNovoLedgerWorkflowCommand | VERIFIED | evidence:EV-denovo-workflows-1:FQ15-A8B81BF8C810 |
+| FQ15-3CB4C8224C0B | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:750 | " kept" | test:DeNovoLedgerWorkflowCommand | VERIFIED | evidence:EV-denovo-workflows-1:FQ15-3CB4C8224C0B |
 | FQ15-5AF42E270E5F | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:757 | "Showing an import of " | render:06-denovo-advanced | OPEN | pending |
 | FQ15-3AE4418D821F | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:757 | "N0" | render:06-denovo-advanced | OPEN | pending |
 | FQ15-DDDCD325392D | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:758 | " de novo row(s) from " | render:06-denovo-advanced | OPEN | pending |
@@ -1551,16 +1551,16 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **1911**; OPEN r
 | FQ15-8BBE9FBFD11B | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:766 | " run(s), at " | render:06-denovo-advanced | OPEN | pending |
 | FQ15-FA4555DDF335 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:766 | ". Next step: choose the SEPro package of the " | render:06-denovo-advanced | OPEN | pending |
 | FQ15-0810195F9FCC | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:767 | "SAME runs in Layer 2 and press Reconcile." | render:06-denovo-advanced | OPEN | pending |
-| FQ15-BAE60C458BFD | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:776 | "De novo only: -" | render:06-denovo-advanced | OPEN | pending |
-| FQ15-A9FB746A0866 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:777 | "Different precursor context: -" | render:06-denovo-advanced | OPEN | pending |
-| FQ15-D7A7AE08C5DA | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:778 | "Redundant equal: -" | render:06-denovo-advanced | OPEN | pending |
-| FQ15-CCE135F51221 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:779 | "Equal but weak PSM: -" | render:06-denovo-advanced | OPEN | pending |
-| FQ15-8E1066A66EC1 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:780 | "Overlapping alternative sequence: -" | render:06-denovo-advanced | OPEN | pending |
-| FQ15-1BBF25E73212 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:781 | "Review queue: -" | render:06-denovo-advanced | OPEN | pending |
-| FQ15-90EE16328F12 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:782 | "Same file + scan: -" | render:06-denovo-advanced | OPEN | pending |
-| FQ15-D000B6EBFF52 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:783 | "Comparable precursor (same charge, 20 ppm): -" | render:06-denovo-advanced | OPEN | pending |
-| FQ15-8CEA93347E87 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:784 | "Same scan + charge exact sequence, PTMs ignored: -" | render:06-denovo-advanced | OPEN | pending |
-| FQ15-E2CC570516D1 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:785 | "Same scan + charge alternative sequence: -" | render:06-denovo-advanced | OPEN | pending |
+| FQ15-BAE60C458BFD | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:776 | "De novo only: -" | test:DeNovoLedgerWorkflowCommand | VERIFIED | evidence:EV-denovo-workflows-1:FQ15-BAE60C458BFD |
+| FQ15-A9FB746A0866 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:777 | "Different precursor context: -" | test:DeNovoLedgerWorkflowCommand | VERIFIED | evidence:EV-denovo-workflows-1:FQ15-A9FB746A0866 |
+| FQ15-D7A7AE08C5DA | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:778 | "Redundant equal: -" | test:DeNovoLedgerWorkflowCommand | VERIFIED | evidence:EV-denovo-workflows-1:FQ15-D7A7AE08C5DA |
+| FQ15-CCE135F51221 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:779 | "Equal but weak PSM: -" | test:DeNovoLedgerWorkflowCommand | VERIFIED | evidence:EV-denovo-workflows-1:FQ15-CCE135F51221 |
+| FQ15-8E1066A66EC1 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:780 | "Overlapping alternative sequence: -" | test:DeNovoLedgerWorkflowCommand | VERIFIED | evidence:EV-denovo-workflows-1:FQ15-8E1066A66EC1 |
+| FQ15-1BBF25E73212 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:781 | "Review queue: -" | test:DeNovoLedgerWorkflowCommand | VERIFIED | evidence:EV-denovo-workflows-1:FQ15-1BBF25E73212 |
+| FQ15-90EE16328F12 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:782 | "Same file + scan: -" | test:DeNovoLedgerWorkflowCommand | VERIFIED | evidence:EV-denovo-workflows-1:FQ15-90EE16328F12 |
+| FQ15-D000B6EBFF52 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:783 | "Comparable precursor (same charge, 20 ppm): -" | test:DeNovoLedgerWorkflowCommand | VERIFIED | evidence:EV-denovo-workflows-1:FQ15-D000B6EBFF52 |
+| FQ15-8CEA93347E87 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:784 | "Same scan + charge exact sequence, PTMs ignored: -" | test:DeNovoLedgerWorkflowCommand | VERIFIED | evidence:EV-denovo-workflows-1:FQ15-8CEA93347E87 |
+| FQ15-E2CC570516D1 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:785 | "Same scan + charge alternative sequence: -" | test:DeNovoLedgerWorkflowCommand | VERIFIED | evidence:EV-denovo-workflows-1:FQ15-E2CC570516D1 |
 | FQ15-06FA1C26F013 | DROP | code fact | FamilyQuant/DeNovoControl.xaml.cs:804 | "Runs extracted: -" | render:06-denovo-advanced | APPROVED_DROP | Paulo via orchestrator M4, 2026-11-01 11:20:38: retire the De Novo Extract areas and Partition ion current sections in 2.0; 1.5 keeps them. Attribute to families stays and its CSV moves to Results in C11. |
 | FQ15-437A6B9108F0 | DROP | code fact | FamilyQuant/DeNovoControl.xaml.cs:805 | "Total M+0: -" | render:06-denovo-advanced | APPROVED_DROP | Paulo via orchestrator M4, 2026-11-01 11:20:38: retire the De Novo Extract areas and Partition ion current sections in 2.0; 1.5 keeps them. Attribute to families stays and its CSV moves to Results in C11. |
 | FQ15-949141E8193B | DROP | code fact | FamilyQuant/DeNovoControl.xaml.cs:806 | "Elapsed: -" | render:06-denovo-advanced | APPROVED_DROP | Paulo via orchestrator M4, 2026-11-01 11:20:38: retire the De Novo Extract areas and Partition ion current sections in 2.0; 1.5 keeps them. Attribute to families stays and its CSV moves to Results in C11. |
@@ -1594,42 +1594,42 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **1911**; OPEN r
 | FQ15-28B0AC264D9E | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:951 | "still shows whatever it showed before. Reason given by the program: " | render:06-denovo-advanced | OPEN | pending |
 | FQ15-DD6261204F16 | KEEP | format/export | FamilyQuant/DeNovoControl.xaml.cs:952 | " Next step: check that the .sepr2 opens in SEPro and that it is not open in " | render:06-denovo-advanced | OPEN | pending |
 | FQ15-F0B60412E975 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:953 | "another program, then press Reconcile again." | render:06-denovo-advanced | OPEN | pending |
-| FQ15-FEE8FCED2FCE | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:976 | "De novo only: " | render:06-denovo-advanced | OPEN | pending |
-| FQ15-B9ADDD91551B | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:977 | "Different precursor context: " | render:06-denovo-advanced | OPEN | pending |
-| FQ15-142432541AA6 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:978 | "Redundant equal: " | render:06-denovo-advanced | OPEN | pending |
-| FQ15-197F1D9EA45B | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:979 | "Equal but weak PSM: " | render:06-denovo-advanced | OPEN | pending |
-| FQ15-D69647ECE711 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:980 | "Overlapping alternative sequence: " | render:06-denovo-advanced | OPEN | pending |
-| FQ15-1D2264883625 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:982 | "Review queue: " | render:06-denovo-advanced | OPEN | pending |
-| FQ15-060631454185 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:983 | "N0" | render:06-denovo-advanced | OPEN | pending |
-| FQ15-CD6A1B77FE8E | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:983 | " to decide" | render:06-denovo-advanced | OPEN | pending |
-| FQ15-CEB68291388E | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:987 | "Same file + scan: " | render:06-denovo-advanced | OPEN | pending |
-| FQ15-977FF4B7B661 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:988 | "Comparable precursor (same charge, m/z within " | render:06-denovo-advanced | OPEN | pending |
-| FQ15-1332C741FD5C | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:989 | "0.##" | render:06-denovo-advanced | OPEN | pending |
-| FQ15-C43B46D9B44C | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:989 | " ppm): " | render:06-denovo-advanced | OPEN | pending |
-| FQ15-CC8DDE4DC5F3 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:991 | "Same scan + charge exact sequence, PTMs ignored: " | render:06-denovo-advanced | OPEN | pending |
-| FQ15-78FD5CACAC6B | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:993 | "Same scan + charge alternative sequence: " | render:06-denovo-advanced | OPEN | pending |
-| FQ15-E5EA381A5601 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:1005 | "Showing " | render:06-denovo-advanced | OPEN | pending |
-| FQ15-1EF35CEC0B61 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:1005 | "N0" | render:06-denovo-advanced | OPEN | pending |
-| FQ15-A1CDC4E3776E | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:1006 | " kept de novo row(s) reconciled against " | render:06-denovo-advanced | OPEN | pending |
-| FQ15-48A2E851048B | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:1007 | "N0" | render:06-denovo-advanced | OPEN | pending |
-| FQ15-50F8E846004E | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:1008 | " PatternLab identification(s) from " | render:06-denovo-advanced | OPEN | pending |
-| FQ15-D4683267ACA8 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:1008 | ": " | render:06-denovo-advanced | OPEN | pending |
-| FQ15-AC67B521B456 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:1009 | " new, " | render:06-denovo-advanced | OPEN | pending |
-| FQ15-651B08AC5168 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:1010 | " different-precursor-context rows, " | render:06-denovo-advanced | OPEN | pending |
-| FQ15-B3005206133F | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:1011 | " redundant, and " | render:06-denovo-advanced | OPEN | pending |
-| FQ15-8F745F58805A | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:1012 | "N0" | render:06-denovo-advanced | OPEN | pending |
-| FQ15-4ADAF0DFF9DE | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:1013 | " in the review queue. Of " | render:06-denovo-advanced | OPEN | pending |
-| FQ15-1A1B3D39B84A | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:1013 | " rows sharing file + scan, " | render:06-denovo-advanced | OPEN | pending |
-| FQ15-29230C722C0F | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:1014 | " report a different charge and " | render:06-denovo-advanced | OPEN | pending |
-| FQ15-5CD4DD6B5BED | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:1015 | " share charge but not precursor m/z. Among " | render:06-denovo-advanced | OPEN | pending |
-| FQ15-CDE795A26076 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:1016 | " rows passing file + scan + charge + 20-ppm m/z, " | render:06-denovo-advanced | OPEN | pending |
-| FQ15-F7D1757FF7ED | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:1017 | " are exact after PTM removal (" | render:06-denovo-advanced | OPEN | pending |
-| FQ15-6504A5413621 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:1018 | " after I/L folding) and " | render:06-denovo-advanced | OPEN | pending |
-| FQ15-B45590F3D6B2 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:1020 | " remain alternative sequences. For the broader same-file/scan/charge audit, " | render:06-denovo-advanced | OPEN | pending |
-| FQ15-3458D15804E2 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:1022 | " are exact after PTM removal (" | render:06-denovo-advanced | OPEN | pending |
-| FQ15-3BA2B42C8642 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:1023 | " when I/L are folded) and " | render:06-denovo-advanced | OPEN | pending |
-| FQ15-0D43622ED1F9 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:1024 | " differ after I/L folding. These are de-novo/search reconciliation rates, not a " | render:06-denovo-advanced | OPEN | pending |
-| FQ15-1555A58EF51F | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:1025 | "search-vs-search accuracy estimate. Comparable-precursor alternatives are excluded from additive de novo quantification." | render:06-denovo-advanced | OPEN | pending |
+| FQ15-FEE8FCED2FCE | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:976 | "De novo only: " | test:DeNovoLedgerWorkflowCommand | VERIFIED | evidence:EV-denovo-workflows-1:FQ15-FEE8FCED2FCE |
+| FQ15-B9ADDD91551B | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:977 | "Different precursor context: " | test:DeNovoLedgerWorkflowCommand | VERIFIED | evidence:EV-denovo-workflows-1:FQ15-B9ADDD91551B |
+| FQ15-142432541AA6 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:978 | "Redundant equal: " | test:DeNovoLedgerWorkflowCommand | VERIFIED | evidence:EV-denovo-workflows-1:FQ15-142432541AA6 |
+| FQ15-197F1D9EA45B | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:979 | "Equal but weak PSM: " | test:DeNovoLedgerWorkflowCommand | VERIFIED | evidence:EV-denovo-workflows-1:FQ15-197F1D9EA45B |
+| FQ15-D69647ECE711 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:980 | "Overlapping alternative sequence: " | test:DeNovoLedgerWorkflowCommand | VERIFIED | evidence:EV-denovo-workflows-1:FQ15-D69647ECE711 |
+| FQ15-1D2264883625 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:982 | "Review queue: " | test:DeNovoLedgerWorkflowCommand | VERIFIED | evidence:EV-denovo-workflows-1:FQ15-1D2264883625 |
+| FQ15-060631454185 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:983 | "N0" | test:DeNovoLedgerWorkflowCommand | VERIFIED | evidence:EV-denovo-workflows-1:FQ15-060631454185 |
+| FQ15-CD6A1B77FE8E | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:983 | " to decide" | test:DeNovoLedgerWorkflowCommand | VERIFIED | evidence:EV-denovo-workflows-1:FQ15-CD6A1B77FE8E |
+| FQ15-CEB68291388E | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:987 | "Same file + scan: " | test:DeNovoLedgerWorkflowCommand | VERIFIED | evidence:EV-denovo-workflows-1:FQ15-CEB68291388E |
+| FQ15-977FF4B7B661 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:988 | "Comparable precursor (same charge, m/z within " | test:DeNovoLedgerWorkflowCommand | VERIFIED | evidence:EV-denovo-workflows-1:FQ15-977FF4B7B661 |
+| FQ15-1332C741FD5C | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:989 | "0.##" | test:DeNovoLedgerWorkflowCommand | VERIFIED | evidence:EV-denovo-workflows-1:FQ15-1332C741FD5C |
+| FQ15-C43B46D9B44C | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:989 | " ppm): " | test:DeNovoLedgerWorkflowCommand | VERIFIED | evidence:EV-denovo-workflows-1:FQ15-C43B46D9B44C |
+| FQ15-CC8DDE4DC5F3 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:991 | "Same scan + charge exact sequence, PTMs ignored: " | test:DeNovoLedgerWorkflowCommand | VERIFIED | evidence:EV-denovo-workflows-1:FQ15-CC8DDE4DC5F3 |
+| FQ15-78FD5CACAC6B | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:993 | "Same scan + charge alternative sequence: " | test:DeNovoLedgerWorkflowCommand | VERIFIED | evidence:EV-denovo-workflows-1:FQ15-78FD5CACAC6B |
+| FQ15-E5EA381A5601 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:1005 | "Showing " | test:DeNovoLedgerWorkflowCommand | VERIFIED | evidence:EV-denovo-workflows-1:FQ15-E5EA381A5601 |
+| FQ15-1EF35CEC0B61 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:1005 | "N0" | test:DeNovoLedgerWorkflowCommand | VERIFIED | evidence:EV-denovo-workflows-1:FQ15-1EF35CEC0B61 |
+| FQ15-A1CDC4E3776E | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:1006 | " kept de novo row(s) reconciled against " | test:DeNovoLedgerWorkflowCommand | VERIFIED | evidence:EV-denovo-workflows-1:FQ15-A1CDC4E3776E |
+| FQ15-48A2E851048B | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:1007 | "N0" | test:DeNovoLedgerWorkflowCommand | VERIFIED | evidence:EV-denovo-workflows-1:FQ15-48A2E851048B |
+| FQ15-50F8E846004E | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:1008 | " PatternLab identification(s) from " | test:DeNovoLedgerWorkflowCommand | VERIFIED | evidence:EV-denovo-workflows-1:FQ15-50F8E846004E |
+| FQ15-D4683267ACA8 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:1008 | ": " | test:DeNovoLedgerWorkflowCommand | VERIFIED | evidence:EV-denovo-workflows-1:FQ15-D4683267ACA8 |
+| FQ15-AC67B521B456 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:1009 | " new, " | test:DeNovoLedgerWorkflowCommand | VERIFIED | evidence:EV-denovo-workflows-1:FQ15-AC67B521B456 |
+| FQ15-651B08AC5168 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:1010 | " different-precursor-context rows, " | test:DeNovoLedgerWorkflowCommand | VERIFIED | evidence:EV-denovo-workflows-1:FQ15-651B08AC5168 |
+| FQ15-B3005206133F | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:1011 | " redundant, and " | test:DeNovoLedgerWorkflowCommand | VERIFIED | evidence:EV-denovo-workflows-1:FQ15-B3005206133F |
+| FQ15-8F745F58805A | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:1012 | "N0" | test:DeNovoLedgerWorkflowCommand | VERIFIED | evidence:EV-denovo-workflows-1:FQ15-8F745F58805A |
+| FQ15-4ADAF0DFF9DE | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:1013 | " in the review queue. Of " | test:DeNovoLedgerWorkflowCommand | VERIFIED | evidence:EV-denovo-workflows-1:FQ15-4ADAF0DFF9DE |
+| FQ15-1A1B3D39B84A | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:1013 | " rows sharing file + scan, " | test:DeNovoLedgerWorkflowCommand | VERIFIED | evidence:EV-denovo-workflows-1:FQ15-1A1B3D39B84A |
+| FQ15-29230C722C0F | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:1014 | " report a different charge and " | test:DeNovoLedgerWorkflowCommand | VERIFIED | evidence:EV-denovo-workflows-1:FQ15-29230C722C0F |
+| FQ15-5CD4DD6B5BED | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:1015 | " share charge but not precursor m/z. Among " | test:DeNovoLedgerWorkflowCommand | VERIFIED | evidence:EV-denovo-workflows-1:FQ15-5CD4DD6B5BED |
+| FQ15-CDE795A26076 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:1016 | " rows passing file + scan + charge + 20-ppm m/z, " | test:DeNovoLedgerWorkflowCommand | VERIFIED | evidence:EV-denovo-workflows-1:FQ15-CDE795A26076 |
+| FQ15-F7D1757FF7ED | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:1017 | " are exact after PTM removal (" | test:DeNovoLedgerWorkflowCommand | VERIFIED | evidence:EV-denovo-workflows-1:FQ15-F7D1757FF7ED |
+| FQ15-6504A5413621 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:1018 | " after I/L folding) and " | test:DeNovoLedgerWorkflowCommand | VERIFIED | evidence:EV-denovo-workflows-1:FQ15-6504A5413621 |
+| FQ15-B45590F3D6B2 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:1020 | " remain alternative sequences. For the broader same-file/scan/charge audit, " | test:DeNovoLedgerWorkflowCommand | VERIFIED | evidence:EV-denovo-workflows-1:FQ15-B45590F3D6B2 |
+| FQ15-3458D15804E2 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:1022 | " are exact after PTM removal (" | test:DeNovoLedgerWorkflowCommand | VERIFIED | evidence:EV-denovo-workflows-1:FQ15-3458D15804E2 |
+| FQ15-3BA2B42C8642 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:1023 | " when I/L are folded) and " | test:DeNovoLedgerWorkflowCommand | VERIFIED | evidence:EV-denovo-workflows-1:FQ15-3BA2B42C8642 |
+| FQ15-0D43622ED1F9 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:1024 | " differ after I/L folding. These are de-novo/search reconciliation rates, not a " | test:DeNovoLedgerWorkflowCommand | VERIFIED | evidence:EV-denovo-workflows-1:FQ15-0D43622ED1F9 |
+| FQ15-1555A58EF51F | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:1025 | "search-vs-search accuracy estimate. Comparable-precursor alternatives are excluded from additive de novo quantification." | test:DeNovoLedgerWorkflowCommand | VERIFIED | evidence:EV-denovo-workflows-1:FQ15-1555A58EF51F |
 | FQ15-2F1943F151BD | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:1031 | "N0" | render:06-denovo-advanced | OPEN | pending |
 | FQ15-9FADDFA46BAD | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:1034 | "N0" | render:06-denovo-advanced | OPEN | pending |
 | FQ15-3A03B46544B3 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:1042 | "There is no reconciliation to export; run one in Layer 2 first." | render:06-denovo-advanced | OPEN | pending |
@@ -1767,20 +1767,20 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **1911**; OPEN r
 | FQ15-B98BC0843953 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:1692 | "whatever it showed before. Reason given by the program: " | render:06-denovo-advanced | OPEN | pending |
 | FQ15-D12418CA3A1D | KEEP | format/export | FamilyQuant/DeNovoControl.xaml.cs:1693 | " Next step: check that the file really is a .fcf written by FamilyQuant and that " | render:06-denovo-advanced | OPEN | pending |
 | FQ15-C7234DADB443 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:1694 | "it is not open in another program, then press Search again." | render:06-denovo-advanced | OPEN | pending |
-| FQ15-A3736FB76A11 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:1714 | "Peptides searched: " | render:06-denovo-advanced | OPEN | pending |
-| FQ15-1015FF721177 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:1715 | "N0" | render:06-denovo-advanced | OPEN | pending |
-| FQ15-5EF0B510C598 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:1716 | "Mapped to targets: " | render:06-denovo-advanced | OPEN | pending |
-| FQ15-27B804F602B8 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:1717 | "N0" | render:06-denovo-advanced | OPEN | pending |
-| FQ15-F94E3921F867 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:1718 | " (" | render:06-denovo-advanced | OPEN | pending |
-| FQ15-9ED653E0BEE9 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:1718 | "P2" | render:06-denovo-advanced | OPEN | pending |
-| FQ15-1FCE249FE430 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:1718 | ")" | render:06-denovo-advanced | OPEN | pending |
-| FQ15-05089955F9AD | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:1719 | "Decoy-only: " | render:06-denovo-advanced | OPEN | pending |
-| FQ15-916E756FB842 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:1720 | "N0" | render:06-denovo-advanced | OPEN | pending |
-| FQ15-5181013AC791 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:1721 | "Unmatched: " | render:06-denovo-advanced | OPEN | pending |
-| FQ15-9AB8032C3ACE | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:1722 | "N0" | render:06-denovo-advanced | OPEN | pending |
-| FQ15-7CF1C9A04025 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:1723 | "Elapsed: " | render:06-denovo-advanced | OPEN | pending |
-| FQ15-694DE97B33C9 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:1724 | "N1" | render:06-denovo-advanced | OPEN | pending |
-| FQ15-F60B76B50C27 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:1724 | " s" | render:06-denovo-advanced | OPEN | pending |
+| FQ15-A3736FB76A11 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:1714 | "Peptides searched: " | test:DeNovoLedgerWorkflowCommand | VERIFIED | evidence:EV-denovo-workflows-1:FQ15-A3736FB76A11 |
+| FQ15-1015FF721177 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:1715 | "N0" | test:DeNovoLedgerWorkflowCommand | VERIFIED | evidence:EV-denovo-workflows-1:FQ15-1015FF721177 |
+| FQ15-5EF0B510C598 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:1716 | "Mapped to targets: " | test:DeNovoLedgerWorkflowCommand | VERIFIED | evidence:EV-denovo-workflows-1:FQ15-5EF0B510C598 |
+| FQ15-27B804F602B8 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:1717 | "N0" | test:DeNovoLedgerWorkflowCommand | VERIFIED | evidence:EV-denovo-workflows-1:FQ15-27B804F602B8 |
+| FQ15-F94E3921F867 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:1718 | " (" | test:DeNovoLedgerWorkflowCommand | VERIFIED | evidence:EV-denovo-workflows-1:FQ15-F94E3921F867 |
+| FQ15-9ED653E0BEE9 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:1718 | "P2" | test:DeNovoLedgerWorkflowCommand | VERIFIED | evidence:EV-denovo-workflows-1:FQ15-9ED653E0BEE9 |
+| FQ15-1FCE249FE430 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:1718 | ")" | test:DeNovoLedgerWorkflowCommand | VERIFIED | evidence:EV-denovo-workflows-1:FQ15-1FCE249FE430 |
+| FQ15-05089955F9AD | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:1719 | "Decoy-only: " | test:DeNovoLedgerWorkflowCommand | VERIFIED | evidence:EV-denovo-workflows-1:FQ15-05089955F9AD |
+| FQ15-916E756FB842 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:1720 | "N0" | test:DeNovoLedgerWorkflowCommand | VERIFIED | evidence:EV-denovo-workflows-1:FQ15-916E756FB842 |
+| FQ15-5181013AC791 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:1721 | "Unmatched: " | test:DeNovoLedgerWorkflowCommand | VERIFIED | evidence:EV-denovo-workflows-1:FQ15-5181013AC791 |
+| FQ15-9AB8032C3ACE | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:1722 | "N0" | test:DeNovoLedgerWorkflowCommand | VERIFIED | evidence:EV-denovo-workflows-1:FQ15-9AB8032C3ACE |
+| FQ15-7CF1C9A04025 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:1723 | "Elapsed: " | test:DeNovoLedgerWorkflowCommand | VERIFIED | evidence:EV-denovo-workflows-1:FQ15-7CF1C9A04025 |
+| FQ15-694DE97B33C9 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:1724 | "N1" | test:DeNovoLedgerWorkflowCommand | VERIFIED | evidence:EV-denovo-workflows-1:FQ15-694DE97B33C9 |
+| FQ15-F60B76B50C27 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:1724 | " s" | test:DeNovoLedgerWorkflowCommand | VERIFIED | evidence:EV-denovo-workflows-1:FQ15-F60B76B50C27 |
 | FQ15-DDB35E0E348E | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:1731 | "Showing " | render:06-denovo-advanced | OPEN | pending |
 | FQ15-97B2E3C28E44 | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:1731 | "N0" | render:06-denovo-advanced | OPEN | pending |
 | FQ15-83A79FCFF61A | IMPROVE | code fact | FamilyQuant/DeNovoControl.xaml.cs:1732 | " distinct peptide(s) searched against " | render:06-denovo-advanced | OPEN | pending |
