@@ -63,10 +63,13 @@ with no overlap with the first batch. After that batch the cohort had 286 propos
 remain OPEN. A passing CSV pair does not automatically verify a format or handler row: each
 proposed row still names its actual production projection or resolved cell comparison.
 
-The native `c13-style-role-mapping-open.json` handoff lists 24 OPEN frozen style observations,
-their IDs, lines, values, style keys and target types. It supplies no current-role mapping;
-FQLook owns that mapping under orchestrator M47. The producer verifies each listed row is
-OPEN when it writes the inventory. This is a handoff, not style verification.
+The initial `c13-style-role-mapping-open.json` handoff listed 24 frozen style observations
+that were OPEN at that checkpoint, with IDs, lines, values, style keys and target types.
+It supplies no current-role mapping;
+FQLook owns that mapping under orchestrator M47. The producer reports each listed row's
+current ledger state when it writes the inventory. The historical `-open.json` filename is
+retained, but the producer does not require OPEN or make a style verdict. This is a handoff,
+not style verification; FQLook's completed proof may legitimately set these rows to VERIFIED.
 
 The third batch's `--prove-denovo-refusals` supports 23 further rows, 20 code facts and
 three format/path facts. It compares actual old/current numeric acceptance and output,
