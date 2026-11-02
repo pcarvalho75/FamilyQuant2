@@ -22,8 +22,8 @@ public partial class ClusterGenerationControl
             QuantitationPanel.SharedItemEvery.ToolTip = SharedPeptidePolicy.CountInEveryFamily.ShortExplanation();
 
             QuantitationPanel.ComboBoxSharedPeptides.ToolTip =
-                "What to do with a peptide found in more than one family; in a redundant database, such as " +
-                "a venom, this choice moves the numbers a great deal. Default: " +
+                "What to do with a peptide found in more than one family; in a redundant database, " +
+                "this choice moves the numbers a great deal. Default: " +
                 SharedPeptidePolicy.FamilyUnique.DisplayName() + ".";
 
             QuantitationPanel.ModeItemIdentified.Content = NormalizationMode.IdentifiedSignal.DisplayName();

@@ -37,6 +37,7 @@ internal static partial class Program
     private static void CurationWordingTests()
     {
         EnsureApplication();
+        GeneralWordingTests();
         Check("tooltip sentence guard counts lowercase sentences and preserves decimals and extensions",
             TooltipSentenceCount("First. second? third!") == 3
             && TooltipSentenceCount("Choose a .plp file at 0.95. Disabled until a file is loaded.") == 2);

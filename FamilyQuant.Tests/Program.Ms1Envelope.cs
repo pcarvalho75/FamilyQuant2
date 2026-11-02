@@ -495,9 +495,10 @@ namespace FamilyQuant.Tests
                 && !Ms1EnvelopeDetector.WeakEvidenceLabel.Contains("not a peptide", StringComparison.OrdinalIgnoreCase)
                 && !Ms1EnvelopeDetector.WeakEvidenceLabel.Contains("non-peptide", StringComparison.OrdinalIgnoreCase),
                 Ms1EnvelopeDetector.WeakEvidenceLabel);
-            Check("Q6 charge split: the caveat names the venom peptides that ARE singly charged",
-                Ms1EnvelopeDetector.SinglyChargedCaveat.Contains("venom", StringComparison.OrdinalIgnoreCase)
-                && Ms1EnvelopeDetector.SinglyChargedCaveat.Contains("bradykinin", StringComparison.OrdinalIgnoreCase),
+            Check("Q6 charge split: natural and identified charge-1 peptides remain peptides",
+                Ms1EnvelopeDetector.SinglyChargedCaveat.Contains("natural peptides are frequently singly charged", StringComparison.Ordinal)
+                && Ms1EnvelopeDetector.SinglyChargedCaveat.Contains("identified charge-1 peptides", StringComparison.Ordinal)
+                && Ms1EnvelopeDetector.SinglyChargedCaveat.Contains("charge alone cannot rule out peptides", StringComparison.Ordinal),
                 Ms1EnvelopeDetector.SinglyChargedCaveat);
 
             var chart = new RecoveryChart(data.Fractions, data.Grouped);
