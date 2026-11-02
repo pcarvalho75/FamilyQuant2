@@ -9,5 +9,7 @@ internal static partial class Program
     [
         new("--ledger-storage-runtime", 10130, TestCommandPhase.Raw,
             args => args.Length > 0 && args[0] == "--ledger-storage-runtime", (args, _) => StorageRuntimeLedgerCommand(args)),
+        new("--ledger-xic-runtime", 10140, TestCommandPhase.Raw,
+            args => args.Length > 0 && args[0] == "--ledger-xic-runtime", (args, _) => XicRuntimeLedgerCommand(args)),
     ];
 }

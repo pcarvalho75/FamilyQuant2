@@ -124,6 +124,7 @@ Invoke each flag with `& $testExe <flag>` after building. Dispatch and arity are
 | `--test-curation-layout` | Retained chrome, tooltips and ancestor-clipping regression |
 | `--test-evidence-coverage-ui [output-dir]` | Recorded query-residue coverage, missing legacy facts, bounded display and native rule line |
 | `--test-database-gap [output-dir]` | Stored Core family parts/global buckets, sparse evidence, exact CSV/FASTA, offline reopen and native Results export routes |
+| `--test-results-tooltips [fresh-output date-timestamp]` | Two-sentence shared/normalization/chart tips retain every fact and dynamic default; optional semantic preservation receipts |
 | `--database-gap-screens <project.fqproj> <fresh-output>` | Read-only native Database gap captures in both themes, stored table CSV, and verified suggested FASTA when available |
 | `--prove-results-interactions <fresh-output> <date-timestamp>` | Native Results controls, displaced handlers, deterministic exports and observation receipts |
 | `--prove-results-members <frozen-root> <fresh-output> <date-timestamp>` | Shared scoped member comparison for assigned Results and quantitation declarations; changed members stay open |
@@ -199,6 +200,7 @@ Companion options for `--screens` are `--screen-fcf <input.fcf>`, `--screen-proj
 | `--ledger-core-relocation <frozen-root> <fresh-output> X5/X7 <date> [member-mappings.json]` | Scoped complete Core member comparisons, exact frozen hashes, retained source/checker snapshots and per-row gaps; [guide](CORE-RELOCATION-LEDGER.md) |
 | `--ledger-core-relocation <frozen-root> <fresh-output> X5/X7 <date> [member-mappings.json]` | Scoped complete Core member comparisons, exact frozen hashes, retained source/checker snapshots and per-row gaps; [guide](CORE-RELOCATION-LEDGER.md) |
 | `--ledger-shell-compare <frozen-root> <fresh-output> <date>` | SH and C1 exact declarations/member tokens; separate candidate registers, unproven rows kept OPEN |
+| `--ledger-xic-runtime <frozen-root> <fresh-output> <date> <stored-project> <validated-cache> [--negative-control]` | Native XIC refusal/source/completion facts plus bounded validated cache replay; [runtime guide](CORE-RUNTIME-LEDGER.md) |
 | `--word-grouping-snapshot <input.fcf-or-fqproj> <output.txt>` | [WordGroupingSnapshot.cs](../FamilyQuant.Tests/WordGroupingSnapshot.cs), also linked into frozen host |
 | `--chart-export-snapshot <output-dir>` | [ChartExportSnapshot.cs](../FamilyQuant.Tests/ChartExportSnapshot.cs), synthetic chart parity fixtures |
 | `--clustering-snapshot <input.fasta> <output.tsv> <integer-identity> <fast-or-exhaustive>` | [ClusteringSnapshot.cs](../FamilyQuant.Tests/ClusteringSnapshot.cs) |
@@ -225,6 +227,7 @@ and output must be separate. None is executed merely to maintain this catalog.
 |---|---|
 | `--evidence-storage-check [input.fcf] [reference.tsv] [report.json]` | [EvidenceStorageCheck.cs](../FamilyQuant.Tests/EvidenceStorageCheck.cs) |
 | `--evidence-task-check <evidence.fcf> <new-report.json>` | [Program.EvidenceTask.cs](../FamilyQuant.Tests/Program.EvidenceTask.cs); read-only live taxonomy discovery, native JSON report |
+| `--evidence-task-header-audit <input.fcf-or-fqproj> <new-report.json>` | Production header-parser audit, joined-taxon counts, input byte hash and refusal boundary; no fetch or save |
 | `--evidence-delivery prepare/split/create ...` | [Program.EvidenceDelivery.cs](../FamilyQuant.Tests/Program.EvidenceDelivery.cs); [native delivery syntax](EVIDENCE-DELIVERY.md) |
 | `--evidence-coverage-check <prepared.fcf> <applied.fcf> <new-output-directory> [existing-capture-directory]` | [Program.EvidenceCoverage.cs](../FamilyQuant.Tests/Program.EvidenceCoverage.cs); native capture or deterministic offline replay, without applying a counterfactual |
 | `--family-world-fetch <input.fcf> <new-output.fcf> <confirmed-scope>` | [Program.FamilyWorldNative.cs](../FamilyQuant.Tests/Program.FamilyWorldNative.cs); live fetch, size report and offline byte proof |
