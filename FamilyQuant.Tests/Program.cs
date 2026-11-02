@@ -524,6 +524,7 @@ namespace FamilyQuant.Tests
             }
 
             Section("CSV export - locale and escaping");
+            CoreReuseContractTests();
             CsvTests();
 
             Section("Core operation outcomes, progress and cancellation");

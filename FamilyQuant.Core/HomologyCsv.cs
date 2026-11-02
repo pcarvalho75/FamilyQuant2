@@ -20,5 +20,5 @@ public static class HomologyCsv
                 Field(string.Join(";", assignment.ProteinIds)), assignment.IsAmbiguous ? "true" : "false"));
         File.WriteAllText(path, csv.ToString());
     }
-    private static string Field(string? value) => "\"" + (value ?? "").Replace("\"", "\"\"") + "\"";
+    private static string Field(string? value) => CsvFormatting.AlwaysQuoted(value);
 }
