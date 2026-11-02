@@ -77,33 +77,7 @@ public partial class DeNovoControl
                       "screen is disabled while it is read.");
         }
 
-        private void ButtonBrowseRawDirectory_Click(object sender, RoutedEventArgs e)
-        {
-            if (!CanShowDialog("No folder was chosen",
-                               "type the folder holding the .raw acquisitions into the box beside the " +
-                               "button instead.")) return;
 
-            var ofd = new OpenFolderDialog
-            {
-                Title = "Choose the folder holding the .raw acquisitions of these runs"
-            };
-
-            if (ofd.ShowDialog() != true) return;
-
-            TextBoxRawDirectory.Text = ofd.FolderName;   // the TextChanged handler redoes the preview
-
-            int found = RawMatches.Count(m => m.Found);
-
-            SetStatus(found == RawMatches.Count && RawMatches.Count > 0
-                ? "All " + found.ToString("N0", CultureInfo.CurrentCulture) + " kept run(s) found their " +
-                  "acquisition in that folder, by file name. Next step: press Extract. Each RAW is opened " +
-                  "once and the runs are done strictly one after another."
-                : "Of " + RawMatches.Count.ToString("N0", CultureInfo.CurrentCulture) + " kept run(s), " +
-                  found.ToString("N0", CultureInfo.CurrentCulture) + " found an acquisition in that " +
-                  "folder. Missing: " + ViewModel.MissingRunsSentence() + " Next step: choose the folder those " +
-                  "files really are in. Extract stays disabled until every kept run has one, because a " +
-                  "partial extraction would draw a de novo slice with a whole run silently missing.");
-        }
 
         private void ButtonBrowseHomologyFcf_Click(object sender, RoutedEventArgs e)
         {
@@ -126,46 +100,9 @@ public partial class DeNovoControl
                       "each hit is attributed to.");
         }
 
-        private void ButtonBrowsePartitionPlp_Click(object sender, RoutedEventArgs e)
-        {
-            if (!CanShowDialog("No PatternLab project was chosen",
-                               "type the path of the .plp into the box beside the button instead.")) return;
 
-            var ofd = new OpenFileDialog
-            {
-                Filter = "PatternLab project (*.plp)|*.plp",
-                Title = "Choose the PatternLab project holding the quantitation of these runs"
-            };
 
-            if (ofd.ShowDialog() != true) return;
 
-            TextBoxPartitionPlp.Text = ofd.FileName;
-
-            SetStatus("PatternLab project chosen: " + Path.GetFileName(ofd.FileName) +
-                      ". Next step: press \"Build partition\". If that project merged its technical " +
-                      "replicates it cannot answer per run, and it will say so in its own words; give " +
-                      "the .xic2 of the same extraction as well, so there is a source that can.");
-        }
-
-        private void ButtonBrowsePartitionXic2_Click(object sender, RoutedEventArgs e)
-        {
-            if (!CanShowDialog("No stored quants file was chosen",
-                               "type the path of the .xic2 into the box beside the button instead.")) return;
-
-            var ofd = new OpenFileDialog
-            {
-                Filter = "Stored quants (*.xic2)|*.xic2",
-                Title = "Choose the stored quants of the same extraction"
-            };
-
-            if (ofd.ShowDialog() != true) return;
-
-            TextBoxPartitionXic2.Text = ofd.FileName;
-
-            SetStatus("Stored quants chosen: " + Path.GetFileName(ofd.FileName) +
-                      ". It is used only if the .plp cannot resolve one column per run. Next step: press " +
-                      "\"Build partition\".");
-        }
 
         private void ButtonExportSummary_Click(object sender, RoutedEventArgs e)
         {
@@ -209,7 +146,7 @@ public partial class DeNovoControl
 
             var sfd = new SaveFileDialog
             {
-                Filter = "CSV files (*.csv)|*.csv|All files (*.*)|*.*",
+                Filter = FileDialogFilters.Csv,
                 FileName = suggestedName,
                 Title = title
             };
@@ -232,61 +169,11 @@ public partial class DeNovoControl
             }
         }
 
-        private void ButtonExportHomologyCsv_Click(object sender, RoutedEventArgs e)
-        {
-            if (LastHomology == null)
-            {
-                SetStatus("Nothing was exported: no homology search has been run, so there are no " +
-                          "assignments to write. Next step: press Search in Step 4 first.");
-                return;
-            }
 
-            Export("FamilyQuant_DeNovo_Homology.csv", "Save the per-peptide family assignments as CSV",
-                   ExportHomologyCsv,
-                   "one line per searched peptide, with its family ids, its protein ids and whether it " +
-                   "is ambiguous");
-        }
 
-        private void ButtonSavePartitionCsv_Click(object sender, RoutedEventArgs e)
-        {
-            if (LastPartition == null || !LastPartition.IsAvailable)
-            {
-                SetStatus("Nothing was saved: no partition has been built, so there are no numbers to " +
-                          "write. Next step: press \"Build partition\" in Step 5 first.");
-                return;
-            }
 
-            Export("three_way_partition.csv", "Save the three-way partition as CSV",
-                   SavePartitionCsv,
-                   "the three components with the provenance of each, the three shares, the " +
-                   "negative-remainder flag and the de novo envelope diagnostic, aggregate line last");
-        }
 
-        private void ButtonOpenPartitionWindow_Click(object sender, RoutedEventArgs e)
-        {
-            if (LastPartition == null || !LastPartition.IsAvailable)
-            {
-                SetStatus("Nothing was opened: no partition has been built, so there would be nothing " +
-                          "to show. Next step: press \"Build partition\" in Step 5 first.");
-                return;
-            }
 
-            // A harness has no screen to put a window on, and opening one there would be a window
-            // nothing ever closes. The same guard the rest of this program uses for a modal box.
-            if (PresentationSource.FromVisual(this) == null)
-            {
-                SetStatus("The detached window was not opened, because this screen is not on a display. " +
-                          "The chart in Step 5 shows the same rows. Next step: nothing.");
-                return;
-            }
-
-            ThreeWayWindow.Show("Three-way partition of the ion current", LastPartition.Rows,
-                                Window.GetWindow(this), LastPartition.BranchNote);
-
-            SetStatus("The chart is now also in a window of its own, with its caption and its own save " +
-                      "button. It is a second view of the same rows: closing it changes nothing here. " +
-                      "Next step: nothing.");
-        }
 
         public void SuggestFamilyClusterFile(string? path)
         {

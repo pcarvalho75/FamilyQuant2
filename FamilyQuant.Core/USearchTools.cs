@@ -487,7 +487,7 @@ namespace FamilyQuant
         /// <paramref name="onHit"/> as they are read, labels up to the first space. A failure throws.
         /// </summary>
         public static void SearchGlobal(string queryFasta, string databaseFasta, double minIdentity,
-                                        Action<PairwiseEdge> onHit)
+                                        Action<PairwiseEdge> onHit, OperationContext? operation = null)
         {
             string usearchExe = GetUSearchPath();
             string tempDir = ApplicationPaths.ScratchDirectory;
@@ -499,7 +499,7 @@ namespace FamilyQuant
                                "-userfields query+target+id+alnlen+ql+tl";
             try
             {
-                RunUSearch(usearchExe, arguments, tempDir);
+                RunUSearch(usearchExe, arguments, tempDir, operation);
                 if (!File.Exists(tsvFile))
                     throw new InvalidOperationException("USEARCH finished without writing its hit table.");
                 foreach (string line in File.ReadLines(tsvFile))

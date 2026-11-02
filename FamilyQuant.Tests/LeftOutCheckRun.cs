@@ -24,8 +24,7 @@ namespace FamilyQuant.Tests
             try
             {
                 int flag = Array.IndexOf(args, Argument);
-                string At(int offset, string fallback) =>
-                    args.Length > flag + offset && args[flag + offset].Length > 0 ? args[flag + offset] : fallback;
+                string At(int offset, string fallback) => TestArguments.EmptyFallsBack(args, flag, offset, fallback);
                 string input = At(1, "D:/FamilyQuant-data/out-opus/e3-ana-neighbours-scoped.fcf");
                 string baseline = At(2, "D:/FamilyQuant-data/baseline/fora_com_dominio_de_veneno.csv");
                 string classes = At(3, "D:/FamilyQuant-data/baseline/classes_all.tsv");
@@ -122,7 +121,6 @@ namespace FamilyQuant.Tests
             return rows;
         }
 
-        private static string Field(string value) =>
-            value.IndexOfAny(new[] { ',', '"', '\r', '\n' }) >= 0 ? "\"" + value.Replace("\"", "\"\"") + "\"" : value;
+        private static string Field(string value) => TestCsvFields.Field(value);
     }
 }

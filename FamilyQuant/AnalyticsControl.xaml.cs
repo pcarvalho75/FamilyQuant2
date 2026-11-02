@@ -19,12 +19,15 @@ public partial class AnalyticsControl : UserControl
     public AnalyticsControl(IReadOnlyList<QuantRow>? rows, QuantManifest? manifest, FamilyClusterFile? curation)
         : this(rows, manifest, curation, null) { }
     public AnalyticsControl(IReadOnlyList<QuantRow>? rows, QuantManifest? manifest, FamilyClusterFile? curation,
-        PeptideFamilyAttribution? attribution) : this(new AnalyticsViewModel(rows, manifest, curation, attribution)) { }
+        PeptideFamilyAttribution? attribution, DeNovoHomology? homology = null)
+        : this(new AnalyticsViewModel(rows, manifest, curation, attribution, homology)) { }
     public AnalyticsControl(AnalyticsViewModel viewModel)
     {
         ViewModel = viewModel;
         InitializeComponent();
         DataContext = ViewModel;
+        foreach (ComboBoxItem item in ComboBoxExportKind.Items)
+            if (string.Equals(item.Tag as string, ViewModel.ExportKind.ToString(), StringComparison.Ordinal)) ComboBoxExportKind.SelectedItem = item;
         TextBlockDetails.Text = ViewModel.Details;
         BorderEmpty.Visibility = Data == null ? Visibility.Visible : Visibility.Collapsed;
         ComboBoxFamilyTopN.IsEnabled = CheckBoxFamilyPercent.IsEnabled = ViewModel.HasData;
@@ -75,9 +78,11 @@ public partial class AnalyticsControl : UserControl
         }
         else
         {
-            var dialog = new SaveFileDialog { Filter = "CSV files (*.csv)|*.csv|All files (*.*)|*.*", AddExtension = true,
-                DefaultExt = ".csv", FileName = ViewModel.ExportKind == ResultsExportKind.Summary
-                    ? "familyquant_analytics_summary.csv" : "familyquant_analytics_peptides.csv", Title = "Export results" };
+            var dialog = new SaveFileDialog { Filter = FileDialogFilters.Csv, AddExtension = true,
+                DefaultExt = ".csv", FileName = ViewModel.ExportKind switch {
+                    ResultsExportKind.Summary => "familyquant_analytics_summary.csv",
+                    ResultsExportKind.Homology => "FamilyQuant_DeNovo_Homology.csv",
+                    _ => "familyquant_analytics_peptides.csv" }, Title = "Export results" };
             path = dialog.ShowDialog() == true ? dialog.FileName : null;
         }
         if (path != null) ViewModel.Export(path);

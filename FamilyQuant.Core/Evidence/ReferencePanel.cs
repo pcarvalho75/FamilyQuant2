@@ -9,6 +9,7 @@ using System.Text.Json.Serialization;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
+using FamilyQuant.Operations;
 
 namespace FamilyQuant.Evidence
 {
@@ -45,7 +46,7 @@ namespace FamilyQuant.Evidence
     public static class ReferencePanelFetcher
     {
         private const string Endpoint = "https://rest.uniprot.org/uniprotkb/search?format=json&size=500&fields="
-            + "accession,reviewed,protein_families,keyword,xref_pfam,xref_panther,ft_transmem,fragment,sequence&query=";
+            + "accession,reviewed,protein_families,keyword,cc_tissue_specificity,xref_pfam,xref_panther,ft_transmem,fragment,sequence&query=";
         private const int Attempts = 3;
 
         /// <summary>Every family named by a target's evidence, optionally only those of targets in a scope
@@ -100,8 +101,7 @@ namespace FamilyQuant.Evidence
                 {
                     cancellationToken.ThrowIfCancellationRequested();
                     using HttpResponseMessage response = await GetWithRetry(client, url, cancellationToken).ConfigureAwait(false);
-                    string currentRelease = response.Headers.TryGetValues("x-uniprot-release", out IEnumerable<string>? values)
-                        ? values.FirstOrDefault() ?? string.Empty : string.Empty;
+                    string currentRelease = UniProtHttp.Release(response);
                     if (currentRelease.Length == 0)
                         throw new InvalidDataException("UniProt omitted its release. No panel was made.");
                     if (release != null && release != currentRelease)
@@ -123,8 +123,8 @@ namespace FamilyQuant.Evidence
                             throw new InvalidDataException("UniProt returned an unreviewed entry to a reviewed search. No panel was made.");
                         if (!FamiliesOf(evidence).Contains(family, StringComparer.OrdinalIgnoreCase)) continue;
                         if (sequence.Length == 0 || entries.ContainsKey(accession)) continue;
-                        // Prose is dropped: a reference is read for its family, memberships and domains.
-                        evidence.TissueSpecificity = new List<string>();
+                        // The family text is dropped; the tissue stays, because the scope words are matched in it
+                        // when a reference decides whether a neighbour is in scope.
                         evidence.SimilarityAnnotations = null;
                         entries.Add(accession, new PanelEntry { Accession = accession, Sequence = sequence, Evidence = evidence });
                     }
@@ -165,6 +165,40 @@ namespace FamilyQuant.Evidence
             file.EvidenceSource ??= new EvidenceProvenance();
             file.EvidenceSource.ReferencePanel = panel;
             return panel;
+        }
+
+        /// <summary>The stage name the panel fetch reports its progress under.</summary>
+        public const string ProgressStage = "Reference panel";
+
+        /// <summary>The panel fetch on the operation path: progress after each family, Cancel through the
+        /// context, and the panel kept with the file only by the final commit, so a cancel or a failure leaves
+        /// the file as it was. Run it through CoreOperation.RunAsync.</summary>
+        public static async Task<ReferencePanel> FetchAndStoreAsync(FamilyClusterFile file, OperationContext operation,
+            Func<ProteinEvidence, bool>? inScope = null, HttpMessageHandler? handler = null)
+        {
+            ArgumentNullException.ThrowIfNull(operation);
+            List<string> families = FamiliesFound(file, inScope);
+            ReferencePanel panel = await FetchAsync(families, handler, new OperationFetchProgress(operation),
+                operation.CancellationToken).ConfigureAwait(false);
+            operation.Commit(() =>
+            {
+                file.EvidenceSource ??= new EvidenceProvenance();
+                file.EvidenceSource.ReferencePanel = panel;
+            });
+            return panel;
+        }
+
+        /// <summary>Reports at once, on the fetching thread, so a cancel stops the fetch at the next family.</summary>
+        private sealed class OperationFetchProgress : IProgress<FetchProgress>
+        {
+            private readonly OperationContext operation;
+            public OperationFetchProgress(OperationContext operation) => this.operation = operation;
+
+            public void Report(FetchProgress value) => operation.Report(ProgressStage,
+                "Fetched " + value.CompletedBatches.ToString(CultureInfo.InvariantCulture) + " of "
+                + value.TotalBatches.ToString(CultureInfo.InvariantCulture) + " families, "
+                + value.Found.ToString("N0", CultureInfo.InvariantCulture) + " reviewed proteins kept",
+                value.CompletedBatches, value.TotalBatches);
         }
 
         /// <summary>The panel's entries as neighbour references, leaving out any accession already among
@@ -211,28 +245,7 @@ namespace FamilyQuant.Evidence
         private static readonly Regex NextLink = new Regex("<([^>]*)>\\s*;\\s*rel=\"next\"",
             RegexOptions.Compiled | RegexOptions.CultureInvariant);
 
-        private static async Task<HttpResponseMessage> GetWithRetry(HttpClient client, string url, CancellationToken cancellationToken)
-        {
-            for (int attempt = 1; ; attempt++)
-            {
-                HttpResponseMessage? response = null;
-                try { response = await client.GetAsync(url, cancellationToken).ConfigureAwait(false); }
-                catch (HttpRequestException) when (attempt < Attempts) { }
-                catch (TaskCanceledException) when (attempt < Attempts && !cancellationToken.IsCancellationRequested) { }
-                if (response != null)
-                {
-                    if (response.IsSuccessStatusCode) return response;
-                    int status = (int)response.StatusCode;
-                    if (attempt == Attempts || (status != 429 && status < 500))
-                    {
-                        response.Dispose();
-                        throw new HttpRequestException("UniProt refused a panel page (HTTP "
-                            + status.ToString(CultureInfo.InvariantCulture) + "). No panel was made.", null, response.StatusCode);
-                    }
-                    response.Dispose();
-                }
-                await Task.Delay(TimeSpan.FromSeconds(attempt), cancellationToken).ConfigureAwait(false);
-            }
-        }
+        private static Task<HttpResponseMessage> GetWithRetry(HttpClient client, string url, CancellationToken cancellationToken) =>
+            UniProtHttp.GetWithRetryAsync(client, url, Attempts, status => "UniProt refused a panel page (HTTP " + status.ToString(CultureInfo.InvariantCulture) + "). No panel was made.", cancellationToken);
     }
 }

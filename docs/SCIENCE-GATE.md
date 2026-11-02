@@ -1,15 +1,45 @@
 # E14 science gate: the evidence rule against the frozen Python classes
 
-Status: draft verdicts for review by FQReview. Built on fq/opus, to be rerun on master once E6 and C4 land.
+Status: E14 verdicts approved by FQReview (with the V08 correction). E16 carried out findings F1 to F3 as general rules; the section "After E16" below gives the current state, and the per-protein table `docs/science-gate-disagreements.csv` is the E16 run.
 
 ## What was compared
 
 - The program: E5's proposal (`EvidenceClassifier.Propose`, scope words `Toxin` and `venom gland`) with E7's coherence flags attached (`CoherenceCheck.Flag`), on Ana's file with E2's evidence, the E4 reference panel and the stored E3 search (`D:/FamilyQuant-data/out-opus/e4-ana-panel-neighbours.fcf`). A protein counts as placed only when it is assigned and not flagged, that is, ticked by default.
 - Python: the frozen classes `classes_all.tsv` (exp8, 2,754 proteins) and `classes.tsv` (exp5, the SVMP and disintegrin set). Python's labels are mapped back to UniProt families by exp8's own label table. That table lives in the checker only, as the answer key; the rule in `Evidence/` has no family, name or domain.
 - The checker: `FamilyQuant.Tests.exe --science-gate-list`. It writes every disagreement with its verdict ID, the program's tier, reason, flags, nearest reviewed neighbour (and whether that neighbour carries the scope words), the E10 left-out entry, and Python's own reason. The rows are in `docs/science-gate-disagreements.csv`; the checker fails if any row has no verdict.
-- E6's architecture split is not merged yet. For the 256 reviewed SVMP and disintegrin entries the checker emulates E6's default: a member of the SVMP family whose only Pfam domain is the disintegrin domain is offered apart, and Ana's default (A4) is to accept that split.
+- At the original E14 comparison, E6's architecture split had not yet merged; the current implementation has since landed. For the 256 reviewed SVMP and disintegrin entries the checker emulates E6's default: a member of the SVMP family whose only Pfam domain is the disintegrin domain is offered apart, and Ana's default (A4) is to accept that split.
 
-## Result
+## After E16: the three findings as rules, and the gate again
+
+E16 put F1 to F3 into the program as general rules, with no name, family or domain in them:
+
+- **F1** (E5): an entry carrying the database's contaminant label is treated like a decoy: it teaches no marker and joins no family.
+- **F2** (E5 and E3): with a scope, the neighbour search uses only reviewed proteins that carry the scope words, the panel's included (`NearestReviewed.References`), so the nearest neighbour found is the nearest one in scope, as exp6's search was; the unannotated tier also refuses a neighbour without the scope words (`neighbour_out_of_scope`). To judge a panel entry's scope the panel now keeps its tissue text (`cc_tissue_specificity`), which it used to drop.
+- **F3** (E6): a complete member with no domain call joins the one domain combination whose complete reviewed members (the file's and the panel's, at least 10) span both its length and its cysteine count; a fragment, or a protein that fits no range or several, stays among the members with no domain calls (`EvidenceArchitectureGroup.InferredProteinIndices`).
+
+What each rule changed on Ana's file (UniProt 2026_03, panel fetched again with tissue, scope `Toxin` and `venom gland`; `--science-gate-list` on `e16-ana-searched.fcf`):
+
+| Rule | Change |
+|---|---|
+| F1 | 20 contaminants no longer placed (V07: 20 to 0) |
+| F2 | Search references 5,844 to 2,721; search time 398 s to 187 s; 2,696 targets with a neighbour (333 from the panel). Of the 81 proteins brought in through a neighbour outside the scope at E14 (V08), 70 are no longer placed and 11 stay, now through a reviewed neighbour that carries the scope words (verdict V11). Three PLA2s and one CRISP that Python placed through an in-scope toxin keep their family: the search now finds that toxin, where refusing only the nearest neighbour would have dropped them |
+| F3 | 7 domainless complete members placed by length and cysteines: 5 reviewed disintegrins into the SVMP family's disintegrin group, 1 member into its Reprolysin group, 1 natriuretic peptide family member into its ANP group |
+
+| Measure | E14 | After E16 |
+|---|---:|---:|
+| Disagreements, all proteins | 308 | 166 (142 resolved, none new) |
+| Reviewed proteins with a Python class that agree | 1,030 of 1,089 | 1,077 of 1,089 |
+| The 256 reviewed SVMP and disintegrin entries, consistent with E6's split taken as Ana's default (A4) | 250 | 255 |
+
+Verdicts after E16: V02 11, V03 52, V04 68, V05 10, V06 9, V09 4, V10 1, V11 11 (V01, V07 and V08 are empty). The leave-one-out is unchanged, as it does not use the classifier: 976 right, 20 wrong, 96 without a neighbour (986, 17, 89 with the panel).
+
+The one of the 256 left is **morulustatin** (sp|P0DW29), a 37-residue fragment of a mature disintegrin with no domain call. Being a fragment, its length cannot place it (it lies below every combination's range, as any piece does), so it stays in the SVMP family's "(no domain calls)" group. The program lists it, with that reason, among the members the split could not place (`EvidenceArchitectureProposal.Undetermined`, filled whenever the family can split), and the gate fails if an inconsistent entry of the 256 is neither flagged nor listed so. Showing that list beside the split is C4's part (FQLook); until C4 is merged no screen shows it. Python placed it by its name. Verdict V02 stands for it.
+
+### V11. Unannotated proteins joined through an in-scope reviewed neighbour (11)
+
+Four CRISPs named "Cysteine-rich venom protein", "Snake venom CRISP-like" or "Cysteine-rich secretory protein", five cystatins whose nearest is J3SE80 (a reviewed venom-gland cystatin, 78 to 100%), and one PLA2 fragment, all at 73 to 100% identity to a reviewed protein that carries the scope words. All 11 were already placed at E14 (as V08, through a closer protein outside the scope) and stay placed. Python did not place them, because its indexed search or its reference set missed that neighbour. Program right on the evidence. The eleventh is serotriflin (sp|P0CB15), a CRISP of snake serum, joined through Q8JI38 at 79.2%: homology cannot tell a serum CRISP from a venom one, so this one is a review item for the user.
+
+## Result at E14 (before E16)
 
 | Measure | Count |
 |---|---:|
@@ -69,9 +99,9 @@ All 20 are `contaminant_` entries (bovine trypsin, chymotrypsinogens, coagulatio
 
 ### V08. Unannotated proteins joined through a neighbour outside the scope (81)
 
-E5's last tier assigns a protein with no scope words when a reviewed neighbour is at 70% or more with compatible domains. With the E4 panel, that neighbour can be any reviewed member of the family from any taxon, and in 80 of these 81 rows it carries no scope word itself. What comes in: 36 snake neurotrophin-3 fragments into NGF-beta, amine and polyamine oxidases into the LAAO family, phosphodiesterases and PLA2s whose nearest reviewed protein is a non-venom mammalian enzyme, PDGF-C and PDGF-D, serotriflin (a CRISP of snake serum) into CRISP, and others. The nearest neighbours are listed per row in the CSV. Their families are right as biology, but nothing says they are venom proteins, which is what Ana's families are for. exp6 avoided this by construction: its references were reviewed toxins only.
+E5's last tier assigns a protein with no scope words when a reviewed neighbour is at 70% or more with compatible domains. With the E4 panel, that neighbour can be any reviewed member of the family from any taxon, and in 80 of these 81 rows it carries no scope word itself. What comes in: 36 snake neurotrophin-3 fragments into NGF-beta, amine and polyamine oxidases into the LAAO family, phosphodiesterases and PLA2s whose nearest reviewed protein is a non-venom mammalian enzyme, PDGF-C and PDGF-D, unannotated CRISPs, and others. The nearest neighbours are listed per row in the CSV. Their families are right as biology, but nothing says they are venom proteins, which is what Ana's families are for. exp6 avoided this by construction: its references were reviewed toxins only.
 
-Finding F2 for E5: an unannotated protein should join a family only through a neighbour that itself carries the scope words. That keeps the one row here whose neighbour is in scope (a CRISP) and drops the 80. Some of the 80 may still be venom proteins (for example "Cysteine-rich venom protein" entries that UniProt left without the keyword); they would then appear in the E10 left-out list for the user rather than being added silently.
+Finding F2 for E5: an unannotated protein should join a family only through a neighbour that itself carries the scope words. That keeps the one row here whose neighbour is in scope, serotriflin (sp|P0CB15, a CRISP of snake serum, whose neighbour Q8JI38 carries the scope words at 79.2%), and drops the 80. Some of the 80 may still be venom proteins (for example "Cysteine-rich venom protein" entries that UniProt left without the keyword); they would then appear in the E10 left-out list for the user rather than being added silently.
 
 ### V09. Short ADAM-named entries in the SVMP family (4)
 
@@ -85,11 +115,11 @@ A7X500 (SVMP-Cau4 fragment) is 85% identical over its whole length to a reviewed
 
 The calmodulin family holds 125 rows of the E10 left-out list. A few calmodulin-family proteins carry the scope words (venom-gland expression), so E5 learns the family's EF-hand marker, and every EF-hand protein outside the family is then listed. Whether calmodulin-like proteins belong in a venom review at all is a choice of scope words, not something a rule should decide. Question: should the scope stay `Toxin` and `venom gland`, which brings in housekeeping proteins expressed in the gland, or should Ana narrow it?
 
-## Findings for other owners
+## Findings, carried out in E16
 
-- F1 (E5): never assign `contaminant_` entries (V07, 20 rows).
-- F2 (E5): the unannotated tier joins only through an in-scope neighbour (V08, 80 rows).
-- F3 (E6): reach domainless mature disintegrins, by the neighbour's architecture or a learned length and cysteine subclass (V02, 6 reviewed of the 256).
+- F1 (E5): never assign `contaminant_` entries (V07, 20 rows). Done.
+- F2 (E5): the unannotated tier joins only through an in-scope neighbour (V08, 80 rows). Done, and the search itself now looks only among in-scope references.
+- F3 (E6): reach domainless mature disintegrins. Done with the learned length and cysteine ranges; the neighbour's architecture was measured and rejected: 4 of the 6 had no qualifying neighbour, one's neighbour had no domain call either, and morulustatin's was a whole P-II precursor that it matched only over its disintegrin region.
 
 ## Errors found in Python, recorded as such
 

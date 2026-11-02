@@ -2,8 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
 using System.Text.Json;
 using System.Text.RegularExpressions;
 
@@ -31,9 +29,11 @@ namespace FamilyQuant.Evidence
             var canonical = families.Values.Where(f => f.Length > 0).GroupBy(f => f, StringComparer.OrdinalIgnoreCase)
                 .ToDictionary(g => g.Key, g => g.OrderBy(f => f, StringComparer.Ordinal).First(), StringComparer.OrdinalIgnoreCase);
             string Label(string family) => canonical.TryGetValue(family, out string? name) ? name : family;
-            List<EvidenceDomainMarker> markers = LearnMarkers(proteins, targets, families, inScope, options.MarkerVoteFraction, maskedLabels);
+            // A contaminant of the database is treated like a decoy: it teaches nothing and joins nothing.
+            List<int> candidates = targets.Where(i => !IsContaminant(proteins[i])).ToList();
+            List<EvidenceDomainMarker> markers = LearnMarkers(proteins, candidates, families, inScope, options.MarkerVoteFraction, maskedLabels);
             var markerByDomain = markers.ToDictionary(m => m.Accession, StringComparer.Ordinal);
-            var familyDomains = targets.Where(i => inScope[i] && families[i].Length > 0 && maskedLabels?.Contains(i) != true)
+            var familyDomains = candidates.Where(i => inScope[i] && families[i].Length > 0 && maskedLabels?.Contains(i) != true)
                 .GroupBy(i => families[i], StringComparer.OrdinalIgnoreCase)
                 .ToDictionary(g => g.Key, g => g.SelectMany(i => Domains(proteins[i].Evidence)).ToHashSet(StringComparer.Ordinal), StringComparer.OrdinalIgnoreCase);
             var sourceByIdentifier = targets.ToDictionary(i => proteins[i].SequenceIdentifier, i => proteins[i].Evidence, StringComparer.Ordinal);
@@ -51,7 +51,11 @@ namespace FamilyQuant.Evidence
                 string assigned = string.Empty;
                 EvidenceTier tier = EvidenceTier.Unassigned;
                 string reason;
-                if (HasMultipleFamilies(evidence))
+                if (IsContaminant(item))
+                {
+                    reason = "A contaminant of the database is never a candidate for a family.";
+                }
+                else if (HasMultipleFamilies(evidence))
                 {
                     reason = "The source lists distinct family memberships; choose a family after reviewing their contexts.";
                     Flag("multiple_source_families", reason);
@@ -91,6 +95,13 @@ namespace FamilyQuant.Evidence
                                 : "No source family, qualifying reviewed neighbour or learned marker supports a family.";
                             if (voted.Count > 1) Flag("conflicting_markers", reason);
                         }
+                    }
+                    else if (validNeighbour && Passes(neighbour!, options.UnannotatedIdentityPercent, options.MinQueryAlignedPercent)
+                        && !scope.Matches(referenceEvidence(neighbour!)))
+                    {
+                        // Out of scope on both sides: nothing says the protein belongs to what the user asked for.
+                        reason = "The neighbour qualifies, but it carries none of the scope words either, so it cannot bring in a protein without them.";
+                        Flag("neighbour_out_of_scope", reason);
                     }
                     else if (validNeighbour && Passes(neighbour!, options.UnannotatedIdentityPercent, options.MinQueryAlignedPercent))
                     {
@@ -147,19 +158,15 @@ namespace FamilyQuant.Evidence
 
         public static string Fingerprint(IReadOnlyList<FastaItemExtended> proteins)
         {
-            using var hash = IncrementalHash.CreateHash(HashAlgorithmName.SHA256);
+            using var hash = new LengthPrefixedSha256();
             foreach (FastaItemExtended item in proteins)
             {
                 Append(item.SequenceIdentifier); Append(item.Sequence); Append(item.UserID.ToString(CultureInfo.InvariantCulture));
                 Append(item.USearchID.ToString(CultureInfo.InvariantCulture)); Append(item.UserAnnotation);
                 Append(JsonSerializer.Serialize(item.Evidence));
             }
-            return Convert.ToHexString(hash.GetHashAndReset());
-            void Append(string? value)
-            {
-                byte[] bytes = Encoding.UTF8.GetBytes(value ?? string.Empty);
-                hash.AppendData(BitConverter.GetBytes(bytes.Length)); hash.AppendData(bytes);
-            }
+            return hash.Finish();
+            void Append(string? value) => hash.Append(value ?? string.Empty);
         }
 
         private static List<EvidenceDomainMarker> LearnMarkers(IReadOnlyList<FastaItemExtended> proteins, List<int> targets,
@@ -201,9 +208,10 @@ namespace FamilyQuant.Evidence
             return result;
         }
 
-        private static HashSet<string> Domains(ProteinEvidence? evidence) => evidence?.Pfam == null
-            ? new HashSet<string>(StringComparer.Ordinal)
-            : evidence.Pfam.Select(p => p.Accession).Where(a => !string.IsNullOrWhiteSpace(a)).ToHashSet(StringComparer.Ordinal);
+        private static HashSet<string> Domains(ProteinEvidence? evidence) => EvidenceDomains.Ordered(evidence).ToHashSet(StringComparer.Ordinal);
+
+        private static bool IsContaminant(FastaItemExtended protein) =>
+            (protein.SequenceIdentifier ?? string.Empty).StartsWith(SequenceLabels.ContaminantPrefix, StringComparison.Ordinal);
 
         private static bool HasMultipleFamilies(ProteinEvidence? evidence) => evidence?.FamilyMemberships != null
             && evidence.FamilyMemberships.Select(m => m.Family).Where(f => !string.IsNullOrWhiteSpace(f))

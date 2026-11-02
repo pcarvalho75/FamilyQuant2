@@ -22,9 +22,9 @@ namespace FamilyQuant.Tests
     /// <summary>
     /// Checks the parts of FamilyQuant that decide numbers, without a window to click.
     ///
-    ///   FamilyQuant.Tests.exe [pathToAPlpFile] [pathToAFastaOrTR]
+    ///   FamilyQuant.Tests.exe [plp] [database] [deNovoRoot] [acquisitionRoot]
     ///
-    /// Everything except the last two sections builds its own fixtures, so the suite runs anywhere.
+    /// Sections without real-data inputs build fixtures and run without a dataset.
     /// Pass a .plp to exercise the quantitation path against real data, and a database as well to run
     /// the UI smoke section - which builds the real WPF controls, because the XAML in
     /// ClusterGenerationControl is only parsed when a Family Cluster File is opened and nothing else
@@ -40,6 +40,13 @@ namespace FamilyQuant.Tests
         [STAThread]   // required: the UI smoke section constructs WPF controls
         private static int Main(string[] args)
         {
+            if (args.Length > 0 && args[0] == IdentitySearchStudy.Argument) return IdentitySearchStudy.Run(args);
+            if (args.Contains("--test-identity-study", StringComparer.Ordinal))
+            {
+                IdentityStudyTests();
+                Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
+                return failed == 0 ? 0 : 1;
+            }
             if (args.Length > 0 && (args[0] == ClusteringSnapshot.Argument || args[0] == ClusteringSnapshot.ExportArgument || args[0] == ClusteringSnapshot.VerifyExportArgument))
                 return ClusteringSnapshot.Run(args);
             if (args.Contains("--test-clustering-results", StringComparer.Ordinal))
@@ -97,6 +104,8 @@ namespace FamilyQuant.Tests
             }
             // Screen capture is an isolated lane: it never runs scientific export commands.
             if (ScreenHarness.IsRequested(args)) return ScreenHarness.Run(args);
+            if (args.Length >= 2 && args[0] == GroupingReviewScreens.Argument)
+                return GroupingReviewScreens.Run(args[1], args.Length >= 3 ? args[2] : null);
 
             if (args.Length > 0 && args[0] == FeatureLedger.GenerateArgument)
             {
@@ -117,6 +126,7 @@ namespace FamilyQuant.Tests
                 ShellStatusBridgeTests();
                 HomeStartTests(shellWork);
                 ShellNavigationTests(shellWork);
+                AppCommandReuseTests(shellWork);
                 ShellProjectOperationTests(shellWork);
                 ShellSavingTests(shellWork);
                 ShellWindowPreferenceTests(shellWork);
@@ -137,13 +147,9 @@ namespace FamilyQuant.Tests
             if (args.Length is 2 or 3 && args[0] == "--results-screens") return ResultsScreens(args[1], args.Length == 3 ? args[2] : null);
             if (args.Length == 2 && args[0] == "--shell-window-screens") return ShellWindowPreferenceScreens(args[1]);
             if (args.Length == 2 && args[0] == "--denovo-screens") return DeNovoScreens(args[1]);
-            if (args.Length == 2 && args[0] == "--shell-window-screens") return ShellWindowPreferenceScreens(args[1]);
+            if (args.Length == 2 && args[0] == "--homology-results-screens") return HomologyResultScreens(args[1]);
             if (args.Length == 2 && args[0] == "--build-family-screens") return BuildFamiliesScreens(args[1]);
-            if (args.Length == 2 && args[0] == "--quantify-screens") return QuantifyScreens(args[1]);
             if (args.Length == 2 && args[0] == "--quantify-shell-screens") return QuantifyShellScreens(args[1]);
-            if (args.Length == 2 && args[0] == "--quantify-screens") return QuantifyScreens(args[1]);
-            if (args.Length is 2 or 3 && args[0] == "--results-screens") return ResultsScreens(args[1], args.Length == 3 ? args[2] : null);
-            if (args.Length == 2 && args[0] == "--shell-window-screens") return ShellWindowPreferenceScreens(args[1]);
             if (args.Length == 2 && args[0] == "--secondary-screens") return SecondaryWindowScreens(args[1]);
 
             // PowerShell 5.1 silently DROPS empty "" arguments to native executables, which shifted
@@ -177,9 +183,23 @@ namespace FamilyQuant.Tests
                 return failed == 0 ? 0 : 1;
             }
 
+            if (args.Contains(ReferencePanelCheck.RefreshArgument))
+            {
+                ReferencePanelCheck.Refresh(args, Check);
+                Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
+                return failed == 0 ? 0 : 1;
+            }
+
             if (args.Contains(ReferencePanelCheck.Argument))
             {
                 ReferencePanelCheck.Run(args, Check);
+                Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
+                return failed == 0 ? 0 : 1;
+            }
+
+            if (args.Contains(EvidenceOperationsCheck.Argument))
+            {
+                EvidenceOperationsCheck.Run(args, Check);
                 Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
                 return failed == 0 ? 0 : 1;
             }
@@ -505,6 +525,8 @@ namespace FamilyQuant.Tests
             }
 
             Section("CSV export - locale and escaping");
+            CoreReuseContractTests();
+            SharedTestHelperContracts(workDir);
             CsvTests();
 
             Section("Core operation outcomes, progress and cancellation");
@@ -530,6 +552,7 @@ namespace FamilyQuant.Tests
             QuantifyViewModelTests(workDir);
             ResultsViewModelTests();
             DeNovoViewModelTests(workDir);
+            HomologyResultsTests(workDir);
 
             Section("Database parsing and the decoy tag");
             DatabaseTests(workDir);
@@ -542,6 +565,7 @@ namespace FamilyQuant.Tests
             Section("Redundancy removal - order kept, subsets dropped");
             RedundancyTests(workDir);
             ClusteringResultTests(workDir);
+            IdentityStudyTests();
 
             Section("De novo evidence - source-aware reader, filters, reconciliation");
             DeNovoTests(workDir);
@@ -691,9 +715,11 @@ namespace FamilyQuant.Tests
             Section("Nearest reviewed protein and the outside panel - never itself, gated, deterministic, offline");
             NearestReviewedTests(workDir);
             ReferencePanelTests(workDir);
+            EvidenceOperationTests();
 
             Section("Coherence check - what the reviewed members of a family ever show");
             CoherenceCheckTests();
+            E16RuleTests();
 
             Section("Motif check - the user's patterns counted per family on complete entries");
             MotifCheckTests(workDir);
@@ -705,6 +731,7 @@ namespace FamilyQuant.Tests
 
             Section("Left-out list - marker carriers kept out of the marker's family, with why");
             LeftOutListTests();
+            EvidenceExportTests();
 
             Section("Batch edit - one User ID and annotation for many selected rows");
             BatchCurationTests();
@@ -756,6 +783,12 @@ namespace FamilyQuant.Tests
             LogoResourceTests(workDir);
             TypographyRulesTests();
             TableAppearanceTests();
+            EvidenceReviewModelTests();
+            GroupingReviewInteractionTests();
+            EvidenceGroupingFlowTests();
+            ArchitectureMemberViewTests();
+            EvidenceFetchCoordinatorTests();
+            CurationSaveResultTests(workDir);
             ThemePreferenceTests(workDir);
 
             Section("Feature ledger - frozen source inventory and explicit preservation checks");
@@ -766,6 +799,7 @@ namespace FamilyQuant.Tests
             ShellStatusTests(workDir);
             HomeStartTests(workDir);
             ShellNavigationTests(workDir);
+            AppCommandReuseTests(workDir);
             ShellProjectOperationTests(workDir);
             ShellSavingTests(workDir);
             ShellWindowPreferenceTests(workDir);
@@ -800,7 +834,7 @@ namespace FamilyQuant.Tests
             }
         }
 
-        private static bool Throws<T>(Action action, Action<string>? capture = null) where T : Exception
+        internal static bool Throws<T>(Action action, Action<string>? capture = null) where T : Exception
         {
             try
             {

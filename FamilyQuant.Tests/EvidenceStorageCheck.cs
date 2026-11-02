@@ -70,16 +70,12 @@ namespace FamilyQuant.Tests
                 }, new JsonSerializerOptions { WriteIndented = true }));
                 Console.WriteLine(File.ReadAllText(report));
 
-                string At(int offset, string fallback) => args.Length > flag + offset ? args[flag + offset] : fallback;
+                string At(int offset, string fallback) => TestArguments.EmptyPassesThrough(args, flag, offset, fallback);
             }
             catch (Exception ex) { check("evidence storage measurement completed", false, ex.GetBaseException().Message); }
         }
 
-        private static string Hash(string path)
-        {
-            using FileStream input = File.OpenRead(path);
-            return Convert.ToHexString(SHA256.HashData(input));
-        }
+        private static string Hash(string path) => TestFileHash.Upper(path);
 
         internal static Dictionary<string, ProteinEvidence> ReadReference(string path)
         {

@@ -83,9 +83,9 @@ public abstract class DeNovoSession : ScreenViewModel
     public object? LabelXicRunsExtracted { get; protected set; } = "Runs extracted: -";
     public object? LabelXicTotalM0 { get; protected set; } = "Total M+0: -";
     public object? ReviewQueueItems { get; protected set; }
-    public object? XicStatsItems { get; protected set; }
+    public System.Collections.IEnumerable? XicStatsItems { get; protected set; }
     public object? HomologyItems { get; protected set; }
-    public object? PartitionItems { get; protected set; }
+    public System.Collections.IEnumerable? PartitionItems { get; protected set; }
     protected DeNovoSession(DeNovoFilterViewModel? filters = null)
     {
         Filters = filters ?? new();
@@ -603,8 +603,7 @@ public abstract class DeNovoSession : ScreenViewModel
                 " reached nothing, across " +
                 outcome.Families.Count.ToString("N0", CultureInfo.CurrentCulture) +
                 " target family(ies). Read the mapped count against the decoy-only count beside it: that " +
-                "is the rate at which this threshold invents a family. Next step: export the " +
-                "assignments, or go on to Step 5.");
+                "is the rate at which this threshold invents a family. Export the homology snapshot from Results.");
         }
 
         public void ExportHomologyCsv(string path)
@@ -612,23 +611,8 @@ public abstract class DeNovoSession : ScreenViewModel
             if (LastHomology == null) throw new InvalidOperationException(
                 "There is no homology search to export; run one in Step 4 first.");
 
-            var csv = new StringBuilder();
-            csv.AppendLine("peptide,family_ids,protein_ids,ambiguous");
-
-            foreach (FamilyAssignment a in LastHomology.Assignments)
-            {
-                csv.AppendLine(string.Join(",",
-                    CsvField(a.Peptide),
-                    CsvField(string.Join(";", a.FamilyIds.Select(f => f.ToString(CultureInfo.InvariantCulture)))),
-                    CsvField(string.Join(";", a.ProteinIds)),
-                    a.IsAmbiguous ? "true" : "false"));
-            }
-
-            File.WriteAllText(path, csv.ToString());
+            HomologyCsv.Write(path, LastHomology);
         }
-
-        protected static string CsvField(string? value) =>
-            "\"" + (value ?? string.Empty).Replace("\"", "\"\"") + "\"";
 
         public void ApplyPartition(DeNovoPartition outcome)
         {

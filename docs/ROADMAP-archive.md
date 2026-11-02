@@ -41,6 +41,10 @@ Finished steps, moved here from docs/ROADMAP.md. The board shows them as green.
 | E11 | Apply: new numbers past every number in use, annotations, locks, decoys and unassigned proteins untouched, one undo step. Writes a recipe into the project (scope, thresholds, ticked families, names, splits, single-protein overrides, release, program version) | H | 4 | E5, E6, F5 | E12, E13, A1, C4 | Applying the recipe twice gives byte-identical assignments; undo restores everything; recipe survives save and reopen | EV | not started | 0% | 0% | T+4 |
 | E15 | Method written up: Help page, `SCIENTIFIC_METHOD.md`, what is new compared with word and keyword grouping | L | 2 | E14 | R1 | Help opens; every number in it comes from the validation report | EV | OP | 0% | 0% | T+4 |
 | E12 | File check after every save: reopen the saved file and compare sequences, decoys, unassigned proteins, locks, source hash. Result shown on screen. Replaces the checks in `make_draft_fcf.cs` | M | 2 | E11 | A1, S5 | A corrupted fixture is caught; a good file reports passed | EV | not started | 0% | 0% | T+3 |
+| E16 | The science gate's three findings as general rules: the contaminant prefix treated like a decoy, the unannotated-neighbour tier joins only through a neighbour with the scope words, a member with no domain call takes its nearest reviewed neighbour's architecture group or a learned subclass. Then rerun the gate on master | M | 2 | E6, E14 | A1 | All 256 reviewed entries consistent, or each one left has a written verdict; C4 shows it on the screen | OP | not started | 0% | 0% | T+4 |
+| E13 | Exports from the program: audit CSV (family, number, previous family, accession, locus, description, reason, domains, length, cysteines, reviewed, fragment, annotated, UniProt family) and left-out CSV. RFC-4180, InvariantCulture | L | 2 | E10, E11 | A1 | Columns match the delivered CSVs; suite pins them | EV | OP | 0% | 0% | T+2 |
+| E11b | Apply takes the session search and checked motifs: validated, attached inside the transaction, in the recipe, restored by the same single undo | M | 1 | E11 | C4, A1 | Cancel and a failed apply leave the file as it was; replay stays an exact no-op | EV | not started | 0% | 0% | T+1 |
+| OP1 | Long evidence steps on the operation path: the neighbour search and the panel fetch get progress and Cancel. Ana's file takes 398 s with neither | M | 1 | X10 | S6, A1 | Cancel leaves the file as it was; progress shown on her real file | OP | not started | 0% | 0% | T+1 |
 
 ### W2 Ana's result, through the software
 
@@ -80,6 +84,9 @@ Finished steps, moved here from docs/ROADMAP.md. The board shows them as green.
 | C6 | Build families screen: one flow, one explanation line, button labels that say what they do ("Input a FASTA file" and "Run USearch" go); Remove Redundancy kept | M | 3 | S2, X3 | C7, V3 | All ledger rows kept; renders pass | AS | SH | 0% | 0% | T+6 |
 | C10 | De novo uses the filters Compute uses, so the screen can no longer disagree with the run. `DeNovoControl` (2,329 lines) replaced by a view model and a thin view | H | 5 | C8 | C11, V3 | One source of filters; test proves it; ledger rows checked | EV | RS | 0% | 0% | T+5 |
 | C12 | Secondary windows rebuilt: Lock manager, Spectrum table, Identity scan, Text report, Help | M | 4 | V4 | V3, C14 | All render clean in both themes | AS | SH | 0% | 0% | T+7 |
+| C7 | One "find best identity" flow, if the check passes: first prove Scan gives Divide and Conquer's answer on the Bjararaca and Viperidae files, otherwise both stay | M | 2 | C6 | R2 | Equivalence measured and written down; `FDR` still reported | AS | AS | 0% | 0% | T+2 |
+| C11 | Retire Extract areas and Partition ion current from the De novo screen (superseded by Full XIC, and a second recovery on another basis). Homology CSV moves to Results. Paulo decided on 2026-11-01 to retire them; 1.5 keeps them | M | 2 | C10 | X11 | Ledger rows marked DROP by Paulo's word; homology CSV still exported | EV | RS | 0% | 0% | T+2 |
+| C4 | Group by evidence window: families on the left with ticks and names, proteins on the right with reason, tier, flags, split, motif box, left-out tab. Same window as the Super Cluster preview, with a keyword mode, so the ticks, red rows and copy all stay | VH | 7 | E5, V4, S1 | E14, A1 | Whole flow by keyboard and mouse in the suite; 31,777 proteins scroll smoothly; Cancel changes nothing; the group with no domain calls and the members placed by length and cysteines show on the screen, with the one reviewed entry left (morulustatin) visible | LK | not started | 0% | 0% | T+7 |
 
 ### W6 Core rewrite: copy what is good, rewrite what is better
 
@@ -91,3 +98,8 @@ Finished steps, moved here from docs/ROADMAP.md. The board shows them as green.
 | X10 | One path for errors, progress and cancel in Core; no message box below the App layer | M | 3 | F6 | X3, X5, S6 | A suite check fails on `MessageBox` in Core; each long operation cancels cleanly | AS | not started | 0% | 0% | T+3 |
 | X3 | Clustering: `USearchTools` and `RedundancyTools` with clear result types, cancel and progress | H | 3 | X2, X10 | C6 | Same families frozen against current: Bjararaca exhaustive, Viperidae fast at identity 85 (exhaustive is about 2 billion pairs, ruled out on 2026-11-01); memo and gate tests kept | AS | not started | 0% | 0% | T+3 |
 
+### W7 Releases (Paulo publishes each one)
+
+| ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
+|---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
+| H1 | Cooldown at the middle, by the `halt-team-for-regroup` skill: everyone finished the step in hand, all branches merged, housekeeping, duplicate-code review, roadmap readjusted from measured speed | H | 2 | | R2, R3 | All worker branches merged; full suite and golden green; ledger status reported; roadmap version 3 written | Orchestrator | done | 100% | 100% | done |
