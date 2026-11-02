@@ -16,35 +16,52 @@ namespace FamilyQuant.Tests;
 
 /// <summary>
 /// N6a: what the compiled 2.0 program holds, read from its assemblies rather than its source. Every method's string
-/// literals (ldstr) and source document (portable PDB); every compiled XAML resource's element names and string
-/// property values (BAML); and a call graph from the application's entry point. Reachability over-approximates
-/// dispatch the usual way: a type touched by reachable code (constructed, called, its fields read or written, or
-/// named as a generic argument) has all its virtual methods and its static constructor reachable, a delegate's target
-/// (ldftn) is reachable, and a reachable reference to a XAML resource loads it, which constructs its class and every
-/// type its elements name. A method nothing reaches stays unreachable, whatever literal it holds.
+/// literals (ldstr), the member each literal is stored into, and its source document (portable PDB); every compiled
+/// XAML resource's elements, names, string property values and visibility (BAML); and a call graph from the
+/// application's entry point. A method is reachable through a call or a delegate (ldftn) from reachable code. A
+/// virtual method is reachable only on a type that is really constructed (a reachable constructor, a XAML load that
+/// creates it, or a value type passed as a generic argument), and then only when the framework can call that slot
+/// (an override of a method outside these assemblies, or an explicit interface implementation) or reachable code
+/// calls a method of that name. Naming or touching a type reaches only its static constructor. A reachable reference
+/// to a XAML resource loads it, which constructs its class and every type its elements name.
 /// </summary>
 internal sealed class LedgerTextProgram
 {
     internal sealed record Method(int Id, string Assembly, string Key, string TopType, string Document, bool IsVirtual,
-        bool IsConstructor, bool IsStaticConstructor, int Type);
-    internal sealed record XamlValue(string ElementType, string ElementName, string Member, string Value);
+        bool IsConstructor, bool IsStaticConstructor, int Type, string Name, int Parameters, bool IsNewSlot, bool FrameworkSlot,
+        string SourceType, string SourceMember);
+    /// <summary>One string property of a compiled XAML element. <see cref="Ancestors"/> are the names of the elements around it,
+    /// nearest first; <see cref="VisibilityInMarkup"/> is true when it or one of them sets Visibility to anything but Visible.</summary>
+    internal sealed record XamlValue(string ElementType, string ElementName, string Member, string Value, IReadOnlyList<string> Ancestors,
+        bool VisibilityInMarkup);
     internal sealed record Baml(string Resource, string? OwnerType, List<XamlValue> Values, List<string> ElementTypes, string? Failure);
     internal sealed record Reach(int Parent, string Reason);
+    /// <summary>A literal as the method uses it: its IL offset and the member it is stored into right away, if any.</summary>
+    internal sealed record LiteralUse(int Offset, string Text, string? StoredInto);
 
     internal readonly List<Method> Methods = new();
     internal readonly Dictionary<int, List<string>> Literals = new();
+    internal readonly Dictionary<int, List<LiteralUse>> LiteralUses = new();
     internal readonly Dictionary<string, List<int>> MethodsByLiteral = new(StringComparer.Ordinal);
     internal readonly Dictionary<string, Baml> Bamls = new(StringComparer.OrdinalIgnoreCase);
     internal readonly Dictionary<int, Reach> Reached = new();
+    /// <summary>Fields read by a method that sets (or binds) a Visibility: an element of that name may be hidden at run time.</summary>
+    internal readonly HashSet<string> VisibilityFields = new(StringComparer.Ordinal);
     internal int EntryMethod = -1;
 
     private readonly Dictionary<string, int> methodByKey = new(StringComparer.Ordinal);
     private readonly Dictionary<string, int> typeByName = new(StringComparer.Ordinal);
-    private readonly List<(string Name, List<int> Methods, int BaseType)> types = new();
+    private readonly List<(string Name, List<int> Methods, int BaseType, bool IsValueType)> types = new();
     private readonly Dictionary<int, List<(int Target, string Reason)>> calls = new();
+    private readonly Dictionary<int, HashSet<string>> calledNames = new();
     private readonly Dictionary<int, HashSet<int>> touches = new();
+    private readonly Dictionary<int, HashSet<int>> genericValueTypes = new();
+    private readonly Dictionary<int, List<(int Offset, string Target)>> stores = new();
+    private readonly Dictionary<int, List<(int Offset, int Callee)>> callSites = new();
+    private readonly Dictionary<int, (HashSet<string> Fields, bool SetsVisibility)> visibilityUse = new();
     private readonly Dictionary<int, HashSet<string>> xamlReferences = new();
     private readonly Dictionary<string, string> ownerByResource = new(StringComparer.OrdinalIgnoreCase);
+    private readonly Dictionary<int, HashSet<string>> storesReached = new();
     private static readonly Dictionary<short, OpCode> OpCodesByValue = typeof(OpCodes).GetFields(BindingFlags.Public | BindingFlags.Static)
         .Select(f => (OpCode)f.GetValue(null)!).ToDictionary(o => o.Value);
 
@@ -81,6 +98,16 @@ internal sealed class LedgerTextProgram
     private Dictionary<MethodDefinitionHandle, int> Declare(MetadataReader md, MetadataReader? pdb, string assembly, string sourceRoot)
     {
         var ids = new Dictionary<MethodDefinitionHandle, int>();
+        // Methods that implement a declaration outside these assemblies through an explicit MethodImpl (an explicit interface
+        // implementation, a compiler state machine's MoveNext): the framework can call them.
+        var external = new HashSet<MethodDefinitionHandle>();
+        foreach (TypeDefinitionHandle th in md.TypeDefinitions)
+            foreach (MethodImplementationHandle ih in md.GetTypeDefinition(th).GetMethodImplementations())
+            {
+                MethodImplementation impl = md.GetMethodImplementation(ih);
+                if (impl.MethodBody.Kind == HandleKind.MethodDefinition && impl.MethodDeclaration.Kind == HandleKind.MemberReference)
+                    external.Add((MethodDefinitionHandle)impl.MethodBody);
+            }
         foreach (TypeDefinitionHandle th in md.TypeDefinitions)
         {
             TypeDefinition t = md.GetTypeDefinition(th);
@@ -88,13 +115,15 @@ internal sealed class LedgerTextProgram
             int typeId = types.Count;
             typeByName.TryAdd(name, typeId);
             var list = new List<int>();
-            types.Add((name, list, -1));
+            string? baseName = t.BaseType.IsNil ? null : TypeOf(md, t.BaseType);
+            types.Add((name, list, -1, baseName is "System.ValueType" or "System.Enum"));
             string top = name.Split('/')[0];
             foreach (MethodDefinitionHandle mh in t.GetMethods())
             {
                 MethodDefinition m = md.GetMethodDefinition(mh);
                 string methodName = md.GetString(m.Name);
-                string key = MethodKey(name, methodName, m.DecodeSignature(Signatures.Instance, null));
+                MethodSignature<string> signature = m.DecodeSignature(Signatures.Instance, null);
+                string key = MethodKey(name, methodName, signature);
                 string document = "";
                 if (pdb != null)
                 {
@@ -103,9 +132,12 @@ internal sealed class LedgerTextProgram
                     if (dh.IsNil) dh = debug.GetSequencePoints().Select(p => p.Document).FirstOrDefault(d => !d.IsNil);
                     if (!dh.IsNil) document = Relative(pdb.GetString(pdb.GetDocument(dh).Name), sourceRoot);
                 }
+                var (sourceType, sourceMember) = SourceOf(name, methodName);
                 int id = Methods.Count;
                 Methods.Add(new Method(id, assembly, key, top, document, (m.Attributes & MethodAttributes.Virtual) != 0,
-                    methodName == ".ctor", methodName == ".cctor", typeId));
+                    methodName == ".ctor", methodName == ".cctor", typeId, methodName, signature.ParameterTypes.Length,
+                    (m.Attributes & MethodAttributes.NewSlot) != 0, external.Contains(mh) || methodName.Contains('.', StringComparison.Ordinal) && methodName[0] != '.',
+                    sourceType, sourceMember));
                 methodByKey.TryAdd(key, id);
                 ids[mh] = id;
                 list.Add(id);
@@ -119,10 +151,26 @@ internal sealed class LedgerTextProgram
             EntityHandle b = md.GetTypeDefinition(th).BaseType;
             string? baseName = b.IsNil ? null : TypeOf(md, b);
             if (baseName != null && typeByName.TryGetValue(baseName, out int baseId))
-                types[start + index] = (types[start + index].Name, types[start + index].Methods, baseId);
+                types[start + index] = (types[start + index].Name, types[start + index].Methods, baseId, types[start + index].IsValueType);
             index++;
         }
         return ids;
+    }
+
+    /// <summary>The source type and member a compiled method comes from: a state machine, closure or lambda belongs to the member
+    /// it was written in, an accessor to its property or event.</summary>
+    internal static (string Type, string Member) SourceOf(string typeName, string methodName)
+    {
+        string[] segments = typeName.Split('/');
+        string type = string.Join("/", segments.Where(s => !s.StartsWith("<", StringComparison.Ordinal)));
+        string member = methodName;
+        string? machine = segments.LastOrDefault(s => s.StartsWith("<", StringComparison.Ordinal) && !s.StartsWith("<>", StringComparison.Ordinal));
+        if (machine != null) member = machine[1..machine.IndexOf('>')];
+        if (member.StartsWith("<", StringComparison.Ordinal) && member.IndexOf('>') > 1) member = member[1..member.IndexOf('>')];
+        foreach (string prefix in new[] { "get_", "set_", "add_", "remove_" })
+            if (member.StartsWith(prefix, StringComparison.Ordinal)) { member = member[prefix.Length..]; break; }
+        int dot = type.LastIndexOfAny(new[] { '.', '/' });
+        return (dot >= 0 ? type[(dot + 1)..] : type, member);
     }
 
     private static string Relative(string document, string sourceRoot)
@@ -140,16 +188,25 @@ internal sealed class LedgerTextProgram
             int id = ids[mh];
             MethodDefinition m = md.GetMethodDefinition(mh);
             var targets = new List<(int, string)>();
+            var names = new HashSet<string>(StringComparer.Ordinal);
             var touched = new HashSet<int>();
+            var valueTypes = new HashSet<int>();
             var literals = new List<string>();
+            var uses = new List<LiteralUse>();
+            var stored = new List<(int, string)>();
+            var sites = new List<(int, int)>();
+            var fields = new HashSet<string>(StringComparer.Ordinal);
+            bool setsVisibility = false;
             var xaml = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
-            calls[id] = targets; touches[id] = touched;
-            Touch(touched, Methods[id].Type);
+            calls[id] = targets; calledNames[id] = names; touches[id] = touched; genericValueTypes[id] = valueTypes;
+            stores[id] = stored; callSites[id] = sites;
             if (m.RelativeVirtualAddress == 0) continue;
             byte[] il = pe.GetMethodBody(m.RelativeVirtualAddress).GetILBytes() ?? Array.Empty<byte>();
             bool connect = md.GetString(m.Name).EndsWith("Connect", StringComparison.Ordinal);
+            (int Offset, string Text)? pending = null;
             for (int i = 0; i < il.Length;)
             {
+                int offset = i;
                 short value = il[i] == 0xFE && i + 1 < il.Length ? (short)(0xFE00 | il[i + 1]) : il[i];
                 i += il[i] == 0xFE ? 2 : 1;
                 if (!OpCodesByValue.TryGetValue(value, out OpCode op)) break;
@@ -162,21 +219,47 @@ internal sealed class LedgerTextProgram
                     OperandType.InlineSwitch => 4 + 4 * BitConverter.ToInt32(il, i),
                     _ => 4,
                 };
+                string? storedHere = null;
                 if (op.OperandType is OperandType.InlineString or OperandType.InlineMethod or OperandType.InlineField
                     or OperandType.InlineType or OperandType.InlineTok)
                 {
                     int token = BitConverter.ToInt32(il, i);
+                    EntityHandle handle = op.OperandType == OperandType.InlineString ? default : MetadataTokens.EntityHandle(token);
                     if (op.OperandType == OperandType.InlineString)
                     {
                         string text = md.GetUserString(MetadataTokens.UserStringHandle(token & 0xFFFFFF));
                         literals.Add(text);
                         if (XamlResource(text) is string resource) xaml.Add(resource);
                     }
-                    else Resolve(md, ids, MetadataTokens.EntityHandle(token), op, connect, targets, touched);
+                    else
+                    {
+                        Resolve(md, ids, handle, op, connect, targets, names, touched, valueTypes);
+                        string? member = MemberName(md, handle);
+                        if (op.OperandType == OperandType.InlineField && member != null)
+                        {
+                            if (op == OpCodes.Stfld || op == OpCodes.Stsfld) storedHere = member;
+                            if (op == OpCodes.Ldfld) fields.Add(member.Split("::")[1]);
+                            if (op == OpCodes.Ldsfld && member.EndsWith("::VisibilityProperty", StringComparison.Ordinal)) setsVisibility = true;
+                        }
+                        else if (op.OperandType == OperandType.InlineMethod && member != null)
+                        {
+                            if (member.EndsWith("::set_Visibility", StringComparison.Ordinal)) setsVisibility = true;
+                            int setter = member.IndexOf("::set_", StringComparison.Ordinal);
+                            if (setter >= 0) storedHere = member[..setter] + "::" + member[(setter + 6)..];
+                            if (MethodOf(md, ids, handle) is int callee) sites.Add((offset, callee));
+                        }
+                    }
                 }
+                if (storedHere != null) stored.Add((offset, storedHere));
+                // A literal is stored into a member when the very next instruction stores it.
+                if (pending is { } p) uses.Add(new LiteralUse(p.Offset, p.Text, storedHere));
+                pending = op.OperandType == OperandType.InlineString ? (offset, literals[^1]) : null;
                 i += size;
             }
+            if (pending is { } last) uses.Add(new LiteralUse(last.Offset, last.Text, null));
             Literals[id] = literals;
+            LiteralUses[id] = uses;
+            visibilityUse[id] = (fields, setsVisibility);
             foreach (string text in literals.Distinct(StringComparer.Ordinal))
             {
                 if (!MethodsByLiteral.TryGetValue(text, out var holders)) MethodsByLiteral[text] = holders = new List<int>();
@@ -186,22 +269,52 @@ internal sealed class LedgerTextProgram
         }
     }
 
+    /// <summary>The member a field or method token names, as "Type::Name", with a property's backing field read as the property.</summary>
+    private static string? MemberName(MetadataReader md, EntityHandle handle)
+    {
+        string? type = null, name = null;
+        switch (handle.Kind)
+        {
+            case HandleKind.FieldDefinition:
+                FieldDefinition f = md.GetFieldDefinition((FieldDefinitionHandle)handle);
+                type = TypeName(md, f.GetDeclaringType()); name = md.GetString(f.Name); break;
+            case HandleKind.MethodDefinition:
+                MethodDefinition m = md.GetMethodDefinition((MethodDefinitionHandle)handle);
+                type = TypeName(md, m.GetDeclaringType()); name = md.GetString(m.Name); break;
+            case HandleKind.MemberReference:
+                MemberReference r = md.GetMemberReference((MemberReferenceHandle)handle);
+                type = TypeOf(md, r.Parent); name = md.GetString(r.Name); break;
+            case HandleKind.MethodSpecification:
+                return MemberName(md, md.GetMethodSpecification((MethodSpecificationHandle)handle).Method);
+        }
+        if (type == null || name == null) return null;
+        if (name.StartsWith("<", StringComparison.Ordinal) && name.EndsWith(">k__BackingField", StringComparison.Ordinal)) name = name[1..name.IndexOf('>')];
+        return type + "::" + name;
+    }
+
     private void Resolve(MetadataReader md, Dictionary<MethodDefinitionHandle, int> ids, EntityHandle handle, OpCode op, bool connect,
-        List<(int, string)> targets, HashSet<int> touched)
+        List<(int, string)> targets, HashSet<string> names, HashSet<int> touched, HashSet<int> valueTypes)
     {
         string reason = op == OpCodes.Ldftn || op == OpCodes.Ldvirtftn ? (connect ? "xaml handler" : "delegate") : "call";
         switch (handle.Kind)
         {
             case HandleKind.MethodDefinition:
             case HandleKind.MemberReference:
+                if (CalledName(md, handle) is string called) names.Add(called);
                 if (MethodOf(md, ids, handle) is int target) { targets.Add((target, reason)); Touch(touched, Methods[target].Type); }
                 else if (handle.Kind == HandleKind.MemberReference && TypeOf(md, md.GetMemberReference((MemberReferenceHandle)handle).Parent) is string parent)
                     TouchName(touched, parent);
                 break;
             case HandleKind.MethodSpecification:
                 MethodSpecification spec = md.GetMethodSpecification((MethodSpecificationHandle)handle);
+                if (CalledName(md, spec.Method) is string genericName) names.Add(genericName);
                 if (MethodOf(md, ids, spec.Method) is int generic) { targets.Add((generic, reason)); Touch(touched, Methods[generic].Type); }
-                foreach (string argument in spec.DecodeSignature(Signatures.Instance, null)) TouchName(touched, argument);
+                foreach (string argument in spec.DecodeSignature(Signatures.Instance, null))
+                {
+                    TouchName(touched, argument);
+                    // A value type needs no constructor to exist: passed as a generic argument (a builder's Start<T>), it is an instance.
+                    if (typeByName.TryGetValue(Generic(argument), out int t) && types[t].IsValueType) valueTypes.Add(t);
+                }
                 break;
             case HandleKind.FieldDefinition:
                 TouchName(touched, TypeName(md, md.GetFieldDefinition((FieldDefinitionHandle)handle).GetDeclaringType()));
@@ -214,17 +327,30 @@ internal sealed class LedgerTextProgram
         }
     }
 
-    private int? MethodOf(MetadataReader md, Dictionary<MethodDefinitionHandle, int> ids, EntityHandle handle)
+    /// <summary>A called method's name and parameter count, inside or outside these assemblies: what name-based dispatch matches.</summary>
+    private static string? CalledName(MetadataReader md, EntityHandle handle)
     {
-        string? key = null;
-        if (handle.Kind == HandleKind.MethodDefinition) return ids[(MethodDefinitionHandle)handle];
+        if (handle.Kind == HandleKind.MethodDefinition)
+        {
+            MethodDefinition m = md.GetMethodDefinition((MethodDefinitionHandle)handle);
+            return md.GetString(m.Name) + "/" + m.DecodeSignature(Signatures.Instance, null).ParameterTypes.Length;
+        }
         if (handle.Kind == HandleKind.MemberReference)
         {
             MemberReference r = md.GetMemberReference((MemberReferenceHandle)handle);
-            if (r.GetKind() != MemberReferenceKind.Method || TypeOf(md, r.Parent) is not string parent) return null;
-            key = MethodKey(parent, md.GetString(r.Name), r.DecodeMethodSignature(Signatures.Instance, null));
+            return r.GetKind() == MemberReferenceKind.Method ? md.GetString(r.Name) + "/" + r.DecodeMethodSignature(Signatures.Instance, null).ParameterTypes.Length : null;
         }
-        return key != null && methodByKey.TryGetValue(key, out int id) ? id : null;
+        return null;
+    }
+
+    private int? MethodOf(MetadataReader md, Dictionary<MethodDefinitionHandle, int> ids, EntityHandle handle)
+    {
+        if (handle.Kind == HandleKind.MethodDefinition) return ids[(MethodDefinitionHandle)handle];
+        if (handle.Kind != HandleKind.MemberReference) return null;
+        MemberReference r = md.GetMemberReference((MemberReferenceHandle)handle);
+        if (r.GetKind() != MemberReferenceKind.Method || TypeOf(md, r.Parent) is not string parent) return null;
+        string key = MethodKey(parent, md.GetString(r.Name), r.DecodeMethodSignature(Signatures.Instance, null));
+        return methodByKey.TryGetValue(key, out int id) ? id : null;
     }
 
     private void Touch(HashSet<int> touched, int type) { if (type >= 0) touched.Add(type); }
@@ -319,37 +445,46 @@ internal sealed class LedgerTextProgram
             try
             {
                 using var reader = new System.Windows.Baml2006.Baml2006Reader(new MemoryStream(bytes), new XamlReaderSettings { LocalAssembly = assembly });
-                var stack = new Stack<(string Type, string Name, List<(string Member, string Value)> Values)>();
+                var stack = new Stack<XamlFrame>();
                 var members = new Stack<string>();
+                bool visibilityPending = false;
                 while (reader.Read())
                 {
+                    if (visibilityPending && reader.NodeType is XamlNodeType.Value or XamlNodeType.StartObject)
+                    {
+                        // Visibility set to anything but a literal Visible (Collapsed, Hidden, a binding or resource) may hide it.
+                        if (!(reader.NodeType == XamlNodeType.Value && reader.Value is string v && v == "Visible") && stack.Count > 0)
+                            stack.Peek().HidesItself = true;
+                        visibilityPending = false;
+                    }
                     switch (reader.NodeType)
                     {
                         case XamlNodeType.StartObject:
-                            string type = reader.Type?.UnderlyingType?.FullName ?? reader.Type?.Name ?? "";
-                            elements.Add(type);
-                            stack.Push((reader.Type?.Name ?? "", "", new List<(string, string)>()));
+                            elements.Add(reader.Type?.UnderlyingType?.FullName ?? reader.Type?.Name ?? "");
+                            stack.Push(new XamlFrame(reader.Type?.Name ?? ""));
                             break;
                         case XamlNodeType.GetObject:
-                            stack.Push(("", "", new List<(string, string)>()));
+                            stack.Push(new XamlFrame(""));
                             break;
                         case XamlNodeType.StartMember:
                             members.Push(reader.Member?.Name ?? "");
+                            if (members.Peek() == "Visibility") visibilityPending = true;
                             break;
                         case XamlNodeType.EndMember:
                             if (members.Count > 0) members.Pop();
                             break;
                         case XamlNodeType.Value when stack.Count > 0 && members.Count > 0 && reader.Value is string text:
-                            var top = stack.Pop();
-                            if (members.Peek() == "Name") top = (top.Type, text, top.Values);
-                            else top.Values.Add((members.Peek(), text));
-                            stack.Push(top);
+                            if (members.Peek() == "Name") stack.Peek().Name = text;
+                            else stack.Peek().Values.Add((members.Peek(), text));
                             break;
                         case XamlNodeType.EndObject when stack.Count > 0:
-                            var done = stack.Pop();
-                            if (done.Type.Length > 0)
-                                foreach (var (member, text) in done.Values) values.Add(new XamlValue(done.Type, done.Name, member, text));
-                            if (done.Type.Length > 0 && done.Name.Length > 0) values.Add(new XamlValue(done.Type, done.Name, "", ""));
+                            XamlFrame done = stack.Pop();
+                            if (done.Type.Length == 0) break;
+                            var around = stack.Where(f => f.Type.Length > 0).ToList();
+                            var ancestors = around.Where(f => f.Name.Length > 0).Select(f => f.Name).ToList();
+                            bool hidden = done.HidesItself || around.Any(f => f.HidesItself);
+                            foreach (var (member, text) in done.Values) values.Add(new XamlValue(done.Type, done.Name, member, text, ancestors, hidden));
+                            if (done.Name.Length > 0) values.Add(new XamlValue(done.Type, done.Name, "", "", ancestors, hidden));
                             break;
                     }
                 }
@@ -360,42 +495,100 @@ internal sealed class LedgerTextProgram
         }
     }
 
+    private sealed class XamlFrame
+    {
+        internal XamlFrame(string type) { Type = type; }
+        internal string Type { get; }
+        internal string Name { get; set; } = "";
+        internal bool HidesItself { get; set; }
+        internal List<(string Member, string Value)> Values { get; } = new();
+    }
+
     private void Walk()
     {
         var queue = new Queue<int>();
-        var typesDone = new HashSet<int>();
+        var touchedDone = new HashSet<int>();
+        var instantiated = new HashSet<int>();
         var bamlsDone = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+        var namesCalled = new HashSet<string>(StringComparer.Ordinal);
+        var waiting = new Dictionary<string, List<int>>(StringComparer.Ordinal);
         void Add(int method, int parent, string reason)
         {
             if (method < 0 || Reached.ContainsKey(method)) return;
             Reached[method] = new Reach(parent, reason);
             queue.Enqueue(method);
         }
-        void TypeTouched(int type, int by)
+        bool DeclaredInBase(int type, string name, int parameters)
         {
-            for (int t = type; t >= 0 && typesDone.Add(t); t = types[t].BaseType)
-                foreach (int m in types[t].Methods)
-                    if (Methods[m].IsVirtual) Add(m, by, "virtual of a touched type");
-                    else if (Methods[m].IsStaticConstructor) Add(m, by, "static constructor");
+            for (int t = types[type].BaseType; t >= 0; t = types[t].BaseType)
+                if (types[t].Methods.Any(m => Methods[m].IsVirtual && Methods[m].Name == name && Methods[m].Parameters == parameters)) return true;
+            return false;
+        }
+        void Instantiate(int type, int by)
+        {
+            for (int t = type; t >= 0 && instantiated.Add(t); t = types[t].BaseType)
+                foreach (int m in types[t].Methods.Where(m => Methods[m].IsVirtual))
+                {
+                    Method v = Methods[m];
+                    if (v.FrameworkSlot) Add(m, by, "framework slot of a constructed type");
+                    else if (!v.IsNewSlot && !DeclaredInBase(t, v.Name, v.Parameters)) Add(m, by, "framework override of a constructed type");
+                    else if (namesCalled.Contains(v.Name + "/" + v.Parameters)) Add(m, by, "virtual call by name on a constructed type");
+                    else
+                    {
+                        string key = v.Name + "/" + v.Parameters;
+                        if (!waiting.TryGetValue(key, out var list)) waiting[key] = list = new List<int>();
+                        list.Add(m);
+                    }
+                }
+        }
+        void Touched(int type, int by)
+        {
+            if (!touchedDone.Add(type)) return;
+            foreach (int m in types[type].Methods.Where(m => Methods[m].IsStaticConstructor)) Add(m, by, "static constructor");
         }
         void Load(string resource, int by)
         {
             if (!bamlsDone.Add(resource) || !Bamls.TryGetValue(resource, out Baml? baml)) return;
             foreach (string name in baml.ElementTypes.Prepend(baml.OwnerType ?? "").Where(n => n.Length > 0).Distinct(StringComparer.Ordinal))
                 if (typeByName.TryGetValue(name, out int type))
-                {
-                    foreach (int m in types[type].Methods.Where(m => Methods[m].IsConstructor)) Add(m, by, "xaml screen");
-                    TypeTouched(type, by);
-                }
+                    foreach (int m in types[type].Methods.Where(m => Methods[m].IsConstructor && Methods[m].Parameters == 0)) Add(m, by, "xaml screen");
         }
         Add(EntryMethod, -1, "entry point");
         while (queue.Count > 0)
         {
             int method = queue.Dequeue();
+            if (Methods[method].IsConstructor) Instantiate(Methods[method].Type, method);
             foreach (var (target, reason) in calls.GetValueOrDefault(method) ?? new List<(int, string)>()) Add(target, method, reason);
-            foreach (int type in touches.GetValueOrDefault(method) ?? new HashSet<int>()) TypeTouched(type, method);
+            foreach (string called in calledNames.GetValueOrDefault(method) ?? new HashSet<string>())
+                if (namesCalled.Add(called) && waiting.Remove(called, out var released))
+                    foreach (int m in released) Add(m, method, "virtual call by name on a constructed type");
+            foreach (int type in touches.GetValueOrDefault(method) ?? new HashSet<int>()) Touched(type, method);
+            foreach (int type in genericValueTypes.GetValueOrDefault(method) ?? new HashSet<int>()) Instantiate(type, method);
             foreach (string resource in xamlReferences.GetValueOrDefault(method) ?? new HashSet<string>()) Load(resource, method);
         }
+        // Any method that sets a visibility counts, reached or not: the shell can call a setter through reflection, which no
+        // call graph sees, so an element whose host may be hidden stays unproved.
+        foreach (var use in visibilityUse.Values)
+            if (use.SetsVisibility) VisibilityFields.UnionWith(use.Fields);
+    }
+
+    /// <summary>Whether the member a literal is stored into is stored again later in the same method, directly or through a
+    /// method it calls afterwards: then the literal is a dead store, not what the screen shows.</summary>
+    internal bool Overwritten(int method, LiteralUse use)
+    {
+        if (use.StoredInto == null) return false;
+        if (stores[method].Any(s => s.Offset > use.Offset && s.Target == use.StoredInto)) return true;
+        return callSites[method].Any(c => c.Offset > use.Offset && StoresOf(c.Callee, new HashSet<int>()).Contains(use.StoredInto));
+    }
+
+    private HashSet<string> StoresOf(int method, HashSet<int> visiting)
+    {
+        if (storesReached.TryGetValue(method, out var known)) return known;
+        var all = new HashSet<string>(stores[method].Select(s => s.Target), StringComparer.Ordinal);
+        if (visiting.Add(method))
+            foreach (var (_, callee) in callSites[method]) all.UnionWith(StoresOf(callee, visiting));
+        storesReached[method] = all;
+        return all;
     }
 
     /// <summary>The nearest screen, handler or delegate on the path from the entry point, and the number of steps from it.</summary>

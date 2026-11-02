@@ -52,12 +52,39 @@ internal static partial class Program
                 throw new InvalidDataException("Frozen source hash differs: " + source);
             frozenText[source] = File.ReadAllText(path);
         }
-        // The reviewed relocations: every current file a register maps a row of the same frozen file to.
-        var sourceOf = inventory.Observations.ToDictionary(o => o.Id, o => o.Source, StringComparer.Ordinal);
-        var mapped = registry.Entries.Values.Where(e => e.Step != TextStep && sourceOf.ContainsKey(e.Row.ObservationId))
-            .SelectMany(e => e.Row.Implementation.Select(i => (Source: sourceOf[e.Row.ObservationId], i.Path)))
-            .GroupBy(x => x.Source, StringComparer.Ordinal)
-            .ToDictionary(g => g.Key, g => g.Select(x => x.Path.Replace('\\', '/')).ToHashSet(StringComparer.OrdinalIgnoreCase), StringComparer.Ordinal);
+        // The reviewed relocations, from valid receipts of other steps only: for a C# row, the current members those receipts
+        // name for rows of the same frozen member; for a XAML row, the current XAML files they name for rows of the same
+        // frozen XAML file.
+        var observationOf = inventory.Observations.ToDictionary(o => o.Id, StringComparer.Ordinal);
+        var frozenMembers = new Dictionary<string, string>(StringComparer.Ordinal);
+        string FrozenMemberOf(FeatureLedger.Observation row)
+        {
+            if (frozenMembers.TryGetValue(row.Id, out string? known)) return known;
+            string member = row.Source.EndsWith(".cs", StringComparison.Ordinal) && frozenText.TryGetValue(row.Source, out string? text)
+                ? LedgerMemberFactComparison.Compare(row, text, new Dictionary<string, string>(StringComparer.Ordinal)).FrozenMember : "";
+            frozenMembers[row.Id] = member;
+            return member;
+        }
+        var memberMappings = new Dictionary<(string Source, string Member), HashSet<Owner>>();
+        var xamlMappings = new Dictionary<string, HashSet<string>>(StringComparer.Ordinal);
+        foreach (var entry in registry.Entries.Values.Where(e => e.Valid && e.Step != TextStep && observationOf.ContainsKey(e.Row.ObservationId))
+            .OrderBy(e => e.Reference, StringComparer.Ordinal))
+        {
+            FeatureLedger.Observation mappedRow = observationOf[entry.Row.ObservationId];
+            if (!frozenText.ContainsKey(mappedRow.Source)) continue;
+            if (mappedRow.Source.EndsWith(".xaml", StringComparison.Ordinal))
+            {
+                if (!xamlMappings.TryGetValue(mappedRow.Source, out var files)) xamlMappings[mappedRow.Source] = files = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+                files.UnionWith(entry.Row.Implementation.Select(i => i.Path.Replace('\\', '/')).Where(path => path.EndsWith(".xaml", StringComparison.OrdinalIgnoreCase)));
+                continue;
+            }
+            string frozenMember = FrozenMemberOf(mappedRow);
+            if (frozenMember.Length == 0) continue;
+            var owners = entry.Row.Implementation.Select(i => OwnerOf(i.Symbol)).Where(o => o != null).Select(o => o!).ToList();
+            if (owners.Count == 0) continue;
+            if (!memberMappings.TryGetValue((mappedRow.Source, frozenMember), out var set)) memberMappings[(mappedRow.Source, frozenMember)] = set = new HashSet<Owner>();
+            set.UnionWith(owners);
+        }
 
         string bin = AppContext.BaseDirectory;
         string app = Path.Combine(bin, "FamilyQuant2.dll"), core = Path.Combine(bin, "FamilyQuant.Core.dll"), tests = typeof(Program).Assembly.Location;
@@ -81,11 +108,8 @@ internal static partial class Program
             Check("Text tool control: a literal held only by dead code is not reachable",
                 control.MethodsByLiteral.GetValueOrDefault(LedgerTextControl.DeadLiteral)?.Where(m => control.Methods[m].TopType == "FamilyQuant.Tests.LedgerTextControl")
                     .All(m => !control.Reached.ContainsKey(m)) == true);
-            var controlFeature = new Feature(new HashSet<string>(StringComparer.OrdinalIgnoreCase), new HashSet<string>(StringComparer.Ordinal) { "FamilyQuant.Tests.LedgerTextControl" }, "control type");
-            TextResult live = Decide(control, new FeatureLedger.Observation("control-live", "control", 1, "code fact", "\"" + LedgerTextControl.LiveLiteral + "\""),
-                new[] { LedgerTextControl.LiveLiteral }, controlFeature);
-            TextResult dead = Decide(control, new FeatureLedger.Observation("control-dead", "control", 1, "code fact", "\"" + LedgerTextControl.DeadLiteral + "\""),
-                new[] { LedgerTextControl.DeadLiteral }, controlFeature);
+            TextResult live = DecideControl(control, "control-live", LedgerTextControl.LiveLiteral, "FamilyQuant.Tests.LedgerTextControl", "LiveText");
+            TextResult dead = DecideControl(control, "control-dead", LedgerTextControl.DeadLiteral, "FamilyQuant.Tests.LedgerTextControl", "Dead");
             Check("Text tool control: a row whose literal is reachable in its feature closes", live.Closed);
             Check("Text tool control: a row whose literal is only in dead code stays OPEN and names check 3", !dead.Closed && dead.Reason.StartsWith("3 failed", StringComparison.Ordinal));
             // FQAssay's counterexamples (review of 330afa5), as controls that must hold before any row closes.
@@ -100,13 +124,28 @@ internal static partial class Program
             Check("Text tool control: a format token does not close by text alone, even in its own member",
                 !DecideControl(control, "control-short", LedgerTextControl.ShortLiteral, "FamilyQuant.Tests.LedgerTextLender", "Alpha").Closed);
 
-            var features = new Dictionary<string, Feature>(StringComparer.Ordinal);
             foreach (var row in cohort)
             {
-                if (!features.TryGetValue(row.Source, out Feature? feature)) features[row.Source] = feature = FeatureOf(program, row, root, mapped);
-                TextResult result = Literal(row, frozenText[row.Source]) is not { } literal ? Open(row, "1 failed: the row records no literal text (kind " + row.Kind + ")")
-                    : literal.Xaml is { } xaml ? DecideXaml(program, row, xaml, literal.Pieces, feature, root)
-                    : Decide(program, row, literal.Pieces, feature);
+                TextResult result;
+                if (Literal(row, frozenText[row.Source]) is not { } literal) result = Open(row, "1 failed: the row records no literal text (kind " + row.Kind + ")");
+                else if (literal.Xaml is { } xaml)
+                {
+                    var files = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+                    string current = FeatureLedgerEvidence.CurrentPath(root, row.Source);
+                    if (current.Length > 0) files.Add(current);
+                    if (xamlMappings.TryGetValue(row.Source, out var more)) files.UnionWith(more);
+                    result = DecideXaml(program, row, xaml, files, root);
+                }
+                else
+                {
+                    string frozenMember = FrozenMemberOf(row);
+                    var owners = new List<Owner>();
+                    if (OwnerOf(frozenMember) is { } own) owners.Add(own);
+                    if (frozenMember.Length > 0 && memberMappings.TryGetValue((row.Source, frozenMember), out var reviewed))
+                        owners.AddRange(reviewed.Where(o => !owners.Contains(o)).OrderBy(o => o.Type, StringComparer.Ordinal).ThenBy(o => o.Member, StringComparer.Ordinal));
+                    result = owners.Count == 0 ? Open(row, "2 failed: the frozen literal's containing member is not identified, so no current member can be its holder")
+                        : Decide(program, row, literal.Pieces, owners, "member " + string.Join(" or ", owners.Select(o => o.Type + "." + o.Member)));
+                }
                 results.Add(result);
                 if (result.Closed) Check("Text " + result.Id + ": " + result.Method, true);
                 else { skipped++; Console.WriteLine("  SKIP  " + result.Id + ": " + result.Reason); }
@@ -173,7 +212,7 @@ internal static partial class Program
     /// <summary>A control row whose frozen literal sits in the named member of the named type.</summary>
     private static TextResult DecideControl(LedgerTextProgram program, string id, string literal, string ownerType, string ownerMember) =>
         Decide(program, new FeatureLedger.Observation(id, "control", 1, "code fact", "\"" + literal + "\""), new[] { literal },
-            new Feature(new HashSet<string>(StringComparer.OrdinalIgnoreCase), new HashSet<string>(StringComparer.Ordinal) { ownerType }, "control type"));
+            new List<Owner> { new(ownerType[(ownerType.LastIndexOf('.') + 1)..], ownerMember, ownerMember == "Caption") }, "control member " + ownerMember);
 
     private static string KindAssertion(string kind) =>
         "Text tool kind " + kind + ": every listed row holds its frozen literal verbatim in the compiled program, in its feature, reachable from the entry point";
@@ -184,23 +223,52 @@ internal static partial class Program
     }
     private static TextResult Open(FeatureLedger.Observation row, string reason) => new(row.Id, row.Kind, false, reason, "", "", "", "", "", "", 0, "");
 
-    /// <summary>The current files and types of a frozen row's feature: its relocated path, every current file the reviewed
-    /// registers map rows of the same frozen file to, and the top-level types those files declare (partial files of the
-    /// same class included); a XAML file's class too.</summary>
-    private sealed record Feature(HashSet<string> Files, HashSet<string> Types, string How);
-    private static Feature FeatureOf(LedgerTextProgram program, FeatureLedger.Observation row, string root, Dictionary<string, HashSet<string>> mapped)
+    /// <summary>A source member: its type's simple name and the member's name; a field or property is credited only through the
+    /// literal stored into it by a constructor.</summary>
+    private sealed record Owner(string Type, string Member, bool Field);
+
+    /// <summary>The owner a member symbol names ("Ns.Type::declaration ( ... )"), or null when the symbol names none.</summary>
+    private static Owner? OwnerOf(string symbol)
     {
-        var files = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
-        string current = FeatureLedgerEvidence.CurrentPath(root, row.Source);
-        if (current.Length > 0) files.Add(current);
-        string code = row.Source.EndsWith(".xaml", StringComparison.Ordinal) ? FeatureLedgerEvidence.CurrentPath(root, row.Source + ".cs") : "";
-        if (code.Length > 0) files.Add(code);
-        if (mapped.TryGetValue(row.Source, out var more)) files.UnionWith(more);
-        var types = program.Methods.Where(m => m.Document.Length > 0 && files.Contains(m.Document)).Select(m => m.TopType).ToHashSet(StringComparer.Ordinal);
-        foreach (string file in files.Where(f => f.EndsWith(".xaml", StringComparison.OrdinalIgnoreCase)))
-            if (program.Bamls.TryGetValue(BamlOf(file), out var baml) && baml.OwnerType != null) types.Add(baml.OwnerType.Split('/')[0]);
-        return new Feature(files, types, (current.Length > 0 ? current : "no relocated path") + (more != null ? " and " + more.Count.ToString(CultureInfo.InvariantCulture) + " reviewed mapped files" : ""));
+        int split = symbol.IndexOf("::", StringComparison.Ordinal);
+        if (split <= 0) return null;
+        string type = symbol[..split];
+        if (type.Contains(' ', StringComparison.Ordinal)) return null;
+        type = type[(type.LastIndexOfAny(new[] { '.', '+', '/' }) + 1)..];
+        string[] tokens = symbol[(split + 2)..].Split(' ', StringSplitOptions.RemoveEmptyEntries);
+        int open = Array.IndexOf(tokens, "(");
+        if (open > 0)
+        {
+            int at = open - 1;
+            if (tokens[at] == ">")
+                for (int depth = 0; at >= 0; at--)
+                {
+                    if (tokens[at] == ">") depth++;
+                    else if (tokens[at] == "<" && --depth == 0) { at--; break; }
+                }
+            return at >= 0 && IsName(tokens[at]) ? new Owner(type, tokens[at], false) : null;
+        }
+        int end = Array.FindIndex(tokens, t => t is "=" or "=>" or "{" or ";");
+        string name = end > 0 ? tokens[end - 1] : tokens.LastOrDefault() ?? "";
+        return IsName(name) ? new Owner(type, name, true) : null;
     }
+    private static bool IsName(string token) => token.Length > 0 && (char.IsLetter(token[0]) || token[0] == '_') && token.All(c => char.IsLetterOrDigit(c) || c == '_');
+
+    /// <summary>Whether a compiled method is the owner's member: the same type and member, the constructor for a constructor,
+    /// or a constructor storing the literal straight into the owner's field or property.</summary>
+    private static bool Holds(LedgerTextProgram.Method method, Owner owner, string? storedInto)
+    {
+        if (method.SourceType != owner.Type) return false;
+        if (method.SourceMember == owner.Member) return true;
+        bool constructor = method.SourceMember is ".ctor" or ".cctor";
+        if (constructor && owner.Member == owner.Type) return true;
+        return constructor && owner.Field && storedInto != null && storedInto.EndsWith("::" + owner.Member, StringComparison.Ordinal);
+    }
+
+    /// <summary>Text alone identifies a fact only when it is prose: two or more words of two or more letters. A format string,
+    /// separator, single word or identifier does not.</summary>
+    private static bool IsProse(string text) => Regex.Matches(text, @"\p{L}{2,}").Count >= 2;
+
     private static string BamlOf(string xamlPath)
     {
         string path = xamlPath.Replace('\\', '/');
@@ -309,26 +377,31 @@ internal static partial class Program
         return text.ToString();
     }
 
-    /// <summary>A C# row: a method holds every piece (in order, for an interpolated literal), belongs to the feature and is reached.</summary>
-    private static TextResult Decide(LedgerTextProgram program, FeatureLedger.Observation row, string[] pieces, Feature feature)
+    /// <summary>A C# row: the frozen member (or a reviewed mapping of it) holds every piece, in order, as prose that is not
+    /// overwritten later in the same call path, and is reached from the entry point.</summary>
+    private static TextResult Decide(LedgerTextProgram program, FeatureLedger.Observation row, string[] pieces, List<Owner> owners, string how)
     {
         if (pieces.Length == 0) return Open(row, "1 failed: the interpolated literal has no constant text");
+        if (!IsProse(string.Concat(pieces))) return Open(row, "1 failed: a format string, separator or single word does not identify a fact by text alone");
         var holders = (program.MethodsByLiteral.GetValueOrDefault(pieces[0]) ?? new List<int>()).Where(m => Ordered(program.Literals[m], pieces))
             .OrderBy(m => program.Methods[m].Assembly, StringComparer.Ordinal).ThenBy(m => program.Methods[m].Key, StringComparer.Ordinal).ToList();
         if (holders.Count == 0)
             return Open(row, "1 failed: the frozen literal is not in the compiled program" + (pieces.Length > 1 ? " (" + pieces.Length.ToString(CultureInfo.InvariantCulture) + " constant pieces)" : ""));
-        var inFeature = holders.Where(m => feature.Files.Contains(program.Methods[m].Document) || feature.Types.Contains(program.Methods[m].TopType)).ToList();
-        if (inFeature.Count == 0)
-            return Open(row, "2 failed: the literal is compiled only outside its feature (" + string.Join(", ", holders.Take(2).Select(m => program.Methods[m].Key)) + ")");
-        var reached = inFeature.Where(m => program.Reached.ContainsKey(m) && program.Methods[m].Document.Length > 0
+        var uses = holders.ToDictionary(m => m, m => program.LiteralUses[m].Where(u => u.Text == pieces[0]).ToList());
+        var own = holders.Where(m => owners.Any(o => uses[m].Any(u => Holds(program.Methods[m], o, u.StoredInto)))).ToList();
+        if (own.Count == 0)
+            return Open(row, "2 failed: the literal is compiled only in other members (" + string.Join(", ", holders.Take(2).Select(m => program.Methods[m].Key)) + "), not in " + how);
+        var live = own.Where(m => uses[m].Any(u => !program.Overwritten(m, u))).ToList();
+        if (live.Count == 0)
+            return Open(row, "1 failed: the compiled literal is overwritten later in the same call path (" + program.Methods[own[0]].Key + ")");
+        var reached = live.Where(m => program.Reached.ContainsKey(m) && program.Methods[m].Document.Length > 0
             && !program.Methods[m].Document.Contains("/obj/", StringComparison.OrdinalIgnoreCase)).ToList();
         if (reached.Count == 0)
-            return Open(row, "3 failed: in its feature (" + program.Methods[inFeature[0]].Key + ") but not reachable from the entry point");
+            return Open(row, "3 failed: held by " + program.Methods[live[0]].Key + " but not reachable from the entry point");
         int method = reached[0];
         var (entry, steps) = program.EntryOf(method);
-        string how = feature.Files.Contains(program.Methods[method].Document) ? "file " + program.Methods[method].Document : "class " + program.Methods[method].TopType;
         return new TextResult(row.Id, row.Kind, true, "", string.Join("{}", pieces), program.Methods[method].Assembly, program.Methods[method].Key,
-            program.Methods[method].Document, program.Methods[method].Key, entry, steps, how + " (" + feature.How + ")");
+            program.Methods[method].Document, program.Methods[method].Key, entry, steps, how);
     }
 
     private static bool Ordered(List<string> literals, string[] pieces)
@@ -338,37 +411,41 @@ internal static partial class Program
         return at == pieces.Length;
     }
 
-    /// <summary>A XAML row: a compiled XAML resource of the feature holds an element of the same name (or, unnamed, of the same
-    /// type) with that property and value, and the class that loads it is reached; a text property may also have moved
-    /// into code of the same feature.</summary>
+    /// <summary>A XAML row: the compiled XAML of its own screen (its relocated file, or a XAML file reviewed receipts map rows of
+    /// the same frozen file to) holds an element of the same name (or, unnamed, of the same type with a prose value) with that
+    /// property and value; neither it nor an element around it has its visibility set by markup or by reachable code; and the
+    /// class that loads that XAML is reached. There is no fallback to code: a XAML fact keeps its element and property.</summary>
     private static TextResult DecideXaml(LedgerTextProgram program, FeatureLedger.Observation row, (string Name, string Member, string Value, bool Control) xaml,
-        string[] pieces, Feature feature, string root)
+        HashSet<string> files, string root)
     {
         bool Matches(LedgerTextProgram.XamlValue v) => xaml.Control
             ? v.Member.Length == 0 && v.ElementName == xaml.Name && row.Detail.StartsWith(v.ElementType + " ", StringComparison.Ordinal)
-            : v.Member == xaml.Member && v.Value == xaml.Value && (v.ElementName == xaml.Name || v.ElementName.Length == 0 && v.ElementType == xaml.Name);
-        var holders = program.Bamls.Values.Where(b => b.Values.Any(Matches)).OrderBy(b => b.Resource, StringComparer.Ordinal).ToList();
-        var inFeature = holders.Where(b => feature.Files.Any(f => f.EndsWith(".xaml", StringComparison.OrdinalIgnoreCase) && BamlOf(f) == b.Resource)
-            || b.OwnerType != null && feature.Types.Contains(b.OwnerType.Split('/')[0])).ToList();
-        foreach (LedgerTextProgram.Baml baml in inFeature)
+            : v.Member == xaml.Member && v.Value == xaml.Value
+                && (v.ElementName == xaml.Name || v.ElementName.Length == 0 && v.ElementType == xaml.Name && IsProse(xaml.Value));
+        var own = files.Where(f => f.EndsWith(".xaml", StringComparison.OrdinalIgnoreCase)).OrderBy(f => f, StringComparer.OrdinalIgnoreCase)
+            .Select(f => (Path: f, Baml: program.Bamls.GetValueOrDefault(BamlOf(f)))).Where(x => x.Baml != null).ToList();
+        var matches = own.SelectMany(x => x.Baml!.Values.Where(Matches).Select(v => (x.Path, Baml: x.Baml!, Value: v))).ToList();
+        if (matches.Count == 0)
         {
+            var elsewhere = program.Bamls.Values.Where(b => b.Values.Any(Matches)).Select(b => b.Resource).Take(2).ToList();
+            return elsewhere.Count > 0
+                ? Open(row, "2 failed: only another screen's compiled XAML holds it (" + string.Join(", ", elsewhere) + ")")
+                : Open(row, "1 failed: no compiled XAML of its screen holds " + (xaml.Control ? "this named element" : "this element, property and value"));
+        }
+        foreach (var (path, baml, value) in matches)
+        {
+            bool hidden = value.VisibilityInMarkup || program.VisibilityFields.Contains(value.ElementName) || value.Ancestors.Any(program.VisibilityFields.Contains);
             int loader = program.Methods.FindIndex(m => baml.OwnerType != null && m.Key == baml.OwnerType + "::InitializeComponent()");
-            string xamlPath = feature.Files.FirstOrDefault(f => f.EndsWith(".xaml", StringComparison.OrdinalIgnoreCase) && BamlOf(f) == baml.Resource)
-                ?? Directory.GetFiles(Path.Combine(root, "FamilyQuant"), "*.xaml", SearchOption.AllDirectories)
-                    .Select(f => Path.GetRelativePath(root, f).Replace('\\', '/')).FirstOrDefault(f => BamlOf(f) == baml.Resource) ?? "";
-            if (loader < 0 || !program.Reached.ContainsKey(loader) || xamlPath.Length == 0) continue;
+            if (hidden || loader < 0 || !program.Reached.ContainsKey(loader)) continue;
             var (entry, steps) = program.EntryOf(loader);
             return new TextResult(row.Id, row.Kind, true, "", xaml.Control ? row.Detail : xaml.Value, "FamilyQuant2.dll", program.Methods[loader].Key + " loading " + baml.Resource,
-                xamlPath, "compiled XAML " + baml.Resource + ": " + (xaml.Control ? row.Detail : xaml.Name + "." + xaml.Member), entry, steps,
-                "compiled XAML of " + (baml.OwnerType ?? baml.Resource) + " (" + feature.How + ")");
+                path, "compiled XAML " + baml.Resource + ": " + (xaml.Control ? row.Detail : xaml.Name + "." + xaml.Member), entry, steps,
+                "compiled XAML of " + (baml.OwnerType ?? baml.Resource));
         }
-        if (!xaml.Control && TextProperties.Contains(xaml.Member))
-        {
-            TextResult code = Decide(program, row, pieces, feature);
-            if (code.Closed || holders.Count == 0) return code;
-        }
-        if (holders.Count == 0) return Open(row, "1 failed: no compiled XAML holds " + (xaml.Control ? "this named element" : "this element, property and value"));
-        if (inFeature.Count == 0) return Open(row, "2 failed: compiled XAML holds it only outside its feature (" + string.Join(", ", holders.Take(2).Select(b => b.Resource)) + ")");
-        return Open(row, "3 failed: in its feature's compiled XAML (" + inFeature[0].Resource + ") but its class is not reachable from the entry point");
+        var first = matches[0];
+        bool anyHidden = matches.Any(x => x.Value.VisibilityInMarkup || program.VisibilityFields.Contains(x.Value.ElementName) || x.Value.Ancestors.Any(program.VisibilityFields.Contains));
+        return Open(row, anyHidden
+            ? "3 failed: it or an element around it has its visibility set by markup or code (" + first.Baml.Resource + "), so being shown is not established"
+            : "3 failed: in its screen's compiled XAML (" + first.Baml.Resource + ") but its class is not reachable from the entry point");
     }
 }
