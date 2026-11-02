@@ -79,6 +79,8 @@ internal static partial class Program
             reasons["FQ15-5BC9BADDBD2B"] = "The peptide-level native load is proved by input-formats; no independently authored protein-level PatternLab export fixture with a known reader classification was available for the required paired refusal.";
             reasons["FQ15-6EF740A445CE"] = "The native profile check records available TIC modes, but does not prove that an arbitrary external re-export recovers missing normalization information.";
             reasons["FQ15-A0A334D576C6"] = "The native save/reopen fixture contains 1001 quant rows; the complete normal visible grouped-count status/details producer has not been compared.";
+            var expected = assigned.Except(new[] { "FQ15-3C4644555B98", "FQ15-6EF740A445CE" }, StringComparer.Ordinal).ToHashSet(StringComparer.Ordinal);
+            Check("behaviour all twenty expected native receipts reproduced before publication", expected.SetEquals(facts.SelectMany(fact => fact.Ids)));
             Console.WriteLine(FormattableString.Invariant($"===== {passed} passed, {failed} failed, {skipped} skipped ====="));
         }
         finally { Console.SetOut(original); SynchronizationContext.SetSynchronizationContext(context); }
@@ -174,6 +176,8 @@ internal static partial class Program
     {
         var old = (UserControl)Activator.CreateInstance(legacy.GetType("FamilyQuant.USearchLib", true)!)!;
         var current = new USearchLib(); var oldHost = SecondaryHost(new Window { Content = old }); var host = SecondaryHost(new Window { Content = current });
+        var synchronization = SynchronizationContext.Current;
+        SynchronizationContext.SetSynchronizationContext(new DispatcherSynchronizationContext(old.Dispatcher));
         var saved = ShellDialogs.FilePresenter; var messages = ShellMessages.Presenter;
         string? tool = Environment.GetEnvironmentVariable("FAMILYQUANT_USEARCH");
         var values = new List<object>(); var trace = new List<SecondaryInjection>();
@@ -213,15 +217,20 @@ internal static partial class Program
                     ((CheckBox)screen.FindName("CheckBoxExhaustiveClustering")).IsChecked = false;
                     if (frozen)
                     {
-                        using var driver = new NativeOwnedDialogDriver(input);
-                        SecondaryClick((Button)old.FindName("ButtonInput"));
-                        BehaviourWait(() => SecondaryRead(old, "fcf") != null && !(bool)BehaviourField(old, "busy")!);
-                        // Acceptance is established by the actual adjacent FCF, read below, and its
-                        // exact source-derived records. The generic driver's timeout also covers
-                        // the later completion message, so it is diagnostic rather than acceptance.
-                        route &= driver.SawDialog && driver.EnteredPath;
-                        values.Add(new { Kind = "native-chooser", Extension = extension, driver.SawDialog, driver.EnteredPath, driver.TimedOut,
-                            AcceptanceEvidence = "Actual successful native build, adjacent reopened FCF and enabled mixing control; no timeout-free dialog claim." });
+                        File.WriteAllText(Path.Combine(folder, "driver-live.txt"), "Invoker context=" + SynchronizationContext.Current?.GetType().FullName + "\n");
+                        using var driver = new NativeOwnedDialogDriver(input, failFirstTextDelivery: true, dismissCompletion: true,
+                            trace: line => File.AppendAllText(Path.Combine(folder, "driver-live.txt"), line + "\n"));
+                        try
+                        {
+                            SecondaryClick((Button)old.FindName("ButtonInput"));
+                            BehaviourWait(() => SecondaryRead(old, "fcf") != null && !(bool)BehaviourField(old, "busy")!);
+                        }
+                        finally { FeatureLedgerEvidence.WriteJson(Path.Combine(folder, "chooser-delivery.json"), new { driver.SawDialog, driver.EnteredPath, driver.PathDeliveryVerified, driver.CompletionAcknowledged, driver.TimedOut, driver.DeliveryTrace }); }
+                        route &= driver.SawDialog && driver.EnteredPath && driver.PathDeliveryVerified && driver.CompletionAcknowledged && !driver.TimedOut
+                            && driver.DeliveryTrace.Count >= 2 && driver.DeliveryTrace[0].Contains("Injected=True;Delivered=False", StringComparison.Ordinal);
+                        values.Add(new { Kind = "native-chooser", Extension = extension, driver.SawDialog, driver.EnteredPath, driver.PathDeliveryVerified,
+                            driver.CompletionAcknowledged, driver.TimedOut, RetriedFirstNonDelivery = driver.DeliveryTrace.Count >= 2,
+                            AcceptanceEvidence = "Readback-confirmed native path, acknowledged completion, actual adjacent FCF and enabled mixing; no timeout ignored." });
                     }
                     else
                     {
@@ -250,7 +259,7 @@ internal static partial class Program
             BehaviourFact(facts, new[] { "FQ15-7AFF0BB0CB70", "FQ15-D498F9890B9B", "FQ15-9D2713E3D10D", "FQ15-22317F5CE7C2", "FQ15-66A98A8CF568", "FQ15-5A8FC191A0CF" },
                 "behaviour actual frozen/current build actions write adjacent readable equal families for FASTA and target-decoy and enable mixing", all && route, values);
         }
-        finally { Environment.SetEnvironmentVariable("FAMILYQUANT_USEARCH", tool); ShellDialogs.FilePresenter = saved; ShellMessages.Presenter = messages; oldHost.Close(); host.Close(); }
+        finally { Environment.SetEnvironmentVariable("FAMILYQUANT_USEARCH", tool); ShellDialogs.FilePresenter = saved; ShellMessages.Presenter = messages; oldHost.Close(); host.Close(); SynchronizationContext.SetSynchronizationContext(synchronization); }
     }
 
     private static FamilyClusterFile BehaviourCuration() => new() { LockedUserIds = new() { 7, 8 }, MyExtendedFastaItems = new() {
