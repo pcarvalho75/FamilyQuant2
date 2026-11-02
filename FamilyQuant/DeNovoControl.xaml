@@ -8,28 +8,22 @@
              mc:Ignorable="d"
              d:DesignHeight="600" d:DesignWidth="1024" Foreground="{DynamicResource TextBrush}">
     <UserControl.Resources>
-
-        <!-- The same three styles the family workspace uses, so a Layer header, a state badge and a
-             blocked Layer look identical on both screens. -->
         <Style x:Key="LayerBadge" TargetType="Border">
             <Setter Property="CornerRadius" Value="3"/>
             <Setter Property="Padding" Value="7,1"/>
             <Setter Property="Margin" Value="10,0,0,0"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
         </Style>
-
         <Style x:Key="LayerBadgeText" TargetType="TextBlock">
             <Setter Property="FontSize" Value="10"/>
             <Setter Property="FontWeight" Value="Bold"/>
             <Setter Property="Foreground" Value="{DynamicResource TextBrush}"/>
         </Style>
-
         <Style x:Key="LayerTitle" TargetType="TextBlock">
             <Setter Property="Foreground" Value="{DynamicResource TextBrush}"/>
             <Setter Property="FontWeight" Value="Bold"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
         </Style>
-
         <Style x:Key="ResultValue" TargetType="Label">
             <Setter Property="Foreground" Value="{DynamicResource TextBrush}"/>
             <Setter Property="FontWeight" Value="Bold"/>
@@ -37,34 +31,20 @@
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="Margin" Value="0,0,14,0"/>
         </Style>
-
         <Style x:Key="Note" TargetType="TextBlock">
             <Setter Property="Foreground" Value="{DynamicResource TextBrush}"/>
             <Setter Property="FontSize" Value="11"/>
             <Setter Property="TextWrapping" Value="Wrap"/>
             <Setter Property="Margin" Value="10,4,10,4"/>
         </Style>
-
     </UserControl.Resources>
-
     <Grid Background="{DynamicResource CanvasBrush}">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-
-        <!-- Five Layers do not fit one screen, and a fixed grid would give each of them a share of the
-             height instead of the height it needs. The tables inside therefore carry an explicit height
-             and the whole stack scrolls, so nothing is squeezed to a few pixels on a small display. -->
         <ScrollViewer Grid.Row="0" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
             <StackPanel>
-
-        <!-- ====================================================================
-             Step 1. The import is a folder, not a file: PEAKS writes one
-             de novo export per run and the three have to be read together, or a
-             per-run breakdown cannot exist and the confidence census cannot be
-             compared with the published one.
-             ==================================================================== -->
         <GroupBox x:Name="GroupBoxImportAndFilter" Margin="5" Padding="5">
             <GroupBox.Header>
                 <StackPanel Orientation="Horizontal">
@@ -74,7 +54,6 @@
                     </Border>
                 </StackPanel>
             </GroupBox.Header>
-
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -83,26 +62,20 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
-
-                <!-- The folder -->
                 <Grid Grid.Row="0" Margin="5,5,5,0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="*" MinWidth="140"/>
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
-
                     <Label Grid.Column="0" Content="De novo export folder:" VerticalAlignment="Center"
                            ToolTip="The folder holding the de novo export. Its sub-folders are searched too, for the files of the source chosen below."/>
-
                     <TextBox Grid.Column="1" x:Name="TextBoxPeaksDirectory" Text="{Binding ImportDirectory, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="5" VerticalAlignment="Center"
                              ToolTip="Type or paste the export folder's full path. Nothing is read until you press Load and filter."/>
-
                     <Button Grid.Column="2" x:Name="ButtonBrowsePeaksDirectory" Content="Browse..."
                             Click="ButtonBrowsePeaksDirectory_Click" Padding="12,5"
                             ToolTip="Pick the export folder. Its matching files are counted at once, but nothing is imported until you press Load and filter."/>
                 </Grid>
-
                 <WrapPanel Grid.Row="1" Margin="5,7,5,0">
                     <Label Content="Source:" VerticalAlignment="Center"
                            ToolTip="Which de novo program made the export. Each keeps its own confidence score: PEAKS uses ALC, DeepNovo uses SCORE."/>
@@ -119,20 +92,15 @@
                                Text="Native confidence: PEAKS ALC (%)"
                                ToolTip="The confidence score that is read and filtered. PEAKS ALC and DeepNovo SCORE are different scales and are not interchangeable."/>
                 </WrapPanel>
-
-                <!-- Three filters: length, source-native average score, and the local-confidence stretch.
-                     The stretch uses two boxes but is one filter. -->
                 <WrapPanel Grid.Row="2" Margin="5,8,5,0">
                     <Label Content="Minimum length:" VerticalAlignment="Center"
                            ToolTip="Shortest de novo sequence kept, in residues. Short sequences match proteins by chance, so lower it only with a reason. Default 7."/>
                     <TextBox x:Name="TextBoxMinLength" Text="{Binding Filters.MinimumLength, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="55" Margin="5" VerticalAlignment="Center"
                              ToolTip="A whole number from 1 to 100. A value out of range is refused when you press Load and filter, and the previous value stays."/>
-
                     <Label x:Name="LabelMinimumSourceConfidence" Content="Minimum ALC (%):" Margin="12,0,0,0" VerticalAlignment="Center"
                            ToolTip="Lowest overall confidence kept (PEAKS ALC or DeepNovo SCORE). The two scales are not equivalent, and neither is a calibrated FDR. Default 80%."/>
                     <TextBox x:Name="TextBoxMinAlc" Text="{Binding ActiveConfidenceText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="55" Margin="5" VerticalAlignment="Center"
                              ToolTip="A number from 0 to 100, decimals allowed. Spectra scoring below it are dropped. A value out of range is refused when you press Load and filter."/>
-
                     <Label x:Name="LabelDeepNovoCutoff" Content="DeepNovo SCORE (%):" Visibility="Collapsed" VerticalAlignment="Center"
                            ToolTip="A separate native SCORE cutoff for DeepNovo in a union. It is never converted into PEAKS ALC."/>
                     <TextBox x:Name="TextBoxDeepNovoCutoff" Text="{Binding Filters.DeepNovoMinimumScore, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="55" Margin="5" Visibility="Collapsed"
@@ -141,18 +109,14 @@
                            ToolTip="How many consecutive residues must each reach the stretch floor. This keeps a sequence with one clearly read region and drops a uniformly mediocre one. Default 5."/>
                     <TextBox x:Name="TextBoxStretchLength" Text="{Binding Filters.StretchLength, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="55" Margin="5" VerticalAlignment="Center"
                              ToolTip="A whole number from 1 to 100; a longer stretch is stricter. A value out of range is refused when you press Load and filter."/>
-
                     <Label Content="Stretch floor (%):" Margin="12,0,0,0" VerticalAlignment="Center"
                            ToolTip="The confidence every residue in the stretch must reach; a lower residue breaks the run. Keep it high. Default 90%."/>
                     <TextBox x:Name="TextBoxStretchFloor" Text="{Binding Filters.StretchFloor, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="55" Margin="5" VerticalAlignment="Center"
                              ToolTip="A number from 0 to 100, rounded to a whole number. A value out of range is refused when you press Load and filter."/>
-
                     <Button x:Name="ButtonLoadAndFilter" Style="{DynamicResource PrimaryButton}" Content="Load and filter" Margin="16,0,0,0" Padding="14,6"
                             Click="ButtonLoadAndFilter_Click" FontSize="13"
                             ToolTip="Reads every export file of the chosen source in the folder and keeps the rows that pass the length, confidence and stretch filters."/>
                 </WrapPanel>
-
-                <!-- What was read -->
                 <WrapPanel Grid.Row="3" Margin="5,10,5,0">
                     <Label x:Name="LabelFilesFound" Content="{Binding LabelFilesFound}" Style="{StaticResource ResultValue}"
                            ToolTip="Export files of the chosen source found in the folder and its sub-folders. Zero means the wrong folder or the wrong source."/>
@@ -161,18 +125,10 @@
                     <Label x:Name="LabelRowsKept" Content="{Binding LabelRowsKept}" Style="{StaticResource ResultValue}"
                            ToolTip="Rows that passed all three filters, and their share of the rows read. Every later step works from these rows."/>
                 </WrapPanel>
-
                 <TextBlock Grid.Row="4" x:Name="TextBlockPerRunBreakdown" Text="{Binding PerRunBreakdown}" Style="{StaticResource Note}"
                            ToolTip="Rows read and kept for each run. Runs are named by file name, not by order. A run keeping far fewer rows than the others is worth checking."/>
             </Grid>
         </GroupBox>
-
-        <!-- ====================================================================
-             Step 2. The join is by run FILE NAME and by scan AND precursor m/z.
-             Neither is a detail: a positional pairing joins every spectrum
-             against the wrong run, and a scan-only join calls a co-isolated
-             second species a duplicate.
-             ==================================================================== -->
         <GroupBox x:Name="GroupBoxReconcile" Margin="5" Padding="5">
             <GroupBox.Header>
                 <StackPanel Orientation="Horizontal">
@@ -182,7 +138,6 @@
                     </Border>
                 </StackPanel>
             </GroupBox.Header>
-
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -190,8 +145,6 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
-
-                <!-- The SEPro package, and the button that joins the two sides -->
                 <Grid Grid.Row="0" Margin="5,5,5,0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
@@ -199,23 +152,17 @@
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
-
                     <Label Grid.Column="0" Content="SEPro package:" VerticalAlignment="Center"
                            ToolTip="The PatternLab search result (.sepr2) to compare the de novo rows with. It must be the search of the same runs, or every row will look new."/>
-
                     <TextBox Grid.Column="1" x:Name="TextBoxSeproPackage" Text="{Binding SeproPackage, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="5" VerticalAlignment="Center"
                              ToolTip="Type or paste the .sepr2 file's full path. It is only read when you press Reconcile."/>
-
                     <Button Grid.Column="2" x:Name="ButtonBrowseSeproPackage" Content="Browse..." Padding="12,5"
                             Click="ButtonBrowseSeproPackage_Click"
                             ToolTip="Pick the .sepr2 file. Nothing is read until you press Reconcile."/>
-
                     <Button Grid.Column="3" x:Name="ButtonReconcile" Style="{DynamicResource PrimaryButton}" Content="Reconcile" Margin="10,4,4,4" Padding="14,6"
                             Click="ButtonReconcile_Click" IsEnabled="False" FontSize="13"
                             ToolTip="Joins the kept de novo rows to PatternLab by file name and scan. Sequences are compared only when the charge matches and the precursor m/z is within 20 ppm."/>
                 </Grid>
-
-                <!-- The five verdicts -->
                 <WrapPanel Grid.Row="1" Margin="5,10,5,0">
                     <Label x:Name="LabelVerdictDeNovoOnly" Content="{Binding LabelVerdictDeNovoOnly}" Style="{StaticResource ResultValue}"
                            ToolTip="Kept de novo spectra with no PatternLab identification in the same run and scan. This is the new evidence the later steps work on."/>
@@ -228,12 +175,9 @@
                     <Label x:Name="LabelVerdictConflict" Content="{Binding LabelVerdictConflict}" Style="{StaticResource ResultValue}"
                            ToolTip="Same scan, charge and precursor m/z (within 20 ppm), but a different sequence. Kept for review and left out of the de novo quantitation."/>
                 </WrapPanel>
-
-                <!-- The queue and its two exports -->
                 <WrapPanel Grid.Row="2" Margin="5,10,5,0">
                     <Label x:Name="LabelReviewQueueCount" Content="{Binding LabelReviewQueueCount}" Style="{StaticResource ResultValue}"
                            ToolTip="Rows kept for review: alternative sequences plus matches whose PatternLab XCorr is below the threshold."/>
-
                     <Label x:Name="LabelOverlapScan" Content="{Binding LabelOverlapScan}" Style="{StaticResource ResultValue}"
                            ToolTip="Spectra both programs reported in the same file and scan. This does not yet mean the same precursor, since one scan can hold several."/>
                     <Label x:Name="LabelOverlapPrecursor" Content="{Binding LabelOverlapPrecursor}" Style="{StaticResource ResultValue}"
@@ -242,23 +186,16 @@
                            ToolTip="Same file, scan and charge, and the same sequence as the best PatternLab match once modifications are removed. I and L count as different here."/>
                     <Label x:Name="LabelOverlapDivergent" Content="{Binding LabelOverlapDivergent}" Style="{StaticResource ResultValue}"
                            ToolTip="Same file, scan and charge, but a different sequence once modifications are removed. The stricter m/z-matched count is shown separately."/>
-
                     <Button x:Name="ButtonExportSummary" Content=" Export summary CSV" Margin="10,4,4,4" Padding="12,5"
                             Click="ButtonExportSummary_Click" IsEnabled="False"
                             ToolTip="Saves a small CSV with the counts above for each run. Disabled until a reconciliation has been run."/>
-
                     <Button x:Name="ButtonExportReviewQueue" Content=" Export review queue CSV" Margin="4" Padding="12,5"
                             Click="ButtonExportReviewQueue_Click" IsEnabled="False"
                             ToolTip="Saves the review queue as a CSV, with both sequences and every matching field, for checking by hand."/>
-
                     <Button x:Name="ButtonExportOverlapStudy" Content=" Export overlap study CSV" Margin="4" Padding="12,5"
                             Click="ButtonExportOverlapStudy_Click" IsEnabled="False"
                             ToolTip="Saves the full overlap study as a CSV: same-scan matches and differences, then the split by precursor. Each row states its definition."/>
                 </WrapPanel>
-
-                <!-- The review queue itself. Read-only: this Layer decides nothing, it presents the
-                     decisions. Rows are added by the reconciliation only. The height is fixed because
-                     the stack scrolls: an unbounded table would grow to thousands of pixels. -->
                 <DataGrid Grid.Row="3" x:Name="DataGridReviewQueue" ItemsSource="{Binding ReviewQueueItems}" Margin="5,10,5,5" Height="200"
                           AutoGenerateColumns="False" IsReadOnly="True"
                           CanUserAddRows="False" CanUserDeleteRows="False" GridLinesVisibility="Horizontal"
@@ -280,116 +217,14 @@
                 </DataGrid>
             </Grid>
         </GroupBox>
-
-        <!-- ====================================================================
-             The advanced, standalone section. Extract areas, attribute to
-             families and partition the ion current are the SAME computations the
-             main Compute full XIC and Analytics screens now run through the
-             project, so they are folded into one collapsed Expander and kept only
-             for a de-novo-only run that has no .fqproj. Everything inside keeps
-             its x:Name, bindings, handlers and tooltips verbatim; only the wrapper
-             and the two core steps' framing changed.
-             ==================================================================== -->
         <Expander x:Name="ExpanderStandalone" Margin="5,6,5,0" IsExpanded="False"
-                  ToolTip="Advanced: extract areas, attribute to families and partition ion current without a project. If you have a .fqproj, use steps 3 and 4 on the Home instead.">
+                  ToolTip="Map the kept peptides to a family file without full XIC or an open project. Export the completed snapshot from Results.">
             <Expander.Header>
-                <TextBlock Text="Standalone run (advanced): extract, attribute, partition without a project" FontWeight="Bold" TextWrapping="Wrap"/>
+                <TextBlock Text="Standalone homology (advanced)" FontWeight="Bold" TextWrapping="Wrap"/>
             </Expander.Header>
-
             <StackPanel>
-
-                <TextBlock Style="{StaticResource Note}"
-                           Text="These are the SAME computations the main Compute full XIC and Analytics screens now run. They are kept here only for a de-novo-only run that has no .fqproj project: with a project, use steps 3 and 4 on the home instead, which store and read the result."
-                           ToolTip="Why this section is optional: with a .fqproj project, steps 3 and 4 on the Home do the same work and store the result."/>
-
-        <!-- ====================================================================
-             Extract areas. The kept rows get an area, from the RAW, with the SAME
-             extraction machinery and the same production cuts that produced the
-             stored PatternLab quants. That is what licenses drawing the two on
-             one bar in the partition, and it is why the RAW files, not the PEAKS
-             areas, are the source: PEAKS integrates the feature envelope, which
-             is a different measurement wearing the same units.
-             ==================================================================== -->
-        <GroupBox x:Name="GroupBoxExtractXic" Margin="5" Padding="5">
-            <GroupBox.Header>
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock Text=" Extract areas" Style="{StaticResource LayerTitle}"/>
-                    <Border x:Name="BadgeDeNovoLayer3" Style="{StaticResource LayerBadge}">
-                        <TextBlock x:Name="TextBlockDeNovoLayer3State" Style="{StaticResource LayerBadgeText}" Text="BLOCKED"/>
-                    </Border>
-                </StackPanel>
-            </GroupBox.Header>
-
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-
-                <Grid Grid.Row="0" Margin="5,5,5,0">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="*" MinWidth="120"/>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="Auto"/>
-                    </Grid.ColumnDefinitions>
-
-                    <Label Grid.Column="0" Content="RAW folder:" VerticalAlignment="Center"
-                           ToolTip="The folder holding the .raw files of these runs. Each run's RAW is found by file name. It defaults to the export folder's parent."/>
-
-                    <TextBox Grid.Column="1" x:Name="TextBoxRawDirectory" Text="{Binding RawDirectory, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="5" VerticalAlignment="Center" TextChanged="TextBoxRawDirectory_TextChanged"
-                             ToolTip="Type or paste the RAW folder's full path. The list below shows which runs found their file. Nothing is read until you press Extract."/>
-
-                    <Button Grid.Column="2" x:Name="ButtonBrowseRawDirectory" Content="Browse..." Padding="12,5"
-                            Click="ButtonBrowseRawDirectory_Click"
-                            ToolTip="Pick the RAW folder. The list below updates at once; nothing is read until you press Extract."/>
-
-                    <Button Grid.Column="3" x:Name="ButtonExtractXic" Content="Extract" Margin="10,4,4,4" Padding="14,6"
-                            Click="ButtonExtractXic_Click" IsEnabled="False" FontSize="13"
-                            ToolTip="Measures the M+0 peak area of each kept de novo precursor from the RAW files, one run at a time. Disabled until Step 2 has been reconciled and every kept run has found its RAW."/>
-                </Grid>
-
-                <TextBlock Grid.Row="1" x:Name="TextBlockRawMatchPreview" Text="{Binding RawMatchPreview}" Style="{StaticResource Note}"
-                           ToolTip="For each kept run, the .raw found for it or the missing file name. Runs are matched by file name, and Extract stays disabled while any is missing."/>
-
-                <WrapPanel Grid.Row="2" Margin="5,6,5,0">
-                    <Label x:Name="LabelXicRunsExtracted" Content="{Binding LabelXicRunsExtracted}" Style="{StaticResource ResultValue}"
-                           ToolTip="Runs extracted so far, out of the kept runs. Partition ion current stays blocked until every kept run is extracted."/>
-                    <Label x:Name="LabelXicTotalM0" Content="{Binding LabelXicTotalM0}" Style="{StaticResource ResultValue}"
-                           ToolTip="The de novo M+0 ion current, summed over distinct peaks, so a peak sampled by several MS2 scans counts once."/>
-                    <Label x:Name="LabelXicElapsed" Content="{Binding LabelXicElapsed}" Style="{StaticResource ResultValue}"
-                           ToolTip="How long the extraction took, in seconds. A repeat over the same runs is much faster, from the cache."/>
-                </WrapPanel>
-
-                <DataGrid Grid.Row="3" x:Name="DataGridXicStats" ItemsSource="{Binding XicStatsItems}" Margin="5,8,5,5" Height="130"
-                          AutoGenerateColumns="False" IsReadOnly="True"
-                          CanUserAddRows="False" CanUserDeleteRows="False" GridLinesVisibility="Horizontal"
-                          ToolTip="One line per run. The first counts are per MS2 scan; Distinct peaks and the areas are per chromatographic peak, so a peak sampled by several scans counts once.">
-                    <DataGrid.Columns>
-                        <DataGridTextColumn x:Name="ColumnXicRun" Header="Run" Width="200" Binding="{Binding Path=RunName}"/>
-                        <DataGridTextColumn x:Name="ColumnXicRowsIn" Header="Rows in" Width="80" Binding="{Binding Path=RowsIn, StringFormat=N0}"/>
-                        <DataGridTextColumn x:Name="ColumnXicUnique" Header="Unique precursors" Width="120" Binding="{Binding Path=UniquePrecursors, StringFormat=N0}"/>
-                        <DataGridTextColumn x:Name="ColumnXicWithSignal" Header="With signal" Width="90" Binding="{Binding Path=WithSignal, StringFormat=N0}"/>
-                        <DataGridTextColumn x:Name="ColumnXicDistinctPeaks" Header="Distinct peaks" Width="100" Binding="{Binding Path=DistinctPeaks, StringFormat=N0}"/>
-                        <DataGridTextColumn x:Name="ColumnXicRedundantAnchors" Header="Redundant anchors" Width="130" Binding="{Binding Path=RedundantAnchors, StringFormat=N0}"/>
-                        <DataGridTextColumn x:Name="ColumnXicRedundantArea" Header="Redundant area" Width="120" Binding="{Binding Path=RedundantAreaM0, StringFormat=E4}"/>
-                        <DataGridTextColumn x:Name="ColumnXicSharedWindow" Header="Shared-window bound" Width="140" Binding="{Binding Path=SharedWindowAreaM0, StringFormat=E4}"/>
-                        <DataGridTextColumn x:Name="ColumnXicTotalM0" Header="M+0 total" Width="120" Binding="{Binding Path=TotalAreaM0, StringFormat=E4}"/>
-                        <DataGridTextColumn x:Name="ColumnXicElapsed" Header="Elapsed (s)" Width="*" MinWidth="90" Binding="{Binding Path=ElapsedSeconds, StringFormat=N1}"/>
-                    </DataGrid.Columns>
-                </DataGrid>
-            </Grid>
-        </GroupBox>
-
-        <!-- ====================================================================
-             Step 4. Homology needs PEPTIDES, not chromatograms, so it is
-             deliberately NOT gated on Step 3: a de novo set can be attributed
-             to families without ever opening a RAW. The .fcf supplies both the
-             sequences that are searched and the family each protein belongs to,
-             which is why one file answers both halves of the question.
-             ==================================================================== -->
+                <TextBlock Style="{StaticResource Note}" Text="Map peptides to a family file; export the snapshot from Results."
+     ToolTip="Homology needs peptide sequences and a family file. It does not need extracted areas or an open project."/>
         <GroupBox x:Name="GroupBoxHomology" Margin="5" Padding="5">
             <GroupBox.Header>
                 <StackPanel Orientation="Horizontal">
@@ -399,7 +234,6 @@
                     </Border>
                 </StackPanel>
             </GroupBox.Header>
-
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -407,7 +241,6 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
-
                 <Grid Grid.Row="0" Margin="5,5,5,0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
@@ -415,47 +248,37 @@
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
-
                     <Label Grid.Column="0" Content="Project or family file:" VerticalAlignment="Center"
                            ToolTip="The project or Family Cluster File supplying the proteins and family numbers. Filled in when a project is already open."/>
-
                     <TextBox Grid.Column="1" x:Name="TextBoxHomologyFcf" Text="{Binding HomologyFcf, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="5" VerticalAlignment="Center"
                              ToolTip="Type or paste the .fqproj or .fcf file's full path. It is only read when you press Search."/>
-
                     <Button Grid.Column="2" x:Name="ButtonBrowseHomologyFcf" Content="Browse..." Padding="12,5"
                             Click="ButtonBrowseHomologyFcf_Click"
                             ToolTip="Pick the .fcf file. Nothing is read until you press Search."/>
-
                     <Button Grid.Column="3" x:Name="ButtonSearchHomology" Style="{DynamicResource PrimaryButton}" Content="Search" Margin="10,4,4,4" Padding="14,6"
                             Click="ButtonSearchHomology_Click" IsEnabled="False" FontSize="13"
                             ToolTip="Aligns each distinct kept peptide to the family file's proteins and assigns the hits to families. It does not need extracted areas. Disabled until Step 1 has kept at least one row."/>
                 </Grid>
-
                 <WrapPanel Grid.Row="1" Margin="5,8,5,0">
                     <Label Content="Minimum identity (0 to 1):" VerticalAlignment="Center"
                            ToolTip="Fraction of a peptide that must match a protein exactly before it is scored. Default 0.80; lower values let in chance matches, so watch the decoy-only count."/>
                     <TextBox x:Name="TextBoxMinIdentity" Text="{Binding MinimumIdentity, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="60" Margin="5" VerticalAlignment="Center"
                              ToolTip="A number from 0 to 1, with a dot as the decimal separator. A value out of range is refused when you press Search."/>
-
                     <Label Content="Top hits per peptide:" Margin="12,0,0,0" VerticalAlignment="Center"
                            ToolTip="How many proteins one peptide may be assigned to, best scores first. Default 3. Raising it spreads shared peptides over more families."/>
                     <TextBox x:Name="TextBoxTopHits" Text="{Binding TopHits, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="55" Margin="5" VerticalAlignment="Center"
                              ToolTip="A whole number, 1 or more. A value below 1 is refused when you press Search."/>
-
                     <CheckBox x:Name="CheckBoxConsiderILSame" IsChecked="{Binding ConsiderILSame, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Content="I and L are one residue"
                               Margin="14,0,0,0" VerticalAlignment="Center"
                               ToolTip="Treat isoleucine and leucine as the same residue when matching, since they have identical mass. On by default; leave it on."/>
-
                     <CheckBox x:Name="CheckBoxKQEquivalent" IsChecked="{Binding KQEquivalent, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Content="K and Q are one residue"
                               Margin="14,0,0,0" VerticalAlignment="Center"
                               ToolTip="Treat lysine and glutamine as the same residue when matching (they differ by 0.036 Da). Off by default; turning it on widens every family."/>
-
                     <Label Content="Decoy prefix:" Margin="12,0,0,0" VerticalAlignment="Center"
                            ToolTip="Text that marks a decoy protein in the family file. If it is wrong, decoys count as targets and the mapped count looks better than it is."/>
                     <TextBox x:Name="TextBoxDecoyLabel" Text="{Binding DecoyLabel, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="90" Margin="5" VerticalAlignment="Center"
                              ToolTip="{x:Static core:IdentifierText.DecoyPrefixToolTip}"/>
                 </WrapPanel>
-
                 <WrapPanel Grid.Row="2" Margin="5,10,5,0">
                     <Label x:Name="LabelHomologyPeptides" Content="{Binding LabelHomologyPeptides}" Style="{StaticResource ResultValue}"
                            ToolTip="Distinct peptide sequences searched. A sequence read in many spectra is searched once, so this is below the kept row count."/>
@@ -467,12 +290,7 @@
                            ToolTip="Peptides that matched no protein at this identity. In venom de novo data this is common, and it is not an error."/>
                     <Label x:Name="LabelHomologyElapsed" Content="{Binding LabelHomologyElapsed}" Style="{StaticResource ResultValue}"
                            ToolTip="How long the search took, in seconds, so an unusually slow search can be noticed."/>
-
-                    <Button x:Name="ButtonExportHomologyCsv" Content=" Export assignments CSV" Margin="10,4,4,4" Padding="12,5"
-                            Click="ButtonExportHomologyCsv_Click" IsEnabled="False"
-                            ToolTip="Saves one line per peptide with its families, proteins and whether it is ambiguous. Disabled until a search has been run."/>
                 </WrapPanel>
-
                 <DataGrid Grid.Row="3" x:Name="DataGridHomologyFamilies" ItemsSource="{Binding HomologyItems}" Margin="5,8,5,5" Height="130"
                           AutoGenerateColumns="False" IsReadOnly="True"
                           CanUserAddRows="False" CanUserDeleteRows="False" GridLinesVisibility="Horizontal"
@@ -485,132 +303,15 @@
                 </DataGrid>
             </Grid>
         </GroupBox>
-
-        <!-- ====================================================================
-             Step 5. The bar is the run's whole ion current and the parts are
-             exhaustive, so the shares sum to one by construction. What has to be
-             earned instead is COMPARABILITY: both numerators are monoisotopic,
-             and both count one integrated peak once. The remainder is never
-             clamped, because a negative one is the finding that the two
-             numerators claim more signal than the denominator holds.
-             ==================================================================== -->
-        <GroupBox x:Name="GroupBoxPartition" Margin="5" Padding="5">
-            <GroupBox.Header>
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock Text=" Partition ion current" Style="{StaticResource LayerTitle}"/>
-                    <Border x:Name="BadgeDeNovoLayer5" Style="{StaticResource LayerBadge}">
-                        <TextBlock x:Name="TextBlockDeNovoLayer5State" Style="{StaticResource LayerBadgeText}" Text="BLOCKED"/>
-                    </Border>
-                </StackPanel>
-            </GroupBox.Header>
-
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-
-                <Grid Grid.Row="0" Margin="5,5,5,0">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="*" MinWidth="120"/>
-                        <ColumnDefinition Width="Auto"/>
-                    </Grid.ColumnDefinitions>
-
-                    <Label Grid.Column="0" Content="PatternLab project (.plp):" VerticalAlignment="Center"
-                           ToolTip="The PatternLab project giving the identified segment of each bar. If it cannot give per-run values (merged replicates), the .xic2 below is used."/>
-
-                    <TextBox Grid.Column="1" x:Name="TextBoxPartitionPlp" Text="{Binding PartitionPlp, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="5" VerticalAlignment="Center"
-                             ToolTip="Type or paste the .plp file's full path. It is only opened when you press Build partition."/>
-
-                    <Button Grid.Column="2" x:Name="ButtonBrowsePartitionPlp" Content="Browse..." Padding="12,5"
-                            Click="ButtonBrowsePartitionPlp_Click"
-                            ToolTip="Pick the .plp file. Nothing is read until you press Build partition."/>
-                </Grid>
-
-                <Grid Grid.Row="1" Margin="5,5,5,0">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="*" MinWidth="120"/>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="Auto"/>
-                    </Grid.ColumnDefinitions>
-
-                    <Label Grid.Column="0" Content="Stored quants (.xic2), optional:" VerticalAlignment="Center"
-                           ToolTip="Optional fall-back holding each run's quants separately, used only when the .plp cannot give per-run values. Give it if you have it."/>
-
-                    <TextBox Grid.Column="1" x:Name="TextBoxPartitionXic2" Text="{Binding PartitionXic2, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="5" VerticalAlignment="Center"
-                             ToolTip="Type or paste the .xic2 file's full path, or leave it empty. It is opened, read only, when you press Build partition."/>
-
-                    <Button Grid.Column="2" x:Name="ButtonBrowsePartitionXic2" Content="Browse..." Padding="12,5"
-                            Click="ButtonBrowsePartitionXic2_Click"
-                            ToolTip="Pick the .xic2 file. Nothing is read until you press Build partition."/>
-
-                    <Button Grid.Column="3" x:Name="ButtonBuildPartition" Content="Build partition" Margin="10,4,4,4" Padding="14,6"
-                            Click="ButtonBuildPartition_Click" IsEnabled="False" FontSize="13"
-                            ToolTip="Splits each run's total ion current into PatternLab-identified, de novo and unassigned signal. Disabled until every kept run has been extracted and a PatternLab project has been chosen."/>
-                </Grid>
-
-                <TextBlock Grid.Row="2" x:Name="TextBlockBranchNote" Text="{Binding BranchNote}" Style="{StaticResource Note}"
-                           ToolTip="Which file supplied the PatternLab numbers and, if the fall-back was used, why the first one could not, in its own words."/>
-
-                <DataGrid Grid.Row="3" x:Name="DataGridPartition" ItemsSource="{Binding PartitionItems}" Margin="5,8,5,5" Height="120"
-                          AutoGenerateColumns="False" IsReadOnly="True"
-                          CanUserAddRows="False" CanUserDeleteRows="False" GridLinesVisibility="Horizontal"
-                          ToolTip="One line per run plus one for all runs. The three shares always add up to 100%. A negative remainder is a real finding and is never set to zero.">
-                    <DataGrid.Columns>
-                        <DataGridTextColumn x:Name="ColumnPartitionRun" Header="Run" Width="200" Binding="{Binding Path=RunName}"/>
-                        <DataGridTextColumn x:Name="ColumnPartitionTic" Header="Total ion current" Width="130" Binding="{Binding Path=Tic.Value, StringFormat=E6}"/>
-                        <DataGridTextColumn x:Name="ColumnPartitionPatternLab" Header="PatternLab" Width="130" Binding="{Binding Path=PatternLab.Value, StringFormat=E6}"/>
-                        <DataGridTextColumn x:Name="ColumnPartitionDeNovo" Header="De novo" Width="130" Binding="{Binding Path=DeNovo.Value, StringFormat=E6}"/>
-                        <DataGridTextColumn x:Name="ColumnPartitionRemainder" Header="Remainder" Width="130" Binding="{Binding Path=Remainder.Value, StringFormat=E6}"/>
-                        <DataGridTextColumn x:Name="ColumnPartitionSharePl" Header="PatternLab %" Width="110" Binding="{Binding Path=SharePatternLabPercent, StringFormat=N4}"/>
-                        <DataGridTextColumn x:Name="ColumnPartitionShareDn" Header="De novo %" Width="110" Binding="{Binding Path=ShareDeNovoPercent, StringFormat=N4}"/>
-                        <DataGridTextColumn x:Name="ColumnPartitionShareRest" Header="Remainder %" Width="*" MinWidth="110" Binding="{Binding Path=ShareRemainderPercent, StringFormat=N4}"/>
-                    </DataGrid.Columns>
-                </DataGrid>
-
-                <!-- The chart is built in code, because ThreeWayChart draws itself with OnRender and has
-                     no XAML surface. A fixed height rather than a star row: the whole stack scrolls. -->
-                <Border Grid.Row="4" x:Name="BorderPartitionChart" Margin="5,4,5,4" Height="320" BorderThickness="1"/>
-
-                <WrapPanel Grid.Row="5" Margin="5,4,5,5">
-                    <Button x:Name="ButtonSavePartitionCsv" Content=" Save CSV" Margin="4" Padding="12,5"
-                            Click="ButtonSavePartitionCsv_Click" IsEnabled="False"
-                            ToolTip="Saves every number behind the chart, per run and for all runs together. Disabled until a partition has been built."/>
-
-                    <Button x:Name="ButtonOpenPartitionWindow" Content=" Open as window" Margin="4" Padding="12,5"
-                            Click="ButtonOpenPartitionWindow_Click" IsEnabled="False"
-                            ToolTip="Opens the chart in its own window, with its own save button. Disabled until a partition has been built."/>
-                </WrapPanel>
-            </Grid>
-        </GroupBox>
-
             </StackPanel>
         </Expander>
-
             </StackPanel>
         </ScrollViewer>
-
-        <!-- ====================================================================
-             The permanent status line, and the guide for this screen. It always
-             says what is on screen and what the next step is, and it is where a
-             refused parameter or an unreadable file is reported: this screen
-             raises no modal box for anything it can say here.
-             ==================================================================== -->
         <Border Grid.Row="1" BorderThickness="0,1,0,0" Padding="10,6">
-
-            <!-- The Help button is docked FIRST, so the status line takes what is left and wraps
-                 instead of pushing the button off the edge on a narrow window. -->
             <DockPanel LastChildFill="True">
                 <Button DockPanel.Dock="Right" x:Name="ButtonDeNovoHelp" Content=" Help" Margin="10,0,0,0"
                         Padding="12,3" VerticalAlignment="Top" Click="ButtonDeNovoHelp_Click"
                         ToolTip="Opens the help page for this screen in a window you can keep open. It explains the source, the three filters, the reconciliation and the review queue."/>
-
                 <TextBlock x:Name="TextBlockDeNovoStatus" TextWrapping="Wrap" FontSize="12"
                            VerticalAlignment="Center"
                            ToolTip="What is on screen and what to do next. Refused values, empty folders and unreadable files are reported here, not in pop-ups."/>
