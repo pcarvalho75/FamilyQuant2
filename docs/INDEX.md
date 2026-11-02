@@ -214,6 +214,9 @@ Companion options for `--screens` are `--screen-fcf <input.fcf>`, `--screen-proj
 | `--prove-denovo-runtime <frozen-source-root> <frozen-app-folder> <fresh-output> <date>` | Native frozen/current controls and resolved values across both themes and three legacy sources |
 | `--prove-denovo-workflows <frozen-source-root> <frozen-app-folder> <fresh-output> <date>` | Native frozen/current projection, reconciliation, binding and legacy export fixtures; C13 style handoff |
 | `--prove-denovo-refusals <frozen-source-root> <frozen-app-folder> <fresh-output> <date>` | Native parser/refusal callback feedback, homology setting restoration, formatting and file-name lookup comparisons |
+| `--prove-denovo-commands <frozen-source> <frozen-app> <trusted-sepr2> <fresh-output> <date>` | Actual old/current command/data/status and native chooser/export success/cancel/failure receipts; 41-row semantic fact inventory |
+| `--denovo-command-probe <frozen-app> <trusted-sepr2> <fresh-output>` | Actual command trace without ledger import |
+| `--native-dialog-probe <fresh-output>` | Owned-process native Open/Folder/Save selection driver check |
 | `--ledger-shell-compare <frozen-root> <fresh-output> <date>` | SH and C1 exact declarations/member tokens; separate candidate registers, unproven rows kept OPEN |
 | `--ledger-core-relocation <frozen-root> <fresh-output> X5/X7 <date> [member-mappings.json]` | Scoped complete Core member comparisons, exact frozen hashes, retained source/checker snapshots and per-row gaps; [guide](CORE-RELOCATION-LEDGER.md) |
 | `--ledger-xic-runtime <frozen-root> <fresh-output> <date> <stored-project> <validated-cache> [--negative-control]` | Native XIC refusal/source/completion facts plus bounded validated cache replay; [runtime guide](CORE-RUNTIME-LEDGER.md) |
