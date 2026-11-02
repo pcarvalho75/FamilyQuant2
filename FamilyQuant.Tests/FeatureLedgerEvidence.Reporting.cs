@@ -16,6 +16,7 @@ internal static partial class FeatureLedgerEvidence
         if (args.Length < 2) throw new ArgumentException("Supply an explicit output directory or a register and output directory.");
         string root = FindRoot() ?? throw new DirectoryNotFoundException("Source checkout not found.");
         var inventory = JsonSerializer.Deserialize<FeatureLedger.Inventory>(File.ReadAllText(Path.Combine(root, "docs/feature-ledger-scan.json")))!;
+        if (args[0] == "--feature-ledger-evidence-import-batch") return ImportBatch(root, inventory, args);
         string ledgerPath = Path.Combine(root, "docs/FEATURE-LEDGER.md");
         string markdown = File.ReadAllText(ledgerPath);
         if (args[0] == "--feature-ledger-evidence-import")
@@ -107,9 +108,9 @@ internal static partial class FeatureLedgerEvidence
         _ => "SH/N6 preservation queue"
     };
 
-    internal static int Report(string root, FeatureLedger.Inventory inventory, string markdown, Registry registry, string output)
+    internal static int Report(string root, FeatureLedger.Inventory inventory, string markdown, Registry registry, string output, bool reuseValidatedRegistry = false)
     {
-        var ledgerProblems = FeatureLedger.Validate(inventory, markdown);
+        var ledgerProblems = FeatureLedger.Validate(inventory, markdown, evidenceOverride: reuseValidatedRegistry ? registry : null);
         var states = markdown.Replace("\r\n", "\n").Split('\n').Where(l => l.StartsWith("| FQ15-", StringComparison.Ordinal))
             .Select(l => l.Split('|').Select(c => c.Trim()).ToArray()).Where(c => c.Length == 10)
             .GroupBy(c => c[1]).ToDictionary(g => g.Key, g => g.First(), StringComparer.Ordinal);
