@@ -114,6 +114,7 @@ Finished steps, moved here from docs/ROADMAP.md. The board shows them as green.
 | X9 | Move paper and talk figure code out of the installed app, but only code no screen calls. The Results screen calls `PresentationEvidencePack`, so that stays. Audit first, keeping the chart findings in `docs/housekeeping/H1-NOTES.md`; if little remains, close it small without a `FamilyQuant.Reports` project | H | 1 | 🟢 | R3 | Same evidence pack from the app, byte for byte except the existing `generatedUtc` field; no screen lost a function; what moved or stayed is listed | RS | not started | 0% | 0% | T+1 |
 | X15 | Bundled USEARCH: the binary's hash differs from upstream 11.0.667, so its origin is unproven. The author publishes versions 5 to 11 as CC0, and VSEARCH has no amino acid support, so it cannot replace it. Swap in the upstream file after a parity check (D6) | L | 0.5 | 🟢 | R3 | Same families on Bjararaca and Viperidae; hash and source recorded; publish rehearsal runs | AS | not started | 0% | 0% | T+0 |
 | X6 | De novo engine tidy: readers, reconciler and table builders, with the logic left in `DeNovoControl` moved into Core | H | 1 | 🟢 | R3 | Golden equal; real-data de novo sections green | FL | not started | 0% | 0% | T+1 |
+| X7 | Project and file formats: `ProjectStore` (1,083) split, schema versioned, and an `.fcf` export the frozen 1.5.0.6 opens | H | 1 | 🟢 | R2 | A file written by 2.0 opens in the reference build with the same families; old `.fqproj` rules kept | FL | not started | 0% | 0% | T+1 |
 
 ### W7 Releases (Paulo publishes each one)
 

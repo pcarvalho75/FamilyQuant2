@@ -263,7 +263,7 @@ namespace FamilyQuant.Evidence
                 || recipe.Assignments.GroupBy(a => a.GroupKey, StringComparer.Ordinal).Any(g => g.Select(a => a.FamilyId).Distinct().Count() != 1)
                 || StateFingerprint(file, recipe.Assignments, recipe, projectSession: true) != recipe.AppliedStateFingerprint)
                 throw new ArgumentException("The recipe's resulting grouping does not match its recorded state.", nameof(recipe));
-            ValidateSearch(file, recipe.SessionSearch, recipe.SessionReferences, recipe.Options, operation);
+            ValidateSearch(file, recipe.SessionSearch, recipe.SessionReferences, recipe.Options, operation, allowLegacyCoverage: true);
             foreach (MotifPattern motif in recipe.CheckedMotifs ?? new List<MotifPattern>()) MotifCheck.Compile(motif.Pattern);
             return Commit(file, recipe, operation);
         }

@@ -1,0 +1,1641 @@
+{
+  "schemaVersion": 1,
+  "step": "RS-interactions",
+  "frozenCommit": "e9b73064d8ff19b2fde3e3231240b636a64c0a91",
+  "runs": [
+    {
+      "id": "RS-native-results",
+      "command": "C:\\FamilyQuant-wt2\\results\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --prove-results-interactions D:/FamilyQuant-data/out-results/ledger-ready/interactions-fixed \u00222026-11-02 01:30:51 -0800\u0022",
+      "executedAt": "2026-11-02 01:30:51 -0800",
+      "commit": "a57fd2dfb365b6f4cf33e0081f7e6bb88cca3cb3",
+      "artifacts": [
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\ledger-ready\\interactions-fixed\\proofs.log",
+          "sha256": "23045696A416350F970624199A9F6794EDAD2E74BD5B307013069C7093C3D0B6"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\ledger-ready\\interactions-fixed\\actual-checks.json",
+          "sha256": "96E2CCF8C0A4CCB29B334F00A0ED9AB191830A9FD4D94E48531D636559A6993D"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\ledger-ready\\interactions-fixed\\executed\\FamilyQuant_AnalyticsControl.xaml",
+          "sha256": "67ADC32B5C4C580890C5895235DF53359F4812AA9F9E9E81E659E2E61C17357D"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\ledger-ready\\interactions-fixed\\executed\\FamilyQuant_AnalyticsControl.xaml.cs",
+          "sha256": "47F92608EBB384F7E3B0C29DE0FF0F0D3E1D15DD8E6D32699A29A0730E5325CD"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\ledger-ready\\interactions-fixed\\executed\\FamilyQuant_AnalyticsViewModel.cs",
+          "sha256": "6E3549DC8E69FCFFE4914D9CF836EA22755264BE6CA0B84A4C1B4F40C425B96D"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\ledger-ready\\interactions-fixed\\executed\\FamilyQuant.Tests_Program.ResultsPreservation.cs",
+          "sha256": "796EBE260F2B702F79DAC0C57C7875811DEE75933F3967E947CFDE6E03ACA674"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\ledger-ready\\interactions-fixed\\executed\\FamilyQuant.Tests_Program.Commands.ResultsPreservation.cs",
+          "sha256": "71C2C16E0A3E386CED407A5E1B26EDA17A7F6A894C691ADAFEDD97F8168C5397"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\ledger-ready\\interactions-fixed\\executed\\FamilyQuant.Tests.dll",
+          "sha256": "914F8EDFE7680B5372D7498099CC3AD34EFC370041D8B72A7BE609BD1F3AC6F1"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\ledger-ready\\interactions-fixed\\executed\\FamilyQuant2.dll",
+          "sha256": "AB82E21A5D1D5D7F0E64A8D2F581E6E1135A2A9A4E8CA5CCEEB53BB815AE42A7"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\ledger-ready\\interactions-fixed\\executed\\FamilyQuant.Core.dll",
+          "sha256": "13CE13CA9091F9CA6FB5765223A8D5522A9709C07E20F1F8085DB5C8AF57D066"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\ledger-ready\\interactions-fixed\\native\\Peptides-1",
+          "sha256": "1EB272F504B26BF2ECBC35843E378B2B9675C512AE94C6F811ACA454571C9185"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\ledger-ready\\interactions-fixed\\native\\Peptides-2",
+          "sha256": "1EB272F504B26BF2ECBC35843E378B2B9675C512AE94C6F811ACA454571C9185"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\ledger-ready\\interactions-fixed\\native\\results-Dark.png",
+          "sha256": "D59AF373C45FB17DC97340BDFC8E8B98A0F16B3D584ADA416C6413741FF94712"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\ledger-ready\\interactions-fixed\\native\\results-Light.png",
+          "sha256": "C5ABBC03DB6E1DAAA424DB2BA0BC5EFC1B28AE6B3699EDCD0FCD6903C724B65C"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\ledger-ready\\interactions-fixed\\native\\Summary-1",
+          "sha256": "25F983A1AAB49B72A8882A0E7B1B65598B2855BF907B9462EA06332A220CFF2F"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\ledger-ready\\interactions-fixed\\native\\Summary-2",
+          "sha256": "25F983A1AAB49B72A8882A0E7B1B65598B2855BF907B9462EA06332A220CFF2F"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\ledger-ready\\interactions-fixed\\native\\Figures-1\\family_contribution.png",
+          "sha256": "73AF111DD1659F08E980CD328D96B6B218D9CCC26B4FE1CB81C546D761AB7116"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\ledger-ready\\interactions-fixed\\native\\Figures-1\\isotopes_credited.png",
+          "sha256": "EC37E6C2C5317C6D5725FFE603899281EB30C5ABBBCB0FDE853221F3CE83A861"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\ledger-ready\\interactions-fixed\\native\\Figures-1\\percent_ion_current_by_mass.png",
+          "sha256": "548345447269A10FDB5ABBF13F9FB515B4D7348AEADD1C0D7CDD44A13A902794"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\ledger-ready\\interactions-fixed\\native\\Figures-1\\recovery.png",
+          "sha256": "B3C8710717B3D959912BA79F47C83AA1C82F1D78DDDE698C73C098FF299FC080"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\ledger-ready\\interactions-fixed\\native\\Figures-1\\xic_by_mass.png",
+          "sha256": "C799CA03E4E223CCE223660C3D70C5D2609D1F297B7CF93E1EF14DE7B2CB06A8"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\ledger-ready\\interactions-fixed\\native\\Figures-2\\family_contribution.png",
+          "sha256": "73AF111DD1659F08E980CD328D96B6B218D9CCC26B4FE1CB81C546D761AB7116"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\ledger-ready\\interactions-fixed\\native\\Figures-2\\isotopes_credited.png",
+          "sha256": "EC37E6C2C5317C6D5725FFE603899281EB30C5ABBBCB0FDE853221F3CE83A861"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\ledger-ready\\interactions-fixed\\native\\Figures-2\\percent_ion_current_by_mass.png",
+          "sha256": "548345447269A10FDB5ABBF13F9FB515B4D7348AEADD1C0D7CDD44A13A902794"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\ledger-ready\\interactions-fixed\\native\\Figures-2\\recovery.png",
+          "sha256": "B3C8710717B3D959912BA79F47C83AA1C82F1D78DDDE698C73C098FF299FC080"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-results\\ledger-ready\\interactions-fixed\\native\\Figures-2\\xic_by_mass.png",
+          "sha256": "C799CA03E4E223CCE223660C3D70C5D2609D1F297B7CF93E1EF14DE7B2CB06A8"
+        }
+      ],
+      "workingDirectory": "C:\\FamilyQuant-wt2\\results"
+    }
+  ],
+  "rows": [
+    {
+      "observationId": "FQ15-075F89E875C2",
+      "implementation": [
+        {
+          "path": "FamilyQuant/AnalyticsControl.xaml",
+          "symbol": "ComboBoxFamilyTopN.Items",
+          "sha256": "67ADC32B5C4C580890C5895235DF53359F4812AA9F9E9E81E659E2E61C17357D"
+        },
+        {
+          "path": "FamilyQuant/AnalyticsControl.xaml.cs",
+          "symbol": "ComboBoxFamilyTopN.Items",
+          "sha256": "47F92608EBB384F7E3B0C29DE0FF0F0D3E1D15DD8E6D32699A29A0730E5325CD"
+        },
+        {
+          "path": "FamilyQuant/AnalyticsViewModel.cs",
+          "symbol": "ComboBoxFamilyTopN.Items",
+          "sha256": "6E3549DC8E69FCFFE4914D9CF836EA22755264BE6CA0B84A4C1B4F40C425B96D"
+        }
+      ],
+      "proofs": [
+        {
+          "runId": "RS-native-results",
+          "kind": "test",
+          "target": "ResultsPreservationTests",
+          "assertion": "RS FQ15-075F89E875C2: family limit retains its label Top 30 families",
+          "artifact": "D:\\FamilyQuant-data\\out-results\\ledger-ready\\interactions-fixed\\proofs.log",
+          "inspectedBy": ""
+        }
+      ],
+      "note": "Native synthetic Results interaction. Copy improvements are explicitly mapped for independent semantic review. Export refusal proves the required-study guard, not a complete evidence pack.",
+      "kindReceiptId": null,
+      "compared": "ComboBoxItem.Content = Top 30 families -\u003E ComboBoxFamilyTopN.Items; RS FQ15-075F89E875C2: family limit retains its label Top 30 families"
+    },
+    {
+      "observationId": "FQ15-152CD0CBD7E6",
+      "implementation": [
+        {
+          "path": "FamilyQuant/AnalyticsControl.xaml",
+          "symbol": "AnalyticsControl / family chart label",
+          "sha256": "67ADC32B5C4C580890C5895235DF53359F4812AA9F9E9E81E659E2E61C17357D"
+        },
+        {
+          "path": "FamilyQuant/AnalyticsControl.xaml.cs",
+          "symbol": "AnalyticsControl / family chart label",
+          "sha256": "47F92608EBB384F7E3B0C29DE0FF0F0D3E1D15DD8E6D32699A29A0730E5325CD"
+        },
+        {
+          "path": "FamilyQuant/AnalyticsViewModel.cs",
+          "symbol": "AnalyticsControl / family chart label",
+          "sha256": "6E3549DC8E69FCFFE4914D9CF836EA22755264BE6CA0B84A4C1B4F40C425B96D"
+        }
+      ],
+      "proofs": [
+        {
+          "runId": "RS-native-results",
+          "kind": "test",
+          "target": "ResultsPreservationTests",
+          "assertion": "RS FQ15-152CD0CBD7E6: family chart retains its visible section label",
+          "artifact": "D:\\FamilyQuant-data\\out-results\\ledger-ready\\interactions-fixed\\proofs.log",
+          "inspectedBy": ""
+        }
+      ],
+      "note": "Native synthetic Results interaction. Copy improvements are explicitly mapped for independent semantic review. Export refusal proves the required-study guard, not a complete evidence pack.",
+      "kindReceiptId": null,
+      "compared": "TextBlock.Text = Family chart: -\u003E AnalyticsControl / family chart label; RS FQ15-152CD0CBD7E6: family chart retains its visible section label"
+    },
+    {
+      "observationId": "FQ15-155754DC695E",
+      "implementation": [
+        {
+          "path": "FamilyQuant/AnalyticsControl.xaml",
+          "symbol": "AnalyticsControl / Results heading",
+          "sha256": "67ADC32B5C4C580890C5895235DF53359F4812AA9F9E9E81E659E2E61C17357D"
+        },
+        {
+          "path": "FamilyQuant/AnalyticsControl.xaml.cs",
+          "symbol": "AnalyticsControl / Results heading",
+          "sha256": "47F92608EBB384F7E3B0C29DE0FF0F0D3E1D15DD8E6D32699A29A0730E5325CD"
+        },
+        {
+          "path": "FamilyQuant/AnalyticsViewModel.cs",
+          "symbol": "AnalyticsControl / Results heading",
+          "sha256": "6E3549DC8E69FCFFE4914D9CF836EA22755264BE6CA0B84A4C1B4F40C425B96D"
+        }
+      ],
+      "proofs": [
+        {
+          "runId": "RS-native-results",
+          "kind": "test",
+          "target": "ResultsPreservationTests",
+          "assertion": "RS FQ15-155754DC695E: Analytics heading is presented as Results",
+          "artifact": "D:\\FamilyQuant-data\\out-results\\ledger-ready\\interactions-fixed\\proofs.log",
+          "inspectedBy": ""
+        }
+      ],
+      "note": "Native synthetic Results interaction. Copy improvements are explicitly mapped for independent semantic review. Export refusal proves the required-study guard, not a complete evidence pack.",
+      "kindReceiptId": null,
+      "compared": "TextBlock.Text = Analytics -\u003E AnalyticsControl / Results heading; RS FQ15-155754DC695E: Analytics heading is presented as Results"
+    },
+    {
+      "observationId": "FQ15-1826BA8181A2",
+      "implementation": [
+        {
+          "path": "FamilyQuant/AnalyticsControl.xaml",
+          "symbol": "CheckBoxFamilyPercent / ChartChoiceChanged",
+          "sha256": "67ADC32B5C4C580890C5895235DF53359F4812AA9F9E9E81E659E2E61C17357D"
+        },
+        {
+          "path": "FamilyQuant/AnalyticsControl.xaml.cs",
+          "symbol": "CheckBoxFamilyPercent / ChartChoiceChanged",
+          "sha256": "47F92608EBB384F7E3B0C29DE0FF0F0D3E1D15DD8E6D32699A29A0730E5325CD"
+        },
+        {
+          "path": "FamilyQuant/AnalyticsViewModel.cs",
+          "symbol": "CheckBoxFamilyPercent / ChartChoiceChanged",
+          "sha256": "6E3549DC8E69FCFFE4914D9CF836EA22755264BE6CA0B84A4C1B4F40C425B96D"
+        }
+      ],
+      "proofs": [
+        {
+          "runId": "RS-native-results",
+          "kind": "test",
+          "target": "ResultsPreservationTests",
+          "assertion": "RS FQ15-1826BA8181A2: percent control remains enabled and changes the chart",
+          "artifact": "D:\\FamilyQuant-data\\out-results\\ledger-ready\\interactions-fixed\\proofs.log",
+          "inspectedBy": ""
+        }
+      ],
+      "note": "Native synthetic Results interaction. Copy improvements are explicitly mapped for independent semantic review. Export refusal proves the required-study guard, not a complete evidence pack.",
+      "kindReceiptId": null,
+      "compared": "CheckBox CheckBoxFamilyPercent -\u003E CheckBoxFamilyPercent / ChartChoiceChanged; RS FQ15-1826BA8181A2: percent control remains enabled and changes the chart"
+    },
+    {
+      "observationId": "FQ15-187ED75059DC",
+      "implementation": [
+        {
+          "path": "FamilyQuant/AnalyticsControl.xaml",
+          "symbol": "ExportClicked / AnalyticsViewModel.ExportAsync",
+          "sha256": "67ADC32B5C4C580890C5895235DF53359F4812AA9F9E9E81E659E2E61C17357D"
+        },
+        {
+          "path": "FamilyQuant/AnalyticsControl.xaml.cs",
+          "symbol": "ExportClicked / AnalyticsViewModel.ExportAsync",
+          "sha256": "47F92608EBB384F7E3B0C29DE0FF0F0D3E1D15DD8E6D32699A29A0730E5325CD"
+        },
+        {
+          "path": "FamilyQuant/AnalyticsViewModel.cs",
+          "symbol": "ExportClicked / AnalyticsViewModel.ExportAsync",
+          "sha256": "6E3549DC8E69FCFFE4914D9CF836EA22755264BE6CA0B84A4C1B4F40C425B96D"
+        }
+      ],
+      "proofs": [
+        {
+          "runId": "RS-native-results",
+          "kind": "test",
+          "target": "ResultsPreservationTests",
+          "assertion": "RS FQ15-187ED75059DC: native evidence-pack route refuses missing required studies and publishes no folder through the replacement handler",
+          "artifact": "D:\\FamilyQuant-data\\out-results\\ledger-ready\\interactions-fixed\\proofs.log",
+          "inspectedBy": ""
+        }
+      ],
+      "note": "Native synthetic Results interaction. Copy improvements are explicitly mapped for independent semantic review. Export refusal proves the required-study guard, not a complete evidence pack.",
+      "kindReceiptId": null,
+      "compared": "private void ButtonSavePresentationFigures_Click(object sender, RoutedEventArgs e) -\u003E ExportClicked / AnalyticsViewModel.ExportAsync; RS FQ15-187ED75059DC: native evidence-pack route refuses missing required studies and publishes no folder through the replacement handler"
+    },
+    {
+      "observationId": "FQ15-1A7280F9C040",
+      "implementation": [
+        {
+          "path": "FamilyQuant/AnalyticsControl.xaml",
+          "symbol": "ComboBoxFamilyTopN.Items",
+          "sha256": "67ADC32B5C4C580890C5895235DF53359F4812AA9F9E9E81E659E2E61C17357D"
+        },
+        {
+          "path": "FamilyQuant/AnalyticsControl.xaml.cs",
+          "symbol": "ComboBoxFamilyTopN.Items",
+          "sha256": "47F92608EBB384F7E3B0C29DE0FF0F0D3E1D15DD8E6D32699A29A0730E5325CD"
+        },
+        {
+          "path": "FamilyQuant/AnalyticsViewModel.cs",
+          "symbol": "ComboBoxFamilyTopN.Items",
+          "sha256": "6E3549DC8E69FCFFE4914D9CF836EA22755264BE6CA0B84A4C1B4F40C425B96D"
+        }
+      ],
+      "proofs": [
+        {
+          "runId": "RS-native-results",
+          "kind": "test",
+          "target": "ResultsPreservationTests",
+          "assertion": "RS FQ15-1A7280F9C040: family limit retains its label Top 20 families",
+          "artifact": "D:\\FamilyQuant-data\\out-results\\ledger-ready\\interactions-fixed\\proofs.log",
+          "inspectedBy": ""
+        }
+      ],
+      "note": "Native synthetic Results interaction. Copy improvements are explicitly mapped for independent semantic review. Export refusal proves the required-study guard, not a complete evidence pack.",
+      "kindReceiptId": null,
+      "compared": "ComboBoxItem.Content = Top 20 families -\u003E ComboBoxFamilyTopN.Items; RS FQ15-1A7280F9C040: family limit retains its label Top 20 families"
+    },
+    {
+      "observationId": "FQ15-1F00D6FFE5EE",
+      "implementation": [
+        {
+          "path": "FamilyQuant/AnalyticsControl.xaml",
+          "symbol": "ComboBoxFamilyTopN / ChartChoiceChanged",
+          "sha256": "67ADC32B5C4C580890C5895235DF53359F4812AA9F9E9E81E659E2E61C17357D"
+        },
+        {
+          "path": "FamilyQuant/AnalyticsControl.xaml.cs",
+          "symbol": "ComboBoxFamilyTopN / ChartChoiceChanged",
+          "sha256": "47F92608EBB384F7E3B0C29DE0FF0F0D3E1D15DD8E6D32699A29A0730E5325CD"
+        },
+        {
+          "path": "FamilyQuant/AnalyticsViewModel.cs",
+          "symbol": "ComboBoxFamilyTopN / ChartChoiceChanged",
+          "sha256": "6E3549DC8E69FCFFE4914D9CF836EA22755264BE6CA0B84A4C1B4F40C425B96D"
+        }
+      ],
+      "proofs": [
+        {
+          "runId": "RS-native-results",
+          "kind": "test",
+          "target": "ResultsPreservationTests",
+          "assertion": "RS FQ15-1F00D6FFE5EE: family limit 10 can be selected through its native control",
+          "artifact": "D:\\FamilyQuant-data\\out-results\\ledger-ready\\interactions-fixed\\proofs.log",
+          "inspectedBy": ""
+        }
+      ],
+      "note": "Native synthetic Results interaction. Copy improvements are explicitly mapped for independent semantic review. Export refusal proves the required-study guard, not a complete evidence pack.",
+      "kindReceiptId": null,
+      "compared": "ComboBoxItem ComboBoxItem -\u003E ComboBoxFamilyTopN / ChartChoiceChanged; RS FQ15-1F00D6FFE5EE: family limit 10 can be selected through its native control"
+    },
+    {
+      "observationId": "FQ15-1F69AF99C92A",
+      "implementation": [
+        {
+          "path": "FamilyQuant/AnalyticsControl.xaml",
+          "symbol": "ComboBoxFamilyTopN / ChartChoiceChanged",
+          "sha256": "67ADC32B5C4C580890C5895235DF53359F4812AA9F9E9E81E659E2E61C17357D"
+        },
+        {
+          "path": "FamilyQuant/AnalyticsControl.xaml.cs",
+          "symbol": "ComboBoxFamilyTopN / ChartChoiceChanged",
+          "sha256": "47F92608EBB384F7E3B0C29DE0FF0F0D3E1D15DD8E6D32699A29A0730E5325CD"
+        },
+        {
+          "path": "FamilyQuant/AnalyticsViewModel.cs",
+          "symbol": "ComboBoxFamilyTopN / ChartChoiceChanged",
+          "sha256": "6E3549DC8E69FCFFE4914D9CF836EA22755264BE6CA0B84A4C1B4F40C425B96D"
+        }
+      ],
+      "proofs": [
+        {
+          "runId": "RS-native-results",
+          "kind": "test",
+          "target": "ResultsPreservationTests",
+          "assertion": "RS FQ15-1F69AF99C92A: family limit selector is displayed and defaults to fifteen",
+          "artifact": "D:\\FamilyQuant-data\\out-results\\ledger-ready\\interactions-fixed\\proofs.log",
+          "inspectedBy": ""
+        }
+      ],
+      "note": "Native synthetic Results interaction. Copy improvements are explicitly mapped for independent semantic review. Export refusal proves the required-study guard, not a complete evidence pack.",
+      "kindReceiptId": null,
+      "compared": "ComboBox ComboBoxFamilyTopN -\u003E ComboBoxFamilyTopN / ChartChoiceChanged; RS FQ15-1F69AF99C92A: family limit selector is displayed and defaults to fifteen"
+    },
+    {
+      "observationId": "FQ15-21F91C29B9E2",
+      "implementation": [
+        {
+          "path": "FamilyQuant/AnalyticsControl.xaml",
+          "symbol": "ComboBoxExportKind / Peptides / ToolTip",
+          "sha256": "67ADC32B5C4C580890C5895235DF53359F4812AA9F9E9E81E659E2E61C17357D"
+        },
+        {
+          "path": "FamilyQuant/AnalyticsControl.xaml.cs",
+          "symbol": "ComboBoxExportKind / Peptides / ToolTip",
+          "sha256": "47F92608EBB384F7E3B0C29DE0FF0F0D3E1D15DD8E6D32699A29A0730E5325CD"
+        },
+        {
+          "path": "FamilyQuant/AnalyticsViewModel.cs",
+          "symbol": "ComboBoxExportKind / Peptides / ToolTip",
+          "sha256": "6E3549DC8E69FCFFE4914D9CF836EA22755264BE6CA0B84A4C1B4F40C425B96D"
+        }
+      ],
+      "proofs": [
+        {
+          "runId": "RS-native-results",
+          "kind": "test",
+          "target": "ResultsPreservationTests",
+          "assertion": "RS FQ15-21F91C29B9E2: retained tooltip: Per-peptide run, sequence, charge, mass, isotope areas, envelope and family assignments.",
+          "artifact": "D:\\FamilyQuant-data\\out-results\\ledger-ready\\interactions-fixed\\proofs.log",
+          "inspectedBy": ""
+        }
+      ],
+      "note": "Native synthetic Results interaction. Copy improvements are explicitly mapped for independent semantic review. Export refusal proves the required-study guard, not a complete evidence pack.",
+      "kindReceiptId": null,
+      "compared": "ButtonExportPeptides.ToolTip = Saves the per-peptide table behind these graphs as a CSV: run, sequence, charge, mass, isotope areas, envelope and family, one row per peptide and charge in each run. Decimals always use a dot. -\u003E ComboBoxExportKind / Peptides / ToolTip; RS FQ15-21F91C29B9E2: retained tooltip: Per-peptide run, sequence, charge, mass, isotope areas, envelope and family assignments."
+    },
+    {
+      "observationId": "FQ15-26786D42C42C",
+      "implementation": [
+        {
+          "path": "FamilyQuant/AnalyticsControl.xaml",
+          "symbol": "ComboBoxExportKind / ButtonExport / ExportChoiceChanged",
+          "sha256": "67ADC32B5C4C580890C5895235DF53359F4812AA9F9E9E81E659E2E61C17357D"
+        },
+        {
+          "path": "FamilyQuant/AnalyticsControl.xaml.cs",
+          "symbol": "ComboBoxExportKind / ButtonExport / ExportChoiceChanged",
+          "sha256": "47F92608EBB384F7E3B0C29DE0FF0F0D3E1D15DD8E6D32699A29A0730E5325CD"
+        },
+        {
+          "path": "FamilyQuant/AnalyticsViewModel.cs",
+          "symbol": "ComboBoxExportKind / ButtonExport / ExportChoiceChanged",
+          "sha256": "6E3549DC8E69FCFFE4914D9CF836EA22755264BE6CA0B84A4C1B4F40C425B96D"
+        }
+      ],
+      "proofs": [
+        {
+          "runId": "RS-native-results",
+          "kind": "test",
+          "target": "ResultsPreservationTests",
+          "assertion": "RS FQ15-26786D42C42C: Peptides export remains selectable and enabled",
+          "artifact": "D:\\FamilyQuant-data\\out-results\\ledger-ready\\interactions-fixed\\proofs.log",
+          "inspectedBy": ""
+        }
+      ],
+      "note": "Native synthetic Results interaction. Copy improvements are explicitly mapped for independent semantic review. Export refusal proves the required-study guard, not a complete evidence pack.",
+      "kindReceiptId": null,
+      "compared": "Button ButtonExportPeptides -\u003E ComboBoxExportKind / ButtonExport / ExportChoiceChanged; RS FQ15-26786D42C42C: Peptides export remains selectable and enabled"
+    },
+    {
+      "observationId": "FQ15-2C55FFA436E6",
+      "implementation": [
+        {
+          "path": "FamilyQuant/AnalyticsControl.xaml",
+          "symbol": "ComboBoxExportKind / Figures / ToolTip",
+          "sha256": "67ADC32B5C4C580890C5895235DF53359F4812AA9F9E9E81E659E2E61C17357D"
+        },
+        {
+          "path": "FamilyQuant/AnalyticsControl.xaml.cs",
+          "symbol": "ComboBoxExportKind / Figures / ToolTip",
+          "sha256": "47F92608EBB384F7E3B0C29DE0FF0F0D3E1D15DD8E6D32699A29A0730E5325CD"
+        },
+        {
+          "path": "FamilyQuant/AnalyticsViewModel.cs",
+          "symbol": "ComboBoxExportKind / Figures / ToolTip",
+          "sha256": "6E3549DC8E69FCFFE4914D9CF836EA22755264BE6CA0B84A4C1B4F40C425B96D"
+        }
+      ],
+      "proofs": [
+        {
+          "runId": "RS-native-results",
+          "kind": "test",
+          "target": "ResultsPreservationTests",
+          "assertion": "RS FQ15-2C55FFA436E6: retained tooltip: Every screen graph at 1920 by 1080 pixels in the Light palette.",
+          "artifact": "D:\\FamilyQuant-data\\out-results\\ledger-ready\\interactions-fixed\\proofs.log",
+          "inspectedBy": ""
+        }
+      ],
+      "note": "Native synthetic Results interaction. Copy improvements are explicitly mapped for independent semantic review. Export refusal proves the required-study guard, not a complete evidence pack.",
+      "kindReceiptId": null,
+      "compared": "ButtonSaveFigures.ToolTip = Saves every graph on this screen as a PNG, 1920 by 1080 pixels on a light background for slides, into a folder you choose. Files of the same name there are overwritten. -\u003E ComboBoxExportKind / Figures / ToolTip; RS FQ15-2C55FFA436E6: retained tooltip: Every screen graph at 1920 by 1080 pixels in the Light palette."
+    },
+    {
+      "observationId": "FQ15-3652AC893FCA",
+      "implementation": [
+        {
+          "path": "FamilyQuant/AnalyticsControl.xaml",
+          "symbol": "ComboBoxFamilyTopN / tag 0 / ToolTip",
+          "sha256": "67ADC32B5C4C580890C5895235DF53359F4812AA9F9E9E81E659E2E61C17357D"
+        },
+        {
+          "path": "FamilyQuant/AnalyticsControl.xaml.cs",
+          "symbol": "ComboBoxFamilyTopN / tag 0 / ToolTip",
+          "sha256": "47F92608EBB384F7E3B0C29DE0FF0F0D3E1D15DD8E6D32699A29A0730E5325CD"
+        },
+        {
+          "path": "FamilyQuant/AnalyticsViewModel.cs",
+          "symbol": "ComboBoxFamilyTopN / tag 0 / ToolTip",
+          "sha256": "6E3549DC8E69FCFFE4914D9CF836EA22755264BE6CA0B84A4C1B4F40C425B96D"
+        }
+      ],
+      "proofs": [
+        {
+          "runId": "RS-native-results",
+          "kind": "test",
+          "target": "ResultsPreservationTests",
+          "assertion": "RS FQ15-3652AC893FCA: retained tooltip: Every family retains its own bar. Scrolling may be needed for a large grouping.",
+          "artifact": "D:\\FamilyQuant-data\\out-results\\ledger-ready\\interactions-fixed\\proofs.log",
+          "inspectedBy": ""
+        }
+      ],
+      "note": "Native synthetic Results interaction. Copy improvements are explicitly mapped for independent semantic review. Export refusal proves the required-study guard, not a complete evidence pack.",
+      "kindReceiptId": null,
+      "compared": "ComboBoxItem.ToolTip = Every family gets its own bar. Complete, but hard to read with more than a few dozen families. -\u003E ComboBoxFamilyTopN / tag 0 / ToolTip; RS FQ15-3652AC893FCA: retained tooltip: Every family retains its own bar. Scrolling may be needed for a large grouping."
+    },
+    {
+      "observationId": "FQ15-3BCC49F296C6",
+      "implementation": [
+        {
+          "path": "FamilyQuant/AnalyticsControl.xaml",
+          "symbol": "ComboBoxExportKind / Peptides / Content",
+          "sha256": "67ADC32B5C4C580890C5895235DF53359F4812AA9F9E9E81E659E2E61C17357D"
+        },
+        {
+          "path": "FamilyQuant/AnalyticsControl.xaml.cs",
+          "symbol": "ComboBoxExportKind / Peptides / Content",
+          "sha256": "47F92608EBB384F7E3B0C29DE0FF0F0D3E1D15DD8E6D32699A29A0730E5325CD"
+        },
+        {
+          "path": "FamilyQuant/AnalyticsViewModel.cs",
+          "symbol": "ComboBoxExportKind / Peptides / Content",
+          "sha256": "6E3549DC8E69FCFFE4914D9CF836EA22755264BE6CA0B84A4C1B4F40C425B96D"
+        }
+      ],
+      "proofs": [
+        {
+          "runId": "RS-native-results",
+          "kind": "test",
+          "target": "ResultsPreservationTests",
+          "assertion": "RS FQ15-3BCC49F296C6: export label retained as Peptide table (CSV)",
+          "artifact": "D:\\FamilyQuant-data\\out-results\\ledger-ready\\interactions-fixed\\proofs.log",
+          "inspectedBy": ""
+        }
+      ],
+      "note": "Native synthetic Results interaction. Copy improvements are explicitly mapped for independent semantic review. Export refusal proves the required-study guard, not a complete evidence pack.",
+      "kindReceiptId": null,
+      "compared": "ButtonExportPeptides.Content = Export peptide table (CSV) -\u003E ComboBoxExportKind / Peptides / Content; RS FQ15-3BCC49F296C6: export label retained as Peptide table (CSV)"
+    },
+    {
+      "observationId": "FQ15-3CDBA38C569B",
+      "implementation": [
+        {
+          "path": "FamilyQuant/AnalyticsControl.xaml",
+          "symbol": "ComboBoxExportKind / EvidencePack / Content",
+          "sha256": "67ADC32B5C4C580890C5895235DF53359F4812AA9F9E9E81E659E2E61C17357D"
+        },
+        {
+          "path": "FamilyQuant/AnalyticsControl.xaml.cs",
+          "symbol": "ComboBoxExportKind / EvidencePack / Content",
+          "sha256": "47F92608EBB384F7E3B0C29DE0FF0F0D3E1D15DD8E6D32699A29A0730E5325CD"
+        },
+        {
+          "path": "FamilyQuant/AnalyticsViewModel.cs",
+          "symbol": "ComboBoxExportKind / EvidencePack / Content",
+          "sha256": "6E3549DC8E69FCFFE4914D9CF836EA22755264BE6CA0B84A4C1B4F40C425B96D"
+        }
+      ],
+      "proofs": [
+        {
+          "runId": "RS-native-results",
+          "kind": "test",
+          "target": "ResultsPreservationTests",
+          "assertion": "RS FQ15-3CDBA38C569B: export label retained as Presentation evidence pack",
+          "artifact": "D:\\FamilyQuant-data\\out-results\\ledger-ready\\interactions-fixed\\proofs.log",
+          "inspectedBy": ""
+        }
+      ],
+      "note": "Native synthetic Results interaction. Copy improvements are explicitly mapped for independent semantic review. Export refusal proves the required-study guard, not a complete evidence pack.",
+      "kindReceiptId": null,
+      "compared": "ButtonSavePresentationFigures.Content = Save presentation evidence pack -\u003E ComboBoxExportKind / EvidencePack / Content; RS FQ15-3CDBA38C569B: export label retained as Presentation evidence pack"
+    },
+    {
+      "observationId": "FQ15-3FF0D958178F",
+      "implementation": [
+        {
+          "path": "FamilyQuant/AnalyticsControl.xaml",
+          "symbol": "ComboBoxFamilyTopN.Items",
+          "sha256": "67ADC32B5C4C580890C5895235DF53359F4812AA9F9E9E81E659E2E61C17357D"
+        },
+        {
+          "path": "FamilyQuant/AnalyticsControl.xaml.cs",
+          "symbol": "ComboBoxFamilyTopN.Items",
+          "sha256": "47F92608EBB384F7E3B0C29DE0FF0F0D3E1D15DD8E6D32699A29A0730E5325CD"
+        },
+        {
+          "path": "FamilyQuant/AnalyticsViewModel.cs",
+          "symbol": "ComboBoxFamilyTopN.Items",
+          "sha256": "6E3549DC8E69FCFFE4914D9CF836EA22755264BE6CA0B84A4C1B4F40C425B96D"
+        }
+      ],
+      "proofs": [
+        {
+          "runId": "RS-native-results",
+          "kind": "test",
+          "target": "ResultsPreservationTests",
+          "assertion": "RS FQ15-3FF0D958178F: family limit retains its label All families",
+          "artifact": "D:\\FamilyQuant-data\\out-results\\ledger-ready\\interactions-fixed\\proofs.log",
+          "inspectedBy": ""
+        }
+      ],
+      "note": "Native synthetic Results interaction. Copy improvements are explicitly mapped for independent semantic review. Export refusal proves the required-study guard, not a complete evidence pack.",
+      "kindReceiptId": null,
+      "compared": "ComboBoxItem.Content = All families -\u003E ComboBoxFamilyTopN.Items; RS FQ15-3FF0D958178F: family limit retains its label All families"
+    },
+    {
+      "observationId": "FQ15-44CB7F99655E",
+      "implementation": [
+        {
+          "path": "FamilyQuant/AnalyticsControl.xaml",
+          "symbol": "ExportClicked / AnalyticsViewModel.ExportAsync",
+          "sha256": "67ADC32B5C4C580890C5895235DF53359F4812AA9F9E9E81E659E2E61C17357D"
+        },
+        {
+          "path": "FamilyQuant/AnalyticsControl.xaml.cs",
+          "symbol": "ExportClicked / AnalyticsViewModel.ExportAsync",
+          "sha256": "47F92608EBB384F7E3B0C29DE0FF0F0D3E1D15DD8E6D32699A29A0730E5325CD"
+        },
+        {
+          "path": "FamilyQuant/AnalyticsViewModel.cs",
+          "symbol": "ExportClicked / AnalyticsViewModel.ExportAsync",
+          "sha256": "6E3549DC8E69FCFFE4914D9CF836EA22755264BE6CA0B84A4C1B4F40C425B96D"
+        }
+      ],
+      "proofs": [
+        {
+          "runId": "RS-native-results",
+          "kind": "test",
+          "target": "ResultsPreservationTests",
+          "assertion": "RS FQ15-44CB7F99655E: native Peptides export writes byte-identical output twice through the replacement handler",
+          "artifact": "D:\\FamilyQuant-data\\out-results\\ledger-ready\\interactions-fixed\\proofs.log",
+          "inspectedBy": ""
+        }
+      ],
+      "note": "Native synthetic Results interaction. Copy improvements are explicitly mapped for independent semantic review. Export refusal proves the required-study guard, not a complete evidence pack.",
+      "kindReceiptId": null,
+      "compared": "private void ButtonExportPeptides_Click(object sender, RoutedEventArgs e) -\u003E ExportClicked / AnalyticsViewModel.ExportAsync; RS FQ15-44CB7F99655E: native Peptides export writes byte-identical output twice through the replacement handler"
+    },
+    {
+      "observationId": "FQ15-4A6B08256B3F",
+      "implementation": [
+        {
+          "path": "FamilyQuant/AnalyticsControl.xaml",
+          "symbol": "ComboBoxFamilyTopN / ChartChoiceChanged",
+          "sha256": "67ADC32B5C4C580890C5895235DF53359F4812AA9F9E9E81E659E2E61C17357D"
+        },
+        {
+          "path": "FamilyQuant/AnalyticsControl.xaml.cs",
+          "symbol": "ComboBoxFamilyTopN / ChartChoiceChanged",
+          "sha256": "47F92608EBB384F7E3B0C29DE0FF0F0D3E1D15DD8E6D32699A29A0730E5325CD"
+        },
+        {
+          "path": "FamilyQuant/AnalyticsViewModel.cs",
+          "symbol": "ComboBoxFamilyTopN / ChartChoiceChanged",
+          "sha256": "6E3549DC8E69FCFFE4914D9CF836EA22755264BE6CA0B84A4C1B4F40C425B96D"
+        }
+      ],
+      "proofs": [
+        {
+          "runId": "RS-native-results",
+          "kind": "test",
+          "target": "ResultsPreservationTests",
+          "assertion": "RS FQ15-4A6B08256B3F: family limit 30 can be selected through its native control",
+          "artifact": "D:\\FamilyQuant-data\\out-results\\ledger-ready\\interactions-fixed\\proofs.log",
+          "inspectedBy": ""
+        }
+      ],
+      "note": "Native synthetic Results interaction. Copy improvements are explicitly mapped for independent semantic review. Export refusal proves the required-study guard, not a complete evidence pack.",
+      "kindReceiptId": null,
+      "compared": "ComboBoxItem ComboBoxItem -\u003E ComboBoxFamilyTopN / ChartChoiceChanged; RS FQ15-4A6B08256B3F: family limit 30 can be selected through its native control"
+    },
+    {
+      "observationId": "FQ15-4CC6F55B2F33",
+      "implementation": [
+        {
+          "path": "FamilyQuant/AnalyticsControl.xaml",
+          "symbol": "ExportClicked / AnalyticsViewModel.ExportAsync",
+          "sha256": "67ADC32B5C4C580890C5895235DF53359F4812AA9F9E9E81E659E2E61C17357D"
+        },
+        {
+          "path": "FamilyQuant/AnalyticsControl.xaml.cs",
+          "symbol": "ExportClicked / AnalyticsViewModel.ExportAsync",
+          "sha256": "47F92608EBB384F7E3B0C29DE0FF0F0D3E1D15DD8E6D32699A29A0730E5325CD"
+        },
+        {
+          "path": "FamilyQuant/AnalyticsViewModel.cs",
+          "symbol": "ExportClicked / AnalyticsViewModel.ExportAsync",
+          "sha256": "6E3549DC8E69FCFFE4914D9CF836EA22755264BE6CA0B84A4C1B4F40C425B96D"
+        }
+      ],
+      "proofs": [
+        {
+          "runId": "RS-native-results",
+          "kind": "test",
+          "target": "ResultsPreservationTests",
+          "assertion": "RS FQ15-4CC6F55B2F33: native Summary export writes byte-identical output twice",
+          "artifact": "D:\\FamilyQuant-data\\out-results\\ledger-ready\\interactions-fixed\\proofs.log",
+          "inspectedBy": ""
+        }
+      ],
+      "note": "Native synthetic Results interaction. Copy improvements are explicitly mapped for independent semantic review. Export refusal proves the required-study guard, not a complete evidence pack.",
+      "kindReceiptId": null,
+      "compared": "ButtonExportSummary.Click = ButtonExportSummary_Click -\u003E ExportClicked / AnalyticsViewModel.ExportAsync; RS FQ15-4CC6F55B2F33: native Summary export writes byte-identical output twice"
+    },
+    {
+      "observationId": "FQ15-523631E1F20E",
+      "implementation": [
+        {
+          "path": "FamilyQuant/AnalyticsControl.xaml",
+          "symbol": "ExportClicked / AnalyticsViewModel.ExportAsync",
+          "sha256": "67ADC32B5C4C580890C5895235DF53359F4812AA9F9E9E81E659E2E61C17357D"
+        },
+        {
+          "path": "FamilyQuant/AnalyticsControl.xaml.cs",
+          "symbol": "ExportClicked / AnalyticsViewModel.ExportAsync",
+          "sha256": "47F92608EBB384F7E3B0C29DE0FF0F0D3E1D15DD8E6D32699A29A0730E5325CD"
+        },
+        {
+          "path": "FamilyQuant/AnalyticsViewModel.cs",
+          "symbol": "ExportClicked / AnalyticsViewModel.ExportAsync",
+          "sha256": "6E3549DC8E69FCFFE4914D9CF836EA22755264BE6CA0B84A4C1B4F40C425B96D"
+        }
+      ],
+      "proofs": [
+        {
+          "runId": "RS-native-results",
+          "kind": "test",
+          "target": "ResultsPreservationTests",
+          "assertion": "RS FQ15-523631E1F20E: native Peptides export writes byte-identical output twice",
+          "artifact": "D:\\FamilyQuant-data\\out-results\\ledger-ready\\interactions-fixed\\proofs.log",
+          "inspectedBy": ""
+        }
+      ],
+      "note": "Native synthetic Results interaction. Copy improvements are explicitly mapped for independent semantic review. Export refusal proves the required-study guard, not a complete evidence pack.",
+      "kindReceiptId": null,
+      "compared": "ButtonExportPeptides.Click = ButtonExportPeptides_Click -\u003E ExportClicked / AnalyticsViewModel.ExportAsync; RS FQ15-523631E1F20E: native Peptides export writes byte-identical output twice"
+    },
+    {
+      "observationId": "FQ15-54521B6EF355",
+      "implementation": [
+        {
+          "path": "FamilyQuant/AnalyticsControl.xaml",
+          "symbol": "ComboBoxFamilyTopN / ChartChoiceChanged",
+          "sha256": "67ADC32B5C4C580890C5895235DF53359F4812AA9F9E9E81E659E2E61C17357D"
+        },
+        {
+          "path": "FamilyQuant/AnalyticsControl.xaml.cs",
+          "symbol": "ComboBoxFamilyTopN / ChartChoiceChanged",
+          "sha256": "47F92608EBB384F7E3B0C29DE0FF0F0D3E1D15DD8E6D32699A29A0730E5325CD"
+        },
+        {
+          "path": "FamilyQuant/AnalyticsViewModel.cs",
+          "symbol": "ComboBoxFamilyTopN / ChartChoiceChanged",
+          "sha256": "6E3549DC8E69FCFFE4914D9CF836EA22755264BE6CA0B84A4C1B4F40C425B96D"
+        }
+      ],
+      "proofs": [
+        {
+          "runId": "RS-native-results",
+          "kind": "test",
+          "target": "ResultsPreservationTests",
+          "assertion": "RS FQ15-54521B6EF355: family limit 15 can be selected through its native control",
+          "artifact": "D:\\FamilyQuant-data\\out-results\\ledger-ready\\interactions-fixed\\proofs.log",
+          "inspectedBy": ""
+        }
+      ],
+      "note": "Native synthetic Results interaction. Copy improvements are explicitly mapped for independent semantic review. Export refusal proves the required-study guard, not a complete evidence pack.",
+      "kindReceiptId": null,
+      "compared": "ComboBoxItem ComboBoxItem -\u003E ComboBoxFamilyTopN / ChartChoiceChanged; RS FQ15-54521B6EF355: family limit 15 can be selected through its native control"
+    },
+    {
+      "observationId": "FQ15-59366EF0C808",
+      "implementation": [
+        {
+          "path": "FamilyQuant/AnalyticsControl.xaml",
+          "symbol": "CheckBoxFamilyPercent.ToolTip",
+          "sha256": "67ADC32B5C4C580890C5895235DF53359F4812AA9F9E9E81E659E2E61C17357D"
+        },
+        {
+          "path": "FamilyQuant/AnalyticsControl.xaml.cs",
+          "symbol": "CheckBoxFamilyPercent.ToolTip",
+          "sha256": "47F92608EBB384F7E3B0C29DE0FF0F0D3E1D15DD8E6D32699A29A0730E5325CD"
+        },
+        {
+          "path": "FamilyQuant/AnalyticsViewModel.cs",
+          "symbol": "CheckBoxFamilyPercent.ToolTip",
+          "sha256": "6E3549DC8E69FCFFE4914D9CF836EA22755264BE6CA0B84A4C1B4F40C425B96D"
+        }
+      ],
+      "proofs": [
+        {
+          "runId": "RS-native-results",
+          "kind": "test",
+          "target": "ResultsPreservationTests",
+          "assertion": "RS FQ15-59366EF0C808: retained tooltip: Divide by the measured signal. Count-in-every-family bars can overlap and their percentages must not be summed.",
+          "artifact": "D:\\FamilyQuant-data\\out-results\\ledger-ready\\interactions-fixed\\proofs.log",
+          "inspectedBy": ""
+        }
+      ],
+      "note": "Native synthetic Results interaction. Copy improvements are explicitly mapped for independent semantic review. Export refusal proves the required-study guard, not a complete evidence pack.",
+      "kindReceiptId": null,
+      "compared": "CheckBoxFamilyPercent.ToolTip = Labels each bar with its percent of the total measured signal instead of the raw value. A peptide shared by two families counts in both, so the percents can add up to more than 100%. -\u003E CheckBoxFamilyPercent.ToolTip; RS FQ15-59366EF0C808: retained tooltip: Divide by the measured signal. Count-in-every-family bars can overlap and their percentages must not be summed."
+    },
+    {
+      "observationId": "FQ15-6C182BB4B81F",
+      "implementation": [
+        {
+          "path": "FamilyQuant/AnalyticsControl.xaml",
+          "symbol": "ExportClicked / AnalyticsViewModel.ExportAsync",
+          "sha256": "67ADC32B5C4C580890C5895235DF53359F4812AA9F9E9E81E659E2E61C17357D"
+        },
+        {
+          "path": "FamilyQuant/AnalyticsControl.xaml.cs",
+          "symbol": "ExportClicked / AnalyticsViewModel.ExportAsync",
+          "sha256": "47F92608EBB384F7E3B0C29DE0FF0F0D3E1D15DD8E6D32699A29A0730E5325CD"
+        },
+        {
+          "path": "FamilyQuant/AnalyticsViewModel.cs",
+          "symbol": "ExportClicked / AnalyticsViewModel.ExportAsync",
+          "sha256": "6E3549DC8E69FCFFE4914D9CF836EA22755264BE6CA0B84A4C1B4F40C425B96D"
+        }
+      ],
+      "proofs": [
+        {
+          "runId": "RS-native-results",
+          "kind": "test",
+          "target": "ResultsPreservationTests",
+          "assertion": "RS FQ15-6C182BB4B81F: native Summary export writes byte-identical output twice through the replacement handler",
+          "artifact": "D:\\FamilyQuant-data\\out-results\\ledger-ready\\interactions-fixed\\proofs.log",
+          "inspectedBy": ""
+        }
+      ],
+      "note": "Native synthetic Results interaction. Copy improvements are explicitly mapped for independent semantic review. Export refusal proves the required-study guard, not a complete evidence pack.",
+      "kindReceiptId": null,
+      "compared": "private void ButtonExportSummary_Click(object sender, RoutedEventArgs e) -\u003E ExportClicked / AnalyticsViewModel.ExportAsync; RS FQ15-6C182BB4B81F: native Summary export writes byte-identical output twice through the replacement handler"
+    },
+    {
+      "observationId": "FQ15-6E6228F56C09",
+      "implementation": [
+        {
+          "path": "FamilyQuant/AnalyticsControl.xaml",
+          "symbol": "ComboBoxFamilyTopN.ToolTip",
+          "sha256": "67ADC32B5C4C580890C5895235DF53359F4812AA9F9E9E81E659E2E61C17357D"
+        },
+        {
+          "path": "FamilyQuant/AnalyticsControl.xaml.cs",
+          "symbol": "ComboBoxFamilyTopN.ToolTip",
+          "sha256": "47F92608EBB384F7E3B0C29DE0FF0F0D3E1D15DD8E6D32699A29A0730E5325CD"
+        },
+        {
+          "path": "FamilyQuant/AnalyticsViewModel.cs",
+          "symbol": "ComboBoxFamilyTopN.ToolTip",
+          "sha256": "6E3549DC8E69FCFFE4914D9CF836EA22755264BE6CA0B84A4C1B4F40C425B96D"
+        }
+      ],
+      "proofs": [
+        {
+          "runId": "RS-native-results",
+          "kind": "test",
+          "target": "ResultsPreservationTests",
+          "assertion": "RS FQ15-6E6228F56C09: retained tooltip: Show the largest families and combine every remaining family in one bar.",
+          "artifact": "D:\\FamilyQuant-data\\out-results\\ledger-ready\\interactions-fixed\\proofs.log",
+          "inspectedBy": ""
+        }
+      ],
+      "note": "Native synthetic Results interaction. Copy improvements are explicitly mapped for independent semantic review. Export refusal proves the required-study guard, not a complete evidence pack.",
+      "kindReceiptId": null,
+      "compared": "ComboBoxFamilyTopN.ToolTip = How many families get their own bar in the family chart, largest first. The rest are combined into one \u0022other families\u0022 bar, so no family is left out. -\u003E ComboBoxFamilyTopN.ToolTip; RS FQ15-6E6228F56C09: retained tooltip: Show the largest families and combine every remaining family in one bar."
+    },
+    {
+      "observationId": "FQ15-777E1F0E05BC",
+      "implementation": [
+        {
+          "path": "FamilyQuant/AnalyticsControl.xaml",
+          "symbol": "ComboBoxFamilyTopN.Items",
+          "sha256": "67ADC32B5C4C580890C5895235DF53359F4812AA9F9E9E81E659E2E61C17357D"
+        },
+        {
+          "path": "FamilyQuant/AnalyticsControl.xaml.cs",
+          "symbol": "ComboBoxFamilyTopN.Items",
+          "sha256": "47F92608EBB384F7E3B0C29DE0FF0F0D3E1D15DD8E6D32699A29A0730E5325CD"
+        },
+        {
+          "path": "FamilyQuant/AnalyticsViewModel.cs",
+          "symbol": "ComboBoxFamilyTopN.Items",
+          "sha256": "6E3549DC8E69FCFFE4914D9CF836EA22755264BE6CA0B84A4C1B4F40C425B96D"
+        }
+      ],
+      "proofs": [
+        {
+          "runId": "RS-native-results",
+          "kind": "test",
+          "target": "ResultsPreservationTests",
+          "assertion": "RS FQ15-777E1F0E05BC: family limit retains its label Top 10 families",
+          "artifact": "D:\\FamilyQuant-data\\out-results\\ledger-ready\\interactions-fixed\\proofs.log",
+          "inspectedBy": ""
+        }
+      ],
+      "note": "Native synthetic Results interaction. Copy improvements are explicitly mapped for independent semantic review. Export refusal proves the required-study guard, not a complete evidence pack.",
+      "kindReceiptId": null,
+      "compared": "ComboBoxItem.Content = Top 10 families -\u003E ComboBoxFamilyTopN.Items; RS FQ15-777E1F0E05BC: family limit retains its label Top 10 families"
+    },
+    {
+      "observationId": "FQ15-7EE1B55F5E41",
+      "implementation": [
+        {
+          "path": "FamilyQuant/AnalyticsControl.xaml",
+          "symbol": "ComboBoxExportKind / Summary / ToolTip",
+          "sha256": "67ADC32B5C4C580890C5895235DF53359F4812AA9F9E9E81E659E2E61C17357D"
+        },
+        {
+          "path": "FamilyQuant/AnalyticsControl.xaml.cs",
+          "symbol": "ComboBoxExportKind / Summary / ToolTip",
+          "sha256": "47F92608EBB384F7E3B0C29DE0FF0F0D3E1D15DD8E6D32699A29A0730E5325CD"
+        },
+        {
+          "path": "FamilyQuant/AnalyticsViewModel.cs",
+          "symbol": "ComboBoxExportKind / Summary / ToolTip",
+          "sha256": "6E3549DC8E69FCFFE4914D9CF836EA22755264BE6CA0B84A4C1B4F40C425B96D"
+        }
+      ],
+      "proofs": [
+        {
+          "runId": "RS-native-results",
+          "kind": "test",
+          "target": "ResultsPreservationTests",
+          "assertion": "RS FQ15-7EE1B55F5E41: retained tooltip: Per-run TIC, peptide counts, envelopes and recovery shares in invariant decimal format.",
+          "artifact": "D:\\FamilyQuant-data\\out-results\\ledger-ready\\interactions-fixed\\proofs.log",
+          "inspectedBy": ""
+        }
+      ],
+      "note": "Native synthetic Results interaction. Copy improvements are explicitly mapped for independent semantic review. Export refusal proves the required-study guard, not a complete evidence pack.",
+      "kindReceiptId": null,
+      "compared": "ButtonExportSummary.ToolTip = Saves the per-run summary as a CSV: TIC, identified and de novo peptide counts and envelopes, and the share of the total ion current each recovers. Decimals always use a dot. -\u003E ComboBoxExportKind / Summary / ToolTip; RS FQ15-7EE1B55F5E41: retained tooltip: Per-run TIC, peptide counts, envelopes and recovery shares in invariant decimal format."
+    },
+    {
+      "observationId": "FQ15-7EF21BC4741F",
+      "implementation": [
+        {
+          "path": "FamilyQuant/AnalyticsControl.xaml",
+          "symbol": "ComboBoxFamilyTopN / tag 30 / ToolTip",
+          "sha256": "67ADC32B5C4C580890C5895235DF53359F4812AA9F9E9E81E659E2E61C17357D"
+        },
+        {
+          "path": "FamilyQuant/AnalyticsControl.xaml.cs",
+          "symbol": "ComboBoxFamilyTopN / tag 30 / ToolTip",
+          "sha256": "47F92608EBB384F7E3B0C29DE0FF0F0D3E1D15DD8E6D32699A29A0730E5325CD"
+        },
+        {
+          "path": "FamilyQuant/AnalyticsViewModel.cs",
+          "symbol": "ComboBoxFamilyTopN / tag 30 / ToolTip",
+          "sha256": "6E3549DC8E69FCFFE4914D9CF836EA22755264BE6CA0B84A4C1B4F40C425B96D"
+        }
+      ],
+      "proofs": [
+        {
+          "runId": "RS-native-results",
+          "kind": "test",
+          "target": "ResultsPreservationTests",
+          "assertion": "RS FQ15-7EF21BC4741F: retained tooltip: Thirty families plus one bar for the rest. Labels need more screen space.",
+          "artifact": "D:\\FamilyQuant-data\\out-results\\ledger-ready\\interactions-fixed\\proofs.log",
+          "inspectedBy": ""
+        }
+      ],
+      "note": "Native synthetic Results interaction. Copy improvements are explicitly mapped for independent semantic review. Export refusal proves the required-study guard, not a complete evidence pack.",
+      "kindReceiptId": null,
+      "compared": "ComboBoxItem.ToolTip = Thirty bars plus one bar for the rest. Bars get thin on a projector. -\u003E ComboBoxFamilyTopN / tag 30 / ToolTip; RS FQ15-7EF21BC4741F: retained tooltip: Thirty families plus one bar for the rest. Labels need more screen space."
+    },
+    {
+      "observationId": "FQ15-803482A42F63",
+      "implementation": [
+        {
+          "path": "FamilyQuant/AnalyticsControl.xaml",
+          "symbol": "ComboBoxFamilyTopN / tag 10 / ToolTip",
+          "sha256": "67ADC32B5C4C580890C5895235DF53359F4812AA9F9E9E81E659E2E61C17357D"
+        },
+        {
+          "path": "FamilyQuant/AnalyticsControl.xaml.cs",
+          "symbol": "ComboBoxFamilyTopN / tag 10 / ToolTip",
+          "sha256": "47F92608EBB384F7E3B0C29DE0FF0F0D3E1D15DD8E6D32699A29A0730E5325CD"
+        },
+        {
+          "path": "FamilyQuant/AnalyticsViewModel.cs",
+          "symbol": "ComboBoxFamilyTopN / tag 10 / ToolTip",
+          "sha256": "6E3549DC8E69FCFFE4914D9CF836EA22755264BE6CA0B84A4C1B4F40C425B96D"
+        }
+      ],
+      "proofs": [
+        {
+          "runId": "RS-native-results",
+          "kind": "test",
+          "target": "ResultsPreservationTests",
+          "assertion": "RS FQ15-803482A42F63: retained tooltip: Ten families plus one bar for the rest. Suits presentation slides.",
+          "artifact": "D:\\FamilyQuant-data\\out-results\\ledger-ready\\interactions-fixed\\proofs.log",
+          "inspectedBy": ""
+        }
+      ],
+      "note": "Native synthetic Results interaction. Copy improvements are explicitly mapped for independent semantic review. Export refusal proves the required-study guard, not a complete evidence pack.",
+      "kindReceiptId": null,
+      "compared": "ComboBoxItem.ToolTip = Ten bars plus one bar for the rest. Best for a slide seen from the back of a room. -\u003E ComboBoxFamilyTopN / tag 10 / ToolTip; RS FQ15-803482A42F63: retained tooltip: Ten families plus one bar for the rest. Suits presentation slides."
+    },
+    {
+      "observationId": "FQ15-8F08DA795CB5",
+      "implementation": [
+        {
+          "path": "FamilyQuant/AnalyticsControl.xaml",
+          "symbol": "ComboBoxExportKind / ButtonExport / ExportChoiceChanged",
+          "sha256": "67ADC32B5C4C580890C5895235DF53359F4812AA9F9E9E81E659E2E61C17357D"
+        },
+        {
+          "path": "FamilyQuant/AnalyticsControl.xaml.cs",
+          "symbol": "ComboBoxExportKind / ButtonExport / ExportChoiceChanged",
+          "sha256": "47F92608EBB384F7E3B0C29DE0FF0F0D3E1D15DD8E6D32699A29A0730E5325CD"
+        },
+        {
+          "path": "FamilyQuant/AnalyticsViewModel.cs",
+          "symbol": "ComboBoxExportKind / ButtonExport / ExportChoiceChanged",
+          "sha256": "6E3549DC8E69FCFFE4914D9CF836EA22755264BE6CA0B84A4C1B4F40C425B96D"
+        }
+      ],
+      "proofs": [
+        {
+          "runId": "RS-native-results",
+          "kind": "test",
+          "target": "ResultsPreservationTests",
+          "assertion": "RS FQ15-8F08DA795CB5: Figures export remains selectable and enabled",
+          "artifact": "D:\\FamilyQuant-data\\out-results\\ledger-ready\\interactions-fixed\\proofs.log",
+          "inspectedBy": ""
+        }
+      ],
+      "note": "Native synthetic Results interaction. Copy improvements are explicitly mapped for independent semantic review. Export refusal proves the required-study guard, not a complete evidence pack.",
+      "kindReceiptId": null,
+      "compared": "Button ButtonSaveFigures -\u003E ComboBoxExportKind / ButtonExport / ExportChoiceChanged; RS FQ15-8F08DA795CB5: Figures export remains selectable and enabled"
+    },
+    {
+      "observationId": "FQ15-905C4A500397",
+      "implementation": [
+        {
+          "path": "FamilyQuant/AnalyticsControl.xaml",
+          "symbol": "ComboBoxFamilyTopN / ChartChoiceChanged",
+          "sha256": "67ADC32B5C4C580890C5895235DF53359F4812AA9F9E9E81E659E2E61C17357D"
+        },
+        {
+          "path": "FamilyQuant/AnalyticsControl.xaml.cs",
+          "symbol": "ComboBoxFamilyTopN / ChartChoiceChanged",
+          "sha256": "47F92608EBB384F7E3B0C29DE0FF0F0D3E1D15DD8E6D32699A29A0730E5325CD"
+        },
+        {
+          "path": "FamilyQuant/AnalyticsViewModel.cs",
+          "symbol": "ComboBoxFamilyTopN / ChartChoiceChanged",
+          "sha256": "6E3549DC8E69FCFFE4914D9CF836EA22755264BE6CA0B84A4C1B4F40C425B96D"
+        }
+      ],
+      "proofs": [
+        {
+          "runId": "RS-native-results",
+          "kind": "test",
+          "target": "ResultsPreservationTests",
+          "assertion": "RS FQ15-905C4A500397: family limit 0 can be selected through its native control",
+          "artifact": "D:\\FamilyQuant-data\\out-results\\ledger-ready\\interactions-fixed\\proofs.log",
+          "inspectedBy": ""
+        }
+      ],
+      "note": "Native synthetic Results interaction. Copy improvements are explicitly mapped for independent semantic review. Export refusal proves the required-study guard, not a complete evidence pack.",
+      "kindReceiptId": null,
+      "compared": "ComboBoxItem ComboBoxItem -\u003E ComboBoxFamilyTopN / ChartChoiceChanged; RS FQ15-905C4A500397: family limit 0 can be selected through its native control"
+    },
+    {
+      "observationId": "FQ15-9AB13C0AE2A4",
+      "implementation": [
+        {
+          "path": "FamilyQuant/AnalyticsControl.xaml",
+          "symbol": "ExportClicked / AnalyticsViewModel.ExportAsync",
+          "sha256": "67ADC32B5C4C580890C5895235DF53359F4812AA9F9E9E81E659E2E61C17357D"
+        },
+        {
+          "path": "FamilyQuant/AnalyticsControl.xaml.cs",
+          "symbol": "ExportClicked / AnalyticsViewModel.ExportAsync",
+          "sha256": "47F92608EBB384F7E3B0C29DE0FF0F0D3E1D15DD8E6D32699A29A0730E5325CD"
+        },
+        {
+          "path": "FamilyQuant/AnalyticsViewModel.cs",
+          "symbol": "ExportClicked / AnalyticsViewModel.ExportAsync",
+          "sha256": "6E3549DC8E69FCFFE4914D9CF836EA22755264BE6CA0B84A4C1B4F40C425B96D"
+        }
+      ],
+      "proofs": [
+        {
+          "runId": "RS-native-results",
+          "kind": "test",
+          "target": "ResultsPreservationTests",
+          "assertion": "RS FQ15-9AB13C0AE2A4: native Figures export writes byte-identical output twice",
+          "artifact": "D:\\FamilyQuant-data\\out-results\\ledger-ready\\interactions-fixed\\proofs.log",
+          "inspectedBy": ""
+        }
+      ],
+      "note": "Native synthetic Results interaction. Copy improvements are explicitly mapped for independent semantic review. Export refusal proves the required-study guard, not a complete evidence pack.",
+      "kindReceiptId": null,
+      "compared": "ButtonSaveFigures.Click = ButtonSaveFigures_Click -\u003E ExportClicked / AnalyticsViewModel.ExportAsync; RS FQ15-9AB13C0AE2A4: native Figures export writes byte-identical output twice"
+    },
+    {
+      "observationId": "FQ15-9D6165ED150A",
+      "implementation": [
+        {
+          "path": "FamilyQuant/AnalyticsControl.xaml",
+          "symbol": "ComboBoxExportKind / Figures / Content",
+          "sha256": "67ADC32B5C4C580890C5895235DF53359F4812AA9F9E9E81E659E2E61C17357D"
+        },
+        {
+          "path": "FamilyQuant/AnalyticsControl.xaml.cs",
+          "symbol": "ComboBoxExportKind / Figures / Content",
+          "sha256": "47F92608EBB384F7E3B0C29DE0FF0F0D3E1D15DD8E6D32699A29A0730E5325CD"
+        },
+        {
+          "path": "FamilyQuant/AnalyticsViewModel.cs",
+          "symbol": "ComboBoxExportKind / Figures / Content",
+          "sha256": "6E3549DC8E69FCFFE4914D9CF836EA22755264BE6CA0B84A4C1B4F40C425B96D"
+        }
+      ],
+      "proofs": [
+        {
+          "runId": "RS-native-results",
+          "kind": "test",
+          "target": "ResultsPreservationTests",
+          "assertion": "RS FQ15-9D6165ED150A: export label retained as Screen figures (PNG)",
+          "artifact": "D:\\FamilyQuant-data\\out-results\\ledger-ready\\interactions-fixed\\proofs.log",
+          "inspectedBy": ""
+        }
+      ],
+      "note": "Native synthetic Results interaction. Copy improvements are explicitly mapped for independent semantic review. Export refusal proves the required-study guard, not a complete evidence pack.",
+      "kindReceiptId": null,
+      "compared": "ButtonSaveFigures.Content = Save figures (PNG) -\u003E ComboBoxExportKind / Figures / Content; RS FQ15-9D6165ED150A: export label retained as Screen figures (PNG)"
+    },
+    {
+      "observationId": "FQ15-9DEFC5CA51C6",
+      "implementation": [
+        {
+          "path": "FamilyQuant/AnalyticsControl.xaml",
+          "symbol": "ComboBoxExportKind / ButtonExport / ExportChoiceChanged",
+          "sha256": "67ADC32B5C4C580890C5895235DF53359F4812AA9F9E9E81E659E2E61C17357D"
+        },
+        {
+          "path": "FamilyQuant/AnalyticsControl.xaml.cs",
+          "symbol": "ComboBoxExportKind / ButtonExport / ExportChoiceChanged",
+          "sha256": "47F92608EBB384F7E3B0C29DE0FF0F0D3E1D15DD8E6D32699A29A0730E5325CD"
+        },
+        {
+          "path": "FamilyQuant/AnalyticsViewModel.cs",
+          "symbol": "ComboBoxExportKind / ButtonExport / ExportChoiceChanged",
+          "sha256": "6E3549DC8E69FCFFE4914D9CF836EA22755264BE6CA0B84A4C1B4F40C425B96D"
+        }
+      ],
+      "proofs": [
+        {
+          "runId": "RS-native-results",
+          "kind": "test",
+          "target": "ResultsPreservationTests",
+          "assertion": "RS FQ15-9DEFC5CA51C6: Summary export remains selectable and enabled",
+          "artifact": "D:\\FamilyQuant-data\\out-results\\ledger-ready\\interactions-fixed\\proofs.log",
+          "inspectedBy": ""
+        }
+      ],
+      "note": "Native synthetic Results interaction. Copy improvements are explicitly mapped for independent semantic review. Export refusal proves the required-study guard, not a complete evidence pack.",
+      "kindReceiptId": null,
+      "compared": "Button ButtonExportSummary -\u003E ComboBoxExportKind / ButtonExport / ExportChoiceChanged; RS FQ15-9DEFC5CA51C6: Summary export remains selectable and enabled"
+    },
+    {
+      "observationId": "FQ15-9F0785257B19",
+      "implementation": [
+        {
+          "path": "FamilyQuant/AnalyticsControl.xaml",
+          "symbol": "ComboBoxExportKind / EvidencePack / ToolTip",
+          "sha256": "67ADC32B5C4C580890C5895235DF53359F4812AA9F9E9E81E659E2E61C17357D"
+        },
+        {
+          "path": "FamilyQuant/AnalyticsControl.xaml.cs",
+          "symbol": "ComboBoxExportKind / EvidencePack / ToolTip",
+          "sha256": "47F92608EBB384F7E3B0C29DE0FF0F0D3E1D15DD8E6D32699A29A0730E5325CD"
+        },
+        {
+          "path": "FamilyQuant/AnalyticsViewModel.cs",
+          "symbol": "ComboBoxExportKind / EvidencePack / ToolTip",
+          "sha256": "6E3549DC8E69FCFFE4914D9CF836EA22755264BE6CA0B84A4C1B4F40C425B96D"
+        }
+      ],
+      "proofs": [
+        {
+          "runId": "RS-native-results",
+          "kind": "test",
+          "target": "ResultsPreservationTests",
+          "assertion": "RS FQ15-9F0785257B19: retained tooltip: Complete figures, exact CSV and JSON numbers and cutoff README. Required studies must be present.",
+          "artifact": "D:\\FamilyQuant-data\\out-results\\ledger-ready\\interactions-fixed\\proofs.log",
+          "inspectedBy": ""
+        }
+      ],
+      "note": "Native synthetic Results interaction. Copy improvements are explicitly mapped for independent semantic review. Export refusal proves the required-study guard, not a complete evidence pack.",
+      "kindReceiptId": null,
+      "compared": "ButtonSavePresentationFigures.ToolTip = Saves the full presentation package: every figure at 1920\u00D71080, the exact numbers behind each (CSV and JSON) and a README of the cutoffs used. If a required study is missing it writes nothing and names it. -\u003E ComboBoxExportKind / EvidencePack / ToolTip; RS FQ15-9F0785257B19: retained tooltip: Complete figures, exact CSV and JSON numbers and cutoff README. Required studies must be present."
+    },
+    {
+      "observationId": "FQ15-A338D170136B",
+      "implementation": [
+        {
+          "path": "FamilyQuant/AnalyticsControl.xaml",
+          "symbol": "ChartChoiceChanged",
+          "sha256": "67ADC32B5C4C580890C5895235DF53359F4812AA9F9E9E81E659E2E61C17357D"
+        },
+        {
+          "path": "FamilyQuant/AnalyticsControl.xaml.cs",
+          "symbol": "ChartChoiceChanged",
+          "sha256": "47F92608EBB384F7E3B0C29DE0FF0F0D3E1D15DD8E6D32699A29A0730E5325CD"
+        },
+        {
+          "path": "FamilyQuant/AnalyticsViewModel.cs",
+          "symbol": "ChartChoiceChanged",
+          "sha256": "6E3549DC8E69FCFFE4914D9CF836EA22755264BE6CA0B84A4C1B4F40C425B96D"
+        }
+      ],
+      "proofs": [
+        {
+          "runId": "RS-native-results",
+          "kind": "test",
+          "target": "ResultsPreservationTests",
+          "assertion": "RS FQ15-A338D170136B: Checked event switches the displayed chart to measured-signal percentages",
+          "artifact": "D:\\FamilyQuant-data\\out-results\\ledger-ready\\interactions-fixed\\proofs.log",
+          "inspectedBy": ""
+        }
+      ],
+      "note": "Native synthetic Results interaction. Copy improvements are explicitly mapped for independent semantic review. Export refusal proves the required-study guard, not a complete evidence pack.",
+      "kindReceiptId": null,
+      "compared": "CheckBoxFamilyPercent.Checked = CheckBoxFamilyPercent_Changed -\u003E ChartChoiceChanged; RS FQ15-A338D170136B: Checked event switches the displayed chart to measured-signal percentages"
+    },
+    {
+      "observationId": "FQ15-A376C13A408D",
+      "implementation": [
+        {
+          "path": "FamilyQuant/AnalyticsControl.xaml",
+          "symbol": "ComboBoxFamilyTopN / ChartChoiceChanged",
+          "sha256": "67ADC32B5C4C580890C5895235DF53359F4812AA9F9E9E81E659E2E61C17357D"
+        },
+        {
+          "path": "FamilyQuant/AnalyticsControl.xaml.cs",
+          "symbol": "ComboBoxFamilyTopN / ChartChoiceChanged",
+          "sha256": "47F92608EBB384F7E3B0C29DE0FF0F0D3E1D15DD8E6D32699A29A0730E5325CD"
+        },
+        {
+          "path": "FamilyQuant/AnalyticsViewModel.cs",
+          "symbol": "ComboBoxFamilyTopN / ChartChoiceChanged",
+          "sha256": "6E3549DC8E69FCFFE4914D9CF836EA22755264BE6CA0B84A4C1B4F40C425B96D"
+        }
+      ],
+      "proofs": [
+        {
+          "runId": "RS-native-results",
+          "kind": "test",
+          "target": "ResultsPreservationTests",
+          "assertion": "RS FQ15-A376C13A408D: family limit 20 can be selected through its native control",
+          "artifact": "D:\\FamilyQuant-data\\out-results\\ledger-ready\\interactions-fixed\\proofs.log",
+          "inspectedBy": ""
+        }
+      ],
+      "note": "Native synthetic Results interaction. Copy improvements are explicitly mapped for independent semantic review. Export refusal proves the required-study guard, not a complete evidence pack.",
+      "kindReceiptId": null,
+      "compared": "ComboBoxItem ComboBoxItem -\u003E ComboBoxFamilyTopN / ChartChoiceChanged; RS FQ15-A376C13A408D: family limit 20 can be selected through its native control"
+    },
+    {
+      "observationId": "FQ15-B81F95D7A694",
+      "implementation": [
+        {
+          "path": "FamilyQuant/AnalyticsControl.xaml",
+          "symbol": "ComboBoxFamilyTopN.Items",
+          "sha256": "67ADC32B5C4C580890C5895235DF53359F4812AA9F9E9E81E659E2E61C17357D"
+        },
+        {
+          "path": "FamilyQuant/AnalyticsControl.xaml.cs",
+          "symbol": "ComboBoxFamilyTopN.Items",
+          "sha256": "47F92608EBB384F7E3B0C29DE0FF0F0D3E1D15DD8E6D32699A29A0730E5325CD"
+        },
+        {
+          "path": "FamilyQuant/AnalyticsViewModel.cs",
+          "symbol": "ComboBoxFamilyTopN.Items",
+          "sha256": "6E3549DC8E69FCFFE4914D9CF836EA22755264BE6CA0B84A4C1B4F40C425B96D"
+        }
+      ],
+      "proofs": [
+        {
+          "runId": "RS-native-results",
+          "kind": "test",
+          "target": "ResultsPreservationTests",
+          "assertion": "RS FQ15-B81F95D7A694: family limit retains its label Top 15 families",
+          "artifact": "D:\\FamilyQuant-data\\out-results\\ledger-ready\\interactions-fixed\\proofs.log",
+          "inspectedBy": ""
+        }
+      ],
+      "note": "Native synthetic Results interaction. Copy improvements are explicitly mapped for independent semantic review. Export refusal proves the required-study guard, not a complete evidence pack.",
+      "kindReceiptId": null,
+      "compared": "ComboBoxItem.Content = Top 15 families -\u003E ComboBoxFamilyTopN.Items; RS FQ15-B81F95D7A694: family limit retains its label Top 15 families"
+    },
+    {
+      "observationId": "FQ15-C213AEB5CD1C",
+      "implementation": [
+        {
+          "path": "FamilyQuant/AnalyticsControl.xaml",
+          "symbol": "ChartChoiceChanged",
+          "sha256": "67ADC32B5C4C580890C5895235DF53359F4812AA9F9E9E81E659E2E61C17357D"
+        },
+        {
+          "path": "FamilyQuant/AnalyticsControl.xaml.cs",
+          "symbol": "ChartChoiceChanged",
+          "sha256": "47F92608EBB384F7E3B0C29DE0FF0F0D3E1D15DD8E6D32699A29A0730E5325CD"
+        },
+        {
+          "path": "FamilyQuant/AnalyticsViewModel.cs",
+          "symbol": "ChartChoiceChanged",
+          "sha256": "6E3549DC8E69FCFFE4914D9CF836EA22755264BE6CA0B84A4C1B4F40C425B96D"
+        }
+      ],
+      "proofs": [
+        {
+          "runId": "RS-native-results",
+          "kind": "test",
+          "target": "ResultsPreservationTests",
+          "assertion": "RS FQ15-C213AEB5CD1C: Unchecked event restores the envelope chart",
+          "artifact": "D:\\FamilyQuant-data\\out-results\\ledger-ready\\interactions-fixed\\proofs.log",
+          "inspectedBy": ""
+        }
+      ],
+      "note": "Native synthetic Results interaction. Copy improvements are explicitly mapped for independent semantic review. Export refusal proves the required-study guard, not a complete evidence pack.",
+      "kindReceiptId": null,
+      "compared": "CheckBoxFamilyPercent.Unchecked = CheckBoxFamilyPercent_Changed -\u003E ChartChoiceChanged; RS FQ15-C213AEB5CD1C: Unchecked event restores the envelope chart"
+    },
+    {
+      "observationId": "FQ15-C571D9176653",
+      "implementation": [
+        {
+          "path": "FamilyQuant/AnalyticsControl.xaml",
+          "symbol": "ComboBoxExportKind / ButtonExport / ExportChoiceChanged",
+          "sha256": "67ADC32B5C4C580890C5895235DF53359F4812AA9F9E9E81E659E2E61C17357D"
+        },
+        {
+          "path": "FamilyQuant/AnalyticsControl.xaml.cs",
+          "symbol": "ComboBoxExportKind / ButtonExport / ExportChoiceChanged",
+          "sha256": "47F92608EBB384F7E3B0C29DE0FF0F0D3E1D15DD8E6D32699A29A0730E5325CD"
+        },
+        {
+          "path": "FamilyQuant/AnalyticsViewModel.cs",
+          "symbol": "ComboBoxExportKind / ButtonExport / ExportChoiceChanged",
+          "sha256": "6E3549DC8E69FCFFE4914D9CF836EA22755264BE6CA0B84A4C1B4F40C425B96D"
+        }
+      ],
+      "proofs": [
+        {
+          "runId": "RS-native-results",
+          "kind": "test",
+          "target": "ResultsPreservationTests",
+          "assertion": "RS FQ15-C571D9176653: EvidencePack export remains selectable and enabled",
+          "artifact": "D:\\FamilyQuant-data\\out-results\\ledger-ready\\interactions-fixed\\proofs.log",
+          "inspectedBy": ""
+        }
+      ],
+      "note": "Native synthetic Results interaction. Copy improvements are explicitly mapped for independent semantic review. Export refusal proves the required-study guard, not a complete evidence pack.",
+      "kindReceiptId": null,
+      "compared": "Button ButtonSavePresentationFigures -\u003E ComboBoxExportKind / ButtonExport / ExportChoiceChanged; RS FQ15-C571D9176653: EvidencePack export remains selectable and enabled"
+    },
+    {
+      "observationId": "FQ15-C7B652959EE3",
+      "implementation": [
+        {
+          "path": "FamilyQuant/AnalyticsControl.xaml",
+          "symbol": "ComboBoxExportKind / Summary / Content",
+          "sha256": "67ADC32B5C4C580890C5895235DF53359F4812AA9F9E9E81E659E2E61C17357D"
+        },
+        {
+          "path": "FamilyQuant/AnalyticsControl.xaml.cs",
+          "symbol": "ComboBoxExportKind / Summary / Content",
+          "sha256": "47F92608EBB384F7E3B0C29DE0FF0F0D3E1D15DD8E6D32699A29A0730E5325CD"
+        },
+        {
+          "path": "FamilyQuant/AnalyticsViewModel.cs",
+          "symbol": "ComboBoxExportKind / Summary / Content",
+          "sha256": "6E3549DC8E69FCFFE4914D9CF836EA22755264BE6CA0B84A4C1B4F40C425B96D"
+        }
+      ],
+      "proofs": [
+        {
+          "runId": "RS-native-results",
+          "kind": "test",
+          "target": "ResultsPreservationTests",
+          "assertion": "RS FQ15-C7B652959EE3: export label retained as Run summary (CSV)",
+          "artifact": "D:\\FamilyQuant-data\\out-results\\ledger-ready\\interactions-fixed\\proofs.log",
+          "inspectedBy": ""
+        }
+      ],
+      "note": "Native synthetic Results interaction. Copy improvements are explicitly mapped for independent semantic review. Export refusal proves the required-study guard, not a complete evidence pack.",
+      "kindReceiptId": null,
+      "compared": "ButtonExportSummary.Content = Export summary (CSV) -\u003E ComboBoxExportKind / Summary / Content; RS FQ15-C7B652959EE3: export label retained as Run summary (CSV)"
+    },
+    {
+      "observationId": "FQ15-C7CC0C2ABDF0",
+      "implementation": [
+        {
+          "path": "FamilyQuant/AnalyticsControl.xaml",
+          "symbol": "ExportClicked / AnalyticsViewModel.ExportAsync",
+          "sha256": "67ADC32B5C4C580890C5895235DF53359F4812AA9F9E9E81E659E2E61C17357D"
+        },
+        {
+          "path": "FamilyQuant/AnalyticsControl.xaml.cs",
+          "symbol": "ExportClicked / AnalyticsViewModel.ExportAsync",
+          "sha256": "47F92608EBB384F7E3B0C29DE0FF0F0D3E1D15DD8E6D32699A29A0730E5325CD"
+        },
+        {
+          "path": "FamilyQuant/AnalyticsViewModel.cs",
+          "symbol": "ExportClicked / AnalyticsViewModel.ExportAsync",
+          "sha256": "6E3549DC8E69FCFFE4914D9CF836EA22755264BE6CA0B84A4C1B4F40C425B96D"
+        }
+      ],
+      "proofs": [
+        {
+          "runId": "RS-native-results",
+          "kind": "test",
+          "target": "ResultsPreservationTests",
+          "assertion": "RS FQ15-C7CC0C2ABDF0: native Figures export writes byte-identical output twice through the replacement handler",
+          "artifact": "D:\\FamilyQuant-data\\out-results\\ledger-ready\\interactions-fixed\\proofs.log",
+          "inspectedBy": ""
+        }
+      ],
+      "note": "Native synthetic Results interaction. Copy improvements are explicitly mapped for independent semantic review. Export refusal proves the required-study guard, not a complete evidence pack.",
+      "kindReceiptId": null,
+      "compared": "private void ButtonSaveFigures_Click(object sender, RoutedEventArgs e) -\u003E ExportClicked / AnalyticsViewModel.ExportAsync; RS FQ15-C7CC0C2ABDF0: native Figures export writes byte-identical output twice through the replacement handler"
+    },
+    {
+      "observationId": "FQ15-C968838F81DD",
+      "implementation": [
+        {
+          "path": "FamilyQuant/AnalyticsControl.xaml",
+          "symbol": "ChartChoiceChanged",
+          "sha256": "67ADC32B5C4C580890C5895235DF53359F4812AA9F9E9E81E659E2E61C17357D"
+        },
+        {
+          "path": "FamilyQuant/AnalyticsControl.xaml.cs",
+          "symbol": "ChartChoiceChanged",
+          "sha256": "47F92608EBB384F7E3B0C29DE0FF0F0D3E1D15DD8E6D32699A29A0730E5325CD"
+        },
+        {
+          "path": "FamilyQuant/AnalyticsViewModel.cs",
+          "symbol": "ChartChoiceChanged",
+          "sha256": "6E3549DC8E69FCFFE4914D9CF836EA22755264BE6CA0B84A4C1B4F40C425B96D"
+        }
+      ],
+      "proofs": [
+        {
+          "runId": "RS-native-results",
+          "kind": "test",
+          "target": "ResultsPreservationTests",
+          "assertion": "RS FQ15-C968838F81DD: percent handler replacement applies checked and unchecked choices",
+          "artifact": "D:\\FamilyQuant-data\\out-results\\ledger-ready\\interactions-fixed\\proofs.log",
+          "inspectedBy": ""
+        }
+      ],
+      "note": "Native synthetic Results interaction. Copy improvements are explicitly mapped for independent semantic review. Export refusal proves the required-study guard, not a complete evidence pack.",
+      "kindReceiptId": null,
+      "compared": "private void CheckBoxFamilyPercent_Changed(object sender, RoutedEventArgs e) -\u003E ChartChoiceChanged; RS FQ15-C968838F81DD: percent handler replacement applies checked and unchecked choices"
+    },
+    {
+      "observationId": "FQ15-CA12594472E1",
+      "implementation": [
+        {
+          "path": "FamilyQuant/AnalyticsControl.xaml",
+          "symbol": "ComboBoxFamilyTopN / tag 20 / ToolTip",
+          "sha256": "67ADC32B5C4C580890C5895235DF53359F4812AA9F9E9E81E659E2E61C17357D"
+        },
+        {
+          "path": "FamilyQuant/AnalyticsControl.xaml.cs",
+          "symbol": "ComboBoxFamilyTopN / tag 20 / ToolTip",
+          "sha256": "47F92608EBB384F7E3B0C29DE0FF0F0D3E1D15DD8E6D32699A29A0730E5325CD"
+        },
+        {
+          "path": "FamilyQuant/AnalyticsViewModel.cs",
+          "symbol": "ComboBoxFamilyTopN / tag 20 / ToolTip",
+          "sha256": "6E3549DC8E69FCFFE4914D9CF836EA22755264BE6CA0B84A4C1B4F40C425B96D"
+        }
+      ],
+      "proofs": [
+        {
+          "runId": "RS-native-results",
+          "kind": "test",
+          "target": "ResultsPreservationTests",
+          "assertion": "RS FQ15-CA12594472E1: retained tooltip: Twenty families plus one bar for the rest. Suits a paper figure.",
+          "artifact": "D:\\FamilyQuant-data\\out-results\\ledger-ready\\interactions-fixed\\proofs.log",
+          "inspectedBy": ""
+        }
+      ],
+      "note": "Native synthetic Results interaction. Copy improvements are explicitly mapped for independent semantic review. Export refusal proves the required-study guard, not a complete evidence pack.",
+      "kindReceiptId": null,
+      "compared": "ComboBoxItem.ToolTip = Twenty bars plus one bar for the rest, for a figure read on paper. -\u003E ComboBoxFamilyTopN / tag 20 / ToolTip; RS FQ15-CA12594472E1: retained tooltip: Twenty families plus one bar for the rest. Suits a paper figure."
+    },
+    {
+      "observationId": "FQ15-D56E685BBF02",
+      "implementation": [
+        {
+          "path": "FamilyQuant/AnalyticsControl.xaml",
+          "symbol": "ExportClicked / AnalyticsViewModel.ExportAsync",
+          "sha256": "67ADC32B5C4C580890C5895235DF53359F4812AA9F9E9E81E659E2E61C17357D"
+        },
+        {
+          "path": "FamilyQuant/AnalyticsControl.xaml.cs",
+          "symbol": "ExportClicked / AnalyticsViewModel.ExportAsync",
+          "sha256": "47F92608EBB384F7E3B0C29DE0FF0F0D3E1D15DD8E6D32699A29A0730E5325CD"
+        },
+        {
+          "path": "FamilyQuant/AnalyticsViewModel.cs",
+          "symbol": "ExportClicked / AnalyticsViewModel.ExportAsync",
+          "sha256": "6E3549DC8E69FCFFE4914D9CF836EA22755264BE6CA0B84A4C1B4F40C425B96D"
+        }
+      ],
+      "proofs": [
+        {
+          "runId": "RS-native-results",
+          "kind": "test",
+          "target": "ResultsPreservationTests",
+          "assertion": "RS FQ15-D56E685BBF02: native evidence-pack route refuses missing required studies and publishes no folder",
+          "artifact": "D:\\FamilyQuant-data\\out-results\\ledger-ready\\interactions-fixed\\proofs.log",
+          "inspectedBy": ""
+        }
+      ],
+      "note": "Native synthetic Results interaction. Copy improvements are explicitly mapped for independent semantic review. Export refusal proves the required-study guard, not a complete evidence pack.",
+      "kindReceiptId": null,
+      "compared": "ButtonSavePresentationFigures.Click = ButtonSavePresentationFigures_Click -\u003E ExportClicked / AnalyticsViewModel.ExportAsync; RS FQ15-D56E685BBF02: native evidence-pack route refuses missing required studies and publishes no folder"
+    },
+    {
+      "observationId": "FQ15-DF754B3A82A5",
+      "implementation": [
+        {
+          "path": "FamilyQuant/AnalyticsControl.xaml",
+          "symbol": "ChartChoiceChanged",
+          "sha256": "67ADC32B5C4C580890C5895235DF53359F4812AA9F9E9E81E659E2E61C17357D"
+        },
+        {
+          "path": "FamilyQuant/AnalyticsControl.xaml.cs",
+          "symbol": "ChartChoiceChanged",
+          "sha256": "47F92608EBB384F7E3B0C29DE0FF0F0D3E1D15DD8E6D32699A29A0730E5325CD"
+        },
+        {
+          "path": "FamilyQuant/AnalyticsViewModel.cs",
+          "symbol": "ChartChoiceChanged",
+          "sha256": "6E3549DC8E69FCFFE4914D9CF836EA22755264BE6CA0B84A4C1B4F40C425B96D"
+        }
+      ],
+      "proofs": [
+        {
+          "runId": "RS-native-results",
+          "kind": "test",
+          "target": "ResultsPreservationTests",
+          "assertion": "RS FQ15-DF754B3A82A5: selection event applies all five family limits",
+          "artifact": "D:\\FamilyQuant-data\\out-results\\ledger-ready\\interactions-fixed\\proofs.log",
+          "inspectedBy": ""
+        }
+      ],
+      "note": "Native synthetic Results interaction. Copy improvements are explicitly mapped for independent semantic review. Export refusal proves the required-study guard, not a complete evidence pack.",
+      "kindReceiptId": null,
+      "compared": "ComboBoxFamilyTopN.SelectionChanged = ComboBoxFamilyTopN_SelectionChanged -\u003E ChartChoiceChanged; RS FQ15-DF754B3A82A5: selection event applies all five family limits"
+    },
+    {
+      "observationId": "FQ15-E25869E2C149",
+      "implementation": [
+        {
+          "path": "FamilyQuant/AnalyticsControl.xaml",
+          "symbol": "CheckBoxFamilyPercent.Content",
+          "sha256": "67ADC32B5C4C580890C5895235DF53359F4812AA9F9E9E81E659E2E61C17357D"
+        },
+        {
+          "path": "FamilyQuant/AnalyticsControl.xaml.cs",
+          "symbol": "CheckBoxFamilyPercent.Content",
+          "sha256": "47F92608EBB384F7E3B0C29DE0FF0F0D3E1D15DD8E6D32699A29A0730E5325CD"
+        },
+        {
+          "path": "FamilyQuant/AnalyticsViewModel.cs",
+          "symbol": "CheckBoxFamilyPercent.Content",
+          "sha256": "6E3549DC8E69FCFFE4914D9CF836EA22755264BE6CA0B84A4C1B4F40C425B96D"
+        }
+      ],
+      "proofs": [
+        {
+          "runId": "RS-native-results",
+          "kind": "test",
+          "target": "ResultsPreservationTests",
+          "assertion": "RS FQ15-E25869E2C149: percent label names the measured signal",
+          "artifact": "D:\\FamilyQuant-data\\out-results\\ledger-ready\\interactions-fixed\\proofs.log",
+          "inspectedBy": ""
+        }
+      ],
+      "note": "Native synthetic Results interaction. Copy improvements are explicitly mapped for independent semantic review. Export refusal proves the required-study guard, not a complete evidence pack.",
+      "kindReceiptId": null,
+      "compared": "CheckBoxFamilyPercent.Content = label as percent of total -\u003E CheckBoxFamilyPercent.Content; RS FQ15-E25869E2C149: percent label names the measured signal"
+    },
+    {
+      "observationId": "FQ15-EFA52B9AC7C2",
+      "implementation": [
+        {
+          "path": "FamilyQuant/AnalyticsControl.xaml",
+          "symbol": "ComboBoxFamilyTopN / tag 15 / ToolTip",
+          "sha256": "67ADC32B5C4C580890C5895235DF53359F4812AA9F9E9E81E659E2E61C17357D"
+        },
+        {
+          "path": "FamilyQuant/AnalyticsControl.xaml.cs",
+          "symbol": "ComboBoxFamilyTopN / tag 15 / ToolTip",
+          "sha256": "47F92608EBB384F7E3B0C29DE0FF0F0D3E1D15DD8E6D32699A29A0730E5325CD"
+        },
+        {
+          "path": "FamilyQuant/AnalyticsViewModel.cs",
+          "symbol": "ComboBoxFamilyTopN / tag 15 / ToolTip",
+          "sha256": "6E3549DC8E69FCFFE4914D9CF836EA22755264BE6CA0B84A4C1B4F40C425B96D"
+        }
+      ],
+      "proofs": [
+        {
+          "runId": "RS-native-results",
+          "kind": "test",
+          "target": "ResultsPreservationTests",
+          "assertion": "RS FQ15-EFA52B9AC7C2: retained tooltip: Fifteen families plus one bar for the rest. This is the default.",
+          "artifact": "D:\\FamilyQuant-data\\out-results\\ledger-ready\\interactions-fixed\\proofs.log",
+          "inspectedBy": ""
+        }
+      ],
+      "note": "Native synthetic Results interaction. Copy improvements are explicitly mapped for independent semantic review. Export refusal proves the required-study guard, not a complete evidence pack.",
+      "kindReceiptId": null,
+      "compared": "ComboBoxItem.ToolTip = Fifteen bars plus one bar for the rest. The default; it fits a slide well. -\u003E ComboBoxFamilyTopN / tag 15 / ToolTip; RS FQ15-EFA52B9AC7C2: retained tooltip: Fifteen families plus one bar for the rest. This is the default."
+    }
+  ],
+  "kindReceipts": null
+}
