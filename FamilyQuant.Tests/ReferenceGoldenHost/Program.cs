@@ -14,6 +14,7 @@ namespace FamilyQuant.Tests
                 return ClusteringSnapshot.Run(args);
             if (args.Length > 0 && args[0] == WordGroupingSnapshot.Argument) return WordGroupingSnapshot.Run(args);
             if (args.Length > 0 && args[0] == ChartExportSnapshot.Argument) return ChartExportSnapshot.Run(args);
+            if (args.Length > 0 && args[0] == ResultsRuntimeSnapshot.Argument) return ResultsRuntimeSnapshot.Run(args);
             var app = new App();
             app.GetType().GetMethod("InitializeComponent")?.Invoke(app, null);
             int failures = 0;
