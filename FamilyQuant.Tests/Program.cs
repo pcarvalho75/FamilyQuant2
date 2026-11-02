@@ -76,6 +76,7 @@ namespace FamilyQuant.Tests
             BusyOperationTests(workDir);
             ShellDialogTests(workDir);
             ResultsViewModelTests();
+            ResultsPreservationTests(Path.Combine(workDir, "results-preservation"));
             DeNovoViewModelTests(workDir);
             HomologyResultsTests(workDir);
             Section("Database parsing and the decoy tag");
@@ -122,6 +123,7 @@ namespace FamilyQuant.Tests
             Section("Identified-peptide envelope (Q1) - stored quants reproduced, full envelope measured");
             IdentifiedQuantRealTests(args.Length > 3 ? args[3] : null, workDir);
             Section("Project store (Q2) - .fqproj container round trip, migration and structure");
+            ProjectFormatStageTests();
             ProjectStoreTests(workDir);
             GoldenNumberGuardTests();
             Section("Talk export routing - one override root for heavy and fast lanes");
@@ -197,8 +199,13 @@ namespace FamilyQuant.Tests
             ProteinDomainsTests(workDir);
             EvidenceStorageTests(workDir);
             EvidenceFetchTests();
+            EvidenceFetchAtomicTests();
+            EvidenceCoverageTests();
+            QueryResidueCoverageTests();
+            FamilyWorldFetchTests();
             EvidenceTaskTests();
             EvidenceClassifierTests();
+            EvidenceDeliveryFixtureTests(workDir);
             EvidenceArchitectureTests();
             Section("Nearest reviewed protein and the outside panel - never itself, gated, deterministic, offline");
             NearestReviewedTests(workDir);
@@ -259,8 +266,10 @@ namespace FamilyQuant.Tests
             KeywordCommandTests();
             CurationScreenTests();
             CurationOperationTests();
+            FamilyViewTests();
             TableAppearanceTests();
             EvidenceReviewModelTests();
+            EvidenceCoverageUiTests(Path.Combine(workDir, "evidence-coverage-ui"));
             EvidenceTaskScopeTests();
             EvidenceTaskScopeRecipeTests();
             EvidenceTaskScopeWindowTests(Path.Combine(workDir, "task-scope"));

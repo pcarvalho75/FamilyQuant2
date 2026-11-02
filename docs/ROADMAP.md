@@ -79,53 +79,46 @@ Columns: Diff = L, M, H, VH. Hrs = worker hours at measured speed: the 56 steps 
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| N6 | Close the ledger by kind of row (D13): one executed check per kind, such as frozen 1.5.0.6 text compared with 2.0, with each row naming what was compared. A row no kind covers gets its own proof or stays open | H | 1.5 | C2, C13 | C14 | `--feature-ledger-release-check` passes; a reviewer samples 200 rows at random across all kinds and agrees; any sample failure reopens that whole kind | SH | not started | 0% | 0% | T+4 |
+| N6 | Close the ledger by kind of row (D13): one executed check per kind, such as frozen 1.5.0.6 text compared with 2.0, with each row naming what was compared. A row no kind covers gets its own proof or stays open | H | 1.5 | C13 | C14 | `--feature-ledger-release-check` passes; a reviewer samples 200 rows at random across all kinds and agrees; any sample failure reopens that whole kind | SH | not started | 0% | 0% | T+3 |
 
 ### W2 Ana's result, through the software
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| A1 | Make her file with 2.0 preview 1 on her original `.fcf`: Fetch Evidence, fetch the panel again so it keeps tissue text, review, Create, Save, Export. Provenance shows version, recipe and release | M | 0.5 | 🟢 | A2 | Recipe reapplied gives the same file; file check passed; no script touched it | EV | not started | 0% | 0% | T+0 |
-| A2 | Adversarial science review of the file: concepts, denominators, labels, red flags, comparison with what Ana already holds | H | 1 | A1 | Ana's file ready | GR's written verdict; every finding closed | GR | not started | 0% | 0% | T+2 |
-| A6 | The coverage gate counts the query letters actually aligned (D12). The evidence window, the audit CSV and Help state the rule in plain words, and no value reads over 100%. Ana's file is made again with it | M | 0.5 | 🟢 | A2 | Same families, tiers and default selection on her file; the neighbours that change are listed; recipe replay exact; the rule is visible on the screen and in the export | EV | not started | 0% | 0% | T+2 |
-| A5 | Measure the shared-peptide effect on her data, through Compute full XIC. It needs a `.sepr2` on this database: if none exists when you reach it, post that and leave the step open | M | 0.5 | A2 | Paper numbers | Numbers exported by the program | EV | not started | 0% | 0% | her pace |
+| A5 | Measure the shared-peptide effect on her data, through Compute full XIC. It needs a `.sepr2` on this database: if none exists when you reach it, post that and leave the step open | M | 0.5 | 🟢 | Paper numbers | Numbers exported by the program | EV | not started | 0% | 0% | her pace |
 
 ### W3 Look
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| V3 | Zero hard-coded colours: a suite check fails on any colour outside tokens and the chart palette. Each rebuilt screen must pass it; this row closes when the last one does | H | 0.5 | 🟢 | C14 | Guard red on a planted colour; 0 sites left; golden equal | LK | not started | 0% | 0% | T+2 |
+| V3 | Zero hard-coded colours: a suite check fails on any colour outside tokens and the chart palette. Each rebuilt screen must pass it; this row closes when the last one does | H | 0.5 | 🟢 | C14 | Guard red on a planted colour; 0 sites left; golden equal | LK | not started | 0% | 0% | T+0 |
 
 ### W4 Shell
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| S9 | Evidence fetch stages the whole fetch on a copy and attaches it at the end. Today the first fetch is written before the panel, so a Cancel at the panel keeps half of it | M | 0.5 | A1 | R2 | Cancel at any point leaves the file as it was; red test first | EV | not started | 0% | 0% | T+1 |
 
 ### W5 Screens: each rebuilt as a thin view over a tested view model
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| C2 | Family view: a table of families (name, proteins, shares, lock) with the proteins of the selected family beside it | H | 1.5 | 🟢 | N6, R2 | Selection, edit, lock and undo work on both tables; 39,996 families smooth | LK | not started | 0% | 0% | T+2 |
-| C13 | Wording pass: labels, tooltips (one or two sentences) and Help match the new screens | M | 1 | 🟢 | N6, C14 | Suite's tooltip checks green; no old screen named anywhere | LK | not started | 0% | 0% | T+3 |
-| C14 | Finish: 100, 125 and 150% scaling, smallest window, Tab order, focus visible, both themes | M | 0.5 | C13, V3, N6 | R2 | Harness renders at each scale; Paulo's final look sign-off | LK | not started | 0% | 0% | T+5 |
+| C13 | Wording pass: labels, tooltips (one or two sentences) and Help match the new screens | M | 1 | 🟢 | N6, C14 | Suite's tooltip checks green; no old screen named anywhere | LK | not started | 0% | 0% | T+2 |
+| C14 | Finish: 100, 125 and 150% scaling, smallest window, Tab order, focus visible, both themes | M | 0.5 | C13, V3, N6 | R2 | Harness renders at each scale; Paulo's final look sign-off | LK | not started | 0% | 0% | T+4 |
 
 ### W6 Core rewrite: copy what is good, rewrite what is better
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| X7 | Project and file formats: `ProjectStore` (1,083) split, schema versioned, and an `.fcf` export the frozen 1.5.0.6 opens | H | 1 | 🟢 | R2 | A file written by 2.0 opens in the reference build with the same families; old `.fqproj` rules kept | FL | not started | 0% | 0% | T+1 |
-| X12 | Improvements found on the way, listed in `docs/IMPROVEMENTS.md` with before and after. Known candidates: the fast clustering pass has no coverage gate (20.1% of its joins, 2,329 of 11,584, fail the second pass's gate); the decoy mixing score cannot see over-merging, so use identified peptides to test the grouping (a peptide identical in two identity families is evidence they are one); the evidence family as a veto on single-linkage merges; one contaminant rule (D5). Anything that changes a number goes to Paulo first | H | 1 | 🟢 | X13, R3 | Each change measured on real data; science review; golden snapshot updated only by Paulo's word | AS | not started | 0% | 0% | T+1 |
-| X13 | Documents: `CLAUDE.md` from 50 KB to a working guide, history to `docs/HISTORY.md`, talk documents out of the root, release notes for 2.0. `SCIENTIFIC_METHOD.md` gains the rule that an unannotated protein joins only through an in-scope neighbour, which the code has and the document lacks. The three test files over 1,000 lines split with no check lost; `dotnet format` differences cleared | L | 1 | X12 | R3 | No fact lost, no line over 300 characters; suite count unchanged; `dotnet format --verify-no-changes` clean | AS | not started | 0% | 0% | T+2 |
+| X13 | Documents: `CLAUDE.md` from 50 KB to a working guide, history to `docs/HISTORY.md`, unprotected talk documents out of the root (`SCIENTIFIC_TALK_SCRIPT.md` stays where it is, untouched), release notes for 2.0. `SCIENTIFIC_METHOD.md` gains the rule that an unannotated protein joins only through an in-scope neighbour, which the code has and the document lacks. The three test files over 1,000 lines split with no check lost | L | 1 | 🟢 | R3 | No fact lost, no line over 300 characters; suite count unchanged | AS | not started | 0% | 0% | T+1 |
 
 ### W7 Releases (Paulo publishes each one)
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| R2 | 2.0 preview 2: new look and shell | M | 0.5 | C2, X7, C14 | R3 | Same, plus Paulo's sign-off on renders, and a published update reaches an installed 2.0 | Orchestrator | not started | 0% | 0% | T+6 |
-| R3 | 2.0 release candidate: rewrite finished, every ledger row closed, the family world in if B1 passed | M | 0.5 | R2, B8, X12, X13 | R4 | Same, plus the ledger check | Orchestrator | not started | 0% | 0% | T+6 |
-| R4 | Final adversarial pass on the whole product | H | 1 | R3 | R5 | GR's verdict; all findings closed | GR | not started | 0% | 0% | T+7 |
-| R5 | FamilyQuant 2.0 final, then the archive of this roadmap | L | 0.5 | R4 | Done | Paulo publishes | Orchestrator | not started | 0% | 0% | T+8 |
+| R2 | 2.0 preview 2: new look and shell | M | 0.5 | C14 | R3 | Same, plus Paulo's sign-off on renders, and a published update reaches an installed 2.0 | Orchestrator | not started | 0% | 0% | T+4 |
+| R3 | 2.0 release candidate: rewrite finished, every ledger row closed, the family world in if B1 passed | M | 0.5 | R2, B8, X13 | R4 | Same, plus the ledger check | Orchestrator | not started | 0% | 0% | T+4 |
+| R4 | Final adversarial pass on the whole product | H | 1 | R3 | R5 | GR's verdict; all findings closed | GR | not started | 0% | 0% | T+6 |
+| R5 | FamilyQuant 2.0 final, then the archive of this roadmap | L | 0.5 | R4 | Done | Paulo publishes | Orchestrator | not started | 0% | 0% | T+6 |
 
 ### W8 Breakthrough: the family world
 
@@ -133,7 +126,6 @@ The bet, from `docs/vision/VISION.md`: a de novo peptide your database cannot pl
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| B4 | Fetch the family world: the reviewed panel plus one clade query per family, unreviewed included, all or nothing, release recorded, stored with the project, offline afterwards | M | 1 | 🟢 | B5 | An interrupted fetch leaves the file as it was; offline rerun identical; size growth measured on Ana's file | EV | not started | 0% | 0% | T+2 |
 | B6 | The error beside every claim: for each family, the decoy rate and the known-answer right rate, stored in the project. A family with too little evidence shows that instead of a number | M | 1 | 🟢 | B7 | Every family row has both; reproducible; conserved families checked by hand | OP | not started | 0% | 0% | T+1 |
 | B7 | Result: three parts per family (identified, de novo in your database, de novo only in the family world) plus one global unexplained bucket, and the "Database gap" ranking: the families with the most signal missing from your database. An export writes a FASTA of the family-world proteins the tags hit, as suggested additions for the person to add and search again in PatternLab. The program never changes the database itself. The screen, the CSV and Help state the minimum tag length and the in-scope rule beside the result | M | 1 | B6 | B8 | Screen and CSV from one table; every number from the program; the rules in force are visible on the screen and in the export, and stored in the project; both themes | RS | not started | 0% | 0% | T+2 |
 | B8 | Science review on a real sample: labels, denominators, inflation of conserved families, and the wording of the claim | H | 1 | B7 | R3 | GR's verdict; findings closed; Paulo accepts the wording | GR | not started | 0% | 0% | T+3 |
