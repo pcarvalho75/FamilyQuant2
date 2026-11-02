@@ -17,7 +17,7 @@ Render targets refer to `ScreenHarness.Screens`, captured with `--screens <outpu
 Release gate: `FamilyQuant.Tests.exe --feature-ledger-release-check` fails until every retained row is VERIFIED with evidence. Authorized DROP rows use APPROVED_DROP, which records a decision, not a completed UI removal. The normal quick suite permits OPEN rows during development. Regeneration resets retained rows to OPEN; preserve reviewed evidence when updating the scanner.
 
 Scan count: **5756**. Ledger rows: **5756**. Source files: **104**.
-Authorized DROP rows: **296**; proposed VERIFIED retained rows: **4287**; OPEN retained rows: **1173**.
+Authorized DROP rows: **296**; proposed VERIFIED retained rows: **4293**; OPEN retained rows: **1167**.
 
 | ID | Disposition | Kind | Frozen source | Fact or control | Planned check | State | Evidence |
 |---|---|---|---|---|---|---|---|
@@ -569,7 +569,7 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **4287**; OPEN r
 | FQ15-B3BB9EC8E1D5 | IMPROVE | code fact | FamilyQuant/ClusterGenerationControl.xaml.cs:488 | "in Layer 2. If it keeps happening, send this message and the project file to whoever " | render:03-curation | OPEN | pending |
 | FQ15-1CD0C5F7DAA3 | IMPROVE | code fact | FamilyQuant/ClusterGenerationControl.xaml.cs:489 | "maintains FamilyQuant." | render:03-curation | OPEN | pending |
 | FQ15-5DD58996A4C8 | IMPROVE | code fact | FamilyQuant/ClusterGenerationControl.xaml.cs:490 | "Could not recalculate" | render:03-curation | OPEN | pending |
-| FQ15-B3488AD4ABFA | KEEP | format/export | FamilyQuant/ClusterGenerationControl.xaml.cs:500 | "PatternLab project file (*.plp)&#124;*.plp" | render:03-curation | OPEN | pending |
+| FQ15-B3488AD4ABFA | KEEP | format/export | FamilyQuant/ClusterGenerationControl.xaml.cs:500 | "PatternLab project file (*.plp)&#124;*.plp" | test:CurationActionProbe | VERIFIED | evidence:SH-curation-actions:FQ15-B3488AD4ABFA |
 | FQ15-97461E9E1C9C | IMPROVE | code fact | FamilyQuant/ClusterGenerationControl.xaml.cs:501 | "Choose the peptide-level PatternLab project to quantify these families with" | render:03-curation | OPEN | pending |
 | FQ15-F22385A4AE69 | IMPROVE | code fact | FamilyQuant/ClusterGenerationControl.xaml.cs:508 | "Loading quantitation data from the PatternLab project..." | render:03-curation | OPEN | pending |
 | FQ15-FB8695990F78 | IMPROVE | code fact | FamilyQuant/ClusterGenerationControl.xaml.cs:510 | "Loading Sparse Matrix" | render:03-curation | OPEN | pending |
@@ -607,8 +607,8 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **4287**; OPEN r
 | FQ15-585C327B3274 | IMPROVE | code fact | FamilyQuant/ClusterGenerationControl.xaml.cs:634 | "Every row is currently hidden by a filter, or the Family Cluster File is empty.\n\n" | render:03-curation | OPEN | pending |
 | FQ15-08612041D32C | IMPROVE | code fact | FamilyQuant/ClusterGenerationControl.xaml.cs:635 | "Next step: clear the Search box and untick the filters in this panel, then export again." | render:03-curation | OPEN | pending |
 | FQ15-35D319F12DD1 | IMPROVE | code fact | FamilyQuant/ClusterGenerationControl.xaml.cs:636 | "Nothing to export" | render:03-curation | OPEN | pending |
-| FQ15-93D5A5132CAD | KEEP | format/export | FamilyQuant/ClusterGenerationControl.xaml.cs:642 | "CSV files (*.csv)&#124;*.csv&#124;All files (*.*)&#124;*.*" | render:03-curation | OPEN | pending |
-| FQ15-F31EFE95C8DB | KEEP | format/export | FamilyQuant/ClusterGenerationControl.xaml.cs:643 | "FamilyQuant_Report.csv" | render:03-curation | OPEN | pending |
+| FQ15-93D5A5132CAD | KEEP | format/export | FamilyQuant/ClusterGenerationControl.xaml.cs:642 | "CSV files (*.csv)&#124;*.csv&#124;All files (*.*)&#124;*.*" | test:CurationActionProbe | VERIFIED | evidence:SH-curation-actions:FQ15-93D5A5132CAD |
+| FQ15-F31EFE95C8DB | KEEP | format/export | FamilyQuant/ClusterGenerationControl.xaml.cs:643 | "FamilyQuant_Report.csv" | test:CurationActionProbe | VERIFIED | evidence:SH-curation-actions:FQ15-F31EFE95C8DB |
 | FQ15-C1E31AA57727 | IMPROVE | code fact | FamilyQuant/ClusterGenerationControl.xaml.cs:644 | "Save the visible rows as CSV" | render:03-curation | OPEN | pending |
 | FQ15-CACEC5937098 | IMPROVE | code fact | FamilyQuant/ClusterGenerationControl.xaml.cs:655 | "The share column is empty, because no quantitation was loaded." | render:03-curation | OPEN | pending |
 | FQ15-F8D19A496632 | IMPROVE | code fact | FamilyQuant/ClusterGenerationControl.xaml.cs:656 | "The share column holds " | render:03-curation | OPEN | pending |
@@ -679,8 +679,8 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **4287**; OPEN r
 | FQ15-967A95B80647 | IMPROVE | code fact | FamilyQuant/ClusterGenerationControl.xaml.cs:1026 | "." | render:03-curation | OPEN | pending |
 | FQ15-7B54472D2AE8 | IMPROVE | code fact | FamilyQuant/ClusterGenerationControl.xaml.cs:1038 | "fraction of " | render:03-curation | OPEN | pending |
 | FQ15-14C09CAE058F | IMPROVE | code fact | FamilyQuant/ClusterGenerationControl.xaml.cs:1038 | "; signal = " | render:03-curation | OPEN | pending |
-| FQ15-32A336B58FA8 | KEEP | format/export | FamilyQuant/ClusterGenerationControl.xaml.cs:1048 | "CSV files (*.csv)&#124;*.csv&#124;All files (*.*)&#124;*.*" | render:03-curation | OPEN | pending |
-| FQ15-4C83255498C2 | KEEP | format/export | FamilyQuant/ClusterGenerationControl.xaml.cs:1049 | "FamilyQuant_family_composition.csv" | render:03-curation | OPEN | pending |
+| FQ15-32A336B58FA8 | KEEP | format/export | FamilyQuant/ClusterGenerationControl.xaml.cs:1048 | "CSV files (*.csv)&#124;*.csv&#124;All files (*.*)&#124;*.*" | test:CurationActionProbe | VERIFIED | evidence:SH-curation-actions:FQ15-32A336B58FA8 |
+| FQ15-4C83255498C2 | KEEP | format/export | FamilyQuant/ClusterGenerationControl.xaml.cs:1049 | "FamilyQuant_family_composition.csv" | test:CurationActionProbe | VERIFIED | evidence:SH-curation-actions:FQ15-4C83255498C2 |
 | FQ15-F5C30A6D6CFB | IMPROVE | code fact | FamilyQuant/ClusterGenerationControl.xaml.cs:1050 | "Save the family composition as CSV" | render:03-curation | OPEN | pending |
 | FQ15-B00E58AC426E | IMPROVE | code fact | FamilyQuant/ClusterGenerationControl.xaml.cs:1056 | "The families are counted with every shared peptide in each, so they overlap and must not be added up." | render:03-curation | OPEN | pending |
 | FQ15-B336AE2FD987 | IMPROVE | code fact | FamilyQuant/ClusterGenerationControl.xaml.cs:1058 | "The fractions are of the TIC, so together they give the share of the TIC the quantified peptides explain." | render:03-curation | OPEN | pending |
@@ -753,7 +753,7 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **4287**; OPEN r
 | FQ15-B6DF500A0081 | IMPROVE | code fact | FamilyQuant/ClusterGenerationControl.xaml.cs:1484 | "equals User ID except where you renumbered a family by hand." | render:03-curation | OPEN | pending |
 | FQ15-B4D65986AE2D | IMPROVE | code fact | FamilyQuant/ClusterGenerationControl.xaml.cs:1487 | "Your own family number, the only editable id. Type the same number in two rows to merge " | render:03-curation | OPEN | pending |
 | FQ15-84CD85B9D9B1 | IMPROVE | code fact | FamilyQuant/ClusterGenerationControl.xaml.cs:1488 | "their families, or an unused one to split a protein off; editing locks the families involved." | render:03-curation | OPEN | pending |
-| FQ15-B2F050B733BC | KEEP | format/export | FamilyQuant/ClusterGenerationControl.xaml.cs:1491 | "Free text of your own. It is saved in the .fcf and written to the CSV, and it affects no " | render:03-curation | OPEN | pending |
+| FQ15-B2F050B733BC | KEEP | format/export | FamilyQuant/ClusterGenerationControl.xaml.cs:1491 | "Free text of your own. It is saved in the .fcf and written to the CSV, and it affects no " | test:CurationActionProbe | VERIFIED | evidence:SH-curation-actions:FQ15-B2F050B733BC |
 | FQ15-8226A2B59947 | IMPROVE | code fact | FamilyQuant/ClusterGenerationControl.xaml.cs:1492 | "calculation." | render:03-curation | OPEN | pending |
 | FQ15-76C287F5EE63 | IMPROVE | code fact | FamilyQuant/ClusterGenerationControl.xaml.cs:1495 | "The protein identifier as in the database. \"Reverse_\" marks a decoy and \"contaminant\" a " | render:03-curation | OPEN | pending |
 | FQ15-5E1FE758C300 | IMPROVE | code fact | FamilyQuant/ClusterGenerationControl.xaml.cs:1496 | "laboratory contaminant; both can be hidden in the Display and Export panel. Right-click a " | render:03-curation | OPEN | pending |

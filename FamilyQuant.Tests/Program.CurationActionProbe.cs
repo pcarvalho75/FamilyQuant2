@@ -16,9 +16,36 @@ namespace FamilyQuant.Tests;
 
 internal static partial class Program
 {
-    private sealed record CurationActionCase(string Id, string[] Handlers, string Compared, string Actual, bool Passed);
+    private static void CurationReviewTextSnapshot(string output)
+    {
+        EnsureApplication();
+        int windows = Application.Current.Windows.Count;
+        var view = new DeNovoControl();
+        view.Measure(new Size(1280, 900)); view.Arrange(new Rect(0, 0, 1280, 900)); view.UpdateLayout();
+        PumpDispatcher();
+        if (view.IsVisible || Application.Current.Windows.Count != windows)
+            throw new InvalidOperationException("Review text capture must not show or create a window.");
+        var values = new SortedDictionary<string, string>(StringComparer.Ordinal)
+        {
+            ["status"] = UiField<TextBlock>(view, "TextBlockDeNovoStatus")!.Text,
+            ["per-run"] = UiField<TextBlock>(view, "TextBlockPerRunBreakdown")!.Text,
+            ["alternative-label"] = (string)UiField<Label>(view, "LabelOverlapDivergent")!.Content,
+            ["exact-label"] = (string)UiField<Label>(view, "LabelOverlapExact")!.Content,
+            ["precursor-label"] = (string)UiField<Label>(view, "LabelOverlapPrecursor")!.Content,
+            ["reconcile-state"] = UiField<TextBlock>(view, "TextBlockDeNovoLayer2State")!.Text,
+            ["homology-state"] = UiField<TextBlock>(view, "TextBlockDeNovoLayer4State")!.Text,
+            ["confidence-tooltip"] = (string)UiField<TextBox>(view, "TextBoxMinAlc")!.ToolTip,
+            ["load-tooltip"] = (string)UiField<Button>(view, "ButtonLoadAndFilter")!.ToolTip,
+            ["curation-help"] = HelpContent.Build(null, NormalizationMode.IdentifiedSignal, SharedPeptidePolicy.FamilyUnique),
+            ["normalization-explanation"] = NormalizationMode.IdentifiedSignal.Explanation(),
+        };
+        FeatureLedgerEvidence.WriteJson(Path.Combine(output, "review-current-text.json"), values);
+    }
 
-    private static List<CurationActionCase> CurationActionProbe(string output)
+    private sealed record CurationActionCase(string Id, string[] Handlers, string Compared, string Actual, bool Passed,
+        string[]? Observations = null);
+
+    private static List<CurationActionCase> CurationActionProbe(string output, FeatureLedger.Observation[] frozen, bool negative)
     {
         Directory.CreateDirectory(output);
         EnsureApplication();
@@ -32,7 +59,14 @@ internal static partial class Program
         string nextFile = "";
         bool accept = false;
         var dialogs = new List<string>();
-        ShellDialogs.FilePresenter = (_, id, dialog) => { dialogs.Add(id); dialog.FileName = nextFile; return accept; };
+        var pickerValues = new List<(string Id, string Filter, string DefaultName)>();
+        ShellDialogs.FilePresenter = (_, id, dialog) =>
+        {
+            dialogs.Add(id);
+            pickerValues.Add((id, dialog.Filter, dialog.FileName));
+            dialog.FileName = nextFile;
+            return accept;
+        };
         var file = new FamilyClusterFile { MyExtendedFastaItems = new()
         {
             new() { SequenceIdentifier = "sp|X|PROT1", Description = "Alpha fixture common", Sequence = "PEPTIDEA", UserID = 11, USearchID = 11, XICUser = 0.4 },
@@ -45,7 +79,7 @@ internal static partial class Program
         var cases = new List<CurationActionCase>();
         var table = UiField<DataGrid>(screen, "DataGridResultGrid")!;
         string IDs() => string.Join("|", table.Items.Cast<FastaItemExtended>().Select(item => item.SequenceIdentifier));
-        void Record(string id, string[] handlers, string compared, bool matched, string actual)
+        void Record(string id, string[] handlers, string compared, bool matched, string actual, string[]? observations = null)
         {
             IntPtr handle = new WindowInteropHelper(window).Handle;
             bool rectangleRead = GetWindowRect(handle, out var bounds);
@@ -54,7 +88,7 @@ internal static partial class Program
                 + "; rectangle=" + bounds.Left + "," + bounds.Top + "," + bounds.Right + "," + bounds.Bottom + "; foreground=" + (GetForegroundWindow() == handle);
             matched &= isolated;
             Check("curation native " + id + ": " + compared, matched);
-            cases.Add(new(id, handlers, compared, actual, matched));
+            cases.Add(new(id, handlers, compared, actual, matched, observations));
         }
         void Click(string name)
         {
@@ -142,6 +176,31 @@ internal static partial class Program
             Record("patternlab-load", ["ButtonLoadQuantData_Click"], "the actual PLP chooser Cancel preserves the document; acceptance loads the native fixture, publishes displayed mode and leaves input bytes unchanged",
                 cancelledPicker && screen.ViewModel.Quantitation.HasPatternLab && screen.ViewModel.Quantitation.DisplayedMode == NormalizationMode.IdentifiedSignal
                 && FeatureLedgerEvidence.Hash(plp) == plpHash && target.XICUser > 0, screen.ShellStatusText);
+
+            string beforeAnnotation = file.ToJsonText();
+            table.SelectedItems.Clear();
+            var annotationTargets = table.Items.Cast<FastaItemExtended>().Take(2).ToArray();
+            foreach (var item in annotationTargets) table.SelectedItems.Add(item);
+            var unchangedNumbers = file.MyExtendedFastaItems.Select(item => (item.UserID, item.XICUser, item.FullXicShare)).ToArray();
+            const string annotation = "Owned annotation, \"quoted\"";
+            UiField<TextBox>(screen, "TextBoxBatchUserId")!.Text = "";
+            UiField<TextBox>(screen, "TextBoxBatchAnnotation")!.Text = annotation;
+            Click("ButtonApplyToSelected");
+            bool numbersUnchanged = unchangedNumbers.SequenceEqual(file.MyExtendedFastaItems.Select(item => (item.UserID, item.XICUser, item.FullXicShare)));
+            string annotationFile = Path.Combine(output, "annotations.fcf");
+            file.Save(annotationFile);
+            var reopened = FamilyClusterFile.Load(annotationFile);
+            string annotationCsv = CsvReport.Build(file.MyExtendedFastaItems, screen.ViewModel.Quantitation.DisplayedMode);
+            File.WriteAllText(Path.Combine(output, "annotations.csv"), annotationCsv);
+            bool annotationsPersisted = annotationTargets.Length == 2
+                && reopened.MyExtendedFastaItems.Count(item => item.UserAnnotation == annotation) == 2
+                && annotationTargets.All(item => reopened.MyExtendedFastaItems.Single(saved => saved.SequenceIdentifier == item.SequenceIdentifier).UserAnnotation == annotation)
+                && annotationCsv.Split('"' + annotation.Replace("\"", "\"\"", StringComparison.Ordinal) + '"', StringSplitOptions.None).Length == 3;
+            Click("ButtonUndo");
+            Record("annotation-storage", [], "with PatternLab quantitation loaded, the annotation-only native batch leaves every family ID and share value equal through recalculation, saves and reopens the two exact annotations through .fcf, exports both quoted CSV fields, and Undo restores all pre-edit document bytes",
+                numbersUnchanged && annotationsPersisted && file.ToJsonText() == beforeAnnotation, annotationCsv,
+                ["FQ15-B2F050B733BC"]);
+
             double oldShare = target.XICUser;
             UiField<ComboBox>(screen, "ComboBoxNormalization")!.SelectedIndex = (int)NormalizationMode.TotalChromatogram;
             UiField<ComboBox>(screen, "ComboBoxSharedPeptides")!.SelectedIndex = 1; PumpDispatcher();
@@ -174,6 +233,26 @@ internal static partial class Program
             Click("ButtonExportComposition");
             Record("composition-export", ["ButtonExportComposition_Click"], "the actual composition export button writes the exact production table for the current denominator and shared-peptide choice",
                 composition.Length > 0 && File.ReadAllText(compositionPath) == composition, composition);
+
+            string FrozenValue(string id) => System.Text.Json.JsonSerializer.Deserialize<string>(frozen.Single(row => row.Id == id).Detail)!;
+            var proteinPicker = pickerValues.First(value => value.Id == "curation.proteins-csv");
+            var compositionPicker = pickerValues.First(value => value.Id == "curation.composition-csv");
+            var plpPicker = pickerValues.First(value => value.Id == "curation.patternlab");
+            string observedCsvFilter = proteinPicker.Filter + (negative ? " PLANTED WRONG FILTER" : "");
+            string patterns(string filter) => string.Join("|", filter.Split('|').Where((_, index) => index % 2 == 1));
+            bool pickersMatch = observedCsvFilter == FrozenValue("FQ15-93D5A5132CAD")
+                && proteinPicker.DefaultName == FrozenValue("FQ15-F31EFE95C8DB")
+                && compositionPicker.Filter == FrozenValue("FQ15-32A336B58FA8")
+                && compositionPicker.DefaultName == FrozenValue("FQ15-4C83255498C2")
+                && patterns(plpPicker.Filter) == patterns(FrozenValue("FQ15-B3488AD4ABFA"));
+            Record("native-picker-values", [], "executed protein/composition CSV chooser filters and default filenames equal their frozen literals before the presenter supplies a path; the PLP chooser retains the frozen *.plp selection pattern and its accepted file was actually loaded",
+                pickersMatch, System.Text.Json.JsonSerializer.Serialize(new
+                {
+                    protein = new { proteinPicker.Filter, proteinPicker.DefaultName },
+                    composition = new { compositionPicker.Filter, compositionPicker.DefaultName },
+                    patternlab = new { plpPicker.Filter, plpPicker.DefaultName }, observedCsvFilter
+                }),
+                ["FQ15-93D5A5132CAD", "FQ15-F31EFE95C8DB", "FQ15-32A336B58FA8", "FQ15-4C83255498C2", "FQ15-B3488AD4ABFA"]);
 
             file.LockedUserIds.Add(11); string beforeWords = file.ToJsonText();
             UiField<DecimalUpDown>(screen, "DecimalUpDownWordReCluster")!.Value = 0;

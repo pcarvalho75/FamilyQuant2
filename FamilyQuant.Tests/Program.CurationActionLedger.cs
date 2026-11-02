@@ -68,7 +68,8 @@ internal static partial class Program
             reportEqual = repeat && Select(before, false) == Select(after, false);
             Check("curation native complete CSV output equals frozen for twenty culture/mode/header fixtures including comma quote CR LF null and fractional fields", csvEqual);
             Check("curation native retained User sorting and counters equal the frozen branches", reportEqual);
-            actions = CurationActionProbe(Path.Combine(output, "native"));
+            actions = CurationActionProbe(Path.Combine(output, "native"), cohort, args.Length == 7);
+            CurationReviewTextSnapshot(output);
             Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
         }
         finally { Console.SetOut(console); File.WriteAllText(log, capture.ToString(), new UTF8Encoding(false)); }
@@ -76,7 +77,8 @@ internal static partial class Program
         string Handler(FeatureLedger.Observation row) => row.Kind == "handler" ? Regex.Match(row.Detail, @" = (\w+)$").Groups[1].Value
             : row.Kind == "handler definition" ? Regex.Match(row.Detail, @"\b(\w+)\(").Groups[1].Value : "";
         CurationPendingList(root, output, cohort.Where(row => !(row.Source == "FamilyQuant/CsvReport.cs" && csvEqual)
-            && !actions.Any(action => action.Passed && action.Handlers.Contains(Handler(row), StringComparer.Ordinal))).ToArray());
+            && !actions.Any(action => action.Passed && (action.Handlers.Contains(Handler(row), StringComparer.Ordinal)
+                || action.Observations?.Contains(row.Id, StringComparer.Ordinal) == true))).ToArray());
         var artifacts = new List<FeatureLedgerEvidence.Artifact>();
         void Artifact(string path) => artifacts.Add(new(path, FeatureLedgerEvidence.Hash(path)));
         foreach (string path in Directory.GetFiles(output, "*", SearchOption.AllDirectories)) Artifact(path);
@@ -95,13 +97,15 @@ internal static partial class Program
         var implementation = Directory.GetFiles(Path.Combine(root, "FamilyQuant"), "*", SearchOption.TopDirectoryOnly)
             .Where(path => Path.GetFileName(path).StartsWith("ClusterGenerationControl", StringComparison.Ordinal)
                 || Path.GetFileName(path).StartsWith("Curation", StringComparison.Ordinal))
-            .Concat(new[] { "FamilyQuant.Core/CsvReport.cs", "FamilyQuant.Core/ReportView.cs", "FamilyQuant.Core/BatchCuration.cs" }.Select(path => Path.Combine(root, path)))
+            .Concat(new[] { "FamilyQuant.Core/CsvReport.cs", "FamilyQuant.Core/ReportView.cs", "FamilyQuant.Core/BatchCuration.cs",
+                "FamilyQuant.Core/FamilyQuantFile.cs", "FamilyQuant.Core/Evidence/SavedFileCheck.cs", "FamilyQuant/FileDialogFilters.cs" }.Select(path => Path.Combine(root, path)))
             .Concat(checks.Select(path => Path.Combine(root, "FamilyQuant.Tests", path))).Distinct(StringComparer.OrdinalIgnoreCase)
             .Select(path => new FeatureLedgerEvidence.Implementation(Path.GetRelativePath(root, path).Replace('\\', '/'), "executed curation screen action/export", FeatureLedgerEvidence.Hash(path))).ToList();
         var comparisons = cohort.Select(row =>
         {
             string handler = Handler(row);
-            var action = handler.Length == 0 ? null : actions.SingleOrDefault(action => action.Passed && action.Handlers.Contains(handler, StringComparer.Ordinal));
+            var action = actions.SingleOrDefault(action => action.Passed && (handler.Length > 0 && action.Handlers.Contains(handler, StringComparer.Ordinal)
+                || action.Observations?.Contains(row.Id, StringComparer.Ordinal) == true));
             bool csv = row.Source == "FamilyQuant/CsvReport.cs" && csvEqual;
             string assertion = action != null ? "curation native " + action.Id + ": " + action.Compared : csv
                 ? "curation native complete CSV output equals frozen for twenty culture/mode/header fixtures including comma quote CR LF null and fractional fields"
