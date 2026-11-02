@@ -18,6 +18,8 @@ internal static partial class Program
             LedgerPauloRulings.Evaluate(value, observed, LedgerRulingLiveText.Find, facts);
         var accepted = Decide(input, row);
         Check("a real compiled current caption can support recorded Rule 1", accepted.Closed && accepted.Rule == "1");
+        Check("each resolved De novo Help page, as its Help button shows it for a preset source, is a live witness",
+            FamilyQuant.DeNovo.DeNovoSource.Presets.All(source => LedgerRulingLiveText.Find(HelpContent.BuildDeNovo(null, source)).Found));
         Check("test-only strings cannot serve as current program text", !LedgerRulingLiveText.Find("Synthetic ruling sentinel 710928399 - absent from installed code").Found);
         Check("empty new text cannot close a ruling row", !Decide(input with { NewText = "" }, row).Closed);
         Check("bare newline cannot close a ruling row", !Decide(input with { NewText = "\r\n" }, row).Closed);
