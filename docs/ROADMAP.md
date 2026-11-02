@@ -134,7 +134,6 @@ Columns: Diff = L, M, H, VH. Hrs = worker hours at measured speed: the 56 steps 
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| R1 | 2.0 preview 1: evidence engine and review window, for Ana's file; installs beside 1.5 | M | 0.5 | 🟢 | A1 | Full suite, golden, publish rehearsal, release notes | Orchestrator | not started | 0% | 0% | T+0 |
 | R2 | 2.0 preview 2: new look and shell | M | 0.5 | C2, C5, S6, X7, C14 | R3 | Same, plus Paulo's sign-off on renders | Orchestrator | not started | 0% | 0% | T+8 |
 | R3 | 2.0 release candidate: rewrite finished, every ledger row closed, the family world in if B1 passed | M | 0.5 | R2, B8, X5, X6, X9, X11, X12, X13, X14, X15 | R4 | Same, plus the ledger check | Orchestrator | not started | 0% | 0% | T+9 |
 | R4 | Final adversarial pass on the whole product | H | 1 | R3 | R5 | GR's verdict; all findings closed | GR | not started | 0% | 0% | T+10 |
