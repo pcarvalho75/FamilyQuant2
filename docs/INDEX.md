@@ -94,6 +94,7 @@ Invoke each flag with `& $testExe <flag>` after building. Dispatch and arity are
 | `--test-operations` | Core outcomes, progress, cancellation and the owned native-child fixture |
 | `--test-busy` | App operation host, running-command cancellation, prior file bytes and guarded publication |
 | `--test-shell-dialogs [--after-busy]` | Browse callers, folder preference, accept/cancel, owned windows and headless messages; optional busy-group setup first |
+| `--test-clustering-diagnostic-shell [fresh-output-dir]` | Analysis action, progress/Cancel guards, actual native reports on read-only saved FCF/FQPROJ fixtures and repeat packet parity |
 | `--test-clustering-results` | Typed clustering/redundancy results and native synthetic fixtures |
 | `--test-identity-study` | Probe parser and grid-versus-probe interpretation |
 | `--test-results` | Results view-model readiness and export choices |

@@ -10,7 +10,7 @@ using System.Windows.Controls;
 
 namespace FamilyQuant;
 
-// Shell-owned request/result contracts. These deliberately do not guess the native writer's return type.
+// Shell-owned request/result contracts keep the native adapter and headless presenters separate.
 public sealed record ClusteringDiagnosticRequest(string DocumentPath, string OutputFolder, int IdentityPercent,
     bool SmallExhaustive = false, string? MatchingFasta = null);
 public sealed record ClusteringDiagnosticShellResult(string Text, string OutputFolder);
@@ -130,14 +130,15 @@ public partial class MainWindow
     }
 
     private static Task<ClusteringDiagnosticShellResult> WriteClusteringDiagnosticReportAsync(
-        ClusteringDiagnosticRequest request, OperationContext operation)
-    {
-        // BINDING REQUIRED: adapt the actual return type from Diagnostics.ClusteringDiagnostics.WriteReport
-        // on an owned Task.Run, passing request.DocumentPath, request.OutputFolder, request.IdentityPercent,
-        // smallExhaustive: false, matchingFasta: null, operation: operation. Return its report text and folder.
-        // Do not use reflection or invent the native result shape while the core lane supplies its contract.
-        return Task.FromException<ClusteringDiagnosticShellResult>(new NotSupportedException("Clustering diagnostics are not available in this build."));
-    }
+        ClusteringDiagnosticRequest request, OperationContext operation) => Task.Run(() =>
+        {
+            var report = Diagnostics.ClusteringDiagnostics.WriteReport(request.DocumentPath, request.OutputFolder,
+                request.IdentityPercent, smallExhaustive: false, matchingFasta: null, operation: operation);
+            string text = File.ReadAllText(report.TextReport);
+            ClusteringDiagnosticShellResult? completed = null;
+            operation.Commit(() => completed = new(text, report.Folder));
+            return completed!;
+        }, operation.CancellationToken);
 
     private int? ChooseDiagnosticIdentity()
     {
