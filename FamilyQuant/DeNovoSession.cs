@@ -404,31 +404,10 @@ public abstract class DeNovoSession : ScreenViewModel
                               new UTF8Encoding(false));
         }
 
-        public List<string> KeptRunNames() => KeptRowsByRun().Keys
-            .OrderBy(r => r, StringComparer.OrdinalIgnoreCase)
-            .ToList();
+        public List<string> KeptRunNames() => DeNovoInspectionSelection.KeptRunNames(LastReconciliation);
 
-        public Dictionary<string, List<PeaksDeNovoRow>> KeptRowsByRun()
-        {
-            var byRun = new Dictionary<string, List<PeaksDeNovoRow>>(StringComparer.OrdinalIgnoreCase);
-            if (LastReconciliation == null) return byRun;
-
-            foreach (ReconciledRow row in LastReconciliation.Rows)
-            {
-                if (row.Verdict != ReconciliationVerdict.DeNovoOnly
-                    && row.Verdict != ReconciliationVerdict.CoIsolatedExtra) continue;
-
-                string run = DeNovoReconciler.NormalizeRunName(row.DeNovo.RunName);
-                if (run.Length == 0) continue;
-
-                if (!byRun.TryGetValue(run, out List<PeaksDeNovoRow>? rows))
-                    byRun[run] = rows = new List<PeaksDeNovoRow>();
-
-                rows.Add(row.DeNovo);
-            }
-
-            return byRun;
-        }
+        public Dictionary<string, List<PeaksDeNovoRow>> KeptRowsByRun() =>
+            DeNovoInspectionSelection.KeptRowsByRun(LastReconciliation);
 
         protected void SuggestRawDirectory(string peaksDirectory)
         {
@@ -549,22 +528,8 @@ public abstract class DeNovoSession : ScreenViewModel
             return true;
         }
 
-        public List<string> PeptidesForHomology()
-        {
-            IEnumerable<PeaksDeNovoRow> rows = LastReconciliation == null
-                ? FilteredRows
-                : LastReconciliation.Rows
-                    .Where(r => r.Verdict == ReconciliationVerdict.DeNovoOnly
-                             || r.Verdict == ReconciliationVerdict.CoIsolatedExtra)
-                    .Select(r => r.DeNovo);
-
-            return rows
-                .Select(r => DeNovoReconciler.NormalizeSequence(r.Peptide))
-                .Where(p => p.Length > 0)
-                .Distinct(StringComparer.Ordinal)
-                .OrderBy(p => p, StringComparer.Ordinal)
-                .ToList();
-        }
+        public List<string> PeptidesForHomology() =>
+            DeNovoInspectionSelection.PeptidesForHomology(FilteredRows, LastReconciliation);
 
         public void ApplyHomology(DeNovoHomology outcome)
         {

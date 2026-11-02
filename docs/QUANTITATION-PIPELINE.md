@@ -50,6 +50,26 @@ seam. B5 can search the residual against the family world, credit family-level
 results separately and write a new export. It must not rewrite the first-pass
 assignments, existing family totals or spectrum mapping provenance.
 
+The pass itself is `FamilyWorldPass` (`Quantitation/FamilyWorldPass.cs`, B5). It reads
+`UnattributedDeNovoPeptides` and searches each distinct normalized tag against a
+`FamilyWorld` with `HomologyMapper.Search`, at the shipped identity gate and the
+production de novo rule, with one reversed copy of every world protein as decoy.
+A hit credits the UniProt families of the winning proteins, never a protein.
+`FamilyWorldOptions` carries Paulo's decision D11 as its defaults: a tag needs at
+least 9 residues (`TooShort` otherwise, not searched), and only the families in
+scope can be credited; the other matched families are kept apart
+(`OutOfScope`, `OutOfScopeFamilies`). The scope defaults to the families the world
+was gathered for; a world that records none is refused. Until the clade fetch (B4)
+stores a world, `FamilyWorld.FromFile` builds one from a family-world file's entries
+and stored panel, with the panel's families as the scope.
+
+`FamilyWorldPassResult` closes on the first pass's unattributed reference-calibrated
+de novo envelope: each family's own peptides, the shared row and every other
+outcome sum to it. `FamilyWorldPass.BuildCsv` is the new export; every row states
+the rules in force (`RuleText`). No existing table, total or export changes. The
+B1 checker (`--family-world-check`) runs the same pass under B1's settings and
+asserts its numbers equal its own tally bit for bit, then runs it under D11.
+
 ## Guide invariants and checks
 
 The eight invariants in `CLAUDE.md` retain their existing fixture coverage. The

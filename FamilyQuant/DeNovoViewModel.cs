@@ -141,7 +141,7 @@ public sealed partial class DeNovoViewModel : DeNovoSession
                 DeNovoFilterCriteria criteria = Criteria;
                 DeNovoImport? imported = LastImport;
                 DeNovoReconciliation outcome = await RunPhase(operation.Context, () =>
-                    DeNovoInspectionAudit.AttachSources(Reconcile(filtered, path, rawRows, criteria), imported));
+                    ReconcileForInspection(filtered, path, rawRows, criteria, imported));
 
                 operation.Context.ThrowIfCancellationRequested();
                 ApplyReconciliation(outcome);

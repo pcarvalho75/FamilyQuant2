@@ -877,7 +877,8 @@ namespace FamilyQuant.Tests
         /// the methods the buttons call. The verdict counts are compared with the ones the engine-level
         /// section measured rather than with a second hand-written copy of them.
         /// </summary>
-        private static void DeNovoScreenRealTests(string? peaksDir, string? desktopDir, string workDir)
+        private static void DeNovoScreenRealTests(string? peaksDir, string? desktopDir, string workDir,
+            bool includeLegacyExtraction = true)
         {
             string? sepr2 = desktopDir == null ? null : Path.Combine(desktopDir, "PLVI.sepr2");
 
@@ -981,6 +982,12 @@ namespace FamilyQuant.Tests
 
             Console.WriteLine("        status line: " + status.Text);
             Console.WriteLine("        relatorios: " + summaryCsv + " | " + queueCsv);
+
+            if (!includeLegacyExtraction)
+            {
+                Console.WriteLine("        focused X6 scope: import, reconciliation, selections and review exports; no RAW extraction");
+                return;
+            }
 
             // Main has no enclosing try/catch, so an unguarded throw here (a locked .xic2, an IOException
             // on a OneDrive placeholder RAW) would abort every section after this one.
