@@ -221,6 +221,7 @@ Companion options for `--screens` are `--screen-fcf <input.fcf>`, `--screen-proj
 | `--prove-denovo-commands <frozen-source> <frozen-app> <trusted-sepr2> <fresh-output> <date>` | Actual old/current command/data/status and native chooser/export success/cancel/failure receipts; 41-row semantic fact inventory |
 | `--prove-denovo-results-export <frozen-source> <frozen-app> <fresh-output> <date> [--negative-control]` | Whole-screen native source/Help and Results assignment export interactions; private desktop, selected CSV bytes, state retention and cancellation |
 | `--isolated-native-proof <native-proof-command> <arguments...>` | Private, never-selected Windows desktop for native-dialog proof commands; the dialog proof entry points isolate automatically |
+| `--prove-threeway <frozen-source> <frozen-app> <fresh-output> <date>` | Frozen/current three-way numeric/CSV and actual Save/cancel, empty/positive window states in two cultures on the private desktop |
 | `--denovo-command-probe <frozen-app> <trusted-sepr2> <fresh-output>` | Actual command trace without ledger import |
 | `--native-dialog-probe <fresh-output>` | Owned-process native Open/Folder/Save selection driver check |
 | `--ledger-shell-compare <frozen-root> <fresh-output> <date>` | SH and C1 exact declarations/member tokens; separate candidate registers, unproven rows kept OPEN |

@@ -28,6 +28,7 @@ internal static partial class Program
         "--shared-peptide-effect",
         "--prove-denovo-results-export",
         "--isolated-native-proof",
+        "--prove-threeway",
         "--prove-denovo-ledger",
         "--prove-denovo-runtime",
         "--prove-denovo-workflows",
