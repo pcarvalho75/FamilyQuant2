@@ -367,14 +367,16 @@ namespace FamilyQuant.Tests
             Line("known_pairs_all", N0(pairs.Count));
             Line("known_pairs", N0(known.Count));
 
-            double rightRate = RunKnown("species", "", pairs.Values.ToList(), known, FamilyWorld.Build(withoutSpecies), outDir, Log, Line);
+            var speciesRun = RunKnown("species", "", pairs.Values.ToList(), known, FamilyWorld.Build(withoutSpecies), outDir, Log, Line);
+            double rightRate = speciesRun.RightRate;
+            List<(int Length, bool Landed, bool Right)>? genusOutcomes = null;
             if (genus != null)
             {
                 Console.WriteLine();
                 Line("genus", string.Join(",", genera.Select(g => g.Id + " " + g.Name)));
                 List<FamilyWorldProtein> withoutGenus = Without(genus, "genus " + string.Join(", ", genera.Select(g => g.Name)));
                 Line("world_without_genus", N0(withoutGenus.Count));
-                RunKnown("genus (ungated)", "_genus", pairs.Values.ToList(), known, FamilyWorld.Build(withoutGenus), outDir, Log, Line);
+                genusOutcomes = RunKnown("genus (ungated)", "_genus", pairs.Values.ToList(), known, FamilyWorld.Build(withoutGenus), outDir, Log, Line).Outcomes;
             }
             else Console.WriteLine("        no genus above the sample's taxa in UniProt's lineage; the genus run is skipped");
 
@@ -492,11 +494,46 @@ namespace FamilyQuant.Tests
                     FamilyWorld.Join(credit.DecoySourceFamilies)));
             }
             Write(outDir, "family_world_coverage_sequences.csv", sequenceCsv.ToString());
+
+            // ---------------------------------------------------------------- gate study
+            // BETWEEN asks for a study of the gate before building. One candidate rule, measured and never applied:
+            // a minimum tag length for the cross-species pass. A shorter tag is simply not searched, so every row
+            // reads off the searches above and the residual stays the denominator. Nothing here changes the verdict.
+            int shortest = known.Select(p => p.Tag.Length).Concat(residual.Select(r => r.Sequence.Length)).Where(l => l > 0).DefaultIfEmpty(1).Min();
+            var studyCsv = new StringBuilder("minimum_tag_length,known_landed,known_right,known_right_rate,known_genus_landed,known_genus_right_rate," +
+                "residual_landed_fraction,residual_decoy_rate\n");
+            Console.WriteLine();
+            Console.WriteLine("        GATE STUDY, measured and not applied: a minimum tag length for the cross-species pass");
+            Console.WriteLine("          minimum | known landed, right (species out) | right (genus out) | residual landed | decoys of landed");
+            for (int minimum = shortest; minimum <= 15; minimum++)
+            {
+                (int Landed, int Right) Known(List<(int Length, bool Landed, bool Right)> outcomes) =>
+                    (outcomes.Count(o => o.Length >= minimum && o.Landed), outcomes.Count(o => o.Length >= minimum && o.Right));
+                var k = Known(speciesRun.Outcomes);
+                var g = genusOutcomes == null ? (Landed: 0, Right: 0) : Known(genusOutcomes);
+                double c = 0, d = 0;
+                foreach (var (p, sequence) in residual)
+                {
+                    if (sequence.Length < minimum) continue;
+                    FamilyWorldOutcome o = CreditOf(sequence).Outcome;
+                    if (o == FamilyWorldOutcome.Credited) c += p.ReferenceCalibratedEnvelope;
+                    else if (o == FamilyWorldOutcome.Decoy) d += p.ReferenceCalibratedEnvelope;
+                }
+                double kr = k.Landed == 0 ? 0 : k.Right / (double)k.Landed;
+                double gr = g.Landed == 0 ? 0 : g.Right / (double)g.Landed;
+                double lf = residualEnvelope <= 0 ? 0 : c / residualEnvelope;
+                double dr = c <= 0 ? double.PositiveInfinity : d / c;
+                Console.WriteLine("          " + minimum.ToString(CultureInfo.InvariantCulture).PadLeft(7) + " | " + N(k.Landed) + ", " + P(kr) +
+                    " | " + (genusOutcomes == null ? "n/a" : P(gr)) + " | " + P(lf) + " | " + P(dr));
+                studyCsv.Append(Csv(N0(minimum), N0(k.Landed), N0(k.Right), R(kr), N0(g.Landed), R(gr), R(lf), R(dr)));
+            }
+            Write(outDir, "family_world_gate_study.csv", studyCsv.ToString());
             Log("written to " + outDir);
         }
 
-        /// <summary>One known-answer run against one world. Returns the right rate among the landed pairs.</summary>
-        private static double RunKnown(string label, string suffix, List<KnownPair> pairs, List<KnownPair> known, FamilyWorld world,
+        /// <summary>One known-answer run against one world. Returns the right rate among the landed pairs, and per
+        /// pair its tag length, whether it landed and whether it was right.</summary>
+        private static (double RightRate, List<(int Length, bool Landed, bool Right)> Outcomes) RunKnown(string label, string suffix, List<KnownPair> pairs, List<KnownPair> known, FamilyWorld world,
             string outDir, Action<string> log, Action<string, string> line)
         {
             List<string> tags = known.Select(p => p.Tag).Distinct(StringComparer.Ordinal).ToList();
@@ -593,7 +630,7 @@ namespace FamilyQuant.Tests
             foreach (var (family, t) in byFamily)
                 familyCsv.Append(Csv(family, N0(t.Known), N0(t.KnownLanded), N0(t.KnownRight), N0(t.KnownDecoy), N0(t.Credited), N0(t.CreditedTrue)));
             Write(outDir, "family_world_known_by_family" + suffix + ".csv", familyCsv.ToString());
-            return rightRate;
+            return (rightRate, known.Select(p => (p.Tag.Length, Landed(p), Right(p))).ToList());
         }
 
         private static (int Order, string Name) LengthBin(int length) => length switch
