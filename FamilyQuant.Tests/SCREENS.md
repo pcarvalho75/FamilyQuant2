@@ -44,10 +44,12 @@ Focused screen producers and their exact arguments are listed in [the command ca
 ## C14 scale matrix
 
 Add `--screen-finish --screen-shell-status` to `--screens <fresh-output>` for the
-C14a matrix. It captures 16 client views in both themes at WPF root scales 1,
+C14 finishing matrix. It captures 18 client views in both themes at WPF root scales 1,
 1.25 and 1.5, at 900x600 and 1366x820 DIPs. A secondary window with a larger
-declared minimum uses that minimum instead. The two extra views are the actual
-Quantify screen and the selected-family member view.
+declared minimum uses that minimum instead. The four extra views are the actual
+Quantify screen, selected-family member view, and B10's stored Database gap
+length/result panel at its top and bottom. This extends C14a's original 16-view,
+192-PNG packet to 216 native PNGs.
 
 The harness calls `VisualTreeHelper.SetRootDpi` on each real WPF window and checks
 that `GetDpi` on both window and content reports the requested scale. PNG pixel

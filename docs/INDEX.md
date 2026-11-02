@@ -95,6 +95,7 @@ Invoke each flag with `& $testExe <flag>` after building. Dispatch and arity are
 | `--test-document` | Document round trip, scoring and denominator attribution fixtures |
 | `--test-evidence-task` | File-derived taxonomy, keyword counts, confirmation and recipe replay fixtures |
 | `--source-caption-check <fresh-output>` | Compiled source picker: all five frozen filename/Union facts, selected-source screenshots and native whole-control checks in both themes |
+| `--shared-peptide-effect <copied-project> <copied-T-R> <copied-sepr2> <copied-RAW-folder> <new-output> <cache> <dataset-label> <date> [--prepare-only]` | One-run native Compute full XIC and all three shared-peptide policies; exact database/curation check, scoped CSV/JSON outputs and no de novo input |
 | `--test-evidence-delivery` | Native default review, save, exports, exact app-session replay and app Open fixture |
 | `--test-evidence-fetch-atomic` | Combined evidence/panel staging, cancellation boundaries, failures and one final commit |
 | `--test-evidence-coverage` | Native alignment-row interpretation, counterfactual chooser and honest audit labels |
@@ -120,6 +121,8 @@ Invoke each flag with `& $testExe <flag>` after building. Dispatch and arity are
 | `--test-look-copy-preservation` | Scoped published-Help comparison negative controls, exact case and numeric boundaries |
 | `--prove-look-style-roles <frozen-source> <role-map> <new-output> <date-timestamp>` | Twenty-four explicit De novo role mappings, old/current values, native resolved properties and actual consumers in both themes |
 | `--probe-look-home-styles <new-output> [--negative-control]` | Native Home action/state checks, resolved style values and off-screen captures in both themes; optional planted lost-enablement regression; no focus or ledger closure by screenshot |
+| `--look-finish-focus <new-output> <date-timestamp>` | Native focus-state/template paint checks for four input types, both themes, three DPIs, without taking focus; creates a synthetic keyboard-check project |
+| `--look-finish-gallery <existing-native-capture-dir>` | Native review sheets assembled from unchanged C14 source PNGs; originals stay intact |
 | `--prove-look-app-tokens <frozen-source> <new-output> <date-timestamp>` | Explicit frozen/current application palette roles and named native Home consumers in both themes; unsupported roles stay OPEN |
 | `--prove-look-copy <frozen-source> <native-audit> <new-output> <date-timestamp> [LK-prefix]` | Exact OPEN help/tooltip cohort, native published Help and named-tooltip comparisons, 200-row LK register batches |
 | `--refresh-look-registers <frozen-source> <new-output> <date-timestamp>` | Regenerates all five existing LK copy/style registers from their fixed ordered IDs, with no audit or hand preparation; leaves unsupported rows unproved |
@@ -212,9 +215,9 @@ Companion options for `--screens` are `--screen-fcf <input.fcf>`, `--screen-proj
 | `--ledger-assay-cohort <frozen-root> <selection.json> <output> <step> <date>` | Scoped shared declaration comparisons; [receipt scope](ASSAY-LEDGER.md) |
 | `--ledger-assay-cache <frozen-root> <output> <date> [--negative-control]` | Frozen/current native cache wire and staging checks; frozen host build required |
 | `--assay-cache-snapshot <output>` | Shared synthetic native cache fixture; fresh output required |
-| `--test-assay-spectrum-properties`, `--test-assay-build-workflow` | Frozen column/property anchors and native Build handler receipt guards |
-| `--assay-view-snapshot spectrum/build <output>`, `--assay-build-output-snapshot <output>` | Native view properties and shared clustering/redundancy fixture outputs; fresh output |
-| `--ledger-assay-spectrum-properties <frozen-root> <output> <date> [--negative-control]`, `--ledger-assay-build-workflow` (same arguments) | Constructed column properties and native [Build workflow](N6H-USEARCH.md) against frozen reference |
+| `--test-assay-spectrum-properties`, `--test-assay-build-workflow`, `--test-assay-figure-gaps` | Frozen property, handler and native producer receipt guards |
+| `--assay-view-snapshot spectrum/build <output>`, `--assay-build-output-snapshot <output>`, `--assay-figure-gap-snapshot <output>` | Native view, clustering/redundancy and synthetic figure fixtures; fresh output |
+| `--ledger-assay-spectrum-properties <frozen-root> <output> <date> [--negative-control]`, `--ledger-assay-build-workflow`, `--ledger-assay-figure-gaps` (same arguments) | Native columns, [Build workflow](N6H-USEARCH.md) and [producer gaps](N6J-PRODUCERS.md) against frozen reference |
 | `--ledger-core-relocation <frozen-root> <fresh-output> X5/X7 <date> [member-mappings.json]` | Scoped complete Core member comparisons, exact frozen hashes, retained source/checker snapshots and per-row gaps; [guide](CORE-RELOCATION-LEDGER.md) |
 | `--ledger-shell-compare <frozen-root> <fresh-output> <date>` | SH and C1 exact declarations/member tokens; separate candidate registers, unproven rows kept OPEN |
 | `--ledger-storage-runtime <frozen-root> <fresh-output> <date> [--negative-control]` | Public project reader/writer schema, codec and refusal observations; [runtime guide](CORE-RUNTIME-LEDGER.md) |
@@ -238,6 +241,10 @@ Companion options for `--screens` are `--screen-fcf <input.fcf>`, `--screen-proj
 | `--shell-metadata-snapshot <frozen-root> <inventory> <fresh-output.json>` | Same native metadata helper in current and frozen hosts; assigned views remain unshown |
 | `--ledger-shell-native <frozen-root> <frozen-host.exe> <fresh-output> <date> [C1-cohort-register]` | Execute compiled SH/C1 metadata and isolated Home clicks; own candidate registers and complete comparison gaps |
 | `--prove-shell-main <frozen-root> <fresh-output> <date>` | Native MainWindow routes, synthetic file writes/refusals and captured dialog/report frames; own SH-main-routes candidate register |
+| `--prove-curation-actions <frozen-root> <own-frozen-host> <fixed-audit.json> <fresh-output> <date> [--negative-control]` | Native curation handlers and real synthetic CSV writes/refusals; complete frozen/current CSV comparison in two cultures; own SH-curation-actions candidate, fixed OPEN cohort only |
+| `--curation-export-snapshot <fresh-json>` | Shared current/frozen synthetic CSV and retained User sorting/counter values; no RAW computation |
+| `--shell-review-wording <review-gaps.tsv> <shared-wording.tsv> <matching-native-main-packet> <fresh-output> <date>` | Generate every requested/previous own list row from compiled/native feature text or the exact `no current equivalent` decision with a reason; never changes dispositions |
+| `--check-shell-review-list <review-gaps.tsv> <wording.tsv>` | Reject missing rows, empty values/reasons and unresolved angle-bracket placeholders in the reviewed cohort |
 | `--word-grouping-snapshot <input.fcf-or-fqproj> <output.txt>` | [WordGroupingSnapshot.cs](../FamilyQuant.Tests/WordGroupingSnapshot.cs), also linked into frozen host |
 | `--chart-export-snapshot <output-dir>` | [ChartExportSnapshot.cs](../FamilyQuant.Tests/ChartExportSnapshot.cs), synthetic chart parity fixtures |
 | `--clustering-snapshot <input.fasta> <output.tsv> <integer-identity> <fast-or-exhaustive>` | [ClusteringSnapshot.cs](../FamilyQuant.Tests/ClusteringSnapshot.cs) |

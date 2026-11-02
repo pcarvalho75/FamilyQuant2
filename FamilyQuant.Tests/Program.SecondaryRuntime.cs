@@ -74,6 +74,7 @@ internal static partial class Program
                     SecondaryGridRuntime(legacy, output, theme, Add);
                     SecondaryComputeRuntime(legacy, output, theme, Add);
                     SecondaryDialogScreenRuntime(legacy, output, theme);
+                    SecondaryComputeSpectrumRuntime(legacy, output, theme, Add);
                 }
                 if (theme == Themes.AppTheme.Dark)
                 {

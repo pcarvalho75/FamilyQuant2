@@ -14,21 +14,22 @@ internal static partial class Program
         .Replace("\n", "\\n", StringComparison.Ordinal).Replace("\t", "\\t", StringComparison.Ordinal);
 
     // Decision list only. This never creates a proof, changes a ledger state or judges equivalence.
-    private static void SecondaryWording(string output, string name, string source, IReadOnlyDictionary<int, string> values, bool includeUnchanged = false)
+    private static void SecondaryWording(string output, string name, string source, IReadOnlyDictionary<int, string> values, bool includeUnchanged = false, bool tooltips = false)
     {
         string root = FindLedgerRoot()!;
         var inventory = JsonSerializer.Deserialize<FeatureLedger.Inventory>(File.ReadAllText(Path.Combine(root, "docs/feature-ledger-scan.json")))!;
         var lines = new List<string> { SecondaryWordingHeader };
         foreach (var row in inventory.Observations.Where(row => row.Source == source && values.ContainsKey(row.Line)).OrderBy(row => row.Id, StringComparer.Ordinal))
         {
-            if (row.Kind is not ("code fact" or "format/export" or "option/copy")) continue;
+            if (row.Kind is not ("code fact" or "format/export" or "option/copy") && !(tooltips && row.Kind == "tooltip")) continue;
             string old = row.Detail;
             if (old.StartsWith('"')) old = JsonSerializer.Deserialize<string>(old)!;
             else if (old.Contains(" = ", StringComparison.Ordinal))
             {
                 int split = old.IndexOf(" = ", StringComparison.Ordinal);
                 string property = old[..split];
-                if (!property.EndsWith(".Content", StringComparison.Ordinal) && !property.EndsWith(".Text", StringComparison.Ordinal)) continue;
+                if (!property.EndsWith(".Content", StringComparison.Ordinal) && !property.EndsWith(".Text", StringComparison.Ordinal)
+                    && !(tooltips && property.EndsWith(".ToolTip", StringComparison.Ordinal))) continue;
                 old = old[(split + 3)..];
             }
             else continue;

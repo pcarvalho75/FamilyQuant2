@@ -4,6 +4,13 @@ The assigned v4 box contains 195 frozen observations. The existing native column
 130 on this pre-C13 checkout. C13 intentionally changes two of those tooltip fragments; the
 row-isolated producer leaves those two OPEN and preserves the other 128 at the gate.
 
+After the M72 sync, all four FQAssay Spectrum producers were re-executed twice
+against the changed implementation mappings. The current 195-row cohort has
+183 VERIFIED and 12 OPEN; all twelve OPEN rows are on Paulo's wording list.
+Both C13 fragments remain OPEN. Native values/proof logs and successful CSV/PNG
+exports are byte-identical in each refreshed pair. Other lanes' registers were
+not edited. These packets are under `D:/FamilyQuant-data/out-assay/m72-spectrum-*`.
+
 The additional native packets cover 18 named control/property and routed-refusal observations,
 25 actual export dialog/status/format observations, and 12 complete view-detail observations.
 The ten other wording observations and the two C13 tooltip fragments are on

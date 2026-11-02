@@ -5,164 +5,164 @@
   "runs": [
     {
       "id": "native",
-      "command": "D:\\FamilyQuant-wt\\assay\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --ledger-assay-spectrum-exports D:/FamilyQuant-data/out-shell/N3/source D:/FamilyQuant-data/out-assay/m67-spectrum-exports-final-2 \u00222026-11-02 07:54:39 -0800\u0022",
-      "executedAt": "2026-11-02 07:54:39 -0800",
-      "commit": "9a5118f8ac3c8e0e31f0dcb0e58d484c0f5f21b7",
+      "command": "D:\\FamilyQuant-wt\\assay\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --ledger-assay-spectrum-exports D:/FamilyQuant-data/out-shell/N3/source D:/FamilyQuant-data/out-assay/m72-spectrum-exports-2 \u00222026-11-02 09:11:29 -0800\u0022",
+      "executedAt": "2026-11-02 09:11:29 -0800",
+      "commit": "809abcb7d2939624f557e42a1cb393102a6b0556",
       "artifacts": [
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\m67-spectrum-exports-final-2\\proofs.log",
-          "sha256": "7ED1CEC2FD8FC9FA8765DCDF3C7815EBD7FA3C207B02F2913ED444734354E367"
+          "path": "D:\\FamilyQuant-data\\out-assay\\m72-spectrum-exports-2\\proofs.log",
+          "sha256": "284751A228E0E00E0ECA9AE924033E0303945195BE3E71143022FC4DE74A45C3"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\m67-spectrum-exports-final-2\\actual-values.json",
+          "path": "D:\\FamilyQuant-data\\out-assay\\m72-spectrum-exports-2\\actual-values.json",
           "sha256": "9DEC1822E1219BB2A2669B2E46E8673E4E612B4D9100C1A5EC0EA70DD71ED8E6"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\m67-spectrum-exports-final-2\\executed\\FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
+          "path": "D:\\FamilyQuant-data\\out-assay\\m72-spectrum-exports-2\\executed\\FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
           "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\m67-spectrum-exports-final-2\\executed\\FamilyQuant.Core/Quantitation/Studies/DeNovoAcceptedScoreScatterStudy.cs",
+          "path": "D:\\FamilyQuant-data\\out-assay\\m72-spectrum-exports-2\\executed\\FamilyQuant.Core/Quantitation/Studies/DeNovoAcceptedScoreScatterStudy.cs",
           "sha256": "EE422A7A31F3BB07F41DF1B50A587C6825BCF4B3AA1DC5E14EAE0E72F73CBE81"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\m67-spectrum-exports-final-2\\executed\\FamilyQuant.Tests/AssayCacheSnapshot.cs",
+          "path": "D:\\FamilyQuant-data\\out-assay\\m72-spectrum-exports-2\\executed\\FamilyQuant.Tests/AssayCacheSnapshot.cs",
           "sha256": "9E0CD15CD1616F7A312E6A14209E745CF8C4ADB6EEF1A3D6125690A9602CCC1B"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\m67-spectrum-exports-final-2\\executed\\FamilyQuant.Tests/AssaySpectrumExportComparison.cs",
+          "path": "D:\\FamilyQuant-data\\out-assay\\m72-spectrum-exports-2\\executed\\FamilyQuant.Tests/AssaySpectrumExportComparison.cs",
           "sha256": "E80F211242CB4A86F38EEFCD3B00BD8389B746ACF207B3A5F359D5A4DA4F230D"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\m67-spectrum-exports-final-2\\executed\\FamilyQuant.Tests/AssaySpectrumPropertyComparison.cs",
+          "path": "D:\\FamilyQuant-data\\out-assay\\m72-spectrum-exports-2\\executed\\FamilyQuant.Tests/AssaySpectrumPropertyComparison.cs",
           "sha256": "157C955F947789AA5BA5759EA3B37D762EA6A5E693AB49345BDE540C420CC036"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\m67-spectrum-exports-final-2\\executed\\FamilyQuant.Tests/FeatureLedgerEvidence.Reporting.cs",
+          "path": "D:\\FamilyQuant-data\\out-assay\\m72-spectrum-exports-2\\executed\\FamilyQuant.Tests/FeatureLedgerEvidence.Reporting.cs",
           "sha256": "8633DCBB14E8DBF1746A1FD771AD4E9404900EB68BA46690A31EFC8DEDFA247B"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\m67-spectrum-exports-final-2\\executed\\FamilyQuant.Tests/FeatureLedgerEvidence.cs",
+          "path": "D:\\FamilyQuant-data\\out-assay\\m72-spectrum-exports-2\\executed\\FamilyQuant.Tests/FeatureLedgerEvidence.cs",
           "sha256": "370FC41121F164A0C2495B260A62149FAD53F6F353203A97488423F2E6FA8738"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\m67-spectrum-exports-final-2\\executed\\FamilyQuant.Tests/Program.AssayCacheLedger.cs",
+          "path": "D:\\FamilyQuant-data\\out-assay\\m72-spectrum-exports-2\\executed\\FamilyQuant.Tests/Program.AssayCacheLedger.cs",
           "sha256": "7D3B175CC9824DA443DC369CF9C8983E1C59004FD15F080951BCEEF72B5449C9"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\m67-spectrum-exports-final-2\\executed\\FamilyQuant.Tests/Program.AssayRuntimeLedger.cs",
+          "path": "D:\\FamilyQuant-data\\out-assay\\m72-spectrum-exports-2\\executed\\FamilyQuant.Tests/Program.AssayRuntimeLedger.cs",
           "sha256": "24F4A0BACCC044156A198BDE8790FCDE12BF0A995641CA359FCB1AFEB3009CB7"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\m67-spectrum-exports-final-2\\executed\\FamilyQuant.Tests/Program.AssaySpectrumExport.cs",
+          "path": "D:\\FamilyQuant-data\\out-assay\\m72-spectrum-exports-2\\executed\\FamilyQuant.Tests/Program.AssaySpectrumExport.cs",
           "sha256": "5FF792AFE282C7D49C8D95B2C53A1AF55BCDE6C231AC627DFBB92CD27F8148B7"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\m67-spectrum-exports-final-2\\executed\\FamilyQuant.Tests/Program.AssaySpectrumExportLedger.cs",
-          "sha256": "85F00B0068C61468A7FB4D0DBD6688C0A083C5D70093E34C23C3B2BA1C085DDC"
+          "path": "D:\\FamilyQuant-data\\out-assay\\m72-spectrum-exports-2\\executed\\FamilyQuant.Tests/Program.AssaySpectrumExportLedger.cs",
+          "sha256": "B35A76B0DF2D163E65367A0389DB422602233CC8C9B171551DDD6A6BB94C08E3"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\m67-spectrum-exports-final-2\\executed\\FamilyQuant.Tests/Program.Commands.AssayLedger.cs",
-          "sha256": "584AE2E5132718747D9B86EE007150164FF7516FD6C6449C48287F9D8CD173F9"
+          "path": "D:\\FamilyQuant-data\\out-assay\\m72-spectrum-exports-2\\executed\\FamilyQuant.Tests/Program.Commands.AssayLedger.cs",
+          "sha256": "46DA029D0DBAA113B736A5E3B2BE7D29C486565EAE0063281F58F292ECC8112E"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\m67-spectrum-exports-final-2\\executed\\FamilyQuant/AppOperationFiles.cs",
+          "path": "D:\\FamilyQuant-data\\out-assay\\m72-spectrum-exports-2\\executed\\FamilyQuant/AppOperationFiles.cs",
           "sha256": "6E1FB949218EADF56A159B520AFD6912D6322578C32FA8BF70DB0000E6D72BD6"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\m67-spectrum-exports-final-2\\executed\\FamilyQuant/AppOperationHost.cs",
+          "path": "D:\\FamilyQuant-data\\out-assay\\m72-spectrum-exports-2\\executed\\FamilyQuant/AppOperationHost.cs",
           "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\m67-spectrum-exports-final-2\\executed\\FamilyQuant/ChartImageExporter.cs",
+          "path": "D:\\FamilyQuant-data\\out-assay\\m72-spectrum-exports-2\\executed\\FamilyQuant/ChartImageExporter.cs",
           "sha256": "77B1752BCDC39B6E677B688259C14E05386F2E797A20292463857158D6567BBC"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\m67-spectrum-exports-final-2\\executed\\FamilyQuant/PresentationFigures.cs",
+          "path": "D:\\FamilyQuant-data\\out-assay\\m72-spectrum-exports-2\\executed\\FamilyQuant/PresentationFigures.cs",
           "sha256": "C896F29F17D40275E77F1387034D36BA2F584FE6EBF75D5C18A76033E6CF6927"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\m67-spectrum-exports-final-2\\executed\\FamilyQuant/SecondaryWindows.ViewModels.cs",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "path": "D:\\FamilyQuant-data\\out-assay\\m72-spectrum-exports-2\\executed\\FamilyQuant/SecondaryWindows.ViewModels.cs",
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\m67-spectrum-exports-final-2\\executed\\FamilyQuant/ShellDialogs.cs",
+          "path": "D:\\FamilyQuant-data\\out-assay\\m72-spectrum-exports-2\\executed\\FamilyQuant/ShellDialogs.cs",
           "sha256": "BADA9EAE7CCA3011F34E56A17D71DA7304EAB666D61D06E0C53DA532589AAA76"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\m67-spectrum-exports-final-2\\executed\\FamilyQuant/SpectrumComparisonWindow.Columns.cs",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "path": "D:\\FamilyQuant-data\\out-assay\\m72-spectrum-exports-2\\executed\\FamilyQuant/SpectrumComparisonWindow.Columns.cs",
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\m67-spectrum-exports-final-2\\executed\\FamilyQuant/SpectrumComparisonWindow.Exports.cs",
+          "path": "D:\\FamilyQuant-data\\out-assay\\m72-spectrum-exports-2\\executed\\FamilyQuant/SpectrumComparisonWindow.Exports.cs",
           "sha256": "5FC458F9AA92ED3D24354ACB8BBDEB4EBB37CC2F968833C1A2AEF52DAB60E2CD"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\m67-spectrum-exports-final-2\\executed\\FamilyQuant/SpectrumComparisonWindow.View.cs",
+          "path": "D:\\FamilyQuant-data\\out-assay\\m72-spectrum-exports-2\\executed\\FamilyQuant/SpectrumComparisonWindow.View.cs",
           "sha256": "B7D8E01139E0E190F7BBDFBA5973AE012B55B56547BF3FDC78702D0B157F2E35"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\m67-spectrum-exports-final-2\\executed\\FamilyQuant/SpectrumComparisonWindow.cs",
+          "path": "D:\\FamilyQuant-data\\out-assay\\m72-spectrum-exports-2\\executed\\FamilyQuant/SpectrumComparisonWindow.cs",
           "sha256": "025C5824B534894B311B6AF36963182831EB0F663FD84AAC0D2399520E08FF0F"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\m67-spectrum-exports-final-2\\executed\\frozen\\FamilyQuant/SpectrumComparisonWindow.cs",
+          "path": "D:\\FamilyQuant-data\\out-assay\\m72-spectrum-exports-2\\executed\\frozen\\FamilyQuant/SpectrumComparisonWindow.cs",
           "sha256": "76DD3FE0949EFB7239FDBBCF9163FB78F06EDE5F008D3CC6CC391D9734C88BF2"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\m67-spectrum-exports-final-2\\executed\\FamilyQuant.Tests.dll",
-          "sha256": "7FE355FE7653D77B0ADC6471A94189033F4CFBCCBA346B8CA8A5E296EA2E1857"
+          "path": "D:\\FamilyQuant-data\\out-assay\\m72-spectrum-exports-2\\executed\\FamilyQuant.Tests.dll",
+          "sha256": "340CADF90108FDC93ECBEDA4777E4275F4DC2E9D66203CE394B3CE2C03283BA8"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\m67-spectrum-exports-final-2\\executed\\FamilyQuant.Core.dll",
-          "sha256": "362F72FCC26677EB000A3440435D9A2BEAA6E1B3A0B85AEE774CDB718B4E91DA"
+          "path": "D:\\FamilyQuant-data\\out-assay\\m72-spectrum-exports-2\\executed\\FamilyQuant.Core.dll",
+          "sha256": "153873484AA98E30EDB6E1F31266817151C151A909CCB575158FD78DCB93F3A0"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\m67-spectrum-exports-final-2\\executed\\FamilyQuant.dll",
-          "sha256": "A256D90C375713BE33AFE782844962FD10D1D29CACEAF04644434BC12A5AA52B"
+          "path": "D:\\FamilyQuant-data\\out-assay\\m72-spectrum-exports-2\\executed\\FamilyQuant.dll",
+          "sha256": "75DCE9DE8412A387840E3835C1F673B07121A21D958F9D5138175605491AB247"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\m67-spectrum-exports-final-2\\export-anchors.json",
+          "path": "D:\\FamilyQuant-data\\out-assay\\m72-spectrum-exports-2\\export-anchors.json",
           "sha256": "96284D6BA00B2C65F9B24D85CC1B3C869AF7690AA5D86426A41A7733854E929E"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\m67-spectrum-exports-final-2\\exports\\csv-dialog-cancel\\fixture.csv",
+          "path": "D:\\FamilyQuant-data\\out-assay\\m72-spectrum-exports-2\\exports\\csv-dialog-cancel\\fixture.csv",
           "sha256": "6DCBD7ECD454C48A13FDEDB794477ABDA1914078BF4492766C1341D3EFF390CB"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\m67-spectrum-exports-final-2\\exports\\csv-failure\\blocked",
+          "path": "D:\\FamilyQuant-data\\out-assay\\m72-spectrum-exports-2\\exports\\csv-failure\\blocked",
           "sha256": "521E7C3FDDB6B94CF80CC2B03B0897766D892583D1D336F60DAE7A1AB794E145"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\m67-spectrum-exports-final-2\\exports\\csv-operation-cancel\\fixture.csv",
+          "path": "D:\\FamilyQuant-data\\out-assay\\m72-spectrum-exports-2\\exports\\csv-operation-cancel\\fixture.csv",
           "sha256": "6DCBD7ECD454C48A13FDEDB794477ABDA1914078BF4492766C1341D3EFF390CB"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\m67-spectrum-exports-final-2\\exports\\csv-success\\fixture.csv",
+          "path": "D:\\FamilyQuant-data\\out-assay\\m72-spectrum-exports-2\\exports\\csv-success\\fixture.csv",
           "sha256": "0E6C55808E04AFD450A2718EE046852B7BF0348D0CA61FF34E6B8C1102E7EECB"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\m67-spectrum-exports-final-2\\exports\\export-actuals.json",
+          "path": "D:\\FamilyQuant-data\\out-assay\\m72-spectrum-exports-2\\exports\\export-actuals.json",
           "sha256": "A629667D1FFEC2337E31CB73FC54482352115A58FAFD69028D13C26359EF319C"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\m67-spectrum-exports-final-2\\exports\\plot-dialog-cancel\\fixture.png",
+          "path": "D:\\FamilyQuant-data\\out-assay\\m72-spectrum-exports-2\\exports\\plot-dialog-cancel\\fixture.png",
           "sha256": "6DCBD7ECD454C48A13FDEDB794477ABDA1914078BF4492766C1341D3EFF390CB"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\m67-spectrum-exports-final-2\\exports\\plot-failure\\blocked",
+          "path": "D:\\FamilyQuant-data\\out-assay\\m72-spectrum-exports-2\\exports\\plot-failure\\blocked",
           "sha256": "521E7C3FDDB6B94CF80CC2B03B0897766D892583D1D336F60DAE7A1AB794E145"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\m67-spectrum-exports-final-2\\exports\\plot-operation-cancel\\fixture.png",
+          "path": "D:\\FamilyQuant-data\\out-assay\\m72-spectrum-exports-2\\exports\\plot-operation-cancel\\fixture.png",
           "sha256": "6DCBD7ECD454C48A13FDEDB794477ABDA1914078BF4492766C1341D3EFF390CB"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\m67-spectrum-exports-final-2\\exports\\plot-success\\fixture.csv",
+          "path": "D:\\FamilyQuant-data\\out-assay\\m72-spectrum-exports-2\\exports\\plot-success\\fixture.csv",
           "sha256": "D4C4C64BD96FA1CD93868D3A4929A25E97B96068E0FA2EDAEB8B399D4CCE9329"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\m67-spectrum-exports-final-2\\exports\\plot-success\\fixture.png",
+          "path": "D:\\FamilyQuant-data\\out-assay\\m72-spectrum-exports-2\\exports\\plot-success\\fixture.png",
           "sha256": "462A8D620C9FF5B211D2458B30B6163DB5266646B3F742B4D68FF26D995BA072"
         }
       ],
@@ -206,7 +206,7 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -216,7 +216,7 @@
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -238,144 +238,6 @@
       "note": "Executed native value/refusal check, with the specific comparison recorded below.",
       "kindReceiptId": "native-code-fact",
       "compared": "FamilyQuant/SpectrumComparisonWindow.cs:410 \u0022N0\u0022; csv/success/status: Frozen complete status expression matches the actual native export status; only the dynamic exception message is a wildcard.; expected Written\\ 1,234\\ spectrum\\ row\\(s\\)\\ to\\ \u003Coutput\u003E\\\\csv-success\\\\fixture\\.csv\\.\\ The\\ project\\ and\\ its\\ quantitation\\ were\\ not\\ changed\\.; actual Written 1,234 spectrum row(s) to \u003Coutput\u003E\\csv-success\\fixture.csv. The project and its quantitation were not changed."
-    },
-    {
-      "observationId": "FQ15-0908BA69C203",
-      "implementation": [
-        {
-          "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
-        },
-        {
-          "path": "FamilyQuant.Core/Quantitation/Studies/DeNovoAcceptedScoreScatterStudy.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "EE422A7A31F3BB07F41DF1B50A587C6825BCF4B3AA1DC5E14EAE0E72F73CBE81"
-        },
-        {
-          "path": "FamilyQuant/AppOperationFiles.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "6E1FB949218EADF56A159B520AFD6912D6322578C32FA8BF70DB0000E6D72BD6"
-        },
-        {
-          "path": "FamilyQuant/AppOperationHost.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
-        },
-        {
-          "path": "FamilyQuant/ChartImageExporter.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "77B1752BCDC39B6E677B688259C14E05386F2E797A20292463857158D6567BBC"
-        },
-        {
-          "path": "FamilyQuant/PresentationFigures.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "C896F29F17D40275E77F1387034D36BA2F584FE6EBF75D5C18A76033E6CF6927"
-        },
-        {
-          "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
-        },
-        {
-          "path": "FamilyQuant/ShellDialogs.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "BADA9EAE7CCA3011F34E56A17D71DA7304EAB666D61D06E0C53DA532589AAA76"
-        },
-        {
-          "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
-        },
-        {
-          "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "5FC458F9AA92ED3D24354ACB8BBDEB4EBB37CC2F968833C1A2AEF52DAB60E2CD"
-        },
-        {
-          "path": "FamilyQuant/SpectrumComparisonWindow.View.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "B7D8E01139E0E190F7BBDFBA5973AE012B55B56547BF3FDC78702D0B157F2E35"
-        },
-        {
-          "path": "FamilyQuant/SpectrumComparisonWindow.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "025C5824B534894B311B6AF36963182831EB0F663FD84AAC0D2399520E08FF0F"
-        }
-      ],
-      "proofs": [],
-      "note": "No observation-specific native check; remains OPEN.",
-      "kindReceiptId": null,
-      "compared": null
-    },
-    {
-      "observationId": "FQ15-0DDF756D3A48",
-      "implementation": [
-        {
-          "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
-        },
-        {
-          "path": "FamilyQuant.Core/Quantitation/Studies/DeNovoAcceptedScoreScatterStudy.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "EE422A7A31F3BB07F41DF1B50A587C6825BCF4B3AA1DC5E14EAE0E72F73CBE81"
-        },
-        {
-          "path": "FamilyQuant/AppOperationFiles.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "6E1FB949218EADF56A159B520AFD6912D6322578C32FA8BF70DB0000E6D72BD6"
-        },
-        {
-          "path": "FamilyQuant/AppOperationHost.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
-        },
-        {
-          "path": "FamilyQuant/ChartImageExporter.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "77B1752BCDC39B6E677B688259C14E05386F2E797A20292463857158D6567BBC"
-        },
-        {
-          "path": "FamilyQuant/PresentationFigures.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "C896F29F17D40275E77F1387034D36BA2F584FE6EBF75D5C18A76033E6CF6927"
-        },
-        {
-          "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
-        },
-        {
-          "path": "FamilyQuant/ShellDialogs.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "BADA9EAE7CCA3011F34E56A17D71DA7304EAB666D61D06E0C53DA532589AAA76"
-        },
-        {
-          "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
-        },
-        {
-          "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "5FC458F9AA92ED3D24354ACB8BBDEB4EBB37CC2F968833C1A2AEF52DAB60E2CD"
-        },
-        {
-          "path": "FamilyQuant/SpectrumComparisonWindow.View.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "B7D8E01139E0E190F7BBDFBA5973AE012B55B56547BF3FDC78702D0B157F2E35"
-        },
-        {
-          "path": "FamilyQuant/SpectrumComparisonWindow.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "025C5824B534894B311B6AF36963182831EB0F663FD84AAC0D2399520E08FF0F"
-        }
-      ],
-      "proofs": [],
-      "note": "No observation-specific native check; remains OPEN.",
-      "kindReceiptId": null,
-      "compared": null
     },
     {
       "observationId": "FQ15-114E3BB905DB",
@@ -413,7 +275,7 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -423,7 +285,7 @@
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -445,144 +307,6 @@
       "note": "Executed native value/refusal check, with the specific comparison recorded below.",
       "kindReceiptId": "native-code-fact",
       "compared": "FamilyQuant/SpectrumComparisonWindow.cs:417 \u0022program: \u0022; csv/failure/status: Frozen complete status expression matches the actual native export status; only the dynamic exception message is a wildcard.; expected The\\ CSV\\ could\\ not\\ be\\ written,\\ so\\ nothing\\ was\\ saved\\.\\ Reason\\ given\\ by\\ the\\ program:\\ .\u002B\\ Check\\ that\\ the\\ file\\ is\\ not\\ open\\ elsewhere\\ and\\ that\\ you\\ can\\ write\\ to\\ that\\ folder,\\ then\\ save\\ again\\.; actual The CSV could not be written, so nothing was saved. Reason given by the program: Cannot create \u0027\u003Coutput\u003E\\csv-failure\\blocked\u0027 because a file or directory with the same name already exists. Check that the file is not open elsewhere and that you can write to that folder, then save again."
-    },
-    {
-      "observationId": "FQ15-13682B7228FE",
-      "implementation": [
-        {
-          "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
-        },
-        {
-          "path": "FamilyQuant.Core/Quantitation/Studies/DeNovoAcceptedScoreScatterStudy.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "EE422A7A31F3BB07F41DF1B50A587C6825BCF4B3AA1DC5E14EAE0E72F73CBE81"
-        },
-        {
-          "path": "FamilyQuant/AppOperationFiles.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "6E1FB949218EADF56A159B520AFD6912D6322578C32FA8BF70DB0000E6D72BD6"
-        },
-        {
-          "path": "FamilyQuant/AppOperationHost.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
-        },
-        {
-          "path": "FamilyQuant/ChartImageExporter.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "77B1752BCDC39B6E677B688259C14E05386F2E797A20292463857158D6567BBC"
-        },
-        {
-          "path": "FamilyQuant/PresentationFigures.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "C896F29F17D40275E77F1387034D36BA2F584FE6EBF75D5C18A76033E6CF6927"
-        },
-        {
-          "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
-        },
-        {
-          "path": "FamilyQuant/ShellDialogs.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "BADA9EAE7CCA3011F34E56A17D71DA7304EAB666D61D06E0C53DA532589AAA76"
-        },
-        {
-          "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
-        },
-        {
-          "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "5FC458F9AA92ED3D24354ACB8BBDEB4EBB37CC2F968833C1A2AEF52DAB60E2CD"
-        },
-        {
-          "path": "FamilyQuant/SpectrumComparisonWindow.View.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "B7D8E01139E0E190F7BBDFBA5973AE012B55B56547BF3FDC78702D0B157F2E35"
-        },
-        {
-          "path": "FamilyQuant/SpectrumComparisonWindow.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "025C5824B534894B311B6AF36963182831EB0F663FD84AAC0D2399520E08FF0F"
-        }
-      ],
-      "proofs": [],
-      "note": "No observation-specific native check; remains OPEN.",
-      "kindReceiptId": null,
-      "compared": null
-    },
-    {
-      "observationId": "FQ15-231902287B95",
-      "implementation": [
-        {
-          "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
-        },
-        {
-          "path": "FamilyQuant.Core/Quantitation/Studies/DeNovoAcceptedScoreScatterStudy.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "EE422A7A31F3BB07F41DF1B50A587C6825BCF4B3AA1DC5E14EAE0E72F73CBE81"
-        },
-        {
-          "path": "FamilyQuant/AppOperationFiles.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "6E1FB949218EADF56A159B520AFD6912D6322578C32FA8BF70DB0000E6D72BD6"
-        },
-        {
-          "path": "FamilyQuant/AppOperationHost.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
-        },
-        {
-          "path": "FamilyQuant/ChartImageExporter.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "77B1752BCDC39B6E677B688259C14E05386F2E797A20292463857158D6567BBC"
-        },
-        {
-          "path": "FamilyQuant/PresentationFigures.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "C896F29F17D40275E77F1387034D36BA2F584FE6EBF75D5C18A76033E6CF6927"
-        },
-        {
-          "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
-        },
-        {
-          "path": "FamilyQuant/ShellDialogs.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "BADA9EAE7CCA3011F34E56A17D71DA7304EAB666D61D06E0C53DA532589AAA76"
-        },
-        {
-          "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
-        },
-        {
-          "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "5FC458F9AA92ED3D24354ACB8BBDEB4EBB37CC2F968833C1A2AEF52DAB60E2CD"
-        },
-        {
-          "path": "FamilyQuant/SpectrumComparisonWindow.View.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "B7D8E01139E0E190F7BBDFBA5973AE012B55B56547BF3FDC78702D0B157F2E35"
-        },
-        {
-          "path": "FamilyQuant/SpectrumComparisonWindow.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "025C5824B534894B311B6AF36963182831EB0F663FD84AAC0D2399520E08FF0F"
-        }
-      ],
-      "proofs": [],
-      "note": "No observation-specific native check; remains OPEN.",
-      "kindReceiptId": null,
-      "compared": null
     },
     {
       "observationId": "FQ15-2539856F1EAD",
@@ -620,7 +344,7 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -630,7 +354,7 @@
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -652,75 +376,6 @@
       "note": "Executed native value/refusal check, with the specific comparison recorded below.",
       "kindReceiptId": "native-code-fact",
       "compared": "FamilyQuant/SpectrumComparisonWindow.cs:348 \u0022N0\u0022; plot/success/status: Frozen complete status expression matches the actual native export status; only the dynamic exception message is a wildcard.; expected Saved\\ \u003Coutput\u003E\\\\plot-success\\\\fixture\\.png\\ and\\ \u003Coutput\u003E\\\\plot-success\\\\fixture\\.csv\\.\\ 1,234\\ jointly\\ accepted\\ precursor-hypothesis\\ row\\(s\\):\\ 1,233\\ strict\\ matches\\ and\\ 1\\ mismatches\\.; actual Saved \u003Coutput\u003E\\plot-success\\fixture.png and \u003Coutput\u003E\\plot-success\\fixture.csv. 1,234 jointly accepted precursor-hypothesis row(s): 1,233 strict matches and 1 mismatches."
-    },
-    {
-      "observationId": "FQ15-2837FB9B6E15",
-      "implementation": [
-        {
-          "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
-        },
-        {
-          "path": "FamilyQuant.Core/Quantitation/Studies/DeNovoAcceptedScoreScatterStudy.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "EE422A7A31F3BB07F41DF1B50A587C6825BCF4B3AA1DC5E14EAE0E72F73CBE81"
-        },
-        {
-          "path": "FamilyQuant/AppOperationFiles.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "6E1FB949218EADF56A159B520AFD6912D6322578C32FA8BF70DB0000E6D72BD6"
-        },
-        {
-          "path": "FamilyQuant/AppOperationHost.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
-        },
-        {
-          "path": "FamilyQuant/ChartImageExporter.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "77B1752BCDC39B6E677B688259C14E05386F2E797A20292463857158D6567BBC"
-        },
-        {
-          "path": "FamilyQuant/PresentationFigures.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "C896F29F17D40275E77F1387034D36BA2F584FE6EBF75D5C18A76033E6CF6927"
-        },
-        {
-          "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
-        },
-        {
-          "path": "FamilyQuant/ShellDialogs.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "BADA9EAE7CCA3011F34E56A17D71DA7304EAB666D61D06E0C53DA532589AAA76"
-        },
-        {
-          "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
-        },
-        {
-          "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "5FC458F9AA92ED3D24354ACB8BBDEB4EBB37CC2F968833C1A2AEF52DAB60E2CD"
-        },
-        {
-          "path": "FamilyQuant/SpectrumComparisonWindow.View.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "B7D8E01139E0E190F7BBDFBA5973AE012B55B56547BF3FDC78702D0B157F2E35"
-        },
-        {
-          "path": "FamilyQuant/SpectrumComparisonWindow.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "025C5824B534894B311B6AF36963182831EB0F663FD84AAC0D2399520E08FF0F"
-        }
-      ],
-      "proofs": [],
-      "note": "No observation-specific native check; remains OPEN.",
-      "kindReceiptId": null,
-      "compared": null
     },
     {
       "observationId": "FQ15-2AB23E3CEF2C",
@@ -758,7 +413,7 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -768,76 +423,7 @@
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
-        },
-        {
-          "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "5FC458F9AA92ED3D24354ACB8BBDEB4EBB37CC2F968833C1A2AEF52DAB60E2CD"
-        },
-        {
-          "path": "FamilyQuant/SpectrumComparisonWindow.View.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "B7D8E01139E0E190F7BBDFBA5973AE012B55B56547BF3FDC78702D0B157F2E35"
-        },
-        {
-          "path": "FamilyQuant/SpectrumComparisonWindow.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "025C5824B534894B311B6AF36963182831EB0F663FD84AAC0D2399520E08FF0F"
-        }
-      ],
-      "proofs": [],
-      "note": "No observation-specific native check; remains OPEN.",
-      "kindReceiptId": null,
-      "compared": null
-    },
-    {
-      "observationId": "FQ15-332E524ED0DD",
-      "implementation": [
-        {
-          "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
-        },
-        {
-          "path": "FamilyQuant.Core/Quantitation/Studies/DeNovoAcceptedScoreScatterStudy.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "EE422A7A31F3BB07F41DF1B50A587C6825BCF4B3AA1DC5E14EAE0E72F73CBE81"
-        },
-        {
-          "path": "FamilyQuant/AppOperationFiles.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "6E1FB949218EADF56A159B520AFD6912D6322578C32FA8BF70DB0000E6D72BD6"
-        },
-        {
-          "path": "FamilyQuant/AppOperationHost.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
-        },
-        {
-          "path": "FamilyQuant/ChartImageExporter.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "77B1752BCDC39B6E677B688259C14E05386F2E797A20292463857158D6567BBC"
-        },
-        {
-          "path": "FamilyQuant/PresentationFigures.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "C896F29F17D40275E77F1387034D36BA2F584FE6EBF75D5C18A76033E6CF6927"
-        },
-        {
-          "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
-        },
-        {
-          "path": "FamilyQuant/ShellDialogs.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "BADA9EAE7CCA3011F34E56A17D71DA7304EAB666D61D06E0C53DA532589AAA76"
-        },
-        {
-          "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -896,7 +482,7 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -906,7 +492,7 @@
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -930,7 +516,7 @@
       "compared": "FamilyQuant/SpectrumComparisonWindow.cs:417 \u0022 Check that the file is not open elsewhere \u0022; csv/failure/status: Frozen complete status expression matches the actual native export status; only the dynamic exception message is a wildcard.; expected The\\ CSV\\ could\\ not\\ be\\ written,\\ so\\ nothing\\ was\\ saved\\.\\ Reason\\ given\\ by\\ the\\ program:\\ .\u002B\\ Check\\ that\\ the\\ file\\ is\\ not\\ open\\ elsewhere\\ and\\ that\\ you\\ can\\ write\\ to\\ that\\ folder,\\ then\\ save\\ again\\.; actual The CSV could not be written, so nothing was saved. Reason given by the program: Cannot create \u0027\u003Coutput\u003E\\csv-failure\\blocked\u0027 because a file or directory with the same name already exists. Check that the file is not open elsewhere and that you can write to that folder, then save again."
     },
     {
-      "observationId": "FQ15-385750EEF709",
+      "observationId": "FQ15-3AF889D02C38",
       "implementation": [
         {
           "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
@@ -965,7 +551,7 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -975,7 +561,7 @@
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -1034,7 +620,7 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -1044,7 +630,7 @@
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -1103,7 +689,7 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -1113,7 +699,7 @@
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -1172,7 +758,7 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -1182,7 +768,7 @@
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -1241,7 +827,7 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -1251,145 +837,7 @@
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
-        },
-        {
-          "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "5FC458F9AA92ED3D24354ACB8BBDEB4EBB37CC2F968833C1A2AEF52DAB60E2CD"
-        },
-        {
-          "path": "FamilyQuant/SpectrumComparisonWindow.View.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "B7D8E01139E0E190F7BBDFBA5973AE012B55B56547BF3FDC78702D0B157F2E35"
-        },
-        {
-          "path": "FamilyQuant/SpectrumComparisonWindow.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "025C5824B534894B311B6AF36963182831EB0F663FD84AAC0D2399520E08FF0F"
-        }
-      ],
-      "proofs": [],
-      "note": "No observation-specific native check; remains OPEN.",
-      "kindReceiptId": null,
-      "compared": null
-    },
-    {
-      "observationId": "FQ15-4E27BBF9D4AA",
-      "implementation": [
-        {
-          "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
-        },
-        {
-          "path": "FamilyQuant.Core/Quantitation/Studies/DeNovoAcceptedScoreScatterStudy.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "EE422A7A31F3BB07F41DF1B50A587C6825BCF4B3AA1DC5E14EAE0E72F73CBE81"
-        },
-        {
-          "path": "FamilyQuant/AppOperationFiles.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "6E1FB949218EADF56A159B520AFD6912D6322578C32FA8BF70DB0000E6D72BD6"
-        },
-        {
-          "path": "FamilyQuant/AppOperationHost.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
-        },
-        {
-          "path": "FamilyQuant/ChartImageExporter.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "77B1752BCDC39B6E677B688259C14E05386F2E797A20292463857158D6567BBC"
-        },
-        {
-          "path": "FamilyQuant/PresentationFigures.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "C896F29F17D40275E77F1387034D36BA2F584FE6EBF75D5C18A76033E6CF6927"
-        },
-        {
-          "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
-        },
-        {
-          "path": "FamilyQuant/ShellDialogs.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "BADA9EAE7CCA3011F34E56A17D71DA7304EAB666D61D06E0C53DA532589AAA76"
-        },
-        {
-          "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
-        },
-        {
-          "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "5FC458F9AA92ED3D24354ACB8BBDEB4EBB37CC2F968833C1A2AEF52DAB60E2CD"
-        },
-        {
-          "path": "FamilyQuant/SpectrumComparisonWindow.View.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "B7D8E01139E0E190F7BBDFBA5973AE012B55B56547BF3FDC78702D0B157F2E35"
-        },
-        {
-          "path": "FamilyQuant/SpectrumComparisonWindow.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "025C5824B534894B311B6AF36963182831EB0F663FD84AAC0D2399520E08FF0F"
-        }
-      ],
-      "proofs": [],
-      "note": "No observation-specific native check; remains OPEN.",
-      "kindReceiptId": null,
-      "compared": null
-    },
-    {
-      "observationId": "FQ15-4EBD6A8069C3",
-      "implementation": [
-        {
-          "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
-        },
-        {
-          "path": "FamilyQuant.Core/Quantitation/Studies/DeNovoAcceptedScoreScatterStudy.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "EE422A7A31F3BB07F41DF1B50A587C6825BCF4B3AA1DC5E14EAE0E72F73CBE81"
-        },
-        {
-          "path": "FamilyQuant/AppOperationFiles.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "6E1FB949218EADF56A159B520AFD6912D6322578C32FA8BF70DB0000E6D72BD6"
-        },
-        {
-          "path": "FamilyQuant/AppOperationHost.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
-        },
-        {
-          "path": "FamilyQuant/ChartImageExporter.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "77B1752BCDC39B6E677B688259C14E05386F2E797A20292463857158D6567BBC"
-        },
-        {
-          "path": "FamilyQuant/PresentationFigures.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "C896F29F17D40275E77F1387034D36BA2F584FE6EBF75D5C18A76033E6CF6927"
-        },
-        {
-          "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
-        },
-        {
-          "path": "FamilyQuant/ShellDialogs.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "BADA9EAE7CCA3011F34E56A17D71DA7304EAB666D61D06E0C53DA532589AAA76"
-        },
-        {
-          "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -1448,7 +896,7 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -1458,7 +906,7 @@
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -1480,351 +928,6 @@
       "note": "Executed native value/refusal check, with the specific comparison recorded below.",
       "kindReceiptId": "native-code-fact",
       "compared": "FamilyQuant/SpectrumComparisonWindow.cs:416 \u0022The CSV could not be written, so nothing was saved. Reason given by the \u0022; csv/failure/status: Frozen complete status expression matches the actual native export status; only the dynamic exception message is a wildcard.; expected The\\ CSV\\ could\\ not\\ be\\ written,\\ so\\ nothing\\ was\\ saved\\.\\ Reason\\ given\\ by\\ the\\ program:\\ .\u002B\\ Check\\ that\\ the\\ file\\ is\\ not\\ open\\ elsewhere\\ and\\ that\\ you\\ can\\ write\\ to\\ that\\ folder,\\ then\\ save\\ again\\.; actual The CSV could not be written, so nothing was saved. Reason given by the program: Cannot create \u0027\u003Coutput\u003E\\csv-failure\\blocked\u0027 because a file or directory with the same name already exists. Check that the file is not open elsewhere and that you can write to that folder, then save again."
-    },
-    {
-      "observationId": "FQ15-65C05F63436B",
-      "implementation": [
-        {
-          "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
-        },
-        {
-          "path": "FamilyQuant.Core/Quantitation/Studies/DeNovoAcceptedScoreScatterStudy.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "EE422A7A31F3BB07F41DF1B50A587C6825BCF4B3AA1DC5E14EAE0E72F73CBE81"
-        },
-        {
-          "path": "FamilyQuant/AppOperationFiles.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "6E1FB949218EADF56A159B520AFD6912D6322578C32FA8BF70DB0000E6D72BD6"
-        },
-        {
-          "path": "FamilyQuant/AppOperationHost.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
-        },
-        {
-          "path": "FamilyQuant/ChartImageExporter.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "77B1752BCDC39B6E677B688259C14E05386F2E797A20292463857158D6567BBC"
-        },
-        {
-          "path": "FamilyQuant/PresentationFigures.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "C896F29F17D40275E77F1387034D36BA2F584FE6EBF75D5C18A76033E6CF6927"
-        },
-        {
-          "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
-        },
-        {
-          "path": "FamilyQuant/ShellDialogs.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "BADA9EAE7CCA3011F34E56A17D71DA7304EAB666D61D06E0C53DA532589AAA76"
-        },
-        {
-          "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
-        },
-        {
-          "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "5FC458F9AA92ED3D24354ACB8BBDEB4EBB37CC2F968833C1A2AEF52DAB60E2CD"
-        },
-        {
-          "path": "FamilyQuant/SpectrumComparisonWindow.View.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "B7D8E01139E0E190F7BBDFBA5973AE012B55B56547BF3FDC78702D0B157F2E35"
-        },
-        {
-          "path": "FamilyQuant/SpectrumComparisonWindow.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "025C5824B534894B311B6AF36963182831EB0F663FD84AAC0D2399520E08FF0F"
-        }
-      ],
-      "proofs": [],
-      "note": "No observation-specific native check; remains OPEN.",
-      "kindReceiptId": null,
-      "compared": null
-    },
-    {
-      "observationId": "FQ15-68E7DEC99B44",
-      "implementation": [
-        {
-          "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
-        },
-        {
-          "path": "FamilyQuant.Core/Quantitation/Studies/DeNovoAcceptedScoreScatterStudy.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "EE422A7A31F3BB07F41DF1B50A587C6825BCF4B3AA1DC5E14EAE0E72F73CBE81"
-        },
-        {
-          "path": "FamilyQuant/AppOperationFiles.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "6E1FB949218EADF56A159B520AFD6912D6322578C32FA8BF70DB0000E6D72BD6"
-        },
-        {
-          "path": "FamilyQuant/AppOperationHost.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
-        },
-        {
-          "path": "FamilyQuant/ChartImageExporter.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "77B1752BCDC39B6E677B688259C14E05386F2E797A20292463857158D6567BBC"
-        },
-        {
-          "path": "FamilyQuant/PresentationFigures.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "C896F29F17D40275E77F1387034D36BA2F584FE6EBF75D5C18A76033E6CF6927"
-        },
-        {
-          "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
-        },
-        {
-          "path": "FamilyQuant/ShellDialogs.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "BADA9EAE7CCA3011F34E56A17D71DA7304EAB666D61D06E0C53DA532589AAA76"
-        },
-        {
-          "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
-        },
-        {
-          "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "5FC458F9AA92ED3D24354ACB8BBDEB4EBB37CC2F968833C1A2AEF52DAB60E2CD"
-        },
-        {
-          "path": "FamilyQuant/SpectrumComparisonWindow.View.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "B7D8E01139E0E190F7BBDFBA5973AE012B55B56547BF3FDC78702D0B157F2E35"
-        },
-        {
-          "path": "FamilyQuant/SpectrumComparisonWindow.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "025C5824B534894B311B6AF36963182831EB0F663FD84AAC0D2399520E08FF0F"
-        }
-      ],
-      "proofs": [],
-      "note": "No observation-specific native check; remains OPEN.",
-      "kindReceiptId": null,
-      "compared": null
-    },
-    {
-      "observationId": "FQ15-7C8FB9F25D48",
-      "implementation": [
-        {
-          "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
-        },
-        {
-          "path": "FamilyQuant.Core/Quantitation/Studies/DeNovoAcceptedScoreScatterStudy.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "EE422A7A31F3BB07F41DF1B50A587C6825BCF4B3AA1DC5E14EAE0E72F73CBE81"
-        },
-        {
-          "path": "FamilyQuant/AppOperationFiles.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "6E1FB949218EADF56A159B520AFD6912D6322578C32FA8BF70DB0000E6D72BD6"
-        },
-        {
-          "path": "FamilyQuant/AppOperationHost.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
-        },
-        {
-          "path": "FamilyQuant/ChartImageExporter.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "77B1752BCDC39B6E677B688259C14E05386F2E797A20292463857158D6567BBC"
-        },
-        {
-          "path": "FamilyQuant/PresentationFigures.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "C896F29F17D40275E77F1387034D36BA2F584FE6EBF75D5C18A76033E6CF6927"
-        },
-        {
-          "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
-        },
-        {
-          "path": "FamilyQuant/ShellDialogs.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "BADA9EAE7CCA3011F34E56A17D71DA7304EAB666D61D06E0C53DA532589AAA76"
-        },
-        {
-          "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
-        },
-        {
-          "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "5FC458F9AA92ED3D24354ACB8BBDEB4EBB37CC2F968833C1A2AEF52DAB60E2CD"
-        },
-        {
-          "path": "FamilyQuant/SpectrumComparisonWindow.View.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "B7D8E01139E0E190F7BBDFBA5973AE012B55B56547BF3FDC78702D0B157F2E35"
-        },
-        {
-          "path": "FamilyQuant/SpectrumComparisonWindow.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "025C5824B534894B311B6AF36963182831EB0F663FD84AAC0D2399520E08FF0F"
-        }
-      ],
-      "proofs": [],
-      "note": "No observation-specific native check; remains OPEN.",
-      "kindReceiptId": null,
-      "compared": null
-    },
-    {
-      "observationId": "FQ15-7E29C1ED8488",
-      "implementation": [
-        {
-          "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
-        },
-        {
-          "path": "FamilyQuant.Core/Quantitation/Studies/DeNovoAcceptedScoreScatterStudy.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "EE422A7A31F3BB07F41DF1B50A587C6825BCF4B3AA1DC5E14EAE0E72F73CBE81"
-        },
-        {
-          "path": "FamilyQuant/AppOperationFiles.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "6E1FB949218EADF56A159B520AFD6912D6322578C32FA8BF70DB0000E6D72BD6"
-        },
-        {
-          "path": "FamilyQuant/AppOperationHost.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
-        },
-        {
-          "path": "FamilyQuant/ChartImageExporter.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "77B1752BCDC39B6E677B688259C14E05386F2E797A20292463857158D6567BBC"
-        },
-        {
-          "path": "FamilyQuant/PresentationFigures.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "C896F29F17D40275E77F1387034D36BA2F584FE6EBF75D5C18A76033E6CF6927"
-        },
-        {
-          "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
-        },
-        {
-          "path": "FamilyQuant/ShellDialogs.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "BADA9EAE7CCA3011F34E56A17D71DA7304EAB666D61D06E0C53DA532589AAA76"
-        },
-        {
-          "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
-        },
-        {
-          "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "5FC458F9AA92ED3D24354ACB8BBDEB4EBB37CC2F968833C1A2AEF52DAB60E2CD"
-        },
-        {
-          "path": "FamilyQuant/SpectrumComparisonWindow.View.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "B7D8E01139E0E190F7BBDFBA5973AE012B55B56547BF3FDC78702D0B157F2E35"
-        },
-        {
-          "path": "FamilyQuant/SpectrumComparisonWindow.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "025C5824B534894B311B6AF36963182831EB0F663FD84AAC0D2399520E08FF0F"
-        }
-      ],
-      "proofs": [],
-      "note": "No observation-specific native check; remains OPEN.",
-      "kindReceiptId": null,
-      "compared": null
-    },
-    {
-      "observationId": "FQ15-836428C77D50",
-      "implementation": [
-        {
-          "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
-        },
-        {
-          "path": "FamilyQuant.Core/Quantitation/Studies/DeNovoAcceptedScoreScatterStudy.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "EE422A7A31F3BB07F41DF1B50A587C6825BCF4B3AA1DC5E14EAE0E72F73CBE81"
-        },
-        {
-          "path": "FamilyQuant/AppOperationFiles.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "6E1FB949218EADF56A159B520AFD6912D6322578C32FA8BF70DB0000E6D72BD6"
-        },
-        {
-          "path": "FamilyQuant/AppOperationHost.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
-        },
-        {
-          "path": "FamilyQuant/ChartImageExporter.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "77B1752BCDC39B6E677B688259C14E05386F2E797A20292463857158D6567BBC"
-        },
-        {
-          "path": "FamilyQuant/PresentationFigures.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "C896F29F17D40275E77F1387034D36BA2F584FE6EBF75D5C18A76033E6CF6927"
-        },
-        {
-          "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
-        },
-        {
-          "path": "FamilyQuant/ShellDialogs.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "BADA9EAE7CCA3011F34E56A17D71DA7304EAB666D61D06E0C53DA532589AAA76"
-        },
-        {
-          "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
-        },
-        {
-          "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "5FC458F9AA92ED3D24354ACB8BBDEB4EBB37CC2F968833C1A2AEF52DAB60E2CD"
-        },
-        {
-          "path": "FamilyQuant/SpectrumComparisonWindow.View.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "B7D8E01139E0E190F7BBDFBA5973AE012B55B56547BF3FDC78702D0B157F2E35"
-        },
-        {
-          "path": "FamilyQuant/SpectrumComparisonWindow.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "025C5824B534894B311B6AF36963182831EB0F663FD84AAC0D2399520E08FF0F"
-        }
-      ],
-      "proofs": [],
-      "note": "No observation-specific native check; remains OPEN.",
-      "kindReceiptId": null,
-      "compared": null
     },
     {
       "observationId": "FQ15-8A683CC9FA21",
@@ -1862,7 +965,7 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -1872,7 +975,7 @@
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -1931,7 +1034,7 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -1941,7 +1044,7 @@
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -1963,75 +1066,6 @@
       "note": "Executed native value/refusal check, with the specific comparison recorded below.",
       "kindReceiptId": "native-code-fact",
       "compared": "FamilyQuant/SpectrumComparisonWindow.cs:347 \u0022 jointly accepted precursor-hypothesis row(s): \u0022; plot/success/status: Frozen complete status expression matches the actual native export status; only the dynamic exception message is a wildcard.; expected Saved\\ \u003Coutput\u003E\\\\plot-success\\\\fixture\\.png\\ and\\ \u003Coutput\u003E\\\\plot-success\\\\fixture\\.csv\\.\\ 1,234\\ jointly\\ accepted\\ precursor-hypothesis\\ row\\(s\\):\\ 1,233\\ strict\\ matches\\ and\\ 1\\ mismatches\\.; actual Saved \u003Coutput\u003E\\plot-success\\fixture.png and \u003Coutput\u003E\\plot-success\\fixture.csv. 1,234 jointly accepted precursor-hypothesis row(s): 1,233 strict matches and 1 mismatches."
-    },
-    {
-      "observationId": "FQ15-910777A7C13F",
-      "implementation": [
-        {
-          "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
-        },
-        {
-          "path": "FamilyQuant.Core/Quantitation/Studies/DeNovoAcceptedScoreScatterStudy.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "EE422A7A31F3BB07F41DF1B50A587C6825BCF4B3AA1DC5E14EAE0E72F73CBE81"
-        },
-        {
-          "path": "FamilyQuant/AppOperationFiles.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "6E1FB949218EADF56A159B520AFD6912D6322578C32FA8BF70DB0000E6D72BD6"
-        },
-        {
-          "path": "FamilyQuant/AppOperationHost.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
-        },
-        {
-          "path": "FamilyQuant/ChartImageExporter.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "77B1752BCDC39B6E677B688259C14E05386F2E797A20292463857158D6567BBC"
-        },
-        {
-          "path": "FamilyQuant/PresentationFigures.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "C896F29F17D40275E77F1387034D36BA2F584FE6EBF75D5C18A76033E6CF6927"
-        },
-        {
-          "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
-        },
-        {
-          "path": "FamilyQuant/ShellDialogs.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "BADA9EAE7CCA3011F34E56A17D71DA7304EAB666D61D06E0C53DA532589AAA76"
-        },
-        {
-          "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
-        },
-        {
-          "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "5FC458F9AA92ED3D24354ACB8BBDEB4EBB37CC2F968833C1A2AEF52DAB60E2CD"
-        },
-        {
-          "path": "FamilyQuant/SpectrumComparisonWindow.View.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "B7D8E01139E0E190F7BBDFBA5973AE012B55B56547BF3FDC78702D0B157F2E35"
-        },
-        {
-          "path": "FamilyQuant/SpectrumComparisonWindow.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "025C5824B534894B311B6AF36963182831EB0F663FD84AAC0D2399520E08FF0F"
-        }
-      ],
-      "proofs": [],
-      "note": "No observation-specific native check; remains OPEN.",
-      "kindReceiptId": null,
-      "compared": null
     },
     {
       "observationId": "FQ15-91DAD8FD3427",
@@ -2069,7 +1103,7 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -2079,7 +1113,7 @@
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -2138,7 +1172,7 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -2148,7 +1182,7 @@
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -2207,7 +1241,7 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -2217,7 +1251,7 @@
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -2276,7 +1310,7 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -2286,7 +1320,7 @@
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -2345,7 +1379,7 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -2355,7 +1389,7 @@
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -2377,75 +1411,6 @@
       "note": "Executed native value/refusal check, with the specific comparison recorded below.",
       "kindReceiptId": "native-code-fact",
       "compared": "FamilyQuant/SpectrumComparisonWindow.cs:355 \u0022The accepted-call score plot was not saved. \u0022; plot/failure/status: Frozen complete status expression matches the actual native export status; only the dynamic exception message is a wildcard.; expected The\\ accepted-call\\ score\\ plot\\ was\\ not\\ saved\\.\\ .\u002B; actual The accepted-call score plot was not saved. Cannot create \u0027\u003Coutput\u003E\\plot-failure\\blocked\u0027 because a file or directory with the same name already exists."
-    },
-    {
-      "observationId": "FQ15-98F81CE88BFD",
-      "implementation": [
-        {
-          "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
-        },
-        {
-          "path": "FamilyQuant.Core/Quantitation/Studies/DeNovoAcceptedScoreScatterStudy.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "EE422A7A31F3BB07F41DF1B50A587C6825BCF4B3AA1DC5E14EAE0E72F73CBE81"
-        },
-        {
-          "path": "FamilyQuant/AppOperationFiles.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "6E1FB949218EADF56A159B520AFD6912D6322578C32FA8BF70DB0000E6D72BD6"
-        },
-        {
-          "path": "FamilyQuant/AppOperationHost.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
-        },
-        {
-          "path": "FamilyQuant/ChartImageExporter.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "77B1752BCDC39B6E677B688259C14E05386F2E797A20292463857158D6567BBC"
-        },
-        {
-          "path": "FamilyQuant/PresentationFigures.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "C896F29F17D40275E77F1387034D36BA2F584FE6EBF75D5C18A76033E6CF6927"
-        },
-        {
-          "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
-        },
-        {
-          "path": "FamilyQuant/ShellDialogs.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "BADA9EAE7CCA3011F34E56A17D71DA7304EAB666D61D06E0C53DA532589AAA76"
-        },
-        {
-          "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
-        },
-        {
-          "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "5FC458F9AA92ED3D24354ACB8BBDEB4EBB37CC2F968833C1A2AEF52DAB60E2CD"
-        },
-        {
-          "path": "FamilyQuant/SpectrumComparisonWindow.View.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "B7D8E01139E0E190F7BBDFBA5973AE012B55B56547BF3FDC78702D0B157F2E35"
-        },
-        {
-          "path": "FamilyQuant/SpectrumComparisonWindow.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "025C5824B534894B311B6AF36963182831EB0F663FD84AAC0D2399520E08FF0F"
-        }
-      ],
-      "proofs": [],
-      "note": "No observation-specific native check; remains OPEN.",
-      "kindReceiptId": null,
-      "compared": null
     },
     {
       "observationId": "FQ15-9A71BF62E6A0",
@@ -2483,7 +1448,7 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -2493,7 +1458,7 @@
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -2552,7 +1517,7 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -2562,7 +1527,7 @@
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -2621,7 +1586,7 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -2631,7 +1596,7 @@
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -2653,75 +1618,6 @@
       "note": "Executed native value/refusal check, with the specific comparison recorded below.",
       "kindReceiptId": "native-code-fact",
       "compared": "FamilyQuant/SpectrumComparisonWindow.cs:324 \u0022Save accepted PEAKS versus DeepNovo score plot and exact CSV\u0022; plot/dialog-cancel/title: Actual routed action constructs the frozen native dialog property before cancellation.; expected Save accepted PEAKS versus DeepNovo score plot and exact CSV; actual Save accepted PEAKS versus DeepNovo score plot and exact CSV"
-    },
-    {
-      "observationId": "FQ15-ABEE2CF20D4D",
-      "implementation": [
-        {
-          "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
-        },
-        {
-          "path": "FamilyQuant.Core/Quantitation/Studies/DeNovoAcceptedScoreScatterStudy.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "EE422A7A31F3BB07F41DF1B50A587C6825BCF4B3AA1DC5E14EAE0E72F73CBE81"
-        },
-        {
-          "path": "FamilyQuant/AppOperationFiles.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "6E1FB949218EADF56A159B520AFD6912D6322578C32FA8BF70DB0000E6D72BD6"
-        },
-        {
-          "path": "FamilyQuant/AppOperationHost.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
-        },
-        {
-          "path": "FamilyQuant/ChartImageExporter.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "77B1752BCDC39B6E677B688259C14E05386F2E797A20292463857158D6567BBC"
-        },
-        {
-          "path": "FamilyQuant/PresentationFigures.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "C896F29F17D40275E77F1387034D36BA2F584FE6EBF75D5C18A76033E6CF6927"
-        },
-        {
-          "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
-        },
-        {
-          "path": "FamilyQuant/ShellDialogs.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "BADA9EAE7CCA3011F34E56A17D71DA7304EAB666D61D06E0C53DA532589AAA76"
-        },
-        {
-          "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
-        },
-        {
-          "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "5FC458F9AA92ED3D24354ACB8BBDEB4EBB37CC2F968833C1A2AEF52DAB60E2CD"
-        },
-        {
-          "path": "FamilyQuant/SpectrumComparisonWindow.View.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "B7D8E01139E0E190F7BBDFBA5973AE012B55B56547BF3FDC78702D0B157F2E35"
-        },
-        {
-          "path": "FamilyQuant/SpectrumComparisonWindow.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "025C5824B534894B311B6AF36963182831EB0F663FD84AAC0D2399520E08FF0F"
-        }
-      ],
-      "proofs": [],
-      "note": "No observation-specific native check; remains OPEN.",
-      "kindReceiptId": null,
-      "compared": null
     },
     {
       "observationId": "FQ15-AF48139BCAFB",
@@ -2759,7 +1655,7 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -2769,7 +1665,7 @@
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -2828,7 +1724,7 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -2838,7 +1734,7 @@
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -2860,75 +1756,6 @@
       "note": "Executed native value/refusal check, with the specific comparison recorded below.",
       "kindReceiptId": "native-code-fact",
       "compared": "FamilyQuant/SpectrumComparisonWindow.cs:412 \u0022. The project and its quantitation were not changed.\u0022; csv/success/status: Frozen complete status expression matches the actual native export status; only the dynamic exception message is a wildcard.; expected Written\\ 1,234\\ spectrum\\ row\\(s\\)\\ to\\ \u003Coutput\u003E\\\\csv-success\\\\fixture\\.csv\\.\\ The\\ project\\ and\\ its\\ quantitation\\ were\\ not\\ changed\\.; actual Written 1,234 spectrum row(s) to \u003Coutput\u003E\\csv-success\\fixture.csv. The project and its quantitation were not changed."
-    },
-    {
-      "observationId": "FQ15-B4760E520F75",
-      "implementation": [
-        {
-          "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
-        },
-        {
-          "path": "FamilyQuant.Core/Quantitation/Studies/DeNovoAcceptedScoreScatterStudy.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "EE422A7A31F3BB07F41DF1B50A587C6825BCF4B3AA1DC5E14EAE0E72F73CBE81"
-        },
-        {
-          "path": "FamilyQuant/AppOperationFiles.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "6E1FB949218EADF56A159B520AFD6912D6322578C32FA8BF70DB0000E6D72BD6"
-        },
-        {
-          "path": "FamilyQuant/AppOperationHost.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
-        },
-        {
-          "path": "FamilyQuant/ChartImageExporter.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "77B1752BCDC39B6E677B688259C14E05386F2E797A20292463857158D6567BBC"
-        },
-        {
-          "path": "FamilyQuant/PresentationFigures.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "C896F29F17D40275E77F1387034D36BA2F584FE6EBF75D5C18A76033E6CF6927"
-        },
-        {
-          "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
-        },
-        {
-          "path": "FamilyQuant/ShellDialogs.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "BADA9EAE7CCA3011F34E56A17D71DA7304EAB666D61D06E0C53DA532589AAA76"
-        },
-        {
-          "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
-        },
-        {
-          "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "5FC458F9AA92ED3D24354ACB8BBDEB4EBB37CC2F968833C1A2AEF52DAB60E2CD"
-        },
-        {
-          "path": "FamilyQuant/SpectrumComparisonWindow.View.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "B7D8E01139E0E190F7BBDFBA5973AE012B55B56547BF3FDC78702D0B157F2E35"
-        },
-        {
-          "path": "FamilyQuant/SpectrumComparisonWindow.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "025C5824B534894B311B6AF36963182831EB0F663FD84AAC0D2399520E08FF0F"
-        }
-      ],
-      "proofs": [],
-      "note": "No observation-specific native check; remains OPEN.",
-      "kindReceiptId": null,
-      "compared": null
     },
     {
       "observationId": "FQ15-B54161CBD937",
@@ -2966,7 +1793,7 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -2976,7 +1803,7 @@
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -3035,7 +1862,7 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -3045,7 +1872,7 @@
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -3067,75 +1894,6 @@
       "note": "Executed native value/refusal check, with the specific comparison recorded below.",
       "kindReceiptId": "native-code-fact",
       "compared": "FamilyQuant/SpectrumComparisonWindow.cs:411 \u0022 spectrum row(s) to \u0022; csv/success/status: Frozen complete status expression matches the actual native export status; only the dynamic exception message is a wildcard.; expected Written\\ 1,234\\ spectrum\\ row\\(s\\)\\ to\\ \u003Coutput\u003E\\\\csv-success\\\\fixture\\.csv\\.\\ The\\ project\\ and\\ its\\ quantitation\\ were\\ not\\ changed\\.; actual Written 1,234 spectrum row(s) to \u003Coutput\u003E\\csv-success\\fixture.csv. The project and its quantitation were not changed."
-    },
-    {
-      "observationId": "FQ15-C08CBBFA8D5A",
-      "implementation": [
-        {
-          "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
-        },
-        {
-          "path": "FamilyQuant.Core/Quantitation/Studies/DeNovoAcceptedScoreScatterStudy.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "EE422A7A31F3BB07F41DF1B50A587C6825BCF4B3AA1DC5E14EAE0E72F73CBE81"
-        },
-        {
-          "path": "FamilyQuant/AppOperationFiles.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "6E1FB949218EADF56A159B520AFD6912D6322578C32FA8BF70DB0000E6D72BD6"
-        },
-        {
-          "path": "FamilyQuant/AppOperationHost.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
-        },
-        {
-          "path": "FamilyQuant/ChartImageExporter.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "77B1752BCDC39B6E677B688259C14E05386F2E797A20292463857158D6567BBC"
-        },
-        {
-          "path": "FamilyQuant/PresentationFigures.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "C896F29F17D40275E77F1387034D36BA2F584FE6EBF75D5C18A76033E6CF6927"
-        },
-        {
-          "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
-        },
-        {
-          "path": "FamilyQuant/ShellDialogs.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "BADA9EAE7CCA3011F34E56A17D71DA7304EAB666D61D06E0C53DA532589AAA76"
-        },
-        {
-          "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
-        },
-        {
-          "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "5FC458F9AA92ED3D24354ACB8BBDEB4EBB37CC2F968833C1A2AEF52DAB60E2CD"
-        },
-        {
-          "path": "FamilyQuant/SpectrumComparisonWindow.View.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "B7D8E01139E0E190F7BBDFBA5973AE012B55B56547BF3FDC78702D0B157F2E35"
-        },
-        {
-          "path": "FamilyQuant/SpectrumComparisonWindow.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "025C5824B534894B311B6AF36963182831EB0F663FD84AAC0D2399520E08FF0F"
-        }
-      ],
-      "proofs": [],
-      "note": "No observation-specific native check; remains OPEN.",
-      "kindReceiptId": null,
-      "compared": null
     },
     {
       "observationId": "FQ15-C1162895D157",
@@ -3173,7 +1931,7 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -3183,76 +1941,7 @@
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
-        },
-        {
-          "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "5FC458F9AA92ED3D24354ACB8BBDEB4EBB37CC2F968833C1A2AEF52DAB60E2CD"
-        },
-        {
-          "path": "FamilyQuant/SpectrumComparisonWindow.View.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "B7D8E01139E0E190F7BBDFBA5973AE012B55B56547BF3FDC78702D0B157F2E35"
-        },
-        {
-          "path": "FamilyQuant/SpectrumComparisonWindow.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "025C5824B534894B311B6AF36963182831EB0F663FD84AAC0D2399520E08FF0F"
-        }
-      ],
-      "proofs": [],
-      "note": "No observation-specific native check; remains OPEN.",
-      "kindReceiptId": null,
-      "compared": null
-    },
-    {
-      "observationId": "FQ15-C12FDBFF007E",
-      "implementation": [
-        {
-          "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
-        },
-        {
-          "path": "FamilyQuant.Core/Quantitation/Studies/DeNovoAcceptedScoreScatterStudy.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "EE422A7A31F3BB07F41DF1B50A587C6825BCF4B3AA1DC5E14EAE0E72F73CBE81"
-        },
-        {
-          "path": "FamilyQuant/AppOperationFiles.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "6E1FB949218EADF56A159B520AFD6912D6322578C32FA8BF70DB0000E6D72BD6"
-        },
-        {
-          "path": "FamilyQuant/AppOperationHost.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
-        },
-        {
-          "path": "FamilyQuant/ChartImageExporter.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "77B1752BCDC39B6E677B688259C14E05386F2E797A20292463857158D6567BBC"
-        },
-        {
-          "path": "FamilyQuant/PresentationFigures.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "C896F29F17D40275E77F1387034D36BA2F584FE6EBF75D5C18A76033E6CF6927"
-        },
-        {
-          "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
-        },
-        {
-          "path": "FamilyQuant/ShellDialogs.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "BADA9EAE7CCA3011F34E56A17D71DA7304EAB666D61D06E0C53DA532589AAA76"
-        },
-        {
-          "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -3311,7 +2000,7 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -3321,7 +2010,7 @@
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -3343,75 +2032,6 @@
       "note": "Executed native value/refusal check, with the specific comparison recorded below.",
       "kindReceiptId": "native-code-fact",
       "compared": "FamilyQuant/SpectrumComparisonWindow.cs:400 \u0022Save the spectrum comparison table\u0022; csv/dialog-cancel/title: Actual routed action constructs the frozen native dialog property before cancellation.; expected Save the spectrum comparison table; actual Save the spectrum comparison table"
-    },
-    {
-      "observationId": "FQ15-C6852B87CA79",
-      "implementation": [
-        {
-          "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
-        },
-        {
-          "path": "FamilyQuant.Core/Quantitation/Studies/DeNovoAcceptedScoreScatterStudy.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "EE422A7A31F3BB07F41DF1B50A587C6825BCF4B3AA1DC5E14EAE0E72F73CBE81"
-        },
-        {
-          "path": "FamilyQuant/AppOperationFiles.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "6E1FB949218EADF56A159B520AFD6912D6322578C32FA8BF70DB0000E6D72BD6"
-        },
-        {
-          "path": "FamilyQuant/AppOperationHost.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
-        },
-        {
-          "path": "FamilyQuant/ChartImageExporter.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "77B1752BCDC39B6E677B688259C14E05386F2E797A20292463857158D6567BBC"
-        },
-        {
-          "path": "FamilyQuant/PresentationFigures.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "C896F29F17D40275E77F1387034D36BA2F584FE6EBF75D5C18A76033E6CF6927"
-        },
-        {
-          "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
-        },
-        {
-          "path": "FamilyQuant/ShellDialogs.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "BADA9EAE7CCA3011F34E56A17D71DA7304EAB666D61D06E0C53DA532589AAA76"
-        },
-        {
-          "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
-        },
-        {
-          "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "5FC458F9AA92ED3D24354ACB8BBDEB4EBB37CC2F968833C1A2AEF52DAB60E2CD"
-        },
-        {
-          "path": "FamilyQuant/SpectrumComparisonWindow.View.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "B7D8E01139E0E190F7BBDFBA5973AE012B55B56547BF3FDC78702D0B157F2E35"
-        },
-        {
-          "path": "FamilyQuant/SpectrumComparisonWindow.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "025C5824B534894B311B6AF36963182831EB0F663FD84AAC0D2399520E08FF0F"
-        }
-      ],
-      "proofs": [],
-      "note": "No observation-specific native check; remains OPEN.",
-      "kindReceiptId": null,
-      "compared": null
     },
     {
       "observationId": "FQ15-C6ED0DC284EB",
@@ -3449,7 +2069,7 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -3459,7 +2079,7 @@
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -3481,75 +2101,6 @@
       "note": "Executed native value/refusal check, with the specific comparison recorded below.",
       "kindReceiptId": "native-code-fact",
       "compared": "FamilyQuant/SpectrumComparisonWindow.cs:349 \u0022 strict matches and \u0022; plot/success/status: Frozen complete status expression matches the actual native export status; only the dynamic exception message is a wildcard.; expected Saved\\ \u003Coutput\u003E\\\\plot-success\\\\fixture\\.png\\ and\\ \u003Coutput\u003E\\\\plot-success\\\\fixture\\.csv\\.\\ 1,234\\ jointly\\ accepted\\ precursor-hypothesis\\ row\\(s\\):\\ 1,233\\ strict\\ matches\\ and\\ 1\\ mismatches\\.; actual Saved \u003Coutput\u003E\\plot-success\\fixture.png and \u003Coutput\u003E\\plot-success\\fixture.csv. 1,234 jointly accepted precursor-hypothesis row(s): 1,233 strict matches and 1 mismatches."
-    },
-    {
-      "observationId": "FQ15-CA28E49ABF49",
-      "implementation": [
-        {
-          "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
-        },
-        {
-          "path": "FamilyQuant.Core/Quantitation/Studies/DeNovoAcceptedScoreScatterStudy.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "EE422A7A31F3BB07F41DF1B50A587C6825BCF4B3AA1DC5E14EAE0E72F73CBE81"
-        },
-        {
-          "path": "FamilyQuant/AppOperationFiles.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "6E1FB949218EADF56A159B520AFD6912D6322578C32FA8BF70DB0000E6D72BD6"
-        },
-        {
-          "path": "FamilyQuant/AppOperationHost.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
-        },
-        {
-          "path": "FamilyQuant/ChartImageExporter.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "77B1752BCDC39B6E677B688259C14E05386F2E797A20292463857158D6567BBC"
-        },
-        {
-          "path": "FamilyQuant/PresentationFigures.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "C896F29F17D40275E77F1387034D36BA2F584FE6EBF75D5C18A76033E6CF6927"
-        },
-        {
-          "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
-        },
-        {
-          "path": "FamilyQuant/ShellDialogs.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "BADA9EAE7CCA3011F34E56A17D71DA7304EAB666D61D06E0C53DA532589AAA76"
-        },
-        {
-          "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
-        },
-        {
-          "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "5FC458F9AA92ED3D24354ACB8BBDEB4EBB37CC2F968833C1A2AEF52DAB60E2CD"
-        },
-        {
-          "path": "FamilyQuant/SpectrumComparisonWindow.View.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "B7D8E01139E0E190F7BBDFBA5973AE012B55B56547BF3FDC78702D0B157F2E35"
-        },
-        {
-          "path": "FamilyQuant/SpectrumComparisonWindow.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "025C5824B534894B311B6AF36963182831EB0F663FD84AAC0D2399520E08FF0F"
-        }
-      ],
-      "proofs": [],
-      "note": "No observation-specific native check; remains OPEN.",
-      "kindReceiptId": null,
-      "compared": null
     },
     {
       "observationId": "FQ15-CC2E78AF38A6",
@@ -3587,7 +2138,7 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -3597,214 +2148,7 @@
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
-        },
-        {
-          "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "5FC458F9AA92ED3D24354ACB8BBDEB4EBB37CC2F968833C1A2AEF52DAB60E2CD"
-        },
-        {
-          "path": "FamilyQuant/SpectrumComparisonWindow.View.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "B7D8E01139E0E190F7BBDFBA5973AE012B55B56547BF3FDC78702D0B157F2E35"
-        },
-        {
-          "path": "FamilyQuant/SpectrumComparisonWindow.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "025C5824B534894B311B6AF36963182831EB0F663FD84AAC0D2399520E08FF0F"
-        }
-      ],
-      "proofs": [],
-      "note": "No observation-specific native check; remains OPEN.",
-      "kindReceiptId": null,
-      "compared": null
-    },
-    {
-      "observationId": "FQ15-CD9682DD861E",
-      "implementation": [
-        {
-          "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
-        },
-        {
-          "path": "FamilyQuant.Core/Quantitation/Studies/DeNovoAcceptedScoreScatterStudy.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "EE422A7A31F3BB07F41DF1B50A587C6825BCF4B3AA1DC5E14EAE0E72F73CBE81"
-        },
-        {
-          "path": "FamilyQuant/AppOperationFiles.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "6E1FB949218EADF56A159B520AFD6912D6322578C32FA8BF70DB0000E6D72BD6"
-        },
-        {
-          "path": "FamilyQuant/AppOperationHost.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
-        },
-        {
-          "path": "FamilyQuant/ChartImageExporter.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "77B1752BCDC39B6E677B688259C14E05386F2E797A20292463857158D6567BBC"
-        },
-        {
-          "path": "FamilyQuant/PresentationFigures.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "C896F29F17D40275E77F1387034D36BA2F584FE6EBF75D5C18A76033E6CF6927"
-        },
-        {
-          "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
-        },
-        {
-          "path": "FamilyQuant/ShellDialogs.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "BADA9EAE7CCA3011F34E56A17D71DA7304EAB666D61D06E0C53DA532589AAA76"
-        },
-        {
-          "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
-        },
-        {
-          "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "5FC458F9AA92ED3D24354ACB8BBDEB4EBB37CC2F968833C1A2AEF52DAB60E2CD"
-        },
-        {
-          "path": "FamilyQuant/SpectrumComparisonWindow.View.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "B7D8E01139E0E190F7BBDFBA5973AE012B55B56547BF3FDC78702D0B157F2E35"
-        },
-        {
-          "path": "FamilyQuant/SpectrumComparisonWindow.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "025C5824B534894B311B6AF36963182831EB0F663FD84AAC0D2399520E08FF0F"
-        }
-      ],
-      "proofs": [],
-      "note": "No observation-specific native check; remains OPEN.",
-      "kindReceiptId": null,
-      "compared": null
-    },
-    {
-      "observationId": "FQ15-CE05D724B775",
-      "implementation": [
-        {
-          "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
-        },
-        {
-          "path": "FamilyQuant.Core/Quantitation/Studies/DeNovoAcceptedScoreScatterStudy.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "EE422A7A31F3BB07F41DF1B50A587C6825BCF4B3AA1DC5E14EAE0E72F73CBE81"
-        },
-        {
-          "path": "FamilyQuant/AppOperationFiles.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "6E1FB949218EADF56A159B520AFD6912D6322578C32FA8BF70DB0000E6D72BD6"
-        },
-        {
-          "path": "FamilyQuant/AppOperationHost.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
-        },
-        {
-          "path": "FamilyQuant/ChartImageExporter.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "77B1752BCDC39B6E677B688259C14E05386F2E797A20292463857158D6567BBC"
-        },
-        {
-          "path": "FamilyQuant/PresentationFigures.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "C896F29F17D40275E77F1387034D36BA2F584FE6EBF75D5C18A76033E6CF6927"
-        },
-        {
-          "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
-        },
-        {
-          "path": "FamilyQuant/ShellDialogs.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "BADA9EAE7CCA3011F34E56A17D71DA7304EAB666D61D06E0C53DA532589AAA76"
-        },
-        {
-          "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
-        },
-        {
-          "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "5FC458F9AA92ED3D24354ACB8BBDEB4EBB37CC2F968833C1A2AEF52DAB60E2CD"
-        },
-        {
-          "path": "FamilyQuant/SpectrumComparisonWindow.View.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "B7D8E01139E0E190F7BBDFBA5973AE012B55B56547BF3FDC78702D0B157F2E35"
-        },
-        {
-          "path": "FamilyQuant/SpectrumComparisonWindow.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "025C5824B534894B311B6AF36963182831EB0F663FD84AAC0D2399520E08FF0F"
-        }
-      ],
-      "proofs": [],
-      "note": "No observation-specific native check; remains OPEN.",
-      "kindReceiptId": null,
-      "compared": null
-    },
-    {
-      "observationId": "FQ15-CFC838A2ABA7",
-      "implementation": [
-        {
-          "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
-        },
-        {
-          "path": "FamilyQuant.Core/Quantitation/Studies/DeNovoAcceptedScoreScatterStudy.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "EE422A7A31F3BB07F41DF1B50A587C6825BCF4B3AA1DC5E14EAE0E72F73CBE81"
-        },
-        {
-          "path": "FamilyQuant/AppOperationFiles.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "6E1FB949218EADF56A159B520AFD6912D6322578C32FA8BF70DB0000E6D72BD6"
-        },
-        {
-          "path": "FamilyQuant/AppOperationHost.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
-        },
-        {
-          "path": "FamilyQuant/ChartImageExporter.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "77B1752BCDC39B6E677B688259C14E05386F2E797A20292463857158D6567BBC"
-        },
-        {
-          "path": "FamilyQuant/PresentationFigures.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "C896F29F17D40275E77F1387034D36BA2F584FE6EBF75D5C18A76033E6CF6927"
-        },
-        {
-          "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
-        },
-        {
-          "path": "FamilyQuant/ShellDialogs.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "BADA9EAE7CCA3011F34E56A17D71DA7304EAB666D61D06E0C53DA532589AAA76"
-        },
-        {
-          "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -3863,7 +2207,7 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -3873,7 +2217,7 @@
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -3895,144 +2239,6 @@
       "note": "Executed native value/refusal check, with the specific comparison recorded below.",
       "kindReceiptId": "native-code-fact",
       "compared": "FamilyQuant/SpectrumComparisonWindow.cs:418 \u0022and that you can write to that folder, then save again.\u0022; csv/failure/status: Frozen complete status expression matches the actual native export status; only the dynamic exception message is a wildcard.; expected The\\ CSV\\ could\\ not\\ be\\ written,\\ so\\ nothing\\ was\\ saved\\.\\ Reason\\ given\\ by\\ the\\ program:\\ .\u002B\\ Check\\ that\\ the\\ file\\ is\\ not\\ open\\ elsewhere\\ and\\ that\\ you\\ can\\ write\\ to\\ that\\ folder,\\ then\\ save\\ again\\.; actual The CSV could not be written, so nothing was saved. Reason given by the program: Cannot create \u0027\u003Coutput\u003E\\csv-failure\\blocked\u0027 because a file or directory with the same name already exists. Check that the file is not open elsewhere and that you can write to that folder, then save again."
-    },
-    {
-      "observationId": "FQ15-D4F6DCC3BE8E",
-      "implementation": [
-        {
-          "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
-        },
-        {
-          "path": "FamilyQuant.Core/Quantitation/Studies/DeNovoAcceptedScoreScatterStudy.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "EE422A7A31F3BB07F41DF1B50A587C6825BCF4B3AA1DC5E14EAE0E72F73CBE81"
-        },
-        {
-          "path": "FamilyQuant/AppOperationFiles.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "6E1FB949218EADF56A159B520AFD6912D6322578C32FA8BF70DB0000E6D72BD6"
-        },
-        {
-          "path": "FamilyQuant/AppOperationHost.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
-        },
-        {
-          "path": "FamilyQuant/ChartImageExporter.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "77B1752BCDC39B6E677B688259C14E05386F2E797A20292463857158D6567BBC"
-        },
-        {
-          "path": "FamilyQuant/PresentationFigures.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "C896F29F17D40275E77F1387034D36BA2F584FE6EBF75D5C18A76033E6CF6927"
-        },
-        {
-          "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
-        },
-        {
-          "path": "FamilyQuant/ShellDialogs.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "BADA9EAE7CCA3011F34E56A17D71DA7304EAB666D61D06E0C53DA532589AAA76"
-        },
-        {
-          "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
-        },
-        {
-          "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "5FC458F9AA92ED3D24354ACB8BBDEB4EBB37CC2F968833C1A2AEF52DAB60E2CD"
-        },
-        {
-          "path": "FamilyQuant/SpectrumComparisonWindow.View.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "B7D8E01139E0E190F7BBDFBA5973AE012B55B56547BF3FDC78702D0B157F2E35"
-        },
-        {
-          "path": "FamilyQuant/SpectrumComparisonWindow.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "025C5824B534894B311B6AF36963182831EB0F663FD84AAC0D2399520E08FF0F"
-        }
-      ],
-      "proofs": [],
-      "note": "No observation-specific native check; remains OPEN.",
-      "kindReceiptId": null,
-      "compared": null
-    },
-    {
-      "observationId": "FQ15-D7E5589C4080",
-      "implementation": [
-        {
-          "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
-        },
-        {
-          "path": "FamilyQuant.Core/Quantitation/Studies/DeNovoAcceptedScoreScatterStudy.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "EE422A7A31F3BB07F41DF1B50A587C6825BCF4B3AA1DC5E14EAE0E72F73CBE81"
-        },
-        {
-          "path": "FamilyQuant/AppOperationFiles.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "6E1FB949218EADF56A159B520AFD6912D6322578C32FA8BF70DB0000E6D72BD6"
-        },
-        {
-          "path": "FamilyQuant/AppOperationHost.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
-        },
-        {
-          "path": "FamilyQuant/ChartImageExporter.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "77B1752BCDC39B6E677B688259C14E05386F2E797A20292463857158D6567BBC"
-        },
-        {
-          "path": "FamilyQuant/PresentationFigures.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "C896F29F17D40275E77F1387034D36BA2F584FE6EBF75D5C18A76033E6CF6927"
-        },
-        {
-          "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
-        },
-        {
-          "path": "FamilyQuant/ShellDialogs.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "BADA9EAE7CCA3011F34E56A17D71DA7304EAB666D61D06E0C53DA532589AAA76"
-        },
-        {
-          "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
-        },
-        {
-          "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "5FC458F9AA92ED3D24354ACB8BBDEB4EBB37CC2F968833C1A2AEF52DAB60E2CD"
-        },
-        {
-          "path": "FamilyQuant/SpectrumComparisonWindow.View.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "B7D8E01139E0E190F7BBDFBA5973AE012B55B56547BF3FDC78702D0B157F2E35"
-        },
-        {
-          "path": "FamilyQuant/SpectrumComparisonWindow.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "025C5824B534894B311B6AF36963182831EB0F663FD84AAC0D2399520E08FF0F"
-        }
-      ],
-      "proofs": [],
-      "note": "No observation-specific native check; remains OPEN.",
-      "kindReceiptId": null,
-      "compared": null
     },
     {
       "observationId": "FQ15-DA5178732418",
@@ -4070,7 +2276,7 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -4080,7 +2286,7 @@
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -4139,7 +2345,7 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -4149,214 +2355,7 @@
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
-        },
-        {
-          "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "5FC458F9AA92ED3D24354ACB8BBDEB4EBB37CC2F968833C1A2AEF52DAB60E2CD"
-        },
-        {
-          "path": "FamilyQuant/SpectrumComparisonWindow.View.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "B7D8E01139E0E190F7BBDFBA5973AE012B55B56547BF3FDC78702D0B157F2E35"
-        },
-        {
-          "path": "FamilyQuant/SpectrumComparisonWindow.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "025C5824B534894B311B6AF36963182831EB0F663FD84AAC0D2399520E08FF0F"
-        }
-      ],
-      "proofs": [],
-      "note": "No observation-specific native check; remains OPEN.",
-      "kindReceiptId": null,
-      "compared": null
-    },
-    {
-      "observationId": "FQ15-E06AECC2FE8F",
-      "implementation": [
-        {
-          "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
-        },
-        {
-          "path": "FamilyQuant.Core/Quantitation/Studies/DeNovoAcceptedScoreScatterStudy.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "EE422A7A31F3BB07F41DF1B50A587C6825BCF4B3AA1DC5E14EAE0E72F73CBE81"
-        },
-        {
-          "path": "FamilyQuant/AppOperationFiles.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "6E1FB949218EADF56A159B520AFD6912D6322578C32FA8BF70DB0000E6D72BD6"
-        },
-        {
-          "path": "FamilyQuant/AppOperationHost.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
-        },
-        {
-          "path": "FamilyQuant/ChartImageExporter.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "77B1752BCDC39B6E677B688259C14E05386F2E797A20292463857158D6567BBC"
-        },
-        {
-          "path": "FamilyQuant/PresentationFigures.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "C896F29F17D40275E77F1387034D36BA2F584FE6EBF75D5C18A76033E6CF6927"
-        },
-        {
-          "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
-        },
-        {
-          "path": "FamilyQuant/ShellDialogs.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "BADA9EAE7CCA3011F34E56A17D71DA7304EAB666D61D06E0C53DA532589AAA76"
-        },
-        {
-          "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
-        },
-        {
-          "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "5FC458F9AA92ED3D24354ACB8BBDEB4EBB37CC2F968833C1A2AEF52DAB60E2CD"
-        },
-        {
-          "path": "FamilyQuant/SpectrumComparisonWindow.View.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "B7D8E01139E0E190F7BBDFBA5973AE012B55B56547BF3FDC78702D0B157F2E35"
-        },
-        {
-          "path": "FamilyQuant/SpectrumComparisonWindow.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "025C5824B534894B311B6AF36963182831EB0F663FD84AAC0D2399520E08FF0F"
-        }
-      ],
-      "proofs": [],
-      "note": "No observation-specific native check; remains OPEN.",
-      "kindReceiptId": null,
-      "compared": null
-    },
-    {
-      "observationId": "FQ15-E1E21B0400F5",
-      "implementation": [
-        {
-          "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
-        },
-        {
-          "path": "FamilyQuant.Core/Quantitation/Studies/DeNovoAcceptedScoreScatterStudy.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "EE422A7A31F3BB07F41DF1B50A587C6825BCF4B3AA1DC5E14EAE0E72F73CBE81"
-        },
-        {
-          "path": "FamilyQuant/AppOperationFiles.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "6E1FB949218EADF56A159B520AFD6912D6322578C32FA8BF70DB0000E6D72BD6"
-        },
-        {
-          "path": "FamilyQuant/AppOperationHost.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
-        },
-        {
-          "path": "FamilyQuant/ChartImageExporter.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "77B1752BCDC39B6E677B688259C14E05386F2E797A20292463857158D6567BBC"
-        },
-        {
-          "path": "FamilyQuant/PresentationFigures.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "C896F29F17D40275E77F1387034D36BA2F584FE6EBF75D5C18A76033E6CF6927"
-        },
-        {
-          "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
-        },
-        {
-          "path": "FamilyQuant/ShellDialogs.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "BADA9EAE7CCA3011F34E56A17D71DA7304EAB666D61D06E0C53DA532589AAA76"
-        },
-        {
-          "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
-        },
-        {
-          "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "5FC458F9AA92ED3D24354ACB8BBDEB4EBB37CC2F968833C1A2AEF52DAB60E2CD"
-        },
-        {
-          "path": "FamilyQuant/SpectrumComparisonWindow.View.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "B7D8E01139E0E190F7BBDFBA5973AE012B55B56547BF3FDC78702D0B157F2E35"
-        },
-        {
-          "path": "FamilyQuant/SpectrumComparisonWindow.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "025C5824B534894B311B6AF36963182831EB0F663FD84AAC0D2399520E08FF0F"
-        }
-      ],
-      "proofs": [],
-      "note": "No observation-specific native check; remains OPEN.",
-      "kindReceiptId": null,
-      "compared": null
-    },
-    {
-      "observationId": "FQ15-E563845A7EC9",
-      "implementation": [
-        {
-          "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
-        },
-        {
-          "path": "FamilyQuant.Core/Quantitation/Studies/DeNovoAcceptedScoreScatterStudy.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "EE422A7A31F3BB07F41DF1B50A587C6825BCF4B3AA1DC5E14EAE0E72F73CBE81"
-        },
-        {
-          "path": "FamilyQuant/AppOperationFiles.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "6E1FB949218EADF56A159B520AFD6912D6322578C32FA8BF70DB0000E6D72BD6"
-        },
-        {
-          "path": "FamilyQuant/AppOperationHost.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
-        },
-        {
-          "path": "FamilyQuant/ChartImageExporter.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "77B1752BCDC39B6E677B688259C14E05386F2E797A20292463857158D6567BBC"
-        },
-        {
-          "path": "FamilyQuant/PresentationFigures.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "C896F29F17D40275E77F1387034D36BA2F584FE6EBF75D5C18A76033E6CF6927"
-        },
-        {
-          "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
-        },
-        {
-          "path": "FamilyQuant/ShellDialogs.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "BADA9EAE7CCA3011F34E56A17D71DA7304EAB666D61D06E0C53DA532589AAA76"
-        },
-        {
-          "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
-          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -4415,7 +2414,7 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -4425,7 +2424,7 @@
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -4484,7 +2483,7 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -4494,7 +2493,7 @@
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -4553,7 +2552,7 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -4563,7 +2562,76 @@
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
+          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
+          "sha256": "5FC458F9AA92ED3D24354ACB8BBDEB4EBB37CC2F968833C1A2AEF52DAB60E2CD"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.View.cs",
+          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
+          "sha256": "B7D8E01139E0E190F7BBDFBA5973AE012B55B56547BF3FDC78702D0B157F2E35"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.cs",
+          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
+          "sha256": "025C5824B534894B311B6AF36963182831EB0F663FD84AAC0D2399520E08FF0F"
+        }
+      ],
+      "proofs": [],
+      "note": "No observation-specific native check; remains OPEN.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-F95421050019",
+      "implementation": [
+        {
+          "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
+          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
+          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
+        },
+        {
+          "path": "FamilyQuant.Core/Quantitation/Studies/DeNovoAcceptedScoreScatterStudy.cs",
+          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
+          "sha256": "EE422A7A31F3BB07F41DF1B50A587C6825BCF4B3AA1DC5E14EAE0E72F73CBE81"
+        },
+        {
+          "path": "FamilyQuant/AppOperationFiles.cs",
+          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
+          "sha256": "6E1FB949218EADF56A159B520AFD6912D6322578C32FA8BF70DB0000E6D72BD6"
+        },
+        {
+          "path": "FamilyQuant/AppOperationHost.cs",
+          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
+          "sha256": "4DEE5F26B4517B0D80FD69E61523E828A5F77799F9F42A8248396A8C988CC9FB"
+        },
+        {
+          "path": "FamilyQuant/ChartImageExporter.cs",
+          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
+          "sha256": "77B1752BCDC39B6E677B688259C14E05386F2E797A20292463857158D6567BBC"
+        },
+        {
+          "path": "FamilyQuant/PresentationFigures.cs",
+          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
+          "sha256": "C896F29F17D40275E77F1387034D36BA2F584FE6EBF75D5C18A76033E6CF6927"
+        },
+        {
+          "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
+          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
+        },
+        {
+          "path": "FamilyQuant/ShellDialogs.cs",
+          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
+          "sha256": "BADA9EAE7CCA3011F34E56A17D71DA7304EAB666D61D06E0C53DA532589AAA76"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
+          "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -4622,7 +2690,7 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/ShellDialogs.cs",
@@ -4632,7 +2700,7 @@
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Actual synthetic native spectrum CSV/plot dialog, success, failure and cancellation paths",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -4666,7 +2734,7 @@
           "kind": "test",
           "target": "RunAssayRuntimeLedger",
           "assertion": "AS-spectrum-exports kind code fact: every listed native value and branch check passed",
-          "artifact": "D:\\FamilyQuant-data\\out-assay\\m67-spectrum-exports-final-2\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-assay\\m72-spectrum-exports-2\\proofs.log",
           "inspectedBy": ""
         }
       ]
@@ -4680,7 +2748,7 @@
           "kind": "test",
           "target": "RunAssayRuntimeLedger",
           "assertion": "AS-spectrum-exports kind format/export: every listed native value and branch check passed",
-          "artifact": "D:\\FamilyQuant-data\\out-assay\\m67-spectrum-exports-final-2\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-assay\\m72-spectrum-exports-2\\proofs.log",
           "inspectedBy": ""
         }
       ]
