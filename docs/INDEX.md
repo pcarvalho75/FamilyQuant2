@@ -10,6 +10,7 @@ This is the navigation index for the current checkout. The roadmap owns unfinish
 | [Architecture](ARCHITECTURE.md) | Current boundaries, planned Reports/operation host, budgets and historical destination inventory |
 | [Core operations](CORE-OPERATIONS.md) | Progress, cancellation, outcomes and atomic publication |
 | [Clustering refactor](CLUSTERING-REFACTOR.md) | Result contracts and bounded frozen/current comparison |
+| [Dependencies](DEPENDENCIES.md) | Package decisions, cache compatibility and real-file opening checks |
 | [Identity study](IDENTITY-SEARCH-STUDY.md) | Why Scan and Divide remain separate, exact measured scope |
 | [Identity/deployment](N1-IDENTITY.md) | Separate application identity and the installed-profile check still owned by Paulo |
 | [Science gate](SCIENCE-GATE.md) | Recorded evidence-rule comparison, verdicts and limitations |
@@ -62,6 +63,7 @@ Invoke each flag with `& $testExe <flag>` after building. Dispatch and arity are
 | Flag | Coverage |
 |---|---|
 | `--test-core-boundary` | Core/App ownership, references and resource contract |
+| `--test-dependencies` | Cache compatibility, package removal and shared numeric control contracts |
 | `--test-document` | Document round trip, scoring and denominator attribution fixtures |
 | `--test-evidence-task` | File-derived taxonomy, keyword counts, confirmation and recipe replay fixtures |
 | `--test-inputs` | Real-data argument-selection contract, without choosing Desktop fallbacks |
@@ -72,6 +74,10 @@ Invoke each flag with `& $testExe <flag>` after building. Dispatch and arity are
 | `--test-results` | Results view-model readiness and export choices |
 | `--test-ui-icons` | No emoji in product source, escaped/entity regressions and Fluent glyphs in both themes |
 | `--test-keyword-command` | Single keyword command, empty review, Cancel and accepted-setting retention |
+| `--test-chart-themes [output-dir]` | Seven hosted chart types, live token refresh, contrast, subscription lifetime and frozen Light palette pins; labelled synthetic chart captures |
+| `--test-chart-themes [output-dir]` | Seven hosted chart types, live token refresh, contrast, subscription lifetime and frozen Light palette pins; labelled synthetic chart captures |
+| `--test-ui-icons` | No emoji in product source, escaped/entity regressions and Fluent glyphs in both themes |
+| `--test-evidence-task-scope [output-dir]` | Supplied task facts, editable scope, cancellation, native confirmation and both-theme synthetic captures |
 | `--shell-checks` | Shell navigation, saving, preferences, Build/Quantify integration and secondary views |
 | `--feature-ledger-check` | Inventory, row coverage, dispositions and guard regressions |
 | `--feature-ledger-release-check` | Same inventory with all retained rows required VERIFIED; OPEN rows intentionally fail |
@@ -113,6 +119,7 @@ Companion options for `--screens` are `--screen-fcf <input.fcf>`, `--screen-proj
 | `--word-grouping-snapshot <input.fcf-or-fqproj> <output.txt>` | [WordGroupingSnapshot.cs](../FamilyQuant.Tests/WordGroupingSnapshot.cs), also linked into frozen host |
 | `--chart-export-snapshot <output-dir>` | [ChartExportSnapshot.cs](../FamilyQuant.Tests/ChartExportSnapshot.cs), synthetic chart parity fixtures |
 | `--clustering-snapshot <input.fasta> <output.tsv> <integer-identity> <fast-or-exhaustive>` | [ClusteringSnapshot.cs](../FamilyQuant.Tests/ClusteringSnapshot.cs) |
+| `--dependency-file-check <real.raw> <real.xic2> <new-report.json>` | [Program.Dependencies.cs](../FamilyQuant.Tests/Program.Dependencies.cs); read-only input-opening check |
 | `--clustering-export-fcf <input.fcf> <new-output.fasta>` | Same helper, ordered stored-sequence export; never replaces an existing output |
 | `--clustering-verify-fcf <input.fcf> <existing-export.fasta>` | Same helper, verifies every identifier/sequence and EOF |
 | `--identity-search-study <input.fasta> <empty-output-dir> <fast-or-exhaustive>` | [IdentitySearchStudy.cs](../FamilyQuant.Tests/IdentitySearchStudy.cs); use the bounded study scope, not a new Viperidae exhaustive run |

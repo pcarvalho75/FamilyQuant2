@@ -19,7 +19,7 @@
     <Grid Margin="16">
         <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
         <TextBlock x:Name="headline" Text="{Binding Summary}" Style="{StaticResource SectionTitle}" TextTrimming="CharacterEllipsis" TextWrapping="NoWrap" Margin="0,0,0,12"/>
-        <TabControl Grid.Row="1" SelectedIndex="{Binding ModeIndex}">
+        <TabControl Grid.Row="1" SelectedIndex="{Binding ModeIndex}" IsEnabled="{Binding CanEdit}" SelectionChanged="ReviewModeChanged">
             <TabItem Header="Keywords" ToolTip="Review the proteins found by description keywords before creating one family.">
                 <Grid Margin="8" DataContext="{Binding Keyword}">
                     <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition/></Grid.RowDefinitions>
@@ -88,12 +88,54 @@
             <TabItem Header="Evidence" IsEnabled="{Binding EvidenceAvailable}" ToolTip="Review classified families, protein-level reasons and flags. Disabled until an evidence proposal is available.">
                 <Grid Margin="8">
                     <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
-                    <DockPanel Margin="0,0,0,10">
+                    <StackPanel Margin="0,0,0,10">
+                    <DockPanel Visibility="{Binding TaskDiscoveryAvailable, Converter={StaticResource VisibleWhenTrue}}" Margin="0,0,0,8">
+                        <Button DockPanel.Dock="Right" Content="Read database and scope" Click="DiscoverTask_Click" IsEnabled="{Binding CanDiscoverTask}"
+                                ToolTip="Reads UniProt taxonomy and keyword counts among reviewed accessions in this file. Review or edit the suggested scope before Update proposal."/>
+                        <TextBlock Text="Database and scope" Style="{StaticResource SectionTitle}" VerticalAlignment="Center"/>
+                    </DockPanel>
+                    <Expander Header="Database taxa and keyword counts" IsExpanded="{Binding TaskScopeExpanded}" Margin="0,0,0,8"
+                              Visibility="{Binding HasTaskScope, Converter={StaticResource VisibleWhenTrue}}"
+                              ToolTip="Shows the database taxa, clade and keyword counts among reviewed accessions in this file. Keyword counts can overlap and are not family shares.">
+                        <StackPanel Margin="0,8,0,0">
+                            <TextBlock Text="{Binding TaskScope.Clade, StringFormat='Database clade: {0}'}" TextTrimming="CharacterEllipsis" ToolTip="{Binding TaskScope.Clade}"/>
+                            <Grid Margin="0,6,0,6" MaxHeight="140">
+                                <Grid.ColumnDefinitions><ColumnDefinition/><ColumnDefinition Width="12"/><ColumnDefinition/></Grid.ColumnDefinitions>
+                                <DataGrid x:Name="taskTaxaGrid" ItemsSource="{Binding TaskScope.Taxa}" IsReadOnly="True" AutoGenerateColumns="False"
+                                          CanUserAddRows="False" CanUserDeleteRows="False" HeadersVisibility="Column" MinHeight="76"
+                                          ToolTip="Taxa recorded for this database, with their UniProt taxonomy identifiers.">
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn Header="Taxon" Width="*" Binding="{Binding Name}"/>
+                                        <DataGridTextColumn Header="Taxonomy ID" Width="128" Binding="{Binding TaxonomyId}" theme:TableAppearance.Numeric="True"/>
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                                <DataGrid x:Name="taskKeywordsGrid" Grid.Column="2" ItemsSource="{Binding TaskScope.Keywords}" IsReadOnly="True" AutoGenerateColumns="False"
+                                          CanUserAddRows="False" CanUserDeleteRows="False" HeadersVisibility="Column" MinHeight="76"
+                                          ToolTip="UniProt keyword counts among distinct reviewed accessions in this file. One accession may carry several keywords, so these rows must not be summed.">
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn Header="Keyword" Width="*" Binding="{Binding Keyword}"/>
+                                        <DataGridTextColumn Header="Reviewed accessions" Width="176" Binding="{Binding ReviewedProteins, StringFormat=N0}" theme:TableAppearance.Numeric="True"/>
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                            </Grid>
+                            <WrapPanel>
+                                <TextBlock Text="{Binding TaskScope.ReviewedProteins, StringFormat='Reviewed accessions counted: {0:N0}'}" Margin="0,0,18,0"/>
+                                <TextBlock Text="{Binding TaskScope.Release, StringFormat='UniProt release: {0}'}"/>
+                            </WrapPanel>
+                            <WrapPanel>
+                                <TextBlock Text="{Binding TaskScope.TargetProteins, StringFormat='Targets counted: {0:N0}'}" Margin="0,0,18,0"/>
+                                <TextBlock Text="{Binding TaskScope.IgnoredContaminants, StringFormat='Contaminants ignored: {0:N0}'}"/>
+                            </WrapPanel>
+                            <TextBlock Text="{Binding TaskScope.Note}" TextTrimming="CharacterEllipsis" ToolTip="{Binding TaskScope.Note}" Foreground="{DynamicResource MutedBrush}"/>
+                        </StackPanel>
+                    </Expander>
+                    <DockPanel>
                         <Button DockPanel.Dock="Right" Content="Update proposal" Click="UpdateProposal_Click" IsEnabled="{Binding CanUpdateProposal}"
-                                ToolTip="Rebuilds the proposal from the scope words and stored evidence. Your open document stays unchanged until Apply."/>
+                                ToolTip="Confirms your scope words and rebuilds the proposal from stored evidence. Your open document stays unchanged until Apply."/>
                         <TextBlock DockPanel.Dock="Left" Text="Scope" VerticalAlignment="Center" Margin="0,0,8,0"/>
                         <TextBox Text="{Binding ScopeText, UpdateSourceTrigger=PropertyChanged}" ToolTip="Words to match in the evidence keywords and tissue fields. These are user choices, never a built-in family list."/>
                     </DockPanel>
+                    </StackPanel>
                     <Grid Grid.Row="1">
                         <Grid.ColumnDefinitions><ColumnDefinition Width="400" MinWidth="240"/><ColumnDefinition Width="10"/><ColumnDefinition MinWidth="280"/></Grid.ColumnDefinitions>
                         <GridSplitter Grid.Column="1" Width="6" HorizontalAlignment="Center" ResizeDirection="Columns" ResizeBehavior="PreviousAndNext"

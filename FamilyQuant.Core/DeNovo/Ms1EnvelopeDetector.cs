@@ -1,4 +1,5 @@
-using Newtonsoft.Json;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using PatternTools.MSParserLight;
 using System;
 using System.Collections.Generic;
@@ -570,7 +571,7 @@ namespace FamilyQuant.DeNovo
             {
                 if (!File.Exists(path)) return false;
 
-                CacheFile? file = JsonConvert.DeserializeObject<CacheFile>(File.ReadAllText(path));
+                CacheFile? file = JsonSerializer.Deserialize<CacheFile>(File.ReadAllText(path), ExtractionCacheJson.Options);
                 if (file == null) return false;
 
                 // Any disagreement discards the file: a stale estimate is worse than a re-extraction,
@@ -642,7 +643,7 @@ namespace FamilyQuant.DeNovo
                     DetectedCountSinglyCharged = result.DetectedCountSinglyCharged,
                 };
 
-                string json = JsonConvert.SerializeObject(file, Formatting.Indented);
+                string json = JsonSerializer.Serialize(file, ExtractionCacheJson.Options);
                 string temp = path + ".tmp";
                 File.WriteAllText(temp, json);
                 File.Move(temp, path, overwrite: true);
@@ -658,28 +659,28 @@ namespace FamilyQuant.DeNovo
         /// can see which run and which detection settings it belongs to.</summary>
         private sealed class CacheFile
         {
-            [JsonProperty("version")] public int Version { get; set; }
-            [JsonProperty("runName")] public string RunName { get; set; } = string.Empty;
-            [JsonProperty("sourceSha256")] public string SourceFingerprint { get; set; } = string.Empty;
-            [JsonProperty("ppmTolerance")] public double PpmTolerance { get; set; }
-            [JsonProperty("minCharge")] public int MinCharge { get; set; }
-            [JsonProperty("maxCharge")] public int MaxCharge { get; set; }
-            [JsonProperty("isotopeCeiling")] public int IsotopeCeiling { get; set; }
-            [JsonProperty("minIsotopes")] public int MinIsotopes { get; set; }
-            [JsonProperty("minScansPerFeature")] public int MinScansPerFeature { get; set; }
-            [JsonProperty("detectedEnvelopeCount")] public int DetectedEnvelopeCount { get; set; }
-            [JsonProperty("detectedPeptideLikeArea")] public double DetectedPeptideLikeArea { get; set; }
-            [JsonProperty("ms1ScanCount")] public int Ms1ScanCount { get; set; }
+            [JsonPropertyName("version")] public int Version { get; set; }
+            [JsonPropertyName("runName")] public string RunName { get; set; } = string.Empty;
+            [JsonPropertyName("sourceSha256")] public string SourceFingerprint { get; set; } = string.Empty;
+            [JsonPropertyName("ppmTolerance")] public double PpmTolerance { get; set; }
+            [JsonPropertyName("minCharge")] public int MinCharge { get; set; }
+            [JsonPropertyName("maxCharge")] public int MaxCharge { get; set; }
+            [JsonPropertyName("isotopeCeiling")] public int IsotopeCeiling { get; set; }
+            [JsonPropertyName("minIsotopes")] public int MinIsotopes { get; set; }
+            [JsonPropertyName("minScansPerFeature")] public int MinScansPerFeature { get; set; }
+            [JsonPropertyName("detectedEnvelopeCount")] public int DetectedEnvelopeCount { get; set; }
+            [JsonPropertyName("detectedPeptideLikeArea")] public double DetectedPeptideLikeArea { get; set; }
+            [JsonPropertyName("ms1ScanCount")] public int Ms1ScanCount { get; set; }
 
             // The charge split, indexed BY CHARGE (index 0 unused), plus the two evidence groups it rolls
             // up to. Stored rather than re-derived so a cached run answers the same question a fresh one
             // does.
-            [JsonProperty("detectedAreaByCharge")] public double[]? DetectedAreaByCharge { get; set; }
-            [JsonProperty("detectedCountByCharge")] public int[]? DetectedCountByCharge { get; set; }
-            [JsonProperty("detectedAreaMultiplyCharged")] public double DetectedAreaMultiplyCharged { get; set; }
-            [JsonProperty("detectedAreaSinglyCharged")] public double DetectedAreaSinglyCharged { get; set; }
-            [JsonProperty("detectedCountMultiplyCharged")] public int DetectedCountMultiplyCharged { get; set; }
-            [JsonProperty("detectedCountSinglyCharged")] public int DetectedCountSinglyCharged { get; set; }
+            [JsonPropertyName("detectedAreaByCharge")] public double[]? DetectedAreaByCharge { get; set; }
+            [JsonPropertyName("detectedCountByCharge")] public int[]? DetectedCountByCharge { get; set; }
+            [JsonPropertyName("detectedAreaMultiplyCharged")] public double DetectedAreaMultiplyCharged { get; set; }
+            [JsonPropertyName("detectedAreaSinglyCharged")] public double DetectedAreaSinglyCharged { get; set; }
+            [JsonPropertyName("detectedCountMultiplyCharged")] public int DetectedCountMultiplyCharged { get; set; }
+            [JsonPropertyName("detectedCountSinglyCharged")] public int DetectedCountSinglyCharged { get; set; }
         }
     }
 }

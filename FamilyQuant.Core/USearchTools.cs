@@ -53,13 +53,27 @@ namespace FamilyQuant
             }
         }
 
-        // Parsed pairwise edges per FASTA, keyed by (FullName, LastWriteTimeUtc, Length). The edges do
+        // Immutable on-disk pairwise tables per FASTA, keyed by full path and content SHA-256. Edges do
         // not depend on the clustering identity, and GenerateFCF is called once per identity across a
         // whole sweep or a Divide-and-Conquer search, possibly from several background threads at once,
         // so the O(N^2) alignment must run ONCE per FASTA. A failed or empty alignment is never left in
         // the memo (see GetOrAlignPairwiseEdges), so it cannot answer forever from a poisoned result.
-        private static readonly ConcurrentDictionary<string, Lazy<List<PairwiseEdge>?>> PairwiseEdgeCache
-            = new ConcurrentDictionary<string, Lazy<List<PairwiseEdge>?>>();
+        private static readonly ConcurrentDictionary<string, Lazy<PairwiseEdgeFile?>> PairwiseEdgeCache = new();
+        private static readonly ConcurrentBag<string> OwnedPairwiseFiles = new();
+
+        static USearchTools()
+        {
+            AppDomain.CurrentDomain.ProcessExit += (_, _) =>
+            {
+                foreach (string path in OwnedPairwiseFiles) TryDelete(path);
+            };
+        }
+
+        private sealed record PairwiseEdgeFile(string Path, long Count, bool FractionalIdentity)
+        {
+            public IEnumerable<PairwiseEdge> Read(OperationContext? operation) =>
+                ReadPairwiseEdges(Path, FractionalIdentity, operation);
+        }
 
         // How many times the all-pairs alignment has actually been executed. A test seam: it proves the
         // memo above serves a repeated call without re-aligning, and that a changed FASTA re-aligns.
@@ -323,6 +337,7 @@ namespace FamilyQuant
 
             foreach (PairwiseEdge edge in edges)
             {
+                operation?.ThrowIfCancellationRequested();
                 if (!PassesExhaustiveGate(edge, identity)) continue;
                 if (!firstPassClusterBySeq.TryGetValue(edge.QueryId, out int cq)) continue;
                 if (!firstPassClusterBySeq.TryGetValue(edge.TargetId, out int ct)) continue;
@@ -364,7 +379,7 @@ namespace FamilyQuant
         private static bool ApplyExhaustiveSecondPass(
             FileInfo fi, string usearchExe, List<FastaItemExtended> items, int identity, OperationContext? operation)
         {
-            List<PairwiseEdge>? edges = GetOrAlignPairwiseEdges(fi, usearchExe, operation);
+            PairwiseEdgeFile? edges = GetOrAlignPairwiseEdges(fi, usearchExe, operation);
             if (edges == null || edges.Count == 0)
             {
                 // Never fail silently: the exhaustive pass was requested but the all-pairs alignment
@@ -378,7 +393,7 @@ namespace FamilyQuant
             var firstPass = new Dictionary<string, int>(items.Count, StringComparer.Ordinal);
             foreach (FastaItemExtended item in items) firstPass[item.SequenceIdentifier] = item.USearchID;
 
-            Dictionary<string, int> merged = MergeFirstPassClusters(firstPass, edges, identity, operation);
+            Dictionary<string, int> merged = MergeFirstPassClusters(firstPass, edges.Read(operation), identity, operation);
 
             foreach (FastaItemExtended item in items)
             {
@@ -392,28 +407,28 @@ namespace FamilyQuant
         }
 
         /// <summary>
-        /// The parsed pairwise edges for a FASTA, memoised by (path, last-write, length). A concurrent
+        /// The native pairwise table for a FASTA, memoised by full path and content SHA-256. A concurrent
         /// sweep asks for the same FASTA at many identities; only the first request runs the O(N^2)
         /// alignment and the rest read the cache. A FAILED or EMPTY alignment is dropped from the memo
         /// before returning, so it is retried next time instead of being remembered as "no edges".
         /// </summary>
-        private static List<PairwiseEdge>? GetOrAlignPairwiseEdges(FileInfo fi, string usearchExe, OperationContext? operation = null)
+        private static PairwiseEdgeFile? GetOrAlignPairwiseEdges(FileInfo fi, string usearchExe, OperationContext? operation = null)
         {
             operation?.ThrowIfCancellationRequested();
             fi.Refresh();
             string key = fi.FullName + "|" + FileFingerprint.Sha256(fi.FullName);
 
-            Lazy<List<PairwiseEdge>?> lazy = PairwiseEdgeCache.GetOrAdd(
+            Lazy<PairwiseEdgeFile?> lazy = PairwiseEdgeCache.GetOrAdd(
                 key,
-                _ => new Lazy<List<PairwiseEdge>?>(
+                _ => new Lazy<PairwiseEdgeFile?>(
                     () => AlignAllPairs(fi, usearchExe, operation),
                     LazyThreadSafetyMode.ExecutionAndPublication));
 
-            List<PairwiseEdge>? edges;
+            PairwiseEdgeFile? edges;
             try { operation?.ThrowIfCancellationRequested(); edges = lazy.Value; operation?.ThrowIfCancellationRequested(); }
             catch (OperationCanceledException)
             {
-                PairwiseEdgeCache.TryRemove(new KeyValuePair<string, Lazy<List<PairwiseEdge>?>>(key, lazy));
+                PairwiseEdgeCache.TryRemove(new KeyValuePair<string, Lazy<PairwiseEdgeFile?>>(key, lazy));
                 throw;
             }
             catch { edges = null; }
@@ -421,8 +436,14 @@ namespace FamilyQuant
             if (edges == null || edges.Count == 0)
             {
                 // Only remove OUR lazy: a concurrent writer may already have replaced it with a good one.
-                PairwiseEdgeCache.TryRemove(new KeyValuePair<string, Lazy<List<PairwiseEdge>?>>(key, lazy));
+                PairwiseEdgeCache.TryRemove(new KeyValuePair<string, Lazy<PairwiseEdgeFile?>>(key, lazy));
                 return null;
+            }
+
+            if (!File.Exists(edges.Path))
+            {
+                PairwiseEdgeCache.TryRemove(new KeyValuePair<string, Lazy<PairwiseEdgeFile?>>(key, lazy));
+                return GetOrAlignPairwiseEdges(fi, usearchExe, operation);
             }
 
             return edges;
@@ -435,18 +456,22 @@ namespace FamilyQuant
         public static IReadOnlyList<PairwiseEdge>? GetPairwiseEdgesForTest(FileInfo fi, OperationContext? operation = null)
         {
             operation?.ThrowIfCancellationRequested();
-            return GetOrAlignPairwiseEdges(fi, GetUSearchPath(), operation);
+            return GetOrAlignPairwiseEdges(fi, GetUSearchPath(), operation)?.Read(operation).ToList();
         }
+
+        /// <summary>Streaming parser seam for format/gate tests without running a native alignment.</summary>
+        public static IEnumerable<PairwiseEdge> ReadPairwiseEdgesForTest(string path, OperationContext? operation = null)
+            => ParsePairwiseEdges(path, operation).Read(operation);
 
         /// <summary>
         /// Aligns every pair of sequences (<c>usearch -allpairs_global ... -acceptall</c>) and parses the
         /// query/target/id/alnlen/ql/tl table. Any failure returns null (rather than throwing) so the
         /// memo above never caches an exception, and the exhaustive pass falls back to fast-only.
         /// </summary>
-        private static List<PairwiseEdge>? AlignAllPairs(FileInfo fi, string usearchExe, OperationContext? operation)
+        private static PairwiseEdgeFile? AlignAllPairs(FileInfo fi, string usearchExe, OperationContext? operation)
         {
             string tsvFile = Path.Combine(
-                fi.DirectoryName ?? string.Empty,
+                ApplicationPaths.ScratchDirectory,
                 Path.GetFileNameWithoutExtension(fi.Name) + "_allpairs_" +
                 Guid.NewGuid().ToString("N").Substring(0, 8) + ".tsv");
 
@@ -456,14 +481,20 @@ namespace FamilyQuant
                                "-userfields query+target+id+alnlen+ql+tl";
 
             Interlocked.Increment(ref pairwiseAlignmentRuns);
+            bool retained = false;
 
             try
             {
+                Directory.CreateDirectory(ApplicationPaths.ScratchDirectory);
                 RunUSearch(usearchExe, arguments, fi.DirectoryName ?? Environment.CurrentDirectory, operation);
 
                 if (!File.Exists(tsvFile)) return null;
 
-                return ParsePairwiseEdges(tsvFile, operation);
+                PairwiseEdgeFile edges = ParsePairwiseEdges(tsvFile, operation);
+                if (edges.Count == 0) return null;
+                OwnedPairwiseFiles.Add(tsvFile);
+                retained = true;
+                return edges;
             }
             catch (OperationCanceledException) { throw; }
             catch
@@ -474,7 +505,7 @@ namespace FamilyQuant
             }
             finally
             {
-                TryDelete(tsvFile);
+                if (!retained) TryDelete(tsvFile);
             }
         }
 
@@ -524,46 +555,58 @@ namespace FamilyQuant
             }
         }
 
-        private static List<PairwiseEdge> ParsePairwiseEdges(string tsvFile, OperationContext? operation = null)
+        private static PairwiseEdgeFile ParsePairwiseEdges(string tsvFile, OperationContext? operation = null)
         {
-            var edges = new List<PairwiseEdge>();
+            long count = 0;
             double maxId = 0.0;
 
             foreach (string line in File.ReadLines(tsvFile))
             {
                 operation?.ThrowIfCancellationRequested();
-                if (string.IsNullOrWhiteSpace(line)) continue;
-
-                string[] cols = line.Split('\t');
-                if (cols.Length < 6) continue;
-
-                string queryId = ExtractIdentifier(cols[0]);
-                string targetId = ExtractIdentifier(cols[1]);
-
-                if (!double.TryParse(cols[2], NumberStyles.Float, CultureInfo.InvariantCulture, out double id)) continue;
-                if (!int.TryParse(cols[3], NumberStyles.Integer, CultureInfo.InvariantCulture, out int alnlen)) continue;
-                if (!int.TryParse(cols[4], NumberStyles.Integer, CultureInfo.InvariantCulture, out int ql)) continue;
-                if (!int.TryParse(cols[5], NumberStyles.Integer, CultureInfo.InvariantCulture, out int tl)) continue;
-
-                if (id > maxId) maxId = id;
-                edges.Add(new PairwiseEdge(queryId, targetId, id, alnlen, ql, tl));
+                if (!TryReadPairwiseRow(line, false, out PairwiseEdge edge)) continue;
+                count++;
+                if (edge.IdentityPercent > maxId) maxId = edge.IdentityPercent;
             }
 
-            // This USEARCH build reports identity as a percentage 0-100 (verified: Q10581/Q10582 read
-            // 87.5). Guard against a build that emits the fraction 0-1 instead: if nothing exceeded 1.0
-            // the whole column is on the fraction scale, so rescale to percent to keep the gate's
-            // "id >= identity" comparison on the same scale as the percentage the user chose.
-            if (maxId <= 1.0 && edges.Count > 0)
+            // Preserve the old whole-column scale guard. The first streaming pass needs constant
+            // memory and establishes the scale before any gate is applied in the second pass.
+            return new PairwiseEdgeFile(tsvFile, count, maxId <= 1.0 && count > 0);
+        }
+
+        private static IEnumerable<PairwiseEdge> ReadPairwiseEdges(string tsvFile, bool fractionalIdentity,
+            OperationContext? operation)
+        {
+
+            foreach (string line in File.ReadLines(tsvFile))
             {
-                for (int i = 0; i < edges.Count; i++)
-                {
-                    PairwiseEdge e = edges[i];
-                    edges[i] = new PairwiseEdge(e.QueryId, e.TargetId, e.IdentityPercent * 100.0,
-                                                e.AlignmentLength, e.QueryLength, e.TargetLength);
-                }
+                operation?.ThrowIfCancellationRequested();
+                if (!TryReadPairwiseRow(line, true, out PairwiseEdge edge)) continue;
+                yield return fractionalIdentity
+                    ? new PairwiseEdge(edge.QueryId, edge.TargetId, edge.IdentityPercent * 100.0,
+                        edge.AlignmentLength, edge.QueryLength, edge.TargetLength)
+                    : edge;
             }
+        }
 
-            return edges;
+        private static bool TryReadPairwiseRow(string line, bool readLabels, out PairwiseEdge edge)
+        {
+            edge = default;
+            ReadOnlySpan<char> text = line.AsSpan();
+            Span<Range> columns = stackalloc Range[7];
+            if (text.Split(columns, '\t') < 6) return false;
+            if (!double.TryParse(text[columns[2]], NumberStyles.Float, CultureInfo.InvariantCulture, out double id)
+                || !int.TryParse(text[columns[3]], NumberStyles.Integer, CultureInfo.InvariantCulture, out int alnlen)
+                || !int.TryParse(text[columns[4]], NumberStyles.Integer, CultureInfo.InvariantCulture, out int ql)
+                || !int.TryParse(text[columns[5]], NumberStyles.Integer, CultureInfo.InvariantCulture, out int tl)) return false;
+            edge = new PairwiseEdge(readLabels ? PairwiseIdentifier(text[columns[0]]) : string.Empty,
+                readLabels ? PairwiseIdentifier(text[columns[1]]) : string.Empty, id, alnlen, ql, tl);
+            return true;
+        }
+
+        private static string PairwiseIdentifier(ReadOnlySpan<char> label)
+        {
+            int space = label.IndexOf(' ');
+            return (space < 0 ? label : label[..space]).ToString();
         }
 
         /// <summary>

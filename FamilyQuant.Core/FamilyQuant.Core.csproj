@@ -13,7 +13,6 @@
 
   <ItemGroup>
     <PackageReference Include="LiteDB" Version="5.0.21" />
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="OpenMcdf" Version="3.2.0" />
     <PackageReference Include="System.Runtime.Serialization.Formatters" Version="10.0.3" />
     <PackageReference Include="ThermoFisher.CommonCore.BackgroundSubtraction" Version="5.0.0.38" />

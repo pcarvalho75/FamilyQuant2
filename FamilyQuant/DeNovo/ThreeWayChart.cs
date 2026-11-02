@@ -36,14 +36,14 @@ namespace FamilyQuant.DeNovo
         private readonly List<ThreeWayPartitionRow> rows;
         private readonly string title;
 
-        static readonly Brush Backdrop = new SolidColorBrush(Color.FromRgb(0x33, 0x39, 0x49));
-        static readonly Brush Ink = new SolidColorBrush(Color.FromRgb(0xF2, 0xF0, 0xE9));
-        static readonly Brush Muted = new SolidColorBrush(Color.FromRgb(0xA8, 0xA4, 0x9A));
-        static readonly Brush Grid = new SolidColorBrush(Color.FromRgb(0x44, 0x4B, 0x5C));
-        static readonly Brush PatternLab = new SolidColorBrush(Color.FromRgb(0x6F, 0xA8, 0xF0));
-        static readonly Brush DeNovo = new SolidColorBrush(Color.FromRgb(0x3F, 0xD3, 0x9C));
-        static readonly Brush Remainder = new SolidColorBrush(Color.FromRgb(0x6B, 0x73, 0x8A));
-        static readonly Brush Negative = new SolidColorBrush(Color.FromRgb(0xE0, 0x4F, 0x5F));
+        private Brush Backdrop => palette.Backdrop;
+        private Brush Ink => palette.Ink;
+        private Brush Muted => palette.Muted;
+        private Brush Grid => palette.Grid;
+        private Brush PatternLab => palette.Identified;
+        private Brush DeNovo => palette.DeNovo;
+        private Brush Remainder => palette.Remainder;
+        private Brush Negative => palette.Negative;
 
         /// <summary>Left gutter, holding the run names.</summary>
         private const double NameGutter = 178;
@@ -160,7 +160,7 @@ namespace FamilyQuant.DeNovo
                 if (s.W <= 0.5) continue;
                 dc.DrawRectangle(s.Fill, null, new Rect(s.X, bar.Top, s.W, bar.Height));
 
-                var label = Text(Percent(s.Share * 100.0), Backdrop, 11, bold: true);
+                var label = Text(Percent(s.Share * 100.0), palette.SegmentLabel, 11, bold: true);
                 if (label.Width + 12 <= s.W && label.Height + 4 <= bar.Height)
                 {
                     dc.DrawText(label, new Point(s.X + (s.W - label.Width) / 2,
@@ -184,7 +184,7 @@ namespace FamilyQuant.DeNovo
 
         /// <summary>Diagonal hatching over a region, clipped to it. Hand-drawn rather than a
         /// DrawingBrush so the stripe spacing does not change with the bar height.</summary>
-        private static void DrawHatch(DrawingContext dc, Rect region)
+        private void DrawHatch(DrawingContext dc, Rect region)
         {
             if (region.Width <= 0 || region.Height <= 0) return;
 
