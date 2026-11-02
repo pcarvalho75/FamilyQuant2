@@ -13,6 +13,7 @@ This is the navigation index for the current checkout. The roadmap owns unfinish
 | [Shell dialogs](SHELL-DIALOGS.md) | Headless messages, browse preferences and protected C1 adoption |
 | [Quantitation stages](QUANTITATION-PIPELINE.md) | Full-XIC stage contracts, second-pass residual seam and focused parity checker |
 | [De novo engine](DENOVO-ENGINE.md) | Reader/result boundaries, Core selections and review tables, focused real-data parity |
+| [Project formats](PROJECT-FORMATS.md) | Versioned schema/codecs, legacy container rules and frozen-reader FCF proof |
 | [Clustering refactor](CLUSTERING-REFACTOR.md) | Result contracts and bounded frozen/current comparison |
 | [Dependencies](DEPENDENCIES.md) | Package decisions, cache compatibility and real-file opening checks |
 | [USEARCH provenance](USEARCH-PROVENANCE.md) | Pinned author artifact, license and full assignment parity |
@@ -23,6 +24,9 @@ This is the navigation index for the current checkout. The roadmap owns unfinish
 | [Task discovery](EVIDENCE-TASK.md) | Header-derived taxonomy, functional keyword proposal and confirmed recipe contract |
 | [Quantitation panel](QUANTITATION-PANEL.md) | Source visibility, retained options and native checks |
 | [Study ownership](X9-STUDIES.md) | Small X9 move and retained screen dependencies |
+| [Native evidence delivery](EVIDENCE-DELIVERY.md) | Program-driven fetch, default review, explicit split, save, export and replay |
+| [A2 coverage audit](A2-COVERAGE.md) | Native counterfactual measurement and the counts-only alignment audit label |
+| [Query residue coverage](QUERY-COVERAGE.md) | Recorded query letters, bounded coverage, current cache provenance and historical replay |
 | [H1 findings](housekeeping/H1-NOTES.md) | Behavior decisions, protected work, ledger migration and remaining reuse scope |
 | [Vision](vision/VISION.md) | Fable's study: the family world proposal behind workstream W8, with the desk's corrections |
 | [Code map](vision/CODE-MAP.md) | How a FASTA and a RAW file become a family number, and what that read did not cover |
@@ -80,8 +84,13 @@ Invoke each flag with `& $testExe <flag>` after building. Dispatch and arity are
 | `--list-test-commands` | Deterministic command table; executes no test or scientific handler |
 | `--test-document` | Document round trip, scoring and denominator attribution fixtures |
 | `--test-evidence-task` | File-derived taxonomy, keyword counts, confirmation and recipe replay fixtures |
+| `--test-evidence-delivery` | Native default review, save, exports, exact app-session replay and app Open fixture |
+| `--test-evidence-fetch-atomic` | Combined evidence/panel staging, cancellation boundaries, failures and one final commit |
+| `--test-evidence-coverage` | Native alignment-row interpretation, counterfactual chooser and honest audit labels |
+| `--test-query-residue-coverage` | Actual query-letter gate, native facts, legacy serialization and evidence-session contracts |
 | `--test-quantitation-stages` | Prepared-peptide assignments, cross-side suppression, residual calibration, rollup and deterministic CSV |
 | `--test-denovo-engine` | Core retained selection/review-table contracts and existing reader/reconciliation/source-aware fixtures |
+| `--test-project-formats` | Schema contract and existing versioned project round-trip/refusal fixtures |
 | `--test-inputs` | Real-data argument-selection contract, without choosing Desktop fallbacks |
 | `--test-operations` | Core outcomes, progress, cancellation and the owned native-child fixture |
 | `--test-busy` | App operation host, running-command cancellation, prior file bytes and guarded publication |
@@ -99,9 +108,13 @@ Invoke each flag with `& $testExe <flag>` after building. Dispatch and arity are
 | `--test-architecture-group-split [output-dir]` | Native per-key split choices, retained bulk choice, unsplit members staying together, exact recipe replay and optional synthetic captures |
 | `--test-curation-view` | Persistent table, accession/full identifier, hidden defaults and native annotation edit/Undo |
 | `--test-curation-layout` | Retained chrome, tooltips and ancestor-clipping regression |
+| `--test-evidence-coverage-ui [output-dir]` | Recorded query-residue coverage, missing legacy facts, bounded display and native rule line |
+| `--prove-results-interactions <fresh-output> <date-timestamp>` | Native Results controls, displaced handlers, deterministic exports and observation receipts |
+| `--prove-results-members <frozen-root> <fresh-output> <date-timestamp>` | Shared scoped member comparison for assigned Results and quantitation declarations; changed members stay open |
 | `--test-quantitation-panel [output-dir]` | Full XIC first, conditional source options, retained selectors and both-theme native captures |
 | `--test-curation-quantitation` | Full-XIC column, denominator changes, shared policy and unavailable-TIC fallback |
 | `--test-curation-operations` | Shared host queue/cancel paths, staged PatternLab publication, stale membership, browse preferences and headless refusal |
+| `--test-family-view` | Native family selection, name editing, accessible locks, Undo, production-share projection and 39,996-family virtualization |
 | `--test-architecture-group-split [output-dir]` | Native per-key split choices, retained bulk choice, unsplit members staying together, exact recipe replay and optional synthetic captures |
 | `--test-report-study-boundary` | Report-only operation ownership, retained Core models and screen dependencies |
 | `--report-study-snapshot <new-output-dir>` | Six native synthetic text/PNG fixtures for source-move parity |
@@ -119,6 +132,7 @@ These commands create native WPF client captures or labelled synthetic fixtures,
 |---|---|
 | `--screens <output-dir>` | [ScreenHarness.cs](../FamilyQuant.Tests/ScreenHarness.cs) |
 | `--curation-screens <new-output-dir> <input.fcf>` | [Program.CurationScreens.cs](../FamilyQuant.Tests/Program.CurationScreens.cs); four native client captures with input hash |
+| `--family-view-screens <new-output-dir> <input.fcf>` | Same producer with a family selected; selection and visible member count recorded |
 | `--busy-screens <output-dir>` | [Program.BusyOperations.cs](../FamilyQuant.Tests/Program.BusyOperations.cs); six synthetic overlay states in both themes |
 | `--shell-menu-screens <output-dir>` | [Program.StandardMenu.cs](../FamilyQuant.Tests/Program.StandardMenu.cs) |
 | `--start-page-screens <output-dir>` | [Program.HomeStart.cs](../FamilyQuant.Tests/Program.HomeStart.cs) |
@@ -175,6 +189,8 @@ Optional positional values following each flag override its native defaults. The
 |---|---|
 | `--evidence-storage-check [input.fcf] [reference.tsv] [report.json]` | [EvidenceStorageCheck.cs](../FamilyQuant.Tests/EvidenceStorageCheck.cs) |
 | `--evidence-task-check <evidence.fcf> <new-report.json>` | [Program.EvidenceTask.cs](../FamilyQuant.Tests/Program.EvidenceTask.cs); read-only live taxonomy discovery, native JSON report |
+| `--evidence-delivery prepare/split/create ...` | [Program.EvidenceDelivery.cs](../FamilyQuant.Tests/Program.EvidenceDelivery.cs); [native delivery syntax](EVIDENCE-DELIVERY.md) |
+| `--evidence-coverage-check <prepared.fcf> <applied.fcf> <new-output-directory> [existing-capture-directory]` | [Program.EvidenceCoverage.cs](../FamilyQuant.Tests/Program.EvidenceCoverage.cs); native capture or deterministic offline replay, without applying a counterfactual |
 | `--evidence-fetch-check [input.fcf] [reference.tsv] [output.fcf]` | [EvidenceFetchCheck.cs](../FamilyQuant.Tests/EvidenceFetchCheck.cs); live fetch |
 | `--evidence-fetch-verify [input.fcf] [reference.tsv] [existing-output.fcf]` | Same helper, verifies the existing native evidence copy |
 | `--reference-panel-check [evidence.fcf] [output-dir]` | [ReferencePanelCheck.cs](../FamilyQuant.Tests/ReferencePanelCheck.cs); live panel and validation |

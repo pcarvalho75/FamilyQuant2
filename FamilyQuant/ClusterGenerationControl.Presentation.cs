@@ -119,7 +119,7 @@ public partial class ClusterGenerationControl
                 FamilyFilter.CountFamilies(finalResult),
                 FamilyFilter.CountFamilies(fcf.MyExtendedFastaItems));
 
-            DataGridResultGrid.ItemsSource = finalResult;
+            DataGridResultGrid.ItemsSource = ViewModel.SelectedFamilyProteins;
 
             // Re-assigning ItemsSource resets every column's SortDirection to null, so the header arrow
             // is re-applied here, once, for EVERY refresh (filter, edit, recluster, load, header click),
@@ -179,10 +179,17 @@ public partial class ClusterGenerationControl
                 ? "Share of signal (none calculated yet)"
                 : DisplayedMode.Value.ColumnHeader();
 
+            if (ColumnFamilyPatternLab != null)
+            {
+                ColumnFamilyPatternLab.Header = ColumnXicUser.Header;
+                ColumnFamilyPatternLab.Visibility = DisplayedMode == null ? Visibility.Collapsed : Visibility.Visible;
+            }
+
             if (ColumnFullXic != null)
                 ColumnFullXic.Header = !HasFullXic
                     ? "Full XIC share (not computed)"
                     : FullXicOverTic ? "Full XIC, % of TIC" : "Full XIC, % of quantified signal";
+            if (ColumnFamilyFullXic != null && ColumnFullXic != null) ColumnFamilyFullXic.Header = ColumnFullXic.Header;
         }
 
         private void UpdateGUI()
@@ -334,6 +341,7 @@ public partial class ClusterGenerationControl
         /// </summary>
         private void ApplyColumnHeaderTooltips()
         {
+            ApplyFamilyHeaderTooltips();
             ColumnUSearchId.HeaderStyle = HeaderTip(
                 "The last automatic grouping, from USEARCH and any word or keyword merge. Read-only; it " +
                 "equals User ID except where you renumbered a family by hand.");

@@ -46,6 +46,16 @@ internal static partial class Program
         File.Copy(typeof(ProjectStore).Assembly.Location, coreAssembly);
         string runId = "N5-native-preservation";
         var rows = new Dictionary<string, FeatureLedgerEvidence.Row>(StringComparer.Ordinal);
+        // A receipt refresh must not discard OPEN mappings merely because a later step moved their
+        // source again. Only unproved mappings carry forward; every proof below is freshly executed.
+        string previousRegister = Path.Combine(root, "docs/feature-ledger-evidence/N5.json");
+        if (File.Exists(previousRegister))
+        {
+            var previous = JsonSerializer.Deserialize<FeatureLedgerEvidence.Register>(
+                File.ReadAllText(previousRegister), FeatureLedgerEvidence.JsonOptions);
+            foreach (var row in previous?.Rows.Where(row => row.Proofs.Count == 0)
+                ?? Enumerable.Empty<FeatureLedgerEvidence.Row>()) rows[row.ObservationId] = row;
+        }
         var hashes = new Dictionary<string, string>(StringComparer.Ordinal);
         FeatureLedgerEvidence.Implementation Mapping(string path, string symbol)
         {

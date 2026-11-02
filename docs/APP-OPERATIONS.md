@@ -35,3 +35,18 @@ observe cancellation at their boundaries; their threads are never aborted.
 `--busy-screens <output-dir>` captures unknown progress, counted progress and cancellation
 in both themes at the minimum shell size, using labelled synthetic fixtures.
 These checks do not claim a new RAW extraction, installed-product test or full scientific validation.
+
+## Combined evidence fetch
+
+`EvidenceFetchSession.FetchAsync(file, operationContext, handler)` is the S9 Core seam for the
+online action. Protein evidence and the reviewed panel are prepared on detached records and
+provenance. The context token and progress reach both fetch phases. A panel failure or a release
+change refuses the complete transaction. The original protein objects, IDs, locks and quantitation
+are retained; only fetched evidence, domains and their provenance attach at the final commit.
+The commit also refuses a file changed while the requests were running.
+
+The original progress overload remains available and accepts an optional cancellation token.
+`--test-evidence-fetch-atomic` covers cancellation before starting, during either request phase,
+between phases, after the panel, and before publication. It also checks failures, a source edit,
+the panel-only path and the rule that a completed commit wins a later cancellation.
+Connecting the shell's Cancel button to this Core seam is FQShell's follow-on integration.
