@@ -17,7 +17,7 @@ Render targets refer to `ScreenHarness.Screens`, captured with `--screens <outpu
 Release gate: `FamilyQuant.Tests.exe --feature-ledger-release-check` fails until every retained row is VERIFIED with evidence. Authorized DROP rows use APPROVED_DROP, which records a decision, not a completed UI removal. The normal quick suite permits OPEN rows during development. Regeneration resets retained rows to OPEN; preserve reviewed evidence when updating the scanner.
 
 Scan count: **5756**. Ledger rows: **5756**. Source files: **104**.
-Authorized DROP rows: **296**; proposed VERIFIED retained rows: **2356**; OPEN retained rows: **3104**.
+Authorized DROP rows: **296**; proposed VERIFIED retained rows: **2443**; OPEN retained rows: **3017**.
 
 | ID | Disposition | Kind | Frozen source | Fact or control | Planned check | State | Evidence |
 |---|---|---|---|---|---|---|---|
@@ -68,38 +68,38 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **2356**; OPEN r
 | FQ15-8586C71F3AD9 | KEEP | format/export | FamilyQuant/AnalyticsControl.xaml.cs:191 | "A project opened from a plain .fcf carries no quantitation, and a .fqproj that was saved " | render:07-analytics | OPEN | pending |
 | FQ15-FB6FB2373EC9 | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:192 | "before it was ever computed carries none either. In both cases the same step applies: run " | render:07-analytics | OPEN | pending |
 | FQ15-8DD9CD4C4EB7 | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:193 | "Compute / update full XIC, then this screen will draw the graphs." | render:07-analytics | OPEN | pending |
-| FQ15-E675289A142D | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:212 | " The family chart stands on " | render:07-analytics | OPEN | pending |
-| FQ15-7CC8C1A2752C | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:213 | "N0" | render:07-analytics | OPEN | pending |
-| FQ15-18B69E5FE48B | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:214 | " family(ies) of the open grouping, reached by homology; families below the cut are " | render:07-analytics | OPEN | pending |
-| FQ15-86A622AD717E | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:215 | "folded into one bar and the signal that reached no family is drawn apart. Its bars count a " | render:07-analytics | OPEN | pending |
-| FQ15-5B5F3C8922E5 | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:216 | "peptide shared by several families in each of them; counted once instead, the peptides " | render:07-analytics | OPEN | pending |
-| FQ15-A5F7C6AF48F1 | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:217 | "shared between families are " | render:07-analytics | OPEN | pending |
-| FQ15-F5FDE7618839 | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:218 | "P2" | render:07-analytics | OPEN | pending |
-| FQ15-6B32904AA9E0 | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:218 | " of the quantified signal and " | render:07-analytics | OPEN | pending |
-| FQ15-F1AF664F53C2 | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:219 | "P2" | render:07-analytics | OPEN | pending |
-| FQ15-A1E86108802F | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:219 | " reached no family (the " | render:07-analytics | OPEN | pending |
-| FQ15-824E8A5CC3BC | KEEP | format/export | FamilyQuant/AnalyticsControl.xaml.cs:220 | "evidence pack's family_composition.csv uses this basis; the curation screen's Full XIC column " | render:07-analytics | OPEN | pending |
-| FQ15-B4F482100C1F | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:221 | "can show it too, with 'Family-unique only' and 'the quantified signal' chosen in Layer 3)." | render:07-analytics | OPEN | pending |
-| FQ15-9CA845CCA73D | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:223 | " No Family Cluster File is open beside this quantitation, so the family chart has " | render:07-analytics | OPEN | pending |
-| FQ15-07D81C5B558B | KEEP | format/export | FamilyQuant/AnalyticsControl.xaml.cs:224 | "nothing to draw: open the project's .fcf or .fqproj and return here." | render:07-analytics | OPEN | pending |
-| FQ15-7C35B6C32532 | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:225 | " No family of the open grouping was reached by any peptide, so the family chart is " | render:07-analytics | OPEN | pending |
-| FQ15-C3187F7C321A | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:226 | "empty. Check that the curation and the quantitation come from the same database." | render:07-analytics | OPEN | pending |
-| FQ15-337A451D104E | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:233 | "Read " | render:07-analytics | OPEN | pending |
-| FQ15-4B1E9C8B0D7C | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:233 | "N0" | render:07-analytics | OPEN | pending |
-| FQ15-14985DE07575 | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:234 | " peptide(s) after collapsing each to one representative peak. No total ion current " | render:07-analytics | OPEN | pending |
-| FQ15-E70EA3381DC2 | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:235 | "is recorded, so the recovery shares cannot be taken; the mass and isotope graphs " | render:07-analytics | OPEN | pending |
-| FQ15-369CAF48846F | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:236 | "still read from the table." | render:07-analytics | OPEN | pending |
-| FQ15-6906A1DF7316 | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:245 | " A further {0:P2} was identified but NOT quantified: {1:N0} peptide(s) whose peaks carried " | render:07-analytics | OPEN | pending |
-| FQ15-335AA9FA614A | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:246 | "too few points to integrate{2}. It is accounted for as its own block rather than left to " | render:07-analytics | OPEN | pending |
-| FQ15-7AAC5C64F2CE | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:247 | "the remainder." | render:07-analytics | OPEN | pending |
-| FQ15-A3E21DE253F6 | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:251 | ", and part of that number is an ESTIMATE (a single-point peak has no width, so it is " | render:07-analytics | OPEN | pending |
-| FQ15-A3A60E01E74D | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:252 | "given the run's median scan spacing)" | render:07-analytics | OPEN | pending |
-| FQ15-9FE6CD09BA9C | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:256 | "Across {0} run(s): the identified (DDA) envelope explains {1:P2} of the total ion current, " | render:07-analytics | OPEN | pending |
-| FQ15-A86960BD0CB9 | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:257 | "the de novo envelope adds {2:P2}, and together they recover {3:P2}. " | render:07-analytics | OPEN | pending |
-| FQ15-D58E10A6C3FE | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:258 | "{4:N0} identified and {5:N0} de novo peptide(s), each counted once. Every number is " | render:07-analytics | OPEN | pending |
-| FQ15-4769F6956FF3 | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:259 | "FamilyQuant's own full-envelope quant, deduped to one deterministic largest-M+0 " | render:07-analytics | OPEN | pending |
-| FQ15-E243A47466D1 | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:260 | "representative per run, evidence side, canonical PTM-aware peptidoform and charge, divided " | render:07-analytics | OPEN | pending |
-| FQ15-C0B70F0BDDD8 | KEEP | format/export | FamilyQuant/AnalyticsControl.xaml.cs:261 | "by the raw TIC; nothing here is read from the .plp or the .xic2." | render:07-analytics | OPEN | pending |
+| FQ15-E675289A142D | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:212 | " The family chart stands on " | test:ResultsRuntimeLedgerCommand | VERIFIED | evidence:RS-runtime:FQ15-E675289A142D |
+| FQ15-7CC8C1A2752C | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:213 | "N0" | test:ResultsRuntimeLedgerCommand | VERIFIED | evidence:RS-runtime:FQ15-7CC8C1A2752C |
+| FQ15-18B69E5FE48B | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:214 | " family(ies) of the open grouping, reached by homology; families below the cut are " | test:ResultsRuntimeLedgerCommand | VERIFIED | evidence:RS-runtime:FQ15-18B69E5FE48B |
+| FQ15-86A622AD717E | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:215 | "folded into one bar and the signal that reached no family is drawn apart. Its bars count a " | test:ResultsRuntimeLedgerCommand | VERIFIED | evidence:RS-runtime:FQ15-86A622AD717E |
+| FQ15-5B5F3C8922E5 | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:216 | "peptide shared by several families in each of them; counted once instead, the peptides " | test:ResultsRuntimeLedgerCommand | VERIFIED | evidence:RS-runtime:FQ15-5B5F3C8922E5 |
+| FQ15-A5F7C6AF48F1 | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:217 | "shared between families are " | test:ResultsRuntimeLedgerCommand | VERIFIED | evidence:RS-runtime:FQ15-A5F7C6AF48F1 |
+| FQ15-F5FDE7618839 | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:218 | "P2" | test:ResultsRuntimeLedgerCommand | VERIFIED | evidence:RS-runtime:FQ15-F5FDE7618839 |
+| FQ15-6B32904AA9E0 | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:218 | " of the quantified signal and " | test:ResultsRuntimeLedgerCommand | VERIFIED | evidence:RS-runtime:FQ15-6B32904AA9E0 |
+| FQ15-F1AF664F53C2 | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:219 | "P2" | test:ResultsRuntimeLedgerCommand | VERIFIED | evidence:RS-runtime:FQ15-F1AF664F53C2 |
+| FQ15-A1E86108802F | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:219 | " reached no family (the " | test:ResultsRuntimeLedgerCommand | VERIFIED | evidence:RS-runtime:FQ15-A1E86108802F |
+| FQ15-824E8A5CC3BC | KEEP | format/export | FamilyQuant/AnalyticsControl.xaml.cs:220 | "evidence pack's family_composition.csv uses this basis; the curation screen's Full XIC column " | test:ResultsRuntimeLedgerCommand | VERIFIED | evidence:RS-runtime:FQ15-824E8A5CC3BC |
+| FQ15-B4F482100C1F | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:221 | "can show it too, with 'Family-unique only' and 'the quantified signal' chosen in Layer 3)." | test:ResultsRuntimeLedgerCommand | VERIFIED | evidence:RS-runtime:FQ15-B4F482100C1F |
+| FQ15-9CA845CCA73D | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:223 | " No Family Cluster File is open beside this quantitation, so the family chart has " | test:ResultsRuntimeLedgerCommand | VERIFIED | evidence:RS-runtime:FQ15-9CA845CCA73D |
+| FQ15-07D81C5B558B | KEEP | format/export | FamilyQuant/AnalyticsControl.xaml.cs:224 | "nothing to draw: open the project's .fcf or .fqproj and return here." | test:ResultsRuntimeLedgerCommand | VERIFIED | evidence:RS-runtime:FQ15-07D81C5B558B |
+| FQ15-7C35B6C32532 | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:225 | " No family of the open grouping was reached by any peptide, so the family chart is " | test:ResultsRuntimeLedgerCommand | VERIFIED | evidence:RS-runtime:FQ15-7C35B6C32532 |
+| FQ15-C3187F7C321A | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:226 | "empty. Check that the curation and the quantitation come from the same database." | test:ResultsRuntimeLedgerCommand | VERIFIED | evidence:RS-runtime:FQ15-C3187F7C321A |
+| FQ15-337A451D104E | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:233 | "Read " | test:ResultsRuntimeLedgerCommand | VERIFIED | evidence:RS-runtime:FQ15-337A451D104E |
+| FQ15-4B1E9C8B0D7C | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:233 | "N0" | test:ResultsRuntimeLedgerCommand | VERIFIED | evidence:RS-runtime:FQ15-4B1E9C8B0D7C |
+| FQ15-14985DE07575 | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:234 | " peptide(s) after collapsing each to one representative peak. No total ion current " | test:ResultsRuntimeLedgerCommand | VERIFIED | evidence:RS-runtime:FQ15-14985DE07575 |
+| FQ15-E70EA3381DC2 | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:235 | "is recorded, so the recovery shares cannot be taken; the mass and isotope graphs " | test:ResultsRuntimeLedgerCommand | VERIFIED | evidence:RS-runtime:FQ15-E70EA3381DC2 |
+| FQ15-369CAF48846F | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:236 | "still read from the table." | test:ResultsRuntimeLedgerCommand | VERIFIED | evidence:RS-runtime:FQ15-369CAF48846F |
+| FQ15-6906A1DF7316 | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:245 | " A further {0:P2} was identified but NOT quantified: {1:N0} peptide(s) whose peaks carried " | test:ResultsRuntimeLedgerCommand | VERIFIED | evidence:RS-runtime:FQ15-6906A1DF7316 |
+| FQ15-335AA9FA614A | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:246 | "too few points to integrate{2}. It is accounted for as its own block rather than left to " | test:ResultsRuntimeLedgerCommand | VERIFIED | evidence:RS-runtime:FQ15-335AA9FA614A |
+| FQ15-7AAC5C64F2CE | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:247 | "the remainder." | test:ResultsRuntimeLedgerCommand | VERIFIED | evidence:RS-runtime:FQ15-7AAC5C64F2CE |
+| FQ15-A3E21DE253F6 | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:251 | ", and part of that number is an ESTIMATE (a single-point peak has no width, so it is " | test:ResultsRuntimeLedgerCommand | VERIFIED | evidence:RS-runtime:FQ15-A3E21DE253F6 |
+| FQ15-A3A60E01E74D | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:252 | "given the run's median scan spacing)" | test:ResultsRuntimeLedgerCommand | VERIFIED | evidence:RS-runtime:FQ15-A3A60E01E74D |
+| FQ15-9FE6CD09BA9C | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:256 | "Across {0} run(s): the identified (DDA) envelope explains {1:P2} of the total ion current, " | test:ResultsRuntimeLedgerCommand | VERIFIED | evidence:RS-runtime:FQ15-9FE6CD09BA9C |
+| FQ15-A86960BD0CB9 | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:257 | "the de novo envelope adds {2:P2}, and together they recover {3:P2}. " | test:ResultsRuntimeLedgerCommand | VERIFIED | evidence:RS-runtime:FQ15-A86960BD0CB9 |
+| FQ15-D58E10A6C3FE | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:258 | "{4:N0} identified and {5:N0} de novo peptide(s), each counted once. Every number is " | test:ResultsRuntimeLedgerCommand | VERIFIED | evidence:RS-runtime:FQ15-D58E10A6C3FE |
+| FQ15-4769F6956FF3 | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:259 | "FamilyQuant's own full-envelope quant, deduped to one deterministic largest-M+0 " | test:ResultsRuntimeLedgerCommand | VERIFIED | evidence:RS-runtime:FQ15-4769F6956FF3 |
+| FQ15-E243A47466D1 | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:260 | "representative per run, evidence side, canonical PTM-aware peptidoform and charge, divided " | test:ResultsRuntimeLedgerCommand | VERIFIED | evidence:RS-runtime:FQ15-E243A47466D1 |
+| FQ15-C0B70F0BDDD8 | KEEP | format/export | FamilyQuant/AnalyticsControl.xaml.cs:261 | "by the raw TIC; nothing here is read from the .plp or the .xic2." | test:ResultsRuntimeLedgerCommand | VERIFIED | evidence:RS-runtime:FQ15-C0B70F0BDDD8 |
 | FQ15-AD127A65769C | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:274 | " + " | test:ResultsMemberComparisonCommand | VERIFIED | evidence:RS-members:FQ15-AD127A65769C |
 | FQ15-E22F82E2E5B1 | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:277 | " [" | test:ResultsMemberComparisonCommand | VERIFIED | evidence:RS-members:FQ15-E22F82E2E5B1 |
 | FQ15-E18E1E92747A | IMPROVE | code fact | FamilyQuant/AnalyticsControl.xaml.cs:277 | "]" | test:ResultsMemberComparisonCommand | VERIFIED | evidence:RS-members:FQ15-E18E1E92747A |
@@ -175,8 +175,8 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **2356**; OPEN r
 | FQ15-DE01178972A9 | KEEP | format/export | FamilyQuant/AnalyticsFigures.cs:44 | "family_contribution.png" | test:ResultsMemberComparisonCommand | VERIFIED | evidence:RS-members:FQ15-DE01178972A9 |
 | FQ15-B42A95BF9A9B | KEEP | format/export | FamilyQuant/AnalyticsFigures.cs:45 | "recovery.png" | test:ResultsMemberComparisonCommand | VERIFIED | evidence:RS-members:FQ15-B42A95BF9A9B |
 | FQ15-3C96BBC03C6E | IMPROVE | code fact | FamilyQuant/AnalyticsFigures.cs:105 | "A folder is required to save the figures." | test:ResultsMemberComparisonCommand | VERIFIED | evidence:RS-members:FQ15-3C96BBC03C6E |
-| FQ15-478160FEFF33 | KEEP | export/storage fact | FamilyQuant/AnalyticsModel.cs:261 | "\u0001" | test:DeNovoAgreementUnitTests | OPEN | pending |
-| FQ15-195C6EA3EF4C | KEEP | export/storage fact | FamilyQuant/AnalyticsModel.cs:261 | "\u0001" | test:DeNovoAgreementUnitTests | OPEN | pending |
+| FQ15-478160FEFF33 | KEEP | export/storage fact | FamilyQuant/AnalyticsModel.cs:261 | "\u0001" | test:ResultsRuntimeLedgerCommand | VERIFIED | evidence:RS-runtime:FQ15-478160FEFF33 |
+| FQ15-195C6EA3EF4C | KEEP | export/storage fact | FamilyQuant/AnalyticsModel.cs:261 | "\u0001" | test:ResultsRuntimeLedgerCommand | VERIFIED | evidence:RS-runtime:FQ15-195C6EA3EF4C |
 | FQ15-14EF3FCA0F05 | KEEP | export/storage fact | FamilyQuant/AnalyticsModel.cs:262 | "\u0001" | test:ResultsMemberComparisonCommand | VERIFIED | evidence:RS-members:FQ15-14EF3FCA0F05 |
 | FQ15-7BF63C65597D | KEEP | export/storage fact | FamilyQuant/AnalyticsModel.cs:295 | "run" | test:ResultsMemberComparisonCommand | VERIFIED | evidence:RS-members:FQ15-7BF63C65597D |
 | FQ15-AC04A32666F4 | KEEP | export/storage fact | FamilyQuant/AnalyticsModel.cs:295 | "side" | test:ResultsMemberComparisonCommand | VERIFIED | evidence:RS-members:FQ15-AC04A32666F4 |
@@ -236,11 +236,11 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **2356**; OPEN r
 | FQ15-B928EDF0A72F | KEEP | export/storage fact | FamilyQuant/AnalyticsModel.cs:397 | "0" | test:ResultsMemberComparisonCommand | VERIFIED | evidence:RS-members:FQ15-B928EDF0A72F |
 | FQ15-9986B5A8B91D | KEEP | export/storage fact | FamilyQuant/AnalyticsModel.cs:418 | "1" | test:ResultsMemberComparisonCommand | VERIFIED | evidence:RS-members:FQ15-9986B5A8B91D |
 | FQ15-3CF44012BB86 | KEEP | export/storage fact | FamilyQuant/AnalyticsModel.cs:418 | "0" | test:ResultsMemberComparisonCommand | VERIFIED | evidence:RS-members:FQ15-3CF44012BB86 |
-| FQ15-6EB4F8E9DE00 | KEEP | export/storage fact | FamilyQuant/AnalyticsModel.cs:444 | "R" | test:DeNovoAgreementUnitTests | OPEN | pending |
-| FQ15-B00484A75D89 | KEEP | export/storage fact | FamilyQuant/AnalyticsModel.cs:455 | "\"" | test:DeNovoAgreementUnitTests | OPEN | pending |
-| FQ15-2160B295CB8D | KEEP | export/storage fact | FamilyQuant/AnalyticsModel.cs:455 | "\"" | test:DeNovoAgreementUnitTests | OPEN | pending |
+| FQ15-6EB4F8E9DE00 | KEEP | export/storage fact | FamilyQuant/AnalyticsModel.cs:444 | "R" | test:ResultsRuntimeLedgerCommand | VERIFIED | evidence:RS-runtime:FQ15-6EB4F8E9DE00 |
+| FQ15-B00484A75D89 | KEEP | export/storage fact | FamilyQuant/AnalyticsModel.cs:455 | "\"" | test:ResultsRuntimeLedgerCommand | VERIFIED | evidence:RS-runtime:FQ15-B00484A75D89 |
+| FQ15-2160B295CB8D | KEEP | export/storage fact | FamilyQuant/AnalyticsModel.cs:455 | "\"" | test:ResultsRuntimeLedgerCommand | VERIFIED | evidence:RS-runtime:FQ15-2160B295CB8D |
 | FQ15-4AB693585488 | KEEP | export/storage fact | FamilyQuant/AnalyticsModel.cs:455 | "\"\"" | test:ResultsMemberComparisonCommand | VERIFIED | evidence:RS-members:FQ15-4AB693585488 |
-| FQ15-A100063129F9 | KEEP | export/storage fact | FamilyQuant/AnalyticsModel.cs:455 | "\"" | test:DeNovoAgreementUnitTests | OPEN | pending |
+| FQ15-A100063129F9 | KEEP | export/storage fact | FamilyQuant/AnalyticsModel.cs:455 | "\"" | test:ResultsRuntimeLedgerCommand | VERIFIED | evidence:RS-runtime:FQ15-A100063129F9 |
 | FQ15-B1182A35C62C | IMPROVE | option/copy | FamilyQuant/App.xaml:10 | SolidColorBrush.Key = PanelDarkBrush | render:01-home | OPEN | pending |
 | FQ15-4CC490537F8C | IMPROVE | option/copy | FamilyQuant/App.xaml:11 | SolidColorBrush.Key = PanelMidBrush | render:01-home | OPEN | pending |
 | FQ15-EFD6FE0DBCF2 | IMPROVE | option/copy | FamilyQuant/App.xaml:12 | SolidColorBrush.Key = PanelLightBrush | render:01-home | OPEN | pending |
@@ -3098,13 +3098,13 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **2356**; OPEN r
 | FQ15-BE95F3FF3BEC | IMPROVE | code fact | FamilyQuant/FamilyContributionChart.cs:350 | " - families reached at " | test:ResultsMemberComparisonCommand | VERIFIED | evidence:RS-members:FQ15-BE95F3FF3BEC |
 | FQ15-E145B325EEE0 | IMPROVE | code fact | FamilyQuant/FamilyContributionChart.cs:351 | "P0" | test:ResultsMemberComparisonCommand | VERIFIED | evidence:RS-members:FQ15-E145B325EEE0 |
 | FQ15-A1A83AC03AE8 | IMPROVE | code fact | FamilyQuant/FamilyContributionChart.cs:351 | " identity" | test:ResultsMemberComparisonCommand | VERIFIED | evidence:RS-members:FQ15-A1A83AC03AE8 |
-| FQ15-7C20698A1A24 | IMPROVE | code fact | FamilyQuant/FamilyContributionChart.cs:369 | "Segoe UI" | test:FamilyContributionChartTests | OPEN | pending |
+| FQ15-7C20698A1A24 | IMPROVE | code fact | FamilyQuant/FamilyContributionChart.cs:369 | "Segoe UI" | test:ResultsRuntimeLedgerCommand | VERIFIED | evidence:RS-runtime:FQ15-7C20698A1A24 |
 | FQ15-40D2FF74F719 | IMPROVE | code fact | FamilyQuant/FamilyContributionChart.cs:390 | "P0" | test:ResultsMemberComparisonCommand | VERIFIED | evidence:RS-members:FQ15-40D2FF74F719 |
 | FQ15-3CF62C420D48 | IMPROVE | code fact | FamilyQuant/FamilyContributionChart.cs:390 | "P1" | test:ResultsMemberComparisonCommand | VERIFIED | evidence:RS-members:FQ15-3CF62C420D48 |
 | FQ15-B81258C16CA7 | IMPROVE | code fact | FamilyQuant/FamilyContributionChart.cs:392 | "E1" | test:ResultsMemberComparisonCommand | VERIFIED | evidence:RS-members:FQ15-B81258C16CA7 |
 | FQ15-66FDF0FB9345 | IMPROVE | code fact | FamilyQuant/FamilyContributionChart.cs:392 | "E2" | test:ResultsMemberComparisonCommand | VERIFIED | evidence:RS-members:FQ15-66FDF0FB9345 |
-| FQ15-E38BEFC387F6 | IMPROVE | code fact | FamilyQuant/FamilyContributionChart.cs:414 | "Nothing to show: no family carries measured signal yet. A family needs a " | test:FamilyContributionChartTests | OPEN | pending |
-| FQ15-1C4AF84D0909 | IMPROVE | code fact | FamilyQuant/FamilyContributionChart.cs:415 | "Family Cluster File open beside the computed full XIC." | test:FamilyContributionChartTests | OPEN | pending |
+| FQ15-E38BEFC387F6 | IMPROVE | code fact | FamilyQuant/FamilyContributionChart.cs:414 | "Nothing to show: no family carries measured signal yet. A family needs a " | test:ResultsRuntimeLedgerCommand | VERIFIED | evidence:RS-runtime:FQ15-E38BEFC387F6 |
+| FQ15-1C4AF84D0909 | IMPROVE | code fact | FamilyQuant/FamilyContributionChart.cs:415 | "Family Cluster File open beside the computed full XIC." | test:ResultsRuntimeLedgerCommand | VERIFIED | evidence:RS-runtime:FQ15-1C4AF84D0909 |
 | FQ15-32D7A6118F09 | IMPROVE | code fact | FamilyQuant/FamilyContributionChart.cs:527 | "identified envelope" | test:ResultsMemberComparisonCommand | VERIFIED | evidence:RS-members:FQ15-32D7A6118F09 |
 | FQ15-C8A2C9E62A73 | IMPROVE | code fact | FamilyQuant/FamilyContributionChart.cs:528 | "de novo reference-model estimate" | test:ResultsMemberComparisonCommand | VERIFIED | evidence:RS-members:FQ15-C8A2C9E62A73 |
 | FQ15-8CF8A16C9755 | IMPROVE | code fact | FamilyQuant/FamilyContributionChart.cs:544 | "not one family: the fold and the unattributed residual" | test:ResultsMemberComparisonCommand | VERIFIED | evidence:RS-members:FQ15-8CF8A16C9755 |
@@ -3820,17 +3820,17 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **2356**; OPEN r
 | FQ15-D712CBF8818B | KEEP | handler definition | FamilyQuant/HomeControl.xaml.cs:63 | private void ButtonHomeCompute_Click(object sender, System.Windows.RoutedEventArgs e) | render:01-home | OPEN | pending |
 | FQ15-5C26F2B35E39 | KEEP | handler definition | FamilyQuant/HomeControl.xaml.cs:66 | private void ButtonHomeAnalytics_Click(object sender, System.Windows.RoutedEventArgs e) | render:01-home | OPEN | pending |
 | FQ15-7A15414A0F8F | KEEP | handler definition | FamilyQuant/HomeControl.xaml.cs:69 | private void ButtonHomeDeNovo_Click(object sender, System.Windows.RoutedEventArgs e) | render:01-home | OPEN | pending |
-| FQ15-0017BF7ED046 | IMPROVE | code fact | FamilyQuant/IdentityScanChart.cs:123 | "Segoe UI" | test:IdentityScanPlotTests | OPEN | pending |
-| FQ15-84504F532220 | IMPROVE | code fact | FamilyQuant/IdentityScanChart.cs:159 | "N0" | test:IdentityScanPlotTests | OPEN | pending |
-| FQ15-651394E9DCCF | IMPROVE | code fact | FamilyQuant/IdentityScanChart.cs:164 | "P1" | test:IdentityScanPlotTests | OPEN | pending |
-| FQ15-AB769D72248D | IMPROVE | code fact | FamilyQuant/IdentityScanChart.cs:179 | "%" | test:IdentityScanPlotTests | OPEN | pending |
-| FQ15-74DAC099EC7F | IMPROVE | code fact | FamilyQuant/IdentityScanChart.cs:196 | "floor " | test:IdentityScanPlotTests | OPEN | pending |
-| FQ15-1F3377115E02 | IMPROVE | code fact | FamilyQuant/IdentityScanChart.cs:196 | "%" | test:IdentityScanPlotTests | OPEN | pending |
-| FQ15-7196A9C14D21 | IMPROVE | code fact | FamilyQuant/IdentityScanChart.cs:213 | "this file, " | test:IdentityScanPlotTests | OPEN | pending |
-| FQ15-147A2344E576 | IMPROVE | code fact | FamilyQuant/IdentityScanChart.cs:213 | "%" | test:IdentityScanPlotTests | OPEN | pending |
-| FQ15-3A5919BF25C4 | IMPROVE | code fact | FamilyQuant/IdentityScanChart.cs:228 | "non-contaminant target connected components" | test:IdentityScanPlotTests | OPEN | pending |
-| FQ15-1EB77992732D | IMPROVE | code fact | FamilyQuant/IdentityScanChart.cs:233 | "families mixing target and decoy" | test:IdentityScanPlotTests | OPEN | pending |
-| FQ15-1AB0B0C1616E | IMPROVE | code fact | FamilyQuant/IdentityScanChart.cs:239 | "USEARCH identity, strictest on the left" | test:IdentityScanPlotTests | OPEN | pending |
+| FQ15-0017BF7ED046 | IMPROVE | code fact | FamilyQuant/IdentityScanChart.cs:123 | "Segoe UI" | test:ResultsRuntimeLedgerCommand | VERIFIED | evidence:RS-runtime:FQ15-0017BF7ED046 |
+| FQ15-84504F532220 | IMPROVE | code fact | FamilyQuant/IdentityScanChart.cs:159 | "N0" | test:ResultsRuntimeLedgerCommand | VERIFIED | evidence:RS-runtime:FQ15-84504F532220 |
+| FQ15-651394E9DCCF | IMPROVE | code fact | FamilyQuant/IdentityScanChart.cs:164 | "P1" | test:ResultsRuntimeLedgerCommand | VERIFIED | evidence:RS-runtime:FQ15-651394E9DCCF |
+| FQ15-AB769D72248D | IMPROVE | code fact | FamilyQuant/IdentityScanChart.cs:179 | "%" | test:ResultsRuntimeLedgerCommand | VERIFIED | evidence:RS-runtime:FQ15-AB769D72248D |
+| FQ15-74DAC099EC7F | IMPROVE | code fact | FamilyQuant/IdentityScanChart.cs:196 | "floor " | test:ResultsRuntimeLedgerCommand | VERIFIED | evidence:RS-runtime:FQ15-74DAC099EC7F |
+| FQ15-1F3377115E02 | IMPROVE | code fact | FamilyQuant/IdentityScanChart.cs:196 | "%" | test:ResultsRuntimeLedgerCommand | VERIFIED | evidence:RS-runtime:FQ15-1F3377115E02 |
+| FQ15-7196A9C14D21 | IMPROVE | code fact | FamilyQuant/IdentityScanChart.cs:213 | "this file, " | test:ResultsRuntimeLedgerCommand | VERIFIED | evidence:RS-runtime:FQ15-7196A9C14D21 |
+| FQ15-147A2344E576 | IMPROVE | code fact | FamilyQuant/IdentityScanChart.cs:213 | "%" | test:ResultsRuntimeLedgerCommand | VERIFIED | evidence:RS-runtime:FQ15-147A2344E576 |
+| FQ15-3A5919BF25C4 | IMPROVE | code fact | FamilyQuant/IdentityScanChart.cs:228 | "non-contaminant target connected components" | test:ResultsRuntimeLedgerCommand | VERIFIED | evidence:RS-runtime:FQ15-3A5919BF25C4 |
+| FQ15-1EB77992732D | IMPROVE | code fact | FamilyQuant/IdentityScanChart.cs:233 | "families mixing target and decoy" | test:ResultsRuntimeLedgerCommand | VERIFIED | evidence:RS-runtime:FQ15-1EB77992732D |
+| FQ15-1AB0B0C1616E | IMPROVE | code fact | FamilyQuant/IdentityScanChart.cs:239 | "USEARCH identity, strictest on the left" | test:ResultsRuntimeLedgerCommand | VERIFIED | evidence:RS-runtime:FQ15-1AB0B0C1616E |
 | FQ15-5DDE030F02CB | KEEP | format/export | FamilyQuant/IdentityScanWindow.cs:28 | "identity_sweep.png" | test:ShellLedgerComparisonCommand | VERIFIED | evidence:SH:FQ15-5DDE030F02CB |
 | FQ15-99646E147558 | IMPROVE | code fact | FamilyQuant/IdentityScanWindow.cs:51 | "Each point is one USEARCH run. The floor line marks the loosest identity at which " | render:12-identity-scan | OPEN | pending |
 | FQ15-BA85253697CA | IMPROVE | code fact | FamilyQuant/IdentityScanWindow.cs:52 | "no family mixed a target with a decoy: below it, alignments are no better than " | render:12-identity-scan | OPEN | pending |
@@ -3869,13 +3869,13 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **2356**; OPEN r
 | FQ15-3FD91852854B | IMPROVE | code fact | FamilyQuant/IsotopeCountChart.cs:41 | "Each bar counts the peptides credited that many isotopes, from 1 up to the " | test:ResultsTooltipTests | VERIFIED | evidence:RS-C13-tooltips:FQ15-3FD91852854B |
 | FQ15-19228B26B200 | IMPROVE | code fact | FamilyQuant/IsotopeCountChart.cs:43 | "-isotope ceiling. An isotope is credited only where signal was found. The colours " | test:ResultsTooltipTests | VERIFIED | evidence:RS-C13-tooltips:FQ15-19228B26B200 |
 | FQ15-0A90D9115B97 | IMPROVE | code fact | FamilyQuant/IsotopeCountChart.cs:44 | "split each bar by peptide mass." | test:ResultsTooltipTests | VERIFIED | evidence:RS-C13-tooltips:FQ15-0A90D9115B97 |
-| FQ15-54F5DE5562BE | IMPROVE | code fact | FamilyQuant/IsotopeCountChart.cs:60 | "Segoe UI" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-18D61707CAFD | IMPROVE | code fact | FamilyQuant/IsotopeCountChart.cs:76 | "Isotopes credited per peptide" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-B6507A24A6BB | IMPROVE | code fact | FamilyQuant/IsotopeCountChart.cs:86 | "Nothing to show: no peptide was credited an isotope yet." | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-B25597DA07D1 | IMPROVE | code fact | FamilyQuant/IsotopeCountChart.cs:116 | "N0" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-FF8E3AB54443 | IMPROVE | code fact | FamilyQuant/IsotopeCountChart.cs:155 | "N0" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-54519B6879D6 | IMPROVE | code fact | FamilyQuant/IsotopeCountChart.cs:159 | " (ceiling)" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-A7CDC3BFB12D | IMPROVE | code fact | FamilyQuant/IsotopeCountChart.cs:163 | "isotopes credited (area &gt; 0)" | test:AnalyticsRenderTests | OPEN | pending |
+| FQ15-54F5DE5562BE | IMPROVE | code fact | FamilyQuant/IsotopeCountChart.cs:60 | "Segoe UI" | test:ResultsRuntimeLedgerCommand | VERIFIED | evidence:RS-runtime:FQ15-54F5DE5562BE |
+| FQ15-18D61707CAFD | IMPROVE | code fact | FamilyQuant/IsotopeCountChart.cs:76 | "Isotopes credited per peptide" | test:ResultsRuntimeLedgerCommand | VERIFIED | evidence:RS-runtime:FQ15-18D61707CAFD |
+| FQ15-B6507A24A6BB | IMPROVE | code fact | FamilyQuant/IsotopeCountChart.cs:86 | "Nothing to show: no peptide was credited an isotope yet." | test:ResultsRuntimeLedgerCommand | VERIFIED | evidence:RS-runtime:FQ15-B6507A24A6BB |
+| FQ15-B25597DA07D1 | IMPROVE | code fact | FamilyQuant/IsotopeCountChart.cs:116 | "N0" | test:ResultsRuntimeLedgerCommand | VERIFIED | evidence:RS-runtime:FQ15-B25597DA07D1 |
+| FQ15-FF8E3AB54443 | IMPROVE | code fact | FamilyQuant/IsotopeCountChart.cs:155 | "N0" | test:ResultsRuntimeLedgerCommand | VERIFIED | evidence:RS-runtime:FQ15-FF8E3AB54443 |
+| FQ15-54519B6879D6 | IMPROVE | code fact | FamilyQuant/IsotopeCountChart.cs:159 | " (ceiling)" | test:ResultsRuntimeLedgerCommand | VERIFIED | evidence:RS-runtime:FQ15-54519B6879D6 |
+| FQ15-A7CDC3BFB12D | IMPROVE | code fact | FamilyQuant/IsotopeCountChart.cs:163 | "isotopes credited (area &gt; 0)" | test:ResultsRuntimeLedgerCommand | VERIFIED | evidence:RS-runtime:FQ15-A7CDC3BFB12D |
 | FQ15-97C20BA0A2D2 | IMPROVE | code fact | FamilyQuant/LockManagerWindow.cs:78 | "Curation locks" | render:10-lock-manager | OPEN | pending |
 | FQ15-7865E0712966 | IMPROVE | code fact | FamilyQuant/LockManagerWindow.cs:99 | "These are the families protected from automatic reclustering. A family is locked by " | render:10-lock-manager | OPEN | pending |
 | FQ15-764AB6398161 | IMPROVE | code fact | FamilyQuant/LockManagerWindow.cs:100 | "typing its number into the User ID column, and by nothing else.\n\n" | render:10-lock-manager | OPEN | pending |
@@ -4207,19 +4207,19 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **2356**; OPEN r
 | FQ15-DAA68CE9D5CA | IMPROVE | code fact | FamilyQuant/NormalizationMode.cs:93 | "% of charge-restricted signal" | test:ResultsMemberComparisonCommand | VERIFIED | evidence:RS-members:FQ15-DAA68CE9D5CA |
 | FQ15-0C61F997EE4B | IMPROVE | code fact | FamilyQuant/NormalizationMode.cs:94 | "% of identified signal" | test:ResultsMemberComparisonCommand | VERIFIED | evidence:RS-members:FQ15-0C61F997EE4B |
 | FQ15-821F5E568468 | IMPROVE | code fact | FamilyQuant/NormalizationMode.cs:104 | "USearch families" | render:03-curation | OPEN | pending |
-| FQ15-5ABBA0861220 | IMPROVE | code fact | FamilyQuant/NormalizationMode.cs:104 | "User families" | render:03-curation | OPEN | pending |
-| FQ15-10748E65D19F | IMPROVE | code fact | FamilyQuant/NormalizationMode.cs:105 | " (" | render:03-curation | OPEN | pending |
-| FQ15-6684BADC27CC | IMPROVE | code fact | FamilyQuant/NormalizationMode.cs:105 | ")" | render:03-curation | OPEN | pending |
+| FQ15-5ABBA0861220 | IMPROVE | code fact | FamilyQuant/NormalizationMode.cs:104 | "User families" | test:ResultsRuntimeLedgerCommand | VERIFIED | evidence:RS-runtime:FQ15-5ABBA0861220 |
+| FQ15-10748E65D19F | IMPROVE | code fact | FamilyQuant/NormalizationMode.cs:105 | " (" | test:ResultsRuntimeLedgerCommand | VERIFIED | evidence:RS-runtime:FQ15-10748E65D19F |
+| FQ15-6684BADC27CC | IMPROVE | code fact | FamilyQuant/NormalizationMode.cs:105 | ")" | test:ResultsRuntimeLedgerCommand | VERIFIED | evidence:RS-runtime:FQ15-6684BADC27CC |
 | FQ15-F31A2BC16C5B | IMPROVE | code fact | FamilyQuant/NormalizationMode.cs:111 | "USearch families" | render:03-curation | OPEN | pending |
-| FQ15-94FE33F6CBEE | IMPROVE | code fact | FamilyQuant/NormalizationMode.cs:111 | "User families" | render:03-curation | OPEN | pending |
-| FQ15-508AFF7616EF | IMPROVE | code fact | FamilyQuant/NormalizationMode.cs:115 | "Family share, fraction 0-1, denominator unknown (" | render:03-curation | OPEN | pending |
-| FQ15-FD8850C763D5 | IMPROVE | code fact | FamilyQuant/NormalizationMode.cs:115 | ")" | render:03-curation | OPEN | pending |
-| FQ15-5371D8A56686 | IMPROVE | code fact | FamilyQuant/NormalizationMode.cs:119 | "of identified signal" | render:03-curation | OPEN | pending |
-| FQ15-E205F47485DC | IMPROVE | code fact | FamilyQuant/NormalizationMode.cs:120 | "% of" | render:03-curation | OPEN | pending |
-| FQ15-7AFE128BF39F | IMPROVE | code fact | FamilyQuant/NormalizationMode.cs:120 | "of" | render:03-curation | OPEN | pending |
-| FQ15-C4EF0DA07C5D | IMPROVE | code fact | FamilyQuant/NormalizationMode.cs:122 | "Family share " | render:03-curation | OPEN | pending |
-| FQ15-D65400D5A22B | IMPROVE | code fact | FamilyQuant/NormalizationMode.cs:122 | ", fraction 0-1 (" | render:03-curation | OPEN | pending |
-| FQ15-170E6DDDE344 | IMPROVE | code fact | FamilyQuant/NormalizationMode.cs:122 | ")" | render:03-curation | OPEN | pending |
+| FQ15-94FE33F6CBEE | IMPROVE | code fact | FamilyQuant/NormalizationMode.cs:111 | "User families" | test:ResultsRuntimeLedgerCommand | VERIFIED | evidence:RS-runtime:FQ15-94FE33F6CBEE |
+| FQ15-508AFF7616EF | IMPROVE | code fact | FamilyQuant/NormalizationMode.cs:115 | "Family share, fraction 0-1, denominator unknown (" | test:ResultsRuntimeLedgerCommand | VERIFIED | evidence:RS-runtime:FQ15-508AFF7616EF |
+| FQ15-FD8850C763D5 | IMPROVE | code fact | FamilyQuant/NormalizationMode.cs:115 | ")" | test:ResultsRuntimeLedgerCommand | VERIFIED | evidence:RS-runtime:FQ15-FD8850C763D5 |
+| FQ15-5371D8A56686 | IMPROVE | code fact | FamilyQuant/NormalizationMode.cs:119 | "of identified signal" | test:ResultsRuntimeLedgerCommand | VERIFIED | evidence:RS-runtime:FQ15-5371D8A56686 |
+| FQ15-E205F47485DC | IMPROVE | code fact | FamilyQuant/NormalizationMode.cs:120 | "% of" | test:ResultsRuntimeLedgerCommand | VERIFIED | evidence:RS-runtime:FQ15-E205F47485DC |
+| FQ15-7AFE128BF39F | IMPROVE | code fact | FamilyQuant/NormalizationMode.cs:120 | "of" | test:ResultsRuntimeLedgerCommand | VERIFIED | evidence:RS-runtime:FQ15-7AFE128BF39F |
+| FQ15-C4EF0DA07C5D | IMPROVE | code fact | FamilyQuant/NormalizationMode.cs:122 | "Family share " | test:ResultsRuntimeLedgerCommand | VERIFIED | evidence:RS-runtime:FQ15-C4EF0DA07C5D |
+| FQ15-D65400D5A22B | IMPROVE | code fact | FamilyQuant/NormalizationMode.cs:122 | ", fraction 0-1 (" | test:ResultsRuntimeLedgerCommand | VERIFIED | evidence:RS-runtime:FQ15-D65400D5A22B |
+| FQ15-170E6DDDE344 | IMPROVE | code fact | FamilyQuant/NormalizationMode.cs:122 | ")" | test:ResultsRuntimeLedgerCommand | VERIFIED | evidence:RS-runtime:FQ15-170E6DDDE344 |
 | FQ15-64F83F4DE64E | IMPROVE | code fact | FamilyQuant/NormalizationMode.cs:134 | "Each family is measured against the run's total ion current, so the column does " | test:ResultsMemberComparisonCommand | VERIFIED | evidence:RS-members:FQ15-64F83F4DE64E |
 | FQ15-EFAF24C67148 | IMPROVE | code fact | FamilyQuant/NormalizationMode.cs:135 | "NOT add up to 100%: what is missing is the part of the chromatogram nothing was " | test:ResultsMemberComparisonCommand | VERIFIED | evidence:RS-members:FQ15-EFAF24C67148 |
 | FQ15-21436697DDB8 | IMPROVE | code fact | FamilyQuant/NormalizationMode.cs:136 | "identified for. Use it when you want to know how much of the sample a family is." | test:ResultsMemberComparisonCommand | VERIFIED | evidence:RS-members:FQ15-21436697DDB8 |
@@ -4244,12 +4244,12 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **2356**; OPEN r
 | FQ15-D659F7855A37 | IMPROVE | code fact | FamilyQuant/PercentIonCurrentChart.cs:38 | "Peptide mass is binned along the bottom. Blue bars are each mass band's share of the " | test:ResultsMemberComparisonCommand | VERIFIED | evidence:RS-members:FQ15-D659F7855A37 |
 | FQ15-1001355FDE8B | IMPROVE | code fact | FamilyQuant/PercentIonCurrentChart.cs:39 | "credited peptide signal and add up to 100%; green bars, when the run's total ion " | test:ResultsMemberComparisonCommand | VERIFIED | evidence:RS-members:FQ15-1001355FDE8B |
 | FQ15-15B84190A3F4 | IMPROVE | code fact | FamilyQuant/PercentIonCurrentChart.cs:40 | "current is known, are its share of all ion current." | test:ResultsMemberComparisonCommand | VERIFIED | evidence:RS-members:FQ15-15B84190A3F4 |
-| FQ15-4CE2050A0999 | IMPROVE | code fact | FamilyQuant/PercentIonCurrentChart.cs:56 | "Segoe UI" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-372A1D7D876F | IMPROVE | code fact | FamilyQuant/PercentIonCurrentChart.cs:70 | "Percent of ion current by mass" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-393E11835299 | IMPROVE | code fact | FamilyQuant/PercentIonCurrentChart.cs:80 | "Nothing to show: no peptide carried a positive envelope yet." | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-183961BF94B3 | IMPROVE | code fact | FamilyQuant/PercentIonCurrentChart.cs:110 | "P0" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-2F326D517A18 | IMPROVE | code fact | FamilyQuant/PercentIonCurrentChart.cs:140 | "N0" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-D16E461B873F | IMPROVE | code fact | FamilyQuant/PercentIonCurrentChart.cs:145 | "monoisotopic mass (Da), upper edge of each bin" | test:AnalyticsRenderTests | OPEN | pending |
+| FQ15-4CE2050A0999 | IMPROVE | code fact | FamilyQuant/PercentIonCurrentChart.cs:56 | "Segoe UI" | test:ResultsRuntimeLedgerCommand | VERIFIED | evidence:RS-runtime:FQ15-4CE2050A0999 |
+| FQ15-372A1D7D876F | IMPROVE | code fact | FamilyQuant/PercentIonCurrentChart.cs:70 | "Percent of ion current by mass" | test:ResultsRuntimeLedgerCommand | VERIFIED | evidence:RS-runtime:FQ15-372A1D7D876F |
+| FQ15-393E11835299 | IMPROVE | code fact | FamilyQuant/PercentIonCurrentChart.cs:80 | "Nothing to show: no peptide carried a positive envelope yet." | test:ResultsRuntimeLedgerCommand | VERIFIED | evidence:RS-runtime:FQ15-393E11835299 |
+| FQ15-183961BF94B3 | IMPROVE | code fact | FamilyQuant/PercentIonCurrentChart.cs:110 | "P0" | test:ResultsRuntimeLedgerCommand | VERIFIED | evidence:RS-runtime:FQ15-183961BF94B3 |
+| FQ15-2F326D517A18 | IMPROVE | code fact | FamilyQuant/PercentIonCurrentChart.cs:140 | "N0" | test:ResultsRuntimeLedgerCommand | VERIFIED | evidence:RS-runtime:FQ15-2F326D517A18 |
+| FQ15-D16E461B873F | IMPROVE | code fact | FamilyQuant/PercentIonCurrentChart.cs:145 | "monoisotopic mass (Da), upper edge of each bin" | test:ResultsRuntimeLedgerCommand | VERIFIED | evidence:RS-runtime:FQ15-D16E461B873F |
 | FQ15-A405B2C741B9 | IMPROVE | code fact | FamilyQuant/PercentIonCurrentChart.cs:156 | "share of credited envelope" | test:ResultsMemberComparisonCommand | VERIFIED | evidence:RS-members:FQ15-A405B2C741B9 |
 | FQ15-25B8151A1126 | IMPROVE | code fact | FamilyQuant/PercentIonCurrentChart.cs:157 | "share of TIC" | test:ResultsMemberComparisonCommand | VERIFIED | evidence:RS-members:FQ15-25B8151A1126 |
 | FQ15-0A23F2CBFDA6 | IMPROVE | code fact | FamilyQuant/PercentIonCurrentChart.cs:168 | "share of TIC" | test:ResultsMemberComparisonCommand | VERIFIED | evidence:RS-members:FQ15-0A23F2CBFDA6 |
@@ -5170,11 +5170,11 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **2356**; OPEN r
 | FQ15-8E13A59E52AB | IMPROVE | code fact | FamilyQuant/RecoveryChart.cs:73 | "unadjusted diagnostic. Bottom: TIC, isotope-series detector and primary estimate. " | test:ResultsTooltipTests | VERIFIED | evidence:RS-C13-tooltips:FQ15-8E13A59E52AB |
 | FQ15-CE35E95FCB45 | IMPROVE | code fact | FamilyQuant/RecoveryChart.cs:74 | "The detector is not peptide-FDR calibrated and does not partition the TIC into " | test:ResultsTooltipTests | VERIFIED | evidence:RS-C13-tooltips:FQ15-CE35E95FCB45 |
 | FQ15-FD734D698920 | IMPROVE | code fact | FamilyQuant/RecoveryChart.cs:75 | "biological classes." | test:ResultsTooltipTests | VERIFIED | evidence:RS-C13-tooltips:FQ15-FD734D698920 |
-| FQ15-3E8F095917C0 | IMPROVE | code fact | FamilyQuant/RecoveryChart.cs:91 | "Segoe UI" | test:AnalyticsRenderTests | OPEN | pending |
+| FQ15-3E8F095917C0 | IMPROVE | code fact | FamilyQuant/RecoveryChart.cs:91 | "Segoe UI" | test:ResultsRuntimeLedgerCommand | VERIFIED | evidence:RS-runtime:FQ15-3E8F095917C0 |
 | FQ15-D015B8DC0C59 | IMPROVE | code fact | FamilyQuant/RecoveryChart.cs:96 | "F1" | test:ResultsMemberComparisonCommand | VERIFIED | evidence:RS-members:FQ15-D015B8DC0C59 |
 | FQ15-FF6451B31D67 | IMPROVE | code fact | FamilyQuant/RecoveryChart.cs:96 | "%" | test:ResultsMemberComparisonCommand | VERIFIED | evidence:RS-members:FQ15-FF6451B31D67 |
-| FQ15-34B55159228E | IMPROVE | code fact | FamilyQuant/RecoveryChart.cs:107 | "Recovery of the total ion current" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-15A171A399A4 | IMPROVE | code fact | FamilyQuant/RecoveryChart.cs:114 | "Nothing to show: compute the full XIC so the runs have a TIC to divide by." | test:AnalyticsRenderTests | OPEN | pending |
+| FQ15-34B55159228E | IMPROVE | code fact | FamilyQuant/RecoveryChart.cs:107 | "Recovery of the total ion current" | test:ResultsRuntimeLedgerCommand | VERIFIED | evidence:RS-runtime:FQ15-34B55159228E |
+| FQ15-15A171A399A4 | IMPROVE | code fact | FamilyQuant/RecoveryChart.cs:114 | "Nothing to show: compute the full XIC so the runs have a TIC to divide by." | test:ResultsRuntimeLedgerCommand | VERIFIED | evidence:RS-runtime:FQ15-15A171A399A4 |
 | FQ15-46F031B63E43 | IMPROVE | code fact | FamilyQuant/RecoveryChart.cs:158 | " / " | test:ResultsMemberComparisonCommand | VERIFIED | evidence:RS-members:FQ15-46F031B63E43 |
 | FQ15-236FAE369760 | IMPROVE | code fact | FamilyQuant/RecoveryChart.cs:159 | " / " | test:ResultsMemberComparisonCommand | VERIFIED | evidence:RS-members:FQ15-236FAE369760 |
 | FQ15-209932A0F7F5 | IMPROVE | code fact | FamilyQuant/RecoveryChart.cs:165 | " / " | test:ResultsMemberComparisonCommand | VERIFIED | evidence:RS-members:FQ15-209932A0F7F5 |
@@ -5764,13 +5764,13 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **2356**; OPEN r
 | FQ15-4DECEB0D8774 | IMPROVE | code fact | FamilyQuant/XicMassChart.cs:34 | "One dot per peptide: its extracted isotope envelope (log10 area, up the side) " | test:ResultsMemberComparisonCommand | VERIFIED | evidence:RS-members:FQ15-4DECEB0D8774 |
 | FQ15-60554875A19A | IMPROVE | code fact | FamilyQuant/XicMassChart.cs:35 | "against its mass (along the bottom). Blue dots are identified peptides; green dots " | test:ResultsMemberComparisonCommand | VERIFIED | evidence:RS-members:FQ15-60554875A19A |
 | FQ15-45C4F2A2837C | IMPROVE | code fact | FamilyQuant/XicMassChart.cs:36 | "are the de novo additions." | test:ResultsMemberComparisonCommand | VERIFIED | evidence:RS-members:FQ15-45C4F2A2837C |
-| FQ15-A05988D6E225 | IMPROVE | code fact | FamilyQuant/XicMassChart.cs:52 | "Segoe UI" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-3335A84B815E | IMPROVE | code fact | FamilyQuant/XicMassChart.cs:66 | "XIC by mass: envelope area against peptide mass" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-E0DC8922ED9E | IMPROVE | code fact | FamilyQuant/XicMassChart.cs:76 | "Nothing to show: no peptide carried a positive envelope yet." | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-727F643D4187 | IMPROVE | code fact | FamilyQuant/XicMassChart.cs:100 | "1e" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-0BF65773FF2C | IMPROVE | code fact | FamilyQuant/XicMassChart.cs:100 | "0" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-2FE77BAEBF4C | IMPROVE | code fact | FamilyQuant/XicMassChart.cs:110 | "N0" | test:AnalyticsRenderTests | OPEN | pending |
-| FQ15-798A3F744ACE | IMPROVE | code fact | FamilyQuant/XicMassChart.cs:122 | "monoisotopic mass (Da)" | test:AnalyticsRenderTests | OPEN | pending |
+| FQ15-A05988D6E225 | IMPROVE | code fact | FamilyQuant/XicMassChart.cs:52 | "Segoe UI" | test:ResultsRuntimeLedgerCommand | VERIFIED | evidence:RS-runtime:FQ15-A05988D6E225 |
+| FQ15-3335A84B815E | IMPROVE | code fact | FamilyQuant/XicMassChart.cs:66 | "XIC by mass: envelope area against peptide mass" | test:ResultsRuntimeLedgerCommand | VERIFIED | evidence:RS-runtime:FQ15-3335A84B815E |
+| FQ15-E0DC8922ED9E | IMPROVE | code fact | FamilyQuant/XicMassChart.cs:76 | "Nothing to show: no peptide carried a positive envelope yet." | test:ResultsRuntimeLedgerCommand | VERIFIED | evidence:RS-runtime:FQ15-E0DC8922ED9E |
+| FQ15-727F643D4187 | IMPROVE | code fact | FamilyQuant/XicMassChart.cs:100 | "1e" | test:ResultsRuntimeLedgerCommand | VERIFIED | evidence:RS-runtime:FQ15-727F643D4187 |
+| FQ15-0BF65773FF2C | IMPROVE | code fact | FamilyQuant/XicMassChart.cs:100 | "0" | test:ResultsRuntimeLedgerCommand | VERIFIED | evidence:RS-runtime:FQ15-0BF65773FF2C |
+| FQ15-2FE77BAEBF4C | IMPROVE | code fact | FamilyQuant/XicMassChart.cs:110 | "N0" | test:ResultsRuntimeLedgerCommand | VERIFIED | evidence:RS-runtime:FQ15-2FE77BAEBF4C |
+| FQ15-798A3F744ACE | IMPROVE | code fact | FamilyQuant/XicMassChart.cs:122 | "monoisotopic mass (Da)" | test:ResultsRuntimeLedgerCommand | VERIFIED | evidence:RS-runtime:FQ15-798A3F744ACE |
 | FQ15-04A1F509E510 | IMPROVE | code fact | FamilyQuant/XicMassChart.cs:151 | "identified (" | test:ResultsMemberComparisonCommand | VERIFIED | evidence:RS-members:FQ15-04A1F509E510 |
 | FQ15-105C1B8A8E36 | IMPROVE | code fact | FamilyQuant/XicMassChart.cs:151 | "N0" | test:ResultsMemberComparisonCommand | VERIFIED | evidence:RS-members:FQ15-105C1B8A8E36 |
 | FQ15-1CBB7DB7F516 | IMPROVE | code fact | FamilyQuant/XicMassChart.cs:151 | ")" | test:ResultsMemberComparisonCommand | VERIFIED | evidence:RS-members:FQ15-1CBB7DB7F516 |
