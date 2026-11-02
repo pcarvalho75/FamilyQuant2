@@ -24,6 +24,7 @@ namespace FamilyQuant.Evidence
         public NeighbourSearch? SessionSearch { get; init; }
         public IReadOnlyList<NeighbourReference>? SessionReferences { get; init; }
         public IReadOnlyList<MotifPattern>? CheckedMotifs { get; init; }
+        public EvidenceTaskChoice? ConfirmedTask { get; init; }
     }
 
     public sealed class EvidenceFamilyChoice
@@ -73,6 +74,8 @@ namespace FamilyQuant.Evidence
         public List<MotifPattern>? CheckedMotifs { get; set; }
         [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull)]
         public List<MotifResult>? CheckedMotifResults { get; set; }
+        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull)]
+        public EvidenceTaskChoice? ConfirmedTask { get; set; }
     }
 
     public sealed class EvidenceApplyResult
@@ -92,6 +95,7 @@ namespace FamilyQuant.Evidence
             ArgumentNullException.ThrowIfNull(selection);
             operation?.Report("evidence-apply", "Validating evidence choices");
             selection = Clone(selection);
+            if (selection.ConfirmedTask != null) EvidenceTaskDiscovery.Validate(file, selection.ConfirmedTask, proposal.Options.ScopeTerms);
             if (selection.SessionSearch == null && selection.SessionReferences != null)
                 throw new ArgumentException("Session references require a session search.", nameof(selection));
             bool sessionInput = selection.SessionSearch != null || selection.CheckedMotifs != null;
@@ -110,6 +114,7 @@ namespace FamilyQuant.Evidence
                 Release = sessionInput ? file.EvidenceSource?.Release ?? string.Empty : file.EvidenceSource?.Release,
             });
             if (sessionInput) request = Hash(new { Request = request, selection.SessionSearch, selection.SessionReferences, selection.CheckedMotifs });
+            if (selection.ConfirmedTask != null) request = Hash(new { Request = request, selection.ConfirmedTask });
             if (file.EvidenceRecipe?.RequestFingerprint == request
                 && file.EvidenceRecipe.AppliedStateFingerprint == StateFingerprint(file, session: file.EvidenceRecipe))
                 return new EvidenceApplyResult { Recipe = Clone(file.EvidenceRecipe) };
@@ -214,6 +219,7 @@ namespace FamilyQuant.Evidence
                 ProgramVersion = programVersion,
                 IncludesSessionEvidence = sessionInput, SessionSearch = session.Search, SessionReferences = session.References,
                 CheckedMotifs = session.Motifs, CheckedMotifResults = session.Results,
+                ConfirmedTask = selection.ConfirmedTask,
             };
             foreach (var family in assignments.Where(a => !familyNames.ContainsKey(a.Family)).GroupBy(a => a.Family, StringComparer.Ordinal))
                 recipe.Families.Add(new EvidenceFamilyChoice { Family = family.Key, Name = family.First().Name, Selected = true });
@@ -230,6 +236,7 @@ namespace FamilyQuant.Evidence
             ArgumentNullException.ThrowIfNull(recipe);
             operation?.Report("evidence-apply", "Validating the saved evidence recipe");
             recipe = Clone(recipe);
+            if (recipe.ConfirmedTask != null) EvidenceTaskDiscovery.Validate(file, recipe.ConfirmedTask, recipe.Options.ScopeTerms);
             string state = StateFingerprint(file, session: recipe);
             if (state == recipe.AppliedStateFingerprint && file.EvidenceRecipe != null
                 && JsonSerializer.Serialize(file.EvidenceRecipe) == JsonSerializer.Serialize(recipe))
@@ -318,11 +325,12 @@ namespace FamilyQuant.Evidence
                 file.DomainSource, EvidenceSource = projectSession ? SessionSource(file, session?.SessionSearch) : file.EvidenceSource,
             });
             // Keep earlier recipes' state hashes unchanged when they have no session evidence.
-            return session?.IncludesSessionEvidence == true ? Hash(new
+            string state = session?.IncludesSessionEvidence == true ? Hash(new
             {
                 Curation = curation, Motifs = projectSession ? session.CheckedMotifs ?? file.Motifs : file.Motifs,
                 Session = Hash(new { session.SessionSearch, session.SessionReferences, session.CheckedMotifs, session.CheckedMotifResults }),
             }) : curation;
+            return session?.ConfirmedTask == null ? state : Hash(new { State = state, session.ConfirmedTask });
         }
 
         private static string GroupKey(params string[] parts) => JsonSerializer.Serialize(parts);

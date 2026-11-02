@@ -40,6 +40,13 @@ namespace FamilyQuant.Tests
         [STAThread]   // required: the UI smoke section constructs WPF controls
         private static int Main(string[] args)
         {
+            if (args.Length > 0 && args[0] == "--evidence-task-check") return EvidenceTaskCheck(args);
+            if (args.Contains("--test-evidence-task", StringComparer.Ordinal))
+            {
+                EvidenceTaskTests();
+                Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
+                return failed == 0 ? 0 : 1;
+            }
             if (args.Length > 0 && args[0] == IdentitySearchStudy.Argument) return IdentitySearchStudy.Run(args);
             if (args.Contains("--test-identity-study", StringComparer.Ordinal))
             {
@@ -709,6 +716,7 @@ namespace FamilyQuant.Tests
             ProteinDomainsTests(workDir);
             EvidenceStorageTests(workDir);
             EvidenceFetchTests();
+            EvidenceTaskTests();
             EvidenceClassifierTests();
             EvidenceArchitectureTests();
 
