@@ -40,6 +40,13 @@ namespace FamilyQuant.Tests
         [STAThread]   // required: the UI smoke section constructs WPF controls
         private static int Main(string[] args)
         {
+            if (args.Contains("--test-family-world", StringComparer.Ordinal))
+            {
+                Section("Family world (B1) - a de novo tag credited to UniProt families, on a fixture");
+                FamilyWorldCheck.RunFixtures(Check);
+                Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
+                return failed == 0 ? 0 : 1;
+            }
             if (args.Contains("--test-ui-icons", StringComparer.Ordinal))
             {
                 UiIconTests();
@@ -241,6 +248,13 @@ namespace FamilyQuant.Tests
             if (args.Contains(CoherenceCheckRun.Argument))
             {
                 CoherenceCheckRun.Run(args, Check);
+                Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
+                return failed == 0 ? 0 : 1;
+            }
+
+            if (args.Contains(FamilyWorldCheck.Argument))
+            {
+                FamilyWorldCheck.Run(args, Check);
                 Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
                 return failed == 0 ? 0 : 1;
             }
@@ -592,6 +606,9 @@ namespace FamilyQuant.Tests
 
             Section("Homology - PepExplorer's aligner, ported with its C-terminus and character defects fixed");
             HomologyTests.Run(Check);
+
+            Section("Family world (B1) - a de novo tag credited to UniProt families, on a fixture");
+            FamilyWorldCheck.RunFixtures(Check);
 
             Section("De novo reconciliation against the real .sepr2 - the request's items 3 to 5");
             ReconciliationRealTests(args.Length > 2 ? args[2] : null, args.Length > 3 ? args[3] : null, workDir);
