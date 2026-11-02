@@ -17,7 +17,7 @@ Render targets refer to `ScreenHarness.Screens`, captured with `--screens <outpu
 Release gate: `FamilyQuant.Tests.exe --feature-ledger-release-check` fails until every retained row is VERIFIED with evidence. Authorized DROP rows use APPROVED_DROP, which records a decision, not a completed UI removal. The normal quick suite permits OPEN rows during development. Regeneration resets retained rows to OPEN; preserve reviewed evidence when updating the scanner.
 
 Scan count: **5756**. Ledger rows: **5756**. Source files: **104**.
-Authorized DROP rows: **296**; proposed VERIFIED retained rows: **4386**; OPEN retained rows: **1074**.
+Authorized DROP rows: **296**; proposed VERIFIED retained rows: **4387**; OPEN retained rows: **1073**.
 
 | ID | Disposition | Kind | Frozen source | Fact or control | Planned check | State | Evidence |
 |---|---|---|---|---|---|---|---|
@@ -607,8 +607,8 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **4386**; OPEN r
 | FQ15-585C327B3274 | IMPROVE | code fact | FamilyQuant/ClusterGenerationControl.xaml.cs:634 | "Every row is currently hidden by a filter, or the Family Cluster File is empty.\n\n" | render:03-curation | OPEN | pending |
 | FQ15-08612041D32C | IMPROVE | code fact | FamilyQuant/ClusterGenerationControl.xaml.cs:635 | "Next step: clear the Search box and untick the filters in this panel, then export again." | render:03-curation | OPEN | pending |
 | FQ15-35D319F12DD1 | IMPROVE | code fact | FamilyQuant/ClusterGenerationControl.xaml.cs:636 | "Nothing to export" | render:03-curation | OPEN | pending |
-| FQ15-93D5A5132CAD | KEEP | format/export | FamilyQuant/ClusterGenerationControl.xaml.cs:642 | "CSV files (*.csv)&#124;*.csv&#124;All files (*.*)&#124;*.*" | test:CurationActionProbe | VERIFIED | evidence:SH-curation-actions:FQ15-93D5A5132CAD |
-| FQ15-F31EFE95C8DB | KEEP | format/export | FamilyQuant/ClusterGenerationControl.xaml.cs:643 | "FamilyQuant_Report.csv" | test:CurationActionProbe | VERIFIED | evidence:SH-curation-actions:FQ15-F31EFE95C8DB |
+| FQ15-93D5A5132CAD | KEEP | format/export | FamilyQuant/ClusterGenerationControl.xaml.cs:642 | "CSV files (*.csv)&#124;*.csv&#124;All files (*.*)&#124;*.*" | test:CurationFileCommand | VERIFIED | evidence:FL-curation-file-contracts:FQ15-93D5A5132CAD |
+| FQ15-F31EFE95C8DB | KEEP | format/export | FamilyQuant/ClusterGenerationControl.xaml.cs:643 | "FamilyQuant_Report.csv" | test:CurationFileCommand | VERIFIED | evidence:FL-curation-file-contracts:FQ15-F31EFE95C8DB |
 | FQ15-C1E31AA57727 | IMPROVE | code fact | FamilyQuant/ClusterGenerationControl.xaml.cs:644 | "Save the visible rows as CSV" | render:03-curation | OPEN | pending |
 | FQ15-CACEC5937098 | IMPROVE | code fact | FamilyQuant/ClusterGenerationControl.xaml.cs:655 | "The share column is empty, because no quantitation was loaded." | render:03-curation | OPEN | pending |
 | FQ15-F8D19A496632 | IMPROVE | code fact | FamilyQuant/ClusterGenerationControl.xaml.cs:656 | "The share column holds " | render:03-curation | OPEN | pending |
@@ -679,8 +679,8 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **4386**; OPEN r
 | FQ15-967A95B80647 | IMPROVE | code fact | FamilyQuant/ClusterGenerationControl.xaml.cs:1026 | "." | render:03-curation | OPEN | pending |
 | FQ15-7B54472D2AE8 | IMPROVE | code fact | FamilyQuant/ClusterGenerationControl.xaml.cs:1038 | "fraction of " | render:03-curation | OPEN | pending |
 | FQ15-14C09CAE058F | IMPROVE | code fact | FamilyQuant/ClusterGenerationControl.xaml.cs:1038 | "; signal = " | render:03-curation | OPEN | pending |
-| FQ15-32A336B58FA8 | KEEP | format/export | FamilyQuant/ClusterGenerationControl.xaml.cs:1048 | "CSV files (*.csv)&#124;*.csv&#124;All files (*.*)&#124;*.*" | test:CurationActionProbe | VERIFIED | evidence:SH-curation-actions:FQ15-32A336B58FA8 |
-| FQ15-4C83255498C2 | KEEP | format/export | FamilyQuant/ClusterGenerationControl.xaml.cs:1049 | "FamilyQuant_family_composition.csv" | test:CurationActionProbe | VERIFIED | evidence:SH-curation-actions:FQ15-4C83255498C2 |
+| FQ15-32A336B58FA8 | KEEP | format/export | FamilyQuant/ClusterGenerationControl.xaml.cs:1048 | "CSV files (*.csv)&#124;*.csv&#124;All files (*.*)&#124;*.*" | test:CurationFileCommand | VERIFIED | evidence:FL-curation-file-contracts:FQ15-32A336B58FA8 |
+| FQ15-4C83255498C2 | KEEP | format/export | FamilyQuant/ClusterGenerationControl.xaml.cs:1049 | "FamilyQuant_family_composition.csv" | test:CurationFileCommand | VERIFIED | evidence:FL-curation-file-contracts:FQ15-4C83255498C2 |
 | FQ15-F5C30A6D6CFB | IMPROVE | code fact | FamilyQuant/ClusterGenerationControl.xaml.cs:1050 | "Save the family composition as CSV" | render:03-curation | OPEN | pending |
 | FQ15-B00E58AC426E | IMPROVE | code fact | FamilyQuant/ClusterGenerationControl.xaml.cs:1056 | "The families are counted with every shared peptide in each, so they overlap and must not be added up." | render:03-curation | OPEN | pending |
 | FQ15-B336AE2FD987 | IMPROVE | code fact | FamilyQuant/ClusterGenerationControl.xaml.cs:1058 | "The fractions are of the TIC, so together they give the share of the TIC the quantified peptides explain." | render:03-curation | OPEN | pending |
@@ -3126,7 +3126,7 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **4386**; OPEN r
 | FQ15-382C4A47D494 | KEEP | export/storage fact | FamilyQuant/FamilyNaming.cs:114 | " OS=" | test:ShellLedgerComparisonCommand | VERIFIED | evidence:SH:FQ15-382C4A47D494 |
 | FQ15-D50C21601FAB | KEEP | export/storage fact | FamilyQuant/FamilyNaming.cs:116 | "(Fragment)" | test:ShellLedgerComparisonCommand | VERIFIED | evidence:SH:FQ15-D50C21601FAB |
 | FQ15-1FCF45133A66 | KEEP | export/storage fact | FamilyQuant/FamilyNaming.cs:117 | "(Fragments)" | test:ShellLedgerComparisonCommand | VERIFIED | evidence:SH:FQ15-1FCF45133A66 |
-| FQ15-0DB3E899880B | KEEP | format/export | FamilyQuant/FamilyQuantFile.cs:682 | "Use a target-decoy database (.T-R), or choose the threshold from 'Scan identity range' " | test:RoundTripTests | OPEN | pending |
+| FQ15-0DB3E899880B | KEEP | format/export | FamilyQuant/FamilyQuantFile.cs:682 | "Use a target-decoy database (.T-R), or choose the threshold from 'Scan identity range' " | test:CurationFileCommand | VERIFIED | evidence:FL-curation-file-contracts:FQ15-0DB3E899880B |
 | FQ15-64F2229168A2 | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:130 | "identified" | test:CoreRelocationCommand | VERIFIED | evidence:Core-X5:FQ15-64F2229168A2 |
 | FQ15-98EA2BCA9546 | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:131 | "denovo" | test:CoreRelocationCommand | VERIFIED | evidence:Core-X5:FQ15-98EA2BCA9546 |
 | FQ15-AEC20A408BF5 | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:144 | "Spectrum evidence table: " | test:CoreRelocationCommand | VERIFIED | evidence:Core-X5:FQ15-AEC20A408BF5 |
