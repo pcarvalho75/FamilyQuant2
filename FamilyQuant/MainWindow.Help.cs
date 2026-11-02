@@ -33,11 +33,11 @@ public partial class MainWindow
                 return
                     "Results. A read-only view of this project's own full-envelope quantitation: the XIC " +
                     "by mass, the isotopes credited per peptide, the percent of ion current by mass, what " +
-                    "each family contributes, and the recovery of the total ion current. Every graph can be " +
+                    "each family contributes, and the recovery of the total ion current. These analytics graphs can be " +
                     "saved as a projector-sized PNG. It changes no family and reads no RAW. If it says " +
                     "there is nothing to analyse, use Analysis > Compute full XIC first. The open " +
                     "project stays open: File > Save saves it from here, and View > Families " +
-                    "returns to it. File > Open opens a different project or Family Cluster File.";
+                    "returns to it. File > Open opens a different project or Family Cluster File.\n\n" + DatabaseGapHelp.Text;
             }
 
             // The de novo screen is NOT a step of that sequence, so it says what it is instead of a
