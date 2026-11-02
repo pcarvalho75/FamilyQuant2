@@ -95,6 +95,29 @@ namespace FamilyQuant.Tests
                 && table.Families.SelectMany(f => f.WorldProteins).All(id => snapshot.Entries.Any(e => e.Accession == id)), null);
             check("family world on B4's world: every family row has its decoy rate and right rate, or says why not",
                 table.Families.All(f => (f.DecoyRate.HasValue || f.CreditedEnvelope == 0) && (f.RightRate.HasValue || f.Evidence.Length > 0)), null);
+            // Ungated: the same rules with the whole genus out of the known-answer world, through each entry's stored
+            // lineage, as for a species with no close relative in the world. The genus comes from UniProt's taxonomy.
+            using (var client = new System.Net.Http.HttpClient { Timeout = TimeSpan.FromSeconds(120) })
+            {
+                client.DefaultRequestHeaders.UserAgent.ParseAdd("FamilyQuant");
+                var genera = new SortedSet<string>(taxa.Select(t => FamilyWorldCheck.Genus(client, t, outDir, Log).Id).Where(id => id.Length > 0), StringComparer.Ordinal);
+                if (genera.Count > 0)
+                {
+                    bool OfGenus(FamilyWorldProtein p) => FamilyWorld.IsOfTaxa(p, genera) || FamilyWorld.IsOfTaxa(p, taxa) || accessions.Contains(p.Accession);
+                    PeptideFamilyAttribution firstAttribution = FamilyEnvelopeQuant.BuildAttributionFromCuration(quant, sample);
+                    FamilyPeptideAttribution firstPass = FamilyEnvelopeQuant.AttributePeptides(FamilyEnvelopeQuant.PreparePeptides(quant), firstAttribution);
+                    FamilyWorldAnalysisResult genus = FamilyWorldAnalysis.Complete(firstPass, analysis.Pass, sample, manifest.SpectrumComparisonRows,
+                        world, snapshot.Release, OfGenus, new FamilyWorldOptions(), FamilyWorldErrors.DefaultMinimumKnownCredits);
+                    List<FamilyWorldKnownAnswer> genusKnown = genus.KnownAnswers.Where(a => a.IsKnown).ToList();
+                    Console.WriteLine("          WITHOUT THE GENUS " + string.Join(",", genera) + " (ungated; " + N(world.Proteins.Count(OfGenus)) +
+                        " entries left out): right among landed, pooled " + Rate(genusKnown) + "; table half " +
+                        Rate(genusKnown.Where(a => HalfOf(a) == 0)) + "; held-out half " + Rate(genusKnown.Where(a => HalfOf(a) == 1)));
+                    foreach (FamilyWorldFamilySummary f in genus.Summary.Families.Where(f => f.KnownCredited > 0))
+                        Console.WriteLine("            " + f.Family + ": " + N(f.KnownCredited) + ", " + N(f.KnownCreditedTrue) + " | " +
+                            (f.RightRate.HasValue ? P(f.RightRate.Value) : f.Evidence));
+                    File.WriteAllText(Path.Combine(outDir, "family_world_errors_without_genus.csv"), genus.Summary.BuildCsv(), new UTF8Encoding(false));
+                }
+            }
             File.WriteAllText(Path.Combine(outDir, "family_world_errors.csv"), table.BuildCsv(), new UTF8Encoding(false));
             File.WriteAllText(Path.Combine(outDir, "family_world_composition.csv"), table.BuildCompositionCsv(), new UTF8Encoding(false));
             File.WriteAllText(Path.Combine(outDir, "family_world_pass.csv"), FamilyWorldPass.BuildCsv(analysis.Pass), new UTF8Encoding(false));

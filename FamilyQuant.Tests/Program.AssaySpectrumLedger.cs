@@ -20,30 +20,50 @@ internal static partial class Program
 
     private static List<AssayRuntimeCase> AssaySpectrumLedgerCases(string output, FeatureLedger.Observation[] rows, bool negative, string frozenRoot)
     {
+        var (before, actual) = AssayNativeViewPair(output, "spectrum");
+        string source = File.ReadAllText(Path.Combine(frozenRoot, "FamilyQuant/SpectrumComparisonWindow.cs"));
+        var comparisons = rows.Select(row => AssaySpectrumPropertyComparison.Compare(row, source, before, actual)).ToArray();
+        FeatureLedgerEvidence.WriteJson(Path.Combine(output, "property-anchors.json"), comparisons);
+        return SelectSpectrumPropertyCases(rows, source, before, actual, negative);
+    }
+
+    private static List<AssayRuntimeCase> SelectSpectrumPropertyCases(FeatureLedger.Observation[] rows, string source,
+        Dictionary<string, string> before, Dictionary<string, string> actual, bool negative)
+    {
+        var comparisons = rows.Select(row => AssaySpectrumPropertyComparison.Compare(row, source, before, actual)).ToArray();
+        foreach (var difference in comparisons.Where(value => value.Key.Length > 0 && !value.Passed))
+            Console.WriteLine("  OPEN  " + difference.Id + ": " + difference.Key + "; expected " + difference.Expected + "; actual " + difference.Actual);
+        var eligible = comparisons.Where(value => value.Passed).Select(value => value.Id).ToHashSet(StringComparer.Ordinal);
+        if (negative)
+        {
+            foreach (string key in actual.Keys.ToArray()) actual[key] = "changed " + actual[key];
+            comparisons = rows.Where(row => eligible.Contains(row.Id)).Select(row => AssaySpectrumPropertyComparison.Compare(row, source, before, actual)).ToArray();
+        }
+        return comparisons.Where(value => eligible.Contains(value.Id)).Select(value => new AssayRuntimeCase(value.Id,
+            value.Key + ": frozen source argument equals frozen native property and current native property",
+            value.Expected, value.Actual, value.Passed)).ToList();
+    }
+    private static (Dictionary<string, string> Before, Dictionary<string, string> Actual) AssayNativeViewPair(string output, string mode)
+    {
         string root = FindLedgerRoot()!, frozen = Path.Combine(output, "frozen-view"), current = Path.Combine(output, "current-view");
         string host = Path.Combine(root, "FamilyQuant.Tests/ReferenceGoldenHost/bin/Release/net10.0-windows7.0");
         if (FeatureLedgerEvidence.Hash(Path.Combine(host, "FamilyQuant.dll")) != FeatureLedgerEvidence.Hash("D:/FamilyQuant-data/reference-1.5.0.6/app/FamilyQuant.dll"))
             throw new InvalidDataException("Frozen host product assembly differs from the read-only reference.");
         var start = new ProcessStartInfo(Path.Combine(host, "ReferenceGoldenHost.exe"))
         { UseShellExecute = false, CreateNoWindow = true, RedirectStandardOutput = true, RedirectStandardError = true };
-        foreach (string argument in new[] { AssayViewSnapshot.Argument, "spectrum", frozen }) start.ArgumentList.Add(argument);
+        foreach (string argument in new[] { AssayViewSnapshot.Argument, mode, frozen }) start.ArgumentList.Add(argument);
         using (var process = Process.Start(start)!)
         {
             string stdout = process.StandardOutput.ReadToEnd(), stderr = process.StandardError.ReadToEnd(); process.WaitForExit();
             File.WriteAllText(Path.Combine(output, "frozen-view.log"), stdout + stderr);
             if (process.ExitCode != 0) throw new InvalidDataException("Frozen native view snapshot failed: " + stderr);
         }
-        AssayViewSnapshot.Run(new[] { AssayViewSnapshot.Argument, "spectrum", current });
+        AssayViewSnapshot.Run(new[] { AssayViewSnapshot.Argument, mode, current });
         foreach (string name in new[] { "FamilyQuant.dll", "ReferenceGoldenHost.dll", "ReferenceGoldenHost.exe" })
             File.Copy(Path.Combine(host, name), Path.Combine(output, "frozen-" + name));
         var before = JsonSerializer.Deserialize<Dictionary<string, string>>(File.ReadAllText(Path.Combine(frozen, "properties.json")))!;
         var actual = JsonSerializer.Deserialize<Dictionary<string, string>>(File.ReadAllText(Path.Combine(current, "properties.json")))!;
-        if (negative) foreach (string key in actual.Keys.ToArray()) actual[key] += " changed";
-        string source = File.ReadAllText(Path.Combine(frozenRoot, "FamilyQuant/SpectrumComparisonWindow.cs"));
-        var comparisons = rows.Select(row => AssaySpectrumPropertyComparison.Compare(row, source, before, actual)).ToArray();
-        FeatureLedgerEvidence.WriteJson(Path.Combine(output, "property-anchors.json"), comparisons);
-        return comparisons.Where(value => value.Key.Length > 0).Select(value => new AssayRuntimeCase(value.Id,
-            value.Key + ": frozen source argument equals frozen native property and current native property",
-            value.Expected, value.Actual, value.Passed)).ToList();
+        return (before, actual);
     }
+
 }

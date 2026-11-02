@@ -18,6 +18,12 @@ namespace FamilyQuant.Tests;
 internal static class AssayViewSnapshot
 {
     internal const string Argument = "--assay-view-snapshot";
+    internal static void ConfigureOffscreen(Window window)
+    {
+        window.Left = -30000; window.Top = -30000;
+        window.ShowActivated = false; window.ShowInTaskbar = false;
+        window.WindowStartupLocation = WindowStartupLocation.Manual;
+    }
     internal static int Run(string[] args)
     {
         if (args.Length != 3 || args[1] is not ("spectrum" or "build"))
@@ -33,6 +39,7 @@ internal static class AssayViewSnapshot
         }
         FrameworkElement root = args[1] == "spectrum"
             ? SpectrumComparisonWindow.Create(Array.Empty<SpectrumComparisonRow>()) : new USearchLib();
+        if (root is Window fixtureWindow) ConfigureOffscreen(fixtureWindow);
         root.Measure(new Size(1200, 900)); root.Arrange(new Rect(0, 0, 1200, 900)); root.UpdateLayout();
         Dispatcher.CurrentDispatcher.Invoke(() => { }, DispatcherPriority.ApplicationIdle);
         var values = new SortedDictionary<string, string>(StringComparer.Ordinal);
