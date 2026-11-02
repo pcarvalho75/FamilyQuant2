@@ -31,7 +31,8 @@
                                  ToolTip="Keywords separated by commas or spaces; the list below follows as you type. Words in quotes form a phrase."/>
                         <ComboBox Grid.Column="2" SelectedIndex="{Binding MatchIndex}" Margin="0,0,0,6"
                                   ToolTip="Whether a protein must carry every keyword, or any one of them.">
-                            <ComboBoxItem Content="match all words"/><ComboBoxItem Content="match any word"/>
+                            <ComboBoxItem Content="match all words" ToolTip="A family is offered when one protein contains every keyword. This is the default match rule."/>
+                            <ComboBoxItem Content="match any word" ToolTip="A family is offered when one protein contains any keyword. Quoted phrases must occur together in order."/>
                         </ComboBox>
                         <TextBlock Grid.Row="1" Text="Exclude words" VerticalAlignment="Center" Margin="0,0,8,6"/>
                         <TextBox Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding ExcludeText, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,6"

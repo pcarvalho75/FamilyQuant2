@@ -57,6 +57,12 @@ namespace FamilyQuant.Tests
                 Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
                 return failed == 0 ? 0 : 1;
             }
+            if (args.Contains("--test-keyword-command", StringComparer.Ordinal))
+            {
+                KeywordCommandTests();
+                Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
+                return failed == 0 ? 0 : 1;
+            }
             if (args.Contains("--test-ui-icons", StringComparer.Ordinal))
             {
                 UiIconTests();
@@ -814,6 +820,7 @@ namespace FamilyQuant.Tests
             LogoResourceTests(workDir);
             TypographyRulesTests();
             UiIconTests();
+            KeywordCommandTests();
             TableAppearanceTests();
             EvidenceReviewModelTests();
             EvidenceTaskScopeTests();
