@@ -84,7 +84,7 @@
                     </ComboBox>
                     <Button x:Name="ButtonRecalculateQuantitation" Style="{DynamicResource PrimaryButton}" Content="Recalculate"
                             Click="Recalculate_Click" IsEnabled="False" Margin="0,10,0,0" HorizontalAlignment="Left"
-                            ToolTip="Applies the chosen denominator and shared rule to PatternLab shares. Disabled until a PatternLab project is loaded."/>
+                            ToolTip="Applies the chosen denominator and shared rule to PatternLab shares. Disabled until you use Load PatternLab project in Families > Quantitation > PatternLab (optional)."/>
                     <Expander Header="PatternLab details" Margin="0,8,0,0"
                               ToolTip="Shows the recorded quantitation profile and supported divisors. An unavailable mode keeps its explanation in the list.">
                         <TextBlock x:Name="TextBlockQuantProfile" TextWrapping="Wrap" Foreground="{DynamicResource MutedBrush}" FontSize="11" Margin="0,6,0,0"

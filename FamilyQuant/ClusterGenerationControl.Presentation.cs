@@ -141,6 +141,7 @@ public partial class ClusterGenerationControl
         private void UpdateStatusLine()
         {
             if (TextBlockStatusLine == null || fcf == null) return;
+            if (lastRecalculationFailed && saveResultStatus.Length > 0) return;
             saveResultStatus = string.Empty;
             if (statusTooltipBeforeSave != null)
             {
@@ -355,7 +356,7 @@ public partial class ClusterGenerationControl
                 "calculation.");
 
             ColumnLocus.HeaderStyle = HeaderTip(
-                "A UniProt accession where available, otherwise the database identifier; hover over the cell for the original. " +
+                "A UniProt accession where available, otherwise the database identifier; hover for the original; Reverse_ marks a decoy and contaminant marks a contaminant. " +
                 "Right-click for its UniProt code or page; Ctrl+C copies the clicked column.");
 
             ColumnDomains.HeaderStyle = HeaderTip(
