@@ -133,3 +133,24 @@ normalizes the owned output directory and excludes only UI status text, measured
 ElapsedSeconds and diagnostic UIA control listings; all scientific data values remain.
 Original status, timing and dialog traces remain in the full native packet.
 No product edit, new retirement, golden run or full-suite claim is made.
+
+`--prove-shell-behaviour` takes the fixed M29 JSON and emits one own `SH-behaviour`
+register covering every requested row. Tests compare actual frozen/current parent
+lock removal, curation denominator Help, native alignment data and unchanged grouping,
+recorded HTTP domain fetch and current atomic cancellation, real review edits/selectors,
+readonly report selection/scrolling and Copy command availability, Build busy/reentry
+and no-family guards, a real two-point target/decoy curve with its lowest-clean report,
+the empty-import reconciliation refusal, missing-run formatting and detached Browse.
+Copy availability is checked without writing the user's clipboard. Alignment comparison
+excludes the executable/temp-file command preamble; the complete alignment is retained.
+Broad harness failures do not overwrite completed independent per-row comparisons.
+
+The authoritative M29 packet is `D:/FamilyQuant-data/out-shell/behaviour/checked2`;
+checked1/checked2 have 24 supported and 15 OPEN rows, 14 passed/0 failed/2 skipped.
+Normalized complete compared values agree for all 39 rows. Earlier overlapping build/run
+outputs under final1/final2 are discarded and supply no receipt. The initial retained-log
+footer defect was caught by the importer and fixed before the authoritative runs.
+`D:/FamilyQuant-data/reviews/behaviour-FQShell-results.tsv` lists all proofs and specific
+reasons for every remaining gap, including the three unexecuted 1001-count cases, missing
+Start-page next-step guidance, actual USEARCH phase cancellation and shell Help adapters.
+No product edit or DROP is supplied by this batch.
