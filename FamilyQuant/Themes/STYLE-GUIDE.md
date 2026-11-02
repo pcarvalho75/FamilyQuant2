@@ -12,6 +12,10 @@ Each panel has at most one `PrimaryButton`. Other actions use the quiet default
 Fluent button. A read-only panel can have none. The shared styles use native
 Fluent interaction and focus templates; they add no group outline or emoji.
 
+Use the `FluentIcon` text style for icons, with a private-use glyph from the
+Windows Segoe Fluent Icons font. Keep a plain text label beside the icon. The
+suite rejects emoji in product C#/XAML, including Unicode escapes and entities.
+
 Keep one short explanation line visible. Put detailed instructions and every
 displaced fact in Help or a tooltip. Name a command by what it does and explain
 disabled state in its tooltip. Do not add colour to plain values.

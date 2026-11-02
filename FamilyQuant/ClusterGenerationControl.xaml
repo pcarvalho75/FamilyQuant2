@@ -273,6 +273,8 @@
                                 <StackPanel Orientation="Horizontal" Margin="20,0,0,0" VerticalAlignment="Center">
                                     <TextBlock Text="Status:" Foreground="{DynamicResource TextBrush}" FontWeight="SemiBold" Margin="0,0,8,0"
                                                ToolTip="Which quantitation project is loaded, if any."/>
+                                    <TextBlock x:Name="IconPLPStatus" Text="&#xE73E;" Style="{DynamicResource FluentIcon}"
+                                               Visibility="Collapsed" Margin="0,0,6,0"/>
                                     <TextBlock x:Name="TextBlockPLPStatus" Text="No quantitation loaded"
                                                Foreground="{DynamicResource MutedBrush}" FontStyle="Italic" TextWrapping="Wrap" MaxWidth="420"
                                                ToolTip="The name of the loaded PatternLab project. Until one is loaded, the share column stays empty."/>

@@ -568,7 +568,8 @@ namespace FamilyQuant
                 RecalculateQuantitationInternal();
 
                 // Update status
-                TextBlockPLPStatus.Text = "✓ Loaded: " + Path.GetFileName(ofd.FileName);
+                TextBlockPLPStatus.Text = "Loaded: " + Path.GetFileName(ofd.FileName);
+                IconPLPStatus.Visibility = Visibility.Visible;
                 TextBlockPLPStatus.SetResourceReference(TextBlock.ForegroundProperty, "TextBrush");
 
                 // Enable Layer 3 controls
@@ -628,6 +629,7 @@ namespace FamilyQuant
 
                 // Reset status
                 TextBlockPLPStatus.Text = "Could not open the last project";
+                IconPLPStatus.Visibility = Visibility.Collapsed;
                 TextBlockPLPStatus.SetResourceReference(TextBlock.ForegroundProperty, "ErrorBrush");
                 UpdateLayerStates();
             }
