@@ -139,6 +139,7 @@ Paulo agreed these at the restart, 2026-11-01.
 | ID | Question | Taken |
 |---|---|---|
 | D14 | Should identity clustering change its coverage rule, merge on shared peptides, or use a reviewed-family veto? | No. Clustering stays as it is, and the measurements ship as a diagnostic the user can see |
+| D27 | Rows that hold no fact of their own, number formats, and superseded rows | Rule 4: they close with the reason recorded, and none is a DROP. Fragments and formats with the same precision today close as a group. A superseded row closes only if it concerns wording or layout; one that removes something the user could do goes to Paulo one by one. The Recalculate colour cue, the Compute XIC sentence, the keyboard focus style, four main-window formats and two unreachable warnings are accepted. Paulo, 11-02 |
 | D26 | Failure guidance that got shorter in the port | Restored in Y9 before the freeze. Independent fact checks found 46 rows a user would miss. Desk, 11-02 |
 | D25 | Wording rules | Rule 1: the old fact in new wording is accepted. Rule 2: a row that only describes the old look closes under the new theme. Rule 3: the current screen name replaces Layer N and a clause about a retired screen goes. Paulo, 11-02 |
 | D24 | Is the claim sentence roadmap work? | No. It is Paulo's own message to Ana, so its boxes left the roadmap. Paulo, 11-02 |
