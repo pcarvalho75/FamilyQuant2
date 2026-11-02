@@ -3941,27 +3941,27 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **2356**; OPEN r
 | FQ15-D88E5CED913A | KEEP | handler | FamilyQuant/MainWindow.xaml:28 | MenuItemLoadFQC.Click = MenuItemCluster_Click | render:01-home | OPEN | pending |
 | FQ15-8FCD469AC3D0 | IMPROVE | tooltip | FamilyQuant/MainWindow.xaml:29 | MenuItemLoadFQC.ToolTip = Step 2: opens a project (.fqproj) with its families and quantitation, or a Family Cluster File (.fcf) with families only. Save first if you have unsaved edits. | render:01-home | OPEN | pending |
 | FQ15-51C0A5780B58 | IMPROVE | control | FamilyQuant/MainWindow.xaml:30 | MenuItem MenuItemSaveProject | render:01-home | OPEN | pending |
-| FQ15-CBF21E135197 | IMPROVE | option/copy | FamilyQuant/MainWindow.xaml:30 | MenuItemSaveProject.IsEnabled = False | test:ShellLedgerComparisonCommand | VERIFIED | evidence:SH:FQ15-CBF21E135197 |
+| FQ15-CBF21E135197 | IMPROVE | option/copy | FamilyQuant/MainWindow.xaml:30 | MenuItemSaveProject.IsEnabled = False | test:LedgerDeclarationCommand | VERIFIED | evidence:SH-C13-tooltip:FQ15-CBF21E135197 |
 | FQ15-67E9A390B4D4 | IMPROVE | option/copy | FamilyQuant/MainWindow.xaml:30 | MenuItemSaveProject.Header = Save project (.fqproj) | render:01-home | OPEN | pending |
 | FQ15-D11D9392E890 | KEEP | handler | FamilyQuant/MainWindow.xaml:30 | MenuItemSaveProject.Click = MenuItemSaveProject_Click | render:01-home | OPEN | pending |
 | FQ15-853CE1DB7A64 | IMPROVE | tooltip | FamilyQuant/MainWindow.xaml:31 | MenuItemSaveProject.ToolTip = Saves the families, your User IDs and annotations, and the computed quantitation to one .fqproj file. Save under a new name to keep the old version. Disabled until a project is loaded. | render:01-home | OPEN | pending |
 | FQ15-B593D6C75DAA | IMPROVE | control | FamilyQuant/MainWindow.xaml:32 | MenuItem MenuItemSaveFCF | render:01-home | OPEN | pending |
-| FQ15-08230753D2CC | IMPROVE | option/copy | FamilyQuant/MainWindow.xaml:32 | MenuItemSaveFCF.IsEnabled = False | test:ShellLedgerComparisonCommand | VERIFIED | evidence:SH:FQ15-08230753D2CC |
+| FQ15-08230753D2CC | IMPROVE | option/copy | FamilyQuant/MainWindow.xaml:32 | MenuItemSaveFCF.IsEnabled = False | test:LedgerDeclarationCommand | VERIFIED | evidence:SH-C13-tooltip:FQ15-08230753D2CC |
 | FQ15-34318E61C997 | IMPROVE | option/copy | FamilyQuant/MainWindow.xaml:32 | MenuItemSaveFCF.Header = Save Family Cluster File (.fcf) | render:01-home | OPEN | pending |
 | FQ15-CFD1302DD85B | KEEP | handler | FamilyQuant/MainWindow.xaml:32 | MenuItemSaveFCF.Click = MenuItemSaveFCF_Click | render:01-home | OPEN | pending |
 | FQ15-06B2D227813F | IMPROVE | tooltip | FamilyQuant/MainWindow.xaml:33 | MenuItemSaveFCF.ToolTip = Saves the families, your User IDs and annotations to a .fcf file, without the quantitation (use Save project for that). Disabled until a Family Cluster File is loaded. | render:01-home | OPEN | pending |
 | FQ15-2C748FDB400F | IMPROVE | control | FamilyQuant/MainWindow.xaml:34 | MenuItem MenuItemComputeXic | render:01-home | OPEN | pending |
-| FQ15-902296155C18 | IMPROVE | option/copy | FamilyQuant/MainWindow.xaml:34 | MenuItemComputeXic.IsEnabled = False | test:ShellLedgerComparisonCommand | VERIFIED | evidence:SH:FQ15-902296155C18 |
+| FQ15-902296155C18 | IMPROVE | option/copy | FamilyQuant/MainWindow.xaml:34 | MenuItemComputeXic.IsEnabled = False | test:LedgerDeclarationCommand | VERIFIED | evidence:SH-C13-tooltip:FQ15-902296155C18 |
 | FQ15-1BA879330EBB | IMPROVE | option/copy | FamilyQuant/MainWindow.xaml:34 | MenuItemComputeXic.Header = Compute / update full XIC | render:01-home | OPEN | pending |
 | FQ15-0CA40EFF5B28 | KEEP | handler | FamilyQuant/MainWindow.xaml:34 | MenuItemComputeXic.Click = MenuItemComputeXic_Click | render:01-home | OPEN | pending |
 | FQ15-EAFC1F85EBD6 | IMPROVE | tooltip | FamilyQuant/MainWindow.xaml:35 | MenuItemComputeXic.ToolTip = Step 3: measures every identified peptide and kept de novo precursor from the RAW files with the full isotope envelope. Save project afterwards to keep it. Disabled until a project is loaded. | render:01-home | OPEN | pending |
 | FQ15-C4624341BA1F | IMPROVE | control | FamilyQuant/MainWindow.xaml:36 | MenuItem MenuItemSpectrumComparison | render:01-home | OPEN | pending |
-| FQ15-CD4156A30F6C | IMPROVE | option/copy | FamilyQuant/MainWindow.xaml:36 | MenuItemSpectrumComparison.IsEnabled = False | test:ShellLedgerComparisonCommand | VERIFIED | evidence:SH:FQ15-CD4156A30F6C |
+| FQ15-CD4156A30F6C | IMPROVE | option/copy | FamilyQuant/MainWindow.xaml:36 | MenuItemSpectrumComparison.IsEnabled = False | test:LedgerDeclarationCommand | VERIFIED | evidence:SH-C13-tooltip:FQ15-CD4156A30F6C |
 | FQ15-DED0AB9EBFAE | IMPROVE | option/copy | FamilyQuant/MainWindow.xaml:37 | MenuItemSpectrumComparison.Header = View spectrum comparison table | render:01-home | OPEN | pending |
 | FQ15-017C8541B68E | KEEP | handler | FamilyQuant/MainWindow.xaml:37 | MenuItemSpectrumComparison.Click = MenuItemSpectrumComparison_Click | render:01-home | OPEN | pending |
 | FQ15-5DD50C3323AD | IMPROVE | tooltip | FamilyQuant/MainWindow.xaml:38 | MenuItemSpectrumComparison.ToolTip = Shows a read-only table comparing PEAKS, DeepNovo and PatternLab, one row per file, scan, charge and precursor m/z. It can be saved as CSV. Disabled until spectrum evidence is loaded. | render:01-home | OPEN | pending |
 | FQ15-82C0DC480D30 | IMPROVE | control | FamilyQuant/MainWindow.xaml:39 | MenuItem MenuItemReanotateSEPro | render:01-home | OPEN | pending |
-| FQ15-5B5F37F3309E | IMPROVE | option/copy | FamilyQuant/MainWindow.xaml:39 | MenuItemReanotateSEPro.IsEnabled = False | test:ShellLedgerComparisonCommand | VERIFIED | evidence:SH:FQ15-5B5F37F3309E |
+| FQ15-5B5F37F3309E | IMPROVE | option/copy | FamilyQuant/MainWindow.xaml:39 | MenuItemReanotateSEPro.IsEnabled = False | test:LedgerDeclarationCommand | VERIFIED | evidence:SH-C13-tooltip:FQ15-5B5F37F3309E |
 | FQ15-C07C8EF91D69 | IMPROVE | option/copy | FamilyQuant/MainWindow.xaml:39 | MenuItemReanotateSEPro.Header = Reanotate Sepro | render:01-home | OPEN | pending |
 | FQ15-DD7878AEE818 | KEEP | handler | FamilyQuant/MainWindow.xaml:39 | MenuItemReanotateSEPro.Click = MenuItemReanotateSEPro_Click | render:01-home | OPEN | pending |
 | FQ15-032559C20232 | IMPROVE | tooltip | FamilyQuant/MainWindow.xaml:40 | MenuItemReanotateSEPro.ToolTip = Writes your User ID family numbers into a SEPro .sepr2 file, saved as a new _regrouped.sepr2; the original is not changed. Disabled until a Family Cluster File is loaded. | render:01-home | OPEN | pending |
@@ -3974,13 +3974,13 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **2356**; OPEN r
 | FQ15-A33C172644F1 | KEEP | handler | FamilyQuant/MainWindow.xaml:53 | MenuItemAnalytics.Click = MenuItemAnalytics_Click | render:01-home | OPEN | pending |
 | FQ15-0E8F41C31827 | IMPROVE | tooltip | FamilyQuant/MainWindow.xaml:54 | MenuItemAnalytics.ToolTip = Step 4: graphs the project's full isotope-envelope quantitation, including each family's share and how much of the total ion current is recovered. Read only; run Compute / update full XIC first. | render:01-home | OPEN | pending |
 | FQ15-2B96D715268C | IMPROVE | control | FamilyQuant/MainWindow.xaml:56 | MenuItem MenuItemHelp | render:01-home | OPEN | pending |
-| FQ15-D6942502EDAD | IMPROVE | option/copy | FamilyQuant/MainWindow.xaml:56 | MenuItemHelp.Header = Help | test:ShellLedgerComparisonCommand | VERIFIED | evidence:SH:FQ15-D6942502EDAD |
+| FQ15-D6942502EDAD | IMPROVE | option/copy | FamilyQuant/MainWindow.xaml:56 | MenuItemHelp.Header = Help | test:LedgerDeclarationCommand | VERIFIED | evidence:SH-C13-tooltip:FQ15-D6942502EDAD |
 | FQ15-7C5612C5D068 | IMPROVE | control | FamilyQuant/MainWindow.xaml:57 | MenuItem MenuItemHowToRead | render:01-home | OPEN | pending |
-| FQ15-F07F017EF771 | IMPROVE | option/copy | FamilyQuant/MainWindow.xaml:57 | MenuItemHowToRead.Header = How to read these numbers | test:ShellLedgerComparisonCommand | VERIFIED | evidence:SH:FQ15-F07F017EF771 |
+| FQ15-F07F017EF771 | IMPROVE | option/copy | FamilyQuant/MainWindow.xaml:57 | MenuItemHowToRead.Header = How to read these numbers | test:LedgerDeclarationCommand | VERIFIED | evidence:SH-C13-tooltip:FQ15-F07F017EF771 |
 | FQ15-D36A80A151FF | KEEP | handler | FamilyQuant/MainWindow.xaml:57 | MenuItemHowToRead.Click = MenuItemHowToRead_Click | render:01-home | OPEN | pending |
 | FQ15-34708753E1F6 | IMPROVE | tooltip | FamilyQuant/MainWindow.xaml:58 | MenuItemHowToRead.ToolTip = Explains every number the program shows, such as what the percentages are of and what a shared peptide is. On the De Novo screen it opens that screen's own help. | render:01-home | OPEN | pending |
 | FQ15-92FDC5469A5B | IMPROVE | control | FamilyQuant/MainWindow.xaml:59 | MenuItem MenuItemWhereAmI | render:01-home | OPEN | pending |
-| FQ15-8D5FBCC18545 | IMPROVE | option/copy | FamilyQuant/MainWindow.xaml:59 | MenuItemWhereAmI.Header = What do I do first? | test:ShellLedgerComparisonCommand | VERIFIED | evidence:SH:FQ15-8D5FBCC18545 |
+| FQ15-8D5FBCC18545 | IMPROVE | option/copy | FamilyQuant/MainWindow.xaml:59 | MenuItemWhereAmI.Header = What do I do first? | test:LedgerDeclarationCommand | VERIFIED | evidence:SH-C13-tooltip:FQ15-8D5FBCC18545 |
 | FQ15-4B1A5D805051 | KEEP | handler | FamilyQuant/MainWindow.xaml:59 | MenuItemWhereAmI.Click = MenuItemWhereAmI_Click | render:01-home | OPEN | pending |
 | FQ15-FCF24F202E4B | IMPROVE | tooltip | FamilyQuant/MainWindow.xaml:60 | MenuItemWhereAmI.ToolTip = Lists the order of work, from a protein database to an exported table, and what each step needs. The de novo review at the end is optional. | render:01-home | OPEN | pending |
 | FQ15-18DC9493B812 | IMPROVE | tooltip | FamilyQuant/MainWindow.xaml:70 | TextBlockGuide.ToolTip = Shows where you are in the workflow and what to do next. It updates as you go. | render:01-home | OPEN | pending |
