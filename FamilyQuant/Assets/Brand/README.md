@@ -5,8 +5,8 @@ unchanged in `D:/FamilyQuant-data/logos/chosen`. This redraw keeps the rounded
 teal tile, two pale bars and cyan centre, with flat surfaces and transparent space
 outside the tile. It contains no cream paper background.
 
-`Themes/Branding.xaml` is the geometry source. The three logo brushes live in
-`Themes/Tokens.xaml`. `StartPageLogo` is a vector `ImageSource` with a 256 by 256
+[Branding.xaml](../../Themes/Branding.xaml) is the geometry source. The three logo brushes live in
+[Tokens.xaml](../../Themes/Tokens.xaml). `StartPageLogo` is a vector `ImageSource` with a 256 by 256
 canvas, suitable for the start page's 52 by 52 image. `AppWindowIcon` loads the
 multi-size ICO resource. App startup applies it to the main window; the shared
 window style supplies it to other windows.
