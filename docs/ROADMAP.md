@@ -124,7 +124,7 @@ The bet, from `docs/vision/VISION.md`: a de novo peptide your database cannot pl
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
 | B8 | Science review on a real sample: labels, denominators, inflation of conserved families, and the wording of the claim | H | 1 | 🟢 | R3 | GR's verdict; findings closed; Paulo accepts the wording | GR | not started | 0% | 0% | T+1 |
-| B10 | Minimum tag length the user can change, with a quick error table: on the Database gap screen, for lengths 7 to 15, the signal that lands, the decoy rate and the known-answer right rate on that project, with no new fetch. Choosing a length updates the result, the CSV and the FASTA and is stored in the project. 9 stays the default | M | 1 | 🟢 | R3 | Table from the program on the real project; the chosen length changes screen, CSV and FASTA and is stored; 9 reproduces today's output; time measured | OP | not started | 0% | 0% | T+1 |
+| B10 | Minimum tag length the user can change, with a quick error table: on the Database gap screen, for lengths 7 to 15, the signal that lands, the decoy rate and the known-answer right rate on that project, with no new fetch. Choosing a length updates the result, the CSV and the FASTA and is stored in the project. 8 is the default (D22) | M | 1 | 🟢 | R3 | Table from the program on the real project; the chosen length changes screen, CSV and FASTA and is stored; choosing 9 reproduces the B6 output; time measured | OP | not started | 0% | 0% | T+1 |
 | B11 | Several taxa on one target: a joined header naming different taxa keeps all of them, and one such target no longer stops the whole file. No guessed taxon | L | 0.5 | 🟢 | R3 | Fixture of a two-species joined header passes; own-species removal covers each taxon; Ana and Bothrops audits unchanged | EV | not started | 0% | 0% | T+0 |
 
 ## Cooldown
@@ -147,6 +147,7 @@ Paulo agreed these at the restart, 2026-11-01.
 | ID | Question | Taken |
 |---|---|---|
 | D14 | Should identity clustering change its coverage rule, merge on shared peptides, or use a reviewed-family veto? | No. Clustering stays as it is, and the measurements ship as a diagnostic the user can see |
+| D22 | Default minimum tag length | 8, and the user can choose 7 to 15. Replaces the 9 in D11. Paulo, 11-02 |
 | D21 | Is the program general? | Yes. It must work with any database, so nothing the user sees names an organism, a venom or a sample's numbers. Paulo, 11-02 |
 | D20 | Minimum tag length | The user can change it and see the error by length on their own project; 9 stays the default. Paulo, 11-02. Step B10 |
 | D19 | A joined header with different taxa | The target keeps all its taxa and the file is not refused. Paulo, 11-02. Step B11 |
