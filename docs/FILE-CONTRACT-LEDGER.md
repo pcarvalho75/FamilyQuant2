@@ -30,3 +30,5 @@ The M52 packet is retained at `D:/FamilyQuant-data/out-floater/formats/publish-1
 The fresh cohort contained 69 OPEN target-kind rows: eight now have native file/storage proofs, and 61 remain explicitly OPEN with wording/reasons listed. The imported combined ledger reported 4,330 VERIFIED, 1,130 OPEN and 296 APPROVED_DROP. `target-audit.json` gives every unresolved ID and its source location; these are not claimed as scientific or wording equivalence.
 
 The required final N6c/N6d sync changed no mapped product source. The merged table contained 4,353 VERIFIED, 1,107 OPEN and 296 APPROVED_DROP; the Release build and native ledger guard passed again after that sync.
+
+M52 review fix: a field beginning with a double quote now uses quoted TSV encoding with doubled internal quotes. Other cells keep their existing encoding. `--test-wording-tsv` reproduces the leading-quote and stripped-quote failures before the fix, then checks both the native table reader and the ruling reader. The exact malformed own shared-list row was repaired with a backup and unchanged surrounding bytes; the full producer can reread the live list afterward.

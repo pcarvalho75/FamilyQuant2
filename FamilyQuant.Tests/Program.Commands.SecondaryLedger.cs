@@ -21,5 +21,7 @@ internal static partial class Program
             args => args.Length > 0 && args[0] == "--secondary-box-audit", (args, _) => SecondaryBoxAudit(args)),
         new("--ledger-file-contracts", 10460, TestCommandPhase.Raw,
             args => args.Length > 0 && args[0] == "--ledger-file-contracts", (args, _) => FileContractCommand(args)),
+        new("--test-wording-tsv", 10465, TestCommandPhase.Raw,
+            args => args.Length > 0 && args[0] == "--test-wording-tsv", (args, _) => WordingTsvRoundTripCommand(args)),
     ];
 }
