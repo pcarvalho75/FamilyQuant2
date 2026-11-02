@@ -95,6 +95,7 @@ Invoke each flag with `& $testExe <flag>` after building. Dispatch and arity are
 | `--test-document` | Document round trip, scoring and denominator attribution fixtures |
 | `--test-evidence-task` | File-derived taxonomy, keyword counts, confirmation and recipe replay fixtures |
 | `--source-caption-check <fresh-output>` | Compiled source picker: all five frozen filename/Union facts, selected-source screenshots and native whole-control checks in both themes |
+| `--shared-peptide-effect <copied-project> <copied-T-R> <copied-sepr2> <copied-RAW-folder> <new-output> <cache> <dataset-label> <date> [--prepare-only]` | One-run native Compute full XIC and all three shared-peptide policies; exact database/curation check, scoped CSV/JSON outputs and no de novo input |
 | `--test-evidence-delivery` | Native default review, save, exports, exact app-session replay and app Open fixture |
 | `--test-evidence-fetch-atomic` | Combined evidence/panel staging, cancellation boundaries, failures and one final commit |
 | `--test-evidence-coverage` | Native alignment-row interpretation, counterfactual chooser and honest audit labels |
@@ -139,7 +140,7 @@ Invoke each flag with `& $testExe <flag>` after building. Dispatch and arity are
 | `--database-gap-screens <project.fqproj> <fresh-output> [--negative-fingerprint]` | Capture/export the stored table; a stored-world project must enable FASTA, and refusal fails the command |
 | `--test-database-gap-refusal <project.fqproj> <fresh-output>` | Native child plants the old fingerprint and must fail the availability gate without writing FASTA or changing input bytes |
 | `--test-database-gap-lengths <fresh-output>` | Whole native length chooser, result/CSV/FASTA consistency, repeated bytes, project roundtrip and shell Save/Cancel |
-| `--database-gap-lengths-screens <project.fqproj> <fresh-output>` | Real stored length table in both themes, all native length/CSV/FASTA choices and byte repeats; input unchanged |
+| `--database-gap-lengths-screens <project.fqproj> <fresh-output> [--require-default]` | Real stored length table in both themes, native CSV/FASTA choices and byte repeats; input unchanged. Default proof requires an unselected Core default8 and stored table8, exact FASTA sequences and a native values snapshot |
 | `--prove-results-interactions <fresh-output> <date-timestamp>` | Native Results controls, displaced handlers, deterministic exports and observation receipts |
 | `--prove-results-members <frozen-root> <fresh-output> <date-timestamp>` | Shared scoped member comparison for assigned Results and quantitation declarations; changed members stay open |
 | `--prove-results-runtime <frozen-root> <own-frozen-host> <fresh-output> <date-timestamp> [--negative-control]` | Native frozen/current summary, CSV, User-header and chart-byte comparisons with repeated outputs and per-row receipts |
@@ -206,6 +207,7 @@ Companion options for `--screens` are `--screen-fcf <input.fcf>`, `--screen-proj
 | `--feature-ledger-generate <frozen-source-root> <scratch-root>` | [FeatureLedger.cs](../FamilyQuant.Tests/FeatureLedger.cs); writes `scratch-root/docs`, never scan moving product source |
 | `--feature-ledger-prove <fresh-output> <date-timestamp>` | Native observation-specific storage/source proofs and register, no ledger edit |
 | `--feature-ledger-evidence-import <register> <output> [--replace-existing]` | Validate receipts, preserve an explicitly replaced register and apply evidenced states |
+| `--ledger-apply-rulings <fresh-output> <date>` | Apply the three pinned Paulo wording rules to listed TSV rows; compiled App/Core/Help text witnesses, visual Style/Setter anchors, adversarial guards and remaining review list; [scope](LEDGER-RULINGS.md) |
 | `--feature-ledger-evidence <output>` | Read-only counts by kind, source mappings and reproducible 50-row sample |
 | `--feature-ledger-kind-review <kind> REOPENED/ACCEPTED <reviewer> <reason> <date> <output>` | Independent D13 kind-review decision and whole-kind reopening |
 | `--ledger-declaration-compare <frozen-root> <current-root> <fresh-output> <step> <source-prefix> <date>` | Frozen/current explicit XAML property comparisons and kind receipts |
@@ -213,9 +215,9 @@ Companion options for `--screens` are `--screen-fcf <input.fcf>`, `--screen-proj
 | `--ledger-assay-cohort <frozen-root> <selection.json> <output> <step> <date>` | Scoped shared declaration comparisons; [receipt scope](ASSAY-LEDGER.md) |
 | `--ledger-assay-cache <frozen-root> <output> <date> [--negative-control]` | Frozen/current native cache wire and staging checks; frozen host build required |
 | `--assay-cache-snapshot <output>` | Shared synthetic native cache fixture; fresh output required |
-| `--test-assay-spectrum-properties`, `--test-assay-build-workflow` | Frozen column/property anchors and native Build handler receipt guards |
-| `--assay-view-snapshot spectrum/build <output>`, `--assay-build-output-snapshot <output>` | Native view properties and shared clustering/redundancy fixture outputs; fresh output |
-| `--ledger-assay-spectrum-properties <frozen-root> <output> <date> [--negative-control]`, `--ledger-assay-build-workflow` (same arguments) | Constructed column properties and native [Build workflow](N6H-USEARCH.md) against frozen reference |
+| `--test-assay-spectrum-properties`, `--test-assay-build-workflow`, `--test-assay-figure-gaps` | Frozen property, handler and native producer receipt guards |
+| `--assay-view-snapshot spectrum/build <output>`, `--assay-build-output-snapshot <output>`, `--assay-figure-gap-snapshot <output>` | Native view, clustering/redundancy and synthetic figure fixtures; fresh output |
+| `--ledger-assay-spectrum-properties <frozen-root> <output> <date> [--negative-control]`, `--ledger-assay-build-workflow`, `--ledger-assay-figure-gaps` (same arguments) | Native columns, [Build workflow](N6H-USEARCH.md) and [producer gaps](N6J-PRODUCERS.md) against frozen reference |
 | `--ledger-core-relocation <frozen-root> <fresh-output> X5/X7 <date> [member-mappings.json]` | Scoped complete Core member comparisons, exact frozen hashes, retained source/checker snapshots and per-row gaps; [guide](CORE-RELOCATION-LEDGER.md) |
 | `--ledger-shell-compare <frozen-root> <fresh-output> <date>` | SH and C1 exact declarations/member tokens; separate candidate registers, unproven rows kept OPEN |
 | `--ledger-storage-runtime <frozen-root> <fresh-output> <date> [--negative-control]` | Public project reader/writer schema, codec and refusal observations; [runtime guide](CORE-RUNTIME-LEDGER.md) |
@@ -224,6 +226,8 @@ Companion options for `--screens` are `--screen-fcf <input.fcf>`, `--screen-proj
 | `--ledger-secondary-runtime <frozen-root> <native-master-audit> <frozen-app> <fresh-output> <date> [--negative-control]` | Native frozen/current secondary values and interactions; [guide](SECONDARY-LEDGER.md) |
 | `--ledger-secondary-interactions <frozen-root> <native-master-audit> <frozen-app> <fresh-output> <date> [--negative-control]` | Native Quantify/close, identity chooser and injected GridCopy IO/modifier contracts; [guide](SECONDARY-LEDGER.md) |
 | `--test-quantify-close` | Native styled Close button, modal result, retained result and no-focus checks in both themes; included in shell/quick checks |
+| `--secondary-wording-append <native-proof-output> <wording.tsv>` | Append native changed-wording candidates for Paulo; no semantic proof or ledger-state change |
+| `--secondary-box-audit <native-ledger-audit> <wording.tsv> N6k/N6l <output>` | Verify each retained box row has native proof or a lane wording entry; never changes ledger state |
 | `--prove-denovo-ledger <frozen-source-root> <fresh-output> <date>` | Scoped exact De novo declarations, retained snapshots and ledger receipts in batches of 250; [guide](DENOVO-PRESERVATION.md) |
 | `--prove-denovo-runtime <frozen-source-root> <frozen-app-folder> <fresh-output> <date>` | Native frozen/current controls and resolved values across both themes and three legacy sources |
 | `--prove-denovo-workflows <frozen-source-root> <frozen-app-folder> <fresh-output> <date>` | Native frozen/current projection, reconciliation, binding and legacy export fixtures; C13 style handoff |
@@ -237,6 +241,10 @@ Companion options for `--screens` are `--screen-fcf <input.fcf>`, `--screen-proj
 | `--shell-metadata-snapshot <frozen-root> <inventory> <fresh-output.json>` | Same native metadata helper in current and frozen hosts; assigned views remain unshown |
 | `--ledger-shell-native <frozen-root> <frozen-host.exe> <fresh-output> <date> [C1-cohort-register]` | Execute compiled SH/C1 metadata and isolated Home clicks; own candidate registers and complete comparison gaps |
 | `--prove-shell-main <frozen-root> <fresh-output> <date>` | Native MainWindow routes, synthetic file writes/refusals and captured dialog/report frames; own SH-main-routes candidate register |
+| `--prove-curation-actions <frozen-root> <own-frozen-host> <fixed-audit.json> <fresh-output> <date> [--negative-control]` | Native curation handlers and real synthetic CSV writes/refusals; complete frozen/current CSV comparison in two cultures; own SH-curation-actions candidate, fixed OPEN cohort only |
+| `--curation-export-snapshot <fresh-json>` | Shared current/frozen synthetic CSV and retained User sorting/counter values; no RAW computation |
+| `--shell-review-wording <review-gaps.tsv> <shared-wording.tsv> <matching-native-main-packet> <fresh-output> <date>` | Generate every requested/previous own list row from compiled/native feature text or the exact `no current equivalent` decision with a reason; never changes dispositions |
+| `--check-shell-review-list <review-gaps.tsv> <wording.tsv>` | Reject missing rows, empty values/reasons and unresolved angle-bracket placeholders in the reviewed cohort |
 | `--word-grouping-snapshot <input.fcf-or-fqproj> <output.txt>` | [WordGroupingSnapshot.cs](../FamilyQuant.Tests/WordGroupingSnapshot.cs), also linked into frozen host |
 | `--chart-export-snapshot <output-dir>` | [ChartExportSnapshot.cs](../FamilyQuant.Tests/ChartExportSnapshot.cs), synthetic chart parity fixtures |
 | `--clustering-snapshot <input.fasta> <output.tsv> <integer-identity> <fast-or-exhaustive>` | [ClusteringSnapshot.cs](../FamilyQuant.Tests/ClusteringSnapshot.cs) |
@@ -277,7 +285,7 @@ and output must be separate. None is executed merely to maintain this catalog.
 | `--evidence-architecture-check [searched.fcf] [report.json] [scope-terms]` | Same helper, architecture suggestions |
 | `--evidence-apply-check [searched.fcf] [report.json] [scope-terms]` | Same helper, explicit apply/undo/reopen checks in separate outputs |
 | `--evidence-session-apply-check [searched.fcf] [report.json] [scope-terms]` | Same helper, session preparation and recipe replay |
-| `--family-world-lengths [computed.fqproj] [output-dir]` | [FamilyWorldLengthsCheck.cs](../FamilyQuant.Tests/FamilyWorldLengthsCheck.cs), B10: every minimum tag length from one search against an analysis at each length alone, timed, with the per-length estimate CSV |
+| `--family-world-lengths [project.fqproj] [output-dir] [world.fcf] [reference.fqproj]` | [FamilyWorldLengthsCheck.cs](../FamilyQuant.Tests/FamilyWorldLengthsCheck.cs), B10: every minimum tag length from one search against an analysis at each length alone, timed, with CSVs of the per-length estimate, what each step down in length adds, and the known-answer halves at 7, 8 and 9. A world file (B4's `.fcf`) replaces the world the project stores, for a project that stores none. A reference project's stored table must come back by choosing its length in this project's stored result (B10b: choosing 9 gives B6's table) |
 | `--family-world-report [project.fqproj] [output-dir]` | [FamilyWorldReport.cs](../FamilyQuant.Tests/FamilyWorldReport.cs), the family-world table a project stores, printed and exported |
 | `--family-world-check [project.fqproj] [world.fcf] [output-dir]` | [FamilyWorldCheck.cs](../FamilyQuant.Tests/FamilyWorldCheck.cs); B1 gate, gate study, B5 product pass under D11 and B6 per-family errors; live taxonomy lists in output |
 | `--coherence-check [panel.fcf] [classes.tsv] [output-dir]` | [CoherenceCheckRun.cs](../FamilyQuant.Tests/CoherenceCheckRun.cs) |

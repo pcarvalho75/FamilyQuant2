@@ -5,128 +5,128 @@
   "runs": [
     {
       "id": "native",
-      "command": "D:\\FamilyQuant-wt\\assay\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --ledger-assay-spectrum-actions D:/FamilyQuant-data/out-shell/N3/source D:/FamilyQuant-data/out-assay/m67-spectrum-actions-final-2 \u00222026-11-02 07:54:12 -0800\u0022",
-      "executedAt": "2026-11-02 07:54:12 -0800",
-      "commit": "9a5118f8ac3c8e0e31f0dcb0e58d484c0f5f21b7",
+      "command": "D:\\FamilyQuant-wt\\assay\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --ledger-assay-spectrum-actions D:/FamilyQuant-data/out-shell/N3/source D:/FamilyQuant-data/out-assay/m72-spectrum-actions-2 \u00222026-11-02 09:09:31 -0800\u0022",
+      "executedAt": "2026-11-02 09:09:31 -0800",
+      "commit": "809abcb7d2939624f557e42a1cb393102a6b0556",
       "artifacts": [
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\m67-spectrum-actions-final-2\\proofs.log",
-          "sha256": "10A5A6B1744F700ECC4B3F9E28341B16A74BA20B0BF90B03A7D653D982AE68BB"
+          "path": "D:\\FamilyQuant-data\\out-assay\\m72-spectrum-actions-2\\proofs.log",
+          "sha256": "7628A5CA17D860DCBD8A7585A3C928C40E91986D0BDEC422A8F44B6334A849E6"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\m67-spectrum-actions-final-2\\actual-values.json",
+          "path": "D:\\FamilyQuant-data\\out-assay\\m72-spectrum-actions-2\\actual-values.json",
           "sha256": "FE3DA8A4ACCC66A1C2BECDB560DB5DF626A170560BA7F61570C31B8222EAEC15"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\m67-spectrum-actions-final-2\\executed\\FamilyQuant.Tests/AssayCacheSnapshot.cs",
+          "path": "D:\\FamilyQuant-data\\out-assay\\m72-spectrum-actions-2\\executed\\FamilyQuant.Tests/AssayCacheSnapshot.cs",
           "sha256": "9E0CD15CD1616F7A312E6A14209E745CF8C4ADB6EEF1A3D6125690A9602CCC1B"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\m67-spectrum-actions-final-2\\executed\\FamilyQuant.Tests/AssaySpectrumActionComparison.cs",
+          "path": "D:\\FamilyQuant-data\\out-assay\\m72-spectrum-actions-2\\executed\\FamilyQuant.Tests/AssaySpectrumActionComparison.cs",
           "sha256": "7543D46D0F919160CE2B2A79F44AC78078871695FA3538209B9E933E8CED305F"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\m67-spectrum-actions-final-2\\executed\\FamilyQuant.Tests/AssaySpectrumPropertyComparison.cs",
+          "path": "D:\\FamilyQuant-data\\out-assay\\m72-spectrum-actions-2\\executed\\FamilyQuant.Tests/AssaySpectrumPropertyComparison.cs",
           "sha256": "157C955F947789AA5BA5759EA3B37D762EA6A5E693AB49345BDE540C420CC036"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\m67-spectrum-actions-final-2\\executed\\FamilyQuant.Tests/AssayViewSnapshot.cs",
+          "path": "D:\\FamilyQuant-data\\out-assay\\m72-spectrum-actions-2\\executed\\FamilyQuant.Tests/AssayViewSnapshot.cs",
           "sha256": "A6F968F2ADEF225690DBCD30373E1150E513E07B2D6D0CAC0C30AB4EA2B66001"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\m67-spectrum-actions-final-2\\executed\\FamilyQuant.Tests/FeatureLedgerEvidence.Reporting.cs",
+          "path": "D:\\FamilyQuant-data\\out-assay\\m72-spectrum-actions-2\\executed\\FamilyQuant.Tests/FeatureLedgerEvidence.Reporting.cs",
           "sha256": "8633DCBB14E8DBF1746A1FD771AD4E9404900EB68BA46690A31EFC8DEDFA247B"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\m67-spectrum-actions-final-2\\executed\\FamilyQuant.Tests/FeatureLedgerEvidence.cs",
+          "path": "D:\\FamilyQuant-data\\out-assay\\m72-spectrum-actions-2\\executed\\FamilyQuant.Tests/FeatureLedgerEvidence.cs",
           "sha256": "370FC41121F164A0C2495B260A62149FAD53F6F353203A97488423F2E6FA8738"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\m67-spectrum-actions-final-2\\executed\\FamilyQuant.Tests/Program.AssayCacheLedger.cs",
+          "path": "D:\\FamilyQuant-data\\out-assay\\m72-spectrum-actions-2\\executed\\FamilyQuant.Tests/Program.AssayCacheLedger.cs",
           "sha256": "7D3B175CC9824DA443DC369CF9C8983E1C59004FD15F080951BCEEF72B5449C9"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\m67-spectrum-actions-final-2\\executed\\FamilyQuant.Tests/Program.AssayRuntimeLedger.cs",
+          "path": "D:\\FamilyQuant-data\\out-assay\\m72-spectrum-actions-2\\executed\\FamilyQuant.Tests/Program.AssayRuntimeLedger.cs",
           "sha256": "24F4A0BACCC044156A198BDE8790FCDE12BF0A995641CA359FCB1AFEB3009CB7"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\m67-spectrum-actions-final-2\\executed\\FamilyQuant.Tests/Program.AssaySpectrumActions.cs",
+          "path": "D:\\FamilyQuant-data\\out-assay\\m72-spectrum-actions-2\\executed\\FamilyQuant.Tests/Program.AssaySpectrumActions.cs",
           "sha256": "4C9C198C5A49DA6B61A740B68F4B0092E0D86EC2DB3AAD2ACE95DBB38CF48AF5"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\m67-spectrum-actions-final-2\\executed\\FamilyQuant.Tests/Program.AssaySpectrumLedger.cs",
+          "path": "D:\\FamilyQuant-data\\out-assay\\m72-spectrum-actions-2\\executed\\FamilyQuant.Tests/Program.AssaySpectrumLedger.cs",
           "sha256": "03817FFBD5BCE472DFE27AE69711ACC589854EEFE783711170DA44EF848B77FB"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\m67-spectrum-actions-final-2\\executed\\FamilyQuant.Tests/Program.Commands.AssayLedger.cs",
-          "sha256": "584AE2E5132718747D9B86EE007150164FF7516FD6C6449C48287F9D8CD173F9"
+          "path": "D:\\FamilyQuant-data\\out-assay\\m72-spectrum-actions-2\\executed\\FamilyQuant.Tests/Program.Commands.AssayLedger.cs",
+          "sha256": "46DA029D0DBAA113B736A5E3B2BE7D29C486565EAE0063281F58F292ECC8112E"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\m67-spectrum-actions-final-2\\executed\\FamilyQuant/SecondaryWindowView.cs",
+          "path": "D:\\FamilyQuant-data\\out-assay\\m72-spectrum-actions-2\\executed\\FamilyQuant/SecondaryWindowView.cs",
           "sha256": "5DDABCDF5F47F3CBCC271B0F04EB20CE51BA12353DD117C1A3EDE8684A742CDE"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\m67-spectrum-actions-final-2\\executed\\FamilyQuant/SecondaryWindows.ViewModels.cs",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "path": "D:\\FamilyQuant-data\\out-assay\\m72-spectrum-actions-2\\executed\\FamilyQuant/SecondaryWindows.ViewModels.cs",
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\m67-spectrum-actions-final-2\\executed\\FamilyQuant/SpectrumComparisonWindow.Columns.cs",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "path": "D:\\FamilyQuant-data\\out-assay\\m72-spectrum-actions-2\\executed\\FamilyQuant/SpectrumComparisonWindow.Columns.cs",
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\m67-spectrum-actions-final-2\\executed\\FamilyQuant/SpectrumComparisonWindow.Exports.cs",
+          "path": "D:\\FamilyQuant-data\\out-assay\\m72-spectrum-actions-2\\executed\\FamilyQuant/SpectrumComparisonWindow.Exports.cs",
           "sha256": "5FC458F9AA92ED3D24354ACB8BBDEB4EBB37CC2F968833C1A2AEF52DAB60E2CD"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\m67-spectrum-actions-final-2\\executed\\FamilyQuant/SpectrumComparisonWindow.View.cs",
+          "path": "D:\\FamilyQuant-data\\out-assay\\m72-spectrum-actions-2\\executed\\FamilyQuant/SpectrumComparisonWindow.View.cs",
           "sha256": "B7D8E01139E0E190F7BBDFBA5973AE012B55B56547BF3FDC78702D0B157F2E35"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\m67-spectrum-actions-final-2\\executed\\FamilyQuant/SpectrumComparisonWindow.cs",
+          "path": "D:\\FamilyQuant-data\\out-assay\\m72-spectrum-actions-2\\executed\\FamilyQuant/SpectrumComparisonWindow.cs",
           "sha256": "025C5824B534894B311B6AF36963182831EB0F663FD84AAC0D2399520E08FF0F"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\m67-spectrum-actions-final-2\\executed\\frozen\\FamilyQuant/SpectrumComparisonWindow.cs",
+          "path": "D:\\FamilyQuant-data\\out-assay\\m72-spectrum-actions-2\\executed\\frozen\\FamilyQuant/SpectrumComparisonWindow.cs",
           "sha256": "76DD3FE0949EFB7239FDBBCF9163FB78F06EDE5F008D3CC6CC391D9734C88BF2"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\m67-spectrum-actions-final-2\\executed\\FamilyQuant.Tests.dll",
-          "sha256": "7FE355FE7653D77B0ADC6471A94189033F4CFBCCBA346B8CA8A5E296EA2E1857"
+          "path": "D:\\FamilyQuant-data\\out-assay\\m72-spectrum-actions-2\\executed\\FamilyQuant.Tests.dll",
+          "sha256": "340CADF90108FDC93ECBEDA4777E4275F4DC2E9D66203CE394B3CE2C03283BA8"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\m67-spectrum-actions-final-2\\executed\\FamilyQuant.Core.dll",
-          "sha256": "362F72FCC26677EB000A3440435D9A2BEAA6E1B3A0B85AEE774CDB718B4E91DA"
+          "path": "D:\\FamilyQuant-data\\out-assay\\m72-spectrum-actions-2\\executed\\FamilyQuant.Core.dll",
+          "sha256": "153873484AA98E30EDB6E1F31266817151C151A909CCB575158FD78DCB93F3A0"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\m67-spectrum-actions-final-2\\executed\\FamilyQuant.dll",
-          "sha256": "A256D90C375713BE33AFE782844962FD10D1D29CACEAF04644434BC12A5AA52B"
+          "path": "D:\\FamilyQuant-data\\out-assay\\m72-spectrum-actions-2\\executed\\FamilyQuant.dll",
+          "sha256": "75DCE9DE8412A387840E3835C1F673B07121A21D958F9D5138175605491AB247"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\m67-spectrum-actions-final-2\\action-anchors.json",
+          "path": "D:\\FamilyQuant-data\\out-assay\\m72-spectrum-actions-2\\action-anchors.json",
           "sha256": "486B5FBA1DBE9276ABB54A12BD6CA2CF5AE8259FC3A5070F8FCDF5D4E543EC3D"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\m67-spectrum-actions-final-2\\frozen-FamilyQuant.dll",
+          "path": "D:\\FamilyQuant-data\\out-assay\\m72-spectrum-actions-2\\frozen-FamilyQuant.dll",
           "sha256": "D764488C923945285E03B338E5A91BF28106A35B11AB465D8E2B23D125F03FD8"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\m67-spectrum-actions-final-2\\frozen-ReferenceGoldenHost.dll",
-          "sha256": "BB818CCDA272A1EA54BB2A9FDFAF286089FC00B14E8C02F55BFFC41464651022"
+          "path": "D:\\FamilyQuant-data\\out-assay\\m72-spectrum-actions-2\\frozen-ReferenceGoldenHost.dll",
+          "sha256": "0507018AAEC2E98B9B3F658F7440B010F5BA52785D92940C29AF8F137127CD80"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\m67-spectrum-actions-final-2\\frozen-ReferenceGoldenHost.exe",
-          "sha256": "322B2D3E91C164B0D13B1D5B0E2F355BBF43398B8984AA32460ADD06B0A3CA72"
+          "path": "D:\\FamilyQuant-data\\out-assay\\m72-spectrum-actions-2\\frozen-ReferenceGoldenHost.exe",
+          "sha256": "0BADE6FFA491ABB6EC3AAB5BB50A2BBF06966133F96EAAE2659996A4E49EC22C"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\m67-spectrum-actions-final-2\\frozen-view.log",
+          "path": "D:\\FamilyQuant-data\\out-assay\\m72-spectrum-actions-2\\frozen-view.log",
           "sha256": "C6F3DB1CB2E00572BF3A7E20F5970B40791820BF1AFA3F7EAB2CFED56F1BC3DE"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\m67-spectrum-actions-final-2\\current-view\\properties.json",
-          "sha256": "8BA10CCEED4F6795CEC335D89A5A66F2907016F7A1F49AE023B20E70A5622EC0"
+          "path": "D:\\FamilyQuant-data\\out-assay\\m72-spectrum-actions-2\\current-view\\properties.json",
+          "sha256": "8FA495288B7900917828F7AC17195849C3B82F62EF977BDE4FCA2D0A1F207EBD"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\m67-spectrum-actions-final-2\\frozen-view\\properties.json",
+          "path": "D:\\FamilyQuant-data\\out-assay\\m72-spectrum-actions-2\\frozen-view\\properties.json",
           "sha256": "EFC983A75C764A06D8CB2D3C1A61EBCEAF8067FCC8DD2DA33D38EEB574F06826"
         }
       ],
@@ -145,12 +145,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed named spectrum controls/properties and actual routed disconnected-window refusals",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed named spectrum controls/properties and actual routed disconnected-window refusals",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -184,12 +184,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed named spectrum controls/properties and actual routed disconnected-window refusals",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed named spectrum controls/properties and actual routed disconnected-window refusals",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -223,12 +223,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed named spectrum controls/properties and actual routed disconnected-window refusals",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed named spectrum controls/properties and actual routed disconnected-window refusals",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -262,12 +262,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed named spectrum controls/properties and actual routed disconnected-window refusals",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed named spectrum controls/properties and actual routed disconnected-window refusals",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -301,12 +301,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed named spectrum controls/properties and actual routed disconnected-window refusals",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed named spectrum controls/properties and actual routed disconnected-window refusals",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -340,12 +340,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed named spectrum controls/properties and actual routed disconnected-window refusals",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed named spectrum controls/properties and actual routed disconnected-window refusals",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -379,12 +379,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed named spectrum controls/properties and actual routed disconnected-window refusals",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed named spectrum controls/properties and actual routed disconnected-window refusals",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -418,12 +418,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed named spectrum controls/properties and actual routed disconnected-window refusals",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed named spectrum controls/properties and actual routed disconnected-window refusals",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -457,12 +457,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed named spectrum controls/properties and actual routed disconnected-window refusals",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed named spectrum controls/properties and actual routed disconnected-window refusals",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -496,12 +496,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed named spectrum controls/properties and actual routed disconnected-window refusals",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed named spectrum controls/properties and actual routed disconnected-window refusals",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -535,12 +535,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed named spectrum controls/properties and actual routed disconnected-window refusals",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed named spectrum controls/properties and actual routed disconnected-window refusals",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -574,12 +574,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed named spectrum controls/properties and actual routed disconnected-window refusals",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed named spectrum controls/properties and actual routed disconnected-window refusals",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -603,6 +603,45 @@
       "compared": "FamilyQuant/SpectrumComparisonWindow.cs:317 \u0022Nothing was saved because this comparison window is not on a display. \u0022; actions/ButtonSaveAcceptedScoreScatter/refusal: Actual named routed Click updates the undisplayed-window refusal; no dialog, write or render is claimed.; expected Nothing was saved because this comparison window is not on a display. Open it from the loaded project and choose Save accepted-call score plot.; actual Nothing was saved because this comparison window is not on a display. Open it from the loaded project and choose Save accepted-call score plot."
     },
     {
+      "observationId": "FQ15-3AF889D02C38",
+      "implementation": [
+        {
+          "path": "FamilyQuant/SecondaryWindowView.cs",
+          "symbol": "Constructed named spectrum controls/properties and actual routed disconnected-window refusals",
+          "sha256": "5DDABCDF5F47F3CBCC271B0F04EB20CE51BA12353DD117C1A3EDE8684A742CDE"
+        },
+        {
+          "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
+          "symbol": "Constructed named spectrum controls/properties and actual routed disconnected-window refusals",
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
+          "symbol": "Constructed named spectrum controls/properties and actual routed disconnected-window refusals",
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
+          "symbol": "Constructed named spectrum controls/properties and actual routed disconnected-window refusals",
+          "sha256": "5FC458F9AA92ED3D24354ACB8BBDEB4EBB37CC2F968833C1A2AEF52DAB60E2CD"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.View.cs",
+          "symbol": "Constructed named spectrum controls/properties and actual routed disconnected-window refusals",
+          "sha256": "B7D8E01139E0E190F7BBDFBA5973AE012B55B56547BF3FDC78702D0B157F2E35"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.cs",
+          "symbol": "Constructed named spectrum controls/properties and actual routed disconnected-window refusals",
+          "sha256": "025C5824B534894B311B6AF36963182831EB0F663FD84AAC0D2399520E08FF0F"
+        }
+      ],
+      "proofs": [],
+      "note": "No observation-specific native check; remains OPEN.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
       "observationId": "FQ15-3F95C93169BF",
       "implementation": [
         {
@@ -613,12 +652,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed named spectrum controls/properties and actual routed disconnected-window refusals",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed named spectrum controls/properties and actual routed disconnected-window refusals",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -652,12 +691,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed named spectrum controls/properties and actual routed disconnected-window refusals",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed named spectrum controls/properties and actual routed disconnected-window refusals",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -691,12 +730,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed named spectrum controls/properties and actual routed disconnected-window refusals",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed named spectrum controls/properties and actual routed disconnected-window refusals",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -730,12 +769,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed named spectrum controls/properties and actual routed disconnected-window refusals",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed named spectrum controls/properties and actual routed disconnected-window refusals",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -769,12 +808,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed named spectrum controls/properties and actual routed disconnected-window refusals",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed named spectrum controls/properties and actual routed disconnected-window refusals",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -808,12 +847,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed named spectrum controls/properties and actual routed disconnected-window refusals",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed named spectrum controls/properties and actual routed disconnected-window refusals",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -847,12 +886,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed named spectrum controls/properties and actual routed disconnected-window refusals",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed named spectrum controls/properties and actual routed disconnected-window refusals",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -886,12 +925,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed named spectrum controls/properties and actual routed disconnected-window refusals",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed named spectrum controls/properties and actual routed disconnected-window refusals",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -925,12 +964,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed named spectrum controls/properties and actual routed disconnected-window refusals",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed named spectrum controls/properties and actual routed disconnected-window refusals",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -964,12 +1003,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed named spectrum controls/properties and actual routed disconnected-window refusals",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed named spectrum controls/properties and actual routed disconnected-window refusals",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -1003,12 +1042,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed named spectrum controls/properties and actual routed disconnected-window refusals",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed named spectrum controls/properties and actual routed disconnected-window refusals",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -1042,12 +1081,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed named spectrum controls/properties and actual routed disconnected-window refusals",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed named spectrum controls/properties and actual routed disconnected-window refusals",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -1081,12 +1120,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed named spectrum controls/properties and actual routed disconnected-window refusals",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed named spectrum controls/properties and actual routed disconnected-window refusals",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -1120,12 +1159,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed named spectrum controls/properties and actual routed disconnected-window refusals",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed named spectrum controls/properties and actual routed disconnected-window refusals",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -1159,12 +1198,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed named spectrum controls/properties and actual routed disconnected-window refusals",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed named spectrum controls/properties and actual routed disconnected-window refusals",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -1198,12 +1237,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed named spectrum controls/properties and actual routed disconnected-window refusals",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed named spectrum controls/properties and actual routed disconnected-window refusals",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -1237,12 +1276,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed named spectrum controls/properties and actual routed disconnected-window refusals",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed named spectrum controls/properties and actual routed disconnected-window refusals",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -1276,12 +1315,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed named spectrum controls/properties and actual routed disconnected-window refusals",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed named spectrum controls/properties and actual routed disconnected-window refusals",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -1315,12 +1354,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed named spectrum controls/properties and actual routed disconnected-window refusals",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed named spectrum controls/properties and actual routed disconnected-window refusals",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -1354,12 +1393,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed named spectrum controls/properties and actual routed disconnected-window refusals",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed named spectrum controls/properties and actual routed disconnected-window refusals",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -1393,12 +1432,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed named spectrum controls/properties and actual routed disconnected-window refusals",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed named spectrum controls/properties and actual routed disconnected-window refusals",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -1432,12 +1471,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed named spectrum controls/properties and actual routed disconnected-window refusals",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed named spectrum controls/properties and actual routed disconnected-window refusals",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -1471,12 +1510,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed named spectrum controls/properties and actual routed disconnected-window refusals",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed named spectrum controls/properties and actual routed disconnected-window refusals",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -1510,12 +1549,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed named spectrum controls/properties and actual routed disconnected-window refusals",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed named spectrum controls/properties and actual routed disconnected-window refusals",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -1549,12 +1588,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed named spectrum controls/properties and actual routed disconnected-window refusals",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed named spectrum controls/properties and actual routed disconnected-window refusals",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -1588,12 +1627,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed named spectrum controls/properties and actual routed disconnected-window refusals",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed named spectrum controls/properties and actual routed disconnected-window refusals",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -1627,12 +1666,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed named spectrum controls/properties and actual routed disconnected-window refusals",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed named spectrum controls/properties and actual routed disconnected-window refusals",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -1666,12 +1705,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed named spectrum controls/properties and actual routed disconnected-window refusals",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed named spectrum controls/properties and actual routed disconnected-window refusals",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -1705,12 +1744,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed named spectrum controls/properties and actual routed disconnected-window refusals",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed named spectrum controls/properties and actual routed disconnected-window refusals",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -1744,12 +1783,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed named spectrum controls/properties and actual routed disconnected-window refusals",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed named spectrum controls/properties and actual routed disconnected-window refusals",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -1783,12 +1822,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed named spectrum controls/properties and actual routed disconnected-window refusals",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed named spectrum controls/properties and actual routed disconnected-window refusals",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -1822,12 +1861,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed named spectrum controls/properties and actual routed disconnected-window refusals",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed named spectrum controls/properties and actual routed disconnected-window refusals",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -1861,12 +1900,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed named spectrum controls/properties and actual routed disconnected-window refusals",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed named spectrum controls/properties and actual routed disconnected-window refusals",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -1900,12 +1939,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed named spectrum controls/properties and actual routed disconnected-window refusals",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed named spectrum controls/properties and actual routed disconnected-window refusals",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -1939,12 +1978,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed named spectrum controls/properties and actual routed disconnected-window refusals",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed named spectrum controls/properties and actual routed disconnected-window refusals",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -1978,12 +2017,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed named spectrum controls/properties and actual routed disconnected-window refusals",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed named spectrum controls/properties and actual routed disconnected-window refusals",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -2017,12 +2056,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed named spectrum controls/properties and actual routed disconnected-window refusals",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed named spectrum controls/properties and actual routed disconnected-window refusals",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -2056,12 +2095,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed named spectrum controls/properties and actual routed disconnected-window refusals",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed named spectrum controls/properties and actual routed disconnected-window refusals",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -2095,12 +2134,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed named spectrum controls/properties and actual routed disconnected-window refusals",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed named spectrum controls/properties and actual routed disconnected-window refusals",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -2134,12 +2173,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed named spectrum controls/properties and actual routed disconnected-window refusals",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed named spectrum controls/properties and actual routed disconnected-window refusals",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -2173,12 +2212,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed named spectrum controls/properties and actual routed disconnected-window refusals",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed named spectrum controls/properties and actual routed disconnected-window refusals",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -2212,12 +2251,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed named spectrum controls/properties and actual routed disconnected-window refusals",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed named spectrum controls/properties and actual routed disconnected-window refusals",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -2251,12 +2290,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed named spectrum controls/properties and actual routed disconnected-window refusals",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed named spectrum controls/properties and actual routed disconnected-window refusals",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -2290,12 +2329,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed named spectrum controls/properties and actual routed disconnected-window refusals",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed named spectrum controls/properties and actual routed disconnected-window refusals",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -2329,12 +2368,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed named spectrum controls/properties and actual routed disconnected-window refusals",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed named spectrum controls/properties and actual routed disconnected-window refusals",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -2368,12 +2407,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed named spectrum controls/properties and actual routed disconnected-window refusals",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed named spectrum controls/properties and actual routed disconnected-window refusals",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -2407,12 +2446,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed named spectrum controls/properties and actual routed disconnected-window refusals",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed named spectrum controls/properties and actual routed disconnected-window refusals",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -2446,12 +2485,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed named spectrum controls/properties and actual routed disconnected-window refusals",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed named spectrum controls/properties and actual routed disconnected-window refusals",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -2485,12 +2524,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed named spectrum controls/properties and actual routed disconnected-window refusals",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed named spectrum controls/properties and actual routed disconnected-window refusals",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -2524,12 +2563,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed named spectrum controls/properties and actual routed disconnected-window refusals",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed named spectrum controls/properties and actual routed disconnected-window refusals",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -2563,12 +2602,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed named spectrum controls/properties and actual routed disconnected-window refusals",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed named spectrum controls/properties and actual routed disconnected-window refusals",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -2602,12 +2641,51 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed named spectrum controls/properties and actual routed disconnected-window refusals",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed named spectrum controls/properties and actual routed disconnected-window refusals",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
+          "symbol": "Constructed named spectrum controls/properties and actual routed disconnected-window refusals",
+          "sha256": "5FC458F9AA92ED3D24354ACB8BBDEB4EBB37CC2F968833C1A2AEF52DAB60E2CD"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.View.cs",
+          "symbol": "Constructed named spectrum controls/properties and actual routed disconnected-window refusals",
+          "sha256": "B7D8E01139E0E190F7BBDFBA5973AE012B55B56547BF3FDC78702D0B157F2E35"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.cs",
+          "symbol": "Constructed named spectrum controls/properties and actual routed disconnected-window refusals",
+          "sha256": "025C5824B534894B311B6AF36963182831EB0F663FD84AAC0D2399520E08FF0F"
+        }
+      ],
+      "proofs": [],
+      "note": "No observation-specific native check; remains OPEN.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-F95421050019",
+      "implementation": [
+        {
+          "path": "FamilyQuant/SecondaryWindowView.cs",
+          "symbol": "Constructed named spectrum controls/properties and actual routed disconnected-window refusals",
+          "sha256": "5DDABCDF5F47F3CBCC271B0F04EB20CE51BA12353DD117C1A3EDE8684A742CDE"
+        },
+        {
+          "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
+          "symbol": "Constructed named spectrum controls/properties and actual routed disconnected-window refusals",
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
+          "symbol": "Constructed named spectrum controls/properties and actual routed disconnected-window refusals",
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -2641,12 +2719,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed named spectrum controls/properties and actual routed disconnected-window refusals",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed named spectrum controls/properties and actual routed disconnected-window refusals",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -2680,7 +2758,7 @@
           "kind": "test",
           "target": "RunAssayRuntimeLedger",
           "assertion": "AS-spectrum-actions kind code control: every listed native value and branch check passed",
-          "artifact": "D:\\FamilyQuant-data\\out-assay\\m67-spectrum-actions-final-2\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-assay\\m72-spectrum-actions-2\\proofs.log",
           "inspectedBy": ""
         }
       ]
@@ -2694,7 +2772,7 @@
           "kind": "test",
           "target": "RunAssayRuntimeLedger",
           "assertion": "AS-spectrum-actions kind code fact: every listed native value and branch check passed",
-          "artifact": "D:\\FamilyQuant-data\\out-assay\\m67-spectrum-actions-final-2\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-assay\\m72-spectrum-actions-2\\proofs.log",
           "inspectedBy": ""
         }
       ]
@@ -2708,7 +2786,7 @@
           "kind": "test",
           "target": "RunAssayRuntimeLedger",
           "assertion": "AS-spectrum-actions kind handler: every listed native value and branch check passed",
-          "artifact": "D:\\FamilyQuant-data\\out-assay\\m67-spectrum-actions-final-2\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-assay\\m72-spectrum-actions-2\\proofs.log",
           "inspectedBy": ""
         }
       ]

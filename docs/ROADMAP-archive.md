@@ -152,6 +152,8 @@ Finished steps, moved here from docs/ROADMAP.md. The board shows them as green.
 | B10a | Core: complete tables for minimum tag lengths 7 to 15, stored with the result | M | 0.1 | 🟢 | B10b, B10c | Each length equals a run at that length alone; on master | OP | not started | 0% | 0% | T+0 |
 | B10c | Database gap screen: table by length, 7 to 15 | M | 0.5 | 🟢 | B10d | Both themes; every number read from Core | RS | not started | 0% | 0% | T+1 |
 | B10d | The chosen length drives the result, the CSV and the FASTA, and is stored in the project | M | 0.5 | B10c | B10e | Save, close and reopen keep the choice | RS | not started | 0% | 0% | T+1 |
+| B10b | Default length 8 in Core, tests, rule text and docs | L | 0.3 | 🟢 | B10e | Choosing 9 reproduces the B6 table byte for byte | OP | not started | 0% | 0% | T+0 |
+| B10e | Real project at the default length: screen, CSV and FASTA | L | 0.2 | 🟢 | R3a | Repeats byte for byte; inspected in both themes | RS | not started | 0% | 0% | T+0 |
 
 ### W2 Port gaps found by the proofs
 
@@ -171,4 +173,27 @@ Finished steps, moved here from docs/ROADMAP.md. The board shows them as green.
 | N6i | Spectrum window (195 rows, 130 of them waiting on the producer fix) | M | 0.5 | 🟢 | N6p | Each row proved or on the wording list | AS | not started | 0% | 0% | T+0 |
 | N6n | Help gaps (88 rows) | M | 0.5 | 🟢 | N6p | Each row proved or on the wording list | LK | not started | 0% | 0% | T+0 |
 | N6h | USearch window (224 rows) | M | 1 | 🟢 | N6p | Each row proved or on the wording list | AS | not started | 0% | 0% | T+1 |
+| N6l | Preview, lock and identity windows (71 rows) | M | 0.5 | 🟢 | N6p | Each row proved or on the wording list | FL | not started | 0% | 0% | T+1 |
+| N6j | Deck producers: the last five rows | L | 0.1 | 🟢 | N6p | Each row proved or on the wording list | AS | not started | 0% | 0% | T+0 |
+| N6k | Compute window (79 rows) | M | 0.5 | 🟢 | N6p | Each row proved or on the wording list | FL | not started | 0% | 0% | T+0 |
+| N6e | Main window: routes, dialogs and messages (158 rows) | M | 1 | 🟢 | N6p | Each row proved or on the wording list | SH | not started | 0% | 0% | T+1 |
+| N6f | Curation code (302 rows) | H | 1 | 🟢 | N6p | Each row proved or on the wording list | SH | not started | 0% | 0% | T+2 |
+| N6g | Curation screen (147 rows) | M | 0.5 | 🟢 | N6p | Each row proved or on the wording list | SH | not started | 0% | 0% | T+2 |
+| N6o | Report and CSV facts (19 rows) | L | 0.2 | 🟢 | N6p | Each row proved or on the wording list | SH | not started | 0% | 0% | T+3 |
+
+### W4 Look
+
+| ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
+|---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
+| C14a | Scaling at 100, 125 and 150% | L | 0.2 | 🟢 | C14e | Harness renders at each scale | LK | not started | 0% | 0% | T+0 |
+| C14b | Smallest window | L | 0.2 | 🟢 | C14e | Every screen usable at the smallest size | LK | not started | 0% | 0% | T+0 |
+| C14c | Tab order and visible focus | L | 0.2 | 🟢 | C14e | Whole flow by keyboard | LK | not started | 0% | 0% | T+0 |
+| C14d | Both themes, every screen | L | 0.2 | 🟢 | C14e | Renders inspected | LK | not started | 0% | 0% | T+0 |
+| C14e | Paulo's final look sign-off | L | 0 | 🟢 | R3a | Paulo's word | Paulo | not started | 0% | 0% | T+1 |
+
+### W6 Paper numbers (no release depends on these)
+
+| ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
+|---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
+| A5b | Shared-peptide effect through Compute full XIC, on Paulo's `.sepr2`: one Bothrops jararaca run on the species database, labelled as such | M | 0.3 | 🟢 | Paper numbers | Numbers exported by the program, with the label | EV | not started | 0% | 0% | T+2 |
 

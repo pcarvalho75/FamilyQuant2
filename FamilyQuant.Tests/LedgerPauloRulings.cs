@@ -1,0 +1,133 @@
+using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Text.Json;
+using System.Text.RegularExpressions;
+using System.Xml;
+using System.Xml.Linq;
+
+namespace FamilyQuant.Tests;
+
+internal static class LedgerPauloRulings
+{
+    internal const string Step = "Paulo-rulings";
+    internal const string Command = "--ledger-apply-rulings";
+    internal const string RulesPath = "D:/FamilyQuant-data/reviews/wording-rulings.md";
+    internal const string InputPath = "D:/FamilyQuant-data/reviews/wording-for-paulo.tsv";
+    internal const string LeftPath = "D:/FamilyQuant-data/reviews/wording-left-for-paulo.tsv";
+    internal const string FrozenRoot = "D:/FamilyQuant-data/out-shell/N3/source";
+    internal const string RulesSha256 = "D3C632398BF48334E08AC2FF31879E4D814865BB72D0AEE781E8EF029C70090B";
+    internal sealed record Input(int Line, string Lane, string Id, string OldText, string NewText, string Reason);
+    internal sealed record Decision(string Id, string Lane, string OldText, string NewText, string Rule, string Reason,
+        string WitnessAssembly = "", string WitnessSymbol = "", string WitnessTextSha256 = "", bool Closed = false);
+    internal sealed record Packet(int SchemaVersion, string Producer, string TsvArtifact, string RulesArtifact,
+        string TsvSha256, string RuleSourceSha256, List<Decision> Decisions);
+
+    internal static string Decode(string value)
+    {
+        for (int iteration = 0; iteration < 2; iteration++)
+        {
+            value = Regex.Replace(value, @"\\u([0-9a-fA-F]{4})", match => ((char)int.Parse(match.Groups[1].Value, NumberStyles.HexNumber, CultureInfo.InvariantCulture)).ToString());
+            value = value.Replace("\\r\\n", "\n", StringComparison.Ordinal).Replace("\\n", "\n", StringComparison.Ordinal)
+                .Replace("\\r", "\r", StringComparison.Ordinal).Replace("\\t", "\t", StringComparison.Ordinal);
+        }
+        return value;
+    }
+
+    internal static List<Input> ReadInputs(string path)
+    {
+        var records = ParseTsv(File.ReadAllText(path));
+        if (records.Count == 0 || !records[0].Fields.SequenceEqual(new[] { "lane", "row_id", "old_text", "new_text", "reason" }))
+            throw new InvalidDataException("Wording TSV must use lane, row_id, old_text, new_text, reason columns.");
+        return records.Skip(1).Where(record => record.Fields.Any(field => field.Length > 0)).Select(record =>
+            record.Fields.Count == 5 ? new Input(record.Line, record.Fields[0], record.Fields[1], Decode(record.Fields[2]), Decode(record.Fields[3]), record.Fields[4])
+                : new Input(record.Line, "", "", "", "", "Malformed TSV record: " + record.Fields.Count.ToString(CultureInfo.InvariantCulture) + " fields.")).ToList();
+    }
+
+    private static List<(int Line, List<string> Fields)> ParseTsv(string text)
+    {
+        var result = new List<(int, List<string>)>(); var fields = new List<string>(); var field = new StringBuilder();
+        bool quoted = false, atStart = true; int line = 1, start = 1;
+        for (int index = 0; index < text.Length; index++)
+        {
+            char value = text[index];
+            if (quoted)
+            {
+                if (value == '"') { if (index + 1 < text.Length && text[index + 1] == '"') { field.Append('"'); index++; } else quoted = false; }
+                else { field.Append(value); if (value == '\n') line++; }
+                continue;
+            }
+            if (atStart && value == '"') { quoted = true; atStart = false; continue; }
+            if (value == '\t') { fields.Add(field.ToString()); field.Clear(); atStart = true; }
+            else if (value is '\r' or '\n')
+            {
+                if (value == '\r' && index + 1 < text.Length && text[index + 1] == '\n') index++;
+                fields.Add(field.ToString()); field.Clear(); result.Add((start, fields)); fields = new(); atStart = true; line++; start = line;
+            }
+            else { field.Append(value); atStart = false; }
+        }
+        if (quoted) throw new InvalidDataException("Unterminated quoted TSV field.");
+        if (field.Length > 0 || fields.Count > 0) { fields.Add(field.ToString()); result.Add((start, fields)); }
+        return result;
+    }
+
+    internal static Decision Evaluate(Input input, FeatureLedger.Observation? row, Func<string, LedgerRulingLiveText.Match> live)
+    {
+        Decision Left(string reason) => new(input.Id, input.Lane, input.OldText, input.NewText, "", reason);
+        if (row == null) return Left("Unknown or malformed observation ID.");
+        if (FeatureLedger.IsApprovedDrop(row)) return Left("Approved DROP is not a wording ruling.");
+        if (row.Kind is "export/storage fact" or "format/export") return Left("Export/storage and format/export rows require execution.");
+        if (LedgerRulingLiveText.Normalize(input.OldText) == LedgerRulingLiveText.Normalize(input.NewText)) return Left("Identical old/new text belongs to the text tool.");
+        if (string.IsNullOrWhiteSpace(input.NewText) || !input.NewText.Any(char.IsLetterOrDigit)) return Left("New text is empty, whitespace or bare punctuation/newline.");
+        if (input.NewText.Contains("<No exact current value captured>", StringComparison.OrdinalIgnoreCase)
+            || input.NewText.TrimStart().StartsWith('<')) return Left("New text is a placeholder, not captured user text.");
+        if (!OldFactMatches(row, input.OldText)) return Left("Old text does not identify the frozen observation's fact.");
+        if (IsStyleOrSetter(row, out string styleReason))
+            return new(input.Id, input.Lane, input.OldText, input.NewText, "2", styleReason, Closed: true);
+        if (row.Detail.StartsWith("Style.", StringComparison.Ordinal) || row.Detail.StartsWith("Setter.", StringComparison.Ordinal))
+            return Left(styleReason);
+        if (row.Kind is not ("option/copy" or "tooltip" or "help fact" or "help page" or "code fact")
+            && !(row.Kind == "column" && row.Detail.Contains(".Header = ", StringComparison.Ordinal)))
+            return Left("Behavior/control/handler/binding row is outside wording rules.");
+        string rule = Regex.IsMatch(input.OldText, @"\bLayer\s+\d+\b", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant) ? "3" : "1";
+        var match = live(input.NewText);
+        if (!match.Found) return Left("New text is not present in the compiled App/Core or resolved current Help.");
+        return new(input.Id, input.Lane, input.OldText, input.NewText, rule, "Recorded Paulo wording ruling; live text witness retained; independent sample required.",
+            match.AssemblyName, match.Symbol, match.TextSha256, true);
+    }
+
+    private static bool OldFactMatches(FeatureLedger.Observation row, string old)
+    {
+        string detail = row.Detail; int equals = detail.IndexOf(" = ", StringComparison.Ordinal);
+        if (equals >= 0) detail = detail[(equals + 3)..];
+        else if (detail.StartsWith("@\"", StringComparison.Ordinal) && detail.EndsWith('"')) detail = detail[2..^1].Replace("\"\"", "\"", StringComparison.Ordinal);
+        else if (detail.StartsWith('"')) { try { detail = JsonSerializer.Deserialize<string>(detail) ?? ""; } catch (JsonException) { return false; } }
+        string fact = LedgerRulingLiveText.Normalize(Decode(detail)), prior = LedgerRulingLiveText.Normalize(old);
+        return fact.Length > 0 && (fact == prior || prior.Contains(fact, StringComparison.Ordinal));
+    }
+
+    internal static bool IsStyleOrSetter(FeatureLedger.Observation row, out string reason)
+    {
+        reason = "Rule 2 requires an anchored frozen Style or visual Setter row.";
+        if (!row.Source.EndsWith(".xaml", StringComparison.Ordinal) || !row.Detail.StartsWith("Style.", StringComparison.Ordinal) && !row.Detail.StartsWith("Setter.", StringComparison.Ordinal)) return false;
+        string path = Path.Combine(FrozenRoot, row.Source);
+        if (!File.Exists(path)) { reason = "Frozen style source unavailable."; return false; }
+        var document = XDocument.Load(path, LoadOptions.SetLineInfo);
+        string type = row.Detail[..row.Detail.IndexOf('.')]; int equals = row.Detail.IndexOf(" = ", StringComparison.Ordinal);
+        string property = row.Detail[(row.Detail.IndexOf('.') + 1)..equals], expected = row.Detail[(equals + 3)..];
+        var nodes = document.Descendants().Where(node => node.Name.LocalName == type && node.Attributes().Any(attribute => attribute.Name.LocalName == property
+            && attribute.Value == expected && (((IXmlLineInfo)attribute).LineNumber == row.Line || ((IXmlLineInfo)node).LineNumber == row.Line))).ToArray();
+        if (nodes.Length != 1) { reason = "Frozen style/setter anchor is missing or ambiguous."; return false; }
+        var visual = new HashSet<string>(new[] { "Background", "Foreground", "BorderBrush", "BorderThickness", "FontFamily", "FontSize", "FontWeight", "FontStyle",
+            "TextDecorations", "Cursor", "Opacity", "Margin", "Padding", "HorizontalAlignment", "VerticalAlignment", "HorizontalContentAlignment", "VerticalContentAlignment",
+            "TextAlignment", "TextWrapping", "CornerRadius", "FocusVisualStyle", "Template", "ContentTemplate", "Width", "Height", "MinWidth", "MinHeight", "MaxWidth", "MaxHeight",
+            "SnapsToDevicePixels", "UseLayoutRounding" }, StringComparer.Ordinal);
+        if (nodes[0].DescendantsAndSelf().Any(node => node.Name.LocalName == "EventSetter"
+            || node.Name.LocalName == "Setter" && !visual.Contains(node.Attribute("Property")?.Value ?? "")))
+        { reason = "Style/setter also changes behavior or an unsupported property."; return false; }
+        reason = "Paulo Rule 2: anchored style/setter changes appearance only; current theme accepted."; return true;
+    }
+}

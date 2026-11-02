@@ -37,6 +37,16 @@ internal static partial class Program
             Button Button(Window window, string text) => WalkTree(window).OfType<Button>().Single(button => button.Content as string == text);
             var oldRemove = Button(old, "Remove selected locks"); var remove = Button(current, "Remove selected locks");
             var oldClose = Button(old, "Close"); var close = Button(current, "Close");
+            var wording = new Dictionary<int, string>();
+            for (int line = 99; line <= 109; line++) wording[line] = LockManagerViewModel.Explanation;
+            foreach (int line in new[] { 139, 140 }) wording[line] = remove.ToolTip?.ToString() ?? "[No current tooltip]";
+            foreach (int line in new[] { 151, 152 }) wording[line] = close.ToolTip?.ToString() ?? "[No current tooltip]";
+            foreach (int line in new[] { 180, 181 }) wording[line] = grid.ToolTip?.ToString() ?? "[No current tooltip]";
+            for (int column = 0; column < 4; column++)
+                foreach (int line in new[] { 190 + column * 10, 191 + column * 10 }) wording[line] = SecondaryHeaderTip(grid.Columns[column]);
+            // The last source column starts at 221 rather than 220.
+            wording[221] = wording[222] = SecondaryHeaderTip(grid.Columns[3]);
+            SecondaryWording(output, "locks-all-" + theme, source, wording, includeUnchanged: true);
             add(source, 78, 78, "native lock-manager window title", old.Title, current.Title, old.Title == current.Title, "LockManagerWindow.Title");
             foreach (var item in new[] { (129, (FrameworkElement)oldRemove, (FrameworkElement)remove), (144, oldClose, close), (168, oldGrid, grid) })
                 add(source, item.Item1, item.Item1, "native lock-manager control is reachable", item.Item2.GetType().Name, item.Item3.GetType().Name,

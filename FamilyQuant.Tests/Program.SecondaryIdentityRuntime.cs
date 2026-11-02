@@ -84,6 +84,12 @@ internal static partial class Program
             add("FamilyQuant/IdentityScanWindow.cs", 79, 79, "native Save figure caption", oldSave.Content, save.Content, Equals(oldSave.Content, save.Content), "IdentityScanWindow Save figure caption");
             var oldReport = WalkTree(old).OfType<TextBox>().Single(box => box.Text == report);
             var newReport = WalkTree(current).OfType<TextBox>().Single(box => box.Text == report);
+            var words = new Dictionary<int, string>();
+            for (int line = 51; line <= 54; line++) words[line] = ((IdentityScanViewModel)current.DataContext).Explanation;
+            for (int line = 55; line <= 57; line++) words[line] = new IdentityScanViewModel("copy", null, "", null).Explanation;
+            words[84] = words[85] = save.ToolTip?.ToString() ?? "[No current tooltip]";
+            words[107] = newReport.FontFamily.Source; words[117] = newReport.ToolTip?.ToString() ?? "[No current tooltip]";
+            SecondaryWording(output, "identity-all-" + theme, "FamilyQuant/IdentityScanWindow.cs", words, includeUnchanged: true);
             add("FamilyQuant/IdentityScanWindow.cs", 101, 101, "native identity report remains selectable and read-only with exact source report",
                 new { Text = oldReport.Text, ReadOnly = oldReport.IsReadOnly }, new { Text = newReport.Text, ReadOnly = newReport.IsReadOnly },
                 oldReport.IsReadOnly && newReport.IsReadOnly && oldReport.Text == newReport.Text && oldReport.IsVisible && newReport.IsVisible,

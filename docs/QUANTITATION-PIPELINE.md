@@ -55,9 +55,9 @@ The pass itself is `FamilyWorldPass` (`Quantitation/FamilyWorldPass.cs`, B5). It
 `FamilyWorld` with `HomologyMapper.Search`, at the shipped identity gate and the
 production de novo rule, with one reversed copy of every world protein as decoy.
 A hit credits the UniProt families of the winning proteins, never a protein.
-`FamilyWorldOptions` carries Paulo's decision D11 as its defaults: a tag needs at
-least 9 residues (`TooShort` otherwise, not searched), and only the families in
-scope can be credited; the other matched families are kept apart
+`FamilyWorldOptions` carries Paulo's decisions as its defaults: by default a tag
+needs at least 8 residues (D22, which replaced D11's 9; `TooShort` otherwise, not
+searched), and only the families in scope can be credited (D11); the other matched families are kept apart
 (`OutOfScope`, `OutOfScopeFamilies`). The scope defaults to the families the world
 was gathered for; a world that records none is refused. Until the clade fetch (B4)
 stores a world, `FamilyWorld.FromFile` builds one from a family-world file's entries
@@ -87,10 +87,12 @@ on the tag, the world and the mapper options, never on the minimum, so
 length's result by marking shorter tags `TooShort`; the known answers are searched
 once and read again per length. Compute stores the complete table for every length
 in `FamilyWorldOptions.LengthChoices` (7 to 15) in `FamilyWorldSummary.Lengths`, with
-a quick estimate per length in `LengthEstimates`; the top-level table stays the
-default 9. `ForLength` returns a stored table, so choosing a length needs no fetch
-and no Compute. `--family-world-lengths` checks on a real project that each stored
-table equals an analysis searched at that length alone.
+a quick estimate per length in `LengthEstimates`; the top-level table is the
+default length's, 8 (D22). `ForLength` returns a stored table, so choosing a length
+needs no fetch and no Compute; choosing 9 gives the table B6 stored at D11's 9, byte
+for byte. `--family-world-lengths` checks on a real project that each stored table
+equals an analysis searched at that length alone, and that choosing a reference
+project's length reproduces its stored table.
 
 ## Guide invariants and checks
 
