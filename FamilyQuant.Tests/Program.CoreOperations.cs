@@ -75,7 +75,7 @@ namespace FamilyQuant.Tests
             LongOperationCancellationTests(workDir);
         }
 
-        private sealed class InlineOperationProgress : IProgress<OperationProgress>
+        internal sealed class InlineOperationProgress : IProgress<OperationProgress>
         {
             private readonly Action<OperationProgress> report;
             public InlineOperationProgress(Action<OperationProgress> report) => this.report = report;

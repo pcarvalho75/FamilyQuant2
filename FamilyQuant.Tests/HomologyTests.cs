@@ -752,22 +752,7 @@ namespace FamilyQuant.Tests
             return "lengths differ";
         }
 
-        private static bool Throws<T>(Action action) where T : Exception
-        {
-            try
-            {
-                action();
-                return false;
-            }
-            catch (T)
-            {
-                return true;
-            }
-            catch (Exception)
-            {
-                return false;
-            }
-        }
+        private static bool Throws<T>(Action action) where T : Exception => Program.Throws<T>(action);
 
         /// <summary>Wraps the runner's Check so the assertions below read as assertions. The runner
         /// owns all output; nothing here writes to the console.</summary>
