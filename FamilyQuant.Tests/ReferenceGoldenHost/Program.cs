@@ -7,6 +7,7 @@ namespace FamilyQuant.Tests
         [STAThread]
         private static int Main(string[] args)
         {
+            if (args.Length > 0 && args[0] == AssayFigureGapSnapshot.Argument) return AssayFigureGapSnapshot.Run(args);
             if (args.Length > 0 && args[0] == ShellMetadataSnapshot.Argument) return ShellMetadataSnapshot.Run(args);
             if (args.Length > 0 && args[0] == AssayBuildOutputSnapshot.Argument) return AssayBuildOutputSnapshot.Run(args);
             if (args.Length > 0 && args[0] == "-cluster_fast") return Environment.GetEnvironmentVariable("FQ_ASSAY_NOOUTPUT_NATIVE") == "1" ? 0 : 2;

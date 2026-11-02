@@ -5,121 +5,121 @@
   "runs": [
     {
       "id": "native",
-      "command": "D:\\FamilyQuant-wt\\assay\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --ledger-assay-spectrum-properties D:/FamilyQuant-data/out-shell/N3/source D:/FamilyQuant-data/out-assay/m48-spectrum-properties-green-5 \u00222026-11-02 05:29:55 -0800\u0022",
-      "executedAt": "2026-11-02 05:29:55 -0800",
-      "commit": "926b91afe2373d804274758e2aaf0c67403d995b",
+      "command": "D:\\FamilyQuant-wt\\assay\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --ledger-assay-spectrum-properties D:/FamilyQuant-data/out-shell/N3/source D:/FamilyQuant-data/out-assay/m72-spectrum-properties-2 \u00222026-11-02 09:08:32 -0800\u0022",
+      "executedAt": "2026-11-02 09:08:32 -0800",
+      "commit": "809abcb7d2939624f557e42a1cb393102a6b0556",
       "artifacts": [
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\m48-spectrum-properties-green-5\\proofs.log",
-          "sha256": "FC33B720B717DB2A92109E4A953AB5EC1D059E785C0D18C45EF88B79EEFEA648"
+          "path": "D:\\FamilyQuant-data\\out-assay\\m72-spectrum-properties-2\\proofs.log",
+          "sha256": "2752DBC8AD07780EBE009FD9E73147BA9845D743402762E76EE877581F2C903D"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\m48-spectrum-properties-green-5\\actual-values.json",
-          "sha256": "018B15BE18D74F0984CFD1EB7C01A6BFF730E506D29D807F977DF0FE672EDE79"
+          "path": "D:\\FamilyQuant-data\\out-assay\\m72-spectrum-properties-2\\actual-values.json",
+          "sha256": "4D51E9F967E555FCBC10D2F211D5E651E64363F903D4AA9624D21029FE1F586B"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\m48-spectrum-properties-green-5\\executed\\FamilyQuant.Tests/AssayCacheSnapshot.cs",
+          "path": "D:\\FamilyQuant-data\\out-assay\\m72-spectrum-properties-2\\executed\\FamilyQuant.Tests/AssayCacheSnapshot.cs",
           "sha256": "9E0CD15CD1616F7A312E6A14209E745CF8C4ADB6EEF1A3D6125690A9602CCC1B"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\m48-spectrum-properties-green-5\\executed\\FamilyQuant.Tests/AssaySpectrumPropertyComparison.cs",
-          "sha256": "C9349E254A6CC44B272F1CC290F7DDAC35302BEF70CB09C7325AD3FB6E2E68FB"
+          "path": "D:\\FamilyQuant-data\\out-assay\\m72-spectrum-properties-2\\executed\\FamilyQuant.Tests/AssaySpectrumPropertyComparison.cs",
+          "sha256": "157C955F947789AA5BA5759EA3B37D762EA6A5E693AB49345BDE540C420CC036"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\m48-spectrum-properties-green-5\\executed\\FamilyQuant.Tests/AssayViewSnapshot.cs",
-          "sha256": "B55B7617464E2D37954B6DF30B83F090BD557C35D231AD786EE29A1CFA019411"
+          "path": "D:\\FamilyQuant-data\\out-assay\\m72-spectrum-properties-2\\executed\\FamilyQuant.Tests/AssayViewSnapshot.cs",
+          "sha256": "A6F968F2ADEF225690DBCD30373E1150E513E07B2D6D0CAC0C30AB4EA2B66001"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\m48-spectrum-properties-green-5\\executed\\FamilyQuant.Tests/FeatureLedgerEvidence.Reporting.cs",
+          "path": "D:\\FamilyQuant-data\\out-assay\\m72-spectrum-properties-2\\executed\\FamilyQuant.Tests/FeatureLedgerEvidence.Reporting.cs",
           "sha256": "8633DCBB14E8DBF1746A1FD771AD4E9404900EB68BA46690A31EFC8DEDFA247B"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\m48-spectrum-properties-green-5\\executed\\FamilyQuant.Tests/FeatureLedgerEvidence.cs",
+          "path": "D:\\FamilyQuant-data\\out-assay\\m72-spectrum-properties-2\\executed\\FamilyQuant.Tests/FeatureLedgerEvidence.cs",
           "sha256": "370FC41121F164A0C2495B260A62149FAD53F6F353203A97488423F2E6FA8738"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\m48-spectrum-properties-green-5\\executed\\FamilyQuant.Tests/Program.AssayCacheLedger.cs",
+          "path": "D:\\FamilyQuant-data\\out-assay\\m72-spectrum-properties-2\\executed\\FamilyQuant.Tests/Program.AssayCacheLedger.cs",
           "sha256": "7D3B175CC9824DA443DC369CF9C8983E1C59004FD15F080951BCEEF72B5449C9"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\m48-spectrum-properties-green-5\\executed\\FamilyQuant.Tests/Program.AssayRuntimeLedger.cs",
+          "path": "D:\\FamilyQuant-data\\out-assay\\m72-spectrum-properties-2\\executed\\FamilyQuant.Tests/Program.AssayRuntimeLedger.cs",
           "sha256": "24F4A0BACCC044156A198BDE8790FCDE12BF0A995641CA359FCB1AFEB3009CB7"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\m48-spectrum-properties-green-5\\executed\\FamilyQuant.Tests/Program.AssaySpectrumLedger.cs",
-          "sha256": "6E265264534268A308F5B31E2498B35D418F67FE19A35C0940A6254741D3F434"
+          "path": "D:\\FamilyQuant-data\\out-assay\\m72-spectrum-properties-2\\executed\\FamilyQuant.Tests/Program.AssaySpectrumLedger.cs",
+          "sha256": "03817FFBD5BCE472DFE27AE69711ACC589854EEFE783711170DA44EF848B77FB"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\m48-spectrum-properties-green-5\\executed\\FamilyQuant.Tests/Program.Commands.AssayLedger.cs",
-          "sha256": "2195075E01E8E0DF7F1CF6750186BE91CC40A93B340BB1521FBA72ECD438D31D"
+          "path": "D:\\FamilyQuant-data\\out-assay\\m72-spectrum-properties-2\\executed\\FamilyQuant.Tests/Program.Commands.AssayLedger.cs",
+          "sha256": "46DA029D0DBAA113B736A5E3B2BE7D29C486565EAE0063281F58F292ECC8112E"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\m48-spectrum-properties-green-5\\executed\\FamilyQuant/SecondaryWindowView.cs",
+          "path": "D:\\FamilyQuant-data\\out-assay\\m72-spectrum-properties-2\\executed\\FamilyQuant/SecondaryWindowView.cs",
           "sha256": "5DDABCDF5F47F3CBCC271B0F04EB20CE51BA12353DD117C1A3EDE8684A742CDE"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\m48-spectrum-properties-green-5\\executed\\FamilyQuant/SecondaryWindows.ViewModels.cs",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "path": "D:\\FamilyQuant-data\\out-assay\\m72-spectrum-properties-2\\executed\\FamilyQuant/SecondaryWindows.ViewModels.cs",
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\m48-spectrum-properties-green-5\\executed\\FamilyQuant/SpectrumComparisonWindow.Columns.cs",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "path": "D:\\FamilyQuant-data\\out-assay\\m72-spectrum-properties-2\\executed\\FamilyQuant/SpectrumComparisonWindow.Columns.cs",
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\m48-spectrum-properties-green-5\\executed\\FamilyQuant/SpectrumComparisonWindow.Exports.cs",
+          "path": "D:\\FamilyQuant-data\\out-assay\\m72-spectrum-properties-2\\executed\\FamilyQuant/SpectrumComparisonWindow.Exports.cs",
           "sha256": "5FC458F9AA92ED3D24354ACB8BBDEB4EBB37CC2F968833C1A2AEF52DAB60E2CD"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\m48-spectrum-properties-green-5\\executed\\FamilyQuant/SpectrumComparisonWindow.View.cs",
+          "path": "D:\\FamilyQuant-data\\out-assay\\m72-spectrum-properties-2\\executed\\FamilyQuant/SpectrumComparisonWindow.View.cs",
           "sha256": "B7D8E01139E0E190F7BBDFBA5973AE012B55B56547BF3FDC78702D0B157F2E35"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\m48-spectrum-properties-green-5\\executed\\FamilyQuant/SpectrumComparisonWindow.cs",
+          "path": "D:\\FamilyQuant-data\\out-assay\\m72-spectrum-properties-2\\executed\\FamilyQuant/SpectrumComparisonWindow.cs",
           "sha256": "025C5824B534894B311B6AF36963182831EB0F663FD84AAC0D2399520E08FF0F"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\m48-spectrum-properties-green-5\\executed\\frozen\\FamilyQuant/SpectrumComparisonWindow.cs",
+          "path": "D:\\FamilyQuant-data\\out-assay\\m72-spectrum-properties-2\\executed\\frozen\\FamilyQuant/SpectrumComparisonWindow.cs",
           "sha256": "76DD3FE0949EFB7239FDBBCF9163FB78F06EDE5F008D3CC6CC391D9734C88BF2"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\m48-spectrum-properties-green-5\\executed\\FamilyQuant.Tests.dll",
-          "sha256": "F28EC4631F79D85EECCE623041CCC67EF766728F09ABC6DF1C0088512727FECD"
+          "path": "D:\\FamilyQuant-data\\out-assay\\m72-spectrum-properties-2\\executed\\FamilyQuant.Tests.dll",
+          "sha256": "340CADF90108FDC93ECBEDA4777E4275F4DC2E9D66203CE394B3CE2C03283BA8"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\m48-spectrum-properties-green-5\\executed\\FamilyQuant.Core.dll",
-          "sha256": "DB70EE7370895507D5E4655EA9D4586F5934533B734633802A83A613DF4D3052"
+          "path": "D:\\FamilyQuant-data\\out-assay\\m72-spectrum-properties-2\\executed\\FamilyQuant.Core.dll",
+          "sha256": "153873484AA98E30EDB6E1F31266817151C151A909CCB575158FD78DCB93F3A0"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\m48-spectrum-properties-green-5\\executed\\FamilyQuant.dll",
-          "sha256": "E91B17B41080593B34A256F61B4CFF95E20CE04F53317F46D7E9B8F3F2A0B846"
+          "path": "D:\\FamilyQuant-data\\out-assay\\m72-spectrum-properties-2\\executed\\FamilyQuant.dll",
+          "sha256": "75DCE9DE8412A387840E3835C1F673B07121A21D958F9D5138175605491AB247"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\m48-spectrum-properties-green-5\\frozen-FamilyQuant.dll",
+          "path": "D:\\FamilyQuant-data\\out-assay\\m72-spectrum-properties-2\\frozen-FamilyQuant.dll",
           "sha256": "D764488C923945285E03B338E5A91BF28106A35B11AB465D8E2B23D125F03FD8"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\m48-spectrum-properties-green-5\\frozen-ReferenceGoldenHost.dll",
-          "sha256": "123A2BAE73A56083E081F5CB3A6453F3AD11D33FD2156134A0A4E99D3032F3DF"
+          "path": "D:\\FamilyQuant-data\\out-assay\\m72-spectrum-properties-2\\frozen-ReferenceGoldenHost.dll",
+          "sha256": "0507018AAEC2E98B9B3F658F7440B010F5BA52785D92940C29AF8F137127CD80"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\m48-spectrum-properties-green-5\\frozen-ReferenceGoldenHost.exe",
-          "sha256": "51F82870D579FC6E494B6501FCB3524F0B424DABAC5FD8F39548F0ED347B0DAD"
+          "path": "D:\\FamilyQuant-data\\out-assay\\m72-spectrum-properties-2\\frozen-ReferenceGoldenHost.exe",
+          "sha256": "0BADE6FFA491ABB6EC3AAB5BB50A2BBF06966133F96EAAE2659996A4E49EC22C"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\m48-spectrum-properties-green-5\\frozen-view.log",
-          "sha256": "F77B9F02D3651EBD7BA4425E8A5F3FEC1C30CFF244E160C3D5DA669A262BE92E"
+          "path": "D:\\FamilyQuant-data\\out-assay\\m72-spectrum-properties-2\\frozen-view.log",
+          "sha256": "DA9B7A4537A8AB78DDFD8B3C2E03EDA89663A158A0E823C8E336F8CA9211E1D0"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\m48-spectrum-properties-green-5\\property-anchors.json",
-          "sha256": "B421AA7F060A3AC1A38141A512F9555B2D58BAEFF8F9A3D02B03A846B2F69A48"
+          "path": "D:\\FamilyQuant-data\\out-assay\\m72-spectrum-properties-2\\property-anchors.json",
+          "sha256": "3C4FBEA06457D17B3203B7CAB073EDB742189575FFB4641789B0922405F71E5B"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\m48-spectrum-properties-green-5\\current-view\\properties.json",
-          "sha256": "6B18E2C8602AC644BD19CAA53B9FB8F868923C576EA9B001C861518CDEE04F36"
+          "path": "D:\\FamilyQuant-data\\out-assay\\m72-spectrum-properties-2\\current-view\\properties.json",
+          "sha256": "88DB48F37D9DF7B06E90EFB81C7EBCF733031EAFD400A542D2AD79E9D888612B"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-assay\\m48-spectrum-properties-green-5\\frozen-view\\properties.json",
-          "sha256": "F5D66132A77B4F220E4D30FDF3F125D4D223EACB8599B15C5C132E4A69393285"
+          "path": "D:\\FamilyQuant-data\\out-assay\\m72-spectrum-properties-2\\frozen-view\\properties.json",
+          "sha256": "D4AE967D1725BECBE7D6BF6561811172D16A2B6D2CB784BECE193872E33EE413"
         }
       ],
       "workingDirectory": "D:\\FamilyQuant-wt\\assay"
@@ -137,12 +137,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -176,12 +176,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -215,12 +215,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -254,12 +254,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -293,12 +293,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -332,12 +332,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -371,12 +371,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -410,12 +410,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -449,12 +449,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -488,12 +488,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -527,12 +527,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -566,12 +566,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -605,12 +605,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -644,12 +644,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -683,12 +683,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -722,12 +722,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -761,12 +761,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -800,12 +800,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -839,12 +839,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -878,12 +878,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -917,12 +917,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -956,12 +956,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -995,12 +995,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -1034,12 +1034,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -1073,12 +1073,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -1112,12 +1112,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -1151,12 +1151,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -1190,12 +1190,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -1229,12 +1229,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -1268,12 +1268,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -1307,12 +1307,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -1346,12 +1346,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -1385,12 +1385,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -1424,12 +1424,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -1463,12 +1463,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -1502,12 +1502,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -1541,12 +1541,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -1580,12 +1580,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -1619,12 +1619,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -1658,12 +1658,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -1697,12 +1697,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -1736,12 +1736,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -1775,12 +1775,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -1799,9 +1799,9 @@
         }
       ],
       "proofs": [],
-      "note": "Executed native value/refusal check, with the specific comparison recorded below.",
-      "kindReceiptId": "native-code-fact",
-      "compared": "FamilyQuant/SpectrumComparisonWindow.cs:272 \u0022says how it was obtained. In the CSV it is also called PrimaryQuantValue.\u0022; columns/QuantPrimaryAssigned/tooltip: frozen source argument equals frozen native property and current native property; expected The main quantity used in the plots. It can differ from the M\u002B0 XIC; the next column says how it was obtained. In the CSV it is also called PrimaryQuantValue.; actual The main quantity used in the plots. It can differ from the M\u002B0 XIC; the next column says how it was obtained. In the CSV it is also called PrimaryQuantValue."
+      "note": "No observation-specific native check; remains OPEN.",
+      "kindReceiptId": null,
+      "compared": null
     },
     {
       "observationId": "FQ15-3C16D5B57672",
@@ -1814,12 +1814,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -1853,12 +1853,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -1892,12 +1892,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -1931,12 +1931,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -1970,12 +1970,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -2009,12 +2009,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -2048,12 +2048,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -2087,12 +2087,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -2126,12 +2126,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -2165,12 +2165,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -2204,12 +2204,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -2243,12 +2243,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -2282,12 +2282,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -2321,12 +2321,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -2360,12 +2360,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -2399,12 +2399,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -2438,12 +2438,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -2477,12 +2477,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -2516,12 +2516,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -2555,12 +2555,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -2594,12 +2594,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -2633,12 +2633,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -2672,12 +2672,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -2711,12 +2711,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -2750,12 +2750,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -2789,12 +2789,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -2828,12 +2828,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -2867,12 +2867,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -2906,12 +2906,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -2945,12 +2945,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -2984,12 +2984,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -3023,12 +3023,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -3062,12 +3062,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -3101,12 +3101,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -3140,12 +3140,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -3179,12 +3179,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -3218,12 +3218,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -3257,12 +3257,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -3296,12 +3296,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -3335,12 +3335,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -3374,12 +3374,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -3413,12 +3413,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -3452,12 +3452,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -3491,12 +3491,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -3530,12 +3530,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -3569,12 +3569,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -3608,12 +3608,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -3647,12 +3647,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -3686,12 +3686,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -3725,12 +3725,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -3764,12 +3764,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -3803,12 +3803,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -3842,12 +3842,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -3881,12 +3881,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -3920,12 +3920,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -3959,12 +3959,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -3998,12 +3998,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -4037,12 +4037,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -4076,12 +4076,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -4115,12 +4115,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -4154,12 +4154,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -4193,12 +4193,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -4232,12 +4232,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -4271,12 +4271,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -4310,12 +4310,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -4349,12 +4349,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -4388,12 +4388,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -4427,12 +4427,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -4466,12 +4466,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -4505,12 +4505,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -4544,12 +4544,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -4583,12 +4583,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -4622,12 +4622,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -4661,12 +4661,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -4700,12 +4700,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -4739,12 +4739,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -4778,12 +4778,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -4817,12 +4817,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -4856,12 +4856,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -4895,12 +4895,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -4934,12 +4934,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -4973,12 +4973,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -5012,12 +5012,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -5051,12 +5051,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -5090,12 +5090,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -5129,12 +5129,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -5168,12 +5168,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -5207,12 +5207,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -5246,12 +5246,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -5285,12 +5285,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -5324,12 +5324,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -5363,12 +5363,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -5402,12 +5402,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -5441,12 +5441,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -5480,12 +5480,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -5519,12 +5519,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -5558,12 +5558,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -5597,12 +5597,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -5636,12 +5636,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -5675,12 +5675,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -5714,12 +5714,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -5753,12 +5753,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -5792,12 +5792,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -5831,12 +5831,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -5870,12 +5870,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -5909,12 +5909,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -5948,12 +5948,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -5987,12 +5987,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -6026,12 +6026,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -6065,12 +6065,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -6104,12 +6104,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -6143,12 +6143,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -6182,12 +6182,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -6221,12 +6221,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -6260,12 +6260,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -6299,12 +6299,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -6338,12 +6338,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -6377,12 +6377,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -6416,12 +6416,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -6455,12 +6455,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -6494,12 +6494,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -6533,12 +6533,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -6572,12 +6572,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -6611,12 +6611,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -6650,12 +6650,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -6689,12 +6689,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -6728,12 +6728,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -6767,12 +6767,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -6806,12 +6806,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -6845,12 +6845,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -6884,12 +6884,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -6923,12 +6923,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -6962,12 +6962,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -7001,12 +7001,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -7040,12 +7040,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -7079,12 +7079,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -7118,12 +7118,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -7157,12 +7157,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -7196,12 +7196,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -7235,12 +7235,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -7274,12 +7274,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -7313,12 +7313,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -7352,12 +7352,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -7391,12 +7391,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -7430,12 +7430,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -7469,12 +7469,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -7508,12 +7508,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -7547,12 +7547,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -7571,9 +7571,9 @@
         }
       ],
       "proofs": [],
-      "note": "Executed native value/refusal check, with the specific comparison recorded below.",
-      "kindReceiptId": "native-code-fact",
-      "compared": "FamilyQuant/SpectrumComparisonWindow.cs:271 \u0022The main quantity used in the plots. It can differ from the M\u002B0 XIC; the next column \u0022; columns/QuantPrimaryAssigned/tooltip: frozen source argument equals frozen native property and current native property; expected The main quantity used in the plots. It can differ from the M\u002B0 XIC; the next column says how it was obtained. In the CSV it is also called PrimaryQuantValue.; actual The main quantity used in the plots. It can differ from the M\u002B0 XIC; the next column says how it was obtained. In the CSV it is also called PrimaryQuantValue."
+      "note": "No observation-specific native check; remains OPEN.",
+      "kindReceiptId": null,
+      "compared": null
     },
     {
       "observationId": "FQ15-F9994D689821",
@@ -7586,12 +7586,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -7625,12 +7625,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -7664,12 +7664,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -7703,12 +7703,12 @@
         {
           "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "6369D811028F49B129EFAB8600E9670D5BBA7F29903398CC57805740997756DE"
+          "sha256": "BFE5E2524E44F619396E5FE22704314070163E6865DE70BE47CDDB600ED41280"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
           "symbol": "Constructed SpectrumComparisonWindow: exact column binding, header, tooltip setter and format",
-          "sha256": "8D68F54CB2F2B6BF1E4B09147CF8B06C3FEEB14D3D62152B613F4C99322BF8E4"
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
         },
         {
           "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
@@ -7742,7 +7742,7 @@
           "kind": "test",
           "target": "RunAssayRuntimeLedger",
           "assertion": "AS-spectrum-properties kind code fact: every listed native value and branch check passed",
-          "artifact": "D:\\FamilyQuant-data\\out-assay\\m48-spectrum-properties-green-5\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-assay\\m72-spectrum-properties-2\\proofs.log",
           "inspectedBy": ""
         }
       ]
