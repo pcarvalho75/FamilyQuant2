@@ -102,6 +102,7 @@ Finished steps, moved here from docs/ROADMAP.md. The board shows them as green.
 | C5 | Quantitation panel: Layers 2 and 3 merged; Full XIC first, PatternLab as a secondary source, options shown only when they apply | M | 1 | C1 | V3, C13, R2 | Every option kept; golden equal | RS | not started | 0% | 0% | T+3 |
 | C1 | Curation rebuilt: table always in view, actions in a side panel, no Controls and Data Browser tabs, no "Layer" words. USearch ID column hidden by default, data kept. Decoys hidden by default; Locus shows the accession. Long operations use the S6 host. `ClusterGenerationControl` (1,978 lines) replaced by a view model and a thin view | VH | 2 | 🟢 | C2, C5, V3, C13 | Pressing any action shows its result without changing view; every ledger row of the screen checked; golden equal | LK | not started | 0% | 0% | T+2 |
 | C2 | Family view: a table of families (name, proteins, shares, lock) with the proteins of the selected family beside it | H | 1.5 | 🟢 | N6, R2 | Selection, edit, lock and undo work on both tables; 39,996 families smooth | LK | not started | 0% | 0% | T+2 |
+| C13 | Wording pass: labels, tooltips (one or two sentences) and Help match the new screens | M | 1 | 🟢 | N6, C14 | Suite's tooltip checks green; no old screen named anywhere | LK | not started | 0% | 0% | T+1 |
 
 ### W6 Core rewrite: copy what is good, rewrite what is better
 
