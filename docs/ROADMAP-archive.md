@@ -206,3 +206,9 @@ Finished steps, moved here from docs/ROADMAP.md. The board shows them as green.
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
 | A5b | Shared-peptide effect through Compute full XIC, on Paulo's `.sepr2`: one Bothrops jararaca run on the species database, labelled as such | M | 0.3 | 🟢 | Paper numbers | Numbers exported by the program, with the label | EV | not started | 0% | 0% | T+2 |
 
+### W5 Release (Paulo publishes)
+
+| ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
+|---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
+| R3a | Code freeze: only review findings touch product code after this | L | 0 | 🟢 | R4a, R4b | Freeze noted; all lanes told | Orchestrator | not started | 0% | 0% | T+0 |
+
