@@ -26,6 +26,8 @@ internal static partial class Program
         "--evidence-task-header-audit",
         "--source-caption-check",
         "--shared-peptide-effect",
+        "--prove-denovo-results-export",
+        "--isolated-native-proof",
         "--prove-denovo-ledger",
         "--prove-denovo-runtime",
         "--prove-denovo-workflows",
