@@ -40,6 +40,14 @@ namespace FamilyQuant.Tests
         [STAThread]   // required: the UI smoke section constructs WPF controls
         private static int Main(string[] args)
         {
+            if (args.Length > 0 && args[0] == "--evidence-delivery") return EvidenceDeliveryCommand(args);
+            if (args.Contains("--test-evidence-delivery", StringComparer.Ordinal))
+            {
+                EnsureApplication();
+                EvidenceDeliveryFixtureTests(Path.Combine(Path.GetTempPath(), "FamilyQuant.Tests"));
+                Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
+                return failed == 0 ? 0 : 1;
+            }
             if (args.Length > 0 && args[0] == "--evidence-task-check") return EvidenceTaskCheck(args);
             if (args.Contains("--test-evidence-task", StringComparer.Ordinal))
             {
@@ -724,6 +732,7 @@ namespace FamilyQuant.Tests
             EvidenceFetchTests();
             EvidenceTaskTests();
             EvidenceClassifierTests();
+            EvidenceDeliveryFixtureTests(workDir);
             EvidenceArchitectureTests();
 
             Section("Nearest reviewed protein and the outside panel - never itself, gated, deterministic, offline");
