@@ -20,6 +20,7 @@ This is the navigation index for the current checkout. The roadmap owns unfinish
 | [Identity/deployment](N1-IDENTITY.md) | Separate application identity and the installed-profile check still owned by Paulo |
 | [Science gate](SCIENCE-GATE.md) | Recorded evidence-rule comparison, verdicts and limitations |
 | [Task discovery](EVIDENCE-TASK.md) | Header-derived taxonomy, functional keyword proposal and confirmed recipe contract |
+| [Quantitation panel](QUANTITATION-PANEL.md) | Source visibility, retained options and native checks |
 | [Study ownership](X9-STUDIES.md) | Small X9 move and retained screen dependencies |
 | [H1 findings](housekeeping/H1-NOTES.md) | Behavior decisions, protected work, ledger migration and remaining reuse scope |
 | [Vision](vision/VISION.md) | Fable's study: the family world proposal behind workstream W8, with the desk's corrections |
@@ -92,9 +93,9 @@ Invoke each flag with `& $testExe <flag>` after building. Dispatch and arity are
 | `--test-report-study-boundary` | Report-only operation ownership, retained Core models and screen dependencies |
 | `--report-study-snapshot <new-output-dir>` | Six native synthetic text/PNG fixtures for source-move parity |
 | `--test-architecture-group-split [output-dir]` | Native per-key split choices, retained bulk choice, unsplit members staying together, exact recipe replay and optional synthetic captures |
-| `--test-keyword-command` | Single keyword command, empty review, Cancel and accepted-setting retention |
 | `--test-curation-view` | Persistent table, accession/full identifier, hidden defaults and native annotation edit/Undo |
 | `--test-curation-layout` | Retained chrome, tooltips and ancestor-clipping regression |
+| `--test-quantitation-panel [output-dir]` | Full XIC first, conditional source options, retained selectors and both-theme native captures |
 | `--test-curation-quantitation` | Full-XIC column, denominator changes, shared policy and unavailable-TIC fallback |
 | `--shell-checks` | Shell navigation, saving, preferences, Build/Quantify integration and secondary views |
 | `--feature-ledger-check` | Inventory, row coverage, dispositions and guard regressions |

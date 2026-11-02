@@ -12,7 +12,12 @@ namespace FamilyQuant;
 
 public sealed partial class CurationQuantitationViewModel
 {
-    public PatternLabProject? CurrentPLP { get; set; }
+    private PatternLabProject? currentPLP;
+    public PatternLabProject? CurrentPLP
+    {
+        get => currentPLP;
+        set { if (Set(ref currentPLP, value)) NotifyPresentationState(); }
+    }
     public QuantitationProfile? CurrentProfile { get; set; }
     public NormalizationMode? DisplayedMode { get; set; }
     public SharedPeptidePolicy DisplayedSharedPolicy { get; set; } = SharedPeptidePolicy.FamilyUnique;
