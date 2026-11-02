@@ -85,16 +85,21 @@ internal static partial class Program
             "FamilyQuant.Tests/Program.CoreRuntimeLedger.cs", "FamilyQuant.Tests/Program.StorageRuntimeLedger.cs",
             "FamilyQuant.Tests/Program.Commands.CoreRuntimeLedger.cs", "FamilyQuant.Tests/FeatureLedgerEvidence.cs",
             "FamilyQuant.Tests/FeatureLedgerEvidence.Reporting.cs",
-        }).Distinct(StringComparer.Ordinal).OrderBy(path => path, StringComparer.Ordinal))
+        }).Concat(step == "Core-X5-runtime" ? new[]
+            { "FamilyQuant.Tests/Program.XicRuntimeLedger.cs", "FamilyQuant.Tests/Program.XicRuntimeKey.cs" } : Array.Empty<string>())
+            .Distinct(StringComparer.Ordinal).OrderBy(path => path, StringComparer.Ordinal))
             Retain(Path.Combine(root, path), path);
         foreach (string source in sources) Retain(Path.Combine(frozenRoot, source), Path.Combine("frozen", source));
         Retain(typeof(Program).Assembly.Location, "FamilyQuant.Tests.dll");
         Retain(typeof(ProjectStore).Assembly.Location, "FamilyQuant.Core.dll");
-        foreach (string path in Directory.GetFiles(output, "*", SearchOption.TopDirectoryOnly)
-            .Where(path => path != log && path != values).OrderBy(path => path, StringComparer.Ordinal))
+        foreach (string path in Directory.GetFiles(output, "*", SearchOption.AllDirectories)
+            .Where(path => path != log && path != values && !Path.GetRelativePath(output, path)
+                .StartsWith("executed" + Path.DirectorySeparatorChar, StringComparison.Ordinal))
+            .OrderBy(path => path, StringComparer.Ordinal))
             artifacts.Add(new(path, FeatureLedgerEvidence.Hash(path)));
         var mappings = implementations.OrderBy(path => path, StringComparer.Ordinal)
-            .Select(path => new FeatureLedgerEvidence.Implementation(path, "ProjectStore public reader/writer and split codecs",
+            .Select(path => new FeatureLedgerEvidence.Implementation(path,
+                step == "Core-X5-runtime" ? "FullXicComputer refusals and executed native stage branches" : "ProjectStore public reader/writer and split codecs",
                 FeatureLedgerEvidence.Hash(Path.Combine(root, path)))).ToList();
         var rows = cohort.Select(row =>
         {

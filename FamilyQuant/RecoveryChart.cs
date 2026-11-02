@@ -69,8 +69,8 @@ namespace FamilyQuant
             MinHeight = 300;
             Margin = new Thickness(0);
             ToolTip = "Top: recovered ion current read three ways, M+0, the PRIMARY estimate and an " +
-                      "unadjusted diagnostic. Bottom: TIC, isotope-series detector and primary estimate. " +
-                      "The detector is not peptide-FDR calibrated and does not partition the TIC into " +
+                      "unadjusted diagnostic. Bottom: TIC, isotope-series detector and primary estimate; " +
+                      "the detector is not peptide-FDR calibrated and does not partition the TIC into " +
                       "biological classes.";
         }
 
