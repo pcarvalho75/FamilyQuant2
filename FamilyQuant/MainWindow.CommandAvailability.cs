@@ -21,6 +21,7 @@ public partial class MainWindow
         MenuItemSaveFCF.IsEnabled = MenuItemSaveProject.IsEnabled = project;
         MenuItemFamilyPanel.IsEnabled = project && !Operations.IsBusy && !saveInProgress;
         MenuItemReportDetails.IsEnabled = project && !Operations.IsBusy && !saveInProgress;
+        MenuItemExportReport.IsEnabled = !Operations.IsBusy && !saveInProgress && !reportExportInProgress;
         MenuItemComputeXic.IsEnabled = project && familyOrHome;
         MenuItemClusteringDiagnostic.IsEnabled = CanRunClusteringDiagnostic;
         MenuItemSpectrumComparison.IsEnabled = spectrum;
