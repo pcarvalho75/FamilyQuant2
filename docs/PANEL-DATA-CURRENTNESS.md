@@ -6,6 +6,8 @@ Current, OutOfDate), IsOutOfDate and a short general Message.
 
 `Fingerprint(panel)` covers classification inputs: family keys, decisions,
 merge targets, domain accessions, subclass definitions and confirmed links.
+`FamilyFingerprint(panel)` excludes subclass definitions and is the stamp for
+family assignments. A subclass-only edit invalidates subclass labels only.
 Names, literature, notes and other printed text do not change membership and do
 not invalidate scientific assignments. List order does not change domain rules.
 
