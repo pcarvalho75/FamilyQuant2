@@ -81,10 +81,15 @@ internal static partial class Program
         Check("panel report refuses before relabelling old numbers by current UserID",
             RefusesMembership(() => ReportPanelSections.BuildFromResults(changed, manifest), "family membership"));
         Check("project composition figures refuse the same mismatched grouping",
-            RefusesMembership(() => StoredCompositionFigures.Build(manifest, new Dictionary<int, string> { [7] = "Second family", [9] = "First family" }, changed), "family membership"));
+            RefusesMembership(() => StoredCompositionFigures.Build(manifest, new Dictionary<int, string> { [7] = "Second family", [9] = "First family" }, project: changed), "family membership"));
         var results = new AnalyticsViewModel(rows, manifest, changed);
         Check("Results can open the project but refuses stale stored charts with a visible reason",
             results.BuildCompositionFigures().Count == 0 && results.Status.Contains("family membership", StringComparison.Ordinal));
+        Check("strict figure export propagates the stale membership refusal",
+            RefusesMembership(() => results.BuildCompositionFigures(strict: true), "family membership"));
+        Check("coverage-only stored figures also refuse a reused-UserID grouping",
+            RefusesMembership(() => StoredCompositionFigures.Build(new QuantManifest
+                { FamilyPeptideLocalization = manifest.FamilyPeptideLocalization }, project: changed), "family membership"));
         string reportFolder = Path.Combine(Path.GetTempPath(), "FamilyQuant.MembershipReport", Guid.NewGuid().ToString("N"));
         Check("report export refuses before rendering files or joining old family data",
             RefusesMembership(() => ReportProjectExporter.Build(rows, manifest, changed, reportFolder), "family membership")

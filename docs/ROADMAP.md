@@ -94,9 +94,7 @@ The program, not a script, puts every database protein in a panel family.
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| J2a | Assign every target protein to a panel family by evidence: the UniProt family of a toxin-annotated protein, else the nearest reviewed toxin, and where two panel families share a domain the panel's own Pfam lists decide by the accompanying domains; shown as proposals, applied as one undoable locked change | H | 3 | 🟢 | J2b, J2c, J3a | The rule in Help in general words; fixtures; the guard test finds no family, name or Pfam literal | EV | | 0 | 0 | |
-| J2b | Measure that rule: leave-one-out on the reviewed entries, and every difference from the 11-01 draft listed with its reason, both written by the program | M | 1 | J2a | J7a | Program CSV with the right rate; each draft difference has a reason | EV | | 0 | 0 | |
-| J2c | Per-protein audit export: accession, family, subclass, evidence used and why, for Ana to check in Excel | L | 0.5 | J2a | J6b | CSV opens in Excel under pt-BR and en-US with the same columns | T1 | | 0 | 0 | |
+| J2c | Per-protein audit export: accession, family, subclass, evidence used and why, for Ana to check in Excel | L | 0.5 | 🟢 | J6b | CSV opens in Excel under pt-BR and en-US with the same columns | T1 | | 0 | 0 | |
 
 ### W3 Subclasses
 
@@ -121,7 +119,6 @@ SVMP P-I, P-II, P-III and "class not resolved"; PLA2 D49 and K49; the parts of a
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| J6j | Supplement workbook: the program writes `<report>_supplement.xlsx` beside the Word document, one sheet per long table (per protein, per peptide, per run, others list, audit), each sheet named where the document cites it, following the section checkboxes | M | 1.5 | 🟢 | J6b | Workbook opens in Excel; sheets equal the program's CSV exports cell for cell; same bytes under pt-BR and en-US | SH | | 0 | 0 | |
 | J6k | The new figures in the report: composition with run error bars, the family and subclass ring, abundance against diversity, the signal sources, and coverage maps of the top proteins of each family, each with its automatic caption, as a figures builder FQResults' J6b calls | M | 1.5 | 🟢 | J6b | Each figure in the document is byte-equal to the program's own PNG export and its caption's numbers equal the figure's data | LK | | 0 | 0 | |
 | J6b | Results in the report: composition with toxin counts, per-run table, subclass and domain tables, figures, Database gap, quality rates, sensitivity and the others list | H | 3 | J2c, J4c, J5g, J6g | J6e | Every number in the document equals the program's own export; the document reads in about 30 to 40 pages and every long table goes to a companion `_supplement.xlsx` the program writes beside it | RS | | 0 | 0 | |
 | J6f | Report sections with checkboxes: the Export report screen lists every section and figure, each with a checkbox, all ticked by default; the choice is stored in the project and the document holds exactly the ticked parts | M | 1 | 🟢 | J6e | Native test: unticking a section removes it and only it; the choice survives reopen | SH | | 0 | 0 | |
@@ -131,8 +128,7 @@ SVMP P-I, P-II, P-III and "class not resolved"; PLA2 D49 and K49; the parts of a
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| J0 | Baseline run of today's program on the new data, with timings and a gap list against Ana's rules | M | 1.5 | 🟢 | J7a | RESULT J0 posted with every output path | OP | | 0 | 0 | |
-| J7a | The full run through the program: panel import, evidence, families, subclasses, Compute on three runs with de novo, family world, Database gap; project saved | H | 2 | J0, J2b | J7b | The project reopens; a second Compute repeats every number | OP | | 0 | 0 | |
+| J7a | The full run through the program: panel import, evidence, families, subclasses, Compute on three runs with de novo, family world, Database gap; project saved | H | 2 | 🟢 | J7b | The project reopens; a second Compute repeats every number | OP | | 0 | 0 | |
 | J7b | Interpretation, written into the project notes, quoting only the report's numbers, read against Ana's panel | M | 1.5 | J7a | J7c | A second reader checks every number against the report | OP | | 0 | 0 | |
 | J7c | Final export and delivery: every number in the document traced to a program export, then the Word report, the project and the family panel written to `C:/Users/paulo/Desktop/AnaG/Bjararaca/Relatorio`, nothing else in Ana's folders touched | M | 1 | J7b | J7d | Reviewer's trace table with 0 mismatches | OP | | 0 | 0 | |
 | J7d | Release 2.1.0, so Ana can make the same report, on Paulo's word | L | 0.5 | J7c | | The release names the version the report prints | EV | | 0 | 0 | |

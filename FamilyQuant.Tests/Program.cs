@@ -98,7 +98,6 @@ namespace FamilyQuant.Tests
             suite.Add(() => ResultsViewModelTests());
             suite.Add(() => DatabaseGapTests(Path.Combine(workDir, "database-gap")));
             suite.Add(() => DatabaseGapLengthTests(Path.Combine(workDir, "database-gap-lengths")));
-            suite.Add(() => FamilySensitivityTests(Path.Combine(workDir, "family-sensitivity")));
             suite.Add(() => ResultsPreservationTests(Path.Combine(workDir, "results-preservation")));
             suite.Add(() => ResultsTooltipTests());
             suite.Add(() => ResultsExportFactTests(Path.Combine(workDir, "results-export-facts")));
@@ -217,6 +216,7 @@ namespace FamilyQuant.Tests
             suite.Add(() => EvidenceStorageTests(workDir));
             suite.Add(() => DomainPositionTests(Path.Combine(workDir, "domain-positions")));
             suite.Add(() => PanelSpreadsheetTests(Path.Combine(workDir, "panel-spreadsheet")));
+            suite.Add(() => FamilySensitivityTests(Path.Combine(workDir, "family-sensitivity")));
             suite.Add(() => EvidenceFetchTests());
             suite.Add(() => EvidenceFetchAtomicTests());
             suite.Add(() => EvidenceCoverageTests());

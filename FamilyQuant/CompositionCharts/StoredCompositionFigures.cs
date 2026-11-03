@@ -7,17 +7,26 @@ namespace FamilyQuant;
 public static class StoredCompositionFigures
 {
     public static IReadOnlyList<AnalyticsFigure> Build(QuantManifest? manifest, IReadOnlyDictionary<int, string>? labels = null,
-        FamilyClusterFile? currentFamilies = null)
+        FamilyRingGrouping? grouping = null, FamilyClusterFile? project = null)
     {
-        if (manifest?.FamilyRunShares == null && manifest?.FamilySubclassParts == null) return Array.Empty<AnalyticsFigure>();
-        if (currentFamilies != null) FamilyStudyMembership.RequireCurrent(currentFamilies, manifest);
-        FamilyStudyMembership.RequireCompatible(manifest.FamilyRunShares, manifest.FamilyProteinCounts, manifest.FamilySubclassParts);
+        if (manifest?.FamilyRunShares == null && manifest?.FamilySubclassParts == null
+            && manifest?.FamilyPeptideLocalization == null) return Array.Empty<AnalyticsFigure>();
+        if (project != null) FamilyStudyMembership.RequireCurrent(project, manifest);
+        FamilyStudyMembership.RequireCompatible(manifest.FamilyRunShares, manifest.FamilyProteinCounts,
+            manifest.FamilySubclassParts, manifest.FamilyPeptideLocalization);
         var means = manifest.FamilyRunShares == null
             ? new FamilyCompositionData(Array.Empty<FamilyCompositionValue>(), "Per-run shares unavailable")
             : StoredCompositionChartData.FromRunShares(manifest.FamilyRunShares, manifest.FamilyProteinCounts, labels);
         var pooled = manifest.FamilySubclassParts == null ? null : StoredCompositionChartData.FromSubclassParts(manifest.FamilySubclassParts, labels);
+        if (pooled != null && manifest.FamilyRunShares != null && manifest.FamilyRunShares.Policy != manifest.FamilySubclassParts!.Policy)
+            throw new ArgumentException("Stored run shares and subclass parts use different shared-peptide policies.", nameof(manifest));
+        if (grouping == null && pooled != null && manifest.FamilyRunShares != null && project != null)
+            grouping = FamilyRingGrouping.FromReportThreshold(FamilyReportThreshold.Build(manifest.FamilyRunShares, project));
         var figures = FamilyCompositionFigures.Build(means, pooled);
         if (manifest.FamilyRunShares != null) figures.Add(FamilyCompositionFigures.BuildAbundanceDiversity(means));
+        if (pooled != null && grouping != null) figures.Add(FamilyCompositionFigures.BuildRing(pooled, grouping));
+        if (manifest.FamilyPeptideLocalization != null && project != null)
+            figures.AddRange(ProteinCoverageFigures.FromStored(manifest.FamilyPeptideLocalization, project));
         return figures;
     }
 }
