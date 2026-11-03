@@ -31,7 +31,7 @@ internal static partial class Program
         var dense = new ReportTable("exact-values", "Exact values", new[] { "Label", "Mean", "Spread", "Signal", "Ratio" },
             new IReadOnlyList<string>[]
             {
-                new[] { "First observation", "0.12345678901234568", "-0.23456789012345678", "123456789012345680", "1.23456789012345E-120" },
+                new[] { "Unexplained", "0.12345678901234568", "-0.23456789012345678", "123456789012345680", "1.23456789012345E-120" },
                 new[] { "Second observation", "unavailable", "0.0000000000000001", "987654321098765430", "9.87654321098765E+120" },
             }, "Exact stored values.");
         var mixed = new ReportTable("mixed-values", "Mixed availability", new[] { "Label", "Value", "Count", "Evidence" },
@@ -62,6 +62,7 @@ internal static partial class Program
                 Check("J34e all exact values and exponents remain unchanged " + culture,
                     printed.Length == original.Length && printed.Zip(original).All(pair => pair.First.SequenceEqual(pair.Second)));
                 var fits = new List<bool>();
+                var labelsFit = new List<bool>();
                 var sizes = new List<double>();
                 foreach (var table in tables)
                 {
@@ -72,18 +73,21 @@ internal static partial class Program
                             foreach (var paragraph in cell.Elements(w + "p"))
                             {
                                 string text = string.Concat(paragraph.Descendants(w + "t").Select(value => value.Value));
-                                if (!double.TryParse(text, NumberStyles.Float, CultureInfo.InvariantCulture, out _)) continue;
                                 var run = paragraph.Element(w + "r")!;
                                 double points = ((double?)run.Element(w + "rPr")?.Element(w + "sz")?.Attribute(w + "val") ?? 22) / 2;
                                 var face = new Typeface(new FontFamily("Calibri"), FontStyles.Normal, FontWeights.Normal, FontStretches.Normal);
-                                double measured = new FormattedText(text, CultureInfo.InvariantCulture, FlowDirection.LeftToRight,
+                                double Measure(string value) => new FormattedText(value, CultureInfo.InvariantCulture, FlowDirection.LeftToRight,
                                     face, points * 96 / 72, Brushes.Black, 1).WidthIncludingTrailingWhitespace * 72 / 96;
+                                if (column == 0) labelsFit.AddRange(text.Split(' ').Select(word => Measure(word) + 10 <= widths[column] / 20.0));
+                                if (!double.TryParse(text, NumberStyles.Float, CultureInfo.InvariantCulture, out _)) continue;
+                                double measured = Measure(text);
                                 fits.Add(measured + 10 <= widths[column] / 20.0);
                                 sizes.Add(points);
                             }
                 }
                 Check("J34e every complete exact number including signed exponents fits its cell " + culture, fits.Count == 10 && fits.All(value => value));
                 Check("J34e dense numeric text remains readable " + culture, sizes.All(size => size >= 8));
+                Check("J34e labels keep room beside the exact numeric columns " + culture, labelsFit.Count > 0 && labelsFit.All(value => value));
                 Check("J34e layout does not mutate source cells " + culture,
                     new[] { dense, mixed }.SelectMany(table => table.Rows).Zip(original).All(pair => pair.First.SequenceEqual(pair.Second)));
                 if (previous != null) Check("J34e exact-number document repeats across cultures", bytes.SequenceEqual(previous));

@@ -18,6 +18,7 @@ internal static class ReportTableLayout
         var weights = new double[widths.Length];
         var numericWidths = new int[widths.Length];
         var headingWidths = new int[widths.Length];
+        var narrativeWidths = new int[widths.Length];
         var numericColumns = new bool[widths.Length];
         for (int column = 0; column < widths.Length; column++)
         {
@@ -31,6 +32,10 @@ internal static class ReportTableLayout
             // including the exponent and sign. A missing-value label must not hide this minimum.
             numericWidths[column] = cells.SelectMany(cell => cell.Replace('\r', '\n').Split('\n')).Where(IsNumber)
                 .Select(line => line.Sum(character => character == '%' ? 200 : 115)).DefaultIfEmpty(0).Max();
+            // Retain bounded word room for labels while allowing long paths and prose to wrap.
+            int longestWord = cells.SelectMany(cell => cell.Split(new[] { ' ', '\t', '\r', '\n', '_', '-', '/' }, StringSplitOptions.RemoveEmptyEntries))
+                .Select(word => word.Length).DefaultIfEmpty(0).Max();
+            narrativeWidths[column] = Math.Max(900, Math.Min(longestWord, 14) * 110);
             headingWidths[column] = headingWord * 130 + 60;
             numericColumns[column] = numeric;
             weights[column] = numeric ? .15 : Math.Sqrt(Math.Clamp(Math.Max(longest, table.Columns[column].Length), 8, 100));
@@ -40,7 +45,7 @@ internal static class ReportTableLayout
         {
             for (int column = 0; column < widths.Length; column++)
             {
-                int content = numericColumns[column] ? 600 : 900;
+                int content = numericColumns[column] ? 600 : numericWidths[column] == 0 ? narrativeWidths[column] : 900;
                 if (numericWidths[column] > 0) content = Math.Max(content, Math.Max(numericWidths[column], headingWidths[column]));
                 widths[column] = 200 + (int)Math.Ceiling(content * halfPoints / 22.0);
             }
