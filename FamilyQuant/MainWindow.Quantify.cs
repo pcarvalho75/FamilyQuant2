@@ -6,6 +6,7 @@ public partial class MainWindow
 {
     private QuantifyControl? quantify;
     private string? openedDatabaseFileName;
+    private string? openedDatabaseFileSha256;
     public static Func<QuantManifest?, FamilyClusterFile?, ComputeXicViewModel>? QuantifyViewModelFactoryOverride { get; set; }
     private bool IsQuantifyVisible => quantify != null && GridApp.Children.Contains(quantify);
     private bool IsQuantifyBusy => quantify?.ViewModel.IsBusy == true;
@@ -16,6 +17,7 @@ public partial class MainWindow
         var model = QuantifyViewModelFactoryOverride?.Invoke(loadedManifest, loadedCuration)
             ?? new ComputeXicViewModel(AppVersion(), loadedManifest, loadedCuration, SharedDeNovoFilters());
         model.SourceDatabaseFileName = openedDatabaseFileName;
+        model.SourceDatabaseFileSha256 = openedDatabaseFileSha256;
         var control = new QuantifyControl(model);
         model.Operations = Operations;
         ClusterGenerationControl? heldProject = cgc;
