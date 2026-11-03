@@ -17,7 +17,7 @@ Render targets refer to `ScreenHarness.Screens`, captured with `--screens <outpu
 Release gate: `FamilyQuant.Tests.exe --feature-ledger-release-check` fails until every retained row is VERIFIED with evidence. Authorized DROP rows use APPROVED_DROP, which records a decision, not a completed UI removal. The normal quick suite permits OPEN rows during development. Regeneration resets retained rows to OPEN; preserve reviewed evidence when updating the scanner.
 
 Scan count: **5756**. Ledger rows: **5756**. Source files: **104**.
-Authorized DROP rows: **296**; proposed VERIFIED retained rows: **5434**; OPEN retained rows: **26**.
+Authorized DROP rows: **296**; proposed VERIFIED retained rows: **5440**; OPEN retained rows: **20**.
 
 | ID | Disposition | Kind | Frozen source | Fact or control | Planned check | State | Evidence |
 |---|---|---|---|---|---|---|---|
@@ -547,7 +547,7 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **5434**; OPEN r
 | FQ15-42B2EF081E9C | IMPROVE | code fact | FamilyQuant/ClusterGenerationControl.xaml.cs:404 | "Nothing was recalculated: no quantitation is loaded.\n\n" | render:03-curation | VERIFIED | evidence:Paulo-rulings:FQ15-42B2EF081E9C |
 | FQ15-39B03EC7BF17 | IMPROVE | code fact | FamilyQuant/ClusterGenerationControl.xaml.cs:405 | "The percentages come from a PatternLab project, and none has been opened yet, so " | render:03-curation | VERIFIED | evidence:Paulo-rulings:FQ15-39B03EC7BF17 |
 | FQ15-68A0AC5693EE | IMPROVE | code fact | FamilyQuant/ClusterGenerationControl.xaml.cs:406 | "there is nothing to divide.\n\n" | render:03-curation | VERIFIED | evidence:Paulo-rulings:FQ15-68A0AC5693EE |
-| FQ15-3980BE03A0C9 | IMPROVE | code fact | FamilyQuant/ClusterGenerationControl.xaml.cs:407 | "Next step: go to Layer 2 and press \"Load PLP File\"." | render:03-curation | OPEN | pending |
+| FQ15-3980BE03A0C9 | IMPROVE | code fact | FamilyQuant/ClusterGenerationControl.xaml.cs:407 | "Next step: go to Layer 2 and press \"Load PLP File\"." | render:03-curation | VERIFIED | evidence:Paulo-rulings:FQ15-3980BE03A0C9 |
 | FQ15-13EB7E8157BA | IMPROVE | code fact | FamilyQuant/ClusterGenerationControl.xaml.cs:408 | "Load a project first" | render:03-curation | VERIFIED | evidence:Paulo-rulings:FQ15-13EB7E8157BA |
 | FQ15-B2AA317C00F3 | IMPROVE | code fact | FamilyQuant/ClusterGenerationControl.xaml.cs:424 | "Recalculating family quantitation..." | render:03-curation | VERIFIED | evidence:Paulo-rulings:FQ15-B2AA317C00F3 |
 | FQ15-286D7AEE802F | IMPROVE | code fact | FamilyQuant/ClusterGenerationControl.xaml.cs:439 | "=== Recalculation Diagnostic ===" | render:03-curation | VERIFIED | evidence:Paulo-rulings:FQ15-286D7AEE802F |
@@ -581,7 +581,7 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **5434**; OPEN r
 | FQ15-7F3333208454 | IMPROVE | code fact | FamilyQuant/ClusterGenerationControl.xaml.cs:580 | "not carry each run's total ion current, and without that total there is nothing " | render:03-curation | VERIFIED | evidence:Paulo-rulings:FQ15-7F3333208454 |
 | FQ15-80DC3AC808B2 | IMPROVE | code fact | FamilyQuant/ClusterGenerationControl.xaml.cs:581 | "to express the families as a share of." | render:03-curation | VERIFIED | evidence:Paulo-rulings:FQ15-80DC3AC808B2 |
 | FQ15-096C041B090E | IMPROVE | code fact | FamilyQuant/ClusterGenerationControl.xaml.cs:582 | "Why: the project was exported before PatternLab wrote down which divisor it " | render:03-curation | VERIFIED | evidence:Paulo-rulings:FQ15-096C041B090E |
-| FQ15-6C89A4C935C2 | IMPROVE | code fact | FamilyQuant/ClusterGenerationControl.xaml.cs:583 | "used, so it carries no per-run totals at all. Re-exporting it from XQuant " | render:03-curation | OPEN | pending |
+| FQ15-6C89A4C935C2 | IMPROVE | code fact | FamilyQuant/ClusterGenerationControl.xaml.cs:583 | "used, so it carries no per-run totals at all. Re-exporting it from XQuant " | render:03-curation | VERIFIED | evidence:Paulo-rulings:FQ15-6C89A4C935C2 |
 | FQ15-273B67957802 | IMPROVE | code fact | FamilyQuant/ClusterGenerationControl.xaml.cs:584 | "records the divisor and every run's totals, and this mode then becomes " | render:03-curation | VERIFIED | evidence:Paulo-rulings:FQ15-273B67957802 |
 | FQ15-6EF740A445CE | IMPROVE | code fact | FamilyQuant/ClusterGenerationControl.xaml.cs:585 | "available." | render:03-curation | OPEN | pending |
 | FQ15-8BAA6A95F82C | IMPROVE | code fact | FamilyQuant/ClusterGenerationControl.xaml.cs:588 | "The project loaded correctly and the table is already showing numbers.\n\n" | render:03-curation | VERIFIED | evidence:Paulo-rulings:FQ15-8BAA6A95F82C |
@@ -771,7 +771,7 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **5434**; OPEN r
 | FQ15-3D068158C763 | IMPROVE | code fact | FamilyQuant/ClusterGenerationControl.xaml.cs:1518 | "read it, so poor descriptions limit how well they work." | render:03-curation | VERIFIED | evidence:Paulo-rulings:FQ15-3D068158C763 |
 | FQ15-90AC1398E15D | IMPROVE | code fact | FamilyQuant/ClusterGenerationControl.xaml.cs:1594 | "FamilyQuant \u00B7 How to read these numbers" | test:ShellLedgerComparisonCommand | VERIFIED | evidence:C1:FQ15-90AC1398E15D |
 | FQ15-F777A1A760B9 | IMPROVE | code fact | FamilyQuant/ClusterGenerationControl.xaml.cs:1608 | "Nothing was aligned: an alignment needs at least two sequences and " | render:03-curation | VERIFIED | evidence:Paulo-rulings:FQ15-F777A1A760B9 |
-| FQ15-3B5AD0429E7C | IMPROVE | code fact | FamilyQuant/ClusterGenerationControl.xaml.cs:1609 | " row(s) are selected.\n\n" | render:03-curation | OPEN | pending |
+| FQ15-3B5AD0429E7C | IMPROVE | code fact | FamilyQuant/ClusterGenerationControl.xaml.cs:1609 | " row(s) are selected.\n\n" | render:03-curation | VERIFIED | evidence:Paulo-rulings:FQ15-3B5AD0429E7C |
 | FQ15-3A5C5A831242 | IMPROVE | code fact | FamilyQuant/ClusterGenerationControl.xaml.cs:1610 | "Next step: open the Data Browser tab and select two or more rows, holding Ctrl to " | render:03-curation | VERIFIED | evidence:Paulo-rulings:FQ15-3A5C5A831242 |
 | FQ15-00A52E0607EE | IMPROVE | code fact | FamilyQuant/ClusterGenerationControl.xaml.cs:1611 | "pick them one by one or Shift to take a range." | render:03-curation | VERIFIED | evidence:Paulo-rulings:FQ15-00A52E0607EE |
 | FQ15-9DC640A163AE | IMPROVE | code fact | FamilyQuant/ClusterGenerationControl.xaml.cs:1612 | "Select at least two proteins" | render:03-curation | VERIFIED | evidence:Paulo-rulings:FQ15-9DC640A163AE |
@@ -2619,8 +2619,8 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **5434**; OPEN r
 | FQ15-80B447B85294 | KEEP | export/storage fact | FamilyQuant/DeNovo/Ms1EnvelopeDetector.cs:134 | "multiply charged resolved isotope series (more specific, not peptide-FDR calibrated)" | test:LedgerAssayCompareCommand | VERIFIED | evidence:AS-retained:FQ15-80B447B85294 |
 | FQ15-A809B858EE55 | KEEP | export/storage fact | FamilyQuant/DeNovo/Ms1EnvelopeDetector.cs:139 | "singly charged resolved isotope series (less specific, not peptide-FDR calibrated)" | test:LedgerAssayCompareCommand | VERIFIED | evidence:AS-retained:FQ15-A809B858EE55 |
 | FQ15-26A8A749B3B6 | KEEP | export/storage fact | FamilyQuant/DeNovo/Ms1EnvelopeDetector.cs:144 | "Weaker evidence is not a claim of non-peptide: in venom the natural peptides (the " | test:LedgerAssayCompareCommand | VERIFIED | evidence:Paulo-rulings:FQ15-26A8A749B3B6 |
-| FQ15-CBD8C887A5B3 | KEEP | export/storage fact | FamilyQuant/DeNovo/Ms1EnvelopeDetector.cs:145 | "bradykinin-potentiating peptides, the angiotensin-like fragments) are frequently singly " | test:LedgerAssayCompareCommand | OPEN | pending: execution evidence missing or stale |
-| FQ15-8ECD8B6595F3 | KEEP | export/storage fact | FamilyQuant/DeNovo/Ms1EnvelopeDetector.cs:146 | "charged, and this dataset contains identified charge-1 peptides." | test:LedgerAssayCompareCommand | OPEN | pending: execution evidence missing or stale |
+| FQ15-CBD8C887A5B3 | KEEP | export/storage fact | FamilyQuant/DeNovo/Ms1EnvelopeDetector.cs:145 | "bradykinin-potentiating peptides, the angiotensin-like fragments) are frequently singly " | test:LedgerAssayCompareCommand | VERIFIED | evidence:Paulo-rulings:FQ15-CBD8C887A5B3 |
+| FQ15-8ECD8B6595F3 | KEEP | export/storage fact | FamilyQuant/DeNovo/Ms1EnvelopeDetector.cs:146 | "charged, and this dataset contains identified charge-1 peptides." | test:LedgerAssayCompareCommand | VERIFIED | evidence:Paulo-rulings:FQ15-8ECD8B6595F3 |
 | FQ15-7797D0EC1F17 | KEEP | export/storage fact | FamilyQuant/DeNovo/Ms1EnvelopeDetector.cs:197 | "A RAW file path is required." | test:LedgerAssayCompareCommand | VERIFIED | evidence:AS-retained:FQ15-7797D0EC1F17 |
 | FQ15-B85B65F42CE1 | KEEP | export/storage fact | FamilyQuant/DeNovo/Ms1EnvelopeDetector.cs:207 | ": resolved isotope-series diagnostic answered from the cache (" | test:LedgerAssayCompareCommand | VERIFIED | evidence:AS-retained:FQ15-B85B65F42CE1 |
 | FQ15-2E287945BA54 | KEEP | export/storage fact | FamilyQuant/DeNovo/Ms1EnvelopeDetector.cs:208 | "N0" | test:LedgerAssayCompareCommand | VERIFIED | evidence:AS-retained:FQ15-2E287945BA54 |
@@ -5588,7 +5588,7 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **5434**; OPEN r
 | FQ15-5F8DD620BA18 | IMPROVE | code fact | FamilyQuant/USearch.xaml.cs:43 | "Next step: wait for the current run to finish. The buttons come back by themselves." | test:ShellBehaviour | VERIFIED | evidence:SH-behaviour:FQ15-5F8DD620BA18 |
 | FQ15-C6B03035EC8E | IMPROVE | code fact | FamilyQuant/USearch.xaml.cs:44 | "Already running" | render:02-build | VERIFIED | evidence:Paulo-rulings:FQ15-C6B03035EC8E |
 | FQ15-95FF9241616A | IMPROVE | code fact | FamilyQuant/USearch.xaml.cs:55 | "Working \u00B7 " | render:02-build | VERIFIED | evidence:Paulo-rulings:FQ15-95FF9241616A |
-| FQ15-A5848F93B253 | IMPROVE | code fact | FamilyQuant/USearch.xaml.cs:55 | " This runs USEARCH and cannot be interrupted; " | render:02-build | OPEN | pending |
+| FQ15-A5848F93B253 | IMPROVE | code fact | FamilyQuant/USearch.xaml.cs:55 | " This runs USEARCH and cannot be interrupted; " | render:02-build | VERIFIED | evidence:Paulo-rulings:FQ15-A5848F93B253 |
 | FQ15-7AC0BC9F0603 | IMPROVE | code fact | FamilyQuant/USearch.xaml.cs:56 | "the buttons come back when it finishes." | render:02-build | OPEN | pending |
 | FQ15-FEFB7367FD8C | IMPROVE | code fact | FamilyQuant/USearch.xaml.cs:79 | "Step 1 of 4 \u00B7 Pick a protein database and press \"Input a FASTA file\". That writes a " | render:02-build | VERIFIED | evidence:Paulo-rulings:FQ15-FEFB7367FD8C |
 | FQ15-5A8FC191A0CF | KEEP | format/export | FamilyQuant/USearch.xaml.cs:80 | "Family Cluster File (.fcf) beside it, which you then open with File \u00B7 Load Family " | test:FloaterBehaviourCommand | VERIFIED | evidence:FL-behaviour:FQ15-5A8FC191A0CF |
