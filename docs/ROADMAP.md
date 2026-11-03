@@ -66,15 +66,14 @@ The rerun of the full analysis with the scope "Toxin", "venom gland" (D39), so t
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| K2 | Rerun: Results, sensitivity and save; the change table posted (proteins and families that moved, the ten lectins, the new headline, subclass parts, others) | L | 0.3 | 🟢 | K4, K6 | `RESULT J7a2` with the change table | OP | | 0 | 0 | |
-| K4 | Science check, part 2: the rerun's headline numbers against the program's stored studies and exports; verdict on D39 | M | 0.4 | K2 | K6 | `APPROVED` on the rerun, or the changes it needs | GR | | 0 | 0 | |
+| K4 | Science check, part 2: the rerun's headline numbers against the program's stored studies and exports; verdict on D39 | M | 0.4 | 🟢 | K6 | `APPROVED` on the rerun, or the changes it needs | GR | | 0 | 0 | |
 
 ### W2 The interpretation
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
 | K5 | Interpretation drafted from the desk's outline, numbers left as marked places | M | 0.5 | 🟢 | K6 | The draft posted | OP | | 0 | 0 | |
-| K6 | Numbers filled from the rerun and written into the project's Report details through the program; project saved | L | 0.3 | K2, K4, K5 | K7, K10, K14 | `interpreted.fqproj` saved, with the source of every number | OP | | 0 | 0 | |
+| K6 | Numbers filled from the rerun and written into the project's Report details through the program; project saved | L | 0.3 | K4, K5 | K7, K10, K14 | `interpreted.fqproj` saved, with the source of every number | OP | | 0 | 0 | |
 | K7 | Second reader: every number in the interpretation matched to its cell in the program's exports | M | 0.4 | K6 | K17 | A table of number, source cell and match, with no mismatch | GR2 | | 0 | 0 | |
 
 ### W3 The report export works and is fast
@@ -87,9 +86,8 @@ The export failed on Ana's project (a figure read the on-screen palette from the
 | J41b | J41 reviewed and merged | L | 0.2 | J41a | J30c, J32c | Approved; gate green | FL | | 0 | 0 | |
 | J30b | The fixed export runs to the end on a copy of the full-run project through the real command | M | 0.5 | J41a | J30c | Word report and supplement written; times reported | RS | | 0 | 0 | |
 | J24c | Export progress on the full-run project: the longest gap between two steps named | L | 0.3 | 🟢 | K14 | `READY` names the longest gap and its step | SH | | 0 | 0 | |
-| J32c | Export timing on the full-run copy: the attribution step with the cache warm, its sub-steps timed | L | 0.3 | J41b | J32d, J39 | `READY` with the sub-step times before and after | T1 | | 0 | 0 | |
-| J32d | J32 reviewed and merged | L | 0.2 | J32c | K14 | Approved; gate green | T1 | | 0 | 0 | |
-| J39 | Cache the two source census searches as well, if J32c shows they cost more than a minute | M | 1 | J32c | | Byte-identical report data; the export time before and after | T1 | | 0 | 0 | |
+| J32d | J32 reviewed and merged | L | 0.2 | 🟢 | K14 | Approved; gate green | T1 | | 0 | 0 | |
+| J39 | Cache the two source census searches as well, if J32c shows they cost more than a minute | M | 1 | 🟢 | | Byte-identical report data; the export time before and after | T1 | | 0 | 0 | |
 | J36a | Delivery command built and tested on a small computed project: export, trace, project, panel, read-me, checks, nothing written outside its folder | M | 0.5 | 🟢 | J36b | Fixture run passes | RS | | 0 | 0 | |
 | J36b | Delivery rehearsal on the first full-run project into a staging folder | L | 0.3 | J36a | J36c | Summary with hashes and the trace's count | RS | | 0 | 0 | |
 | J36c | J36 reviewed and merged | L | 0.2 | J36b | K17 | Approved; gate green | RS | | 0 | 0 | |
