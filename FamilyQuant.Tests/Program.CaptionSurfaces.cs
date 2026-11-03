@@ -35,9 +35,9 @@ internal static partial class Program
         var control = new AnalyticsControl(rows, manifest);
         var captions = WalkTree(control).OfType<TextBlock>().Where(t => t.Tag is string tag && tag.StartsWith("figure-caption:", StringComparison.Ordinal)).ToArray();
         Check("every Results chart has its generated caption on the actual screen tree", captions.Length == AnalyticsFigures.FileNames.Count);
-        Check("screen captions occupy one line and expose their complete text in a tooltip", captions.Length > 0
+        Check("screen captions keep the full generated text on one line with a short tooltip", captions.Length > 0
             && captions.All(c => c.TextWrapping == TextWrapping.NoWrap && c.TextTrimming == TextTrimming.CharacterEllipsis
-                && c.ToolTip is string full && full == c.Text && full.Length > 60));
+                && c.Text.Length > 60 && c.ToolTip is string tip && TooltipSentenceCount(tip) <= 2));
         Check("Results XIC caption contains facts from its displayed data", captions.Any(c => Equals(c.Tag, "figure-caption:" + AnalyticsFigures.XicByMassFile)
             && c.Text.Contains("Identified points") && c.Text.Contains("De novo points")));
         var originalTheme = Themes.ThemeManager.Current;

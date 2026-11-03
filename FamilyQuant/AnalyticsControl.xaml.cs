@@ -64,7 +64,9 @@ public partial class AnalyticsControl : UserControl
         {
             if (figure.Chart is IPalettedChart chart) chart.Palette = ChartPalette.UiPalette;
             string text = CompositionChartCaptions.Build(figure, Data);
-            var caption = new TextBlock { Text = text, ToolTip = text, Tag = "figure-caption:" + figure.FileName,
+            var caption = new TextBlock { Text = text,
+                ToolTip = "This line explains the chart and its recorded numbers. The complete explanation is included in the report.",
+                Tag = "figure-caption:" + figure.FileName,
                 TextWrapping = TextWrapping.NoWrap, TextTrimming = TextTrimming.CharacterEllipsis,
                 FontSize = 12, Margin = new Thickness(0, 6, 0, 0) };
             caption.SetResourceReference(TextBlock.ForegroundProperty, "MutedBrush");

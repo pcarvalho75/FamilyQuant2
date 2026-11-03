@@ -69,3 +69,9 @@ the Results grid. The added assertion failed first at 20/1/0 with enum identifie
 21/0/0 with the interface labels. Release remained zero warnings/errors and the numeric CSV locale
 comparison passed. Logs: `D:/FamilyQuant-data/assay-j5e-policy-red.log`,
 `assay-j5e-policy-green.log` and the matching build logs.
+
+Gate correction: sensitivity content/actions live in the section's own ControlTemplate and name
+scope. The unchanged Results four-control inventory failed red at layout 171/1/0, then passed
+172/0/0. Results model checks passed 6/0/0 and sensitivity checks 25/0/0, including both themes,
+template ownership, the real calculate-button event, saved comparison and atomic failure behavior.
+Release remained zero warnings/errors. The layout assertion was not changed.

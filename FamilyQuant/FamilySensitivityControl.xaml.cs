@@ -13,10 +13,15 @@ public partial class FamilySensitivityControl : UserControl
     public FamilySensitivityControl(FamilySensitivityViewModel model)
     {
         ViewModel = model; InitializeComponent(); DataContext = model;
-        PropertyChangedEventManager.AddHandler(model, Changed, string.Empty); RefreshHeaders();
+        PropertyChangedEventManager.AddHandler(model, Changed, string.Empty); ApplyTemplate(); RefreshHeaders();
     }
     private void Changed(object? sender, PropertyChangedEventArgs args) => RefreshHeaders();
-    private void RefreshHeaders() { FirstColumn.Header = ViewModel.FirstHeader; SecondColumn.Header = ViewModel.SecondHeader; }
+    public override void OnApplyTemplate() { base.OnApplyTemplate(); RefreshHeaders(); }
+    private void RefreshHeaders()
+    {
+        if (Template?.FindName("SensitivityGrid", this) is DataGrid grid && grid.Columns.Count >= 5)
+        { grid.Columns[3].Header = ViewModel.FirstHeader; grid.Columns[4].Header = ViewModel.SecondHeader; }
+    }
     private async void CalculateClicked(object sender, RoutedEventArgs args) => await ViewModel.CalculateAsync(null, AppOperationHost.For(this));
     private async void ComparisonClicked(object sender, RoutedEventArgs args)
     {
