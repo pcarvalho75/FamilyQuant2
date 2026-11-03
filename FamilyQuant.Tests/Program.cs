@@ -390,6 +390,22 @@ namespace FamilyQuant.Tests
             suite.Add(() => BuildFamiliesScreenTests(workDir));
             suite.Add(() => QuantifyShellTests(workDir));
             suite.Add(() => SecondaryWindowTests(workDir));
+            suite.Section("Additional core and preservation fixture guards");
+            suite.Add(() => AssayBuildWorkflowGuardTests());
+            suite.Add(() => AssayFigureGapGuardTests());
+            suite.Add(() => AssaySpectrumPropertyTests());
+            suite.Add(() => AssaySpectrumActionTests());
+            suite.Add(() => AssayBuildPropertyTests());
+            suite.Add(() => AssaySpectrumExportGuardTests());
+            suite.AddWithApplication(() => AssaySpectrumRowIsolationTests(Array.Empty<string>(), workDir));
+            suite.Add(() => LedgerDeclarationComparisonTests());
+            suite.Add(() => LedgerMemberFactComparisonTests());
+            suite.Add(() => ShellLedgerComparisonTests());
+            suite.Add(() => LookRefreshCohortTests());
+            suite.Add(() => WordingTsvRoundTripCommand(new[] { "--test-wording-tsv",
+                Path.Combine(workDir, "wording-roundtrip-" + Guid.NewGuid().ToString("N")) }));
+            suite.Add(() => ShellSeproFixtureCheck(new[] { "--test-shell-sepro-fixture",
+                Path.Combine(workDir, "shell-sepro-" + Guid.NewGuid().ToString("N"), "fixture.sepr2") }, workDir));
             return suite;
         }
 
