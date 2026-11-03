@@ -38,6 +38,23 @@ This is exploratory calibration, not an FDR guarantee. Floor results are reused;
 only queries at genuinely tighter gates are searched again, with target-decoy
 competition recomputed so a previously suppressed opposing hit can win.
 
+The tag gate enumerates the original plus every permitted single rewrite, never
+compositions of rewrites. N/GG and Q/AG (both AG orders), K/Q, and one adjacent
+residue-order exchange are separate audited alternatives. Expansion splits the
+original residue weight; contraction sums its two weights; an order exchange
+moves each called residue's weight with it. Total confidence weight is preserved.
+Per-position accepted-source medians are percentages; a missing or all-zero
+profile uses uniform weights and reports that confidence was not used.
+
+The gate is the maximum ordered matched-weight/total-weight fraction over those
+variant windows. A conservative count bound with a positive-sum rounding margin
+permits the same lossless diagonal filter; the exact weighted comparison decides
+admission. Unsupported bounds use the complete scan. PAM always scores the
+original tag and only full original-length protein windows. The audit retains
+each gated protein's winning variant, rule, gate offset/span and weighted fraction
+separately from the scored PAM offset/substring. A protein too short for the
+original PAM query remains unavailable, even if a contracted gate variant fits.
+
 PAM30MS remains the original-query, full-window score. A gate can have another
 best alignment, as in the existing identity/PAM split. The tag option reports
 its gate variant and offset separately. Score tiers operate after target-decoy

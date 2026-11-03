@@ -39,12 +39,14 @@ namespace FamilyQuant.Homology
             HomologyOptions opts = (options ?? new HomologyOptions()).Clone();
             opts.Validate();
             bool calibrate = opts.Science?.QueryRole == HomologyQueryRole.DeNovo && opts.Science.DecoyGate?.Enabled == true;
+            bool tagErrors = opts.Science?.QueryRole == HomologyQueryRole.DeNovo && opts.Science.TagErrors?.Enabled == true;
             double nominalIdentity = opts.MinIdentity;
             if (calibrate)
             {
                 if (!double.IsFinite(nominalIdentity)) throw new ArgumentOutOfRangeException(nameof(opts.MinIdentity));
                 opts.MinIdentity = Math.Max(nominalIdentity, opts.Science!.DecoyGate!.MinimumSearchIdentity);
             }
+            if (tagErrors && !double.IsFinite(opts.MinIdentity)) throw new ArgumentOutOfRangeException(nameof(opts.MinIdentity));
 
             if (opts.Strategy == HomologySearchStrategy.SeedIndex && !database.HasSeedIndex)
             {
@@ -82,7 +84,9 @@ namespace FamilyQuant.Homology
             }
 
             PositionalIndex? positionalIndex = opts.Strategy != HomologySearchStrategy.SeedIndex
-                && queries.Any(q => q.Rejection == null && ShouldUseSeedIndex(q.Normalized, database, opts))
+                && (queries.Any(q => q.Rejection == null && ShouldUseSeedIndex(q.Normalized, database, opts))
+                    || tagErrors && opts.Strategy == HomologySearchStrategy.Auto && database.HasSeedIndex
+                        && database.Proteins.Count >= opts.BruteForceProteinLimit && !opts.KQEquivalent)
                 ? GetIndex(database, operation) : null;
             HomologyResult[] results = new HomologyResult[queries.Count];
 
@@ -145,8 +149,15 @@ namespace FamilyQuant.Homology
             bool useIndex = ShouldUseSeedIndex(peptide, database, options);
             var passed = new List<GateHit>();
             int candidatesExamined;
+            bool tagErrors = options.Science?.QueryRole == HomologyQueryRole.DeNovo && options.Science.TagErrors?.Enabled == true;
+            bool usedConfidence = false;
 
-            if (useIndex && options.Strategy != HomologySearchStrategy.SeedIndex)
+            if (tagErrors)
+            {
+                passed = TagGateProteins(peptide, database, options, operation, positionalIndex,
+                    out candidatesExamined, out useIndex, out usedConfidence);
+            }
+            else if (useIndex && options.Strategy != HomologySearchStrategy.SeedIndex)
             {
                 // A passing window has at most e mismatches. Each mismatch spoils at most
                 // three q-grams on its own diagonal. Exact gate checks follow this lossless filter.
@@ -185,7 +196,7 @@ namespace FamilyQuant.Homology
             bool hasDecoys = passed.Any(g => IsDecoy(g.ProteinIndex));
             bool decoysSuppressed = false, targetsSuppressed = false;
             var hits = new List<HomologyHit>();
-            bool containment = options.BestScoreOnly && passed.Any(g => g.ExactOffset >= 0)
+            bool containment = !tagErrors && options.BestScoreOnly && passed.Any(g => g.ExactOffset >= 0)
                 && TryContainmentScore(peptide, foldMap, out _)
                 // List.Sort is not stable for duplicate identifiers with equal score/offset.
                 // Keep the original complete hit list in that case, including its tie behavior.
@@ -245,28 +256,36 @@ namespace FamilyQuant.Homology
                 hits.RemoveRange(options.TopHitsPerPeptide, hits.Count - options.TopHitsPerPeptide);
             HomologyScienceAudit? audit = science ? new()
             {
-                Method = tier == null ? "Experimental gate audit" : "De novo integer PAM30MS tier after conservative target-decoy competition",
+                Method = tagErrors ? "De novo zero/one-rewrite confidence-weighted identity gate; original-tag full-window PAM30MS"
+                    + (tier == null ? "" : "; integer PAM score tier after target-decoy competition")
+                    : tier == null ? "Experimental gate audit" : "De novo integer PAM30MS tier after conservative target-decoy competition",
                 QueryRole = HomologyQueryRole.DeNovo, NominalIdentityGate = options.MinIdentity, AppliedIdentityGate = options.MinIdentity,
                 GateTargetProteins = passed.Count(g => !IsDecoy(g.ProteinIndex)), GateDecoyProteins = passed.Count(g => IsDecoy(g.ProteinIndex)),
-                BestTargetGateIdentity = passed.Where(g => !IsDecoy(g.ProteinIndex)).Select(g => (double?)(g.Identities / (double)peptide.Length)).Max(),
-                BestDecoyGateIdentity = passed.Where(g => IsDecoy(g.ProteinIndex)).Select(g => (double?)(g.Identities / (double)peptide.Length)).Max(),
+                BestTargetGateIdentity = passed.Where(g => !IsDecoy(g.ProteinIndex)).Select(g => (double?)GateFraction(g)).Max(),
+                BestDecoyGateIdentity = passed.Where(g => IsDecoy(g.ProteinIndex)).Select(g => (double?)GateFraction(g)).Max(),
                 ProteinsBeforeTier = beforeTier, ProteinsAfterTier = afterTier, ProteinsAfterTopCut = hits.Count,
                 MaximumPamScoreDrop = tier?.MaximumPamScoreDrop,
+                UsedLocalConfidence = usedConfidence,
+                GateAlignments = tagErrors ? passed.Where(g => g.Alignment != null).Select(g => g.Alignment!).ToArray() : null,
+                GateVariant = passed.Where(g => g.Alignment != null).OrderByDescending(GateFraction).Select(g => g.Alignment!.Variant).FirstOrDefault(),
+                GateVariantOffset = passed.Where(g => g.Alignment != null).OrderByDescending(GateFraction).Select(g => (int?)g.Alignment!.Offset).FirstOrDefault(),
             } : null;
             return new HomologyResult(raw, peptide, null, hits, decoysSuppressed, targetsSuppressed,
                 candidatesExamined, useIndex, audit);
 
             bool IsDecoy(int index) => database.Proteins[index].Id.StartsWith(options.DecoyLabel, StringComparison.Ordinal);
+            double GateFraction(GateHit gate) => gate.WeightedIdentity ?? gate.Identities / (double)peptide.Length;
             void AddHit(GateHit gate, int offset, int score)
             {
                 HomologyProtein protein = database.Proteins[gate.ProteinIndex];
                 hits.Add(new HomologyHit(protein.Id, offset, score,
                     HomologyScorer.IdentityAt(peptide, protein.Sequence, offset, foldMap) / (double)peptide.Length,
-                    gate.Identities / (double)peptide.Length, protein.Sequence.Substring(offset, peptide.Length), IsDecoy(gate.ProteinIndex)));
+                    GateFraction(gate), protein.Sequence.Substring(offset, peptide.Length), IsDecoy(gate.ProteinIndex)));
             }
         }
 
-        private readonly record struct GateHit(int ProteinIndex, int Identities, int ExactOffset);
+        private readonly record struct GateHit(int ProteinIndex, int Identities, int ExactOffset,
+            double? WeightedIdentity = null, HomologyGateAlignment? Alignment = null);
 
         // Match the original comparison, including floating-point boundary rounding and NaN.
         // Multiplication/ceiling is not interchangeable with identities/(double)length.
@@ -511,7 +530,7 @@ namespace FamilyQuant.Homology
         private static PositionalIndex GetIndex(HomologyDatabase database, OperationContext? operation)
             => new PositionalIndex(database, operation);
 
-        private sealed class PositionalIndex
+        private sealed partial class PositionalIndex
         {
             private readonly PostingBucket[] postings = new PostingBucket[1 << 15];
             private readonly record struct PostingBucket(uint[]? Compact, ulong[]? Wide)

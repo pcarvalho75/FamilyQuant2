@@ -121,4 +121,5 @@ public sealed record HomologyScienceAudit
     public bool UsedLocalConfidence { get; init; }
     public string? GateVariant { get; init; }
     public int? GateVariantOffset { get; init; }
+    public IReadOnlyList<HomologyGateAlignment>? GateAlignments { get; init; }
 }
