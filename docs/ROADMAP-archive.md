@@ -449,6 +449,8 @@ Paulo agreed these at the restart, 2026-11-01.
 | J27b | One total per panel family: the program computes and stores the per-panel-family totals when several families share a panel family (contract posted) | M | 1 | 🟢 | J27c | A fixture's stored totals credit a shared peptide once | FL | | 0 | 0 | |
 | J27c | The per-family briefs and new exports read those totals; the headline keeps its unit (D40) | M | 0.5 | J27b | J27d | Old exports unchanged; new exports added | FL | | 0 | 0 | |
 | J33c | J33 reviewed and merged | L | 0.2 | 🟢 | J37a, J40 | Approved; gate green | T2 | | 0 | 0 | |
+| J37a | A confirmed family link keeps a short note on why, saved with the project and printed in the report's method | L | 0.5 | 🟢 | J37b | Survives save and reopen; appears in the method table | T2 | | 0 | 0 | |
+| J37b | J37 reviewed and merged | L | 0.2 | J37a | | Approved; gate green | T2 | | 0 | 0 | |
 
 ### W4 Release 2.1.0 on GitHub
 
