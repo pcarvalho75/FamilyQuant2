@@ -22,7 +22,7 @@ internal static partial class Program
 
     private static int MeasureReportWindowless(string[] args)
     {
-        if (args.Length != 3) throw new ArgumentException("Use --measure-report-windowless <project> <new-output>.");
+        if (args.Length is < 3 or > 4) throw new ArgumentException("Use --measure-report-windowless <project> <new-output> [primary-cache-to-copy].");
         string root = Path.GetFullPath(@"C:\tmp\familyquant\FQTerra1");
         string prefix = root + Path.DirectorySeparatorChar;
         string project = Path.GetFullPath(args[1]), output = Path.GetFullPath(args[2]);
@@ -31,6 +31,9 @@ internal static partial class Program
             || new[] { project, output, cache }.Any(p => !p.StartsWith(prefix, StringComparison.OrdinalIgnoreCase))
             || !File.Exists(project)) throw new IOException("All inputs and outputs must be inside the owned remote worker folder.");
         if (Directory.Exists(output) || File.Exists(output)) throw new IOException("The output folder must be new.");
+        string? seed = args.Length == 4 ? Path.GetFullPath(args[3]) : null;
+        if (seed != null && (!seed.StartsWith(prefix, StringComparison.OrdinalIgnoreCase) || !Directory.Exists(seed)))
+            throw new IOException("The primary cache must be inside the owned remote worker folder.");
         Directory.CreateDirectory(output);
         string logPath = Path.Combine(output, "measurement.log");
         using var log = new StreamWriter(logPath) { AutoFlush = true };
@@ -43,13 +46,31 @@ internal static partial class Program
         string original = FileFingerprint.Sha256(project);
         try
         {
+            if (seed != null)
+            {
+                Directory.CreateDirectory(cache);
+                string[] entries = Directory.GetFiles(seed, "*.fqhits", SearchOption.TopDirectoryOnly);
+                if (entries.Length == 0) throw new IOException("No primary cache entry is available to seed this comparison.");
+                foreach (string entry in entries)
+                {
+                    string source = Path.GetFullPath(entry), destination = Path.GetFullPath(Path.Combine(cache, Path.GetFileName(entry)));
+                    if (!source.StartsWith(prefix, StringComparison.OrdinalIgnoreCase)
+                        || !destination.StartsWith(prefix, StringComparison.OrdinalIgnoreCase))
+                        throw new IOException("Cache copy is outside the owned remote worker folder.");
+                    File.Copy(source, destination, false);
+                    if (FileFingerprint.Sha256(source) != FileFingerprint.Sha256(destination))
+                        throw new InvalidDataException("Primary cache copy differs from its source.");
+                }
+                Log("Copied and verified " + entries.Length.ToString(CultureInfo.InvariantCulture) + " primary cache entries");
+            }
             EnsureApplication(); // Initializes resources but does not show a window.
             Log("Reading project copy"); var saved = ProjectStore.ReadFqproj(project);
             Log("Read " + saved.quant.Count.ToString(CultureInfo.InvariantCulture) + " stored rows");
             var measurements = new List<object>();
             Dictionary<string, string>? firstCsv = null;
+            Dictionary<string, string>? firstDiskCsv = null;
             string? firstWorkbookHash = null;
-            bool csvEqual = false, bothReportsComplete = true, workbookEqual = false;
+            bool csvEqual = false, diskCsvEqual = false, bothReportsComplete = true, workbookEqual = false;
             for (int round = 0; round < 2; round++)
             {
                 string name = round == 0 ? "cold" : "warm";
@@ -61,7 +82,12 @@ internal static partial class Program
                     saved.fcf.ReportDetails, saved.fcf.ReportInputProvenance, operation: operation, homologyCacheDirectory: cache);
                 bool hit = progress.Events.Any(e => e.Stage == "report-primary-cache" && e.Message.Contains("hit", StringComparison.OrdinalIgnoreCase));
                 bool miss = progress.Events.Any(e => e.Stage == "report-primary-cache" && e.Message.Contains("miss", StringComparison.OrdinalIgnoreCase));
-                if ((round == 0 && !miss) || (round == 1 && !hit)) throw new InvalidDataException("Expected cold miss and warm hit were not observed.");
+                if ((round == 0 && seed == null && !miss) || (round == 0 && seed != null && !hit) || (round == 1 && !hit))
+                    throw new InvalidDataException("Expected primary cache state was not observed.");
+                bool censusHit = progress.Events.Any(e => e.Stage == "report-census-cache" && e.Message.Contains("hit", StringComparison.OrdinalIgnoreCase));
+                bool censusMiss = progress.Events.Any(e => e.Stage == "report-census-cache" && e.Message.Contains("miss", StringComparison.OrdinalIgnoreCase));
+                if (seed != null && ((round == 0 && !censusMiss) || (round == 1 && !censusHit)))
+                    throw new InvalidDataException("Expected source census cache state was not observed.");
                 string report = Path.Combine(folder, "report.docx"); string? workbookFailure = null;
                 try { ReportProjectExporter.Write(export, report); }
                 catch (InvalidDataException ex) when (ex.Message.Contains("exceeds Excel's text limit", StringComparison.Ordinal))
@@ -71,16 +97,21 @@ internal static partial class Program
                 bothReportsComplete &= complete;
                 var csv = export.CsvExports.ToDictionary(kv => kv.Key,
                     kv => Convert.ToHexString(SHA256.HashData(Encoding.UTF8.GetBytes(kv.Value))), StringComparer.Ordinal);
+                var diskCsv = csv.Keys.ToDictionary(key => key, key => FileFingerprint.Sha256(Path.Combine(folder, "report_data", key)), StringComparer.Ordinal);
                 string? workbookHash = complete ? FileFingerprint.Sha256(workbook) : null;
-                if (round == 0) { firstCsv = csv; firstWorkbookHash = workbookHash; }
+                if (round == 0) { firstCsv = csv; firstDiskCsv = diskCsv; firstWorkbookHash = workbookHash; }
                 else
                 {
                     csvEqual = firstCsv != null && firstCsv.Count == csv.Count
                         && firstCsv.All(kv => csv.TryGetValue(kv.Key, out string? value) && value == kv.Value);
+                    diskCsvEqual = firstDiskCsv != null && firstDiskCsv.Count == diskCsv.Count
+                        && firstDiskCsv.All(kv => diskCsv.TryGetValue(kv.Key, out string? value) && value == kv.Value);
                     workbookEqual = firstWorkbookHash != null && firstWorkbookHash == workbookHash;
                 }
                 var measurement = new { name, cacheHit = hit, cacheMiss = miss,
                     primarySeconds = progress.Seconds("report-primary-start", "report-primary-end"),
+                    censusCacheSeconds = progress.OptionalSeconds("report-census-cache-start", "report-census-cache-end"),
+                    censusCacheHit = censusHit, censusCacheMiss = censusMiss,
                     identifiedCensusSeconds = progress.Seconds("report-census-identified-start", "report-census-identified-end"),
                     deNovoCensusSeconds = progress.Seconds("report-census-denovo-start", "report-census-denovo-end"),
                     totalSeconds = clock.Elapsed.TotalSeconds, csvCount = csv.Count, reportComplete = complete,
@@ -89,10 +120,10 @@ internal static partial class Program
             }
             bool unchanged = original == FileFingerprint.Sha256(project);
             var result = new { projectSha256 = original, inputUnchanged = unchanged, csvBytesEqual = csvEqual,
-                bothReportsComplete, workbookBytesEqual = workbookEqual, measurements };
+                diskCsvBytesEqual = diskCsvEqual, bothReportsComplete, workbookBytesEqual = workbookEqual, measurements };
             File.WriteAllText(Path.Combine(output, "measurement.json"), JsonSerializer.Serialize(result, new JsonSerializerOptions { WriteIndented = true }));
             Log(JsonSerializer.Serialize(result));
-            if (!unchanged || !csvEqual || (bothReportsComplete && !workbookEqual)) return 1;
+            if (!unchanged || !csvEqual || !diskCsvEqual || (bothReportsComplete && !workbookEqual)) return 1;
             return bothReportsComplete ? 0 : 2;
         }
         catch (Exception ex)
