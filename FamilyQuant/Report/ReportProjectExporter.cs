@@ -103,8 +103,8 @@ public static class ReportProjectExporter
             exports.Add("family_sources_support.csv", ReportStudyExports.SourceSupport(sourceWorld));
         var layout = ReportSupplementLayout.Apply(document, exports);
         exports.Add(FigureLayout.DetailFileName, studies.FigureDetailsCsv);
-        return new(layout.Document, exports, figures) { SupplementSheets = layout.Sheets.Concat(studies.FigureDetailSheets)
-            .Concat(ReportCaptionTrace.Build(document, figureCaptions)).ToArray(), Selection = curation.ReportSelection };
+        return new(layout.Document, exports, figures) { SupplementSheets = layout.Sheets
+            .Concat(ReportStudyFigures.CombineFigureSupplements(studies.FigureDetailSheets, ReportCaptionTrace.Build(document, figureCaptions))).ToArray(), Selection = curation.ReportSelection };
     }
 
     public static void Write(ReportProjectExport export, string docxPath, ReportSelection? selection = null)

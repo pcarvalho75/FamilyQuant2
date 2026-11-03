@@ -25,8 +25,10 @@ internal static partial class Program
             args => args.Length > 0 && args[0] == "--test-project-figure-export", (args, _) =>
             {
                 if (args.Length is not (3 or 4)) throw new ArgumentException(
-                    "Use --test-project-figure-export <copied-project.fqproj> <output-folder> [--plan-only].");
-                ProjectFigureExportTests(args[1], args[2], args.Length == 4 && args[3] == "--plan-only");
+                    "Use --test-project-figure-export <copied-project.fqproj> <output-folder> [--plan-only|--report-figures-only].");
+                if (args.Length == 4 && args[3] is not ("--plan-only" or "--report-figures-only")) throw new ArgumentException("Unknown figure check mode.");
+                ProjectFigureExportTests(args[1], args[2], args.Length == 4 && args[3] == "--plan-only",
+                    args.Length == 4 && args[3] == "--report-figures-only");
                 Console.WriteLine($"{passed} passed, {failed} failed, {skipped} skipped");
                 return failed == 0 ? 0 : 1;
             })
@@ -120,9 +122,19 @@ internal static partial class Program
         using var selected = DocumentFormat.OpenXml.Packaging.SpreadsheetDocument.Open(new MemoryStream(selectedBook), false);
         Check("excluding a bounded figure also excludes its complete detail sheet", selected.WorkbookPart?.Workbook?.Sheets?.ChildElements.Count
             == packet.FigureDetailSheets.Count);
+        manifest.FamilyRunShares!.MembershipSha256 = manifest.FamilySubclassParts!.MembershipSha256 = FamilyStudyMembership.Fingerprint(project);
+        var assembled = ReportProjectExporter.Build(SyntheticAnalyticsRows(), manifest, project,
+            Path.Combine(folder, "assembled"), familyResults: FamilyFixture(3));
+        bool uniqueIds = assembled.SupplementSheets.Select(s => s.Id).Distinct(StringComparer.Ordinal).Count() == assembled.SupplementSheets.Count;
+        Check("assembled large report combines figure details and caption trace under one unique owner id", uniqueIds);
+        Check("assembled figure sheet retains both exact caption values and every full reference row",
+            assembled.SupplementSheets.Any(s => s.Table.Columns.Contains("Displayed value") && s.Table.Columns.Contains("Data record_type")
+                && s.Table.Rows.Count > 2000));
+        if (uniqueIds) File.WriteAllBytes(Path.Combine(folder, "assembled_supplement.xlsx"),
+            ReportSupplementWorkbook.BuildBytes(assembled.Document, assembled.SupplementSheets));
     }
 
-    private static void ProjectFigureExportTests(string projectPath, string folder, bool planOnly)
+    private static void ProjectFigureExportTests(string projectPath, string folder, bool planOnly, bool reportFiguresOnly)
     {
         EnsureApplication(); Directory.CreateDirectory(folder);
         void Stage(string message) { Console.WriteLine(message); File.AppendAllText(Path.Combine(folder, "progress.log"), message + Environment.NewLine); }
@@ -130,7 +142,7 @@ internal static partial class Program
         Stage("Opening copied saved project.");
         var (project, rows, manifest) = ProjectStore.ReadFqproj(projectPath);
         Stage("Saved project loaded; planning stored figures.");
-        var figures = StoredCompositionFigures.Build(manifest, project: project);
+        IReadOnlyList<AnalyticsFigure> figures = reportFiguresOnly ? Array.Empty<AnalyticsFigure>() : StoredCompositionFigures.Build(manifest, project: project);
         var report = ReportStudyFigures.Plan(manifest, project);
         string PlanLine(string route, AnalyticsFigure f) => route + "\t" + f.FileName + "\t" + f.Chart.GetType().Name
             + "\t" + f.ScreenHeight.ToString("R", CultureInfo.InvariantCulture);
@@ -140,6 +152,30 @@ internal static partial class Program
         foreach (var f in figures.OrderByDescending(f => f.ScreenHeight).Take(5)) Console.WriteLine(PlanLine("Largest Results", f));
         foreach (var f in report.Figures.OrderByDescending(f => f.Plot.ScreenHeight).Take(5)) Console.WriteLine(PlanLine("Largest report", f.Plot));
         if (planOnly) return;
+        if (reportFiguresOnly)
+        {
+            Stage("Rendering the saved project's native report study figure packet.");
+            var packet = ReportStudyFigures.Build(manifest, project, Path.Combine(folder, "report"));
+            Check("real saved-project report figures fit bounded native dimensions", packet.Figures.Count == report.Figures.Count
+                && report.Figures.All(f => f.Plot.ScreenHeight <= FigureLayout.MaximumUncappedHeight));
+            var doc = new ReportDocument { Title = "Saved-project report figures", Sections = packet.Figures.GroupBy(f => f.SectionId)
+                .Select(g => new ReportSection(g.Key, g.Key, g.Select(f => (ReportBlock)f.Figure).ToArray())).ToArray() };
+            var sheets = ReportStudyFigures.CombineFigureSupplements(packet.FigureDetailSheets, ReportCaptionTrace.Build(doc, packet.CaptionBindings));
+            byte[] docBytes = WordReportWriter.BuildBytes(doc);
+            File.WriteAllBytes(Path.Combine(folder, "report-figures.docx"), docBytes);
+            File.WriteAllBytes(Path.Combine(folder, "report-figures_supplement.xlsx"), ReportSupplementWorkbook.BuildBytes(doc, sheets));
+            using var opened = DocumentFormat.OpenXml.Packaging.WordprocessingDocument.Open(new MemoryStream(docBytes), false);
+            var mainPart = opened.MainDocumentPart!;
+            var embedded = mainPart.Document!.Descendants<DocumentFormat.OpenXml.Drawing.Blip>().Select(b =>
+            { using var input = mainPart.GetPartById(b.Embed!.Value!).GetStream(); using var bytes = new MemoryStream(); input.CopyTo(bytes); return bytes.ToArray(); }).ToArray();
+            Check("all real report-study PNG bytes are embedded verbatim in Word", embedded.Length == packet.Figures.Count
+                && packet.Figures.All(f => embedded.Any(b => b.SequenceEqual(f.Figure.PngBytes))));
+            Check("real figure workbook has unique ownership and retains full data with caption facts", sheets.Select(s => s.Id).Distinct(StringComparer.Ordinal).Count() == sheets.Count
+                && sheets.Any(s => s.Table.Columns.Contains("Displayed value") && s.Table.Columns.Contains("Data record_type")));
+            Check("copied project stays byte-identical during report figure export", originalHash == TestFileHash.Upper(projectPath));
+            Stage("Saved-project Word figure and workbook checks finished.");
+            return;
+        }
         Stage("Preparing the actual Results export model and its current family attribution.");
         var model = new AnalyticsViewModel(rows, manifest, project) { ExportKind = ResultsExportKind.Figures };
         Check("real Results model retains its current family result", model.Families != null);
