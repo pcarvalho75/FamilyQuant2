@@ -19,10 +19,19 @@ public static class CompositionChartCaptions
         FamilyAbundanceDiversityChart chart => Diversity(chart),
         FamilyRingChart chart => Ring(chart),
         ProteinCoverageMapChart chart => Coverage(chart.Data),
+        FamilySignalOriginChart chart => SignalSources(chart),
         FamilyContributionChart chart => LegacyFamilies(chart),
         _ when analytics != null => Analytics(figure, analytics),
         _ => throw new NotSupportedException("Caption data is required for figure: " + figure.FileName)
     };
+
+    private static FigureCaptionInput SignalSources(FamilySignalOriginChart chart) => new(
+        "Family-specific envelope signal by sequence source, all runs pooled",
+        "Each stacked row shows identified, de novo supported by the starting database, and family-world-only contributions. Shared and unexplained global signal are separate. Family-world-only signal is not added to starting database family composition",
+        new CaptionNumber[] { new("Family rows shown", chart.Rows.Count, "families", "0"),
+            new("Identified signal", chart.Rows.Sum(r => r.IdentifiedEnvelope), "area units", "G5"),
+            new("Starting-database de novo signal", chart.Rows.Sum(r => r.DatabaseDeNovoEnvelope), "area units", "G5"),
+            new("Family-world-only de novo signal", chart.Rows.Sum(r => r.WorldDeNovoEnvelope), "area units", "G5") });
 
     private static FigureCaptionInput Composition(FamilyCompositionData data)
     {
