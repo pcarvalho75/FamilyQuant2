@@ -97,8 +97,20 @@ public sealed class AnalyticsViewModel : ScreenViewModel
     }
 
     public void ShowStatus(string message) => Status = message;
-    public IReadOnlyList<AnalyticsFigure> BuildCompositionFigures() => StoredCompositionFigures.Build(manifest,
-        Families?.Families.ToDictionary(f => f.FamilyUserId, f => f.Description));
+    public IReadOnlyList<AnalyticsFigure> BuildCompositionFigures()
+    {
+        try
+        {
+            if (curation != null) FamilyStudyMembership.RequireCurrent(curation, manifest);
+            return StoredCompositionFigures.Build(manifest,
+                Families?.Families.ToDictionary(f => f.FamilyUserId, f => f.Description), curation);
+        }
+        catch (InvalidOperationException ex)
+        {
+            Status = ex.Message;
+            return Array.Empty<AnalyticsFigure>();
+        }
+    }
     public string ExportUnavailableReason => ExportKind switch
     {
         ResultsExportKind.Homology => "Nothing was exported: no homology search result is stored, so there are no assignments to write. Open De novo and press Search first, then return to Results.",

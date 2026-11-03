@@ -12,6 +12,7 @@ public static class StoredCompositionChartData
         FamilyProteinCountsResult? counts = null, IReadOnlyDictionary<int, string>? labels = null)
     {
         ArgumentNullException.ThrowIfNull(shares);
+        FamilyStudyMembership.RequireCompatible(shares, counts);
         var countRows = counts?.Families.ToDictionary(r => r.FamilyUserId);
         var rows = new List<FamilyCompositionValue>();
         var unavailable = new List<string>();

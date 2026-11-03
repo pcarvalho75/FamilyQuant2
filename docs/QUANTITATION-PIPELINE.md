@@ -71,6 +71,29 @@ Existing positive supported rates keep their original values. Older out-of-range
 stored rows are protected at access/display, while their underlying envelopes
 remain unchanged; unrecorded old counts say `not recorded` rather than zero.
 
+## Stored family membership
+
+The five saved family studies (run shares, protein explanation counts, subclass
+parts, domain/product parts and peptide localization) carry `MembershipSha256`.
+Production attribution supplies it automatically. The hash binds sorted protein
+identifiers, sequences and current UserID memberships; it ignores row order and
+display text. It is separate from `FamilyMapping.ProteinSetSha256`, which correctly
+ignores grouping so cached hits can be rejoined without re-extraction.
+
+Current-project chart/report consumers refuse missing or mismatched membership
+before looking up current labels by UserID. They retain the saved numbers without
+retagging them. Results can still open the project and shows a plain refusal for
+the affected stored figures. A report refuses before writing rendered assets.
+Standalone explicitly supplied snapshots can be drawn without claiming a current
+project; known incompatible fingerprints cannot be combined. Sensitivity keeps
+its existing stronger curation fingerprint, including grouping and labels, and
+also rejects contradictory known nested run-share bindings or stale cached
+attribution. No RAW access is required to detect these cases.
+
+`--test-family-study-membership` covers reused UserIDs with an unchanged protein
+set, production propagation, legacy missing provenance, cross-study joins,
+sensitivity, current-project consumers and project round-trip persistence.
+
 Family quantitation has these stages:
 
 1. `SearchCuration` searches normalized sequences, retaining compact protein hits.

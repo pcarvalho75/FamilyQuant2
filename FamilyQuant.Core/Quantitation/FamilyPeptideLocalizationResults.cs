@@ -62,8 +62,10 @@ public sealed class FamilyProteinRanking
 
 /// <summary>All runs pooled. Each segment retains its evidence side and exact/aligned status.
 /// Rankings use additive allocated signal, descending, with ordinal protein-ID tie breaks.</summary>
-public sealed class FamilyPeptideLocalizationResult
+public sealed class FamilyPeptideLocalizationResult : IFamilyMembershipStudy
 {
+    [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull)]
+    public string? MembershipSha256 { get; set; }
     public string Method { get; set; } = string.Empty;
     public SharedPeptidePolicy Policy { get; set; }
     public List<LocalizedPeptideSegment> Segments { get; set; } = new();

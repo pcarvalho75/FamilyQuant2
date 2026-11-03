@@ -15,6 +15,7 @@ public static class ReportPanelSections
     {
         ArgumentNullException.ThrowIfNull(curation);
         ArgumentNullException.ThrowIfNull(manifest);
+        FamilyStudyMembership.RequireCurrent(curation, manifest);
         var tables = new Dictionary<int, List<ReportTable>>();
         List<ReportTable> For(int id)
         {

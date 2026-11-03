@@ -52,6 +52,7 @@ internal static partial class Program
     private static void QuantifyViewModelTests(string workDir)
     {
         DeNovoSourceProposalTests();
+        FamilyStudyMembershipTests();
         Section("Quantify view model - one request, publication and refusal");
         string package = Path.Combine(workDir, "quantify-fixture.sepr2");
         File.WriteAllText(package, "fixture; the injected engine never reads this");

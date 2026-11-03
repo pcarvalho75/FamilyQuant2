@@ -47,6 +47,8 @@ internal static partial class Program
                 new() { FamilyUserId = 22, GreedyProteinCount = 9 },
             } },
         };
+        manifest.FamilyRunShares!.MembershipSha256 = FamilyStudyMembership.Fingerprint(file);
+        manifest.FamilyProteinCounts!.MembershipSha256 = FamilyStudyMembership.Fingerprint(file);
         var method = typeof(ReportPanelSections).GetMethod("BuildFromResults", new[] { typeof(FamilyClusterFile), typeof(QuantManifest) });
         Check("J6c builds from the project's typed stored results", method != null);
         var sections = method?.Invoke(null, new object[] { file, manifest }) as IReadOnlyList<ReportSection>;
@@ -85,9 +87,10 @@ internal static partial class Program
         Check("J6c explicitly handles merged and excluded rows", sections != null && sections.Skip(2)
             .All(s => s.Blocks.OfType<ReportParagraph>().Any())
             && sections.Skip(2).All(s => !s.Blocks.OfType<ReportTable>().Any(t => t.Title.Contains("observed", StringComparison.OrdinalIgnoreCase))));
-        Check("J6c does not invent sections for an absent panel", ReportPanelSections.BuildFromResults(new FamilyClusterFile(), manifest).Count == 0);
+        Check("J6c does not invent sections for an absent panel", ReportPanelSections.BuildFromResults(new FamilyClusterFile(), new QuantManifest()).Count == 0);
         var duplicate = new QuantManifest { FamilyRunShares = new FamilyRunSharesResult { Families = new()
             { new() { FamilyUserId = 11 }, new() { FamilyUserId = 11 } } } };
+        duplicate.FamilyRunShares.MembershipSha256 = FamilyStudyMembership.Fingerprint(file);
         bool refused = false;
         try { ReportPanelSections.BuildFromResults(file, duplicate); }
         catch (InvalidOperationException) { refused = true; }

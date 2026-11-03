@@ -308,6 +308,8 @@ namespace FamilyQuant
     /// </summary>
     public sealed class PeptideFamilyAttribution
     {
+        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull)]
+        public string? MembershipSha256 { get; internal set; }
         public Dictionary<string, IReadOnlyList<int>> IdentifiedBySequence { get; } =
             new Dictionary<string, IReadOnlyList<int>>(StringComparer.Ordinal);
         public Dictionary<string, IReadOnlyList<int>> DeNovoBySequence { get; } =
