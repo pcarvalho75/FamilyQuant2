@@ -88,7 +88,8 @@ The fixture now compares every completed native sheet/cell and pins those two sh
 `DefaultSuite` without executing command handlers or suite bodies. It also runs once in `DefaultSuite`.
 Its deterministic listing includes every registered flag, its declared fixture methods or individual
 exclusion reason, compiled fixture entry-point references and any routing problem. With an output path,
-the exact suite-method inventory is also written to `<output.tsv>.suite-fixtures.txt`.
+the exact suite-method inventory is also written to `<output.tsv>.suite-fixtures.txt`; the indexed entry
+inventory in `<output.tsv>.suite-entries.tsv` supports focused execution through the ordinary shard path.
 
 Every flag requires a literal entry in `SuiteCommandInventory.cs`; there is no flag-prefix or wildcard
 exemption. A covered entry names exact method signatures present in the compiled suite and reached from
@@ -96,6 +97,9 @@ the command handler. Missing/changed fixture routes, new undeclared flags, dupli
 reasons and stale exclusions fail. Shared assertion/bootstrap helpers cannot prove coverage, and a
 covered subfixture cannot conceal another missing assertion fixture. This checks static enrollment,
 not whether every assertion or data-dependent branch ran with a particular invocation.
+K8c follows actual compiled calls below aggregate fixtures as well as direct suite entries, so nested
+checks already executed by the suite do not need duplicate enrollment. Unused delegate references do
+not count as calls; metadata-only planted controls must not contaminate the suite inventory.
 
 Exclusions distinguish selected-data/live checks, artifact/proof producers, and existing focused-only
 enrollment gaps. Each gap is named explicitly; it is not reported as gated coverage. K8b does not silently
