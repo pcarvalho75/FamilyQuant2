@@ -19,7 +19,8 @@ public static class ReportStoredResults
         ReportTable Table(string id, string title, string file, string csv, string caption, string[] columns, string[] headings)
         {
             exports.Add(file, csv);
-            return ReportCsvTable.Build(id, title, csv, caption, columns) with { Columns = headings };
+            var table = ReportCsvTable.Build(id, title, csv, caption, columns) with { Columns = headings };
+            return ReportTableSupplements.WithStoredPercentages(table, csv, columns);
         }
         void Remove(string id) => results.RemoveAll(b => b.Id == id);
         const string displayed = " Percentages use six significant digits; companion CSV fraction columns retain round-trip values. Empty values are unavailable, not zero.";
@@ -32,6 +33,7 @@ public static class ReportStoredResults
             Remove("family-runs-unavailable");
             exports.Add("family_run_means.csv", ReportStudyExports.MeanShares(runs, familyLabels));
             string headlineCsv = ReportStudyExports.Headline(grouping, manifest.FamilyProteinCounts, familyLabels);
+            exports.Add("report_settings.csv", ReportStudyExports.ReportSettings(grouping));
             results.Insert(0, Table("family-run-means", "Headline family composition: mean of per-run shares", "family_composition_headline.csv",
                 headlineCsv,
                 "Each run's composition uses signal credited to database families. Mean and sample SD use available runs. Whole measured-signal mean/SD are separate stored statistics; family-world-only signal is excluded. Protein estimates count database entries, not genes or proteoforms. Others membership and summed-run uncertainty come only from the canonical stored-threshold accessor." + displayed,
