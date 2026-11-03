@@ -195,7 +195,11 @@ public partial class MainWindow
                 "   Quantify provides extraction and Results reads the ion-current recovery. Family\n" +
                 "   attribution remains available for de novo work without a saved project.\n" +
                 "   That screen has a Help button of its own, and while it is open Help · How to read\n" +
-                "   these numbers shows its page instead of this one.\n";
+                "   these numbers shows its page instead of this one.\n\n" +
+
+                "Help > Check for updates asks GitHub for the latest public release only when you choose\n" +
+                "it, and sends nothing but that request. It names a newer version and opens its release\n" +
+                "page on request; nothing is downloaded or installed.\n";
         }
     }
 }

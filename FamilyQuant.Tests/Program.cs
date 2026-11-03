@@ -75,6 +75,7 @@ namespace FamilyQuant.Tests
             QuantifyViewModelTests(workDir);
             BusyOperationTests(workDir);
             ShellDialogTests(workDir);
+            UpdateCheckTests();
             ResultsViewModelTests();
             DatabaseGapTests(Path.Combine(workDir, "database-gap"));
             DatabaseGapLengthTests(Path.Combine(workDir, "database-gap-lengths"));

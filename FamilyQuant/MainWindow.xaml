@@ -88,6 +88,8 @@
                           ToolTip="Explains the current screen's numbers and choices, including denominators and shared peptides. F1 opens this same help."/>
                 <MenuItem x:Name="MenuItemWhereAmI" Header="What do I do first?" Click="MenuItemWhereAmI_Click"
                           ToolTip="Lists the complete workflow and what each step needs. De novo review is optional."/>
+                <MenuItem x:Name="MenuItemCheckForUpdates" Header="Check for updates" Click="MenuItemCheckForUpdates_Click"
+                          ToolTip="Asks GitHub for the latest public release, only when you choose it. A newer version opens its release page on request; nothing is installed."/>
             </MenuItem>
         </Menu>
         <!-- The first thing a new user sees. It says what to do, in order, and it stays until a Family
