@@ -223,3 +223,9 @@ Finished steps, moved here from docs/ROADMAP.md. The board shows them as green.
 | R5a | FamilyQuant 2.0 final published | L | 0 | 🟢 | R5b | Paulo publishes | Paulo | not started | 0% | 0% | T+0 |
 | R5b | Archive this roadmap | L | 0.1 | 🟢 | Done | Archive committed | Orchestrator | not started | 0% | 0% | T+0 |
 
+### W1 Ana's family panel, as user data
+
+| ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
+|---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
+| J1b0 | One package, DocumentFormat.OpenXml, to read `.xlsx` and write `.docx`; pinned and recorded in DEPENDENCIES.md | L | 0.5 | 🟢 | J1b, J6a | Build, dependency check, publish payload lists the DLL | AS | | 0 | 0 | |
+
