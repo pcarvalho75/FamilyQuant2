@@ -57,8 +57,10 @@ namespace FamilyQuant
             // and every other caller of it, are unchanged.
             Homology.HomologyOptions effective = (options ?? new Homology.HomologyOptions()).Clone();
             effective.TopHitsPerPeptide = int.MaxValue;
+            if (effective.Science != null) effective.Science.QueryRole = Homology.HomologyQueryRole.DeNovo;
             Homology.HomologyOptions identifiedOptions = effective.Clone();
             identifiedOptions.BestScoreOnly = identifiedBestScoreOnly;
+            if (identifiedOptions.Science != null) identifiedOptions.Science.QueryRole = Homology.HomologyQueryRole.Identified;
             var hits = new CurationHomologyHits
             {
                 IdentityThreshold = effective.MinIdentity,

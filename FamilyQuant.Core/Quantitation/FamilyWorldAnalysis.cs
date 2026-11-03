@@ -162,6 +162,23 @@ namespace FamilyQuant
         public static FamilyWorldAnalysisResult CompleteLengths(FamilyPeptideAttribution firstPass, IReadOnlyList<FamilyWorldPassResult> passes,
             FamilyClusterFile curation, IEnumerable<SpectrumComparisonRow> spectra, FamilyWorld world, string worldRelease,
             Func<FamilyWorldProtein, bool>? ownSpecies, FamilyWorldOptions options, int minimumKnownCredits, OperationContext? operation = null)
+            => CompleteLengthsCore(firstPass, passes, curation, spectra, world, worldRelease, ownSpecies, options,
+                minimumKnownCredits, operation, null, null);
+
+        /// <summary>Reuse verified holder and known-tag replay results; every required query must be present.</summary>
+        public static FamilyWorldAnalysisResult CompleteLengthsFromResults(FamilyPeptideAttribution firstPass, IReadOnlyList<FamilyWorldPassResult> passes,
+            FamilyClusterFile curation, IEnumerable<SpectrumComparisonRow> spectra, FamilyWorld world, string worldRelease,
+            Func<FamilyWorldProtein, bool>? ownSpecies, FamilyWorldOptions options, int minimumKnownCredits,
+            IReadOnlyDictionary<string, Homology.HomologyResult> holders, IReadOnlyDictionary<string, Homology.HomologyResult> tags,
+            OperationContext? operation = null)
+            => CompleteLengthsCore(firstPass, passes, curation, spectra, world, worldRelease, ownSpecies, options,
+                minimumKnownCredits, operation, holders ?? throw new ArgumentNullException(nameof(holders)),
+                tags ?? throw new ArgumentNullException(nameof(tags)));
+
+        private static FamilyWorldAnalysisResult CompleteLengthsCore(FamilyPeptideAttribution firstPass, IReadOnlyList<FamilyWorldPassResult> passes,
+            FamilyClusterFile curation, IEnumerable<SpectrumComparisonRow> spectra, FamilyWorld world, string worldRelease,
+            Func<FamilyWorldProtein, bool>? ownSpecies, FamilyWorldOptions options, int minimumKnownCredits, OperationContext? operation,
+            IReadOnlyDictionary<string, Homology.HomologyResult>? cachedHolders, IReadOnlyDictionary<string, Homology.HomologyResult>? cachedTags)
         {
             if (firstPass == null) throw new ArgumentNullException(nameof(firstPass));
             if (passes == null || passes.Count == 0) throw new ArgumentException("Give at least one pass.", nameof(passes));
@@ -175,11 +192,13 @@ namespace FamilyQuant
             FamilyWorld withoutSpecies = FamilyWorld.Build(world.Proteins.Where(p => !ownSpecies(p)), world.ScopeFamilies);
             Dictionary<string, IReadOnlyList<string>> labels = FamilyWorldErrors.Labels(world.Proteins, curation);
             operation?.Report("world-phase", "Family world 4 of 5: Checking known answers", 4, 5);
-            List<FamilyWorldKnownAnswer> answers = FamilyWorldErrors.KnownAnswers(spectra, curation, labels, operation);
+            List<FamilyWorldKnownAnswer> answers = cachedHolders == null ? FamilyWorldErrors.KnownAnswers(spectra, curation, labels, operation)
+                : FamilyWorldErrors.KnownAnswersFromResults(spectra, curation, labels, cachedHolders, operation);
             int lowest = passes.Min(p => p.MinimumTagLength);
             FamilyWorldOptions searchOptions = options.Clone();
             searchOptions.MinimumTagLength = lowest;
-            FamilyWorldErrors.Credit(answers, withoutSpecies, passes[0].CreditableFamilies, searchOptions, operation);
+            if (cachedTags == null) FamilyWorldErrors.Credit(answers, withoutSpecies, passes[0].CreditableFamilies, searchOptions, operation);
+            else FamilyWorldErrors.CreditFromResults(answers, withoutSpecies, passes[0].CreditableFamilies, searchOptions, cachedTags, operation);
             operation?.Report("world-phase", "Family world 5 of 5: Assembling stored length studies", 5, 5);
 
             (FamilyWorldSummary Table, List<FamilyWorldKnownAnswer> Answers) TableAt(FamilyWorldPassResult pass)

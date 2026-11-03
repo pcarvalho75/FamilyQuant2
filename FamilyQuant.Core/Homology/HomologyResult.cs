@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace FamilyQuant.Homology
 {
@@ -45,6 +46,9 @@ namespace FamilyQuant.Homology
         /// It can exceed <see cref="IdentityFraction"/>, because the window with the most identical
         /// residues need not be the window PAM30MS scores highest - conservative substitutions score
         /// well without being identities. Both are reported rather than one being quietly chosen.
+        /// With the experimental tag-error gate, this is the matched confidence-weight fraction
+        /// of the winning permitted variant window. ScienceAudit records that variant and its
+        /// gate alignment separately; Offset, Score and MatchedSubsequence still use the original tag.
         /// </summary>
         public double GateIdentityFraction { get; }
 
@@ -61,7 +65,7 @@ namespace FamilyQuant.Homology
     {
         internal HomologyResult(string peptide, string normalizedPeptide, string? rejection,
             IReadOnlyList<HomologyHit> hits, bool decoysSuppressed, bool targetsSuppressedByDecoyCompetition,
-            int candidatesExamined, bool usedSeedIndex)
+            int candidatesExamined, bool usedSeedIndex, HomologyScienceAudit? scienceAudit = null)
         {
             Peptide = peptide;
             NormalizedPeptide = normalizedPeptide;
@@ -71,6 +75,7 @@ namespace FamilyQuant.Homology
             TargetsSuppressedByDecoyCompetition = targetsSuppressedByDecoyCompetition;
             CandidatesExamined = candidatesExamined;
             UsedSeedIndex = usedSeedIndex;
+            ScienceAudit = scienceAudit;
         }
 
         /// <summary>The query as it was supplied.</summary>
@@ -110,6 +115,10 @@ namespace FamilyQuant.Homology
 
         /// <summary>Whether this particular query went through the seed index.</summary>
         public bool UsedSeedIndex { get; }
+
+        /// <summary>Optional experimental gate/tier provenance. Null and omitted when science options are OFF.</summary>
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public HomologyScienceAudit? ScienceAudit { get; }
     }
 
     /// <summary>

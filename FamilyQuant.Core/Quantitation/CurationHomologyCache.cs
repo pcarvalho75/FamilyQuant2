@@ -14,7 +14,7 @@ using System.Threading;
 namespace FamilyQuant;
 
 /// <summary>Disposable external cache of compact curation hits. A miss or invalid file searches normally.</summary>
-public static class CurationHomologyCache
+public static partial class CurationHomologyCache
 {
     // Bump whenever the search, serialization or localization semantics change.
     private const string Format = "FamilyQuant curation hits v1";
@@ -105,6 +105,8 @@ public static class CurationHomologyCache
             }
             Add(data.ToArray());
         }
+        // Append only enabled science settings, preserving the exact existing cache key when OFF.
+        if (options.Science?.AnyEnabled == true) Add(JsonSerializer.SerializeToUtf8Bytes(options.Science));
         foreach (var row in rows)
         {
             token.ThrowIfCancellationRequested();
@@ -209,8 +211,10 @@ public static class CurationHomologyCache
         }
         HomologyOptions effective = options.Clone();
         effective.TopHitsPerPeptide = int.MaxValue;
+        if (effective.Science != null) effective.Science.QueryRole = HomologyQueryRole.DeNovo;
         HomologyOptions identified = effective.Clone();
         identified.BestScoreOnly = identifiedBestScoreOnly;
+        if (identified.Science != null) identified.Science.QueryRole = HomologyQueryRole.Identified;
         var result = new CurationHomologyHits { ProteinIds = ids, IdentityThreshold = effective.MinIdentity,
             EffectiveOptions = effective, IdentifiedOptions = identified };
         List<string> Queries(string side) => items.Count == 0 ? new List<string>() : rows.Where(row => row != null && string.Equals(row.Side, side, StringComparison.Ordinal))

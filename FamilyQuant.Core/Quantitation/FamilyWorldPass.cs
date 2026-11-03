@@ -79,13 +79,22 @@ namespace FamilyQuant
 
         public double MinIdentity { get; set; } = HomologyOptions.DefaultMinIdentity;
 
+        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull)]
+        public HomologyScienceOptions? Science { get; set; }
+
         /// <summary>The de novo side of the production attribution: every target past the gate after the
         /// target-decoy competition, with no cut at the mapper's top three.</summary>
-        public HomologyOptions SearchOptions() => new HomologyOptions { MinIdentity = MinIdentity, TopHitsPerPeptide = int.MaxValue };
+        public HomologyOptions SearchOptions()
+        {
+            var science = Science?.AnyEnabled == true ? Science.Clone() : null;
+            if (science != null) science.QueryRole = HomologyQueryRole.DeNovo;
+            return new HomologyOptions { MinIdentity = MinIdentity, TopHitsPerPeptide = int.MaxValue, Science = science };
+        }
 
         public FamilyWorldOptions Clone() => new FamilyWorldOptions
         {
             MinimumTagLength = MinimumTagLength, CreditableFamilies = CreditableFamilies, MinIdentity = MinIdentity,
+            Science = Science?.AnyEnabled == true ? Science.Clone() : null,
         };
     }
 
@@ -410,6 +419,18 @@ namespace FamilyQuant
         /// </summary>
         public static IReadOnlyList<FamilyWorldPassResult> RunLengths(FamilyPeptideAttribution firstPass, FamilyWorld world,
             FamilyWorldOptions? options, IReadOnlyList<int> lengths, OperationContext? operation = null)
+            => RunLengthsCore(firstPass, world, options, lengths, operation, null);
+
+        /// <summary>Aggregate a complete, input-verified replay without another homology search.
+        /// Every actual residual query must be supplied; missing results fail instead of becoming zero.</summary>
+        public static IReadOnlyList<FamilyWorldPassResult> RunLengthsFromResults(FamilyPeptideAttribution firstPass, FamilyWorld world,
+            FamilyWorldOptions? options, IReadOnlyList<int> lengths, IReadOnlyDictionary<string, HomologyResult> searchResults,
+            OperationContext? operation = null)
+            => RunLengthsCore(firstPass, world, options, lengths, operation, searchResults ?? throw new ArgumentNullException(nameof(searchResults)));
+
+        private static IReadOnlyList<FamilyWorldPassResult> RunLengthsCore(FamilyPeptideAttribution firstPass, FamilyWorld world,
+            FamilyWorldOptions? options, IReadOnlyList<int> lengths, OperationContext? operation,
+            IReadOnlyDictionary<string, HomologyResult>? replay)
         {
             if (firstPass == null) throw new ArgumentNullException(nameof(firstPass));
             if (world == null) throw new ArgumentNullException(nameof(world));
@@ -429,8 +450,12 @@ namespace FamilyQuant
             List<string> searched = residual.Select(r => r.Sequence).Where(s => s.Length > 0 && s.Length >= lowest)
                 .Distinct(StringComparer.Ordinal).ToList();
             var credits = new Dictionary<string, FamilyWorldCredit>(StringComparer.Ordinal);
-            foreach (HomologyResult r in HomologySearch.Search(searched, world.Database, options.SearchOptions(), operation,
-                progressStage: "world-residual-queries", progressLabel: "Family-world peptides searched", progressBatchSize: 128))
+            IEnumerable<HomologyResult> found = replay == null
+                ? HomologySearch.Search(searched, world.Database, options.SearchOptions(), operation,
+                    progressStage: "world-residual-queries", progressLabel: "Family-world peptides searched", progressBatchSize: 128)
+                : searched.Select(sequence => replay.TryGetValue(sequence, out var result) && result.NormalizedPeptide == sequence
+                    ? result : throw new ArgumentException("Replay lacks residual query: " + sequence, nameof(replay)));
+            foreach (HomologyResult r in found)
                 credits[r.IsRejected ? r.Peptide : r.NormalizedPeptide] = world.Credit(r, creditableSorted, lowest);
             operation?.ThrowIfCancellationRequested();
             return lengths.Select(length => Aggregate(residual, credits, length, creditableSorted, world, options)).ToList();

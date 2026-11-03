@@ -1,5 +1,6 @@
 using System;
 using System.Globalization;
+using System.Text.Json.Serialization;
 
 namespace FamilyQuant.Homology
 {
@@ -93,6 +94,11 @@ namespace FamilyQuant.Homology
         /// willing to use the index.</summary>
         public int BruteForceProteinLimit { get; set; } = DefaultBruteForceProteinLimit;
 
+        /// <summary>Opt-in experimental science settings. Null, or all flags disabled, preserves
+        /// the established search; Clone canonicalizes disabled settings to null.</summary>
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public HomologyScienceOptions? Science { get; set; }
+
         /// <summary>A copy, so a search cannot be perturbed by a caller mutating the options while it
         /// runs.</summary>
         public HomologyOptions Clone()
@@ -108,6 +114,7 @@ namespace FamilyQuant.Homology
                 Strategy = Strategy,
                 SeedLength = SeedLength,
                 BruteForceProteinLimit = BruteForceProteinLimit,
+                Science = Science?.AnyEnabled == true ? Science.Clone() : null,
             };
         }
 
@@ -147,6 +154,7 @@ namespace FamilyQuant.Homology
             {
                 throw new ArgumentException("DecoyLabel cannot be null or empty.", nameof(DecoyLabel));
             }
+            Science?.Validate();
         }
     }
 }

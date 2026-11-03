@@ -65,6 +65,42 @@ internal static partial class Program
             && Math.Abs(table.Composition.Sum(r => r.TotalEnvelope) + table.SharedIdentifiedEnvelope + table.SharedDatabaseDeNovoEnvelope
                 + table.SharedEnvelope + table.UnattributedIdentifiedEnvelope + table.UnexplainedEnvelope - table.MeasuredTotalEnvelope) < 1e-9);
 
+        var replayMapping = FamilyEnvelopeQuant.BuildAttributionFromCuration(attached.Rows, file);
+        var replayFirst = FamilyEnvelopeQuant.AttributePeptides(FamilyEnvelopeQuant.PreparePeptides(attached.Rows), replayMapping);
+        var replayOptions = new FamilyWorldOptions();
+        int[] replayLengths = [7, 8];
+        var residualQueries = replayFirst.UnattributedDeNovoPeptides.Select(p => DeNovoReconciler.NormalizeSequence(p.Sequence))
+            .Where(s => s.Length >= 7).Distinct(StringComparer.Ordinal).ToArray();
+        var residualResults = Homology.HomologySearch.Search(residualQueries, world.Database, replayOptions.SearchOptions())
+            .ToDictionary(r => r.NormalizedPeptide, StringComparer.Ordinal);
+        var normalPasses = FamilyWorldPass.RunLengths(replayFirst, world, replayOptions, replayLengths);
+        var replayPasses = FamilyWorldPass.RunLengthsFromResults(replayFirst, world, replayOptions, replayLengths, residualResults);
+        var replayJson = new System.Text.Json.JsonSerializerOptions
+            { NumberHandling = System.Text.Json.Serialization.JsonNumberHandling.AllowNamedFloatingPointLiterals };
+        Check("J47 cached world results preserve every native pass byte", System.Text.Json.JsonSerializer.Serialize(normalPasses, replayJson)
+            == System.Text.Json.JsonSerializer.Serialize(replayPasses, replayJson));
+        var holderDb = Homology.HomologyDatabase.Build(file.MyExtendedFastaItems);
+        var holderResults = Homology.HomologySearch.Search(attached.SpectrumComparisonRows.Select(r => DeNovoReconciler.NormalizeSequence(r.PatternLabCleanSequence)), holderDb,
+            new Homology.HomologyOptions { TopHitsPerPeptide = int.MaxValue, BestScoreOnly = true })
+            .ToDictionary(r => r.NormalizedPeptide, StringComparer.Ordinal);
+        var taxa = FamilyWorldAnalysis.SampleTaxa(file); var own = FamilyWorldAnalysis.SampleAccessions(file);
+        var without = FamilyWorld.Build(world.Proteins.Where(p => !FamilyWorld.IsOfTaxa(p, taxa) && !own.Contains(p.Accession)), world.ScopeFamilies);
+        var labels = FamilyWorldErrors.Labels(world.Proteins, file);
+        var known = FamilyWorldErrors.KnownAnswersFromResults(attached.SpectrumComparisonRows, file, labels, holderResults);
+        var knownOptions = replayOptions.Clone(); knownOptions.MinimumTagLength = 7;
+        var tagResults = Homology.HomologySearch.Search(known.Where(a => a.IsKnown && a.Tag.Length >= 7).Select(a => a.Tag),
+            without.Database, knownOptions.SearchOptions()).ToDictionary(r => r.NormalizedPeptide, StringComparer.Ordinal);
+        var normalComplete = FamilyWorldAnalysis.CompleteLengths(replayFirst, normalPasses, file, attached.SpectrumComparisonRows,
+            world, snapshot.Release, null, replayOptions, FamilyWorldErrors.DefaultMinimumKnownCredits);
+        var replayComplete = FamilyWorldAnalysis.CompleteLengthsFromResults(replayFirst, replayPasses, file, attached.SpectrumComparisonRows,
+            world, snapshot.Release, null, replayOptions, FamilyWorldErrors.DefaultMinimumKnownCredits, holderResults, tagResults);
+        Check("J47 cached holders/tags preserve every native known-answer/gap/composition byte",
+            System.Text.Json.JsonSerializer.Serialize(normalComplete.Summary) == System.Text.Json.JsonSerializer.Serialize(replayComplete.Summary));
+        bool missingReplay = false;
+        try { FamilyWorldPass.RunLengthsFromResults(replayFirst, world, replayOptions, replayLengths,
+            new Dictionary<string, Homology.HomologyResult>()); } catch (ArgumentException) { missingReplay = true; }
+        Check("J47 missing cached residual is refused rather than counted as zero", residualQueries.Length > 0 && missingReplay);
+
         var reuseMethod = typeof(FamilyWorldAnalysis).GetMethod("AttachToComputeWithAttribution",
             System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.NonPublic);
         Check("J38 Compute can pass its complete curation attribution into the world analysis", reuseMethod != null);
