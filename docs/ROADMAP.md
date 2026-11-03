@@ -83,8 +83,6 @@ The export failed on Ana's project (a figure read the on-screen palette from the
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
 | J41b | J41 reviewed and merged | L | 0.2 | 🟢 | J30c, J32c | Approved; gate green | FL | | 0 | 0 | |
-| J30b | The fixed export runs to the end on a copy of the full-run project through the real command | M | 0.5 | 🟢 | J30c | Word report and supplement written; times reported | RS | | 0 | 0 | |
-| J24c | Export progress on the full-run project, read from J30b's real export (which runs with the merged progress): the longest gap between two steps named | L | 0.3 | J30b | K14 | `READY` names the longest gap and its step | RS | | 0 | 0 | |
 | J39 | Cache the two source census searches as well, if J32c shows they cost more than a minute | M | 1 | 🟢 | | Byte-identical report data; the export time before and after | T1 | | 0 | 0 | |
 | J36b | Delivery rehearsal on the first full-run project into a staging folder | L | 0.3 | 🟢 | J36c | Summary with hashes and the trace's count | RS | | 0 | 0 | |
 | J36c | J36 reviewed and merged | L | 0.2 | J36b | K17 | Approved; gate green | RS | | 0 | 0 | |
@@ -106,7 +104,7 @@ Ana installs it from the public releases page (D31); the desk publishes on Paulo
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| K14 | Final export of the interpreted project through the real command, on master with J30, J24, J16, J32 and J34 | L | 0.5 | J24c, J34c, J44b | K15, K16 | Word report and supplement written | OP | | 0 | 0 | |
+| K14 | Final export of the interpreted project through the real command, on master with J30, J24, J16, J32 and J34 | L | 0.5 | J34c, J44b | K15, K16 | Word report and supplement written | OP | | 0 | 0 | |
 | K15 | Number trace on the final report: every number found, or each one not found ruled | L | 0.2 | K14 | K17 | `trace.csv` with nothing left open | T1 | | 0 | 0 | |
 | K16 | The final report's pages read for look and sense | L | 0.3 | K14 | K17 | No blocking item | LK | | 0 | 0 | |
 | K17 | Delivered: the Word report, supplement, project, family panel, a read-me with the release link, and the AI key file (D42) written to `AnaG/Bjararaca/Relatorio`; nothing else in Ana's folders touched | L | 0.2 | K7, K15, K16, J36c, K11 | | The five items with hashes; the rest of AnaG unchanged | OP | | 0 | 0 | |
