@@ -100,7 +100,7 @@ internal static partial class Program
         var staleProject = new FamilyClusterFile { FamilyPanel = FamilyPanelValidation.Clone(file.FamilyPanel!),
             PanelProteinAssignments = new(), ProteinSubclassLabels = new() };
         string fingerprint = PanelDerivedDataCurrentness.Fingerprint(staleProject.FamilyPanel);
-        staleProject.PanelProteinAssignmentsPanelFingerprint = fingerprint;
+        staleProject.PanelProteinAssignmentsPanelFingerprint = PanelDerivedDataCurrentness.FamilyFingerprint(staleProject.FamilyPanel);
         staleProject.ProteinSubclassLabelsPanelFingerprint = fingerprint;
         var staleModel = new CurationViewModel(staleProject);
         var changedRules = FamilyPanelValidation.Clone(staleProject.FamilyPanel);
