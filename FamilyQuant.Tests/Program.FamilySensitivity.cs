@@ -48,10 +48,17 @@ internal static partial class Program
         Check("J5e: changed family grouping refuses a stale comparison", Throws<InvalidDataException>(() =>
             FamilySensitivityStudy.Compare(study, rows, Source(90), changed, new string('A', 64), mapping)));
         var manifest = Source(80); manifest.FamilySensitivity = compared;
+        manifest.FamilyPeptideLocalization = new() { Method = "Synthetic localization fixture", Policy = SharedPeptidePolicy.FamilyUnique,
+            Segments = new() { new() { FamilyUserId = 1, ProteinIdentifier = "sp|P00001|ONE", Side = NativeQuantFractions.SideIdentified,
+                NormalizedSequence = "ACDEFGHIK", FamilyMembershipCount = 1, MatchKind = PeptideLocalizationMatchKind.ExactContainment,
+                Signal = 10, Intervals = new() { new() { Start = 1, End = 9 } } } } };
         string project = Path.Combine(output, "sensitivity.fqproj");
         ProjectStore.WriteFqproj(project, file, rows, manifest);
-        var reopened = ProjectStore.ReadFqproj(project).manifest.FamilySensitivity;
+        var reopenedManifest = ProjectStore.ReadFqproj(project).manifest;
+        var reopened = reopenedManifest.FamilySensitivity;
         Check("J5e: the complete study reopens offline with exact values and provenance", JsonSerializer.Serialize(compared) == JsonSerializer.Serialize(reopened));
+        Check("J5e/J4b: both populated optional manifest parts survive one project roundtrip", JsonSerializer.Serialize(manifest.FamilyPeptideLocalization)
+            == JsonSerializer.Serialize(reopenedManifest.FamilyPeptideLocalization) && reopened != null && reopenedManifest.FamilyPeptideLocalization?.Segments.Count == 1);
         var culture = CultureInfo.CurrentCulture;
         try
         {
