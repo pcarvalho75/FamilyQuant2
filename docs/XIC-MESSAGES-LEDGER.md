@@ -59,3 +59,25 @@ This is preservation evidence for messages, formatting, cache routing and CSV
 outcomes. It is not full XIC extraction, fresh quantitation, validation of detector
 accuracy, a complete scientific reproduction, or release acceptance. Independent
 review and the integrated ledger/release gates remain required.
+
+## Retained validation
+
+Packets are in `D:/FamilyQuant-data/out-floater/J15-xic`. Both normal packets
+passed 23/0/0 (21 observations and two kind receipts). The wrong-count control
+failed 19/4/0 as intended, and both the original and stricter pinned-source
+importers refused it without changing the ledger or creating its register.
+
+Twenty-nine files repeated byte for byte: canonical cases, assertion logs,
+authored fixtures, input metadata, retained sources and binaries. The only
+exclusions are per-run receipt metadata and raw captures containing the different
+owned output prefixes. Raw captures remain available for inspection. Both real
+detector runs preserved the input SHA256, length and modification time.
+
+The detached fresh validation tree `70aab88` combines Shell's `5d69a0c` receipt
+baseline with producer `140151d`. Its native audit/import changed exactly the
+assigned 21 rows from OPEN to VERIFIED: 5,439 VERIFIED / 21 OPEN became
+5,460 VERIFIED / 0 OPEN; 296 approved DROP rows stayed unchanged. Fatal and ledger
+problem lists were empty. Official master was subsequently merged into
+`fq/floater`, with the same Core/App/test code tree. Native batch import there
+also reported 5,460 VERIFIED / 0 OPEN / 296 approved DROP. No disposition was
+edited by hand. These are candidate proof states, pending independent review.
