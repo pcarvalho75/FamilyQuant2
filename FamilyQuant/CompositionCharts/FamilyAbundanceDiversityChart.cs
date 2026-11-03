@@ -8,20 +8,21 @@ namespace FamilyQuant;
 
 public sealed record FamilyDiversityPoint(string Key, string Label, double SharePercent, int ProteinCount, int Index);
 
-/// <summary>Abundance is supplied mean share, diversity is the supplied minimum explanatory protein count.</summary>
+/// <summary>Abundance is supplied mean share, diversity is the supplied greedy explanatory protein count.</summary>
 public sealed class FamilyAbundanceDiversityChart : CompositionDrawingBase
 {
     private readonly FamilyCompositionData data;
     public IReadOnlyList<FamilyDiversityPoint> Points { get; }
     public IReadOnlyList<FamilyCompositionValue> UnavailableFamilies { get; }
-    public static double RecommendedHeight(FamilyCompositionData data) => Math.Max(540, 160 + data.Families.Count * 31);
+    public static double RecommendedHeight(FamilyCompositionData data) =>
+        Math.Max(540, 160 + (data.Families.Count + data.UnavailableFamilies.Count) * 31);
 
     public FamilyAbundanceDiversityChart(FamilyCompositionData data)
     {
         this.data = data ?? throw new ArgumentNullException(nameof(data));
-        Points = Array.AsReadOnly(data.Families.Select((r, i) => (r, i)).Where(p => p.r.MinimumProteinCount.HasValue)
-            .Select(p => new FamilyDiversityPoint(p.r.Key, p.r.Label, p.r.MeanPercent, p.r.MinimumProteinCount!.Value, p.i + 1)).ToArray());
-        UnavailableFamilies = Array.AsReadOnly(data.Families.Where(r => !r.MinimumProteinCount.HasValue).ToArray());
+        Points = Array.AsReadOnly(data.Families.Select((r, i) => (r, i)).Where(p => p.r.GreedyProteinCount.HasValue)
+            .Select(p => new FamilyDiversityPoint(p.r.Key, p.r.Label, p.r.MeanPercent, p.r.GreedyProteinCount!.Value, p.i + 1)).ToArray());
+        UnavailableFamilies = Array.AsReadOnly(data.Families.Where(r => !r.GreedyProteinCount.HasValue).ToArray());
     }
 
     protected override void OnRender(DrawingContext dc)
@@ -40,7 +41,7 @@ public sealed class FamilyAbundanceDiversityChart : CompositionDrawingBase
             dc.DrawLine(new Pen(palette.Grid, .5), new Point(plot.Left, y), new Point(plot.Right, y));
             Label(dc, tick.ToString(System.Globalization.CultureInfo.CurrentCulture), 26, y - 7, 38, 11, brush: palette.Muted);
         }
-        Label(dc, "Minimum proteins", plot.Left, 94, plot.Width, 12, true);
+        Label(dc, "Proteins needed to explain the peptides (greedy estimate)", plot.Left, 94, plot.Width, 11, true);
         Label(dc, "Mean family share (%)", plot.Left, plot.Bottom + 38, plot.Width, 12);
         DrawAxes(dc, plot, new Pen(palette.Axis, .8));
         var placed = new List<Rect>();
@@ -73,10 +74,14 @@ public sealed class FamilyAbundanceDiversityChart : CompositionDrawingBase
         {
             var row = data.Families[i]; double y = 120 + i * 31;
             Label(dc, (i + 1) + ". " + row.Label, legendLeft, y, ActualWidth - legendLeft - 26, 12);
-            string count = row.MinimumProteinCount is int n ? n + " minimum proteins" : "protein count unavailable";
+            string count = row.GreedyProteinCount is int n ? n + " proteins (greedy estimate)" : "protein count unavailable";
+            if (row.UnexplainedPeptideCount > 0) count += "; unexplained peptides: " + row.UnexplainedPeptideCount;
             Label(dc, Number(row.MeanPercent) + "% | " + count, legendLeft, y + 15, ActualWidth - legendLeft - 26, 10, brush: palette.Muted);
         }
-        Label(dc, "Coincident points retain their coordinates. Missing counts are listed, not plotted. Protein counts are database dependent.",
+        for (int i = 0; i < data.UnavailableFamilies.Count; i++)
+            Label(dc, data.UnavailableFamilies[i] + ": share unavailable", legendLeft,
+                120 + (data.Families.Count + i) * 31, ActualWidth - legendLeft - 26, 11, brush: palette.Muted);
+        Label(dc, "Counts approximate the minimum database-protein set. Coincident points are retained; missing counts are listed, not plotted.",
             26, ActualHeight - 25, ActualWidth - 52, 11, brush: palette.Muted);
     }
 }

@@ -11,7 +11,11 @@ public sealed class FamilySubclassChart : CompositionDrawingBase
 {
     private readonly FamilyCompositionData data;
     public IReadOnlyList<FamilyCompositionValue> Rows => data.Families;
-    public FamilySubclassChart(FamilyCompositionData data) => this.data = data ?? throw new ArgumentNullException(nameof(data));
+    public FamilySubclassChart(FamilyCompositionData data)
+    {
+        this.data = data ?? throw new ArgumentNullException(nameof(data));
+        if (data.IsMeanOfRuns) throw new ArgumentException("Subclass charts require all runs pooled.", nameof(data));
+    }
 
     protected override void OnRender(DrawingContext dc)
     {

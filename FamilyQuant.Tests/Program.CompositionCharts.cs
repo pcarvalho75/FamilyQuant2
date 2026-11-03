@@ -71,13 +71,16 @@ internal static partial class Program
         Check("SD extending below zero expands the axis instead of entering the label column",
             new FamilyCompositionChart(wideSd).AxisMinimum == -10);
 
-        var figures = FamilyCompositionFigures.Build(data);
+        var pooled = new FamilyCompositionData(data.Families, "Share of credited family signal", false);
+        var figures = FamilyCompositionFigures.Build(data, pooled);
         Check("program offers both family means and stacked subclass figures",
             figures.Select(f => f.FileName).SequenceEqual(new[] { "family_composition.png", "family_subclasses.png" }));
         Check("missing subclass breakdown stays explicitly unavailable",
-            new FamilySubclassChart(data).Rows[2].Subclasses.Count == 0);
+            new FamilySubclassChart(pooled).Rows[2].Subclasses.Count == 0);
+        Check("mean-of-runs input cannot be drawn as a pooled subclass breakdown",
+            Throws<ArgumentException>(() => new FamilySubclassChart(data)));
         foreach (var figure in figures)
-            CheckChartNative(figure.FileName, () => FamilyCompositionFigures.Build(data)
+            CheckChartNative(figure.FileName, () => FamilyCompositionFigures.Build(data, pooled)
                 .Single(f => f.FileName == figure.FileName).Chart, folder, figure.ScreenHeight);
         CheckChartNative("empty-composition.png", () => new FamilyCompositionChart(
             new FamilyCompositionData(Array.Empty<FamilyCompositionValue>(), "No stored shares")), folder, 540);

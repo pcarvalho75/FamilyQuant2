@@ -42,10 +42,13 @@ public sealed class FamilyCompositionChart : CompositionDrawingBase
                     dc.DrawLine(new Pen(palette.Ink, 1.5), new Point(end, y + 6), new Point(end, y + 17));
             }
             Label(dc, Number(row.MeanPercent) + "%", right + 18, y - 1, 140, 13, true);
-            Label(dc, row.SdPercent is double s ? "SD " + Number(s) + "; n = " + row.RunCount
+            Label(dc, !data.IsMeanOfRuns ? "Pooled share" : row.SdPercent is double s ? "SD " + Number(s) + "; n = " + row.RunCount
                 : "SD unavailable; n = " + row.RunCount, right + 18, y + 17, 150, 10, brush: palette.Muted);
         }
-        Label(dc, "Bars: mean share. Whiskers: +/- 1 SD across runs; no whisker when SD is unavailable.",
+        string note = data.IsMeanOfRuns ? "Bars: mean share. Whiskers: +/- 1 SD across runs; no whisker when SD is unavailable."
+            : "Bars: pooled credited signal shares. Run-to-run uncertainty is not shown on this basis.";
+        if (data.UnavailableFamilies.Count > 0) note += " Unavailable shares: " + string.Join(", ", data.UnavailableFamilies) + ".";
+        Label(dc, note,
             26, ActualHeight - 25, ActualWidth - 52, 11, brush: palette.Muted);
     }
 }
