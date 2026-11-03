@@ -66,8 +66,7 @@ The rerun of the full analysis with the scope "Toxin", "venom gland" (D39), so t
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| K1 | Rerun: Compute on the three runs finishes, from the RAW cache | L | 0.5 | 🟢 | K2 | The run log shows Compute finished and the project saved | OP | | 0 | 0 | |
-| K2 | Rerun: Results, sensitivity and save; the change table posted (proteins and families that moved, the ten lectins, the new headline, subclass parts, others) | L | 0.3 | K1 | K4, K6 | `RESULT J7a2` with the change table | OP | | 0 | 0 | |
+| K2 | Rerun: Results, sensitivity and save; the change table posted (proteins and families that moved, the ten lectins, the new headline, subclass parts, others) | L | 0.3 | 🟢 | K4, K6 | `RESULT J7a2` with the change table | OP | | 0 | 0 | |
 | K4 | Science check, part 2: the rerun's headline numbers against the program's stored studies and exports; verdict on D39 | M | 0.4 | K2 | K6 | `APPROVED` on the rerun, or the changes it needs | GR | | 0 | 0 | |
 
 ### W2 The interpretation
@@ -88,8 +87,7 @@ The export failed on Ana's project (a figure read the on-screen palette from the
 | J41b | J41 reviewed and merged | L | 0.2 | J41a | J30c, J32c | Approved; gate green | FL | | 0 | 0 | |
 | J30b | The fixed export runs to the end on a copy of the full-run project through the real command | M | 0.5 | J41a | J30c | Word report and supplement written; times reported | RS | | 0 | 0 | |
 | J30c | J30 reviewed and merged | L | 0.2 | J30b | J24c, J32c, J34b, J36b, K8, K14 | Approved; gate green | RS | | 0 | 0 | |
-| J24b | J24 (export progress) and J31 (Export report available after opening) merged | L | 0.1 | 🟢 | J24c, K8, K14 | Gate green | SH | | 0 | 0 | |
-| J24c | Export progress on the full-run project: the longest gap between two steps named | L | 0.3 | J30c, J24b | K14 | `READY` names the longest gap and its step | SH | | 0 | 0 | |
+| J24c | Export progress on the full-run project: the longest gap between two steps named | L | 0.3 | J30c | K14 | `READY` names the longest gap and its step | SH | | 0 | 0 | |
 | J16b | J16 re-reviewed and merged | L | 0.2 | 🟢 | J34b, K8, K14 | Approved; gate green | LK | | 0 | 0 | |
 | J32c | Export timing on the full-run copy: the attribution step with the cache warm, its sub-steps timed | L | 0.3 | J30c, J41b | J32d, J39 | `READY` with the sub-step times before and after | T1 | | 0 | 0 | |
 | J32d | J32 reviewed and merged | L | 0.2 | J32c | K14 | Approved; gate green | T1 | | 0 | 0 | |
@@ -97,8 +95,7 @@ The export failed on Ana's project (a figure read the on-screen palette from the
 | J36a | Delivery command built and tested on a small computed project: export, trace, project, panel, read-me, checks, nothing written outside its folder | M | 0.5 | 🟢 | J36b | Fixture run passes | RS | | 0 | 0 | |
 | J36b | Delivery rehearsal on the first full-run project into a staging folder | L | 0.3 | J30c, J36a | J36c | Summary with hashes and the trace's count | RS | | 0 | 0 | |
 | J36c | J36 reviewed and merged | L | 0.2 | J36b | K17 | Approved; gate green | RS | | 0 | 0 | |
-| J34a | The report's look: the 38-page rehearsal report read page by page as a scientist would | M | 0.5 | 🟢 | J34b | A numbered list with page, figure id and file:line | LK | | 0 | 0 | |
-| J34b | Look fixes for the listed items | M | 1 | J34a, J30c, J16b | J34c | Each item fixed or ruled | LK | | 0 | 0 | |
+| J34b | Look fixes for the listed items | M | 1 | J30c, J16b | J34c | Each item fixed or ruled | LK | | 0 | 0 | |
 | J34c | J34 reviewed and merged | L | 0.2 | J34b | K14 | Approved; gate green | LK | | 0 | 0 | |
 
 ### W4 Release 2.1.0 on GitHub
@@ -107,7 +104,7 @@ Ana installs it from the public releases page (D31); the desk publishes on Paulo
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| K8 | Release candidate: release notes and version 2.1.0 merged with master after J30, J24, J31 and J16; the zip built | L | 0.3 | J30c, J24b, J16b | K9 | Zip with its SHA-256; the report cover prints 2.1.0 | EV | | 0 | 0 | |
+| K8 | Release candidate: release notes and version 2.1.0 merged with master after J30, J24, J31 and J16; the zip built | L | 0.3 | J30c, J16b | K9 | Zip with its SHA-256; the report cover prints 2.1.0 | EV | | 0 | 0 | |
 | K9 | Full gate on the candidate: every ledger receipt current (quick gates defer them) | M | 0.5 | K8 | K10 | Full gate green, ledger 5,460 of 5,460 | Orchestrator | | 0 | 0 | |
 | K10 | The unpacked candidate exports the final project's report through the real menu | L | 0.3 | K9, K6 | K11 | Files and times recorded | EV | | 0 | 0 | |
 | K11 | Published: v2.1.0 on pcarvalho75/FamilyQuant2-releases with the zip, its .sha256 and user release notes | L | 0.1 | K10 | K13, K17 | The release page is live | Orchestrator | | 0 | 0 | |
@@ -117,7 +114,7 @@ Ana installs it from the public releases page (D31); the desk publishes on Paulo
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| K14 | Final export of the interpreted project through the real command, on master with J30, J24, J16, J32 and J34 | L | 0.5 | K6, J30c, J24b, J24c, J16b, J32d, J34c | K15, K16 | Word report and supplement written | OP | | 0 | 0 | |
+| K14 | Final export of the interpreted project through the real command, on master with J30, J24, J16, J32 and J34 | L | 0.5 | K6, J30c, J24c, J16b, J32d, J34c | K15, K16 | Word report and supplement written | OP | | 0 | 0 | |
 | K15 | Number trace on the final report: every number found, or each one not found ruled | L | 0.2 | K14 | K17 | `trace.csv` with nothing left open | T1 | | 0 | 0 | |
 | K16 | The final report's pages read for look and sense | L | 0.3 | K14 | K17 | No blocking item | LK | | 0 | 0 | |
 | K17 | Delivered: the Word report, supplement, project, family panel and a read-me with the release link written to `AnaG/Bjararaca/Relatorio`; nothing else in Ana's folders touched | L | 0.2 | K7, K15, K16, J36c, K11 | | The five items with hashes; the rest of AnaG unchanged | OP | | 0 | 0 | |
@@ -128,7 +125,6 @@ Compute took 37 to 54 minutes on Ana's project with the RAW cache warm, silent f
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| J17b | Faster evidence fetch (one streamed query instead of one per family, about 3 times faster, same entries) reviewed and merged | L | 0.2 | 🟢 | | Approved; gate green | AS | | 0 | 0 | |
 | J35a | Progress for Compute and opening: every phase counted against a known total, the current item, elapsed time and time since the last step, all logged | M | 0.6 | 🟢 | J35b | A fixture Compute records every phase once, in order | SH | | 0 | 0 | |
 | J35b | Progress on the full-run project: the longest gap between two steps named | L | 0.3 | J35a | J35c | `READY` names the longest gap and its phase | SH | | 0 | 0 | |
 | J35c | J35 reviewed and merged | L | 0.2 | J35b | J40 | Approved; gate green | SH | | 0 | 0 | |
