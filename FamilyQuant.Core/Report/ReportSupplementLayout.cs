@@ -123,7 +123,7 @@ public static class ReportSupplementLayout
         if (table.Id.StartsWith("panel-block:", StringComparison.Ordinal)
             && (table.Id.EndsWith(":run-shares", StringComparison.Ordinal) || table.Id.EndsWith(":domains", StringComparison.Ordinal)
                 || table.Id.EndsWith(":subclass-definitions", StringComparison.Ordinal))) return true;
-        if (table.Id is "family-run-means" or "protein-counts" or "quality-family-world" or "source-world-support" or "methods-project" or "assignment-conflicts-table") return false;
+        if (table.Id is "family-run-means" or "protein-counts" or "quality-family-world" or "source-world-support" or "methods-project" or "methods-panel-links" or "assignment-conflicts-table") return false;
         return table.Rows.Count > 20;
     }
 
