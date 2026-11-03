@@ -292,7 +292,7 @@ public partial class USearchLib
             if (owner.busy)
             {
                 owner.ShowBuildMessage(
-                    "Nothing was started: a run is already going. Wait for it to finish; the buttons come back by themselves.",
+                    "Nothing was started: USEARCH is already running. Two runs over the same files would interfere with each other. Wait for it to finish; the buttons come back by themselves.",
                     "Already running", MessageBoxButton.OK, MessageBoxImage.Information);
                 return;
             }

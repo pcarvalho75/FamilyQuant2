@@ -5,76 +5,76 @@
   "runs": [
     {
       "id": "SH-curation-actions",
-      "command": "C:\\FamilyQuant-gate\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --prove-curation-actions D:/FamilyQuant-data/out-shell/N3/source FamilyQuant.Tests/ReferenceGoldenHost/bin/Release/net10.0-windows7.0/ReferenceGoldenHost.exe D:/FamilyQuant-data/out-shell/N6-curation-20261102-080337/cohort-audit.json D:/FamilyQuant-data/out-refresh\\20261102-135654-FamilyQuant-gate\\sh-curation-actions \u00222026-11-02 13:59:16 -0800\u0022",
-      "executedAt": "2026-11-02 13:59:16 -0800",
-      "commit": "4d28dbcc530f7cccc9dff5a9df676924c4b558f8",
+      "command": "C:\\FamilyQuant-gate\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --prove-curation-actions D:/FamilyQuant-data/out-shell/N3/source FamilyQuant.Tests/ReferenceGoldenHost/bin/Release/net10.0-windows7.0/ReferenceGoldenHost.exe D:/FamilyQuant-data/out-shell/N6-curation-20261102-080337/cohort-audit.json D:/FamilyQuant-data/out-refresh\\20261102-163331-FamilyQuant-gate\\sh-curation-actions \u00222026-11-02 16:34:38 -0800\u0022",
+      "executedAt": "2026-11-02 16:34:38 -0800",
+      "commit": "bd07003d11ead79d8ce191ffa2ec8b2b96d30c25",
       "artifacts": [
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\sh-curation-actions\\compared-current-csv.json",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-163331-FamilyQuant-gate\\sh-curation-actions\\compared-current-csv.json",
           "sha256": "6D508A836C788C88DE73EF7F82A1D3D35EB0364B8E3758C9F60D06A162DFC741"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\sh-curation-actions\\current.json",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-163331-FamilyQuant-gate\\sh-curation-actions\\current.json",
           "sha256": "9036D208FF09A3CACB01E787A20304D8D30FB9A4B5FF16111AAAC4B3EFB9526E"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\sh-curation-actions\\current.json.log",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-163331-FamilyQuant-gate\\sh-curation-actions\\current.json.log",
           "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\sh-curation-actions\\frozen.json",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-163331-FamilyQuant-gate\\sh-curation-actions\\frozen.json",
           "sha256": "9036D208FF09A3CACB01E787A20304D8D30FB9A4B5FF16111AAAC4B3EFB9526E"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\sh-curation-actions\\frozen.json.log",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-163331-FamilyQuant-gate\\sh-curation-actions\\frozen.json.log",
           "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\sh-curation-actions\\proofs.log",
-          "sha256": "66171DCEEC62B47A53114C18B36E927F2D978A25D0072CD4953CC5EE593DD90B"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-163331-FamilyQuant-gate\\sh-curation-actions\\proofs.log",
+          "sha256": "1008F3A9E9947561B1CD9D6E22A7782A30AABD8B293844EAC930260EE2DE0AE8"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\sh-curation-actions\\repeat.json",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-163331-FamilyQuant-gate\\sh-curation-actions\\repeat.json",
           "sha256": "9036D208FF09A3CACB01E787A20304D8D30FB9A4B5FF16111AAAC4B3EFB9526E"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\sh-curation-actions\\repeat.json.log",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-163331-FamilyQuant-gate\\sh-curation-actions\\repeat.json.log",
           "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\sh-curation-actions\\review-current-text.json",
-          "sha256": "E839E041BDFDAC39AF6D0930EE36140611430D355DBD502259A8153BE4E89D9F"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-163331-FamilyQuant-gate\\sh-curation-actions\\review-current-text.json",
+          "sha256": "09F7ED19D0F167814EE7E816785D660FBB959DE636F3784923D2FB0190771458"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\sh-curation-actions\\wording-for-paulo.tsv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-163331-FamilyQuant-gate\\sh-curation-actions\\wording-for-paulo.tsv",
           "sha256": "BBE9B00928E187D85BCBB101128A08D5CD382B6CA45C8D8495AE34FB4D9D1D19"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\sh-curation-actions\\native\\actions.json",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-163331-FamilyQuant-gate\\sh-curation-actions\\native\\actions.json",
           "sha256": "B0B2501DB34115B75684C1F2E104FE8F9C2852206041109E0267753AE66BC8E4"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\sh-curation-actions\\native\\annotations.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-163331-FamilyQuant-gate\\sh-curation-actions\\native\\annotations.csv",
           "sha256": "8E3E75AF2832D91DC353A331D4AEAB68C93B933AC033915C19EB7C0EA43F0EBE"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\sh-curation-actions\\native\\annotations.fcf",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-163331-FamilyQuant-gate\\sh-curation-actions\\native\\annotations.fcf",
           "sha256": "EA0DF9A1EAC0F880117B7B61B2014556D902407A7A53D2C403A7C3A04EB398D2"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\sh-curation-actions\\native\\composition.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-163331-FamilyQuant-gate\\sh-curation-actions\\native\\composition.csv",
           "sha256": "E31FE3715AEA27550B912D1F533D7D036DA9E82DDC103AD91B54DE7E09A32170"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\sh-curation-actions\\native\\owned.plp",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-163331-FamilyQuant-gate\\sh-curation-actions\\native\\owned.plp",
           "sha256": "D89E4677E8B0DA29E68AC8E8C1A7FB2DE6C93461CEDDAD5E3B72391E77737470"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\sh-curation-actions\\native\\preferences.json",
-          "sha256": "C1090F8FE342976A572B455CF2F1AAF0CEF3381BE7056AC2D5F46A6B85D14A71"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-163331-FamilyQuant-gate\\sh-curation-actions\\native\\preferences.json",
+          "sha256": "6E1F125022DD5E00A887305A35D8D7C1D5AC0C6E9AE6425700D95B17D1ADA03D"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\sh-curation-actions\\native\\visible.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-163331-FamilyQuant-gate\\sh-curation-actions\\native\\visible.csv",
           "sha256": "BCEC199B1CA31C3E3910245A5AFDDD5FF6EBD2F03A10CDA1CE28E4015C69B991"
         },
         {
@@ -82,51 +82,51 @@
           "sha256": "27C224E3611E96C680D0B97E1C97934A9BC2DA0EA34AB2844A5EADFBB31B8C3D"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\sh-curation-actions\\executed\\CurationExportSnapshot.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-163331-FamilyQuant-gate\\sh-curation-actions\\executed\\CurationExportSnapshot.cs",
           "sha256": "B48C9CD320AA49AC7DDD073032850CBC769B7AFCD34D42D75CD1F06737515724"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\sh-curation-actions\\executed\\Program.CurationActionProbe.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-163331-FamilyQuant-gate\\sh-curation-actions\\executed\\Program.CurationActionProbe.cs",
           "sha256": "BABAA61B3AD308183BCFDB5F930270D74285DDE7BDF3789BF9DEF590B67AF104"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\sh-curation-actions\\executed\\Program.CurationActionLedger.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-163331-FamilyQuant-gate\\sh-curation-actions\\executed\\Program.CurationActionLedger.cs",
           "sha256": "AC43542BBEF6F819D6AA5BD30A849B7F82C5639D52834DD36564DD03687E98C2"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\sh-curation-actions\\executed\\Program.ShellReviewWording.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-163331-FamilyQuant-gate\\sh-curation-actions\\executed\\Program.ShellReviewWording.cs",
           "sha256": "80E4FE6597400151ADBD96260D491D84EB8519F1B0C5800545E57ECE558683AC"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\sh-curation-actions\\executed\\Program.Commands.CurationActions.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-163331-FamilyQuant-gate\\sh-curation-actions\\executed\\Program.Commands.CurationActions.cs",
           "sha256": "17A11DD6AF08156D8FA4CF85EE29FC5387647B3A7CBCC55E02B6E830A9B9B843"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\sh-curation-actions\\executed\\Program.ShellProofWindows.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-163331-FamilyQuant-gate\\sh-curation-actions\\executed\\Program.ShellProofWindows.cs",
           "sha256": "630AEB8FA35969CBF53BDD55A5EB1A28E6C86B14DAD3FA71EBF8EC560013D0EE"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\sh-curation-actions\\executed\\FamilyQuant.Tests.dll",
-          "sha256": "AF6B483E2C3E34036AD088F4ECCBB6B316270C6B911EA6D31A7EA222DB761AE2"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-163331-FamilyQuant-gate\\sh-curation-actions\\executed\\FamilyQuant.Tests.dll",
+          "sha256": "22236F6B3713CA0ED8D5B5FF4E62938BACEB92E8AD5E117C5DC1AF7B463ACE99"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\sh-curation-actions\\executed\\FamilyQuant2.dll",
-          "sha256": "8511AB784ACA1C6C07FD728C1CEB53E76C60D9A4A7EBE381AF9759D294F15C59"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-163331-FamilyQuant-gate\\sh-curation-actions\\executed\\FamilyQuant2.dll",
+          "sha256": "82A2171E2E9F5DA83023FB3056E7C5F3059EA63B511DF8BCAAAD62D55E46970D"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\sh-curation-actions\\executed\\FamilyQuant.Core.dll",
-          "sha256": "743F2A4D78BAFC24B294E887663A75FE5A7BB4DA8B0ACF95EBF52F5BEE2DC116"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-163331-FamilyQuant-gate\\sh-curation-actions\\executed\\FamilyQuant.Core.dll",
+          "sha256": "1F57737BD32B299A001FF2677F1743AFD0D4739764C751575760FAA627CE653E"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\sh-curation-actions\\executed\\ReferenceGoldenHost.exe",
-          "sha256": "3A0BD04A65920F738B70F554F0F76031AC2CDAD282113D8B08AF8523667D2426"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-163331-FamilyQuant-gate\\sh-curation-actions\\executed\\ReferenceGoldenHost.exe",
+          "sha256": "8965EE5581C9AB8B89ACA7D1D5C59E261B3A8B5511F4CBAFB8A0205C79DBE628"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\sh-curation-actions\\executed\\ReferenceGoldenHost.dll",
-          "sha256": "13B9395F56C66659A6A90C350190D140E2E07F847D24B39D591ECE63EEDF720A"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-163331-FamilyQuant-gate\\sh-curation-actions\\executed\\ReferenceGoldenHost.dll",
+          "sha256": "3E759FE105C71577690CA63FC102DF67A68553F0579C3A96EA798D9AB98814C8"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\sh-curation-actions\\executed\\FamilyQuant.dll",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-163331-FamilyQuant-gate\\sh-curation-actions\\executed\\FamilyQuant.dll",
           "sha256": "D764488C923945285E03B338E5A91BF28106A35B11AB465D8E2B23D125F03FD8"
         }
       ],
@@ -421,7 +421,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "executed curation screen action/export",
-          "sha256": "0845785B94D6ED35E9702CD57B9DEB382608DE637444F8ED7154683872D75E5E"
+          "sha256": "FA446992C4421614EEB7A719A80650E93C0B7525105C72583F8BDFD5108943DF"
         },
         {
           "path": "FamilyQuant.Core/Evidence/SavedFileCheck.cs",
@@ -470,7 +470,7 @@
           "kind": "test",
           "target": "CurationActionProbe",
           "assertion": "curation native keyword-grouping: the actual keyword button prepares its review, Cancel preserves all bytes, accepted supplied settings group unlocked families and one Undo restores the document",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\sh-curation-actions\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-163331-FamilyQuant-gate\\sh-curation-actions\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -637,7 +637,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "executed curation screen action/export",
-          "sha256": "0845785B94D6ED35E9702CD57B9DEB382608DE637444F8ED7154683872D75E5E"
+          "sha256": "FA446992C4421614EEB7A719A80650E93C0B7525105C72583F8BDFD5108943DF"
         },
         {
           "path": "FamilyQuant.Core/Evidence/SavedFileCheck.cs",
@@ -686,7 +686,7 @@
           "kind": "test",
           "target": "CurationActionProbe",
           "assertion": "curation native display-filters: contaminant and positive-share Checked/Unchecked change the visible projection and restore all four rows without editing the document",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\sh-curation-actions\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-163331-FamilyQuant-gate\\sh-curation-actions\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -877,7 +877,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "executed curation screen action/export",
-          "sha256": "0845785B94D6ED35E9702CD57B9DEB382608DE637444F8ED7154683872D75E5E"
+          "sha256": "FA446992C4421614EEB7A719A80650E93C0B7525105C72583F8BDFD5108943DF"
         },
         {
           "path": "FamilyQuant.Core/Evidence/SavedFileCheck.cs",
@@ -926,7 +926,7 @@
           "kind": "test",
           "target": "CurationActionsLedger",
           "assertion": "curation native complete CSV output equals frozen for twenty culture/mode/header fixtures including comma quote CR LF null and fractional fields",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\sh-curation-actions\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-163331-FamilyQuant-gate\\sh-curation-actions\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -1109,7 +1109,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "executed curation screen action/export",
-          "sha256": "0845785B94D6ED35E9702CD57B9DEB382608DE637444F8ED7154683872D75E5E"
+          "sha256": "FA446992C4421614EEB7A719A80650E93C0B7525105C72583F8BDFD5108943DF"
         },
         {
           "path": "FamilyQuant.Core/Evidence/SavedFileCheck.cs",
@@ -1158,7 +1158,7 @@
           "kind": "test",
           "target": "CurationActionProbe",
           "assertion": "curation native normalization-recalculate: both native selectors leave old displayed shares labelled with their original mode until the Recalculate button publishes the chosen mode",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\sh-curation-actions\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-163331-FamilyQuant-gate\\sh-curation-actions\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -1557,7 +1557,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "executed curation screen action/export",
-          "sha256": "0845785B94D6ED35E9702CD57B9DEB382608DE637444F8ED7154683872D75E5E"
+          "sha256": "FA446992C4421614EEB7A719A80650E93C0B7525105C72583F8BDFD5108943DF"
         },
         {
           "path": "FamilyQuant.Core/Evidence/SavedFileCheck.cs",
@@ -1606,7 +1606,7 @@
           "kind": "test",
           "target": "CurationActionProbe",
           "assertion": "curation native display-filters: contaminant and positive-share Checked/Unchecked change the visible projection and restore all four rows without editing the document",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\sh-curation-actions\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-163331-FamilyQuant-gate\\sh-curation-actions\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -1733,7 +1733,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "executed curation screen action/export",
-          "sha256": "0845785B94D6ED35E9702CD57B9DEB382608DE637444F8ED7154683872D75E5E"
+          "sha256": "FA446992C4421614EEB7A719A80650E93C0B7525105C72583F8BDFD5108943DF"
         },
         {
           "path": "FamilyQuant.Core/Evidence/SavedFileCheck.cs",
@@ -1782,7 +1782,7 @@
           "kind": "test",
           "target": "CurationActionProbe",
           "assertion": "curation native native-picker-values: executed protein/composition CSV chooser filters and default filenames equal their frozen literals before the presenter supplies a path; the PLP chooser retains the frozen *.plp selection pattern and its accepted file was actually loaded",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\sh-curation-actions\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-163331-FamilyQuant-gate\\sh-curation-actions\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -2165,7 +2165,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "executed curation screen action/export",
-          "sha256": "0845785B94D6ED35E9702CD57B9DEB382608DE637444F8ED7154683872D75E5E"
+          "sha256": "FA446992C4421614EEB7A719A80650E93C0B7525105C72583F8BDFD5108943DF"
         },
         {
           "path": "FamilyQuant.Core/Evidence/SavedFileCheck.cs",
@@ -2214,7 +2214,7 @@
           "kind": "test",
           "target": "CurationActionsLedger",
           "assertion": "curation native complete CSV output equals frozen for twenty culture/mode/header fixtures including comma quote CR LF null and fractional fields",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\sh-curation-actions\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-163331-FamilyQuant-gate\\sh-curation-actions\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -2389,7 +2389,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "executed curation screen action/export",
-          "sha256": "0845785B94D6ED35E9702CD57B9DEB382608DE637444F8ED7154683872D75E5E"
+          "sha256": "FA446992C4421614EEB7A719A80650E93C0B7525105C72583F8BDFD5108943DF"
         },
         {
           "path": "FamilyQuant.Core/Evidence/SavedFileCheck.cs",
@@ -2438,7 +2438,7 @@
           "kind": "test",
           "target": "CurationActionProbe",
           "assertion": "curation native composition-export: the actual composition export button writes the exact production table for the current denominator and shared-peptide choice",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\sh-curation-actions\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-163331-FamilyQuant-gate\\sh-curation-actions\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -2613,7 +2613,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "executed curation screen action/export",
-          "sha256": "0845785B94D6ED35E9702CD57B9DEB382608DE637444F8ED7154683872D75E5E"
+          "sha256": "FA446992C4421614EEB7A719A80650E93C0B7525105C72583F8BDFD5108943DF"
         },
         {
           "path": "FamilyQuant.Core/Evidence/SavedFileCheck.cs",
@@ -2662,7 +2662,7 @@
           "kind": "test",
           "target": "CurationActionProbe",
           "assertion": "curation native native-picker-values: executed protein/composition CSV chooser filters and default filenames equal their frozen literals before the presenter supplies a path; the PLP chooser retains the frozen *.plp selection pattern and its accepted file was actually loaded",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\sh-curation-actions\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-163331-FamilyQuant-gate\\sh-curation-actions\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -2941,7 +2941,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "executed curation screen action/export",
-          "sha256": "0845785B94D6ED35E9702CD57B9DEB382608DE637444F8ED7154683872D75E5E"
+          "sha256": "FA446992C4421614EEB7A719A80650E93C0B7525105C72583F8BDFD5108943DF"
         },
         {
           "path": "FamilyQuant.Core/Evidence/SavedFileCheck.cs",
@@ -2990,7 +2990,7 @@
           "kind": "test",
           "target": "CurationActionProbe",
           "assertion": "curation native normalization-recalculate: both native selectors leave old displayed shares labelled with their original mode until the Recalculate button publishes the chosen mode",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\sh-curation-actions\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-163331-FamilyQuant-gate\\sh-curation-actions\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -3365,7 +3365,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "executed curation screen action/export",
-          "sha256": "0845785B94D6ED35E9702CD57B9DEB382608DE637444F8ED7154683872D75E5E"
+          "sha256": "FA446992C4421614EEB7A719A80650E93C0B7525105C72583F8BDFD5108943DF"
         },
         {
           "path": "FamilyQuant.Core/Evidence/SavedFileCheck.cs",
@@ -3414,7 +3414,7 @@
           "kind": "test",
           "target": "CurationActionsLedger",
           "assertion": "curation native complete CSV output equals frozen for twenty culture/mode/header fixtures including comma quote CR LF null and fractional fields",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\sh-curation-actions\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-163331-FamilyQuant-gate\\sh-curation-actions\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -3533,7 +3533,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "executed curation screen action/export",
-          "sha256": "0845785B94D6ED35E9702CD57B9DEB382608DE637444F8ED7154683872D75E5E"
+          "sha256": "FA446992C4421614EEB7A719A80650E93C0B7525105C72583F8BDFD5108943DF"
         },
         {
           "path": "FamilyQuant.Core/Evidence/SavedFileCheck.cs",
@@ -3582,7 +3582,7 @@
           "kind": "test",
           "target": "CurationActionProbe",
           "assertion": "curation native sort-toggle: native Sorting toggles ascending/descending and restores the identical ascending order with unchanged stored values",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\sh-curation-actions\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-163331-FamilyQuant-gate\\sh-curation-actions\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -3781,7 +3781,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "executed curation screen action/export",
-          "sha256": "0845785B94D6ED35E9702CD57B9DEB382608DE637444F8ED7154683872D75E5E"
+          "sha256": "FA446992C4421614EEB7A719A80650E93C0B7525105C72583F8BDFD5108943DF"
         },
         {
           "path": "FamilyQuant.Core/Evidence/SavedFileCheck.cs",
@@ -3830,7 +3830,7 @@
           "kind": "test",
           "target": "CurationActionProbe",
           "assertion": "curation native fullxic-basis: native Full XIC basis selection applies the recorded TIC denominator to the attached synthetic envelope",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\sh-curation-actions\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-163331-FamilyQuant-gate\\sh-curation-actions\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -4013,7 +4013,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "executed curation screen action/export",
-          "sha256": "0845785B94D6ED35E9702CD57B9DEB382608DE637444F8ED7154683872D75E5E"
+          "sha256": "FA446992C4421614EEB7A719A80650E93C0B7525105C72583F8BDFD5108943DF"
         },
         {
           "path": "FamilyQuant.Core/Evidence/SavedFileCheck.cs",
@@ -4062,7 +4062,7 @@
           "kind": "test",
           "target": "CurationActionProbe",
           "assertion": "curation native word-grouping: the native word-grouping button honors a user lock, groups the remaining synthetic descriptions and Undo restores the pre-grouping document",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\sh-curation-actions\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-163331-FamilyQuant-gate\\sh-curation-actions\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -4245,7 +4245,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "executed curation screen action/export",
-          "sha256": "0845785B94D6ED35E9702CD57B9DEB382608DE637444F8ED7154683872D75E5E"
+          "sha256": "FA446992C4421614EEB7A719A80650E93C0B7525105C72583F8BDFD5108943DF"
         },
         {
           "path": "FamilyQuant.Core/Evidence/SavedFileCheck.cs",
@@ -4294,7 +4294,7 @@
           "kind": "test",
           "target": "CurationActionsLedger",
           "assertion": "curation native complete CSV output equals frozen for twenty culture/mode/header fixtures including comma quote CR LF null and fractional fields",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\sh-curation-actions\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-163331-FamilyQuant-gate\\sh-curation-actions\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -4485,7 +4485,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "executed curation screen action/export",
-          "sha256": "0845785B94D6ED35E9702CD57B9DEB382608DE637444F8ED7154683872D75E5E"
+          "sha256": "FA446992C4421614EEB7A719A80650E93C0B7525105C72583F8BDFD5108943DF"
         },
         {
           "path": "FamilyQuant.Core/Evidence/SavedFileCheck.cs",
@@ -4534,7 +4534,7 @@
           "kind": "test",
           "target": "CurationActionProbe",
           "assertion": "curation native decoy-filter: actual Checked/Unchecked restores every persisted row and leaves exact curation bytes unchanged",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\sh-curation-actions\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-163331-FamilyQuant-gate\\sh-curation-actions\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -4821,7 +4821,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "executed curation screen action/export",
-          "sha256": "0845785B94D6ED35E9702CD57B9DEB382608DE637444F8ED7154683872D75E5E"
+          "sha256": "FA446992C4421614EEB7A719A80650E93C0B7525105C72583F8BDFD5108943DF"
         },
         {
           "path": "FamilyQuant.Core/Evidence/SavedFileCheck.cs",
@@ -4870,7 +4870,7 @@
           "kind": "test",
           "target": "CurationActionProbe",
           "assertion": "curation native batch-and-undo: actual batch button edits only selected family IDs/annotations, records one Undo and restores the complete pre-edit document",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\sh-curation-actions\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-163331-FamilyQuant-gate\\sh-curation-actions\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -5077,7 +5077,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "executed curation screen action/export",
-          "sha256": "0845785B94D6ED35E9702CD57B9DEB382608DE637444F8ED7154683872D75E5E"
+          "sha256": "FA446992C4421614EEB7A719A80650E93C0B7525105C72583F8BDFD5108943DF"
         },
         {
           "path": "FamilyQuant.Core/Evidence/SavedFileCheck.cs",
@@ -5126,7 +5126,7 @@
           "kind": "test",
           "target": "CurationActionProbe",
           "assertion": "curation native protein-export: the actual export button writes every currently visible row with the displayed denominator; a native write refusal preserves the previous file bytes",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\sh-curation-actions\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-163331-FamilyQuant-gate\\sh-curation-actions\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -5253,7 +5253,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "executed curation screen action/export",
-          "sha256": "0845785B94D6ED35E9702CD57B9DEB382608DE637444F8ED7154683872D75E5E"
+          "sha256": "FA446992C4421614EEB7A719A80650E93C0B7525105C72583F8BDFD5108943DF"
         },
         {
           "path": "FamilyQuant.Core/Evidence/SavedFileCheck.cs",
@@ -5302,7 +5302,7 @@
           "kind": "test",
           "target": "CurationActionProbe",
           "assertion": "curation native native-picker-values: executed protein/composition CSV chooser filters and default filenames equal their frozen literals before the presenter supplies a path; the PLP chooser retains the frozen *.plp selection pattern and its accepted file was actually loaded",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\sh-curation-actions\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-163331-FamilyQuant-gate\\sh-curation-actions\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -5501,7 +5501,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "executed curation screen action/export",
-          "sha256": "0845785B94D6ED35E9702CD57B9DEB382608DE637444F8ED7154683872D75E5E"
+          "sha256": "FA446992C4421614EEB7A719A80650E93C0B7525105C72583F8BDFD5108943DF"
         },
         {
           "path": "FamilyQuant.Core/Evidence/SavedFileCheck.cs",
@@ -5550,7 +5550,7 @@
           "kind": "test",
           "target": "CurationActionProbe",
           "assertion": "curation native display-filters: contaminant and positive-share Checked/Unchecked change the visible projection and restore all four rows without editing the document",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\sh-curation-actions\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-163331-FamilyQuant-gate\\sh-curation-actions\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -5781,7 +5781,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "executed curation screen action/export",
-          "sha256": "0845785B94D6ED35E9702CD57B9DEB382608DE637444F8ED7154683872D75E5E"
+          "sha256": "FA446992C4421614EEB7A719A80650E93C0B7525105C72583F8BDFD5108943DF"
         },
         {
           "path": "FamilyQuant.Core/Evidence/SavedFileCheck.cs",
@@ -5830,7 +5830,7 @@
           "kind": "test",
           "target": "CurationActionsLedger",
           "assertion": "curation native complete CSV output equals frozen for twenty culture/mode/header fixtures including comma quote CR LF null and fractional fields",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\sh-curation-actions\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-163331-FamilyQuant-gate\\sh-curation-actions\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -6133,7 +6133,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "executed curation screen action/export",
-          "sha256": "0845785B94D6ED35E9702CD57B9DEB382608DE637444F8ED7154683872D75E5E"
+          "sha256": "FA446992C4421614EEB7A719A80650E93C0B7525105C72583F8BDFD5108943DF"
         },
         {
           "path": "FamilyQuant.Core/Evidence/SavedFileCheck.cs",
@@ -6182,7 +6182,7 @@
           "kind": "test",
           "target": "CurationActionProbe",
           "assertion": "curation native annotation-storage: with PatternLab quantitation loaded, the annotation-only native batch leaves every family ID and share value equal through recalculation, saves and reopens the two exact annotations through .fcf, exports both quoted CSV fields, and Undo restores all pre-edit document bytes",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\sh-curation-actions\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-163331-FamilyQuant-gate\\sh-curation-actions\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -6309,7 +6309,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "executed curation screen action/export",
-          "sha256": "0845785B94D6ED35E9702CD57B9DEB382608DE637444F8ED7154683872D75E5E"
+          "sha256": "FA446992C4421614EEB7A719A80650E93C0B7525105C72583F8BDFD5108943DF"
         },
         {
           "path": "FamilyQuant.Core/Evidence/SavedFileCheck.cs",
@@ -6358,7 +6358,7 @@
           "kind": "test",
           "target": "CurationActionProbe",
           "assertion": "curation native native-picker-values: executed protein/composition CSV chooser filters and default filenames equal their frozen literals before the presenter supplies a path; the PLP chooser retains the frozen *.plp selection pattern and its accepted file was actually loaded",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\sh-curation-actions\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-163331-FamilyQuant-gate\\sh-curation-actions\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -6725,7 +6725,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "executed curation screen action/export",
-          "sha256": "0845785B94D6ED35E9702CD57B9DEB382608DE637444F8ED7154683872D75E5E"
+          "sha256": "FA446992C4421614EEB7A719A80650E93C0B7525105C72583F8BDFD5108943DF"
         },
         {
           "path": "FamilyQuant.Core/Evidence/SavedFileCheck.cs",
@@ -6774,7 +6774,7 @@
           "kind": "test",
           "target": "CurationActionProbe",
           "assertion": "curation native decoy-filter: actual Checked/Unchecked restores every persisted row and leaves exact curation bytes unchanged",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\sh-curation-actions\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-163331-FamilyQuant-gate\\sh-curation-actions\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -6909,7 +6909,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "executed curation screen action/export",
-          "sha256": "0845785B94D6ED35E9702CD57B9DEB382608DE637444F8ED7154683872D75E5E"
+          "sha256": "FA446992C4421614EEB7A719A80650E93C0B7525105C72583F8BDFD5108943DF"
         },
         {
           "path": "FamilyQuant.Core/Evidence/SavedFileCheck.cs",
@@ -6958,7 +6958,7 @@
           "kind": "test",
           "target": "CurationActionsLedger",
           "assertion": "curation native complete CSV output equals frozen for twenty culture/mode/header fixtures including comma quote CR LF null and fractional fields",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\sh-curation-actions\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-163331-FamilyQuant-gate\\sh-curation-actions\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -7093,7 +7093,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "executed curation screen action/export",
-          "sha256": "0845785B94D6ED35E9702CD57B9DEB382608DE637444F8ED7154683872D75E5E"
+          "sha256": "FA446992C4421614EEB7A719A80650E93C0B7525105C72583F8BDFD5108943DF"
         },
         {
           "path": "FamilyQuant.Core/Evidence/SavedFileCheck.cs",
@@ -7142,7 +7142,7 @@
           "kind": "test",
           "target": "CurationActionProbe",
           "assertion": "curation native cell-edit: the actual grid CellEditEnding event and column binding renumber, lock both families, record one Undo and restore every curation byte without activating an editor",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\sh-curation-actions\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-163331-FamilyQuant-gate\\sh-curation-actions\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -7421,7 +7421,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "executed curation screen action/export",
-          "sha256": "0845785B94D6ED35E9702CD57B9DEB382608DE637444F8ED7154683872D75E5E"
+          "sha256": "FA446992C4421614EEB7A719A80650E93C0B7525105C72583F8BDFD5108943DF"
         },
         {
           "path": "FamilyQuant.Core/Evidence/SavedFileCheck.cs",
@@ -7470,7 +7470,7 @@
           "kind": "test",
           "target": "CurationActionProbe",
           "assertion": "curation native selection-gate: one selected protein disables alignment and two enable it, without a document change",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\sh-curation-actions\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-163331-FamilyQuant-gate\\sh-curation-actions\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -7605,7 +7605,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "executed curation screen action/export",
-          "sha256": "0845785B94D6ED35E9702CD57B9DEB382608DE637444F8ED7154683872D75E5E"
+          "sha256": "FA446992C4421614EEB7A719A80650E93C0B7525105C72583F8BDFD5108943DF"
         },
         {
           "path": "FamilyQuant.Core/Evidence/SavedFileCheck.cs",
@@ -7654,7 +7654,7 @@
           "kind": "test",
           "target": "CurationActionsLedger",
           "assertion": "curation native complete CSV output equals frozen for twenty culture/mode/header fixtures including comma quote CR LF null and fractional fields",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\sh-curation-actions\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-163331-FamilyQuant-gate\\sh-curation-actions\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -7797,7 +7797,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "executed curation screen action/export",
-          "sha256": "0845785B94D6ED35E9702CD57B9DEB382608DE637444F8ED7154683872D75E5E"
+          "sha256": "FA446992C4421614EEB7A719A80650E93C0B7525105C72583F8BDFD5108943DF"
         },
         {
           "path": "FamilyQuant.Core/Evidence/SavedFileCheck.cs",
@@ -7846,7 +7846,7 @@
           "kind": "test",
           "target": "CurationActionProbe",
           "assertion": "curation native keyword-grouping: the actual keyword button prepares its review, Cancel preserves all bytes, accepted supplied settings group unlocked families and one Undo restores the document",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\sh-curation-actions\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-163331-FamilyQuant-gate\\sh-curation-actions\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -7973,7 +7973,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "executed curation screen action/export",
-          "sha256": "0845785B94D6ED35E9702CD57B9DEB382608DE637444F8ED7154683872D75E5E"
+          "sha256": "FA446992C4421614EEB7A719A80650E93C0B7525105C72583F8BDFD5108943DF"
         },
         {
           "path": "FamilyQuant.Core/Evidence/SavedFileCheck.cs",
@@ -8022,7 +8022,7 @@
           "kind": "test",
           "target": "CurationActionsLedger",
           "assertion": "curation native complete CSV output equals frozen for twenty culture/mode/header fixtures including comma quote CR LF null and fractional fields",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\sh-curation-actions\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-163331-FamilyQuant-gate\\sh-curation-actions\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -8141,7 +8141,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "executed curation screen action/export",
-          "sha256": "0845785B94D6ED35E9702CD57B9DEB382608DE637444F8ED7154683872D75E5E"
+          "sha256": "FA446992C4421614EEB7A719A80650E93C0B7525105C72583F8BDFD5108943DF"
         },
         {
           "path": "FamilyQuant.Core/Evidence/SavedFileCheck.cs",
@@ -8190,7 +8190,7 @@
           "kind": "test",
           "target": "CurationActionProbe",
           "assertion": "curation native patternlab-load: the actual PLP chooser Cancel preserves the document; acceptance loads the native fixture, publishes displayed mode and leaves input bytes unchanged",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\sh-curation-actions\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-163331-FamilyQuant-gate\\sh-curation-actions\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -8421,7 +8421,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "executed curation screen action/export",
-          "sha256": "0845785B94D6ED35E9702CD57B9DEB382608DE637444F8ED7154683872D75E5E"
+          "sha256": "FA446992C4421614EEB7A719A80650E93C0B7525105C72583F8BDFD5108943DF"
         },
         {
           "path": "FamilyQuant.Core/Evidence/SavedFileCheck.cs",
@@ -8470,7 +8470,7 @@
           "kind": "test",
           "target": "CurationActionProbe",
           "assertion": "curation native normalization-recalculate: both native selectors leave old displayed shares labelled with their original mode until the Recalculate button publishes the chosen mode",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\sh-curation-actions\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-163331-FamilyQuant-gate\\sh-curation-actions\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -8613,7 +8613,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "executed curation screen action/export",
-          "sha256": "0845785B94D6ED35E9702CD57B9DEB382608DE637444F8ED7154683872D75E5E"
+          "sha256": "FA446992C4421614EEB7A719A80650E93C0B7525105C72583F8BDFD5108943DF"
         },
         {
           "path": "FamilyQuant.Core/Evidence/SavedFileCheck.cs",
@@ -8662,7 +8662,7 @@
           "kind": "test",
           "target": "CurationActionProbe",
           "assertion": "curation native display-filters: contaminant and positive-share Checked/Unchecked change the visible projection and restore all four rows without editing the document",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\sh-curation-actions\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-163331-FamilyQuant-gate\\sh-curation-actions\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -8805,7 +8805,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "executed curation screen action/export",
-          "sha256": "0845785B94D6ED35E9702CD57B9DEB382608DE637444F8ED7154683872D75E5E"
+          "sha256": "FA446992C4421614EEB7A719A80650E93C0B7525105C72583F8BDFD5108943DF"
         },
         {
           "path": "FamilyQuant.Core/Evidence/SavedFileCheck.cs",
@@ -8854,7 +8854,7 @@
           "kind": "test",
           "target": "CurationActionProbe",
           "assertion": "curation native row-numbers: actual realized grid rows display their own one-based index",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\sh-curation-actions\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-163331-FamilyQuant-gate\\sh-curation-actions\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -9021,7 +9021,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "executed curation screen action/export",
-          "sha256": "0845785B94D6ED35E9702CD57B9DEB382608DE637444F8ED7154683872D75E5E"
+          "sha256": "FA446992C4421614EEB7A719A80650E93C0B7525105C72583F8BDFD5108943DF"
         },
         {
           "path": "FamilyQuant.Core/Evidence/SavedFileCheck.cs",
@@ -9070,7 +9070,7 @@
           "kind": "test",
           "target": "CurationActionsLedger",
           "assertion": "curation native complete CSV output equals frozen for twenty culture/mode/header fixtures including comma quote CR LF null and fractional fields",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\sh-curation-actions\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-163331-FamilyQuant-gate\\sh-curation-actions\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -9237,7 +9237,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "executed curation screen action/export",
-          "sha256": "0845785B94D6ED35E9702CD57B9DEB382608DE637444F8ED7154683872D75E5E"
+          "sha256": "FA446992C4421614EEB7A719A80650E93C0B7525105C72583F8BDFD5108943DF"
         },
         {
           "path": "FamilyQuant.Core/Evidence/SavedFileCheck.cs",
@@ -9286,7 +9286,7 @@
           "kind": "test",
           "target": "CurationActionProbe",
           "assertion": "curation native composition-export: the actual composition export button writes the exact production table for the current denominator and shared-peptide choice",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\sh-curation-actions\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-163331-FamilyQuant-gate\\sh-curation-actions\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -9429,7 +9429,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "executed curation screen action/export",
-          "sha256": "0845785B94D6ED35E9702CD57B9DEB382608DE637444F8ED7154683872D75E5E"
+          "sha256": "FA446992C4421614EEB7A719A80650E93C0B7525105C72583F8BDFD5108943DF"
         },
         {
           "path": "FamilyQuant.Core/Evidence/SavedFileCheck.cs",
@@ -9478,7 +9478,7 @@
           "kind": "test",
           "target": "CurationActionProbe",
           "assertion": "curation native normalization-recalculate: both native selectors leave old displayed shares labelled with their original mode until the Recalculate button publishes the chosen mode",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\sh-curation-actions\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-163331-FamilyQuant-gate\\sh-curation-actions\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -9661,7 +9661,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "executed curation screen action/export",
-          "sha256": "0845785B94D6ED35E9702CD57B9DEB382608DE637444F8ED7154683872D75E5E"
+          "sha256": "FA446992C4421614EEB7A719A80650E93C0B7525105C72583F8BDFD5108943DF"
         },
         {
           "path": "FamilyQuant.Core/Evidence/SavedFileCheck.cs",
@@ -9710,7 +9710,7 @@
           "kind": "test",
           "target": "CurationActionProbe",
           "assertion": "curation native native-picker-values: executed protein/composition CSV chooser filters and default filenames equal their frozen literals before the presenter supplies a path; the PLP chooser retains the frozen *.plp selection pattern and its accepted file was actually loaded",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\sh-curation-actions\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-163331-FamilyQuant-gate\\sh-curation-actions\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -9837,7 +9837,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "executed curation screen action/export",
-          "sha256": "0845785B94D6ED35E9702CD57B9DEB382608DE637444F8ED7154683872D75E5E"
+          "sha256": "FA446992C4421614EEB7A719A80650E93C0B7525105C72583F8BDFD5108943DF"
         },
         {
           "path": "FamilyQuant.Core/Evidence/SavedFileCheck.cs",
@@ -9886,7 +9886,7 @@
           "kind": "test",
           "target": "CurationActionProbe",
           "assertion": "curation native protein-export: the actual export button writes every currently visible row with the displayed denominator; a native write refusal preserves the previous file bytes",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\sh-curation-actions\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-163331-FamilyQuant-gate\\sh-curation-actions\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -10029,7 +10029,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "executed curation screen action/export",
-          "sha256": "0845785B94D6ED35E9702CD57B9DEB382608DE637444F8ED7154683872D75E5E"
+          "sha256": "FA446992C4421614EEB7A719A80650E93C0B7525105C72583F8BDFD5108943DF"
         },
         {
           "path": "FamilyQuant.Core/Evidence/SavedFileCheck.cs",
@@ -10078,7 +10078,7 @@
           "kind": "test",
           "target": "CurationActionsLedger",
           "assertion": "curation native complete CSV output equals frozen for twenty culture/mode/header fixtures including comma quote CR LF null and fractional fields",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\sh-curation-actions\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-163331-FamilyQuant-gate\\sh-curation-actions\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -10213,7 +10213,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "executed curation screen action/export",
-          "sha256": "0845785B94D6ED35E9702CD57B9DEB382608DE637444F8ED7154683872D75E5E"
+          "sha256": "FA446992C4421614EEB7A719A80650E93C0B7525105C72583F8BDFD5108943DF"
         },
         {
           "path": "FamilyQuant.Core/Evidence/SavedFileCheck.cs",
@@ -10262,7 +10262,7 @@
           "kind": "test",
           "target": "CurationActionProbe",
           "assertion": "curation native patternlab-load: the actual PLP chooser Cancel preserves the document; acceptance loads the native fixture, publishes displayed mode and leaves input bytes unchanged",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\sh-curation-actions\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-163331-FamilyQuant-gate\\sh-curation-actions\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -10389,7 +10389,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "executed curation screen action/export",
-          "sha256": "0845785B94D6ED35E9702CD57B9DEB382608DE637444F8ED7154683872D75E5E"
+          "sha256": "FA446992C4421614EEB7A719A80650E93C0B7525105C72583F8BDFD5108943DF"
         },
         {
           "path": "FamilyQuant.Core/Evidence/SavedFileCheck.cs",
@@ -10438,7 +10438,7 @@
           "kind": "test",
           "target": "CurationActionProbe",
           "assertion": "curation native batch-and-undo: actual batch button edits only selected family IDs/annotations, records one Undo and restores the complete pre-edit document",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\sh-curation-actions\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-163331-FamilyQuant-gate\\sh-curation-actions\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -10589,7 +10589,7 @@
         {
           "path": "FamilyQuant.Core/FamilyQuantFile.cs",
           "symbol": "executed curation screen action/export",
-          "sha256": "0845785B94D6ED35E9702CD57B9DEB382608DE637444F8ED7154683872D75E5E"
+          "sha256": "FA446992C4421614EEB7A719A80650E93C0B7525105C72583F8BDFD5108943DF"
         },
         {
           "path": "FamilyQuant.Core/Evidence/SavedFileCheck.cs",
@@ -10638,7 +10638,7 @@
           "kind": "test",
           "target": "CurationActionProbe",
           "assertion": "curation native word-grouping: the native word-grouping button honors a user lock, groups the remaining synthetic descriptions and Undo restores the pre-grouping document",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-135654-FamilyQuant-gate\\sh-curation-actions\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-163331-FamilyQuant-gate\\sh-curation-actions\\proofs.log",
           "inspectedBy": ""
         }
       ],

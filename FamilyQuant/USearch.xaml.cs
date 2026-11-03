@@ -19,7 +19,7 @@ namespace FamilyQuant
         private AppOperationHost.OperationLease? runningOperation;
         private OperationContext? Operation => runningOperation?.Context;
         public void CancelOperation() => AppOperationHost.For(this).Cancel();
-        public string ShellStatusText => busy ? "Running USEARCH" : ViewModel.Status;
+        public string ShellStatusText => busy ? "Running USEARCH. Two runs over the same files would interfere with each other." : ViewModel.Status;
         public string ShellHelpText => BuildHelpText() + "\n\n" + TextBlockUSearchState.Text;
         public event EventHandler? ShellStatusChanged;
         public bool UseShellStatusBar

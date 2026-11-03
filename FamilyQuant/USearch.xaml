@@ -53,7 +53,7 @@
             <Expander Header="Prepare database (optional)" BorderThickness="0" Margin="0,0,0,14" Foreground="{DynamicResource TextBrush}">
                 <Border Background="{DynamicResource SurfaceBrush}" Padding="16">
                     <WrapPanel>
-                        <Label Content="Redundancy identity (%)" VerticalAlignment="Center" ToolTip="At 100 percent, removes exact subsets and duplicates. Lower values remove near-identical sequences too."/>
+                        <Label Content="Redundancy identity (%)" VerticalAlignment="Center" ToolTip="Below 100 percent, identity is the best ungapped matching-residue count as a percentage of the shorter sequence, treating I and L as equal. At 100 percent, removes exact subsets and duplicates."/>
                         <numeric:IntegerUpDown x:Name="IntegerUpDownRedundancyIdentity" Value="{Binding RedundancyIdentity, Mode=TwoWay}" Minimum="50" Maximum="100" Width="76" Margin="8,0,12,0"
                                            ToolTip="Identity above which sequences count as redundant. Default 100 preserves original order and removes exact subsets and duplicates."/>
                         <Button x:Name="ButtonRemoveRedundancy" Content="Remove redundancy" Click="ButtonRemoveRedundancy_Click" IsEnabled="False"

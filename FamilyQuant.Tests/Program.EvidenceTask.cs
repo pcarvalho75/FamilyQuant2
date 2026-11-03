@@ -74,6 +74,7 @@ internal static partial class Program
 
     private static void EvidenceTaskTests()
     {
+        TaskOrderCoreChecks();
         static void Verify(string name, Action run)
         {
             try { run(); }
