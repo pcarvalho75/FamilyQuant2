@@ -86,7 +86,6 @@ Ana installs it from the public releases page (D31); the desk publishes on Paulo
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| K8b | No test that no gate runs: a check in DefaultSuite lists every registered test command and fails when one needs no RAW yet is neither in DefaultSuite nor named in an explicit, reasoned exclusion list (K8a: --test-report-command sat outside the gates since J41 and hid a stale expectation) | L | 0.4 | 🟢 | | The check fails on a planted unregistered command and passes on master; the exclusion list has a reason per entry | FL | | 0 | 0 | |
 | K9 | Full gate on the release candidate re-cut after J41 (and J32, J34 if merged): every ledger receipt current (quick gates defer them) | M | 0.5 | K8 | K10 | Full gate green, ledger 5,460 of 5,460 | Orchestrator | | 0 | 0 | |
 | K10 | The unpacked candidate exports the final project's report through the real menu | L | 0.3 | K9 | K11 | Files and times recorded | EV | | 0 | 0 | |
 | K11 | Published: v2.1.0 on pcarvalho75/FamilyQuant2-releases with the zip, its .sha256 and user release notes | L | 0.1 | K10 | K13, K17 | The release page is live | Orchestrator | | 0 | 0 | |
