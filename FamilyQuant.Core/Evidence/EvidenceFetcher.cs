@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
@@ -23,6 +24,9 @@ namespace FamilyQuant.Evidence
         public int Asked { get; internal set; }
         public int Found { get; internal set; }
         public int WithDomains { get; internal set; }
+        public int PositionAsked { get; internal set; }
+        public int PositionFound { get; internal set; }
+        public double PositionElapsedSeconds { get; internal set; }
         public int Missing => Asked - Found;
         public EvidenceProvenance Provenance { get; internal set; } = new EvidenceProvenance();
         public string Source => Provenance.Provider + (Provenance.Release.Length == 0 ? "" : " " + Provenance.Release);
@@ -31,7 +35,7 @@ namespace FamilyQuant.Evidence
     public static class EvidenceFetcher
     {
         private const string Endpoint = "https://rest.uniprot.org/uniprotkb/accessions?format=json&size=500&fields="
-            + "accession,reviewed,protein_families,keyword,cc_tissue_specificity,xref_pfam,xref_panther,ft_transmem,fragment&accessions=";
+            + "accession,reviewed,protein_families,keyword,cc_tissue_specificity,xref_pfam,xref_panther,ft_transmem,fragment,sequence,ft_chain,ft_peptide,ft_propep,ft_signal&accessions=";
         private const int Attempts = 3;
         private static readonly Regex MembershipStart = new Regex(@"\bbelongs\s+to\s+(?:the\s+)?",
             RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.CultureInvariant);
@@ -110,6 +114,7 @@ namespace FamilyQuant.Evidence
                             .Select(p => p.GetProperty("value").GetString()).FirstOrDefault() ?? string.Empty;
                     (database == "Pfam" ? evidence.Pfam : evidence.Panther).Add(domain);
                 }
+            evidence.Positions = Positions.ProteinPositionParser.ReadUniProt(item);
             return evidence;
         }
 
@@ -156,11 +161,12 @@ namespace FamilyQuant.Evidence
 
         public static async Task<EvidenceFetchResult> FetchAsync(FamilyClusterFile file,
             HttpMessageHandler? handler = null, IProgress<FetchProgress>? progress = null,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default, IReadOnlyCollection<string>? positionAccessions = null)
         {
             if (file == null) throw new ArgumentNullException(nameof(file));
+            var positionScope = (positionAccessions ?? Array.Empty<string>()).ToHashSet(StringComparer.Ordinal);
             var originals = file.MyExtendedFastaItems.Select(i =>
-                (Item: i, Identifier: i.SequenceIdentifier, Domains: i.Domains, Evidence: i.Evidence)).ToArray();
+                (Item: i, Identifier: i.SequenceIdentifier, Sequence: i.Sequence, Domains: i.Domains, Evidence: i.Evidence)).ToArray();
             List<List<string>> batches = ProteinDomains.Batches(originals.Select(i => i.Item));
             if (batches.Count == 0) return new EvidenceFetchResult
             {
@@ -181,7 +187,8 @@ namespace FamilyQuant.Evidence
                 List<string> batch = batches[index];
                 using HttpResponseMessage response = await GetWithRetry(client, Endpoint + string.Join(",", batch), cancellationToken)
                     .ConfigureAwait(false);
-                Dictionary<string, ProteinEvidence> parsed = Parse(await response.Content.ReadAsStringAsync(cancellationToken).ConfigureAwait(false));
+                string body = await response.Content.ReadAsStringAsync(cancellationToken).ConfigureAwait(false);
+                Dictionary<string, ProteinEvidence> parsed = Parse(body);
                 int matched = 0;
                 foreach (string accession in batch)
                     if (parsed.TryGetValue(accession, out ProteinEvidence? evidence))
@@ -198,8 +205,38 @@ namespace FamilyQuant.Evidence
                 if (release != null && release != currentRelease)
                     throw new InvalidDataException("The UniProt release changed between batches. No evidence was applied.");
                 release = currentRelease;
+                var featureSource = Positions.ProteinPositionFetcher.Source("UniProt", currentRelease,
+                    Endpoint + string.Join(",", batch), body);
+                foreach (var evidence in parsed.Values.Distinct())
+                    if (evidence.Positions != null) evidence.Positions.FeatureSource = featureSource;
                 Report(index + 1);
             }
+            // Fetch onto detached evidence objects. A failed page or cancellation cannot publish a
+            // half-enriched protein, nor any of the otherwise successful UniProt batches.
+            var requestedEvidence = positionScope.Where(found.ContainsKey).Select(a => found[a]).ToHashSet();
+            var previousPositions = originals.Select(p => p.Evidence?.Positions).Where(p => p != null)
+                .GroupBy(p => (p!.Accession, p.SequenceSha256)).ToDictionary(g => g.Key, g => g.First()!);
+            var positionWatch = Stopwatch.StartNew();
+            result.PositionAsked = positionScope.Count;
+            foreach (var evidence in found.Values.Distinct())
+            {
+                if (!requestedEvidence.Contains(evidence) && evidence.Positions != null)
+                {
+                    if (previousPositions.TryGetValue((evidence.Accession, evidence.Positions.SequenceSha256), out var previous))
+                    {
+                        evidence.Positions.Pfam = EvidenceApply.Clone(previous.Pfam)!;
+                        evidence.Positions.DomainSource = EvidenceApply.Clone(previous.DomainSource);
+                    }
+                }
+            }
+            await Parallel.ForEachAsync(requestedEvidence.Where(e => e.Positions != null), new ParallelOptions
+            {
+                MaxDegreeOfParallelism = 4, CancellationToken = cancellationToken,
+            }, async (evidence, token) => await Positions.ProteinPositionFetcher.FetchDomainsAsync(evidence.Positions!, client, token).ConfigureAwait(false)).ConfigureAwait(false);
+            result.PositionFound = requestedEvidence.Count(e => e.Positions?.DomainSource != null);
+            if (requestedEvidence.Select(e => e.Positions?.DomainSource?.Release).Where(r => r != null).Distinct(StringComparer.Ordinal).Count() > 1)
+                throw new InvalidDataException("The InterPro release changed between proteins. No evidence was applied.");
+            result.PositionElapsedSeconds = positionWatch.Elapsed.TotalSeconds;
             result.Found = found.Count;
             result.WithDomains = found.Values.Count(e => e.Pfam.Count > 0);
             result.Provenance = new EvidenceProvenance
@@ -224,6 +261,7 @@ namespace FamilyQuant.Evidence
             for (int i = 0; i < originals.Length; i++)
                 if (!ReferenceEquals(file.MyExtendedFastaItems[i], originals[i].Item)
                     || originals[i].Item.SequenceIdentifier != originals[i].Identifier
+                    || originals[i].Item.Sequence != originals[i].Sequence
                     || originals[i].Item.Domains != originals[i].Domains
                     || !ReferenceEquals(originals[i].Item.Evidence, originals[i].Evidence))
                     throw new InvalidDataException("A protein changed while evidence was being fetched. No evidence was applied.");

@@ -236,3 +236,9 @@ Finished steps, moved here from docs/ROADMAP.md. The board shows them as green.
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
 | J6d | Report details: one form saved in the project (title, authors, sample, workflow, kind of database, written interpretation), each printed in its place in the report | M | 1.5 | 🟢 | J6e, J7b | Round trip; Undo; native editor test. Printing each field is checked in J6a, whose writer consumes it | SH | | 0 | 0 | |
 
+### W4 Where the peptides fall
+
+| ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
+|---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
+| J4a | Fetch domain positions (InterPro) and UniProt feature positions (chain, peptide, propeptide, signal) for each protein, stored with the evidence and its provenance | M | 2 | 🟢 | J4b, J4c | Live fetch on Ana's database; the project reopens offline with the positions | AS | | 0 | 0 | |
+
