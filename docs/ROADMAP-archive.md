@@ -455,6 +455,7 @@ Paulo agreed these at the restart, 2026-11-01.
 | J37a | A confirmed family link keeps a short note on why, saved with the project and printed in the report's method | L | 0.5 | 🟢 | J37b | Survives save and reopen; appears in the method table | T2 | | 0 | 0 | |
 | J37b | J37 reviewed and merged | L | 0.2 | J37a | | Approved; gate green | T2 | | 0 | 0 | |
 | J27d | J27 reviewed and merged | L | 0.2 | 🟢 | | Approved; gate green | FL | | 0 | 0 | |
+| J42 | The family-assignment accuracy check (leave-one-out on reviewed proteins) accepts a project whose scope has several phrases: on the D39 project it refuses with "The session search no longer matches the current queries and reviewed references" (EvidenceSession.cs:42-68 does not accept the panel review's stored search over the in-scope references) | L | 0.5 | 🟢 | K14 | Red then green: a fixture with a two-phrase scope runs the audit; on a copy of the D39 project it prints the right, wrong and abstained counts | T2 | | 0 | 0 | |
 
 ### W4 Release 2.1.0 on GitHub
 
