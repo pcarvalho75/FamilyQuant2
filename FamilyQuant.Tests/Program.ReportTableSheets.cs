@@ -138,12 +138,15 @@ internal static partial class Program
                 Cells(t.Id) is { } cells && actual[Array.FindIndex(printed, p => p.Table.Id == t.Id)].Skip(1)
                     .Select(r => string.Join("\t", r)).SequenceEqual(cells.Skip(1).Select(r => string.Join("\t", r)))));
         }
-        if (output != null)
-        {
-            Directory.CreateDirectory(output);
-            File.WriteAllBytes(Path.Combine(output, "synthetic-tables.docx"), word);
-            File.WriteAllBytes(Path.Combine(output, "synthetic-tables_supplement.xlsx"), workbook);
-        }
+        string folder = output ?? Path.Combine(Path.GetTempPath(), "FamilyQuant.TableSheets", Guid.NewGuid().ToString("N"));
+        Directory.CreateDirectory(folder);
+        string documentPath = Path.Combine(folder, "synthetic-tables.docx"), sidecars = Path.Combine(folder, "source");
+        File.WriteAllBytes(documentPath, word);
+        File.WriteAllBytes(Path.Combine(folder, "synthetic-tables_supplement.xlsx"), workbook);
+        Directory.CreateDirectory(sidecars);
+        foreach (var export in packet.CsvExports) File.WriteAllText(Path.Combine(sidecars, export.Key), export.Value);
+        int traceExit = ReportNumberTrace.Run(documentPath, sidecars, Path.Combine(folder, "trace.csv"));
+        Check("J18 traces every input, setting and other printed fixture number to a native export", traceExit == 0);
         foreach (var method in methods) Console.WriteLine(method.Id + " -> " + (index.GetValueOrDefault(method.Id) ?? "MISSING"));
     }
 }

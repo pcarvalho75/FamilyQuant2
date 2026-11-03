@@ -62,6 +62,9 @@ text; their headers explain multiplication by 100 and six-significant-digit form
 These values come from native round-trip columns, never from reparsing rounded Word
 cells. A missing source column or disagreement with Word is refused. Missing values
 remain empty or explicitly unavailable, never zero. Existing CSV exports are unchanged.
+The additive `report_settings.csv` also records the report-family threshold used in
+the prose: stored fraction, unrounded percentage and the exact six-significant-digit
+Word display. Its native export sheet lets the number trace cover that setting too.
 
 The method worksheet names are stable:
 
