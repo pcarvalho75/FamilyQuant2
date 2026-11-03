@@ -150,10 +150,18 @@ public static class ReportFigureRenderer
         if (manifest.IdentificationConcordance is { } concordance)
         {
             concordance.Validate();
-            Add(ReportSectionIds.Quality, PresentationFigures.DatabaseSearchConcordanceFile, "Database search concordance",
-                "Sequence agreement among precursor-qualified one-to-one PSM pairs. Raw scan overlap is not its denominator.", () => new DatabaseSearchConcordanceChart(concordance),
-                new("Precursor-qualified database-search pairs", concordance.PrecursorQualifiedDatabaseSearchPairs, "pairs", "0"),
-                new("Exact pairs", concordance.ExactPrecursorQualifiedDatabaseSearchPairs, "pairs", "0"));
+            if (concordance.PrecursorQualifiedDatabaseSearchPairs > 0)
+                Add(ReportSectionIds.Quality, PresentationFigures.DatabaseSearchConcordanceFile, "Database search concordance",
+                    "Sequence agreement among precursor-qualified one-to-one PSM pairs. Raw scan overlap is not its denominator.", () => new DatabaseSearchConcordanceChart(concordance),
+                    new("Precursor-qualified database-search pairs", concordance.PrecursorQualifiedDatabaseSearchPairs, "pairs", "0"),
+                    new("Exact pairs", concordance.ExactPrecursorQualifiedDatabaseSearchPairs, "pairs", "0"));
+            else Missing(ReportSectionIds.Quality, "Database search concordance",
+                "No precursor-qualified comparable pairs were recorded. Stored audit counts: PatternLab PSM rows "
+                + concordance.PatternLabPsmRows.ToString(CultureInfo.InvariantCulture) + "; PEAKS database PSM rows "
+                + concordance.PeaksDatabasePsmRows.ToString(CultureInfo.InvariantCulture) + "; comparable pairs "
+                + concordance.PrecursorQualifiedDatabaseSearchPairs.ToString(CultureInfo.InvariantCulture) + "; exact pairs "
+                + concordance.ExactPrecursorQualifiedDatabaseSearchPairs.ToString(CultureInfo.InvariantCulture)
+                + ". No agreement rate is estimated. The complete audit remains in the table and companion workbook.");
             if (manifest.DeNovoOverlap is { HasScanLevelSequenceComparison: true } overlap)
             {
                 overlap.Validate();
