@@ -11,6 +11,10 @@ namespace FamilyQuant.Report;
 /// <summary>One section per panel row in source order. User text is never interpreted as a result.</summary>
 public static class ReportPanelSections
 {
+    /// <summary>Retained exact entry point for existing callers and reflection-based integrations.</summary>
+    public static IReadOnlyList<ReportSection> BuildFromResults(FamilyClusterFile curation, QuantManifest manifest) =>
+        BuildFromResults(curation, manifest, (OperationContext?)null, 0, null);
+
     /// <summary>Build sections from the studies stored in the project manifest. Shares are fractions.
     /// Completed native studies retain explicit no-peptide zeros. Other missing results stay unavailable.
     /// An ambiguous UserID is not assigned to a panel family.</summary>
