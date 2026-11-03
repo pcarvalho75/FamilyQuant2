@@ -423,6 +423,7 @@ Paulo agreed these at the restart, 2026-11-01.
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
 | K3 | Science check, part 1: the two runs' family assignments compared; nothing non-venom pulled in; the 3 new Kunitz and Waprin link choices follow D38 | M | 0.5 | 🟢 | K4 | `RESULT D39-review` part 1 | GR | | 0 | 0 | |
 | K1 | Rerun: Compute on the three runs finishes, from the RAW cache | L | 0.5 | 🟢 | K2 | The run log shows Compute finished and the project saved | OP | | 0 | 0 | |
+| K2 | Rerun: Results, sensitivity and save; the change table posted (proteins and families that moved, the ten lectins, the new headline, subclass parts, others) | L | 0.3 | 🟢 | K4, K6 | `RESULT J7a2` with the change table | OP | | 0 | 0 | |
 
 ### W3 The report export works and is fast
 

@@ -66,15 +66,14 @@ The rerun of the full analysis with the scope "Toxin", "venom gland" (D39), so t
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| K2 | Rerun: Results, sensitivity and save; the change table posted (proteins and families that moved, the ten lectins, the new headline, subclass parts, others) | L | 0.3 | 🟢 | K4, K6 | `RESULT J7a2` with the change table | OP | | 0 | 0 | |
-| K4 | Science check, part 2: the rerun's headline numbers against the program's stored studies and exports; verdict on D39 | M | 0.4 | K2 | K6 | `APPROVED` on the rerun, or the changes it needs | GR | | 0 | 0 | |
+| K4 | Science check, part 2: the rerun's headline numbers against the program's stored studies and exports; verdict on D39 | M | 0.4 | 🟢 | K6 | `APPROVED` on the rerun, or the changes it needs | GR | | 0 | 0 | |
 
 ### W2 The interpretation
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
 | K5 | Interpretation drafted from the desk's outline, numbers left as marked places | M | 0.5 | 🟢 | K6 | The draft posted | OP | | 0 | 0 | |
-| K6 | Numbers filled from the rerun and written into the project's Report details through the program; project saved | L | 0.3 | K2, K4, K5 | K7, K10, K14 | `interpreted.fqproj` saved, with the source of every number | OP | | 0 | 0 | |
+| K6 | Numbers filled from the rerun and written into the project's Report details through the program; project saved | L | 0.3 | K4, K5 | K7, K10, K14 | `interpreted.fqproj` saved, with the source of every number | OP | | 0 | 0 | |
 | K7 | Second reader: every number in the interpretation matched to its cell in the program's exports | M | 0.4 | K6 | K17 | A table of number, source cell and match, with no mismatch | GR2 | | 0 | 0 | |
 
 ### W3 The report export works and is fast
