@@ -37,7 +37,7 @@ public sealed class FamilyRingChart : CompositionDrawingBase
         {
             var family = Families[i];
             double sweep = family.Percent * 3.6;
-            Brush familyFill = Series(i);
+            Brush familyFill = family.IsUnassigned ? palette.Remainder : Series(i);
             if (sweep > 0)
                 dc.DrawGeometry(familyFill, new Pen(palette.Backdrop, 1.2),
                     FamilyRingPlot.Annulus(center, radius * .48, radius * .74, angle, sweep));
@@ -79,7 +79,7 @@ public sealed class FamilyRingChart : CompositionDrawingBase
         dc.DrawText(total, new Point(center.X - total.Width / 2, center.Y - total.Height / 2 - 7));
         var pooled = Text("all runs pooled", palette.Muted, 10);
         dc.DrawText(pooled, new Point(center.X - pooled.Width / 2, center.Y + 24));
-        Label(dc, "Inner: families. Outer: subclasses.", 40, center.Y + radius + 22, legendLeft - 65, 12);
+        Label(dc, "Inner: report groups. Outer: subclass parts.", 40, center.Y + radius + 22, legendLeft - 65, 12);
         Label(dc, "Both rings use the same credited-signal total.", 40, center.Y + radius + 41, legendLeft - 65, 11, brush: palette.Muted);
         Label(dc, "Others uses the report's mean-of-runs membership" + (grouping.ThresholdPercent is double threshold
             ? " (threshold " + Number(threshold) + "%)" : "") + ". Both rings use all runs pooled.",

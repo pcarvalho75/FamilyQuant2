@@ -51,7 +51,8 @@ public static class WordReportWriter
             for (int index = 0; index < sections.Count; index++)
             {
                 var section = sections[index];
-                if (index > 0) body.Append(new W.Paragraph(new W.Run(new W.Break { Type = W.BreakValues.Page })));
+                if (index > 0 && !section.Id.StartsWith(ReportSectionIds.FamilyPrefix, StringComparison.Ordinal))
+                    body.Append(new W.Paragraph(new W.Run(new W.Break { Type = W.BreakValues.Page })));
                 string bookmark = "section_" + index.ToString(CultureInfo.InvariantCulture);
                 var heading = Paragraph(section.Id == ReportSectionIds.Title ? document.Title : section.Title,
                     section.Id == ReportSectionIds.Title ? "Title" : "Heading1");
@@ -95,7 +96,14 @@ public static class WordReportWriter
                             var imagePart = main.AddImagePart(ImagePartType.Png, relation);
                             using (var png = new MemoryStream(figure.PngBytes, false)) imagePart.FeedData(png);
                             body.Append(Image(figure, relation, imageId));
-                            foreach (string line in Lines(figure.Caption)) body.Append(Paragraph(line, "Caption"));
+                            string[] captionLines = Lines(figure.Caption).ToArray();
+                            for (int line = 0; line < captionLines.Length; line++)
+                            {
+                                var caption = Paragraph(captionLines[line], "Caption");
+                                caption.ParagraphProperties!.Append(new W.KeepLines());
+                                if (line < captionLines.Length - 1) caption.ParagraphProperties.InsertAfter(new W.KeepNext(), caption.ParagraphProperties.ParagraphStyleId!);
+                                body.Append(caption);
+                            }
                             break;
                         default: throw new ArgumentException("Unsupported report block.", nameof(document));
                     }
@@ -103,7 +111,7 @@ public static class WordReportWriter
             }
             var footer = main.AddNewPart<FooterPart>("rIdFooter");
             footer.Footer = new W.Footer(new W.Paragraph(new W.ParagraphProperties(new W.Justification { Val = W.JustificationValues.Center }),
-                new W.Run(new W.Text("Page ")), new W.SimpleField { Instruction = "PAGE" }));
+                new W.Run(new W.Text("Page ") { Space = SpaceProcessingModeValues.Preserve }), new W.SimpleField { Instruction = "PAGE" }));
             body.Append(new W.SectionProperties(
                 new W.FooterReference { Type = W.HeaderFooterValues.Default, Id = "rIdFooter" },
                 new W.PageSize { Width = 12240, Height = 15840 },
@@ -141,7 +149,9 @@ public static class WordReportWriter
     {
         W.Style Style(string id, string name, string size, bool bold = false)
         {
-            var paragraph = new W.StyleParagraphProperties(new W.KeepNext(), new W.SpacingBetweenLines { Before = "180", After = "100" });
+            var paragraph = new W.StyleParagraphProperties();
+            if (id == "Caption") paragraph.Append(new W.KeepLines()); else paragraph.Append(new W.KeepNext());
+            paragraph.Append(new W.SpacingBetweenLines { Before = "180", After = "100" });
             if (id is "Heading1" or "Heading2") paragraph.Append(new W.OutlineLevel { Val = id == "Heading1" ? 0 : 1 });
             var run = new W.StyleRunProperties(new W.RunFonts { Ascii = "Calibri", HighAnsi = "Calibri" });
             if (bold) run.Append(new W.Bold());
@@ -162,7 +172,11 @@ public static class WordReportWriter
         int[] widths = Enumerable.Range(0, data.Columns.Count)
             .Select(index => PageWidth / data.Columns.Count + (index < PageWidth % data.Columns.Count ? 1 : 0)).ToArray();
         var result = new W.Table(new W.TableProperties(new W.TableWidth { Width = PageWidth.ToString(CultureInfo.InvariantCulture), Type = W.TableWidthUnitValues.Dxa },
-            new W.TableLayout { Type = W.TableLayoutValues.Fixed }),
+            new W.TableLayout { Type = W.TableLayoutValues.Fixed },
+            new W.TableCellMarginDefault(new W.TopMargin { Width = "40", Type = W.TableWidthUnitValues.Dxa },
+                new W.TableCellLeftMargin { Width = 100, Type = W.TableWidthValues.Dxa },
+                new W.BottomMargin { Width = "40", Type = W.TableWidthUnitValues.Dxa },
+                new W.TableCellRightMargin { Width = 100, Type = W.TableWidthValues.Dxa })),
             new W.TableGrid(widths.Select(width => new W.GridColumn { Width = width.ToString(CultureInfo.InvariantCulture) })));
         W.TableRow Row(IReadOnlyList<string> cells, bool header)
         {
@@ -207,7 +221,7 @@ public static class WordReportWriter
 
     // OPC can choose a random root relationship id. Canonicalize that id and metadata, then
     // repack sorted entries with fixed ZIP dates so culture and wall-clock time cannot alter bytes.
-    private static byte[] DeterministicPackage(byte[] original, ReportDocument document)
+    internal static byte[] DeterministicPackage(byte[] original, ReportDocument document)
     {
         using var source = new ZipArchive(new MemoryStream(original));
         var files = new SortedDictionary<string, byte[]>(StringComparer.Ordinal);

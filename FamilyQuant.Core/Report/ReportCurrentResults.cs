@@ -1,6 +1,7 @@
 using FamilyQuant.DeNovo;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 
 namespace FamilyQuant.Report;
@@ -46,6 +47,16 @@ public static class ReportCurrentResults
             }
             else results.Insert(0, new ReportParagraph("composition-overlap-warning", "Count in every family produces overlapping contributions. They cannot be summed or normalized as sample composition."));
             summary.Add(new ReportParagraph("summary-composition", "The current pooled composition diagnostic is reported beside each family's share of the whole measured peptide signal. All runs are pooled in these tables. The primary signal basis is " + basis + ". Allocation: " + policy.ShortName() + ". The headline mean of per-run shares requires the separately stored per-run study."));
+            if (families.MeasuredTotalEnvelopeReferenceCalibrated > 0)
+            {
+                double shared = families.SharedTotalEnvelopeReferenceCalibrated / families.MeasuredTotalEnvelopeReferenceCalibrated;
+                string sharedPercent = (100 * shared).ToString("F2", CultureInfo.InvariantCulture);
+                exports.Add("current_grouping_summary.csv", "\"quantity\",\"share_pct\",\"share_fraction\",\"basis\"\n"
+                    + "\"shared_between_families\",\"" + sharedPercent + "\",\"" + shared.ToString("R", CultureInfo.InvariantCulture)
+                    + "\",\"all runs pooled; primary measured peptide signal\"\n");
+                summary.Add(new ReportParagraph("summary-shared-signal", "On the saved current grouping, " + sharedPercent
+                    + "% of the primary measured peptide signal is shared between families, with all runs pooled. This shared signal remains separate from family-specific composition."));
+            }
         }
         else results.Add(new ReportParagraph("composition-unavailable", "Family composition: not computed in this project."));
         string runCsv = AnalyticsCsv.BuildSummaryCsv(data.Fractions, data.Grouped);

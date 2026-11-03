@@ -27,7 +27,7 @@ public abstract class CompositionDrawingBase : ChartDrawingBase, IPalettedChart
         Label(dc, subtitle, 26, 54, ActualWidth - 52, 12, brush: palette.Muted);
     }
 
-    // Grey is reserved for unresolved or unavailable parts, regardless of subclass count.
+    // Ordinary keyed series never use grey; unresolved parts and unassigned ring categories do.
     protected Brush Series(int index) => (index % 4) switch
     {
         0 => palette.Identified, 1 => palette.Quantified, 2 => palette.NotQuantified,

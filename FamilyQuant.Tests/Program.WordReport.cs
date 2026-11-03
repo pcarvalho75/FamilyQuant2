@@ -75,6 +75,10 @@ internal static partial class Program
             Check("core dates fixed, not export time", Read("docProps/core.xml").Contains("2000-01-01T00:00:00Z"));
             Check("every ZIP entry has the deterministic timestamp", zip.Entries.All(e => e.LastWriteTime.Year == 2000));
             Check("headings use built-in styles for contents", xml.Descendants(w + "pStyle").Any(n => (string?)n.Attribute(w + "val") == "Heading1"));
+            var drawingParagraph = xml.Descendants(w + "p").Single(p => p.Descendants(w + "drawing").Any());
+            var captionParagraph = drawingParagraph.ElementsAfterSelf(w + "p").First();
+            Check("figure stays with its complete caption", drawingParagraph.Element(w + "pPr")?.Element(w + "keepNext") != null
+                && captionParagraph.Element(w + "pPr")?.Element(w + "keepLines") != null);
             byte[] selected = Bytes(document, new ReportSelection { ExcludedIds = new[] { "figure-one", ReportSectionIds.Interpretation } });
             using var selectedZip = new ZipArchive(new MemoryStream(selected));
             using var selectedReader = new StreamReader(selectedZip.GetEntry("word/document.xml")!.Open());

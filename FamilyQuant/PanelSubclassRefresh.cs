@@ -27,9 +27,9 @@ public static class PanelSubclassRefresh
     }
 
     /// <summary>When family assignments are stale, offer their review before subclass recomputation.
-    /// A null review delegate means the panel-aware family command is not yet available.</summary>
+    /// If review performs its own subclass refresh, report that result without running it again.</summary>
     public static async Task<bool> ReviewThenRecomputeAsync(bool familyStale, bool subclassesChanged, Func<bool> familyCurrent,
-        Func<bool> confirmReview, Func<Task>? reviewFamilies, Func<Task<bool>> recompute)
+        Func<bool> confirmReview, Func<Task>? reviewFamilies, Func<Task<bool>> recompute, Func<bool>? subclassesCurrent = null)
     {
         ArgumentNullException.ThrowIfNull(familyCurrent);
         ArgumentNullException.ThrowIfNull(confirmReview);
@@ -39,6 +39,7 @@ public static class PanelSubclassRefresh
             if (reviewFamilies == null || !confirmReview()) return false;
             await reviewFamilies();
             if (!familyCurrent()) return false;
+            if (subclassesCurrent != null) return subclassesChanged && subclassesCurrent();
         }
         return await RecomputeIfCurrentAsync(subclassesChanged, familyCurrent, recompute);
     }

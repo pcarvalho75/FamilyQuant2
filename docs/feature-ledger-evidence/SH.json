@@ -5,64 +5,64 @@
   "runs": [
     {
       "id": "shell-declarations",
-      "command": "C:\\FamilyQuant-gate\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --ledger-shell-compare D:/FamilyQuant-data/out-shell/N3/source D:/FamilyQuant-data/out-refresh\\20261102-210533-FamilyQuant-gate\\shell-compare \u00222026-11-02 21:06:05 -0800\u0022",
-      "executedAt": "2026-11-02 21:06:05 -0800",
-      "commit": "f8bf0902393d7946e71dacf14dc81ea0c2c4ceb7",
+      "command": "C:\\FamilyQuant-wt2\\terra1\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --ledger-shell-compare D:/FamilyQuant-data/out-shell/N3/source D:/FamilyQuant-data/out-refresh\\20261103-013000-terra1\\shell-compare \u00222026-11-03 01:31:10 -0800\u0022",
+      "executedAt": "2026-11-03 01:31:10 -0800",
+      "commit": "7a231c0104e5ca2a9f8c518c0aaf8593a2ed8972",
       "artifacts": [
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\shell-compare\\comparisons.log",
-          "sha256": "6E2FC1C285797B04CD40173760BB02C74834533D9CDCEF564C4870AB0A2AC5DA"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\shell-compare\\comparisons.log",
+          "sha256": "A7C2B507D6BB6DF07ED22CA679655E3CAE603ECBBD40ACC61E88A10C47809F90"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\shell-compare\\comparisons.json",
-          "sha256": "32E29184EDCFC4BFA11BD829AB498821A316F9EC51D83180417837A112F13C36"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\shell-compare\\comparisons.json",
+          "sha256": "A4686DA9C5EBE81431A3E058AE5FB5A30D8C3CE133E4674CFE1796F196726F02"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\shell-compare\\curation-runtime.json",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\shell-compare\\curation-runtime.json",
           "sha256": "4EF1BCE9EAFF5985013CD15A6B1CBFA29C34D7D42702007E522840A20879D128"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\shell-compare\\executed\\Program.ShellLedgerReceipts.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\shell-compare\\executed\\Program.ShellLedgerReceipts.cs",
           "sha256": "6C0E1250A4A019C4937A0CABEF9BA9078213B35E597781407B767279490D3EF3"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\shell-compare\\executed\\Program.ShellLedgerComparison.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\shell-compare\\executed\\Program.ShellLedgerComparison.cs",
           "sha256": "869FC668090431A23D08E8ED109B95BC937D9A6B94DE63E11E86672852649FEB"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\shell-compare\\executed\\Program.Commands.LedgerDeclarations.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\shell-compare\\executed\\Program.Commands.LedgerDeclarations.cs",
           "sha256": "5F18F4DD7E56E601368051AAD44866736DE2FA60C17A5550F4A330C98DABB3D4"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\shell-compare\\executed\\Program.CurationScreen.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\shell-compare\\executed\\Program.CurationScreen.cs",
           "sha256": "42C2CC3D48F2E59DC8E48D06915FE933C6A025F48972FDC3FB0458A0284FA2FF"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\shell-compare\\executed\\LedgerDeclarationComparison.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\shell-compare\\executed\\LedgerDeclarationComparison.cs",
           "sha256": "78EC993565740269D572410A84584AF1D96488C1AE81F2455B1D9AA2D94BB4C3"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\shell-compare\\executed\\LedgerMemberFactComparison.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\shell-compare\\executed\\LedgerMemberFactComparison.cs",
           "sha256": "1F3254D635B40D22576E9F40347DBEB503A5FF661EFC18E743EAC35B097FC14C"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\shell-compare\\executed\\FeatureLedgerEvidence.Reporting.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\shell-compare\\executed\\FeatureLedgerEvidence.Reporting.cs",
           "sha256": "E9A4F3A2A671452283E1C28E155B81DEF97F9BAE907945607C1F16DD0078CC12"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\shell-compare\\executed\\FamilyQuant.Tests.dll",
-          "sha256": "7BF4EDAB23F5D09BA329655DEFC7CA1DA9E901AED04DBA57FBAE9B36AE74ED44"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\shell-compare\\executed\\FamilyQuant.Tests.dll",
+          "sha256": "87E72637B2823DE2238B57CE682D92234CE31508A52FB2AD552CB105C0A91816"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\shell-compare\\executed\\FamilyQuant2.dll",
-          "sha256": "80ADEFB7501B1F40F0A7599E30D4166AA7FBA1E7459CFF505849D4D5F7F58065"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\shell-compare\\executed\\FamilyQuant2.dll",
+          "sha256": "DECBFB068BB6B7EB77DB498D2B6B7BF749C7A6B19F06C826ABE1C47C90F0E47A"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\shell-compare\\executed\\FamilyQuant.Core.dll",
-          "sha256": "8267A1D42284C72B70B419973DF5A276EA96B6001B370E7B7198D445982B6DA9"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\shell-compare\\executed\\FamilyQuant.Core.dll",
+          "sha256": "E5C7BAF7E12F4E28AAC51960DA2E9E5B628696B95B2537EE4953E95B7C142E9A"
         }
       ],
-      "workingDirectory": "C:\\FamilyQuant-gate"
+      "workingDirectory": "C:\\FamilyQuant-wt2\\terra1"
     }
   ],
   "rows": [
@@ -204,17 +204,11 @@
     },
     {
       "observationId": "FQ15-04AAB575A5CB",
-      "implementation": [
-        {
-          "path": "FamilyQuant.Core/CsvReport.cs",
-          "symbol": "FamilyQuant.CsvReport::public static string BuildFamilyComposition ( FamilyEnvelopeQuantResult result , SharedPeptidePolicy policy , double denominator , string basis )",
-          "sha256": "453BA55ABE23B6A567016C1D2BB419AA102E6D801C7347A371769F1FD334DDDF"
-        }
-      ],
+      "implementation": [],
       "proofs": [],
-      "note": "Declaration only; no reachability or handler-execution claim.",
-      "kindReceiptId": "shell-decl-export-storage-fact",
-      "compared": "FamilyQuant/CsvReport.cs:95 \u0022family_user_id\u0022 -\u003E FamilyQuant.Core/CsvReport.cs: FamilyQuant.CsvReport::public static string BuildFamilyComposition ( FamilyEnvelopeQuantResult result , SharedPeptidePolicy policy , double denominator , string basis ) = \u0022family_user_id\u0022; complete member tokens SHA256=72E09E1F2AA03A91DCE0AC8BF94ABF063E09A3B6E077213352CBC81DC164D700"
+      "note": "The exact literal multiplicity within the containing member changed.",
+      "kindReceiptId": null,
+      "compared": null
     },
     {
       "observationId": "FQ15-04B6DD530612",
@@ -306,17 +300,11 @@
     },
     {
       "observationId": "FQ15-06E740B998A5",
-      "implementation": [
-        {
-          "path": "FamilyQuant.Core/CsvReport.cs",
-          "symbol": "FamilyQuant.CsvReport::public static string BuildFamilyComposition ( FamilyEnvelopeQuantResult result , SharedPeptidePolicy policy , double denominator , string basis )",
-          "sha256": "453BA55ABE23B6A567016C1D2BB419AA102E6D801C7347A371769F1FD334DDDF"
-        }
-      ],
+      "implementation": [],
       "proofs": [],
-      "note": "Declaration only; no reachability or handler-execution claim.",
-      "kindReceiptId": "shell-decl-export-storage-fact",
-      "compared": "FamilyQuant/CsvReport.cs:95 \u0022fraction\u0022 -\u003E FamilyQuant.Core/CsvReport.cs: FamilyQuant.CsvReport::public static string BuildFamilyComposition ( FamilyEnvelopeQuantResult result , SharedPeptidePolicy policy , double denominator , string basis ) = \u0022fraction\u0022; complete member tokens SHA256=72E09E1F2AA03A91DCE0AC8BF94ABF063E09A3B6E077213352CBC81DC164D700"
+      "note": "The exact literal multiplicity within the containing member changed.",
+      "kindReceiptId": null,
+      "compared": null
     },
     {
       "observationId": "FQ15-070EBFCAD535",
@@ -380,7 +368,7 @@
         {
           "path": "FamilyQuant/MainWindow.xaml",
           "symbol": "FamilyQuant.MainWindow.MenuItemSaveFCF.IsEnabled",
-          "sha256": "BC451B6AC4E62A03AC1519FFE087EBD3C077368A8FB1FD4B8999ADD9AE8E9A75"
+          "sha256": "7FB4FD37FE007363F1494FC25D848FB96E2F1BC15F7D1500885CB9811E71475C"
         }
       ],
       "proofs": [],
@@ -1304,17 +1292,11 @@
     },
     {
       "observationId": "FQ15-2025778EF37B",
-      "implementation": [
-        {
-          "path": "FamilyQuant.Core/CsvReport.cs",
-          "symbol": "FamilyQuant.CsvReport::public static string BuildFamilyComposition ( FamilyEnvelopeQuantResult result , SharedPeptidePolicy policy , double denominator , string basis )",
-          "sha256": "453BA55ABE23B6A567016C1D2BB419AA102E6D801C7347A371769F1FD334DDDF"
-        }
-      ],
+      "implementation": [],
       "proofs": [],
-      "note": "Declaration only; no reachability or handler-execution claim.",
-      "kindReceiptId": "shell-decl-export-storage-fact",
-      "compared": "FamilyQuant/CsvReport.cs:115 \u0022not attributed to any family\u0022 -\u003E FamilyQuant.Core/CsvReport.cs: FamilyQuant.CsvReport::public static string BuildFamilyComposition ( FamilyEnvelopeQuantResult result , SharedPeptidePolicy policy , double denominator , string basis ) = \u0022not attributed to any family\u0022; complete member tokens SHA256=72E09E1F2AA03A91DCE0AC8BF94ABF063E09A3B6E077213352CBC81DC164D700"
+      "note": "The exact literal multiplicity within the containing member changed.",
+      "kindReceiptId": null,
+      "compared": null
     },
     {
       "observationId": "FQ15-202B1ADC53BE",
@@ -1498,17 +1480,11 @@
     },
     {
       "observationId": "FQ15-24ED395047BF",
-      "implementation": [
-        {
-          "path": "FamilyQuant.Core/CsvReport.cs",
-          "symbol": "FamilyQuant.CsvReport::public static string BuildFamilyComposition ( FamilyEnvelopeQuantResult result , SharedPeptidePolicy policy , double denominator , string basis )",
-          "sha256": "453BA55ABE23B6A567016C1D2BB419AA102E6D801C7347A371769F1FD334DDDF"
-        }
-      ],
+      "implementation": [],
       "proofs": [],
-      "note": "Declaration only; no reachability or handler-execution claim.",
-      "kindReceiptId": "shell-decl-export-storage-fact",
-      "compared": "FamilyQuant/CsvReport.cs:100 \u0022; \u0022 -\u003E FamilyQuant.Core/CsvReport.cs: FamilyQuant.CsvReport::public static string BuildFamilyComposition ( FamilyEnvelopeQuantResult result , SharedPeptidePolicy policy , double denominator , string basis ) = \u0022; \u0022; complete member tokens SHA256=72E09E1F2AA03A91DCE0AC8BF94ABF063E09A3B6E077213352CBC81DC164D700"
+      "note": "The exact literal multiplicity within the containing member changed.",
+      "kindReceiptId": null,
+      "compared": null
     },
     {
       "observationId": "FQ15-2539856F1EAD",
@@ -3378,7 +3354,7 @@
         {
           "path": "FamilyQuant.Core/CsvReport.cs",
           "symbol": "FamilyQuant.CsvReport::public const string NoFullXicHeader",
-          "sha256": "453BA55ABE23B6A567016C1D2BB419AA102E6D801C7347A371769F1FD334DDDF"
+          "sha256": "15B7F2A6E9E75ACC99002C67DC265627136C3437BB6A6555DAAA813D87ADFB48"
         }
       ],
       "proofs": [],
@@ -3424,7 +3400,7 @@
         {
           "path": "FamilyQuant/MainWindow.xaml",
           "symbol": "FamilyQuant.MainWindow.MenuItemReanotateSEPro.IsEnabled",
-          "sha256": "BC451B6AC4E62A03AC1519FFE087EBD3C077368A8FB1FD4B8999ADD9AE8E9A75"
+          "sha256": "7FB4FD37FE007363F1494FC25D848FB96E2F1BC15F7D1500885CB9811E71475C"
         }
       ],
       "proofs": [],
@@ -4126,17 +4102,11 @@
     },
     {
       "observationId": "FQ15-7036894F9DF7",
-      "implementation": [
-        {
-          "path": "FamilyQuant.Core/CsvReport.cs",
-          "symbol": "FamilyQuant.CsvReport::public static string BuildFamilyComposition ( FamilyEnvelopeQuantResult result , SharedPeptidePolicy policy , double denominator , string basis )",
-          "sha256": "453BA55ABE23B6A567016C1D2BB419AA102E6D801C7347A371769F1FD334DDDF"
-        }
-      ],
+      "implementation": [],
       "proofs": [],
-      "note": "Declaration only; no reachability or handler-execution claim.",
-      "kindReceiptId": "shell-decl-export-storage-fact",
-      "compared": "FamilyQuant/CsvReport.cs:111 \u0022,\u0022 -\u003E FamilyQuant.Core/CsvReport.cs: FamilyQuant.CsvReport::public static string BuildFamilyComposition ( FamilyEnvelopeQuantResult result , SharedPeptidePolicy policy , double denominator , string basis ) = \u0022,\u0022; complete member tokens SHA256=72E09E1F2AA03A91DCE0AC8BF94ABF063E09A3B6E077213352CBC81DC164D700"
+      "note": "The exact literal multiplicity within the containing member changed.",
+      "kindReceiptId": null,
+      "compared": null
     },
     {
       "observationId": "FQ15-7056CF96BEBD",
@@ -4718,17 +4688,11 @@
     },
     {
       "observationId": "FQ15-7D56F063F66C",
-      "implementation": [
-        {
-          "path": "FamilyQuant.Core/CsvReport.cs",
-          "symbol": "FamilyQuant.CsvReport::public static string BuildFamilyComposition ( FamilyEnvelopeQuantResult result , SharedPeptidePolicy policy , double denominator , string basis )",
-          "sha256": "453BA55ABE23B6A567016C1D2BB419AA102E6D801C7347A371769F1FD334DDDF"
-        }
-      ],
+      "implementation": [],
       "proofs": [],
-      "note": "Declaration only; no reachability or handler-execution claim.",
-      "kindReceiptId": "shell-decl-export-storage-fact",
-      "compared": "FamilyQuant/CsvReport.cs:106 \u0022,\u0022 -\u003E FamilyQuant.Core/CsvReport.cs: FamilyQuant.CsvReport::public static string BuildFamilyComposition ( FamilyEnvelopeQuantResult result , SharedPeptidePolicy policy , double denominator , string basis ) = \u0022,\u0022; complete member tokens SHA256=72E09E1F2AA03A91DCE0AC8BF94ABF063E09A3B6E077213352CBC81DC164D700"
+      "note": "The exact literal multiplicity within the containing member changed.",
+      "kindReceiptId": null,
+      "compared": null
     },
     {
       "observationId": "FQ15-7D9A67D08B41",
@@ -5020,17 +4984,11 @@
     },
     {
       "observationId": "FQ15-83110D07824B",
-      "implementation": [
-        {
-          "path": "FamilyQuant.Core/CsvReport.cs",
-          "symbol": "FamilyQuant.CsvReport::public static string BuildFamilyComposition ( FamilyEnvelopeQuantResult result , SharedPeptidePolicy policy , double denominator , string basis )",
-          "sha256": "453BA55ABE23B6A567016C1D2BB419AA102E6D801C7347A371769F1FD334DDDF"
-        }
-      ],
+      "implementation": [],
       "proofs": [],
-      "note": "Declaration only; no reachability or handler-execution claim.",
-      "kindReceiptId": "shell-decl-export-storage-fact",
-      "compared": "FamilyQuant/CsvReport.cs:101 \u0022, shared ones in their own row\u0022 -\u003E FamilyQuant.Core/CsvReport.cs: FamilyQuant.CsvReport::public static string BuildFamilyComposition ( FamilyEnvelopeQuantResult result , SharedPeptidePolicy policy , double denominator , string basis ) = \u0022, shared ones in their own row\u0022; complete member tokens SHA256=72E09E1F2AA03A91DCE0AC8BF94ABF063E09A3B6E077213352CBC81DC164D700"
+      "note": "The exact literal multiplicity within the containing member changed.",
+      "kindReceiptId": null,
+      "compared": null
     },
     {
       "observationId": "FQ15-836428C77D50",
@@ -5428,7 +5386,7 @@
         {
           "path": "FamilyQuant/MainWindow.xaml",
           "symbol": "FamilyQuant.MainWindow.MenuItemWhereAmI.Header",
-          "sha256": "BC451B6AC4E62A03AC1519FFE087EBD3C077368A8FB1FD4B8999ADD9AE8E9A75"
+          "sha256": "7FB4FD37FE007363F1494FC25D848FB96E2F1BC15F7D1500885CB9811E71475C"
         }
       ],
       "proofs": [],
@@ -5578,7 +5536,7 @@
         {
           "path": "FamilyQuant/MainWindow.xaml",
           "symbol": "FamilyQuant.MainWindow.MenuItemComputeXic.IsEnabled",
-          "sha256": "BC451B6AC4E62A03AC1519FFE087EBD3C077368A8FB1FD4B8999ADD9AE8E9A75"
+          "sha256": "7FB4FD37FE007363F1494FC25D848FB96E2F1BC15F7D1500885CB9811E71475C"
         }
       ],
       "proofs": [],
@@ -6286,17 +6244,11 @@
     },
     {
       "observationId": "FQ15-9FDF0CC7EACE",
-      "implementation": [
-        {
-          "path": "FamilyQuant.Core/CsvReport.cs",
-          "symbol": "FamilyQuant.CsvReport::public static string BuildFamilyComposition ( FamilyEnvelopeQuantResult result , SharedPeptidePolicy policy , double denominator , string basis )",
-          "sha256": "453BA55ABE23B6A567016C1D2BB419AA102E6D801C7347A371769F1FD334DDDF"
-        }
-      ],
+      "implementation": [],
       "proofs": [],
-      "note": "Declaration only; no reachability or handler-execution claim.",
-      "kindReceiptId": "shell-decl-export-storage-fact",
-      "compared": "FamilyQuant/CsvReport.cs:111 \u0022shared between families\u0022 -\u003E FamilyQuant.Core/CsvReport.cs: FamilyQuant.CsvReport::public static string BuildFamilyComposition ( FamilyEnvelopeQuantResult result , SharedPeptidePolicy policy , double denominator , string basis ) = \u0022shared between families\u0022; complete member tokens SHA256=72E09E1F2AA03A91DCE0AC8BF94ABF063E09A3B6E077213352CBC81DC164D700"
+      "note": "The exact literal multiplicity within the containing member changed.",
+      "kindReceiptId": null,
+      "compared": null
     },
     {
       "observationId": "FQ15-A03C58D60828",
@@ -6992,17 +6944,11 @@
     },
     {
       "observationId": "FQ15-B32233DB2707",
-      "implementation": [
-        {
-          "path": "FamilyQuant.Core/CsvReport.cs",
-          "symbol": "FamilyQuant.CsvReport::public static string BuildFamilyComposition ( FamilyEnvelopeQuantResult result , SharedPeptidePolicy policy , double denominator , string basis )",
-          "sha256": "453BA55ABE23B6A567016C1D2BB419AA102E6D801C7347A371769F1FD334DDDF"
-        }
-      ],
+      "implementation": [],
       "proofs": [],
-      "note": "Declaration only; no reachability or handler-execution claim.",
-      "kindReceiptId": "shell-decl-export-storage-fact",
-      "compared": "FamilyQuant/CsvReport.cs:95 \u0022description\u0022 -\u003E FamilyQuant.Core/CsvReport.cs: FamilyQuant.CsvReport::public static string BuildFamilyComposition ( FamilyEnvelopeQuantResult result , SharedPeptidePolicy policy , double denominator , string basis ) = \u0022description\u0022; complete member tokens SHA256=72E09E1F2AA03A91DCE0AC8BF94ABF063E09A3B6E077213352CBC81DC164D700"
+      "note": "The exact literal multiplicity within the containing member changed.",
+      "kindReceiptId": null,
+      "compared": null
     },
     {
       "observationId": "FQ15-B35E0335E9E9",
@@ -7792,7 +7738,7 @@
         {
           "path": "FamilyQuant/MainWindow.xaml",
           "symbol": "FamilyQuant.MainWindow.MenuItemSaveProject.IsEnabled",
-          "sha256": "BC451B6AC4E62A03AC1519FFE087EBD3C077368A8FB1FD4B8999ADD9AE8E9A75"
+          "sha256": "7FB4FD37FE007363F1494FC25D848FB96E2F1BC15F7D1500885CB9811E71475C"
         }
       ],
       "proofs": [],
@@ -7846,7 +7792,7 @@
         {
           "path": "FamilyQuant/MainWindow.xaml",
           "symbol": "FamilyQuant.MainWindow.MenuItemSpectrumComparison.IsEnabled",
-          "sha256": "BC451B6AC4E62A03AC1519FFE087EBD3C077368A8FB1FD4B8999ADD9AE8E9A75"
+          "sha256": "7FB4FD37FE007363F1494FC25D848FB96E2F1BC15F7D1500885CB9811E71475C"
         }
       ],
       "proofs": [],
@@ -7884,7 +7830,7 @@
         {
           "path": "FamilyQuant.Core/CsvReport.cs",
           "symbol": "FamilyQuant.CsvReport::public static string Build ( IEnumerable \u003C FastaItemExtended \u003E items , NormalizationMode ? mode , string ? fullXicHeader = null )",
-          "sha256": "453BA55ABE23B6A567016C1D2BB419AA102E6D801C7347A371769F1FD334DDDF"
+          "sha256": "15B7F2A6E9E75ACC99002C67DC265627136C3437BB6A6555DAAA813D87ADFB48"
         }
       ],
       "proofs": [],
@@ -8282,7 +8228,7 @@
         {
           "path": "FamilyQuant/MainWindow.xaml",
           "symbol": "FamilyQuant.MainWindow.MenuItemHelp.Header",
-          "sha256": "BC451B6AC4E62A03AC1519FFE087EBD3C077368A8FB1FD4B8999ADD9AE8E9A75"
+          "sha256": "7FB4FD37FE007363F1494FC25D848FB96E2F1BC15F7D1500885CB9811E71475C"
         }
       ],
       "proofs": [],
@@ -8548,17 +8494,11 @@
     },
     {
       "observationId": "FQ15-DC72052AA7DC",
-      "implementation": [
-        {
-          "path": "FamilyQuant.Core/CsvReport.cs",
-          "symbol": "FamilyQuant.CsvReport::public static string BuildFamilyComposition ( FamilyEnvelopeQuantResult result , SharedPeptidePolicy policy , double denominator , string basis )",
-          "sha256": "453BA55ABE23B6A567016C1D2BB419AA102E6D801C7347A371769F1FD334DDDF"
-        }
-      ],
+      "implementation": [],
       "proofs": [],
-      "note": "Declaration only; no reachability or handler-execution claim.",
-      "kindReceiptId": "shell-decl-export-storage-fact",
-      "compared": "FamilyQuant/CsvReport.cs:115 \u0022,\u0022 -\u003E FamilyQuant.Core/CsvReport.cs: FamilyQuant.CsvReport::public static string BuildFamilyComposition ( FamilyEnvelopeQuantResult result , SharedPeptidePolicy policy , double denominator , string basis ) = \u0022,\u0022; complete member tokens SHA256=72E09E1F2AA03A91DCE0AC8BF94ABF063E09A3B6E077213352CBC81DC164D700"
+      "note": "The exact literal multiplicity within the containing member changed.",
+      "kindReceiptId": null,
+      "compared": null
     },
     {
       "observationId": "FQ15-DD7878AEE818",
@@ -8586,17 +8526,11 @@
     },
     {
       "observationId": "FQ15-DE97BFC1DC1A",
-      "implementation": [
-        {
-          "path": "FamilyQuant.Core/CsvReport.cs",
-          "symbol": "FamilyQuant.CsvReport::public static string BuildFamilyComposition ( FamilyEnvelopeQuantResult result , SharedPeptidePolicy policy , double denominator , string basis )",
-          "sha256": "453BA55ABE23B6A567016C1D2BB419AA102E6D801C7347A371769F1FD334DDDF"
-        }
-      ],
+      "implementation": [],
       "proofs": [],
-      "note": "Declaration only; no reachability or handler-execution claim.",
-      "kindReceiptId": "shell-decl-export-storage-fact",
-      "compared": "FamilyQuant/CsvReport.cs:93 \u0022,\u0022 -\u003E FamilyQuant.Core/CsvReport.cs: FamilyQuant.CsvReport::public static string BuildFamilyComposition ( FamilyEnvelopeQuantResult result , SharedPeptidePolicy policy , double denominator , string basis ) = \u0022,\u0022; complete member tokens SHA256=72E09E1F2AA03A91DCE0AC8BF94ABF063E09A3B6E077213352CBC81DC164D700"
+      "note": "The exact literal multiplicity within the containing member changed.",
+      "kindReceiptId": null,
+      "compared": null
     },
     {
       "observationId": "FQ15-DEB6901B39EC",
@@ -8632,17 +8566,11 @@
     },
     {
       "observationId": "FQ15-DF6B9D200673",
-      "implementation": [
-        {
-          "path": "FamilyQuant.Core/CsvReport.cs",
-          "symbol": "FamilyQuant.CsvReport::public static string BuildFamilyComposition ( FamilyEnvelopeQuantResult result , SharedPeptidePolicy policy , double denominator , string basis )",
-          "sha256": "453BA55ABE23B6A567016C1D2BB419AA102E6D801C7347A371769F1FD334DDDF"
-        }
-      ],
+      "implementation": [],
       "proofs": [],
-      "note": "Declaration only; no reachability or handler-execution claim.",
-      "kindReceiptId": "shell-decl-export-storage-fact",
-      "compared": "FamilyQuant/CsvReport.cs:95 \u0022basis\u0022 -\u003E FamilyQuant.Core/CsvReport.cs: FamilyQuant.CsvReport::public static string BuildFamilyComposition ( FamilyEnvelopeQuantResult result , SharedPeptidePolicy policy , double denominator , string basis ) = \u0022basis\u0022; complete member tokens SHA256=72E09E1F2AA03A91DCE0AC8BF94ABF063E09A3B6E077213352CBC81DC164D700"
+      "note": "The exact literal multiplicity within the containing member changed.",
+      "kindReceiptId": null,
+      "compared": null
     },
     {
       "observationId": "FQ15-DF72D3E013B6",
@@ -8994,17 +8922,11 @@
     },
     {
       "observationId": "FQ15-E67177435835",
-      "implementation": [
-        {
-          "path": "FamilyQuant.Core/CsvReport.cs",
-          "symbol": "FamilyQuant.CsvReport::public static string BuildFamilyComposition ( FamilyEnvelopeQuantResult result , SharedPeptidePolicy policy , double denominator , string basis )",
-          "sha256": "453BA55ABE23B6A567016C1D2BB419AA102E6D801C7347A371769F1FD334DDDF"
-        }
-      ],
+      "implementation": [],
       "proofs": [],
-      "note": "Declaration only; no reachability or handler-execution claim.",
-      "kindReceiptId": "shell-decl-export-storage-fact",
-      "compared": "FamilyQuant/CsvReport.cs:95 \u0022signal_primary_estimate\u0022 -\u003E FamilyQuant.Core/CsvReport.cs: FamilyQuant.CsvReport::public static string BuildFamilyComposition ( FamilyEnvelopeQuantResult result , SharedPeptidePolicy policy , double denominator , string basis ) = \u0022signal_primary_estimate\u0022; complete member tokens SHA256=72E09E1F2AA03A91DCE0AC8BF94ABF063E09A3B6E077213352CBC81DC164D700"
+      "note": "The exact literal multiplicity within the containing member changed.",
+      "kindReceiptId": null,
+      "compared": null
     },
     {
       "observationId": "FQ15-E6CBEFC09F9D",
@@ -9330,7 +9252,7 @@
         {
           "path": "FamilyQuant/MainWindow.xaml",
           "symbol": "FamilyQuant.MainWindow.MenuItemHowToRead.Header",
-          "sha256": "BC451B6AC4E62A03AC1519FFE087EBD3C077368A8FB1FD4B8999ADD9AE8E9A75"
+          "sha256": "7FB4FD37FE007363F1494FC25D848FB96E2F1BC15F7D1500885CB9811E71475C"
         }
       ],
       "proofs": [],
@@ -9720,7 +9642,7 @@
         {
           "path": "FamilyQuant.Core/CsvReport.cs",
           "symbol": "FamilyQuant.CsvReport::public static string Build ( IEnumerable \u003C FastaItemExtended \u003E items , NormalizationMode ? mode , string ? fullXicHeader = null )",
-          "sha256": "453BA55ABE23B6A567016C1D2BB419AA102E6D801C7347A371769F1FD334DDDF"
+          "sha256": "15B7F2A6E9E75ACC99002C67DC265627136C3437BB6A6555DAAA813D87ADFB48"
         }
       ],
       "proofs": [],
@@ -9817,7 +9739,7 @@
           "kind": "test",
           "target": "ShellLedgerComparisonCommand",
           "assertion": "shell declaration kind code fact: every listed matched observation retains its exact declaration",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\shell-compare\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\shell-compare\\comparisons.log",
           "inspectedBy": ""
         }
       ]
@@ -9831,7 +9753,7 @@
           "kind": "test",
           "target": "ShellLedgerComparisonCommand",
           "assertion": "shell declaration kind export/storage fact: every listed matched observation retains its exact declaration",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\shell-compare\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\shell-compare\\comparisons.log",
           "inspectedBy": ""
         }
       ]
@@ -9845,7 +9767,7 @@
           "kind": "test",
           "target": "ShellLedgerComparisonCommand",
           "assertion": "shell declaration kind format/export: every listed matched observation retains its exact declaration",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\shell-compare\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\shell-compare\\comparisons.log",
           "inspectedBy": ""
         }
       ]
@@ -9859,7 +9781,7 @@
           "kind": "test",
           "target": "ShellLedgerComparisonCommand",
           "assertion": "shell declaration kind option/copy: every listed matched observation retains its exact declaration",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\shell-compare\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\shell-compare\\comparisons.log",
           "inspectedBy": ""
         }
       ]
@@ -9873,7 +9795,7 @@
           "kind": "test",
           "target": "ShellLedgerComparisonCommand",
           "assertion": "shell declaration kind tooltip: every listed matched observation retains its exact declaration",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\shell-compare\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\shell-compare\\comparisons.log",
           "inspectedBy": ""
         }
       ]
