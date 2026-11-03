@@ -204,6 +204,7 @@ namespace FamilyQuant.Tests
             EnsureApplication();
             ProteinDomainsTests(workDir);
             EvidenceStorageTests(workDir);
+            DomainPositionTests(Path.Combine(workDir, "domain-positions"));
             EvidenceFetchTests();
             EvidenceFetchAtomicTests();
             EvidenceCoverageTests();

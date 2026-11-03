@@ -28,6 +28,16 @@ namespace FamilyQuant.Tests
             internal string PanelRelease = "2026_03";
             protected override Task<System.Net.Http.HttpResponseMessage> SendAsync(System.Net.Http.HttpRequestMessage request, CancellationToken token)
             {
+                if (request.RequestUri!.Host == "www.ebi.ac.uk")
+                {
+                    bool metadata = request.RequestUri.AbsolutePath.StartsWith("/interpro/api/protein/", StringComparison.Ordinal);
+                    var positionResponse = new System.Net.Http.HttpResponseMessage(System.Net.HttpStatusCode.OK)
+                    {
+                        Content = new System.Net.Http.StringContent(metadata ? """{"metadata":{"accession":"A0A710","sequence":"PEPTIDEK"}}""" : """{"count":0,"next":null,"results":[]}"""),
+                    };
+                    positionResponse.Headers.Add("InterPro-Version", "101.0");
+                    return Task.FromResult(positionResponse);
+                }
                 bool panel = Uri.UnescapeDataString(request.RequestUri!.Query).Contains("reviewed:true", StringComparison.Ordinal);
                 if (panel) PanelRequests++; else ProteinRequests++;
                 DuringRequest?.Invoke(panel, token);
