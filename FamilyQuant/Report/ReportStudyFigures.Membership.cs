@@ -10,6 +10,20 @@ public static partial class ReportStudyFigures
     private const string OthersKey = "others";
     private static string FamilyKey(int id) => id.ToString(CultureInfo.InvariantCulture);
 
+    private static FamilyCompositionData WordOthersNames(FamilyCompositionData data, FamilyReportThresholdResult threshold)
+    {
+        var others = threshold.OtherFamilies.Select(f => FamilyKey(f.FamilyUserId)).ToHashSet(StringComparer.Ordinal);
+        int member = 0;
+        return new(data.Families.Select(f => !others.Contains(f.Key) ? f : f with
+        {
+            Label = "Other member " + (++member).ToString(CultureInfo.InvariantCulture),
+            Subclasses = f.Subclasses.Select((p, index) => p with
+            {
+                Label = p.Key.Length == 0 ? "Subclass not resolved" : "Part " + (index + 1).ToString(CultureInfo.InvariantCulture),
+            }).ToArray(),
+        }), data.Basis, data.IsMeanOfRuns, data.UnavailableFamilies);
+    }
+
     private static FamilyCompositionData CanonicalRows(FamilyCompositionData data, FamilyReportThresholdResult threshold,
         FamilyProteinCountsResult? counts)
     {
@@ -73,7 +87,7 @@ public static partial class ReportStudyFigures
             if (row.CuratedUserIds.Any(blocked.Contains)
                 || row.CuratedUserIds.Any(others.Contains) && row.CuratedUserIds.Any(id => !others.Contains(id)))
             {
-                unavailable.Add(new(ReportSectionIds.Results, "Family signal source: " + row.Family,
+                unavailable.Add(new(ReportSectionIds.Results, row.CuratedUserIds.Any(others.Contains) ? "Family signal source" : "Family signal source: " + row.Family,
                     "The stored source row mixes report memberships or includes an excluded/conflicting group; its signal cannot be split without a new source study."));
             }
             else if (row.CuratedUserIds.Count > 0 && row.CuratedUserIds.All(others.Contains)) small.Add(row);

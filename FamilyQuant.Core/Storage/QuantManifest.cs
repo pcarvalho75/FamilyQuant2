@@ -22,6 +22,9 @@ namespace FamilyQuant
     /// </summary>
     public sealed class QuantManifest
     {
+        // The report owns new study containers/lists; unrelated stored evidence is shared read-only.
+        internal QuantManifest CopyForFamilyStudies() => (QuantManifest)MemberwiseClone();
+
         /// <summary>The format version of the container, starting at 1. A reader refuses a version it
         /// does not understand rather than misreading a newer layout as an older one.</summary>
         public int FormatVersion { get; set; } = ProjectStore.CurrentFormatVersion;
