@@ -71,8 +71,10 @@ The rerun of the full analysis with the scope "Toxin", "venom gland" (D39), so t
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| K6 | Numbers filled from the rerun and written into the project's Report details through the program; project saved | L | 0.3 | 🟢 | K7, K10, K14 | `interpreted.fqproj` saved, with the source of every number | OP | | 0 | 0 | |
-| K7 | Second reader: every number in the interpretation matched to its cell in the program's exports | M | 0.4 | K6 | K17 | A table of number, source cell and match, with no mismatch | GR2 | | 0 | 0 | |
+| K6 | The rerun project saved with master's build and the report details, the written interpretation EMPTY (Paulo, 11-03 08:40: "the report is to be performed without an LLM"); the open warms the cache for the final export | L | 0.3 | K2, K4 | K7, K10, K14 | final-input.fqproj saved; interpretation field empty | OP | | 0 | 0 | |
+| K7 | Second reader: every number in the program-written Summary of findings (J44) on Ana's project matched to its cell in the program's exports | M | 0.4 | J44b, K6 | K17 | A table of number, source cell and match, with no mismatch | GR2 | | 0 | 0 | |
+| J44a | The program writes a Summary of findings section itself, from the stored studies with fixed templates and no free text: the families above the threshold with share, SD and protein count, replicate agreement, Others, panel families with no peptide observed, subclass parts, signal outside the panel, the analysis choices in force; numbers in a supplement sheet | M | 1 | 🟢 | J44b | Red then green on a fixture: every sentence present when its data exist, absent when not; numbers equal the headline and studies; D21 guard passes | OP | | 0 | 0 | |
+| J44b | J44 reviewed and merged | L | 0.2 | J44a | K7, K14 | Approved; gate green | OP | | 0 | 0 | |
 
 ### W3 The report export works and is fast
 
@@ -106,7 +108,7 @@ Ana installs it from the public releases page (D31); the desk publishes on Paulo
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| K14 | Final export of the interpreted project through the real command, on master with J30, J24, J16, J32 and J34 | L | 0.5 | K6, J24c, J32d, J34c | K15, K16 | Word report and supplement written | OP | | 0 | 0 | |
+| K14 | Final export of the interpreted project through the real command, on master with J30, J24, J16, J32 and J34 | L | 0.5 | K6, J24c, J32d, J34c, J44b | K15, K16 | Word report and supplement written | OP | | 0 | 0 | |
 | K15 | Number trace on the final report: every number found, or each one not found ruled | L | 0.2 | K14 | K17 | `trace.csv` with nothing left open | T1 | | 0 | 0 | |
 | K16 | The final report's pages read for look and sense | L | 0.3 | K14 | K17 | No blocking item | LK | | 0 | 0 | |
 | K17 | Delivered: the Word report, supplement, project, family panel and a read-me with the release link written to `AnaG/Bjararaca/Relatorio`; nothing else in Ana's folders touched | L | 0.2 | K7, K15, K16, J36c, K11 | | The five items with hashes; the rest of AnaG unchanged | OP | | 0 | 0 | |
