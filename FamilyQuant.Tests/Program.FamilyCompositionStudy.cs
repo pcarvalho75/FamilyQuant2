@@ -25,6 +25,7 @@ internal static partial class Program
 
     private static void FamilySubclassStudyTests()
     {
+        FamilySubclassNativeStudyTests();
         var rows = new List<QuantRow>
         {
             Qr("identified", "r1", 1, 2, "AAAAAAAK", 2, 2),
@@ -98,5 +99,27 @@ internal static partial class Program
         QuantManifest? reopened = ProjectStore.ReadFqproj(path).manifest;
         Check("subclass parts survive a real project round trip", reopened?.FamilySubclassParts != null
             && JsonSerializer.Serialize(reopened.FamilySubclassParts) == json);
+        var preserved = new QuantManifest { FamilySubclassParts = unique };
+        Check("failed subclass calculation leaves a prior stored study intact", Throws<InvalidOperationException>(() =>
+            FamilyCompositionStudy.StoreSubclasses(preserved, attribution, (_, _, _) => throw new InvalidOperationException("fixture")))
+            && ReferenceEquals(preserved.FamilySubclassParts, unique));
+        var random = new Random(4301);
+        bool exact = true;
+        for (int trial = 0; trial < 25; trial++)
+        {
+            var stressMap = new PeptideFamilyAttribution();
+            var stressRows = "ACDEFGHV".Select((letter, i) =>
+            {
+                string sequence = new string(letter, 7) + "K";
+                stressMap.IdentifiedBySequence[sequence] = new[] { 1 };
+                double area = Math.Pow(10, random.Next(-8, 17)) * (0.1 + random.NextDouble());
+                return Qr("identified", "r", i + 1, 2, sequence, area, area);
+            }).ToList();
+            var stress = FamilyEnvelopeQuant.AttributePeptides(FamilyEnvelopeQuant.PreparePeptides(stressRows), stressMap);
+            var split = FamilyCompositionStudy.BuildSubclasses(stress, (_, sequence, _) => new[] { (sequence[0] % 3).ToString(CultureInfo.InvariantCulture) }).Families.Single();
+            exact &= split.Parts.Sum(p => p.Signal) == FamilyEnvelopeQuant.BuildFromAttributedPeptides(stress).Families.Single().Signal(SharedPeptidePolicy.FamilyUnique)
+                && split.Parts.All(p => p.Signal >= 0);
+        }
+        Check("subclass parts close bit for bit across wide signal ranges", exact);
     }
 }

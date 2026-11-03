@@ -34,12 +34,14 @@ namespace FamilyQuant
             // metadata are still available, then persisted in the project. Rebuilding from QuantRow
             // alone would lose rejected audit calls and accepted calls that produced no stored XIC.
             PeptideFamilyAttribution? familyAttribution = null;
+            CurationHomologyHits? familyHits = null;
             if (options.FamilyCuration != null)
             {
                 try
                 {
-                    familyAttribution = FamilyEnvelopeQuant.BuildAttributionFromCuration(
+                    familyHits = FamilyEnvelopeQuant.SearchCuration(
                         result.Rows, options.FamilyCuration);
+                    familyAttribution = FamilyEnvelopeQuant.AttributeHits(familyHits, options.FamilyCuration);
                     manifest.FamilyMapping = FamilyEnvelopeQuant.ProvenanceFor(options.FamilyCuration,
                         familyAttribution.IdentityThreshold);
                     result.Notes.Add("Spectrum-table family attribution: every matching User family at " +
@@ -55,8 +57,11 @@ namespace FamilyQuant
             }
             if (familyAttribution != null)
             {
-                FamilyCompositionStudy.StoreRunShares(manifest, FamilyEnvelopeQuant.AttributePeptides(
-                    FamilyEnvelopeQuant.PreparePeptides(result.Rows), familyAttribution));
+                FamilyPeptideAttribution assigned = FamilyEnvelopeQuant.AttributePeptides(
+                    FamilyEnvelopeQuant.PreparePeptides(result.Rows), familyAttribution);
+                FamilyCompositionStudy.StoreRunShares(manifest, assigned);
+                if (familyHits != null && options.FamilyCuration != null)
+                    FamilyCompositionStudy.StoreSubclassesFromCuration(manifest, assigned, familyHits, options.FamilyCuration);
             }
             result.SpectrumComparisonRows = SpectrumComparisonTable.Build(
                 deNovoImport.AllSourceRows.Where(r => !string.Equals(r.SourceId,

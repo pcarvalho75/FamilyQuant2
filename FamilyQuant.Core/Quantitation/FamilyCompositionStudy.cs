@@ -30,7 +30,7 @@ namespace FamilyQuant
             return new FamilySubclassPartsResult
             {
                 Policy = policy,
-                Method = "Credit to a subclass only when the peptide reaches one family and all candidate " +
+                Method = "All runs pooled. Credit to a subclass only when the peptide reaches one family and all candidate " +
                     "proteins have the same recorded subclass; otherwise subclass not resolved. " +
                     "Existing primary signal and shared-peptide policy retained; final-part rounding closes to the family total.",
                 Families = BuildParts(attribution, policy, (assigned, family) =>
