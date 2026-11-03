@@ -446,6 +446,7 @@ Paulo agreed these at the restart, 2026-11-01.
 | J39 | Cache the two source census searches as well, if J32c shows they cost more than a minute | M | 1 | 🟢 | | Byte-identical report data; the export time before and after | T1 | | 0 | 0 | |
 | J36c | J36 reviewed and merged | L | 0.2 | 🟢 | K17 | Approved; gate green | RS | | 0 | 0 | |
 | J34b | Look fixes for the listed items | M | 1 | 🟢 | J34c | Each item fixed or ruled | LK | | 0 | 0 | |
+| J34c | J34 reviewed and merged | L | 0.2 | 🟢 | K14 | Approved; gate green | LK | | 0 | 0 | |
 
 ### W7 Clear reasons and totals
 

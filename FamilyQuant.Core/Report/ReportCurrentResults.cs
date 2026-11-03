@@ -25,6 +25,8 @@ public static class ReportCurrentResults
         }
         if (families != null)
         {
+            if (families.SourceSequenceSummary.Families.Count > 0)
+                results.Add(ReportFamilySourceSequences.Build(families.SourceSequenceSummary));
             string basis = "identified observed envelope plus database-mapped de novo reference-calibrated estimate";
             double assigned = families.Families.Sum(f => f.Signal(policy));
             var measured = Export("composition-measured", "Family shares of the whole measured signal, all runs pooled", "family_composition_measured.csv",

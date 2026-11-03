@@ -44,10 +44,13 @@ public static class ReportCaptionBuilder
         var sentences = new List<string>
         {
             Sentence(input?.What ?? table.Title),
-            Sentence(input?.How ?? "Read across each row; column headings identify the measures and units"),
-            "The table shows " + table.Rows.Count.ToString(CultureInfo.InvariantCulture) + (table.Rows.Count == 1 ? " data row" : " data rows")
-                + " across " + table.Columns.Count.ToString(CultureInfo.InvariantCulture) + (table.Columns.Count == 1 ? " column." : " columns.")
+            Sentence(input?.How ?? "Read across each row; column headings identify the measures and units")
         };
+        // A workbook-only detail table contributes a Word reference, not a displayed grid.
+        // Its dimensions are structural metadata, not source measurements for the number trace.
+        if (!table.SupplementOnly)
+            sentences.Add("The table shows " + table.Rows.Count.ToString(CultureInfo.InvariantCulture) + (table.Rows.Count == 1 ? " data row" : " data rows")
+                + " across " + table.Columns.Count.ToString(CultureInfo.InvariantCulture) + (table.Columns.Count == 1 ? " column." : " columns."));
         if (table.Columns.Count == 0 || table.Rows.Count == 0) return string.Join(" ", sentences);
         int labelColumn = input?.LabelColumn ?? 0;
         if (labelColumn < 0 || labelColumn >= table.Columns.Count) throw new ArgumentOutOfRangeException(nameof(input));

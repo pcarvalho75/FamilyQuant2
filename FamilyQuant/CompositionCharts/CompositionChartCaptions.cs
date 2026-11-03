@@ -164,7 +164,17 @@ public static class CompositionChartCaptions
         {
             var numbers = new List<CaptionNumber> { new("Acquisition runs", data.Fractions.Count, "runs", "0") };
             if (data.Grouped is { Tic: > 0 } grouped) numbers.Add(new("Pooled primary recovery estimate", grouped.RecoveredFractionReferenceCalibrated * 100, "%", "0.0"));
-            return new("Recovery relative to each run's recorded total ion current", "The top compares M+0 sensitivity, the primary calibrated estimate and the observed-envelope diagnostic; these are different readings, not confidence limits. The lower levels are independent comparisons, not a biological partition", numbers);
+            var reference = data.Fractions.Concat(data.Grouped == null ? Array.Empty<NativeRunFraction>() : new[] { data.Grouped })
+                .LastOrDefault(row => row.HasDetectedChargeSplit && row.Tic > 0);
+            if (reference != null)
+            {
+                string scope = reference.IsGrouped ? "all runs pooled" : reference.Run;
+                numbers.Add(new("Detector z >= 2 share of TIC, " + scope, reference.DetectedFractionMultiplyCharged * 100, "%"));
+                numbers.Add(new("Detector z = 1 share of TIC, " + scope, reference.DetectedFractionSinglyCharged * 100, "%"));
+            }
+            return new("Recovery relative to each run's recorded total ion current", "The top compares M+0 sensitivity, the primary calibrated estimate and the observed-envelope diagnostic; these are different readings, not confidence limits. The lower levels are independent comparisons, not a biological partition", numbers,
+                new[] { "Independent MS1 detector: z >= 2: " + Ms1EnvelopeDetector.StrongEvidenceLabel + "; z = 1: " + Ms1EnvelopeDetector.WeakEvidenceLabel,
+                    Ms1EnvelopeDetector.SinglyChargedCaveat });
         }
         throw new NotSupportedException("Supply an explicit data-bound caption for figure: " + figure.FileName);
     }
