@@ -19,7 +19,8 @@ public static class ReportStoredResults
         ReportTable Table(string id, string title, string file, string csv, string caption, string[] columns, string[] headings)
         {
             exports.Add(file, csv);
-            return ReportCsvTable.Build(id, title, csv, caption, columns) with { Columns = headings };
+            var table = ReportCsvTable.Build(id, title, csv, caption, columns) with { Columns = headings };
+            return ReportTableSupplements.WithStoredPercentages(table, csv, columns);
         }
         void Remove(string id) => results.RemoveAll(b => b.Id == id);
         const string displayed = " Percentages use six significant digits; companion CSV fraction columns retain round-trip values. Empty values are unavailable, not zero.";

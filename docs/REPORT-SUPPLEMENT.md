@@ -4,6 +4,10 @@
 workbook from RS's `ReportSupplementSheet(Id, OwnerSectionId, Name, Table)` model. The
 document builder supplies full native CSV tables and exact citation names. The writer
 validates those names and never renames them silently or recalculates any quantity.
+`ReportTableSupplements.Complete` appends a sheet for each printed table that has no
+sheet yet. The exporter calls it after existing detail and caption-trace sheets; the
+writer also calls it for direct Core callers. Existing sheets retain their names,
+relative order, headers and cells.
 
 The workbook starts with a Contents index listing only selected detail sheets. Excluding
 an owning section or a table id omits that sheet. If no detail remains, Contents has only
@@ -11,7 +15,7 @@ its header. A valid workbook is still produced without fabricated result rows.
 
 Every source cell is literal text, including numeric lexemes, empty availability cells,
 leading zeros, formula-looking values, carriage returns and SpreadsheetML escape-like
-identifiers. Header/data cells occupy the same rows and columns as the source CSV; no
+identifiers. Existing CSV sheets occupy the same rows and columns as the source CSV; no
 title or explanatory rows are inserted. Sheets have Arial text, a bold frozen header,
 filters, wrapping and bounded column widths. There are no formulas to recalculate.
 
@@ -42,3 +46,34 @@ generated variants in a private hidden Excel instance, reads its actual cell val
 closes it and verifies the files were unchanged. The third exercises pair publication,
 including Cancel after each rename, previous-file restoration and recovery retention.
 These fixture checks are not fresh RAW or biological validation.
+
+## Printed tables and stored precision
+
+Short tables kept in Word now have their own worksheets, including project/database
+counts, scientific inputs, search/extraction rules, de novo sources/cutoffs, local
+confidence gates and stored family-study rules. Contents retains each table's stable
+block id, owning section and worksheet name. The same section/table exclusions apply.
+
+New table sheets state the Word formatting rule in the header row. Method cells use
+the exact stored invariant text. Where the report displays percentages with six
+significant digits, the primary sheet cells keep unrounded percentages in the same
+units. Additional columns retain the exact stored fraction/ratio and the Word display
+text; their headers explain multiplication by 100 and six-significant-digit formatting.
+These values come from native round-trip columns, never from reparsing rounded Word
+cells. A missing source column or disagreement with Word is refused. Missing values
+remain empty or explicitly unavailable, never zero. Existing CSV exports are unchanged.
+
+The method worksheet names are stable:
+
+| Table id | Worksheet |
+|---|---|
+| `methods-project` | `Project and database_442FA9` |
+| `methods-inputs` | `Scientific inputs_0C3F74` |
+| `methods-rules` | `Search and quantitation _E85762` |
+| `methods-denovo` | `De novo sources and cuto_68F9D2` |
+| `methods-denovo-gates` | `De novo length and local_05C6C4` |
+| `methods-stored-studies` | `Family study rules_E1E305` |
+
+`--test-report-table-sheets <fresh-output>` exercises actual Word/workbook table
+coverage, exact method cells, raw precision, header guidance, selections, refusal
+boundaries and culture-invariant bytes. It also runs once in DefaultSuite.
