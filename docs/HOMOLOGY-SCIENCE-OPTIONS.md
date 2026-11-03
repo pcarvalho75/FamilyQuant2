@@ -25,6 +25,19 @@ audit reports target/decoy proteins reaching the gate and multiplicities before
 the tier, after the tier, and after the top-hit cut. J28 cache keys append enabled
 science settings only; the default/OFF byte stream remains unchanged.
 
+Length calibration uses one observation per distinct normalized tag. At each
+candidate gate a query is a target winner only when its best target identity
+strictly beats its best decoy; an identity tie goes to the decoy. The observed
+ratio is `(decoy winners + 1) / target winners * (target proteins / decoy proteins)`.
+The first candidate is the greater of the nominal gate and the 0.8 exploration
+floor; higher candidates are the original-length integer-identity fractions.
+The smallest supported qualifying gate is selected separately per length. Fewer
+than 100 distinct tags by default, missing exposure, or no qualifying gate means
+an explicit empty-hit abstention with a reason in the experimental audit.
+This is exploratory calibration, not an FDR guarantee. Floor results are reused;
+only queries at genuinely tighter gates are searched again, with target-decoy
+competition recomputed so a previously suppressed opposing hit can win.
+
 PAM30MS remains the original-query, full-window score. A gate can have another
 best alignment, as in the existing identity/PAM split. The tag option reports
 its gate variant and offset separately. Score tiers operate after target-decoy

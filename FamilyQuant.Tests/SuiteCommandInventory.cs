@@ -10,6 +10,7 @@ internal static class SuiteCommandInventory
     [
         SuiteCommandRule.Covered("--test-homology-search-equivalence", "FamilyQuant.Tests.Program.HomologySearchEquivalenceTests()", "FamilyQuant.Tests.HomologyTests.Run(System.Action`3[System.String,System.Boolean,System.String])"),
         SuiteCommandRule.Covered("--test-homology-score-tier", "FamilyQuant.Tests.Program.HomologyScoreTierTests()"),
+        SuiteCommandRule.Covered("--test-homology-decoy-gate", "FamilyQuant.Tests.Program.HomologyDecoyGateTests()"),
         SuiteCommandRule.Covered("--test-reference-envelope-optimization", "FamilyQuant.Tests.Program.ReferenceEnvelopeOptimizationTests()"),
         SuiteCommandRule.Covered("--test-streaming-provenance-hash", "FamilyQuant.Tests.Program.StreamingProvenanceHashTests()"),
         SuiteCommandRule.Excluded("--replay-homology-capture", "Worker equivalence proof replays explicitly selected actual-Compute database/query/options/result captures against the frozen reference. It requires the captured packet and a fresh owned output; ordinary gates do not select or regenerate these real-data artifacts."),

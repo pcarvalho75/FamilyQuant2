@@ -11,7 +11,7 @@ namespace FamilyQuant.Homology
     /// <summary>Deterministic gapless homology search with a lossless positional q3 filter,
     /// mismatch-budget identity scan and matrix-proven BestScoreOnly containment shortcut.
     /// The frozen HomologyMapper remains the equivalence reference.</summary>
-    public static class HomologySearch
+    public static partial class HomologySearch
     {
         /// <summary>
         /// Searches every distinct query against the database.
@@ -38,6 +38,13 @@ namespace FamilyQuant.Homology
 
             HomologyOptions opts = (options ?? new HomologyOptions()).Clone();
             opts.Validate();
+            bool calibrate = opts.Science?.QueryRole == HomologyQueryRole.DeNovo && opts.Science.DecoyGate?.Enabled == true;
+            double nominalIdentity = opts.MinIdentity;
+            if (calibrate)
+            {
+                if (!double.IsFinite(nominalIdentity)) throw new ArgumentOutOfRangeException(nameof(opts.MinIdentity));
+                opts.MinIdentity = Math.Max(nominalIdentity, opts.Science!.DecoyGate!.MinimumSearchIdentity);
+            }
 
             if (opts.Strategy == HomologySearchStrategy.SeedIndex && !database.HasSeedIndex)
             {
@@ -106,6 +113,8 @@ namespace FamilyQuant.Homology
                                     + completed.ToString(CultureInfo.InvariantCulture) + " of " + queries.Count.ToString(CultureInfo.InvariantCulture), completed, queries.Count);
                         }
                 });
+                if (calibrate)
+                    ApplyLengthCalibration(queries, results, database, opts, nominalIdentity, operation, positionalIndex, parallelOptions);
             }
             finally
             {
@@ -239,6 +248,8 @@ namespace FamilyQuant.Homology
                 Method = tier == null ? "Experimental gate audit" : "De novo integer PAM30MS tier after conservative target-decoy competition",
                 QueryRole = HomologyQueryRole.DeNovo, NominalIdentityGate = options.MinIdentity, AppliedIdentityGate = options.MinIdentity,
                 GateTargetProteins = passed.Count(g => !IsDecoy(g.ProteinIndex)), GateDecoyProteins = passed.Count(g => IsDecoy(g.ProteinIndex)),
+                BestTargetGateIdentity = passed.Where(g => !IsDecoy(g.ProteinIndex)).Select(g => (double?)(g.Identities / (double)peptide.Length)).Max(),
+                BestDecoyGateIdentity = passed.Where(g => IsDecoy(g.ProteinIndex)).Select(g => (double?)(g.Identities / (double)peptide.Length)).Max(),
                 ProteinsBeforeTier = beforeTier, ProteinsAfterTier = afterTier, ProteinsAfterTopCut = hits.Count,
                 MaximumPamScoreDrop = tier?.MaximumPamScoreDrop,
             } : null;

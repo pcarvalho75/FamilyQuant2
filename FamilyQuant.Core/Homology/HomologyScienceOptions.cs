@@ -50,7 +50,7 @@ public sealed class DecoyIdentityGateOptions
         if (!Enabled) return;
         if (!double.IsFinite(MaximumDecoyRatio) || MaximumDecoyRatio <= 0 || MaximumDecoyRatio >= 1)
             throw new ArgumentOutOfRangeException(nameof(MaximumDecoyRatio));
-        if (!double.IsFinite(MinimumSearchIdentity) || MinimumSearchIdentity < 0 || MinimumSearchIdentity > 1)
+        if (!double.IsFinite(MinimumSearchIdentity) || MinimumSearchIdentity < 0.8 || MinimumSearchIdentity > 1)
             throw new ArgumentOutOfRangeException(nameof(MinimumSearchIdentity));
         if (MinimumLengthQueries < 1) throw new ArgumentOutOfRangeException(nameof(MinimumLengthQueries));
     }
@@ -103,7 +103,7 @@ public sealed class HomologyScoreTierOptions
 
 /// <summary>Query-level experimental audit. Protein multiplicities precede the caller's family
 /// join; family multiplicity and shared-signal policy are measured by the attribution producer.</summary>
-public sealed class HomologyScienceAudit
+public sealed record HomologyScienceAudit
 {
     public string Method { get; init; } = string.Empty;
     public HomologyQueryRole QueryRole { get; init; }
@@ -111,6 +111,9 @@ public sealed class HomologyScienceAudit
     public double? AppliedIdentityGate { get; init; }
     public int GateTargetProteins { get; init; }
     public int GateDecoyProteins { get; init; }
+    public double? BestTargetGateIdentity { get; init; }
+    public double? BestDecoyGateIdentity { get; init; }
+    public HomologyLengthGate? LengthCalibration { get; init; }
     public int ProteinsBeforeTier { get; init; }
     public int ProteinsAfterTier { get; init; }
     public int ProteinsAfterTopCut { get; init; }

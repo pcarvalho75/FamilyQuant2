@@ -137,6 +137,7 @@ namespace FamilyQuant.Tests
             suite.Add(() => HomologyTests.Run(Check));
             suite.Add(() => HomologySearchEquivalenceTests());
             suite.Add(() => HomologyScoreTierTests());
+            suite.Add(() => HomologyDecoyGateTests());
             suite.Section("Family world (B1) - a de novo tag credited to UniProt families, on a fixture");
             suite.Add(() => FamilyWorldCheck.RunFixtures(Check));
             suite.Add(() => FamilyWorldRateTests());
