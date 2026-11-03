@@ -32,6 +32,9 @@ public static class ReportProjectExporter
         operation?.Report("report-data", "Preparing stored report data", 0, 8);
         Data(1, "Analyzing stored quantitation");
         manifest = FamilyUnobservedStudies.View(curation, manifest);
+        // Refuse an unavailable collapsed unit before any optional expensive source-family search.
+        if (curation.FamilyPanel != null && manifest.EffectivePanelFamilies == null && EffectivePanelFamilyStudy.HasMultipleUserIds(curation))
+            _ = ReportCompositionBasis.Select(curation, manifest);
         var data = analyticsData ?? AnalyticsBuilder.Build(rows, manifest.PerRunTic);
         if (analyticsData == null && manifest.DerivedFractions.Count > 0) NativeQuantFractions.ApplyDetectedToFractions(data.Fractions, data.Grouped, manifest.DerivedFractions);
         var options = new Homology.HomologyOptions();
@@ -59,6 +62,26 @@ public static class ReportProjectExporter
             ?? new Dictionary<int, string>();
         Data(4, "Applying stored studies");
         result = ReportStoredResults.Apply(result, manifest, labels, grouping, curation);
+        var compositionBasis = ReportCompositionBasis.Select(curation, manifest, labels);
+        result = compositionBasis.Apply(result);
+        if (compositionBasis.UsesPanel && ReportFindings.InputFromProject(curation, compositionBasis.Studies,
+            compositionBasis.Grouping, compositionBasis.Labels) is { } panelFindings)
+        {
+            panelFindings = panelFindings with
+            {
+                PanelKeyByUserId = compositionBasis.Map!.UserFamilies.ToDictionary(pair => pair.Key,
+                    pair => pair.Value.HasConflict ? null : pair.Value.PanelFamilyKey),
+                MembersByPanelKey = panelFindings.MembersByPanelKey
+                    .GroupBy(pair => Panels.FamilyPanelValidation.ResolveFamilyKey(curation.FamilyPanel!, pair.Key), StringComparer.Ordinal)
+                    .Where(group => group.Key != null).ToDictionary(group => group.Key!, group => group.Sum(pair => pair.Value), StringComparer.Ordinal),
+            };
+            var findings = ReportFindings.Build(panelFindings);
+            var selectedExports = new Dictionary<string, string>(result.CsvExports, StringComparer.Ordinal)
+            {
+                ["panel_family_report_findings.csv"] = findings.Csv,
+            };
+            result = new(result.Sections.Where(section => section.Id != ReportSectionIds.Findings).Append(findings.Section).ToArray(), selectedExports);
+        }
         Data(5, "Preparing report sections");
         var replacements = result.Sections.ToDictionary(s => s.Id, StringComparer.Ordinal);
         bool hasConflicts = replacements.ContainsKey(ReportSectionIds.AssignmentConflicts);
@@ -66,14 +89,16 @@ public static class ReportProjectExporter
         var document = ReportDocumentBuilder.Build(curation, manifest, details, provenance, operation,
             panelCount + (hasConflicts ? 1 : 0)) with { ApplicationVersion = AppVersionInfo.Current() };
         int sectionTotal = document.Sections.Count + panelCount + (hasConflicts ? 1 : 0);
-        var panelSections = ReportPanelSections.BuildFromResults(curation, manifest, grouping, operation, document.Sections.Count, sectionTotal);
+        var panelSections = ReportPanelSections.BuildFromResults(curation, manifest, compositionBasis.SourceMembership() ?? grouping,
+            operation, document.Sections.Count, sectionTotal);
         if (hasConflicts)
             operation?.Report("report-prepare-section", "Section " + sectionTotal.ToString(CultureInfo.InvariantCulture) + " of "
                 + sectionTotal.ToString(CultureInfo.InvariantCulture) + ": " + replacements[ReportSectionIds.AssignmentConflicts].Title, sectionTotal, sectionTotal);
         Data(6, "Planning report figures");
         var plan = ReportFigureRenderer.Plan(data, manifest, curation, families, grouping);
+        if (compositionBasis.UsesPanel) plan = ReportFigureRenderer.SourceUnitSupplement(plan);
         Data(7, "Rendering report figures");
-        var studies = ReportStudyFigures.Build(manifest, curation, pngFolder, topProteinsPerPanelFamily: 1,
+        var studies = ReportStudyFigures.BuildForBasis(manifest, curation, pngFolder, compositionBasis, topProteinsPerPanelFamily: 1,
             reportGrouping: grouping, operation: operation, otherFigureCount: plan.Charts.Count);
         var figures = ReportFigureRenderer.Render(plan, pngFolder, operation: operation, figureOffset: studies.Figures.Count,
             figureTotal: plan.Charts.Count + studies.Figures.Count).Concat(studies.Figures).ToArray();
@@ -85,8 +110,6 @@ public static class ReportProjectExporter
             {
                 var section = replacements.GetValueOrDefault(original.Id) ?? original;
                 var blocks = section.Blocks.ToList();
-                if (section.Id == ReportSectionIds.Summary && EffectivePanelFamilyStudy.HasMultipleUserIds(curation))
-                    blocks.Add(new ReportParagraph("headline-family-unit", ReportEffectivePanelFamilies.UnitNotice));
                 if (section.Id == ReportSectionIds.Summary && curation.FamilyPanel == null)
                     blocks.Insert(0, new ReportParagraph("current-grouping-notice",
                         "Draft of the saved current grouping. No family panel is stored in this project. Group-specific, shared and unattributed signal remain separate; panel-based assignments can change both the grouping and its shared-signal fraction."));

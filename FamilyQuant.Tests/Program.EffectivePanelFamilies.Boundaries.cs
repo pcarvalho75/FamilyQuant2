@@ -122,7 +122,7 @@ internal static partial class Program
             && brief.Any(t => t.Contains("Unseen part: Not measured", StringComparison.Ordinal))
             && brief.Any(t => t.Contains("Peptide: Unseen segment: Not measured", StringComparison.Ordinal)));
         Check("the report states its headline unit once for a multi-UserID panel family", export.Document.Sections.SelectMany(s => s.Blocks).OfType<ReportParagraph>()
-            .Count(p => p.Text == ReportEffectivePanelFamilies.UnitNotice) == 1);
+            .Count(p => p.Text == ReportCompositionBasis.PanelNotice) == 1);
         ReportProjectExporter.Write(export, Path.Combine(directory, "effective-panel.docx"));
         Check("the exported report retains all original CSVs and adds effective-key native values", before.CsvExports.All(p => export.CsvExports[p.Key] == p.Value)
             && export.CsvExports["effective_panel_families.csv"].Contains("\"0.5\"", StringComparison.Ordinal));
