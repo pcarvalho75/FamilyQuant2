@@ -43,8 +43,11 @@ public static class PanelAssignmentEvidenceStore
         FamilyPanelValidation.Validate(panel);
         var byId = assignments.Where(r => r.FamilyUserId.HasValue).GroupBy(r => r.FamilyUserId!.Value).ToDictionary(g => g.Key, g =>
         {
-            string[] keys = g.Where(r => r.IsApplied && r.PanelFamilyKey != null).Select(r => FamilyPanelValidation.ResolveFamilyKey(panel, r.PanelFamilyKey!))
-                .Where(k => k != null).Select(k => k!).Distinct(StringComparer.Ordinal).Order(StringComparer.Ordinal).ToArray();
+            // Excluded keys still carry a report decision. Only PanelRows' measured membership
+            // drops them; erasing them here would turn an explicit exclusion into an unlinked row.
+            string[] keys = g.Where(r => r.IsApplied && r.PanelFamilyKey != null)
+                .Select(r => FamilyPanelValidation.ResolveFamilyKey(panel, r.PanelFamilyKey!) ?? r.PanelFamilyKey!)
+                .Distinct(StringComparer.Ordinal).Order(StringComparer.Ordinal).ToArray();
             bool outside = g.Any(r => !r.IsApplied || r.PanelFamilyKey == null);
             bool conflict = keys.Length > 1 || keys.Length > 0 && outside;
             string? key = keys.Length == 1 && !conflict ? keys[0] : null;

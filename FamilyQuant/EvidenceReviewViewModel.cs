@@ -18,7 +18,8 @@ namespace FamilyQuant
     public sealed record EvidenceReviewInput(string SourceFingerprint, IReadOnlyList<ReviewProteinInput> Proteins,
         IReadOnlyList<ReviewFamilyInput> Families, IReadOnlyList<ReviewMarkerInput> Markers,
         IReadOnlyList<ReviewArchitectureInput>? Architectures = null, IReadOnlyList<ReviewLeftOutInput>? LeftOut = null,
-        string SourceLabel = "", string RuleSummary = "");
+        string SourceLabel = "", string RuleSummary = "", IReadOnlyList<PanelFamilyLinkProposal>? PanelLinks = null,
+        IReadOnlyDictionary<string, string>? PanelNames = null);
     public sealed record EvidenceReviewSelection(string SourceFingerprint, IReadOnlyList<int> ProteinIndices,
         IReadOnlyDictionary<string, string> Names, IReadOnlyList<ReviewArchitectureChoice>? ArchitectureChoices = null,
         string MotifPattern = "", IReadOnlyList<EvidenceProteinOverride>? ProteinOverrides = null);
@@ -113,8 +114,13 @@ namespace FamilyQuant
         public IReadOnlyList<ArchitectureReviewViewModel> Architectures { get; }
         public ArchitectureReviewViewModel? SelectedArchitecture => Architectures.FirstOrDefault(a => a.Family == SelectedFamily?.Family);
         public IReadOnlyList<ReviewMarkerInput> Markers => Source.Markers;
+        public IReadOnlyList<PanelLinkReviewRow> PanelLinks { get; }
+        public bool HasPanelRules => Source.PanelLinks != null;
+        public bool HasUnappliedPanelLinkChoices => PanelLinks.Any(row => row.HasUnappliedChoice);
+        public IReadOnlyList<PanelFamilyLinkSelection> CapturePanelLinkChoices() => PanelLinks.Where(row => row.HasUnappliedChoice).Select(row => row.Capture()).ToArray();
         public int SelectedCount => selectedCount;
-        public bool CanConfirm => selectedCount > 0 && Families.Where(f => f.SelectedCount > 0).All(f => !string.IsNullOrWhiteSpace(f.Name))
+        public bool CanConfirm => selectedCount > 0 && !HasUnappliedPanelLinkChoices && PanelLinks.All(row => !row.Source.NeedsConfirmation)
+            && Families.Where(f => f.SelectedCount > 0).All(f => !string.IsNullOrWhiteSpace(f.Name))
             && Architectures.Where(a => familyByKey.TryGetValue(a.Family, out var family) && family.SelectedCount > 0).All(a => a.IsValid);
         public string Summary => (Source.SourceLabel.Length == 0 ? "" : Source.SourceLabel + " ") + selectedCount.ToString("N0") + " proteins selected in "
             + Families.Count(f => f.SelectedCount > 0).ToString("N0") + " families. Nothing has changed yet.";
@@ -135,6 +141,8 @@ namespace FamilyQuant
                 Families = source.Families.ToArray(), Markers = source.Markers.ToArray(), LeftOut = source.LeftOut?.ToArray()
             };
             Source = source;
+            PanelLinks = (source.PanelLinks ?? Array.Empty<PanelFamilyLinkProposal>()).Select(link =>
+                new PanelLinkReviewRow(link, source.PanelNames, () => { Changed(nameof(HasUnappliedPanelLinkChoices)); Changed(nameof(CanConfirm)); })).ToArray();
             if (string.IsNullOrEmpty(source.SourceFingerprint)) throw new ArgumentException("The proposal needs a source fingerprint.", nameof(source));
             if (source.Proteins.Select(p => p.ProteinIndex).Distinct().Count() != source.Proteins.Count)
                 throw new ArgumentException("A proposal cannot repeat a protein index.", nameof(source));

@@ -43,6 +43,7 @@ public static class ReportSectionIds
     public const string Summary = "summary";
     public const string Methods = "methods";
     public const string Results = "results";
+    public const string AssignmentConflicts = "assignment-conflicts";
     public const string FamilyPrefix = "family:";
     public const string Quality = "quality";
     public const string Sensitivity = "sensitivity";

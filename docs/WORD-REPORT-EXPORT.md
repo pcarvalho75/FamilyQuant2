@@ -11,8 +11,10 @@ closing it or cancelling the file chooser leaves the choices unchanged.
 
 Accepted options mark the project changed. A changed threshold rebuilds the report from
 the updated setting. The production Word writer prepares a file beside its destination;
-the shell checks cancellation and the current project before one final rename. Cancel,
-failure, or a replaced project preserves the previous report. A Word report cannot replace
+the shell checks cancellation and the current project before one final paired publication.
+The Word document and same-base `_supplement.xlsx` workbook are staged together. Cancel or
+failure between renames rolls back both artifacts, retaining recovery copies if restoration
+itself fails. A replaced project preserves previous reports. A Word report cannot replace
 the open project. Export does not save the project.
 
 The report menu is distinct from File > Export > Panel audit (CSV).
@@ -26,7 +28,8 @@ Focused checks after a Release build:
 ```
 
 The native command fixture writes a real Word document through the menu and production
-builder/writer, checks its stored details, sources and selected sections, reopens the choices,
-and exercises file-chooser cancellation, shared Cancel and stale-project refusal. It uses
+builder/writer, checks its stored details, sources, selected sections and all published workbook
+cells, reopens the choices, and exercises file-chooser cancellation, shared Cancel between the
+two publications, old-pair restoration and stale-project refusal. It uses
 labelled synthetic stored Results and reads no RAW file. The section/figure checker also
 compares selected Word packages and the retained original PNG bytes.
