@@ -35,7 +35,8 @@ internal static partial class Program
         EnsureApplication();
         var mapRows = new[] { Qr("identified", "report_fixture", 1, 2, "ACDEFGHIK", 100, 150),
             Qr("denovo", "report_fixture", 2, 2, "ACDEFAHIK", 50, 70) };
-        var mapFile = new FamilyClusterFile { MyExtendedFastaItems = new()
+        var mapFile = new FamilyClusterFile { ReportDetails = new() { Title = "Synthetic saved-project report", WrittenInterpretation = "Synthetic stored interpretation." },
+            MyExtendedFastaItems = new()
         {
             new() { SequenceIdentifier = "SYNTHETIC_REPORT_TARGET", Sequence = "TTACDEFGHIKGG", Description = "Synthetic report mapping", UserID = 1, USearchID = 1 },
         } };
@@ -47,5 +48,14 @@ internal static partial class Program
         var actualTable = ReportCsvTable.Build("mapping", "Mapping", generated.CsvExports["family_composition_measured.csv"], "");
         Check("draft family mapping honors the project's recorded identity gate", actualTable.Rows.Single(r => r[0] == "1")[2]
             == expected.Families.Single().Signal(SharedPeptidePolicy.FamilyUnique).ToString(System.Globalization.CultureInfo.InvariantCulture));
+        string fixtureProject = Path.Combine(fixtureFolder, "synthetic-project.fqproj");
+        ProjectStore.WriteFqproj(fixtureProject, mapFile, mapRows, mapManifest);
+        string fixtureReport = Path.Combine(fixtureFolder, "synthetic-cli-report.docx");
+        Check("native saved-project report command writes the complete draft", RunWordProjectExport(new[] { "--export-word-report", fixtureProject, fixtureReport }, fixtureFolder) == 0);
+        using var zip = new System.IO.Compression.ZipArchive(File.OpenRead(fixtureReport));
+        using var xmlReader = new StreamReader(zip.GetEntry("word/document.xml")!.Open());
+        string documentXml = xmlReader.ReadToEnd();
+        Check("reopened project details and interpretation reach the CLI document", documentXml.Contains("Synthetic saved-project report", StringComparison.Ordinal)
+            && documentXml.Contains("Synthetic stored interpretation.", StringComparison.Ordinal));
     }
 }
