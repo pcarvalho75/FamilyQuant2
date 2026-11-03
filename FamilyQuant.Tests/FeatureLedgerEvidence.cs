@@ -90,31 +90,36 @@ internal static partial class FeatureLedgerEvidence
         }
         bool Matches(string path, string expected) => Regex.IsMatch(expected ?? "", "^[0-9A-Fa-f]{64}$")
             && File.Exists(path) && string.Equals(CachedHash(path), expected, StringComparison.OrdinalIgnoreCase);
-        var sourceEolHashes = reads?.SourceEolHashes ?? new Dictionary<string, HashSet<string>>(StringComparer.OrdinalIgnoreCase);
-        bool MatchesCurrentSource(string path, string expected)
+        var sourceLfBytes = reads?.SourceLfBytes ?? new Dictionary<string, byte[]>(StringComparer.OrdinalIgnoreCase);
+        byte[] LfBytes(string path)
         {
-            if (Matches(path, expected)) return true;
-            // Only current C#/XAML implementations tolerate checkout EOL changes.
-            // Frozen sources, logs, renders and all retained artifacts still use raw hashes.
-            if (!File.Exists(path) || Path.GetExtension(path) is not (".cs" or ".xaml")) return false;
-            if (!sourceEolHashes.TryGetValue(path, out var variants))
+            if (!sourceLfBytes.TryGetValue(path, out var normalized))
             {
                 byte[] bytes = File.ReadAllBytes(path);
-                variants = new(StringComparer.OrdinalIgnoreCase);
-                foreach (bool crlf in new[] { false, true })
+                using var converted = new MemoryStream();
+                for (int i = 0; i < bytes.Length; i++)
                 {
-                    using var converted = new MemoryStream();
-                    for (int i = 0; i < bytes.Length; i++)
-                    {
-                        if (bytes[i] == 13 && i + 1 < bytes.Length && bytes[i + 1] == 10) continue;
-                        if (bytes[i] == 10 && crlf) converted.WriteByte(13);
-                        converted.WriteByte(bytes[i]);
-                    }
-                    variants.Add(Convert.ToHexString(SHA256.HashData(converted.ToArray())));
+                    if (bytes[i] == 13 && i + 1 < bytes.Length && bytes[i + 1] == 10) continue;
+                    converted.WriteByte(bytes[i]);
                 }
-                sourceEolHashes[path] = variants;
+                sourceLfBytes[path] = normalized = converted.ToArray();
             }
-            return variants.Contains(expected);
+            return normalized;
+        }
+        bool MatchesCurrentSource(string path, string expected, IEnumerable<Artifact> retained)
+        {
+            if (Matches(path, expected)) return true;
+            // Normalize current source only against recorded source bytes, never against an
+            // invented hash variant. The retained artifact must still pass its original raw hash.
+            string extension = Path.GetExtension(path);
+            if (!File.Exists(path) || extension is not (".cs" or ".xaml")) return false;
+            foreach (var artifact in retained.Where(artifact => string.Equals(artifact.Sha256, expected, StringComparison.OrdinalIgnoreCase)
+                && string.Equals(Path.GetExtension(artifact.Path), extension, StringComparison.OrdinalIgnoreCase)))
+            {
+                string recorded = ResolveArtifact(artifact.Path);
+                if (Matches(recorded, expected) && LfBytes(path).AsSpan().SequenceEqual(LfBytes(recorded))) return true;
+            }
+            return false;
         }
         string ResolveArtifact(string path)
         {
@@ -161,6 +166,8 @@ internal static partial class FeatureLedgerEvidence
                     else row = row with { Proofs = row.Proofs.Concat(kinds[0].Proofs).Distinct().ToList() };
                 }
                 if (row.Proofs.Count > 0 && row.Implementation.Count == 0) problems.Add("Missing implementation mapping.");
+                var retainedSources = row.Proofs.SelectMany(proof => runs.TryGetValue(proof.RunId, out var candidates) && candidates.Length == 1
+                    ? candidates[0].Artifacts ?? new List<Artifact>() : new List<Artifact>()).Distinct().ToArray();
                 if (row.Proofs.Count > 0)
                 foreach (var source in row.Implementation)
                 {
@@ -172,7 +179,7 @@ internal static partial class FeatureLedgerEvidence
                             throw new InvalidDataException("Implementation leaves this worktree.");
                         if (full.Split(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar).Any(p => p.Equals("Orion", StringComparison.OrdinalIgnoreCase)))
                             throw new InvalidDataException("Implementation is outside this mission.");
-                        if (string.IsNullOrWhiteSpace(source.Symbol) || !MatchesCurrentSource(full, source.Sha256)) problems.Add("Implementation hash/symbol differs: " + source.Path);
+                        if (string.IsNullOrWhiteSpace(source.Symbol) || !MatchesCurrentSource(full, source.Sha256, retainedSources)) problems.Add("Implementation hash/symbol differs: " + source.Path);
                     }
                     catch (Exception ex) when (ex is IOException or ArgumentException or InvalidDataException or UnauthorizedAccessException)
                     { problems.Add(ex.Message); }

@@ -5,48 +5,48 @@
   "runs": [
     {
       "id": "AS-member-comparison",
-      "command": "C:\\FamilyQuant-gate\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --ledger-assay-compare D:/FamilyQuant-data/out-shell/N3/source D:/FamilyQuant-data/out-shell/N5-final-20261101-224706/audit-a/mapping.json D:/FamilyQuant-data/out-refresh\\20261102-182444-FamilyQuant-gate\\assay-retained AS-retained \u00222026-11-02 18:25:52 -0800\u0022",
-      "executedAt": "2026-11-02 18:25:52 -0800",
-      "commit": "8421552b22169f5b7ab3c44f2670c992e5e4562c",
+      "command": "D:\\FamilyQuant-wt\\shell-j15-check\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --ledger-assay-compare D:/FamilyQuant-data/out-shell/N3/source D:/FamilyQuant-data/out-shell/N5-final-20261101-224706/audit-a/mapping.json D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\assay-retained AS-retained \u00222026-11-03 02:48:38 -0800\u0022",
+      "executedAt": "2026-11-03 02:48:38 -0800",
+      "commit": "9fe583514b1e3726e523edb37ca5c10c303cc6dd",
       "artifacts": [
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\assay-retained\\comparisons.log",
-          "sha256": "CC24A591B25DFAAD7B5CF9BC7A946D295C5D154A529BC5FCF9247C72522C95CC"
+          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\assay-retained\\comparisons.log",
+          "sha256": "773729F3015D99DE1EA5C2DBA5E60F63420A1891299A86D58700D402289694C8"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\assay-retained\\comparisons.json",
-          "sha256": "CD6EA963A025AEE80E50DE9AA3640AB259C52FAF4C7ED63DC4B3035117496BB5"
+          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\assay-retained\\comparisons.json",
+          "sha256": "3B8BFE13F9DBB9F4C5A7DC314D5B24F8B93A027E71448CE63B25DF80A4F395EB"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\assay-retained\\unproven.tsv",
-          "sha256": "78B0DB4A789FF349ABD31FB69F762F47DED9E882EEDDDB17DD8A58437F22ED98"
+          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\assay-retained\\unproven.tsv",
+          "sha256": "09825EC1EFA8860AFDE8BEABC07E1D9852A8AE0C47DD3A60D5D55B709394E2BE"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\assay-retained\\counts-by-source.tsv",
-          "sha256": "A413D11601DB7A3CD708C013922D0AE9B873C7CA196C752B1A53BEA449C06AA8"
+          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\assay-retained\\counts-by-source.tsv",
+          "sha256": "FBFFC0EBBD32F95D64501921630C8CE4C7ECB24F0A53E5806162950126ACE455"
         },
         {
           "path": "D:\\FamilyQuant-data\\out-shell\\N5-final-20261101-224706\\audit-a\\mapping.json",
           "sha256": "DE1EDBDA53D9EE54B672F5820ED85D94087F2C0671270E08CBFF3FCD02F2A352"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\assay-retained\\executed\\Program.LedgerAssayComparison.cs",
+          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\assay-retained\\executed\\Program.LedgerAssayComparison.cs",
           "sha256": "A68676F37892744747170ECFBFE8F332FABCFEA05E5997BE5E39E55390E9654F"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\assay-retained\\executed\\Program.Commands.AssayLedger.cs",
+          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\assay-retained\\executed\\Program.Commands.AssayLedger.cs",
           "sha256": "46DA029D0DBAA113B736A5E3B2BE7D29C486565EAE0063281F58F292ECC8112E"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\assay-retained\\executed\\LedgerMemberFactComparison.cs",
+          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\assay-retained\\executed\\LedgerMemberFactComparison.cs",
           "sha256": "1F3254D635B40D22576E9F40347DBEB503A5FF661EFC18E743EAC35B097FC14C"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\assay-retained\\executed\\FamilyQuant.Tests.dll",
-          "sha256": "6F2762D3760DB80C7EF95E01791ADDCF311D2A58137A9797910B10F57606C080"
+          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\assay-retained\\executed\\FamilyQuant.Tests.dll",
+          "sha256": "6407606040C45143C12C0432C670F6345DD42144E1608CE7BFE61C0AD1530979"
         }
       ],
-      "workingDirectory": "C:\\FamilyQuant-gate"
+      "workingDirectory": "D:\\FamilyQuant-wt\\shell-j15-check"
     }
   ],
   "rows": [
@@ -834,7 +834,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/DeNovoXicCache.cs",
           "symbol": "FamilyQuant.DeNovo.DeNovoXicCache::public static string KeyFor ( int scanNoMS2 , double roundedMz , int charge )",
-          "sha256": "D63E0B9022082142131FA26E1E050BA705133F492761C1D8C97321E4B7CC2B5B"
+          "sha256": "F5296E32FB6CE6CBACD00F9B41E521BC9A86F84520EE8B63673F936BA099F588"
         }
       ],
       "proofs": [],
@@ -2330,7 +2330,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs",
           "symbol": "FamilyQuant.DeNovo.Ms1EnvelopeDetector::public const string SinglyChargedCaveat",
-          "sha256": "79CA110CF12B1603F371147540B1682854EE4671584F76DA65613F074DCE601F"
+          "sha256": "4869CFA848996AF803B9DFC7C10A621C1E08514F88D1EAF09F31E3DD13FB9903"
         }
       ],
       "proofs": [],
@@ -2750,17 +2750,11 @@
     },
     {
       "observationId": "FQ15-2E287945BA54",
-      "implementation": [
-        {
-          "path": "FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs",
-          "symbol": "FamilyQuant.DeNovo.Ms1EnvelopeDetector::public static Ms1EnvelopeDetectionResult DetectRun ( string rawPath , string ? cachePath = null , Action \u003C string \u003E ? progress = null , string ? sourceFingerprint = null )",
-          "sha256": "79CA110CF12B1603F371147540B1682854EE4671584F76DA65613F074DCE601F"
-        }
-      ],
+      "implementation": [],
       "proofs": [],
-      "note": "Exact literal syntax, multiplicity and complete member tokens agree. Declaration only; no runtime or behavior claim.",
-      "kindReceiptId": "member-export-storage-fact",
-      "compared": "\u0022N0\u0022 -\u003E FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs: FamilyQuant.DeNovo.Ms1EnvelopeDetector::public static Ms1EnvelopeDetectionResult DetectRun ( string rawPath , string ? cachePath = null , Action \u003C string \u003E ? progress = null , string ? sourceFingerprint = null ) = \u0022N0\u0022"
+      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
+      "kindReceiptId": null,
+      "compared": "\u0022N0\u0022 -\u003E :  = "
     },
     {
       "observationId": "FQ15-2E3972F43052",
@@ -3568,7 +3562,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/DeNovoXicCache.cs",
           "symbol": "FamilyQuant.DeNovo.DeNovoXicCache::public void Save ( )",
-          "sha256": "D63E0B9022082142131FA26E1E050BA705133F492761C1D8C97321E4B7CC2B5B"
+          "sha256": "F5296E32FB6CE6CBACD00F9B41E521BC9A86F84520EE8B63673F936BA099F588"
         }
       ],
       "proofs": [],
@@ -4424,17 +4418,11 @@
     },
     {
       "observationId": "FQ15-4FE5D15AF045",
-      "implementation": [
-        {
-          "path": "FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs",
-          "symbol": "FamilyQuant.DeNovo.Ms1EnvelopeDetector::public static Ms1EnvelopeDetectionResult DetectRun ( string rawPath , string ? cachePath = null , Action \u003C string \u003E ? progress = null , string ? sourceFingerprint = null )",
-          "sha256": "79CA110CF12B1603F371147540B1682854EE4671584F76DA65613F074DCE601F"
-        }
-      ],
+      "implementation": [],
       "proofs": [],
-      "note": "Exact literal syntax, multiplicity and complete member tokens agree. Declaration only; no runtime or behavior claim.",
-      "kindReceiptId": "member-export-storage-fact",
-      "compared": "\u0022N0\u0022 -\u003E FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs: FamilyQuant.DeNovo.Ms1EnvelopeDetector::public static Ms1EnvelopeDetectionResult DetectRun ( string rawPath , string ? cachePath = null , Action \u003C string \u003E ? progress = null , string ? sourceFingerprint = null ) = \u0022N0\u0022"
+      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
+      "kindReceiptId": null,
+      "compared": "\u0022N0\u0022 -\u003E :  = "
     },
     {
       "observationId": "FQ15-5037D0AEAFDD",
@@ -5228,7 +5216,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/DeNovoXicCache.cs",
           "symbol": "FamilyQuant.DeNovo.DeNovoXicCache::public static string KeyFor ( int scanNoMS2 , double roundedMz , int charge )",
-          "sha256": "D63E0B9022082142131FA26E1E050BA705133F492761C1D8C97321E4B7CC2B5B"
+          "sha256": "F5296E32FB6CE6CBACD00F9B41E521BC9A86F84520EE8B63673F936BA099F588"
         }
       ],
       "proofs": [],
@@ -6210,7 +6198,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/DeNovoXicCache.cs",
           "symbol": "FamilyQuant.DeNovo.DeNovoXicCache::public static string KeyFor ( int scanNoMS2 , double roundedMz , int charge )",
-          "sha256": "D63E0B9022082142131FA26E1E050BA705133F492761C1D8C97321E4B7CC2B5B"
+          "sha256": "F5296E32FB6CE6CBACD00F9B41E521BC9A86F84520EE8B63673F936BA099F588"
         }
       ],
       "proofs": [],
@@ -6700,31 +6688,19 @@
     },
     {
       "observationId": "FQ15-77672F14EDEE",
-      "implementation": [
-        {
-          "path": "FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs",
-          "symbol": "FamilyQuant.DeNovo.Ms1EnvelopeDetector::public static Ms1EnvelopeDetectionResult DetectRun ( string rawPath , string ? cachePath = null , Action \u003C string \u003E ? progress = null , string ? sourceFingerprint = null )",
-          "sha256": "79CA110CF12B1603F371147540B1682854EE4671584F76DA65613F074DCE601F"
-        }
-      ],
+      "implementation": [],
       "proofs": [],
-      "note": "Exact literal syntax, multiplicity and complete member tokens agree. Declaration only; no runtime or behavior claim.",
-      "kindReceiptId": "member-export-storage-fact",
-      "compared": "\u0022 envelope(s)).\u0022 -\u003E FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs: FamilyQuant.DeNovo.Ms1EnvelopeDetector::public static Ms1EnvelopeDetectionResult DetectRun ( string rawPath , string ? cachePath = null , Action \u003C string \u003E ? progress = null , string ? sourceFingerprint = null ) = \u0022 envelope(s)).\u0022"
+      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
+      "kindReceiptId": null,
+      "compared": "\u0022 envelope(s)).\u0022 -\u003E :  = "
     },
     {
       "observationId": "FQ15-7797D0EC1F17",
-      "implementation": [
-        {
-          "path": "FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs",
-          "symbol": "FamilyQuant.DeNovo.Ms1EnvelopeDetector::public static Ms1EnvelopeDetectionResult DetectRun ( string rawPath , string ? cachePath = null , Action \u003C string \u003E ? progress = null , string ? sourceFingerprint = null )",
-          "sha256": "79CA110CF12B1603F371147540B1682854EE4671584F76DA65613F074DCE601F"
-        }
-      ],
+      "implementation": [],
       "proofs": [],
-      "note": "Exact literal syntax, multiplicity and complete member tokens agree. Declaration only; no runtime or behavior claim.",
-      "kindReceiptId": "member-export-storage-fact",
-      "compared": "\u0022A RAW file path is required.\u0022 -\u003E FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs: FamilyQuant.DeNovo.Ms1EnvelopeDetector::public static Ms1EnvelopeDetectionResult DetectRun ( string rawPath , string ? cachePath = null , Action \u003C string \u003E ? progress = null , string ? sourceFingerprint = null ) = \u0022A RAW file path is required.\u0022"
+      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
+      "kindReceiptId": null,
+      "compared": "\u0022A RAW file path is required.\u0022 -\u003E :  = "
     },
     {
       "observationId": "FQ15-779D2CC5DE2C",
@@ -7520,7 +7496,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs",
           "symbol": "FamilyQuant.DeNovo.Ms1EnvelopeDetector::public const string StrongEvidenceLabel",
-          "sha256": "79CA110CF12B1603F371147540B1682854EE4671584F76DA65613F074DCE601F"
+          "sha256": "4869CFA848996AF803B9DFC7C10A621C1E08514F88D1EAF09F31E3DD13FB9903"
         }
       ],
       "proofs": [],
@@ -7562,7 +7538,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs",
           "symbol": "FamilyQuant.DeNovo.Ms1EnvelopeDetector::private static void SaveCache ( string path , Ms1EnvelopeDetectionResult result , string sourceFingerprint )",
-          "sha256": "79CA110CF12B1603F371147540B1682854EE4671584F76DA65613F074DCE601F"
+          "sha256": "4869CFA848996AF803B9DFC7C10A621C1E08514F88D1EAF09F31E3DD13FB9903"
         }
       ],
       "proofs": [],
@@ -7896,17 +7872,11 @@
     },
     {
       "observationId": "FQ15-868453DF20C8",
-      "implementation": [
-        {
-          "path": "FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs",
-          "symbol": "FamilyQuant.DeNovo.Ms1EnvelopeDetector::public static Ms1EnvelopeDetectionResult DetectRun ( string rawPath , string ? cachePath = null , Action \u003C string \u003E ? progress = null , string ? sourceFingerprint = null )",
-          "sha256": "79CA110CF12B1603F371147540B1682854EE4671584F76DA65613F074DCE601F"
-        }
-      ],
+      "implementation": [],
       "proofs": [],
-      "note": "Exact literal syntax, multiplicity and complete member tokens agree. Declaration only; no runtime or behavior claim.",
-      "kindReceiptId": "member-export-storage-fact",
-      "compared": "\u0022 resolved isotope-series feature(s) over \u0022 -\u003E FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs: FamilyQuant.DeNovo.Ms1EnvelopeDetector::public static Ms1EnvelopeDetectionResult DetectRun ( string rawPath , string ? cachePath = null , Action \u003C string \u003E ? progress = null , string ? sourceFingerprint = null ) = \u0022 resolved isotope-series feature(s) over \u0022"
+      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
+      "kindReceiptId": null,
+      "compared": "\u0022 resolved isotope-series feature(s) over \u0022 -\u003E :  = "
     },
     {
       "observationId": "FQ15-86ADAE66B36A",
@@ -8400,7 +8370,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs",
           "symbol": "FamilyQuant.DeNovo.Ms1EnvelopeDetector::public const string SinglyChargedCaveat",
-          "sha256": "79CA110CF12B1603F371147540B1682854EE4671584F76DA65613F074DCE601F"
+          "sha256": "4869CFA848996AF803B9DFC7C10A621C1E08514F88D1EAF09F31E3DD13FB9903"
         }
       ],
       "proofs": [],
@@ -10094,7 +10064,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs",
           "symbol": "FamilyQuant.DeNovo.Ms1EnvelopeDetector::public const string WeakEvidenceLabel",
-          "sha256": "79CA110CF12B1603F371147540B1682854EE4671584F76DA65613F074DCE601F"
+          "sha256": "4869CFA848996AF803B9DFC7C10A621C1E08514F88D1EAF09F31E3DD13FB9903"
         }
       ],
       "proofs": [],
@@ -11108,17 +11078,11 @@
     },
     {
       "observationId": "FQ15-B85B65F42CE1",
-      "implementation": [
-        {
-          "path": "FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs",
-          "symbol": "FamilyQuant.DeNovo.Ms1EnvelopeDetector::public static Ms1EnvelopeDetectionResult DetectRun ( string rawPath , string ? cachePath = null , Action \u003C string \u003E ? progress = null , string ? sourceFingerprint = null )",
-          "sha256": "79CA110CF12B1603F371147540B1682854EE4671584F76DA65613F074DCE601F"
-        }
-      ],
+      "implementation": [],
       "proofs": [],
-      "note": "Exact literal syntax, multiplicity and complete member tokens agree. Declaration only; no runtime or behavior claim.",
-      "kindReceiptId": "member-export-storage-fact",
-      "compared": "\u0022: resolved isotope-series diagnostic answered from the cache (\u0022 -\u003E FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs: FamilyQuant.DeNovo.Ms1EnvelopeDetector::public static Ms1EnvelopeDetectionResult DetectRun ( string rawPath , string ? cachePath = null , Action \u003C string \u003E ? progress = null , string ? sourceFingerprint = null ) = \u0022: resolved isotope-series diagnostic answered from the cache (\u0022"
+      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
+      "kindReceiptId": null,
+      "compared": "\u0022: resolved isotope-series diagnostic answered from the cache (\u0022 -\u003E :  = "
     },
     {
       "observationId": "FQ15-B88F17268A1F",
@@ -11538,17 +11502,11 @@
     },
     {
       "observationId": "FQ15-BD4FFA89F875",
-      "implementation": [
-        {
-          "path": "FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs",
-          "symbol": "FamilyQuant.DeNovo.Ms1EnvelopeDetector::public static Ms1EnvelopeDetectionResult DetectRun ( string rawPath , string ? cachePath = null , Action \u003C string \u003E ? progress = null , string ? sourceFingerprint = null )",
-          "sha256": "79CA110CF12B1603F371147540B1682854EE4671584F76DA65613F074DCE601F"
-        }
-      ],
+      "implementation": [],
       "proofs": [],
-      "note": "Exact literal syntax, multiplicity and complete member tokens agree. Declaration only; no runtime or behavior claim.",
-      "kindReceiptId": "member-export-storage-fact",
-      "compared": "\u0022: loading MS1 spectra to detect resolved isotope series...\u0022 -\u003E FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs: FamilyQuant.DeNovo.Ms1EnvelopeDetector::public static Ms1EnvelopeDetectionResult DetectRun ( string rawPath , string ? cachePath = null , Action \u003C string \u003E ? progress = null , string ? sourceFingerprint = null ) = \u0022: loading MS1 spectra to detect resolved isotope series...\u0022"
+      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
+      "kindReceiptId": null,
+      "compared": "\u0022: loading MS1 spectra to detect resolved isotope series...\u0022 -\u003E :  = "
     },
     {
       "observationId": "FQ15-BDBE026E9B66",
@@ -11876,17 +11834,11 @@
     },
     {
       "observationId": "FQ15-C28A0B762E27",
-      "implementation": [
-        {
-          "path": "FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs",
-          "symbol": "FamilyQuant.DeNovo.Ms1EnvelopeDetector::public static Ms1EnvelopeDetectionResult DetectRun ( string rawPath , string ? cachePath = null , Action \u003C string \u003E ? progress = null , string ? sourceFingerprint = null )",
-          "sha256": "79CA110CF12B1603F371147540B1682854EE4671584F76DA65613F074DCE601F"
-        }
-      ],
+      "implementation": [],
       "proofs": [],
-      "note": "Exact literal syntax, multiplicity and complete member tokens agree. Declaration only; no runtime or behavior claim.",
-      "kindReceiptId": "member-export-storage-fact",
-      "compared": "\u0022N0\u0022 -\u003E FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs: FamilyQuant.DeNovo.Ms1EnvelopeDetector::public static Ms1EnvelopeDetectionResult DetectRun ( string rawPath , string ? cachePath = null , Action \u003C string \u003E ? progress = null , string ? sourceFingerprint = null ) = \u0022N0\u0022"
+      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
+      "kindReceiptId": null,
+      "compared": "\u0022N0\u0022 -\u003E :  = "
     },
     {
       "observationId": "FQ15-C309DCD69D94",
@@ -12364,7 +12316,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs",
           "symbol": "FamilyQuant.DeNovo.Ms1EnvelopeDetector::public const string SinglyChargedCaveat",
-          "sha256": "79CA110CF12B1603F371147540B1682854EE4671584F76DA65613F074DCE601F"
+          "sha256": "4869CFA848996AF803B9DFC7C10A621C1E08514F88D1EAF09F31E3DD13FB9903"
         }
       ],
       "proofs": [],
@@ -12620,17 +12572,11 @@
     },
     {
       "observationId": "FQ15-CFB0C496B272",
-      "implementation": [
-        {
-          "path": "FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs",
-          "symbol": "FamilyQuant.DeNovo.Ms1EnvelopeDetector::public static Ms1EnvelopeDetectionResult DetectRun ( string rawPath , string ? cachePath = null , Action \u003C string \u003E ? progress = null , string ? sourceFingerprint = null )",
-          "sha256": "79CA110CF12B1603F371147540B1682854EE4671584F76DA65613F074DCE601F"
-        }
-      ],
+      "implementation": [],
       "proofs": [],
-      "note": "Exact literal syntax, multiplicity and complete member tokens agree. Declaration only; no runtime or behavior claim.",
-      "kindReceiptId": "member-export-storage-fact",
-      "compared": "\u0022 MS1 scan(s) - \u0022 -\u003E FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs: FamilyQuant.DeNovo.Ms1EnvelopeDetector::public static Ms1EnvelopeDetectionResult DetectRun ( string rawPath , string ? cachePath = null , Action \u003C string \u003E ? progress = null , string ? sourceFingerprint = null ) = \u0022 MS1 scan(s) - \u0022"
+      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
+      "kindReceiptId": null,
+      "compared": "\u0022 MS1 scan(s) - \u0022 -\u003E :  = "
     },
     {
       "observationId": "FQ15-D04DFC347869",
@@ -12754,17 +12700,11 @@
     },
     {
       "observationId": "FQ15-D1A591E52DA0",
-      "implementation": [
-        {
-          "path": "FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs",
-          "symbol": "FamilyQuant.DeNovo.Ms1EnvelopeDetector::public static Ms1EnvelopeDetectionResult DetectRun ( string rawPath , string ? cachePath = null , Action \u003C string \u003E ? progress = null , string ? sourceFingerprint = null )",
-          "sha256": "79CA110CF12B1603F371147540B1682854EE4671584F76DA65613F074DCE601F"
-        }
-      ],
+      "implementation": [],
       "proofs": [],
-      "note": "Exact literal syntax, multiplicity and complete member tokens agree. Declaration only; no runtime or behavior claim.",
-      "kindReceiptId": "member-export-storage-fact",
-      "compared": "\u0022, \u0022 -\u003E FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs: FamilyQuant.DeNovo.Ms1EnvelopeDetector::public static Ms1EnvelopeDetectionResult DetectRun ( string rawPath , string ? cachePath = null , Action \u003C string \u003E ? progress = null , string ? sourceFingerprint = null ) = \u0022, \u0022"
+      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
+      "kindReceiptId": null,
+      "compared": "\u0022, \u0022 -\u003E :  = "
     },
     {
       "observationId": "FQ15-D2282E119F8D",
@@ -13006,17 +12946,11 @@
     },
     {
       "observationId": "FQ15-D636B492FD40",
-      "implementation": [
-        {
-          "path": "FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs",
-          "symbol": "FamilyQuant.DeNovo.Ms1EnvelopeDetector::public static Ms1EnvelopeDetectionResult DetectRun ( string rawPath , string ? cachePath = null , Action \u003C string \u003E ? progress = null , string ? sourceFingerprint = null )",
-          "sha256": "79CA110CF12B1603F371147540B1682854EE4671584F76DA65613F074DCE601F"
-        }
-      ],
+      "implementation": [],
       "proofs": [],
-      "note": "Exact literal syntax, multiplicity and complete member tokens agree. Declaration only; no runtime or behavior claim.",
-      "kindReceiptId": "member-export-storage-fact",
-      "compared": "\u0022.\u0022 -\u003E FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs: FamilyQuant.DeNovo.Ms1EnvelopeDetector::public static Ms1EnvelopeDetectionResult DetectRun ( string rawPath , string ? cachePath = null , Action \u003C string \u003E ? progress = null , string ? sourceFingerprint = null ) = \u0022.\u0022"
+      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
+      "kindReceiptId": null,
+      "compared": "\u0022.\u0022 -\u003E :  = "
     },
     {
       "observationId": "FQ15-D6E38FAD93D5",
@@ -13048,17 +12982,11 @@
     },
     {
       "observationId": "FQ15-D773CB4DC14D",
-      "implementation": [
-        {
-          "path": "FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs",
-          "symbol": "FamilyQuant.DeNovo.Ms1EnvelopeDetector::public static Ms1EnvelopeDetectionResult DetectRun ( string rawPath , string ? cachePath = null , Action \u003C string \u003E ? progress = null , string ? sourceFingerprint = null )",
-          "sha256": "79CA110CF12B1603F371147540B1682854EE4671584F76DA65613F074DCE601F"
-        }
-      ],
+      "implementation": [],
       "proofs": [],
-      "note": "Exact literal syntax, multiplicity and complete member tokens agree. Declaration only; no runtime or behavior claim.",
-      "kindReceiptId": "member-export-storage-fact",
-      "compared": "\u0022: detected \u0022 -\u003E FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs: FamilyQuant.DeNovo.Ms1EnvelopeDetector::public static Ms1EnvelopeDetectionResult DetectRun ( string rawPath , string ? cachePath = null , Action \u003C string \u003E ? progress = null , string ? sourceFingerprint = null ) = \u0022: detected \u0022"
+      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
+      "kindReceiptId": null,
+      "compared": "\u0022: detected \u0022 -\u003E :  = "
     },
     {
       "observationId": "FQ15-D798D8FAC4BC",
@@ -14010,7 +13938,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs",
           "symbol": "FamilyQuant.DeNovo.Ms1EnvelopeDetector::public const string MethodSentence",
-          "sha256": "79CA110CF12B1603F371147540B1682854EE4671584F76DA65613F074DCE601F"
+          "sha256": "4869CFA848996AF803B9DFC7C10A621C1E08514F88D1EAF09F31E3DD13FB9903"
         }
       ],
       "proofs": [],
@@ -14342,17 +14270,11 @@
     },
     {
       "observationId": "FQ15-EC1ED07E39CC",
-      "implementation": [
-        {
-          "path": "FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs",
-          "symbol": "FamilyQuant.DeNovo.Ms1EnvelopeDetector::public static Ms1EnvelopeDetectionResult DetectRun ( string rawPath , string ? cachePath = null , Action \u003C string \u003E ? progress = null , string ? sourceFingerprint = null )",
-          "sha256": "79CA110CF12B1603F371147540B1682854EE4671584F76DA65613F074DCE601F"
-        }
-      ],
+      "implementation": [],
       "proofs": [],
-      "note": "Exact literal syntax, multiplicity and complete member tokens agree. Declaration only; no runtime or behavior claim.",
-      "kindReceiptId": "member-export-storage-fact",
-      "compared": "\u0022N0\u0022 -\u003E FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs: FamilyQuant.DeNovo.Ms1EnvelopeDetector::public static Ms1EnvelopeDetectionResult DetectRun ( string rawPath , string ? cachePath = null , Action \u003C string \u003E ? progress = null , string ? sourceFingerprint = null ) = \u0022N0\u0022"
+      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
+      "kindReceiptId": null,
+      "compared": "\u0022N0\u0022 -\u003E :  = "
     },
     {
       "observationId": "FQ15-EC3753E52CC1",
@@ -14434,17 +14356,11 @@
     },
     {
       "observationId": "FQ15-EDD5C6112828",
-      "implementation": [
-        {
-          "path": "FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs",
-          "symbol": "FamilyQuant.DeNovo.Ms1EnvelopeDetector::public static Ms1EnvelopeDetectionResult DetectRun ( string rawPath , string ? cachePath = null , Action \u003C string \u003E ? progress = null , string ? sourceFingerprint = null )",
-          "sha256": "79CA110CF12B1603F371147540B1682854EE4671584F76DA65613F074DCE601F"
-        }
-      ],
+      "implementation": [],
       "proofs": [],
-      "note": "Exact literal syntax, multiplicity and complete member tokens agree. Declaration only; no runtime or behavior claim.",
-      "kindReceiptId": "member-export-storage-fact",
-      "compared": "\u0022N0\u0022 -\u003E FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs: FamilyQuant.DeNovo.Ms1EnvelopeDetector::public static Ms1EnvelopeDetectionResult DetectRun ( string rawPath , string ? cachePath = null , Action \u003C string \u003E ? progress = null , string ? sourceFingerprint = null ) = \u0022N0\u0022"
+      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
+      "kindReceiptId": null,
+      "compared": "\u0022N0\u0022 -\u003E :  = "
     },
     {
       "observationId": "FQ15-EE3E608E8284",
@@ -15457,7 +15373,7 @@
           "kind": "test",
           "target": "LedgerAssayCompareCommand",
           "assertion": "AS member kind code fact: every listed frozen/current member declaration agrees",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\assay-retained\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\assay-retained\\comparisons.log",
           "inspectedBy": ""
         }
       ]
@@ -15471,7 +15387,7 @@
           "kind": "test",
           "target": "LedgerAssayCompareCommand",
           "assertion": "AS member kind export/storage fact: every listed frozen/current member declaration agrees",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\assay-retained\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\assay-retained\\comparisons.log",
           "inspectedBy": ""
         }
       ]
@@ -15485,7 +15401,7 @@
           "kind": "test",
           "target": "LedgerAssayCompareCommand",
           "assertion": "AS member kind format/export: every listed frozen/current member declaration agrees",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\assay-retained\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\assay-retained\\comparisons.log",
           "inspectedBy": ""
         }
       ]
