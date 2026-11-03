@@ -169,3 +169,6 @@ each have ten passed/zero failed/zero skipped, nine supported/seven OPEN rows. A
 fact records and four cache/FASTA data artifacts repeat byte-identically. Every remaining
 gap is listed in `D:/FamilyQuant-data/reviews/behaviour2-FQShell-results.tsv`.
 Only requested case groups run; unrelated approved execution/input packets are not replayed.
+The final READY sync includes N6q. Its N6q1/N6q2 runs repeat the same 9/7 outcome,
+10/0/0 checks and identical fact/data artifacts against the updated Help text.
+The 3277/0/17 quick pass preceded that sync; post-sync build and both native runs passed.
