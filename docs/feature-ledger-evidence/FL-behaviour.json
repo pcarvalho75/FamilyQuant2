@@ -5,268 +5,268 @@
   "runs": [
     {
       "id": "native",
-      "command": "C:\\FamilyQuant-gate\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --isolated-native-proof --ledger-floater-behaviour D:/FamilyQuant-data/out-shell/N3/source D:/FamilyQuant-data/reference-1.5.0.6/app D:/FamilyQuant-data/reviews/behaviour-FQFloater.json D:/FamilyQuant-data/out-refresh\\20261102-210533-FamilyQuant-gate\\fl-behaviour \u00222026-11-02 21:06:05 -0800\u0022",
-      "executedAt": "2026-11-02 21:06:05 -0800",
-      "commit": "f8bf0902393d7946e71dacf14dc81ea0c2c4ceb7",
+      "command": "C:\\FamilyQuant-wt2\\terra1\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --isolated-native-proof --ledger-floater-behaviour D:/FamilyQuant-data/out-shell/N3/source D:/FamilyQuant-data/reference-1.5.0.6/app D:/FamilyQuant-data/reviews/behaviour-FQFloater.json D:/FamilyQuant-data/out-refresh\\20261102-234342-terra1\\fl-behaviour \u00222026-11-02 23:46:02 -0800\u0022",
+      "executedAt": "2026-11-02 23:46:02 -0800",
+      "commit": "f25f216fa174989478989cefc1c925a41ac8c760",
       "artifacts": [
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\fl-behaviour\\behaviour-values.json",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-234342-terra1\\fl-behaviour\\behaviour-values.json",
           "sha256": "C2EC57ED922AE6F164E6E8DB3468C3EF625B10A608ED720954279D279B1263EC"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\fl-behaviour\\behaviour.log",
-          "sha256": "2B98CDE47678C89607C5D5E4C7466A8117F05D6CE8C58601330141E6EFF62D99"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-234342-terra1\\fl-behaviour\\behaviour.log",
+          "sha256": "ED0ADD704383DBB56DB40BBA4BF0EF2C9208CFD56FBF4D1232FEA514E1B31308"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\fl-behaviour\\build-values.json",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-234342-terra1\\fl-behaviour\\build-values.json",
           "sha256": "AD5D3EDCF6432FC787917D4B7F768B5D8DC06B1A539D1ED46AC1B97F8401E107"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\fl-behaviour\\build\\T-R\\current\\owned.T-R",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-234342-terra1\\fl-behaviour\\build\\T-R\\current\\owned.T-R",
           "sha256": "1C6D9A8907CBE7EF26AEB6F6080495D84127ACD667CB4735C7C0AE79C7B6AFDA"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\fl-behaviour\\build\\T-R\\current\\owned.fcf",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-234342-terra1\\fl-behaviour\\build\\T-R\\current\\owned.fcf",
           "sha256": "ACEFAF57826028B1AD2073BD2012ECB6F299F28C8F9E1610F4BC658A8F86B006"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\fl-behaviour\\build\\T-R\\current\\usearch.exe",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-234342-terra1\\fl-behaviour\\build\\T-R\\current\\usearch.exe",
           "sha256": "CFB6A77FF0CABCF9D7334EE298A1DF22B2351A54C65418F0EB93F3913A10ACD3"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\fl-behaviour\\build\\T-R\\frozen\\chooser-delivery.json",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-234342-terra1\\fl-behaviour\\build\\T-R\\frozen\\chooser-delivery.json",
           "sha256": "CECE1806011096E02BE2A2C97CBA78F154C26E3A690869F822B0A7A196081794"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\fl-behaviour\\build\\T-R\\frozen\\driver-live.txt",
-          "sha256": "000257A8E94771DE5D5F1155DD7914D208B8804B95E8B6A1C6E23E3519BDFCE1"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-234342-terra1\\fl-behaviour\\build\\T-R\\frozen\\driver-live.txt",
+          "sha256": "8C5BF9B083C001FFB32B7CABBD4600AB3F6F4C72D0C438B92A60901751EC2406"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\fl-behaviour\\build\\T-R\\frozen\\owned.T-R",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-234342-terra1\\fl-behaviour\\build\\T-R\\frozen\\owned.T-R",
           "sha256": "1C6D9A8907CBE7EF26AEB6F6080495D84127ACD667CB4735C7C0AE79C7B6AFDA"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\fl-behaviour\\build\\T-R\\frozen\\owned.fcf",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-234342-terra1\\fl-behaviour\\build\\T-R\\frozen\\owned.fcf",
           "sha256": "8EE717C08F22EAB6B6B06F5B51232214878C2D3105A1D5F181F8FE8990BCBA32"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\fl-behaviour\\build\\T-R\\frozen\\usearch.exe",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-234342-terra1\\fl-behaviour\\build\\T-R\\frozen\\usearch.exe",
           "sha256": "E05C852CE29155CEA546B271AA0B79A303EBB90BC8C87299A87303832662E764"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\fl-behaviour\\build\\fasta\\current\\owned.fasta",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-234342-terra1\\fl-behaviour\\build\\fasta\\current\\owned.fasta",
           "sha256": "1B7B0AC9AC8F30047371411B57371C688C9818047FF3C54D0455C63BDA1D74E3"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\fl-behaviour\\build\\fasta\\current\\owned.fcf",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-234342-terra1\\fl-behaviour\\build\\fasta\\current\\owned.fcf",
           "sha256": "F7724BE9F4262273A28ACFBA6ADE0BC428394E085A9CFF15886C63DBE84F7C87"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\fl-behaviour\\build\\fasta\\current\\usearch.exe",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-234342-terra1\\fl-behaviour\\build\\fasta\\current\\usearch.exe",
           "sha256": "CFB6A77FF0CABCF9D7334EE298A1DF22B2351A54C65418F0EB93F3913A10ACD3"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\fl-behaviour\\build\\fasta\\frozen\\chooser-delivery.json",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-234342-terra1\\fl-behaviour\\build\\fasta\\frozen\\chooser-delivery.json",
           "sha256": "CECE1806011096E02BE2A2C97CBA78F154C26E3A690869F822B0A7A196081794"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\fl-behaviour\\build\\fasta\\frozen\\driver-live.txt",
-          "sha256": "000257A8E94771DE5D5F1155DD7914D208B8804B95E8B6A1C6E23E3519BDFCE1"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-234342-terra1\\fl-behaviour\\build\\fasta\\frozen\\driver-live.txt",
+          "sha256": "8C5BF9B083C001FFB32B7CABBD4600AB3F6F4C72D0C438B92A60901751EC2406"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\fl-behaviour\\build\\fasta\\frozen\\owned.fasta",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-234342-terra1\\fl-behaviour\\build\\fasta\\frozen\\owned.fasta",
           "sha256": "1B7B0AC9AC8F30047371411B57371C688C9818047FF3C54D0455C63BDA1D74E3"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\fl-behaviour\\build\\fasta\\frozen\\owned.fcf",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-234342-terra1\\fl-behaviour\\build\\fasta\\frozen\\owned.fcf",
           "sha256": "2F4B33A838BB62557AB9BEAD447E4AFB1DAC7DEA62219A95F99DD39AD1D48D57"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\fl-behaviour\\build\\fasta\\frozen\\usearch.exe",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-234342-terra1\\fl-behaviour\\build\\fasta\\frozen\\usearch.exe",
           "sha256": "E05C852CE29155CEA546B271AA0B79A303EBB90BC8C87299A87303832662E764"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\fl-behaviour\\executed\\FamilyQuant.Core.dll",
-          "sha256": "8267A1D42284C72B70B419973DF5A276EA96B6001B370E7B7198D445982B6DA9"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-234342-terra1\\fl-behaviour\\executed\\FamilyQuant.Core.dll",
+          "sha256": "81B37B2BD86A4F5A0884E43ED1101B7E67F20D63596F2B3E0E2ABDBBECAE8151"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\fl-behaviour\\executed\\FamilyQuant.Core\\ProjectStore.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-234342-terra1\\fl-behaviour\\executed\\FamilyQuant.Core\\ProjectStore.cs",
           "sha256": "CF34F9F920078064A0F94CA8C3F1021ABFD2D1D6229A69C15E75C9ED899E8949"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\fl-behaviour\\executed\\FamilyQuant.Tests.dll",
-          "sha256": "7BF4EDAB23F5D09BA329655DEFC7CA1DA9E901AED04DBA57FBAE9B36AE74ED44"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-234342-terra1\\fl-behaviour\\executed\\FamilyQuant.Tests.dll",
+          "sha256": "217772BEAB68CBD36D0F7153F2B045C548878FEAB310CA58A32217341A216A69"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\fl-behaviour\\executed\\FamilyQuant.Tests\\NativeBehaviourMessages.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-234342-terra1\\fl-behaviour\\executed\\FamilyQuant.Tests\\NativeBehaviourMessages.cs",
           "sha256": "9408F206A843C3B8A7FAF97608A40F31E5BFBD145F230E01CA35445FCB511BFB"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\fl-behaviour\\executed\\FamilyQuant.Tests\\NativeOwnedDialogDriver.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-234342-terra1\\fl-behaviour\\executed\\FamilyQuant.Tests\\NativeOwnedDialogDriver.cs",
           "sha256": "CFAAE1CC0BA608665E89B71234BB717A6520EF0C452442A4510D5706D5BBD7E1"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\fl-behaviour\\executed\\FamilyQuant.Tests\\NativeProofDesktop.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-234342-terra1\\fl-behaviour\\executed\\FamilyQuant.Tests\\NativeProofDesktop.cs",
           "sha256": "E00BADD2FB785CB1750FDD704AF7F9D93C040CD1A5BE59ABDF864C91FEE7B3AF"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\fl-behaviour\\executed\\FamilyQuant.Tests\\Program.Commands.DeNovoLedger.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-234342-terra1\\fl-behaviour\\executed\\FamilyQuant.Tests\\Program.Commands.DeNovoLedger.cs",
           "sha256": "B4116A6A47B9A014A4E1ED11F17B94E802EFB7151158BDAC6DE1F226557F741F"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\fl-behaviour\\executed\\FamilyQuant.Tests\\Program.Commands.SecondaryLedger.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-234342-terra1\\fl-behaviour\\executed\\FamilyQuant.Tests\\Program.Commands.SecondaryLedger.cs",
           "sha256": "F38C27B0A3B11CDFD6D6FECC4ED8F00C0E1B1B24E2C3D5C8916E6106C703CCC1"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\fl-behaviour\\executed\\FamilyQuant.Tests\\Program.FloaterBehaviour.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-234342-terra1\\fl-behaviour\\executed\\FamilyQuant.Tests\\Program.FloaterBehaviour.cs",
           "sha256": "6E1124CB312EDE28943A0417ECFB573EB529620732426F4BA66D2CF6DB8E6C65"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\fl-behaviour\\executed\\FamilyQuant.Tests\\Program.SecondaryInjectedMethod.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-234342-terra1\\fl-behaviour\\executed\\FamilyQuant.Tests\\Program.SecondaryInjectedMethod.cs",
           "sha256": "23A7781DDBD6E2B6299FB12C9F31A083CC4FF42C290513848F61EA4CEF31E2D1"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\fl-behaviour\\executed\\FamilyQuant2.dll",
-          "sha256": "80ADEFB7501B1F40F0A7599E30D4166AA7FBA1E7459CFF505849D4D5F7F58065"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-234342-terra1\\fl-behaviour\\executed\\FamilyQuant2.dll",
+          "sha256": "5C05808C8C63EACFF0335F19694A21D1C0C708F5D3CB2EA13BB97C09CD935FAD"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\fl-behaviour\\executed\\FamilyQuant\\ClusterGenerationControl.Presentation.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-234342-terra1\\fl-behaviour\\executed\\FamilyQuant\\ClusterGenerationControl.Presentation.cs",
           "sha256": "163C3F79EC1A4885705484E029FB1814589A70F3A709C47680245E111BA4BB37"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\fl-behaviour\\executed\\FamilyQuant\\ClusterGenerationControl.xaml.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-234342-terra1\\fl-behaviour\\executed\\FamilyQuant\\ClusterGenerationControl.xaml.cs",
           "sha256": "0C3DECE2E6E26161D7A12954C124BF2AE7A2627DD121C18C99191C0FC9F2CDF2"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\fl-behaviour\\executed\\FamilyQuant\\DeNovoControl.Compatibility.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-234342-terra1\\fl-behaviour\\executed\\FamilyQuant\\DeNovoControl.Compatibility.cs",
           "sha256": "BB45BCACC7C63869B4B22F63EE16C6572D12F7F2A2C9B589686B2DE2BC15479C"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\fl-behaviour\\executed\\FamilyQuant\\DeNovoControl.Dialogs.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-234342-terra1\\fl-behaviour\\executed\\FamilyQuant\\DeNovoControl.Dialogs.cs",
           "sha256": "B714D7D9AA689F30D9EDFA2479D373824358521783DBBD267E209E34E91884A1"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\fl-behaviour\\executed\\FamilyQuant\\DeNovoViewModel.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-234342-terra1\\fl-behaviour\\executed\\FamilyQuant\\DeNovoViewModel.cs",
           "sha256": "2FFF30BF700616645D36D91A25F12D038DDD10442BE65A6288CE06B5855B35C0"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\fl-behaviour\\executed\\FamilyQuant\\LockManagerWindow.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-234342-terra1\\fl-behaviour\\executed\\FamilyQuant\\LockManagerWindow.cs",
           "sha256": "2C55B2CAFE7FB5D42B391EE1B5647464728550B4CB2EB044049546188D72603E"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\fl-behaviour\\executed\\FamilyQuant\\MainWindow.Documents.cs",
-          "sha256": "12468ABA5D76AD6674C85BD283AF4A7C4BA20FE25308F9E19E4BCD68E51366E3"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-234342-terra1\\fl-behaviour\\executed\\FamilyQuant\\MainWindow.Documents.cs",
+          "sha256": "0344F81A715044BF267CD875F1D1340E5E67B7934F8C179CFE82425BD2F3171A"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\fl-behaviour\\executed\\FamilyQuant\\MainWindow.Saving.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-234342-terra1\\fl-behaviour\\executed\\FamilyQuant\\MainWindow.Saving.cs",
           "sha256": "4F1458536558A6E990544393263263B3F38007B2666534522FE0042D925819FD"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\fl-behaviour\\executed\\FamilyQuant\\QuantifyControl.xaml.cs",
-          "sha256": "BE5A9029EEBC4004EFDEBD15BF72C332BE9EC28FE17541857670ADBD732083F7"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-234342-terra1\\fl-behaviour\\executed\\FamilyQuant\\QuantifyControl.xaml.cs",
+          "sha256": "AC582FC12AEF12E8AC708BE775C6E57442DB4133FEC952A25DAABDCC9DF2276C"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\fl-behaviour\\executed\\FamilyQuant\\USearch.Actions.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-234342-terra1\\fl-behaviour\\executed\\FamilyQuant\\USearch.Actions.cs",
           "sha256": "1BA6FB66F542B2BB332DF02D6CF58524AD259AC73DE93D8A6CDD4CDC932C1826"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\fl-behaviour\\executed\\FamilyQuant\\USearch.Presentation.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-234342-terra1\\fl-behaviour\\executed\\FamilyQuant\\USearch.Presentation.cs",
           "sha256": "8F8C52800E607F3F705B5263C84BA20C2455FCFBC27DCD917A02A3BA8EAF9D15"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\fl-behaviour\\executed\\FamilyQuant\\USearch.xaml.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-234342-terra1\\fl-behaviour\\executed\\FamilyQuant\\USearch.xaml.cs",
           "sha256": "44B2797536E00769B90697707C639CE7A0584100EB14C7021266DEC4407CC7FF"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\fl-behaviour\\executed\\frozen-FamilyQuant.dll",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-234342-terra1\\fl-behaviour\\executed\\frozen-FamilyQuant.dll",
           "sha256": "D764488C923945285E03B338E5A91BF28106A35B11AB465D8E2B23D125F03FD8"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\fl-behaviour\\locks\\current.fcf",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-234342-terra1\\fl-behaviour\\locks\\current.fcf",
           "sha256": "6D717D2E2A98BC3FDE721838DD900661EF9F5828955968171788E40B07C583F1"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\fl-behaviour\\locks\\frozen.fcf",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-234342-terra1\\fl-behaviour\\locks\\frozen.fcf",
           "sha256": "B6E9A4C0F3156C49AE931BC489BB7907EF692ED89DE066547B032FDEDA9D6097"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\fl-behaviour\\modes\\owned.plp",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-234342-terra1\\fl-behaviour\\modes\\owned.plp",
           "sha256": "D89E4677E8B0DA29E68AC8E8C1A7FB2DE6C93461CEDDAD5E3B72391E77737470"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\fl-behaviour\\projects\\current-save-message.txt",
-          "sha256": "C0701668F889B8227BE724EBB78B10E82961B4E374BD9EDC307674869C5F8910"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-234342-terra1\\fl-behaviour\\projects\\current-save-message.txt",
+          "sha256": "D8BCD490931086AEDE862302FBFD4000F11648CB36EE279797501E3FD89BF715"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\fl-behaviour\\projects\\current-saved.fqproj",
-          "sha256": "78EF65B98EA4F1AF927B63393068C26F2B11502A484BDF022A64EE08E859A902"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-234342-terra1\\fl-behaviour\\projects\\current-saved.fqproj",
+          "sha256": "4AF7FEF0230BB415DBC532BAF898212D618D9F1EAC62203C1C6F0AB5CE41AE9B"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\fl-behaviour\\projects\\current-saved.fqproj.curation.json",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-234342-terra1\\fl-behaviour\\projects\\current-saved.fqproj.curation.json",
           "sha256": "3E011F806ED5482D46A532F653437172E7F340EDA58B958DE579345249C02A6A"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\fl-behaviour\\projects\\current-saved.fqproj.quant.json",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-234342-terra1\\fl-behaviour\\projects\\current-saved.fqproj.quant.json",
           "sha256": "65289E43D3F3A770DC459C65883243BD48BE804BDC6BE7E3B31F65694432A243"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\fl-behaviour\\projects\\current-saved.fqproj.spectrum.json",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-234342-terra1\\fl-behaviour\\projects\\current-saved.fqproj.spectrum.json",
           "sha256": "CF7F2805F4EF339F19973D82DE6E5F382647C28A37B437B1F3A4CE978E7A69B4"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\fl-behaviour\\projects\\frozen-App.xaml",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-234342-terra1\\fl-behaviour\\projects\\frozen-App.xaml",
           "sha256": "166324C43527D213AE342ADD8AD1ABD37ECC78A87858B6ECA751C02E5AF820AB"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\fl-behaviour\\projects\\frozen-save-message.txt",
-          "sha256": "DD633DB25B63D022187201A9C6ECED281909786379D337D160E2E06D7C6DF77B"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-234342-terra1\\fl-behaviour\\projects\\frozen-save-message.txt",
+          "sha256": "755971818096C41CA3534AD3CFFDD0B65CBBC54F93D0F59EC04B502A6BB7DFF3"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\fl-behaviour\\projects\\frozen-saved.fqproj",
-          "sha256": "B8EDA547B7509F61A86AAE2579C246566AA412FFE3DA6FB65C7E4A762818B0C3"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-234342-terra1\\fl-behaviour\\projects\\frozen-saved.fqproj",
+          "sha256": "59AD4C9E06BCF8B932996DFBFCB01E9FE104434C53BC09D7FCC9C524991F639B"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\fl-behaviour\\projects\\frozen-saved.fqproj.curation.json",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-234342-terra1\\fl-behaviour\\projects\\frozen-saved.fqproj.curation.json",
           "sha256": "3E011F806ED5482D46A532F653437172E7F340EDA58B958DE579345249C02A6A"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\fl-behaviour\\projects\\frozen-saved.fqproj.quant.json",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-234342-terra1\\fl-behaviour\\projects\\frozen-saved.fqproj.quant.json",
           "sha256": "65289E43D3F3A770DC459C65883243BD48BE804BDC6BE7E3B31F65694432A243"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\fl-behaviour\\projects\\frozen-saved.fqproj.spectrum.json",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-234342-terra1\\fl-behaviour\\projects\\frozen-saved.fqproj.spectrum.json",
           "sha256": "CF7F2805F4EF339F19973D82DE6E5F382647C28A37B437B1F3A4CE978E7A69B4"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\fl-behaviour\\projects\\frozen.fcf",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-234342-terra1\\fl-behaviour\\projects\\frozen.fcf",
           "sha256": "2C75435CFF4804E9A3832B20278495356FDF03807580121CADCDD4FF8A0BECAB"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\fl-behaviour\\projects\\input.fqproj",
-          "sha256": "431DE1389CC82C2CB91F05ECFFED31A10E1C2CECB8FFE8A943BF156A85E2816B"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-234342-terra1\\fl-behaviour\\projects\\input.fqproj",
+          "sha256": "14F87F805FE849454012896CE3B92A01B63F2F3B811F64E37F4EC3509DE43EDF"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\fl-behaviour\\projects\\preferences.json",
-          "sha256": "105E6E34DB04430BA2669041F2A0E66D612ED8E17DEEF042498622A32C334216"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-234342-terra1\\fl-behaviour\\projects\\preferences.json",
+          "sha256": "56C31A192242F77B662300442B89BD77EDAAB6F145B4EEA5DE7985B77AE9EB19"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\fl-behaviour\\protein-plp\\peptides.plp",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-234342-terra1\\fl-behaviour\\protein-plp\\peptides.plp",
           "sha256": "D89E4677E8B0DA29E68AC8E8C1A7FB2DE6C93461CEDDAD5E3B72391E77737470"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\fl-behaviour\\protein-plp\\proteins.plp",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-234342-terra1\\fl-behaviour\\protein-plp\\proteins.plp",
           "sha256": "1C26C3559841ADA064F5D854F049499C951BF6A630BB5A73D9936A5089E8F36E"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\fl-behaviour\\scope.json",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-234342-terra1\\fl-behaviour\\scope.json",
           "sha256": "2D914BFC33394BEF06D0219B8EEE4D8F8EB09592782727514A0D3248AD0209DB"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\fl-behaviour\\target-audit.json",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-234342-terra1\\fl-behaviour\\target-audit.json",
           "sha256": "D076F9F52F51BC588935B7D152AD0B4A2622AF81FD7B8AD94A66FD8865FA9FB7"
         }
       ],
-      "workingDirectory": "C:\\FamilyQuant-gate"
+      "workingDirectory": "C:\\FamilyQuant-wt2\\terra1"
     }
   ],
   "rows": [
@@ -326,7 +326,7 @@
         {
           "path": "FamilyQuant/QuantifyControl.xaml.cs",
           "symbol": "Actual paired native behaviour case",
-          "sha256": "BE5A9029EEBC4004EFDEBD15BF72C332BE9EC28FE17541857670ADBD732083F7"
+          "sha256": "AC582FC12AEF12E8AC708BE775C6E57442DB4133FEC952A25DAABDCC9DF2276C"
         },
         {
           "path": "FamilyQuant/USearch.Actions.cs",
@@ -361,7 +361,7 @@
         {
           "path": "FamilyQuant/MainWindow.Documents.cs",
           "symbol": "Actual paired native behaviour case",
-          "sha256": "12468ABA5D76AD6674C85BD283AF4A7C4BA20FE25308F9E19E4BCD68E51366E3"
+          "sha256": "0344F81A715044BF267CD875F1D1340E5E67B7934F8C179CFE82425BD2F3171A"
         },
         {
           "path": "FamilyQuant/MainWindow.Saving.cs",
@@ -380,7 +380,7 @@
           "kind": "test",
           "target": "FloaterBehaviourCommand",
           "assertion": "behaviour overlap writers refuse absent reconciliation identically and create no file",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\fl-behaviour\\behaviour.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-234342-terra1\\fl-behaviour\\behaviour.log",
           "inspectedBy": ""
         }
       ],
@@ -444,7 +444,7 @@
         {
           "path": "FamilyQuant/QuantifyControl.xaml.cs",
           "symbol": "Actual paired native behaviour case",
-          "sha256": "BE5A9029EEBC4004EFDEBD15BF72C332BE9EC28FE17541857670ADBD732083F7"
+          "sha256": "AC582FC12AEF12E8AC708BE775C6E57442DB4133FEC952A25DAABDCC9DF2276C"
         },
         {
           "path": "FamilyQuant/USearch.Actions.cs",
@@ -479,7 +479,7 @@
         {
           "path": "FamilyQuant/MainWindow.Documents.cs",
           "symbol": "Actual paired native behaviour case",
-          "sha256": "12468ABA5D76AD6674C85BD283AF4A7C4BA20FE25308F9E19E4BCD68E51366E3"
+          "sha256": "0344F81A715044BF267CD875F1D1340E5E67B7934F8C179CFE82425BD2F3171A"
         },
         {
           "path": "FamilyQuant/MainWindow.Saving.cs",
@@ -498,7 +498,7 @@
           "kind": "test",
           "target": "FloaterBehaviourCommand",
           "assertion": "behaviour empty de novo controls disable prerequisite actions and actual bypassed handlers explain the refusal",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\fl-behaviour\\behaviour.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-234342-terra1\\fl-behaviour\\behaviour.log",
           "inspectedBy": ""
         }
       ],
@@ -562,7 +562,7 @@
         {
           "path": "FamilyQuant/QuantifyControl.xaml.cs",
           "symbol": "Actual paired native behaviour case",
-          "sha256": "BE5A9029EEBC4004EFDEBD15BF72C332BE9EC28FE17541857670ADBD732083F7"
+          "sha256": "AC582FC12AEF12E8AC708BE775C6E57442DB4133FEC952A25DAABDCC9DF2276C"
         },
         {
           "path": "FamilyQuant/USearch.Actions.cs",
@@ -597,7 +597,7 @@
         {
           "path": "FamilyQuant/MainWindow.Documents.cs",
           "symbol": "Actual paired native behaviour case",
-          "sha256": "12468ABA5D76AD6674C85BD283AF4A7C4BA20FE25308F9E19E4BCD68E51366E3"
+          "sha256": "0344F81A715044BF267CD875F1D1340E5E67B7934F8C179CFE82425BD2F3171A"
         },
         {
           "path": "FamilyQuant/MainWindow.Saving.cs",
@@ -616,7 +616,7 @@
           "kind": "test",
           "target": "FloaterBehaviourCommand",
           "assertion": "behaviour empty de novo controls disable prerequisite actions and actual bypassed handlers explain the refusal",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\fl-behaviour\\behaviour.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-234342-terra1\\fl-behaviour\\behaviour.log",
           "inspectedBy": ""
         }
       ],
@@ -680,7 +680,7 @@
         {
           "path": "FamilyQuant/QuantifyControl.xaml.cs",
           "symbol": "Actual paired native behaviour case",
-          "sha256": "BE5A9029EEBC4004EFDEBD15BF72C332BE9EC28FE17541857670ADBD732083F7"
+          "sha256": "AC582FC12AEF12E8AC708BE775C6E57442DB4133FEC952A25DAABDCC9DF2276C"
         },
         {
           "path": "FamilyQuant/USearch.Actions.cs",
@@ -715,7 +715,7 @@
         {
           "path": "FamilyQuant/MainWindow.Documents.cs",
           "symbol": "Actual paired native behaviour case",
-          "sha256": "12468ABA5D76AD6674C85BD283AF4A7C4BA20FE25308F9E19E4BCD68E51366E3"
+          "sha256": "0344F81A715044BF267CD875F1D1340E5E67B7934F8C179CFE82425BD2F3171A"
         },
         {
           "path": "FamilyQuant/MainWindow.Saving.cs",
@@ -734,7 +734,7 @@
           "kind": "test",
           "target": "FloaterBehaviourCommand",
           "assertion": "behaviour Quantify native identification choosers retain sepr2 acceptance and cancellation",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\fl-behaviour\\behaviour.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-234342-terra1\\fl-behaviour\\behaviour.log",
           "inspectedBy": ""
         }
       ],
@@ -798,7 +798,7 @@
         {
           "path": "FamilyQuant/QuantifyControl.xaml.cs",
           "symbol": "Actual paired native behaviour case",
-          "sha256": "BE5A9029EEBC4004EFDEBD15BF72C332BE9EC28FE17541857670ADBD732083F7"
+          "sha256": "AC582FC12AEF12E8AC708BE775C6E57442DB4133FEC952A25DAABDCC9DF2276C"
         },
         {
           "path": "FamilyQuant/USearch.Actions.cs",
@@ -833,7 +833,7 @@
         {
           "path": "FamilyQuant/MainWindow.Documents.cs",
           "symbol": "Actual paired native behaviour case",
-          "sha256": "12468ABA5D76AD6674C85BD283AF4A7C4BA20FE25308F9E19E4BCD68E51366E3"
+          "sha256": "0344F81A715044BF267CD875F1D1340E5E67B7934F8C179CFE82425BD2F3171A"
         },
         {
           "path": "FamilyQuant/MainWindow.Saving.cs",
@@ -852,7 +852,7 @@
           "kind": "test",
           "target": "FloaterBehaviourCommand",
           "assertion": "behaviour native mixing controls gate absent families and actual defensive handlers refuse without scoring",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\fl-behaviour\\behaviour.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-234342-terra1\\fl-behaviour\\behaviour.log",
           "inspectedBy": ""
         }
       ],
@@ -916,7 +916,7 @@
         {
           "path": "FamilyQuant/QuantifyControl.xaml.cs",
           "symbol": "Actual paired native behaviour case",
-          "sha256": "BE5A9029EEBC4004EFDEBD15BF72C332BE9EC28FE17541857670ADBD732083F7"
+          "sha256": "AC582FC12AEF12E8AC708BE775C6E57442DB4133FEC952A25DAABDCC9DF2276C"
         },
         {
           "path": "FamilyQuant/USearch.Actions.cs",
@@ -951,7 +951,7 @@
         {
           "path": "FamilyQuant/MainWindow.Documents.cs",
           "symbol": "Actual paired native behaviour case",
-          "sha256": "12468ABA5D76AD6674C85BD283AF4A7C4BA20FE25308F9E19E4BCD68E51366E3"
+          "sha256": "0344F81A715044BF267CD875F1D1340E5E67B7934F8C179CFE82425BD2F3171A"
         },
         {
           "path": "FamilyQuant/MainWindow.Saving.cs",
@@ -970,7 +970,7 @@
           "kind": "test",
           "target": "FloaterBehaviourCommand",
           "assertion": "behaviour database choosers select real FASTA and target-decoy inputs retaining every legacy pattern",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\fl-behaviour\\behaviour.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-234342-terra1\\fl-behaviour\\behaviour.log",
           "inspectedBy": ""
         }
       ],
@@ -1034,7 +1034,7 @@
         {
           "path": "FamilyQuant/QuantifyControl.xaml.cs",
           "symbol": "Actual paired native behaviour case",
-          "sha256": "BE5A9029EEBC4004EFDEBD15BF72C332BE9EC28FE17541857670ADBD732083F7"
+          "sha256": "AC582FC12AEF12E8AC708BE775C6E57442DB4133FEC952A25DAABDCC9DF2276C"
         },
         {
           "path": "FamilyQuant/USearch.Actions.cs",
@@ -1069,7 +1069,7 @@
         {
           "path": "FamilyQuant/MainWindow.Documents.cs",
           "symbol": "Actual paired native behaviour case",
-          "sha256": "12468ABA5D76AD6674C85BD283AF4A7C4BA20FE25308F9E19E4BCD68E51366E3"
+          "sha256": "0344F81A715044BF267CD875F1D1340E5E67B7934F8C179CFE82425BD2F3171A"
         },
         {
           "path": "FamilyQuant/MainWindow.Saving.cs",
@@ -1088,7 +1088,7 @@
           "kind": "test",
           "target": "FloaterBehaviourCommand",
           "assertion": "behaviour actual frozen/current build actions write adjacent readable equal families for FASTA and target-decoy and enable mixing",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\fl-behaviour\\behaviour.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-234342-terra1\\fl-behaviour\\behaviour.log",
           "inspectedBy": ""
         }
       ],
@@ -1152,7 +1152,7 @@
         {
           "path": "FamilyQuant/QuantifyControl.xaml.cs",
           "symbol": "Actual paired native behaviour case",
-          "sha256": "BE5A9029EEBC4004EFDEBD15BF72C332BE9EC28FE17541857670ADBD732083F7"
+          "sha256": "AC582FC12AEF12E8AC708BE775C6E57442DB4133FEC952A25DAABDCC9DF2276C"
         },
         {
           "path": "FamilyQuant/USearch.Actions.cs",
@@ -1187,7 +1187,7 @@
         {
           "path": "FamilyQuant/MainWindow.Documents.cs",
           "symbol": "Actual paired native behaviour case",
-          "sha256": "12468ABA5D76AD6674C85BD283AF4A7C4BA20FE25308F9E19E4BCD68E51366E3"
+          "sha256": "0344F81A715044BF267CD875F1D1340E5E67B7934F8C179CFE82425BD2F3171A"
         },
         {
           "path": "FamilyQuant/MainWindow.Saving.cs",
@@ -1206,7 +1206,7 @@
           "kind": "test",
           "target": "FloaterBehaviourCommand",
           "assertion": "behaviour actual frozen/current build actions write adjacent readable equal families for FASTA and target-decoy and enable mixing",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\fl-behaviour\\behaviour.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-234342-terra1\\fl-behaviour\\behaviour.log",
           "inspectedBy": ""
         }
       ],
@@ -1270,7 +1270,7 @@
         {
           "path": "FamilyQuant/QuantifyControl.xaml.cs",
           "symbol": "Actual paired native behaviour case",
-          "sha256": "BE5A9029EEBC4004EFDEBD15BF72C332BE9EC28FE17541857670ADBD732083F7"
+          "sha256": "AC582FC12AEF12E8AC708BE775C6E57442DB4133FEC952A25DAABDCC9DF2276C"
         },
         {
           "path": "FamilyQuant/USearch.Actions.cs",
@@ -1305,7 +1305,7 @@
         {
           "path": "FamilyQuant/MainWindow.Documents.cs",
           "symbol": "Actual paired native behaviour case",
-          "sha256": "12468ABA5D76AD6674C85BD283AF4A7C4BA20FE25308F9E19E4BCD68E51366E3"
+          "sha256": "0344F81A715044BF267CD875F1D1340E5E67B7934F8C179CFE82425BD2F3171A"
         },
         {
           "path": "FamilyQuant/MainWindow.Saving.cs",
@@ -1324,7 +1324,7 @@
           "kind": "test",
           "target": "FloaterBehaviourCommand",
           "assertion": "behaviour actual frozen/current build actions write adjacent readable equal families for FASTA and target-decoy and enable mixing",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\fl-behaviour\\behaviour.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-234342-terra1\\fl-behaviour\\behaviour.log",
           "inspectedBy": ""
         }
       ],
@@ -1388,7 +1388,7 @@
         {
           "path": "FamilyQuant/QuantifyControl.xaml.cs",
           "symbol": "Actual paired native behaviour case",
-          "sha256": "BE5A9029EEBC4004EFDEBD15BF72C332BE9EC28FE17541857670ADBD732083F7"
+          "sha256": "AC582FC12AEF12E8AC708BE775C6E57442DB4133FEC952A25DAABDCC9DF2276C"
         },
         {
           "path": "FamilyQuant/USearch.Actions.cs",
@@ -1423,7 +1423,7 @@
         {
           "path": "FamilyQuant/MainWindow.Documents.cs",
           "symbol": "Actual paired native behaviour case",
-          "sha256": "12468ABA5D76AD6674C85BD283AF4A7C4BA20FE25308F9E19E4BCD68E51366E3"
+          "sha256": "0344F81A715044BF267CD875F1D1340E5E67B7934F8C179CFE82425BD2F3171A"
         },
         {
           "path": "FamilyQuant/MainWindow.Saving.cs",
@@ -1442,7 +1442,7 @@
           "kind": "test",
           "target": "FloaterBehaviourCommand",
           "assertion": "behaviour actual frozen/current build actions write adjacent readable equal families for FASTA and target-decoy and enable mixing",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\fl-behaviour\\behaviour.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-234342-terra1\\fl-behaviour\\behaviour.log",
           "inspectedBy": ""
         }
       ],
@@ -1506,7 +1506,7 @@
         {
           "path": "FamilyQuant/QuantifyControl.xaml.cs",
           "symbol": "Actual paired native behaviour case",
-          "sha256": "BE5A9029EEBC4004EFDEBD15BF72C332BE9EC28FE17541857670ADBD732083F7"
+          "sha256": "AC582FC12AEF12E8AC708BE775C6E57442DB4133FEC952A25DAABDCC9DF2276C"
         },
         {
           "path": "FamilyQuant/USearch.Actions.cs",
@@ -1541,7 +1541,7 @@
         {
           "path": "FamilyQuant/MainWindow.Documents.cs",
           "symbol": "Actual paired native behaviour case",
-          "sha256": "12468ABA5D76AD6674C85BD283AF4A7C4BA20FE25308F9E19E4BCD68E51366E3"
+          "sha256": "0344F81A715044BF267CD875F1D1340E5E67B7934F8C179CFE82425BD2F3171A"
         },
         {
           "path": "FamilyQuant/MainWindow.Saving.cs",
@@ -1560,7 +1560,7 @@
           "kind": "test",
           "target": "FloaterBehaviourCommand",
           "assertion": "behaviour actual frozen/current build actions write adjacent readable equal families for FASTA and target-decoy and enable mixing",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\fl-behaviour\\behaviour.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-234342-terra1\\fl-behaviour\\behaviour.log",
           "inspectedBy": ""
         }
       ],
@@ -1624,7 +1624,7 @@
         {
           "path": "FamilyQuant/QuantifyControl.xaml.cs",
           "symbol": "Actual paired native behaviour case",
-          "sha256": "BE5A9029EEBC4004EFDEBD15BF72C332BE9EC28FE17541857670ADBD732083F7"
+          "sha256": "AC582FC12AEF12E8AC708BE775C6E57442DB4133FEC952A25DAABDCC9DF2276C"
         },
         {
           "path": "FamilyQuant/USearch.Actions.cs",
@@ -1659,7 +1659,7 @@
         {
           "path": "FamilyQuant/MainWindow.Documents.cs",
           "symbol": "Actual paired native behaviour case",
-          "sha256": "12468ABA5D76AD6674C85BD283AF4A7C4BA20FE25308F9E19E4BCD68E51366E3"
+          "sha256": "0344F81A715044BF267CD875F1D1340E5E67B7934F8C179CFE82425BD2F3171A"
         },
         {
           "path": "FamilyQuant/MainWindow.Saving.cs",
@@ -1678,7 +1678,7 @@
           "kind": "test",
           "target": "FloaterBehaviourCommand",
           "assertion": "behaviour actual frozen/current build actions write adjacent readable equal families for FASTA and target-decoy and enable mixing",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\fl-behaviour\\behaviour.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-234342-terra1\\fl-behaviour\\behaviour.log",
           "inspectedBy": ""
         }
       ],
@@ -1742,7 +1742,7 @@
         {
           "path": "FamilyQuant/QuantifyControl.xaml.cs",
           "symbol": "Actual paired native behaviour case",
-          "sha256": "BE5A9029EEBC4004EFDEBD15BF72C332BE9EC28FE17541857670ADBD732083F7"
+          "sha256": "AC582FC12AEF12E8AC708BE775C6E57442DB4133FEC952A25DAABDCC9DF2276C"
         },
         {
           "path": "FamilyQuant/USearch.Actions.cs",
@@ -1777,7 +1777,7 @@
         {
           "path": "FamilyQuant/MainWindow.Documents.cs",
           "symbol": "Actual paired native behaviour case",
-          "sha256": "12468ABA5D76AD6674C85BD283AF4A7C4BA20FE25308F9E19E4BCD68E51366E3"
+          "sha256": "0344F81A715044BF267CD875F1D1340E5E67B7934F8C179CFE82425BD2F3171A"
         },
         {
           "path": "FamilyQuant/MainWindow.Saving.cs",
@@ -1796,7 +1796,7 @@
           "kind": "test",
           "target": "FloaterBehaviourCommand",
           "assertion": "behaviour native lock managers change memory only and explicit FCF save/reopen persists the same removal",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\fl-behaviour\\behaviour.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-234342-terra1\\fl-behaviour\\behaviour.log",
           "inspectedBy": ""
         }
       ],
@@ -1860,7 +1860,7 @@
         {
           "path": "FamilyQuant/QuantifyControl.xaml.cs",
           "symbol": "Actual paired native behaviour case",
-          "sha256": "BE5A9029EEBC4004EFDEBD15BF72C332BE9EC28FE17541857670ADBD732083F7"
+          "sha256": "AC582FC12AEF12E8AC708BE775C6E57442DB4133FEC952A25DAABDCC9DF2276C"
         },
         {
           "path": "FamilyQuant/USearch.Actions.cs",
@@ -1895,7 +1895,7 @@
         {
           "path": "FamilyQuant/MainWindow.Documents.cs",
           "symbol": "Actual paired native behaviour case",
-          "sha256": "12468ABA5D76AD6674C85BD283AF4A7C4BA20FE25308F9E19E4BCD68E51366E3"
+          "sha256": "0344F81A715044BF267CD875F1D1340E5E67B7934F8C179CFE82425BD2F3171A"
         },
         {
           "path": "FamilyQuant/MainWindow.Saving.cs",
@@ -1914,7 +1914,7 @@
           "kind": "test",
           "target": "FloaterBehaviourCommand",
           "assertion": "behaviour native PLP mode recalculation preserves Full XIC and matches frozen PLP shares in every available mode",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\fl-behaviour\\behaviour.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-234342-terra1\\fl-behaviour\\behaviour.log",
           "inspectedBy": ""
         }
       ],
@@ -1978,7 +1978,7 @@
         {
           "path": "FamilyQuant/QuantifyControl.xaml.cs",
           "symbol": "Actual paired native behaviour case",
-          "sha256": "BE5A9029EEBC4004EFDEBD15BF72C332BE9EC28FE17541857670ADBD732083F7"
+          "sha256": "AC582FC12AEF12E8AC708BE775C6E57442DB4133FEC952A25DAABDCC9DF2276C"
         },
         {
           "path": "FamilyQuant/USearch.Actions.cs",
@@ -2013,7 +2013,7 @@
         {
           "path": "FamilyQuant/MainWindow.Documents.cs",
           "symbol": "Actual paired native behaviour case",
-          "sha256": "12468ABA5D76AD6674C85BD283AF4A7C4BA20FE25308F9E19E4BCD68E51366E3"
+          "sha256": "0344F81A715044BF267CD875F1D1340E5E67B7934F8C179CFE82425BD2F3171A"
         },
         {
           "path": "FamilyQuant/MainWindow.Saving.cs",
@@ -2032,7 +2032,7 @@
           "kind": "test",
           "target": "FloaterBehaviourCommand",
           "assertion": "behaviour native PLP readers attribute the peptide index and clear stale shares for the protein index identically",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\fl-behaviour\\behaviour.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-234342-terra1\\fl-behaviour\\behaviour.log",
           "inspectedBy": ""
         }
       ],
@@ -2096,7 +2096,7 @@
         {
           "path": "FamilyQuant/QuantifyControl.xaml.cs",
           "symbol": "Actual paired native behaviour case",
-          "sha256": "BE5A9029EEBC4004EFDEBD15BF72C332BE9EC28FE17541857670ADBD732083F7"
+          "sha256": "AC582FC12AEF12E8AC708BE775C6E57442DB4133FEC952A25DAABDCC9DF2276C"
         },
         {
           "path": "FamilyQuant/USearch.Actions.cs",
@@ -2131,7 +2131,7 @@
         {
           "path": "FamilyQuant/MainWindow.Documents.cs",
           "symbol": "Actual paired native behaviour case",
-          "sha256": "12468ABA5D76AD6674C85BD283AF4A7C4BA20FE25308F9E19E4BCD68E51366E3"
+          "sha256": "0344F81A715044BF267CD875F1D1340E5E67B7934F8C179CFE82425BD2F3171A"
         },
         {
           "path": "FamilyQuant/MainWindow.Saving.cs",
@@ -2150,7 +2150,7 @@
           "kind": "test",
           "target": "FloaterBehaviourCommand",
           "assertion": "behaviour actual File Save and Open preserve 1001 native quant rows, equal complete refreshed spectrum tables and curation",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\fl-behaviour\\behaviour.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-234342-terra1\\fl-behaviour\\behaviour.log",
           "inspectedBy": ""
         }
       ],
@@ -2214,7 +2214,7 @@
         {
           "path": "FamilyQuant/QuantifyControl.xaml.cs",
           "symbol": "Actual paired native behaviour case",
-          "sha256": "BE5A9029EEBC4004EFDEBD15BF72C332BE9EC28FE17541857670ADBD732083F7"
+          "sha256": "AC582FC12AEF12E8AC708BE775C6E57442DB4133FEC952A25DAABDCC9DF2276C"
         },
         {
           "path": "FamilyQuant/USearch.Actions.cs",
@@ -2249,7 +2249,7 @@
         {
           "path": "FamilyQuant/MainWindow.Documents.cs",
           "symbol": "Actual paired native behaviour case",
-          "sha256": "12468ABA5D76AD6674C85BD283AF4A7C4BA20FE25308F9E19E4BCD68E51366E3"
+          "sha256": "0344F81A715044BF267CD875F1D1340E5E67B7934F8C179CFE82425BD2F3171A"
         },
         {
           "path": "FamilyQuant/MainWindow.Saving.cs",
@@ -2268,7 +2268,7 @@
           "kind": "test",
           "target": "FloaterBehaviourCommand",
           "assertion": "behaviour actual File Save and Open preserve 1001 native quant rows, equal complete refreshed spectrum tables and curation",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\fl-behaviour\\behaviour.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-234342-terra1\\fl-behaviour\\behaviour.log",
           "inspectedBy": ""
         }
       ],
@@ -2332,7 +2332,7 @@
         {
           "path": "FamilyQuant/QuantifyControl.xaml.cs",
           "symbol": "Actual paired native behaviour case",
-          "sha256": "BE5A9029EEBC4004EFDEBD15BF72C332BE9EC28FE17541857670ADBD732083F7"
+          "sha256": "AC582FC12AEF12E8AC708BE775C6E57442DB4133FEC952A25DAABDCC9DF2276C"
         },
         {
           "path": "FamilyQuant/USearch.Actions.cs",
@@ -2367,7 +2367,7 @@
         {
           "path": "FamilyQuant/MainWindow.Documents.cs",
           "symbol": "Actual paired native behaviour case",
-          "sha256": "12468ABA5D76AD6674C85BD283AF4A7C4BA20FE25308F9E19E4BCD68E51366E3"
+          "sha256": "0344F81A715044BF267CD875F1D1340E5E67B7934F8C179CFE82425BD2F3171A"
         },
         {
           "path": "FamilyQuant/MainWindow.Saving.cs",
@@ -2386,7 +2386,7 @@
           "kind": "test",
           "target": "FloaterBehaviourCommand",
           "assertion": "behaviour actual File Open reads frozen FCF families and annotations while clearing prior project quantitation",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\fl-behaviour\\behaviour.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-234342-terra1\\fl-behaviour\\behaviour.log",
           "inspectedBy": ""
         }
       ],
@@ -2450,7 +2450,7 @@
         {
           "path": "FamilyQuant/QuantifyControl.xaml.cs",
           "symbol": "Actual paired native behaviour case",
-          "sha256": "BE5A9029EEBC4004EFDEBD15BF72C332BE9EC28FE17541857670ADBD732083F7"
+          "sha256": "AC582FC12AEF12E8AC708BE775C6E57442DB4133FEC952A25DAABDCC9DF2276C"
         },
         {
           "path": "FamilyQuant/USearch.Actions.cs",
@@ -2485,7 +2485,7 @@
         {
           "path": "FamilyQuant/MainWindow.Documents.cs",
           "symbol": "Actual paired native behaviour case",
-          "sha256": "12468ABA5D76AD6674C85BD283AF4A7C4BA20FE25308F9E19E4BCD68E51366E3"
+          "sha256": "0344F81A715044BF267CD875F1D1340E5E67B7934F8C179CFE82425BD2F3171A"
         },
         {
           "path": "FamilyQuant/MainWindow.Saving.cs",
@@ -2504,7 +2504,7 @@
           "kind": "test",
           "target": "FloaterBehaviourCommand",
           "assertion": "behaviour actual File Open reads frozen FCF families and annotations while clearing prior project quantitation",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\fl-behaviour\\behaviour.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-234342-terra1\\fl-behaviour\\behaviour.log",
           "inspectedBy": ""
         }
       ],
@@ -2568,7 +2568,7 @@
         {
           "path": "FamilyQuant/QuantifyControl.xaml.cs",
           "symbol": "Actual paired native behaviour case",
-          "sha256": "BE5A9029EEBC4004EFDEBD15BF72C332BE9EC28FE17541857670ADBD732083F7"
+          "sha256": "AC582FC12AEF12E8AC708BE775C6E57442DB4133FEC952A25DAABDCC9DF2276C"
         },
         {
           "path": "FamilyQuant/USearch.Actions.cs",
@@ -2603,7 +2603,7 @@
         {
           "path": "FamilyQuant/MainWindow.Documents.cs",
           "symbol": "Actual paired native behaviour case",
-          "sha256": "12468ABA5D76AD6674C85BD283AF4A7C4BA20FE25308F9E19E4BCD68E51366E3"
+          "sha256": "0344F81A715044BF267CD875F1D1340E5E67B7934F8C179CFE82425BD2F3171A"
         },
         {
           "path": "FamilyQuant/MainWindow.Saving.cs",
@@ -2622,7 +2622,7 @@
           "kind": "test",
           "target": "FloaterBehaviourCommand",
           "assertion": "behaviour actual native File Save messages display the same grouped 1001-row count",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\fl-behaviour\\behaviour.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-234342-terra1\\fl-behaviour\\behaviour.log",
           "inspectedBy": ""
         }
       ],

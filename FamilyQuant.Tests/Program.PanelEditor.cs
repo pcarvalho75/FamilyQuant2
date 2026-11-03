@@ -110,6 +110,13 @@ internal static partial class Program
         staleModel.Undo();
         Check("J1d changed rules report stale assignments and Undo restores currentness", warned
             && !PanelDerivedDataCurrentness.Check(staleProject).IsOutOfDate && staleProject.ProteinSubclassLabels != null);
+        var subclassOnly = FamilyPanelValidation.Clone(staleProject.FamilyPanel!);
+        subclassOnly.Families[0].Subclasses[0].RequiredPfam.Add("PF2");
+        staleModel.ApplyFamilyPanel(subclassOnly);
+        var splitStatus = PanelDerivedDataCurrentness.Check(staleProject);
+        Check("J1d subclass-only edits keep family assignments current while marking labels stale",
+            splitStatus.FamilyAssignments == PanelDerivedDataStatus.Current && splitStatus.SubclassLabels == PanelDerivedDataStatus.OutOfDate);
+        staleModel.Undo();
         bool? confirmed = modal.ShowDialog();
         if (confirmed == true && modal.Result != null) model.ApplyFamilyPanel(modal.Result);
         bool appliedFromScreen = uiError == null && confirmed == true && file.FamilyPanel!.Families[0].DisplayName == "Changed from screen";

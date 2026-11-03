@@ -5,152 +5,152 @@
   "runs": [
     {
       "id": "native",
-      "command": "C:\\FamilyQuant-gate\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --ledger-curation-file-contracts D:/FamilyQuant-data/out-floater/formats/cohort-ready D:/FamilyQuant-data/reference-1.5.0.6/app D:/FamilyQuant-data/out-refresh\\20261102-210533-FamilyQuant-gate\\fl-curation-file-contracts \u00222026-11-02 21:06:14 -0800\u0022",
-      "executedAt": "2026-11-02 21:06:14 -0800",
-      "commit": "f8bf0902393d7946e71dacf14dc81ea0c2c4ceb7",
+      "command": "C:\\FamilyQuant-wt2\\terra1\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --ledger-curation-file-contracts D:/FamilyQuant-data/out-floater/formats/cohort-ready D:/FamilyQuant-data/reference-1.5.0.6/app D:/FamilyQuant-data/out-refresh\\20261103-001001-terra1\\fl-curation-file-contracts \u00222026-11-03 00:12:05 -0800\u0022",
+      "executedAt": "2026-11-03 00:12:05 -0800",
+      "commit": "9dc3bb854ca3b048750f548bd6243b5c64c707a0",
       "artifacts": [
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\fl-curation-file-contracts\\cohort-ledger.md",
-          "sha256": "959104CDF4892BA16B83E7A160364B7E5375E74AF7FCBF662896B56AADDA0874"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\fl-curation-file-contracts\\cohort-ledger.md",
+          "sha256": "F7C7FC7C95B9112CEFF9C7D034255B51E5FB1FB202280EEB52E91DE6DE903FAE"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\fl-curation-file-contracts\\cohort-mapping.json",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\fl-curation-file-contracts\\cohort-mapping.json",
           "sha256": "72013D1B74FC3ACDBE7D97E0606227A26D4F1527F6DDCFDCAD0B83404BC59FAA"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\fl-curation-file-contracts\\cohort-report.json",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\fl-curation-file-contracts\\cohort-report.json",
           "sha256": "1C7EC20E3F7A6DFD4B80A3DF362E5C667E1ACBCE70792A44844ADDDD6AFFC306"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\fl-curation-file-contracts\\en-US\\current-composition.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\fl-curation-file-contracts\\en-US\\current-composition.csv",
           "sha256": "E146FA173353B8E8D474606C14F1EC0D806D49702516EE3CF44BF725ED8A3763"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\fl-curation-file-contracts\\en-US\\current-protein.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\fl-curation-file-contracts\\en-US\\current-protein.csv",
           "sha256": "45B34A017456AB8E3D1CD4FDA1EBA4DDFC67E555934AA38F0A95BAE8283CEAD5"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\fl-curation-file-contracts\\en-US\\dialogs.json",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\fl-curation-file-contracts\\en-US\\dialogs.json",
           "sha256": "129DD8C9DDA2A31C52E75FFE4232A43F25DB17D47FB13CF1EA69908C420CC08C"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\fl-curation-file-contracts\\en-US\\frozen-composition.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\fl-curation-file-contracts\\en-US\\frozen-composition.csv",
           "sha256": "E146FA173353B8E8D474606C14F1EC0D806D49702516EE3CF44BF725ED8A3763"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\fl-curation-file-contracts\\en-US\\frozen-protein.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\fl-curation-file-contracts\\en-US\\frozen-protein.csv",
           "sha256": "45B34A017456AB8E3D1CD4FDA1EBA4DDFC67E555934AA38F0A95BAE8283CEAD5"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\fl-curation-file-contracts\\en-US\\injections.json",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\fl-curation-file-contracts\\en-US\\injections.json",
           "sha256": "26346149CE3D69E9DBB96BB661739755508FD87088B76FEBF31B59C20FABAF14"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\fl-curation-file-contracts\\executed\\FamilyQuant.Core.dll",
-          "sha256": "8267A1D42284C72B70B419973DF5A276EA96B6001B370E7B7198D445982B6DA9"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\fl-curation-file-contracts\\executed\\FamilyQuant.Core.dll",
+          "sha256": "65BCEB231336E82E0CA4C57F82B74C67F84739554F5EFCA02A1FFC7557E4E6EC"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\fl-curation-file-contracts\\executed\\FamilyQuant.Core\\CsvReport.cs",
-          "sha256": "453BA55ABE23B6A567016C1D2BB419AA102E6D801C7347A371769F1FD334DDDF"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\fl-curation-file-contracts\\executed\\FamilyQuant.Core\\CsvReport.cs",
+          "sha256": "15B7F2A6E9E75ACC99002C67DC265627136C3437BB6A6555DAAA813D87ADFB48"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\fl-curation-file-contracts\\executed\\FamilyQuant.Core\\FamilyClusterScoring.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\fl-curation-file-contracts\\executed\\FamilyQuant.Core\\FamilyClusterScoring.cs",
           "sha256": "F033C9FDCB15D2F282CFF64BC12F301D0275346DB5C82F9EA983340F9340CE51"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\fl-curation-file-contracts\\executed\\FamilyQuant.Core\\FamilyQuantFile.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\fl-curation-file-contracts\\executed\\FamilyQuant.Core\\FamilyQuantFile.cs",
           "sha256": "FA446992C4421614EEB7A719A80650E93C0B7525105C72583F8BDFD5108943DF"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\fl-curation-file-contracts\\executed\\FamilyQuant.Core\\USearchTools.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\fl-curation-file-contracts\\executed\\FamilyQuant.Core\\USearchTools.cs",
           "sha256": "7F644E1379D8A72937266A95B1E525417C4AFF55B1DFF5A9E10ABBC5BF80ACF9"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\fl-curation-file-contracts\\executed\\FamilyQuant.Tests.dll",
-          "sha256": "7BF4EDAB23F5D09BA329655DEFC7CA1DA9E901AED04DBA57FBAE9B36AE74ED44"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\fl-curation-file-contracts\\executed\\FamilyQuant.Tests.dll",
+          "sha256": "257A4322D9D517D659D7B5D1A27D84D099D900BF2BEDC167F11A040E15ADBDE3"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\fl-curation-file-contracts\\executed\\FamilyQuant.Tests\\Program.Commands.SecondaryLedger.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\fl-curation-file-contracts\\executed\\FamilyQuant.Tests\\Program.Commands.SecondaryLedger.cs",
           "sha256": "F38C27B0A3B11CDFD6D6FECC4ED8F00C0E1B1B24E2C3D5C8916E6106C703CCC1"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\fl-curation-file-contracts\\executed\\FamilyQuant.Tests\\Program.CurationFileContracts.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\fl-curation-file-contracts\\executed\\FamilyQuant.Tests\\Program.CurationFileContracts.cs",
           "sha256": "7A3CE2446E3D8BA00722851C16F77698D4BC0646BE596ED4B81D410EFD0BB493"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\fl-curation-file-contracts\\executed\\FamilyQuant.Tests\\Program.SecondaryInjectedMethod.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\fl-curation-file-contracts\\executed\\FamilyQuant.Tests\\Program.SecondaryInjectedMethod.cs",
           "sha256": "23A7781DDBD6E2B6299FB12C9F31A083CC4FF42C290513848F61EA4CEF31E2D1"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\fl-curation-file-contracts\\executed\\FamilyQuant2.dll",
-          "sha256": "80ADEFB7501B1F40F0A7599E30D4166AA7FBA1E7459CFF505849D4D5F7F58065"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\fl-curation-file-contracts\\executed\\FamilyQuant2.dll",
+          "sha256": "7E0C4A9A25BAAF7B505DD44550A630D316E162BF2C0A0F9F5E3E8FECE31143D0"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\fl-curation-file-contracts\\executed\\FamilyQuant\\ClusterGenerationControl.xaml.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\fl-curation-file-contracts\\executed\\FamilyQuant\\ClusterGenerationControl.xaml.cs",
           "sha256": "0C3DECE2E6E26161D7A12954C124BF2AE7A2627DD121C18C99191C0FC9F2CDF2"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\fl-curation-file-contracts\\executed\\FamilyQuant\\CurationQuantitationViewModel.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\fl-curation-file-contracts\\executed\\FamilyQuant\\CurationQuantitationViewModel.cs",
           "sha256": "0ECF3950DE35D910A11F4BEBF8FF357C273AB0D1AFC90032C277EABF1A2C85B1"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\fl-curation-file-contracts\\executed\\frozen-FamilyQuant.dll",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\fl-curation-file-contracts\\executed\\frozen-FamilyQuant.dll",
           "sha256": "D764488C923945285E03B338E5A91BF28106A35B11AB465D8E2B23D125F03FD8"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\fl-curation-file-contracts\\files.log",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\fl-curation-file-contracts\\files.log",
           "sha256": "0ADB523A9AED0CB6CD8000D405801BEDA6248269B5D60AAF3B7EC4E60A4C414C"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\fl-curation-file-contracts\\no-decoy\\current-usearch.exe",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\fl-curation-file-contracts\\no-decoy\\current-usearch.exe",
           "sha256": "CFB6A77FF0CABCF9D7334EE298A1DF22B2351A54C65418F0EB93F3913A10ACD3"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\fl-curation-file-contracts\\no-decoy\\current.fcf",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\fl-curation-file-contracts\\no-decoy\\current.fcf",
           "sha256": "81379F0137F1A084E3BBCE2EA8B90CFD6A240F6B0F63CCDFC7DFC1C9F66FE517"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\fl-curation-file-contracts\\no-decoy\\frozen-usearch.exe",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\fl-curation-file-contracts\\no-decoy\\frozen-usearch.exe",
           "sha256": "E05C852CE29155CEA546B271AA0B79A303EBB90BC8C87299A87303832662E764"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\fl-curation-file-contracts\\no-decoy\\frozen.fcf",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\fl-curation-file-contracts\\no-decoy\\frozen.fcf",
           "sha256": "070C2D6B1D34865D37FFB2A1106F5D4A3FBA32D686D291881086540C9F6A2EE7"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\fl-curation-file-contracts\\no-decoy\\values.json",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\fl-curation-file-contracts\\no-decoy\\values.json",
           "sha256": "5D83F498A636ADB6576DDB88364E1451A6B0931F5C7A64A20E89B663A0A0BD43"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\fl-curation-file-contracts\\pt-BR\\current-composition.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\fl-curation-file-contracts\\pt-BR\\current-composition.csv",
           "sha256": "E146FA173353B8E8D474606C14F1EC0D806D49702516EE3CF44BF725ED8A3763"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\fl-curation-file-contracts\\pt-BR\\current-protein.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\fl-curation-file-contracts\\pt-BR\\current-protein.csv",
           "sha256": "45B34A017456AB8E3D1CD4FDA1EBA4DDFC67E555934AA38F0A95BAE8283CEAD5"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\fl-curation-file-contracts\\pt-BR\\dialogs.json",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\fl-curation-file-contracts\\pt-BR\\dialogs.json",
           "sha256": "7DB4D016224BAB2F8D349C2E6B379E83D3CB8B0D6B7721A2D4082FD854F417A2"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\fl-curation-file-contracts\\pt-BR\\frozen-composition.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\fl-curation-file-contracts\\pt-BR\\frozen-composition.csv",
           "sha256": "E146FA173353B8E8D474606C14F1EC0D806D49702516EE3CF44BF725ED8A3763"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\fl-curation-file-contracts\\pt-BR\\frozen-protein.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\fl-curation-file-contracts\\pt-BR\\frozen-protein.csv",
           "sha256": "45B34A017456AB8E3D1CD4FDA1EBA4DDFC67E555934AA38F0A95BAE8283CEAD5"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\fl-curation-file-contracts\\pt-BR\\injections.json",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\fl-curation-file-contracts\\pt-BR\\injections.json",
           "sha256": "26346149CE3D69E9DBB96BB661739755508FD87088B76FEBF31B59C20FABAF14"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\fl-curation-file-contracts\\target-audit.json",
-          "sha256": "AD118F39E3D8FDF62F53FE38D3501B3B22E8FE2419C366607AC3826D042E2137"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\fl-curation-file-contracts\\target-audit.json",
+          "sha256": "74096CA265DB8D7D0641CDDA606BB587ED730AEBD26609EE57EF048913CC56D1"
         }
       ],
-      "workingDirectory": "C:\\FamilyQuant-gate"
+      "workingDirectory": "C:\\FamilyQuant-wt2\\terra1"
     }
   ],
   "rows": [
@@ -170,7 +170,7 @@
         {
           "path": "FamilyQuant.Core/CsvReport.cs",
           "symbol": "Native curation CSV chooser and writer paths; native no-decoy refusal when executed",
-          "sha256": "453BA55ABE23B6A567016C1D2BB419AA102E6D801C7347A371769F1FD334DDDF"
+          "sha256": "15B7F2A6E9E75ACC99002C67DC265627136C3437BB6A6555DAAA813D87ADFB48"
         },
         {
           "path": "FamilyQuant.Core/USearchTools.cs",
@@ -209,7 +209,7 @@
         {
           "path": "FamilyQuant.Core/CsvReport.cs",
           "symbol": "Native curation CSV chooser and writer paths; native no-decoy refusal when executed",
-          "sha256": "453BA55ABE23B6A567016C1D2BB419AA102E6D801C7347A371769F1FD334DDDF"
+          "sha256": "15B7F2A6E9E75ACC99002C67DC265627136C3437BB6A6555DAAA813D87ADFB48"
         },
         {
           "path": "FamilyQuant.Core/USearchTools.cs",
@@ -248,7 +248,7 @@
         {
           "path": "FamilyQuant.Core/CsvReport.cs",
           "symbol": "Native curation CSV chooser and writer paths; native no-decoy refusal when executed",
-          "sha256": "453BA55ABE23B6A567016C1D2BB419AA102E6D801C7347A371769F1FD334DDDF"
+          "sha256": "15B7F2A6E9E75ACC99002C67DC265627136C3437BB6A6555DAAA813D87ADFB48"
         },
         {
           "path": "FamilyQuant.Core/USearchTools.cs",
@@ -287,7 +287,7 @@
         {
           "path": "FamilyQuant.Core/CsvReport.cs",
           "symbol": "Native curation CSV chooser and writer paths; native no-decoy refusal when executed",
-          "sha256": "453BA55ABE23B6A567016C1D2BB419AA102E6D801C7347A371769F1FD334DDDF"
+          "sha256": "15B7F2A6E9E75ACC99002C67DC265627136C3437BB6A6555DAAA813D87ADFB48"
         },
         {
           "path": "FamilyQuant.Core/USearchTools.cs",
@@ -326,7 +326,7 @@
         {
           "path": "FamilyQuant.Core/CsvReport.cs",
           "symbol": "Native curation CSV chooser and writer paths; native no-decoy refusal when executed",
-          "sha256": "453BA55ABE23B6A567016C1D2BB419AA102E6D801C7347A371769F1FD334DDDF"
+          "sha256": "15B7F2A6E9E75ACC99002C67DC265627136C3437BB6A6555DAAA813D87ADFB48"
         },
         {
           "path": "FamilyQuant.Core/USearchTools.cs",
@@ -360,7 +360,7 @@
           "kind": "test",
           "target": "CurationFileCommand",
           "assertion": "native curation protein chooser/filter/name and cancel/accept route en-US",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\fl-curation-file-contracts\\files.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\fl-curation-file-contracts\\files.log",
           "inspectedBy": ""
         },
         {
@@ -368,7 +368,7 @@
           "kind": "test",
           "target": "CurationFileCommand",
           "assertion": "native curation protein file bytes en-US",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\fl-curation-file-contracts\\files.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\fl-curation-file-contracts\\files.log",
           "inspectedBy": ""
         },
         {
@@ -376,7 +376,7 @@
           "kind": "test",
           "target": "CurationFileCommand",
           "assertion": "native curation protein chooser/filter/name and cancel/accept route pt-BR",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\fl-curation-file-contracts\\files.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\fl-curation-file-contracts\\files.log",
           "inspectedBy": ""
         },
         {
@@ -384,7 +384,7 @@
           "kind": "test",
           "target": "CurationFileCommand",
           "assertion": "native curation protein file bytes pt-BR",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\fl-curation-file-contracts\\files.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\fl-curation-file-contracts\\files.log",
           "inspectedBy": ""
         }
       ]
@@ -398,7 +398,7 @@
           "kind": "test",
           "target": "CurationFileCommand",
           "assertion": "native curation composition chooser/filter/name and cancel/accept route en-US",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\fl-curation-file-contracts\\files.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\fl-curation-file-contracts\\files.log",
           "inspectedBy": ""
         },
         {
@@ -406,7 +406,7 @@
           "kind": "test",
           "target": "CurationFileCommand",
           "assertion": "native curation composition file bytes en-US",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\fl-curation-file-contracts\\files.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\fl-curation-file-contracts\\files.log",
           "inspectedBy": ""
         },
         {
@@ -414,7 +414,7 @@
           "kind": "test",
           "target": "CurationFileCommand",
           "assertion": "native curation composition chooser/filter/name and cancel/accept route pt-BR",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\fl-curation-file-contracts\\files.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\fl-curation-file-contracts\\files.log",
           "inspectedBy": ""
         },
         {
@@ -422,7 +422,7 @@
           "kind": "test",
           "target": "CurationFileCommand",
           "assertion": "native curation composition file bytes pt-BR",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\fl-curation-file-contracts\\files.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\fl-curation-file-contracts\\files.log",
           "inspectedBy": ""
         }
       ]
@@ -436,7 +436,7 @@
           "kind": "test",
           "target": "CurationFileCommand",
           "assertion": "native no-decoy engine files and refusal agree",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\fl-curation-file-contracts\\files.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261103-001001-terra1\\fl-curation-file-contracts\\files.log",
           "inspectedBy": ""
         }
       ]

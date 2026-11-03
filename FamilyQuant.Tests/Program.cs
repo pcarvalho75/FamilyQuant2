@@ -225,6 +225,16 @@ namespace FamilyQuant.Tests
             suite.Add(() => DomainPositionTests(Path.Combine(workDir, "domain-positions")));
             suite.Add(() => PanelSpreadsheetTests(Path.Combine(workDir, "panel-spreadsheet")));
             suite.Add(() => FamilySensitivityTests(Path.Combine(workDir, "family-sensitivity")));
+            suite.Section("Panel, threshold, template and report Help");
+            suite.Add(() => PanelAuditTests());
+            suite.Add(() => PanelAuditCurrentTests());
+            suite.Add(() => ReportThresholdTests());
+            suite.Add(() => ReportThresholdPolicyTests());
+            suite.Add(() => PanelTemplateTests());
+            suite.AddWithApplication(() => PanelEditorTests());
+            suite.AddWithApplication(() => PanelEditorTemplateRoundtripTests());
+            suite.Add(() => AnalysisHelpTests());
+            suite.Add(() => SuiteMergeGuardTests());
             suite.Add(() => EvidenceFetchTests());
             suite.Add(() => EvidenceFetchAtomicTests());
             suite.Add(() => EvidenceCoverageTests());

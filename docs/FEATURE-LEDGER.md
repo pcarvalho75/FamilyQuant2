@@ -17,7 +17,7 @@ Render targets refer to `ScreenHarness.Screens`, captured with `--screens <outpu
 Release gate: `FamilyQuant.Tests.exe --feature-ledger-release-check` fails until every retained row is VERIFIED with evidence. Authorized DROP rows use APPROVED_DROP, which records a decision, not a completed UI removal. The normal quick suite permits OPEN rows during development. Regeneration resets retained rows to OPEN; preserve reviewed evidence when updating the scanner.
 
 Scan count: **5756**. Ledger rows: **5756**. Source files: **104**.
-Authorized DROP rows: **296**; proposed VERIFIED retained rows: **5460**; OPEN retained rows: **0**.
+Authorized DROP rows: **296**; proposed VERIFIED retained rows: **5447**; OPEN retained rows: **13**.
 
 | ID | Disposition | Kind | Frozen source | Fact or control | Planned check | State | Evidence |
 |---|---|---|---|---|---|---|---|
@@ -1046,19 +1046,19 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **5460**; OPEN r
 | FQ15-5A06CA17D19F | KEEP | export/storage fact | FamilyQuant/CsvReport.cs:40 | "Full XIC family share, fraction 0-1, not computed" | test:ShellLedgerComparisonCommand | VERIFIED | evidence:SH:FQ15-5A06CA17D19F |
 | FQ15-FF06D3867D20 | KEEP | export/storage fact | FamilyQuant/CsvReport.cs:57 | "," | test:ShellLedgerComparisonCommand | VERIFIED | evidence:SH:FQ15-FF06D3867D20 |
 | FQ15-CDE28B37900C | KEEP | export/storage fact | FamilyQuant/CsvReport.cs:75 | "," | test:ShellLedgerComparisonCommand | VERIFIED | evidence:SH:FQ15-CDE28B37900C |
-| FQ15-DE97BFC1DC1A | KEEP | export/storage fact | FamilyQuant/CsvReport.cs:93 | "," | test:ShellLedgerComparisonCommand | VERIFIED | evidence:SH:FQ15-DE97BFC1DC1A |
-| FQ15-04AAB575A5CB | KEEP | export/storage fact | FamilyQuant/CsvReport.cs:95 | "family_user_id" | test:ShellLedgerComparisonCommand | VERIFIED | evidence:SH:FQ15-04AAB575A5CB |
-| FQ15-B32233DB2707 | KEEP | export/storage fact | FamilyQuant/CsvReport.cs:95 | "description" | test:ShellLedgerComparisonCommand | VERIFIED | evidence:SH:FQ15-B32233DB2707 |
-| FQ15-E67177435835 | KEEP | export/storage fact | FamilyQuant/CsvReport.cs:95 | "signal_primary_estimate" | test:ShellLedgerComparisonCommand | VERIFIED | evidence:SH:FQ15-E67177435835 |
-| FQ15-06E740B998A5 | KEEP | export/storage fact | FamilyQuant/CsvReport.cs:95 | "fraction" | test:ShellLedgerComparisonCommand | VERIFIED | evidence:SH:FQ15-06E740B998A5 |
-| FQ15-DF6B9D200673 | KEEP | export/storage fact | FamilyQuant/CsvReport.cs:95 | "basis" | test:ShellLedgerComparisonCommand | VERIFIED | evidence:SH:FQ15-DF6B9D200673 |
-| FQ15-24ED395047BF | KEEP | export/storage fact | FamilyQuant/CsvReport.cs:100 | "; " | test:ShellLedgerComparisonCommand | VERIFIED | evidence:SH:FQ15-24ED395047BF |
-| FQ15-83110D07824B | KEEP | export/storage fact | FamilyQuant/CsvReport.cs:101 | ", shared ones in their own row" | test:ShellLedgerComparisonCommand | VERIFIED | evidence:SH:FQ15-83110D07824B |
-| FQ15-7D56F063F66C | KEEP | export/storage fact | FamilyQuant/CsvReport.cs:106 | "," | test:ShellLedgerComparisonCommand | VERIFIED | evidence:SH:FQ15-7D56F063F66C |
-| FQ15-7036894F9DF7 | KEEP | export/storage fact | FamilyQuant/CsvReport.cs:111 | "," | test:ShellLedgerComparisonCommand | VERIFIED | evidence:SH:FQ15-7036894F9DF7 |
-| FQ15-9FDF0CC7EACE | KEEP | export/storage fact | FamilyQuant/CsvReport.cs:111 | "shared between families" | test:ShellLedgerComparisonCommand | VERIFIED | evidence:SH:FQ15-9FDF0CC7EACE |
-| FQ15-DC72052AA7DC | KEEP | export/storage fact | FamilyQuant/CsvReport.cs:115 | "," | test:ShellLedgerComparisonCommand | VERIFIED | evidence:SH:FQ15-DC72052AA7DC |
-| FQ15-2025778EF37B | KEEP | export/storage fact | FamilyQuant/CsvReport.cs:115 | "not attributed to any family" | test:ShellLedgerComparisonCommand | VERIFIED | evidence:SH:FQ15-2025778EF37B |
+| FQ15-DE97BFC1DC1A | KEEP | export/storage fact | FamilyQuant/CsvReport.cs:93 | "," | test:ShellLedgerComparisonCommand | OPEN | pending: execution evidence missing or stale |
+| FQ15-04AAB575A5CB | KEEP | export/storage fact | FamilyQuant/CsvReport.cs:95 | "family_user_id" | test:ShellLedgerComparisonCommand | OPEN | pending: execution evidence missing or stale |
+| FQ15-B32233DB2707 | KEEP | export/storage fact | FamilyQuant/CsvReport.cs:95 | "description" | test:ShellLedgerComparisonCommand | OPEN | pending: execution evidence missing or stale |
+| FQ15-E67177435835 | KEEP | export/storage fact | FamilyQuant/CsvReport.cs:95 | "signal_primary_estimate" | test:ShellLedgerComparisonCommand | OPEN | pending: execution evidence missing or stale |
+| FQ15-06E740B998A5 | KEEP | export/storage fact | FamilyQuant/CsvReport.cs:95 | "fraction" | test:ShellLedgerComparisonCommand | OPEN | pending: execution evidence missing or stale |
+| FQ15-DF6B9D200673 | KEEP | export/storage fact | FamilyQuant/CsvReport.cs:95 | "basis" | test:ShellLedgerComparisonCommand | OPEN | pending: execution evidence missing or stale |
+| FQ15-24ED395047BF | KEEP | export/storage fact | FamilyQuant/CsvReport.cs:100 | "; " | test:ShellLedgerComparisonCommand | OPEN | pending: execution evidence missing or stale |
+| FQ15-83110D07824B | KEEP | export/storage fact | FamilyQuant/CsvReport.cs:101 | ", shared ones in their own row" | test:ShellLedgerComparisonCommand | OPEN | pending: execution evidence missing or stale |
+| FQ15-7D56F063F66C | KEEP | export/storage fact | FamilyQuant/CsvReport.cs:106 | "," | test:ShellLedgerComparisonCommand | OPEN | pending: execution evidence missing or stale |
+| FQ15-7036894F9DF7 | KEEP | export/storage fact | FamilyQuant/CsvReport.cs:111 | "," | test:ShellLedgerComparisonCommand | OPEN | pending: execution evidence missing or stale |
+| FQ15-9FDF0CC7EACE | KEEP | export/storage fact | FamilyQuant/CsvReport.cs:111 | "shared between families" | test:ShellLedgerComparisonCommand | OPEN | pending: execution evidence missing or stale |
+| FQ15-DC72052AA7DC | KEEP | export/storage fact | FamilyQuant/CsvReport.cs:115 | "," | test:ShellLedgerComparisonCommand | OPEN | pending: execution evidence missing or stale |
+| FQ15-2025778EF37B | KEEP | export/storage fact | FamilyQuant/CsvReport.cs:115 | "not attributed to any family" | test:ShellLedgerComparisonCommand | OPEN | pending: execution evidence missing or stale |
 | FQ15-A461B04622FD | KEEP | export/storage fact | FamilyQuant/CsvReport.cs:128 | "\"" | test:CurationActionsLedger | VERIFIED | evidence:SH-curation-actions:FQ15-A461B04622FD |
 | FQ15-D3ED3D034725 | KEEP | export/storage fact | FamilyQuant/CsvReport.cs:128 | "\"" | test:CurationActionsLedger | VERIFIED | evidence:SH-curation-actions:FQ15-D3ED3D034725 |
 | FQ15-6A8D402A968E | KEEP | export/storage fact | FamilyQuant/CsvReport.cs:128 | "\"\"" | test:CurationActionsLedger | VERIFIED | evidence:SH-curation-actions:FQ15-6A8D402A968E |
