@@ -38,13 +38,13 @@ public static class ReportProjectExporter
         Data(2, "Attributing current families");
         var families = familyResults ?? (curation.MyExtendedFastaItems.Count > 0 ? FamilyEnvelopeQuant.BuildFromCuration(rows, curation, options) : null);
         Data(3, "Preparing current result tables");
-        var result = ReportCurrentResults.Build(data, manifest, families, manifest.FamilyRunShares?.Policy ?? SharedPeptidePolicy.FamilyUnique);
+        var grouping = manifest.FamilyRunShares == null ? null : FamilyReportThreshold.Build(manifest.FamilyRunShares, curation);
+        var result = ReportCurrentResults.Build(data, manifest, families, manifest.FamilyRunShares?.Policy ?? SharedPeptidePolicy.FamilyUnique, grouping);
         if (manifest.FamilySensitivity is { } sensitivity && (sensitivity.CurationFingerprint != FamilySensitivityStudy.CurationFingerprint(curation)
             || sensitivity.Variants.Count == 0 || sensitivity.Variants[0].SourceSha256 != FamilySensitivityStudy.CurrentFingerprint(rows, manifest, curation)))
             throw new InvalidDataException("Stored sensitivity results do not match this project's current quantitation and grouping. Recompute the sensitivity study before reporting it.");
         var labels = families?.Families.ToDictionary(f => f.FamilyUserId, f => f.Description)
             ?? new Dictionary<int, string>();
-        var grouping = manifest.FamilyRunShares == null ? null : FamilyReportThreshold.Build(manifest.FamilyRunShares, curation);
         Data(4, "Applying stored studies");
         result = ReportStoredResults.Apply(result, manifest, labels, grouping);
         Data(5, "Preparing report sections");
@@ -54,15 +54,15 @@ public static class ReportProjectExporter
         var document = ReportDocumentBuilder.Build(curation, manifest, details, provenance, operation,
             panelCount + (hasConflicts ? 1 : 0)) with { ApplicationVersion = AppVersionInfo.Current() };
         int sectionTotal = document.Sections.Count + panelCount + (hasConflicts ? 1 : 0);
-        var panelSections = ReportPanelSections.BuildFromResults(curation, manifest, operation, document.Sections.Count, sectionTotal);
+        var panelSections = ReportPanelSections.BuildFromResults(curation, manifest, grouping, operation, document.Sections.Count, sectionTotal);
         if (hasConflicts)
             operation?.Report("report-prepare-section", "Section " + sectionTotal.ToString(CultureInfo.InvariantCulture) + " of "
                 + sectionTotal.ToString(CultureInfo.InvariantCulture) + ": " + replacements[ReportSectionIds.AssignmentConflicts].Title, sectionTotal, sectionTotal);
         Data(6, "Planning report figures");
-        var plan = ReportFigureRenderer.Plan(data, manifest, curation, families);
+        var plan = ReportFigureRenderer.Plan(data, manifest, curation, families, grouping);
         Data(7, "Rendering report figures");
         var studies = ReportStudyFigures.Build(manifest, curation, pngFolder, topProteinsPerPanelFamily: 1,
-            operation: operation, otherFigureCount: plan.Charts.Count);
+            reportGrouping: grouping, operation: operation, otherFigureCount: plan.Charts.Count);
         var figures = ReportFigureRenderer.Render(plan, pngFolder, operation: operation, figureOffset: studies.Figures.Count,
             figureTotal: plan.Charts.Count + studies.Figures.Count).Concat(studies.Figures).ToArray();
         var unavailable = plan.Unavailable.Concat(studies.Unavailable).ToArray();
@@ -100,7 +100,7 @@ public static class ReportProjectExporter
                 int sourcePosition = blocks.FindLastIndex(b => b is ReportFigure figure && figure.Id.StartsWith("figure:family_signal_sources", StringComparison.Ordinal));
                 if (sourcePosition >= 0)
                 {
-                    blocks.Insert(sourcePosition + 1, ReportSourceSupport.Build(sourceWorld));
+                    blocks.Insert(sourcePosition + 1, ReportSourceSupport.Build(sourceWorld, grouping));
                     sections[i] = sections[i] with { Blocks = blocks };
                 }
             }

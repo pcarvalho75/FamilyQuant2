@@ -25,7 +25,7 @@ public static partial class ReportStudyFigures
     /// <summary>The optional map is the authoritative current map supplied by the assignment producer.
     /// With no supplied map, the saved evidence/currentness accessor is always used for a panel project.</summary>
     public static ReportStudyFigurePlan Plan(QuantManifest manifest, FamilyClusterFile project,
-        int topProteinsPerPanelFamily = 1, PanelFamilyMap? panelMap = null)
+        int topProteinsPerPanelFamily = 1, PanelFamilyMap? panelMap = null, FamilyReportThresholdResult? reportGrouping = null)
     {
         ArgumentNullException.ThrowIfNull(manifest); ArgumentNullException.ThrowIfNull(project);
         if (topProteinsPerPanelFamily < 1) throw new ArgumentOutOfRangeException(nameof(topProteinsPerPanelFamily));
@@ -38,12 +38,15 @@ public static partial class ReportStudyFigures
         var unavailable = new List<ReportFigureAvailability>();
         void Missing(string title, string reason, string section = ReportSectionIds.Results) => unavailable.Add(new(section, title, reason));
         var labels = FamilyLabels(project, panelMap);
-        FamilyReportThresholdResult? threshold = manifest.FamilyRunShares == null ? null : panelMap == null
+        FamilyReportThresholdResult? threshold = reportGrouping ?? (manifest.FamilyRunShares == null ? null : panelMap == null
             ? FamilyReportThreshold.Build(manifest.FamilyRunShares, project)
-            : FamilyReportThreshold.Build(manifest.FamilyRunShares, project, panelMap);
+            : FamilyReportThreshold.Build(manifest.FamilyRunShares, project, panelMap));
         void Add(AnalyticsFigure plot, string title, string section = ReportSectionIds.Results)
         {
             var caption = CompositionChartCaptions.Describe(plot);
+            if (plot.Chart is FamilySubclassChart or FamilyRingChart && threshold?.OtherFamilies.Count > 0)
+                caption = caption with { Notes = (caption.Notes ?? Array.Empty<string>()).Append(
+                    "Others member and part names are retained in the companion workbook. Generic member and part labels preserve the stored pooled amounts in this figure").ToArray() };
             if (plot.Chart is FamilyCompositionChart or FamilySubclassChart or FamilyAbundanceDiversityChart)
             {
                 var notes = (caption.Notes ?? Array.Empty<string>()).ToList();
@@ -84,7 +87,7 @@ public static partial class ReportStudyFigures
                 .SetEquals(manifest.FamilyRunShares!.Families.Select(f => f.FamilyUserId)))
                 throw new InvalidOperationException("Pooled subclass parts and the canonical report partition have different family memberships.");
             // Adapt the complete stored partition first: filtering must never change the pooled denominator.
-            ringData = StoredCompositionChartData.FromSubclassParts(manifest.FamilySubclassParts, labels);
+            ringData = WordOthersNames(StoredCompositionChartData.FromSubclassParts(manifest.FamilySubclassParts, labels), threshold);
             pooled = CanonicalRows(ringData, threshold, null);
             if (pooled.Families.Count > 0)
             {
@@ -129,14 +132,15 @@ public static partial class ReportStudyFigures
     }
 
     public static ReportStudyFigurePacket Build(QuantManifest manifest, FamilyClusterFile project, string pngFolder,
-        int topProteinsPerPanelFamily = 1, PanelFamilyMap? panelMap = null, OperationContext? operation = null,
+        int topProteinsPerPanelFamily = 1, PanelFamilyMap? panelMap = null, FamilyReportThresholdResult? reportGrouping = null,
+        OperationContext? operation = null,
         int otherFigureCount = 0)
     {
         var culture = CultureInfo.CurrentCulture; var ui = CultureInfo.CurrentUICulture;
         try
         {
             CultureInfo.CurrentCulture = CultureInfo.InvariantCulture; CultureInfo.CurrentUICulture = CultureInfo.InvariantCulture;
-            var plan = Plan(manifest, project, topProteinsPerPanelFamily, panelMap);
+            var plan = Plan(manifest, project, topProteinsPerPanelFamily, panelMap, reportGrouping);
             int total = plan.Figures.Count + otherFigureCount;
             if (plan.Figures.Count > 0 || total == 0) operation?.Report("report-prepare-figure", "Preparing report figures", 0, total);
             var placed = plan.Figures.Select((item, index) =>

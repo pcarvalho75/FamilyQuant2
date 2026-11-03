@@ -23,8 +23,10 @@ public sealed record ReportPlacedFigure(string SectionId, ReportFigure Figure);
 public static class ReportFigureRenderer
 {
     public static ReportFigurePlan Plan(AnalyticsData data, QuantManifest manifest,
-        FamilyClusterFile curation, FamilyEnvelopeQuantResult? families)
+        FamilyClusterFile curation, FamilyEnvelopeQuantResult? families, FamilyReportThresholdResult? reportGrouping = null)
     {
+        reportGrouping ??= manifest.FamilyRunShares == null ? null : FamilyReportThreshold.Build(manifest.FamilyRunShares, curation);
+        var visibleFamilies = families == null ? null : ReportFigureMembership.Visible(families, reportGrouping);
         var charts = new List<ReportChart>();
         var unavailable = new List<ReportFigureAvailability>();
         void Add(string section, string file, string title, string guidance, Func<FrameworkElement> factory,
@@ -39,6 +41,9 @@ public static class ReportFigureRenderer
                 if (facts.Length == 0) throw new InvalidOperationException("Numeric caption data are missing for " + file);
                 input = new FigureCaptionInput(title, guidance + " Read each labelled axis and legend using its stated units.", facts);
             }
+            if (reportGrouping != null && native is FamilyContributionChart or FamilySignalShareChart or FamilySourceSequenceChart or DatabaseGapChart or ReportFamilyWorldRatesChart)
+                input = input with { Notes = (input.Notes ?? Array.Empty<string>()).Append(
+                    "Only canonical report members are shown individually. Others member details remain in the supplement; stored values and original denominators are unchanged").ToArray() };
             charts.Add(new(section, file, title, ReportCaptionBuilder.Figure(input), factory, CaptionInput: input));
         }
         void Missing(string section, string title, string reason = "Not computed in this project.") => unavailable.Add(new(section, title, reason));
@@ -60,17 +65,28 @@ public static class ReportFigureRenderer
         Add(ReportSectionIds.Results, PresentationFigures.SignalUpliftFile, "Signal recovery components",
             "Grouped primary signal estimate and its components. The de novo estimate is distinct from directly observed isotope-window signal.", () => new SignalUpliftChart(data.Grouped),
             pooledFacts);
-        if (families != null)
+        if (visibleFamilies != null)
         {
-            Add(ReportSectionIds.Results, AnalyticsFigures.FamilyContributionFile, "Family signal contributions",
-                "Current curated family contributions on the chart's stated shared-peptide basis. Shared and unattributed signal remain explicit.", () => new FamilyContributionChart(families));
+            var bars = FamilyContributionPlot.Fold(visibleFamilies, reportGrouping == null ? FamilyContributionPlot.DefaultTopN : 0);
+            var pages = reportGrouping == null ? new[] { bars.ToArray() } : bars.Chunk(12).DefaultIfEmpty(Array.Empty<FamilyContributionBar>()).ToArray();
+            for (int page = 0; page < pages.Length; page++)
+            {
+                var pageBars = pages[page];
+                string file = page == 0 ? AnalyticsFigures.FamilyContributionFile : Path.GetFileNameWithoutExtension(AnalyticsFigures.FamilyContributionFile)
+                    + "_" + (page + 1).ToString(CultureInfo.InvariantCulture) + ".png";
+                Add(ReportSectionIds.Results, file, "Family signal contributions" + (pages.Length > 1 ? " - page " + (page + 1).ToString(CultureInfo.InvariantCulture) : ""),
+                    "Current curated family contributions on the chart's stated shared-peptide basis. Shared and unattributed signal remain explicit.",
+                    () => reportGrouping == null ? new FamilyContributionChart(visibleFamilies)
+                        : new FamilyContributionChart(pageBars, measuredEnvelope: visibleFamilies.MeasuredTotalEnvelopeReferenceCalibrated, identityThresholdFraction: visibleFamilies.IdentityThreshold));
+                if (reportGrouping != null) charts[^1] = charts[^1] with { Height = Math.Max(540, 240 + pageBars.Length * 50) };
+            }
             Add(ReportSectionIds.Results, PresentationFigures.FamilySignalShareFile, "Family signal and de novo share",
-                "Family signal against its de novo contribution; these axes describe abundance and evidence source, not diversity.", () => new FamilySignalShareChart(families, 10),
-                new CaptionNumber("Family rows in the stored attribution", families.Families.Count, "families", "0"));
+                "Family signal against its de novo contribution; these axes describe abundance and evidence source, not diversity.", () => new FamilySignalShareChart(visibleFamilies, 10),
+                new CaptionNumber("Family rows shown from the stored attribution", visibleFamilies.Families.Count, "families", "0"));
             Add(ReportSectionIds.Results, PresentationFigures.FamilySourceSequenceFile, "Family source sequence counts",
-                "Distinct source sequence counts for the current family attribution. Sequence counts are not gene or proteoform counts.", () => new FamilySourceSequenceChart(families.SourceSequenceSummary),
-                new("Family rows in the stored sequence census", families.SourceSequenceSummary.Families.Count, "families", "0"),
-                new("Input identified distinct sequences", families.SourceSequenceSummary.SearchInputDistinctSequences, "sequences", "0"));
+                "Distinct source sequence counts for the current family attribution. Sequence counts are not gene or proteoform counts.", () => new FamilySourceSequenceChart(visibleFamilies.SourceSequenceSummary),
+                new("Family rows in the visible stored sequence census", visibleFamilies.SourceSequenceSummary.Families.Count, "families", "0"),
+                new("Input identified distinct sequences", visibleFamilies.SourceSequenceSummary.SearchInputDistinctSequences, "sequences", "0"));
         }
         else Missing(ReportSectionIds.Results, "Family figures", "Family attribution is unavailable in this project.");
         if (manifest.DeNovoSourceScoreDistributions.Count > 0)
@@ -189,9 +205,10 @@ public static class ReportFigureRenderer
         Missing(ReportSectionIds.Quality, "Unfiltered source score scatter", "The underlying source-pair score study is not stored in this project.");
         Missing(ReportSectionIds.Quality, "Source set novelty", "The underlying three-source sequence-set study is not stored in this project.");
         var world = manifest.FamilyWorldResult?.ForLength(manifest.DatabaseGapMinimumTagLength ?? FamilyWorldOptions.DefaultMinimumTagLength);
+        var hiddenWorld = world == null ? new HashSet<string>(StringComparer.Ordinal) : ReportWordMembership.HiddenWorldFamilies(world, reportGrouping);
         if (world is { CompositionRules.Length: > 0 })
         {
-            var rows = world.Composition.OrderByDescending(r => r.WorldDeNovoEnvelope).ThenByDescending(r => r.TotalEnvelope)
+            var rows = world.Composition.Where(r => !hiddenWorld.Contains(r.Family)).OrderByDescending(r => r.WorldDeNovoEnvelope).ThenByDescending(r => r.TotalEnvelope)
                 .ThenBy(r => r.Family, StringComparer.Ordinal).ToArray();
             Add(ReportSectionIds.DatabaseGap, "database_gap.png", "Database gap",
                 "Identified, database-mapped de novo and family-world-only signal are separate components. The family-world-only component is excluded from database family composition.",
@@ -202,7 +219,7 @@ public static class ReportFigureRenderer
         else Missing(ReportSectionIds.DatabaseGap, "Database gap");
         if (world != null)
         {
-            var rows = world.Families.OrderBy(r => r.Family, StringComparer.Ordinal).ToArray();
+            var rows = world.Families.Where(r => !hiddenWorld.Contains(r.Family)).OrderBy(r => r.Family, StringComparer.Ordinal).ToArray();
             for (int offset = 0; offset < rows.Length; offset += 12)
             {
                 var page = rows.Skip(offset).Take(12).ToArray();
@@ -212,7 +229,7 @@ public static class ReportFigureRenderer
                     () => new ReportFamilyWorldRatesChart(page), new("Family rows on this page", page.Length, "families", "0"),
                     new("Known credited sequences on this page", page.Sum(r => r.KnownCredited), "sequences", "0"));
             }
-            if (rows.Length == 0) Missing(ReportSectionIds.Quality, "Family-world error rates", "No per-family rates were computed in this project.");
+            if (rows.Length == 0) Missing(ReportSectionIds.Quality, "Family-world error rates", "No individually reportable per-family rates are available. Complete stored rates remain in the companion workbook.");
         }
         else Missing(ReportSectionIds.Quality, "Family-world error rates");
         return new(charts, unavailable);
