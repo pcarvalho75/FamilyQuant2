@@ -61,6 +61,20 @@ internal static partial class Program
         var worldPlan = ReportFigureRenderer.Plan(data, manifest, curation, families);
         var rateChart = (ReportFamilyWorldRatesChart)worldPlan.Charts.Single(c => c.FileName == "family_world_rates_1.png").CreateChart();
         Check("world rate chart retains recorded values and null availability", rateChart.Rows.Single().DecoyRate == .05 && rateChart.Rows.Single().RightRate == null);
+        oldCulture = CultureInfo.CurrentCulture; oldUi = CultureInfo.CurrentUICulture;
+        try
+        {
+            var ratePlan = new ReportFigurePlan(worldPlan.Charts.Where(c => c.FileName.StartsWith("family_world_rates_", StringComparison.Ordinal)).ToArray(), Array.Empty<ReportFigureAvailability>());
+            CultureInfo.CurrentCulture = CultureInfo.GetCultureInfo("pt-BR"); CultureInfo.CurrentUICulture = CultureInfo.CurrentCulture;
+            byte[] ratePt = ReportFigureRenderer.Render(ratePlan, Path.Combine(output, "rates-pt")).Single().Figure.PngBytes;
+            string directPt = ChartImageExporter.Save(new ReportFamilyWorldRatesChart(rateChart.Rows), Path.Combine(output, "rates-direct-pt.png"), variant: ChartPaletteVariant.Light);
+            CultureInfo.CurrentCulture = CultureInfo.GetCultureInfo("en-US"); CultureInfo.CurrentUICulture = CultureInfo.CurrentCulture;
+            byte[] rateEn = ReportFigureRenderer.Render(ratePlan, Path.Combine(output, "rates-en")).Single().Figure.PngBytes;
+            string directEn = ChartImageExporter.Save(new ReportFamilyWorldRatesChart(rateChart.Rows), Path.Combine(output, "rates-direct-en.png"), variant: ChartPaletteVariant.Light);
+            Check("actual stored-rate report PNG is byte-equal under pt-BR and en-US", ratePt.SequenceEqual(rateEn));
+            Check("standalone stored-rate chart export is culture invariant", File.ReadAllBytes(directPt).SequenceEqual(File.ReadAllBytes(directEn)));
+        }
+        finally { CultureInfo.CurrentCulture = oldCulture; CultureInfo.CurrentUICulture = oldUi; }
         manifest.DeNovoSourceScoreDistributions.Add(new() { SourceId = "incomplete", RawRows = 1 });
         bool invalid = false;
         try { ReportFigureRenderer.Plan(data, manifest, curation, families); } catch (InvalidOperationException) { invalid = true; }
