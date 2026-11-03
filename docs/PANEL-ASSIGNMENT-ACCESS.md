@@ -14,7 +14,11 @@ Core access is `FamilyQuant.Evidence.PanelAssignmentEvidenceStore`:
 - `BuildFamilyMap(panel, assignments)` is the pure mapper for already verified
   data or a stand-in; production consumers use GetCurrentFamilyMap.
 
-`PanelFamilyMap.IsCurrent` must be true before quantities are attributed.
+`PanelFamilyMap.IsCurrent` answers input/provenance currentness only and must
+be true before quantities are attributed. Conflicting groups do not make a
+current map stale. Report each non-conflicting current family normally; report
+each conflicting UserID as its own flagged row, never within a panel family or
+within others.
 `UserFamilies` maps each UserID to its effective PanelFamilyKey and the target
 row's Decision. Outside members have no applied panel key. Two keys in one
 UserID, or a mixture of a panel key and outside members, flag HasConflict and
