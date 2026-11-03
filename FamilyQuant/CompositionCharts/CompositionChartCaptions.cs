@@ -19,10 +19,19 @@ public static class CompositionChartCaptions
         FamilyAbundanceDiversityChart chart => Diversity(chart),
         FamilyRingChart chart => Ring(chart),
         ProteinCoverageMapChart chart => Coverage(chart.Data),
+        FamilySignalOriginChart chart => SignalSources(chart),
         FamilyContributionChart chart => LegacyFamilies(chart),
         _ when analytics != null => Analytics(figure, analytics),
         _ => throw new NotSupportedException("Caption data is required for figure: " + figure.FileName)
     };
+
+    private static FigureCaptionInput SignalSources(FamilySignalOriginChart chart) => new(
+        "Family-specific envelope signal by sequence source, all runs pooled",
+        "Each stacked row shows identified, de novo supported by the starting database, and family-world-only contributions. Shared and unexplained global signal are separate. Family-world-only signal is not added to starting database family composition",
+        new CaptionNumber[] { new("Family rows shown", chart.Rows.Count, "families", "0"),
+            new("Identified signal", chart.Rows.Sum(r => r.IdentifiedEnvelope), "area units", "G5"),
+            new("Starting-database de novo signal", chart.Rows.Sum(r => r.DatabaseDeNovoEnvelope), "area units", "G5"),
+            new("Family-world-only de novo signal", chart.Rows.Sum(r => r.WorldDeNovoEnvelope), "area units", "G5") });
 
     private static FigureCaptionInput Composition(FamilyCompositionData data)
     {
@@ -78,6 +87,8 @@ public static class CompositionChartCaptions
         {
             numbers.Add(new("Inner-ring total", chart.Families.Sum(f => f.Percent), "%"));
             numbers.Add(new("Outer-ring total", chart.Families.SelectMany(f => f.Parts).Sum(p => p.Percent), "%"));
+            foreach (var category in chart.Families.Where(f => f.IsUnassigned))
+                numbers.Add(new(category.Label + " pooled share", category.Percent, "%"));
             var others = chart.Families.SingleOrDefault(f => f.IsOthers);
             if (others != null)
             {
@@ -85,9 +96,9 @@ public static class CompositionChartCaptions
                 numbers.Add(new("Families retained inside Others", others.Members.Count, "families", "0"));
             }
         }
-        return new("Family shares and their subclass parts, all runs pooled",
-            "Inner arcs show families and outer arcs split the same pooled signal by subclass. Others uses the report's mean-of-runs membership; the ring never re-decides membership from pooled shares",
-            numbers, new[] { "Grey outer parts are unresolved or unavailable, as labelled. Original Others members and parts remain in the reference",
+        return new("Family shares, unassigned categories and subclass parts, all runs pooled",
+            "Inner arcs show report groups and outer arcs split the same pooled signal by subclass. Others uses the report's mean-of-runs membership; the ring never re-decides membership from pooled shares",
+            numbers, new[] { "Grey slices are conflicting families, not a panel family, or unresolved or unavailable parts, as labelled. The first two are outside families and Others. Original Others members and parts remain in the reference",
                 "Basis: " + chart.Data.Basis });
     }
 

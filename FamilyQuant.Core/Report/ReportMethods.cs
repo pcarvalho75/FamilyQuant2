@@ -17,6 +17,7 @@ public static class ReportMethods
         ArgumentNullException.ThrowIfNull(curation);
         ArgumentNullException.ThrowIfNull(manifest);
         details ??= curation.ReportDetails;
+        facts ??= curation.ReportInputProvenance;
         var blocks = new List<ReportBlock>();
         var rows = new List<IReadOnlyList<string>>();
         void Add(string key, string? value) => rows.Add(new[] { key, Value(value) });
@@ -24,6 +25,7 @@ public static class ReportMethods
         Add("Workflow", details?.Workflow);
         Add("Database kind", details?.DatabaseKind);
         Add("Database input", facts?.DatabaseFileName);
+        Add("Chosen database file SHA-256", facts?.DatabaseFileSha256);
         Add("SEPro input", facts?.SeproFileName);
         Add("Database source SHA-256", curation.SourceSha256);
         Add("Source database records at clustering", curation.SourceSequenceCount > 0 ? Number(curation.SourceSequenceCount) : null);
@@ -46,6 +48,7 @@ public static class ReportMethods
         foreach (var input in manifest.ScientificInputFingerprints) inputs[input.Key] = input.Value;
         foreach (var input in manifest.DeNovoInputs) inputs[input.FilePath] = input.Sha256;
         if (!string.IsNullOrWhiteSpace(facts?.SearchParameterFileName)) inputs[facts.SearchParameterFileName] = facts.SearchParameterSha256;
+        if (!string.IsNullOrWhiteSpace(facts?.DatabaseFileName)) inputs[facts.DatabaseFileName] = facts.DatabaseFileSha256;
         if (curation.FamilyPanel?.Import is { } panelInput) inputs[panelInput.SourceName] = panelInput.SourceSha256;
         blocks.Add(new ReportTable("methods-inputs", "Scientific inputs", new[] { "Input name or path", "SHA-256" },
             inputs.Select(p => (IReadOnlyList<string>)new[] { p.Key, Value(p.Value) }).ToArray(),
@@ -91,6 +94,15 @@ public static class ReportMethods
         blocks.Add(new ReportTable("methods-denovo-gates", "De novo length and local confidence", new[] { "Gate", "Stored value" }, rows,
             rows.Count == 0 ? "Length and local-confidence gates were not recorded in this project." : "Source gates recorded with the stored score distributions and overlap analysis."));
         blocks.Add(new ReportParagraph("methods-unavailable", "An unavailable measurement is not a zero. Abundance and the number of supported database entries describe different properties. User-written interpretation appears separately."));
+        rows = new List<IReadOnlyList<string>>();
+        if (manifest.FamilyRunShares is { } runStudy) Add("Per-run composition and statistics", runStudy.Method);
+        if (manifest.FamilyProteinCounts is { } proteinStudy) Add("Database-protein diversity", proteinStudy.Method);
+        if (manifest.FamilySubclassParts is { } subclassStudy) Add("Pooled subclass allocation", subclassStudy.Method);
+        if (manifest.FamilyDomainParts is { } domainStudy) Add("Pooled domain and mature-product allocation", domainStudy.Method);
+        if (manifest.FamilySensitivity is { } sensitivityStudy) Add("Stored sensitivity comparison", sensitivityStudy.Method);
+        if (rows.Count > 0)
+            blocks.Add(new ReportTable("methods-stored-studies", "Family study rules", new[] { "Study", "Stored method" }, rows,
+                "Headline composition uses the mean of per-run shares, sample SD and CV. Within-family subclass, domain and mature-product parts use all runs pooled. Pooled within-family fractions are never multiplied by the per-run mean. Greedy protein cover is an estimate over database entries, distinct from gene or proteoform counts."));
         return new ReportSection(ReportSectionIds.Methods, "Methods", blocks);
     }
 }
