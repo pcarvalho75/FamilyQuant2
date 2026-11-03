@@ -31,6 +31,11 @@ public partial class MainWindow
             ShellMessages.Report(this, "Open a project with stored Results and wait for the current operation before drafting an interpretation.", "AI interpretation");
             return false;
         }
+        if (loadedManifest.FamilyRunShares == null)
+        {
+            ShellMessages.Report(this, "The project has no stored family shares. Use Analysis > Compute full XIC and save the Results first.", "AI interpretation");
+            return false;
+        }
         var project = cgc;
         var manifest = loadedManifest;
         var rows = loadedQuant;
