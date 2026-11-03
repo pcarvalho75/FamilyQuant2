@@ -174,6 +174,22 @@ namespace FamilyQuant
         [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull)]
         public int? DatabaseGapMinimumTagLength { get; set; }
 
+        /// <summary>Per-file family shares and sample statistics. Absent until computed.</summary>
+        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull)]
+        public FamilyRunSharesResult? FamilyRunShares { get; set; }
+
+        /// <summary>Deterministic greedy database-protein cover and unique-peptide support. Absent until computed.</summary>
+        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull)]
+        public FamilyProteinCountsResult? FamilyProteinCounts { get; set; }
+
+        /// <summary>Subclass signal including an explicit not-resolved part. Absent until computed.</summary>
+        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull)]
+        public FamilySubclassPartsResult? FamilySubclassParts { get; set; }
+
+        /// <summary>Domain and mature-product partitions. Absent until computed.</summary>
+        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull)]
+        public FamilyDomainPartsResult? FamilyDomainParts { get; set; }
+
         /// <summary>The complete compute-time spectrum evidence table, including accepted source calls
         /// that did not yield a stored XIC and RAW-selected precursor metadata. Version-2 projects keep
         /// this collection in the streaming <c>spectrum_comparison.jsonl.gz</c> entry rather than in
