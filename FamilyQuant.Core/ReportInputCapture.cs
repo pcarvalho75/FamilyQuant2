@@ -10,13 +10,15 @@ namespace FamilyQuant.Report;
 /// <summary>Reads provenance from chosen input files. Never infers missing search settings.</summary>
 public static class ReportInputCapture
 {
-    public static ReportInputProvenance Read(string? databasePath, string seproPath, string? parameterPath = null)
+    public static ReportInputProvenance Read(string? databasePath, string seproPath, string? parameterPath = null,
+        string? databaseFileSha256 = null)
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(seproPath);
         if (!File.Exists(seproPath)) throw new FileNotFoundException("The identification package could not be found.", seproPath);
         var facts = new ReportInputProvenance
         {
             DatabaseFileName = string.IsNullOrWhiteSpace(databasePath) ? "" : Path.GetFileName(databasePath),
+            DatabaseFileSha256 = string.IsNullOrWhiteSpace(databasePath) ? "" : databaseFileSha256 ?? FileFingerprint.Sha256(databasePath),
             SeproFileName = Path.GetFileName(seproPath)
         };
         if (parameterPath == null)
@@ -51,6 +53,7 @@ public static class ReportInputCapture
         static string Available(string? value) => string.IsNullOrEmpty(value) ? "Not recorded" : value;
         var text = new StringBuilder();
         text.Append("Database file: ").AppendLine(Available(facts?.DatabaseFileName));
+        text.Append("Chosen database file SHA-256: ").AppendLine(Available(facts?.DatabaseFileSha256));
         text.Append("Identification package: ").AppendLine(Available(facts?.SeproFileName));
         text.Append("Search parameter file: ").AppendLine(Available(facts?.SearchParameterFileName));
         text.Append("Search parameter SHA-256: ").AppendLine(Available(facts?.SearchParameterSha256));
