@@ -431,6 +431,7 @@ Paulo agreed these at the restart, 2026-11-01.
 | J16a | Figure export's gate failures fixed: the figure details file is written only when a figure is capped, so small projects export exactly as before; the screen test passes | L | 0.3 | 🟢 | J16b | `FIXED J16` with the three checks green | LK | | 0 | 0 | |
 | J24b | J24 (export progress) and J31 (Export report available after opening) merged | L | 0.1 | 🟢 | J24c, K8, K14 | Gate green | SH | | 0 | 0 | |
 | J34a | The report's look: the 38-page rehearsal report read page by page as a scientist would | M | 0.5 | 🟢 | J34b | A numbered list with page, figure id and file:line | LK | | 0 | 0 | |
+| J16b | J16 re-reviewed and merged | L | 0.2 | 🟢 | J34b, K8, K14 | Approved; gate green | LK | | 0 | 0 | |
 
 ### W7 Clear reasons and totals
 
@@ -440,6 +441,7 @@ Paulo agreed these at the restart, 2026-11-01.
 | J33b | The scope proposal also offers the commonest tissue phrase among the task's reviewed proteins, read from the database | L | 0.4 | 🟢 | J33c | A fixture's proposal offers its phrase | T2 | | 0 | 0 | |
 | J27b | One total per panel family: the program computes and stores the per-panel-family totals when several families share a panel family (contract posted) | M | 1 | 🟢 | J27c | A fixture's stored totals credit a shared peptide once | FL | | 0 | 0 | |
 | J27c | The per-family briefs and new exports read those totals; the headline keeps its unit (D40) | M | 0.5 | J27b | J27d | Old exports unchanged; new exports added | FL | | 0 | 0 | |
+| J33c | J33 reviewed and merged | L | 0.2 | 🟢 | J37a, J40 | Approved; gate green | T2 | | 0 | 0 | |
 
 ### W4 Release 2.1.0 on GitHub
 
