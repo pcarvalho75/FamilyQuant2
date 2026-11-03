@@ -137,12 +137,13 @@ SVMP P-I, P-II, P-III and "class not resolved"; PLA2 D49 and K49; the parts of a
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
 | J6a | Report writer: a `.docx` with title, contents and methods written from the project's own facts (inputs and hashes, database counts and labels, search and de novo settings, the quantitation rules in force) | M | 2 | J1b0 | J6b, J6c | Opens in Word; fixed wording is general; same bytes under pt-BR and en-US | RS | | 0 | 0 | |
-| J6b | Results in the report: composition with toxin counts, per-run table, subclass and domain tables, figures, Database gap, quality rates, sensitivity and the others list | H | 3 | J6a, J2c, J3b, J4b, J4c, J5a, J5b, J5c, J5d, J5e, J5f, J5g, J5h, J6g, J6h | J6e | Every number in the document equals the program's own export | RS | | 0 | 0 | |
+| J6b | Results in the report: composition with toxin counts, per-run table, subclass and domain tables, figures, Database gap, quality rates, sensitivity and the others list | H | 3 | J6a, J2c, J3b, J4b, J4c, J5a, J5b, J5c, J5d, J5e, J5f, J5g, J5h, J6g, J6h, J6i | J6e | Every number in the document equals the program's own export | RS | | 0 | 0 | |
 | J6c | One section per family from the user's panel: its decision, literature abundance and notes printed beside the observed numbers | M | 1 | J6a, J1a | J6e | Panel text appears as written; no fixed organism text | RS | | 0 | 0 | |
 | J6d | Report details: one form saved in the project (title, authors, sample, workflow, kind of database, written interpretation), each printed in its place in the report | M | 1.5 | 🟢 | J6e, J7b | Round trip; Undo; every field printed in the report | SH | | 0 | 0 | |
 | J6f | Report sections with checkboxes: the Export report screen lists every section and figure, each with a checkbox, all ticked by default; the choice is stored in the project and the document holds exactly the ticked parts | M | 1 | J6a | J6e | Native test: unticking a section removes it and only it; the choice survives reopen | SH | | 0 | 0 | |
 | J6g | Automatic explanations: every figure and table gets a caption saying what is drawn and how to read it, plus sentences written from that project's own numbers, in general words | M | 2 | J6a | J6b | Each caption's numbers equal the figure's data; no fixed organism text | LK | | 0 | 0 | |
 | J6h | Every figure the program already draws goes into the report: ion current, M+0 recovery, XIC mass, isotope count, de novo scores and sources, accepted scores, family-world error rates, Database gap | M | 1.5 | J6a | J6b | Each figure in the document is byte-equal to the program's own PNG export | RS | | 0 | 0 | |
+| J6i | Input provenance for the methods: the database's original file name, the SEPro package name and the search settings read from the search parameter file beside it, stored in the project when Results are computed or the file is chosen | M | 1 | J6d | J6b | Methods print the database name and the search settings from the project alone; a project without them says which are missing | SH | | 0 | 0 | |
 | J6e | File > Export report: the command, the wait screen, refusal when Results are missing, Help | M | 1 | J6b, J6c, J6d, J6f | J7c | Native command test writes the document | SH | | 0 | 0 | |
 
 ### W7 The analysis
@@ -163,10 +164,6 @@ J1a, J1b, J1d and J2a, J2b open the full run J7a. Beside them run the quantitati
 
 | ID | Decision | Default if no answer | Needed by |
 |---|---|---|---|
-| D33 | Which de novo data: the three-run export (ALC 50 and up) cut by the program at ALC 80, or run 01 only (ALC 80 and up) | The three runs, cut at 80 | J7a |
-| D35 | Which families | All 41 of Ana's consensus families with her decisions: excluded ones are not families, merged ones join their target, the rest are measured and those under 0.1% are listed as others | J1b |
-| D36 | Report language | English, the program's language, with Ana's own family names from her file | J6a |
-| D37 | What "% of the venom" means | The share of the signal credited to families (identified plus de novo matched to the database), summing to 100%, with the share of the whole measured signal printed beside it | J6b |
 
 ### Decisions taken
 
@@ -174,6 +171,10 @@ Paulo agreed these at the restart, 2026-11-01.
 
 | ID | Question | Taken |
 |---|---|---|
+| D33 | Which de novo data | Ana's three-run export (`AnaG/DeNovo_ALC-50percent`, PEAKS de novo all), cut by the program at ALC 80. Paulo, 11-02 |
+| D35 | Which families | All 41 of Ana's consensus families with her decisions: Excluir is not a family, Fundir em CTL joins CTL, the rest are measured, and those under 0.1% are listed as others with the names in a supplement. Paulo, 11-02 |
+| D36 | Report language | English, with Ana's own family names from her file. Paulo, 11-02 |
+| D37 | What "% of the venom" means | The share of the signal credited to families (identified plus de novo matched to the database), summing to 100%; beside it the share of the whole measured signal, and the de novo found only through Database gap shown apart, never added. Paulo, 11-02 |
 | D34 | Who writes the Word document | The program writes the complete report (File > Export report) from the project, with the input it needs: the family panel from Ana's file and a Report details form in the project (title, authors, sample, workflow, kind of database, written interpretation). Paulo, 11-02: "maybe the software could export a complete report too, its just that it would need some input" |
 | D14 | Should identity clustering change its coverage rule, merge on shared peptides, or use a reviewed-family veto? | No. Clustering stays as it is, and the measurements ship as a diagnostic the user can see |
 | D32 | Publishing | FamilyQuant 2.0.0 published 2026-11-02 19:16 at https://github.com/pcarvalho75/FamilyQuant2-releases/releases/tag/v2.0.0 from commit bc7209f, zip SHA256 02df797c...056c8f, by the desk at Paulo's request. The desk may publish when Paulo asks. Paulo, 11-02 |

@@ -224,9 +224,10 @@ internal static partial class Program
             && only.Id == forged.Id && only.OldText == forged.OldText && only.NewText == forged.NewText);
         File.WriteAllText(factFile, "row_id\tverdict\tnote\n" + forgery.Input.Id + "\tkept\t" + forged.FactCheckNote + "\n");
         FeatureLedgerEvidence.WriteJson(packetFile, packet with { Decisions = new() { forged }, TsvSha256 = FeatureLedgerEvidence.Hash(tsv), FactChecksSha256 = FeatureLedgerEvidence.Hash(factFile) });
-        string forgedCurrent = FeatureLedgerEvidence.CurrentPath(root, forgery.Row!.Source);
+        var forgedRow = forgery.Row ?? throw new InvalidOperationException("The forgery fixture has no matching ledger row.");
+        string forgedCurrent = FeatureLedgerEvidence.CurrentPath(root, forgedRow.Source);
         string forgedRule = File.ReadAllLines(rules).First(line => line.StartsWith("Rule " + forged.Rule + ",", StringComparison.Ordinal));
-        var rejectedReceipt = new FeatureLedgerEvidence.Row(forgery.Row.Id, new() { new(forgedCurrent, "Synthetic rejected fact", FeatureLedgerEvidence.Hash(Path.Combine(root, forgedCurrent))) },
+        var rejectedReceipt = new FeatureLedgerEvidence.Row(forgedRow.Id, new() { new(forgedCurrent, "Synthetic rejected fact", FeatureLedgerEvidence.Hash(Path.Combine(root, forgedCurrent))) },
             new() { proof with { Target = "Rule " + forged.Rule, Assertion = FeatureLedgerEvidence.RulingAssertion(forgedRule, forged) } }, Compared: FeatureLedgerEvidence.RulingComparison(forged));
         Check("a private forged kept verdict cannot override the canonical lost verdict", !Valid(rejectedReceipt));
 
