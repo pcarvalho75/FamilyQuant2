@@ -70,6 +70,23 @@ internal static partial class Program
                 "sample", "workflow", "database", "interpretation", "section", "threshold", "Word", "supplement" };
             Check("J21 workflow covers the panel-to-report choices and outputs", details.All(value => flat.Contains(value, StringComparison.OrdinalIgnoreCase)),
                 string.Join("; ", details.Where(value => !flat.Contains(value, StringComparison.OrdinalIgnoreCase))));
+            string[][] releaseDetails =
+            {
+                new[] { "Export report", "progress", "Operation log", "elapsed" },
+                new[] { "opening", "attribution", "available" },
+                new[] { "cached", "reopen", "export" },
+                new[] { "no peptide observed", "not proof" },
+                new[] { "scope phrases", "keywords", "tissue", "audit", "outside" },
+                new[] { "accuracy check", "multiple scope phrases", "reviewed", "not independent" },
+                new[] { "link", "note", "report" },
+                new[] { "Compute", "current item", "since the last step", "known total" },
+                new[] { "supplement", "one row per item" },
+                new[] { "written by the program", "without AI" },
+            };
+            foreach (string[] group in releaseDetails)
+                Check("J40 workflow explains " + string.Join(", ", group),
+                    group.All(value => flat.Contains(value, StringComparison.OrdinalIgnoreCase)),
+                    string.Join("; ", group.Where(value => !flat.Contains(value, StringComparison.OrdinalIgnoreCase))));
             Check("J21 workflow uses general wording and ordinary hyphens", !Regex.IsMatch(text,
                 @"\b(?:venom|toxin|snake|bothrops)\b|[\u2013\u2014]", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant));
             var previous = CultureInfo.CurrentCulture;
