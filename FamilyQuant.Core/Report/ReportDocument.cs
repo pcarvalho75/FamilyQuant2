@@ -28,6 +28,8 @@ public sealed record ReportParagraph(string Id, string Text) : ReportBlock(Id);
 public sealed record ReportTable(string Id, string Title, IReadOnlyList<string> Columns,
     IReadOnlyList<IReadOnlyList<string>> Rows, string Caption) : ReportBlock(Id)
 {
+    /// <summary>Full detail retained in the companion workbook, with no quantitative Word rendering.</summary>
+    public bool SupplementOnly { get; init; }
     /// <summary>Optional native export behind rounded display columns. Only the workbook consumes
     /// this recipe; Word and the existing CSV exports retain their original literal cells.</summary>
     [JsonIgnore] public ReportSupplementSource? SupplementSource { get; init; }
