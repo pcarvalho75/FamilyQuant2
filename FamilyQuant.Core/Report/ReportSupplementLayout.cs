@@ -4,6 +4,7 @@ using System.Globalization;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace FamilyQuant.Report;
 
@@ -43,7 +44,7 @@ public static class ReportSupplementLayout
                 }
                 string name = SheetName(table.Id, table.Title);
                 sheets.Add(new(table.Id, section.Id, name, full));
-                return (ReportBlock)new ReportParagraph(table.Id, table.Title + ". See the companion supplement workbook, sheet '" + name + "'. " + table.Caption);
+                return (ReportBlock)new ReportParagraph(table.Id, table.Title + ". See the companion supplement workbook, sheet '" + name + "'. " + ReferenceCaption(table.Caption));
             }).ToArray(),
         }).ToList();
         foreach (var export in csvExports.OrderBy(p => p.Key, StringComparer.Ordinal))
@@ -65,6 +66,11 @@ public static class ReportSupplementLayout
         }
         return new(source with { Sections = sections }, sheets.Concat(listSheets).ToArray());
     }
+
+    // The Word view may have fewer rows/columns than its complete native worksheet.
+    // Remove only the generated grid-size sentence from reference prose; keep the native caption and cells intact.
+    private static string ReferenceCaption(string caption) => Regex.Replace(caption,
+        @"(?<!\S)The table shows [0-9]+ data rows? across [0-9]+ columns?\.(?:\s+|$)", "", RegexOptions.CultureInvariant).Trim();
 
     private static ReportSection FamilyBrief(ReportSection section, List<ReportSupplementSheet> sheets, List<ReportSupplementSheet> listSheets)
     {
