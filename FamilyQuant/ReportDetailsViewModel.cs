@@ -14,13 +14,15 @@ public sealed class ReportDetailsViewModel
     public string Workflow { get; set; }
     public string DatabaseKind { get; set; }
     public string WrittenInterpretation { get; set; }
+    public string InputProvenanceText { get; }
 
-    public ReportDetailsViewModel(ReportDetails? details, Action<ReportDetails> apply)
+    public ReportDetailsViewModel(ReportDetails? details, Action<ReportDetails> apply, ReportInputProvenance? provenance = null)
     {
         original = details ?? new();
         this.apply = apply ?? throw new ArgumentNullException(nameof(apply));
         Title = original.Title; Authors = original.Authors; SampleDescription = original.SampleDescription;
         Workflow = original.Workflow; DatabaseKind = original.DatabaseKind; WrittenInterpretation = original.WrittenInterpretation;
+        InputProvenanceText = ReportInputCapture.Describe(provenance);
     }
 
     public bool Save()

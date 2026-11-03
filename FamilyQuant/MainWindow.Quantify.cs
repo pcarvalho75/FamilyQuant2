@@ -39,6 +39,7 @@ public partial class MainWindow
             }
             loadedQuant = result.Rows;
             loadedManifest = result.Manifest;
+            loadedCuration!.ReportInputProvenance = model.CompletedInputProvenance;
             lastSpectrumComparisonCsvPath = result.SpectrumComparisonCsvPath;
             RefreshProjectCommandAvailability(spectrumAvailable: result.SpectrumComparisonRows.Count > 0 || loadedQuant.Count > 0);
             _ = cgc!.SetFullXicQuantAsync(loadedQuant, loadedManifest.PerRunTic);

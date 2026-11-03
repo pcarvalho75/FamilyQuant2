@@ -59,6 +59,9 @@ public partial class MainWindow
 
         private bool AttachProject(string path, ShellProjectContent content)
         {
+                if (!ProjectStore.IsProjectPath(path) && string.IsNullOrEmpty(content.Curation.ReportInputProvenance?.DatabaseFileName))
+                    content.Curation.ReportInputProvenance = (content.Curation.ReportInputProvenance ?? new Report.ReportInputProvenance())
+                        with { DatabaseFileName = Path.GetFileName(path) };
                 var loaded = new ClusterGenerationControl(content.Curation) { Name = "MyClusterGenerationControl" };
                 List<QuantRow> quant = content.Rows;
                 QuantManifest? manifest = content.Manifest;

@@ -12,7 +12,9 @@ public sealed class ReportDetailsWindow : Window
     public const string HelpText = "Report details are your own text, saved with the project. Title and authors identify the report; "
         + "sample description, workflow and kind of database describe your study. Written interpretation accepts several paragraphs "
         + "and is printed as written. Base numerical claims on the project's reported results. Save details applies all fields as one "
-        + "Undo step. Cancel discards this draft. File > Save keeps the details in the project; report export does not save the project.";
+        + "Undo step. Cancel discards this draft. Input provenance shows read-only source names and search settings captured from files. "
+        + "Missing facts are marked Not recorded. Quantify captures search settings when Results complete; an optional parameter file resolves "
+        + "ambiguous adjacent files. File > Save keeps the details in the project; report export does not save the project.";
 
     public ReportDetailsWindow(ReportDetailsViewModel model)
     {
@@ -47,6 +49,10 @@ public sealed class ReportDetailsWindow : Window
         Field("Title", nameof(model.Title)); Field("Authors", nameof(model.Authors));
         Field("Sample description", nameof(model.SampleDescription), 70); Field("Workflow", nameof(model.Workflow), 60);
         Field("Kind of database", nameof(model.DatabaseKind)); Field("Written interpretation", nameof(model.WrittenInterpretation), 210);
+        var provenance = SecondaryWindowView.Report(model.InputProvenanceText, true, "Read-only input names, source hash and parsed search settings. Missing values are marked Not recorded.");
+        provenance.MaxHeight = 280;
+        fields.Children.Add(new Expander { Header = "Input provenance", Content = provenance,
+            ToolTip = "Inspect the input facts stored for the report's methods." });
         layout.Children.Add(new ScrollViewer { Content = fields, VerticalScrollBarVisibility = ScrollBarVisibility.Auto });
         Content = SecondaryWindowView.Frame(layout);
         CommandBindings.Add(new CommandBinding(ApplicationCommands.Help, (_, _) => TextReportWindow.Show(Title, HelpText, this, true)));

@@ -26,6 +26,9 @@ public sealed class ComputeXicViewModel : ScreenViewModel
     public string RawDirectory { get => raw; set => Set(ref raw, value); }
     public string SeproPackage { get => sepro; set => Set(ref sepro, value); }
     public string DeNovoDirectory { get => deNovo; set => Set(ref deNovo, value); }
+    private string searchParametersPath = "";
+    public string SearchParametersPath { get => searchParametersPath; set => Set(ref searchParametersPath, value); }
+    public Report.ReportInputProvenance? CompletedInputProvenance { get; private set; }
     public int? IsotopeCeiling { get => isotopes; set { Set(ref isotopes, value); Changed(nameof(Basis)); } }
     public int? MinimumPoints { get => points; set { Set(ref points, value); Changed(nameof(Basis)); } }
     public int IsotopeCount => IsotopeCeiling is >= 1 ? IsotopeCeiling.Value : DeNovoXicExtractor.DefaultEnvelopeIsotopeCount;
@@ -86,9 +89,12 @@ public sealed class ComputeXicViewModel : ScreenViewModel
         });
         try
         {
+            var inputProvenance = Report.ReportInputCapture.Read(curation?.ReportInputProvenance?.DatabaseFileName,
+                seproPath, string.IsNullOrWhiteSpace(SearchParametersPath) ? null : SearchParametersPath.Trim());
             FullXicComputeResult outcome = await compute(request, progress, tokenSource.Token);
             tokenSource.Token.ThrowIfCancellationRequested();
             Result = outcome;
+            CompletedInputProvenance = inputProvenance;
             RunSummary = $"{outcome.Rows.Count.ToString("N0", CultureInfo.CurrentCulture)} quant rows across " +
                 $"{outcome.Manifest.PerRunTic.Count.ToString("N0", CultureInfo.CurrentCulture)} runs. " +
                 $"{outcome.IdentifiedRows:N0} identified; {outcome.DeNovoRows:N0} de novo.";
