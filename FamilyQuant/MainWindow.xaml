@@ -18,6 +18,8 @@
                           ToolTip="Builds families from a FASTA or target-decoy database. Save the open project before starting a different database."/>
                 <MenuItem x:Name="MenuItemLoadFQC" Header="Open" Command="Open" InputGestureText="Ctrl+O"
                           ToolTip="Opens a FamilyQuant project or an older Family Cluster File. Save your current changes first."/>
+                <MenuItem x:Name="MenuItemFamilyPanel" Header="Import family panel" Click="MenuItemFamilyPanel_Click" IsEnabled="False"
+                          ToolTip="Import or edit a family panel for the open project."/>
                 <Separator/>
                 <MenuItem x:Name="MenuItemSaveProject" Header="Save" Command="Save" InputGestureText="Ctrl+S" IsEnabled="False"
                           ToolTip="Saves the open project's families and stored quantitation. Disabled until a project is loaded."/>

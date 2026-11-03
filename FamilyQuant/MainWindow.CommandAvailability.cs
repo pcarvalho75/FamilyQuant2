@@ -19,6 +19,7 @@ public partial class MainWindow
         // Quantify retains the previous view's reannotation policy, as before.
         bool reannotate = IsQuantifyVisible ? ExplicitAvailability(MenuItemReanotateSEPro) : project && familyOrHome;
         MenuItemSaveFCF.IsEnabled = MenuItemSaveProject.IsEnabled = project;
+        MenuItemFamilyPanel.IsEnabled = project;
         MenuItemComputeXic.IsEnabled = project && familyOrHome;
         MenuItemClusteringDiagnostic.IsEnabled = CanRunClusteringDiagnostic;
         MenuItemSpectrumComparison.IsEnabled = spectrum;
