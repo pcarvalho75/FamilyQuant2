@@ -80,6 +80,8 @@ public static class WordReportWriter
                         case ReportParagraph paragraph:
                             foreach (string line in Lines(paragraph.Text)) body.Append(Paragraph(line));
                             break;
+                        case ReportTable { SupplementOnly: true }:
+                            break;
                         case ReportTable table:
                             if (table.Columns.Count == 0 || table.Rows.Any(r => r.Count != table.Columns.Count))
                                 throw new ArgumentException("Report tables require columns and equally sized rows.", nameof(document));

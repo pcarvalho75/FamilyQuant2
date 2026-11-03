@@ -12,7 +12,7 @@ public sealed record ReportResultPacket(IReadOnlyList<ReportSection> Sections, I
 public static class ReportCurrentResults
 {
     public static ReportResultPacket Build(AnalyticsData data, QuantManifest manifest, FamilyEnvelopeQuantResult? families,
-        SharedPeptidePolicy policy = SharedPeptidePolicy.FamilyUnique)
+        SharedPeptidePolicy policy = SharedPeptidePolicy.FamilyUnique, FamilyReportThresholdResult? grouping = null)
     {
         var exports = new SortedDictionary<string, string>(StringComparer.Ordinal);
         var results = new List<ReportBlock>(); var quality = new List<ReportBlock>();
@@ -84,16 +84,16 @@ public static class ReportCurrentResults
         if (world != null)
         {
             string csv = world.BuildCsv();
-            quality.Add(Export("quality-family-world", "Family-world support and rates", "family_world_rates.csv", csv,
+            quality.Add(ReportWordMembership.FilterWorld(Export("quality-family-world", "Family-world support and rates", "family_world_rates.csv", csv,
                 "Decoy ratio is decoy signal divided by credited signal. Right rate is correct known credits divided by known credits and remains unavailable below the stored evidence floor.",
                 "family", "decoy_rate", "known_credited", "known_credited_true", "right_rate", "evidence")
-                with { Columns = new[] { "Family", "Decoy ratio", "Known credits", "Correct credits", "Right rate", "Evidence" } });
+                with { Columns = new[] { "Family", "Decoy ratio", "Known credits", "Correct credits", "Right rate", "Evidence" } }, world, grouping));
             quality.Add(new ReportParagraph("quality-world-rules", world.Rules + "\n" + world.KnownAnswerMethod));
             if (world.CompositionRules.Length > 0)
-                gap.Add(Export("database-gap-table", "Stored Database gap components", "database_gap.csv", world.BuildCompositionCsv(),
+                gap.Add(ReportWordMembership.FilterWorld(Export("database-gap-table", "Stored Database gap components", "database_gap.csv", world.BuildCompositionCsv(),
                     "Identified, database de novo and family-world-only signal are distinct. Global shared and unexplained rows are retained; family-world-only signal is not added to database family composition.",
                     "family", "identified_envelope", "database_de_novo_envelope", "family_world_de_novo_envelope", "fraction_of_measured_total")
-                    with { Columns = new[] { "Family or global row", "Identified", "Database de novo", "Family-world only", "Fraction of measured signal" } });
+                    with { Columns = new[] { "Family or global row", "Identified", "Database de novo", "Family-world only", "Fraction of measured signal" } }, world, grouping));
             else gap.Add(new ReportParagraph("gap-table-unavailable", "Database gap components: not computed in this project."));
         }
         else

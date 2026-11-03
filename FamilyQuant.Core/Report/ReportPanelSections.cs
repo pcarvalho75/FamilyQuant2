@@ -17,6 +17,15 @@ public static class ReportPanelSections
     {
         ArgumentNullException.ThrowIfNull(curation);
         ArgumentNullException.ThrowIfNull(manifest);
+        bool currentMap = curation.FamilyPanel == null || PanelAssignmentEvidenceStore.Current(curation) != null;
+        return BuildFromResults(curation, manifest, manifest.FamilyRunShares == null || !currentMap ? null : FamilyReportThreshold.Build(manifest.FamilyRunShares, curation));
+    }
+
+    public static IReadOnlyList<ReportSection> BuildFromResults(FamilyClusterFile curation, QuantManifest manifest,
+        FamilyReportThresholdResult? grouping)
+    {
+        ArgumentNullException.ThrowIfNull(curation);
+        ArgumentNullException.ThrowIfNull(manifest);
         FamilyStudyMembership.RequireCurrent(curation, manifest);
         var observations = FamilyUnobservedStudies.Read(curation, manifest);
         var tables = new Dictionary<int, List<ReportTable>>();
@@ -76,11 +85,15 @@ public static class ReportPanelSections
             if (!target.Any(t => t.Id == "share-summary")) Missing("missing-shares", "Family share availability");
             if (!target.Any(t => t.Id == "protein-counts")) Missing("missing-counts", "Protein count availability");
         }
-        return Build(curation, tables.ToDictionary(p => p.Key, p => (IReadOnlyList<ReportTable>)p.Value));
+        return Build(curation, tables.ToDictionary(p => p.Key, p => (IReadOnlyList<ReportTable>)p.Value), grouping);
     }
 
     public static IReadOnlyList<ReportSection> Build(FamilyClusterFile curation,
         IReadOnlyDictionary<int, IReadOnlyList<ReportTable>>? observed = null)
+        => Build(curation, observed, null);
+
+    public static IReadOnlyList<ReportSection> Build(FamilyClusterFile curation,
+        IReadOnlyDictionary<int, IReadOnlyList<ReportTable>>? observed, FamilyReportThresholdResult? grouping)
     {
         ArgumentNullException.ThrowIfNull(curation);
         var panel = curation.FamilyPanel;
@@ -88,6 +101,7 @@ public static class ReportPanelSections
         var assignments = PanelAssignmentEvidenceStore.Current(curation);
         var familyMap = assignments == null ? null : PanelAssignmentEvidenceStore.BuildFamilyMap(panel, assignments);
         bool subclassCurrent = SubclassAssignment.IsCurrent(curation);
+        var others = grouping?.OtherFamilies.Select(f => f.FamilyUserId).ToHashSet() ?? new HashSet<int>();
         var sections = new List<ReportSection>();
         foreach (var family in panel.Families)
         {
@@ -130,6 +144,9 @@ public static class ReportPanelSections
                 var matchingGroups = mappings.Where(g => g.PanelKeys.Contains(family.Key, StringComparer.Ordinal)).ToArray();
                 int[] ids = matchingGroups.Where(g => !g.HasConflict && string.Equals(g.PanelFamilyKey, family.Key, StringComparison.Ordinal))
                     .Select(g => g.FamilyUserId).OrderBy(i => i).ToArray();
+                if (ids.Any(others.Contains))
+                    blocks.Add(new ReportParagraph(blockPrefix + "others-status",
+                        "Quantitative observations assigned to Others are retained in the companion workbook. Panel text remains reference material."));
                 if (matchingGroups.Any(g => g.HasConflict))
                     blocks.Add(new ReportParagraph(blockPrefix + "ambiguous", "Some User IDs are shared with other or unknown panel families; their observations cannot be assigned to this panel family."));
                 bool hasObserved = false;
@@ -140,7 +157,7 @@ public static class ReportPanelSections
                             foreach (var table in tables)
                             {
                                 blocks.Add(table with { Id = blockPrefix + "observed:" + userId.ToString(System.Globalization.CultureInfo.InvariantCulture)
-                                    + ":" + Uri.EscapeDataString(table.Id) });
+                                    + ":" + Uri.EscapeDataString(table.Id), SupplementOnly = table.SupplementOnly || others.Contains(userId) });
                                 hasObserved = hasUserId = true;
                             }
                     if (!hasUserId) blocks.Add(new ReportParagraph(blockPrefix + "unavailable:" + userId.ToString(CultureInfo.InvariantCulture),
