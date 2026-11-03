@@ -58,6 +58,7 @@ namespace FamilyQuant.Tests
             CoreReuseContractTests();
             SharedTestHelperContracts(workDir);
             CsvTests();
+            ExportProteinNameTests();
             Section("Core operation outcomes, progress and cancellation");
             CoreOperationTests(workDir);
             Section("Display filters and the family counter");

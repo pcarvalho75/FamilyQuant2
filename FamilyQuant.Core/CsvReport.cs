@@ -104,7 +104,7 @@ namespace FamilyQuant
                 .OrderByDescending(f => f.Signal(policy)).ThenBy(f => f.FamilyUserId))
             {
                 csv.AppendLine(string.Join(",", f.FamilyUserId.ToString(CultureInfo.InvariantCulture),
-                    Field(f.Description), Num(f.Signal(policy)), Fraction(f.Signal(policy)), basisField));
+                    Field(ExportProteinName(f.Description)), Num(f.Signal(policy)), Fraction(f.Signal(policy)), basisField));
             }
 
             if (policy == SharedPeptidePolicy.FamilyUnique)
@@ -124,5 +124,14 @@ namespace FamilyQuant
         /// routinely contain commas and quotes, which previously broke the column layout.
         /// </summary>
         private static string Field(string value) => CsvFormatting.AlwaysQuoted(value);
+
+        // Composition names omit the source header's organism section. Keep already-clean user
+        // labels exact, including their whitespace and qualifiers; never rewrite stored evidence.
+        private static string ExportProteinName(string? description)
+        {
+            string text = description ?? string.Empty;
+            int organism = text.IndexOf(" OS=", System.StringComparison.Ordinal);
+            return organism < 0 ? text : text.Substring(0, organism);
+        }
     }
 }
