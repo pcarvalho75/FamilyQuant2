@@ -12,7 +12,8 @@ namespace FamilyQuant.Report;
 public static class ReportPanelSections
 {
     /// <summary>Build sections from the studies stored in the project manifest. Shares are fractions.
-    /// A missing study or family is unavailable, not zero. An ambiguous UserID is not assigned to a panel family.</summary>
+    /// Completed native studies retain explicit no-peptide zeros. Other missing results stay unavailable.
+    /// An ambiguous UserID is not assigned to a panel family.</summary>
     public static IReadOnlyList<ReportSection> BuildFromResults(FamilyClusterFile curation, QuantManifest manifest,
         OperationContext? operation = null, int sectionOffset = 0, int? sectionTotal = null)
     {
@@ -29,6 +30,7 @@ public static class ReportPanelSections
         ArgumentNullException.ThrowIfNull(curation);
         ArgumentNullException.ThrowIfNull(manifest);
         FamilyStudyMembership.RequireCurrent(curation, manifest);
+        var observations = FamilyUnobservedStudies.Read(curation, manifest);
         var tables = new Dictionary<int, List<ReportTable>>();
         List<ReportTable> For(int id)
         {
@@ -44,10 +46,14 @@ public static class ReportPanelSections
             string basis = "Signal uses observed identified envelope plus reference-calibrated de novo envelope. Shared-peptide policy: "
                 + manifest.FamilyRunShares.Policy.DisplayName() + ". " + (string.IsNullOrWhiteSpace(manifest.FamilyRunShares.Method)
                     ? "Method not recorded." : manifest.FamilyRunShares.Method);
-            foreach (var family in manifest.FamilyRunShares.Families)
+            foreach (var family in observations.Shares)
             {
                 string id = Integer(family.FamilyUserId);
                 var target = For(family.FamilyUserId);
+                if (family.NoPeptideObserved)
+                    target.Add(new ReportTable("observation-status", "Family observation status", new[] { "User ID", "Status" },
+                        new[] { new[] { id, FamilyUnobservedStudies.Status } },
+                        "No peptide was assigned to this family in the completed stored study. Zero assigned signal does not establish biological absence; undefined shares and statistics remain unavailable."));
                 target.Add(new ReportTable("share-summary", "Observed family share",
                     new[] { "User ID", "Available runs", "Mean assigned share", "Sample SD", "CV" },
                     new[] { new[] { id, Integer(family.AvailableRunCount), Number(family.MeanShare),
@@ -64,7 +70,7 @@ public static class ReportPanelSections
         {
             if (manifest.FamilyProteinCounts.Families.GroupBy(f => f.FamilyUserId).Any(g => g.Count() > 1))
                 throw new InvalidOperationException("The stored protein count result repeats a User ID.");
-            foreach (var family in manifest.FamilyProteinCounts.Families)
+            foreach (var family in observations.ProteinCounts)
                 For(family.FamilyUserId).Add(new ReportTable("protein-counts", "Observed database protein counts",
                     new[] { "User ID", "Greedy protein count", "Proteins with unique peptides", "Observed peptides", "Unexplained peptides" },
                     new[] { new[] { Integer(family.FamilyUserId), Integer(family.GreedyProteinCount),

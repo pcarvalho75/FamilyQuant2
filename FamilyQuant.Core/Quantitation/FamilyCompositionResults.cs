@@ -40,6 +40,10 @@ namespace FamilyQuant
     public sealed class FamilyRunShareSummary
     {
         public int FamilyUserId { get; set; }
+        /// <summary>The completed native study found no assigned peptide for this family. This does
+        /// not establish biological absence; unavailable denominators and undefined CV remain null.</summary>
+        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]
+        public bool NoPeptideObserved { get; set; }
         public List<FamilyRunShare> Runs { get; set; } = new();
         public int AvailableRunCount { get; set; }
         public double? MeanShare { get; set; }

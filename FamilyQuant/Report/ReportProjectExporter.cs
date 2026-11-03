@@ -31,6 +31,7 @@ public static class ReportProjectExporter
             + " of 8: " + title, item, 8);
         operation?.Report("report-data", "Preparing stored report data", 0, 8);
         Data(1, "Analyzing stored quantitation");
+        manifest = FamilyUnobservedStudies.View(curation, manifest);
         var data = analyticsData ?? AnalyticsBuilder.Build(rows, manifest.PerRunTic);
         if (analyticsData == null && manifest.DerivedFractions.Count > 0) NativeQuantFractions.ApplyDetectedToFractions(data.Fractions, data.Grouped, manifest.DerivedFractions);
         var options = new Homology.HomologyOptions();
