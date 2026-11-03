@@ -33,7 +33,12 @@ public sealed record ReportTable(string Id, string Title, IReadOnlyList<string> 
     /// <summary>Optional native export behind rounded display columns. Only the workbook consumes
     /// this recipe; Word and the existing CSV exports retain their original literal cells.</summary>
     [JsonIgnore] public ReportSupplementSource? SupplementSource { get; init; }
+    /// <summary>Structured list cells, retained separately from the unchanged native CSV text.</summary>
+    [JsonIgnore] public IReadOnlyList<ReportListColumn> ListColumns { get; init; } = Array.Empty<ReportListColumn>();
 }
+
+public sealed record ReportListColumn(int ColumnIndex, string Name, IReadOnlyList<IReadOnlyList<string>> Items,
+    IReadOnlyList<string>? RowKeys = null);
 
 public sealed record ReportSupplementSource(string Csv, IReadOnlyList<string> Columns);
 

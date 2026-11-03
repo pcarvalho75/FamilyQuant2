@@ -125,6 +125,8 @@ public static class ReportStoredResults
             exports.Add(ReportFindings.CsvFile, findings.Csv);
             final.Add(findings.Section);
         }
+        if (manifest.EffectivePanelFamilies is { } effective)
+            foreach (var export in ReportEffectivePanelExports.Build(effective)) exports.Add(export.Key, export.Value);
         return new(final, exports);
     }
 }

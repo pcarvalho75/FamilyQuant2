@@ -42,6 +42,7 @@ public static class FamilyStudyMembership
         if (manifest.FamilySubclassParts != null) yield return ("Subclass parts", manifest.FamilySubclassParts);
         if (manifest.FamilyDomainParts != null) yield return ("Domain and product parts", manifest.FamilyDomainParts);
         if (manifest.FamilyPeptideLocalization != null) yield return ("Peptide localization", manifest.FamilyPeptideLocalization);
+        if (manifest.EffectivePanelFamilies != null) yield return ("Effective panel families", manifest.EffectivePanelFamilies);
     }
 
     public static string? Problem(FamilyClusterFile? curation, QuantManifest? manifest)
@@ -56,6 +57,8 @@ public static class FamilyStudyMembership
             if (string.IsNullOrWhiteSpace(item.Study.MembershipSha256)) return item.Name + ": " + UnverifiedMessage;
             if (!string.Equals(current, item.Study.MembershipSha256, StringComparison.OrdinalIgnoreCase)) return item.Name + ": " + ChangedMessage;
         }
+        if (manifest.EffectivePanelFamilies is { } effective && EffectivePanelFamilyStudy.Problem(curation, effective) is string effectiveProblem)
+            return effectiveProblem;
         if (manifest.FamilySensitivity is { } sensitivity)
         {
             if (string.IsNullOrWhiteSpace(sensitivity.CurationFingerprint)) return "Sensitivity: " + UnverifiedMessage;
