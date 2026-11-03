@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace FamilyQuant.Homology
 {
@@ -61,7 +62,7 @@ namespace FamilyQuant.Homology
     {
         internal HomologyResult(string peptide, string normalizedPeptide, string? rejection,
             IReadOnlyList<HomologyHit> hits, bool decoysSuppressed, bool targetsSuppressedByDecoyCompetition,
-            int candidatesExamined, bool usedSeedIndex)
+            int candidatesExamined, bool usedSeedIndex, HomologyScienceAudit? scienceAudit = null)
         {
             Peptide = peptide;
             NormalizedPeptide = normalizedPeptide;
@@ -71,6 +72,7 @@ namespace FamilyQuant.Homology
             TargetsSuppressedByDecoyCompetition = targetsSuppressedByDecoyCompetition;
             CandidatesExamined = candidatesExamined;
             UsedSeedIndex = usedSeedIndex;
+            ScienceAudit = scienceAudit;
         }
 
         /// <summary>The query as it was supplied.</summary>
@@ -110,6 +112,9 @@ namespace FamilyQuant.Homology
 
         /// <summary>Whether this particular query went through the seed index.</summary>
         public bool UsedSeedIndex { get; }
+
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public HomologyScienceAudit? ScienceAudit { get; }
     }
 
     /// <summary>
