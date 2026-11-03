@@ -3,8 +3,8 @@
 `ReferencePanelFetcher.FetchAsync` uses UniProt's `uniprotkb/stream` endpoint. It sorts and
 case-folds the families found in the file, combines the previous `family:"..."` clauses with
 OR, and splits when adding a clause would take the complete escaped URL above 7,000
-characters or exceed UniProt's 100-condition query limit. No family, taxon or protein list is built into the rule. An empty selection makes
-no requests.
+characters or exceed UniProt's 100-condition query limit. No family, taxon or protein list
+is built into the rule. An empty selection makes no requests.
 
 The requested fields are unchanged from the paged route. Every entry goes through the same
 `EvidenceFetcher.Parse` and exact, case-insensitive family-membership filter. Text-search
@@ -12,8 +12,8 @@ matches without the requested membership are dropped. Entries remain unique and 
 accession; similarity prose is dropped and tissue specificity is kept, as before.
 The stream requests gzip transfer encoding and decompresses it before the same JSON parser.
 The decoder also accepts a gzip file whose reply omits the transfer-encoding header, and
-gzip transfer encoding wrapped around a gzip file. Plain JSON remains supported. Invalid compression or an unsupported encoding fails without
-publishing anything.
+gzip transfer encoding wrapped around a gzip file. Plain JSON remains supported. Invalid
+compression or an unsupported encoding fails without publishing anything.
 
 Stream replies do not supply `X-Total-Results`. Before each stream, a `search` request with
 `size=0`, `fields=accession` and the identical query supplies the completeness count. A missing
@@ -72,3 +72,30 @@ protein evidence and its provenance timestamps are hashed before and after both 
 A successful comparison saves `streamed.fqproj` and reopens it offline, comparing the panel
 and protein evidence again. The original input hash must remain unchanged. These checks do
 not claim new RAW extraction or biological accuracy.
+
+## Full-source timing and parity record
+
+The native comparison used the complete source FCF with SHA256
+`5A30B67FD0FA7B0605BEEFB097FD70DDDB3622B733397E12011AB3B3BB655E13`,
+UniProt release `2026_03`, and every one of its 3,605 discovered families. Both stream
+transports produced the same 308,576 reviewed entries as the complete paged route. Each
+entry's full sequence and evidence were compared by serialized SHA256, with zero mismatches.
+
+| Phase | Measured seconds | Actual HTTP requests |
+|---|---:|---:|
+| Protein evidence | 128.4357324 | 64 |
+| Original paged panel | 3545.5173167 | 3933 |
+| Plain streamed panel | 1139.8176801 | 74 |
+| Gzip streamed panel | 774.6166528 | 74 |
+
+Each stream route used 37 streams and 37 zero-row count checks. The complete paged capture
+had zero cache hits. The gzip measurement was a fresh network fetch compared with that
+saved complete baseline; its reported paged time is the original measurement. These are
+observed fetch times with parsing and native capture, rather than a replay timed as network
+retrieval. Failed preliminary attempts are separate diagnostics.
+
+Artifacts are in `D:/FamilyQuant-data/out-assay/j17-live-02`: `baseline-validation.json`
+retains the original plain/paged comparison, `validation.json` records the refreshed
+comparison, and `entry-parity.csv` records every compared accession/hash. The panel JSON,
+packet manifests and saved project files retain the corresponding source data. Protein
+evidence and its original provenance timestamps are hashed unchanged across the routes.
