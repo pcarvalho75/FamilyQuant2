@@ -498,3 +498,9 @@ Paulo agreed these at the restart, 2026-11-01.
 | J44b | J44 reviewed and merged | L | 0.2 | 🟢 | K7, K14 | Approved; gate green | OP | | 0 | 0 | |
 | J45 | File > Export > Interpretation input: one plain file a user can give to an AI assistant of their choice (report details, the panel table as entered, the result tables, the analysis choices, a neutral instruction to quote numbers only from the tables); the program never calls an LLM (Paulo, 11-03) | L | 0.5 | 🟢 | | Deterministic export; its test; D21 wording | OP | | 0 | 0 | |
 
+### W5 Ana's report delivered
+
+| ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
+|---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
+| J44c | Summary of findings names families with the same shared name helper as the rest of the report (J12: names stop at the header's OS= field, no raw OS/OX/GN fields), and the long family sentence is split so each family reads on its own | L | 0.3 | 🟢 | K14 | Fixture red then green; the real export shows no OS=/OX=/GN= in the section; numbers unchanged (K7 table still matches) | OP | | 0 | 0 | |
+
