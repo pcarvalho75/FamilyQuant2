@@ -262,10 +262,17 @@ Finished steps, moved here from docs/ROADMAP.md. The board shows them as green.
 | J5b | Toxin count per family: the fewest database proteins that explain the family's peptides, and the proteins with a peptide of their own; definitions on screen and in exports | M | 1.5 | 🟢 | J6b, J7a | Fixture with a known minimal set | FL | | 0 | 0 | |
 | J5d | Composition charts: family shares with run-to-run error bars, and subclasses stacked within each family. Every figure is drawn by the program on screen and exported for the report | M | 1.5 | 🟢 | J6b | Native PNG in both themes and the Light export | LK | | 0 | 0 | |
 | J5f | Abundance against diversity: each family as a point, its share of the venom against its toxin count, so the two are never confused | M | 1.5 | 🟢 | J6b | Native PNG in both themes and the Light export; values equal the composition export | LK | | 0 | 0 | |
+| J5e | Sensitivity table: family shares under the three shared-peptide policies and two de novo cutoffs | M | 1.5 | 🟢 | J6b | Program table; stored results reused, none invented | AS | | 0 | 0 | |
 
 ### W3 Subclasses
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
 | J3b | Credit each peptide to the deepest level it is unique to: a subclass when only that subclass holds it, else "family, subclass not resolved"; each family's parts sum to the family | H | 2 | 🟢 | J5d, J6b, J7a | Closure test bit for bit; family totals and golden unchanged | FL | | 0 | 0 | |
+
+### W7 The analysis
+
+| ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
+|---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
+| J12 | Protein names in the new report and its supplement stop at the header's organism field (" OS="), as the screens do; the frozen 1.5-compatible exports keep their bytes | L | 0.5 | 🟢 | J6b | One shared name helper used by the report, supplement and audit CSV; golden stays 4/0/0 | AS | | 0 | 0 | |
 

@@ -1,7 +1,10 @@
 <UserControl x:Class="FamilyQuant.FamilySensitivityControl"
  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+ xmlns:local="clr-namespace:FamilyQuant"
  Background="{DynamicResource CanvasBrush}" Foreground="{DynamicResource TextBrush}">
+ <UserControl.Template>
+ <ControlTemplate TargetType="{x:Type local:FamilySensitivityControl}">
  <StackPanel>
   <TextBlock Text="{Binding Explanation}" TextWrapping="Wrap" Foreground="{DynamicResource MutedBrush}" Margin="0,0,0,10"/>
   <WrapPanel Margin="0,0,0,10">
@@ -27,4 +30,6 @@
    </DataGrid.Columns>
   </DataGrid>
  </StackPanel>
+ </ControlTemplate>
+ </UserControl.Template>
 </UserControl>

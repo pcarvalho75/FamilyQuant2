@@ -89,15 +89,25 @@ internal static partial class Program
             foreach (var theme in new[] { Themes.AppTheme.Dark, Themes.AppTheme.Light })
             {
                 Themes.ThemeManager.Apply(theme); PumpDispatcher();
-                var grid = (System.Windows.Controls.DataGrid)control.FindName("SensitivityGrid");
+                var grid = (System.Windows.Controls.DataGrid)control.Template.FindName("SensitivityGrid", control);
                 Check("J5e: " + theme + " native table reads the persisted six policy conditions", grid.Items.Count == 6 && model.Rows.All(r => r.First != "Unavailable" && r.Second != "Unavailable"));
+                Check("J5e: " + theme + " sensitivity actions belong to the section template", new[] { "CalculateCurrent", "LoadComparison", "ExportTable" }
+                    .Select(name => (System.Windows.Controls.Button)control.Template.FindName(name, control)).All(button => ReferenceEquals(button.TemplatedParent, control)));
             }
             var comparisonSource = Source(90);
             string comparisonProject = Path.Combine(output, "computed-comparison.fqproj");
             ProjectStore.WriteFqproj(comparisonProject, file, rows.Take(2), comparisonSource);
             var host = AppOperationHost.For(control);
+            var calculate = (System.Windows.Controls.Button)control.Template.FindName("CalculateCurrent", control);
+            FinishBusyTask(AppOperationHost.OnUi(control, () =>
+            {
+                calculate.RaiseEvent(new System.Windows.RoutedEventArgs(System.Windows.Controls.Button.ClickEvent));
+                return System.Threading.Tasks.Task.CompletedTask;
+            }));
+            FinishBusyOperation(host);
+            Check("J5e: the section template calculate action still publishes a current study", dirty == 1 && manifest.FamilySensitivity?.Variants.Count == 1);
             FinishBusyTask(AppOperationHost.OnUi(control, () => model.CalculateAsync(comparisonProject, host)));
-            Check("J5e: native comparison stores actual project provenance and marks the project changed", dirty == 1 && model.HasData
+            Check("J5e: native comparison stores actual project provenance and marks the project changed", dirty == 2 && model.HasData
                 && manifest.FamilySensitivity?.Variants[1].SourceSha256 == TestFileHash.Upper(comparisonProject));
             string exactCsv = model.BuildCsv(); var previous = manifest.FamilySensitivity;
             var wrong = Source(90); wrong.Ppm = 99;
@@ -105,7 +115,7 @@ internal static partial class Program
             ProjectStore.WriteFqproj(wrongProject, file, rows, wrong);
             FinishBusyTask(AppOperationHost.OnUi(control, () => model.CalculateAsync(wrongProject, host)));
             Check("J5e: an incompatible native comparison retains every prior value and dirty count", ReferenceEquals(previous, manifest.FamilySensitivity)
-                && exactCsv == model.BuildCsv() && dirty == 1);
+                && exactCsv == model.BuildCsv() && dirty == 2);
             var edited = FamilyClusterFile.FromJsonText(file.ToJsonText()); edited.MyExtendedFastaItems[0].UserID = 9;
             var stale = new FamilySensitivityViewModel(rows, manifest, edited, mapping, () => { });
             Check("J5e: the table hides a study stale after regrouping", !stale.HasData && stale.Status.Contains("grouping", StringComparison.Ordinal));
