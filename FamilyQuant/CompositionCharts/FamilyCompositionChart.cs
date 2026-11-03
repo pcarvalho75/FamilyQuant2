@@ -7,13 +7,19 @@ using System.Windows.Media;
 namespace FamilyQuant;
 
 /// <summary>Family means with sample SD whiskers supplied by the quantitation result.</summary>
-public sealed class FamilyCompositionChart : CompositionDrawingBase
+public sealed class FamilyCompositionChart : CompositionDrawingBase, IFigureDetails
 {
     private readonly FamilyCompositionData data;
     public FamilyCompositionData Data => data;
-    public IReadOnlyList<FamilyCompositionValue> Rows => data.Families;
+    public IReadOnlyList<FamilyCompositionValue> Rows { get; }
+    public string DetailNotice => Rows.Count < data.Families.Count ? FigureLayout.FamilyNotice(Rows.Count, data.Families.Count) : "";
+    public static double RecommendedHeight(FamilyCompositionData data) => Math.Max(540, 190 + FigureLayout.Rows(data, _ => 52).Count * 52);
     public double AxisMinimum => Rows.Count == 0 ? 0 : Math.Min(0, Math.Floor(Rows.Min(r => r.MeanPercent - (r.SdPercent ?? 0)) / 10) * 10);
-    public FamilyCompositionChart(FamilyCompositionData data) => this.data = data ?? throw new ArgumentNullException(nameof(data));
+    public FamilyCompositionChart(FamilyCompositionData data)
+    {
+        this.data = data ?? throw new ArgumentNullException(nameof(data));
+        Rows = FigureLayout.Rows(data, _ => 52);
+    }
 
     protected override void OnRender(DrawingContext dc)
     {
@@ -49,6 +55,7 @@ public sealed class FamilyCompositionChart : CompositionDrawingBase
         string note = data.IsMeanOfRuns ? "Bars: mean share. Whiskers: +/- 1 SD across runs; no whisker when SD is unavailable."
             : "Bars: pooled credited signal shares. Run-to-run uncertainty is not shown on this basis.";
         if (data.UnavailableFamilies.Count > 0) note += " Unavailable shares: " + string.Join(", ", data.UnavailableFamilies) + ".";
+        if (DetailNotice.Length > 0) Label(dc, DetailNotice, 26, ActualHeight - 46, ActualWidth - 52, 11, brush: palette.Muted);
         Label(dc, note,
             26, ActualHeight - 25, ActualWidth - 52, 11, brush: palette.Muted);
     }
