@@ -67,9 +67,24 @@ internal static partial class Program
             auditPassed = PanelEvidenceAuditCommand(new[] { "--panel-evidence-audit", project, draft,
                 "\"first scope\", \"second scope\"", output }) == 0;
         }
-        catch (InvalidOperationException) { }
+        catch (InvalidOperationException ex) { Console.WriteLine("J42 audit refusal: " + ex.Message); }
         Check("J42 the native two-phrase audit accepts its own current panel references", auditPassed
             && File.Exists(Path.Combine(output, "leave-one-out.csv")) && File.Exists(Path.Combine(output, "leave-one-out.json")));
+
+        int previousFailures = failed, commandWithPriorFailure = -1, auditFailures = 0;
+        string priorFailureOutput = Path.Combine(root, "audit-with-prior-failure");
+        failed++; // Simulate an unrelated earlier suite failure without changing any audit input.
+        try
+        {
+            commandWithPriorFailure = PanelEvidenceAuditCommand(new[] { "--panel-evidence-audit", project, draft,
+                "\"first scope\", \"second scope\"", priorFailureOutput });
+            auditFailures = failed - previousFailures - 1;
+        }
+        finally { failed--; } // Remove only the synthetic failure; retain any real audit failures.
+        Check("J42 a valid audit return is independent of earlier suite failures", commandWithPriorFailure == 0
+            && auditFailures == 0 && File.Exists(Path.Combine(priorFailureOutput, "leave-one-out.csv"))
+            && File.Exists(Path.Combine(priorFailureOutput, "leave-one-out.json")),
+            "prior=" + (previousFailures + 1) + "; audit failures=" + auditFailures + "; returned=" + commandWithPriorFailure);
 
         var method = typeof(EvidenceApply).GetMethod("ValidateSearch", BindingFlags.NonPublic | BindingFlags.Static)!;
         bool Validate(NeighbourSearch candidate, IReadOnlyList<NeighbourReference>? references, bool allowPanel = true)
