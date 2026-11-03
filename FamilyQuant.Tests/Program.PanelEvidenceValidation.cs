@@ -82,6 +82,7 @@ internal static partial class Program
 
     private static int PanelEvidenceAuditCommand(string[] args)
     {
+        int initialPassed = passed, initialFailed = failed, initialSkipped = skipped;
         if (args.Length < 5 || args.Length > 7)
             throw new ArgumentException("--panel-evidence-audit <program-project> <draft.fcf> <scope> <new-output-directory> [draft-label-map.json] [link-choices.json]");
         if (Directory.Exists(args[4])) throw new IOException("Choose a new output directory.");
@@ -128,7 +129,7 @@ internal static partial class Program
             + " scorable; " + loo.Wrong.ToString(CultureInfo.InvariantCulture) + " wrong; " + loo.Abstained.ToString(CultureInfo.InvariantCulture)
             + " abstained; " + loo.Unscorable.ToString(CultureInfo.InvariantCulture) + " unresolved expectations; "
             + differences.Count.ToString(CultureInfo.InvariantCulture) + " draft differences.");
-        Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
-        return failed == 0 ? 0 : 1;
+        Console.WriteLine($"===== {passed - initialPassed} passed, {failed - initialFailed} failed, {skipped - initialSkipped} skipped =====");
+        return failed == initialFailed ? 0 : 1;
     }
 }

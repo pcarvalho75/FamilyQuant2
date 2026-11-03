@@ -88,9 +88,25 @@ internal static partial class Program
             .All(id => ids.Contains("findings:" + id)), string.Join(", ", ids));
         var headline = ReportCsvTable.Build("h", "h", ReportStudyExports.Headline(input.Grouping, input.Counts, input.Labels), "", "family", "status", "mean_pct", "sample_sd_pct", "greedy_protein_estimate");
         var listed = headline.Rows.Where(r => r[1] == "Listed").ToList();
-        Check("J44 listed families follow the headline order with its exact share, SD and protein count", listed.Count == 2
-            && Text("listed").Contains("Alpha group " + listed[0][2] + "% (SD " + listed[0][3] + "; " + listed[0][4] + " proteins); Beta group " + listed[1][2] + "% (SD " + listed[1][3] + "; " + listed[1][4] + " protein)", StringComparison.Ordinal)
-            && Text("listed").StartsWith("2 families are above the report threshold of 0.1%", StringComparison.Ordinal), Text("listed"));
+        Check("J44 listed families follow the headline order with its exact share, SD and protein count, one paragraph each", listed.Count == 2
+            && Text("listed:1") == "Alpha group: " + listed[0][2] + "% (SD " + listed[0][3] + "; " + listed[0][4] + " proteins)."
+            && Text("listed:2") == "Beta group: " + listed[1][2] + "% (SD " + listed[1][3] + "; " + listed[1][4] + " protein)."
+            && Array.IndexOf(ids, "findings:listed") + 1 == Array.IndexOf(ids, "findings:listed:1") && Array.IndexOf(ids, "findings:listed:1") + 1 == Array.IndexOf(ids, "findings:listed:2")
+            && Text("listed").StartsWith("2 families are above the report threshold of 0.1%", StringComparison.Ordinal) && Text("listed").EndsWith(":", StringComparison.Ordinal),
+            Text("listed") + " | " + Text("listed:1") + " | " + Text("listed:2"));
+        var headered = input with { Labels = new Dictionary<int, string>(input.Labels)
+            { [2] = "Beta group OS=Sample source OX=12345 GN=XYZ1 PE=2 SV=1", [5] = "Outside group OS=Other source OX=678 PE=1 SV=2" } };
+        var headeredSection = ReportFindings.Build(headered);
+        var headeredText = headeredSection.Section.Blocks.OfType<ReportParagraph>().Select(p => p.Text).ToList();
+        Check("J44c family names stop before the header's OS= field, in the text and in the numbers table (J12 helper)",
+            headeredText.Concat(headeredSection.Section.Blocks.OfType<ReportTable>().Single().Rows.Select(r => r[1]))
+                .All(t => !Regex.IsMatch(t, @"\b(?:OS|OX|GN|PE|SV)=", RegexOptions.CultureInvariant))
+            && headeredText.Contains("Beta group: " + listed[1][2] + "% (SD " + listed[1][3] + "; " + listed[1][4] + " protein)."),
+            string.Join(" | ", headeredText.Where(t => t.Contains('=', StringComparison.Ordinal))));
+        var headeredValues = ReportCsvTable.Build("c", "c", headeredSection.Csv, "", "value").Rows.Select(r => r[0]).ToHashSet(StringComparer.Ordinal);
+        var headeredPrinted = headeredText.SelectMany(t => Regex.Matches(t.Replace("run_a", "").Replace("run_b", ""), @"\d+(\.\d+)?").Select(m => m.Value)).ToList();
+        Check("J44c no digit from a header field is printed; every printed number is still a supplement row",
+            headeredPrinted.All(headeredValues.Contains), string.Join(", ", headeredPrinted.Where(v => !headeredValues.Contains(v))));
         Check("J44 replicate agreement is the range of the listed families' CVs", Text("replicates") == "Across these 2 families, the coefficient of variation of the per-run shares ranges from 2% to 4% over 2 runs.", Text("replicates"));
         string othersShare = (100 * input.Grouping.OthersMeanShare!.Value).ToString("G6", CultureInfo.InvariantCulture);
         Check("J44 Others gives disjoint reason counts that add up to the total, and the stored Others share", othersShare == "0.4"
@@ -128,7 +144,8 @@ internal static partial class Program
             Families = input.Shares.Families.Select(f => new FamilyRunShareSummary { FamilyUserId = f.FamilyUserId, MeanShare = f.MeanShare, AvailableRunCount = 1, Runs = f.Runs, NoPeptideObserved = f.NoPeptideObserved }).ToList() },
             new FamilyClusterFile { FamilyPanel = input.Panel }, new Dictionary<int, IReadOnlyList<string>> { [1] = new[] { "a" }, [2] = new[] { "b" } }) };
         Check("J44 no CV, no replicate sentence; no SD, the line says so", !ReportFindings.Build(noCv).Section.Blocks.Any(b => b.Id == "findings:replicates")
-            && ReportFindings.Build(noCv).Section.Blocks.OfType<ReportParagraph>().Single(p => p.Id == "findings:listed").Text.Contains("SD unavailable", StringComparison.Ordinal));
+            && ReportFindings.Build(noCv).Section.Blocks.OfType<ReportParagraph>().Where(p => p.Id.StartsWith("findings:listed:", StringComparison.Ordinal))
+                .All(p => p.Text.Contains("(SD unavailable; ", StringComparison.Ordinal)));
         var previous = Thread.CurrentThread.CurrentCulture;
         try
         {
@@ -144,5 +161,25 @@ internal static partial class Program
         try { order = string.Join(",", ReportDocumentBuilder.Build(new FamilyClusterFile(), new QuantManifest()).Sections.Select(s => s.Id)); }
         catch (Exception ex) { order = ex.GetType().Name + ": " + ex.Message; }
         Check("J44 the base document places Summary of findings right after Summary", order.Contains(ReportSectionIds.Summary + "," + ReportSectionIds.Findings + ",", StringComparison.Ordinal), order);
+
+        // J44d: the numbers table becomes a workbook reference paragraph; Word keeps it on the page of the last sentence.
+        var baseDocument = ReportDocumentBuilder.Build(new FamilyClusterFile(), new QuantManifest());
+        var laidOut = ReportSupplementLayout.Apply(baseDocument with { Sections = baseDocument.Sections.Select(s => s.Id == ReportSectionIds.Findings ? section : s).ToList() },
+            new Dictionary<string, string> { [ReportFindings.CsvFile] = csv });
+        using var word = DocumentFormat.OpenXml.Packaging.WordprocessingDocument.Open(new System.IO.MemoryStream(WordReportWriter.BuildBytes(laidOut.Document)), false);
+        var written = word.MainDocumentPart!.Document!.Body!.Elements<DocumentFormat.OpenXml.Wordprocessing.Paragraph>().ToList();
+        int last = written.FindIndex(p => p.InnerText == Text("choices"));
+        bool Keeps(DocumentFormat.OpenXml.Wordprocessing.Paragraph p) => p.ParagraphProperties?.KeepNext != null && p.ParagraphProperties.KeepLines != null;
+        Check("J44d the last summary sentence keeps with the workbook reference that follows it", last >= 0 && last + 1 < written.Count && Keeps(written[last])
+            && written[last + 1].InnerText.StartsWith("Numbers in the summary of findings. See the companion supplement workbook, sheet '", StringComparison.Ordinal),
+            last < 0 ? "sentence not found" : written[Math.Min(last + 1, written.Count - 1)].InnerText);
+        string? After(DocumentFormat.OpenXml.Wordprocessing.Paragraph p) => p.ParagraphProperties?.SpacingBetweenLines?.After?.Value;
+        var first = written.Single(p => p.InnerText == Text("listed:1"));
+        var lastListed = written.Single(p => p.InnerText == Text("listed:2"));
+        Check("J44d the listed families read as one compact list: no space after each item but the last", After(first) == "0" && After(lastListed) == null,
+            "first " + After(first) + ", last " + After(lastListed));
+        var statements = section.Blocks.OfType<ReportParagraph>().Where(p => p.Id is not ("findings:choices" or "findings:listed:1")).Select(p => p.Text).ToHashSet(StringComparer.Ordinal);
+        Check("J44d no other summary paragraph changes its properties, and the text is unchanged", written.Where(p => statements.Contains(p.InnerText)).Count() == statements.Count
+            && written.Where(p => statements.Contains(p.InnerText)).All(p => !Keeps(p) && After(p) == null) && Text("choices") == "Analysis choices in force: evidence scope phrases \"term one\", \"term two\"; 2 confirmed panel links (notes: user note); report threshold 0.1%; de novo source \"source one\" with score at least 80.");
     }
 }

@@ -78,6 +78,34 @@ under the former section headings, each call keeping the `EnsureApplication()` t
 (`AddWithApplication`). A run without `--shard` executes exactly the former calls in the former order and
 prints the same headings. A lane adds a check as before, by adding one `suite.Add(...)` line in place.
 
+`--test-report-command [fresh-output]` also runs once in `DefaultSuite`, with a unique temporary output
+folder. It exercises the real File > Export report command, Word/workbook publication, selection,
+cancellation and rollback without RAW data. Its flag registration alone previously left it outside both
+ordinary quick and full gates, so J41's two list sheets and empty-list references went unchecked there.
+The fixture now compares every completed native sheet/cell and pins those two sheet names and references.
+
+`--test-suite-command-coverage [output.tsv] [--negative-control]` audits the command registry against
+`DefaultSuite` without executing command handlers or suite bodies. It also runs once in `DefaultSuite`.
+Its deterministic listing includes every registered flag, its declared fixture methods or individual
+exclusion reason, compiled fixture entry-point references and any routing problem. With an output path,
+the exact suite-method inventory is also written to `<output.tsv>.suite-fixtures.txt`.
+
+Every flag requires a literal entry in `SuiteCommandInventory.cs`; there is no flag-prefix or wildcard
+exemption. A covered entry names exact method signatures present in the compiled suite and reached from
+the command handler. Missing/changed fixture routes, new undeclared flags, duplicate declarations, empty
+reasons and stale exclusions fail. Shared assertion/bootstrap helpers cannot prove coverage, and a
+covered subfixture cannot conceal another missing assertion fixture. This checks static enrollment,
+not whether every assertion or data-dependent branch ran with a particular invocation.
+
+Exclusions distinguish selected-data/live checks, artifact/proof producers, and existing focused-only
+enrollment gaps. Each gap is named explicitly; it is not reported as gated coverage. K8b does not silently
+add those unrelated packs to this release's execution set. To enroll one, add its fixture to `DefaultSuite`
+and replace its exclusion with the exact fixture signatures from the audit. For a new no-RAW test, add
+the suite call and covered declaration, or supply an explicit per-command reason for keeping it opt-in.
+The negative-control switch adds one registered synthetic test without a suite call or declaration and
+must exit nonzero; its handler is never invoked. Ordinary checks also plant missing/partial routes and
+invalid exclusions to verify those failures.
+
 `--shard k/N` (0 <= k < N) may appear anywhere in the arguments. It is removed, with its value, after the dot
 normalization and both command dispatches and before any positional data slot is read, so
 `. . <deNovoRoot> <acquisitionRoot> --shard 2/6` and `--shard 2/6` both work. Shard k runs the entries whose
