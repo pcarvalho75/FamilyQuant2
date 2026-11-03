@@ -123,8 +123,7 @@ Compute took 37 to 54 minutes on Ana's project with the RAW cache warm, silent f
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
 | J43 | With a panel in use, the headline and composition figures use the per-panel-family totals (D40, B): before and after shown on a real project with several families in one panel family, science review, the old unit kept in the supplement | M | 1 | 🟢 | | Red then green on a multi-family fixture; before/after table on a real project; reviewed | FL | | 0 | 0 | |
 | J40 | Help explains what 2.1 adds: the progress lines, the cached reopen, "no peptide observed", the scope phrases, link notes | L | 0.5 | 🟢 | | A test reads each menu name in the text from the live menu | T2 | | 0 | 0 | |
-| J46c | J46 reviewed and merged | L | 0.2 | 🟢 | | Approved; gate green | T2 | | 0 | 0 | |
-| J46d | The AI draft uses J45's interpretation input instead of J46's stand-in seam, and its number check reads J45's table cells and column headings directly (J45 exposes them beside the Markdown) instead of parsing Markdown (FQTerra2's observation, 11-03 09:49) | L | 0.3 | J45, J46c | | The sent text equals J45's export byte for byte; number-check fixtures green against J45's cells | T2 | | 0 | 0 | |
+| J46d | The AI draft uses J45's interpretation input instead of J46's stand-in seam, and its number check reads J45's table cells and column headings directly (J45 exposes them beside the Markdown) instead of parsing Markdown (FQTerra2's observation, 11-03 09:49) | L | 0.3 | J45 | | The sent text equals J45's export byte for byte; number-check fixtures green against J45's cells | T2 | | 0 | 0 | |
 
 ## Critical path
 
