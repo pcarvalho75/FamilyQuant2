@@ -107,7 +107,8 @@ public static class ReportFindings
             return value;
         }
         void Say(string id, string text) => blocks.Add(new ReportParagraph("findings:" + id, text));
-        string Name(int userId) => input.Labels.TryGetValue(userId, out string? label) ? label : Integer(userId);
+        // Protein-name text as the rest of the report prints it: the header's OS= field and what follows are left out (J12).
+        string Name(int userId) => input.Labels.TryGetValue(userId, out string? label) ? ProteinNameFormatting.ForNewOutput(label) : Integer(userId);
         var grouping = input.Grouping;
         string threshold = Percent(grouping.Threshold);
 
@@ -117,7 +118,10 @@ public static class ReportFindings
         if (listed.Count > 0)
         {
             Record("listed", "report threshold (%)", threshold);
-            var parts = listed.Select(f =>
+            Say("listed", Record("listed", "families above the threshold", Integer(listed.Count)) + (listed.Count == 1 ? " family is" : " families are")
+                + " above the report threshold of " + threshold + "% of the credited family signal. In headline order, each with the mean of per-run shares, the sample SD in percentage points and the greedy estimate of database proteins:");
+            // One paragraph per family, so each reads on its own.
+            foreach (var f in listed)
             {
                 string name = Name(f.FamilyUserId);
                 string mean = Record("listed", name + " mean share (%)", Percent(f.MeanShare));
@@ -125,11 +129,8 @@ public static class ReportFindings
                 string proteins = counts.TryGetValue(f.FamilyUserId, out var count)
                     ? Record("listed", name + " greedy protein estimate", Integer(count.GreedyProteinCount)) + (count.GreedyProteinCount == 1 ? " protein" : " proteins")
                     : "protein estimate unavailable";
-                return name + " " + mean + "% (" + sd + "; " + proteins + ")";
-            });
-            Say("listed", Record("listed", "families above the threshold", Integer(listed.Count)) + (listed.Count == 1 ? " family is" : " families are")
-                + " above the report threshold of " + threshold + "% of the credited family signal. In headline order, with the mean of per-run shares, the sample SD in percentage points and the greedy estimate of database proteins: "
-                + string.Join("; ", parts) + ".");
+                Say("listed:" + Integer(f.FamilyUserId), name + ": " + mean + "% (" + sd + "; " + proteins + ").");
+            }
             var cvs = listed.Where(f => f.CoefficientOfVariation.HasValue).Select(f => f.CoefficientOfVariation!.Value).ToList();
             if (cvs.Count > 0)
             {
