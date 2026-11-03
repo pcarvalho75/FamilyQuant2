@@ -17,7 +17,7 @@ Render targets refer to `ScreenHarness.Screens`, captured with `--screens <outpu
 Release gate: `FamilyQuant.Tests.exe --feature-ledger-release-check` fails until every retained row is VERIFIED with evidence. Authorized DROP rows use APPROVED_DROP, which records a decision, not a completed UI removal. The normal quick suite permits OPEN rows during development. Regeneration resets retained rows to OPEN; preserve reviewed evidence when updating the scanner.
 
 Scan count: **5756**. Ledger rows: **5756**. Source files: **104**.
-Authorized DROP rows: **296**; proposed VERIFIED retained rows: **5439**; OPEN retained rows: **21**.
+Authorized DROP rows: **296**; proposed VERIFIED retained rows: **5460**; OPEN retained rows: **0**.
 
 | ID | Disposition | Kind | Frozen source | Fact or control | Planned check | State | Evidence |
 |---|---|---|---|---|---|---|---|
@@ -2621,20 +2621,20 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **5439**; OPEN r
 | FQ15-26A8A749B3B6 | KEEP | export/storage fact | FamilyQuant/DeNovo/Ms1EnvelopeDetector.cs:144 | "Weaker evidence is not a claim of non-peptide: in venom the natural peptides (the " | test:LedgerAssayCompareCommand | VERIFIED | evidence:Paulo-rulings:FQ15-26A8A749B3B6 |
 | FQ15-CBD8C887A5B3 | KEEP | export/storage fact | FamilyQuant/DeNovo/Ms1EnvelopeDetector.cs:145 | "bradykinin-potentiating peptides, the angiotensin-like fragments) are frequently singly " | test:LedgerAssayCompareCommand | VERIFIED | evidence:Paulo-rulings:FQ15-CBD8C887A5B3 |
 | FQ15-8ECD8B6595F3 | KEEP | export/storage fact | FamilyQuant/DeNovo/Ms1EnvelopeDetector.cs:146 | "charged, and this dataset contains identified charge-1 peptides." | test:LedgerAssayCompareCommand | VERIFIED | evidence:Paulo-rulings:FQ15-8ECD8B6595F3 |
-| FQ15-7797D0EC1F17 | KEEP | export/storage fact | FamilyQuant/DeNovo/Ms1EnvelopeDetector.cs:197 | "A RAW file path is required." | test:LedgerAssayCompareCommand | OPEN | pending: execution evidence missing or stale |
-| FQ15-B85B65F42CE1 | KEEP | export/storage fact | FamilyQuant/DeNovo/Ms1EnvelopeDetector.cs:207 | ": resolved isotope-series diagnostic answered from the cache (" | test:LedgerAssayCompareCommand | OPEN | pending: execution evidence missing or stale |
-| FQ15-2E287945BA54 | KEEP | export/storage fact | FamilyQuant/DeNovo/Ms1EnvelopeDetector.cs:208 | "N0" | test:LedgerAssayCompareCommand | OPEN | pending: execution evidence missing or stale |
-| FQ15-77672F14EDEE | KEEP | export/storage fact | FamilyQuant/DeNovo/Ms1EnvelopeDetector.cs:208 | " envelope(s))." | test:LedgerAssayCompareCommand | OPEN | pending: execution evidence missing or stale |
-| FQ15-BD4FFA89F875 | KEEP | export/storage fact | FamilyQuant/DeNovo/Ms1EnvelopeDetector.cs:212 | ": loading MS1 spectra to detect resolved isotope series..." | test:LedgerAssayCompareCommand | OPEN | pending: execution evidence missing or stale |
-| FQ15-D773CB4DC14D | KEEP | export/storage fact | FamilyQuant/DeNovo/Ms1EnvelopeDetector.cs:216 | ": detected " | test:LedgerAssayCompareCommand | OPEN | pending: execution evidence missing or stale |
-| FQ15-4FE5D15AF045 | KEEP | export/storage fact | FamilyQuant/DeNovo/Ms1EnvelopeDetector.cs:217 | "N0" | test:LedgerAssayCompareCommand | OPEN | pending: execution evidence missing or stale |
-| FQ15-868453DF20C8 | KEEP | export/storage fact | FamilyQuant/DeNovo/Ms1EnvelopeDetector.cs:218 | " resolved isotope-series feature(s) over " | test:LedgerAssayCompareCommand | OPEN | pending: execution evidence missing or stale |
-| FQ15-EDD5C6112828 | KEEP | export/storage fact | FamilyQuant/DeNovo/Ms1EnvelopeDetector.cs:219 | "N0" | test:LedgerAssayCompareCommand | OPEN | pending: execution evidence missing or stale |
-| FQ15-CFB0C496B272 | KEEP | export/storage fact | FamilyQuant/DeNovo/Ms1EnvelopeDetector.cs:219 | " MS1 scan(s) - " | test:LedgerAssayCompareCommand | OPEN | pending: execution evidence missing or stale |
-| FQ15-EC1ED07E39CC | KEEP | export/storage fact | FamilyQuant/DeNovo/Ms1EnvelopeDetector.cs:220 | "N0" | test:LedgerAssayCompareCommand | OPEN | pending: execution evidence missing or stale |
-| FQ15-D1A591E52DA0 | KEEP | export/storage fact | FamilyQuant/DeNovo/Ms1EnvelopeDetector.cs:221 | ", " | test:LedgerAssayCompareCommand | OPEN | pending: execution evidence missing or stale |
-| FQ15-C28A0B762E27 | KEEP | export/storage fact | FamilyQuant/DeNovo/Ms1EnvelopeDetector.cs:222 | "N0" | test:LedgerAssayCompareCommand | OPEN | pending: execution evidence missing or stale |
-| FQ15-D636B492FD40 | KEEP | export/storage fact | FamilyQuant/DeNovo/Ms1EnvelopeDetector.cs:223 | "." | test:LedgerAssayCompareCommand | OPEN | pending: execution evidence missing or stale |
+| FQ15-7797D0EC1F17 | KEEP | export/storage fact | FamilyQuant/DeNovo/Ms1EnvelopeDetector.cs:197 | "A RAW file path is required." | test:XicMessagesCommand | VERIFIED | evidence:J15-xic-runtime:FQ15-7797D0EC1F17 |
+| FQ15-B85B65F42CE1 | KEEP | export/storage fact | FamilyQuant/DeNovo/Ms1EnvelopeDetector.cs:207 | ": resolved isotope-series diagnostic answered from the cache (" | test:XicMessagesCommand | VERIFIED | evidence:J15-xic-runtime:FQ15-B85B65F42CE1 |
+| FQ15-2E287945BA54 | KEEP | export/storage fact | FamilyQuant/DeNovo/Ms1EnvelopeDetector.cs:208 | "N0" | test:XicMessagesCommand | VERIFIED | evidence:J15-xic-runtime:FQ15-2E287945BA54 |
+| FQ15-77672F14EDEE | KEEP | export/storage fact | FamilyQuant/DeNovo/Ms1EnvelopeDetector.cs:208 | " envelope(s))." | test:XicMessagesCommand | VERIFIED | evidence:J15-xic-runtime:FQ15-77672F14EDEE |
+| FQ15-BD4FFA89F875 | KEEP | export/storage fact | FamilyQuant/DeNovo/Ms1EnvelopeDetector.cs:212 | ": loading MS1 spectra to detect resolved isotope series..." | test:XicMessagesCommand | VERIFIED | evidence:J15-xic-runtime:FQ15-BD4FFA89F875 |
+| FQ15-D773CB4DC14D | KEEP | export/storage fact | FamilyQuant/DeNovo/Ms1EnvelopeDetector.cs:216 | ": detected " | test:XicMessagesCommand | VERIFIED | evidence:J15-xic-runtime:FQ15-D773CB4DC14D |
+| FQ15-4FE5D15AF045 | KEEP | export/storage fact | FamilyQuant/DeNovo/Ms1EnvelopeDetector.cs:217 | "N0" | test:XicMessagesCommand | VERIFIED | evidence:J15-xic-runtime:FQ15-4FE5D15AF045 |
+| FQ15-868453DF20C8 | KEEP | export/storage fact | FamilyQuant/DeNovo/Ms1EnvelopeDetector.cs:218 | " resolved isotope-series feature(s) over " | test:XicMessagesCommand | VERIFIED | evidence:J15-xic-runtime:FQ15-868453DF20C8 |
+| FQ15-EDD5C6112828 | KEEP | export/storage fact | FamilyQuant/DeNovo/Ms1EnvelopeDetector.cs:219 | "N0" | test:XicMessagesCommand | VERIFIED | evidence:J15-xic-runtime:FQ15-EDD5C6112828 |
+| FQ15-CFB0C496B272 | KEEP | export/storage fact | FamilyQuant/DeNovo/Ms1EnvelopeDetector.cs:219 | " MS1 scan(s) - " | test:XicMessagesCommand | VERIFIED | evidence:J15-xic-runtime:FQ15-CFB0C496B272 |
+| FQ15-EC1ED07E39CC | KEEP | export/storage fact | FamilyQuant/DeNovo/Ms1EnvelopeDetector.cs:220 | "N0" | test:XicMessagesCommand | VERIFIED | evidence:J15-xic-runtime:FQ15-EC1ED07E39CC |
+| FQ15-D1A591E52DA0 | KEEP | export/storage fact | FamilyQuant/DeNovo/Ms1EnvelopeDetector.cs:221 | ", " | test:XicMessagesCommand | VERIFIED | evidence:J15-xic-runtime:FQ15-D1A591E52DA0 |
+| FQ15-C28A0B762E27 | KEEP | export/storage fact | FamilyQuant/DeNovo/Ms1EnvelopeDetector.cs:222 | "N0" | test:XicMessagesCommand | VERIFIED | evidence:J15-xic-runtime:FQ15-C28A0B762E27 |
+| FQ15-D636B492FD40 | KEEP | export/storage fact | FamilyQuant/DeNovo/Ms1EnvelopeDetector.cs:223 | "." | test:XicMessagesCommand | VERIFIED | evidence:J15-xic-runtime:FQ15-D636B492FD40 |
 | FQ15-81151181893E | KEEP | export/storage fact | FamilyQuant/DeNovo/Ms1EnvelopeDetector.cs:646 | ".tmp" | test:RunAssayRuntimeLedger | VERIFIED | evidence:AS-cache-wire:FQ15-81151181893E |
 | FQ15-1751EF9EAE8B | KEEP | export/storage fact | FamilyQuant/DeNovo/Ms1EnvelopeDetector.cs:661 | "version" | test:RunAssayRuntimeLedger | VERIFIED | evidence:AS-cache-wire:FQ15-1751EF9EAE8B |
 | FQ15-088FABB46324 | KEEP | export/storage fact | FamilyQuant/DeNovo/Ms1EnvelopeDetector.cs:662 | "runName" | test:RunAssayRuntimeLedger | VERIFIED | evidence:AS-cache-wire:FQ15-088FABB46324 |
@@ -3129,12 +3129,12 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **5439**; OPEN r
 | FQ15-0DB3E899880B | KEEP | format/export | FamilyQuant/FamilyQuantFile.cs:682 | "Use a target-decoy database (.T-R), or choose the threshold from 'Scan identity range' " | test:CurationFileCommand | VERIFIED | evidence:FL-curation-file-contracts:FQ15-0DB3E899880B |
 | FQ15-64F2229168A2 | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:130 | "identified" | test:CoreRelocationCommand | VERIFIED | evidence:Core-X5:FQ15-64F2229168A2 |
 | FQ15-98EA2BCA9546 | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:131 | "denovo" | test:CoreRelocationCommand | VERIFIED | evidence:Core-X5:FQ15-98EA2BCA9546 |
-| FQ15-AEC20A408BF5 | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:144 | "Spectrum evidence table: " | test:CoreRelocationCommand | OPEN | pending: execution evidence missing or stale |
-| FQ15-DA304C6BDF34 | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:154 | "WARNING: the spectrum comparison CSV could not be written to \"" | test:CoreRelocationCommand | OPEN | pending: execution evidence missing or stale |
-| FQ15-071F2EFBA65F | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:155 | "\" (" | test:CoreRelocationCommand | OPEN | pending: execution evidence missing or stale |
-| FQ15-3DED4AAA299C | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:155 | ": " | test:CoreRelocationCommand | OPEN | pending: execution evidence missing or stale |
-| FQ15-D9FF9427E1F0 | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:156 | "). Quantitation completed and the complete table remains available in the " | test:CoreRelocationCommand | OPEN | pending: execution evidence missing or stale |
-| FQ15-DC05EFDCB408 | KEEP | format/export | FamilyQuant/FullXicComputer.cs:157 | "project/DataGrid; save the .fqproj and choose another CSV path to retry." | test:CoreRelocationCommand | OPEN | pending: execution evidence missing or stale |
+| FQ15-AEC20A408BF5 | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:144 | "Spectrum evidence table: " | test:XicMessagesCommand | VERIFIED | evidence:J15-xic-runtime:FQ15-AEC20A408BF5 |
+| FQ15-DA304C6BDF34 | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:154 | "WARNING: the spectrum comparison CSV could not be written to \"" | test:XicMessagesCommand | VERIFIED | evidence:J15-xic-runtime:FQ15-DA304C6BDF34 |
+| FQ15-071F2EFBA65F | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:155 | "\" (" | test:XicMessagesCommand | VERIFIED | evidence:J15-xic-runtime:FQ15-071F2EFBA65F |
+| FQ15-3DED4AAA299C | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:155 | ": " | test:XicMessagesCommand | VERIFIED | evidence:J15-xic-runtime:FQ15-3DED4AAA299C |
+| FQ15-D9FF9427E1F0 | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:156 | "). Quantitation completed and the complete table remains available in the " | test:XicMessagesCommand | VERIFIED | evidence:J15-xic-runtime:FQ15-D9FF9427E1F0 |
+| FQ15-DC05EFDCB408 | KEEP | format/export | FamilyQuant/FullXicComputer.cs:157 | "project/DataGrid; save the .fqproj and choose another CSV path to retry." | test:XicMessagesCommand | VERIFIED | evidence:J15-xic-runtime:FQ15-DC05EFDCB408 |
 | FQ15-CFDA98D5020B | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:245 | "\"" | test:CoreRelocationCommand | VERIFIED | evidence:Core-X5:FQ15-CFDA98D5020B |
 | FQ15-06BEA5A21A25 | KEEP | format/export | FamilyQuant/FullXicComputer.cs:245 | ".raw\" looks like run \"" | test:CoreRelocationCommand | VERIFIED | evidence:Core-X5:FQ15-06BEA5A21A25 |
 | FQ15-888A72B14404 | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:245 | "\": rename it to \"" | test:CoreRelocationCommand | VERIFIED | evidence:Core-X5:FQ15-888A72B14404 |
@@ -3273,7 +3273,7 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **5439**; OPEN r
 | FQ15-F9D985281FC3 | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:986 | "fullxic_" | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X5-runtime:FQ15-F9D985281FC3 |
 | FQ15-72AC30937F60 | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:986 | "_" | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X5-runtime:FQ15-72AC30937F60 |
 | FQ15-1DF0CFAB7619 | KEEP | format/export | FamilyQuant/FullXicComputer.cs:986 | ".json" | test:RunCoreRuntimeLedger | VERIFIED | evidence:Core-X5-runtime:FQ15-1DF0CFAB7619 |
-| FQ15-467B1BA865EB | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:994 | "run" | test:CoreRelocationCommand | OPEN | pending: execution evidence missing or stale |
+| FQ15-467B1BA865EB | KEEP | export/storage fact | FamilyQuant/FullXicComputer.cs:994 | "run" | test:XicMessagesCommand | VERIFIED | evidence:J15-xic-runtime:FQ15-467B1BA865EB |
 | FQ15-21E2C567A4FA | IMPROVE | code fact | FamilyQuant/GridCopy.cs:35 | "Copy description" | test:SecondaryRuntimeCommand | VERIFIED | evidence:FL-secondary-runtime:FQ15-21E2C567A4FA |
 | FQ15-28F12314F396 | IMPROVE | code fact | FamilyQuant/GridCopy.cs:74 | "Copy UniProt code" | test:SecondaryRuntimeCommand | VERIFIED | evidence:FL-secondary-runtime:FQ15-28F12314F396 |
 | FQ15-78ADF51D7401 | IMPROVE | code fact | FamilyQuant/GridCopy.cs:75 | "Copies the code alone, P31982 from sp&#124;P31982&#124;VM2I_CROCC, one line per selected row." | test:LedgerTextPreservedCommand | VERIFIED | evidence:N6a-text:FQ15-78ADF51D7401 |

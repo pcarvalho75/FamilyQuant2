@@ -1,0 +1,1092 @@
+{
+  "schemaVersion": 1,
+  "step": "J15-xic-runtime",
+  "frozenCommit": "e9b73064d8ff19b2fde3e3231240b636a64c0a91",
+  "runs": [
+    {
+      "id": "native",
+      "command": "C:\\FamilyQuant-wt2\\floater-j15-combined-proof\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --ledger-xic-messages-runtime D:/FamilyQuant-data/out-shell/N3/source D:/FamilyQuant-data/out-floater/J15-xic/positive-1 \u00222026-11-03 03:56:08 -0800\u0022 C:/Users/paulo/Desktop/FamilyQuant/BrProt_Talk/all\u002BDeepNovo/scientific_results.fqproj",
+      "executedAt": "2026-11-03 03:56:08 -0800",
+      "commit": "70aab887a4dff7c212c57bd45fd6329206e14e85",
+      "artifacts": [
+        {
+          "path": "D:\\FamilyQuant-data\\out-floater\\J15-xic\\positive-1\\blocked",
+          "sha256": "B759B38D13723DCDF16174E452CE48DDAD4CA1E0540EABA93975962A09C4C2C0"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-floater\\J15-xic\\positive-1\\detector-progress.json",
+          "sha256": "9DF3A47B839DF991973855FF2E495A7812E8A839087AB468DE42D304AEE75AD2"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-floater\\J15-xic\\positive-1\\executed\\FamilyQuant.Core\\DeNovo\\DeNovoXicExtractor.cs",
+          "sha256": "AAF12E46C108889A2D8109C791A1389DC489E15646395F9D5E4EAD3493314719"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-floater\\J15-xic\\positive-1\\executed\\FamilyQuant.Core\\DeNovo\\Ms1EnvelopeDetector.cs",
+          "sha256": "4869CFA848996AF803B9DFC7C10A621C1E08514F88D1EAF09F31E3DD13FB9903"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-floater\\J15-xic\\positive-1\\executed\\FamilyQuant.Core\\DeNovo\\SpectrumComparisonTable.cs",
+          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-floater\\J15-xic\\positive-1\\executed\\FamilyQuant.Core\\FileFingerprint.cs",
+          "sha256": "BC4E633FFE3130CE29E05F552F725CE863F4CDEB2A7A527716CC5B69BA66123C"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-floater\\J15-xic\\positive-1\\executed\\FamilyQuant.Core\\Quantitation\\FullXicModels.cs",
+          "sha256": "92AACA640A441951B8D10CCCD45A8C8CF7C3C16E85E2F5B91866281FEAEFDD8E"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-floater\\J15-xic\\positive-1\\executed\\FamilyQuant.Core\\Quantitation\\FullXicStoragePaths.cs",
+          "sha256": "86E1D205030AC62211725E3522B965CAD20B013F5D67207FC0A43ACA3F16E3CA"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-floater\\J15-xic\\positive-1\\executed\\FamilyQuant.Tests\\FeatureLedger.cs",
+          "sha256": "78FE61453A7E6FB7BE49D0FAA403B56D1918D53E6FD1C44663712D4F5B75AB03"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-floater\\J15-xic\\positive-1\\executed\\FamilyQuant.Tests\\FeatureLedgerEvidence.Reporting.cs",
+          "sha256": "E9A4F3A2A671452283E1C28E155B81DEF97F9BAE907945607C1F16DD0078CC12"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-floater\\J15-xic\\positive-1\\executed\\FamilyQuant.Tests\\FeatureLedgerEvidence.cs",
+          "sha256": "7FFE973E1D4F66812812B051DAB78C93169902380838CFA92C011F86B1C3A02D"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-floater\\J15-xic\\positive-1\\executed\\FamilyQuant.Tests\\Program.J15XicMessages.cs",
+          "sha256": "7944E501413A97349593FBC5D6D3ED404D878CF6C64D81B188EAEAABD687BF3D"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-floater\\J15-xic\\positive-1\\executed\\FamilyQuant.Tests\\Program.LedgerPreservation.cs",
+          "sha256": "999E13B7BF67353AF11E001FAF28CF71A51AB03299D24116C86C47474D1D7406"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-floater\\J15-xic\\positive-1\\executed\\FamilyQuant.Tests\\TestCommandRegistry.cs",
+          "sha256": "CDBE959710FB0FD128381AE9F57A6BAE82E68B84D4D76AFB3E0AB6EA43D11BA5"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-floater\\J15-xic\\positive-1\\executed\\binaries\\FamilyQuant.Core.dll",
+          "sha256": "CBCA06B1545F8BF1B3314DCC2FCC4F5FF661A80492E6DBB686D0FEF2F9D9E86E"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-floater\\J15-xic\\positive-1\\executed\\binaries\\FamilyQuant.Tests.dll",
+          "sha256": "7A0178B3A08F299776CD963FE43A48D73402C2AF9C23AB5B1491F1A1A229042B"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-floater\\J15-xic\\positive-1\\executed\\binaries\\PatternTools.dll",
+          "sha256": "C36CC8957FFA977E16A8447F0D808BBD7E710BAB09B50EEC5172D8942987E1F6"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-floater\\J15-xic\\positive-1\\executed\\binaries\\ThermoFisher.CommonCore.Data.dll",
+          "sha256": "A992D587580F5470F01B6EA3072131E686C63D21C0222BCF9A067E255466238B"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-floater\\J15-xic\\positive-1\\executed\\binaries\\ThermoFisher.CommonCore.RawFileReader.dll",
+          "sha256": "665754874B055DBAB975FC3DC3FC366D2296D18323ACE801C5F72F933FEB46F9"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-floater\\J15-xic\\positive-1\\executed\\docs\\feature-ledger-scan.json",
+          "sha256": "CD811F554E3E7101B12871AB603C765603FBBE8320BC173C466726A1862234AC"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-floater\\J15-xic\\positive-1\\executed\\frozen\\FamilyQuant\\DeNovo\\Ms1EnvelopeDetector.cs",
+          "sha256": "2BE7652D4FB2F3C44801773D52BA3787BAD054CA004D29CEA9ADAA9745654CA2"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-floater\\J15-xic\\positive-1\\executed\\frozen\\FamilyQuant\\FullXicComputer.cs",
+          "sha256": "ED72573B31BCFD68FEE783807A692C51452FD98B4B039B93E9BCBBC9A198BA58"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-floater\\J15-xic\\positive-1\\native-cases-canonical.json",
+          "sha256": "DA95641359BDE20A36C57F9DB79E7A738DE1D6E2D1C2C2F7E2678F51B6C02BCF"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-floater\\J15-xic\\positive-1\\native-cases-raw.json",
+          "sha256": "6FC80BB81E531DACCCC5090EEDFCE98FE2FAAD77711808D39A775F07A3132E3E"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-floater\\J15-xic\\positive-1\\proofs.log",
+          "sha256": "A26B8E6E16099D0AFCDC212DA296E4A3E39176497821CAD3C5261ECEC3AF86A5"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-floater\\J15-xic\\positive-1\\readonly-input.json",
+          "sha256": "C14104BC29F80D95BE811812468349EFE8C7DB557880EB4A2921577AECF62446"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-floater\\J15-xic\\positive-1\\spectrum.csv",
+          "sha256": "DA72C33C7536DBEB6839F65ABE834F4D0E73BB78FA67238674368B883A6C2BA3"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-floater\\J15-xic\\positive-1\\synthetic-detector.json",
+          "sha256": "35E74C19732AA64779E003F526655A29BA954D3F256426A0D7EF1438C2E7E90A"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-floater\\J15-xic\\positive-1\\synthetic.raw",
+          "sha256": "D8983BEA6F5AFB2274DABFD6DD077DC5BBA5DDC95B4630598E8D3A5FBEEC66D5"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-floater\\J15-xic\\positive-1\\uncached-detector.json",
+          "sha256": "463A35E6C54E9BC5C689A9E8E0A65DD2746FDCE7FF31772F3BBB3B671734F49F"
+        }
+      ],
+      "workingDirectory": "C:\\FamilyQuant-wt2\\floater-j15-combined-proof"
+    }
+  ],
+  "rows": [
+    {
+      "observationId": "FQ15-7797D0EC1F17",
+      "implementation": [
+        {
+          "path": "FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs",
+          "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
+          "sha256": "4869CFA848996AF803B9DFC7C10A621C1E08514F88D1EAF09F31E3DD13FB9903"
+        },
+        {
+          "path": "FamilyQuant.Core/DeNovo/DeNovoXicExtractor.cs",
+          "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
+          "sha256": "AAF12E46C108889A2D8109C791A1389DC489E15646395F9D5E4EAD3493314719"
+        },
+        {
+          "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
+          "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
+          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
+        },
+        {
+          "path": "FamilyQuant.Core/FileFingerprint.cs",
+          "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
+          "sha256": "BC4E633FFE3130CE29E05F552F725CE863F4CDEB2A7A527716CC5B69BA66123C"
+        },
+        {
+          "path": "FamilyQuant.Core/Quantitation/FullXicModels.cs",
+          "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
+          "sha256": "92AACA640A441951B8D10CCCD45A8C8CF7C3C16E85E2F5B91866281FEAEFDD8E"
+        },
+        {
+          "path": "FamilyQuant.Core/Quantitation/FullXicStoragePaths.cs",
+          "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
+          "sha256": "86E1D205030AC62211725E3522B965CAD20B013F5D67207FC0A43ACA3F16E3CA"
+        },
+        {
+          "path": "FamilyQuant.Tests/Program.J15XicMessages.cs",
+          "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
+          "sha256": "7944E501413A97349593FBC5D6D3ED404D878CF6C64D81B188EAEAABD687BF3D"
+        }
+      ],
+      "proofs": [],
+      "note": "Native execution of this branch; synthetic cache/CSV fixtures and a read-only uncached detector pass, not scientific quantitation validation.",
+      "kindReceiptId": "native-export-storage-fact",
+      "compared": "FamilyQuant/DeNovo/Ms1EnvelopeDetector.cs:197 \u0022A RAW file path is required.\u0022; empty acquisition path refuses before cache/load; expected A RAW file path is required. (Parameter \u0027rawPath\u0027); actual A RAW file path is required. (Parameter \u0027rawPath\u0027)"
+    },
+    {
+      "observationId": "FQ15-B85B65F42CE1",
+      "implementation": [
+        {
+          "path": "FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs",
+          "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
+          "sha256": "4869CFA848996AF803B9DFC7C10A621C1E08514F88D1EAF09F31E3DD13FB9903"
+        },
+        {
+          "path": "FamilyQuant.Core/DeNovo/DeNovoXicExtractor.cs",
+          "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
+          "sha256": "AAF12E46C108889A2D8109C791A1389DC489E15646395F9D5E4EAD3493314719"
+        },
+        {
+          "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
+          "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
+          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
+        },
+        {
+          "path": "FamilyQuant.Core/FileFingerprint.cs",
+          "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
+          "sha256": "BC4E633FFE3130CE29E05F552F725CE863F4CDEB2A7A527716CC5B69BA66123C"
+        },
+        {
+          "path": "FamilyQuant.Core/Quantitation/FullXicModels.cs",
+          "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
+          "sha256": "92AACA640A441951B8D10CCCD45A8C8CF7C3C16E85E2F5B91866281FEAEFDD8E"
+        },
+        {
+          "path": "FamilyQuant.Core/Quantitation/FullXicStoragePaths.cs",
+          "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
+          "sha256": "86E1D205030AC62211725E3522B965CAD20B013F5D67207FC0A43ACA3F16E3CA"
+        },
+        {
+          "path": "FamilyQuant.Tests/Program.J15XicMessages.cs",
+          "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
+          "sha256": "7944E501413A97349593FBC5D6D3ED404D878CF6C64D81B188EAEAABD687BF3D"
+        }
+      ],
+      "proofs": [],
+      "note": "Native execution of this branch; synthetic cache/CSV fixtures and a read-only uncached detector pass, not scientific quantitation validation.",
+      "kindReceiptId": "native-export-storage-fact",
+      "compared": "FamilyQuant/DeNovo/Ms1EnvelopeDetector.cs:207 \u0022: resolved isotope-series diagnostic answered from the cache (\u0022; validated detector cache emits complete invariant grouped-count status; expected synthetic: resolved isotope-series diagnostic answered from the cache (1,234 envelope(s)).; actual synthetic: resolved isotope-series diagnostic answered from the cache (1,234 envelope(s))."
+    },
+    {
+      "observationId": "FQ15-2E287945BA54",
+      "implementation": [
+        {
+          "path": "FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs",
+          "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
+          "sha256": "4869CFA848996AF803B9DFC7C10A621C1E08514F88D1EAF09F31E3DD13FB9903"
+        },
+        {
+          "path": "FamilyQuant.Core/DeNovo/DeNovoXicExtractor.cs",
+          "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
+          "sha256": "AAF12E46C108889A2D8109C791A1389DC489E15646395F9D5E4EAD3493314719"
+        },
+        {
+          "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
+          "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
+          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
+        },
+        {
+          "path": "FamilyQuant.Core/FileFingerprint.cs",
+          "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
+          "sha256": "BC4E633FFE3130CE29E05F552F725CE863F4CDEB2A7A527716CC5B69BA66123C"
+        },
+        {
+          "path": "FamilyQuant.Core/Quantitation/FullXicModels.cs",
+          "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
+          "sha256": "92AACA640A441951B8D10CCCD45A8C8CF7C3C16E85E2F5B91866281FEAEFDD8E"
+        },
+        {
+          "path": "FamilyQuant.Core/Quantitation/FullXicStoragePaths.cs",
+          "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
+          "sha256": "86E1D205030AC62211725E3522B965CAD20B013F5D67207FC0A43ACA3F16E3CA"
+        },
+        {
+          "path": "FamilyQuant.Tests/Program.J15XicMessages.cs",
+          "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
+          "sha256": "7944E501413A97349593FBC5D6D3ED404D878CF6C64D81B188EAEAABD687BF3D"
+        }
+      ],
+      "proofs": [],
+      "note": "Native execution of this branch; synthetic cache/CSV fixtures and a read-only uncached detector pass, not scientific quantitation validation.",
+      "kindReceiptId": "native-export-storage-fact",
+      "compared": "FamilyQuant/DeNovo/Ms1EnvelopeDetector.cs:208 \u0022N0\u0022; validated detector cache emits complete invariant grouped-count status; expected synthetic: resolved isotope-series diagnostic answered from the cache (1,234 envelope(s)).; actual synthetic: resolved isotope-series diagnostic answered from the cache (1,234 envelope(s))."
+    },
+    {
+      "observationId": "FQ15-77672F14EDEE",
+      "implementation": [
+        {
+          "path": "FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs",
+          "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
+          "sha256": "4869CFA848996AF803B9DFC7C10A621C1E08514F88D1EAF09F31E3DD13FB9903"
+        },
+        {
+          "path": "FamilyQuant.Core/DeNovo/DeNovoXicExtractor.cs",
+          "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
+          "sha256": "AAF12E46C108889A2D8109C791A1389DC489E15646395F9D5E4EAD3493314719"
+        },
+        {
+          "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
+          "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
+          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
+        },
+        {
+          "path": "FamilyQuant.Core/FileFingerprint.cs",
+          "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
+          "sha256": "BC4E633FFE3130CE29E05F552F725CE863F4CDEB2A7A527716CC5B69BA66123C"
+        },
+        {
+          "path": "FamilyQuant.Core/Quantitation/FullXicModels.cs",
+          "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
+          "sha256": "92AACA640A441951B8D10CCCD45A8C8CF7C3C16E85E2F5B91866281FEAEFDD8E"
+        },
+        {
+          "path": "FamilyQuant.Core/Quantitation/FullXicStoragePaths.cs",
+          "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
+          "sha256": "86E1D205030AC62211725E3522B965CAD20B013F5D67207FC0A43ACA3F16E3CA"
+        },
+        {
+          "path": "FamilyQuant.Tests/Program.J15XicMessages.cs",
+          "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
+          "sha256": "7944E501413A97349593FBC5D6D3ED404D878CF6C64D81B188EAEAABD687BF3D"
+        }
+      ],
+      "proofs": [],
+      "note": "Native execution of this branch; synthetic cache/CSV fixtures and a read-only uncached detector pass, not scientific quantitation validation.",
+      "kindReceiptId": "native-export-storage-fact",
+      "compared": "FamilyQuant/DeNovo/Ms1EnvelopeDetector.cs:208 \u0022 envelope(s)).\u0022; validated detector cache emits complete invariant grouped-count status; expected synthetic: resolved isotope-series diagnostic answered from the cache (1,234 envelope(s)).; actual synthetic: resolved isotope-series diagnostic answered from the cache (1,234 envelope(s))."
+    },
+    {
+      "observationId": "FQ15-BD4FFA89F875",
+      "implementation": [
+        {
+          "path": "FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs",
+          "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
+          "sha256": "4869CFA848996AF803B9DFC7C10A621C1E08514F88D1EAF09F31E3DD13FB9903"
+        },
+        {
+          "path": "FamilyQuant.Core/DeNovo/DeNovoXicExtractor.cs",
+          "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
+          "sha256": "AAF12E46C108889A2D8109C791A1389DC489E15646395F9D5E4EAD3493314719"
+        },
+        {
+          "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
+          "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
+          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
+        },
+        {
+          "path": "FamilyQuant.Core/FileFingerprint.cs",
+          "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
+          "sha256": "BC4E633FFE3130CE29E05F552F725CE863F4CDEB2A7A527716CC5B69BA66123C"
+        },
+        {
+          "path": "FamilyQuant.Core/Quantitation/FullXicModels.cs",
+          "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
+          "sha256": "92AACA640A441951B8D10CCCD45A8C8CF7C3C16E85E2F5B91866281FEAEFDD8E"
+        },
+        {
+          "path": "FamilyQuant.Core/Quantitation/FullXicStoragePaths.cs",
+          "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
+          "sha256": "86E1D205030AC62211725E3522B965CAD20B013F5D67207FC0A43ACA3F16E3CA"
+        },
+        {
+          "path": "FamilyQuant.Tests/Program.J15XicMessages.cs",
+          "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
+          "sha256": "7944E501413A97349593FBC5D6D3ED404D878CF6C64D81B188EAEAABD687BF3D"
+        }
+      ],
+      "proofs": [],
+      "note": "Native execution of this branch; synthetic cache/CSV fixtures and a read-only uncached detector pass, not scientific quantitation validation.",
+      "kindReceiptId": "native-export-storage-fact",
+      "compared": "FamilyQuant/DeNovo/Ms1EnvelopeDetector.cs:212 \u0022: loading MS1 spectra to detect resolved isotope series...\u0022; uncached native loader emits the complete loading status; expected 20220624_Bjararaca_1ug_3step-240min_01: loading MS1 spectra to detect resolved isotope series...; actual 20220624_Bjararaca_1ug_3step-240min_01: loading MS1 spectra to detect resolved isotope series..."
+    },
+    {
+      "observationId": "FQ15-D773CB4DC14D",
+      "implementation": [
+        {
+          "path": "FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs",
+          "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
+          "sha256": "4869CFA848996AF803B9DFC7C10A621C1E08514F88D1EAF09F31E3DD13FB9903"
+        },
+        {
+          "path": "FamilyQuant.Core/DeNovo/DeNovoXicExtractor.cs",
+          "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
+          "sha256": "AAF12E46C108889A2D8109C791A1389DC489E15646395F9D5E4EAD3493314719"
+        },
+        {
+          "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
+          "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
+          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
+        },
+        {
+          "path": "FamilyQuant.Core/FileFingerprint.cs",
+          "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
+          "sha256": "BC4E633FFE3130CE29E05F552F725CE863F4CDEB2A7A527716CC5B69BA66123C"
+        },
+        {
+          "path": "FamilyQuant.Core/Quantitation/FullXicModels.cs",
+          "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
+          "sha256": "92AACA640A441951B8D10CCCD45A8C8CF7C3C16E85E2F5B91866281FEAEFDD8E"
+        },
+        {
+          "path": "FamilyQuant.Core/Quantitation/FullXicStoragePaths.cs",
+          "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
+          "sha256": "86E1D205030AC62211725E3522B965CAD20B013F5D67207FC0A43ACA3F16E3CA"
+        },
+        {
+          "path": "FamilyQuant.Tests/Program.J15XicMessages.cs",
+          "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
+          "sha256": "7944E501413A97349593FBC5D6D3ED404D878CF6C64D81B188EAEAABD687BF3D"
+        }
+      ],
+      "proofs": [],
+      "note": "Native execution of this branch; synthetic cache/CSV fixtures and a read-only uncached detector pass, not scientific quantitation validation.",
+      "kindReceiptId": "native-export-storage-fact",
+      "compared": "FamilyQuant/DeNovo/Ms1EnvelopeDetector.cs:216 \u0022: detected \u0022; uncached detector completion retains counts, invariant formats and both evidence labels; expected 20220624_Bjararaca_1ug_3step-240min_01: detected 444,248 resolved isotope-series feature(s) over 41,035 MS1 scan(s) - 409,955 multiply charged resolved isotope series (more specific, not peptide-FDR calibrated), 34,293 singly charged resolved isotope series (less specific, not peptide-FDR calibrated).; actual 20220624_Bjararaca_1ug_3step-240min_01: detected 444,248 resolved isotope-series feature(s) over 41,035 MS1 scan(s) - 409,955 multiply charged resolved isotope series (more specific, not peptide-FDR calibrated), 34,293 singly charged resolved isotope series (less specific, not peptide-FDR calibrated)."
+    },
+    {
+      "observationId": "FQ15-4FE5D15AF045",
+      "implementation": [
+        {
+          "path": "FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs",
+          "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
+          "sha256": "4869CFA848996AF803B9DFC7C10A621C1E08514F88D1EAF09F31E3DD13FB9903"
+        },
+        {
+          "path": "FamilyQuant.Core/DeNovo/DeNovoXicExtractor.cs",
+          "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
+          "sha256": "AAF12E46C108889A2D8109C791A1389DC489E15646395F9D5E4EAD3493314719"
+        },
+        {
+          "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
+          "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
+          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
+        },
+        {
+          "path": "FamilyQuant.Core/FileFingerprint.cs",
+          "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
+          "sha256": "BC4E633FFE3130CE29E05F552F725CE863F4CDEB2A7A527716CC5B69BA66123C"
+        },
+        {
+          "path": "FamilyQuant.Core/Quantitation/FullXicModels.cs",
+          "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
+          "sha256": "92AACA640A441951B8D10CCCD45A8C8CF7C3C16E85E2F5B91866281FEAEFDD8E"
+        },
+        {
+          "path": "FamilyQuant.Core/Quantitation/FullXicStoragePaths.cs",
+          "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
+          "sha256": "86E1D205030AC62211725E3522B965CAD20B013F5D67207FC0A43ACA3F16E3CA"
+        },
+        {
+          "path": "FamilyQuant.Tests/Program.J15XicMessages.cs",
+          "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
+          "sha256": "7944E501413A97349593FBC5D6D3ED404D878CF6C64D81B188EAEAABD687BF3D"
+        }
+      ],
+      "proofs": [],
+      "note": "Native execution of this branch; synthetic cache/CSV fixtures and a read-only uncached detector pass, not scientific quantitation validation.",
+      "kindReceiptId": "native-export-storage-fact",
+      "compared": "FamilyQuant/DeNovo/Ms1EnvelopeDetector.cs:217 \u0022N0\u0022; uncached detector completion retains counts, invariant formats and both evidence labels; expected 20220624_Bjararaca_1ug_3step-240min_01: detected 444,248 resolved isotope-series feature(s) over 41,035 MS1 scan(s) - 409,955 multiply charged resolved isotope series (more specific, not peptide-FDR calibrated), 34,293 singly charged resolved isotope series (less specific, not peptide-FDR calibrated).; actual 20220624_Bjararaca_1ug_3step-240min_01: detected 444,248 resolved isotope-series feature(s) over 41,035 MS1 scan(s) - 409,955 multiply charged resolved isotope series (more specific, not peptide-FDR calibrated), 34,293 singly charged resolved isotope series (less specific, not peptide-FDR calibrated)."
+    },
+    {
+      "observationId": "FQ15-868453DF20C8",
+      "implementation": [
+        {
+          "path": "FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs",
+          "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
+          "sha256": "4869CFA848996AF803B9DFC7C10A621C1E08514F88D1EAF09F31E3DD13FB9903"
+        },
+        {
+          "path": "FamilyQuant.Core/DeNovo/DeNovoXicExtractor.cs",
+          "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
+          "sha256": "AAF12E46C108889A2D8109C791A1389DC489E15646395F9D5E4EAD3493314719"
+        },
+        {
+          "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
+          "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
+          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
+        },
+        {
+          "path": "FamilyQuant.Core/FileFingerprint.cs",
+          "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
+          "sha256": "BC4E633FFE3130CE29E05F552F725CE863F4CDEB2A7A527716CC5B69BA66123C"
+        },
+        {
+          "path": "FamilyQuant.Core/Quantitation/FullXicModels.cs",
+          "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
+          "sha256": "92AACA640A441951B8D10CCCD45A8C8CF7C3C16E85E2F5B91866281FEAEFDD8E"
+        },
+        {
+          "path": "FamilyQuant.Core/Quantitation/FullXicStoragePaths.cs",
+          "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
+          "sha256": "86E1D205030AC62211725E3522B965CAD20B013F5D67207FC0A43ACA3F16E3CA"
+        },
+        {
+          "path": "FamilyQuant.Tests/Program.J15XicMessages.cs",
+          "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
+          "sha256": "7944E501413A97349593FBC5D6D3ED404D878CF6C64D81B188EAEAABD687BF3D"
+        }
+      ],
+      "proofs": [],
+      "note": "Native execution of this branch; synthetic cache/CSV fixtures and a read-only uncached detector pass, not scientific quantitation validation.",
+      "kindReceiptId": "native-export-storage-fact",
+      "compared": "FamilyQuant/DeNovo/Ms1EnvelopeDetector.cs:218 \u0022 resolved isotope-series feature(s) over \u0022; uncached detector completion retains counts, invariant formats and both evidence labels; expected 20220624_Bjararaca_1ug_3step-240min_01: detected 444,248 resolved isotope-series feature(s) over 41,035 MS1 scan(s) - 409,955 multiply charged resolved isotope series (more specific, not peptide-FDR calibrated), 34,293 singly charged resolved isotope series (less specific, not peptide-FDR calibrated).; actual 20220624_Bjararaca_1ug_3step-240min_01: detected 444,248 resolved isotope-series feature(s) over 41,035 MS1 scan(s) - 409,955 multiply charged resolved isotope series (more specific, not peptide-FDR calibrated), 34,293 singly charged resolved isotope series (less specific, not peptide-FDR calibrated)."
+    },
+    {
+      "observationId": "FQ15-EDD5C6112828",
+      "implementation": [
+        {
+          "path": "FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs",
+          "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
+          "sha256": "4869CFA848996AF803B9DFC7C10A621C1E08514F88D1EAF09F31E3DD13FB9903"
+        },
+        {
+          "path": "FamilyQuant.Core/DeNovo/DeNovoXicExtractor.cs",
+          "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
+          "sha256": "AAF12E46C108889A2D8109C791A1389DC489E15646395F9D5E4EAD3493314719"
+        },
+        {
+          "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
+          "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
+          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
+        },
+        {
+          "path": "FamilyQuant.Core/FileFingerprint.cs",
+          "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
+          "sha256": "BC4E633FFE3130CE29E05F552F725CE863F4CDEB2A7A527716CC5B69BA66123C"
+        },
+        {
+          "path": "FamilyQuant.Core/Quantitation/FullXicModels.cs",
+          "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
+          "sha256": "92AACA640A441951B8D10CCCD45A8C8CF7C3C16E85E2F5B91866281FEAEFDD8E"
+        },
+        {
+          "path": "FamilyQuant.Core/Quantitation/FullXicStoragePaths.cs",
+          "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
+          "sha256": "86E1D205030AC62211725E3522B965CAD20B013F5D67207FC0A43ACA3F16E3CA"
+        },
+        {
+          "path": "FamilyQuant.Tests/Program.J15XicMessages.cs",
+          "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
+          "sha256": "7944E501413A97349593FBC5D6D3ED404D878CF6C64D81B188EAEAABD687BF3D"
+        }
+      ],
+      "proofs": [],
+      "note": "Native execution of this branch; synthetic cache/CSV fixtures and a read-only uncached detector pass, not scientific quantitation validation.",
+      "kindReceiptId": "native-export-storage-fact",
+      "compared": "FamilyQuant/DeNovo/Ms1EnvelopeDetector.cs:219 \u0022N0\u0022; uncached detector completion retains counts, invariant formats and both evidence labels; expected 20220624_Bjararaca_1ug_3step-240min_01: detected 444,248 resolved isotope-series feature(s) over 41,035 MS1 scan(s) - 409,955 multiply charged resolved isotope series (more specific, not peptide-FDR calibrated), 34,293 singly charged resolved isotope series (less specific, not peptide-FDR calibrated).; actual 20220624_Bjararaca_1ug_3step-240min_01: detected 444,248 resolved isotope-series feature(s) over 41,035 MS1 scan(s) - 409,955 multiply charged resolved isotope series (more specific, not peptide-FDR calibrated), 34,293 singly charged resolved isotope series (less specific, not peptide-FDR calibrated)."
+    },
+    {
+      "observationId": "FQ15-CFB0C496B272",
+      "implementation": [
+        {
+          "path": "FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs",
+          "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
+          "sha256": "4869CFA848996AF803B9DFC7C10A621C1E08514F88D1EAF09F31E3DD13FB9903"
+        },
+        {
+          "path": "FamilyQuant.Core/DeNovo/DeNovoXicExtractor.cs",
+          "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
+          "sha256": "AAF12E46C108889A2D8109C791A1389DC489E15646395F9D5E4EAD3493314719"
+        },
+        {
+          "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
+          "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
+          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
+        },
+        {
+          "path": "FamilyQuant.Core/FileFingerprint.cs",
+          "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
+          "sha256": "BC4E633FFE3130CE29E05F552F725CE863F4CDEB2A7A527716CC5B69BA66123C"
+        },
+        {
+          "path": "FamilyQuant.Core/Quantitation/FullXicModels.cs",
+          "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
+          "sha256": "92AACA640A441951B8D10CCCD45A8C8CF7C3C16E85E2F5B91866281FEAEFDD8E"
+        },
+        {
+          "path": "FamilyQuant.Core/Quantitation/FullXicStoragePaths.cs",
+          "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
+          "sha256": "86E1D205030AC62211725E3522B965CAD20B013F5D67207FC0A43ACA3F16E3CA"
+        },
+        {
+          "path": "FamilyQuant.Tests/Program.J15XicMessages.cs",
+          "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
+          "sha256": "7944E501413A97349593FBC5D6D3ED404D878CF6C64D81B188EAEAABD687BF3D"
+        }
+      ],
+      "proofs": [],
+      "note": "Native execution of this branch; synthetic cache/CSV fixtures and a read-only uncached detector pass, not scientific quantitation validation.",
+      "kindReceiptId": "native-export-storage-fact",
+      "compared": "FamilyQuant/DeNovo/Ms1EnvelopeDetector.cs:219 \u0022 MS1 scan(s) - \u0022; uncached detector completion retains counts, invariant formats and both evidence labels; expected 20220624_Bjararaca_1ug_3step-240min_01: detected 444,248 resolved isotope-series feature(s) over 41,035 MS1 scan(s) - 409,955 multiply charged resolved isotope series (more specific, not peptide-FDR calibrated), 34,293 singly charged resolved isotope series (less specific, not peptide-FDR calibrated).; actual 20220624_Bjararaca_1ug_3step-240min_01: detected 444,248 resolved isotope-series feature(s) over 41,035 MS1 scan(s) - 409,955 multiply charged resolved isotope series (more specific, not peptide-FDR calibrated), 34,293 singly charged resolved isotope series (less specific, not peptide-FDR calibrated)."
+    },
+    {
+      "observationId": "FQ15-EC1ED07E39CC",
+      "implementation": [
+        {
+          "path": "FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs",
+          "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
+          "sha256": "4869CFA848996AF803B9DFC7C10A621C1E08514F88D1EAF09F31E3DD13FB9903"
+        },
+        {
+          "path": "FamilyQuant.Core/DeNovo/DeNovoXicExtractor.cs",
+          "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
+          "sha256": "AAF12E46C108889A2D8109C791A1389DC489E15646395F9D5E4EAD3493314719"
+        },
+        {
+          "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
+          "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
+          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
+        },
+        {
+          "path": "FamilyQuant.Core/FileFingerprint.cs",
+          "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
+          "sha256": "BC4E633FFE3130CE29E05F552F725CE863F4CDEB2A7A527716CC5B69BA66123C"
+        },
+        {
+          "path": "FamilyQuant.Core/Quantitation/FullXicModels.cs",
+          "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
+          "sha256": "92AACA640A441951B8D10CCCD45A8C8CF7C3C16E85E2F5B91866281FEAEFDD8E"
+        },
+        {
+          "path": "FamilyQuant.Core/Quantitation/FullXicStoragePaths.cs",
+          "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
+          "sha256": "86E1D205030AC62211725E3522B965CAD20B013F5D67207FC0A43ACA3F16E3CA"
+        },
+        {
+          "path": "FamilyQuant.Tests/Program.J15XicMessages.cs",
+          "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
+          "sha256": "7944E501413A97349593FBC5D6D3ED404D878CF6C64D81B188EAEAABD687BF3D"
+        }
+      ],
+      "proofs": [],
+      "note": "Native execution of this branch; synthetic cache/CSV fixtures and a read-only uncached detector pass, not scientific quantitation validation.",
+      "kindReceiptId": "native-export-storage-fact",
+      "compared": "FamilyQuant/DeNovo/Ms1EnvelopeDetector.cs:220 \u0022N0\u0022; uncached detector completion retains counts, invariant formats and both evidence labels; expected 20220624_Bjararaca_1ug_3step-240min_01: detected 444,248 resolved isotope-series feature(s) over 41,035 MS1 scan(s) - 409,955 multiply charged resolved isotope series (more specific, not peptide-FDR calibrated), 34,293 singly charged resolved isotope series (less specific, not peptide-FDR calibrated).; actual 20220624_Bjararaca_1ug_3step-240min_01: detected 444,248 resolved isotope-series feature(s) over 41,035 MS1 scan(s) - 409,955 multiply charged resolved isotope series (more specific, not peptide-FDR calibrated), 34,293 singly charged resolved isotope series (less specific, not peptide-FDR calibrated)."
+    },
+    {
+      "observationId": "FQ15-D1A591E52DA0",
+      "implementation": [
+        {
+          "path": "FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs",
+          "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
+          "sha256": "4869CFA848996AF803B9DFC7C10A621C1E08514F88D1EAF09F31E3DD13FB9903"
+        },
+        {
+          "path": "FamilyQuant.Core/DeNovo/DeNovoXicExtractor.cs",
+          "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
+          "sha256": "AAF12E46C108889A2D8109C791A1389DC489E15646395F9D5E4EAD3493314719"
+        },
+        {
+          "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
+          "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
+          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
+        },
+        {
+          "path": "FamilyQuant.Core/FileFingerprint.cs",
+          "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
+          "sha256": "BC4E633FFE3130CE29E05F552F725CE863F4CDEB2A7A527716CC5B69BA66123C"
+        },
+        {
+          "path": "FamilyQuant.Core/Quantitation/FullXicModels.cs",
+          "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
+          "sha256": "92AACA640A441951B8D10CCCD45A8C8CF7C3C16E85E2F5B91866281FEAEFDD8E"
+        },
+        {
+          "path": "FamilyQuant.Core/Quantitation/FullXicStoragePaths.cs",
+          "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
+          "sha256": "86E1D205030AC62211725E3522B965CAD20B013F5D67207FC0A43ACA3F16E3CA"
+        },
+        {
+          "path": "FamilyQuant.Tests/Program.J15XicMessages.cs",
+          "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
+          "sha256": "7944E501413A97349593FBC5D6D3ED404D878CF6C64D81B188EAEAABD687BF3D"
+        }
+      ],
+      "proofs": [],
+      "note": "Native execution of this branch; synthetic cache/CSV fixtures and a read-only uncached detector pass, not scientific quantitation validation.",
+      "kindReceiptId": "native-export-storage-fact",
+      "compared": "FamilyQuant/DeNovo/Ms1EnvelopeDetector.cs:221 \u0022, \u0022; uncached detector completion retains counts, invariant formats and both evidence labels; expected 20220624_Bjararaca_1ug_3step-240min_01: detected 444,248 resolved isotope-series feature(s) over 41,035 MS1 scan(s) - 409,955 multiply charged resolved isotope series (more specific, not peptide-FDR calibrated), 34,293 singly charged resolved isotope series (less specific, not peptide-FDR calibrated).; actual 20220624_Bjararaca_1ug_3step-240min_01: detected 444,248 resolved isotope-series feature(s) over 41,035 MS1 scan(s) - 409,955 multiply charged resolved isotope series (more specific, not peptide-FDR calibrated), 34,293 singly charged resolved isotope series (less specific, not peptide-FDR calibrated)."
+    },
+    {
+      "observationId": "FQ15-C28A0B762E27",
+      "implementation": [
+        {
+          "path": "FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs",
+          "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
+          "sha256": "4869CFA848996AF803B9DFC7C10A621C1E08514F88D1EAF09F31E3DD13FB9903"
+        },
+        {
+          "path": "FamilyQuant.Core/DeNovo/DeNovoXicExtractor.cs",
+          "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
+          "sha256": "AAF12E46C108889A2D8109C791A1389DC489E15646395F9D5E4EAD3493314719"
+        },
+        {
+          "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
+          "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
+          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
+        },
+        {
+          "path": "FamilyQuant.Core/FileFingerprint.cs",
+          "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
+          "sha256": "BC4E633FFE3130CE29E05F552F725CE863F4CDEB2A7A527716CC5B69BA66123C"
+        },
+        {
+          "path": "FamilyQuant.Core/Quantitation/FullXicModels.cs",
+          "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
+          "sha256": "92AACA640A441951B8D10CCCD45A8C8CF7C3C16E85E2F5B91866281FEAEFDD8E"
+        },
+        {
+          "path": "FamilyQuant.Core/Quantitation/FullXicStoragePaths.cs",
+          "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
+          "sha256": "86E1D205030AC62211725E3522B965CAD20B013F5D67207FC0A43ACA3F16E3CA"
+        },
+        {
+          "path": "FamilyQuant.Tests/Program.J15XicMessages.cs",
+          "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
+          "sha256": "7944E501413A97349593FBC5D6D3ED404D878CF6C64D81B188EAEAABD687BF3D"
+        }
+      ],
+      "proofs": [],
+      "note": "Native execution of this branch; synthetic cache/CSV fixtures and a read-only uncached detector pass, not scientific quantitation validation.",
+      "kindReceiptId": "native-export-storage-fact",
+      "compared": "FamilyQuant/DeNovo/Ms1EnvelopeDetector.cs:222 \u0022N0\u0022; uncached detector completion retains counts, invariant formats and both evidence labels; expected 20220624_Bjararaca_1ug_3step-240min_01: detected 444,248 resolved isotope-series feature(s) over 41,035 MS1 scan(s) - 409,955 multiply charged resolved isotope series (more specific, not peptide-FDR calibrated), 34,293 singly charged resolved isotope series (less specific, not peptide-FDR calibrated).; actual 20220624_Bjararaca_1ug_3step-240min_01: detected 444,248 resolved isotope-series feature(s) over 41,035 MS1 scan(s) - 409,955 multiply charged resolved isotope series (more specific, not peptide-FDR calibrated), 34,293 singly charged resolved isotope series (less specific, not peptide-FDR calibrated)."
+    },
+    {
+      "observationId": "FQ15-D636B492FD40",
+      "implementation": [
+        {
+          "path": "FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs",
+          "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
+          "sha256": "4869CFA848996AF803B9DFC7C10A621C1E08514F88D1EAF09F31E3DD13FB9903"
+        },
+        {
+          "path": "FamilyQuant.Core/DeNovo/DeNovoXicExtractor.cs",
+          "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
+          "sha256": "AAF12E46C108889A2D8109C791A1389DC489E15646395F9D5E4EAD3493314719"
+        },
+        {
+          "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
+          "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
+          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
+        },
+        {
+          "path": "FamilyQuant.Core/FileFingerprint.cs",
+          "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
+          "sha256": "BC4E633FFE3130CE29E05F552F725CE863F4CDEB2A7A527716CC5B69BA66123C"
+        },
+        {
+          "path": "FamilyQuant.Core/Quantitation/FullXicModels.cs",
+          "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
+          "sha256": "92AACA640A441951B8D10CCCD45A8C8CF7C3C16E85E2F5B91866281FEAEFDD8E"
+        },
+        {
+          "path": "FamilyQuant.Core/Quantitation/FullXicStoragePaths.cs",
+          "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
+          "sha256": "86E1D205030AC62211725E3522B965CAD20B013F5D67207FC0A43ACA3F16E3CA"
+        },
+        {
+          "path": "FamilyQuant.Tests/Program.J15XicMessages.cs",
+          "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
+          "sha256": "7944E501413A97349593FBC5D6D3ED404D878CF6C64D81B188EAEAABD687BF3D"
+        }
+      ],
+      "proofs": [],
+      "note": "Native execution of this branch; synthetic cache/CSV fixtures and a read-only uncached detector pass, not scientific quantitation validation.",
+      "kindReceiptId": "native-export-storage-fact",
+      "compared": "FamilyQuant/DeNovo/Ms1EnvelopeDetector.cs:223 \u0022.\u0022; uncached detector completion retains counts, invariant formats and both evidence labels; expected 20220624_Bjararaca_1ug_3step-240min_01: detected 444,248 resolved isotope-series feature(s) over 41,035 MS1 scan(s) - 409,955 multiply charged resolved isotope series (more specific, not peptide-FDR calibrated), 34,293 singly charged resolved isotope series (less specific, not peptide-FDR calibrated).; actual 20220624_Bjararaca_1ug_3step-240min_01: detected 444,248 resolved isotope-series feature(s) over 41,035 MS1 scan(s) - 409,955 multiply charged resolved isotope series (more specific, not peptide-FDR calibrated), 34,293 singly charged resolved isotope series (less specific, not peptide-FDR calibrated)."
+    },
+    {
+      "observationId": "FQ15-AEC20A408BF5",
+      "implementation": [
+        {
+          "path": "FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs",
+          "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
+          "sha256": "4869CFA848996AF803B9DFC7C10A621C1E08514F88D1EAF09F31E3DD13FB9903"
+        },
+        {
+          "path": "FamilyQuant.Core/DeNovo/DeNovoXicExtractor.cs",
+          "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
+          "sha256": "AAF12E46C108889A2D8109C791A1389DC489E15646395F9D5E4EAD3493314719"
+        },
+        {
+          "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
+          "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
+          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
+        },
+        {
+          "path": "FamilyQuant.Core/FileFingerprint.cs",
+          "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
+          "sha256": "BC4E633FFE3130CE29E05F552F725CE863F4CDEB2A7A527716CC5B69BA66123C"
+        },
+        {
+          "path": "FamilyQuant.Core/Quantitation/FullXicModels.cs",
+          "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
+          "sha256": "92AACA640A441951B8D10CCCD45A8C8CF7C3C16E85E2F5B91866281FEAEFDD8E"
+        },
+        {
+          "path": "FamilyQuant.Core/Quantitation/FullXicStoragePaths.cs",
+          "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
+          "sha256": "86E1D205030AC62211725E3522B965CAD20B013F5D67207FC0A43ACA3F16E3CA"
+        },
+        {
+          "path": "FamilyQuant.Tests/Program.J15XicMessages.cs",
+          "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
+          "sha256": "7944E501413A97349593FBC5D6D3ED404D878CF6C64D81B188EAEAABD687BF3D"
+        }
+      ],
+      "proofs": [],
+      "note": "Native execution of this branch; synthetic cache/CSV fixtures and a read-only uncached detector pass, not scientific quantitation validation.",
+      "kindReceiptId": "native-export-storage-fact",
+      "compared": "FamilyQuant/FullXicComputer.cs:144 \u0022Spectrum evidence table: \u0022; native CSV success records the actual written path and full table; expected Spectrum evidence table: \u003Cowned-output\u003E\\spectrum.csv; actual Spectrum evidence table: \u003Cowned-output\u003E\\spectrum.csv"
+    },
+    {
+      "observationId": "FQ15-DA304C6BDF34",
+      "implementation": [
+        {
+          "path": "FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs",
+          "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
+          "sha256": "4869CFA848996AF803B9DFC7C10A621C1E08514F88D1EAF09F31E3DD13FB9903"
+        },
+        {
+          "path": "FamilyQuant.Core/DeNovo/DeNovoXicExtractor.cs",
+          "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
+          "sha256": "AAF12E46C108889A2D8109C791A1389DC489E15646395F9D5E4EAD3493314719"
+        },
+        {
+          "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
+          "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
+          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
+        },
+        {
+          "path": "FamilyQuant.Core/FileFingerprint.cs",
+          "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
+          "sha256": "BC4E633FFE3130CE29E05F552F725CE863F4CDEB2A7A527716CC5B69BA66123C"
+        },
+        {
+          "path": "FamilyQuant.Core/Quantitation/FullXicModels.cs",
+          "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
+          "sha256": "92AACA640A441951B8D10CCCD45A8C8CF7C3C16E85E2F5B91866281FEAEFDD8E"
+        },
+        {
+          "path": "FamilyQuant.Core/Quantitation/FullXicStoragePaths.cs",
+          "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
+          "sha256": "86E1D205030AC62211725E3522B965CAD20B013F5D67207FC0A43ACA3F16E3CA"
+        },
+        {
+          "path": "FamilyQuant.Tests/Program.J15XicMessages.cs",
+          "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
+          "sha256": "7944E501413A97349593FBC5D6D3ED404D878CF6C64D81B188EAEAABD687BF3D"
+        }
+      ],
+      "proofs": [],
+      "note": "Native execution of this branch; synthetic cache/CSV fixtures and a read-only uncached detector pass, not scientific quantitation validation.",
+      "kindReceiptId": "native-export-storage-fact",
+      "compared": "FamilyQuant/FullXicComputer.cs:154 \u0022WARNING: the spectrum comparison CSV could not be written to \\\u0022\u0022; native CSV refusal retains the complete warning, retry instruction and unchanged result/table; expected WARNING: the spectrum comparison CSV could not be written to \u0022blocked\\table.csv\u0022 (IOException: Cannot create \u0027\u003Cowned-output\u003E\\blocked\u0027 because a file or directory with the same name already exists.). Quantitation completed and the complete table remains available in the project/DataGrid; save the .fqproj and choose another CSV path to retry.; actual WARNING: the spectrum comparison CSV could not be written to \u0022blocked\\table.csv\u0022 (IOException: Cannot create \u0027\u003Cowned-output\u003E\\blocked\u0027 because a file or directory with the same name already exists.). Quantitation completed and the complete table remains available in the project/DataGrid; save the .fqproj and choose another CSV path to retry."
+    },
+    {
+      "observationId": "FQ15-071F2EFBA65F",
+      "implementation": [
+        {
+          "path": "FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs",
+          "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
+          "sha256": "4869CFA848996AF803B9DFC7C10A621C1E08514F88D1EAF09F31E3DD13FB9903"
+        },
+        {
+          "path": "FamilyQuant.Core/DeNovo/DeNovoXicExtractor.cs",
+          "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
+          "sha256": "AAF12E46C108889A2D8109C791A1389DC489E15646395F9D5E4EAD3493314719"
+        },
+        {
+          "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
+          "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
+          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
+        },
+        {
+          "path": "FamilyQuant.Core/FileFingerprint.cs",
+          "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
+          "sha256": "BC4E633FFE3130CE29E05F552F725CE863F4CDEB2A7A527716CC5B69BA66123C"
+        },
+        {
+          "path": "FamilyQuant.Core/Quantitation/FullXicModels.cs",
+          "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
+          "sha256": "92AACA640A441951B8D10CCCD45A8C8CF7C3C16E85E2F5B91866281FEAEFDD8E"
+        },
+        {
+          "path": "FamilyQuant.Core/Quantitation/FullXicStoragePaths.cs",
+          "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
+          "sha256": "86E1D205030AC62211725E3522B965CAD20B013F5D67207FC0A43ACA3F16E3CA"
+        },
+        {
+          "path": "FamilyQuant.Tests/Program.J15XicMessages.cs",
+          "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
+          "sha256": "7944E501413A97349593FBC5D6D3ED404D878CF6C64D81B188EAEAABD687BF3D"
+        }
+      ],
+      "proofs": [],
+      "note": "Native execution of this branch; synthetic cache/CSV fixtures and a read-only uncached detector pass, not scientific quantitation validation.",
+      "kindReceiptId": "native-export-storage-fact",
+      "compared": "FamilyQuant/FullXicComputer.cs:155 \u0022\\\u0022 (\u0022; native CSV refusal retains the complete warning, retry instruction and unchanged result/table; expected WARNING: the spectrum comparison CSV could not be written to \u0022blocked\\table.csv\u0022 (IOException: Cannot create \u0027\u003Cowned-output\u003E\\blocked\u0027 because a file or directory with the same name already exists.). Quantitation completed and the complete table remains available in the project/DataGrid; save the .fqproj and choose another CSV path to retry.; actual WARNING: the spectrum comparison CSV could not be written to \u0022blocked\\table.csv\u0022 (IOException: Cannot create \u0027\u003Cowned-output\u003E\\blocked\u0027 because a file or directory with the same name already exists.). Quantitation completed and the complete table remains available in the project/DataGrid; save the .fqproj and choose another CSV path to retry."
+    },
+    {
+      "observationId": "FQ15-3DED4AAA299C",
+      "implementation": [
+        {
+          "path": "FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs",
+          "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
+          "sha256": "4869CFA848996AF803B9DFC7C10A621C1E08514F88D1EAF09F31E3DD13FB9903"
+        },
+        {
+          "path": "FamilyQuant.Core/DeNovo/DeNovoXicExtractor.cs",
+          "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
+          "sha256": "AAF12E46C108889A2D8109C791A1389DC489E15646395F9D5E4EAD3493314719"
+        },
+        {
+          "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
+          "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
+          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
+        },
+        {
+          "path": "FamilyQuant.Core/FileFingerprint.cs",
+          "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
+          "sha256": "BC4E633FFE3130CE29E05F552F725CE863F4CDEB2A7A527716CC5B69BA66123C"
+        },
+        {
+          "path": "FamilyQuant.Core/Quantitation/FullXicModels.cs",
+          "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
+          "sha256": "92AACA640A441951B8D10CCCD45A8C8CF7C3C16E85E2F5B91866281FEAEFDD8E"
+        },
+        {
+          "path": "FamilyQuant.Core/Quantitation/FullXicStoragePaths.cs",
+          "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
+          "sha256": "86E1D205030AC62211725E3522B965CAD20B013F5D67207FC0A43ACA3F16E3CA"
+        },
+        {
+          "path": "FamilyQuant.Tests/Program.J15XicMessages.cs",
+          "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
+          "sha256": "7944E501413A97349593FBC5D6D3ED404D878CF6C64D81B188EAEAABD687BF3D"
+        }
+      ],
+      "proofs": [],
+      "note": "Native execution of this branch; synthetic cache/CSV fixtures and a read-only uncached detector pass, not scientific quantitation validation.",
+      "kindReceiptId": "native-export-storage-fact",
+      "compared": "FamilyQuant/FullXicComputer.cs:155 \u0022: \u0022; native CSV refusal retains the complete warning, retry instruction and unchanged result/table; expected WARNING: the spectrum comparison CSV could not be written to \u0022blocked\\table.csv\u0022 (IOException: Cannot create \u0027\u003Cowned-output\u003E\\blocked\u0027 because a file or directory with the same name already exists.). Quantitation completed and the complete table remains available in the project/DataGrid; save the .fqproj and choose another CSV path to retry.; actual WARNING: the spectrum comparison CSV could not be written to \u0022blocked\\table.csv\u0022 (IOException: Cannot create \u0027\u003Cowned-output\u003E\\blocked\u0027 because a file or directory with the same name already exists.). Quantitation completed and the complete table remains available in the project/DataGrid; save the .fqproj and choose another CSV path to retry."
+    },
+    {
+      "observationId": "FQ15-D9FF9427E1F0",
+      "implementation": [
+        {
+          "path": "FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs",
+          "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
+          "sha256": "4869CFA848996AF803B9DFC7C10A621C1E08514F88D1EAF09F31E3DD13FB9903"
+        },
+        {
+          "path": "FamilyQuant.Core/DeNovo/DeNovoXicExtractor.cs",
+          "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
+          "sha256": "AAF12E46C108889A2D8109C791A1389DC489E15646395F9D5E4EAD3493314719"
+        },
+        {
+          "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
+          "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
+          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
+        },
+        {
+          "path": "FamilyQuant.Core/FileFingerprint.cs",
+          "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
+          "sha256": "BC4E633FFE3130CE29E05F552F725CE863F4CDEB2A7A527716CC5B69BA66123C"
+        },
+        {
+          "path": "FamilyQuant.Core/Quantitation/FullXicModels.cs",
+          "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
+          "sha256": "92AACA640A441951B8D10CCCD45A8C8CF7C3C16E85E2F5B91866281FEAEFDD8E"
+        },
+        {
+          "path": "FamilyQuant.Core/Quantitation/FullXicStoragePaths.cs",
+          "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
+          "sha256": "86E1D205030AC62211725E3522B965CAD20B013F5D67207FC0A43ACA3F16E3CA"
+        },
+        {
+          "path": "FamilyQuant.Tests/Program.J15XicMessages.cs",
+          "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
+          "sha256": "7944E501413A97349593FBC5D6D3ED404D878CF6C64D81B188EAEAABD687BF3D"
+        }
+      ],
+      "proofs": [],
+      "note": "Native execution of this branch; synthetic cache/CSV fixtures and a read-only uncached detector pass, not scientific quantitation validation.",
+      "kindReceiptId": "native-export-storage-fact",
+      "compared": "FamilyQuant/FullXicComputer.cs:156 \u0022). Quantitation completed and the complete table remains available in the \u0022; native CSV refusal retains the complete warning, retry instruction and unchanged result/table; expected WARNING: the spectrum comparison CSV could not be written to \u0022blocked\\table.csv\u0022 (IOException: Cannot create \u0027\u003Cowned-output\u003E\\blocked\u0027 because a file or directory with the same name already exists.). Quantitation completed and the complete table remains available in the project/DataGrid; save the .fqproj and choose another CSV path to retry.; actual WARNING: the spectrum comparison CSV could not be written to \u0022blocked\\table.csv\u0022 (IOException: Cannot create \u0027\u003Cowned-output\u003E\\blocked\u0027 because a file or directory with the same name already exists.). Quantitation completed and the complete table remains available in the project/DataGrid; save the .fqproj and choose another CSV path to retry."
+    },
+    {
+      "observationId": "FQ15-DC05EFDCB408",
+      "implementation": [
+        {
+          "path": "FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs",
+          "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
+          "sha256": "4869CFA848996AF803B9DFC7C10A621C1E08514F88D1EAF09F31E3DD13FB9903"
+        },
+        {
+          "path": "FamilyQuant.Core/DeNovo/DeNovoXicExtractor.cs",
+          "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
+          "sha256": "AAF12E46C108889A2D8109C791A1389DC489E15646395F9D5E4EAD3493314719"
+        },
+        {
+          "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
+          "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
+          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
+        },
+        {
+          "path": "FamilyQuant.Core/FileFingerprint.cs",
+          "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
+          "sha256": "BC4E633FFE3130CE29E05F552F725CE863F4CDEB2A7A527716CC5B69BA66123C"
+        },
+        {
+          "path": "FamilyQuant.Core/Quantitation/FullXicModels.cs",
+          "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
+          "sha256": "92AACA640A441951B8D10CCCD45A8C8CF7C3C16E85E2F5B91866281FEAEFDD8E"
+        },
+        {
+          "path": "FamilyQuant.Core/Quantitation/FullXicStoragePaths.cs",
+          "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
+          "sha256": "86E1D205030AC62211725E3522B965CAD20B013F5D67207FC0A43ACA3F16E3CA"
+        },
+        {
+          "path": "FamilyQuant.Tests/Program.J15XicMessages.cs",
+          "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
+          "sha256": "7944E501413A97349593FBC5D6D3ED404D878CF6C64D81B188EAEAABD687BF3D"
+        }
+      ],
+      "proofs": [],
+      "note": "Native execution of this branch; synthetic cache/CSV fixtures and a read-only uncached detector pass, not scientific quantitation validation.",
+      "kindReceiptId": "native-format-export",
+      "compared": "FamilyQuant/FullXicComputer.cs:157 \u0022project/DataGrid; save the .fqproj and choose another CSV path to retry.\u0022; native CSV refusal retains the complete warning, retry instruction and unchanged result/table; expected WARNING: the spectrum comparison CSV could not be written to \u0022blocked\\table.csv\u0022 (IOException: Cannot create \u0027\u003Cowned-output\u003E\\blocked\u0027 because a file or directory with the same name already exists.). Quantitation completed and the complete table remains available in the project/DataGrid; save the .fqproj and choose another CSV path to retry.; actual WARNING: the spectrum comparison CSV could not be written to \u0022blocked\\table.csv\u0022 (IOException: Cannot create \u0027\u003Cowned-output\u003E\\blocked\u0027 because a file or directory with the same name already exists.). Quantitation completed and the complete table remains available in the project/DataGrid; save the .fqproj and choose another CSV path to retry."
+    },
+    {
+      "observationId": "FQ15-467B1BA865EB",
+      "implementation": [
+        {
+          "path": "FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs",
+          "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
+          "sha256": "4869CFA848996AF803B9DFC7C10A621C1E08514F88D1EAF09F31E3DD13FB9903"
+        },
+        {
+          "path": "FamilyQuant.Core/DeNovo/DeNovoXicExtractor.cs",
+          "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
+          "sha256": "AAF12E46C108889A2D8109C791A1389DC489E15646395F9D5E4EAD3493314719"
+        },
+        {
+          "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
+          "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
+          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
+        },
+        {
+          "path": "FamilyQuant.Core/FileFingerprint.cs",
+          "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
+          "sha256": "BC4E633FFE3130CE29E05F552F725CE863F4CDEB2A7A527716CC5B69BA66123C"
+        },
+        {
+          "path": "FamilyQuant.Core/Quantitation/FullXicModels.cs",
+          "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
+          "sha256": "92AACA640A441951B8D10CCCD45A8C8CF7C3C16E85E2F5B91866281FEAEFDD8E"
+        },
+        {
+          "path": "FamilyQuant.Core/Quantitation/FullXicStoragePaths.cs",
+          "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
+          "sha256": "86E1D205030AC62211725E3522B965CAD20B013F5D67207FC0A43ACA3F16E3CA"
+        },
+        {
+          "path": "FamilyQuant.Tests/Program.J15XicMessages.cs",
+          "symbol": "Ms1EnvelopeDetector.DetectRun / FullXicComputeResult CSV outcome / FullXicStoragePaths.Extraction native execution",
+          "sha256": "7944E501413A97349593FBC5D6D3ED404D878CF6C64D81B188EAEAABD687BF3D"
+        }
+      ],
+      "proofs": [],
+      "note": "Native execution of this branch; synthetic cache/CSV fixtures and a read-only uncached detector pass, not scientific quantitation validation.",
+      "kindReceiptId": "native-export-storage-fact",
+      "compared": "FamilyQuant/FullXicComputer.cs:994 \u0022run\u0022; public cache-path construction executes the empty-run filename fallback; expected fullxic_identified_run.json; actual fullxic_identified_run.json"
+    }
+  ],
+  "kindReceipts": [
+    {
+      "id": "native-export-storage-fact",
+      "kind": "export/storage fact",
+      "proofs": [
+        {
+          "runId": "native",
+          "kind": "test",
+          "target": "XicMessagesCommand",
+          "assertion": "J15-xic-runtime kind export/storage fact: every assigned native branch and complete message passed",
+          "artifact": "D:\\FamilyQuant-data\\out-floater\\J15-xic\\positive-1\\proofs.log",
+          "inspectedBy": ""
+        }
+      ]
+    },
+    {
+      "id": "native-format-export",
+      "kind": "format/export",
+      "proofs": [
+        {
+          "runId": "native",
+          "kind": "test",
+          "target": "XicMessagesCommand",
+          "assertion": "J15-xic-runtime kind format/export: every assigned native branch and complete message passed",
+          "artifact": "D:\\FamilyQuant-data\\out-floater\\J15-xic\\positive-1\\proofs.log",
+          "inspectedBy": ""
+        }
+      ]
+    }
+  ]
+}
