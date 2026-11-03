@@ -19,7 +19,8 @@ public static class ReportCsvTable
         int[] indexes = selected.Select(c => header.IndexOf(c)).ToArray();
         if (indexes.Any(i => i < 0)) throw new InvalidDataException("A requested report column is absent from the program export.");
         if (parsed.Skip(1).Any(row => row.Count != header.Count)) throw new InvalidDataException("The report source CSV has an inconsistent row width.");
-        return new(id, title, selected, parsed.Skip(1).Select(row => (IReadOnlyList<string>)indexes.Select(i => row[i]).ToArray()).ToArray(), caption);
+        var rows = parsed.Skip(1).Select(row => (IReadOnlyList<string>)indexes.Select(i => row[i]).ToArray()).ToArray();
+        return new(id, title, selected, rows, caption) { ListColumns = ReportListSheets.Describe(id, selected, rows) };
     }
 
     private static List<List<string>> Parse(string csv)
