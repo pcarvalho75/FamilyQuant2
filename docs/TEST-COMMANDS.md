@@ -92,3 +92,11 @@ Each shard needs its own `TEMP` and `TMP`; the suite's fixture folder lives unde
 also share the per-user `%LOCALAPPDATA%/FamilyQuant2` folder: the extracted USEARCH executable (read, and
 written only when missing) and the real `shell.json` and `appearance.json`, which the suite's shell and theme
 checks redirect to their own fixture paths and only read for the unchanged-profile check.
+
+The feature-ledger checks are thirteen entries in the table (base validation, six planted-change validations, the
+receipt guard, the receipt fixtures, the import batch, shell metadata, message frames and the live proofs), so
+shards share them; `FeatureLedgerTests()` still runs them all, in the same order, for `--feature-ledger-check`.
+With `FAMILYQUANT_LEDGER_RECEIPTS=release-only`, the ordinary suite skips the receipt-currency checks: validation
+leaves out the "Verified row lacks a current executed receipt" test and the receipt load it needs, and two
+SKIP lines name what was left out. Every other ledger guard runs. `--feature-ledger-release-check` always
+checks receipts, whatever the variable says. Unset, nothing changes.

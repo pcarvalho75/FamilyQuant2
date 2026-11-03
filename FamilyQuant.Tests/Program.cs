@@ -289,7 +289,18 @@ namespace FamilyQuant.Tests
             suite.Add(() => CurationSaveResultTests(workDir));
             suite.Add(() => ThemePreferenceTests(workDir));
             suite.Section("Feature ledger - frozen source inventory and explicit preservation checks");
-            suite.Add(() => FeatureLedgerTests());
+            suite.Add(() => FeatureLedgerBaseTests());
+            for (int mutation = 0; mutation < FeatureLedgerMutations; mutation++)
+            {
+                int planted = mutation;
+                suite.Add(() => { if (FeatureLedgerReady()) FeatureLedgerMutationTest(planted); });
+            }
+            suite.Add(() => { if (FeatureLedgerReady()) FeatureLedgerReceiptGuardTests(); });
+            suite.Add(() => { if (FeatureLedgerReady()) FeatureLedgerReceiptFixtureTests(); });
+            suite.Add(() => { if (FeatureLedgerReady()) LedgerImportBatchTests(); });
+            suite.Add(() => { if (FeatureLedgerReady()) ShellMetadataComparisonTests(); });
+            suite.Add(() => { if (FeatureLedgerReady()) ShellMessageFrameTests(); });
+            suite.Add(() => { if (FeatureLedgerReady()) FeatureLedgerLiveTests(); });
             suite.Section("Standard menu - shortcuts, save paths, curation routing and recent projects");
             suite.Add(() => StandardMenuTests(workDir));
             suite.Add(() => ShellStatusTests(workDir));
