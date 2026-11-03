@@ -78,6 +78,7 @@ namespace FamilyQuant
                         result.Notes.Add("Protein explanation counts unavailable: " + ex.Message);
                     }
                 }
+                if (options.FamilyCuration != null) FamilyUnobservedStudies.Store(options.FamilyCuration, manifest);
             }
             result.SpectrumComparisonRows = SpectrumComparisonTable.Build(
                 deNovoImport.AllSourceRows.Where(r => !string.Equals(r.SourceId,

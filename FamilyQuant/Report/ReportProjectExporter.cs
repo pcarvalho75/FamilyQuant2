@@ -25,6 +25,7 @@ public static class ReportProjectExporter
     {
         if (rows.Count == 0) throw new InvalidOperationException("No full XIC results are stored. Compute and save results before exporting a report.");
         FamilyStudyMembership.RequireCurrent(curation, manifest);
+        manifest = FamilyUnobservedStudies.View(curation, manifest);
         var data = analyticsData ?? AnalyticsBuilder.Build(rows, manifest.PerRunTic);
         if (analyticsData == null && manifest.DerivedFractions.Count > 0) NativeQuantFractions.ApplyDetectedToFractions(data.Fractions, data.Grouped, manifest.DerivedFractions);
         var options = new Homology.HomologyOptions();
