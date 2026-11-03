@@ -38,6 +38,8 @@ internal static partial class Program
             if (last.Seconds < first.Seconds) throw new InvalidDataException("Progress stages are out of order.");
             return last.Seconds - first.Seconds;
         }
+        public double? OptionalSeconds(string start, string end) => Events.Any(e => e.Stage == start)
+            ? Seconds(start, end) : null;
     }
 
     [TestCommandTable]
@@ -103,6 +105,8 @@ internal static partial class Program
             bool complete = workbookFailure == null && File.Exists(report) && File.Exists(workbook);
             var result = new { projectSha256 = original, inputUnchanged = unchanged, cacheHit,
                 primarySeconds = progress.Seconds("report-primary-start", "report-primary-end"),
+                censusCacheSeconds = progress.OptionalSeconds("report-census-cache-start", "report-census-cache-end"),
+                censusCacheHit = progress.Events.Any(e => e.Stage == "report-census-cache" && e.Message.Contains("hit", StringComparison.OrdinalIgnoreCase)),
                 identifiedCensusSeconds = progress.Seconds("report-census-identified-start", "report-census-identified-end"),
                 deNovoCensusSeconds = progress.Seconds("report-census-denovo-start", "report-census-denovo-end"),
                 totalSeconds = clock.Elapsed.TotalSeconds, csvCount = right.Count, csvBytesEqual = csvEqual,
@@ -178,6 +182,8 @@ internal static partial class Program
                 else if (originalCsv == null || originalCsv.Count != csv.Count || originalCsv.Any(kv => !csv.TryGetValue(kv.Key, out string? v) || v != kv.Value)
                     || originalWorkbook != workbookHash) throw new InvalidDataException("Cold and warm report data differ.");
                 var result = new { name, cacheHit, cacheMiss, primarySeconds = progress.Seconds("report-primary-start", "report-primary-end"),
+                    censusCacheSeconds = progress.OptionalSeconds("report-census-cache-start", "report-census-cache-end"),
+                    censusCacheHit = progress.Events.Any(e => e.Stage == "report-census-cache" && e.Message.Contains("hit", StringComparison.OrdinalIgnoreCase)),
                     identifiedCensusSeconds = progress.Seconds("report-census-identified-start", "report-census-identified-end"),
                     deNovoCensusSeconds = progress.Seconds("report-census-denovo-start", "report-census-denovo-end"),
                     totalSeconds = clock.Elapsed.TotalSeconds, csvCount = csv.Count, workbookSha256 = workbookHash };
