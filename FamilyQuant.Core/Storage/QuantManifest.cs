@@ -190,6 +190,10 @@ namespace FamilyQuant
         [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull)]
         public FamilyDomainPartsResult? FamilyDomainParts { get; set; }
 
+        /// <summary>Actual computed shared-policy/cutoff variants. Absent until explicitly requested.</summary>
+        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull)]
+        public FamilySensitivityResult? FamilySensitivity { get; set; }
+
         /// <summary>Localized peptide intervals and allocated protein rankings, all runs pooled.
         /// Absent until computed; exact and aligned placements are explicitly distinguished.</summary>
         [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull)]
