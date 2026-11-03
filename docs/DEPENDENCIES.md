@@ -4,6 +4,7 @@ The roadmap owns acceptance. This note records the removal decisions and the bou
 
 | Dependency | Decision | Evidence |
 |---|---|---|
+| DocumentFormat.OpenXml 3.5.1 | Added in Core, J1b0 | One direct package for reading XLSX panels and writing DOCX reports. MIT license. Latest stable verified on [NuGet](https://www.nuget.org/packages/DocumentFormat.OpenXml/3.5.1) on 2026-11-02. The App and Tests receive it through ProjectReference; no Office installation is required. |
 | Extended.Wpf.Toolkit 4.6.1 | Removed | All six numeric sites use the shared `NumericUpDown` implementation with typed integer/decimal adapters. Names, bounds, increments, defaults and bindings remain. |
 | Newtonsoft.Json 13.0.3 | Removed | Only the extraction and MS1 cache serializers used it. Both now use `System.Text.Json` with the historical field names and cache versions. Accessor omissions apply only to those caches. |
 | LiteDB 5.0.21 | Kept | `PatternLabRunQuants.FromXic2` reads the `QuantPackage` and `Quants` collections. It opens the file read-only. Removing it would remove a supported input. |
@@ -35,3 +36,23 @@ X11 validation: Release build had zero warnings/errors; focused tests were 23 pa
 4 passed, 0 failed, 0 skipped. The .NET Framework MSBuild rehearsal produced `setup.exe` and
 `FamilyQuant2.application` in `out-assay/x11-publish`. Its payload retains LiteDB, OpenMcdf and all
 four Thermo assemblies, with no Newtonsoft, Xceed or test assembly.
+
+## Open XML payload, J1b0
+
+Core pins `DocumentFormat.OpenXml` 3.5.1. The package brings its matching Framework package
+transitively. `--test-dependencies` exercises XLSX Unicode/line-break reading and DOCX writing
+through that transitive reference. The first build failed without the package; the green Release
+build had zero warnings/errors, the dependency checks passed 36/0/0 and quick passed 3328/0/17.
+A pre-existing nullable fixture dereference in `Program.PauloRulingTests.cs` was annotated after its
+existing guard so the solution builds without warnings.
+
+The isolated, framework-dependent FileSystem publish at
+`D:/FamilyQuant-data/out-assay/j1b0-publish` used `dotnet publish` with `--no-build --no-restore`,
+`PublishProtocol=FileSystem`, `GenerateManifests=false`, `GenerateClickOnceManifests=false`,
+`BootstrapperEnabled=false`, `SignManifests=false` and that explicit output folder. It uploads
+nothing and does not change any publish profile. This is a local payload check, not an install.
+
+| Published file | Bytes | SHA256 |
+|---|---:|---|
+| DocumentFormat.OpenXml.dll | 7985120 | EE2A31FF79DB570E2EB98EC7513B222F2B8C6BFCB638D66C2CEC8255B0BBE499 |
+| DocumentFormat.OpenXml.Framework.dll | 478688 | FF3ED8318388D84FA5BBC5736DF6144ECFA3165C0B95F6B45B5330F463EDF7AE |
