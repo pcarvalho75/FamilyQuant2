@@ -71,6 +71,7 @@ namespace FamilyQuant.Tests
             var suite = new SuiteTable();
             suite.Section("CSV export - locale and escaping");
             suite.Add(() => CommandRegistryTests());
+            suite.Add(() => SuiteCommandCoverageTests(null));
             suite.Add(() => CoreReuseContractTests());
             suite.Add(() => SharedTestHelperContracts(workDir));
             suite.Add(() => CsvTests());
