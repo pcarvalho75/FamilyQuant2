@@ -89,7 +89,8 @@ Ana installs it from the public releases page (D31); the desk publishes on Paulo
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| K9 | Full gate on the release candidate re-cut after J41 (and J32, J34 if merged): every ledger receipt current (quick gates defer them) | M | 0.5 | K8 | K10 | Full gate green, ledger 5,460 of 5,460 | Orchestrator | | 0 | 0 | |
+| K9a | Ledger currency before the full release gate: the 21 VERIFIED rows that did not come back in the first full refresh since 01:30 (13 SH rows from J12's CsvReport.BuildFamilyComposition, 8 C1 rows from J28's PrepareFullXic; list in desk notes/lost-095206.json) each get its reason and either an explicit reviewed relocation or a fresh executed check, no guard weakened; and the two pt-BR curation chooser route checks (IsActive window guard) rerun alone to tell a focus flake from a defect | M | 0.5 | 🟢 | K9 | Refresh on a master copy: 21 of 21 back, curation file contracts 15 of 15 | T1 | | 0 | 0 | |
+| K9 | Full gate on the release candidate re-cut after J41 (and J32, J34 if merged): every ledger receipt current (quick gates defer them) | M | 0.5 | K8, K9a | K10 | Full gate green, ledger 5,460 of 5,460 | Orchestrator | | 0 | 0 | |
 | K10 | The unpacked candidate exports the final project's report through the real menu | L | 0.3 | K9 | K11 | Files and times recorded | EV | | 0 | 0 | |
 | K11 | Published: v2.1.0 on pcarvalho75/FamilyQuant2-releases with the zip, its .sha256 and user release notes | L | 0.1 | K10 | K13, K17 | The release page is live | Orchestrator | | 0 | 0 | |
 | K13 | Install check on 2.1.0 from GitHub; 2.0.0's Check for updates finds 2.1.0 | L | 0.2 | K11 | | Both pass | EV | | 0 | 0 | |
