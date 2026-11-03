@@ -216,6 +216,7 @@ namespace FamilyQuant.Tests
             suite.Add(() => FamilySensitivityTests(Path.Combine(workDir, "family-sensitivity")));
             suite.Section("Panel, threshold, template and report Help");
             suite.Add(() => PanelAuditTests());
+            suite.Add(() => PanelAuditCurrentTests());
             suite.Add(() => ReportThresholdTests());
             suite.Add(() => ReportThresholdPolicyTests());
             suite.Add(() => PanelTemplateTests());
