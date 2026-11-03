@@ -298,6 +298,13 @@ namespace FamilyQuant.Tests
             suite.Add(() => GroupingReviewInteractionTests());
             suite.Add(() => EvidenceGroupingFlowTests());
             suite.Add(() => ReportStudyBoundaryTests());
+            suite.Section("Word report and companion - source values, selection and exact native images");
+            suite.Add(() => WordReportTests(null));
+            suite.AddWithApplication(() => ReportStoredChecks());
+            suite.AddWithApplication(() => ReportSupplementChecks(null));
+            suite.AddWithApplication(() => ReportFigureTests(Path.Combine(workDir, "report-figures")));
+            suite.AddWithApplication(() => WordReportDraftTests());
+            suite.AddWithApplication(() => ReportAssemblyChecks(Path.Combine(workDir, "report-assembly")));
             suite.Add(() => QuantitationPanelTests(Path.Combine(workDir, "quantitation-panel")));
             suite.Add(() => ArchitectureGroupSplitTests());
             suite.Add(() => ArchitectureMemberViewTests());
