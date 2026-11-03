@@ -94,7 +94,6 @@ The program, not a script, puts every database protein in a panel family.
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| J2c | Per-protein audit export: accession, family, subclass, evidence used and why, for Ana to check in Excel | L | 0.5 | 🟢 | J6b | CSV opens in Excel under pt-BR and en-US with the same columns | T1 | | 0 | 0 | |
 
 ### W3 Subclasses
 

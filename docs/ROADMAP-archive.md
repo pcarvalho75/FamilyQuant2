@@ -293,4 +293,5 @@ Finished steps, moved here from docs/ROADMAP.md. The board shows them as green.
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
 | J2a | Assign every target protein to a panel family by evidence: the UniProt family of a toxin-annotated protein, else the nearest reviewed toxin, and where two panel families share a domain the panel's own Pfam lists decide by the accompanying domains; shown as proposals, applied as one undoable locked change | H | 3 | 🟢 | J2b, J2c, J3a | The rule in Help in general words; fixtures; the guard test finds no family, name or Pfam literal | EV | | 0 | 0 | |
 | J2b | Measure that rule: leave-one-out on the reviewed entries, and every difference from the 11-01 draft listed with its reason, both written by the program | M | 1 | J2a | J7a | Program CSV with the right rate; each draft difference has a reason | EV | | 0 | 0 | |
+| J2c | Per-protein audit export: accession, family, subclass, evidence used and why, for Ana to check in Excel | L | 0.5 | 🟢 | J6b | CSV opens in Excel under pt-BR and en-US with the same columns | T1 | | 0 | 0 | |
 
