@@ -99,7 +99,7 @@ public sealed class ComputeXicViewModel : ScreenViewModel
                 (string.IsNullOrWhiteSpace(outcome.SpectrumComparisonCsvPath) ? "" : "\nCSV: " + outcome.SpectrumComparisonCsvPath) +
                 (string.IsNullOrWhiteSpace(outcome.SpectrumComparisonCsvError) ? "" : "\n" + outcome.SpectrumComparisonCsvError) +
                 "\n\n" + HelpWorkflowFacts.Quantify;
-            Status = "Computed. Save the project to keep these results.";
+            Status = "Computed. The results are held in memory; the project itself has not been saved yet. Use File > Save to keep the quant rows and complete spectrum evidence table.";
             Changed(nameof(Result)); Changed(nameof(Computed));
             operation.Dispose();
             Completed?.Invoke(outcome);
