@@ -241,6 +241,14 @@ namespace FamilyQuant.Tests
             suite.AddWithApplication(() => WorkflowReportHelpTests());
             suite.Add(() => AiKeyStoreTests());
             suite.Add(() => AiTransportTests());
+            suite.AddWithApplication(() => AiKeySettingsTests());
+            suite.Add(() => InterpretationNumberTraceTests());
+            suite.Add(() => AiInterpretationDraftTests());
+            suite.Add(() => AiInterpretationWorkflowTests());
+            suite.AddWithApplication(() => AiInterpretationWindowsTests());
+            suite.Add(() => AiInterpretationInputTests());
+            suite.Add(() => AiKeyOfferTests());
+            suite.AddWithApplication(() => AiShellTests());
             suite.Add(() => SuiteMergeGuardTests());
             suite.Add(() => EvidenceFetchTests());
             suite.Add(() => EvidenceFetchAtomicTests());

@@ -14,10 +14,15 @@ namespace FamilyQuant.Ai;
 public enum AiOutcome { Success, WrongKey, Billing, RateLimited, Unavailable, NoConnection, Refusal, Incomplete }
 public sealed record AiResult(AiOutcome Outcome, string Text = "");
 
-public sealed class AiTransport
+public interface IAiTransport
+{
+    Task<AiResult> SendAsync(string key, string prompt, int maxTokens, CancellationToken cancellationToken);
+}
+
+public sealed class AiTransport : IAiTransport
 {
     public const string Model = "claude-opus-5-5";
-    private static readonly HttpClient SharedHttp = new();
+    private static readonly HttpClient SharedHttp = new(new HttpClientHandler { AllowAutoRedirect = false });
     private readonly HttpClient http;
     public AiTransport(HttpClient? client = null) => http = client ?? SharedHttp;
 
@@ -26,7 +31,8 @@ public sealed class AiTransport
         cancellationToken.ThrowIfCancellationRequested();
         ArgumentException.ThrowIfNullOrWhiteSpace(key);
         ArgumentNullException.ThrowIfNull(prompt);
-        var client = new AnthropicClient { ApiKey = key, HttpClient = http, MaxRetries = 0 };
+        var client = new AnthropicClient { ApiKey = key, HttpClient = http, MaxRetries = 0,
+            BaseUrl = "https://api.anthropic.com", OpenTelemetry = false };
         var request = new MessageCreateParams
         {
             Model = Model, MaxTokens = maxTokens,

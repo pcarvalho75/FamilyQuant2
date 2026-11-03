@@ -1,3 +1,5 @@
+using System.Text.Json.Serialization;
+
 namespace FamilyQuant.Report;
 
 /// <summary>
@@ -13,4 +15,8 @@ public sealed record ReportDetails
     public string Workflow { get; init; } = string.Empty;
     public string DatabaseKind { get; init; } = string.Empty;
     public string WrittenInterpretation { get; init; } = string.Empty;
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    public AiInterpretationProvenance? AiInterpretation { get; init; }
 }
+
+public sealed record AiInterpretationProvenance(string Model, string InputSha256);
