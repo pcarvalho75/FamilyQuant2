@@ -6,8 +6,8 @@ using System.Linq;
 
 namespace FamilyQuant.Report;
 
-/// <summary>Only panel-family briefs use the optional collapsed-key unit. Headline, figures and
-/// their canonical Others membership keep the original UserID unit.</summary>
+/// <summary>Panel-family briefs consume stored collapsed-key totals. The caller supplies the
+/// selected report partition projected back to source membership.</summary>
 public static class ReportEffectivePanelFamilies
 {
     public const string UnitNotice = "The headline and composition figures use the stored UserID studies; effective panel-family briefs collapse candidate UserIDs to panel keys before shared-peptide credit, so their assigned-signal denominators can differ.";

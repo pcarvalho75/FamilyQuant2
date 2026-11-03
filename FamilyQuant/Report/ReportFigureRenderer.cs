@@ -22,6 +22,15 @@ public sealed record ReportPlacedFigure(string SectionId, ReportFigure Figure);
 /// An absent stored study is reported; a present but invalid study fails rather than being hidden.</summary>
 public static class ReportFigureRenderer
 {
+    public static ReportFigurePlan SourceUnitSupplement(ReportFigurePlan plan)
+    {
+        string contribution = Path.GetFileNameWithoutExtension(AnalyticsFigures.FamilyContributionFile);
+        bool SourceFamily(ReportChart chart) => chart.FileName.StartsWith(contribution, StringComparison.Ordinal)
+            || chart.FileName == PresentationFigures.FamilySignalShareFile || chart.FileName == PresentationFigures.FamilySourceSequenceFile;
+        return plan with { Charts = plan.Charts.Select(c => SourceFamily(c)
+            ? c with { SectionId = ReportSectionIds.Supplements, Title = c.Title + " (source UserID study)" } : c).ToArray() };
+    }
+
     public static ReportFigurePlan Plan(AnalyticsData data, QuantManifest manifest,
         FamilyClusterFile curation, FamilyEnvelopeQuantResult? families, FamilyReportThresholdResult? reportGrouping = null)
     {

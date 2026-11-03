@@ -332,6 +332,7 @@ namespace FamilyQuant.Tests
             suite.Add(() => ReportListSheetTests(null));
             suite.Add(FamilyUnobservedTests);
             suite.Add(() => EffectivePanelFamiliesTests(null));
+            suite.Add(() => PanelHeadlineTests(null));
             suite.AddWithApplication(() => ReportFigureTests(Path.Combine(workDir, "report-figures")));
             suite.AddWithApplication(() => WordReportDraftTests());
             suite.AddWithApplication(() => ReportAssemblyChecks(Path.Combine(workDir, "report-assembly")));
