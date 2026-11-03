@@ -5,24 +5,24 @@
   "runs": [
     {
       "id": "AS-member-comparison",
-      "command": "C:\\FamilyQuant-gate\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --ledger-assay-cohort D:/FamilyQuant-data/out-shell/N3/source D:/FamilyQuant-data/out-assay/m48-plans/remaining.json D:/FamilyQuant-data/out-refresh\\20261102-182444-FamilyQuant-gate\\assay-remaining AS-remaining \u00222026-11-02 18:25:51 -0800\u0022",
-      "executedAt": "2026-11-02 18:25:51 -0800",
-      "commit": "8421552b22169f5b7ab3c44f2670c992e5e4562c",
+      "command": "C:\\FamilyQuant-gate\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --ledger-assay-cohort D:/FamilyQuant-data/out-shell/N3/source D:/FamilyQuant-data/out-assay/m48-plans/remaining.json D:/FamilyQuant-data/out-refresh\\20261103-140604-FamilyQuant-gate\\assay-remaining AS-remaining \u00222026-11-03 14:06:35 -0800\u0022",
+      "executedAt": "2026-11-03 14:06:35 -0800",
+      "commit": "3ab0bd7d5da0dc6900afda91c85ea5985fffa0ae",
       "artifacts": [
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\assay-remaining\\comparisons.log",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\assay-remaining\\comparisons.log",
           "sha256": "52493BA6CC8CBAB5C29ECC6203B5F4957D0D4C8551F8DDAC94A8AB8533AC5958"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\assay-remaining\\comparisons.json",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\assay-remaining\\comparisons.json",
           "sha256": "663195D00EDEF66EE6C4A9FA2381239997B2D2F5EBB2E9CBD1C45479EE5412C4"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\assay-remaining\\unproven.tsv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\assay-remaining\\unproven.tsv",
           "sha256": "DDFC99DAC74A868B670093654647BFE0E3DA8F72062EDBC6C6C5D279E7CE4970"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\assay-remaining\\counts-by-source.tsv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\assay-remaining\\counts-by-source.tsv",
           "sha256": "21C83F2F7B8DEBC8AF1F9326ECA9DFCF37C98A3537C640407630816002A61218"
         },
         {
@@ -30,24 +30,24 @@
           "sha256": "37BA4469F033CCB87D1B8E92424FF57C0B401716DB85F260413E1F205029B550"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\assay-remaining\\executed\\Program.LedgerAssayCohort.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\assay-remaining\\executed\\Program.LedgerAssayCohort.cs",
           "sha256": "1454F77DB5AAF78EC0D2B36A5999E294B0FA69E7838FE1FF7329A50BAD5DFC58"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\assay-remaining\\executed\\Program.Commands.AssayLedger.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\assay-remaining\\executed\\Program.Commands.AssayLedger.cs",
           "sha256": "46DA029D0DBAA113B736A5E3B2BE7D29C486565EAE0063281F58F292ECC8112E"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\assay-remaining\\executed\\LedgerMemberFactComparison.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\assay-remaining\\executed\\LedgerMemberFactComparison.cs",
           "sha256": "1F3254D635B40D22576E9F40347DBEB503A5FF661EFC18E743EAC35B097FC14C"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\assay-remaining\\executed\\LedgerDeclarationComparison.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\assay-remaining\\executed\\LedgerDeclarationComparison.cs",
           "sha256": "78EC993565740269D572410A84584AF1D96488C1AE81F2455B1D9AA2D94BB4C3"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\assay-remaining\\executed\\FamilyQuant.Tests.dll",
-          "sha256": "6F2762D3760DB80C7EF95E01791ADDCF311D2A58137A9797910B10F57606C080"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\assay-remaining\\executed\\FamilyQuant.Tests.dll",
+          "sha256": "49C720B5ECD30B7BD86E4443AF12603A99D50EDB0B2DDB51AEA09C11775DCE64"
         }
       ],
       "workingDirectory": "C:\\FamilyQuant-gate"
@@ -212,7 +212,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
           "symbol": "FamilyQuant.DeNovo.SpectrumComparisonTable::private static List \u003C Claim \u003E Ranked ( IEnumerable \u003C Claim \u003E claims )",
-          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
+          "sha256": "543977625B258DA255997F76B721ECD25BB6B5852F783679C469D1B9F7068ABE"
         }
       ],
       "proofs": [],
@@ -278,7 +278,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/DeNovoXicCache.cs",
           "symbol": "FamilyQuant.DeNovo.DeNovoXicCache::public void Save ( )",
-          "sha256": "D63E0B9022082142131FA26E1E050BA705133F492761C1D8C97321E4B7CC2B5B"
+          "sha256": "F5296E32FB6CE6CBACD00F9B41E521BC9A86F84520EE8B63673F936BA099F588"
         }
       ],
       "proofs": [],
@@ -328,7 +328,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
           "symbol": "FamilyQuant.DeNovo.SpectrumComparisonTable::private static List \u003C Claim \u003E Ranked ( IEnumerable \u003C Claim \u003E claims )",
-          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
+          "sha256": "543977625B258DA255997F76B721ECD25BB6B5852F783679C469D1B9F7068ABE"
         }
       ],
       "proofs": [],
@@ -468,7 +468,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs",
           "symbol": "FamilyQuant.DeNovo.Ms1EnvelopeDetector::private static void SaveCache ( string path , Ms1EnvelopeDetectionResult result , string sourceFingerprint )",
-          "sha256": "79CA110CF12B1603F371147540B1682854EE4671584F76DA65613F074DCE601F"
+          "sha256": "C98DD10DCD1D8A2BD943AD937CA7CD0324E526E04326A679FB9738E3AD252181"
         }
       ],
       "proofs": [],
@@ -490,7 +490,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
           "symbol": "FamilyQuant.DeNovo.SpectrumComparisonTable::private static List \u003C Claim \u003E Ranked ( IEnumerable \u003C Claim \u003E claims )",
-          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
+          "sha256": "543977625B258DA255997F76B721ECD25BB6B5852F783679C469D1B9F7068ABE"
         }
       ],
       "proofs": [],
@@ -632,7 +632,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
           "symbol": "FamilyQuant.DeNovo.SpectrumComparisonTable::private static string CreditedKey ( NativePeptideQuant quant )",
-          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
+          "sha256": "543977625B258DA255997F76B721ECD25BB6B5852F783679C469D1B9F7068ABE"
         }
       ],
       "proofs": [],
@@ -756,7 +756,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
           "symbol": "FamilyQuant.DeNovo.SpectrumComparisonTable::private static List \u003C Claim \u003E Ranked ( IEnumerable \u003C Claim \u003E claims )",
-          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
+          "sha256": "543977625B258DA255997F76B721ECD25BB6B5852F783679C469D1B9F7068ABE"
         }
       ],
       "proofs": [],
@@ -778,7 +778,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
           "symbol": "FamilyQuant.DeNovo.SpectrumComparisonTable::private static string CreditedKey ( NativePeptideQuant quant )",
-          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
+          "sha256": "543977625B258DA255997F76B721ECD25BB6B5852F783679C469D1B9F7068ABE"
         }
       ],
       "proofs": [],
@@ -828,7 +828,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
           "symbol": "FamilyQuant.DeNovo.SpectrumComparisonTable::private static string EquivalentClaimKey ( Claim claim )",
-          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
+          "sha256": "543977625B258DA255997F76B721ECD25BB6B5852F783679C469D1B9F7068ABE"
         }
       ],
       "proofs": [],
@@ -936,7 +936,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
           "symbol": "FamilyQuant.DeNovo.SpectrumComparisonTable::private static string EquivalentClaimKey ( Claim claim )",
-          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
+          "sha256": "543977625B258DA255997F76B721ECD25BB6B5852F783679C469D1B9F7068ABE"
         }
       ],
       "proofs": [],
@@ -1043,7 +1043,7 @@
           "kind": "test",
           "target": "LedgerAssayCohortCommand",
           "assertion": "AS member kind export/storage fact: every listed frozen/current member declaration agrees",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\assay-remaining\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\assay-remaining\\comparisons.log",
           "inspectedBy": ""
         }
       ]

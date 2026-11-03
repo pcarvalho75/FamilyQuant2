@@ -5,204 +5,228 @@
   "runs": [
     {
       "id": "core-members",
-      "command": "D:\\FamilyQuant-wt\\shell-j15-check\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --ledger-core-relocation D:/FamilyQuant-data/out-floater/ledger/frozen-source D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\core-relocation-x5 X5 \u00222026-11-03 02:49:38 -0800\u0022 D:/FamilyQuant-data/out-floater/ledger/X5-reviewed-relocations.json",
-      "executedAt": "2026-11-03 02:49:38 -0800",
-      "commit": "9fe583514b1e3726e523edb37ca5c10c303cc6dd",
+      "command": "C:\\FamilyQuant-gate\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --ledger-core-relocation D:/FamilyQuant-data/out-floater/ledger/frozen-source D:/FamilyQuant-data/out-refresh\\20261103-140604-FamilyQuant-gate\\core-relocation-x5 X5 \u00222026-11-03 14:06:45 -0800\u0022 D:/FamilyQuant-data/out-floater/ledger/X5-reviewed-relocations.json",
+      "executedAt": "2026-11-03 14:06:45 -0800",
+      "commit": "3ab0bd7d5da0dc6900afda91c85ea5985fffa0ae",
       "artifacts": [
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\core-relocation-x5\\comparisons.log",
-          "sha256": "AE95B6558934FCB6C994F5813A32BB813CB070DB4E13EE5C9945109B1DC94FE1"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\core-relocation-x5\\comparisons.log",
+          "sha256": "74C95B0C3B553E84C6E2E74FC6E539A68B03C0BA4A4AD9188BB3EB0FA96C31F6"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\core-relocation-x5\\comparisons.json",
-          "sha256": "C69319D8CC83DAAAFBA3F12BF1E3771CD4BAE33BF717D3D969C4794716550171"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\core-relocation-x5\\comparisons.json",
+          "sha256": "5997079148C4DFA7214C93EED92848593E82D31473ED8AA28BEDBD2A6E7E95EE"
         },
         {
           "path": "D:\\FamilyQuant-data\\out-floater\\ledger\\X5-reviewed-relocations.json",
           "sha256": "D291745AD50BD292FCEE19DFEF731C3B6512CF4B426585C59CDF4134A15AB1C0"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\core-relocation-x5\\executed\\FamilyQuant.Core/FamilyEnvelopeQuant.cs",
-          "sha256": "7B53E0420601A778C712575295B3386173DD7BF3ECBBB8BE88F2F9577ADBE19D"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\core-relocation-x5\\executed\\FamilyQuant.Core/FamilyEnvelopeQuant.cs",
+          "sha256": "D422D55BAAED6A70CEF71C9F61DFDCDFAE2D276C47726E4BED6DC8F3D3C41CB5"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\core-relocation-x5\\executed\\FamilyQuant.Core/FullXicComputer.cs",
-          "sha256": "CD071676A16CF4BA9C6BE7A26BD6308F46548ED9510F840DAB0E3D920CD14F05"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\core-relocation-x5\\executed\\FamilyQuant.Core/FullXicComputer.cs",
+          "sha256": "CE1264D6BC1C45168222FDA294C1C6EC05147A8BA88AAD995E818AA5D415C817"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\core-relocation-x5\\executed\\FamilyQuant.Core/Quantitation/CompositionPeptideIndex.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\core-relocation-x5\\executed\\FamilyQuant.Core/Quantitation/CompositionPeptideIndex.cs",
           "sha256": "5EFCB7E79412B88ABD19C66A5E6A50932944485FDAF3B0F5FB698D0C80BB514D"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\core-relocation-x5\\executed\\FamilyQuant.Core/Quantitation/CompositionProteinCandidates.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\core-relocation-x5\\executed\\FamilyQuant.Core/Quantitation/CompositionProteinCandidates.cs",
           "sha256": "CE41BCDBCDE276F918DE2F28ACBD1D461E066526783B3B80B0D1A86E5435F844"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\core-relocation-x5\\executed\\FamilyQuant.Core/Quantitation/CurationLocalizationOffsets.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\core-relocation-x5\\executed\\FamilyQuant.Core/Quantitation/CurationHomologyCache.cs",
+          "sha256": "3B88D9592B364A8BB45EDE1C5F872BD11295609151A02CD256BF428A3B276A49"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\core-relocation-x5\\executed\\FamilyQuant.Core/Quantitation/CurationLocalizationOffsets.cs",
           "sha256": "E4CD4EBDFDD4FD401711B7BC846929DB1745015DEBC4F4001D6AB6ABB2D74A28"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\core-relocation-x5\\executed\\FamilyQuant.Core/Quantitation/FamilyCompositionResults.cs",
-          "sha256": "7F99977A05D3A7F0166458C7E84A09F142FBFCC3452F3C6F1E3CFF04F83CB6C3"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\core-relocation-x5\\executed\\FamilyQuant.Core/Quantitation/EffectivePanelFamilyResults.cs",
+          "sha256": "82B45B09EDD6658CA22B352649202A6F0DC070A518E02EE5F5D2FF90AE960008"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\core-relocation-x5\\executed\\FamilyQuant.Core/Quantitation/FamilyCompositionStudy.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\core-relocation-x5\\executed\\FamilyQuant.Core/Quantitation/EffectivePanelFamilyStudy.Parts.cs",
+          "sha256": "D118F45D2A6BB41A3AAEF1AA170C281D779CBE021F01DA24D0CC00EFE3A25B50"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\core-relocation-x5\\executed\\FamilyQuant.Core/Quantitation/EffectivePanelFamilyStudy.cs",
+          "sha256": "E6BEC5FF92CFADFB59377FF18B78C41EF22FB8F3A0D0A84D6B70EDD7964D6ED6"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\core-relocation-x5\\executed\\FamilyQuant.Core/Quantitation/FamilyCompositionResults.cs",
+          "sha256": "CE2A15C5CC10339D837CD0A52B4E71A405A5768269F9B6F6502AA85FF0FF1E9C"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\core-relocation-x5\\executed\\FamilyQuant.Core/Quantitation/FamilyCompositionStudy.cs",
           "sha256": "1634A13EF274EDC489982A8AA6EDAA3F64FA748371B2BD96184D708321FE1D39"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\core-relocation-x5\\executed\\FamilyQuant.Core/Quantitation/FamilyCurationAttribution.cs",
-          "sha256": "3DE920741C178887AB612C2C62488B30E2BF50622003BB2441F27485FC5BAB6E"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\core-relocation-x5\\executed\\FamilyQuant.Core/Quantitation/FamilyCurationAttribution.cs",
+          "sha256": "709882781729AEB784CCEA86CEB42AB3D0986905A7CCE9D300C06F5AB5E1EE32"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\core-relocation-x5\\executed\\FamilyQuant.Core/Quantitation/FamilyEnvelopeModels.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\core-relocation-x5\\executed\\FamilyQuant.Core/Quantitation/FamilyEnvelopeModels.cs",
           "sha256": "928512F5F910BEA1CFA84DCB776FA2E5AC0917F5A5D406C68E0521B7FADD3521"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\core-relocation-x5\\executed\\FamilyQuant.Core/Quantitation/FamilyPeptideAttribution.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\core-relocation-x5\\executed\\FamilyQuant.Core/Quantitation/FamilyPeptideAttribution.cs",
           "sha256": "9D11E32C2367307F759F8AF0D37FA1DDBC52B4C64263D4CCC4FEC66CD9C80E8D"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\core-relocation-x5\\executed\\FamilyQuant.Core/Quantitation/FamilyPeptideLocalizationResults.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\core-relocation-x5\\executed\\FamilyQuant.Core/Quantitation/FamilyPeptideLocalizationResults.cs",
           "sha256": "B8F8572DEAD9DC0D62A5BA05518EC69672D912624B990F426C1C3D097C97B41E"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\core-relocation-x5\\executed\\FamilyQuant.Core/Quantitation/FamilyPositionAllocation.cs",
-          "sha256": "D0B268522E3F42F979424FBBEC74EB52A850660869F82C850F20ED2F6FA3042D"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\core-relocation-x5\\executed\\FamilyQuant.Core/Quantitation/FamilyPositionAllocation.cs",
+          "sha256": "5FF057F310893CC9F9673FC51EC8C477DCE9031A0249E153E6305B63BB73A360"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\core-relocation-x5\\executed\\FamilyQuant.Core/Quantitation/FamilyPositionCurationAdapter.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\core-relocation-x5\\executed\\FamilyQuant.Core/Quantitation/FamilyPositionCurationAdapter.cs",
           "sha256": "C2576F3477D234F3B849078DE0935D8C406975268C790F6B58B3930832BF5EAE"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\core-relocation-x5\\executed\\FamilyQuant.Core/Quantitation/FamilyPositionStudies.cs",
-          "sha256": "F902F85ECEC46DCCE2EFEB156D0C18C9BDF430E29CE5995056DEF6EB0F3FEF04"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\core-relocation-x5\\executed\\FamilyQuant.Core/Quantitation/FamilyPositionStudies.cs",
+          "sha256": "8EC517ED4EE94AEE17FCD97CEF29EE028E82BC0B11135E63CB9143E1951783D0"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\core-relocation-x5\\executed\\FamilyQuant.Core/Quantitation/FamilyProteinCountsStudy.cs",
-          "sha256": "C9D8848C40E7B7659934D3E8F185B86108BF931F6D2CE44D5BF54F9D9DDB0A9F"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\core-relocation-x5\\executed\\FamilyQuant.Core/Quantitation/FamilyProteinCountsStudy.cs",
+          "sha256": "540FA56739E8EA69BF1ECE2C3C1AD5F124447C0AE64C9CDB6E0707480A3DBC4B"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\core-relocation-x5\\executed\\FamilyQuant.Core/Quantitation/FamilyReportThreshold.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\core-relocation-x5\\executed\\FamilyQuant.Core/Quantitation/FamilyReportThreshold.cs",
           "sha256": "B1CADE713C23FB033D1A9963BF80359513E6DAD541762013EBD435682EB326D1"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\core-relocation-x5\\executed\\FamilyQuant.Core/Quantitation/FamilyReportThresholdResult.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\core-relocation-x5\\executed\\FamilyQuant.Core/Quantitation/FamilyReportThresholdResult.cs",
           "sha256": "9FBEDBABCE4E49D56F780897731C828A9C721B0E380C67DF40918C23E5C68642"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\core-relocation-x5\\executed\\FamilyQuant.Core/Quantitation/FamilyRunSharesStudy.cs",
-          "sha256": "A3D2CC0D9CF522038A6846756D1AD5CEC5ABACA969A075D31C7D58ACABE768D2"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\core-relocation-x5\\executed\\FamilyQuant.Core/Quantitation/FamilyRunSharesStudy.cs",
+          "sha256": "8806D44EBA263F941696460B0DD2BBD87F5732B43E6543238CF5E01FD7068964"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\core-relocation-x5\\executed\\FamilyQuant.Core/Quantitation/FamilySensitivityResults.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\core-relocation-x5\\executed\\FamilyQuant.Core/Quantitation/FamilySensitivityResults.cs",
           "sha256": "82D6A59A5C6A87374CB2B7DFCDFA212E0BE936BBDE86FAF2242BE0BDB50BAA57"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\core-relocation-x5\\executed\\FamilyQuant.Core/Quantitation/FamilySensitivityStudy.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\core-relocation-x5\\executed\\FamilyQuant.Core/Quantitation/FamilySensitivityStudy.cs",
           "sha256": "8597250243C81E15A026814A810760BF46C32D3B66FB06F6B1841F3AF80643D4"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\core-relocation-x5\\executed\\FamilyQuant.Core/Quantitation/FamilySensitivityTable.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\core-relocation-x5\\executed\\FamilyQuant.Core/Quantitation/FamilySensitivityTable.cs",
           "sha256": "BD2C9F4E6F414B0496E4F9748D0D8B14A9D5623EB373A6C0E3C5CF73F9485A2D"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\core-relocation-x5\\executed\\FamilyQuant.Core/Quantitation/FamilySourceSequenceCensus.cs",
-          "sha256": "94F2FE128627D9D7E63177F69CA63FF558A60D5DEAF15C6415648D15A546ECA7"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\core-relocation-x5\\executed\\FamilyQuant.Core/Quantitation/FamilySourceCensusCache.cs",
+          "sha256": "4050EBB8838529D8BF231F638E434A0DE03182716AA71A83EE67CB0474871287"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\core-relocation-x5\\executed\\FamilyQuant.Core/Quantitation/FamilyStudyMembership.cs",
-          "sha256": "923AB5F55286702CAB1DF982C84C42432A704B75B23974ECFAAFEDD73C1CB7C8"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\core-relocation-x5\\executed\\FamilyQuant.Core/Quantitation/FamilySourceSequenceCensus.cs",
+          "sha256": "2D36C97B32EAD8338D4EC2D85F1CEE4A832B272F871C52F0B92A76C2CBE4A487"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\core-relocation-x5\\executed\\FamilyQuant.Core/Quantitation/FamilySubclassCurationAdapter.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\core-relocation-x5\\executed\\FamilyQuant.Core/Quantitation/FamilyStudyMembership.cs",
+          "sha256": "87E9F459F1E36D2DCC6059850CD9A870AD808FC5C15F1ADF5576183B0542A843"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\core-relocation-x5\\executed\\FamilyQuant.Core/Quantitation/FamilySubclassCurationAdapter.cs",
           "sha256": "39EAF5AFD7EB2DAF3F3B9A8A87EEF9985E20F71EEFB5F7AC03509162903A4A9F"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\core-relocation-x5\\executed\\FamilyQuant.Core/Quantitation/FamilyWorldAnalysis.cs",
-          "sha256": "8080697FF40B639D73CB85802B5074DD4059E3865BB9CD5BE452B7ABD37109D0"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\core-relocation-x5\\executed\\FamilyQuant.Core/Quantitation/FamilyUnobservedStudies.cs",
+          "sha256": "0748EB917E7F9974DB24FBAF6648CC612FC8FB95F374EEB330D24621F831CED7"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\core-relocation-x5\\executed\\FamilyQuant.Core/Quantitation/FamilyWorldDecoyRates.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\core-relocation-x5\\executed\\FamilyQuant.Core/Quantitation/FamilyWorldAnalysis.cs",
+          "sha256": "79CA9B27CAFBC5ECE505BADC55C14F0373E3FB31FD59E89D4D734C4CD1B6F259"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\core-relocation-x5\\executed\\FamilyQuant.Core/Quantitation/FamilyWorldDecoyRates.cs",
           "sha256": "BD7AB45066C7EBAA916B34C591BD444E507AE3C6F160D90CC02A747F2C73282F"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\core-relocation-x5\\executed\\FamilyQuant.Core/Quantitation/FamilyWorldErrors.cs",
-          "sha256": "36A0D0A3203318F65F0D19D1A3EC6E8202866DFAC03EA0BD9BDD34C76DE3B91E"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\core-relocation-x5\\executed\\FamilyQuant.Core/Quantitation/FamilyWorldErrors.cs",
+          "sha256": "43AECAED0A889564AB75D8BA1D2740533550BC80E990484240FC7DEE8040BD91"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\core-relocation-x5\\executed\\FamilyQuant.Core/Quantitation/FamilyWorldPass.cs",
-          "sha256": "64B743CA8C3CA8360CDB2BF3F12517836120C004BF6B6997ED349D4F7C87E221"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\core-relocation-x5\\executed\\FamilyQuant.Core/Quantitation/FamilyWorldPass.cs",
+          "sha256": "09D47C38738708668BCB9120263EE529F3DF5D27FF227EC7F34E72BD4A2E9DF1"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\core-relocation-x5\\executed\\FamilyQuant.Core/Quantitation/FullXicCompletionStage.cs",
-          "sha256": "FCFE51151748DC15D53529D4FA8F851203EB37FCBECE7D67F24BCDFB9E23B340"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\core-relocation-x5\\executed\\FamilyQuant.Core/Quantitation/FullXicCompletionStage.cs",
+          "sha256": "E377958BA4750F629D488CCDB29D6A0C022CD112F87CB03CDD9DF02A4ADB0615"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\core-relocation-x5\\executed\\FamilyQuant.Core/Quantitation/FullXicInputStage.cs",
-          "sha256": "179D7B52396DE6617CB3D27AFB8CEC95A2AA7277B76E875EA52436E47A00EFA2"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\core-relocation-x5\\executed\\FamilyQuant.Core/Quantitation/FullXicInputStage.cs",
+          "sha256": "3D77C47FEA51290FD14B2767DDA7D6816E0884D63BC34308034D372A10545E5C"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\core-relocation-x5\\executed\\FamilyQuant.Core/Quantitation/FullXicModels.cs",
-          "sha256": "92AACA640A441951B8D10CCCD45A8C8CF7C3C16E85E2F5B91866281FEAEFDD8E"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\core-relocation-x5\\executed\\FamilyQuant.Core/Quantitation/FullXicModels.cs",
+          "sha256": "D459E25C82E1ABBB3E7B310863ECCA8186A8BE0E94013C4C377A7079457D5348"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\core-relocation-x5\\executed\\FamilyQuant.Core/Quantitation/FullXicRunMatch.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\core-relocation-x5\\executed\\FamilyQuant.Core/Quantitation/FullXicRunMatch.cs",
           "sha256": "DBCF886A5B63A85F12623E21F87DE68C9B9C74370051DF13C0F5F0FAD4F7F12D"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\core-relocation-x5\\executed\\FamilyQuant.Core/Quantitation/FullXicRunStage.cs",
-          "sha256": "06142790EC593ECF52A032A001AC62BF9F6412D2A627E1625A6E17BC72BEF9D7"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\core-relocation-x5\\executed\\FamilyQuant.Core/Quantitation/FullXicRunStage.cs",
+          "sha256": "F453A7D84D209B9F26FD9034F084533E74A25D57C9984F5F03B6DCA0D7DBA758"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\core-relocation-x5\\executed\\FamilyQuant.Core/Quantitation/FullXicSourceStage.cs",
-          "sha256": "1CB50531540941797A8856950254A7FD30836C7024EC9C25EABC1CFFE8051630"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\core-relocation-x5\\executed\\FamilyQuant.Core/Quantitation/FullXicSourceStage.cs",
+          "sha256": "CA347B8B23375DAA3D08BC329A3EDB8E8FC71853BE0AA6EFE09585FF2A51BA9C"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\core-relocation-x5\\executed\\FamilyQuant.Core/Quantitation/FullXicStoragePaths.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\core-relocation-x5\\executed\\FamilyQuant.Core/Quantitation/FullXicStoragePaths.cs",
           "sha256": "86E1D205030AC62211725E3522B965CAD20B013F5D67207FC0A43ACA3F16E3CA"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\core-relocation-x5\\executed\\FamilyQuant.Core/Quantitation/PanelAuditCsv.cs",
-          "sha256": "40D4C53006E862E69289CD17581B5006534E251AF3255E0ABA61E81F73E7429D"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\core-relocation-x5\\executed\\FamilyQuant.Core/Quantitation/PanelAuditCsv.cs",
+          "sha256": "50F87BD4BB60156CB7B99BF3BBFF8FE4A94C1C0538069B546423E77C6BE6C1FB"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\core-relocation-x5\\executed\\FamilyQuant.Tests/FeatureLedgerEvidence.Reporting.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\core-relocation-x5\\executed\\FamilyQuant.Tests/FeatureLedgerEvidence.Reporting.cs",
           "sha256": "E9A4F3A2A671452283E1C28E155B81DEF97F9BAE907945607C1F16DD0078CC12"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\core-relocation-x5\\executed\\FamilyQuant.Tests/FeatureLedgerEvidence.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\core-relocation-x5\\executed\\FamilyQuant.Tests/FeatureLedgerEvidence.cs",
           "sha256": "7FFE973E1D4F66812812B051DAB78C93169902380838CFA92C011F86B1C3A02D"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\core-relocation-x5\\executed\\FamilyQuant.Tests/LedgerMemberFactComparison.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\core-relocation-x5\\executed\\FamilyQuant.Tests/LedgerMemberFactComparison.cs",
           "sha256": "1F3254D635B40D22576E9F40347DBEB503A5FF661EFC18E743EAC35B097FC14C"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\core-relocation-x5\\executed\\FamilyQuant.Tests/Program.Commands.CoreRelocation.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\core-relocation-x5\\executed\\FamilyQuant.Tests/Program.Commands.CoreRelocation.cs",
           "sha256": "632EA73117DFE589F8F209110D91A1431BCC97BFC7CA5BD009C60AE550725361"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\core-relocation-x5\\executed\\FamilyQuant.Tests/Program.CoreRelocation.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\core-relocation-x5\\executed\\FamilyQuant.Tests/Program.CoreRelocation.cs",
           "sha256": "2CECC1BACB96EA489AFD3ED5EFD72373A762B6F08452048E6F4FC449B87E1367"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\core-relocation-x5\\executed\\frozen\\FamilyQuant/FullXicComputer.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\core-relocation-x5\\executed\\frozen\\FamilyQuant/FullXicComputer.cs",
           "sha256": "ED72573B31BCFD68FEE783807A692C51452FD98B4B039B93E9BCBBC9A198BA58"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\core-relocation-x5\\executed\\frozen\\FamilyQuant/FamilyEnvelopeQuant.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\core-relocation-x5\\executed\\frozen\\FamilyQuant/FamilyEnvelopeQuant.cs",
           "sha256": "258311C5951F41E3323C72016CCA6F0BF10AB0570D7B12D944DAC0F6DC5EA6FD"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\core-relocation-x5\\executed\\FamilyQuant.Tests.dll",
-          "sha256": "6407606040C45143C12C0432C670F6345DD42144E1608CE7BFE61C0AD1530979"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\core-relocation-x5\\executed\\FamilyQuant.Tests.dll",
+          "sha256": "49C720B5ECD30B7BD86E4443AF12603A99D50EDB0B2DDB51AEA09C11775DCE64"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\core-relocation-x5\\executed\\FamilyQuant.Core.dll",
-          "sha256": "738A1059162D1AC024C965E3FFB31B9920AA635687AB66379DC2000A990C666F"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\core-relocation-x5\\executed\\FamilyQuant.Core.dll",
+          "sha256": "597BF4DBBF66E40BB6FB46AE769CACCBFDC51BEE0874A5E043377A282237B68B"
         }
       ],
-      "workingDirectory": "D:\\FamilyQuant-wt\\shell-j15-check"
+      "workingDirectory": "C:\\FamilyQuant-gate"
     }
   ],
   "rows": [
@@ -240,7 +264,7 @@
       "observationId": "FQ15-0799A52C9394",
       "implementation": [],
       "proofs": [],
-      "note": "The exact literal multiplicity within the containing member changed.",
+      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -248,7 +272,7 @@
       "observationId": "FQ15-09CB0A3405D1",
       "implementation": [],
       "proofs": [],
-      "note": "The exact literal multiplicity within the containing member changed.",
+      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -256,7 +280,7 @@
       "observationId": "FQ15-0B83B7FAA554",
       "implementation": [],
       "proofs": [],
-      "note": "The exact literal multiplicity within the containing member changed.",
+      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -280,7 +304,7 @@
         {
           "path": "FamilyQuant.Core/FullXicComputer.cs",
           "symbol": "FamilyQuant.FullXicComputer::public static List \u003C string \u003E DescribeTicShares ( IEnumerable \u003C DerivedRunFraction \u003E ? fractions )",
-          "sha256": "CD071676A16CF4BA9C6BE7A26BD6308F46548ED9510F840DAB0E3D920CD14F05"
+          "sha256": "CE1264D6BC1C45168222FDA294C1C6EC05147A8BA88AAD995E818AA5D415C817"
         }
       ],
       "proofs": [],
@@ -306,7 +330,7 @@
       "observationId": "FQ15-15D163FAA780",
       "implementation": [],
       "proofs": [],
-      "note": "The exact literal multiplicity within the containing member changed.",
+      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -358,7 +382,7 @@
         {
           "path": "FamilyQuant.Core/FullXicComputer.cs",
           "symbol": "FamilyQuant.FullXicComputer::public static List \u003C string \u003E DescribeTicShares ( IEnumerable \u003C DerivedRunFraction \u003E ? fractions )",
-          "sha256": "CD071676A16CF4BA9C6BE7A26BD6308F46548ED9510F840DAB0E3D920CD14F05"
+          "sha256": "CE1264D6BC1C45168222FDA294C1C6EC05147A8BA88AAD995E818AA5D415C817"
         }
       ],
       "proofs": [],
@@ -380,7 +404,7 @@
         {
           "path": "FamilyQuant.Core/FullXicComputer.cs",
           "symbol": "FamilyQuant.FullXicComputer::public static List \u003C string \u003E DescribeTicShares ( IEnumerable \u003C DerivedRunFraction \u003E ? fractions )",
-          "sha256": "CD071676A16CF4BA9C6BE7A26BD6308F46548ED9510F840DAB0E3D920CD14F05"
+          "sha256": "CE1264D6BC1C45168222FDA294C1C6EC05147A8BA88AAD995E818AA5D415C817"
         }
       ],
       "proofs": [],
@@ -400,7 +424,7 @@
       "observationId": "FQ15-222784EFA8AB",
       "implementation": [],
       "proofs": [],
-      "note": "The exact literal multiplicity within the containing member changed.",
+      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -408,7 +432,7 @@
       "observationId": "FQ15-228A4BFC8CC9",
       "implementation": [],
       "proofs": [],
-      "note": "The exact literal multiplicity within the containing member changed.",
+      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -438,7 +462,7 @@
       "observationId": "FQ15-238D7603CEBF",
       "implementation": [],
       "proofs": [],
-      "note": "The exact literal multiplicity within the containing member changed.",
+      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -448,7 +472,7 @@
         {
           "path": "FamilyQuant.Core/FullXicComputer.cs",
           "symbol": "FamilyQuant.FullXicComputer::public static List \u003C string \u003E DescribeTicShares ( IEnumerable \u003C DerivedRunFraction \u003E ? fractions )",
-          "sha256": "CD071676A16CF4BA9C6BE7A26BD6308F46548ED9510F840DAB0E3D920CD14F05"
+          "sha256": "CE1264D6BC1C45168222FDA294C1C6EC05147A8BA88AAD995E818AA5D415C817"
         }
       ],
       "proofs": [],
@@ -498,7 +522,7 @@
         {
           "path": "FamilyQuant.Core/FullXicComputer.cs",
           "symbol": "FamilyQuant.FullXicComputer::public static List \u003C string \u003E DescribeTicShares ( IEnumerable \u003C DerivedRunFraction \u003E ? fractions )",
-          "sha256": "CD071676A16CF4BA9C6BE7A26BD6308F46548ED9510F840DAB0E3D920CD14F05"
+          "sha256": "CE1264D6BC1C45168222FDA294C1C6EC05147A8BA88AAD995E818AA5D415C817"
         }
       ],
       "proofs": [],
@@ -510,7 +534,7 @@
       "observationId": "FQ15-304BFB289D54",
       "implementation": [],
       "proofs": [],
-      "note": "The exact literal multiplicity within the containing member changed.",
+      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -518,7 +542,7 @@
       "observationId": "FQ15-321BECF71001",
       "implementation": [],
       "proofs": [],
-      "note": "The exact literal multiplicity within the containing member changed.",
+      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -528,7 +552,7 @@
         {
           "path": "FamilyQuant.Core/FullXicComputer.cs",
           "symbol": "FamilyQuant.FullXicComputer::public static List \u003C string \u003E DescribeTicShares ( IEnumerable \u003C DerivedRunFraction \u003E ? fractions )",
-          "sha256": "CD071676A16CF4BA9C6BE7A26BD6308F46548ED9510F840DAB0E3D920CD14F05"
+          "sha256": "CE1264D6BC1C45168222FDA294C1C6EC05147A8BA88AAD995E818AA5D415C817"
         }
       ],
       "proofs": [],
@@ -540,7 +564,7 @@
       "observationId": "FQ15-37B080CB2138",
       "implementation": [],
       "proofs": [],
-      "note": "The exact literal multiplicity within the containing member changed.",
+      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -576,7 +600,7 @@
       "observationId": "FQ15-3D4F77FDED0E",
       "implementation": [],
       "proofs": [],
-      "note": "The exact literal multiplicity within the containing member changed.",
+      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -592,7 +616,7 @@
       "observationId": "FQ15-3E32D8E2F780",
       "implementation": [],
       "proofs": [],
-      "note": "The exact literal multiplicity within the containing member changed.",
+      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -600,7 +624,7 @@
       "observationId": "FQ15-3F934B495038",
       "implementation": [],
       "proofs": [],
-      "note": "The exact literal multiplicity within the containing member changed.",
+      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -608,7 +632,7 @@
       "observationId": "FQ15-443CD5A9880B",
       "implementation": [],
       "proofs": [],
-      "note": "The exact literal multiplicity within the containing member changed.",
+      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -616,7 +640,7 @@
       "observationId": "FQ15-45ECA6780D7A",
       "implementation": [],
       "proofs": [],
-      "note": "The exact literal multiplicity within the containing member changed.",
+      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -640,7 +664,7 @@
       "observationId": "FQ15-4D6485AB908B",
       "implementation": [],
       "proofs": [],
-      "note": "The exact literal multiplicity within the containing member changed.",
+      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -664,7 +688,7 @@
       "observationId": "FQ15-500EB2CCA45D",
       "implementation": [],
       "proofs": [],
-      "note": "The exact literal multiplicity within the containing member changed.",
+      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -672,7 +696,7 @@
       "observationId": "FQ15-52CECCEB7A37",
       "implementation": [],
       "proofs": [],
-      "note": "The exact literal multiplicity within the containing member changed.",
+      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -694,7 +718,7 @@
       "observationId": "FQ15-55D93E7970D7",
       "implementation": [],
       "proofs": [],
-      "note": "The exact literal multiplicity within the containing member changed.",
+      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -724,7 +748,7 @@
       "observationId": "FQ15-580CC33CCE5B",
       "implementation": [],
       "proofs": [],
-      "note": "The exact literal multiplicity within the containing member changed.",
+      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -734,7 +758,7 @@
         {
           "path": "FamilyQuant.Core/FullXicComputer.cs",
           "symbol": "FamilyQuant.FullXicComputer::public static List \u003C string \u003E DescribeTicShares ( IEnumerable \u003C DerivedRunFraction \u003E ? fractions )",
-          "sha256": "CD071676A16CF4BA9C6BE7A26BD6308F46548ED9510F840DAB0E3D920CD14F05"
+          "sha256": "CE1264D6BC1C45168222FDA294C1C6EC05147A8BA88AAD995E818AA5D415C817"
         }
       ],
       "proofs": [],
@@ -782,7 +806,7 @@
       "observationId": "FQ15-5E612B6D4668",
       "implementation": [],
       "proofs": [],
-      "note": "The exact literal multiplicity within the containing member changed.",
+      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -806,7 +830,7 @@
         {
           "path": "FamilyQuant.Core/FullXicComputer.cs",
           "symbol": "FamilyQuant.FullXicComputer::public static List \u003C string \u003E DescribeTicShares ( IEnumerable \u003C DerivedRunFraction \u003E ? fractions )",
-          "sha256": "CD071676A16CF4BA9C6BE7A26BD6308F46548ED9510F840DAB0E3D920CD14F05"
+          "sha256": "CE1264D6BC1C45168222FDA294C1C6EC05147A8BA88AAD995E818AA5D415C817"
         }
       ],
       "proofs": [],
@@ -820,7 +844,7 @@
         {
           "path": "FamilyQuant.Core/Quantitation/FullXicModels.cs",
           "symbol": "FamilyQuant.FullXicComputeResult::public int IdentifiedRows",
-          "sha256": "92AACA640A441951B8D10CCCD45A8C8CF7C3C16E85E2F5B91866281FEAEFDD8E"
+          "sha256": "D459E25C82E1ABBB3E7B310863ECCA8186A8BE0E94013C4C377A7079457D5348"
         }
       ],
       "proofs": [],
@@ -832,7 +856,7 @@
       "observationId": "FQ15-6675FF32BA50",
       "implementation": [],
       "proofs": [],
-      "note": "The exact literal multiplicity within the containing member changed.",
+      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -850,7 +874,7 @@
         {
           "path": "FamilyQuant.Core/FullXicComputer.cs",
           "symbol": "FamilyQuant.FullXicComputer::public static List \u003C string \u003E DescribeTicShares ( IEnumerable \u003C DerivedRunFraction \u003E ? fractions )",
-          "sha256": "CD071676A16CF4BA9C6BE7A26BD6308F46548ED9510F840DAB0E3D920CD14F05"
+          "sha256": "CE1264D6BC1C45168222FDA294C1C6EC05147A8BA88AAD995E818AA5D415C817"
         }
       ],
       "proofs": [],
@@ -870,7 +894,7 @@
       "observationId": "FQ15-74FDFA70A6DD",
       "implementation": [],
       "proofs": [],
-      "note": "The exact literal multiplicity within the containing member changed.",
+      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -880,7 +904,7 @@
         {
           "path": "FamilyQuant.Core/FullXicComputer.cs",
           "symbol": "FamilyQuant.FullXicComputer::public static List \u003C string \u003E DescribeTicShares ( IEnumerable \u003C DerivedRunFraction \u003E ? fractions )",
-          "sha256": "CD071676A16CF4BA9C6BE7A26BD6308F46548ED9510F840DAB0E3D920CD14F05"
+          "sha256": "CE1264D6BC1C45168222FDA294C1C6EC05147A8BA88AAD995E818AA5D415C817"
         }
       ],
       "proofs": [],
@@ -894,7 +918,7 @@
         {
           "path": "FamilyQuant.Core/FullXicComputer.cs",
           "symbol": "FamilyQuant.FullXicComputer::public static List \u003C string \u003E DescribeTicShares ( IEnumerable \u003C DerivedRunFraction \u003E ? fractions )",
-          "sha256": "CD071676A16CF4BA9C6BE7A26BD6308F46548ED9510F840DAB0E3D920CD14F05"
+          "sha256": "CE1264D6BC1C45168222FDA294C1C6EC05147A8BA88AAD995E818AA5D415C817"
         }
       ],
       "proofs": [],
@@ -906,7 +930,7 @@
       "observationId": "FQ15-784ED2F5B9C6",
       "implementation": [],
       "proofs": [],
-      "note": "The exact literal multiplicity within the containing member changed.",
+      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -936,7 +960,7 @@
       "observationId": "FQ15-7D7F4767477A",
       "implementation": [],
       "proofs": [],
-      "note": "The exact literal multiplicity within the containing member changed.",
+      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -944,7 +968,7 @@
       "observationId": "FQ15-81DF7ED5DAA6",
       "implementation": [],
       "proofs": [],
-      "note": "The exact literal multiplicity within the containing member changed.",
+      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -952,7 +976,7 @@
       "observationId": "FQ15-86EC167DFB43",
       "implementation": [],
       "proofs": [],
-      "note": "The exact literal multiplicity within the containing member changed.",
+      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -974,7 +998,7 @@
       "observationId": "FQ15-876B7393E318",
       "implementation": [],
       "proofs": [],
-      "note": "The exact literal multiplicity within the containing member changed.",
+      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -1006,7 +1030,7 @@
         {
           "path": "FamilyQuant.Core/FullXicComputer.cs",
           "symbol": "FamilyQuant.FullXicComputer::public static List \u003C string \u003E DescribeTicShares ( IEnumerable \u003C DerivedRunFraction \u003E ? fractions )",
-          "sha256": "CD071676A16CF4BA9C6BE7A26BD6308F46548ED9510F840DAB0E3D920CD14F05"
+          "sha256": "CE1264D6BC1C45168222FDA294C1C6EC05147A8BA88AAD995E818AA5D415C817"
         }
       ],
       "proofs": [],
@@ -1018,7 +1042,7 @@
       "observationId": "FQ15-8A8A02F4D40B",
       "implementation": [],
       "proofs": [],
-      "note": "The exact literal multiplicity within the containing member changed.",
+      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -1026,7 +1050,7 @@
       "observationId": "FQ15-8BF6E74D83EA",
       "implementation": [],
       "proofs": [],
-      "note": "The exact literal multiplicity within the containing member changed.",
+      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -1034,7 +1058,7 @@
       "observationId": "FQ15-8C3F03F24F56",
       "implementation": [],
       "proofs": [],
-      "note": "The exact literal multiplicity within the containing member changed.",
+      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -1042,7 +1066,7 @@
       "observationId": "FQ15-8E3D6DC6122D",
       "implementation": [],
       "proofs": [],
-      "note": "The exact literal multiplicity within the containing member changed.",
+      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -1096,7 +1120,7 @@
         {
           "path": "FamilyQuant.Core/FullXicComputer.cs",
           "symbol": "FamilyQuant.FullXicComputer::public static List \u003C string \u003E DescribeTicShares ( IEnumerable \u003C DerivedRunFraction \u003E ? fractions )",
-          "sha256": "CD071676A16CF4BA9C6BE7A26BD6308F46548ED9510F840DAB0E3D920CD14F05"
+          "sha256": "CE1264D6BC1C45168222FDA294C1C6EC05147A8BA88AAD995E818AA5D415C817"
         }
       ],
       "proofs": [],
@@ -1110,7 +1134,7 @@
         {
           "path": "FamilyQuant.Core/Quantitation/FullXicModels.cs",
           "symbol": "FamilyQuant.FullXicComputeResult::public int DeNovoRows",
-          "sha256": "92AACA640A441951B8D10CCCD45A8C8CF7C3C16E85E2F5B91866281FEAEFDD8E"
+          "sha256": "D459E25C82E1ABBB3E7B310863ECCA8186A8BE0E94013C4C377A7079457D5348"
         }
       ],
       "proofs": [],
@@ -1144,7 +1168,7 @@
       "observationId": "FQ15-9C2CBEFBC82D",
       "implementation": [],
       "proofs": [],
-      "note": "The exact literal multiplicity within the containing member changed.",
+      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -1174,7 +1198,7 @@
       "observationId": "FQ15-A391A3D8DA40",
       "implementation": [],
       "proofs": [],
-      "note": "The exact literal multiplicity within the containing member changed.",
+      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -1184,7 +1208,7 @@
         {
           "path": "FamilyQuant.Core/FullXicComputer.cs",
           "symbol": "FamilyQuant.FullXicComputer::public static List \u003C string \u003E DescribeTicShares ( IEnumerable \u003C DerivedRunFraction \u003E ? fractions )",
-          "sha256": "CD071676A16CF4BA9C6BE7A26BD6308F46548ED9510F840DAB0E3D920CD14F05"
+          "sha256": "CE1264D6BC1C45168222FDA294C1C6EC05147A8BA88AAD995E818AA5D415C817"
         }
       ],
       "proofs": [],
@@ -1210,7 +1234,7 @@
       "observationId": "FQ15-A99DFFEBAC4B",
       "implementation": [],
       "proofs": [],
-      "note": "The exact literal multiplicity within the containing member changed.",
+      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -1218,7 +1242,7 @@
       "observationId": "FQ15-AABCD7E95D9F",
       "implementation": [],
       "proofs": [],
-      "note": "The exact literal multiplicity within the containing member changed.",
+      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -1228,7 +1252,7 @@
         {
           "path": "FamilyQuant.Core/FullXicComputer.cs",
           "symbol": "FamilyQuant.FullXicComputer::public const string CacheFolderName",
-          "sha256": "CD071676A16CF4BA9C6BE7A26BD6308F46548ED9510F840DAB0E3D920CD14F05"
+          "sha256": "CE1264D6BC1C45168222FDA294C1C6EC05147A8BA88AAD995E818AA5D415C817"
         }
       ],
       "proofs": [],
@@ -1240,7 +1264,7 @@
       "observationId": "FQ15-AE62D7A6D2D7",
       "implementation": [],
       "proofs": [],
-      "note": "The exact literal multiplicity within the containing member changed.",
+      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -1256,7 +1280,7 @@
       "observationId": "FQ15-B54429E92C62",
       "implementation": [],
       "proofs": [],
-      "note": "The exact literal multiplicity within the containing member changed.",
+      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -1264,7 +1288,7 @@
       "observationId": "FQ15-B5E4FE6CA170",
       "implementation": [],
       "proofs": [],
-      "note": "The exact literal multiplicity within the containing member changed.",
+      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -1316,7 +1340,7 @@
       "observationId": "FQ15-BFDD375817E9",
       "implementation": [],
       "proofs": [],
-      "note": "The exact literal multiplicity within the containing member changed.",
+      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -1346,7 +1370,7 @@
       "observationId": "FQ15-C806E83A6C32",
       "implementation": [],
       "proofs": [],
-      "note": "The exact literal multiplicity within the containing member changed.",
+      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -1354,7 +1378,7 @@
       "observationId": "FQ15-CA7106BC1CC0",
       "implementation": [],
       "proofs": [],
-      "note": "The exact literal multiplicity within the containing member changed.",
+      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -1362,7 +1386,7 @@
       "observationId": "FQ15-CDB07CFC2A5D",
       "implementation": [],
       "proofs": [],
-      "note": "The exact literal multiplicity within the containing member changed.",
+      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -1372,7 +1396,7 @@
         {
           "path": "FamilyQuant.Core/FullXicComputer.cs",
           "symbol": "FamilyQuant.FullXicComputer::public static List \u003C string \u003E DescribeTicShares ( IEnumerable \u003C DerivedRunFraction \u003E ? fractions )",
-          "sha256": "CD071676A16CF4BA9C6BE7A26BD6308F46548ED9510F840DAB0E3D920CD14F05"
+          "sha256": "CE1264D6BC1C45168222FDA294C1C6EC05147A8BA88AAD995E818AA5D415C817"
         }
       ],
       "proofs": [],
@@ -1426,7 +1450,7 @@
       "observationId": "FQ15-D6B128E39208",
       "implementation": [],
       "proofs": [],
-      "note": "The exact literal multiplicity within the containing member changed.",
+      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -1472,7 +1496,7 @@
       "observationId": "FQ15-DB38A84ED138",
       "implementation": [],
       "proofs": [],
-      "note": "The exact literal multiplicity within the containing member changed.",
+      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -1502,7 +1526,7 @@
       "observationId": "FQ15-DD54F44F3FE5",
       "implementation": [],
       "proofs": [],
-      "note": "The exact literal multiplicity within the containing member changed.",
+      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -1526,7 +1550,7 @@
         {
           "path": "FamilyQuant.Core/FullXicComputer.cs",
           "symbol": "FamilyQuant.FullXicComputer::public static List \u003C string \u003E DescribeTicShares ( IEnumerable \u003C DerivedRunFraction \u003E ? fractions )",
-          "sha256": "CD071676A16CF4BA9C6BE7A26BD6308F46548ED9510F840DAB0E3D920CD14F05"
+          "sha256": "CE1264D6BC1C45168222FDA294C1C6EC05147A8BA88AAD995E818AA5D415C817"
         }
       ],
       "proofs": [],
@@ -1546,7 +1570,7 @@
       "observationId": "FQ15-E4E5BD980A42",
       "implementation": [],
       "proofs": [],
-      "note": "The exact literal multiplicity within the containing member changed.",
+      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -1556,7 +1580,7 @@
         {
           "path": "FamilyQuant.Core/FullXicComputer.cs",
           "symbol": "FamilyQuant.FullXicComputer::public static List \u003C string \u003E DescribeTicShares ( IEnumerable \u003C DerivedRunFraction \u003E ? fractions )",
-          "sha256": "CD071676A16CF4BA9C6BE7A26BD6308F46548ED9510F840DAB0E3D920CD14F05"
+          "sha256": "CE1264D6BC1C45168222FDA294C1C6EC05147A8BA88AAD995E818AA5D415C817"
         }
       ],
       "proofs": [],
@@ -1568,7 +1592,7 @@
       "observationId": "FQ15-EA1840ABFA82",
       "implementation": [],
       "proofs": [],
-      "note": "The exact literal multiplicity within the containing member changed.",
+      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -1576,7 +1600,7 @@
       "observationId": "FQ15-EA864907E42D",
       "implementation": [],
       "proofs": [],
-      "note": "The exact literal multiplicity within the containing member changed.",
+      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -1584,7 +1608,7 @@
       "observationId": "FQ15-EB1982536C65",
       "implementation": [],
       "proofs": [],
-      "note": "The exact literal multiplicity within the containing member changed.",
+      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -1592,7 +1616,7 @@
       "observationId": "FQ15-EB6246AE57E2",
       "implementation": [],
       "proofs": [],
-      "note": "The exact literal multiplicity within the containing member changed.",
+      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -1602,7 +1626,7 @@
         {
           "path": "FamilyQuant.Core/FullXicComputer.cs",
           "symbol": "FamilyQuant.FullXicComputer::public static List \u003C string \u003E DescribeTicShares ( IEnumerable \u003C DerivedRunFraction \u003E ? fractions )",
-          "sha256": "CD071676A16CF4BA9C6BE7A26BD6308F46548ED9510F840DAB0E3D920CD14F05"
+          "sha256": "CE1264D6BC1C45168222FDA294C1C6EC05147A8BA88AAD995E818AA5D415C817"
         }
       ],
       "proofs": [],
@@ -1678,7 +1702,7 @@
       "observationId": "FQ15-FAEEC621EEC6",
       "implementation": [],
       "proofs": [],
-      "note": "The exact literal multiplicity within the containing member changed.",
+      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -1686,7 +1710,7 @@
       "observationId": "FQ15-FC08F56D35C5",
       "implementation": [],
       "proofs": [],
-      "note": "The exact literal multiplicity within the containing member changed.",
+      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -1694,7 +1718,7 @@
       "observationId": "FQ15-FC97D1AB23B4",
       "implementation": [],
       "proofs": [],
-      "note": "The exact literal multiplicity within the containing member changed.",
+      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -1704,7 +1728,7 @@
         {
           "path": "FamilyQuant.Core/FullXicComputer.cs",
           "symbol": "FamilyQuant.FullXicComputer::public static List \u003C string \u003E DescribeTicShares ( IEnumerable \u003C DerivedRunFraction \u003E ? fractions )",
-          "sha256": "CD071676A16CF4BA9C6BE7A26BD6308F46548ED9510F840DAB0E3D920CD14F05"
+          "sha256": "CE1264D6BC1C45168222FDA294C1C6EC05147A8BA88AAD995E818AA5D415C817"
         }
       ],
       "proofs": [],
@@ -1716,7 +1740,7 @@
       "observationId": "FQ15-FE4529678EAA",
       "implementation": [],
       "proofs": [],
-      "note": "The exact literal multiplicity within the containing member changed.",
+      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -1724,7 +1748,7 @@
       "observationId": "FQ15-FE69EB82A11F",
       "implementation": [],
       "proofs": [],
-      "note": "The exact literal multiplicity within the containing member changed.",
+      "note": "The current containing member is missing or ambiguous; no same-text fallback.",
       "kindReceiptId": null,
       "compared": null
     },
@@ -1753,7 +1777,7 @@
           "kind": "test",
           "target": "CoreRelocationCommand",
           "assertion": "Core member kind export/storage fact: all listed complete declarations retain exact literal syntax and multiplicity",
-          "artifact": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\core-relocation-x5\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\core-relocation-x5\\comparisons.log",
           "inspectedBy": ""
         }
       ]
@@ -1767,7 +1791,7 @@
           "kind": "test",
           "target": "CoreRelocationCommand",
           "assertion": "Core member kind format/export: all listed complete declarations retain exact literal syntax and multiplicity",
-          "artifact": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\core-relocation-x5\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\core-relocation-x5\\comparisons.log",
           "inspectedBy": ""
         }
       ]
