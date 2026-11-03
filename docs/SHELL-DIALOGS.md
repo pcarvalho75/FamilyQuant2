@@ -195,3 +195,13 @@ the compared semantic fact records are checked separately on repeat runs.
 After the R4a/R4c READY sync, M37-ready1/M37-ready2 each execute 13 passed, zero failed,
 two skipped checks, yielding twelve supported and four OPEN rows. All sixteen complete fact
 records and five completed native cache/FASTA/pairwise data artifacts repeat byte-identically.
+
+M39's one-row `--prove-shell-behaviour3` packet isolates the empty-import reconciliation
+refusal. The gate's earlier failure captured the missing-SEPro refusal because the preceding
+filtering case had populated the shared controls. Its Layer 2/Step 2 difference belonged to
+that other guard; the empty-import sentence and next-step advice did not change. A combined
+filtering-then-refusal run reproduces the defect before repair and passes after repair.
+Fresh native controls now prove the exact complete frozen/current refusal with zero rows,
+no reconciliation, a disabled normal button and unchanged state. The defensive handler is
+invoked directly because the normal button is disabled. Two one-row runs agree byte-for-byte
+on their complete fact records. Only the own one-row SH-behaviour3 register is imported.

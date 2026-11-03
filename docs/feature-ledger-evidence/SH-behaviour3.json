@@ -1,0 +1,944 @@
+{
+  "schemaVersion": 1,
+  "step": "SH-behaviour3",
+  "frozenCommit": "e9b73064d8ff19b2fde3e3231240b636a64c0a91",
+  "runs": [
+    {
+      "id": "SH-behaviour3",
+      "command": "D:\\FamilyQuant-wt\\shell\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --prove-shell-behaviour3 D:/FamilyQuant-data/out-shell/N3/source D:/FamilyQuant-data/reference-1.5.0.6/app D:/FamilyQuant-data/out-shell/behaviour3/scope.json D:/FamilyQuant-data/out-shell/behaviour3/run2 \u00222026-11-02 17:14:57 -0800\u0022",
+      "executedAt": "2026-11-02 17:14:57 -0800",
+      "commit": "dfdedd28c1352622413a385d0874ef4ded10e509",
+      "artifacts": [
+        {
+          "path": "D:\\FamilyQuant-data\\out-shell\\behaviour3\\run2\\facts.json",
+          "sha256": "CC2392E14BC7E5E179C2D4DC3CEBB0C8CE681914F5C31A6E9AB5276A36040952"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-shell\\behaviour3\\run2\\proofs.log",
+          "sha256": "26A0B9F7868FB2209F1E214DE7EFBFAA86923068CA74D1B77E6C53C9A1362955"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-shell\\behaviour3\\run2\\executed\\FamilyQuant.Core.dll",
+          "sha256": "056240E86EF45C9AD6671EAD62C669CAC31C1F9FE1ABC6E09A6E9C0515A91504"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-shell\\behaviour3\\run2\\executed\\FamilyQuant.dll",
+          "sha256": "D764488C923945285E03B338E5A91BF28106A35B11AB465D8E2B23D125F03FD8"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-shell\\behaviour3\\run2\\executed\\FamilyQuant.Tests.dll",
+          "sha256": "7CD6F17BC334A75557BA88F37A3008129A2589BA3C8EF8856B7C60D89D3C1DB2"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-shell\\behaviour3\\run2\\executed\\FamilyQuant2.dll",
+          "sha256": "E4EA0B6240F2157A38CAB25B642F8974E517B84851F5F270C61A643F7B17BA61"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-shell\\behaviour3\\run2\\executed\\NativeOwnedDialogDriver.cs",
+          "sha256": "CFAAE1CC0BA608665E89B71234BB717A6520EF0C452442A4510D5706D5BBD7E1"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-shell\\behaviour3\\run2\\executed\\Program.Commands.ShellBehaviour.cs",
+          "sha256": "810F94BE771441CA8508B747171921845614C7C6AA1D696858E3177E8741E654"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-shell\\behaviour3\\run2\\executed\\Program.SecondarySuperRuntime.cs",
+          "sha256": "7BC597762989B17730C639AFC8142657A03FB4975AB76EEE8852E9EB0CC9B352"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-shell\\behaviour3\\run2\\executed\\Program.ShellBehaviour.Build.cs",
+          "sha256": "1022809FB9652D2E874AC2587041000505DA9BDB57968B5AF4921866F8885E11"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-shell\\behaviour3\\run2\\executed\\Program.ShellBehaviour.cs",
+          "sha256": "6761A41262D0E169E00D37CA991F99C5EFC9EB064BA4B9F94B6F3C93EB3CD564"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-shell\\behaviour3\\run2\\executed\\Program.ShellBehaviour.Curation.cs",
+          "sha256": "41CB033C788475F6609D4DD8CDBE8A03023677EA0BF049B8F1EAE744AFB2525C"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-shell\\behaviour3\\run2\\executed\\scope.json",
+          "sha256": "7C457C42FCFB598410B5B538C949C01B00A270984B736CE21B2F80FB3A51B4E7"
+        }
+      ],
+      "workingDirectory": "D:\\FamilyQuant-wt\\shell"
+    }
+  ],
+  "rows": [
+    {
+      "observationId": "FQ15-48FB6F4B7D66",
+      "implementation": [
+        {
+          "path": "FamilyQuant/AccessionTextConverter.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "DB9A84ABB37F25E74102953F14F7C27C456FF2C7D2D784373438590E32A94EA1"
+        },
+        {
+          "path": "FamilyQuant/AnalyticsControl.xaml.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "46FC2DBCFF7729406F19915B367A5D9CEE968439942BB07038906B6901D3EA32"
+        },
+        {
+          "path": "FamilyQuant/AnalyticsFigures.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "F5B33D068521F58EA3EA4B6EAD3C092D8F18CCC2F90056BFEFDB27974D634039"
+        },
+        {
+          "path": "FamilyQuant/AnalyticsViewModel.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "1EB5F952996E46F35E0FE1912CA683327E091439128D92727EF37BE2233E3B03"
+        },
+        {
+          "path": "FamilyQuant/App.xaml.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "6A8ECDD66D0ADCBF868B9D13C5FBCC16141B50183E010623E46AD247A2C84A49"
+        },
+        {
+          "path": "FamilyQuant/AppOperationFiles.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "6E1FB949218EADF56A159B520AFD6912D6322578C32FA8BF70DB0000E6D72BD6"
+        },
+        {
+          "path": "FamilyQuant/AppOperationHost.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
+        },
+        {
+          "path": "FamilyQuant/AppVersionInfo.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "ACBB2D2F358359B09845992E25DB3FCE18AAF11AC8FBE550D4D04F6476A7C018"
+        },
+        {
+          "path": "FamilyQuant/ArchitectureReviewControl.xaml.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "B4715372A85A340387B3AAE165A226A1835D93A690E650785505A68CF33FF555"
+        },
+        {
+          "path": "FamilyQuant/ArchitectureReviewViewModel.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "C7A0F2ADB335A97B4A0030268F8E65FD312E039DEDA8891060612860F61C20DE"
+        },
+        {
+          "path": "FamilyQuant/AssemblyInfo.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "C7FA6E85B5B7957DB33E34FC9487A8DB3EADF4983941F7DF7743D711EB026643"
+        },
+        {
+          "path": "FamilyQuant/BusyLogo.xaml.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "E592ACBD633117CE940556F508FC08439CB50A534FBB06B51C730E0CBC1A30AF"
+        },
+        {
+          "path": "FamilyQuant/BusyOverlay.xaml.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "FBE78A595CC128F2A5D5F0A2031DCDEE79DC1901F3D02C1804F03CDCA3385783"
+        },
+        {
+          "path": "FamilyQuant/ChartDrawingBase.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "D217B023C2A53E6B480245F226E0FC9A5CFC810BAF2115EE1D1624D248A6CFA4"
+        },
+        {
+          "path": "FamilyQuant/ChartImageExporter.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "77B1752BCDC39B6E677B688259C14E05386F2E797A20292463857158D6567BBC"
+        },
+        {
+          "path": "FamilyQuant/ChartPalette.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "08EE43A5A44D35CDA783D7D48E692929BA87170515CF953BE25CA29E07A20FB3"
+        },
+        {
+          "path": "FamilyQuant/ClusterGenerationControl.Evidence.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "071D33FED719B3A33622122530E4F1C5DD1928AF62F6A9444B67851D520065F0"
+        },
+        {
+          "path": "FamilyQuant/ClusterGenerationControl.Families.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "6D19CCC318322A521C993A6CDD1472B4A76096A2743C5030078EBADFFC8BC098"
+        },
+        {
+          "path": "FamilyQuant/ClusterGenerationControl.FamilyWorld.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "AA065837B5F48CCBE84AAE177C9524A731D8FB31881013DBDEC70A0E0CE13E85"
+        },
+        {
+          "path": "FamilyQuant/ClusterGenerationControl.Operations.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "1FDEA1E49EAFBFE8D052EC714B5798E12CA8BAC5F29E6C09D18F93D2B4180DD3"
+        },
+        {
+          "path": "FamilyQuant/ClusterGenerationControl.Presentation.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "163C3F79EC1A4885705484E029FB1814589A70F3A709C47680245E111BA4BB37"
+        },
+        {
+          "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "5D928F417023C396D37C10C3FA048C9EF00D36C21BCCD3D09AE647BAF881449D"
+        },
+        {
+          "path": "FamilyQuant/ComputeXicViewModel.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "E0FB6EF64C19BB49E1171A2496BAE39C444436D722D9EF21BD2EB1DB8FACA197"
+        },
+        {
+          "path": "FamilyQuant/ComputeXicWindow.xaml.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "97EA1E4BD66498C03C6A573978D9818529DFD2C0D51458542A6A8CA56CE5FF79"
+        },
+        {
+          "path": "FamilyQuant/CurationFeedback.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "6EC2B7C46593FADD0FDFDB1B849CB31DEA269775B19E834A473D50484C38B9EE"
+        },
+        {
+          "path": "FamilyQuant/CurationQuantitationPanel.xaml.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "82E6C2FC2C62831D5008FD7284AFF844F7945A72D2C004003348B7DB124D8447"
+        },
+        {
+          "path": "FamilyQuant/CurationQuantitationViewModel.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "0ECF3950DE35D910A11F4BEBF8FF357C273AB0D1AFC90032C277EABF1A2C85B1"
+        },
+        {
+          "path": "FamilyQuant/CurationQuantitationViewModel.Operations.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "A46747D987566C017B71421B82C7D709A71E488F37B2B7315B4C17DF47A24852"
+        },
+        {
+          "path": "FamilyQuant/CurationQuantitationViewModel.PatternLab.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "6773CFE7B8DDD4F378625C4E8635A7E773D958168D7A8B6840AA56EC79C8D199"
+        },
+        {
+          "path": "FamilyQuant/CurationQuantitationViewModel.Presentation.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "9AF73ABFFAD347FB1DBB32F2D6E22F3B99E9DDBBDA97117221A1ED0D1949135A"
+        },
+        {
+          "path": "FamilyQuant/CurationViewModel.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "EDE5C16D1EA3FF324FCFF72DB128F34397E0CA606629230703C3F578185CB814"
+        },
+        {
+          "path": "FamilyQuant/CurationViewModel.Evidence.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "C2B49A9735B9DEEEFE21DBEA5E2CCF957FF3AAD504457F52D480D8111203A94D"
+        },
+        {
+          "path": "FamilyQuant/CurationViewModel.Families.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "F4803A0416E312269429B2978AE6F0B2D758984EB0651AD0CE23F9BEEAAAF071"
+        },
+        {
+          "path": "FamilyQuant/CurationViewModel.FamilyWorld.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "18CA12ADFF5C42F2ABAA8CFA7D4F94BD0782501911AD1A587D0F1B5C8C28335A"
+        },
+        {
+          "path": "FamilyQuant/DatabaseGapChart.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "D0EDD349C8D6057B5EC17B27E11200F31CC66137B50DDBF6980171E23458FE8F"
+        },
+        {
+          "path": "FamilyQuant/DatabaseGapControl.xaml.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "78E5CF6CBBBEE6C2EF252034552577282DB1C351718FCE3D706727CFFF63443B"
+        },
+        {
+          "path": "FamilyQuant/DatabaseGapViewModel.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "7DAD560720E86D1316B0E116CF4F55F4BBF628735A40AEE6D286A66DFCA095CF"
+        },
+        {
+          "path": "FamilyQuant/DeNovoControl.Compatibility.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "BB45BCACC7C63869B4B22F63EE16C6572D12F7F2A2C9B589686B2DE2BC15479C"
+        },
+        {
+          "path": "FamilyQuant/DeNovoControl.Dialogs.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "B714D7D9AA689F30D9EDFA2479D373824358521783DBBD267E209E34E91884A1"
+        },
+        {
+          "path": "FamilyQuant/DeNovoControl.Files.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "A894899A775DE9BC762B0069DCE26314631BE060B82892F480A5EA3D88B7CD14"
+        },
+        {
+          "path": "FamilyQuant/DeNovoControl.Tables.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "5B2292689F03600BD8FB482588343C0A24DF674B1A4D909588FD9BF747BA296A"
+        },
+        {
+          "path": "FamilyQuant/DeNovoControl.xaml.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "4BB5BDADAE2498ADD500A9A5DBBE93748A1D7F8707950CD749EF0F3BD6B770A1"
+        },
+        {
+          "path": "FamilyQuant/DeNovoFilterControl.xaml.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "40DA440AE1CCBE68A7A99D261D7BAE87B103D6EB11DFC862CA26B309BA018108"
+        },
+        {
+          "path": "FamilyQuant/DeNovoFilterViewModel.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "8F34872C345515C7D40A1D068628195740FF7C7C3832E2B598976BB230B20F10"
+        },
+        {
+          "path": "FamilyQuant/DeNovoSession.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "B23BD99957ED0E1DE9F740C5F51F9B9099BC208556C7DD2FC855DBBFD6094040"
+        },
+        {
+          "path": "FamilyQuant/DeNovoViewModel.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "2FFF30BF700616645D36D91A25F12D038DDD10442BE65A6288CE06B5855B35C0"
+        },
+        {
+          "path": "FamilyQuant/DeNovoViewModel.Readiness.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "7910326977351A2F5DEC53EB4265AC4ACEB88CDB9EBAD9BB284CCA1D58CA215F"
+        },
+        {
+          "path": "FamilyQuant/EvidenceGroupingSession.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "2069038441AE73514767D29FD942A6837EEDA9A94F53B8290EBB6E8F2659048E"
+        },
+        {
+          "path": "FamilyQuant/EvidenceProposalPresentation.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "6F1CA5A8563759A60D047C7BCC3B59CDB62214C16826BDB7219B52AFD9CCF591"
+        },
+        {
+          "path": "FamilyQuant/EvidenceReviewViewModel.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "D51383B96A6E9C930032029F4FDC8D800791878B1CC690B296FB0E37645B62AD"
+        },
+        {
+          "path": "FamilyQuant/EvidenceTaskScopeInput.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "7C72E53ADBCD42839DD61F8F60C83F190F4172D35487323CEC4AF6BF05EC3C49"
+        },
+        {
+          "path": "FamilyQuant/FamilyContributionChart.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "939A4F9C98A0739582DDBBEA460C0631F90C29871BD45F0BDC4ACB8DB5EF60E2"
+        },
+        {
+          "path": "FamilyQuant/FileDialogFilters.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "EFAC76A1E8C82734142C555D213414CC042595724D07612813FAD350EF66D83E"
+        },
+        {
+          "path": "FamilyQuant/GridCopy.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "ABD75B1CB3C81C232FB8766AE738A3607772F3136D0D4879A3803F2511551B7C"
+        },
+        {
+          "path": "FamilyQuant/GroupingReviewHelp.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "7A0AC61DFE470FFC46ACE534407CAAC1E6334CDFF5E9865124824D775A78BA69"
+        },
+        {
+          "path": "FamilyQuant/GroupingReviewViewModel.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "F509B342E966008153CA12F4858E6163B58FF0F2220038D1D69E4A47BBA2471D"
+        },
+        {
+          "path": "FamilyQuant/HomeControl.ViewModel.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "15EF180AF61E9AA89E130D99824254EB5CBED4E267B2F44272755427AB4A6761"
+        },
+        {
+          "path": "FamilyQuant/HomeControl.xaml.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "9170B56B65783F835323BC8FC3C3E0CC1CBEF1CB502B267C4A4EA1D097E466E7"
+        },
+        {
+          "path": "FamilyQuant/IdentityScanChart.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "6E12975B73154AFD5E6AF1796751F28ED49CD977C5C3E38830A11FC45F015CAF"
+        },
+        {
+          "path": "FamilyQuant/IdentityScanWindow.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "52979A9563BD11A98266F72D1581CA3DC3A39A7B5DBCA1D1E6531B2AD1732AAF"
+        },
+        {
+          "path": "FamilyQuant/IsotopeCountChart.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "C18B470572D3647F4B9007B8170702C5F231BCB62989EBD6662825DCE7AF17EF"
+        },
+        {
+          "path": "FamilyQuant/KeywordReviewViewModel.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "5A0F3CEC79A4D418047B3E53F3224332B83B7AAD8E53176406D0EBC77336554C"
+        },
+        {
+          "path": "FamilyQuant/LockManagerWindow.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "2C55B2CAFE7FB5D42B391EE1B5647464728550B4CB2EB044049546188D72603E"
+        },
+        {
+          "path": "FamilyQuant/LockManagerWindow.View.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "78FF0F0C04DD5F430E4E7A6C877866F5588FAAE1B94E2738533D3CD7765FFDB9"
+        },
+        {
+          "path": "FamilyQuant/MainWindow.ClusteringDiagnostic.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "9B0255006FA8C5C63419D27E35D71433358C016670F155A93B414EE0E0D783FD"
+        },
+        {
+          "path": "FamilyQuant/MainWindow.CommandAvailability.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "EEB2B21490C21025AAEE85BEC95A4E0954078AA78CA3848D28EA5DC31E68726F"
+        },
+        {
+          "path": "FamilyQuant/MainWindow.Commands.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "F97408DFF2DB9D5D5B1FFEA4C47320885D4E92381B77710C329638395E87AC9D"
+        },
+        {
+          "path": "FamilyQuant/MainWindow.DeNovoFilters.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "2616E2A4D77BCFE51033AD36660974A4A6D8F18EE1D0B2B2750E6E26451EBAEC"
+        },
+        {
+          "path": "FamilyQuant/MainWindow.Documents.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "12468ABA5D76AD6674C85BD283AF4A7C4BA20FE25308F9E19E4BCD68E51366E3"
+        },
+        {
+          "path": "FamilyQuant/MainWindow.DocumentState.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "6A4713A1A11D9C8B2A91DDEB9DF0C7C5342966BA34ED4F83DE13979EEA937404"
+        },
+        {
+          "path": "FamilyQuant/MainWindow.Help.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "5B7F1864A1F8842801B406641B528793E752553B81480159751C679675F760FF"
+        },
+        {
+          "path": "FamilyQuant/MainWindow.HomologyResults.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "0962B205512B2255B387ABA2FD88DE05A82DA341540BA4780AADB76862FC204D"
+        },
+        {
+          "path": "FamilyQuant/MainWindow.Navigation.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "8EDC36FB29E29B1866731D8AB580042248FAF75CEB84DCE5F37F68AA730F1A76"
+        },
+        {
+          "path": "FamilyQuant/MainWindow.NavigationRail.xaml.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "3B4D5E06F3CBF38F27F2B2CDB12EF327779B8D65E55696C13E0B6895E58912EA"
+        },
+        {
+          "path": "FamilyQuant/MainWindow.Operations.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "6922208BE6568150922825A2173019B8B6DD51A68F423B43329300604EFE4F2A"
+        },
+        {
+          "path": "FamilyQuant/MainWindow.Presentation.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "742C5AF1E9CA9B98C3F2F601B0C4218486A92220892E04B6D1FDC2706CF6EA28"
+        },
+        {
+          "path": "FamilyQuant/MainWindow.Quantify.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "46BA90F3FC0DE295CA92CD87C51B77901C05D20176AC905DF37518A96877CF80"
+        },
+        {
+          "path": "FamilyQuant/MainWindow.Saving.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "4F1458536558A6E990544393263263B3F38007B2666534522FE0042D925819FD"
+        },
+        {
+          "path": "FamilyQuant/MainWindow.State.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "CB37251BD9D5CA2BC923F5FF3CEF4FB48BB39004E79766A1917A75540D46EF65"
+        },
+        {
+          "path": "FamilyQuant/MainWindow.Status.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "A13F51B49BD04137DF641A3B6251363646613F8DF04EAE2BE38E0A695D635A19"
+        },
+        {
+          "path": "FamilyQuant/MainWindow.ViewModel.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "AC50CA8607AC0BD55C1F2917CD7CDA4168ADFB63CB68008EC4941C06147CF466"
+        },
+        {
+          "path": "FamilyQuant/MainWindow.WindowPreferences.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "329C31B4ED1AEF848C2F7E0BA6E6F9BC2F89F9649C357F22D440B7312FF82378"
+        },
+        {
+          "path": "FamilyQuant/MainWindow.xaml.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "4367370E720C11B7E1D825E0958F552312003B329B10E85BFF09F10C34F52F97"
+        },
+        {
+          "path": "FamilyQuant/NumericUpDown.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "C11ED6BE7990FC050F7171D2DF23A26DBDA32C0043E48023D6144FD5A9257ED0"
+        },
+        {
+          "path": "FamilyQuant/PercentIonCurrentChart.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "61E28173A23BF601B17197ECFF2A47AFD523A4DEC2F47BD244BDDA6FCD106E05"
+        },
+        {
+          "path": "FamilyQuant/PresentationEvidencePack.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "A5343E0BCD1E01178D2C6726F22495862885BEA9E24865BE6ADAF05F71A5F788"
+        },
+        {
+          "path": "FamilyQuant/PresentationFigures.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "C896F29F17D40275E77F1387034D36BA2F584FE6EBF75D5C18A76033E6CF6927"
+        },
+        {
+          "path": "FamilyQuant/QuantifyControl.xaml.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "BE5A9029EEBC4004EFDEBD15BF72C332BE9EC28FE17541857670ADBD732083F7"
+        },
+        {
+          "path": "FamilyQuant/RecoveryChart.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "F39E00E4455E67A05AC77A8324D51819C3C343FB95B183DCD93D6A5B9D5FAB6A"
+        },
+        {
+          "path": "FamilyQuant/ScreenBindings.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "DA1A4D6D2D68B66B825FE7239372A3849474D200247FBF6204D86BF391C6AE10"
+        },
+        {
+          "path": "FamilyQuant/ScreenViewModel.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "1D8B1D2994D5D5AB01E0CE57A19E6006581E2EDCE196473469BC49F8904D42B1"
+        },
+        {
+          "path": "FamilyQuant/SecondaryWindows.ViewModels.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "87BB4D589ACF49B3CDF635B485D60D07DA6CAB0B9B4B99E7367D44FA52C97743"
+        },
+        {
+          "path": "FamilyQuant/SecondaryWindowView.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "5DDABCDF5F47F3CBCC271B0F04EB20CE51BA12353DD117C1A3EDE8684A742CDE"
+        },
+        {
+          "path": "FamilyQuant/ShellDialogs.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "BADA9EAE7CCA3011F34E56A17D71DA7304EAB666D61D06E0C53DA532589AAA76"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.Columns.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "684822A15F541B291C12BF2CEF2F6793621CCA083002450739162A5B41E9ABA1"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "025C5824B534894B311B6AF36963182831EB0F663FD84AAC0D2399520E08FF0F"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.Exports.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "5FC458F9AA92ED3D24354ACB8BBDEB4EBB37CC2F968833C1A2AEF52DAB60E2CD"
+        },
+        {
+          "path": "FamilyQuant/SpectrumComparisonWindow.View.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "BEA0A617E0850EE56C477D63D69FC08E939E8A9232673A2E09353330561E6A9B"
+        },
+        {
+          "path": "FamilyQuant/SuperClusterPreviewWindow.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "A1730BBA278D8BB574A5A16E5B6FAED0ED3AECF192D334DFC0AB453F764CAD81"
+        },
+        {
+          "path": "FamilyQuant/SuperClusterPreviewWindow.Operations.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "038F6F35164C89F0B288313B845F4EF08B7BD4BAF2E1A489CFFB140666A8805A"
+        },
+        {
+          "path": "FamilyQuant/TextReportWindow.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "275E35B236EEC4C43FB54B6CC049E5C5E62A1767176D6F6410A3D69421106F96"
+        },
+        {
+          "path": "FamilyQuant/USearch.Actions.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "1BA6FB66F542B2BB332DF02D6CF58524AD259AC73DE93D8A6CDD4CDC932C1826"
+        },
+        {
+          "path": "FamilyQuant/USearch.Presentation.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "8F8C52800E607F3F705B5263C84BA20C2455FCFBC27DCD917A02A3BA8EAF9D15"
+        },
+        {
+          "path": "FamilyQuant/USearch.Report.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "5ECEE34F97D000E7FB1B3D140CBED8BFF97312D28ABA53D4F398F8A427691164"
+        },
+        {
+          "path": "FamilyQuant/USearch.ViewModel.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "7F2B00D5FF4971D43728A6AD20E696AEFA76793FC47C9D80BB0E54A6707A46E1"
+        },
+        {
+          "path": "FamilyQuant/USearch.xaml.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "44B2797536E00769B90697707C639CE7A0584100EB14C7021266DEC4407CC7FF"
+        },
+        {
+          "path": "FamilyQuant/XicMassChart.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "DC13EE41EE7A44EAA05EF0A47AB25D16317335965CD7EAE4A9F9CFD2AE7D8629"
+        },
+        {
+          "path": "FamilyQuant/AnalyticsControl.xaml",
+          "symbol": "native behaviour fixture",
+          "sha256": "4DD2D03A4C04806C2C428FE581C8F7543103982B3E5448A46F6BEF4906110A74"
+        },
+        {
+          "path": "FamilyQuant/App.xaml",
+          "symbol": "native behaviour fixture",
+          "sha256": "E8B1DA6AD5BFE0564D7A791600FDE3E24DCDEB2011C92411E35CC47AE9312DE9"
+        },
+        {
+          "path": "FamilyQuant/ArchitectureReviewControl.xaml",
+          "symbol": "native behaviour fixture",
+          "sha256": "CA64B59ED567E3A7FAC2F1E8EF8CAD340B9EAE7C48EA31697E3FE7358A7BB9B3"
+        },
+        {
+          "path": "FamilyQuant/BusyLogo.xaml",
+          "symbol": "native behaviour fixture",
+          "sha256": "D5F32A271FC545F09704142322C103A5ADBC74868173929CC755BEA98EF2F2AD"
+        },
+        {
+          "path": "FamilyQuant/BusyOverlay.xaml",
+          "symbol": "native behaviour fixture",
+          "sha256": "E256DEB30E8FD5DAE59BBB768B61973FEAD054F970CB390A2FF681D20F2B9F8B"
+        },
+        {
+          "path": "FamilyQuant/ClusterGenerationControl.xaml",
+          "symbol": "native behaviour fixture",
+          "sha256": "6933BE6F025D5150BAE4D3F893420C29024764B838A522722D257D525376276F"
+        },
+        {
+          "path": "FamilyQuant/ComputeXicWindow.xaml",
+          "symbol": "native behaviour fixture",
+          "sha256": "5B67765FC8C89E84679999CE0AE8C91769C36EB2655451BDF141784E4A1EBF90"
+        },
+        {
+          "path": "FamilyQuant/CurationQuantitationPanel.xaml",
+          "symbol": "native behaviour fixture",
+          "sha256": "92E9D5C4EDC997866F22E2EA0EE0F4C2F18436CD0D6447FF466F14F9C2C1D2D8"
+        },
+        {
+          "path": "FamilyQuant/DatabaseGapControl.xaml",
+          "symbol": "native behaviour fixture",
+          "sha256": "6B36EF279B074780BA4B3876ABA5149A0D2955B07663251533EEC5DC3B561848"
+        },
+        {
+          "path": "FamilyQuant/DeNovoControl.xaml",
+          "symbol": "native behaviour fixture",
+          "sha256": "B2AE1EB5D56BD53AC8573887D15349795DA7B14CF5FFE6667F625C3DB03CE6D7"
+        },
+        {
+          "path": "FamilyQuant/DeNovoFilterControl.xaml",
+          "symbol": "native behaviour fixture",
+          "sha256": "C5F5FD8218E9862B6C3279B39686CBB8E287F809D11483BF4B20BD9EF6381E41"
+        },
+        {
+          "path": "FamilyQuant/HomeControl.xaml",
+          "symbol": "native behaviour fixture",
+          "sha256": "418C26820B6D043B994FB3730DB44E933A93BD5023B9C25D29A69953F45A3E6D"
+        },
+        {
+          "path": "FamilyQuant/MainWindow.NavigationRail.xaml",
+          "symbol": "native behaviour fixture",
+          "sha256": "0000FCEF05E837A6511051C8BD8397786006AB063FC217952A5500532CEE0319"
+        },
+        {
+          "path": "FamilyQuant/MainWindow.xaml",
+          "symbol": "native behaviour fixture",
+          "sha256": "422DE48434233AA62B67BF4F37326A8F66C6C2771A45A828E40318E09A1806C5"
+        },
+        {
+          "path": "FamilyQuant/QuantifyControl.xaml",
+          "symbol": "native behaviour fixture",
+          "sha256": "CEB8BFAF859F87F593628CD55D74C90869AABE22C0A098BB2D00D01F70DBC64C"
+        },
+        {
+          "path": "FamilyQuant/SuperClusterPreviewWindow.xaml",
+          "symbol": "native behaviour fixture",
+          "sha256": "A1161153B0A4BD9D932331733683D83427BCE6A87B744094C1583B133439DF6F"
+        },
+        {
+          "path": "FamilyQuant/USearch.xaml",
+          "symbol": "native behaviour fixture",
+          "sha256": "817D7125F7C4EFC273327DA9AA732B354E38FB13CBB86390BA255ADF406A466F"
+        },
+        {
+          "path": "FamilyQuant.Core/AnalyticsModel.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "735ABBBF39EB5BA9CC40D28B2FEE57386D1FD33E268AD708632EF119BCBFDD73"
+        },
+        {
+          "path": "FamilyQuant.Core/ApplicationPaths.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "3274D9A4A8B5412098FA5FEC8BE6BF1C7C5CB5297C4618ACA09B4867689B658B"
+        },
+        {
+          "path": "FamilyQuant.Core/BatchCuration.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "56A7B14D523C329474824E171ECFEAF9E7E9FEA77A248E96D0C6D3C3955B26DA"
+        },
+        {
+          "path": "FamilyQuant.Core/ClusteringResults.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "61AA98B99AEC56485627070AD54AAA82055EAFF6AC9DB2551A9C0F9CFAE05FB4"
+        },
+        {
+          "path": "FamilyQuant.Core/CsvFormatting.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "59F0FCB80FCE3BEC8D46C7A986308BBDAD9BAC9C481E82D7EECB7EC1302335D0"
+        },
+        {
+          "path": "FamilyQuant.Core/CsvReport.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "453BA55ABE23B6A567016C1D2BB419AA102E6D801C7347A371769F1FD334DDDF"
+        },
+        {
+          "path": "FamilyQuant.Core/DeNovoInspectionAudit.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "74173BCE06F06B38AFDD0DBCE03FDD2632A740A9BC36FD98085D44B0A7CF1BF5"
+        },
+        {
+          "path": "FamilyQuant.Core/DeNovoScreenOperations.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "A9E88AEDD45115A5A0859EC2F03EF367C6C1929B52DA3B2AE204CE56BED7FC61"
+        },
+        {
+          "path": "FamilyQuant.Core/DeNovoSourceImport.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "33826F8F9471758ED81568545C746982676C633283CA2CB1471F591730AF24BD"
+        },
+        {
+          "path": "FamilyQuant.Core/DescriptionWordMatcher.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "F421E22B0D2983D016AA72A5C4183B534AA28F56F7489BD583D98CCBE9202C22"
+        },
+        {
+          "path": "FamilyQuant.Core/EvidenceHelp.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "36532A49398D8910893ADF04030E110AD0CED5B3250850CD8E6E410B0997B210"
+        },
+        {
+          "path": "FamilyQuant.Core/FamilyClusterScoring.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "F033C9FDCB15D2F282CFF64BC12F301D0275346DB5C82F9EA983340F9340CE51"
+        },
+        {
+          "path": "FamilyQuant.Core/FamilyEnvelopeQuant.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "7B53E0420601A778C712575295B3386173DD7BF3ECBBB8BE88F2F9577ADBE19D"
+        },
+        {
+          "path": "FamilyQuant.Core/FamilyFilter.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "F8564CB566010E4400BF3018C8489E537160AB3D7F9DEA4B7A7941EEAA90A694"
+        },
+        {
+          "path": "FamilyQuant.Core/FamilyNaming.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "9B817ED6F1C6AF80A2FFC59A242638F7625A53F2AC1680E1D8CA7A853A0508D0"
+        },
+        {
+          "path": "FamilyQuant.Core/FamilyQuantFile.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "FA446992C4421614EEB7A719A80650E93C0B7525105C72583F8BDFD5108943DF"
+        },
+        {
+          "path": "FamilyQuant.Core/FastaItemExtended.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "CDCF25DAAF85A15E9AB1421CF070AF2663A0031A6950F2707517F105C700495B"
+        },
+        {
+          "path": "FamilyQuant.Core/FileFingerprint.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "BC4E633FFE3130CE29E05F552F725CE863F4CDEB2A7A527716CC5B69BA66123C"
+        },
+        {
+          "path": "FamilyQuant.Core/FullXicComputer.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "91538E7B748639873291B78FA96D7B5B3D5A24B3D387FA94127E38ED8B4266B5"
+        },
+        {
+          "path": "FamilyQuant.Core/GroupingScore.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "5E9D2B3B72697E90DF1BC0742F1DBFBB60F28749C4F4CDD54AB00604311F7201"
+        },
+        {
+          "path": "FamilyQuant.Core/GroupingSnapshot.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "D8571571B9D6789C7D345FE03B0C82C56990ABF38313D5D78F44BB018A85DFE7"
+        },
+        {
+          "path": "FamilyQuant.Core/HelpContent.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "50920956389D0160209AE305AFEEDE7C096096FFF751A2895F85B81B6D6CF68D"
+        },
+        {
+          "path": "FamilyQuant.Core/HelpWorkflowFacts.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "37975BF052F9ED7EC33279A648DE907DEE9D601BD108037DB4E09B867606CFB0"
+        },
+        {
+          "path": "FamilyQuant.Core/HomologyCsv.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "BEAEC2438CC98B7D359C5225B38129C4E2397372CCEBE0A33F95ACA8345F17DF"
+        },
+        {
+          "path": "FamilyQuant.Core/IdentifierText.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "DF5F98A476264A65D34B34C78EF930DB0062508BDC3EC7F7A5690E67CAA6769B"
+        },
+        {
+          "path": "FamilyQuant.Core/IdentityScanRow.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "630102E0069CA25BFE4E7DC27A27274584CC5B0BBBD03443F163FFFD03AF3756"
+        },
+        {
+          "path": "FamilyQuant.Core/MyResources.Designer.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "2B62F8B1F10157FC4EC36F4369656F520F8B9ACA0A9E6FB2B52C623ED9FBA039"
+        },
+        {
+          "path": "FamilyQuant.Core/NormalizationMode.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "951708B64A2746F38DA428448E32DD50DA1004F864C58ACB410A39F872CA29C5"
+        },
+        {
+          "path": "FamilyQuant.Core/NormalizationPlan.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "849B337B4F590D58DA0E5F8A39865013633EF7E4BAE3AF9D79820AAB30976DEE"
+        },
+        {
+          "path": "FamilyQuant.Core/PatternLabAttribution.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "BC4436C27D35FA62B5739A9DF8660839423B8FA6FC968EADCE7A25CB7D86B14A"
+        },
+        {
+          "path": "FamilyQuant.Core/ProjectStore.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "CF34F9F920078064A0F94CA8C3F1021ABFD2D1D6229A69C15E75C9ED899E8949"
+        },
+        {
+          "path": "FamilyQuant.Core/ProteinDomains.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "44B3C26FAC69DFF9244D2EFDCA5ADC2C26A47148C8667FD7F3D9B97FDD52609A"
+        },
+        {
+          "path": "FamilyQuant.Core/QuantitationProfile.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "44C857B61504BA7F8860F5F7D8B6FD7E5D50AE30ABE0948FB6D3CBE42312DB59"
+        },
+        {
+          "path": "FamilyQuant.Core/RedundancyTools.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "B51F93ECF6FF874ED17BDAB7E619EAF67691F0C099A5E8A21059C81DE0D086C5"
+        },
+        {
+          "path": "FamilyQuant.Core/ReportView.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "6DAC5AA56BD69B6BBFE835877140448EC211ADE46C6FBA0F9E018B4BAC3541B9"
+        },
+        {
+          "path": "FamilyQuant.Core/SequenceLabels.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "63ED669CB9BCBC03B1C5C762F9545146EE649E9F883B5813B9BF4F6AF5522CF8"
+        },
+        {
+          "path": "FamilyQuant.Core/SharedPeptidePolicy.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "0C1A414EC708B47FF538FC22BAF525F0E13082B4AA02C63CEEB32FA1AB35E3A1"
+        },
+        {
+          "path": "FamilyQuant.Core/ShellProjectOperations.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "DD2E526EC8BBB21577AA9B5F986DE237863E7DA2C5F04997F7A83C7816674B1A"
+        },
+        {
+          "path": "FamilyQuant.Core/SuperClusterPreview.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "4CCA37A592451F6E1AF717F389D4FCC6EFF484EE09A85EF4367D23CC788916F8"
+        },
+        {
+          "path": "FamilyQuant.Core/USearchTools.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "7F644E1379D8A72937266A95B1E525417C4AFF55B1DFF5A9E10ABBC5BF80ACF9"
+        },
+        {
+          "path": "FamilyQuant.Core/WordCluster.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "37B55891480F15A76166C7A39BE871B5D22900E950EB7EFA21B048A4052F3F4C"
+        },
+        {
+          "path": "FamilyQuant.Tests/Program.ShellBehaviour.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "6761A41262D0E169E00D37CA991F99C5EFC9EB064BA4B9F94B6F3C93EB3CD564"
+        },
+        {
+          "path": "FamilyQuant.Tests/Program.ShellBehaviour.Curation.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "41CB033C788475F6609D4DD8CDBE8A03023677EA0BF049B8F1EAE744AFB2525C"
+        },
+        {
+          "path": "FamilyQuant.Tests/Program.ShellBehaviour.Build.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "1022809FB9652D2E874AC2587041000505DA9BDB57968B5AF4921866F8885E11"
+        },
+        {
+          "path": "FamilyQuant.Tests/Program.Commands.ShellBehaviour.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "810F94BE771441CA8508B747171921845614C7C6AA1D696858E3177E8741E654"
+        },
+        {
+          "path": "FamilyQuant.Tests/Program.SecondarySuperRuntime.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "7BC597762989B17730C639AFC8142657A03FB4975AB76EEE8852E9EB0CC9B352"
+        },
+        {
+          "path": "FamilyQuant.Tests/NativeOwnedDialogDriver.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "CFAAE1CC0BA608665E89B71234BB717A6520EF0C452442A4510D5706D5BBD7E1"
+        }
+      ],
+      "proofs": [
+        {
+          "runId": "SH-behaviour3",
+          "kind": "test",
+          "target": "ShellBehaviour",
+          "assertion": "SH behaviour empty-import reconciliation guard",
+          "artifact": "D:\\FamilyQuant-data\\out-shell\\behaviour3\\run2\\proofs.log",
+          "inspectedBy": ""
+        }
+      ],
+      "note": "Native frozen/current comparison; no product change.",
+      "kindReceiptId": null,
+      "compared": "FamilyQuant/DeNovoControl.xaml.cs:912 \u0022Nothing was reconciled: no de novo rows have been kept, so there is nothing \u0022; before={\u0022status\u0022:\u0022Nothing was reconciled: no de novo rows have been kept, so there is nothing to join. Next step: import the selected de novo export in Step 1 first.\u0022,\u0022initial\u0022:\u0022{\\u0022rows\\u0022:0,\\u0022hasReconciliation\\u0022:false,\\u0022buttonDisabled\\u0022:true}\u0022,\u0022final\u0022:{\u0022rows\u0022:0,\u0022hasReconciliation\u0022:false,\u0022buttonDisabled\u0022:true}}; actual={\u0022status\u0022:\u0022Nothing was reconciled: no de novo rows have been kept, so there is nothing to join. Next step: import the selected de novo export in Step 1 first.\u0022,\u0022initial\u0022:\u0022{\\u0022rows\\u0022:0,\\u0022hasReconciliation\\u0022:false,\\u0022buttonDisabled\\u0022:true}\u0022,\u0022final\u0022:{\u0022rows\u0022:0,\u0022hasReconciliation\u0022:false,\u0022buttonDisabled\u0022:true}}"
+    }
+  ],
+  "kindReceipts": null
+}

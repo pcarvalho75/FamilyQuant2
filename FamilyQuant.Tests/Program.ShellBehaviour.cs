@@ -22,7 +22,7 @@ internal static partial class Program
     {
         if (args.Length != 6) throw new ArgumentException("Supply frozen source/app, fixed behaviour JSON, fresh output and date.");
         string output = Path.GetFullPath(args[4]);
-        string step = args[0] == "--prove-shell-behaviour2" ? "SH-behaviour2" : "SH-behaviour";
+        string step = args[0] switch { "--prove-shell-behaviour3" => "SH-behaviour3", "--prove-shell-behaviour2" => "SH-behaviour2", _ => "SH-behaviour" };
         if (!NativeProofDesktop.IsPrivate) return NativeProofDesktop.Run(args, output + ".isolated-process.log");
         if (Directory.Exists(output)) throw new IOException("Use a fresh behaviour output.");
         Directory.CreateDirectory(output);
@@ -101,12 +101,34 @@ internal static partial class Program
                 });
                 Attempt(["48FB6F4B7D66"], "empty-import reconciliation guard", () =>
                 {
-                    bool disabled = !((Button)oldDeNovo.FindName("ButtonReconcile")).IsEnabled && !((Button)currentDeNovo.FindName("ButtonReconcile")).IsEnabled;
-                    SecondaryCall(oldDeNovo, oldDeNovo.GetType(), "ButtonReconcile_Click", oldDeNovo, new RoutedEventArgs());
-                    SecondaryCall(currentDeNovo, currentDeNovo.GetType(), "ButtonReconcile_Click", currentDeNovo, new RoutedEventArgs()); PumpDispatcher();
-                    string before = ((TextBlock)oldDeNovo.FindName("TextBlockDeNovoStatus")).Text;
-                    string actual = currentDeNovo.ViewModel.Status;
-                    Record(["48FB6F4B7D66"], "empty-import reconciliation guard", disabled && before == actual && before.Contains("nothing to join", StringComparison.Ordinal), before, actual);
+                    // Other scoped cases can import into the shared controls. This refusal needs its
+                    // own empty controls even when the filtering prerequisite case ran immediately before it.
+                    var oldEmpty = (UserControl)Activator.CreateInstance(legacy.GetType("FamilyQuant.DeNovoControl", true)!)!;
+                    var empty = new DeNovoControl();
+                    var oldEmptyHost = SecondaryHost(new Window { Content = oldEmpty });
+                    var emptyHost = SecondaryHost(new Window { Content = empty });
+                    object State(UserControl view) => new
+                    {
+                        rows = ((IEnumerable)SecondaryRead(view, "FilteredRows")!).Cast<object>().Count(),
+                        hasReconciliation = SecondaryRead(view, "LastReconciliation") != null,
+                        buttonDisabled = !((Button)view.FindName("ButtonReconcile")).IsEnabled
+                    };
+                    try
+                    {
+                        string oldInitial = JsonSerializer.Serialize(State(oldEmpty)), initial = JsonSerializer.Serialize(State(empty));
+                        const string expectedState = "{\"rows\":0,\"hasReconciliation\":false,\"buttonDisabled\":true}";
+                        SecondaryCall(oldEmpty, oldEmpty.GetType(), "ButtonReconcile_Click", oldEmpty, new RoutedEventArgs());
+                        SecondaryCall(empty, empty.GetType(), "ButtonReconcile_Click", empty, new RoutedEventArgs()); PumpDispatcher();
+                        string before = ((TextBlock)oldEmpty.FindName("TextBlockDeNovoStatus")).Text, actual = empty.ViewModel.Status;
+                        const string expected = "Nothing was reconciled: no de novo rows have been kept, so there is nothing "
+                            + "to join. Next step: import the selected de novo export in Step 1 first.";
+                        Record(["48FB6F4B7D66"], "empty-import reconciliation guard", oldInitial == expectedState && initial == expectedState
+                            && JsonSerializer.Serialize(State(oldEmpty)) == oldInitial && JsonSerializer.Serialize(State(empty)) == initial
+                            && before == expected && actual == expected,
+                            new { status = before, initial = oldInitial, final = State(oldEmpty) }, new { status = actual, initial, final = State(empty) },
+                            "Fresh native empty-row controls must retain the exact complete refusal and next-step advice without reconciliation or state changes.");
+                    }
+                    finally { oldEmptyHost.Close(); emptyHost.Close(); }
                 });
                 Attempt(["95D4A5E286C3"], "missing-run empty native contract", () =>
                 {
