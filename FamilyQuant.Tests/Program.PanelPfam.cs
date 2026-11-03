@@ -46,10 +46,18 @@ internal static partial class Program
     {
         public int Requests;
         public bool Offline;
+        public bool RateLimited;
+        public bool AlwaysLimited;
         protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
         {
             Requests++;
             if (Offline) throw new HttpRequestException("Fixture offline");
+            if (RateLimited && (AlwaysLimited || Requests == 1))
+            {
+                var limited = new HttpResponseMessage(HttpStatusCode.TooManyRequests);
+                limited.Headers.RetryAfter = new System.Net.Http.Headers.RetryConditionHeaderValue(TimeSpan.Zero);
+                return Task.FromResult(limited);
+            }
             string accession = request.RequestUri!.Segments.Last().Trim('/');
             if (accession == "PF99999") return Task.FromResult(new HttpResponseMessage(HttpStatusCode.NotFound));
             if (accession == "PF99998") return Task.FromResult(new HttpResponseMessage(HttpStatusCode.ServiceUnavailable));
@@ -112,5 +120,14 @@ internal static partial class Program
         try { PanelPfamChecker.CheckAsync(panel, handler, cancelled.Token).GetAwaiter().GetResult(); }
         catch (OperationCanceledException) { stopped = true; }
         Check("J1c cancellation is not reported as a successful check", stopped);
+        var single = new FamilyPanel { Families = new() { new() { Key = "rate", Pfam = new() { new() { Accession = "PF00001", Name = "Short_domain" } } } } };
+        using var temporaryLimit = new PfamFixtureHandler { RateLimited = true };
+        var recovered = PanelPfamChecker.CheckAsync(single, temporaryLimit).GetAwaiter().GetResult();
+        Check("J1c a transient rate limit retries after the provider delay", temporaryLimit.Requests == 2
+            && recovered.Complete && recovered.Rows.Single().Status == PanelPfamCheckStatus.Match);
+        using var persistentLimit = new PfamFixtureHandler { RateLimited = true, AlwaysLimited = true };
+        var refused = PanelPfamChecker.CheckAsync(single, persistentLimit).GetAwaiter().GetResult();
+        Check("J1c rate-limit retries are bounded and remain unavailable on refusal", persistentLimit.Requests == 3
+            && !refused.Complete && refused.Rows.Single().Status == PanelPfamCheckStatus.CouldNotCheck);
     }
 }
