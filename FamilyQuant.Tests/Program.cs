@@ -58,6 +58,7 @@ namespace FamilyQuant.Tests
             CoreReuseContractTests();
             SharedTestHelperContracts(workDir);
             CsvTests();
+            ExportProteinNameTests();
             Section("Core operation outcomes, progress and cancellation");
             CoreOperationTests(workDir);
             Section("Display filters and the family counter");
@@ -206,6 +207,7 @@ namespace FamilyQuant.Tests
             EvidenceStorageTests(workDir);
             DomainPositionTests(Path.Combine(workDir, "domain-positions"));
             PanelSpreadsheetTests(Path.Combine(workDir, "panel-spreadsheet"));
+            FamilySensitivityTests(Path.Combine(workDir, "family-sensitivity"));
             EvidenceFetchTests();
             EvidenceFetchAtomicTests();
             EvidenceCoverageTests();
