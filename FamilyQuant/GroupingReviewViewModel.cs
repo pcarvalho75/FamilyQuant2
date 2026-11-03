@@ -3,6 +3,8 @@ using System.ComponentModel;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Collections.Generic;
+using FamilyQuant.Evidence;
 
 namespace FamilyQuant
 {
@@ -19,6 +21,7 @@ namespace FamilyQuant
         private readonly Func<string, EvidenceReviewInput>? propose;
         private readonly Func<string, string>? motif;
         private readonly Func<CancellationToken, Task<EvidenceTaskScopeInput>>? discoverTask;
+        private readonly Func<IReadOnlyList<PanelFamilyLinkSelection>, EvidenceReviewInput>? confirmPanelLinks;
         private CancellationTokenSource? discoveryCancellation;
         public EvidenceTaskScopeInput? TaskScope { get; private set; }
         public bool TaskDiscoveryAvailable => discoverTask != null;
@@ -29,9 +32,10 @@ namespace FamilyQuant
         public KeywordReviewViewModel Keyword { get; }
         public EvidenceReviewViewModel? Evidence => evidence;
         public bool EvidenceAvailable => evidence != null || propose != null;
-        public bool IsBusy { get => isBusy; private set { isBusy = value; Changed(); Changed(nameof(CanEdit)); Changed(nameof(CanDiscoverTask)); Changed(nameof(CanUpdateProposal)); Changed(nameof(CanCheckMotif)); NotifySummary(); } }
+        public bool IsBusy { get => isBusy; private set { isBusy = value; Changed(); Changed(nameof(CanEdit)); Changed(nameof(CanDiscoverTask)); Changed(nameof(CanUpdateProposal)); Changed(nameof(CanCheckMotif)); Changed(nameof(CanUpdatePanelLinks)); NotifySummary(); } }
         public bool CanUpdateProposal => propose != null && !IsBusy && !string.IsNullOrWhiteSpace(ScopeText);
         public bool CanCheckMotif => motif != null && !IsBusy && Evidence != null && !string.IsNullOrWhiteSpace(MotifPattern);
+        public bool CanUpdatePanelLinks => confirmPanelLinks != null && !IsBusy && Evidence?.HasUnappliedPanelLinkChoices == true;
         public int ModeIndex { get => modeIndex; set { modeIndex = value; Changed(); NotifySummary(); } }
         public string ScopeText { get => scopeText; set { scopeText = value; Changed(); Changed(nameof(CanUpdateProposal)); NotifySummary(); } }
         public string MotifPattern { get => motifPattern; set { motifPattern = value; Changed(); Changed(nameof(CanCheckMotif)); NotifySummary(); } }
@@ -43,10 +47,12 @@ namespace FamilyQuant
         public GroupingReviewViewModel(SuperClusterPreview keyword, EvidenceReviewInput? input = null,
             Func<string, EvidenceReviewInput>? propose = null, Func<string, string>? motif = null,
             string initialScope = "", bool evidenceMode = false,
-            Func<CancellationToken, Task<EvidenceTaskScopeInput>>? discoverTask = null)
+            Func<CancellationToken, Task<EvidenceTaskScopeInput>>? discoverTask = null,
+            Func<IReadOnlyList<PanelFamilyLinkSelection>, EvidenceReviewInput>? confirmPanelLinks = null)
         {
             Keyword = new KeywordReviewViewModel(keyword); this.propose = propose; this.motif = motif;
             this.discoverTask = discoverTask;
+            this.confirmPanelLinks = confirmPanelLinks;
             scopeText = initialScope; proposalScope = initialScope;
             Keyword.PropertyChanged += (_, _) => NotifySummary();
             SetEvidence(input);
@@ -102,6 +108,24 @@ namespace FamilyQuant
             generation++; discoveryCancellation?.Cancel(); IsBusy = false;
             if (wasBusy) Status = "Cancelled. Previous review is kept.";
         }
+        public async Task UpdatePanelLinksAsync()
+        {
+            if (!CanUpdatePanelLinks) return;
+            var choices = Evidence!.CapturePanelLinkChoices();
+            string requestedScope = ScopeText;
+            int request = ++generation;
+            IsBusy = true; Changed(nameof(CanUpdatePanelLinks)); Status = "Updating the confirmed panel links...";
+            try
+            {
+                var input = await Task.Run(() => confirmPanelLinks!(choices));
+                if (request != generation) return;
+                if (ScopeText != requestedScope) { Status = "Scope changed. Update the proposal before applying."; return; }
+                SetEvidence(input);
+                Status = "Links updated. Review the proposal before applying.";
+            }
+            catch (Exception ex) { if (request == generation) Status = ex.Message; }
+            finally { if (request == generation) { IsBusy = false; Changed(nameof(CanUpdatePanelLinks)); } }
+        }
         public async Task CheckMotifAsync()
         {
             if (!CanCheckMotif) return;
@@ -126,7 +150,7 @@ namespace FamilyQuant
             checkedMotifPattern = ""; MotifReport = "";
             Changed(nameof(Evidence)); Changed(nameof(EvidenceAvailable)); Changed(nameof(CanCheckMotif)); NotifySummary();
         }
-        private void EvidenceChanged(object? sender, PropertyChangedEventArgs e) => NotifySummary();
+        private void EvidenceChanged(object? sender, PropertyChangedEventArgs e) { Changed(nameof(CanUpdatePanelLinks)); NotifySummary(); }
         private void NotifySummary() { Changed(nameof(Summary)); Changed(nameof(CanConfirm)); }
     }
 }

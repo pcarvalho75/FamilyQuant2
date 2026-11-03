@@ -17,6 +17,7 @@ public sealed class PanelFamilyRowMap
 public sealed class PanelFamilyUserMap
 {
     public int FamilyUserId { get; init; }
+    /// <summary>Effective key, or the original excluded key so its report decision is retained.</summary>
     public string? PanelFamilyKey { get; init; }
     public FamilyPanelDecision? Decision { get; init; }
     public IReadOnlyList<string> PanelKeys { get; init; } = Array.Empty<string>();
