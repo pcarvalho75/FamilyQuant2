@@ -4,7 +4,7 @@ Subclass definitions are user data in the family panel. Each rule can specify re
 Pfam accessions, or source subfamily text. A source rank suffix can be omitted from the entered
 text; matching otherwise uses a complete annotation component, not a substring. Multiple rules
 that support different reported subclasses remain unresolved. An absent-domain rule cannot be
-established from missing domain evidence or a recorded protein fragment. A rule may report its
+established from missing domain evidence, a recorded fragment, or unknown fragment status. A rule may report its
 result under another subclass selected in the panel.
 
 `SubclassAssignment.ComputeCurrent` requires current applied family-assignment evidence. It
@@ -21,7 +21,10 @@ candidate, and stores the labels and fingerprints in the project and its recipe 
 change. `IsCurrent` checks both family-assignment provenance and the subclass inputs and stored
 labels. The App entry point is `SubclassAssignmentRunner.RecomputeSubclassesAsync(host)`; it uses
 the existing Families busy/Cancel host and Undo stack. Call it after a previous host lease ends.
-If family assignment evidence is not current, it refuses to publish subclass labels.
+The default creates one Undo entry. For an automatic recomputation that is part of a preceding
+action, pass `combineWithPreviousUndo: true`; the caller's existing Undo must capture panel and
+evidence state. The operation refuses combined mode if no preceding Undo exists or it changes
+while work is running. If family assignment evidence is not current, it refuses to publish labels.
 
 `MeasureLeaveOneOutCurrent` measures reviewed targets whose source subfamily matches a user rule.
 It masks each query's own subclass and excludes the same accession, then applies the reviewed
