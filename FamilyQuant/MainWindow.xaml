@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FamilyQuant"
         mc:Ignorable="d"
-        Title="FamilyQuant 2.0" Height="768" Width="1024" MinHeight="600" MinWidth="900">
+        Title="FamilyQuant" Height="768" Width="1024" MinHeight="600" MinWidth="900">
     <Grid x:Name="MainGrid">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -35,11 +35,15 @@
                               ToolTip="Exports one row per target protein with panel labels and recorded assignment evidence."/>
                     <MenuItem x:Name="MenuItemExportComposition" Header="Family composition (CSV)" Click="MenuItemExportComposition_Click"
                               ToolTip="Exports the current Full XIC family composition with its existing attribution settings. Disabled until Full XIC is available."/>
+                    <MenuItem x:Name="MenuItemExportInterpretationInput" Header="Interpretation input (Markdown)" Click="MenuItemExportInterpretationInput_Click"
+                              ToolTip="Writes report details, the panel and the stored result tables to one file for an assistant of your choice. Needs stored Results."/>
                 </MenuItem>
                 <MenuItem x:Name="MenuItemReportDetails" Header="Report details" Click="MenuItemReportDetails_Click" IsEnabled="False"
                           ToolTip="Edit the study description and written interpretation saved with the project. Disabled until a project is open."/>
                 <MenuItem x:Name="MenuItemExportReport" Header="Export report" Click="MenuItemExportReport_Click"
                           ToolTip="Write a Word report from stored Results and selected sections or figures. Compute full XIC first when no Results are stored."/>
+                <MenuItem x:Name="MenuItemAiDraft" Header="Draft interpretation with AI..." Click="MenuItemAiDraft_Click"
+                          ToolTip="Optionally review project information, then request and review an AI interpretation draft."/>
                 <MenuItem x:Name="MenuItemRecent" Header="Recent projects" SubmenuOpened="MenuItemRecent_SubmenuOpened"
                           ToolTip="Reopens a recent project or Family Cluster File. Missing files remain listed with their paths."/>
                 <Separator/>
@@ -92,6 +96,8 @@
                           ToolTip="Writes family numbers to a new regrouped SEPro package, leaving the original unchanged. Disabled until a project is loaded."/>
             </MenuItem>
             <MenuItem x:Name="MenuItemHelp" Header="Help" ToolTip="Read the current screen's explanations or the complete workflow.">
+                <MenuItem x:Name="MenuItemAiKey" Header="AI assistant key..." Click="MenuItemAiKey_Click"
+                          ToolTip="Add, test, import or remove your private API key for the optional AI draft."/>
                 <MenuItem x:Name="MenuItemHowToRead" Header="How to read these numbers" Command="Help" InputGestureText="F1"
                           ToolTip="Explains the current screen's numbers and choices, including denominators and shared peptides. F1 opens this same help."/>
                 <MenuItem x:Name="MenuItemWhereAmI" Header="What do I do first?" Click="MenuItemWhereAmI_Click"

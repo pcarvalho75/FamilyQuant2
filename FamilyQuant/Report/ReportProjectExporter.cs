@@ -61,9 +61,27 @@ public static class ReportProjectExporter
         var labels = families?.Families.ToDictionary(f => f.FamilyUserId, f => f.Description)
             ?? new Dictionary<int, string>();
         Data(4, "Applying stored studies");
-        result = ReportStoredResults.Apply(result, manifest, labels, grouping);
+        result = ReportStoredResults.Apply(result, manifest, labels, grouping, curation);
         var compositionBasis = ReportCompositionBasis.Select(curation, manifest, labels);
         result = compositionBasis.Apply(result);
+        if (compositionBasis.UsesPanel && ReportFindings.InputFromProject(curation, compositionBasis.Studies,
+            compositionBasis.Grouping, compositionBasis.Labels) is { } panelFindings)
+        {
+            panelFindings = panelFindings with
+            {
+                PanelKeyByUserId = compositionBasis.Map!.UserFamilies.ToDictionary(pair => pair.Key,
+                    pair => pair.Value.HasConflict ? null : pair.Value.PanelFamilyKey),
+                MembersByPanelKey = panelFindings.MembersByPanelKey
+                    .GroupBy(pair => Panels.FamilyPanelValidation.ResolveFamilyKey(curation.FamilyPanel!, pair.Key), StringComparer.Ordinal)
+                    .Where(group => group.Key != null).ToDictionary(group => group.Key!, group => group.Sum(pair => pair.Value), StringComparer.Ordinal),
+            };
+            var findings = ReportFindings.Build(panelFindings);
+            var selectedExports = new Dictionary<string, string>(result.CsvExports, StringComparer.Ordinal)
+            {
+                ["panel_family_report_findings.csv"] = findings.Csv,
+            };
+            result = new(result.Sections.Where(section => section.Id != ReportSectionIds.Findings).Append(findings.Section).ToArray(), selectedExports);
+        }
         Data(5, "Preparing report sections");
         var replacements = result.Sections.ToDictionary(s => s.Id, StringComparer.Ordinal);
         bool hasConflicts = replacements.ContainsKey(ReportSectionIds.AssignmentConflicts);
@@ -96,8 +114,7 @@ public static class ReportProjectExporter
                     blocks.Insert(0, new ReportParagraph("current-grouping-notice",
                         "Draft of the saved current grouping. No family panel is stored in this project. Group-specific, shared and unattributed signal remain separate; panel-based assignments can change both the grouping and its shared-signal fraction."));
                 blocks.AddRange(figures.Where(f => f.SectionId == section.Id).Select(f => (ReportBlock)f.Figure));
-                blocks.AddRange(unavailable.Where(f => f.SectionId == section.Id).Select((f, index) =>
-                    (ReportBlock)new ReportParagraph(section.Id + ":unavailable-figure:" + index.ToString(CultureInfo.InvariantCulture), f.Title + ": " + f.Reason)));
+                ReportFigureAvailabilityBlocks.Append(blocks, section.Id, unavailable);
                 return section with { Blocks = blocks };
             }).ToArray(),
         };

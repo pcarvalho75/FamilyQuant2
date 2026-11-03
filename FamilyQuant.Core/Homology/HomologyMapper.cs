@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 namespace FamilyQuant.Homology
 {
     /// <summary>
+    /// Deprecated: use HomologySearch, which gives identical results faster. Kept as the reference for equivalence tests.
     /// Maps de novo sequences onto the proteins of a family database by HOMOLOGY, and from there onto
     /// families.
     ///
@@ -36,6 +37,7 @@ namespace FamilyQuant.Homology
     ///     (ProgramEngine.cs:255-261 keeps every protein whose score EQUALS the maximum and nothing
     ///     else), because the second-best protein of a family is exactly what a curator needs to see.
     /// </summary>
+    [Obsolete("Deprecated: use HomologySearch, which gives identical results faster. Kept as the reference for equivalence tests.")]
     public static class HomologyMapper
     {
         /// <summary>
@@ -47,7 +49,8 @@ namespace FamilyQuant.Homology
         /// first seen.
         /// </summary>
         public static List<HomologyResult> Search(IEnumerable<string> peptides, HomologyDatabase database,
-            HomologyOptions? options = null, OperationContext? operation = null)
+            HomologyOptions? options = null, OperationContext? operation = null,
+            string progressStage = "homology", string? progressLabel = null, int progressBatchSize = 1)
         {
             operation?.ThrowIfCancellationRequested();
             if (peptides == null)
@@ -105,6 +108,8 @@ namespace FamilyQuant.Homology
             // parallel would also have to merge partial argmaxes, and the merge is where a tie-break
             // silently becomes non-deterministic.
             int completed = 0;
+            if (progressBatchSize < 1) throw new ArgumentOutOfRangeException(nameof(progressBatchSize));
+            if (progressLabel != null) operation?.Report(progressStage, progressLabel, 0, queries.Count);
             object progressGate = new object();
             var parallelOptions = new ParallelOptions { CancellationToken = operation?.CancellationToken ?? CancellationToken.None };
             Parallel.For(0, queries.Count, parallelOptions, i =>
@@ -116,7 +121,12 @@ namespace FamilyQuant.Homology
                         Array.Empty<HomologyHit>(), false, false, 0, false)
                     : SearchNormalized(query.Raw, query.Normalized, database, opts, operation);
                 if (operation != null)
-                    lock (progressGate) operation.Report("homology", "Searched peptide queries", ++completed, queries.Count);
+                    lock (progressGate)
+                    {
+                        if (++completed % progressBatchSize == 0 || completed == queries.Count)
+                            operation.Report(progressStage, progressLabel == null ? "Searched peptide queries" : progressLabel + " "
+                                + completed.ToString(CultureInfo.InvariantCulture) + " of " + queries.Count.ToString(CultureInfo.InvariantCulture), completed, queries.Count);
+                    }
             });
 
             return new List<HomologyResult>(results);

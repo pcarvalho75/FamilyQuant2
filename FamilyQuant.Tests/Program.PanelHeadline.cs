@@ -41,6 +41,14 @@ internal static partial class Program
         Check("the original UserID headline stays byte-identical under its old export name", export.CsvExports["family_composition_headline.csv"] == original);
         Check("Word identifies the headline as the panel-family unit", export.Document.Sections.SelectMany(s => s.Blocks).OfType<ReportParagraph>()
             .Any(p => p.Text.Contains("headline", StringComparison.OrdinalIgnoreCase) && p.Text.Contains("effective panel-family totals", StringComparison.Ordinal)));
+        Check("automatic findings use the same panel-family mean as the headline", export.Document.Sections
+            .Where(s => s.Id == ReportSectionIds.Findings).SelectMany(s => s.Blocks).OfType<ReportParagraph>()
+            .Any(p => p.Text.Contains("Main group: 50%", StringComparison.Ordinal)));
+        var findingsTable = export.CsvExports.TryGetValue("panel_family_report_findings.csv", out string? findingsCsv)
+            ? ReportCsvTable.Build("panel-findings-test", "Panel findings", findingsCsv, "") : null;
+        Check("panel findings have a matching native export while the source findings export remains", findingsTable != null
+            && findingsTable.Rows.Any(r => r[1] == "Main group mean share (%)" && r[2] == "50")
+            && export.CsvExports.ContainsKey(ReportFindings.CsvFile));
         var basis = ReportCompositionBasis.Select(file, manifest, labels);
         var plots = ReportStudyFigures.PlanForBasis(manifest, file, basis, reportGrouping: originalGrouping);
         var meanChart = (FamilyCompositionChart)plots.Figures.Single(p => p.Plot.Chart is FamilyCompositionChart).Plot.Chart;

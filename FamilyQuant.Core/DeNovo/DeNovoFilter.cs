@@ -53,8 +53,24 @@ namespace FamilyQuant.DeNovo
 
         public static List<PeaksDeNovoRow> Apply(IEnumerable<PeaksDeNovoRow> rows,
                                                   DeNovoFilterCriteria c,
-                                                  double minimumConfidence)
-            => rows.Where(r => Passes(r, c, minimumConfidence)).ToList();
+                                                  double minimumConfidence, FamilyQuant.Operations.OperationContext? operation = null,
+                                                  string progressStage = "denovo-rows")
+        {
+            if (operation == null) return rows.Where(r => Passes(r, c, minimumConfidence)).ToList();
+            var input = rows as IReadOnlyCollection<PeaksDeNovoRow> ?? rows.ToArray();
+            operation.Report(progressStage, "Filtering de novo rows", 0, input.Count);
+            var accepted = new List<PeaksDeNovoRow>();
+            int completed = 0;
+            foreach (var row in input)
+            {
+                operation.ThrowIfCancellationRequested();
+                if (Passes(row, c, minimumConfidence)) accepted.Add(row);
+                if (++completed % 128 == 0 || completed == input.Count)
+                    operation.Report(progressStage, "De novo rows " + completed.ToString(System.Globalization.CultureInfo.InvariantCulture)
+                        + " of " + input.Count.ToString(System.Globalization.CultureInfo.InvariantCulture), completed, input.Count);
+            }
+            return accepted;
+        }
 
         /// <summary>At least <paramref name="need"/> consecutive values at or above
         /// <paramref name="floor"/>.</summary>

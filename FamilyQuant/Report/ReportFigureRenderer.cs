@@ -14,7 +14,10 @@ namespace FamilyQuant.Report;
 public sealed record ReportChart(string SectionId, string FileName, string Title, string Caption,
     Func<FrameworkElement> CreateChart, double Width = ChartImageExporter.DefaultLayoutWidth,
     double Height = ChartImageExporter.DefaultLayoutHeight, FigureCaptionInput? CaptionInput = null);
-public sealed record ReportFigureAvailability(string SectionId, string Title, string Reason);
+public sealed record ReportFigureAvailability(string SectionId, string Title, string Reason)
+{
+    public bool SupplementOnly { get; init; }
+}
 public sealed record ReportFigurePlan(IReadOnlyList<ReportChart> Charts, IReadOnlyList<ReportFigureAvailability> Unavailable);
 public sealed record ReportPlacedFigure(string SectionId, ReportFigure Figure);
 
@@ -50,7 +53,10 @@ public static class ReportFigureRenderer
                 if (facts.Length == 0) throw new InvalidOperationException("Numeric caption data are missing for " + file);
                 input = new FigureCaptionInput(title, guidance + " Read each labelled axis and legend using its stated units.", facts);
             }
-            if (reportGrouping != null && native is FamilyContributionChart or FamilySignalShareChart or FamilySourceSequenceChart or DatabaseGapChart or ReportFamilyWorldRatesChart)
+            if (native is FamilyContributionChart or FamilySignalShareChart)
+                input = input with { Notes = (input.Notes ?? Array.Empty<string>()).Append(
+                    "Family labels may be abbreviated. Match each printed family id to its complete name in the Family composition tables and companion workbook").ToArray() };
+            if (reportGrouping != null && native is FamilyContributionChart or FamilySignalShareChart or ReportFamilySourceSequenceChart or DatabaseGapChart or ReportFamilyWorldRatesChart)
                 input = input with { Notes = (input.Notes ?? Array.Empty<string>()).Append(
                     "Only canonical report members are shown individually. Others member details remain in the supplement; stored values and original denominators are unchanged").ToArray() };
             charts.Add(new(section, file, title, ReportCaptionBuilder.Figure(input), factory, CaptionInput: input));
@@ -64,16 +70,28 @@ public static class ReportFigureRenderer
             "Signal in each mass interval divided by the recorded RAW total ion current. Missing TIC is unavailable.", () => new PercentIonCurrentChart(data.Peptides, data.Grouped?.Tic ?? 0));
         Add(ReportSectionIds.Quality, AnalyticsFigures.RecoveryFile, "Recovery and M+0 sensitivity",
             "The chart separates the primary reference-calibrated estimate, M+0 sensitivity and directly observed diagnostic bases.", () => new RecoveryChart(data.Fractions, data.Grouped));
-        Add(ReportSectionIds.Results, PresentationFigures.SignalByRunFile, "Signal by run",
-            "Stored run-level native fractions, with the denominator and signal bases stated in the chart.", () => new SignalByRunChart(data.Fractions),
-            new CaptionNumber("Acquisition runs", data.Fractions.Count, "runs", "0"));
+        var runPages = data.Fractions.Chunk(ReportSignalByRunChart.RunsPerPage).DefaultIfEmpty(Array.Empty<NativeRunFraction>()).ToArray();
+        for (int page = 0; page < runPages.Length; page++)
+        {
+            var pageRuns = runPages[page];
+            int runOffset = page * ReportSignalByRunChart.RunsPerPage;
+            string file = page == 0 ? PresentationFigures.SignalByRunFile
+                : Path.GetFileNameWithoutExtension(PresentationFigures.SignalByRunFile) + "_" + (page + 1).ToString(CultureInfo.InvariantCulture) + ".png";
+            Add(ReportSectionIds.Results, file, "Signal by run",
+                "Observed identified envelope and reference-calibrated de novo estimate each use that run's TIC denominator. "
+                    + "Run indices follow acquisition order in the Signal by run table and companion workbook, where complete run names are retained. Missing TIC is unavailable.",
+                () => new ReportSignalByRunChart(pageRuns, runOffset),
+                new CaptionNumber("Acquisition runs", data.Fractions.Count, "runs", "0"));
+            charts[^1] = charts[^1] with { Width = ReportPrintChart.LayoutWidth, Height = ReportPrintChart.LayoutHeight };
+        }
         var pooledFacts = data.Grouped is { Tic: > 0 } pooled
             ? new[] { new CaptionNumber("Pooled primary recovery estimate", 100 * pooled.RecoveredFractionReferenceCalibrated, "%"),
                 new CaptionNumber("Pooled M+0 recovery", 100 * pooled.RecoveredFractionM0, "%") }
             : new[] { new CaptionNumber("Pooled records available", data.Grouped == null ? 0 : 1, "records", "0") };
         Add(ReportSectionIds.Results, PresentationFigures.SignalUpliftFile, "Signal recovery components",
-            "Grouped primary signal estimate and its components. The de novo estimate is distinct from directly observed isotope-window signal.", () => new SignalUpliftChart(data.Grouped),
+            "Grouped primary signal estimate and its components. The de novo estimate is distinct from directly observed isotope-window signal.", () => new ReportSignalUpliftChart(data.Grouped),
             pooledFacts);
+        charts[^1] = charts[^1] with { Width = ReportPrintChart.LayoutWidth, Height = ReportPrintChart.LayoutHeight };
         if (visibleFamilies != null)
         {
             var bars = FamilyContributionPlot.Fold(visibleFamilies, reportGrouping == null ? FamilyContributionPlot.DefaultTopN : 0);
@@ -92,10 +110,30 @@ public static class ReportFigureRenderer
             Add(ReportSectionIds.Results, PresentationFigures.FamilySignalShareFile, "Family signal and de novo share",
                 "Family signal against its de novo contribution; these axes describe abundance and evidence source, not diversity.", () => new FamilySignalShareChart(visibleFamilies, 10),
                 new CaptionNumber("Family rows shown from the stored attribution", visibleFamilies.Families.Count, "families", "0"));
-            Add(ReportSectionIds.Results, PresentationFigures.FamilySourceSequenceFile, "Family source sequence counts",
-                "Distinct source sequence counts for the current family attribution. Sequence counts are not gene or proteoform counts.", () => new FamilySourceSequenceChart(visibleFamilies.SourceSequenceSummary),
-                new("Family rows in the visible stored sequence census", visibleFamilies.SourceSequenceSummary.Families.Count, "families", "0"),
-                new("Input identified distinct sequences", visibleFamilies.SourceSequenceSummary.SearchInputDistinctSequences, "sequences", "0"));
+            var census = visibleFamilies.SourceSequenceSummary;
+            var sourcePages = ReportFamilySourceSequenceChart.Pages(census);
+            int selected = sourcePages.Sum(page => page.Count);
+            if (selected == 0)
+                Missing(ReportSectionIds.Results, "Family source sequence counts",
+                    "The stored census has no source-resolved family sequences for the PEAKS de-novo-only and DeepNovo disjoint sets. "
+                    + "Other de novo sources are separate; this does not establish that all de novo evidence is absent. "
+                    + "The complete stored census remains in the companion workbook's Complete family source sequence census table.");
+            for (int page = 0; page < sourcePages.Count; page++)
+            {
+                var pageRows = sourcePages[page];
+                string file = page == 0 ? PresentationFigures.FamilySourceSequenceFile
+                    : Path.GetFileNameWithoutExtension(PresentationFigures.FamilySourceSequenceFile) + "_" + (page + 1).ToString(CultureInfo.InvariantCulture) + ".png";
+                Add(ReportSectionIds.Results, file, "Family source sequence counts - page " + (page + 1).ToString(CultureInfo.InvariantCulture),
+                    "The highest-count families with de novo sequences are selected by descending union count, ties by family id, and split across pages. "
+                        + "Sequence counts are not gene or proteoform counts. The complete stored census and full names are retained in the companion workbook's Complete family source sequence census table; match by family id.",
+                    () => new ReportFamilySourceSequenceChart(pageRows),
+                    new("Selected highest-count families across pages", selected, "families", "0"),
+                    new("Family rows in the visible stored sequence census", census.Families.Count, "families", "0"),
+                    new("Eligible families with de novo sequences", census.Families.Count(row => row.DeNovoUnionDistinctSequences > 0), "families", "0"),
+                    new("Input identified distinct sequences", census.SearchInputDistinctSequences, "sequences", "0"),
+                    new("Family rows on this page", pageRows.Count, "families", "0"));
+                charts[^1] = charts[^1] with { Width = ReportPrintChart.LayoutWidth, Height = ReportFamilySourceSequenceChart.RequiredHeight(pageRows) };
+            }
         }
         else Missing(ReportSectionIds.Results, "Family figures", "Family attribution is unavailable in this project.");
         if (manifest.DeNovoSourceScoreDistributions.Count > 0)
@@ -127,25 +165,44 @@ public static class ReportFigureRenderer
                 new("Filtered spectrum calls", identification.FilteredSpectrumCalls, "calls", "0"),
                 new("Carried-forward spectrum calls", identification.CarriedForwardSpectrumCalls, "calls", "0"));
             Add(ReportSectionIds.Quality, PresentationFigures.PeptideEvidenceFile, "Peptide representatives",
-                "Representative counts and evidence categories from the stored consolidation analysis.", () => new PeptideRepresentativesChart(data, identification),
-                new("Identified representatives", data.IdentifiedCount, "representatives", "0"),
-                new("De novo representatives", data.DeNovoCount, "representatives", "0"));
+                "Credited de novo representatives retain run, canonical peptidoform, charge and precursor mass after cross-side suppression. "
+                    + "Stored representatives before cross-side suppression are a separate population; neither count is sequence diversity.",
+                () => new PeptideRepresentativesChart(data, identification),
+                new("Credited de novo representatives after cross-side suppression", data.Grouped?.DeNovoPeptides
+                    ?? data.Peptides.Select(p => p.Run).Distinct(StringComparer.OrdinalIgnoreCase).Sum(run => data.Fractions.FirstOrDefault(f =>
+                        !f.IsGrouped && string.Equals(f.Run, run, StringComparison.OrdinalIgnoreCase))?.DeNovoPeptides ?? 0), "representatives", "0"),
+                new("Stored identified representatives before cross-side suppression", data.IdentifiedCount, "representatives", "0"),
+                new("Stored de novo representatives before cross-side suppression", data.DeNovoCount, "representatives", "0"));
         }
         else Missing(ReportSectionIds.Quality, "De novo consolidation and representatives");
         if (manifest.IdentificationConcordance is { } concordance)
         {
             concordance.Validate();
-            Add(ReportSectionIds.Quality, PresentationFigures.DatabaseSearchConcordanceFile, "Database search concordance",
-                "Sequence agreement among precursor-qualified one-to-one PSM pairs. Raw scan overlap is not its denominator.", () => new DatabaseSearchConcordanceChart(concordance),
-                new("Precursor-qualified database-search pairs", concordance.PrecursorQualifiedDatabaseSearchPairs, "pairs", "0"),
-                new("Exact pairs", concordance.ExactPrecursorQualifiedDatabaseSearchPairs, "pairs", "0"));
+            if (concordance.PrecursorQualifiedDatabaseSearchPairs > 0)
+                Add(ReportSectionIds.Quality, PresentationFigures.DatabaseSearchConcordanceFile, "Database search concordance",
+                    "Sequence agreement among precursor-qualified one-to-one PSM pairs. Raw scan overlap is not its denominator.", () => new DatabaseSearchConcordanceChart(concordance),
+                    new("Precursor-qualified database-search pairs", concordance.PrecursorQualifiedDatabaseSearchPairs, "pairs", "0"),
+                    new("Exact pairs", concordance.ExactPrecursorQualifiedDatabaseSearchPairs, "pairs", "0"));
+            else Missing(ReportSectionIds.Quality, "Database search concordance",
+                "No precursor-qualified comparable pairs were recorded. Stored audit counts: PatternLab PSM rows "
+                + concordance.PatternLabPsmRows.ToString(CultureInfo.InvariantCulture) + "; PEAKS database PSM rows "
+                + concordance.PeaksDatabasePsmRows.ToString(CultureInfo.InvariantCulture) + "; comparable pairs "
+                + concordance.PrecursorQualifiedDatabaseSearchPairs.ToString(CultureInfo.InvariantCulture) + "; exact pairs "
+                + concordance.ExactPrecursorQualifiedDatabaseSearchPairs.ToString(CultureInfo.InvariantCulture)
+                + ". No agreement rate is estimated. The complete audit remains in the table and companion workbook.");
             if (manifest.DeNovoOverlap is { HasScanLevelSequenceComparison: true } overlap)
             {
                 overlap.Validate();
                 Add(ReportSectionIds.Quality, PresentationFigures.DeNovoSearchCrosscheckFile, "De novo alternative triage",
-                    "Stored overlap and sequence-comparison stages, with scan and precursor denominators kept distinct.", () => new DeNovoSearchCrosscheckChart(overlap, concordance),
+                    "Stored overlap and sequence-comparison stages, with scan and precursor denominators kept distinct. "
+                        + "Source scope: " + overlap.SourceScopeLabel + ". Contextual search overlap is not a caller-accuracy estimate. "
+                        + (overlap.IsStrictDeNovoOnlyScope ? "De-novo-only export calls are alternative hypotheses, not failed database searches. " : "")
+                        + "PEAKS database sequence context is compared at the same scan and charge.", () => new ReportDeNovoTriageChart(overlap),
                     new CaptionNumber("Filtered de novo rows", overlap.FilteredDeNovoRows, "rows", "0"),
-                    new CaptionNumber("Precursor-matched rows", overlap.SamePrecursorWithinTolerance, "rows", "0"));
+                    new CaptionNumber("Precursor-matched rows", overlap.SamePrecursorWithinTolerance, "rows", "0"),
+                    new CaptionNumber("Same-charge PEAKS database context", concordance.DeNovoRowsSharingPeaksDatabaseScanAndCharge, "rows", "0"),
+                    new CaptionNumber("Exact PEAKS database sequence in that context", concordance.DeNovoRowsExactToPeaksDatabaseAtSameCharge, "rows", "0"));
+                charts[^1] = charts[^1] with { Width = ReportPrintChart.LayoutWidth, Height = ReportPrintChart.LayoutHeight };
             }
             else Missing(ReportSectionIds.Quality, "De novo alternative triage");
         }
@@ -167,18 +224,32 @@ public static class ReportFigureRenderer
             Add(ReportSectionIds.Sensitivity, PresentationFigures.IdentitySweepFile, "Identity sensitivity",
                 "The identity scan recorded in this project, without recomputing clustering.", () => new ReferenceIdentitySweepChart(manifest.PresentationIdentitySweep, identity),
                 new("Stored identity thresholds", manifest.PresentationIdentitySweep.Count, "thresholds", "0"), new("Highlighted identity", identity, "%"));
+            var scanFacts = new List<CaptionNumber> { new("Stored identity thresholds", manifest.PresentationIdentitySweep.Count, "thresholds", "0") };
+            if (curation.ClusteringIdentity > 0) scanFacts.Add(new("This file's clustering identity", curation.ClusteringIdentity, "%"));
+            bool hasDecoys = manifest.PresentationIdentitySweep.Any(r => r.Groups > r.TargetGroups || r.MixedGroups > 0);
+            int? floor = hasDecoys && manifest.PresentationIdentitySweep.Max(r => r.Score) > 0
+                ? IdentityScanPlot.CleanFloor(manifest.PresentationIdentitySweep) : null;
+            if (floor.HasValue) scanFacts.Add(new("Recorded clean-range floor", floor.Value, "%"));
             Add(ReportSectionIds.Sensitivity, "identity_scan.png", "Identity scan",
-                "The saved identity scan in the program's identity-window view.", () => new IdentityScanChart(manifest.PresentationIdentitySweep,
+                "Horizontal position runs from stricter to looser identity. The left axis counts non-contaminant target connected components; "
+                    + "the right axis is the percentage of families mixing target and decoy. Family mixing is not an identification FDR. "
+                    + "A marked floor is the lowest identity in the uninterrupted clean range from the strictest recorded threshold, not an optimum or a guarantee against target-target fusions. "
+                    + (floor.HasValue ? "The recorded file identity and the clean-range floor are separate reference points." : "No clean-range floor is drawn for these data."),
+                () => new IdentityScanChart(manifest.PresentationIdentitySweep,
                     curation.ClusteringIdentity > 0 ? curation.ClusteringIdentity : null),
-                new CaptionNumber("Stored identity thresholds", manifest.PresentationIdentitySweep.Count, "thresholds", "0"));
+                scanFacts.ToArray());
         }
         else Missing(ReportSectionIds.Sensitivity, "Identity sensitivity");
         if (manifest.DeNovoCallerAgreement is { } agreement)
         {
             agreement.Validate();
             Add(ReportSectionIds.Quality, PresentationFigures.DeNovoAgreementFile, "De novo caller agreement",
-                "Stored caller agreement under the chart's source-specific gates and precursor matching rule.", () => new DeNovoAgreementChart(agreement),
-                new("Precursor-qualified comparisons", agreement.Total, "comparisons", "0"), new("Identical comparisons", agreement.Identical, "comparisons", "0"));
+                "Population: " + agreement.PopulationDefinition + ". Observed source floors describe the imported exports, not configured acceptance cutoffs. "
+                    + "This comparison is separate from the jointly accepted source-score population. Pairing: " + agreement.PrimaryPairGate,
+                () => new DeNovoAgreementChart(agreement),
+                new("Precursor-qualified comparisons", agreement.Total, "comparisons", "0"), new("Identical comparisons", agreement.Identical, "comparisons", "0"),
+                new("Observed PEAKS confidence floor", agreement.PeaksObservedMinimumConfidence),
+                new("Observed DeepNovo confidence floor", agreement.DeepNovoObservedMinimumConfidence));
         }
         else Missing(ReportSectionIds.Quality, "De novo caller agreement");
         if (manifest.DeNovoSourceVenn is { } venn)
@@ -193,20 +264,30 @@ public static class ReportFigureRenderer
         if (manifest.DeNovoAcceptedScoreScatter is { Total: > 0 } scatter)
         {
             scatter.Validate();
+            var acceptedFacts = new List<CaptionNumber> { new("Accepted source-pair comparisons", scatter.Total, "comparisons", "0"),
+                new("Identical PTM-cleaned accepted pairs", scatter.Matches, "comparisons", "0"),
+                new("Identical share of accepted pairs", 100 * scatter.MatchFraction, "%") };
+            if (scatter.PeaksMinimumAcceptedScore is double peaksCutoff) acceptedFacts.Add(new("Recorded PEAKS acceptance cutoff", peaksCutoff));
+            if (scatter.DeepNovoMinimumAcceptedScore is double deepCutoff) acceptedFacts.Add(new("Recorded DeepNovo acceptance cutoff", deepCutoff));
             Add(ReportSectionIds.Quality, PresentationFigures.DeNovoAcceptedScoreScatterFile, "Accepted source scores",
-                "Accepted precursor hypotheses on separate source-native axes, labelled by sequence agreement.", () => new DeNovoAcceptedScoreScatterChart(scatter),
-                new CaptionNumber("Accepted source-pair comparisons", scatter.Total, "comparisons", "0"));
+                "Only compatible precursor hypotheses accepted by both complete source filters are shown; this differs from all imported export calls. "
+                    + scatter.PeaksFilterDescription + ". " + scatter.DeepNovoFilterDescription + ". " + DeNovoAcceptedScoreScatter.ScoreScaleCaveat,
+                () => new DeNovoAcceptedScoreScatterChart(scatter), acceptedFacts.ToArray());
         }
         else Missing(ReportSectionIds.Quality, "Accepted source score scatter");
         if (manifest.PresentationDeNovoVariants.Count > 0)
         {
             DeNovoVariantComparison.ValidateTalkVariantSet(manifest.PresentationDeNovoVariants);
             Add(ReportSectionIds.Sensitivity, PresentationFigures.DeNovoVariantComparisonFile, "Stored source variants",
-                "The source variants actually computed and recorded in this project.", () => new DeNovoVariantComparisonChart(manifest.PresentationDeNovoVariants),
+                "The source variants actually computed and recorded in this project. Red whiskers compare fixed-bin and pooled-ratio envelope models; "
+                    + "they show model sensitivity, not run-to-run SD or a confidence interval.", () => new DeNovoVariantComparisonChart(manifest.PresentationDeNovoVariants),
                 new CaptionNumber("Stored source variants", manifest.PresentationDeNovoVariants.Count, "variants", "0"));
             var comparison = DeNovoTalkComparison.Build(manifest.PresentationDeNovoVariants);
             Add(ReportSectionIds.Sensitivity, PresentationFigures.DeNovoTalkComparisonFile, "Source effect comparison",
-                "The program's comparison of the stored, provenance-matched source variants on one common search baseline.", () => new DeNovoTalkComparisonChart(comparison),
+                "The program's comparison of the stored, provenance-matched source variants on one common search baseline. "
+                    + "The Both callers bar uses " + DeNovoVariantComparison.OnlyPlusDeepNovoVariantName
+                    + " (PEAKS de-novo-only plus DeepNovo). " + DeNovoVariantComparison.AllPlusDeepNovoVariantName
+                    + " includes PEAKS-all and is a separate variant; its headline must not be substituted for the bar shown here.", () => new DeNovoTalkComparisonChart(comparison),
                 new CaptionNumber("Stored source variants", manifest.PresentationDeNovoVariants.Count, "variants", "0"));
         }
         else Missing(ReportSectionIds.Sensitivity, "Source variant comparison");

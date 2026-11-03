@@ -1,4 +1,5 @@
 using FamilyQuant.DeNovo;
+using FamilyQuant.Operations;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -52,16 +53,25 @@ namespace FamilyQuant
             Func<string, string, string>? cachePathFor = null,
             Action<string>? progress = null,
             IReadOnlyList<string>? restrictToRuns = null,
-            Func<string, string>? detectedCachePathFor = null)
+            Func<string, string>? detectedCachePathFor = null, OperationContext? operation = null)
         {
+            operation?.Report("compute-phase", "Compute phases", 0, 5);
+            operation?.Report("compute-phase", "Phase 1 of 5: Reading inputs", 1, 5);
             FullXicInput input = FullXicInputStage.Prepare(rawDirectory, sepr2Path,
-                deNovoDirectory, options, progress, restrictToRuns);
+                deNovoDirectory, options, progress, restrictToRuns, operation);
             FullXicComputeResult result = FullXicInputStage.CreateResult(input, options);
             var rawPrecursorMetadata = new List<RawScanPrecursorMetadata>();
-            foreach (string run in input.Runs)
+            operation?.Report("compute-phase", "Phase 2 of 5: Extracting acquisitions", 2, 5);
+            operation?.Report("compute-run", "Acquisitions to process", 0, input.Runs.Count);
+            for (int index = 0; index < input.Runs.Count; index++)
+            {
+                string run = input.Runs[index];
+                operation?.Report("compute-run", "Run " + (index + 1).ToString(CultureInfo.InvariantCulture) + " of "
+                    + input.Runs.Count.ToString(CultureInfo.InvariantCulture) + ": " + run, index + 1, input.Runs.Count);
                 FullXicRunStage.Extract(input, run, options, result, rawPrecursorMetadata,
-                    cachePathFor, progress, detectedCachePathFor);
-            return FullXicCompletionStage.Complete(input, options, result, rawPrecursorMetadata);
+                    cachePathFor, progress, detectedCachePathFor, operation);
+            }
+            return FullXicCompletionStage.Complete(input, options, result, rawPrecursorMetadata, operation);
         }
 
         /// <summary>

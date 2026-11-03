@@ -71,12 +71,14 @@ namespace FamilyQuant.Tests
             var suite = new SuiteTable();
             suite.Section("CSV export - locale and escaping");
             suite.Add(() => CommandRegistryTests());
+            suite.Add(() => SuiteCommandCoverageTests(null));
             suite.Add(() => CoreReuseContractTests());
             suite.Add(() => SharedTestHelperContracts(workDir));
             suite.Add(() => CsvTests());
             suite.Add(() => ExportProteinNameTests());
             suite.Section("Core operation outcomes, progress and cancellation");
             suite.Add(() => CoreOperationTests(workDir));
+            suite.Add(() => StreamingSaveTests(Path.Combine(workDir, "streaming-save")));
             suite.Section("Display filters and the family counter");
             suite.Add(() => FilterTests());
             suite.Section("Target/decoy scoring arithmetic");
@@ -133,6 +135,7 @@ namespace FamilyQuant.Tests
             });
             suite.Section("Homology - PepExplorer's aligner, ported with its C-terminus and character defects fixed");
             suite.Add(() => HomologyTests.Run(Check));
+            suite.Add(() => HomologySearchEquivalenceTests());
             suite.Section("Family world (B1) - a de novo tag credited to UniProt families, on a fixture");
             suite.Add(() => FamilyWorldCheck.RunFixtures(Check));
             suite.Add(() => FamilyWorldRateTests());
@@ -164,6 +167,8 @@ namespace FamilyQuant.Tests
             suite.Add(() => TicShareSummaryTests());
             suite.Section("Native fraction of TIC (Q3) - per-peptide dedup, unit invariants and the method");
             suite.Add(() => NativeFractionUnitTests(workDir));
+            suite.Add(() => ReferenceEnvelopeOptimizationTests());
+            suite.Add(() => StreamingProvenanceHashTests());
             suite.Section("Native fraction of TIC (Q3) - run _01 identified/envelope/DDA+de novo, envelope partition");
             suite.Add(() => NativeTicFractionRealTests(args.Length > 2 ? args[2] : null, args.Length > 3 ? args[3] : null, workDir));
             suite.Section("MS1 peptide-like envelope (Q6) - detector invariants on synthetic spectra");
@@ -239,6 +244,18 @@ namespace FamilyQuant.Tests
             suite.AddWithApplication(() => PanelEditorTemplateRoundtripTests());
             suite.Add(() => AnalysisHelpTests());
             suite.AddWithApplication(() => WorkflowReportHelpTests());
+            suite.Add(() => AiKeyStoreTests());
+            suite.Add(() => AiTransportTests());
+            suite.AddWithApplication(() => AiKeySettingsTests());
+            suite.Add(() => InterpretationNumberTraceTests());
+            suite.Add(() => AiInterpretationDraftTests());
+            suite.Add(() => AiInterpretationWorkflowTests());
+            suite.AddWithApplication(() => AiInterpretationWindowsTests());
+            suite.Add(() => AiInterpretationInputTests());
+            suite.Add(() => AiKeyOfferTests());
+            suite.AddWithApplication(() => AiShellTests());
+            suite.Add(() => AiJ45ParityTests());
+            suite.AddWithApplication(() => AiAssistantHelpTests());
             suite.Add(() => SuiteMergeGuardTests());
             suite.Add(() => EvidenceFetchTests());
             suite.Add(() => EvidenceFetchAtomicTests());
@@ -312,6 +329,7 @@ namespace FamilyQuant.Tests
             suite.AddWithApplication(() => CurationExportFeedbackTests(Path.Combine(workDir, "curation-export-feedback")));
             suite.AddWithApplication(() => ReportProgressTests(Path.Combine(workDir, "report-progress")));
             suite.AddWithApplication(() => ProjectCommandReadyTests(Path.Combine(workDir, "project-command-ready")));
+            suite.AddWithApplication(() => ComputeProgressTests(Path.Combine(workDir, "compute-progress")));
             suite.Add(() => FamilyViewTests());
             suite.Add(() => TableAppearanceTests());
             suite.Add(() => EvidenceReviewModelTests());
@@ -324,6 +342,8 @@ namespace FamilyQuant.Tests
             suite.Add(() => ReportStudyBoundaryTests());
             suite.Section("Word report and companion - source values, selection and exact native images");
             suite.Add(() => WordReportTests(null));
+            suite.Add(() => ReportFindingsTests());
+            suite.AddWithApplication(() => InterpretationInputTests());
             suite.Add(() => ReportNumberTraceTests());
             suite.AddWithApplication(() => ReportStoredChecks());
             suite.AddWithApplication(() => ReportAttributionCacheTests());
@@ -331,7 +351,10 @@ namespace FamilyQuant.Tests
             suite.Add(() => ReportPairedSummaryTests());
             suite.AddWithApplication(() => ReportSupplementChecks(null));
             suite.Add(() => ReportTableSheetTests(null));
+            suite.AddWithApplication(() => ReportNumericLayoutTests(Path.Combine(workDir, "report-numeric-layout")));
+            suite.Add(() => ReportTablePaginationTests(Path.Combine(workDir, "report-table-pagination")));
             suite.Add(() => ReportListSheetTests(null));
+            suite.AddWithApplication(() => ReportCommandTests(new[] { "--test-report-command" }));
             suite.Add(FamilyUnobservedTests);
             suite.Add(() => EffectivePanelFamiliesTests(null));
             suite.Add(() => PanelHeadlineTests(null));

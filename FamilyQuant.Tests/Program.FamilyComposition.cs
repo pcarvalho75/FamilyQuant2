@@ -165,9 +165,9 @@ namespace FamilyQuant.Tests
                     Sequence = "MD" + peptide + "TT", UserID = 7 },
             };
             var options = new FamilyQuant.Homology.HomologyOptions();
-            var results = FamilyQuant.Homology.HomologyMapper.Search(new[] { peptide },
+            var results = FamilyQuant.Homology.HomologySearch.Search(new[] { peptide },
                 FamilyQuant.Homology.HomologyDatabase.Build(db), options);
-            var familyRows = FamilyQuant.Homology.HomologyMapper.CountByFamily(results, db, options.DecoyLabel);
+            var familyRows = FamilyQuant.Homology.HomologySearch.CountByFamily(results, db, options.DecoyLabel);
             Check("the de novo family table names the family by the most common target name",
                 familyRows.Count == 1 && familyRows[0].Description == "Common name OS=x",
                 familyRows.Count == 1 ? familyRows[0].Description : familyRows.Count + " rows");
@@ -349,7 +349,7 @@ namespace FamilyQuant.Tests
                 }
             };
             var tiedRows = new List<QuantRow> { Qr("identified", "r1", 10, 2, tied, 10, 20) };
-            List<FamilyQuant.Homology.HomologyResult> plain = FamilyQuant.Homology.HomologyMapper.Search(new[] { tied },
+            List<FamilyQuant.Homology.HomologyResult> plain = FamilyQuant.Homology.HomologySearch.Search(new[] { tied },
                 FamilyQuant.Homology.HomologyDatabase.Build(fourProteins.MyExtendedFastaItems));
             PeptideFamilyAttribution tiedAttribution = FamilyEnvelopeQuant.BuildAttributionFromCuration(tiedRows, fourProteins);
             IReadOnlyList<int> tiedFamilies = tiedAttribution.Resolve("identified", tied);
@@ -453,7 +453,7 @@ namespace FamilyQuant.Tests
             var bestHits = new FamilyQuant.Homology.HomologyOptions { TopHitsPerPeptide = int.MaxValue, BestScoreOnly = true };
             var targetsOnly = lowerFourth.MyExtendedFastaItems.ToList();
             List<FamilyQuant.Homology.FamilyAssignment> MapperJoin(FamilyQuant.Homology.HomologyOptions o) =>
-                FamilyQuant.Homology.HomologyMapper.MapToFamilies(FamilyQuant.Homology.HomologyMapper.Search(new[] { tied },
+                FamilyQuant.Homology.HomologySearch.MapToFamilies(FamilyQuant.Homology.HomologySearch.Search(new[] { tied },
                     FamilyQuant.Homology.HomologyDatabase.Build(lowerFourth.MyExtendedFastaItems), o), targetsOnly);
             List<FamilyQuant.Homology.FamilyAssignment> viaMapper = MapperJoin(bestHits);
             List<FamilyQuant.Homology.FamilyAssignment> viaMapperDeNovo = MapperJoin(allHits);

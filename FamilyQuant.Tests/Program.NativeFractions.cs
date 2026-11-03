@@ -732,8 +732,8 @@ namespace FamilyQuant.Tests
                             .Where(s => s.Length > 0)
                             .Distinct(StringComparer.Ordinal)
                             .ToList();
-                        var res = FamilyQuant.Homology.HomologyMapper.Search(seqs, db);
-                        var asg = FamilyQuant.Homology.HomologyMapper.MapToFamilies(res, venom.MyExtendedFastaItems);
+                        var res = FamilyQuant.Homology.HomologySearch.Search(seqs, db);
+                        var asg = FamilyQuant.Homology.HomologySearch.MapToFamilies(res, venom.MyExtendedFastaItems);
                         var map = new Dictionary<string, IReadOnlyList<int>>(StringComparer.Ordinal);
                         foreach (var a in asg) map[a.Peptide] = a.FamilyIds;
                         return map;

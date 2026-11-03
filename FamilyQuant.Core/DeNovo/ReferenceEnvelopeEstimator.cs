@@ -95,11 +95,13 @@ namespace FamilyQuant.DeNovo
         /// replacing the mass bins with one pooled ratio. These diagnostics should accompany a quoted
         /// model estimate; the sensitivity bounds are not confidence limits.
         /// </summary>
-        public static ReferenceEnvelopeDiagnostics Evaluate(IReadOnlyList<NativePeptideQuant> peptides)
+        public static ReferenceEnvelopeDiagnostics Evaluate(IReadOnlyList<NativePeptideQuant> peptides,
+            FamilyQuant.Operations.OperationContext? operation = null, string progressStage = "reference-validation")
         {
             if (peptides == null) throw new ArgumentNullException(nameof(peptides));
 
             List<NativePeptideQuant> identified = ValidIdentified(peptides);
+            operation?.Report(progressStage, "Checking reference-envelope representatives", 0, identified.Count);
             List<NativePeptideQuant> rawDeNovo = peptides.Where(p =>
                 string.Equals(p.Side, NativeQuantFractions.SideDeNovo, StringComparison.Ordinal)
                 && p.AreaM0 > 0 && p.MonoisotopicMass > 0).ToList();
@@ -127,12 +129,14 @@ namespace FamilyQuant.DeNovo
             result.SensitivityUpperEstimate = Math.Max(
                 result.FixedBinDeNovoEstimate, result.PooledRatioDeNovoEstimate);
 
+            var membersByBin = new List<NativePeptideQuant>[MassBinUpperBounds.Length];
             double lower = 0.0;
             for (int bin = 0; bin < MassBinUpperBounds.Length; bin++)
             {
                 int current = bin;
                 List<NativePeptideQuant> members = identified
                     .Where(p => BinOf(p.MonoisotopicMass) == current).ToList();
+                membersByBin[bin] = members;
                 double m0 = members.Sum(p => p.AreaM0);
                 double envelope = members.Sum(p => p.EnvelopeSum);
                 result.Bins.Add(new ReferenceEnvelopeBinDiagnostic
@@ -154,14 +158,27 @@ namespace FamilyQuant.DeNovo
             double absoluteError = 0.0;
             double signedError = 0.0;
             double observedTotal = 0.0;
+            int completed = 0;
             foreach (NativePeptideQuant heldOut in identified)
             {
-                List<NativePeptideQuant> peers = identified.Where(p => !ReferenceEquals(p, heldOut)).ToList();
-                double peerPooled = PooledRatio(peers);
+                operation?.ThrowIfCancellationRequested();
                 int bin = BinOf(heldOut.MonoisotopicMass);
-                double peerM0 = peers.Where(p => BinOf(p.MonoisotopicMass) == bin).Sum(p => p.AreaM0);
-                double peerEnvelope = peers.Where(p => BinOf(p.MonoisotopicMass) == bin).Sum(p => p.EnvelopeSum);
-                double ratio = SafeRatio(peerEnvelope, peerM0, peerPooled);
+                // The bin lists retain the original order. Keep the exact same Sum operation and
+                // remove all occurrences of the held-out reference, just as the original loop did.
+                // Subtracting one value from a precomputed total would change floating-point results.
+                List<NativePeptideQuant> members = membersByBin[bin];
+                double peerM0 = members.Where(p => !ReferenceEquals(p, heldOut)).Sum(p => p.AreaM0);
+                double peerEnvelope = members.Where(p => !ReferenceEquals(p, heldOut)).Sum(p => p.EnvelopeSum);
+                double localRatio = peerM0 > 0 ? peerEnvelope / peerM0 : double.NaN;
+                double ratio;
+                if (double.IsFinite(localRatio)) ratio = Math.Max(1.0, localRatio);
+                else
+                {
+                    // Only an unsupported/invalid local ratio uses the pooled fallback. Preserve
+                    // its old peer order and calculation when it is actually needed.
+                    List<NativePeptideQuant> peers = identified.Where(p => !ReferenceEquals(p, heldOut)).ToList();
+                    ratio = SafeRatio(peerEnvelope, peerM0, PooledRatio(peers));
+                }
                 double predicted = heldOut.AreaM0 * ratio;
                 double error = predicted - heldOut.EnvelopeSum;
                 absoluteError += Math.Abs(error);
@@ -169,6 +186,9 @@ namespace FamilyQuant.DeNovo
                 observedTotal += heldOut.EnvelopeSum;
                 if (heldOut.EnvelopeSum > 0)
                     absolutePercentErrors.Add(Math.Abs(error) / heldOut.EnvelopeSum);
+                if (++completed % 128 == 0 || completed == identified.Count)
+                    operation?.Report(progressStage, "Reference representatives checked " + completed.ToString(CultureInfo.InvariantCulture)
+                        + " of " + identified.Count.ToString(CultureInfo.InvariantCulture), completed, identified.Count);
             }
 
             absolutePercentErrors.Sort();

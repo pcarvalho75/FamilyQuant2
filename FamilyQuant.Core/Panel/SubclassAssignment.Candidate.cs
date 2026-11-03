@@ -229,13 +229,21 @@ public static partial class SubclassAssignment
         s.RequiredPfam.Count > 0 || s.AbsentPfam.Count > 0 || s.UniProtSubfamilies.Any(t => !string.IsNullOrWhiteSpace(t)));
 
     private static string SourceFingerprint(FamilyClusterFile file, EvidenceClassificationOptions options, string panelFingerprint) =>
-        Hash(JsonSerializer.Serialize(new { Algorithm = "Panel subclass assignment v1", NearestReviewed.Method, NearestReviewed.QueryCoverageMethod, NearestReviewed.ReferenceTieMethod,
+        HashJson(new { Algorithm = "Panel subclass assignment v1", NearestReviewed.Method, NearestReviewed.QueryCoverageMethod, NearestReviewed.ReferenceTieMethod,
             Panel = panelFingerprint, Proteins = EvidenceClassifier.Fingerprint(file.MyExtendedFastaItems),
             file.PanelProteinAssignments, file.PanelProteinAssignmentsFingerprint, Options = options,
-            ReferencePanel = file.EvidenceSource?.ReferencePanel }));
+            ReferencePanel = file.EvidenceSource?.ReferencePanel });
 
     private static string LabelFingerprint(string source, IReadOnlyList<ProteinSubclassLabel> labels) =>
         Hash(JsonSerializer.Serialize(new { Source = source, Labels = labels }));
 
     private static string Hash(string value) => Convert.ToHexString(SHA256.HashData(Encoding.UTF8.GetBytes(value)));
+
+    private static string HashJson<T>(T value)
+    {
+        using var hash = SHA256.Create();
+        using var stream = new System.Security.Cryptography.CryptoStream(System.IO.Stream.Null, hash, CryptoStreamMode.Write);
+        JsonSerializer.Serialize(stream, value); stream.FlushFinalBlock();
+        return Convert.ToHexString(hash.Hash!);
+    }
 }

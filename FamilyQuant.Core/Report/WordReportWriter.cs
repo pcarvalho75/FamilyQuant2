@@ -50,6 +50,8 @@ public static class WordReportWriter
             main.Document = new W.Document(body);
             var styles = main.AddNewPart<StyleDefinitionsPart>("rIdStyles");
             styles.Styles = Styles();
+            var settings = main.AddNewPart<DocumentSettingsPart>("rIdSettings");
+            settings.Settings = new W.Settings(new W.UpdateFieldsOnOpen { Val = true });
             uint imageId = 0;
             for (int index = 0; index < sections.Count; index++)
             {
@@ -74,8 +76,13 @@ public static class WordReportWriter
                     for (int other = 0; other < sections.Count; other++)
                     {
                         if (sections[other].Id is ReportSectionIds.Title or ReportSectionIds.Contents) continue;
-                        body.Append(new W.Paragraph(new W.Hyperlink(new W.Run(new W.Text(sections[other].Title)))
-                        { Anchor = "section_" + other.ToString(CultureInfo.InvariantCulture) }));
+                        string target = "section_" + other.ToString(CultureInfo.InvariantCulture);
+                        body.Append(new W.Paragraph(
+                            new W.ParagraphProperties(new W.Tabs(new W.TabStop
+                                { Val = W.TabStopValues.Right, Leader = W.TabStopLeaderCharValues.Dot, Position = PageWidth })),
+                            new W.Hyperlink(new W.Run(new W.Text(sections[other].Title))) { Anchor = target },
+                            new W.Run(new W.TabChar()),
+                            new W.SimpleField(new W.Run(new W.Text("?"))) { Instruction = "PAGEREF " + target + " \\h" }));
                     }
                 }
                 foreach (var block in section.Blocks.Where(b => !excluded.Contains(b.Id)))
@@ -84,7 +91,13 @@ public static class WordReportWriter
                     switch (block)
                     {
                         case ReportParagraph paragraph:
-                            foreach (string line in Lines(paragraph.Text)) body.Append(Paragraph(line));
+                            foreach (string line in Lines(paragraph.Text))
+                            {
+                                var written = Paragraph(line);
+                                if (paragraph.KeepWithNext) written.ParagraphProperties!.Append(new W.KeepNext(), new W.KeepLines());
+                                if (paragraph.Compact) written.ParagraphProperties!.Append(new W.SpacingBetweenLines { After = "0" });
+                                body.Append(written);
+                            }
                             break;
                         case ReportTable { SupplementOnly: true }:
                             break;
@@ -92,8 +105,15 @@ public static class WordReportWriter
                             if (table.Columns.Count == 0 || table.Rows.Any(r => r.Count != table.Columns.Count))
                                 throw new ArgumentException("Report tables require columns and equally sized rows.", nameof(document));
                             body.Append(Paragraph(table.Title, "Heading2"));
+                            // Keep a caption/header/first-row chain in document flow. A keep-next
+                            // inside the final cell did not anchor a paragraph after the table in Word.
+                            foreach (string line in Lines(table.Caption))
+                            {
+                                var caption = Paragraph(line, "Caption");
+                                caption.ParagraphProperties!.Append(new W.KeepNext(), new W.KeepLines());
+                                body.Append(caption);
+                            }
                             body.Append(Table(table));
-                            foreach (string line in Lines(table.Caption)) body.Append(Paragraph(line, "Caption"));
                             break;
                         case ReportFigure figure:
                             if (figure.PixelWidth <= 0 || figure.PixelHeight <= 0 || figure.PngBytes.Length < 8
@@ -177,8 +197,8 @@ public static class WordReportWriter
     private static W.Table Table(ReportTable data)
     {
         data = ReportListSheets.WordView(data);
-        int[] widths = Enumerable.Range(0, data.Columns.Count)
-            .Select(index => PageWidth / data.Columns.Count + (index < PageWidth % data.Columns.Count ? 1 : 0)).ToArray();
+        var layout = ReportTableLayout.Create(data, PageWidth);
+        int[] widths = layout.Widths;
         var result = new W.Table(new W.TableProperties(new W.TableWidth { Width = PageWidth.ToString(CultureInfo.InvariantCulture), Type = W.TableWidthUnitValues.Dxa },
             new W.TableLayout { Type = W.TableLayoutValues.Fixed },
             new W.TableCellMarginDefault(new W.TopMargin { Width = "40", Type = W.TableWidthUnitValues.Dxa },
@@ -186,10 +206,10 @@ public static class WordReportWriter
                 new W.BottomMargin { Width = "40", Type = W.TableWidthUnitValues.Dxa },
                 new W.TableCellRightMargin { Width = 100, Type = W.TableWidthValues.Dxa })),
             new W.TableGrid(widths.Select(width => new W.GridColumn { Width = width.ToString(CultureInfo.InvariantCulture) })));
-        W.TableRow Row(IReadOnlyList<string> cells, bool header)
+        W.TableRow Row(IReadOnlyList<string> cells, bool header, bool keepNext)
         {
-            var row = new W.TableRow();
-            if (header) row.Append(new W.TableRowProperties(new W.TableHeader()));
+            var row = new W.TableRow(new W.TableRowProperties(new W.CantSplit()));
+            if (header) row.TableRowProperties!.Append(new W.TableHeader());
             for (int index = 0; index < cells.Count; index++)
             {
                 string text = cells[index];
@@ -197,8 +217,14 @@ public static class WordReportWriter
                 foreach (string line in Lines(text))
                 {
                     var paragraph = Paragraph(line);
-                    if (header) paragraph.GetFirstChild<W.Run>()!.PrependChild(new W.RunProperties(new W.Bold()));
-                    else if (double.TryParse(line, NumberStyles.Float, CultureInfo.InvariantCulture, out _))
+                    if (keepNext) paragraph.ParagraphProperties!.Append(new W.KeepNext());
+                    paragraph.ParagraphProperties!.Append(new W.KeepLines());
+                    var runProperties = new W.RunProperties();
+                    if (header) runProperties.Append(new W.Bold());
+                    if (layout.FontHalfPoints < 22)
+                        runProperties.Append(new W.FontSize { Val = layout.FontHalfPoints.ToString(CultureInfo.InvariantCulture) });
+                    if (runProperties.HasChildren) paragraph.GetFirstChild<W.Run>()!.PrependChild(runProperties);
+                    if (!header && double.TryParse(line, NumberStyles.Float, CultureInfo.InvariantCulture, out _))
                         paragraph.ParagraphProperties!.Append(new W.Justification { Val = W.JustificationValues.Right });
                     cell.Append(paragraph);
                 }
@@ -206,8 +232,9 @@ public static class WordReportWriter
             }
             return row;
         }
-        result.Append(Row(data.Columns, true));
-        foreach (var row in data.Rows) result.Append(Row(row, false));
+        result.Append(Row(data.Columns, true, data.Rows.Count > 0));
+        for (int index = 0; index < data.Rows.Count; index++)
+            result.Append(Row(data.Rows[index], false, false));
         return result;
     }
 

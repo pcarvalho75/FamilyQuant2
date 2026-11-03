@@ -43,12 +43,42 @@ namespace FamilyQuant
         /// A failure is noted and never loses the quantitation.
         /// </summary>
         public static void AttachToCompute(FamilyClusterFile? curation, FullXicComputeResult result)
+            => AttachToComputeCore(curation, result, null, null);
+
+        public static void AttachToCompute(FamilyClusterFile? curation, FullXicComputeResult result, OperationContext? operation)
+            => AttachToComputeCore(curation, result, null, operation);
+
+        /// <summary>Compute already attributed these same rows. Keep that complete map inside this
+        /// operation rather than repeating its two searches. Other callers retain the fresh route.</summary>
+        internal static void AttachToComputeWithAttribution(FamilyClusterFile? curation, FullXicComputeResult result,
+            PeptideFamilyAttribution? attribution, OperationContext? operation = null)
+            => AttachToComputeCore(curation, result, attribution, operation);
+
+        private static void AttachToComputeCore(FamilyClusterFile? curation, FullXicComputeResult result,
+            PeptideFamilyAttribution? attribution, OperationContext? operation)
         {
             if (result == null) throw new ArgumentNullException(nameof(result));
-            if (curation?.EvidenceSource?.FamilyWorld == null) return;
+            if (curation?.EvidenceSource?.FamilyWorld == null)
+            {
+                operation?.Report("world-phase", "Family world unavailable: no stored world", 0, 0);
+                return;
+            }
             try
             {
-                FamilyWorldSummary table = FamilyWorldAnalysis.FromStoredWorld(result.Rows, curation, result.SpectrumComparisonRows).Summary;
+                FamilyWorldSummary table;
+                if (attribution != null && attribution.MembershipSha256 == FamilyStudyMembership.Fingerprint(curation))
+                {
+                    operation?.Report("world-phase", "Family-world phases", 0, 5);
+                    operation?.Report("world-phase", "Family world 1 of 5: Reading stored world", 1, 5);
+                    FamilyWorldSnapshot snapshot = FamilyWorldFetcher.Stored(curation);
+                    operation?.Report("world-phase", "Family world 2 of 5: Reusing current peptide attribution", 2, 5);
+                    FamilyPeptideAttribution firstPass = FamilyEnvelopeQuant.AttributePeptides(
+                        FamilyEnvelopeQuant.PreparePeptides(result.Rows), attribution);
+                    table = RunPrepared(firstPass, curation, result.SpectrumComparisonRows, FamilyWorld.FromSnapshot(snapshot),
+                        snapshot.Release, null, null, FamilyWorldErrors.DefaultMinimumKnownCredits, operation,
+                        FamilyWorldOptions.LengthChoices).Summary;
+                }
+                else table = FromStoredWorld(result.Rows, curation, result.SpectrumComparisonRows, operation).Summary;
                 result.Manifest.FamilyWorldResult = table;
                 double landed = table.ResidualEnvelope > 0
                     ? table.Outcomes.Where(o => o.Outcome == nameof(FamilyWorldOutcome.Credited)).Sum(o => o.Envelope) / table.ResidualEnvelope : 0;
@@ -56,7 +86,7 @@ namespace FamilyQuant
                     " of the de novo envelope the curated families leave unattributed is credited to a family in scope (" +
                     table.Rules + ").");
             }
-            catch (Exception ex)
+            catch (Exception ex) when (ex is not OperationCanceledException || operation?.IsCancellationRequested != true)
             {
                 result.Manifest.FamilyWorldResult = null;
                 result.Notes.Add("WARNING: the family-world pass did not run (" + ex.GetType().Name + ": " + ex.Message +
@@ -70,6 +100,8 @@ namespace FamilyQuant
             IEnumerable<SpectrumComparisonRow> spectra, OperationContext? operation = null)
         {
             if (curation == null) throw new ArgumentNullException(nameof(curation));
+            operation?.Report("world-phase", "Family-world phases", 0, 5);
+            operation?.Report("world-phase", "Family world 1 of 5: Reading stored world", 1, 5);
             FamilyWorldSnapshot snapshot = FamilyWorldFetcher.Stored(curation);
             return Run(rows, curation, spectra, FamilyWorld.FromSnapshot(snapshot), snapshot.Release, operation: operation,
                 lengths: FamilyWorldOptions.LengthChoices);
@@ -84,9 +116,21 @@ namespace FamilyQuant
             if (rows == null) throw new ArgumentNullException(nameof(rows));
             if (curation == null) throw new ArgumentNullException(nameof(curation));
             List<QuantRow> rowList = rows.Where(r => r != null).ToList();
-            PeptideFamilyAttribution attribution = FamilyEnvelopeQuant.BuildAttributionFromCuration(rowList, curation);
+            operation?.Report("world-phase", "Family world 2 of 5: Attributing the current peptides", 2, 5);
+            PeptideFamilyAttribution attribution = FamilyEnvelopeQuant.BuildAttributionFromCuration(rowList, curation,
+                operation: operation, progressPrefix: "world-attribution");
             FamilyPeptideAttribution firstPass = FamilyEnvelopeQuant.AttributePeptides(FamilyEnvelopeQuant.PreparePeptides(rowList), attribution);
+            return RunPrepared(firstPass, curation, spectra, world, worldRelease, ownSpecies, options,
+                minimumKnownCredits, operation, lengths);
+        }
+
+        private static FamilyWorldAnalysisResult RunPrepared(FamilyPeptideAttribution firstPass, FamilyClusterFile curation,
+            IEnumerable<SpectrumComparisonRow> spectra, FamilyWorld world, string worldRelease,
+            Func<FamilyWorldProtein, bool>? ownSpecies, FamilyWorldOptions? options, int minimumKnownCredits,
+            OperationContext? operation, IReadOnlyList<int>? lengths)
+        {
             options ??= new FamilyWorldOptions();
+            operation?.Report("world-phase", "Family world 3 of 5: Searching residual peptides", 3, 5);
             if (lengths == null || lengths.Count == 0)
             {
                 FamilyWorldPassResult pass = FamilyWorldPass.Run(firstPass, world, options, operation);
@@ -130,11 +174,13 @@ namespace FamilyQuant
             ownSpecies ??= p => FamilyWorld.IsOfTaxa(p, taxa) || accessions.Contains(p.Accession);
             FamilyWorld withoutSpecies = FamilyWorld.Build(world.Proteins.Where(p => !ownSpecies(p)), world.ScopeFamilies);
             Dictionary<string, IReadOnlyList<string>> labels = FamilyWorldErrors.Labels(world.Proteins, curation);
+            operation?.Report("world-phase", "Family world 4 of 5: Checking known answers", 4, 5);
             List<FamilyWorldKnownAnswer> answers = FamilyWorldErrors.KnownAnswers(spectra, curation, labels, operation);
             int lowest = passes.Min(p => p.MinimumTagLength);
             FamilyWorldOptions searchOptions = options.Clone();
             searchOptions.MinimumTagLength = lowest;
             FamilyWorldErrors.Credit(answers, withoutSpecies, passes[0].CreditableFamilies, searchOptions, operation);
+            operation?.Report("world-phase", "Family world 5 of 5: Assembling stored length studies", 5, 5);
 
             (FamilyWorldSummary Table, List<FamilyWorldKnownAnswer> Answers) TableAt(FamilyWorldPassResult pass)
             {

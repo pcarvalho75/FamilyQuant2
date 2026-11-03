@@ -48,6 +48,7 @@ internal static partial class Program
         var assertions = new Dictionary<string, string>(StringComparer.Ordinal);
         var curationRuntime = new Dictionary<string, string>(StringComparer.Ordinal);
         var compositionRuntime = new ShellCompositionEvidence(new(StringComparer.Ordinal), new());
+        var ticRuntime = new ShellTicEvidence(new(StringComparer.Ordinal), new());
         var original = Console.Out;
         using var transcript = new StringWriter(CultureInfo.InvariantCulture);
         try
@@ -106,7 +107,10 @@ internal static partial class Program
                 curationRuntime.Add(observation.Id, fact.Item3);
             }
             if (args.Length >= 5)
+            {
                 compositionRuntime = ProveShellComposition(Path.Combine(frozenRoot, "FamilyQuant/CsvReport.cs"), args[4], output, cohort, args.Length == 6);
+                ticRuntime = ProveShellTic(Path.Combine(frozenRoot, "FamilyQuant/ClusterGenerationControl.xaml.cs"), args[4], output, cohort);
+            }
             Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
         }
         finally { Console.SetOut(original); }
@@ -124,9 +128,10 @@ internal static partial class Program
         var artifacts = new List<FeatureLedgerEvidence.Artifact>
         { new(log, FeatureLedgerEvidence.Hash(log)), new(data, FeatureLedgerEvidence.Hash(data)), new(runtimeData, FeatureLedgerEvidence.Hash(runtimeData)) };
         artifacts.AddRange(compositionRuntime.Artifacts.Select(path => new FeatureLedgerEvidence.Artifact(path, FeatureLedgerEvidence.Hash(path))));
+        artifacts.AddRange(ticRuntime.Artifacts.Select(path => new FeatureLedgerEvidence.Artifact(path, FeatureLedgerEvidence.Hash(path))));
         string snapshot = Path.Combine(output, "executed");
         Directory.CreateDirectory(snapshot);
-        foreach (string source in new[] { "Program.ShellLedgerReceipts.cs", "Program.ShellLedgerComparison.cs", "Program.ShellCompositionProof.cs",
+        foreach (string source in new[] { "Program.ShellLedgerReceipts.cs", "Program.ShellLedgerComparison.cs", "Program.ShellCompositionProof.cs", "Program.ShellTicProof.cs",
             "Program.Commands.LedgerDeclarations.cs", "Program.CurationScreen.cs", "LedgerDeclarationComparison.cs", "LedgerMemberFactComparison.cs", "FeatureLedgerEvidence.Reporting.cs" })
         {
             string path = Path.Combine(snapshot, source);
@@ -151,7 +156,15 @@ internal static partial class Program
         foreach (string step in new[] { "SH", "C1" })
         {
             var selected = results.Where(result => (result.Source.Contains("ClusterGenerationControl", StringComparison.Ordinal) ? "C1" : "SH") == step).ToArray();
-            var rows = selected.Select(result => compositionRuntime.Assertions.TryGetValue(result.Id, out string? compositionAssertion)
+            var rows = selected.Select(result => ticRuntime.Assertions.TryGetValue(result.Id, out string? ticAssertion)
+                ? new FeatureLedgerEvidence.Row(result.Id, ShellTicSources.Select(path => new FeatureLedgerEvidence.Implementation(path,
+                    path == "FamilyQuant/CurationQuantitationViewModel.cs" ? "PrepareFullXic; native five-argument production overload"
+                        : "Native TIC refusal proof dependency", FeatureLedgerEvidence.Hash(Path.Combine(root, path)))).ToList(),
+                    new() { new("shell-declarations", "test", nameof(ProveShellTic), ticAssertion, log, "") },
+                    "Executed frozen/current TIC refusal output, run count and denominator in both cultures on synthetic inputs and repeated private-cache calls; declaration equality is not claimed.",
+                    Compared: result.Source + ":" + result.Line.ToString(CultureInfo.InvariantCulture) + " " + result.Before
+                        + "; frozen member " + result.FrozenMember + "; exact emitted message fragment in equal native results")
+                : compositionRuntime.Assertions.TryGetValue(result.Id, out string? compositionAssertion)
                 ? new FeatureLedgerEvidence.Row(result.Id, ShellCompositionSources.Select(path => new FeatureLedgerEvidence.Implementation(path,
                     path == "FamilyQuant.Core/CsvReport.cs" ? HistoricalCompositionMember + "; native public historical overload"
                         : "Native historical composition CSV dependency", FeatureLedgerEvidence.Hash(Path.Combine(root, path)))).ToList(),
@@ -185,7 +198,8 @@ internal static partial class Program
             Console.WriteLine(step + ": " + selected.Count(result => result.Matched).ToString(CultureInfo.InvariantCulture)
                 + " matched declarations; " + selected.Count(result => curationRuntime.ContainsKey(result.Id)).ToString(CultureInfo.InvariantCulture)
                 + " native interaction proofs; " + selected.Count(result => compositionRuntime.Assertions.ContainsKey(result.Id)).ToString(CultureInfo.InvariantCulture)
-                + " native composition facts; " + selected.Count(result => !result.Matched && !curationRuntime.ContainsKey(result.Id)
+                + " native composition facts; " + selected.Count(result => ticRuntime.Assertions.ContainsKey(result.Id)).ToString(CultureInfo.InvariantCulture)
+                + " native TIC facts; " + selected.Count(result => !result.Matched && !curationRuntime.ContainsKey(result.Id) && !ticRuntime.Assertions.ContainsKey(result.Id)
                     && !compositionRuntime.Assertions.ContainsKey(result.Id)).ToString(CultureInfo.InvariantCulture) + " remain unproven.");
         }
         return failed == 0 ? 0 : 1;

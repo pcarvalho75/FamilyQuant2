@@ -135,7 +135,7 @@ public static class PanelAssignmentEvidenceStore
             hash.Append((changed != null && changed.TryGetValue(index, out var assignment) ? assignment.FamilyId : protein.UserID).ToString(CultureInfo.InvariantCulture));
             hash.Append(JsonSerializer.Serialize(protein.Evidence));
         }
-        hash.Append(JsonSerializer.Serialize(source)); hash.Append(JsonSerializer.Serialize(recipe.Options));
+        hash.AppendJson(source); hash.Append(JsonSerializer.Serialize(recipe.Options));
         hash.Append(JsonSerializer.Serialize(recipe.PanelContext)); hash.Append(JsonSerializer.Serialize(recipe.Assignments));
         foreach (var row in rows) hash.Append(JsonSerializer.Serialize(row));
         return hash.Finish();

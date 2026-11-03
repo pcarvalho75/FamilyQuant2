@@ -158,7 +158,10 @@ public partial class MainWindow
                 "   Needs: the .fcf from step 1.\n" +
                 "   You can now merge families further by their description words, or build one family\n" +
                 "   from a keyword list. Curation changes can be undone in this session. Use Save as\n" +
-                "   to keep the previous grouping in a separate project.\n\n" +
+                "   to keep the previous grouping in a separate project. On reopen, unchanged peptide\n" +
+                "   matches can be read from cached results; changed inputs are checked again. After\n" +
+                "   opening a project with stored Results, Export report becomes available when its\n" +
+                "   family attribution is ready.\n\n" +
                 "BEFORE STEP 3 · Prepare the family panel and report\n" +
                 "   Menu: File > Import family panel\n" +
                 "   Needs: an open project and a spreadsheet with one row per family.\n" +
@@ -172,6 +175,14 @@ public partial class MainWindow
                 "   Needs: the panel and protein evidence. Use Fetch evidence if needed.\n" +
                 "   Choose Group by evidence, review or edit the scope, then Update proposal. In\n" +
                 "   Panel links, review ambiguous links and confirm choices with Use link choices.\n" +
+                "   Scope phrases can contain several words: put each phrase in double quotes.\n" +
+                "   The scope is checked against evidence keywords and tissue annotations. The audit\n" +
+                "   explains when a linked source family stays outside because its evidence does not\n" +
+                "   match that scope. You can add a note to a link choice; saved choices and notes\n" +
+                "   are included in the report methods.\n" +
+                "   The reviewed-entry accuracy check accepts multiple scope phrases. It holds each\n" +
+                "   entry out when comparing it with other reviewed entries; its expected family\n" +
+                "   comes from source annotations and is not independent proof.\n" +
                 "   Review the updated proposal and protein ticks, then choose Apply grouping.\n" +
                 "   Applying a panel-based grouping also computes subclass labels from its rules.\n" +
                 "   Produces: reviewed family assignments and subclass labels in the project.\n\n" +
@@ -183,7 +194,12 @@ public partial class MainWindow
                 "   Menu: Analysis > Compute full XIC\n" +
                 "   Needs: the RAW folder and matching identifications (.sepr2); de novo and search\n" +
                 "   settings are optional. Choose Compute full XIC in Quantify.\n" +
+                "   Compute and project opening show progress for each phase, the current item,\n" +
+                "   elapsed time and time since the last step. Where a known total is available,\n" +
+                "   the progress line counts completed work. Operation log shows recorded steps.\n" +
                 "   Produces: stored Results for the project and its report.\n" +
+                "   A quantitative panel family marked no peptide observed has no peptide observed\n" +
+                "   in the completed study. This is not proof that the family is absent.\n" +
                 "   In Families > Quantitation use Full XIC > Share of and Shared peptides.\n" +
                 "   For the secondary source, open PatternLab (optional) and Load PatternLab project.\n" +
                 "   PatternLab needs a project (.plp) exported at PEPTIDE level. A protein-level\n" +
@@ -206,8 +222,39 @@ public partial class MainWindow
                 "   Choose sections and figures with the checkboxes. Set Report threshold (%) to\n" +
                 "   group families below that mean assigned-signal share under Others; their list\n" +
                 "   remains in the supplement. Families marked Report under others also go there.\n" +
+                "   Preparation and export show progress, the current step and elapsed time. Choose\n" +
+                "   Operation log to read the timestamped steps while the operation is running. The\n" +
+                "   report log is also saved in %LOCALAPPDATA%\\FamilyQuant2\\operation-logs. Export can\n" +
+                "   reuse current family attribution and cached matches when the inputs still match.\n" +
+                "   Summary of findings states the stored values in fixed sentences; its numbers are\n" +
+                "   also listed in the supplement.\n" +
                 "   Produces: a Word report and a companion supplement workbook beside it.\n" +
+                "   Long lists have their own supplement sheets, one row per item; the report points\n" +
+                "   to those sheets and CSV exports retain their values. Report narrative is written by the program from\n" +
+                "   project data, without AI. Your panel and report details also appear in the report.\n" +
                 "   File > Save keeps the project, report details, choices and threshold.\n\n" +
+                "EXPORT THE INTERPRETATION INPUT\n" +
+                "   Menu: File > Export > Interpretation input (Markdown)\n" +
+                "   Needs: stored Results from step 3.\n" +
+                "   Writes one Markdown file with the report details, the panel as entered, the summary\n" +
+                "   of findings, the stored tables it reads, the methods and a short instruction block.\n" +
+                "   Give it to an assistant of your choice; FamilyQuant itself does not interpret it.\n\n" +
+
+                "OPTIONAL · Draft an interpretation with AI\n" +
+                "   Menu: Help > AI assistant key...\n" +
+                "   Add, test, import or remove your Anthropic key. It is protected for this Windows\n" +
+                "   user and is not saved in the project or report. Test key sends a short request\n" +
+                "   without project data. On first use, you may import a key file beside the project.\n\n" +
+                "   Menu: File > Draft interpretation with AI...\n" +
+                "   The program shows the exact interpretation input and model before you confirm\n" +
+                "   sending it to Anthropic. The input is the same text as File > Export > Interpretation\n" +
+                "   input (Markdown): your report details, panel text, result tables and analysis\n" +
+                "   choices. Cancel leaves the project unchanged. After a response, review the draft\n" +
+                "   and every number not found in the input tables before accepting it. A matching\n" +
+                "   number is not proof that a claim is correct. Accepting stores a labelled draft\n" +
+                "   as your written interpretation; Undo restores the previous text.\n" +
+                "   The program's own report narrative is written without AI. Your accepted written\n" +
+                "   interpretation is included separately when that report section is selected.\n\n" +
 
                 // The de novo screen is a separate workflow and is written as one: it is numbered
                 // OPTIONAL rather than as a fifth step, because nothing above it needs it and it needs

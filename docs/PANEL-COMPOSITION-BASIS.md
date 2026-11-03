@@ -6,6 +6,8 @@ With a current panel, the report headline and primary composition plots use effe
 
 Original UserID studies and CSV names/bytes remain in the supplement. New `panel_family_*` exports record the selected headline, run means, run shares, denominators and Others membership. Source-family diagnostic figures keep their filenames and are placed in the supplement; stored world/coverage studies with a different grouping remain explicitly secondary. Per-panel briefs receive the selected partition mapped back to source membership, rather than a second threshold rule.
 
+The automatic findings section uses the same selected native shares, counts, subclasses and threshold partition as the headline. Its study-local IDs resolve through the selected panel map; panel member counts follow effective merge keys. `panel_family_report_findings.csv` records those primary statements. The original `report_findings.csv` remains available with the source UserID findings, so the merge does not rewrite an existing source export.
+
 Fixtures run with `--test-panel-headline [owned-output]` and are registered once in DefaultSuite. They show before/after on a shared-within-key case, inspect actual composition plot inputs, retain old exports, refuse missing studies, exercise one-to-one and no-panel behavior, and execute the native copy-proof harness on a small saved fixture.
 
 The native proof commands are:

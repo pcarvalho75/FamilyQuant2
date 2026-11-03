@@ -18,9 +18,10 @@ public sealed partial class CurationQuantitationViewModel
         ClearFullXic();
         try
         {
-            operation.Report("attribution", "Preparing the full-XIC family attribution");
+            operation.Report("attribution", "Preparing the full-XIC family attribution", 0, 1);
             if (rows == null || rows.Count == 0)
             {
+                operation.Report("attribution", "No stored quantitation to attribute", 1, 1);
                 operation.Commit(() => ApplyFullXic(null, null, generation)); return true;
             }
             fullXicPending = true;
@@ -32,7 +33,10 @@ public sealed partial class CurationQuantitationViewModel
             var prepared = await Task.Run(() => PrepareFullXic(rowCopy, ticCopy, proteins, operation, fullXicCacheDirectory), operation.CancellationToken);
             operation.ThrowIfCancellationRequested();
             if (generation != fullXicGeneration) return false;
+            operation.Report("attribution", "Full-XIC family attribution prepared", 1, 1);
+            operation.Report("attribution-apply", "Applying completed family attribution", 0, 1);
             operation.Commit(() => ApplyFullXic(prepared, null, generation));
+            operation.Report("attribution-apply", "Family attribution applied", 1, 1);
             return true;
         }
         catch (OperationCanceledException) when (operation.IsCancellationRequested)
@@ -45,6 +49,7 @@ public sealed partial class CurationQuantitationViewModel
         }
         catch (Exception ex)
         {
+            operation.Report("attribution-failure", "Family attribution did not finish: " + ex.Message, 1, 1);
             if (generation == fullXicGeneration) { ClearFullXic(); ApplyFullXic(null, ex.Message, generation); }
             return false;
         }

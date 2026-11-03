@@ -71,9 +71,6 @@ The rerun of the full analysis with the scope "Toxin", "venom gland" (D39), so t
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| K7 | Second reader: every number in the program-written Summary of findings (J44) on Ana's project matched to its cell in the program's exports | M | 0.4 | J44b | K17 | A table of number, source cell and match, with no mismatch | GR2 | | 0 | 0 | |
-| J44b | J44 reviewed and merged | L | 0.2 | 🟢 | K7, K14 | Approved; gate green | OP | | 0 | 0 | |
-| J45 | File > Export > Interpretation input: one plain file a user can give to an AI assistant of their choice (report details, the panel table as entered, the result tables, the analysis choices, a neutral instruction to quote numbers only from the tables); the program never calls an LLM (Paulo, 11-03) | L | 0.5 | 🟢 | | Deterministic export; its test; D21 wording | OP | | 0 | 0 | |
 
 ### W3 The report export works and is fast
 
@@ -81,7 +78,6 @@ The export failed on Ana's project (a figure read the on-screen palette from the
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| J34c | J34 reviewed and merged | L | 0.2 | 🟢 | K14 | Approved; gate green | LK | | 0 | 0 | |
 
 ### W4 Release 2.1.0 on GitHub
 
@@ -89,19 +85,13 @@ Ana installs it from the public releases page (D31); the desk publishes on Paulo
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| K9 | Full gate on the release candidate re-cut after J41 (and J32, J34 if merged): every ledger receipt current (quick gates defer them) | M | 0.5 | K8 | K10 | Full gate green, ledger 5,460 of 5,460 | Orchestrator | | 0 | 0 | |
-| K10 | The unpacked candidate exports the final project's report through the real menu | L | 0.3 | K9 | K11 | Files and times recorded | EV | | 0 | 0 | |
-| K11 | Published: v2.1.0 on pcarvalho75/FamilyQuant2-releases with the zip, its .sha256 and user release notes | L | 0.1 | K10 | K13, K17 | The release page is live | Orchestrator | | 0 | 0 | |
-| K13 | Install check on 2.1.0 from GitHub; 2.0.0's Check for updates finds 2.1.0 | L | 0.2 | K11 | | Both pass | EV | | 0 | 0 | |
+| K8c | The cheap ungated tests come into the gates (2.1.1): from K8b's exclusion list, every fixture that needs no RAW and runs in under a minute moves into DefaultSuite, one commit per group; any that fails gets its own fix or an owner | M | 1 | 🟢 | | Exclusion list shorter by every cheap fixture; quick suite still under its time budget; each moved fixture green | FL | | 0 | 0 | |
+| K13 | Install check on 2.1.0 from GitHub; 2.0.0's Check for updates finds 2.1.0 | L | 0.2 | 🟢 | | Both pass | EV | | 0 | 0 | |
 
 ### W5 Ana's report delivered
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| K14 | Final export of the interpreted project through the real command, on master with J30, J24, J16, J32 and J34 | L | 0.5 | J34c, J44b | K15, K16 | Word report and supplement written | OP | | 0 | 0 | |
-| K15 | Number trace on the final report: every number found, or each one not found ruled | L | 0.2 | K14 | K17 | `trace.csv` with nothing left open | T1 | | 0 | 0 | |
-| K16 | The final report's pages read for look and sense | L | 0.3 | K14 | K17 | No blocking item | LK | | 0 | 0 | |
-| K17 | Delivered: the Word report, supplement, project, family panel, a read-me with the release link, and the AI key file (D42) written to `AnaG/Bjararaca/Relatorio`; nothing else in Ana's folders touched | L | 0.2 | K7, K15, K16, K11 | | The five items with hashes; the rest of AnaG unchanged | OP | | 0 | 0 | |
 
 ### W6 Compute fast and visible
 
@@ -109,22 +99,18 @@ Compute took 37 to 54 minutes on Ana's project with the RAW cache warm, silent f
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| J35c | J35 reviewed and merged | L | 0.2 | 🟢 | J40 | Approved; gate green | SH | | 0 | 0 | |
-| J48 | Saving the full-run project fits in memory: J35b's measurement hit an OutOfMemoryException in SavedFileCheck.Curation -> ToJsonText under an 8 GB heap cap; find whether the product's Save builds the whole curation JSON as one string and what heap Save needs, and if a 16 GB office PC could run out, stream it with the same bytes written | M | 0.5 | J35c | | FINDING first; if fixed, byte-identical saved file on the full-run copy and the peak measured before and after | SH | | 0 | 0 | |
-| J38c | First fix: Compute reuses the attribution FullXicCompletionStage already computed instead of the family-world step searching again (calls 3 and 4 repeat 1 and 2: 366 s of 923 s on WORKHORSE) | H | 1 | 🟢 | J38d | Byte-identical stored results on a fixture | AS | | 0 | 0 | |
-| J38d | New HomologySearch method (Paulo, 11-03 09:20) from Fable's plan (docs/ideas/HOMOLOGY-PERFORMANCE.md): the mismatch-budget early exit, the exact-containment shortcut for best-score identified queries with the matrix guard, and the diagonal q-gram prefilter; every caller switches to it; the old HomologyMapper stays unchanged, marked [Obsolete] ("use HomologySearch"), as the reference the equivalence tests compare against | M | 1 | J38c | J38e | Every stored result byte-identical to the old method on fixtures and on the full-run copy; old and new compared hit for hit on every search call | AS | | 0 | 0 | |
+| J38d | New HomologySearch method (Paulo, 11-03 09:20) from Fable's plan (docs/ideas/HOMOLOGY-PERFORMANCE.md): the mismatch-budget early exit, the exact-containment shortcut for best-score identified queries with the matrix guard, and the diagonal q-gram prefilter; every caller switches to it; the old HomologyMapper stays unchanged, marked [Obsolete] ("use HomologySearch"), as the reference the equivalence tests compare against | M | 1 | 🟢 | J38e | Every stored result byte-identical to the old method on fixtures and on the full-run copy; old and new compared hit for hit on every search call | AS | | 0 | 0 | |
 | J38e | Compute before and after on the full-run copy | L | 0.3 | J38d | J38f | Both times; stored results byte-identical | AS | | 0 | 0 | |
 | J38f | J38 reviewed and merged | L | 0.2 | J38e | | Approved; gate green | AS | | 0 | 0 | |
 | J47a | Fable's science options in HomologySearch, each off by default: a decoy-calibrated identity gate per tag length; isobaric-swap folding for de novo tags (N/GG, Q/AG, equal-mass pair order, K/Q) weighted by PEAKS per-residue confidence; crediting families by score tier with the multiplicity reported | M | 1.5 | J38d | J47b | Options off: byte-identical; options on: their own tests | AS | | 0 | 0 | |
-| J47b | Validation of each science option on the full-run project: target-decoy rates at the gate, the Database gap error rates, the leave-one-out family check (J42: 966 right, 12 wrong, 95 abstained), and what changes in the headline; Paulo decides which become default | M | 1 | J47a | | A before/after table per option; science review | AS | | 0 | 0 | |
+| J47b | Validation of each science option on the full-run project: target-decoy rates at the gate, the Database gap error rates, the leave-one-out family check (J42: 966 right, 12 wrong, 95 abstained), and what changes in the headline; Paulo decides which become default (Paulo, 11-03 13:15: no recomputing everything: validate by replaying FQAssay's captured five search inputs and the cached attribution, one full Compute only for the options chosen as defaults) | M | 1 | J47a | | A before/after table per option; science review | AS | | 0 | 0 | |
 
 ### W7 Clear reasons and totals
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
 | J43 | With a panel in use, the headline and composition figures use the per-panel-family totals (D40, B): before and after shown on a real project with several families in one panel family, science review, the old unit kept in the supplement | M | 1 | 🟢 | | Red then green on a multi-family fixture; before/after table on a real project; reviewed | FL | | 0 | 0 | |
-| J40 | Help explains what 2.1 adds: the progress lines, the cached reopen, "no peptide observed", the scope phrases, link notes | L | 0.5 | J35c | | A test reads each menu name in the text from the live menu | T2 | | 0 | 0 | |
-| J46c | J46 reviewed and merged | L | 0.2 | 🟢 | | Approved; gate green | T2 | | 0 | 0 | |
+| J49 | The number trace cites the right cell (2.1.1): a printed number is matched first to cells of the sentence's own subject (the family, run or option it names), and a number that equals several cells with no subject match is reported AMBIGUOUS instead of the first equal cell (K15, 11-03: the 14-protein estimate of one family was cited to the '14 families above threshold' cell; the cover's 2.0 to a protein count) | M | 1 | 🟢 | | On Ana's export every K15 wrong-cell example cites its subject cell; ambiguous cases listed; NOT FOUND unchanged | RS | | 0 | 0 | |
 
 ## Critical path
 
