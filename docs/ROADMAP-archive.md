@@ -467,6 +467,8 @@ Paulo agreed these at the restart, 2026-11-01.
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
 | J17b | Faster evidence fetch (one streamed query instead of one per family, about 3 times faster, same entries) reviewed and merged | L | 0.2 | 🟢 | | Approved; gate green | AS | | 0 | 0 | |
+| J38a | Measure: time of each homology search call in one Compute (world pass, two world-error searches, attribution, two census searches): queries, candidates per query, seconds, cores | M | 0.5 | 🟢 | J38b | `FINDING J38` table | AS | | 0 | 0 | |
+| J35a | Progress for Compute and opening: every phase counted against a known total, the current item, elapsed time and time since the last step, all logged | M | 0.6 | 🟢 | J35b | A fixture Compute records every phase once, in order | SH | | 0 | 0 | |
 
 ### W2 The interpretation
 

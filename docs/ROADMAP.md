@@ -115,11 +115,9 @@ Compute took 37 to 54 minutes on Ana's project with the RAW cache warm, silent f
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| J35a | Progress for Compute and opening: every phase counted against a known total, the current item, elapsed time and time since the last step, all logged | M | 0.6 | 🟢 | J35b | A fixture Compute records every phase once, in order | SH | | 0 | 0 | |
-| J35b | Progress on the full-run project: the longest gap between two steps named | L | 0.3 | J35a | J35c | `READY` names the longest gap and its phase | SH | | 0 | 0 | |
+| J35b | Progress on the full-run project: the longest gap between two steps named | L | 0.3 | 🟢 | J35c | `READY` names the longest gap and its phase | SH | | 0 | 0 | |
 | J35c | J35 reviewed and merged | L | 0.2 | J35b | J40 | Approved; gate green | SH | | 0 | 0 | |
-| J38a | Measure: time of each homology search call in one Compute (world pass, two world-error searches, attribution, two census searches): queries, candidates per query, seconds, cores | M | 0.5 | 🟢 | J38b | `FINDING J38` table | AS | | 0 | 0 | |
-| J38b | CPU profile of the slowest call: its top functions with file:line | M | 0.4 | J38a | J38c | The profile posted | AS | | 0 | 0 | |
+| J38b | CPU profile of the slowest call: its top functions with file:line | M | 0.4 | 🟢 | J38c | The profile posted | AS | | 0 | 0 | |
 | J38c | First fix: an identified peptide found exactly in a protein needs no scoring of the other candidates (proved from the scorer first) | H | 1 | J38b | J38d | Byte-identical stored results on a fixture | AS | | 0 | 0 | |
 | J38d | Second fix, as the measurement says: one seed index shared by the searches on the same proteins, or the J28 cache pattern for the other searches | M | 1 | J38c | J38e | Byte-identical stored results on a fixture | AS | | 0 | 0 | |
 | J38e | Compute before and after on the full-run copy | L | 0.3 | J38d | J38f | Both times; stored results byte-identical | AS | | 0 | 0 | |
