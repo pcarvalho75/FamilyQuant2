@@ -481,6 +481,7 @@ Paulo agreed these at the restart, 2026-11-01.
 | K9b | The 3 ledger rows K9's refresh did not bring back (AS-retained, SpectrumComparisonTable.Build's literals XCorr, patternlab, PatternLab, staled by J35c's progress change): reason, then an explicit reviewed relocation or a fresh executed check, no guard weakened | L | 0.3 | 🟢 | K9 | Refresh on a master copy: 3 of 3 back | SH | | 0 | 0 | |
 | K9 | Full gate on the release candidate re-cut after J41 (and J32, J34 if merged): every ledger receipt current (quick gates defer them) | M | 0.5 | K8, K9b | K10 | Full gate green, ledger 5,460 of 5,460 | Orchestrator | | 0 | 0 | |
 | K11 | Published: v2.1.0 on pcarvalho75/FamilyQuant2-releases with the zip, its .sha256 and user release notes | L | 0.1 | 🟢 | K13, K17 | The release page is live | Orchestrator | | 0 | 0 | |
+| K13 | Install check on 2.1.0 from GitHub; 2.0.0's Check for updates finds 2.1.0 | L | 0.2 | 🟢 | | Both pass | EV | | 0 | 0 | |
 
 ### W6 Compute fast and visible
 
