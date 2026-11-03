@@ -99,20 +99,7 @@ public static class WordReportWriter
                             if (table.Columns.Count == 0 || table.Rows.Any(r => r.Count != table.Columns.Count))
                                 throw new ArgumentException("Report tables require columns and equally sized rows.", nameof(document));
                             body.Append(Paragraph(table.Title, "Heading2"));
-                            if (table.Columns.Count > 5 && table.Rows.Count > 0)
-                            {
-                                // A narrow seven-column source table turns paths and definitions into
-                                // letter stacks. Print each complete record as a two-column card.
-                                // The model and companion workbook retain the original rectangular data.
-                                for (int record = 0; record < table.Rows.Count; record++)
-                                {
-                                    body.Append(Paragraph("Record " + (record + 1).ToString(CultureInfo.InvariantCulture), "Heading2"));
-                                    var rows = table.Columns.Select((column, index) =>
-                                        (IReadOnlyList<string>)new[] { column, table.Rows[record][index] }).ToArray();
-                                    body.Append(Table(table with { Columns = new[] { "Field", "Stored value" }, Rows = rows }, keepTogether: true));
-                                }
-                            }
-                            else body.Append(Table(table));
+                            body.Append(Table(table));
                             foreach (string line in Lines(table.Caption)) body.Append(Paragraph(line, "Caption"));
                             break;
                         case ReportFigure figure:
@@ -194,7 +181,7 @@ public static class WordReportWriter
             Style("Heading2", "heading 2", "24", true), Style("Caption", "caption", "20"));
     }
 
-    private static W.Table Table(ReportTable data, bool keepTogether = false)
+    private static W.Table Table(ReportTable data)
     {
         int[] widths = ReportTableLayout.Widths(data, PageWidth);
         var result = new W.Table(new W.TableProperties(new W.TableWidth { Width = PageWidth.ToString(CultureInfo.InvariantCulture), Type = W.TableWidthUnitValues.Dxa },
@@ -228,7 +215,7 @@ public static class WordReportWriter
         }
         result.Append(Row(data.Columns, true, true));
         for (int index = 0; index < data.Rows.Count; index++)
-            result.Append(Row(data.Rows[index], false, keepTogether && index < data.Rows.Count - 1));
+            result.Append(Row(data.Rows[index], false, false));
         return result;
     }
 

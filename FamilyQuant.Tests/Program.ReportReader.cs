@@ -61,9 +61,11 @@ internal static partial class Program
         var xml = XDocument.Parse(reader.ReadToEnd());
         XNamespace w = "http://schemas.openxmlformats.org/wordprocessingml/2006/main";
         var tables = xml.Descendants(w + "tbl").ToArray();
-        Check("wide source records use readable field/value tables",
-            tables[0].Element(w + "tblGrid")!.Elements(w + "gridCol").Count() == 2
-            && wide.Rows[0].All(value => xml.Descendants(w + "t").Any(t => t.Value == value)));
+        var sourceWidths = tables[0].Element(w + "tblGrid")!.Elements(w + "gridCol").Select(c => (int)c.Attribute(w + "w")!).ToArray();
+        Check("wide source tables retain their native grid with more space for paths",
+            sourceWidths.Length == wide.Columns.Count && sourceWidths[^1] > sourceWidths[2]
+            && tables[0].Elements(w + "tr").Skip(1).SelectMany(r => r.Elements(w + "tc"))
+                .Select(c => string.Join("\n", c.Descendants(w + "t").Select(t => t.Value))).SequenceEqual(wide.Rows.SelectMany(r => r)));
         Check("narrative audit columns get more width than numeric counts",
             tables[^1].Element(w + "tblGrid")!.Elements(w + "gridCol")
                 .Select(c => (int)c.Attribute(w + "w")!).Distinct().Count() > 1);
