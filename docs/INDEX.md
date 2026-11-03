@@ -31,6 +31,7 @@ This is the navigation index for the current checkout. The roadmap owns unfinish
 | [A2 coverage audit](A2-COVERAGE.md) | Native counterfactual measurement and the counts-only alignment audit label |
 | [Query residue coverage](QUERY-COVERAGE.md) | Recorded query letters, bounded coverage, current cache provenance and historical replay |
 | [Family-world storage](FAMILY-WORLD-STORAGE.md) | Atomic reviewed/clade fetch, taxonomy, persisted evidence and offline integrity |
+| [Reviewed panel bulk retrieval](REFERENCE-PANEL-STREAM.md) | Streamed family queries, completeness checks, retained paged comparison and native parity timing |
 | [H1 findings](housekeeping/H1-NOTES.md) | Behavior decisions, protected work, ledger migration and remaining reuse scope |
 | [Vision](vision/VISION.md) | Fable's study: the family world proposal behind workstream W8, with the desk's corrections |
 | [Code map](vision/CODE-MAP.md) | How a FASTA and a RAW file become a family number, and what that read did not cover |
@@ -99,6 +100,8 @@ Invoke each flag with `& $testExe <flag>` after building. Dispatch and arity are
 | `--shared-peptide-effect <copied-project> <copied-T-R> <copied-sepr2> <copied-RAW-folder> <new-output> <cache> <dataset-label> <date> [--prepare-only]` | One-run native Compute full XIC and all three shared-peptide policies; exact database/curation check, scoped CSV/JSON outputs and no de novo input |
 | `--test-evidence-delivery` | Native default review, save, exports, exact app-session replay and app Open fixture |
 | `--test-evidence-fetch-atomic` | Combined evidence/panel staging, cancellation boundaries, failures and one final commit |
+| `--test-reference-panel-stream` | Bulk query batching, exact paged-route entry parity, release/count failures, Cancel and panel operation checks |
+| `--reference-panel-parity-live <input.fcf> <new-output>` | Full-source live evidence fetch and both reviewed-panel routes, timings, per-entry hashes and offline project reopening |
 | `--test-evidence-coverage` | Native alignment-row interpretation, counterfactual chooser and honest audit labels |
 | `--test-query-residue-coverage` | Actual query-letter gate, native facts, legacy serialization and evidence-session contracts |
 | `--test-family-world-fetch` | Staged fetch, paging, release/taxonomy validation, offline persistence and recipe compatibility |
