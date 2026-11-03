@@ -2,6 +2,7 @@ using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -57,7 +58,8 @@ public partial class AnalyticsControl : UserControl
     {
         PanelCharts.Children.Clear();
         if (Data == null) return;
-        foreach (var figure in AnalyticsFigures.Build(Data, Families, FamilyTopN, FamilyAsPercent))
+        foreach (var figure in AnalyticsFigures.Build(Data, Families, FamilyTopN, FamilyAsPercent)
+            .Concat(ViewModel.BuildCompositionFigures()))
         {
             if (figure.Chart is IPalettedChart chart) chart.Palette = ChartPalette.UiPalette;
             PanelCharts.Children.Add(new Border { Height = figure.ScreenHeight, Margin = new Thickness(0, 0, 0, 12), Child = figure.Chart });

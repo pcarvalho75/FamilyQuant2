@@ -111,6 +111,11 @@ internal static partial class Program
                 SearchParameters = new[] { new ReportSearchParameter("Search minimum length", "5"),
                     new ReportSearchParameter("Repeated key", "first"), new ReportSearchParameter("Repeated key", "second") } };
             var generated = ReportDocumentBuilder.Build(project, manifest, details, facts);
+            project.ReportDetails = details;
+            var fromSavedDetails = ReportDocumentBuilder.Build(project, manifest);
+            Check("saved report details are used without caller overrides", fromSavedDetails.Title == details.Title
+                && fromSavedDetails.Authors == details.Authors
+                && fromSavedDetails.Sections.Single(s => s.Id == ReportSectionIds.Interpretation).Blocks.OfType<ReportParagraph>().Single().Text == details.WrittenInterpretation);
             string TableCell(string label) => generated.Sections.Single(s => s.Id == ReportSectionIds.Methods).Blocks.OfType<ReportTable>()
                 .SelectMany(t => t.Rows).Single(r => r[0] == label)[1];
             Check("methods count actual database records and label classes", TableCell("Targets (including target contaminants)") == "2"
