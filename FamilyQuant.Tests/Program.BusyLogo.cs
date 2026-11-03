@@ -15,9 +15,23 @@ namespace FamilyQuant.Tests;
 internal static partial class Program
 {
     private const int BusyLogoFrameCount = 48;
-    private static int BusyLogoFixtureTests(string output) => NativeProofDesktop.IsPrivate
-        ? BusyLogoProof(output)
-        : NativeProofDesktop.Run(new[] { "--test-busy-logo", output }, output + ".native.log", 60_000);
+    private static int BusyLogoFixtureTests(string output)
+    {
+        string log = output + ".native.log";
+        if (!NativeProofDesktop.IsPrivate)
+            return NativeProofDesktop.Run(new[] { "--test-busy-logo", output }, log, 60_000);
+        Directory.CreateDirectory(Path.GetDirectoryName(Path.GetFullPath(log))!);
+        var previousOut = Console.Out;
+        var previousError = Console.Error;
+        using var writer = new StreamWriter(log) { AutoFlush = true };
+        try
+        {
+            Console.SetOut(writer); Console.SetError(writer);
+            return BusyLogoProof(output);
+        }
+        catch (Exception error) { Console.WriteLine(error); return 1; }
+        finally { Console.SetOut(previousOut); Console.SetError(previousError); }
+    }
 
     private static int BusyLogoProof(string output)
     {
