@@ -14,7 +14,7 @@ internal static partial class Program
 {
     private static int LedgerAssayCompareCommand(string[] args)
     {
-        if (args.Length != 6) throw new ArgumentException("Supply frozen source root, assigned owner map, fresh output, step and timestamp from date.");
+        if (args.Length is not (6 or 7)) throw new ArgumentException("Supply frozen source root, assigned owner map, fresh output, step, timestamp from date and optional pinned reference app.");
         string root = FindLedgerRoot()!, frozenRoot = Path.GetFullPath(args[1]), ownerMap = Path.GetFullPath(args[2]), output = Path.GetFullPath(args[3]);
         if (Directory.Exists(output) && Directory.EnumerateFileSystemEntries(output).Any()) throw new IOException("Comparison output must be fresh.");
         if (!Regex.IsMatch(args[4], "^[A-Za-z0-9-]+$")) throw new ArgumentException("Invalid receipt step name.");
@@ -64,12 +64,15 @@ internal static partial class Program
         var results = new List<LedgerMemberFactComparison.Result>();
         var kinds = cohort.ToDictionary(row => row.Id, row => row.Kind, StringComparer.Ordinal);
         var assertions = new Dictionary<string, string>(StringComparer.Ordinal);
+        var spectrumRuntime = new AssaySpectrumProof(new(StringComparer.Ordinal), new());
         var original = Console.Out;
         using var transcript = new StringWriter(CultureInfo.InvariantCulture);
         try
         {
             Console.SetOut(new LedgerProofWriter(original, transcript));
             Check("AS assignment contains the 1146 rows delegated in M22", cohort.Length == 1146);
+            if (args.Length == 7)
+                spectrumRuntime = ProveAssaySpectrumFacts(frozen["FamilyQuant/DeNovo/SpectrumComparisonTable.cs"], args[6], output, cohort);
             foreach (var row in cohort)
             {
                 var anchor = LedgerMemberFactComparison.Compare(row, frozen[row.Source], empty);
@@ -77,7 +80,7 @@ internal static partial class Program
                     : LedgerMemberFactComparison.Compare(row, frozen[row.Source], Candidates(anchor.FrozenMember));
                 results.Add(result);
                 if (result.Matched) Check("AS member " + row.Id + ": " + result.Symbol, true);
-                else { skipped++; Console.WriteLine("  SKIP  " + row.Id + ": " + result.Reason); }
+                else if (!spectrumRuntime.Assertions.ContainsKey(row.Id)) { skipped++; Console.WriteLine("  SKIP  " + row.Id + ": " + result.Reason); }
             }
             foreach (var group in results.Where(result => result.Matched).GroupBy(result => kinds[result.Id]).OrderBy(group => group.Key, StringComparer.Ordinal))
             {
@@ -102,13 +105,17 @@ internal static partial class Program
                 + results.Count(result => !result.Matched && group.Any(row => row.Id == result.Id)).ToString(CultureInfo.InvariantCulture))), new UTF8Encoding(false));
         string archive = Path.Combine(output, "executed"); Directory.CreateDirectory(archive);
         var artifactPaths = new List<string> { log, data, Path.Combine(output, "unproven.tsv"), Path.Combine(output, "counts-by-source.tsv"), ownerMap };
-        foreach (string relative in new[] { "FamilyQuant.Tests/Program.LedgerAssayComparison.cs", "FamilyQuant.Tests/Program.Commands.AssayLedger.cs", "FamilyQuant.Tests/LedgerMemberFactComparison.cs" })
+        artifactPaths.AddRange(spectrumRuntime.Artifacts);
+        foreach (string relative in new[] { "FamilyQuant.Tests/Program.LedgerAssayComparison.cs", "FamilyQuant.Tests/Program.Commands.AssayLedger.cs", "FamilyQuant.Tests/LedgerMemberFactComparison.cs" }
+            .Concat(AssaySpectrumProofSources).Distinct(StringComparer.Ordinal))
         {
             string retained = Path.Combine(archive, Path.GetFileName(relative));
             File.Copy(Path.Combine(root, relative), retained); artifactPaths.Add(retained);
         }
         string assembly = Path.Combine(archive, "FamilyQuant.Tests.dll");
         File.Copy(typeof(Program).Assembly.Location, assembly); artifactPaths.Add(assembly);
+        string coreAssembly = Path.Combine(archive, "FamilyQuant.Core.dll");
+        File.Copy(typeof(FamilyClusterFile).Assembly.Location, coreAssembly); artifactPaths.Add(coreAssembly);
         var git = new ProcessStartInfo("git") { WorkingDirectory = root, RedirectStandardOutput = true, UseShellExecute = false, CreateNoWindow = true };
         git.ArgumentList.Add("rev-parse"); git.ArgumentList.Add("HEAD");
         using var process = Process.Start(git)!;
@@ -116,7 +123,14 @@ internal static partial class Program
         if (process.ExitCode != 0) throw new IOException("Could not record executing commit.");
         const string runId = "AS-member-comparison";
         string KindId(string kind) => "member-" + kind.Replace('/', '-').Replace(' ', '-');
-        var rows = results.Select(result => new FeatureLedgerEvidence.Row(result.Id,
+        var rows = results.Select(result => spectrumRuntime.Assertions.TryGetValue(result.Id, out string? nativeAssertion) && failed == 0
+            ? new FeatureLedgerEvidence.Row(result.Id, AssaySpectrumProofSources.Select(path => new FeatureLedgerEvidence.Implementation(path,
+                path == "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs" ? "SpectrumComparisonTable.Build; executed embedded PatternLab claims" : "Scoped native spectrum proof dependency",
+                FeatureLedgerEvidence.Hash(Path.Combine(root, path)))).ToList(),
+                new() { new(runId, "test", nameof(ProveAssaySpectrumFacts), nativeAssertion, log, "") },
+                "Executed pinned frozen/current Build, observed real embedded claim fields at the unchanged clustering boundary, and equal full CSV bytes with and without progress in two cultures. Declaration equality is not claimed.",
+                Compared: result.FrozenMember + ": " + result.Before + "; scoped native field/output proof")
+            : new FeatureLedgerEvidence.Row(result.Id,
             result.CurrentPath.Length > 0 ? new() { new(result.CurrentPath, result.Symbol, FeatureLedgerEvidence.Hash(Path.Combine(root, result.CurrentPath))) } : new(),
             new(), result.Reason, result.Matched && failed == 0 ? KindId(kinds[result.Id]) : null,
             result.Before + " -> " + result.CurrentPath + ": " + result.Symbol + " = " + result.Actual)).ToList();

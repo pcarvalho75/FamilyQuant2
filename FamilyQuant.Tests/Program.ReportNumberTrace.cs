@@ -144,6 +144,33 @@ internal static partial class Program
         trace = ReportCsvTable.Build("bad-size", "bad-size", File.ReadAllText(workbookOutput), "");
         Check("J18 refuses a wrong table size even when that number appears in a workbook cell", badSize != 0 && Has("3", "NOT FOUND"));
 
+        WordReportWriter.Write(workbookDoc, bookReport);
+        using (var word = WordprocessingDocument.Open(workbookDoc, true))
+        {
+            var body = word.MainDocumentPart!.Document!.Body!;
+            var owner = body.Elements<W.Table>().Single();
+            var caption = body.Elements<W.Paragraph>().Single(paragraph => paragraph.InnerText == table.Caption);
+            caption.Remove(); owner.InsertAfterSelf(caption);
+        }
+        int legacyCaption = ReportNumberTrace.Run(workbookDoc, missingFolder, workbookOutput);
+        trace = ReportCsvTable.Build("legacy-caption", "legacy-caption", File.ReadAllText(workbookOutput), "");
+        Check("J18 retains ownership of a legacy caption after its table", legacyCaption == 0 && Has("2", "TABLE ROWS") && Has("2", "TABLE COLUMNS"));
+        using (var word = WordprocessingDocument.Open(workbookDoc, true))
+        {
+            var body = word.MainDocumentPart!.Document!.Body!;
+            var owner = body.Elements<W.Table>().Single();
+            var caption = body.Elements<W.Paragraph>().Single(paragraph => paragraph.InnerText == table.Caption);
+            caption.InsertAfterSelf(owner.CloneNode(true));
+        }
+        int ambiguous = ReportNumberTrace.Run(workbookDoc, missingFolder, workbookOutput);
+        trace = ReportCsvTable.Build("ambiguous-caption", "ambiguous-caption", File.ReadAllText(workbookOutput), "");
+        Check("J18 refuses ambiguous caption ownership even when both tables have matching dimensions", ambiguous != 0 && Has("2", "NOT FOUND"));
+        using (var word = WordprocessingDocument.Open(workbookDoc, true))
+            foreach (var owner in word.MainDocumentPart!.Document!.Body!.Elements<W.Table>().ToArray()) owner.Remove();
+        int orphan = ReportNumberTrace.Run(workbookDoc, missingFolder, workbookOutput);
+        trace = ReportCsvTable.Build("orphan-caption", "orphan-caption", File.ReadAllText(workbookOutput), "");
+        Check("J18 refuses an orphan caption instead of borrowing its dimensions from the workbook", orphan != 0 && Has("2", "NOT FOUND"));
+
         string? savedVersion = Environment.GetEnvironmentVariable(AppVersionInfo.ClickOnceCurrentVersionVariable);
         try
         {
