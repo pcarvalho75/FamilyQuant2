@@ -85,7 +85,7 @@ namespace FamilyQuant.Tests
 
             var homologyDb = FamilyQuant.Homology.HomologyDatabase.Build(fcf.MyExtendedFastaItems);
             var started = DateTime.UtcNow;
-            var results = FamilyQuant.Homology.HomologyMapper.Search(peptides, homologyDb);
+            var results = FamilyQuant.Homology.HomologySearch.Search(peptides, homologyDb);
             double seconds = (DateTime.UtcNow - started).TotalSeconds;
 
             // Search answers one result per DISTINCT normalized query; equality here proves the
@@ -109,7 +109,7 @@ namespace FamilyQuant.Tests
             Check("target hits dominate decoy-only hits", targetMapped > decoyOnly,
                 $"{targetMapped:N0} contra {decoyOnly:N0}");
 
-            var assignments = FamilyQuant.Homology.HomologyMapper.MapToFamilies(results, fcf.MyExtendedFastaItems);
+            var assignments = FamilyQuant.Homology.HomologySearch.MapToFamilies(results, fcf.MyExtendedFastaItems);
             Check("one assignment per result, positionally joinable",
                 assignments.Count == results.Count
                 && assignments.Zip(results, (a, r) => a.Peptide == (r.IsRejected ? r.Peptide : r.NormalizedPeptide)).All(x => x));
@@ -121,7 +121,7 @@ namespace FamilyQuant.Tests
             // peptide is the control, not the biology. Through the ENGINE's own aggregation, which is
             // also the one the screen fills its table from: a census the suite computed for itself
             // would prove only that the suite's copy agreed with the suite's copy.
-            var familyRows = FamilyQuant.Homology.HomologyMapper.CountByFamily(
+            var familyRows = FamilyQuant.Homology.HomologySearch.CountByFamily(
                 results, fcf.MyExtendedFastaItems, new FamilyQuant.Homology.HomologyOptions().DecoyLabel);
 
             Console.WriteLine($"        familias alvo alcancadas: {familyRows.Count:N0}");
@@ -156,8 +156,8 @@ namespace FamilyQuant.Tests
                     + ":" + h.IdentityFraction.ToString("R", CultureInfo.InvariantCulture)
                     + ":" + h.GateIdentityFraction.ToString("R", CultureInfo.InvariantCulture)
                     + ":" + h.MatchedSubsequence + ":" + (h.IsDecoy ? "D" : "T")))));
-            var againA = FamilyQuant.Homology.HomologyMapper.Search(subset, homologyDb);
-            var againB = FamilyQuant.Homology.HomologyMapper.Search(subset, homologyDb);
+            var againA = FamilyQuant.Homology.HomologySearch.Search(subset, homologyDb);
+            var againB = FamilyQuant.Homology.HomologySearch.Search(subset, homologyDb);
             Check("two searches of the same subset are hit-for-hit identical",
                 Fingerprint(againA) == Fingerprint(againB));
             Check("and identical to the full run's answers for those peptides",

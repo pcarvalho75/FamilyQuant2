@@ -63,7 +63,7 @@ namespace FamilyQuant.Tests
             var engine = typeof(FamilyClusterFile).Assembly;
             Check("the headless engines are owned by FamilyQuant.Core",
                 new[] { typeof(FamilyClusterFile), typeof(USearchTools), typeof(WordCluster),
-                        typeof(ProjectStore), typeof(Homology.HomologyMapper), typeof(DeNovo.NativeQuantFractions) }
+                        typeof(ProjectStore), typeof(Homology.HomologySearch), typeof(DeNovo.NativeQuantFractions) }
                     .All(t => t.Assembly.GetName().Name == "FamilyQuant.Core"));
             Check("Core has no WPF assembly references",
                 !engine.GetReferencedAssemblies().Any(a =>

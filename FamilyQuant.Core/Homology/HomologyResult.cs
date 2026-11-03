@@ -154,7 +154,7 @@ namespace FamilyQuant.Homology
     }
 
     /// <summary>
-    /// One family the de novo peptides reached, as <see cref="HomologyMapper.CountByFamily"/> counts it
+    /// One family the de novo peptides reached, as <see cref="HomologySearch.CountByFamily"/> counts it
     /// and as the de novo screen's table shows it.
     ///
     /// It lives here rather than beside the screen because the count is engine work: the screen and the

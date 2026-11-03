@@ -135,6 +135,7 @@ namespace FamilyQuant.Tests
             });
             suite.Section("Homology - PepExplorer's aligner, ported with its C-terminus and character defects fixed");
             suite.Add(() => HomologyTests.Run(Check));
+            suite.Add(() => HomologySearchEquivalenceTests());
             suite.Section("Family world (B1) - a de novo tag credited to UniProt families, on a fixture");
             suite.Add(() => FamilyWorldCheck.RunFixtures(Check));
             suite.Add(() => FamilyWorldRateTests());
@@ -166,6 +167,8 @@ namespace FamilyQuant.Tests
             suite.Add(() => TicShareSummaryTests());
             suite.Section("Native fraction of TIC (Q3) - per-peptide dedup, unit invariants and the method");
             suite.Add(() => NativeFractionUnitTests(workDir));
+            suite.Add(() => ReferenceEnvelopeOptimizationTests());
+            suite.Add(() => StreamingProvenanceHashTests());
             suite.Section("Native fraction of TIC (Q3) - run _01 identified/envelope/DDA+de novo, envelope partition");
             suite.Add(() => NativeTicFractionRealTests(args.Length > 2 ? args[2] : null, args.Length > 3 ? args[3] : null, workDir));
             suite.Section("MS1 peptide-like envelope (Q6) - detector invariants on synthetic spectra");

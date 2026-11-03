@@ -96,8 +96,8 @@ namespace FamilyQuant
             // maps, because one sequence can be both a search identification and a de novo claim.
             Dictionary<string, IReadOnlyList<int>> FamiliesOf(IEnumerable<string> sequences,
                                                                Homology.HomologyOptions sideOptions) =>
-                Homology.HomologyMapper.MapToFamilies(
-                        Homology.HomologyMapper.Search(sequences, database, sideOptions), targets)
+                Homology.HomologySearch.MapToFamilies(
+                        Homology.HomologySearch.Search(sequences, database, sideOptions), targets)
                     .ToDictionary(a => a.Peptide, a => a.FamilyIds, StringComparer.Ordinal);
             operation?.Report("report-census-identified-start", "Data step 2: source census 1 of 2, identified search", 2, 8);
             Dictionary<string, IReadOnlyList<int>> searchFamilies = FamiliesOf(search, identifiedOptions);

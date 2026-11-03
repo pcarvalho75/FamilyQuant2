@@ -170,7 +170,7 @@ namespace FamilyQuant.Tests
             // The family of an identified peptide: the UniProt families of the database proteins that hold it,
             // found by the production identified rule (the proteins tied at the best score).
             HomologyDatabase sampleDatabase = HomologyDatabase.Build(sampleItems);
-            var identifiedHits = HomologyMapper.Search(pairs.Values.Select(p => p.Identified).Distinct(StringComparer.Ordinal), sampleDatabase,
+            var identifiedHits = HomologySearch.Search(pairs.Values.Select(p => p.Identified).Distinct(StringComparer.Ordinal), sampleDatabase,
                     new HomologyOptions { TopHitsPerPeptide = int.MaxValue, BestScoreOnly = true })
                 .Where(r => !r.IsRejected).ToDictionary(r => r.NormalizedPeptide, StringComparer.Ordinal);
             foreach (KnownPair pair in pairs.Values)
@@ -626,7 +626,7 @@ namespace FamilyQuant.Tests
         {
             List<string> tags = known.Select(p => p.Tag).Distinct(StringComparer.Ordinal).ToList();
             log("world without the " + label + ": " + N(world.Proteins.Count) + " targets and as many reversed copies; searching " + N(tags.Count) + " tags");
-            Dictionary<string, HomologyResult> results = HomologyMapper.Search(tags, world.Database, B1Options(world).SearchOptions())
+            Dictionary<string, HomologyResult> results = HomologySearch.Search(tags, world.Database, B1Options(world).SearchOptions())
                 .ToDictionary(r => r.IsRejected ? r.Peptide : r.NormalizedPeptide, StringComparer.Ordinal);
             Dictionary<string, FamilyWorldCredit> credits = results.ToDictionary(kv => kv.Key,
                 kv => world.Credit(kv.Value, world.Families, 0), StringComparer.Ordinal);
@@ -931,7 +931,7 @@ namespace FamilyQuant.Tests
 
             // B1's settings: every family creditable, no minimum length. The scope (alpha only) is D11's.
             FamilyWorld world = FamilyWorld.Build(all, new[] { "alpha family" });
-            HomologyResult Find(FamilyWorld w, string tag) => HomologyMapper.SearchOne(tag, w.Database, new FamilyWorldOptions().SearchOptions());
+            HomologyResult Find(FamilyWorld w, string tag) => HomologySearch.SearchOne(tag, w.Database, new FamilyWorldOptions().SearchOptions());
             FamilyWorldCredit Search(FamilyWorld w, string tag) => w.Credit(Find(w, tag), w.Families, 0);
             FamilyWorldCredit Shipped(FamilyWorld w, string tag) => w.Credit(Find(w, tag), w.ScopeFamilies, FamilyWorldOptions.DefaultMinimumTagLength);
             string alphaTag = alpha.Substring(30, 12);
