@@ -102,6 +102,7 @@ public static class ReportFigureRenderer
                     new("Selected highest-count families across pages", selected, "families", "0"),
                     new("Family rows in the visible stored sequence census", census.Families.Count, "families", "0"),
                     new("Eligible families with de novo sequences", census.Families.Count(row => row.DeNovoUnionDistinctSequences > 0), "families", "0"),
+                    new("Input identified distinct sequences", census.SearchInputDistinctSequences, "sequences", "0"),
                     new("Family rows on this page", pageRows.Count, "families", "0"));
                 charts[^1] = charts[^1] with { Width = ReportPrintChart.LayoutWidth, Height = ReportFamilySourceSequenceChart.RequiredHeight(pageRows) };
             }
