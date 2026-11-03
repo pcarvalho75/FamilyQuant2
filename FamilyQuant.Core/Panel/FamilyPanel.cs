@@ -12,6 +12,7 @@ public sealed class FamilyPanel
     public List<FamilyPanelText> Levels { get; set; } = new();
     public List<FamilyPanelText> TextFields { get; set; } = new();
     public FamilyPanelImport? Import { get; set; }
+    public List<FamilyPanelEvidenceLink> EvidenceLinks { get; set; } = new();
 }
 
 public enum FamilyPanelDecision { Quantify, ReportUnderOthers, NotAFamily, MergeIntoAnotherFamily }
