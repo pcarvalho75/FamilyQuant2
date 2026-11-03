@@ -126,7 +126,7 @@ namespace FamilyQuant
                 result.SpectrumComparisonRows, manifest.DeNovoSourceScoreDistributions);
             operation?.Report("compute-phase", "Phase 4 of 5: Family world", 4, 5);
             Study(12, "Family world");
-            FamilyWorldAnalysis.AttachToCompute(options.FamilyCuration, result, operation);
+            FamilyWorldAnalysis.AttachToComputeWithAttribution(options.FamilyCuration, result, familyAttribution, operation);
             operation?.Report("compute-phase", "Phase 5 of 5: Completing stored results", 5, 5);
             if (options.ExportSpectrumComparisonCsv)
             {
