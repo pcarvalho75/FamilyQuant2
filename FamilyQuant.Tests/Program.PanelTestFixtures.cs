@@ -9,11 +9,13 @@ namespace FamilyQuant.Tests;
 internal static partial class Program
 {
     // A stand-in for J2a's applied result; the production accessor still checks the full fingerprint.
-    private static void MakePanelAssignmentsCurrent(FamilyClusterFile file, EvidenceClassificationOptions options)
+    private static void MakePanelAssignmentsCurrent(FamilyClusterFile file, EvidenceClassificationOptions options,
+        PanelEvidenceContext? context = null)
     {
-        file.PanelProteinAssignmentsPanelFingerprint = PanelDerivedDataCurrentness.Fingerprint(file.FamilyPanel!);
+        file.PanelProteinAssignmentsPanelFingerprint = PanelDerivedDataCurrentness.FamilyFingerprint(file.FamilyPanel!);
         foreach (var row in file.PanelProteinAssignments!) row.Reason = "Synthetic applied assignment";
         var recipe = new EvidenceRecipe { Options = options, FamilyPanel = FamilyPanelValidation.Clone(file.FamilyPanel!),
+            PanelContext = context ?? new PanelEvidenceContext(),
             PanelProteinAssignments = JsonSerializer.Deserialize<List<PanelProteinAssignment>>(JsonSerializer.Serialize(file.PanelProteinAssignments)),
             PanelProteinAssignmentsPanelFingerprint = file.PanelProteinAssignmentsPanelFingerprint };
         file.EvidenceRecipe = recipe;
