@@ -185,6 +185,11 @@ namespace FamilyQuant
         [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull)]
         public FamilyProteinCountsResult? FamilyProteinCounts { get; set; }
 
+        /// <summary>Effective panel-key attribution, collapsed before the shared-peptide policy.
+        /// Optional until natively computed; source UserID studies remain unchanged.</summary>
+        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull)]
+        public EffectivePanelFamilyResult? EffectivePanelFamilies { get; set; }
+
         /// <summary>Subclass signal including an explicit not-resolved part. Absent until computed.</summary>
         [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull)]
         public FamilySubclassPartsResult? FamilySubclassParts { get; set; }
