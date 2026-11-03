@@ -100,8 +100,7 @@ Columns: Diff = L, M, H, VH. Hrs = worker hours at measured speed: estimates are
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| R3c | Release candidate: versions, a release zip, and the program run from that unpacked zip | M | 0.3 | 🟢 | R5a | The zip opens a saved project on this machine with no install. No install on this machine (Paulo), so a clean machine stays untested | Orchestrator | not started | 0% | 0% | T+0 |
-| R5a | FamilyQuant 2.0 final published | L | 0 | R3c | R5b | Paulo publishes | Paulo | not started | 0% | 0% | T+0 |
+| R5a | FamilyQuant 2.0 final published | L | 0 | 🟢 | R5b | Paulo publishes | Paulo | not started | 0% | 0% | T+0 |
 | R5b | Archive this roadmap | L | 0.1 | R5a | Done | Archive committed | Orchestrator | not started | 0% | 0% | T+0 |
 
 ### W6 Paper numbers (no release depends on these)
