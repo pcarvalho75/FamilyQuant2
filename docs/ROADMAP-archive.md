@@ -483,6 +483,7 @@ Paulo agreed these at the restart, 2026-11-01.
 | K9 | Full gate on the release candidate re-cut after J41 (and J32, J34 if merged): every ledger receipt current (quick gates defer them) | M | 0.5 | K8, K9b | K10 | Full gate green, ledger 5,460 of 5,460 | Orchestrator | | 0 | 0 | |
 | K11 | Published: v2.1.0 on pcarvalho75/FamilyQuant2-releases with the zip, its .sha256 and user release notes | L | 0.1 | 🟢 | K13, K17 | The release page is live | Orchestrator | | 0 | 0 | |
 | K13 | Install check on 2.1.0 from GitHub; 2.0.0's Check for updates finds 2.1.0 | L | 0.2 | 🟢 | | Both pass | EV | | 0 | 0 | |
+| K8c | The cheap ungated tests come into the gates (2.1.1): from K8b's exclusion list, every fixture that needs no RAW and runs in under a minute moves into DefaultSuite, one commit per group; any that fails gets its own fix or an owner | M | 1 | 🟢 | | Exclusion list shorter by every cheap fixture; quick suite still under its time budget; each moved fixture green | FL | | 0 | 0 | |
 
 ### W6 Compute fast and visible
 
