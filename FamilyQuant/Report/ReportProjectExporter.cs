@@ -1,7 +1,7 @@
 using FamilyQuant.DeNovo;
+using FamilyQuant.Operations;
 using FamilyQuant.Report.Captions;
 using System;
-using FamilyQuant.Operations;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
@@ -23,7 +23,7 @@ public static class ReportProjectExporter
     public static ReportProjectExport Build(IReadOnlyList<QuantRow> rows, QuantManifest manifest,
         FamilyClusterFile curation, string pngFolder, ReportDetails? details = null,
         ReportInputProvenance? provenance = null, FamilyEnvelopeQuantResult? familyResults = null, AnalyticsData? analyticsData = null,
-        OperationContext? operation = null)
+        OperationContext? operation = null, string? homologyCacheDirectory = null)
     {
         if (rows.Count == 0) throw new InvalidOperationException("No full XIC results are stored. Compute and save results before exporting a report.");
         FamilyStudyMembership.RequireCurrent(curation, manifest);
@@ -37,7 +37,18 @@ public static class ReportProjectExporter
         var options = new Homology.HomologyOptions();
         if (manifest.FamilyMapping != null) options.MinIdentity = manifest.FamilyMapping.MinIdentity;
         Data(2, "Attributing current families");
-        var families = familyResults ?? (curation.MyExtendedFastaItems.Count > 0 ? FamilyEnvelopeQuant.BuildFromCuration(rows, curation, options) : null);
+        var families = familyResults;
+        if (families == null && curation.MyExtendedFastaItems.Count > 0)
+        {
+            operation?.Report("report-primary-start", "Data step 2: primary homology lookup and search", 2, 8);
+            var hits = CurationHomologyCache.GetOrSearch(rows, curation, homologyCacheDirectory, options,
+                progress: hit => operation?.Report("report-primary-cache", hit
+                    ? "Data step 2: primary homology cache hit" : "Data step 2: primary homology cache miss", 2, 8),
+                cancellationToken: operation?.CancellationToken ?? default);
+            operation?.Report("report-primary-end", "Data step 2: primary homology lookup and search complete", 2, 8);
+            string? censusCacheDirectory = homologyCacheDirectory == null ? null : Path.Combine(homologyCacheDirectory, "source-census");
+            families = FamilyEnvelopeQuant.BuildFromAttribution(rows, FamilyEnvelopeQuant.AttributeHits(hits, curation), operation, censusCacheDirectory);
+        }
         Data(3, "Preparing current result tables");
         var grouping = manifest.FamilyRunShares == null ? null : FamilyReportThreshold.Build(manifest.FamilyRunShares, curation);
         var result = ReportCurrentResults.Build(data, manifest, families, manifest.FamilyRunShares?.Policy ?? SharedPeptidePolicy.FamilyUnique, grouping);
@@ -74,6 +85,8 @@ public static class ReportProjectExporter
             {
                 var section = replacements.GetValueOrDefault(original.Id) ?? original;
                 var blocks = section.Blocks.ToList();
+                if (section.Id == ReportSectionIds.Summary && EffectivePanelFamilyStudy.HasMultipleUserIds(curation))
+                    blocks.Add(new ReportParagraph("headline-family-unit", ReportEffectivePanelFamilies.UnitNotice));
                 if (section.Id == ReportSectionIds.Summary && curation.FamilyPanel == null)
                     blocks.Insert(0, new ReportParagraph("current-grouping-notice",
                         "Draft of the saved current grouping. No family panel is stored in this project. Group-specific, shared and unattributed signal remain separate; panel-based assignments can change both the grouping and its shared-signal fraction."));

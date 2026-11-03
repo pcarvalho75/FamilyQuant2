@@ -1,4 +1,5 @@
 using FamilyQuant.DeNovo;
+using FamilyQuant.Operations;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -311,6 +312,22 @@ namespace FamilyQuant
         /// runs the homology search once.</summary>
         public static FamilyEnvelopeQuantResult BuildFromAttribution(IEnumerable<QuantRow> rows,
                                                                      PeptideFamilyAttribution attribution)
+            => BuildFromAttribution(rows, attribution, null);
+
+        /// <summary>Builds the same result while reporting the independent source census searches.</summary>
+        public static FamilyEnvelopeQuantResult BuildFromAttribution(IEnumerable<QuantRow> rows,
+                                                                     PeptideFamilyAttribution attribution,
+                                                                     OperationContext? operation)
+            => BuildFromAttributionCore(rows, attribution, operation, null, false);
+
+        /// <summary>Builds report data using a separately keyed cache for the source census.</summary>
+        public static FamilyEnvelopeQuantResult BuildFromAttribution(IEnumerable<QuantRow> rows,
+                                                                     PeptideFamilyAttribution attribution,
+                                                                     OperationContext? operation, string? censusCacheDirectory)
+            => BuildFromAttributionCore(rows, attribution, operation, censusCacheDirectory, true);
+
+        private static FamilyEnvelopeQuantResult BuildFromAttributionCore(IEnumerable<QuantRow> rows,
+            PeptideFamilyAttribution attribution, OperationContext? operation, string? censusCacheDirectory, bool cacheCensus)
         {
             if (rows == null) throw new ArgumentNullException(nameof(rows));
             if (attribution == null) throw new ArgumentNullException(nameof(attribution));
@@ -335,9 +352,13 @@ namespace FamilyQuant
             // The threshold this attribution stood on, so the chart's heading can state it and a reader can
             // tell whether the figure and a census run at another identity are comparable at all.
             result.IdentityThreshold = attribution.IdentityThreshold;
-            result.SourceSequenceSummary = BuildSourceSequenceSummary(
+            FamilySourceSequenceSummary Census() => BuildSourceSequenceSummary(
                 rowList, attribution.Database, attribution.TargetItems, attribution.EffectiveOptions,
-                attribution.IdentifiedOptions, attribution.FamilyDescriptions);
+                attribution.IdentifiedOptions, attribution.FamilyDescriptions, operation);
+            result.SourceSequenceSummary = cacheCensus
+                ? FamilySourceCensusCache.GetOrCompute(rowList, attribution.Database, attribution.TargetItems,
+                    attribution.EffectiveOptions, attribution.IdentifiedOptions, attribution.FamilyDescriptions, censusCacheDirectory, operation, Census)
+                : Census();
             return result;
         }
 

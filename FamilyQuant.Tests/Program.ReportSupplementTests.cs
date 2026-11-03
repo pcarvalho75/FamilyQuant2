@@ -87,11 +87,18 @@ internal static partial class Program
                 Check("supplement bytes do not depend on " + name, first == null || first.SequenceEqual(bytes));
                 first ??= bytes;
                 var contents = ReadSupplement(bytes);
-                Check("one complete data sheet per supplied table plus Contents under " + name, contents.Count == fixture.Sheets.Length + 1 && contents.ContainsKey("Contents"));
+                Check("one data sheet per supplied table plus declared list sheets and Contents under " + name,
+                    contents.Count == fixture.Sheets.Length + fixture.Sheets.Sum(s => s.Table.ListColumns.Count) + 1 && contents.ContainsKey("Contents"));
                 foreach (var sheet in fixture.Sheets)
                 {
                     var expected = new[] { sheet.Table.Columns.ToArray() }.Concat(sheet.Table.Rows.Select(row => row.ToArray())).ToArray();
-                    Check(sheet.Name + " cells equal their program CSV under " + name, contents[sheet.Name].Length == expected.Length
+                    foreach (var column in sheet.Table.ListColumns)
+                    {
+                        string listName = contents["Contents"].Skip(1).Single(r => r[2] == sheet.Table.Title + " - " + column.Name + " items")[0];
+                        for (int row = 0; row < column.Items.Count; row++) expected[row + 1][column.ColumnIndex] = column.Items[row].Count.ToString(CultureInfo.InvariantCulture)
+                            + " items; sheet '" + listName + "'";
+                    }
+                    Check(sheet.Name + " cells retain native values except declared list references under " + name, contents[sheet.Name].Length == expected.Length
                         && contents[sheet.Name].Zip(expected).All(pair => pair.First.SequenceEqual(pair.Second)));
                 }
             }

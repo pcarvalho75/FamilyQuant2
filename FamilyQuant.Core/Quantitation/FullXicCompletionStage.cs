@@ -93,6 +93,15 @@ namespace FamilyQuant
                 }
                 Study(8, "Unobserved-family status");
                 if (options.FamilyCuration != null) FamilyUnobservedStudies.Store(options.FamilyCuration, manifest);
+                if (options.FamilyCuration != null && familyHits != null)
+                {
+                    try { EffectivePanelFamilyStudy.StoreIfNeeded(manifest, assigned, familyHits, options.FamilyCuration); }
+                    catch (ArgumentException ex)
+                    {
+                        manifest.EffectivePanelFamilies = null;
+                        result.Notes.Add("Effective panel-family studies unavailable: " + ex.Message);
+                    }
+                }
             }
             else
             {

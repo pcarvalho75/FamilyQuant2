@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Text.Json;
+using FamilyQuant.Evidence;
 
 namespace FamilyQuant.Report;
 
@@ -72,6 +74,35 @@ public static class ReportMethods
         blocks.Add(new ReportTable("methods-rules", "Search and quantitation rules", new[] { "Setting", "Stored value" }, rows,
             "These are the settings recorded with the computation. Missing settings are not replaced by current defaults."));
 
+        if (curation.FamilyPanel is { } panel && panel.EvidenceLinks.Count > 0)
+        {
+            string definition = PanelEvidenceClassifier.DefinitionFingerprint(panel);
+            string Context(string? architecture)
+            {
+                if (string.IsNullOrEmpty(architecture)) return "Any observed combination";
+                try { return string.Join(" + ", JsonSerializer.Deserialize<string[]>(architecture) ?? Array.Empty<string>()); }
+                catch (JsonException) { return architecture; }
+            }
+            string Family(string? key)
+            {
+                if (key == null) return "Leave outside panel";
+                string? name = panel.Families.FirstOrDefault(f => f.Key == key)?.DisplayName;
+                return string.IsNullOrWhiteSpace(name) ? key : name;
+            }
+            var links = panel.EvidenceLinks.OrderBy(link => link.SourceFamily, StringComparer.Ordinal)
+                .ThenBy(link => link.ArchitectureKey, StringComparer.Ordinal).Select(link => (IReadOnlyList<string>)new[]
+                {
+                    link.SourceFamily ?? string.Empty, Context(link.ArchitectureKey),
+                    Family(link.PanelFamilyKey),
+                    link.Source ?? string.Empty,
+                    link.PanelDefinitionFingerprint != definition ? "Panel definition changed" :
+                        link.PanelFamilyKey != null && !panel.Families.Any(f => f.Key == link.PanelFamilyKey) ? "Panel family missing" : "Confirmed",
+                }).ToArray();
+            blocks.Add(new ReportTable("methods-panel-links", "Saved panel link choices",
+                new[] { "Source family", "Domain combination", "Panel family choice", "User note", "Status" }, links,
+                "These are the user's saved choices and notes. A changed panel definition makes a choice out of date; a choice does not prove an assignment was applied."));
+        }
+
         var deNovoRows = manifest.DeNovoInputs.OrderBy(i => i.SourceId, StringComparer.Ordinal).ThenBy(i => i.FilePath, StringComparer.Ordinal)
             .Select(i => (IReadOnlyList<string>)new[] { i.SourceDisplayName, i.ConfidenceField, Number(i.MinimumConfidence),
                 Number(i.SourcePriority), Number(i.RawRows), Number(i.RowsPassingSourceFilter), i.FilePath }).ToArray();
@@ -96,6 +127,8 @@ public static class ReportMethods
         blocks.Add(new ReportParagraph("methods-unavailable", "An unavailable measurement is not a zero. Abundance and the number of supported database entries describe different properties. User-written interpretation appears separately."));
         rows = new List<IReadOnlyList<string>>();
         if (manifest.FamilyRunShares is { } runStudy) Add("Per-run composition and statistics", runStudy.Method);
+        if (manifest.EffectivePanelFamilies is { } effective) Add("Effective panel-family studies", effective.Method
+            + " Source membership SHA-256: " + effective.MembershipSha256 + ". Panel-map SHA-256: " + effective.PanelMapSha256 + ".");
         if (manifest.FamilyProteinCounts is { } proteinStudy) Add("Database-protein diversity", proteinStudy.Method);
         if (manifest.FamilySubclassParts is { } subclassStudy) Add("Pooled subclass allocation", subclassStudy.Method);
         if (manifest.FamilyDomainParts is { } domainStudy) Add("Pooled domain and mature-product allocation", domainStudy.Method);

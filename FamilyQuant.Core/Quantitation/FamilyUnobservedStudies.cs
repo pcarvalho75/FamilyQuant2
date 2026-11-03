@@ -65,13 +65,13 @@ public static class FamilyUnobservedStudies
         return new(shares, counts);
     }
 
-    private static FamilyRunShareSummary ZeroShare(int id, IReadOnlyList<FamilyRunTotal> totals)
+    internal static FamilyRunShareSummary ZeroShare(int id, IReadOnlyList<FamilyRunTotal> totals)
     {
         static bool Positive(double value) => double.IsFinite(value) && value > 0;
         static double? Zero(bool available) => available ? 0 : null;
         int available = totals.Count(t => Positive(t.AssignedSignal));
-        bool measured = totals.All(t => Positive(t.MeasuredSignal));
-        bool tic = totals.All(t => t.TotalIonCurrent.HasValue && Positive(t.TotalIonCurrent.Value));
+        bool measured = totals.Count > 0 && totals.All(t => Positive(t.MeasuredSignal));
+        bool tic = totals.Count > 0 && totals.All(t => t.TotalIonCurrent.HasValue && Positive(t.TotalIonCurrent.Value));
         return new()
         {
             FamilyUserId = id, NoPeptideObserved = true, AvailableRunCount = available,

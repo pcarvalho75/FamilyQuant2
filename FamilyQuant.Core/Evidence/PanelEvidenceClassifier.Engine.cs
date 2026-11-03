@@ -13,6 +13,11 @@ namespace FamilyQuant.Evidence;
 /// combinations to that data. Conflicting links require a saved user choice, never a vote or a name rule.</summary>
 public static partial class PanelEvidenceClassifier
 {
+    public const int MaximumLinkNoteLength = 512;
+
+    public static bool IsValidLinkNote(string? note) => note == null || note.Length <= MaximumLinkNoteLength
+        && !note.Any(c => char.IsControl(c) || char.GetUnicodeCategory(c) is UnicodeCategory.LineSeparator or UnicodeCategory.ParagraphSeparator);
+
     internal sealed record Resolution(string? Family, string Code, string Reason, IReadOnlyList<string>? LinkKeys = null, bool Confirmed = false);
 
     public static List<NeighbourReference> References(FamilyClusterFile file, EvidenceClassificationOptions options) =>
@@ -40,7 +45,7 @@ public static partial class PanelEvidenceClassifier
                 throw new InvalidOperationException("Run the reviewed-neighbour search again to record all equally close references for panel assignment.");
             if (search.MinQueryAlignedPercent != options.MinQueryAlignedPercent)
                 throw new InvalidOperationException("Run the reviewed-neighbour search with the current query-residue coverage gate.");
-            EvidenceApply.ValidateSearch(file, search, used, options, null);
+            EvidenceApply.ValidateSearch(file, search, used, options, null, allowPanelReferences: true);
         }
         var neighbours = search?.ByQuery() ?? new Dictionary<string, NearestNeighbour>(StringComparer.Ordinal);
         var links = BuildLinks(panel, used, options);
@@ -121,6 +126,7 @@ public static partial class PanelEvidenceClassifier
                 Key = pair.Key, SourceFamily = pair.Value.SourceFamily, ArchitectureKey = pair.Value.Architecture,
                 CandidateFamilyKeys = candidates, SupportingAccessions = pair.Value.Accessions.Order(StringComparer.Ordinal).ToArray(),
                 IsConfirmed = current, SelectedFamilyKey = current ? choice!.PanelFamilyKey : candidates.Length == 1 ? candidates[0] : null,
+                SourceNote = current ? choice!.Source ?? string.Empty : string.Empty,
             };
         }).ToArray();
 
@@ -162,6 +168,9 @@ public static partial class PanelEvidenceClassifier
             throw new ArgumentException("A source context may be confirmed only once per update.", nameof(selections));
         foreach (var selection in selections)
         {
+            if (!IsValidLinkNote(selection.Source))
+                throw new ArgumentException("A link note must be a single line of at most "
+                    + MaximumLinkNoteLength.ToString(CultureInfo.InvariantCulture) + " characters.", nameof(selections));
             if (!known.TryGetValue(selection.LinkKey, out var link)
                 || (selection.PanelFamilyKey != null && !link.CandidateFamilyKeys.Contains(selection.PanelFamilyKey, StringComparer.Ordinal)))
                 throw new ArgumentException("A selected link is outside its evidence-derived candidates.", nameof(selections));
@@ -171,7 +180,7 @@ public static partial class PanelEvidenceClassifier
                 SourceFamily = link.SourceFamily, ArchitectureKey = link.ArchitectureKey,
                 PanelFamilyKey = selection.PanelFamilyKey, PanelDefinitionFingerprint = DefinitionFingerprint(panel),
                 SupportingAccessions = link.SupportingAccessions.ToList(),
-                Source = selection.Source,
+                Source = selection.Source ?? string.Empty,
             });
         }
         copy.EvidenceLinks = copy.EvidenceLinks.OrderBy(c => LinkKey(c.SourceFamily, c.ArchitectureKey), StringComparer.Ordinal).ToList();

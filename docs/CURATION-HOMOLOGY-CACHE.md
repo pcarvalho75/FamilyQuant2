@@ -21,6 +21,16 @@ query list, indices and offsets, and reconstructs the homology database. This ke
 position studies and family attribution on the same hit set. The cache version must
 be advanced if the search or localization semantics change.
 
+Reports also keep a separate disposable source-census cache in the
+`familyquant_fullxic_cache/source-census` folder. Its key includes the full stored
+rows, including each caller's original sequence and source identifiers, the ordered
+protein set, family assignments and descriptions, and both census search options.
+Consequently a census hit does not replace the independent source-specific searches
+with the primary attribution hits. The key is checked again before a cached result
+is used or a newly computed result is published. An invalid or unavailable entry
+falls back to the normal census computation. Advance its format version whenever
+source-claim selection, search, mapping or serialization semantics change.
+
 The test-only `--measure-curation-hit-cache <project-copy.fqproj> <new-output-folder>`
 command opens the given copy twice with a private cache, records attribution times,
 compares the composition CSV and stored run-share bytes, and checks the project hash
