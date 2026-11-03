@@ -1,6 +1,7 @@
 using FamilyQuant.Evidence;
 using FamilyQuant.Operations;
 using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -24,14 +25,15 @@ public static class EvidenceFetchSession
     public const string EvidenceStage = "Protein evidence";
 
     public static Task<EvidenceFetchOutcome> FetchAsync(FamilyClusterFile file, HttpMessageHandler? handler = null,
-        IProgress<FetchProgress>? progress = null, CancellationToken cancellationToken = default) =>
-        FetchStagedAsync(file, new OperationContext(cancellationToken), handler, progress);
+        IProgress<FetchProgress>? progress = null, CancellationToken cancellationToken = default,
+        IReadOnlyCollection<string>? positionAccessions = null) =>
+        FetchStagedAsync(file, new OperationContext(cancellationToken), handler, progress, positionAccessions);
 
     public static Task<EvidenceFetchOutcome> FetchAsync(FamilyClusterFile file, OperationContext operation,
-        HttpMessageHandler? handler = null) => FetchStagedAsync(file, operation, handler, null);
+        HttpMessageHandler? handler = null, IReadOnlyCollection<string>? positionAccessions = null) => FetchStagedAsync(file, operation, handler, null, positionAccessions);
 
     private static async Task<EvidenceFetchOutcome> FetchStagedAsync(FamilyClusterFile file, OperationContext operation,
-        HttpMessageHandler? handler, IProgress<FetchProgress>? progress)
+        HttpMessageHandler? handler, IProgress<FetchProgress>? progress, IReadOnlyCollection<string>? positionAccessions)
     {
         ArgumentNullException.ThrowIfNull(file);
         ArgumentNullException.ThrowIfNull(operation);
@@ -57,7 +59,7 @@ public static class EvidenceFetchSession
         var stagedEvidence = staged.MyExtendedFastaItems.Select(p => p.Evidence).ToArray();
         operation.ThrowIfCancellationRequested();
         var evidence = await EvidenceFetcher.FetchAsync(staged, handler,
-            new FetchStageProgress(operation, EvidenceStage, progress), operation.CancellationToken).ConfigureAwait(false);
+            new FetchStageProgress(operation, EvidenceStage, progress), operation.CancellationToken, positionAccessions).ConfigureAwait(false);
         ReferencePanel? panel = null;
         if (ReferencePanelFetcher.FamiliesFound(staged).Count > 0)
         {

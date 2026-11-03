@@ -72,6 +72,7 @@ public sealed class FamilyPanelImport
     public string SourceName { get; set; } = string.Empty;
     public string SourceSha256 { get; set; } = string.Empty;
     public string FamilySheet { get; set; } = string.Empty;
+    public int HeaderRowNumber { get; set; } = 1;
     public string SubclassSheet { get; set; } = string.Empty;
     public string LevelSheet { get; set; } = string.Empty;
     public Dictionary<string, string> ColumnHeaders { get; set; } = new();

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json.Serialization;
@@ -38,13 +38,13 @@ namespace FamilyQuant
                     string.Equals(r.Run, run.Run, StringComparison.OrdinalIgnoreCase))).ToList();
                 if (rows.Any(r => r == null))
                     throw new ArgumentException("Each family must have a row for every run.", nameof(source));
-                bool complete = rows.All(r => r!.ShareOfAssignedSignal != null) && (rows.Count > 0 || run.AssignedSignal > 0);
+                bool complete = run.AssignedSignal > 0 && rows.All(r => r!.ShareOfAssignedSignal != null);
                 result.OthersRuns.Add(new FamilyRunShare
                 {
                     Run = run.Run,
                     Signal = rows.Where(r => r != null).Sum(r => r!.Signal),
                     ShareOfAssignedSignal = complete ? rows.Sum(r => r!.ShareOfAssignedSignal!.Value) : null,
-                    ShareOfMeasuredSignal = rows.All(r => r?.ShareOfMeasuredSignal != null)
+                    ShareOfMeasuredSignal = run.MeasuredSignal > 0 && rows.All(r => r?.ShareOfMeasuredSignal != null)
                         ? rows.Sum(r => r!.ShareOfMeasuredSignal!.Value) : null
                 });
             }
