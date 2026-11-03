@@ -398,7 +398,8 @@ namespace FamilyQuant
             HomologyDatabase database = HomologyDatabase.Build(sample.MyExtendedFastaItems ?? new List<FastaItemExtended>());
             var options = new HomologyOptions { TopHitsPerPeptide = int.MaxValue, BestScoreOnly = true };
             Dictionary<string, HomologyResult> holders = HomologyMapper.Search(
-                    pairs.Values.Select(p => p.Identified).Distinct(StringComparer.Ordinal), database, options, operation)
+                    pairs.Values.Select(p => p.Identified).Distinct(StringComparer.Ordinal), database, options, operation,
+                    progressStage: "world-known-holder-queries", progressLabel: "Known-answer holders searched", progressBatchSize: 128)
                 .Where(r => !r.IsRejected).ToDictionary(r => r.NormalizedPeptide, StringComparer.Ordinal);
             foreach (FamilyWorldKnownAnswer pair in pairs.Values)
             {
@@ -435,7 +436,8 @@ namespace FamilyQuant
             List<FamilyWorldKnownAnswer> known = answers.Where(a => a.IsKnown).ToList();
             List<string> searched = known.Select(a => a.Tag).Where(t => t.Length >= options.MinimumTagLength).Distinct(StringComparer.Ordinal).ToList();
             var credits = new Dictionary<string, FamilyWorldCredit>(StringComparer.Ordinal);
-            foreach (HomologyResult r in HomologyMapper.Search(searched, withoutSpecies.Database, options.SearchOptions(), operation))
+            foreach (HomologyResult r in HomologyMapper.Search(searched, withoutSpecies.Database, options.SearchOptions(), operation,
+                progressStage: "world-known-credit-queries", progressLabel: "Known-answer tags searched", progressBatchSize: 128))
                 credits[r.IsRejected ? r.Peptide : r.NormalizedPeptide] = withoutSpecies.Credit(r, creditable, options.MinimumTagLength);
             foreach (FamilyWorldKnownAnswer a in known)
                 a.Credit = a.Tag.Length < options.MinimumTagLength

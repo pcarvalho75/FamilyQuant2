@@ -1,4 +1,5 @@
 using FamilyQuant.DeNovo;
+using FamilyQuant.Operations;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -30,7 +31,7 @@ namespace FamilyQuant
     {
         internal static FullXicSourceInput Read(
             string deNovoDirectory, List<PatternLabPsm> psms, DeNovoFilterCriteria criteria,
-            IReadOnlyList<DeNovoSourceSelection> selections, Action<string>? progress)
+            IReadOnlyList<DeNovoSourceSelection> selections, Action<string>? progress, OperationContext? operation = null)
         {
             var result = new FullXicSourceInput();
             if (selections == null || selections.Count == 0)
@@ -44,6 +45,8 @@ namespace FamilyQuant
             var peaksDatabase = new List<PeaksDatabasePsm>();
             var rowsBySource = new Dictionary<string, List<PeaksDeNovoRow>>(StringComparer.OrdinalIgnoreCase);
             int rawRows = 0;
+            int sourceIndex = 0;
+            operation?.Report("denovo-source", "Reading de novo sources", 0, selections.Count);
 
             // Each source is read with its own glob and its own confidence column, then concatenated: a
             // single source reproduces the baseline; a union (de novo all + DeepNovo) reads both globs
@@ -51,18 +54,24 @@ namespace FamilyQuant
             foreach (DeNovoSourceSelection selection in selections)
             {
                 DeNovoSource source = selection.Source;
+                operation?.Report("denovo-source", "Source " + (++sourceIndex).ToString(CultureInfo.InvariantCulture) + " of "
+                    + selections.Count.ToString(CultureInfo.InvariantCulture) + ": " + source.DisplayName, sourceIndex, selections.Count);
                 progress?.Invoke("Reading the " + source.DisplayName + " export (" + source.FileGlob +
                     ") under " + deNovoDirectory + "; " + selection.CutoffLabel + "...");
 
                 if (!rowsBySource.TryGetValue(source.Id, out List<PeaksDeNovoRow>? sourceRows))
                     rowsBySource[source.Id] = sourceRows = new List<PeaksDeNovoRow>();
 
-                foreach (string csv in DeNovoSourceFileDiscovery.RequireFiles(
-                    deNovoDirectory, source))
+                var files = DeNovoSourceFileDiscovery.RequireFiles(deNovoDirectory, source);
+                int fileIndex = 0;
+                operation?.Report("denovo-file:" + source.Id, "Reading source files: " + source.DisplayName, 0, files.Count);
+                foreach (string csv in files)
                 {
+                    operation?.Report("denovo-file:" + source.Id, "File " + (++fileIndex).ToString(CultureInfo.InvariantCulture) + " of "
+                        + files.Count.ToString(CultureInfo.InvariantCulture) + ": " + Path.GetFileName(csv), fileIndex, files.Count);
                     List<PeaksDeNovoRow> read = PeaksCsvReader.Read(csv, source);
                     List<PeaksDeNovoRow> accepted = DeNovoFilter.Apply(
-                        read, criteria, selection.MinimumConfidence);
+                        read, criteria, selection.MinimumConfidence, operation, "denovo-rows:" + source.Id + ":" + csv);
                     rawRows += read.Count;
                     sourceRows.AddRange(read);
                     result.AllSourceRows.AddRange(read);
@@ -81,8 +90,10 @@ namespace FamilyQuant
                     });
                 }
 
+                operation?.Report("source-score:" + source.Id, "Preparing source score distribution: " + source.DisplayName, 0, 1);
                 result.SourceScoreDistributions.Add(DeNovoSourceScoreDistributionStudy.Build(
                     sourceRows, selection, criteria));
+                operation?.Report("source-score:" + source.Id, "Source score distribution prepared: " + source.DisplayName, 1, 1);
             }
 
             // Canonicalize file provenance from the parsed rows themselves. The inline records above
@@ -90,11 +101,16 @@ namespace FamilyQuant
             // partially populated input list from travelling beside a complete multi-source distribution.
             // The presentation validator remains fail-closed and will still reject a configured source
             // whose export is genuinely absent.
+            operation?.Report("source-study", "Preparing source studies", 0, 10);
+            void Study(int index, string title) => operation?.Report("source-study", "Source study "
+                + index.ToString(CultureInfo.InvariantCulture) + " of 10: " + title, index, 10);
+            Study(1, "Input provenance");
             RebuildObservedInputManifests(result, rowsBySource, selections, criteria);
 
             // A single source may use the legacy presentation record. In a union it remains the PRIMARY
             // source's distribution only: ALC and SCORE are never pooled into one histogram.
             DeNovoSourceSelection primary = selections.OrderBy(s => s.Priority).First();
+            Study(2, "Primary-source score distribution");
             if (rowsBySource.TryGetValue(primary.Source.Id, out List<PeaksDeNovoRow>? primaryRows))
             {
                 var primaryCriteria = new DeNovoFilterCriteria
@@ -113,6 +129,7 @@ namespace FamilyQuant
             // exports, before the >=80 quantitation filters and before union resolution. That population
             // is stored with the result and labelled explicitly by the chart/export; it is a caller-
             // consistency audit, not an accuracy estimate and not the quantified-tier denominator.
+            Study(3, "Caller agreement");
             if (rowsBySource.TryGetValue(DeNovoSource.DeNovoAll.Id,
                     out List<PeaksDeNovoRow>? peaksAllRows)
                 && rowsBySource.TryGetValue(DeNovoSource.DeepNovo.Id,
@@ -128,16 +145,22 @@ namespace FamilyQuant
             // Resolve after every source has passed its own cutoff. This yields exactly one sequence label
             // per extraction key while retaining all alternate source evidence on the winner.
             result.AcceptedSourceRows.AddRange(filtered);
+            Study(4, "Precursor union resolution");
             filtered = DeNovoUnionResolver.Resolve(filtered, selections);
 
+            Study(5, "Database-search exports");
             foreach (string csv in Directory
                 .GetFiles(deNovoDirectory, "db.psms.csv", SearchOption.AllDirectories)
                 .OrderBy(f => f, StringComparer.Ordinal))
                 peaksDatabase.AddRange(PeaksDatabasePsmReader.Read(csv));
 
+            Study(6, "Reconciliation with identifications");
             List<ReconciledRow> reconciliation = DeNovoReconciler.Reconcile(filtered, psms);
+            Study(7, "Source overlap");
             result.Overlap = DeNovoOverlapStudy.Build(rawRows, reconciliation, criteria);
+            Study(8, "De novo identification status");
             result.IdentificationSummary = DeNovoIdentificationStudy.Build(filtered, reconciliation);
+            Study(9, "Identification concordance");
             result.IdentificationConcordance = IdentificationConcordanceStudy.Build(
                 psms, peaksDatabase, filtered);
 
@@ -145,6 +168,7 @@ namespace FamilyQuant
             // independently run source variants. Tier A uses each caller's accepted source rows before
             // precursor union; tier B follows the source provenance attached to union-resolved rows that
             // survived PatternLab reconciliation as additional hypotheses.
+            Study(10, "Source membership");
             if (rowsBySource.TryGetValue(DeNovoSource.DenovoOnly.Id,
                     out List<PeaksDeNovoRow>? peaksOnlyRows)
                 && rowsBySource.TryGetValue(DeNovoSource.DeepNovo.Id,
