@@ -9,7 +9,11 @@ using System.Text;
 
 namespace FamilyQuant;
 
-public sealed record ShellProjectContent(FamilyClusterFile Curation, List<QuantRow> Rows, QuantManifest? Manifest);
+public sealed record ShellProjectContent(FamilyClusterFile Curation, List<QuantRow> Rows, QuantManifest? Manifest)
+{
+    /// <summary>Digest of the exact chosen family-file bytes parsed below; outside curation so Open preserves it.</summary>
+    public string DatabaseFileSha256 { get; init; } = string.Empty;
+}
 public sealed record ShellReannotationResult(int Updated, IReadOnlyList<string> Missing);
 
 /// <summary>Headless document operations used by shell commands. Existing numerical services retain their rules.</summary>
@@ -67,7 +71,20 @@ public static class ShellProjectOperations
 
     public static ShellProjectContent Read(string path, OperationContext? operation = null)
     {
-        if (!ProjectStore.IsProjectPath(path)) return new(FamilyClusterFile.Load(path, operation), new(), null);
+        if (!ProjectStore.IsProjectPath(path))
+        {
+            operation?.Report("document-read", "Opening family document");
+            byte[] bytes = File.ReadAllBytes(path);
+            operation?.ThrowIfCancellationRequested();
+            using var reader = new StreamReader(new MemoryStream(bytes), Encoding.UTF8, detectEncodingFromByteOrderMarks: true);
+            try
+            {
+                var file = FamilyClusterFile.FromJsonText(reader.ReadToEnd());
+                operation?.ThrowIfCancellationRequested();
+                return new(file, new(), null) { DatabaseFileSha256 = Convert.ToHexString(SHA256.HashData(bytes)).ToLowerInvariant() };
+            }
+            catch (InvalidDataException) { throw new InvalidDataException("\"" + path + "\" is not a valid Family Cluster File."); }
+        }
         var (curation, rows, manifest) = ProjectStore.ReadFqproj(path, operation);
         return new(curation, rows, manifest);
     }
