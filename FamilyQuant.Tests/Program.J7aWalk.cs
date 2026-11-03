@@ -30,7 +30,128 @@ internal static partial class Program
     [TestCommandTable]
     private static IEnumerable<TestCommand> J7aWalkCommands() =>
     [new("--j7a-walk", 10463, TestCommandPhase.Raw,
-        args => args.Length > 0 && args[0] == "--j7a-walk", (args, _) => J7aWalk(args))];
+        args => args.Length > 0 && args[0] == "--j7a-walk", (args, _) => J7aWalk(args)),
+     new("--j7a-report-probe", 10464, TestCommandPhase.Raw,
+        args => args.Length > 0 && args[0] == "--j7a-report-probe", (args, _) => J7aReportProbe(args)),
+     new("--j7b-walk", 10465, TestCommandPhase.Raw,
+        args => args.Length > 0 && args[0] == "--j7b-walk", (args, _) => J7bWalk(args))];
+
+    // J7b through the shell: open the project, show Families and export its composition and protein table, then, when an
+    // interpretation file is given, File > Report details writes it into the written-interpretation field (the other
+    // fields kept) and File > Save as writes the new project.
+    private static int J7bWalk(string[] args)
+    {
+        if (args.Length is not (3 or 5)) throw new ArgumentException("Use --j7b-walk <project.fqproj> <new-output> [interpretation.txt output.fqproj].");
+        string output = Path.GetFullPath(args[2]); Directory.CreateDirectory(output);
+        string logPath = Path.Combine(output, "j7b-walk.log");
+        if (!NativeProofDesktop.IsPrivate) return NativeProofDesktop.Run(args, logPath, 14_400_000);
+        using var log = new StreamWriter(logPath, append: true) { AutoFlush = true };
+        var previousOut = Console.Out; Console.SetOut(log); Console.SetError(log);
+        void Say(string text) => Console.WriteLine(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture) + " " + text);
+        MainWindow? shell = null; string? savePath = null;
+        try
+        {
+            EnsureApplication();
+            SynchronizationContext.SetSynchronizationContext(new DispatcherSynchronizationContext(Dispatcher.CurrentDispatcher));
+            MainWindow.ShellSettingsPathOverride = Path.Combine(output, "shell-preferences.json");
+            MainWindow.UnsavedProjectChoiceOverride = () => UnsavedProjectChoice.Discard;
+            MainWindow.SelectSaveProjectPathOverride = () => savePath;
+            ShellMessages.Presenter = (_, message) => { Say("Shell message: " + message.Text.Replace("\n", " | ")); return MessageBoxResult.OK; };
+            Say("J7b walk: " + args[1] + " (" + TestFileHash.Upper(args[1]) + ")");
+            shell = new MainWindow { Left = -30000, Top = -30000, ShowActivated = false, ShowInTaskbar = false,
+                WindowStartupLocation = WindowStartupLocation.Manual, Width = 1440, Height = 1000 };
+            shell.Show(); PumpDispatcher();
+            if (!shell.OpenProjectPath(args[1])) throw new InvalidOperationException("The shell did not open the project.");
+            J7aWaitIdle(shell, TimeSpan.FromHours(2));
+            var families = J7aFamilies(shell);
+            J7aWait(() => families.FullXicReady.IsCompleted, TimeSpan.FromHours(2));
+            shell.NavigationModel.RequestNavigate(ShellDestination.Families); PumpDispatcher();
+            Say("Families displayed: " + (PresentationSource.FromVisual(families) != null) + "; status " + J7aStatus(shell));
+            J7aButtonExport(families, "ButtonExportComposition", Path.Combine(output, "FamilyQuant_family_composition.csv"), Say);
+            J7aButtonExport(families, "ButtonSaveReport", Path.Combine(output, "FamilyQuant_Report.csv"), Say);
+            if (args.Length == 5)
+            {
+                string text = File.ReadAllText(args[3], Encoding.UTF8).Replace("\r\n", "\n");
+                MainWindow.ReportDetailsPresenterOverride = editor =>
+                {
+                    editor.ViewModel.WrittenInterpretation = text;
+                    editor.SaveButton.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+                };
+                ((MenuItem)shell.FindName("MenuItemReportDetails")).RaiseEvent(new RoutedEventArgs(MenuItem.ClickEvent));
+                MainWindow.ReportDetailsPresenterOverride = null;
+                var details = families.fcf.ReportDetails;
+                Say("Report details now: title '" + details?.Title + "', interpretation " + (details?.WrittenInterpretation.Length ?? 0) + " characters, equal to the file "
+                    + (details?.WrittenInterpretation == text));
+                savePath = Path.GetFullPath(args[4]); Directory.CreateDirectory(Path.GetDirectoryName(savePath)!);
+                ApplicationCommands.SaveAs.Execute(null, shell);
+                J7aWait(() => string.Equals(shell.DocumentState.ProjectPath, savePath, StringComparison.OrdinalIgnoreCase)
+                    && !shell.DocumentState.IsModified && !shell.Operations.IsBusy, TimeSpan.FromMinutes(30));
+                Say("Saved " + savePath + " (" + new FileInfo(savePath).Length + " bytes; " + shell.DocumentState.SaveCheckText + ")");
+                var reread = ProjectStore.ReadFqproj(savePath).fcf.ReportDetails;
+                Say("Reopened interpretation equal: " + (reread?.WrittenInterpretation == text));
+            }
+            Say("J7b walk finished.");
+            return 0;
+        }
+        catch (Exception ex) { Say("FAILED " + ex); return 1; }
+        finally { shell?.Close(); Console.SetOut(previousOut); }
+    }
+
+    // Runs the report preparation Export report uses (ReportProjectExporter.Build on an owned STA thread) on a saved
+    // project, first with no window, then after the shell opened the project, and prints any exception in full.
+    private static int J7aReportProbe(string[] args)
+    {
+        if (args.Length != 3) throw new ArgumentException("Use --j7a-report-probe <project.fqproj> <new-output>.");
+        string output = Path.GetFullPath(args[2]); Directory.CreateDirectory(output);
+        string logPath = Path.Combine(output, "report-probe.log");
+        if (!NativeProofDesktop.IsPrivate) return NativeProofDesktop.Run(args, logPath, 14_400_000);
+        using var log = new StreamWriter(logPath, append: true) { AutoFlush = true };
+        var previousOut = Console.Out; Console.SetOut(log); Console.SetError(log);
+        void Say(string text) => Console.WriteLine(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture) + " " + text);
+        int failures = 0;
+        void Prepare(string label, IReadOnlyList<QuantRow> rows, QuantManifest manifest, FamilyClusterFile curation)
+        {
+            var snapshot = FamilyClusterFile.FromJsonText(curation.ToJsonText());
+            string folder = Path.Combine(output, label);
+            var watch = Stopwatch.StartNew();
+            try
+            {
+                Report.ReportProjectExport? prepared = null;
+                J7aWait(AppOperationFiles.RunSta(() => prepared = Report.ReportProjectExporter.Build(rows.ToArray(), manifest, snapshot, folder,
+                    snapshot.ReportDetails, snapshot.ReportInputProvenance)), TimeSpan.FromHours(2));
+                Say(label + ": prepared in " + watch.Elapsed.TotalSeconds.ToString("F0", CultureInfo.InvariantCulture) + " s; sections "
+                    + prepared!.Document.Sections.Count + ", supplement sheets " + prepared.SupplementSheets.Count + ", CSV exports " + prepared.CsvExports.Count);
+            }
+            catch (Exception ex) { failures++; Say(label + ": FAILED after " + watch.Elapsed.TotalSeconds.ToString("F0", CultureInfo.InvariantCulture) + " s: " + ex); }
+        }
+        try
+        {
+            EnsureApplication();
+            SynchronizationContext.SetSynchronizationContext(new DispatcherSynchronizationContext(Dispatcher.CurrentDispatcher));
+            var (file, rows, manifest) = ProjectStore.ReadFqproj(args[1]);
+            Say("Probe: " + args[1] + " (" + TestFileHash.Upper(args[1]) + "), " + rows.Count + " quant rows");
+            Prepare("a-no-window", rows, manifest, file);
+            MainWindow.ShellSettingsPathOverride = Path.Combine(output, "shell-preferences.json");
+            MainWindow.UnsavedProjectChoiceOverride = () => UnsavedProjectChoice.Discard;
+            ShellMessages.Presenter = (_, message) => { Say("Shell message: " + message.Text.Replace("\n", " | ")); return MessageBoxResult.OK; };
+            var shell = new MainWindow { Left = -30000, Top = -30000, ShowActivated = false, ShowInTaskbar = false,
+                WindowStartupLocation = WindowStartupLocation.Manual, Width = 1440, Height = 1000 };
+            shell.Show(); PumpDispatcher();
+            if (!shell.OpenProjectPath(args[1])) throw new InvalidOperationException("The shell did not open the project.");
+            J7aWaitIdle(shell, TimeSpan.FromHours(2));
+            var families = J7aFamilies(shell);
+            J7aWait(() => families.FullXicReady.IsCompleted, TimeSpan.FromHours(2));
+            var flags = System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic;
+            var heldRows = (List<QuantRow>)typeof(MainWindow).GetField("loadedQuant", flags)!.GetValue(shell)!;
+            var heldManifest = (QuantManifest)typeof(MainWindow).GetField("loadedManifest", flags)!.GetValue(shell)!;
+            Prepare("b-after-shell-open", heldRows, heldManifest, families.fcf);
+            shell.Close();
+            Say("Probe finished; failures " + failures);
+            return failures == 0 ? 0 : 1;
+        }
+        catch (Exception ex) { Say("PROBE FAILED " + ex); return 1; }
+        finally { Console.SetOut(previousOut); }
+    }
 
     private sealed class J7aConfig
     {
@@ -53,6 +174,8 @@ internal static partial class Program
         public string? Scope { get; set; }
         public Report.ReportDetails Details { get; set; } = new();
         public bool UseOwnCache { get; set; } = true;
+        public bool SkipRepeat { get; set; }
+        public bool SkipReport { get; set; }
     }
 
     private sealed class J7aSubclass
@@ -246,6 +369,7 @@ internal static partial class Program
 
             // Stage 6: reopen, Compute a second time, Sensitivity again; every stored number must repeat.
             string repeat = Stage("s6-repeat", "repeat.fqproj");
+            if (config.SkipRepeat) { Say("Stages 6 and 7 skipped by the configuration."); return 0; }
             if (!File.Exists(repeat))
             {
                 Open(results);
@@ -259,6 +383,7 @@ internal static partial class Program
             Timed("6d compare stored numbers");
 
             // Stage 7: File > Export report, every section ticked, then save the project with its export choices.
+            if (config.SkipReport) { Say("Stage 7 skipped by the configuration."); return differences == 0 ? 0 : 4; }
             string reportPath = Stage("s7-report", "Bothrops_jararaca_venom_report_draft.docx");
             string final = Stage("s7-report", "final.fqproj");
             if (!File.Exists(reportPath))
@@ -434,10 +559,15 @@ internal static partial class Program
         var model = analytics.ViewModel;
         foreach (var card in model.Cards) say("Results card: " + card.Title + " = " + card.Value + " (" + card.Detail + ")");
         say("Database gap: rows " + model.DatabaseGap.Rows.Count + "; " + model.DatabaseGap.Rules + " FASTA: " + model.DatabaseGap.FastaState);
+        foreach (var expander in J7aDescendants<Expander>(analytics).Where(x => (x.Header as string) == "Sensitivity")) expander.IsExpanded = true;
+        PumpDispatcher(); analytics.UpdateLayout(); PumpDispatcher();
         var sensitivity = J7aDescendants<FamilySensitivityControl>(analytics).FirstOrDefault();
         if (sensitivity != null)
         {
-            var calculate = (Button)sensitivity.FindName("CalculateCurrent");
+            // The section's buttons live in its own control template.
+            sensitivity.ApplyTemplate();
+            Button Part(string name) => (Button)sensitivity.Template.FindName(name, sensitivity);
+            var calculate = Part("CalculateCurrent");
             J7aWait(() => calculate.IsEnabled || !shell.Operations.IsBusy, TimeSpan.FromMinutes(5));
             if (calculate.IsEnabled)
             {
@@ -445,7 +575,7 @@ internal static partial class Program
                 J7aWait(() => !AppOperationHost.For(sensitivity).IsBusy && !shell.Operations.IsBusy, TimeSpan.FromHours(2));
             }
             say("Sensitivity: " + J7aProperty(sensitivity.ViewModel, "Status"));
-            J7aButtonExport(sensitivity, "ExportTable", Path.Combine(dir, "family_sensitivity.csv"), say);
+            J7aButtonExport(sensitivity, Part("ExportTable"), Path.Combine(dir, "family_sensitivity.csv"), say);
         }
         else say("Sensitivity section not found in Results.");
         foreach (var kind in Enum.GetValues<ResultsExportKind>())
@@ -512,17 +642,29 @@ internal static partial class Program
         if (!menu.IsEnabled) { say("Export " + menuName + " UNAVAILABLE: " + menu.ToolTip); return; }
         using var driver = new NativeOwnedDialogDriver(path);
         menu.RaiseEvent(new RoutedEventArgs(MenuItem.ClickEvent));
+        if (!J7aWaitOrGiveUp(() => driver.SawDialog || File.Exists(path), TimeSpan.FromSeconds(60)))
+        {
+            var families = J7aFamilies(shell);
+            say("Export " + menuName + ": no file dialog appeared within 60 s; composition button enabled " + ((Button)families.FindName("ButtonExportComposition")).IsEnabled
+                + " (" + ((Button)families.FindName("ButtonExportComposition")).ToolTip + "); has full XIC " + families.HasFullXic + "; status " + J7aStatus(shell));
+            return;
+        }
         J7aWait(() => File.Exists(path) && !shell.Operations.IsBusy || driver.TimedOut, TimeSpan.FromMinutes(20));
         say("Export " + menuName + " to " + path + ": dialog " + driver.SawDialog + ", written " + File.Exists(path)
             + (File.Exists(path) ? " (" + new FileInfo(path).Length + " bytes)" : ""));
     }
 
-    private static void J7aButtonExport(FrameworkElement screen, string buttonName, string path, Action<string> say)
+    private static void J7aButtonExport(FrameworkElement screen, string buttonName, string path, Action<string> say) =>
+        J7aButtonExport(screen, (Button)screen.FindName(buttonName), path, say);
+
+    private static void J7aButtonExport(FrameworkElement screen, Button button, string path, Action<string> say)
     {
-        var button = (Button)screen.FindName(buttonName);
+        string buttonName = button.Name.Length > 0 ? button.Name : Convert.ToString(button.Content, CultureInfo.InvariantCulture) ?? "button";
         if (!button.IsEnabled) { say("Export " + buttonName + " UNAVAILABLE: " + button.ToolTip); return; }
         using var driver = new NativeOwnedDialogDriver(path);
         button.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+        if (!J7aWaitOrGiveUp(() => driver.SawDialog || File.Exists(path), TimeSpan.FromSeconds(60)))
+        { say("Export " + buttonName + ": no file dialog appeared within 60 s."); return; }
         J7aWait(() => File.Exists(path) && !AppOperationHost.For(screen).IsBusy || driver.TimedOut, TimeSpan.FromMinutes(20));
         say("Export " + buttonName + " to " + path + ": dialog " + driver.SawDialog + ", written " + File.Exists(path)
             + (File.Exists(path) ? " (" + new FileInfo(path).Length + " bytes)" : ""));
@@ -567,6 +709,13 @@ internal static partial class Program
             PumpDispatcher(); Thread.Sleep(20);
         }
         PumpDispatcher();
+    }
+
+    private static bool J7aWaitOrGiveUp(Func<bool> done, TimeSpan timeout)
+    {
+        var watch = Stopwatch.StartNew();
+        while (!done() && watch.Elapsed < timeout) { PumpDispatcher(); Thread.Sleep(20); }
+        return done();
     }
 
     private static async Task J7aWaitAsync(Func<bool> done, TimeSpan timeout)
