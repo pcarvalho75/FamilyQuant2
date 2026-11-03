@@ -264,8 +264,17 @@ internal static class FeatureLedger
         return md.ToString().Replace("\r\n", "\n");
     }
 
+    /// <summary>Set to <see cref="ReceiptsReleaseOnlyValue"/>, quick gates skip the receipt-currency checks of the
+    /// ordinary suite, which hash every receipt's artifacts. The release check and every other guard always run.</summary>
+    internal const string ReceiptsVariable = "FAMILYQUANT_LEDGER_RECEIPTS";
+    internal const string ReceiptsReleaseOnlyValue = "release-only";
+    internal static bool ReceiptsReleaseOnly => string.Equals(Environment.GetEnvironmentVariable(ReceiptsVariable),
+        ReceiptsReleaseOnlyValue, StringComparison.Ordinal);
+
+    /// <param name="checkReceipts">False leaves out the receipt-currency check of VERIFIED rows (and the receipt
+    /// load it needs); every other check still runs.</param>
     internal static List<string> Validate(Inventory inventory, string markdown, bool requireClosed = false,
-        FeatureLedgerEvidence.Registry? evidenceOverride = null)
+        FeatureLedgerEvidence.Registry? evidenceOverride = null, bool checkReceipts = true)
     {
         var errors = new List<string>();
         string[][] rows = markdown.Split('\n').Where(s => s.StartsWith("| FQ15-", StringComparison.Ordinal))
@@ -278,7 +287,7 @@ internal static class FeatureLedger
         if (inventory.Observations.Select(r => r.Id).Distinct().Count() != inventory.Observations.Count) errors.Add("Duplicate scan ID.");
         var byId = inventory.Observations.GroupBy(r => r.Id).ToDictionary(g => g.Key, g => g.First());
         string? evidenceRoot = FeatureLedgerEvidence.FindRoot();
-        var evidence = evidenceOverride ?? (evidenceRoot != null && rows.Any(r => r.Length == 10 && r[7] == "VERIFIED")
+        var evidence = evidenceOverride ?? (checkReceipts && evidenceRoot != null && rows.Any(r => r.Length == 10 && r[7] == "VERIFIED")
             ? FeatureLedgerEvidence.Load(evidenceRoot, inventory) : null);
         foreach (string[] row in rows)
         {
@@ -301,7 +310,7 @@ internal static class FeatureLedger
             if (requireClosed && row[7] is not ("VERIFIED" or "APPROVED_DROP")) errors.Add("Release has an open row: " + row[1]);
             if (row[7] == "VERIFIED" && (row[8] == "pending" || row[8].Length < 12))
                 errors.Add("Verified row lacks behavioral evidence: " + row[1]);
-            if (row[7] == "VERIFIED" && evidence?.IsVerified(row[1], row[8]) != true)
+            if (checkReceipts && row[7] == "VERIFIED" && evidence?.IsVerified(row[1], row[8]) != true)
                 errors.Add("Verified row lacks a current executed receipt: " + row[1]);
         }
         foreach (SourceFile file in inventory.Files)

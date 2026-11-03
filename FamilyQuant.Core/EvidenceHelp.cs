@@ -14,8 +14,9 @@ namespace FamilyQuant
     public static class EvidenceHelp
     {
         public static string Build(LeaveOneOutResult? validation = null, IReadOnlyList<RouteScore>? routes = null,
-            string? routeFamily = null)
+            string? routeFamily = null, bool panelMode = false)
         {
+            if (panelMode) return PanelEvidenceHelp.Build();
             var options = new EvidenceClassificationOptions();
             var sb = new StringBuilder();
             sb.AppendLine("GROUPING BY EVIDENCE");

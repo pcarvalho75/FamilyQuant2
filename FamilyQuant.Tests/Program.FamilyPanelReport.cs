@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using FamilyQuant.Evidence;
 using FamilyQuant.Panels;
 using FamilyQuant.Report;
 
@@ -47,6 +48,17 @@ internal static partial class Program
                 new() { FamilyUserId = 22, GreedyProteinCount = 9 },
             } },
         };
+        file.MyExtendedFastaItems = file.ProteinSubclassLabels!.Select((label, index) => new FastaItemExtended
+        {
+            SequenceIdentifier = "report-target-" + index, UserID = label.FamilyUserId!.Value,
+            USearchID = label.FamilyUserId.Value, Sequence = "ACDEFGHIK",
+        }).ToList();
+        file.PanelProteinAssignments = file.ProteinSubclassLabels.Select((label, index) => new PanelProteinAssignment
+        {
+            ProteinIndex = index, Identifier = file.MyExtendedFastaItems[index].SequenceIdentifier,
+            FamilyUserId = label.FamilyUserId, PanelFamilyKey = label.PanelFamilyKey, IsApplied = true,
+        }).ToList();
+        MakePanelAssignmentsCurrent(file, new EvidenceClassificationOptions { ScopeTerms = new[] { "selected" } });
         var method = typeof(ReportPanelSections).GetMethod("BuildFromResults", new[] { typeof(FamilyClusterFile), typeof(QuantManifest) });
         Check("J6c builds from the project's typed stored results", method != null);
         var sections = method?.Invoke(null, new object[] { file, manifest }) as IReadOnlyList<ReportSection>;

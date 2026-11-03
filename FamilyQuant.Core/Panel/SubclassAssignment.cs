@@ -41,7 +41,7 @@ public static partial class SubclassAssignment
         {
             bool hasDomainRule = s.RequiredPfam.Count > 0 || s.AbsentPfam.Count > 0;
             bool architecture = hasDomainRule && domains.Count > 0
-                && (s.AbsentPfam.Count == 0 || evidence.Fragment != true)
+                && (s.AbsentPfam.Count == 0 || evidence.Fragment == false)
                 && s.RequiredPfam.All(domains.Contains) && s.AbsentPfam.All(d => !domains.Contains(d));
             bool subfamily = s.UniProtSubfamilies.Any(t => !string.IsNullOrWhiteSpace(t)
                 && rankedTexts.Contains(WithoutRankSuffix(t.Trim())));

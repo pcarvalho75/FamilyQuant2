@@ -47,9 +47,11 @@ public static partial class SubclassAssignment
         PanelAssignmentEvidenceStore.RequireCurrent(file);
         string panel = PanelDerivedDataCurrentness.Fingerprint(file.FamilyPanel!);
         string before = SourceFingerprint(file, file.EvidenceRecipe!.Options, panel);
-        var result = MeasureLeaveOneOutCandidate(file, file.EvidenceRecipe.Options, operation);
+        var resolver = PanelEvidenceClassifier.CreateCurrentResolver(file);
+        var result = MeasureLeaveOneOutCore(file, file.EvidenceRecipe.Options, operation, resolver);
         PanelAssignmentEvidenceStore.RequireCurrent(file);
         if (result.SourceFingerprint != before
+            || !resolver.IsCurrent(file)
             || SourceFingerprint(file, file.EvidenceRecipe!.Options, PanelDerivedDataCurrentness.Fingerprint(file.FamilyPanel!)) != before)
             throw new InvalidOperationException("Subclass inputs changed during the leave-one-out measurement.");
         return result;
@@ -61,12 +63,15 @@ public static partial class SubclassAssignment
         MeasureLeaveOneOutCandidate(file, options, null);
 
     public static SubclassLeaveOneOutResult MeasureLeaveOneOutCandidate(FamilyClusterFile file, EvidenceClassificationOptions options,
-        OperationContext? operation)
+        OperationContext? operation) => MeasureLeaveOneOutCore(file, options, operation, null);
+
+    private static SubclassLeaveOneOutResult MeasureLeaveOneOutCore(FamilyClusterFile file, EvidenceClassificationOptions options,
+        OperationContext? operation, PanelFamilyResolver? resolver)
     {
         ArgumentNullException.ThrowIfNull(file);
         ArgumentNullException.ThrowIfNull(options);
         // Validate panel, assignments and target identities before identifying the scored cohort.
-        var baseline = BuildCandidateCore(file, options, operation, new HashSet<int>());
+        var baseline = BuildCandidateCore(file, options, operation, new HashSet<int>(), resolver);
         var baselineRows = baseline.Labels.ToDictionary(r => r.ProteinIndex);
         var panel = file.FamilyPanel!;
         var families = panel.Families.ToDictionary(f => f.Key, StringComparer.Ordinal);
@@ -86,7 +91,7 @@ public static partial class SubclassAssignment
             if (expected.Status == ProteinSubclassStatus.Assigned && expected.SubclassKey != null)
                 truth.Add(assignment.ProteinIndex, (familyKey, expected.SubclassKey));
         }
-        var candidate = BuildCandidateCore(file, options, operation, truth.Keys.ToHashSet());
+        var candidate = BuildCandidateCore(file, options, operation, truth.Keys.ToHashSet(), resolver);
         if (candidate.SourceFingerprint != baseline.SourceFingerprint || candidate.PanelFingerprint != baseline.PanelFingerprint)
             throw new InvalidOperationException("Subclass inputs changed during the leave-one-out measurement.");
         var byIndex = candidate.Labels.ToDictionary(r => r.ProteinIndex);
