@@ -73,6 +73,9 @@ internal static partial class Program
             int[] positions = phases.Select(stage => p.Events.FindIndex(e => e.Stage == stage)).ToArray();
             return positions.All(i => i >= 0) && positions.Zip(positions.Skip(1), (a, b) => a < b).All(x => x);
         }));
+        Check("J32 substeps retain the overall report progress fraction", new[] { coldProgress, warmProgress }.All(p =>
+            p.Events.Where(e => phases.Contains(e.Stage) || e.Stage == "report-primary-cache")
+                .All(e => e.Completed == 2 && e.Total == 8)));
         Check("J32 warm report CSV data equal cold report CSV data", cold.CsvExports.Count == warm.CsvExports.Count
             && cold.CsvExports.All(kv => warm.CsvExports.TryGetValue(kv.Key, out string? value) && value == kv.Value));
         Check("J32 report CSV data also equal the original uncached search path", fresh.CsvExports.Count == warm.CsvExports.Count

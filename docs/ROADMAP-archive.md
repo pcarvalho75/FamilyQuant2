@@ -299,6 +299,7 @@ Finished steps, moved here from docs/ROADMAP.md. The board shows them as green.
 | J25 | The panel's reporting unit (J22 GAP R7): one compact line per reported family, its signal share followed by the protein count in parentheses, naming the denominator and labelling the count as the greedy database-protein estimate (never as toxins or genes); abundance and diversity stay separate and the whole-measured share stays | L | 0.5 | 🟢 | J7c | Red then green: a fixture report prints the paired line with the same stored values as the headline table and the count exports | T1 | | 0 | 0 | |
 | J26 | One Others rule across the whole Word file (J22 GAP R11): every quantitative table and panel-family brief uses the canonical Others membership, so named rows under the threshold appear only in the supplement's Others list; panel reference text stays | M | 1 | 🟢 | J7c | Red then green: on a fixture with families under the threshold, no Word table or brief names them, the supplement lists them, and the headline is unchanged | RS | | 0 | 0 | |
 | J29 | A quantified panel family with no stored share says why: the full-run project's precursor family (one family, 83 proteins) has no share or count row, so the report prints Not available; find whether no peptide reached it or the study left it out, and print a measured zero with "no peptide observed" when nothing was observed, keeping Not available only for a value the program could not compute | M | 1 | 🟢 | J7c | Red then green: a fixture family with no observed peptide gets a zero share row and the report says no peptide observed; a family the study could not compute stays Not available; the READY names the cause in the full-run project | FL | | 0 | 0 | |
+| J28 | Reopening a computed project in seconds, not 10 minutes: the peptide-to-protein homology hits (SearchCuration, 168,132 rows against 63,554 proteins took 9.4 and 9.8 min in the full run) are kept in the program's cache folder, keyed by the stored rows, the protein set and the search options, and reused on open; any change to one of them searches again | M | 1 | 🟢 | J7d | Red then green: a reopened fixture reads the hits from the cache and attributes exactly the same numbers as a fresh search; a changed protein set or option searches again; on a copy of the full-run project the READY gives both times | T2 | | 0 | 0 | |
 
 ### W2 Families by evidence
 
@@ -307,4 +308,151 @@ Finished steps, moved here from docs/ROADMAP.md. The board shows them as green.
 | J2a | Assign every target protein to a panel family by evidence: the UniProt family of a toxin-annotated protein, else the nearest reviewed toxin, and where two panel families share a domain the panel's own Pfam lists decide by the accompanying domains; shown as proposals, applied as one undoable locked change | H | 3 | 🟢 | J2b, J2c, J3a | The rule in Help in general words; fixtures; the guard test finds no family, name or Pfam literal | EV | | 0 | 0 | |
 | J2b | Measure that rule: leave-one-out on the reviewed entries, and every difference from the 11-01 draft listed with its reason, both written by the program | M | 1 | J2a | J7a | Program CSV with the right rate; each draft difference has a reason | EV | | 0 | 0 | |
 | J2c | Per-protein audit export: accession, family, subclass, evidence used and why, for Ana to check in Excel | L | 0.5 | 🟢 | J6b | CSV opens in Excel under pt-BR and en-US with the same columns | T1 | | 0 | 0 | |
+
+
+### W7 The analysis (version 5, finished)
+
+| ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
+|---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
+| J22 | The panel's reporting rules against the report: each rule in the panel workbook's rules sheet mapped to the section, table, figure or sentence of the exported report that carries it; a rule with no place is a gap line for the desk | L | 0.5 | 🟢 | J7c | A rule-by-rule table with the section id for each, and the gap list | RS | | 0 | 0 | |
+
+## Roadmap version 5 rows replaced by small steps in version 6 (2026-11-03)
+
+These were still open when version 6 cut them into small steps (K1 to K17 and the lettered J steps). They are kept here as history and are not finished steps.
+
+| ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
+|---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
+| J7a | The full run through the program: panel import, evidence, families, subclasses, Compute on three runs with de novo, family world, Database gap; project saved | H | 2 | 🟢 | J7b | The project reopens; a second Compute repeats every number | OP | | 0 | 0 | |
+| J7b | Interpretation, written into the project notes, quoting only the report's numbers, read against Ana's panel | M | 1.5 | J7a | J7c | A second reader checks every number against the report | OP | | 0 | 0 | |
+| J7c | Final export and delivery: every number in the document traced to a program export, then the Word report, the project and the family panel written to `C:/Users/paulo/Desktop/AnaG/Bjararaca/Relatorio`, nothing else in Ana's folders touched | M | 1 | J7b | J7d | Reviewer's trace table with 0 mismatches | OP | | 0 | 0 | |
+| J7d | Release 2.1.0 handed to Ana with her report (Paulo, 11-03 07:30: "i would like to hand her the software as well so she can experiment"): the release candidate is cut from master when J30, J24 and J31 have landed, its zip is checked unpacked on a copy of the final project, and it goes into the delivery folder beside the report; publishing on the public releases page only on Paulo's explicit word | L | 0.5 | J7c | | The release names the version the report prints | EV | | 0 | 0 | |
+| J16 | Results > Export > Figures works on a real panel project: every figure (composition, subclasses, ring, abundance against diversity, coverage maps) stays within the image codec's limits, splitting or paging a tall figure instead of refusing | M | 1 | 🟢 | J7c | On FQOpus's computed J7a project the export writes every figure; a fixture with many families and proteins exports too; PNG bytes unchanged for small projects | LK | | 0 | 0 | |
+| J17 | Faster evidence fetch: the reviewed reference panel comes from a few streamed UniProt queries (uniprotkb/stream, families combined in one query) instead of one paged search per family; the stored panel and evidence stay identical | M | 1.5 | 🟢 | | On Ana's database the new route stores the same reviewed panel, entry for entry, as the slow route, and both fetch times are reported; cancel and failure still leave the project unchanged | AS | | 0 | 0 | |
+| J24 | A detailed progress bar for Export report, so a user can tell work from a stall: every phase counts its items against a known total (section k of N and figure i of M by name while preparing, section k of N while writing the Word file, sheet k of N for the supplement, then publishing), the wait screen shows the current item, the elapsed time and the time since the last step, and each step is logged with its time (Paulo, 11-03) | M | 1 | 🟢 | J7c | A native export of a fixture records every section and figure once, counts rise to known totals, the wait screen shows them; on a large project the READY names the longest gap between steps | SH | | 0 | 0 | |
+| J27 | One total per effective panel family (J22 GAP R4): when several families resolve to the same panel family (a merged precursor, for example), the report prints one total with its parts and an explicit not-measured state for parts it cannot see, never two totals added again; first check whether the saved full-run project has this case (the full-run project has one family per panel family, FQTerra1 05:47, so this no longer gates J7c) | M | 1 | 🟢 | J7d | Red then green: a fixture with two families merged into one panel family prints one total; the READY says whether the full-run project had the case | FL | | 0 | 0 | |
+| J30 | Export report works on the full-run project: in J7a stage 7 it failed after 15 minutes of preparing sections and figures with "The calling thread cannot access this object because a different thread owns it" (an interface-thread object used on the report's own thread); find the object, fix it, and make an export failure log the exception type and stack | H | 1.5 | 🟢 | J7c | Red then green: a fixture that creates the object on the interface thread first and then exports reproduces the error and passes after the fix; a copy of the full-run project exports the Word report and supplement | RS | | 0 | 0 | |
+| J31 | File > Export report becomes available when an opened project's family attribution finishes: the J19 rehearsal of the packaged program found it still greyed out 30 s after attribution (MainWindow.Documents.cs:86-88 caches menu availability while busy; MainWindow.Operations.cs:14-17 restores parents without refreshing the leaf) | L | 0.5 | 🟢 | J7d | Red then green: a native test opens a computed project, waits for attribution and finds Export report enabled without any other menu action | SH | | 0 | 0 | |
+| J32 | Export report does not attribute the families a second time: on the full-run project, report preparation spent 921 s in "Data step 2 of 8: Attributing current families" (FQShell's J24 progress log) after the open had already attributed them; reuse the open's attribution when nothing changed, or J28's cached hits, so the export takes minutes, not a quarter of an hour | M | 1 | 🟢 | J7d | First a FINDING with file:line of what that step runs; then red then green: a fixture export reuses the current attribution and gives byte-identical report data; the READY gives the large-project step time before and after | T1 | | 0 | 0 | |
+| J33 | The scope trap made visible: when a protein's own family is a confirmed panel link but no scope phrase matches its keywords or tissue lines, the panel assignment audit says so (the full run said "No reviewed neighbour passes the search gate" for ten lectins kept out by the scope, D39); and the scope proposal also offers the commonest tissue-specificity phrase among the task's reviewed proteins, computed from the database, never a fixed word | M | 1 | 🟢 | J7d | Red then green: a fixture protein with a linked own family outside the scope gets the scope reason in the audit; the proposal on a fixture offers its tissue phrase; no organism or venom literal in code (D21 guard) | T2 | | 0 | 0 | |
+| J34 | The report's look, read as a scientist would: page by page on the only complete real-project report so far (the J19 rehearsal, 38 pages), every figure legible at print size, nothing clipped or overlapping, captions with their figures, tables that fit, the report palette with no yellow; findings first, fixes after J30 lands | M | 1 | 🟢 | J7c | A numbered FINDING list with page, figure id and file:line; each item fixed or ruled, and the final export's pages re-checked | LK | | 0 | 0 | |
+| J35 | Detailed progress for Compute and for opening a project (Paulo, 11-03): the same counted steps as J24 (run k of N, precursor batches, the family world pass, attribution, each study), the current item, elapsed time and time since the last step, all logged; the full run showed 30 to 50 minutes with no visible step | M | 1 | 🟢 | J7d | A native Compute on a fixture records every phase with known totals; on a copy of the full-run project the READY names the longest gap between steps | SH | | 0 | 0 | |
+| J36 | Delivery rehearsal: one test-side command takes a computed project, exports the report through the real command, runs the J18 trace, assembles the delivery folder (Word report, supplement, project, family panel, a short read-me) in a staging folder and checks every file; rehearsed on the first full-run project so J7c is one run | M | 1 | J30 | J7c | The staging folder holds the five items with their hashes, the trace lists every number, nothing is written outside the staging folder | RS | | 0 | 0 | |
+| J37 | A link choice keeps its reason: when the user confirms a family link, a short source note (for example the panel's consensus) is stored with it and printed in the report's method; the full run could not record that the 13 D38 choices came from the panel's rules | L | 0.5 | 🟢 | J7d | Red then green: a confirmed link with a note survives save and reopen and appears in the report's method table | T2 | | 0 | 0 | |
+| J38 | Compute in minutes, not most of an hour (Paulo, 11-03): first measure on a copy of the full-run project where Compute's time goes, per homology search call (world pass, the two world-error searches, attribution, the two census searches: queries, candidates per query, seconds, cores) plus a CPU profile of the slowest; then fix the top cost (likely: an identified peptide found exactly in a protein needs no scoring of the others, and repeated searches of the same peptides), proving every stored result byte-identical | H | 2 | 🟢 | J7d | A FINDING with the measured table and the profile's hot functions; then red then green: identical stored results on a fixture and on the full-run copy, with Compute time before and after | AS | | 0 | 0 | |
+
+## Version 5 decisions (history; the ones still in force are repeated in the roadmap)
+
+
+
+Paulo agreed these at the restart, 2026-11-01.
+
+| ID | Question | Taken |
+|---|---|---|
+| D38 | The 13 ambiguous family links in J2a | Confirmed by the desk from Ana's written rules (tab 1 merges, tab 4 rules 2, 3 and 5): disintegrin family and M12B Disintegrin-only to DIS, the DC architecture stays SVMP, the non-specific endonuclease family to NUCL, snaclec and true venom lectin to CTL, M12B to SVMP; source-less single-domain contexts stay outside the link table. Stored as user choices in the project, attributed to her consensus. Desk, 11-02 23:02 |
+| D39 | The scope of families by evidence for the panel analysis | The full run kept the program's proposed scope word "Toxin", so ten lectins of the true venom lectin family (PF00059; the panel's Gal-CTL row, merge into CTL) without that keyword never entered CTL and stood outside as group 614, 2.53% of credited signal (FQReview, J7a review 06:29). The analysis uses the scope "Toxin", "venom gland": the scope box takes several phrases, and "venom gland" matches the UniProt tissue line of venom proteins, so Ana's merge rule is honored by a user choice, with no code change. J7c reruns from families by evidence; the report's method states the scope. Desk, 11-03 06:35 |
+| D33 | Which de novo data | Ana's three-run export (`AnaG/DeNovo_ALC-50percent`, PEAKS de novo all), cut by the program at ALC 80. Paulo, 11-02 |
+| D35 | Which families | All 41 of Ana's consensus families with her decisions: Excluir is not a family, Fundir em CTL joins CTL, the rest are measured, and those under 0.1% are listed as others with the names in a supplement. Paulo, 11-02 |
+| D36 | Report language | English, with Ana's own family names from her file. Paulo, 11-02 |
+| D37 | What "% of the venom" means | The share of the signal credited to families (identified plus de novo matched to the database), summing to 100%; beside it the share of the whole measured signal, and the de novo found only through Database gap shown apart, never added. Paulo, 11-02 |
+| D34 | Who writes the Word document | The program writes the complete report (File > Export report) from the project, with the input it needs: the family panel from Ana's file and a Report details form in the project (title, authors, sample, workflow, kind of database, written interpretation). Paulo, 11-02: "maybe the software could export a complete report too, its just that it would need some input" |
+| D14 | Should identity clustering change its coverage rule, merge on shared peptides, or use a reviewed-family veto? | No. Clustering stays as it is, and the measurements ship as a diagnostic the user can see |
+| D32 | Publishing | FamilyQuant 2.0.0 published 2026-11-02 19:16 at https://github.com/pcarvalho75/FamilyQuant2-releases/releases/tag/v2.0.0 from commit bc7209f, zip SHA256 02df797c...056c8f, by the desk at Paulo's request. The desk may publish when Paulo asks. Paulo, 11-02 |
+| D31 | How 2.0 reaches users | From a new public repo, pcarvalho75/FamilyQuant2-releases, as a release zip, with Help > Check for updates (Y10). This repo stays private, since its history holds unpublished work. No install on this machine; R3c runs the program from the unpacked zip, so a clean machine stays untested until the first real install. ClickOnce at the old address is not the route. Paulo, 11-02 |
+| D30 | The last six rows | Accepted: two refusals that can no longer appear, the old cannot-interrupt line, two sample-specific examples, and for 2.0 the status of an old .plp with no per-run totals, which no longer gives the reason. That last one goes to a later version. The PatternLab generator equivalence stays out, since current code cannot confirm it. Paulo, 11-02 |
+| D29 | Rows that remove something a user could do, and sentences that mention a file | Accepted as lost from 2.0, all still in 1.5: running extraction or partition without a project, the three-way partition bar and its CSV, the RAW preview before computing. Also accepted: the wait during family attribution, and the contaminant rule of D15. Sentences tagged as file rows only because they mention a file are wording rows (Rule 5). Five dropped messages are restored in R4c, among them that the project is not saved yet. Paulo, 11-02 |
+| D28 | Order of the end game | Freeze when Y9 lands, since the ledger work after it touches no product code. The two final passes then run at once beside the ledger work, and the final refresh and release candidate come after their fixes, so they run only once. Desk, 11-02, to finish today |
+| D27 | Rows that hold no fact of their own, number formats, and superseded rows | Rule 4: they close with the reason recorded, and none is a DROP. Fragments and formats with the same precision today close as a group. A superseded row closes only if it concerns wording or layout; one that removes something the user could do goes to Paulo one by one. The Recalculate colour cue, the Compute XIC sentence, the keyboard focus style, four main-window formats and two unreachable warnings are accepted. Paulo, 11-02 |
+| D26 | Failure guidance that got shorter in the port | Restored in Y9 before the freeze. Independent fact checks found 46 rows a user would miss. Desk, 11-02 |
+| D25 | Wording rules | Rule 1: the old fact in new wording is accepted. Rule 2: a row that only describes the old look closes under the new theme. Rule 3: the current screen name replaces Layer N and a clause about a retired screen goes. Paulo, 11-02 |
+| D24 | Is the claim sentence roadmap work? | No. It is Paulo's own message to Ana, so its boxes left the roadmap. Paulo, 11-02 |
+| D23 | Finish today | Yes. C14 runs beside the ledger, preview 2 folds into the release candidate, and rows that only changed wording get one ruling from Paulo at the end. Paulo, 11-02 |
+| D22 | Default minimum tag length | 8, and the user can choose 7 to 15. Replaces the 9 in D11. Paulo, 11-02 |
+| D21 | Is the program general? | Yes. It must work with any database, so nothing the user sees names an organism, a venom or a sample's numbers. Paulo, 11-02 |
+| D20 | Minimum tag length | The user can change it and see the error by length on their own project; 9 stays the default. Paulo, 11-02. Step B10 |
+| D19 | A joined header with different taxa | The target keeps all its taxa and the file is not refused. Paulo, 11-02. Step B11 |
+| D18 | Does the family world ship on one sample? | Yes. Every project shows its own measured rates, and it stays optional. Paulo, 11-02 |
+| D17 | Row FQ15-0061551CF9D6 | The clause on Layer 5 goes with the retired partition screen; the assignment fact stays. Paulo, 11-02 |
+| D16 | Where the claim sentence goes | To Ana, papers and project records only, never into the program. It also states that the program has been tested only on venom. Paulo, 11-02 |
+| D15 | Does the contaminant rule look past `Reverse_`? | Yes, one exact unwrap, then the database prefix in exact case. Target classes do not change; golden stays 4/0/0 |
+| D13 | How the ledger is proven | By kind of row, one executed check per kind, plus a reviewer's random sample, instead of hand work per row |
+| D11 | Minimum tag length for the family world | 9 residues, and only families in scope can be credited. Paulo: the program must show this to the user |
+| D12 | How the 70% coverage gate is counted | Query letters actually aligned, so gaps earn no credit. Paulo: the program must show this to the user |
+| D7 | `LICENSE.txt` | Changed from the blank MIT template to all rights reserved, 2026, holder Fiocruz |
+| D8 | Test 1.5 and 2.0 side by side before Ana gets 2.0? | Not needed. Paulo: it is safe, she already uses 1.5 and will have 2.0 beside it |
+| D1 | Is a family-level claim acceptable for a peptide absent from the species database? | Yes, with the decoy rate and right rate printed beside it. |
+| D2 | Clade of the family world on Ana's file: Viperidae or all snakes? | The clade the program reads from the headers, Viperidae on her file |
+| D3 | Scope proposed by the program or typed by the person? | Proposed, the person confirms |
+| D4 | Does the database gap ranking belong in the product or only in the paper? | In the product, named "Database gap", with a FASTA of suggested additions |
+| D5 | One contaminant rule: three places differ today (prefix or anywhere, exact case or not) | The database's own label, prefix and exact case, measured before and after |
+| D6 | Replace the bundled USEARCH with the upstream CC0 file after a parity check? | Yes |
+| D9 | Does the desk keep pushing master to the private repository? | Yes, as a backup |
+| D10 | Retire the deprecated `build_scientific_deck.mjs`? | Keep it untouched as history |
+
+## Version 5 target layout and risks (history)
+
+## Target layout
+
+| Project | Holds | Rule |
+|---|---|---|
+| `FamilyQuant.Core` | Everything without WPF: families, clustering, grouping, evidence, quantitation, de novo, homology, project files | No WPF, no message boxes, reports progress and accepts cancel |
+| `FamilyQuant.App` | WPF screens, each a thin view over a tested view model; assembly `FamilyQuant2` | No science in the UI |
+| `FamilyQuant.Reports` | Paper and talk figure code no screen calls, a separate tool reading a `.fqproj`. Only if X9 finds enough to move | Never in the installed app |
+| `FamilyQuant.Tests` | The suite, split by area | Runs headless |
+
+### Risks and triggers (version 5)
+
+| Risk | Trigger | Response |
+|---|---|---|
+| The family world credits the wrong family | B1 or B6 shows a right rate under the bar, above all on conserved families | Tighten the gate or drop B4 to B8. No claim is made without its error beside it |
+| The claim is not new | B2 finds the same method published | Say so plainly, cite it, and keep what is still ours: the automatic flow and the gap ranking |
+| The clade fetch is too large | B4 measures a project size or fetch time Ana cannot use | Fetch only the families found in scope. Report the size |
+| Two steps collide in `FamilyEnvelopeQuant` | B5 starts before X5 merges | B5 waits. X5 leaves the seam |
+| Kimi runs out of quota | A Kimi call returns 403 or a limit | FQOpus takes reviews again until a short test call succeeds. The orchestrator tells Paulo the same hour. A step never goes to its own author |
+| A rewrite loses a function | A ledger row has no check, or a user finds a gap | No release passes; the row goes back to the step that dropped it |
+| A rewrite moves a number | Golden check red | No merge; the step goes back to its owner, or follows rule 4 if the change is meant |
+| Ana needs 1.5 while 2.0 is unfinished | She asks | 1.5 stays installed and untouched, and `.fcf` export (X7) carries her work back |
+| UniProt changes or is down | A fetch fails live | Stored evidence keeps working; fetch stays all or nothing |
+| Non-UniProt headers | B3 or the evidence fetch cannot read them | Report it plainly in the review window; proteins stay unassigned, never guessed |
+| Ana's rule needs a family literal | A step can only meet a rule by naming a family, a domain or a keyword in code | The rule becomes a user choice stored in the project, entered once from her file |
+| A subclass cannot be told apart | Peptides shared by every subclass, as in the SVMP catalytic domain | They are reported as "class not resolved", never forced into a class |
+| The full run is too slow for tonight | J0 measures Compute on three RAW files with de novo above two hours | Cache reuse first; report the time to Paulo the same hour |
+
+### W1 Ana's analysis with the corrected scope
+
+| ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
+|---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
+| K3 | Science check, part 1: the two runs' family assignments compared; nothing non-venom pulled in; the 3 new Kunitz and Waprin link choices follow D38 | M | 0.5 | 🟢 | K4 | `RESULT D39-review` part 1 | GR | | 0 | 0 | |
+| K1 | Rerun: Compute on the three runs finishes, from the RAW cache | L | 0.5 | 🟢 | K2 | The run log shows Compute finished and the project saved | OP | | 0 | 0 | |
+
+### W3 The report export works and is fast
+
+| ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
+|---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
+| J16a | Figure export's gate failures fixed: the figure details file is written only when a figure is capped, so small projects export exactly as before; the screen test passes | L | 0.3 | 🟢 | J16b | `FIXED J16` with the three checks green | LK | | 0 | 0 | |
+| J24b | J24 (export progress) and J31 (Export report available after opening) merged | L | 0.1 | 🟢 | J24c, K8, K14 | Gate green | SH | | 0 | 0 | |
+| J34a | The report's look: the 38-page rehearsal report read page by page as a scientist would | M | 0.5 | 🟢 | J34b | A numbered list with page, figure id and file:line | LK | | 0 | 0 | |
+| J16b | J16 re-reviewed and merged | L | 0.2 | 🟢 | J34b, K8, K14 | Approved; gate green | LK | | 0 | 0 | |
+| J30c | J30 reviewed and merged | L | 0.2 | J30b | J24c, J32c, J34b, J36b, K8, K14 | Approved; gate green | RS | | 0 | 0 | |
+
+### W7 Clear reasons and totals
+
+| ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
+|---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
+| J33a | The panel assignment audit names the scope when it keeps a protein with a linked family out (it said "no reviewed neighbour" for the ten lectins) | L | 0.4 | 🟢 | J33c | A fixture protein gets the scope reason | T2 | | 0 | 0 | |
+| J33b | The scope proposal also offers the commonest tissue phrase among the task's reviewed proteins, read from the database | L | 0.4 | 🟢 | J33c | A fixture's proposal offers its phrase | T2 | | 0 | 0 | |
+| J27b | One total per panel family: the program computes and stores the per-panel-family totals when several families share a panel family (contract posted) | M | 1 | 🟢 | J27c | A fixture's stored totals credit a shared peptide once | FL | | 0 | 0 | |
+| J27c | The per-family briefs and new exports read those totals; the headline keeps its unit (D40) | M | 0.5 | J27b | J27d | Old exports unchanged; new exports added | FL | | 0 | 0 | |
+| J33c | J33 reviewed and merged | L | 0.2 | 🟢 | J37a, J40 | Approved; gate green | T2 | | 0 | 0 | |
+
+### W4 Release 2.1.0 on GitHub
+
+| ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
+|---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
+| K12 | Install check rehearsed now on the published 2.0.0: download from GitHub, SHA-256, unpack, open a project, Check for updates | L | 0.3 | 🟢 | K13 | A written install log | EV | | 0 | 0 | |
+
+### W6 Compute fast and visible
+
+| ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
+|---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
+| J17b | Faster evidence fetch (one streamed query instead of one per family, about 3 times faster, same entries) reviewed and merged | L | 0.2 | 🟢 | | Approved; gate green | AS | | 0 | 0 | |
 

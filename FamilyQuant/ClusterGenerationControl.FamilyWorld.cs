@@ -80,7 +80,7 @@ public partial class ClusterGenerationControl
         var panel = new StackPanel { Margin = new Thickness(20) };
         panel.Children.Add(new TextBlock { Text = "Database task: " + proposal.Clade.ScientificName + ". UniProt release " + proposal.Release + ".",
             TextWrapping = TextWrapping.Wrap });
-        panel.Children.Add(new TextBlock { Text = "Confirm the scope words or quoted phrases. The stored world will contain family references for this scope.",
+        panel.Children.Add(new TextBlock { Text = "Confirm the scope words or quoted phrases. Suggestions can include a reviewed keyword and a tissue annotation phrase. The stored world will contain family references for this scope.",
             TextWrapping = TextWrapping.Wrap, Margin = new Thickness(0, 12, 0, 4) });
         var scope = new TextBox { Text = string.Join(", ", proposal.ProposedScopeTerms.ConvertAll(term => "\"" + term + "\"")),
             ToolTip = "Scope words or quoted phrases, as in Group by evidence." };

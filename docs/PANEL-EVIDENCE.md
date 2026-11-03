@@ -16,6 +16,14 @@ All equally close reference identities are retained, including references with
 the same source family but different architectures. Conflicting panel labels
 remain outside. Historical searches without this tie provenance must be rerun.
 
+The per-protein panel audit explains when a protein's own source family maps to a
+panel family but its keywords and tissue annotations do not match any selected
+scope phrase. It names the phrases and retains the reviewed-neighbour reason. A
+saved confirmed link with the current panel definition can support this explanation
+even when the current scope contains no reference for that source. Stale choices
+are not claimed. This is an audit explanation only: it does not change the proposal,
+grouping, saved assignment reasons or recipe replay.
+
 The existing assignment review now has a Panel links tab. No ambiguous choice is
 preselected. Applying choices updates the proposal; applying the reviewed
 selection stores one locked family change. The subclass runner then runs after
