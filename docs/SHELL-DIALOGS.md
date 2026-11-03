@@ -154,3 +154,44 @@ footer defect was caught by the importer and fixed before the authoritative runs
 reasons for every remaining gap, including the three unexecuted 1001-count cases, missing
 Start-page next-step guidance, actual USEARCH phase cancellation and shell Help adapters.
 No product edit or DROP is supplied by this batch.
+
+The final `--prove-shell-behaviour2` scope contains sixteen rows. The native harness
+invokes `MenuItem.OnClick`, which executes command bindings as well as Click handlers.
+It compares Families and De novo Help, workflow Help and the F1 replacement route;
+uses the named grouping confirmation button; executes both no-reconciliation writer
+guards; writes empty-run native cache artifacts through both real serializers; and
+executes actual redundancy removal before checking restored controls, headers and order.
+The cache check compares the complete JSON schema and exact numeric double bits, allowing
+only equivalent numeric spellings such as 5 and 5.0. No tolerance is introduced.
+Frozen redundancy's combined duplicate headers are retained and compared exactly.
+The authoritative packet is `D:/FamilyQuant-data/out-shell/behaviour2`: final1/final2
+each have ten passed/zero failed/zero skipped, nine supported/seven OPEN rows. All sixteen
+fact records and four cache/FASTA data artifacts repeat byte-identically. Every remaining
+gap is listed in `D:/FamilyQuant-data/reviews/behaviour2-FQShell-results.tsv`.
+Only requested case groups run; unrelated approved execution/input packets are not replayed.
+The final READY sync includes N6q. Its N6q1/N6q2 runs repeat the same 9/7 outcome,
+10/0/0 checks and identical fact/data artifacts against the updated Help text.
+The 3277/0/17 quick pass preceded that sync; post-sync build and both native runs passed.
+
+M37 review rejected two workflow receipts because the fixture retained Home after replacing
+the visible screen. Strengthened assertions first reproduced that defect: both workflow rows
+became OPEN. The fixture now invokes each version's actual Families and De novo presenters.
+Both captured workflow reports must identify their actual screen and its specific guidance;
+generic headings and a Start location cannot satisfy the check. M37-fix1/M37-fix2 replace
+the rejected N6q2 receipts. This is a test fixture repair, with no product change.
+
+M37 also executes the retained filtering prerequisites, both legacy/recorded PatternLab
+loads, next-step workflow Help, and cancellation during a real all-pairs USEARCH phase.
+The synthetic legacy file has no recorded divisor or per-run totals. Native loads retain
+the re-export advice, and a recorded-totals fixture enables TIC reporting; these are file
+contract checks, not an execution of the external XQuant exporter. Current legacy status
+still omits the explicit fact that this file lacks per-run totals, so that row stays OPEN.
+The real cancellation check observes its uniquely named owned child running before
+requesting cancellation through the native operation context. It does not drive the shell's
+Cancel button. The frozen phase completes 31,125 pairs; current cancellation interrupts
+the phase. That old cannot-interrupt fact stays OPEN. Partial cancelled output and its count
+are timing diagnostics, not deterministic published results. Completed fixture outputs and
+the compared semantic fact records are checked separately on repeat runs.
+After the R4a/R4c READY sync, M37-ready1/M37-ready2 each execute 13 passed, zero failed,
+two skipped checks, yielding twelve supported and four OPEN rows. All sixteen complete fact
+records and five completed native cache/FASTA/pairwise data artifacts repeat byte-identically.

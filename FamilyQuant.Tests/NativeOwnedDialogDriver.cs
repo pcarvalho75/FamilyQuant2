@@ -32,6 +32,7 @@ internal sealed class NativeOwnedDialogDriver : IDisposable
     internal bool EnteredPath { get; private set; }
     internal bool TimedOut { get; private set; }
     internal List<string> Controls { get; } = new();
+    internal List<string> DialogTexts { get; } = new();
 
     internal NativeOwnedDialogDriver(string? selectedPath, bool failFirstTextDelivery = false, bool dismissCompletion = false, Action<string>? trace = null)
     {
@@ -51,7 +52,20 @@ internal sealed class NativeOwnedDialogDriver : IDisposable
             {
                 GetWindowThreadProcessId(window, out uint process);
                 if (process != Environment.ProcessId || Class(window) != "#32770") return true;
-                if (seenWindows.Add(window)) trace?.Invoke("Native dialog observed; thread=" + thread + "; entered=" + EnteredPath);
+                if (seenWindows.Add(window))
+                {
+                    trace?.Invoke("Native dialog observed; thread=" + thread + "; entered=" + EnteredPath);
+                    EnumChildWindows(window, (child, _) =>
+                    {
+                        if (Class(child) == "Static")
+                        {
+                            var text = new StringBuilder(16384);
+                            SendMessageTimeoutText(child, 0x000D, new IntPtr(text.Capacity), text, 2, 500, out _);
+                            if (text.Length > 0) DialogTexts.Add(text.ToString());
+                        }
+                        return true;
+                    }, IntPtr.Zero);
+                }
                 SawDialog = true;
                 SetWindowPos(window, IntPtr.Zero, -28000, -28000, 0, 0, 1 | 4 | 16);
                 if (selected == null) { PostMessage(window, 0x111, new IntPtr(2), IntPtr.Zero); return true; }
