@@ -119,6 +119,22 @@ internal static partial class Program
         bool changedRefused = false;
         try { FamilyReportThreshold.Build(source, project); } catch (InvalidOperationException) { changedRefused = true; }
         Check("J5c refuses assignment IDs that no longer match project proteins", changedRefused);
+        var producerFacts = new List<PanelProteinAssignment>
+        {
+            new() { FamilyUserId = 1, PanelFamilyKey = "under", IsApplied = true },
+            new() { FamilyUserId = 2, PanelFamilyKey = "forced", IsApplied = true },
+            new() { FamilyUserId = 4, PanelFamilyKey = "one", IsApplied = true },
+            new() { FamilyUserId = 4, PanelFamilyKey = "two", IsApplied = true },
+            new() { FamilyUserId = 6, PanelFamilyKey = "forced", IsApplied = true },
+            new() { FamilyUserId = 6, PanelFamilyKey = null, IsApplied = false },
+        };
+        var producedMap = Evidence.PanelAssignmentEvidenceStore.BuildFamilyMap(project.FamilyPanel!, producerFacts);
+        var producedReport = FamilyReportThreshold.Build(source, project, producedMap);
+        Check("J5c consumes the producer map and preserves current panel-outside conflicts",
+            producedMap.IsCurrent && producedMap.ConflictingUserIds.SequenceEqual(new[] { 4, 6 })
+            && producedReport.ConflictFamilies.Select(x => x.Family.FamilyUserId).SequenceEqual(new[] { 4, 6 })
+            && producedReport.ConflictFamilies.Single(x => x.Family.FamilyUserId == 6).HasOutsideMembers
+            && producedReport.OtherFamilies.Select(x => x.FamilyUserId).SequenceEqual(new[] { 1, 2, 3 }));
         var peptideMap = new PeptideFamilyAttribution();
         peptideMap.IdentifiedBySequence["AAAAAAAK"] = new[] { 1 };
         peptideMap.IdentifiedBySequence["CCCCCCCK"] = new[] { 2 };
