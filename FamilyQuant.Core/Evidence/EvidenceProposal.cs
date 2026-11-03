@@ -62,6 +62,10 @@ namespace FamilyQuant.Evidence
 
     public sealed class EvidenceProposal
     {
+        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull)]
+        public PanelEvidenceContext? PanelContext { get; init; }
+        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull)]
+        public IReadOnlyList<Panels.PanelProteinAssignment>? PanelAssignments { get; init; }
         public string SourceFingerprint { get; init; } = string.Empty;
         public EvidenceClassificationOptions Options { get; init; } = new EvidenceClassificationOptions();
         public IReadOnlyList<EvidenceProteinProposal> Proteins { get; init; } = Array.Empty<EvidenceProteinProposal>();
