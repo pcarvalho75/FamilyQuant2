@@ -214,4 +214,6 @@ Finished steps, moved here from docs/ROADMAP.md. The board shows them as green.
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
 | R3a | Code freeze: only review findings touch product code after this | L | 0 | 🟢 | R4a, R4b | Freeze noted; all lanes told | Orchestrator | not started | 0% | 0% | T+0 |
 | R4b | Final adversarial pass: science and numbers | H | 1 | 🟢 | R4c | KM's verdict | KM | not started | 0% | 0% | T+1 |
+| R4a | Final adversarial pass: code and behaviour | H | 1 | 🟢 | R4c | GR's verdict | GR | not started | 0% | 0% | T+1 |
+| R4c | Every finding fixed and gated | M | 0.5 | R4a | R3b | No open finding | Orchestrator | not started | 0% | 0% | T+2 |
 
