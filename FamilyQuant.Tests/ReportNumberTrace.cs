@@ -20,9 +20,6 @@ internal static class ReportNumberTrace
     private static readonly Regex Tokens = new(
         @"(?<![\p{L}\p{N}_])(?<date>\d{4}-\d{2}-\d{2})(?![\p{L}\p{N}_])|(?<![\p{L}\p{N}_])(?<algorithm>SHA-?256)(?![\p{L}\p{N}_])|(?<![\p{L}\p{N}_])(?<hash>(?=[0-9a-fA-F]{32,}(?![\p{L}\p{N}_]))(?=[0-9a-fA-F]*[a-fA-F])(?=[0-9a-fA-F]*[0-9])[0-9a-fA-F]{32,})|(?<![\p{L}\p{N}_])(?<number>[+-]?(?:(?:\d{1,3}(?:,\d{3})+)|\d+)(?:\.\d+)?(?:[eE][+-]?\d+)?%?)(?![\p{L}\p{N}_])|(?<![\p{L}\p{N}_])(?<identifier>(?=[\p{L}\p{N}_]*[\p{L}_])(?=[\p{L}\p{N}_]*\d)[\p{L}\p{N}_]+)(?![\p{L}\p{N}_])",
         RegexOptions.Compiled | RegexOptions.CultureInvariant);
-    private static readonly Regex Numeric = new(
-        @"^(?<sign>[+-]?)(?<integer>(?:\d{1,3}(?:,\d{3})+)|\d+)(?:\.(?<fraction>\d+))?(?:[eE](?<exponent>[+-]?\d+))?(?<percent>%?)$",
-        RegexOptions.Compiled | RegexOptions.CultureInvariant);
     private static readonly Regex RunPrefix = new(@"\b(?:run|sample)\s*#?\s*$", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant);
     private static readonly Regex PagePrefix = new(@"\bpages?\s*#?\s*$", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant);
     private static readonly Regex YearPrefix = new(@"\b(?:year|years|published|publication)\s*[:#]?\s*$", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant);
@@ -208,22 +205,8 @@ internal static class ReportNumberTrace
     }
 
     // Canonical decimal as signed significant digits and decimal exponent, avoiding floating-point rounding.
-    private static bool TryKey(string text, int exponentAdjustment, out string key)
-    {
-        key = string.Empty;
-        var match = Numeric.Match(text);
-        if (!match.Success) return false;
-        int exponent = 0;
-        if (match.Groups["exponent"].Success && !int.TryParse(match.Groups["exponent"].Value, NumberStyles.AllowLeadingSign, CultureInfo.InvariantCulture, out exponent)) return false;
-        string fraction = match.Groups["fraction"].Value;
-        string digits = (match.Groups["integer"].Value.Replace(",", "", StringComparison.Ordinal) + fraction).TrimStart('0');
-        if (digits.Length == 0) { key = "0"; return true; }
-        long power = (long)exponent - fraction.Length + exponentAdjustment;
-        int length = digits.Length;
-        while (length > 1 && digits[length - 1] == '0') { length--; power++; }
-        key = (match.Groups["sign"].Value == "-" ? "-" : "") + digits.Substring(0, length) + "e" + power.ToString(CultureInfo.InvariantCulture);
-        return true;
-    }
+    private static bool TryKey(string text, int exponentAdjustment, out string key) =>
+        InterpretationNumberTrace.TryKey(text, exponentAdjustment, out key);
 
     private static string ColumnName(int number)
     {

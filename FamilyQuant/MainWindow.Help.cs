@@ -206,8 +206,16 @@ public partial class MainWindow
                 "   Choose sections and figures with the checkboxes. Set Report threshold (%) to\n" +
                 "   group families below that mean assigned-signal share under Others; their list\n" +
                 "   remains in the supplement. Families marked Report under others also go there.\n" +
+                "   Summary of findings states the stored values in fixed sentences; its numbers are\n" +
+                "   also listed in the supplement.\n" +
                 "   Produces: a Word report and a companion supplement workbook beside it.\n" +
                 "   File > Save keeps the project, report details, choices and threshold.\n\n" +
+                "EXPORT THE INTERPRETATION INPUT\n" +
+                "   Menu: File > Export > Interpretation input (Markdown)\n" +
+                "   Needs: stored Results from step 3.\n" +
+                "   Writes one Markdown file with the report details, the panel as entered, the summary\n" +
+                "   of findings, the stored tables it reads, the methods and a short instruction block.\n" +
+                "   Give it to an assistant of your choice; FamilyQuant itself does not interpret it.\n\n" +
 
                 // The de novo screen is a separate workflow and is written as one: it is numbered
                 // OPTIONAL rather than as a fifth step, because nothing above it needs it and it needs

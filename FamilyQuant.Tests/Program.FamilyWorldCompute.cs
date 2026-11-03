@@ -73,7 +73,7 @@ internal static partial class Program
             var attribution = FamilyEnvelopeQuant.BuildAttributionFromCuration(attached.Rows, file);
             var reused = new FullXicComputeResult { Rows = attached.Rows, SpectrumComparisonRows = attached.SpectrumComparisonRows,
                 Manifest = new QuantManifest() };
-            reuseMethod.Invoke(null, new object?[] { file, reused, attribution });
+            reuseMethod.Invoke(null, new object?[] { file, reused, attribution, null });
             Check("J38 reused attribution preserves every stored world field and note",
                 System.Text.Json.JsonSerializer.Serialize(reused.Manifest.FamilyWorldResult) == System.Text.Json.JsonSerializer.Serialize(table)
                 && reused.Notes.SequenceEqual(attached.Notes));
@@ -84,7 +84,7 @@ internal static partial class Program
             var stale = new FullXicComputeResult { Rows = attached.Rows, SpectrumComparisonRows = attached.SpectrumComparisonRows,
                 Manifest = new QuantManifest() };
             FamilyWorldAnalysis.AttachToCompute(regrouped, fresh);
-            reuseMethod.Invoke(null, new object?[] { regrouped, stale, attribution });
+            reuseMethod.Invoke(null, new object?[] { regrouped, stale, attribution, null });
             Check("J38 stale grouping rejects reuse and retains the ordinary fresh-search result",
                 System.Text.Json.JsonSerializer.Serialize(stale.Manifest.FamilyWorldResult)
                 == System.Text.Json.JsonSerializer.Serialize(fresh.Manifest.FamilyWorldResult) && stale.Notes.SequenceEqual(fresh.Notes));

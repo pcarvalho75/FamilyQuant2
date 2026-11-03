@@ -46,7 +46,7 @@ public partial class MainWindow
             loadedCuration!.ReportInputProvenance = model.CompletedInputProvenance;
             lastSpectrumComparisonCsvPath = result.SpectrumComparisonCsvPath;
             RefreshProjectCommandAvailability(spectrumAvailable: result.SpectrumComparisonRows.Count > 0 || loadedQuant.Count > 0);
-            _ = cgc!.SetFullXicQuantAsync(loadedQuant, loadedManifest.PerRunTic);
+            _ = cgc!.SetFullXicQuantAsync(loadedQuant, loadedManifest.PerRunTic, model.OperationStartedAtUtc, model.OperationLogPath);
             DocumentState.MarkModified();
             UpdateGuide();
             StatusModel.ShowMessage(model.RunSummary + "\n" + model.Details);

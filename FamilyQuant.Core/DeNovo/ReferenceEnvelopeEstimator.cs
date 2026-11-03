@@ -95,11 +95,13 @@ namespace FamilyQuant.DeNovo
         /// replacing the mass bins with one pooled ratio. These diagnostics should accompany a quoted
         /// model estimate; the sensitivity bounds are not confidence limits.
         /// </summary>
-        public static ReferenceEnvelopeDiagnostics Evaluate(IReadOnlyList<NativePeptideQuant> peptides)
+        public static ReferenceEnvelopeDiagnostics Evaluate(IReadOnlyList<NativePeptideQuant> peptides,
+            FamilyQuant.Operations.OperationContext? operation = null, string progressStage = "reference-validation")
         {
             if (peptides == null) throw new ArgumentNullException(nameof(peptides));
 
             List<NativePeptideQuant> identified = ValidIdentified(peptides);
+            operation?.Report(progressStage, "Checking reference-envelope representatives", 0, identified.Count);
             List<NativePeptideQuant> rawDeNovo = peptides.Where(p =>
                 string.Equals(p.Side, NativeQuantFractions.SideDeNovo, StringComparison.Ordinal)
                 && p.AreaM0 > 0 && p.MonoisotopicMass > 0).ToList();
@@ -154,8 +156,10 @@ namespace FamilyQuant.DeNovo
             double absoluteError = 0.0;
             double signedError = 0.0;
             double observedTotal = 0.0;
+            int completed = 0;
             foreach (NativePeptideQuant heldOut in identified)
             {
+                operation?.ThrowIfCancellationRequested();
                 List<NativePeptideQuant> peers = identified.Where(p => !ReferenceEquals(p, heldOut)).ToList();
                 double peerPooled = PooledRatio(peers);
                 int bin = BinOf(heldOut.MonoisotopicMass);
@@ -169,6 +173,9 @@ namespace FamilyQuant.DeNovo
                 observedTotal += heldOut.EnvelopeSum;
                 if (heldOut.EnvelopeSum > 0)
                     absolutePercentErrors.Add(Math.Abs(error) / heldOut.EnvelopeSum);
+                if (++completed % 128 == 0 || completed == identified.Count)
+                    operation?.Report(progressStage, "Reference representatives checked " + completed.ToString(CultureInfo.InvariantCulture)
+                        + " of " + identified.Count.ToString(CultureInfo.InvariantCulture), completed, identified.Count);
             }
 
             absolutePercentErrors.Sort();

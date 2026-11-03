@@ -73,7 +73,7 @@ public static class ShellProjectOperations
     {
         if (!ProjectStore.IsProjectPath(path))
         {
-            operation?.Report("document-read", "Opening family document");
+            operation?.Report("document-read", "Opening family document", 0, 1);
             byte[] bytes = File.ReadAllBytes(path);
             operation?.ThrowIfCancellationRequested();
             using var reader = new StreamReader(new MemoryStream(bytes), Encoding.UTF8, detectEncodingFromByteOrderMarks: true);
@@ -81,6 +81,7 @@ public static class ShellProjectOperations
             {
                 var file = FamilyClusterFile.FromJsonText(reader.ReadToEnd());
                 operation?.ThrowIfCancellationRequested();
+                operation?.Report("document-read", "Family document read", 1, 1);
                 return new(file, new(), null) { DatabaseFileSha256 = Convert.ToHexString(SHA256.HashData(bytes)).ToLowerInvariant() };
             }
             catch (InvalidDataException) { throw new InvalidDataException("\"" + path + "\" is not a valid Family Cluster File."); }
