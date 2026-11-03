@@ -117,9 +117,14 @@ public static class ReportFigureRenderer
                 new("Filtered spectrum calls", identification.FilteredSpectrumCalls, "calls", "0"),
                 new("Carried-forward spectrum calls", identification.CarriedForwardSpectrumCalls, "calls", "0"));
             Add(ReportSectionIds.Quality, PresentationFigures.PeptideEvidenceFile, "Peptide representatives",
-                "Representative counts and evidence categories from the stored consolidation analysis.", () => new PeptideRepresentativesChart(data, identification),
-                new("Identified representatives", data.IdentifiedCount, "representatives", "0"),
-                new("De novo representatives", data.DeNovoCount, "representatives", "0"));
+                "Credited de novo representatives retain run, canonical peptidoform, charge and precursor mass after cross-side suppression. "
+                    + "Stored representatives before cross-side suppression are a separate population; neither count is sequence diversity.",
+                () => new PeptideRepresentativesChart(data, identification),
+                new("Credited de novo representatives after cross-side suppression", data.Grouped?.DeNovoPeptides
+                    ?? data.Peptides.Select(p => p.Run).Distinct(StringComparer.OrdinalIgnoreCase).Sum(run => data.Fractions.FirstOrDefault(f =>
+                        !f.IsGrouped && string.Equals(f.Run, run, StringComparison.OrdinalIgnoreCase))?.DeNovoPeptides ?? 0), "representatives", "0"),
+                new("Stored identified representatives before cross-side suppression", data.IdentifiedCount, "representatives", "0"),
+                new("Stored de novo representatives before cross-side suppression", data.DeNovoCount, "representatives", "0"));
         }
         else Missing(ReportSectionIds.Quality, "De novo consolidation and representatives");
         if (manifest.IdentificationConcordance is { } concordance)
