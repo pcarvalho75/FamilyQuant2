@@ -50,6 +50,13 @@ namespace FamilyQuant
         public double? PooledShare { get; set; }
         /// <summary>PooledShare minus MeanShare; both shares use the assigned-family denominator.</summary>
         public double? PooledMinusMeanShare { get; set; }
+        /// <summary>Arithmetic mean and sample SD of measured-peptide shares; both null if any run
+        /// lacks the share. As elsewhere, sample SD needs at least two runs.</summary>
+        public double? MeanShareOfMeasuredSignal { get; set; }
+        public double? StandardDeviationOfMeasuredSignal { get; set; }
+        /// <summary>Separate RAW TIC statistics, present only when every run has a TIC share.</summary>
+        public double? MeanShareOfTic { get; set; }
+        public double? StandardDeviationOfTic { get; set; }
     }
 
     /// <summary>Database-protein diversity, not a gene or proteoform count. Greedy set cover is an
