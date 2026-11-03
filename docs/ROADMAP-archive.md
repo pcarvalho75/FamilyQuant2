@@ -465,6 +465,7 @@ Paulo agreed these at the restart, 2026-11-01.
 | J46b | Optional "Draft interpretation with AI": the user sees exactly what is sent (J45's input), confirms, the text returns into the interpretation field labelled "AI draft (model, date)", and every number in it is checked against the program's own tables (J18 trace) before the user accepts | M | 1 | J46a | J46c | Fake-transport tests for every outcome; one live call reported; works fully without a key | T2 | | 0 | 0 | |
 | J46c | J46 reviewed and merged | L | 0.2 | 🟢 | | Approved; gate green | T2 | | 0 | 0 | |
 | J40 | Help explains what 2.1 adds: the progress lines, the cached reopen, "no peptide observed", the scope phrases, link notes | L | 0.5 | 🟢 | | A test reads each menu name in the text from the live menu | T2 | | 0 | 0 | |
+| J46d | The AI draft uses J45's interpretation input instead of J46's stand-in seam, and its number check reads J45's table cells and column headings directly (J45 exposes them beside the Markdown) instead of parsing Markdown (FQTerra2's observation, 11-03 09:49) | L | 0.3 | 🟢 | | The sent text equals J45's export byte for byte; number-check fixtures green against J45's cells | T2 | | 0 | 0 | |
 
 ### W4 Release 2.1.0 on GitHub
 
