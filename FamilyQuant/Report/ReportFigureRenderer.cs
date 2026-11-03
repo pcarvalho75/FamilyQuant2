@@ -14,7 +14,10 @@ namespace FamilyQuant.Report;
 public sealed record ReportChart(string SectionId, string FileName, string Title, string Caption,
     Func<FrameworkElement> CreateChart, double Width = ChartImageExporter.DefaultLayoutWidth,
     double Height = ChartImageExporter.DefaultLayoutHeight, FigureCaptionInput? CaptionInput = null);
-public sealed record ReportFigureAvailability(string SectionId, string Title, string Reason);
+public sealed record ReportFigureAvailability(string SectionId, string Title, string Reason)
+{
+    public bool SupplementOnly { get; init; }
+}
 public sealed record ReportFigurePlan(IReadOnlyList<ReportChart> Charts, IReadOnlyList<ReportFigureAvailability> Unavailable);
 public sealed record ReportPlacedFigure(string SectionId, ReportFigure Figure);
 
@@ -58,9 +61,20 @@ public static class ReportFigureRenderer
             "Signal in each mass interval divided by the recorded RAW total ion current. Missing TIC is unavailable.", () => new PercentIonCurrentChart(data.Peptides, data.Grouped?.Tic ?? 0));
         Add(ReportSectionIds.Quality, AnalyticsFigures.RecoveryFile, "Recovery and M+0 sensitivity",
             "The chart separates the primary reference-calibrated estimate, M+0 sensitivity and directly observed diagnostic bases.", () => new RecoveryChart(data.Fractions, data.Grouped));
-        Add(ReportSectionIds.Results, PresentationFigures.SignalByRunFile, "Signal by run",
-            "Stored run-level native fractions, with the denominator and signal bases stated in the chart.", () => new SignalByRunChart(data.Fractions),
-            new CaptionNumber("Acquisition runs", data.Fractions.Count, "runs", "0"));
+        var runPages = data.Fractions.Chunk(ReportSignalByRunChart.RunsPerPage).DefaultIfEmpty(Array.Empty<NativeRunFraction>()).ToArray();
+        for (int page = 0; page < runPages.Length; page++)
+        {
+            var pageRuns = runPages[page];
+            int runOffset = page * ReportSignalByRunChart.RunsPerPage;
+            string file = page == 0 ? PresentationFigures.SignalByRunFile
+                : Path.GetFileNameWithoutExtension(PresentationFigures.SignalByRunFile) + "_" + (page + 1).ToString(CultureInfo.InvariantCulture) + ".png";
+            Add(ReportSectionIds.Results, file, "Signal by run",
+                "Observed identified envelope and reference-calibrated de novo estimate each use that run's TIC denominator. "
+                    + "Run indices follow acquisition order in the Signal by run table and companion workbook, where complete run names are retained. Missing TIC is unavailable.",
+                () => new ReportSignalByRunChart(pageRuns, runOffset),
+                new CaptionNumber("Acquisition runs", data.Fractions.Count, "runs", "0"));
+            charts[^1] = charts[^1] with { Width = ReportPrintChart.LayoutWidth, Height = ReportPrintChart.LayoutHeight };
+        }
         var pooledFacts = data.Grouped is { Tic: > 0 } pooled
             ? new[] { new CaptionNumber("Pooled primary recovery estimate", 100 * pooled.RecoveredFractionReferenceCalibrated, "%"),
                 new CaptionNumber("Pooled M+0 recovery", 100 * pooled.RecoveredFractionM0, "%") }
@@ -90,6 +104,11 @@ public static class ReportFigureRenderer
             var census = visibleFamilies.SourceSequenceSummary;
             var sourcePages = ReportFamilySourceSequenceChart.Pages(census);
             int selected = sourcePages.Sum(page => page.Count);
+            if (selected == 0)
+                Missing(ReportSectionIds.Results, "Family source sequence counts",
+                    "The stored census has no source-resolved family sequences for the PEAKS de-novo-only and DeepNovo disjoint sets. "
+                    + "Other de novo sources are separate; this does not establish that all de novo evidence is absent. "
+                    + "The complete stored census remains in the companion workbook's Complete family source sequence census table.");
             for (int page = 0; page < sourcePages.Count; page++)
             {
                 var pageRows = sourcePages[page];
@@ -150,10 +169,18 @@ public static class ReportFigureRenderer
         if (manifest.IdentificationConcordance is { } concordance)
         {
             concordance.Validate();
-            Add(ReportSectionIds.Quality, PresentationFigures.DatabaseSearchConcordanceFile, "Database search concordance",
-                "Sequence agreement among precursor-qualified one-to-one PSM pairs. Raw scan overlap is not its denominator.", () => new DatabaseSearchConcordanceChart(concordance),
-                new("Precursor-qualified database-search pairs", concordance.PrecursorQualifiedDatabaseSearchPairs, "pairs", "0"),
-                new("Exact pairs", concordance.ExactPrecursorQualifiedDatabaseSearchPairs, "pairs", "0"));
+            if (concordance.PrecursorQualifiedDatabaseSearchPairs > 0)
+                Add(ReportSectionIds.Quality, PresentationFigures.DatabaseSearchConcordanceFile, "Database search concordance",
+                    "Sequence agreement among precursor-qualified one-to-one PSM pairs. Raw scan overlap is not its denominator.", () => new DatabaseSearchConcordanceChart(concordance),
+                    new("Precursor-qualified database-search pairs", concordance.PrecursorQualifiedDatabaseSearchPairs, "pairs", "0"),
+                    new("Exact pairs", concordance.ExactPrecursorQualifiedDatabaseSearchPairs, "pairs", "0"));
+            else Missing(ReportSectionIds.Quality, "Database search concordance",
+                "No precursor-qualified comparable pairs were recorded. Stored audit counts: PatternLab PSM rows "
+                + concordance.PatternLabPsmRows.ToString(CultureInfo.InvariantCulture) + "; PEAKS database PSM rows "
+                + concordance.PeaksDatabasePsmRows.ToString(CultureInfo.InvariantCulture) + "; comparable pairs "
+                + concordance.PrecursorQualifiedDatabaseSearchPairs.ToString(CultureInfo.InvariantCulture) + "; exact pairs "
+                + concordance.ExactPrecursorQualifiedDatabaseSearchPairs.ToString(CultureInfo.InvariantCulture)
+                + ". No agreement rate is estimated. The complete audit remains in the table and companion workbook.");
             if (manifest.DeNovoOverlap is { HasScanLevelSequenceComparison: true } overlap)
             {
                 overlap.Validate();
