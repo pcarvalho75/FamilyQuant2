@@ -42,7 +42,7 @@ public sealed record ReportFigure(string Id, string Title, byte[] PngBytes, stri
     int PixelWidth, int PixelHeight) : ReportBlock(Id);
 
 /// <summary>
-/// Top-level order: title, contents, summary, methods, results, one section per panel family,
+/// Top-level order: title, contents, summary, summary of findings, methods, results, one section per panel family,
 /// quality, sensitivity, Database gap, interpretation, supplements. Dynamic family ids append
 /// the panel's stable key to FamilyPrefix, with no display name or position in the id.
 /// </summary>
@@ -51,6 +51,7 @@ public static class ReportSectionIds
     public const string Title = "title";
     public const string Contents = "contents";
     public const string Summary = "summary";
+    public const string Findings = "findings";
     public const string Methods = "methods";
     public const string Results = "results";
     public const string AssignmentConflicts = "assignment-conflicts";

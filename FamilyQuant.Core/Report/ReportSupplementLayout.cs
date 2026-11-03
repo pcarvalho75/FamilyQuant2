@@ -21,6 +21,7 @@ public static class ReportSupplementLayout
         ["product-parts"] = "family_product_parts.csv", ["database-gap-table"] = "database_gap.csv",
         ["others-members"] = "family_others_members.csv",
         ["sensitivity-table"] = "family_sensitivity.csv",
+        ["findings-numbers"] = ReportFindings.CsvFile,
     };
 
     public static ReportSupplementLayoutResult Apply(ReportDocument source, IReadOnlyDictionary<string, string> csvExports)

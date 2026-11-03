@@ -8,7 +8,7 @@ namespace FamilyQuant.Report;
 public static class ReportStoredResults
 {
     public static ReportResultPacket Apply(ReportResultPacket current, QuantManifest manifest,
-        IReadOnlyDictionary<int, string> familyLabels, FamilyReportThresholdResult? grouping = null)
+        IReadOnlyDictionary<int, string> familyLabels, FamilyReportThresholdResult? grouping = null, FamilyClusterFile? curation = null)
     {
         var exports = new Dictionary<string, string>(current.CsvExports, StringComparer.Ordinal);
         var sections = current.Sections.ToDictionary(s => s.Id, s => s.Blocks.ToList(), StringComparer.Ordinal);
@@ -120,6 +120,11 @@ public static class ReportStoredResults
         }
         var final = current.Sections.Select(s => s with { Blocks = sections[s.Id] }).ToList();
         if (conflicts != null) final.Add(conflicts);
+        if (curation != null && ReportFindings.FromProject(curation, manifest, grouping, familyLabels) is { } findings)
+        {
+            exports.Add(ReportFindings.CsvFile, findings.Csv);
+            final.Add(findings.Section);
+        }
         return new(final, exports);
     }
 }

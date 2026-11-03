@@ -176,6 +176,9 @@ internal static partial class Program
         public bool UseOwnCache { get; set; } = true;
         public bool SkipRepeat { get; set; }
         public bool SkipReport { get; set; }
+        /// <summary>Open Start and run only File > Export report into Output/report/ReportName.</summary>
+        public bool OnlyReport { get; set; }
+        public string ReportName { get; set; } = "report.docx";
     }
 
     private sealed class J7aSubclass
@@ -256,6 +259,33 @@ internal static partial class Program
                 Say("Saved " + path + " (" + new FileInfo(path).Length + " bytes; " + shell.DocumentState.SaveCheckText + ")");
             }
             string Stage(string name, string file) => Path.Combine(output, name, file);
+            bool ExportReport(string reportPath)
+            {
+                MainWindow.SelectReportPathOverride = () => reportPath;
+                MainWindow.ReportExportPresenterOverride = editor =>
+                {
+                    editor.Left = -30000; editor.Top = -30000; editor.ShowActivated = false; editor.ShowInTaskbar = false;
+                    editor.WindowStartupLocation = WindowStartupLocation.Manual; editor.Show(); PumpDispatcher();
+                    var boxes = J7aDescendants<CheckBox>(editor).ToList();
+                    foreach (var box in boxes) box.IsChecked = true;
+                    Say("Report export screen: " + boxes.Count + " section and figure boxes, all ticked: " + string.Join("; ", boxes.Select(b => b.Content?.ToString())));
+                    editor.SaveButton.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+                };
+                Directory.CreateDirectory(Path.GetDirectoryName(reportPath)!);
+                ((MenuItem)shell.FindName("MenuItemExportReport")).RaiseEvent(new RoutedEventArgs(MenuItem.ClickEvent));
+                bool exported = shell.ReportExportTask != null && J7aWait(shell.ReportExportTask, TimeSpan.FromHours(2));
+                Say("Report export: " + exported + "; " + (File.Exists(reportPath) ? new FileInfo(reportPath).Length + " bytes" : "no file")
+                    + "; supplement " + Report.ReportSupplementWorkbook.PathForReport(reportPath) + " " + File.Exists(Report.ReportSupplementWorkbook.PathForReport(reportPath)));
+                return exported;
+            }
+            if (config.OnlyReport)
+            {
+                Open(config.Start);
+                watch.Restart();
+                bool exported = ExportReport(Path.Combine(output, "report", config.ReportName));
+                Timed("report export");
+                return exported ? 0 : 5;
+            }
 
             // Stage 1: File > Import family panel, the Pfam check, the subclass rules entered through the panel template.
             string panelProject = Stage("s1-panel", "panel.fqproj");
