@@ -674,7 +674,10 @@ namespace FamilyQuant
             {
                 await RunCurationAsync("Fetch evidence", async operation =>
                 {
-                    var outcome = await ViewModel.FetchEvidenceAsync(FetchDomainsHandlerOverride, operation);
+                    var extraPositionFamilies = CheckBoxIncludeFamilyPositions.IsChecked == true
+                        ? DataGridResultGrid.SelectedItems.OfType<FastaItemExtended>().Select(p => p.UserID).Distinct().ToArray()
+                        : Array.Empty<int>();
+                    var outcome = await ViewModel.FetchEvidenceAsync(FetchDomainsHandlerOverride, operation, extraPositionFamilies);
                     UpdateFilteredResults();
                     string title = "Fetch evidence";
                     ShellMessages.Report(this, CurationViewModel.DescribeEvidenceFetch(outcome), title,
