@@ -121,3 +121,11 @@ Multiplicity uses the native `MapToFamilies` target-member join. It copies J42's
 recorded audit/provenance and labels that path structurally invariant, not newly
 recomputed. No output changes a project, a production default or the user's
 chosen family grouping. Science review and Paulo's default decision remain open.
+
+Desk M130 additionally requires the J43 headline basis. The comparison calls
+`ReportCompositionBasis.Select` on each option's native shares/effective-panel
+bundle and records `UsesPanel`, `IsIdentity` and whether the original share object
+was reused without arithmetic. Native panel-headline CSVs and complete panel-unit
+shares/source membership are retained separately. A one-to-one panel preserves
+each option's measured share deltas under J43; a multi-source panel uses the
+computed collapsed bundle and cannot silently fall back to the old unit.

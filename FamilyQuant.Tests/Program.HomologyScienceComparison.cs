@@ -1,4 +1,5 @@
 using FamilyQuant.Homology;
+using FamilyQuant.Report;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -39,6 +40,7 @@ internal static partial class Program
         var multiplicities = new List<object>();
         var j42 = new List<JsonElement>();
         var appliedGates = new Dictionary<(int Study, int Call), (int Targets, int Decoys)>();
+        var panelBases = new List<ReportCompositionBasis>();
         for (int i = 0; i < directories.Length; i++)
         {
             string directory = directories[i];
@@ -64,6 +66,10 @@ internal static partial class Program
             summaries.Add(summary);
             headlines.Add(StudyRead<JsonElement>(Path.Combine(directory, "headline.json")));
             shares.Add(StudyRead<FamilyRunSharesResult>(Path.Combine(directory, "family-run-shares.json")));
+            var effective = StudyRead<JsonElement>(Path.Combine(directory, "effective-panel-families.json"));
+            var basisStudies = new QuantManifest { FamilyRunShares = shares[i],
+                EffectivePanelFamilies = effective.ValueKind == JsonValueKind.Null ? null : effective.Deserialize<EffectivePanelFamilyResult>(HomologyStudyJson) };
+            panelBases.Add(ReportCompositionBasis.Select(saved.fcf, basisStudies));
             j42.Add(StudyRead<JsonElement>(Path.Combine(directory, "j42-reference.json")));
             var found = StudyRestoreResults(Path.Combine(directory, "results-2.json.gz"));
             foreach (int call in new[] { 2, 3, 5 })
@@ -87,6 +93,19 @@ internal static partial class Program
             || r.GetProperty("ProvenanceSha256").GetString() != j42[0].GetProperty("ProvenanceSha256").GetString()))
             throw new InvalidDataException("J42 reference inputs differ between studies.");
         Directory.CreateDirectory(output);
+        StudyWrite(Path.Combine(output, "panel-headline-basis.json"), panelBases.Select((basis, i) => new
+        {
+            Option = labels[i], basis.UsesPanel, basis.IsIdentity,
+            ReusesOriginalSharesWithoutArithmetic = ReferenceEquals(basis.Studies.FamilyRunShares, shares[i]),
+            Labels = basis.Labels, SourceUserIds = basis.SourceUserIds, RunShares = basis.Studies.FamilyRunShares,
+        }).ToArray());
+        for (int i = 0; i < panelBases.Count; i++)
+        {
+            var basis = panelBases[i];
+            if (basis.Grouping != null)
+                File.WriteAllText(Path.Combine(output, "panel-headline-" + i + ".csv"),
+                    ReportStudyExports.Headline(basis.Grouping, basis.Studies.FamilyProteinCounts, basis.Labels), new UTF8Encoding(false));
+        }
         StudyWrite(Path.Combine(output, "multiplicity.json"), multiplicities);
         var text = new StringBuilder("# J47 separate-option replay comparison\n\n");
         text.AppendLine("Produced by FamilyQuant.Tests from the five verified actual-Compute search captures and unchanged saved quantitation. No full Compute or RAW extraction. Each option is enabled alone; every production default remains OFF. The OFF run matches all five certified scientific hashes and the available stored native quantitative views.");
@@ -117,6 +136,10 @@ internal static partial class Program
             text.AppendLine($"| {labels[i]} | {h.GetProperty("KnownPairs")} | {h.GetProperty("KnownLanded")} | {h.GetProperty("KnownRight")} | {h.GetProperty("KnownWrong")} | {Fraction(h.GetProperty("KnownWrong").GetDouble(), h.GetProperty("KnownLanded").GetDouble())} | {w.GetProperty("TargetPeptides")} | {w.GetProperty("DecoyPeptides")} | {Fraction(w.GetProperty("DecoyEnvelope").GetDouble(), w.GetProperty("CreditedEnvelope").GetDouble())} | {Fraction(h.GetProperty("ResidualEnvelope").GetDouble(), total)} | {Fraction(w.GetProperty("CreditedEnvelope").GetDouble(), total)} | {Fraction(h.GetProperty("UnexplainedEnvelope").GetDouble(), total)} |");
         }
         text.AppendLine("\n## Family shares\n\nArithmetic mean of per-run shares, percent of credited primary family signal. The second value is the signed change from OFF in percentage points. These are composition shares, not percent of the whole specimen. All panel rows are retained, including explicit zero rows. Full measured-envelope shares are in family-share-comparison.json.");
+        text.AppendLine("\nJ43 panel-family headline basis is selected by the native ReportCompositionBasis.Select for each option. Identity and direct reuse of the original shares prove that the option's headline effect is unchanged by J43; otherwise the native collapsed panel-unit rows are reported separately. The original UserID comparisons below retain their original unit. Full panel-unit values and source membership are in panel-headline-basis.json, with native headline CSVs for all four options.");
+        text.AppendLine("\n| Option | Panel in use | One-to-one identity | Original share object reused without arithmetic |\n|---|---|---|---|");
+        for (int i = 0; i < panelBases.Count; i++)
+            text.AppendLine($"| {labels[i]} | {panelBases[i].UsesPanel} | {panelBases[i].IsIdentity} | {ReferenceEquals(panelBases[i].Studies.FamilyRunShares, shares[i])} |");
         text.AppendLine("\n| Current family ID and name | OFF % | Tier % (delta pp) | Length % (delta pp) | Tag % (delta pp) |\n|---|---:|---:|---:|---:|");
         var familyMaps = shares.Select(s => s.Families.ToDictionary(f => f.FamilyUserId)).ToArray();
         var familyRows = new List<object>();
@@ -148,8 +171,18 @@ internal static partial class Program
         StudyWrite(Path.Combine(output, "headlines.json"), headlines);
         StudyWrite(Path.Combine(output, "j42-reference.json"), j42[0]);
         if (StudyHash(project) != projectSha) throw new InvalidDataException("Input project changed during comparison.");
+        string[] artifacts = { "validation.json", "search-summary.json", "results-2.json.gz", "results-3.json.gz", "results-5.json.gz",
+            "headline.json", "family-run-shares.json", "family-world.json", "effective-panel-families.json",
+            "actual-world-gate-summary.json", "actual-world-length-gates.json", "j42-reference.json" };
+        StudyWrite(Path.Combine(output, "input-hashes.json"), directories.Select((directory, i) => new
+        {
+            Option = labels[i], Directory = directory,
+            Sha256 = artifacts.ToDictionary(name => name, name => StudyHash(Path.Combine(directory, name)), StringComparer.Ordinal),
+        }).ToArray());
         StudyWrite(Path.Combine(output, "validation.json"), new { Complete = true, ProjectSha256 = projectSha,
-            Directories = directories, NoFullCompute = true, J42Recomputed = false });
+            Directories = directories, NoFullCompute = true, J42Recomputed = false,
+            ProducerAssemblySha256 = StudyHash(typeof(Program).Assembly.Location),
+            CoreAssemblySha256 = StudyHash(typeof(HomologySearch).Assembly.Location) });
         Console.WriteLine("Four native replay packets compared; input project unchanged. " + Path.Combine(output, "comparison.md"));
         return 0;
 
