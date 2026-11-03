@@ -85,13 +85,15 @@ The export failed on Ana's project (a figure read the on-screen palette from the
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| J30b | The fixed export runs to the end on a copy of the full-run project through the real command | M | 0.5 | 🟢 | J30c | Word report and supplement written; times reported | RS | | 0 | 0 | |
+| J41a | No list in one cell: on Ana's project the supplement refused to write because one cell, a family's 1,970 unexplained peptide sequences, is 38,388 characters (Excel's limit is 32,767); a list goes to its own one-row-per-item sheet, the Word file and CSVs keep their counts | M | 0.5 | 🟢 | J41b, J30b | A fixture with a list longer than Excel's limit writes the workbook; every item is in the list sheet; nothing is truncated | FL | | 0 | 0 | |
+| J41b | J41 reviewed and merged | L | 0.2 | J41a | J30c, J32c | Approved; gate green | FL | | 0 | 0 | |
+| J30b | The fixed export runs to the end on a copy of the full-run project through the real command | M | 0.5 | J41a | J30c | Word report and supplement written; times reported | RS | | 0 | 0 | |
 | J30c | J30 reviewed and merged | L | 0.2 | J30b | J24c, J32c, J34b, J36b, K8, K14 | Approved; gate green | RS | | 0 | 0 | |
 | J24b | J24 (export progress) and J31 (Export report available after opening) merged | L | 0.1 | 🟢 | J24c, K8, K14 | Gate green | SH | | 0 | 0 | |
 | J24c | Export progress on the full-run project: the longest gap between two steps named | L | 0.3 | J30c, J24b | K14 | `READY` names the longest gap and its step | SH | | 0 | 0 | |
 | J16a | Figure export's gate failures fixed: the figure details file is written only when a figure is capped, so small projects export exactly as before; the screen test passes | L | 0.3 | 🟢 | J16b | `FIXED J16` with the three checks green | LK | | 0 | 0 | |
 | J16b | J16 re-reviewed and merged | L | 0.2 | J16a | J34b, K8, K14 | Approved; gate green | LK | | 0 | 0 | |
-| J32c | Export timing on the full-run copy: the attribution step with the cache warm, its sub-steps timed | L | 0.3 | J30c | J32d, J39 | `READY` with the sub-step times before and after | T1 | | 0 | 0 | |
+| J32c | Export timing on the full-run copy: the attribution step with the cache warm, its sub-steps timed | L | 0.3 | J30c, J41b | J32d, J39 | `READY` with the sub-step times before and after | T1 | | 0 | 0 | |
 | J32d | J32 reviewed and merged | L | 0.2 | J32c | K14 | Approved; gate green | T1 | | 0 | 0 | |
 | J39 | Cache the two source census searches as well, if J32c shows they cost more than a minute | M | 1 | J32c | | Byte-identical report data; the export time before and after | T1 | | 0 | 0 | |
 | J36a | Delivery command built and tested on a small computed project: export, trace, project, panel, read-me, checks, nothing written outside its folder | M | 0.5 | 🟢 | J36b | Fixture run passes | RS | | 0 | 0 | |
