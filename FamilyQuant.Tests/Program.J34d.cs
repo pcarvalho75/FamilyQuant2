@@ -64,7 +64,35 @@ internal static partial class Program
         Check("nonempty source sets retain their existing source-census drawing",
             ReportFigureRenderer.Plan(data, manifest, new FamilyClusterFile(), families).Charts
                 .Single(c => c.FileName == PresentationFigures.FamilySourceSequenceFile).CreateChart() is ReportFamilySourceSequenceChart);
+        J34dConcordanceTraceTests(data);
         J34dRunChartTests(data);
+    }
+
+    private static void J34dConcordanceTraceTests(AnalyticsData data)
+    {
+        // Deliberately unique counts: incidental equality with another table cell cannot pass this regression.
+        var manifest = new QuantManifest { IdentificationConcordance = new IdentificationConcordanceSummary
+            { PatternLabPsmRows = 123457, PeaksDatabasePsmRows = 234569 } };
+        var packet = ReportCurrentResults.Build(data, manifest, null);
+        var audit = packet.Sections.SelectMany(s => s.Blocks).OfType<ReportTable>().Single(t => t.Id == "quality-concordance");
+        Check("zero-pair audit retains both source PSM counts as native integer cells without rate denominators",
+            audit.Rows.Any(r => r[1] == "patternlab_psm_rows" && r[2] == "123457" && r[3] == "")
+            && audit.Rows.Any(r => r[1] == "peaks_database_psm_rows" && r[2] == "234569" && r[3] == ""));
+        string csv = packet.CsvExports["database_search_concordance.csv"];
+        Check("additional source audit counts preserve every original concordance CSV row byte for byte",
+            csv.StartsWith(IdentificationConcordanceStudy.BuildCsv(manifest.IdentificationConcordance), StringComparison.Ordinal));
+        var missing = ReportFigureRenderer.Plan(data, manifest, new FamilyClusterFile(), null).Unavailable.Single(x => x.Title == "Database search concordance");
+        var document = new ReportDocument { Sections = new[] { new ReportSection(ReportSectionIds.Quality, "Quality",
+            new ReportBlock[] { new ReportParagraph("no-comparable-pairs", missing.Reason) }) } };
+        string folder = Path.Combine(Path.GetTempPath(), "j34d-concordance-trace", Guid.NewGuid().ToString("N"));
+        Directory.CreateDirectory(folder);
+        string word = Path.Combine(folder, "audit.docx"), output = Path.Combine(folder, "trace.csv");
+        WordReportWriter.Write(word, document);
+        ReportSupplementWorkbook.Write(ReportSupplementWorkbook.PathForReport(word), document,
+            new[] { new ReportSupplementSheet(audit.Id, ReportSectionIds.Quality, "Concordance", audit) });
+        File.WriteAllText(Path.Combine(folder, "database_search_concordance.csv"), csv);
+        Check("the no-comparable-pairs paragraph passes the unchanged J18 tracer against its native audit cells",
+            ReportNumberTrace.Run(word, folder, output) == 0);
     }
 
     private static void J34dRunChartTests(AnalyticsData data)
