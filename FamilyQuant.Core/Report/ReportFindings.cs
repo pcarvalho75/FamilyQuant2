@@ -75,6 +75,13 @@ public static class ReportFindings
         }
         void Say(string id, string text) => blocks.Add(new ReportParagraph("findings:" + id, text));
         string Name(int userId) => input.Labels.TryGetValue(userId, out string? label) ? label : Integer(userId);
+        // The effective panel family of a group, after merges; null without a panel or an unambiguous key.
+        FamilyPanelFamily? PanelFamily(int userId)
+        {
+            if (input.Panel is not { } panel || input.PanelKeyByUserId.GetValueOrDefault(userId) is not { } key) return null;
+            string? effective = FamilyPanelValidation.ResolveFamilyKey(panel, key);
+            return effective == null ? null : panel.Families.Single(f => f.Key == effective);
+        }
         var grouping = input.Grouping;
         string threshold = Percent(grouping.Threshold);
         // Families under Others are named only in the supplement, never in the document text (D35).
@@ -114,26 +121,25 @@ public static class ReportFindings
         if (grouping.OtherFamilies.Count > 0)
         {
             var reasons = grouping.OtherMembership.ToDictionary(m => m.FamilyUserId, m => m.Reason);
-            int below = grouping.OtherFamilies.Count(f => reasons.GetValueOrDefault(f.FamilyUserId).HasFlag(FamilyReportOtherReason.Threshold));
-            int decided = grouping.OtherFamilies.Count(f => reasons.GetValueOrDefault(f.FamilyUserId).HasFlag(FamilyReportOtherReason.PanelDecision));
+            bool Is(FamilyRunShareSummary f,FamilyReportOtherReason reason) => reasons.GetValueOrDefault(f.FamilyUserId).HasFlag(reason);
+            // Disjoint counts, so the parts add up to the total.
+            var why = new List<string>();
+            void Reason(int count, string text) { if (count > 0) why.Add(Record("others", text, Integer(count)) + " " + text); }
+            Reason(grouping.OtherFamilies.Count(f => Is(f, FamilyReportOtherReason.Threshold) && !Is(f, FamilyReportOtherReason.PanelDecision)), "below the threshold");
+            Reason(grouping.OtherFamilies.Count(f => Is(f, FamilyReportOtherReason.PanelDecision) && !Is(f, FamilyReportOtherReason.Threshold)), "by panel decision");
+            Reason(grouping.OtherFamilies.Count(f => Is(f, FamilyReportOtherReason.Threshold) && Is(f, FamilyReportOtherReason.PanelDecision)), "below the threshold and by panel decision");
             foreach (var member in grouping.OtherFamilies.OrderByDescending(f => f.MeanShare).ThenBy(f => f.FamilyUserId))
                 numbers.Add(new[] { "others", Name(member.FamilyUserId) + " mean share (%)", Percent(member.MeanShare) });
             string total = grouping.OthersMeanShare.HasValue
                 ? "; together they hold " + Record("others", "Others mean share (%)", Percent(grouping.OthersMeanShare)) + "% of the credited family signal" : "";
             Say("others", Record("others", "families under Others", Integer(grouping.OtherFamilies.Count)) + (grouping.OtherFamilies.Count == 1 ? " family is" : " families are")
-                + " reported under Others (" + Record("others", "below the threshold", Integer(below)) + " below the threshold, "
-                + Record("others", "by panel decision", Integer(decided)) + " by panel decision)" + total + "; the supplement names them.");
+                + " reported under Others" + (why.Count == 0 ? "" : " (" + string.Join(", ", why) + ")") + total + "; the supplement names them.");
         }
 
         if (input.Panel is { } panel)
         {
-            string? Decide(string key)
-            {
-                string? effective = FamilyPanelValidation.ResolveFamilyKey(panel, key);
-                return effective == null ? null : panel.Families.Single(f => f.Key == effective).Decision.ToString();
-            }
             var unobserved = input.Shares.Families.Where(f => f.NoPeptideObserved && input.PanelKeyByUserId.GetValueOrDefault(f.FamilyUserId) is { } key
-                    && Decide(key) == nameof(FamilyPanelDecision.Quantify) && input.MembersByPanelKey.GetValueOrDefault(key) > 0)
+                    && PanelFamily(f.FamilyUserId)?.Decision == FamilyPanelDecision.Quantify && input.MembersByPanelKey.GetValueOrDefault(key) > 0)
                 .Select(f => input.PanelKeyByUserId[f.FamilyUserId]!).Distinct(StringComparer.Ordinal)
                 .OrderByDescending(k => input.MembersByPanelKey[k]).ThenBy(k => k, StringComparer.Ordinal).ToList();
             if (unobserved.Count > 0)
@@ -148,7 +154,9 @@ public static class ReportFindings
         }
 
         bool anyUnresolved = false;
-        foreach (var family in (input.Subclasses?.Families ?? new()).Where(f => f.Parts.Count > 0 && f.FamilySignal > 0 && !hidden.Contains(f.FamilyUserId))
+        // Only families whose panel family carries subclass rules; elsewhere every part is unresolved by construction.
+        foreach (var family in (input.Subclasses?.Families ?? new()).Where(f => f.Parts.Count > 0 && f.FamilySignal > 0 && !hidden.Contains(f.FamilyUserId)
+                         && PanelFamily(f.FamilyUserId)?.Subclasses.Count > 0)
                      .OrderByDescending(f => f.FamilySignal).ThenBy(f => f.FamilyUserId))
         {
             string name = Name(family.FamilyUserId);
@@ -179,7 +187,7 @@ public static class ReportFindings
         }
         choices.Add("report threshold " + Record("choices", "report threshold (%)", threshold) + "%");
         foreach (var source in input.DeNovoInputs.GroupBy(i => i.SourceId, StringComparer.Ordinal).Select(g => g.First()))
-            choices.Add("de novo input " + source.SourceDisplayName + " with " + source.ConfidenceField + " at least "
+            choices.Add("de novo source \"" + source.SourceDisplayName + "\" with " + source.ConfidenceField + " at least "
                 + Record("choices", source.SourceDisplayName + " minimum " + source.ConfidenceField, source.MinimumConfidence.ToString("R", CultureInfo.InvariantCulture)));
         Say("choices", "Analysis choices in force: " + string.Join("; ", choices) + ".");
 

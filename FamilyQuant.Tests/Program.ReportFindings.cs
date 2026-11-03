@@ -24,8 +24,9 @@ internal static partial class Program
         return failed == 0 ? 0 : 1;
     }
 
-    // Synthetic stored studies: two listed families, one below the threshold, one Others by panel decision, one quantified
-    // panel family with members and no peptide, one group outside the panel. Names are fixture data, never product text.
+    // Synthetic stored studies: two listed families, one below the threshold, one Others by panel decision, one Others for
+    // both reasons, one quantified panel family with members and no peptide, one group outside the panel, and subclass
+    // parts for a family with subclass rules and for one without. Names are fixture data, never product text.
     private static ReportFindingsInput FindingsFixture()
     {
         FamilyRunShareSummary Family(int id, double? mean, double? sd, double? cv, bool none = false) => new()
@@ -38,17 +39,19 @@ internal static partial class Program
         {
             Runs = new() { new() { Run = "run_a", AssignedSignal = 80, MeasuredSignal = 100 }, new() { Run = "run_b", AssignedSignal = 81, MeasuredSignal = 100 } },
             Families = new() { Family(1, 0.6, 0.012, 0.02), Family(2, 0.385, 0.0154, 0.04), Family(3, 0.0006, 0.0001, 0.1667),
-                Family(4, 0, 0, null, none: true), Family(5, 0.0008, 0.0001, 0.125), Family(6, 0.0024, 0.0002, 0.0833) },
+                Family(4, 0, 0, null, none: true), Family(5, 0.0008, 0.0001, 0.125), Family(6, 0.0024, 0.0002, 0.0833),
+                Family(7, 0.0002, 0.00005, 0.25) },
         };
         var panel = new FamilyPanel { Families = new()
         {
-            new() { Key = "a", DisplayName = "Alpha group", Decision = FamilyPanelDecision.Quantify },
+            new() { Key = "a", DisplayName = "Alpha group", Decision = FamilyPanelDecision.Quantify,
+                Subclasses = new() { new() { Key = "x", DisplayName = "Part X" }, new() { Key = "y", DisplayName = "Part Y" } } },
             new() { Key = "b", DisplayName = "Beta group", Decision = FamilyPanelDecision.Quantify },
             new() { Key = "c", DisplayName = "Gamma group", Decision = FamilyPanelDecision.Quantify },
             new() { Key = "d", DisplayName = "Delta group", Decision = FamilyPanelDecision.Quantify },
             new() { Key = "e", DisplayName = "Epsilon group", Decision = FamilyPanelDecision.ReportUnderOthers },
         } };
-        var keys = new Dictionary<int, IReadOnlyList<string>> { [1] = new[] { "a" }, [2] = new[] { "b" }, [3] = new[] { "c" }, [4] = new[] { "d" }, [6] = new[] { "e" } };
+        var keys = new Dictionary<int, IReadOnlyList<string>> { [1] = new[] { "a" }, [2] = new[] { "b" }, [3] = new[] { "c" }, [4] = new[] { "d" }, [6] = new[] { "e" }, [7] = new[] { "e" } };
         var grouping = FamilyReportThreshold.Build(shares, new FamilyClusterFile { FamilyPanel = panel }, keys);
         return new ReportFindingsInput
         {
@@ -59,10 +62,13 @@ internal static partial class Program
                 new() { PartKey = "x", Label = "Part X", Signal = 40, ShareOfFamily = 0.4 },
                 new() { PartKey = "y", Label = "Part Y", Signal = 15, ShareOfFamily = 0.15 },
                 new() { PartKey = null, Label = "Subclass not resolved", IsUnresolved = true, Signal = 45, ShareOfFamily = 0.45 },
+            } }, new() { FamilyUserId = 2, FamilySignal = 50, Parts = new()
+            {
+                new() { PartKey = null, Label = "Subclass not resolved", IsUnresolved = true, Signal = 50, ShareOfFamily = 1 },
             } } } },
-            Labels = new Dictionary<int, string> { [1] = "Alpha group", [2] = "Beta group", [3] = "Gamma group", [4] = "Delta group", [5] = "Outside group", [6] = "Epsilon group" },
+            Labels = new Dictionary<int, string> { [1] = "Alpha group", [2] = "Beta group", [3] = "Gamma group", [4] = "Delta group", [5] = "Outside group", [6] = "Epsilon group", [7] = "Zeta group" },
             Panel = panel,
-            PanelKeyByUserId = new Dictionary<int, string?> { [1] = "a", [2] = "b", [3] = "c", [4] = "d", [6] = "e" },
+            PanelKeyByUserId = new Dictionary<int, string?> { [1] = "a", [2] = "b", [3] = "c", [4] = "d", [6] = "e", [7] = "e" },
             MembersByPanelKey = new Dictionary<string, int>(StringComparer.Ordinal) { ["a"] = 10, ["b"] = 5, ["c"] = 2, ["d"] = 7, ["e"] = 1 },
             ScopeTerms = new[] { "term one", "term two" },
             Links = new List<FamilyPanelEvidenceLink> { new() { SourceFamily = "s1", PanelFamilyKey = "a", Source = "user note" }, new() { SourceFamily = "s2", PanelFamilyKey = null } },
@@ -87,19 +93,20 @@ internal static partial class Program
             && Text("listed").StartsWith("2 families are above the report threshold of 0.1%", StringComparison.Ordinal), Text("listed"));
         Check("J44 replicate agreement is the range of the listed families' CVs", Text("replicates") == "Across these 2 families, the coefficient of variation of the per-run shares ranges from 2% to 4% over 2 runs.", Text("replicates"));
         string othersShare = (100 * input.Grouping.OthersMeanShare!.Value).ToString("G6", CultureInfo.InvariantCulture);
-        Check("J44 Others gives the members in share order, both reasons and the stored Others share", othersShare == "0.38"
-            && Text("others") == "4 families are reported under Others (3 below the threshold, 1 by panel decision); together they hold "
+        Check("J44 Others gives disjoint reason counts that add up to the total, and the stored Others share", othersShare == "0.4"
+            && Text("others") == "5 families are reported under Others (3 below the threshold, 1 by panel decision, 1 below the threshold and by panel decision); together they hold "
             + othersShare + "% of the credited family signal; the supplement names them.", Text("others"));
         Check("J44 no Others member is named in the document text, only in the supplement (D35)", section.Blocks.OfType<ReportParagraph>()
-            .All(p => !new[] { "Epsilon group", "Outside group", "Gamma group", "Delta group" }.Any(n => p.Text.Contains(n, StringComparison.Ordinal)))
+            .All(p => !new[] { "Epsilon group", "Zeta group", "Outside group", "Gamma group", "Delta group" }.Any(n => p.Text.Contains(n, StringComparison.Ordinal)))
             && csv.Contains("Epsilon group mean share", StringComparison.Ordinal) && csv.Contains("Delta group database members", StringComparison.Ordinal));
         Check("J44 quantified panel families with members and no peptide are counted with their members", Text("unobserved") == "1 quantified panel family has database members and no peptide observed (7 database members); the supplement names it.", Text("unobserved"));
-        var parts = ReportCsvTable.Build("p", "p", ReportStudyExports.Parts(input.Subclasses!.Families, input.Labels), "", "part", "within_family_pct");
+        var parts = ReportCsvTable.Build("p", "p", ReportStudyExports.Parts(input.Subclasses!.Families, input.Labels), "", "family_user_id", "part", "within_family_pct");
         Check("J44 subclass parts equal the stored parts table, not-resolved named with its rule", Text("subclasses:1") == "Alpha group subclass parts, all runs pooled: "
-            + string.Join(", ", parts.Rows.Select(r => r[0] + " " + r[1] + "%")) + "." && Text("subclasses-method") == ReportFindings.NotResolvedMethod, Text("subclasses:1"));
+            + string.Join(", ", parts.Rows.Where(r => r[0] == "1").Select(r => r[1] + " " + r[2] + "%")) + "." && Text("subclasses-method") == ReportFindings.NotResolvedMethod, Text("subclasses:1"));
+        Check("J44 a family whose panel family has no subclass rules gets no subclass sentence", parts.Rows.Any(r => r[0] == "2") && !ids.Contains("findings:subclasses:2"), string.Join(", ", ids));
         Check("J44 outside-panel and credited shares come from the stored run totals", Text("outside") == "Groups outside the panel families hold 0.08% of the credited family signal."
             && Text("credited") == "The credited family signal is 80% and 81% of the measured peptide signal in run_a and run_b.", Text("outside") + " | " + Text("credited"));
-        Check("J44 analysis choices print the scope phrases, links with notes, threshold and de novo cutoff", Text("choices") == "Analysis choices in force: evidence scope phrases \"term one\", \"term two\"; 2 confirmed panel links (notes: user note); report threshold 0.1%; de novo input source one with score at least 80.", Text("choices"));
+        Check("J44 analysis choices print the scope phrases, links with notes, threshold and de novo cutoff", Text("choices") == "Analysis choices in force: evidence scope phrases \"term one\", \"term two\"; 2 confirmed panel links (notes: user note); report threshold 0.1%; de novo source \"source one\" with score at least 80.", Text("choices"));
         var values = ReportCsvTable.Build("c", "c", csv, "", "value").Rows.Select(r => r[0]).ToHashSet(StringComparer.Ordinal);
         var printed = section.Blocks.OfType<ReportParagraph>().SelectMany(p => Regex.Matches(p.Text.Replace("run_a", "").Replace("run_b", ""), @"\d+(\.\d+)?").Select(m => m.Value)).ToList();
         Check("J44 every number printed is a row of the findings supplement", printed.All(values.Contains), string.Join(", ", printed.Where(v => !values.Contains(v))));
