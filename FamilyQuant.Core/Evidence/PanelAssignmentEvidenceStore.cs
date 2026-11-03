@@ -12,7 +12,11 @@ namespace FamilyQuant.Evidence;
 public static class PanelAssignmentEvidenceStore
 {
     public static IReadOnlyList<PanelProteinAssignment> RequireCurrent(FamilyClusterFile file) => Current(file)
-        ?? throw new InvalidOperationException("Family assignment evidence is missing or out of date. Rebuild the evidence grouping.");
+        ?? throw new InvalidOperationException(HasMissingSequence(file) ? "A target has no stored sequence. Restore its sequence before assigning families."
+            : "Family assignment evidence is missing or out of date. Rebuild the evidence grouping.");
+
+    private static bool HasMissingSequence(FamilyClusterFile file) => file.MyExtendedFastaItems
+        .Any(p => !NearestReviewed.IsDecoy(p) && string.IsNullOrEmpty(p.Sequence));
 
     public static PanelFamilyMap GetCurrentFamilyMap(FamilyClusterFile file)
     {
@@ -26,7 +30,8 @@ public static class PanelAssignmentEvidenceStore
                 .GroupBy(r => file.MyExtendedFastaItems[r.ProteinIndex].UserID)
                 .Where(g => g.Select(r => r.PanelFamilyKey).Distinct(StringComparer.Ordinal).Count() > 1)
                 .Select(g => g.Key).Order().ToArray();
-            return new() { Message = "Family assignment evidence is missing or out of date. Rebuild the evidence grouping.", ConflictingUserIds = conflicts };
+            return new() { Message = HasMissingSequence(file) ? "A target has no stored sequence. Restore its sequence before assigning families."
+                : "Family assignment evidence is missing or out of date. Rebuild the evidence grouping.", ConflictingUserIds = conflicts };
         }
         return BuildFamilyMap(file.FamilyPanel!, current);
     }
@@ -38,8 +43,11 @@ public static class PanelAssignmentEvidenceStore
         FamilyPanelValidation.Validate(panel);
         var byId = assignments.Where(r => r.FamilyUserId.HasValue).GroupBy(r => r.FamilyUserId!.Value).ToDictionary(g => g.Key, g =>
         {
-            string[] keys = g.Where(r => r.IsApplied && r.PanelFamilyKey != null).Select(r => FamilyPanelValidation.ResolveFamilyKey(panel, r.PanelFamilyKey!))
-                .Where(k => k != null).Select(k => k!).Distinct(StringComparer.Ordinal).Order(StringComparer.Ordinal).ToArray();
+            // Excluded keys still carry a report decision. Only PanelRows' measured membership
+            // drops them; erasing them here would turn an explicit exclusion into an unlinked row.
+            string[] keys = g.Where(r => r.IsApplied && r.PanelFamilyKey != null)
+                .Select(r => FamilyPanelValidation.ResolveFamilyKey(panel, r.PanelFamilyKey!) ?? r.PanelFamilyKey!)
+                .Distinct(StringComparer.Ordinal).Order(StringComparer.Ordinal).ToArray();
             bool outside = g.Any(r => !r.IsApplied || r.PanelFamilyKey == null);
             bool conflict = keys.Length > 1 || keys.Length > 0 && outside;
             string? key = keys.Length == 1 && !conflict ? keys[0] : null;
@@ -65,6 +73,7 @@ public static class PanelAssignmentEvidenceStore
 
     public static IReadOnlyList<PanelProteinAssignment>? Current(FamilyClusterFile file)
     {
+        if (HasMissingSequence(file)) return null;
         var rows = file.PanelProteinAssignments;
         var recipe = file.EvidenceRecipe;
         if (rows == null || file.FamilyPanel == null || recipe?.PanelProteinAssignments == null
@@ -112,17 +121,17 @@ public static class PanelAssignmentEvidenceStore
         using var hash = new LengthPrefixedSha256();
         hash.Append("Panel assignment facts v1");
         hash.Append(file.SourceSha256); hash.Append(file.SourceSequenceCount.ToString(CultureInfo.InvariantCulture));
-        hash.Append(recipe.FamilyPanel == null ? "" : PanelDerivedDataCurrentness.Fingerprint(recipe.FamilyPanel));
+        hash.Append(recipe.FamilyPanel == null ? "" : PanelDerivedDataCurrentness.FamilyFingerprint(recipe.FamilyPanel));
         hash.Append(JsonSerializer.Serialize(recipe.FamilyPanel?.EvidenceLinks));
         // On a stored file, use the current panel's definitions/links, not only its recipe snapshot.
         var currentPanel = projected == null ? file.FamilyPanel : recipe.FamilyPanel;
-        hash.Append(currentPanel == null ? "" : PanelDerivedDataCurrentness.Fingerprint(currentPanel));
+        hash.Append(currentPanel == null ? "" : PanelDerivedDataCurrentness.FamilyFingerprint(currentPanel));
         hash.Append(JsonSerializer.Serialize(projected == null ? file.FamilyPanel?.EvidenceLinks : recipe.FamilyPanel?.EvidenceLinks));
         for (int index = 0; index < file.MyExtendedFastaItems.Count; index++)
         {
             var protein = file.MyExtendedFastaItems[index];
             if (NearestReviewed.IsDecoy(protein)) continue;
-            hash.Append(index.ToString(CultureInfo.InvariantCulture)); hash.Append(protein.SequenceIdentifier); hash.Append(protein.Sequence);
+            hash.Append(index.ToString(CultureInfo.InvariantCulture)); hash.Append(protein.SequenceIdentifier ?? ""); hash.Append(protein.Sequence ?? "");
             hash.Append((changed != null && changed.TryGetValue(index, out var assignment) ? assignment.FamilyId : protein.UserID).ToString(CultureInfo.InvariantCulture));
             hash.Append(JsonSerializer.Serialize(protein.Evidence));
         }

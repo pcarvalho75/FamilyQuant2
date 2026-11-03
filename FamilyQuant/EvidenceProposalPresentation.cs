@@ -15,7 +15,9 @@ namespace FamilyQuant
         {
             var input = Present(proposal, file.MyExtendedFastaItems, file.LockedUserIds);
             return input with { RuleSummary = input.RuleSummary + "\nStored motifs:\n"
-                + string.Join("\n", (file.Motifs ?? new List<MotifPattern>()).Select(m => m.Name + ": " + m.Pattern)) };
+                + string.Join("\n", (file.Motifs ?? new List<MotifPattern>()).Select(m => m.Name + ": " + m.Pattern))
+                + (proposal.PanelContext == null ? "" : "\n\n" + PanelEvidenceHelp.Build()),
+                PanelNames = file.FamilyPanel?.Families.ToDictionary(f => f.Key, f => f.DisplayName, StringComparer.Ordinal) };
         }
 
         public static EvidenceReviewInput Present(EvidenceProposal proposal, IReadOnlyList<FastaItemExtended> proteins,
@@ -42,7 +44,8 @@ namespace FamilyQuant
                 proposal.Families.Select(f => new ReviewFamilyInput(f.Family, f.SuggestedName, f.Proteins, f.ReviewedProteins)).ToArray(),
                 proposal.Markers.Select(m => new ReviewMarkerInput(m.Accession, m.Name, m.Family,
                     m.FamilyCarriers, m.AllCarriers, m.LabelledCarriers, m.VoteFraction)).ToArray(),
-                Architectures: EvidenceArchitecture.Suggest(proteins, proposal).Select(a => new ReviewArchitectureInput(a.Family, a.CanSplit,
+                Architectures: proposal.PanelContext != null ? Array.Empty<ReviewArchitectureInput>()
+                : EvidenceArchitecture.Suggest(proteins, proposal).Select(a => new ReviewArchitectureInput(a.Family, a.CanSplit,
                     a.Groups.Select(g => new ReviewArchitectureGroupInput(g.Key, g.SuggestedName, g.DominantDomainAccession,
                         g.Domains, g.ProteinIndices, g.ReviewedProteins, g.InferredProteinIndices)).ToArray(),
                     a.Undetermined.Select(p => new ReviewArchitectureUndeterminedInput(p.ProteinIndex, p.Reason)).ToArray())).ToArray(),
@@ -52,7 +55,9 @@ namespace FamilyQuant
                     + "\nAnnotated identity threshold (%): " + proposal.Options.AnnotatedIdentityPercent.ToString(CultureInfo.CurrentCulture)
                     + "\nUnannotated identity threshold (%): " + proposal.Options.UnannotatedIdentityPercent.ToString(CultureInfo.CurrentCulture)
                     + "\nMinimum query aligned (%): " + proposal.Options.MinQueryAlignedPercent.ToString(CultureInfo.CurrentCulture)
-                    + "\nMarker vote fraction: " + proposal.Options.MarkerVoteFraction.ToString(CultureInfo.CurrentCulture));
+                    + (proposal.PanelContext == null ? "\nMarker vote fraction: " + proposal.Options.MarkerVoteFraction.ToString(CultureInfo.CurrentCulture)
+                        : "\nPanel links require one explicit choice when the evidence is ambiguous."),
+                PanelLinks: proposal.PanelContext?.Links);
         }
 
         public static string CountMotif(EvidenceProposal proposal, IReadOnlyList<FastaItemExtended> proteins, string pattern)

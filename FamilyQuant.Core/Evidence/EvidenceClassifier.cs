@@ -260,7 +260,7 @@ namespace FamilyQuant.Evidence
             + neighbour.AlignmentLength.ToString(CultureInfo.InvariantCulture) + " alignment columns; query length "
             + neighbour.QueryLength.ToString(CultureInfo.InvariantCulture) + " residues.";
 
-        private static void Validate(EvidenceClassificationOptions options)
+        internal static void Validate(EvidenceClassificationOptions options)
         {
             if (options.ScopeTerms == null || options.ScopeTerms.Count == 0 || options.ScopeTerms.All(t => string.IsNullOrWhiteSpace(t) || Words.Matches(t).Count == 0))
                 throw new ArgumentException("Provide at least one scope word or phrase.", nameof(options));

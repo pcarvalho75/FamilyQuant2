@@ -62,7 +62,8 @@ namespace FamilyQuant
                 FamilyCompositionStudy.StoreRunShares(manifest, assigned);
                 if (familyHits != null && options.FamilyCuration != null)
                 {
-                    FamilyCompositionStudy.StoreSubclassesFromCuration(manifest, assigned, familyHits, options.FamilyCuration);
+                    if (!FamilyCompositionStudy.StoreSubclassesFromCuration(manifest, assigned, familyHits, options.FamilyCuration))
+                        result.Notes.Add("Subclass breakdown unavailable: subclass labels have not been computed or are out of date.");
                     FamilyCompositionStudy.StorePositionsFromCuration(manifest, assigned, familyHits, options.FamilyCuration);
                 }
                 if (options.FamilyCuration != null)

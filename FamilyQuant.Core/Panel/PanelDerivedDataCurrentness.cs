@@ -18,7 +18,10 @@ namespace FamilyQuant.Panels
     /// confirmed links are scientific inputs; names and named report text do not change membership.</summary>
     public static class PanelDerivedDataCurrentness
     {
-        public static string Fingerprint(FamilyPanel panel)
+        public static string Fingerprint(FamilyPanel panel) => FingerprintCore(panel, includeSubclasses: true);
+        public static string FamilyFingerprint(FamilyPanel panel) => FingerprintCore(panel, includeSubclasses: false);
+
+        private static string FingerprintCore(FamilyPanel panel, bool includeSubclasses)
         {
             ArgumentNullException.ThrowIfNull(panel);
             var data = new
@@ -27,7 +30,7 @@ namespace FamilyQuant.Panels
                 {
                     f.Key, f.Decision, f.MergeTargetFamilyKey,
                     Pfam = f.Pfam.Select(d => d.Accession).Distinct(StringComparer.Ordinal).Order(StringComparer.Ordinal),
-                    Subclasses = f.Subclasses.OrderBy(s => s.Key, StringComparer.Ordinal).Select(s => new
+                    Subclasses = f.Subclasses.Where(_ => includeSubclasses).OrderBy(s => s.Key, StringComparer.Ordinal).Select(s => new
                     {
                         s.Key, s.ReportAsSubclassKey,
                         Required = s.RequiredPfam.Distinct(StringComparer.Ordinal).Order(StringComparer.Ordinal),
@@ -43,12 +46,14 @@ namespace FamilyQuant.Panels
         public static PanelDerivedDataCheck Check(FamilyClusterFile file)
         {
             string? current = file.FamilyPanel == null ? null : Fingerprint(file.FamilyPanel);
-            PanelDerivedDataStatus Status(bool present, string? computed) => !present ? PanelDerivedDataStatus.NotComputed
-                : current != null && computed == current ? PanelDerivedDataStatus.Current : PanelDerivedDataStatus.OutOfDate;
-            var families = Status(file.PanelProteinAssignments != null, file.PanelProteinAssignmentsPanelFingerprint);
-            var subclasses = Status(file.ProteinSubclassLabels != null, file.ProteinSubclassLabelsPanelFingerprint);
-            string message = families == PanelDerivedDataStatus.OutOfDate || subclasses == PanelDerivedDataStatus.OutOfDate
-                ? "Panel rules changed. Rebuild family assignments and subclass labels."
+            string? familyCurrent = file.FamilyPanel == null ? null : FamilyFingerprint(file.FamilyPanel);
+            PanelDerivedDataStatus Status(bool present, string? computed, string? expected) => !present ? PanelDerivedDataStatus.NotComputed
+                : expected != null && computed == expected ? PanelDerivedDataStatus.Current : PanelDerivedDataStatus.OutOfDate;
+            var families = Status(file.PanelProteinAssignments != null, file.PanelProteinAssignmentsPanelFingerprint, familyCurrent);
+            var subclasses = Status(file.ProteinSubclassLabels != null, file.ProteinSubclassLabelsPanelFingerprint, current);
+            string message = families == PanelDerivedDataStatus.OutOfDate
+                ? "Panel family rules changed. Rebuild family assignments and subclass labels."
+                : subclasses == PanelDerivedDataStatus.OutOfDate ? "Subclass rules changed. Recompute subclass labels."
                 : families == PanelDerivedDataStatus.NotComputed || subclasses == PanelDerivedDataStatus.NotComputed
                     ? "Some panel assignments or subclass labels have not been computed."
                     : "Family assignments and subclass labels match the current panel rules.";

@@ -712,16 +712,16 @@ namespace FamilyQuant
                 preview = await Task.Run(() => ViewModel.PrepareKeywordReview(ignored), operation.CancellationToken);
                 operation.ThrowIfCancellationRequested();
             });
-            if (prepared && preview != null && ConfirmSuperCluster(preview)) PerformClustering(preview);
+            if (prepared && preview != null && await ConfirmSuperCluster(preview)) PerformClustering(preview);
         }
 
         /// <summary>Seam for the suite only, like <see cref="DeNovoControl.ImportOverride"/>: stands in for the
         /// modal window. The application never sets it.</summary>
         public Func<SuperClusterPreview, bool>? ConfirmSuperClusterOverride { get; set; }
 
-        private bool ConfirmSuperCluster(SuperClusterPreview preview)
+        private Task<bool> ConfirmSuperCluster(SuperClusterPreview preview)
         {
-            if (ConfirmSuperClusterOverride != null) return ConfirmSuperClusterOverride(preview);
+            if (ConfirmSuperClusterOverride != null) return Task.FromResult(ConfirmSuperClusterOverride(preview));
 
             return OpenGroupingReview(preview, false);
         }

@@ -11,4 +11,5 @@ public sealed class FamilyPanelEvidenceLink
     public string? PanelFamilyKey { get; set; }
     public string PanelDefinitionFingerprint { get; set; } = string.Empty;
     public List<string> SupportingAccessions { get; set; } = new();
+    public string Source { get; set; } = string.Empty;
 }
