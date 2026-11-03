@@ -90,7 +90,6 @@ Columns: Diff = L, M, H, VH. Hrs = worker hours at measured speed: estimates are
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| N6s | Release check passes | L | 0.1 | 🟢 | R3b | `--feature-ledger-release-check` passes | Orchestrator | not started | 0% | 0% | T+0 |
 
 ### W4 Look
 
@@ -101,9 +100,9 @@ Columns: Diff = L, M, H, VH. Hrs = worker hours at measured speed: estimates are
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| R3b | Final proof refresh and full suite on the frozen code | L | 0.2 | N6s | R3c | Every proof current; suite green | Orchestrator | not started | 0% | 0% | T+0 |
-| R3c | Release candidate: versions, build and a clean install rehearsal | M | 0.3 | R3b | R5a | Rehearsal installs beside 1.5 and opens her file | Orchestrator | not started | 0% | 0% | T+1 |
-| R5a | FamilyQuant 2.0 final published | L | 0 | R3c | R5b | Paulo publishes | Paulo | not started | 0% | 0% | T+1 |
+| R3b | Final proof refresh and full suite on the frozen code | L | 0.2 | 🟢 | R3c | Every proof current; suite green | Orchestrator | not started | 0% | 0% | T+0 |
+| R3c | Release candidate: versions, build and a clean install rehearsal | M | 0.3 | R3b | R5a | Rehearsal installs beside 1.5 and opens her file | Orchestrator | not started | 0% | 0% | T+0 |
+| R5a | FamilyQuant 2.0 final published | L | 0 | R3c | R5b | Paulo publishes | Paulo | not started | 0% | 0% | T+0 |
 | R5b | Archive this roadmap | L | 0.1 | R5a | Done | Archive committed | Orchestrator | not started | 0% | 0% | T+1 |
 
 ### W6 Paper numbers (no release depends on these)

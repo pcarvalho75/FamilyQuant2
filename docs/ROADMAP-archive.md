@@ -191,6 +191,7 @@ Finished steps, moved here from docs/ROADMAP.md. The board shows them as green.
 | N6p | Wording list assembled for Paulo: rows that changed on purpose, with old and new text | L | 0.2 | 🟢 | N6q | List grouped by reason | Orchestrator | not started | 0% | 0% | T+0 |
 | N6r | Reviewer's 200-row random sample across the whole ledger | M | 0.3 | N6q | N6s | GR's verdict; one failure reopens the kind | GR | not started | 0% | 0% | T+0 |
 | N6q | Paulo rules on the wording list in one pass | L | 0 | 🟢 | N6r | Paulo's ruling recorded | Paulo | not started | 0% | 0% | T+0 |
+| N6s | Release check passes | L | 0.1 | 🟢 | R3b | `--feature-ledger-release-check` passes | Orchestrator | not started | 0% | 0% | T+0 |
 
 ### W4 Look
 
