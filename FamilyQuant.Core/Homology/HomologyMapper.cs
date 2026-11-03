@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 namespace FamilyQuant.Homology
 {
     /// <summary>
+    /// Deprecated: use HomologySearch, which gives identical results faster. Kept as the reference for equivalence tests.
     /// Maps de novo sequences onto the proteins of a family database by HOMOLOGY, and from there onto
     /// families.
     ///
@@ -36,6 +37,7 @@ namespace FamilyQuant.Homology
     ///     (ProgramEngine.cs:255-261 keeps every protein whose score EQUALS the maximum and nothing
     ///     else), because the second-best protein of a family is exactly what a curator needs to see.
     /// </summary>
+    [Obsolete("Deprecated: use HomologySearch, which gives identical results faster. Kept as the reference for equivalence tests.")]
     public static class HomologyMapper
     {
         /// <summary>

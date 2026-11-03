@@ -397,7 +397,7 @@ namespace FamilyQuant
             // The production identified rule on the sample's own database: the proteins tied at the best score.
             HomologyDatabase database = HomologyDatabase.Build(sample.MyExtendedFastaItems ?? new List<FastaItemExtended>());
             var options = new HomologyOptions { TopHitsPerPeptide = int.MaxValue, BestScoreOnly = true };
-            Dictionary<string, HomologyResult> holders = HomologyMapper.Search(
+            Dictionary<string, HomologyResult> holders = HomologySearch.Search(
                     pairs.Values.Select(p => p.Identified).Distinct(StringComparer.Ordinal), database, options, operation)
                 .Where(r => !r.IsRejected).ToDictionary(r => r.NormalizedPeptide, StringComparer.Ordinal);
             foreach (FamilyWorldKnownAnswer pair in pairs.Values)
@@ -435,7 +435,7 @@ namespace FamilyQuant
             List<FamilyWorldKnownAnswer> known = answers.Where(a => a.IsKnown).ToList();
             List<string> searched = known.Select(a => a.Tag).Where(t => t.Length >= options.MinimumTagLength).Distinct(StringComparer.Ordinal).ToList();
             var credits = new Dictionary<string, FamilyWorldCredit>(StringComparer.Ordinal);
-            foreach (HomologyResult r in HomologyMapper.Search(searched, withoutSpecies.Database, options.SearchOptions(), operation))
+            foreach (HomologyResult r in HomologySearch.Search(searched, withoutSpecies.Database, options.SearchOptions(), operation))
                 credits[r.IsRejected ? r.Peptide : r.NormalizedPeptide] = withoutSpecies.Credit(r, creditable, options.MinimumTagLength);
             foreach (FamilyWorldKnownAnswer a in known)
                 a.Credit = a.Tag.Length < options.MinimumTagLength

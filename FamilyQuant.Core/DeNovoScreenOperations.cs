@@ -238,15 +238,15 @@ namespace FamilyQuant
             var database = HomologyDatabase.Build(fcf.MyExtendedFastaItems, operation: operation);
 
             DateTime started = DateTime.UtcNow;
-            List<HomologyResult> results = HomologyMapper.Search(peptides, database, options, operation: operation);
+            List<HomologyResult> results = HomologySearch.Search(peptides, database, options, operation: operation);
             double seconds = (DateTime.UtcNow - started).TotalSeconds;
 
-            List<FamilyAssignment> assignments = HomologyMapper.MapToFamilies(results, fcf.MyExtendedFastaItems);
+            List<FamilyAssignment> assignments = HomologySearch.MapToFamilies(results, fcf.MyExtendedFastaItems);
 
             // The engine's own aggregation, not a copy of it: the suite pins the family census against
             // this very method, so the number on screen and the number that is pinned cannot diverge.
             List<DeNovoFamilyRow> rows =
-                HomologyMapper.CountByFamily(results, fcf.MyExtendedFastaItems, options.DecoyLabel);
+                HomologySearch.CountByFamily(results, fcf.MyExtendedFastaItems, options.DecoyLabel);
 
             return new DeNovoHomology
             {

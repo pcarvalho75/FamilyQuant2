@@ -17,7 +17,7 @@ namespace FamilyQuant.Homology
         }
 
         /// <summary>The FASTA identifier, exactly as it arrived - this is the key
-        /// <see cref="HomologyMapper.MapToFamilies"/> joins on, so it is never rewritten.</summary>
+        /// <see cref="HomologySearch.MapToFamilies"/> joins on, so it is never rewritten.</summary>
         public string Id { get; }
 
         /// <summary>The sequence, uppercased. Residues the matrix does not define are left in place

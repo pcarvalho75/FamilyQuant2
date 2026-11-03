@@ -85,7 +85,7 @@ namespace FamilyQuant
                 var compact = new List<(string, int[])>();
                 if (sequences.Count == 0) return compact;
 
-                foreach (Homology.HomologyResult r in Homology.HomologyMapper.Search(sequences, database, sideOptions))
+                foreach (Homology.HomologyResult r in Homology.HomologySearch.Search(sequences, database, sideOptions))
                 {
                     int[] proteins = r.Hits.Select(h => h.ProteinId).Distinct(StringComparer.Ordinal).Select(id =>
                     {
@@ -142,7 +142,7 @@ namespace FamilyQuant
             attribution.Database = hits.Database;
             attribution.TargetItems = targets;
 
-            // The join HomologyMapper.MapToFamilies performs, over the compact hits: target members only,
+            // The join HomologySearch.MapToFamilies performs, over the compact hits: target members only,
             // the first occurrence of an identifier wins, family ids distinct and ascending.
             var byIdentifier = new Dictionary<string, FastaItemExtended>(StringComparer.Ordinal);
             foreach (FastaItemExtended item in targets)
