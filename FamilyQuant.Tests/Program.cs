@@ -347,6 +347,7 @@ namespace FamilyQuant.Tests
             suite.Add(() => ReportPairedSummaryTests());
             suite.AddWithApplication(() => ReportSupplementChecks(null));
             suite.Add(() => ReportTableSheetTests(null));
+            suite.AddWithApplication(() => ReportNumericLayoutTests(Path.Combine(workDir, "report-numeric-layout")));
             suite.Add(() => ReportListSheetTests(null));
             suite.Add(FamilyUnobservedTests);
             suite.Add(() => EffectivePanelFamiliesTests(null));
