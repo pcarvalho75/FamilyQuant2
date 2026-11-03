@@ -5,56 +5,56 @@
   "runs": [
     {
       "id": "text-tool",
-      "command": "D:\\FamilyQuant-wt\\shell\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --ledger-text-preserved D:/FamilyQuant-data/out-shell/N3/source D:/FamilyQuant-data/out-shell/J15-text-current-20261103-1 \u00222026-11-03 01:49:44 -0800\u0022",
-      "executedAt": "2026-11-03 01:49:44 -0800",
-      "commit": "fa61b9868578fee53a0ee361364ccc0b7b222890",
+      "command": "D:\\FamilyQuant-wt\\shell-j15-check\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --ledger-text-preserved D:/FamilyQuant-data/out-shell/N3/source D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\text-preserved \u00222026-11-03 03:22:07 -0800\u0022",
+      "executedAt": "2026-11-03 03:22:07 -0800",
+      "commit": "bdcfc993f9c689b32fb690993a7a590d242e93da",
       "artifacts": [
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\J15-text-current-20261103-1\\text.log",
-          "sha256": "0BBA29E6CAE22747AF4DE55E3C94232875FD3465AE3AA41E2EC85BAE989190F5"
+          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\text-preserved\\text.log",
+          "sha256": "184F9DD932A104000081AC5CCE2684B15462A2D02125360468FECDDC14F4B586"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\J15-text-current-20261103-1\\text.json",
+          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\text-preserved\\text.json",
           "sha256": "8D6C3A2563E6EB3AA7DB01B172870EA9D900192ADA49356962473CDB9D7A05C3"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\J15-text-current-20261103-1\\executed\\FamilyQuant2.dll",
-          "sha256": "2BB7095714757FF164AB3A39E2F459A5AA1294D5E60F8DBADE39CDE7D7D17403"
+          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\text-preserved\\executed\\FamilyQuant2.dll",
+          "sha256": "D9B63468B2F8941183D1AE693669FB9E06B6EF5315D3A96BD4347608D0C6BCD6"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\J15-text-current-20261103-1\\executed\\FamilyQuant2.pdb",
-          "sha256": "2557BC220557D470A337ECC0BAC71311EAC6988FEB626892822ACA6B4E2C765C"
+          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\text-preserved\\executed\\FamilyQuant2.pdb",
+          "sha256": "D496FC355E1AAF6C70906FF323B2ECEEE966239BB354B1EFE0A51EDEA604D68E"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\J15-text-current-20261103-1\\executed\\FamilyQuant.Core.dll",
-          "sha256": "5DB4296CF97ED9CA38A025C244D1647F4E8693CF16A2224B107C0668F3477792"
+          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\text-preserved\\executed\\FamilyQuant.Core.dll",
+          "sha256": "181AE3DD2A7DC0A2EF3384C7A2CA6CB1E4491FD236E85E4CEAE457A26E6530AC"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\J15-text-current-20261103-1\\executed\\FamilyQuant.Core.pdb",
-          "sha256": "2FBAB9238DD55106D7345661F3B1A3FA815E31DAA74689C02A3ECBB85473D872"
+          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\text-preserved\\executed\\FamilyQuant.Core.pdb",
+          "sha256": "2E0ADE1B1F61FCBB68881D099175416BBAC2622F7B65D14723AE3D5BC1258F44"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\J15-text-current-20261103-1\\executed\\FamilyQuant.Tests.dll",
-          "sha256": "7656AD53A03043A244F135A17E6F2A4478DDF5543154C795029959DBEA3C19E3"
+          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\text-preserved\\executed\\FamilyQuant.Tests.dll",
+          "sha256": "3882D42FEE0332710B7E9B349A10C1A6A71EF4135E6BBA2EA723CAAFCA329FAE"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\J15-text-current-20261103-1\\executed\\FamilyQuant.Tests/LedgerTextPreserved.cs",
+          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\text-preserved\\executed\\FamilyQuant.Tests/LedgerTextPreserved.cs",
           "sha256": "2CB78207901A4D7ACADF502A2EA634EFA79F3C1FC984986B33E5559BAD99FD21"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\J15-text-current-20261103-1\\executed\\FamilyQuant.Tests/Program.LedgerTextPreserved.cs",
+          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\text-preserved\\executed\\FamilyQuant.Tests/Program.LedgerTextPreserved.cs",
           "sha256": "5DF4825EB752822347F0BCA69799D5F85074B6233EC741A6F9FC8186AE2BD721"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\J15-text-current-20261103-1\\executed\\FamilyQuant.Tests/Program.Commands.LedgerTextPreserved.cs",
+          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\text-preserved\\executed\\FamilyQuant.Tests/Program.Commands.LedgerTextPreserved.cs",
           "sha256": "76B82F938173EA4E342000A363089B287BD5B2A897FDC8872B5EDB5319BB2F12"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\J15-text-current-20261103-1\\executed\\FamilyQuant.Tests/FeatureLedgerEvidence.cs",
-          "sha256": "2060D409570285CEAE8FA6ADF3F4A5173924C80C2A6A99B1856294055365174C"
+          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\text-preserved\\executed\\FamilyQuant.Tests/FeatureLedgerEvidence.cs",
+          "sha256": "7FFE973E1D4F66812812B051DAB78C93169902380838CFA92C011F86B1C3A02D"
         }
       ],
-      "workingDirectory": "D:\\FamilyQuant-wt\\shell"
+      "workingDirectory": "D:\\FamilyQuant-wt\\shell-j15-check"
     }
   ],
   "rows": [
@@ -1343,7 +1343,7 @@
           "kind": "test",
           "target": "LedgerTextPreservedCommand",
           "assertion": "Text tool kind code fact: every listed row holds its frozen literal verbatim in the compiled program, in its feature, reachable from the entry point",
-          "artifact": "D:\\FamilyQuant-data\\out-shell\\J15-text-current-20261103-1\\text.log",
+          "artifact": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\text-preserved\\text.log",
           "inspectedBy": ""
         }
       ]
@@ -1357,7 +1357,7 @@
           "kind": "test",
           "target": "LedgerTextPreservedCommand",
           "assertion": "Text tool kind control: every listed row holds its frozen literal verbatim in the compiled program, in its feature, reachable from the entry point",
-          "artifact": "D:\\FamilyQuant-data\\out-shell\\J15-text-current-20261103-1\\text.log",
+          "artifact": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\text-preserved\\text.log",
           "inspectedBy": ""
         }
       ]
@@ -1371,7 +1371,7 @@
           "kind": "test",
           "target": "LedgerTextPreservedCommand",
           "assertion": "Text tool kind help fact: every listed row holds its frozen literal verbatim in the compiled program, in its feature, reachable from the entry point",
-          "artifact": "D:\\FamilyQuant-data\\out-shell\\J15-text-current-20261103-1\\text.log",
+          "artifact": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\text-preserved\\text.log",
           "inspectedBy": ""
         }
       ]
@@ -1385,7 +1385,7 @@
           "kind": "test",
           "target": "LedgerTextPreservedCommand",
           "assertion": "Text tool kind option/copy: every listed row holds its frozen literal verbatim in the compiled program, in its feature, reachable from the entry point",
-          "artifact": "D:\\FamilyQuant-data\\out-shell\\J15-text-current-20261103-1\\text.log",
+          "artifact": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\text-preserved\\text.log",
           "inspectedBy": ""
         }
       ]
@@ -1399,7 +1399,7 @@
           "kind": "test",
           "target": "LedgerTextPreservedCommand",
           "assertion": "Text tool kind tooltip: every listed row holds its frozen literal verbatim in the compiled program, in its feature, reachable from the entry point",
-          "artifact": "D:\\FamilyQuant-data\\out-shell\\J15-text-current-20261103-1\\text.log",
+          "artifact": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\text-preserved\\text.log",
           "inspectedBy": ""
         }
       ]
