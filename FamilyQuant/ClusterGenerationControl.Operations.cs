@@ -40,7 +40,7 @@ public partial class ClusterGenerationControl
     private OperationContext CurationOperation => curationLease?.Context
         ?? throw new InvalidOperationException("No curation operation is running.");
 
-    private void BeginSharedWait(string title)
+    private void BeginSharedWait(string title, DateTimeOffset? startedAtUtc = null, string? operationLogPath = null)
     {
         if (curationLease != null || Operations.IsBusy)
             throw new InvalidOperationException("Wait for the current operation to finish.");
@@ -48,7 +48,7 @@ public partial class ClusterGenerationControl
             || !DataGridResultGrid.CommitEdit(DataGridEditingUnit.Row, true))
             throw new InvalidOperationException("Finish or cancel the current cell edit before starting an operation.");
         enabledBeforeCuration = ReadLocalValue(IsEnabledProperty);
-        curationLease = Operations.Begin(title);
+        curationLease = Operations.Begin(title, startedAtUtc, operationLogPath);
         IsEnabled = false;
     }
     private void EndSharedWait()
@@ -86,10 +86,12 @@ public partial class ClusterGenerationControl
             finally { if (began) EndSharedWait(); }
         });
 
-    private Task QueueFullXicAsync(IReadOnlyList<QuantRow>? rows, IReadOnlyDictionary<string, double>? perRunTic) =>
-        AppOperationHost.OnUi(this, () => QueueFullXicCore(rows, perRunTic));
+    private Task QueueFullXicAsync(IReadOnlyList<QuantRow>? rows, IReadOnlyDictionary<string, double>? perRunTic,
+        DateTimeOffset? startedAtUtc = null, string? operationLogPath = null) =>
+        AppOperationHost.OnUi(this, () => QueueFullXicCore(rows, perRunTic, startedAtUtc, operationLogPath));
 
-    private Task QueueFullXicCore(IReadOnlyList<QuantRow>? rows, IReadOnlyDictionary<string, double>? perRunTic)
+    private Task QueueFullXicCore(IReadOnlyList<QuantRow>? rows, IReadOnlyDictionary<string, double>? perRunTic,
+        DateTimeOffset? startedAtUtc, string? operationLogPath)
     {
         int generation = ++projectionGeneration;
         releaseQueuedProjection?.Invoke();
@@ -107,7 +109,8 @@ public partial class ClusterGenerationControl
             bool began = false, succeeded = false;
             try
             {
-                BeginSharedWait("Attribute full XIC to families"); began = true; projectionRunning = true;
+                BeginSharedWait("Attribute full XIC to families", startedAtUtc, operationLogPath ?? AppOperationHost.CreateLogPath("attribution"));
+                began = true; projectionRunning = true;
                 SyncQuantitationChoices();
                 succeeded = await Quantitation.AttachWithOperationAsync(rowCopy, ticCopy, CurationOperation);
                 if (!succeeded && generation == projectionGeneration) ShowCurationOperationResult(Quantitation.Summary);

@@ -444,6 +444,8 @@ Paulo agreed these at the restart, 2026-11-01.
 | J41b | J41 reviewed and merged | L | 0.2 | 🟢 | J30c, J32c | Approved; gate green | FL | | 0 | 0 | |
 | J36b | Delivery rehearsal on the first full-run project into a staging folder | L | 0.3 | 🟢 | J36c | Summary with hashes and the trace's count | RS | | 0 | 0 | |
 | J39 | Cache the two source census searches as well, if J32c shows they cost more than a minute | M | 1 | 🟢 | | Byte-identical report data; the export time before and after | T1 | | 0 | 0 | |
+| J36c | J36 reviewed and merged | L | 0.2 | 🟢 | K17 | Approved; gate green | RS | | 0 | 0 | |
+| J34b | Look fixes for the listed items | M | 1 | 🟢 | J34c | Each item fixed or ruled | LK | | 0 | 0 | |
 
 ### W7 Clear reasons and totals
 
@@ -458,6 +460,8 @@ Paulo agreed these at the restart, 2026-11-01.
 | J37b | J37 reviewed and merged | L | 0.2 | J37a | | Approved; gate green | T2 | | 0 | 0 | |
 | J27d | J27 reviewed and merged | L | 0.2 | 🟢 | | Approved; gate green | FL | | 0 | 0 | |
 | J42 | The family-assignment accuracy check (leave-one-out on reviewed proteins) accepts a project whose scope has several phrases: on the D39 project it refuses with "The session search no longer matches the current queries and reviewed references" (EvidenceSession.cs:42-68 does not accept the panel review's stored search over the in-scope references) | L | 0.5 | 🟢 | K14 | Red then green: a fixture with a two-phrase scope runs the audit; on a copy of the D39 project it prints the right, wrong and abstained counts | T2 | | 0 | 0 | |
+| J46a | An Anthropic API key the user can add, test, replace or remove (Help > AI assistant key), stored per user with Windows protection, never in a project, the repository, a log or a report; import from a key file placed next to the project (Paulo, 11-03) | L | 0.5 | J40 | J46b | Fixture tests for works, wrong key, no credit, rate limit, no connection; the key never appears in project bytes | T2 | | 0 | 0 | |
+| J46b | Optional "Draft interpretation with AI": the user sees exactly what is sent (J45's input), confirms, the text returns into the interpretation field labelled "AI draft (model, date)", and every number in it is checked against the program's own tables (J18 trace) before the user accepts | M | 1 | J46a | J46c | Fake-transport tests for every outcome; one live call reported; works fully without a key | T2 | | 0 | 0 | |
 
 ### W4 Release 2.1.0 on GitHub
 
@@ -473,6 +477,9 @@ Paulo agreed these at the restart, 2026-11-01.
 | J17b | Faster evidence fetch (one streamed query instead of one per family, about 3 times faster, same entries) reviewed and merged | L | 0.2 | 🟢 | | Approved; gate green | AS | | 0 | 0 | |
 | J38a | Measure: time of each homology search call in one Compute (world pass, two world-error searches, attribution, two census searches): queries, candidates per query, seconds, cores | M | 0.5 | 🟢 | J38b | `FINDING J38` table | AS | | 0 | 0 | |
 | J35a | Progress for Compute and opening: every phase counted against a known total, the current item, elapsed time and time since the last step, all logged | M | 0.6 | 🟢 | J35b | A fixture Compute records every phase once, in order | SH | | 0 | 0 | |
+| J38b | CPU profile of the slowest call: its top functions with file:line | M | 0.4 | 🟢 | J38c | The profile posted | AS | | 0 | 0 | |
+| J35b | Progress on the full-run project: the longest gap between two steps named | L | 0.3 | 🟢 | J35c | `READY` names the longest gap and its phase | SH | | 0 | 0 | |
+| J35c | J35 reviewed and merged | L | 0.2 | 🟢 | J40 | Approved; gate green | SH | | 0 | 0 | |
 
 ### W2 The interpretation
 
@@ -480,4 +487,6 @@ Paulo agreed these at the restart, 2026-11-01.
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
 | K5 | Interpretation drafted from the desk's outline, numbers left as marked places | M | 0.5 | 🟢 | K6 | The draft posted | OP | | 0 | 0 | |
 | K6 | The rerun project saved with master's build and the report details, the written interpretation EMPTY (Paulo, 11-03 08:40: "the report is to be performed without an LLM"); the open warms the cache for the final export | L | 0.3 | K2, K4 | K7, K10, K14 | final-input.fqproj saved; interpretation field empty | OP | | 0 | 0 | |
+| J44a | The program interprets as much as it can without an LLM (Paulo, 11-03 08:45: "strict results like do tables, and very informative plots"): a Summary of findings section from the stored studies with fixed templates, only data-bound statements (values, counts, ranks, ranges, presence, comparisons with stored references), and, where the panel holds numeric references, observed share against the panel's reference per family; numbers in a supplement sheet | M | 1 | 🟢 | J44b | Red then green on a fixture: every sentence present when its data exist, absent when not; numbers equal the headline and studies; D21 guard passes | OP | | 0 | 0 | |
+| J44b | J44 reviewed and merged | L | 0.2 | 🟢 | K7, K14 | Approved; gate green | OP | | 0 | 0 | |
 

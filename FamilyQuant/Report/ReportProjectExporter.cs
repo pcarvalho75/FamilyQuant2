@@ -58,7 +58,7 @@ public static class ReportProjectExporter
         var labels = families?.Families.ToDictionary(f => f.FamilyUserId, f => f.Description)
             ?? new Dictionary<int, string>();
         Data(4, "Applying stored studies");
-        result = ReportStoredResults.Apply(result, manifest, labels, grouping);
+        result = ReportStoredResults.Apply(result, manifest, labels, grouping, curation);
         Data(5, "Preparing report sections");
         var replacements = result.Sections.ToDictionary(s => s.Id, StringComparer.Ordinal);
         bool hasConflicts = replacements.ContainsKey(ReportSectionIds.AssignmentConflicts);

@@ -124,7 +124,8 @@ namespace FamilyQuant.DeNovo
         /// another run would hide a caller bug.
         /// </summary>
         public static (List<DeNovoXicResult> results, DeNovoBatchStats stats) ExtractForRun(
-            string rawPath, IReadOnlyList<PeaksDeNovoRow> rows, DeNovoXicOptions options)
+            string rawPath, IReadOnlyList<PeaksDeNovoRow> rows, DeNovoXicOptions options,
+            FamilyQuant.Operations.OperationContext? operation = null)
         {
             string run = DeNovoReconciler.NormalizeRunName(rawPath);
             var foreignRow = rows.FirstOrDefault(r =>
@@ -140,7 +141,7 @@ namespace FamilyQuant.DeNovo
             var requests = BuildRequests(rows);
 
             var started = DateTime.UtcNow;
-            var results = DeNovoXicExtractor.ExtractRun(rawPath, requests, options);
+            var results = DeNovoXicExtractor.ExtractRun(rawPath, requests, options, operation, "denovo");
             double elapsed = (DateTime.UtcNow - started).TotalSeconds;
 
             var stats = new DeNovoBatchStats

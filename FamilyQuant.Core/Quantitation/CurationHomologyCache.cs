@@ -28,11 +28,13 @@ public static class CurationHomologyCache
     public static CurationHomologyHits GetOrSearch(IReadOnlyList<QuantRow> rows, FamilyClusterFile proteins,
         string? cacheDirectory = null, HomologyOptions? options = null,
         bool identifiedBestScoreOnly = FamilyEnvelopeQuant.IdentifiedBestScoreOnlyDefault,
-        Action<bool>? progress = null, CancellationToken cancellationToken = default)
+        Action<bool>? progress = null, CancellationToken cancellationToken = default,
+        FamilyQuant.Operations.OperationContext? operation = null)
     {
         ArgumentNullException.ThrowIfNull(rows);
         ArgumentNullException.ThrowIfNull(proteins);
         cancellationToken.ThrowIfCancellationRequested();
+        operation?.Report("attribution-cache", "Checking the peptide-to-protein hits cache", 0, 1);
         var requested = (options ?? new HomologyOptions()).Clone();
         string directory = cacheDirectory ?? Path.Combine(ApplicationPaths.LocalDataDirectory, FullXicComputer.CacheFolderName, "curation-homology");
         string? key = null, path = null;
@@ -44,6 +46,7 @@ public static class CurationHomologyCache
                 && key == Fingerprint(rows, proteins, requested, identifiedBestScoreOnly, cancellationToken))
             {
                 progress?.Invoke(true);
+                operation?.Report("attribution-cache", "Peptide-to-protein hits read from the cache", 1, 1);
                 cancellationToken.ThrowIfCancellationRequested();
                 return loaded!;
             }
@@ -51,8 +54,9 @@ public static class CurationHomologyCache
         catch (Exception ex) when (IsCacheFailure(ex)) { /* cache is optional; preserve the fresh search */ }
         cancellationToken.ThrowIfCancellationRequested();
         progress?.Invoke(false);
+        operation?.Report("attribution-cache", "Searching the stored peptide sequences against the proteins", 1, 1);
         cancellationToken.ThrowIfCancellationRequested();
-        var hits = FamilyEnvelopeQuant.SearchCuration(rows, proteins, requested, identifiedBestScoreOnly);
+        var hits = FamilyEnvelopeQuant.SearchCuration(rows, proteins, requested, identifiedBestScoreOnly, operation);
         cancellationToken.ThrowIfCancellationRequested();
         if (path != null && key != null)
         {

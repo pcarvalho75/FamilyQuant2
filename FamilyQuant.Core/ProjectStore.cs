@@ -150,7 +150,7 @@ namespace FamilyQuant
         /// </summary>
         public static (FamilyClusterFile fcf, List<QuantRow> quant, QuantManifest manifest) ReadFqproj(string path, OperationContext? operation = null)
         {
-            operation?.Report("project-read", "Opening project input");
+            operation?.Report("project-read", "Opening project input", 0, 1);
             if (path == null) throw new ArgumentNullException(nameof(path));
 
             using var fileStream = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Read);
@@ -243,6 +243,7 @@ namespace FamilyQuant
             }
 
             operation?.ThrowIfCancellationRequested();
+            operation?.Report("project-read", "Project input read", 1, 1);
             return (fcf, quant, manifest);
         }
 

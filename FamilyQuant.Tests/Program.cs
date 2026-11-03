@@ -312,6 +312,7 @@ namespace FamilyQuant.Tests
             suite.AddWithApplication(() => CurationExportFeedbackTests(Path.Combine(workDir, "curation-export-feedback")));
             suite.AddWithApplication(() => ReportProgressTests(Path.Combine(workDir, "report-progress")));
             suite.AddWithApplication(() => ProjectCommandReadyTests(Path.Combine(workDir, "project-command-ready")));
+            suite.AddWithApplication(() => ComputeProgressTests(Path.Combine(workDir, "compute-progress")));
             suite.Add(() => FamilyViewTests());
             suite.Add(() => TableAppearanceTests());
             suite.Add(() => EvidenceReviewModelTests());
@@ -324,6 +325,7 @@ namespace FamilyQuant.Tests
             suite.Add(() => ReportStudyBoundaryTests());
             suite.Section("Word report and companion - source values, selection and exact native images");
             suite.Add(() => WordReportTests(null));
+            suite.Add(() => ReportFindingsTests());
             suite.Add(() => ReportNumberTraceTests());
             suite.AddWithApplication(() => ReportStoredChecks());
             suite.AddWithApplication(() => ReportAttributionCacheTests());

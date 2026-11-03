@@ -1,4 +1,5 @@
 using FamilyQuant.DeNovo;
+using FamilyQuant.Operations;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -9,7 +10,10 @@ using System.Threading.Tasks;
 
 namespace FamilyQuant;
 
-public sealed record ComputeXicRequest(string RawDirectory, string SeproPackage, string? DeNovoDirectory, FullXicOptions Options);
+public sealed record ComputeXicRequest(string RawDirectory, string SeproPackage, string? DeNovoDirectory, FullXicOptions Options)
+{
+    public OperationContext? Operation { get; init; }
+}
 
 /// <summary>Quantify state, validation, re-entry protection and completed-result publication.</summary>
 public sealed class ComputeXicViewModel : ScreenViewModel
@@ -22,6 +26,8 @@ public sealed class ComputeXicViewModel : ScreenViewModel
     private bool busy;
     private CancellationTokenSource? cancellation;
     public AppOperationHost Operations { get; set; } = new();
+    public string? OperationLogPath { get; private set; }
+    public DateTimeOffset? OperationStartedAtUtc { get; private set; }
     public DeNovoFilterViewModel Filters { get; }
     public string RawDirectory { get => raw; set => Set(ref raw, value); }
     public string SeproPackage { get => sepro; set => Set(ref sepro, value); }
@@ -78,7 +84,9 @@ public sealed class ComputeXicViewModel : ScreenViewModel
             new FullXicOptions { IsotopeCount = IsotopeCount, MinPointsForQuant = MinPointsForQuant,
                 Ppm = DeNovoXicExtractor.ProductionPpm, Ms1Tolerance = DeNovoXicExtractor.ProductionMs1Tolerance,
                 AppVersion = appVersion, FamilyCuration = curation, DeNovoCriteria = criteria, DeNovoSelections = selections });
-        using var operation = Operations.Begin("Compute full XIC");
+        OperationStartedAtUtc = DateTimeOffset.UtcNow; OperationLogPath = AppOperationHost.CreateLogPath("compute");
+        using var operation = Operations.Begin("Compute full XIC", OperationStartedAtUtc, OperationLogPath);
+        request = request with { Operation = operation.Context };
         var tokenSource = CancellationTokenSource.CreateLinkedTokenSource(operation.Context.CancellationToken);
         using var tokenLifetime = tokenSource;
         cancellation = tokenSource;
@@ -88,15 +96,19 @@ public sealed class ComputeXicViewModel : ScreenViewModel
         {
             if (!ReferenceEquals(cancellation, tokenSource) || tokenSource.IsCancellationRequested) return;
             Status = message;
-            operation.Report(new("full-xic", message));
+            Operations.LogMessage("full-xic-detail", message);
         });
         try
         {
+            operation.Context.Report("compute-provenance", "Reading input provenance", 0, 1);
             var inputProvenance = Report.ReportInputCapture.Read(SourceDatabaseFileName ?? curation?.ReportInputProvenance?.DatabaseFileName,
                 seproPath, string.IsNullOrWhiteSpace(SearchParametersPath) ? null : SearchParametersPath.Trim(),
                 SourceDatabaseFileSha256 ?? curation?.ReportInputProvenance?.DatabaseFileSha256 ?? "");
+            operation.Context.Report("compute-provenance", "Input provenance read", 1, 1);
             FullXicComputeResult outcome = await compute(request, progress, tokenSource.Token);
             tokenSource.Token.ThrowIfCancellationRequested();
+            operation.Context.Report("compute-publish", "Attaching completed results", 0, 1);
+            operation.Context.Report("compute-publish", "Attaching completed results", 1, 1);
             Result = outcome;
             CompletedInputProvenance = inputProvenance;
             RunSummary = $"{outcome.Rows.Count.ToString("N0", CultureInfo.CurrentCulture)} quant rows across " +
@@ -115,8 +127,8 @@ public sealed class ComputeXicViewModel : ScreenViewModel
             Completed?.Invoke(outcome);
         }
         catch (OperationCanceledException) when (tokenSource.IsCancellationRequested) { Status = "Cancelled. The previous project results were kept."; }
-        catch (FullXicNoMatchedRunsException ex) { Status = ex.Message; }
-        catch (Exception ex) { Status = "The computation did not finish. " + ex.Message; }
+        catch (FullXicNoMatchedRunsException ex) { Operations.LogFailure(ex); Status = ex.Message; }
+        catch (Exception ex) { Operations.LogFailure(ex); Status = "The computation did not finish. " + ex.Message; }
         finally { cancellation = null; IsBusy = false; }
     }
 
@@ -125,6 +137,6 @@ public sealed class ComputeXicViewModel : ScreenViewModel
         {
             token.ThrowIfCancellationRequested();
             return FullXicComputer.ComputeFullXic(request.RawDirectory, request.SeproPackage, request.DeNovoDirectory,
-                request.Options, null, message => { token.ThrowIfCancellationRequested(); progress.Report(message); });
+                request.Options, null, message => { token.ThrowIfCancellationRequested(); progress.Report(message); }, operation: request.Operation);
         });
 }

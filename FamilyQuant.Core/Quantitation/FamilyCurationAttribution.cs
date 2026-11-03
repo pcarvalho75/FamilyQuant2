@@ -16,12 +16,13 @@ namespace FamilyQuant
             IEnumerable<QuantRow> rows,
             FamilyClusterFile curation,
             Homology.HomologyOptions? options = null,
-            bool identifiedBestScoreOnly = IdentifiedBestScoreOnlyDefault)
+            bool identifiedBestScoreOnly = IdentifiedBestScoreOnlyDefault,
+            FamilyQuant.Operations.OperationContext? operation = null, string progressPrefix = "attribution")
         {
             if (rows == null) throw new ArgumentNullException(nameof(rows));
             if (curation == null) throw new ArgumentNullException(nameof(curation));
 
-            return AttributeHits(SearchCuration(rows, curation, options, identifiedBestScoreOnly), curation);
+            return AttributeHits(SearchCuration(rows, curation, options, identifiedBestScoreOnly, operation, progressPrefix), curation);
         }
 
         /// <summary>Whether an IDENTIFIED peptide reaches only the proteins tied at its best score (the
@@ -37,7 +38,8 @@ namespace FamilyQuant
         /// </summary>
         public static CurationHomologyHits SearchCuration(IEnumerable<QuantRow> rows, FamilyClusterFile curation,
                                                          Homology.HomologyOptions? options = null,
-                                                         bool identifiedBestScoreOnly = IdentifiedBestScoreOnlyDefault)
+                                                         bool identifiedBestScoreOnly = IdentifiedBestScoreOnlyDefault,
+                                                         FamilyQuant.Operations.OperationContext? operation = null, string progressPrefix = "attribution")
         {
             if (rows == null) throw new ArgumentNullException(nameof(rows));
             if (curation == null) throw new ArgumentNullException(nameof(curation));
@@ -65,7 +67,7 @@ namespace FamilyQuant
             };
             if (items.Count == 0) return hits;
 
-            Homology.HomologyDatabase database = Homology.HomologyDatabase.Build(items);
+            Homology.HomologyDatabase database = Homology.HomologyDatabase.Build(items, operation: operation);
             hits.Database = database;
 
             // Kept COMPACT: per peptide only the indices of the proteins it hit (all a family join reads),
@@ -83,9 +85,15 @@ namespace FamilyQuant
                     .Distinct(StringComparer.Ordinal)
                     .ToList();
                 var compact = new List<(string, int[])>();
-                if (sequences.Count == 0) return compact;
+                if (sequences.Count == 0)
+                {
+                    operation?.Report(progressPrefix + "-" + side, "No peptide queries on this side", 0, 0);
+                    return compact;
+                }
 
-                foreach (Homology.HomologyResult r in Homology.HomologyMapper.Search(sequences, database, sideOptions))
+                foreach (Homology.HomologyResult r in Homology.HomologyMapper.Search(sequences, database, sideOptions, operation,
+                    progressStage: progressPrefix + "-" + side,
+                    progressLabel: (side == NativeQuantFractions.SideIdentified ? "Identified" : "De novo") + " peptides searched", progressBatchSize: 128))
                 {
                     int[] proteins = r.Hits.Select(h => h.ProteinId).Distinct(StringComparer.Ordinal).Select(id =>
                     {
