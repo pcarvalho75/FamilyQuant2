@@ -29,6 +29,7 @@ namespace FamilyQuant
             ArgumentNullException.ThrowIfNull(subclassKeys);
             return new FamilySubclassPartsResult
             {
+                MembershipSha256 = attribution.MembershipSha256,
                 Policy = policy,
                 Method = "All runs pooled. Credit to a subclass only when the peptide reaches one family and all candidate " +
                     "proteins have the same recorded subclass; otherwise subclass not resolved. " +

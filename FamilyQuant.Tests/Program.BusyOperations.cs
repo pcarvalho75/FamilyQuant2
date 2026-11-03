@@ -218,9 +218,12 @@ internal static partial class Program
 
     private static void BusyDeNovoTests(string workDir)
     {
+        string proposalFolder = Path.Combine(Path.GetTempPath(), "FamilyQuant.Busy.DeNovo", Guid.NewGuid().ToString("N"));
+        Directory.CreateDirectory(proposalFolder);
+        File.WriteAllText(Path.Combine(proposalFolder, "fixture.denovo.csv"), "Filename-only proposal fixture; the import seam supplies rows.");
         var previous = new DeNovoImport { RowsRead = 1, Kept = new() { new PeaksDeNovoRow { Peptide = "PEPTIDEK" } } };
         var waiting = new TaskCompletionSource<DeNovoImport>();
-        var model = new DeNovoViewModel { ImportDirectory = workDir, ImportOverride = (_, _) => waiting.Task };
+        var model = new DeNovoViewModel { ImportDirectory = proposalFolder, ImportOverride = (_, _) => waiting.Task };
         model.ApplyImport(previous);
         Task running = model.ImportAsync();
         Check("De novo import uses the common busy path and whole-screen edit guard", model.Operations.IsBusy && model.IsBusy && !model.CanEdit);

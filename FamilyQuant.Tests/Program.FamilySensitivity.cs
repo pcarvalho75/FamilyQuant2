@@ -49,6 +49,7 @@ internal static partial class Program
             FamilySensitivityStudy.Compare(study, rows, Source(90), changed, new string('A', 64), mapping)));
         var manifest = Source(80); manifest.FamilySensitivity = compared;
         manifest.FamilyPeptideLocalization = new() { Method = "Synthetic localization fixture", Policy = SharedPeptidePolicy.FamilyUnique,
+            MembershipSha256 = FamilyStudyMembership.Fingerprint(file),
             Segments = new() { new() { FamilyUserId = 1, ProteinIdentifier = "sp|P00001|ONE", Side = NativeQuantFractions.SideIdentified,
                 NormalizedSequence = "ACDEFGHIK", FamilyMembershipCount = 1, MatchKind = PeptideLocalizationMatchKind.ExactContainment,
                 Signal = 10, Intervals = new() { new() { Start = 1, End = 9 } } } } };
@@ -118,7 +119,7 @@ internal static partial class Program
                 && exactCsv == model.BuildCsv() && dirty == 2);
             var edited = FamilyClusterFile.FromJsonText(file.ToJsonText()); edited.MyExtendedFastaItems[0].UserID = 9;
             var stale = new FamilySensitivityViewModel(rows, manifest, edited, mapping, () => { });
-            Check("J5e: the table hides a study stale after regrouping", !stale.HasData && stale.Status.Contains("grouping", StringComparison.Ordinal));
+            Check("J5e: the table hides a study stale after regrouping", !stale.HasData && stale.Status.Contains("family membership", StringComparison.Ordinal));
         }
         finally { window.Close(); Themes.ThemeManager.Apply(Themes.AppTheme.Dark); }
     }

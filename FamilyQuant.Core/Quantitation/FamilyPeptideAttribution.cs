@@ -24,6 +24,8 @@ namespace FamilyQuant
     /// records its separate family-world results without changing the first-pass family table.</summary>
     public sealed class FamilyPeptideAttribution
     {
+        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull)]
+        public string? MembershipSha256 { get; internal set; }
         internal FamilyPeptideAttribution(List<FamilyAttributedPeptide> peptides)
         {
             Peptides = peptides.AsReadOnly();
@@ -46,11 +48,13 @@ namespace FamilyQuant
             IReadOnlyList<NativePeptideQuant> peptides, PeptideFamilyAttribution attribution)
         {
             if (attribution == null) throw new ArgumentNullException(nameof(attribution));
-            return AttributePeptides(peptides,
+            FamilyPeptideAttribution assigned = AttributePeptides(peptides,
                 s => attribution.IdentifiedBySequence.TryGetValue(s, out IReadOnlyList<int>? families)
                     ? families : Array.Empty<int>(),
                 s => attribution.DeNovoBySequence.TryGetValue(s, out IReadOnlyList<int>? families)
                     ? families : Array.Empty<int>());
+            assigned.MembershipSha256 = attribution.MembershipSha256;
+            return assigned;
         }
 
         internal static FamilyPeptideAttribution AttributePeptides(

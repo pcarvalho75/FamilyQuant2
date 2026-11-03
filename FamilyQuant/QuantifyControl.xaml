@@ -20,7 +20,7 @@
       ToolTip="SEPro identification package from the same runs as the RAW acquisitions."/>
      <Button Grid.Row="1" Grid.Column="2" Content="Browse..." Click="BrowseSepro" ToolTip="Choose the SEPro identification package for these RAW acquisitions."/>
      <Label Grid.Row="2" Content="De novo folder (optional)" ToolTip="Export root searched recursively for the selected de novo sources."/>
-     <TextBox x:Name="TextBoxDeNovoDirectory" Grid.Row="2" Grid.Column="1" Text="{Binding DeNovoDirectory, UpdateSourceTrigger=PropertyChanged}"
+     <TextBox x:Name="TextBoxDeNovoDirectory" Grid.Row="2" Grid.Column="1" Text="{Binding DeNovoDirectory, UpdateSourceTrigger=LostFocus}"
       ToolTip="Export root searched recursively for the selected sources. Leave empty for identified peptides only."/>
      <Button Grid.Row="2" Grid.Column="2" Content="Browse..." Click="BrowseDeNovo" ToolTip="Choose the de novo export root."/>
      <Label Grid.Row="3" Content="Search settings (optional)" ToolTip="Search parameter file recorded for the report's methods."/>

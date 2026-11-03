@@ -128,6 +128,8 @@ internal static partial class Program
                     Signal = 1, MatchKind = PeptideLocalizationMatchKind.Aligned, Intervals = new() { new() { Start = 20, End = 24 }, new() { Start = 28, End = 32 } } }
             }
         };
+        string membership = FamilyStudyMembership.Fingerprint(project);
+        perRun.MembershipSha256 = parts.MembershipSha256 = localization.MembershipSha256 = membership;
         return (new QuantManifest { FamilyRunShares = perRun, FamilySubclassParts = parts, FamilyPeptideLocalization = localization }, project);
     }
 }

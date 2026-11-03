@@ -98,8 +98,18 @@ internal static partial class Program
             && conflictTable.Rows.Single()[2] == "200" && conflictTable.Rows.Single()[3] == "a; b" && conflictTable.Rows.Single()[5].Length > 0);
         EnsureApplication();
         var rows = SyntheticAnalyticsRows();
-        var export = ReportProjectExporter.Build(rows, manifest, new FamilyClusterFile(),
-            Path.Combine(Path.GetTempPath(), "fq-report-stored-" + Guid.NewGuid().ToString("N")), familyResults: FamilyFixture(2));
+        var project = new FamilyClusterFile { MyExtendedFastaItems = new()
+        {
+            new() { SequenceIdentifier = "P1", Sequence = "PEPTIDEK", UserID = 1 },
+            new() { SequenceIdentifier = "P2", Sequence = "AAAAAAAK", UserID = 1 },
+            new() { SequenceIdentifier = "P3", Sequence = "CCCCCCCK", UserID = 2 },
+        } };
+        string membership = FamilyStudyMembership.Fingerprint(project);
+        manifest.FamilyRunShares.MembershipSha256 = manifest.FamilyProteinCounts.MembershipSha256 = manifest.FamilySubclassParts.MembershipSha256 = membership;
+        var families = FamilyFixture(2);
+        for (int i = 0; i < families.Families.Count; i++) families.Families[i].FamilyUserId = i + 1;
+        var export = ReportProjectExporter.Build(rows, manifest, project,
+            Path.Combine(Path.GetTempPath(), "fq-report-stored-" + Guid.NewGuid().ToString("N")), familyResults: families);
         Check("saved-project export includes its stored headline table", export.Document.Sections.SelectMany(s => s.Blocks).Any(b => b.Id == "family-run-means"));
     }
 }

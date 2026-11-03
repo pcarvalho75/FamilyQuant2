@@ -227,6 +227,10 @@ namespace FamilyQuant.DeNovo
         /// skips the RAW entirely when every requested precursor is already known.</summary>
         public string? CachePath { get; set; }
 
+        /// <summary>Optional older sidecar to read after validating the same run, parameters and
+        /// content fingerprint. New entries are written only to CachePath, never here.</summary>
+        public string? LegacyCachePath { get; set; }
+
         /// <summary>SHA-256 of the RAW content. Full-project extraction computes it once per run and
         /// shares it between identified, de novo, and detector caches.</summary>
         public string? SourceFingerprint { get; set; }
@@ -758,7 +762,7 @@ namespace FamilyQuant.DeNovo
             DeNovoXicCache? cache = opt.CachePath == null
                 ? null
                 : DeNovoXicCache.Load(opt.CachePath, runName, opt.Ppm, opt.Ms1Tolerance, isotopeCount,
-                    minPoints, sourceFingerprint);
+                    minPoints, sourceFingerprint, opt.LegacyCachePath);
 
             // Pass one: reject what cannot be extracted, answer what the cache already knows, and
             // note what is left. Nothing here touches the RAW.

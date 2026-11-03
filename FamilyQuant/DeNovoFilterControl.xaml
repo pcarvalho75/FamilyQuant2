@@ -3,7 +3,7 @@
  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
  <Grid>
   <Grid.ColumnDefinitions><ColumnDefinition Width="190"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
-  <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
+  <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
   <Label Content="De novo source" ToolTip="The selected caller determines the files and native confidence field used."/>
   <ComboBox x:Name="ComboBoxDeNovoSource" Grid.Column="1" SelectedValuePath="Tag"
    SelectedValue="{Binding ModeTag, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
@@ -33,5 +33,7 @@
      ToolTip="Local confidence floor from 0 to 100, rounded to the nearest whole number. Default 90."/>
    </WrapPanel>
   </Expander>
+  <TextBlock Grid.Row="4" Grid.ColumnSpan="2" Margin="0,6,0,0" Text="{Binding SourceProposalText}"
+   TextTrimming="CharacterEllipsis" ToolTip="{Binding SourceProposalText}"/>
  </Grid>
 </UserControl>
