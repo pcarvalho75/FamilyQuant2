@@ -238,12 +238,15 @@ Finished steps, moved here from docs/ROADMAP.md. The board shows them as green.
 | J6d | Report details: one form saved in the project (title, authors, sample, workflow, kind of database, written interpretation), each printed in its place in the report | M | 1.5 | 🟢 | J6e, J7b | Round trip; Undo; native editor test. Printing each field is checked in J6a, whose writer consumes it | SH | | 0 | 0 | |
 | J6i | Input provenance for the methods: the database's original file name, the SEPro package name and the search settings read from the search parameter file beside it, stored in the project when Results are computed or the file is chosen | M | 1 | 🟢 | J6b | Methods print the database name and the search settings from the project alone; a project without them says which are missing | SH | | 0 | 0 | |
 | J6c | One section per family from the user's panel: its decision, literature abundance and notes printed beside the observed numbers | M | 1 | J6a | J6e | Panel text appears as written; no fixed organism text | T2 | | 0 | 0 | |
+| J6a | Report writer: a `.docx` with title, contents and methods written from the project's own facts (inputs and hashes, database counts and labels, search and de novo settings, the quantitation rules in force) | M | 2 | J1b0 | J6b, J6c | Opens in Word; fixed wording is general; same bytes under pt-BR and en-US; every Report details field printed in its place | RS | | 0 | 0 | |
+| J6h | Every figure the program already draws goes into the report: ion current, M+0 recovery, XIC mass, isotope count, de novo scores and sources, accepted scores, family-world error rates, Database gap | M | 1.5 | J6a | J6b | Each figure in the document is byte-equal to the program's own PNG export | RS | | 0 | 0 | |
 
 ### W4 Where the peptides fall
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
 | J4a | Fetch domain positions (InterPro) and UniProt feature positions (chain, peptide, propeptide, signal) for each protein, stored with the evidence and its provenance | M | 2 | 🟢 | J4b, J4c | Live fetch on Ana's database; the project reopens offline with the positions | AS | | 0 | 0 | |
+| J4b | Signal by domain and by mature product: each peptide placed on its protein's domains and named products; per family the share in each domain and outside any domain | M | 2 | 🟢 | J6b, J7a | Domain parts sum to the family; fixture | FL | | 0 | 0 | |
 
 ### W5 The numbers Ana asked for
 
@@ -253,6 +256,8 @@ Finished steps, moved here from docs/ROADMAP.md. The board shows them as green.
 | J5h | Where each family's signal came from: identified, de novo in the database and de novo found only in the family world, stacked per family | M | 1 | 🟢 | J6b | Native PNG in both themes; parts equal the stored result table | T2 | | 0 | 0 | |
 | J5a | Per run: each family's share in each RAW, and the mean, SD and CV over runs | M | 1.5 | 🟢 | J5d, J6b, J7a | Each run's parts sum to that run's total; fixture | FL | | 0 | 0 | |
 | J5b | Toxin count per family: the fewest database proteins that explain the family's peptides, and the proteins with a peptide of their own; definitions on screen and in exports | M | 1.5 | 🟢 | J6b, J7a | Fixture with a known minimal set | FL | | 0 | 0 | |
+| J5d | Composition charts: family shares with run-to-run error bars, and subclasses stacked within each family. Every figure is drawn by the program on screen and exported for the report | M | 1.5 | 🟢 | J6b | Native PNG in both themes and the Light export | LK | | 0 | 0 | |
+| J5f | Abundance against diversity: each family as a point, its share of the venom against its toxin count, so the two are never confused | M | 1.5 | 🟢 | J6b | Native PNG in both themes and the Light export; values equal the composition export | LK | | 0 | 0 | |
 
 ### W3 Subclasses
 
