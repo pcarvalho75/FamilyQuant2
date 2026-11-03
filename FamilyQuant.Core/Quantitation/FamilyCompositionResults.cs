@@ -68,6 +68,10 @@ namespace FamilyQuant
         public int ObservedPeptideCount { get; set; }
         public List<string> SelectedProteinIdentifiers { get; set; } = new();
         public List<string> UnexplainedPeptides { get; set; } = new();
+        /// <summary>False means the greedy count explains only the supported subset. Report the
+        /// unexplained count beside the estimate; it is not a complete explanation of all observations.</summary>
+        public bool ExplainsAllObservedPeptides => UnexplainedPeptides.Count == 0;
+        public int ExplainedPeptideCount => ObservedPeptideCount - UnexplainedPeptides.Count;
     }
 
     /// <summary>A partition of credited family signal. A missing key with IsUnresolved=true denotes

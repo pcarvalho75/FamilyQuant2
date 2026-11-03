@@ -62,6 +62,18 @@ namespace FamilyQuant
                 FamilyCompositionStudy.StoreRunShares(manifest, assigned);
                 if (familyHits != null && options.FamilyCuration != null)
                     FamilyCompositionStudy.StoreSubclassesFromCuration(manifest, assigned, familyHits, options.FamilyCuration);
+                if (options.FamilyCuration != null)
+                {
+                    try
+                    {
+                        FamilyCompositionStudy.StoreProteinCounts(manifest, assigned, options.FamilyCuration.MyExtendedFastaItems);
+                    }
+                    catch (ArgumentException ex)
+                    {
+                        manifest.FamilyProteinCounts = null;
+                        result.Notes.Add("Protein explanation counts unavailable: " + ex.Message);
+                    }
+                }
             }
             result.SpectrumComparisonRows = SpectrumComparisonTable.Build(
                 deNovoImport.AllSourceRows.Where(r => !string.Equals(r.SourceId,
