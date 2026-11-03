@@ -194,7 +194,8 @@ public partial class MainWindow
             if (factory != null) prepared = new(factory(rows, manifest, snapshot, folder), new Dictionary<string, string>(StringComparer.Ordinal), Array.Empty<ReportPlacedFigure>());
             else
             {
-                prepared = ReportProjectExporter.Build(rows, manifest, snapshot, folder, snapshot.ReportDetails, snapshot.ReportInputProvenance, operation: operation);
+                prepared = ReportProjectExporter.Build(rows, manifest, snapshot, folder, snapshot.ReportDetails, snapshot.ReportInputProvenance,
+                    operation: operation);
                 // The published carrier precedes RS's final J6b Build wiring. Use the owner's
                 // layout while the carrier is empty; a populated carrier is already compact.
                 if (prepared.SupplementSheets.Count == 0 && prepared.CsvExports.Count > 0)
