@@ -86,7 +86,20 @@ public static class WordReportWriter
                             if (table.Columns.Count == 0 || table.Rows.Any(r => r.Count != table.Columns.Count))
                                 throw new ArgumentException("Report tables require columns and equally sized rows.", nameof(document));
                             body.Append(Paragraph(table.Title, "Heading2"));
-                            body.Append(Table(table));
+                            if (table.Columns.Count > 5 && table.Rows.Count > 0)
+                            {
+                                // A narrow seven-column source table turns paths and definitions into
+                                // letter stacks. Print each complete record as a two-column card.
+                                // The model and companion workbook retain the original rectangular data.
+                                for (int record = 0; record < table.Rows.Count; record++)
+                                {
+                                    body.Append(Paragraph("Record " + (record + 1).ToString(CultureInfo.InvariantCulture), "Heading2"));
+                                    var rows = table.Columns.Select((column, index) =>
+                                        (IReadOnlyList<string>)new[] { column, table.Rows[record][index] }).ToArray();
+                                    body.Append(Table(table with { Columns = new[] { "Field", "Stored value" }, Rows = rows }, keepTogether: true));
+                                }
+                            }
+                            else body.Append(Table(table));
                             foreach (string line in Lines(table.Caption)) body.Append(Paragraph(line, "Caption"));
                             break;
                         case ReportFigure figure:
@@ -169,10 +182,9 @@ public static class WordReportWriter
             Style("Heading2", "heading 2", "24", true), Style("Caption", "caption", "20"));
     }
 
-    private static W.Table Table(ReportTable data)
+    private static W.Table Table(ReportTable data, bool keepTogether = false)
     {
-        int[] widths = Enumerable.Range(0, data.Columns.Count)
-            .Select(index => PageWidth / data.Columns.Count + (index < PageWidth % data.Columns.Count ? 1 : 0)).ToArray();
+        int[] widths = ReportTableLayout.Widths(data, PageWidth);
         var result = new W.Table(new W.TableProperties(new W.TableWidth { Width = PageWidth.ToString(CultureInfo.InvariantCulture), Type = W.TableWidthUnitValues.Dxa },
             new W.TableLayout { Type = W.TableLayoutValues.Fixed },
             new W.TableCellMarginDefault(new W.TopMargin { Width = "40", Type = W.TableWidthUnitValues.Dxa },
@@ -180,10 +192,10 @@ public static class WordReportWriter
                 new W.BottomMargin { Width = "40", Type = W.TableWidthUnitValues.Dxa },
                 new W.TableCellRightMargin { Width = 100, Type = W.TableWidthValues.Dxa })),
             new W.TableGrid(widths.Select(width => new W.GridColumn { Width = width.ToString(CultureInfo.InvariantCulture) })));
-        W.TableRow Row(IReadOnlyList<string> cells, bool header)
+        W.TableRow Row(IReadOnlyList<string> cells, bool header, bool keepNext)
         {
-            var row = new W.TableRow();
-            if (header) row.Append(new W.TableRowProperties(new W.TableHeader()));
+            var row = new W.TableRow(new W.TableRowProperties(new W.CantSplit()));
+            if (header) row.TableRowProperties!.Append(new W.TableHeader());
             for (int index = 0; index < cells.Count; index++)
             {
                 string text = cells[index];
@@ -191,6 +203,8 @@ public static class WordReportWriter
                 foreach (string line in Lines(text))
                 {
                     var paragraph = Paragraph(line);
+                    if (keepNext) paragraph.ParagraphProperties!.Append(new W.KeepNext());
+                    paragraph.ParagraphProperties!.Append(new W.KeepLines());
                     if (header) paragraph.GetFirstChild<W.Run>()!.PrependChild(new W.RunProperties(new W.Bold()));
                     else if (double.TryParse(line, NumberStyles.Float, CultureInfo.InvariantCulture, out _))
                         paragraph.ParagraphProperties!.Append(new W.Justification { Val = W.JustificationValues.Right });
@@ -200,8 +214,9 @@ public static class WordReportWriter
             }
             return row;
         }
-        result.Append(Row(data.Columns, true));
-        foreach (var row in data.Rows) result.Append(Row(row, false));
+        result.Append(Row(data.Columns, true, true));
+        for (int index = 0; index < data.Rows.Count; index++)
+            result.Append(Row(data.Rows[index], false, keepTogether && index < data.Rows.Count - 1));
         return result;
     }
 
