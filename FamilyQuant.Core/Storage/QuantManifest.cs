@@ -190,6 +190,10 @@ namespace FamilyQuant
         [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull)]
         public FamilyDomainPartsResult? FamilyDomainParts { get; set; }
 
+        /// <summary>Actual computed shared-policy/cutoff variants. Absent until explicitly requested.</summary>
+        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull)]
+        public FamilySensitivityResult? FamilySensitivity { get; set; }
+
         /// <summary>The complete compute-time spectrum evidence table, including accepted source calls
         /// that did not yield a stored XIC and RAW-selected precursor metadata. Version-2 projects keep
         /// this collection in the streaming <c>spectrum_comparison.jsonl.gz</c> entry rather than in
