@@ -83,8 +83,7 @@ The export failed on Ana's project (a figure read the on-screen palette from the
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
 | J39 | Cache the two source census searches as well, if J32c shows they cost more than a minute | M | 1 | 🟢 | | Byte-identical report data; the export time before and after | T1 | | 0 | 0 | |
-| J36b | Delivery rehearsal on the first full-run project into a staging folder | L | 0.3 | 🟢 | J36c | Summary with hashes and the trace's count | RS | | 0 | 0 | |
-| J36c | J36 reviewed and merged | L | 0.2 | J36b | K17 | Approved; gate green | RS | | 0 | 0 | |
+| J36c | J36 reviewed and merged | L | 0.2 | 🟢 | K17 | Approved; gate green | RS | | 0 | 0 | |
 | J34b | Look fixes for the listed items | M | 1 | 🟢 | J34c | Each item fixed or ruled | LK | | 0 | 0 | |
 | J34c | J34 reviewed and merged | L | 0.2 | J34b | K14 | Approved; gate green | LK | | 0 | 0 | |
 
