@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text.Json;
+using FamilyQuant.DeNovo;
 using FamilyQuant.Evidence;
 using FamilyQuant.Panels;
 
@@ -201,15 +202,7 @@ internal static partial class Program
 
         void MakeAssignmentsCurrent(FamilyClusterFile file)
         {
-            foreach (var row in file.PanelProteinAssignments!) row.Reason = "Synthetic applied assignment";
-            var recipe = new EvidenceRecipe { Options = options, FamilyPanel = FamilyPanelValidation.Clone(file.FamilyPanel!),
-                PanelProteinAssignments = JsonSerializer.Deserialize<List<PanelProteinAssignment>>(JsonSerializer.Serialize(file.PanelProteinAssignments)),
-                PanelProteinAssignmentsPanelFingerprint = file.PanelProteinAssignmentsPanelFingerprint };
-            file.EvidenceRecipe = recipe;
-            var fingerprint = typeof(PanelAssignmentEvidenceStore).GetMethod("Fingerprint",
-                System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.NonPublic)!;
-            string value = (string)fingerprint.Invoke(null, new object?[] { file, file.PanelProteinAssignments, recipe, file.EvidenceSource, null })!;
-            file.PanelProteinAssignmentsFingerprint = recipe.PanelProteinAssignmentsFingerprint = value;
+            MakePanelAssignmentsCurrent(file, options);
         }
         var current = Fixture(false); MakeAssignmentsCurrent(current);
         Check("J3a stand-in exercises J2a's current-assignment accessor", PanelAssignmentEvidenceStore.Current(current) != null);
@@ -320,6 +313,49 @@ internal static partial class Program
         try { RunSubclassLeaveOneOut(new[] { "--subclass-leave-one-out", looProject, looOutput }); }
         catch (IOException) { existingRefused = true; }
         Check("J3a native measurement refuses an existing output directory", existingRefused);
+
+        var staleConsumers = Fixture(false); MakeAssignmentsCurrent(staleConsumers);
+        var staleLabels = Candidate(staleConsumers);
+        commitMethod!.Invoke(null, new[] { staleConsumers, staleLabels });
+        staleConsumers.MyExtendedFastaItems[0].Evidence!.Keywords.Add("changed after subclass computation");
+        var staleManifest = new QuantManifest { FamilySubclassParts = new FamilySubclassPartsResult(),
+            FamilyRunShares = new FamilyRunSharesResult { Families = new() { new() { FamilyUserId = 11, MeanShare = .125 } } } };
+        var emptyAttribution = FamilyEnvelopeQuant.AttributePeptides(Array.Empty<NativePeptideQuant>(), new PeptideFamilyAttribution());
+        Check("J3a stale subclass labels cannot feed the quantitation adapter or retain prior parts",
+            !FamilyCompositionStudy.StoreSubclassesFromCuration(staleManifest, emptyAttribution, new CurationHomologyHits(), staleConsumers)
+            && staleManifest.FamilySubclassParts == null);
+        var staleReport = FamilyQuant.Report.ReportPanelSections.BuildFromResults(staleConsumers, staleManifest);
+        var staleReportText = JsonSerializer.Serialize(staleReport.SelectMany(s => s.Blocks).Select(b => b switch
+        {
+            FamilyQuant.Report.ReportParagraph p => p.Text,
+            FamilyQuant.Report.ReportTable t => JsonSerializer.Serialize(t.Rows),
+            _ => "",
+        }));
+        Check("J3a stale labels cannot map report observations and are reported unavailable",
+            !staleReportText.Contains("0.125", StringComparison.Ordinal)
+            && staleReportText.Contains("out of date", StringComparison.OrdinalIgnoreCase));
+        string staleAudit = PanelAuditCsv.BuildCsv(staleConsumers);
+        Check("J3a audit does not export stale subclass labels as current", staleAudit.Contains("out of date", StringComparison.OrdinalIgnoreCase)
+            && !staleAudit.Contains("Source evidence matches the user-defined subclass rule", StringComparison.Ordinal));
+        var staleOnlySubclass = Fixture(false);
+        staleOnlySubclass.FamilyPanel!.Families[0].DisplayName = "User family";
+        MakeAssignmentsCurrent(staleOnlySubclass);
+        var freshLabels = Candidate(staleOnlySubclass);
+        commitMethod.Invoke(null, new[] { staleOnlySubclass, freshLabels });
+        staleOnlySubclass.ProteinSubclassLabels![0].SubclassKey = "altered";
+        var validFamilyReport = FamilyQuant.Report.ReportPanelSections.BuildFromResults(staleOnlySubclass, staleManifest);
+        string validFamilyText = JsonSerializer.Serialize(validFamilyReport.SelectMany(s => s.Blocks).Select(b => b switch
+        {
+            FamilyQuant.Report.ReportParagraph p => p.Text,
+            FamilyQuant.Report.ReportTable t => JsonSerializer.Serialize(t.Rows),
+            _ => "",
+        }));
+        Check("J3a report keeps current family observations while marking only subclass labels stale",
+            PanelAssignmentEvidenceStore.Current(staleOnlySubclass) != null && !SubclassAssignment.IsCurrent(staleOnlySubclass)
+            && validFamilyText.Contains("0.125", StringComparison.Ordinal) && validFamilyText.Contains("out of date", StringComparison.OrdinalIgnoreCase));
+        string familyAudit = PanelAuditCsv.BuildCsv(staleOnlySubclass);
+        Check("J3a audit keeps current family assignment while marking subclass labels stale", familyAudit.Contains("User family", StringComparison.Ordinal)
+            && familyAudit.Contains("out of date", StringComparison.OrdinalIgnoreCase) && !familyAudit.Contains("altered", StringComparison.Ordinal));
 
         EnsureApplication();
         bool RunRunner(ClusterGenerationControl host)

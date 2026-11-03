@@ -18,11 +18,15 @@ public static partial class FamilyCompositionStudy
         ArgumentNullException.ThrowIfNull(manifest);
         ArgumentNullException.ThrowIfNull(curation);
         ArgumentNullException.ThrowIfNull(hits);
-        if (curation.ProteinSubclassLabels == null) return false;
+        if (!SubclassAssignment.IsCurrent(curation))
+        {
+            manifest.FamilySubclassParts = null;
+            return false;
+        }
         var candidates = new CompositionProteinCandidates(hits, curation);
-        var labels = curation.ProteinSubclassLabels.GroupBy(l => l.ProteinIndex)
+        var labels = curation.ProteinSubclassLabels!.GroupBy(l => l.ProteinIndex)
             .ToDictionary(g => g.Key, g => g.Count() == 1 ? g.Single() : null);
-        var familyKeys = curation.ProteinSubclassLabels.Where(l => l.FamilyUserId.HasValue && l.PanelFamilyKey != null)
+        var familyKeys = curation.ProteinSubclassLabels!.Where(l => l.FamilyUserId.HasValue && l.PanelFamilyKey != null)
             .GroupBy(l => l.FamilyUserId!.Value).ToDictionary(g => g.Key,
                 g => g.Select(l => l.PanelFamilyKey!).Distinct(StringComparer.Ordinal).ToArray());
         var result = BuildSubclasses(attribution, (side, sequence, family) =>
