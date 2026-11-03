@@ -32,6 +32,8 @@
                     <MenuItem x:Name="MenuItemExportComposition" Header="Family composition (CSV)" Click="MenuItemExportComposition_Click"
                               ToolTip="Exports the current Full XIC family composition with its existing attribution settings. Disabled until Full XIC is available."/>
                 </MenuItem>
+                <MenuItem x:Name="MenuItemReportDetails" Header="Report details" Click="MenuItemReportDetails_Click" IsEnabled="False"
+                          ToolTip="Edit the study description and written interpretation saved with the project. Disabled until a project is open."/>
                 <MenuItem x:Name="MenuItemRecent" Header="Recent projects" SubmenuOpened="MenuItemRecent_SubmenuOpened"
                           ToolTip="Reopens a recent project or Family Cluster File. Missing files remain listed with their paths."/>
                 <Separator/>

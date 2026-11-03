@@ -223,3 +223,16 @@ Finished steps, moved here from docs/ROADMAP.md. The board shows them as green.
 | R5a | FamilyQuant 2.0 final published | L | 0 | 🟢 | R5b | Paulo publishes | Paulo | not started | 0% | 0% | T+0 |
 | R5b | Archive this roadmap | L | 0.1 | 🟢 | Done | Archive committed | Orchestrator | not started | 0% | 0% | T+0 |
 
+### W1 Ana's family panel, as user data
+
+| ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
+|---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
+| J1b0 | One package, DocumentFormat.OpenXml, to read `.xlsx` and write `.docx`; pinned and recorded in DEPENDENCIES.md | L | 0.5 | 🟢 | J1b, J6a | Build, dependency check, publish payload lists the DLL | AS | | 0 | 0 | |
+| J1a | Family panel in the project: for each family its code, names, decision, Pfam list, subclasses to report, literature abundance, notes and sources, stored in the `.fqproj` and the recipe | M | 1.5 | 🟢 | J1b, J1c, J2a, J3a, J5c, J6c | Round trip test; an old project opens and saves its old bytes | EV | | 0 | 0 | |
+
+### W6 The Word report, written by the program
+
+| ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
+|---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
+| J6d | Report details: one form saved in the project (title, authors, sample, workflow, kind of database, written interpretation), each printed in its place in the report | M | 1.5 | 🟢 | J6e, J7b | Round trip; Undo; native editor test. Printing each field is checked in J6a, whose writer consumes it | SH | | 0 | 0 | |
+
