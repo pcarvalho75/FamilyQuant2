@@ -14,6 +14,7 @@ This is the navigation index for the current checkout. The roadmap owns unfinish
 | [App operations](APP-OPERATIONS.md) | Busy host, overlay and publication adapters |
 | [Shell dialogs](SHELL-DIALOGS.md) | Headless messages, browse preferences and protected C1 adoption |
 | [Quantitation stages](QUANTITATION-PIPELINE.md) | Full-XIC stage contracts, second-pass residual seam and focused parity checker |
+| [Compute homology performance](COMPUTE-HOMOLOGY-PERFORMANCE.md) | Matched full-data timing and stored-byte proof for attribution reuse |
 | [Panel subclasses](PANEL-SUBCLASSES.md) | User-defined subclass rules, currentness, reviewed transfer and leave-one-out measurement |
 | [De novo engine](DENOVO-ENGINE.md) | Reader/result boundaries, Core selections and review tables, focused real-data parity |
 | [Project formats](PROJECT-FORMATS.md) | Versioned schema/codecs, legacy container rules and frozen-reader FCF proof |
