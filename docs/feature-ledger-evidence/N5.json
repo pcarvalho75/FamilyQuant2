@@ -5,29 +5,29 @@
   "runs": [
     {
       "id": "N5-native-preservation",
-      "command": "C:\\FamilyQuant-gate\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --feature-ledger-prove D:/FamilyQuant-data/out-refresh\\20261102-174442-FamilyQuant-gate\\n5-native \u00222026-11-02 17:47:24 -0800\u0022",
-      "executedAt": "2026-11-02 17:47:24 -0800",
-      "commit": "0255e09ed407d2a8153e26bc9317281c2df8774e",
+      "command": "C:\\FamilyQuant-gate\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --feature-ledger-prove D:/FamilyQuant-data/out-refresh\\20261102-182444-FamilyQuant-gate\\n5-native \u00222026-11-02 18:28:24 -0800\u0022",
+      "executedAt": "2026-11-02 18:28:24 -0800",
+      "commit": "8421552b22169f5b7ab3c44f2670c992e5e4562c",
       "artifacts": [
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\n5-native\\proofs.log",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\n5-native\\proofs.log",
           "sha256": "1D1F465B561B134651DC1CD34CCF11A08C6CAEDD08D664E1E94EB8E233A84B41"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\n5-native\\actual-values.json",
-          "sha256": "E3DC529B5DFCD4CBF1A22A112D21DA810B25C7AD5FA582C34C1F8ACE1568199C"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\n5-native\\actual-values.json",
+          "sha256": "AE5BBA3553CEA4C369254EC095174885F4ACDED6EB1270B38A3AF4660AB43E77"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\n5-native\\executed\\Program.LedgerPreservation.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\n5-native\\executed\\Program.LedgerPreservation.cs",
           "sha256": "999E13B7BF67353AF11E001FAF28CF71A51AB03299D24116C86C47474D1D7406"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\n5-native\\executed\\FamilyQuant.Tests.dll",
-          "sha256": "661F0CB7809E1866C73DE96EF1FC7F1453325D70D6A950EE454AE056FEDC042E"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\n5-native\\executed\\FamilyQuant.Tests.dll",
+          "sha256": "6F2762D3760DB80C7EF95E01791ADDCF311D2A58137A9797910B10F57606C080"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\n5-native\\executed\\FamilyQuant.Core.dll",
-          "sha256": "F8F2936F4B51F1EBE9C1FE18ED1B27D2C9DF922317E94B6418E68E62AF722441"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\n5-native\\executed\\FamilyQuant.Core.dll",
+          "sha256": "BB2B0CAA4935237DB0CAE13B8BC6177D08BDFB963839063CE2B5D5E240F9B4BA"
         }
       ],
       "workingDirectory": "C:\\FamilyQuant-gate"
@@ -119,7 +119,7 @@
           "kind": "test",
           "target": "LedgerPreservationTests",
           "assertion": "N5 FQ15-008C54E1A893: fail-closed source discovery at frozen line 171",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\n5-native\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\n5-native\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -296,7 +296,7 @@
           "kind": "test",
           "target": "LedgerPreservationTests",
           "assertion": "N5 FQ15-021B6A5826E1: source descriptor peaks-denovo-all field 3",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\n5-native\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\n5-native\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -963,7 +963,7 @@
           "kind": "test",
           "target": "LedgerPreservationTests",
           "assertion": "N5 FQ15-084B9CE2A9A6: stored provenance value for tic",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\n5-native\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\n5-native\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -1028,7 +1028,7 @@
           "kind": "test",
           "target": "LedgerPreservationTests",
           "assertion": "N5 FQ15-0880AF558C0B: fail-closed source discovery at frozen line 172",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\n5-native\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\n5-native\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -1583,7 +1583,7 @@
           "kind": "test",
           "target": "LedgerPreservationTests",
           "assertion": "N5 FQ15-0EBEB1105B90: native quant column 17",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\n5-native\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\n5-native\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -1970,7 +1970,7 @@
           "kind": "test",
           "target": "LedgerPreservationTests",
           "assertion": "N5 FQ15-128379750CCC: native quant column 2",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\n5-native\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\n5-native\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -2455,7 +2455,7 @@
           "kind": "test",
           "target": "LedgerPreservationTests",
           "assertion": "N5 FQ15-170DBA4A2A67: invariant cutoff format at frozen line 144",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\n5-native\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\n5-native\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -3164,7 +3164,7 @@
           "kind": "test",
           "target": "LedgerPreservationTests",
           "assertion": "N5 FQ15-1CEC65FD799B: stored provenance key area_m3",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\n5-native\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\n5-native\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -3649,7 +3649,7 @@
           "kind": "test",
           "target": "LedgerPreservationTests",
           "assertion": "N5 FQ15-2156E4FAB256: native quant column 16",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\n5-native\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\n5-native\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -4498,7 +4498,7 @@
           "kind": "test",
           "target": "LedgerPreservationTests",
           "assertion": "N5 FQ15-2957C99E4509: source descriptor deepnovo field 0",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\n5-native\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\n5-native\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -6369,7 +6369,7 @@
           "kind": "test",
           "target": "LedgerPreservationTests",
           "assertion": "N5 FQ15-3A73D0EA2CEB: stored provenance key area_m0",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\n5-native\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\n5-native\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -6448,7 +6448,7 @@
           "kind": "test",
           "target": "LedgerPreservationTests",
           "assertion": "N5 FQ15-3B197D67924A: source descriptor peaks-denovo-only field 0",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\n5-native\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\n5-native\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -6835,7 +6835,7 @@
           "kind": "test",
           "target": "LedgerPreservationTests",
           "assertion": "N5 FQ15-3EFB074CBAF2: invariant cutoff format at frozen line 127",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\n5-native\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\n5-native\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -7012,7 +7012,7 @@
           "kind": "test",
           "target": "LedgerPreservationTests",
           "assertion": "N5 FQ15-4125BDC9D9E4: native ZIP entry curation.json",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\n5-native\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\n5-native\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -7189,7 +7189,7 @@
           "kind": "test",
           "target": "LedgerPreservationTests",
           "assertion": "N5 FQ15-43E0539B0DAE: fail-closed source discovery at frozen line 173",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\n5-native\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\n5-native\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -7268,7 +7268,7 @@
           "kind": "test",
           "target": "LedgerPreservationTests",
           "assertion": "N5 FQ15-447590079D9B: fail-closed source discovery at frozen line 172",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\n5-native\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\n5-native\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -7585,7 +7585,7 @@
           "kind": "test",
           "target": "LedgerPreservationTests",
           "assertion": "N5 FQ15-479CB86583FB: stored provenance key area_m5",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\n5-native\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\n5-native\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -7748,7 +7748,7 @@
           "kind": "test",
           "target": "LedgerPreservationTests",
           "assertion": "N5 FQ15-4A6E229824ED: stored provenance value for area_m0",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\n5-native\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\n5-native\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -8303,7 +8303,7 @@
           "kind": "test",
           "target": "LedgerPreservationTests",
           "assertion": "N5 FQ15-4F578A187EB7: stored provenance value for area_m1",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\n5-native\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\n5-native\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -8634,7 +8634,7 @@
           "kind": "test",
           "target": "LedgerPreservationTests",
           "assertion": "N5 FQ15-521EC8707644: stored provenance value for area_m3",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\n5-native\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\n5-native\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -9119,7 +9119,7 @@
           "kind": "test",
           "target": "LedgerPreservationTests",
           "assertion": "N5 FQ15-554928074AB5: stored provenance key area_m1",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\n5-native\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\n5-native\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -9646,7 +9646,7 @@
           "kind": "test",
           "target": "LedgerPreservationTests",
           "assertion": "N5 FQ15-58C4C478BAED: invalid source descriptor refusal at frozen line 36",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\n5-native\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\n5-native\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -10299,7 +10299,7 @@
           "kind": "test",
           "target": "LedgerPreservationTests",
           "assertion": "N5 FQ15-5EAEA6ECC2B7: invariant cutoff format at frozen line 126",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\n5-native\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\n5-native\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -10560,7 +10560,7 @@
           "kind": "test",
           "target": "LedgerPreservationTests",
           "assertion": "N5 FQ15-6209E9A73911: native ZIP entry quant.tsv.gz",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\n5-native\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\n5-native\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -11087,7 +11087,7 @@
           "kind": "test",
           "target": "LedgerPreservationTests",
           "assertion": "N5 FQ15-662D85255ACF: source descriptor peaks-denovo-all field 2",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\n5-native\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\n5-native\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -11348,7 +11348,7 @@
           "kind": "test",
           "target": "LedgerPreservationTests",
           "assertion": "N5 FQ15-6809BD59963F: stored provenance key tic",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\n5-native\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\n5-native\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -11567,7 +11567,7 @@
           "kind": "test",
           "target": "LedgerPreservationTests",
           "assertion": "N5 FQ15-69F62274DF68: native quant column 12",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\n5-native\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\n5-native\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -11688,7 +11688,7 @@
           "kind": "test",
           "target": "LedgerPreservationTests",
           "assertion": "N5 FQ15-6AC71082A526: native quant column 7",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\n5-native\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\n5-native\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -12649,7 +12649,7 @@
           "kind": "test",
           "target": "LedgerPreservationTests",
           "assertion": "N5 FQ15-741749FE2D0D: invariant cutoff format at frozen line 143",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\n5-native\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\n5-native\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -12840,7 +12840,7 @@
           "kind": "test",
           "target": "LedgerPreservationTests",
           "assertion": "N5 FQ15-7642C21EFB76: source descriptor deepnovo field 2",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\n5-native\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\n5-native\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -13087,7 +13087,7 @@
           "kind": "test",
           "target": "LedgerPreservationTests",
           "assertion": "N5 FQ15-77D3E342BA86: native quant column 9",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\n5-native\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\n5-native\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -13306,7 +13306,7 @@
           "kind": "test",
           "target": "LedgerPreservationTests",
           "assertion": "N5 FQ15-795A7F967780: fail-closed source discovery at frozen line 158",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\n5-native\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\n5-native\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -13385,7 +13385,7 @@
           "kind": "test",
           "target": "LedgerPreservationTests",
           "assertion": "N5 FQ15-7A13A45A5F69: invalid source descriptor refusal at frozen line 32",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\n5-native\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\n5-native\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -13422,7 +13422,7 @@
           "kind": "test",
           "target": "LedgerPreservationTests",
           "assertion": "N5 FQ15-7AA5A56D46CD: fail-closed source discovery at frozen line 163",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\n5-native\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\n5-native\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -13739,7 +13739,7 @@
           "kind": "test",
           "target": "LedgerPreservationTests",
           "assertion": "N5 FQ15-7CE635F6AA7C: stored provenance value for under_sampled",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\n5-native\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\n5-native\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -13804,7 +13804,7 @@
           "kind": "test",
           "target": "LedgerPreservationTests",
           "assertion": "N5 FQ15-7D078E78DADC: invalid source descriptor refusal at frozen line 34",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\n5-native\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\n5-native\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -14037,7 +14037,7 @@
           "kind": "test",
           "target": "LedgerPreservationTests",
           "assertion": "N5 FQ15-7E70C78DF1B3: source descriptor deepnovo field 3",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\n5-native\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\n5-native\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -14074,7 +14074,7 @@
           "kind": "test",
           "target": "LedgerPreservationTests",
           "assertion": "N5 FQ15-7ECD142ABDD2: native quant column 13",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\n5-native\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\n5-native\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -14769,7 +14769,7 @@
           "kind": "test",
           "target": "LedgerPreservationTests",
           "assertion": "N5 FQ15-856E088CAD09: fail-closed source discovery at frozen line 171",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\n5-native\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\n5-native\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -15954,7 +15954,7 @@
           "kind": "test",
           "target": "LedgerPreservationTests",
           "assertion": "N5 FQ15-8FC43ECEA164: native quant column 4",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\n5-native\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\n5-native\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -16033,7 +16033,7 @@
           "kind": "test",
           "target": "LedgerPreservationTests",
           "assertion": "N5 FQ15-8FF92D872DC0: stored provenance key envelope_sum",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\n5-native\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\n5-native\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -16378,7 +16378,7 @@
           "kind": "test",
           "target": "LedgerPreservationTests",
           "assertion": "N5 FQ15-92E5CE966288: native quant column 14",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\n5-native\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\n5-native\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -16821,7 +16821,7 @@
           "kind": "test",
           "target": "LedgerPreservationTests",
           "assertion": "N5 FQ15-9753B6AA522A: native quant column 0",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\n5-native\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\n5-native\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -17278,7 +17278,7 @@
           "kind": "test",
           "target": "LedgerPreservationTests",
           "assertion": "N5 FQ15-9B6933EC00EC: stored provenance key family_userid",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\n5-native\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\n5-native\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -17315,7 +17315,7 @@
           "kind": "test",
           "target": "LedgerPreservationTests",
           "assertion": "N5 FQ15-9B6B0DA4C370: fail-closed source discovery at frozen line 172",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\n5-native\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\n5-native\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -17352,7 +17352,7 @@
           "kind": "test",
           "target": "LedgerPreservationTests",
           "assertion": "N5 FQ15-9B78CBB81C8E: native quant column 5",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\n5-native\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\n5-native\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -17375,7 +17375,7 @@
           "kind": "test",
           "target": "LedgerPreservationTests",
           "assertion": "N5 FQ15-9B98EE3542D8: native ZIP entry spectrum_comparison.jsonl.gz",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\n5-native\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\n5-native\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -17538,7 +17538,7 @@
           "kind": "test",
           "target": "LedgerPreservationTests",
           "assertion": "N5 FQ15-9CC6DA22E43D: source descriptor deepnovo field 1",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\n5-native\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\n5-native\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -17673,7 +17673,7 @@
           "kind": "test",
           "target": "LedgerPreservationTests",
           "assertion": "N5 FQ15-9D951130781D: native quant column 15",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\n5-native\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\n5-native\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -17766,7 +17766,7 @@
           "kind": "test",
           "target": "LedgerPreservationTests",
           "assertion": "N5 FQ15-9F075B101A12: native quant column 11",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\n5-native\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\n5-native\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -17817,7 +17817,7 @@
           "kind": "test",
           "target": "LedgerPreservationTests",
           "assertion": "N5 FQ15-9F8BE9ADF943: stored provenance value for family_userid",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\n5-native\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\n5-native\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -17910,7 +17910,7 @@
           "kind": "test",
           "target": "LedgerPreservationTests",
           "assertion": "N5 FQ15-A030BBDCD130: source descriptor peaks-denovo-all field 0",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\n5-native\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\n5-native\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -17933,7 +17933,7 @@
           "kind": "test",
           "target": "LedgerPreservationTests",
           "assertion": "N5 FQ15-A058982DBB8A: native quant column 6",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\n5-native\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\n5-native\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -18124,7 +18124,7 @@
           "kind": "test",
           "target": "LedgerPreservationTests",
           "assertion": "N5 FQ15-A20F3B9AC766: stored provenance value for area_m5",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\n5-native\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\n5-native\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -18651,7 +18651,7 @@
           "kind": "test",
           "target": "LedgerPreservationTests",
           "assertion": "N5 FQ15-A6996DB788A9: source descriptor peaks-denovo-only field 1",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\n5-native\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\n5-native\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -18856,7 +18856,7 @@
           "kind": "test",
           "target": "LedgerPreservationTests",
           "assertion": "N5 FQ15-A7FA686D8E73: invalid source descriptor refusal at frozen line 38",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\n5-native\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\n5-native\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -20069,7 +20069,7 @@
           "kind": "test",
           "target": "LedgerPreservationTests",
           "assertion": "N5 FQ15-B2EEF7F999D4: project extension recognition",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\n5-native\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\n5-native\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -20750,7 +20750,7 @@
           "kind": "test",
           "target": "LedgerPreservationTests",
           "assertion": "N5 FQ15-B875F8E0EF71: source descriptor peaks-denovo-only field 2",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\n5-native\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\n5-native\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -20913,7 +20913,7 @@
           "kind": "test",
           "target": "LedgerPreservationTests",
           "assertion": "N5 FQ15-BA9D5EB3D72E: stored provenance value for area_m4",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\n5-native\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\n5-native\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -21174,7 +21174,7 @@
           "kind": "test",
           "target": "LedgerPreservationTests",
           "assertion": "N5 FQ15-BBF878F85F25: native quant column 8",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\n5-native\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\n5-native\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -22009,7 +22009,7 @@
           "kind": "test",
           "target": "LedgerPreservationTests",
           "assertion": "N5 FQ15-C35550A96D04: source descriptor peaks-denovo-only field 3",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\n5-native\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\n5-native\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -22046,7 +22046,7 @@
           "kind": "test",
           "target": "LedgerPreservationTests",
           "assertion": "N5 FQ15-C37E75592AC2: native quant column 1",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\n5-native\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\n5-native\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -22951,7 +22951,7 @@
           "kind": "test",
           "target": "LedgerPreservationTests",
           "assertion": "N5 FQ15-CACA566043BC: native quant column 10",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\n5-native\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\n5-native\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -23590,7 +23590,7 @@
           "kind": "test",
           "target": "LedgerPreservationTests",
           "assertion": "N5 FQ15-D057870D915B: invalid source cutoff refusal",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\n5-native\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\n5-native\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -23795,7 +23795,7 @@
           "kind": "test",
           "target": "LedgerPreservationTests",
           "assertion": "N5 FQ15-D1FDC7352FBC: stored provenance value for envelope_sum",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\n5-native\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\n5-native\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -23944,7 +23944,7 @@
           "kind": "test",
           "target": "LedgerPreservationTests",
           "assertion": "N5 FQ15-D355DF369812: native ZIP entry manifest.json",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\n5-native\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\n5-native\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -25283,7 +25283,7 @@
           "kind": "test",
           "target": "LedgerPreservationTests",
           "assertion": "N5 FQ15-DE45FB8A9EDC: stored provenance key area_m2",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\n5-native\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\n5-native\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -25614,7 +25614,7 @@
           "kind": "test",
           "target": "LedgerPreservationTests",
           "assertion": "N5 FQ15-E1B07D326141: stored provenance value for area_m2",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\n5-native\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\n5-native\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -25917,7 +25917,7 @@
           "kind": "test",
           "target": "LedgerPreservationTests",
           "assertion": "N5 FQ15-E3E8E11F54D6: source descriptor peaks-denovo-all field 1",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\n5-native\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\n5-native\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -26598,7 +26598,7 @@
           "kind": "test",
           "target": "LedgerPreservationTests",
           "assertion": "N5 FQ15-E9FB9559928D: native quant column 3",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\n5-native\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\n5-native\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -27111,7 +27111,7 @@
           "kind": "test",
           "target": "LedgerPreservationTests",
           "assertion": "N5 FQ15-ED906DC39F2E: stored provenance key area_m4",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\n5-native\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\n5-native\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -29052,7 +29052,7 @@
           "kind": "test",
           "target": "LedgerPreservationTests",
           "assertion": "N5 FQ15-FFDACDBBF734: stored provenance key under_sampled",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\n5-native\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\n5-native\\proofs.log",
           "inspectedBy": ""
         }
       ],

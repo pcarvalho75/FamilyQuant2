@@ -5,192 +5,192 @@
   "runs": [
     {
       "id": "native",
-      "command": "C:\\FamilyQuant-gate\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --ledger-assay-build-workflow D:/FamilyQuant-data/out-shell/N3/source D:/FamilyQuant-data/out-refresh\\20261102-174442-FamilyQuant-gate\\as-build-workflow \u00222026-11-02 17:45:02 -0800\u0022",
-      "executedAt": "2026-11-02 17:45:02 -0800",
-      "commit": "0255e09ed407d2a8153e26bc9317281c2df8774e",
+      "command": "C:\\FamilyQuant-gate\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --ledger-assay-build-workflow D:/FamilyQuant-data/out-shell/N3/source D:/FamilyQuant-data/out-refresh\\20261102-182444-FamilyQuant-gate\\as-build-workflow \u00222026-11-02 18:25:13 -0800\u0022",
+      "executedAt": "2026-11-02 18:25:13 -0800",
+      "commit": "8421552b22169f5b7ab3c44f2670c992e5e4562c",
       "artifacts": [
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\as-build-workflow\\proofs.log",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\as-build-workflow\\proofs.log",
           "sha256": "D3645DD59387AE3A505610354CC0ECD4F0E20C23121A5B25EBB009C9875F6347"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\as-build-workflow\\actual-values.json",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\as-build-workflow\\actual-values.json",
           "sha256": "DC54423F75A4B81E6C2594941147C330C3F3CC635DE5042E3210E52500C4E98B"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\as-build-workflow\\executed\\FamilyQuant.Core/FamilyQuantFile.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\as-build-workflow\\executed\\FamilyQuant.Core/FamilyQuantFile.cs",
           "sha256": "FA446992C4421614EEB7A719A80650E93C0B7525105C72583F8BDFD5108943DF"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\as-build-workflow\\executed\\FamilyQuant.Core/RedundancyTools.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\as-build-workflow\\executed\\FamilyQuant.Core/RedundancyTools.cs",
           "sha256": "B51F93ECF6FF874ED17BDAB7E619EAF67691F0C099A5E8A21059C81DE0D086C5"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\as-build-workflow\\executed\\FamilyQuant.Core/USearchTools.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\as-build-workflow\\executed\\FamilyQuant.Core/USearchTools.cs",
           "sha256": "7F644E1379D8A72937266A95B1E525417C4AFF55B1DFF5A9E10ABBC5BF80ACF9"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\as-build-workflow\\executed\\FamilyQuant.Tests/AssayBuildOutputSnapshot.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\as-build-workflow\\executed\\FamilyQuant.Tests/AssayBuildOutputSnapshot.cs",
           "sha256": "57CC2BAE2FF17F0EAD6B5571BD47EA34F49D037AC2067146DA3935AE6787233A"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\as-build-workflow\\executed\\FamilyQuant.Tests/AssayBuildWorkflowComparison.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\as-build-workflow\\executed\\FamilyQuant.Tests/AssayBuildWorkflowComparison.cs",
           "sha256": "EEBF877F4BE8A0FE7C51D6F3339D51DA8C412BAE0D6685BCE81F4E24E0A5909E"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\as-build-workflow\\executed\\FamilyQuant.Tests/AssayCacheSnapshot.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\as-build-workflow\\executed\\FamilyQuant.Tests/AssayCacheSnapshot.cs",
           "sha256": "9E0CD15CD1616F7A312E6A14209E745CF8C4ADB6EEF1A3D6125690A9602CCC1B"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\as-build-workflow\\executed\\FamilyQuant.Tests/AssaySpectrumPropertyComparison.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\as-build-workflow\\executed\\FamilyQuant.Tests/AssaySpectrumPropertyComparison.cs",
           "sha256": "157C955F947789AA5BA5759EA3B37D762EA6A5E693AB49345BDE540C420CC036"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\as-build-workflow\\executed\\FamilyQuant.Tests/AssayViewSnapshot.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\as-build-workflow\\executed\\FamilyQuant.Tests/AssayViewSnapshot.cs",
           "sha256": "CC9596D8D5DFE89A459BF6D4E44CDEF3D690528063C87F47461DA4724083DDC7"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\as-build-workflow\\executed\\FamilyQuant.Tests/FeatureLedgerEvidence.Reporting.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\as-build-workflow\\executed\\FamilyQuant.Tests/FeatureLedgerEvidence.Reporting.cs",
           "sha256": "E9A4F3A2A671452283E1C28E155B81DEF97F9BAE907945607C1F16DD0078CC12"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\as-build-workflow\\executed\\FamilyQuant.Tests/FeatureLedgerEvidence.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\as-build-workflow\\executed\\FamilyQuant.Tests/FeatureLedgerEvidence.cs",
           "sha256": "2060D409570285CEAE8FA6ADF3F4A5173924C80C2A6A99B1856294055365174C"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\as-build-workflow\\executed\\FamilyQuant.Tests/Program.AssayBuildWorkflow.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\as-build-workflow\\executed\\FamilyQuant.Tests/Program.AssayBuildWorkflow.cs",
           "sha256": "EA69D4403315627CD4D216B193D0A4FA2BF24599625468784EC3430DC0FF7BF0"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\as-build-workflow\\executed\\FamilyQuant.Tests/Program.AssayBuildWorkflowLedger.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\as-build-workflow\\executed\\FamilyQuant.Tests/Program.AssayBuildWorkflowLedger.cs",
           "sha256": "24ABF234700F95A876F817A3DB74DCBF2945AF86767C3423EB99F02591AFB822"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\as-build-workflow\\executed\\FamilyQuant.Tests/Program.AssayCacheLedger.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\as-build-workflow\\executed\\FamilyQuant.Tests/Program.AssayCacheLedger.cs",
           "sha256": "7D3B175CC9824DA443DC369CF9C8983E1C59004FD15F080951BCEEF72B5449C9"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\as-build-workflow\\executed\\FamilyQuant.Tests/Program.AssayRuntimeLedger.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\as-build-workflow\\executed\\FamilyQuant.Tests/Program.AssayRuntimeLedger.cs",
           "sha256": "24F4A0BACCC044156A198BDE8790FCDE12BF0A995641CA359FCB1AFEB3009CB7"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\as-build-workflow\\executed\\FamilyQuant.Tests/Program.Commands.AssayLedger.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\as-build-workflow\\executed\\FamilyQuant.Tests/Program.Commands.AssayLedger.cs",
           "sha256": "46DA029D0DBAA113B736A5E3B2BE7D29C486565EAE0063281F58F292ECC8112E"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\as-build-workflow\\executed\\FamilyQuant/AppOperationHost.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\as-build-workflow\\executed\\FamilyQuant/AppOperationHost.cs",
           "sha256": "9D18D05E0EFFD1EAAAE5A87DA813F463E7A929912B832DB454107AA71BF1F0F4"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\as-build-workflow\\executed\\FamilyQuant/ShellDialogs.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\as-build-workflow\\executed\\FamilyQuant/ShellDialogs.cs",
           "sha256": "BADA9EAE7CCA3011F34E56A17D71DA7304EAB666D61D06E0C53DA532589AAA76"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\as-build-workflow\\executed\\FamilyQuant/USearch.Actions.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\as-build-workflow\\executed\\FamilyQuant/USearch.Actions.cs",
           "sha256": "1BA6FB66F542B2BB332DF02D6CF58524AD259AC73DE93D8A6CDD4CDC932C1826"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\as-build-workflow\\executed\\FamilyQuant/USearch.Presentation.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\as-build-workflow\\executed\\FamilyQuant/USearch.Presentation.cs",
           "sha256": "8F8C52800E607F3F705B5263C84BA20C2455FCFBC27DCD917A02A3BA8EAF9D15"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\as-build-workflow\\executed\\FamilyQuant/USearch.Report.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\as-build-workflow\\executed\\FamilyQuant/USearch.Report.cs",
           "sha256": "5ECEE34F97D000E7FB1B3D140CBED8BFF97312D28ABA53D4F398F8A427691164"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\as-build-workflow\\executed\\FamilyQuant/USearch.ViewModel.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\as-build-workflow\\executed\\FamilyQuant/USearch.ViewModel.cs",
           "sha256": "7F2B00D5FF4971D43728A6AD20E696AEFA76793FC47C9D80BB0E54A6707A46E1"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\as-build-workflow\\executed\\FamilyQuant/USearch.xaml",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\as-build-workflow\\executed\\FamilyQuant/USearch.xaml",
           "sha256": "817D7125F7C4EFC273327DA9AA732B354E38FB13CBB86390BA255ADF406A466F"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\as-build-workflow\\executed\\FamilyQuant/USearch.xaml.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\as-build-workflow\\executed\\FamilyQuant/USearch.xaml.cs",
           "sha256": "44B2797536E00769B90697707C639CE7A0584100EB14C7021266DEC4407CC7FF"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\as-build-workflow\\executed\\frozen\\FamilyQuant/USearch.xaml",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\as-build-workflow\\executed\\frozen\\FamilyQuant/USearch.xaml",
           "sha256": "9AFFA6E1E8BEBD1BA44EABD784C6FF91EA769B79514143C4125B7D32143C7AE3"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\as-build-workflow\\executed\\frozen\\FamilyQuant/USearch.xaml.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\as-build-workflow\\executed\\frozen\\FamilyQuant/USearch.xaml.cs",
           "sha256": "693D5B1F505751D5C552AB1F902C8FC6F0186B2D8B8E53E53C446B327F8A5597"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\as-build-workflow\\executed\\FamilyQuant.Tests.dll",
-          "sha256": "661F0CB7809E1866C73DE96EF1FC7F1453325D70D6A950EE454AE056FEDC042E"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\as-build-workflow\\executed\\FamilyQuant.Tests.dll",
+          "sha256": "6F2762D3760DB80C7EF95E01791ADDCF311D2A58137A9797910B10F57606C080"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\as-build-workflow\\executed\\FamilyQuant.Core.dll",
-          "sha256": "F8F2936F4B51F1EBE9C1FE18ED1B27D2C9DF922317E94B6418E68E62AF722441"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\as-build-workflow\\executed\\FamilyQuant.Core.dll",
+          "sha256": "BB2B0CAA4935237DB0CAE13B8BC6177D08BDFB963839063CE2B5D5E240F9B4BA"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\as-build-workflow\\executed\\FamilyQuant.dll",
-          "sha256": "9B6C4DBC3D3851BB668F6BC15C8268CBB55413DC1155DFEAE9D316E1A00610A7"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\as-build-workflow\\executed\\FamilyQuant.dll",
+          "sha256": "FA5B9E3A6B3879ADA83165E6E6CC644E900DB0E72E59E11263D15871663B55AD"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\as-build-workflow\\frozen-FamilyQuant.dll",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\as-build-workflow\\frozen-FamilyQuant.dll",
           "sha256": "D764488C923945285E03B338E5A91BF28106A35B11AB465D8E2B23D125F03FD8"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\as-build-workflow\\frozen-ReferenceGoldenHost.dll",
-          "sha256": "9253534977DED86EABA63F1040D90FBD9D9B0B9B28E051FB8B41D43B9DD3247A"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\as-build-workflow\\frozen-ReferenceGoldenHost.dll",
+          "sha256": "20AEFF6A80555E28B750CC4F726F7F7C65FFD06B7FB0A0E87F485E7E6CA0821A"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\as-build-workflow\\frozen-ReferenceGoldenHost.exe",
-          "sha256": "0C53C9B67AAD80FC5A51A3957BAE0E570EF9CA7BAD57831B5907C5936049A4AA"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\as-build-workflow\\frozen-ReferenceGoldenHost.exe",
+          "sha256": "A2ED952ECBCA00A6AD4693C5192C17B9D4BB9384CB3C2A819F29567235C1D915"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\as-build-workflow\\frozen-native.log",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\as-build-workflow\\frozen-native.log",
           "sha256": "8F7A6D041E150E0A68FE2C1A5C544E1E063165C582AE4346022869C0FE9A018A"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\as-build-workflow\\workflow-anchors.json",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\as-build-workflow\\workflow-anchors.json",
           "sha256": "79601963DF9D00ADF7D1EAC52ABB5F61F5847C5A1FAC671959D0ADCBFAD25ABB"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\as-build-workflow\\current-native\\fixture.fasta",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\as-build-workflow\\current-native\\fixture.fasta",
           "sha256": "697D8C44990CBE641D82AB135C3F44E8C2F6553E99F03C24CDD4D8F7B2E4C763"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\as-build-workflow\\current-native\\fixture_NO_REDUNDANCY.fasta",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\as-build-workflow\\current-native\\fixture_NO_REDUNDANCY.fasta",
           "sha256": "B4FB282F81C1037452C245A6C028419B4E148B5A312DD8AFC367950E7610A9C8"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\as-build-workflow\\current-native\\native-values.json",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\as-build-workflow\\current-native\\native-values.json",
           "sha256": "595093461DD8A6E5CEC80B2ABEB3BB839F5E7D7A10983B7CE3E5F02FDD243A2D"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\as-build-workflow\\frozen-native\\fixture.fasta",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\as-build-workflow\\frozen-native\\fixture.fasta",
           "sha256": "697D8C44990CBE641D82AB135C3F44E8C2F6553E99F03C24CDD4D8F7B2E4C763"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\as-build-workflow\\frozen-native\\fixture_NO_REDUNDANCY.fasta",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\as-build-workflow\\frozen-native\\fixture_NO_REDUNDANCY.fasta",
           "sha256": "B4FB282F81C1037452C245A6C028419B4E148B5A312DD8AFC367950E7610A9C8"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\as-build-workflow\\frozen-native\\native-values.json",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\as-build-workflow\\frozen-native\\native-values.json",
           "sha256": "595093461DD8A6E5CEC80B2ABEB3BB839F5E7D7A10983B7CE3E5F02FDD243A2D"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\as-build-workflow\\workflow\\duplicate.fasta",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\as-build-workflow\\workflow\\duplicate.fasta",
           "sha256": "3F457EA73863923CD09074D2E9C805E196D5CDDBE2EB8A65455419A47B202368"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\as-build-workflow\\workflow\\fixture.fasta",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\as-build-workflow\\workflow\\fixture.fasta",
           "sha256": "697D8C44990CBE641D82AB135C3F44E8C2F6553E99F03C24CDD4D8F7B2E4C763"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\as-build-workflow\\workflow\\fixture.fcf",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\as-build-workflow\\workflow\\fixture.fcf",
           "sha256": "290DE46CAFEA6D393C9DD7DD407727446DA780B42DFEA18CCCAD7A8EB1458062"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\as-build-workflow\\workflow\\fixture_NO_REDUNDANCY.fasta",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\as-build-workflow\\workflow\\fixture_NO_REDUNDANCY.fasta",
           "sha256": "B4FB282F81C1037452C245A6C028419B4E148B5A312DD8AFC367950E7610A9C8"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\as-build-workflow\\workflow\\workflow-values.json",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\as-build-workflow\\workflow\\workflow-values.json",
           "sha256": "851A345B8121242A473F919234C105D5525D1D8C24B8CE614C96BB1AF0A936D8"
         }
       ],
@@ -849,7 +849,7 @@
           "kind": "test",
           "target": "RunAssayRuntimeLedger",
           "assertion": "AS-build-workflow kind format/export: every listed native value and branch check passed",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\as-build-workflow\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\as-build-workflow\\proofs.log",
           "inspectedBy": ""
         }
       ]
@@ -863,7 +863,7 @@
           "kind": "test",
           "target": "RunAssayRuntimeLedger",
           "assertion": "AS-build-workflow kind handler: every listed native value and branch check passed",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\as-build-workflow\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\as-build-workflow\\proofs.log",
           "inspectedBy": ""
         }
       ]
@@ -877,7 +877,7 @@
           "kind": "test",
           "target": "RunAssayRuntimeLedger",
           "assertion": "AS-build-workflow kind handler definition: every listed native value and branch check passed",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\as-build-workflow\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\as-build-workflow\\proofs.log",
           "inspectedBy": ""
         }
       ]

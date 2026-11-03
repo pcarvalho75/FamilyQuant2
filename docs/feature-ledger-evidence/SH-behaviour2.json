@@ -5,124 +5,124 @@
   "runs": [
     {
       "id": "SH-behaviour2",
-      "command": "C:\\FamilyQuant-gate\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --prove-shell-behaviour2 D:/FamilyQuant-data/out-shell/N3/source D:/FamilyQuant-data/reference-1.5.0.6/app D:/FamilyQuant-data/reviews/behaviour2-FQShell.json D:/FamilyQuant-data/out-refresh\\20261102-174442-FamilyQuant-gate\\sh-behaviour2 \u00222026-11-02 17:47:37 -0800\u0022",
-      "executedAt": "2026-11-02 17:47:37 -0800",
-      "commit": "0255e09ed407d2a8153e26bc9317281c2df8774e",
+      "command": "C:\\FamilyQuant-gate\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --prove-shell-behaviour2 D:/FamilyQuant-data/out-shell/N3/source D:/FamilyQuant-data/reference-1.5.0.6/app D:/FamilyQuant-data/reviews/behaviour2-FQShell.json D:/FamilyQuant-data/out-refresh\\20261102-182444-FamilyQuant-gate\\sh-behaviour2 \u00222026-11-02 18:28:43 -0800\u0022",
+      "executedAt": "2026-11-02 18:28:43 -0800",
+      "commit": "8421552b22169f5b7ab3c44f2670c992e5e4562c",
       "artifacts": [
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\sh-behaviour2\\cancel-current-pairs.tsv",
-          "sha256": "8A10FC4A6F5292F7CC2FA9107EAC55ED6291EC6A4667898A64698617E003FBA1"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\sh-behaviour2\\cancel-current-pairs.tsv",
+          "sha256": "F1F054F0EAE5F1922409B0EEC6CA40E4BBBD65FD1E15C1279C83E8A906A796CA"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\sh-behaviour2\\cancel-frozen-pairs.tsv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\sh-behaviour2\\cancel-frozen-pairs.tsv",
           "sha256": "58A5DB4477B65DD74694B865E61D42E3838B8F5B60F55E02E6AE599D21C4F267"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\sh-behaviour2\\cancel-observation.json",
-          "sha256": "D5BDC06855002FC984651EBD83D333A518DD048B8E432D080AF21E4CC038D67A"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\sh-behaviour2\\cancel-observation.json",
+          "sha256": "3D6C8072DFE3DE24C724D0AAE5D25112DBD809267240521AE6707FF78E38C746"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\sh-behaviour2\\cancel-phase.fasta",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\sh-behaviour2\\cancel-phase.fasta",
           "sha256": "A000A133AC37853C88BA2B37F685DBA97B065E13F78405D739F7D252DB9033F3"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\sh-behaviour2\\current-redundancy.fasta",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\sh-behaviour2\\current-redundancy.fasta",
           "sha256": "6DDA81C868625321A08ADCE69ADA611C1CCE3CF664C1C2FD04609DEC10B7975E"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\sh-behaviour2\\facts.json",
-          "sha256": "242DCB53E326B9B59DDAEA8E917EE70C7A8DEA3ED8C72DEE270CDD45283509AB"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\sh-behaviour2\\facts.json",
+          "sha256": "A21950D305F2A68F40295044B064EAF7B832557684173EBE46F7FF01DAEE5C64"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\sh-behaviour2\\frozen-redundancy.fasta",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\sh-behaviour2\\frozen-redundancy.fasta",
           "sha256": "6DDA81C868625321A08ADCE69ADA611C1CCE3CF664C1C2FD04609DEC10B7975E"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\sh-behaviour2\\legacy-no-totals.plp",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\sh-behaviour2\\legacy-no-totals.plp",
           "sha256": "3002883B446199897ECEF55BF74529144349CBFF8CBE507A29D4166A4E1B81B2"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\sh-behaviour2\\owned-usearch-3dfdf39558c8412aaed8b630d8455f8d.exe",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\sh-behaviour2\\owned-usearch-addea055858c4b4399bb534484ce80f0.exe",
           "sha256": "CFB6A77FF0CABCF9D7334EE298A1DF22B2351A54C65418F0EB93F3913A10ACD3"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\sh-behaviour2\\proofs.log",
-          "sha256": "A1AB5E7ED24054D09B90F416D423B0AE6BC5119118241A3F97D91077786B40D8"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\sh-behaviour2\\proofs.log",
+          "sha256": "6DCB97179F0DD09BB82EF3BCDFB517DE2C68D97130BF0E977423197D1F48681E"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\sh-behaviour2\\recorded-totals.plp",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\sh-behaviour2\\recorded-totals.plp",
           "sha256": "A95B6A2FAD8989547C939FDE4A5AC2AF9DDB32394547586B42BFEA5DEA0D5615"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\sh-behaviour2\\redundancy.fasta",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\sh-behaviour2\\redundancy.fasta",
           "sha256": "9D60C254FC184669C6F8E4BCE440947712C33BF36615C5BF6F6EF79F8EE56108"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\sh-behaviour2\\redundancy_NO_REDUNDANCY.fasta",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\sh-behaviour2\\redundancy_NO_REDUNDANCY.fasta",
           "sha256": "6DDA81C868625321A08ADCE69ADA611C1CCE3CF664C1C2FD04609DEC10B7975E"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\sh-behaviour2\\wording-grouping-copy-Dark.tsv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\sh-behaviour2\\wording-grouping-copy-Dark.tsv",
           "sha256": "EAA3F6B4A60693AD4FADDD0A700611819747ADF0974979A47FD0D0C3F17C173A"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\sh-behaviour2\\wording-grouping-Dark.tsv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\sh-behaviour2\\wording-grouping-Dark.tsv",
           "sha256": "21F0D14C57E7067F2E130797C36FE8DF849E6C4619671313998D997E1B62FC49"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\sh-behaviour2\\executed\\FamilyQuant.Core.dll",
-          "sha256": "F8F2936F4B51F1EBE9C1FE18ED1B27D2C9DF922317E94B6418E68E62AF722441"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\sh-behaviour2\\executed\\FamilyQuant.Core.dll",
+          "sha256": "BB2B0CAA4935237DB0CAE13B8BC6177D08BDFB963839063CE2B5D5E240F9B4BA"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\sh-behaviour2\\executed\\FamilyQuant.dll",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\sh-behaviour2\\executed\\FamilyQuant.dll",
           "sha256": "D764488C923945285E03B338E5A91BF28106A35B11AB465D8E2B23D125F03FD8"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\sh-behaviour2\\executed\\FamilyQuant.Tests.dll",
-          "sha256": "661F0CB7809E1866C73DE96EF1FC7F1453325D70D6A950EE454AE056FEDC042E"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\sh-behaviour2\\executed\\FamilyQuant.Tests.dll",
+          "sha256": "6F2762D3760DB80C7EF95E01791ADDCF311D2A58137A9797910B10F57606C080"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\sh-behaviour2\\executed\\FamilyQuant2.dll",
-          "sha256": "9B6C4DBC3D3851BB668F6BC15C8268CBB55413DC1155DFEAE9D316E1A00610A7"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\sh-behaviour2\\executed\\FamilyQuant2.dll",
+          "sha256": "FA5B9E3A6B3879ADA83165E6E6CC644E900DB0E72E59E11263D15871663B55AD"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\sh-behaviour2\\executed\\NativeOwnedDialogDriver.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\sh-behaviour2\\executed\\NativeOwnedDialogDriver.cs",
           "sha256": "CFAAE1CC0BA608665E89B71234BB717A6520EF0C452442A4510D5706D5BBD7E1"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\sh-behaviour2\\executed\\Program.Commands.ShellBehaviour.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\sh-behaviour2\\executed\\Program.Commands.ShellBehaviour.cs",
           "sha256": "B5D4623943E15E6EFC12495F695BB8150DEC92903F747335B5CDD9192EE4237A"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\sh-behaviour2\\executed\\Program.SecondarySuperRuntime.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\sh-behaviour2\\executed\\Program.SecondarySuperRuntime.cs",
           "sha256": "7BC597762989B17730C639AFC8142657A03FB4975AB76EEE8852E9EB0CC9B352"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\sh-behaviour2\\executed\\Program.ShellBehaviour.Build.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\sh-behaviour2\\executed\\Program.ShellBehaviour.Build.cs",
           "sha256": "E6E9E40CAD65C7D01184D388ECE0FF777701401BCE2F0C7FAD37EF7C7ADD0329"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\sh-behaviour2\\executed\\Program.ShellBehaviour.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\sh-behaviour2\\executed\\Program.ShellBehaviour.cs",
           "sha256": "4754F1433B6470E46038587CC08A1FE3CE5B8121DD9FFCE36B77EBFF7C6C9EEB"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\sh-behaviour2\\executed\\Program.ShellBehaviour.Curation.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\sh-behaviour2\\executed\\Program.ShellBehaviour.Curation.cs",
           "sha256": "8C8492A48BF3096F3B4DE5D3A950AD2542DBBBE741A5257524627FB694E5D60C"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\sh-behaviour2\\executed\\scope.json",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\sh-behaviour2\\executed\\scope.json",
           "sha256": "B798C4909900BA2083F44F1B238111C618721D17B493A9FDE56853631D2896D7"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\sh-behaviour2\\prerequisite-import\\owned.raw.denovoOnly.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\sh-behaviour2\\prerequisite-import\\owned.raw.denovoOnly.csv",
           "sha256": "8BEB433E54CAF3BD23D87548C1F21B0AF5D6033D185544D464D489050CA78ACD"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\sh-behaviour2\\cache-current\\familyquant_denovo_cache\\denovo_xic_run.json",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\sh-behaviour2\\cache-current\\familyquant_denovo_cache\\denovo_xic_run.json",
           "sha256": "04243B992B7D14C2449C3908CDAFB2ADEA30B986F603BFCCC6E79CA41ED869FE"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\sh-behaviour2\\cache-frozen\\familyquant_denovo_cache\\denovo_xic_run.json",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\sh-behaviour2\\cache-frozen\\familyquant_denovo_cache\\denovo_xic_run.json",
           "sha256": "3E1FB4DD6B6E95B44710EE7B779B4D906E740429758C96A119E4DFA5EC042475"
         }
       ],
@@ -171,7 +171,7 @@
         {
           "path": "FamilyQuant/AppVersionInfo.cs",
           "symbol": "native behaviour fixture",
-          "sha256": "ACBB2D2F358359B09845992E25DB3FCE18AAF11AC8FBE550D4D04F6476A7C018"
+          "sha256": "D1C2B935AAF6F89EA3AF8A13F2F7CF4E516364E3D39F5568243501A7E8B13E30"
         },
         {
           "path": "FamilyQuant/ArchitectureReviewControl.xaml.cs",
@@ -486,7 +486,7 @@
         {
           "path": "FamilyQuant/MainWindow.Help.cs",
           "symbol": "native behaviour fixture",
-          "sha256": "5B7F1864A1F8842801B406641B528793E752553B81480159751C679675F760FF"
+          "sha256": "397841BD2DE9AF88D56E877172E9B392B6E785BBEF9095D30A0FF4229675A501"
         },
         {
           "path": "FamilyQuant/MainWindow.HomologyResults.cs",
@@ -532,6 +532,11 @@
           "path": "FamilyQuant/MainWindow.Status.cs",
           "symbol": "native behaviour fixture",
           "sha256": "A13F51B49BD04137DF641A3B6251363646613F8DF04EAE2BE38E0A695D635A19"
+        },
+        {
+          "path": "FamilyQuant/MainWindow.UpdateCheck.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "56D31854A8BF14D8F53E2EBD2EF1EB1608598703C868F8FD7135E3C8F9D8519A"
         },
         {
           "path": "FamilyQuant/MainWindow.ViewModel.cs",
@@ -736,7 +741,7 @@
         {
           "path": "FamilyQuant/MainWindow.xaml",
           "symbol": "native behaviour fixture",
-          "sha256": "422DE48434233AA62B67BF4F37326A8F66C6C2771A45A828E40318E09A1806C5"
+          "sha256": "933BF2A60001B362097D40E60990398D1C38FCD94448C9782096C6539F656208"
         },
         {
           "path": "FamilyQuant/QuantifyControl.xaml",
@@ -922,6 +927,11 @@
           "path": "FamilyQuant.Core/RedundancyTools.cs",
           "symbol": "native behaviour fixture",
           "sha256": "B51F93ECF6FF874ED17BDAB7E619EAF67691F0C099A5E8A21059C81DE0D086C5"
+        },
+        {
+          "path": "FamilyQuant.Core/ReleaseUpdateChecker.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "5F37F5722EDEB6B6328881F24FDFF5C134D96935B59D899B20DB046537CE359C"
         },
         {
           "path": "FamilyQuant.Core/ReportView.cs",
@@ -995,7 +1005,7 @@
           "kind": "test",
           "target": "ShellBehaviour",
           "assertion": "SH behaviour blank keyword Apply gate",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\sh-behaviour2\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\sh-behaviour2\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -1060,7 +1070,7 @@
         {
           "path": "FamilyQuant/AppVersionInfo.cs",
           "symbol": "native behaviour fixture",
-          "sha256": "ACBB2D2F358359B09845992E25DB3FCE18AAF11AC8FBE550D4D04F6476A7C018"
+          "sha256": "D1C2B935AAF6F89EA3AF8A13F2F7CF4E516364E3D39F5568243501A7E8B13E30"
         },
         {
           "path": "FamilyQuant/ArchitectureReviewControl.xaml.cs",
@@ -1375,7 +1385,7 @@
         {
           "path": "FamilyQuant/MainWindow.Help.cs",
           "symbol": "native behaviour fixture",
-          "sha256": "5B7F1864A1F8842801B406641B528793E752553B81480159751C679675F760FF"
+          "sha256": "397841BD2DE9AF88D56E877172E9B392B6E785BBEF9095D30A0FF4229675A501"
         },
         {
           "path": "FamilyQuant/MainWindow.HomologyResults.cs",
@@ -1421,6 +1431,11 @@
           "path": "FamilyQuant/MainWindow.Status.cs",
           "symbol": "native behaviour fixture",
           "sha256": "A13F51B49BD04137DF641A3B6251363646613F8DF04EAE2BE38E0A695D635A19"
+        },
+        {
+          "path": "FamilyQuant/MainWindow.UpdateCheck.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "56D31854A8BF14D8F53E2EBD2EF1EB1608598703C868F8FD7135E3C8F9D8519A"
         },
         {
           "path": "FamilyQuant/MainWindow.ViewModel.cs",
@@ -1625,7 +1640,7 @@
         {
           "path": "FamilyQuant/MainWindow.xaml",
           "symbol": "native behaviour fixture",
-          "sha256": "422DE48434233AA62B67BF4F37326A8F66C6C2771A45A828E40318E09A1806C5"
+          "sha256": "933BF2A60001B362097D40E60990398D1C38FCD94448C9782096C6539F656208"
         },
         {
           "path": "FamilyQuant/QuantifyControl.xaml",
@@ -1811,6 +1826,11 @@
           "path": "FamilyQuant.Core/RedundancyTools.cs",
           "symbol": "native behaviour fixture",
           "sha256": "B51F93ECF6FF874ED17BDAB7E619EAF67691F0C099A5E8A21059C81DE0D086C5"
+        },
+        {
+          "path": "FamilyQuant.Core/ReleaseUpdateChecker.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "5F37F5722EDEB6B6328881F24FDFF5C134D96935B59D899B20DB046537CE359C"
         },
         {
           "path": "FamilyQuant.Core/ReportView.cs",
@@ -1884,7 +1904,7 @@
           "kind": "test",
           "target": "ShellBehaviour",
           "assertion": "SH behaviour native legacy re-export advice and recorded-totals availability",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\sh-behaviour2\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\sh-behaviour2\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -1941,7 +1961,7 @@
         {
           "path": "FamilyQuant/AppVersionInfo.cs",
           "symbol": "native behaviour fixture",
-          "sha256": "ACBB2D2F358359B09845992E25DB3FCE18AAF11AC8FBE550D4D04F6476A7C018"
+          "sha256": "D1C2B935AAF6F89EA3AF8A13F2F7CF4E516364E3D39F5568243501A7E8B13E30"
         },
         {
           "path": "FamilyQuant/ArchitectureReviewControl.xaml.cs",
@@ -2256,7 +2276,7 @@
         {
           "path": "FamilyQuant/MainWindow.Help.cs",
           "symbol": "native behaviour fixture",
-          "sha256": "5B7F1864A1F8842801B406641B528793E752553B81480159751C679675F760FF"
+          "sha256": "397841BD2DE9AF88D56E877172E9B392B6E785BBEF9095D30A0FF4229675A501"
         },
         {
           "path": "FamilyQuant/MainWindow.HomologyResults.cs",
@@ -2302,6 +2322,11 @@
           "path": "FamilyQuant/MainWindow.Status.cs",
           "symbol": "native behaviour fixture",
           "sha256": "A13F51B49BD04137DF641A3B6251363646613F8DF04EAE2BE38E0A695D635A19"
+        },
+        {
+          "path": "FamilyQuant/MainWindow.UpdateCheck.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "56D31854A8BF14D8F53E2EBD2EF1EB1608598703C868F8FD7135E3C8F9D8519A"
         },
         {
           "path": "FamilyQuant/MainWindow.ViewModel.cs",
@@ -2506,7 +2531,7 @@
         {
           "path": "FamilyQuant/MainWindow.xaml",
           "symbol": "native behaviour fixture",
-          "sha256": "422DE48434233AA62B67BF4F37326A8F66C6C2771A45A828E40318E09A1806C5"
+          "sha256": "933BF2A60001B362097D40E60990398D1C38FCD94448C9782096C6539F656208"
         },
         {
           "path": "FamilyQuant/QuantifyControl.xaml",
@@ -2692,6 +2717,11 @@
           "path": "FamilyQuant.Core/RedundancyTools.cs",
           "symbol": "native behaviour fixture",
           "sha256": "B51F93ECF6FF874ED17BDAB7E619EAF67691F0C099A5E8A21059C81DE0D086C5"
+        },
+        {
+          "path": "FamilyQuant.Core/ReleaseUpdateChecker.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "5F37F5722EDEB6B6328881F24FDFF5C134D96935B59D899B20DB046537CE359C"
         },
         {
           "path": "FamilyQuant.Core/ReportView.cs",
@@ -2765,7 +2795,7 @@
           "kind": "test",
           "target": "ShellBehaviour",
           "assertion": "SH behaviour retained reconciliation and search filtering prerequisites",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\sh-behaviour2\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\sh-behaviour2\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -2814,7 +2844,7 @@
         {
           "path": "FamilyQuant/AppVersionInfo.cs",
           "symbol": "native behaviour fixture",
-          "sha256": "ACBB2D2F358359B09845992E25DB3FCE18AAF11AC8FBE550D4D04F6476A7C018"
+          "sha256": "D1C2B935AAF6F89EA3AF8A13F2F7CF4E516364E3D39F5568243501A7E8B13E30"
         },
         {
           "path": "FamilyQuant/ArchitectureReviewControl.xaml.cs",
@@ -3129,7 +3159,7 @@
         {
           "path": "FamilyQuant/MainWindow.Help.cs",
           "symbol": "native behaviour fixture",
-          "sha256": "5B7F1864A1F8842801B406641B528793E752553B81480159751C679675F760FF"
+          "sha256": "397841BD2DE9AF88D56E877172E9B392B6E785BBEF9095D30A0FF4229675A501"
         },
         {
           "path": "FamilyQuant/MainWindow.HomologyResults.cs",
@@ -3175,6 +3205,11 @@
           "path": "FamilyQuant/MainWindow.Status.cs",
           "symbol": "native behaviour fixture",
           "sha256": "A13F51B49BD04137DF641A3B6251363646613F8DF04EAE2BE38E0A695D635A19"
+        },
+        {
+          "path": "FamilyQuant/MainWindow.UpdateCheck.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "56D31854A8BF14D8F53E2EBD2EF1EB1608598703C868F8FD7135E3C8F9D8519A"
         },
         {
           "path": "FamilyQuant/MainWindow.ViewModel.cs",
@@ -3379,7 +3414,7 @@
         {
           "path": "FamilyQuant/MainWindow.xaml",
           "symbol": "native behaviour fixture",
-          "sha256": "422DE48434233AA62B67BF4F37326A8F66C6C2771A45A828E40318E09A1806C5"
+          "sha256": "933BF2A60001B362097D40E60990398D1C38FCD94448C9782096C6539F656208"
         },
         {
           "path": "FamilyQuant/QuantifyControl.xaml",
@@ -3565,6 +3600,11 @@
           "path": "FamilyQuant.Core/RedundancyTools.cs",
           "symbol": "native behaviour fixture",
           "sha256": "B51F93ECF6FF874ED17BDAB7E619EAF67691F0C099A5E8A21059C81DE0D086C5"
+        },
+        {
+          "path": "FamilyQuant.Core/ReleaseUpdateChecker.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "5F37F5722EDEB6B6328881F24FDFF5C134D96935B59D899B20DB046537CE359C"
         },
         {
           "path": "FamilyQuant.Core/ReportView.cs",
@@ -3638,7 +3678,7 @@
           "kind": "test",
           "target": "ShellBehaviour",
           "assertion": "SH behaviour empty reconciliation export writer guard",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\sh-behaviour2\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\sh-behaviour2\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -3687,7 +3727,7 @@
         {
           "path": "FamilyQuant/AppVersionInfo.cs",
           "symbol": "native behaviour fixture",
-          "sha256": "ACBB2D2F358359B09845992E25DB3FCE18AAF11AC8FBE550D4D04F6476A7C018"
+          "sha256": "D1C2B935AAF6F89EA3AF8A13F2F7CF4E516364E3D39F5568243501A7E8B13E30"
         },
         {
           "path": "FamilyQuant/ArchitectureReviewControl.xaml.cs",
@@ -4002,7 +4042,7 @@
         {
           "path": "FamilyQuant/MainWindow.Help.cs",
           "symbol": "native behaviour fixture",
-          "sha256": "5B7F1864A1F8842801B406641B528793E752553B81480159751C679675F760FF"
+          "sha256": "397841BD2DE9AF88D56E877172E9B392B6E785BBEF9095D30A0FF4229675A501"
         },
         {
           "path": "FamilyQuant/MainWindow.HomologyResults.cs",
@@ -4048,6 +4088,11 @@
           "path": "FamilyQuant/MainWindow.Status.cs",
           "symbol": "native behaviour fixture",
           "sha256": "A13F51B49BD04137DF641A3B6251363646613F8DF04EAE2BE38E0A695D635A19"
+        },
+        {
+          "path": "FamilyQuant/MainWindow.UpdateCheck.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "56D31854A8BF14D8F53E2EBD2EF1EB1608598703C868F8FD7135E3C8F9D8519A"
         },
         {
           "path": "FamilyQuant/MainWindow.ViewModel.cs",
@@ -4252,7 +4297,7 @@
         {
           "path": "FamilyQuant/MainWindow.xaml",
           "symbol": "native behaviour fixture",
-          "sha256": "422DE48434233AA62B67BF4F37326A8F66C6C2771A45A828E40318E09A1806C5"
+          "sha256": "933BF2A60001B362097D40E60990398D1C38FCD94448C9782096C6539F656208"
         },
         {
           "path": "FamilyQuant/QuantifyControl.xaml",
@@ -4438,6 +4483,11 @@
           "path": "FamilyQuant.Core/RedundancyTools.cs",
           "symbol": "native behaviour fixture",
           "sha256": "B51F93ECF6FF874ED17BDAB7E619EAF67691F0C099A5E8A21059C81DE0D086C5"
+        },
+        {
+          "path": "FamilyQuant.Core/ReleaseUpdateChecker.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "5F37F5722EDEB6B6328881F24FDFF5C134D96935B59D899B20DB046537CE359C"
         },
         {
           "path": "FamilyQuant.Core/ReportView.cs",
@@ -4511,7 +4561,7 @@
           "kind": "test",
           "target": "ShellBehaviour",
           "assertion": "SH behaviour empty-run native cache artifact fallback",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\sh-behaviour2\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\sh-behaviour2\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -4560,7 +4610,7 @@
         {
           "path": "FamilyQuant/AppVersionInfo.cs",
           "symbol": "native behaviour fixture",
-          "sha256": "ACBB2D2F358359B09845992E25DB3FCE18AAF11AC8FBE550D4D04F6476A7C018"
+          "sha256": "D1C2B935AAF6F89EA3AF8A13F2F7CF4E516364E3D39F5568243501A7E8B13E30"
         },
         {
           "path": "FamilyQuant/ArchitectureReviewControl.xaml.cs",
@@ -4875,7 +4925,7 @@
         {
           "path": "FamilyQuant/MainWindow.Help.cs",
           "symbol": "native behaviour fixture",
-          "sha256": "5B7F1864A1F8842801B406641B528793E752553B81480159751C679675F760FF"
+          "sha256": "397841BD2DE9AF88D56E877172E9B392B6E785BBEF9095D30A0FF4229675A501"
         },
         {
           "path": "FamilyQuant/MainWindow.HomologyResults.cs",
@@ -4921,6 +4971,11 @@
           "path": "FamilyQuant/MainWindow.Status.cs",
           "symbol": "native behaviour fixture",
           "sha256": "A13F51B49BD04137DF641A3B6251363646613F8DF04EAE2BE38E0A695D635A19"
+        },
+        {
+          "path": "FamilyQuant/MainWindow.UpdateCheck.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "56D31854A8BF14D8F53E2EBD2EF1EB1608598703C868F8FD7135E3C8F9D8519A"
         },
         {
           "path": "FamilyQuant/MainWindow.ViewModel.cs",
@@ -5125,7 +5180,7 @@
         {
           "path": "FamilyQuant/MainWindow.xaml",
           "symbol": "native behaviour fixture",
-          "sha256": "422DE48434233AA62B67BF4F37326A8F66C6C2771A45A828E40318E09A1806C5"
+          "sha256": "933BF2A60001B362097D40E60990398D1C38FCD94448C9782096C6539F656208"
         },
         {
           "path": "FamilyQuant/QuantifyControl.xaml",
@@ -5311,6 +5366,11 @@
           "path": "FamilyQuant.Core/RedundancyTools.cs",
           "symbol": "native behaviour fixture",
           "sha256": "B51F93ECF6FF874ED17BDAB7E619EAF67691F0C099A5E8A21059C81DE0D086C5"
+        },
+        {
+          "path": "FamilyQuant.Core/ReleaseUpdateChecker.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "5F37F5722EDEB6B6328881F24FDFF5C134D96935B59D899B20DB046537CE359C"
         },
         {
           "path": "FamilyQuant.Core/ReportView.cs",
@@ -5384,7 +5444,7 @@
           "kind": "test",
           "target": "ShellBehaviour",
           "assertion": "SH behaviour native shell context Help",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\sh-behaviour2\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\sh-behaviour2\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -5433,7 +5493,7 @@
         {
           "path": "FamilyQuant/AppVersionInfo.cs",
           "symbol": "native behaviour fixture",
-          "sha256": "ACBB2D2F358359B09845992E25DB3FCE18AAF11AC8FBE550D4D04F6476A7C018"
+          "sha256": "D1C2B935AAF6F89EA3AF8A13F2F7CF4E516364E3D39F5568243501A7E8B13E30"
         },
         {
           "path": "FamilyQuant/ArchitectureReviewControl.xaml.cs",
@@ -5748,7 +5808,7 @@
         {
           "path": "FamilyQuant/MainWindow.Help.cs",
           "symbol": "native behaviour fixture",
-          "sha256": "5B7F1864A1F8842801B406641B528793E752553B81480159751C679675F760FF"
+          "sha256": "397841BD2DE9AF88D56E877172E9B392B6E785BBEF9095D30A0FF4229675A501"
         },
         {
           "path": "FamilyQuant/MainWindow.HomologyResults.cs",
@@ -5794,6 +5854,11 @@
           "path": "FamilyQuant/MainWindow.Status.cs",
           "symbol": "native behaviour fixture",
           "sha256": "A13F51B49BD04137DF641A3B6251363646613F8DF04EAE2BE38E0A695D635A19"
+        },
+        {
+          "path": "FamilyQuant/MainWindow.UpdateCheck.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "56D31854A8BF14D8F53E2EBD2EF1EB1608598703C868F8FD7135E3C8F9D8519A"
         },
         {
           "path": "FamilyQuant/MainWindow.ViewModel.cs",
@@ -5998,7 +6063,7 @@
         {
           "path": "FamilyQuant/MainWindow.xaml",
           "symbol": "native behaviour fixture",
-          "sha256": "422DE48434233AA62B67BF4F37326A8F66C6C2771A45A828E40318E09A1806C5"
+          "sha256": "933BF2A60001B362097D40E60990398D1C38FCD94448C9782096C6539F656208"
         },
         {
           "path": "FamilyQuant/QuantifyControl.xaml",
@@ -6184,6 +6249,11 @@
           "path": "FamilyQuant.Core/RedundancyTools.cs",
           "symbol": "native behaviour fixture",
           "sha256": "B51F93ECF6FF874ED17BDAB7E619EAF67691F0C099A5E8A21059C81DE0D086C5"
+        },
+        {
+          "path": "FamilyQuant.Core/ReleaseUpdateChecker.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "5F37F5722EDEB6B6328881F24FDFF5C134D96935B59D899B20DB046537CE359C"
         },
         {
           "path": "FamilyQuant.Core/ReportView.cs",
@@ -6257,13 +6327,13 @@
           "kind": "test",
           "target": "ShellBehaviour",
           "assertion": "SH behaviour native shell workflow Help",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\sh-behaviour2\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\sh-behaviour2\\proofs.log",
           "inspectedBy": ""
         }
       ],
       "note": "Native frozen/current comparison; no product change.",
       "kindReceiptId": null,
-      "compared": "FamilyQuant/MainWindow.xaml:59 MenuItemWhereAmI.Click = MenuItemWhereAmI_Click; before={\u0022families\u0022:\u0022WHAT DO I DO FIRST?\\n===================\\n\\nYou are at: Step 2 of 4 \\u00B7 Families loaded. Project: none open. Curate them here, then File \\u00B7 Compute / update full XIC gives the project its own quantitation, and Analytics reads it. Help \\u00B7 How to read these numbers explains every column.\\n\\nSTEP 1 \\u00B7 Group the proteins into families\\n   Menu: Run USearch\\n   Needs: a protein database, either a plain .fasta or a target-decoy .T-R file.\\n   Produces: a Family Cluster File (.fcf) written next to the database.\\n   Choose the sequence identity first. 85% is the value the box starts at. \\u0022Scan\\n   identity range\\u0022 shows how the family count and the target/decoy mixing behave\\n   across the whole range, which is a better basis for the choice than a single\\n   number. Divide and Conquer finds the lowest identity with no mixing at all; that\\n   is a floor, not a recommendation, and Help \\u00B7 How to read these numbers explains\\n   why.\\n\\nSTEP 2 \\u00B7 Open the families\\n   Menu: File \\u00B7 Load Family Cluster File\\n   Needs: the .fcf from step 1.\\n   You can now merge families further by their description words, or build one family\\n   from a keyword list. Both are shown in Layer 1 and neither can be undone, so save\\n   under a new name if you want to keep the previous grouping.\\n\\nSTEP 3 \\u00B7 Attach the quantitation\\n   Layer 2: Load PLP File\\n   Needs: a PatternLab project (.plp) exported at PEPTIDE level. A protein-level\\n   export contains nothing that can be attributed to a family, and every row will\\n   read 0.\\n   Then in Layer 3 choose what the percentages are a share of, choose what to do with\\n   peptides that belong to several families, and press Recalculate. Modes the project\\n   cannot support are greyed out, each with the reason in its own tooltip.\\n\\nSTEP 4 \\u00B7 Take the result away\\n   Export to CSV writes exactly the rows on screen, with the shares as fractions\\n   between 0 and 1 and a dot for the decimal separator, so any program can read them.\\n   File \\u00B7 Save Family Cluster File keeps the grouping for next time.\\n   File \\u00B7 Reanotate Sepro stamps your User ID family numbers into a copy of a SEPro\\n   result package, leaving the original untouched.\\n\\nOPTIONAL \\u00B7 Review de novo evidence\\n   Menu: De Novo evidence\\n   A separate workflow, not a step of the four above. It changes no family, no User ID\\n   and no quantitation, and it needs no Family Cluster File to start. Use it to ask\\n   how the selected de novo calls relate to PatternLab. Its two core steps are:\\n     1. Select PEAKS or DeepNovo and keep calls passing all three filters: minimum\\n        length, the source-native score, and a consecutive local-confidence stretch.\\n     2. Compare them with a SEPro search of the SAME runs. Each kept row comes back\\n        as new territory, a co-isolated second species, a redundant confirmation, an\\n        agreement PatternLab itself scored weakly, or a straight disagreement. The\\n        last two are listed as a review queue, because they are decisions.\\n   The collapsed Standalone run (advanced) section retains extraction, family\\n   attribution and ion-current partitioning for work without a saved project.\\n   That screen has a Help button of its own, and while it is open Help \\u00B7 How to read\\n   these numbers shows its page instead of this one.\\n\u0022,\u0022deNovo\u0022:\u0022WHAT DO I DO FIRST?\\n===================\\n\\nYou are at: De Novo evidence \\u00B7 A separate workflow: select PEAKS or DeepNovo, apply the three source-aware filters, and reconcile the accepted calls with PatternLab by file, scan, charge and precursor m/z. It needs no Family Cluster File and changes no family. The status line at the bottom of the screen says what to do next, and the Help button beside it explains every number this screen shows. To return to the family workflow, use Home \\u00B7 Curate families (the open project stays open) or File \\u00B7 Load Family Cluster File for another one.\\n\\nSTEP 1 \\u00B7 Group the proteins into families\\n   Menu: Run USearch\\n   Needs: a protein database, either a plain .fasta or a target-decoy .T-R file.\\n   Produces: a Family Cluster File (.fcf) written next to the database.\\n   Choose the sequence identity first. 85% is the value the box starts at. \\u0022Scan\\n   identity range\\u0022 shows how the family count and the target/decoy mixing behave\\n   across the whole range, which is a better basis for the choice than a single\\n   number. Divide and Conquer finds the lowest identity with no mixing at all; that\\n   is a floor, not a recommendation, and Help \\u00B7 How to read these numbers explains\\n   why.\\n\\nSTEP 2 \\u00B7 Open the families\\n   Menu: File \\u00B7 Load Family Cluster File\\n   Needs: the .fcf from step 1.\\n   You can now merge families further by their description words, or build one family\\n   from a keyword list. Both are shown in Layer 1 and neither can be undone, so save\\n   under a new name if you want to keep the previous grouping.\\n\\nSTEP 3 \\u00B7 Attach the quantitation\\n   Layer 2: Load PLP File\\n   Needs: a PatternLab project (.plp) exported at PEPTIDE level. A protein-level\\n   export contains nothing that can be attributed to a family, and every row will\\n   read 0.\\n   Then in Layer 3 choose what the percentages are a share of, choose what to do with\\n   peptides that belong to several families, and press Recalculate. Modes the project\\n   cannot support are greyed out, each with the reason in its own tooltip.\\n\\nSTEP 4 \\u00B7 Take the result away\\n   Export to CSV writes exactly the rows on screen, with the shares as fractions\\n   between 0 and 1 and a dot for the decimal separator, so any program can read them.\\n   File \\u00B7 Save Family Cluster File keeps the grouping for next time.\\n   File \\u00B7 Reanotate Sepro stamps your User ID family numbers into a copy of a SEPro\\n   result package, leaving the original untouched.\\n\\nOPTIONAL \\u00B7 Review de novo evidence\\n   Menu: De Novo evidence\\n   A separate workflow, not a step of the four above. It changes no family, no User ID\\n   and no quantitation, and it needs no Family Cluster File to start. Use it to ask\\n   how the selected de novo calls relate to PatternLab. Its two core steps are:\\n     1. Select PEAKS or DeepNovo and keep calls passing all three filters: minimum\\n        length, the source-native score, and a consecutive local-confidence stretch.\\n     2. Compare them with a SEPro search of the SAME runs. Each kept row comes back\\n        as new territory, a co-isolated second species, a redundant confirmation, an\\n        agreement PatternLab itself scored weakly, or a straight disagreement. The\\n        last two are listed as a review queue, because they are decisions.\\n   The collapsed Standalone run (advanced) section retains extraction, family\\n   attribution and ion-current partitioning for work without a saved project.\\n   That screen has a Help button of its own, and while it is open Help \\u00B7 How to read\\n   these numbers shows its page instead of this one.\\n\u0022}; actual={\u0022families\u0022:\u0022WHAT DO I DO FIRST?\\n===================\\n\\nYou are at: Families | Open project | PatternLab project loaded correctly; nothing is required; the table currently shows \\u0022% of identified signal (families sum to 100%)\\u0022; Normalized by: total ion current (TIC) (recorded by the exporter).\\n\\nFamilies loaded. Project: none open. Curate them here, then Analysis \\u003E Compute full XIC gives the project its own quantitation, and Results reads it. Help \\u00B7 How to read these numbers explains every column.\\n\\nProject: none open.\\n\\nCurrent screen status: PatternLab project loaded correctly; nothing is required; the table currently shows \\u0022% of identified signal (families sum to 100%)\\u0022; Normalized by: total ion current (TIC) (recorded by the exporter).\\n\\nSTEP 1 \\u00B7 Group the proteins into families\\n   Menu: File \\u003E New from database\\n   Needs: a protein database, either a plain .fasta or a target-decoy .T-R file.\\n   Produces: a Family Cluster File (.fcf) written next to the database.\\n   Choose database, set identity, then Build families. 85% is the initial value. \\u0022Scan\\n   identity range\\u0022 shows how the family count and the target/decoy mixing behave\\n   across the whole range, which is a better basis for the choice than a single\\n   number. Find lowest identity uses Divide and Conquer to find the lowest identity\\n   with no mixing at all. That is a floor, not a recommendation. Help \\u003E How to read\\n   these numbers explains why.\\n\\nSTEP 2 \\u00B7 Open the families\\n   Menu: File \\u003E Open\\n   Needs: the .fcf from step 1.\\n   You can now merge families further by their description words, or build one family\\n   from a keyword list. Curation changes can be undone in this session. Use Save as\\n   to keep the previous grouping in a separate project.\\n\\nSTEP 3 \\u00B7 Attach the quantitation\\n   Open Quantify to compute or update full XIC for this project.\\n   In Families \\u003E Quantitation use Full XIC \\u003E Share of and Shared peptides.\\n   For the secondary source, open PatternLab (optional) and Load PatternLab project.\\n   PatternLab needs a project (.plp) exported at PEPTIDE level. A protein-level\\n   export contains nothing that can be attributed to a family, and every row will\\n   read 0.\\n   In PatternLab (optional), PatternLab share of chooses what the percentages are a\\n   share of. Choose what to do with peptides that belong to several families, then\\n   press Recalculate. Modes the project cannot support are greyed out, each with\\n   the reason in its own tooltip.\\n\\nSTEP 4 \\u00B7 Take the result away\\n   Export to CSV writes exactly the rows on screen, with the shares as fractions\\n   between 0 and 1 and a dot for the decimal separator, so any program can read them.\\n   File \\u003E Save keeps the project for next time. File \\u003E Export also writes families\\n   for FamilyQuant 1.5 (.fcf), preserving the grouping without stored quantitation.\\n   Analysis \\u003E Reannotate SEPro stamps your User ID family numbers into a copy of a SEPro\\n   result package, leaving the original untouched.\\n\\nOPTIONAL \\u00B7 Review de novo evidence\\n   Menu: Analysis \\u003E De novo evidence\\n   A separate workflow, not a step of the four above. It changes no family, no User ID\\n   and no quantitation, and it needs no Family Cluster File to start. Use it to ask\\n   how the selected de novo calls relate to PatternLab. Its two core steps are:\\n     1. Select PEAKS or DeepNovo and keep calls passing all three filters: minimum\\n        length, the source-native score, and a consecutive local-confidence stretch.\\n     2. Compare them with a SEPro search of the SAME runs. Each kept row comes back\\n        as new territory, a co-isolated second species, a redundant confirmation, an\\n        agreement PatternLab itself scored weakly, or a straight disagreement. The\\n        last two are listed as a review queue, because they are decisions.\\n   Quantify provides extraction and Results reads the ion-current recovery. Family\\n   attribution remains available for de novo work without a saved project.\\n   That screen has a Help button of its own, and while it is open Help \\u00B7 How to read\\n   these numbers shows its page instead of this one.\\n\u0022,\u0022deNovo\u0022:\u0022WHAT DO I DO FIRST?\\n===================\\n\\nYou are at: De novo | Open project\\n\\nDe Novo evidence \\u00B7 A separate workflow: select PEAKS or DeepNovo, apply the three source-aware filters, and reconcile the accepted calls with PatternLab by file, scan, charge and precursor m/z. It needs no Family Cluster File and changes no family. The status line at the bottom of the screen says what to do next, and the Help button beside it explains every number this screen shows. To return to the family workflow, use View \\u003E Families (the open project stays open) or File \\u003E Open for another project or Family Cluster File.\\n\\nProject: none open.\\n\\nSTEP 1 \\u00B7 Group the proteins into families\\n   Menu: File \\u003E New from database\\n   Needs: a protein database, either a plain .fasta or a target-decoy .T-R file.\\n   Produces: a Family Cluster File (.fcf) written next to the database.\\n   Choose database, set identity, then Build families. 85% is the initial value. \\u0022Scan\\n   identity range\\u0022 shows how the family count and the target/decoy mixing behave\\n   across the whole range, which is a better basis for the choice than a single\\n   number. Find lowest identity uses Divide and Conquer to find the lowest identity\\n   with no mixing at all. That is a floor, not a recommendation. Help \\u003E How to read\\n   these numbers explains why.\\n\\nSTEP 2 \\u00B7 Open the families\\n   Menu: File \\u003E Open\\n   Needs: the .fcf from step 1.\\n   You can now merge families further by their description words, or build one family\\n   from a keyword list. Curation changes can be undone in this session. Use Save as\\n   to keep the previous grouping in a separate project.\\n\\nSTEP 3 \\u00B7 Attach the quantitation\\n   Open Quantify to compute or update full XIC for this project.\\n   In Families \\u003E Quantitation use Full XIC \\u003E Share of and Shared peptides.\\n   For the secondary source, open PatternLab (optional) and Load PatternLab project.\\n   PatternLab needs a project (.plp) exported at PEPTIDE level. A protein-level\\n   export contains nothing that can be attributed to a family, and every row will\\n   read 0.\\n   In PatternLab (optional), PatternLab share of chooses what the percentages are a\\n   share of. Choose what to do with peptides that belong to several families, then\\n   press Recalculate. Modes the project cannot support are greyed out, each with\\n   the reason in its own tooltip.\\n\\nSTEP 4 \\u00B7 Take the result away\\n   Export to CSV writes exactly the rows on screen, with the shares as fractions\\n   between 0 and 1 and a dot for the decimal separator, so any program can read them.\\n   File \\u003E Save keeps the project for next time. File \\u003E Export also writes families\\n   for FamilyQuant 1.5 (.fcf), preserving the grouping without stored quantitation.\\n   Analysis \\u003E Reannotate SEPro stamps your User ID family numbers into a copy of a SEPro\\n   result package, leaving the original untouched.\\n\\nOPTIONAL \\u00B7 Review de novo evidence\\n   Menu: Analysis \\u003E De novo evidence\\n   A separate workflow, not a step of the four above. It changes no family, no User ID\\n   and no quantitation, and it needs no Family Cluster File to start. Use it to ask\\n   how the selected de novo calls relate to PatternLab. Its two core steps are:\\n     1. Select PEAKS or DeepNovo and keep calls passing all three filters: minimum\\n        length, the source-native score, and a consecutive local-confidence stretch.\\n     2. Compare them with a SEPro search of the SAME runs. Each kept row comes back\\n        as new territory, a co-isolated second species, a redundant confirmation, an\\n        agreement PatternLab itself scored weakly, or a straight disagreement. The\\n        last two are listed as a review queue, because they are decisions.\\n   Quantify provides extraction and Results reads the ion-current recovery. Family\\n   attribution remains available for de novo work without a saved project.\\n   That screen has a Help button of its own, and while it is open Help \\u00B7 How to read\\n   these numbers shows its page instead of this one.\\n\u0022}"
+      "compared": "FamilyQuant/MainWindow.xaml:59 MenuItemWhereAmI.Click = MenuItemWhereAmI_Click; before={\u0022families\u0022:\u0022WHAT DO I DO FIRST?\\n===================\\n\\nYou are at: Step 2 of 4 \\u00B7 Families loaded. Project: none open. Curate them here, then File \\u00B7 Compute / update full XIC gives the project its own quantitation, and Analytics reads it. Help \\u00B7 How to read these numbers explains every column.\\n\\nSTEP 1 \\u00B7 Group the proteins into families\\n   Menu: Run USearch\\n   Needs: a protein database, either a plain .fasta or a target-decoy .T-R file.\\n   Produces: a Family Cluster File (.fcf) written next to the database.\\n   Choose the sequence identity first. 85% is the value the box starts at. \\u0022Scan\\n   identity range\\u0022 shows how the family count and the target/decoy mixing behave\\n   across the whole range, which is a better basis for the choice than a single\\n   number. Divide and Conquer finds the lowest identity with no mixing at all; that\\n   is a floor, not a recommendation, and Help \\u00B7 How to read these numbers explains\\n   why.\\n\\nSTEP 2 \\u00B7 Open the families\\n   Menu: File \\u00B7 Load Family Cluster File\\n   Needs: the .fcf from step 1.\\n   You can now merge families further by their description words, or build one family\\n   from a keyword list. Both are shown in Layer 1 and neither can be undone, so save\\n   under a new name if you want to keep the previous grouping.\\n\\nSTEP 3 \\u00B7 Attach the quantitation\\n   Layer 2: Load PLP File\\n   Needs: a PatternLab project (.plp) exported at PEPTIDE level. A protein-level\\n   export contains nothing that can be attributed to a family, and every row will\\n   read 0.\\n   Then in Layer 3 choose what the percentages are a share of, choose what to do with\\n   peptides that belong to several families, and press Recalculate. Modes the project\\n   cannot support are greyed out, each with the reason in its own tooltip.\\n\\nSTEP 4 \\u00B7 Take the result away\\n   Export to CSV writes exactly the rows on screen, with the shares as fractions\\n   between 0 and 1 and a dot for the decimal separator, so any program can read them.\\n   File \\u00B7 Save Family Cluster File keeps the grouping for next time.\\n   File \\u00B7 Reanotate Sepro stamps your User ID family numbers into a copy of a SEPro\\n   result package, leaving the original untouched.\\n\\nOPTIONAL \\u00B7 Review de novo evidence\\n   Menu: De Novo evidence\\n   A separate workflow, not a step of the four above. It changes no family, no User ID\\n   and no quantitation, and it needs no Family Cluster File to start. Use it to ask\\n   how the selected de novo calls relate to PatternLab. Its two core steps are:\\n     1. Select PEAKS or DeepNovo and keep calls passing all three filters: minimum\\n        length, the source-native score, and a consecutive local-confidence stretch.\\n     2. Compare them with a SEPro search of the SAME runs. Each kept row comes back\\n        as new territory, a co-isolated second species, a redundant confirmation, an\\n        agreement PatternLab itself scored weakly, or a straight disagreement. The\\n        last two are listed as a review queue, because they are decisions.\\n   The collapsed Standalone run (advanced) section retains extraction, family\\n   attribution and ion-current partitioning for work without a saved project.\\n   That screen has a Help button of its own, and while it is open Help \\u00B7 How to read\\n   these numbers shows its page instead of this one.\\n\u0022,\u0022deNovo\u0022:\u0022WHAT DO I DO FIRST?\\n===================\\n\\nYou are at: De Novo evidence \\u00B7 A separate workflow: select PEAKS or DeepNovo, apply the three source-aware filters, and reconcile the accepted calls with PatternLab by file, scan, charge and precursor m/z. It needs no Family Cluster File and changes no family. The status line at the bottom of the screen says what to do next, and the Help button beside it explains every number this screen shows. To return to the family workflow, use Home \\u00B7 Curate families (the open project stays open) or File \\u00B7 Load Family Cluster File for another one.\\n\\nSTEP 1 \\u00B7 Group the proteins into families\\n   Menu: Run USearch\\n   Needs: a protein database, either a plain .fasta or a target-decoy .T-R file.\\n   Produces: a Family Cluster File (.fcf) written next to the database.\\n   Choose the sequence identity first. 85% is the value the box starts at. \\u0022Scan\\n   identity range\\u0022 shows how the family count and the target/decoy mixing behave\\n   across the whole range, which is a better basis for the choice than a single\\n   number. Divide and Conquer finds the lowest identity with no mixing at all; that\\n   is a floor, not a recommendation, and Help \\u00B7 How to read these numbers explains\\n   why.\\n\\nSTEP 2 \\u00B7 Open the families\\n   Menu: File \\u00B7 Load Family Cluster File\\n   Needs: the .fcf from step 1.\\n   You can now merge families further by their description words, or build one family\\n   from a keyword list. Both are shown in Layer 1 and neither can be undone, so save\\n   under a new name if you want to keep the previous grouping.\\n\\nSTEP 3 \\u00B7 Attach the quantitation\\n   Layer 2: Load PLP File\\n   Needs: a PatternLab project (.plp) exported at PEPTIDE level. A protein-level\\n   export contains nothing that can be attributed to a family, and every row will\\n   read 0.\\n   Then in Layer 3 choose what the percentages are a share of, choose what to do with\\n   peptides that belong to several families, and press Recalculate. Modes the project\\n   cannot support are greyed out, each with the reason in its own tooltip.\\n\\nSTEP 4 \\u00B7 Take the result away\\n   Export to CSV writes exactly the rows on screen, with the shares as fractions\\n   between 0 and 1 and a dot for the decimal separator, so any program can read them.\\n   File \\u00B7 Save Family Cluster File keeps the grouping for next time.\\n   File \\u00B7 Reanotate Sepro stamps your User ID family numbers into a copy of a SEPro\\n   result package, leaving the original untouched.\\n\\nOPTIONAL \\u00B7 Review de novo evidence\\n   Menu: De Novo evidence\\n   A separate workflow, not a step of the four above. It changes no family, no User ID\\n   and no quantitation, and it needs no Family Cluster File to start. Use it to ask\\n   how the selected de novo calls relate to PatternLab. Its two core steps are:\\n     1. Select PEAKS or DeepNovo and keep calls passing all three filters: minimum\\n        length, the source-native score, and a consecutive local-confidence stretch.\\n     2. Compare them with a SEPro search of the SAME runs. Each kept row comes back\\n        as new territory, a co-isolated second species, a redundant confirmation, an\\n        agreement PatternLab itself scored weakly, or a straight disagreement. The\\n        last two are listed as a review queue, because they are decisions.\\n   The collapsed Standalone run (advanced) section retains extraction, family\\n   attribution and ion-current partitioning for work without a saved project.\\n   That screen has a Help button of its own, and while it is open Help \\u00B7 How to read\\n   these numbers shows its page instead of this one.\\n\u0022}; actual={\u0022families\u0022:\u0022WHAT DO I DO FIRST?\\n===================\\n\\nYou are at: Families | Open project | PatternLab project loaded correctly; nothing is required; the table currently shows \\u0022% of identified signal (families sum to 100%)\\u0022; Normalized by: total ion current (TIC) (recorded by the exporter).\\n\\nFamilies loaded. Project: none open. Curate them here, then Analysis \\u003E Compute full XIC gives the project its own quantitation, and Results reads it. Help \\u00B7 How to read these numbers explains every column.\\n\\nProject: none open.\\n\\nCurrent screen status: PatternLab project loaded correctly; nothing is required; the table currently shows \\u0022% of identified signal (families sum to 100%)\\u0022; Normalized by: total ion current (TIC) (recorded by the exporter).\\n\\nSTEP 1 \\u00B7 Group the proteins into families\\n   Menu: File \\u003E New from database\\n   Needs: a protein database, either a plain .fasta or a target-decoy .T-R file.\\n   Produces: a Family Cluster File (.fcf) written next to the database.\\n   Choose database, set identity, then Build families. 85% is the initial value. \\u0022Scan\\n   identity range\\u0022 shows how the family count and the target/decoy mixing behave\\n   across the whole range, which is a better basis for the choice than a single\\n   number. Find lowest identity uses Divide and Conquer to find the lowest identity\\n   with no mixing at all. That is a floor, not a recommendation. Help \\u003E How to read\\n   these numbers explains why.\\n\\nSTEP 2 \\u00B7 Open the families\\n   Menu: File \\u003E Open\\n   Needs: the .fcf from step 1.\\n   You can now merge families further by their description words, or build one family\\n   from a keyword list. Curation changes can be undone in this session. Use Save as\\n   to keep the previous grouping in a separate project.\\n\\nSTEP 3 \\u00B7 Attach the quantitation\\n   Open Quantify to compute or update full XIC for this project.\\n   In Families \\u003E Quantitation use Full XIC \\u003E Share of and Shared peptides.\\n   For the secondary source, open PatternLab (optional) and Load PatternLab project.\\n   PatternLab needs a project (.plp) exported at PEPTIDE level. A protein-level\\n   export contains nothing that can be attributed to a family, and every row will\\n   read 0.\\n   In PatternLab (optional), PatternLab share of chooses what the percentages are a\\n   share of. Choose what to do with peptides that belong to several families, then\\n   press Recalculate. Modes the project cannot support are greyed out, each with\\n   the reason in its own tooltip.\\n\\nSTEP 4 \\u00B7 Take the result away\\n   Export to CSV writes exactly the rows on screen, with the shares as fractions\\n   between 0 and 1 and a dot for the decimal separator, so any program can read them.\\n   File \\u003E Save keeps the project for next time. File \\u003E Export also writes families\\n   for FamilyQuant 1.5 (.fcf), preserving the grouping without stored quantitation.\\n   Analysis \\u003E Reannotate SEPro stamps your User ID family numbers into a copy of a SEPro\\n   result package, leaving the original untouched.\\n\\nOPTIONAL \\u00B7 Review de novo evidence\\n   Menu: Analysis \\u003E De novo evidence\\n   A separate workflow, not a step of the four above. It changes no family, no User ID\\n   and no quantitation, and it needs no Family Cluster File to start. Use it to ask\\n   how the selected de novo calls relate to PatternLab. Its two core steps are:\\n     1. Select PEAKS or DeepNovo and keep calls passing all three filters: minimum\\n        length, the source-native score, and a consecutive local-confidence stretch.\\n     2. Compare them with a SEPro search of the SAME runs. Each kept row comes back\\n        as new territory, a co-isolated second species, a redundant confirmation, an\\n        agreement PatternLab itself scored weakly, or a straight disagreement. The\\n        last two are listed as a review queue, because they are decisions.\\n   Quantify provides extraction and Results reads the ion-current recovery. Family\\n   attribution remains available for de novo work without a saved project.\\n   That screen has a Help button of its own, and while it is open Help \\u00B7 How to read\\n   these numbers shows its page instead of this one.\\n\\nHelp \\u003E Check for updates asks GitHub for the latest public release only when you choose\\nit, and sends nothing but that request. It names a newer version and opens its release\\npage on request; nothing is downloaded or installed.\\n\u0022,\u0022deNovo\u0022:\u0022WHAT DO I DO FIRST?\\n===================\\n\\nYou are at: De novo | Open project\\n\\nDe Novo evidence \\u00B7 A separate workflow: select PEAKS or DeepNovo, apply the three source-aware filters, and reconcile the accepted calls with PatternLab by file, scan, charge and precursor m/z. It needs no Family Cluster File and changes no family. The status line at the bottom of the screen says what to do next, and the Help button beside it explains every number this screen shows. To return to the family workflow, use View \\u003E Families (the open project stays open) or File \\u003E Open for another project or Family Cluster File.\\n\\nProject: none open.\\n\\nSTEP 1 \\u00B7 Group the proteins into families\\n   Menu: File \\u003E New from database\\n   Needs: a protein database, either a plain .fasta or a target-decoy .T-R file.\\n   Produces: a Family Cluster File (.fcf) written next to the database.\\n   Choose database, set identity, then Build families. 85% is the initial value. \\u0022Scan\\n   identity range\\u0022 shows how the family count and the target/decoy mixing behave\\n   across the whole range, which is a better basis for the choice than a single\\n   number. Find lowest identity uses Divide and Conquer to find the lowest identity\\n   with no mixing at all. That is a floor, not a recommendation. Help \\u003E How to read\\n   these numbers explains why.\\n\\nSTEP 2 \\u00B7 Open the families\\n   Menu: File \\u003E Open\\n   Needs: the .fcf from step 1.\\n   You can now merge families further by their description words, or build one family\\n   from a keyword list. Curation changes can be undone in this session. Use Save as\\n   to keep the previous grouping in a separate project.\\n\\nSTEP 3 \\u00B7 Attach the quantitation\\n   Open Quantify to compute or update full XIC for this project.\\n   In Families \\u003E Quantitation use Full XIC \\u003E Share of and Shared peptides.\\n   For the secondary source, open PatternLab (optional) and Load PatternLab project.\\n   PatternLab needs a project (.plp) exported at PEPTIDE level. A protein-level\\n   export contains nothing that can be attributed to a family, and every row will\\n   read 0.\\n   In PatternLab (optional), PatternLab share of chooses what the percentages are a\\n   share of. Choose what to do with peptides that belong to several families, then\\n   press Recalculate. Modes the project cannot support are greyed out, each with\\n   the reason in its own tooltip.\\n\\nSTEP 4 \\u00B7 Take the result away\\n   Export to CSV writes exactly the rows on screen, with the shares as fractions\\n   between 0 and 1 and a dot for the decimal separator, so any program can read them.\\n   File \\u003E Save keeps the project for next time. File \\u003E Export also writes families\\n   for FamilyQuant 1.5 (.fcf), preserving the grouping without stored quantitation.\\n   Analysis \\u003E Reannotate SEPro stamps your User ID family numbers into a copy of a SEPro\\n   result package, leaving the original untouched.\\n\\nOPTIONAL \\u00B7 Review de novo evidence\\n   Menu: Analysis \\u003E De novo evidence\\n   A separate workflow, not a step of the four above. It changes no family, no User ID\\n   and no quantitation, and it needs no Family Cluster File to start. Use it to ask\\n   how the selected de novo calls relate to PatternLab. Its two core steps are:\\n     1. Select PEAKS or DeepNovo and keep calls passing all three filters: minimum\\n        length, the source-native score, and a consecutive local-confidence stretch.\\n     2. Compare them with a SEPro search of the SAME runs. Each kept row comes back\\n        as new territory, a co-isolated second species, a redundant confirmation, an\\n        agreement PatternLab itself scored weakly, or a straight disagreement. The\\n        last two are listed as a review queue, because they are decisions.\\n   Quantify provides extraction and Results reads the ion-current recovery. Family\\n   attribution remains available for de novo work without a saved project.\\n   That screen has a Help button of its own, and while it is open Help \\u00B7 How to read\\n   these numbers shows its page instead of this one.\\n\\nHelp \\u003E Check for updates asks GitHub for the latest public release only when you choose\\nit, and sends nothing but that request. It names a newer version and opens its release\\npage on request; nothing is downloaded or installed.\\n\u0022}"
     },
     {
       "observationId": "FQ15-18DC9493B812",
@@ -6306,7 +6376,7 @@
         {
           "path": "FamilyQuant/AppVersionInfo.cs",
           "symbol": "native behaviour fixture",
-          "sha256": "ACBB2D2F358359B09845992E25DB3FCE18AAF11AC8FBE550D4D04F6476A7C018"
+          "sha256": "D1C2B935AAF6F89EA3AF8A13F2F7CF4E516364E3D39F5568243501A7E8B13E30"
         },
         {
           "path": "FamilyQuant/ArchitectureReviewControl.xaml.cs",
@@ -6621,7 +6691,7 @@
         {
           "path": "FamilyQuant/MainWindow.Help.cs",
           "symbol": "native behaviour fixture",
-          "sha256": "5B7F1864A1F8842801B406641B528793E752553B81480159751C679675F760FF"
+          "sha256": "397841BD2DE9AF88D56E877172E9B392B6E785BBEF9095D30A0FF4229675A501"
         },
         {
           "path": "FamilyQuant/MainWindow.HomologyResults.cs",
@@ -6667,6 +6737,11 @@
           "path": "FamilyQuant/MainWindow.Status.cs",
           "symbol": "native behaviour fixture",
           "sha256": "A13F51B49BD04137DF641A3B6251363646613F8DF04EAE2BE38E0A695D635A19"
+        },
+        {
+          "path": "FamilyQuant/MainWindow.UpdateCheck.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "56D31854A8BF14D8F53E2EBD2EF1EB1608598703C868F8FD7135E3C8F9D8519A"
         },
         {
           "path": "FamilyQuant/MainWindow.ViewModel.cs",
@@ -6871,7 +6946,7 @@
         {
           "path": "FamilyQuant/MainWindow.xaml",
           "symbol": "native behaviour fixture",
-          "sha256": "422DE48434233AA62B67BF4F37326A8F66C6C2771A45A828E40318E09A1806C5"
+          "sha256": "933BF2A60001B362097D40E60990398D1C38FCD94448C9782096C6539F656208"
         },
         {
           "path": "FamilyQuant/QuantifyControl.xaml",
@@ -7057,6 +7132,11 @@
           "path": "FamilyQuant.Core/RedundancyTools.cs",
           "symbol": "native behaviour fixture",
           "sha256": "B51F93ECF6FF874ED17BDAB7E619EAF67691F0C099A5E8A21059C81DE0D086C5"
+        },
+        {
+          "path": "FamilyQuant.Core/ReleaseUpdateChecker.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "5F37F5722EDEB6B6328881F24FDFF5C134D96935B59D899B20DB046537CE359C"
         },
         {
           "path": "FamilyQuant.Core/ReportView.cs",
@@ -7130,13 +7210,13 @@
           "kind": "test",
           "target": "ShellBehaviour",
           "assertion": "SH behaviour native Families and De novo next-step workflow Help",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\sh-behaviour2\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\sh-behaviour2\\proofs.log",
           "inspectedBy": ""
         }
       ],
       "note": "Native frozen/current comparison; no product change.",
       "kindReceiptId": null,
-      "compared": "FamilyQuant/MainWindow.xaml:70 TextBlockGuide.ToolTip = Shows where you are in the workflow and what to do next. It updates as you go.; before={\u0022families\u0022:\u0022WHAT DO I DO FIRST?\\n===================\\n\\nYou are at: Step 2 of 4 \\u00B7 Families loaded. Project: none open. Curate them here, then File \\u00B7 Compute / update full XIC gives the project its own quantitation, and Analytics reads it. Help \\u00B7 How to read these numbers explains every column.\\n\\nSTEP 1 \\u00B7 Group the proteins into families\\n   Menu: Run USearch\\n   Needs: a protein database, either a plain .fasta or a target-decoy .T-R file.\\n   Produces: a Family Cluster File (.fcf) written next to the database.\\n   Choose the sequence identity first. 85% is the value the box starts at. \\u0022Scan\\n   identity range\\u0022 shows how the family count and the target/decoy mixing behave\\n   across the whole range, which is a better basis for the choice than a single\\n   number. Divide and Conquer finds the lowest identity with no mixing at all; that\\n   is a floor, not a recommendation, and Help \\u00B7 How to read these numbers explains\\n   why.\\n\\nSTEP 2 \\u00B7 Open the families\\n   Menu: File \\u00B7 Load Family Cluster File\\n   Needs: the .fcf from step 1.\\n   You can now merge families further by their description words, or build one family\\n   from a keyword list. Both are shown in Layer 1 and neither can be undone, so save\\n   under a new name if you want to keep the previous grouping.\\n\\nSTEP 3 \\u00B7 Attach the quantitation\\n   Layer 2: Load PLP File\\n   Needs: a PatternLab project (.plp) exported at PEPTIDE level. A protein-level\\n   export contains nothing that can be attributed to a family, and every row will\\n   read 0.\\n   Then in Layer 3 choose what the percentages are a share of, choose what to do with\\n   peptides that belong to several families, and press Recalculate. Modes the project\\n   cannot support are greyed out, each with the reason in its own tooltip.\\n\\nSTEP 4 \\u00B7 Take the result away\\n   Export to CSV writes exactly the rows on screen, with the shares as fractions\\n   between 0 and 1 and a dot for the decimal separator, so any program can read them.\\n   File \\u00B7 Save Family Cluster File keeps the grouping for next time.\\n   File \\u00B7 Reanotate Sepro stamps your User ID family numbers into a copy of a SEPro\\n   result package, leaving the original untouched.\\n\\nOPTIONAL \\u00B7 Review de novo evidence\\n   Menu: De Novo evidence\\n   A separate workflow, not a step of the four above. It changes no family, no User ID\\n   and no quantitation, and it needs no Family Cluster File to start. Use it to ask\\n   how the selected de novo calls relate to PatternLab. Its two core steps are:\\n     1. Select PEAKS or DeepNovo and keep calls passing all three filters: minimum\\n        length, the source-native score, and a consecutive local-confidence stretch.\\n     2. Compare them with a SEPro search of the SAME runs. Each kept row comes back\\n        as new territory, a co-isolated second species, a redundant confirmation, an\\n        agreement PatternLab itself scored weakly, or a straight disagreement. The\\n        last two are listed as a review queue, because they are decisions.\\n   The collapsed Standalone run (advanced) section retains extraction, family\\n   attribution and ion-current partitioning for work without a saved project.\\n   That screen has a Help button of its own, and while it is open Help \\u00B7 How to read\\n   these numbers shows its page instead of this one.\\n\u0022,\u0022deNovo\u0022:\u0022WHAT DO I DO FIRST?\\n===================\\n\\nYou are at: De Novo evidence \\u00B7 A separate workflow: select PEAKS or DeepNovo, apply the three source-aware filters, and reconcile the accepted calls with PatternLab by file, scan, charge and precursor m/z. It needs no Family Cluster File and changes no family. The status line at the bottom of the screen says what to do next, and the Help button beside it explains every number this screen shows. To return to the family workflow, use Home \\u00B7 Curate families (the open project stays open) or File \\u00B7 Load Family Cluster File for another one.\\n\\nSTEP 1 \\u00B7 Group the proteins into families\\n   Menu: Run USearch\\n   Needs: a protein database, either a plain .fasta or a target-decoy .T-R file.\\n   Produces: a Family Cluster File (.fcf) written next to the database.\\n   Choose the sequence identity first. 85% is the value the box starts at. \\u0022Scan\\n   identity range\\u0022 shows how the family count and the target/decoy mixing behave\\n   across the whole range, which is a better basis for the choice than a single\\n   number. Divide and Conquer finds the lowest identity with no mixing at all; that\\n   is a floor, not a recommendation, and Help \\u00B7 How to read these numbers explains\\n   why.\\n\\nSTEP 2 \\u00B7 Open the families\\n   Menu: File \\u00B7 Load Family Cluster File\\n   Needs: the .fcf from step 1.\\n   You can now merge families further by their description words, or build one family\\n   from a keyword list. Both are shown in Layer 1 and neither can be undone, so save\\n   under a new name if you want to keep the previous grouping.\\n\\nSTEP 3 \\u00B7 Attach the quantitation\\n   Layer 2: Load PLP File\\n   Needs: a PatternLab project (.plp) exported at PEPTIDE level. A protein-level\\n   export contains nothing that can be attributed to a family, and every row will\\n   read 0.\\n   Then in Layer 3 choose what the percentages are a share of, choose what to do with\\n   peptides that belong to several families, and press Recalculate. Modes the project\\n   cannot support are greyed out, each with the reason in its own tooltip.\\n\\nSTEP 4 \\u00B7 Take the result away\\n   Export to CSV writes exactly the rows on screen, with the shares as fractions\\n   between 0 and 1 and a dot for the decimal separator, so any program can read them.\\n   File \\u00B7 Save Family Cluster File keeps the grouping for next time.\\n   File \\u00B7 Reanotate Sepro stamps your User ID family numbers into a copy of a SEPro\\n   result package, leaving the original untouched.\\n\\nOPTIONAL \\u00B7 Review de novo evidence\\n   Menu: De Novo evidence\\n   A separate workflow, not a step of the four above. It changes no family, no User ID\\n   and no quantitation, and it needs no Family Cluster File to start. Use it to ask\\n   how the selected de novo calls relate to PatternLab. Its two core steps are:\\n     1. Select PEAKS or DeepNovo and keep calls passing all three filters: minimum\\n        length, the source-native score, and a consecutive local-confidence stretch.\\n     2. Compare them with a SEPro search of the SAME runs. Each kept row comes back\\n        as new territory, a co-isolated second species, a redundant confirmation, an\\n        agreement PatternLab itself scored weakly, or a straight disagreement. The\\n        last two are listed as a review queue, because they are decisions.\\n   The collapsed Standalone run (advanced) section retains extraction, family\\n   attribution and ion-current partitioning for work without a saved project.\\n   That screen has a Help button of its own, and while it is open Help \\u00B7 How to read\\n   these numbers shows its page instead of this one.\\n\u0022}; actual={\u0022families\u0022:\u0022WHAT DO I DO FIRST?\\n===================\\n\\nYou are at: Families | Open project | PatternLab project loaded correctly; nothing is required; the table currently shows \\u0022% of identified signal (families sum to 100%)\\u0022; Normalized by: total ion current (TIC) (recorded by the exporter).\\n\\nFamilies loaded. Project: none open. Curate them here, then Analysis \\u003E Compute full XIC gives the project its own quantitation, and Results reads it. Help \\u00B7 How to read these numbers explains every column.\\n\\nProject: none open.\\n\\nCurrent screen status: PatternLab project loaded correctly; nothing is required; the table currently shows \\u0022% of identified signal (families sum to 100%)\\u0022; Normalized by: total ion current (TIC) (recorded by the exporter).\\n\\nSTEP 1 \\u00B7 Group the proteins into families\\n   Menu: File \\u003E New from database\\n   Needs: a protein database, either a plain .fasta or a target-decoy .T-R file.\\n   Produces: a Family Cluster File (.fcf) written next to the database.\\n   Choose database, set identity, then Build families. 85% is the initial value. \\u0022Scan\\n   identity range\\u0022 shows how the family count and the target/decoy mixing behave\\n   across the whole range, which is a better basis for the choice than a single\\n   number. Find lowest identity uses Divide and Conquer to find the lowest identity\\n   with no mixing at all. That is a floor, not a recommendation. Help \\u003E How to read\\n   these numbers explains why.\\n\\nSTEP 2 \\u00B7 Open the families\\n   Menu: File \\u003E Open\\n   Needs: the .fcf from step 1.\\n   You can now merge families further by their description words, or build one family\\n   from a keyword list. Curation changes can be undone in this session. Use Save as\\n   to keep the previous grouping in a separate project.\\n\\nSTEP 3 \\u00B7 Attach the quantitation\\n   Open Quantify to compute or update full XIC for this project.\\n   In Families \\u003E Quantitation use Full XIC \\u003E Share of and Shared peptides.\\n   For the secondary source, open PatternLab (optional) and Load PatternLab project.\\n   PatternLab needs a project (.plp) exported at PEPTIDE level. A protein-level\\n   export contains nothing that can be attributed to a family, and every row will\\n   read 0.\\n   In PatternLab (optional), PatternLab share of chooses what the percentages are a\\n   share of. Choose what to do with peptides that belong to several families, then\\n   press Recalculate. Modes the project cannot support are greyed out, each with\\n   the reason in its own tooltip.\\n\\nSTEP 4 \\u00B7 Take the result away\\n   Export to CSV writes exactly the rows on screen, with the shares as fractions\\n   between 0 and 1 and a dot for the decimal separator, so any program can read them.\\n   File \\u003E Save keeps the project for next time. File \\u003E Export also writes families\\n   for FamilyQuant 1.5 (.fcf), preserving the grouping without stored quantitation.\\n   Analysis \\u003E Reannotate SEPro stamps your User ID family numbers into a copy of a SEPro\\n   result package, leaving the original untouched.\\n\\nOPTIONAL \\u00B7 Review de novo evidence\\n   Menu: Analysis \\u003E De novo evidence\\n   A separate workflow, not a step of the four above. It changes no family, no User ID\\n   and no quantitation, and it needs no Family Cluster File to start. Use it to ask\\n   how the selected de novo calls relate to PatternLab. Its two core steps are:\\n     1. Select PEAKS or DeepNovo and keep calls passing all three filters: minimum\\n        length, the source-native score, and a consecutive local-confidence stretch.\\n     2. Compare them with a SEPro search of the SAME runs. Each kept row comes back\\n        as new territory, a co-isolated second species, a redundant confirmation, an\\n        agreement PatternLab itself scored weakly, or a straight disagreement. The\\n        last two are listed as a review queue, because they are decisions.\\n   Quantify provides extraction and Results reads the ion-current recovery. Family\\n   attribution remains available for de novo work without a saved project.\\n   That screen has a Help button of its own, and while it is open Help \\u00B7 How to read\\n   these numbers shows its page instead of this one.\\n\u0022,\u0022deNovo\u0022:\u0022WHAT DO I DO FIRST?\\n===================\\n\\nYou are at: De novo | Open project\\n\\nDe Novo evidence \\u00B7 A separate workflow: select PEAKS or DeepNovo, apply the three source-aware filters, and reconcile the accepted calls with PatternLab by file, scan, charge and precursor m/z. It needs no Family Cluster File and changes no family. The status line at the bottom of the screen says what to do next, and the Help button beside it explains every number this screen shows. To return to the family workflow, use View \\u003E Families (the open project stays open) or File \\u003E Open for another project or Family Cluster File.\\n\\nProject: none open.\\n\\nSTEP 1 \\u00B7 Group the proteins into families\\n   Menu: File \\u003E New from database\\n   Needs: a protein database, either a plain .fasta or a target-decoy .T-R file.\\n   Produces: a Family Cluster File (.fcf) written next to the database.\\n   Choose database, set identity, then Build families. 85% is the initial value. \\u0022Scan\\n   identity range\\u0022 shows how the family count and the target/decoy mixing behave\\n   across the whole range, which is a better basis for the choice than a single\\n   number. Find lowest identity uses Divide and Conquer to find the lowest identity\\n   with no mixing at all. That is a floor, not a recommendation. Help \\u003E How to read\\n   these numbers explains why.\\n\\nSTEP 2 \\u00B7 Open the families\\n   Menu: File \\u003E Open\\n   Needs: the .fcf from step 1.\\n   You can now merge families further by their description words, or build one family\\n   from a keyword list. Curation changes can be undone in this session. Use Save as\\n   to keep the previous grouping in a separate project.\\n\\nSTEP 3 \\u00B7 Attach the quantitation\\n   Open Quantify to compute or update full XIC for this project.\\n   In Families \\u003E Quantitation use Full XIC \\u003E Share of and Shared peptides.\\n   For the secondary source, open PatternLab (optional) and Load PatternLab project.\\n   PatternLab needs a project (.plp) exported at PEPTIDE level. A protein-level\\n   export contains nothing that can be attributed to a family, and every row will\\n   read 0.\\n   In PatternLab (optional), PatternLab share of chooses what the percentages are a\\n   share of. Choose what to do with peptides that belong to several families, then\\n   press Recalculate. Modes the project cannot support are greyed out, each with\\n   the reason in its own tooltip.\\n\\nSTEP 4 \\u00B7 Take the result away\\n   Export to CSV writes exactly the rows on screen, with the shares as fractions\\n   between 0 and 1 and a dot for the decimal separator, so any program can read them.\\n   File \\u003E Save keeps the project for next time. File \\u003E Export also writes families\\n   for FamilyQuant 1.5 (.fcf), preserving the grouping without stored quantitation.\\n   Analysis \\u003E Reannotate SEPro stamps your User ID family numbers into a copy of a SEPro\\n   result package, leaving the original untouched.\\n\\nOPTIONAL \\u00B7 Review de novo evidence\\n   Menu: Analysis \\u003E De novo evidence\\n   A separate workflow, not a step of the four above. It changes no family, no User ID\\n   and no quantitation, and it needs no Family Cluster File to start. Use it to ask\\n   how the selected de novo calls relate to PatternLab. Its two core steps are:\\n     1. Select PEAKS or DeepNovo and keep calls passing all three filters: minimum\\n        length, the source-native score, and a consecutive local-confidence stretch.\\n     2. Compare them with a SEPro search of the SAME runs. Each kept row comes back\\n        as new territory, a co-isolated second species, a redundant confirmation, an\\n        agreement PatternLab itself scored weakly, or a straight disagreement. The\\n        last two are listed as a review queue, because they are decisions.\\n   Quantify provides extraction and Results reads the ion-current recovery. Family\\n   attribution remains available for de novo work without a saved project.\\n   That screen has a Help button of its own, and while it is open Help \\u00B7 How to read\\n   these numbers shows its page instead of this one.\\n\u0022}"
+      "compared": "FamilyQuant/MainWindow.xaml:70 TextBlockGuide.ToolTip = Shows where you are in the workflow and what to do next. It updates as you go.; before={\u0022families\u0022:\u0022WHAT DO I DO FIRST?\\n===================\\n\\nYou are at: Step 2 of 4 \\u00B7 Families loaded. Project: none open. Curate them here, then File \\u00B7 Compute / update full XIC gives the project its own quantitation, and Analytics reads it. Help \\u00B7 How to read these numbers explains every column.\\n\\nSTEP 1 \\u00B7 Group the proteins into families\\n   Menu: Run USearch\\n   Needs: a protein database, either a plain .fasta or a target-decoy .T-R file.\\n   Produces: a Family Cluster File (.fcf) written next to the database.\\n   Choose the sequence identity first. 85% is the value the box starts at. \\u0022Scan\\n   identity range\\u0022 shows how the family count and the target/decoy mixing behave\\n   across the whole range, which is a better basis for the choice than a single\\n   number. Divide and Conquer finds the lowest identity with no mixing at all; that\\n   is a floor, not a recommendation, and Help \\u00B7 How to read these numbers explains\\n   why.\\n\\nSTEP 2 \\u00B7 Open the families\\n   Menu: File \\u00B7 Load Family Cluster File\\n   Needs: the .fcf from step 1.\\n   You can now merge families further by their description words, or build one family\\n   from a keyword list. Both are shown in Layer 1 and neither can be undone, so save\\n   under a new name if you want to keep the previous grouping.\\n\\nSTEP 3 \\u00B7 Attach the quantitation\\n   Layer 2: Load PLP File\\n   Needs: a PatternLab project (.plp) exported at PEPTIDE level. A protein-level\\n   export contains nothing that can be attributed to a family, and every row will\\n   read 0.\\n   Then in Layer 3 choose what the percentages are a share of, choose what to do with\\n   peptides that belong to several families, and press Recalculate. Modes the project\\n   cannot support are greyed out, each with the reason in its own tooltip.\\n\\nSTEP 4 \\u00B7 Take the result away\\n   Export to CSV writes exactly the rows on screen, with the shares as fractions\\n   between 0 and 1 and a dot for the decimal separator, so any program can read them.\\n   File \\u00B7 Save Family Cluster File keeps the grouping for next time.\\n   File \\u00B7 Reanotate Sepro stamps your User ID family numbers into a copy of a SEPro\\n   result package, leaving the original untouched.\\n\\nOPTIONAL \\u00B7 Review de novo evidence\\n   Menu: De Novo evidence\\n   A separate workflow, not a step of the four above. It changes no family, no User ID\\n   and no quantitation, and it needs no Family Cluster File to start. Use it to ask\\n   how the selected de novo calls relate to PatternLab. Its two core steps are:\\n     1. Select PEAKS or DeepNovo and keep calls passing all three filters: minimum\\n        length, the source-native score, and a consecutive local-confidence stretch.\\n     2. Compare them with a SEPro search of the SAME runs. Each kept row comes back\\n        as new territory, a co-isolated second species, a redundant confirmation, an\\n        agreement PatternLab itself scored weakly, or a straight disagreement. The\\n        last two are listed as a review queue, because they are decisions.\\n   The collapsed Standalone run (advanced) section retains extraction, family\\n   attribution and ion-current partitioning for work without a saved project.\\n   That screen has a Help button of its own, and while it is open Help \\u00B7 How to read\\n   these numbers shows its page instead of this one.\\n\u0022,\u0022deNovo\u0022:\u0022WHAT DO I DO FIRST?\\n===================\\n\\nYou are at: De Novo evidence \\u00B7 A separate workflow: select PEAKS or DeepNovo, apply the three source-aware filters, and reconcile the accepted calls with PatternLab by file, scan, charge and precursor m/z. It needs no Family Cluster File and changes no family. The status line at the bottom of the screen says what to do next, and the Help button beside it explains every number this screen shows. To return to the family workflow, use Home \\u00B7 Curate families (the open project stays open) or File \\u00B7 Load Family Cluster File for another one.\\n\\nSTEP 1 \\u00B7 Group the proteins into families\\n   Menu: Run USearch\\n   Needs: a protein database, either a plain .fasta or a target-decoy .T-R file.\\n   Produces: a Family Cluster File (.fcf) written next to the database.\\n   Choose the sequence identity first. 85% is the value the box starts at. \\u0022Scan\\n   identity range\\u0022 shows how the family count and the target/decoy mixing behave\\n   across the whole range, which is a better basis for the choice than a single\\n   number. Divide and Conquer finds the lowest identity with no mixing at all; that\\n   is a floor, not a recommendation, and Help \\u00B7 How to read these numbers explains\\n   why.\\n\\nSTEP 2 \\u00B7 Open the families\\n   Menu: File \\u00B7 Load Family Cluster File\\n   Needs: the .fcf from step 1.\\n   You can now merge families further by their description words, or build one family\\n   from a keyword list. Both are shown in Layer 1 and neither can be undone, so save\\n   under a new name if you want to keep the previous grouping.\\n\\nSTEP 3 \\u00B7 Attach the quantitation\\n   Layer 2: Load PLP File\\n   Needs: a PatternLab project (.plp) exported at PEPTIDE level. A protein-level\\n   export contains nothing that can be attributed to a family, and every row will\\n   read 0.\\n   Then in Layer 3 choose what the percentages are a share of, choose what to do with\\n   peptides that belong to several families, and press Recalculate. Modes the project\\n   cannot support are greyed out, each with the reason in its own tooltip.\\n\\nSTEP 4 \\u00B7 Take the result away\\n   Export to CSV writes exactly the rows on screen, with the shares as fractions\\n   between 0 and 1 and a dot for the decimal separator, so any program can read them.\\n   File \\u00B7 Save Family Cluster File keeps the grouping for next time.\\n   File \\u00B7 Reanotate Sepro stamps your User ID family numbers into a copy of a SEPro\\n   result package, leaving the original untouched.\\n\\nOPTIONAL \\u00B7 Review de novo evidence\\n   Menu: De Novo evidence\\n   A separate workflow, not a step of the four above. It changes no family, no User ID\\n   and no quantitation, and it needs no Family Cluster File to start. Use it to ask\\n   how the selected de novo calls relate to PatternLab. Its two core steps are:\\n     1. Select PEAKS or DeepNovo and keep calls passing all three filters: minimum\\n        length, the source-native score, and a consecutive local-confidence stretch.\\n     2. Compare them with a SEPro search of the SAME runs. Each kept row comes back\\n        as new territory, a co-isolated second species, a redundant confirmation, an\\n        agreement PatternLab itself scored weakly, or a straight disagreement. The\\n        last two are listed as a review queue, because they are decisions.\\n   The collapsed Standalone run (advanced) section retains extraction, family\\n   attribution and ion-current partitioning for work without a saved project.\\n   That screen has a Help button of its own, and while it is open Help \\u00B7 How to read\\n   these numbers shows its page instead of this one.\\n\u0022}; actual={\u0022families\u0022:\u0022WHAT DO I DO FIRST?\\n===================\\n\\nYou are at: Families | Open project | PatternLab project loaded correctly; nothing is required; the table currently shows \\u0022% of identified signal (families sum to 100%)\\u0022; Normalized by: total ion current (TIC) (recorded by the exporter).\\n\\nFamilies loaded. Project: none open. Curate them here, then Analysis \\u003E Compute full XIC gives the project its own quantitation, and Results reads it. Help \\u00B7 How to read these numbers explains every column.\\n\\nProject: none open.\\n\\nCurrent screen status: PatternLab project loaded correctly; nothing is required; the table currently shows \\u0022% of identified signal (families sum to 100%)\\u0022; Normalized by: total ion current (TIC) (recorded by the exporter).\\n\\nSTEP 1 \\u00B7 Group the proteins into families\\n   Menu: File \\u003E New from database\\n   Needs: a protein database, either a plain .fasta or a target-decoy .T-R file.\\n   Produces: a Family Cluster File (.fcf) written next to the database.\\n   Choose database, set identity, then Build families. 85% is the initial value. \\u0022Scan\\n   identity range\\u0022 shows how the family count and the target/decoy mixing behave\\n   across the whole range, which is a better basis for the choice than a single\\n   number. Find lowest identity uses Divide and Conquer to find the lowest identity\\n   with no mixing at all. That is a floor, not a recommendation. Help \\u003E How to read\\n   these numbers explains why.\\n\\nSTEP 2 \\u00B7 Open the families\\n   Menu: File \\u003E Open\\n   Needs: the .fcf from step 1.\\n   You can now merge families further by their description words, or build one family\\n   from a keyword list. Curation changes can be undone in this session. Use Save as\\n   to keep the previous grouping in a separate project.\\n\\nSTEP 3 \\u00B7 Attach the quantitation\\n   Open Quantify to compute or update full XIC for this project.\\n   In Families \\u003E Quantitation use Full XIC \\u003E Share of and Shared peptides.\\n   For the secondary source, open PatternLab (optional) and Load PatternLab project.\\n   PatternLab needs a project (.plp) exported at PEPTIDE level. A protein-level\\n   export contains nothing that can be attributed to a family, and every row will\\n   read 0.\\n   In PatternLab (optional), PatternLab share of chooses what the percentages are a\\n   share of. Choose what to do with peptides that belong to several families, then\\n   press Recalculate. Modes the project cannot support are greyed out, each with\\n   the reason in its own tooltip.\\n\\nSTEP 4 \\u00B7 Take the result away\\n   Export to CSV writes exactly the rows on screen, with the shares as fractions\\n   between 0 and 1 and a dot for the decimal separator, so any program can read them.\\n   File \\u003E Save keeps the project for next time. File \\u003E Export also writes families\\n   for FamilyQuant 1.5 (.fcf), preserving the grouping without stored quantitation.\\n   Analysis \\u003E Reannotate SEPro stamps your User ID family numbers into a copy of a SEPro\\n   result package, leaving the original untouched.\\n\\nOPTIONAL \\u00B7 Review de novo evidence\\n   Menu: Analysis \\u003E De novo evidence\\n   A separate workflow, not a step of the four above. It changes no family, no User ID\\n   and no quantitation, and it needs no Family Cluster File to start. Use it to ask\\n   how the selected de novo calls relate to PatternLab. Its two core steps are:\\n     1. Select PEAKS or DeepNovo and keep calls passing all three filters: minimum\\n        length, the source-native score, and a consecutive local-confidence stretch.\\n     2. Compare them with a SEPro search of the SAME runs. Each kept row comes back\\n        as new territory, a co-isolated second species, a redundant confirmation, an\\n        agreement PatternLab itself scored weakly, or a straight disagreement. The\\n        last two are listed as a review queue, because they are decisions.\\n   Quantify provides extraction and Results reads the ion-current recovery. Family\\n   attribution remains available for de novo work without a saved project.\\n   That screen has a Help button of its own, and while it is open Help \\u00B7 How to read\\n   these numbers shows its page instead of this one.\\n\\nHelp \\u003E Check for updates asks GitHub for the latest public release only when you choose\\nit, and sends nothing but that request. It names a newer version and opens its release\\npage on request; nothing is downloaded or installed.\\n\u0022,\u0022deNovo\u0022:\u0022WHAT DO I DO FIRST?\\n===================\\n\\nYou are at: De novo | Open project\\n\\nDe Novo evidence \\u00B7 A separate workflow: select PEAKS or DeepNovo, apply the three source-aware filters, and reconcile the accepted calls with PatternLab by file, scan, charge and precursor m/z. It needs no Family Cluster File and changes no family. The status line at the bottom of the screen says what to do next, and the Help button beside it explains every number this screen shows. To return to the family workflow, use View \\u003E Families (the open project stays open) or File \\u003E Open for another project or Family Cluster File.\\n\\nProject: none open.\\n\\nSTEP 1 \\u00B7 Group the proteins into families\\n   Menu: File \\u003E New from database\\n   Needs: a protein database, either a plain .fasta or a target-decoy .T-R file.\\n   Produces: a Family Cluster File (.fcf) written next to the database.\\n   Choose database, set identity, then Build families. 85% is the initial value. \\u0022Scan\\n   identity range\\u0022 shows how the family count and the target/decoy mixing behave\\n   across the whole range, which is a better basis for the choice than a single\\n   number. Find lowest identity uses Divide and Conquer to find the lowest identity\\n   with no mixing at all. That is a floor, not a recommendation. Help \\u003E How to read\\n   these numbers explains why.\\n\\nSTEP 2 \\u00B7 Open the families\\n   Menu: File \\u003E Open\\n   Needs: the .fcf from step 1.\\n   You can now merge families further by their description words, or build one family\\n   from a keyword list. Curation changes can be undone in this session. Use Save as\\n   to keep the previous grouping in a separate project.\\n\\nSTEP 3 \\u00B7 Attach the quantitation\\n   Open Quantify to compute or update full XIC for this project.\\n   In Families \\u003E Quantitation use Full XIC \\u003E Share of and Shared peptides.\\n   For the secondary source, open PatternLab (optional) and Load PatternLab project.\\n   PatternLab needs a project (.plp) exported at PEPTIDE level. A protein-level\\n   export contains nothing that can be attributed to a family, and every row will\\n   read 0.\\n   In PatternLab (optional), PatternLab share of chooses what the percentages are a\\n   share of. Choose what to do with peptides that belong to several families, then\\n   press Recalculate. Modes the project cannot support are greyed out, each with\\n   the reason in its own tooltip.\\n\\nSTEP 4 \\u00B7 Take the result away\\n   Export to CSV writes exactly the rows on screen, with the shares as fractions\\n   between 0 and 1 and a dot for the decimal separator, so any program can read them.\\n   File \\u003E Save keeps the project for next time. File \\u003E Export also writes families\\n   for FamilyQuant 1.5 (.fcf), preserving the grouping without stored quantitation.\\n   Analysis \\u003E Reannotate SEPro stamps your User ID family numbers into a copy of a SEPro\\n   result package, leaving the original untouched.\\n\\nOPTIONAL \\u00B7 Review de novo evidence\\n   Menu: Analysis \\u003E De novo evidence\\n   A separate workflow, not a step of the four above. It changes no family, no User ID\\n   and no quantitation, and it needs no Family Cluster File to start. Use it to ask\\n   how the selected de novo calls relate to PatternLab. Its two core steps are:\\n     1. Select PEAKS or DeepNovo and keep calls passing all three filters: minimum\\n        length, the source-native score, and a consecutive local-confidence stretch.\\n     2. Compare them with a SEPro search of the SAME runs. Each kept row comes back\\n        as new territory, a co-isolated second species, a redundant confirmation, an\\n        agreement PatternLab itself scored weakly, or a straight disagreement. The\\n        last two are listed as a review queue, because they are decisions.\\n   Quantify provides extraction and Results reads the ion-current recovery. Family\\n   attribution remains available for de novo work without a saved project.\\n   That screen has a Help button of its own, and while it is open Help \\u00B7 How to read\\n   these numbers shows its page instead of this one.\\n\\nHelp \\u003E Check for updates asks GitHub for the latest public release only when you choose\\nit, and sends nothing but that request. It names a newer version and opens its release\\npage on request; nothing is downloaded or installed.\\n\u0022}"
     },
     {
       "observationId": "FQ15-C4526422A15C",
@@ -7179,7 +7259,7 @@
         {
           "path": "FamilyQuant/AppVersionInfo.cs",
           "symbol": "native behaviour fixture",
-          "sha256": "ACBB2D2F358359B09845992E25DB3FCE18AAF11AC8FBE550D4D04F6476A7C018"
+          "sha256": "D1C2B935AAF6F89EA3AF8A13F2F7CF4E516364E3D39F5568243501A7E8B13E30"
         },
         {
           "path": "FamilyQuant/ArchitectureReviewControl.xaml.cs",
@@ -7494,7 +7574,7 @@
         {
           "path": "FamilyQuant/MainWindow.Help.cs",
           "symbol": "native behaviour fixture",
-          "sha256": "5B7F1864A1F8842801B406641B528793E752553B81480159751C679675F760FF"
+          "sha256": "397841BD2DE9AF88D56E877172E9B392B6E785BBEF9095D30A0FF4229675A501"
         },
         {
           "path": "FamilyQuant/MainWindow.HomologyResults.cs",
@@ -7540,6 +7620,11 @@
           "path": "FamilyQuant/MainWindow.Status.cs",
           "symbol": "native behaviour fixture",
           "sha256": "A13F51B49BD04137DF641A3B6251363646613F8DF04EAE2BE38E0A695D635A19"
+        },
+        {
+          "path": "FamilyQuant/MainWindow.UpdateCheck.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "56D31854A8BF14D8F53E2EBD2EF1EB1608598703C868F8FD7135E3C8F9D8519A"
         },
         {
           "path": "FamilyQuant/MainWindow.ViewModel.cs",
@@ -7744,7 +7829,7 @@
         {
           "path": "FamilyQuant/MainWindow.xaml",
           "symbol": "native behaviour fixture",
-          "sha256": "422DE48434233AA62B67BF4F37326A8F66C6C2771A45A828E40318E09A1806C5"
+          "sha256": "933BF2A60001B362097D40E60990398D1C38FCD94448C9782096C6539F656208"
         },
         {
           "path": "FamilyQuant/QuantifyControl.xaml",
@@ -7930,6 +8015,11 @@
           "path": "FamilyQuant.Core/RedundancyTools.cs",
           "symbol": "native behaviour fixture",
           "sha256": "B51F93ECF6FF874ED17BDAB7E619EAF67691F0C099A5E8A21059C81DE0D086C5"
+        },
+        {
+          "path": "FamilyQuant.Core/ReleaseUpdateChecker.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "5F37F5722EDEB6B6328881F24FDFF5C134D96935B59D899B20DB046537CE359C"
         },
         {
           "path": "FamilyQuant.Core/ReportView.cs",
@@ -8003,7 +8093,7 @@
           "kind": "test",
           "target": "ShellBehaviour",
           "assertion": "SH behaviour native shell context Help",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\sh-behaviour2\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\sh-behaviour2\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -8052,7 +8142,7 @@
         {
           "path": "FamilyQuant/AppVersionInfo.cs",
           "symbol": "native behaviour fixture",
-          "sha256": "ACBB2D2F358359B09845992E25DB3FCE18AAF11AC8FBE550D4D04F6476A7C018"
+          "sha256": "D1C2B935AAF6F89EA3AF8A13F2F7CF4E516364E3D39F5568243501A7E8B13E30"
         },
         {
           "path": "FamilyQuant/ArchitectureReviewControl.xaml.cs",
@@ -8367,7 +8457,7 @@
         {
           "path": "FamilyQuant/MainWindow.Help.cs",
           "symbol": "native behaviour fixture",
-          "sha256": "5B7F1864A1F8842801B406641B528793E752553B81480159751C679675F760FF"
+          "sha256": "397841BD2DE9AF88D56E877172E9B392B6E785BBEF9095D30A0FF4229675A501"
         },
         {
           "path": "FamilyQuant/MainWindow.HomologyResults.cs",
@@ -8413,6 +8503,11 @@
           "path": "FamilyQuant/MainWindow.Status.cs",
           "symbol": "native behaviour fixture",
           "sha256": "A13F51B49BD04137DF641A3B6251363646613F8DF04EAE2BE38E0A695D635A19"
+        },
+        {
+          "path": "FamilyQuant/MainWindow.UpdateCheck.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "56D31854A8BF14D8F53E2EBD2EF1EB1608598703C868F8FD7135E3C8F9D8519A"
         },
         {
           "path": "FamilyQuant/MainWindow.ViewModel.cs",
@@ -8617,7 +8712,7 @@
         {
           "path": "FamilyQuant/MainWindow.xaml",
           "symbol": "native behaviour fixture",
-          "sha256": "422DE48434233AA62B67BF4F37326A8F66C6C2771A45A828E40318E09A1806C5"
+          "sha256": "933BF2A60001B362097D40E60990398D1C38FCD94448C9782096C6539F656208"
         },
         {
           "path": "FamilyQuant/QuantifyControl.xaml",
@@ -8803,6 +8898,11 @@
           "path": "FamilyQuant.Core/RedundancyTools.cs",
           "symbol": "native behaviour fixture",
           "sha256": "B51F93ECF6FF874ED17BDAB7E619EAF67691F0C099A5E8A21059C81DE0D086C5"
+        },
+        {
+          "path": "FamilyQuant.Core/ReleaseUpdateChecker.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "5F37F5722EDEB6B6328881F24FDFF5C134D96935B59D899B20DB046537CE359C"
         },
         {
           "path": "FamilyQuant.Core/ReportView.cs",
@@ -8876,13 +8976,13 @@
           "kind": "test",
           "target": "ShellBehaviour",
           "assertion": "SH behaviour native shell workflow Help",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\sh-behaviour2\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\sh-behaviour2\\proofs.log",
           "inspectedBy": ""
         }
       ],
       "note": "Native frozen/current comparison; no product change.",
       "kindReceiptId": null,
-      "compared": "FamilyQuant/MainWindow.xaml.cs:865 private void MenuItemWhereAmI_Click(object sender, RoutedEventArgs e); before={\u0022families\u0022:\u0022WHAT DO I DO FIRST?\\n===================\\n\\nYou are at: Step 2 of 4 \\u00B7 Families loaded. Project: none open. Curate them here, then File \\u00B7 Compute / update full XIC gives the project its own quantitation, and Analytics reads it. Help \\u00B7 How to read these numbers explains every column.\\n\\nSTEP 1 \\u00B7 Group the proteins into families\\n   Menu: Run USearch\\n   Needs: a protein database, either a plain .fasta or a target-decoy .T-R file.\\n   Produces: a Family Cluster File (.fcf) written next to the database.\\n   Choose the sequence identity first. 85% is the value the box starts at. \\u0022Scan\\n   identity range\\u0022 shows how the family count and the target/decoy mixing behave\\n   across the whole range, which is a better basis for the choice than a single\\n   number. Divide and Conquer finds the lowest identity with no mixing at all; that\\n   is a floor, not a recommendation, and Help \\u00B7 How to read these numbers explains\\n   why.\\n\\nSTEP 2 \\u00B7 Open the families\\n   Menu: File \\u00B7 Load Family Cluster File\\n   Needs: the .fcf from step 1.\\n   You can now merge families further by their description words, or build one family\\n   from a keyword list. Both are shown in Layer 1 and neither can be undone, so save\\n   under a new name if you want to keep the previous grouping.\\n\\nSTEP 3 \\u00B7 Attach the quantitation\\n   Layer 2: Load PLP File\\n   Needs: a PatternLab project (.plp) exported at PEPTIDE level. A protein-level\\n   export contains nothing that can be attributed to a family, and every row will\\n   read 0.\\n   Then in Layer 3 choose what the percentages are a share of, choose what to do with\\n   peptides that belong to several families, and press Recalculate. Modes the project\\n   cannot support are greyed out, each with the reason in its own tooltip.\\n\\nSTEP 4 \\u00B7 Take the result away\\n   Export to CSV writes exactly the rows on screen, with the shares as fractions\\n   between 0 and 1 and a dot for the decimal separator, so any program can read them.\\n   File \\u00B7 Save Family Cluster File keeps the grouping for next time.\\n   File \\u00B7 Reanotate Sepro stamps your User ID family numbers into a copy of a SEPro\\n   result package, leaving the original untouched.\\n\\nOPTIONAL \\u00B7 Review de novo evidence\\n   Menu: De Novo evidence\\n   A separate workflow, not a step of the four above. It changes no family, no User ID\\n   and no quantitation, and it needs no Family Cluster File to start. Use it to ask\\n   how the selected de novo calls relate to PatternLab. Its two core steps are:\\n     1. Select PEAKS or DeepNovo and keep calls passing all three filters: minimum\\n        length, the source-native score, and a consecutive local-confidence stretch.\\n     2. Compare them with a SEPro search of the SAME runs. Each kept row comes back\\n        as new territory, a co-isolated second species, a redundant confirmation, an\\n        agreement PatternLab itself scored weakly, or a straight disagreement. The\\n        last two are listed as a review queue, because they are decisions.\\n   The collapsed Standalone run (advanced) section retains extraction, family\\n   attribution and ion-current partitioning for work without a saved project.\\n   That screen has a Help button of its own, and while it is open Help \\u00B7 How to read\\n   these numbers shows its page instead of this one.\\n\u0022,\u0022deNovo\u0022:\u0022WHAT DO I DO FIRST?\\n===================\\n\\nYou are at: De Novo evidence \\u00B7 A separate workflow: select PEAKS or DeepNovo, apply the three source-aware filters, and reconcile the accepted calls with PatternLab by file, scan, charge and precursor m/z. It needs no Family Cluster File and changes no family. The status line at the bottom of the screen says what to do next, and the Help button beside it explains every number this screen shows. To return to the family workflow, use Home \\u00B7 Curate families (the open project stays open) or File \\u00B7 Load Family Cluster File for another one.\\n\\nSTEP 1 \\u00B7 Group the proteins into families\\n   Menu: Run USearch\\n   Needs: a protein database, either a plain .fasta or a target-decoy .T-R file.\\n   Produces: a Family Cluster File (.fcf) written next to the database.\\n   Choose the sequence identity first. 85% is the value the box starts at. \\u0022Scan\\n   identity range\\u0022 shows how the family count and the target/decoy mixing behave\\n   across the whole range, which is a better basis for the choice than a single\\n   number. Divide and Conquer finds the lowest identity with no mixing at all; that\\n   is a floor, not a recommendation, and Help \\u00B7 How to read these numbers explains\\n   why.\\n\\nSTEP 2 \\u00B7 Open the families\\n   Menu: File \\u00B7 Load Family Cluster File\\n   Needs: the .fcf from step 1.\\n   You can now merge families further by their description words, or build one family\\n   from a keyword list. Both are shown in Layer 1 and neither can be undone, so save\\n   under a new name if you want to keep the previous grouping.\\n\\nSTEP 3 \\u00B7 Attach the quantitation\\n   Layer 2: Load PLP File\\n   Needs: a PatternLab project (.plp) exported at PEPTIDE level. A protein-level\\n   export contains nothing that can be attributed to a family, and every row will\\n   read 0.\\n   Then in Layer 3 choose what the percentages are a share of, choose what to do with\\n   peptides that belong to several families, and press Recalculate. Modes the project\\n   cannot support are greyed out, each with the reason in its own tooltip.\\n\\nSTEP 4 \\u00B7 Take the result away\\n   Export to CSV writes exactly the rows on screen, with the shares as fractions\\n   between 0 and 1 and a dot for the decimal separator, so any program can read them.\\n   File \\u00B7 Save Family Cluster File keeps the grouping for next time.\\n   File \\u00B7 Reanotate Sepro stamps your User ID family numbers into a copy of a SEPro\\n   result package, leaving the original untouched.\\n\\nOPTIONAL \\u00B7 Review de novo evidence\\n   Menu: De Novo evidence\\n   A separate workflow, not a step of the four above. It changes no family, no User ID\\n   and no quantitation, and it needs no Family Cluster File to start. Use it to ask\\n   how the selected de novo calls relate to PatternLab. Its two core steps are:\\n     1. Select PEAKS or DeepNovo and keep calls passing all three filters: minimum\\n        length, the source-native score, and a consecutive local-confidence stretch.\\n     2. Compare them with a SEPro search of the SAME runs. Each kept row comes back\\n        as new territory, a co-isolated second species, a redundant confirmation, an\\n        agreement PatternLab itself scored weakly, or a straight disagreement. The\\n        last two are listed as a review queue, because they are decisions.\\n   The collapsed Standalone run (advanced) section retains extraction, family\\n   attribution and ion-current partitioning for work without a saved project.\\n   That screen has a Help button of its own, and while it is open Help \\u00B7 How to read\\n   these numbers shows its page instead of this one.\\n\u0022}; actual={\u0022families\u0022:\u0022WHAT DO I DO FIRST?\\n===================\\n\\nYou are at: Families | Open project | PatternLab project loaded correctly; nothing is required; the table currently shows \\u0022% of identified signal (families sum to 100%)\\u0022; Normalized by: total ion current (TIC) (recorded by the exporter).\\n\\nFamilies loaded. Project: none open. Curate them here, then Analysis \\u003E Compute full XIC gives the project its own quantitation, and Results reads it. Help \\u00B7 How to read these numbers explains every column.\\n\\nProject: none open.\\n\\nCurrent screen status: PatternLab project loaded correctly; nothing is required; the table currently shows \\u0022% of identified signal (families sum to 100%)\\u0022; Normalized by: total ion current (TIC) (recorded by the exporter).\\n\\nSTEP 1 \\u00B7 Group the proteins into families\\n   Menu: File \\u003E New from database\\n   Needs: a protein database, either a plain .fasta or a target-decoy .T-R file.\\n   Produces: a Family Cluster File (.fcf) written next to the database.\\n   Choose database, set identity, then Build families. 85% is the initial value. \\u0022Scan\\n   identity range\\u0022 shows how the family count and the target/decoy mixing behave\\n   across the whole range, which is a better basis for the choice than a single\\n   number. Find lowest identity uses Divide and Conquer to find the lowest identity\\n   with no mixing at all. That is a floor, not a recommendation. Help \\u003E How to read\\n   these numbers explains why.\\n\\nSTEP 2 \\u00B7 Open the families\\n   Menu: File \\u003E Open\\n   Needs: the .fcf from step 1.\\n   You can now merge families further by their description words, or build one family\\n   from a keyword list. Curation changes can be undone in this session. Use Save as\\n   to keep the previous grouping in a separate project.\\n\\nSTEP 3 \\u00B7 Attach the quantitation\\n   Open Quantify to compute or update full XIC for this project.\\n   In Families \\u003E Quantitation use Full XIC \\u003E Share of and Shared peptides.\\n   For the secondary source, open PatternLab (optional) and Load PatternLab project.\\n   PatternLab needs a project (.plp) exported at PEPTIDE level. A protein-level\\n   export contains nothing that can be attributed to a family, and every row will\\n   read 0.\\n   In PatternLab (optional), PatternLab share of chooses what the percentages are a\\n   share of. Choose what to do with peptides that belong to several families, then\\n   press Recalculate. Modes the project cannot support are greyed out, each with\\n   the reason in its own tooltip.\\n\\nSTEP 4 \\u00B7 Take the result away\\n   Export to CSV writes exactly the rows on screen, with the shares as fractions\\n   between 0 and 1 and a dot for the decimal separator, so any program can read them.\\n   File \\u003E Save keeps the project for next time. File \\u003E Export also writes families\\n   for FamilyQuant 1.5 (.fcf), preserving the grouping without stored quantitation.\\n   Analysis \\u003E Reannotate SEPro stamps your User ID family numbers into a copy of a SEPro\\n   result package, leaving the original untouched.\\n\\nOPTIONAL \\u00B7 Review de novo evidence\\n   Menu: Analysis \\u003E De novo evidence\\n   A separate workflow, not a step of the four above. It changes no family, no User ID\\n   and no quantitation, and it needs no Family Cluster File to start. Use it to ask\\n   how the selected de novo calls relate to PatternLab. Its two core steps are:\\n     1. Select PEAKS or DeepNovo and keep calls passing all three filters: minimum\\n        length, the source-native score, and a consecutive local-confidence stretch.\\n     2. Compare them with a SEPro search of the SAME runs. Each kept row comes back\\n        as new territory, a co-isolated second species, a redundant confirmation, an\\n        agreement PatternLab itself scored weakly, or a straight disagreement. The\\n        last two are listed as a review queue, because they are decisions.\\n   Quantify provides extraction and Results reads the ion-current recovery. Family\\n   attribution remains available for de novo work without a saved project.\\n   That screen has a Help button of its own, and while it is open Help \\u00B7 How to read\\n   these numbers shows its page instead of this one.\\n\u0022,\u0022deNovo\u0022:\u0022WHAT DO I DO FIRST?\\n===================\\n\\nYou are at: De novo | Open project\\n\\nDe Novo evidence \\u00B7 A separate workflow: select PEAKS or DeepNovo, apply the three source-aware filters, and reconcile the accepted calls with PatternLab by file, scan, charge and precursor m/z. It needs no Family Cluster File and changes no family. The status line at the bottom of the screen says what to do next, and the Help button beside it explains every number this screen shows. To return to the family workflow, use View \\u003E Families (the open project stays open) or File \\u003E Open for another project or Family Cluster File.\\n\\nProject: none open.\\n\\nSTEP 1 \\u00B7 Group the proteins into families\\n   Menu: File \\u003E New from database\\n   Needs: a protein database, either a plain .fasta or a target-decoy .T-R file.\\n   Produces: a Family Cluster File (.fcf) written next to the database.\\n   Choose database, set identity, then Build families. 85% is the initial value. \\u0022Scan\\n   identity range\\u0022 shows how the family count and the target/decoy mixing behave\\n   across the whole range, which is a better basis for the choice than a single\\n   number. Find lowest identity uses Divide and Conquer to find the lowest identity\\n   with no mixing at all. That is a floor, not a recommendation. Help \\u003E How to read\\n   these numbers explains why.\\n\\nSTEP 2 \\u00B7 Open the families\\n   Menu: File \\u003E Open\\n   Needs: the .fcf from step 1.\\n   You can now merge families further by their description words, or build one family\\n   from a keyword list. Curation changes can be undone in this session. Use Save as\\n   to keep the previous grouping in a separate project.\\n\\nSTEP 3 \\u00B7 Attach the quantitation\\n   Open Quantify to compute or update full XIC for this project.\\n   In Families \\u003E Quantitation use Full XIC \\u003E Share of and Shared peptides.\\n   For the secondary source, open PatternLab (optional) and Load PatternLab project.\\n   PatternLab needs a project (.plp) exported at PEPTIDE level. A protein-level\\n   export contains nothing that can be attributed to a family, and every row will\\n   read 0.\\n   In PatternLab (optional), PatternLab share of chooses what the percentages are a\\n   share of. Choose what to do with peptides that belong to several families, then\\n   press Recalculate. Modes the project cannot support are greyed out, each with\\n   the reason in its own tooltip.\\n\\nSTEP 4 \\u00B7 Take the result away\\n   Export to CSV writes exactly the rows on screen, with the shares as fractions\\n   between 0 and 1 and a dot for the decimal separator, so any program can read them.\\n   File \\u003E Save keeps the project for next time. File \\u003E Export also writes families\\n   for FamilyQuant 1.5 (.fcf), preserving the grouping without stored quantitation.\\n   Analysis \\u003E Reannotate SEPro stamps your User ID family numbers into a copy of a SEPro\\n   result package, leaving the original untouched.\\n\\nOPTIONAL \\u00B7 Review de novo evidence\\n   Menu: Analysis \\u003E De novo evidence\\n   A separate workflow, not a step of the four above. It changes no family, no User ID\\n   and no quantitation, and it needs no Family Cluster File to start. Use it to ask\\n   how the selected de novo calls relate to PatternLab. Its two core steps are:\\n     1. Select PEAKS or DeepNovo and keep calls passing all three filters: minimum\\n        length, the source-native score, and a consecutive local-confidence stretch.\\n     2. Compare them with a SEPro search of the SAME runs. Each kept row comes back\\n        as new territory, a co-isolated second species, a redundant confirmation, an\\n        agreement PatternLab itself scored weakly, or a straight disagreement. The\\n        last two are listed as a review queue, because they are decisions.\\n   Quantify provides extraction and Results reads the ion-current recovery. Family\\n   attribution remains available for de novo work without a saved project.\\n   That screen has a Help button of its own, and while it is open Help \\u00B7 How to read\\n   these numbers shows its page instead of this one.\\n\u0022}"
+      "compared": "FamilyQuant/MainWindow.xaml.cs:865 private void MenuItemWhereAmI_Click(object sender, RoutedEventArgs e); before={\u0022families\u0022:\u0022WHAT DO I DO FIRST?\\n===================\\n\\nYou are at: Step 2 of 4 \\u00B7 Families loaded. Project: none open. Curate them here, then File \\u00B7 Compute / update full XIC gives the project its own quantitation, and Analytics reads it. Help \\u00B7 How to read these numbers explains every column.\\n\\nSTEP 1 \\u00B7 Group the proteins into families\\n   Menu: Run USearch\\n   Needs: a protein database, either a plain .fasta or a target-decoy .T-R file.\\n   Produces: a Family Cluster File (.fcf) written next to the database.\\n   Choose the sequence identity first. 85% is the value the box starts at. \\u0022Scan\\n   identity range\\u0022 shows how the family count and the target/decoy mixing behave\\n   across the whole range, which is a better basis for the choice than a single\\n   number. Divide and Conquer finds the lowest identity with no mixing at all; that\\n   is a floor, not a recommendation, and Help \\u00B7 How to read these numbers explains\\n   why.\\n\\nSTEP 2 \\u00B7 Open the families\\n   Menu: File \\u00B7 Load Family Cluster File\\n   Needs: the .fcf from step 1.\\n   You can now merge families further by their description words, or build one family\\n   from a keyword list. Both are shown in Layer 1 and neither can be undone, so save\\n   under a new name if you want to keep the previous grouping.\\n\\nSTEP 3 \\u00B7 Attach the quantitation\\n   Layer 2: Load PLP File\\n   Needs: a PatternLab project (.plp) exported at PEPTIDE level. A protein-level\\n   export contains nothing that can be attributed to a family, and every row will\\n   read 0.\\n   Then in Layer 3 choose what the percentages are a share of, choose what to do with\\n   peptides that belong to several families, and press Recalculate. Modes the project\\n   cannot support are greyed out, each with the reason in its own tooltip.\\n\\nSTEP 4 \\u00B7 Take the result away\\n   Export to CSV writes exactly the rows on screen, with the shares as fractions\\n   between 0 and 1 and a dot for the decimal separator, so any program can read them.\\n   File \\u00B7 Save Family Cluster File keeps the grouping for next time.\\n   File \\u00B7 Reanotate Sepro stamps your User ID family numbers into a copy of a SEPro\\n   result package, leaving the original untouched.\\n\\nOPTIONAL \\u00B7 Review de novo evidence\\n   Menu: De Novo evidence\\n   A separate workflow, not a step of the four above. It changes no family, no User ID\\n   and no quantitation, and it needs no Family Cluster File to start. Use it to ask\\n   how the selected de novo calls relate to PatternLab. Its two core steps are:\\n     1. Select PEAKS or DeepNovo and keep calls passing all three filters: minimum\\n        length, the source-native score, and a consecutive local-confidence stretch.\\n     2. Compare them with a SEPro search of the SAME runs. Each kept row comes back\\n        as new territory, a co-isolated second species, a redundant confirmation, an\\n        agreement PatternLab itself scored weakly, or a straight disagreement. The\\n        last two are listed as a review queue, because they are decisions.\\n   The collapsed Standalone run (advanced) section retains extraction, family\\n   attribution and ion-current partitioning for work without a saved project.\\n   That screen has a Help button of its own, and while it is open Help \\u00B7 How to read\\n   these numbers shows its page instead of this one.\\n\u0022,\u0022deNovo\u0022:\u0022WHAT DO I DO FIRST?\\n===================\\n\\nYou are at: De Novo evidence \\u00B7 A separate workflow: select PEAKS or DeepNovo, apply the three source-aware filters, and reconcile the accepted calls with PatternLab by file, scan, charge and precursor m/z. It needs no Family Cluster File and changes no family. The status line at the bottom of the screen says what to do next, and the Help button beside it explains every number this screen shows. To return to the family workflow, use Home \\u00B7 Curate families (the open project stays open) or File \\u00B7 Load Family Cluster File for another one.\\n\\nSTEP 1 \\u00B7 Group the proteins into families\\n   Menu: Run USearch\\n   Needs: a protein database, either a plain .fasta or a target-decoy .T-R file.\\n   Produces: a Family Cluster File (.fcf) written next to the database.\\n   Choose the sequence identity first. 85% is the value the box starts at. \\u0022Scan\\n   identity range\\u0022 shows how the family count and the target/decoy mixing behave\\n   across the whole range, which is a better basis for the choice than a single\\n   number. Divide and Conquer finds the lowest identity with no mixing at all; that\\n   is a floor, not a recommendation, and Help \\u00B7 How to read these numbers explains\\n   why.\\n\\nSTEP 2 \\u00B7 Open the families\\n   Menu: File \\u00B7 Load Family Cluster File\\n   Needs: the .fcf from step 1.\\n   You can now merge families further by their description words, or build one family\\n   from a keyword list. Both are shown in Layer 1 and neither can be undone, so save\\n   under a new name if you want to keep the previous grouping.\\n\\nSTEP 3 \\u00B7 Attach the quantitation\\n   Layer 2: Load PLP File\\n   Needs: a PatternLab project (.plp) exported at PEPTIDE level. A protein-level\\n   export contains nothing that can be attributed to a family, and every row will\\n   read 0.\\n   Then in Layer 3 choose what the percentages are a share of, choose what to do with\\n   peptides that belong to several families, and press Recalculate. Modes the project\\n   cannot support are greyed out, each with the reason in its own tooltip.\\n\\nSTEP 4 \\u00B7 Take the result away\\n   Export to CSV writes exactly the rows on screen, with the shares as fractions\\n   between 0 and 1 and a dot for the decimal separator, so any program can read them.\\n   File \\u00B7 Save Family Cluster File keeps the grouping for next time.\\n   File \\u00B7 Reanotate Sepro stamps your User ID family numbers into a copy of a SEPro\\n   result package, leaving the original untouched.\\n\\nOPTIONAL \\u00B7 Review de novo evidence\\n   Menu: De Novo evidence\\n   A separate workflow, not a step of the four above. It changes no family, no User ID\\n   and no quantitation, and it needs no Family Cluster File to start. Use it to ask\\n   how the selected de novo calls relate to PatternLab. Its two core steps are:\\n     1. Select PEAKS or DeepNovo and keep calls passing all three filters: minimum\\n        length, the source-native score, and a consecutive local-confidence stretch.\\n     2. Compare them with a SEPro search of the SAME runs. Each kept row comes back\\n        as new territory, a co-isolated second species, a redundant confirmation, an\\n        agreement PatternLab itself scored weakly, or a straight disagreement. The\\n        last two are listed as a review queue, because they are decisions.\\n   The collapsed Standalone run (advanced) section retains extraction, family\\n   attribution and ion-current partitioning for work without a saved project.\\n   That screen has a Help button of its own, and while it is open Help \\u00B7 How to read\\n   these numbers shows its page instead of this one.\\n\u0022}; actual={\u0022families\u0022:\u0022WHAT DO I DO FIRST?\\n===================\\n\\nYou are at: Families | Open project | PatternLab project loaded correctly; nothing is required; the table currently shows \\u0022% of identified signal (families sum to 100%)\\u0022; Normalized by: total ion current (TIC) (recorded by the exporter).\\n\\nFamilies loaded. Project: none open. Curate them here, then Analysis \\u003E Compute full XIC gives the project its own quantitation, and Results reads it. Help \\u00B7 How to read these numbers explains every column.\\n\\nProject: none open.\\n\\nCurrent screen status: PatternLab project loaded correctly; nothing is required; the table currently shows \\u0022% of identified signal (families sum to 100%)\\u0022; Normalized by: total ion current (TIC) (recorded by the exporter).\\n\\nSTEP 1 \\u00B7 Group the proteins into families\\n   Menu: File \\u003E New from database\\n   Needs: a protein database, either a plain .fasta or a target-decoy .T-R file.\\n   Produces: a Family Cluster File (.fcf) written next to the database.\\n   Choose database, set identity, then Build families. 85% is the initial value. \\u0022Scan\\n   identity range\\u0022 shows how the family count and the target/decoy mixing behave\\n   across the whole range, which is a better basis for the choice than a single\\n   number. Find lowest identity uses Divide and Conquer to find the lowest identity\\n   with no mixing at all. That is a floor, not a recommendation. Help \\u003E How to read\\n   these numbers explains why.\\n\\nSTEP 2 \\u00B7 Open the families\\n   Menu: File \\u003E Open\\n   Needs: the .fcf from step 1.\\n   You can now merge families further by their description words, or build one family\\n   from a keyword list. Curation changes can be undone in this session. Use Save as\\n   to keep the previous grouping in a separate project.\\n\\nSTEP 3 \\u00B7 Attach the quantitation\\n   Open Quantify to compute or update full XIC for this project.\\n   In Families \\u003E Quantitation use Full XIC \\u003E Share of and Shared peptides.\\n   For the secondary source, open PatternLab (optional) and Load PatternLab project.\\n   PatternLab needs a project (.plp) exported at PEPTIDE level. A protein-level\\n   export contains nothing that can be attributed to a family, and every row will\\n   read 0.\\n   In PatternLab (optional), PatternLab share of chooses what the percentages are a\\n   share of. Choose what to do with peptides that belong to several families, then\\n   press Recalculate. Modes the project cannot support are greyed out, each with\\n   the reason in its own tooltip.\\n\\nSTEP 4 \\u00B7 Take the result away\\n   Export to CSV writes exactly the rows on screen, with the shares as fractions\\n   between 0 and 1 and a dot for the decimal separator, so any program can read them.\\n   File \\u003E Save keeps the project for next time. File \\u003E Export also writes families\\n   for FamilyQuant 1.5 (.fcf), preserving the grouping without stored quantitation.\\n   Analysis \\u003E Reannotate SEPro stamps your User ID family numbers into a copy of a SEPro\\n   result package, leaving the original untouched.\\n\\nOPTIONAL \\u00B7 Review de novo evidence\\n   Menu: Analysis \\u003E De novo evidence\\n   A separate workflow, not a step of the four above. It changes no family, no User ID\\n   and no quantitation, and it needs no Family Cluster File to start. Use it to ask\\n   how the selected de novo calls relate to PatternLab. Its two core steps are:\\n     1. Select PEAKS or DeepNovo and keep calls passing all three filters: minimum\\n        length, the source-native score, and a consecutive local-confidence stretch.\\n     2. Compare them with a SEPro search of the SAME runs. Each kept row comes back\\n        as new territory, a co-isolated second species, a redundant confirmation, an\\n        agreement PatternLab itself scored weakly, or a straight disagreement. The\\n        last two are listed as a review queue, because they are decisions.\\n   Quantify provides extraction and Results reads the ion-current recovery. Family\\n   attribution remains available for de novo work without a saved project.\\n   That screen has a Help button of its own, and while it is open Help \\u00B7 How to read\\n   these numbers shows its page instead of this one.\\n\\nHelp \\u003E Check for updates asks GitHub for the latest public release only when you choose\\nit, and sends nothing but that request. It names a newer version and opens its release\\npage on request; nothing is downloaded or installed.\\n\u0022,\u0022deNovo\u0022:\u0022WHAT DO I DO FIRST?\\n===================\\n\\nYou are at: De novo | Open project\\n\\nDe Novo evidence \\u00B7 A separate workflow: select PEAKS or DeepNovo, apply the three source-aware filters, and reconcile the accepted calls with PatternLab by file, scan, charge and precursor m/z. It needs no Family Cluster File and changes no family. The status line at the bottom of the screen says what to do next, and the Help button beside it explains every number this screen shows. To return to the family workflow, use View \\u003E Families (the open project stays open) or File \\u003E Open for another project or Family Cluster File.\\n\\nProject: none open.\\n\\nSTEP 1 \\u00B7 Group the proteins into families\\n   Menu: File \\u003E New from database\\n   Needs: a protein database, either a plain .fasta or a target-decoy .T-R file.\\n   Produces: a Family Cluster File (.fcf) written next to the database.\\n   Choose database, set identity, then Build families. 85% is the initial value. \\u0022Scan\\n   identity range\\u0022 shows how the family count and the target/decoy mixing behave\\n   across the whole range, which is a better basis for the choice than a single\\n   number. Find lowest identity uses Divide and Conquer to find the lowest identity\\n   with no mixing at all. That is a floor, not a recommendation. Help \\u003E How to read\\n   these numbers explains why.\\n\\nSTEP 2 \\u00B7 Open the families\\n   Menu: File \\u003E Open\\n   Needs: the .fcf from step 1.\\n   You can now merge families further by their description words, or build one family\\n   from a keyword list. Curation changes can be undone in this session. Use Save as\\n   to keep the previous grouping in a separate project.\\n\\nSTEP 3 \\u00B7 Attach the quantitation\\n   Open Quantify to compute or update full XIC for this project.\\n   In Families \\u003E Quantitation use Full XIC \\u003E Share of and Shared peptides.\\n   For the secondary source, open PatternLab (optional) and Load PatternLab project.\\n   PatternLab needs a project (.plp) exported at PEPTIDE level. A protein-level\\n   export contains nothing that can be attributed to a family, and every row will\\n   read 0.\\n   In PatternLab (optional), PatternLab share of chooses what the percentages are a\\n   share of. Choose what to do with peptides that belong to several families, then\\n   press Recalculate. Modes the project cannot support are greyed out, each with\\n   the reason in its own tooltip.\\n\\nSTEP 4 \\u00B7 Take the result away\\n   Export to CSV writes exactly the rows on screen, with the shares as fractions\\n   between 0 and 1 and a dot for the decimal separator, so any program can read them.\\n   File \\u003E Save keeps the project for next time. File \\u003E Export also writes families\\n   for FamilyQuant 1.5 (.fcf), preserving the grouping without stored quantitation.\\n   Analysis \\u003E Reannotate SEPro stamps your User ID family numbers into a copy of a SEPro\\n   result package, leaving the original untouched.\\n\\nOPTIONAL \\u00B7 Review de novo evidence\\n   Menu: Analysis \\u003E De novo evidence\\n   A separate workflow, not a step of the four above. It changes no family, no User ID\\n   and no quantitation, and it needs no Family Cluster File to start. Use it to ask\\n   how the selected de novo calls relate to PatternLab. Its two core steps are:\\n     1. Select PEAKS or DeepNovo and keep calls passing all three filters: minimum\\n        length, the source-native score, and a consecutive local-confidence stretch.\\n     2. Compare them with a SEPro search of the SAME runs. Each kept row comes back\\n        as new territory, a co-isolated second species, a redundant confirmation, an\\n        agreement PatternLab itself scored weakly, or a straight disagreement. The\\n        last two are listed as a review queue, because they are decisions.\\n   Quantify provides extraction and Results reads the ion-current recovery. Family\\n   attribution remains available for de novo work without a saved project.\\n   That screen has a Help button of its own, and while it is open Help \\u00B7 How to read\\n   these numbers shows its page instead of this one.\\n\\nHelp \\u003E Check for updates asks GitHub for the latest public release only when you choose\\nit, and sends nothing but that request. It names a newer version and opens its release\\npage on request; nothing is downloaded or installed.\\n\u0022}"
     },
     {
       "observationId": "FQ15-A5848F93B253",
@@ -8933,7 +9033,7 @@
         {
           "path": "FamilyQuant/AppVersionInfo.cs",
           "symbol": "native behaviour fixture",
-          "sha256": "ACBB2D2F358359B09845992E25DB3FCE18AAF11AC8FBE550D4D04F6476A7C018"
+          "sha256": "D1C2B935AAF6F89EA3AF8A13F2F7CF4E516364E3D39F5568243501A7E8B13E30"
         },
         {
           "path": "FamilyQuant/ArchitectureReviewControl.xaml.cs",
@@ -9248,7 +9348,7 @@
         {
           "path": "FamilyQuant/MainWindow.Help.cs",
           "symbol": "native behaviour fixture",
-          "sha256": "5B7F1864A1F8842801B406641B528793E752553B81480159751C679675F760FF"
+          "sha256": "397841BD2DE9AF88D56E877172E9B392B6E785BBEF9095D30A0FF4229675A501"
         },
         {
           "path": "FamilyQuant/MainWindow.HomologyResults.cs",
@@ -9294,6 +9394,11 @@
           "path": "FamilyQuant/MainWindow.Status.cs",
           "symbol": "native behaviour fixture",
           "sha256": "A13F51B49BD04137DF641A3B6251363646613F8DF04EAE2BE38E0A695D635A19"
+        },
+        {
+          "path": "FamilyQuant/MainWindow.UpdateCheck.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "56D31854A8BF14D8F53E2EBD2EF1EB1608598703C868F8FD7135E3C8F9D8519A"
         },
         {
           "path": "FamilyQuant/MainWindow.ViewModel.cs",
@@ -9498,7 +9603,7 @@
         {
           "path": "FamilyQuant/MainWindow.xaml",
           "symbol": "native behaviour fixture",
-          "sha256": "422DE48434233AA62B67BF4F37326A8F66C6C2771A45A828E40318E09A1806C5"
+          "sha256": "933BF2A60001B362097D40E60990398D1C38FCD94448C9782096C6539F656208"
         },
         {
           "path": "FamilyQuant/QuantifyControl.xaml",
@@ -9686,6 +9791,11 @@
           "sha256": "B51F93ECF6FF874ED17BDAB7E619EAF67691F0C099A5E8A21059C81DE0D086C5"
         },
         {
+          "path": "FamilyQuant.Core/ReleaseUpdateChecker.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "5F37F5722EDEB6B6328881F24FDFF5C134D96935B59D899B20DB046537CE359C"
+        },
+        {
           "path": "FamilyQuant.Core/ReportView.cs",
           "symbol": "native behaviour fixture",
           "sha256": "6DAC5AA56BD69B6BBFE835877140448EC211ADE46C6FBA0F9E018B4BAC3541B9"
@@ -9757,7 +9867,7 @@
           "kind": "test",
           "target": "ShellBehaviour",
           "assertion": "SH behaviour native redundancy completion returns controls and preserves headers",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\sh-behaviour2\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\sh-behaviour2\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -9806,7 +9916,7 @@
         {
           "path": "FamilyQuant/AppVersionInfo.cs",
           "symbol": "native behaviour fixture",
-          "sha256": "ACBB2D2F358359B09845992E25DB3FCE18AAF11AC8FBE550D4D04F6476A7C018"
+          "sha256": "D1C2B935AAF6F89EA3AF8A13F2F7CF4E516364E3D39F5568243501A7E8B13E30"
         },
         {
           "path": "FamilyQuant/ArchitectureReviewControl.xaml.cs",
@@ -10121,7 +10231,7 @@
         {
           "path": "FamilyQuant/MainWindow.Help.cs",
           "symbol": "native behaviour fixture",
-          "sha256": "5B7F1864A1F8842801B406641B528793E752553B81480159751C679675F760FF"
+          "sha256": "397841BD2DE9AF88D56E877172E9B392B6E785BBEF9095D30A0FF4229675A501"
         },
         {
           "path": "FamilyQuant/MainWindow.HomologyResults.cs",
@@ -10167,6 +10277,11 @@
           "path": "FamilyQuant/MainWindow.Status.cs",
           "symbol": "native behaviour fixture",
           "sha256": "A13F51B49BD04137DF641A3B6251363646613F8DF04EAE2BE38E0A695D635A19"
+        },
+        {
+          "path": "FamilyQuant/MainWindow.UpdateCheck.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "56D31854A8BF14D8F53E2EBD2EF1EB1608598703C868F8FD7135E3C8F9D8519A"
         },
         {
           "path": "FamilyQuant/MainWindow.ViewModel.cs",
@@ -10371,7 +10486,7 @@
         {
           "path": "FamilyQuant/MainWindow.xaml",
           "symbol": "native behaviour fixture",
-          "sha256": "422DE48434233AA62B67BF4F37326A8F66C6C2771A45A828E40318E09A1806C5"
+          "sha256": "933BF2A60001B362097D40E60990398D1C38FCD94448C9782096C6539F656208"
         },
         {
           "path": "FamilyQuant/QuantifyControl.xaml",
@@ -10559,6 +10674,11 @@
           "sha256": "B51F93ECF6FF874ED17BDAB7E619EAF67691F0C099A5E8A21059C81DE0D086C5"
         },
         {
+          "path": "FamilyQuant.Core/ReleaseUpdateChecker.cs",
+          "symbol": "native behaviour fixture",
+          "sha256": "5F37F5722EDEB6B6328881F24FDFF5C134D96935B59D899B20DB046537CE359C"
+        },
+        {
           "path": "FamilyQuant.Core/ReportView.cs",
           "symbol": "native behaviour fixture",
           "sha256": "6DAC5AA56BD69B6BBFE835877140448EC211ADE46C6FBA0F9E018B4BAC3541B9"
@@ -10630,7 +10750,7 @@
           "kind": "test",
           "target": "ShellBehaviour",
           "assertion": "SH behaviour native redundancy completion returns controls and preserves headers",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\sh-behaviour2\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\sh-behaviour2\\proofs.log",
           "inspectedBy": ""
         }
       ],

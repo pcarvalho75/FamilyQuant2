@@ -5,49 +5,49 @@
   "runs": [
     {
       "id": "RS-C13-native-tooltips",
-      "command": "C:\\FamilyQuant-gate\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --test-results-tooltips D:/FamilyQuant-data/out-refresh\\20261102-174442-FamilyQuant-gate\\results-tooltips \u00222026-11-02 17:47:30 -0800\u0022",
-      "executedAt": "2026-11-02 17:47:30 -0800",
-      "commit": "0255e09ed407d2a8153e26bc9317281c2df8774e",
+      "command": "C:\\FamilyQuant-gate\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --test-results-tooltips D:/FamilyQuant-data/out-refresh\\20261102-182444-FamilyQuant-gate\\results-tooltips \u00222026-11-02 18:28:31 -0800\u0022",
+      "executedAt": "2026-11-02 18:28:31 -0800",
+      "commit": "8421552b22169f5b7ab3c44f2670c992e5e4562c",
       "artifacts": [
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\results-tooltips\\proofs.log",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\results-tooltips\\proofs.log",
           "sha256": "E7E2C6AF6AF69A862726494C6A4566240115C0B92612FF471822D2ECB93FB030"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\results-tooltips\\executed\\FamilyQuant_ClusterGenerationControl.Presentation.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\results-tooltips\\executed\\FamilyQuant_ClusterGenerationControl.Presentation.cs",
           "sha256": "163C3F79EC1A4885705484E029FB1814589A70F3A709C47680245E111BA4BB37"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\results-tooltips\\executed\\FamilyQuant_RecoveryChart.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\results-tooltips\\executed\\FamilyQuant_RecoveryChart.cs",
           "sha256": "F39E00E4455E67A05AC77A8324D51819C3C343FB95B183DCD93D6A5B9D5FAB6A"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\results-tooltips\\executed\\FamilyQuant_IsotopeCountChart.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\results-tooltips\\executed\\FamilyQuant_IsotopeCountChart.cs",
           "sha256": "C18B470572D3647F4B9007B8170702C5F231BCB62989EBD6662825DCE7AF17EF"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\results-tooltips\\executed\\FamilyQuant.Tests_Program.ResultsTooltips.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\results-tooltips\\executed\\FamilyQuant.Tests_Program.ResultsTooltips.cs",
           "sha256": "8675FD6ECCCEFDC3AB62D8017C702B6F74401AA509AE478A31DB100F552CFF33"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\results-tooltips\\executed\\FamilyQuant.Tests_Program.ResultsTooltipProof.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\results-tooltips\\executed\\FamilyQuant.Tests_Program.ResultsTooltipProof.cs",
           "sha256": "D4282B196CBB0EE6B9EFB4C68ECB49536A3AC2B5C920CBD9BAD34ADA0EAB7AFE"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\results-tooltips\\executed\\FamilyQuant.Tests_Program.Commands.ResultsTooltips.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\results-tooltips\\executed\\FamilyQuant.Tests_Program.Commands.ResultsTooltips.cs",
           "sha256": "C5EED2A7A19CE30329501BEF6514E253025C2CA92CA90CBA05590D977331BF94"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\results-tooltips\\executed\\FamilyQuant.Tests.dll",
-          "sha256": "661F0CB7809E1866C73DE96EF1FC7F1453325D70D6A950EE454AE056FEDC042E"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\results-tooltips\\executed\\FamilyQuant.Tests.dll",
+          "sha256": "6F2762D3760DB80C7EF95E01791ADDCF311D2A58137A9797910B10F57606C080"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\results-tooltips\\executed\\FamilyQuant2.dll",
-          "sha256": "9B6C4DBC3D3851BB668F6BC15C8268CBB55413DC1155DFEAE9D316E1A00610A7"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\results-tooltips\\executed\\FamilyQuant2.dll",
+          "sha256": "FA5B9E3A6B3879ADA83165E6E6CC644E900DB0E72E59E11263D15871663B55AD"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\results-tooltips\\executed\\FamilyQuant.Core.dll",
-          "sha256": "F8F2936F4B51F1EBE9C1FE18ED1B27D2C9DF922317E94B6418E68E62AF722441"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\results-tooltips\\executed\\FamilyQuant.Core.dll",
+          "sha256": "BB2B0CAA4935237DB0CAE13B8BC6177D08BDFB963839063CE2B5D5E240F9B4BA"
         }
       ],
       "workingDirectory": "C:\\FamilyQuant-gate"
@@ -69,7 +69,7 @@
           "kind": "test",
           "target": "ResultsTooltipTests",
           "assertion": "isotope count tooltip retains each required fact and its dynamic default",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\results-tooltips\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\results-tooltips\\proofs.log",
           "inspectedBy": ""
         },
         {
@@ -77,7 +77,7 @@
           "kind": "test",
           "target": "ResultsTooltipTests",
           "assertion": "isotope count tooltip has at most two sentences",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\results-tooltips\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\results-tooltips\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -100,7 +100,7 @@
           "kind": "test",
           "target": "ResultsTooltipTests",
           "assertion": "isotope count tooltip retains each required fact and its dynamic default",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\results-tooltips\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\results-tooltips\\proofs.log",
           "inspectedBy": ""
         },
         {
@@ -108,7 +108,7 @@
           "kind": "test",
           "target": "ResultsTooltipTests",
           "assertion": "isotope count tooltip has at most two sentences",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\results-tooltips\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\results-tooltips\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -131,7 +131,7 @@
           "kind": "test",
           "target": "ResultsTooltipTests",
           "assertion": "isotope count tooltip retains each required fact and its dynamic default",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\results-tooltips\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\results-tooltips\\proofs.log",
           "inspectedBy": ""
         },
         {
@@ -139,7 +139,7 @@
           "kind": "test",
           "target": "ResultsTooltipTests",
           "assertion": "isotope count tooltip has at most two sentences",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\results-tooltips\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\results-tooltips\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -162,7 +162,7 @@
           "kind": "test",
           "target": "ResultsTooltipTests",
           "assertion": "recovery tooltip retains each required fact and its dynamic default",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\results-tooltips\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\results-tooltips\\proofs.log",
           "inspectedBy": ""
         },
         {
@@ -170,7 +170,7 @@
           "kind": "test",
           "target": "ResultsTooltipTests",
           "assertion": "recovery tooltip has at most two sentences",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\results-tooltips\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\results-tooltips\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -193,7 +193,7 @@
           "kind": "test",
           "target": "ResultsTooltipTests",
           "assertion": "recovery tooltip retains each required fact and its dynamic default",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\results-tooltips\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\results-tooltips\\proofs.log",
           "inspectedBy": ""
         },
         {
@@ -201,7 +201,7 @@
           "kind": "test",
           "target": "ResultsTooltipTests",
           "assertion": "recovery tooltip has at most two sentences",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\results-tooltips\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\results-tooltips\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -224,7 +224,7 @@
           "kind": "test",
           "target": "ResultsTooltipTests",
           "assertion": "recovery tooltip retains each required fact and its dynamic default",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\results-tooltips\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\results-tooltips\\proofs.log",
           "inspectedBy": ""
         },
         {
@@ -232,7 +232,7 @@
           "kind": "test",
           "target": "ResultsTooltipTests",
           "assertion": "recovery tooltip has at most two sentences",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\results-tooltips\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\results-tooltips\\proofs.log",
           "inspectedBy": ""
         }
       ],
@@ -255,7 +255,7 @@
           "kind": "test",
           "target": "ResultsTooltipTests",
           "assertion": "recovery tooltip retains each required fact and its dynamic default",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\results-tooltips\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\results-tooltips\\proofs.log",
           "inspectedBy": ""
         },
         {
@@ -263,7 +263,7 @@
           "kind": "test",
           "target": "ResultsTooltipTests",
           "assertion": "recovery tooltip has at most two sentences",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\results-tooltips\\proofs.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\results-tooltips\\proofs.log",
           "inspectedBy": ""
         }
       ],

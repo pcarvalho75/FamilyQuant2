@@ -5,16 +5,16 @@
   "runs": [
     {
       "id": "declarations",
-      "command": "C:\\FamilyQuant-gate\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --ledger-declaration-compare D:/FamilyQuant-data/out-shell/N3/source C:\\FamilyQuant-gate D:/FamilyQuant-data/out-refresh\\20261102-174442-FamilyQuant-gate\\shell-tooltip-declarations SH-C13-tooltip FamilyQuant/MainWindow.xaml \u00222026-11-02 17:47:36 -0800\u0022",
-      "executedAt": "2026-11-02 17:47:36 -0800",
-      "commit": "0255e09ed407d2a8153e26bc9317281c2df8774e",
+      "command": "C:\\FamilyQuant-gate\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --ledger-declaration-compare D:/FamilyQuant-data/out-shell/N3/source C:\\FamilyQuant-gate D:/FamilyQuant-data/out-refresh\\20261102-182444-FamilyQuant-gate\\shell-tooltip-declarations SH-C13-tooltip FamilyQuant/MainWindow.xaml \u00222026-11-02 18:28:42 -0800\u0022",
+      "executedAt": "2026-11-02 18:28:42 -0800",
+      "commit": "8421552b22169f5b7ab3c44f2670c992e5e4562c",
       "artifacts": [
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\shell-tooltip-declarations\\comparisons.log",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\shell-tooltip-declarations\\comparisons.log",
           "sha256": "04F8B3F7EF578BB800A3D167185DD4A93BDC1924A23D37AB85800F815E9296C9"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\shell-tooltip-declarations\\comparisons.json",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\shell-tooltip-declarations\\comparisons.json",
           "sha256": "98C65AD25B6E3A844579B48F6BC40A0382C9A0CB29B991E079E3A673DC2B8D14"
         }
       ],
@@ -148,7 +148,7 @@
         {
           "path": "FamilyQuant/MainWindow.xaml",
           "symbol": "FamilyQuant.MainWindow.MenuItemSaveProject.IsEnabled",
-          "sha256": "422DE48434233AA62B67BF4F37326A8F66C6C2771A45A828E40318E09A1806C5"
+          "sha256": "933BF2A60001B362097D40E60990398D1C38FCD94448C9782096C6539F656208"
         }
       ],
       "proofs": [],
@@ -194,7 +194,7 @@
         {
           "path": "FamilyQuant/MainWindow.xaml",
           "symbol": "FamilyQuant.MainWindow.MenuItemSaveFCF.IsEnabled",
-          "sha256": "422DE48434233AA62B67BF4F37326A8F66C6C2771A45A828E40318E09A1806C5"
+          "sha256": "933BF2A60001B362097D40E60990398D1C38FCD94448C9782096C6539F656208"
         }
       ],
       "proofs": [],
@@ -240,7 +240,7 @@
         {
           "path": "FamilyQuant/MainWindow.xaml",
           "symbol": "FamilyQuant.MainWindow.MenuItemComputeXic.IsEnabled",
-          "sha256": "422DE48434233AA62B67BF4F37326A8F66C6C2771A45A828E40318E09A1806C5"
+          "sha256": "933BF2A60001B362097D40E60990398D1C38FCD94448C9782096C6539F656208"
         }
       ],
       "proofs": [],
@@ -286,7 +286,7 @@
         {
           "path": "FamilyQuant/MainWindow.xaml",
           "symbol": "FamilyQuant.MainWindow.MenuItemSpectrumComparison.IsEnabled",
-          "sha256": "422DE48434233AA62B67BF4F37326A8F66C6C2771A45A828E40318E09A1806C5"
+          "sha256": "933BF2A60001B362097D40E60990398D1C38FCD94448C9782096C6539F656208"
         }
       ],
       "proofs": [],
@@ -332,7 +332,7 @@
         {
           "path": "FamilyQuant/MainWindow.xaml",
           "symbol": "FamilyQuant.MainWindow.MenuItemReanotateSEPro.IsEnabled",
-          "sha256": "422DE48434233AA62B67BF4F37326A8F66C6C2771A45A828E40318E09A1806C5"
+          "sha256": "933BF2A60001B362097D40E60990398D1C38FCD94448C9782096C6539F656208"
         }
       ],
       "proofs": [],
@@ -442,7 +442,7 @@
         {
           "path": "FamilyQuant/MainWindow.xaml",
           "symbol": "FamilyQuant.MainWindow.MenuItemHelp.Header",
-          "sha256": "422DE48434233AA62B67BF4F37326A8F66C6C2771A45A828E40318E09A1806C5"
+          "sha256": "933BF2A60001B362097D40E60990398D1C38FCD94448C9782096C6539F656208"
         }
       ],
       "proofs": [],
@@ -464,7 +464,7 @@
         {
           "path": "FamilyQuant/MainWindow.xaml",
           "symbol": "FamilyQuant.MainWindow.MenuItemHowToRead.Header",
-          "sha256": "422DE48434233AA62B67BF4F37326A8F66C6C2771A45A828E40318E09A1806C5"
+          "sha256": "933BF2A60001B362097D40E60990398D1C38FCD94448C9782096C6539F656208"
         }
       ],
       "proofs": [],
@@ -502,7 +502,7 @@
         {
           "path": "FamilyQuant/MainWindow.xaml",
           "symbol": "FamilyQuant.MainWindow.MenuItemWhereAmI.Header",
-          "sha256": "422DE48434233AA62B67BF4F37326A8F66C6C2771A45A828E40318E09A1806C5"
+          "sha256": "933BF2A60001B362097D40E60990398D1C38FCD94448C9782096C6539F656208"
         }
       ],
       "proofs": [],
@@ -2257,7 +2257,7 @@
           "kind": "test",
           "target": "LedgerDeclarationCommand",
           "assertion": "declaration kind option/copy: every listed named property agrees",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\shell-tooltip-declarations\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\shell-tooltip-declarations\\comparisons.log",
           "inspectedBy": ""
         }
       ]

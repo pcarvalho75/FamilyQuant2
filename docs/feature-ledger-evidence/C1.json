@@ -5,61 +5,61 @@
   "runs": [
     {
       "id": "shell-declarations",
-      "command": "C:\\FamilyQuant-gate\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --ledger-shell-compare D:/FamilyQuant-data/out-shell/N3/source D:/FamilyQuant-data/out-refresh\\20261102-174442-FamilyQuant-gate\\shell-compare \u00222026-11-02 17:45:46 -0800\u0022",
-      "executedAt": "2026-11-02 17:45:46 -0800",
-      "commit": "0255e09ed407d2a8153e26bc9317281c2df8774e",
+      "command": "C:\\FamilyQuant-gate\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --ledger-shell-compare D:/FamilyQuant-data/out-shell/N3/source D:/FamilyQuant-data/out-refresh\\20261102-182444-FamilyQuant-gate\\shell-compare \u00222026-11-02 18:26:14 -0800\u0022",
+      "executedAt": "2026-11-02 18:26:14 -0800",
+      "commit": "8421552b22169f5b7ab3c44f2670c992e5e4562c",
       "artifacts": [
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\shell-compare\\comparisons.log",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\shell-compare\\comparisons.log",
           "sha256": "6E2FC1C285797B04CD40173760BB02C74834533D9CDCEF564C4870AB0A2AC5DA"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\shell-compare\\comparisons.json",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\shell-compare\\comparisons.json",
           "sha256": "32E29184EDCFC4BFA11BD829AB498821A316F9EC51D83180417837A112F13C36"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\shell-compare\\curation-runtime.json",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\shell-compare\\curation-runtime.json",
           "sha256": "4EF1BCE9EAFF5985013CD15A6B1CBFA29C34D7D42702007E522840A20879D128"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\shell-compare\\executed\\Program.ShellLedgerReceipts.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\shell-compare\\executed\\Program.ShellLedgerReceipts.cs",
           "sha256": "6C0E1250A4A019C4937A0CABEF9BA9078213B35E597781407B767279490D3EF3"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\shell-compare\\executed\\Program.ShellLedgerComparison.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\shell-compare\\executed\\Program.ShellLedgerComparison.cs",
           "sha256": "869FC668090431A23D08E8ED109B95BC937D9A6B94DE63E11E86672852649FEB"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\shell-compare\\executed\\Program.Commands.LedgerDeclarations.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\shell-compare\\executed\\Program.Commands.LedgerDeclarations.cs",
           "sha256": "5F18F4DD7E56E601368051AAD44866736DE2FA60C17A5550F4A330C98DABB3D4"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\shell-compare\\executed\\Program.CurationScreen.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\shell-compare\\executed\\Program.CurationScreen.cs",
           "sha256": "42C2CC3D48F2E59DC8E48D06915FE933C6A025F48972FDC3FB0458A0284FA2FF"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\shell-compare\\executed\\LedgerDeclarationComparison.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\shell-compare\\executed\\LedgerDeclarationComparison.cs",
           "sha256": "78EC993565740269D572410A84584AF1D96488C1AE81F2455B1D9AA2D94BB4C3"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\shell-compare\\executed\\LedgerMemberFactComparison.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\shell-compare\\executed\\LedgerMemberFactComparison.cs",
           "sha256": "1F3254D635B40D22576E9F40347DBEB503A5FF661EFC18E743EAC35B097FC14C"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\shell-compare\\executed\\FeatureLedgerEvidence.Reporting.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\shell-compare\\executed\\FeatureLedgerEvidence.Reporting.cs",
           "sha256": "E9A4F3A2A671452283E1C28E155B81DEF97F9BAE907945607C1F16DD0078CC12"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\shell-compare\\executed\\FamilyQuant.Tests.dll",
-          "sha256": "661F0CB7809E1866C73DE96EF1FC7F1453325D70D6A950EE454AE056FEDC042E"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\shell-compare\\executed\\FamilyQuant.Tests.dll",
+          "sha256": "6F2762D3760DB80C7EF95E01791ADDCF311D2A58137A9797910B10F57606C080"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\shell-compare\\executed\\FamilyQuant2.dll",
-          "sha256": "9B6C4DBC3D3851BB668F6BC15C8268CBB55413DC1155DFEAE9D316E1A00610A7"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\shell-compare\\executed\\FamilyQuant2.dll",
+          "sha256": "FA5B9E3A6B3879ADA83165E6E6CC644E900DB0E72E59E11263D15871663B55AD"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\shell-compare\\executed\\FamilyQuant.Core.dll",
-          "sha256": "F8F2936F4B51F1EBE9C1FE18ED1B27D2C9DF922317E94B6418E68E62AF722441"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\shell-compare\\executed\\FamilyQuant.Core.dll",
+          "sha256": "BB2B0CAA4935237DB0CAE13B8BC6177D08BDFB963839063CE2B5D5E240F9B4BA"
         }
       ],
       "workingDirectory": "C:\\FamilyQuant-gate"
@@ -157,7 +157,7 @@
           "kind": "test",
           "target": "CurationScreenTests",
           "assertion": "a native protein annotation edit marks the document and records one Undo step",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\shell-compare\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\shell-compare\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -2150,7 +2150,7 @@
           "kind": "test",
           "target": "CurationScreenTests",
           "assertion": "curation shows accession in Locus while retaining the complete protein identifier",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\shell-compare\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\shell-compare\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -2937,7 +2937,7 @@
           "kind": "test",
           "target": "CurationScreenTests",
           "assertion": "a native protein annotation edit marks the document and records one Undo step",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\shell-compare\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\shell-compare\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -3630,7 +3630,7 @@
           "kind": "test",
           "target": "CurationScreenTests",
           "assertion": "Undo restores the edited protein annotation and emits one more document change",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\shell-compare\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\shell-compare\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -3741,7 +3741,7 @@
           "kind": "test",
           "target": "CurationScreenTests",
           "assertion": "curation hides search IDs and decoys by default while keeping all document rows",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\shell-compare\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\shell-compare\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -3902,7 +3902,7 @@
           "kind": "test",
           "target": "CurationScreenTests",
           "assertion": "curation hides search IDs and decoys by default while keeping all document rows",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\shell-compare\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\shell-compare\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -4369,7 +4369,7 @@
           "kind": "test",
           "target": "CurationScreenTests",
           "assertion": "curation always shows its table without Controls or Data Browser tabs",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\shell-compare\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\shell-compare\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -4460,7 +4460,7 @@
           "kind": "test",
           "target": "CurationScreenTests",
           "assertion": "curation shows accession in Locus while retaining the complete protein identifier",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\shell-compare\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\shell-compare\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -4563,7 +4563,7 @@
           "kind": "test",
           "target": "CurationScreenTests",
           "assertion": "Undo restores the edited protein annotation and emits one more document change",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\shell-compare\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\shell-compare\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -4628,7 +4628,7 @@
           "kind": "test",
           "target": "CurationScreenTests",
           "assertion": "Undo restores the edited protein annotation and emits one more document change",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\shell-compare\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\shell-compare\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -5171,7 +5171,7 @@
           "kind": "test",
           "target": "ShellLedgerComparisonCommand",
           "assertion": "shell declaration kind code fact: every listed matched observation retains its exact declaration",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\shell-compare\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\shell-compare\\comparisons.log",
           "inspectedBy": ""
         }
       ]
@@ -5185,7 +5185,7 @@
           "kind": "test",
           "target": "ShellLedgerComparisonCommand",
           "assertion": "shell declaration kind column: every listed matched observation retains its exact declaration",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\shell-compare\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\shell-compare\\comparisons.log",
           "inspectedBy": ""
         }
       ]
@@ -5199,7 +5199,7 @@
           "kind": "test",
           "target": "ShellLedgerComparisonCommand",
           "assertion": "shell declaration kind option/copy: every listed matched observation retains its exact declaration",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\shell-compare\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\shell-compare\\comparisons.log",
           "inspectedBy": ""
         }
       ]
@@ -5213,7 +5213,7 @@
           "kind": "test",
           "target": "ShellLedgerComparisonCommand",
           "assertion": "shell declaration kind tooltip: every listed matched observation retains its exact declaration",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-174442-FamilyQuant-gate\\shell-compare\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\shell-compare\\comparisons.log",
           "inspectedBy": ""
         }
       ]
