@@ -14,6 +14,15 @@ internal static partial class Program
     [TestCommandTable]
     private static IEnumerable<TestCommand> FigureLimitCommands() => new[]
     {
+        new TestCommand("--test-small-figure-package", 10478, TestCommandPhase.Normalized,
+            args => args.Contains("--test-small-figure-package", StringComparer.Ordinal), (_, work) =>
+            {
+                string fresh = Path.Combine(work, "small-figure-package-" + Guid.NewGuid().ToString("N"));
+                ResultsPreservationTests(Path.Combine(fresh, "native"));
+                ChartImageExportTests(Path.Combine(fresh, "images"));
+                Console.WriteLine($"{passed} passed, {failed} failed, {skipped} skipped");
+                return failed == 0 ? 0 : 1;
+            }),
         new TestCommand("--test-figure-limits", 10479, TestCommandPhase.Normalized,
             args => args.Contains("--test-figure-limits", StringComparer.Ordinal), (_, work) =>
             {
@@ -132,6 +141,21 @@ internal static partial class Program
                 && s.Table.Rows.Count > 2000));
         if (uniqueIds) File.WriteAllBytes(Path.Combine(folder, "assembled_supplement.xlsx"),
             ReportSupplementWorkbook.BuildBytes(assembled.Document, assembled.SupplementSheets));
+        string boundedFolder = Path.Combine(folder, "bounded-results-" + Guid.NewGuid().ToString("N"));
+        var boundedModel = new AnalyticsViewModel(SyntheticAnalyticsRows(), new QuantManifest { FamilyRunShares = new()
+        {
+            Families = rows.Select(r => new FamilyRunShareSummary { FamilyUserId = int.Parse(r.Key, CultureInfo.InvariantCulture),
+                MeanShare = r.MeanPercent / 100, AvailableRunCount = 1 }).ToList()
+        } }) { ExportKind = ResultsExportKind.Figures };
+        boundedModel.Export(boundedFolder);
+        Check("bounded Results export still writes the complete reference sidecar", boundedModel.Status.StartsWith("Written to ", StringComparison.Ordinal)
+            && File.Exists(Path.Combine(boundedFolder, FigureLayout.DetailFileName)));
+        var fullReference = ReportCsvTable.Build("complete", "Complete data", File.ReadAllText(Path.Combine(boundedFolder, FigureLayout.DetailFileName)), "");
+        Check("bounded sidecar retains all original family rows", fullReference.Rows.Count(r => r[0] == "family_composition.png" && r[1] == "family") == 1200);
+        string smallFolder = Path.Combine(folder, "small-save-" + Guid.NewGuid().ToString("N"));
+        var smallFiles = FamilyCompositionFigures.Save(new FamilyCompositionData(mean.Families.Take(3), mean.Basis), smallFolder);
+        Check("uncapped figure Save retains its PNG-only package", Directory.GetFiles(smallFolder).Length == smallFiles.Count
+            && Directory.GetFiles(smallFolder).All(p => p.EndsWith(".png", StringComparison.Ordinal)));
     }
 
     private static void ProjectFigureExportTests(string projectPath, string folder, bool planOnly, bool reportFiguresOnly)

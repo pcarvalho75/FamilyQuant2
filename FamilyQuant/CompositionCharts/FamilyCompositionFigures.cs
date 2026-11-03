@@ -38,7 +38,8 @@ public static partial class FamilyCompositionFigures
     {
         Directory.CreateDirectory(folder);
         var figures = Build(data, pooledSubclasses);
-        File.WriteAllText(Path.Combine(folder, FigureLayout.DetailFileName), FigureDetailsCsv.Build(figures));
+        if (figures.Any(f => f.Chart is IFigureDetails details && details.DetailNotice.Length > 0))
+            File.WriteAllText(Path.Combine(folder, FigureLayout.DetailFileName), FigureDetailsCsv.Build(figures));
         return figures.Select(f =>
         {
             string path = Path.Combine(folder, f.FileName); File.WriteAllBytes(path, RenderPng(f)); return path;
