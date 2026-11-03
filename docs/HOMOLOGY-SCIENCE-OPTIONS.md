@@ -81,3 +81,43 @@ on a missing required query. `RunLengthsFromResults`, `KnownAnswersFromResults`,
 error-rate and composition code. Native fixture comparisons preserve every pass
 and summary byte. These entry points do not extract RAW data or silently treat a
 missing search as no signal.
+
+`--homology-science-study <config.json>` is a selected-input native study command.
+It verifies all captured database/query/options/result files against their recorded
+hashes and requires the completed five-call frozen-reference certificate. It
+loads the saved quantitation, feeds replay hits through `CurationHomologyCache.FromReplay`,
+verifies ordinary J28 hot-cache reuse, then uses J38c's prepared-peptide attribution,
+the existing per-run family shares, explicit unobserved panel rows and the native
+world/known-answer composition. It never extracts RAW data or calls full Compute.
+OFF completion must equal the available stored quantitative views, not merely
+the search hits. Unavailable effective-panel output remains unavailable.
+
+`FromReplay` rejects a different current database, incomplete query coverage and
+invalid protein/offset/original-span matches before writing the native compact
+cache. Its focused fixtures also compare native attribution and cache reuse.
+Cached world completion rejects null or missing required search-result inputs.
+
+The optional `ReuseResultsDirectory` reuses an already completed measured packet
+only for the same project SHA and science settings, and verifies every reused
+scientific result hash. This permits adding diagnostics without repeating the
+expensive tag search. The replayed result audit is retained. If curation changes
+the residual cohort, the world calculation searches any new queries; a calibrated
+length gate refits that whole affected world cohort because its support depends
+on the cohort. `actual-world-results.json.gz`, `actual-world-length-gates.json`
+and `actual-world-gate-summary.json` distinguish this cohort from captured call 3.
+
+Unsupported length bins retain the exploration observations in their audit, but
+have no applied gate. They are excluded from the native study's admitted target
+and decoy gate counts. Abstentions and their reasons remain explicit. Gate D/T
+counts distinct queries with an admitted protein on each side and allows overlap;
+it is not a statistical error estimate. Database-gap envelope ratios and strict
+known-answer wrong/landed rates retain their separate native denominators.
+
+`--compare-homology-science-studies <project> <off> <tier> <length> <tag> <fresh-output>`
+requires four completed packets with the same project SHA, the approved separate
+settings and retained identified/OFF search hashes. It writes a before/after
+Markdown table and JSON for headlines, every family share and multiplicity.
+Multiplicity uses the native `MapToFamilies` target-member join. It copies J42's
+recorded audit/provenance and labels that path structurally invariant, not newly
+recomputed. No output changes a project, a production default or the user's
+chosen family grouping. Science review and Paulo's default decision remain open.

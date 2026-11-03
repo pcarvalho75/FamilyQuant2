@@ -172,7 +172,8 @@ namespace FamilyQuant
             IReadOnlyDictionary<string, Homology.HomologyResult> holders, IReadOnlyDictionary<string, Homology.HomologyResult> tags,
             OperationContext? operation = null)
             => CompleteLengthsCore(firstPass, passes, curation, spectra, world, worldRelease, ownSpecies, options,
-                minimumKnownCredits, operation, holders, tags);
+                minimumKnownCredits, operation, holders ?? throw new ArgumentNullException(nameof(holders)),
+                tags ?? throw new ArgumentNullException(nameof(tags)));
 
         private static FamilyWorldAnalysisResult CompleteLengthsCore(FamilyPeptideAttribution firstPass, IReadOnlyList<FamilyWorldPassResult> passes,
             FamilyClusterFile curation, IEnumerable<SpectrumComparisonRow> spectra, FamilyWorld world, string worldRelease,

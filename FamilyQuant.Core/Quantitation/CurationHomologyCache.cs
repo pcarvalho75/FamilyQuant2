@@ -14,7 +14,7 @@ using System.Threading;
 namespace FamilyQuant;
 
 /// <summary>Disposable external cache of compact curation hits. A miss or invalid file searches normally.</summary>
-public static class CurationHomologyCache
+public static partial class CurationHomologyCache
 {
     // Bump whenever the search, serialization or localization semantics change.
     private const string Format = "FamilyQuant curation hits v1";

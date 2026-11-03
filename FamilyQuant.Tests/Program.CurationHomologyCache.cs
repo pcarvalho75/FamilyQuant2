@@ -61,6 +61,24 @@ internal static partial class Program
             JsonSerializer.SerializeToUtf8Bytes(FamilyEnvelopeQuant.BuildFromAttribution(input, FamilyEnvelopeQuant.AttributeHits(hits, proteins)));
         CurationHomologyHits fresh = FamilyEnvelopeQuant.SearchCuration(first.quant, first.fcf);
         byte[] expected = Shares(first.quant, first.fcf, fresh);
+        var replayDatabase = HomologyDatabase.Build(first.fcf.MyExtendedFastaItems);
+        var replayOptions = new HomologyOptions { TopHitsPerPeptide = int.MaxValue };
+        var replayIdentifiedOptions = replayOptions.Clone(); replayIdentifiedOptions.BestScoreOnly = true;
+        var replayIdentified = HomologySearch.Search(first.quant.Where(r => r.Side == NativeQuantFractions.SideIdentified).Select(r => DeNovoReconciler.NormalizeSequence(r.Sequence)), replayDatabase, replayIdentifiedOptions);
+        var replayDeNovo = HomologySearch.Search(first.quant.Where(r => r.Side == NativeQuantFractions.SideDeNovo).Select(r => DeNovoReconciler.NormalizeSequence(r.Sequence)), replayDatabase, replayOptions);
+        string replayCache = Path.Combine(root, "replay-cache");
+        var replayed = CurationHomologyCache.FromReplay(first.quant, first.fcf, replayDatabase, replayIdentified, replayDeNovo, replayCache);
+        Check("J47 replay compact cache reproduces fresh attribution", Shares(first.quant, first.fcf, replayed).SequenceEqual(expected));
+        bool replayHit = false;
+        CurationHomologyCache.GetOrSearch(first.quant, first.fcf, replayCache, progress: hit => replayHit = hit);
+        Check("J47 replay compact cache takes the ordinary native hot path", replayHit);
+        bool missingReplayRejected = false, changedReplayDatabaseRejected = false;
+        try { CurationHomologyCache.FromReplay(first.quant, first.fcf, replayDatabase, replayIdentified, Array.Empty<HomologyResult>(), replayCache); }
+        catch (ArgumentException) { missingReplayRejected = true; }
+        try { CurationHomologyCache.FromReplay(first.quant, first.fcf, HomologyDatabase.Build(new[] { ("other", "AAAAAA") }), replayIdentified, replayDeNovo, replayCache); }
+        catch (ArgumentException) { changedReplayDatabaseRejected = true; }
+        Check("J47 replay rejects missing query coverage before cache publication", missingReplayRejected);
+        Check("J47 replay rejects a different curation database", changedReplayDatabaseRejected);
         CurationHomologyHits initial = Get(first.quant, first.fcf);
         Check("J28 cache miss performs a fresh search", outcome == false);
         Check("J28 cached search equals the independent fresh family result byte for byte", Shares(first.quant, first.fcf, initial).SequenceEqual(expected));
