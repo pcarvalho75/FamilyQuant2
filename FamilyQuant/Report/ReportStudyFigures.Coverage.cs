@@ -63,6 +63,6 @@ public static partial class ReportStudyFigures
             foreach (var family in localization.Families.Where(f => !map.UserFamilies.TryGetValue(f.FamilyUserId, out var link)
                 || link.HasConflict || link.PanelFamilyKey == null))
                 unavailable.Add(new(ReportSectionIds.Results, "Protein coverage: group " + family.FamilyUserId.ToString(CultureInfo.InvariantCulture),
-                    "Panel membership is outside the panel or conflicting; no panel-family placement was guessed."));
+                    "Panel membership is outside the panel or conflicting; no panel-family placement was guessed.") { SupplementOnly = true });
     }
 }
