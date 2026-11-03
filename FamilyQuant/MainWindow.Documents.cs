@@ -73,6 +73,9 @@ public partial class MainWindow
                 owner.loadedQuant = quant;
                 owner.loadedManifest = manifest;
                 owner.loadedCuration = loaded.fcf;
+                owner.openedDatabaseFileName = loaded.fcf.ReportInputProvenance?.DatabaseFileName;
+                if (!ProjectStore.IsProjectPath(path) && string.IsNullOrEmpty(owner.openedDatabaseFileName))
+                    owner.openedDatabaseFileName = Path.GetFileName(path);
                 owner.GridApp.Children.Add(owner.cgc);
 
                 // A .fqproj carries its own quantitation: the curation table shows it at once.

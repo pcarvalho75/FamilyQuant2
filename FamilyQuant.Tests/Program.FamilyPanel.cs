@@ -4,6 +4,7 @@ using System.Linq;
 using System.IO;
 using System.Text.Json;
 using FamilyQuant.Panels;
+using FamilyQuant.Report;
 
 namespace FamilyQuant.Tests;
 
@@ -16,6 +17,7 @@ internal static partial class Program
             args => args.Contains("--test-family-panel", StringComparer.Ordinal), (_, _) =>
             {
                 FamilyPanelTests();
+                FamilyPanelReportTests();
                 Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
                 return failed == 0 ? 0 : 1;
             }),
