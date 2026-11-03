@@ -362,7 +362,8 @@ namespace FamilyQuant.Tests
                 FamilyQuant.Themes.ThemeManager.Apply(theme);
                 var window = new SuperClusterPreviewWindow(new SuperClusterPreview(Vipers(), null, ViperKeywords, "", KeywordMatch.Any, null, null), input, null)
                 { Width = 1180, Height = 740, Left = -30000, Top = -30000, WindowStartupLocation = WindowStartupLocation.Manual, ShowActivated = false, ShowInTaskbar = false };
-                ((TabControl)window.FindName("evidenceTabs")).SelectedIndex = 1;
+                var tabs = (TabControl)window.FindName("evidenceTabs");
+                tabs.SelectedItem = tabs.Items.OfType<TabItem>().Single(tab => tab.Content is ArchitectureReviewControl);
                 window.Show();
                 try
                 {
