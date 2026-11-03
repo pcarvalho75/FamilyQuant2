@@ -40,7 +40,7 @@ public static class ReportStoredResults
             var paired = ReportCsvTable.Build("paired-source", "Paired source", headlineCsv, "",
                 "family_user_id", "family", "status", "mean_pct", "greedy_protein_estimate");
             results.Insert(1, new ReportParagraph("family-paired-intro",
-                "Each percentage is the mean of per-run shares of signal credited to database families; abundance is separate from protein diversity. Each count is a greedy estimate of database proteins that explain the family's observed peptides; partial estimates may leave peptides unexplained. These estimates are not counts of toxins or genes."));
+                "Each percentage is the mean of per-run shares of signal credited to database families; abundance is separate from protein diversity. Each count is a greedy estimate of database proteins that explain the family's observed peptides; partial estimates may leave peptides unexplained. These estimates are not counts of genes."));
             int pairedIndex = 2;
             foreach (var row in paired.Rows.Where(r => r[2] == "Listed"))
             {

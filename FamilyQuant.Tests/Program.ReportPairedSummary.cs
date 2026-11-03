@@ -79,11 +79,11 @@ internal static partial class Program
             .Where(p => p.Id.StartsWith("family-paired:", StringComparison.Ordinal)).ToArray();
         Check("J25 panel-directed Others and conflicting assignments are not paired as listed families", alternateLines.Length == 2
             && alternateLines.All(p => !p.Text.Contains(labels[1], StringComparison.Ordinal) && !p.Text.Contains(labels[2], StringComparison.Ordinal)));
-        Check("J25 introduction names credited signal and the greedy estimate, not toxins or genes", intro != null
+        Check("J25 introduction names credited signal and the greedy estimate, not gene counts", intro != null
             && intro.Text.Contains("credited", StringComparison.OrdinalIgnoreCase) && intro.Text.Contains("signal", StringComparison.OrdinalIgnoreCase)
             && intro.Text.Contains("greedy", StringComparison.OrdinalIgnoreCase) && intro.Text.Contains("database", StringComparison.OrdinalIgnoreCase)
             && intro.Text.Contains("peptides", StringComparison.OrdinalIgnoreCase)
-            && intro.Text.Contains("not counts of toxins or genes", StringComparison.OrdinalIgnoreCase));
+            && intro.Text.Contains("not counts of genes", StringComparison.OrdinalIgnoreCase));
         Check("J25 paired explanation follows the headline table", intro != null && blocks.ToList().IndexOf(intro) == blocks.ToList().IndexOf(headline) + 1);
         var document = ReportSupplementLayout.Apply(new ReportDocument { Sections = packet.Sections }, packet.CsvExports).Document;
         byte[] word = WordReportWriter.BuildBytes(document);
