@@ -149,11 +149,14 @@ public partial class ClusterGenerationControl
                 statusTooltipBeforeSave = null;
             }
 
-            TextBlockStatusLine.Text = ReportView.StatusLine(
+            string patternLabStatus = ReportView.StatusLine(
                 DisplayedMode,
                 DisplayedSharedPolicy,
                 ReportView.QuantifiedFamilies(fcf.MyExtendedFastaItems),
                 FamilyFilter.CountFamilies(fcf.MyExtendedFastaItems));
+            TextBlockStatusLine.Text = HasFullXic
+                ? ReportView.FullXicStatusLine(FullXicBasisLabel, Quantitation.SharedPolicy, DisplayedMode == null ? null : patternLabStatus)
+                : patternLabStatus;
             PublishShellStatus();
         }
 
