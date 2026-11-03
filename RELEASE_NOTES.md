@@ -4,6 +4,28 @@ This file preserves historical release notes, including their original pending-p
 checkout release status. Current work and release gates are in [the roadmap](docs/ROADMAP.md), with build/test commands
 in [the catalog](docs/INDEX.md). No historical version heading is changed by this note.
 
+## 2.1.1 (release candidate, not published)
+
+The program, report and deployment profile identify this version as 2.1.1.0.
+This candidate awaits the release gate and packaged report export.
+
+- **Faster Compute.** A new search engine reduced Compute from about 600 seconds
+  to about 80 seconds on the same full-run project and machine, with lower peak
+  memory use. The search change preserved the stored scientific results byte for
+  byte; timings on other projects depend on their inputs and machine.
+- **One headline total per panel family.** When your panel groups several families,
+  the headline and composition figures now use their combined panel-family total.
+  A peptide shared within that panel family is credited once. The supplement keeps
+  the original family-level results as well.
+- **More precise number checks.** The report's number check uses the family, run or
+  option named beside a number to find its source cell. If several unrelated cells
+  have the same value and the subject cannot resolve them, it reports an ambiguous
+  match rather than citing the first equal cell.
+- **Homology science options.** [Pending J47d: score-tier defaults and the two
+  migration sentences from FQAssay. Replace this placeholder before publication.]
+- **More release checks.** Additional automated checks now run before release,
+  including family-panel behavior, analysis options and report exports.
+
 ## 2.1.0 (release candidate, not published)
 
 This candidate includes the accepted family analysis and reporting work for 2.1.0.
