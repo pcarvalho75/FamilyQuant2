@@ -41,7 +41,10 @@ public static class ReportFigureRenderer
                 if (facts.Length == 0) throw new InvalidOperationException("Numeric caption data are missing for " + file);
                 input = new FigureCaptionInput(title, guidance + " Read each labelled axis and legend using its stated units.", facts);
             }
-            if (reportGrouping != null && native is FamilyContributionChart or FamilySignalShareChart or FamilySourceSequenceChart or DatabaseGapChart or ReportFamilyWorldRatesChart)
+            if (native is FamilyContributionChart or FamilySignalShareChart)
+                input = input with { Notes = (input.Notes ?? Array.Empty<string>()).Append(
+                    "Family labels may be abbreviated. Match each printed family id to its complete name in the Family composition tables and companion workbook").ToArray() };
+            if (reportGrouping != null && native is FamilyContributionChart or FamilySignalShareChart or ReportFamilySourceSequenceChart or DatabaseGapChart or ReportFamilyWorldRatesChart)
                 input = input with { Notes = (input.Notes ?? Array.Empty<string>()).Append(
                     "Only canonical report members are shown individually. Others member details remain in the supplement; stored values and original denominators are unchanged").ToArray() };
             charts.Add(new(section, file, title, ReportCaptionBuilder.Figure(input), factory, CaptionInput: input));
@@ -84,10 +87,24 @@ public static class ReportFigureRenderer
             Add(ReportSectionIds.Results, PresentationFigures.FamilySignalShareFile, "Family signal and de novo share",
                 "Family signal against its de novo contribution; these axes describe abundance and evidence source, not diversity.", () => new FamilySignalShareChart(visibleFamilies, 10),
                 new CaptionNumber("Family rows shown from the stored attribution", visibleFamilies.Families.Count, "families", "0"));
-            Add(ReportSectionIds.Results, PresentationFigures.FamilySourceSequenceFile, "Family source sequence counts",
-                "Distinct source sequence counts for the current family attribution. Sequence counts are not gene or proteoform counts.", () => new FamilySourceSequenceChart(visibleFamilies.SourceSequenceSummary),
-                new("Family rows in the visible stored sequence census", visibleFamilies.SourceSequenceSummary.Families.Count, "families", "0"),
-                new("Input identified distinct sequences", visibleFamilies.SourceSequenceSummary.SearchInputDistinctSequences, "sequences", "0"));
+            var census = visibleFamilies.SourceSequenceSummary;
+            var sourcePages = ReportFamilySourceSequenceChart.Pages(census);
+            int selected = sourcePages.Sum(page => page.Count);
+            for (int page = 0; page < sourcePages.Count; page++)
+            {
+                var pageRows = sourcePages[page];
+                string file = page == 0 ? PresentationFigures.FamilySourceSequenceFile
+                    : Path.GetFileNameWithoutExtension(PresentationFigures.FamilySourceSequenceFile) + "_" + (page + 1).ToString(CultureInfo.InvariantCulture) + ".png";
+                Add(ReportSectionIds.Results, file, "Family source sequence counts - page " + (page + 1).ToString(CultureInfo.InvariantCulture),
+                    "The highest-count families with de novo sequences are selected by descending union count, ties by family id, and split across pages. "
+                        + "Sequence counts are not gene or proteoform counts. The complete stored census and full names are retained in the companion workbook's Complete family source sequence census table; match by family id.",
+                    () => new ReportFamilySourceSequenceChart(pageRows),
+                    new("Selected highest-count families across pages", selected, "families", "0"),
+                    new("Family rows in the visible stored sequence census", census.Families.Count, "families", "0"),
+                    new("Eligible families with de novo sequences", census.Families.Count(row => row.DeNovoUnionDistinctSequences > 0), "families", "0"),
+                    new("Family rows on this page", pageRows.Count, "families", "0"));
+                charts[^1] = charts[^1] with { Width = ReportPrintChart.LayoutWidth, Height = ReportFamilySourceSequenceChart.RequiredHeight(pageRows) };
+            }
         }
         else Missing(ReportSectionIds.Results, "Family figures", "Family attribution is unavailable in this project.");
         if (manifest.DeNovoSourceScoreDistributions.Count > 0)

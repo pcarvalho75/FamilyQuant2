@@ -42,6 +42,7 @@ internal static partial class Program
         ReportReaderTableTests();
         ReportReaderNativeTests(data);
         ReportReaderQualificationTests(data);
+        ReportReaderFamilyTests(data);
     }
 
     private static void ReportReaderTableTests()
@@ -169,5 +170,46 @@ internal static partial class Program
         Check("source-effect caption names the exact union rather than the separate headline variant",
             Figure(PresentationFigures.DeNovoTalkComparisonFile).Caption.Contains(DeNovoVariantComparison.OnlyPlusDeepNovoVariantName, StringComparison.Ordinal)
             && Figure(PresentationFigures.DeNovoTalkComparisonFile).Caption.Contains(DeNovoVariantComparison.AllPlusDeepNovoVariantName, StringComparison.Ordinal));
+    }
+
+    private static void ReportReaderFamilyTests(AnalyticsData data)
+    {
+        var families = FamilyFixture(12);
+        foreach (var family in families.Families)
+        {
+            family.Description = "Synthetic complete family name with a long descriptive architecture " + family.FamilyUserId;
+            families.SourceSequenceSummary.Families.Add(new()
+            {
+                FamilyUserId = family.FamilyUserId, Description = family.Description, SearchDistinctSequences = 4,
+                PeaksDeNovoOnlyExclusiveDistinctSequences = 5, SharedPeaksDeepNovoDistinctSequences = 2,
+                DeepNovoExclusiveDistinctSequences = 3, DeNovoUnionDistinctSequences = 10,
+            });
+        }
+        var plan = ReportFigureRenderer.Plan(data, new QuantManifest(), new FamilyClusterFile(), families);
+        var source = plan.Charts.Where(c => c.FileName.StartsWith("family_source_sequence_counts", StringComparison.Ordinal)).ToArray();
+        Check("source census caption declares the selected top eight and the complete population",
+            source.All(c => c.CaptionInput!.Numbers.Any(n => n.Label.Contains("Selected", StringComparison.Ordinal) && n.Value == 8)
+                && c.CaptionInput.Numbers.Any(n => n.Label.Contains("census", StringComparison.Ordinal) && n.Value == 12)));
+        Check("abbreviated family labels point to complete names by id",
+            plan.Charts.Where(c => c.FileName == AnalyticsFigures.FamilyContributionFile || c.FileName == PresentationFigures.FamilySignalShareFile)
+                .All(c => c.Caption.Contains("family id", StringComparison.OrdinalIgnoreCase)
+                    && c.Caption.Contains("companion workbook", StringComparison.Ordinal)));
+        var tables = ReportCurrentResults.Build(data, new QuantManifest(), families).Sections.SelectMany(s => s.Blocks).OfType<ReportTable>();
+        Check("the complete source census retains every family and full name in a supplement table",
+            tables.Any(t => t.Id == "family-source-sequences" && t.SupplementOnly && t.Rows.Count == 12
+                && families.Families.All(f => t.Rows.Any(row => row.Contains(f.Description)))));
+        foreach (var chart in source)
+        foreach (var theme in new[] { ChartPaletteVariant.Light, ChartPaletteVariant.Dark })
+        {
+            var native = chart.CreateChart();
+            ChartImageExporter.Save(native, Path.Combine(Path.GetTempPath(), "reader-figures", theme.ToString(), chart.FileName), chart.Width, chart.Height, variant: theme);
+            var glyphs = ReaderGlyphs(VisualTreeHelper.GetDrawing(native)).ToArray();
+            double pointsPerDip = Math.Min(468 / chart.Width, 360 / chart.Height);
+            Check(chart.FileName + " " + theme + " source labels are readable at print size",
+                glyphs.Length > 0 && glyphs.All(g => g.GlyphRun.FontRenderingEmSize * pointsPerDip >= 10)
+                && !glyphs.Any(g => new string(g.GlyphRun.Characters.ToArray()).Contains("toxin", StringComparison.OrdinalIgnoreCase)));
+            Check(chart.FileName + " " + theme + " full name labels remain in bounds",
+                glyphs.All(g => g.Bounds.Left >= 0 && g.Bounds.Right <= chart.Width && g.Bounds.Top >= 0 && g.Bounds.Bottom <= chart.Height));
+        }
     }
 }
