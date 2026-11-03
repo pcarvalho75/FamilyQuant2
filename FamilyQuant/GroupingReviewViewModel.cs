@@ -64,7 +64,7 @@ namespace FamilyQuant
             int request = ++generation;
             using var cancellation = new CancellationTokenSource();
             discoveryCancellation = cancellation;
-            IsBusy = true; Status = "Reading the database taxonomy and reviewed keyword counts...";
+            IsBusy = true; Status = "Reading the database taxonomy, reviewed keywords and tissue annotations...";
             try
             {
                 var facts = await discoverTask!(cancellation.Token);
@@ -74,7 +74,7 @@ namespace FamilyQuant
                 // Preserve every supplied phrase through the same parser used by the grouping command.
                 string suggested = string.Join(", ", facts.ProposedScopeTerms.Select(t => "\"" + t + "\""));
                 if (string.IsNullOrWhiteSpace(ScopeText)) ScopeText = suggested;
-                Status = "Review the database taxa and keyword counts, then confirm or edit the scope with Update proposal.";
+                Status = "Review the database taxa, keyword counts and suggested scope, then confirm or edit the scope with Update proposal.";
             }
             catch (OperationCanceledException) { if (request == generation) Status = "Task discovery cancelled. You may enter a manual scope."; }
             catch (Exception ex) { if (request == generation) Status = ex.Message; }

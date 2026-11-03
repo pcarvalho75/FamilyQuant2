@@ -247,6 +247,7 @@ namespace FamilyQuant.Tests
             suite.Add(() => FamilyWorldFetchTests());
             suite.Add(() => DesktopWorldChecks());
             suite.Add(() => EvidenceTaskTests());
+            suite.AddWithApplication(() => ScopeVisibilityTests());
             suite.Add(() => EvidenceClassifierTests());
             suite.AddWithApplication(() => FamilyPanelSubclassTests());
             suite.Add(() => EvidenceDeliveryFixtureTests(workDir));
@@ -254,6 +255,7 @@ namespace FamilyQuant.Tests
             suite.Section("Nearest reviewed protein and the outside panel - never itself, gated, deterministic, offline");
             suite.Add(() => NearestReviewedTests(workDir));
             suite.Add(() => ReferencePanelTests(workDir));
+            suite.Add(() => ReferencePanelStreamTests());
             suite.Add(() => EvidenceOperationTests());
             suite.Section("Coherence check - what the reviewed members of a family ever show");
             suite.Add(() => CoherenceCheckTests());
@@ -306,6 +308,8 @@ namespace FamilyQuant.Tests
             suite.Add(() => CurationScreenTests());
             suite.Add(() => CurationOperationTests());
             suite.AddWithApplication(() => CurationExportFeedbackTests(Path.Combine(workDir, "curation-export-feedback")));
+            suite.AddWithApplication(() => ReportProgressTests(Path.Combine(workDir, "report-progress")));
+            suite.AddWithApplication(() => ProjectCommandReadyTests(Path.Combine(workDir, "project-command-ready")));
             suite.Add(() => FamilyViewTests());
             suite.Add(() => TableAppearanceTests());
             suite.Add(() => EvidenceReviewModelTests());
@@ -328,6 +332,7 @@ namespace FamilyQuant.Tests
             suite.AddWithApplication(() => WordReportDraftTests());
             suite.AddWithApplication(() => ReportAssemblyChecks(Path.Combine(workDir, "report-assembly")));
             suite.AddWithApplication(() => ReportWordOthersChecks(Path.Combine(workDir, "report-word-others")));
+            suite.AddWithApplication(() => ReportStaChecks(Path.Combine(workDir, "report-sta")));
             suite.Add(() => QuantitationPanelTests(Path.Combine(workDir, "quantitation-panel")));
             suite.Add(() => ArchitectureGroupSplitTests());
             suite.Add(() => ArchitectureMemberViewTests());

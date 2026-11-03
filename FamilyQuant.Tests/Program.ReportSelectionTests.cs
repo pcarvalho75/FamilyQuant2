@@ -136,7 +136,7 @@ internal static partial class Program
     private static void ReportSelectionWriterTests(ReportDocument document)
     {
         var writer = typeof(ReportDocument).Assembly.GetType("FamilyQuant.Report.WordReportWriter");
-        var build = writer?.GetMethod("BuildBytes");
+        var build = writer?.GetMethod("BuildBytes", new[] { typeof(ReportDocument), typeof(ReportSelection) });
         if (build == null) { Console.WriteLine("  SKIP  exact selected Word document proof awaits the report writer"); skipped++; return; }
         byte[] png = Convert.FromBase64String("iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+a8k0AAAAASUVORK5CYII=");
         document = document with { Sections = document.Sections.Select(section => section with

@@ -43,7 +43,7 @@ namespace FamilyQuant.Evidence
         public ReferencePanel? ReferencePanel { get; set; }
     }
 
-    public static class ReferencePanelFetcher
+    public static partial class ReferencePanelFetcher
     {
         private const string Endpoint = "https://rest.uniprot.org/uniprotkb/search?format=json&size=500&fields="
             + "accession,reviewed,protein_families,keyword,cc_tissue_specificity,xref_pfam,xref_panther,ft_transmem,fragment,sequence&query=";
@@ -75,12 +75,15 @@ namespace FamilyQuant.Evidence
         /// The reviewed proteins of each family, every taxon. UniProt's family search is a text search, so
         /// an entry is kept only when one of its memberships is the family asked for. All or nothing: a
         /// refused page, a missing release or a release that changes between pages throws and returns no
-        /// panel. Progress counts families done.
+        /// panel. Progress counts families done. The paged comparison switch retains the previous
+        /// route for the native parity checker; ordinary callers use bounded, OR-combined streams.
         /// </summary>
         public static async Task<ReferencePanel> FetchAsync(IReadOnlyList<string> families,
             HttpMessageHandler? handler = null, IProgress<FetchProgress>? progress = null,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default, bool usePagedComparison = false)
         {
+            if (!usePagedComparison)
+                return await FetchStreamsAsync(families, handler, progress, cancellationToken).ConfigureAwait(false);
             List<string> asked = families.Where(f => !string.IsNullOrWhiteSpace(f))
                 .Distinct(StringComparer.OrdinalIgnoreCase)
                 .OrderBy(f => f, StringComparer.OrdinalIgnoreCase).ThenBy(f => f, StringComparer.Ordinal).ToList();
@@ -157,9 +160,10 @@ namespace FamilyQuant.Evidence
         /// with the file's evidence. Nothing changes in the file unless the whole panel arrives.</summary>
         public static async Task<ReferencePanel> FetchAndStoreAsync(FamilyClusterFile file,
             Func<ProteinEvidence, bool>? inScope = null, HttpMessageHandler? handler = null,
-            IProgress<FetchProgress>? progress = null, CancellationToken cancellationToken = default)
+            IProgress<FetchProgress>? progress = null, CancellationToken cancellationToken = default,
+            bool usePagedComparison = false)
         {
-            ReferencePanel panel = await FetchAsync(FamiliesFound(file, inScope), handler, progress, cancellationToken)
+            ReferencePanel panel = await FetchAsync(FamiliesFound(file, inScope), handler, progress, cancellationToken, usePagedComparison)
                 .ConfigureAwait(false);
             cancellationToken.ThrowIfCancellationRequested();
             file.EvidenceSource ??= new EvidenceProvenance();

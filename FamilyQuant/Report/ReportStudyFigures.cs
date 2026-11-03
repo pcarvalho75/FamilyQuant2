@@ -2,6 +2,7 @@ using FamilyQuant.Evidence;
 using FamilyQuant.Panels;
 using FamilyQuant.Report.Captions;
 using System;
+using FamilyQuant.Operations;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
@@ -135,16 +136,25 @@ public static partial class ReportStudyFigures
     }
 
     public static ReportStudyFigurePacket Build(QuantManifest manifest, FamilyClusterFile project, string pngFolder,
-        int topProteinsPerPanelFamily = 1, PanelFamilyMap? panelMap = null, FamilyReportThresholdResult? reportGrouping = null)
+        int topProteinsPerPanelFamily = 1, PanelFamilyMap? panelMap = null, FamilyReportThresholdResult? reportGrouping = null,
+        OperationContext? operation = null,
+        int otherFigureCount = 0)
     {
         var culture = CultureInfo.CurrentCulture; var ui = CultureInfo.CurrentUICulture;
         try
         {
             CultureInfo.CurrentCulture = CultureInfo.InvariantCulture; CultureInfo.CurrentUICulture = CultureInfo.InvariantCulture;
             var plan = Plan(manifest, project, topProteinsPerPanelFamily, panelMap, reportGrouping);
-            var placed = plan.Figures.Select(item => new ReportPlacedFigure(item.SectionId,
-                new("figure:" + item.Plot.FileName, item.Title, ExportPng(item), ReportCaptionBuilder.Figure(item.Caption),
-                    (int)(960 * ChartImageExporter.DefaultScale), (int)Math.Round(item.Plot.ScreenHeight * ChartImageExporter.DefaultScale)))).ToArray();
+            int total = plan.Figures.Count + otherFigureCount;
+            if (plan.Figures.Count > 0 || total == 0) operation?.Report("report-prepare-figure", "Preparing report figures", 0, total);
+            var placed = plan.Figures.Select((item, index) =>
+            {
+                operation?.Report("report-prepare-figure", "Figure " + (index + 1).ToString(CultureInfo.InvariantCulture) + " of "
+                    + total.ToString(CultureInfo.InvariantCulture) + ": " + item.Title, index + 1, total);
+                return new ReportPlacedFigure(item.SectionId,
+                    new("figure:" + item.Plot.FileName, item.Title, ExportPng(item), ReportCaptionBuilder.Figure(item.Caption),
+                        (int)(960 * ChartImageExporter.DefaultScale), (int)Math.Round(item.Plot.ScreenHeight * ChartImageExporter.DefaultScale)));
+            }).ToArray();
             Directory.CreateDirectory(pngFolder);
             for (int i = 0; i < placed.Length; i++) File.WriteAllBytes(Path.Combine(pngFolder, plan.Figures[i].Plot.FileName), placed[i].Figure.PngBytes);
             string details = global::FamilyQuant.FigureDetailsCsv.Build(plan.Figures.Select(f => f.Plot));
