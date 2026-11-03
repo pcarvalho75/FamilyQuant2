@@ -1,6 +1,7 @@
 using FamilyQuant.Report;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 
@@ -18,13 +19,22 @@ public sealed class ReportChoice : ScreenViewModel
 }
 
 /// <summary>Checkbox draft over the report's own stable ids. Unavailable ids remain stored.</summary>
-public sealed class ReportExportViewModel
+public sealed class ReportExportViewModel : ScreenViewModel
 {
     private readonly HashSet<string> excluded;
+    private readonly double originalThreshold;
+    private readonly decimal originalPercent;
+    private decimal? thresholdPercent;
+    public decimal? ThresholdPercent { get => thresholdPercent; set => Set(ref thresholdPercent, value); }
     public IReadOnlyList<ReportChoice> Choices { get; }
-    public ReportExportViewModel(ReportDocument document, ReportSelection? stored)
+    public ReportExportViewModel(ReportDocument document, ReportSelection? stored, double threshold = FamilyReportThreshold.DefaultThreshold)
     {
         ArgumentNullException.ThrowIfNull(document);
+        if (!double.IsFinite(threshold) || threshold < 0 || threshold > 1) throw new ArgumentOutOfRangeException(nameof(threshold));
+        originalThreshold = threshold;
+        originalPercent = decimal.Parse(((decimal)threshold * 100m).ToString("G29", CultureInfo.InvariantCulture),
+            NumberStyles.Float, CultureInfo.InvariantCulture);
+        ThresholdPercent = originalPercent;
         excluded = new(stored?.ExcludedIds ?? Array.Empty<string>(), StringComparer.Ordinal);
         var choices = new List<ReportChoice>();
         var seen = new HashSet<string>(StringComparer.Ordinal);
@@ -40,6 +50,14 @@ public sealed class ReportExportViewModel
             foreach (var figure in section.Blocks.OfType<ReportFigure>()) Add(figure.Id, figure.Title, true);
         }
         Choices = choices.AsReadOnly();
+    }
+    public bool TryThreshold(out double threshold)
+    {
+        threshold = originalThreshold;
+        if (ThresholdPercent is not decimal percent || percent < 0m || percent > 100m) return false;
+        // An untouched localized editor must not round an existing stored double.
+        if (percent != originalPercent) threshold = (double)(percent / 100m);
+        return true;
     }
     public ReportSelection Selection()
     {

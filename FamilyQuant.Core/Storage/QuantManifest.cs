@@ -190,6 +190,11 @@ namespace FamilyQuant
         [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull)]
         public FamilyDomainPartsResult? FamilyDomainParts { get; set; }
 
+        /// <summary>Localized peptide intervals and allocated protein rankings, all runs pooled.
+        /// Absent until computed; exact and aligned placements are explicitly distinguished.</summary>
+        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull)]
+        public FamilyPeptideLocalizationResult? FamilyPeptideLocalization { get; set; }
+
         /// <summary>The complete compute-time spectrum evidence table, including accepted source calls
         /// that did not yield a stored XIC and RAW-selected precursor metadata. Version-2 projects keep
         /// this collection in the streaming <c>spectrum_comparison.jsonl.gz</c> entry rather than in

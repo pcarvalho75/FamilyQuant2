@@ -50,16 +50,14 @@ public static class PanelPfamChecker
         string Key(string value) => value.Trim().ToUpperInvariant();
         string[] accessions = rows.Select(r => Key(r.Domain.Accession)).Distinct(StringComparer.Ordinal).Order(StringComparer.Ordinal).ToArray();
         using var client = handler == null ? new HttpClient() : new HttpClient(handler, disposeHandler: false);
-        client.Timeout = TimeSpan.FromSeconds(15);
+        client.Timeout = TimeSpan.FromSeconds(60);
         client.DefaultRequestHeaders.UserAgent.ParseAdd("FamilyQuant");
-        using var slots = new SemaphoreSlim(4);
-        var replies = await Task.WhenAll(accessions.Select(async accession =>
+        var byAccession = new Dictionary<string, ProviderCheck>(StringComparer.Ordinal);
+        for (int index = 0; index < accessions.Length; index++)
         {
-            await slots.WaitAsync(cancellationToken).ConfigureAwait(false);
-            try { return (Accession: accession, Check: await FetchAsync(client, accession, cancellationToken).ConfigureAwait(false)); }
-            finally { slots.Release(); }
-        })).ConfigureAwait(false);
-        var byAccession = replies.ToDictionary(r => r.Accession, r => r.Check, StringComparer.Ordinal);
+            if (index > 0) await Task.Delay(TimeSpan.FromSeconds(1), cancellationToken).ConfigureAwait(false);
+            byAccession.Add(accessions[index], await FetchAsync(client, accessions[index], cancellationToken).ConfigureAwait(false));
+        }
         cancellationToken.ThrowIfCancellationRequested();
         return new PanelPfamCheckReport
         {
@@ -89,10 +87,11 @@ public static class PanelPfamChecker
         if (!AccessionSyntax.IsMatch(accession)) return new(PanelPfamCheckStatus.NotFound, "", "", "Invalid accession syntax; no request was made.", url);
         try
         {
-            using var response = await client.GetAsync(url, cancellationToken).ConfigureAwait(false);
+            using var response = await GetWithRateLimitRetryAsync(client, url, cancellationToken).ConfigureAwait(false);
             if (response.StatusCode is HttpStatusCode.NotFound or HttpStatusCode.NoContent)
                 return new(PanelPfamCheckStatus.NotFound, "", "", "The provider returned no entry for this accession.", url);
-            if (!response.IsSuccessStatusCode) return Unavailable("provider HTTP status " + ((int)response.StatusCode).ToString(System.Globalization.CultureInfo.InvariantCulture) + ".");
+            if (!response.IsSuccessStatusCode) return Unavailable("provider HTTP status " + ((int)response.StatusCode).ToString(System.Globalization.CultureInfo.InvariantCulture) + "."
+                + (response.Headers.RetryAfter == null ? "" : " Retry-After: " + response.Headers.RetryAfter.ToString() + "."));
             using var json = JsonDocument.Parse(await response.Content.ReadAsStringAsync(cancellationToken).ConfigureAwait(false));
             if (!json.RootElement.TryGetProperty("metadata", out var metadata)
                 || !metadata.TryGetProperty("accession", out var returned) || returned.GetString() != accession
@@ -108,6 +107,20 @@ public static class PanelPfamChecker
             || exception is OperationCanceledException && !cancellationToken.IsCancellationRequested)
         {
             return Unavailable(exception.Message);
+        }
+    }
+
+    private static async Task<HttpResponseMessage> GetWithRateLimitRetryAsync(HttpClient client, string url, CancellationToken cancellationToken)
+    {
+        for (int attempt = 1; ; attempt++)
+        {
+            var response = await client.GetAsync(url, cancellationToken).ConfigureAwait(false);
+            if (response.StatusCode != HttpStatusCode.TooManyRequests || attempt == 3) return response;
+            TimeSpan wait = response.Headers.RetryAfter?.Delta
+                ?? (response.Headers.RetryAfter?.Date is DateTimeOffset retryAt ? retryAt - DateTimeOffset.UtcNow : TimeSpan.FromSeconds(5 * attempt));
+            if (wait > TimeSpan.FromMinutes(1)) return response;
+            response.Dispose();
+            await Task.Delay(wait < TimeSpan.Zero ? TimeSpan.Zero : wait, cancellationToken).ConfigureAwait(false);
         }
     }
 
