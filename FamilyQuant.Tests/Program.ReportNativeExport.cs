@@ -64,6 +64,9 @@ internal static partial class Program
             var open = Stopwatch.StartNew();
             if (!shell.OpenProjectPath(projectPath)) throw new InvalidOperationException("The project open was refused.");
             ClusterGenerationControl? Families() => typeof(MainWindow).GetField("cgc", BindingFlags.Instance | BindingFlags.NonPublic)?.GetValue(shell) as ClusterGenerationControl;
+            string lastOperation = "";
+            if (Families() is { } loadedView)
+                loadedView.Operations.PropertyChanged += (_, _) => { if (loadedView.Operations.Message != lastOperation) { lastOperation = loadedView.Operations.Message; Log("Program activity: " + lastOperation); } };
             Wait(() => !shell.Operations.IsBusy && Families() is { } view && !view.Operations.IsBusy && view.FullXicReady.IsCompleted);
             Families()!.FullXicReady.GetAwaiter().GetResult();
             openSeconds = open.Elapsed.TotalSeconds; Log("Open and attribution ready in " + openSeconds);
@@ -92,7 +95,8 @@ internal static partial class Program
             if (after != before) throw new InvalidOperationException("Export changed its source project.");
             File.WriteAllText(Path.Combine(output, "result.json"), JsonSerializer.Serialize(new { Project = projectPath, SourceSha256 = before,
                 Report = report, Workbook = workbook, OpenSeconds = openSeconds, ExportSeconds = exportSeconds, TotalSeconds = total.Elapsed.TotalSeconds,
-                ReportSha256 = FileFingerprint.Sha256(report), WorkbookSha256 = FileFingerprint.Sha256(workbook), SourceUnchanged = true }, new JsonSerializerOptions { WriteIndented = true }));
+                ReportSha256 = FileFingerprint.Sha256(report), WorkbookSha256 = FileFingerprint.Sha256(workbook), SourceUnchanged = true,
+                ProgramStateDirectory = ApplicationPaths.LocalDataDirectory }, new JsonSerializerOptions { WriteIndented = true }));
             Log("Export succeeded in " + exportSeconds + " s; Word and supplement published; source unchanged");
             return 0;
         }
