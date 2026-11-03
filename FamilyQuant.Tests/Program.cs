@@ -239,6 +239,8 @@ namespace FamilyQuant.Tests
             suite.AddWithApplication(() => PanelEditorTemplateRoundtripTests());
             suite.Add(() => AnalysisHelpTests());
             suite.AddWithApplication(() => WorkflowReportHelpTests());
+            suite.Add(() => AiKeyStoreTests());
+            suite.Add(() => AiTransportTests());
             suite.Add(() => SuiteMergeGuardTests());
             suite.Add(() => EvidenceFetchTests());
             suite.Add(() => EvidenceFetchAtomicTests());
