@@ -115,10 +115,12 @@ Compute took 37 to 54 minutes on Ana's project with the RAW cache warm, silent f
 | J35b | Progress on the full-run project: the longest gap between two steps named | L | 0.3 | 🟢 | J35c | `READY` names the longest gap and its phase | SH | | 0 | 0 | |
 | J35c | J35 reviewed and merged | L | 0.2 | J35b | J40 | Approved; gate green | SH | | 0 | 0 | |
 | J38b | CPU profile of the slowest call: its top functions with file:line | M | 0.4 | 🟢 | J38c | The profile posted | AS | | 0 | 0 | |
-| J38c | First fix: an identified peptide found exactly in a protein needs no scoring of the other candidates (proved from the scorer first) | H | 1 | J38b | J38d | Byte-identical stored results on a fixture | AS | | 0 | 0 | |
-| J38d | Second fix, as the measurement says: one seed index shared by the searches on the same proteins, or the J28 cache pattern for the other searches | M | 1 | J38c | J38e | Byte-identical stored results on a fixture | AS | | 0 | 0 | |
+| J38c | First fix: Compute reuses the attribution FullXicCompletionStage already computed instead of the family-world step searching again (calls 3 and 4 repeat 1 and 2: 366 s of 923 s on WORKHORSE) | H | 1 | J38b | J38d | Byte-identical stored results on a fixture | AS | | 0 | 0 | |
+| J38d | New HomologySearch method (Paulo, 11-03 09:20) from Fable's plan (docs/ideas/HOMOLOGY-PERFORMANCE.md): the mismatch-budget early exit, the exact-containment shortcut for best-score identified queries with the matrix guard, and the diagonal q-gram prefilter; every caller switches to it; the old HomologyMapper stays unchanged, marked [Obsolete] ("use HomologySearch"), as the reference the equivalence tests compare against | M | 1 | J38c | J38e | Every stored result byte-identical to the old method on fixtures and on the full-run copy; old and new compared hit for hit on every search call | AS | | 0 | 0 | |
 | J38e | Compute before and after on the full-run copy | L | 0.3 | J38d | J38f | Both times; stored results byte-identical | AS | | 0 | 0 | |
 | J38f | J38 reviewed and merged | L | 0.2 | J38e | | Approved; gate green | AS | | 0 | 0 | |
+| J47a | Fable's science options in HomologySearch, each off by default: a decoy-calibrated identity gate per tag length; isobaric-swap folding for de novo tags (N/GG, Q/AG, equal-mass pair order, K/Q) weighted by PEAKS per-residue confidence; crediting families by score tier with the multiplicity reported | M | 1.5 | J38d | J47b | Options off: byte-identical; options on: their own tests | AS | | 0 | 0 | |
+| J47b | Validation of each science option on the full-run project: target-decoy rates at the gate, the Database gap error rates, the leave-one-out family check (J42: 966 right, 12 wrong, 95 abstained), and what changes in the headline; Paulo decides which become default | M | 1 | J47a | | A before/after table per option; science review | AS | | 0 | 0 | |
 
 ### W7 Clear reasons and totals
 
