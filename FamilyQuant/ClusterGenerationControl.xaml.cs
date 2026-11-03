@@ -484,9 +484,10 @@ namespace FamilyQuant
         {
             SyncQuantitationChoices(); Quantitation.SetFullXicQuant(rows, perRunTic);
         }
-        public Task SetFullXicQuantAsync(IReadOnlyList<QuantRow>? rows, IReadOnlyDictionary<string, double>? perRunTic)
+        public Task SetFullXicQuantAsync(IReadOnlyList<QuantRow>? rows, IReadOnlyDictionary<string, double>? perRunTic,
+            DateTimeOffset? startedAtUtc = null, string? operationLogPath = null)
         {
-            return QueueFullXicAsync(rows, perRunTic);
+            return QueueFullXicAsync(rows, perRunTic, startedAtUtc, operationLogPath);
         }
         public string? FullXicCompositionCsv()
         {

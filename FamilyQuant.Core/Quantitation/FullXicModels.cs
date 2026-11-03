@@ -49,6 +49,9 @@ namespace FamilyQuant
         /// application data, scoped by the acquisition folder to avoid same-name run collisions.</summary>
         public string? CacheDirectory { get; set; }
 
+        // Acquisition I/O seam for cache-only synthetic fixtures. Production always uses the native chromatogram.
+        internal Func<string, double>? ReadTicArea { get; set; }
+
         /// <summary>The confidence criteria the de novo export is filtered by before extraction. Ignored
         /// when no de novo directory is given.</summary>
         public DeNovoFilterCriteria DeNovoCriteria { get; set; } = new DeNovoFilterCriteria();

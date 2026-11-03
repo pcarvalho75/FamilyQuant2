@@ -60,7 +60,14 @@ internal static partial class Program
             BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic)!.SetValue(value, field);
         object? Call(string owner, string method, params object?[] arguments)
         {
-            try { return Stage(owner).GetMethod(method, BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic)!.Invoke(null, arguments); }
+            try
+            {
+                var target = Stage(owner).GetMethod(method, BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic)!;
+                var parameters = target.GetParameters();
+                if (arguments.Length < parameters.Length && parameters.Skip(arguments.Length).All(parameter => parameter.IsOptional))
+                    arguments = arguments.Concat(Enumerable.Repeat<object?>(Type.Missing, parameters.Length - arguments.Length)).ToArray();
+                return target.Invoke(null, arguments);
+            }
             catch (TargetInvocationException ex) when (ex.InnerException != null)
             { ExceptionDispatchInfo.Capture(ex.InnerException).Throw(); throw; }
         }

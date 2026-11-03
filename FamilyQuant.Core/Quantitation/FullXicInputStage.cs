@@ -1,4 +1,5 @@
 using FamilyQuant.DeNovo;
+using FamilyQuant.Operations;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -27,7 +28,7 @@ namespace FamilyQuant
     {
         internal static FullXicInput Prepare(string rawDirectory, string sepr2Path,
             string? deNovoDirectory, FullXicOptions options, Action<string>? progress,
-            IReadOnlyList<string>? restrictToRuns)
+            IReadOnlyList<string>? restrictToRuns, OperationContext? operation = null)
         {
             if (rawDirectory == null) throw new ArgumentNullException(nameof(rawDirectory));
             if (sepr2Path == null) throw new ArgumentNullException(nameof(sepr2Path));
@@ -46,6 +47,8 @@ namespace FamilyQuant
             // The RAWs, keyed by normalized run name. First one wins for a duplicated name, matching the
             // de novo screen's matcher.
             var rawByRun = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+            operation?.Report("compute-input", "Reading computation inputs", 0, 3);
+            operation?.Report("compute-input", "Input 1 of 3: Matching acquisition files", 1, 3);
             foreach (string file in Directory.GetFiles(rawDirectory, "*.raw", SearchOption.TopDirectoryOnly))
             {
                 string run = DeNovoReconciler.NormalizeRunName(file);
@@ -54,6 +57,7 @@ namespace FamilyQuant
 
             // The identified PSMs, grouped by run.
             progress?.Invoke("Reading identifications from " + Path.GetFileName(sepr2Path) + "...");
+            operation?.Report("compute-input", "Input 2 of 3: Reading identifications", 2, 3);
             List<PatternLabPsm> psms = SeproPsmAdapter.Load(sepr2Path);
 
             var psmsByRun = new Dictionary<string, List<PatternLabPsm>>(StringComparer.OrdinalIgnoreCase);
@@ -68,10 +72,11 @@ namespace FamilyQuant
             // The kept de novo rows, grouped by run, when a PEAKS export was given. Imported, filtered
             // and reconciled ONCE, exactly as the de novo screen does it, then split by run.
             IReadOnlyList<DeNovoSourceSelection> deNovoSelections = options.ResolveDeNovoSelections();
+            operation?.Report("compute-input", "Input 3 of 3: Reading de novo sources", 3, 3);
 
             FullXicSourceInput deNovoImport = deNovoDirectory == null
                 ? new FullXicSourceInput()
-                : FullXicSourceStage.Read(deNovoDirectory, psms, options.DeNovoCriteria, deNovoSelections, progress);
+                : FullXicSourceStage.Read(deNovoDirectory, psms, options.DeNovoCriteria, deNovoSelections, progress, operation);
             Dictionary<string, List<PeaksDeNovoRow>> deNovoByRun = deNovoImport.ByRun;
 
             // The runs to process: any run with a RAW and either identifications or kept de novo rows,
