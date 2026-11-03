@@ -205,6 +205,7 @@ namespace FamilyQuant.Tests
             ProteinDomainsTests(workDir);
             EvidenceStorageTests(workDir);
             DomainPositionTests(Path.Combine(workDir, "domain-positions"));
+            PanelSpreadsheetTests(Path.Combine(workDir, "panel-spreadsheet"));
             EvidenceFetchTests();
             EvidenceFetchAtomicTests();
             EvidenceCoverageTests();
