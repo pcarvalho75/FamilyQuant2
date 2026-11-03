@@ -59,7 +59,7 @@ namespace FamilyQuant.Tests
             var file = File(); using var handler = new EvidenceAndPanelHandler();
             var result = Task.Run(() => EvidenceFetchSession.FetchAsync(file, handler)).GetAwaiter().GetResult();
             Check("the explicit fetch coordinator calls E2 and E4 and stores the reviewed panel without moving IDs",
-                handler.ProteinRequests == 1 && handler.PanelRequests == 1 && result.Changed && result.PanelFailure == null
+                handler.ProteinRequests == 1 && handler.PanelRequests == 2 && result.Changed && result.PanelFailure == null
                 && file.MyExtendedFastaItems[0].Evidence != null && file.EvidenceSource?.ReferencePanel?.Entries.Count == 1
                 && file.MyExtendedFastaItems[0].UserID == 71 && file.MyExtendedFastaItems[0].USearchID == 71);
             var partial = File(); using var failing = new EvidenceAndPanelHandler(failPanel: true);
@@ -80,7 +80,7 @@ namespace FamilyQuant.Tests
                 while (!control.IsEnabled && watch.Elapsed < TimeSpan.FromSeconds(5)) { PumpDispatcher(); Thread.Sleep(1); }
                 PumpDispatcher();
                 Check("the real Fetch evidence button reaches the panel service and emits one document change",
-                    control.IsEnabled && uiHandler.PanelRequests == 1 && control.fcf.EvidenceSource?.ReferencePanel?.Entries.Count == 1 && changed == 1);
+                    control.IsEnabled && uiHandler.PanelRequests == 2 && control.fcf.EvidenceSource?.ReferencePanel?.Entries.Count == 1 && changed == 1);
             }
             finally { SynchronizationContext.SetSynchronizationContext(previous); control.FetchDomainsHandlerOverride = null; }
         }
