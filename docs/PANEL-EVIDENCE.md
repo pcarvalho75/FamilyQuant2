@@ -25,10 +25,14 @@ are not claimed. This is an audit explanation only: it does not change the propo
 grouping, saved assignment reasons or recipe replay.
 
 The existing assignment review now has a Panel links tab. No ambiguous choice is
-preselected. Applying choices updates the proposal; applying the reviewed
+preselected. A choice can carry an optional, user-entered single-line note of up to
+512 characters; it starts empty and can be edited or cleared. An invalid note
+blocks the link update rather than being truncated. Applying choices updates the proposal; applying the reviewed
 selection stores one locked family change. The subclass runner then runs after
 the family host lease ends and folds into the same Undo entry. The original
 snapshot restores groups, locks, panel, recipe, assignment facts and labels.
+The note uses the existing link source field, survives project save and recipe replay,
+and is restored by the same Undo. It is the user's text, not an inferred explanation.
 
 Current/RequireCurrent refuse changed database, evidence/provenance, panel-family
 rules, recipe, or membership. A missing target sequence is an explicit refusal.

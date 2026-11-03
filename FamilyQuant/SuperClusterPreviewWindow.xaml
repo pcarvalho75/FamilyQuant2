@@ -217,6 +217,13 @@
                                                     </DataTemplate>
                                                 </DataGridTemplateColumn.CellTemplate>
                                             </DataGridTemplateColumn>
+                                            <DataGridTextColumn Header="Note (optional)" Binding="{Binding Note, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="240">
+                                                <DataGridTextColumn.CellStyle>
+                                                    <Style TargetType="{x:Type DataGridCell}">
+                                                        <Setter Property="ToolTip" Value="Optional single-line note explaining this link choice, up to 512 characters."/>
+                                                    </Style>
+                                                </DataGridTextColumn.CellStyle>
+                                            </DataGridTextColumn>
                                             <DataGridTextColumn Header="Status" Binding="{Binding State}" IsReadOnly="True" Width="180"/>
                                         </DataGrid.Columns>
                                     </DataGrid>
