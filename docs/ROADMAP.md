@@ -82,10 +82,8 @@ The export failed on Ana's project (a figure read the on-screen palette from the
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| J41b | J41 reviewed and merged | L | 0.2 | 🟢 | J30c, J32c | Approved; gate green | FL | | 0 | 0 | |
 | J39 | Cache the two source census searches as well, if J32c shows they cost more than a minute | M | 1 | 🟢 | | Byte-identical report data; the export time before and after | T1 | | 0 | 0 | |
-| J36b | Delivery rehearsal on the first full-run project into a staging folder | L | 0.3 | 🟢 | J36c | Summary with hashes and the trace's count | RS | | 0 | 0 | |
-| J36c | J36 reviewed and merged | L | 0.2 | J36b | K17 | Approved; gate green | RS | | 0 | 0 | |
+| J36c | J36 reviewed and merged | L | 0.2 | 🟢 | K17 | Approved; gate green | RS | | 0 | 0 | |
 | J34b | Look fixes for the listed items | M | 1 | 🟢 | J34c | Each item fixed or ruled | LK | | 0 | 0 | |
 | J34c | J34 reviewed and merged | L | 0.2 | J34b | K14 | Approved; gate green | LK | | 0 | 0 | |
 
@@ -95,7 +93,7 @@ Ana installs it from the public releases page (D31); the desk publishes on Paulo
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| K9 | Full gate on the release candidate re-cut after J41 (and J32, J34 if merged): every ledger receipt current (quick gates defer them) | M | 0.5 | K8, J41b | K10 | Full gate green, ledger 5,460 of 5,460 | Orchestrator | | 0 | 0 | |
+| K9 | Full gate on the release candidate re-cut after J41 (and J32, J34 if merged): every ledger receipt current (quick gates defer them) | M | 0.5 | K8 | K10 | Full gate green, ledger 5,460 of 5,460 | Orchestrator | | 0 | 0 | |
 | K10 | The unpacked candidate exports the final project's report through the real menu | L | 0.3 | K9 | K11 | Files and times recorded | EV | | 0 | 0 | |
 | K11 | Published: v2.1.0 on pcarvalho75/FamilyQuant2-releases with the zip, its .sha256 and user release notes | L | 0.1 | K10 | K13, K17 | The release page is live | Orchestrator | | 0 | 0 | |
 | K13 | Install check on 2.1.0 from GitHub; 2.0.0's Check for updates finds 2.1.0 | L | 0.2 | K11 | | Both pass | EV | | 0 | 0 | |
@@ -132,7 +130,6 @@ Compute took 37 to 54 minutes on Ana's project with the RAW cache warm, silent f
 | J46a | An Anthropic API key the user can add, test, replace or remove (Help > AI assistant key), stored per user with Windows protection, never in a project, the repository, a log or a report; import from a key file placed next to the project (Paulo, 11-03) | L | 0.5 | J40 | J46b | Fixture tests for works, wrong key, no credit, rate limit, no connection; the key never appears in project bytes | T2 | | 0 | 0 | |
 | J46b | Optional "Draft interpretation with AI": the user sees exactly what is sent (J45's input), confirms, the text returns into the interpretation field labelled "AI draft (model, date)", and every number in it is checked against the program's own tables (J18 trace) before the user accepts | M | 1 | J46a | J46c | Fake-transport tests for every outcome; one live call reported; works fully without a key | T2 | | 0 | 0 | |
 | J46c | J46 reviewed and merged | L | 0.2 | J46b | | Approved; gate green | T2 | | 0 | 0 | |
-| J42 | The family-assignment accuracy check (leave-one-out on reviewed proteins) accepts a project whose scope has several phrases: on the D39 project it refuses with "The session search no longer matches the current queries and reviewed references" (EvidenceSession.cs:42-68 does not accept the panel review's stored search over the in-scope references) | L | 0.5 | 🟢 | K14 | Red then green: a fixture with a two-phrase scope runs the audit; on a copy of the D39 project it prints the right, wrong and abstained counts | T2 | | 0 | 0 | |
 
 ## Critical path
 

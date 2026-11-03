@@ -249,6 +249,7 @@ namespace FamilyQuant.Tests
             suite.Add(() => DesktopWorldChecks());
             suite.Add(() => EvidenceTaskTests());
             suite.AddWithApplication(() => ScopeVisibilityTests());
+            suite.Add(() => PanelMultiScopeAuditTests());
             suite.AddWithApplication(() => PanelLinkNotesTests());
             suite.Add(() => EvidenceClassifierTests());
             suite.AddWithApplication(() => FamilyPanelSubclassTests());

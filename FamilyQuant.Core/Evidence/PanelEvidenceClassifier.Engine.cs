@@ -45,7 +45,7 @@ public static partial class PanelEvidenceClassifier
                 throw new InvalidOperationException("Run the reviewed-neighbour search again to record all equally close references for panel assignment.");
             if (search.MinQueryAlignedPercent != options.MinQueryAlignedPercent)
                 throw new InvalidOperationException("Run the reviewed-neighbour search with the current query-residue coverage gate.");
-            EvidenceApply.ValidateSearch(file, search, used, options, null);
+            EvidenceApply.ValidateSearch(file, search, used, options, null, allowPanelReferences: true);
         }
         var neighbours = search?.ByQuery() ?? new Dictionary<string, NearestNeighbour>(StringComparer.Ordinal);
         var links = BuildLinks(panel, used, options);
