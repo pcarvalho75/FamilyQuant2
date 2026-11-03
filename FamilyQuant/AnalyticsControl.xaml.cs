@@ -26,6 +26,7 @@ public partial class AnalyticsControl : UserControl
         ViewModel = viewModel;
         InitializeComponent();
         DataContext = ViewModel;
+        SensitivityHost.Content = new FamilySensitivityControl(ViewModel.Sensitivity);
         DatabaseGapHost.Content = ViewModel.DatabaseGap.HasStoredResult ? new DatabaseGapControl(ViewModel.DatabaseGap)
             : new TextBlock { Text = ViewModel.DatabaseGap.EmptyMessage, TextWrapping = TextWrapping.Wrap };
         foreach (ComboBoxItem item in ComboBoxExportKind.Items)

@@ -5,7 +5,7 @@ namespace FamilyQuant;
 
 /// <summary>Comparison of actual computed cutoff variants. Missing variants are absent, never zero.
 /// Shares use each variant's measured peptide signal on the primary calibrated basis. Full counts
-/// overlap and are not a normalized family composition. Family-world-only signal is excluded.</summary>
+/// overlap and are not a normalized family composition. Family-world-only credits are excluded.</summary>
 public sealed class FamilySensitivityResult
 {
     public string Method { get; set; } = string.Empty;
@@ -21,6 +21,7 @@ public sealed class FamilySensitivityVariant
     /// <summary>SHA256 of a loaded project, or of the stored current quant rows and source manifest facts.</summary>
     public string SourceSha256 { get; set; } = string.Empty;
     public List<DeNovoInputManifest> DeNovoInputs { get; set; } = new();
+    public FamilyMappingProvenance? Mapping { get; set; }
     public List<FamilySensitivityPolicyResult> Policies { get; set; } = new();
 }
 

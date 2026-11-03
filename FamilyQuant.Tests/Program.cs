@@ -206,6 +206,7 @@ namespace FamilyQuant.Tests
             EvidenceStorageTests(workDir);
             DomainPositionTests(Path.Combine(workDir, "domain-positions"));
             PanelSpreadsheetTests(Path.Combine(workDir, "panel-spreadsheet"));
+            FamilySensitivityTests(Path.Combine(workDir, "family-sensitivity"));
             EvidenceFetchTests();
             EvidenceFetchAtomicTests();
             EvidenceCoverageTests();
