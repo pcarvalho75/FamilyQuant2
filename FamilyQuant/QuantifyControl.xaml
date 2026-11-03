@@ -10,7 +10,7 @@
    <Border Background="{DynamicResource SurfaceBrush}" Padding="16" CornerRadius="6">
     <Grid IsEnabled="{Binding CanEdit}">
      <Grid.ColumnDefinitions><ColumnDefinition Width="190"/><ColumnDefinition Width="*"/><ColumnDefinition Width="100"/></Grid.ColumnDefinitions>
-     <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
+     <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
      <Label Content="RAW folder" ToolTip="Acquisition folder whose file names are matched to the identified runs."/>
      <TextBox x:Name="TextBoxRawDirectory" Grid.Column="1" Text="{Binding RawDirectory, UpdateSourceTrigger=PropertyChanged}"
       ToolTip="Folder containing the RAW acquisitions. Runs are matched by file name."/>
@@ -23,8 +23,12 @@
      <TextBox x:Name="TextBoxDeNovoDirectory" Grid.Row="2" Grid.Column="1" Text="{Binding DeNovoDirectory, UpdateSourceTrigger=PropertyChanged}"
       ToolTip="Export root searched recursively for the selected sources. Leave empty for identified peptides only."/>
      <Button Grid.Row="2" Grid.Column="2" Content="Browse..." Click="BrowseDeNovo" ToolTip="Choose the de novo export root."/>
-     <local:DeNovoFilterControl x:Name="FilterControl" Grid.Row="3" Grid.ColumnSpan="3" DataContext="{Binding Filters}" Margin="0,12,0,12"/>
-     <WrapPanel Grid.Row="4" Grid.ColumnSpan="3">
+     <Label Grid.Row="3" Content="Search settings (optional)" ToolTip="Search parameter file recorded for the report's methods."/>
+     <TextBox x:Name="TextBoxSearchParameters" Grid.Row="3" Grid.Column="1" Text="{Binding SearchParametersPath, UpdateSourceTrigger=PropertyChanged}"
+      ToolTip="Choose the search parameter file for the report. If empty, one adjacent .params file is selected automatically; ambiguous files are not guessed."/>
+     <Button Grid.Row="3" Grid.Column="2" Content="Browse..." Click="BrowseSearchParameters" ToolTip="Choose the search parameter file to record with completed Results."/>
+     <local:DeNovoFilterControl x:Name="FilterControl" Grid.Row="4" Grid.ColumnSpan="3" DataContext="{Binding Filters}" Margin="0,12,0,12"/>
+     <WrapPanel Grid.Row="5" Grid.ColumnSpan="3">
       <Label Content="Isotope ceiling" ToolTip="Maximum credited isotopes per peptide, including the monoisotopic peak."/><numeric:IntegerUpDown x:Name="IntegerUpDownIsotopes" Margin="{DynamicResource ControlPadding}" Width="70" Minimum="1" Maximum="6" Value="{Binding IsotopeCeiling, Mode=TwoWay}"
        ToolTip="Maximum isotopes per peptide from 1 to 6, default 6. An absent isotope adds nothing."/>
       <Label Content="Minimum points per peak" ToolTip="Required array points per isotope peak, including the two padding points." Margin="20,0,0,0"/><numeric:IntegerUpDown x:Name="IntegerUpDownMinPoints" Margin="{DynamicResource ControlPadding}" Width="70" Minimum="1" Maximum="20" Value="{Binding MinimumPoints, Mode=TwoWay}"

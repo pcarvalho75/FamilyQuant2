@@ -87,10 +87,9 @@ Her consensus spreadsheet becomes the project's family panel. Family names, doma
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| J1b | Read a panel from a spreadsheet as the user sent it: columns chosen by header; each distinct decision value mapped by the user to Quantify, Report under others, Not a family, or Merge into a named family; the choices stored | M | 2 | J1b0 | J1d, J2a | Native test on a copy of Ana's file: 41 rows read, her mapping replayed from the recipe | AS | | 0 | 0 | |
 | J1c | Check the panel's Pfam accessions against InterPro: each accession's name against the panel's name, every mismatch listed for the user, nothing changed silently | L | 1 | 🟢 | J2a | Live check on Ana's file prints every mismatch; offline it says it could not check | EV | | 0 | 0 | |
-| J1d | File > Import family panel: the panel table, the decision mapping and the Pfam check on one screen, with Help in general words | M | 1.5 | J1b | J7a | Native captures in both themes; a choice changes the stored panel and Undo restores it | T1 | | 0 | 0 | |
-| J1e | Simple family input: on the same screen, a table where a person adds, edits and removes families (name, decision from a list, Pfam codes, subclasses) with Undo, plus Save panel as spreadsheet, a template that imports back unchanged | M | 1.5 | J1b | J7a | Native test: type a family, save, reopen, export the spreadsheet and import it back with identical panel | T1 | | 0 | 0 | |
+| J1d | File > Import family panel: the panel table, the decision mapping and the Pfam check on one screen, with Help in general words | M | 1.5 | 🟢 | J7a | Native captures in both themes; a choice changes the stored panel and Undo restores it | T1 | | 0 | 0 | |
+| J1e | Simple family input: on the same screen, a table where a person adds, edits and removes families (name, decision from a list, Pfam codes, subclasses) with Undo, plus Save panel as spreadsheet, a template that imports back unchanged | M | 1.5 | 🟢 | J7a | Native test: type a family, save, reopen, export the spreadsheet and import it back with identical panel | T1 | | 0 | 0 | |
 
 ### W2 Families by evidence
 
@@ -108,51 +107,42 @@ SVMP P-I, P-II, P-III and "class not resolved"; PLA2 D49 and K49; the parts of a
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| J3a | Subclass of each protein: by domain architecture (the user enters required and absent Pfam per subclass) or by the UniProt subfamily text, carried to unreviewed proteins by the nearest reviewed; definitions stored in the project | M | 2 | J2a | J3b | Fixtures; Ana's SVMP and PLA2 subclasses entered once and replayed from the recipe | EV | | 0 | 0 | |
-| J3b | Credit each peptide to the deepest level it is unique to: a subclass when only that subclass holds it, else "family, subclass not resolved"; each family's parts sum to the family | H | 2 | 🟢 | J5d, J6b, J7a | Closure test bit for bit; family totals and golden unchanged | FL | | 0 | 0 | |
+| J3a | Subclass of each protein: by domain architecture (the user enters required and absent Pfam per subclass) or by the UniProt subfamily text, carried to unreviewed proteins by the nearest reviewed; definitions stored in the project | M | 2 | J2a | J3b | Fixtures; Ana's SVMP and PLA2 subclasses entered once and replayed from the recipe | T2 | | 0 | 0 | |
 
 ### W4 Where the peptides fall
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| J4a | Fetch domain positions (InterPro) and UniProt feature positions (chain, peptide, propeptide, signal) for each protein, stored with the evidence and its provenance | M | 2 | 🟢 | J4b, J4c | Live fetch on Ana's database; the project reopens offline with the positions | AS | | 0 | 0 | |
-| J4b | Signal by domain and by mature product: each peptide placed on its protein's domains and named products; per family the share in each domain and outside any domain | M | 2 | J4a | J6b, J7a | Domain parts sum to the family; fixture | FL | | 0 | 0 | |
-| J4c | Coverage map figure: a protein drawn as a bar with its domains and the identified and de novo peptides on it, for the top proteins of each family | M | 2 | J4a | J6b | Native PNG in both themes and the Light export | LK | | 0 | 0 | |
+| J4b | Signal by domain and by mature product: each peptide placed on its protein's domains and named products; per family the share in each domain and outside any domain | M | 2 | 🟢 | J6b, J7a | Domain parts sum to the family; fixture | FL | | 0 | 0 | |
+| J4c | Coverage map figure: a protein drawn as a bar with its domains and the identified and de novo peptides on it, for the top proteins of each family | M | 2 | 🟢 | J6b | Native PNG in both themes and the Light export | LK | | 0 | 0 | |
 
 ### W5 The numbers Ana asked for
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| J5a | Per run: each family's share in each RAW, and the mean, SD and CV over runs | M | 1.5 | 🟢 | J5d, J6b, J7a | Each run's parts sum to that run's total; fixture | FL | | 0 | 0 | |
-| J5b | Toxin count per family: the fewest database proteins that explain the family's peptides, and the proteins with a peptide of their own; definitions on screen and in exports | M | 1.5 | 🟢 | J6b, J7a | Fixture with a known minimal set | FL | | 0 | 0 | |
-| J5c | Report threshold: families under a user-set share (default 0.1%) go to "others", and the list is kept | L | 0.5 | 🟢 | J6b | Fixture; the threshold is stored | T1 | | 0 | 0 | |
 | J5d | Composition charts: family shares with run-to-run error bars, and subclasses stacked within each family. Every figure is drawn by the program on screen and exported for the report | M | 1.5 | 🟢 | J6b | Native PNG in both themes and the Light export | LK | | 0 | 0 | |
 | J5e | Sensitivity table: family shares under the three shared-peptide policies and two de novo cutoffs | M | 1.5 | 🟢 | J6b | Program table; stored results reused, none invented | AS | | 0 | 0 | |
 | J5f | Abundance against diversity: each family as a point, its share of the venom against its toxin count, so the two are never confused | M | 1.5 | 🟢 | J6b | Native PNG in both themes and the Light export; values equal the composition export | LK | | 0 | 0 | |
 | J5g | Family and subclass ring chart: families on the inner ring, their subclasses and "class not resolved" on the outer ring, small families grouped as others | M | 1.5 | 🟢 | J6b | Native PNG in both themes; rings sum to 100% | LK | | 0 | 0 | |
-| J5h | Where each family's signal came from: identified, de novo in the database and de novo found only in the family world, stacked per family | M | 1 | 🟢 | J6b | Native PNG in both themes; parts equal the stored result table | T2 | | 0 | 0 | |
 
 ### W6 The Word report, written by the program
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| J6a | Report writer: a `.docx` with title, contents and methods written from the project's own facts (inputs and hashes, database counts and labels, search and de novo settings, the quantitation rules in force) | M | 2 | J1b0, J6d | J6b, J6c | Opens in Word; fixed wording is general; same bytes under pt-BR and en-US; every Report details field printed in its place | RS | | 0 | 0 | |
-| J6b | Results in the report: composition with toxin counts, per-run table, subclass and domain tables, figures, Database gap, quality rates, sensitivity and the others list | H | 3 | J6a, J2c, J3b, J4b, J4c, J5a, J5b, J5c, J5d, J5e, J5f, J5g, J5h, J6g, J6h, J6i | J6e | Every number in the document equals the program's own export | RS | | 0 | 0 | |
-| J6c | One section per family from the user's panel: its decision, literature abundance and notes printed beside the observed numbers | M | 1 | J6a | J6e | Panel text appears as written; no fixed organism text | T2 | | 0 | 0 | |
-| J6d | Report details: one form saved in the project (title, authors, sample, workflow, kind of database, written interpretation), each printed in its place in the report | M | 1.5 | 🟢 | J6e, J7b | Round trip; Undo; native editor test. Printing each field is checked in J6a, whose writer consumes it | SH | | 0 | 0 | |
+| J6a | Report writer: a `.docx` with title, contents and methods written from the project's own facts (inputs and hashes, database counts and labels, search and de novo settings, the quantitation rules in force) | M | 2 | J1b0 | J6b, J6c | Opens in Word; fixed wording is general; same bytes under pt-BR and en-US; every Report details field printed in its place | RS | | 0 | 0 | |
+| J6b | Results in the report: composition with toxin counts, per-run table, subclass and domain tables, figures, Database gap, quality rates, sensitivity and the others list | H | 3 | J6a, J2c, J4b, J4c, J5d, J5e, J5f, J5g, J6g, J6h | J6e | Every number in the document equals the program's own export | RS | | 0 | 0 | |
 | J6f | Report sections with checkboxes: the Export report screen lists every section and figure, each with a checkbox, all ticked by default; the choice is stored in the project and the document holds exactly the ticked parts | M | 1 | J6a | J6e | Native test: unticking a section removes it and only it; the choice survives reopen | SH | | 0 | 0 | |
 | J6g | Automatic explanations: every figure and table gets a caption saying what is drawn and how to read it, plus sentences written from that project's own numbers, in general words | M | 2 | J6a | J6b | Each caption's numbers equal the figure's data; no fixed organism text | LK | | 0 | 0 | |
 | J6h | Every figure the program already draws goes into the report: ion current, M+0 recovery, XIC mass, isotope count, de novo scores and sources, accepted scores, family-world error rates, Database gap | M | 1.5 | J6a | J6b | Each figure in the document is byte-equal to the program's own PNG export | RS | | 0 | 0 | |
-| J6i | Input provenance for the methods: the database's original file name, the SEPro package name and the search settings read from the search parameter file beside it, stored in the project when Results are computed or the file is chosen | M | 1 | J6d | J6b | Methods print the database name and the search settings from the project alone; a project without them says which are missing | SH | | 0 | 0 | |
-| J6e | File > Export report: the command, the wait screen, refusal when Results are missing, Help | M | 1 | J6b, J6c, J6d, J6f | J7c | Native command test writes the document | SH | | 0 | 0 | |
+| J6e | File > Export report: the command, the wait screen, refusal when Results are missing, Help | M | 1 | J6b, J6f | J7c | Native command test writes the document | SH | | 0 | 0 | |
 
 ### W7 The analysis
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
 | J0 | Baseline run of today's program on the new data, with timings and a gap list against Ana's rules | M | 1.5 | 🟢 | J7a | RESULT J0 posted with every output path | OP | | 0 | 0 | |
-| J7a | The full run through the program: panel import, evidence, families, subclasses, Compute on three runs with de novo, family world, Database gap; project saved | H | 2 | J0, J1d, J2b, J3b, J4b, J5a, J5b | J7b | The project reopens; a second Compute repeats every number | OP | | 0 | 0 | |
-| J7b | Interpretation, written into the project notes, quoting only the report's numbers, read against Ana's panel | M | 1.5 | J7a, J6d | J7c | A second reader checks every number against the report | OP | | 0 | 0 | |
+| J7a | The full run through the program: panel import, evidence, families, subclasses, Compute on three runs with de novo, family world, Database gap; project saved | H | 2 | J0, J1d, J2b, J4b | J7b | The project reopens; a second Compute repeats every number | OP | | 0 | 0 | |
+| J7b | Interpretation, written into the project notes, quoting only the report's numbers, read against Ana's panel | M | 1.5 | J7a | J7c | A second reader checks every number against the report | OP | | 0 | 0 | |
 | J7c | Final export and delivery: every number in the document traced to a program export, then the Word report, the project and the family panel written to `C:/Users/paulo/Desktop/AnaG/Bjararaca/Relatorio`, nothing else in Ana's folders touched | M | 1 | J6e, J7b | J7d | Reviewer's trace table with 0 mismatches | OP | | 0 | 0 | |
 | J7d | Release 2.1.0, so Ana can make the same report, on Paulo's word | L | 0.5 | J7c | | The release names the version the report prints | EV | | 0 | 0 | |
 | J8 | Parallel suite: the console suite split into independent shards run as separate processes at once, each with its own temp folder, with one summary that adds them up; gates and quick suites use it | M | 1.5 | 🟢 | J7a | The sharded run reports exactly the serial run's passed, failed and skipped counts on the same commit, in a fraction of the time | OP | | 0 | 0 | |
