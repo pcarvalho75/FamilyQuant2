@@ -91,13 +91,7 @@ public static class ReportProjectExporter
                     blocks.Insert(0, new ReportParagraph("current-grouping-notice",
                         "Draft of the saved current grouping. No family panel is stored in this project. Group-specific, shared and unattributed signal remain separate; panel-based assignments can change both the grouping and its shared-signal fraction."));
                 blocks.AddRange(figures.Where(f => f.SectionId == section.Id).Select(f => (ReportBlock)f.Figure));
-                var notices = blocks.OfType<ReportParagraph>().Select(p => p.Text.Trim()).ToHashSet(StringComparer.OrdinalIgnoreCase);
-                foreach (var (missing, index) in unavailable.Where(f => f.SectionId == section.Id).Select((f, index) => (f, index)))
-                {
-                    string message = missing.Title + ": " + missing.Reason;
-                    if (notices.Add(message.Trim()))
-                        blocks.Add(new ReportParagraph(section.Id + ":unavailable-figure:" + index.ToString(CultureInfo.InvariantCulture), message));
-                }
+                ReportFigureAvailabilityBlocks.Append(blocks, section.Id, unavailable);
                 return section with { Blocks = blocks };
             }).ToArray(),
         };

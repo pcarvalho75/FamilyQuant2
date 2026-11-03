@@ -79,7 +79,7 @@ public static class ReportCurrentResults
         {
             concordance.Validate();
             quality.Add(Export("quality-concordance", "Database-search concordance", "database_search_concordance.csv",
-                IdentificationConcordanceStudy.BuildCsv(concordance), "Agreement is measured among precursor-qualified one-to-one PSM pairs, not all shared scans."));
+                ConcordanceAuditCsv(concordance), "Agreement is measured among precursor-qualified one-to-one PSM pairs, not all shared scans."));
         }
         else quality.Add(new ReportParagraph("quality-concordance-unavailable", "Database-search concordance: not computed in this project."));
         var world = manifest.FamilyWorldResult?.ForLength(manifest.DatabaseGapMinimumTagLength ?? FamilyWorldOptions.DefaultMinimumTagLength);
@@ -121,4 +121,13 @@ public static class ReportCurrentResults
             new ReportSection(ReportSectionIds.Supplements, "Supplements", supplement),
         }, exports);
     }
+
+    // Preserve the original audit verbatim, then expose the two stored source counts as integer cells.
+    // Empty denominators keep raw PSM counts distinct from precursor-qualified agreement rates.
+    private static string ConcordanceAuditCsv(IdentificationConcordanceSummary summary) =>
+        IdentificationConcordanceStudy.BuildCsv(summary)
+        + "PatternLab_vs_PEAKS_database,patternlab_psm_rows," + summary.PatternLabPsmRows.ToString(CultureInfo.InvariantCulture)
+        + ",,\"Stored PatternLab database-search PSM rows; source audit only, not a comparable-pair denominator\"\n"
+        + "PatternLab_vs_PEAKS_database,peaks_database_psm_rows," + summary.PeaksDatabasePsmRows.ToString(CultureInfo.InvariantCulture)
+        + ",,\"Stored PEAKS database-search PSM rows; source audit only, not a comparable-pair denominator\"\n";
 }
