@@ -95,7 +95,9 @@ Ana installs it from the public releases page (D31); the desk publishes on Paulo
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| K14 | Final export of the interpreted project through the real command, on master with J30, J24, J16, J32 and J34 | L | 0.5 | K8 | K15, K16 | Word report and supplement written | OP | | 0 | 0 | |
+| J34f | A Word table that continues on the next page repeats its header row there, and its caption stays with its last row (Ana's report p18-p20, results/product-parts: no header on p19, the caption alone at the top of p20; FQLook's K16, 12:14) | L | 0.3 | 🟢 | K14 | Red then green on a fixture that spans a page; the page check shows p19 with the header and the caption with the table; no cell changes | SH | | 0 | 0 | |
+| J34g | A sentence that points to a workbook sheet never states a table size that differs from that sheet (K15 blocking, 12:19: p435 'Database-family composition' says 1016 data rows across 4 columns, the sheet has 1018 and 5; p437 says 1018 and 4, the sheet 5 columns; p1478 says 1024 and 3, the sheet 10 columns): apply J34d's rule (workbook-only references print no grid size) to every such reference, or print the sheet's exact size | L | 0.3 | 🟢 | K14 | Red then green; on the real export no dimension sentence differs from its sheet; trace unchanged otherwise | LK | | 0 | 0 | |
+| K14 | Final export of the interpreted project through the real command, on master with J30, J24, J16, J32 and J34 | L | 0.5 | J34f, J34g, K8 | K15, K16 | Word report and supplement written | OP | | 0 | 0 | |
 | K15 | Number trace on the final report: every number found, or each one not found ruled | L | 0.2 | K14 | K17 | `trace.csv` with nothing left open | T1 | | 0 | 0 | |
 | K16 | The final report's pages read for look and sense | L | 0.3 | K14 | K17 | No blocking item | LK | | 0 | 0 | |
 | K17 | Delivered: the Word report, supplement, project, family panel, a read-me with the release link, and the AI key file (D42) written to `AnaG/Bjararaca/Relatorio`; nothing else in Ana's folders touched | L | 0.2 | K7, K15, K16, K11 | | The five items with hashes; the rest of AnaG unchanged | OP | | 0 | 0 | |
@@ -117,6 +119,7 @@ Compute took 37 to 54 minutes on Ana's project with the RAW cache warm, silent f
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
 | J43 | With a panel in use, the headline and composition figures use the per-panel-family totals (D40, B): before and after shown on a real project with several families in one panel family, science review, the old unit kept in the supplement | M | 1 | 🟢 | | Red then green on a multi-family fixture; before/after table on a real project; reviewed | FL | | 0 | 0 | |
+| J49 | The number trace cites the right cell (2.1.1): a printed number is matched first to cells of the sentence's own subject (the family, run or option it names), and a number that equals several cells with no subject match is reported AMBIGUOUS instead of the first equal cell (K15, 11-03: the 14-protein estimate of one family was cited to the '14 families above threshold' cell; the cover's 2.0 to a protein count) | M | 1 | 🟢 | | On Ana's export every K15 wrong-cell example cites its subject cell; ambiguous cases listed; NOT FOUND unchanged | RS | | 0 | 0 | |
 
 ## Critical path
 
