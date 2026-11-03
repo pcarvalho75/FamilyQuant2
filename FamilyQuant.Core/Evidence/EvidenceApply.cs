@@ -95,6 +95,8 @@ namespace FamilyQuant.Evidence
             ArgumentNullException.ThrowIfNull(selection);
             operation?.Report("evidence-apply", "Validating evidence choices");
             selection = Clone(selection);
+            Panels.FamilyPanel? familyPanel = file.FamilyPanel == null ? null : Panels.FamilyPanelValidation.Clone(file.FamilyPanel);
+            if (familyPanel != null) Panels.FamilyPanelValidation.Validate(familyPanel);
             if (selection.ConfirmedTask != null) EvidenceTaskDiscovery.Validate(file, selection.ConfirmedTask, proposal.Options.ScopeTerms);
             if (selection.SessionSearch == null && selection.SessionReferences != null)
                 throw new ArgumentException("Session references require a session search.", nameof(selection));
@@ -115,6 +117,7 @@ namespace FamilyQuant.Evidence
             });
             if (sessionInput) request = Hash(new { Request = request, selection.SessionSearch, selection.SessionReferences, selection.CheckedMotifs });
             if (selection.ConfirmedTask != null) request = Hash(new { Request = request, selection.ConfirmedTask });
+            if (familyPanel != null) request = Hash(new { Request = request, FamilyPanel = familyPanel });
             if (file.EvidenceRecipe?.RequestFingerprint == request
                 && file.EvidenceRecipe.AppliedStateFingerprint == StateFingerprint(file, session: file.EvidenceRecipe))
                 return new EvidenceApplyResult { Recipe = Clone(file.EvidenceRecipe) };
@@ -220,10 +223,12 @@ namespace FamilyQuant.Evidence
                 IncludesSessionEvidence = sessionInput, SessionSearch = session.Search, SessionReferences = session.References,
                 CheckedMotifs = session.Motifs, CheckedMotifResults = session.Results,
                 ConfirmedTask = selection.ConfirmedTask,
+                FamilyPanel = familyPanel,
             };
             foreach (var family in assignments.Where(a => !familyNames.ContainsKey(a.Family)).GroupBy(a => a.Family, StringComparer.Ordinal))
                 recipe.Families.Add(new EvidenceFamilyChoice { Family = family.Key, Name = family.First().Name, Selected = true });
-            if (initialState != StateFingerprint(file) || initialMotifs != Hash(file.Motifs))
+            if (initialState != StateFingerprint(file) || initialMotifs != Hash(file.Motifs)
+                || Hash(file.FamilyPanel) != Hash(familyPanel))
                 throw new InvalidOperationException("The curation changed while the evidence choices were validated.");
             recipe.SourceStateFingerprint = StateFingerprint(file, session: recipe);
             recipe.AppliedStateFingerprint = StateFingerprint(file, assignments, recipe, projectSession: true);
@@ -236,6 +241,7 @@ namespace FamilyQuant.Evidence
             ArgumentNullException.ThrowIfNull(recipe);
             operation?.Report("evidence-apply", "Validating the saved evidence recipe");
             recipe = Clone(recipe);
+            if (recipe.FamilyPanel != null) Panels.FamilyPanelValidation.Validate(recipe.FamilyPanel);
             if (recipe.ConfirmedTask != null) EvidenceTaskDiscovery.Validate(file, recipe.ConfirmedTask, recipe.Options.ScopeTerms);
             string state = StateFingerprint(file, session: recipe);
             if (state == recipe.AppliedStateFingerprint && file.EvidenceRecipe != null
@@ -274,6 +280,7 @@ namespace FamilyQuant.Evidence
             EvidenceRecipe returned = Clone(recipe);
             EvidenceProvenance? source = SessionSource(file, stored.SessionSearch);
             List<MotifPattern>? motifs = stored.CheckedMotifs == null ? file.Motifs : Clone(stored.CheckedMotifs);
+            Panels.FamilyPanel? panel = stored.FamilyPanel == null ? file.FamilyPanel : Panels.FamilyPanelValidation.Clone(stored.FamilyPanel);
             GroupingSnapshot undo = GroupingSnapshot.CaptureEvidence(file);
             operation?.Report("evidence-apply", "Publishing the reviewed evidence choices", 1, 1);
             void Publish()
@@ -291,6 +298,7 @@ namespace FamilyQuant.Evidence
                 file.EvidenceSource = source;
                 file.Motifs = motifs;
                 file.EvidenceRecipe = stored;
+                file.FamilyPanel = panel;
             }
             if (operation == null) Publish();
             else operation.Commit(Publish);
@@ -330,7 +338,11 @@ namespace FamilyQuant.Evidence
                 Curation = curation, Motifs = projectSession ? session.CheckedMotifs ?? file.Motifs : file.Motifs,
                 Session = Hash(new { session.SessionSearch, session.SessionReferences, session.CheckedMotifs, session.CheckedMotifResults }),
             }) : curation;
-            return session?.ConfirmedTask == null ? state : Hash(new { State = state, session.ConfirmedTask });
+            if (session?.ConfirmedTask != null) state = Hash(new { State = state, session.ConfirmedTask });
+            return session?.FamilyPanel == null ? state : Hash(new
+            {
+                State = state, FamilyPanel = projectSession ? session.FamilyPanel : file.FamilyPanel,
+            });
         }
 
         private static string GroupKey(params string[] parts) => JsonSerializer.Serialize(parts);
