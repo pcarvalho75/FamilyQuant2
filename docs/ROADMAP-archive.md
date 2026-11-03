@@ -245,6 +245,9 @@ Finished steps, moved here from docs/ROADMAP.md. The board shows them as green.
 | J6h | Every figure the program already draws goes into the report: ion current, M+0 recovery, XIC mass, isotope count, de novo scores and sources, accepted scores, family-world error rates, Database gap | M | 1.5 | J6a | J6b | Each figure in the document is byte-equal to the program's own PNG export | RS | | 0 | 0 | |
 | J6e | File > Export report: the command, the wait screen, refusal when Results are missing, Help | M | 1 | J6b, J6f | J7c | Native command test writes the document | SH | | 0 | 0 | |
 | J6j | Supplement workbook: the program writes `<report>_supplement.xlsx` beside the Word document, one sheet per long table (per protein, per peptide, per run, others list, audit), each sheet named where the document cites it, following the section checkboxes | M | 1.5 | 🟢 | J6b | Workbook opens in Excel; sheets equal the program's CSV exports cell for cell; same bytes under pt-BR and en-US | SH | | 0 | 0 | |
+| J6g | Automatic explanations: every figure and table gets a caption saying what is drawn and how to read it, plus sentences written from that project's own numbers, in general words | M | 2 | 🟢 | J6b | Each caption's numbers equal the figure's data; no fixed organism text | LK | | 0 | 0 | |
+| J6k | The new figures in the report: composition with run error bars, the family and subclass ring, abundance against diversity, the signal sources, and coverage maps of the top proteins of each family, each with its automatic caption, as a figures builder FQResults' J6b calls | M | 1.5 | 🟢 | J6b | Each figure in the document is byte-equal to the program's own PNG export and its caption's numbers equal the figure's data | LK | | 0 | 0 | |
+| J6b | Results in the report: composition with toxin counts, per-run table, subclass and domain tables, figures, Database gap, quality rates, sensitivity and the others list | H | 3 | J2c, J4c, J5g, J6g | J6e | Every number in the document equals the program's own export; the document reads in about 30 to 40 pages and every long table goes to a companion `_supplement.xlsx` the program writes beside it | RS | | 0 | 0 | |
 
 ### W4 Where the peptides fall
 
@@ -252,6 +255,7 @@ Finished steps, moved here from docs/ROADMAP.md. The board shows them as green.
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
 | J4a | Fetch domain positions (InterPro) and UniProt feature positions (chain, peptide, propeptide, signal) for each protein, stored with the evidence and its provenance | M | 2 | 🟢 | J4b, J4c | Live fetch on Ana's database; the project reopens offline with the positions | AS | | 0 | 0 | |
 | J4b | Signal by domain and by mature product: each peptide placed on its protein's domains and named products; per family the share in each domain and outside any domain | M | 2 | 🟢 | J6b, J7a | Domain parts sum to the family; fixture | FL | | 0 | 0 | |
+| J4c | Coverage map figure: a protein drawn as a bar with its domains and the identified and de novo peptides on it, for the top proteins of each family | M | 2 | 🟢 | J6b | Native PNG in both themes and the Light export | LK | | 0 | 0 | |
 
 ### W5 The numbers Ana asked for
 
@@ -264,6 +268,7 @@ Finished steps, moved here from docs/ROADMAP.md. The board shows them as green.
 | J5d | Composition charts: family shares with run-to-run error bars, and subclasses stacked within each family. Every figure is drawn by the program on screen and exported for the report | M | 1.5 | 🟢 | J6b | Native PNG in both themes and the Light export | LK | | 0 | 0 | |
 | J5f | Abundance against diversity: each family as a point, its share of the venom against its toxin count, so the two are never confused | M | 1.5 | 🟢 | J6b | Native PNG in both themes and the Light export; values equal the composition export | LK | | 0 | 0 | |
 | J5e | Sensitivity table: family shares under the three shared-peptide policies and two de novo cutoffs | M | 1.5 | 🟢 | J6b | Program table; stored results reused, none invented | AS | | 0 | 0 | |
+| J5g | Family and subclass ring chart: families on the inner ring, their subclasses and "class not resolved" on the outer ring, small families grouped as others | M | 1.5 | 🟢 | J6b | Native PNG in both themes; rings sum to 100% | LK | | 0 | 0 | |
 
 ### W3 Subclasses
 
