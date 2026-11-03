@@ -53,7 +53,7 @@
                                     Visibility="{Binding HasDomains, Converter={StaticResource VisibleWhenTrue}}">
                             <TextBlock Text="Keep domains" VerticalAlignment="Center" Margin="8,0"/>
                             <TextBox x:Name="domainsBox" Width="180" Text="{Binding DomainText, UpdateSourceTrigger=PropertyChanged}"
-                                     ToolTip="Domains to keep, separated by commas or spaces, as the Domains column writes them, for example: Reprolysin, ADAM_CR."/>
+                                     ToolTip="Domains to keep, separated by commas or spaces. Copy domain names as the Domains column writes them."/>
                             <ComboBox x:Name="domainsList" Width="190" ItemsSource="{Binding DomainChoices}" SelectedItem="{Binding ChosenDomain}" Margin="6,0"
                                       ToolTip="The domains on this list, most proteins first. Choosing one adds its name to the box and resets this list."/>
                             <Button Content="Apply" Click="Domains_Click" ToolTip="Unticks proteins with none of these domains. A protein with no domains stays ticked if it carries a keyword."/>

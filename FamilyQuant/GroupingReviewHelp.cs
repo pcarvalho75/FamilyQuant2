@@ -12,7 +12,7 @@ namespace FamilyQuant
         Exclude words keep individual proteins out. The rest of the family still joins. Ignore words from Recluster by words remains part of the matching scope.
         A red row carries no keyword itself: it is offered because another protein in its family does. Untick the red ones keeps only carriers. Tick all restores the offered rows. Tick selected and Untick selected act only on the selected rows; use a heading to sort and Shift+click to select many.
         The hidden-families option includes matching families hidden by the main Search without changing that Search.
-        Domains are fetched from UniProt and remain stored offline with the file. Keep domains unticks proteins carrying none of the supplied domains; it does not tick new rows. A protein with no domains stays ticked if it carries a keyword. Choose a domain from the list, most proteins first, to append its name without the count, or type names separated by commas/spaces, for example Reprolysin, ADAM_CR. If the file has no domains yet, use Fetch evidence in the main screen.
+        Domains are fetched from UniProt and remain stored offline with the file. Keep domains unticks proteins carrying none of the supplied domains; it does not tick new rows. A protein with no domains stays ticked if it carries a keyword. Choose a domain from the list, most proteins first, to append its name without the count, or type domain names from the Domains column separated by commas/spaces. If the file has no domains yet, use Fetch evidence in the main screen.
 
         Evidence
         At least 70 percent of the query's residues occur in the alignment; inserted gap columns do not count.

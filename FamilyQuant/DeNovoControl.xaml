@@ -81,7 +81,7 @@
                            ToolTip="Which de novo program made the export. Each keeps its own confidence score: PEAKS uses ALC, DeepNovo uses SCORE."/>
                     <ComboBox x:Name="ComboBoxDeNovoSource" Width="300" Margin="5" SelectedIndex="0"
                               SelectionChanged="ComboBoxDeNovoSource_SelectionChanged"
-                              ToolTip="Choose PEAKS de novo only (default), PEAKS de novo all (including identified spectra), or DeepNovo filtered on SCORE (%). This inspection takes one source at a time with the shared source-native cutoffs; Quantify can combine sources.">
+                              ToolTip="Choose one source or a union of PEAKS and DeepNovo: PEAKS de novo only is the default, PEAKS de novo all includes identified spectra, and DeepNovo uses SCORE (%). Each source keeps its own native cutoff in inspection and Quantify.">
                         <ComboBoxItem Content="PEAKS de novo only (*.denovoOnly.csv)" Tag="peaks-denovo-only"/>
                         <ComboBoxItem Content="PEAKS de novo all (*.denovo.csv)" Tag="peaks-denovo-all"/>
                         <ComboBoxItem Content="DeepNovo (*.deepnovo.csv)" Tag="deepnovo"/>

@@ -40,8 +40,14 @@ internal static partial class Program
             model.Status.Contains(model.SeproPackage, StringComparison.Ordinal) && model.Status.Contains("same runs", StringComparison.Ordinal));
         Facts("Files and navigation", general, "nothing is saved", "whole numbers with digit grouping", "names the written CSV path",
             "status bar", "what to do next", "Tab and Shift+Tab", "full XIC result");
-        Facts("De novo", HelpContent.BuildDeNovo(), "one source at a time", "Quantify can combine sources", "per searched peptide",
+        Facts("De novo", HelpContent.BuildDeNovo(), "one source or a union", "Quantify can combine sources", "per searched peptide",
             "family IDs, protein IDs and ambiguity", "reads peptides, not chromatograms", "use Quantify and Results");
+        var sourceChoice = (System.Windows.Controls.ComboBox)new DeNovoControl().FindName("ComboBoxDeNovoSource");
+        string sourceTip = (string)sourceChoice.ToolTip;
+        Check("de novo inspection tooltip agrees with its selectable source unions",
+            sourceChoice.Items.OfType<System.Windows.Controls.ComboBoxItem>().Any(item => item.Tag is string tag && tag.StartsWith("union-", StringComparison.Ordinal))
+            && sourceTip.Contains("one source or a union", StringComparison.OrdinalIgnoreCase)
+            && !sourceTip.Contains("one source at a time", StringComparison.OrdinalIgnoreCase));
         Facts("Locks", LockManagerViewModel.Explanation, "read-only", "zero remaining proteins", "Still in use", "already removed from the open file");
         Facts("Spectrum table", SpectrumComparisonViewModel.Explanation, "number of rows shown", "read-only", "one scan can have several rows");
         PrefixDefinitionTests();
