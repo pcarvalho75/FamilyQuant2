@@ -61,7 +61,15 @@ internal static partial class Program
         Check("J6c includes exact stored run and protein values", new[] { "run-one", "123.5", "0.125", "0.075", "3", "2", "5" }.All(firstValues.Contains));
         Check("J6c reports the stored share method and shared-peptide policy", sections != null && sections[0].Blocks
             .OfType<ReportTable>().Any(t => t.Caption.Contains("Stored method details", StringComparison.Ordinal)
-                && t.Caption.Contains("SplitEqually", StringComparison.Ordinal)));
+                && t.Caption.Contains(SharedPeptidePolicy.SplitEqually.DisplayName(), StringComparison.Ordinal)));
+        foreach (var policy in Enum.GetValues<SharedPeptidePolicy>())
+        {
+            manifest.FamilyRunShares!.Policy = policy;
+            var policySections = ReportPanelSections.BuildFromResults(file, manifest);
+            Check("J6c uses the screen name for " + policy, policySections[0].Blocks.OfType<ReportTable>()
+                .Any(t => t.Title == "Observed family share" && t.Caption.Contains(policy.DisplayName(), StringComparison.Ordinal)));
+        }
+        manifest.FamilyRunShares!.Policy = SharedPeptidePolicy.SplitEqually;
         var runTwo = sections?.FirstOrDefault()?.Blocks.OfType<ReportTable>().Where(t => t.Title == "Observed run shares")
             .SelectMany(t => t.Rows).FirstOrDefault(r => r.Contains("run-two"));
         Check("J6c distinguishes recorded zero from an unavailable share", runTwo != null

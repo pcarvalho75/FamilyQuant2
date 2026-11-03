@@ -28,7 +28,7 @@ public static class ReportPanelSections
             if (manifest.FamilyRunShares.Families.GroupBy(f => f.FamilyUserId).Any(g => g.Count() > 1))
                 throw new InvalidOperationException("The stored family share result repeats a User ID.");
             string basis = "Signal uses observed identified envelope plus reference-calibrated de novo envelope. Shared-peptide policy: "
-                + manifest.FamilyRunShares.Policy + ". " + (string.IsNullOrWhiteSpace(manifest.FamilyRunShares.Method)
+                + manifest.FamilyRunShares.Policy.DisplayName() + ". " + (string.IsNullOrWhiteSpace(manifest.FamilyRunShares.Method)
                     ? "Method not recorded." : manifest.FamilyRunShares.Method);
             foreach (var family in manifest.FamilyRunShares.Families)
             {
