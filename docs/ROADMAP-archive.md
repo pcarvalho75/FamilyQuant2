@@ -424,6 +424,7 @@ Paulo agreed these at the restart, 2026-11-01.
 | K3 | Science check, part 1: the two runs' family assignments compared; nothing non-venom pulled in; the 3 new Kunitz and Waprin link choices follow D38 | M | 0.5 | 🟢 | K4 | `RESULT D39-review` part 1 | GR | | 0 | 0 | |
 | K1 | Rerun: Compute on the three runs finishes, from the RAW cache | L | 0.5 | 🟢 | K2 | The run log shows Compute finished and the project saved | OP | | 0 | 0 | |
 | K2 | Rerun: Results, sensitivity and save; the change table posted (proteins and families that moved, the ten lectins, the new headline, subclass parts, others) | L | 0.3 | 🟢 | K4, K6 | `RESULT J7a2` with the change table | OP | | 0 | 0 | |
+| K4 | Science check, part 2: the rerun's headline numbers against the program's stored studies and exports; verdict on D39 | M | 0.4 | 🟢 | K6 | `APPROVED` on the rerun, or the changes it needs | GR | | 0 | 0 | |
 
 ### W3 The report export works and is fast
 
@@ -434,6 +435,10 @@ Paulo agreed these at the restart, 2026-11-01.
 | J34a | The report's look: the 38-page rehearsal report read page by page as a scientist would | M | 0.5 | 🟢 | J34b | A numbered list with page, figure id and file:line | LK | | 0 | 0 | |
 | J16b | J16 re-reviewed and merged | L | 0.2 | 🟢 | J34b, K8, K14 | Approved; gate green | LK | | 0 | 0 | |
 | J30c | J30 reviewed and merged | L | 0.2 | J30b | J24c, J32c, J34b, J36b, K8, K14 | Approved; gate green | RS | | 0 | 0 | |
+| J32c | Export timing on the full-run copy: the attribution step with the cache warm, its sub-steps timed | L | 0.3 | J41b | J32d, J39 | `READY` with the sub-step times before and after | T1 | | 0 | 0 | |
+| J41a | No list in one cell: on Ana's project the supplement refused to write because one cell, a family's 1,970 unexplained peptide sequences, is 38,388 characters (Excel's limit is 32,767); a list goes to its own one-row-per-item sheet, the Word file and CSVs keep their counts | M | 0.5 | 🟢 | J41b, J30b | A fixture with a list longer than Excel's limit writes the workbook; every item is in the list sheet; nothing is truncated | FL | | 0 | 0 | |
+| J32d | J32 reviewed and merged | L | 0.2 | 🟢 | K14 | Approved; gate green | T1 | | 0 | 0 | |
+| J36a | Delivery command built and tested on a small computed project: export, trace, project, panel, read-me, checks, nothing written outside its folder | M | 0.5 | 🟢 | J36b | Fixture run passes | RS | | 0 | 0 | |
 
 ### W7 Clear reasons and totals
 
@@ -444,16 +449,25 @@ Paulo agreed these at the restart, 2026-11-01.
 | J27b | One total per panel family: the program computes and stores the per-panel-family totals when several families share a panel family (contract posted) | M | 1 | 🟢 | J27c | A fixture's stored totals credit a shared peptide once | FL | | 0 | 0 | |
 | J27c | The per-family briefs and new exports read those totals; the headline keeps its unit (D40) | M | 0.5 | J27b | J27d | Old exports unchanged; new exports added | FL | | 0 | 0 | |
 | J33c | J33 reviewed and merged | L | 0.2 | 🟢 | J37a, J40 | Approved; gate green | T2 | | 0 | 0 | |
+| J37a | A confirmed family link keeps a short note on why, saved with the project and printed in the report's method | L | 0.5 | 🟢 | J37b | Survives save and reopen; appears in the method table | T2 | | 0 | 0 | |
+| J37b | J37 reviewed and merged | L | 0.2 | J37a | | Approved; gate green | T2 | | 0 | 0 | |
 
 ### W4 Release 2.1.0 on GitHub
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
 | K12 | Install check rehearsed now on the published 2.0.0: download from GitHub, SHA-256, unpack, open a project, Check for updates | L | 0.3 | 🟢 | K13 | A written install log | EV | | 0 | 0 | |
+| K8 | Release candidate: release notes and version 2.1.0 merged with master after J30, J24, J31 and J16; the zip built | L | 0.3 | 🟢 | K9 | Zip with its SHA-256; the report cover prints 2.1.0 | EV | | 0 | 0 | |
 
 ### W6 Compute fast and visible
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
 | J17b | Faster evidence fetch (one streamed query instead of one per family, about 3 times faster, same entries) reviewed and merged | L | 0.2 | 🟢 | | Approved; gate green | AS | | 0 | 0 | |
+
+### W2 The interpretation
+
+| ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
+|---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
+| K5 | Interpretation drafted from the desk's outline, numbers left as marked places | M | 0.5 | 🟢 | K6 | The draft posted | OP | | 0 | 0 | |
 
