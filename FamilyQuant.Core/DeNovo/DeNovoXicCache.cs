@@ -109,7 +109,21 @@ namespace FamilyQuant.DeNovo
         public static DeNovoXicCache Load(string path, string runName, double ppm, int ms1Tolerance,
             int isotopeCount = DeNovoXicExtractor.DefaultIsotopeCount,
             int minPointsForQuant = DeNovoXicExtractor.DefaultMinPointsForQuant,
-            string? sourceFingerprint = null)
+            string? sourceFingerprint = null, string? fallbackPath = null)
+        {
+            DeNovoXicCache current = LoadSingle(path, runName, ppm, ms1Tolerance, isotopeCount, minPointsForQuant, sourceFingerprint);
+            if (fallbackPath != null && !string.Equals(path, fallbackPath, StringComparison.OrdinalIgnoreCase))
+            {
+                DeNovoXicCache legacy = LoadSingle(fallbackPath, runName, ppm, ms1Tolerance, isotopeCount, minPointsForQuant, sourceFingerprint);
+                foreach (var entry in legacy._entries) current._entries.TryAdd(entry.Key, entry.Value);
+            }
+            // Legacy entries are read only. If extraction adds anything, Save targets the modern
+            // path; a fully cached run can keep reading the legacy file without rewriting either.
+            return current;
+        }
+
+        private static DeNovoXicCache LoadSingle(string path, string runName, double ppm, int ms1Tolerance,
+            int isotopeCount, int minPointsForQuant, string? sourceFingerprint)
         {
             string fingerprint = sourceFingerprint ?? string.Empty;
             var empty = new DeNovoXicCache(path, runName, ppm, ms1Tolerance, isotopeCount, minPointsForQuant, fingerprint,

@@ -21,6 +21,30 @@ failures retain their existing distinct warning boundaries. All seven studies
 called by Compute remain in `Quantitation/Studies`; none becomes a report-only
 dependency or disappears from the manifest.
 
+## Compute output storage
+
+Full XIC writes new caches and its automatic spectrum CSV under
+`%LOCALAPPDATA%/FamilyQuant2/familyquant_fullxic_cache/<acquisition-path SHA256>/`.
+`FullXicOptions.CacheDirectory` can supply another root outside the acquisitions.
+Folder scoping prevents equal run names in different input folders from sharing
+a mutable cache file; RAW content and extraction parameters are still validated.
+Existing sidecars beside RAW remain read-only sources. Valid legacy extraction
+entries can fill gaps in a current cache, whose entries take precedence. Detector
+legacy results receive the same content/parameter validation. Explicit external
+cache callbacks remain isolated and do not silently consult acquisition-side
+caches. An acquisition-side callback becomes a read source, never a write target.
+Automatic CSV export refuses a requested path inside RAW while retaining the
+completed quantitation and spectrum table.
+
+`--test-fullxic-storage` checks routing, fallback validation and CSV protection.
+`--check-readonly-fullxic <RAW-file> <SEPro-package> <complete-cache-folder> <fresh-output>`
+runs a bounded real-input check using an owned RAW hard link and cache copies.
+It preflights every extraction request, denies new writes through owned directory
+ACLs, and compares quant rows, TIC, derived fractions, the spectrum table and
+input fingerprints. It changes no original RAW ACL/attribute and copies no RAW
+bytes. This cache-backed check proves input immutability and replay equality,
+not independent fresh extraction.
+
 Family quantitation has these stages:
 
 1. `SearchCuration` searches normalized sequences, retaining compact protein hits.

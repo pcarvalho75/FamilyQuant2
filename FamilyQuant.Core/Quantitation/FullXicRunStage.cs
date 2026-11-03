@@ -17,6 +17,7 @@ namespace FamilyQuant
             Func<string, string>? detectedCachePathFor)
         {
             string rawDirectory = input.RawDirectory;
+            var storage = new FullXicStoragePaths(rawDirectory, options.CacheDirectory);
             Dictionary<string, string> rawByRun = input.RawByRun;
             Dictionary<string, List<PatternLabPsm>> psmsByRun = input.PsmsByRun;
             FullXicSourceInput deNovoImport = input.Sources;
@@ -51,13 +52,15 @@ namespace FamilyQuant
             // ---- identified side ----------------------------------------------------------------
             if (psmsByRun.TryGetValue(run, out List<PatternLabPsm>? runPsms) && runPsms.Count > 0)
             {
+                FullXicCacheLocation cache = storage.Extraction("identified", run, cachePathFor?.Invoke("identified", run));
                 var opt = new DeNovoXicOptions
                 {
                     IsotopeCount = options.IsotopeCount,
                     MinPointsForQuant = options.MinPointsForQuant,
                     Ppm = options.Ppm,
                     Ms1Tolerance = options.Ms1Tolerance,
-                    CachePath = CachePath(cachePathFor, "identified", run, rawDirectory),
+                    CachePath = cache.WritePath,
+                    LegacyCachePath = cache.LegacyReadPath,
                     SourceFingerprint = rawFingerprint,
                     Progress = progress,
                 };
@@ -82,13 +85,15 @@ namespace FamilyQuant
             // ---- de novo side -------------------------------------------------------------------
             if (deNovoByRun.TryGetValue(run, out List<PeaksDeNovoRow>? runDeNovo) && runDeNovo.Count > 0)
             {
+                FullXicCacheLocation cache = storage.Extraction("denovo", run, cachePathFor?.Invoke("denovo", run));
                 var opt = new DeNovoXicOptions
                 {
                     IsotopeCount = options.IsotopeCount,
                     MinPointsForQuant = options.MinPointsForQuant,
                     Ppm = options.Ppm,
                     Ms1Tolerance = options.Ms1Tolerance,
-                    CachePath = CachePath(cachePathFor, "denovo", run, rawDirectory),
+                    CachePath = cache.WritePath,
+                    LegacyCachePath = cache.LegacyReadPath,
                     SourceFingerprint = rawFingerprint,
                     Progress = progress,
                 };
@@ -119,12 +124,10 @@ namespace FamilyQuant
             // noted rather than thrown.
             try
             {
-                string detectedCache = detectedCachePathFor != null
-                    ? detectedCachePathFor(run)
-                    : Path.Combine(rawDirectory, FullXicComputer.CacheFolderName, "ms1envelope_" + SafeFileName(run) + ".json");
+                FullXicCacheLocation detectedCache = storage.Detector(run, detectedCachePathFor?.Invoke(run));
 
                 Ms1EnvelopeDetectionResult det = Ms1EnvelopeDetector.DetectRun(
-                    rawPath, detectedCache, progress, rawFingerprint);
+                    rawPath, detectedCache.WritePath, progress, rawFingerprint, detectedCache.LegacyReadPath);
                 result.Detected[run] = det;
 
                 manifest.PerRunTic.TryGetValue(run, out double runTic);
@@ -149,21 +152,5 @@ namespace FamilyQuant
             GC.Collect();
         }
 
-        private static string CachePath(Func<string, string, string>? cachePathFor, string side, string run,
-            string rawDirectory)
-        {
-            if (cachePathFor != null) return cachePathFor(side, run);
-
-            string safe = SafeFileName(run);
-            return Path.Combine(rawDirectory, FullXicComputer.CacheFolderName, "fullxic_" + side + "_" + safe + ".json");
-        }
-
-        private static string SafeFileName(string name)
-        {
-            var sb = new System.Text.StringBuilder(name.Length);
-            char[] invalid = Path.GetInvalidFileNameChars();
-            foreach (char c in name) sb.Append(Array.IndexOf(invalid, c) >= 0 ? '_' : c);
-            return sb.Length == 0 ? "run" : sb.ToString();
-        }
     }
 }
