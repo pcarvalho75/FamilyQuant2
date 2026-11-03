@@ -269,10 +269,12 @@ Finished steps, moved here from docs/ROADMAP.md. The board shows them as green.
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
 | J3b | Credit each peptide to the deepest level it is unique to: a subclass when only that subclass holds it, else "family, subclass not resolved"; each family's parts sum to the family | H | 2 | 🟢 | J5d, J6b, J7a | Closure test bit for bit; family totals and golden unchanged | FL | | 0 | 0 | |
+| J3a | Subclass of each protein: by domain architecture (the user enters required and absent Pfam per subclass) or by the UniProt subfamily text, carried to unreviewed proteins by the nearest reviewed; definitions stored in the project | M | 2 | J2a | J3b | Fixtures; Ana's SVMP and PLA2 subclasses entered once and replayed from the recipe | T2 | | 0 | 0 | |
 
 ### W7 The analysis
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
 | J12 | Protein names in the new report and its supplement stop at the header's organism field (" OS="), as the screens do; the frozen 1.5-compatible exports keep their bytes | L | 0.5 | 🟢 | J6b | One shared name helper used by the report, supplement and audit CSV; golden stays 4/0/0 | AS | | 0 | 0 | |
+| J13 | Help for everything mission J added, in general words: the family panel (import, editing, template, Pfam check), families by evidence and the link confirmations, subclasses, per-run statistics, toxin counts, others, the sensitivity table, the new figures, and Export report with its sections and supplement | M | 1.5 | 🟢 | J7c | Every new screen and command has its Help page or section; no organism, venom or sample number in it; the wording tests pass | T1 | | 0 | 0 | |
 
