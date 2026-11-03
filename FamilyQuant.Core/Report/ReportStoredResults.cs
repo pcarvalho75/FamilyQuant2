@@ -19,7 +19,8 @@ public static class ReportStoredResults
         ReportTable Table(string id, string title, string file, string csv, string caption, string[] columns, string[] headings)
         {
             exports.Add(file, csv);
-            return ReportCsvTable.Build(id, title, csv, caption, columns) with { Columns = headings };
+            var table = ReportCsvTable.Build(id, title, csv, caption, columns) with { Columns = headings };
+            return ReportWordMembership.Filter(ReportTableSupplements.WithStoredPercentages(table, csv, columns), csv, grouping);
         }
         void Remove(string id) => results.RemoveAll(b => b.Id == id);
         const string displayed = " Percentages use six significant digits; companion CSV fraction columns retain round-trip values. Empty values are unavailable, not zero.";
@@ -31,11 +32,23 @@ public static class ReportStoredResults
                 "Headline family composition uses the arithmetic mean of available per-run shares, with sample SD and CV. Pooled composition and within-family parts are labelled separately. Per-run whole measured peptide signal and RAW TIC shares retain their own denominators. Family-world-only signal remains separate."));
             Remove("family-runs-unavailable");
             exports.Add("family_run_means.csv", ReportStudyExports.MeanShares(runs, familyLabels));
+            string headlineCsv = ReportStudyExports.Headline(grouping, manifest.FamilyProteinCounts, familyLabels);
+            exports.Add("report_settings.csv", ReportStudyExports.ReportSettings(grouping));
             results.Insert(0, Table("family-run-means", "Headline family composition: mean of per-run shares", "family_composition_headline.csv",
-                ReportStudyExports.Headline(grouping, manifest.FamilyProteinCounts, familyLabels),
+                headlineCsv,
                 "Each run's composition uses signal credited to database families. Mean and sample SD use available runs. Whole measured-signal mean/SD are separate stored statistics; family-world-only signal is excluded. Protein estimates count database entries, not genes or proteoforms. Others membership and summed-run uncertainty come only from the canonical stored-threshold accessor." + displayed,
                 new[] { "family", "mean_pct", "sample_sd_pct", "mean_measured_pct", "sample_sd_measured_pct", "greedy_protein_estimate", "unique_peptide_proteins" },
                 new[] { "Family", "Mean share (%)", "Sample SD (pp)", "Whole measured (%)", "Whole-signal SD (pp)", "Proteins needed (greedy)", "Proteins with own peptide" }));
+            var paired = ReportCsvTable.Build("paired-source", "Paired source", headlineCsv, "",
+                "family_user_id", "family", "status", "mean_pct", "greedy_protein_estimate");
+            results.Insert(1, new ReportParagraph("family-paired-intro",
+                "Each percentage is the mean of per-run shares of signal credited to database families; abundance is separate from protein diversity. Each count is a greedy estimate of database proteins that explain the family's observed peptides; partial estimates may leave peptides unexplained. These estimates are not counts of genes."));
+            int pairedIndex = 2;
+            foreach (var row in paired.Rows.Where(r => r[2] == "Listed"))
+            {
+                string count = row[4].Length == 0 ? "protein count unavailable" : row[4] + (row[4] == "1" ? " protein" : " proteins");
+                results.Insert(pairedIndex++, new ReportParagraph("family-paired:" + row[0], row[1] + " " + row[3] + "% (" + count + ")"));
+            }
             supplement.RemoveAll(b => b.Id == "others-unavailable");
             supplement.Add(Table("others-members", "Canonical others membership", "family_others_members.csv", ReportStudyExports.Others(grouping, familyLabels),
                 "Membership is decided once from the stored mean-share threshold and explicit panel decisions. Reasons are retained; unavailable/conflicting/excluded groups are not silently folded into others.",

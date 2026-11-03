@@ -92,6 +92,7 @@ internal static partial class Program
         var distribution = stored.DeNovoSourceScoreDistributions.First();
         var options = new FullXicOptions { IsotopeCount = stored.IsotopeCount, MinPointsForQuant = stored.MinPointsForQuant,
             Ppm = stored.Ppm, Ms1Tolerance = stored.Ms1Tolerance, ExportSpectrumComparisonCsv = false,
+            CacheDirectory = Path.Combine(Path.GetDirectoryName(output)!, "xic-owned-output"),
             DeNovoSelections = selections, DeNovoCriteria = new() { MinLength = distribution.MinLength,
                 StretchLength = distribution.StretchLength, StretchFloor = distribution.StretchFloor } };
         string sourceDirectory = Path.GetDirectoryName(stored.DeNovoInputs[0].FilePath)!;
@@ -126,13 +127,23 @@ internal static partial class Program
             string reading = At(398, 0) + Path.GetFileName(package) + At(398, 1);
             Add(398, 398, "identification import progress before matching", reading, string.Join(";", progress), progress.Contains(reading));
 
-            string defaultPath = (string)Call("FullXicRunStage", "CachePath", null, "identified", "bad:run?", "cache-root")!;
-            string expectedDefault = Path.Combine("cache-root", FullXicComputer.CacheFolderName, At(986, 0) + "identified" + At(986, 1) + "bad_run_" + At(986, 2));
-            string? callbackSide = null, callbackRun = null;
-            Func<string, string, string> overridePath = (side, name) => { callbackSide = side; callbackRun = name; return "explicit-cache.json"; };
-            string overridden = (string)Call("FullXicRunStage", "CachePath", overridePath, "denovo", "fixture", "cache-root")!;
-            Add(986, 986, "default cache filename and explicit override branch", expectedDefault + ";explicit-cache.json",
-                defaultPath + ";" + overridden, defaultPath == expectedDefault && overridden == "explicit-cache.json" && callbackSide == "denovo" && callbackRun == "fixture");
+            // J11 moved path policy out of the private RunStage helper. The frozen filename
+            // literals still belong to the production storage API; legacy input caches are read-only.
+            string rawCacheRoot = Path.GetFullPath("cache-root");
+            var storage = new FullXicStoragePaths(rawCacheRoot, Path.Combine(output, "managed-cache"));
+            var defaultCache = storage.Extraction("identified", "bad:run?");
+            string expectedName = At(986, 0) + "identified" + At(986, 1) + "bad_run_" + At(986, 2);
+            string explicitCache = Path.Combine(output, "explicit-cache.json");
+            var overridden = storage.Extraction("denovo", "fixture", explicitCache);
+            string insideRaw = Path.Combine(rawCacheRoot, "explicit-cache.json");
+            var redirected = storage.Extraction("denovo", "fixture", insideRaw);
+            Add(986, 986, "retained cache filename and current explicit-path/read-only-input policy", expectedName + ";" + explicitCache,
+                Path.GetFileName(defaultCache.WritePath) + ";" + overridden.WritePath,
+                Path.GetFileName(defaultCache.WritePath) == expectedName
+                && defaultCache.LegacyReadPath == Path.Combine(rawCacheRoot, FullXicComputer.CacheFolderName, expectedName)
+                && !FullXicStoragePaths.IsInRawDirectory(defaultCache.WritePath, rawCacheRoot)
+                && overridden.WritePath == explicitCache && overridden.LegacyReadPath == null
+                && redirected.LegacyReadPath == insideRaw && !FullXicStoragePaths.IsInRawDirectory(redirected.WritePath, rawCacheRoot));
 
             Directory.CreateDirectory("sources"); Directory.CreateDirectory(Path.Combine("sources", "nested"));
             const string header = "Scan,Peptide,{0},Length,m/z,z,RT,Area,local confidence (%)\n";

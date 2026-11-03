@@ -9,6 +9,13 @@ public static partial class FamilyCompositionStudy
 {
     public const string ProteinCountLabel = "Proteins needed to explain the peptides (greedy estimate)";
     public const string UniquePeptideProteinCountLabel = "Proteins with a peptide of their own";
+    public const string ProteinCountsMethod = "Proteins needed to explain the peptides (greedy estimate): repeatedly select the database target " +
+        "covering the most unexplained distinct peptide sequences; ties use ordinal protein identifiers. " +
+        "Exact containment with I/L folded and modifications removed, across all assigned quantified peptides " +
+        "(shared peptides included). This is an approximation, not an exact minimum or a gene/proteoform count. " +
+        "Greedy explanation candidates exclude contaminants. Proteins with a peptide of their own require " +
+        "uniqueness across all database targets, including contaminants; decoys are excluded. " +
+        "Homology-only support does not establish exact containment and remains unexplained.";
 
     public static FamilyProteinCountsResult BuildProteinCounts(FamilyPeptideAttribution attribution,
         IEnumerable<FastaItemExtended> database) => BuildProteinCountsCore(attribution, database);
@@ -52,13 +59,7 @@ public static partial class FamilyCompositionStudy
         var result = new FamilyProteinCountsResult
         {
             MembershipSha256 = attribution.MembershipSha256,
-            Method = "Proteins needed to explain the peptides (greedy estimate): repeatedly select the database target " +
-                "covering the most unexplained distinct peptide sequences; ties use ordinal protein identifiers. " +
-                "Exact containment with I/L folded and modifications removed, across all assigned quantified peptides " +
-                "(shared peptides included). This is an approximation, not an exact minimum or a gene/proteoform count. " +
-                "Greedy explanation candidates exclude contaminants. Proteins with a peptide of their own require " +
-                "uniqueness across all database targets, including contaminants; decoys are excluded. " +
-                "Homology-only support does not establish exact containment and remains unexplained.",
+            Method = ProteinCountsMethod,
         };
         foreach (var entry in byFamily)
         {

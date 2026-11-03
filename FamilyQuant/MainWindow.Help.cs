@@ -159,8 +159,31 @@ public partial class MainWindow
                 "   You can now merge families further by their description words, or build one family\n" +
                 "   from a keyword list. Curation changes can be undone in this session. Use Save as\n" +
                 "   to keep the previous grouping in a separate project.\n\n" +
+                "BEFORE STEP 3 · Prepare the family panel and report\n" +
+                "   Menu: File > Import family panel\n" +
+                "   Needs: an open project and a spreadsheet with one row per family.\n" +
+                "   Choose spreadsheet, select its sheet and header row, then Preview columns.\n" +
+                "   Pick the columns for family key, family name, decision and optional Pfam. Map\n" +
+                "   each spreadsheet decision to Quantify, Report under others, Not a family or\n" +
+                "   Merge into family; for a merge, enter the target family key. Preview panel.\n" +
+                "   Check Pfam reviews the panel's codes and names without changing them. Review\n" +
+                "   the results, correct the draft if needed, then choose Apply panel.\n\n" +
+                "   Menu: View > Families\n" +
+                "   Needs: the panel and protein evidence. Use Fetch evidence if needed.\n" +
+                "   Choose Group by evidence, review or edit the scope, then Update proposal. In\n" +
+                "   Panel links, review ambiguous links and confirm choices with Use link choices.\n" +
+                "   Review the updated proposal and protein ticks, then choose Apply grouping.\n" +
+                "   Applying a panel-based grouping also computes subclass labels from its rules.\n" +
+                "   Produces: reviewed family assignments and subclass labels in the project.\n\n" +
+                "   Menu: File > Report details\n" +
+                "   Needs: an open project. Enter the title, authors, sample description, workflow,\n" +
+                "   kind of database and written interpretation you want, then choose Save details.\n" +
+                "   Produces: report details in the project. Continue to step 3 to compute.\n\n" +
                 "STEP 3 · Attach the quantitation\n" +
-                "   Open Quantify to compute or update full XIC for this project.\n" +
+                "   Menu: Analysis > Compute full XIC\n" +
+                "   Needs: the RAW folder and matching identifications (.sepr2); de novo and search\n" +
+                "   settings are optional. Choose Compute full XIC in Quantify.\n" +
+                "   Produces: stored Results for the project and its report.\n" +
                 "   In Families > Quantitation use Full XIC > Share of and Shared peptides.\n" +
                 "   For the secondary source, open PatternLab (optional) and Load PatternLab project.\n" +
                 "   PatternLab needs a project (.plp) exported at PEPTIDE level. A protein-level\n" +
@@ -177,6 +200,14 @@ public partial class MainWindow
                 "   for FamilyQuant 1.5 (.fcf), preserving the grouping without stored quantitation.\n" +
                 "   Analysis > Reannotate SEPro stamps your User ID family numbers into a copy of a SEPro\n" +
                 "   result package, leaving the original untouched.\n\n" +
+                "EXPORT THE REPORT\n" +
+                "   Menu: File > Export report\n" +
+                "   Needs: stored Results from step 3 and the report details you want to include.\n" +
+                "   Choose sections and figures with the checkboxes. Set Report threshold (%) to\n" +
+                "   group families below that mean assigned-signal share under Others; their list\n" +
+                "   remains in the supplement. Families marked Report under others also go there.\n" +
+                "   Produces: a Word report and a companion supplement workbook beside it.\n" +
+                "   File > Save keeps the project, report details, choices and threshold.\n\n" +
 
                 // The de novo screen is a separate workflow and is written as one: it is numbered
                 // OPTIONAL rather than as a fifth step, because nothing above it needs it and it needs

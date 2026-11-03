@@ -104,6 +104,13 @@ public static class ReportStudyExports
         result.Runs.OrderBy(r => r.Run, StringComparer.Ordinal).Select(r => (IReadOnlyList<string>)new[]
             { r.Run, Number(r.AssignedSignal), Number(r.MeasuredSignal), Optional(r.TotalIonCurrent) }));
 
+    /// <summary>The report threshold is also printed outside its tables. Retain the stored
+    /// fraction, unrounded percentage and exact G6 Word lexeme without changing existing exports.</summary>
+    public static string ReportSettings(FamilyReportThresholdResult grouping) => Csv(
+        new[] { "setting", "stored_fraction", "unrounded_percent", "word_percent_6_significant_digits" },
+        new[] { (IReadOnlyList<string>)new[] { "Report family threshold", Number(grouping.Threshold),
+            Number(100 * grouping.Threshold), Percent(grouping.Threshold) } });
+
     public static string BasisComparison(FamilyRunSharesResult result, IReadOnlyDictionary<int, string> labels) => Csv(
         new[] { "family_user_id", "family", "pooled_pct", "run_mean_pct", "pooled_minus_mean_percentage_points", "pooled_fraction", "run_mean_fraction", "pooled_minus_mean_fraction" },
         result.Families.OrderBy(f => f.FamilyUserId).Select(f => (IReadOnlyList<string>)new[] { Integer(f.FamilyUserId), Label(f.FamilyUserId, labels),

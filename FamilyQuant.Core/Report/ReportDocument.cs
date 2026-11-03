@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace FamilyQuant.Report;
 
@@ -25,7 +26,16 @@ public sealed record ReportParagraph(string Id, string Text) : ReportBlock(Id);
 
 /// <summary>Cells contain the exact invariant strings used by the program's corresponding export.</summary>
 public sealed record ReportTable(string Id, string Title, IReadOnlyList<string> Columns,
-    IReadOnlyList<IReadOnlyList<string>> Rows, string Caption) : ReportBlock(Id);
+    IReadOnlyList<IReadOnlyList<string>> Rows, string Caption) : ReportBlock(Id)
+{
+    /// <summary>Full detail retained in the companion workbook, with no quantitative Word rendering.</summary>
+    public bool SupplementOnly { get; init; }
+    /// <summary>Optional native export behind rounded display columns. Only the workbook consumes
+    /// this recipe; Word and the existing CSV exports retain their original literal cells.</summary>
+    [JsonIgnore] public ReportSupplementSource? SupplementSource { get; init; }
+}
+
+public sealed record ReportSupplementSource(string Csv, IReadOnlyList<string> Columns);
 
 /// <summary>Original PNG export, never transcoded by the document writer. Size controls layout only.</summary>
 public sealed record ReportFigure(string Id, string Title, byte[] PngBytes, string Caption,

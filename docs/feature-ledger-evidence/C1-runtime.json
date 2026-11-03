@@ -5,92 +5,92 @@
   "runs": [
     {
       "id": "native-shell-metadata",
-      "command": "C:\\FamilyQuant-wt2\\terra1\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --ledger-shell-native D:/FamilyQuant-data/out-shell/N3/source C:\\FamilyQuant-wt2\\terra1\\FamilyQuant.Tests\\ReferenceGoldenHost\\bin\\Release\\net10.0-windows7.0\\ReferenceGoldenHost.exe D:/FamilyQuant-data/out-refresh\\20261103-013000-terra1\\shell-native \u00222026-11-03 01:31:10 -0800\u0022 D:/FamilyQuant-data/out-refresh\\20261103-013000-terra1\\inputs\\C1-runtime.json",
-      "executedAt": "2026-11-03 01:31:10 -0800",
-      "commit": "7a231c0104e5ca2a9f8c518c0aaf8593a2ed8972",
+      "command": "D:\\FamilyQuant-wt\\shell-j15-check\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --ledger-shell-native D:/FamilyQuant-data/out-shell/N3/source D:\\FamilyQuant-wt\\shell-j15-check\\FamilyQuant.Tests\\ReferenceGoldenHost\\bin\\Release\\net10.0-windows7.0\\ReferenceGoldenHost.exe D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-native \u00222026-11-03 02:41:53 -0800\u0022 D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\inputs\\shell-native\\C1-runtime.json",
+      "executedAt": "2026-11-03 02:41:53 -0800",
+      "commit": "9fe583514b1e3726e523edb37ca5c10c303cc6dd",
       "artifacts": [
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\shell-native\\comparisons.log",
+          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-native\\comparisons.log",
           "sha256": "4B45E35C1E8B88506960E568CE701DB57D75F01B8CA1C92368CE61C2894C463F"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\shell-native\\frozen.json",
+          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-native\\frozen.json",
           "sha256": "49A31F693A6AD63BC47DC370CA9BDA06BD5E85F6D032DBCC05CC4A724759CAC4"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\shell-native\\current.json",
-          "sha256": "865B9336F2EFB8B2C11C99F2733AFBFE9EA4242066C1B4EA03A6A271A48DC5B1"
+          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-native\\current.json",
+          "sha256": "7D09E8B2C73CC16541CDF317395C8AE06C97D6398BC969B4FF458A80B79D6165"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\shell-native\\comparisons.json",
+          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-native\\comparisons.json",
           "sha256": "B6CDC4DB6097BB8B3CFE6BA9B358DB76C2C1835C332AD5BDBA555B0F0C99D4DF"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\shell-native\\frozen.log",
+          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-native\\frozen.log",
           "sha256": "4104A3EC66E1C8FA2AF2A8105ACC570C9B6EDB3AC01DA030B45E8BCB97542C6B"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\inputs\\C1-runtime.json",
-          "sha256": "DCFC12F22A9B104DC2A169729D260627203B71DA06C13B4DAC7B027B5C1F9A1A"
+          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\inputs\\shell-native\\C1-runtime.json",
+          "sha256": "6AD6929D502F2B41F18FAEA8381F4C691007CC6A235F886FE11C988819C43762"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\shell-native\\executed\\FamilyQuant.Tests_ShellMetadataSnapshot.cs",
+          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-native\\executed\\FamilyQuant.Tests_ShellMetadataSnapshot.cs",
           "sha256": "47D494FBC5FF481A950E8F491C3B3009C3AA90B0A9FE5E1E6A024FB39D655A89"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\shell-native\\executed\\FamilyQuant.Tests_ShellMetadataSnapshot.Home.cs",
+          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-native\\executed\\FamilyQuant.Tests_ShellMetadataSnapshot.Home.cs",
           "sha256": "B6638F24407CBD00BDA4EC05C339B4BA5ACCC96705B0C69C829128833A1E8B2C"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\shell-native\\executed\\FamilyQuant.Tests_ShellMetadataComparison.cs",
+          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-native\\executed\\FamilyQuant.Tests_ShellMetadataComparison.cs",
           "sha256": "9C63F9AF014EDD2F6B6A8D00095475832C3E59AADC9229FDB6A4EA17AD84159B"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\shell-native\\executed\\FamilyQuant.Tests_Program.ShellMetadata.cs",
+          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-native\\executed\\FamilyQuant.Tests_Program.ShellMetadata.cs",
           "sha256": "6AD7281C3B583750E33E151A82F6B5F001E2FC382F90D0A0FDD9AAE5A571AB00"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\shell-native\\executed\\FamilyQuant.Tests_Program.ShellMetadataReceipts.cs",
+          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-native\\executed\\FamilyQuant.Tests_Program.ShellMetadataReceipts.cs",
           "sha256": "090760DA59AE80A322F8A36C300DB790E3AFF4740EA31F3AF9CB9EB72D47E0E9"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\shell-native\\executed\\FamilyQuant.Tests_Program.Commands.ShellMetadata.cs",
+          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-native\\executed\\FamilyQuant.Tests_Program.Commands.ShellMetadata.cs",
           "sha256": "9333F90441B310A545C0EF69B28F3EE6BB8EEC195846EB0950519FB7E129A4B9"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\shell-native\\executed\\FamilyQuant.Tests_ReferenceGoldenHost_Program.cs",
+          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-native\\executed\\FamilyQuant.Tests_ReferenceGoldenHost_Program.cs",
           "sha256": "B35CF2C9532E821E92B73DDE08E8AFFDC407C15C465CB486A98F75C56C4FA125"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\shell-native\\executed\\FamilyQuant.Tests_ReferenceGoldenHost_ReferenceGoldenHost.csproj",
+          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-native\\executed\\FamilyQuant.Tests_ReferenceGoldenHost_ReferenceGoldenHost.csproj",
           "sha256": "6E765AC6228BB73AFE487547FBDBF7F1404E7CFB0B496989607707CBB1B5828E"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\shell-native\\executed\\FamilyQuant.Tests.dll",
-          "sha256": "87E72637B2823DE2238B57CE682D92234CE31508A52FB2AD552CB105C0A91816"
+          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-native\\executed\\FamilyQuant.Tests.dll",
+          "sha256": "6407606040C45143C12C0432C670F6345DD42144E1608CE7BFE61C0AD1530979"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\shell-native\\executed\\FamilyQuant2.dll",
-          "sha256": "DECBFB068BB6B7EB77DB498D2B6B7BF749C7A6B19F06C826ABE1C47C90F0E47A"
+          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-native\\executed\\FamilyQuant2.dll",
+          "sha256": "7F98785D9A2F40FEE7D03BE859F12613A13FD0CDF5BB0034B5444C4545BCEDBD"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\shell-native\\executed\\FamilyQuant.Core.dll",
-          "sha256": "E5C7BAF7E12F4E28AAC51960DA2E9E5B628696B95B2537EE4953E95B7C142E9A"
+          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-native\\executed\\FamilyQuant.Core.dll",
+          "sha256": "738A1059162D1AC024C965E3FFB31B9920AA635687AB66379DC2000A990C666F"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\shell-native\\executed\\ReferenceGoldenHost.exe",
-          "sha256": "8C836B4E9EBDEFE28DC69EC47CD77B7B6B7D300B20F05D54730BAA2FF97DD2C5"
+          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-native\\executed\\ReferenceGoldenHost.exe",
+          "sha256": "66E7D02B144EDA4C0407C215B67EEFF50B96A927F704EE899C981C4A0100A3F5"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\shell-native\\executed\\ReferenceGoldenHost.dll",
-          "sha256": "E90A1A3E423DF9142DF8C75934D9973D888C738B4B0F71235C10BF1A1472DD4C"
+          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-native\\executed\\ReferenceGoldenHost.dll",
+          "sha256": "885BBD481270E4E03D6F7E64303AF56173FE226C4D5B05DAFC8FDF9AA0797620"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\shell-native\\executed\\FamilyQuant.dll",
+          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-native\\executed\\FamilyQuant.dll",
           "sha256": "D764488C923945285E03B338E5A91BF28106A35B11AB465D8E2B23D125F03FD8"
         }
       ],
-      "workingDirectory": "C:\\FamilyQuant-wt2\\terra1"
+      "workingDirectory": "D:\\FamilyQuant-wt\\shell-j15-check"
     }
   ],
   "rows": [
@@ -230,7 +230,7 @@
         {
           "path": "FamilyQuant/CurationViewModel.Panel.cs",
           "symbol": "compiled native metadata for TextBlockLayer2State.Text = PENDING",
-          "sha256": "31097B675978A3667054B5DCF9FF42F340F803AA7B15735081338E2716A1ED47"
+          "sha256": "0C9D1AA2F5EC3A62A09F3D8F2813C5D0C772FD3D6116AF81095A013AB2EC505A"
         },
         {
           "path": "FamilyQuant/CurationViewModel.ReportDetails.cs",
@@ -409,7 +409,7 @@
         {
           "path": "FamilyQuant/CurationViewModel.Panel.cs",
           "symbol": "compiled native metadata for DataGridTextColumn ColumnUserAnnotation",
-          "sha256": "31097B675978A3667054B5DCF9FF42F340F803AA7B15735081338E2716A1ED47"
+          "sha256": "0C9D1AA2F5EC3A62A09F3D8F2813C5D0C772FD3D6116AF81095A013AB2EC505A"
         },
         {
           "path": "FamilyQuant/CurationViewModel.ReportDetails.cs",
@@ -588,7 +588,7 @@
         {
           "path": "FamilyQuant/CurationViewModel.Panel.cs",
           "symbol": "compiled native metadata for ColumnXicUser.Binding = {Binding Path=XICUser, StringFormat=P3}",
-          "sha256": "31097B675978A3667054B5DCF9FF42F340F803AA7B15735081338E2716A1ED47"
+          "sha256": "0C9D1AA2F5EC3A62A09F3D8F2813C5D0C772FD3D6116AF81095A013AB2EC505A"
         },
         {
           "path": "FamilyQuant/CurationViewModel.ReportDetails.cs",
@@ -767,7 +767,7 @@
         {
           "path": "FamilyQuant/CurationViewModel.Panel.cs",
           "symbol": "compiled native metadata for ColumnLocus.IsReadOnly = True",
-          "sha256": "31097B675978A3667054B5DCF9FF42F340F803AA7B15735081338E2716A1ED47"
+          "sha256": "0C9D1AA2F5EC3A62A09F3D8F2813C5D0C772FD3D6116AF81095A013AB2EC505A"
         },
         {
           "path": "FamilyQuant/CurationViewModel.ReportDetails.cs",
@@ -946,7 +946,7 @@
         {
           "path": "FamilyQuant/CurationViewModel.Panel.cs",
           "symbol": "compiled native metadata for ColumnMass.IsReadOnly = True",
-          "sha256": "31097B675978A3667054B5DCF9FF42F340F803AA7B15735081338E2716A1ED47"
+          "sha256": "0C9D1AA2F5EC3A62A09F3D8F2813C5D0C772FD3D6116AF81095A013AB2EC505A"
         },
         {
           "path": "FamilyQuant/CurationViewModel.ReportDetails.cs",
@@ -1125,7 +1125,7 @@
         {
           "path": "FamilyQuant/CurationViewModel.Panel.cs",
           "symbol": "compiled native metadata for DecimalUpDownWordReCluster.Maximum = 1",
-          "sha256": "31097B675978A3667054B5DCF9FF42F340F803AA7B15735081338E2716A1ED47"
+          "sha256": "0C9D1AA2F5EC3A62A09F3D8F2813C5D0C772FD3D6116AF81095A013AB2EC505A"
         },
         {
           "path": "FamilyQuant/CurationViewModel.ReportDetails.cs",
@@ -1304,7 +1304,7 @@
         {
           "path": "FamilyQuant/CurationViewModel.Panel.cs",
           "symbol": "compiled native metadata for TextBox TextBoxSearch",
-          "sha256": "31097B675978A3667054B5DCF9FF42F340F803AA7B15735081338E2716A1ED47"
+          "sha256": "0C9D1AA2F5EC3A62A09F3D8F2813C5D0C772FD3D6116AF81095A013AB2EC505A"
         },
         {
           "path": "FamilyQuant/CurationViewModel.ReportDetails.cs",
@@ -1483,7 +1483,7 @@
         {
           "path": "FamilyQuant/CurationViewModel.Panel.cs",
           "symbol": "compiled native metadata for ColumnFullXic.Header = Full XIC share",
-          "sha256": "31097B675978A3667054B5DCF9FF42F340F803AA7B15735081338E2716A1ED47"
+          "sha256": "0C9D1AA2F5EC3A62A09F3D8F2813C5D0C772FD3D6116AF81095A013AB2EC505A"
         },
         {
           "path": "FamilyQuant/CurationViewModel.ReportDetails.cs",
@@ -1662,7 +1662,7 @@
         {
           "path": "FamilyQuant/CurationViewModel.Panel.cs",
           "symbol": "compiled native metadata for DataGridTextColumn ColumnDomains",
-          "sha256": "31097B675978A3667054B5DCF9FF42F340F803AA7B15735081338E2716A1ED47"
+          "sha256": "0C9D1AA2F5EC3A62A09F3D8F2813C5D0C772FD3D6116AF81095A013AB2EC505A"
         },
         {
           "path": "FamilyQuant/CurationViewModel.ReportDetails.cs",
@@ -1841,7 +1841,7 @@
         {
           "path": "FamilyQuant/CurationViewModel.Panel.cs",
           "symbol": "compiled native metadata for Button ButtonSuperCluster",
-          "sha256": "31097B675978A3667054B5DCF9FF42F340F803AA7B15735081338E2716A1ED47"
+          "sha256": "0C9D1AA2F5EC3A62A09F3D8F2813C5D0C772FD3D6116AF81095A013AB2EC505A"
         },
         {
           "path": "FamilyQuant/CurationViewModel.ReportDetails.cs",
@@ -2020,7 +2020,7 @@
         {
           "path": "FamilyQuant/CurationViewModel.Panel.cs",
           "symbol": "compiled native metadata for DecimalUpDownWordReCluster.Minimum = 0.10",
-          "sha256": "31097B675978A3667054B5DCF9FF42F340F803AA7B15735081338E2716A1ED47"
+          "sha256": "0C9D1AA2F5EC3A62A09F3D8F2813C5D0C772FD3D6116AF81095A013AB2EC505A"
         },
         {
           "path": "FamilyQuant/CurationViewModel.ReportDetails.cs",
@@ -2199,7 +2199,7 @@
         {
           "path": "FamilyQuant/CurationViewModel.Panel.cs",
           "symbol": "compiled native metadata for ColumnFullXic.IsReadOnly = True",
-          "sha256": "31097B675978A3667054B5DCF9FF42F340F803AA7B15735081338E2716A1ED47"
+          "sha256": "0C9D1AA2F5EC3A62A09F3D8F2813C5D0C772FD3D6116AF81095A013AB2EC505A"
         },
         {
           "path": "FamilyQuant/CurationViewModel.ReportDetails.cs",
@@ -2378,7 +2378,7 @@
         {
           "path": "FamilyQuant/CurationViewModel.Panel.cs",
           "symbol": "compiled native metadata for DecimalUpDownWordReCluster.Value = 0.95",
-          "sha256": "31097B675978A3667054B5DCF9FF42F340F803AA7B15735081338E2716A1ED47"
+          "sha256": "0C9D1AA2F5EC3A62A09F3D8F2813C5D0C772FD3D6116AF81095A013AB2EC505A"
         },
         {
           "path": "FamilyQuant/CurationViewModel.ReportDetails.cs",
@@ -2557,7 +2557,7 @@
         {
           "path": "FamilyQuant/CurationViewModel.Panel.cs",
           "symbol": "compiled native metadata for ColumnLocus.Header = Locus",
-          "sha256": "31097B675978A3667054B5DCF9FF42F340F803AA7B15735081338E2716A1ED47"
+          "sha256": "0C9D1AA2F5EC3A62A09F3D8F2813C5D0C772FD3D6116AF81095A013AB2EC505A"
         },
         {
           "path": "FamilyQuant/CurationViewModel.ReportDetails.cs",
@@ -2736,7 +2736,7 @@
         {
           "path": "FamilyQuant/CurationViewModel.Panel.cs",
           "symbol": "compiled native metadata for CheckBox CheckBoxExcludeContaminants",
-          "sha256": "31097B675978A3667054B5DCF9FF42F340F803AA7B15735081338E2716A1ED47"
+          "sha256": "0C9D1AA2F5EC3A62A09F3D8F2813C5D0C772FD3D6116AF81095A013AB2EC505A"
         },
         {
           "path": "FamilyQuant/CurationViewModel.ReportDetails.cs",
@@ -2915,7 +2915,7 @@
         {
           "path": "FamilyQuant/CurationViewModel.Panel.cs",
           "symbol": "compiled native metadata for ComboBoxItem SharedItemEvery",
-          "sha256": "31097B675978A3667054B5DCF9FF42F340F803AA7B15735081338E2716A1ED47"
+          "sha256": "0C9D1AA2F5EC3A62A09F3D8F2813C5D0C772FD3D6116AF81095A013AB2EC505A"
         },
         {
           "path": "FamilyQuant/CurationViewModel.ReportDetails.cs",
@@ -3094,7 +3094,7 @@
         {
           "path": "FamilyQuant/CurationViewModel.Panel.cs",
           "symbol": "compiled native metadata for ButtonApplyToSelected.Content = Apply to selected rows",
-          "sha256": "31097B675978A3667054B5DCF9FF42F340F803AA7B15735081338E2716A1ED47"
+          "sha256": "0C9D1AA2F5EC3A62A09F3D8F2813C5D0C772FD3D6116AF81095A013AB2EC505A"
         },
         {
           "path": "FamilyQuant/CurationViewModel.ReportDetails.cs",
@@ -3273,7 +3273,7 @@
         {
           "path": "FamilyQuant/CurationViewModel.Panel.cs",
           "symbol": "compiled native metadata for Button ButtonRecalculateQuantitation",
-          "sha256": "31097B675978A3667054B5DCF9FF42F340F803AA7B15735081338E2716A1ED47"
+          "sha256": "0C9D1AA2F5EC3A62A09F3D8F2813C5D0C772FD3D6116AF81095A013AB2EC505A"
         },
         {
           "path": "FamilyQuant/CurationViewModel.ReportDetails.cs",
@@ -3452,7 +3452,7 @@
         {
           "path": "FamilyQuant/CurationViewModel.Panel.cs",
           "symbol": "compiled native metadata for ComboBoxItem ModeItemTic",
-          "sha256": "31097B675978A3667054B5DCF9FF42F340F803AA7B15735081338E2716A1ED47"
+          "sha256": "0C9D1AA2F5EC3A62A09F3D8F2813C5D0C772FD3D6116AF81095A013AB2EC505A"
         },
         {
           "path": "FamilyQuant/CurationViewModel.ReportDetails.cs",
@@ -3631,7 +3631,7 @@
         {
           "path": "FamilyQuant/CurationViewModel.Panel.cs",
           "symbol": "compiled native metadata for ColumnUserId.Header = User ID",
-          "sha256": "31097B675978A3667054B5DCF9FF42F340F803AA7B15735081338E2716A1ED47"
+          "sha256": "0C9D1AA2F5EC3A62A09F3D8F2813C5D0C772FD3D6116AF81095A013AB2EC505A"
         },
         {
           "path": "FamilyQuant/CurationViewModel.ReportDetails.cs",
@@ -3810,7 +3810,7 @@
         {
           "path": "FamilyQuant/CurationViewModel.Panel.cs",
           "symbol": "compiled native metadata for ComboBoxItem SharedItemUnique",
-          "sha256": "31097B675978A3667054B5DCF9FF42F340F803AA7B15735081338E2716A1ED47"
+          "sha256": "0C9D1AA2F5EC3A62A09F3D8F2813C5D0C772FD3D6116AF81095A013AB2EC505A"
         },
         {
           "path": "FamilyQuant/CurationViewModel.ReportDetails.cs",
@@ -3989,7 +3989,7 @@
         {
           "path": "FamilyQuant/CurationViewModel.Panel.cs",
           "symbol": "compiled native metadata for ColumnUserAnnotation.Header = User Annotation",
-          "sha256": "31097B675978A3667054B5DCF9FF42F340F803AA7B15735081338E2716A1ED47"
+          "sha256": "0C9D1AA2F5EC3A62A09F3D8F2813C5D0C772FD3D6116AF81095A013AB2EC505A"
         },
         {
           "path": "FamilyQuant/CurationViewModel.ReportDetails.cs",
@@ -4168,7 +4168,7 @@
         {
           "path": "FamilyQuant/CurationViewModel.Panel.cs",
           "symbol": "compiled native metadata for ColumnMass.Header = Residue mass (Da)",
-          "sha256": "31097B675978A3667054B5DCF9FF42F340F803AA7B15735081338E2716A1ED47"
+          "sha256": "0C9D1AA2F5EC3A62A09F3D8F2813C5D0C772FD3D6116AF81095A013AB2EC505A"
         },
         {
           "path": "FamilyQuant/CurationViewModel.ReportDetails.cs",
@@ -4347,7 +4347,7 @@
         {
           "path": "FamilyQuant/CurationViewModel.Panel.cs",
           "symbol": "compiled native metadata for Button ButtonManageLocks",
-          "sha256": "31097B675978A3667054B5DCF9FF42F340F803AA7B15735081338E2716A1ED47"
+          "sha256": "0C9D1AA2F5EC3A62A09F3D8F2813C5D0C772FD3D6116AF81095A013AB2EC505A"
         },
         {
           "path": "FamilyQuant/CurationViewModel.ReportDetails.cs",
@@ -4526,7 +4526,7 @@
         {
           "path": "FamilyQuant/CurationViewModel.Panel.cs",
           "symbol": "compiled native metadata for ColumnMass.Binding = {Binding Path=MonoisotopicMass, StringFormat=N3}",
-          "sha256": "31097B675978A3667054B5DCF9FF42F340F803AA7B15735081338E2716A1ED47"
+          "sha256": "0C9D1AA2F5EC3A62A09F3D8F2813C5D0C772FD3D6116AF81095A013AB2EC505A"
         },
         {
           "path": "FamilyQuant/CurationViewModel.ReportDetails.cs",
@@ -4705,7 +4705,7 @@
         {
           "path": "FamilyQuant/CurationViewModel.Panel.cs",
           "symbol": "compiled native metadata for ButtonExportComposition.IsEnabled = False",
-          "sha256": "31097B675978A3667054B5DCF9FF42F340F803AA7B15735081338E2716A1ED47"
+          "sha256": "0C9D1AA2F5EC3A62A09F3D8F2813C5D0C772FD3D6116AF81095A013AB2EC505A"
         },
         {
           "path": "FamilyQuant/CurationViewModel.ReportDetails.cs",
@@ -4884,7 +4884,7 @@
         {
           "path": "FamilyQuant/CurationViewModel.Panel.cs",
           "symbol": "compiled native metadata for LabelLockCount.Content = No families locked",
-          "sha256": "31097B675978A3667054B5DCF9FF42F340F803AA7B15735081338E2716A1ED47"
+          "sha256": "0C9D1AA2F5EC3A62A09F3D8F2813C5D0C772FD3D6116AF81095A013AB2EC505A"
         },
         {
           "path": "FamilyQuant/CurationViewModel.ReportDetails.cs",
@@ -5063,7 +5063,7 @@
         {
           "path": "FamilyQuant/CurationViewModel.Panel.cs",
           "symbol": "compiled native metadata for Button ButtonAlignSelected",
-          "sha256": "31097B675978A3667054B5DCF9FF42F340F803AA7B15735081338E2716A1ED47"
+          "sha256": "0C9D1AA2F5EC3A62A09F3D8F2813C5D0C772FD3D6116AF81095A013AB2EC505A"
         },
         {
           "path": "FamilyQuant/CurationViewModel.ReportDetails.cs",
@@ -5242,7 +5242,7 @@
         {
           "path": "FamilyQuant/CurationViewModel.Panel.cs",
           "symbol": "compiled native metadata for ComboBoxItem ModeItemChargeRestricted",
-          "sha256": "31097B675978A3667054B5DCF9FF42F340F803AA7B15735081338E2716A1ED47"
+          "sha256": "0C9D1AA2F5EC3A62A09F3D8F2813C5D0C772FD3D6116AF81095A013AB2EC505A"
         },
         {
           "path": "FamilyQuant/CurationViewModel.ReportDetails.cs",
@@ -5421,7 +5421,7 @@
         {
           "path": "FamilyQuant/CurationViewModel.Panel.cs",
           "symbol": "compiled native metadata for ColumnDomains.IsReadOnly = True",
-          "sha256": "31097B675978A3667054B5DCF9FF42F340F803AA7B15735081338E2716A1ED47"
+          "sha256": "0C9D1AA2F5EC3A62A09F3D8F2813C5D0C772FD3D6116AF81095A013AB2EC505A"
         },
         {
           "path": "FamilyQuant/CurationViewModel.ReportDetails.cs",
@@ -5600,7 +5600,7 @@
         {
           "path": "FamilyQuant/CurationViewModel.Panel.cs",
           "symbol": "compiled native metadata for TextBlockLayer1State.Text = READY",
-          "sha256": "31097B675978A3667054B5DCF9FF42F340F803AA7B15735081338E2716A1ED47"
+          "sha256": "0C9D1AA2F5EC3A62A09F3D8F2813C5D0C772FD3D6116AF81095A013AB2EC505A"
         },
         {
           "path": "FamilyQuant/CurationViewModel.ReportDetails.cs",
@@ -5779,7 +5779,7 @@
         {
           "path": "FamilyQuant/CurationViewModel.Panel.cs",
           "symbol": "compiled native metadata for TextBox TextBoxWordsToBeExcluded",
-          "sha256": "31097B675978A3667054B5DCF9FF42F340F803AA7B15735081338E2716A1ED47"
+          "sha256": "0C9D1AA2F5EC3A62A09F3D8F2813C5D0C772FD3D6116AF81095A013AB2EC505A"
         },
         {
           "path": "FamilyQuant/CurationViewModel.ReportDetails.cs",
@@ -5958,7 +5958,7 @@
         {
           "path": "FamilyQuant/CurationViewModel.Panel.cs",
           "symbol": "compiled native metadata for ComboBox ComboBoxFullXicBasis",
-          "sha256": "31097B675978A3667054B5DCF9FF42F340F803AA7B15735081338E2716A1ED47"
+          "sha256": "0C9D1AA2F5EC3A62A09F3D8F2813C5D0C772FD3D6116AF81095A013AB2EC505A"
         },
         {
           "path": "FamilyQuant/CurationViewModel.ReportDetails.cs",
@@ -6137,7 +6137,7 @@
         {
           "path": "FamilyQuant/CurationViewModel.Panel.cs",
           "symbol": "compiled native metadata for ComboBoxItem ModeItemPeptideSignal",
-          "sha256": "31097B675978A3667054B5DCF9FF42F340F803AA7B15735081338E2716A1ED47"
+          "sha256": "0C9D1AA2F5EC3A62A09F3D8F2813C5D0C772FD3D6116AF81095A013AB2EC505A"
         },
         {
           "path": "FamilyQuant/CurationViewModel.ReportDetails.cs",
@@ -6316,7 +6316,7 @@
         {
           "path": "FamilyQuant/CurationViewModel.Panel.cs",
           "symbol": "compiled native metadata for ColumnDescription.Binding = {Binding Path=Description}",
-          "sha256": "31097B675978A3667054B5DCF9FF42F340F803AA7B15735081338E2716A1ED47"
+          "sha256": "0C9D1AA2F5EC3A62A09F3D8F2813C5D0C772FD3D6116AF81095A013AB2EC505A"
         },
         {
           "path": "FamilyQuant/CurationViewModel.ReportDetails.cs",
@@ -6495,7 +6495,7 @@
         {
           "path": "FamilyQuant/CurationViewModel.Panel.cs",
           "symbol": "compiled native metadata for ColumnUSearchId.Binding = {Binding Path=USearchID}",
-          "sha256": "31097B675978A3667054B5DCF9FF42F340F803AA7B15735081338E2716A1ED47"
+          "sha256": "0C9D1AA2F5EC3A62A09F3D8F2813C5D0C772FD3D6116AF81095A013AB2EC505A"
         },
         {
           "path": "FamilyQuant/CurationViewModel.ReportDetails.cs",
@@ -6674,7 +6674,7 @@
         {
           "path": "FamilyQuant/CurationViewModel.Panel.cs",
           "symbol": "compiled native metadata for ButtonAlignSelected.IsEnabled = False",
-          "sha256": "31097B675978A3667054B5DCF9FF42F340F803AA7B15735081338E2716A1ED47"
+          "sha256": "0C9D1AA2F5EC3A62A09F3D8F2813C5D0C772FD3D6116AF81095A013AB2EC505A"
         },
         {
           "path": "FamilyQuant/CurationViewModel.ReportDetails.cs",
@@ -6853,7 +6853,7 @@
         {
           "path": "FamilyQuant/CurationViewModel.Panel.cs",
           "symbol": "compiled native metadata for Button ButtonSaveReport",
-          "sha256": "31097B675978A3667054B5DCF9FF42F340F803AA7B15735081338E2716A1ED47"
+          "sha256": "0C9D1AA2F5EC3A62A09F3D8F2813C5D0C772FD3D6116AF81095A013AB2EC505A"
         },
         {
           "path": "FamilyQuant/CurationViewModel.ReportDetails.cs",
@@ -7032,7 +7032,7 @@
         {
           "path": "FamilyQuant/CurationViewModel.Panel.cs",
           "symbol": "compiled native metadata for ColumnUSearchId.IsReadOnly = True",
-          "sha256": "31097B675978A3667054B5DCF9FF42F340F803AA7B15735081338E2716A1ED47"
+          "sha256": "0C9D1AA2F5EC3A62A09F3D8F2813C5D0C772FD3D6116AF81095A013AB2EC505A"
         },
         {
           "path": "FamilyQuant/CurationViewModel.ReportDetails.cs",
@@ -7211,7 +7211,7 @@
         {
           "path": "FamilyQuant/CurationViewModel.Panel.cs",
           "symbol": "compiled native metadata for FullXicBasisTic.Content = the total ion current of all runs",
-          "sha256": "31097B675978A3667054B5DCF9FF42F340F803AA7B15735081338E2716A1ED47"
+          "sha256": "0C9D1AA2F5EC3A62A09F3D8F2813C5D0C772FD3D6116AF81095A013AB2EC505A"
         },
         {
           "path": "FamilyQuant/CurationViewModel.ReportDetails.cs",
@@ -7390,7 +7390,7 @@
         {
           "path": "FamilyQuant/CurationViewModel.Panel.cs",
           "symbol": "compiled native metadata for DataGridTextColumn ColumnDescription",
-          "sha256": "31097B675978A3667054B5DCF9FF42F340F803AA7B15735081338E2716A1ED47"
+          "sha256": "0C9D1AA2F5EC3A62A09F3D8F2813C5D0C772FD3D6116AF81095A013AB2EC505A"
         },
         {
           "path": "FamilyQuant/CurationViewModel.ReportDetails.cs",
@@ -7569,7 +7569,7 @@
         {
           "path": "FamilyQuant/CurationViewModel.Panel.cs",
           "symbol": "compiled native metadata for DataGridTextColumn ColumnUserId",
-          "sha256": "31097B675978A3667054B5DCF9FF42F340F803AA7B15735081338E2716A1ED47"
+          "sha256": "0C9D1AA2F5EC3A62A09F3D8F2813C5D0C772FD3D6116AF81095A013AB2EC505A"
         },
         {
           "path": "FamilyQuant/CurationViewModel.ReportDetails.cs",
@@ -7748,7 +7748,7 @@
         {
           "path": "FamilyQuant/CurationViewModel.Panel.cs",
           "symbol": "compiled native metadata for LabelWordSimilarity.Content = none",
-          "sha256": "31097B675978A3667054B5DCF9FF42F340F803AA7B15735081338E2716A1ED47"
+          "sha256": "0C9D1AA2F5EC3A62A09F3D8F2813C5D0C772FD3D6116AF81095A013AB2EC505A"
         },
         {
           "path": "FamilyQuant/CurationViewModel.ReportDetails.cs",
@@ -7927,7 +7927,7 @@
         {
           "path": "FamilyQuant/CurationViewModel.Panel.cs",
           "symbol": "compiled native metadata for ComboBox ComboBoxSharedPeptides",
-          "sha256": "31097B675978A3667054B5DCF9FF42F340F803AA7B15735081338E2716A1ED47"
+          "sha256": "0C9D1AA2F5EC3A62A09F3D8F2813C5D0C772FD3D6116AF81095A013AB2EC505A"
         },
         {
           "path": "FamilyQuant/CurationViewModel.ReportDetails.cs",
@@ -8106,7 +8106,7 @@
         {
           "path": "FamilyQuant/CurationViewModel.Panel.cs",
           "symbol": "compiled native metadata for ColumnUserAnnotation.Binding = {Binding Path=UserAnnotation, Mode=TwoWay}",
-          "sha256": "31097B675978A3667054B5DCF9FF42F340F803AA7B15735081338E2716A1ED47"
+          "sha256": "0C9D1AA2F5EC3A62A09F3D8F2813C5D0C772FD3D6116AF81095A013AB2EC505A"
         },
         {
           "path": "FamilyQuant/CurationViewModel.ReportDetails.cs",
@@ -8285,7 +8285,7 @@
         {
           "path": "FamilyQuant/CurationViewModel.Panel.cs",
           "symbol": "compiled native metadata for ColumnUSearchId.Header = USearch ID",
-          "sha256": "31097B675978A3667054B5DCF9FF42F340F803AA7B15735081338E2716A1ED47"
+          "sha256": "0C9D1AA2F5EC3A62A09F3D8F2813C5D0C772FD3D6116AF81095A013AB2EC505A"
         },
         {
           "path": "FamilyQuant/CurationViewModel.ReportDetails.cs",
@@ -8464,7 +8464,7 @@
         {
           "path": "FamilyQuant/CurationViewModel.Panel.cs",
           "symbol": "compiled native metadata for ColumnDomains.Binding = {Binding Path=Domains}",
-          "sha256": "31097B675978A3667054B5DCF9FF42F340F803AA7B15735081338E2716A1ED47"
+          "sha256": "0C9D1AA2F5EC3A62A09F3D8F2813C5D0C772FD3D6116AF81095A013AB2EC505A"
         },
         {
           "path": "FamilyQuant/CurationViewModel.ReportDetails.cs",
@@ -8643,7 +8643,7 @@
         {
           "path": "FamilyQuant/CurationViewModel.Panel.cs",
           "symbol": "compiled native metadata for Button ButtonApplyToSelected",
-          "sha256": "31097B675978A3667054B5DCF9FF42F340F803AA7B15735081338E2716A1ED47"
+          "sha256": "0C9D1AA2F5EC3A62A09F3D8F2813C5D0C772FD3D6116AF81095A013AB2EC505A"
         },
         {
           "path": "FamilyQuant/CurationViewModel.ReportDetails.cs",
@@ -8822,7 +8822,7 @@
         {
           "path": "FamilyQuant/CurationViewModel.Panel.cs",
           "symbol": "compiled native metadata for ComboBoxItem ModeItemIdentified",
-          "sha256": "31097B675978A3667054B5DCF9FF42F340F803AA7B15735081338E2716A1ED47"
+          "sha256": "0C9D1AA2F5EC3A62A09F3D8F2813C5D0C772FD3D6116AF81095A013AB2EC505A"
         },
         {
           "path": "FamilyQuant/CurationViewModel.ReportDetails.cs",
@@ -9001,7 +9001,7 @@
         {
           "path": "FamilyQuant/CurationViewModel.Panel.cs",
           "symbol": "compiled native metadata for ComboBoxItem SharedItemSplit",
-          "sha256": "31097B675978A3667054B5DCF9FF42F340F803AA7B15735081338E2716A1ED47"
+          "sha256": "0C9D1AA2F5EC3A62A09F3D8F2813C5D0C772FD3D6116AF81095A013AB2EC505A"
         },
         {
           "path": "FamilyQuant/CurationViewModel.ReportDetails.cs",
@@ -9180,7 +9180,7 @@
         {
           "path": "FamilyQuant/CurationViewModel.Panel.cs",
           "symbol": "compiled native metadata for LabelNumberOfGroups.Content = ?",
-          "sha256": "31097B675978A3667054B5DCF9FF42F340F803AA7B15735081338E2716A1ED47"
+          "sha256": "0C9D1AA2F5EC3A62A09F3D8F2813C5D0C772FD3D6116AF81095A013AB2EC505A"
         },
         {
           "path": "FamilyQuant/CurationViewModel.ReportDetails.cs",
@@ -9359,7 +9359,7 @@
         {
           "path": "FamilyQuant/CurationViewModel.Panel.cs",
           "symbol": "compiled native metadata for Button ButtonExportComposition",
-          "sha256": "31097B675978A3667054B5DCF9FF42F340F803AA7B15735081338E2716A1ED47"
+          "sha256": "0C9D1AA2F5EC3A62A09F3D8F2813C5D0C772FD3D6116AF81095A013AB2EC505A"
         },
         {
           "path": "FamilyQuant/CurationViewModel.ReportDetails.cs",
@@ -9538,7 +9538,7 @@
         {
           "path": "FamilyQuant/CurationViewModel.Panel.cs",
           "symbol": "compiled native metadata for TextBox TextBoxBatchAnnotation",
-          "sha256": "31097B675978A3667054B5DCF9FF42F340F803AA7B15735081338E2716A1ED47"
+          "sha256": "0C9D1AA2F5EC3A62A09F3D8F2813C5D0C772FD3D6116AF81095A013AB2EC505A"
         },
         {
           "path": "FamilyQuant/CurationViewModel.ReportDetails.cs",
@@ -9717,7 +9717,7 @@
         {
           "path": "FamilyQuant/CurationViewModel.Panel.cs",
           "symbol": "compiled native metadata for FullXicBasisQuantified.Content = the quantified signal",
-          "sha256": "31097B675978A3667054B5DCF9FF42F340F803AA7B15735081338E2716A1ED47"
+          "sha256": "0C9D1AA2F5EC3A62A09F3D8F2813C5D0C772FD3D6116AF81095A013AB2EC505A"
         },
         {
           "path": "FamilyQuant/CurationViewModel.ReportDetails.cs",
@@ -9896,7 +9896,7 @@
         {
           "path": "FamilyQuant/CurationViewModel.Panel.cs",
           "symbol": "compiled native metadata for ColumnFullXic.SortMemberPath = FullXicShare",
-          "sha256": "31097B675978A3667054B5DCF9FF42F340F803AA7B15735081338E2716A1ED47"
+          "sha256": "0C9D1AA2F5EC3A62A09F3D8F2813C5D0C772FD3D6116AF81095A013AB2EC505A"
         },
         {
           "path": "FamilyQuant/CurationViewModel.ReportDetails.cs",
@@ -10075,7 +10075,7 @@
         {
           "path": "FamilyQuant/CurationViewModel.Panel.cs",
           "symbol": "compiled native metadata for CheckBox CheckBoxExcludeReverse",
-          "sha256": "31097B675978A3667054B5DCF9FF42F340F803AA7B15735081338E2716A1ED47"
+          "sha256": "0C9D1AA2F5EC3A62A09F3D8F2813C5D0C772FD3D6116AF81095A013AB2EC505A"
         },
         {
           "path": "FamilyQuant/CurationViewModel.ReportDetails.cs",
@@ -10254,7 +10254,7 @@
         {
           "path": "FamilyQuant/CurationViewModel.Panel.cs",
           "symbol": "compiled native metadata for DataGridTextColumn ColumnUSearchId",
-          "sha256": "31097B675978A3667054B5DCF9FF42F340F803AA7B15735081338E2716A1ED47"
+          "sha256": "0C9D1AA2F5EC3A62A09F3D8F2813C5D0C772FD3D6116AF81095A013AB2EC505A"
         },
         {
           "path": "FamilyQuant/CurationViewModel.ReportDetails.cs",
@@ -10433,7 +10433,7 @@
         {
           "path": "FamilyQuant/CurationViewModel.Panel.cs",
           "symbol": "compiled native metadata for ColumnDescription.Header = Description",
-          "sha256": "31097B675978A3667054B5DCF9FF42F340F803AA7B15735081338E2716A1ED47"
+          "sha256": "0C9D1AA2F5EC3A62A09F3D8F2813C5D0C772FD3D6116AF81095A013AB2EC505A"
         },
         {
           "path": "FamilyQuant/CurationViewModel.ReportDetails.cs",
@@ -10612,7 +10612,7 @@
         {
           "path": "FamilyQuant/CurationViewModel.Panel.cs",
           "symbol": "compiled native metadata for ComboBoxItem FullXicBasisTic",
-          "sha256": "31097B675978A3667054B5DCF9FF42F340F803AA7B15735081338E2716A1ED47"
+          "sha256": "0C9D1AA2F5EC3A62A09F3D8F2813C5D0C772FD3D6116AF81095A013AB2EC505A"
         },
         {
           "path": "FamilyQuant/CurationViewModel.ReportDetails.cs",
@@ -10791,7 +10791,7 @@
         {
           "path": "FamilyQuant/CurationViewModel.Panel.cs",
           "symbol": "compiled native metadata for ColumnUserId.Binding = {Binding Path=UserID, Mode=TwoWay}",
-          "sha256": "31097B675978A3667054B5DCF9FF42F340F803AA7B15735081338E2716A1ED47"
+          "sha256": "0C9D1AA2F5EC3A62A09F3D8F2813C5D0C772FD3D6116AF81095A013AB2EC505A"
         },
         {
           "path": "FamilyQuant/CurationViewModel.ReportDetails.cs",
@@ -10970,7 +10970,7 @@
         {
           "path": "FamilyQuant/CurationViewModel.Panel.cs",
           "symbol": "compiled native metadata for ButtonRecalculateQuantitation.IsEnabled = False",
-          "sha256": "31097B675978A3667054B5DCF9FF42F340F803AA7B15735081338E2716A1ED47"
+          "sha256": "0C9D1AA2F5EC3A62A09F3D8F2813C5D0C772FD3D6116AF81095A013AB2EC505A"
         },
         {
           "path": "FamilyQuant/CurationViewModel.ReportDetails.cs",
@@ -11149,7 +11149,7 @@
         {
           "path": "FamilyQuant/CurationViewModel.Panel.cs",
           "symbol": "compiled native metadata for TextBlockExportState.Text = READY",
-          "sha256": "31097B675978A3667054B5DCF9FF42F340F803AA7B15735081338E2716A1ED47"
+          "sha256": "0C9D1AA2F5EC3A62A09F3D8F2813C5D0C772FD3D6116AF81095A013AB2EC505A"
         },
         {
           "path": "FamilyQuant/CurationViewModel.ReportDetails.cs",
@@ -11328,7 +11328,7 @@
         {
           "path": "FamilyQuant/CurationViewModel.Panel.cs",
           "symbol": "compiled native metadata for DataGridTextColumn ColumnMass",
-          "sha256": "31097B675978A3667054B5DCF9FF42F340F803AA7B15735081338E2716A1ED47"
+          "sha256": "0C9D1AA2F5EC3A62A09F3D8F2813C5D0C772FD3D6116AF81095A013AB2EC505A"
         },
         {
           "path": "FamilyQuant/CurationViewModel.ReportDetails.cs",
@@ -11507,7 +11507,7 @@
         {
           "path": "FamilyQuant/CurationViewModel.Panel.cs",
           "symbol": "compiled native metadata for DataGrid DataGridResultGrid",
-          "sha256": "31097B675978A3667054B5DCF9FF42F340F803AA7B15735081338E2716A1ED47"
+          "sha256": "0C9D1AA2F5EC3A62A09F3D8F2813C5D0C772FD3D6116AF81095A013AB2EC505A"
         },
         {
           "path": "FamilyQuant/CurationViewModel.ReportDetails.cs",
@@ -11686,7 +11686,7 @@
         {
           "path": "FamilyQuant/CurationViewModel.Panel.cs",
           "symbol": "compiled native metadata for LabelClusterThreshold.Content = ?",
-          "sha256": "31097B675978A3667054B5DCF9FF42F340F803AA7B15735081338E2716A1ED47"
+          "sha256": "0C9D1AA2F5EC3A62A09F3D8F2813C5D0C772FD3D6116AF81095A013AB2EC505A"
         },
         {
           "path": "FamilyQuant/CurationViewModel.ReportDetails.cs",
@@ -11865,7 +11865,7 @@
         {
           "path": "FamilyQuant/CurationViewModel.Panel.cs",
           "symbol": "compiled native metadata for ButtonManageLocks.IsEnabled = False",
-          "sha256": "31097B675978A3667054B5DCF9FF42F340F803AA7B15735081338E2716A1ED47"
+          "sha256": "0C9D1AA2F5EC3A62A09F3D8F2813C5D0C772FD3D6116AF81095A013AB2EC505A"
         },
         {
           "path": "FamilyQuant/CurationViewModel.ReportDetails.cs",
@@ -12044,7 +12044,7 @@
         {
           "path": "FamilyQuant/CurationViewModel.Panel.cs",
           "symbol": "compiled native metadata for DataGridTextColumn ColumnLocus",
-          "sha256": "31097B675978A3667054B5DCF9FF42F340F803AA7B15735081338E2716A1ED47"
+          "sha256": "0C9D1AA2F5EC3A62A09F3D8F2813C5D0C772FD3D6116AF81095A013AB2EC505A"
         },
         {
           "path": "FamilyQuant/CurationViewModel.ReportDetails.cs",
@@ -12223,7 +12223,7 @@
         {
           "path": "FamilyQuant/CurationViewModel.Panel.cs",
           "symbol": "compiled native metadata for ComboBox ComboBoxNormalization",
-          "sha256": "31097B675978A3667054B5DCF9FF42F340F803AA7B15735081338E2716A1ED47"
+          "sha256": "0C9D1AA2F5EC3A62A09F3D8F2813C5D0C772FD3D6116AF81095A013AB2EC505A"
         },
         {
           "path": "FamilyQuant/CurationViewModel.ReportDetails.cs",
@@ -12402,7 +12402,7 @@
         {
           "path": "FamilyQuant/CurationViewModel.Panel.cs",
           "symbol": "compiled native metadata for ColumnXicUser.IsReadOnly = True",
-          "sha256": "31097B675978A3667054B5DCF9FF42F340F803AA7B15735081338E2716A1ED47"
+          "sha256": "0C9D1AA2F5EC3A62A09F3D8F2813C5D0C772FD3D6116AF81095A013AB2EC505A"
         },
         {
           "path": "FamilyQuant/CurationViewModel.ReportDetails.cs",
@@ -12581,7 +12581,7 @@
         {
           "path": "FamilyQuant/CurationViewModel.Panel.cs",
           "symbol": "compiled native metadata for Button ButtonUndo",
-          "sha256": "31097B675978A3667054B5DCF9FF42F340F803AA7B15735081338E2716A1ED47"
+          "sha256": "0C9D1AA2F5EC3A62A09F3D8F2813C5D0C772FD3D6116AF81095A013AB2EC505A"
         },
         {
           "path": "FamilyQuant/CurationViewModel.ReportDetails.cs",
@@ -12760,7 +12760,7 @@
         {
           "path": "FamilyQuant/CurationViewModel.Panel.cs",
           "symbol": "compiled native metadata for ComboBoxItem FullXicBasisQuantified",
-          "sha256": "31097B675978A3667054B5DCF9FF42F340F803AA7B15735081338E2716A1ED47"
+          "sha256": "0C9D1AA2F5EC3A62A09F3D8F2813C5D0C772FD3D6116AF81095A013AB2EC505A"
         },
         {
           "path": "FamilyQuant/CurationViewModel.ReportDetails.cs",
@@ -12939,7 +12939,7 @@
         {
           "path": "FamilyQuant/CurationViewModel.Panel.cs",
           "symbol": "compiled native metadata for DataGridTextColumn ColumnFullXic",
-          "sha256": "31097B675978A3667054B5DCF9FF42F340F803AA7B15735081338E2716A1ED47"
+          "sha256": "0C9D1AA2F5EC3A62A09F3D8F2813C5D0C772FD3D6116AF81095A013AB2EC505A"
         },
         {
           "path": "FamilyQuant/CurationViewModel.ReportDetails.cs",
@@ -13118,7 +13118,7 @@
         {
           "path": "FamilyQuant/CurationViewModel.Panel.cs",
           "symbol": "compiled native metadata for ColumnFullXic.Binding = {Binding Path=FullXicShare, StringFormat=P3}",
-          "sha256": "31097B675978A3667054B5DCF9FF42F340F803AA7B15735081338E2716A1ED47"
+          "sha256": "0C9D1AA2F5EC3A62A09F3D8F2813C5D0C772FD3D6116AF81095A013AB2EC505A"
         },
         {
           "path": "FamilyQuant/CurationViewModel.ReportDetails.cs",
@@ -13297,7 +13297,7 @@
         {
           "path": "FamilyQuant/CurationViewModel.Panel.cs",
           "symbol": "compiled native metadata for ColumnXicUser.Header = Share of signal",
-          "sha256": "31097B675978A3667054B5DCF9FF42F340F803AA7B15735081338E2716A1ED47"
+          "sha256": "0C9D1AA2F5EC3A62A09F3D8F2813C5D0C772FD3D6116AF81095A013AB2EC505A"
         },
         {
           "path": "FamilyQuant/CurationViewModel.ReportDetails.cs",
@@ -13476,7 +13476,7 @@
         {
           "path": "FamilyQuant/CurationViewModel.Panel.cs",
           "symbol": "compiled native metadata for CheckBox CheckBoxShowXICOnly",
-          "sha256": "31097B675978A3667054B5DCF9FF42F340F803AA7B15735081338E2716A1ED47"
+          "sha256": "0C9D1AA2F5EC3A62A09F3D8F2813C5D0C772FD3D6116AF81095A013AB2EC505A"
         },
         {
           "path": "FamilyQuant/CurationViewModel.ReportDetails.cs",
@@ -13655,7 +13655,7 @@
         {
           "path": "FamilyQuant/CurationViewModel.Panel.cs",
           "symbol": "compiled native metadata for TextBox TextBoxBatchUserId",
-          "sha256": "31097B675978A3667054B5DCF9FF42F340F803AA7B15735081338E2716A1ED47"
+          "sha256": "0C9D1AA2F5EC3A62A09F3D8F2813C5D0C772FD3D6116AF81095A013AB2EC505A"
         },
         {
           "path": "FamilyQuant/CurationViewModel.ReportDetails.cs",
@@ -13834,7 +13834,7 @@
         {
           "path": "FamilyQuant/CurationViewModel.Panel.cs",
           "symbol": "compiled native metadata for DataGridTextColumn ColumnXicUser",
-          "sha256": "31097B675978A3667054B5DCF9FF42F340F803AA7B15735081338E2716A1ED47"
+          "sha256": "0C9D1AA2F5EC3A62A09F3D8F2813C5D0C772FD3D6116AF81095A013AB2EC505A"
         },
         {
           "path": "FamilyQuant/CurationViewModel.ReportDetails.cs",
@@ -14013,7 +14013,7 @@
         {
           "path": "FamilyQuant/CurationViewModel.Panel.cs",
           "symbol": "compiled native metadata for TextBlockLayer3State.Text = BLOCKED",
-          "sha256": "31097B675978A3667054B5DCF9FF42F340F803AA7B15735081338E2716A1ED47"
+          "sha256": "0C9D1AA2F5EC3A62A09F3D8F2813C5D0C772FD3D6116AF81095A013AB2EC505A"
         },
         {
           "path": "FamilyQuant/CurationViewModel.ReportDetails.cs",
@@ -14192,7 +14192,7 @@
         {
           "path": "FamilyQuant/CurationViewModel.Panel.cs",
           "symbol": "compiled native metadata for Button ButtonWordCluster",
-          "sha256": "31097B675978A3667054B5DCF9FF42F340F803AA7B15735081338E2716A1ED47"
+          "sha256": "0C9D1AA2F5EC3A62A09F3D8F2813C5D0C772FD3D6116AF81095A013AB2EC505A"
         },
         {
           "path": "FamilyQuant/CurationViewModel.ReportDetails.cs",
@@ -14371,7 +14371,7 @@
         {
           "path": "FamilyQuant/CurationViewModel.Panel.cs",
           "symbol": "compiled native metadata for ColumnDescription.IsReadOnly = True",
-          "sha256": "31097B675978A3667054B5DCF9FF42F340F803AA7B15735081338E2716A1ED47"
+          "sha256": "0C9D1AA2F5EC3A62A09F3D8F2813C5D0C772FD3D6116AF81095A013AB2EC505A"
         },
         {
           "path": "FamilyQuant/CurationViewModel.ReportDetails.cs",
@@ -14550,7 +14550,7 @@
         {
           "path": "FamilyQuant/CurationViewModel.Panel.cs",
           "symbol": "compiled native metadata for ButtonUndo.IsEnabled = False",
-          "sha256": "31097B675978A3667054B5DCF9FF42F340F803AA7B15735081338E2716A1ED47"
+          "sha256": "0C9D1AA2F5EC3A62A09F3D8F2813C5D0C772FD3D6116AF81095A013AB2EC505A"
         },
         {
           "path": "FamilyQuant/CurationViewModel.ReportDetails.cs",
@@ -14729,7 +14729,7 @@
         {
           "path": "FamilyQuant/CurationViewModel.Panel.cs",
           "symbol": "compiled native metadata for Button ButtonLoadQuantData",
-          "sha256": "31097B675978A3667054B5DCF9FF42F340F803AA7B15735081338E2716A1ED47"
+          "sha256": "0C9D1AA2F5EC3A62A09F3D8F2813C5D0C772FD3D6116AF81095A013AB2EC505A"
         },
         {
           "path": "FamilyQuant/CurationViewModel.ReportDetails.cs",
@@ -14908,7 +14908,7 @@
         {
           "path": "FamilyQuant/CurationViewModel.Panel.cs",
           "symbol": "compiled native metadata for ColumnDomains.Header = Domains",
-          "sha256": "31097B675978A3667054B5DCF9FF42F340F803AA7B15735081338E2716A1ED47"
+          "sha256": "0C9D1AA2F5EC3A62A09F3D8F2813C5D0C772FD3D6116AF81095A013AB2EC505A"
         },
         {
           "path": "FamilyQuant/CurationViewModel.ReportDetails.cs",
@@ -15087,7 +15087,7 @@
         {
           "path": "FamilyQuant/CurationViewModel.Panel.cs",
           "symbol": "compiled native metadata for Button ButtonFetchDomains",
-          "sha256": "31097B675978A3667054B5DCF9FF42F340F803AA7B15735081338E2716A1ED47"
+          "sha256": "0C9D1AA2F5EC3A62A09F3D8F2813C5D0C772FD3D6116AF81095A013AB2EC505A"
         },
         {
           "path": "FamilyQuant/CurationViewModel.ReportDetails.cs",
@@ -15141,7 +15141,7 @@
           "kind": "test",
           "target": "ShellMetadataReceipts",
           "assertion": "native shell kind option/copy: every listed frozen/current observation has equal native metadata or executed event outcome",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\shell-native\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-native\\comparisons.log",
           "inspectedBy": ""
         }
       ]
@@ -15155,7 +15155,7 @@
           "kind": "test",
           "target": "ShellMetadataReceipts",
           "assertion": "native shell kind control: every listed frozen/current observation has equal native metadata or executed event outcome",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\shell-native\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-native\\comparisons.log",
           "inspectedBy": ""
         }
       ]
@@ -15169,7 +15169,7 @@
           "kind": "test",
           "target": "ShellMetadataReceipts",
           "assertion": "native shell kind column: every listed frozen/current observation has equal native metadata or executed event outcome",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261103-013000-terra1\\shell-native\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-native\\comparisons.log",
           "inspectedBy": ""
         }
       ]
