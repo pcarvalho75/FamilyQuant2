@@ -57,10 +57,39 @@ internal static partial class Program
         }
         finally { CultureInfo.CurrentCulture = oldCulture; CultureInfo.CurrentUICulture = oldUi; }
         manifest.FamilyWorldResult = new FamilyWorldSummary { MinimumTagLength = FamilyWorldOptions.DefaultMinimumTagLength,
-            Families = new() { new() { Family = "Synthetic stored family", DecoyRate = .05, RightRate = null, KnownCredited = 2 } } };
+            Families = new()
+            {
+                new() { Family = "Synthetic stored family", CreditedEnvelope = 100, DecoyEnvelope = 5,
+                    Peptides = 20, DecoyPeptides = 1, DecoyRate = .05, RightRate = null, KnownCredited = 2 },
+                new() { Family = "Synthetic zero-credit family", CreditedEnvelope = 0, DecoyEnvelope = 5,
+                    Peptides = 0, DecoyPeptides = 3, DecoyRate = .05, RightRate = null },
+            } };
         var worldPlan = ReportFigureRenderer.Plan(data, manifest, curation, families);
         var rateChart = (ReportFamilyWorldRatesChart)worldPlan.Charts.Single(c => c.FileName == "family_world_rates_1.png").CreateChart();
-        Check("world rate chart retains recorded values and null availability", rateChart.Rows.Single().DecoyRate == .05 && rateChart.Rows.Single().RightRate == null);
+        var supported = rateChart.Rows.Single(r => r.Family == "Synthetic stored family");
+        Check("world rate chart retains recorded values and null availability", supported.DecoyRate == .05 && supported.RightRate == null);
+        var unavailable = rateChart.Rows.Single(r => r.Family == "Synthetic zero-credit family");
+        Check("world rate chart retains the zero-credit no-rate state with its reason and counts",
+            unavailable.DecoyRate == null && unavailable.RightRate == null
+            && unavailable.DecoyRateStatus == FamilyWorldDecoyRates.NoCreditedSignal
+            && unavailable.Peptides == 0 && unavailable.DecoyPeptides == 3);
+        string unavailableLabel = FamilyWorldDecoyRates.Format(FamilyWorldDecoyRates.ForFamily(unavailable), CultureInfo.InvariantCulture);
+        Check("stored no-rate evidence formats its reason and counts without a percentage or changed envelopes",
+            unavailableLabel == "no credited signal (target 0; decoy 3)" && unavailable.CreditedEnvelope == 0 && unavailable.DecoyEnvelope == 5);
+        oldCulture = CultureInfo.CurrentCulture; oldUi = CultureInfo.CurrentUICulture;
+        try
+        {
+            var ratePlan = new ReportFigurePlan(worldPlan.Charts.Where(c => c.FileName.StartsWith("family_world_rates_", StringComparison.Ordinal)).ToArray(), Array.Empty<ReportFigureAvailability>());
+            CultureInfo.CurrentCulture = CultureInfo.GetCultureInfo("pt-BR"); CultureInfo.CurrentUICulture = CultureInfo.CurrentCulture;
+            byte[] ratePt = ReportFigureRenderer.Render(ratePlan, Path.Combine(output, "rates-pt")).Single().Figure.PngBytes;
+            string directPt = ChartImageExporter.Save(new ReportFamilyWorldRatesChart(rateChart.Rows), Path.Combine(output, "rates-direct-pt.png"), variant: ChartPaletteVariant.Light);
+            CultureInfo.CurrentCulture = CultureInfo.GetCultureInfo("en-US"); CultureInfo.CurrentUICulture = CultureInfo.CurrentCulture;
+            byte[] rateEn = ReportFigureRenderer.Render(ratePlan, Path.Combine(output, "rates-en")).Single().Figure.PngBytes;
+            string directEn = ChartImageExporter.Save(new ReportFamilyWorldRatesChart(rateChart.Rows), Path.Combine(output, "rates-direct-en.png"), variant: ChartPaletteVariant.Light);
+            Check("actual stored-rate report PNG is byte-equal under pt-BR and en-US", ratePt.SequenceEqual(rateEn));
+            Check("standalone stored-rate chart export is culture invariant", File.ReadAllBytes(directPt).SequenceEqual(File.ReadAllBytes(directEn)));
+        }
+        finally { CultureInfo.CurrentCulture = oldCulture; CultureInfo.CurrentUICulture = oldUi; }
         manifest.DeNovoSourceScoreDistributions.Add(new() { SourceId = "incomplete", RawRows = 1 });
         bool invalid = false;
         try { ReportFigureRenderer.Plan(data, manifest, curation, families); } catch (InvalidOperationException) { invalid = true; }

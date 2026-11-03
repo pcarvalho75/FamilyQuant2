@@ -51,6 +51,7 @@ public static partial class FamilyCompositionStudy
             foreach (int match in index.Match(protein.Sequence ?? string.Empty)) support[sequences[match]].Add(protein);
         var result = new FamilyProteinCountsResult
         {
+            MembershipSha256 = attribution.MembershipSha256,
             Method = "Proteins needed to explain the peptides (greedy estimate): repeatedly select the database target " +
                 "covering the most unexplained distinct peptide sequences; ties use ordinal protein identifiers. " +
                 "Exact containment with I/L folded and modifications removed, across all assigned quantified peptides " +

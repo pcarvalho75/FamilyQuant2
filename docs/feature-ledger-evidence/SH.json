@@ -5,64 +5,328 @@
   "runs": [
     {
       "id": "shell-declarations",
-      "command": "C:\\FamilyQuant-gate\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --ledger-shell-compare D:/FamilyQuant-data/out-shell/N3/source D:/FamilyQuant-data/out-refresh\\20261102-210533-FamilyQuant-gate\\shell-compare \u00222026-11-02 21:06:05 -0800\u0022",
-      "executedAt": "2026-11-02 21:06:05 -0800",
-      "commit": "f8bf0902393d7946e71dacf14dc81ea0c2c4ceb7",
+      "command": "D:\\FamilyQuant-wt\\shell-j15-check\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --ledger-shell-compare D:/FamilyQuant-data/out-shell/N3/source D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare \u00222026-11-03 02:37:27 -0800\u0022 D:/FamilyQuant-data/reference-1.5.0.6/app",
+      "executedAt": "2026-11-03 02:37:27 -0800",
+      "commit": "9fe583514b1e3726e523edb37ca5c10c303cc6dd",
       "artifacts": [
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\shell-compare\\comparisons.log",
-          "sha256": "6E2FC1C285797B04CD40173760BB02C74834533D9CDCEF564C4870AB0A2AC5DA"
+          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\comparisons.log",
+          "sha256": "06C53B7CEA33941F602005A509E6ECC1D0399856CB1178E95298E423A989A68F"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\shell-compare\\comparisons.json",
-          "sha256": "32E29184EDCFC4BFA11BD829AB498821A316F9EC51D83180417837A112F13C36"
+          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\comparisons.json",
+          "sha256": "A4686DA9C5EBE81431A3E058AE5FB5A30D8C3CE133E4674CFE1796F196726F02"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\shell-compare\\curation-runtime.json",
+          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\curation-runtime.json",
           "sha256": "4EF1BCE9EAFF5985013CD15A6B1CBFA29C34D7D42702007E522840A20879D128"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\shell-compare\\executed\\Program.ShellLedgerReceipts.cs",
-          "sha256": "6C0E1250A4A019C4937A0CABEF9BA9078213B35E597781407B767279490D3EF3"
+          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\composition-native\\en-US\\frozen-populated-FamilyUnique.csv",
+          "sha256": "12500FE7194134C33F8FE4E2C03A9E4263D64F93F5A718E4D17B0065446ADE2D"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\shell-compare\\executed\\Program.ShellLedgerComparison.cs",
+          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\composition-native\\en-US\\current-populated-FamilyUnique.csv",
+          "sha256": "12500FE7194134C33F8FE4E2C03A9E4263D64F93F5A718E4D17B0065446ADE2D"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\composition-native\\en-US\\frozen-populated-SplitEqually.csv",
+          "sha256": "8A0D01F97236F51ADA2B56897C172C165A5B9C9E9242B746EB4B814E54D700BE"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\composition-native\\en-US\\current-populated-SplitEqually.csv",
+          "sha256": "8A0D01F97236F51ADA2B56897C172C165A5B9C9E9242B746EB4B814E54D700BE"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\composition-native\\en-US\\frozen-populated-CountInEveryFamily.csv",
+          "sha256": "AC5A0DD489533CDF687C6808D93E59DDCE4FB72AA57AB1A6FDA7B060AE4E5224"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\composition-native\\en-US\\current-populated-CountInEveryFamily.csv",
+          "sha256": "AC5A0DD489533CDF687C6808D93E59DDCE4FB72AA57AB1A6FDA7B060AE4E5224"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\composition-native\\en-US\\frozen-zero-denominator-FamilyUnique.csv",
+          "sha256": "6EFDE400710983694FC23DE446DFCCEBD26033B6ACE7F174356E93909161F34B"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\composition-native\\en-US\\current-zero-denominator-FamilyUnique.csv",
+          "sha256": "6EFDE400710983694FC23DE446DFCCEBD26033B6ACE7F174356E93909161F34B"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\composition-native\\en-US\\frozen-zero-denominator-SplitEqually.csv",
+          "sha256": "064D06FFB41A86C79C70A13857CFDABA9AB12F7F2C48E5D3E3A2BC3079A337D1"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\composition-native\\en-US\\current-zero-denominator-SplitEqually.csv",
+          "sha256": "064D06FFB41A86C79C70A13857CFDABA9AB12F7F2C48E5D3E3A2BC3079A337D1"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\composition-native\\en-US\\frozen-zero-denominator-CountInEveryFamily.csv",
+          "sha256": "212C11E79B586FEC795FA9FD8DE396F882B19FEB97E0DDD8E54925BF872F0F01"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\composition-native\\en-US\\current-zero-denominator-CountInEveryFamily.csv",
+          "sha256": "212C11E79B586FEC795FA9FD8DE396F882B19FEB97E0DDD8E54925BF872F0F01"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\composition-native\\en-US\\frozen-negative-denominator-FamilyUnique.csv",
+          "sha256": "6EFDE400710983694FC23DE446DFCCEBD26033B6ACE7F174356E93909161F34B"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\composition-native\\en-US\\current-negative-denominator-FamilyUnique.csv",
+          "sha256": "6EFDE400710983694FC23DE446DFCCEBD26033B6ACE7F174356E93909161F34B"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\composition-native\\en-US\\frozen-negative-denominator-SplitEqually.csv",
+          "sha256": "064D06FFB41A86C79C70A13857CFDABA9AB12F7F2C48E5D3E3A2BC3079A337D1"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\composition-native\\en-US\\current-negative-denominator-SplitEqually.csv",
+          "sha256": "064D06FFB41A86C79C70A13857CFDABA9AB12F7F2C48E5D3E3A2BC3079A337D1"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\composition-native\\en-US\\frozen-negative-denominator-CountInEveryFamily.csv",
+          "sha256": "212C11E79B586FEC795FA9FD8DE396F882B19FEB97E0DDD8E54925BF872F0F01"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\composition-native\\en-US\\current-negative-denominator-CountInEveryFamily.csv",
+          "sha256": "212C11E79B586FEC795FA9FD8DE396F882B19FEB97E0DDD8E54925BF872F0F01"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\composition-native\\en-US\\frozen-nonfinite-denominator-FamilyUnique.csv",
+          "sha256": "6EFDE400710983694FC23DE446DFCCEBD26033B6ACE7F174356E93909161F34B"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\composition-native\\en-US\\current-nonfinite-denominator-FamilyUnique.csv",
+          "sha256": "6EFDE400710983694FC23DE446DFCCEBD26033B6ACE7F174356E93909161F34B"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\composition-native\\en-US\\frozen-nonfinite-denominator-SplitEqually.csv",
+          "sha256": "064D06FFB41A86C79C70A13857CFDABA9AB12F7F2C48E5D3E3A2BC3079A337D1"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\composition-native\\en-US\\current-nonfinite-denominator-SplitEqually.csv",
+          "sha256": "064D06FFB41A86C79C70A13857CFDABA9AB12F7F2C48E5D3E3A2BC3079A337D1"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\composition-native\\en-US\\frozen-nonfinite-denominator-CountInEveryFamily.csv",
+          "sha256": "212C11E79B586FEC795FA9FD8DE396F882B19FEB97E0DDD8E54925BF872F0F01"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\composition-native\\en-US\\current-nonfinite-denominator-CountInEveryFamily.csv",
+          "sha256": "212C11E79B586FEC795FA9FD8DE396F882B19FEB97E0DDD8E54925BF872F0F01"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\composition-native\\en-US\\frozen-empty-FamilyUnique.csv",
+          "sha256": "C04670EEB4A24EDB8BA795E844EE4237DC06095F983D7B74C943E862400EE803"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\composition-native\\en-US\\current-empty-FamilyUnique.csv",
+          "sha256": "C04670EEB4A24EDB8BA795E844EE4237DC06095F983D7B74C943E862400EE803"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\composition-native\\en-US\\frozen-empty-SplitEqually.csv",
+          "sha256": "008C6F16A12DA1AD623AEE87D3EC80A99C6C700ADE6F7273DFC868F646360CC0"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\composition-native\\en-US\\current-empty-SplitEqually.csv",
+          "sha256": "008C6F16A12DA1AD623AEE87D3EC80A99C6C700ADE6F7273DFC868F646360CC0"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\composition-native\\en-US\\frozen-empty-CountInEveryFamily.csv",
+          "sha256": "529FAFC1DB3CB47D7560F8736316B0778873B81E7D907E400866334ABA5C2A4D"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\composition-native\\en-US\\current-empty-CountInEveryFamily.csv",
+          "sha256": "529FAFC1DB3CB47D7560F8736316B0778873B81E7D907E400866334ABA5C2A4D"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\composition-native\\pt-BR\\frozen-populated-FamilyUnique.csv",
+          "sha256": "12500FE7194134C33F8FE4E2C03A9E4263D64F93F5A718E4D17B0065446ADE2D"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\composition-native\\pt-BR\\current-populated-FamilyUnique.csv",
+          "sha256": "12500FE7194134C33F8FE4E2C03A9E4263D64F93F5A718E4D17B0065446ADE2D"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\composition-native\\pt-BR\\frozen-populated-SplitEqually.csv",
+          "sha256": "8A0D01F97236F51ADA2B56897C172C165A5B9C9E9242B746EB4B814E54D700BE"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\composition-native\\pt-BR\\current-populated-SplitEqually.csv",
+          "sha256": "8A0D01F97236F51ADA2B56897C172C165A5B9C9E9242B746EB4B814E54D700BE"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\composition-native\\pt-BR\\frozen-populated-CountInEveryFamily.csv",
+          "sha256": "AC5A0DD489533CDF687C6808D93E59DDCE4FB72AA57AB1A6FDA7B060AE4E5224"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\composition-native\\pt-BR\\current-populated-CountInEveryFamily.csv",
+          "sha256": "AC5A0DD489533CDF687C6808D93E59DDCE4FB72AA57AB1A6FDA7B060AE4E5224"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\composition-native\\pt-BR\\frozen-zero-denominator-FamilyUnique.csv",
+          "sha256": "6EFDE400710983694FC23DE446DFCCEBD26033B6ACE7F174356E93909161F34B"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\composition-native\\pt-BR\\current-zero-denominator-FamilyUnique.csv",
+          "sha256": "6EFDE400710983694FC23DE446DFCCEBD26033B6ACE7F174356E93909161F34B"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\composition-native\\pt-BR\\frozen-zero-denominator-SplitEqually.csv",
+          "sha256": "064D06FFB41A86C79C70A13857CFDABA9AB12F7F2C48E5D3E3A2BC3079A337D1"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\composition-native\\pt-BR\\current-zero-denominator-SplitEqually.csv",
+          "sha256": "064D06FFB41A86C79C70A13857CFDABA9AB12F7F2C48E5D3E3A2BC3079A337D1"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\composition-native\\pt-BR\\frozen-zero-denominator-CountInEveryFamily.csv",
+          "sha256": "212C11E79B586FEC795FA9FD8DE396F882B19FEB97E0DDD8E54925BF872F0F01"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\composition-native\\pt-BR\\current-zero-denominator-CountInEveryFamily.csv",
+          "sha256": "212C11E79B586FEC795FA9FD8DE396F882B19FEB97E0DDD8E54925BF872F0F01"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\composition-native\\pt-BR\\frozen-negative-denominator-FamilyUnique.csv",
+          "sha256": "6EFDE400710983694FC23DE446DFCCEBD26033B6ACE7F174356E93909161F34B"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\composition-native\\pt-BR\\current-negative-denominator-FamilyUnique.csv",
+          "sha256": "6EFDE400710983694FC23DE446DFCCEBD26033B6ACE7F174356E93909161F34B"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\composition-native\\pt-BR\\frozen-negative-denominator-SplitEqually.csv",
+          "sha256": "064D06FFB41A86C79C70A13857CFDABA9AB12F7F2C48E5D3E3A2BC3079A337D1"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\composition-native\\pt-BR\\current-negative-denominator-SplitEqually.csv",
+          "sha256": "064D06FFB41A86C79C70A13857CFDABA9AB12F7F2C48E5D3E3A2BC3079A337D1"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\composition-native\\pt-BR\\frozen-negative-denominator-CountInEveryFamily.csv",
+          "sha256": "212C11E79B586FEC795FA9FD8DE396F882B19FEB97E0DDD8E54925BF872F0F01"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\composition-native\\pt-BR\\current-negative-denominator-CountInEveryFamily.csv",
+          "sha256": "212C11E79B586FEC795FA9FD8DE396F882B19FEB97E0DDD8E54925BF872F0F01"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\composition-native\\pt-BR\\frozen-nonfinite-denominator-FamilyUnique.csv",
+          "sha256": "6EFDE400710983694FC23DE446DFCCEBD26033B6ACE7F174356E93909161F34B"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\composition-native\\pt-BR\\current-nonfinite-denominator-FamilyUnique.csv",
+          "sha256": "6EFDE400710983694FC23DE446DFCCEBD26033B6ACE7F174356E93909161F34B"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\composition-native\\pt-BR\\frozen-nonfinite-denominator-SplitEqually.csv",
+          "sha256": "064D06FFB41A86C79C70A13857CFDABA9AB12F7F2C48E5D3E3A2BC3079A337D1"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\composition-native\\pt-BR\\current-nonfinite-denominator-SplitEqually.csv",
+          "sha256": "064D06FFB41A86C79C70A13857CFDABA9AB12F7F2C48E5D3E3A2BC3079A337D1"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\composition-native\\pt-BR\\frozen-nonfinite-denominator-CountInEveryFamily.csv",
+          "sha256": "212C11E79B586FEC795FA9FD8DE396F882B19FEB97E0DDD8E54925BF872F0F01"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\composition-native\\pt-BR\\current-nonfinite-denominator-CountInEveryFamily.csv",
+          "sha256": "212C11E79B586FEC795FA9FD8DE396F882B19FEB97E0DDD8E54925BF872F0F01"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\composition-native\\pt-BR\\frozen-empty-FamilyUnique.csv",
+          "sha256": "C04670EEB4A24EDB8BA795E844EE4237DC06095F983D7B74C943E862400EE803"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\composition-native\\pt-BR\\current-empty-FamilyUnique.csv",
+          "sha256": "C04670EEB4A24EDB8BA795E844EE4237DC06095F983D7B74C943E862400EE803"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\composition-native\\pt-BR\\frozen-empty-SplitEqually.csv",
+          "sha256": "008C6F16A12DA1AD623AEE87D3EC80A99C6C700ADE6F7273DFC868F646360CC0"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\composition-native\\pt-BR\\current-empty-SplitEqually.csv",
+          "sha256": "008C6F16A12DA1AD623AEE87D3EC80A99C6C700ADE6F7273DFC868F646360CC0"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\composition-native\\pt-BR\\frozen-empty-CountInEveryFamily.csv",
+          "sha256": "529FAFC1DB3CB47D7560F8736316B0778873B81E7D907E400866334ABA5C2A4D"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\composition-native\\pt-BR\\current-empty-CountInEveryFamily.csv",
+          "sha256": "529FAFC1DB3CB47D7560F8736316B0778873B81E7D907E400866334ABA5C2A4D"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\composition-native\\files.json",
+          "sha256": "82FBB975CB146528A13D290133B0884E2023A15EEA78AA3E9D59D15D7A2BB4E9"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\composition-native\\inputs.json",
+          "sha256": "834E2BB59297BD99ECA91C23762B9FE56F44DCA2E49527BDBA7C12A742A27BFE"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\composition-native\\frozen-FamilyQuant.dll",
+          "sha256": "D764488C923945285E03B338E5A91BF28106A35B11AB465D8E2B23D125F03FD8"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\composition-native\\current-CsvReport.cs",
+          "sha256": "15B7F2A6E9E75ACC99002C67DC265627136C3437BB6A6555DAAA813D87ADFB48"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\composition-native\\frozen-CsvReport.cs",
+          "sha256": "B4574252A1AEAE766366D13932117A31C2C7FFB3910F05B1CD6E852B08087617"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\executed\\Program.ShellLedgerReceipts.cs",
+          "sha256": "8826CE4F58630068138F923812C41067C40D6E3478C606AF35793FEDD8479A56"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\executed\\Program.ShellLedgerComparison.cs",
           "sha256": "869FC668090431A23D08E8ED109B95BC937D9A6B94DE63E11E86672852649FEB"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\shell-compare\\executed\\Program.Commands.LedgerDeclarations.cs",
+          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\executed\\Program.ShellCompositionProof.cs",
+          "sha256": "834C1A46D7B63DFAD8EE0B7578570DF274759CDAAF4732E97106A027488A71C9"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\executed\\Program.Commands.LedgerDeclarations.cs",
           "sha256": "5F18F4DD7E56E601368051AAD44866736DE2FA60C17A5550F4A330C98DABB3D4"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\shell-compare\\executed\\Program.CurationScreen.cs",
+          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\executed\\Program.CurationScreen.cs",
           "sha256": "42C2CC3D48F2E59DC8E48D06915FE933C6A025F48972FDC3FB0458A0284FA2FF"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\shell-compare\\executed\\LedgerDeclarationComparison.cs",
+          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\executed\\LedgerDeclarationComparison.cs",
           "sha256": "78EC993565740269D572410A84584AF1D96488C1AE81F2455B1D9AA2D94BB4C3"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\shell-compare\\executed\\LedgerMemberFactComparison.cs",
+          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\executed\\LedgerMemberFactComparison.cs",
           "sha256": "1F3254D635B40D22576E9F40347DBEB503A5FF661EFC18E743EAC35B097FC14C"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\shell-compare\\executed\\FeatureLedgerEvidence.Reporting.cs",
+          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\executed\\FeatureLedgerEvidence.Reporting.cs",
           "sha256": "E9A4F3A2A671452283E1C28E155B81DEF97F9BAE907945607C1F16DD0078CC12"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\shell-compare\\executed\\FamilyQuant.Tests.dll",
-          "sha256": "7BF4EDAB23F5D09BA329655DEFC7CA1DA9E901AED04DBA57FBAE9B36AE74ED44"
+          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\executed\\FamilyQuant.Tests.dll",
+          "sha256": "6407606040C45143C12C0432C670F6345DD42144E1608CE7BFE61C0AD1530979"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\shell-compare\\executed\\FamilyQuant2.dll",
-          "sha256": "80ADEFB7501B1F40F0A7599E30D4166AA7FBA1E7459CFF505849D4D5F7F58065"
+          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\executed\\FamilyQuant2.dll",
+          "sha256": "7F98785D9A2F40FEE7D03BE859F12613A13FD0CDF5BB0034B5444C4545BCEDBD"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\shell-compare\\executed\\FamilyQuant.Core.dll",
-          "sha256": "8267A1D42284C72B70B419973DF5A276EA96B6001B370E7B7198D445982B6DA9"
+          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\executed\\FamilyQuant.Core.dll",
+          "sha256": "738A1059162D1AC024C965E3FFB31B9920AA635687AB66379DC2000A990C666F"
         }
       ],
-      "workingDirectory": "C:\\FamilyQuant-gate"
+      "workingDirectory": "D:\\FamilyQuant-wt\\shell-j15-check"
     }
   ],
   "rows": [
@@ -207,14 +471,43 @@
       "implementation": [
         {
           "path": "FamilyQuant.Core/CsvReport.cs",
-          "symbol": "FamilyQuant.CsvReport::public static string BuildFamilyComposition ( FamilyEnvelopeQuantResult result , SharedPeptidePolicy policy , double denominator , string basis )",
-          "sha256": "453BA55ABE23B6A567016C1D2BB419AA102E6D801C7347A371769F1FD334DDDF"
+          "symbol": "FamilyQuant.CsvReport::public static string BuildFamilyComposition ( FamilyEnvelopeQuantResult result , SharedPeptidePolicy policy , double denominator , string basis ); native public historical overload",
+          "sha256": "15B7F2A6E9E75ACC99002C67DC265627136C3437BB6A6555DAAA813D87ADFB48"
+        },
+        {
+          "path": "FamilyQuant.Core/CsvFormatting.cs",
+          "symbol": "Native historical composition CSV dependency",
+          "sha256": "D70EFC4C06C7E81C9215555102B5AF238781B734B8BB81E825A25140A268C57A"
+        },
+        {
+          "path": "FamilyQuant.Core/SharedPeptidePolicy.cs",
+          "symbol": "Native historical composition CSV dependency",
+          "sha256": "0C1A414EC708B47FF538FC22BAF525F0E13082B4AA02C63CEEB32FA1AB35E3A1"
+        },
+        {
+          "path": "FamilyQuant.Core/Quantitation/FamilyEnvelopeModels.cs",
+          "symbol": "Native historical composition CSV dependency",
+          "sha256": "928512F5F910BEA1CFA84DCB776FA2E5AC0917F5A5D406C68E0521B7FADD3521"
+        },
+        {
+          "path": "FamilyQuant.Tests/Program.ShellCompositionProof.cs",
+          "symbol": "Native historical composition CSV dependency",
+          "sha256": "834C1A46D7B63DFAD8EE0B7578570DF274759CDAAF4732E97106A027488A71C9"
         }
       ],
-      "proofs": [],
-      "note": "Declaration only; no reachability or handler-execution claim.",
-      "kindReceiptId": "shell-decl-export-storage-fact",
-      "compared": "FamilyQuant/CsvReport.cs:95 \u0022family_user_id\u0022 -\u003E FamilyQuant.Core/CsvReport.cs: FamilyQuant.CsvReport::public static string BuildFamilyComposition ( FamilyEnvelopeQuantResult result , SharedPeptidePolicy policy , double denominator , string basis ) = \u0022family_user_id\u0022; complete member tokens SHA256=72E09E1F2AA03A91DCE0AC8BF94ABF063E09A3B6E077213352CBC81DC164D700"
+      "proofs": [
+        {
+          "runId": "shell-declarations",
+          "kind": "test",
+          "target": "ProveShellComposition",
+          "assertion": "native shell composition fact FQ15-04AAB575A5CB: anchored frozen literal observed and complete historical CSV bytes agree in every case and culture",
+          "artifact": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\comparisons.log",
+          "inspectedBy": ""
+        }
+      ],
+      "note": "Executed complete frozen/current historical composition CSVs in all shared-peptide policies and two cultures; declaration equality is not claimed.",
+      "kindReceiptId": null,
+      "compared": "FamilyQuant/CsvReport.cs:95 \u0022family_user_id\u0022; frozen member FamilyQuant.CsvReport::public static string BuildFamilyComposition ( FamilyEnvelopeQuantResult result , SharedPeptidePolicy policy , double denominator , string basis ); exact native file bytes and observed literal, including empty and nonpositive-denominator cases"
     },
     {
       "observationId": "FQ15-04B6DD530612",
@@ -309,14 +602,43 @@
       "implementation": [
         {
           "path": "FamilyQuant.Core/CsvReport.cs",
-          "symbol": "FamilyQuant.CsvReport::public static string BuildFamilyComposition ( FamilyEnvelopeQuantResult result , SharedPeptidePolicy policy , double denominator , string basis )",
-          "sha256": "453BA55ABE23B6A567016C1D2BB419AA102E6D801C7347A371769F1FD334DDDF"
+          "symbol": "FamilyQuant.CsvReport::public static string BuildFamilyComposition ( FamilyEnvelopeQuantResult result , SharedPeptidePolicy policy , double denominator , string basis ); native public historical overload",
+          "sha256": "15B7F2A6E9E75ACC99002C67DC265627136C3437BB6A6555DAAA813D87ADFB48"
+        },
+        {
+          "path": "FamilyQuant.Core/CsvFormatting.cs",
+          "symbol": "Native historical composition CSV dependency",
+          "sha256": "D70EFC4C06C7E81C9215555102B5AF238781B734B8BB81E825A25140A268C57A"
+        },
+        {
+          "path": "FamilyQuant.Core/SharedPeptidePolicy.cs",
+          "symbol": "Native historical composition CSV dependency",
+          "sha256": "0C1A414EC708B47FF538FC22BAF525F0E13082B4AA02C63CEEB32FA1AB35E3A1"
+        },
+        {
+          "path": "FamilyQuant.Core/Quantitation/FamilyEnvelopeModels.cs",
+          "symbol": "Native historical composition CSV dependency",
+          "sha256": "928512F5F910BEA1CFA84DCB776FA2E5AC0917F5A5D406C68E0521B7FADD3521"
+        },
+        {
+          "path": "FamilyQuant.Tests/Program.ShellCompositionProof.cs",
+          "symbol": "Native historical composition CSV dependency",
+          "sha256": "834C1A46D7B63DFAD8EE0B7578570DF274759CDAAF4732E97106A027488A71C9"
         }
       ],
-      "proofs": [],
-      "note": "Declaration only; no reachability or handler-execution claim.",
-      "kindReceiptId": "shell-decl-export-storage-fact",
-      "compared": "FamilyQuant/CsvReport.cs:95 \u0022fraction\u0022 -\u003E FamilyQuant.Core/CsvReport.cs: FamilyQuant.CsvReport::public static string BuildFamilyComposition ( FamilyEnvelopeQuantResult result , SharedPeptidePolicy policy , double denominator , string basis ) = \u0022fraction\u0022; complete member tokens SHA256=72E09E1F2AA03A91DCE0AC8BF94ABF063E09A3B6E077213352CBC81DC164D700"
+      "proofs": [
+        {
+          "runId": "shell-declarations",
+          "kind": "test",
+          "target": "ProveShellComposition",
+          "assertion": "native shell composition fact FQ15-06E740B998A5: anchored frozen literal observed and complete historical CSV bytes agree in every case and culture",
+          "artifact": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\comparisons.log",
+          "inspectedBy": ""
+        }
+      ],
+      "note": "Executed complete frozen/current historical composition CSVs in all shared-peptide policies and two cultures; declaration equality is not claimed.",
+      "kindReceiptId": null,
+      "compared": "FamilyQuant/CsvReport.cs:95 \u0022fraction\u0022; frozen member FamilyQuant.CsvReport::public static string BuildFamilyComposition ( FamilyEnvelopeQuantResult result , SharedPeptidePolicy policy , double denominator , string basis ); exact native file bytes and observed literal, including empty and nonpositive-denominator cases"
     },
     {
       "observationId": "FQ15-070EBFCAD535",
@@ -380,7 +702,7 @@
         {
           "path": "FamilyQuant/MainWindow.xaml",
           "symbol": "FamilyQuant.MainWindow.MenuItemSaveFCF.IsEnabled",
-          "sha256": "BC451B6AC4E62A03AC1519FFE087EBD3C077368A8FB1FD4B8999ADD9AE8E9A75"
+          "sha256": "7FB4FD37FE007363F1494FC25D848FB96E2F1BC15F7D1500885CB9811E71475C"
         }
       ],
       "proofs": [],
@@ -1307,14 +1629,43 @@
       "implementation": [
         {
           "path": "FamilyQuant.Core/CsvReport.cs",
-          "symbol": "FamilyQuant.CsvReport::public static string BuildFamilyComposition ( FamilyEnvelopeQuantResult result , SharedPeptidePolicy policy , double denominator , string basis )",
-          "sha256": "453BA55ABE23B6A567016C1D2BB419AA102E6D801C7347A371769F1FD334DDDF"
+          "symbol": "FamilyQuant.CsvReport::public static string BuildFamilyComposition ( FamilyEnvelopeQuantResult result , SharedPeptidePolicy policy , double denominator , string basis ); native public historical overload",
+          "sha256": "15B7F2A6E9E75ACC99002C67DC265627136C3437BB6A6555DAAA813D87ADFB48"
+        },
+        {
+          "path": "FamilyQuant.Core/CsvFormatting.cs",
+          "symbol": "Native historical composition CSV dependency",
+          "sha256": "D70EFC4C06C7E81C9215555102B5AF238781B734B8BB81E825A25140A268C57A"
+        },
+        {
+          "path": "FamilyQuant.Core/SharedPeptidePolicy.cs",
+          "symbol": "Native historical composition CSV dependency",
+          "sha256": "0C1A414EC708B47FF538FC22BAF525F0E13082B4AA02C63CEEB32FA1AB35E3A1"
+        },
+        {
+          "path": "FamilyQuant.Core/Quantitation/FamilyEnvelopeModels.cs",
+          "symbol": "Native historical composition CSV dependency",
+          "sha256": "928512F5F910BEA1CFA84DCB776FA2E5AC0917F5A5D406C68E0521B7FADD3521"
+        },
+        {
+          "path": "FamilyQuant.Tests/Program.ShellCompositionProof.cs",
+          "symbol": "Native historical composition CSV dependency",
+          "sha256": "834C1A46D7B63DFAD8EE0B7578570DF274759CDAAF4732E97106A027488A71C9"
         }
       ],
-      "proofs": [],
-      "note": "Declaration only; no reachability or handler-execution claim.",
-      "kindReceiptId": "shell-decl-export-storage-fact",
-      "compared": "FamilyQuant/CsvReport.cs:115 \u0022not attributed to any family\u0022 -\u003E FamilyQuant.Core/CsvReport.cs: FamilyQuant.CsvReport::public static string BuildFamilyComposition ( FamilyEnvelopeQuantResult result , SharedPeptidePolicy policy , double denominator , string basis ) = \u0022not attributed to any family\u0022; complete member tokens SHA256=72E09E1F2AA03A91DCE0AC8BF94ABF063E09A3B6E077213352CBC81DC164D700"
+      "proofs": [
+        {
+          "runId": "shell-declarations",
+          "kind": "test",
+          "target": "ProveShellComposition",
+          "assertion": "native shell composition fact FQ15-2025778EF37B: anchored frozen literal observed and complete historical CSV bytes agree in every case and culture",
+          "artifact": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\comparisons.log",
+          "inspectedBy": ""
+        }
+      ],
+      "note": "Executed complete frozen/current historical composition CSVs in all shared-peptide policies and two cultures; declaration equality is not claimed.",
+      "kindReceiptId": null,
+      "compared": "FamilyQuant/CsvReport.cs:115 \u0022not attributed to any family\u0022; frozen member FamilyQuant.CsvReport::public static string BuildFamilyComposition ( FamilyEnvelopeQuantResult result , SharedPeptidePolicy policy , double denominator , string basis ); exact native file bytes and observed literal, including empty and nonpositive-denominator cases"
     },
     {
       "observationId": "FQ15-202B1ADC53BE",
@@ -1501,14 +1852,43 @@
       "implementation": [
         {
           "path": "FamilyQuant.Core/CsvReport.cs",
-          "symbol": "FamilyQuant.CsvReport::public static string BuildFamilyComposition ( FamilyEnvelopeQuantResult result , SharedPeptidePolicy policy , double denominator , string basis )",
-          "sha256": "453BA55ABE23B6A567016C1D2BB419AA102E6D801C7347A371769F1FD334DDDF"
+          "symbol": "FamilyQuant.CsvReport::public static string BuildFamilyComposition ( FamilyEnvelopeQuantResult result , SharedPeptidePolicy policy , double denominator , string basis ); native public historical overload",
+          "sha256": "15B7F2A6E9E75ACC99002C67DC265627136C3437BB6A6555DAAA813D87ADFB48"
+        },
+        {
+          "path": "FamilyQuant.Core/CsvFormatting.cs",
+          "symbol": "Native historical composition CSV dependency",
+          "sha256": "D70EFC4C06C7E81C9215555102B5AF238781B734B8BB81E825A25140A268C57A"
+        },
+        {
+          "path": "FamilyQuant.Core/SharedPeptidePolicy.cs",
+          "symbol": "Native historical composition CSV dependency",
+          "sha256": "0C1A414EC708B47FF538FC22BAF525F0E13082B4AA02C63CEEB32FA1AB35E3A1"
+        },
+        {
+          "path": "FamilyQuant.Core/Quantitation/FamilyEnvelopeModels.cs",
+          "symbol": "Native historical composition CSV dependency",
+          "sha256": "928512F5F910BEA1CFA84DCB776FA2E5AC0917F5A5D406C68E0521B7FADD3521"
+        },
+        {
+          "path": "FamilyQuant.Tests/Program.ShellCompositionProof.cs",
+          "symbol": "Native historical composition CSV dependency",
+          "sha256": "834C1A46D7B63DFAD8EE0B7578570DF274759CDAAF4732E97106A027488A71C9"
         }
       ],
-      "proofs": [],
-      "note": "Declaration only; no reachability or handler-execution claim.",
-      "kindReceiptId": "shell-decl-export-storage-fact",
-      "compared": "FamilyQuant/CsvReport.cs:100 \u0022; \u0022 -\u003E FamilyQuant.Core/CsvReport.cs: FamilyQuant.CsvReport::public static string BuildFamilyComposition ( FamilyEnvelopeQuantResult result , SharedPeptidePolicy policy , double denominator , string basis ) = \u0022; \u0022; complete member tokens SHA256=72E09E1F2AA03A91DCE0AC8BF94ABF063E09A3B6E077213352CBC81DC164D700"
+      "proofs": [
+        {
+          "runId": "shell-declarations",
+          "kind": "test",
+          "target": "ProveShellComposition",
+          "assertion": "native shell composition fact FQ15-24ED395047BF: anchored frozen literal observed and complete historical CSV bytes agree in every case and culture",
+          "artifact": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\comparisons.log",
+          "inspectedBy": ""
+        }
+      ],
+      "note": "Executed complete frozen/current historical composition CSVs in all shared-peptide policies and two cultures; declaration equality is not claimed.",
+      "kindReceiptId": null,
+      "compared": "FamilyQuant/CsvReport.cs:100 \u0022; \u0022; frozen member FamilyQuant.CsvReport::public static string BuildFamilyComposition ( FamilyEnvelopeQuantResult result , SharedPeptidePolicy policy , double denominator , string basis ); exact native file bytes and observed literal, including empty and nonpositive-denominator cases"
     },
     {
       "observationId": "FQ15-2539856F1EAD",
@@ -3378,7 +3758,7 @@
         {
           "path": "FamilyQuant.Core/CsvReport.cs",
           "symbol": "FamilyQuant.CsvReport::public const string NoFullXicHeader",
-          "sha256": "453BA55ABE23B6A567016C1D2BB419AA102E6D801C7347A371769F1FD334DDDF"
+          "sha256": "15B7F2A6E9E75ACC99002C67DC265627136C3437BB6A6555DAAA813D87ADFB48"
         }
       ],
       "proofs": [],
@@ -3424,7 +3804,7 @@
         {
           "path": "FamilyQuant/MainWindow.xaml",
           "symbol": "FamilyQuant.MainWindow.MenuItemReanotateSEPro.IsEnabled",
-          "sha256": "BC451B6AC4E62A03AC1519FFE087EBD3C077368A8FB1FD4B8999ADD9AE8E9A75"
+          "sha256": "7FB4FD37FE007363F1494FC25D848FB96E2F1BC15F7D1500885CB9811E71475C"
         }
       ],
       "proofs": [],
@@ -4129,14 +4509,43 @@
       "implementation": [
         {
           "path": "FamilyQuant.Core/CsvReport.cs",
-          "symbol": "FamilyQuant.CsvReport::public static string BuildFamilyComposition ( FamilyEnvelopeQuantResult result , SharedPeptidePolicy policy , double denominator , string basis )",
-          "sha256": "453BA55ABE23B6A567016C1D2BB419AA102E6D801C7347A371769F1FD334DDDF"
+          "symbol": "FamilyQuant.CsvReport::public static string BuildFamilyComposition ( FamilyEnvelopeQuantResult result , SharedPeptidePolicy policy , double denominator , string basis ); native public historical overload",
+          "sha256": "15B7F2A6E9E75ACC99002C67DC265627136C3437BB6A6555DAAA813D87ADFB48"
+        },
+        {
+          "path": "FamilyQuant.Core/CsvFormatting.cs",
+          "symbol": "Native historical composition CSV dependency",
+          "sha256": "D70EFC4C06C7E81C9215555102B5AF238781B734B8BB81E825A25140A268C57A"
+        },
+        {
+          "path": "FamilyQuant.Core/SharedPeptidePolicy.cs",
+          "symbol": "Native historical composition CSV dependency",
+          "sha256": "0C1A414EC708B47FF538FC22BAF525F0E13082B4AA02C63CEEB32FA1AB35E3A1"
+        },
+        {
+          "path": "FamilyQuant.Core/Quantitation/FamilyEnvelopeModels.cs",
+          "symbol": "Native historical composition CSV dependency",
+          "sha256": "928512F5F910BEA1CFA84DCB776FA2E5AC0917F5A5D406C68E0521B7FADD3521"
+        },
+        {
+          "path": "FamilyQuant.Tests/Program.ShellCompositionProof.cs",
+          "symbol": "Native historical composition CSV dependency",
+          "sha256": "834C1A46D7B63DFAD8EE0B7578570DF274759CDAAF4732E97106A027488A71C9"
         }
       ],
-      "proofs": [],
-      "note": "Declaration only; no reachability or handler-execution claim.",
-      "kindReceiptId": "shell-decl-export-storage-fact",
-      "compared": "FamilyQuant/CsvReport.cs:111 \u0022,\u0022 -\u003E FamilyQuant.Core/CsvReport.cs: FamilyQuant.CsvReport::public static string BuildFamilyComposition ( FamilyEnvelopeQuantResult result , SharedPeptidePolicy policy , double denominator , string basis ) = \u0022,\u0022; complete member tokens SHA256=72E09E1F2AA03A91DCE0AC8BF94ABF063E09A3B6E077213352CBC81DC164D700"
+      "proofs": [
+        {
+          "runId": "shell-declarations",
+          "kind": "test",
+          "target": "ProveShellComposition",
+          "assertion": "native shell composition fact FQ15-7036894F9DF7: anchored frozen literal observed and complete historical CSV bytes agree in every case and culture",
+          "artifact": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\comparisons.log",
+          "inspectedBy": ""
+        }
+      ],
+      "note": "Executed complete frozen/current historical composition CSVs in all shared-peptide policies and two cultures; declaration equality is not claimed.",
+      "kindReceiptId": null,
+      "compared": "FamilyQuant/CsvReport.cs:111 \u0022,\u0022; frozen member FamilyQuant.CsvReport::public static string BuildFamilyComposition ( FamilyEnvelopeQuantResult result , SharedPeptidePolicy policy , double denominator , string basis ); exact native file bytes and observed literal, including empty and nonpositive-denominator cases"
     },
     {
       "observationId": "FQ15-7056CF96BEBD",
@@ -4721,14 +5130,43 @@
       "implementation": [
         {
           "path": "FamilyQuant.Core/CsvReport.cs",
-          "symbol": "FamilyQuant.CsvReport::public static string BuildFamilyComposition ( FamilyEnvelopeQuantResult result , SharedPeptidePolicy policy , double denominator , string basis )",
-          "sha256": "453BA55ABE23B6A567016C1D2BB419AA102E6D801C7347A371769F1FD334DDDF"
+          "symbol": "FamilyQuant.CsvReport::public static string BuildFamilyComposition ( FamilyEnvelopeQuantResult result , SharedPeptidePolicy policy , double denominator , string basis ); native public historical overload",
+          "sha256": "15B7F2A6E9E75ACC99002C67DC265627136C3437BB6A6555DAAA813D87ADFB48"
+        },
+        {
+          "path": "FamilyQuant.Core/CsvFormatting.cs",
+          "symbol": "Native historical composition CSV dependency",
+          "sha256": "D70EFC4C06C7E81C9215555102B5AF238781B734B8BB81E825A25140A268C57A"
+        },
+        {
+          "path": "FamilyQuant.Core/SharedPeptidePolicy.cs",
+          "symbol": "Native historical composition CSV dependency",
+          "sha256": "0C1A414EC708B47FF538FC22BAF525F0E13082B4AA02C63CEEB32FA1AB35E3A1"
+        },
+        {
+          "path": "FamilyQuant.Core/Quantitation/FamilyEnvelopeModels.cs",
+          "symbol": "Native historical composition CSV dependency",
+          "sha256": "928512F5F910BEA1CFA84DCB776FA2E5AC0917F5A5D406C68E0521B7FADD3521"
+        },
+        {
+          "path": "FamilyQuant.Tests/Program.ShellCompositionProof.cs",
+          "symbol": "Native historical composition CSV dependency",
+          "sha256": "834C1A46D7B63DFAD8EE0B7578570DF274759CDAAF4732E97106A027488A71C9"
         }
       ],
-      "proofs": [],
-      "note": "Declaration only; no reachability or handler-execution claim.",
-      "kindReceiptId": "shell-decl-export-storage-fact",
-      "compared": "FamilyQuant/CsvReport.cs:106 \u0022,\u0022 -\u003E FamilyQuant.Core/CsvReport.cs: FamilyQuant.CsvReport::public static string BuildFamilyComposition ( FamilyEnvelopeQuantResult result , SharedPeptidePolicy policy , double denominator , string basis ) = \u0022,\u0022; complete member tokens SHA256=72E09E1F2AA03A91DCE0AC8BF94ABF063E09A3B6E077213352CBC81DC164D700"
+      "proofs": [
+        {
+          "runId": "shell-declarations",
+          "kind": "test",
+          "target": "ProveShellComposition",
+          "assertion": "native shell composition fact FQ15-7D56F063F66C: anchored frozen literal observed and complete historical CSV bytes agree in every case and culture",
+          "artifact": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\comparisons.log",
+          "inspectedBy": ""
+        }
+      ],
+      "note": "Executed complete frozen/current historical composition CSVs in all shared-peptide policies and two cultures; declaration equality is not claimed.",
+      "kindReceiptId": null,
+      "compared": "FamilyQuant/CsvReport.cs:106 \u0022,\u0022; frozen member FamilyQuant.CsvReport::public static string BuildFamilyComposition ( FamilyEnvelopeQuantResult result , SharedPeptidePolicy policy , double denominator , string basis ); exact native file bytes and observed literal, including empty and nonpositive-denominator cases"
     },
     {
       "observationId": "FQ15-7D9A67D08B41",
@@ -5023,14 +5461,43 @@
       "implementation": [
         {
           "path": "FamilyQuant.Core/CsvReport.cs",
-          "symbol": "FamilyQuant.CsvReport::public static string BuildFamilyComposition ( FamilyEnvelopeQuantResult result , SharedPeptidePolicy policy , double denominator , string basis )",
-          "sha256": "453BA55ABE23B6A567016C1D2BB419AA102E6D801C7347A371769F1FD334DDDF"
+          "symbol": "FamilyQuant.CsvReport::public static string BuildFamilyComposition ( FamilyEnvelopeQuantResult result , SharedPeptidePolicy policy , double denominator , string basis ); native public historical overload",
+          "sha256": "15B7F2A6E9E75ACC99002C67DC265627136C3437BB6A6555DAAA813D87ADFB48"
+        },
+        {
+          "path": "FamilyQuant.Core/CsvFormatting.cs",
+          "symbol": "Native historical composition CSV dependency",
+          "sha256": "D70EFC4C06C7E81C9215555102B5AF238781B734B8BB81E825A25140A268C57A"
+        },
+        {
+          "path": "FamilyQuant.Core/SharedPeptidePolicy.cs",
+          "symbol": "Native historical composition CSV dependency",
+          "sha256": "0C1A414EC708B47FF538FC22BAF525F0E13082B4AA02C63CEEB32FA1AB35E3A1"
+        },
+        {
+          "path": "FamilyQuant.Core/Quantitation/FamilyEnvelopeModels.cs",
+          "symbol": "Native historical composition CSV dependency",
+          "sha256": "928512F5F910BEA1CFA84DCB776FA2E5AC0917F5A5D406C68E0521B7FADD3521"
+        },
+        {
+          "path": "FamilyQuant.Tests/Program.ShellCompositionProof.cs",
+          "symbol": "Native historical composition CSV dependency",
+          "sha256": "834C1A46D7B63DFAD8EE0B7578570DF274759CDAAF4732E97106A027488A71C9"
         }
       ],
-      "proofs": [],
-      "note": "Declaration only; no reachability or handler-execution claim.",
-      "kindReceiptId": "shell-decl-export-storage-fact",
-      "compared": "FamilyQuant/CsvReport.cs:101 \u0022, shared ones in their own row\u0022 -\u003E FamilyQuant.Core/CsvReport.cs: FamilyQuant.CsvReport::public static string BuildFamilyComposition ( FamilyEnvelopeQuantResult result , SharedPeptidePolicy policy , double denominator , string basis ) = \u0022, shared ones in their own row\u0022; complete member tokens SHA256=72E09E1F2AA03A91DCE0AC8BF94ABF063E09A3B6E077213352CBC81DC164D700"
+      "proofs": [
+        {
+          "runId": "shell-declarations",
+          "kind": "test",
+          "target": "ProveShellComposition",
+          "assertion": "native shell composition fact FQ15-83110D07824B: anchored frozen literal observed and complete historical CSV bytes agree in every case and culture",
+          "artifact": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\comparisons.log",
+          "inspectedBy": ""
+        }
+      ],
+      "note": "Executed complete frozen/current historical composition CSVs in all shared-peptide policies and two cultures; declaration equality is not claimed.",
+      "kindReceiptId": null,
+      "compared": "FamilyQuant/CsvReport.cs:101 \u0022, shared ones in their own row\u0022; frozen member FamilyQuant.CsvReport::public static string BuildFamilyComposition ( FamilyEnvelopeQuantResult result , SharedPeptidePolicy policy , double denominator , string basis ); exact native file bytes and observed literal, including empty and nonpositive-denominator cases"
     },
     {
       "observationId": "FQ15-836428C77D50",
@@ -5428,7 +5895,7 @@
         {
           "path": "FamilyQuant/MainWindow.xaml",
           "symbol": "FamilyQuant.MainWindow.MenuItemWhereAmI.Header",
-          "sha256": "BC451B6AC4E62A03AC1519FFE087EBD3C077368A8FB1FD4B8999ADD9AE8E9A75"
+          "sha256": "7FB4FD37FE007363F1494FC25D848FB96E2F1BC15F7D1500885CB9811E71475C"
         }
       ],
       "proofs": [],
@@ -5578,7 +6045,7 @@
         {
           "path": "FamilyQuant/MainWindow.xaml",
           "symbol": "FamilyQuant.MainWindow.MenuItemComputeXic.IsEnabled",
-          "sha256": "BC451B6AC4E62A03AC1519FFE087EBD3C077368A8FB1FD4B8999ADD9AE8E9A75"
+          "sha256": "7FB4FD37FE007363F1494FC25D848FB96E2F1BC15F7D1500885CB9811E71475C"
         }
       ],
       "proofs": [],
@@ -6289,14 +6756,43 @@
       "implementation": [
         {
           "path": "FamilyQuant.Core/CsvReport.cs",
-          "symbol": "FamilyQuant.CsvReport::public static string BuildFamilyComposition ( FamilyEnvelopeQuantResult result , SharedPeptidePolicy policy , double denominator , string basis )",
-          "sha256": "453BA55ABE23B6A567016C1D2BB419AA102E6D801C7347A371769F1FD334DDDF"
+          "symbol": "FamilyQuant.CsvReport::public static string BuildFamilyComposition ( FamilyEnvelopeQuantResult result , SharedPeptidePolicy policy , double denominator , string basis ); native public historical overload",
+          "sha256": "15B7F2A6E9E75ACC99002C67DC265627136C3437BB6A6555DAAA813D87ADFB48"
+        },
+        {
+          "path": "FamilyQuant.Core/CsvFormatting.cs",
+          "symbol": "Native historical composition CSV dependency",
+          "sha256": "D70EFC4C06C7E81C9215555102B5AF238781B734B8BB81E825A25140A268C57A"
+        },
+        {
+          "path": "FamilyQuant.Core/SharedPeptidePolicy.cs",
+          "symbol": "Native historical composition CSV dependency",
+          "sha256": "0C1A414EC708B47FF538FC22BAF525F0E13082B4AA02C63CEEB32FA1AB35E3A1"
+        },
+        {
+          "path": "FamilyQuant.Core/Quantitation/FamilyEnvelopeModels.cs",
+          "symbol": "Native historical composition CSV dependency",
+          "sha256": "928512F5F910BEA1CFA84DCB776FA2E5AC0917F5A5D406C68E0521B7FADD3521"
+        },
+        {
+          "path": "FamilyQuant.Tests/Program.ShellCompositionProof.cs",
+          "symbol": "Native historical composition CSV dependency",
+          "sha256": "834C1A46D7B63DFAD8EE0B7578570DF274759CDAAF4732E97106A027488A71C9"
         }
       ],
-      "proofs": [],
-      "note": "Declaration only; no reachability or handler-execution claim.",
-      "kindReceiptId": "shell-decl-export-storage-fact",
-      "compared": "FamilyQuant/CsvReport.cs:111 \u0022shared between families\u0022 -\u003E FamilyQuant.Core/CsvReport.cs: FamilyQuant.CsvReport::public static string BuildFamilyComposition ( FamilyEnvelopeQuantResult result , SharedPeptidePolicy policy , double denominator , string basis ) = \u0022shared between families\u0022; complete member tokens SHA256=72E09E1F2AA03A91DCE0AC8BF94ABF063E09A3B6E077213352CBC81DC164D700"
+      "proofs": [
+        {
+          "runId": "shell-declarations",
+          "kind": "test",
+          "target": "ProveShellComposition",
+          "assertion": "native shell composition fact FQ15-9FDF0CC7EACE: anchored frozen literal observed and complete historical CSV bytes agree in every case and culture",
+          "artifact": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\comparisons.log",
+          "inspectedBy": ""
+        }
+      ],
+      "note": "Executed complete frozen/current historical composition CSVs in all shared-peptide policies and two cultures; declaration equality is not claimed.",
+      "kindReceiptId": null,
+      "compared": "FamilyQuant/CsvReport.cs:111 \u0022shared between families\u0022; frozen member FamilyQuant.CsvReport::public static string BuildFamilyComposition ( FamilyEnvelopeQuantResult result , SharedPeptidePolicy policy , double denominator , string basis ); exact native file bytes and observed literal, including empty and nonpositive-denominator cases"
     },
     {
       "observationId": "FQ15-A03C58D60828",
@@ -6995,14 +7491,43 @@
       "implementation": [
         {
           "path": "FamilyQuant.Core/CsvReport.cs",
-          "symbol": "FamilyQuant.CsvReport::public static string BuildFamilyComposition ( FamilyEnvelopeQuantResult result , SharedPeptidePolicy policy , double denominator , string basis )",
-          "sha256": "453BA55ABE23B6A567016C1D2BB419AA102E6D801C7347A371769F1FD334DDDF"
+          "symbol": "FamilyQuant.CsvReport::public static string BuildFamilyComposition ( FamilyEnvelopeQuantResult result , SharedPeptidePolicy policy , double denominator , string basis ); native public historical overload",
+          "sha256": "15B7F2A6E9E75ACC99002C67DC265627136C3437BB6A6555DAAA813D87ADFB48"
+        },
+        {
+          "path": "FamilyQuant.Core/CsvFormatting.cs",
+          "symbol": "Native historical composition CSV dependency",
+          "sha256": "D70EFC4C06C7E81C9215555102B5AF238781B734B8BB81E825A25140A268C57A"
+        },
+        {
+          "path": "FamilyQuant.Core/SharedPeptidePolicy.cs",
+          "symbol": "Native historical composition CSV dependency",
+          "sha256": "0C1A414EC708B47FF538FC22BAF525F0E13082B4AA02C63CEEB32FA1AB35E3A1"
+        },
+        {
+          "path": "FamilyQuant.Core/Quantitation/FamilyEnvelopeModels.cs",
+          "symbol": "Native historical composition CSV dependency",
+          "sha256": "928512F5F910BEA1CFA84DCB776FA2E5AC0917F5A5D406C68E0521B7FADD3521"
+        },
+        {
+          "path": "FamilyQuant.Tests/Program.ShellCompositionProof.cs",
+          "symbol": "Native historical composition CSV dependency",
+          "sha256": "834C1A46D7B63DFAD8EE0B7578570DF274759CDAAF4732E97106A027488A71C9"
         }
       ],
-      "proofs": [],
-      "note": "Declaration only; no reachability or handler-execution claim.",
-      "kindReceiptId": "shell-decl-export-storage-fact",
-      "compared": "FamilyQuant/CsvReport.cs:95 \u0022description\u0022 -\u003E FamilyQuant.Core/CsvReport.cs: FamilyQuant.CsvReport::public static string BuildFamilyComposition ( FamilyEnvelopeQuantResult result , SharedPeptidePolicy policy , double denominator , string basis ) = \u0022description\u0022; complete member tokens SHA256=72E09E1F2AA03A91DCE0AC8BF94ABF063E09A3B6E077213352CBC81DC164D700"
+      "proofs": [
+        {
+          "runId": "shell-declarations",
+          "kind": "test",
+          "target": "ProveShellComposition",
+          "assertion": "native shell composition fact FQ15-B32233DB2707: anchored frozen literal observed and complete historical CSV bytes agree in every case and culture",
+          "artifact": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\comparisons.log",
+          "inspectedBy": ""
+        }
+      ],
+      "note": "Executed complete frozen/current historical composition CSVs in all shared-peptide policies and two cultures; declaration equality is not claimed.",
+      "kindReceiptId": null,
+      "compared": "FamilyQuant/CsvReport.cs:95 \u0022description\u0022; frozen member FamilyQuant.CsvReport::public static string BuildFamilyComposition ( FamilyEnvelopeQuantResult result , SharedPeptidePolicy policy , double denominator , string basis ); exact native file bytes and observed literal, including empty and nonpositive-denominator cases"
     },
     {
       "observationId": "FQ15-B35E0335E9E9",
@@ -7792,7 +8317,7 @@
         {
           "path": "FamilyQuant/MainWindow.xaml",
           "symbol": "FamilyQuant.MainWindow.MenuItemSaveProject.IsEnabled",
-          "sha256": "BC451B6AC4E62A03AC1519FFE087EBD3C077368A8FB1FD4B8999ADD9AE8E9A75"
+          "sha256": "7FB4FD37FE007363F1494FC25D848FB96E2F1BC15F7D1500885CB9811E71475C"
         }
       ],
       "proofs": [],
@@ -7846,7 +8371,7 @@
         {
           "path": "FamilyQuant/MainWindow.xaml",
           "symbol": "FamilyQuant.MainWindow.MenuItemSpectrumComparison.IsEnabled",
-          "sha256": "BC451B6AC4E62A03AC1519FFE087EBD3C077368A8FB1FD4B8999ADD9AE8E9A75"
+          "sha256": "7FB4FD37FE007363F1494FC25D848FB96E2F1BC15F7D1500885CB9811E71475C"
         }
       ],
       "proofs": [],
@@ -7884,7 +8409,7 @@
         {
           "path": "FamilyQuant.Core/CsvReport.cs",
           "symbol": "FamilyQuant.CsvReport::public static string Build ( IEnumerable \u003C FastaItemExtended \u003E items , NormalizationMode ? mode , string ? fullXicHeader = null )",
-          "sha256": "453BA55ABE23B6A567016C1D2BB419AA102E6D801C7347A371769F1FD334DDDF"
+          "sha256": "15B7F2A6E9E75ACC99002C67DC265627136C3437BB6A6555DAAA813D87ADFB48"
         }
       ],
       "proofs": [],
@@ -8282,7 +8807,7 @@
         {
           "path": "FamilyQuant/MainWindow.xaml",
           "symbol": "FamilyQuant.MainWindow.MenuItemHelp.Header",
-          "sha256": "BC451B6AC4E62A03AC1519FFE087EBD3C077368A8FB1FD4B8999ADD9AE8E9A75"
+          "sha256": "7FB4FD37FE007363F1494FC25D848FB96E2F1BC15F7D1500885CB9811E71475C"
         }
       ],
       "proofs": [],
@@ -8551,14 +9076,43 @@
       "implementation": [
         {
           "path": "FamilyQuant.Core/CsvReport.cs",
-          "symbol": "FamilyQuant.CsvReport::public static string BuildFamilyComposition ( FamilyEnvelopeQuantResult result , SharedPeptidePolicy policy , double denominator , string basis )",
-          "sha256": "453BA55ABE23B6A567016C1D2BB419AA102E6D801C7347A371769F1FD334DDDF"
+          "symbol": "FamilyQuant.CsvReport::public static string BuildFamilyComposition ( FamilyEnvelopeQuantResult result , SharedPeptidePolicy policy , double denominator , string basis ); native public historical overload",
+          "sha256": "15B7F2A6E9E75ACC99002C67DC265627136C3437BB6A6555DAAA813D87ADFB48"
+        },
+        {
+          "path": "FamilyQuant.Core/CsvFormatting.cs",
+          "symbol": "Native historical composition CSV dependency",
+          "sha256": "D70EFC4C06C7E81C9215555102B5AF238781B734B8BB81E825A25140A268C57A"
+        },
+        {
+          "path": "FamilyQuant.Core/SharedPeptidePolicy.cs",
+          "symbol": "Native historical composition CSV dependency",
+          "sha256": "0C1A414EC708B47FF538FC22BAF525F0E13082B4AA02C63CEEB32FA1AB35E3A1"
+        },
+        {
+          "path": "FamilyQuant.Core/Quantitation/FamilyEnvelopeModels.cs",
+          "symbol": "Native historical composition CSV dependency",
+          "sha256": "928512F5F910BEA1CFA84DCB776FA2E5AC0917F5A5D406C68E0521B7FADD3521"
+        },
+        {
+          "path": "FamilyQuant.Tests/Program.ShellCompositionProof.cs",
+          "symbol": "Native historical composition CSV dependency",
+          "sha256": "834C1A46D7B63DFAD8EE0B7578570DF274759CDAAF4732E97106A027488A71C9"
         }
       ],
-      "proofs": [],
-      "note": "Declaration only; no reachability or handler-execution claim.",
-      "kindReceiptId": "shell-decl-export-storage-fact",
-      "compared": "FamilyQuant/CsvReport.cs:115 \u0022,\u0022 -\u003E FamilyQuant.Core/CsvReport.cs: FamilyQuant.CsvReport::public static string BuildFamilyComposition ( FamilyEnvelopeQuantResult result , SharedPeptidePolicy policy , double denominator , string basis ) = \u0022,\u0022; complete member tokens SHA256=72E09E1F2AA03A91DCE0AC8BF94ABF063E09A3B6E077213352CBC81DC164D700"
+      "proofs": [
+        {
+          "runId": "shell-declarations",
+          "kind": "test",
+          "target": "ProveShellComposition",
+          "assertion": "native shell composition fact FQ15-DC72052AA7DC: anchored frozen literal observed and complete historical CSV bytes agree in every case and culture",
+          "artifact": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\comparisons.log",
+          "inspectedBy": ""
+        }
+      ],
+      "note": "Executed complete frozen/current historical composition CSVs in all shared-peptide policies and two cultures; declaration equality is not claimed.",
+      "kindReceiptId": null,
+      "compared": "FamilyQuant/CsvReport.cs:115 \u0022,\u0022; frozen member FamilyQuant.CsvReport::public static string BuildFamilyComposition ( FamilyEnvelopeQuantResult result , SharedPeptidePolicy policy , double denominator , string basis ); exact native file bytes and observed literal, including empty and nonpositive-denominator cases"
     },
     {
       "observationId": "FQ15-DD7878AEE818",
@@ -8589,14 +9143,43 @@
       "implementation": [
         {
           "path": "FamilyQuant.Core/CsvReport.cs",
-          "symbol": "FamilyQuant.CsvReport::public static string BuildFamilyComposition ( FamilyEnvelopeQuantResult result , SharedPeptidePolicy policy , double denominator , string basis )",
-          "sha256": "453BA55ABE23B6A567016C1D2BB419AA102E6D801C7347A371769F1FD334DDDF"
+          "symbol": "FamilyQuant.CsvReport::public static string BuildFamilyComposition ( FamilyEnvelopeQuantResult result , SharedPeptidePolicy policy , double denominator , string basis ); native public historical overload",
+          "sha256": "15B7F2A6E9E75ACC99002C67DC265627136C3437BB6A6555DAAA813D87ADFB48"
+        },
+        {
+          "path": "FamilyQuant.Core/CsvFormatting.cs",
+          "symbol": "Native historical composition CSV dependency",
+          "sha256": "D70EFC4C06C7E81C9215555102B5AF238781B734B8BB81E825A25140A268C57A"
+        },
+        {
+          "path": "FamilyQuant.Core/SharedPeptidePolicy.cs",
+          "symbol": "Native historical composition CSV dependency",
+          "sha256": "0C1A414EC708B47FF538FC22BAF525F0E13082B4AA02C63CEEB32FA1AB35E3A1"
+        },
+        {
+          "path": "FamilyQuant.Core/Quantitation/FamilyEnvelopeModels.cs",
+          "symbol": "Native historical composition CSV dependency",
+          "sha256": "928512F5F910BEA1CFA84DCB776FA2E5AC0917F5A5D406C68E0521B7FADD3521"
+        },
+        {
+          "path": "FamilyQuant.Tests/Program.ShellCompositionProof.cs",
+          "symbol": "Native historical composition CSV dependency",
+          "sha256": "834C1A46D7B63DFAD8EE0B7578570DF274759CDAAF4732E97106A027488A71C9"
         }
       ],
-      "proofs": [],
-      "note": "Declaration only; no reachability or handler-execution claim.",
-      "kindReceiptId": "shell-decl-export-storage-fact",
-      "compared": "FamilyQuant/CsvReport.cs:93 \u0022,\u0022 -\u003E FamilyQuant.Core/CsvReport.cs: FamilyQuant.CsvReport::public static string BuildFamilyComposition ( FamilyEnvelopeQuantResult result , SharedPeptidePolicy policy , double denominator , string basis ) = \u0022,\u0022; complete member tokens SHA256=72E09E1F2AA03A91DCE0AC8BF94ABF063E09A3B6E077213352CBC81DC164D700"
+      "proofs": [
+        {
+          "runId": "shell-declarations",
+          "kind": "test",
+          "target": "ProveShellComposition",
+          "assertion": "native shell composition fact FQ15-DE97BFC1DC1A: anchored frozen literal observed and complete historical CSV bytes agree in every case and culture",
+          "artifact": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\comparisons.log",
+          "inspectedBy": ""
+        }
+      ],
+      "note": "Executed complete frozen/current historical composition CSVs in all shared-peptide policies and two cultures; declaration equality is not claimed.",
+      "kindReceiptId": null,
+      "compared": "FamilyQuant/CsvReport.cs:93 \u0022,\u0022; frozen member FamilyQuant.CsvReport::public static string BuildFamilyComposition ( FamilyEnvelopeQuantResult result , SharedPeptidePolicy policy , double denominator , string basis ); exact native file bytes and observed literal, including empty and nonpositive-denominator cases"
     },
     {
       "observationId": "FQ15-DEB6901B39EC",
@@ -8635,14 +9218,43 @@
       "implementation": [
         {
           "path": "FamilyQuant.Core/CsvReport.cs",
-          "symbol": "FamilyQuant.CsvReport::public static string BuildFamilyComposition ( FamilyEnvelopeQuantResult result , SharedPeptidePolicy policy , double denominator , string basis )",
-          "sha256": "453BA55ABE23B6A567016C1D2BB419AA102E6D801C7347A371769F1FD334DDDF"
+          "symbol": "FamilyQuant.CsvReport::public static string BuildFamilyComposition ( FamilyEnvelopeQuantResult result , SharedPeptidePolicy policy , double denominator , string basis ); native public historical overload",
+          "sha256": "15B7F2A6E9E75ACC99002C67DC265627136C3437BB6A6555DAAA813D87ADFB48"
+        },
+        {
+          "path": "FamilyQuant.Core/CsvFormatting.cs",
+          "symbol": "Native historical composition CSV dependency",
+          "sha256": "D70EFC4C06C7E81C9215555102B5AF238781B734B8BB81E825A25140A268C57A"
+        },
+        {
+          "path": "FamilyQuant.Core/SharedPeptidePolicy.cs",
+          "symbol": "Native historical composition CSV dependency",
+          "sha256": "0C1A414EC708B47FF538FC22BAF525F0E13082B4AA02C63CEEB32FA1AB35E3A1"
+        },
+        {
+          "path": "FamilyQuant.Core/Quantitation/FamilyEnvelopeModels.cs",
+          "symbol": "Native historical composition CSV dependency",
+          "sha256": "928512F5F910BEA1CFA84DCB776FA2E5AC0917F5A5D406C68E0521B7FADD3521"
+        },
+        {
+          "path": "FamilyQuant.Tests/Program.ShellCompositionProof.cs",
+          "symbol": "Native historical composition CSV dependency",
+          "sha256": "834C1A46D7B63DFAD8EE0B7578570DF274759CDAAF4732E97106A027488A71C9"
         }
       ],
-      "proofs": [],
-      "note": "Declaration only; no reachability or handler-execution claim.",
-      "kindReceiptId": "shell-decl-export-storage-fact",
-      "compared": "FamilyQuant/CsvReport.cs:95 \u0022basis\u0022 -\u003E FamilyQuant.Core/CsvReport.cs: FamilyQuant.CsvReport::public static string BuildFamilyComposition ( FamilyEnvelopeQuantResult result , SharedPeptidePolicy policy , double denominator , string basis ) = \u0022basis\u0022; complete member tokens SHA256=72E09E1F2AA03A91DCE0AC8BF94ABF063E09A3B6E077213352CBC81DC164D700"
+      "proofs": [
+        {
+          "runId": "shell-declarations",
+          "kind": "test",
+          "target": "ProveShellComposition",
+          "assertion": "native shell composition fact FQ15-DF6B9D200673: anchored frozen literal observed and complete historical CSV bytes agree in every case and culture",
+          "artifact": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\comparisons.log",
+          "inspectedBy": ""
+        }
+      ],
+      "note": "Executed complete frozen/current historical composition CSVs in all shared-peptide policies and two cultures; declaration equality is not claimed.",
+      "kindReceiptId": null,
+      "compared": "FamilyQuant/CsvReport.cs:95 \u0022basis\u0022; frozen member FamilyQuant.CsvReport::public static string BuildFamilyComposition ( FamilyEnvelopeQuantResult result , SharedPeptidePolicy policy , double denominator , string basis ); exact native file bytes and observed literal, including empty and nonpositive-denominator cases"
     },
     {
       "observationId": "FQ15-DF72D3E013B6",
@@ -8997,14 +9609,43 @@
       "implementation": [
         {
           "path": "FamilyQuant.Core/CsvReport.cs",
-          "symbol": "FamilyQuant.CsvReport::public static string BuildFamilyComposition ( FamilyEnvelopeQuantResult result , SharedPeptidePolicy policy , double denominator , string basis )",
-          "sha256": "453BA55ABE23B6A567016C1D2BB419AA102E6D801C7347A371769F1FD334DDDF"
+          "symbol": "FamilyQuant.CsvReport::public static string BuildFamilyComposition ( FamilyEnvelopeQuantResult result , SharedPeptidePolicy policy , double denominator , string basis ); native public historical overload",
+          "sha256": "15B7F2A6E9E75ACC99002C67DC265627136C3437BB6A6555DAAA813D87ADFB48"
+        },
+        {
+          "path": "FamilyQuant.Core/CsvFormatting.cs",
+          "symbol": "Native historical composition CSV dependency",
+          "sha256": "D70EFC4C06C7E81C9215555102B5AF238781B734B8BB81E825A25140A268C57A"
+        },
+        {
+          "path": "FamilyQuant.Core/SharedPeptidePolicy.cs",
+          "symbol": "Native historical composition CSV dependency",
+          "sha256": "0C1A414EC708B47FF538FC22BAF525F0E13082B4AA02C63CEEB32FA1AB35E3A1"
+        },
+        {
+          "path": "FamilyQuant.Core/Quantitation/FamilyEnvelopeModels.cs",
+          "symbol": "Native historical composition CSV dependency",
+          "sha256": "928512F5F910BEA1CFA84DCB776FA2E5AC0917F5A5D406C68E0521B7FADD3521"
+        },
+        {
+          "path": "FamilyQuant.Tests/Program.ShellCompositionProof.cs",
+          "symbol": "Native historical composition CSV dependency",
+          "sha256": "834C1A46D7B63DFAD8EE0B7578570DF274759CDAAF4732E97106A027488A71C9"
         }
       ],
-      "proofs": [],
-      "note": "Declaration only; no reachability or handler-execution claim.",
-      "kindReceiptId": "shell-decl-export-storage-fact",
-      "compared": "FamilyQuant/CsvReport.cs:95 \u0022signal_primary_estimate\u0022 -\u003E FamilyQuant.Core/CsvReport.cs: FamilyQuant.CsvReport::public static string BuildFamilyComposition ( FamilyEnvelopeQuantResult result , SharedPeptidePolicy policy , double denominator , string basis ) = \u0022signal_primary_estimate\u0022; complete member tokens SHA256=72E09E1F2AA03A91DCE0AC8BF94ABF063E09A3B6E077213352CBC81DC164D700"
+      "proofs": [
+        {
+          "runId": "shell-declarations",
+          "kind": "test",
+          "target": "ProveShellComposition",
+          "assertion": "native shell composition fact FQ15-E67177435835: anchored frozen literal observed and complete historical CSV bytes agree in every case and culture",
+          "artifact": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\comparisons.log",
+          "inspectedBy": ""
+        }
+      ],
+      "note": "Executed complete frozen/current historical composition CSVs in all shared-peptide policies and two cultures; declaration equality is not claimed.",
+      "kindReceiptId": null,
+      "compared": "FamilyQuant/CsvReport.cs:95 \u0022signal_primary_estimate\u0022; frozen member FamilyQuant.CsvReport::public static string BuildFamilyComposition ( FamilyEnvelopeQuantResult result , SharedPeptidePolicy policy , double denominator , string basis ); exact native file bytes and observed literal, including empty and nonpositive-denominator cases"
     },
     {
       "observationId": "FQ15-E6CBEFC09F9D",
@@ -9330,7 +9971,7 @@
         {
           "path": "FamilyQuant/MainWindow.xaml",
           "symbol": "FamilyQuant.MainWindow.MenuItemHowToRead.Header",
-          "sha256": "BC451B6AC4E62A03AC1519FFE087EBD3C077368A8FB1FD4B8999ADD9AE8E9A75"
+          "sha256": "7FB4FD37FE007363F1494FC25D848FB96E2F1BC15F7D1500885CB9811E71475C"
         }
       ],
       "proofs": [],
@@ -9720,7 +10361,7 @@
         {
           "path": "FamilyQuant.Core/CsvReport.cs",
           "symbol": "FamilyQuant.CsvReport::public static string Build ( IEnumerable \u003C FastaItemExtended \u003E items , NormalizationMode ? mode , string ? fullXicHeader = null )",
-          "sha256": "453BA55ABE23B6A567016C1D2BB419AA102E6D801C7347A371769F1FD334DDDF"
+          "sha256": "15B7F2A6E9E75ACC99002C67DC265627136C3437BB6A6555DAAA813D87ADFB48"
         }
       ],
       "proofs": [],
@@ -9817,7 +10458,7 @@
           "kind": "test",
           "target": "ShellLedgerComparisonCommand",
           "assertion": "shell declaration kind code fact: every listed matched observation retains its exact declaration",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\shell-compare\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\comparisons.log",
           "inspectedBy": ""
         }
       ]
@@ -9831,7 +10472,7 @@
           "kind": "test",
           "target": "ShellLedgerComparisonCommand",
           "assertion": "shell declaration kind export/storage fact: every listed matched observation retains its exact declaration",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\shell-compare\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\comparisons.log",
           "inspectedBy": ""
         }
       ]
@@ -9845,7 +10486,7 @@
           "kind": "test",
           "target": "ShellLedgerComparisonCommand",
           "assertion": "shell declaration kind format/export: every listed matched observation retains its exact declaration",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\shell-compare\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\comparisons.log",
           "inspectedBy": ""
         }
       ]
@@ -9859,7 +10500,7 @@
           "kind": "test",
           "target": "ShellLedgerComparisonCommand",
           "assertion": "shell declaration kind option/copy: every listed matched observation retains its exact declaration",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\shell-compare\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\comparisons.log",
           "inspectedBy": ""
         }
       ]
@@ -9873,7 +10514,7 @@
           "kind": "test",
           "target": "ShellLedgerComparisonCommand",
           "assertion": "shell declaration kind tooltip: every listed matched observation retains its exact declaration",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-210533-FamilyQuant-gate\\shell-compare\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\comparisons.log",
           "inspectedBy": ""
         }
       ]

@@ -24,6 +24,10 @@ row's Decision. Outside members have no applied panel key. Two keys in one
 UserID, or a mixture of a panel key and outside members, flag HasConflict and
 ConflictingUserIds; no single key is guessed. Stale data return no usable map,
 and may include a diagnostic about conflicting stored labels in current UserIDs.
+An applied NotAFamily key and decision remain in UserFamilies so the report
+places that UserID in ExcludedFamilies. Excluded rows still have no measured
+membership in PanelRows. Excluded keys mixed with an included key or outside
+members remain conflicts, rather than excluding or measuring the whole group.
 
 `PanelRows` includes every original row, including NotAFamily and
 MergeIntoAnotherFamily. It preserves the original decision and merge target,
@@ -35,5 +39,16 @@ as a distinct decision on its measured target.
 Currentness binds database identity, every target identifier/sequence/evidence,
 current membership, source/reference provenance, panel rules, the recipe and
 the facts themselves. Display names and printed report text do not decide
-membership. The helper checks saved evidence; it never fetches, guesses, applies
+membership. Family assignment fingerprints cover family rows (keys, decisions,
+merges, Pfam accessions and confirmed links), not subclass definitions. A subclass
+edit leaves family assignments current and reruns only the subclass runner.
+The helper checks saved evidence; it never fetches, guesses, applies
 or silently refreshes an assignment.
+
+`PanelEvidenceClassifier.CreateCurrentResolver(file)` first requires current
+assignment provenance, then returns a detached resolver. Its
+`PanelFamilyFor(evidence)` maps any evidence record, including external reviewed
+entries, through the same confirmed or unique source/architecture links. It
+returns null for unresolved, excluded or ambiguous contexts. It does not bypass
+scope/homology gates. Recheck `resolver.IsCurrent(file)` before publishing an
+asynchronous calculation based on the captured snapshot.

@@ -1,4 +1,5 @@
 using System;
+using FamilyQuant.Report.Captions;
 using System.Globalization;
 using System.Windows;
 using System.Windows.Media;
@@ -26,14 +27,15 @@ public abstract class CompositionDrawingBase : ChartDrawingBase, IPalettedChart
         Label(dc, subtitle, 26, 54, ActualWidth - 52, 12, brush: palette.Muted);
     }
 
-    // Grey is reserved for unresolved or unavailable parts, regardless of subclass count.
+    // Ordinary keyed series never use grey; unresolved parts and unassigned ring categories do.
     protected Brush Series(int index) => (index % 4) switch
     {
         0 => palette.Identified, 1 => palette.Quantified, 2 => palette.NotQuantified,
         _ => palette.DeNovo
     };
 
-    protected static string Number(double value, string format = "0.##") => value.ToString(format, CultureInfo.CurrentCulture);
+    protected static string Number(double value, string? format = null) =>
+        ReportCaptionBuilder.Number(value, CultureInfo.CurrentCulture, format);
 
     protected void PercentAxis(DrawingContext dc, double left, double right, double top, double bottom, double maximum,
         double minimum = 0)

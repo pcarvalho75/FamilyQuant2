@@ -14,7 +14,7 @@ internal static partial class FeatureLedgerEvidence
     {
         internal Dictionary<string, string> Hashes { get; } = new(StringComparer.OrdinalIgnoreCase);
         internal Dictionary<string, string[]> Logs { get; } = new(StringComparer.OrdinalIgnoreCase);
-        internal Dictionary<string, HashSet<string>> SourceEolHashes { get; } = new(StringComparer.OrdinalIgnoreCase);
+        internal Dictionary<string, byte[]> SourceLfBytes { get; } = new(StringComparer.OrdinalIgnoreCase);
     }
 
     internal static int ImportBatch(string root, FeatureLedger.Inventory inventory, string[] args)

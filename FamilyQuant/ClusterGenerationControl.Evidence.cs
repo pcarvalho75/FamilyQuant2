@@ -34,7 +34,7 @@ public partial class ClusterGenerationControl
                 preview = await Task.Run(() => new SuperClusterPreview(proteins, null, "", "", KeywordMatch.All, null, locks), operation.CancellationToken);
                 operation.ThrowIfCancellationRequested();
             });
-            if (prepared && preview != null && OpenGroupingReview(preview, true))
+            if (prepared && preview != null && await OpenGroupingReview(preview, true))
             {
                 PerformClustering(preview);
             }
@@ -43,27 +43,27 @@ public partial class ClusterGenerationControl
         finally { evidenceReviewRunning = false; }
     }
 
-    private bool OpenGroupingReview(SuperClusterPreview preview, bool startWithEvidence)
+    private async Task<bool> OpenGroupingReview(SuperClusterPreview preview, bool startWithEvidence)
     {
         var session = new EvidenceGroupingSession(fcf, AppVersionInfo.Current(), EvidenceSearchOverride);
         if (startWithEvidence && ConfirmEvidenceReviewOverride != null)
         {
             var choice = ConfirmEvidenceReviewOverride(session);
-            if (choice != null) ApplyEvidenceChoice(session, choice);
+            if (choice != null) await ApplyEvidenceChoice(session, choice);
             return false;
         }
         Window? owner = Window.GetWindow(this);
         if (owner == null) return false;
         var window = new SuperClusterPreviewWindow(preview, null, session.Propose, session.CountMotif,
-            evidenceMode: startWithEvidence, discoverTask: session.DiscoverTaskAsync) { Owner = owner };
+            evidenceMode: startWithEvidence, discoverTask: session.DiscoverTaskAsync, confirmPanelLinks: session.ConfirmPanelLinks) { Owner = owner };
         window.ShowDialog();
         if (!window.Confirmed) return false;
         if (!window.IsEvidenceMode) return true;
-        ApplyEvidenceChoice(session, window.EvidenceSelection!);
+        await ApplyEvidenceChoice(session, window.EvidenceSelection!);
         return false;
     }
 
-    private void ApplyEvidenceChoice(EvidenceGroupingSession session, EvidenceReviewSelection choice)
+    private async Task ApplyEvidenceChoice(EvidenceGroupingSession session, EvidenceReviewSelection choice)
     {
         bool committed = false;
         BeginWait("Applying the reviewed grouping...");
@@ -90,6 +90,11 @@ public partial class ClusterGenerationControl
             ShowCurationOperationResult((committed ? "The grouping was applied, but the view could not refresh: " : "No grouping was applied: ") + ex.Message);
         }
         finally { EndWait(); }
+        if (committed && session.Proposal?.PanelContext != null)
+        {
+            bool labelled = await SubclassAssignmentRunner.RecomputeSubclassesAsync(this, combineWithPreviousUndo: true);
+            if (!labelled) ShowCurationOperationResult("Family assignments were applied; subclass recomputation did not finish. Undo restores the whole grouping.");
+        }
     }
 
     private MessageBoxResult ShowCurationMessage(string message, string title,

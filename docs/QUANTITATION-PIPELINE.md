@@ -21,6 +21,79 @@ failures retain their existing distinct warning boundaries. All seven studies
 called by Compute remain in `Quantitation/Studies`; none becomes a report-only
 dependency or disappears from the manifest.
 
+## Compute output storage
+
+Full XIC writes new caches and its automatic spectrum CSV under
+`%LOCALAPPDATA%/FamilyQuant2/familyquant_fullxic_cache/<acquisition-path SHA256>/`.
+`FullXicOptions.CacheDirectory` can supply another root outside the acquisitions.
+Folder scoping prevents equal run names in different input folders from sharing
+a mutable cache file; RAW content and extraction parameters are still validated.
+Existing sidecars beside RAW remain read-only sources. Valid legacy extraction
+entries can fill gaps in a current cache, whose entries take precedence. Detector
+legacy results receive the same content/parameter validation. Explicit external
+cache callbacks remain isolated and do not silently consult acquisition-side
+caches. An acquisition-side callback becomes a read source, never a write target.
+Automatic CSV export refuses a requested path inside RAW while retaining the
+completed quantitation and spectrum table.
+
+`--test-fullxic-storage` checks routing, fallback validation and CSV protection.
+`--check-readonly-fullxic <RAW-file> <SEPro-package> <complete-cache-folder> <fresh-output>`
+runs a bounded real-input check using an owned RAW hard link and cache copies.
+It preflights every extraction request, denies new writes through owned directory
+ACLs, and compares quant rows, TIC, derived fractions, the spectrum table and
+input fingerprints. It changes no original RAW ACL/attribute and copies no RAW
+bytes. This cache-backed check proves input immutability and replay equality,
+not independent fresh extraction.
+
+## Source proposal
+
+Quantify inspects the chosen de novo export folder using the same source filename
+patterns as import, including nested folders. One PEAKS type, DeepNovo, or one
+PEAKS type plus DeepNovo proposes the matching source or union. Both PEAKS export
+types are reported as an explicit choice. Import still validates CSV contents.
+Stored selections and a person's changed selection are retained; the proposal
+does not translate confidence cutoffs between PEAKS ALC and DeepNovo SCORE.
+The shared De novo importer applies the same proposal before reading its inputs.
+
+`--test-denovo-source-proposal` includes native picker binding and override checks.
+Optional arguments `<export-folder> <comma-separated-source-ids>` check an actual
+folder without importing or changing it.
+
+## Unavailable family-world rates
+
+An envelope-based decoy rate requires finite positive credited signal and a
+finite nonnegative decoy signal no greater than it. Unsupported rates are null,
+never clamped: zero/non-finite credit says `no credited signal`; decoy domination
+says `decoy signal exceeds credited signal, no rate`. Target and decoy counts
+stay beside rates/reasons in the screen and in appended CSV columns. These are
+prepared peptide-representative counts, which can overlap between families.
+Existing positive supported rates keep their original values. Older out-of-range
+stored rows are protected at access/display, while their underlying envelopes
+remain unchanged; unrecorded old counts say `not recorded` rather than zero.
+
+## Stored family membership
+
+The five saved family studies (run shares, protein explanation counts, subclass
+parts, domain/product parts and peptide localization) carry `MembershipSha256`.
+Production attribution supplies it automatically. The hash binds sorted protein
+identifiers, sequences and current UserID memberships; it ignores row order and
+display text. It is separate from `FamilyMapping.ProteinSetSha256`, which correctly
+ignores grouping so cached hits can be rejoined without re-extraction.
+
+Current-project chart/report consumers refuse missing or mismatched membership
+before looking up current labels by UserID. They retain the saved numbers without
+retagging them. Results can still open the project and shows a plain refusal for
+the affected stored figures. A report refuses before writing rendered assets.
+Standalone explicitly supplied snapshots can be drawn without claiming a current
+project; known incompatible fingerprints cannot be combined. Sensitivity keeps
+its existing stronger curation fingerprint, including grouping and labels, and
+also rejects contradictory known nested run-share bindings or stale cached
+attribution. No RAW access is required to detect these cases.
+
+`--test-family-study-membership` covers reused UserIDs with an unchanged protein
+set, production propagation, legacy missing provenance, cross-study joins,
+sensitivity, current-project consumers and project round-trip persistence.
+
 Family quantitation has these stages:
 
 1. `SearchCuration` searches normalized sequences, retaining compact protein hits.

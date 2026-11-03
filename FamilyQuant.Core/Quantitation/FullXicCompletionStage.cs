@@ -62,7 +62,8 @@ namespace FamilyQuant
                 FamilyCompositionStudy.StoreRunShares(manifest, assigned);
                 if (familyHits != null && options.FamilyCuration != null)
                 {
-                    FamilyCompositionStudy.StoreSubclassesFromCuration(manifest, assigned, familyHits, options.FamilyCuration);
+                    if (!FamilyCompositionStudy.StoreSubclassesFromCuration(manifest, assigned, familyHits, options.FamilyCuration))
+                        result.Notes.Add("Subclass breakdown unavailable: subclass labels have not been computed or are out of date.");
                     FamilyCompositionStudy.StorePositionsFromCuration(manifest, assigned, familyHits, options.FamilyCuration);
                 }
                 if (options.FamilyCuration != null)
@@ -94,9 +95,9 @@ namespace FamilyQuant
             if (options.ExportSpectrumComparisonCsv)
             {
                 string tablePath = string.IsNullOrWhiteSpace(options.SpectrumComparisonCsvPath)
-                    ? Path.Combine(rawDirectory, SpectrumComparisonTable.DefaultFileName)
+                    ? new FullXicStoragePaths(rawDirectory, options.CacheDirectory).SpectrumComparisonCsvPath
                     : options.SpectrumComparisonCsvPath!;
-                result.TryExportSpectrumComparisonCsv(tablePath);
+                result.TryExportSpectrumComparisonCsvOutsideRaw(tablePath, rawDirectory);
             }
 
             // Q6: fold the detected peptide-like estimate into the manifest's derived section (measured

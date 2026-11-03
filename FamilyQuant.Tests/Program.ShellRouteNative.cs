@@ -154,6 +154,17 @@ internal static partial class Program
             dispatch = Dispatch("MenuItemLoadFQC");
             var document = main.NavigationModel.Document;
             string documentBefore = document!.ToJsonText();
+            // Save records the opened database bytes. Build the expectation from the
+            // pre-Save snapshot so any other curation or provenance change still fails.
+            string databaseFileName = Path.GetFileName(input), databaseFileSha256 = inputHash.ToLowerInvariant();
+            var expectedSaved = FamilyClusterFile.FromJsonText(documentBefore);
+            expectedSaved.ReportInputProvenance = new Report.ReportInputProvenance
+            { DatabaseFileName = databaseFileName, DatabaseFileSha256 = databaseFileSha256 };
+            string savedDocument = expectedSaved.ToJsonText();
+            bool MatchesSavedDocument(FamilyClusterFile? candidate) =>
+                candidate?.ReportInputProvenance?.DatabaseFileName == databaseFileName
+                && candidate.ReportInputProvenance.DatabaseFileSha256 == databaseFileSha256
+                && candidate.ToJsonText() == savedDocument;
             Record("open-fcf", "MenuItemLoadFQC", dispatch, "Open reads the selected FCF and retains its exact curation",
                 dialogs.Count == 1 && documentBefore == fixture.ToJsonText() && CurrentView() == typeof(ClusterGenerationControl).FullName
                 && ((FrameworkElement)Host().Children[0]).Name == "MyClusterGenerationControl");
@@ -243,8 +254,8 @@ internal static partial class Program
             Reset(); accept = true;
             dispatch = Dispatch("MenuItemSaveProject");
             var reopened = ProjectStore.ReadFqproj(saved);
-            Record("project-success", "MenuItemSaveProject", dispatch, "Project save preserves exact curation and the empty quantitation and passes its saved-file check",
-                reopened.fcf.ToJsonText() == documentBefore && reopened.quant.Count == 0 && !main.DocumentState.IsModified
+            Record("project-success", "MenuItemSaveProject", dispatch, "Project save adds the exact opened database name and SHA256, preserves all other curation and the empty quantitation, and passes its saved-file check",
+                MatchesSavedDocument(reopened.fcf) && MatchesSavedDocument(document) && reopened.quant.Count == 0 && !main.DocumentState.IsModified
                 && main.DocumentState.SaveCheckText.Contains("passed", StringComparison.OrdinalIgnoreCase)
                 && main.StatusModel.ContextHelp.Contains("The project was saved to", StringComparison.Ordinal));
             byte[] originalProject = File.ReadAllBytes(saved);
@@ -256,7 +267,7 @@ internal static partial class Program
                 catch (Exception ex) { expectedError = ex.Message; }
                 Reset(); dispatch = Dispatch("MenuItemSaveProject");
                 Record("project-failure", "MenuItemSaveProject", dispatch, "Failed project save keeps the previous container bytes and curation",
-                    expectedError != null && originalProject.SequenceEqual(File.ReadAllBytes(saved)) && document.ToJsonText() == documentBefore
+                    expectedError != null && originalProject.SequenceEqual(File.ReadAllBytes(saved)) && MatchesSavedDocument(document)
                     && messages.Count == 1 && messages[0].Title == "Could not save", expectedError);
             }
             finally { File.SetAttributes(saved, File.GetAttributes(saved) & ~FileAttributes.ReadOnly); }
@@ -366,8 +377,8 @@ internal static partial class Program
 
             Reset(); accept = true; nextFile = saved;
             dispatch = Dispatch("MenuItemLoadFQC");
-            Record("open-project", "MenuItemLoadFQC", dispatch, "Open restores the selected FQPROJ curation and its native curation view",
-                main.NavigationModel.Document?.ToJsonText() == documentBefore && CurrentView() == typeof(ClusterGenerationControl).FullName
+            Record("open-project", "MenuItemLoadFQC", dispatch, "Open restores the exact saved database provenance and all other FQPROJ curation and its native curation view",
+                MatchesSavedDocument(main.NavigationModel.Document) && CurrentView() == typeof(ClusterGenerationControl).FullName
                 && ((FrameworkElement)Host().Children[0]).Name == "MyClusterGenerationControl");
 
             Reset(); dispatch = Dispatch("MenuItemRunUSearch");

@@ -53,7 +53,7 @@ namespace FamilyQuant.Tests
                 Console.WriteLine("        Per family: own share of the residual | decoy rate | known credits, truly it | right rate or evidence");
                 foreach (FamilyWorldFamilySummary f in table.Families)
                     Console.WriteLine("          " + f.Family + ": " + P(f.UniqueEnvelope / table.ResidualEnvelope) + " | " +
-                        (f.DecoyRate.HasValue ? P(f.DecoyRate.Value) : "nothing credited") + " | " + N(f.KnownCredited) + ", " +
+                        FamilyWorldDecoyRates.Format(FamilyWorldDecoyRates.ForFamily(f), CultureInfo.InvariantCulture) + " | " + N(f.KnownCredited) + ", " +
                         N(f.KnownCreditedTrue) + " | " + (f.RightRate.HasValue ? P(f.RightRate.Value) : f.Evidence));
                 Console.WriteLine("        Result table, own parts of the measured total (identified | de novo in the database | de novo only in the family world):");
                 foreach (FamilyWorldCompositionRow r in table.Composition.Take(15))

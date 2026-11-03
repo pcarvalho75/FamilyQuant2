@@ -8,6 +8,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Threading;
+using FamilyQuant.Evidence;
 
 namespace FamilyQuant
 {
@@ -22,10 +23,11 @@ namespace FamilyQuant
         public SuperClusterPreviewWindow(SuperClusterPreview preview, EvidenceReviewInput? input,
             Func<string, EvidenceReviewInput>? propose, Func<string, string>? motif = null,
             string initialScope = "", bool evidenceMode = false,
-            Func<CancellationToken, Task<EvidenceTaskScopeInput>>? discoverTask = null)
+            Func<CancellationToken, Task<EvidenceTaskScopeInput>>? discoverTask = null,
+            Func<IReadOnlyList<PanelFamilyLinkSelection>, EvidenceReviewInput>? confirmPanelLinks = null)
         {
             InitializeComponent();
-            model = new GroupingReviewViewModel(preview, input, propose, motif, initialScope, evidenceMode, discoverTask);
+            model = new GroupingReviewViewModel(preview, input, propose, motif, initialScope, evidenceMode, discoverTask, confirmPanelLinks);
             Loaded += async (_, _) => await DiscoverInitialTaskAsync();
             Closed += (_, _) => model.CancelPending();
             DataContext = model;
@@ -71,6 +73,7 @@ namespace FamilyQuant
         private void EvidenceTickSelected_Click(object sender, RoutedEventArgs e) => model.Evidence?.SetSelected(evidenceGrid.SelectedItems.Cast<ReviewProteinRow>().ToArray(), true);
         private void EvidenceUntickSelected_Click(object sender, RoutedEventArgs e) => model.Evidence?.SetSelected(evidenceGrid.SelectedItems.Cast<ReviewProteinRow>().ToArray(), false);
         private async void UpdateProposal_Click(object sender, RoutedEventArgs e) => await RunReviewAsync("Update grouping proposal", model.UpdateProposalAsync);
+        private async void UpdatePanelLinks_Click(object sender, RoutedEventArgs e) => await RunReviewAsync("Confirm panel links", model.UpdatePanelLinksAsync);
         private async void Motif_Click(object sender, RoutedEventArgs e) => await RunReviewAsync("Count motif", model.CheckMotifAsync);
         private void Create_Click(object sender, RoutedEventArgs e)
         {
@@ -83,7 +86,7 @@ namespace FamilyQuant
         private void Help_Click(object sender, RoutedEventArgs e)
         {
             var help = TextReportWindow.Create("Grouping review help", GroupingReviewHelp.Text
-                + "\n\n" + EvidenceHelp.Build()
+                + "\n\n" + EvidenceHelp.Build(panelMode: model.Evidence?.HasPanelRules == true)
                 + (model.Evidence == null ? "" : "\n\nCurrent proposal\n" + model.Evidence.Source.RuleSummary), true);
             help.Owner = this; help.WindowStartupLocation = WindowStartupLocation.CenterOwner; help.Show();
         }

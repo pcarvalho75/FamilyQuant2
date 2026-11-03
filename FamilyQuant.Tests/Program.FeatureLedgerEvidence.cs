@@ -9,7 +9,22 @@ namespace FamilyQuant.Tests;
 
 internal static partial class Program
 {
-    private static void FeatureLedgerEvidenceTests()
+    private static void FeatureLedgerEvidenceTests(bool release = false)
+    {
+        FeatureLedgerReceiptGuardTests(release);
+        FeatureLedgerReceiptFixtureTests();
+        LedgerImportBatchTests();
+    }
+
+    // The default suite runs the three parts of FeatureLedgerEvidenceTests as separate entries.
+    private static void FeatureLedgerReceiptFixtureTests()
+    {
+        string root = FindLedgerRoot()!;
+        ReceiptValidationFixtures(root, JsonSerializer.Deserialize<FeatureLedger.Inventory>(
+            File.ReadAllText(Path.Combine(root, "docs/feature-ledger-scan.json")))!);
+    }
+
+    private static void FeatureLedgerReceiptGuardTests(bool release = false)
     {
         Section("Feature ledger evidence receipts");
         string root = FindLedgerRoot()!;
@@ -20,15 +35,14 @@ internal static partial class Program
         cells[7] = " VERIFIED ";
         cells[8] = " executed:long-enough-but-no-receipt ";
         string forged = markdown.Replace(first, string.Join('|', cells), StringComparison.Ordinal);
-        Check("a plausible evidence sentence cannot close a row without an executed receipt",
+        if (LedgerReceiptsSkipped(release)) SkipLedgerReceipts("a plausible evidence sentence cannot close a row without an executed receipt");
+        else Check("a plausible evidence sentence cannot close a row without an executed receipt",
             FeatureLedger.Validate(inventory, forged).Count > 0);
         Check("a native tool groups and audits per-observation receipts", typeof(Program).Assembly.GetType("FamilyQuant.Tests.FeatureLedgerEvidence") != null);
         string invalidAudit = Path.Combine(Path.GetTempPath(), "FamilyQuant.EvidenceGuard.Tests", Path.GetFileName(root), "missing-row-audit");
         Directory.CreateDirectory(invalidAudit);
         Check("an audit cannot accept a ledger with a missing frozen row", FeatureLedgerEvidence.Report(root, inventory,
             markdown.Replace(first + "\n", "", StringComparison.Ordinal), FeatureLedgerEvidence.Load(root, inventory), invalidAudit) == 1);
-        ReceiptValidationFixtures(root, inventory);
-        LedgerImportBatchTests();
     }
 
     // Deliberately synthetic validator inputs. None is imported into the real ledger.
@@ -100,8 +114,43 @@ internal static partial class Program
         string ByteHash(byte[] bytes) => Convert.ToHexString(System.Security.Cryptography.SHA256.HashData(bytes));
         var lfSource = source with { Sha256 = ByteHash(Eol(implementationBytes, false)) };
         var crlfSource = source with { Sha256 = ByteHash(Eol(implementationBytes, true)) };
-        Check("current source receipt accepts the same bytes with LF line endings", Valid(row with { Implementation = new() { lfSource } }));
-        Check("current source receipt accepts the same bytes with CRLF line endings", Valid(row with { Implementation = new() { crlfSource } }));
+        string retainedLf = Path.Combine(folder, "retained-lf.cs"), retainedCrlf = Path.Combine(folder, "retained-crlf.cs");
+        File.WriteAllBytes(retainedLf, Eol(implementationBytes, false)); File.WriteAllBytes(retainedCrlf, Eol(implementationBytes, true));
+        FeatureLedgerEvidence.Run WithSource(string path) => run with
+            { Artifacts = run.Artifacts.Append(new FeatureLedgerEvidence.Artifact(path, FeatureLedgerEvidence.Hash(path))).ToList() };
+        Check("current source receipt accepts the same bytes with LF line endings", Valid(row with { Implementation = new() { lfSource } }, WithSource(retainedLf)));
+        Check("current source receipt accepts the same bytes with CRLF line endings", Valid(row with { Implementation = new() { crlfSource } }, WithSource(retainedCrlf)));
+        var differentEolSource = source.Sha256 == lfSource.Sha256 ? crlfSource : lfSource;
+        Check("current source EOL tolerance never invents an unretained expected hash", !Valid(row with { Implementation = new() { differentEolSource } }));
+        string mixedRoot = Path.Combine(folder, "mixed-source-checkout"); Directory.CreateDirectory(mixedRoot);
+        string mixedCurrent = Path.Combine(mixedRoot, "Current.cs"), mixedRecorded = Path.Combine(folder, "recorded-mixed.cs");
+        byte[] mixedBytes = Encoding.UTF8.GetBytes("// retained source\r\nclass Example {\n string Value = \"kept\";\r\n}\n");
+        File.WriteAllBytes(mixedRecorded, mixedBytes);
+        var mixedRow = row with { Implementation = new() { new("Current.cs", "Example", ByteHash(mixedBytes)) } };
+        bool MixedValid(FeatureLedgerEvidence.Run supplied, FeatureLedgerEvidence.Row? suppliedRow = null) => FeatureLedgerEvidence.Load(mixedRoot, inventory,
+            new[] { new FeatureLedgerEvidence.Register(1, "fixture", FeatureLedger.ReferenceCommit, new() { supplied }, new() { suppliedRow ?? mixedRow }) },
+            Array.Empty<FeatureLedgerEvidence.KindReview>()).IsVerified(observed.Id, "evidence:fixture:" + observed.Id);
+        File.WriteAllBytes(mixedCurrent, Eol(mixedBytes, false));
+        var mixedRun = WithSource(mixedRecorded);
+        Check("current LF source accepts pinned retained mixed-EOL bytes", MixedValid(mixedRun));
+        File.WriteAllBytes(mixedCurrent, Eol(mixedBytes, true));
+        Check("current CRLF source accepts pinned retained mixed-EOL bytes", MixedValid(mixedRun));
+        Check("mixed-EOL tolerance requires a retained source artifact", !MixedValid(run));
+        File.WriteAllBytes(mixedCurrent, Encoding.UTF8.GetBytes(Encoding.UTF8.GetString(Eol(mixedBytes, false)).Replace("kept", "lost", StringComparison.Ordinal)));
+        Check("mixed-EOL tolerance rejects a changed source literal", !MixedValid(mixedRun));
+        File.WriteAllBytes(mixedCurrent, Eol(mixedBytes, false));
+        File.WriteAllBytes(mixedRecorded, Eol(mixedBytes, false));
+        Check("retained source line endings remain raw-hash pinned", !MixedValid(mixedRun));
+        File.WriteAllBytes(mixedRecorded, mixedBytes);
+        File.AppendAllText(mixedRecorded, "// corrupt retained artifact");
+        Check("mixed-EOL tolerance rejects corrupt retained raw bytes", !MixedValid(mixedRun));
+        File.WriteAllBytes(mixedRecorded, mixedBytes);
+        File.WriteAllBytes(mixedCurrent, Eol(mixedBytes, false).Append((byte)13).ToArray());
+        Check("mixed-EOL tolerance does not remove standalone carriage returns", !MixedValid(mixedRun));
+        string binaryCurrent = Path.Combine(mixedRoot, "Current.dll"), binaryRecorded = Path.Combine(folder, "recorded-mixed.dll");
+        File.WriteAllBytes(binaryCurrent, Eol(mixedBytes, false)); File.WriteAllBytes(binaryRecorded, mixedBytes);
+        Check("assembly implementation bytes never use source EOL tolerance", !MixedValid(WithSource(binaryRecorded), mixedRow with
+            { Implementation = new() { new("Current.dll", "Example", ByteHash(mixedBytes)) } }));
         byte[] changedCharacter = Eol(implementationBytes, false);
         changedCharacter[Array.IndexOf(changedCharacter, (byte)'u')] = (byte)'v';
         Check("current source EOL tolerance still rejects one changed character", !Valid(row with

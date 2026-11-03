@@ -10,6 +10,7 @@ namespace FamilyQuant;
 public sealed class FamilySubclassChart : CompositionDrawingBase
 {
     private readonly FamilyCompositionData data;
+    public FamilyCompositionData Data => data;
     public IReadOnlyList<FamilyCompositionValue> Rows => data.Families;
     public FamilySubclassChart(FamilyCompositionData data)
     {

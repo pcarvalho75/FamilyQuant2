@@ -40,6 +40,9 @@ public sealed class FamilySensitivityViewModel : ScreenViewModel
         try
         {
             var stored = manifest?.FamilySensitivity;
+            if (stored != null && curation != null
+                && FamilyStudyMembership.Problem(curation, new QuantManifest { FamilySensitivity = stored }) is string membershipProblem)
+                throw new InvalidDataException(membershipProblem);
             if (stored != null && curation != null && stored.CurationFingerprint != FamilySensitivityStudy.CurationFingerprint(curation))
                 throw new InvalidDataException("Stored sensitivity belongs to a different family grouping. Calculate it again.");
             if (stored != null && CanCalculate && stored.Variants.FirstOrDefault()?.SourceSha256 != FamilySensitivityStudy.CurrentFingerprint(rows!, manifest!, curation!))
