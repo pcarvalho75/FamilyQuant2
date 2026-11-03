@@ -93,6 +93,11 @@ public static class ReportFigureRenderer
             var census = visibleFamilies.SourceSequenceSummary;
             var sourcePages = ReportFamilySourceSequenceChart.Pages(census);
             int selected = sourcePages.Sum(page => page.Count);
+            if (selected == 0)
+                Missing(ReportSectionIds.Results, "Family source sequence counts",
+                    "The stored census has no source-resolved family sequences for the PEAKS de-novo-only and DeepNovo disjoint sets. "
+                    + "Other de novo sources are separate; this does not establish that all de novo evidence is absent. "
+                    + "The complete stored census remains in the companion workbook's Complete family source sequence census table.");
             for (int page = 0; page < sourcePages.Count; page++)
             {
                 var pageRows = sourcePages[page];

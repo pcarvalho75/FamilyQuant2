@@ -41,5 +41,26 @@ internal static partial class Program
         Check("a supported concordance study retains its original native graphic",
             ReportFigureRenderer.Plan(data, manifest, new FamilyClusterFile(), null).Charts
                 .Single(c => c.FileName == PresentationFigures.DatabaseSearchConcordanceFile).CreateChart() is DatabaseSearchConcordanceChart);
+        var families = FamilyFixture(3);
+        families.SourceSequenceSummary.Families.Clear();
+        families.SourceSequenceSummary.Families.Add(new()
+        {
+            FamilyUserId = families.Families[0].FamilyUserId, Description = "Synthetic search-only census row", SearchDistinctSequences = 17,
+        });
+        var sourcePlan = ReportFigureRenderer.Plan(data, manifest, new FamilyClusterFile(), families);
+        Check("unavailable disjoint source sets do not occupy an empty source-census figure",
+            !sourcePlan.Charts.Any(c => c.FileName.StartsWith("family_source_sequence_counts", StringComparison.Ordinal)));
+        Check("source-set availability is explicit without claiming all de novo evidence is absent",
+            sourcePlan.Unavailable.Any(item => item.Title == "Family source sequence counts"
+                && item.Reason.Contains("PEAKS de-novo-only and DeepNovo", StringComparison.Ordinal)
+                && item.Reason.Contains("Other de novo sources are separate", StringComparison.Ordinal)));
+        Check("unavailable source graphic retains the original complete census and values in the workbook",
+            ReportCurrentResults.Build(data, manifest, families).Sections.SelectMany(s => s.Blocks).OfType<ReportTable>()
+                .Any(t => t.Id == "family-source-sequences" && t.SupplementOnly && t.Rows.Count == 1 && t.Rows[0].Contains("17")));
+        families.SourceSequenceSummary.Families[0].DeNovoUnionDistinctSequences = 2;
+        families.SourceSequenceSummary.Families[0].DeepNovoExclusiveDistinctSequences = 2;
+        Check("nonempty source sets retain their existing source-census drawing",
+            ReportFigureRenderer.Plan(data, manifest, new FamilyClusterFile(), families).Charts
+                .Single(c => c.FileName == PresentationFigures.FamilySourceSequenceFile).CreateChart() is ReportFamilySourceSequenceChart);
     }
 }

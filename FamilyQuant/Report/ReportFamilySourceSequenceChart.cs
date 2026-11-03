@@ -40,7 +40,7 @@ public sealed class ReportFamilySourceSequenceChart : ReportPrintChart
             }
             page.Add(row);
         }
-        if (page.Count > 0 || pages.Count == 0) pages.Add(page.ToArray());
+        if (page.Count > 0) pages.Add(page.ToArray());
         return pages;
     }
 
