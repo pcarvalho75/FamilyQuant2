@@ -23,7 +23,9 @@ public static class WordReportWriter
     private static readonly DateTimeOffset ZipDate = new(2000, 1, 1, 0, 0, 0, TimeSpan.Zero);
     private static readonly XNamespace PackageR = "http://schemas.openxmlformats.org/package/2006/relationships";
 
-    public static byte[] BuildBytes(ReportDocument document, ReportSelection? selection = null)
+    public static byte[] BuildBytes(ReportDocument document, ReportSelection? selection = null) => BuildBytes(document, selection, null);
+
+    public static byte[] BuildBytes(ReportDocument document, ReportSelection? selection, OperationContext? operation)
     {
         ArgumentNullException.ThrowIfNull(document);
         var ids = new HashSet<string>(StringComparer.Ordinal);
@@ -39,6 +41,7 @@ public static class WordReportWriter
         }
         var excluded = new HashSet<string>(selection?.ExcludedIds ?? Array.Empty<string>(), StringComparer.Ordinal);
         var sections = document.Sections.Where(s => !excluded.Contains(s.Id)).ToList();
+        operation?.Report("report-write-section", "Writing report sections", 0, sections.Count);
         using var buffer = new MemoryStream();
         using (var word = WordprocessingDocument.Create(buffer, WordprocessingDocumentType.Document, true))
         {
@@ -51,6 +54,8 @@ public static class WordReportWriter
             for (int index = 0; index < sections.Count; index++)
             {
                 var section = sections[index];
+                operation?.Report("report-write-section", "Writing section " + (index + 1).ToString(CultureInfo.InvariantCulture)
+                    + " of " + sections.Count.ToString(CultureInfo.InvariantCulture) + ": " + section.Title, index + 1, sections.Count);
                 if (index > 0 && !section.Id.StartsWith(ReportSectionIds.FamilyPrefix, StringComparison.Ordinal))
                     body.Append(new W.Paragraph(new W.Run(new W.Break { Type = W.BreakValues.Page })));
                 string bookmark = "section_" + index.ToString(CultureInfo.InvariantCulture);
@@ -75,6 +80,7 @@ public static class WordReportWriter
                 }
                 foreach (var block in section.Blocks.Where(b => !excluded.Contains(b.Id)))
                 {
+                    operation?.ThrowIfCancellationRequested();
                     switch (block)
                     {
                         case ReportParagraph paragraph:
@@ -124,8 +130,7 @@ public static class WordReportWriter
 
     public static void Write(string path, ReportDocument document, ReportSelection? selection = null, OperationContext? operation = null)
     {
-        operation?.Report("report", "Preparing report document");
-        byte[] bytes = BuildBytes(document, selection);
+        byte[] bytes = BuildBytes(document, selection, operation);
         operation?.ThrowIfCancellationRequested();
         string fullPath = Path.GetFullPath(path);
         Directory.CreateDirectory(Path.GetDirectoryName(fullPath)!);
@@ -171,6 +176,7 @@ public static class WordReportWriter
 
     private static W.Table Table(ReportTable data)
     {
+        data = ReportListSheets.WordView(data);
         int[] widths = Enumerable.Range(0, data.Columns.Count)
             .Select(index => PageWidth / data.Columns.Count + (index < PageWidth % data.Columns.Count ? 1 : 0)).ToArray();
         var result = new W.Table(new W.TableProperties(new W.TableWidth { Width = PageWidth.ToString(CultureInfo.InvariantCulture), Type = W.TableWidthUnitValues.Dxa },

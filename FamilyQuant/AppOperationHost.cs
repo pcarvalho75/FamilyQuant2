@@ -1,11 +1,18 @@
 using FamilyQuant.Operations;
 using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.IO;
+using System.Linq;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Threading;
 
 namespace FamilyQuant;
+
+public sealed record OperationLogEntry(DateTimeOffset Timestamp, string Stage, string Message, long? Completed, long? Total);
 
 /// <summary>One visible operation per window. A lease owns cancellation until the actual work ends.</summary>
 public sealed class AppOperationHost : ScreenViewModel
@@ -54,6 +61,12 @@ public sealed class AppOperationHost : ScreenViewModel
     private OperationLease? active;
     private string title = "", message = "";
     private long? completed, total;
+    private DateTimeOffset startedAt, lastStepAt;
+    private DateTimeOffset? endedAt;
+    private string? logPath;
+    private string? logWriteError;
+    private readonly List<OperationLogEntry> logEntries = new();
+    private readonly StringBuilder logText = new();
     public bool IsBusy => active != null;
     public bool IsCancelling => active?.Context.IsCancellationRequested == true;
     public string Title => title;
@@ -61,14 +74,48 @@ public sealed class AppOperationHost : ScreenViewModel
     public bool IsIndeterminate => !total.HasValue || total <= 0;
     public double Percent => IsIndeterminate ? 0 : Math.Clamp(100d * (completed ?? 0) / total!.Value, 0, 100);
     public ScreenCommand CancelCommand { get; }
+    public event EventHandler<OperationProgress>? ProgressReported;
+    public TimeSpan Elapsed { get { lock (lifetime) return startedAt == default ? TimeSpan.Zero : Nonnegative((endedAt ?? DateTimeOffset.UtcNow) - startedAt); } }
+    public TimeSpan SinceLastStep { get { lock (lifetime) return lastStepAt == default ? TimeSpan.Zero : Nonnegative((endedAt ?? DateTimeOffset.UtcNow) - lastStepAt); } }
+    public string ElapsedText => "Elapsed " + Clock(Elapsed);
+    public string SinceLastStepText => "Since last step " + Clock(SinceLastStep);
+    public string LogText { get { lock (lifetime) return logText.ToString() + (logWriteError == null ? "" : "\nFile log unavailable: " + logWriteError); } }
+    public string? LogPath => logPath;
+    public IReadOnlyList<OperationLogEntry> LogEntries { get { lock (lifetime) return logEntries.ToArray(); } }
+    public void LogFailure(Exception error)
+    {
+        ArgumentNullException.ThrowIfNull(error);
+        lock (lifetime) Record(new("operation-failure", error.ToString()), DateTimeOffset.UtcNow);
+    }
+    private static TimeSpan Nonnegative(TimeSpan value) => value < TimeSpan.Zero ? TimeSpan.Zero : value;
+    private static string Clock(TimeSpan value) => string.Format(CultureInfo.InvariantCulture, "{0:00}:{1:00}:{2:00}", (long)value.TotalHours, value.Minutes, value.Seconds);
 
     public AppOperationHost() => CancelCommand = new(Cancel, () => IsBusy && !IsCancelling && active?.Context.HasCommitted != true);
-    public OperationLease Begin(string operation)
+    public OperationLease Begin(string operation, DateTimeOffset? startedAtUtc = null, string? operationLogPath = null)
     {
         dispatcher.VerifyAccess();
         if (IsBusy) throw new InvalidOperationException("Wait for the current operation to finish.");
         title = message = operation;
         completed = total = null;
+        lock (lifetime)
+        {
+            startedAt = startedAtUtc ?? DateTimeOffset.UtcNow;
+            lastStepAt = DateTimeOffset.UtcNow; endedAt = null;
+            if (operationLogPath == null || !string.Equals(operationLogPath, logPath, StringComparison.OrdinalIgnoreCase))
+            {
+                logEntries.Clear(); logText.Clear(); logPath = operationLogPath; logWriteError = null;
+                if (logPath != null)
+                {
+                    try
+                    {
+                        Directory.CreateDirectory(Path.GetDirectoryName(Path.GetFullPath(logPath))!);
+                        File.WriteAllText(logPath, "", new UTF8Encoding(false));
+                    }
+                    catch (Exception error) when (error is IOException or UnauthorizedAccessException) { logWriteError = error.Message; }
+                }
+            }
+            Record(new("operation-start", operation), lastStepAt);
+        }
         var lease = new OperationLease(this);
         active = lease;
         Notify();
@@ -83,10 +130,16 @@ public sealed class AppOperationHost : ScreenViewModel
             active.Source.Cancel();
         }
         message = "Cancelling after the current phase...";
+        lock (lifetime) Record(new("operation-cancel", message), DateTimeOffset.UtcNow);
         Notify();
     }
     private void Report(OperationLease lease, OperationProgress progress)
     {
+        lock (lifetime)
+        {
+            if (!ReferenceEquals(active, lease) || IsCancelling) return;
+            Record(progress, DateTimeOffset.UtcNow);
+        }
         void Apply()
         {
             if (!ReferenceEquals(active, lease) || IsCancelling) return;
@@ -97,12 +150,29 @@ public sealed class AppOperationHost : ScreenViewModel
         }
         if (dispatcher.CheckAccess()) Apply();
         else dispatcher.BeginInvoke(DispatcherPriority.Background, (Action)Apply);
+        ProgressReported?.Invoke(this, progress);
+    }
+    // Caller holds lifetime. Raw file records remain timestamped even if UI painting is delayed.
+    private void Record(OperationProgress progress, DateTimeOffset at)
+    {
+        lastStepAt = at;
+        logEntries.Add(new(at, progress.Stage, progress.Message, progress.Completed, progress.Total));
+        string Clean(string value) => value.Replace("\r\n", " ", StringComparison.Ordinal).Replace('\r', ' ').Replace('\n', ' ').Replace('\t', ' ');
+        string line = at.UtcDateTime.ToString("O", CultureInfo.InvariantCulture) + "\t" + Clean(progress.Stage) + "\t"
+            + progress.Completed?.ToString(CultureInfo.InvariantCulture) + "\t" + progress.Total?.ToString(CultureInfo.InvariantCulture)
+            + "\t" + Clean(progress.Message) + Environment.NewLine;
+        logText.Append(line);
+        if (logPath != null && logWriteError == null)
+            try { File.AppendAllText(logPath, line, new UTF8Encoding(false)); }
+            catch (Exception error) when (error is IOException or UnauthorizedAccessException) { logWriteError = error.Message; }
     }
     private void End(OperationLease lease)
     {
         lock (lifetime)
         {
             if (!ReferenceEquals(active, lease)) return;
+            endedAt = DateTimeOffset.UtcNow;
+            Record(new("operation-end", "Operation ended"), endedAt.Value);
             active = null;
             lease.Source.Dispose();
         }

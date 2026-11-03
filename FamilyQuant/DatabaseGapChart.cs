@@ -11,11 +11,16 @@ namespace FamilyQuant;
 public sealed class DatabaseGapChart : ChartDrawingBase, IPalettedChart
 {
     public IReadOnlyList<FamilyWorldCompositionRow> Rows { get; }
-    public DatabaseGapChart(IReadOnlyList<FamilyWorldCompositionRow> rows)
+    public DatabaseGapChart(IReadOnlyList<FamilyWorldCompositionRow> rows) : this(rows, ChartPalette.UiPalette) { }
+
+    /// <summary>Detached exports supply their frozen palette without reading the application dispatcher.</summary>
+    public DatabaseGapChart(IReadOnlyList<FamilyWorldCompositionRow> rows, ChartPalette palette)
     {
+        ArgumentNullException.ThrowIfNull(rows);
+        ArgumentNullException.ThrowIfNull(palette);
         Rows = rows;
         Height = Math.Max(90, 50 + 30 * rows.Count);
-        Palette = ChartPalette.UiPalette;
+        Palette = palette;
     }
     protected override void OnRender(DrawingContext dc)
     {

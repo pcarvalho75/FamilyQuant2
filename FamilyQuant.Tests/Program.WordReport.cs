@@ -16,7 +16,7 @@ internal static partial class Program
         var writer = typeof(ReportDocument).Assembly.GetType("FamilyQuant.Report.WordReportWriter");
         Check("Word report writer is implemented in Core", writer != null);
         if (writer == null) return;
-        var build = writer.GetMethod("BuildBytes");
+        var build = writer.GetMethod("BuildBytes", new[] { typeof(ReportDocument), typeof(ReportSelection) });
         Check("writer exposes the document and selection entry point", build != null);
         if (build == null) return;
         byte[] png = Convert.FromBase64String("iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAusB9Wl6MpIAAAAASUVORK5CYII=");
