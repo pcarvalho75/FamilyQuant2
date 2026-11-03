@@ -2,7 +2,9 @@ using FamilyQuant.Report;
 using FamilyQuant.DeNovo;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Windows.Media;
 
 namespace FamilyQuant.Tests;
 
@@ -62,5 +64,45 @@ internal static partial class Program
         Check("nonempty source sets retain their existing source-census drawing",
             ReportFigureRenderer.Plan(data, manifest, new FamilyClusterFile(), families).Charts
                 .Single(c => c.FileName == PresentationFigures.FamilySourceSequenceFile).CreateChart() is ReportFamilySourceSequenceChart);
+        J34dRunChartTests(data);
+    }
+
+    private static void J34dRunChartTests(AnalyticsData data)
+    {
+        data.Fractions.Clear();
+        for (int index = 0; index < 4; index++) data.Fractions.Add(new NativeRunFraction
+        {
+            Run = "synthetic_run_" + index, Tic = index == 3 ? 0 : 1000,
+            IdentifiedEnvelope = 350, DeNovoEnvelopeReferenceCalibrated = 210,
+        });
+        var charts = ReportFigureRenderer.Plan(data, new QuantManifest(), new FamilyClusterFile(), null).Charts
+            .Where(c => c.FileName.StartsWith("signal_by_run", StringComparison.Ordinal)).ToArray();
+        Check("run chart pagination keeps all runs in their original order with room for labels", charts.Length == 2);
+        foreach (var theme in new[] { ChartPaletteVariant.Light, ChartPaletteVariant.Dark })
+        {
+            var text = new List<string>();
+            foreach (var chart in charts)
+            {
+                var native = chart.CreateChart();
+                ChartImageExporter.Save(native, Path.Combine(Path.GetTempPath(), "j34d-run", theme.ToString(), chart.FileName),
+                    chart.Width, chart.Height, variant: theme);
+                var glyphs = ReaderGlyphs(VisualTreeHelper.GetDrawing(native)).ToArray();
+                text.AddRange(glyphs.Select(g => new string(g.GlyphRun.Characters.ToArray())));
+                double pointsPerDip = Math.Min(468 / chart.Width, 360 / chart.Height);
+                Check(theme + " " + chart.FileName + " text remains readable and inside the drawing",
+                    glyphs.Length > 0 && glyphs.All(g => g.GlyphRun.FontRenderingEmSize * pointsPerDip >= 10
+                        && g.Bounds.Left >= 0 && g.Bounds.Top >= 0 && g.Bounds.Right <= chart.Width && g.Bounds.Bottom <= chart.Height));
+                var totals = glyphs.Where(g => new string(g.GlyphRun.Characters.ToArray()).StartsWith("total ", StringComparison.Ordinal)).ToArray();
+                var header = glyphs.Where(g => g.Bounds.Top < 100).ToArray();
+                Check(theme + " " + chart.FileName + " run totals clear every header label",
+                    totals.All(total => header.All(label => !total.Bounds.IntersectsWith(label.Bounds))));
+            }
+            Check(theme + " native run values and unavailable TIC are explicit",
+                text.Any(t => t.Contains("56.00%", StringComparison.Ordinal))
+                && text.Any(t => t.Contains("35.00%", StringComparison.Ordinal))
+                && text.Any(t => t.Contains("21.00%", StringComparison.Ordinal))
+                && text.Any(t => t.Contains("Run 4", StringComparison.Ordinal))
+                && text.Any(t => t.Contains("TIC unavailable", StringComparison.Ordinal)));
+        }
     }
 }

@@ -61,9 +61,20 @@ public static class ReportFigureRenderer
             "Signal in each mass interval divided by the recorded RAW total ion current. Missing TIC is unavailable.", () => new PercentIonCurrentChart(data.Peptides, data.Grouped?.Tic ?? 0));
         Add(ReportSectionIds.Quality, AnalyticsFigures.RecoveryFile, "Recovery and M+0 sensitivity",
             "The chart separates the primary reference-calibrated estimate, M+0 sensitivity and directly observed diagnostic bases.", () => new RecoveryChart(data.Fractions, data.Grouped));
-        Add(ReportSectionIds.Results, PresentationFigures.SignalByRunFile, "Signal by run",
-            "Stored run-level native fractions, with the denominator and signal bases stated in the chart.", () => new SignalByRunChart(data.Fractions),
-            new CaptionNumber("Acquisition runs", data.Fractions.Count, "runs", "0"));
+        var runPages = data.Fractions.Chunk(ReportSignalByRunChart.RunsPerPage).DefaultIfEmpty(Array.Empty<NativeRunFraction>()).ToArray();
+        for (int page = 0; page < runPages.Length; page++)
+        {
+            var pageRuns = runPages[page];
+            int runOffset = page * ReportSignalByRunChart.RunsPerPage;
+            string file = page == 0 ? PresentationFigures.SignalByRunFile
+                : Path.GetFileNameWithoutExtension(PresentationFigures.SignalByRunFile) + "_" + (page + 1).ToString(CultureInfo.InvariantCulture) + ".png";
+            Add(ReportSectionIds.Results, file, "Signal by run",
+                "Observed identified envelope and reference-calibrated de novo estimate each use that run's TIC denominator. "
+                    + "Run indices follow acquisition order in the Signal by run table and companion workbook, where complete run names are retained. Missing TIC is unavailable.",
+                () => new ReportSignalByRunChart(pageRuns, runOffset),
+                new CaptionNumber("Acquisition runs", data.Fractions.Count, "runs", "0"));
+            charts[^1] = charts[^1] with { Width = ReportPrintChart.LayoutWidth, Height = ReportPrintChart.LayoutHeight };
+        }
         var pooledFacts = data.Grouped is { Tic: > 0 } pooled
             ? new[] { new CaptionNumber("Pooled primary recovery estimate", 100 * pooled.RecoveredFractionReferenceCalibrated, "%"),
                 new CaptionNumber("Pooled M+0 recovery", 100 * pooled.RecoveredFractionM0, "%") }
