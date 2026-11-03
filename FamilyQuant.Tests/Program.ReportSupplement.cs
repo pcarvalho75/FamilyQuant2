@@ -71,7 +71,8 @@ internal static partial class Program
             var main = package.WorkbookPart ?? throw new InvalidDataException("Workbook part is missing.");
             var book = main.Workbook ?? throw new InvalidDataException("Workbook root is missing.");
             var sheets = (book.Sheets ?? throw new InvalidDataException("Workbook sheets are missing.")).Elements<S.Sheet>().ToList();
-            Check("one worksheet per table plus its index", sheets.Count == layout.Sheets.Count + 1 && sheets.Any(s => s.Name == "Contents"));
+            var tableIds = layout.Sheets.Select(s => s.Id).Concat(layout.Document.Sections.SelectMany(s => s.Blocks.OfType<ReportTable>()).Select(t => t.Id));
+            Check("one worksheet per supplied or printed table plus its index", sheets.Count == tableIds.Distinct(StringComparer.Ordinal).Count() + 1 && sheets.Any(s => s.Name == "Contents"));
             var cells = main.WorksheetParts.SelectMany(part => (part.Worksheet ?? throw new InvalidDataException("Worksheet root is missing.")).Descendants<S.Cell>()).ToList();
             string Value(S.Cell cell) => cell.InlineString?.InnerText ?? cell.CellValue?.Text ?? string.Empty;
             Check("stored numeric lexemes are unchanged", cells.Any(c => Value(c) == "0.125") && cells.Any(c => Value(c) == "123.5"));

@@ -19,7 +19,8 @@ public static class ReportStoredResults
         ReportTable Table(string id, string title, string file, string csv, string caption, string[] columns, string[] headings)
         {
             exports.Add(file, csv);
-            return ReportWordMembership.Filter(ReportCsvTable.Build(id, title, csv, caption, columns) with { Columns = headings }, csv, grouping);
+            var table = ReportCsvTable.Build(id, title, csv, caption, columns) with { Columns = headings };
+            return ReportWordMembership.Filter(ReportTableSupplements.WithStoredPercentages(table, csv, columns), csv, grouping);
         }
         void Remove(string id) => results.RemoveAll(b => b.Id == id);
         const string displayed = " Percentages use six significant digits; companion CSV fraction columns retain round-trip values. Empty values are unavailable, not zero.";
@@ -31,6 +32,7 @@ public static class ReportStoredResults
                 "Headline family composition uses the arithmetic mean of available per-run shares, with sample SD and CV. Pooled composition and within-family parts are labelled separately. Per-run whole measured peptide signal and RAW TIC shares retain their own denominators. Family-world-only signal remains separate."));
             Remove("family-runs-unavailable");
             exports.Add("family_run_means.csv", ReportStudyExports.MeanShares(runs, familyLabels));
+            exports.Add("report_settings.csv", ReportStudyExports.ReportSettings(grouping));
             results.Insert(0, Table("family-run-means", "Headline family composition: mean of per-run shares", "family_composition_headline.csv",
                 ReportStudyExports.Headline(grouping, manifest.FamilyProteinCounts, familyLabels),
                 "Each run's composition uses signal credited to database families. Mean and sample SD use available runs. Whole measured-signal mean/SD are separate stored statistics; family-world-only signal is excluded. Protein estimates count database entries, not genes or proteoforms. Others membership and summed-run uncertainty come only from the canonical stored-threshold accessor." + displayed,

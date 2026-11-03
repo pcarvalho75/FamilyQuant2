@@ -22,8 +22,8 @@ public static class ReportWordMembership
         int index = full.Columns.ToList().FindIndex(c => c is "family_user_id" or "family_id");
         if (index < 0) return table;
         if (full.Rows.Count != table.Rows.Count) throw new InvalidOperationException("Word rows do not match their native family export.");
-        return table with { Rows = table.Rows.Where((_, row) => !int.TryParse(full.Rows[row][index], NumberStyles.Integer,
-            CultureInfo.InvariantCulture, out int id) || !hidden.Contains(id)).ToArray() };
+        return KeepRows(table, Enumerable.Range(0, table.Rows.Count).Where(row => !int.TryParse(full.Rows[row][index], NumberStyles.Integer,
+            CultureInfo.InvariantCulture, out int id) || !hidden.Contains(id)).ToArray());
     }
 
     public static HashSet<string> HiddenWorldFamilies(FamilyWorldSummary world, FamilyReportThresholdResult? grouping)
@@ -35,6 +35,20 @@ public static class ReportWordMembership
     public static ReportTable FilterWorld(ReportTable table, FamilyWorldSummary world, FamilyReportThresholdResult? grouping)
     {
         var hidden = HiddenWorldFamilies(world, grouping);
-        return table with { Rows = table.Rows.Where(r => !hidden.Contains(r[0])).ToArray() };
+        return KeepRows(table, Enumerable.Range(0, table.Rows.Count).Where(row => !hidden.Contains(table.Rows[row][0])).ToArray());
+    }
+
+    private static ReportTable KeepRows(ReportTable table, IReadOnlyList<int> indexes)
+    {
+        if (indexes.Count == table.Rows.Count) return table;
+        var recipe = table.SupplementSource;
+        if (recipe != null)
+        {
+            var full = ReportCsvTable.Build(table.Id, table.Title, recipe.Csv, "");
+            if (full.Rows.Count != table.Rows.Count) throw new InvalidOperationException("Word rows do not match their supplement source.");
+            string Row(IReadOnlyList<string> cells) => string.Join(",", cells.Select(CsvFormatting.AlwaysQuoted)) + "\n";
+            recipe = recipe with { Csv = Row(full.Columns) + string.Concat(indexes.Select(i => Row(full.Rows[i]))) };
+        }
+        return table with { Rows = indexes.Select(i => table.Rows[i]).ToArray(), SupplementSource = recipe };
     }
 }
