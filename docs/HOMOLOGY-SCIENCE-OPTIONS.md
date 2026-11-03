@@ -46,6 +46,15 @@ moves each called residue's weight with it. Total confidence weight is preserved
 Per-position accepted-source medians are percentages; a missing or all-zero
 profile uses uniform weights and reports that confidence was not used.
 
+The adjacent rewrite is audited as "adjacent order swap (same pair mass)".
+Exchanging two adjacent residues conserves the pair's summed mass; the two
+residues need not have equal individual masses. It models the ordering ambiguity
+when a fragment between those two positions is missing. The current option
+enumerates every adjacent nonidentical pair: no per-position PEAKS confidence
+cutoff restricts which positions can swap, including high-confidence positions
+or tags without confidence profiles. Confidence still weights the aggregate
+identity gate. This remains an off-by-default experiment.
+
 The gate is the maximum ordered matched-weight/total-weight fraction over those
 variant windows. A conservative count bound with a positive-sum rounding margin
 permits the same lossless diagonal filter; the exact weighted comparison decides

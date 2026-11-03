@@ -49,6 +49,9 @@ internal static partial class Program
             Check("J47 PAM and reported span still describe the ORIGINAL tag " + pair.Query,
                 result.Hits.Count == 1 && result.Hits[0].Offset == offset && result.Hits[0].Score == pam
                 && result.Hits[0].MatchedSubsequence.Length == pair.Query.Length);
+            if (pair.Query == "ANRAAA")
+                Check("J47 adjacent-swap audit names conserved pair mass without implying equal residue masses",
+                    result.ScienceAudit?.GateAlignments?.Any(a => a.Rule == "adjacent order swap (same pair mass)") == true);
         }
         var two = HomologyDatabase.Build(new[] { ("two", "GGGGAAAA") });
         Check("J47 two required rewrites cannot sneak through the one-rewrite model",

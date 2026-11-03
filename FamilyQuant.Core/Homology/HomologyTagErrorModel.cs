@@ -65,7 +65,7 @@ public static class HomologyTagErrorModel
             if (options.AllowNAndGG && pair == "GG") Replace(i, 2, "N", [weights[i] + weights[i + 1]], "GG to N");
             if (options.AllowQAndAG && pair is "AG" or "GA") Replace(i, 2, "Q", [weights[i] + weights[i + 1]], "AG/GA to Q");
             if (options.AllowAdjacentOrderSwap && sequence[i] != sequence[i + 1])
-                Replace(i, 2, new string([sequence[i + 1], sequence[i]]), [weights[i + 1], weights[i]], "Adjacent equal-mass order");
+                Replace(i, 2, new string([sequence[i + 1], sequence[i]]), [weights[i + 1], weights[i]], "adjacent order swap (same pair mass)");
         }
         return result.GroupBy(v => v.Sequence + "\u001f" + string.Join(",", v.Weights.Select(w => w.ToString("R", System.Globalization.CultureInfo.InvariantCulture))), StringComparer.Ordinal)
             .Select(g => g.First()).OrderBy(v => v.Rewrites).ThenBy(v => v.Sequence, StringComparer.Ordinal).ThenBy(v => v.Rule, StringComparer.Ordinal).ToArray();
