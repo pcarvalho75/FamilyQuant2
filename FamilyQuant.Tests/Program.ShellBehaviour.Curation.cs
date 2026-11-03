@@ -134,11 +134,11 @@ internal static partial class Program
                 var review = SecondaryHost(new SuperClusterPreviewWindow(blank));
                 try
                 {
-                    var apply = WalkTree(review).OfType<Button>().Single(value => value.Content as string == "Apply");
+                    var apply = (Button)review.FindName("createButton");
                     var offered = (DataGrid?)review.GetType().GetField("grid", BindingFlags.Instance | BindingFlags.NonPublic)?.GetValue(review)
                         ?? WalkTree(review).OfType<DataGrid>().First(value => value.IsVisible && value.Items.Count > 0);
                     offered.SelectAll();
-                    SecondaryClick(WalkTree(review).OfType<Button>().Single(value => value.Content as string == "Untick selected")); PumpDispatcher();
+                    SecondaryCall(review, review.GetType(), "UntickSelected_Click", review, new RoutedEventArgs()); PumpDispatcher();
                     R(["0F3C5F5D43F5"], "blank keyword Apply gate", disabled && enabled && !apply.IsEnabled, "old blank false/nonblank true", apply.IsEnabled);
                 }
                 finally { review.Close(); }
@@ -163,7 +163,7 @@ internal static partial class Program
                     string text = "";
                     var item = (MenuItem)shell.FindName(menu);
                     if (!item.IsEnabled) throw new InvalidOperationException("Help command is disabled.");
-                    Capture(() => item.RaiseEvent(new RoutedEventArgs(MenuItem.ClickEvent, item)), window =>
+                    Capture(() => typeof(MenuItem).GetMethod("OnClick", BindingFlags.Instance | BindingFlags.NonPublic)!.Invoke(item, null), window =>
                     { if (window.Owner != shell) throw new InvalidOperationException("Help window lost its owner."); text = WalkTree(window).OfType<TextBox>().Single().Text; });
                     return text;
                 }

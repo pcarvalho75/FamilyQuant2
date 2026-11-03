@@ -154,3 +154,18 @@ footer defect was caught by the importer and fixed before the authoritative runs
 reasons for every remaining gap, including the three unexecuted 1001-count cases, missing
 Start-page next-step guidance, actual USEARCH phase cancellation and shell Help adapters.
 No product edit or DROP is supplied by this batch.
+
+The final `--prove-shell-behaviour2` scope contains sixteen rows. The native harness
+invokes `MenuItem.OnClick`, which executes command bindings as well as Click handlers.
+It compares Families and De novo Help, workflow Help and the F1 replacement route;
+uses the named grouping confirmation button; executes both no-reconciliation writer
+guards; writes empty-run native cache artifacts through both real serializers; and
+executes actual redundancy removal before checking restored controls, headers and order.
+The cache check compares the complete JSON schema and exact numeric double bits, allowing
+only equivalent numeric spellings such as 5 and 5.0. No tolerance is introduced.
+Frozen redundancy's combined duplicate headers are retained and compared exactly.
+The authoritative packet is `D:/FamilyQuant-data/out-shell/behaviour2`: final1/final2
+each have ten passed/zero failed/zero skipped, nine supported/seven OPEN rows. All sixteen
+fact records and four cache/FASTA data artifacts repeat byte-identically. Every remaining
+gap is listed in `D:/FamilyQuant-data/reviews/behaviour2-FQShell-results.tsv`.
+Only requested case groups run; unrelated approved execution/input packets are not replayed.

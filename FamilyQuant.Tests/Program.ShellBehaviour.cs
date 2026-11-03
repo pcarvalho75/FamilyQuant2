@@ -22,6 +22,7 @@ internal static partial class Program
     {
         if (args.Length != 6) throw new ArgumentException("Supply frozen source/app, fixed behaviour JSON, fresh output and date.");
         string output = Path.GetFullPath(args[4]);
+        string step = args[0] == "--prove-shell-behaviour2" ? "SH-behaviour2" : "SH-behaviour";
         if (!NativeProofDesktop.IsPrivate) return NativeProofDesktop.Run(args, output + ".isolated-process.log");
         if (Directory.Exists(output)) throw new IOException("Use a fresh behaviour output.");
         Directory.CreateDirectory(output);
@@ -31,6 +32,8 @@ internal static partial class Program
         var oldContext = SynchronizationContext.Current;
         SynchronizationContext.SetSynchronizationContext(new DispatcherSynchronizationContext(Dispatcher.CurrentDispatcher));
         var facts = new Dictionary<string, ShellBehaviourFact>(StringComparer.Ordinal);
+        using var requested = JsonDocument.Parse(File.ReadAllText(args[3]));
+        var ids = requested.RootElement.EnumerateObject().Select(value => value.Name).ToHashSet(StringComparer.Ordinal);
         try
         {
             EnsureApplication();
@@ -46,6 +49,7 @@ internal static partial class Program
                 foreach (string id in ids)
                 {
                     string full = id.StartsWith("FQ15-", StringComparison.Ordinal) ? id : "FQ15-" + id;
+                    if (!requested.RootElement.TryGetProperty(full, out _)) continue;
                     facts[full] = new(full, name, pass, b, a, reason);
                 }
                 if (pass) Check("SH behaviour " + name, true);
@@ -53,6 +57,7 @@ internal static partial class Program
             }
             void Attempt(string[] ids, string name, Action action)
             {
+                if (!ids.Any(id => requested.RootElement.TryGetProperty(id.StartsWith("FQ15-", StringComparison.Ordinal) ? id : "FQ15-" + id, out _))) return;
                 try { action(); }
                 catch (Exception ex)
                 {
@@ -82,6 +87,44 @@ internal static partial class Program
                     string actual = currentDeNovo.ViewModel.MissingRunsSentence();
                     Record(["95D4A5E286C3"], "missing-run empty native contract", before == "none." && actual == before, before, actual);
                 });
+                Attempt(["8504F0703DBD"], "empty reconciliation export writer guard", () =>
+                {
+                    string path = Path.Combine(output, "absent-review.csv"); string before = "", actual = "";
+                    try { SecondaryCall(oldDeNovo, oldDeNovo.GetType(), "ExportReviewQueueCsv", path); }
+                    catch (TargetInvocationException ex) when (ex.InnerException is InvalidOperationException error) { before = error.Message; }
+                    try { currentDeNovo.ExportReviewQueueCsv(path); }
+                    catch (InvalidOperationException error) { actual = error.Message; }
+                    bool disabled = !((Button)oldDeNovo.FindName("ButtonExportReviewQueue")).IsEnabled && !((Button)currentDeNovo.FindName("ButtonExportReviewQueue")).IsEnabled;
+                    Record(["8504F0703DBD"], "empty reconciliation export writer guard", disabled && before.Length > 0
+                        && before.Replace("Layer 2", "Step 2", StringComparison.Ordinal) == actual && !File.Exists(path), before, actual);
+                });
+                Attempt(["7497282283CE"], "empty-run native cache artifact fallback", () =>
+                {
+                    string oldRoot = Path.Combine(output, "cache-frozen"), newRoot = Path.Combine(output, "cache-current");
+                    string oldPath = (string)SecondaryCall(null, oldDeNovo.GetType(), "CachePathFor", "", oldRoot)!;
+                    string newPath = DeNovoScreenOperations.CachePathFor("", newRoot);
+                    var value = new FamilyQuant.DeNovo.DeNovoXicResult { RunName = "", ScanNoMS2 = 17, Charge = 2, PrecursorMz = 500,
+                        IsotopeAreas = new[] { 4.0, 2.0, 1.0 } };
+                    var oldResultType = legacy.GetType("FamilyQuant.DeNovo.DeNovoXicResult", true)!;
+                    object oldValue = JsonSerializer.Deserialize(JsonSerializer.Serialize(value), oldResultType)!;
+                    var oldCacheType = legacy.GetType("FamilyQuant.DeNovo.DeNovoXicCache", true)!;
+                    object oldCache = SecondaryCall(null, oldCacheType, "Load", oldPath, "", 5.0, 1, 3, 3, "owned-cache-fallback")!;
+                    SecondaryCall(oldCache, oldCacheType, "Put", oldValue); SecondaryCall(oldCache, oldCacheType, "Save");
+                    var cache = FamilyQuant.DeNovo.DeNovoXicCache.Load(newPath, "", 5, 1, 3, 3, "owned-cache-fallback"); cache.Put(value); cache.Save();
+                    using var oldJson = JsonDocument.Parse(File.ReadAllText(oldPath)); using var newJson = JsonDocument.Parse(File.ReadAllText(newPath));
+                    bool SameCache(JsonElement before, JsonElement actual) => before.ValueKind == actual.ValueKind && before.ValueKind switch
+                    {
+                        JsonValueKind.Object => before.EnumerateObject().Count() == actual.EnumerateObject().Count()
+                            && before.EnumerateObject().All(property => actual.TryGetProperty(property.Name, out var other) && SameCache(property.Value, other)),
+                        JsonValueKind.Array => before.GetArrayLength() == actual.GetArrayLength()
+                            && before.EnumerateArray().Zip(actual.EnumerateArray()).All(pair => SameCache(pair.First, pair.Second)),
+                        JsonValueKind.Number => BitConverter.DoubleToInt64Bits(before.GetDouble()) == BitConverter.DoubleToInt64Bits(actual.GetDouble()),
+                        _ => before.GetRawText() == actual.GetRawText()
+                    };
+                    Record(["7497282283CE"], "empty-run native cache artifact fallback", Path.GetFileName(oldPath) == "denovo_xic_run.json"
+                        && Path.GetFileName(newPath) == Path.GetFileName(oldPath) && SameCache(oldJson.RootElement, newJson.RootElement),
+                        File.ReadAllText(oldPath), File.ReadAllText(newPath));
+                });
             }
             finally { oldDnWindow.Close(); dnWindow.Close(); }
             Attempt(["E3939DBDC9B0"], "detached Quantify browse guard", () =>
@@ -102,8 +145,6 @@ internal static partial class Program
             });
             string root = FindLedgerRoot()!;
             var inventory = JsonSerializer.Deserialize<FeatureLedger.Inventory>(File.ReadAllText(Path.Combine(root, "docs/feature-ledger-scan.json")))!;
-            using var requested = JsonDocument.Parse(File.ReadAllText(args[3]));
-            var ids = requested.RootElement.EnumerateObject().Select(value => value.Name).ToHashSet(StringComparer.Ordinal);
             var cohort = inventory.Observations.Where(row => ids.Contains(row.Id)).ToArray();
             foreach (var source in inventory.Files.Where(file => cohort.Any(row => row.Source == file.Path)))
                 if (FeatureLedgerEvidence.Hash(Path.Combine(args[1], source.Path)) != source.Sha256) throw new InvalidDataException("Frozen source differs: " + source.Path);
@@ -126,16 +167,16 @@ internal static partial class Program
             start.ArgumentList.Add("rev-parse"); start.ArgumentList.Add("HEAD"); using var git = Process.Start(start)!;
             string commit = git.StandardOutput.ReadToEnd().Trim(); git.WaitForExit();
             var artifacts = Directory.GetFiles(output, "*", SearchOption.AllDirectories).Select(path => new FeatureLedgerEvidence.Artifact(path, FeatureLedgerEvidence.Hash(path))).ToList();
-            var run = new FeatureLedgerEvidence.Run("SH-behaviour", Environment.CommandLine, args[5], commit, artifacts, root);
+            var run = new FeatureLedgerEvidence.Run(step, Environment.CommandLine, args[5], commit, artifacts, root);
             var rows = cohort.Select(row =>
             {
                 var fact = facts[row.Id]; return new FeatureLedgerEvidence.Row(row.Id, fact.Passed ? implementation : new(), fact.Passed
-                    ? new() { new("SH-behaviour", "test", nameof(ShellBehaviour), "SH behaviour " + fact.Case, proof, "") } : new(),
+                    ? new() { new(step, "test", nameof(ShellBehaviour), "SH behaviour " + fact.Case, proof, "") } : new(),
                     fact.Passed ? "Native frozen/current comparison; no product change." : "OPEN: " + fact.Reason,
                     Compared: fact.Passed ? row.Source + ":" + row.Line + " " + row.Detail + "; before=" + fact.Before + "; actual=" + fact.Actual : null);
             }).ToList();
-            FeatureLedgerEvidence.WriteJson(Path.Combine(output, "SH-behaviour.json"), new FeatureLedgerEvidence.Register(1, "SH-behaviour", FeatureLedger.ReferenceCommit, new() { run }, rows));
-            Console.WriteLine("SH-behaviour: " + rows.Count(row => row.Proofs.Count > 0) + " supported; " + rows.Count(row => row.Proofs.Count == 0) + " OPEN.");
+            FeatureLedgerEvidence.WriteJson(Path.Combine(output, step + ".json"), new FeatureLedgerEvidence.Register(1, step, FeatureLedger.ReferenceCommit, new() { run }, rows));
+            Console.WriteLine(step + ": " + rows.Count(row => row.Proofs.Count > 0) + " supported; " + rows.Count(row => row.Proofs.Count == 0) + " OPEN.");
             Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
             return failed == 0 ? 0 : 1;
         }

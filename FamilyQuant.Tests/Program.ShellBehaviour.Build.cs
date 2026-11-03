@@ -20,6 +20,31 @@ internal static partial class Program
         bool[] State(UserControl view) => buttons.Select(name => ((Button)view.FindName(name)).IsEnabled).ToArray();
         try
         {
+            attempt(["3385D4BF21BC", "7AC0BC9F0603"], "native redundancy completion returns controls and preserves headers", () =>
+            {
+                string path = Path.Combine(output, "redundancy.fasta");
+                const string fasta = ">first owned header\nACDEFGHIKLMNPQRSTVWY\n>duplicate second header\nACDEFGHIKLMNPQRSTVWY\n>third owned header\nVVVVVVVVVVVVVVVVVVK\n";
+                File.WriteAllText(path, fasta); string hash = FeatureLedgerEvidence.Hash(path);
+                string target = Path.Combine(output, "redundancy_NO_REDUNDANCY.fasta");
+                var oldBefore = State(old);
+                using (var driver = new NativeOwnedDialogDriver(path))
+                {
+                    SecondaryCall(old, old.GetType(), "ButtonRemoveRedundancy_Click", old, new RoutedEventArgs());
+                    var watch = System.Diagnostics.Stopwatch.StartNew();
+                    while ((old.GetType().GetField("busy", BindingFlags.NonPublic | BindingFlags.Instance)?.GetValue(old) is true) && watch.Elapsed < TimeSpan.FromSeconds(30))
+                    { PumpDispatcher(); System.Threading.Thread.Sleep(5); }
+                }
+                string before = File.ReadAllText(target); File.Copy(target, Path.Combine(output, "frozen-redundancy.fasta")); File.Delete(target);
+                current.ViewModel.DatabasePath = path; PumpDispatcher(); var currentBefore = State(current);
+                SecondaryClick((Button)current.FindName("ButtonRemoveRedundancy")); FinishBusyOperation(AppOperationHost.For(current)); PumpDispatcher();
+                string actual = File.ReadAllText(target); File.Copy(target, Path.Combine(output, "current-redundancy.fasta"));
+                R(["3385D4BF21BC", "7AC0BC9F0603"], "native redundancy completion returns controls and preserves headers", before == actual
+                    && before.IndexOf("first owned header", StringComparison.Ordinal) < before.IndexOf(">third owned header", StringComparison.Ordinal)
+                    && before.Contains("first owned header", StringComparison.Ordinal) && before.Contains("duplicate second header", StringComparison.Ordinal)
+                    && before.Contains(">third owned header", StringComparison.Ordinal)
+                    && FeatureLedgerEvidence.Hash(path) == hash && State(old).SequenceEqual(oldBefore) && State(current).SequenceEqual(currentBefore),
+                    new { fasta = before, controls = State(old) }, new { fasta = actual, controls = State(current) });
+            });
             attempt(["94CC1A1E09A7", "5F8DD620BA18", "ABE30F08F684"], "native busy reentry and return of controls", () =>
             {
                 var a = State(old); var b = State(current);
