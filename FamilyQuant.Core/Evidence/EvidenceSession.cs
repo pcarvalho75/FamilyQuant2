@@ -39,7 +39,7 @@ namespace FamilyQuant.Evidence
             return new PreparedSession(selection.SessionSearch, references, motifs, results);
         }
 
-        private static List<NeighbourReference>? ValidateSearch(FamilyClusterFile file, NeighbourSearch? search,
+        internal static List<NeighbourReference>? ValidateSearch(FamilyClusterFile file, NeighbourSearch? search,
             IReadOnlyList<NeighbourReference>? suppliedReferences, EvidenceClassificationOptions options, Operations.OperationContext? operation,
             bool allowLegacyCoverage = false)
         {
@@ -90,6 +90,24 @@ namespace FamilyQuant.Evidence
                         : neighbour.QueryAlignedResidues is int covered && NearestReviewed.PassesGate(neighbour.IdentityPercent, covered, neighbour.QueryLength,
                             search.MinIdentityPercent, search.MinQueryAlignedPercent)) || neighbour.TiedFamilies.Any(f => !families.Contains(f)))
                     throw new InvalidOperationException("A session neighbour is inconsistent with its current query, reference or search gate.");
+                if (search.TieMethod == NearestReviewed.ReferenceTieMethod)
+                {
+                    var alternatives = neighbour.TiedReferences ?? new List<NearestNeighbourTie>();
+                    var keys = new HashSet<string>(StringComparer.Ordinal) { ReferenceKey(neighbour.Accession, neighbour.Reference, neighbour.Family) };
+                    foreach (var alternative in alternatives)
+                        if (!keys.Add(ReferenceKey(alternative.Accession, alternative.Reference, alternative.Family))
+                            || !referenceByKey.TryGetValue(ReferenceKey(alternative.Accession, alternative.Reference, alternative.Family), out var tiedMatches)
+                            || alternative.Accession == NearestReviewed.EntryAccession(query.SequenceIdentifier)
+                            || alternative.AlignmentLength <= 0 || !tiedMatches.Any(r => r.Sequence.Length == alternative.ReferenceLength)
+                            || alternative.QueryAlignedResidues is not int tiedCovered
+                            || !NearestReviewed.PassesGate(neighbour.IdentityPercent, tiedCovered, neighbour.QueryLength,
+                                search.MinIdentityPercent, search.MinQueryAlignedPercent))
+                            throw new InvalidOperationException("An equally close reference is inconsistent with the search evidence.");
+                    string[] expectedTies = alternatives.Select(a => a.Family).Where(f => f != neighbour.Family)
+                        .Distinct(StringComparer.Ordinal).OrderBy(f => f, StringComparer.Ordinal).ToArray();
+                    if (!expectedTies.SequenceEqual(neighbour.TiedFamilies))
+                        throw new InvalidOperationException("The tied source-family labels do not match the equally close references.");
+                }
             }
             return references;
         }
