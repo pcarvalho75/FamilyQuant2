@@ -470,4 +470,5 @@ Paulo agreed these at the restart, 2026-11-01.
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
 | K5 | Interpretation drafted from the desk's outline, numbers left as marked places | M | 0.5 | 🟢 | K6 | The draft posted | OP | | 0 | 0 | |
+| K6 | The rerun project saved with master's build and the report details, the written interpretation EMPTY (Paulo, 11-03 08:40: "the report is to be performed without an LLM"); the open warms the cache for the final export | L | 0.3 | K2, K4 | K7, K10, K14 | final-input.fqproj saved; interpretation field empty | OP | | 0 | 0 | |
 
