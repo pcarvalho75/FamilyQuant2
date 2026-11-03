@@ -432,6 +432,7 @@ Paulo agreed these at the restart, 2026-11-01.
 | J24b | J24 (export progress) and J31 (Export report available after opening) merged | L | 0.1 | 🟢 | J24c, K8, K14 | Gate green | SH | | 0 | 0 | |
 | J34a | The report's look: the 38-page rehearsal report read page by page as a scientist would | M | 0.5 | 🟢 | J34b | A numbered list with page, figure id and file:line | LK | | 0 | 0 | |
 | J16b | J16 re-reviewed and merged | L | 0.2 | 🟢 | J34b, K8, K14 | Approved; gate green | LK | | 0 | 0 | |
+| J30c | J30 reviewed and merged | L | 0.2 | J30b | J24c, J32c, J34b, J36b, K8, K14 | Approved; gate green | RS | | 0 | 0 | |
 
 ### W7 Clear reasons and totals
 
