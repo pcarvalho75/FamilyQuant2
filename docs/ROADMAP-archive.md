@@ -231,6 +231,8 @@ Finished steps, moved here from docs/ROADMAP.md. The board shows them as green.
 | J1a | Family panel in the project: for each family its code, names, decision, Pfam list, subclasses to report, literature abundance, notes and sources, stored in the `.fqproj` and the recipe | M | 1.5 | 🟢 | J1b, J1c, J2a, J3a, J5c, J6c | Round trip test; an old project opens and saves its old bytes | EV | | 0 | 0 | |
 | J1b | Read a panel from a spreadsheet as the user sent it: columns chosen by header; each distinct decision value mapped by the user to Quantify, Report under others, Not a family, or Merge into a named family; the choices stored | M | 2 | J1b0 | J1d, J2a | Native test on a copy of Ana's file: 41 rows read, her mapping replayed from the recipe | AS | | 0 | 0 | |
 | J1c | Check the panel's Pfam accessions against InterPro: each accession's name against the panel's name, every mismatch listed for the user, nothing changed silently | L | 1 | 🟢 | J2a | Live check on Ana's file prints every mismatch; offline it says it could not check | EV | | 0 | 0 | |
+| J1d | File > Import family panel: the panel table, the decision mapping and the Pfam check on one screen, with Help in general words | M | 1.5 | 🟢 | J7a | Native captures in both themes; a choice changes the stored panel and Undo restores it | T1 | | 0 | 0 | |
+| J1e | Simple family input: on the same screen, a table where a person adds, edits and removes families (name, decision from a list, Pfam codes, subclasses) with Undo, plus Save panel as spreadsheet, a template that imports back unchanged | M | 1.5 | 🟢 | J7a | Native test: type a family, save, reopen, export the spreadsheet and import it back with identical panel | T1 | | 0 | 0 | |
 
 ### W6 The Word report, written by the program
 
