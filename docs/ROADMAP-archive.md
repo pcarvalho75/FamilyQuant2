@@ -437,6 +437,8 @@ Paulo agreed these at the restart, 2026-11-01.
 | J30c | J30 reviewed and merged | L | 0.2 | J30b | J24c, J32c, J34b, J36b, K8, K14 | Approved; gate green | RS | | 0 | 0 | |
 | J32c | Export timing on the full-run copy: the attribution step with the cache warm, its sub-steps timed | L | 0.3 | J41b | J32d, J39 | `READY` with the sub-step times before and after | T1 | | 0 | 0 | |
 | J41a | No list in one cell: on Ana's project the supplement refused to write because one cell, a family's 1,970 unexplained peptide sequences, is 38,388 characters (Excel's limit is 32,767); a list goes to its own one-row-per-item sheet, the Word file and CSVs keep their counts | M | 0.5 | 🟢 | J41b, J30b | A fixture with a list longer than Excel's limit writes the workbook; every item is in the list sheet; nothing is truncated | FL | | 0 | 0 | |
+| J32d | J32 reviewed and merged | L | 0.2 | 🟢 | K14 | Approved; gate green | T1 | | 0 | 0 | |
+| J36a | Delivery command built and tested on a small computed project: export, trace, project, panel, read-me, checks, nothing written outside its folder | M | 0.5 | 🟢 | J36b | Fixture run passes | RS | | 0 | 0 | |
 
 ### W7 Clear reasons and totals
 
@@ -447,6 +449,8 @@ Paulo agreed these at the restart, 2026-11-01.
 | J27b | One total per panel family: the program computes and stores the per-panel-family totals when several families share a panel family (contract posted) | M | 1 | 🟢 | J27c | A fixture's stored totals credit a shared peptide once | FL | | 0 | 0 | |
 | J27c | The per-family briefs and new exports read those totals; the headline keeps its unit (D40) | M | 0.5 | J27b | J27d | Old exports unchanged; new exports added | FL | | 0 | 0 | |
 | J33c | J33 reviewed and merged | L | 0.2 | 🟢 | J37a, J40 | Approved; gate green | T2 | | 0 | 0 | |
+| J37a | A confirmed family link keeps a short note on why, saved with the project and printed in the report's method | L | 0.5 | 🟢 | J37b | Survives save and reopen; appears in the method table | T2 | | 0 | 0 | |
+| J37b | J37 reviewed and merged | L | 0.2 | J37a | | Approved; gate green | T2 | | 0 | 0 | |
 
 ### W4 Release 2.1.0 on GitHub
 

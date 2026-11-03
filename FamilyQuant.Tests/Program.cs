@@ -248,6 +248,7 @@ namespace FamilyQuant.Tests
             suite.Add(() => DesktopWorldChecks());
             suite.Add(() => EvidenceTaskTests());
             suite.AddWithApplication(() => ScopeVisibilityTests());
+            suite.AddWithApplication(() => PanelLinkNotesTests());
             suite.Add(() => EvidenceClassifierTests());
             suite.AddWithApplication(() => FamilyPanelSubclassTests());
             suite.Add(() => EvidenceDeliveryFixtureTests(workDir));
@@ -324,6 +325,7 @@ namespace FamilyQuant.Tests
             suite.Add(() => WordReportTests(null));
             suite.Add(() => ReportNumberTraceTests());
             suite.AddWithApplication(() => ReportStoredChecks());
+            suite.AddWithApplication(() => ReportAttributionCacheTests());
             suite.Add(() => ReportPairedSummaryTests());
             suite.AddWithApplication(() => ReportSupplementChecks(null));
             suite.Add(() => ReportTableSheetTests(null));

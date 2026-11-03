@@ -71,8 +71,11 @@ The rerun of the full analysis with the scope "Toxin", "venom gland" (D39), so t
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| K6 | Numbers filled from the rerun and written into the project's Report details through the program; project saved | L | 0.3 | 🟢 | K7, K10, K14 | `interpreted.fqproj` saved, with the source of every number | OP | | 0 | 0 | |
-| K7 | Second reader: every number in the interpretation matched to its cell in the program's exports | M | 0.4 | K6 | K17 | A table of number, source cell and match, with no mismatch | GR2 | | 0 | 0 | |
+| K6 | The rerun project saved with master's build and the report details, the written interpretation EMPTY (Paulo, 11-03 08:40: "the report is to be performed without an LLM"); the open warms the cache for the final export | L | 0.3 | K2, K4 | K7, K10, K14 | final-input.fqproj saved; interpretation field empty | OP | | 0 | 0 | |
+| K7 | Second reader: every number in the program-written Summary of findings (J44) on Ana's project matched to its cell in the program's exports | M | 0.4 | J44b, K6 | K17 | A table of number, source cell and match, with no mismatch | GR2 | | 0 | 0 | |
+| J44a | The program interprets as much as it can without an LLM (Paulo, 11-03 08:45: "strict results like do tables, and very informative plots"): a Summary of findings section from the stored studies with fixed templates, only data-bound statements (values, counts, ranks, ranges, presence, comparisons with stored references), and, where the panel holds numeric references, observed share against the panel's reference per family; numbers in a supplement sheet | M | 1 | 🟢 | J44b | Red then green on a fixture: every sentence present when its data exist, absent when not; numbers equal the headline and studies; D21 guard passes | OP | | 0 | 0 | |
+| J44b | J44 reviewed and merged | L | 0.2 | J44a | K7, K14 | Approved; gate green | OP | | 0 | 0 | |
+| J45 | File > Export > Interpretation input: one plain file a user can give to an AI assistant of their choice (report details, the panel table as entered, the result tables, the analysis choices, a neutral instruction to quote numbers only from the tables); the program never calls an LLM (Paulo, 11-03) | L | 0.5 | J44a | | Deterministic export; its test; D21 wording | OP | | 0 | 0 | |
 
 ### W3 The report export works and is fast
 
@@ -83,10 +86,8 @@ The export failed on Ana's project (a figure read the on-screen palette from the
 | J41b | J41 reviewed and merged | L | 0.2 | 🟢 | J30c, J32c | Approved; gate green | FL | | 0 | 0 | |
 | J30b | The fixed export runs to the end on a copy of the full-run project through the real command | M | 0.5 | 🟢 | J30c | Word report and supplement written; times reported | RS | | 0 | 0 | |
 | J24c | Export progress on the full-run project, read from J30b's real export (which runs with the merged progress): the longest gap between two steps named | L | 0.3 | J30b | K14 | `READY` names the longest gap and its step | RS | | 0 | 0 | |
-| J32d | J32 reviewed and merged | L | 0.2 | 🟢 | K14 | Approved; gate green | T1 | | 0 | 0 | |
 | J39 | Cache the two source census searches as well, if J32c shows they cost more than a minute | M | 1 | 🟢 | | Byte-identical report data; the export time before and after | T1 | | 0 | 0 | |
-| J36a | Delivery command built and tested on a small computed project: export, trace, project, panel, read-me, checks, nothing written outside its folder | M | 0.5 | 🟢 | J36b | Fixture run passes | RS | | 0 | 0 | |
-| J36b | Delivery rehearsal on the first full-run project into a staging folder | L | 0.3 | J36a | J36c | Summary with hashes and the trace's count | RS | | 0 | 0 | |
+| J36b | Delivery rehearsal on the first full-run project into a staging folder | L | 0.3 | 🟢 | J36c | Summary with hashes and the trace's count | RS | | 0 | 0 | |
 | J36c | J36 reviewed and merged | L | 0.2 | J36b | K17 | Approved; gate green | RS | | 0 | 0 | |
 | J34b | Look fixes for the listed items | M | 1 | 🟢 | J34c | Each item fixed or ruled | LK | | 0 | 0 | |
 | J34c | J34 reviewed and merged | L | 0.2 | J34b | K14 | Approved; gate green | LK | | 0 | 0 | |
@@ -106,7 +107,7 @@ Ana installs it from the public releases page (D31); the desk publishes on Paulo
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| K14 | Final export of the interpreted project through the real command, on master with J30, J24, J16, J32 and J34 | L | 0.5 | K6, J24c, J32d, J34c | K15, K16 | Word report and supplement written | OP | | 0 | 0 | |
+| K14 | Final export of the interpreted project through the real command, on master with J30, J24, J16, J32 and J34 | L | 0.5 | K6, J24c, J34c, J44b | K15, K16 | Word report and supplement written | OP | | 0 | 0 | |
 | K15 | Number trace on the final report: every number found, or each one not found ruled | L | 0.2 | K14 | K17 | `trace.csv` with nothing left open | T1 | | 0 | 0 | |
 | K16 | The final report's pages read for look and sense | L | 0.3 | K14 | K17 | No blocking item | LK | | 0 | 0 | |
 | K17 | Delivered: the Word report, supplement, project, family panel and a read-me with the release link written to `AnaG/Bjararaca/Relatorio`; nothing else in Ana's folders touched | L | 0.2 | K7, K15, K16, J36c, K11 | | The five items with hashes; the rest of AnaG unchanged | OP | | 0 | 0 | |
@@ -131,8 +132,6 @@ Compute took 37 to 54 minutes on Ana's project with the RAW cache warm, silent f
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| J37a | A confirmed family link keeps a short note on why, saved with the project and printed in the report's method | L | 0.5 | 🟢 | J37b | Survives save and reopen; appears in the method table | T2 | | 0 | 0 | |
-| J37b | J37 reviewed and merged | L | 0.2 | J37a | | Approved; gate green | T2 | | 0 | 0 | |
 | J27d | J27 reviewed and merged | L | 0.2 | 🟢 | | Approved; gate green | FL | | 0 | 0 | |
 | J43 | With a panel in use, the headline and composition figures use the per-panel-family totals (D40, B): before and after shown on a real project with several families in one panel family, science review, the old unit kept in the supplement | M | 1 | J27d | | Red then green on a multi-family fixture; before/after table on a real project; reviewed | FL | | 0 | 0 | |
 | J40 | Help explains what 2.1 adds: the progress lines, the cached reopen, "no peptide observed", the scope phrases, link notes | L | 0.5 | J35c | | A test reads each menu name in the text from the live menu | T2 | | 0 | 0 | |
