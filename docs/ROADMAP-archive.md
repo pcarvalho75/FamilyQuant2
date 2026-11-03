@@ -230,6 +230,7 @@ Finished steps, moved here from docs/ROADMAP.md. The board shows them as green.
 | J1b0 | One package, DocumentFormat.OpenXml, to read `.xlsx` and write `.docx`; pinned and recorded in DEPENDENCIES.md | L | 0.5 | 🟢 | J1b, J6a | Build, dependency check, publish payload lists the DLL | AS | | 0 | 0 | |
 | J1a | Family panel in the project: for each family its code, names, decision, Pfam list, subclasses to report, literature abundance, notes and sources, stored in the `.fqproj` and the recipe | M | 1.5 | 🟢 | J1b, J1c, J2a, J3a, J5c, J6c | Round trip test; an old project opens and saves its old bytes | EV | | 0 | 0 | |
 | J1b | Read a panel from a spreadsheet as the user sent it: columns chosen by header; each distinct decision value mapped by the user to Quantify, Report under others, Not a family, or Merge into a named family; the choices stored | M | 2 | J1b0 | J1d, J2a | Native test on a copy of Ana's file: 41 rows read, her mapping replayed from the recipe | AS | | 0 | 0 | |
+| J1c | Check the panel's Pfam accessions against InterPro: each accession's name against the panel's name, every mismatch listed for the user, nothing changed silently | L | 1 | 🟢 | J2a | Live check on Ana's file prints every mismatch; offline it says it could not check | EV | | 0 | 0 | |
 
 ### W6 The Word report, written by the program
 
@@ -240,6 +241,7 @@ Finished steps, moved here from docs/ROADMAP.md. The board shows them as green.
 | J6c | One section per family from the user's panel: its decision, literature abundance and notes printed beside the observed numbers | M | 1 | J6a | J6e | Panel text appears as written; no fixed organism text | T2 | | 0 | 0 | |
 | J6a | Report writer: a `.docx` with title, contents and methods written from the project's own facts (inputs and hashes, database counts and labels, search and de novo settings, the quantitation rules in force) | M | 2 | J1b0 | J6b, J6c | Opens in Word; fixed wording is general; same bytes under pt-BR and en-US; every Report details field printed in its place | RS | | 0 | 0 | |
 | J6h | Every figure the program already draws goes into the report: ion current, M+0 recovery, XIC mass, isotope count, de novo scores and sources, accepted scores, family-world error rates, Database gap | M | 1.5 | J6a | J6b | Each figure in the document is byte-equal to the program's own PNG export | RS | | 0 | 0 | |
+| J6e | File > Export report: the command, the wait screen, refusal when Results are missing, Help | M | 1 | J6b, J6f | J7c | Native command test writes the document | SH | | 0 | 0 | |
 
 ### W4 Where the peptides fall
 
