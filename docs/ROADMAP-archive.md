@@ -460,6 +460,8 @@ Paulo agreed these at the restart, 2026-11-01.
 | J37b | J37 reviewed and merged | L | 0.2 | J37a | | Approved; gate green | T2 | | 0 | 0 | |
 | J27d | J27 reviewed and merged | L | 0.2 | 🟢 | | Approved; gate green | FL | | 0 | 0 | |
 | J42 | The family-assignment accuracy check (leave-one-out on reviewed proteins) accepts a project whose scope has several phrases: on the D39 project it refuses with "The session search no longer matches the current queries and reviewed references" (EvidenceSession.cs:42-68 does not accept the panel review's stored search over the in-scope references) | L | 0.5 | 🟢 | K14 | Red then green: a fixture with a two-phrase scope runs the audit; on a copy of the D39 project it prints the right, wrong and abstained counts | T2 | | 0 | 0 | |
+| J46a | An Anthropic API key the user can add, test, replace or remove (Help > AI assistant key), stored per user with Windows protection, never in a project, the repository, a log or a report; import from a key file placed next to the project (Paulo, 11-03) | L | 0.5 | J40 | J46b | Fixture tests for works, wrong key, no credit, rate limit, no connection; the key never appears in project bytes | T2 | | 0 | 0 | |
+| J46b | Optional "Draft interpretation with AI": the user sees exactly what is sent (J45's input), confirms, the text returns into the interpretation field labelled "AI draft (model, date)", and every number in it is checked against the program's own tables (J18 trace) before the user accepts | M | 1 | J46a | J46c | Fake-transport tests for every outcome; one live call reported; works fully without a key | T2 | | 0 | 0 | |
 
 ### W4 Release 2.1.0 on GitHub
 
