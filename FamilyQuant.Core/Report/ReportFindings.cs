@@ -106,7 +106,7 @@ public static class ReportFindings
             numbers.Add(new[] { statement, quantity, value });
             return value;
         }
-        void Say(string id, string text) => blocks.Add(new ReportParagraph("findings:" + id, text));
+        void Say(string id, string text, bool keepWithNext = false) => blocks.Add(new ReportParagraph("findings:" + id, text) { KeepWithNext = keepWithNext });
         // Protein-name text as the rest of the report prints it: the header's OS= field and what follows are left out (J12).
         string Name(int userId) => input.Labels.TryGetValue(userId, out string? label) ? ProteinNameFormatting.ForNewOutput(label) : Integer(userId);
         var grouping = input.Grouping;
@@ -208,7 +208,8 @@ public static class ReportFindings
         foreach (var source in input.DeNovoInputs.GroupBy(i => i.SourceId, StringComparer.Ordinal).Select(g => g.First()))
             choices.Add("de novo source \"" + source.SourceDisplayName + "\" with " + source.ConfidenceField + " at least "
                 + Record("choices", source.SourceDisplayName + " minimum " + source.ConfidenceField, source.MinimumConfidence.ToString("R", CultureInfo.InvariantCulture)));
-        Say("choices", "Analysis choices in force: " + string.Join("; ", choices) + ".");
+        // The numbers table below becomes a workbook reference paragraph; it stays on this sentence's page.
+        Say("choices", "Analysis choices in force: " + string.Join("; ", choices) + ".", keepWithNext: true);
 
         string csv = Csv(new[] { "statement", "quantity", "value" }, numbers);
         blocks.Add(new ReportTable("findings-numbers", "Numbers in the summary of findings", new[] { "Statement", "Quantity", "Value" }, numbers,

@@ -22,7 +22,11 @@ public sealed record ReportDocument
 
 public sealed record ReportSection(string Id, string Title, IReadOnlyList<ReportBlock> Blocks);
 public abstract record ReportBlock(string Id);
-public sealed record ReportParagraph(string Id, string Text) : ReportBlock(Id);
+public sealed record ReportParagraph(string Id, string Text) : ReportBlock(Id)
+{
+    /// <summary>Word keeps this paragraph on the page of the block that follows it.</summary>
+    public bool KeepWithNext { get; init; }
+}
 
 /// <summary>Cells contain the exact invariant strings used by the program's corresponding export.</summary>
 public sealed record ReportTable(string Id, string Title, IReadOnlyList<string> Columns,
