@@ -55,10 +55,23 @@ internal static partial class Program
         {
             string csv = CsvReport.BuildFamilyComposition(result, policy, 2, "measured signal");
             var rows = csv.Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries).Skip(1).Select(ParseCsvLine).Where(r => r[0].Length > 0).ToArray();
-            Check("J12: " + policy + " family export stops the source name before organism metadata", rows.Single(r => r[0] == "1")[1] == "Protein, example (Fragment)");
+            Check("J12: " + policy + " historical family export retains its complete description", rows.Single(r => r[0] == "1")[1] == source);
             Check("J12: " + policy + " already-clean names stay exact, including spaces and qualifiers", rows.Single(r => r[0] == "2")[1] == clean);
+            string newCsv = CsvReport.BuildFamilyComposition(result, policy, 2, "measured signal", ProteinNameFormatting.ForNewOutput);
+            var newRows = newCsv.Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries).Skip(1).Select(ParseCsvLine).Where(r => r[0].Length > 0).ToArray();
+            Check("J12: " + policy + " new-output name helper removes only the organism tail", newRows.Single(r => r[0] == "1")[1] == "Protein, example (Fragment)"
+                && newRows.Single(r => r[0] == "2")[1] == clean);
         }
         Check("J12: presentation cleanup does not mutate stored evidence or labels", result.Families[0].Description == source && result.Families[1].Description == clean);
+        var data = AnalyticsBuilder.Build(Array.Empty<QuantRow>(), new Dictionary<string, double>());
+        var packet = Report.ReportCurrentResults.Build(data, new QuantManifest(), result);
+        var reportTable = packet.Sections.SelectMany(s => s.Blocks).OfType<Report.ReportTable>().Single(t => t.Id == "composition-measured");
+        Check("J12: the Word report table uses the shared cleaned protein name", reportTable.Rows.Single(r => r[0] == "1")[1] == "Protein, example (Fragment)");
+        Check("J12: report companion data for the supplement contains the same cleaned names", !packet.CsvExports["family_composition_measured.csv"].Contains(" OS=", StringComparison.Ordinal)
+            && Report.ReportCsvTable.Build("supplement", "Supplement", packet.CsvExports["family_composition_measured.csv"], "").Rows.Single(r => r[0] == "1")[1] == reportTable.Rows.Single(r => r[0] == "1")[1]);
+        var auditFile = new FamilyClusterFile { MyExtendedFastaItems = new() { new() { SequenceIdentifier = "sp|P00001|ONE", Description = source } } };
+        var auditRow = ParseCsvLine(PanelAuditCsv.BuildCsv(auditFile).Split(new[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries)[1]);
+        Check("J12: panel audit uses the same helper and preserves protein qualifiers", auditRow[1] == "Protein, example (Fragment)");
         var culture = CultureInfo.CurrentCulture;
         try
         {

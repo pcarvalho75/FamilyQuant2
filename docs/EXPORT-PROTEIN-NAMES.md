@@ -1,19 +1,25 @@
-# Exported composition names, J12
+# Names in new outputs, J12
 
-CsvReport.BuildFamilyComposition stops a source protein-name description at the exact ` OS=`
-header marker. It leaves already-clean names unchanged, including their whitespace, quotes and
-fragment qualifiers. Stored descriptions, user annotations and the detailed description CSV are
-unchanged. No family-name selection, grouping or numeric calculation changes.
+`ProteinNameFormatting.ForNewOutput(string?)` is the shared formatter for new report, supplement
+and audit protein-name text. It stops at the exact ` OS=` header marker. Already-clean strings stay
+exact, including whitespace, quotes and fragment qualifiers; null becomes empty. Stored descriptions,
+annotations, name-selection rules and numerical values are unchanged.
 
-`--test-export-protein-names` covers all three sharing policies, preservation of clean labels and
-stored data, locale-independent export, and the existing CSV formatting checks. Red: 16/3/0;
-green: 19/0/0; Release zero warnings/errors.
+The existing four-argument CsvReport.BuildFamilyComposition path retains its signature and historical
+bytes. A new formatter overload lets new outputs opt in. ReportCurrentResults passes the shared helper
+for its Word tables and companion data. Supplement tables consume those same formatted report cells.
+PanelAuditCsv calls the same helper. Newly added direct protein-name columns in report/supplement
+builders should call ForNewOutput; authored panel text is kept verbatim.
 
-The existing golden corpus contains organism tails in composition.csv. Consequently J12 gives
-3/1/0 there: analytics_summary.csv, evidence_pack_numbers.csv and families.csv are byte-identical;
-composition.csv has the requested name cleanup. The native command
-`--verify-export-name-cleanup <baseline.csv> <current.csv> <new-report.json>` verifies that every
-byte outside precisely those tails is identical, including all numeric/basis/ID bytes and clean
-labels. It passed 2/0/0 on the actual golden outputs. Evidence:
-`D:/FamilyQuant-data/out-assay/j12-golden/name-cleanup-verification.json`.
-The frozen corpus was not updated; the desk owns acceptance of this intended label difference.
+Revised checks: a missing-helper red build, then Release zero warnings/errors and
+`--test-export-protein-names` 25/0/0. The checks cover legacy compatibility under all three policies,
+new-output formatting, exact clean names, immutable source, culture-independent output, Word/companion
+table cells, the audit, and existing CSV formatting. Existing `--test-report-draft` passed 11/0/0,
+including the native saved-project Word command.
+
+The required frozen golden is 4/0/0: analytics_summary.csv, composition.csv, evidence_pack_numbers.csv
+and families.csv are byte-identical. Log: `D:/FamilyQuant-data/assay-j12-new-output-golden.log`.
+The earlier formatting-only verification packet is retained at
+`D:/FamilyQuant-data/out-assay/j12-golden/name-cleanup-verification.json`: it proves the helper removes
+33 organism tails while leaving every other byte and 27 clean names unchanged. It is a helper proof;
+the frozen baseline was never changed.
