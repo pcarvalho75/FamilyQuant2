@@ -1,0 +1,101 @@
+# Reviewed panel bulk retrieval
+
+`ReferencePanelFetcher.FetchAsync` uses UniProt's `uniprotkb/stream` endpoint. It sorts and
+case-folds the families found in the file, combines the previous `family:"..."` clauses with
+OR, and splits when adding a clause would take the complete escaped URL above 7,000
+characters or exceed UniProt's 100-condition query limit. No family, taxon or protein list
+is built into the rule. An empty selection makes no requests.
+
+The requested fields are unchanged from the paged route. Every entry goes through the same
+`EvidenceFetcher.Parse` and exact, case-insensitive family-membership filter. Text-search
+matches without the requested membership are dropped. Entries remain unique and sorted by
+accession; similarity prose is dropped and tissue specificity is kept, as before.
+The stream requests gzip transfer encoding and decompresses it before the same JSON parser.
+The decoder also accepts a gzip file whose reply omits the transfer-encoding header, and
+gzip transfer encoding wrapped around a gzip file. Plain JSON remains supported. Invalid
+compression or an unsupported encoding fails without publishing anything.
+
+Stream replies do not supply `X-Total-Results`. Before each stream, a `search` request with
+`size=0`, `fields=accession` and the identical query supplies the completeness count. A missing
+count, missing/changed release, unexpected pagination, incomplete body, malformed entry,
+unreviewed entry, refused request or cancellation prevents publication. All count and stream
+replies must use one release. The combined evidence session also retains its cross-phase
+release check and one final commit. The existing retry and timeout policy is unchanged.
+
+Progress still counts completed families. A completed stream may advance several families
+together, with a cancellation checkpoint at each reported family. All downloaded entries
+remain detached until the entire fetch succeeds. Provider, release, families and retrieval
+time retain the existing stored schema. Projects continue to answer offline.
+
+UniProt documents the shared query/field semantics of search and stream in its
+[API paper](https://doi.org/10.1093/nar/gkaf394). The stream is not resumable; a failed request
+is retried from its start, then the operation fails without a partial panel.
+
+## Checks
+
+`--test-reference-panel-stream` runs stream batching, entry-level parity with the former
+route, release/completeness and cancellation fixtures, the retained paged-panel checks and
+the operation/commit checks. `--test-evidence-fetch-atomic` exercises the real combined
+session and Fetch evidence button. Both are feature-owned commands; the default suite also
+registers the stream checks once in `DefaultSuite`.
+
+`--reference-panel-parity-live <input.fcf> <new-output-directory>` fetches evidence once,
+then times streamed and old paged panel retrieval independently for every discovered family.
+The old route is retained behind `usePagedComparison: true` for this comparison only.
+The checker reads its own supplied source and never consults another running project.
+Ctrl+C requests cancellation.
+
+Add `--resume` to reuse that command's evidence and streamed-panel checkpoints after an
+interrupted paged comparison. The checker verifies the source identifiers/sequences/grouping,
+source hash, requested families and release, then pins the checkpoint hashes. Successful
+paged replies are retained verbatim with their headers and SHA256, so further interruptions
+can replay completed requests without network access. Changed checkpoint or cached bytes are
+refused. Only this comparison transport honors a provider `Retry-After` before retrying a
+429 (30 seconds when omitted); the production retry policy is unchanged. The final paged
+time includes active attempts and retry waits, including any replay processing, and excludes
+time spent with the command stopped. Earlier attempts that predate these resumable captures
+remain separate diagnostics and are not presented as a complete baseline timing.
+
+After a complete successful baseline, `--refresh-stream` fetches a fresh stream and compares
+it to the saved complete paged panel without another paged network fetch. It retains the
+measured original paged time, preserves `baseline-validation.json` and the plain stream
+artifact, and writes `stream-panel-gzip.json` and `streamed-gzip.fqproj`. This mode measures
+the gzip transport change against the same complete baseline, rather than timing a replay
+as if it were a network fetch.
+
+The packet manifests record each response URL, release, total when supplied, body SHA256,
+size and elapsed seconds. `entry-parity.csv` compares the full serialized entry, including
+sequence and every evidence field, by accession. `validation.json` reports the timings,
+request counts, release and mismatch count. Independent panel retrieval timestamps are
+recorded separately; they are the only field excluded from exact panel parity. The fetched
+protein evidence and its provenance timestamps are hashed before and after both routes.
+A successful comparison saves `streamed.fqproj` and reopens it offline, comparing the panel
+and protein evidence again. The original input hash must remain unchanged. These checks do
+not claim new RAW extraction or biological accuracy.
+
+## Full-source timing and parity record
+
+The native comparison used the complete source FCF with SHA256
+`5A30B67FD0FA7B0605BEEFB097FD70DDDB3622B733397E12011AB3B3BB655E13`,
+UniProt release `2026_03`, and every one of its 3,605 discovered families. Both stream
+transports produced the same 308,576 reviewed entries as the complete paged route. Each
+entry's full sequence and evidence were compared by serialized SHA256, with zero mismatches.
+
+| Phase | Measured seconds | Actual HTTP requests |
+|---|---:|---:|
+| Protein evidence | 128.4357324 | 64 |
+| Original paged panel | 3545.5173167 | 3933 |
+| Plain streamed panel | 1139.8176801 | 74 |
+| Gzip streamed panel | 774.6166528 | 74 |
+
+Each stream route used 37 streams and 37 zero-row count checks. The complete paged capture
+had zero cache hits. The gzip measurement was a fresh network fetch compared with that
+saved complete baseline; its reported paged time is the original measurement. These are
+observed fetch times with parsing and native capture, rather than a replay timed as network
+retrieval. Failed preliminary attempts are separate diagnostics.
+
+Artifacts are in `D:/FamilyQuant-data/out-assay/j17-live-02`: `baseline-validation.json`
+retains the original plain/paged comparison, `validation.json` records the refreshed
+comparison, and `entry-parity.csv` records every compared accession/hash. The panel JSON,
+packet manifests and saved project files retain the corresponding source data. Protein
+evidence and its original provenance timestamps are hashed unchanged across the routes.

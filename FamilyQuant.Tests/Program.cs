@@ -253,6 +253,7 @@ namespace FamilyQuant.Tests
             suite.Section("Nearest reviewed protein and the outside panel - never itself, gated, deterministic, offline");
             suite.Add(() => NearestReviewedTests(workDir));
             suite.Add(() => ReferencePanelTests(workDir));
+            suite.Add(() => ReferencePanelStreamTests());
             suite.Add(() => EvidenceOperationTests());
             suite.Section("Coherence check - what the reviewed members of a family ever show");
             suite.Add(() => CoherenceCheckTests());

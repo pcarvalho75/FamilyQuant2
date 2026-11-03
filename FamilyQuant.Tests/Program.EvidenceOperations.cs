@@ -65,9 +65,10 @@ namespace FamilyQuant.Tests
             var panelFile = new FamilyClusterFile();
             panelFile.MyExtendedFastaItems.Add(NearestItem("tr|A0A951|P_TEST", a, false, "alpha family"));
             panelFile.MyExtendedFastaItems.Add(NearestItem("tr|A0A952|P_TEST", b, false, "beta family"));
-            CannedPanelUniProt Handler() => new CannedPanelUniProt(
-                (HttpStatusCode.OK, PanelPage(PanelEntryJson("P71001", "Belongs to the alpha family.", a)), "2026_03", null),
-                (HttpStatusCode.OK, PanelPage(PanelEntryJson("P71002", "Belongs to the beta family.", b)), "2026_03", null));
+            CannedPanelUniProt Handler() => Announcing(new CannedPanelUniProt(
+                (HttpStatusCode.OK, "{\"results\":[]}", "2026_03", null),
+                (HttpStatusCode.OK, PanelPage(PanelEntryJson("P71001", "Belongs to the alpha family.", a),
+                    PanelEntryJson("P71002", "Belongs to the beta family.", b)), "2026_03", null)), 2);
             var panelReports = new List<OperationProgress>();
             OperationResult<ReferencePanel> fetched = CoreOperation.RunAsync("Reference panel",
                 op => ReferencePanelFetcher.FetchAndStoreAsync(panelFile, op, null, Handler()),
