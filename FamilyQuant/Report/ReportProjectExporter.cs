@@ -1,4 +1,5 @@
 using FamilyQuant.DeNovo;
+using FamilyQuant.Report.Captions;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -44,6 +45,13 @@ public static class ReportProjectExporter
                 return section with { Blocks = blocks };
             }).ToArray(),
         };
+        var figureCaptions = plan.Charts.ToDictionary(c => "figure:" + c.FileName,
+            c => c.CaptionInput ?? throw new InvalidOperationException("Caption data are unavailable for " + c.FileName), StringComparer.Ordinal);
+        var tableCaptions = document.Sections.SelectMany(s => s.Blocks).OfType<ReportTable>().ToDictionary(t => t.Id,
+            t => new TableCaptionInput(t.Title, string.IsNullOrWhiteSpace(t.Caption)
+                ? "Read across each row using the named columns and units" : t.Caption,
+                SummaryColumns: Array.Empty<int>()), StringComparer.Ordinal);
+        document = ReportCaptionBuilder.WithCaptions(document, figureCaptions, tableCaptions);
         return new(document, result.CsvExports, figures);
     }
 

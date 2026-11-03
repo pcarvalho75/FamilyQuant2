@@ -181,6 +181,17 @@ namespace FamilyQuant.Tests
             suite.AddWithApplication(() => ChartPaletteTests(workDir));
             suite.Section("Figure export - every chart as a projector-sized PNG, with no window");
             suite.AddWithApplication(() => ChartImageExportTests(workDir));
+            suite.Section("Composition, subclass parts and diversity from stored family studies");
+            suite.AddWithApplication(() => CompositionChartTests(Path.Combine(workDir, "composition-charts")));
+            suite.AddWithApplication(() => AbundanceDiversityTests(Path.Combine(workDir, "abundance-diversity")));
+            suite.AddWithApplication(() => FamilyRingTests(Path.Combine(workDir, "family-ring")));
+            suite.AddWithApplication(() => ProteinCoverageMapTests(Path.Combine(workDir, "protein-coverage-map")));
+            suite.AddWithApplication(() => StoredCompositionTests(Path.Combine(workDir, "stored-composition-charts")));
+            suite.AddWithApplication(() => CompositionExportCultureTests(Path.Combine(workDir, "composition-export-culture")));
+            suite.Section("Automatic report captions and stored-study figure parity");
+            suite.AddWithApplication(() => ReportCaptionTests(Path.Combine(workDir, "report-captions")));
+            suite.AddWithApplication(() => CaptionSurfaceTests(Path.Combine(workDir, "caption-surfaces")));
+            suite.AddWithApplication(() => ReportStudyFigureTests(Path.Combine(workDir, "report-study-figures")));
             suite.Section("Analytics (Q4) - run _01 recovery reproduced from the store, CSV round trip");
             suite.Add(() => AnalyticsRealTests(args.Length > 2 ? args[2] : null, args.Length > 3 ? args[3] : null, workDir));
             suite.Section("De novo homology - the kept peptides mapped to the venom families");
