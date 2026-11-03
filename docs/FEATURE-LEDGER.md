@@ -17,7 +17,7 @@ Render targets refer to `ScreenHarness.Screens`, captured with `--screens <outpu
 Release gate: `FamilyQuant.Tests.exe --feature-ledger-release-check` fails until every retained row is VERIFIED with evidence. Authorized DROP rows use APPROVED_DROP, which records a decision, not a completed UI removal. The normal quick suite permits OPEN rows during development. Regeneration resets retained rows to OPEN; preserve reviewed evidence when updating the scanner.
 
 Scan count: **5756**. Ledger rows: **5756**. Source files: **104**.
-Authorized DROP rows: **296**; proposed VERIFIED retained rows: **5432**; OPEN retained rows: **28**.
+Authorized DROP rows: **296**; proposed VERIFIED retained rows: **5433**; OPEN retained rows: **27**.
 
 | ID | Disposition | Kind | Frozen source | Fact or control | Planned check | State | Evidence |
 |---|---|---|---|---|---|---|---|
@@ -5567,7 +5567,7 @@ Authorized DROP rows: **296**; proposed VERIFIED retained rows: **5432**; OPEN r
 | FQ15-032C14B46507 | KEEP | handler | FamilyQuant/USearch.xaml:77 | ButtonScanIdentities.Click = ButtonScanIdentities_Click | test:RunAssayRuntimeLedger | VERIFIED | evidence:AS-build-workflow:FQ15-032C14B46507 |
 | FQ15-67C18A2317D7 | IMPROVE | tooltip | FamilyQuant/USearch.xaml:80 | ButtonScanIdentities.ToolTip = Clusters at every identity from 95% down to 10% and tabulates the family count and target/decoy mixing. Use it before choosing a threshold. Nothing is saved; large databases take a while. | render:02-build | VERIFIED | evidence:Paulo-rulings:FQ15-67C18A2317D7 |
 | FQ15-7823248CE671 | IMPROVE | option/copy | FamilyQuant/USearch.xaml:84 | GroupBox.Header = \uD83E\uDDEC Remove Redundancy (preserve order) | render:02-build | VERIFIED | evidence:Paulo-rulings:FQ15-7823248CE671 |
-| FQ15-4A644A3EA1F3 | IMPROVE | option/copy | FamilyQuant/USearch.xaml:88 | TextBlock.Text = Removes subset / near-identical sequences from a FASTA and writes &lt;name&gt;_NO_REDUNDANCY.fasta beside it, keeping the original sequence order and headers. Do this before "Input a FASTA file" when a database has fragments or duplicates that would otherwise split a family. Same as PatternLab's database generator, without leaving this window. | render:02-build | OPEN | pending |
+| FQ15-4A644A3EA1F3 | IMPROVE | option/copy | FamilyQuant/USearch.xaml:88 | TextBlock.Text = Removes subset / near-identical sequences from a FASTA and writes &lt;name&gt;_NO_REDUNDANCY.fasta beside it, keeping the original sequence order and headers. Do this before "Input a FASTA file" when a database has fragments or duplicates that would otherwise split a family. Same as PatternLab's database generator, without leaving this window. | render:02-build | VERIFIED | evidence:Paulo-rulings:FQ15-4A644A3EA1F3 |
 | FQ15-7F693FC0BCB9 | IMPROVE | tooltip | FamilyQuant/USearch.xaml:89 | TextBlock.ToolTip = Like PatternLab's 'Eliminate subset sequences', but this one keeps the original sequence order, which matters because USEARCH is order-sensitive. | render:02-build | VERIFIED | evidence:Paulo-rulings:FQ15-7F693FC0BCB9 |
 | FQ15-A7D75E41769F | IMPROVE | option/copy | FamilyQuant/USearch.xaml:91 | Label.Content = Identity: | render:02-build | VERIFIED | evidence:Paulo-rulings:FQ15-A7D75E41769F |
 | FQ15-4D640F0B5E15 | IMPROVE | tooltip | FamilyQuant/USearch.xaml:92 | Label.ToolTip = 100 removes only exact subset sequences (a sequence wholly contained in another). Below 100 removes near-identical sequences by alignment. | render:02-build | VERIFIED | evidence:Paulo-rulings:FQ15-4D640F0B5E15 |
