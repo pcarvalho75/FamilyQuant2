@@ -211,7 +211,7 @@ public static class ReportFigureRenderer
                 .ThenBy(r => r.Family, StringComparer.Ordinal).ToArray();
             Add(ReportSectionIds.DatabaseGap, "database_gap.png", "Database gap",
                 "Identified, database-mapped de novo and family-world-only signal are separate components. The family-world-only component is excluded from database family composition.",
-                () => new DatabaseGapChart(rows), new("Family rows shown", rows.Length, "families", "0"),
+                () => new DatabaseGapChart(rows, ChartPalette.Light), new("Family rows shown", rows.Length, "families", "0"),
                 new("Family-world-only envelope shown", rows.Sum(r => r.WorldDeNovoEnvelope), "area units", "G5"));
             charts[^1] = charts[^1] with { Height = Math.Max(540, 70 + rows.Length * 30) };
         }
