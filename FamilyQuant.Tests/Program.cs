@@ -249,6 +249,8 @@ namespace FamilyQuant.Tests
             suite.Add(() => AiInterpretationInputTests());
             suite.Add(() => AiKeyOfferTests());
             suite.AddWithApplication(() => AiShellTests());
+            suite.Add(() => AiJ45ParityTests());
+            suite.AddWithApplication(() => AiAssistantHelpTests());
             suite.Add(() => SuiteMergeGuardTests());
             suite.Add(() => EvidenceFetchTests());
             suite.Add(() => EvidenceFetchAtomicTests());

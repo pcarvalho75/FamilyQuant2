@@ -240,6 +240,22 @@ public partial class MainWindow
                 "   of findings, the stored tables it reads, the methods and a short instruction block.\n" +
                 "   Give it to an assistant of your choice; FamilyQuant itself does not interpret it.\n\n" +
 
+                "OPTIONAL · Draft an interpretation with AI\n" +
+                "   Menu: Help > AI assistant key...\n" +
+                "   Add, test, import or remove your Anthropic key. It is protected for this Windows\n" +
+                "   user and is not saved in the project or report. Test key sends a short request\n" +
+                "   without project data. On first use, you may import a key file beside the project.\n\n" +
+                "   Menu: File > Draft interpretation with AI...\n" +
+                "   The program shows the exact interpretation input and model before you confirm\n" +
+                "   sending it to Anthropic. The input is the same text as File > Export > Interpretation\n" +
+                "   input (Markdown): your report details, panel text, result tables and analysis\n" +
+                "   choices. Cancel leaves the project unchanged. After a response, review the draft\n" +
+                "   and every number not found in the input tables before accepting it. A matching\n" +
+                "   number is not proof that a claim is correct. Accepting stores a labelled draft\n" +
+                "   as your written interpretation; Undo restores the previous text.\n" +
+                "   The program's own report narrative is written without AI. Your accepted written\n" +
+                "   interpretation is included separately when that report section is selected.\n\n" +
+
                 // The de novo screen is a separate workflow and is written as one: it is numbered
                 // OPTIONAL rather than as a fifth step, because nothing above it needs it and it needs
                 // nothing above it except, for family attribution, a Family Cluster File.
