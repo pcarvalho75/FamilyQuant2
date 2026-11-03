@@ -38,6 +38,11 @@ namespace FamilyQuant
             var labels = (subclassCurrent ? file.ProteinSubclassLabels! : new List<ProteinSubclassLabel>()).ToDictionary(x => x.ProteinIndex);
             var currentAssignments = PanelAssignmentEvidenceStore.Current(file);
             var currentByIndex = currentAssignments?.ToDictionary(x => x.ProteinIndex) ?? new Dictionary<int, PanelProteinAssignment>();
+            // Explain the current scope at export time rather than rewriting the saved recipe. Older
+            // assignments therefore remain replayable and retain their original grouping decisions.
+            var scope = file.EvidenceRecipe?.Options?.ScopeTerms;
+            var resolver = currentAssignments != null && file.EvidenceRecipe?.PanelContext != null && scope is { Count: > 0 }
+                ? PanelEvidenceClassifier.CreateCurrentResolver(file) : null;
             var conflicts = currentAssignments == null || file.FamilyPanel == null ? new HashSet<int>()
                 : PanelAssignmentEvidenceStore.BuildFamilyMap(file.FamilyPanel, currentAssignments).ConflictingUserIds.ToHashSet();
             var audit = (supplied ?? currentAssignments?.Select(ToAuditEvidence).ToArray()
@@ -80,9 +85,23 @@ namespace FamilyQuant
                 if (!string.IsNullOrEmpty(evidence?.Subfamily)) recorded.Add("Subfamily: " + evidence.Subfamily);
                 if (evidence?.Pfam != null && evidence.Pfam.Count > 0)
                     recorded.Add("Pfam: " + string.Join("; ", evidence.Pfam.Select(x => x.Accession)));
+                string familyReason = assignment?.Reason ?? (currentAssignments == null ? "Family assignment evidence is unavailable or out of date." : "");
+                if (resolver != null && assignment != null && evidence != null
+                    && PanelEvidenceClassifier.SourceFamilies(evidence).Length > 0 && !EvidenceClassifier.IsInScope(evidence, scope!))
+                {
+                    string? ownFamily = resolver.PanelFamilyForAudit(evidence);
+                    if (ownFamily != null)
+                    {
+                        string name = file.FamilyPanel!.Families.Single(f => f.Key == ownFamily).DisplayName;
+                        if (string.IsNullOrWhiteSpace(name)) name = ownFamily;
+                        familyReason = "The protein's own source family maps to panel family " + name
+                            + ", but its keywords and tissue annotations do not match the user scope phrases: "
+                            + string.Join("; ", scope!.Select(term => "\"" + term + "\"")) + ". " + familyReason;
+                    }
+                }
                 Append(FamilyNaming.Accession(item.SequenceIdentifier), ProteinNameFormatting.ForNewOutput(item.Description),
                     family?.DisplayName, subclass?.DisplayName, assignment?.EvidenceUsed,
-                    assignment?.Reason ?? (currentAssignments == null ? "Family assignment evidence is unavailable or out of date." : ""),
+                    familyReason,
                     conflicts.Contains(item.UserID) ? "The current User ID has conflicting panel family or outside members."
                         : label?.Reason ?? (subclassCurrent ? "" : "Subclass labels are unavailable or out of date."), string.Join(" | ", recorded));
             }

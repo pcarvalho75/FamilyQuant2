@@ -246,6 +246,7 @@ namespace FamilyQuant.Tests
             suite.Add(() => FamilyWorldFetchTests());
             suite.Add(() => DesktopWorldChecks());
             suite.Add(() => EvidenceTaskTests());
+            suite.AddWithApplication(() => ScopeVisibilityTests());
             suite.Add(() => EvidenceClassifierTests());
             suite.AddWithApplication(() => FamilyPanelSubclassTests());
             suite.Add(() => EvidenceDeliveryFixtureTests(workDir));
