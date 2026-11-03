@@ -12,18 +12,23 @@ public static class CompositionChartCaptions
     public static string Build(AnalyticsFigure figure, AnalyticsData? analytics = null) =>
         ReportCaptionBuilder.Figure(Describe(figure, analytics));
 
-    public static FigureCaptionInput Describe(AnalyticsFigure figure, AnalyticsData? analytics = null) => figure.Chart switch
+    public static FigureCaptionInput Describe(AnalyticsFigure figure, AnalyticsData? analytics = null)
     {
-        FamilyCompositionChart chart => Composition(chart.Data),
-        FamilySubclassChart chart => Subclasses(chart.Data),
+        var caption = figure.Chart switch
+        {
+        FamilyCompositionChart chart => Composition(new(chart.Rows, chart.Data.Basis, chart.Data.IsMeanOfRuns, chart.Data.UnavailableFamilies)),
+        FamilySubclassChart chart => Subclasses(new(chart.Rows, chart.Data.Basis, false, chart.Data.UnavailableFamilies)),
         FamilyAbundanceDiversityChart chart => Diversity(chart),
         FamilyRingChart chart => Ring(chart),
-        ProteinCoverageMapChart chart => Coverage(chart.Data),
+        ProteinCoverageMapChart chart => Coverage(chart),
         FamilySignalOriginChart chart => SignalSources(chart),
         FamilyContributionChart chart => LegacyFamilies(chart),
         _ when analytics != null => Analytics(figure, analytics),
         _ => throw new NotSupportedException("Caption data is required for figure: " + figure.FileName)
-    };
+        };
+        return figure.Chart is IFigureDetails detail && detail.DetailNotice.Length > 0
+            ? caption with { Notes = (caption.Notes ?? Array.Empty<string>()).Append(detail.DetailNotice).ToArray() } : caption;
+    }
 
     private static FigureCaptionInput SignalSources(FamilySignalOriginChart chart) => new(
         "Family-specific envelope signal by sequence source, all runs pooled",
@@ -102,19 +107,23 @@ public static class CompositionChartCaptions
                 "Basis: " + chart.Data.Basis });
     }
 
-    private static FigureCaptionInput Coverage(ProteinCoverageMapData data) => new(
+    private static FigureCaptionInput Coverage(ProteinCoverageMapChart chart)
+    {
+        var data = chart.Data;
+        return new(
         "Domain, feature and peptide positions on " + data.Label,
         "Read residues from left to right. Blue peptide blocks are identified sequences and green blocks are de novo sequences. Filled peptide blocks are exact placements; outlined blocks are aligned placements. Gaps and uncertain feature intervals are not painted. A de novo alignment is not an exact sequence identification",
         new CaptionNumber[]
         {
             new("Protein length", data.SequenceLength, "residues", "0"),
             new("Allocated display signal", data.RankingSignal, "area units"),
-            new("Identified placements drawn", data.Peptides.Count(p => p.Source == CoveragePeptideSource.Identified), "placements", "0"),
-            new("De novo placements drawn", data.Peptides.Count(p => p.Source == CoveragePeptideSource.DeNovo), "placements", "0"),
-            new("Domain hits drawn", data.Annotations.Count(a => a.Kind == CoverageAnnotationKind.Domain), "hits", "0"),
+            new("Identified placements drawn", chart.VisiblePeptides.Count(p => p.Source == CoveragePeptideSource.Identified), "placements", "0"),
+            new("De novo placements drawn", chart.VisiblePeptides.Count(p => p.Source == CoveragePeptideSource.DeNovo), "placements", "0"),
+            new("Domain hits drawn", chart.VisibleAnnotations.Count(a => a.Kind == CoverageAnnotationKind.Domain), "hits", "0"),
             new("Placements unavailable", data.UnplacedPeptides.Count, "placements", "0")
         }, new[] { data.PositionState, data.PeptideState, "Stored position sources: " + data.Provenance,
             "Protein ordering uses the supplied pooled display allocation of peptide signal. " + data.RankingMethod });
+    }
 
     private static FigureCaptionInput LegacyFamilies(FamilyContributionChart chart)
     {

@@ -195,6 +195,7 @@ namespace FamilyQuant.Tests
             suite.AddWithApplication(() => ReportCaptionTests(Path.Combine(workDir, "report-captions")));
             suite.AddWithApplication(() => CaptionSurfaceTests(Path.Combine(workDir, "caption-surfaces")));
             suite.AddWithApplication(() => ReportStudyFigureTests(Path.Combine(workDir, "report-study-figures")));
+            suite.AddWithApplication(() => FigureLimitTests(Path.Combine(workDir, "figure-limits")));
             suite.Section("Analytics (Q4) - run _01 recovery reproduced from the store, CSV round trip");
             suite.Add(() => AnalyticsRealTests(args.Length > 2 ? args[2] : null, args.Length > 3 ? args[3] : null, workDir));
             suite.Section("De novo homology - the kept peptides mapped to the venom families");

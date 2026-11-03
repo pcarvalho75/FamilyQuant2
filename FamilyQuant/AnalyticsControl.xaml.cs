@@ -84,7 +84,7 @@ public partial class AnalyticsControl : UserControl
     private void RefreshExportHint() => ButtonExport.ToolTip = !ViewModel.CanExport ? ViewModel.ExportUnavailableReason : ViewModel.ExportKind switch {
         ResultsExportKind.SuggestedAdditions => ViewModel.DatabaseGap.FastaState,
         ResultsExportKind.DatabaseGap => ViewModel.DatabaseGap.HasData ? "Write the stored composition table, every global bucket and its recorded rules." : ViewModel.DatabaseGap.EmptyMessage,
-        _ => "Save the selected result in CSV or PNG format with invariant decimals. Figures use 1920 by 1080 pixels in the Light palette." };
+        _ => "Save the selected result in CSV or PNG format with invariant decimals. PNGs are 1920 pixels wide in the Light palette, with complete reference data beside bounded figures." };
     private async void ExportClicked(object sender, RoutedEventArgs e)
     {
         if (!ViewModel.CanExport) return;
