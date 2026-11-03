@@ -78,6 +78,12 @@ under the former section headings, each call keeping the `EnsureApplication()` t
 (`AddWithApplication`). A run without `--shard` executes exactly the former calls in the former order and
 prints the same headings. A lane adds a check as before, by adding one `suite.Add(...)` line in place.
 
+`--test-report-command [fresh-output]` also runs once in `DefaultSuite`, with a unique temporary output
+folder. It exercises the real File > Export report command, Word/workbook publication, selection,
+cancellation and rollback without RAW data. Its flag registration alone previously left it outside both
+ordinary quick and full gates, so J41's two list sheets and empty-list references went unchecked there.
+The fixture now compares every completed native sheet/cell and pins those two sheet names and references.
+
 `--shard k/N` (0 <= k < N) may appear anywhere in the arguments. It is removed, with its value, after the dot
 normalization and both command dispatches and before any positional data slot is read, so
 `. . <deNovoRoot> <acquisitionRoot> --shard 2/6` and `--shard 2/6` both work. Shard k runs the entries whose

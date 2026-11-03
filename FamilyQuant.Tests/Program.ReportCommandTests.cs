@@ -124,15 +124,22 @@ internal static partial class Program
                 expectedExport = expectedExport with { Document = layout.Document, SupplementSheets = layout.Sheets };
             }
             var workbookCells = ReadSupplement(File.ReadAllBytes(supplement));
-            var expectedSheets = expectedExport.SupplementSheets.Where(sheet => sheet.OwnerSectionId != ReportSectionIds.Quality).ToArray();
-            Check("published companion contains exactly the selected production sheets", workbookCells.Keys.ToHashSet(StringComparer.Ordinal)
+            // J41 expands declared lists even when they have no items. Keep the complete source-table
+            // comparison, and pin the empty-list sheets/references that the native command publishes.
+            var expectedSheets = ReportListSheets.Complete(expectedExport.SupplementSheets)
+                .Where(sheet => sheet.OwnerSectionId != ReportSectionIds.Quality).ToArray();
+            Check("published companion contains exactly the selected production sheets", workbookCells.Count == 20
+                && workbookCells.ContainsKey("List Evidence recorded_2B25AB")
+                && workbookCells.ContainsKey("List Family evidence use_8EB293")
+                && workbookCells.Keys.ToHashSet(StringComparer.Ordinal)
                 .SetEquals(expectedSheets.Select(sheet => sheet.Name).Append("Contents")));
             Check("published companion cells equal every complete native source table", expectedSheets.All(sheet =>
             {
                 var expectedCells = new[] { sheet.Table.Columns.ToArray() }.Concat(sheet.Table.Rows.Select(row => row.ToArray())).ToArray();
                 return workbookCells[sheet.Name].Length == expectedCells.Length
                     && workbookCells[sheet.Name].Zip(expectedCells).All(pair => pair.First.SequenceEqual(pair.Second));
-            }));
+            }) && workbookCells["protein_audit.csv_533FF7"][1][4] == "0 items; sheet 'List Family evidence use_8EB293'"
+                && workbookCells["protein_audit.csv_533FF7"][1][7] == "0 items; sheet 'List Evidence recorded_2B25AB'");
             Check("native export stores choices and threshold and leaves the project dirty", current.ReportSelection?.ExcludedIds is [ReportSectionIds.Quality]
                 && current.ReportThreshold == 0.002 && shell.DocumentState.IsModified);
             string saved = Path.Combine(output, "chosen.fqproj");
