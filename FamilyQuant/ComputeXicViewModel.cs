@@ -25,7 +25,7 @@ public sealed class ComputeXicViewModel : ScreenViewModel
     public DeNovoFilterViewModel Filters { get; }
     public string RawDirectory { get => raw; set => Set(ref raw, value); }
     public string SeproPackage { get => sepro; set => Set(ref sepro, value); }
-    public string DeNovoDirectory { get => deNovo; set => Set(ref deNovo, value); }
+    public string DeNovoDirectory { get => deNovo; set { if (Set(ref deNovo, value)) Filters.ProposeSourceForDirectory(value.Trim()); } }
     private string searchParametersPath = "";
     public string SearchParametersPath { get => searchParametersPath; set => Set(ref searchParametersPath, value); }
     public Report.ReportInputProvenance? CompletedInputProvenance { get; private set; }
@@ -71,6 +71,7 @@ public sealed class ComputeXicViewModel : ScreenViewModel
         if (!File.Exists(seproPath)) { Status = "Nothing was computed: the SEPro identification package does not exist or cannot be reached: " + seproPath + ". Choose the .sepr2 of the same runs as the acquisitions."; return; }
         if (deNovoPath.Length > 0 && !Directory.Exists(deNovoPath)) { Status = "Nothing was computed: the de novo folder does not exist or cannot be reached: " + deNovoPath + ". Enter its export root, or leave it empty for identified peptides only."; return; }
         if (IsotopeCount > 6 || MinPointsForQuant > 20) { Status = "Use 1 to 6 isotopes and 1 to 20 points per peak."; return; }
+        Filters.ProposeSourceForDirectory(deNovoPath);
         if (!Filters.TryBuild(out var criteria, out var selections, out string error)) { Status = error; return; }
         var request = new ComputeXicRequest(rawPath, seproPath, deNovoPath.Length == 0 ? null : deNovoPath,
             new FullXicOptions { IsotopeCount = IsotopeCount, MinPointsForQuant = MinPointsForQuant,

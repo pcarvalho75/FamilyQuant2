@@ -10,7 +10,28 @@ namespace FamilyQuant;
 public sealed class DeNovoFilterViewModel : ScreenViewModel
 {
     private string mode = "peaks-only", peaks = "80", deep = "80", length = "7", stretch = "5", floor = "90";
-    public string ModeTag { get => mode; set { if (Set(ref mode, value)) { Changed(nameof(UsesPeaks)); Changed(nameof(UsesDeepNovo)); } } }
+    private bool sourceChosen, applyingProposal;
+    private string sourceProposalText = "";
+    public string ModeTag { get => mode; set { if (Set(ref mode, value))
+        { if (!applyingProposal) sourceChosen = true; Changed(nameof(UsesPeaks)); Changed(nameof(UsesDeepNovo)); } } }
+    public string SourceProposalText { get => sourceProposalText; private set => Set(ref sourceProposalText, value); }
+    public void ProposeSourceForDirectory(string directory)
+    {
+        DeNovoSourceProposal proposal = DeNovoSourceDiscovery.Inspect(directory);
+        SourceProposalText = proposal.Message;
+        if (proposal.ProposedSources.Count == 0) return;
+        if (sourceChosen) { SourceProposalText += " Current source selection kept."; return; }
+        bool all = proposal.ProposedSources.Contains(DeNovoSource.DeNovoAll);
+        bool only = proposal.ProposedSources.Contains(DeNovoSource.DenovoOnly);
+        bool deepNovo = proposal.ProposedSources.Contains(DeNovoSource.DeepNovo);
+        applyingProposal = true;
+        try
+        {
+            ModeTag = deepNovo ? only ? "union-only-deepnovo" : all ? "union-all-deepnovo" : "deepnovo"
+                : all ? "peaks-all" : "peaks-only";
+        }
+        finally { applyingProposal = false; }
+    }
     public string PeaksMinimumAlc { get => peaks; set => Set(ref peaks, value); }
     public string DeepNovoMinimumScore { get => deep; set => Set(ref deep, value); }
     public string MinimumLength { get => length; set => Set(ref length, value); }
@@ -35,8 +56,11 @@ public sealed class DeNovoFilterViewModel : ScreenViewModel
         bool only = inputs.Any(i => i.SourceId == DeNovoSource.DenovoOnly.Id);
         bool all = inputs.Any(i => i.SourceId == DeNovoSource.DeNovoAll.Id);
         bool dn = inputs.Any(i => i.SourceId == DeNovoSource.DeepNovo.Id);
+        applyingProposal = true;
         ModeTag = dn ? only ? "union-only-deepnovo" : all ? "union-all-deepnovo" : "deepnovo"
             : all ? "peaks-all" : "peaks-only";
+        applyingProposal = false;
+        sourceChosen = inputs.Count > 0;
         var p = inputs.FirstOrDefault(i => i.SourceId == DeNovoSource.DenovoOnly.Id || i.SourceId == DeNovoSource.DeNovoAll.Id);
         var d = inputs.FirstOrDefault(i => i.SourceId == DeNovoSource.DeepNovo.Id);
         if (p != null) PeaksMinimumAlc = p.MinimumConfidence.ToString("0.###", CultureInfo.InvariantCulture);

@@ -45,6 +45,20 @@ input fingerprints. It changes no original RAW ACL/attribute and copies no RAW
 bytes. This cache-backed check proves input immutability and replay equality,
 not independent fresh extraction.
 
+## Source proposal
+
+Quantify inspects the chosen de novo export folder using the same source filename
+patterns as import, including nested folders. One PEAKS type, DeepNovo, or one
+PEAKS type plus DeepNovo proposes the matching source or union. Both PEAKS export
+types are reported as an explicit choice. Import still validates CSV contents.
+Stored selections and a person's changed selection are retained; the proposal
+does not translate confidence cutoffs between PEAKS ALC and DeepNovo SCORE.
+The shared De novo importer applies the same proposal before reading its inputs.
+
+`--test-denovo-source-proposal` includes native picker binding and override checks.
+Optional arguments `<export-folder> <comma-separated-source-ids>` check an actual
+folder without importing or changing it.
+
 Family quantitation has these stages:
 
 1. `SearchCuration` searches normalized sequences, retaining compact protein hits.

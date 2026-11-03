@@ -31,6 +31,7 @@ public sealed partial class DeNovoViewModel : DeNovoSession
             // see RestoreCriteria.
             DeNovoFilterCriteria previousCriteria = Criteria;
 
+            Filters.ProposeSourceForDirectory(ImportDirectory.Trim());
             if (!ReadCriteriaFromBoxes()) return;   // Refuse() has already said which box, and why
 
             string directory = ImportDirectory.Trim();
