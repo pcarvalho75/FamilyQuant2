@@ -441,6 +441,7 @@ Paulo agreed these at the restart, 2026-11-01.
 | J36a | Delivery command built and tested on a small computed project: export, trace, project, panel, read-me, checks, nothing written outside its folder | M | 0.5 | 🟢 | J36b | Fixture run passes | RS | | 0 | 0 | |
 | J30b | The fixed export runs to the end on a copy of the full-run project through the real command | M | 0.5 | 🟢 | J30c | Word report and supplement written; times reported | RS | | 0 | 0 | |
 | J24c | Export progress on the full-run project, read from J30b's real export (which runs with the merged progress): the longest gap between two steps named | L | 0.3 | J30b | K14 | `READY` names the longest gap and its step | RS | | 0 | 0 | |
+| J41b | J41 reviewed and merged | L | 0.2 | 🟢 | J30c, J32c | Approved; gate green | FL | | 0 | 0 | |
 
 ### W7 Clear reasons and totals
 
