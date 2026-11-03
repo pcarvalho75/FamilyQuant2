@@ -110,6 +110,8 @@
                             <Button x:Name="ButtonAlignSelected" Content="Align selected" Click="ButtonAlignSelected_Click" IsEnabled="False"
                                     ToolTip="Align the selected proteins without changing their families. Disabled until at least two rows are selected in the protein table."/>
                         </WrapPanel>
+                        <CheckBox x:Name="CheckBoxIncludeFamilyPositions" Content="Include selected families in position fetch" Margin="4,4,4,0"
+                                  ToolTip="Also fetch positions for every member of the families selected in the protein table. By default, only proteins reached by computed peptides are requested."/>
                         <TextBlock x:Name="TextBlockFamilyWorldState" Text="{Binding FamilyWorldState}" TextWrapping="Wrap" Margin="4,4,4,0"
                                    Foreground="{DynamicResource MutedBrush}"/>
                         <Grid Margin="4,8,4,0">
