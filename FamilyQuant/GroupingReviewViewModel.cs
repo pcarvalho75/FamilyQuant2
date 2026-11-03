@@ -35,7 +35,8 @@ namespace FamilyQuant
         public bool IsBusy { get => isBusy; private set { isBusy = value; Changed(); Changed(nameof(CanEdit)); Changed(nameof(CanDiscoverTask)); Changed(nameof(CanUpdateProposal)); Changed(nameof(CanCheckMotif)); Changed(nameof(CanUpdatePanelLinks)); NotifySummary(); } }
         public bool CanUpdateProposal => propose != null && !IsBusy && !string.IsNullOrWhiteSpace(ScopeText);
         public bool CanCheckMotif => motif != null && !IsBusy && Evidence != null && !string.IsNullOrWhiteSpace(MotifPattern);
-        public bool CanUpdatePanelLinks => confirmPanelLinks != null && !IsBusy && Evidence?.HasUnappliedPanelLinkChoices == true;
+        public bool CanUpdatePanelLinks => confirmPanelLinks != null && !IsBusy && Evidence?.HasUnappliedPanelLinkChoices == true
+            && Evidence.HasInvalidPanelLinkNotes == false;
         public int ModeIndex { get => modeIndex; set { modeIndex = value; Changed(); NotifySummary(); } }
         public string ScopeText { get => scopeText; set { scopeText = value; Changed(); Changed(nameof(CanUpdateProposal)); NotifySummary(); } }
         public string MotifPattern { get => motifPattern; set { motifPattern = value; Changed(); Changed(nameof(CanCheckMotif)); NotifySummary(); } }

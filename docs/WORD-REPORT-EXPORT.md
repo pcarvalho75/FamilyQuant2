@@ -30,6 +30,11 @@ the open project. Export does not save the project.
 
 The report menu is distinct from File > Export > Panel audit (CSV).
 
+Methods includes a table of saved panel link choices when present, including each
+user-entered note exactly as saved. Empty notes remain empty. A choice whose panel
+definition changed is marked as such; the table does not claim that a saved choice
+was applied. The table stays in Word and also has its own supplement sheet.
+
 The saved mean-share threshold decides Others membership once for the report. Quantitative Word
 rows, family observations and report figures reuse that membership. Complete member observations
 and names remain in the companion workbook; the person's original panel-reference text stays in
