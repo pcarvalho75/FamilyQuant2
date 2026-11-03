@@ -32,6 +32,7 @@ internal static partial class Program
     private sealed class StreamPanelHandler : HttpMessageHandler
     {
         internal List<Uri> Requests { get; } = new();
+        internal bool CompressStreams, CorruptCompression, RequestedGzip, OmitCompressionHeader, NestedCompression;
         internal Func<Uri, (string Body, string Release, int? Count)> Reply = _ =>
             (PanelPage(PanelEntryJson("P00002", "Belongs to the beta family.", "PEPTIDEK"),
                 PanelEntryJson("P00001", "Belongs to the alpha family.", "OTHERPEPTIDE"),
@@ -41,8 +42,25 @@ internal static partial class Program
             token.ThrowIfCancellationRequested();
             Uri uri = request.RequestUri!;
             Requests.Add(uri);
+            RequestedGzip |= request.Headers.AcceptEncoding.Any(e => e.Value == "gzip");
             var (body, release, count) = Reply(uri);
             var response = new HttpResponseMessage(HttpStatusCode.OK) { Content = new StringContent(body) };
+            if (CompressStreams && uri.AbsolutePath.EndsWith("/stream", StringComparison.Ordinal))
+            {
+                using var bytes = new MemoryStream();
+                using (var gzip = new System.IO.Compression.GZipStream(bytes, System.IO.Compression.CompressionLevel.Fastest, leaveOpen: true))
+                    gzip.Write(System.Text.Encoding.UTF8.GetBytes(body));
+                byte[] encoded = bytes.ToArray();
+                if (NestedCompression)
+                {
+                    using var wrapped = new MemoryStream();
+                    using (var outer = new System.IO.Compression.GZipStream(wrapped, System.IO.Compression.CompressionLevel.Fastest, leaveOpen: true))
+                        outer.Write(encoded);
+                    encoded = wrapped.ToArray();
+                }
+                response.Content = new ByteArrayContent(CorruptCompression ? System.Text.Encoding.UTF8.GetBytes(body) : encoded);
+                if (!OmitCompressionHeader) response.Content.Headers.ContentEncoding.Add("gzip");
+            }
             if (release.Length > 0) response.Headers.Add("x-uniprot-release", release);
             // Real stream replies do not announce a count. The search count request does.
             if (uri.AbsolutePath.EndsWith("/search", StringComparison.Ordinal) && count is int total)
@@ -71,6 +89,21 @@ internal static partial class Program
             && JsonSerializer.Serialize(panel.Families) == JsonSerializer.Serialize(old.Families)
             && panel.Provider == old.Provider && panel.Release == old.Release
             && panel.RetrievedAtUtc != null && old.RetrievedAtUtc != null);
+        using var compressed = new StreamPanelHandler { CompressStreams = true };
+        var zipped = ReferencePanelFetcher.FetchAsync(panel.Families, compressed).GetAwaiter().GetResult();
+        Check("J17 negotiates gzip and retains exactly the same full entries as plain JSON",
+            compressed.RequestedGzip && JsonSerializer.Serialize(zipped.Entries) == JsonSerializer.Serialize(panel.Entries));
+        foreach (bool nested in new[] { false, true })
+        {
+            using var encoded = new StreamPanelHandler { CompressStreams = true, NestedCompression = nested, OmitCompressionHeader = !nested };
+            var decoded = ReferencePanelFetcher.FetchAsync(panel.Families, encoded).GetAwaiter().GetResult();
+            Check("J17 decodes " + (nested ? "a gzip file wrapped in gzip transfer encoding" : "a gzip file without a transfer-encoding header")
+                + " before the same JSON parser", JsonSerializer.Serialize(decoded.Entries) == JsonSerializer.Serialize(panel.Entries));
+        }
+        using var corrupt = new StreamPanelHandler { CompressStreams = true, CorruptCompression = true };
+        var preserved = AtomicFetchFile(); string original = preserved.ToJsonText();
+        Check("J17 invalid compressed data leaves the prior panel and evidence unchanged", Throws<InvalidDataException>(() =>
+            ReferencePanelFetcher.FetchAndStoreAsync(preserved, handler: corrupt).GetAwaiter().GetResult()) && preserved.ToJsonText() == original);
 
         using var empty = new StreamPanelHandler();
         var none = ReferencePanelFetcher.FetchAsync(Array.Empty<string>(), empty).GetAwaiter().GetResult();

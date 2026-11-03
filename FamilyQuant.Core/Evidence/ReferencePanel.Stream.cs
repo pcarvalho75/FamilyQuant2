@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
+using System.IO.Compression;
 using System.Linq;
 using System.Net.Http;
 using System.Threading;
@@ -31,6 +32,7 @@ public static partial class ReferencePanelFetcher
         using HttpClient client = handler == null ? new HttpClient() : new HttpClient(handler, disposeHandler: false);
         client.Timeout = TimeSpan.FromSeconds(100);
         client.DefaultRequestHeaders.UserAgent.ParseAdd("FamilyQuant");
+        client.DefaultRequestHeaders.AcceptEncoding.ParseAdd("gzip");
         Report();
         foreach (List<string> batch in batches)
         {
@@ -51,7 +53,7 @@ public static partial class ReferencePanelFetcher
             CheckRelease(response);
             if (NextPage(response) != null)
                 throw new InvalidDataException("UniProt returned an incomplete stream. No panel was made.");
-            string json = await response.Content.ReadAsStringAsync(cancellationToken).ConfigureAwait(false);
+            string json = await ReadStreamJson(response.Content, cancellationToken).ConfigureAwait(false);
             Dictionary<string, ProteinEvidence> parsed = EvidenceFetcher.Parse(json);
             var membership = batch.ToHashSet(StringComparer.OrdinalIgnoreCase);
             int delivered = 0;
@@ -98,6 +100,34 @@ public static partial class ReferencePanelFetcher
         {
             CompletedBatches = completed, TotalBatches = asked.Count, Asked = received, Found = entries.Count,
         });
+    }
+
+    private static async Task<string> ReadStreamJson(HttpContent content, CancellationToken cancellationToken)
+    {
+        if (content.Headers.ContentEncoding.Any(e => !e.Equals("gzip", StringComparison.OrdinalIgnoreCase)
+            && !e.Equals("identity", StringComparison.OrdinalIgnoreCase)))
+            throw new InvalidDataException("UniProt returned an unsupported stream encoding. No panel was made.");
+        byte[] bytes = await content.ReadAsByteArrayAsync(cancellationToken).ConfigureAwait(false);
+        int layers = 0;
+        // Some stream replies are gzip files without Content-Encoding; a proxy can also wrap
+        // an already compressed file in gzip transfer encoding. Decode the actual lossless layers.
+        while (bytes.Length >= 2 && bytes[0] == 0x1f && bytes[1] == 0x8b)
+        {
+            if (++layers > 4) throw new InvalidDataException("UniProt returned too many compression layers. No panel was made.");
+            using var source = new MemoryStream(bytes, writable: false);
+            using var gzip = new GZipStream(source, CompressionMode.Decompress);
+            using var decoded = new MemoryStream();
+            await gzip.CopyToAsync(decoded, cancellationToken).ConfigureAwait(false);
+            bytes = decoded.ToArray();
+        }
+        if (layers == 0)
+        {
+            if (content.Headers.ContentEncoding.Any(e => e.Equals("gzip", StringComparison.OrdinalIgnoreCase)))
+                throw new InvalidDataException("UniProt returned invalid compressed data. No panel was made.");
+            return await content.ReadAsStringAsync(cancellationToken).ConfigureAwait(false);
+        }
+        using var reader = new StreamReader(new MemoryStream(bytes, writable: false), System.Text.Encoding.UTF8);
+        return await reader.ReadToEndAsync(cancellationToken).ConfigureAwait(false);
     }
 
     private static string StreamQuery(IEnumerable<string> families) => "(reviewed:true) AND ("

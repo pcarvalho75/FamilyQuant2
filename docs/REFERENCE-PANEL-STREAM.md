@@ -10,6 +10,10 @@ The requested fields are unchanged from the paged route. Every entry goes throug
 `EvidenceFetcher.Parse` and exact, case-insensitive family-membership filter. Text-search
 matches without the requested membership are dropped. Entries remain unique and sorted by
 accession; similarity prose is dropped and tissue specificity is kept, as before.
+The stream requests gzip transfer encoding and decompresses it before the same JSON parser.
+The decoder also accepts a gzip file whose reply omits the transfer-encoding header, and
+gzip transfer encoding wrapped around a gzip file. Plain JSON remains supported. Invalid compression or an unsupported encoding fails without
+publishing anything.
 
 Stream replies do not supply `X-Total-Results`. Before each stream, a `search` request with
 `size=0`, `fields=accession` and the identical query supplies the completeness count. A missing
@@ -51,6 +55,13 @@ refused. Only this comparison transport honors a provider `Retry-After` before r
 time includes active attempts and retry waits, including any replay processing, and excludes
 time spent with the command stopped. Earlier attempts that predate these resumable captures
 remain separate diagnostics and are not presented as a complete baseline timing.
+
+After a complete successful baseline, `--refresh-stream` fetches a fresh stream and compares
+it to the saved complete paged panel without another paged network fetch. It retains the
+measured original paged time, preserves `baseline-validation.json` and the plain stream
+artifact, and writes `stream-panel-gzip.json` and `streamed-gzip.fqproj`. This mode measures
+the gzip transport change against the same complete baseline, rather than timing a replay
+as if it were a network fetch.
 
 The packet manifests record each response URL, release, total when supplied, body SHA256,
 size and elapsed seconds. `entry-parity.csv` compares the full serialized entry, including

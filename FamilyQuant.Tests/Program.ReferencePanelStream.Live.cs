@@ -78,6 +78,8 @@ internal static partial class Program
                     Release = response.Headers.TryGetValues("x-uniprot-release", out var release) ? release.FirstOrDefault() : null,
                     Total = response.Headers.TryGetValues("x-total-results", out var total) ? total.FirstOrDefault() : null,
                     RetryAfter = response.Headers.RetryAfter?.ToString(),
+                    ContentEncoding = string.Join(",", response.Content.Headers.ContentEncoding), ContentType = response.Content.Headers.ContentType?.ToString(),
+                    FirstBytes = Convert.ToHexString(body.AsSpan(0, Math.Min(8, body.Length))),
                     Bytes = body.Length, Sha256 = Convert.ToHexString(SHA256.HashData(body)),
                 }) + "\n");
                 Requests++;
@@ -102,7 +104,8 @@ internal static partial class Program
 
     private static int ReferencePanelParityLive(string[] args)
     {
-        bool resume = args.Length == 4 && args[3] == "--resume";
+        bool refresh = args.Length == 4 && args[3] == "--refresh-stream";
+        bool resume = refresh || args.Length == 4 && args[3] == "--resume";
         if (args.Length != 3 && !resume) throw new ArgumentException("Supply an input FCF and a new output directory, or add --resume for its saved comparison.");
         string input = Path.GetFullPath(args[1]), output = Path.GetFullPath(args[2]);
         if ((!resume && Directory.Exists(output)) || (resume && !Directory.Exists(output))
@@ -127,8 +130,15 @@ internal static partial class Program
             {
                 using var checkpoint = JsonDocument.Parse(File.ReadAllText(Path.Combine(output, "validation.json")));
                 prior = checkpoint.RootElement.Clone();
+                if (refresh)
+                {
+                    if (Text(prior, "Phase") != "complete" || Number(prior, "failed") != 0 || Number(prior, "PagedSeconds") <= 0)
+                        throw new InvalidDataException("A fresh stream comparison needs a successfully completed paged baseline.");
+                    string baseline = Path.Combine(output, "baseline-validation.json");
+                    if (!File.Exists(baseline)) File.WriteAllText(baseline, prior.GetRawText());
+                }
                 evidenceSeconds = Number(prior, "EvidenceSeconds");
-                priorPagedSeconds = Number(prior, "PagedActiveSeconds");
+                priorPagedSeconds = Number(prior, refresh ? "PagedSeconds" : "PagedActiveSeconds");
                 priorPagedRequests = (int)Number(prior, "PagedRequests");
                 if (original.SourceSha256 != file.SourceSha256 || original.SourceSequenceCount != file.SourceSequenceCount
                     || !original.MyExtendedFastaItems.Select(p => (p.SequenceIdentifier, p.Sequence, p.Description, p.UserID, p.USearchID))
@@ -149,14 +159,15 @@ internal static partial class Program
             if (Text(prior, "EvidenceSha256") is string savedEvidenceHash && savedEvidenceHash != fetchedEvidenceHash)
                 throw new InvalidDataException("The evidence checkpoint changed.");
 
-            using var streamPackets = new PanelPacketHandler(Path.Combine(output, "stream-packets.jsonl"));
+            using var streamPackets = new PanelPacketHandler(Path.Combine(output, refresh ? "stream-gzip-packets.jsonl" : "stream-packets.jsonl"));
             watch.Restart();
             ReferencePanel streamed;
             double streamSeconds;
             int streamRequests;
-            if (resume)
+            string streamFile = refresh ? "stream-panel-gzip.json" : Text(prior, "StreamPanelFile") ?? "stream-panel.json";
+            if (resume && !refresh)
             {
-                using FileStream panel = File.OpenRead(Path.Combine(output, "stream-panel.json"));
+                using FileStream panel = File.OpenRead(Path.Combine(output, streamFile));
                 streamed = JsonSerializer.Deserialize<ReferencePanel>(panel)!;
                 streamSeconds = Number(prior, "StreamSeconds");
                 streamRequests = (int)Number(prior, "StreamRequests", "Requests");
@@ -166,24 +177,29 @@ internal static partial class Program
                 streamed = ReferencePanelFetcher.FetchAsync(families, streamPackets, new PanelLiveProgress("Stream"), stop.Token).GetAwaiter().GetResult();
                 streamSeconds = watch.Elapsed.TotalSeconds;
                 streamRequests = streamPackets.Requests;
-                using FileStream panel = File.Create(Path.Combine(output, "stream-panel.json"));
+                using FileStream panel = File.Create(Path.Combine(output, streamFile));
                 JsonSerializer.Serialize(panel, streamed);
             }
             Check("J17 live stream release and families equal the protein evidence checkpoint",
                 streamed.Release == file.EvidenceSource!.Release && streamed.Families.SequenceEqual(families));
             if (failed > 0) return 1;
-            string streamHash = TestFileHash.Upper(Path.Combine(output, "stream-panel.json"));
-            if (Text(prior, "StreamPanelSha256") is string savedStreamHash && savedStreamHash != streamHash)
+            string streamHash = TestFileHash.Upper(Path.Combine(output, streamFile));
+            if (!refresh && Text(prior, "StreamPanelSha256") is string savedStreamHash && savedStreamHash != streamHash)
                 throw new InvalidDataException("The streamed panel checkpoint changed.");
-            WritePagedStage("stream complete; paged comparison running", priorPagedSeconds, priorPagedRequests);
+            WritePagedStage(refresh ? "stream complete; comparing saved full paged baseline" : "stream complete; paged comparison running", priorPagedSeconds, priorPagedRequests);
 
             using var pagedPackets = new PanelPacketHandler(Path.Combine(output, "paged-comparison-packets.jsonl"), Path.Combine(output, "paged-replies"));
             watch.Restart();
             ReferencePanel paged;
             try
             {
-                paged = ReferencePanelFetcher.FetchAsync(families, pagedPackets, new PanelLiveProgress("Paged"), stop.Token,
-                    usePagedComparison: true).GetAwaiter().GetResult();
+                if (refresh)
+                {
+                    using FileStream baseline = File.OpenRead(Path.Combine(output, "paged-panel.json"));
+                    paged = JsonSerializer.Deserialize<ReferencePanel>(baseline)!;
+                }
+                else paged = ReferencePanelFetcher.FetchAsync(families, pagedPackets, new PanelLiveProgress("Paged"), stop.Token,
+                        usePagedComparison: true).GetAwaiter().GetResult();
             }
             catch
             {
@@ -191,8 +207,9 @@ internal static partial class Program
                     priorPagedRequests + pagedPackets.Requests);
                 throw;
             }
-            double pagedSeconds = priorPagedSeconds + watch.Elapsed.TotalSeconds;
-            using (FileStream panel = File.Create(Path.Combine(output, "paged-panel.json"))) JsonSerializer.Serialize(panel, paged);
+            double pagedSeconds = priorPagedSeconds + (refresh ? 0 : watch.Elapsed.TotalSeconds);
+            if (!refresh)
+                using (FileStream panel = File.Create(Path.Combine(output, "paged-panel.json"))) JsonSerializer.Serialize(panel, paged);
             Check("J17 live panel provider, release and requested family order equal the old route",
                 streamed.Provider == paged.Provider && streamed.Release == paged.Release && streamed.Families.SequenceEqual(paged.Families));
             var oldEntries = paged.Entries.ToDictionary(e => e.Accession, StringComparer.Ordinal);
@@ -215,7 +232,7 @@ internal static partial class Program
             if (failed == 0)
             {
                 file.EvidenceSource!.ReferencePanel = streamed;
-                string project = Path.Combine(output, "streamed.fqproj");
+                string project = Path.Combine(output, refresh ? "streamed-gzip.fqproj" : "streamed.fqproj");
                 ProjectStore.WriteFqproj(project, file, Array.Empty<QuantRow>(), new QuantManifest());
                 var reopened = ProjectStore.ReadFqproj(project).fcf;
                 Check("J17 live saved panel and protein evidence reopen offline exactly",
@@ -231,6 +248,8 @@ internal static partial class Program
                 EvidenceRequests = File.ReadLines(Path.Combine(output, "evidence-packets.jsonl")).Count(), StreamRequests = streamRequests,
                 PagedRequests = priorPagedRequests + pagedPackets.Requests, pagedPackets.CacheHits,
                 StreamPanelSha256 = streamHash,
+                StreamPanelFile = streamFile,
+                ComparisonMode = refresh ? "Fresh gzip stream compared to the saved complete paged baseline; original paged time retained" : "Complete paged fetch compared to the streamed panel",
                 streamed.Provider, streamed.Release, StreamRetrievedAtUtc = streamed.RetrievedAtUtc, PagedRetrievedAtUtc = paged.RetrievedAtUtc,
                 TimestampComparison = "Independent retrieval timestamps are recorded separately. Every other panel field is compared exactly.",
                 passed, failed, skipped,
@@ -241,6 +260,7 @@ internal static partial class Program
             void WritePagedStage(string phase, double seconds, int requests) => WriteStage(new
             {
                 Phase = phase, InputSha256 = inputHash, EvidenceSha256 = fetchedEvidenceHash, StreamPanelSha256 = streamHash,
+                StreamPanelFile = streamFile,
                 EvidenceSeconds = evidenceSeconds, StreamSeconds = streamSeconds, StreamRequests = streamRequests,
                 PagedActiveSeconds = seconds, PagedRequests = requests,
                 Families = families.Count, Entries = streamed.Entries.Count, streamed.Release,
