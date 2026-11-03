@@ -422,6 +422,20 @@ namespace FamilyQuant.Tests
                 Path.Combine(workDir, "report-workbook-" + Guid.NewGuid().ToString("N")) }));
             suite.AddWithApplication(() => J34dTests());
             suite.AddWithApplication(() => K16LayoutTests());
+            suite.Section("Native fixture processes and UI lifetime");
+            suite.AddWithApplication(() => BusyLogoProof(Path.Combine(workDir, "busy-logo-" + Guid.NewGuid().ToString("N"))));
+            suite.AddWithApplication(() => RunClusteringDiagnosticShellChecks(new[] { "--test-clustering-diagnostic-shell",
+                Path.Combine(workDir, "diagnostic-shell-" + Guid.NewGuid().ToString("N")) }, workDir));
+            suite.Add(() => Check("native feedback fixture propagates its worker exit status",
+                FeedbackFactTests(new[] { "--test-feedback-facts",
+                    Path.Combine(workDir, "feedback-facts-" + Guid.NewGuid().ToString("N")) }) == 0));
+            suite.AddWithApplication(() => ShellEvidenceFetchCancellationTests());
+            suite.AddWithApplication(() => ShellProofWindowChecks(Array.Empty<string>(), workDir));
+            suite.AddWithApplication(() => TaskOrderRegression(new[] { "--test-task-order",
+                Path.Combine(workDir, "task-order-" + Guid.NewGuid().ToString("N")) }));
+            suite.Add(() => Check("native update fixture propagates its worker exit status",
+                UpdateCheckCommand(new[] { "--test-update-check",
+                    Path.Combine(workDir, "update-check-" + Guid.NewGuid().ToString("N")) }, workDir) == 0));
             return suite;
         }
 
