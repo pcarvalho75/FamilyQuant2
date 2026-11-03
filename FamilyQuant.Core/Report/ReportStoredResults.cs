@@ -120,6 +120,8 @@ public static class ReportStoredResults
         }
         var final = current.Sections.Select(s => s with { Blocks = sections[s.Id] }).ToList();
         if (conflicts != null) final.Add(conflicts);
+        if (manifest.EffectivePanelFamilies is { } effective)
+            foreach (var export in ReportEffectivePanelExports.Build(effective)) exports.Add(export.Key, export.Value);
         return new(final, exports);
     }
 }

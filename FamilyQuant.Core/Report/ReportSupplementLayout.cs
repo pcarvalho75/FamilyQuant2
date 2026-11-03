@@ -77,22 +77,30 @@ public static class ReportSupplementLayout
                     for (int column = 0; column < table.Columns.Count; column++)
                     {
                         string raw = table.Rows[row][column];
-                        string display = raw;
-                        if (table.Id.Contains(":observed:", StringComparison.Ordinal)
-                            && double.TryParse(raw, NumberStyles.Float, CultureInfo.InvariantCulture, out double number) && double.IsFinite(number))
-                            display = number.ToString("G6", CultureInfo.InvariantCulture);
+                        string display = BriefValue(table, column, raw);
                         detail.Add(new[] { table.Title, (row + 1).ToString(CultureInfo.InvariantCulture), table.Columns[column], raw, display });
                     }
                 detail.Add(new[] { table.Title, "", "Caption / units", table.Caption, table.Caption });
                 if (table.Id.EndsWith(":text", StringComparison.Ordinal))
                     foreach (var row in table.Rows.Where(r => r.Count >= 2 && r[1].Length > 0))
                         panelText.Append(row[0]).Append(": ").Append(row[1]).Append("; ");
-                if (!table.SupplementOnly && table.Id.Contains(":observed:", StringComparison.Ordinal) && table.Rows.Count == 1
-                    && !table.Id.EndsWith(":run-shares", StringComparison.Ordinal))
-                    observations.Add(table.Title + ": " + string.Join("; ", table.Columns.Zip(table.Rows[0], (label, raw) =>
+                bool effectiveParts = table.Id.EndsWith(":effective:parts", StringComparison.Ordinal);
+                if (!table.SupplementOnly && effectiveParts)
+                {
+                    observations.Add("Pooled subclass, domain and product parts are separate partitions and must not be added across kinds.");
+                    foreach (var row in table.Rows.Where(r => r.Count >= 6))
                     {
-                        string display = double.TryParse(raw, NumberStyles.Float, CultureInfo.InvariantCulture, out double value) && double.IsFinite(value)
-                            ? value.ToString("G6", CultureInfo.InvariantCulture) : raw;
+                        string values = double.TryParse(row[3], NumberStyles.Float, CultureInfo.InvariantCulture, out _)
+                            ? " Pooled signal = " + BriefValue(table, 3, row[3]) + "; within-family fraction = " + BriefValue(table, 4, row[4]) + "."
+                            : " " + row[5];
+                        observations.Add(row[0] + " - " + row[1] + ": " + row[2] + "." + values);
+                    }
+                }
+                if (!table.SupplementOnly && !effectiveParts && table.Id.Contains(":observed:", StringComparison.Ordinal) && table.Rows.Count == 1
+                    && !table.Id.EndsWith(":run-shares", StringComparison.Ordinal))
+                    observations.Add(table.Title + ": " + string.Join("; ", table.Columns.Select((label, column) =>
+                    {
+                        string display = BriefValue(table, column, table.Rows[0][column]);
                         return label + " = " + display;
                     })) + ".");
             }
@@ -114,6 +122,15 @@ public static class ReportSupplementLayout
         blocks.Add(new ReportParagraph(section.Id + ":detail-reference",
             "Full panel text, literature, notes, sources, observed tables and units: supplement sheet '" + name + "'. Share entries in the brief are fractions unless their label states otherwise."));
         return section with { Blocks = blocks };
+    }
+
+    private static string BriefValue(ReportTable table, int column, string raw)
+    {
+        if (table.Id.Contains(":effective:", StringComparison.Ordinal)
+            && table.Columns[column] is "Panel family key" or "Source User IDs" or "Run" or "Part kind" or "Named part" or "Status" or "Reason") return raw;
+        return table.Id.Contains(":observed:", StringComparison.Ordinal)
+            && double.TryParse(raw, NumberStyles.Float, CultureInfo.InvariantCulture, out double value) && double.IsFinite(value)
+                ? value.ToString("G6", CultureInfo.InvariantCulture) : raw;
     }
 
     private static bool MoveToWorkbook(ReportTable table)

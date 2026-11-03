@@ -85,7 +85,8 @@ public static class ReportPanelSections
             if (!target.Any(t => t.Id == "share-summary")) Missing("missing-shares", "Family share availability");
             if (!target.Any(t => t.Id == "protein-counts")) Missing("missing-counts", "Protein count availability");
         }
-        return Build(curation, tables.ToDictionary(p => p.Key, p => (IReadOnlyList<ReportTable>)p.Value), grouping);
+        var sections = Build(curation, tables.ToDictionary(p => p.Key, p => (IReadOnlyList<ReportTable>)p.Value), grouping);
+        return ReportEffectivePanelFamilies.Apply(curation, manifest, sections, grouping);
     }
 
     public static IReadOnlyList<ReportSection> Build(FamilyClusterFile curation,
