@@ -11,6 +11,10 @@ persists it. The report writer owns printing each field in its corresponding sec
 
 The export checkbox draft uses the report document's stable section and figure ids.
 All parts start selected. Unknown exclusions remain available for a later export.
+`FamilyClusterFile.ReportSelection` stores the unchecked ids. `ReportThreshold`, provided
+by the threshold partition service, stores a fraction; the screen edits its percentage.
+The default fraction is 0.001 (0.1%). Unchanged defaults preserve old curation text.
+Applying checkbox and threshold edits sends one project-change notification.
 
 Focused checks after a Release build:
 
@@ -18,6 +22,7 @@ Focused checks after a Release build:
 & ./FamilyQuant.Tests/bin/Release/net10.0-windows7.0/FamilyQuant.Tests.exe --test-report-details
 & ./FamilyQuant.Tests/bin/Release/net10.0-windows7.0/FamilyQuant.Tests.exe --report-details-screens <fresh-output>
 & ./FamilyQuant.Tests/bin/Release/net10.0-windows7.0/FamilyQuant.Tests.exe --test-report-selection
+& ./FamilyQuant.Tests/bin/Release/net10.0-windows7.0/FamilyQuant.Tests.exe --report-export-screens <fresh-output>
 ```
 
 The first command checks both cultures, multi-paragraph round trip, old curation bytes,
