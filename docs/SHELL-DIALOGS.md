@@ -187,7 +187,11 @@ the re-export advice, and a recorded-totals fixture enables TIC reporting; these
 contract checks, not an execution of the external XQuant exporter. Current legacy status
 still omits the explicit fact that this file lacks per-run totals, so that row stays OPEN.
 The real cancellation check observes its uniquely named owned child running before
-requesting Cancel. The frozen phase completes 31,125 pairs; current cancellation interrupts
+requesting cancellation through the native operation context. It does not drive the shell's
+Cancel button. The frozen phase completes 31,125 pairs; current cancellation interrupts
 the phase. That old cannot-interrupt fact stays OPEN. Partial cancelled output and its count
 are timing diagnostics, not deterministic published results. Completed fixture outputs and
 the compared semantic fact records are checked separately on repeat runs.
+After the R4a/R4c READY sync, M37-ready1/M37-ready2 each execute 13 passed, zero failed,
+two skipped checks, yielding twelve supported and four OPEN rows. All sixteen complete fact
+records and five completed native cache/FASTA/pairwise data artifacts repeat byte-identically.
