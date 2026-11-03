@@ -32,6 +32,9 @@ public sealed class LocalizedPeptideSegment
     public string ProteinIdentifier { get; set; } = string.Empty;
     public string Side { get; set; } = string.Empty;
     public string NormalizedSequence { get; set; } = string.Empty;
+    /// <summary>One means family-unique, more than one shared, zero not recorded. Mapped evidence
+    /// with zero credited signal is still retained for coverage inspection.</summary>
+    public int FamilyMembershipCount { get; set; }
     public PeptideLocalizationMatchKind MatchKind { get; set; }
     public List<PeptideResidueInterval> Intervals { get; set; } = new();
     public double Signal { get; set; }

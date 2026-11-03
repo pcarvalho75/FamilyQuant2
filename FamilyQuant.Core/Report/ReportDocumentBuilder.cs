@@ -10,7 +10,7 @@ public static class ReportDocumentBuilder
     {
         ArgumentNullException.ThrowIfNull(curation);
         ArgumentNullException.ThrowIfNull(manifest);
-        details ??= new ReportDetails();
+        details ??= curation.ReportDetails ?? new ReportDetails();
         DateTime Date(DateTime value) => value == default ? new DateTime(2000, 1, 1, 0, 0, 0, DateTimeKind.Utc) : value;
         return new ReportDocument
         {
