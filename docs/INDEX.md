@@ -113,6 +113,9 @@ Invoke each flag with `& $testExe <flag>` after building. Dispatch and arity are
 | `--desktop-world-walk <copied-project> <copied-raw-folder> <copied-sepr2> <copied-denovo-root> <output> <confirmed-scope>` | Private desktop real-data fetch/scope dialog, production Compute, Database gap and native CSV/FASTA exports; uses only copies |
 | `--test-quantitation-stages` | Prepared-peptide assignments, cross-side suppression, residual calibration, rollup and deterministic CSV |
 | `--test-family-panel` | Panel and subclass fixtures, safe publication, native runner and report sections |
+| `--test-report-findings` | J44 Summary of findings: each fixed sentence present only with its data, headline and study values, Others named only in the supplement, numbers table, culture and wording guards |
+| `--test-interpretation-input` | J45 Interpretation input: deterministic Markdown of details, panel, findings, stored tables and Methods; escaping, absent parts, refusal and the File > Export command |
+| `--j45-walk <project.fqproj> <new-output>` | Private desktop File > Export > Interpretation input (Markdown) twice on a saved project; timings and byte equality |
 | `--subclass-leave-one-out <project.fqproj> <new-output-directory>` | Current-assignment reviewed-subfamily measurement, per-target CSV and summary JSON; input project unchanged |
 | `--test-denovo-engine` | Core retained selection/review-table contracts and existing reader/reconciliation/source-aware fixtures |
 | `--test-project-formats` | Schema contract and existing versioned project round-trip/refusal fixtures |
