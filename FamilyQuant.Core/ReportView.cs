@@ -53,6 +53,16 @@ namespace FamilyQuant
                    familiesInFile.ToString("N0", CultureInfo.CurrentCulture) + " families quantified";
         }
 
+        /// <summary>Names the displayed full-XIC basis and rule, retaining any separately loaded PatternLab status.</summary>
+        public static string FullXicStatusLine(string basis, SharedPeptidePolicy policy, string? patternLabStatus = null)
+        {
+            string line = "showing: Full XIC · " + basis + " · " + policy.ShortName();
+            if (!string.IsNullOrEmpty(patternLabStatus))
+                line += " · PatternLab: " + (patternLabStatus.StartsWith("showing: ", StringComparison.Ordinal)
+                    ? patternLabStatus["showing: ".Length..] : patternLabStatus);
+            return line;
+        }
+
         /// <summary>Families that ended up with a number, for the status line.</summary>
         public static int QuantifiedFamilies(IEnumerable<FastaItemExtended> items)
         {
