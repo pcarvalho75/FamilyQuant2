@@ -117,9 +117,10 @@ namespace FamilyQuant
         public IReadOnlyList<PanelLinkReviewRow> PanelLinks { get; }
         public bool HasPanelRules => Source.PanelLinks != null;
         public bool HasUnappliedPanelLinkChoices => PanelLinks.Any(row => row.HasUnappliedChoice);
+        public bool HasInvalidPanelLinkNotes => PanelLinks.Any(row => !row.IsNoteValid);
         public IReadOnlyList<PanelFamilyLinkSelection> CapturePanelLinkChoices() => PanelLinks.Where(row => row.HasUnappliedChoice).Select(row => row.Capture()).ToArray();
         public int SelectedCount => selectedCount;
-        public bool CanConfirm => selectedCount > 0 && !HasUnappliedPanelLinkChoices && PanelLinks.All(row => !row.Source.NeedsConfirmation)
+        public bool CanConfirm => selectedCount > 0 && !HasUnappliedPanelLinkChoices && !HasInvalidPanelLinkNotes && PanelLinks.All(row => !row.Source.NeedsConfirmation)
             && Families.Where(f => f.SelectedCount > 0).All(f => !string.IsNullOrWhiteSpace(f.Name))
             && Architectures.Where(a => familyByKey.TryGetValue(a.Family, out var family) && family.SelectedCount > 0).All(a => a.IsValid);
         public string Summary => (Source.SourceLabel.Length == 0 ? "" : Source.SourceLabel + " ") + selectedCount.ToString("N0") + " proteins selected in "
@@ -142,7 +143,7 @@ namespace FamilyQuant
             };
             Source = source;
             PanelLinks = (source.PanelLinks ?? Array.Empty<PanelFamilyLinkProposal>()).Select(link =>
-                new PanelLinkReviewRow(link, source.PanelNames, () => { Changed(nameof(HasUnappliedPanelLinkChoices)); Changed(nameof(CanConfirm)); })).ToArray();
+                new PanelLinkReviewRow(link, source.PanelNames, () => { Changed(nameof(HasUnappliedPanelLinkChoices)); Changed(nameof(HasInvalidPanelLinkNotes)); Changed(nameof(CanConfirm)); })).ToArray();
             if (string.IsNullOrEmpty(source.SourceFingerprint)) throw new ArgumentException("The proposal needs a source fingerprint.", nameof(source));
             if (source.Proteins.Select(p => p.ProteinIndex).Distinct().Count() != source.Proteins.Count)
                 throw new ArgumentException("A proposal cannot repeat a protein index.", nameof(source));

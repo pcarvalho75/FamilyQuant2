@@ -71,8 +71,7 @@ The rerun of the full analysis with the scope "Toxin", "venom gland" (D39), so t
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| K6 | The rerun project saved with master's build and the report details, the written interpretation EMPTY (Paulo, 11-03 08:40: "the report is to be performed without an LLM"); the open warms the cache for the final export | L | 0.3 | K2, K4 | K7, K10, K14 | final-input.fqproj saved; interpretation field empty | OP | | 0 | 0 | |
-| K7 | Second reader: every number in the program-written Summary of findings (J44) on Ana's project matched to its cell in the program's exports | M | 0.4 | J44b, K6 | K17 | A table of number, source cell and match, with no mismatch | GR2 | | 0 | 0 | |
+| K7 | Second reader: every number in the program-written Summary of findings (J44) on Ana's project matched to its cell in the program's exports | M | 0.4 | J44b | K17 | A table of number, source cell and match, with no mismatch | GR2 | | 0 | 0 | |
 | J44a | The program interprets as much as it can without an LLM (Paulo, 11-03 08:45: "strict results like do tables, and very informative plots"): a Summary of findings section from the stored studies with fixed templates, only data-bound statements (values, counts, ranks, ranges, presence, comparisons with stored references), and, where the panel holds numeric references, observed share against the panel's reference per family; numbers in a supplement sheet | M | 1 | 🟢 | J44b | Red then green on a fixture: every sentence present when its data exist, absent when not; numbers equal the headline and studies; D21 guard passes | OP | | 0 | 0 | |
 | J44b | J44 reviewed and merged | L | 0.2 | J44a | K7, K14 | Approved; gate green | OP | | 0 | 0 | |
 | J45 | File > Export > Interpretation input: one plain file a user can give to an AI assistant of their choice (report details, the panel table as entered, the result tables, the analysis choices, a neutral instruction to quote numbers only from the tables); the program never calls an LLM (Paulo, 11-03) | L | 0.5 | J44a | | Deterministic export; its test; D21 wording | OP | | 0 | 0 | |
@@ -99,7 +98,7 @@ Ana installs it from the public releases page (D31); the desk publishes on Paulo
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
 | K9 | Full gate on the release candidate re-cut after J41 (and J32, J34 if merged): every ledger receipt current (quick gates defer them) | M | 0.5 | K8, J41b | K10 | Full gate green, ledger 5,460 of 5,460 | Orchestrator | | 0 | 0 | |
-| K10 | The unpacked candidate exports the final project's report through the real menu | L | 0.3 | K9, K6 | K11 | Files and times recorded | EV | | 0 | 0 | |
+| K10 | The unpacked candidate exports the final project's report through the real menu | L | 0.3 | K9 | K11 | Files and times recorded | EV | | 0 | 0 | |
 | K11 | Published: v2.1.0 on pcarvalho75/FamilyQuant2-releases with the zip, its .sha256 and user release notes | L | 0.1 | K10 | K13, K17 | The release page is live | Orchestrator | | 0 | 0 | |
 | K13 | Install check on 2.1.0 from GitHub; 2.0.0's Check for updates finds 2.1.0 | L | 0.2 | K11 | | Both pass | EV | | 0 | 0 | |
 
@@ -107,10 +106,10 @@ Ana installs it from the public releases page (D31); the desk publishes on Paulo
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| K14 | Final export of the interpreted project through the real command, on master with J30, J24, J16, J32 and J34 | L | 0.5 | K6, J24c, J34c, J44b | K15, K16 | Word report and supplement written | OP | | 0 | 0 | |
+| K14 | Final export of the interpreted project through the real command, on master with J30, J24, J16, J32 and J34 | L | 0.5 | J24c, J34c, J44b | K15, K16 | Word report and supplement written | OP | | 0 | 0 | |
 | K15 | Number trace on the final report: every number found, or each one not found ruled | L | 0.2 | K14 | K17 | `trace.csv` with nothing left open | T1 | | 0 | 0 | |
 | K16 | The final report's pages read for look and sense | L | 0.3 | K14 | K17 | No blocking item | LK | | 0 | 0 | |
-| K17 | Delivered: the Word report, supplement, project, family panel and a read-me with the release link written to `AnaG/Bjararaca/Relatorio`; nothing else in Ana's folders touched | L | 0.2 | K7, K15, K16, J36c, K11 | | The five items with hashes; the rest of AnaG unchanged | OP | | 0 | 0 | |
+| K17 | Delivered: the Word report, supplement, project, family panel, a read-me with the release link, and the AI key file (D42) written to `AnaG/Bjararaca/Relatorio`; nothing else in Ana's folders touched | L | 0.2 | K7, K15, K16, J36c, K11 | | The five items with hashes; the rest of AnaG unchanged | OP | | 0 | 0 | |
 
 ### W6 Compute fast and visible
 
@@ -132,11 +131,11 @@ Compute took 37 to 54 minutes on Ana's project with the RAW cache warm, silent f
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| J37a | A confirmed family link keeps a short note on why, saved with the project and printed in the report's method | L | 0.5 | 🟢 | J37b | Survives save and reopen; appears in the method table | T2 | | 0 | 0 | |
-| J37b | J37 reviewed and merged | L | 0.2 | J37a | | Approved; gate green | T2 | | 0 | 0 | |
-| J27d | J27 reviewed and merged | L | 0.2 | 🟢 | | Approved; gate green | FL | | 0 | 0 | |
-| J43 | With a panel in use, the headline and composition figures use the per-panel-family totals (D40, B): before and after shown on a real project with several families in one panel family, science review, the old unit kept in the supplement | M | 1 | J27d | | Red then green on a multi-family fixture; before/after table on a real project; reviewed | FL | | 0 | 0 | |
+| J43 | With a panel in use, the headline and composition figures use the per-panel-family totals (D40, B): before and after shown on a real project with several families in one panel family, science review, the old unit kept in the supplement | M | 1 | 🟢 | | Red then green on a multi-family fixture; before/after table on a real project; reviewed | FL | | 0 | 0 | |
 | J40 | Help explains what 2.1 adds: the progress lines, the cached reopen, "no peptide observed", the scope phrases, link notes | L | 0.5 | J35c | | A test reads each menu name in the text from the live menu | T2 | | 0 | 0 | |
+| J46a | An Anthropic API key the user can add, test, replace or remove (Help > AI assistant key), stored per user with Windows protection, never in a project, the repository, a log or a report; import from a key file placed next to the project (Paulo, 11-03) | L | 0.5 | J40 | J46b | Fixture tests for works, wrong key, no credit, rate limit, no connection; the key never appears in project bytes | T2 | | 0 | 0 | |
+| J46b | Optional "Draft interpretation with AI": the user sees exactly what is sent (J45's input), confirms, the text returns into the interpretation field labelled "AI draft (model, date)", and every number in it is checked against the program's own tables (J18 trace) before the user accepts | M | 1 | J46a | J46c | Fake-transport tests for every outcome; one live call reported; works fully without a key | T2 | | 0 | 0 | |
+| J46c | J46 reviewed and merged | L | 0.2 | J46b | | Approved; gate green | T2 | | 0 | 0 | |
 | J42 | The family-assignment accuracy check (leave-one-out on reviewed proteins) accepts a project whose scope has several phrases: on the D39 project it refuses with "The session search no longer matches the current queries and reviewed references" (EvidenceSession.cs:42-68 does not accept the panel review's stored search over the in-scope references) | L | 0.5 | 🟢 | K14 | Red then green: a fixture with a two-phrase scope runs the audit; on a copy of the D39 project it prints the right, wrong and abstained counts | T2 | | 0 | 0 | |
 
 ## Critical path
@@ -164,6 +163,7 @@ The full history, D1 to D39, is in `docs/ROADMAP-archive.md`.
 | D38 | The ambiguous family links | Decided from Ana's written rules (disintegrin and M12B Disintegrin-only to DIS, DC stays SVMP, endonuclease to NUCL, snaclec and true venom lectin to CTL, M12B to SVMP). Desk, 11-02 |
 | D39 | The scope of families by evidence | "Toxin", "venom gland", so the panel's galactose-binding lectins (Gal-CTL, merge into CTL) join CTL; the report's method states the scope. Desk, 11-03 06:35 |
 | D41 | The three new link choices the D39 scope raised | Decided by D38's rule (the source family decides; a source-less domain combination stays outside): venom Kunitz-type family, any combination, to KUN; the same family with Kunitz_BPTI plus WAP to KUN; no source family with Kunitz_BPTI plus WAP stays outside. Checked against the panel's KUN and Waprin rows by FQReview (K3). Desk, 11-03 08:20 |
+| D42 | How Ana gets the AI key | Option b: Paulo's key ships only as a small file next to Ana's report, never in the program, the public release or the repository; FamilyQuant offers to import it on first use and stores it per user with Windows protection (J46a). Paulo, 11-03 08:55 ("i will follow your advice") |
 | D40 | Headline unit when several families share a panel family | B: with a panel in use, the headline and composition figures use the per-panel-family totals (J27), which credit a peptide shared inside one panel family once. Done in 2.1.1, right after Ana's delivery (step J43); her project has one family per panel family, so her numbers are the same either way. Paulo, 11-03 08:28 ("lets go with B") |
 
 ## Risks and triggers
