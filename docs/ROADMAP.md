@@ -72,9 +72,8 @@ The rerun of the full analysis with the scope "Toxin", "venom gland" (D39), so t
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
 | K7 | Second reader: every number in the program-written Summary of findings (J44) on Ana's project matched to its cell in the program's exports | M | 0.4 | J44b | K17 | A table of number, source cell and match, with no mismatch | GR2 | | 0 | 0 | |
-| J44a | The program interprets as much as it can without an LLM (Paulo, 11-03 08:45: "strict results like do tables, and very informative plots"): a Summary of findings section from the stored studies with fixed templates, only data-bound statements (values, counts, ranks, ranges, presence, comparisons with stored references), and, where the panel holds numeric references, observed share against the panel's reference per family; numbers in a supplement sheet | M | 1 | 🟢 | J44b | Red then green on a fixture: every sentence present when its data exist, absent when not; numbers equal the headline and studies; D21 guard passes | OP | | 0 | 0 | |
-| J44b | J44 reviewed and merged | L | 0.2 | J44a | K7, K14 | Approved; gate green | OP | | 0 | 0 | |
-| J45 | File > Export > Interpretation input: one plain file a user can give to an AI assistant of their choice (report details, the panel table as entered, the result tables, the analysis choices, a neutral instruction to quote numbers only from the tables); the program never calls an LLM (Paulo, 11-03) | L | 0.5 | J44a | | Deterministic export; its test; D21 wording | OP | | 0 | 0 | |
+| J44b | J44 reviewed and merged | L | 0.2 | 🟢 | K7, K14 | Approved; gate green | OP | | 0 | 0 | |
+| J45 | File > Export > Interpretation input: one plain file a user can give to an AI assistant of their choice (report details, the panel table as entered, the result tables, the analysis choices, a neutral instruction to quote numbers only from the tables); the program never calls an LLM (Paulo, 11-03) | L | 0.5 | 🟢 | | Deterministic export; its test; D21 wording | OP | | 0 | 0 | |
 
 ### W3 The report export works and is fast
 
@@ -82,8 +81,7 @@ The export failed on Ana's project (a figure read the on-screen palette from the
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| J34b | Look fixes for the listed items | M | 1 | 🟢 | J34c | Each item fixed or ruled | LK | | 0 | 0 | |
-| J34c | J34 reviewed and merged | L | 0.2 | J34b | K14 | Approved; gate green | LK | | 0 | 0 | |
+| J34c | J34 reviewed and merged | L | 0.2 | 🟢 | K14 | Approved; gate green | LK | | 0 | 0 | |
 
 ### W4 Release 2.1.0 on GitHub
 
@@ -111,8 +109,8 @@ Compute took 37 to 54 minutes on Ana's project with the RAW cache warm, silent f
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| J35b | Progress on the full-run project: the longest gap between two steps named | L | 0.3 | 🟢 | J35c | `READY` names the longest gap and its phase | SH | | 0 | 0 | |
-| J35c | J35 reviewed and merged | L | 0.2 | J35b | J40 | Approved; gate green | SH | | 0 | 0 | |
+| J35c | J35 reviewed and merged | L | 0.2 | 🟢 | J40 | Approved; gate green | SH | | 0 | 0 | |
+| J48 | Saving the full-run project fits in memory: J35b's measurement hit an OutOfMemoryException in SavedFileCheck.Curation -> ToJsonText under an 8 GB heap cap; find whether the product's Save builds the whole curation JSON as one string and what heap Save needs, and if a 16 GB office PC could run out, stream it with the same bytes written | M | 0.5 | J35c | | FINDING first; if fixed, byte-identical saved file on the full-run copy and the peak measured before and after | SH | | 0 | 0 | |
 | J38c | First fix: Compute reuses the attribution FullXicCompletionStage already computed instead of the family-world step searching again (calls 3 and 4 repeat 1 and 2: 366 s of 923 s on WORKHORSE) | H | 1 | 🟢 | J38d | Byte-identical stored results on a fixture | AS | | 0 | 0 | |
 | J38d | New HomologySearch method (Paulo, 11-03 09:20) from Fable's plan (docs/ideas/HOMOLOGY-PERFORMANCE.md): the mismatch-budget early exit, the exact-containment shortcut for best-score identified queries with the matrix guard, and the diagonal q-gram prefilter; every caller switches to it; the old HomologyMapper stays unchanged, marked [Obsolete] ("use HomologySearch"), as the reference the equivalence tests compare against | M | 1 | J38c | J38e | Every stored result byte-identical to the old method on fixtures and on the full-run copy; old and new compared hit for hit on every search call | AS | | 0 | 0 | |
 | J38e | Compute before and after on the full-run copy | L | 0.3 | J38d | J38f | Both times; stored results byte-identical | AS | | 0 | 0 | |
@@ -126,9 +124,7 @@ Compute took 37 to 54 minutes on Ana's project with the RAW cache warm, silent f
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
 | J43 | With a panel in use, the headline and composition figures use the per-panel-family totals (D40, B): before and after shown on a real project with several families in one panel family, science review, the old unit kept in the supplement | M | 1 | 🟢 | | Red then green on a multi-family fixture; before/after table on a real project; reviewed | FL | | 0 | 0 | |
 | J40 | Help explains what 2.1 adds: the progress lines, the cached reopen, "no peptide observed", the scope phrases, link notes | L | 0.5 | J35c | | A test reads each menu name in the text from the live menu | T2 | | 0 | 0 | |
-| J46a | An Anthropic API key the user can add, test, replace or remove (Help > AI assistant key), stored per user with Windows protection, never in a project, the repository, a log or a report; import from a key file placed next to the project (Paulo, 11-03) | L | 0.5 | J40 | J46b | Fixture tests for works, wrong key, no credit, rate limit, no connection; the key never appears in project bytes | T2 | | 0 | 0 | |
-| J46b | Optional "Draft interpretation with AI": the user sees exactly what is sent (J45's input), confirms, the text returns into the interpretation field labelled "AI draft (model, date)", and every number in it is checked against the program's own tables (J18 trace) before the user accepts | M | 1 | J46a | J46c | Fake-transport tests for every outcome; one live call reported; works fully without a key | T2 | | 0 | 0 | |
-| J46c | J46 reviewed and merged | L | 0.2 | J46b | | Approved; gate green | T2 | | 0 | 0 | |
+| J46c | J46 reviewed and merged | L | 0.2 | 🟢 | | Approved; gate green | T2 | | 0 | 0 | |
 
 ## Critical path
 
