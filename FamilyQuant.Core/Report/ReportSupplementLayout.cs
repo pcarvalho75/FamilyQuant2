@@ -4,6 +4,7 @@ using System.Globalization;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace FamilyQuant.Report;
 
@@ -43,7 +44,7 @@ public static class ReportSupplementLayout
                 }
                 string name = SheetName(table.Id, table.Title);
                 sheets.Add(new(table.Id, section.Id, name, full));
-                return (ReportBlock)new ReportParagraph(table.Id, table.Title + ". See the companion supplement workbook, sheet '" + name + "'. " + table.Caption);
+                return (ReportBlock)new ReportParagraph(table.Id, table.Title + ". See the companion supplement workbook, sheet '" + name + "'. " + ReferenceCaption(table.Caption));
             }).ToArray(),
         }).ToList();
         foreach (var export in csvExports.OrderBy(p => p.Key, StringComparer.Ordinal))
@@ -65,6 +66,11 @@ public static class ReportSupplementLayout
         }
         return new(source with { Sections = sections }, sheets.Concat(listSheets).ToArray());
     }
+
+    // The Word view may have fewer rows/columns than its complete native worksheet.
+    // Remove only the generated grid-size sentence from reference prose; keep the native caption and cells intact.
+    private static string ReferenceCaption(string caption) => Regex.Replace(caption,
+        @"(?<!\S)The table shows [0-9]+ data rows? across [0-9]+ columns?\.(?:\s+|$)", "", RegexOptions.CultureInvariant).Trim();
 
     private static ReportSection FamilyBrief(ReportSection section, List<ReportSupplementSheet> sheets, List<ReportSupplementSheet> listSheets)
     {
@@ -115,9 +121,9 @@ public static class ReportSupplementLayout
         sheets.Add(new(id, section.Id, name, new ReportTable(id, section.Title + " - complete panel and observed detail",
             new[] { "Source table", "Row", "Field", "Native value", "Word display value" }, detail,
             "Complete user panel text and native observations. Source captions retain units and availability. The Word brief uses six significant digits for observed numeric values.")));
-        string text = panelText.ToString();
-        bool excerpt = text.Length > 300;
-        if (excerpt) { text = text[..300]; if (char.IsHighSurrogate(text[^1])) text = text[..^1]; }
+        string completeText = panelText.ToString();
+        string text = PanelExcerpt(completeText, 300);
+        bool excerpt = text.Length < completeText.TrimEnd().Length;
         var blocks = new List<ReportBlock>();
         if (text.Length > 0) blocks.Add(new ReportParagraph(section.Id + ":panel-brief", (excerpt ? "Panel text excerpt: " : "Panel text: ") + text + (excerpt ? " ..." : "")));
         foreach (string observation in observations) blocks.Add(new ReportParagraph(section.Id + ":observation-brief:" + blocks.Count.ToString(CultureInfo.InvariantCulture), observation));
@@ -126,6 +132,20 @@ public static class ReportSupplementLayout
         blocks.Add(new ReportParagraph(section.Id + ":detail-reference",
             "Full panel text, literature, notes, sources, observed tables and units: supplement sheet '" + name + "'. Share entries in the brief are fractions unless their label states otherwise."));
         return section with { Blocks = blocks };
+    }
+
+    private static string PanelExcerpt(string text, int limit)
+    {
+        if (text.Length <= limit) return text;
+        int end = limit;
+        while (end > 0 && !char.IsWhiteSpace(text[end])) end--;
+        // An unusually long first token is retained whole rather than printing part of a word or number.
+        if (end == 0)
+        {
+            end = limit;
+            while (end < text.Length && !char.IsWhiteSpace(text[end])) end++;
+        }
+        return text[..end].TrimEnd();
     }
 
     private static string BriefValue(ReportTable table, int column, string raw)
