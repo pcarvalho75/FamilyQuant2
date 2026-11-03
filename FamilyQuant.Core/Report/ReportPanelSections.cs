@@ -166,6 +166,13 @@ public static class ReportPanelSections
                 }
                 if (!hasObserved && ids.Length == 0) blocks.Add(new ReportParagraph(blockPrefix + "observation-status", "Panel-linked quantitative observations are not available. Missing observations are not zero abundance."));
             }
+            blocks = blocks.Select(block => block is ReportTable table && table.Id.EndsWith(":subclass-definitions", StringComparison.Ordinal)
+                ? table with { ListColumns = new[]
+                {
+                    new ReportListColumn(2, "Required domains", family.Subclasses.Select(s => (IReadOnlyList<string>)s.RequiredPfam.ToArray()).ToArray()),
+                    new ReportListColumn(3, "Absent domains", family.Subclasses.Select(s => (IReadOnlyList<string>)s.AbsentPfam.ToArray()).ToArray()),
+                    new ReportListColumn(4, "Source subfamilies", family.Subclasses.Select(s => (IReadOnlyList<string>)s.UniProtSubfamilies.ToArray()).ToArray()),
+                } } : block).ToList();
             sections.Add(new ReportSection(id, family.DisplayName, blocks));
         }
         return sections;

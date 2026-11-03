@@ -171,6 +171,7 @@ public static class WordReportWriter
 
     private static W.Table Table(ReportTable data)
     {
+        data = ReportListSheets.WordView(data);
         int[] widths = Enumerable.Range(0, data.Columns.Count)
             .Select(index => PageWidth / data.Columns.Count + (index < PageWidth % data.Columns.Count ? 1 : 0)).ToArray();
         var result = new W.Table(new W.TableProperties(new W.TableWidth { Width = PageWidth.ToString(CultureInfo.InvariantCulture), Type = W.TableWidthUnitValues.Dxa },

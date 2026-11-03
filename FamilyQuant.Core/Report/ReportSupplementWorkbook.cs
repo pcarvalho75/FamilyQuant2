@@ -68,6 +68,7 @@ public static class ReportSupplementWorkbook
             if (string.IsNullOrWhiteSpace(section.Id) || !owners.TryAdd(section.Id, section.Title))
                 throw new ArgumentException("Report section ids must be nonempty and unique.", nameof(document));
         sheets = ReportTableSupplements.Complete(document, sheets);
+        sheets = ReportListSheets.Complete(sheets);
         var names = new HashSet<string>(StringComparer.OrdinalIgnoreCase) { ContentsName };
         var ids = new HashSet<string>(StringComparer.Ordinal);
         foreach (var sheet in sheets)
@@ -80,7 +81,8 @@ public static class ReportSupplementWorkbook
             if (sheet.Table == null) throw new ArgumentException("A supplement sheet requires its source table.", nameof(sheets));
         }
         var excluded = new HashSet<string>(selection?.ExcludedIds ?? Array.Empty<string>(), StringComparer.Ordinal);
-        var included = sheets.Where(sheet => !excluded.Contains(sheet.Id) && !excluded.Contains(sheet.OwnerSectionId)).ToArray();
+        var included = sheets.Where(sheet => !excluded.Contains(sheet.Id) && !excluded.Contains(sheet.OwnerSectionId)
+            && (sheet.SourceTableId == null || !excluded.Contains(sheet.SourceTableId))).ToArray();
         var index = new ReportTable("supplement-index", ContentsName,
             new[] { "Worksheet", "Report section", "Table", "Table id", "Data rows" },
             included.Select(sheet => (IReadOnlyList<string>)new[] { sheet.Name, owners[sheet.OwnerSectionId], sheet.Table.Title,

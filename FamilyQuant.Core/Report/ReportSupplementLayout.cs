@@ -26,9 +26,10 @@ public static class ReportSupplementLayout
     public static ReportSupplementLayoutResult Apply(ReportDocument source, IReadOnlyDictionary<string, string> csvExports)
     {
         var sheets = new List<ReportSupplementSheet>();
+        var listSheets = new List<ReportSupplementSheet>();
         var usedFiles = new HashSet<string>(StringComparer.Ordinal);
         var sections = source.Sections.Select(section => section.Id.StartsWith(ReportSectionIds.FamilyPrefix, StringComparison.Ordinal)
-            ? FamilyBrief(section, sheets) : section with
+            ? FamilyBrief(section, sheets, listSheets) : section with
         {
             Blocks = section.Blocks.Select(block =>
             {
@@ -61,10 +62,10 @@ public static class ReportSupplementLayout
                 "The companion workbook uses the same report name followed by _supplement.xlsx. Its Contents sheet lists every selected detail table and its source section. Full current-grouping, per-run, per-protein and per-peptide detail is retained there. Worksheets follow the owning section choices."));
             sections[supplement] = sections[supplement] with { Blocks = blocks };
         }
-        return new(source with { Sections = sections }, sheets);
+        return new(source with { Sections = sections }, sheets.Concat(listSheets).ToArray());
     }
 
-    private static ReportSection FamilyBrief(ReportSection section, List<ReportSupplementSheet> sheets)
+    private static ReportSection FamilyBrief(ReportSection section, List<ReportSupplementSheet> sheets, List<ReportSupplementSheet> listSheets)
     {
         var detail = new List<IReadOnlyList<string>>();
         var observations = new List<string>();
@@ -73,6 +74,8 @@ public static class ReportSupplementLayout
         {
             if (block is ReportTable table)
             {
+                listSheets.AddRange(ReportListSheets.ForTable(table, section.Id, SheetName(section.Id + ":full-detail", section.Title)));
+                table = ReportListSheets.WordView(table);
                 for (int row = 0; row < table.Rows.Count; row++)
                     for (int column = 0; column < table.Columns.Count; column++)
                     {
