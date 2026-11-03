@@ -434,6 +434,7 @@ Paulo agreed these at the restart, 2026-11-01.
 | J34a | The report's look: the 38-page rehearsal report read page by page as a scientist would | M | 0.5 | 🟢 | J34b | A numbered list with page, figure id and file:line | LK | | 0 | 0 | |
 | J16b | J16 re-reviewed and merged | L | 0.2 | 🟢 | J34b, K8, K14 | Approved; gate green | LK | | 0 | 0 | |
 | J30c | J30 reviewed and merged | L | 0.2 | J30b | J24c, J32c, J34b, J36b, K8, K14 | Approved; gate green | RS | | 0 | 0 | |
+| J32c | Export timing on the full-run copy: the attribution step with the cache warm, its sub-steps timed | L | 0.3 | J41b | J32d, J39 | `READY` with the sub-step times before and after | T1 | | 0 | 0 | |
 
 ### W7 Clear reasons and totals
 
