@@ -96,9 +96,7 @@ Ana installs it from the public releases page (D31); the desk publishes on Paulo
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| J34e | Numbers never wrap inside a Word table cell (Ana's report p114 quality-family-world and p129 database-gap-table split exact values, the last digit alone on a line); exact values stay in the workbook and CSV (moved from J34d item 3, 11-03 11:05, to run in parallel) | L | 0.4 | 🟢 | K14 | Red then green on a fixture with long exact values; the page check shows p114 and p129 whole; no cell value changes; trace unchanged | SH | | 0 | 0 | |
-| J44d | The Summary of findings' closing workbook-reference paragraph stays on the page with the summary (on Ana's report it spilled alone onto an otherwise empty p6; FQLook's page proof, 11:20) | L | 0.2 | 🟢 | K14 | The real export shows the reference on p5 with the summary; no text or number changes | OP | | 0 | 0 | |
-| K14 | Final export of the interpreted project through the real command, on master with J30, J24, J16, J32 and J34 | L | 0.5 | J34e, J44d, K8 | K15, K16 | Word report and supplement written | OP | | 0 | 0 | |
+| K14 | Final export of the interpreted project through the real command, on master with J30, J24, J16, J32 and J34 | L | 0.5 | K8 | K15, K16 | Word report and supplement written | OP | | 0 | 0 | |
 | K15 | Number trace on the final report: every number found, or each one not found ruled | L | 0.2 | K14 | K17 | `trace.csv` with nothing left open | T1 | | 0 | 0 | |
 | K16 | The final report's pages read for look and sense | L | 0.3 | K14 | K17 | No blocking item | LK | | 0 | 0 | |
 | K17 | Delivered: the Word report, supplement, project, family panel, a read-me with the release link, and the AI key file (D42) written to `AnaG/Bjararaca/Relatorio`; nothing else in Ana's folders touched | L | 0.2 | K7, K15, K16, K11 | | The five items with hashes; the rest of AnaG unchanged | OP | | 0 | 0 | |
