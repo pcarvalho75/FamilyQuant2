@@ -18,7 +18,9 @@ internal static class ReportTableLayout
             bool numeric = cells.Length > 0 && cells.All(cell => double.TryParse(cell.TrimEnd('%'),
                 NumberStyles.Float, CultureInfo.InvariantCulture, out _));
             int longest = cells.Select(cell => cell.Length).DefaultIfEmpty(0).Max();
-            widths[column] = numeric ? Math.Clamp((longest + 2) * 110, 800, 2000) : 1100;
+            int headingWord = table.Columns[column].Split(new[] { ' ', '_', '-', '/' }, StringSplitOptions.RemoveEmptyEntries)
+                .Select(word => word.Length).DefaultIfEmpty(0).Max();
+            widths[column] = numeric ? Math.Clamp(Math.Max((longest + 2) * 110, (headingWord + 2) * 130), 800, 2200) : 1100;
             weights[column] = numeric ? .15 : Math.Sqrt(Math.Clamp(Math.Max(longest, table.Columns[column].Length), 8, 100));
         }
         int remainder = available - widths.Sum();

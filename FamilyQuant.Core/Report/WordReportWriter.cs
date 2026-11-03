@@ -216,7 +216,7 @@ public static class WordReportWriter
         }
         result.Append(Row(data.Columns, true, true));
         for (int index = 0; index < data.Rows.Count; index++)
-            result.Append(Row(data.Rows[index], false, false));
+            result.Append(Row(data.Rows[index], false, index == data.Rows.Count - 1 && !string.IsNullOrWhiteSpace(data.Caption)));
         return result;
     }
 

@@ -66,6 +66,12 @@ internal static partial class Program
             sourceWidths.Length == wide.Columns.Count && sourceWidths[^1] > sourceWidths[2]
             && tables[0].Elements(w + "tr").Skip(1).SelectMany(r => r.Elements(w + "tc"))
                 .Select(c => string.Join("\n", c.Descendants(w + "t").Select(t => t.Value))).SequenceEqual(wide.Rows.SelectMany(r => r)));
+        var headerFace = new Typeface(new FontFamily("Calibri"), System.Windows.FontStyles.Normal,
+            System.Windows.FontWeights.Bold, System.Windows.FontStretches.Normal);
+        Check("numeric source headers fit without splitting their words",
+            Enumerable.Range(2, 4).All(column => wide.Columns[column].Split(' ').All(word =>
+                new FormattedText(word, System.Globalization.CultureInfo.InvariantCulture, System.Windows.FlowDirection.LeftToRight,
+                    headerFace, 11 * 96.0 / 72, ChartPalette.Light.Ink, 1).Width * 72 / 96 + 10 <= sourceWidths[column] / 20.0)));
         Check("narrative audit columns get more width than numeric counts",
             tables[^1].Element(w + "tblGrid")!.Elements(w + "gridCol")
                 .Select(c => (int)c.Attribute(w + "w")!).Distinct().Count() > 1);
@@ -178,6 +184,7 @@ internal static partial class Program
     private static FamilyEnvelopeQuantResult ReportReaderFamilyTests(AnalyticsData data)
     {
         var families = FamilyFixture(12);
+        families.SourceSequenceSummary.SearchInputDistinctSequences = 24;
         foreach (var family in families.Families)
         {
             family.Description = "Synthetic complete family name with a long descriptive architecture " + family.FamilyUserId;
@@ -192,7 +199,8 @@ internal static partial class Program
         var source = plan.Charts.Where(c => c.FileName.StartsWith("family_source_sequence_counts", StringComparison.Ordinal)).ToArray();
         Check("source census caption declares the selected top eight and the complete population",
             source.All(c => c.CaptionInput!.Numbers.Any(n => n.Label.Contains("Selected", StringComparison.Ordinal) && n.Value == 8)
-                && c.CaptionInput.Numbers.Any(n => n.Label.Contains("census", StringComparison.Ordinal) && n.Value == 12)));
+                && c.CaptionInput.Numbers.Any(n => n.Label.Contains("census", StringComparison.Ordinal) && n.Value == 12)
+                && c.CaptionInput.Numbers.Any(n => n.Label == "Input identified distinct sequences" && n.Value == 24)));
         Check("abbreviated family labels point to complete names by id",
             plan.Charts.Where(c => c.FileName == AnalyticsFigures.FamilyContributionFile || c.FileName == PresentationFigures.FamilySignalShareFile)
                 .All(c => c.Caption.Contains("family id", StringComparison.OrdinalIgnoreCase)
