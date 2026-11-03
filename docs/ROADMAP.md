@@ -161,6 +161,7 @@ Paulo agreed these at the restart, 2026-11-01.
 
 | ID | Question | Taken |
 |---|---|---|
+| D38 | The 13 ambiguous family links in J2a | Confirmed by the desk from Ana's written rules (tab 1 merges, tab 4 rules 2, 3 and 5): disintegrin family and M12B Disintegrin-only to DIS, the DC architecture stays SVMP, the non-specific endonuclease family to NUCL, snaclec and true venom lectin to CTL, M12B to SVMP; source-less single-domain contexts stay outside the link table. Stored as user choices in the project, attributed to her consensus. Desk, 11-02 23:02 |
 | D33 | Which de novo data | Ana's three-run export (`AnaG/DeNovo_ALC-50percent`, PEAKS de novo all), cut by the program at ALC 80. Paulo, 11-02 |
 | D35 | Which families | All 41 of Ana's consensus families with her decisions: Excluir is not a family, Fundir em CTL joins CTL, the rest are measured, and those under 0.1% are listed as others with the names in a supplement. Paulo, 11-02 |
 | D36 | Report language | English, with Ana's own family names from her file. Paulo, 11-02 |
