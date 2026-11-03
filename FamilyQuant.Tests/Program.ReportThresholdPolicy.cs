@@ -88,6 +88,10 @@ internal static partial class Program
         bool staleRefused = false;
         try { FamilyReportThreshold.Build(source, project); } catch (InvalidOperationException) { staleRefused = true; }
         Check("J5c refuses stale panel assignment evidence", staleRefused);
+        bool missingPanelRefused = false;
+        try { FamilyReportThreshold.Build(source, new FamilyClusterFile { PanelProteinAssignments = new() }); }
+        catch (InvalidOperationException) { missingPanelRefused = true; }
+        Check("J5c refuses stored assignments when their panel is missing", missingPanelRefused);
         project.PanelProteinAssignmentsPanelFingerprint = PanelDerivedDataCurrentness.Fingerprint(project.FamilyPanel!);
         project.MyExtendedFastaItems[1].UserID = 99;
         bool changedRefused = false;

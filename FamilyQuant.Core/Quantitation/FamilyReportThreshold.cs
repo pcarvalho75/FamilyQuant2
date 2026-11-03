@@ -26,8 +26,10 @@ namespace FamilyQuant
         {
             ArgumentNullException.ThrowIfNull(project);
             var mapping = new Dictionary<int, IReadOnlyList<string>>();
-            if (project.FamilyPanel != null && project.PanelProteinAssignments != null)
+            if (project.PanelProteinAssignments != null)
             {
+                if (project.FamilyPanel == null)
+                    throw new InvalidOperationException("The panel for stored family assignments is missing. Rebuild them before reporting.");
                 if (PanelDerivedDataCurrentness.Check(project).FamilyAssignments == PanelDerivedDataStatus.OutOfDate)
                     throw new InvalidOperationException("Panel family assignments are out of date. Rebuild them before reporting.");
                 foreach (var item in project.PanelProteinAssignments.Where(x => x.IsApplied && x.FamilyUserId.HasValue && x.PanelFamilyKey != null))
