@@ -412,6 +412,16 @@ namespace FamilyQuant.Tests
             suite.Add(() => PanelEvidenceValidationTests());
             suite.Add(() => PanelFamilyMapContractTests());
             suite.Add(() => PanelFamilyDependencyContractTests());
+            suite.Section("Complete report command and document fixture packs");
+            suite.AddWithApplication(() => RunReportDetailsTests());
+            suite.AddWithApplication(() => RunReportInputTests());
+            suite.Add(() => ReportPublicationTests());
+            suite.AddWithApplication(() => ReportReaderTests(Path.Combine(workDir, "report-reader-" + Guid.NewGuid().ToString("N"))));
+            suite.AddWithApplication(() => RunReportSelectionTests());
+            suite.Add(() => ReportSupplementTests(new[] { "--test-report-supplement",
+                Path.Combine(workDir, "report-workbook-" + Guid.NewGuid().ToString("N")) }));
+            suite.AddWithApplication(() => J34dTests());
+            suite.AddWithApplication(() => K16LayoutTests());
             return suite;
         }
 
