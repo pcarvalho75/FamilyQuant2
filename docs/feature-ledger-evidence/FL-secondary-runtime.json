@@ -5,436 +5,436 @@
   "runs": [
     {
       "id": "secondary",
-      "command": "C:\\FamilyQuant-gate\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --ledger-secondary-runtime D:/FamilyQuant-data/out-floater/secondary/frozen-source D:/FamilyQuant-data/out-floater/secondary/master-audit-4 D:/FamilyQuant-data/reference-1.5.0.6/app D:/FamilyQuant-data/out-refresh\\20261102-182444-FamilyQuant-gate\\secondary-runtime \u00222026-11-02 18:28:08 -0800\u0022",
-      "executedAt": "2026-11-02 18:28:08 -0800",
-      "commit": "8421552b22169f5b7ab3c44f2670c992e5e4562c",
+      "command": "C:\\FamilyQuant-gate\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --ledger-secondary-runtime D:/FamilyQuant-data/out-floater/secondary/frozen-source D:/FamilyQuant-data/out-floater/secondary/master-audit-4 D:/FamilyQuant-data/reference-1.5.0.6/app D:/FamilyQuant-data/out-refresh\\20261102-200137-FamilyQuant-gate\\secondary-runtime \u00222026-11-02 20:01:59 -0800\u0022",
+      "executedAt": "2026-11-02 20:01:59 -0800",
+      "commit": "8055dd8dea22616648a9313f1aebd83f7ea2264d",
       "artifacts": [
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\secondary-runtime\\runtime.log",
-          "sha256": "1576BFC95C8650BF4B2757CE893F4BB208E7BAC5D82FCEC71768C230B8F2A015"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-200137-FamilyQuant-gate\\secondary-runtime\\runtime.log",
+          "sha256": "EA0078BC2511185E9AF793AA93604F88ED4DF056042C789F2D75DBED358B3FEB"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\secondary-runtime\\runtime.json",
-          "sha256": "C6CC49A72650EB3CDB10D24667EC6B62CF79F6394C9824E7237D25FE95F903D7"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-200137-FamilyQuant-gate\\secondary-runtime\\runtime.json",
+          "sha256": "7B517AB38EDB342BCA1C9B1352644E5F5E3499B7D3B1D646498EAD80C37E40A3"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\secondary-runtime\\executed\\FamilyQuant.Core/FamilyNaming.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-200137-FamilyQuant-gate\\secondary-runtime\\executed\\FamilyQuant.Core/FamilyNaming.cs",
           "sha256": "9B817ED6F1C6AF80A2FFC59A242638F7625A53F2AC1680E1D8CA7A853A0508D0"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\secondary-runtime\\executed\\FamilyQuant.Core/ProjectStore.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-200137-FamilyQuant-gate\\secondary-runtime\\executed\\FamilyQuant.Core/ProjectStore.cs",
           "sha256": "CF34F9F920078064A0F94CA8C3F1021ABFD2D1D6229A69C15E75C9ED899E8949"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\secondary-runtime\\executed\\FamilyQuant.Core\\Storage\\DerivedRunFraction.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-200137-FamilyQuant-gate\\secondary-runtime\\executed\\FamilyQuant.Core\\Storage\\DerivedRunFraction.cs",
           "sha256": "DB943BF669B6E133E4359C2FABF73502C482052C94E0694F5AC3BD6BF87E68F3"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\secondary-runtime\\executed\\FamilyQuant.Core\\Storage\\ProjectArchiveEntries.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-200137-FamilyQuant-gate\\secondary-runtime\\executed\\FamilyQuant.Core\\Storage\\ProjectArchiveEntries.cs",
           "sha256": "E6F5E379CA8B22948A63F9E8955AF7B5727E9963DA17C8637865504F8B31739C"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\secondary-runtime\\executed\\FamilyQuant.Core\\Storage\\ProjectFileSchema.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-200137-FamilyQuant-gate\\secondary-runtime\\executed\\FamilyQuant.Core\\Storage\\ProjectFileSchema.cs",
           "sha256": "CA83EE0B4B17D735F0C59EBDA615432F09856F7999CF885E40EBBC6173ED492B"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\secondary-runtime\\executed\\FamilyQuant.Core\\Storage\\ProjectManifestCodec.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-200137-FamilyQuant-gate\\secondary-runtime\\executed\\FamilyQuant.Core\\Storage\\ProjectManifestCodec.cs",
           "sha256": "CB22639FA210E2838BD5F760C071E23AF0A74E49291479D8EEC9997AB9D7FE55"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\secondary-runtime\\executed\\FamilyQuant.Core\\Storage\\ProjectQuantCodec.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-200137-FamilyQuant-gate\\secondary-runtime\\executed\\FamilyQuant.Core\\Storage\\ProjectQuantCodec.cs",
           "sha256": "A5097760D179973DCC6D29CEAA10208254C0B925D67E691F650B62A6BC97F1EC"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\secondary-runtime\\executed\\FamilyQuant.Core\\Storage\\ProjectSpectrumCodec.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-200137-FamilyQuant-gate\\secondary-runtime\\executed\\FamilyQuant.Core\\Storage\\ProjectSpectrumCodec.cs",
           "sha256": "5DC87F85CB5719C9B38FD3262909E9D764CA9251D263DDE77B7199A0448356C5"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\secondary-runtime\\executed\\FamilyQuant.Core\\Storage\\QuantManifest.cs",
-          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-200137-FamilyQuant-gate\\secondary-runtime\\executed\\FamilyQuant.Core\\Storage\\QuantManifest.cs",
+          "sha256": "FBB1D2B23FB2B5A50E928F87D7C2F046C4341021F363FE7384E94AC90A875B87"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\secondary-runtime\\executed\\FamilyQuant.Core\\Storage\\QuantRow.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-200137-FamilyQuant-gate\\secondary-runtime\\executed\\FamilyQuant.Core\\Storage\\QuantRow.cs",
           "sha256": "7C8F6076F895F8935C09E72A8B12C79AB42886CA35F9132E026F77CE3DF307F1"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\secondary-runtime\\executed\\FamilyQuant.Tests/Program.Commands.SecondaryLedger.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-200137-FamilyQuant-gate\\secondary-runtime\\executed\\FamilyQuant.Tests/Program.Commands.SecondaryLedger.cs",
           "sha256": "F38C27B0A3B11CDFD6D6FECC4ED8F00C0E1B1B24E2C3D5C8916E6106C703CCC1"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\secondary-runtime\\executed\\FamilyQuant.Tests/Program.QuantifyClose.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-200137-FamilyQuant-gate\\secondary-runtime\\executed\\FamilyQuant.Tests/Program.QuantifyClose.cs",
           "sha256": "D4068BFE30D88454161F5F37A21A7F0A58E4A0ADAB6BF1979B9D41C54EF8FDD2"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\secondary-runtime\\executed\\FamilyQuant.Tests\\Program.SecondaryCacheRuntime.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-200137-FamilyQuant-gate\\secondary-runtime\\executed\\FamilyQuant.Tests\\Program.SecondaryCacheRuntime.cs",
           "sha256": "6FEDD2F8469AF7FA30C493E2A8FCFECFE22A3FFA6DA0764612547C43FC1083E5"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\secondary-runtime\\executed\\FamilyQuant.Tests\\Program.SecondaryComputeInteractions.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-200137-FamilyQuant-gate\\secondary-runtime\\executed\\FamilyQuant.Tests\\Program.SecondaryComputeInteractions.cs",
           "sha256": "C24C45F098D04CB7EAD6A45BB9B921BF16F8ED71B042EFB72F1C9803E2B64E42"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\secondary-runtime\\executed\\FamilyQuant.Tests\\Program.SecondaryComputeRuntime.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-200137-FamilyQuant-gate\\secondary-runtime\\executed\\FamilyQuant.Tests\\Program.SecondaryComputeRuntime.cs",
           "sha256": "0DFD6DCCD5F80A6EC8E9F660A1B9AE33E4E9521D962C7513C5BE0BDA338702F0"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\secondary-runtime\\executed\\FamilyQuant.Tests\\Program.SecondaryComputeSpectrum.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-200137-FamilyQuant-gate\\secondary-runtime\\executed\\FamilyQuant.Tests\\Program.SecondaryComputeSpectrum.cs",
           "sha256": "A65FEADA88D49B36B9E8D8F6E757016E323456E2E602C358FE0107BDB212551E"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\secondary-runtime\\executed\\FamilyQuant.Tests\\Program.SecondaryControlsRuntime.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-200137-FamilyQuant-gate\\secondary-runtime\\executed\\FamilyQuant.Tests\\Program.SecondaryControlsRuntime.cs",
           "sha256": "699289C396E33B57A9970168F5CD540895E9A7D5024ED23189A6412588821E6D"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\secondary-runtime\\executed\\FamilyQuant.Tests\\Program.SecondaryDialogs.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-200137-FamilyQuant-gate\\secondary-runtime\\executed\\FamilyQuant.Tests\\Program.SecondaryDialogs.cs",
           "sha256": "A95D77642F0E67608D1F5A7F60B5057AAB66FD12D4F557EB47E0AA812CDA875F"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\secondary-runtime\\executed\\FamilyQuant.Tests\\Program.SecondaryGridBoundaries.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-200137-FamilyQuant-gate\\secondary-runtime\\executed\\FamilyQuant.Tests\\Program.SecondaryGridBoundaries.cs",
           "sha256": "9AF7F614F5AF67052B3D3FA38C657CF484205409C81EB91111EDF8466BE30B85"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\secondary-runtime\\executed\\FamilyQuant.Tests\\Program.SecondaryGridRuntime.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-200137-FamilyQuant-gate\\secondary-runtime\\executed\\FamilyQuant.Tests\\Program.SecondaryGridRuntime.cs",
           "sha256": "2EAB01E7C932E1515A42F4C8D9D4B42538166C2B751F8B1FF3EE6BB0234DBAEA"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\secondary-runtime\\executed\\FamilyQuant.Tests\\Program.SecondaryIdentityChooser.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-200137-FamilyQuant-gate\\secondary-runtime\\executed\\FamilyQuant.Tests\\Program.SecondaryIdentityChooser.cs",
           "sha256": "6529DBBA6DE0CB08DD6172EC6E47763B9F40E6D74EE40FB50FB05A78FA9FABD6"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\secondary-runtime\\executed\\FamilyQuant.Tests\\Program.SecondaryIdentityRuntime.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-200137-FamilyQuant-gate\\secondary-runtime\\executed\\FamilyQuant.Tests\\Program.SecondaryIdentityRuntime.cs",
           "sha256": "41367B193F51400694EDDD3AFEC377A4962CA13DBEEAE462A1B28D395EEDE212"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\secondary-runtime\\executed\\FamilyQuant.Tests\\Program.SecondaryInjectedMethod.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-200137-FamilyQuant-gate\\secondary-runtime\\executed\\FamilyQuant.Tests\\Program.SecondaryInjectedMethod.cs",
           "sha256": "23A7781DDBD6E2B6299FB12C9F31A083CC4FF42C290513848F61EA4CEF31E2D1"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\secondary-runtime\\executed\\FamilyQuant.Tests\\Program.SecondaryLedger.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-200137-FamilyQuant-gate\\secondary-runtime\\executed\\FamilyQuant.Tests\\Program.SecondaryLedger.cs",
           "sha256": "1C3292AC9A97AC34F7F71AD6726B0668D8AE9B514FC42A1FC1E24D773536C257"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\secondary-runtime\\executed\\FamilyQuant.Tests\\Program.SecondaryLedgerRegister.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-200137-FamilyQuant-gate\\secondary-runtime\\executed\\FamilyQuant.Tests\\Program.SecondaryLedgerRegister.cs",
           "sha256": "47170C887289AACD3C00A9687C4BD2BF61A04E210FAFD144111E34CEA3D40B29"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\secondary-runtime\\executed\\FamilyQuant.Tests\\Program.SecondaryLockRuntime.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-200137-FamilyQuant-gate\\secondary-runtime\\executed\\FamilyQuant.Tests\\Program.SecondaryLockRuntime.cs",
           "sha256": "4164C8B9274079C0E383EFC201628493495B004A927DA1421A6DA9EE5EE9F88C"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\secondary-runtime\\executed\\FamilyQuant.Tests\\Program.SecondaryRuntime.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-200137-FamilyQuant-gate\\secondary-runtime\\executed\\FamilyQuant.Tests\\Program.SecondaryRuntime.cs",
           "sha256": "439510C542365268BC9C6A065E2EC0E5DFE3900B26D68F69614F0542043E82AD"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\secondary-runtime\\executed\\FamilyQuant.Tests\\Program.SecondarySuperRuntime.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-200137-FamilyQuant-gate\\secondary-runtime\\executed\\FamilyQuant.Tests\\Program.SecondarySuperRuntime.cs",
           "sha256": "7BC597762989B17730C639AFC8142657A03FB4975AB76EEE8852E9EB0CC9B352"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\secondary-runtime\\executed\\FamilyQuant.Tests\\Program.SecondaryWindows.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-200137-FamilyQuant-gate\\secondary-runtime\\executed\\FamilyQuant.Tests\\Program.SecondaryWindows.cs",
           "sha256": "6F8E37F3F36DF38EA0B6DE2BEB7058230A2B9AD8127788426C47E20FF7514949"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\secondary-runtime\\executed\\FamilyQuant.Tests\\Program.SecondaryWording.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-200137-FamilyQuant-gate\\secondary-runtime\\executed\\FamilyQuant.Tests\\Program.SecondaryWording.cs",
           "sha256": "0AF2A4A0972995B2AFF951C52497A2A9A7D9ED30AF120EF29B887DECAFFD405C"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\secondary-runtime\\executed\\FamilyQuant/AppOperationFiles.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-200137-FamilyQuant-gate\\secondary-runtime\\executed\\FamilyQuant/AppOperationFiles.cs",
           "sha256": "6E1FB949218EADF56A159B520AFD6912D6322578C32FA8BF70DB0000E6D72BD6"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\secondary-runtime\\executed\\FamilyQuant/ChartDrawingBase.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-200137-FamilyQuant-gate\\secondary-runtime\\executed\\FamilyQuant/ChartDrawingBase.cs",
           "sha256": "D217B023C2A53E6B480245F226E0FC9A5CFC810BAF2115EE1D1624D248A6CFA4"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\secondary-runtime\\executed\\FamilyQuant/ChartImageExporter.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-200137-FamilyQuant-gate\\secondary-runtime\\executed\\FamilyQuant/ChartImageExporter.cs",
           "sha256": "77B1752BCDC39B6E677B688259C14E05386F2E797A20292463857158D6567BBC"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\secondary-runtime\\executed\\FamilyQuant/ChartPalette.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-200137-FamilyQuant-gate\\secondary-runtime\\executed\\FamilyQuant/ChartPalette.cs",
           "sha256": "08EE43A5A44D35CDA783D7D48E692929BA87170515CF953BE25CA29E07A20FB3"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\secondary-runtime\\executed\\FamilyQuant/ComputeXicViewModel.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-200137-FamilyQuant-gate\\secondary-runtime\\executed\\FamilyQuant/ComputeXicViewModel.cs",
           "sha256": "E0FB6EF64C19BB49E1171A2496BAE39C444436D722D9EF21BD2EB1DB8FACA197"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\secondary-runtime\\executed\\FamilyQuant/ComputeXicWindow.xaml",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-200137-FamilyQuant-gate\\secondary-runtime\\executed\\FamilyQuant/ComputeXicWindow.xaml",
           "sha256": "5B67765FC8C89E84679999CE0AE8C91769C36EB2655451BDF141784E4A1EBF90"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\secondary-runtime\\executed\\FamilyQuant/ComputeXicWindow.xaml.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-200137-FamilyQuant-gate\\secondary-runtime\\executed\\FamilyQuant/ComputeXicWindow.xaml.cs",
           "sha256": "97EA1E4BD66498C03C6A573978D9818529DFD2C0D51458542A6A8CA56CE5FF79"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\secondary-runtime\\executed\\FamilyQuant/DeNovoFilterControl.xaml",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-200137-FamilyQuant-gate\\secondary-runtime\\executed\\FamilyQuant/DeNovoFilterControl.xaml",
           "sha256": "C5F5FD8218E9862B6C3279B39686CBB8E287F809D11483BF4B20BD9EF6381E41"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\secondary-runtime\\executed\\FamilyQuant/DeNovoFilterViewModel.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-200137-FamilyQuant-gate\\secondary-runtime\\executed\\FamilyQuant/DeNovoFilterViewModel.cs",
           "sha256": "8F34872C345515C7D40A1D068628195740FF7C7C3832E2B598976BB230B20F10"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\secondary-runtime\\executed\\FamilyQuant/GridCopy.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-200137-FamilyQuant-gate\\secondary-runtime\\executed\\FamilyQuant/GridCopy.cs",
           "sha256": "ABD75B1CB3C81C232FB8766AE738A3607772F3136D0D4879A3803F2511551B7C"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\secondary-runtime\\executed\\FamilyQuant/GroupingReviewViewModel.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-200137-FamilyQuant-gate\\secondary-runtime\\executed\\FamilyQuant/GroupingReviewViewModel.cs",
           "sha256": "F509B342E966008153CA12F4858E6163B58FF0F2220038D1D69E4A47BBA2471D"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\secondary-runtime\\executed\\FamilyQuant/IdentityScanChart.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-200137-FamilyQuant-gate\\secondary-runtime\\executed\\FamilyQuant/IdentityScanChart.cs",
           "sha256": "6E12975B73154AFD5E6AF1796751F28ED49CD977C5C3E38830A11FC45F015CAF"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\secondary-runtime\\executed\\FamilyQuant/IdentityScanWindow.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-200137-FamilyQuant-gate\\secondary-runtime\\executed\\FamilyQuant/IdentityScanWindow.cs",
           "sha256": "52979A9563BD11A98266F72D1581CA3DC3A39A7B5DBCA1D1E6531B2AD1732AAF"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\secondary-runtime\\executed\\FamilyQuant/KeywordReviewViewModel.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-200137-FamilyQuant-gate\\secondary-runtime\\executed\\FamilyQuant/KeywordReviewViewModel.cs",
           "sha256": "5A0F3CEC79A4D418047B3E53F3224332B83B7AAD8E53176406D0EBC77336554C"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\secondary-runtime\\executed\\FamilyQuant/LockManagerWindow.View.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-200137-FamilyQuant-gate\\secondary-runtime\\executed\\FamilyQuant/LockManagerWindow.View.cs",
           "sha256": "78FF0F0C04DD5F430E4E7A6C877866F5588FAAE1B94E2738533D3CD7765FFDB9"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\secondary-runtime\\executed\\FamilyQuant/LockManagerWindow.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-200137-FamilyQuant-gate\\secondary-runtime\\executed\\FamilyQuant/LockManagerWindow.cs",
           "sha256": "2C55B2CAFE7FB5D42B391EE1B5647464728550B4CB2EB044049546188D72603E"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\secondary-runtime\\executed\\FamilyQuant/QuantifyControl.xaml",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-200137-FamilyQuant-gate\\secondary-runtime\\executed\\FamilyQuant/QuantifyControl.xaml",
           "sha256": "CEB8BFAF859F87F593628CD55D74C90869AABE22C0A098BB2D00D01F70DBC64C"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\secondary-runtime\\executed\\FamilyQuant/QuantifyControl.xaml.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-200137-FamilyQuant-gate\\secondary-runtime\\executed\\FamilyQuant/QuantifyControl.xaml.cs",
           "sha256": "BE5A9029EEBC4004EFDEBD15BF72C332BE9EC28FE17541857670ADBD732083F7"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\secondary-runtime\\executed\\FamilyQuant/SecondaryWindowView.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-200137-FamilyQuant-gate\\secondary-runtime\\executed\\FamilyQuant/SecondaryWindowView.cs",
           "sha256": "5DDABCDF5F47F3CBCC271B0F04EB20CE51BA12353DD117C1A3EDE8684A742CDE"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\secondary-runtime\\executed\\FamilyQuant/SecondaryWindows.ViewModels.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-200137-FamilyQuant-gate\\secondary-runtime\\executed\\FamilyQuant/SecondaryWindows.ViewModels.cs",
           "sha256": "87BB4D589ACF49B3CDF635B485D60D07DA6CAB0B9B4B99E7367D44FA52C97743"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\secondary-runtime\\executed\\FamilyQuant/ShellDialogs.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-200137-FamilyQuant-gate\\secondary-runtime\\executed\\FamilyQuant/ShellDialogs.cs",
           "sha256": "BADA9EAE7CCA3011F34E56A17D71DA7304EAB666D61D06E0C53DA532589AAA76"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\secondary-runtime\\executed\\FamilyQuant/SuperClusterPreviewWindow.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-200137-FamilyQuant-gate\\secondary-runtime\\executed\\FamilyQuant/SuperClusterPreviewWindow.cs",
           "sha256": "A1730BBA278D8BB574A5A16E5B6FAED0ED3AECF192D334DFC0AB453F764CAD81"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\secondary-runtime\\executed\\FamilyQuant/SuperClusterPreviewWindow.xaml",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-200137-FamilyQuant-gate\\secondary-runtime\\executed\\FamilyQuant/SuperClusterPreviewWindow.xaml",
           "sha256": "A1161153B0A4BD9D932331733683D83427BCE6A87B744094C1583B133439DF6F"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\secondary-runtime\\executed\\frozen/FamilyQuant/ComputeXicWindow.xaml",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-200137-FamilyQuant-gate\\secondary-runtime\\executed\\frozen/FamilyQuant/ComputeXicWindow.xaml",
           "sha256": "5F6F055975674DF78ADAFB085A285DB273427945D173ADA2A2B64977F0C17ABF"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\secondary-runtime\\executed\\frozen/FamilyQuant/ComputeXicWindow.xaml.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-200137-FamilyQuant-gate\\secondary-runtime\\executed\\frozen/FamilyQuant/ComputeXicWindow.xaml.cs",
           "sha256": "CA16B36C7876533C27C0C22862C9D3A0B83A1425CF7841F78BE3747E7849A268"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\secondary-runtime\\executed\\frozen/FamilyQuant/GridCopy.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-200137-FamilyQuant-gate\\secondary-runtime\\executed\\frozen/FamilyQuant/GridCopy.cs",
           "sha256": "F8241B2D8D4053344DD4677D7F0B25CF18351942DDF459EA18A68F3B59B10C3D"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\secondary-runtime\\executed\\frozen/FamilyQuant/IdentityScanWindow.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-200137-FamilyQuant-gate\\secondary-runtime\\executed\\frozen/FamilyQuant/IdentityScanWindow.cs",
           "sha256": "D2D182AD32A68B212873E26E471B185B1769B089C06870280FE7B74BFBA012E3"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\secondary-runtime\\executed\\frozen/FamilyQuant/LockManagerWindow.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-200137-FamilyQuant-gate\\secondary-runtime\\executed\\frozen/FamilyQuant/LockManagerWindow.cs",
           "sha256": "E24B08406EBB952E8744AC415261E576E66540695AE4D1C8721EB10A81EA5198"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\secondary-runtime\\executed\\frozen/FamilyQuant/SuperClusterPreviewWindow.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-200137-FamilyQuant-gate\\secondary-runtime\\executed\\frozen/FamilyQuant/SuperClusterPreviewWindow.cs",
           "sha256": "53A5922D3EB5940135BB4A24DE0529456A7A38368589C083F2B40D66313CA08D"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\secondary-runtime\\executed\\master-audit/report.json",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-200137-FamilyQuant-gate\\secondary-runtime\\executed\\master-audit/report.json",
           "sha256": "7F50922CB342636F85780B19C7BFEB8B3A2D7AE0DA13B13E309059778D4CE6E1"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\secondary-runtime\\executed\\master-audit/mapping.json",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-200137-FamilyQuant-gate\\secondary-runtime\\executed\\master-audit/mapping.json",
           "sha256": "DABF96B5C202D43AA50F3A06E2AE4CD69785957264EA97358FD7A5A8738548C9"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\secondary-runtime\\executed\\FamilyQuant.Tests.dll",
-          "sha256": "6F2762D3760DB80C7EF95E01791ADDCF311D2A58137A9797910B10F57606C080"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-200137-FamilyQuant-gate\\secondary-runtime\\executed\\FamilyQuant.Tests.dll",
+          "sha256": "584AA4C821823648D1ED0891FD9CB119214C845519584E26594DB71567139A5F"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\secondary-runtime\\executed\\FamilyQuant.dll",
-          "sha256": "FA5B9E3A6B3879ADA83165E6E6CC644E900DB0E72E59E11263D15871663B55AD"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-200137-FamilyQuant-gate\\secondary-runtime\\executed\\FamilyQuant.dll",
+          "sha256": "E4948BB7B8EBDE8B534611FC59D3640AF8C322F513DE2F872E20CB6E38C791E8"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\secondary-runtime\\executed\\FamilyQuant.Core.dll",
-          "sha256": "BB2B0CAA4935237DB0CAE13B8BC6177D08BDFB963839063CE2B5D5E240F9B4BA"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-200137-FamilyQuant-gate\\secondary-runtime\\executed\\FamilyQuant.Core.dll",
+          "sha256": "494755911866D57ABD12A4FA4EAAF6D4AA6AC16C6B03FEE7E86A2717D0E63E96"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\secondary-runtime\\compute-input\\native.sepr2",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-200137-FamilyQuant-gate\\secondary-runtime\\compute-input\\native.sepr2",
           "sha256": "E557EDF9DA84CE876442A7F6A22A21384738625E1D7492CCF9B51FF5584C9D50"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\secondary-runtime\\compute-spectrum-link-Dark.json",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-200137-FamilyQuant-gate\\secondary-runtime\\compute-spectrum-link-Dark.json",
           "sha256": "99FB2700E2EF6152048E85A1E57884B9C29907F9F08152DE39015B50711C4176"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\secondary-runtime\\compute-spectrum-link-Light.json",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-200137-FamilyQuant-gate\\secondary-runtime\\compute-spectrum-link-Light.json",
           "sha256": "99FB2700E2EF6152048E85A1E57884B9C29907F9F08152DE39015B50711C4176"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\secondary-runtime\\computed-result-Dark.fqproj",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-200137-FamilyQuant-gate\\secondary-runtime\\computed-result-Dark.fqproj",
           "sha256": "B1AB084C3123C162AE0CB8EF84F1542980F87460FC800F6E573BE33C55DA4AFD"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\secondary-runtime\\computed-result-Light.fqproj",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-200137-FamilyQuant-gate\\secondary-runtime\\computed-result-Light.fqproj",
           "sha256": "B1AB084C3123C162AE0CB8EF84F1542980F87460FC800F6E573BE33C55DA4AFD"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\secondary-runtime\\current-detector.json",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-200137-FamilyQuant-gate\\secondary-runtime\\current-detector.json",
           "sha256": "02F81D4A22D42BBDCB4C39D3D1053E31C325A8119CAC638D15E7D10160157142"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\secondary-runtime\\dark-values.json",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-200137-FamilyQuant-gate\\secondary-runtime\\dark-values.json",
           "sha256": "E6BFDE0B53076C2CB30941F1BA951D06F3AC8D30AF8BE5ACEE85508263DA8013"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\secondary-runtime\\dialog-input\\native.sepr2",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-200137-FamilyQuant-gate\\secondary-runtime\\dialog-input\\native.sepr2",
           "sha256": "4D711BE4A69EB951D928678442071438A1ACC9B30F397F896F8BB3D9B591EECB"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\secondary-runtime\\dialog-screen-Dark.json",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-200137-FamilyQuant-gate\\secondary-runtime\\dialog-screen-Dark.json",
           "sha256": "80FE45D37FCA2CB97DFB1C9E4E669139A830C73B5F5C79C6825044521465F805"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\secondary-runtime\\dialog-screen-Light.json",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-200137-FamilyQuant-gate\\secondary-runtime\\dialog-screen-Light.json",
           "sha256": "80FE45D37FCA2CB97DFB1C9E4E669139A830C73B5F5C79C6825044521465F805"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\secondary-runtime\\frozen-detector.json",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-200137-FamilyQuant-gate\\secondary-runtime\\frozen-detector.json",
           "sha256": "726C4326B6C4995465D1939B05E6F33B6CB15FBB8DD06B3CFDB340032BD448CB"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\secondary-runtime\\frozen-source-build.dll",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-200137-FamilyQuant-gate\\secondary-runtime\\frozen-source-build.dll",
           "sha256": "D764488C923945285E03B338E5A91BF28106A35B11AB465D8E2B23D125F03FD8"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\secondary-runtime\\identity-Dark.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-200137-FamilyQuant-gate\\secondary-runtime\\identity-Dark.png",
           "sha256": "19DDBB4179ED12782FA010BDE3732415AA506B2F1B07A4D085866025411FA430"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\secondary-runtime\\identity-Light.png",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-200137-FamilyQuant-gate\\secondary-runtime\\identity-Light.png",
           "sha256": "19DDBB4179ED12782FA010BDE3732415AA506B2F1B07A4D085866025411FA430"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\secondary-runtime\\identity-glyphs-Dark.json",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-200137-FamilyQuant-gate\\secondary-runtime\\identity-glyphs-Dark.json",
           "sha256": "3C9B855438233769D9A467770F6C4E958C7205D17E8B8684F678C663F6F75EE0"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\secondary-runtime\\identity-glyphs-Light.json",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-200137-FamilyQuant-gate\\secondary-runtime\\identity-glyphs-Light.json",
           "sha256": "3C9B855438233769D9A467770F6C4E958C7205D17E8B8684F678C663F6F75EE0"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\secondary-runtime\\spectrum-link-input\\native.sepr2",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-200137-FamilyQuant-gate\\secondary-runtime\\spectrum-link-input\\native.sepr2",
           "sha256": "9CFB09550FADB477D5C53D26623BFBBFDE8DDC5DF81A78D43307593EA4B4E4C5"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\secondary-runtime\\wording-compute-basis-Dark.tsv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-200137-FamilyQuant-gate\\secondary-runtime\\wording-compute-basis-Dark.tsv",
           "sha256": "37CB61416C5569A2FAA8696A8346D301F106B38E12325166A80677F22C996929"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\secondary-runtime\\wording-compute-basis-Light.tsv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-200137-FamilyQuant-gate\\secondary-runtime\\wording-compute-basis-Light.tsv",
           "sha256": "37CB61416C5569A2FAA8696A8346D301F106B38E12325166A80677F22C996929"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\secondary-runtime\\wording-compute-busy-Dark.tsv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-200137-FamilyQuant-gate\\secondary-runtime\\wording-compute-busy-Dark.tsv",
           "sha256": "D771F23FF50808124B68E91BA6F8CAEC17E68E89BA48FEC70675C8EAEE67451C"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\secondary-runtime\\wording-compute-busy-Light.tsv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-200137-FamilyQuant-gate\\secondary-runtime\\wording-compute-busy-Light.tsv",
           "sha256": "D771F23FF50808124B68E91BA6F8CAEC17E68E89BA48FEC70675C8EAEE67451C"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\secondary-runtime\\wording-compute-cs-Dark.tsv",
-          "sha256": "0FF4ADE2B1877787AE35B0587F4B997261EBA46CD60F92970C95C601449ACD9F"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-200137-FamilyQuant-gate\\secondary-runtime\\wording-compute-cs-Dark.tsv",
+          "sha256": "BC9A75D0AEE4F1E1B92614566C0B568B81F135F0BA68148E4E72879B5C9D2642"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\secondary-runtime\\wording-compute-cs-Light.tsv",
-          "sha256": "0FF4ADE2B1877787AE35B0587F4B997261EBA46CD60F92970C95C601449ACD9F"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-200137-FamilyQuant-gate\\secondary-runtime\\wording-compute-cs-Light.tsv",
+          "sha256": "BC9A75D0AEE4F1E1B92614566C0B568B81F135F0BA68148E4E72879B5C9D2642"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\secondary-runtime\\wording-compute-spectrum-cs-Dark.tsv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-200137-FamilyQuant-gate\\secondary-runtime\\wording-compute-spectrum-cs-Dark.tsv",
           "sha256": "0AD25FF3ACD5D0493BC7CB79113EEA5CF6890474AE6796D2EDCC83E42EFDDA5C"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\secondary-runtime\\wording-compute-spectrum-cs-Light.tsv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-200137-FamilyQuant-gate\\secondary-runtime\\wording-compute-spectrum-cs-Light.tsv",
           "sha256": "0AD25FF3ACD5D0493BC7CB79113EEA5CF6890474AE6796D2EDCC83E42EFDDA5C"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\secondary-runtime\\wording-compute-spectrum-tooltip-Dark.tsv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-200137-FamilyQuant-gate\\secondary-runtime\\wording-compute-spectrum-tooltip-Dark.tsv",
           "sha256": "0E79AD814A48893A81B5701EE8387700C7C08E5BCBC8ED2B726C68199B3B9E75"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\secondary-runtime\\wording-compute-spectrum-tooltip-Light.tsv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-200137-FamilyQuant-gate\\secondary-runtime\\wording-compute-spectrum-tooltip-Light.tsv",
           "sha256": "0E79AD814A48893A81B5701EE8387700C7C08E5BCBC8ED2B726C68199B3B9E75"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\secondary-runtime\\wording-compute-spectrum-xaml-Dark.tsv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-200137-FamilyQuant-gate\\secondary-runtime\\wording-compute-spectrum-xaml-Dark.tsv",
           "sha256": "E787BB1622923D07BE0016A7811063B37410BA1FD0DF958C003C32BA5AE1C6BF"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\secondary-runtime\\wording-compute-spectrum-xaml-Light.tsv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-200137-FamilyQuant-gate\\secondary-runtime\\wording-compute-spectrum-xaml-Light.tsv",
           "sha256": "E787BB1622923D07BE0016A7811063B37410BA1FD0DF958C003C32BA5AE1C6BF"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\secondary-runtime\\wording-compute-tooltips-Dark.tsv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-200137-FamilyQuant-gate\\secondary-runtime\\wording-compute-tooltips-Dark.tsv",
           "sha256": "4FF33907B6DFC9028D0DC792CC902063EEF4AC2472167291E507B8078BAB2CEA"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\secondary-runtime\\wording-compute-tooltips-Light.tsv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-200137-FamilyQuant-gate\\secondary-runtime\\wording-compute-tooltips-Light.tsv",
           "sha256": "4FF33907B6DFC9028D0DC792CC902063EEF4AC2472167291E507B8078BAB2CEA"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\secondary-runtime\\wording-compute-xaml-Dark.tsv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-200137-FamilyQuant-gate\\secondary-runtime\\wording-compute-xaml-Dark.tsv",
           "sha256": "6B7E95BEA6C6EB2B26443EFDB1D11A0E44AD7D821357408E9E243FD1B3723611"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\secondary-runtime\\wording-compute-xaml-Light.tsv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-200137-FamilyQuant-gate\\secondary-runtime\\wording-compute-xaml-Light.tsv",
           "sha256": "6B7E95BEA6C6EB2B26443EFDB1D11A0E44AD7D821357408E9E243FD1B3723611"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\secondary-runtime\\wording-grouping-Dark.tsv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-200137-FamilyQuant-gate\\secondary-runtime\\wording-grouping-Dark.tsv",
           "sha256": "21F0D14C57E7067F2E130797C36FE8DF849E6C4619671313998D997E1B62FC49"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\secondary-runtime\\wording-grouping-Light.tsv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-200137-FamilyQuant-gate\\secondary-runtime\\wording-grouping-Light.tsv",
           "sha256": "21F0D14C57E7067F2E130797C36FE8DF849E6C4619671313998D997E1B62FC49"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\secondary-runtime\\wording-grouping-copy-Dark.tsv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-200137-FamilyQuant-gate\\secondary-runtime\\wording-grouping-copy-Dark.tsv",
           "sha256": "EAA3F6B4A60693AD4FADDD0A700611819747ADF0974979A47FD0D0C3F17C173A"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\secondary-runtime\\wording-grouping-copy-Light.tsv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-200137-FamilyQuant-gate\\secondary-runtime\\wording-grouping-copy-Light.tsv",
           "sha256": "EAA3F6B4A60693AD4FADDD0A700611819747ADF0974979A47FD0D0C3F17C173A"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\secondary-runtime\\wording-identity-all-Dark.tsv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-200137-FamilyQuant-gate\\secondary-runtime\\wording-identity-all-Dark.tsv",
           "sha256": "B8C07175A0392A27B137310239B495AADF552F693E910272DD9263E5E0F29B0E"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\secondary-runtime\\wording-identity-all-Light.tsv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-200137-FamilyQuant-gate\\secondary-runtime\\wording-identity-all-Light.tsv",
           "sha256": "B8C07175A0392A27B137310239B495AADF552F693E910272DD9263E5E0F29B0E"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\secondary-runtime\\wording-locks-all-Dark.tsv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-200137-FamilyQuant-gate\\secondary-runtime\\wording-locks-all-Dark.tsv",
           "sha256": "6D14F53F85DF6E96EAF9BABE1A5CF5B40A28B9D2DB1C6D240C83741346E274DD"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\secondary-runtime\\wording-locks-all-Light.tsv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-200137-FamilyQuant-gate\\secondary-runtime\\wording-locks-all-Light.tsv",
           "sha256": "6D14F53F85DF6E96EAF9BABE1A5CF5B40A28B9D2DB1C6D240C83741346E274DD"
         }
       ],
@@ -488,7 +488,7 @@
         {
           "path": "FamilyQuant.Core\\Storage\\QuantManifest.cs",
           "symbol": "keyword text event",
-          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
+          "sha256": "FBB1D2B23FB2B5A50E928F87D7C2F046C4341021F363FE7384E94AC90A875B87"
         },
         {
           "path": "FamilyQuant.Core\\Storage\\QuantRow.cs",
@@ -662,7 +662,7 @@
         {
           "path": "FamilyQuant.Core\\Storage\\QuantManifest.cs",
           "symbol": "Quantify visible RunSummary/Basis; wording may be improved",
-          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
+          "sha256": "FBB1D2B23FB2B5A50E928F87D7C2F046C4341021F363FE7384E94AC90A875B87"
         },
         {
           "path": "FamilyQuant.Core\\Storage\\QuantRow.cs",
@@ -791,6 +791,22 @@
       "compared": "FamilyQuant/ComputeXicWindow.xaml.cs:338 \u0022N0\u0022; native result summary and visible basis preserve row/run counts and chosen isotope/point rules; frozen/contract={\u0022Rows\u0022:1050,\u0022Identified\u0022:1030,\u0022DeNovo\u0022:20,\u0022Runs\u0022:2,\u0022Isotopes\u0022:4,\u0022Points\u0022:2}; current={\u0022Rows\u0022:1050,\u0022Identified\u0022:1030,\u0022DeNovo\u0022:20,\u0022Runs\u0022:2,\u0022Isotopes\u0022:4,\u0022Points\u0022:2}"
     },
     {
+      "observationId": "FQ15-033F630F491F",
+      "implementation": [],
+      "proofs": [],
+      "note": "No supported native check. Help/tooltips stay with LK; other facts remain OPEN.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-03AC11AB11BF",
+      "implementation": [],
+      "proofs": [],
+      "note": "No supported native check. Help/tooltips stay with LK; other facts remain OPEN.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
       "observationId": "FQ15-04B6DD530612",
       "implementation": [
         {
@@ -836,7 +852,7 @@
         {
           "path": "FamilyQuant.Core\\Storage\\QuantManifest.cs",
           "symbol": "DeNovoFilterViewModel.TryBuild native source selections",
-          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
+          "sha256": "FBB1D2B23FB2B5A50E928F87D7C2F046C4341021F363FE7384E94AC90A875B87"
         },
         {
           "path": "FamilyQuant.Core\\Storage\\QuantRow.cs",
@@ -1010,7 +1026,7 @@
         {
           "path": "FamilyQuant.Core\\Storage\\QuantManifest.cs",
           "symbol": "DeNovoFilterViewModel source state",
-          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
+          "sha256": "FBB1D2B23FB2B5A50E928F87D7C2F046C4341021F363FE7384E94AC90A875B87"
         },
         {
           "path": "FamilyQuant.Core\\Storage\\QuantRow.cs",
@@ -1139,6 +1155,14 @@
       "compared": "FamilyQuant/ComputeXicWindow.xaml.cs:134 \u0022peaks-all\u0022; all legacy source modes keep distinct cutoff-enabled state; frozen/contract={\u0022deepnovo\u0022:\u0022False/True\u0022,\u0022peaks-all\u0022:\u0022True/False\u0022,\u0022peaks-only\u0022:\u0022True/False\u0022,\u0022union-all-deepnovo\u0022:\u0022True/True\u0022,\u0022union-only-deepnovo\u0022:\u0022True/True\u0022}; current={\u0022deepnovo\u0022:\u0022False/True\u0022,\u0022peaks-all\u0022:\u0022True/False\u0022,\u0022peaks-only\u0022:\u0022True/False\u0022,\u0022union-all-deepnovo\u0022:\u0022True/True\u0022,\u0022union-only-deepnovo\u0022:\u0022True/True\u0022}"
     },
     {
+      "observationId": "FQ15-07F4B3377686",
+      "implementation": [],
+      "proofs": [],
+      "note": "No supported native check. Help/tooltips stay with LK; other facts remain OPEN.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
       "observationId": "FQ15-082201BA17EB",
       "implementation": [
         {
@@ -1184,7 +1208,7 @@
         {
           "path": "FamilyQuant.Core\\Storage\\QuantManifest.cs",
           "symbol": "LockManagerViewModel.Remove log",
-          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
+          "sha256": "FBB1D2B23FB2B5A50E928F87D7C2F046C4341021F363FE7384E94AC90A875B87"
         },
         {
           "path": "FamilyQuant.Core\\Storage\\QuantRow.cs",
@@ -1358,7 +1382,7 @@
         {
           "path": "FamilyQuant.Core\\Storage\\QuantManifest.cs",
           "symbol": "Compute button input validation; displayed wording may be improved",
-          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
+          "sha256": "FBB1D2B23FB2B5A50E928F87D7C2F046C4341021F363FE7384E94AC90A875B87"
         },
         {
           "path": "FamilyQuant.Core\\Storage\\QuantRow.cs",
@@ -1532,7 +1556,7 @@
         {
           "path": "FamilyQuant.Core\\Storage\\QuantManifest.cs",
           "symbol": "keyword action buttons",
-          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
+          "sha256": "FBB1D2B23FB2B5A50E928F87D7C2F046C4341021F363FE7384E94AC90A875B87"
         },
         {
           "path": "FamilyQuant.Core\\Storage\\QuantRow.cs",
@@ -1661,6 +1685,22 @@
       "compared": "FamilyQuant/SuperClusterPreviewWindow.cs:243 new Button; native bulk-action buttons execute their bound choice changes; frozen/contract=\u0022four frozen/current action effects\u0022; current=[\u0022Untick the red ones:True\u0022,\u0022Tick all:True\u0022,\u0022Untick selected:True\u0022,\u0022Tick selected:True\u0022]"
     },
     {
+      "observationId": "FQ15-0A391763660E",
+      "implementation": [],
+      "proofs": [],
+      "note": "No supported native check. Help/tooltips stay with LK; other facts remain OPEN.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-0B2E0CF9C157",
+      "implementation": [],
+      "proofs": [],
+      "note": "No supported native check. Help/tooltips stay with LK; other facts remain OPEN.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
       "observationId": "FQ15-0B53EC66E542",
       "implementation": [
         {
@@ -1706,7 +1746,7 @@
         {
           "path": "FamilyQuant.Core\\Storage\\QuantManifest.cs",
           "symbol": "IdentityScanWindow report TextBox",
-          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
+          "sha256": "FBB1D2B23FB2B5A50E928F87D7C2F046C4341021F363FE7384E94AC90A875B87"
         },
         {
           "path": "FamilyQuant.Core\\Storage\\QuantRow.cs",
@@ -1880,7 +1920,7 @@
         {
           "path": "FamilyQuant.Core\\Storage\\QuantManifest.cs",
           "symbol": "QuantifyControl Browse handlers",
-          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
+          "sha256": "FBB1D2B23FB2B5A50E928F87D7C2F046C4341021F363FE7384E94AC90A875B87"
         },
         {
           "path": "FamilyQuant.Core\\Storage\\QuantRow.cs",
@@ -2054,7 +2094,7 @@
         {
           "path": "FamilyQuant.Core\\Storage\\QuantManifest.cs",
           "symbol": "Quantify failure publication guard; wording may be improved",
-          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
+          "sha256": "FBB1D2B23FB2B5A50E928F87D7C2F046C4341021F363FE7384E94AC90A875B87"
         },
         {
           "path": "FamilyQuant.Core\\Storage\\QuantRow.cs",
@@ -2228,7 +2268,7 @@
         {
           "path": "FamilyQuant.Core\\Storage\\QuantManifest.cs",
           "symbol": "IdentityScanWindow SaveFigureFromDialog headless refusal",
-          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
+          "sha256": "FBB1D2B23FB2B5A50E928F87D7C2F046C4341021F363FE7384E94AC90A875B87"
         },
         {
           "path": "FamilyQuant.Core\\Storage\\QuantRow.cs",
@@ -2357,6 +2397,14 @@
       "compared": "FamilyQuant/IdentityScanWindow.cs:168 \u0022dialog there is a window nothing can close. Next step: open the sweep in the \u0022; actual Save click on disconnected visuals refuses a native dialog; frozen/contract=\u0022Nothing was saved, because this window is not on a display and a file dialog there is a window nothing can close. Next step: open the sweep in the application and save the figure from there.\u0022; current=\u0022Nothing was saved, because this window is not on a display and a file dialog there is a window nothing can close. Next step: open the sweep in the application and save the figure from there.\u0022"
     },
     {
+      "observationId": "FQ15-14313353E09F",
+      "implementation": [],
+      "proofs": [],
+      "note": "No supported native check. Help/tooltips stay with LK; other facts remain OPEN.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
       "observationId": "FQ15-150AC931A687",
       "implementation": [
         {
@@ -2402,7 +2450,7 @@
         {
           "path": "FamilyQuant.Core\\Storage\\QuantManifest.cs",
           "symbol": "keyword match SelectionChanged",
-          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
+          "sha256": "FBB1D2B23FB2B5A50E928F87D7C2F046C4341021F363FE7384E94AC90A875B87"
         },
         {
           "path": "FamilyQuant.Core\\Storage\\QuantRow.cs",
@@ -2576,7 +2624,7 @@
         {
           "path": "FamilyQuant.Core\\Storage\\QuantManifest.cs",
           "symbol": "DeNovoFilterControl source union-only-deepnovo",
-          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
+          "sha256": "FBB1D2B23FB2B5A50E928F87D7C2F046C4341021F363FE7384E94AC90A875B87"
         },
         {
           "path": "FamilyQuant.Core\\Storage\\QuantRow.cs",
@@ -2750,7 +2798,7 @@
         {
           "path": "FamilyQuant.Core\\Storage\\QuantManifest.cs",
           "symbol": "QuantifyControl Browse handlers",
-          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
+          "sha256": "FBB1D2B23FB2B5A50E928F87D7C2F046C4341021F363FE7384E94AC90A875B87"
         },
         {
           "path": "FamilyQuant.Core\\Storage\\QuantRow.cs",
@@ -2924,7 +2972,7 @@
         {
           "path": "FamilyQuant.Core\\Storage\\QuantManifest.cs",
           "symbol": "GridCopy.NewItem Click -\u003E supplied clipboard/browser seams",
-          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
+          "sha256": "FBB1D2B23FB2B5A50E928F87D7C2F046C4341021F363FE7384E94AC90A875B87"
         },
         {
           "path": "FamilyQuant.Core\\Storage\\QuantRow.cs",
@@ -3098,7 +3146,7 @@
         {
           "path": "FamilyQuant.Core\\Storage\\QuantManifest.cs",
           "symbol": "GridCopy native MenuItems",
-          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
+          "sha256": "FBB1D2B23FB2B5A50E928F87D7C2F046C4341021F363FE7384E94AC90A875B87"
         },
         {
           "path": "FamilyQuant.Core\\Storage\\QuantRow.cs",
@@ -3272,7 +3320,7 @@
         {
           "path": "FamilyQuant.Core\\Storage\\QuantManifest.cs",
           "symbol": "DeNovoFilterViewModel.TryBuild native source selections",
-          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
+          "sha256": "FBB1D2B23FB2B5A50E928F87D7C2F046C4341021F363FE7384E94AC90A875B87"
         },
         {
           "path": "FamilyQuant.Core\\Storage\\QuantRow.cs",
@@ -3446,7 +3494,7 @@
         {
           "path": "FamilyQuant.Core\\Storage\\QuantManifest.cs",
           "symbol": "QuantifyControl.IntegerUpDownMinPoints",
-          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
+          "sha256": "FBB1D2B23FB2B5A50E928F87D7C2F046C4341021F363FE7384E94AC90A875B87"
         },
         {
           "path": "FamilyQuant.Core\\Storage\\QuantRow.cs",
@@ -3620,7 +3668,7 @@
         {
           "path": "FamilyQuant.Core\\Storage\\QuantManifest.cs",
           "symbol": "GridCopy.Attach default textLabel",
-          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
+          "sha256": "FBB1D2B23FB2B5A50E928F87D7C2F046C4341021F363FE7384E94AC90A875B87"
         },
         {
           "path": "FamilyQuant.Core\\Storage\\QuantRow.cs",
@@ -3794,7 +3842,7 @@
         {
           "path": "FamilyQuant.Core\\Storage\\QuantManifest.cs",
           "symbol": "keyword DataGridTextColumns",
-          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
+          "sha256": "FBB1D2B23FB2B5A50E928F87D7C2F046C4341021F363FE7384E94AC90A875B87"
         },
         {
           "path": "FamilyQuant.Core\\Storage\\QuantRow.cs",
@@ -3968,7 +4016,7 @@
         {
           "path": "FamilyQuant.Core\\Storage\\QuantManifest.cs",
           "symbol": "LockManagerWindow table column 1",
-          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
+          "sha256": "FBB1D2B23FB2B5A50E928F87D7C2F046C4341021F363FE7384E94AC90A875B87"
         },
         {
           "path": "FamilyQuant.Core\\Storage\\QuantRow.cs",
@@ -4142,7 +4190,7 @@
         {
           "path": "FamilyQuant.Core\\Storage\\QuantManifest.cs",
           "symbol": "ComputeXicWindow source tags -\u003E DeNovoFilterViewModel.ModeTag/Sources",
-          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
+          "sha256": "FBB1D2B23FB2B5A50E928F87D7C2F046C4341021F363FE7384E94AC90A875B87"
         },
         {
           "path": "FamilyQuant.Core\\Storage\\QuantRow.cs",
@@ -4316,7 +4364,7 @@
         {
           "path": "FamilyQuant.Core\\Storage\\QuantManifest.cs",
           "symbol": "ComputeXicViewModel.Details native retained result fields",
-          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
+          "sha256": "FBB1D2B23FB2B5A50E928F87D7C2F046C4341021F363FE7384E94AC90A875B87"
         },
         {
           "path": "FamilyQuant.Core\\Storage\\QuantRow.cs",
@@ -4490,7 +4538,7 @@
         {
           "path": "FamilyQuant.Core\\Storage\\QuantManifest.cs",
           "symbol": "LockManagerWindow action caption",
-          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
+          "sha256": "FBB1D2B23FB2B5A50E928F87D7C2F046C4341021F363FE7384E94AC90A875B87"
         },
         {
           "path": "FamilyQuant.Core\\Storage\\QuantRow.cs",
@@ -4664,7 +4712,7 @@
         {
           "path": "FamilyQuant.Core\\Storage\\QuantManifest.cs",
           "symbol": "keyword domain choices N0/count punctuation",
-          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
+          "sha256": "FBB1D2B23FB2B5A50E928F87D7C2F046C4341021F363FE7384E94AC90A875B87"
         },
         {
           "path": "FamilyQuant.Core\\Storage\\QuantRow.cs",
@@ -4838,7 +4886,7 @@
         {
           "path": "FamilyQuant.Core\\Storage\\QuantManifest.cs",
           "symbol": "QuantifyControl Browse handlers",
-          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
+          "sha256": "FBB1D2B23FB2B5A50E928F87D7C2F046C4341021F363FE7384E94AC90A875B87"
         },
         {
           "path": "FamilyQuant.Core\\Storage\\QuantRow.cs",
@@ -5012,7 +5060,7 @@
         {
           "path": "FamilyQuant.Core\\Storage\\QuantManifest.cs",
           "symbol": "GridCopy code menu item",
-          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
+          "sha256": "FBB1D2B23FB2B5A50E928F87D7C2F046C4341021F363FE7384E94AC90A875B87"
         },
         {
           "path": "FamilyQuant.Core\\Storage\\QuantRow.cs",
@@ -5186,7 +5234,7 @@
         {
           "path": "FamilyQuant.Core\\Storage\\QuantManifest.cs",
           "symbol": "QuantifyControl.TextBoxDeNovoDirectory",
-          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
+          "sha256": "FBB1D2B23FB2B5A50E928F87D7C2F046C4341021F363FE7384E94AC90A875B87"
         },
         {
           "path": "FamilyQuant.Core\\Storage\\QuantRow.cs",
@@ -5360,7 +5408,7 @@
         {
           "path": "FamilyQuant.Core\\Storage\\QuantManifest.cs",
           "symbol": "GridCopy unmodified keyboard navigation",
-          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
+          "sha256": "FBB1D2B23FB2B5A50E928F87D7C2F046C4341021F363FE7384E94AC90A875B87"
         },
         {
           "path": "FamilyQuant.Core\\Storage\\QuantRow.cs",
@@ -5534,7 +5582,7 @@
         {
           "path": "FamilyQuant.Core\\Storage\\QuantManifest.cs",
           "symbol": "QuantifyControl.IntegerUpDownIsotopes.Minimum",
-          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
+          "sha256": "FBB1D2B23FB2B5A50E928F87D7C2F046C4341021F363FE7384E94AC90A875B87"
         },
         {
           "path": "FamilyQuant.Core\\Storage\\QuantRow.cs",
@@ -5708,7 +5756,7 @@
         {
           "path": "FamilyQuant.Core\\Storage\\QuantManifest.cs",
           "symbol": "keyword action button Click handlers",
-          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
+          "sha256": "FBB1D2B23FB2B5A50E928F87D7C2F046C4341021F363FE7384E94AC90A875B87"
         },
         {
           "path": "FamilyQuant.Core\\Storage\\QuantRow.cs",
@@ -5882,7 +5930,7 @@
         {
           "path": "FamilyQuant.Core\\Storage\\QuantManifest.cs",
           "symbol": "DeNovoFilterControl source SelectionChanged / bound enabled state",
-          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
+          "sha256": "FBB1D2B23FB2B5A50E928F87D7C2F046C4341021F363FE7384E94AC90A875B87"
         },
         {
           "path": "FamilyQuant.Core\\Storage\\QuantRow.cs",
@@ -6056,7 +6104,7 @@
         {
           "path": "FamilyQuant.Core\\Storage\\QuantManifest.cs",
           "symbol": "LockManagerWindow table header 0",
-          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
+          "sha256": "FBB1D2B23FB2B5A50E928F87D7C2F046C4341021F363FE7384E94AC90A875B87"
         },
         {
           "path": "FamilyQuant.Core\\Storage\\QuantRow.cs",
@@ -6230,7 +6278,7 @@
         {
           "path": "FamilyQuant.Core\\Storage\\QuantManifest.cs",
           "symbol": "LockManagerViewModel.Remove log",
-          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
+          "sha256": "FBB1D2B23FB2B5A50E928F87D7C2F046C4341021F363FE7384E94AC90A875B87"
         },
         {
           "path": "FamilyQuant.Core\\Storage\\QuantRow.cs",
@@ -6404,7 +6452,7 @@
         {
           "path": "FamilyQuant.Core\\Storage\\QuantManifest.cs",
           "symbol": "grouping confirmation Click",
-          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
+          "sha256": "FBB1D2B23FB2B5A50E928F87D7C2F046C4341021F363FE7384E94AC90A875B87"
         },
         {
           "path": "FamilyQuant.Core\\Storage\\QuantRow.cs",
@@ -6533,6 +6581,14 @@
       "compared": "FamilyQuant/SuperClusterPreviewWindow.cs:182 createButton.Click \u002B= (_, _) =\u003E { Confirmed = true; Close(); };; actual confirmation Click records the same confirmation and closes the preview; frozen/contract=true; current=true"
     },
     {
+      "observationId": "FQ15-35390F70C4F2",
+      "implementation": [],
+      "proofs": [],
+      "note": "No supported native check. Help/tooltips stay with LK; other facts remain OPEN.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
       "observationId": "FQ15-35B54F08F2F5",
       "implementation": [
         {
@@ -6578,7 +6634,7 @@
         {
           "path": "FamilyQuant.Core\\Storage\\QuantManifest.cs",
           "symbol": "LockManagerWindow binding Presence",
-          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
+          "sha256": "FBB1D2B23FB2B5A50E928F87D7C2F046C4341021F363FE7384E94AC90A875B87"
         },
         {
           "path": "FamilyQuant.Core\\Storage\\QuantRow.cs",
@@ -6752,7 +6808,7 @@
         {
           "path": "FamilyQuant.Core\\Storage\\QuantManifest.cs",
           "symbol": "GridCopy unmodified keyboard navigation",
-          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
+          "sha256": "FBB1D2B23FB2B5A50E928F87D7C2F046C4341021F363FE7384E94AC90A875B87"
         },
         {
           "path": "FamilyQuant.Core\\Storage\\QuantRow.cs",
@@ -6881,6 +6937,14 @@
       "compared": "FamilyQuant/GridCopy.cs:53 || !extending \u0026\u0026 e.Key is Key.Up or Key.Down or Key.Home or Key.End or Key.PageUp or Key.PageDown); actual Left/Right/Tab/Up/Down/Home/End/PageUp/PageDown navigation preserves column-only copy; frozen/contract=[\u0022Left/True/second native description\u0022,\u0022Right/True/second native description\u0022,\u0022Tab/True/second native description\u0022,\u0022Up/True/second native description\u0022,\u0022Down/True/second native description\u0022,\u0022Home/True/second native description\u0022,\u0022End/True/second native description\u0022,\u0022PageUp/True/second native description\u0022,\u0022Next/True/second native description\u0022]; current=[\u0022Left/True/second native description\u0022,\u0022Right/True/second native description\u0022,\u0022Tab/True/second native description\u0022,\u0022Up/True/second native description\u0022,\u0022Down/True/second native description\u0022,\u0022Home/True/second native description\u0022,\u0022End/True/second native description\u0022,\u0022PageUp/True/second native description\u0022,\u0022Next/True/second native description\u0022]"
     },
     {
+      "observationId": "FQ15-373C56C4ED66",
+      "implementation": [],
+      "proofs": [],
+      "note": "No supported native check. Help/tooltips stay with LK; other facts remain OPEN.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
       "observationId": "FQ15-37E5ADB91874",
       "implementation": [
         {
@@ -6926,7 +6990,7 @@
         {
           "path": "FamilyQuant.Core\\Storage\\QuantManifest.cs",
           "symbol": "ComputeXicWindow source tags -\u003E DeNovoFilterViewModel.ModeTag/Sources",
-          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
+          "sha256": "FBB1D2B23FB2B5A50E928F87D7C2F046C4341021F363FE7384E94AC90A875B87"
         },
         {
           "path": "FamilyQuant.Core\\Storage\\QuantRow.cs",
@@ -7100,7 +7164,7 @@
         {
           "path": "FamilyQuant.Core\\Storage\\QuantManifest.cs",
           "symbol": "Compute button input validation; displayed wording may be improved",
-          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
+          "sha256": "FBB1D2B23FB2B5A50E928F87D7C2F046C4341021F363FE7384E94AC90A875B87"
         },
         {
           "path": "FamilyQuant.Core\\Storage\\QuantRow.cs",
@@ -7274,7 +7338,7 @@
         {
           "path": "FamilyQuant.Core\\Storage\\QuantManifest.cs",
           "symbol": "DeNovoFilterViewModel source state",
-          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
+          "sha256": "FBB1D2B23FB2B5A50E928F87D7C2F046C4341021F363FE7384E94AC90A875B87"
         },
         {
           "path": "FamilyQuant.Core\\Storage\\QuantRow.cs",
@@ -7448,7 +7512,7 @@
         {
           "path": "FamilyQuant.Core\\Storage\\QuantManifest.cs",
           "symbol": "QuantifyControl.ComboBoxDeNovoSource",
-          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
+          "sha256": "FBB1D2B23FB2B5A50E928F87D7C2F046C4341021F363FE7384E94AC90A875B87"
         },
         {
           "path": "FamilyQuant.Core\\Storage\\QuantRow.cs",
@@ -7622,7 +7686,7 @@
         {
           "path": "FamilyQuant.Core\\Storage\\QuantManifest.cs",
           "symbol": "keyword domain ComboBox",
-          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
+          "sha256": "FBB1D2B23FB2B5A50E928F87D7C2F046C4341021F363FE7384E94AC90A875B87"
         },
         {
           "path": "FamilyQuant.Core\\Storage\\QuantRow.cs",
@@ -7796,7 +7860,7 @@
         {
           "path": "FamilyQuant.Core\\Storage\\QuantManifest.cs",
           "symbol": "LockManagerWindow table header 2",
-          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
+          "sha256": "FBB1D2B23FB2B5A50E928F87D7C2F046C4341021F363FE7384E94AC90A875B87"
         },
         {
           "path": "FamilyQuant.Core\\Storage\\QuantRow.cs",
@@ -7970,7 +8034,7 @@
         {
           "path": "FamilyQuant.Core\\Storage\\QuantManifest.cs",
           "symbol": "ComputeXicWindow source tags -\u003E DeNovoFilterViewModel.ModeTag/Sources",
-          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
+          "sha256": "FBB1D2B23FB2B5A50E928F87D7C2F046C4341021F363FE7384E94AC90A875B87"
         },
         {
           "path": "FamilyQuant.Core\\Storage\\QuantRow.cs",
@@ -8144,7 +8208,7 @@
         {
           "path": "FamilyQuant.Core\\Storage\\QuantManifest.cs",
           "symbol": "LockManagerWindow action caption",
-          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
+          "sha256": "FBB1D2B23FB2B5A50E928F87D7C2F046C4341021F363FE7384E94AC90A875B87"
         },
         {
           "path": "FamilyQuant.Core\\Storage\\QuantRow.cs",
@@ -8318,7 +8382,7 @@
         {
           "path": "FamilyQuant.Core\\Storage\\QuantManifest.cs",
           "symbol": "Quantify failure publication guard; wording may be improved",
-          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
+          "sha256": "FBB1D2B23FB2B5A50E928F87D7C2F046C4341021F363FE7384E94AC90A875B87"
         },
         {
           "path": "FamilyQuant.Core\\Storage\\QuantRow.cs",
@@ -8492,7 +8556,7 @@
         {
           "path": "FamilyQuant.Core\\Storage\\QuantManifest.cs",
           "symbol": "Quantify visible RunSummary/Basis; wording may be improved",
-          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
+          "sha256": "FBB1D2B23FB2B5A50E928F87D7C2F046C4341021F363FE7384E94AC90A875B87"
         },
         {
           "path": "FamilyQuant.Core\\Storage\\QuantRow.cs",
@@ -8666,7 +8730,7 @@
         {
           "path": "FamilyQuant.Core\\Storage\\QuantManifest.cs",
           "symbol": "QuantifyControl.TextBoxDeepNovoMinimumScore",
-          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
+          "sha256": "FBB1D2B23FB2B5A50E928F87D7C2F046C4341021F363FE7384E94AC90A875B87"
         },
         {
           "path": "FamilyQuant.Core\\Storage\\QuantRow.cs",
@@ -8840,7 +8904,7 @@
         {
           "path": "FamilyQuant.Core\\Storage\\QuantManifest.cs",
           "symbol": "Quantify failure publication guard; wording may be improved",
-          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
+          "sha256": "FBB1D2B23FB2B5A50E928F87D7C2F046C4341021F363FE7384E94AC90A875B87"
         },
         {
           "path": "FamilyQuant.Core\\Storage\\QuantRow.cs",
@@ -9014,7 +9078,7 @@
         {
           "path": "FamilyQuant.Core\\Storage\\QuantManifest.cs",
           "symbol": "DeNovoFilterControl.ComboBoxDeNovoSource.SelectedIndex",
-          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
+          "sha256": "FBB1D2B23FB2B5A50E928F87D7C2F046C4341021F363FE7384E94AC90A875B87"
         },
         {
           "path": "FamilyQuant.Core\\Storage\\QuantRow.cs",
@@ -9188,7 +9252,7 @@
         {
           "path": "FamilyQuant.Core\\Storage\\QuantManifest.cs",
           "symbol": "keyword domain choices N0/count punctuation",
-          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
+          "sha256": "FBB1D2B23FB2B5A50E928F87D7C2F046C4341021F363FE7384E94AC90A875B87"
         },
         {
           "path": "FamilyQuant.Core\\Storage\\QuantRow.cs",
@@ -9362,7 +9426,7 @@
         {
           "path": "FamilyQuant.Core\\Storage\\QuantManifest.cs",
           "symbol": "LockManagerWindow binding Description",
-          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
+          "sha256": "FBB1D2B23FB2B5A50E928F87D7C2F046C4341021F363FE7384E94AC90A875B87"
         },
         {
           "path": "FamilyQuant.Core\\Storage\\QuantRow.cs",
@@ -9536,7 +9600,7 @@
         {
           "path": "FamilyQuant.Core\\Storage\\QuantManifest.cs",
           "symbol": "ComputeXicViewModel.ComputeAsync",
-          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
+          "sha256": "FBB1D2B23FB2B5A50E928F87D7C2F046C4341021F363FE7384E94AC90A875B87"
         },
         {
           "path": "FamilyQuant.Core\\Storage\\QuantRow.cs",
@@ -9710,7 +9774,7 @@
         {
           "path": "FamilyQuant.Core\\Storage\\QuantManifest.cs",
           "symbol": "DeNovoFilterViewModel source state",
-          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
+          "sha256": "FBB1D2B23FB2B5A50E928F87D7C2F046C4341021F363FE7384E94AC90A875B87"
         },
         {
           "path": "FamilyQuant.Core\\Storage\\QuantRow.cs",
@@ -9884,7 +9948,7 @@
         {
           "path": "FamilyQuant.Core\\Storage\\QuantManifest.cs",
           "symbol": "Compute button input validation; displayed wording may be improved",
-          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
+          "sha256": "FBB1D2B23FB2B5A50E928F87D7C2F046C4341021F363FE7384E94AC90A875B87"
         },
         {
           "path": "FamilyQuant.Core\\Storage\\QuantRow.cs",
@@ -10058,7 +10122,7 @@
         {
           "path": "FamilyQuant.Core\\Storage\\QuantManifest.cs",
           "symbol": "QuantifyControl.TextBoxSeproPackage",
-          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
+          "sha256": "FBB1D2B23FB2B5A50E928F87D7C2F046C4341021F363FE7384E94AC90A875B87"
         },
         {
           "path": "FamilyQuant.Core\\Storage\\QuantRow.cs",
@@ -10232,7 +10296,7 @@
         {
           "path": "FamilyQuant.Core\\Storage\\QuantManifest.cs",
           "symbol": "DeNovoFilterControl source peaks-all",
-          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
+          "sha256": "FBB1D2B23FB2B5A50E928F87D7C2F046C4341021F363FE7384E94AC90A875B87"
         },
         {
           "path": "FamilyQuant.Core\\Storage\\QuantRow.cs",
@@ -10406,7 +10470,7 @@
         {
           "path": "FamilyQuant.Core\\Storage\\QuantManifest.cs",
           "symbol": "keyword domain TextBox",
-          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
+          "sha256": "FBB1D2B23FB2B5A50E928F87D7C2F046C4341021F363FE7384E94AC90A875B87"
         },
         {
           "path": "FamilyQuant.Core\\Storage\\QuantRow.cs",
@@ -10580,7 +10644,7 @@
         {
           "path": "FamilyQuant.Core\\Storage\\QuantManifest.cs",
           "symbol": "QuantifyControl.ButtonCompute",
-          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
+          "sha256": "FBB1D2B23FB2B5A50E928F87D7C2F046C4341021F363FE7384E94AC90A875B87"
         },
         {
           "path": "FamilyQuant.Core\\Storage\\QuantRow.cs",
@@ -10754,7 +10818,7 @@
         {
           "path": "FamilyQuant.Core\\Storage\\QuantManifest.cs",
           "symbol": "IdentityScanWindow SaveFigureFromDialog headless refusal",
-          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
+          "sha256": "FBB1D2B23FB2B5A50E928F87D7C2F046C4341021F363FE7384E94AC90A875B87"
         },
         {
           "path": "FamilyQuant.Core\\Storage\\QuantRow.cs",
@@ -10883,6 +10947,14 @@
       "compared": "FamilyQuant/IdentityScanWindow.cs:169 \u0022application and save the figure from there.\u0022; actual Save click on disconnected visuals refuses a native dialog; frozen/contract=\u0022Nothing was saved, because this window is not on a display and a file dialog there is a window nothing can close. Next step: open the sweep in the application and save the figure from there.\u0022; current=\u0022Nothing was saved, because this window is not on a display and a file dialog there is a window nothing can close. Next step: open the sweep in the application and save the figure from there.\u0022"
     },
     {
+      "observationId": "FQ15-4B912FDD995D",
+      "implementation": [],
+      "proofs": [],
+      "note": "No supported native check. Help/tooltips stay with LK; other facts remain OPEN.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
       "observationId": "FQ15-4DD358BA51E7",
       "implementation": [
         {
@@ -10928,7 +11000,7 @@
         {
           "path": "FamilyQuant.Core\\Storage\\QuantManifest.cs",
           "symbol": "LockManagerWindow binding UserId",
-          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
+          "sha256": "FBB1D2B23FB2B5A50E928F87D7C2F046C4341021F363FE7384E94AC90A875B87"
         },
         {
           "path": "FamilyQuant.Core\\Storage\\QuantRow.cs",
@@ -11102,7 +11174,7 @@
         {
           "path": "FamilyQuant.Core\\Storage\\QuantManifest.cs",
           "symbol": "LockManagerWindow table header 1",
-          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
+          "sha256": "FBB1D2B23FB2B5A50E928F87D7C2F046C4341021F363FE7384E94AC90A875B87"
         },
         {
           "path": "FamilyQuant.Core\\Storage\\QuantRow.cs",
@@ -11276,7 +11348,7 @@
         {
           "path": "FamilyQuant.Core\\Storage\\QuantManifest.cs",
           "symbol": "keyword grid column 3",
-          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
+          "sha256": "FBB1D2B23FB2B5A50E928F87D7C2F046C4341021F363FE7384E94AC90A875B87"
         },
         {
           "path": "FamilyQuant.Core\\Storage\\QuantRow.cs",
@@ -11405,6 +11477,22 @@
       "compared": "FamilyQuant/SuperClusterPreviewWindow.cs:302 \u0022Domains\u0022; native keyword table header and source-row projection; frozen/contract=\u0022Domains\u0022; current=\u0022Domains\u0022"
     },
     {
+      "observationId": "FQ15-53AFA8BB71EB",
+      "implementation": [],
+      "proofs": [],
+      "note": "No supported native check. Help/tooltips stay with LK; other facts remain OPEN.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-551DF67EF6AC",
+      "implementation": [],
+      "proofs": [],
+      "note": "No supported native check. Help/tooltips stay with LK; other facts remain OPEN.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
       "observationId": "FQ15-58353DB887F3",
       "implementation": [
         {
@@ -11450,7 +11538,7 @@
         {
           "path": "FamilyQuant.Core\\Storage\\QuantManifest.cs",
           "symbol": "DeNovoFilterControl source peaks-only",
-          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
+          "sha256": "FBB1D2B23FB2B5A50E928F87D7C2F046C4341021F363FE7384E94AC90A875B87"
         },
         {
           "path": "FamilyQuant.Core\\Storage\\QuantRow.cs",
@@ -11624,7 +11712,7 @@
         {
           "path": "FamilyQuant.Core\\Storage\\QuantManifest.cs",
           "symbol": "LockManagerWindow.Remove button Click -\u003E RemoveSelectedLocks",
-          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
+          "sha256": "FBB1D2B23FB2B5A50E928F87D7C2F046C4341021F363FE7384E94AC90A875B87"
         },
         {
           "path": "FamilyQuant.Core\\Storage\\QuantRow.cs",
@@ -11798,7 +11886,7 @@
         {
           "path": "FamilyQuant.Core\\Storage\\QuantManifest.cs",
           "symbol": "Quantify visible RunSummary/Basis; wording may be improved",
-          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
+          "sha256": "FBB1D2B23FB2B5A50E928F87D7C2F046C4341021F363FE7384E94AC90A875B87"
         },
         {
           "path": "FamilyQuant.Core\\Storage\\QuantRow.cs",
@@ -11927,6 +12015,14 @@
       "compared": "FamilyQuant/ComputeXicWindow.xaml.cs:340 \u0022N0\u0022; native result summary and visible basis preserve row/run counts and chosen isotope/point rules; frozen/contract={\u0022Rows\u0022:1050,\u0022Identified\u0022:1030,\u0022DeNovo\u0022:20,\u0022Runs\u0022:2,\u0022Isotopes\u0022:4,\u0022Points\u0022:2}; current={\u0022Rows\u0022:1050,\u0022Identified\u0022:1030,\u0022DeNovo\u0022:20,\u0022Runs\u0022:2,\u0022Isotopes\u0022:4,\u0022Points\u0022:2}"
     },
     {
+      "observationId": "FQ15-5BCE77D5F1E6",
+      "implementation": [],
+      "proofs": [],
+      "note": "No supported native check. Help/tooltips stay with LK; other facts remain OPEN.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
       "observationId": "FQ15-5CAAE9F40E7B",
       "implementation": [
         {
@@ -11972,7 +12068,7 @@
         {
           "path": "FamilyQuant.Core\\Storage\\QuantManifest.cs",
           "symbol": "keyword hidden families checkbox",
-          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
+          "sha256": "FBB1D2B23FB2B5A50E928F87D7C2F046C4341021F363FE7384E94AC90A875B87"
         },
         {
           "path": "FamilyQuant.Core\\Storage\\QuantRow.cs",
@@ -12146,7 +12242,7 @@
         {
           "path": "FamilyQuant.Core\\Storage\\QuantManifest.cs",
           "symbol": "QuantifyControl.IntegerUpDownMinPoints.Maximum",
-          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
+          "sha256": "FBB1D2B23FB2B5A50E928F87D7C2F046C4341021F363FE7384E94AC90A875B87"
         },
         {
           "path": "FamilyQuant.Core\\Storage\\QuantRow.cs",
@@ -12275,6 +12371,14 @@
       "compared": "FamilyQuant/ComputeXicWindow.xaml:101 IntegerUpDownMinPoints.Maximum = 20; native numeric boundary IntegerUpDownMinPoints.Maximum; frozen/contract=\u002220\u0022; current=\u002220\u0022"
     },
     {
+      "observationId": "FQ15-61702F7E02DB",
+      "implementation": [],
+      "proofs": [],
+      "note": "No supported native check. Help/tooltips stay with LK; other facts remain OPEN.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
       "observationId": "FQ15-63B8B7147930",
       "implementation": [
         {
@@ -12320,7 +12424,7 @@
         {
           "path": "FamilyQuant.Core\\Storage\\QuantManifest.cs",
           "symbol": "keyword exclusion text event",
-          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
+          "sha256": "FBB1D2B23FB2B5A50E928F87D7C2F046C4341021F363FE7384E94AC90A875B87"
         },
         {
           "path": "FamilyQuant.Core\\Storage\\QuantRow.cs",
@@ -12494,7 +12598,7 @@
         {
           "path": "FamilyQuant.Core\\Storage\\QuantManifest.cs",
           "symbol": "ComputeXicViewModel.Details native retained result fields",
-          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
+          "sha256": "FBB1D2B23FB2B5A50E928F87D7C2F046C4341021F363FE7384E94AC90A875B87"
         },
         {
           "path": "FamilyQuant.Core\\Storage\\QuantRow.cs",
@@ -12668,7 +12772,7 @@
         {
           "path": "FamilyQuant.Core\\Storage\\QuantManifest.cs",
           "symbol": "ComputeXicViewModel.Details native retained result fields",
-          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
+          "sha256": "FBB1D2B23FB2B5A50E928F87D7C2F046C4341021F363FE7384E94AC90A875B87"
         },
         {
           "path": "FamilyQuant.Core\\Storage\\QuantRow.cs",
@@ -12797,6 +12901,14 @@
       "compared": "FamilyQuant/ComputeXicWindow.xaml.cs:354 \u0022 (\u0022; native details preserve share-before-diagnostic order and grouped caller cutoff/file count; frozen/contract=true; current={\u0022PrimaryFirst\u0022:true,\u0022Caller\u0022:true,\u0022Cutoff\u0022:true,\u0022Files\u0022:true}"
     },
     {
+      "observationId": "FQ15-66AEFD6107CA",
+      "implementation": [],
+      "proofs": [],
+      "note": "No supported native check. Help/tooltips stay with LK; other facts remain OPEN.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
       "observationId": "FQ15-67E17DC96003",
       "implementation": [
         {
@@ -12842,7 +12954,7 @@
         {
           "path": "FamilyQuant.Core\\Storage\\QuantManifest.cs",
           "symbol": "DeNovoFilterControl source union-all-deepnovo",
-          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
+          "sha256": "FBB1D2B23FB2B5A50E928F87D7C2F046C4341021F363FE7384E94AC90A875B87"
         },
         {
           "path": "FamilyQuant.Core\\Storage\\QuantRow.cs",
@@ -13016,7 +13128,7 @@
         {
           "path": "FamilyQuant.Core\\Storage\\QuantManifest.cs",
           "symbol": "LockManagerWindow table column 3",
-          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
+          "sha256": "FBB1D2B23FB2B5A50E928F87D7C2F046C4341021F363FE7384E94AC90A875B87"
         },
         {
           "path": "FamilyQuant.Core\\Storage\\QuantRow.cs",
@@ -13190,7 +13302,7 @@
         {
           "path": "FamilyQuant.Core\\Storage\\QuantManifest.cs",
           "symbol": "QuantifyControl.ViewSpectrum linked Click; native table constructed from completed result",
-          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
+          "sha256": "FBB1D2B23FB2B5A50E928F87D7C2F046C4341021F363FE7384E94AC90A875B87"
         },
         {
           "path": "FamilyQuant.Core\\Storage\\QuantRow.cs",
@@ -13364,7 +13476,7 @@
         {
           "path": "FamilyQuant.Core\\Storage\\QuantManifest.cs",
           "symbol": "source-specific confidence refusal; UI copy may be improved",
-          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
+          "sha256": "FBB1D2B23FB2B5A50E928F87D7C2F046C4341021F363FE7384E94AC90A875B87"
         },
         {
           "path": "FamilyQuant.Core\\Storage\\QuantRow.cs",
@@ -13538,7 +13650,7 @@
         {
           "path": "FamilyQuant.Core\\Storage\\QuantManifest.cs",
           "symbol": "IdentityScanWindow Save button Click",
-          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
+          "sha256": "FBB1D2B23FB2B5A50E928F87D7C2F046C4341021F363FE7384E94AC90A875B87"
         },
         {
           "path": "FamilyQuant.Core\\Storage\\QuantRow.cs",
@@ -13712,7 +13824,7 @@
         {
           "path": "FamilyQuant.Core\\Storage\\QuantManifest.cs",
           "symbol": "SuperClusterPreviewWindow keyword match ComboBox",
-          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
+          "sha256": "FBB1D2B23FB2B5A50E928F87D7C2F046C4341021F363FE7384E94AC90A875B87"
         },
         {
           "path": "FamilyQuant.Core\\Storage\\QuantRow.cs",
@@ -13886,7 +13998,7 @@
         {
           "path": "FamilyQuant.Core\\Storage\\QuantManifest.cs",
           "symbol": "Quantify visible RunSummary/Basis; wording may be improved",
-          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
+          "sha256": "FBB1D2B23FB2B5A50E928F87D7C2F046C4341021F363FE7384E94AC90A875B87"
         },
         {
           "path": "FamilyQuant.Core\\Storage\\QuantRow.cs",
@@ -14060,7 +14172,7 @@
         {
           "path": "FamilyQuant.Core\\Storage\\QuantManifest.cs",
           "symbol": "Quantify visible RunSummary/Basis; wording may be improved",
-          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
+          "sha256": "FBB1D2B23FB2B5A50E928F87D7C2F046C4341021F363FE7384E94AC90A875B87"
         },
         {
           "path": "FamilyQuant.Core\\Storage\\QuantRow.cs",
@@ -14234,7 +14346,7 @@
         {
           "path": "FamilyQuant.Core\\Storage\\QuantManifest.cs",
           "symbol": "DeNovoFilterViewModel.TryBuild native source selections",
-          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
+          "sha256": "FBB1D2B23FB2B5A50E928F87D7C2F046C4341021F363FE7384E94AC90A875B87"
         },
         {
           "path": "FamilyQuant.Core\\Storage\\QuantRow.cs",
@@ -14408,7 +14520,7 @@
         {
           "path": "FamilyQuant.Core\\Storage\\QuantManifest.cs",
           "symbol": "ComputeXicViewModel.Details native retained result fields",
-          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
+          "sha256": "FBB1D2B23FB2B5A50E928F87D7C2F046C4341021F363FE7384E94AC90A875B87"
         },
         {
           "path": "FamilyQuant.Core\\Storage\\QuantRow.cs",
@@ -14537,6 +14649,14 @@
       "compared": "FamilyQuant/ComputeXicWindow.xaml.cs:356 \u0022 file(s))\u0022; native details preserve share-before-diagnostic order and grouped caller cutoff/file count; frozen/contract=true; current={\u0022PrimaryFirst\u0022:true,\u0022Caller\u0022:true,\u0022Cutoff\u0022:true,\u0022Files\u0022:true}"
     },
     {
+      "observationId": "FQ15-71A8CAFFFFAC",
+      "implementation": [],
+      "proofs": [],
+      "note": "No supported native check. Help/tooltips stay with LK; other facts remain OPEN.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
       "observationId": "FQ15-71E525ACF12F",
       "implementation": [
         {
@@ -14582,7 +14702,7 @@
         {
           "path": "FamilyQuant.Core\\Storage\\QuantManifest.cs",
           "symbol": "grouping confirmation button",
-          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
+          "sha256": "FBB1D2B23FB2B5A50E928F87D7C2F046C4341021F363FE7384E94AC90A875B87"
         },
         {
           "path": "FamilyQuant.Core\\Storage\\QuantRow.cs",
@@ -14756,7 +14876,7 @@
         {
           "path": "FamilyQuant.Core\\Storage\\QuantManifest.cs",
           "symbol": "QuantifyControl Browse handlers",
-          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
+          "sha256": "FBB1D2B23FB2B5A50E928F87D7C2F046C4341021F363FE7384E94AC90A875B87"
         },
         {
           "path": "FamilyQuant.Core\\Storage\\QuantRow.cs",
@@ -14930,7 +15050,7 @@
         {
           "path": "FamilyQuant.Core\\Storage\\QuantManifest.cs",
           "symbol": "DeNovoFilterViewModel source state",
-          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
+          "sha256": "FBB1D2B23FB2B5A50E928F87D7C2F046C4341021F363FE7384E94AC90A875B87"
         },
         {
           "path": "FamilyQuant.Core\\Storage\\QuantRow.cs",
@@ -15104,7 +15224,7 @@
         {
           "path": "FamilyQuant.Core\\Storage\\QuantManifest.cs",
           "symbol": "IdentityScanWindow Save figure button",
-          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
+          "sha256": "FBB1D2B23FB2B5A50E928F87D7C2F046C4341021F363FE7384E94AC90A875B87"
         },
         {
           "path": "FamilyQuant.Core\\Storage\\QuantRow.cs",
@@ -15278,7 +15398,7 @@
         {
           "path": "FamilyQuant.Core\\Storage\\QuantManifest.cs",
           "symbol": "keyword match choice copy",
-          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
+          "sha256": "FBB1D2B23FB2B5A50E928F87D7C2F046C4341021F363FE7384E94AC90A875B87"
         },
         {
           "path": "FamilyQuant.Core\\Storage\\QuantRow.cs",
@@ -15452,7 +15572,7 @@
         {
           "path": "FamilyQuant.Core\\Storage\\QuantManifest.cs",
           "symbol": "ComputeXicViewModel.Details native retained result fields",
-          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
+          "sha256": "FBB1D2B23FB2B5A50E928F87D7C2F046C4341021F363FE7384E94AC90A875B87"
         },
         {
           "path": "FamilyQuant.Core\\Storage\\QuantRow.cs",
@@ -15626,7 +15746,7 @@
         {
           "path": "FamilyQuant.Core\\Storage\\QuantManifest.cs",
           "symbol": "LockManagerWindow table column 2",
-          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
+          "sha256": "FBB1D2B23FB2B5A50E928F87D7C2F046C4341021F363FE7384E94AC90A875B87"
         },
         {
           "path": "FamilyQuant.Core\\Storage\\QuantRow.cs",
@@ -15800,7 +15920,7 @@
         {
           "path": "FamilyQuant.Core\\Storage\\QuantManifest.cs",
           "symbol": "DeNovoFilterControl.TextBoxPeaksMinimumAlc",
-          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
+          "sha256": "FBB1D2B23FB2B5A50E928F87D7C2F046C4341021F363FE7384E94AC90A875B87"
         },
         {
           "path": "FamilyQuant.Core\\Storage\\QuantRow.cs",
@@ -15974,7 +16094,7 @@
         {
           "path": "FamilyQuant.Core\\Storage\\QuantManifest.cs",
           "symbol": "DeNovoFilterControl source deepnovo",
-          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
+          "sha256": "FBB1D2B23FB2B5A50E928F87D7C2F046C4341021F363FE7384E94AC90A875B87"
         },
         {
           "path": "FamilyQuant.Core\\Storage\\QuantRow.cs",
@@ -16103,6 +16223,22 @@
       "compared": "FamilyQuant/ComputeXicWindow.xaml:73 ComboBoxItem.Content = DeepNovo (*.deepnovo.csv); native old/current source-item copy: deepnovo; frozen/contract=\u0022DeepNovo (*.deepnovo.csv)\u0022; current=\u0022DeepNovo (*.deepnovo.csv)\u0022"
     },
     {
+      "observationId": "FQ15-7960E8A0CC39",
+      "implementation": [],
+      "proofs": [],
+      "note": "No supported native check. Help/tooltips stay with LK; other facts remain OPEN.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-7961F556D755",
+      "implementation": [],
+      "proofs": [],
+      "note": "No supported native check. Help/tooltips stay with LK; other facts remain OPEN.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
       "observationId": "FQ15-7BB37DBBE52F",
       "implementation": [
         {
@@ -16148,7 +16284,7 @@
         {
           "path": "FamilyQuant.Core\\Storage\\QuantManifest.cs",
           "symbol": "QuantifyControl.ViewSpectrum / SpectrumComparisonWindow.Show; injected final presentation only",
-          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
+          "sha256": "FBB1D2B23FB2B5A50E928F87D7C2F046C4341021F363FE7384E94AC90A875B87"
         },
         {
           "path": "FamilyQuant.Core\\Storage\\QuantRow.cs",
@@ -16277,6 +16413,14 @@
       "compared": "FamilyQuant/ComputeXicWindow.xaml.cs:384 private void ButtonViewSpectrumComparison_Click(object sender, RoutedEventArgs e); compiled attached spectrum handler retains empty-state refusal and completed-table behavior; frozen/contract=true; current=true"
     },
     {
+      "observationId": "FQ15-7D3BDCCD05F8",
+      "implementation": [],
+      "proofs": [],
+      "note": "No supported native check. Help/tooltips stay with LK; other facts remain OPEN.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
       "observationId": "FQ15-7F734DFF2640",
       "implementation": [
         {
@@ -16322,7 +16466,7 @@
         {
           "path": "FamilyQuant.Core\\Storage\\QuantManifest.cs",
           "symbol": "GridCopy unmodified keyboard navigation",
-          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
+          "sha256": "FBB1D2B23FB2B5A50E928F87D7C2F046C4341021F363FE7384E94AC90A875B87"
         },
         {
           "path": "FamilyQuant.Core\\Storage\\QuantRow.cs",
@@ -16451,6 +16595,22 @@
       "compared": "FamilyQuant/GridCopy.cs:52 if (e.Key is Key.Left or Key.Right or Key.Tab; actual Left/Right/Tab/Up/Down/Home/End/PageUp/PageDown navigation preserves column-only copy; frozen/contract=[\u0022Left/True/second native description\u0022,\u0022Right/True/second native description\u0022,\u0022Tab/True/second native description\u0022,\u0022Up/True/second native description\u0022,\u0022Down/True/second native description\u0022,\u0022Home/True/second native description\u0022,\u0022End/True/second native description\u0022,\u0022PageUp/True/second native description\u0022,\u0022Next/True/second native description\u0022]; current=[\u0022Left/True/second native description\u0022,\u0022Right/True/second native description\u0022,\u0022Tab/True/second native description\u0022,\u0022Up/True/second native description\u0022,\u0022Down/True/second native description\u0022,\u0022Home/True/second native description\u0022,\u0022End/True/second native description\u0022,\u0022PageUp/True/second native description\u0022,\u0022Next/True/second native description\u0022]"
     },
     {
+      "observationId": "FQ15-804F299CF330",
+      "implementation": [],
+      "proofs": [],
+      "note": "No supported native check. Help/tooltips stay with LK; other facts remain OPEN.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-81E9937ED1C5",
+      "implementation": [],
+      "proofs": [],
+      "note": "No supported native check. Help/tooltips stay with LK; other facts remain OPEN.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
       "observationId": "FQ15-822F25A3F3E4",
       "implementation": [
         {
@@ -16496,7 +16656,7 @@
         {
           "path": "FamilyQuant.Core\\Storage\\QuantManifest.cs",
           "symbol": "LockManagerWindow table SelectionChanged",
-          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
+          "sha256": "FBB1D2B23FB2B5A50E928F87D7C2F046C4341021F363FE7384E94AC90A875B87"
         },
         {
           "path": "FamilyQuant.Core\\Storage\\QuantRow.cs",
@@ -16670,7 +16830,7 @@
         {
           "path": "FamilyQuant.Core\\Storage\\QuantManifest.cs",
           "symbol": "DeNovoFilterControl.TextBoxDeepNovoMinimumScore",
-          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
+          "sha256": "FBB1D2B23FB2B5A50E928F87D7C2F046C4341021F363FE7384E94AC90A875B87"
         },
         {
           "path": "FamilyQuant.Core\\Storage\\QuantRow.cs",
@@ -16844,7 +17004,7 @@
         {
           "path": "FamilyQuant.Core\\Storage\\QuantManifest.cs",
           "symbol": "ComputeXicWindow source tags -\u003E DeNovoFilterViewModel.ModeTag/Sources",
-          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
+          "sha256": "FBB1D2B23FB2B5A50E928F87D7C2F046C4341021F363FE7384E94AC90A875B87"
         },
         {
           "path": "FamilyQuant.Core\\Storage\\QuantRow.cs",
@@ -17018,7 +17178,7 @@
         {
           "path": "FamilyQuant.Core\\Storage\\QuantManifest.cs",
           "symbol": "Quantify visible RunSummary/Basis; wording may be improved",
-          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
+          "sha256": "FBB1D2B23FB2B5A50E928F87D7C2F046C4341021F363FE7384E94AC90A875B87"
         },
         {
           "path": "FamilyQuant.Core\\Storage\\QuantRow.cs",
@@ -17192,7 +17352,7 @@
         {
           "path": "FamilyQuant.Core\\Storage\\QuantManifest.cs",
           "symbol": "DeNovoFilterControl source peaks-all",
-          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
+          "sha256": "FBB1D2B23FB2B5A50E928F87D7C2F046C4341021F363FE7384E94AC90A875B87"
         },
         {
           "path": "FamilyQuant.Core\\Storage\\QuantRow.cs",
@@ -17366,7 +17526,7 @@
         {
           "path": "FamilyQuant.Core\\Storage\\QuantManifest.cs",
           "symbol": "LockManagerWindow Button",
-          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
+          "sha256": "FBB1D2B23FB2B5A50E928F87D7C2F046C4341021F363FE7384E94AC90A875B87"
         },
         {
           "path": "FamilyQuant.Core\\Storage\\QuantRow.cs",
@@ -17540,7 +17700,7 @@
         {
           "path": "FamilyQuant.Core\\Storage\\QuantManifest.cs",
           "symbol": "GridCopy unmodified keyboard navigation",
-          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
+          "sha256": "FBB1D2B23FB2B5A50E928F87D7C2F046C4341021F363FE7384E94AC90A875B87"
         },
         {
           "path": "FamilyQuant.Core\\Storage\\QuantRow.cs",
@@ -17714,7 +17874,7 @@
         {
           "path": "FamilyQuant.Core\\Storage\\QuantManifest.cs",
           "symbol": "GridCopy unmodified keyboard navigation",
-          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
+          "sha256": "FBB1D2B23FB2B5A50E928F87D7C2F046C4341021F363FE7384E94AC90A875B87"
         },
         {
           "path": "FamilyQuant.Core\\Storage\\QuantRow.cs",
@@ -17888,7 +18048,7 @@
         {
           "path": "FamilyQuant.Core\\Storage\\QuantManifest.cs",
           "symbol": "keyword domain SelectionChanged",
-          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
+          "sha256": "FBB1D2B23FB2B5A50E928F87D7C2F046C4341021F363FE7384E94AC90A875B87"
         },
         {
           "path": "FamilyQuant.Core\\Storage\\QuantRow.cs",
@@ -18062,7 +18222,7 @@
         {
           "path": "FamilyQuant.Core\\Storage\\QuantManifest.cs",
           "symbol": "Quantify visible RunSummary/Basis; wording may be improved",
-          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
+          "sha256": "FBB1D2B23FB2B5A50E928F87D7C2F046C4341021F363FE7384E94AC90A875B87"
         },
         {
           "path": "FamilyQuant.Core\\Storage\\QuantRow.cs",
@@ -18236,7 +18396,7 @@
         {
           "path": "FamilyQuant.Core\\Storage\\QuantManifest.cs",
           "symbol": "LockManagerWindow Close button Click",
-          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
+          "sha256": "FBB1D2B23FB2B5A50E928F87D7C2F046C4341021F363FE7384E94AC90A875B87"
         },
         {
           "path": "FamilyQuant.Core\\Storage\\QuantRow.cs",
@@ -18410,7 +18570,7 @@
         {
           "path": "FamilyQuant.Core\\Storage\\QuantManifest.cs",
           "symbol": "QuantifyControl Browse handlers",
-          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
+          "sha256": "FBB1D2B23FB2B5A50E928F87D7C2F046C4341021F363FE7384E94AC90A875B87"
         },
         {
           "path": "FamilyQuant.Core\\Storage\\QuantRow.cs",
@@ -18584,7 +18744,7 @@
         {
           "path": "FamilyQuant.Core\\Storage\\QuantManifest.cs",
           "symbol": "LockManagerViewModel.Rows.Presence",
-          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
+          "sha256": "FBB1D2B23FB2B5A50E928F87D7C2F046C4341021F363FE7384E94AC90A875B87"
         },
         {
           "path": "FamilyQuant.Core\\Storage\\QuantRow.cs",
@@ -18713,6 +18873,14 @@
       "compared": "FamilyQuant/LockManagerWindow.cs:287 \u0022yes\u0022; current and retired lock presence values are retained in ordered native rows; frozen/contract=[\u00222/1/yes/Fixture name\u0022,\u00227/1/yes/Other fixture\u0022,\u002290/0/no, merged away/\u0022]; current=[\u00222/1/yes/Fixture name\u0022,\u00227/1/yes/Other fixture\u0022,\u002290/0/no, merged away/\u0022]"
     },
     {
+      "observationId": "FQ15-8F913107E6BE",
+      "implementation": [],
+      "proofs": [],
+      "note": "No supported native check. Help/tooltips stay with LK; other facts remain OPEN.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
       "observationId": "FQ15-9015BBF51BAF",
       "implementation": [
         {
@@ -18758,7 +18926,7 @@
         {
           "path": "FamilyQuant.Core\\Storage\\QuantManifest.cs",
           "symbol": "QuantifyControl.IntegerUpDownIsotopes.Maximum",
-          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
+          "sha256": "FBB1D2B23FB2B5A50E928F87D7C2F046C4341021F363FE7384E94AC90A875B87"
         },
         {
           "path": "FamilyQuant.Core\\Storage\\QuantRow.cs",
@@ -18887,6 +19055,14 @@
       "compared": "FamilyQuant/ComputeXicWindow.xaml:95 IntegerUpDownIsotopes.Maximum = 6; native numeric boundary IntegerUpDownIsotopes.Maximum; frozen/contract=\u00226\u0022; current=\u00226\u0022"
     },
     {
+      "observationId": "FQ15-9114008B6416",
+      "implementation": [],
+      "proofs": [],
+      "note": "No supported native check. Help/tooltips stay with LK; other facts remain OPEN.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
       "observationId": "FQ15-91343967EB15",
       "implementation": [
         {
@@ -18932,7 +19108,7 @@
         {
           "path": "FamilyQuant.Core\\Storage\\QuantManifest.cs",
           "symbol": "keyword tick template column",
-          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
+          "sha256": "FBB1D2B23FB2B5A50E928F87D7C2F046C4341021F363FE7384E94AC90A875B87"
         },
         {
           "path": "FamilyQuant.Core\\Storage\\QuantRow.cs",
@@ -19106,7 +19282,7 @@
         {
           "path": "FamilyQuant.Core\\Storage\\QuantManifest.cs",
           "symbol": "grouping screen native keyword/exclusion TextBox controls",
-          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
+          "sha256": "FBB1D2B23FB2B5A50E928F87D7C2F046C4341021F363FE7384E94AC90A875B87"
         },
         {
           "path": "FamilyQuant.Core\\Storage\\QuantRow.cs",
@@ -19280,7 +19456,7 @@
         {
           "path": "FamilyQuant.Core\\Storage\\QuantManifest.cs",
           "symbol": "QuantifyControl.ViewSpectrum linked Click; native table constructed from completed result",
-          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
+          "sha256": "FBB1D2B23FB2B5A50E928F87D7C2F046C4341021F363FE7384E94AC90A875B87"
         },
         {
           "path": "FamilyQuant.Core\\Storage\\QuantRow.cs",
@@ -19454,7 +19630,7 @@
         {
           "path": "FamilyQuant.Core\\Storage\\QuantManifest.cs",
           "symbol": "QuantifyControl.IntegerUpDownIsotopes",
-          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
+          "sha256": "FBB1D2B23FB2B5A50E928F87D7C2F046C4341021F363FE7384E94AC90A875B87"
         },
         {
           "path": "FamilyQuant.Core\\Storage\\QuantRow.cs",
@@ -19628,7 +19804,7 @@
         {
           "path": "FamilyQuant.Core\\Storage\\QuantManifest.cs",
           "symbol": "LockManagerWindow.Title",
-          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
+          "sha256": "FBB1D2B23FB2B5A50E928F87D7C2F046C4341021F363FE7384E94AC90A875B87"
         },
         {
           "path": "FamilyQuant.Core\\Storage\\QuantRow.cs",
@@ -19757,6 +19933,14 @@
       "compared": "FamilyQuant/LockManagerWindow.cs:78 \u0022Curation locks\u0022; native lock-manager window title; frozen/contract=\u0022Curation locks\u0022; current=\u0022Curation locks\u0022"
     },
     {
+      "observationId": "FQ15-9A07131C3851",
+      "implementation": [],
+      "proofs": [],
+      "note": "No supported native check. Help/tooltips stay with LK; other facts remain OPEN.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
       "observationId": "FQ15-9B2031D389FA",
       "implementation": [
         {
@@ -19802,7 +19986,7 @@
         {
           "path": "FamilyQuant.Core\\Storage\\QuantManifest.cs",
           "symbol": "ComputeXicWindow source tags -\u003E DeNovoFilterViewModel.ModeTag/Sources",
-          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
+          "sha256": "FBB1D2B23FB2B5A50E928F87D7C2F046C4341021F363FE7384E94AC90A875B87"
         },
         {
           "path": "FamilyQuant.Core\\Storage\\QuantRow.cs",
@@ -19976,7 +20160,7 @@
         {
           "path": "FamilyQuant.Core\\Storage\\QuantManifest.cs",
           "symbol": "IdentityScanWindow SaveFigureFromDialog headless refusal",
-          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
+          "sha256": "FBB1D2B23FB2B5A50E928F87D7C2F046C4341021F363FE7384E94AC90A875B87"
         },
         {
           "path": "FamilyQuant.Core\\Storage\\QuantRow.cs",
@@ -20105,6 +20289,14 @@
       "compared": "FamilyQuant/IdentityScanWindow.cs:167 \u0022Nothing was saved, because this window is not on a display and a file \u0022; actual Save click on disconnected visuals refuses a native dialog; frozen/contract=\u0022Nothing was saved, because this window is not on a display and a file dialog there is a window nothing can close. Next step: open the sweep in the application and save the figure from there.\u0022; current=\u0022Nothing was saved, because this window is not on a display and a file dialog there is a window nothing can close. Next step: open the sweep in the application and save the figure from there.\u0022"
     },
     {
+      "observationId": "FQ15-9C2B4865CCD0",
+      "implementation": [],
+      "proofs": [],
+      "note": "No supported native check. Help/tooltips stay with LK; other facts remain OPEN.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
       "observationId": "FQ15-9CCD6A5C04BF",
       "implementation": [
         {
@@ -20150,7 +20342,7 @@
         {
           "path": "FamilyQuant.Core\\Storage\\QuantManifest.cs",
           "symbol": "keyword match choice copy",
-          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
+          "sha256": "FBB1D2B23FB2B5A50E928F87D7C2F046C4341021F363FE7384E94AC90A875B87"
         },
         {
           "path": "FamilyQuant.Core\\Storage\\QuantRow.cs",
@@ -20279,6 +20471,14 @@
       "compared": "FamilyQuant/SuperClusterPreviewWindow.cs:81 \u0022match all words\u0022; native match-all/any choice captions; frozen/contract=[\u0022match all words\u0022,\u0022match any word\u0022]; current=[\u0022match all words\u0022,\u0022match any word\u0022]"
     },
     {
+      "observationId": "FQ15-9E3E3DEA8BE6",
+      "implementation": [],
+      "proofs": [],
+      "note": "No supported native check. Help/tooltips stay with LK; other facts remain OPEN.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
       "observationId": "FQ15-9EF85553B00F",
       "implementation": [
         {
@@ -20324,7 +20524,7 @@
         {
           "path": "FamilyQuant.Core\\Storage\\QuantManifest.cs",
           "symbol": "Quantify completed spectrum/CSV state",
-          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
+          "sha256": "FBB1D2B23FB2B5A50E928F87D7C2F046C4341021F363FE7384E94AC90A875B87"
         },
         {
           "path": "FamilyQuant.Core\\Storage\\QuantRow.cs",
@@ -20498,7 +20698,7 @@
         {
           "path": "FamilyQuant.Core\\Storage\\QuantManifest.cs",
           "symbol": "Quantify completed spectrum/CSV state",
-          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
+          "sha256": "FBB1D2B23FB2B5A50E928F87D7C2F046C4341021F363FE7384E94AC90A875B87"
         },
         {
           "path": "FamilyQuant.Core\\Storage\\QuantRow.cs",
@@ -20672,7 +20872,7 @@
         {
           "path": "FamilyQuant.Core\\Storage\\QuantManifest.cs",
           "symbol": "LockManagerViewModel.Rows.Presence",
-          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
+          "sha256": "FBB1D2B23FB2B5A50E928F87D7C2F046C4341021F363FE7384E94AC90A875B87"
         },
         {
           "path": "FamilyQuant.Core\\Storage\\QuantRow.cs",
@@ -20846,7 +21046,7 @@
         {
           "path": "FamilyQuant.Core\\Storage\\QuantManifest.cs",
           "symbol": "QuantifyControl Browse handlers",
-          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
+          "sha256": "FBB1D2B23FB2B5A50E928F87D7C2F046C4341021F363FE7384E94AC90A875B87"
         },
         {
           "path": "FamilyQuant.Core\\Storage\\QuantRow.cs",
@@ -20975,6 +21175,14 @@
       "compared": "FamilyQuant/ComputeXicWindow.xaml.cs:253 private void ButtonBrowseDeNovo_Click(object sender, RoutedEventArgs e); replacement Browse handler executes and keeps the chosen path; frozen/contract=true; current=true"
     },
     {
+      "observationId": "FQ15-A4E6C8C57E6C",
+      "implementation": [],
+      "proofs": [],
+      "note": "No supported native check. Help/tooltips stay with LK; other facts remain OPEN.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
       "observationId": "FQ15-A551DA5C1A01",
       "implementation": [
         {
@@ -21020,7 +21228,7 @@
         {
           "path": "FamilyQuant.Core\\Storage\\QuantManifest.cs",
           "symbol": "GridCopy unmodified keyboard navigation",
-          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
+          "sha256": "FBB1D2B23FB2B5A50E928F87D7C2F046C4341021F363FE7384E94AC90A875B87"
         },
         {
           "path": "FamilyQuant.Core\\Storage\\QuantRow.cs",
@@ -21194,7 +21402,7 @@
         {
           "path": "FamilyQuant.Core\\Storage\\QuantManifest.cs",
           "symbol": "Compute button input validation; displayed wording may be improved",
-          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
+          "sha256": "FBB1D2B23FB2B5A50E928F87D7C2F046C4341021F363FE7384E94AC90A875B87"
         },
         {
           "path": "FamilyQuant.Core\\Storage\\QuantRow.cs",
@@ -21323,6 +21531,30 @@
       "compared": "FamilyQuant/ComputeXicWindow.xaml.cs:290 \u0022Nothing was computed: the de novo export folder \\\u0022\u0022; native old/current Compute rejects the same invalid input category before the engine; frozen/contract={\u0022Refused\u0022:true,\u0022HasStatus\u0022:true}; current={\u0022Refused\u0022:true,\u0022HasStatus\u0022:true}"
     },
     {
+      "observationId": "FQ15-A6A013274E5B",
+      "implementation": [],
+      "proofs": [],
+      "note": "No supported native check. Help/tooltips stay with LK; other facts remain OPEN.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-A79A2A224FBE",
+      "implementation": [],
+      "proofs": [],
+      "note": "No supported native check. Help/tooltips stay with LK; other facts remain OPEN.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-A79A78EB851A",
+      "implementation": [],
+      "proofs": [],
+      "note": "No supported native check. Help/tooltips stay with LK; other facts remain OPEN.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
       "observationId": "FQ15-A82D616607CA",
       "implementation": [
         {
@@ -21368,7 +21600,7 @@
         {
           "path": "FamilyQuant.Core\\Storage\\QuantManifest.cs",
           "symbol": "Quantify visible RunSummary/Basis; wording may be improved",
-          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
+          "sha256": "FBB1D2B23FB2B5A50E928F87D7C2F046C4341021F363FE7384E94AC90A875B87"
         },
         {
           "path": "FamilyQuant.Core\\Storage\\QuantRow.cs",
@@ -21497,6 +21729,22 @@
       "compared": "FamilyQuant/ComputeXicWindow.xaml.cs:339 \u0022 identified and \u0022; native result summary and visible basis preserve row/run counts and chosen isotope/point rules; frozen/contract={\u0022Rows\u0022:1050,\u0022Identified\u0022:1030,\u0022DeNovo\u0022:20,\u0022Runs\u0022:2,\u0022Isotopes\u0022:4,\u0022Points\u0022:2}; current={\u0022Rows\u0022:1050,\u0022Identified\u0022:1030,\u0022DeNovo\u0022:20,\u0022Runs\u0022:2,\u0022Isotopes\u0022:4,\u0022Points\u0022:2}"
     },
     {
+      "observationId": "FQ15-A9115704A702",
+      "implementation": [],
+      "proofs": [],
+      "note": "No supported native check. Help/tooltips stay with LK; other facts remain OPEN.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-A9EEF5A65595",
+      "implementation": [],
+      "proofs": [],
+      "note": "No supported native check. Help/tooltips stay with LK; other facts remain OPEN.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
       "observationId": "FQ15-AF81016585BA",
       "implementation": [
         {
@@ -21542,7 +21790,7 @@
         {
           "path": "FamilyQuant.Core\\Storage\\QuantManifest.cs",
           "symbol": "QuantifyControl.TextBoxRawDirectory",
-          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
+          "sha256": "FBB1D2B23FB2B5A50E928F87D7C2F046C4341021F363FE7384E94AC90A875B87"
         },
         {
           "path": "FamilyQuant.Core\\Storage\\QuantRow.cs",
@@ -21671,6 +21919,14 @@
       "compared": "FamilyQuant/ComputeXicWindow.xaml:37 TextBox TextBoxRawDirectory; native old/current Quantify control is reachable: TextBoxRawDirectory; frozen/contract=\u0022TextBox:True\u0022; current=\u0022TextBox:True\u0022"
     },
     {
+      "observationId": "FQ15-AFEF440F5FA3",
+      "implementation": [],
+      "proofs": [],
+      "note": "No supported native check. Help/tooltips stay with LK; other facts remain OPEN.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
       "observationId": "FQ15-B03E8AA0C4C2",
       "implementation": [
         {
@@ -21716,7 +21972,7 @@
         {
           "path": "FamilyQuant.Core\\Storage\\QuantManifest.cs",
           "symbol": "ComputeXicViewModel.Details native retained result fields",
-          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
+          "sha256": "FBB1D2B23FB2B5A50E928F87D7C2F046C4341021F363FE7384E94AC90A875B87"
         },
         {
           "path": "FamilyQuant.Core\\Storage\\QuantRow.cs",
@@ -21890,7 +22146,7 @@
         {
           "path": "FamilyQuant.Core\\Storage\\QuantManifest.cs",
           "symbol": "keyword domain choices N0/count punctuation",
-          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
+          "sha256": "FBB1D2B23FB2B5A50E928F87D7C2F046C4341021F363FE7384E94AC90A875B87"
         },
         {
           "path": "FamilyQuant.Core\\Storage\\QuantRow.cs",
@@ -22064,7 +22320,7 @@
         {
           "path": "FamilyQuant.Core\\Storage\\QuantManifest.cs",
           "symbol": "keyword hidden-family Click",
-          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
+          "sha256": "FBB1D2B23FB2B5A50E928F87D7C2F046C4341021F363FE7384E94AC90A875B87"
         },
         {
           "path": "FamilyQuant.Core\\Storage\\QuantRow.cs",
@@ -22238,7 +22494,7 @@
         {
           "path": "FamilyQuant.Core\\Storage\\QuantManifest.cs",
           "symbol": "keyword grid column 0",
-          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
+          "sha256": "FBB1D2B23FB2B5A50E928F87D7C2F046C4341021F363FE7384E94AC90A875B87"
         },
         {
           "path": "FamilyQuant.Core\\Storage\\QuantRow.cs",
@@ -22412,7 +22668,7 @@
         {
           "path": "FamilyQuant.Core\\Storage\\QuantManifest.cs",
           "symbol": "keyword grid column 6",
-          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
+          "sha256": "FBB1D2B23FB2B5A50E928F87D7C2F046C4341021F363FE7384E94AC90A875B87"
         },
         {
           "path": "FamilyQuant.Core\\Storage\\QuantRow.cs",
@@ -22586,7 +22842,7 @@
         {
           "path": "FamilyQuant.Core\\Storage\\QuantManifest.cs",
           "symbol": "SuperClusterPreviewWindow modal Cancel control and Cancel_Click",
-          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
+          "sha256": "FBB1D2B23FB2B5A50E928F87D7C2F046C4341021F363FE7384E94AC90A875B87"
         },
         {
           "path": "FamilyQuant.Core\\Storage\\QuantRow.cs",
@@ -22715,6 +22971,22 @@
       "compared": "FamilyQuant/SuperClusterPreviewWindow.cs:183 new Button; grouping screen Cancel control returns modal false without confirmation or source mutation through its actual Click; frozen/contract={\u0022ClosedByClick\u0022:true,\u0022Result\u0022:false,\u0022Safe\u0022:true,\u0022SourceSame\u0022:true,\u0022LoadedAfter\u0022:false,\u0022Confirmed\u0022:false}; current={\u0022ClosedByClick\u0022:true,\u0022Result\u0022:false,\u0022Safe\u0022:true,\u0022SourceSame\u0022:true,\u0022LoadedAfter\u0022:false,\u0022Confirmed\u0022:false}"
     },
     {
+      "observationId": "FQ15-B61F52952457",
+      "implementation": [],
+      "proofs": [],
+      "note": "No supported native check. Help/tooltips stay with LK; other facts remain OPEN.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-B62102783A3E",
+      "implementation": [],
+      "proofs": [],
+      "note": "No supported native check. Help/tooltips stay with LK; other facts remain OPEN.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
       "observationId": "FQ15-B85F52C3CC74",
       "implementation": [
         {
@@ -22760,7 +23032,7 @@
         {
           "path": "FamilyQuant.Core\\Storage\\QuantManifest.cs",
           "symbol": "GridCopy unmodified keyboard navigation",
-          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
+          "sha256": "FBB1D2B23FB2B5A50E928F87D7C2F046C4341021F363FE7384E94AC90A875B87"
         },
         {
           "path": "FamilyQuant.Core\\Storage\\QuantRow.cs",
@@ -22889,6 +23161,22 @@
       "compared": "FamilyQuant/GridCopy.cs:53 || !extending \u0026\u0026 e.Key is Key.Up or Key.Down or Key.Home or Key.End or Key.PageUp or Key.PageDown); actual Left/Right/Tab/Up/Down/Home/End/PageUp/PageDown navigation preserves column-only copy; frozen/contract=[\u0022Left/True/second native description\u0022,\u0022Right/True/second native description\u0022,\u0022Tab/True/second native description\u0022,\u0022Up/True/second native description\u0022,\u0022Down/True/second native description\u0022,\u0022Home/True/second native description\u0022,\u0022End/True/second native description\u0022,\u0022PageUp/True/second native description\u0022,\u0022Next/True/second native description\u0022]; current=[\u0022Left/True/second native description\u0022,\u0022Right/True/second native description\u0022,\u0022Tab/True/second native description\u0022,\u0022Up/True/second native description\u0022,\u0022Down/True/second native description\u0022,\u0022Home/True/second native description\u0022,\u0022End/True/second native description\u0022,\u0022PageUp/True/second native description\u0022,\u0022Next/True/second native description\u0022]"
     },
     {
+      "observationId": "FQ15-BA53FE3A41BD",
+      "implementation": [],
+      "proofs": [],
+      "note": "No supported native check. Help/tooltips stay with LK; other facts remain OPEN.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-BC114CF2EF29",
+      "implementation": [],
+      "proofs": [],
+      "note": "No supported native check. Help/tooltips stay with LK; other facts remain OPEN.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
       "observationId": "FQ15-BC6B94085335",
       "implementation": [
         {
@@ -22934,7 +23222,7 @@
         {
           "path": "FamilyQuant.Core\\Storage\\QuantManifest.cs",
           "symbol": "ComputeXicWindow source tags -\u003E DeNovoFilterViewModel.ModeTag/Sources",
-          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
+          "sha256": "FBB1D2B23FB2B5A50E928F87D7C2F046C4341021F363FE7384E94AC90A875B87"
         },
         {
           "path": "FamilyQuant.Core\\Storage\\QuantRow.cs",
@@ -23108,7 +23396,7 @@
         {
           "path": "FamilyQuant.Core\\Storage\\QuantManifest.cs",
           "symbol": "Compute button input validation; displayed wording may be improved",
-          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
+          "sha256": "FBB1D2B23FB2B5A50E928F87D7C2F046C4341021F363FE7384E94AC90A875B87"
         },
         {
           "path": "FamilyQuant.Core\\Storage\\QuantRow.cs",
@@ -23237,6 +23525,22 @@
       "compared": "FamilyQuant/ComputeXicWindow.xaml.cs:274 \u0022\\\u0022 does not exist or cannot be reached.\u0022; native old/current Compute rejects the same invalid input category before the engine; frozen/contract={\u0022Refused\u0022:true,\u0022HasStatus\u0022:true}; current={\u0022Refused\u0022:true,\u0022HasStatus\u0022:true}"
     },
     {
+      "observationId": "FQ15-C79F408722F2",
+      "implementation": [],
+      "proofs": [],
+      "note": "No supported native check. Help/tooltips stay with LK; other facts remain OPEN.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-CCEA6126BA7D",
+      "implementation": [],
+      "proofs": [],
+      "note": "No supported native check. Help/tooltips stay with LK; other facts remain OPEN.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
       "observationId": "FQ15-CDFF2D766E18",
       "implementation": [
         {
@@ -23282,7 +23586,7 @@
         {
           "path": "FamilyQuant.Core\\Storage\\QuantManifest.cs",
           "symbol": "QuantifyControl bound ComputeCommand / IsBusy",
-          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
+          "sha256": "FBB1D2B23FB2B5A50E928F87D7C2F046C4341021F363FE7384E94AC90A875B87"
         },
         {
           "path": "FamilyQuant.Core\\Storage\\QuantRow.cs",
@@ -23456,7 +23760,7 @@
         {
           "path": "FamilyQuant.Core\\Storage\\QuantManifest.cs",
           "symbol": "Quantify visible RunSummary/Basis; wording may be improved",
-          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
+          "sha256": "FBB1D2B23FB2B5A50E928F87D7C2F046C4341021F363FE7384E94AC90A875B87"
         },
         {
           "path": "FamilyQuant.Core\\Storage\\QuantRow.cs",
@@ -23630,7 +23934,7 @@
         {
           "path": "FamilyQuant.Core\\Storage\\QuantManifest.cs",
           "symbol": "QuantifyControl.TextBoxPeaksMinimumAlc",
-          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
+          "sha256": "FBB1D2B23FB2B5A50E928F87D7C2F046C4341021F363FE7384E94AC90A875B87"
         },
         {
           "path": "FamilyQuant.Core\\Storage\\QuantRow.cs",
@@ -23759,6 +24063,14 @@
       "compared": "FamilyQuant/ComputeXicWindow.xaml:81 TextBox TextBoxPeaksMinimumAlc; native old/current Quantify control is reachable: TextBoxPeaksMinimumAlc; frozen/contract=\u0022TextBox:True\u0022; current=\u0022TextBox:True\u0022"
     },
     {
+      "observationId": "FQ15-D22FD31240E7",
+      "implementation": [],
+      "proofs": [],
+      "note": "No supported native check. Help/tooltips stay with LK; other facts remain OPEN.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
       "observationId": "FQ15-D2798EBA3158",
       "implementation": [
         {
@@ -23804,7 +24116,7 @@
         {
           "path": "FamilyQuant.Core\\Storage\\QuantManifest.cs",
           "symbol": "GridCopy URL menu item",
-          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
+          "sha256": "FBB1D2B23FB2B5A50E928F87D7C2F046C4341021F363FE7384E94AC90A875B87"
         },
         {
           "path": "FamilyQuant.Core\\Storage\\QuantRow.cs",
@@ -23978,7 +24290,7 @@
         {
           "path": "FamilyQuant.Core\\Storage\\QuantManifest.cs",
           "symbol": "Compute button input validation; displayed wording may be improved",
-          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
+          "sha256": "FBB1D2B23FB2B5A50E928F87D7C2F046C4341021F363FE7384E94AC90A875B87"
         },
         {
           "path": "FamilyQuant.Core\\Storage\\QuantRow.cs",
@@ -24152,7 +24464,7 @@
         {
           "path": "FamilyQuant.Core\\Storage\\QuantManifest.cs",
           "symbol": "LockManagerWindow binding Members",
-          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
+          "sha256": "FBB1D2B23FB2B5A50E928F87D7C2F046C4341021F363FE7384E94AC90A875B87"
         },
         {
           "path": "FamilyQuant.Core\\Storage\\QuantRow.cs",
@@ -24326,7 +24638,7 @@
         {
           "path": "FamilyQuant.Core\\Storage\\QuantManifest.cs",
           "symbol": "QuantifyControl.IntegerUpDownMinPoints.Minimum",
-          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
+          "sha256": "FBB1D2B23FB2B5A50E928F87D7C2F046C4341021F363FE7384E94AC90A875B87"
         },
         {
           "path": "FamilyQuant.Core\\Storage\\QuantRow.cs",
@@ -24500,7 +24812,7 @@
         {
           "path": "FamilyQuant.Core\\Storage\\QuantManifest.cs",
           "symbol": "LockManagerWindow DataGrid",
-          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
+          "sha256": "FBB1D2B23FB2B5A50E928F87D7C2F046C4341021F363FE7384E94AC90A875B87"
         },
         {
           "path": "FamilyQuant.Core\\Storage\\QuantRow.cs",
@@ -24629,6 +24941,14 @@
       "compared": "FamilyQuant/LockManagerWindow.cs:168 new DataGrid; native lock-manager control is reachable; frozen/contract=\u0022DataGrid\u0022; current=\u0022DataGrid\u0022"
     },
     {
+      "observationId": "FQ15-DBB769BD6B03",
+      "implementation": [],
+      "proofs": [],
+      "note": "No supported native check. Help/tooltips stay with LK; other facts remain OPEN.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
       "observationId": "FQ15-DC76ACF83982",
       "implementation": [
         {
@@ -24674,7 +24994,7 @@
         {
           "path": "FamilyQuant.Core\\Storage\\QuantManifest.cs",
           "symbol": "keyword protein DataGrid",
-          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
+          "sha256": "FBB1D2B23FB2B5A50E928F87D7C2F046C4341021F363FE7384E94AC90A875B87"
         },
         {
           "path": "FamilyQuant.Core\\Storage\\QuantRow.cs",
@@ -24848,7 +25168,7 @@
         {
           "path": "FamilyQuant.Core\\Storage\\QuantManifest.cs",
           "symbol": "IdentityScanWindow Save figure caption",
-          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
+          "sha256": "FBB1D2B23FB2B5A50E928F87D7C2F046C4341021F363FE7384E94AC90A875B87"
         },
         {
           "path": "FamilyQuant.Core\\Storage\\QuantRow.cs",
@@ -25022,7 +25342,7 @@
         {
           "path": "FamilyQuant.Core\\Storage\\QuantManifest.cs",
           "symbol": "LockManagerWindow table column 0",
-          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
+          "sha256": "FBB1D2B23FB2B5A50E928F87D7C2F046C4341021F363FE7384E94AC90A875B87"
         },
         {
           "path": "FamilyQuant.Core\\Storage\\QuantRow.cs",
@@ -25196,7 +25516,7 @@
         {
           "path": "FamilyQuant.Core\\Storage\\QuantManifest.cs",
           "symbol": "ComputeXicWindow / QuantifyControl spectrum link; only final Window.Show presentation injected",
-          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
+          "sha256": "FBB1D2B23FB2B5A50E928F87D7C2F046C4341021F363FE7384E94AC90A875B87"
         },
         {
           "path": "FamilyQuant.Core\\Storage\\QuantRow.cs",
@@ -25370,7 +25690,7 @@
         {
           "path": "FamilyQuant.Core\\Storage\\QuantManifest.cs",
           "symbol": "QuantifyControl bound ComputeCommand / IsBusy",
-          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
+          "sha256": "FBB1D2B23FB2B5A50E928F87D7C2F046C4341021F363FE7384E94AC90A875B87"
         },
         {
           "path": "FamilyQuant.Core\\Storage\\QuantRow.cs",
@@ -25544,7 +25864,7 @@
         {
           "path": "FamilyQuant.Core\\Storage\\QuantManifest.cs",
           "symbol": "IdentityScanWindow.SaveFigure / ChartImageExporter",
-          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
+          "sha256": "FBB1D2B23FB2B5A50E928F87D7C2F046C4341021F363FE7384E94AC90A875B87"
         },
         {
           "path": "FamilyQuant.Core\\Storage\\QuantRow.cs",
@@ -25718,7 +26038,7 @@
         {
           "path": "FamilyQuant.Core\\Storage\\QuantManifest.cs",
           "symbol": "Quantify visible RunSummary/Basis; wording may be improved",
-          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
+          "sha256": "FBB1D2B23FB2B5A50E928F87D7C2F046C4341021F363FE7384E94AC90A875B87"
         },
         {
           "path": "FamilyQuant.Core\\Storage\\QuantRow.cs",
@@ -25847,6 +26167,14 @@
       "compared": "FamilyQuant/ComputeXicWindow.xaml.cs:344 \u0022 point(s) or more.\\n\\n\u0022; native result summary and visible basis preserve row/run counts and chosen isotope/point rules; frozen/contract={\u0022Rows\u0022:1050,\u0022Identified\u0022:1030,\u0022DeNovo\u0022:20,\u0022Runs\u0022:2,\u0022Isotopes\u0022:4,\u0022Points\u0022:2}; current={\u0022Rows\u0022:1050,\u0022Identified\u0022:1030,\u0022DeNovo\u0022:20,\u0022Runs\u0022:2,\u0022Isotopes\u0022:4,\u0022Points\u0022:2}"
     },
     {
+      "observationId": "FQ15-E6FC69103914",
+      "implementation": [],
+      "proofs": [],
+      "note": "No supported native check. Help/tooltips stay with LK; other facts remain OPEN.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
       "observationId": "FQ15-E710DB6ACB71",
       "implementation": [
         {
@@ -25892,7 +26220,7 @@
         {
           "path": "FamilyQuant.Core\\Storage\\QuantManifest.cs",
           "symbol": "DeNovoFilterControl source peaks-only",
-          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
+          "sha256": "FBB1D2B23FB2B5A50E928F87D7C2F046C4341021F363FE7384E94AC90A875B87"
         },
         {
           "path": "FamilyQuant.Core\\Storage\\QuantRow.cs",
@@ -26066,7 +26394,7 @@
         {
           "path": "FamilyQuant.Core\\Storage\\QuantManifest.cs",
           "symbol": "LockManagerWindow Button",
-          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
+          "sha256": "FBB1D2B23FB2B5A50E928F87D7C2F046C4341021F363FE7384E94AC90A875B87"
         },
         {
           "path": "FamilyQuant.Core\\Storage\\QuantRow.cs",
@@ -26240,7 +26568,7 @@
         {
           "path": "FamilyQuant.Core\\Storage\\QuantManifest.cs",
           "symbol": "IntegerUpDownMinPoints.ValueChanged / ComputeXicViewModel.MinPointsForQuant",
-          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
+          "sha256": "FBB1D2B23FB2B5A50E928F87D7C2F046C4341021F363FE7384E94AC90A875B87"
         },
         {
           "path": "FamilyQuant.Core\\Storage\\QuantRow.cs",
@@ -26369,6 +26697,22 @@
       "compared": "FamilyQuant/ComputeXicWindow.xaml.cs:76 IntegerUpDownMinPoints.ValueChanged \u002B= (_, __) =\u003E UpdateBasisLine();; minimum-point value-change event reaches the active extraction basis; frozen/contract=[\u00221\u0022,\u00223\u0022,\u00228\u0022]; current=[\u00221\u0022,\u00223\u0022,\u00228\u0022]"
     },
     {
+      "observationId": "FQ15-EC13827DBF41",
+      "implementation": [],
+      "proofs": [],
+      "note": "No supported native check. Help/tooltips stay with LK; other facts remain OPEN.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
+      "observationId": "FQ15-ED28D2E0DB7C",
+      "implementation": [],
+      "proofs": [],
+      "note": "No supported native check. Help/tooltips stay with LK; other facts remain OPEN.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
       "observationId": "FQ15-EFE25789BE86",
       "implementation": [
         {
@@ -26414,7 +26758,7 @@
         {
           "path": "FamilyQuant.Core\\Storage\\QuantManifest.cs",
           "symbol": "DeNovoFilterViewModel source state",
-          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
+          "sha256": "FBB1D2B23FB2B5A50E928F87D7C2F046C4341021F363FE7384E94AC90A875B87"
         },
         {
           "path": "FamilyQuant.Core\\Storage\\QuantRow.cs",
@@ -26588,7 +26932,7 @@
         {
           "path": "FamilyQuant.Core\\Storage\\QuantManifest.cs",
           "symbol": "GridCopy unmodified keyboard navigation",
-          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
+          "sha256": "FBB1D2B23FB2B5A50E928F87D7C2F046C4341021F363FE7384E94AC90A875B87"
         },
         {
           "path": "FamilyQuant.Core\\Storage\\QuantRow.cs",
@@ -26717,6 +27061,14 @@
       "compared": "FamilyQuant/GridCopy.cs:52 if (e.Key is Key.Left or Key.Right or Key.Tab; actual Left/Right/Tab/Up/Down/Home/End/PageUp/PageDown navigation preserves column-only copy; frozen/contract=[\u0022Left/True/second native description\u0022,\u0022Right/True/second native description\u0022,\u0022Tab/True/second native description\u0022,\u0022Up/True/second native description\u0022,\u0022Down/True/second native description\u0022,\u0022Home/True/second native description\u0022,\u0022End/True/second native description\u0022,\u0022PageUp/True/second native description\u0022,\u0022Next/True/second native description\u0022]; current=[\u0022Left/True/second native description\u0022,\u0022Right/True/second native description\u0022,\u0022Tab/True/second native description\u0022,\u0022Up/True/second native description\u0022,\u0022Down/True/second native description\u0022,\u0022Home/True/second native description\u0022,\u0022End/True/second native description\u0022,\u0022PageUp/True/second native description\u0022,\u0022Next/True/second native description\u0022]"
     },
     {
+      "observationId": "FQ15-F0267BB733C2",
+      "implementation": [],
+      "proofs": [],
+      "note": "No supported native check. Help/tooltips stay with LK; other facts remain OPEN.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
       "observationId": "FQ15-F0301F02CC14",
       "implementation": [
         {
@@ -26762,7 +27114,7 @@
         {
           "path": "FamilyQuant.Core\\Storage\\QuantManifest.cs",
           "symbol": "Quantify failure publication guard; wording may be improved",
-          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
+          "sha256": "FBB1D2B23FB2B5A50E928F87D7C2F046C4341021F363FE7384E94AC90A875B87"
         },
         {
           "path": "FamilyQuant.Core\\Storage\\QuantRow.cs",
@@ -26936,7 +27288,7 @@
         {
           "path": "FamilyQuant.Core\\Storage\\QuantManifest.cs",
           "symbol": "IntegerUpDownIsotopes.ValueChanged / ComputeXicViewModel.IsotopeCount",
-          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
+          "sha256": "FBB1D2B23FB2B5A50E928F87D7C2F046C4341021F363FE7384E94AC90A875B87"
         },
         {
           "path": "FamilyQuant.Core\\Storage\\QuantRow.cs",
@@ -27110,7 +27462,7 @@
         {
           "path": "FamilyQuant.Core\\Storage\\QuantManifest.cs",
           "symbol": "DeNovoFilterControl source deepnovo",
-          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
+          "sha256": "FBB1D2B23FB2B5A50E928F87D7C2F046C4341021F363FE7384E94AC90A875B87"
         },
         {
           "path": "FamilyQuant.Core\\Storage\\QuantRow.cs",
@@ -27239,6 +27591,14 @@
       "compared": "FamilyQuant/ComputeXicWindow.xaml:73 ComboBoxItem ComboBoxItem; native source item remains selectable: deepnovo; frozen/contract=\u0022ComboBoxItem\u0022; current=\u0022ComboBoxItem\u0022"
     },
     {
+      "observationId": "FQ15-F2EC3EEEF8E3",
+      "implementation": [],
+      "proofs": [],
+      "note": "No supported native check. Help/tooltips stay with LK; other facts remain OPEN.",
+      "kindReceiptId": null,
+      "compared": null
+    },
+    {
       "observationId": "FQ15-F379F81E2DEF",
       "implementation": [
         {
@@ -27284,7 +27644,7 @@
         {
           "path": "FamilyQuant.Core\\Storage\\QuantManifest.cs",
           "symbol": "GridCopy PreviewKeyDown",
-          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
+          "sha256": "FBB1D2B23FB2B5A50E928F87D7C2F046C4341021F363FE7384E94AC90A875B87"
         },
         {
           "path": "FamilyQuant.Core\\Storage\\QuantRow.cs",
@@ -27458,7 +27818,7 @@
         {
           "path": "FamilyQuant.Core\\Storage\\QuantManifest.cs",
           "symbol": "ComputeXicViewModel progress to Status; prefix may be improved",
-          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
+          "sha256": "FBB1D2B23FB2B5A50E928F87D7C2F046C4341021F363FE7384E94AC90A875B87"
         },
         {
           "path": "FamilyQuant.Core\\Storage\\QuantRow.cs",
@@ -27632,7 +27992,7 @@
         {
           "path": "FamilyQuant.Core\\Storage\\QuantManifest.cs",
           "symbol": "LockManagerWindow table header 3",
-          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
+          "sha256": "FBB1D2B23FB2B5A50E928F87D7C2F046C4341021F363FE7384E94AC90A875B87"
         },
         {
           "path": "FamilyQuant.Core\\Storage\\QuantRow.cs",
@@ -27806,7 +28166,7 @@
         {
           "path": "FamilyQuant.Core\\Storage\\QuantManifest.cs",
           "symbol": "Quantify visible RunSummary/Basis; wording may be improved",
-          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
+          "sha256": "FBB1D2B23FB2B5A50E928F87D7C2F046C4341021F363FE7384E94AC90A875B87"
         },
         {
           "path": "FamilyQuant.Core\\Storage\\QuantRow.cs",
@@ -27980,7 +28340,7 @@
         {
           "path": "FamilyQuant.Core\\Storage\\QuantManifest.cs",
           "symbol": "DeNovoFilterViewModel.TryBuild native source selections",
-          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
+          "sha256": "FBB1D2B23FB2B5A50E928F87D7C2F046C4341021F363FE7384E94AC90A875B87"
         },
         {
           "path": "FamilyQuant.Core\\Storage\\QuantRow.cs",
@@ -28154,7 +28514,7 @@
         {
           "path": "FamilyQuant.Core\\Storage\\QuantManifest.cs",
           "symbol": "GridCopy unmodified keyboard navigation",
-          "sha256": "07DCDBA54CF68533CCFB9B9290BB16CA32ACBED433C4591A07E02DEF96E2127B"
+          "sha256": "FBB1D2B23FB2B5A50E928F87D7C2F046C4341021F363FE7384E94AC90A875B87"
         },
         {
           "path": "FamilyQuant.Core\\Storage\\QuantRow.cs",
@@ -28281,6 +28641,14 @@
       "note": "Executed native control/value/action check; exact scope is recorded in the comparison.",
       "kindReceiptId": "secondary-shortcut",
       "compared": "FamilyQuant/GridCopy.cs:53 || !extending \u0026\u0026 e.Key is Key.Up or Key.Down or Key.Home or Key.End or Key.PageUp or Key.PageDown); actual Left/Right/Tab/Up/Down/Home/End/PageUp/PageDown navigation preserves column-only copy; frozen/contract=[\u0022Left/True/second native description\u0022,\u0022Right/True/second native description\u0022,\u0022Tab/True/second native description\u0022,\u0022Up/True/second native description\u0022,\u0022Down/True/second native description\u0022,\u0022Home/True/second native description\u0022,\u0022End/True/second native description\u0022,\u0022PageUp/True/second native description\u0022,\u0022Next/True/second native description\u0022]; current=[\u0022Left/True/second native description\u0022,\u0022Right/True/second native description\u0022,\u0022Tab/True/second native description\u0022,\u0022Up/True/second native description\u0022,\u0022Down/True/second native description\u0022,\u0022Home/True/second native description\u0022,\u0022End/True/second native description\u0022,\u0022PageUp/True/second native description\u0022,\u0022Next/True/second native description\u0022]"
+    },
+    {
+      "observationId": "FQ15-FFCD179BA4E9",
+      "implementation": [],
+      "proofs": [],
+      "note": "No supported native check. Help/tooltips stay with LK; other facts remain OPEN.",
+      "kindReceiptId": null,
+      "compared": null
     }
   ],
   "kindReceipts": [
@@ -28293,7 +28661,7 @@
           "kind": "test",
           "target": "SecondaryRuntimeCommand",
           "assertion": "secondary runtime kind code control: each listed native control, value or action check passed",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\secondary-runtime\\runtime.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-200137-FamilyQuant-gate\\secondary-runtime\\runtime.log",
           "inspectedBy": ""
         }
       ]
@@ -28307,7 +28675,7 @@
           "kind": "test",
           "target": "SecondaryRuntimeCommand",
           "assertion": "secondary runtime kind code fact: each listed native control, value or action check passed",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\secondary-runtime\\runtime.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-200137-FamilyQuant-gate\\secondary-runtime\\runtime.log",
           "inspectedBy": ""
         }
       ]
@@ -28321,7 +28689,7 @@
           "kind": "test",
           "target": "SecondaryRuntimeCommand",
           "assertion": "secondary runtime kind control: each listed native control, value or action check passed",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\secondary-runtime\\runtime.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-200137-FamilyQuant-gate\\secondary-runtime\\runtime.log",
           "inspectedBy": ""
         }
       ]
@@ -28335,7 +28703,7 @@
           "kind": "test",
           "target": "SecondaryRuntimeCommand",
           "assertion": "secondary runtime kind format/export: each listed native control, value or action check passed",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\secondary-runtime\\runtime.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-200137-FamilyQuant-gate\\secondary-runtime\\runtime.log",
           "inspectedBy": ""
         }
       ]
@@ -28349,7 +28717,7 @@
           "kind": "test",
           "target": "SecondaryRuntimeCommand",
           "assertion": "secondary runtime kind handler: each listed native control, value or action check passed",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\secondary-runtime\\runtime.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-200137-FamilyQuant-gate\\secondary-runtime\\runtime.log",
           "inspectedBy": ""
         }
       ]
@@ -28363,7 +28731,7 @@
           "kind": "test",
           "target": "SecondaryRuntimeCommand",
           "assertion": "secondary runtime kind handler definition: each listed native control, value or action check passed",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\secondary-runtime\\runtime.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-200137-FamilyQuant-gate\\secondary-runtime\\runtime.log",
           "inspectedBy": ""
         }
       ]
@@ -28377,7 +28745,7 @@
           "kind": "test",
           "target": "SecondaryRuntimeCommand",
           "assertion": "secondary runtime kind option/copy: each listed native control, value or action check passed",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\secondary-runtime\\runtime.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-200137-FamilyQuant-gate\\secondary-runtime\\runtime.log",
           "inspectedBy": ""
         }
       ]
@@ -28391,7 +28759,7 @@
           "kind": "test",
           "target": "SecondaryRuntimeCommand",
           "assertion": "secondary runtime kind shortcut: each listed native control, value or action check passed",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-182444-FamilyQuant-gate\\secondary-runtime\\runtime.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-200137-FamilyQuant-gate\\secondary-runtime\\runtime.log",
           "inspectedBy": ""
         }
       ]
