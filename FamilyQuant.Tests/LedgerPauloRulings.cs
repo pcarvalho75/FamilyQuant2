@@ -21,17 +21,18 @@ internal static class LedgerPauloRulings
     internal const string LeftPath = "D:/FamilyQuant-data/reviews/wording-left-for-paulo.tsv";
     internal const string FrozenRoot = "D:/FamilyQuant-data/out-shell/N3/source";
     internal const string GroupRulingPath = "D:/FamilyQuant-data/reviews/paulo-group-ruling.tsv";
-    internal const string RulesSha256 = "3C6B1EC5979F0B593A609D0555AB84BC5EC05FCC60B370A647E11030993A8605";
+    internal const string RulesSha256 = "667874EC14E7AC206787190CCB1B01D7612A82CE9DC7FD35B33EDECD47324AB1";
     internal sealed record Input(int Line, string Lane, string Id, string OldText, string NewText, string Reason);
     internal sealed record Decision(string Id, string Lane, string OldText, string NewText, string Rule, string Reason,
         string WitnessAssembly = "", string WitnessSymbol = "", string WitnessTextSha256 = "", bool Closed = false, string FactCheckNote = "");
     internal sealed record FactCheck(string Verdict, string Note);
-    internal sealed record GroupRuling(string Group, string Note);
+    internal sealed record GroupRuling(string Group, string Note, bool Message = false);
     internal sealed record Packet(int SchemaVersion, string Producer, string TsvArtifact, string RulesArtifact,
         string TsvSha256, string RuleSourceSha256, List<Decision> Decisions, string FactChecksArtifact = "", string FactChecksSha256 = "",
         string GroupRulingArtifact = "", string GroupRulingSha256 = "");
 
-    /// <summary>Paulo's group ruling (rule 4): row_id, group (fragment, format or superseded), note. A missing or empty file holds no rows.</summary>
+    /// <summary>Paulo's group ruling (rule 4): row_id, group (fragment, format or superseded), note. A row may also be listed once as
+    /// message (Rule 5), beside at most one closing group. A missing or empty file holds no rows.</summary>
     internal static Dictionary<string, GroupRuling> ReadGroupRulings(string path)
     {
         var result = new Dictionary<string, GroupRuling>(StringComparer.Ordinal);
@@ -42,9 +43,15 @@ internal static class LedgerPauloRulings
         if (!records[0].Fields.SequenceEqual(new[] { "row_id", "group", "note" }))
             throw new InvalidDataException("Group ruling TSV must use row_id, group, note columns.");
         foreach (var record in records.Skip(1).Where(record => record.Fields.Any(field => field.Length > 0)))
-            if (record.Fields.Count != 3 || string.IsNullOrWhiteSpace(record.Fields[0]) || record.Fields[1] is not ("fragment" or "format" or "superseded")
-                || !result.TryAdd(record.Fields[0], new(record.Fields[1], record.Fields[2])))
-                throw new InvalidDataException("Malformed, duplicate or unknown group ruling at TSV line " + record.Line.ToString(CultureInfo.InvariantCulture) + ".");
+        {
+            if (record.Fields.Count != 3 || string.IsNullOrWhiteSpace(record.Fields[0]) || record.Fields[1] is not ("fragment" or "format" or "superseded" or "message"))
+                throw new InvalidDataException("Malformed or unknown group ruling at TSV line " + record.Line.ToString(CultureInfo.InvariantCulture) + ".");
+            result.TryGetValue(record.Fields[0], out var prior);
+            if (record.Fields[1] == "message" ? prior?.Message == true : prior?.Group.Length > 0)
+                throw new InvalidDataException("Duplicate group ruling at TSV line " + record.Line.ToString(CultureInfo.InvariantCulture) + ".");
+            result[record.Fields[0]] = record.Fields[1] == "message" ? (prior ?? new("", "")) with { Message = true }
+                : new(record.Fields[1], record.Fields[2], prior?.Message ?? false);
+        }
         return result;
     }
 
@@ -119,24 +126,30 @@ internal static class LedgerPauloRulings
         return result;
     }
 
-    /// <summary>The wording rules (1 to 3) first; a row they leave open closes under rule 4 when Paulo's group ruling lists it,
-    /// unless it is unknown, an approved DROP, or an export/storage or format/export row, which need execution.</summary>
+    /// <summary>The wording rules (1 to 3) first; a row they leave open closes under rule 4 when Paulo's group ruling lists it in a
+    /// closing group, unless it is unknown, an approved DROP, or an export/storage or format/export row, which need execution. A row
+    /// listed as message (Rule 5) is a wording row despite its export kind; every other guard stays.</summary>
     internal static Decision Evaluate(Input input, FeatureLedger.Observation? row, Func<string, LedgerRulingLiveText.Match> live,
         IReadOnlyDictionary<string, FactCheck>? factChecks = null, IReadOnlyDictionary<string, GroupRuling>? groupRulings = null)
     {
-        var decision = EvaluateWording(input, row, live, factChecks);
-        if (decision.Closed || row == null || groupRulings == null || !groupRulings.TryGetValue(input.Id, out var ruling)
-            || FeatureLedger.IsApprovedDrop(row) || row.Kind is "export/storage fact" or "format/export") return decision;
+        bool message = groupRulings != null && groupRulings.TryGetValue(input.Id, out var listed) && listed.Message;
+        var decision = EvaluateWording(input, row, live, factChecks, message);
+        if (decision.Closed || row == null || groupRulings == null || !groupRulings.TryGetValue(input.Id, out var ruling) || ruling.Group.Length == 0
+            || FeatureLedger.IsApprovedDrop(row) || IsExportKind(row) && !message) return decision;
         return decision with { Rule = "4", Reason = GroupReason(ruling), Closed = true };
     }
 
+    private static bool IsExportKind(FeatureLedger.Observation row) => row.Kind is "export/storage fact" or "format/export";
+
     private static Decision EvaluateWording(Input input, FeatureLedger.Observation? row, Func<string, LedgerRulingLiveText.Match> live,
-        IReadOnlyDictionary<string, FactCheck>? factChecks)
+        IReadOnlyDictionary<string, FactCheck>? factChecks, bool message = false)
     {
         Decision Left(string reason, string note = "") => new(input.Id, input.Lane, input.OldText, input.NewText, "", reason, FactCheckNote: note);
         if (row == null) return Left("Unknown or malformed observation ID.");
         if (FeatureLedger.IsApprovedDrop(row)) return Left("Approved DROP is not a wording ruling.");
-        if (row.Kind is "export/storage fact" or "format/export") return Left("Export/storage and format/export rows require execution.");
+        if (IsExportKind(row) && !message) return Left("Export/storage and format/export rows require execution.");
+        bool wording = IsWordingKind(row) || message && IsExportKind(row);
+        string rule5 = message && IsExportKind(row) ? " Paulo Rule 5: a message row, not a file-format row." : "";
         if (LedgerRulingLiveText.Normalize(input.OldText) == LedgerRulingLiveText.Normalize(input.NewText))
         {
             // Identical old and new text closes under Rule 1 only with an independent kept verdict, a wording row of the frozen
@@ -145,11 +158,11 @@ internal static class LedgerPauloRulings
             if (factChecks == null || !factChecks.TryGetValue(input.Id, out var kept) || kept.Verdict != "kept"
                 || string.IsNullOrWhiteSpace(input.NewText) || !input.NewText.Any(char.IsLetterOrDigit) || input.NewText.TrimStart().StartsWith('<')
                 || !OldFactMatches(row, input.OldText) || row.Detail.StartsWith("Style.", StringComparison.Ordinal)
-                || row.Detail.StartsWith("Setter.", StringComparison.Ordinal) || !IsWordingKind(row)) return Left(identical);
+                || row.Detail.StartsWith("Setter.", StringComparison.Ordinal) || !wording) return Left(identical);
             var witness = live(input.NewText);
             if (!witness.Found) return Left(identical);
             return new(input.Id, input.Lane, input.OldText, input.NewText, "1",
-                "Identical old/new text; independent kept verdict and live text witness retained; independent sample required.",
+                "Identical old/new text; independent kept verdict and live text witness retained; independent sample required." + rule5,
                 witness.AssemblyName, witness.Symbol, witness.TextSha256, true, kept.Note);
         }
         if (string.IsNullOrWhiteSpace(input.NewText) || !input.NewText.Any(char.IsLetterOrDigit)) return Left("New text is empty, whitespace or bare punctuation/newline.");
@@ -160,14 +173,14 @@ internal static class LedgerPauloRulings
             return new(input.Id, input.Lane, input.OldText, input.NewText, "2", styleReason, Closed: true);
         if (row.Detail.StartsWith("Style.", StringComparison.Ordinal) || row.Detail.StartsWith("Setter.", StringComparison.Ordinal))
             return Left(styleReason);
-        if (!IsWordingKind(row)) return Left("Behavior/control/handler/binding row is outside wording rules.");
+        if (!wording) return Left("Behavior/control/handler/binding row is outside wording rules.");
         if (factChecks == null || !factChecks.TryGetValue(input.Id, out var fact))
             return Left("Independent fact-check verdict is missing.");
         if (fact.Verdict != "kept") return Left("Independent fact check marks the old fact lost.", fact.Note);
         string rule = Regex.IsMatch(input.OldText, @"\bLayer\s+\d+\b", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant) ? "3" : "1";
         var match = live(input.NewText);
         if (!match.Found) return Left("New text is not present in the compiled App/Core or resolved current Help.");
-        return new(input.Id, input.Lane, input.OldText, input.NewText, rule, "Recorded Paulo wording ruling; live text witness retained; independent sample required.",
+        return new(input.Id, input.Lane, input.OldText, input.NewText, rule, "Recorded Paulo wording ruling; live text witness retained; independent sample required." + rule5,
             match.AssemblyName, match.Symbol, match.TextSha256, true, fact.Note);
     }
 
