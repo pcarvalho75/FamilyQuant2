@@ -46,7 +46,8 @@ public static class ReportProjectExporter
                     ? "Data step 2: primary homology cache hit" : "Data step 2: primary homology cache miss", 2, 8),
                 cancellationToken: operation?.CancellationToken ?? default);
             operation?.Report("report-primary-end", "Data step 2: primary homology lookup and search complete", 2, 8);
-            families = FamilyEnvelopeQuant.BuildFromAttribution(rows, FamilyEnvelopeQuant.AttributeHits(hits, curation), operation);
+            string? censusCacheDirectory = homologyCacheDirectory == null ? null : Path.Combine(homologyCacheDirectory, "source-census");
+            families = FamilyEnvelopeQuant.BuildFromAttribution(rows, FamilyEnvelopeQuant.AttributeHits(hits, curation), operation, censusCacheDirectory);
         }
         Data(3, "Preparing current result tables");
         var grouping = manifest.FamilyRunShares == null ? null : FamilyReportThreshold.Build(manifest.FamilyRunShares, curation);
@@ -57,7 +58,7 @@ public static class ReportProjectExporter
         var labels = families?.Families.ToDictionary(f => f.FamilyUserId, f => f.Description)
             ?? new Dictionary<int, string>();
         Data(4, "Applying stored studies");
-        result = ReportStoredResults.Apply(result, manifest, labels, grouping);
+        result = ReportStoredResults.Apply(result, manifest, labels, grouping, curation);
         Data(5, "Preparing report sections");
         var replacements = result.Sections.ToDictionary(s => s.Id, StringComparer.Ordinal);
         bool hasConflicts = replacements.ContainsKey(ReportSectionIds.AssignmentConflicts);

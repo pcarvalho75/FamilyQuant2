@@ -312,6 +312,7 @@ namespace FamilyQuant.Tests
             suite.AddWithApplication(() => CurationExportFeedbackTests(Path.Combine(workDir, "curation-export-feedback")));
             suite.AddWithApplication(() => ReportProgressTests(Path.Combine(workDir, "report-progress")));
             suite.AddWithApplication(() => ProjectCommandReadyTests(Path.Combine(workDir, "project-command-ready")));
+            suite.AddWithApplication(() => ComputeProgressTests(Path.Combine(workDir, "compute-progress")));
             suite.Add(() => FamilyViewTests());
             suite.Add(() => TableAppearanceTests());
             suite.Add(() => EvidenceReviewModelTests());
@@ -324,9 +325,11 @@ namespace FamilyQuant.Tests
             suite.Add(() => ReportStudyBoundaryTests());
             suite.Section("Word report and companion - source values, selection and exact native images");
             suite.Add(() => WordReportTests(null));
+            suite.Add(() => ReportFindingsTests());
             suite.Add(() => ReportNumberTraceTests());
             suite.AddWithApplication(() => ReportStoredChecks());
             suite.AddWithApplication(() => ReportAttributionCacheTests());
+            suite.AddWithApplication(() => ReportSourceCensusCacheTests());
             suite.Add(() => ReportPairedSummaryTests());
             suite.AddWithApplication(() => ReportSupplementChecks(null));
             suite.Add(() => ReportTableSheetTests(null));
@@ -338,6 +341,7 @@ namespace FamilyQuant.Tests
             suite.AddWithApplication(() => ReportAssemblyChecks(Path.Combine(workDir, "report-assembly")));
             suite.AddWithApplication(() => ReportWordOthersChecks(Path.Combine(workDir, "report-word-others")));
             suite.AddWithApplication(() => ReportStaChecks(Path.Combine(workDir, "report-sta")));
+            suite.AddWithApplication(() => DeliveryRehearsalChecks(Path.Combine(workDir, "delivery-rehearsal")));
             suite.Add(() => QuantitationPanelTests(Path.Combine(workDir, "quantitation-panel")));
             suite.Add(() => ArchitectureGroupSplitTests());
             suite.Add(() => ArchitectureMemberViewTests());
