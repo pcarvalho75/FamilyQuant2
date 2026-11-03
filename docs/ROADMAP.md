@@ -99,10 +99,7 @@ Compute took 37 to 54 minutes on Ana's project with the RAW cache warm, silent f
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| J38d | New HomologySearch method (Paulo, 11-03 09:20) from Fable's plan (docs/ideas/HOMOLOGY-PERFORMANCE.md): the mismatch-budget early exit, the exact-containment shortcut for best-score identified queries with the matrix guard, and the diagonal q-gram prefilter; every caller switches to it; the old HomologyMapper stays unchanged, marked [Obsolete] ("use HomologySearch"), as the reference the equivalence tests compare against | M | 1 | 🟢 | J38e | Every stored result byte-identical to the old method on fixtures and on the full-run copy; old and new compared hit for hit on every search call | AS | | 0 | 0 | |
-| J38e | Compute before and after on the full-run copy | L | 0.3 | J38d | J38f | Both times; stored results byte-identical | AS | | 0 | 0 | |
-| J38f | J38 reviewed and merged | L | 0.2 | J38e | | Approved; gate green | AS | | 0 | 0 | |
-| J47a | Fable's science options in HomologySearch, each off by default: a decoy-calibrated identity gate per tag length; isobaric-swap folding for de novo tags (N/GG, Q/AG, equal-mass pair order, K/Q) weighted by PEAKS per-residue confidence; crediting families by score tier with the multiplicity reported | M | 1.5 | J38d | J47b | Options off: byte-identical; options on: their own tests | AS | | 0 | 0 | |
+| J47a | Fable's science options in HomologySearch, each off by default: a decoy-calibrated identity gate per tag length; isobaric-swap folding for de novo tags (N/GG, Q/AG, equal-mass pair order, K/Q) weighted by PEAKS per-residue confidence; crediting families by score tier with the multiplicity reported | M | 1.5 | 🟢 | J47b | Options off: byte-identical; options on: their own tests | AS | | 0 | 0 | |
 | J47b | Validation of each science option on the full-run project: target-decoy rates at the gate, the Database gap error rates, the leave-one-out family check (J42: 966 right, 12 wrong, 95 abstained), and what changes in the headline; Paulo decides which become default (Paulo, 11-03 13:15: no recomputing everything: validate by replaying FQAssay's captured five search inputs and the cached attribution, one full Compute only for the options chosen as defaults) | M | 1 | J47a | | A before/after table per option; science review | AS | | 0 | 0 | |
 
 ### W7 Clear reasons and totals
@@ -110,7 +107,6 @@ Compute took 37 to 54 minutes on Ana's project with the RAW cache warm, silent f
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
 | J43 | With a panel in use, the headline and composition figures use the per-panel-family totals (D40, B): before and after shown on a real project with several families in one panel family, science review, the old unit kept in the supplement | M | 1 | 🟢 | | Red then green on a multi-family fixture; before/after table on a real project; reviewed | FL | | 0 | 0 | |
-| J49 | The number trace cites the right cell (2.1.1): a printed number is matched first to cells of the sentence's own subject (the family, run or option it names), and a number that equals several cells with no subject match is reported AMBIGUOUS instead of the first equal cell (K15, 11-03: the 14-protein estimate of one family was cited to the '14 families above threshold' cell; the cover's 2.0 to a protein count) | M | 1 | 🟢 | | On Ana's export every K15 wrong-cell example cites its subject cell; ambiguous cases listed; NOT FOUND unchanged | RS | | 0 | 0 | |
 
 ## Critical path
 

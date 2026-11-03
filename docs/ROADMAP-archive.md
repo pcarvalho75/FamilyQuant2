@@ -466,6 +466,7 @@ Paulo agreed these at the restart, 2026-11-01.
 | J46c | J46 reviewed and merged | L | 0.2 | 🟢 | | Approved; gate green | T2 | | 0 | 0 | |
 | J40 | Help explains what 2.1 adds: the progress lines, the cached reopen, "no peptide observed", the scope phrases, link notes | L | 0.5 | 🟢 | | A test reads each menu name in the text from the live menu | T2 | | 0 | 0 | |
 | J46d | The AI draft uses J45's interpretation input instead of J46's stand-in seam, and its number check reads J45's table cells and column headings directly (J45 exposes them beside the Markdown) instead of parsing Markdown (FQTerra2's observation, 11-03 09:49) | L | 0.3 | 🟢 | | The sent text equals J45's export byte for byte; number-check fixtures green against J45's cells | T2 | | 0 | 0 | |
+| J49 | The number trace cites the right cell (2.1.1): a printed number is matched first to cells of the sentence's own subject (the family, run or option it names), and a number that equals several cells with no subject match is reported AMBIGUOUS instead of the first equal cell (K15, 11-03: the 14-protein estimate of one family was cited to the '14 families above threshold' cell; the cover's 2.0 to a protein count) | M | 1 | 🟢 | | On Ana's export every K15 wrong-cell example cites its subject cell; ambiguous cases listed; NOT FOUND unchanged | RS | | 0 | 0 | |
 
 ### W4 Release 2.1.0 on GitHub
 
@@ -493,6 +494,9 @@ Paulo agreed these at the restart, 2026-11-01.
 | J35c | J35 reviewed and merged | L | 0.2 | 🟢 | J40 | Approved; gate green | SH | | 0 | 0 | |
 | J38c | First fix: Compute reuses the attribution FullXicCompletionStage already computed instead of the family-world step searching again (calls 3 and 4 repeat 1 and 2: 366 s of 923 s on WORKHORSE) | H | 1 | 🟢 | J38d | Byte-identical stored results on a fixture | AS | | 0 | 0 | |
 | J48 | Saving the full-run project fits in memory: J35b's measurement hit an OutOfMemoryException in SavedFileCheck.Curation -> ToJsonText under an 8 GB heap cap; find whether the product's Save builds the whole curation JSON as one string and what heap Save needs, and if a 16 GB office PC could run out, stream it with the same bytes written | M | 0.5 | 🟢 | | FINDING first; if fixed, byte-identical saved file on the full-run copy and the peak measured before and after | SH | | 0 | 0 | |
+| J38d | New HomologySearch method (Paulo, 11-03 09:20) from Fable's plan (docs/ideas/HOMOLOGY-PERFORMANCE.md): the mismatch-budget early exit, the exact-containment shortcut for best-score identified queries with the matrix guard, and the diagonal q-gram prefilter; every caller switches to it; the old HomologyMapper stays unchanged, marked [Obsolete] ("use HomologySearch"), as the reference the equivalence tests compare against | M | 1 | 🟢 | J38e | Every stored result byte-identical to the old method on fixtures and on the full-run copy; old and new compared hit for hit on every search call | AS | | 0 | 0 | |
+| J38e | Compute before and after on the full-run copy | L | 0.3 | J38d | J38f | Both times; stored results byte-identical | AS | | 0 | 0 | |
+| J38f | J38 reviewed and merged | L | 0.2 | J38e | | Approved; gate green | AS | | 0 | 0 | |
 
 ### W2 The interpretation
 
