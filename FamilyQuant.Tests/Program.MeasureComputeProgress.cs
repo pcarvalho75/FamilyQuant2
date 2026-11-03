@@ -14,7 +14,8 @@ namespace FamilyQuant.Tests;
 
 internal static partial class Program
 {
-    private sealed record ComputeProgressMeasurement(string Project, string Raw, string Sepro, string DeNovo, string Cache, string Output);
+    private sealed record ComputeProgressMeasurement(string Project, string Raw, string Sepro, string DeNovo, string Cache, string Output,
+        bool SaveProject = false);
     private sealed record TimedComputeStep(DateTimeOffset At, double Seconds, string Scope, OperationProgress Progress);
     private sealed class ComputeMeasurementTrace(string output) : IProgress<OperationProgress>
     {
@@ -69,7 +70,7 @@ internal static partial class Program
         File.WriteAllText(Path.Combine(output, "process.pid"), process.Id.ToString(CultureInfo.InvariantCulture));
         Console.WriteLine("PID=" + process.Id + "; machine=" + Environment.MachineName + "; processors=" + Environment.ProcessorCount);
         var trace = new ComputeMeasurementTrace(output); var timer = Stopwatch.StartNew(); var cpu = process.TotalProcessorTime;
-        string before = FileFingerprint.Sha256(input); int exit = 1; Exception? failure = null;
+        string before = FileFingerprint.Sha256(input); int exit = 1; Exception? failure = null; bool computeCompleted = false;
         try
         {
             var opening = new OperationContext(progress: trace);
@@ -136,9 +137,14 @@ internal static partial class Program
             var context = new OperationContext(progress: trace);
             var result = FullXicComputer.ComputeFullXic(config.Raw, sepro, config.DeNovo, options,
                 (side, run) => paths[(side, run)], detectedCachePathFor: run => detectors[run], operation: context);
-            trace.Scope = "save"; trace.Report(new("measure-save", "Saving completed measured project", 0, 1));
-            ProjectStore.WriteFqproj(Path.Combine(output, "computed.fqproj"), saved.fcf, result.Rows, result.Manifest);
-            trace.Report(new("measure-save", "Measured project saved", 1, 1));
+            computeCompleted = true;
+            trace.Report(new("measure-compute-complete", "Full public Compute returned completed results", 1, 1));
+            if (config.SaveProject)
+            {
+                trace.Scope = "save"; trace.Report(new("measure-save", "Saving completed measured project", 0, 1));
+                ProjectStore.WriteFqproj(Path.Combine(output, "computed.fqproj"), saved.fcf, result.Rows, result.Manifest);
+                trace.Report(new("measure-save", "Measured project saved", 1, 1));
+            }
             if (before != FileFingerprint.Sha256(input)) throw new InvalidDataException("The copied input project changed.");
             exit = 0;
         }
@@ -152,7 +158,7 @@ internal static partial class Program
             var gaps = trace.Steps.Zip(trace.Steps.Skip(1), (left, right) => new { seconds = right.Seconds - left.Seconds,
                 scope = left.Scope, stage = left.Progress.Stage, item = left.Progress.Message, next = right.Progress.Message })
                 .OrderByDescending(gap => gap.seconds).ToArray();
-            File.WriteAllText(Path.Combine(output, "metrics.json"), JsonSerializer.Serialize(new { exit, machine = Environment.MachineName,
+            File.WriteAllText(Path.Combine(output, "metrics.json"), JsonSerializer.Serialize(new { exit, computeCompleted, saveRequested = config.SaveProject, machine = Environment.MachineName,
                 process = process.Id, processors = Environment.ProcessorCount, elapsedSeconds = timer.Elapsed.TotalSeconds,
                 cpuSeconds = (process.TotalProcessorTime - cpu).TotalSeconds, peakWorkingSetBytes = process.PeakWorkingSet64,
                 progressSteps = trace.Steps.Count, longestGap = gaps.FirstOrDefault(), topGaps = gaps.Take(12),

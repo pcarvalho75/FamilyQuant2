@@ -38,4 +38,7 @@ Its configuration names `Project`, `Raw`, `Sepro`, `DeNovo`, `Cache` and a fresh
 Mutable paths must be inside the lane's owned proof folder; shared lab inputs are read only.
 It checks complete validated precursor and detector cache coverage before Compute so a missing
 entry cannot unexpectedly load a full MS1 map. It writes the actual PID, timestamped steps,
-per-step gaps, peak memory, saved project and input-preservation result.
+per-step gaps, peak memory, Compute completion and input-preservation result. Saving a
+second full project is optional (`SaveProject: true`), separate from the measured Compute;
+it can require additional serialization memory. The normal measurement retains the
+computed spectrum CSV and does not request that extra copy.
