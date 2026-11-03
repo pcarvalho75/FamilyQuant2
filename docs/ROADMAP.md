@@ -71,7 +71,6 @@ The rerun of the full analysis with the scope "Toxin", "venom gland" (D39), so t
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| K7 | Second reader: every number in the program-written Summary of findings (J44) on Ana's project matched to its cell in the program's exports | M | 0.4 | 🟢 | K17 | A table of number, source cell and match, with no mismatch | GR2 | | 0 | 0 | |
 
 ### W3 The report export works and is fast
 
@@ -97,10 +96,8 @@ Ana installs it from the public releases page (D31); the desk publishes on Paulo
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| K14 | Final export of the interpreted project through the real command, on master with J30, J24, J16, J32 and J34 | L | 0.5 | 🟢 | K15, K16 | Word report and supplement written | OP | | 0 | 0 | |
-| K15 | Number trace on the final report: every number found, or each one not found ruled | L | 0.2 | K14 | K17 | `trace.csv` with nothing left open | T1 | | 0 | 0 | |
-| K16 | The final report's pages read for look and sense | L | 0.3 | K14 | K17 | No blocking item | LK | | 0 | 0 | |
-| K17 | Delivered: the Word report, supplement, project, family panel, a read-me with the release link, and the AI key file (D42) written to `AnaG/Bjararaca/Relatorio`; nothing else in Ana's folders touched | L | 0.2 | K7, K15, K16, K11 | | The five items with hashes; the rest of AnaG unchanged | OP | | 0 | 0 | |
+| K16 | The final report's pages read for look and sense | L | 0.3 | 🟢 | K17 | No blocking item | LK | | 0 | 0 | |
+| K17 | Delivered: the Word report, supplement, project, family panel, a read-me with the release link, and the AI key file (D42) written to `AnaG/Bjararaca/Relatorio`; nothing else in Ana's folders touched | L | 0.2 | K16, K11 | | The five items with hashes; the rest of AnaG unchanged | OP | | 0 | 0 | |
 
 ### W6 Compute fast and visible
 
