@@ -320,6 +320,7 @@ namespace FamilyQuant.Tests
             suite.AddWithApplication(() => ReportStoredChecks());
             suite.AddWithApplication(() => ReportSupplementChecks(null));
             suite.Add(() => ReportTableSheetTests(null));
+            suite.Add(FamilyUnobservedTests);
             suite.AddWithApplication(() => ReportFigureTests(Path.Combine(workDir, "report-figures")));
             suite.AddWithApplication(() => WordReportDraftTests());
             suite.AddWithApplication(() => ReportAssemblyChecks(Path.Combine(workDir, "report-assembly")));

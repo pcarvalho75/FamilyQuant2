@@ -7,6 +7,12 @@ namespace FamilyQuant;
 
 public static partial class FamilyCompositionStudy
 {
+    // Retained verbatim so older completed native studies can be recognized without rerunning attribution.
+    public const string RunSharesMethod = "Per-file primary family signal / sum of credited family signal; measured-peptide and recorded " +
+        "RAW TIC shares are separate. Family-world-only signal excluded. Arithmetic mean of available run " +
+        "shares, sample SD (n-1), CV = SD / mean. Zero denominators and undefined statistics are unavailable. " +
+        "Pooled share uses all runs pooled; pooled-minus-mean is its signed difference from the per-run mean. " +
+        "Measured-signal and TIC means/SDs each require every run's corresponding share to be available.";
     /// <summary>Group the existing prepared rows by normalized file name. Missing family signal is
     /// zero in a measured run; a zero assigned denominator is unavailable. Calibration and suppression
     /// have already run and are never refitted independently for each acquisition.</summary>
@@ -35,11 +41,7 @@ public static partial class FamilyCompositionStudy
         {
             MembershipSha256 = attribution.MembershipSha256,
             Policy = policy,
-            Method = "Per-file primary family signal / sum of credited family signal; measured-peptide and recorded " +
-                "RAW TIC shares are separate. Family-world-only signal excluded. Arithmetic mean of available run " +
-                "shares, sample SD (n-1), CV = SD / mean. Zero denominators and undefined statistics are unavailable. " +
-                "Pooled share uses all runs pooled; pooled-minus-mean is its signed difference from the per-run mean. " +
-                "Measured-signal and TIC means/SDs each require every run's corresponding share to be available.",
+            Method = RunSharesMethod,
             Families = attribution.Peptides.SelectMany(a => a.FamilyUserIds).Distinct().OrderBy(id => id)
                 .Select(id => new FamilyRunShareSummary { FamilyUserId = id }).ToList(),
         };
