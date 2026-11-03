@@ -23,7 +23,7 @@ public static class ReportSupplementWorkbook
     public const string ContentsName = "Contents";
     private const int MaxColumns = 16384, MaxDataRows = 1048575, MaxCellCharacters = 32767;
     private static readonly DateTimeOffset PackageDate = new(2000, 1, 1, 0, 0, 0, TimeSpan.Zero);
-    private static readonly Regex LiteralEscape = new("_x[0-9a-fA-F]{4}_", RegexOptions.CultureInvariant);
+    private static readonly Regex LiteralEscape = new("_(?=x[0-9a-fA-F]{4}_)", RegexOptions.CultureInvariant);
 
     public static string PathForReport(string reportPath)
     {
@@ -134,7 +134,7 @@ public static class ReportSupplementWorkbook
         try { XmlConvert.VerifyXmlChars(value); }
         catch (XmlException exception) { throw new InvalidDataException("A source cell contains text that Excel cannot retain.", exception); }
         // Escape literal SpreadsheetML escape tokens first, then preserve carriage returns explicitly.
-        return LiteralEscape.Replace(value, match => "_x005F_" + match.Value[1..]).Replace("\r", "_x000D_", StringComparison.Ordinal);
+        return LiteralEscape.Replace(value, "_x005F_").Replace("\r", "_x000D_", StringComparison.Ordinal);
     }
 
     private static void WriteSheet(WorksheetPart part, ReportTable table, ReportSupplementSheet[]? index,
