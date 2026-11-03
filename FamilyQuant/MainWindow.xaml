@@ -29,6 +29,8 @@
                               ToolTip="Exports families, User IDs and annotations for FamilyQuant 1.5, without quantitation. Disabled until a project is loaded."/>
                     <MenuItem x:Name="MenuItemExportFamilyTable" Header="Visible protein table (CSV)" Click="MenuItemExportFamilyTable_Click"
                               ToolTip="Exports the visible protein rows using the table's existing filters and columns. Disabled until a project is loaded."/>
+                    <MenuItem x:Name="MenuItemExportPanelAudit" Header="Panel assignment audit (CSV)" Click="MenuItemExportPanelAudit_Click"
+                              ToolTip="Exports one row per target protein with panel labels and recorded assignment evidence."/>
                     <MenuItem x:Name="MenuItemExportComposition" Header="Family composition (CSV)" Click="MenuItemExportComposition_Click"
                               ToolTip="Exports the current Full XIC family composition with its existing attribution settings. Disabled until Full XIC is available."/>
                 </MenuItem>
