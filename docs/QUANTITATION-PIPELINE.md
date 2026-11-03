@@ -59,6 +59,18 @@ The shared De novo importer applies the same proposal before reading its inputs.
 Optional arguments `<export-folder> <comma-separated-source-ids>` check an actual
 folder without importing or changing it.
 
+## Unavailable family-world rates
+
+An envelope-based decoy rate requires finite positive credited signal and a
+finite nonnegative decoy signal no greater than it. Unsupported rates are null,
+never clamped: zero/non-finite credit says `no credited signal`; decoy domination
+says `decoy signal exceeds credited signal, no rate`. Target and decoy counts
+stay beside rates/reasons in the screen and in appended CSV columns. These are
+prepared peptide-representative counts, which can overlap between families.
+Existing positive supported rates keep their original values. Older out-of-range
+stored rows are protected at access/display, while their underlying envelopes
+remain unchanged; unrecorded old counts say `not recorded` rather than zero.
+
 Family quantitation has these stages:
 
 1. `SearchCuration` searches normalized sequences, retaining compact protein hits.

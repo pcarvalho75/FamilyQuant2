@@ -78,7 +78,7 @@ namespace FamilyQuant.Tests
             Console.WriteLine("          by family: own share of the residual | decoy rate | known credits, truly it | right rate or evidence");
             foreach (FamilyWorldFamilySummary f in table.Families)
                 Console.WriteLine("            " + f.Family + ": " + P(f.UniqueEnvelope / table.ResidualEnvelope) + " | " +
-                    (f.DecoyRate.HasValue ? P(f.DecoyRate.Value) : "nothing credited") + " | " + N(f.KnownCredited) + ", " + N(f.KnownCreditedTrue) +
+                    FamilyWorldDecoyRates.Format(FamilyWorldDecoyRates.ForFamily(f), CultureInfo.InvariantCulture) + " | " + N(f.KnownCredited) + ", " + N(f.KnownCreditedTrue) +
                     " | " + (f.RightRate.HasValue ? P(f.RightRate.Value) : f.Evidence));
             Console.WriteLine("          result table, own parts of the measured total (identified | de novo in the database | de novo only in the family world):");
             foreach (FamilyWorldCompositionRow r in table.Composition.Where(r => r.Kind == FamilyWorldCompositionRow.UniProtKind).Take(12))
@@ -94,7 +94,8 @@ namespace FamilyQuant.Tests
                 table.WorldFingerprint == snapshot.ContentSha256
                 && table.Families.SelectMany(f => f.WorldProteins).All(id => snapshot.Entries.Any(e => e.Accession == id)), null);
             check("family world on B4's world: every family row has its decoy rate and right rate, or says why not",
-                table.Families.All(f => (f.DecoyRate.HasValue || f.CreditedEnvelope == 0) && (f.RightRate.HasValue || f.Evidence.Length > 0)), null);
+                table.Families.All(f => (f.DecoyRate.HasValue || f.DecoyRateStatus is FamilyWorldDecoyRates.NoCreditedSignal or FamilyWorldDecoyRates.DecoyExceedsCredited)
+                    && (f.RightRate.HasValue || f.Evidence.Length > 0)), null);
             // Ungated: the same rules with the whole genus out of the known-answer world, through each entry's stored
             // lineage, as for a species with no close relative in the world. The genus comes from UniProt's taxonomy.
             using (var client = new System.Net.Http.HttpClient { Timeout = TimeSpan.FromSeconds(120) })

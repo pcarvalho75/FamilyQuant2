@@ -27,7 +27,7 @@ internal static partial class Program
             tables.Single(table => table.MinimumTagLength == FamilyWorldOptions.DefaultMinimumTagLength)))!;
         root.Lengths = tables;
         root.LengthEstimates = FamilyWorldOptions.LengthChoices.Select(length => new FamilyWorldLengthEstimate
-        { MinimumTagLength = length, LandedFraction = (30 - length) / 30d, DecoyRate = .01,
+        { MinimumTagLength = length, LandedFraction = (30 - length) / 30d, CreditedEnvelope = 30 - length, DecoyEnvelope = (30 - length) * .01, DecoyRate = .01,
             KnownRight = 11, KnownLanded = 12, RightRate = 11d / 12, FamiliesMeasured = 1 }).ToList();
         return new QuantManifest { FamilyWorldResult = root, PerRunTic = new() { ["ui_01"] = 5e8, ["ui_02"] = 4e8 } };
     }

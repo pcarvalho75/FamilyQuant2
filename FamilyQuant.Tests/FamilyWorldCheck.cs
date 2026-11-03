@@ -568,10 +568,10 @@ namespace FamilyQuant.Tests
             Console.WriteLine("          family: own share of the residual | decoy rate | known credits, truly the family | right rate or evidence");
             foreach (FamilyWorldFamilySummary f in errors.Families)
                 Console.WriteLine("            " + f.Family + ": " + P(f.UniqueEnvelope / errors.ResidualEnvelope) + " | " +
-                    (f.DecoyRate.HasValue ? P(f.DecoyRate.Value) : "nothing credited") + " | " + N(f.KnownCredited) + ", " + N(f.KnownCreditedTrue) +
+                    FamilyWorldDecoyRates.Format(FamilyWorldDecoyRates.ForFamily(f), CultureInfo.InvariantCulture) + " | " + N(f.KnownCredited) + ", " + N(f.KnownCreditedTrue) +
                     " | " + (f.RightRate.HasValue ? P(f.RightRate.Value) : f.Evidence));
             check("family world (B6): every family row has its decoy rate and its right rate, or says why not",
-                errors.Families.All(f => (f.DecoyRate.HasValue || f.CreditedEnvelope == 0)
+                errors.Families.All(f => (f.DecoyRate.HasValue || f.DecoyRateStatus is FamilyWorldDecoyRates.NoCreditedSignal or FamilyWorldDecoyRates.DecoyExceedsCredited)
                     && (f.RightRate.HasValue ? f.Evidence == "measured" : f.Evidence.Length > 0)), N(errors.Families.Count) + " families");
             double errorsClosure = errors.Families.Sum(f => f.UniqueEnvelope)
                 + errors.Outcomes.Where(o => o.Outcome != nameof(FamilyWorldOutcome.Credited)).Sum(o => o.Envelope);
@@ -1018,7 +1018,7 @@ namespace FamilyQuant.Tests
             check("family world pass fixture: alpha holds both credited peptides, its decoy and nothing of beta or gamma",
                 alphaRow.Family == "alpha family" && alphaRow.Peptides == 2 && alphaRow.UniquePeptides == 2
                 && Math.Abs(alphaRow.UniqueEnvelope - pass.Envelope(FamilyWorldOutcome.Credited)) < 1e-9
-                && Math.Abs(alphaRow.DecoyEnvelope - pass.Envelope(FamilyWorldOutcome.Decoy)) < 1e-9
+                && Math.Abs(alphaRow.DecoyEnvelope - pass.Envelope(FamilyWorldOutcome.Decoy)) < 1e-9 && alphaRow.DecoyPeptides == 1
                 && Math.Abs(pass.AlsoOutOfScopeEnvelope - EnvelopeOf(dualTag)) < 1e-9, null);
             FamilyWorldSequenceRow dualRow = pass.Sequences.Single(r => r.Sequence == DeNovoReconciler.NormalizeSequence(dualTag));
             check("family world pass fixture: each tag keeps the world proteins it hit, and a family row only its own",
@@ -1168,7 +1168,8 @@ namespace FamilyQuant.Tests
             string compositionCsv = groupTable.BuildCompositionCsv();
             check("result table fixture: the export has the family rows and five global rows, all with the same columns",
                 compositionCsv.TrimEnd('\n').Split('\n').Length == 1 + groupTable.Composition.Count + 5
-                && compositionCsv.TrimEnd('\n').Split('\n').Select(FieldCount).Distinct().SequenceEqual(new[] { 15 }), null);
+                && compositionCsv.TrimEnd('\n').Split('\n').Select(FieldCount).Distinct().SequenceEqual(new[] { 18 })
+                && compositionCsv.Contains("\"family_world_decoy_rate_status\"", StringComparison.Ordinal), null);
 
             // ---- B10: every minimum tag length from one search, equal to a pass run at that length alone
             string Json(object value) => System.Text.Json.JsonSerializer.Serialize(value);
