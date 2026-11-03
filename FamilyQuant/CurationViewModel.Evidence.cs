@@ -1,6 +1,7 @@
 using FamilyQuant.Evidence;
 using FamilyQuant.Operations;
 using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Net.Http;
@@ -10,16 +11,18 @@ namespace FamilyQuant;
 
 public sealed partial class CurationViewModel
 {
-    public async Task<EvidenceFetchOutcome> FetchEvidenceAsync(HttpMessageHandler? handler, OperationContext operation)
+    public async Task<EvidenceFetchOutcome> FetchEvidenceAsync(HttpMessageHandler? handler, OperationContext operation,
+        IReadOnlyCollection<int>? additionalPositionFamilyIds = null)
     {
         operation.Report("evidence", "Preparing the evidence fetch");
         var source = Document.MyExtendedFastaItems.Select(p => (Item: p, p.SequenceIdentifier, p.Domains, p.Evidence)).ToArray();
         string domainSource = Document.DomainSource;
         var evidenceSource = Document.EvidenceSource;
+        var positionAccessions = Quantitation.PositionAccessions(additionalPositionFamilyIds);
         var prepared = await Task.Run(() => FamilyClusterFile.FromJsonText(Document.ToJsonText()), operation.CancellationToken);
         operation.ThrowIfCancellationRequested();
         var result = await EvidenceFetchSession.FetchAsync(prepared, handler, new CurationFetchProgress(operation),
-            cancellationToken: operation.CancellationToken);
+            cancellationToken: operation.CancellationToken, positionAccessions: positionAccessions);
         operation.ThrowIfCancellationRequested();
         if (!result.Changed) return result;
         operation.Commit(() =>
@@ -63,6 +66,11 @@ public sealed partial class CurationViewModel
         if (outcome.Panel != null)
             message += " Reviewed reference panel: " + outcome.Panel.Entries.Count.ToString("N0", CultureInfo.CurrentCulture)
                 + " entries from " + outcome.Panel.Families.Count.ToString("N0", CultureInfo.CurrentCulture) + " families, " + outcome.Panel.Release + ". Stored for offline grouping.";
+        message += result.PositionAsked > 0
+            ? " Position coordinates: " + result.PositionFound.ToString("N0", CultureInfo.CurrentCulture) + " of "
+                + result.PositionAsked.ToString("N0", CultureInfo.CurrentCulture) + " requested proteins in "
+                + result.PositionElapsedSeconds.ToString("N1", CultureInfo.CurrentCulture) + " s. Save to use them offline."
+            : " Position coordinates are fetched for proteins with mapped peptides after Compute.";
         if (outcome.PanelFailure != null)
             message += (result.Asked > 0 ? " Protein evidence was fetched; the reviewed reference panel was kept unchanged. " : " Stored protein evidence and the reference panel were kept unchanged. ")
                 + "Reason: " + outcome.PanelFailure.Message + ". Check the connection and press Fetch evidence again.";

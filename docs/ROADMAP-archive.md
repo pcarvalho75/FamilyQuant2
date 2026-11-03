@@ -229,4 +229,17 @@ Finished steps, moved here from docs/ROADMAP.md. The board shows them as green.
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
 | J1b0 | One package, DocumentFormat.OpenXml, to read `.xlsx` and write `.docx`; pinned and recorded in DEPENDENCIES.md | L | 0.5 | 🟢 | J1b, J6a | Build, dependency check, publish payload lists the DLL | AS | | 0 | 0 | |
 | J1a | Family panel in the project: for each family its code, names, decision, Pfam list, subclasses to report, literature abundance, notes and sources, stored in the `.fqproj` and the recipe | M | 1.5 | 🟢 | J1b, J1c, J2a, J3a, J5c, J6c | Round trip test; an old project opens and saves its old bytes | EV | | 0 | 0 | |
+| J1b | Read a panel from a spreadsheet as the user sent it: columns chosen by header; each distinct decision value mapped by the user to Quantify, Report under others, Not a family, or Merge into a named family; the choices stored | M | 2 | J1b0 | J1d, J2a | Native test on a copy of Ana's file: 41 rows read, her mapping replayed from the recipe | AS | | 0 | 0 | |
+
+### W6 The Word report, written by the program
+
+| ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
+|---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
+| J6d | Report details: one form saved in the project (title, authors, sample, workflow, kind of database, written interpretation), each printed in its place in the report | M | 1.5 | 🟢 | J6e, J7b | Round trip; Undo; native editor test. Printing each field is checked in J6a, whose writer consumes it | SH | | 0 | 0 | |
+
+### W4 Where the peptides fall
+
+| ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
+|---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
+| J4a | Fetch domain positions (InterPro) and UniProt feature positions (chain, peptide, propeptide, signal) for each protein, stored with the evidence and its provenance | M | 2 | 🟢 | J4b, J4c | Live fetch on Ana's database; the project reopens offline with the positions | AS | | 0 | 0 | |
 
