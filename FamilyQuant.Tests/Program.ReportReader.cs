@@ -46,6 +46,7 @@ internal static partial class Program
         ReportReaderDocumentTests(data, families, output);
         ReportReaderCensusTraceTests();
         ReportReaderWorkbookReferenceTests();
+        ReportReaderPanelExcerptTests();
     }
 
     private static void ReportReaderCensusTraceTests()

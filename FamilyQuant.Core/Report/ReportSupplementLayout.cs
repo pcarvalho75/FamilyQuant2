@@ -121,9 +121,9 @@ public static class ReportSupplementLayout
         sheets.Add(new(id, section.Id, name, new ReportTable(id, section.Title + " - complete panel and observed detail",
             new[] { "Source table", "Row", "Field", "Native value", "Word display value" }, detail,
             "Complete user panel text and native observations. Source captions retain units and availability. The Word brief uses six significant digits for observed numeric values.")));
-        string text = panelText.ToString();
-        bool excerpt = text.Length > 300;
-        if (excerpt) { text = text[..300]; if (char.IsHighSurrogate(text[^1])) text = text[..^1]; }
+        string completeText = panelText.ToString();
+        string text = PanelExcerpt(completeText, 300);
+        bool excerpt = text.Length < completeText.TrimEnd().Length;
         var blocks = new List<ReportBlock>();
         if (text.Length > 0) blocks.Add(new ReportParagraph(section.Id + ":panel-brief", (excerpt ? "Panel text excerpt: " : "Panel text: ") + text + (excerpt ? " ..." : "")));
         foreach (string observation in observations) blocks.Add(new ReportParagraph(section.Id + ":observation-brief:" + blocks.Count.ToString(CultureInfo.InvariantCulture), observation));
@@ -132,6 +132,20 @@ public static class ReportSupplementLayout
         blocks.Add(new ReportParagraph(section.Id + ":detail-reference",
             "Full panel text, literature, notes, sources, observed tables and units: supplement sheet '" + name + "'. Share entries in the brief are fractions unless their label states otherwise."));
         return section with { Blocks = blocks };
+    }
+
+    private static string PanelExcerpt(string text, int limit)
+    {
+        if (text.Length <= limit) return text;
+        int end = limit;
+        while (end > 0 && !char.IsWhiteSpace(text[end])) end--;
+        // An unusually long first token is retained whole rather than printing part of a word or number.
+        if (end == 0)
+        {
+            end = limit;
+            while (end < text.Length && !char.IsWhiteSpace(text[end])) end++;
+        }
+        return text[..end].TrimEnd();
     }
 
     private static string BriefValue(ReportTable table, int column, string raw)
