@@ -477,6 +477,9 @@ Paulo agreed these at the restart, 2026-11-01.
 | K8a | --test-report-command passes again: its expected supplement (Program.ReportCommandTests.cs:128,130) predates J41's list sheets, so it fails 16/2 on master (18 expected sheets, 20 written: 'List Evidence recorded' and 'List Family evidence use'; protein_audit E2 and H2 now cite those sheets). Update the expectation to J41's behaviour without weakening the check, and say why no gate ran it (put it in the gated suite if it belongs there) | L | 0.3 | 🟢 | K9 | 18/0 on master; the reason it was outside the gates stated | FL | | 0 | 0 | |
 | K8b | No test that no gate runs: a check in DefaultSuite lists every registered test command and fails when one needs no RAW yet is neither in DefaultSuite nor named in an explicit, reasoned exclusion list (K8a: --test-report-command sat outside the gates since J41 and hid a stale expectation) | L | 0.4 | 🟢 | | The check fails on a planted unregistered command and passes on master; the exclusion list has a reason per entry | FL | | 0 | 0 | |
 | K10 | The unpacked candidate exports the final project's report through the real menu | L | 0.3 | K9 | K11 | Files and times recorded | EV | | 0 | 0 | |
+| K9b | The 3 ledger rows K9's refresh did not bring back (AS-retained, SpectrumComparisonTable.Build's literals XCorr, patternlab, PatternLab, staled by J35c's progress change): reason, then an explicit reviewed relocation or a fresh executed check, no guard weakened | L | 0.3 | 🟢 | K9 | Refresh on a master copy: 3 of 3 back | SH | | 0 | 0 | |
+| K9 | Full gate on the release candidate re-cut after J41 (and J32, J34 if merged): every ledger receipt current (quick gates defer them) | M | 0.5 | K8, K9b | K10 | Full gate green, ledger 5,460 of 5,460 | Orchestrator | | 0 | 0 | |
+| K11 | Published: v2.1.0 on pcarvalho75/FamilyQuant2-releases with the zip, its .sha256 and user release notes | L | 0.1 | 🟢 | K13, K17 | The release page is live | Orchestrator | | 0 | 0 | |
 
 ### W6 Compute fast and visible
 
@@ -515,4 +518,5 @@ Paulo agreed these at the restart, 2026-11-01.
 | K15 | Number trace on the final report: every number found, or each one not found ruled | L | 0.2 | K14 | K17 | `trace.csv` with nothing left open | T1 | | 0 | 0 | |
 | K14 | Final export of the interpreted project through the real command, on master with J30, J24, J16, J32 and J34 | L | 0.5 | 🟢 | K15, K16 | Word report and supplement written | OP | | 0 | 0 | |
 | K16 | The final report's pages read for look and sense | L | 0.3 | 🟢 | K17 | No blocking item | LK | | 0 | 0 | |
+| K17 | Delivered: the Word report, supplement, project, family panel, a read-me with the release link, and the AI key file (D42) written to `AnaG/Bjararaca/Relatorio`; nothing else in Ana's folders touched | L | 0.2 | K11 | | The five items with hashes; the rest of AnaG unchanged | OP | | 0 | 0 | |
 
