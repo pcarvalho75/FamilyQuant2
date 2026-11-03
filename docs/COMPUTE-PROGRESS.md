@@ -24,7 +24,7 @@ After a Release build, run:
 & ./FamilyQuant.Tests/bin/Release/net10.0-windows7.0/FamilyQuant.Tests.exe --test-compute-progress <fresh-output>
 ```
 
-The check is registered once in DefaultSuite. It runs public Compute on two synthetic
+The check is registered once in DefaultSuite and runs in en-US and pt-BR. It runs public Compute on two synthetic
 acquisitions with validated extraction and detector caches. A per-call internal reader
 supplies only the fixture TIC; production reads the native acquisition chromatogram.
 It checks ordered phases and totals, cache batches, the visible clocks, persistent logs,

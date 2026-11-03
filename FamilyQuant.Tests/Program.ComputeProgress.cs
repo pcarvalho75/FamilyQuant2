@@ -52,6 +52,20 @@ internal static partial class Program
 
     private static void ComputeProgressTests(string folder)
     {
+        var oldCulture = CultureInfo.CurrentCulture; var oldUi = CultureInfo.CurrentUICulture;
+        try
+        {
+            foreach (string language in new[] { "en-US", "pt-BR" })
+            {
+                CultureInfo.CurrentCulture = CultureInfo.GetCultureInfo(language); CultureInfo.CurrentUICulture = CultureInfo.CurrentCulture;
+                ComputeProgressFixture(Path.Combine(folder, language));
+            }
+        }
+        finally { CultureInfo.CurrentCulture = oldCulture; CultureInfo.CurrentUICulture = oldUi; }
+    }
+
+    private static void ComputeProgressFixture(string folder)
+    {
         EnsureApplication(); Directory.CreateDirectory(folder);
         string raw = Path.Combine(folder, "raw"), exports = Path.Combine(folder, "denovo"), cache = Path.Combine(folder, "cache");
         Directory.CreateDirectory(raw); Directory.CreateDirectory(exports); Directory.CreateDirectory(cache);
