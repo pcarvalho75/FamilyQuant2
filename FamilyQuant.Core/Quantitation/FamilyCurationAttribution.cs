@@ -97,7 +97,11 @@ namespace FamilyQuant
                         return i;
                     }).ToArray();
                     // The same key MapToFamilies gives the assignment.
-                    compact.Add((r.IsRejected ? r.Peptide : r.NormalizedPeptide, proteins));
+                    string key = r.IsRejected ? r.Peptide : r.NormalizedPeptide;
+                    compact.Add((key, proteins));
+                    var offsets = r.Hits.GroupBy(h => h.ProteinId, StringComparer.Ordinal)
+                        .ToDictionary(g => g.Key, g => g.First().Offset, StringComparer.Ordinal);
+                    hits.RecordLocalizationOffsets(side, key, proteins, proteins.Select(i => offsets[proteinIds[i]]).ToArray());
                 }
                 return compact;
             }

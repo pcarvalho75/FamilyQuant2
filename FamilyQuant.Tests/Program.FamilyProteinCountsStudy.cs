@@ -41,7 +41,7 @@ internal static partial class Program
         var database = new List<FastaItemExtended>
         {
             Protein("P1", 0, 1), Protein("P2", 2, 3), Protein("P3", 0, 2), Protein("P4", 1, 3), Protein("P5", 4),
-            Protein(SequenceLabels.DecoyPrefix + "test", 4), Protein(SequenceLabels.ContaminantPrefix + "test", 4),
+            Protein(SequenceLabels.DecoyPrefix + "test", 4),
         };
         FamilyProteinCountsResult result = FamilyCompositionStudy.BuildProteinCounts(attribution, database);
         var family = result.Families.FirstOrDefault(f => f.FamilyUserId == 1);
@@ -49,6 +49,11 @@ internal static partial class Program
             && family.SelectedProteinIdentifiers.SequenceEqual(new[] { "P1", "P2", "P5" }));
         Check("own-peptide support counts proteins separately from abundance and cover size",
             family?.UniquePeptideProteinCount == 1 && family.ObservedPeptideCount == 6);
+        var contaminantCompetition = FamilyCompositionStudy.BuildProteinCounts(attribution,
+            database.Append(Protein(SequenceLabels.ContaminantPrefix + "competitor", 0, 1, 2, 3, 4, 5))).Families.FirstOrDefault();
+        Check("contaminants compete against own-peptide specificity without explaining a biological family",
+            contaminantCompetition?.UniquePeptideProteinCount == 0 && contaminantCompetition.GreedyProteinCount == 3
+            && contaminantCompetition.UnexplainedPeptides.SequenceEqual(new[] { "VVVVVVK" }));
         Check("a peptide without exact database support remains explicitly unexplained",
             family?.UnexplainedPeptides.SequenceEqual(new[] { "VVVVVVK" }) == true
             && !family.ExplainsAllObservedPeptides && family.ExplainedPeptideCount == 5);
