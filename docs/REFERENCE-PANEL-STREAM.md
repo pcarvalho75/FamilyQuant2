@@ -41,6 +41,17 @@ The old route is retained behind `usePagedComparison: true` for this comparison 
 The checker reads its own supplied source and never consults another running project.
 Ctrl+C requests cancellation.
 
+Add `--resume` to reuse that command's evidence and streamed-panel checkpoints after an
+interrupted paged comparison. The checker verifies the source identifiers/sequences/grouping,
+source hash, requested families and release, then pins the checkpoint hashes. Successful
+paged replies are retained verbatim with their headers and SHA256, so further interruptions
+can replay completed requests without network access. Changed checkpoint or cached bytes are
+refused. Only this comparison transport honors a provider `Retry-After` before retrying a
+429 (30 seconds when omitted); the production retry policy is unchanged. The final paged
+time includes active attempts and retry waits, including any replay processing, and excludes
+time spent with the command stopped. Earlier attempts that predate these resumable captures
+remain separate diagnostics and are not presented as a complete baseline timing.
+
 The packet manifests record each response URL, release, total when supplied, body SHA256,
 size and elapsed seconds. `entry-parity.csv` compares the full serialized entry, including
 sequence and every evidence field, by accession. `validation.json` reports the timings,

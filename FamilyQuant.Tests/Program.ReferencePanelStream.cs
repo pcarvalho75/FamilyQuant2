@@ -126,6 +126,7 @@ internal static partial class Program
             catch (OperationCanceledException) { refused = true; }
             Check("J17 cancellation " + (afterBatch ? "at completed batch" : "during stream") + " preserves all stored bytes", refused && before == file.ToJsonText());
         }
+        PanelComparisonCacheTests();
     }
 
     private sealed class InlineFetchProgress(Action<FetchProgress> report) : IProgress<FetchProgress>
