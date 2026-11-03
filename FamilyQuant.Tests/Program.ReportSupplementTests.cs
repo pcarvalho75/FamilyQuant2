@@ -35,7 +35,7 @@ internal static partial class Program
             ("runs", "results", "Per run", AnalyticsCsv.BuildSummaryCsv(data.Fractions, data.Grouped)),
             ("others", "supplements", "Others with reasons", "family,mean_share,threshold,reason\r\nFixture family,0.0004,0.001,Below the stored threshold\r\n"),
             ("panel-audit", "supplements", "Panel audit", PanelAuditCsv.BuildCsv(file)),
-            ("literal", "supplements", "Literal cells", "identifier,numeric_text,formula_text,note,escape_text,blank\r\n00123,1.000,\"=SUM(1,2)\",\"a, b\"\"c\r\nline\",_x0041_,\r\n")
+            ("literal", "supplements", "Literal cells", "identifier,numeric_text,formula_text,note,escape_text,blank\r\n00123,1.000,\"=SUM(1,2)\",\"a, b\"\"c\r\nline\",_x0041_,\r\n_x005F_x0041_,0.000,+123,'quoted,_x000D_,#N/A\r\n")
         };
         var sheets = csvs.Select(value => new ReportSupplementSheet(value.Item1, value.Item2, value.Item3,
             ReportCsvTable.Build(value.Item1, value.Item3, value.Item4, "Native CSV cells"))).ToArray();
@@ -125,6 +125,12 @@ internal static partial class Program
         Check("unknown owning sections are refused", Refused(new[] { fixture.Sheets[0] with { OwnerSectionId = "absent" } }));
         var malformed = fixture.Sheets[0] with { Table = new("bad", "Bad", new[] { "a", "b" }, new[] { (IReadOnlyList<string>)new[] { "only one" } }, "") };
         Check("inconsistent row widths are refused", Refused(new[] { malformed }));
+        ReportSupplementSheet Cell(string value) => fixture.Sheets[0] with
+        { Table = new("cell", "Cell", new[] { "value" }, new[] { (IReadOnlyList<string>)new[] { value } }, "") };
+        Check("Excel text limits refuse truncation", Refused(new[] { Cell(new string('x', 32768)) }));
+        Check("invalid XML control text is refused", Refused(new[] { Cell("a\u0001b") }));
+        var tooWide = fixture.Sheets[0] with { Table = new("wide", "Wide", Enumerable.Repeat("column", 16385).ToArray(), Array.Empty<IReadOnlyList<string>>(), "") };
+        Check("Excel column limits refuse dropped columns", Refused(new[] { tooWide }));
         Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
         Console.WriteLine("Synthetic supplement workbook and CSV-parity fixture: " + output);
         return failed == 0 ? 0 : 1;

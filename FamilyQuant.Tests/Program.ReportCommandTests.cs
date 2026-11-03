@@ -60,6 +60,7 @@ internal static partial class Program
         var oldPresenter = MainWindow.ReportExportPresenterOverride;
         var oldFactory = MainWindow.ReportDocumentFactoryOverride;
         var oldStager = MainWindow.ReportFileStagerOverride;
+        var oldPublication = MainWindow.ReportPublicationStepOverride;
         var oldMessages = ShellMessages.Presenter;
         var oldChoice = MainWindow.UnsavedProjectChoiceOverride;
         string? oldSettings = MainWindow.ShellSettingsPathOverride;
@@ -101,6 +102,8 @@ internal static partial class Program
             menu.RaiseEvent(new RoutedEventArgs(MenuItem.ClickEvent));
             bool exported = shell.ReportExportTask != null && FinishReportCommand(shell.ReportExportTask);
             Check("native File Export report writes the production Word document", exported && File.Exists(report) && !shell.Operations.IsBusy);
+            string supplement = ReportSupplementWorkbook.PathForReport(report);
+            Check("native File Export report publishes its same-base supplement workbook", exported && File.Exists(supplement));
             if (!exported) throw new InvalidOperationException("Native report export failed; inspect the shell message and fixture output.");
             using (var archive = ZipFile.OpenRead(report))
             {
@@ -114,6 +117,22 @@ internal static partial class Program
                 Check("the unticked section is absent while Methods and Results remain", !text.Contains("Quality") && text.Contains("Methods") && text.Contains("Results"));
             }
             var current = shell.NavigationModel.Document!;
+            var expectedExport = ReportProjectExporter.Build(rows, manifest, current, Path.Combine(output, "reference-figures"), current.ReportDetails, current.ReportInputProvenance);
+            if (expectedExport.SupplementSheets.Count == 0 && expectedExport.CsvExports.Count > 0)
+            {
+                var layout = ReportSupplementLayout.Apply(expectedExport.Document, expectedExport.CsvExports);
+                expectedExport = expectedExport with { Document = layout.Document, SupplementSheets = layout.Sheets };
+            }
+            var workbookCells = ReadSupplement(File.ReadAllBytes(supplement));
+            var expectedSheets = expectedExport.SupplementSheets.Where(sheet => sheet.OwnerSectionId != ReportSectionIds.Quality).ToArray();
+            Check("published companion contains exactly the selected production sheets", workbookCells.Keys.ToHashSet(StringComparer.Ordinal)
+                .SetEquals(expectedSheets.Select(sheet => sheet.Name).Append("Contents")));
+            Check("published companion cells equal every complete native source table", expectedSheets.All(sheet =>
+            {
+                var expectedCells = new[] { sheet.Table.Columns.ToArray() }.Concat(sheet.Table.Rows.Select(row => row.ToArray())).ToArray();
+                return workbookCells[sheet.Name].Length == expectedCells.Length
+                    && workbookCells[sheet.Name].Zip(expectedCells).All(pair => pair.First.SequenceEqual(pair.Second));
+            }));
             Check("native export stores choices and threshold and leaves the project dirty", current.ReportSelection?.ExcludedIds is [ReportSectionIds.Quality]
                 && current.ReportThreshold == 0.002 && shell.DocumentState.IsModified);
             string saved = Path.Combine(output, "chosen.fqproj");
@@ -135,6 +154,8 @@ internal static partial class Program
 
             string previous = Path.Combine(output, "previous.docx");
             File.WriteAllText(previous, "previous report bytes");
+            string previousBook = ReportSupplementWorkbook.PathForReport(previous);
+            File.WriteAllText(previousBook, "previous workbook bytes");
             MainWindow.SelectReportPathOverride = () => previous;
             bool busy = false;
             MainWindow.ReportFileStagerOverride = (stage, document, selected, operation) =>
@@ -148,8 +169,20 @@ internal static partial class Program
                 });
             };
             Check("shared Cancel prevents publication and preserves an existing report", !FinishReportCommand(shell.ExportReportAsync())
-                && File.ReadAllText(previous) == "previous report bytes" && busy && !shell.Operations.IsBusy);
+                && File.ReadAllText(previous) == "previous report bytes" && File.ReadAllText(previousBook) == "previous workbook bytes" && busy && !shell.Operations.IsBusy);
             Check("cancelled report staging leaves no destination temporary file", !Directory.EnumerateFiles(output, ".fq-report-*.docx").Any());
+
+            MainWindow.ReportFileStagerOverride = null;
+            string newPair = Path.Combine(output, "cancel-between.docx");
+            MainWindow.SelectReportPathOverride = () => newPair;
+            MainWindow.ReportPublicationStepOverride = step => { if (step == 1) shell.Operations.Cancel(); };
+            Check("native Cancel between the two publications leaves neither artifact", !FinishReportCommand(shell.ExportReportAsync())
+                && !File.Exists(newPair) && !File.Exists(ReportSupplementWorkbook.PathForReport(newPair)));
+            MainWindow.SelectReportPathOverride = () => previous;
+            Check("native Cancel between publications restores both previous files", !FinishReportCommand(shell.ExportReportAsync())
+                && File.ReadAllText(previous) == "previous report bytes" && File.ReadAllText(previousBook) == "previous workbook bytes");
+            Check("paired cancellation cleans its private staging folder", !Directory.EnumerateDirectories(output, ".fq-report-*").Any());
+            MainWindow.ReportPublicationStepOverride = null;
 
             MainWindow.ReportFileStagerOverride = null;
             MainWindow.SelectReportPathOverride = () => Path.Combine(output, "stale.docx");
@@ -168,6 +201,7 @@ internal static partial class Program
             shell.Close(); PumpDispatcher();
             MainWindow.SelectReportPathOverride = oldPath; MainWindow.ReportExportPresenterOverride = oldPresenter;
             MainWindow.ReportDocumentFactoryOverride = oldFactory; MainWindow.ReportFileStagerOverride = oldStager;
+            MainWindow.ReportPublicationStepOverride = oldPublication;
             MainWindow.UnsavedProjectChoiceOverride = oldChoice; ShellMessages.Presenter = oldMessages; MainWindow.ShellSettingsPathOverride = oldSettings;
         }
         Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");

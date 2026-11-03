@@ -21,7 +21,8 @@ public sealed class ReportExportWindow : Window
         + "are grouped under Others, and their full list remains in the supplement. The default is 0.1 percent. "
         + "Report details hold the study description and your written interpretation. File > Export report writes a Word document from stored Results; "
         + "compute Results first when they are missing. Figures use the Light export palette. The shared wait screen provides Cancel before publication, "
-        + "keeping the previous report file. Exporting does not save the project; use File > Save to keep changed details, choices and threshold.";
+        + "keeping the previous report files. Long detail tables are in the same-name _supplement.xlsx workbook. Word and workbook are published together; "
+        + "section choices also control workbook sheets. Exporting does not save the project; use File > Save to keep changed details, choices and threshold.";
 
     public ReportExportWindow(ReportExportViewModel model, Action<ReportSelection, double> apply, string actionText = "Save choices")
     {
