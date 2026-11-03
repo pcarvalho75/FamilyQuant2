@@ -41,3 +41,18 @@ Refresh validation uses `python D:/FamilyQuant-wt/desk/refresh_ledger.py --tree
 <built-master-copy-with-candidate> --parallel 1 --processors 4 --also AS-retained
 --out-root <owned-output>`. Imports are performed by the native refresher in the
 isolated copy; no negative-control option is used.
+
+Validation on the isolated master-plus-candidate copy at `5f8cc19` restored all
+three observations from OPEN to VERIFIED. The automatic refresh restored 2,121
+of 2,222 stale rows; its remaining 101 rows were the two intentionally deferred
+RAW producers. Their already executed registers from the supplied K9 run were
+then accepted by the unchanged native batch importer, giving 5,460 VERIFIED,
+zero OPEN. This carry-forward is not a new RAW run. No receipt was edited by hand.
+
+Evidence is under `D:/FamilyQuant-data/out-shell/K9b`: `target-refresh-proof.json`,
+`refresh/20261103-134111-master-copy`, and `carry-forward-raw`. The native assay
+producer passed 1,012 checks with zero failures and 153 unrelated declaration
+skips; all three scoped facts passed. The unchanged declaration guards passed
+67 checks with zero failures. Both isolated and worker builds had zero warnings
+and errors. Generated imports remain in the isolated copy, outside the source
+commit.
