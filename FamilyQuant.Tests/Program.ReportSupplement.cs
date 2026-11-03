@@ -29,6 +29,9 @@ internal static partial class Program
                 new ReportTable("panel-block:key:text", "User panel text", new[] { "Field", "Text" },
                     new[] { (IReadOnlyList<string>)new[] { "Original notes", new string('x', 800) } }, "User data."),
                 new ReportParagraph("panel-block:key:observation-status", "No observation was stored."),
+                new ReportFigure("figure:family-map-fixture", "Synthetic family map",
+                    Convert.FromBase64String("iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAusB9Wl6MpIAAAAASUVORK5CYII="),
+                    "Synthetic map caption.", 1, 1),
             }),
             new ReportSection(ReportSectionIds.Supplements, "Supplements", Array.Empty<ReportBlock>()),
         } };
@@ -40,6 +43,8 @@ internal static partial class Program
         Check("complete panel text is retained in its family-owned workbook sheet", layout.Sheets.Single(s => s.OwnerSectionId == "family:key").Table.Rows.Any(r => r.Contains(new string('x', 800))));
         Check("family brief marks excerpts and cites full panel text", layout.Document.Sections[1].Blocks.OfType<ReportParagraph>().Any(p => p.Text.StartsWith("Panel text excerpt:", StringComparison.Ordinal))
             && layout.Document.Sections[1].Blocks.OfType<ReportParagraph>().Any(p => p.Text.Contains("Full panel text", StringComparison.Ordinal)));
+        Check("compact family section preserves its native coverage figure and caption", layout.Document.Sections[1].Blocks.OfType<ReportFigure>().Single().Id == "figure:family-map-fixture"
+            && layout.Document.Sections[1].Blocks.OfType<ReportFigure>().Single().Caption == "Synthetic map caption.");
         Check("workbook sheet names are deterministic, unique and valid length", layout.Sheets.All(s => s.Name.Length <= 31)
             && layout.Sheets.Select(s => s.Name).Distinct(StringComparer.OrdinalIgnoreCase).Count() == layout.Sheets.Count
             && layout.Sheets.Select(s => s.Name).SequenceEqual(ReportSupplementLayout.Apply(source, csv).Sheets.Select(s => s.Name)));

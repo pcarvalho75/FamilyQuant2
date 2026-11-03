@@ -38,7 +38,9 @@ public static class ReportProjectExporter
         var grouping = manifest.FamilyRunShares == null ? null : FamilyReportThreshold.Build(manifest.FamilyRunShares, curation);
         result = ReportStoredResults.Apply(result, manifest, labels, grouping);
         var plan = ReportFigureRenderer.Plan(data, manifest, curation, families);
-        var figures = ReportFigureRenderer.Render(plan, pngFolder);
+        var studies = ReportStudyFigures.Build(manifest, curation, pngFolder, topProteinsPerPanelFamily: 1);
+        var figures = ReportFigureRenderer.Render(plan, pngFolder).Concat(studies.Figures).ToArray();
+        var unavailable = plan.Unavailable.Concat(studies.Unavailable).ToArray();
         var document = ReportDocumentBuilder.Build(curation, manifest, details, provenance) with { ApplicationVersion = AppVersionInfo.Current() };
         var replacements = result.Sections.ToDictionary(s => s.Id, StringComparer.Ordinal);
         document = document with
@@ -51,7 +53,7 @@ public static class ReportProjectExporter
                     blocks.Insert(0, new ReportParagraph("current-grouping-notice",
                         "Draft of the saved current grouping. No family panel is stored in this project. Group-specific, shared and unattributed signal remain separate; panel-based assignments can change both the grouping and its shared-signal fraction."));
                 blocks.AddRange(figures.Where(f => f.SectionId == section.Id).Select(f => (ReportBlock)f.Figure));
-                blocks.AddRange(plan.Unavailable.Where(f => f.SectionId == section.Id).Select((f, index) =>
+                blocks.AddRange(unavailable.Where(f => f.SectionId == section.Id).Select((f, index) =>
                     (ReportBlock)new ReportParagraph(section.Id + ":unavailable-figure:" + index.ToString(CultureInfo.InvariantCulture), f.Title + ": " + f.Reason)));
                 return section with { Blocks = blocks };
             }).ToArray(),
@@ -61,10 +63,27 @@ public static class ReportProjectExporter
             sections.Insert(sections.FindIndex(s => s.Id == ReportSectionIds.Results) + 1, conflictSection);
         int familyPosition = sections.FindIndex(s => s.Id == ReportSectionIds.AssignmentConflicts);
         familyPosition = familyPosition >= 0 ? familyPosition + 1 : sections.FindIndex(s => s.Id == ReportSectionIds.Results) + 1;
-        sections.InsertRange(familyPosition, ReportPanelSections.BuildFromResults(curation, manifest));
+        sections.InsertRange(familyPosition, ReportPanelSections.BuildFromResults(curation, manifest).Select(section => section with
+        {
+            Blocks = section.Blocks.Concat(figures.Where(f => f.SectionId == section.Id).Select(f => (ReportBlock)f.Figure))
+                .Concat(unavailable.Where(f => f.SectionId == section.Id).Select((f, index) => (ReportBlock)new ReportParagraph(section.Id + ":unavailable-map:" + index.ToString(CultureInfo.InvariantCulture), f.Title + ": " + f.Reason))).ToArray(),
+        }));
+        var sourceWorld = manifest.FamilyWorldResult?.ForLength(manifest.DatabaseGapMinimumTagLength ?? FamilyWorldOptions.DefaultMinimumTagLength);
+        if (sourceWorld != null)
+            for (int i = 0; i < sections.Count; i++)
+            {
+                var blocks = sections[i].Blocks.ToList();
+                int sourcePosition = blocks.FindLastIndex(b => b is ReportFigure figure && figure.Id.StartsWith("figure:family_signal_sources", StringComparison.Ordinal));
+                if (sourcePosition >= 0)
+                {
+                    blocks.Insert(sourcePosition + 1, ReportSourceSupport.Build(sourceWorld));
+                    sections[i] = sections[i] with { Blocks = blocks };
+                }
+            }
         document = document with { Sections = sections };
         var figureCaptions = plan.Charts.ToDictionary(c => "figure:" + c.FileName,
             c => c.CaptionInput ?? throw new InvalidOperationException("Caption data are unavailable for " + c.FileName), StringComparer.Ordinal);
+        foreach (var binding in studies.CaptionBindings) figureCaptions.Add(binding.Key, binding.Value);
         var tableCaptions = document.Sections.SelectMany(s => s.Blocks).OfType<ReportTable>().ToDictionary(t => t.Id,
             t => new TableCaptionInput(t.Title, string.IsNullOrWhiteSpace(t.Caption)
                 ? "Read across each row using the named columns and units" : t.Caption,
@@ -79,6 +98,8 @@ public static class ReportProjectExporter
                     ProteinIndex = a.ProteinIndex, Identifier = a.Identifier, EvidenceUsed = a.EvidenceKind.ToString(), Reason = a.Reason,
                 }).ToArray()),
         };
+        if (sourceWorld != null && studies.Figures.Any(f => f.Figure.Id.StartsWith("figure:family_signal_sources", StringComparison.Ordinal)))
+            exports.Add("family_sources_support.csv", ReportStudyExports.SourceSupport(sourceWorld));
         var layout = ReportSupplementLayout.Apply(document, exports);
         return new(layout.Document, exports, figures) { SupplementSheets = layout.Sheets.Concat(ReportCaptionTrace.Build(document, figureCaptions)).ToArray(), Selection = curation.ReportSelection };
     }
