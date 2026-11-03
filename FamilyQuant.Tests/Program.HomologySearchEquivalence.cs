@@ -113,6 +113,21 @@ internal static partial class Program
         Check("J38d q3 protein indices retain values above 65535", search(["PEPTLDEK"], wideDb, indexed, null)
             .Single().Hits.Single().ProteinId == "protein-65536");
 
+        string longQuery = RandomSequence(1000);
+        char[] longMutant = longQuery.ToCharArray();
+        for (int i = 1; i < longMutant.Length; i += 5) longMutant[i] = longMutant[i] == 'A' ? 'G' : 'A';
+        var saturatedDb = HomologyDatabase.Build(new[] { ("exact", "GG" + longQuery),
+            ("mutant", new string(longMutant)), ("Reverse_long", longQuery.Replace('I', 'L')) });
+        foreach (bool best in new[] { false, true })
+        {
+            var options = new HomologyOptions { BestScoreOnly = best, BruteForceProteinLimit = 0, TopHitsPerPeptide = 100 };
+#pragma warning disable CS0618
+            var expected = HomologyMapper.Search([longQuery], saturatedDb, options);
+#pragma warning restore CS0618
+            string difference = HomologySearchEquivalence.Difference(expected, search([longQuery], saturatedDb, options, null));
+            Check($"J38d q3 diagonal vote counts remain exact above255, best={best}", difference.Length == 0, difference);
+        }
+
         const string canonical = "ARNDCQEGHLKMFPSTWYV";
         char[] fold = HomologyScorer.BuildFoldMap(true, false);
         Check("J38d matrix proves identified-row maxima exactly at the I/L-folded identity class",

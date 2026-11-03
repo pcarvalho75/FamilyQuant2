@@ -43,3 +43,56 @@ and `j38c-reuse-parity.json`. The input copy SHA-256 is
 
 Focused native checks cover fresh-map reuse, complete world JSON and notes,
 stale-membership fallback, and preservation of the public two-argument entry point.
+
+## J38d: separate equivalent search engine
+
+`HomologySearch` is the production entry point. `HomologyMapper` retains the old
+algorithm as the deprecated equivalence reference. All production callers and
+ordinary behavior checks use the new class; only explicit equivalence checks use
+the old one. The progress-aware public search signature and batch reports match.
+
+The identity gate derives the smallest passing integer `m` using the original
+`m / (double)L < MinIdentity` comparison. A window is abandoned only after more
+than `e = L - m` mismatches. Such a window cannot pass or improve a passing maximum.
+
+Auto uses a positional q3 index when `T = L - 2 - 3e` is positive. Each mismatch
+spoils at most three q-grams, so every passing window has at least T matches on its
+own diagonal `(protein, proteinOffset - queryOffset)`. The index folds I to L;
+strict I/L therefore only gains candidates. K/Q equivalence, nonpositive T, an
+unindexed database and the small-database policy retain the brute path. A forced
+legacy SeedIndex request retains the old k-mer candidate set, including its
+documented lossy cases. Positions and protein indices each use 32 bits, without a
+65535 limit. The immutable positional index is cached weakly by database; cancelled
+builds are not published. PAM scoring still visits every full window of every
+protein that passes the exact identity gate.
+
+Query scratch uses a small merge heap over the sorted positional posting lists.
+Subtracting a fixed query offset preserves each list's order. Equal diagonal keys
+arrive consecutively, so exact q-gram votes need only O(query length) scratch, with
+no allocating dictionary, database-sized per-worker array or all-window list.
+The first dictionary prototype completed the DISCOTECH run but reached a 22.163
+GiB peak; it is retained as a memory failure, not accepted performance evidence.
+
+For BestScoreOnly queries with exact containers, a matrix-derived guard requires
+that each row's maximizers are exactly its identity-fold class and that integer
+sums cannot overflow. Only then can the earliest folded exact occurrence replace
+the PAM scan. Wildcard or incompatible-fold rows decline this shortcut. All
+candidate proteins still receive the identity gate so both target-decoy suppression
+flags remain exact, even when only a lower-scoring opposing hit exists. Duplicate
+identifiers decline containment to preserve the reference sort's equal-key behavior.
+
+`CandidatesExamined` on the Auto q3 route counts distinct candidate proteins with
+a qualifying diagonal before the identity gate; `UsedSeedIndex` records that the
+positional filter ran. These work diagnostics can differ. Query/rejection fields,
+hit order, protein, offset, score, both identities, matched sequence, decoy status
+and both competition flags participate in equivalence.
+
+The focused command `--test-homology-search-equivalence` covers every length 1 to
+40 across 192 IL/KQ/gate/best/strategy configurations, canonical adversarial and
+wildcard queries, separate gate/PAM optima, tail windows, rounding boundaries,
+duplicate ranking keys, and offsets/protein indices above 65535. It also runs the
+ordinary homology behavior fixtures. Registered default suites run each fixture
+once. At integrated commit `68b868f`: Release build has zero warnings/errors,
+equivalence/behavior 170 passed, family-world 51 passed and J35 progress 42 passed
+(English and Portuguese, including stored-byte comparisons). Full-data proof and
+timing are recorded only after the remote runs finish.

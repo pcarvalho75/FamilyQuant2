@@ -132,31 +132,11 @@ namespace FamilyQuant.Homology
 
             if (useIndex && options.Strategy != HomologySearchStrategy.SeedIndex)
             {
-                // A passing window has at most e mismatches. Each mismatch spoils at most three
-                // q-grams, leaving at least L-2-3e matching query positions on this exact diagonal.
-                // Folded indexing can add candidates (strict I/L or undefined FASTA symbols),
-                // but the identity check below always uses the caller's actual fold.
+                // A passing window has at most e mismatches. Each mismatch spoils at most
+                // three q-grams on its own diagonal. Exact gate checks follow this lossless filter.
                 int threshold = (int)((long)peptide.Length - 2 - 3L * budget);
-                List<ulong> windows = positionalIndex!.CandidateWindows(peptide, database, threshold, operation);
-                candidatesExamined = 0;
-                int cursor = 0;
-                while (cursor < windows.Count)
-                {
-                    operation?.ThrowIfCancellationRequested();
-                    int proteinIndex = (int)(windows[cursor] >> 32);
-                    string sequence = database.Proteins[proteinIndex].Sequence;
-                    int best = -1, exactOffset = -1;
-                    candidatesExamined++;
-                    do
-                    {
-                        int offset = (int)(uint)windows[cursor++];
-                        int identity = IdentityWithinBudget(foldedQuery, sequence, offset, foldMap, budget);
-                        if (identity > best) best = identity;
-                        if (identity == peptide.Length && exactOffset < 0) exactOffset = offset;
-                    }
-                    while (cursor < windows.Count && (int)(windows[cursor] >> 32) == proteinIndex);
-                    if (best >= required) passed.Add(new GateHit(proteinIndex, best, exactOffset));
-                }
+                passed = positionalIndex!.PassingProteins(peptide, foldedQuery, foldMap, database,
+                    threshold, required, budget, operation, out candidatesExamined);
             }
             else
             {
@@ -540,29 +520,77 @@ namespace FamilyQuant.Homology
                 }
             }
 
-            internal List<ulong> CandidateWindows(string query, HomologyDatabase database, int threshold, OperationContext? operation)
+            private readonly record struct PostingCursor(int QueryOffset, int NextPosting);
+
+            internal List<GateHit> PassingProteins(string query, char[] foldedQuery, char[] fold,
+                HomologyDatabase database, int threshold, int required, int budget, OperationContext? operation,
+                out int candidatesExamined)
             {
-                var counts = new Dictionary<ulong, int>();
+                // Each posting list is ordered by protein and position. Subtracting a fixed query
+                // offset preserves that order for valid windows. Merge the L-2 lists, counting equal
+                // (protein,start) keys consecutively. Scratch is O(L), independent of database size;
+                // no allocating diagonal dictionary, dense position array or all-window list.
+                int grams = query.Length - 2;
+                var buckets = new ulong[grams][];
+                var merge = new PriorityQueue<PostingCursor, ulong>(grams);
                 int visited = 0;
-                for (int queryOffset = 0; queryOffset <= query.Length - 3; queryOffset++)
+                for (int offset = 0; offset < grams; offset++)
                 {
-                    operation?.ThrowIfCancellationRequested();
-                    foreach (ulong occurrence in postings[Pack(query, queryOffset)])
+                    buckets[offset] = postings[Pack(query, offset)];
+                    EnqueueNext(offset, 0);
+                }
+                var passed = new List<GateHit>();
+                int currentProtein = -1, best = -1, exactOffset = -1;
+                candidatesExamined = 0;
+                while (merge.TryDequeue(out PostingCursor cursor, out ulong diagonal))
+                {
+                    int votes = 1;
+                    EnqueueNext(cursor.QueryOffset, cursor.NextPosting);
+                    while (merge.TryPeek(out _, out ulong next) && next == diagonal)
+                    {
+                        merge.TryDequeue(out cursor, out _);
+                        votes++;
+                        EnqueueNext(cursor.QueryOffset, cursor.NextPosting);
+                    }
+                    if (votes < threshold) continue;
+                    int protein = (int)(diagonal >> 32);
+                    if (protein != currentProtein)
+                    {
+                        CompleteProtein();
+                        currentProtein = protein;
+                        best = -1;
+                        exactOffset = -1;
+                        candidatesExamined++;
+                    }
+                    if (best == query.Length) continue; // Exact maximum and its first offset known.
+                    int start = (int)(uint)diagonal;
+                    int identity = IdentityWithinBudget(foldedQuery, database.Proteins[protein].Sequence, start, fold, budget);
+                    if (identity > best) best = identity;
+                    if (identity == query.Length) exactOffset = start;
+                }
+                CompleteProtein();
+                return passed;
+
+                void CompleteProtein()
+                {
+                    if (currentProtein >= 0 && best >= required)
+                        passed.Add(new GateHit(currentProtein, best, exactOffset));
+                }
+                void EnqueueNext(int queryOffset, int index)
+                {
+                    ulong[] bucket = buckets[queryOffset];
+                    while (index < bucket.Length)
                     {
                         if ((++visited & 4095) == 0) operation?.ThrowIfCancellationRequested();
+                        ulong occurrence = bucket[index++];
                         int protein = (int)(occurrence >> 32);
                         int start = (int)(uint)occurrence - queryOffset;
                         if (start < 0 || start > database.Proteins[protein].Sequence.Length - query.Length) continue;
                         ulong diagonal = ((ulong)(uint)protein << 32) | (uint)start;
-                        counts.TryGetValue(diagonal, out int count);
-                        counts[diagonal] = count + 1;
+                        merge.Enqueue(new PostingCursor(queryOffset, index), diagonal);
+                        return;
                     }
                 }
-                var windows = new List<ulong>();
-                foreach (var diagonal in counts)
-                    if (diagonal.Value >= threshold) windows.Add(diagonal.Key);
-                windows.Sort(); // Protein order, then offset; no dictionary-order tie breaking.
-                return windows;
             }
 
             private static byte[] BuildCodes()
