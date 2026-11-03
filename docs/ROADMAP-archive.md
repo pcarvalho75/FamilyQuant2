@@ -416,3 +416,23 @@ Paulo agreed these at the restart, 2026-11-01.
 | Ana's rule needs a family literal | A step can only meet a rule by naming a family, a domain or a keyword in code | The rule becomes a user choice stored in the project, entered once from her file |
 | A subclass cannot be told apart | Peptides shared by every subclass, as in the SVMP catalytic domain | They are reported as "class not resolved", never forced into a class |
 | The full run is too slow for tonight | J0 measures Compute on three RAW files with de novo above two hours | Cache reuse first; report the time to Paulo the same hour |
+
+### W1 Ana's analysis with the corrected scope
+
+| ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
+|---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
+| K3 | Science check, part 1: the two runs' family assignments compared; nothing non-venom pulled in; the 3 new Kunitz and Waprin link choices follow D38 | M | 0.5 | 🟢 | K4 | `RESULT D39-review` part 1 | GR | | 0 | 0 | |
+
+### W3 The report export works and is fast
+
+| ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
+|---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
+| J16a | Figure export's gate failures fixed: the figure details file is written only when a figure is capped, so small projects export exactly as before; the screen test passes | L | 0.3 | 🟢 | J16b | `FIXED J16` with the three checks green | LK | | 0 | 0 | |
+
+### W7 Clear reasons and totals
+
+| ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
+|---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
+| J33a | The panel assignment audit names the scope when it keeps a protein with a linked family out (it said "no reviewed neighbour" for the ten lectins) | L | 0.4 | 🟢 | J33c | A fixture protein gets the scope reason | T2 | | 0 | 0 | |
+| J33b | The scope proposal also offers the commonest tissue phrase among the task's reviewed proteins, read from the database | L | 0.4 | 🟢 | J33c | A fixture's proposal offers its phrase | T2 | | 0 | 0 | |
+
