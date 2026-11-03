@@ -116,6 +116,39 @@ internal static partial class Program
         model.Undo();
         Check("J1d native apply changes the project and Undo restores it", appliedFromScreen && file.FamilyPanel!.Families[0].DisplayName == "Old",
             uiError?.Message ?? string.Empty);
+        var refreshType = typeof(MainWindow).Assembly.GetType("FamilyQuant.PanelSubclassRefresh");
+        var changedMethod = refreshType?.GetMethod("DefinitionsChanged");
+        var refreshMethod = refreshType?.GetMethod("RecomputeIfCurrentAsync", new[] { typeof(bool), typeof(Func<bool>), typeof(Func<Task<bool>>) });
+        Check("J1d subclass refresh coordinator is available", changedMethod != null && refreshMethod != null);
+        if (changedMethod != null && refreshMethod != null)
+        {
+            var before = FamilyPanelValidation.Clone(file.FamilyPanel!);
+            var after = FamilyPanelValidation.Clone(before);
+            after.Families[0].Subclasses[0].RequiredPfam.Add("PF2");
+            bool subclassChanged = (bool)changedMethod.Invoke(null, new object?[] { before, after })!;
+            int runs = 0;
+            Func<Task<bool>> run = () => { runs++; return Task.FromResult(true); };
+            var skipped = (Task<bool>)refreshMethod.Invoke(null, new object[] { subclassChanged, new Func<bool>(() => false), run })!;
+            var applied = (Task<bool>)refreshMethod.Invoke(null, new object[] { subclassChanged, new Func<bool>(() => true), run })!;
+            Check("J1d subclass changes recompute only with current family assignments", subclassChanged && !skipped.GetAwaiter().GetResult()
+                && applied.GetAwaiter().GetResult() && runs == 1);
+            bool familyCurrent = false;
+            int reviews = 0, refreshes = 0;
+            Func<Task> review = () => { reviews++; familyCurrent = true; return Task.CompletedTask; };
+            Func<Task<bool>> refresh = () => { refreshes++; return Task.FromResult(true); };
+            bool both = PanelSubclassRefresh.ReviewThenRecomputeAsync(true, true, () => familyCurrent, () => true, review, refresh).GetAwaiter().GetResult();
+            Check("J1d stale family review precedes subclass recomputation", both && reviews == 1 && refreshes == 1);
+            familyCurrent = false; reviews = refreshes = 0;
+            bool declined = PanelSubclassRefresh.ReviewThenRecomputeAsync(true, true, () => familyCurrent, () => false, review, refresh).GetAwaiter().GetResult();
+            Check("J1d declining family review leaves subclass labels unchanged", !declined && reviews == 0 && refreshes == 0);
+            familyCurrent = false;
+            PanelSubclassRefresh.ReviewThenRecomputeAsync(true, false, () => familyCurrent, () => true, review, refresh).GetAwaiter().GetResult();
+            Check("J1d family-only changes can request family review without a subclass run", reviews == 1 && refreshes == 0);
+            reviews = refreshes = 0; familyCurrent = false;
+            Func<Task> noCommit = () => { reviews++; return Task.CompletedTask; };
+            bool notCommitted = PanelSubclassRefresh.ReviewThenRecomputeAsync(true, true, () => familyCurrent, () => true, noCommit, refresh).GetAwaiter().GetResult();
+            Check("J1d cancelled or incomplete family review does not recompute subclasses", !notCommitted && reviews == 1 && refreshes == 0);
+        }
     }
     private sealed class PanelPfamFixture : IPanelPfamReview
     {
