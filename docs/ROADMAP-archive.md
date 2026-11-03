@@ -168,6 +168,7 @@ Finished steps, moved here from docs/ROADMAP.md. The board shows them as green.
 | Y7 | Busy screen: a polished animated logo wherever the program computes, in the one shared busy overlay, with Cancel and progress kept | M | 0.5 | 🟢 | R3a | Shown in every long operation, both themes; animation stops when the work ends and costs no noticeable CPU; Paulo likes it | RS | not started | 0% | 0% | T+0 |
 | Y8 | Fetch the family world from the program: a screen action with the confirmed scope, Cancel and progress. Today only a command line reaches it | M | 0.7 | 🟢 | R3a | Real project walked through the buttons: fetch, Compute, Database gap, FASTA; Cancel leaves the file as it was | EV | not started | 0% | 0% | T+1 |
 | Y9 | Failure guidance restored: the 46 rows where a user would miss what 1.5 said, such as the share column warning after a failed recalculation | M | 0.7 | 🟢 | R3a | Each fact shown on the normal route, its row closes on an independent read, or it is listed for Paulo | EV | not started | 0% | 0% | T+1 |
+| Y10 | Help > Check for updates: on request, compare this version with the latest public release and open the download page. No automatic install and no data sent | M | 0.7 | 🟢 | R3b | Newer, same, offline and no-release cases tested; the real menu item works | SH | not started | 0% | 0% | T+0 |
 
 ### W3 Ledger, screen by screen
 
@@ -217,4 +218,5 @@ Finished steps, moved here from docs/ROADMAP.md. The board shows them as green.
 | R4b | Final adversarial pass: science and numbers | H | 1 | 🟢 | R4c | KM's verdict | KM | not started | 0% | 0% | T+1 |
 | R4a | Final adversarial pass: code and behaviour | H | 1 | 🟢 | R4c | GR's verdict | GR | not started | 0% | 0% | T+1 |
 | R4c | Every finding fixed and gated | M | 0.5 | R4a | R3b | No open finding | Orchestrator | not started | 0% | 0% | T+2 |
+| R3b | Final proof refresh and full suite on the frozen code | L | 0.2 | R4c, N6s, Y10 | R3c | Every proof current; suite green | Orchestrator | not started | 0% | 0% | T+0 |
 

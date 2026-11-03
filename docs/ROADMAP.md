@@ -85,7 +85,6 @@ Columns: Diff = L, M, H, VH. Hrs = worker hours at measured speed: estimates are
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| Y10 | Help > Check for updates: on request, compare this version with the latest public release and open the download page. No automatic install and no data sent | M | 0.7 | 🟢 | R3b | Newer, same, offline and no-release cases tested; the real menu item works | SH | not started | 0% | 0% | T+0 |
 
 ### W3 Ledger, screen by screen
 
@@ -101,10 +100,9 @@ Columns: Diff = L, M, H, VH. Hrs = worker hours at measured speed: estimates are
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| R3b | Final proof refresh and full suite on the frozen code | L | 0.2 | R4c, N6s, Y10 | R3c | Every proof current; suite green | Orchestrator | not started | 0% | 0% | T+0 |
-| R3c | Release candidate: versions, a release zip, and the program run from that unpacked zip | M | 0.3 | R3b | R5a | The zip opens a saved project on this machine with no install. No install on this machine (Paulo), so a clean machine stays untested | Orchestrator | not started | 0% | 0% | T+0 |
+| R3c | Release candidate: versions, a release zip, and the program run from that unpacked zip | M | 0.3 | 🟢 | R5a | The zip opens a saved project on this machine with no install. No install on this machine (Paulo), so a clean machine stays untested | Orchestrator | not started | 0% | 0% | T+0 |
 | R5a | FamilyQuant 2.0 final published | L | 0 | R3c | R5b | Paulo publishes | Paulo | not started | 0% | 0% | T+0 |
-| R5b | Archive this roadmap | L | 0.1 | R5a | Done | Archive committed | Orchestrator | not started | 0% | 0% | T+1 |
+| R5b | Archive this roadmap | L | 0.1 | R5a | Done | Archive committed | Orchestrator | not started | 0% | 0% | T+0 |
 
 ### W6 Paper numbers (no release depends on these)
 
