@@ -13,10 +13,11 @@ using S = DocumentFormat.OpenXml.Spreadsheet;
 
 namespace FamilyQuant.Tests;
 
-/// <summary>Audits printed numeric tokens against numeric cells, without asserting semantic provenance.</summary>
-internal static class ReportNumberTrace
+/// <summary>Audits numeric equality, preferring the locally named subject and exposing unresolved alternatives.</summary>
+internal static partial class ReportNumberTrace
 {
-    private sealed record SourceCell(string Csv, string Cell, string Column);
+    private sealed record SourceCell(string Csv, string Cell, string Column, SourceRow Row);
+    private sealed record Candidate(SourceCell Source, string Kind);
     private static readonly Regex Tokens = new(
         @"(?<![\p{L}\p{N}_])(?<date>\d{4}-\d{2}-\d{2})(?![\p{L}\p{N}_])|(?<![\p{L}\p{N}_])(?<algorithm>SHA-?256)(?![\p{L}\p{N}_])|(?<![\p{L}\p{N}_])(?<hash>(?=[0-9a-fA-F]{32,}(?![\p{L}\p{N}_]))(?=[0-9a-fA-F]*[a-fA-F])(?=[0-9a-fA-F]*[0-9])[0-9a-fA-F]{32,})|(?<![\p{L}\p{N}_])(?<number>[+-]?(?:(?:\d{1,3}(?:,\d{3})+)|\d+)(?:\.\d+)?(?:[eE][+-]?\d+)?%?)(?![\p{L}\p{N}_])|(?<![\p{L}\p{N}_])(?<identifier>(?=[\p{L}\p{N}_]*[\p{L}_])(?=[\p{L}\p{N}_]*\d)[\p{L}\p{N}_]+)(?![\p{L}\p{N}_])",
         RegexOptions.Compiled | RegexOptions.CultureInvariant);
@@ -40,9 +41,8 @@ internal static class ReportNumberTrace
         if (string.Equals(doc, output, StringComparison.OrdinalIgnoreCase) || string.Equals(workbook, output, StringComparison.OrdinalIgnoreCase)
             || files.Any(f => string.Equals(Path.GetFullPath(f), output, StringComparison.OrdinalIgnoreCase)))
             throw new InvalidOperationException("Trace output must not overwrite the report, workbook or a source CSV.");
-        var exact = new Dictionary<string, SourceCell>(StringComparer.Ordinal);
-        var percentValues = new Dictionary<string, SourceCell>(StringComparer.Ordinal);
-        var fractions = new Dictionary<string, SourceCell>(StringComparer.Ordinal);
+        var exact = new Dictionary<string, List<SourceCell>>(StringComparer.Ordinal);
+        var subjects = new SubjectCatalog();
         foreach (string file in files)
         {
             string relative = Path.GetRelativePath(source, file).Replace(Path.DirectorySeparatorChar, (char)47);
@@ -53,15 +53,12 @@ internal static class ReportNumberTrace
             {
                 row++;
                 if (header == null) { header = cells; continue; }
-                for (int column = 0; column < cells.Length; column++)
-                {
-                    string heading = column < header.Length ? header[column] : string.Empty;
-                    Register(cells[column], relative, ColumnName(column + 1) + row.ToString(CultureInfo.InvariantCulture), heading);
-                }
+                RegisterRow(cells.Select((text, column) => (text, ColumnName(column + 1) + row.ToString(CultureInfo.InvariantCulture),
+                    column < header.Length ? header[column] : string.Empty)), relative);
             }
         }
         if (File.Exists(workbook)) IndexWorkbook();
-        var outputRows = new List<string[]> { new[] { "location", "number", "status", "csv", "cell", "match_kind", "context" } };
+        var outputRows = new List<string[]> { new[] { "location", "number", "status", "csv", "cell", "match_kind", "context", "subject", "candidate_count" } };
         using (var package = WordprocessingDocument.Open(doc, false))
         {
             var main = package.MainDocumentPart ?? throw new InvalidDataException("The document has no main part.");
@@ -75,16 +72,21 @@ internal static class ReportNumberTrace
         using (var writer = new StreamWriter(output, false, new UTF8Encoding(false)))
             foreach (string[] row in outputRows) writer.WriteLine(string.Join(",", row.Select(value => SpreadsheetSafeCsv.Encode(value))));
         int missing = outputRows.Skip(1).Count(row => row[2] == "NOT FOUND");
-        Console.WriteLine($"Report number trace: {outputRows.Count - 1} tokens, {missing} not found. Output: {output}");
+        int ambiguous = outputRows.Skip(1).Count(row => row[2] == "AMBIGUOUS");
+        Console.WriteLine($"Report number trace: {outputRows.Count - 1} tokens, {missing} not found, {ambiguous} ambiguous. Output: {output}");
         return missing == 0 ? 0 : 1;
 
-        void Register(string text, string sourceName, string address, string heading)
+        void RegisterRow(IEnumerable<(string Text, string Address, string Heading)> sourceCells, string sourceName)
         {
-            if (!TryKey(text.Trim(), 0, out string key)) return;
-            var reference = new SourceCell(sourceName, address, heading);
-            exact.TryAdd(key, reference);
-            if (heading.Contains("fraction", StringComparison.OrdinalIgnoreCase)) fractions.TryAdd(key, reference);
-            else percentValues.TryAdd(key, reference);
+            var cells = sourceCells.ToArray();
+            var row = new SourceRow(cells.Select(c => c.Text).ToArray());
+            foreach (var cell in cells)
+            {
+                if (!TryKey(cell.Text.Trim(), 0, out string key)) continue;
+                if (!exact.TryGetValue(key, out var values)) exact.Add(key, values = new());
+                values.Add(new(sourceName, cell.Address, cell.Heading, row));
+                if (!IsRowReference(cell.Heading)) subjects.Add(row);
+            }
         }
 
         void IndexWorkbook()
@@ -103,21 +105,26 @@ internal static class ReportNumberTrace
                 using var reader = DocumentFormat.OpenXml.OpenXmlReader.Create(worksheet);
                 while (reader.Read())
                 {
-                    if (!reader.IsStartElement || reader.ElementType != typeof(S.Cell)) continue;
-                    if (reader.LoadCurrentElement() is not S.Cell cell) throw new InvalidDataException("A supplement cell could not be read.");
-                    var address = CellReference.Match(cell.CellReference?.Value ?? string.Empty);
-                    if (!address.Success || cell.CellFormula != null) continue;
-                    string value = cell.DataType?.Value == S.CellValues.InlineString ? cell.InlineString?.InnerText ?? "" : cell.CellValue?.Text ?? "";
-                    if (cell.DataType?.Value == S.CellValues.SharedString)
+                    if (!reader.IsStartElement || reader.ElementType != typeof(S.Row)) continue;
+                    if (reader.LoadCurrentElement() is not S.Row row) throw new InvalidDataException("A supplement row could not be read.");
+                    var values = new List<(string Text, string Address, string Heading)>();
+                    foreach (var cell in row.Elements<S.Cell>())
                     {
-                        if (!int.TryParse(value, NumberStyles.None, CultureInfo.InvariantCulture, out int index) || index < 0 || index >= shared.Length)
-                            throw new InvalidDataException("A supplement cell has an invalid shared string index.");
-                        value = shared[index];
+                        var address = CellReference.Match(cell.CellReference?.Value ?? string.Empty);
+                        if (!address.Success || cell.CellFormula != null) continue;
+                        string value = cell.DataType?.Value == S.CellValues.InlineString ? cell.InlineString?.InnerText ?? "" : cell.CellValue?.Text ?? "";
+                        if (cell.DataType?.Value == S.CellValues.SharedString)
+                        {
+                            if (!int.TryParse(value, NumberStyles.None, CultureInfo.InvariantCulture, out int index) || index < 0 || index >= shared.Length)
+                                throw new InvalidDataException("A supplement cell has an invalid shared string index.");
+                            value = shared[index];
+                        }
+                        if (cell.DataType?.Value == S.CellValues.Boolean || cell.DataType?.Value == S.CellValues.Error || cell.DataType?.Value == S.CellValues.Date) continue;
+                        string column = address.Groups["column"].Value;
+                        if (address.Groups["row"].Value == "1") headings[column] = value;
+                        else values.Add((value, cell.CellReference!.Value!, headings.GetValueOrDefault(column, "")));
                     }
-                    if (cell.DataType?.Value == S.CellValues.Boolean || cell.DataType?.Value == S.CellValues.Error || cell.DataType?.Value == S.CellValues.Date) continue;
-                    string column = address.Groups["column"].Value;
-                    if (address.Groups["row"].Value == "1") headings[column] = value;
-                    else Register(value, Path.GetFileName(workbook) + "!" + name, cell.CellReference!.Value!, headings.GetValueOrDefault(column, ""));
+                    if (values.Count > 0) RegisterRow(values, Path.GetFileName(workbook) + "!" + name);
                 }
             }
         }
@@ -166,7 +173,7 @@ internal static class ReportNumberTrace
                     string prefix = text.Substring(0, token.Index);
                     string suffix = text.Substring(token.Index + token.Length);
                     string category = Classify(token, prefix, suffix, part);
-                    string sourceCsv = "", sourceCell = "", matchKind = "";
+                    string sourceCsv = "", sourceCell = "", matchKind = "", subject = "", candidateCount = "";
                     bool rowCount = isCaption && dimensions.Success && token.Index == dimensions.Groups["rows"].Index;
                     bool columnCount = isCaption && dimensions.Success && token.Index == dimensions.Groups["columns"].Index;
                     if (rowCount || columnCount)
@@ -180,13 +187,19 @@ internal static class ReportNumberTrace
                     if (category.Length == 0)
                     {
                         bool percent = value.EndsWith('%');
-                        if (TryKey(value, 0, out string key) && (percent ? percentValues : exact).TryGetValue(key, out var found))
-                        { category = "MATCH"; sourceCsv = found.Csv; sourceCell = found.Cell; matchKind = "numeric equality"; }
-                        else if (value.EndsWith('%') && TryKey(value, -2, out key) && fractions.TryGetValue(key, out found))
-                        { category = "MATCH"; sourceCsv = found.Csv; sourceCell = found.Cell; matchKind = "percentage from fraction column"; }
-                        else category = "NOT FOUND";
+                        var candidates = new List<Candidate>();
+                        if (TryKey(value, 0, out string key) && exact.TryGetValue(key, out var equal))
+                            candidates.AddRange(equal.Where(c => !percent || !c.Column.Contains("fraction", StringComparison.OrdinalIgnoreCase))
+                                .Select(c => new Candidate(c, "numeric equality")));
+                        if (percent && TryKey(value, -2, out key) && exact.TryGetValue(key, out var scaled))
+                            candidates.AddRange(scaled.Where(c => c.Column.Contains("fraction", StringComparison.OrdinalIgnoreCase))
+                                .Select(c => new Candidate(c, "percentage from fraction column")));
+                        candidateCount = candidates.Count.ToString(CultureInfo.InvariantCulture);
+                        var resolved = ResolveSubject(candidates, text, token.Index, token.Length, cell, subjects, paragraph);
+                        category = resolved.Status; matchKind = resolved.Reason; subject = resolved.Subject;
+                        if (resolved.Found is { } found) { sourceCsv = found.Source.Csv; sourceCell = found.Source.Cell; }
                     }
-                    outputRows.Add(new[] { location, value, category, sourceCsv, sourceCell, matchKind, text });
+                    outputRows.Add(new[] { location, value, category, sourceCsv, sourceCell, matchKind, text, subject, candidateCount });
                 }
             }
         }
