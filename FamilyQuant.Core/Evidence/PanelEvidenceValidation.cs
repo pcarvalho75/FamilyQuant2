@@ -60,7 +60,7 @@ public static class PanelEvidenceValidation
         var references = PanelEvidenceClassifier.References(file, options);
         if (search.TieMethod != NearestReviewed.ReferenceTieMethod || search.MinQueryAlignedPercent != options.MinQueryAlignedPercent)
             throw new InvalidOperationException("Run a current tie-aware search at the selected coverage gate.");
-        EvidenceApply.ValidateSearch(file, search, references, options, null);
+        EvidenceApply.ValidateSearch(file, search, references, options, null, allowPanelReferences: true);
         var full = new PanelEvidenceClassifier.ClassificationContext(panel, PanelEvidenceClassifier.BuildLinks(panel, references, options));
         var reviewed = file.MyExtendedFastaItems.Select((p, i) => (Protein: p, Index: i))
             .Where(r => !NearestReviewed.IsDecoy(r.Protein) && !SequenceLabels.IsContaminant(r.Protein.SequenceIdentifier)
