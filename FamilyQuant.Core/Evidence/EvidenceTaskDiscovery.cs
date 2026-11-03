@@ -162,7 +162,11 @@ public static class EvidenceTaskDiscovery
 
     internal static void Validate(FamilyClusterFile file, EvidenceTaskChoice choice, IReadOnlyList<string> scope)
     {
-        if (choice.Proposal.SourceFingerprint != SourceFingerprint(file) || choice.Proposal.Provider != "UniProt"
+        string current = SourceFingerprint(file);
+        string recorded = choice.Proposal.SourceFingerprint;
+        bool sourceMatches = recorded == current || recorded == LegacySourceFingerprint(file)
+            || file.LegacyTaskSourceFingerprints?.TryGetValue(recorded, out string? migrated) == true && migrated == current;
+        if (!sourceMatches || choice.Proposal.Provider != "UniProt"
             || choice.Proposal.Release.Length == 0 || choice.Proposal.Clade.TaxonId <= 0 || choice.Proposal.Clade.ScientificName.Length == 0
             || choice.ScopeTerms.Count == 0 || choice.ScopeTerms.Any(string.IsNullOrWhiteSpace)
             || !choice.ScopeTerms.OrderBy(s => s, StringComparer.Ordinal).SequenceEqual(scope.OrderBy(s => s, StringComparer.Ordinal)))
@@ -174,12 +178,41 @@ public static class EvidenceTaskDiscovery
     private static string SourceFingerprint(FamilyClusterFile file)
     {
         using var hash = new LengthPrefixedSha256();
+        // Sort the complete source tuple, including evidence, and retain duplicates. Neither a
+        // family edit nor a display refresh changes the task's protein multiset.
+        var rows = file.MyExtendedFastaItems.Select(p => new[] { p.SequenceIdentifier ?? string.Empty,
+            p.Description ?? string.Empty, p.Sequence ?? string.Empty, JsonSerializer.Serialize(p.Evidence) });
+        foreach (var row in rows.OrderBy(r => r[0], StringComparer.Ordinal).ThenBy(r => r[1], StringComparer.Ordinal)
+            .ThenBy(r => r[2], StringComparer.Ordinal).ThenBy(r => r[3], StringComparer.Ordinal))
+            foreach (string field in row) hash.Append(field);
+        return "set-v2:" + hash.Finish();
+    }
+
+    private static string LegacySourceFingerprint(FamilyClusterFile file)
+    {
+        using var hash = new LengthPrefixedSha256();
         foreach (var protein in file.MyExtendedFastaItems)
         {
             hash.Append(protein.SequenceIdentifier ?? string.Empty); hash.Append(protein.Description ?? string.Empty);
             hash.Append(protein.Sequence ?? string.Empty); hash.Append(JsonSerializer.Serialize(protein.Evidence));
         }
         return hash.Finish();
+    }
+
+    // Bind a legacy task only while its original ordered source is still available on load.
+    // Keep this outside the world snapshot: its task and content hash also identify stored results.
+    internal static void BindLegacySources(FamilyClusterFile file)
+    {
+        var tasks = new[] { file.EvidenceRecipe?.ConfirmedTask, file.EvidenceSource?.FamilyWorld?.Task }
+            .Where(t => t != null && !t.Proposal.SourceFingerprint.StartsWith("set-v2:", StringComparison.Ordinal)).ToArray();
+        if (tasks.Length == 0) return;
+        string legacy = LegacySourceFingerprint(file);
+        foreach (var task in tasks)
+            if (task!.Proposal.SourceFingerprint == legacy)
+            {
+                file.LegacyTaskSourceFingerprints ??= new Dictionary<string, string>(StringComparer.Ordinal);
+                file.LegacyTaskSourceFingerprints[legacy] = SourceFingerprint(file);
+            }
     }
 
     private static bool IsContaminant(FastaItemExtended protein) =>

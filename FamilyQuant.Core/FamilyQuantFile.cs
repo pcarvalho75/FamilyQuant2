@@ -52,6 +52,11 @@ namespace FamilyQuant
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public Evidence.EvidenceProvenance? EvidenceSource { get; set; }
 
+        /// <summary>Verified legacy ordered task hashes bound to the same protein multiset on load.
+        /// Kept outside stored worlds so their content hashes and result provenance remain unchanged.</summary>
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public Dictionary<string, string>? LegacyTaskSourceFingerprints { get; set; }
+
         public List<FastaItemExtended> MyExtendedFastaItems { get; set; } = new List<FastaItemExtended>();
 
         /// <summary>How the current grouping was produced, for display.</summary>
@@ -186,6 +191,7 @@ namespace FamilyQuant
                 }
             }
 
+            Evidence.EvidenceTaskDiscovery.BindLegacySources(loaded);
             return loaded;
         }
 
