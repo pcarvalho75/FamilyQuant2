@@ -2,6 +2,7 @@ using FamilyQuant.Evidence;
 using FamilyQuant.Panels;
 using FamilyQuant.Report.Captions;
 using System;
+using FamilyQuant.Operations;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
@@ -14,7 +15,11 @@ public sealed record ReportStudyFigure(string SectionId, string Title, Analytics
 public sealed record ReportStudyFigurePlan(IReadOnlyList<ReportStudyFigure> Figures,
     IReadOnlyList<ReportFigureAvailability> Unavailable);
 public sealed record ReportStudyFigurePacket(IReadOnlyList<ReportPlacedFigure> Figures,
-    IReadOnlyList<ReportFigureAvailability> Unavailable, IReadOnlyDictionary<string, FigureCaptionInput> CaptionBindings);
+    IReadOnlyList<ReportFigureAvailability> Unavailable, IReadOnlyDictionary<string, FigureCaptionInput> CaptionBindings)
+{
+    public string FigureDetailsCsv { get; init; } = "";
+    public IReadOnlyList<ReportSupplementSheet> FigureDetailSheets { get; init; } = Array.Empty<ReportSupplementSheet>();
+}
 
 /// <summary>Stored-study report figures. No extraction, sequence search, evidence refresh or quantitation is run.</summary>
 public static partial class ReportStudyFigures
@@ -90,12 +95,12 @@ public static partial class ReportStudyFigures
             pooled = CanonicalRows(ringData, threshold, null);
             if (pooled.Families.Count > 0)
             {
-                var pages = Pages(pooled.Families, r => Math.Max(64, 37 + r.Subclasses.Count * 18));
+                var pages = Pages(pooled.Families, FamilySubclassChart.RowHeight);
                 for (int i = 0; i < pages.Count; i++)
                 {
                     var page = Copy(pooled, pages[i]);
                     Add(new(PageFile("family_subclasses", i, pages.Count), new FamilySubclassChart(page),
-                        Math.Max(540, 190 + page.Families.Sum(r => Math.Max(64, 37 + r.Subclasses.Count * 18)))),
+                        FamilySubclassChart.RecommendedHeight(page)),
                         PageTitle("Family subclass contributions, all runs pooled", i, pages.Count));
                 }
             }
@@ -131,19 +136,38 @@ public static partial class ReportStudyFigures
     }
 
     public static ReportStudyFigurePacket Build(QuantManifest manifest, FamilyClusterFile project, string pngFolder,
-        int topProteinsPerPanelFamily = 1, PanelFamilyMap? panelMap = null, FamilyReportThresholdResult? reportGrouping = null)
+        int topProteinsPerPanelFamily = 1, PanelFamilyMap? panelMap = null, FamilyReportThresholdResult? reportGrouping = null,
+        OperationContext? operation = null,
+        int otherFigureCount = 0)
     {
         var culture = CultureInfo.CurrentCulture; var ui = CultureInfo.CurrentUICulture;
         try
         {
             CultureInfo.CurrentCulture = CultureInfo.InvariantCulture; CultureInfo.CurrentUICulture = CultureInfo.InvariantCulture;
             var plan = Plan(manifest, project, topProteinsPerPanelFamily, panelMap, reportGrouping);
-            var placed = plan.Figures.Select(item => new ReportPlacedFigure(item.SectionId,
-                new("figure:" + item.Plot.FileName, item.Title, ExportPng(item), ReportCaptionBuilder.Figure(item.Caption),
-                    (int)(960 * ChartImageExporter.DefaultScale), (int)Math.Round(item.Plot.ScreenHeight * ChartImageExporter.DefaultScale)))).ToArray();
+            int total = plan.Figures.Count + otherFigureCount;
+            if (plan.Figures.Count > 0 || total == 0) operation?.Report("report-prepare-figure", "Preparing report figures", 0, total);
+            var placed = plan.Figures.Select((item, index) =>
+            {
+                operation?.Report("report-prepare-figure", "Figure " + (index + 1).ToString(CultureInfo.InvariantCulture) + " of "
+                    + total.ToString(CultureInfo.InvariantCulture) + ": " + item.Title, index + 1, total);
+                return new ReportPlacedFigure(item.SectionId,
+                    new("figure:" + item.Plot.FileName, item.Title, ExportPng(item), ReportCaptionBuilder.Figure(item.Caption),
+                        (int)(960 * ChartImageExporter.DefaultScale), (int)Math.Round(item.Plot.ScreenHeight * ChartImageExporter.DefaultScale)));
+            }).ToArray();
             Directory.CreateDirectory(pngFolder);
             for (int i = 0; i < placed.Length; i++) File.WriteAllBytes(Path.Combine(pngFolder, plan.Figures[i].Plot.FileName), placed[i].Figure.PngBytes);
-            return new(placed, plan.Unavailable, plan.Figures.ToDictionary(f => "figure:" + f.Plot.FileName, f => f.Caption, StringComparer.Ordinal));
+            string details = global::FamilyQuant.FigureDetailsCsv.Build(plan.Figures.Select(f => f.Plot));
+            File.WriteAllText(Path.Combine(pngFolder, FigureLayout.DetailFileName), details, new System.Text.UTF8Encoding(false));
+            var sheets = plan.Figures.Where(f => f.Plot.Chart is IFigureDetails d && d.DetailNotice.Length > 0).Select((f, i) =>
+            {
+                string id = "figure:" + f.Plot.FileName;
+                var table = ReportCsvTable.Build(id, "Complete figure data: " + f.Title, global::FamilyQuant.FigureDetailsCsv.Build(new[] { f.Plot }),
+                    "Complete native drawing input; the overview's reference/track limit does not change these values or their denominator.");
+                return new ReportSupplementSheet(id, f.SectionId, "Figure data " + (i + 1).ToString(CultureInfo.InvariantCulture), table);
+            }).ToArray();
+            return new(placed, plan.Unavailable, plan.Figures.ToDictionary(f => "figure:" + f.Plot.FileName, f => f.Caption, StringComparer.Ordinal))
+                { FigureDetailsCsv = details, FigureDetailSheets = sheets };
         }
         finally { CultureInfo.CurrentCulture = culture; CultureInfo.CurrentUICulture = ui; }
     }

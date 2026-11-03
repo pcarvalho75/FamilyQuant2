@@ -86,7 +86,7 @@ namespace FamilyQuant.Tests
                     PanelEntryJson("P20003", "Belongs to the alpha family.", alphaBase),
                     PanelEntryJson("P20004", "In the N-terminal section; belongs to the gamma family. In the C-terminal section; belongs to the delta family.", NearestMutate(gammaBase, 5))), "2026_03", null));
             foreach (int? total in new int?[] { 3, null, 3 }) handler.Totals.Enqueue(total);
-            ReferencePanel panel = ReferencePanelFetcher.FetchAndStoreAsync(file, scope, handler).GetAwaiter().GetResult();
+            ReferencePanel panel = ReferencePanelFetcher.FetchAndStoreAsync(file, scope, handler, usePagedComparison: true).GetAwaiter().GetResult();
             Check("each family is asked as a reviewed search, and the next page is followed",
                 handler.Asked.Count == 3 && handler.Asked[0].Contains("(reviewed:true) AND (family:\"Alpha family\")")
                 && handler.Asked[1] == next && handler.Asked[2].Contains("family:\"gamma family\""),
@@ -183,7 +183,7 @@ namespace FamilyQuant.Tests
                 file.MyExtendedFastaItems[0].Evidence!.Keywords = new List<string> { "Chosen" };
                 string before = file.ToJsonText();
                 bool threw = false;
-                try { ReferencePanelFetcher.FetchAndStoreAsync(file, scope, handler).GetAwaiter().GetResult(); }
+                try { ReferencePanelFetcher.FetchAndStoreAsync(file, scope, handler, usePagedComparison: true).GetAwaiter().GetResult(); }
                 catch (Exception) { threw = true; }
                 Check("no panel is made from " + name + ", and the file is unchanged",
                     threw && file.ToJsonText() == before);

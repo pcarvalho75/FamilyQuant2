@@ -88,6 +88,7 @@ public static class ReportSupplementWorkbook
             included.Select(sheet => (IReadOnlyList<string>)new[] { sheet.Name, owners[sheet.OwnerSectionId], sheet.Table.Title,
                 sheet.Id, sheet.Table.Rows.Count.ToString(CultureInfo.InvariantCulture) }).ToArray(), "");
         var all = new[] { (Name: ContentsName, Table: index) }.Concat(included.Select(sheet => (sheet.Name, sheet.Table))).ToArray();
+        operation?.Report("supplement-sheet", "Writing supplement sheets", 0, all.Length);
         using var stream = new MemoryStream();
         using (var package = SpreadsheetDocument.Create(stream, SpreadsheetDocumentType.Workbook, true))
         {
@@ -100,7 +101,8 @@ public static class ReportSupplementWorkbook
             workbook.Workbook.Append(list);
             for (int i = 0; i < all.Length; i++)
             {
-                operation?.Report("supplement-sheet", "Writing supplement worksheet " + all[i].Name, i, all.Length);
+                operation?.Report("supplement-sheet", "Sheet " + (i + 1).ToString(CultureInfo.InvariantCulture) + " of "
+                    + all.Length.ToString(CultureInfo.InvariantCulture) + ": " + all[i].Name, i + 1, all.Length);
                 string relation = "rIdSheet" + (i + 1).ToString(CultureInfo.InvariantCulture);
                 var part = workbook.AddNewPart<WorksheetPart>(relation);
                 WriteSheet(part, all[i].Table, i == 0 ? included : null, operation);
