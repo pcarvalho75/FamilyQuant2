@@ -302,11 +302,11 @@ namespace FamilyQuant.Tests
             Check("and says why nothing arbitrates them for you",
                 help.Contains("presents the evidence and decides nothing")
                 && help.Contains("not on the same scale"));
-            Check("the de novo page quotes the corrected comparable-precursor review set",
-                help.Contains("historical three-run PEAKS de-novo-only baseline")
-                && help.Contains("1,020 passed file + scan + charge")
-                && help.Contains("1,016 remained alternatives")
-                && help.Contains("superseded"),
+            Check("the de novo page explains the current comparable-precursor counters without a sample census",
+                help.Contains("The loaded data determines how many rows share a file and scan")
+                && help.Contains("strict or I/L-folded sequence comparison")
+                && help.Contains("on-screen counters and comparison table for the current source and cutoffs")
+                && !HistoricalSampleCopy.IsMatch(help),
                 help.Length.ToString());
             Check("and still says why the review is not arbitrated automatically",
                 help.Contains("invented threshold dressed as a result"));

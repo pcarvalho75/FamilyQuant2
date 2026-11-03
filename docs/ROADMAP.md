@@ -90,7 +90,6 @@ Columns: Diff = L, M, H, VH. Hrs = worker hours at measured speed: estimates are
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| N6q | Paulo rules on the wording list in one pass | L | 0 | 🟢 | N6r | Paulo's ruling recorded | Paulo | not started | 0% | 0% | T+0 |
 | N6s | Release check passes | L | 0.1 | 🟢 | R3b | `--feature-ledger-release-check` passes | Orchestrator | not started | 0% | 0% | T+0 |
 
 ### W4 Look
@@ -134,6 +133,7 @@ Paulo agreed these at the restart, 2026-11-01.
 | ID | Question | Taken |
 |---|---|---|
 | D14 | Should identity clustering change its coverage rule, merge on shared peptides, or use a reviewed-family veto? | No. Clustering stays as it is, and the measurements ship as a diagnostic the user can see |
+| D29 | Rows that remove something a user could do, and sentences that mention a file | Accepted as lost from 2.0, all still in 1.5: running extraction or partition without a project, the three-way partition bar and its CSV, the RAW preview before computing. Also accepted: the wait during family attribution, and the contaminant rule of D15. Sentences tagged as file rows only because they mention a file are wording rows (Rule 5). Five dropped messages are restored in R4c, among them that the project is not saved yet. Paulo, 11-02 |
 | D28 | Order of the end game | Freeze when Y9 lands, since the ledger work after it touches no product code. The two final passes then run at once beside the ledger work, and the final refresh and release candidate come after their fixes, so they run only once. Desk, 11-02, to finish today |
 | D27 | Rows that hold no fact of their own, number formats, and superseded rows | Rule 4: they close with the reason recorded, and none is a DROP. Fragments and formats with the same precision today close as a group. A superseded row closes only if it concerns wording or layout; one that removes something the user could do goes to Paulo one by one. The Recalculate colour cue, the Compute XIC sentence, the keyboard focus style, four main-window formats and two unreachable warnings are accepted. Paulo, 11-02 |
 | D26 | Failure guidance that got shorter in the port | Restored in Y9 before the freeze. Independent fact checks found 46 rows a user would miss. Desk, 11-02 |

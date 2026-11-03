@@ -5,324 +5,324 @@
   "runs": [
     {
       "id": "EV-actual-commands",
-      "command": "C:\\FamilyQuant-gate\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --isolated-native-proof --prove-denovo-commands D:/FamilyQuant-data/out-shell/N3/source D:/FamilyQuant-data/reference-1.5.0.6/app C:/Users/paulo/Desktop/FamilyQuant/PLVI.sepr2 D:/FamilyQuant-data/out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands \u00222026-11-02 14:07:10 -0800\u0022",
-      "executedAt": "2026-11-02 14:07:10 -0800",
-      "commit": "4d28dbcc530f7cccc9dff5a9df676924c4b558f8",
+      "command": "C:\\FamilyQuant-gate\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --isolated-native-proof --prove-denovo-commands D:/FamilyQuant-data/out-shell/N3/source D:/FamilyQuant-data/reference-1.5.0.6/app C:/Users/paulo/Desktop/FamilyQuant/PLVI.sepr2 D:/FamilyQuant-data/out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands \u00222026-11-02 15:54:30 -0800\u0022",
+      "executedAt": "2026-11-02 15:54:30 -0800",
+      "commit": "eb0acabd982305bfb16fd8d5dd5d62c9f74b37c5",
       "artifacts": [
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\canonical-command-data.json",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\canonical-command-data.json",
           "sha256": "B8AF106F117E158D43A493F80594629894A815EF3708E08374CBF4EB0E8A55E9"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\changed-copy-facts-41.json",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\changed-copy-facts-41.json",
           "sha256": "81FE8205331B7ED5E04C0E2976A3B6B9353511876C21A964D42607B868DF991B"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\command-probe.json",
-          "sha256": "0DB7E124AC8ACB54356A7E262EF9FD845CE0E2A55C5F2514552F55E77F7FA221"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\command-probe.json",
+          "sha256": "42ADB8DB067D476357261E3EFD8899A3455188DC29B5D641F4C9E38D4BAC2C97"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\current-overlap.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\current-overlap.csv",
           "sha256": "18079E7C827227AD1368FC52BF7778724F9C3C20548B7DECA691C868880393F9"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\current-review.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\current-review.csv",
           "sha256": "80A651CC3199752C8B2BA80EF57457418EBAFDD2EA7EEBA89393B168E0EFF0B8"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\current-summary.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\current-summary.csv",
           "sha256": "3EE9B927F77A7F06D8482CD27C286769907907764CFA2C7E738171F04174039F"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\frozen-overlap.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\frozen-overlap.csv",
           "sha256": "18079E7C827227AD1368FC52BF7778724F9C3C20548B7DECA691C868880393F9"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\frozen-review.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\frozen-review.csv",
           "sha256": "80A651CC3199752C8B2BA80EF57457418EBAFDD2EA7EEBA89393B168E0EFF0B8"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\frozen-summary.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\frozen-summary.csv",
           "sha256": "3EE9B927F77A7F06D8482CD27C286769907907764CFA2C7E738171F04174039F"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\execution.log",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\execution.log",
           "sha256": "FDE3A07311D51FF60E5DAE63E8911BB692196EE92290CDB6EC706E12E03B38CD"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\executed\\FamilyQuant.Core_DeNovo_DeNovoBatchExtractor.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\executed\\FamilyQuant.Core_DeNovo_DeNovoBatchExtractor.cs",
           "sha256": "0FFA340223DED2A7D9C9F2AB64B822A0188C9002D81990A2D0DFAB95CB9CBE34"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\executed\\FamilyQuant.Core_DeNovo_DeNovoFilter.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\executed\\FamilyQuant.Core_DeNovo_DeNovoFilter.cs",
           "sha256": "BF5AD5FF6DC42EC345724E0F08918A1FE6C79F08FC4C139FDD29183036444518"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\executed\\FamilyQuant.Core_DeNovo_DeNovoReconciler.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\executed\\FamilyQuant.Core_DeNovo_DeNovoReconciler.cs",
           "sha256": "E773452CA224E76B70017F184E502BD1ED9B6D1E9E40CE28DE31FF512226E105"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\executed\\FamilyQuant.Core_DeNovo_DeNovoReconciliationReport.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\executed\\FamilyQuant.Core_DeNovo_DeNovoReconciliationReport.cs",
           "sha256": "3AF07869DAEB11B28A2CD0FCD655F1523EB00BAD3105B0C1C73D6F57802CE0E1"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\executed\\FamilyQuant.Core_DeNovo_DeNovoScoreScatterStudy.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\executed\\FamilyQuant.Core_DeNovo_DeNovoScoreScatterStudy.cs",
           "sha256": "0CF9E125369DBF6B00119919BF6326198B1A690100BBDC785D9698CDF5935E7B"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\executed\\FamilyQuant.Core_DeNovo_DeNovoSource.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\executed\\FamilyQuant.Core_DeNovo_DeNovoSource.cs",
           "sha256": "F5D28EB3D7DC60C34D4288ED4C55EBB7C8878D8ECC015842B907469BC4267D3C"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\executed\\FamilyQuant.Core_DeNovo_DeNovoTalkComparison.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\executed\\FamilyQuant.Core_DeNovo_DeNovoTalkComparison.cs",
           "sha256": "F6A1DF69CC6F843C525000456D59ECE1BBDD7C012A350744EC36B8FBB26100FE"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\executed\\FamilyQuant.Core_DeNovo_DeNovoUnionResolver.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\executed\\FamilyQuant.Core_DeNovo_DeNovoUnionResolver.cs",
           "sha256": "01404EB835853E821A9C8F95487E6D3704CE7C874677FFFEC54DBBCF22235DB8"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\executed\\FamilyQuant.Core_DeNovo_DeNovoVariantComparison.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\executed\\FamilyQuant.Core_DeNovo_DeNovoVariantComparison.cs",
           "sha256": "08767B50B96AE4D5F0F955837E9092C3E8505040B345DF43703D6B611795C1D7"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\executed\\FamilyQuant.Core_DeNovo_DeNovoXicCache.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\executed\\FamilyQuant.Core_DeNovo_DeNovoXicCache.cs",
           "sha256": "D63E0B9022082142131FA26E1E050BA705133F492761C1D8C97321E4B7CC2B5B"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\executed\\FamilyQuant.Core_DeNovo_DeNovoXicExtractor.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\executed\\FamilyQuant.Core_DeNovo_DeNovoXicExtractor.cs",
           "sha256": "0542D9A4F01298D622F037CBC4DA7F6CEF9E7E743A0D2B0D5CCEA4E75FB48701"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\executed\\FamilyQuant.Core_DeNovo_ExtractionCacheJson.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\executed\\FamilyQuant.Core_DeNovo_ExtractionCacheJson.cs",
           "sha256": "02449AE15CDD325AAF5F974F5D867567194909661D77F1A646FE8E82430816BD"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\executed\\FamilyQuant.Core_DeNovo_IdentifiedQuantExtractor.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\executed\\FamilyQuant.Core_DeNovo_IdentifiedQuantExtractor.cs",
           "sha256": "1486F481B7126DA72C7D859CF4A78A4B5F0866AB6682BC9587054B269A62CD0A"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\executed\\FamilyQuant.Core_DeNovo_Inspection_DeNovoInspectionSelection.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\executed\\FamilyQuant.Core_DeNovo_Inspection_DeNovoInspectionSelection.cs",
           "sha256": "0794F5B5FBF37B0B76441D72137DCBDC5CE940FB5BB8DE33B6BFA8FF766BB699"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\executed\\FamilyQuant.Core_DeNovo_Inspection_DeNovoOperationResults.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\executed\\FamilyQuant.Core_DeNovo_Inspection_DeNovoOperationResults.cs",
           "sha256": "23FC52E7A1D98ECA2824BBF4BAD120350536C216982F3099A7749197263056AC"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\executed\\FamilyQuant.Core_DeNovo_Inspection_DeNovoReviewTableBuilder.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\executed\\FamilyQuant.Core_DeNovo_Inspection_DeNovoReviewTableBuilder.cs",
           "sha256": "DB8A3266573432441CB756DB495476B2F35BC815D6C638F6A8503877E04CA4F8"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\executed\\FamilyQuant.Core_DeNovo_Inspection_ReconciliationModels.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\executed\\FamilyQuant.Core_DeNovo_Inspection_ReconciliationModels.cs",
           "sha256": "2696D1E3D699A59C63DDBC65B63642337A5082566B7847C40C499F282C5FFDDE"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\executed\\FamilyQuant.Core_DeNovo_Inspection_ReviewQueueRow.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\executed\\FamilyQuant.Core_DeNovo_Inspection_ReviewQueueRow.cs",
           "sha256": "3D4BEB65C2F217737E3033233BAB7FB283A15F6558E75A2D95B3C923EA2E4D18"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\executed\\FamilyQuant.Core_DeNovo_Ms1EnvelopeDetector.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\executed\\FamilyQuant.Core_DeNovo_Ms1EnvelopeDetector.cs",
           "sha256": "79CA110CF12B1603F371147540B1682854EE4671584F76DA65613F074DCE601F"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\executed\\FamilyQuant.Core_DeNovo_NativeQuantFractions.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\executed\\FamilyQuant.Core_DeNovo_NativeQuantFractions.cs",
           "sha256": "1B584F17E5D5796993F127A35D75354F178185E9C84536C96198D50908FCCB4E"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\executed\\FamilyQuant.Core_DeNovo_PatternLabRunQuants.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\executed\\FamilyQuant.Core_DeNovo_PatternLabRunQuants.cs",
           "sha256": "98159D7F59E7860B3FBB8A9CBD97843AD91DDA27D1C1F212AD837832C6214A1C"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\executed\\FamilyQuant.Core_DeNovo_PeptideMass.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\executed\\FamilyQuant.Core_DeNovo_PeptideMass.cs",
           "sha256": "FD0BF2EDA5218306BE5162913AC5547EC33D02C124679CE42DBB561A8A5CCA2F"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\executed\\FamilyQuant.Core_DeNovo_PeptidoformIdentity.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\executed\\FamilyQuant.Core_DeNovo_PeptidoformIdentity.cs",
           "sha256": "1AE27580D2FD1A5325D0FD126414E855EFF0A14E3EC4CB8FBA875840EB48D9B9"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\executed\\FamilyQuant.Core_DeNovo_PsmDeNovoCounterpartStudy.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\executed\\FamilyQuant.Core_DeNovo_PsmDeNovoCounterpartStudy.cs",
           "sha256": "12BCAE2FC33D66EC02E47E6FA96A6BBB2F8E597B1B7C6E9A6B22AE561A81AB2C"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\executed\\FamilyQuant.Core_DeNovo_RawScanChargeReader.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\executed\\FamilyQuant.Core_DeNovo_RawScanChargeReader.cs",
           "sha256": "F2F007BE43A50F27CFCE92CC144E46B618BCB3A0EA79832C7A0CCFA65C6877E7"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\executed\\FamilyQuant.Core_DeNovo_Readers_DeNovoSourceRows.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\executed\\FamilyQuant.Core_DeNovo_Readers_DeNovoSourceRows.cs",
           "sha256": "14F011D7B49E7F486F87D6FECB385DF819EE8CF8D929E3C22F577DE884AE49B2"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\executed\\FamilyQuant.Core_DeNovo_Readers_PeaksCsvReader.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\executed\\FamilyQuant.Core_DeNovo_Readers_PeaksCsvReader.cs",
           "sha256": "490B9BA0778AE4A884AC8E62C5A9A6AF5764DD90BE45B9F416990D5DB7174809"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\executed\\FamilyQuant.Core_DeNovo_Readers_PeaksDatabasePsmReader.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\executed\\FamilyQuant.Core_DeNovo_Readers_PeaksDatabasePsmReader.cs",
           "sha256": "BAE88C16509A545D6CB93433B533ABA3F2182128AE7CE3A6DDB2474D3F95E03F"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\executed\\FamilyQuant.Core_DeNovo_ReferenceEnvelopeEstimator.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\executed\\FamilyQuant.Core_DeNovo_ReferenceEnvelopeEstimator.cs",
           "sha256": "FDC3528CF45CE9023D8576FD87680DFED3F20E2F530DCEC11EA8C78D38458080"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\executed\\FamilyQuant.Core_DeNovo_SeproPsmAdapter.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\executed\\FamilyQuant.Core_DeNovo_SeproPsmAdapter.cs",
           "sha256": "00B9CFF5C8A4A5CFD7714F3CC076FF44DB00BAAB13EB02153A11B890F9696C40"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\executed\\FamilyQuant.Core_DeNovo_SetNoveltyStudy.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\executed\\FamilyQuant.Core_DeNovo_SetNoveltyStudy.cs",
           "sha256": "7CDACE7E392B954DC041BF04C9FF371703EE6209650EA56F78400961AD232BBA"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\executed\\FamilyQuant.Core_DeNovo_SpectrumComparisonTable.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\executed\\FamilyQuant.Core_DeNovo_SpectrumComparisonTable.cs",
           "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\executed\\FamilyQuant.Core_DeNovo_SpreadsheetSafeCsv.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\executed\\FamilyQuant.Core_DeNovo_SpreadsheetSafeCsv.cs",
           "sha256": "B654DE265D6C7D459797EC1296DBB0938B16BD6BB8745C30B4BC740DC148E25C"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\executed\\FamilyQuant.Core_DeNovo_ThreeWayPartition.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\executed\\FamilyQuant.Core_DeNovo_ThreeWayPartition.cs",
           "sha256": "7173311D16275646CD22A9FE44B1396CBE5502CD6AF5964833D913B8A33E9E9D"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\executed\\FamilyQuant.Core_DeNovoInspectionAudit.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\executed\\FamilyQuant.Core_DeNovoInspectionAudit.cs",
           "sha256": "74173BCE06F06B38AFDD0DBCE03FDD2632A740A9BC36FD98085D44B0A7CF1BF5"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\executed\\FamilyQuant.Core_DeNovoScreenOperations.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\executed\\FamilyQuant.Core_DeNovoScreenOperations.cs",
           "sha256": "A9E88AEDD45115A5A0859EC2F03EF367C6C1929B52DA3B2AE204CE56BED7FC61"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\executed\\FamilyQuant.Core_DeNovoSourceImport.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\executed\\FamilyQuant.Core_DeNovoSourceImport.cs",
           "sha256": "33826F8F9471758ED81568545C746982676C633283CA2CB1471F591730AF24BD"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\executed\\FamilyQuant.Core_Homology_HomologyDatabase.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\executed\\FamilyQuant.Core_Homology_HomologyDatabase.cs",
           "sha256": "76F3BBC4E4939AC898C463E9F17BA92B8C2A1683B393BD26BE187A58CF3F5F54"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\executed\\FamilyQuant.Core_Homology_HomologyMapper.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\executed\\FamilyQuant.Core_Homology_HomologyMapper.cs",
           "sha256": "9FCFB502DB7D53F958FCB7677B8A0EB522C91797FF0CE65B46676B5B200160B9"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\executed\\FamilyQuant.Core_Homology_HomologyOptions.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\executed\\FamilyQuant.Core_Homology_HomologyOptions.cs",
           "sha256": "514F26D4E6B2B4B24C2BF0F875BFC9646B8F798FA1BF00439ED0BD8298B481E8"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\executed\\FamilyQuant.Core_Homology_HomologyResult.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\executed\\FamilyQuant.Core_Homology_HomologyResult.cs",
           "sha256": "54E0F6B6629EDF1E232C4CCF8B1E1EBAB30CBFB9F01564A12EE278F5797B92C4"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\executed\\FamilyQuant.Core_Homology_HomologyScorer.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\executed\\FamilyQuant.Core_Homology_HomologyScorer.cs",
           "sha256": "750D89790E3163B1E758BAD1C0DB86BCBDF4873B633376EA38B8BFBED0A42075"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\executed\\FamilyQuant.Core_Homology_PamMatrix.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\executed\\FamilyQuant.Core_Homology_PamMatrix.cs",
           "sha256": "E3C4B3D3BA90EC9E57452171AFA23A6884D6C673AC78A2345B5E28F53A800CE6"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\executed\\FamilyQuant_AppOperationFiles.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\executed\\FamilyQuant_AppOperationFiles.cs",
           "sha256": "6E1FB949218EADF56A159B520AFD6912D6322578C32FA8BF70DB0000E6D72BD6"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\executed\\FamilyQuant_DeNovoControl.Compatibility.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\executed\\FamilyQuant_DeNovoControl.Compatibility.cs",
           "sha256": "BB45BCACC7C63869B4B22F63EE16C6572D12F7F2A2C9B589686B2DE2BC15479C"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\executed\\FamilyQuant_DeNovoControl.Dialogs.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\executed\\FamilyQuant_DeNovoControl.Dialogs.cs",
           "sha256": "B714D7D9AA689F30D9EDFA2479D373824358521783DBBD267E209E34E91884A1"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\executed\\FamilyQuant_DeNovoControl.Files.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\executed\\FamilyQuant_DeNovoControl.Files.cs",
           "sha256": "A894899A775DE9BC762B0069DCE26314631BE060B82892F480A5EA3D88B7CD14"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\executed\\FamilyQuant_DeNovoControl.Tables.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\executed\\FamilyQuant_DeNovoControl.Tables.cs",
           "sha256": "5B2292689F03600BD8FB482588343C0A24DF674B1A4D909588FD9BF747BA296A"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\executed\\FamilyQuant_DeNovoControl.xaml",
-          "sha256": "4782956D87A77EB08ECC8C5E574479F33E11F4BBCF3058BEBBF6ED7CF815BA4A"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\executed\\FamilyQuant_DeNovoControl.xaml",
+          "sha256": "B2AE1EB5D56BD53AC8573887D15349795DA7B14CF5FFE6667F625C3DB03CE6D7"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\executed\\FamilyQuant_DeNovoControl.xaml.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\executed\\FamilyQuant_DeNovoControl.xaml.cs",
           "sha256": "4BB5BDADAE2498ADD500A9A5DBBE93748A1D7F8707950CD749EF0F3BD6B770A1"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\executed\\FamilyQuant_DeNovoFilterControl.xaml",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\executed\\FamilyQuant_DeNovoFilterControl.xaml",
           "sha256": "C5F5FD8218E9862B6C3279B39686CBB8E287F809D11483BF4B20BD9EF6381E41"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\executed\\FamilyQuant_DeNovoFilterControl.xaml.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\executed\\FamilyQuant_DeNovoFilterControl.xaml.cs",
           "sha256": "40DA440AE1CCBE68A7A99D261D7BAE87B103D6EB11DFC862CA26B309BA018108"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\executed\\FamilyQuant_DeNovoFilterViewModel.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\executed\\FamilyQuant_DeNovoFilterViewModel.cs",
           "sha256": "8F34872C345515C7D40A1D068628195740FF7C7C3832E2B598976BB230B20F10"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\executed\\FamilyQuant_DeNovoSession.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\executed\\FamilyQuant_DeNovoSession.cs",
           "sha256": "B23BD99957ED0E1DE9F740C5F51F9B9099BC208556C7DD2FC855DBBFD6094040"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\executed\\FamilyQuant_DeNovoViewModel.Readiness.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\executed\\FamilyQuant_DeNovoViewModel.Readiness.cs",
           "sha256": "7910326977351A2F5DEC53EB4265AC4ACEB88CDB9EBAD9BB284CCA1D58CA215F"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\executed\\FamilyQuant_DeNovoViewModel.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\executed\\FamilyQuant_DeNovoViewModel.cs",
           "sha256": "2FFF30BF700616645D36D91A25F12D038DDD10442BE65A6288CE06B5855B35C0"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\executed\\FamilyQuant_ShellDialogs.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\executed\\FamilyQuant_ShellDialogs.cs",
           "sha256": "BADA9EAE7CCA3011F34E56A17D71DA7304EAB666D61D06E0C53DA532589AAA76"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\executed\\FamilyQuant.Tests_Program.DeNovoCommandProbe.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\executed\\FamilyQuant.Tests_Program.DeNovoCommandProbe.cs",
           "sha256": "B8C6DAC56C2F6DA74202F8659842EC9BF9C5D4BE247955F5DACCED0A8D340E54"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\executed\\FamilyQuant.Tests_Program.DeNovoCommandEvidence.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\executed\\FamilyQuant.Tests_Program.DeNovoCommandEvidence.cs",
           "sha256": "A7F1786A3CA33DB9FB3C8D08C470D54042BB79FAB42761BB977B486CCA44DCF9"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\executed\\FamilyQuant.Tests_Program.DeNovoChangedCopyFacts.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\executed\\FamilyQuant.Tests_Program.DeNovoChangedCopyFacts.cs",
           "sha256": "6D9731C84E226768E534EDF5CB7BEB0E2B4470253E1447FE63394E84CA123AF6"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\executed\\FamilyQuant.Tests_NativeOwnedDialogDriver.cs",
-          "sha256": "69B79A7DED9DAABE175EC5FA4DE5F1C6BA8EEC63B12BFD0D035D299DC618701F"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\executed\\FamilyQuant.Tests_NativeOwnedDialogDriver.cs",
+          "sha256": "26D033FCB83984AE8F13651C7F6CEDB4B991EFB701826DD407010F34AE434E6C"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\executed\\FamilyQuant.Tests_NativeProofDesktop.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\executed\\FamilyQuant.Tests_NativeProofDesktop.cs",
           "sha256": "E00BADD2FB785CB1750FDD704AF7F9D93C040CD1A5BE59ABDF864C91FEE7B3AF"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\executed\\FamilyQuant.Tests_Program.Commands.DeNovoLedger.cs",
-          "sha256": "DFBB8DC2DA159B3AD4E3A3703E2C40A9F3DCA9759670147CFF80057A61B58338"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\executed\\FamilyQuant.Tests_Program.Commands.DeNovoLedger.cs",
+          "sha256": "B4116A6A47B9A014A4E1ED11F17B94E802EFB7151158BDAC6DE1F226557F741F"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\executed\\FamilyQuant.Tests.dll",
-          "sha256": "AF6B483E2C3E34036AD088F4ECCBB6B316270C6B911EA6D31A7EA222DB761AE2"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\executed\\FamilyQuant.Tests.dll",
+          "sha256": "D0E5572100A55A7C66F38100607A315B72ED15B010ABF8F817864CFAA9B46D5E"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\executed\\FamilyQuant2.dll",
-          "sha256": "8511AB784ACA1C6C07FD728C1CEB53E76C60D9A4A7EBE381AF9759D294F15C59"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\executed\\FamilyQuant2.dll",
+          "sha256": "F7ED28D6D08D1DB4C5291451C7B0B434E7C0AADA8D9D27E22E06B3256275E25B"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\executed\\FamilyQuant.Core.dll",
-          "sha256": "743F2A4D78BAFC24B294E887663A75FE5A7BB4DA8B0ACF95EBF52F5BEE2DC116"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\executed\\FamilyQuant.Core.dll",
+          "sha256": "BD748D986CA2EAB684305F700DE4F9A5F8A4A56F9B4822E02DDB4E8E21DF9D64"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\executed\\FamilyQuant.dll",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\executed\\FamilyQuant.dll",
           "sha256": "D764488C923945285E03B338E5A91BF28106A35B11AB465D8E2B23D125F03FD8"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\executed\\frozen_FamilyQuant_DeNovoControl.xaml",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\executed\\frozen_FamilyQuant_DeNovoControl.xaml",
           "sha256": "E7F6B72A22E658A4CFCBD4BD6FDC3DF42AAC0F0DEBAA5EF8B3CA337B736F51BF"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\executed\\frozen_FamilyQuant_DeNovoControl.xaml.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\executed\\frozen_FamilyQuant_DeNovoControl.xaml.cs",
           "sha256": "16D617F16382298A4A60238100D58B65CE03A6562C4B3F0B5B37C629E70A40BF"
         }
       ],
@@ -576,7 +576,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "FamilyQuant.DeNovoControl.ButtonBrowsePeaksDirectory",
-          "sha256": "4782956D87A77EB08ECC8C5E574479F33E11F4BBCF3058BEBBF6ED7CF815BA4A"
+          "sha256": "B2AE1EB5D56BD53AC8573887D15349795DA7B14CF5FFE6667F625C3DB03CE6D7"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -625,7 +625,7 @@
           "kind": "test",
           "target": "DeNovoCommandEvidence",
           "assertion": "Actual command observation FQ15-46AF78C30619: frozen/current ButtonBrowsePeaksDirectory success route",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\execution.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\execution.log",
           "inspectedBy": ""
         }
       ],
@@ -879,7 +879,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "FamilyQuant.DeNovoControl.ButtonBrowsePeaksDirectory_Click",
-          "sha256": "4782956D87A77EB08ECC8C5E574479F33E11F4BBCF3058BEBBF6ED7CF815BA4A"
+          "sha256": "B2AE1EB5D56BD53AC8573887D15349795DA7B14CF5FFE6667F625C3DB03CE6D7"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -928,7 +928,7 @@
           "kind": "test",
           "target": "DeNovoCommandEvidence",
           "assertion": "Actual command observation FQ15-DEE484B58160: frozen/current ButtonBrowsePeaksDirectory success route",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\execution.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\execution.log",
           "inspectedBy": ""
         }
       ],
@@ -1182,7 +1182,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "FamilyQuant.DeNovoControl.ButtonLoadAndFilter",
-          "sha256": "4782956D87A77EB08ECC8C5E574479F33E11F4BBCF3058BEBBF6ED7CF815BA4A"
+          "sha256": "B2AE1EB5D56BD53AC8573887D15349795DA7B14CF5FFE6667F625C3DB03CE6D7"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -1231,7 +1231,7 @@
           "kind": "test",
           "target": "DeNovoCommandEvidence",
           "assertion": "Actual command observation FQ15-506F32502C21: frozen/current ButtonLoadAndFilter success route",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\execution.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\execution.log",
           "inspectedBy": ""
         }
       ],
@@ -1485,7 +1485,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "FamilyQuant.DeNovoControl.ButtonLoadAndFilter_Click",
-          "sha256": "4782956D87A77EB08ECC8C5E574479F33E11F4BBCF3058BEBBF6ED7CF815BA4A"
+          "sha256": "B2AE1EB5D56BD53AC8573887D15349795DA7B14CF5FFE6667F625C3DB03CE6D7"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -1534,7 +1534,7 @@
           "kind": "test",
           "target": "DeNovoCommandEvidence",
           "assertion": "Actual command observation FQ15-262AE3B154CA: frozen/current ButtonLoadAndFilter success route",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\execution.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\execution.log",
           "inspectedBy": ""
         }
       ],
@@ -1788,7 +1788,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "FamilyQuant.DeNovoControl.ButtonBrowseSeproPackage",
-          "sha256": "4782956D87A77EB08ECC8C5E574479F33E11F4BBCF3058BEBBF6ED7CF815BA4A"
+          "sha256": "B2AE1EB5D56BD53AC8573887D15349795DA7B14CF5FFE6667F625C3DB03CE6D7"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -1837,7 +1837,7 @@
           "kind": "test",
           "target": "DeNovoCommandEvidence",
           "assertion": "Actual command observation FQ15-DD230CC1D377: frozen/current ButtonBrowseSeproPackage success route",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\execution.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\execution.log",
           "inspectedBy": ""
         }
       ],
@@ -2091,7 +2091,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "FamilyQuant.DeNovoControl.ButtonBrowseSeproPackage_Click",
-          "sha256": "4782956D87A77EB08ECC8C5E574479F33E11F4BBCF3058BEBBF6ED7CF815BA4A"
+          "sha256": "B2AE1EB5D56BD53AC8573887D15349795DA7B14CF5FFE6667F625C3DB03CE6D7"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -2140,7 +2140,7 @@
           "kind": "test",
           "target": "DeNovoCommandEvidence",
           "assertion": "Actual command observation FQ15-44CB1EE1D17F: frozen/current ButtonBrowseSeproPackage success route",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\execution.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\execution.log",
           "inspectedBy": ""
         }
       ],
@@ -2394,7 +2394,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "FamilyQuant.DeNovoControl.ButtonReconcile",
-          "sha256": "4782956D87A77EB08ECC8C5E574479F33E11F4BBCF3058BEBBF6ED7CF815BA4A"
+          "sha256": "B2AE1EB5D56BD53AC8573887D15349795DA7B14CF5FFE6667F625C3DB03CE6D7"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -2443,7 +2443,7 @@
           "kind": "test",
           "target": "DeNovoCommandEvidence",
           "assertion": "Actual command observation FQ15-59FD7F62DA2D: frozen/current ButtonReconcile success route",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\execution.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\execution.log",
           "inspectedBy": ""
         }
       ],
@@ -2697,7 +2697,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "FamilyQuant.DeNovoControl.ButtonReconcile_Click",
-          "sha256": "4782956D87A77EB08ECC8C5E574479F33E11F4BBCF3058BEBBF6ED7CF815BA4A"
+          "sha256": "B2AE1EB5D56BD53AC8573887D15349795DA7B14CF5FFE6667F625C3DB03CE6D7"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -2746,7 +2746,7 @@
           "kind": "test",
           "target": "DeNovoCommandEvidence",
           "assertion": "Actual command observation FQ15-41E9B72D15A8: frozen/current ButtonReconcile success route",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\execution.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\execution.log",
           "inspectedBy": ""
         }
       ],
@@ -3000,7 +3000,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "FamilyQuant.DeNovoControl.ButtonExportSummary",
-          "sha256": "4782956D87A77EB08ECC8C5E574479F33E11F4BBCF3058BEBBF6ED7CF815BA4A"
+          "sha256": "B2AE1EB5D56BD53AC8573887D15349795DA7B14CF5FFE6667F625C3DB03CE6D7"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -3049,7 +3049,7 @@
           "kind": "test",
           "target": "DeNovoCommandEvidence",
           "assertion": "Actual command observation FQ15-14FBFA82D87C: frozen/current ButtonExportSummary success route",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\execution.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\execution.log",
           "inspectedBy": ""
         }
       ],
@@ -3303,7 +3303,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "FamilyQuant.DeNovoControl.ButtonExportSummary_Click",
-          "sha256": "4782956D87A77EB08ECC8C5E574479F33E11F4BBCF3058BEBBF6ED7CF815BA4A"
+          "sha256": "B2AE1EB5D56BD53AC8573887D15349795DA7B14CF5FFE6667F625C3DB03CE6D7"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -3352,7 +3352,7 @@
           "kind": "test",
           "target": "DeNovoCommandEvidence",
           "assertion": "Actual command observation FQ15-BA54B9A61BCA: frozen/current ButtonExportSummary success route",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\execution.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\execution.log",
           "inspectedBy": ""
         }
       ],
@@ -3606,7 +3606,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "FamilyQuant.DeNovoControl.ButtonExportReviewQueue",
-          "sha256": "4782956D87A77EB08ECC8C5E574479F33E11F4BBCF3058BEBBF6ED7CF815BA4A"
+          "sha256": "B2AE1EB5D56BD53AC8573887D15349795DA7B14CF5FFE6667F625C3DB03CE6D7"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -3655,7 +3655,7 @@
           "kind": "test",
           "target": "DeNovoCommandEvidence",
           "assertion": "Actual command observation FQ15-E6C940C1DB8E: frozen/current ButtonExportReviewQueue success route",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\execution.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\execution.log",
           "inspectedBy": ""
         }
       ],
@@ -3909,7 +3909,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "FamilyQuant.DeNovoControl.ButtonExportReviewQueue_Click",
-          "sha256": "4782956D87A77EB08ECC8C5E574479F33E11F4BBCF3058BEBBF6ED7CF815BA4A"
+          "sha256": "B2AE1EB5D56BD53AC8573887D15349795DA7B14CF5FFE6667F625C3DB03CE6D7"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -3958,7 +3958,7 @@
           "kind": "test",
           "target": "DeNovoCommandEvidence",
           "assertion": "Actual command observation FQ15-934035A65B0A: frozen/current ButtonExportReviewQueue success route",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\execution.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\execution.log",
           "inspectedBy": ""
         }
       ],
@@ -4212,7 +4212,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "FamilyQuant.DeNovoControl.ButtonExportOverlapStudy",
-          "sha256": "4782956D87A77EB08ECC8C5E574479F33E11F4BBCF3058BEBBF6ED7CF815BA4A"
+          "sha256": "B2AE1EB5D56BD53AC8573887D15349795DA7B14CF5FFE6667F625C3DB03CE6D7"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -4261,7 +4261,7 @@
           "kind": "test",
           "target": "DeNovoCommandEvidence",
           "assertion": "Actual command observation FQ15-4D05CF3F77B3: frozen/current ButtonExportOverlapStudy success route",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\execution.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\execution.log",
           "inspectedBy": ""
         }
       ],
@@ -4515,7 +4515,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "FamilyQuant.DeNovoControl.ButtonExportOverlapStudy_Click",
-          "sha256": "4782956D87A77EB08ECC8C5E574479F33E11F4BBCF3058BEBBF6ED7CF815BA4A"
+          "sha256": "B2AE1EB5D56BD53AC8573887D15349795DA7B14CF5FFE6667F625C3DB03CE6D7"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -4564,7 +4564,7 @@
           "kind": "test",
           "target": "DeNovoCommandEvidence",
           "assertion": "Actual command observation FQ15-F685DDC96072: frozen/current ButtonExportOverlapStudy success route",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\execution.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\execution.log",
           "inspectedBy": ""
         }
       ],
@@ -4818,7 +4818,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "FamilyQuant.DeNovoControl.ButtonBrowseHomologyFcf",
-          "sha256": "4782956D87A77EB08ECC8C5E574479F33E11F4BBCF3058BEBBF6ED7CF815BA4A"
+          "sha256": "B2AE1EB5D56BD53AC8573887D15349795DA7B14CF5FFE6667F625C3DB03CE6D7"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -4867,7 +4867,7 @@
           "kind": "test",
           "target": "DeNovoCommandEvidence",
           "assertion": "Actual command observation FQ15-6973B8061312: frozen/current ButtonBrowseHomologyFcf success route",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\execution.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\execution.log",
           "inspectedBy": ""
         }
       ],
@@ -5121,7 +5121,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "FamilyQuant.DeNovoControl.ButtonBrowseHomologyFcf_Click",
-          "sha256": "4782956D87A77EB08ECC8C5E574479F33E11F4BBCF3058BEBBF6ED7CF815BA4A"
+          "sha256": "B2AE1EB5D56BD53AC8573887D15349795DA7B14CF5FFE6667F625C3DB03CE6D7"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -5170,7 +5170,7 @@
           "kind": "test",
           "target": "DeNovoCommandEvidence",
           "assertion": "Actual command observation FQ15-47E1C7C97E1F: frozen/current ButtonBrowseHomologyFcf success route",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\execution.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\execution.log",
           "inspectedBy": ""
         }
       ],
@@ -5424,7 +5424,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "FamilyQuant.DeNovoControl.ButtonSearchHomology",
-          "sha256": "4782956D87A77EB08ECC8C5E574479F33E11F4BBCF3058BEBBF6ED7CF815BA4A"
+          "sha256": "B2AE1EB5D56BD53AC8573887D15349795DA7B14CF5FFE6667F625C3DB03CE6D7"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -5473,7 +5473,7 @@
           "kind": "test",
           "target": "DeNovoCommandEvidence",
           "assertion": "Actual command observation FQ15-89082139AB77: frozen/current ButtonSearchHomology success route",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\execution.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\execution.log",
           "inspectedBy": ""
         }
       ],
@@ -5727,7 +5727,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "FamilyQuant.DeNovoControl.ButtonSearchHomology_Click",
-          "sha256": "4782956D87A77EB08ECC8C5E574479F33E11F4BBCF3058BEBBF6ED7CF815BA4A"
+          "sha256": "B2AE1EB5D56BD53AC8573887D15349795DA7B14CF5FFE6667F625C3DB03CE6D7"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -5776,7 +5776,7 @@
           "kind": "test",
           "target": "DeNovoCommandEvidence",
           "assertion": "Actual command observation FQ15-D1C96A54C4E7: frozen/current ButtonSearchHomology success route",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\execution.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\execution.log",
           "inspectedBy": ""
         }
       ],
@@ -6030,7 +6030,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "Actual command dependency",
-          "sha256": "4782956D87A77EB08ECC8C5E574479F33E11F4BBCF3058BEBBF6ED7CF815BA4A"
+          "sha256": "B2AE1EB5D56BD53AC8573887D15349795DA7B14CF5FFE6667F625C3DB03CE6D7"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -6079,7 +6079,7 @@
           "kind": "test",
           "target": "DeNovoCommandEvidence",
           "assertion": "Executed status observation FQ15-9A02870EFB2D: complete frozen/current messages agree at the recorded frozen call site",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\execution.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\execution.log",
           "inspectedBy": ""
         }
       ],
@@ -6333,7 +6333,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "Actual command dependency",
-          "sha256": "4782956D87A77EB08ECC8C5E574479F33E11F4BBCF3058BEBBF6ED7CF815BA4A"
+          "sha256": "B2AE1EB5D56BD53AC8573887D15349795DA7B14CF5FFE6667F625C3DB03CE6D7"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -6382,7 +6382,7 @@
           "kind": "test",
           "target": "DeNovoCommandEvidence",
           "assertion": "Executed status observation FQ15-372244CC78BC: complete frozen/current messages agree at the recorded frozen call site",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\execution.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\execution.log",
           "inspectedBy": ""
         }
       ],
@@ -6636,7 +6636,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "Actual command dependency",
-          "sha256": "4782956D87A77EB08ECC8C5E574479F33E11F4BBCF3058BEBBF6ED7CF815BA4A"
+          "sha256": "B2AE1EB5D56BD53AC8573887D15349795DA7B14CF5FFE6667F625C3DB03CE6D7"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -6685,7 +6685,7 @@
           "kind": "test",
           "target": "DeNovoCommandEvidence",
           "assertion": "Executed status observation FQ15-65D20791C824: complete frozen/current messages agree at the recorded frozen call site",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\execution.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\execution.log",
           "inspectedBy": ""
         }
       ],
@@ -6939,7 +6939,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "Actual command dependency",
-          "sha256": "4782956D87A77EB08ECC8C5E574479F33E11F4BBCF3058BEBBF6ED7CF815BA4A"
+          "sha256": "B2AE1EB5D56BD53AC8573887D15349795DA7B14CF5FFE6667F625C3DB03CE6D7"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -6988,7 +6988,7 @@
           "kind": "test",
           "target": "DeNovoChangedCopyFacts",
           "assertion": "Changed-copy user fact FQ15-48A19048BFEA: The source change resets the visible kept-row count to zero",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\execution.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\execution.log",
           "inspectedBy": ""
         }
       ],
@@ -7242,7 +7242,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "Actual command dependency",
-          "sha256": "4782956D87A77EB08ECC8C5E574479F33E11F4BBCF3058BEBBF6ED7CF815BA4A"
+          "sha256": "B2AE1EB5D56BD53AC8573887D15349795DA7B14CF5FFE6667F625C3DB03CE6D7"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -7291,7 +7291,7 @@
           "kind": "test",
           "target": "DeNovoChangedCopyFacts",
           "assertion": "Changed-copy user fact FQ15-5613D727F9F4: The per-run area says a new import is required",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\execution.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\execution.log",
           "inspectedBy": ""
         }
       ],
@@ -7545,7 +7545,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "Actual command dependency",
-          "sha256": "4782956D87A77EB08ECC8C5E574479F33E11F4BBCF3058BEBBF6ED7CF815BA4A"
+          "sha256": "B2AE1EB5D56BD53AC8573887D15349795DA7B14CF5FFE6667F625C3DB03CE6D7"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -7594,7 +7594,7 @@
           "kind": "test",
           "target": "DeNovoChangedCopyFacts",
           "assertion": "Changed-copy user fact FQ15-1E61FC693B2F: The newly selected de novo program is identified",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\execution.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\execution.log",
           "inspectedBy": ""
         }
       ],
@@ -7848,7 +7848,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "Actual command dependency",
-          "sha256": "4782956D87A77EB08ECC8C5E574479F33E11F4BBCF3058BEBBF6ED7CF815BA4A"
+          "sha256": "B2AE1EB5D56BD53AC8573887D15349795DA7B14CF5FFE6667F625C3DB03CE6D7"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -7897,7 +7897,7 @@
           "kind": "test",
           "target": "DeNovoChangedCopyFacts",
           "assertion": "Changed-copy user fact FQ15-EF7CA1E93F27: The active program\u0027s native confidence scale reaches the user",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\execution.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\execution.log",
           "inspectedBy": ""
         }
       ],
@@ -8151,7 +8151,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "Actual command dependency",
-          "sha256": "4782956D87A77EB08ECC8C5E574479F33E11F4BBCF3058BEBBF6ED7CF815BA4A"
+          "sha256": "B2AE1EB5D56BD53AC8573887D15349795DA7B14CF5FFE6667F625C3DB03CE6D7"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -8200,7 +8200,7 @@
           "kind": "test",
           "target": "DeNovoChangedCopyFacts",
           "assertion": "Changed-copy user fact FQ15-549529DEFE02: The previous source\u0027s rows and downstream results are cleared and the status says so",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\execution.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\execution.log",
           "inspectedBy": ""
         }
       ],
@@ -8454,7 +8454,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "Actual command dependency",
-          "sha256": "4782956D87A77EB08ECC8C5E574479F33E11F4BBCF3058BEBBF6ED7CF815BA4A"
+          "sha256": "B2AE1EB5D56BD53AC8573887D15349795DA7B14CF5FFE6667F625C3DB03CE6D7"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -8503,7 +8503,7 @@
           "kind": "test",
           "target": "DeNovoChangedCopyFacts",
           "assertion": "Changed-copy user fact FQ15-9E9B3B697A05: Load and filter is the available next action",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\execution.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\execution.log",
           "inspectedBy": ""
         }
       ],
@@ -8757,7 +8757,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "Actual command dependency",
-          "sha256": "4782956D87A77EB08ECC8C5E574479F33E11F4BBCF3058BEBBF6ED7CF815BA4A"
+          "sha256": "B2AE1EB5D56BD53AC8573887D15349795DA7B14CF5FFE6667F625C3DB03CE6D7"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -8806,13 +8806,13 @@
           "kind": "test",
           "target": "DeNovoCommandEvidence",
           "assertion": "Executed status observation FQ15-FD40ACC93D38: complete frozen/current messages agree at the recorded frozen call site",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\execution.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\execution.log",
           "inspectedBy": ""
         }
       ],
       "note": "Actual command success/cancel/failure fixture; no fresh RAW or biological accuracy claim.",
       "kindReceiptId": null,
-      "compared": "FamilyQuant/DeNovoControl.xaml.cs:643 \u0022Nothing was imported: \u0022 -\u003E actual PDB call-site range 642..647; complete matching messages=[\u0022Nothing was imported: no folder has been chosen yet. Next step: press Browse and pick the folder holding the selected de novo export.\u0022,\u0022Nothing was imported: the folder \\u0022D:\\\\FamilyQuant-data\\\\out-refresh\\\\20261102-140640-FamilyQuant-gate\\\\denovo-commands\\\\absent-import-directory\\u0022 does not exist or cannot be reached. Next step: press Browse and pick the folder holding the selected de novo export.\u0022]; chosen output filenames are compared as recorded fixture arguments."
+      "compared": "FamilyQuant/DeNovoControl.xaml.cs:643 \u0022Nothing was imported: \u0022 -\u003E actual PDB call-site range 642..647; complete matching messages=[\u0022Nothing was imported: no folder has been chosen yet. Next step: press Browse and pick the folder holding the selected de novo export.\u0022,\u0022Nothing was imported: the folder \\u0022D:\\\\FamilyQuant-data\\\\out-refresh\\\\20261102-155410-FamilyQuant-gate\\\\denovo-commands\\\\absent-import-directory\\u0022 does not exist or cannot be reached. Next step: press Browse and pick the folder holding the selected de novo export.\u0022]; chosen output filenames are compared as recorded fixture arguments."
     },
     {
       "observationId": "FQ15-30FDAA0FC251",
@@ -9060,7 +9060,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "Actual command dependency",
-          "sha256": "4782956D87A77EB08ECC8C5E574479F33E11F4BBCF3058BEBBF6ED7CF815BA4A"
+          "sha256": "B2AE1EB5D56BD53AC8573887D15349795DA7B14CF5FFE6667F625C3DB03CE6D7"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -9109,7 +9109,7 @@
           "kind": "test",
           "target": "DeNovoCommandEvidence",
           "assertion": "Executed status observation FQ15-30FDAA0FC251: complete frozen/current messages agree at the recorded frozen call site",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\execution.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\execution.log",
           "inspectedBy": ""
         }
       ],
@@ -9363,7 +9363,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "Actual command dependency",
-          "sha256": "4782956D87A77EB08ECC8C5E574479F33E11F4BBCF3058BEBBF6ED7CF815BA4A"
+          "sha256": "B2AE1EB5D56BD53AC8573887D15349795DA7B14CF5FFE6667F625C3DB03CE6D7"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -9412,13 +9412,13 @@
           "kind": "test",
           "target": "DeNovoCommandEvidence",
           "assertion": "Executed status observation FQ15-B883DB09A57C: complete frozen/current messages agree at the recorded frozen call site",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\execution.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\execution.log",
           "inspectedBy": ""
         }
       ],
       "note": "Actual command success/cancel/failure fixture; no fresh RAW or biological accuracy claim.",
       "kindReceiptId": null,
-      "compared": "FamilyQuant/DeNovoControl.xaml.cs:645 \u0022the folder \\\u0022\u0022 -\u003E actual PDB call-site range 642..647; complete matching messages=[\u0022Nothing was imported: the folder \\u0022D:\\\\FamilyQuant-data\\\\out-refresh\\\\20261102-140640-FamilyQuant-gate\\\\denovo-commands\\\\absent-import-directory\\u0022 does not exist or cannot be reached. Next step: press Browse and pick the folder holding the selected de novo export.\u0022]; chosen output filenames are compared as recorded fixture arguments."
+      "compared": "FamilyQuant/DeNovoControl.xaml.cs:645 \u0022the folder \\\u0022\u0022 -\u003E actual PDB call-site range 642..647; complete matching messages=[\u0022Nothing was imported: the folder \\u0022D:\\\\FamilyQuant-data\\\\out-refresh\\\\20261102-155410-FamilyQuant-gate\\\\denovo-commands\\\\absent-import-directory\\u0022 does not exist or cannot be reached. Next step: press Browse and pick the folder holding the selected de novo export.\u0022]; chosen output filenames are compared as recorded fixture arguments."
     },
     {
       "observationId": "FQ15-69F77FABB90E",
@@ -9666,7 +9666,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "Actual command dependency",
-          "sha256": "4782956D87A77EB08ECC8C5E574479F33E11F4BBCF3058BEBBF6ED7CF815BA4A"
+          "sha256": "B2AE1EB5D56BD53AC8573887D15349795DA7B14CF5FFE6667F625C3DB03CE6D7"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -9715,13 +9715,13 @@
           "kind": "test",
           "target": "DeNovoCommandEvidence",
           "assertion": "Executed status observation FQ15-69F77FABB90E: complete frozen/current messages agree at the recorded frozen call site",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\execution.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\execution.log",
           "inspectedBy": ""
         }
       ],
       "note": "Actual command success/cancel/failure fixture; no fresh RAW or biological accuracy claim.",
       "kindReceiptId": null,
-      "compared": "FamilyQuant/DeNovoControl.xaml.cs:645 \u0022\\\u0022 does not exist or cannot be reached.\u0022 -\u003E actual PDB call-site range 642..647; complete matching messages=[\u0022Nothing was imported: the folder \\u0022D:\\\\FamilyQuant-data\\\\out-refresh\\\\20261102-140640-FamilyQuant-gate\\\\denovo-commands\\\\absent-import-directory\\u0022 does not exist or cannot be reached. Next step: press Browse and pick the folder holding the selected de novo export.\u0022]; chosen output filenames are compared as recorded fixture arguments."
+      "compared": "FamilyQuant/DeNovoControl.xaml.cs:645 \u0022\\\u0022 does not exist or cannot be reached.\u0022 -\u003E actual PDB call-site range 642..647; complete matching messages=[\u0022Nothing was imported: the folder \\u0022D:\\\\FamilyQuant-data\\\\out-refresh\\\\20261102-155410-FamilyQuant-gate\\\\denovo-commands\\\\absent-import-directory\\u0022 does not exist or cannot be reached. Next step: press Browse and pick the folder holding the selected de novo export.\u0022]; chosen output filenames are compared as recorded fixture arguments."
     },
     {
       "observationId": "FQ15-29C1749EE42B",
@@ -9969,7 +9969,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "Actual command dependency",
-          "sha256": "4782956D87A77EB08ECC8C5E574479F33E11F4BBCF3058BEBBF6ED7CF815BA4A"
+          "sha256": "B2AE1EB5D56BD53AC8573887D15349795DA7B14CF5FFE6667F625C3DB03CE6D7"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -10018,13 +10018,13 @@
           "kind": "test",
           "target": "DeNovoCommandEvidence",
           "assertion": "Executed status observation FQ15-29C1749EE42B: complete frozen/current messages agree at the recorded frozen call site",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\execution.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\execution.log",
           "inspectedBy": ""
         }
       ],
       "note": "Actual command success/cancel/failure fixture; no fresh RAW or biological accuracy claim.",
       "kindReceiptId": null,
-      "compared": "FamilyQuant/DeNovoControl.xaml.cs:647 \u0022 Next step: press Browse and pick the folder holding the selected de novo export.\u0022 -\u003E actual PDB call-site range 642..647; complete matching messages=[\u0022Nothing was imported: no folder has been chosen yet. Next step: press Browse and pick the folder holding the selected de novo export.\u0022,\u0022Nothing was imported: the folder \\u0022D:\\\\FamilyQuant-data\\\\out-refresh\\\\20261102-140640-FamilyQuant-gate\\\\denovo-commands\\\\absent-import-directory\\u0022 does not exist or cannot be reached. Next step: press Browse and pick the folder holding the selected de novo export.\u0022]; chosen output filenames are compared as recorded fixture arguments."
+      "compared": "FamilyQuant/DeNovoControl.xaml.cs:647 \u0022 Next step: press Browse and pick the folder holding the selected de novo export.\u0022 -\u003E actual PDB call-site range 642..647; complete matching messages=[\u0022Nothing was imported: no folder has been chosen yet. Next step: press Browse and pick the folder holding the selected de novo export.\u0022,\u0022Nothing was imported: the folder \\u0022D:\\\\FamilyQuant-data\\\\out-refresh\\\\20261102-155410-FamilyQuant-gate\\\\denovo-commands\\\\absent-import-directory\\u0022 does not exist or cannot be reached. Next step: press Browse and pick the folder holding the selected de novo export.\u0022]; chosen output filenames are compared as recorded fixture arguments."
     },
     {
       "observationId": "FQ15-119FAEF14CE8",
@@ -10272,7 +10272,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "Actual command dependency",
-          "sha256": "4782956D87A77EB08ECC8C5E574479F33E11F4BBCF3058BEBBF6ED7CF815BA4A"
+          "sha256": "B2AE1EB5D56BD53AC8573887D15349795DA7B14CF5FFE6667F625C3DB03CE6D7"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -10321,13 +10321,13 @@
           "kind": "test",
           "target": "DeNovoCommandEvidence",
           "assertion": "Executed status observation FQ15-119FAEF14CE8: complete frozen/current messages agree at the recorded frozen call site",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\execution.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\execution.log",
           "inspectedBy": ""
         }
       ],
       "note": "Actual command success/cancel/failure fixture; no fresh RAW or biological accuracy claim.",
       "kindReceiptId": null,
-      "compared": "FamilyQuant/DeNovoControl.xaml.cs:654 \u0022Reading the de novo exports (source: \u0022 -\u003E actual PDB call-site range 653..656; complete matching messages=[\u0022Reading the de novo exports (source: de novo only) under D:\\\\FamilyQuant-data\\\\out-refresh\\\\20261102-140640-FamilyQuant-gate\\\\denovo-commands\\\\imports and applying length 7 or more, ALC (%) 80% or more, and 5 consecutive residues at 90% or better. A real export is a few hundred thousand rows, so this takes a moment.\u0022,\u0022Reading the de novo exports (source: de novo only) under D:\\\\FamilyQuant-data\\\\out-refresh\\\\20261102-140640-FamilyQuant-gate\\\\denovo-commands\\\\imports and applying length 7 or more, ALC (%) 80% or more, and 5 consecutive residues at 90% or better. A real export is a few hundred thousand rows, so this takes a moment.\u0022,\u0022Reading the de novo exports (source: DeepNovo) under D:\\\\FamilyQuant-data\\\\out-refresh\\\\20261102-140640-FamilyQuant-gate\\\\denovo-commands\\\\empty and applying length 7 or more, SCORE (%) 80% or more, and 5 consecutive residues at 90% or better. A real export is a few hundred thousand rows, so this takes a moment.\u0022]; chosen output filenames are compared as recorded fixture arguments."
+      "compared": "FamilyQuant/DeNovoControl.xaml.cs:654 \u0022Reading the de novo exports (source: \u0022 -\u003E actual PDB call-site range 653..656; complete matching messages=[\u0022Reading the de novo exports (source: de novo only) under D:\\\\FamilyQuant-data\\\\out-refresh\\\\20261102-155410-FamilyQuant-gate\\\\denovo-commands\\\\imports and applying length 7 or more, ALC (%) 80% or more, and 5 consecutive residues at 90% or better. A real export is a few hundred thousand rows, so this takes a moment.\u0022,\u0022Reading the de novo exports (source: de novo only) under D:\\\\FamilyQuant-data\\\\out-refresh\\\\20261102-155410-FamilyQuant-gate\\\\denovo-commands\\\\imports and applying length 7 or more, ALC (%) 80% or more, and 5 consecutive residues at 90% or better. A real export is a few hundred thousand rows, so this takes a moment.\u0022,\u0022Reading the de novo exports (source: DeepNovo) under D:\\\\FamilyQuant-data\\\\out-refresh\\\\20261102-155410-FamilyQuant-gate\\\\denovo-commands\\\\empty and applying length 7 or more, SCORE (%) 80% or more, and 5 consecutive residues at 90% or better. A real export is a few hundred thousand rows, so this takes a moment.\u0022]; chosen output filenames are compared as recorded fixture arguments."
     },
     {
       "observationId": "FQ15-7E8B9FAD3F78",
@@ -10575,7 +10575,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "Actual command dependency",
-          "sha256": "4782956D87A77EB08ECC8C5E574479F33E11F4BBCF3058BEBBF6ED7CF815BA4A"
+          "sha256": "B2AE1EB5D56BD53AC8573887D15349795DA7B14CF5FFE6667F625C3DB03CE6D7"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -10624,13 +10624,13 @@
           "kind": "test",
           "target": "DeNovoCommandEvidence",
           "assertion": "Executed status observation FQ15-7E8B9FAD3F78: complete frozen/current messages agree at the recorded frozen call site",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\execution.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\execution.log",
           "inspectedBy": ""
         }
       ],
       "note": "Actual command success/cancel/failure fixture; no fresh RAW or biological accuracy claim.",
       "kindReceiptId": null,
-      "compared": "FamilyQuant/DeNovoControl.xaml.cs:654 \u0022) under \u0022 -\u003E actual PDB call-site range 653..656; complete matching messages=[\u0022Reading the de novo exports (source: de novo only) under D:\\\\FamilyQuant-data\\\\out-refresh\\\\20261102-140640-FamilyQuant-gate\\\\denovo-commands\\\\imports and applying length 7 or more, ALC (%) 80% or more, and 5 consecutive residues at 90% or better. A real export is a few hundred thousand rows, so this takes a moment.\u0022,\u0022Reading the de novo exports (source: de novo only) under D:\\\\FamilyQuant-data\\\\out-refresh\\\\20261102-140640-FamilyQuant-gate\\\\denovo-commands\\\\imports and applying length 7 or more, ALC (%) 80% or more, and 5 consecutive residues at 90% or better. A real export is a few hundred thousand rows, so this takes a moment.\u0022,\u0022Reading the de novo exports (source: DeepNovo) under D:\\\\FamilyQuant-data\\\\out-refresh\\\\20261102-140640-FamilyQuant-gate\\\\denovo-commands\\\\empty and applying length 7 or more, SCORE (%) 80% or more, and 5 consecutive residues at 90% or better. A real export is a few hundred thousand rows, so this takes a moment.\u0022]; chosen output filenames are compared as recorded fixture arguments."
+      "compared": "FamilyQuant/DeNovoControl.xaml.cs:654 \u0022) under \u0022 -\u003E actual PDB call-site range 653..656; complete matching messages=[\u0022Reading the de novo exports (source: de novo only) under D:\\\\FamilyQuant-data\\\\out-refresh\\\\20261102-155410-FamilyQuant-gate\\\\denovo-commands\\\\imports and applying length 7 or more, ALC (%) 80% or more, and 5 consecutive residues at 90% or better. A real export is a few hundred thousand rows, so this takes a moment.\u0022,\u0022Reading the de novo exports (source: de novo only) under D:\\\\FamilyQuant-data\\\\out-refresh\\\\20261102-155410-FamilyQuant-gate\\\\denovo-commands\\\\imports and applying length 7 or more, ALC (%) 80% or more, and 5 consecutive residues at 90% or better. A real export is a few hundred thousand rows, so this takes a moment.\u0022,\u0022Reading the de novo exports (source: DeepNovo) under D:\\\\FamilyQuant-data\\\\out-refresh\\\\20261102-155410-FamilyQuant-gate\\\\denovo-commands\\\\empty and applying length 7 or more, SCORE (%) 80% or more, and 5 consecutive residues at 90% or better. A real export is a few hundred thousand rows, so this takes a moment.\u0022]; chosen output filenames are compared as recorded fixture arguments."
     },
     {
       "observationId": "FQ15-06879967CEB3",
@@ -10878,7 +10878,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "Actual command dependency",
-          "sha256": "4782956D87A77EB08ECC8C5E574479F33E11F4BBCF3058BEBBF6ED7CF815BA4A"
+          "sha256": "B2AE1EB5D56BD53AC8573887D15349795DA7B14CF5FFE6667F625C3DB03CE6D7"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -10927,13 +10927,13 @@
           "kind": "test",
           "target": "DeNovoCommandEvidence",
           "assertion": "Executed status observation FQ15-06879967CEB3: complete frozen/current messages agree at the recorded frozen call site",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\execution.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\execution.log",
           "inspectedBy": ""
         }
       ],
       "note": "Actual command success/cancel/failure fixture; no fresh RAW or biological accuracy claim.",
       "kindReceiptId": null,
-      "compared": "FamilyQuant/DeNovoControl.xaml.cs:654 \u0022 and applying \u0022 -\u003E actual PDB call-site range 653..656; complete matching messages=[\u0022Reading the de novo exports (source: de novo only) under D:\\\\FamilyQuant-data\\\\out-refresh\\\\20261102-140640-FamilyQuant-gate\\\\denovo-commands\\\\imports and applying length 7 or more, ALC (%) 80% or more, and 5 consecutive residues at 90% or better. A real export is a few hundred thousand rows, so this takes a moment.\u0022,\u0022Reading the de novo exports (source: de novo only) under D:\\\\FamilyQuant-data\\\\out-refresh\\\\20261102-140640-FamilyQuant-gate\\\\denovo-commands\\\\imports and applying length 7 or more, ALC (%) 80% or more, and 5 consecutive residues at 90% or better. A real export is a few hundred thousand rows, so this takes a moment.\u0022,\u0022Reading the de novo exports (source: DeepNovo) under D:\\\\FamilyQuant-data\\\\out-refresh\\\\20261102-140640-FamilyQuant-gate\\\\denovo-commands\\\\empty and applying length 7 or more, SCORE (%) 80% or more, and 5 consecutive residues at 90% or better. A real export is a few hundred thousand rows, so this takes a moment.\u0022]; chosen output filenames are compared as recorded fixture arguments."
+      "compared": "FamilyQuant/DeNovoControl.xaml.cs:654 \u0022 and applying \u0022 -\u003E actual PDB call-site range 653..656; complete matching messages=[\u0022Reading the de novo exports (source: de novo only) under D:\\\\FamilyQuant-data\\\\out-refresh\\\\20261102-155410-FamilyQuant-gate\\\\denovo-commands\\\\imports and applying length 7 or more, ALC (%) 80% or more, and 5 consecutive residues at 90% or better. A real export is a few hundred thousand rows, so this takes a moment.\u0022,\u0022Reading the de novo exports (source: de novo only) under D:\\\\FamilyQuant-data\\\\out-refresh\\\\20261102-155410-FamilyQuant-gate\\\\denovo-commands\\\\imports and applying length 7 or more, ALC (%) 80% or more, and 5 consecutive residues at 90% or better. A real export is a few hundred thousand rows, so this takes a moment.\u0022,\u0022Reading the de novo exports (source: DeepNovo) under D:\\\\FamilyQuant-data\\\\out-refresh\\\\20261102-155410-FamilyQuant-gate\\\\denovo-commands\\\\empty and applying length 7 or more, SCORE (%) 80% or more, and 5 consecutive residues at 90% or better. A real export is a few hundred thousand rows, so this takes a moment.\u0022]; chosen output filenames are compared as recorded fixture arguments."
     },
     {
       "observationId": "FQ15-68EE1C6A3380",
@@ -11181,7 +11181,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "Actual command dependency",
-          "sha256": "4782956D87A77EB08ECC8C5E574479F33E11F4BBCF3058BEBBF6ED7CF815BA4A"
+          "sha256": "B2AE1EB5D56BD53AC8573887D15349795DA7B14CF5FFE6667F625C3DB03CE6D7"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -11230,13 +11230,13 @@
           "kind": "test",
           "target": "DeNovoCommandEvidence",
           "assertion": "Executed status observation FQ15-68EE1C6A3380: complete frozen/current messages agree at the recorded frozen call site",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\execution.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\execution.log",
           "inspectedBy": ""
         }
       ],
       "note": "Actual command success/cancel/failure fixture; no fresh RAW or biological accuracy claim.",
       "kindReceiptId": null,
-      "compared": "FamilyQuant/DeNovoControl.xaml.cs:655 \u0022. A real export is a few hundred thousand rows, so this \u0022 -\u003E actual PDB call-site range 653..656; complete matching messages=[\u0022Reading the de novo exports (source: de novo only) under D:\\\\FamilyQuant-data\\\\out-refresh\\\\20261102-140640-FamilyQuant-gate\\\\denovo-commands\\\\imports and applying length 7 or more, ALC (%) 80% or more, and 5 consecutive residues at 90% or better. A real export is a few hundred thousand rows, so this takes a moment.\u0022,\u0022Reading the de novo exports (source: de novo only) under D:\\\\FamilyQuant-data\\\\out-refresh\\\\20261102-140640-FamilyQuant-gate\\\\denovo-commands\\\\imports and applying length 7 or more, ALC (%) 80% or more, and 5 consecutive residues at 90% or better. A real export is a few hundred thousand rows, so this takes a moment.\u0022,\u0022Reading the de novo exports (source: DeepNovo) under D:\\\\FamilyQuant-data\\\\out-refresh\\\\20261102-140640-FamilyQuant-gate\\\\denovo-commands\\\\empty and applying length 7 or more, SCORE (%) 80% or more, and 5 consecutive residues at 90% or better. A real export is a few hundred thousand rows, so this takes a moment.\u0022]; chosen output filenames are compared as recorded fixture arguments."
+      "compared": "FamilyQuant/DeNovoControl.xaml.cs:655 \u0022. A real export is a few hundred thousand rows, so this \u0022 -\u003E actual PDB call-site range 653..656; complete matching messages=[\u0022Reading the de novo exports (source: de novo only) under D:\\\\FamilyQuant-data\\\\out-refresh\\\\20261102-155410-FamilyQuant-gate\\\\denovo-commands\\\\imports and applying length 7 or more, ALC (%) 80% or more, and 5 consecutive residues at 90% or better. A real export is a few hundred thousand rows, so this takes a moment.\u0022,\u0022Reading the de novo exports (source: de novo only) under D:\\\\FamilyQuant-data\\\\out-refresh\\\\20261102-155410-FamilyQuant-gate\\\\denovo-commands\\\\imports and applying length 7 or more, ALC (%) 80% or more, and 5 consecutive residues at 90% or better. A real export is a few hundred thousand rows, so this takes a moment.\u0022,\u0022Reading the de novo exports (source: DeepNovo) under D:\\\\FamilyQuant-data\\\\out-refresh\\\\20261102-155410-FamilyQuant-gate\\\\denovo-commands\\\\empty and applying length 7 or more, SCORE (%) 80% or more, and 5 consecutive residues at 90% or better. A real export is a few hundred thousand rows, so this takes a moment.\u0022]; chosen output filenames are compared as recorded fixture arguments."
     },
     {
       "observationId": "FQ15-78CADC4BF323",
@@ -11484,7 +11484,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "Actual command dependency",
-          "sha256": "4782956D87A77EB08ECC8C5E574479F33E11F4BBCF3058BEBBF6ED7CF815BA4A"
+          "sha256": "B2AE1EB5D56BD53AC8573887D15349795DA7B14CF5FFE6667F625C3DB03CE6D7"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -11533,13 +11533,13 @@
           "kind": "test",
           "target": "DeNovoCommandEvidence",
           "assertion": "Executed status observation FQ15-78CADC4BF323: complete frozen/current messages agree at the recorded frozen call site",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\execution.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\execution.log",
           "inspectedBy": ""
         }
       ],
       "note": "Actual command success/cancel/failure fixture; no fresh RAW or biological accuracy claim.",
       "kindReceiptId": null,
-      "compared": "FamilyQuant/DeNovoControl.xaml.cs:656 \u0022takes a moment.\u0022 -\u003E actual PDB call-site range 653..656; complete matching messages=[\u0022Reading the de novo exports (source: de novo only) under D:\\\\FamilyQuant-data\\\\out-refresh\\\\20261102-140640-FamilyQuant-gate\\\\denovo-commands\\\\imports and applying length 7 or more, ALC (%) 80% or more, and 5 consecutive residues at 90% or better. A real export is a few hundred thousand rows, so this takes a moment.\u0022,\u0022Reading the de novo exports (source: de novo only) under D:\\\\FamilyQuant-data\\\\out-refresh\\\\20261102-140640-FamilyQuant-gate\\\\denovo-commands\\\\imports and applying length 7 or more, ALC (%) 80% or more, and 5 consecutive residues at 90% or better. A real export is a few hundred thousand rows, so this takes a moment.\u0022,\u0022Reading the de novo exports (source: DeepNovo) under D:\\\\FamilyQuant-data\\\\out-refresh\\\\20261102-140640-FamilyQuant-gate\\\\denovo-commands\\\\empty and applying length 7 or more, SCORE (%) 80% or more, and 5 consecutive residues at 90% or better. A real export is a few hundred thousand rows, so this takes a moment.\u0022]; chosen output filenames are compared as recorded fixture arguments."
+      "compared": "FamilyQuant/DeNovoControl.xaml.cs:656 \u0022takes a moment.\u0022 -\u003E actual PDB call-site range 653..656; complete matching messages=[\u0022Reading the de novo exports (source: de novo only) under D:\\\\FamilyQuant-data\\\\out-refresh\\\\20261102-155410-FamilyQuant-gate\\\\denovo-commands\\\\imports and applying length 7 or more, ALC (%) 80% or more, and 5 consecutive residues at 90% or better. A real export is a few hundred thousand rows, so this takes a moment.\u0022,\u0022Reading the de novo exports (source: de novo only) under D:\\\\FamilyQuant-data\\\\out-refresh\\\\20261102-155410-FamilyQuant-gate\\\\denovo-commands\\\\imports and applying length 7 or more, ALC (%) 80% or more, and 5 consecutive residues at 90% or better. A real export is a few hundred thousand rows, so this takes a moment.\u0022,\u0022Reading the de novo exports (source: DeepNovo) under D:\\\\FamilyQuant-data\\\\out-refresh\\\\20261102-155410-FamilyQuant-gate\\\\denovo-commands\\\\empty and applying length 7 or more, SCORE (%) 80% or more, and 5 consecutive residues at 90% or better. A real export is a few hundred thousand rows, so this takes a moment.\u0022]; chosen output filenames are compared as recorded fixture arguments."
     },
     {
       "observationId": "FQ15-5AF42E270E5F",
@@ -11787,7 +11787,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "Actual command dependency",
-          "sha256": "4782956D87A77EB08ECC8C5E574479F33E11F4BBCF3058BEBBF6ED7CF815BA4A"
+          "sha256": "B2AE1EB5D56BD53AC8573887D15349795DA7B14CF5FFE6667F625C3DB03CE6D7"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -11836,7 +11836,7 @@
           "kind": "test",
           "target": "DeNovoChangedCopyFacts",
           "assertion": "Changed-copy user fact FQ15-5AF42E270E5F: An empty import reports its read count",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\execution.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\execution.log",
           "inspectedBy": ""
         }
       ],
@@ -12090,7 +12090,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "Actual command dependency",
-          "sha256": "4782956D87A77EB08ECC8C5E574479F33E11F4BBCF3058BEBBF6ED7CF815BA4A"
+          "sha256": "B2AE1EB5D56BD53AC8573887D15349795DA7B14CF5FFE6667F625C3DB03CE6D7"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -12139,7 +12139,7 @@
           "kind": "test",
           "target": "DeNovoChangedCopyFacts",
           "assertion": "Changed-copy user fact FQ15-3AE4418D821F: An empty import reports its read count",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\execution.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\execution.log",
           "inspectedBy": ""
         }
       ],
@@ -12393,7 +12393,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "Actual command dependency",
-          "sha256": "4782956D87A77EB08ECC8C5E574479F33E11F4BBCF3058BEBBF6ED7CF815BA4A"
+          "sha256": "B2AE1EB5D56BD53AC8573887D15349795DA7B14CF5FFE6667F625C3DB03CE6D7"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -12442,7 +12442,7 @@
           "kind": "test",
           "target": "DeNovoChangedCopyFacts",
           "assertion": "Changed-copy user fact FQ15-DDDCD325392D: An empty import reports its file count",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\execution.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\execution.log",
           "inspectedBy": ""
         }
       ],
@@ -12696,7 +12696,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "Actual command dependency",
-          "sha256": "4782956D87A77EB08ECC8C5E574479F33E11F4BBCF3058BEBBF6ED7CF815BA4A"
+          "sha256": "B2AE1EB5D56BD53AC8573887D15349795DA7B14CF5FFE6667F625C3DB03CE6D7"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -12745,7 +12745,7 @@
           "kind": "test",
           "target": "DeNovoChangedCopyFacts",
           "assertion": "Changed-copy user fact FQ15-646588177A4D: An empty import reports its file count",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\execution.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\execution.log",
           "inspectedBy": ""
         }
       ],
@@ -12999,7 +12999,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "Actual command dependency",
-          "sha256": "4782956D87A77EB08ECC8C5E574479F33E11F4BBCF3058BEBBF6ED7CF815BA4A"
+          "sha256": "B2AE1EB5D56BD53AC8573887D15349795DA7B14CF5FFE6667F625C3DB03CE6D7"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -13048,7 +13048,7 @@
           "kind": "test",
           "target": "DeNovoChangedCopyFacts",
           "assertion": "Changed-copy user fact FQ15-988F7E1CF825: The user is told no row cleared the stated criteria",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\execution.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\execution.log",
           "inspectedBy": ""
         }
       ],
@@ -13302,7 +13302,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "Actual command dependency",
-          "sha256": "4782956D87A77EB08ECC8C5E574479F33E11F4BBCF3058BEBBF6ED7CF815BA4A"
+          "sha256": "B2AE1EB5D56BD53AC8573887D15349795DA7B14CF5FFE6667F625C3DB03CE6D7"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -13351,7 +13351,7 @@
           "kind": "test",
           "target": "DeNovoChangedCopyFacts",
           "assertion": "Changed-copy user fact FQ15-8DD1826EC288: Reconciliation is blocked when no row survives",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\execution.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\execution.log",
           "inspectedBy": ""
         }
       ],
@@ -13605,7 +13605,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "Actual command dependency",
-          "sha256": "4782956D87A77EB08ECC8C5E574479F33E11F4BBCF3058BEBBF6ED7CF815BA4A"
+          "sha256": "B2AE1EB5D56BD53AC8573887D15349795DA7B14CF5FFE6667F625C3DB03CE6D7"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -13654,7 +13654,7 @@
           "kind": "test",
           "target": "DeNovoChangedCopyFacts",
           "assertion": "Changed-copy user fact FQ15-F9B01DCA7ADF: The status explains there is nothing to reconcile and asks for a looser criterion",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\execution.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\execution.log",
           "inspectedBy": ""
         }
       ],
@@ -13908,7 +13908,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "Actual command dependency",
-          "sha256": "4782956D87A77EB08ECC8C5E574479F33E11F4BBCF3058BEBBF6ED7CF815BA4A"
+          "sha256": "B2AE1EB5D56BD53AC8573887D15349795DA7B14CF5FFE6667F625C3DB03CE6D7"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -13957,7 +13957,7 @@
           "kind": "test",
           "target": "DeNovoChangedCopyFacts",
           "assertion": "Changed-copy user fact FQ15-29D794690DFE: The next command and weaker-sequence warning remain visible",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\execution.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\execution.log",
           "inspectedBy": ""
         }
       ],
@@ -14211,7 +14211,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "Actual command dependency",
-          "sha256": "4782956D87A77EB08ECC8C5E574479F33E11F4BBCF3058BEBBF6ED7CF815BA4A"
+          "sha256": "B2AE1EB5D56BD53AC8573887D15349795DA7B14CF5FFE6667F625C3DB03CE6D7"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -14260,7 +14260,7 @@
           "kind": "test",
           "target": "DeNovoChangedCopyFacts",
           "assertion": "Changed-copy user fact FQ15-0C5C9D5D65CF: Successful import identifies the next workflow step",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\execution.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\execution.log",
           "inspectedBy": ""
         }
       ],
@@ -14514,7 +14514,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "Actual command dependency",
-          "sha256": "4782956D87A77EB08ECC8C5E574479F33E11F4BBCF3058BEBBF6ED7CF815BA4A"
+          "sha256": "B2AE1EB5D56BD53AC8573887D15349795DA7B14CF5FFE6667F625C3DB03CE6D7"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -14563,7 +14563,7 @@
           "kind": "test",
           "target": "DeNovoChangedCopyFacts",
           "assertion": "Changed-copy user fact FQ15-319497A8B500: The kept-row count is reported as an integer",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\execution.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\execution.log",
           "inspectedBy": ""
         }
       ],
@@ -14817,7 +14817,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "Actual command dependency",
-          "sha256": "4782956D87A77EB08ECC8C5E574479F33E11F4BBCF3058BEBBF6ED7CF815BA4A"
+          "sha256": "B2AE1EB5D56BD53AC8573887D15349795DA7B14CF5FFE6667F625C3DB03CE6D7"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -14866,7 +14866,7 @@
           "kind": "test",
           "target": "DeNovoChangedCopyFacts",
           "assertion": "Changed-copy user fact FQ15-F51D867CF9B2: The kept/read relationship and read count are reported",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\execution.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\execution.log",
           "inspectedBy": ""
         }
       ],
@@ -15120,7 +15120,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "Actual command dependency",
-          "sha256": "4782956D87A77EB08ECC8C5E574479F33E11F4BBCF3058BEBBF6ED7CF815BA4A"
+          "sha256": "B2AE1EB5D56BD53AC8573887D15349795DA7B14CF5FFE6667F625C3DB03CE6D7"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -15169,7 +15169,7 @@
           "kind": "test",
           "target": "DeNovoChangedCopyFacts",
           "assertion": "Changed-copy user fact FQ15-8D63F28E3E2C: The kept/read relationship and read count are reported",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\execution.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\execution.log",
           "inspectedBy": ""
         }
       ],
@@ -15423,7 +15423,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "Actual command dependency",
-          "sha256": "4782956D87A77EB08ECC8C5E574479F33E11F4BBCF3058BEBBF6ED7CF815BA4A"
+          "sha256": "B2AE1EB5D56BD53AC8573887D15349795DA7B14CF5FFE6667F625C3DB03CE6D7"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -15472,7 +15472,7 @@
           "kind": "test",
           "target": "DeNovoChangedCopyFacts",
           "assertion": "Changed-copy user fact FQ15-EF3B72BB48A4: The successful import reports its file count",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\execution.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\execution.log",
           "inspectedBy": ""
         }
       ],
@@ -15726,7 +15726,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "Actual command dependency",
-          "sha256": "4782956D87A77EB08ECC8C5E574479F33E11F4BBCF3058BEBBF6ED7CF815BA4A"
+          "sha256": "B2AE1EB5D56BD53AC8573887D15349795DA7B14CF5FFE6667F625C3DB03CE6D7"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -15775,7 +15775,7 @@
           "kind": "test",
           "target": "DeNovoChangedCopyFacts",
           "assertion": "Changed-copy user fact FQ15-0822C8BC887B: The successful import reports its file count",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\execution.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\execution.log",
           "inspectedBy": ""
         }
       ],
@@ -16029,7 +16029,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "Actual command dependency",
-          "sha256": "4782956D87A77EB08ECC8C5E574479F33E11F4BBCF3058BEBBF6ED7CF815BA4A"
+          "sha256": "B2AE1EB5D56BD53AC8573887D15349795DA7B14CF5FFE6667F625C3DB03CE6D7"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -16078,7 +16078,7 @@
           "kind": "test",
           "target": "DeNovoChangedCopyFacts",
           "assertion": "Changed-copy user fact FQ15-CDD9EFABA0FA: The successful import reports its run count",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\execution.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\execution.log",
           "inspectedBy": ""
         }
       ],
@@ -16332,7 +16332,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "Actual command dependency",
-          "sha256": "4782956D87A77EB08ECC8C5E574479F33E11F4BBCF3058BEBBF6ED7CF815BA4A"
+          "sha256": "B2AE1EB5D56BD53AC8573887D15349795DA7B14CF5FFE6667F625C3DB03CE6D7"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -16381,7 +16381,7 @@
           "kind": "test",
           "target": "DeNovoChangedCopyFacts",
           "assertion": "Changed-copy user fact FQ15-28935611B5AB: The successful import reports its run count",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\execution.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\execution.log",
           "inspectedBy": ""
         }
       ],
@@ -16635,7 +16635,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "Actual command dependency",
-          "sha256": "4782956D87A77EB08ECC8C5E574479F33E11F4BBCF3058BEBBF6ED7CF815BA4A"
+          "sha256": "B2AE1EB5D56BD53AC8573887D15349795DA7B14CF5FFE6667F625C3DB03CE6D7"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -16684,7 +16684,7 @@
           "kind": "test",
           "target": "DeNovoChangedCopyFacts",
           "assertion": "Changed-copy user fact FQ15-8BBE9FBFD11B: The actual filtering criteria reach the user",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\execution.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\execution.log",
           "inspectedBy": ""
         }
       ],
@@ -16938,7 +16938,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "Actual command dependency",
-          "sha256": "4782956D87A77EB08ECC8C5E574479F33E11F4BBCF3058BEBBF6ED7CF815BA4A"
+          "sha256": "B2AE1EB5D56BD53AC8573887D15349795DA7B14CF5FFE6667F625C3DB03CE6D7"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -16987,7 +16987,7 @@
           "kind": "test",
           "target": "DeNovoChangedCopyFacts",
           "assertion": "Changed-copy user fact FQ15-FA4555DDF335: The next action is choosing a SEPro package from the same runs",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\execution.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\execution.log",
           "inspectedBy": ""
         }
       ],
@@ -17241,7 +17241,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "Actual command dependency",
-          "sha256": "4782956D87A77EB08ECC8C5E574479F33E11F4BBCF3058BEBBF6ED7CF815BA4A"
+          "sha256": "B2AE1EB5D56BD53AC8573887D15349795DA7B14CF5FFE6667F625C3DB03CE6D7"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -17290,7 +17290,7 @@
           "kind": "test",
           "target": "DeNovoChangedCopyFacts",
           "assertion": "Changed-copy user fact FQ15-0810195F9FCC: The same-run requirement and Reconcile command remain visible",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\execution.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\execution.log",
           "inspectedBy": ""
         }
       ],
@@ -17544,7 +17544,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "Actual command dependency",
-          "sha256": "4782956D87A77EB08ECC8C5E574479F33E11F4BBCF3058BEBBF6ED7CF815BA4A"
+          "sha256": "B2AE1EB5D56BD53AC8573887D15349795DA7B14CF5FFE6667F625C3DB03CE6D7"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -17593,7 +17593,7 @@
           "kind": "test",
           "target": "DeNovoCommandEvidence",
           "assertion": "Executed status observation FQ15-50D78F955352: complete frozen/current messages agree at the recorded frozen call site",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\execution.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\execution.log",
           "inspectedBy": ""
         }
       ],
@@ -17847,7 +17847,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "Actual command dependency",
-          "sha256": "4782956D87A77EB08ECC8C5E574479F33E11F4BBCF3058BEBBF6ED7CF815BA4A"
+          "sha256": "B2AE1EB5D56BD53AC8573887D15349795DA7B14CF5FFE6667F625C3DB03CE6D7"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -17896,7 +17896,7 @@
           "kind": "test",
           "target": "DeNovoCommandEvidence",
           "assertion": "Executed status observation FQ15-66E8A7C104BB: complete frozen/current messages agree at the recorded frozen call site",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\execution.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\execution.log",
           "inspectedBy": ""
         }
       ],
@@ -18150,7 +18150,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "Actual command dependency",
-          "sha256": "4782956D87A77EB08ECC8C5E574479F33E11F4BBCF3058BEBBF6ED7CF815BA4A"
+          "sha256": "B2AE1EB5D56BD53AC8573887D15349795DA7B14CF5FFE6667F625C3DB03CE6D7"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -18199,7 +18199,7 @@
           "kind": "test",
           "target": "DeNovoCommandEvidence",
           "assertion": "Executed status observation FQ15-8A3FE99F899F: complete frozen/current messages agree at the recorded frozen call site",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\execution.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\execution.log",
           "inspectedBy": ""
         }
       ],
@@ -18453,7 +18453,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "Actual command dependency",
-          "sha256": "4782956D87A77EB08ECC8C5E574479F33E11F4BBCF3058BEBBF6ED7CF815BA4A"
+          "sha256": "B2AE1EB5D56BD53AC8573887D15349795DA7B14CF5FFE6667F625C3DB03CE6D7"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -18502,7 +18502,7 @@
           "kind": "test",
           "target": "DeNovoCommandEvidence",
           "assertion": "Executed status observation FQ15-82B0DE7C2F67: complete frozen/current messages agree at the recorded frozen call site",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\execution.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\execution.log",
           "inspectedBy": ""
         }
       ],
@@ -18756,7 +18756,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "Actual command dependency",
-          "sha256": "4782956D87A77EB08ECC8C5E574479F33E11F4BBCF3058BEBBF6ED7CF815BA4A"
+          "sha256": "B2AE1EB5D56BD53AC8573887D15349795DA7B14CF5FFE6667F625C3DB03CE6D7"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -18805,7 +18805,7 @@
           "kind": "test",
           "target": "DeNovoCommandEvidence",
           "assertion": "Executed status observation FQ15-3604A9990DD7: complete frozen/current messages agree at the recorded frozen call site",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\execution.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\execution.log",
           "inspectedBy": ""
         }
       ],
@@ -19059,7 +19059,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "Actual command dependency",
-          "sha256": "4782956D87A77EB08ECC8C5E574479F33E11F4BBCF3058BEBBF6ED7CF815BA4A"
+          "sha256": "B2AE1EB5D56BD53AC8573887D15349795DA7B14CF5FFE6667F625C3DB03CE6D7"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -19108,7 +19108,7 @@
           "kind": "test",
           "target": "DeNovoCommandEvidence",
           "assertion": "Executed status observation FQ15-D6E8B4FC93AC: complete frozen/current messages agree at the recorded frozen call site",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\execution.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\execution.log",
           "inspectedBy": ""
         }
       ],
@@ -19362,7 +19362,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "Actual command dependency",
-          "sha256": "4782956D87A77EB08ECC8C5E574479F33E11F4BBCF3058BEBBF6ED7CF815BA4A"
+          "sha256": "B2AE1EB5D56BD53AC8573887D15349795DA7B14CF5FFE6667F625C3DB03CE6D7"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -19411,7 +19411,7 @@
           "kind": "test",
           "target": "DeNovoCommandEvidence",
           "assertion": "Executed status observation FQ15-39074CF0EDFA: complete frozen/current messages agree at the recorded frozen call site",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\execution.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\execution.log",
           "inspectedBy": ""
         }
       ],
@@ -19665,7 +19665,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "Actual command dependency",
-          "sha256": "4782956D87A77EB08ECC8C5E574479F33E11F4BBCF3058BEBBF6ED7CF815BA4A"
+          "sha256": "B2AE1EB5D56BD53AC8573887D15349795DA7B14CF5FFE6667F625C3DB03CE6D7"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -19714,7 +19714,7 @@
           "kind": "test",
           "target": "DeNovoCommandEvidence",
           "assertion": "Executed status observation FQ15-E5EA381A5601: complete frozen/current messages agree at the recorded frozen call site",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\execution.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\execution.log",
           "inspectedBy": ""
         }
       ],
@@ -19968,7 +19968,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "Actual command dependency",
-          "sha256": "4782956D87A77EB08ECC8C5E574479F33E11F4BBCF3058BEBBF6ED7CF815BA4A"
+          "sha256": "B2AE1EB5D56BD53AC8573887D15349795DA7B14CF5FFE6667F625C3DB03CE6D7"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -20017,7 +20017,7 @@
           "kind": "test",
           "target": "DeNovoCommandEvidence",
           "assertion": "Executed status observation FQ15-A1CDC4E3776E: complete frozen/current messages agree at the recorded frozen call site",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\execution.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\execution.log",
           "inspectedBy": ""
         }
       ],
@@ -20271,7 +20271,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "Actual command dependency",
-          "sha256": "4782956D87A77EB08ECC8C5E574479F33E11F4BBCF3058BEBBF6ED7CF815BA4A"
+          "sha256": "B2AE1EB5D56BD53AC8573887D15349795DA7B14CF5FFE6667F625C3DB03CE6D7"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -20320,7 +20320,7 @@
           "kind": "test",
           "target": "DeNovoCommandEvidence",
           "assertion": "Executed status observation FQ15-50F8E846004E: complete frozen/current messages agree at the recorded frozen call site",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\execution.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\execution.log",
           "inspectedBy": ""
         }
       ],
@@ -20574,7 +20574,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "Actual command dependency",
-          "sha256": "4782956D87A77EB08ECC8C5E574479F33E11F4BBCF3058BEBBF6ED7CF815BA4A"
+          "sha256": "B2AE1EB5D56BD53AC8573887D15349795DA7B14CF5FFE6667F625C3DB03CE6D7"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -20623,7 +20623,7 @@
           "kind": "test",
           "target": "DeNovoCommandEvidence",
           "assertion": "Executed status observation FQ15-D4683267ACA8: complete frozen/current messages agree at the recorded frozen call site",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\execution.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\execution.log",
           "inspectedBy": ""
         }
       ],
@@ -20877,7 +20877,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "Actual command dependency",
-          "sha256": "4782956D87A77EB08ECC8C5E574479F33E11F4BBCF3058BEBBF6ED7CF815BA4A"
+          "sha256": "B2AE1EB5D56BD53AC8573887D15349795DA7B14CF5FFE6667F625C3DB03CE6D7"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -20926,7 +20926,7 @@
           "kind": "test",
           "target": "DeNovoCommandEvidence",
           "assertion": "Executed status observation FQ15-AC67B521B456: complete frozen/current messages agree at the recorded frozen call site",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\execution.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\execution.log",
           "inspectedBy": ""
         }
       ],
@@ -21180,7 +21180,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "Actual command dependency",
-          "sha256": "4782956D87A77EB08ECC8C5E574479F33E11F4BBCF3058BEBBF6ED7CF815BA4A"
+          "sha256": "B2AE1EB5D56BD53AC8573887D15349795DA7B14CF5FFE6667F625C3DB03CE6D7"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -21229,7 +21229,7 @@
           "kind": "test",
           "target": "DeNovoCommandEvidence",
           "assertion": "Executed status observation FQ15-651B08AC5168: complete frozen/current messages agree at the recorded frozen call site",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\execution.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\execution.log",
           "inspectedBy": ""
         }
       ],
@@ -21483,7 +21483,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "Actual command dependency",
-          "sha256": "4782956D87A77EB08ECC8C5E574479F33E11F4BBCF3058BEBBF6ED7CF815BA4A"
+          "sha256": "B2AE1EB5D56BD53AC8573887D15349795DA7B14CF5FFE6667F625C3DB03CE6D7"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -21532,7 +21532,7 @@
           "kind": "test",
           "target": "DeNovoCommandEvidence",
           "assertion": "Executed status observation FQ15-B3005206133F: complete frozen/current messages agree at the recorded frozen call site",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\execution.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\execution.log",
           "inspectedBy": ""
         }
       ],
@@ -21786,7 +21786,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "Actual command dependency",
-          "sha256": "4782956D87A77EB08ECC8C5E574479F33E11F4BBCF3058BEBBF6ED7CF815BA4A"
+          "sha256": "B2AE1EB5D56BD53AC8573887D15349795DA7B14CF5FFE6667F625C3DB03CE6D7"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -21835,7 +21835,7 @@
           "kind": "test",
           "target": "DeNovoCommandEvidence",
           "assertion": "Executed status observation FQ15-4ADAF0DFF9DE: complete frozen/current messages agree at the recorded frozen call site",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\execution.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\execution.log",
           "inspectedBy": ""
         }
       ],
@@ -22089,7 +22089,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "Actual command dependency",
-          "sha256": "4782956D87A77EB08ECC8C5E574479F33E11F4BBCF3058BEBBF6ED7CF815BA4A"
+          "sha256": "B2AE1EB5D56BD53AC8573887D15349795DA7B14CF5FFE6667F625C3DB03CE6D7"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -22138,7 +22138,7 @@
           "kind": "test",
           "target": "DeNovoCommandEvidence",
           "assertion": "Executed status observation FQ15-1A1B3D39B84A: complete frozen/current messages agree at the recorded frozen call site",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\execution.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\execution.log",
           "inspectedBy": ""
         }
       ],
@@ -22392,7 +22392,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "Actual command dependency",
-          "sha256": "4782956D87A77EB08ECC8C5E574479F33E11F4BBCF3058BEBBF6ED7CF815BA4A"
+          "sha256": "B2AE1EB5D56BD53AC8573887D15349795DA7B14CF5FFE6667F625C3DB03CE6D7"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -22441,7 +22441,7 @@
           "kind": "test",
           "target": "DeNovoCommandEvidence",
           "assertion": "Executed status observation FQ15-29230C722C0F: complete frozen/current messages agree at the recorded frozen call site",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\execution.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\execution.log",
           "inspectedBy": ""
         }
       ],
@@ -22695,7 +22695,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "Actual command dependency",
-          "sha256": "4782956D87A77EB08ECC8C5E574479F33E11F4BBCF3058BEBBF6ED7CF815BA4A"
+          "sha256": "B2AE1EB5D56BD53AC8573887D15349795DA7B14CF5FFE6667F625C3DB03CE6D7"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -22744,7 +22744,7 @@
           "kind": "test",
           "target": "DeNovoCommandEvidence",
           "assertion": "Executed status observation FQ15-5CD4DD6B5BED: complete frozen/current messages agree at the recorded frozen call site",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\execution.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\execution.log",
           "inspectedBy": ""
         }
       ],
@@ -22998,7 +22998,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "Actual command dependency",
-          "sha256": "4782956D87A77EB08ECC8C5E574479F33E11F4BBCF3058BEBBF6ED7CF815BA4A"
+          "sha256": "B2AE1EB5D56BD53AC8573887D15349795DA7B14CF5FFE6667F625C3DB03CE6D7"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -23047,7 +23047,7 @@
           "kind": "test",
           "target": "DeNovoCommandEvidence",
           "assertion": "Executed status observation FQ15-CDE795A26076: complete frozen/current messages agree at the recorded frozen call site",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\execution.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\execution.log",
           "inspectedBy": ""
         }
       ],
@@ -23301,7 +23301,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "Actual command dependency",
-          "sha256": "4782956D87A77EB08ECC8C5E574479F33E11F4BBCF3058BEBBF6ED7CF815BA4A"
+          "sha256": "B2AE1EB5D56BD53AC8573887D15349795DA7B14CF5FFE6667F625C3DB03CE6D7"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -23350,7 +23350,7 @@
           "kind": "test",
           "target": "DeNovoCommandEvidence",
           "assertion": "Executed status observation FQ15-F7D1757FF7ED: complete frozen/current messages agree at the recorded frozen call site",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\execution.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\execution.log",
           "inspectedBy": ""
         }
       ],
@@ -23604,7 +23604,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "Actual command dependency",
-          "sha256": "4782956D87A77EB08ECC8C5E574479F33E11F4BBCF3058BEBBF6ED7CF815BA4A"
+          "sha256": "B2AE1EB5D56BD53AC8573887D15349795DA7B14CF5FFE6667F625C3DB03CE6D7"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -23653,7 +23653,7 @@
           "kind": "test",
           "target": "DeNovoCommandEvidence",
           "assertion": "Executed status observation FQ15-6504A5413621: complete frozen/current messages agree at the recorded frozen call site",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\execution.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\execution.log",
           "inspectedBy": ""
         }
       ],
@@ -23907,7 +23907,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "Actual command dependency",
-          "sha256": "4782956D87A77EB08ECC8C5E574479F33E11F4BBCF3058BEBBF6ED7CF815BA4A"
+          "sha256": "B2AE1EB5D56BD53AC8573887D15349795DA7B14CF5FFE6667F625C3DB03CE6D7"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -23956,7 +23956,7 @@
           "kind": "test",
           "target": "DeNovoCommandEvidence",
           "assertion": "Executed status observation FQ15-B45590F3D6B2: complete frozen/current messages agree at the recorded frozen call site",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\execution.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\execution.log",
           "inspectedBy": ""
         }
       ],
@@ -24210,7 +24210,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "Actual command dependency",
-          "sha256": "4782956D87A77EB08ECC8C5E574479F33E11F4BBCF3058BEBBF6ED7CF815BA4A"
+          "sha256": "B2AE1EB5D56BD53AC8573887D15349795DA7B14CF5FFE6667F625C3DB03CE6D7"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -24259,7 +24259,7 @@
           "kind": "test",
           "target": "DeNovoCommandEvidence",
           "assertion": "Executed status observation FQ15-3458D15804E2: complete frozen/current messages agree at the recorded frozen call site",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\execution.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\execution.log",
           "inspectedBy": ""
         }
       ],
@@ -24513,7 +24513,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "Actual command dependency",
-          "sha256": "4782956D87A77EB08ECC8C5E574479F33E11F4BBCF3058BEBBF6ED7CF815BA4A"
+          "sha256": "B2AE1EB5D56BD53AC8573887D15349795DA7B14CF5FFE6667F625C3DB03CE6D7"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -24562,7 +24562,7 @@
           "kind": "test",
           "target": "DeNovoCommandEvidence",
           "assertion": "Executed status observation FQ15-3BA2B42C8642: complete frozen/current messages agree at the recorded frozen call site",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\execution.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\execution.log",
           "inspectedBy": ""
         }
       ],
@@ -24816,7 +24816,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "Actual command dependency",
-          "sha256": "4782956D87A77EB08ECC8C5E574479F33E11F4BBCF3058BEBBF6ED7CF815BA4A"
+          "sha256": "B2AE1EB5D56BD53AC8573887D15349795DA7B14CF5FFE6667F625C3DB03CE6D7"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -24865,7 +24865,7 @@
           "kind": "test",
           "target": "DeNovoCommandEvidence",
           "assertion": "Executed status observation FQ15-0D43622ED1F9: complete frozen/current messages agree at the recorded frozen call site",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\execution.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\execution.log",
           "inspectedBy": ""
         }
       ],
@@ -25119,7 +25119,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "Actual command dependency",
-          "sha256": "4782956D87A77EB08ECC8C5E574479F33E11F4BBCF3058BEBBF6ED7CF815BA4A"
+          "sha256": "B2AE1EB5D56BD53AC8573887D15349795DA7B14CF5FFE6667F625C3DB03CE6D7"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -25168,7 +25168,7 @@
           "kind": "test",
           "target": "DeNovoCommandEvidence",
           "assertion": "Executed status observation FQ15-1555A58EF51F: complete frozen/current messages agree at the recorded frozen call site",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\execution.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\execution.log",
           "inspectedBy": ""
         }
       ],
@@ -25422,7 +25422,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "Actual command dependency",
-          "sha256": "4782956D87A77EB08ECC8C5E574479F33E11F4BBCF3058BEBBF6ED7CF815BA4A"
+          "sha256": "B2AE1EB5D56BD53AC8573887D15349795DA7B14CF5FFE6667F625C3DB03CE6D7"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -25471,13 +25471,13 @@
           "kind": "test",
           "target": "DeNovoCommandEvidence",
           "assertion": "Executed status observation FQ15-745332D47B0C: complete frozen/current messages agree at the recorded frozen call site",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\execution.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\execution.log",
           "inspectedBy": ""
         }
       ],
       "note": "Actual command success/cancel/failure fixture; no fresh RAW or biological accuracy claim.",
       "kindReceiptId": null,
-      "compared": "FamilyQuant/DeNovoControl.xaml.cs:1123 \u0022Written to \u0022 -\u003E actual PDB call-site range 1122..1125; complete matching messages=[\u0022Written to D:\\\\FamilyQuant-data\\\\out-refresh\\\\20261102-140640-FamilyQuant-gate\\\\denovo-commands\\\\frozen-summary.csv: one line per run and verdict, with how many rows fell into each. Numbers use a dot for the decimal separator whatever your machine\\u0027s language is, so any program can read them. Nothing on screen changed. Next step: nothing.\u0022,\u0022Written to D:\\\\FamilyQuant-data\\\\out-refresh\\\\20261102-140640-FamilyQuant-gate\\\\denovo-commands\\\\frozen-review.csv: one line per row of the table, both sequences side by side. Numbers use a dot for the decimal separator whatever your machine\\u0027s language is, so any program can read them. Nothing on screen changed. Next step: nothing.\u0022,\u0022Written to D:\\\\FamilyQuant-data\\\\out-refresh\\\\20261102-140640-FamilyQuant-gate\\\\denovo-commands\\\\frozen-overlap.csv: the nested scan, precursor, exact-sequence and divergence counts with their denominators. Numbers use a dot for the decimal separator whatever your machine\\u0027s language is, so any program can read them. Nothing on screen changed. Next step: nothing.\u0022]; chosen output filenames are compared as recorded fixture arguments."
+      "compared": "FamilyQuant/DeNovoControl.xaml.cs:1123 \u0022Written to \u0022 -\u003E actual PDB call-site range 1122..1125; complete matching messages=[\u0022Written to D:\\\\FamilyQuant-data\\\\out-refresh\\\\20261102-155410-FamilyQuant-gate\\\\denovo-commands\\\\frozen-summary.csv: one line per run and verdict, with how many rows fell into each. Numbers use a dot for the decimal separator whatever your machine\\u0027s language is, so any program can read them. Nothing on screen changed. Next step: nothing.\u0022,\u0022Written to D:\\\\FamilyQuant-data\\\\out-refresh\\\\20261102-155410-FamilyQuant-gate\\\\denovo-commands\\\\frozen-review.csv: one line per row of the table, both sequences side by side. Numbers use a dot for the decimal separator whatever your machine\\u0027s language is, so any program can read them. Nothing on screen changed. Next step: nothing.\u0022,\u0022Written to D:\\\\FamilyQuant-data\\\\out-refresh\\\\20261102-155410-FamilyQuant-gate\\\\denovo-commands\\\\frozen-overlap.csv: the nested scan, precursor, exact-sequence and divergence counts with their denominators. Numbers use a dot for the decimal separator whatever your machine\\u0027s language is, so any program can read them. Nothing on screen changed. Next step: nothing.\u0022]; chosen output filenames are compared as recorded fixture arguments."
     },
     {
       "observationId": "FQ15-9E73EC365DDF",
@@ -25725,7 +25725,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "Actual command dependency",
-          "sha256": "4782956D87A77EB08ECC8C5E574479F33E11F4BBCF3058BEBBF6ED7CF815BA4A"
+          "sha256": "B2AE1EB5D56BD53AC8573887D15349795DA7B14CF5FFE6667F625C3DB03CE6D7"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -25774,13 +25774,13 @@
           "kind": "test",
           "target": "DeNovoCommandEvidence",
           "assertion": "Executed status observation FQ15-9E73EC365DDF: complete frozen/current messages agree at the recorded frozen call site",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\execution.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\execution.log",
           "inspectedBy": ""
         }
       ],
       "note": "Actual command success/cancel/failure fixture; no fresh RAW or biological accuracy claim.",
       "kindReceiptId": null,
-      "compared": "FamilyQuant/DeNovoControl.xaml.cs:1123 \u0022: \u0022 -\u003E actual PDB call-site range 1122..1125; complete matching messages=[\u0022Written to D:\\\\FamilyQuant-data\\\\out-refresh\\\\20261102-140640-FamilyQuant-gate\\\\denovo-commands\\\\frozen-summary.csv: one line per run and verdict, with how many rows fell into each. Numbers use a dot for the decimal separator whatever your machine\\u0027s language is, so any program can read them. Nothing on screen changed. Next step: nothing.\u0022,\u0022Written to D:\\\\FamilyQuant-data\\\\out-refresh\\\\20261102-140640-FamilyQuant-gate\\\\denovo-commands\\\\frozen-review.csv: one line per row of the table, both sequences side by side. Numbers use a dot for the decimal separator whatever your machine\\u0027s language is, so any program can read them. Nothing on screen changed. Next step: nothing.\u0022,\u0022Written to D:\\\\FamilyQuant-data\\\\out-refresh\\\\20261102-140640-FamilyQuant-gate\\\\denovo-commands\\\\frozen-overlap.csv: the nested scan, precursor, exact-sequence and divergence counts with their denominators. Numbers use a dot for the decimal separator whatever your machine\\u0027s language is, so any program can read them. Nothing on screen changed. Next step: nothing.\u0022]; chosen output filenames are compared as recorded fixture arguments."
+      "compared": "FamilyQuant/DeNovoControl.xaml.cs:1123 \u0022: \u0022 -\u003E actual PDB call-site range 1122..1125; complete matching messages=[\u0022Written to D:\\\\FamilyQuant-data\\\\out-refresh\\\\20261102-155410-FamilyQuant-gate\\\\denovo-commands\\\\frozen-summary.csv: one line per run and verdict, with how many rows fell into each. Numbers use a dot for the decimal separator whatever your machine\\u0027s language is, so any program can read them. Nothing on screen changed. Next step: nothing.\u0022,\u0022Written to D:\\\\FamilyQuant-data\\\\out-refresh\\\\20261102-155410-FamilyQuant-gate\\\\denovo-commands\\\\frozen-review.csv: one line per row of the table, both sequences side by side. Numbers use a dot for the decimal separator whatever your machine\\u0027s language is, so any program can read them. Nothing on screen changed. Next step: nothing.\u0022,\u0022Written to D:\\\\FamilyQuant-data\\\\out-refresh\\\\20261102-155410-FamilyQuant-gate\\\\denovo-commands\\\\frozen-overlap.csv: the nested scan, precursor, exact-sequence and divergence counts with their denominators. Numbers use a dot for the decimal separator whatever your machine\\u0027s language is, so any program can read them. Nothing on screen changed. Next step: nothing.\u0022]; chosen output filenames are compared as recorded fixture arguments."
     },
     {
       "observationId": "FQ15-D8088C6F3110",
@@ -26028,7 +26028,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "Actual command dependency",
-          "sha256": "4782956D87A77EB08ECC8C5E574479F33E11F4BBCF3058BEBBF6ED7CF815BA4A"
+          "sha256": "B2AE1EB5D56BD53AC8573887D15349795DA7B14CF5FFE6667F625C3DB03CE6D7"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -26077,13 +26077,13 @@
           "kind": "test",
           "target": "DeNovoCommandEvidence",
           "assertion": "Executed status observation FQ15-D8088C6F3110: complete frozen/current messages agree at the recorded frozen call site",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\execution.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\execution.log",
           "inspectedBy": ""
         }
       ],
       "note": "Actual command success/cancel/failure fixture; no fresh RAW or biological accuracy claim.",
       "kindReceiptId": null,
-      "compared": "FamilyQuant/DeNovoControl.xaml.cs:1123 \u0022. Numbers use a dot for the \u0022 -\u003E actual PDB call-site range 1122..1125; complete matching messages=[\u0022Written to D:\\\\FamilyQuant-data\\\\out-refresh\\\\20261102-140640-FamilyQuant-gate\\\\denovo-commands\\\\frozen-summary.csv: one line per run and verdict, with how many rows fell into each. Numbers use a dot for the decimal separator whatever your machine\\u0027s language is, so any program can read them. Nothing on screen changed. Next step: nothing.\u0022,\u0022Written to D:\\\\FamilyQuant-data\\\\out-refresh\\\\20261102-140640-FamilyQuant-gate\\\\denovo-commands\\\\frozen-review.csv: one line per row of the table, both sequences side by side. Numbers use a dot for the decimal separator whatever your machine\\u0027s language is, so any program can read them. Nothing on screen changed. Next step: nothing.\u0022,\u0022Written to D:\\\\FamilyQuant-data\\\\out-refresh\\\\20261102-140640-FamilyQuant-gate\\\\denovo-commands\\\\frozen-overlap.csv: the nested scan, precursor, exact-sequence and divergence counts with their denominators. Numbers use a dot for the decimal separator whatever your machine\\u0027s language is, so any program can read them. Nothing on screen changed. Next step: nothing.\u0022]; chosen output filenames are compared as recorded fixture arguments."
+      "compared": "FamilyQuant/DeNovoControl.xaml.cs:1123 \u0022. Numbers use a dot for the \u0022 -\u003E actual PDB call-site range 1122..1125; complete matching messages=[\u0022Written to D:\\\\FamilyQuant-data\\\\out-refresh\\\\20261102-155410-FamilyQuant-gate\\\\denovo-commands\\\\frozen-summary.csv: one line per run and verdict, with how many rows fell into each. Numbers use a dot for the decimal separator whatever your machine\\u0027s language is, so any program can read them. Nothing on screen changed. Next step: nothing.\u0022,\u0022Written to D:\\\\FamilyQuant-data\\\\out-refresh\\\\20261102-155410-FamilyQuant-gate\\\\denovo-commands\\\\frozen-review.csv: one line per row of the table, both sequences side by side. Numbers use a dot for the decimal separator whatever your machine\\u0027s language is, so any program can read them. Nothing on screen changed. Next step: nothing.\u0022,\u0022Written to D:\\\\FamilyQuant-data\\\\out-refresh\\\\20261102-155410-FamilyQuant-gate\\\\denovo-commands\\\\frozen-overlap.csv: the nested scan, precursor, exact-sequence and divergence counts with their denominators. Numbers use a dot for the decimal separator whatever your machine\\u0027s language is, so any program can read them. Nothing on screen changed. Next step: nothing.\u0022]; chosen output filenames are compared as recorded fixture arguments."
     },
     {
       "observationId": "FQ15-F917A2895716",
@@ -26331,7 +26331,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "Actual command dependency",
-          "sha256": "4782956D87A77EB08ECC8C5E574479F33E11F4BBCF3058BEBBF6ED7CF815BA4A"
+          "sha256": "B2AE1EB5D56BD53AC8573887D15349795DA7B14CF5FFE6667F625C3DB03CE6D7"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -26380,13 +26380,13 @@
           "kind": "test",
           "target": "DeNovoCommandEvidence",
           "assertion": "Executed status observation FQ15-F917A2895716: complete frozen/current messages agree at the recorded frozen call site",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\execution.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\execution.log",
           "inspectedBy": ""
         }
       ],
       "note": "Actual command success/cancel/failure fixture; no fresh RAW or biological accuracy claim.",
       "kindReceiptId": null,
-      "compared": "FamilyQuant/DeNovoControl.xaml.cs:1124 \u0022decimal separator whatever your machine\u0027s language is, so any program can \u0022 -\u003E actual PDB call-site range 1122..1125; complete matching messages=[\u0022Written to D:\\\\FamilyQuant-data\\\\out-refresh\\\\20261102-140640-FamilyQuant-gate\\\\denovo-commands\\\\frozen-summary.csv: one line per run and verdict, with how many rows fell into each. Numbers use a dot for the decimal separator whatever your machine\\u0027s language is, so any program can read them. Nothing on screen changed. Next step: nothing.\u0022,\u0022Written to D:\\\\FamilyQuant-data\\\\out-refresh\\\\20261102-140640-FamilyQuant-gate\\\\denovo-commands\\\\frozen-review.csv: one line per row of the table, both sequences side by side. Numbers use a dot for the decimal separator whatever your machine\\u0027s language is, so any program can read them. Nothing on screen changed. Next step: nothing.\u0022,\u0022Written to D:\\\\FamilyQuant-data\\\\out-refresh\\\\20261102-140640-FamilyQuant-gate\\\\denovo-commands\\\\frozen-overlap.csv: the nested scan, precursor, exact-sequence and divergence counts with their denominators. Numbers use a dot for the decimal separator whatever your machine\\u0027s language is, so any program can read them. Nothing on screen changed. Next step: nothing.\u0022]; chosen output filenames are compared as recorded fixture arguments."
+      "compared": "FamilyQuant/DeNovoControl.xaml.cs:1124 \u0022decimal separator whatever your machine\u0027s language is, so any program can \u0022 -\u003E actual PDB call-site range 1122..1125; complete matching messages=[\u0022Written to D:\\\\FamilyQuant-data\\\\out-refresh\\\\20261102-155410-FamilyQuant-gate\\\\denovo-commands\\\\frozen-summary.csv: one line per run and verdict, with how many rows fell into each. Numbers use a dot for the decimal separator whatever your machine\\u0027s language is, so any program can read them. Nothing on screen changed. Next step: nothing.\u0022,\u0022Written to D:\\\\FamilyQuant-data\\\\out-refresh\\\\20261102-155410-FamilyQuant-gate\\\\denovo-commands\\\\frozen-review.csv: one line per row of the table, both sequences side by side. Numbers use a dot for the decimal separator whatever your machine\\u0027s language is, so any program can read them. Nothing on screen changed. Next step: nothing.\u0022,\u0022Written to D:\\\\FamilyQuant-data\\\\out-refresh\\\\20261102-155410-FamilyQuant-gate\\\\denovo-commands\\\\frozen-overlap.csv: the nested scan, precursor, exact-sequence and divergence counts with their denominators. Numbers use a dot for the decimal separator whatever your machine\\u0027s language is, so any program can read them. Nothing on screen changed. Next step: nothing.\u0022]; chosen output filenames are compared as recorded fixture arguments."
     },
     {
       "observationId": "FQ15-06AE82FB3921",
@@ -26634,7 +26634,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "Actual command dependency",
-          "sha256": "4782956D87A77EB08ECC8C5E574479F33E11F4BBCF3058BEBBF6ED7CF815BA4A"
+          "sha256": "B2AE1EB5D56BD53AC8573887D15349795DA7B14CF5FFE6667F625C3DB03CE6D7"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -26683,13 +26683,13 @@
           "kind": "test",
           "target": "DeNovoCommandEvidence",
           "assertion": "Executed status observation FQ15-06AE82FB3921: complete frozen/current messages agree at the recorded frozen call site",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\execution.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\execution.log",
           "inspectedBy": ""
         }
       ],
       "note": "Actual command success/cancel/failure fixture; no fresh RAW or biological accuracy claim.",
       "kindReceiptId": null,
-      "compared": "FamilyQuant/DeNovoControl.xaml.cs:1125 \u0022read them. Nothing on screen changed. Next step: nothing.\u0022 -\u003E actual PDB call-site range 1122..1125; complete matching messages=[\u0022Written to D:\\\\FamilyQuant-data\\\\out-refresh\\\\20261102-140640-FamilyQuant-gate\\\\denovo-commands\\\\frozen-summary.csv: one line per run and verdict, with how many rows fell into each. Numbers use a dot for the decimal separator whatever your machine\\u0027s language is, so any program can read them. Nothing on screen changed. Next step: nothing.\u0022,\u0022Written to D:\\\\FamilyQuant-data\\\\out-refresh\\\\20261102-140640-FamilyQuant-gate\\\\denovo-commands\\\\frozen-review.csv: one line per row of the table, both sequences side by side. Numbers use a dot for the decimal separator whatever your machine\\u0027s language is, so any program can read them. Nothing on screen changed. Next step: nothing.\u0022,\u0022Written to D:\\\\FamilyQuant-data\\\\out-refresh\\\\20261102-140640-FamilyQuant-gate\\\\denovo-commands\\\\frozen-overlap.csv: the nested scan, precursor, exact-sequence and divergence counts with their denominators. Numbers use a dot for the decimal separator whatever your machine\\u0027s language is, so any program can read them. Nothing on screen changed. Next step: nothing.\u0022]; chosen output filenames are compared as recorded fixture arguments."
+      "compared": "FamilyQuant/DeNovoControl.xaml.cs:1125 \u0022read them. Nothing on screen changed. Next step: nothing.\u0022 -\u003E actual PDB call-site range 1122..1125; complete matching messages=[\u0022Written to D:\\\\FamilyQuant-data\\\\out-refresh\\\\20261102-155410-FamilyQuant-gate\\\\denovo-commands\\\\frozen-summary.csv: one line per run and verdict, with how many rows fell into each. Numbers use a dot for the decimal separator whatever your machine\\u0027s language is, so any program can read them. Nothing on screen changed. Next step: nothing.\u0022,\u0022Written to D:\\\\FamilyQuant-data\\\\out-refresh\\\\20261102-155410-FamilyQuant-gate\\\\denovo-commands\\\\frozen-review.csv: one line per row of the table, both sequences side by side. Numbers use a dot for the decimal separator whatever your machine\\u0027s language is, so any program can read them. Nothing on screen changed. Next step: nothing.\u0022,\u0022Written to D:\\\\FamilyQuant-data\\\\out-refresh\\\\20261102-155410-FamilyQuant-gate\\\\denovo-commands\\\\frozen-overlap.csv: the nested scan, precursor, exact-sequence and divergence counts with their denominators. Numbers use a dot for the decimal separator whatever your machine\\u0027s language is, so any program can read them. Nothing on screen changed. Next step: nothing.\u0022]; chosen output filenames are compared as recorded fixture arguments."
     },
     {
       "observationId": "FQ15-9A8A923BA90A",
@@ -26937,7 +26937,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "Actual command dependency",
-          "sha256": "4782956D87A77EB08ECC8C5E574479F33E11F4BBCF3058BEBBF6ED7CF815BA4A"
+          "sha256": "B2AE1EB5D56BD53AC8573887D15349795DA7B14CF5FFE6667F625C3DB03CE6D7"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -26986,7 +26986,7 @@
           "kind": "test",
           "target": "DeNovoCommandEvidence",
           "assertion": "Executed status observation FQ15-9A8A923BA90A: complete frozen/current messages agree at the recorded frozen call site",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\execution.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\execution.log",
           "inspectedBy": ""
         }
       ],
@@ -27240,7 +27240,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "Actual command dependency",
-          "sha256": "4782956D87A77EB08ECC8C5E574479F33E11F4BBCF3058BEBBF6ED7CF815BA4A"
+          "sha256": "B2AE1EB5D56BD53AC8573887D15349795DA7B14CF5FFE6667F625C3DB03CE6D7"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -27289,7 +27289,7 @@
           "kind": "test",
           "target": "DeNovoCommandEvidence",
           "assertion": "Executed status observation FQ15-CB1CCF968A7F: complete frozen/current messages agree at the recorded frozen call site",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\execution.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\execution.log",
           "inspectedBy": ""
         }
       ],
@@ -27543,7 +27543,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "Actual command dependency",
-          "sha256": "4782956D87A77EB08ECC8C5E574479F33E11F4BBCF3058BEBBF6ED7CF815BA4A"
+          "sha256": "B2AE1EB5D56BD53AC8573887D15349795DA7B14CF5FFE6667F625C3DB03CE6D7"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -27592,7 +27592,7 @@
           "kind": "test",
           "target": "DeNovoCommandEvidence",
           "assertion": "Executed status observation FQ15-3B2BB47C04F7: complete frozen/current messages agree at the recorded frozen call site",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\execution.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\execution.log",
           "inspectedBy": ""
         }
       ],
@@ -27846,7 +27846,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "Actual command dependency",
-          "sha256": "4782956D87A77EB08ECC8C5E574479F33E11F4BBCF3058BEBBF6ED7CF815BA4A"
+          "sha256": "B2AE1EB5D56BD53AC8573887D15349795DA7B14CF5FFE6667F625C3DB03CE6D7"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -27895,7 +27895,7 @@
           "kind": "test",
           "target": "DeNovoCommandEvidence",
           "assertion": "Executed status observation FQ15-9F933F8B5670: complete frozen/current messages agree at the recorded frozen call site",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\execution.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\execution.log",
           "inspectedBy": ""
         }
       ],
@@ -28149,7 +28149,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "Actual command dependency",
-          "sha256": "4782956D87A77EB08ECC8C5E574479F33E11F4BBCF3058BEBBF6ED7CF815BA4A"
+          "sha256": "B2AE1EB5D56BD53AC8573887D15349795DA7B14CF5FFE6667F625C3DB03CE6D7"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -28198,7 +28198,7 @@
           "kind": "test",
           "target": "DeNovoCommandEvidence",
           "assertion": "Executed status observation FQ15-D2F8FEEC80EE: complete frozen/current messages agree at the recorded frozen call site",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\execution.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\execution.log",
           "inspectedBy": ""
         }
       ],
@@ -28452,7 +28452,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "Actual command dependency",
-          "sha256": "4782956D87A77EB08ECC8C5E574479F33E11F4BBCF3058BEBBF6ED7CF815BA4A"
+          "sha256": "B2AE1EB5D56BD53AC8573887D15349795DA7B14CF5FFE6667F625C3DB03CE6D7"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -28501,7 +28501,7 @@
           "kind": "test",
           "target": "DeNovoCommandEvidence",
           "assertion": "Executed status observation FQ15-DA934458B136: complete frozen/current messages agree at the recorded frozen call site",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\execution.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\execution.log",
           "inspectedBy": ""
         }
       ],
@@ -28755,7 +28755,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "Actual command dependency",
-          "sha256": "4782956D87A77EB08ECC8C5E574479F33E11F4BBCF3058BEBBF6ED7CF815BA4A"
+          "sha256": "B2AE1EB5D56BD53AC8573887D15349795DA7B14CF5FFE6667F625C3DB03CE6D7"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -28804,7 +28804,7 @@
           "kind": "test",
           "target": "DeNovoCommandEvidence",
           "assertion": "Executed status observation FQ15-17C426DBF63A: complete frozen/current messages agree at the recorded frozen call site",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\execution.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\execution.log",
           "inspectedBy": ""
         }
       ],
@@ -29058,7 +29058,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "Actual command dependency",
-          "sha256": "4782956D87A77EB08ECC8C5E574479F33E11F4BBCF3058BEBBF6ED7CF815BA4A"
+          "sha256": "B2AE1EB5D56BD53AC8573887D15349795DA7B14CF5FFE6667F625C3DB03CE6D7"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -29107,7 +29107,7 @@
           "kind": "test",
           "target": "DeNovoCommandEvidence",
           "assertion": "Executed status observation FQ15-616094D09225: complete frozen/current messages agree at the recorded frozen call site",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\execution.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\execution.log",
           "inspectedBy": ""
         }
       ],
@@ -29361,7 +29361,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "Actual command dependency",
-          "sha256": "4782956D87A77EB08ECC8C5E574479F33E11F4BBCF3058BEBBF6ED7CF815BA4A"
+          "sha256": "B2AE1EB5D56BD53AC8573887D15349795DA7B14CF5FFE6667F625C3DB03CE6D7"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -29410,7 +29410,7 @@
           "kind": "test",
           "target": "DeNovoChangedCopyFacts",
           "assertion": "Changed-copy user fact FQ15-DDB35E0E348E: The number of distinct searched peptides is shown",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\execution.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\execution.log",
           "inspectedBy": ""
         }
       ],
@@ -29664,7 +29664,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "Actual command dependency",
-          "sha256": "4782956D87A77EB08ECC8C5E574479F33E11F4BBCF3058BEBBF6ED7CF815BA4A"
+          "sha256": "B2AE1EB5D56BD53AC8573887D15349795DA7B14CF5FFE6667F625C3DB03CE6D7"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -29713,7 +29713,7 @@
           "kind": "test",
           "target": "DeNovoChangedCopyFacts",
           "assertion": "Changed-copy user fact FQ15-97B2E3C28E44: The number of distinct searched peptides is shown",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\execution.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\execution.log",
           "inspectedBy": ""
         }
       ],
@@ -29967,7 +29967,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "Actual command dependency",
-          "sha256": "4782956D87A77EB08ECC8C5E574479F33E11F4BBCF3058BEBBF6ED7CF815BA4A"
+          "sha256": "B2AE1EB5D56BD53AC8573887D15349795DA7B14CF5FFE6667F625C3DB03CE6D7"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -30016,7 +30016,7 @@
           "kind": "test",
           "target": "DeNovoChangedCopyFacts",
           "assertion": "Changed-copy user fact FQ15-83A79FCFF61A: The searched family file is named beside the peptide count",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\execution.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\execution.log",
           "inspectedBy": ""
         }
       ],
@@ -30270,7 +30270,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "Actual command dependency",
-          "sha256": "4782956D87A77EB08ECC8C5E574479F33E11F4BBCF3058BEBBF6ED7CF815BA4A"
+          "sha256": "B2AE1EB5D56BD53AC8573887D15349795DA7B14CF5FFE6667F625C3DB03CE6D7"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -30319,7 +30319,7 @@
           "kind": "test",
           "target": "DeNovoChangedCopyFacts",
           "assertion": "Changed-copy user fact FQ15-FB9DC543F995: The searched family file is named beside the peptide count",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\execution.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\execution.log",
           "inspectedBy": ""
         }
       ],
@@ -30573,7 +30573,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "Actual command dependency",
-          "sha256": "4782956D87A77EB08ECC8C5E574479F33E11F4BBCF3058BEBBF6ED7CF815BA4A"
+          "sha256": "B2AE1EB5D56BD53AC8573887D15349795DA7B14CF5FFE6667F625C3DB03CE6D7"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -30622,7 +30622,7 @@
           "kind": "test",
           "target": "DeNovoChangedCopyFacts",
           "assertion": "Changed-copy user fact FQ15-17B4F3CB7F34: The target-mapped count is shown",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\execution.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\execution.log",
           "inspectedBy": ""
         }
       ],
@@ -30876,7 +30876,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "Actual command dependency",
-          "sha256": "4782956D87A77EB08ECC8C5E574479F33E11F4BBCF3058BEBBF6ED7CF815BA4A"
+          "sha256": "B2AE1EB5D56BD53AC8573887D15349795DA7B14CF5FFE6667F625C3DB03CE6D7"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -30925,7 +30925,7 @@
           "kind": "test",
           "target": "DeNovoChangedCopyFacts",
           "assertion": "Changed-copy user fact FQ15-B196620BD30B: The target-mapped count is shown",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\execution.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\execution.log",
           "inspectedBy": ""
         }
       ],
@@ -31179,7 +31179,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "Actual command dependency",
-          "sha256": "4782956D87A77EB08ECC8C5E574479F33E11F4BBCF3058BEBBF6ED7CF815BA4A"
+          "sha256": "B2AE1EB5D56BD53AC8573887D15349795DA7B14CF5FFE6667F625C3DB03CE6D7"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -31228,7 +31228,7 @@
           "kind": "test",
           "target": "DeNovoChangedCopyFacts",
           "assertion": "Changed-copy user fact FQ15-27B79D3CDC99: The target-mapped share is shown with two decimal places",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\execution.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\execution.log",
           "inspectedBy": ""
         }
       ],
@@ -31482,7 +31482,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "Actual command dependency",
-          "sha256": "4782956D87A77EB08ECC8C5E574479F33E11F4BBCF3058BEBBF6ED7CF815BA4A"
+          "sha256": "B2AE1EB5D56BD53AC8573887D15349795DA7B14CF5FFE6667F625C3DB03CE6D7"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -31531,7 +31531,7 @@
           "kind": "test",
           "target": "DeNovoChangedCopyFacts",
           "assertion": "Changed-copy user fact FQ15-69497EC5F0A4: The target-mapped share is shown with two decimal places",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\execution.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\execution.log",
           "inspectedBy": ""
         }
       ],
@@ -31785,7 +31785,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "Actual command dependency",
-          "sha256": "4782956D87A77EB08ECC8C5E574479F33E11F4BBCF3058BEBBF6ED7CF815BA4A"
+          "sha256": "B2AE1EB5D56BD53AC8573887D15349795DA7B14CF5FFE6667F625C3DB03CE6D7"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -31834,7 +31834,7 @@
           "kind": "test",
           "target": "DeNovoChangedCopyFacts",
           "assertion": "Changed-copy user fact FQ15-36CD9A3625EB: The decoy-only count is shown",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\execution.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\execution.log",
           "inspectedBy": ""
         }
       ],
@@ -32088,7 +32088,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "Actual command dependency",
-          "sha256": "4782956D87A77EB08ECC8C5E574479F33E11F4BBCF3058BEBBF6ED7CF815BA4A"
+          "sha256": "B2AE1EB5D56BD53AC8573887D15349795DA7B14CF5FFE6667F625C3DB03CE6D7"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -32137,7 +32137,7 @@
           "kind": "test",
           "target": "DeNovoChangedCopyFacts",
           "assertion": "Changed-copy user fact FQ15-02849424D2AA: Decoy-only and unmatched outcomes remain distinct",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\execution.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\execution.log",
           "inspectedBy": ""
         }
       ],
@@ -32391,7 +32391,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "Actual command dependency",
-          "sha256": "4782956D87A77EB08ECC8C5E574479F33E11F4BBCF3058BEBBF6ED7CF815BA4A"
+          "sha256": "B2AE1EB5D56BD53AC8573887D15349795DA7B14CF5FFE6667F625C3DB03CE6D7"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -32440,7 +32440,7 @@
           "kind": "test",
           "target": "DeNovoChangedCopyFacts",
           "assertion": "Changed-copy user fact FQ15-647A793CAB9E: The unmatched count is shown",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\execution.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\execution.log",
           "inspectedBy": ""
         }
       ],
@@ -32694,7 +32694,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "Actual command dependency",
-          "sha256": "4782956D87A77EB08ECC8C5E574479F33E11F4BBCF3058BEBBF6ED7CF815BA4A"
+          "sha256": "B2AE1EB5D56BD53AC8573887D15349795DA7B14CF5FFE6667F625C3DB03CE6D7"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -32743,7 +32743,7 @@
           "kind": "test",
           "target": "DeNovoChangedCopyFacts",
           "assertion": "Changed-copy user fact FQ15-4A31A5796BD8: The unmatched outcome and family count remain visible",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\execution.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\execution.log",
           "inspectedBy": ""
         }
       ],
@@ -32997,7 +32997,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "Actual command dependency",
-          "sha256": "4782956D87A77EB08ECC8C5E574479F33E11F4BBCF3058BEBBF6ED7CF815BA4A"
+          "sha256": "B2AE1EB5D56BD53AC8573887D15349795DA7B14CF5FFE6667F625C3DB03CE6D7"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -33046,7 +33046,7 @@
           "kind": "test",
           "target": "DeNovoChangedCopyFacts",
           "assertion": "Changed-copy user fact FQ15-02E2055621DE: The target-family count is shown as an integer",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\execution.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\execution.log",
           "inspectedBy": ""
         }
       ],
@@ -33300,7 +33300,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "Actual command dependency",
-          "sha256": "4782956D87A77EB08ECC8C5E574479F33E11F4BBCF3058BEBBF6ED7CF815BA4A"
+          "sha256": "B2AE1EB5D56BD53AC8573887D15349795DA7B14CF5FFE6667F625C3DB03CE6D7"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -33349,7 +33349,7 @@
           "kind": "test",
           "target": "DeNovoChangedCopyFacts",
           "assertion": "Changed-copy user fact FQ15-337AAECB73AA: The user is told to interpret mapped count alongside the decoy control",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\execution.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\execution.log",
           "inspectedBy": ""
         }
       ],
@@ -33603,7 +33603,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "Actual command dependency",
-          "sha256": "4782956D87A77EB08ECC8C5E574479F33E11F4BBCF3058BEBBF6ED7CF815BA4A"
+          "sha256": "B2AE1EB5D56BD53AC8573887D15349795DA7B14CF5FFE6667F625C3DB03CE6D7"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -33652,7 +33652,7 @@
           "kind": "test",
           "target": "DeNovoChangedCopyFacts",
           "assertion": "Changed-copy user fact FQ15-AC0CE9A0A3C5: The false-family warning and export next action reach the user",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\execution.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\execution.log",
           "inspectedBy": ""
         }
       ],
@@ -33906,7 +33906,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "Actual command dependency",
-          "sha256": "4782956D87A77EB08ECC8C5E574479F33E11F4BBCF3058BEBBF6ED7CF815BA4A"
+          "sha256": "B2AE1EB5D56BD53AC8573887D15349795DA7B14CF5FFE6667F625C3DB03CE6D7"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -33955,7 +33955,7 @@
           "kind": "test",
           "target": "DeNovoCommandEvidence",
           "assertion": "Actual command observation FQ15-1BB1BBFE77DF: frozen/current ButtonBrowsePeaksDirectory success route",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\execution.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\execution.log",
           "inspectedBy": ""
         }
       ],
@@ -34209,7 +34209,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "Actual command dependency",
-          "sha256": "4782956D87A77EB08ECC8C5E574479F33E11F4BBCF3058BEBBF6ED7CF815BA4A"
+          "sha256": "B2AE1EB5D56BD53AC8573887D15349795DA7B14CF5FFE6667F625C3DB03CE6D7"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -34258,7 +34258,7 @@
           "kind": "test",
           "target": "DeNovoCommandEvidence",
           "assertion": "Actual command observation FQ15-117504DF6278: frozen/current ButtonLoadAndFilter success route",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\execution.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\execution.log",
           "inspectedBy": ""
         }
       ],
@@ -34512,7 +34512,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "Actual command dependency",
-          "sha256": "4782956D87A77EB08ECC8C5E574479F33E11F4BBCF3058BEBBF6ED7CF815BA4A"
+          "sha256": "B2AE1EB5D56BD53AC8573887D15349795DA7B14CF5FFE6667F625C3DB03CE6D7"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -34561,7 +34561,7 @@
           "kind": "test",
           "target": "DeNovoCommandEvidence",
           "assertion": "Actual command observation FQ15-86FCA588E860: frozen/current ButtonBrowseSeproPackage success route",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\execution.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\execution.log",
           "inspectedBy": ""
         }
       ],
@@ -34815,7 +34815,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "Actual command dependency",
-          "sha256": "4782956D87A77EB08ECC8C5E574479F33E11F4BBCF3058BEBBF6ED7CF815BA4A"
+          "sha256": "B2AE1EB5D56BD53AC8573887D15349795DA7B14CF5FFE6667F625C3DB03CE6D7"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -34864,7 +34864,7 @@
           "kind": "test",
           "target": "DeNovoCommandEvidence",
           "assertion": "Actual command observation FQ15-00D8DDAFB01A: frozen/current ButtonReconcile success route",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\execution.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\execution.log",
           "inspectedBy": ""
         }
       ],
@@ -35118,7 +35118,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "Actual command dependency",
-          "sha256": "4782956D87A77EB08ECC8C5E574479F33E11F4BBCF3058BEBBF6ED7CF815BA4A"
+          "sha256": "B2AE1EB5D56BD53AC8573887D15349795DA7B14CF5FFE6667F625C3DB03CE6D7"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -35167,7 +35167,7 @@
           "kind": "test",
           "target": "DeNovoCommandEvidence",
           "assertion": "Actual command observation FQ15-21059FDA8FDC: frozen/current ButtonExportSummary success route",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\execution.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\execution.log",
           "inspectedBy": ""
         }
       ],
@@ -35421,7 +35421,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "Actual command dependency",
-          "sha256": "4782956D87A77EB08ECC8C5E574479F33E11F4BBCF3058BEBBF6ED7CF815BA4A"
+          "sha256": "B2AE1EB5D56BD53AC8573887D15349795DA7B14CF5FFE6667F625C3DB03CE6D7"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -35470,7 +35470,7 @@
           "kind": "test",
           "target": "DeNovoCommandEvidence",
           "assertion": "Actual command observation FQ15-0B73960109D5: frozen/current ButtonExportReviewQueue success route",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\execution.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\execution.log",
           "inspectedBy": ""
         }
       ],
@@ -35724,7 +35724,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "Actual command dependency",
-          "sha256": "4782956D87A77EB08ECC8C5E574479F33E11F4BBCF3058BEBBF6ED7CF815BA4A"
+          "sha256": "B2AE1EB5D56BD53AC8573887D15349795DA7B14CF5FFE6667F625C3DB03CE6D7"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -35773,7 +35773,7 @@
           "kind": "test",
           "target": "DeNovoCommandEvidence",
           "assertion": "Actual command observation FQ15-759EAE25FFB9: frozen/current ButtonExportOverlapStudy success route",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\execution.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\execution.log",
           "inspectedBy": ""
         }
       ],
@@ -36027,7 +36027,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "Actual command dependency",
-          "sha256": "4782956D87A77EB08ECC8C5E574479F33E11F4BBCF3058BEBBF6ED7CF815BA4A"
+          "sha256": "B2AE1EB5D56BD53AC8573887D15349795DA7B14CF5FFE6667F625C3DB03CE6D7"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -36076,7 +36076,7 @@
           "kind": "test",
           "target": "DeNovoCommandEvidence",
           "assertion": "Actual command observation FQ15-6D49EFE30E0E: frozen/current ButtonBrowseHomologyFcf success route",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\execution.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\execution.log",
           "inspectedBy": ""
         }
       ],
@@ -36330,7 +36330,7 @@
         {
           "path": "FamilyQuant/DeNovoControl.xaml",
           "symbol": "Actual command dependency",
-          "sha256": "4782956D87A77EB08ECC8C5E574479F33E11F4BBCF3058BEBBF6ED7CF815BA4A"
+          "sha256": "B2AE1EB5D56BD53AC8573887D15349795DA7B14CF5FFE6667F625C3DB03CE6D7"
         },
         {
           "path": "FamilyQuant/DeNovoControl.xaml.cs",
@@ -36379,7 +36379,7 @@
           "kind": "test",
           "target": "DeNovoCommandEvidence",
           "assertion": "Actual command observation FQ15-1EEC74BA5E8B: frozen/current ButtonSearchHomology success route",
-          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-140640-FamilyQuant-gate\\denovo-commands\\execution.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261102-155410-FamilyQuant-gate\\denovo-commands\\execution.log",
           "inspectedBy": ""
         }
       ],
