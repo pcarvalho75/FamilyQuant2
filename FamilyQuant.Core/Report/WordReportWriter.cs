@@ -183,6 +183,7 @@ public static class WordReportWriter
 
     private static W.Table Table(ReportTable data)
     {
+        data = ReportListSheets.WordView(data);
         int[] widths = ReportTableLayout.Widths(data, PageWidth);
         var result = new W.Table(new W.TableProperties(new W.TableWidth { Width = PageWidth.ToString(CultureInfo.InvariantCulture), Type = W.TableWidthUnitValues.Dxa },
             new W.TableLayout { Type = W.TableLayoutValues.Fixed },

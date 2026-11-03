@@ -127,6 +127,8 @@ public static class ReportMethods
         blocks.Add(new ReportParagraph("methods-unavailable", "An unavailable measurement is not a zero. Abundance and the number of supported database entries describe different properties. User-written interpretation appears separately."));
         rows = new List<IReadOnlyList<string>>();
         if (manifest.FamilyRunShares is { } runStudy) Add("Per-run composition and statistics", runStudy.Method);
+        if (manifest.EffectivePanelFamilies is { } effective) Add("Effective panel-family studies", effective.Method
+            + " Source membership SHA-256: " + effective.MembershipSha256 + ". Panel-map SHA-256: " + effective.PanelMapSha256 + ".");
         if (manifest.FamilyProteinCounts is { } proteinStudy) Add("Database-protein diversity", proteinStudy.Method);
         if (manifest.FamilySubclassParts is { } subclassStudy) Add("Pooled subclass allocation", subclassStudy.Method);
         if (manifest.FamilyDomainParts is { } domainStudy) Add("Pooled domain and mature-product allocation", domainStudy.Method);

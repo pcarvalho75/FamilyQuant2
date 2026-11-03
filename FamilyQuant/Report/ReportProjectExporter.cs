@@ -84,6 +84,8 @@ public static class ReportProjectExporter
             {
                 var section = replacements.GetValueOrDefault(original.Id) ?? original;
                 var blocks = section.Blocks.ToList();
+                if (section.Id == ReportSectionIds.Summary && EffectivePanelFamilyStudy.HasMultipleUserIds(curation))
+                    blocks.Add(new ReportParagraph("headline-family-unit", ReportEffectivePanelFamilies.UnitNotice));
                 if (section.Id == ReportSectionIds.Summary && curation.FamilyPanel == null)
                     blocks.Insert(0, new ReportParagraph("current-grouping-notice",
                         "Draft of the saved current grouping. No family panel is stored in this project. Group-specific, shared and unattributed signal remain separate; panel-based assignments can change both the grouping and its shared-signal fraction."));

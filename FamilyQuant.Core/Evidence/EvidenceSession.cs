@@ -13,7 +13,8 @@ namespace FamilyQuant.Evidence
         private static PreparedSession PrepareSession(FamilyClusterFile file, EvidenceProposal proposal, EvidenceApplySelection selection,
             Operations.OperationContext? operation)
         {
-            List<NeighbourReference>? references = ValidateSearch(file, selection.SessionSearch, selection.SessionReferences, proposal.Options, operation);
+            List<NeighbourReference>? references = ValidateSearch(file, selection.SessionSearch, selection.SessionReferences, proposal.Options, operation,
+                allowPanelReferences: proposal.PanelContext != null);
             if (selection.SessionSearch != null)
             {
                 var byQuery = selection.SessionSearch.ByQuery();
@@ -41,7 +42,7 @@ namespace FamilyQuant.Evidence
 
         internal static List<NeighbourReference>? ValidateSearch(FamilyClusterFile file, NeighbourSearch? search,
             IReadOnlyList<NeighbourReference>? suppliedReferences, EvidenceClassificationOptions options, Operations.OperationContext? operation,
-            bool allowLegacyCoverage = false)
+            bool allowLegacyCoverage = false, bool allowPanelReferences = false)
         {
             if (search == null)
             {
@@ -50,19 +51,24 @@ namespace FamilyQuant.Evidence
             }
             List<FastaItemExtended> queries = NearestReviewed.Targets(file).Where(p => !string.IsNullOrEmpty(p.Sequence)).ToList();
             List<NeighbourReference> current = NearestReviewed.References(file);
+            List<NeighbourReference>? panel = allowPanelReferences ? PanelEvidenceClassifier.References(file, options) : null;
             List<NeighbourReference>? references = suppliedReferences?.ToList();
             if (references == null)
             {
-                var candidates = new[]
+                var candidates = new List<List<NeighbourReference>>
                 {
                     current,
                     NearestReviewed.References(file, e => EvidenceClassifier.IsInScope(e, options.ScopeTerms)),
                     NearestReviewed.References(file, e => e.FamilyAnnotation.Length > 0 && EvidenceClassifier.IsInScope(e, options.ScopeTerms)),
                 };
+                if (panel != null) candidates.Add(panel);
                 references = candidates.FirstOrDefault(r => NearestReviewed.IsCurrent(search, queries, r, allowLegacyCoverage: allowLegacyCoverage));
             }
             var known = current.Select(r => Hash(r)).ToHashSet(StringComparer.Ordinal);
-            if (references == null || references.Any(r => r == null || !known.Contains(Hash(r)))
+            var panelKnown = panel?.Select(r => Hash(r)).ToHashSet(StringComparer.Ordinal);
+            bool fromCurrent = references != null && references.All(r => r != null && known.Contains(Hash(r)));
+            bool fromPanel = references != null && panelKnown != null && references.All(r => r != null && panelKnown.Contains(Hash(r)));
+            if (references == null || !(fromCurrent || fromPanel)
                 || references.Select(r => Hash(r)).Distinct(StringComparer.Ordinal).Count() != references.Count
                 || !NearestReviewed.IsCurrent(search, queries, references, allowLegacyCoverage: allowLegacyCoverage) || search.Queries != queries.Count || search.References != references.Count)
                 throw new InvalidOperationException("The session search no longer matches the current queries and reviewed references.");

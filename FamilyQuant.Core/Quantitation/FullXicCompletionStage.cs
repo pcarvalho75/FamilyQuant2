@@ -79,6 +79,15 @@ namespace FamilyQuant
                     }
                 }
                 if (options.FamilyCuration != null) FamilyUnobservedStudies.Store(options.FamilyCuration, manifest);
+                if (options.FamilyCuration != null && familyHits != null)
+                {
+                    try { EffectivePanelFamilyStudy.StoreIfNeeded(manifest, assigned, familyHits, options.FamilyCuration); }
+                    catch (ArgumentException ex)
+                    {
+                        manifest.EffectivePanelFamilies = null;
+                        result.Notes.Add("Effective panel-family studies unavailable: " + ex.Message);
+                    }
+                }
             }
             result.SpectrumComparisonRows = SpectrumComparisonTable.Build(
                 deNovoImport.AllSourceRows.Where(r => !string.Equals(r.SourceId,

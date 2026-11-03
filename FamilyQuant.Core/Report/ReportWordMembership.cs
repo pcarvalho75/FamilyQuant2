@@ -49,6 +49,7 @@ public static class ReportWordMembership
             string Row(IReadOnlyList<string> cells) => string.Join(",", cells.Select(CsvFormatting.AlwaysQuoted)) + "\n";
             recipe = recipe with { Csv = Row(full.Columns) + string.Concat(indexes.Select(i => Row(full.Rows[i]))) };
         }
-        return table with { Rows = indexes.Select(i => table.Rows[i]).ToArray(), SupplementSource = recipe };
+        return table with { Rows = indexes.Select(i => table.Rows[i]).ToArray(), SupplementSource = recipe,
+            ListColumns = ReportListSheets.KeepRows(table, indexes) };
     }
 }

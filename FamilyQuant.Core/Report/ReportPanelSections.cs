@@ -11,6 +11,10 @@ namespace FamilyQuant.Report;
 /// <summary>One section per panel row in source order. User text is never interpreted as a result.</summary>
 public static class ReportPanelSections
 {
+    /// <summary>Retained exact entry point for existing callers and reflection-based integrations.</summary>
+    public static IReadOnlyList<ReportSection> BuildFromResults(FamilyClusterFile curation, QuantManifest manifest) =>
+        BuildFromResults(curation, manifest, (OperationContext?)null, 0, null);
+
     /// <summary>Build sections from the studies stored in the project manifest. Shares are fractions.
     /// Completed native studies retain explicit no-peptide zeros. Other missing results stay unavailable.
     /// An ambiguous UserID is not assigned to a panel family.</summary>
@@ -88,8 +92,9 @@ public static class ReportPanelSections
             if (!target.Any(t => t.Id == "share-summary")) Missing("missing-shares", "Family share availability");
             if (!target.Any(t => t.Id == "protein-counts")) Missing("missing-counts", "Protein count availability");
         }
-        return Build(curation, tables.ToDictionary(p => p.Key, p => (IReadOnlyList<ReportTable>)p.Value), grouping,
+        var sections = Build(curation, tables.ToDictionary(p => p.Key, p => (IReadOnlyList<ReportTable>)p.Value), grouping,
             operation, sectionOffset, sectionTotal);
+        return ReportEffectivePanelFamilies.Apply(curation, manifest, sections, grouping);
     }
 
     public static IReadOnlyList<ReportSection> Build(FamilyClusterFile curation,
@@ -176,6 +181,13 @@ public static class ReportPanelSections
                 }
                 if (!hasObserved && ids.Length == 0) blocks.Add(new ReportParagraph(blockPrefix + "observation-status", "Panel-linked quantitative observations are not available. Missing observations are not zero abundance."));
             }
+            blocks = blocks.Select(block => block is ReportTable table && table.Id.EndsWith(":subclass-definitions", StringComparison.Ordinal)
+                ? table with { ListColumns = new[]
+                {
+                    new ReportListColumn(2, "Required domains", family.Subclasses.Select(s => (IReadOnlyList<string>)s.RequiredPfam.ToArray()).ToArray()),
+                    new ReportListColumn(3, "Absent domains", family.Subclasses.Select(s => (IReadOnlyList<string>)s.AbsentPfam.ToArray()).ToArray()),
+                    new ReportListColumn(4, "Source subfamilies", family.Subclasses.Select(s => (IReadOnlyList<string>)s.UniProtSubfamilies.ToArray()).ToArray()),
+                } } : block).ToList();
             sections.Add(new ReportSection(id, family.DisplayName, blocks));
         }
         return sections;
