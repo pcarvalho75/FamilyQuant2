@@ -40,11 +40,17 @@ public static partial class ReportStudyFigures
         FamilyReportThresholdResult? threshold = manifest.FamilyRunShares == null ? null : panelMap == null
             ? FamilyReportThreshold.Build(manifest.FamilyRunShares, project)
             : FamilyReportThreshold.Build(manifest.FamilyRunShares, project, panelMap);
-        var excluded = threshold?.ExcludedFamilies.Select(f => f.FamilyUserId.ToString(CultureInfo.InvariantCulture)).ToHashSet(StringComparer.Ordinal)
-            ?? new HashSet<string>(StringComparer.Ordinal);
         void Add(AnalyticsFigure plot, string title, string section = ReportSectionIds.Results)
         {
             var caption = CompositionChartCaptions.Describe(plot);
+            if (plot.Chart is FamilyCompositionChart or FamilySubclassChart or FamilyAbundanceDiversityChart)
+            {
+                var notes = (caption.Notes ?? Array.Empty<string>()).ToList();
+                notes.Add("Conflicting groups and groups that are not a panel family are outside family rows and Others; their signal remains in the original denominator");
+                if (plot.Chart is FamilyAbundanceDiversityChart && threshold?.OtherFamilies.Count > 0)
+                    notes.Add("Others diversity is the union of stored member-family greedy protein selections, not a new pooled fit; missing selected identifiers make that count unavailable");
+                caption = caption with { Notes = notes };
+            }
             figures.Add(new(section, title, plot, caption));
         }
 
@@ -52,8 +58,7 @@ public static partial class ReportStudyFigures
         if (manifest.FamilyRunShares != null)
         {
             var stored = StoredCompositionChartData.FromRunShares(manifest.FamilyRunShares, manifest.FamilyProteinCounts, labels);
-            means = Copy(stored, stored.Families.Where(r => !excluded.Contains(r.Key)).OrderByDescending(r => r.MeanPercent)
-                .ThenBy(r => r.Key, StringComparer.Ordinal));
+            means = CanonicalRows(stored, threshold!, manifest.FamilyProteinCounts);
             if (means.Families.Count > 0)
             {
                 var pages = Pages(means.Families, _ => 52);
@@ -69,13 +74,17 @@ public static partial class ReportStudyFigures
         else Missing("Family composition with run error bars", "Per-run family shares have not been computed.");
 
         FamilyCompositionData? pooled = null;
-        if (manifest.FamilySubclassParts != null)
+        FamilyCompositionData? ringData = null;
+        if (manifest.FamilySubclassParts != null && threshold != null)
         {
             if (manifest.FamilyRunShares != null && manifest.FamilyRunShares.Policy != manifest.FamilySubclassParts.Policy)
                 throw new InvalidOperationException("Run shares and subclass parts use different shared-peptide policies.");
-            var parts = new FamilySubclassPartsResult { Method = manifest.FamilySubclassParts.Method, Policy = manifest.FamilySubclassParts.Policy,
-                Families = manifest.FamilySubclassParts.Families.Where(f => !excluded.Contains(f.FamilyUserId.ToString(CultureInfo.InvariantCulture))).ToList() };
-            pooled = StoredCompositionChartData.FromSubclassParts(parts, labels);
+            if (!manifest.FamilySubclassParts.Families.Select(f => f.FamilyUserId).ToHashSet()
+                .SetEquals(manifest.FamilyRunShares!.Families.Select(f => f.FamilyUserId)))
+                throw new InvalidOperationException("Pooled subclass parts and the canonical report partition have different family memberships.");
+            // Adapt the complete stored partition first: filtering must never change the pooled denominator.
+            ringData = StoredCompositionChartData.FromSubclassParts(manifest.FamilySubclassParts, labels);
+            pooled = CanonicalRows(ringData, threshold, null);
             if (pooled.Families.Count > 0)
             {
                 var pages = Pages(pooled.Families, r => Math.Max(64, 37 + r.Subclasses.Count * 18));
@@ -89,9 +98,9 @@ public static partial class ReportStudyFigures
             }
             else Missing("Subclass contributions", "No pooled credited family signal is stored.");
         }
-        else Missing("Subclass contributions", "Subclass parts have not been computed.");
-        if (pooled is { Families.Count: > 0 } && threshold != null)
-            Add(FamilyCompositionFigures.BuildRing(pooled, FamilyRingGrouping.FromReportThreshold(threshold)), "Family and subclass ring, all runs pooled");
+        else Missing("Subclass contributions", "Stored subclass parts and the canonical mean-share report partition are required.");
+        if (ringData is { Families.Count: > 0 } && threshold != null)
+            Add(FamilyCompositionFigures.BuildRing(ringData, FamilyRingGrouping.FromReportThreshold(threshold)), "Family and subclass ring, all runs pooled");
         else Missing("Family and subclass ring", "Stored pooled subclass parts and mean per-run shares are required for the ring and Others membership.");
         if (means is { Families.Count: > 0 } && manifest.FamilyProteinCounts != null)
             Add(FamilyCompositionFigures.BuildAbundanceDiversity(means), "Abundance against database-protein diversity");
@@ -100,7 +109,7 @@ public static partial class ReportStudyFigures
         var world = manifest.FamilyWorldResult?.ForLength(manifest.DatabaseGapMinimumTagLength ?? FamilyWorldOptions.DefaultMinimumTagLength);
         if (world is { CompositionRules.Length: > 0 })
         {
-            var rows = world.Composition.Select(Snapshot).OrderByDescending(r => r.WorldDeNovoEnvelope).ThenBy(r => r.Kind, StringComparer.Ordinal)
+            var rows = CanonicalSources(world.Composition, threshold, unavailable).OrderByDescending(r => r.WorldDeNovoEnvelope).ThenBy(r => r.Kind, StringComparer.Ordinal)
                 .ThenBy(r => r.Family, StringComparer.OrdinalIgnoreCase).ThenBy(r => r.Family, StringComparer.Ordinal)
                 .ThenBy(r => r.CuratedUserIds.FirstOrDefault()).ToArray();
             var pages = rows.Chunk(12).ToArray();
@@ -112,7 +121,7 @@ public static partial class ReportStudyFigures
             }
         }
         else Missing("Family signal sources", "The selected family-world source composition has not been stored; its missing parts are not zero.");
-        AddCoverage(manifest, project, panelMap, topProteinsPerPanelFamily, figures, unavailable);
+        AddCoverage(manifest, project, panelMap, threshold, topProteinsPerPanelFamily, figures, unavailable);
         if (figures.Select(f => f.Plot.FileName).Distinct(StringComparer.Ordinal).Count() != figures.Count)
             throw new InvalidOperationException("Report study figure filenames collide.");
         return new(figures.AsReadOnly(), unavailable.AsReadOnly());

@@ -87,6 +87,8 @@ public static class CompositionChartCaptions
         {
             numbers.Add(new("Inner-ring total", chart.Families.Sum(f => f.Percent), "%"));
             numbers.Add(new("Outer-ring total", chart.Families.SelectMany(f => f.Parts).Sum(p => p.Percent), "%"));
+            foreach (var category in chart.Families.Where(f => f.IsUnassigned))
+                numbers.Add(new(category.Label + " pooled share", category.Percent, "%"));
             var others = chart.Families.SingleOrDefault(f => f.IsOthers);
             if (others != null)
             {
@@ -94,9 +96,9 @@ public static class CompositionChartCaptions
                 numbers.Add(new("Families retained inside Others", others.Members.Count, "families", "0"));
             }
         }
-        return new("Family shares and their subclass parts, all runs pooled",
-            "Inner arcs show families and outer arcs split the same pooled signal by subclass. Others uses the report's mean-of-runs membership; the ring never re-decides membership from pooled shares",
-            numbers, new[] { "Grey outer parts are unresolved or unavailable, as labelled. Original Others members and parts remain in the reference",
+        return new("Family shares, unassigned categories and subclass parts, all runs pooled",
+            "Inner arcs show report groups and outer arcs split the same pooled signal by subclass. Others uses the report's mean-of-runs membership; the ring never re-decides membership from pooled shares",
+            numbers, new[] { "Grey slices are conflicting families, not a panel family, or unresolved or unavailable parts, as labelled. The first two are outside families and Others. Original Others members and parts remain in the reference",
                 "Basis: " + chart.Data.Basis });
     }
 

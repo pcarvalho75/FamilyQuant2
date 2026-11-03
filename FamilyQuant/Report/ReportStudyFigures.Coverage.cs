@@ -8,7 +8,7 @@ namespace FamilyQuant.Report;
 
 public static partial class ReportStudyFigures
 {
-    private static void AddCoverage(QuantManifest manifest, FamilyClusterFile project, PanelFamilyMap? map, int top,
+    private static void AddCoverage(QuantManifest manifest, FamilyClusterFile project, PanelFamilyMap? map, FamilyReportThresholdResult? threshold, int top,
         List<ReportStudyFigure> figures, List<ReportFigureAvailability> unavailable)
     {
         var localization = manifest.FamilyPeptideLocalization;
@@ -24,13 +24,22 @@ public static partial class ReportStudyFigures
                 throw new InvalidOperationException("A stored peptide placement has no ranked protein.");
         }
         var groups = new List<(string Section, string Label, HashSet<int> Ids)>();
+        var blocked = threshold?.ExcludedFamilies.Select(f => f.FamilyUserId)
+            .Concat(threshold.ConflictFamilies.Select(f => f.Family.FamilyUserId)).ToHashSet() ?? new HashSet<int>();
+        var others = threshold?.OtherFamilies.Select(f => f.FamilyUserId).ToHashSet() ?? new HashSet<int>();
         if (project.FamilyPanel != null && map != null)
+        {
             foreach (var panel in project.FamilyPanel.Families.Where(f => f.Decision is FamilyPanelDecision.Quantify or FamilyPanelDecision.ReportUnderOthers))
-                groups.Add((ReportSectionIds.FamilyPrefix + panel.Key, panel.DisplayName,
-                    map.UserFamilies.Values.Where(f => !f.HasConflict && f.PanelFamilyKey == panel.Key).Select(f => f.FamilyUserId).ToHashSet()));
+            {
+                var ids = map.UserFamilies.Values.Where(f => !f.HasConflict && !blocked.Contains(f.FamilyUserId)
+                    && !others.Contains(f.FamilyUserId) && f.PanelFamilyKey == panel.Key).Select(f => f.FamilyUserId).ToHashSet();
+                if (ids.Count > 0) groups.Add((ReportSectionIds.FamilyPrefix + panel.Key, panel.DisplayName, ids));
+            }
+        }
         else if (localization != null)
-            groups.AddRange(localization.Families.OrderBy(f => f.FamilyUserId).Select(f =>
+            groups.AddRange(localization.Families.Where(f => !blocked.Contains(f.FamilyUserId) && !others.Contains(f.FamilyUserId)).OrderBy(f => f.FamilyUserId).Select(f =>
                 (ReportSectionIds.Results, "Family " + f.FamilyUserId.ToString(CultureInfo.InvariantCulture), new HashSet<int> { f.FamilyUserId })));
+        if (others.Count > 0) groups.Add((ReportSectionIds.Results, "Others", others));
         if (groups.Count == 0) unavailable.Add(new(ReportSectionIds.Results, "Protein coverage maps", "No panel-linked protein localization is stored."));
         foreach (var group in groups)
         {
