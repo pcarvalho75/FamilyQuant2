@@ -325,6 +325,7 @@ internal static class SuiteCommandInventory
         SuiteCommandRule.Covered("--test-report-list-sheets", "FamilyQuant.Tests.Program.ReportListSheetTests(System.String)"),
         SuiteCommandRule.Covered("--test-report-number-trace", "FamilyQuant.Tests.Program.ReportNumberTraceTests()"),
         SuiteCommandRule.Covered("--test-report-numeric-layout", "FamilyQuant.Tests.Program.ReportNumericLayoutTests(System.String)"),
+        SuiteCommandRule.Covered("--test-report-table-pagination", "FamilyQuant.Tests.Program.ReportTablePaginationTests(System.String)"),
         SuiteCommandRule.Covered("--test-report-paired-summary", "FamilyQuant.Tests.Program.ReportPairedSummaryTests()"),
         SuiteCommandRule.Covered("--test-report-progress", "FamilyQuant.Tests.Program.ReportProgressTests(System.String)"),
         SuiteCommandRule.Excluded("--test-report-publication", "Existing focused-only enrollment gap: paired report publication/rollback fixture. K8b audits routing; expanding this unrelated fixture pack is left to a separate enrollment change. No complete gate coverage is claimed."),

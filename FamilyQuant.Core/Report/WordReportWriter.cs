@@ -105,8 +105,15 @@ public static class WordReportWriter
                             if (table.Columns.Count == 0 || table.Rows.Any(r => r.Count != table.Columns.Count))
                                 throw new ArgumentException("Report tables require columns and equally sized rows.", nameof(document));
                             body.Append(Paragraph(table.Title, "Heading2"));
+                            // Keep a caption/header/first-row chain in document flow. A keep-next
+                            // inside the final cell did not anchor a paragraph after the table in Word.
+                            foreach (string line in Lines(table.Caption))
+                            {
+                                var caption = Paragraph(line, "Caption");
+                                caption.ParagraphProperties!.Append(new W.KeepNext(), new W.KeepLines());
+                                body.Append(caption);
+                            }
                             body.Append(Table(table));
-                            foreach (string line in Lines(table.Caption)) body.Append(Paragraph(line, "Caption"));
                             break;
                         case ReportFigure figure:
                             if (figure.PixelWidth <= 0 || figure.PixelHeight <= 0 || figure.PngBytes.Length < 8
@@ -225,9 +232,9 @@ public static class WordReportWriter
             }
             return row;
         }
-        result.Append(Row(data.Columns, true, true));
+        result.Append(Row(data.Columns, true, data.Rows.Count > 0));
         for (int index = 0; index < data.Rows.Count; index++)
-            result.Append(Row(data.Rows[index], false, index == data.Rows.Count - 1 && !string.IsNullOrWhiteSpace(data.Caption)));
+            result.Append(Row(data.Rows[index], false, false));
         return result;
     }
 
