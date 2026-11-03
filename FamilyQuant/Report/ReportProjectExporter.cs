@@ -25,21 +25,22 @@ public static class ReportProjectExporter
     {
         if (rows.Count == 0) throw new InvalidOperationException("No full XIC results are stored. Compute and save results before exporting a report.");
         FamilyStudyMembership.RequireCurrent(curation, manifest);
+        manifest = FamilyUnobservedStudies.View(curation, manifest);
         var data = analyticsData ?? AnalyticsBuilder.Build(rows, manifest.PerRunTic);
         if (analyticsData == null && manifest.DerivedFractions.Count > 0) NativeQuantFractions.ApplyDetectedToFractions(data.Fractions, data.Grouped, manifest.DerivedFractions);
         var options = new Homology.HomologyOptions();
         if (manifest.FamilyMapping != null) options.MinIdentity = manifest.FamilyMapping.MinIdentity;
         var families = familyResults ?? (curation.MyExtendedFastaItems.Count > 0 ? FamilyEnvelopeQuant.BuildFromCuration(rows, curation, options) : null);
-        var result = ReportCurrentResults.Build(data, manifest, families, manifest.FamilyRunShares?.Policy ?? SharedPeptidePolicy.FamilyUnique);
+        var grouping = manifest.FamilyRunShares == null ? null : FamilyReportThreshold.Build(manifest.FamilyRunShares, curation);
+        var result = ReportCurrentResults.Build(data, manifest, families, manifest.FamilyRunShares?.Policy ?? SharedPeptidePolicy.FamilyUnique, grouping);
         if (manifest.FamilySensitivity is { } sensitivity && (sensitivity.CurationFingerprint != FamilySensitivityStudy.CurationFingerprint(curation)
             || sensitivity.Variants.Count == 0 || sensitivity.Variants[0].SourceSha256 != FamilySensitivityStudy.CurrentFingerprint(rows, manifest, curation)))
             throw new InvalidDataException("Stored sensitivity results do not match this project's current quantitation and grouping. Recompute the sensitivity study before reporting it.");
         var labels = families?.Families.ToDictionary(f => f.FamilyUserId, f => f.Description)
             ?? new Dictionary<int, string>();
-        var grouping = manifest.FamilyRunShares == null ? null : FamilyReportThreshold.Build(manifest.FamilyRunShares, curation);
         result = ReportStoredResults.Apply(result, manifest, labels, grouping);
-        var plan = ReportFigureRenderer.Plan(data, manifest, curation, families);
-        var studies = ReportStudyFigures.Build(manifest, curation, pngFolder, topProteinsPerPanelFamily: 1);
+        var plan = ReportFigureRenderer.Plan(data, manifest, curation, families, grouping);
+        var studies = ReportStudyFigures.Build(manifest, curation, pngFolder, topProteinsPerPanelFamily: 1, reportGrouping: grouping);
         var figures = ReportFigureRenderer.Render(plan, pngFolder).Concat(studies.Figures).ToArray();
         var unavailable = plan.Unavailable.Concat(studies.Unavailable).ToArray();
         var document = ReportDocumentBuilder.Build(curation, manifest, details, provenance) with { ApplicationVersion = AppVersionInfo.Current() };
@@ -64,7 +65,7 @@ public static class ReportProjectExporter
             sections.Insert(sections.FindIndex(s => s.Id == ReportSectionIds.Results) + 1, conflictSection);
         int familyPosition = sections.FindIndex(s => s.Id == ReportSectionIds.AssignmentConflicts);
         familyPosition = familyPosition >= 0 ? familyPosition + 1 : sections.FindIndex(s => s.Id == ReportSectionIds.Results) + 1;
-        sections.InsertRange(familyPosition, ReportPanelSections.BuildFromResults(curation, manifest).Select(section => section with
+        sections.InsertRange(familyPosition, ReportPanelSections.BuildFromResults(curation, manifest, grouping).Select(section => section with
         {
             Blocks = section.Blocks.Concat(figures.Where(f => f.SectionId == section.Id).Select(f => (ReportBlock)f.Figure))
                 .Concat(unavailable.Where(f => f.SectionId == section.Id).Select((f, index) => (ReportBlock)new ReportParagraph(section.Id + ":unavailable-map:" + index.ToString(CultureInfo.InvariantCulture), f.Title + ": " + f.Reason))).ToArray(),
@@ -77,7 +78,7 @@ public static class ReportProjectExporter
                 int sourcePosition = blocks.FindLastIndex(b => b is ReportFigure figure && figure.Id.StartsWith("figure:family_signal_sources", StringComparison.Ordinal));
                 if (sourcePosition >= 0)
                 {
-                    blocks.Insert(sourcePosition + 1, ReportSourceSupport.Build(sourceWorld));
+                    blocks.Insert(sourcePosition + 1, ReportSourceSupport.Build(sourceWorld, grouping));
                     sections[i] = sections[i] with { Blocks = blocks };
                 }
             }
@@ -102,7 +103,8 @@ public static class ReportProjectExporter
         if (sourceWorld != null && studies.Figures.Any(f => f.Figure.Id.StartsWith("figure:family_signal_sources", StringComparison.Ordinal)))
             exports.Add("family_sources_support.csv", ReportStudyExports.SourceSupport(sourceWorld));
         var layout = ReportSupplementLayout.Apply(document, exports);
-        return new(layout.Document, exports, figures) { SupplementSheets = layout.Sheets.Concat(ReportCaptionTrace.Build(document, figureCaptions)).ToArray(), Selection = curation.ReportSelection };
+        var sheets = layout.Sheets.Concat(ReportCaptionTrace.Build(document, figureCaptions)).ToArray();
+        return new(layout.Document, exports, figures) { SupplementSheets = ReportTableSupplements.Complete(layout.Document, sheets), Selection = curation.ReportSelection };
     }
 
     public static void Write(ReportProjectExport export, string docxPath, ReportSelection? selection = null)
