@@ -64,6 +64,9 @@ internal static partial class Program
             var open = Stopwatch.StartNew();
             if (!shell.OpenProjectPath(projectPath)) throw new InvalidOperationException("The project open was refused.");
             ClusterGenerationControl? Families() => typeof(MainWindow).GetField("cgc", BindingFlags.Instance | BindingFlags.NonPublic)?.GetValue(shell) as ClusterGenerationControl;
+            string lastOperation = "";
+            if (Families() is { } loadedView)
+                loadedView.Operations.PropertyChanged += (_, _) => { if (loadedView.Operations.Message != lastOperation) { lastOperation = loadedView.Operations.Message; Log("Program activity: " + lastOperation); } };
             Wait(() => !shell.Operations.IsBusy && Families() is { } view && !view.Operations.IsBusy && view.FullXicReady.IsCompleted);
             Families()!.FullXicReady.GetAwaiter().GetResult();
             openSeconds = open.Elapsed.TotalSeconds; Log("Open and attribution ready in " + openSeconds);
@@ -86,13 +89,22 @@ internal static partial class Program
             Wait(() => shell.ReportExportTask.IsCompleted);
             bool success = shell.ReportExportTask.GetAwaiter().GetResult();
             exportSeconds = export.Elapsed.TotalSeconds;
+            var progress = shell.Operations.LogEntries.ToArray();
+            var gaps = progress.Zip(progress.Skip(1), (previous, next) => new { Seconds = (next.Timestamp - previous.Timestamp).TotalSeconds,
+                PreviousStage = previous.Stage, PreviousMessage = previous.Message, NextStage = next.Stage, NextMessage = next.Message }).ToArray();
+            var longest = gaps.OrderByDescending(gap => gap.Seconds).FirstOrDefault();
+            File.WriteAllText(Path.Combine(output, "export-progress.json"), JsonSerializer.Serialize(new { Entries = progress, LongestGap = longest }, new JsonSerializerOptions { WriteIndented = true }));
+            File.WriteAllText(Path.Combine(output, "export-progress.log"), shell.Operations.LogText);
+            if (longest != null) Log("Longest export gap " + longest.Seconds.ToString("F3", System.Globalization.CultureInfo.InvariantCulture)
+                + " s: " + longest.PreviousStage + " / " + longest.PreviousMessage + " -> " + longest.NextStage + " / " + longest.NextMessage);
             string workbook = ReportSupplementWorkbook.PathForReport(report);
             if (!success || !File.Exists(report) || !File.Exists(workbook)) throw new InvalidOperationException("Native report export failed; inspect command.log.");
             string after = FileFingerprint.Sha256(projectPath);
             if (after != before) throw new InvalidOperationException("Export changed its source project.");
             File.WriteAllText(Path.Combine(output, "result.json"), JsonSerializer.Serialize(new { Project = projectPath, SourceSha256 = before,
                 Report = report, Workbook = workbook, OpenSeconds = openSeconds, ExportSeconds = exportSeconds, TotalSeconds = total.Elapsed.TotalSeconds,
-                ReportSha256 = FileFingerprint.Sha256(report), WorkbookSha256 = FileFingerprint.Sha256(workbook), SourceUnchanged = true }, new JsonSerializerOptions { WriteIndented = true }));
+                ReportSha256 = FileFingerprint.Sha256(report), WorkbookSha256 = FileFingerprint.Sha256(workbook), SourceUnchanged = true,
+                ProgramStateDirectory = ApplicationPaths.LocalDataDirectory, LongestProgressGap = longest }, new JsonSerializerOptions { WriteIndented = true }));
             Log("Export succeeded in " + exportSeconds + " s; Word and supplement published; source unchanged");
             return 0;
         }
