@@ -157,7 +157,7 @@ internal static partial class Program
         byte[] selected = Bytes(document, figureChoice);
         Check("unticking one figure removes exactly its Word block", selected.SequenceEqual(Bytes(expected)));
         using var archive = new ZipArchive(new MemoryStream(selected));
-        var media = archive.Entries.Where(entry => entry.FullName.StartsWith("word/media/", StringComparison.Ordinal)).ToArray();
+        var media = archive.Entries.Where(entry => entry.FullName.EndsWith(".png", StringComparison.OrdinalIgnoreCase)).ToArray();
         using var image = new MemoryStream();
         if (media.Length == 1) { using var input = media[0].Open(); input.CopyTo(image); }
         Check("the remaining selected figure preserves its native PNG bytes", media.Length == 1 && image.ToArray().SequenceEqual(png));

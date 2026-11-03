@@ -72,7 +72,7 @@ namespace FamilyQuant
                 if (!string.IsNullOrEmpty(evidence?.Subfamily)) recorded.Add("Subfamily: " + evidence.Subfamily);
                 if (evidence?.Pfam != null && evidence.Pfam.Count > 0)
                     recorded.Add("Pfam: " + string.Join("; ", evidence.Pfam.Select(x => x.Accession)));
-                Append(FamilyNaming.Accession(item.SequenceIdentifier), FamilyNaming.ProteinName(item.Description),
+                Append(FamilyNaming.Accession(item.SequenceIdentifier), ProteinNameFormatting.ForNewOutput(item.Description),
                     family?.DisplayName, subclass?.DisplayName, assignment?.EvidenceUsed, assignment?.Reason,
                     conflicts.Contains(item.UserID) ? "The current User ID has conflicting panel family or outside members."
                         : label?.Reason ?? (subclassCurrent ? "" : "Subclass labels are unavailable or out of date."), string.Join(" | ", recorded));
