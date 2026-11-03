@@ -156,9 +156,9 @@ public partial class MainWindow
     {
         if (cgc?.ButtonSaveReport.IsEnabled == true) cgc.ButtonSaveReport.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
     }
-    private void MenuItemExportComposition_Click(object sender, RoutedEventArgs e)
+    private async void MenuItemExportComposition_Click(object sender, RoutedEventArgs e)
     {
-        if (cgc?.ButtonExportComposition.IsEnabled == true) cgc.ButtonExportComposition.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+        if (cgc != null) await cgc.ExportFamilyCompositionAsync(this);
     }
     private async void MenuItemSaveAs_Click(object sender, RoutedEventArgs e) => await SaveProjectAsync(saveAs: true);
 }

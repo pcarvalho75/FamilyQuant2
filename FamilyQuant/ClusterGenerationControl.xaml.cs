@@ -27,8 +27,8 @@ namespace FamilyQuant
         private string saveResultStatus = string.Empty;
         private object? statusTooltipBeforeSave;
 
-        public string ShellStatusText => saveResultStatus.Length > 0 ? saveResultStatus : DisplayedMode == null
-            ? (HasFullXic ? "Family curation. Full XIC available." : "Family curation. No calculated shares.")
+        public string ShellStatusText => saveResultStatus.Length > 0 ? saveResultStatus : DisplayedMode == null && !HasFullXic
+            ? "Family curation. No calculated shares."
             : TextBlockStatusLine.Text.Replace("showing: ", string.Empty, StringComparison.Ordinal);
 
         public event EventHandler? ShellStatusChanged;
@@ -504,11 +504,15 @@ namespace FamilyQuant
             ButtonExportComposition.IsEnabled = HasFullXic;
         }
 
-        private async void ButtonExportComposition_Click(object sender, RoutedEventArgs e)
+        private async void ButtonExportComposition_Click(object sender, RoutedEventArgs e) =>
+            await ExportFamilyCompositionAsync(this);
+
+        internal async Task ExportFamilyCompositionAsync(DependencyObject dialogOrigin)
         {
-            if (Operations.IsBusy || !HasFullXic) return;
+            if (Operations.IsBusy) { ShowCurationOperationResult("Wait for the current operation to finish."); return; }
+            if (!HasFullXic) return;
             var dialog = new SaveFileDialog { Filter = FileDialogFilters.Csv, FileName = "FamilyQuant_family_composition.csv", Title = "Save the family composition as CSV" };
-            if (!ShellDialogs.ShowFile(this, "curation.composition-csv", dialog)) return;
+            if (!ShellDialogs.ShowFile(dialogOrigin, "curation.composition-csv", dialog)) return;
             await RunCurationAsync("Export family composition", async operation =>
             {
                 operation.Report("export", "Preparing the full-XIC family composition");
