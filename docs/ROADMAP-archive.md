@@ -479,6 +479,7 @@ Paulo agreed these at the restart, 2026-11-01.
 | J35a | Progress for Compute and opening: every phase counted against a known total, the current item, elapsed time and time since the last step, all logged | M | 0.6 | 🟢 | J35b | A fixture Compute records every phase once, in order | SH | | 0 | 0 | |
 | J38b | CPU profile of the slowest call: its top functions with file:line | M | 0.4 | 🟢 | J38c | The profile posted | AS | | 0 | 0 | |
 | J35b | Progress on the full-run project: the longest gap between two steps named | L | 0.3 | 🟢 | J35c | `READY` names the longest gap and its phase | SH | | 0 | 0 | |
+| J35c | J35 reviewed and merged | L | 0.2 | 🟢 | J40 | Approved; gate green | SH | | 0 | 0 | |
 
 ### W2 The interpretation
 
