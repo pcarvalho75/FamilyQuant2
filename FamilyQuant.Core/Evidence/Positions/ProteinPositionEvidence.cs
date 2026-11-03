@@ -6,8 +6,8 @@ namespace FamilyQuant.Evidence.Positions;
 
 /// <summary>Coordinates on the canonical source protein, 1-based and inclusive. A consumer must
 /// verify SequenceSha256 against its protein before placing peptides; equal length alone is insufficient.
-/// Null on ProteinEvidence means positions have not been fetched. Empty lists on this record mean
-/// the sources were queried and returned no matching annotations.</summary>
+/// Null on ProteinEvidence means positions have not been fetched. Null DomainSource means domains
+/// were not queried; an empty Pfam list with a DomainSource means the query returned no matches.</summary>
 public sealed class ProteinPositionEvidence
 {
     public string Accession { get; set; } = string.Empty;
