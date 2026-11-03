@@ -16,6 +16,7 @@ public static class ReportMethods
     {
         ArgumentNullException.ThrowIfNull(curation);
         ArgumentNullException.ThrowIfNull(manifest);
+        details ??= curation.ReportDetails;
         var blocks = new List<ReportBlock>();
         var rows = new List<IReadOnlyList<string>>();
         void Add(string key, string? value) => rows.Add(new[] { key, Value(value) });
