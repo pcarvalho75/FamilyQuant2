@@ -8,6 +8,8 @@ using System.Linq;
 using System.Reflection;
 using System.Security.Cryptography;
 using System.Text;
+using System.Text.Json;
+using System.Text.Json.Nodes;
 
 namespace FamilyQuant.Tests;
 
@@ -18,6 +20,11 @@ internal static partial class Program
         public int MaximumWrite { get; private set; }
         public override void Write(byte[] buffer, int offset, int count) { MaximumWrite = Math.Max(MaximumWrite, count); base.Write(buffer, offset, count); }
         public override void Write(ReadOnlySpan<byte> buffer) { MaximumWrite = Math.Max(MaximumWrite, buffer.Length); base.Write(buffer); }
+    }
+    private sealed class SaveShortRead(byte[] bytes) : MemoryStream(bytes)
+    {
+        public override int Read(byte[] buffer, int offset, int count) => base.Read(buffer, offset, Math.Min(7, count));
+        public override int Read(Span<byte> buffer) => base.Read(buffer[..Math.Min(7, buffer.Length)]);
     }
 
     [TestCommandTable]
@@ -41,7 +48,7 @@ internal static partial class Program
                 UserID = index % 9, USearchID = index % 11, UserAnnotation = "Annotation " + index.ToString(CultureInfo.InvariantCulture) }).ToList() };
         file.LockedUserIds.Add(2);
         var write = typeof(FamilyClusterFile).GetMethod("WriteJsonUtf8", BindingFlags.Instance | BindingFlags.NonPublic);
-        var digest = typeof(FamilyClusterFile).GetMethod("JsonContentSha256", BindingFlags.Instance | BindingFlags.NonPublic);
+        var digest = typeof(FamilyClusterFile).GetMethod("JsonContentSha256", BindingFlags.Instance | BindingFlags.Public);
         byte[]? previous = null;
         var old = CultureInfo.CurrentCulture;
         try
@@ -57,6 +64,8 @@ internal static partial class Program
                     write != null && stream.CanWrite && expected.Length > 262144 && stream.MaximumWrite < 131072);
                 Check("J48 streamed curation fingerprint equals the existing UTF-8 SHA256 " + language,
                     digest != null && (string)digest.Invoke(file, null)! == Convert.ToHexString(SHA256.HashData(expected)));
+                Check("J48 shell dirty/saved-state fingerprint keeps the exact existing value " + language,
+                    ShellDocumentState.Fingerprint(file) == Convert.ToHexString(SHA256.HashData(expected)));
                 if (previous != null) Check("J48 streamed JSON repeats across cultures", previous.SequenceEqual(stream.ToArray()));
                 previous = stream.ToArray();
                 string project = Path.Combine(folder, language + ".fqproj");
@@ -78,5 +87,37 @@ internal static partial class Program
             }
         }
         finally { CultureInfo.CurrentCulture = old; }
+        StreamingSaveReadTests();
+    }
+
+    private static void StreamingSaveReadTests()
+    {
+        var file = new FamilyClusterFile { MyExtendedFastaItems = new()
+        { new() { SequenceIdentifier = "read", Sequence = "PEPTIDEK", Description = "Á < & >", UserID = 1, USearchID = 2 } } };
+        var method = typeof(FamilyClusterFile).GetMethod("ReadJsonUtf8", BindingFlags.Static | BindingFlags.NonPublic)!;
+        FamilyClusterFile Read(byte[] bytes)
+        {
+            try { return (FamilyClusterFile)method.Invoke(null, new object[] { (Func<Stream>)(() => new SaveShortRead(bytes)) })!; }
+            catch (TargetInvocationException error) when (error.InnerException != null)
+            { System.Runtime.ExceptionServices.ExceptionDispatchInfo.Capture(error.InnerException).Throw(); throw; }
+        }
+        string modern = file.ToJsonText();
+        Check("J48 streamed reader preserves modern explicit-empty lock semantics across short reads",
+            Read(Encoding.UTF8.GetBytes(modern)).ToJsonText() == FamilyClusterFile.FromJsonText(modern).ToJsonText());
+        var legacy = JsonNode.Parse(modern)!.AsObject(); legacy.Remove("LockedUserIds");
+        string old = legacy.ToJsonString();
+        Check("J48 streamed reader applies the exact legacy divergent-id lock migration",
+            Read(Encoding.UTF8.GetBytes(old)).ToJsonText() == FamilyClusterFile.FromJsonText(old).ToJsonText()
+            && Read(Encoding.UTF8.GetBytes(old)).LockedUserIds.SetEquals(new[] { 1, 2 }));
+        legacy["UnknownNested"] = new JsonObject { ["LockedUserIds"] = new JsonArray() };
+        string nested = legacy.ToJsonString();
+        Check("J48 streamed reader preserves the original raw lock-token presence rule for unknown nested fields",
+            Read(Encoding.UTF8.GetBytes(nested)).ToJsonText() == FamilyClusterFile.FromJsonText(nested).ToJsonText());
+        byte[] utf16 = Encoding.Unicode.GetPreamble().Concat(Encoding.Unicode.GetBytes(old)).ToArray();
+        Check("J48 streamed reader retains legacy UTF16 BOM compatibility fallback",
+            Read(utf16).ToJsonText() == FamilyClusterFile.FromJsonText(old).ToJsonText());
+        byte[] bom = Encoding.UTF8.GetPreamble().Concat(Encoding.UTF8.GetBytes(old)).ToArray();
+        Check("J48 streamed reader retains UTF8 BOM compatibility", Read(bom).ToJsonText() == FamilyClusterFile.FromJsonText(old).ToJsonText());
+        Check("J48 streamed reader still rejects malformed curation JSON", Throws<JsonException>(() => Read(Encoding.UTF8.GetBytes("{invalid"))));
     }
 }

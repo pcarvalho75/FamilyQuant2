@@ -158,7 +158,7 @@ namespace FamilyQuant
             using var fileStream = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Read);
             using var zip = new ZipArchive(fileStream, ZipArchiveMode.Read);
 
-            string curationText = ProjectArchiveEntries.ReadTextEntry(zip, CurationEntryName, operation)
+            ZipArchiveEntry curationEntry = zip.GetEntry(CurationEntryName)
                 ?? throw new InvalidDataException(
                     "\"" + path + "\" is not a valid FamilyQuant project: its " + CurationEntryName +
                     " entry is missing.");
@@ -168,7 +168,7 @@ namespace FamilyQuant
                     "\"" + path + "\" is not a valid FamilyQuant project: its " + ManifestEntryName +
                     " entry is missing.");
 
-            FamilyClusterFile fcf = FamilyClusterFile.FromJsonText(curationText);
+            FamilyClusterFile fcf = FamilyClusterFile.ReadJsonUtf8(curationEntry.Open);
 
             QuantManifest manifest = ProjectManifestCodec.Read(manifestText)
                 ?? throw new InvalidDataException(

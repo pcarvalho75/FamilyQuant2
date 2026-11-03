@@ -30,13 +30,16 @@ internal static partial class Program
         var readTimer = Stopwatch.StartNew(); var loaded = ProjectStore.ReadFqproj(input); double readSeconds = readTimer.Elapsed.TotalSeconds;
         string destination = Path.Combine(output, "saved.fqproj");
         var gate = new object(); long peakUsed = 0, peakHeap = 0, peakCommitted = 0, peakWorkingSet = 0; int samples = 0;
+        string phase = "Save entry", peakManagedPhase = phase, peakWorkingSetPhase = phase;
         void Sample()
         {
             lock (gate)
             {
                 process.Refresh(); var info = GC.GetGCMemoryInfo();
-                peakUsed = Math.Max(peakUsed, GC.GetTotalMemory(false)); peakHeap = Math.Max(peakHeap, info.HeapSizeBytes);
-                peakCommitted = Math.Max(peakCommitted, info.TotalCommittedBytes); peakWorkingSet = Math.Max(peakWorkingSet, process.WorkingSet64); samples++;
+                long used = GC.GetTotalMemory(false), working = process.WorkingSet64;
+                if (used > peakUsed) { peakUsed = used; peakManagedPhase = phase; }
+                if (working > peakWorkingSet) { peakWorkingSet = working; peakWorkingSetPhase = phase; }
+                peakHeap = Math.Max(peakHeap, info.HeapSizeBytes); peakCommitted = Math.Max(peakCommitted, info.TotalCommittedBytes); samples++;
             }
         }
         Sample(); long entryUsed = peakUsed, entryWorkingSet = peakWorkingSet;
@@ -47,7 +50,8 @@ internal static partial class Program
         {
             // Exactly the headless verified-Save service used by MainWindow.Documents:230.
             check = ShellProjectOperations.WriteVerifiedProject(destination, loaded.fcf, loaded.quant, loaded.manifest,
-                operation: new OperationContext(progress: new SaveMeasurementProgress(output, Sample)));
+                operation: new OperationContext(progress: new SaveMeasurementProgress(output, value =>
+                { lock (gate) phase = value.Stage + ": " + value.Message; Sample(); })));
             exit = 0;
         }
         catch (Exception failure)
@@ -65,10 +69,13 @@ internal static partial class Program
                     uncapped = true, readSeconds, saveSeconds, samples, entryManagedUsedBytes = entryUsed, entryWorkingSetBytes = entryWorkingSet,
                     sampledPeakManagedUsedBytes = peakUsed, peakReportedGCHeapBytes = peakHeap, peakCommittedGCBytes = peakCommitted,
                     sampledPeakSaveWorkingSetBytes = peakWorkingSet, processPeakWorkingSetBytes = process.PeakWorkingSet64,
+                    peakManagedPhase, peakWorkingSetPhase,
                     saveAllocatedBytes = GC.GetTotalAllocatedBytes(false) - allocatedBefore,
                     savedFileBytes = File.Exists(destination) ? new FileInfo(destination).Length : 0,
                     inputUnchanged = before == FileFingerprint.Sha256(input), check,
-                    route = "MainWindow.Documents -> ShellProjectOperations.WriteVerifiedProject -> ProjectStore.WriteFqproj -> SavedFileCheck.Capture/Curation -> FamilyClusterFile.ToJsonText",
+                    route = "MainWindow.Documents -> ShellProjectOperations.WriteVerifiedProject -> ProjectStore.WriteFqproj -> SavedFileCheck.Capture/Curation -> "
+                        + (typeof(FamilyClusterFile).GetMethod("WriteJsonUtf8", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic) != null
+                            ? "FamilyClusterFile.WriteJsonUtf8 (stream)" : "FamilyClusterFile.ToJsonText (full string)"),
                     error };
                 File.WriteAllText(Path.Combine(output, "save-metrics.json"), JsonSerializer.Serialize(result, new JsonSerializerOptions { WriteIndented = true }));
                 Console.WriteLine("SAVE MEASUREMENT COMPLETE " + JsonSerializer.Serialize(result));
@@ -77,11 +84,11 @@ internal static partial class Program
         return exit;
     }
 
-    private sealed class SaveMeasurementProgress(string output, Action sample) : IProgress<OperationProgress>
+    private sealed class SaveMeasurementProgress(string output, Action<OperationProgress> sample) : IProgress<OperationProgress>
     {
         public void Report(OperationProgress value)
         {
-            sample(); string line = DateTimeOffset.UtcNow.ToString("O", CultureInfo.InvariantCulture) + "\t" + value.Stage + "\t" + value.Message;
+            sample(value); string line = DateTimeOffset.UtcNow.ToString("O", CultureInfo.InvariantCulture) + "\t" + value.Stage + "\t" + value.Message;
             Console.WriteLine(line); File.AppendAllText(Path.Combine(output, "save-progress.log"), line + Environment.NewLine);
         }
     }
