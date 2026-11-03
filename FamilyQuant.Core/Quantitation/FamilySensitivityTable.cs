@@ -44,7 +44,7 @@ public static class FamilySensitivityTable
                 var policy = variant?.Policies.Single(p => p.Policy == row.Policy);
                 var family = policy?.Families.SingleOrDefault(f => f.FamilyUserId == row.FamilyUserId);
                 double? share = i == 0 ? row.FirstShare : row.SecondShare;
-                string[] fields = { row.FamilyUserId.ToString(CultureInfo.InvariantCulture), row.Description, row.Policy.ToString(),
+                string[] fields = { row.FamilyUserId.ToString(CultureInfo.InvariantCulture), row.Description, row.Policy.DisplayName(),
                     variant?.Label ?? "Comparison unavailable", variant?.SourceSha256 ?? string.Empty,
                     policy == null ? "" : (family?.Signal ?? 0).ToString("R", CultureInfo.InvariantCulture),
                     policy?.MeasuredSignal.ToString("R", CultureInfo.InvariantCulture) ?? "",

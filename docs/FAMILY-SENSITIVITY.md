@@ -56,10 +56,16 @@ family table, two actual variant inputs, missing/corrupt/stale data, cancellatio
 locale-independent CSV, exact project round trip and native table/comparison behavior in both themes.
 These are synthetic fixtures and saved-project checks, not a new RAW extraction or biological claim.
 
-J5e validation: Release build had zero warnings/errors; focused/native checks passed 20/0/0,
+J5e validation before the policy-label correction: Release build had zero warnings/errors; focused/native checks passed 20/0/0,
 including both themes, actual saved-project loading, exact study reopen, no row mutation, source/gate
 incompatibility and preservation of the previous table on failure. Stored-project golden passed
 4/0/0 with byte-identical analytics_summary.csv, composition.csv, evidence_pack_numbers.csv and
 families.csv. Logs: `D:/FamilyQuant-data/assay-j5e-final-build.log` and
 `D:/FamilyQuant-data/assay-j5e-golden.log`; fixture projects are under the isolated assay TEMP
 `FamilyQuant.Tests/family-sensitivity` directory. No builder quick suite was run under desk M12.
+
+Review correction: exported policy values use the same SharedPeptidePolicy.DisplayName wording as
+the Results grid. The added assertion failed first at 20/1/0 with enum identifiers, then passed at
+21/0/0 with the interface labels. Release remained zero warnings/errors and the numeric CSV locale
+comparison passed. Logs: `D:/FamilyQuant-data/assay-j5e-policy-red.log`,
+`assay-j5e-policy-green.log` and the matching build logs.

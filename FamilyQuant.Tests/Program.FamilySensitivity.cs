@@ -61,6 +61,9 @@ internal static partial class Program
         }
         finally { CultureInfo.CurrentCulture = culture; }
         Check("J5e: computing the study changes no extraction row", before == JsonSerializer.Serialize(rows));
+        string exportedPolicies = FamilySensitivityTable.BuildCsv(compared);
+        Check("J5e: exported policy labels equal the wording displayed by the interface", Enum.GetValues<SharedPeptidePolicy>()
+            .All(policy => exportedPolicies.Contains(policy.DisplayName(), StringComparison.Ordinal)));
         Check("J5e: an absent study is omitted from legacy manifest JSON", !JsonSerializer.Serialize(new QuantManifest()).Contains("FamilySensitivity", StringComparison.Ordinal));
         Check("J5e: a cancelled preparation publishes no study", Throws<OperationCanceledException>(() => FamilySensitivityStudy.Build(rows, source, file, mapping, new System.Threading.CancellationToken(true))));
         var missingHashes = Source(90); missingHashes.ScientificInputFingerprints.Clear();
