@@ -43,6 +43,7 @@ internal static partial class Program
         Section("Composition charts - supplied means, SD and subclass closure");
         EnsureApplication();
         Directory.CreateDirectory(folder);
+        KeyedSubclassColorTests(folder);
         var data = CompositionFixture();
         Check("composition retains the input mean and SD without renormalizing",
             data.Families[0].MeanPercent == 60 && data.Families[0].SdPercent == 5);
@@ -84,6 +85,30 @@ internal static partial class Program
                 .Single(f => f.FileName == figure.FileName).Chart, folder, figure.ScreenHeight);
         CheckChartNative("empty-composition.png", () => new FamilyCompositionChart(
             new FamilyCompositionData(Array.Empty<FamilyCompositionValue>(), "No stored shares")), folder, 540);
+    }
+
+    private static void KeyedSubclassColorTests(string folder)
+    {
+        var parts = Enumerable.Range(1, 6).Select(i => new FamilySubclassValue("class" + i, "Subclass " + i, 10))
+            .Append(new FamilySubclassValue("", "Subclass not resolved", 40)).ToArray();
+        var data = new FamilyCompositionData(new[]
+        {
+            new FamilyCompositionValue("many", "Family with six keyed subclasses", 100, null, 0, parts, null, null)
+        }, "Credited family signal", false);
+        var bitmap = ChartImageExporter.Render(new FamilySubclassChart(data), 960, 540, 1);
+        var remainder = ChartPalette.ColorOf(ChartPalette.Light.Remainder);
+        Color PixelAtShare(double share)
+        {
+            // Sample centers of the data rectangles, away from separators and text.
+            int x = (int)Math.Round(260 + 604 * share / 100);
+            byte[] pixel = new byte[4];
+            bitmap.CopyPixels(new Int32Rect(x, 119, 1, 1), pixel, 4, 0);
+            return Color.FromArgb(pixel[3], pixel[2], pixel[1], pixel[0]);
+        }
+        Check("all six keyed subclasses paint a data color distinct from unresolved grey",
+            Enumerable.Range(0, 6).All(i => PixelAtShare(5 + i * 10) != remainder));
+        Check("the explicit unresolved part still paints the reserved grey", PixelAtShare(80) == remainder);
+        CheckChartNative("six-keyed-subclasses.png", () => new FamilySubclassChart(data), folder, 540);
     }
 
     private static void CheckChartNative(string name, Func<FrameworkElement> create, string folder, double height)

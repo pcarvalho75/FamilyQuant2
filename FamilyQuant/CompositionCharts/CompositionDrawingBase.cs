@@ -26,10 +26,11 @@ public abstract class CompositionDrawingBase : ChartDrawingBase, IPalettedChart
         Label(dc, subtitle, 26, 54, ActualWidth - 52, 12, brush: palette.Muted);
     }
 
-    protected Brush Series(int index) => (index % 5) switch
+    // Grey is reserved for unresolved or unavailable parts, regardless of subclass count.
+    protected Brush Series(int index) => (index % 4) switch
     {
         0 => palette.Identified, 1 => palette.Quantified, 2 => palette.NotQuantified,
-        3 => palette.DeNovo, _ => palette.Remainder
+        _ => palette.DeNovo
     };
 
     protected static string Number(double value, string format = "0.##") => value.ToString(format, CultureInfo.CurrentCulture);
