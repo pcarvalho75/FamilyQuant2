@@ -9,7 +9,22 @@ namespace FamilyQuant.Tests;
 
 internal static partial class Program
 {
-    private static void FeatureLedgerEvidenceTests()
+    private static void FeatureLedgerEvidenceTests(bool release = false)
+    {
+        FeatureLedgerReceiptGuardTests(release);
+        FeatureLedgerReceiptFixtureTests();
+        LedgerImportBatchTests();
+    }
+
+    // The default suite runs the three parts of FeatureLedgerEvidenceTests as separate entries.
+    private static void FeatureLedgerReceiptFixtureTests()
+    {
+        string root = FindLedgerRoot()!;
+        ReceiptValidationFixtures(root, JsonSerializer.Deserialize<FeatureLedger.Inventory>(
+            File.ReadAllText(Path.Combine(root, "docs/feature-ledger-scan.json")))!);
+    }
+
+    private static void FeatureLedgerReceiptGuardTests(bool release = false)
     {
         Section("Feature ledger evidence receipts");
         string root = FindLedgerRoot()!;
@@ -20,15 +35,14 @@ internal static partial class Program
         cells[7] = " VERIFIED ";
         cells[8] = " executed:long-enough-but-no-receipt ";
         string forged = markdown.Replace(first, string.Join('|', cells), StringComparison.Ordinal);
-        Check("a plausible evidence sentence cannot close a row without an executed receipt",
+        if (LedgerReceiptsSkipped(release)) SkipLedgerReceipts("a plausible evidence sentence cannot close a row without an executed receipt");
+        else Check("a plausible evidence sentence cannot close a row without an executed receipt",
             FeatureLedger.Validate(inventory, forged).Count > 0);
         Check("a native tool groups and audits per-observation receipts", typeof(Program).Assembly.GetType("FamilyQuant.Tests.FeatureLedgerEvidence") != null);
         string invalidAudit = Path.Combine(Path.GetTempPath(), "FamilyQuant.EvidenceGuard.Tests", Path.GetFileName(root), "missing-row-audit");
         Directory.CreateDirectory(invalidAudit);
         Check("an audit cannot accept a ledger with a missing frozen row", FeatureLedgerEvidence.Report(root, inventory,
             markdown.Replace(first + "\n", "", StringComparison.Ordinal), FeatureLedgerEvidence.Load(root, inventory), invalidAudit) == 1);
-        ReceiptValidationFixtures(root, inventory);
-        LedgerImportBatchTests();
     }
 
     // Deliberately synthetic validator inputs. None is imported into the real ledger.

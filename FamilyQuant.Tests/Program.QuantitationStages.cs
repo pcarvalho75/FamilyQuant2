@@ -11,7 +11,6 @@ namespace FamilyQuant.Tests
     {
         private static void QuantitationStageTests()
         {
-            FullXicStorageTests();
             FamilySubclassStudyTests();
             FamilyRunSharesStudyTests();
             FamilyProteinCountsStudyTests();

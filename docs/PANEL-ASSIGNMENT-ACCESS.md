@@ -35,5 +35,16 @@ as a distinct decision on its measured target.
 Currentness binds database identity, every target identifier/sequence/evidence,
 current membership, source/reference provenance, panel rules, the recipe and
 the facts themselves. Display names and printed report text do not decide
-membership. The helper checks saved evidence; it never fetches, guesses, applies
+membership. Family assignment fingerprints cover family rows (keys, decisions,
+merges, Pfam accessions and confirmed links), not subclass definitions. A subclass
+edit leaves family assignments current and reruns only the subclass runner.
+The helper checks saved evidence; it never fetches, guesses, applies
 or silently refreshes an assignment.
+
+`PanelEvidenceClassifier.CreateCurrentResolver(file)` first requires current
+assignment provenance, then returns a detached resolver. Its
+`PanelFamilyFor(evidence)` maps any evidence record, including external reviewed
+entries, through the same confirmed or unique source/architecture links. It
+returns null for unresolved, excluded or ambiguous contexts. It does not bypass
+scope/homology gates. Recheck `resolver.IsCurrent(file)` before publishing an
+asynchronous calculation based on the captured snapshot.

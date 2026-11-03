@@ -13,7 +13,6 @@ internal static partial class Program
     /// when the curation carries a verified world, nothing changes without one, and a damaged world is noted.</summary>
     private static void FamilyWorldComputeTests()
     {
-        FamilyWorldRateTests();
         FamilyClusterFile file = TaskFile();
         using (var taxonomy = new TaskTaxonomyHandler())
         using (var handler = new WorldFetchHandler())

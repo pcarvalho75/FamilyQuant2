@@ -1,4 +1,5 @@
 using FamilyQuant.Panels;
+using FamilyQuant.Evidence;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -58,7 +59,8 @@ public static class ReportPanelSections
                         Integer(family.UniquePeptideProteinCount), Integer(family.ObservedPeptideCount), Integer(family.UnexplainedPeptides.Count) } },
                     "The greedy protein count approximates the fewest database proteins explaining peptides with a database match; it is not a gene count. Unexplained peptides remain separate."));
         }
-        foreach (int id in (curation.ProteinSubclassLabels ?? new List<ProteinSubclassLabel>())
+        var currentAssignments = PanelAssignmentEvidenceStore.Current(curation);
+        foreach (int id in (currentAssignments ?? Array.Empty<PanelProteinAssignment>())
             .Where(l => l.FamilyUserId.HasValue).Select(l => l.FamilyUserId!.Value).Distinct())
         {
             var target = For(id);
@@ -77,8 +79,9 @@ public static class ReportPanelSections
         ArgumentNullException.ThrowIfNull(curation);
         var panel = curation.FamilyPanel;
         if (panel == null) return Array.Empty<ReportSection>();
-        var byUserId = (curation.ProteinSubclassLabels ?? new List<ProteinSubclassLabel>())
-            .Where(l => l.FamilyUserId.HasValue).GroupBy(l => l.FamilyUserId!.Value).ToArray();
+        var assignments = PanelAssignmentEvidenceStore.Current(curation);
+        var familyMap = assignments == null ? null : PanelAssignmentEvidenceStore.BuildFamilyMap(panel, assignments);
+        bool subclassCurrent = SubclassAssignment.IsCurrent(curation);
         var sections = new List<ReportSection>();
         foreach (var family in panel.Families)
         {
@@ -113,10 +116,15 @@ public static class ReportPanelSections
                 blocks.Add(new ReportParagraph(blockPrefix + "observation-status", "Quantitative observations belong to the panel's named merge target; this row is not an additional family total."));
             else
             {
-                var matchingGroups = byUserId.Where(g => g.Any(l => string.Equals(l.PanelFamilyKey, family.Key, StringComparison.Ordinal))).ToArray();
-                int[] ids = matchingGroups.Where(g => g.All(l => string.Equals(l.PanelFamilyKey, family.Key, StringComparison.Ordinal)))
-                    .Select(g => g.Key).OrderBy(i => i).ToArray();
-                if (matchingGroups.Length != ids.Length)
+                if (!subclassCurrent)
+                    blocks.Add(new ReportParagraph(blockPrefix + "subclass-unavailable", "Subclass labels have not been computed or are out of date."));
+                if (familyMap == null)
+                    blocks.Add(new ReportParagraph(blockPrefix + "family-unavailable", "Panel family assignments are unavailable or out of date."));
+                var mappings = familyMap?.UserFamilies.Values ?? Enumerable.Empty<PanelFamilyUserMap>();
+                var matchingGroups = mappings.Where(g => g.PanelKeys.Contains(family.Key, StringComparer.Ordinal)).ToArray();
+                int[] ids = matchingGroups.Where(g => !g.HasConflict && string.Equals(g.PanelFamilyKey, family.Key, StringComparison.Ordinal))
+                    .Select(g => g.FamilyUserId).OrderBy(i => i).ToArray();
+                if (matchingGroups.Any(g => g.HasConflict))
                     blocks.Add(new ReportParagraph(blockPrefix + "ambiguous", "Some User IDs are shared with other or unknown panel families; their observations cannot be assigned to this panel family."));
                 bool hasObserved = false;
                 foreach (int userId in ids)
