@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text.Json;
+using FamilyQuant.DeNovo;
 using FamilyQuant.Evidence;
 using FamilyQuant.Panels;
 
@@ -23,7 +24,7 @@ internal static partial class Program
         static ProteinEvidence Evidence(string[] domains, string subfamily = "", string annotation = "") => new()
         {
             Pfam = domains.Select(d => new EvidenceDomain { Accession = d }).ToList(),
-            Subfamily = subfamily, FamilyAnnotation = annotation,
+            Subfamily = subfamily, FamilyAnnotation = annotation, Fragment = false,
         };
         var type = typeof(FamilyPanel).Assembly.GetType("FamilyQuant.Panels.SubclassAssignment");
         var method = type?.GetMethod("ClassifyDirect", new[] { typeof(FamilyPanelFamily), typeof(ProteinEvidence) });
@@ -80,6 +81,9 @@ internal static partial class Program
         var incomplete = Evidence(new[] { "domain-a" }); incomplete.Fragment = true;
         Check("J3a does not infer an absent domain from a recorded protein fragment",
             Direct(family, incomplete)?.Status == ProteinSubclassStatus.Unknown);
+        var unknownCompleteness = Evidence(new[] { "domain-a" }); unknownCompleteness.Fragment = null;
+        Check("J3a does not infer an absent domain when fragment status is unavailable",
+            Direct(family, unknownCompleteness)?.Status == ProteinSubclassStatus.Unknown);
 
         var options = new EvidenceClassificationOptions { ScopeTerms = new[] { "selected" } };
         var build = type?.GetMethod("BuildCandidate", new[] { typeof(FamilyClusterFile), typeof(EvidenceClassificationOptions) });
@@ -89,7 +93,7 @@ internal static partial class Program
         {
             SequenceIdentifier = id, Sequence = sequence, UserID = 11, USearchID = 11,
             Evidence = new ProteinEvidence { Accession = id, Reviewed = reviewed, Family = reviewed ? "Source family" : "",
-                Keywords = scope ? new() { "selected" } : new(),
+                Fragment = false, Keywords = scope ? new() { "selected" } : new(),
                 Pfam = domains.Select(d => new EvidenceDomain { Accession = d }).ToList() },
         };
         FamilyClusterFile Fixture(bool tied)
@@ -135,6 +139,15 @@ internal static partial class Program
         var tiedLabels = Labels(Candidate(Fixture(true)));
         Check("J3a refuses equally near reviewed references with different subclasses", tiedLabels
             .Any(r => r.Identifier == "Q-one" && r.Status == ProteinSubclassStatus.Unknown && !string.IsNullOrWhiteSpace(r.Reason)));
+        var externalUnknown = Fixture(false);
+        externalUnknown.MyExtendedFastaItems[0].Evidence!.Reviewed = false;
+        var externalEvidence = Protein("external", true, true, "common", "domain-a").Evidence!;
+        externalUnknown.EvidenceSource = new EvidenceProvenance { ReferencePanel = new ReferencePanel
+        {
+            Families = new() { "Source family" }, Entries = new() { new() { Accession = "external", Sequence = sequence, Evidence = externalEvidence } },
+        } };
+        Check("J3a does not guess an external reference's panel family from its accession", Labels(Candidate(externalUnknown))
+            .Any(r => r.Identifier == "Q-one" && r.Status == ProteinSubclassStatus.Unknown));
         var same = Fixture(true);
         same.MyExtendedFastaItems.Last().Evidence!.Pfam.RemoveAll(d => d.Accession == "domain-b");
         Check("J3a can use equally near references when they agree on the reported subclass", Labels(Candidate(same))
@@ -165,6 +178,10 @@ internal static partial class Program
         var fragmentTarget = Fixture(false);
         fragmentTarget.MyExtendedFastaItems[1].Evidence!.Fragment = true;
         Check("J3a does not carry an absence-dependent subclass to a recorded fragment", Labels(Candidate(fragmentTarget))
+            .Any(r => r.Identifier == "Q-one" && r.Status == ProteinSubclassStatus.Unknown));
+        var unknownTarget = Fixture(false);
+        unknownTarget.MyExtendedFastaItems[1].Evidence!.Fragment = null;
+        Check("J3a does not carry an absence-dependent subclass when fragment status is unavailable", Labels(Candidate(unknownTarget))
             .Any(r => r.Identifier == "Q-one" && r.Status == ProteinSubclassStatus.Unknown));
         var stale = Fixture(false);
         stale.FamilyPanel!.Families[0].Subclasses[0].RequiredPfam.Add("new-rule");
@@ -201,15 +218,7 @@ internal static partial class Program
 
         void MakeAssignmentsCurrent(FamilyClusterFile file)
         {
-            foreach (var row in file.PanelProteinAssignments!) row.Reason = "Synthetic applied assignment";
-            var recipe = new EvidenceRecipe { Options = options, FamilyPanel = FamilyPanelValidation.Clone(file.FamilyPanel!),
-                PanelProteinAssignments = JsonSerializer.Deserialize<List<PanelProteinAssignment>>(JsonSerializer.Serialize(file.PanelProteinAssignments)),
-                PanelProteinAssignmentsPanelFingerprint = file.PanelProteinAssignmentsPanelFingerprint };
-            file.EvidenceRecipe = recipe;
-            var fingerprint = typeof(PanelAssignmentEvidenceStore).GetMethod("Fingerprint",
-                System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.NonPublic)!;
-            string value = (string)fingerprint.Invoke(null, new object?[] { file, file.PanelProteinAssignments, recipe, file.EvidenceSource, null })!;
-            file.PanelProteinAssignmentsFingerprint = recipe.PanelProteinAssignmentsFingerprint = value;
+            MakePanelAssignmentsCurrent(file, options);
         }
         var current = Fixture(false); MakeAssignmentsCurrent(current);
         Check("J3a stand-in exercises J2a's current-assignment accessor", PanelAssignmentEvidenceStore.Current(current) != null);
@@ -321,6 +330,49 @@ internal static partial class Program
         catch (IOException) { existingRefused = true; }
         Check("J3a native measurement refuses an existing output directory", existingRefused);
 
+        var staleConsumers = Fixture(false); MakeAssignmentsCurrent(staleConsumers);
+        var staleLabels = Candidate(staleConsumers);
+        commitMethod!.Invoke(null, new[] { staleConsumers, staleLabels });
+        staleConsumers.MyExtendedFastaItems[0].Evidence!.Keywords.Add("changed after subclass computation");
+        var staleManifest = new QuantManifest { FamilySubclassParts = new FamilySubclassPartsResult(),
+            FamilyRunShares = new FamilyRunSharesResult { Families = new() { new() { FamilyUserId = 11, MeanShare = .125 } } } };
+        var emptyAttribution = FamilyEnvelopeQuant.AttributePeptides(Array.Empty<NativePeptideQuant>(), new PeptideFamilyAttribution());
+        Check("J3a stale subclass labels cannot feed the quantitation adapter or retain prior parts",
+            !FamilyCompositionStudy.StoreSubclassesFromCuration(staleManifest, emptyAttribution, new CurationHomologyHits(), staleConsumers)
+            && staleManifest.FamilySubclassParts == null);
+        var staleReport = FamilyQuant.Report.ReportPanelSections.BuildFromResults(staleConsumers, staleManifest);
+        var staleReportText = JsonSerializer.Serialize(staleReport.SelectMany(s => s.Blocks).Select(b => b switch
+        {
+            FamilyQuant.Report.ReportParagraph p => p.Text,
+            FamilyQuant.Report.ReportTable t => JsonSerializer.Serialize(t.Rows),
+            _ => "",
+        }));
+        Check("J3a stale labels cannot map report observations and are reported unavailable",
+            !staleReportText.Contains("0.125", StringComparison.Ordinal)
+            && staleReportText.Contains("out of date", StringComparison.OrdinalIgnoreCase));
+        string staleAudit = PanelAuditCsv.BuildCsv(staleConsumers);
+        Check("J3a audit does not export stale subclass labels as current", staleAudit.Contains("out of date", StringComparison.OrdinalIgnoreCase)
+            && !staleAudit.Contains("Source evidence matches the user-defined subclass rule", StringComparison.Ordinal));
+        var staleOnlySubclass = Fixture(false);
+        staleOnlySubclass.FamilyPanel!.Families[0].DisplayName = "User family";
+        MakeAssignmentsCurrent(staleOnlySubclass);
+        var freshLabels = Candidate(staleOnlySubclass);
+        commitMethod.Invoke(null, new[] { staleOnlySubclass, freshLabels });
+        staleOnlySubclass.ProteinSubclassLabels![0].SubclassKey = "altered";
+        var validFamilyReport = FamilyQuant.Report.ReportPanelSections.BuildFromResults(staleOnlySubclass, staleManifest);
+        string validFamilyText = JsonSerializer.Serialize(validFamilyReport.SelectMany(s => s.Blocks).Select(b => b switch
+        {
+            FamilyQuant.Report.ReportParagraph p => p.Text,
+            FamilyQuant.Report.ReportTable t => JsonSerializer.Serialize(t.Rows),
+            _ => "",
+        }));
+        Check("J3a report keeps current family observations while marking only subclass labels stale",
+            PanelAssignmentEvidenceStore.Current(staleOnlySubclass) != null && !SubclassAssignment.IsCurrent(staleOnlySubclass)
+            && validFamilyText.Contains("0.125", StringComparison.Ordinal) && validFamilyText.Contains("out of date", StringComparison.OrdinalIgnoreCase));
+        string familyAudit = PanelAuditCsv.BuildCsv(staleOnlySubclass);
+        Check("J3a audit keeps current family assignment while marking subclass labels stale", familyAudit.Contains("User family", StringComparison.Ordinal)
+            && familyAudit.Contains("out of date", StringComparison.OrdinalIgnoreCase) && !familyAudit.Contains("altered", StringComparison.Ordinal));
+
         EnsureApplication();
         bool RunRunner(ClusterGenerationControl host)
         {
@@ -358,5 +410,46 @@ internal static partial class Program
         finally { cancelScreen.Operations.PropertyChanged -= cancel; }
         Check("J3a native runner honors shared Cancel without publication or Undo", requestedCancel && !cancelResult
             && cancelFile.ProteinSubclassLabels == null && cancelScreen.ViewModel.UndoStack.Count == 0 && !cancelScreen.Operations.IsBusy);
+        var combinedMethod = typeof(SubclassAssignmentRunner).GetMethod("RecomputeSubclassesAsync", new[] { typeof(ClusterGenerationControl), typeof(bool) });
+        bool RunCombined(ClusterGenerationControl host)
+        {
+            if (combinedMethod == null) return false;
+            var task = (System.Threading.Tasks.Task<bool>)combinedMethod.Invoke(null, new object[] { host, true })!;
+            var watch = System.Diagnostics.Stopwatch.StartNew();
+            while (!task.IsCompleted && watch.Elapsed < TimeSpan.FromSeconds(30)) { PumpDispatcher(); System.Threading.Thread.Sleep(5); }
+            if (!task.IsCompleted) throw new TimeoutException("Combined subclass runner did not finish.");
+            return task.GetAwaiter().GetResult();
+        }
+        var combined = Fixture(false); MakeAssignmentsCurrent(combined);
+        var combinedScreen = new ClusterGenerationControl(combined);
+        var previous = GroupingSnapshot.CaptureEvidence(combined);
+        string priorName = combined.FamilyPanel!.Families[0].DisplayName;
+        combined.FamilyPanel.Families[0].DisplayName = "Edited name";
+        combinedScreen.ViewModel.UndoStack.Add(previous);
+        bool combinedRan = RunCombined(combinedScreen);
+        Check("J3a automatic runner folds subclass recomputation into the caller's Undo", combinedRan
+            && combinedScreen.ViewModel.UndoStack.Count == 1 && SubclassAssignment.IsCurrent(combined));
+        if (combinedScreen.ViewModel.CanUndo) combinedScreen.ViewModel.Undo();
+        Check("J3a one combined Undo restores both prior panel and prior labels", combinedRan
+            && combined.FamilyPanel!.Families[0].DisplayName == priorName && combined.ProteinSubclassLabels == null);
+        var noCaller = Fixture(false); MakeAssignmentsCurrent(noCaller);
+        var noCallerScreen = new ClusterGenerationControl(noCaller);
+        Check("J3a combined mode refuses to run without a caller Undo", !RunCombined(noCallerScreen)
+            && noCaller.ProteinSubclassLabels == null && noCallerScreen.ViewModel.UndoStack.Count == 0);
+        var combinedCancel = Fixture(false); MakeAssignmentsCurrent(combinedCancel);
+        var combinedCancelScreen = new ClusterGenerationControl(combinedCancel);
+        combinedCancelScreen.ViewModel.UndoStack.Add(GroupingSnapshot.CaptureEvidence(combinedCancel));
+        bool combinedCancelRequested = false;
+        System.ComponentModel.PropertyChangedEventHandler cancelCombined = (_, _) =>
+        {
+            if (!combinedCancelRequested && combinedCancelScreen.Operations.IsBusy)
+            { combinedCancelRequested = true; combinedCancelScreen.Operations.Cancel(); }
+        };
+        combinedCancelScreen.Operations.PropertyChanged += cancelCombined;
+        bool cancelledCombined;
+        try { cancelledCombined = RunCombined(combinedCancelScreen); }
+        finally { combinedCancelScreen.Operations.PropertyChanged -= cancelCombined; }
+        Check("J3a combined Cancel retains the caller's Undo without publishing labels", combinedCancelRequested && !cancelledCombined
+            && combinedCancel.ProteinSubclassLabels == null && combinedCancelScreen.ViewModel.UndoStack.Count == 1);
     }
 }

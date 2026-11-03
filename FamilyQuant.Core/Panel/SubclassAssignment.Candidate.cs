@@ -154,7 +154,7 @@ public static partial class SubclassAssignment
                 }
                 FamilyPanelSubclass? rule = selected[index].Subclasses.FirstOrDefault(s => s.Key == reference.DefinitionKey);
                 var targetEvidence = proteins[index].Evidence;
-                if (rule == null || (rule.AbsentPfam.Count > 0 && targetEvidence?.Fragment == true)
+                if (rule == null || (rule.AbsentPfam.Count > 0 && targetEvidence?.Fragment != false)
                     || (targetEvidence?.Pfam ?? new List<EvidenceDomain>()).Any(d => rule.AbsentPfam.Contains(d.Accession, StringComparer.Ordinal)))
                 {
                     labels[index].Reason = "The target's available evidence does not support the reviewed reference's subclass rule.";
