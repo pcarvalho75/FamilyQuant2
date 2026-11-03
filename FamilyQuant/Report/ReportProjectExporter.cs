@@ -8,7 +8,11 @@ using System.Text;
 namespace FamilyQuant.Report;
 
 public sealed record ReportProjectExport(ReportDocument Document, IReadOnlyDictionary<string, string> CsvExports,
-    IReadOnlyList<ReportPlacedFigure> Figures);
+    IReadOnlyList<ReportPlacedFigure> Figures)
+{
+    public IReadOnlyList<ReportSupplementSheet> SupplementSheets { get; init; } = Array.Empty<ReportSupplementSheet>();
+    public ReportSelection? Selection { get; init; }
+}
 
 /// <summary>Program-owned saved-project route shared by the shell and reproducibility command.</summary>
 public static class ReportProjectExporter
