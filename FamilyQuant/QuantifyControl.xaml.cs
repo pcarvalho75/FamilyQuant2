@@ -46,6 +46,12 @@ public partial class QuantifyControl : UserControl
         if (ShellDialogs.ShowFolder(this, "quantify.denovo", dialog)) ViewModel.DeNovoDirectory = dialog.FolderName;
         else ViewModel.ShowStatus("No de novo folder was chosen. Type the optional export root or leave it empty for identified peptides only.");
     }
+    private void BrowseSearchParameters(object sender, RoutedEventArgs e)
+    {
+        if (!CanShowDialog()) return;
+        var dialog = new OpenFileDialog { Title = "Choose the search parameter file", Filter = "Search parameter files (*.params;*.txt)|*.params;*.txt|All files (*.*)|*.*" };
+        if (ShellDialogs.ShowFile(this, "quantify.search-parameters", dialog)) ViewModel.SearchParametersPath = dialog.FileName;
+    }
     private void ViewSpectrum(object sender, RoutedEventArgs e)
     {
         if (ViewModel.Result is not { } result || !CanShowDialog()) return;
