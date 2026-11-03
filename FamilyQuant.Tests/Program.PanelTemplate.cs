@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text.Json;
+using System.Globalization;
+using FamilyQuant.Panels.Import;
 using FamilyQuant.Panels;
 
 namespace FamilyQuant.Tests;
@@ -44,6 +46,21 @@ internal static partial class Program
         {
             write.Invoke(null, new object[] { path, panel });
             Check("J1e writer marks its own template", FamilyPanelTemplate.IsTemplate(path));
+            string culturePath = Path.Combine(Path.GetTempPath(), Guid.NewGuid() + ".xlsx");
+            var previousCulture = CultureInfo.CurrentCulture;
+            try
+            {
+                CultureInfo.CurrentCulture = CultureInfo.GetCultureInfo("pt-BR");
+                FamilyPanelTemplate.Write(culturePath, panel);
+                var portuguese = new PanelSpreadsheetReader().ReadTable(culturePath, "Families", 2);
+                CultureInfo.CurrentCulture = CultureInfo.GetCultureInfo("en-US");
+                FamilyPanelTemplate.Write(culturePath, panel);
+                var english = new PanelSpreadsheetReader().ReadTable(culturePath, "Families", 2);
+                Check("J1e template columns and cell values are invariant across cultures",
+                    JsonSerializer.Serialize(portuguese.Headers) == JsonSerializer.Serialize(english.Headers)
+                    && JsonSerializer.Serialize(portuguese.Rows.Select(x => x.Cells)) == JsonSerializer.Serialize(english.Rows.Select(x => x.Cells)));
+            }
+            finally { CultureInfo.CurrentCulture = previousCulture; if (File.Exists(culturePath)) File.Delete(culturePath); }
             var tooLong = FamilyPanelValidation.Clone(panel);
             tooLong.Families[0].TextFields[0].Text = new string('x', 32768);
             string longPath = Path.Combine(Path.GetTempPath(), Guid.NewGuid() + ".xlsx");

@@ -156,7 +156,7 @@ public static class FamilyPanelTemplate
         }
         return result;
     }
-    private static string FieldHeader(TextColumn field) => "Text: " + field.Name + (field.Occurrence == 1 ? "" : " [" + field.Occurrence + "]");
+    private static string FieldHeader(TextColumn field) => "Text: " + field.Name + (field.Occurrence == 1 ? "" : " [" + field.Occurrence.ToString(CultureInfo.InvariantCulture) + "]");
     private static string FieldValue(FamilyPanelFamily family, TextColumn field) => family.TextFields.Where(x => x.Name == field.Name).Skip(field.Occurrence - 1).FirstOrDefault()?.Text ?? string.Empty;
     private static void SetField(FamilyPanelFamily family, TextColumn field, string value)
     {
