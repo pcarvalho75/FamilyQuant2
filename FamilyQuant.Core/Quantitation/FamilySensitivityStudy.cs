@@ -67,6 +67,8 @@ public static class FamilySensitivityStudy
         double gate = EffectiveIdentity(source);
         if (!double.IsFinite(gate) || gate is < 0 or > 1) throw new InvalidDataException("The recorded family identity gate is invalid.");
         mapping ??= FamilyEnvelopeQuant.BuildAttributionFromCuration(rows, curation, new Homology.HomologyOptions { MinIdentity = gate });
+        if (mapping.MembershipSha256 != null && mapping.MembershipSha256 != FamilyStudyMembership.Fingerprint(curation))
+            throw new InvalidDataException(FamilyStudyMembership.ChangedMessage);
         if (mapping.IdentityThreshold != gate) throw new InvalidDataException("The cached attribution differs from the recorded family identity gate.");
         token.ThrowIfCancellationRequested();
         var attributed = FamilyEnvelopeQuant.AttributePeptides(peptides, mapping);

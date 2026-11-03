@@ -25,17 +25,17 @@ namespace FamilyQuant
     /// </summary>
     public static class FullXicComputer
     {
-        /// <summary>The subfolder, beside the RAW files, the per-run extraction caches are written into
-        /// when no cache-path override is given. Beside the acquisitions on purpose: the cache belongs to
-        /// them, so a second computation over the same runs is answered without opening a 3 GB file
-        /// again.</summary>
+        /// <summary>The cache folder name, now in per-user application data. Older folders beside
+        /// acquisitions remain read sources only; new cache and automatic CSV writes stay outside RAW.</summary>
         public const string CacheFolderName = "familyquant_fullxic_cache";
 
         /// <summary>
         /// Computes the full XIC of every run that has both a RAW and something to extract.
         ///
         /// <paramref name="cachePathFor"/> maps (side, run name) to a cache file path, or is null for the
-        /// default beside the RAW files. A SEAM for the harness (which already holds the caches it needs)
+        /// per-user default. An explicit external path keeps the harness's cache isolation (no legacy
+        /// lookup). An acquisition-side override is read only and new entries go to per-user storage.
+        /// A SEAM for the harness (which already holds the caches it needs)
         /// and a legitimate hook for a project that keeps its caches elsewhere; the identified and de novo
         /// sides get SEPARATE cache files, because they credit a different isotope count and a cache is
         /// keyed by it.

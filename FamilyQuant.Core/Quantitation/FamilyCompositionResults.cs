@@ -5,8 +5,10 @@ namespace FamilyQuant
     /// <summary>Optional composition studies. Shares are fractions, not percentages. Signal uses the
     /// primary family basis: observed identified envelope plus reference-calibrated de novo envelope.
     /// Family IDs are current UserIDs. These records never replace the original family table.</summary>
-    public sealed class FamilyRunSharesResult
+    public sealed class FamilyRunSharesResult : IFamilyMembershipStudy
     {
+        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull)]
+        public string? MembershipSha256 { get; set; }
         public string Method { get; set; } = string.Empty;
         public SharedPeptidePolicy Policy { get; set; }
         public List<FamilyRunTotal> Runs { get; set; } = new();
@@ -61,8 +63,10 @@ namespace FamilyQuant
 
     /// <summary>Database-protein diversity, not a gene or proteoform count. Greedy set cover is an
     /// approximation to the minimum. Ties use ordinal protein identifiers. Unexplained peptides stay visible.</summary>
-    public sealed class FamilyProteinCountsResult
+    public sealed class FamilyProteinCountsResult : IFamilyMembershipStudy
     {
+        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull)]
+        public string? MembershipSha256 { get; set; }
         public string Method { get; set; } = string.Empty;
         public List<FamilyProteinCount> Families { get; set; } = new();
     }
@@ -101,8 +105,10 @@ namespace FamilyQuant
 
     /// <summary>Peptides unique to one subclass are credited there; all others remain not resolved.
     /// Protein labels come from the panel's evidence assignment, never from fixed subclass names.</summary>
-    public sealed class FamilySubclassPartsResult
+    public sealed class FamilySubclassPartsResult : IFamilyMembershipStudy
     {
+        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull)]
+        public string? MembershipSha256 { get; set; }
         public string Method { get; set; } = string.Empty;
         public SharedPeptidePolicy Policy { get; set; }
         public List<FamilySignalBreakdown> Families { get; set; } = new();
@@ -110,8 +116,10 @@ namespace FamilyQuant
 
     /// <summary>Separate partitions by domain and by named mature product. Positions are one-based,
     /// inclusive. Overlapping annotations require an explicit allocation method, recorded in Method.</summary>
-    public sealed class FamilyDomainPartsResult
+    public sealed class FamilyDomainPartsResult : IFamilyMembershipStudy
     {
+        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull)]
+        public string? MembershipSha256 { get; set; }
         public string Method { get; set; } = string.Empty;
         public SharedPeptidePolicy Policy { get; set; }
         public List<FamilySignalBreakdown> Domains { get; set; } = new();

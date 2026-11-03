@@ -320,6 +320,7 @@ namespace FamilyQuant
         public int UniquePeptides { get; set; }
         /// <summary>Peptides won by the reversed copies of this family's proteins.</summary>
         public double DecoyEnvelope { get; set; }
+        public int DecoyPeptides { get; set; }
         /// <summary>The world proteins of this family that the credited tags hit, by identifier.</summary>
         public SortedSet<string> Proteins { get; } = new SortedSet<string>(StringComparer.Ordinal);
     }
@@ -485,7 +486,12 @@ namespace FamilyQuant
                     }
                 }
                 foreach (string family in credit.DecoySourceFamilies)
-                    if (creditableSet.Contains(family)) Row(family).DecoyEnvelope += envelope;
+                    if (creditableSet.Contains(family))
+                    {
+                        FamilyWorldFamilyRow row = Row(family);
+                        row.DecoyEnvelope += envelope;
+                        row.DecoyPeptides++;
+                    }
                 if (!bySequence.TryGetValue(sequence, out FamilyWorldSequenceRow? s))
                     bySequence[sequence] = s = new FamilyWorldSequenceRow { Sequence = sequence, Credit = credit };
                 s.Peptides++;

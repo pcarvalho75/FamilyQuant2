@@ -40,7 +40,8 @@ internal static partial class Program
         var root = JsonSerializer.Deserialize<FamilyWorldSummary>(JsonSerializer.Serialize(tables.Single(table => table.MinimumTagLength == FamilyWorldOptions.DefaultMinimumTagLength)))!;
         root.Lengths = tables;
         root.LengthEstimates = FamilyWorldOptions.LengthChoices.Select(length => new FamilyWorldLengthEstimate
-        { MinimumTagLength = length, LandedFraction = .125, DecoyRate = length == FamilyWorldOptions.LengthChoices[^1] ? null : .005,
+        { MinimumTagLength = length, LandedFraction = .125, CreditedEnvelope = 1, DecoyEnvelope = .005,
+            DecoyRate = length == FamilyWorldOptions.LengthChoices[^1] ? null : .005,
             KnownRight = 12, KnownLanded = 13, RightRate = .923, FamiliesMeasured = 1 }).ToList();
         string originalTables = JsonSerializer.Serialize(root), originalWorld = file.ToJsonText();
         var manifest = new QuantManifest { FamilyWorldResult = root };
@@ -63,7 +64,8 @@ internal static partial class Program
                 && chooser.Items.Cast<int>().SequenceEqual(FamilyWorldOptions.LengthChoices) && edits == 0);
             Check("length grid displays exact stored estimates and explicit missing rates", ((DataGrid)gap.FindName("DataGridLengths")).Items.Count == FamilyWorldOptions.LengthChoices.Count
                 && model.DatabaseGap.LengthRows.All(row => ReferenceEquals(row.Data, root.LengthEstimates.Single(value => value.MinimumTagLength == row.MinimumTagLength)))
-                && model.DatabaseGap.LengthRows.Last().DecoyRate == "Not recorded");
+                && model.DatabaseGap.LengthRows.Last().DecoyRate.StartsWith("Not recorded", StringComparison.Ordinal)
+                && model.DatabaseGap.LengthRows.Last().DecoyRate.Contains("decoy not recorded", StringComparison.Ordinal));
             foreach (int length in new[] { FamilyWorldOptions.LengthChoices[0], FamilyWorldOptions.LengthChoices[^1], FamilyWorldOptions.DefaultMinimumTagLength })
             {
                 chooser.SelectedItem = length; PumpDispatcher();

@@ -33,6 +33,7 @@ public static partial class FamilyCompositionStudy
             .Distinct(StringComparer.OrdinalIgnoreCase).ToList();
         var result = new FamilyRunSharesResult
         {
+            MembershipSha256 = attribution.MembershipSha256,
             Policy = policy,
             Method = "Per-file primary family signal / sum of credited family signal; measured-peptide and recorded " +
                 "RAW TIC shares are separate. Family-world-only signal excluded. Arithmetic mean of available run " +

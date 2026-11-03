@@ -425,6 +425,7 @@ internal static partial class Program
         staleConsumers.MyExtendedFastaItems[0].Evidence!.Keywords.Add("changed after subclass computation");
         var staleManifest = new QuantManifest { FamilySubclassParts = new FamilySubclassPartsResult(),
             FamilyRunShares = new FamilyRunSharesResult { Families = new() { new() { FamilyUserId = 11, MeanShare = .125 } } } };
+        staleManifest.FamilyRunShares.MembershipSha256 = FamilyStudyMembership.Fingerprint(staleConsumers);
         var emptyAttribution = FamilyEnvelopeQuant.AttributePeptides(Array.Empty<NativePeptideQuant>(), new PeptideFamilyAttribution());
         Check("J3a stale subclass labels cannot feed the quantitation adapter or retain prior parts",
             !FamilyCompositionStudy.StoreSubclassesFromCuration(staleManifest, emptyAttribution, new CurationHomologyHits(), staleConsumers)

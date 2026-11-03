@@ -51,6 +51,7 @@ public static partial class FamilyCompositionStudy
         {
             DomainParts = new()
             {
+                MembershipSha256 = attribution.MembershipSha256,
                 Policy = policy,
                 Method = "All runs pooled. Peptide signal is apportioned by covered residue length. Only the " +
                     "overlap common to every candidate placement is resolved; remaining signal is position not resolved. " +
@@ -218,6 +219,7 @@ public static partial class FamilyCompositionStudy
         }
         var result = new FamilyPeptideLocalizationResult
         {
+            MembershipSha256 = attribution.MembershipSha256,
             Policy = policy,
             Method = "All runs pooled. Exact containment and retained alignments are distinguished. Intervals cover only " +
                 "aligned protein residues, excluding gaps. Signal is divided equally among candidate proteins and their " +
