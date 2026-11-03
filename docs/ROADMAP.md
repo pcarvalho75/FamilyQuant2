@@ -105,6 +105,17 @@ Compute took 37 to 54 minutes on Ana's project with the RAW cache warm, silent f
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
 
+### W8 Release 2.1.1
+
+| ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
+|---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
+| J47d | Score tier ON by default (D43): one commit; say what a project computed with 2.1.0 shows when opened in 2.1.1 (stored results kept until Compute? the attribution cache key changes?) and put it in Help and the release notes; one full Compute of the full-run copy to confirm the expected share shifts (the only full Compute, per Paulo 13:15) | L | 0.5 | 🟢 | K20 | Default ON in code and tests; the one Compute matches J47b's score-tier row; per-length and tag gates OFF | AS | | 0 | 0 | |
+| K19 | Version 2.1.1 everywhere the program shows or checks it, plus 2.1.1 release notes (J38d new search engine and its speed, J43, J49, K8c, the science options with score tier on by default), plain user wording | L | 0.3 | 🟢 | K20 | Version pins green; notes claim only what is on master | EV | | 0 | 0 | |
+| K20 | Full release gate on the 2.1.1 commit after J47d and K19: ledger refresh and the full suite | M | 0.3 | J47d, K19 | K21 | Ledger 5,460 of 5,460, suite green | Orchestrator | | 0 | 0 | |
+| K21 | The 2.1.1 package from that exact commit, and its real-menu export of a copy of Ana's project (K10's runner) | L | 0.3 | K20 | K22 | Zip and SHA256; export passes with the Summary of findings | EV | | 0 | 0 | |
+| K22 | Published: v2.1.1 on pcarvalho75/FamilyQuant2-releases with zip, .sha256 and notes (D44) | L | 0.1 | K21 | K23 | The release page is live and Latest; downloaded zip hash equals K21 | Orchestrator | | 0 | 0 | |
+| K23 | Install check on 2.1.1 from GitHub; 2.1.0's Check for updates finds 2.1.1 | L | 0.2 | K22 | | Both pass | EV | | 0 | 0 | |
+
 ## Critical path
 
 Ana's report: K1, K2, K4, K6, then K14 (which also needs J30c, J24c, J16b, J32d, J34c), K15 and K16, then K17. The release runs beside it: K8, K9, K10, K11, and K17 links the published release. Compute speed (W6) and the clarity steps (W7) ship in 2.1.0 if they land before the candidate (K8), otherwise in 2.1.1.
@@ -132,6 +143,9 @@ The full history, D1 to D39, is in `docs/ROADMAP-archive.md`.
 | D41 | The three new link choices the D39 scope raised | Decided by D38's rule (the source family decides; a source-less domain combination stays outside): venom Kunitz-type family, any combination, to KUN; the same family with Kunitz_BPTI plus WAP to KUN; no source family with Kunitz_BPTI plus WAP stays outside. Checked against the panel's KUN and Waprin rows by FQReview (K3). Desk, 11-03 08:20 |
 | D42 | How Ana gets the AI key | Option b: Paulo's key ships only as a small file next to Ana's report, never in the program, the public release or the repository; FamilyQuant offers to import it on first use and stores it per user with Windows protection (J46a). Paulo, 11-03 08:55 ("i will follow your advice") |
 | D40 | Headline unit when several families share a panel family | B: with a panel in use, the headline and composition figures use the per-panel-family totals (J27), which credit a peptide shared inside one panel family once. Done in 2.1.1, right after Ana's delivery (step J43); her project has one family per panel family, so her numbers are the same either way. Paulo, 11-03 08:28 ("lets go with B") |
+| D43 | Defaults of the homology science options (J47b) | A: score tier ON by default, per-length gate OFF, tag gate OFF until J47c is measured (FQReview's science review agreed). Paulo, 11-03 15:40 ("i agree with you on all") |
+| D44 | Publish 2.1.1 today | Yes: after J47d and the version bump, through the same full gate, package, real-menu export and install checks as 2.1.0. Paulo, 11-03 15:40 |
+| D45 | The tag-gate option on this roadmap | Finish J47c (fast prefilter, its J47b row) in parallel with 2.1.1; it stays OFF by default whatever it shows. Paulo, 11-03 15:40 |
 
 ## Risks and triggers
 
