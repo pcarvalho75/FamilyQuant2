@@ -1,6 +1,7 @@
 using FamilyQuant.Panels;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 
 namespace FamilyQuant.Report;
@@ -8,11 +9,75 @@ namespace FamilyQuant.Report;
 /// <summary>One section per panel row in source order. User text is never interpreted as a result.</summary>
 public static class ReportPanelSections
 {
+    /// <summary>Build sections from the studies stored in the project manifest. Shares are fractions.
+    /// A missing study or family is unavailable, not zero. An ambiguous UserID is not assigned to a panel family.</summary>
+    public static IReadOnlyList<ReportSection> BuildFromResults(FamilyClusterFile curation, QuantManifest manifest)
+    {
+        ArgumentNullException.ThrowIfNull(curation);
+        ArgumentNullException.ThrowIfNull(manifest);
+        var tables = new Dictionary<int, List<ReportTable>>();
+        List<ReportTable> For(int id)
+        {
+            if (!tables.TryGetValue(id, out var value)) tables.Add(id, value = new List<ReportTable>());
+            return value;
+        }
+        static string Number(double? value) => value?.ToString("R", CultureInfo.InvariantCulture) ?? "Not available";
+        static string Integer(int value) => value.ToString(CultureInfo.InvariantCulture);
+        if (manifest.FamilyRunShares != null)
+        {
+            if (manifest.FamilyRunShares.Families.GroupBy(f => f.FamilyUserId).Any(g => g.Count() > 1))
+                throw new InvalidOperationException("The stored family share result repeats a User ID.");
+            string basis = "Signal uses observed identified envelope plus reference-calibrated de novo envelope. Shared-peptide policy: "
+                + manifest.FamilyRunShares.Policy + ". " + (string.IsNullOrWhiteSpace(manifest.FamilyRunShares.Method)
+                    ? "Method not recorded." : manifest.FamilyRunShares.Method);
+            foreach (var family in manifest.FamilyRunShares.Families)
+            {
+                string id = Integer(family.FamilyUserId);
+                var target = For(family.FamilyUserId);
+                target.Add(new ReportTable("share-summary", "Observed family share",
+                    new[] { "User ID", "Available runs", "Mean assigned share", "Sample SD", "CV" },
+                    new[] { new[] { id, Integer(family.AvailableRunCount), Number(family.MeanShare),
+                        Number(family.StandardDeviation), Number(family.CoefficientOfVariation) } },
+                    "Shares are fractions of assigned family signal. SD is the sample standard deviation; CV is SD divided by the mean. " + basis));
+                target.Add(new ReportTable("run-shares", "Observed run shares",
+                    new[] { "User ID", "Run", "Signal", "Share of assigned signal", "Share of measured signal" },
+                    family.Runs.Select(r => (IReadOnlyList<string>)new[] { id, r.Run, Number(r.Signal),
+                        Number(r.ShareOfAssignedSignal), Number(r.ShareOfMeasuredSignal) }).ToArray(),
+                    "Measured signal is the deduplicated peptide envelope, not total ion current. Shares are fractions. " + basis));
+            }
+        }
+        if (manifest.FamilyProteinCounts != null)
+        {
+            if (manifest.FamilyProteinCounts.Families.GroupBy(f => f.FamilyUserId).Any(g => g.Count() > 1))
+                throw new InvalidOperationException("The stored protein count result repeats a User ID.");
+            foreach (var family in manifest.FamilyProteinCounts.Families)
+                For(family.FamilyUserId).Add(new ReportTable("protein-counts", "Observed database protein counts",
+                    new[] { "User ID", "Greedy protein count", "Proteins with unique peptides", "Observed peptides", "Unexplained peptides" },
+                    new[] { new[] { Integer(family.FamilyUserId), Integer(family.GreedyProteinCount),
+                        Integer(family.UniquePeptideProteinCount), Integer(family.ObservedPeptideCount), Integer(family.UnexplainedPeptides.Count) } },
+                    "The greedy protein count approximates the fewest database proteins explaining peptides with a database match; it is not a gene count. Unexplained peptides remain separate."));
+        }
+        foreach (int id in (curation.ProteinSubclassLabels ?? new List<ProteinSubclassLabel>())
+            .Where(l => l.FamilyUserId.HasValue).Select(l => l.FamilyUserId!.Value).Distinct())
+        {
+            var target = For(id);
+            void Missing(string key, string title) => target.Add(new ReportTable(key, title,
+                new[] { "User ID", "Status" }, new[] { new[] { Integer(id), "Not available" } },
+                "The project does not contain this result for this User ID."));
+            if (!target.Any(t => t.Id == "share-summary")) Missing("missing-shares", "Family share availability");
+            if (!target.Any(t => t.Id == "protein-counts")) Missing("missing-counts", "Protein count availability");
+        }
+        return Build(curation, tables.ToDictionary(p => p.Key, p => (IReadOnlyList<ReportTable>)p.Value));
+    }
+
     public static IReadOnlyList<ReportSection> Build(FamilyClusterFile curation,
         IReadOnlyDictionary<int, IReadOnlyList<ReportTable>>? observed = null)
     {
+        ArgumentNullException.ThrowIfNull(curation);
         var panel = curation.FamilyPanel;
         if (panel == null) return Array.Empty<ReportSection>();
+        var byUserId = (curation.ProteinSubclassLabels ?? new List<ProteinSubclassLabel>())
+            .Where(l => l.FamilyUserId.HasValue).GroupBy(l => l.FamilyUserId!.Value).ToArray();
         var sections = new List<ReportSection>();
         foreach (var family in panel.Families)
         {
@@ -47,19 +112,26 @@ public static class ReportPanelSections
                 blocks.Add(new ReportParagraph(blockPrefix + "observation-status", "Quantitative observations belong to the panel's named merge target; this row is not an additional family total."));
             else
             {
-                int[] ids = curation.ProteinSubclassLabels?.Where(l => string.Equals(l.PanelFamilyKey, family.Key, StringComparison.Ordinal)
-                    && l.FamilyUserId.HasValue).Select(l => l.FamilyUserId!.Value).Distinct().OrderBy(i => i).ToArray() ?? Array.Empty<int>();
+                var matchingGroups = byUserId.Where(g => g.Any(l => string.Equals(l.PanelFamilyKey, family.Key, StringComparison.Ordinal))).ToArray();
+                int[] ids = matchingGroups.Where(g => g.All(l => string.Equals(l.PanelFamilyKey, family.Key, StringComparison.Ordinal)))
+                    .Select(g => g.Key).OrderBy(i => i).ToArray();
+                if (matchingGroups.Length != ids.Length)
+                    blocks.Add(new ReportParagraph(blockPrefix + "ambiguous", "Some User IDs are shared with other or unknown panel families; their observations cannot be assigned to this panel family."));
                 bool hasObserved = false;
-                if (observed != null)
-                    foreach (int userId in ids)
-                        if (observed.TryGetValue(userId, out var tables))
+                foreach (int userId in ids)
+                {
+                    bool hasUserId = false;
+                    if (observed != null && observed.TryGetValue(userId, out var tables))
                             foreach (var table in tables)
                             {
                                 blocks.Add(table with { Id = blockPrefix + "observed:" + userId.ToString(System.Globalization.CultureInfo.InvariantCulture)
                                     + ":" + Uri.EscapeDataString(table.Id) });
-                                hasObserved = true;
+                                hasObserved = hasUserId = true;
                             }
-                if (!hasObserved) blocks.Add(new ReportParagraph(blockPrefix + "observation-status", "Panel-linked quantitative observations: not computed in this project. Missing observations are not zero abundance."));
+                    if (!hasUserId) blocks.Add(new ReportParagraph(blockPrefix + "unavailable:" + userId.ToString(CultureInfo.InvariantCulture),
+                        "Observations for User ID " + userId.ToString(CultureInfo.InvariantCulture) + " are not available in this project."));
+                }
+                if (!hasObserved && ids.Length == 0) blocks.Add(new ReportParagraph(blockPrefix + "observation-status", "Panel-linked quantitative observations are not available. Missing observations are not zero abundance."));
             }
             sections.Add(new ReportSection(id, family.DisplayName, blocks));
         }
