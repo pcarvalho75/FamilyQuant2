@@ -62,7 +62,7 @@ namespace FamilyQuant
                 if (!string.IsNullOrEmpty(evidence?.Subfamily)) recorded.Add("Subfamily: " + evidence.Subfamily);
                 if (evidence?.Pfam != null && evidence.Pfam.Count > 0)
                     recorded.Add("Pfam: " + string.Join("; ", evidence.Pfam.Select(x => x.Accession)));
-                Append(FamilyNaming.Accession(item.SequenceIdentifier), FamilyNaming.ProteinName(item.Description),
+                Append(FamilyNaming.Accession(item.SequenceIdentifier), ProteinNameFormatting.ForNewOutput(item.Description),
                     family?.DisplayName, subclass?.DisplayName, assignment?.EvidenceUsed, assignment?.Reason,
                     label?.Reason, string.Join(" | ", recorded));
             }

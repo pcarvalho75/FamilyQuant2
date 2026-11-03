@@ -23,6 +23,7 @@ public sealed class AnalyticsViewModel : ScreenViewModel
     public FamilyEnvelopeQuantResult? Families { get; }
     public DeNovoHomology? Homology { get; }
     public DatabaseGapViewModel DatabaseGap { get; }
+    public FamilySensitivityViewModel Sensitivity { get; }
     public event EventHandler? ResultsOptionsChanged;
     public bool HasHomology => Homology != null;
     public string HomologySummary => Homology == null ? "" :
@@ -52,6 +53,7 @@ public sealed class AnalyticsViewModel : ScreenViewModel
         this.manifest = manifest;
         this.curation = curation;
         Homology = homology;
+        Sensitivity = new FamilySensitivityViewModel(rows, manifest, curation, attribution, () => ResultsOptionsChanged?.Invoke(this, EventArgs.Empty));
         DatabaseGap = new DatabaseGapViewModel(manifest?.FamilyWorldResult, curation, manifest?.DatabaseGapMinimumTagLength, length =>
         {
             if (manifest == null) return;
