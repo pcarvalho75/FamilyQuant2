@@ -1,6 +1,7 @@
 using FamilyQuant.DeNovo;
 using FamilyQuant.Report.Captions;
 using System;
+using FamilyQuant.Operations;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
@@ -21,15 +22,22 @@ public static class ReportProjectExporter
 {
     public static ReportProjectExport Build(IReadOnlyList<QuantRow> rows, QuantManifest manifest,
         FamilyClusterFile curation, string pngFolder, ReportDetails? details = null,
-        ReportInputProvenance? provenance = null, FamilyEnvelopeQuantResult? familyResults = null, AnalyticsData? analyticsData = null)
+        ReportInputProvenance? provenance = null, FamilyEnvelopeQuantResult? familyResults = null, AnalyticsData? analyticsData = null,
+        OperationContext? operation = null)
     {
         if (rows.Count == 0) throw new InvalidOperationException("No full XIC results are stored. Compute and save results before exporting a report.");
         FamilyStudyMembership.RequireCurrent(curation, manifest);
+        void Data(int item, string title) => operation?.Report("report-data", "Data step " + item.ToString(CultureInfo.InvariantCulture)
+            + " of 8: " + title, item, 8);
+        operation?.Report("report-data", "Preparing stored report data", 0, 8);
+        Data(1, "Analyzing stored quantitation");
         var data = analyticsData ?? AnalyticsBuilder.Build(rows, manifest.PerRunTic);
         if (analyticsData == null && manifest.DerivedFractions.Count > 0) NativeQuantFractions.ApplyDetectedToFractions(data.Fractions, data.Grouped, manifest.DerivedFractions);
         var options = new Homology.HomologyOptions();
         if (manifest.FamilyMapping != null) options.MinIdentity = manifest.FamilyMapping.MinIdentity;
+        Data(2, "Attributing current families");
         var families = familyResults ?? (curation.MyExtendedFastaItems.Count > 0 ? FamilyEnvelopeQuant.BuildFromCuration(rows, curation, options) : null);
+        Data(3, "Preparing current result tables");
         var result = ReportCurrentResults.Build(data, manifest, families, manifest.FamilyRunShares?.Policy ?? SharedPeptidePolicy.FamilyUnique);
         if (manifest.FamilySensitivity is { } sensitivity && (sensitivity.CurationFingerprint != FamilySensitivityStudy.CurationFingerprint(curation)
             || sensitivity.Variants.Count == 0 || sensitivity.Variants[0].SourceSha256 != FamilySensitivityStudy.CurrentFingerprint(rows, manifest, curation)))
@@ -37,13 +45,28 @@ public static class ReportProjectExporter
         var labels = families?.Families.ToDictionary(f => f.FamilyUserId, f => f.Description)
             ?? new Dictionary<int, string>();
         var grouping = manifest.FamilyRunShares == null ? null : FamilyReportThreshold.Build(manifest.FamilyRunShares, curation);
+        Data(4, "Applying stored studies");
         result = ReportStoredResults.Apply(result, manifest, labels, grouping);
-        var plan = ReportFigureRenderer.Plan(data, manifest, curation, families);
-        var studies = ReportStudyFigures.Build(manifest, curation, pngFolder, topProteinsPerPanelFamily: 1);
-        var figures = ReportFigureRenderer.Render(plan, pngFolder).Concat(studies.Figures).ToArray();
-        var unavailable = plan.Unavailable.Concat(studies.Unavailable).ToArray();
-        var document = ReportDocumentBuilder.Build(curation, manifest, details, provenance) with { ApplicationVersion = AppVersionInfo.Current() };
+        Data(5, "Preparing report sections");
         var replacements = result.Sections.ToDictionary(s => s.Id, StringComparer.Ordinal);
+        bool hasConflicts = replacements.ContainsKey(ReportSectionIds.AssignmentConflicts);
+        int panelCount = curation.FamilyPanel?.Families.Count ?? 0;
+        var document = ReportDocumentBuilder.Build(curation, manifest, details, provenance, operation,
+            panelCount + (hasConflicts ? 1 : 0)) with { ApplicationVersion = AppVersionInfo.Current() };
+        int sectionTotal = document.Sections.Count + panelCount + (hasConflicts ? 1 : 0);
+        var panelSections = ReportPanelSections.BuildFromResults(curation, manifest, operation, document.Sections.Count, sectionTotal);
+        if (hasConflicts)
+            operation?.Report("report-prepare-section", "Section " + sectionTotal.ToString(CultureInfo.InvariantCulture) + " of "
+                + sectionTotal.ToString(CultureInfo.InvariantCulture) + ": " + replacements[ReportSectionIds.AssignmentConflicts].Title, sectionTotal, sectionTotal);
+        Data(6, "Planning report figures");
+        var plan = ReportFigureRenderer.Plan(data, manifest, curation, families);
+        Data(7, "Rendering report figures");
+        var studies = ReportStudyFigures.Build(manifest, curation, pngFolder, topProteinsPerPanelFamily: 1,
+            operation: operation, otherFigureCount: plan.Charts.Count);
+        var figures = ReportFigureRenderer.Render(plan, pngFolder, operation: operation, figureOffset: studies.Figures.Count,
+            figureTotal: plan.Charts.Count + studies.Figures.Count).Concat(studies.Figures).ToArray();
+        var unavailable = plan.Unavailable.Concat(studies.Unavailable).ToArray();
+        Data(8, "Assembling captions and supplement");
         document = document with
         {
             Sections = document.Sections.Select(original =>
@@ -64,7 +87,7 @@ public static class ReportProjectExporter
             sections.Insert(sections.FindIndex(s => s.Id == ReportSectionIds.Results) + 1, conflictSection);
         int familyPosition = sections.FindIndex(s => s.Id == ReportSectionIds.AssignmentConflicts);
         familyPosition = familyPosition >= 0 ? familyPosition + 1 : sections.FindIndex(s => s.Id == ReportSectionIds.Results) + 1;
-        sections.InsertRange(familyPosition, ReportPanelSections.BuildFromResults(curation, manifest).Select(section => section with
+        sections.InsertRange(familyPosition, panelSections.Select(section => section with
         {
             Blocks = section.Blocks.Concat(figures.Where(f => f.SectionId == section.Id).Select(f => (ReportBlock)f.Figure))
                 .Concat(unavailable.Where(f => f.SectionId == section.Id).Select((f, index) => (ReportBlock)new ReportParagraph(section.Id + ":unavailable-map:" + index.ToString(CultureInfo.InvariantCulture), f.Title + ": " + f.Reason))).ToArray(),
@@ -105,14 +128,22 @@ public static class ReportProjectExporter
         return new(layout.Document, exports, figures) { SupplementSheets = layout.Sheets.Concat(ReportCaptionTrace.Build(document, figureCaptions)).ToArray(), Selection = curation.ReportSelection };
     }
 
-    public static void Write(ReportProjectExport export, string docxPath, ReportSelection? selection = null)
+    public static void Write(ReportProjectExport export, string docxPath, ReportSelection? selection = null, OperationContext? operation = null)
     {
         selection ??= export.Selection;
         string folder = Path.Combine(Path.GetDirectoryName(Path.GetFullPath(docxPath))!, Path.GetFileNameWithoutExtension(docxPath) + "_data");
         Directory.CreateDirectory(folder);
-        foreach (var csv in export.CsvExports) File.WriteAllText(Path.Combine(folder, csv.Key), csv.Value, new UTF8Encoding(false));
+        operation?.Report("report-csv", "Writing native report CSV files", 0, export.CsvExports.Count);
+        int written = 0;
+        foreach (var csv in export.CsvExports)
+        {
+            operation?.Report("report-csv", "CSV " + (++written).ToString(CultureInfo.InvariantCulture) + " of "
+                + export.CsvExports.Count.ToString(CultureInfo.InvariantCulture) + ": " + csv.Key, written, export.CsvExports.Count);
+            File.WriteAllText(Path.Combine(folder, csv.Key), csv.Value, new UTF8Encoding(false));
+        }
         string workbook = Path.Combine(Path.GetDirectoryName(Path.GetFullPath(docxPath))!, Path.GetFileNameWithoutExtension(docxPath) + "_supplement.xlsx");
-        File.WriteAllBytes(workbook, ReportSupplementWorkbook.BuildBytes(export.Document, export.SupplementSheets, selection));
-        WordReportWriter.Write(docxPath, export.Document, selection);
+        File.WriteAllBytes(workbook, operation == null ? ReportSupplementWorkbook.BuildBytes(export.Document, export.SupplementSheets, selection)
+            : ReportSupplementWorkbook.BuildBytes(export.Document, export.SupplementSheets, selection, operation));
+        WordReportWriter.Write(docxPath, export.Document, selection, operation);
     }
 }

@@ -14,6 +14,7 @@ public partial class MainWindow
 {
     private bool reportExportInProgress;
     public Task<bool>? ReportExportTask { get; private set; }
+    public string? ReportExportLogPath { get; private set; }
     public static Func<string?>? SelectReportPathOverride { get; set; }
     public static Action<ReportExportWindow>? ReportExportPresenterOverride { get; set; }
     public static Func<IReadOnlyList<QuantRow>, QuantManifest, FamilyClusterFile, string, ReportDocument>? ReportDocumentFactoryOverride { get; set; }
@@ -51,23 +52,27 @@ public partial class MainWindow
         string scratch = Path.Combine(scratchParent, Guid.NewGuid().ToString("N"));
         string? publicationStage = null, publicationParent = null;
         bool keepPublicationStage = false;
+        DateTimeOffset exportStarted = DateTimeOffset.UtcNow;
         try
         {
+            ReportExportLogPath = Path.Combine(ApplicationPaths.LocalDataDirectory, "operation-logs", "report-" + Guid.NewGuid().ToString("N") + ".log");
             FamilyClusterFile snapshot;
             QuantRow[] capturedRows;
             ReportDocument document;
             ReportProjectExport prepared;
-            using (var operation = Operations.Begin("Prepare report"))
+            using (var operation = Operations.Begin("Prepare report", exportStarted, ReportExportLogPath))
             {
-                operation.Context.Report("report-attribution", "Waiting for family attribution");
+                operation.Context.Report("report-attribution", "Waiting for family attribution", 0, 1);
                 await project.FullXicReady.WaitAsync(operation.Context.CancellationToken);
                 var ready = await RefreshSpectrumFamiliesAsync();
                 operation.Context.ThrowIfCancellationRequested();
                 if (!ready.Completed) throw new InvalidOperationException("The project changed while its family attribution was being prepared.");
                 RequireSameProject();
-                operation.Context.Report("report-snapshot", "Capturing the project and stored Results");
+                operation.Context.Report("report-attribution", "Family attribution ready", 1, 1);
+                operation.Context.Report("report-snapshot", "Capturing the project and stored Results", 0, 1);
                 var captured = await Task.Run(() => (File: FamilyClusterFile.FromJsonText(curation.ToJsonText()), Rows: rows.ToArray()));
                 snapshot = captured.File; capturedRows = captured.Rows;
+                operation.Context.Report("report-snapshot", "Project and stored Results captured", 1, 1);
                 RequireSameProject();
                 prepared = await PrepareReportDocumentAsync(capturedRows, manifest, snapshot, Path.Combine(scratch, "preview"), operation.Context);
                 document = prepared.Document;
@@ -105,7 +110,7 @@ public partial class MainWindow
             snapshot.ReportSelection = project.fcf.ReportSelection;
             snapshot.ReportThreshold = project.fcf.ReportThreshold;
 
-            using (var operation = Operations.Begin("Export report"))
+            using (var operation = Operations.Begin("Export report", exportStarted, ReportExportLogPath))
             {
                 if (threshold != previousThreshold)
                 {
@@ -121,26 +126,29 @@ public partial class MainWindow
                 string stage = Path.Combine(publicationStage, Path.GetFileName(fullPath));
                 string workbookStage = ReportSupplementWorkbook.PathForReport(stage);
                 var stager = ReportFileStagerOverride;
-                operation.Context.Report("report-write", "Writing the selected report and supplement workbook");
+                operation.Context.Report("report-write", "Writing the selected report and supplement workbook", 0, 1);
                 await Task.Run(() =>
                 {
                     if (stager != null)
                     {
                         stager(stage, document, selected, operation.Context);
                         operation.Context.ThrowIfCancellationRequested();
-                        ReportSupplementWorkbook.Write(workbookStage, document, prepared.SupplementSheets, selected);
                     }
                     else
                     {
-                        WordReportWriter.Write(stage, document, selected);
-                        operation.Context.ThrowIfCancellationRequested();
-                        ReportSupplementWorkbook.Write(workbookStage, document, prepared.SupplementSheets, selected);
+                        File.WriteAllBytes(stage, WordReportWriter.BuildBytes(document, selected, operation.Context));
                     }
+                    operation.Context.ThrowIfCancellationRequested();
+                    File.WriteAllBytes(workbookStage, ReportSupplementWorkbook.BuildBytes(document, prepared.SupplementSheets, selected, operation.Context));
                 });
                 operation.Context.ThrowIfCancellationRequested();
                 RequireSameProject();
-                operation.Context.Report("report-publish", "Publishing the Word report and supplement workbook", 1, 1);
-                ReportArtifactPublication.Publish(stage, workbookStage, fullPath, operation.Context, ReportPublicationStepOverride);
+                operation.Context.Report("report-publish", "Publishing the Word report and supplement workbook", 0, 2);
+                ReportArtifactPublication.Publish(stage, workbookStage, fullPath, operation.Context, step =>
+                {
+                    operation.Context.Report("report-publish", step == 1 ? "Published Word report" : "Published supplement workbook", step, 2);
+                    ReportPublicationStepOverride?.Invoke(step);
+                });
                 StatusModel.ShowMessage("Report exported to " + fullPath + " with " + Path.GetFileName(ReportSupplementWorkbook.PathForReport(fullPath))
                     + ". Save the project to keep any changed report details or choices.");
             }
@@ -153,6 +161,7 @@ public partial class MainWindow
         }
         catch (Exception exception)
         {
+            Operations.LogFailure(exception);
             keepPublicationStage = exception is ReportPublicationRecoveryException;
             string guidance = exception is IOException or UnauthorizedAccessException
                 ? " Check that the destination is writable and that the report is closed in other applications." : "";
@@ -178,14 +187,14 @@ public partial class MainWindow
     {
         ReportProjectExport? prepared = null;
         var factory = ReportDocumentFactoryOverride;
-        operation.Report("report-prepare", "Preparing report sections and figures");
+        operation.Report("report-prepare", "Preparing report sections and figures", 0, 1);
         await AppOperationFiles.RunSta(() =>
         {
             operation.ThrowIfCancellationRequested();
             if (factory != null) prepared = new(factory(rows, manifest, snapshot, folder), new Dictionary<string, string>(StringComparer.Ordinal), Array.Empty<ReportPlacedFigure>());
             else
             {
-                prepared = ReportProjectExporter.Build(rows, manifest, snapshot, folder, snapshot.ReportDetails, snapshot.ReportInputProvenance);
+                prepared = ReportProjectExporter.Build(rows, manifest, snapshot, folder, snapshot.ReportDetails, snapshot.ReportInputProvenance, operation: operation);
                 // The published carrier precedes RS's final J6b Build wiring. Use the owner's
                 // layout while the carrier is empty; a populated carrier is already compact.
                 if (prepared.SupplementSheets.Count == 0 && prepared.CsvExports.Count > 0)
@@ -196,6 +205,7 @@ public partial class MainWindow
             }
             operation.ThrowIfCancellationRequested();
         });
+        operation.Report("report-prepare", "Report sections and figures prepared", 1, 1);
         return prepared ?? throw new InvalidOperationException("Report preparation returned no document.");
     }
 

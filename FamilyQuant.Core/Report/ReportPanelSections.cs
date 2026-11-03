@@ -1,6 +1,7 @@
 using FamilyQuant.Panels;
 using FamilyQuant.Evidence;
 using System;
+using FamilyQuant.Operations;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -12,7 +13,8 @@ public static class ReportPanelSections
 {
     /// <summary>Build sections from the studies stored in the project manifest. Shares are fractions.
     /// A missing study or family is unavailable, not zero. An ambiguous UserID is not assigned to a panel family.</summary>
-    public static IReadOnlyList<ReportSection> BuildFromResults(FamilyClusterFile curation, QuantManifest manifest)
+    public static IReadOnlyList<ReportSection> BuildFromResults(FamilyClusterFile curation, QuantManifest manifest,
+        OperationContext? operation = null, int sectionOffset = 0, int? sectionTotal = null)
     {
         ArgumentNullException.ThrowIfNull(curation);
         ArgumentNullException.ThrowIfNull(manifest);
@@ -70,11 +72,12 @@ public static class ReportPanelSections
             if (!target.Any(t => t.Id == "share-summary")) Missing("missing-shares", "Family share availability");
             if (!target.Any(t => t.Id == "protein-counts")) Missing("missing-counts", "Protein count availability");
         }
-        return Build(curation, tables.ToDictionary(p => p.Key, p => (IReadOnlyList<ReportTable>)p.Value));
+        return Build(curation, tables.ToDictionary(p => p.Key, p => (IReadOnlyList<ReportTable>)p.Value), operation, sectionOffset, sectionTotal);
     }
 
     public static IReadOnlyList<ReportSection> Build(FamilyClusterFile curation,
-        IReadOnlyDictionary<int, IReadOnlyList<ReportTable>>? observed = null)
+        IReadOnlyDictionary<int, IReadOnlyList<ReportTable>>? observed = null, OperationContext? operation = null,
+        int sectionOffset = 0, int? sectionTotal = null)
     {
         ArgumentNullException.ThrowIfNull(curation);
         var panel = curation.FamilyPanel;
@@ -83,8 +86,13 @@ public static class ReportPanelSections
         var familyMap = assignments == null ? null : PanelAssignmentEvidenceStore.BuildFamilyMap(panel, assignments);
         bool subclassCurrent = SubclassAssignment.IsCurrent(curation);
         var sections = new List<ReportSection>();
+        int total = sectionTotal ?? panel.Families.Count;
+        if (sectionOffset == 0) operation?.Report("report-prepare-section", "Preparing panel report sections", 0, total);
         foreach (var family in panel.Families)
         {
+            int ordinal = sectionOffset + sections.Count + 1;
+            operation?.Report("report-prepare-section", "Section " + ordinal.ToString(CultureInfo.InvariantCulture) + " of "
+                + total.ToString(CultureInfo.InvariantCulture) + ": " + family.DisplayName, ordinal, total);
             string id = ReportSectionIds.FamilyPrefix + family.Key;
             string blockPrefix = "panel-block:" + Uri.EscapeDataString(family.Key) + ":";
             var rows = new List<IReadOnlyList<string>>

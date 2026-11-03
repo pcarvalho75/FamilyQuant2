@@ -1,6 +1,7 @@
 using FamilyQuant.DeNovo;
 using FamilyQuant.Report.Captions;
 using System;
+using FamilyQuant.Operations;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
@@ -219,7 +220,8 @@ public static class ReportFigureRenderer
 
     /// <summary>The exact files written here are also embedded; no second PNG encoder is used.</summary>
     public static IReadOnlyList<ReportPlacedFigure> Render(ReportFigurePlan plan, string pngFolder,
-        IReadOnlyDictionary<string, string>? captions = null)
+        IReadOnlyDictionary<string, string>? captions = null, OperationContext? operation = null,
+        int figureOffset = 0, int? figureTotal = null)
     {
         if (Thread.CurrentThread.GetApartmentState() != ApartmentState.STA)
             throw new InvalidOperationException("Report figure rendering requires an STA thread.");
@@ -228,8 +230,13 @@ public static class ReportFigureRenderer
         {
             CultureInfo.CurrentCulture = CultureInfo.InvariantCulture; CultureInfo.CurrentUICulture = CultureInfo.GetCultureInfo("en-US");
             Directory.CreateDirectory(pngFolder);
-            return plan.Charts.Select(chart =>
+            int total = figureTotal ?? plan.Charts.Count;
+            if (figureOffset == 0) operation?.Report("report-prepare-figure", "Preparing report figures", 0, total);
+            return plan.Charts.Select((chart, index) =>
             {
+                int ordinal = figureOffset + index + 1;
+                operation?.Report("report-prepare-figure", "Figure " + ordinal.ToString(CultureInfo.InvariantCulture) + " of "
+                    + total.ToString(CultureInfo.InvariantCulture) + ": " + chart.Title, ordinal, total);
                 string path = ChartImageExporter.Save(chart.CreateChart(), Path.Combine(pngFolder, chart.FileName), chart.Width, chart.Height,
                     variant: ChartPaletteVariant.Light);
                 string caption = captions != null && captions.TryGetValue(chart.FileName, out string? text) ? text : chart.Caption;

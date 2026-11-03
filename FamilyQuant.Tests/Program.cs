@@ -303,6 +303,7 @@ namespace FamilyQuant.Tests
             suite.Add(() => CurationScreenTests());
             suite.Add(() => CurationOperationTests());
             suite.AddWithApplication(() => CurationExportFeedbackTests(Path.Combine(workDir, "curation-export-feedback")));
+            suite.AddWithApplication(() => ReportProgressTests(Path.Combine(workDir, "report-progress")));
             suite.Add(() => FamilyViewTests());
             suite.Add(() => TableAppearanceTests());
             suite.Add(() => EvidenceReviewModelTests());
