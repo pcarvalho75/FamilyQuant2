@@ -179,3 +179,15 @@ became OPEN. The fixture now invokes each version's actual Families and De novo 
 Both captured workflow reports must identify their actual screen and its specific guidance;
 generic headings and a Start location cannot satisfy the check. M37-fix1/M37-fix2 replace
 the rejected N6q2 receipts. This is a test fixture repair, with no product change.
+
+M37 also executes the retained filtering prerequisites, both legacy/recorded PatternLab
+loads, next-step workflow Help, and cancellation during a real all-pairs USEARCH phase.
+The synthetic legacy file has no recorded divisor or per-run totals. Native loads retain
+the re-export advice, and a recorded-totals fixture enables TIC reporting; these are file
+contract checks, not an execution of the external XQuant exporter. Current legacy status
+still omits the explicit fact that this file lacks per-run totals, so that row stays OPEN.
+The real cancellation check observes its uniquely named owned child running before
+requesting Cancel. The frozen phase completes 31,125 pairs; current cancellation interrupts
+the phase. That old cannot-interrupt fact stays OPEN. Partial cancelled output and its count
+are timing diagnostics, not deterministic published results. Completed fixture outputs and
+the compared semantic fact records are checked separately on repeat runs.

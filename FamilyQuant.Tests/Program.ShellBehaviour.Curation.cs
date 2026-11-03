@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Windows;
@@ -143,7 +144,51 @@ internal static partial class Program
                 }
                 finally { review.Close(); }
             });
-            attempt(["C4526422A15C", "D36A80A151FF", "8921B21922FE", "4B1A5D805051"], "native shell context and workflow Help", () =>
+            attempt(["6C89A4C935C2", "6EF740A445CE"], "native legacy PLP load reason and qualified re-export advice", () =>
+            {
+                string plp = WriteSparseRunFixture(output, "legacy-no-totals.plp");
+                File.WriteAllText(plp, File.ReadAllText(plp).Replace("0.6", "6.0", StringComparison.Ordinal));
+                string before;
+                using (var dialogs = new NativeOwnedDialogDriver(plp, dismissCompletion: true))
+                {
+                    SecondaryClick((Button)old.FindName("ButtonLoadQuantData"));
+                    var watch = System.Diagnostics.Stopwatch.StartNew();
+                    while (!dialogs.CompletionAcknowledged && watch.Elapsed < TimeSpan.FromSeconds(25)) { PumpDispatcher(); System.Threading.Thread.Sleep(5); }
+                    if (!dialogs.CompletionAcknowledged) throw new TimeoutException("Legacy PLP completion was not acknowledged.");
+                    PumpDispatcher();
+                    before = string.Join("\n", dialogs.DialogTexts);
+                }
+                var previous = ShellDialogs.FilePresenter;
+                string Load(string path)
+                {
+                    ShellDialogs.FilePresenter = (_, id, dialog) => { dialog.FileName = path; return id == "curation.patternlab"; };
+                    foreach (var expander in WalkTree(current).OfType<Expander>()) expander.IsExpanded = true;
+                    SecondaryClick(WalkTree(current).OfType<Button>().Single(button => button.Name == "ButtonLoadQuantData"));
+                    FinishBusyOperation(current.Operations); PumpDispatcher();
+                    return ((TextBlock)current.FindName("TextBlockStatusLine")).Text;
+                }
+                try
+                {
+                    string actual = Load(plp);
+                    var profile = QuantitationProfile.Describe(new PatternTools.PLP.PatternLabProject(new System.IO.FileInfo(plp)));
+                    bool noTotals = before.Contains("no per-run totals at all", StringComparison.Ordinal)
+                        && actual.Contains("no per-run totals", StringComparison.Ordinal);
+                    record(["6C89A4C935C2"], "native legacy PLP file-specific absent-totals reason", noTotals,
+                        before, actual, "Actual legacy PLP load omits this file's explicit absent-per-run-totals fact in current status; no product edit under freeze.");
+                    string recorded = WriteDenominatorFixture(output, "recorded-totals.plp", "TIC");
+                    var recordedProfile = QuantitationProfile.Describe(new PatternTools.PLP.PatternLabProject(new System.IO.FileInfo(recorded)));
+                    string recordedStatus = Load(recorded);
+                    bool advice = before.Contains("Re-exporting it from XQuant", StringComparison.Ordinal)
+                        && before.Contains("available.", StringComparison.Ordinal)
+                        && actual.Contains("re-export it from XQuant to record the divisor and every run's totals and make that mode available", StringComparison.Ordinal)
+                        && !profile.CanReportTotalChromatogram && profile.Evidence == DenominatorEvidence.Inferred
+                        && recordedProfile.CanReportTotalChromatogram && !recordedStatus.Contains("greyed out", StringComparison.Ordinal);
+                    R(["6EF740A445CE"], "native legacy re-export advice and recorded-totals availability",
+                        advice, new { legacy = before }, new { legacy = actual, recorded = recordedStatus, recordedProfile.CanReportTotalChromatogram });
+                }
+                finally { ShellDialogs.FilePresenter = previous; }
+            });
+            attempt(["C4526422A15C", "D36A80A151FF", "8921B21922FE", "4B1A5D805051", "18DC9493B812"], "native shell context and workflow Help", () =>
             {
                 oldHost.Content = null; host.Content = null;
                 var oldMain = (Window)Activator.CreateInstance(legacy.GetType("FamilyQuant.MainWindow", true)!)!;
@@ -196,6 +241,15 @@ internal static partial class Program
                         && workflowActual.Contains("A separate workflow: select PEAKS or DeepNovo", StringComparison.Ordinal)
                         && !familyWorkflowActual.Contains("You are at: Start", StringComparison.Ordinal)
                         && !workflowActual.Contains("You are at: Start", StringComparison.Ordinal),
+                        new { families = familyWorkflowBefore, deNovo = workflowBefore }, new { families = familyWorkflowActual, deNovo = workflowActual });
+                    R(["18DC9493B812"], "native Families and De novo next-step workflow Help",
+                        familyWorkflowBefore.Contains("Curate them here, then", StringComparison.Ordinal)
+                        && familyWorkflowActual.Contains("Curate them here, then", StringComparison.Ordinal)
+                        && familyWorkflowActual.Contains("Analysis > Compute full XIC", StringComparison.Ordinal)
+                        && familyWorkflowActual.Contains("Results", StringComparison.Ordinal)
+                        && workflowBefore.Contains("select PEAKS or DeepNovo, apply the three", StringComparison.Ordinal)
+                        && workflowActual.Contains("select PEAKS or DeepNovo, apply the three", StringComparison.Ordinal)
+                        && workflowActual.Contains("reconcile the accepted calls with PatternLab", StringComparison.Ordinal),
                         new { families = familyWorkflowBefore, deNovo = workflowBefore }, new { families = familyWorkflowActual, deNovo = workflowActual });
                     Mount(main, current, "cgc"); string f1 = "";
                     Capture(() => ApplicationCommands.Help.Execute(null, main), window => f1 = WalkTree(window).OfType<TextBox>().Single().Text);

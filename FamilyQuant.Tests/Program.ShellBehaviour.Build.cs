@@ -20,6 +20,44 @@ internal static partial class Program
         bool[] State(UserControl view) => buttons.Select(name => ((Button)view.FindName(name)).IsEnabled).ToArray();
         try
         {
+            attempt(["A5848F93B253"], "actual USEARCH phase cancellation", () =>
+            {
+                string input = Path.Combine(output, "cancel-phase.fasta");
+                var random = new Random(3719); const string alphabet = "ACDEFGHIKLMNPQRSTVWY";
+                File.WriteAllText(input, string.Concat(Enumerable.Range(0, 250).Select(index => ">owned_" + index.ToString(CultureInfo.InvariantCulture)
+                    + "\n" + new string(Enumerable.Range(0, 250).Select(_ => alphabet[random.Next(alphabet.Length)]).ToArray()) + "\n")));
+                string executable = Path.Combine(output, "owned-usearch-" + Guid.NewGuid().ToString("N") + ".exe");
+                string native = (string)SecondaryCall(null, typeof(USearchTools), "GetUSearchPath")!; File.Copy(native, executable);
+                string Arguments(string path) => "-allpairs_global \"" + input + "\" -acceptall -userout \"" + path + "\" -userfields query+target+id+alnlen+ql+tl -threads 1";
+                string beforePath = Path.Combine(output, "cancel-frozen-pairs.tsv"), actualPath = Path.Combine(output, "cancel-current-pairs.tsv");
+                SecondaryCall(null, legacy.GetType("FamilyQuant.USearchTools", true)!, "RunUSearch", executable, Arguments(beforePath), output);
+                int expected = File.ReadLines(beforePath).Count(); bool observedRunning = false, cancelled = false;
+                using var cancellation = new System.Threading.CancellationTokenSource();
+                using var monitorDone = new System.Threading.CancellationTokenSource();
+                var monitor = System.Threading.Tasks.Task.Run(() =>
+                {
+                    var watch = System.Diagnostics.Stopwatch.StartNew();
+                    while (!monitorDone.IsCancellationRequested && watch.Elapsed < TimeSpan.FromSeconds(15))
+                    {
+                        foreach (var child in System.Diagnostics.Process.GetProcessesByName(Path.GetFileNameWithoutExtension(executable)))
+                        using (child)
+                        {
+                            if (child.HasExited || child.MainModule?.FileName != executable) continue;
+                            observedRunning = true; cancellation.Cancel(); return;
+                        }
+                        System.Threading.Thread.Sleep(1);
+                    }
+                });
+                try { SecondaryCall(null, typeof(USearchTools), "RunUSearch", executable, Arguments(actualPath), output,
+                    new FamilyQuant.Operations.OperationContext(cancellation.Token)); }
+                catch (TargetInvocationException ex) when (ex.GetBaseException() is OperationCanceledException) { cancelled = true; }
+                finally { monitorDone.Cancel(); monitor.GetAwaiter().GetResult(); }
+                int currentPairs = File.Exists(actualPath) ? File.ReadLines(actualPath).Count() : 0;
+                File.WriteAllText(Path.Combine(output, "cancel-observation.json"), System.Text.Json.JsonSerializer.Serialize(new { expected, currentPairs, observedRunning, cancelled }));
+                record(["A5848F93B253"], "actual USEARCH phase cancellation", observedRunning && cancelled && expected > 0 && currentPairs == expected,
+                    new { phaseCompleted = expected > 0, pairs = expected }, new { observedRunning, cancelled, phaseCompleted = currentPairs == expected },
+                    "Real all-pairs USEARCH phase was observed running and Cancel interrupted its owned child before the frozen phase completed; the old cannot-interrupt fact is not retained.");
+            });
             attempt(["3385D4BF21BC", "7AC0BC9F0603"], "native redundancy completion returns controls and preserves headers", () =>
             {
                 string path = Path.Combine(output, "redundancy.fasta");

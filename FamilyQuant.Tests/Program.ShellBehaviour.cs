@@ -72,6 +72,33 @@ internal static partial class Program
             var oldDnWindow = SecondaryHost(new Window { Content = oldDeNovo }); var dnWindow = SecondaryHost(new Window { Content = currentDeNovo });
             try
             {
+                Attempt(["56EFD9B009FD"], "retained reconciliation and search filtering prerequisites", () =>
+                {
+                    string imports = Path.Combine(output, "prerequisite-import"); Directory.CreateDirectory(imports);
+                    File.WriteAllText(Path.Combine(imports, "owned.raw.denovoOnly.csv"),
+                        "Scan,Peptide,ALC (%),Length,m/z,z,RT,Area,local confidence (%)\n" +
+                        "1,ACDEFGHIKLMN,99,12,500,2,1,1000,99 99 99 99 99 99 99 99 99 99 99 99\n" +
+                        "2,ACDEFGHIKLMN,1,12,500,2,1,1000,1 1 1 1 1 1 1 1 1 1 1 1\n");
+                    object Run(UserControl view)
+                    {
+                        bool[] Gates() => new[] { "ButtonReconcile", "ButtonSearchHomology" }.Select(name => ((Button)view.FindName(name)).IsEnabled).ToArray();
+                        var initial = Gates();
+                        ((TextBox)view.FindName("TextBoxPeaksDirectory")).Text = imports;
+                        SecondaryClick((Button)view.FindName("ButtonLoadAndFilter"));
+                        var watch = Stopwatch.StartNew();
+                        while (!((GroupBox)view.FindName("GroupBoxImportAndFilter")).IsEnabled && watch.Elapsed < TimeSpan.FromSeconds(20)) { PumpDispatcher(); Thread.Sleep(5); }
+                        if (view is DeNovoControl native) FinishBusyOperation(native.ViewModel.Operations);
+                        PumpDispatcher();
+                        int count = ((IEnumerable)SecondaryRead(view, "FilteredRows")!).Cast<object>().Count();
+                        return new { initial, after = Gates(), count };
+                    }
+                    object before = Run(oldDeNovo), actual = Run(currentDeNovo);
+                    string b = JsonSerializer.Serialize(before), a = JsonSerializer.Serialize(actual);
+                    Record(["56EFD9B009FD"], "retained reconciliation and search filtering prerequisites", b == a
+                        && b.Contains("\"initial\":[false,false]", StringComparison.Ordinal) && b.Contains("\"after\":[true,true]", StringComparison.Ordinal)
+                        && b.Contains("\"count\":1", StringComparison.Ordinal), before, actual,
+                        "Retained reconciliation/search gates did not match the real native filtering outcome; retired stages are outside this comparison.");
+                });
                 Attempt(["48FB6F4B7D66"], "empty-import reconciliation guard", () =>
                 {
                     bool disabled = !((Button)oldDeNovo.FindName("ButtonReconcile")).IsEnabled && !((Button)currentDeNovo.FindName("ButtonReconcile")).IsEnabled;
@@ -154,14 +181,14 @@ internal static partial class Program
             Console.WriteLine($"===== {passed} passed, {failed} failed, {skipped} skipped =====");
             string proof = Path.Combine(output, "proofs.log"); File.WriteAllText(proof, transcript.ToString(), new UTF8Encoding(false));
             string archive = Path.Combine(output, "executed"); Directory.CreateDirectory(archive);
-            foreach (string file in new[] { "Program.ShellBehaviour.cs", "Program.ShellBehaviour.Curation.cs", "Program.ShellBehaviour.Build.cs", "Program.Commands.ShellBehaviour.cs", "Program.SecondarySuperRuntime.cs" })
+            foreach (string file in new[] { "Program.ShellBehaviour.cs", "Program.ShellBehaviour.Curation.cs", "Program.ShellBehaviour.Build.cs", "Program.Commands.ShellBehaviour.cs", "Program.SecondarySuperRuntime.cs", "NativeOwnedDialogDriver.cs" })
                 File.Copy(Path.Combine(root, "FamilyQuant.Tests", file), Path.Combine(archive, file));
             foreach (string file in new[] { typeof(Program).Assembly.Location, typeof(App).Assembly.Location, typeof(FamilyClusterFile).Assembly.Location, legacy.Location })
                 File.Copy(file, Path.Combine(archive, Path.GetFileName(file)));
             File.Copy(args[3], Path.Combine(archive, "scope.json"));
             var implementation = Directory.GetFiles(Path.Combine(root, "FamilyQuant"), "*.cs").Concat(Directory.GetFiles(Path.Combine(root, "FamilyQuant"), "*.xaml"))
                 .Concat(Directory.GetFiles(Path.Combine(root, "FamilyQuant.Core"), "*.cs"))
-                .Concat(new[] { "FamilyQuant.Tests/Program.ShellBehaviour.cs", "FamilyQuant.Tests/Program.ShellBehaviour.Curation.cs", "FamilyQuant.Tests/Program.ShellBehaviour.Build.cs", "FamilyQuant.Tests/Program.Commands.ShellBehaviour.cs", "FamilyQuant.Tests/Program.SecondarySuperRuntime.cs" }.Select(path => Path.Combine(root, path)))
+                .Concat(new[] { "FamilyQuant.Tests/Program.ShellBehaviour.cs", "FamilyQuant.Tests/Program.ShellBehaviour.Curation.cs", "FamilyQuant.Tests/Program.ShellBehaviour.Build.cs", "FamilyQuant.Tests/Program.Commands.ShellBehaviour.cs", "FamilyQuant.Tests/Program.SecondarySuperRuntime.cs", "FamilyQuant.Tests/NativeOwnedDialogDriver.cs" }.Select(path => Path.Combine(root, path)))
                 .Select(path => new FeatureLedgerEvidence.Implementation(Path.GetRelativePath(root, path).Replace('\\', '/'), "native behaviour fixture", FeatureLedgerEvidence.Hash(path))).ToList();
             var start = new ProcessStartInfo("git") { WorkingDirectory = root, UseShellExecute = false, CreateNoWindow = true, RedirectStandardOutput = true };
             start.ArgumentList.Add("rev-parse"); start.ArgumentList.Add("HEAD"); using var git = Process.Start(start)!;
