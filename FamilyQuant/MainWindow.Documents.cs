@@ -13,6 +13,7 @@ namespace FamilyQuant;
 
 public partial class MainWindow
 {
+    public string? ProjectOpenLogPath { get; private set; }
     private sealed class ShellDocumentCommands
     {
         private readonly MainWindow owner;
@@ -41,23 +42,25 @@ public partial class MainWindow
         private async Task<bool> OpenProjectCoreAsync(string path)
         {
             if (owner.Operations.IsBusy) return false;
-            using var operation = owner.Operations.Begin("Open project");
+            DateTimeOffset started = DateTimeOffset.UtcNow;
+            owner.ProjectOpenLogPath = AppOperationHost.CreateLogPath("open");
+            using var operation = owner.Operations.Begin("Open project", started, owner.ProjectOpenLogPath);
             try
             {
                 ShellProjectContent content = await Task.Run(() => ShellProjectOperations.Read(path, operation.Context));
                 operation.Context.ThrowIfCancellationRequested();
                 operation.Dispose();
-                return AttachProject(path, content);
+                return AttachProject(path, content, started, owner.ProjectOpenLogPath);
             }
             catch (OperationCanceledException) when (operation.Context.IsCancellationRequested)
             {
                 owner.StatusModel.ShowMessage("Cancelled. The previous project was kept.");
                 return false;
             }
-            catch (Exception ex) { return ReportOpenFailure(ex); }
+            catch (Exception ex) { owner.Operations.LogFailure(ex); return ReportOpenFailure(ex); }
         }
 
-        private bool AttachProject(string path, ShellProjectContent content)
+        private bool AttachProject(string path, ShellProjectContent content, DateTimeOffset? started = null, string? operationLogPath = null)
         {
                 var loaded = new ClusterGenerationControl(content.Curation) { Name = "MyClusterGenerationControl" };
                 List<QuantRow> quant = content.Rows;
@@ -83,7 +86,7 @@ public partial class MainWindow
                 owner.GridApp.Children.Add(owner.cgc);
 
                 // A .fqproj carries its own quantitation: the curation table shows it at once.
-                _ = owner.cgc.SetFullXicQuantAsync(owner.loadedQuant, owner.loadedManifest?.PerRunTic);
+                _ = owner.cgc.SetFullXicQuantAsync(owner.loadedQuant, owner.loadedManifest?.PerRunTic, started, operationLogPath);
 
                 owner.RefreshProjectCommandAvailability(resetSpectrum: true);
                 owner.lastSpectrumComparisonCsvPath = null;

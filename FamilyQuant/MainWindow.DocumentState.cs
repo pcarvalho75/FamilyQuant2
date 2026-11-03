@@ -19,8 +19,7 @@ public sealed class ShellDocumentState : INotifyPropertyChanged
     public event PropertyChangedEventHandler? PropertyChanged;
     private void Changed() => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(null));
 
-    public static string Fingerprint(FamilyClusterFile value) => Convert.ToHexString(
-        SHA256.HashData(Encoding.UTF8.GetBytes(value.ToJsonText())));
+    public static string Fingerprint(FamilyClusterFile value) => value.JsonContentSha256();
 
     public void Open(FamilyClusterFile value, string? path)
     {

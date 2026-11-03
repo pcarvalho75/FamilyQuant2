@@ -191,12 +191,14 @@ namespace FamilyQuant.DeNovo
         /// </summary>
         public static Ms1EnvelopeDetectionResult DetectRun(
             string rawPath, string? cachePath = null, Action<string>? progress = null,
-            string? sourceFingerprint = null, string? legacyCachePath = null)
+            string? sourceFingerprint = null, string? legacyCachePath = null,
+            FamilyQuant.Operations.OperationContext? operation = null)
         {
             if (string.IsNullOrWhiteSpace(rawPath))
                 throw new ArgumentException("A RAW file path is required.", nameof(rawPath));
 
             string runName = DeNovoReconciler.NormalizeRunName(rawPath);
+            operation?.Report("detector-cache:" + runName, "Checking resolved isotope-series cache: " + runName, 0, 1);
             string fingerprint = string.IsNullOrWhiteSpace(sourceFingerprint)
                 ? FileFingerprint.Sha256(rawPath) : sourceFingerprint;
 
@@ -206,18 +208,21 @@ namespace FamilyQuant.DeNovo
             {
                 progress?.Invoke(runName + ": resolved isotope-series diagnostic answered from the cache (" +
                     cached.DetectedEnvelopeCount.ToString("N0", CultureInfo.InvariantCulture) + " envelope(s)).");
+                operation?.Report("detector-cache:" + runName, "Resolved isotope-series diagnostic read from the cache: " + runName, 1, 1);
                 return cached;
             }
             if (legacyCachePath != null && TryLoadCache(legacyCachePath, runName, fingerprint, out var legacy) && legacy != null)
             {
                 progress?.Invoke(runName + ": resolved isotope-series diagnostic answered from the legacy cache (read only).");
+                operation?.Report("detector-cache:" + runName, "Resolved isotope-series diagnostic read from the legacy cache: " + runName, 1, 1);
                 return legacy;
             }
 
+            operation?.Report("detector-cache:" + runName, "No cached detector result; loading acquisition: " + runName, 1, 1);
             progress?.Invoke(runName + ": loading MS1 spectra to detect resolved isotope series...");
             List<MSUltraLight> spectra = DeNovoXicExtractor.LoadMs1Spectra(rawPath);
 
-            Ms1EnvelopeDetectionResult result = Detect(runName, spectra);
+            Ms1EnvelopeDetectionResult result = Detect(runName, spectra, operation);
             progress?.Invoke(runName + ": detected " +
                 result.DetectedEnvelopeCount.ToString("N0", CultureInfo.InvariantCulture) +
                 " resolved isotope-series feature(s) over " +
@@ -237,7 +242,8 @@ namespace FamilyQuant.DeNovo
         /// peptide-like envelopes. Separated from the RAW load so it is exercised on synthetic spectra
         /// without a file. Deterministic: the same spectra in yield the same numbers out.
         /// </summary>
-        public static Ms1EnvelopeDetectionResult Detect(string runName, IReadOnlyList<MSUltraLight> spectra)
+        public static Ms1EnvelopeDetectionResult Detect(string runName, IReadOnlyList<MSUltraLight> spectra,
+            FamilyQuant.Operations.OperationContext? operation = null)
         {
             if (spectra == null) throw new ArgumentNullException(nameof(spectra));
 
@@ -250,9 +256,11 @@ namespace FamilyQuant.DeNovo
 
             var openFeatures = new List<Feature>();
             var closedFeatures = new List<Feature>();
+            operation?.Report("detector-scans:" + runName, "Detecting resolved isotope series: " + runName, 0, scans.Count);
 
             for (int i = 0; i < scans.Count; i++)
             {
+                operation?.ThrowIfCancellationRequested();
                 MSUltraLight scan = scans[i];
                 double rt = scan.CromatographyRetentionTime;
 
@@ -308,6 +316,9 @@ namespace FamilyQuant.DeNovo
                     else closedFeatures.Add(openFeatures[f]);
                 }
                 openFeatures = stillOpen;
+                if ((i + 1) % 128 == 0 || i + 1 == scans.Count)
+                    operation?.Report("detector-scans:" + runName, "Detector MS1 scans " + (i + 1).ToString(CultureInfo.InvariantCulture)
+                        + " of " + scans.Count.ToString(CultureInfo.InvariantCulture) + ": " + runName, i + 1, scans.Count);
             }
 
             closedFeatures.AddRange(openFeatures);

@@ -77,6 +77,7 @@ namespace FamilyQuant.Tests
             suite.Add(() => ExportProteinNameTests());
             suite.Section("Core operation outcomes, progress and cancellation");
             suite.Add(() => CoreOperationTests(workDir));
+            suite.Add(() => StreamingSaveTests(Path.Combine(workDir, "streaming-save")));
             suite.Section("Display filters and the family counter");
             suite.Add(() => FilterTests());
             suite.Section("Target/decoy scoring arithmetic");
@@ -239,6 +240,18 @@ namespace FamilyQuant.Tests
             suite.AddWithApplication(() => PanelEditorTemplateRoundtripTests());
             suite.Add(() => AnalysisHelpTests());
             suite.AddWithApplication(() => WorkflowReportHelpTests());
+            suite.Add(() => AiKeyStoreTests());
+            suite.Add(() => AiTransportTests());
+            suite.AddWithApplication(() => AiKeySettingsTests());
+            suite.Add(() => InterpretationNumberTraceTests());
+            suite.Add(() => AiInterpretationDraftTests());
+            suite.Add(() => AiInterpretationWorkflowTests());
+            suite.AddWithApplication(() => AiInterpretationWindowsTests());
+            suite.Add(() => AiInterpretationInputTests());
+            suite.Add(() => AiKeyOfferTests());
+            suite.AddWithApplication(() => AiShellTests());
+            suite.Add(() => AiJ45ParityTests());
+            suite.AddWithApplication(() => AiAssistantHelpTests());
             suite.Add(() => SuiteMergeGuardTests());
             suite.Add(() => EvidenceFetchTests());
             suite.Add(() => EvidenceFetchAtomicTests());
@@ -312,6 +325,7 @@ namespace FamilyQuant.Tests
             suite.AddWithApplication(() => CurationExportFeedbackTests(Path.Combine(workDir, "curation-export-feedback")));
             suite.AddWithApplication(() => ReportProgressTests(Path.Combine(workDir, "report-progress")));
             suite.AddWithApplication(() => ProjectCommandReadyTests(Path.Combine(workDir, "project-command-ready")));
+            suite.AddWithApplication(() => ComputeProgressTests(Path.Combine(workDir, "compute-progress")));
             suite.Add(() => FamilyViewTests());
             suite.Add(() => TableAppearanceTests());
             suite.Add(() => EvidenceReviewModelTests());

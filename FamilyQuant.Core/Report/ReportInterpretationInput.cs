@@ -17,6 +17,9 @@ public sealed record ReportInterpretationInputData
     public string ApplicationVersion { get; init; } = string.Empty;
 }
 
+/// <summary>The exact exported Markdown and its unescaped table cells, captured together.</summary>
+public sealed record ReportInterpretationCapture(string Text, IReadOnlyList<(string Column, string Value)> Cells);
+
 /// <summary>
 /// One Markdown file a user can give to an assistant of their choice: report details, the panel as entered, the summary
 /// of findings and every stored table it reads, the analysis choices, and a neutral instruction block. The program never
@@ -37,7 +40,13 @@ public static class ReportInterpretationInput
         "When these tables cannot answer a question, say so.",
     };
 
-    public static string FromProject(FamilyClusterFile curation, QuantManifest manifest, string applicationVersion)
+    public static string FromProject(FamilyClusterFile curation, QuantManifest manifest, string applicationVersion) =>
+        Build(ProjectData(curation, manifest, applicationVersion));
+
+    public static ReportInterpretationCapture CaptureFromProject(FamilyClusterFile curation, QuantManifest manifest, string applicationVersion) =>
+        Capture(ProjectData(curation, manifest, applicationVersion));
+
+    private static ReportInterpretationInputData ProjectData(FamilyClusterFile curation, QuantManifest manifest, string applicationVersion)
     {
         ArgumentNullException.ThrowIfNull(curation);
         ArgumentNullException.ThrowIfNull(manifest);
@@ -48,14 +57,23 @@ public static class ReportInterpretationInput
         manifest = FamilyUnobservedStudies.View(curation, manifest);
         var labels = FamilyNaming.Names(curation.MyExtendedFastaItems.Where(p => !SequenceLabels.IsDecoy(p.SequenceIdentifier)));
         var grouping = FamilyReportThreshold.Build(manifest.FamilyRunShares!, curation);
-        return Build(new ReportInterpretationInputData
+        return new ReportInterpretationInputData
         {
             Details = curation.ReportDetails ?? new(), Methods = ReportMethods.Build(curation, manifest),
             Findings = ReportFindings.InputFromProject(curation, manifest, grouping, labels)!, ApplicationVersion = applicationVersion,
-        });
+        };
     }
 
-    public static string Build(ReportInterpretationInputData data)
+    public static string Build(ReportInterpretationInputData data) => Render(data, null);
+
+    public static ReportInterpretationCapture Capture(ReportInterpretationInputData data)
+    {
+        var cells = new List<(string Column, string Value)>();
+        string text = Render(data, cells);
+        return new(text, cells.ToArray());
+    }
+
+    private static string Render(ReportInterpretationInputData data, List<(string Column, string Value)>? cells)
     {
         ArgumentNullException.ThrowIfNull(data);
         var input = data.Findings;
@@ -66,7 +84,13 @@ public static class ReportInterpretationInput
         {
             Line("| " + string.Join(" | ", headers.Select(Cell)) + " |");
             Line("|" + string.Concat(headers.Select(_ => "---|")));
-            foreach (var row in rows) Line("| " + string.Join(" | ", row.Select(Cell)) + " |");
+            foreach (var row in rows)
+            {
+                if (cells != null)
+                    for (int index = 0; index < row.Count; index++)
+                        cells.Add((index < headers.Count ? headers[index] : string.Empty, row[index]));
+                Line("| " + string.Join(" | ", row.Select(Cell)) + " |");
+            }
         }
         // Columns of a program export, renamed for reading; the values stay the export's own text.
         void Export(string csv, (string Column, string Header)[] columns)

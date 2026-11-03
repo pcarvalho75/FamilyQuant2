@@ -446,6 +446,7 @@ Paulo agreed these at the restart, 2026-11-01.
 | J39 | Cache the two source census searches as well, if J32c shows they cost more than a minute | M | 1 | 🟢 | | Byte-identical report data; the export time before and after | T1 | | 0 | 0 | |
 | J36c | J36 reviewed and merged | L | 0.2 | 🟢 | K17 | Approved; gate green | RS | | 0 | 0 | |
 | J34b | Look fixes for the listed items | M | 1 | 🟢 | J34c | Each item fixed or ruled | LK | | 0 | 0 | |
+| J34c | J34 reviewed and merged | L | 0.2 | 🟢 | K14 | Approved; gate green | LK | | 0 | 0 | |
 
 ### W7 Clear reasons and totals
 
@@ -462,6 +463,9 @@ Paulo agreed these at the restart, 2026-11-01.
 | J42 | The family-assignment accuracy check (leave-one-out on reviewed proteins) accepts a project whose scope has several phrases: on the D39 project it refuses with "The session search no longer matches the current queries and reviewed references" (EvidenceSession.cs:42-68 does not accept the panel review's stored search over the in-scope references) | L | 0.5 | 🟢 | K14 | Red then green: a fixture with a two-phrase scope runs the audit; on a copy of the D39 project it prints the right, wrong and abstained counts | T2 | | 0 | 0 | |
 | J46a | An Anthropic API key the user can add, test, replace or remove (Help > AI assistant key), stored per user with Windows protection, never in a project, the repository, a log or a report; import from a key file placed next to the project (Paulo, 11-03) | L | 0.5 | J40 | J46b | Fixture tests for works, wrong key, no credit, rate limit, no connection; the key never appears in project bytes | T2 | | 0 | 0 | |
 | J46b | Optional "Draft interpretation with AI": the user sees exactly what is sent (J45's input), confirms, the text returns into the interpretation field labelled "AI draft (model, date)", and every number in it is checked against the program's own tables (J18 trace) before the user accepts | M | 1 | J46a | J46c | Fake-transport tests for every outcome; one live call reported; works fully without a key | T2 | | 0 | 0 | |
+| J46c | J46 reviewed and merged | L | 0.2 | 🟢 | | Approved; gate green | T2 | | 0 | 0 | |
+| J40 | Help explains what 2.1 adds: the progress lines, the cached reopen, "no peptide observed", the scope phrases, link notes | L | 0.5 | 🟢 | | A test reads each menu name in the text from the live menu | T2 | | 0 | 0 | |
+| J46d | The AI draft uses J45's interpretation input instead of J46's stand-in seam, and its number check reads J45's table cells and column headings directly (J45 exposes them beside the Markdown) instead of parsing Markdown (FQTerra2's observation, 11-03 09:49) | L | 0.3 | 🟢 | | The sent text equals J45's export byte for byte; number-check fixtures green against J45's cells | T2 | | 0 | 0 | |
 
 ### W4 Release 2.1.0 on GitHub
 
@@ -469,6 +473,7 @@ Paulo agreed these at the restart, 2026-11-01.
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
 | K12 | Install check rehearsed now on the published 2.0.0: download from GitHub, SHA-256, unpack, open a project, Check for updates | L | 0.3 | 🟢 | K13 | A written install log | EV | | 0 | 0 | |
 | K8 | Release candidate: release notes and version 2.1.0 merged with master after J30, J24, J31 and J16; the zip built | L | 0.3 | 🟢 | K9 | Zip with its SHA-256; the report cover prints 2.1.0 | EV | | 0 | 0 | |
+| K9a | Ledger currency before the full release gate: the 21 VERIFIED rows that did not come back in the first full refresh since 01:30 (13 SH rows from J12's CsvReport.BuildFamilyComposition, 8 C1 rows from J28's PrepareFullXic; list in desk notes/lost-095206.json) each get its reason and either an explicit reviewed relocation or a fresh executed check, no guard weakened; and the two pt-BR curation chooser route checks (IsActive window guard) rerun alone to tell a focus flake from a defect | M | 0.5 | 🟢 | K9 | Refresh on a master copy: 21 of 21 back, curation file contracts 15 of 15 | T1 | | 0 | 0 | |
 
 ### W6 Compute fast and visible
 
@@ -479,6 +484,9 @@ Paulo agreed these at the restart, 2026-11-01.
 | J35a | Progress for Compute and opening: every phase counted against a known total, the current item, elapsed time and time since the last step, all logged | M | 0.6 | 🟢 | J35b | A fixture Compute records every phase once, in order | SH | | 0 | 0 | |
 | J38b | CPU profile of the slowest call: its top functions with file:line | M | 0.4 | 🟢 | J38c | The profile posted | AS | | 0 | 0 | |
 | J35b | Progress on the full-run project: the longest gap between two steps named | L | 0.3 | 🟢 | J35c | `READY` names the longest gap and its phase | SH | | 0 | 0 | |
+| J35c | J35 reviewed and merged | L | 0.2 | 🟢 | J40 | Approved; gate green | SH | | 0 | 0 | |
+| J38c | First fix: Compute reuses the attribution FullXicCompletionStage already computed instead of the family-world step searching again (calls 3 and 4 repeat 1 and 2: 366 s of 923 s on WORKHORSE) | H | 1 | 🟢 | J38d | Byte-identical stored results on a fixture | AS | | 0 | 0 | |
+| J48 | Saving the full-run project fits in memory: J35b's measurement hit an OutOfMemoryException in SavedFileCheck.Curation -> ToJsonText under an 8 GB heap cap; find whether the product's Save builds the whole curation JSON as one string and what heap Save needs, and if a 16 GB office PC could run out, stream it with the same bytes written | M | 0.5 | 🟢 | | FINDING first; if fixed, byte-identical saved file on the full-run copy and the peak measured before and after | SH | | 0 | 0 | |
 
 ### W2 The interpretation
 
@@ -487,4 +495,6 @@ Paulo agreed these at the restart, 2026-11-01.
 | K5 | Interpretation drafted from the desk's outline, numbers left as marked places | M | 0.5 | 🟢 | K6 | The draft posted | OP | | 0 | 0 | |
 | K6 | The rerun project saved with master's build and the report details, the written interpretation EMPTY (Paulo, 11-03 08:40: "the report is to be performed without an LLM"); the open warms the cache for the final export | L | 0.3 | K2, K4 | K7, K10, K14 | final-input.fqproj saved; interpretation field empty | OP | | 0 | 0 | |
 | J44a | The program interprets as much as it can without an LLM (Paulo, 11-03 08:45: "strict results like do tables, and very informative plots"): a Summary of findings section from the stored studies with fixed templates, only data-bound statements (values, counts, ranks, ranges, presence, comparisons with stored references), and, where the panel holds numeric references, observed share against the panel's reference per family; numbers in a supplement sheet | M | 1 | 🟢 | J44b | Red then green on a fixture: every sentence present when its data exist, absent when not; numbers equal the headline and studies; D21 guard passes | OP | | 0 | 0 | |
+| J44b | J44 reviewed and merged | L | 0.2 | 🟢 | K7, K14 | Approved; gate green | OP | | 0 | 0 | |
+| J45 | File > Export > Interpretation input: one plain file a user can give to an AI assistant of their choice (report details, the panel table as entered, the result tables, the analysis choices, a neutral instruction to quote numbers only from the tables); the program never calls an LLM (Paulo, 11-03) | L | 0.5 | 🟢 | | Deterministic export; its test; D21 wording | OP | | 0 | 0 | |
 
