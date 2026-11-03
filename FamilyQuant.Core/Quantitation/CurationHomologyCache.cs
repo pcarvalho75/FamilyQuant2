@@ -105,6 +105,8 @@ public static class CurationHomologyCache
             }
             Add(data.ToArray());
         }
+        // Append only enabled science settings, preserving the exact existing cache key when OFF.
+        if (options.Science?.AnyEnabled == true) Add(JsonSerializer.SerializeToUtf8Bytes(options.Science));
         foreach (var row in rows)
         {
             token.ThrowIfCancellationRequested();
@@ -209,8 +211,10 @@ public static class CurationHomologyCache
         }
         HomologyOptions effective = options.Clone();
         effective.TopHitsPerPeptide = int.MaxValue;
+        if (effective.Science != null) effective.Science.QueryRole = HomologyQueryRole.DeNovo;
         HomologyOptions identified = effective.Clone();
         identified.BestScoreOnly = identifiedBestScoreOnly;
+        if (identified.Science != null) identified.Science.QueryRole = HomologyQueryRole.Identified;
         var result = new CurationHomologyHits { ProteinIds = ids, IdentityThreshold = effective.MinIdentity,
             EffectiveOptions = effective, IdentifiedOptions = identified };
         List<string> Queries(string side) => items.Count == 0 ? new List<string>() : rows.Where(row => row != null && string.Equals(row.Side, side, StringComparison.Ordinal))

@@ -223,10 +223,27 @@ namespace FamilyQuant.Homology
                 int best = hits[0].Score;
                 hits.RemoveAll(h => h.Score != best);
             }
+            bool science = options.Science?.AnyEnabled == true && options.Science.QueryRole == HomologyQueryRole.DeNovo;
+            int beforeTier = hits.Count;
+            HomologyScoreTierOptions? tier = science && options.Science!.ScoreTier?.Enabled == true ? options.Science.ScoreTier : null;
+            if (tier != null && hits.Count > 0)
+            {
+                long minimum = (long)hits[0].Score - tier.MaximumPamScoreDrop;
+                hits.RemoveAll(h => h.Score < minimum);
+            }
+            int afterTier = hits.Count;
             if (hits.Count > options.TopHitsPerPeptide)
                 hits.RemoveRange(options.TopHitsPerPeptide, hits.Count - options.TopHitsPerPeptide);
+            HomologyScienceAudit? audit = science ? new()
+            {
+                Method = tier == null ? "Experimental gate audit" : "De novo integer PAM30MS tier after conservative target-decoy competition",
+                QueryRole = HomologyQueryRole.DeNovo, NominalIdentityGate = options.MinIdentity, AppliedIdentityGate = options.MinIdentity,
+                GateTargetProteins = passed.Count(g => !IsDecoy(g.ProteinIndex)), GateDecoyProteins = passed.Count(g => IsDecoy(g.ProteinIndex)),
+                ProteinsBeforeTier = beforeTier, ProteinsAfterTier = afterTier, ProteinsAfterTopCut = hits.Count,
+                MaximumPamScoreDrop = tier?.MaximumPamScoreDrop,
+            } : null;
             return new HomologyResult(raw, peptide, null, hits, decoysSuppressed, targetsSuppressed,
-                candidatesExamined, useIndex);
+                candidatesExamined, useIndex, audit);
 
             bool IsDecoy(int index) => database.Proteins[index].Id.StartsWith(options.DecoyLabel, StringComparison.Ordinal);
             void AddHit(GateHit gate, int offset, int score)

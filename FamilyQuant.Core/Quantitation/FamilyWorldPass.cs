@@ -79,13 +79,22 @@ namespace FamilyQuant
 
         public double MinIdentity { get; set; } = HomologyOptions.DefaultMinIdentity;
 
+        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull)]
+        public HomologyScienceOptions? Science { get; set; }
+
         /// <summary>The de novo side of the production attribution: every target past the gate after the
         /// target-decoy competition, with no cut at the mapper's top three.</summary>
-        public HomologyOptions SearchOptions() => new HomologyOptions { MinIdentity = MinIdentity, TopHitsPerPeptide = int.MaxValue };
+        public HomologyOptions SearchOptions()
+        {
+            var science = Science?.AnyEnabled == true ? Science.Clone() : null;
+            if (science != null) science.QueryRole = HomologyQueryRole.DeNovo;
+            return new HomologyOptions { MinIdentity = MinIdentity, TopHitsPerPeptide = int.MaxValue, Science = science };
+        }
 
         public FamilyWorldOptions Clone() => new FamilyWorldOptions
         {
             MinimumTagLength = MinimumTagLength, CreditableFamilies = CreditableFamilies, MinIdentity = MinIdentity,
+            Science = Science?.AnyEnabled == true ? Science.Clone() : null,
         };
     }
 

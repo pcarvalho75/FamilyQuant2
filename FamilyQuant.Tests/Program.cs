@@ -136,6 +136,7 @@ namespace FamilyQuant.Tests
             suite.Section("Homology - PepExplorer's aligner, ported with its C-terminus and character defects fixed");
             suite.Add(() => HomologyTests.Run(Check));
             suite.Add(() => HomologySearchEquivalenceTests());
+            suite.Add(() => HomologyScoreTierTests());
             suite.Section("Family world (B1) - a de novo tag credited to UniProt families, on a fixture");
             suite.Add(() => FamilyWorldCheck.RunFixtures(Check));
             suite.Add(() => FamilyWorldRateTests());

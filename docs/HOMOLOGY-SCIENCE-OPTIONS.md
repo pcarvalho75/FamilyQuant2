@@ -11,6 +11,20 @@ isobaric identity gate, and a PAM score tier. Each receives its own implementati
 commit and fixtures. Scientific parameter choices are under desk review; no
 option is being promoted to a production default.
 
+Desk ruling M122 fixes the first experiments: length floor 0.8 (tighten only),
+explicit abstention below support, per-search/per-length support and gate, no FDR
+claim; at most one rewrite, original-tag PAM, per-position median confidence over
+accepted PEAKS rows of the same sequence, unit weights when missing with coverage
+reported; configurable score tier starting at margin zero.
+
+The score-tier implementation preserves the original target-decoy competition
+(including conservative ties), sorts the same way, then keeps `score >= best -
+MaximumPamScoreDrop` using integer arithmetic. The existing BestScoreOnly rule and
+top-hit limit still apply. Explicitly identified queries are unchanged. Query
+audit reports target/decoy proteins reaching the gate and multiplicities before
+the tier, after the tier, and after the top-hit cut. J28 cache keys append enabled
+science settings only; the default/OFF byte stream remains unchanged.
+
 PAM30MS remains the original-query, full-window score. A gate can have another
 best alignment, as in the existing identity/PAM split. The tag option reports
 its gate variant and offset separately. Score tiers operate after target-decoy
