@@ -216,6 +216,7 @@ internal static class SuiteCommandInventory
         SuiteCommandRule.Covered("--test-ai-shell", "FamilyQuant.Tests.Program.AiShellTests()"),
         SuiteCommandRule.Covered("--test-ai-transport", "FamilyQuant.Tests.Program.AiTransportTests()"),
         SuiteCommandRule.Covered("--test-analysis-help", "FamilyQuant.Tests.Program.AnalysisHelpTests()"),
+        SuiteCommandRule.Covered("--test-app-version", "FamilyQuant.Tests.Program.AppVersionTests()"),
         SuiteCommandRule.Covered("--test-architecture-group-split", "FamilyQuant.Tests.Program.ArchitectureGroupSplitTests(System.String)"),
         SuiteCommandRule.Excluded("--test-assay-build-workflow", "Existing focused-only enrollment gap: assay build-workflow guard. K8b audits routing; expanding this unrelated fixture pack is left to a separate enrollment change. No complete gate coverage is claimed."),
         SuiteCommandRule.Excluded("--test-assay-figure-gaps", "Existing focused-only enrollment gap: assay figure-gap guard. K8b audits routing; expanding this unrelated fixture pack is left to a separate enrollment change. No complete gate coverage is claimed."),

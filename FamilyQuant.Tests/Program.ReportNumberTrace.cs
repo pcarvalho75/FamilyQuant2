@@ -170,6 +170,38 @@ internal static partial class Program
         int orphan = ReportNumberTrace.Run(workbookDoc, missingFolder, workbookOutput);
         trace = ReportCsvTable.Build("orphan-caption", "orphan-caption", File.ReadAllText(workbookOutput), "");
         Check("J18 refuses an orphan caption instead of borrowing its dimensions from the workbook", orphan != 0 && Has("2", "NOT FOUND"));
+
+        string? savedVersion = Environment.GetEnvironmentVariable(AppVersionInfo.ClickOnceCurrentVersionVariable);
+        try
+        {
+            Environment.SetEnvironmentVariable(AppVersionInfo.ClickOnceCurrentVersionVariable, "2.1.0.0");
+            var versionReport = report with { ApplicationVersion = "2.1.0.0", Sections = new[]
+            {
+                new ReportSection(ReportSectionIds.Title, "Title", Array.Empty<ReportBlock>()),
+                report.Sections[0] with { Blocks = new ReportBlock[]
+                {
+                    new ReportParagraph("stray-version-prefix", "Stray 2.1."),
+                    new ReportParagraph("dotted-body", "Elsewhere 2.1.0.0."),
+                    new ReportParagraph("other-version", "FamilyQuant 8.9.10.11"),
+                } },
+            } };
+            WordReportWriter.Write(document, versionReport);
+            int versionExit = Run();
+            trace = ReportCsvTable.Build("version", "version", File.ReadAllText(output), "");
+            int context = trace.Columns.ToList().IndexOf("context");
+            Check("J18 classifies the complete current FamilyQuant cover version as VERSION",
+                trace.Rows.Where(r => r[status] == "VERSION").Select(r => r[value]).SequenceEqual(new[] { "2.1.0.0" }));
+            Check("J18 a stray body 2.1 stays NOT FOUND beside a classified cover",
+                versionExit != 0 && trace.Rows.Any(r => r[value] == "2.1" && r[status] == "NOT FOUND" && r[context] == "Stray 2.1."));
+            Check("J18 other dotted numbers and noncurrent FamilyQuant versions are not VERSION",
+                trace.Rows.Where(r => r[context] is "Elsewhere 2.1.0.0." or "FamilyQuant 8.9.10.11").All(r => r[status] != "VERSION"));
+            Environment.SetEnvironmentVariable(AppVersionInfo.ClickOnceCurrentVersionVariable, "2.1.0.1");
+            int noncurrentExit = Run();
+            trace = ReportCsvTable.Build("noncurrent-version", "noncurrent-version", File.ReadAllText(output), "");
+            Check("J18 a cover version differing from AppVersionInfo.Current is not exempt",
+                noncurrentExit != 0 && trace.Rows.All(r => r[status] != "VERSION"));
+        }
+        finally { Environment.SetEnvironmentVariable(AppVersionInfo.ClickOnceCurrentVersionVariable, savedVersion); }
     }
 
     private sealed class RowComparer : IEqualityComparer<IReadOnlyList<string>>

@@ -86,7 +86,7 @@ Ana installs it from the public releases page (D31); the desk publishes on Paulo
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| K9 | Full gate on the release candidate re-cut after J41 (and J32, J34 if merged): every ledger receipt current (quick gates defer them) | M | 0.5 | K8 | K10 | Full gate green, ledger 5,460 of 5,460 | Orchestrator | | 0 | 0 | |
+| K9 | Full gate on the release candidate re-cut after J41 (and J32, J34 if merged): every ledger receipt current (quick gates defer them) | M | 0.5 | 🟢 | K10 | Full gate green, ledger 5,460 of 5,460 | Orchestrator | | 0 | 0 | |
 | K10 | The unpacked candidate exports the final project's report through the real menu | L | 0.3 | K9 | K11 | Files and times recorded | EV | | 0 | 0 | |
 | K11 | Published: v2.1.0 on pcarvalho75/FamilyQuant2-releases with the zip, its .sha256 and user release notes | L | 0.1 | K10 | K13, K17 | The release page is live | Orchestrator | | 0 | 0 | |
 | K13 | Install check on 2.1.0 from GitHub; 2.0.0's Check for updates finds 2.1.0 | L | 0.2 | K11 | | Both pass | EV | | 0 | 0 | |
@@ -96,7 +96,8 @@ Ana installs it from the public releases page (D31); the desk publishes on Paulo
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
 | J34f | A Word table that continues on the next page repeats its header row there, and its caption stays with its last row (Ana's report p18-p20, results/product-parts: no header on p19, the caption alone at the top of p20; FQLook's K16, 12:14) | L | 0.3 | 🟢 | K14 | Red then green on a fixture that spans a page; the page check shows p19 with the header and the caption with the table; no cell changes | SH | | 0 | 0 | |
-| K14 | Final export of the interpreted project through the real command, on master with J30, J24, J16, J32 and J34 | L | 0.5 | J34f, K8 | K15, K16 | Word report and supplement written | OP | | 0 | 0 | |
+| J34g | A sentence that points to a workbook sheet never states a table size that differs from that sheet (K15 blocking, 12:19: p435 'Database-family composition' says 1016 data rows across 4 columns, the sheet has 1018 and 5; p437 says 1018 and 4, the sheet 5 columns; p1478 says 1024 and 3, the sheet 10 columns): apply J34d's rule (workbook-only references print no grid size) to every such reference, or print the sheet's exact size; also (11-03 12:24) six of seven such sentences differ (p435, 437, 438, 440, 1399, 1478), and panel text excerpts end at a whole word, never inside a number (p923 showed '... nas 2 ...' for the panel's '... nas 27 originais?') | L | 0.3 | 🟢 | K14 | Red then green; on the real export no dimension sentence differs from its sheet; trace unchanged otherwise | LK | | 0 | 0 | |
+| K14 | Final export of the interpreted project through the real command, on master with J30, J24, J16, J32 and J34 | L | 0.5 | J34f, J34g | K15, K16 | Word report and supplement written | OP | | 0 | 0 | |
 | K15 | Number trace on the final report: every number found, or each one not found ruled | L | 0.2 | K14 | K17 | `trace.csv` with nothing left open | T1 | | 0 | 0 | |
 | K16 | The final report's pages read for look and sense | L | 0.3 | K14 | K17 | No blocking item | LK | | 0 | 0 | |
 | K17 | Delivered: the Word report, supplement, project, family panel, a read-me with the release link, and the AI key file (D42) written to `AnaG/Bjararaca/Relatorio`; nothing else in Ana's folders touched | L | 0.2 | K7, K15, K16, K11 | | The five items with hashes; the rest of AnaG unchanged | OP | | 0 | 0 | |

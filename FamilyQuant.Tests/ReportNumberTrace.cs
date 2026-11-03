@@ -62,6 +62,9 @@ internal static class ReportNumberTrace
         }
         if (File.Exists(workbook)) IndexWorkbook();
         var outputRows = new List<string[]> { new[] { "location", "number", "status", "csv", "cell", "match_kind", "context" } };
+        // Match only the report's complete, standalone label for this running version.
+        var tokens = new Regex(@"(?<=^FamilyQuant )(?<version>" + Regex.Escape(AppVersionInfo.Current())
+            + @")$|" + Tokens.ToString(), Tokens.Options);
         using (var package = WordprocessingDocument.Open(doc, false))
         {
             var main = package.MainDocumentPart ?? throw new InvalidDataException("The document has no main part.");
@@ -168,7 +171,7 @@ internal static class ReportNumberTrace
                     if (precedingTable == null || followingTable == null)
                         captionTable = precedingTable ?? followingTable;
                 }
-                foreach (Match token in Tokens.Matches(text))
+                foreach (Match token in tokens.Matches(text))
                 {
                     string value = token.Value;
                     string prefix = text.Substring(0, token.Index);
@@ -202,6 +205,7 @@ internal static class ReportNumberTrace
 
     private static string Classify(Match token, string prefix, string suffix, string part)
     {
+        if (token.Groups["version"].Success) return "VERSION";
         if (token.Groups["date"].Success) return "DATE";
         if (token.Groups["hash"].Success || token.Groups["algorithm"].Success || HashPrefix.IsMatch(prefix)) return "SHA-256";
         if (token.Groups["identifier"].Success) return "IDENTIFIER";
