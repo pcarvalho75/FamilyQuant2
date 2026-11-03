@@ -62,8 +62,9 @@ public static class ReportFigureRenderer
                 new CaptionNumber("Pooled M+0 recovery", 100 * pooled.RecoveredFractionM0, "%") }
             : new[] { new CaptionNumber("Pooled records available", data.Grouped == null ? 0 : 1, "records", "0") };
         Add(ReportSectionIds.Results, PresentationFigures.SignalUpliftFile, "Signal recovery components",
-            "Grouped primary signal estimate and its components. The de novo estimate is distinct from directly observed isotope-window signal.", () => new SignalUpliftChart(data.Grouped),
+            "Grouped primary signal estimate and its components. The de novo estimate is distinct from directly observed isotope-window signal.", () => new ReportSignalUpliftChart(data.Grouped),
             pooledFacts);
+        charts[^1] = charts[^1] with { Width = ReportPrintChart.LayoutWidth, Height = ReportPrintChart.LayoutHeight };
         if (visibleFamilies != null)
         {
             var bars = FamilyContributionPlot.Fold(visibleFamilies, reportGrouping == null ? FamilyContributionPlot.DefaultTopN : 0);
@@ -138,9 +139,15 @@ public static class ReportFigureRenderer
             {
                 overlap.Validate();
                 Add(ReportSectionIds.Quality, PresentationFigures.DeNovoSearchCrosscheckFile, "De novo alternative triage",
-                    "Stored overlap and sequence-comparison stages, with scan and precursor denominators kept distinct.", () => new DeNovoSearchCrosscheckChart(overlap, concordance),
+                    "Stored overlap and sequence-comparison stages, with scan and precursor denominators kept distinct. "
+                        + "Source scope: " + overlap.SourceScopeLabel + ". Contextual search overlap is not a caller-accuracy estimate. "
+                        + (overlap.IsStrictDeNovoOnlyScope ? "De-novo-only export calls are alternative hypotheses, not failed database searches. " : "")
+                        + "PEAKS database sequence context is compared at the same scan and charge.", () => new ReportDeNovoTriageChart(overlap),
                     new CaptionNumber("Filtered de novo rows", overlap.FilteredDeNovoRows, "rows", "0"),
-                    new CaptionNumber("Precursor-matched rows", overlap.SamePrecursorWithinTolerance, "rows", "0"));
+                    new CaptionNumber("Precursor-matched rows", overlap.SamePrecursorWithinTolerance, "rows", "0"),
+                    new CaptionNumber("Same-charge PEAKS database context", concordance.DeNovoRowsSharingPeaksDatabaseScanAndCharge, "rows", "0"),
+                    new CaptionNumber("Exact PEAKS database sequence in that context", concordance.DeNovoRowsExactToPeaksDatabaseAtSameCharge, "rows", "0"));
+                charts[^1] = charts[^1] with { Width = ReportPrintChart.LayoutWidth, Height = ReportPrintChart.LayoutHeight };
             }
             else Missing(ReportSectionIds.Quality, "De novo alternative triage");
         }

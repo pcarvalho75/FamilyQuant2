@@ -6,6 +6,7 @@ using System.IO;
 using System.IO.Compression;
 using System.Linq;
 using System.Xml.Linq;
+using System.Windows.Media;
 
 namespace FamilyQuant.Tests;
 
@@ -39,6 +40,7 @@ internal static partial class Program
             facts.Any(n => n.Label.Contains("before cross-side suppression", StringComparison.Ordinal)
                 && n.Label.Contains("de novo", StringComparison.Ordinal) && n.Value == data.DeNovoCount));
         ReportReaderTableTests();
+        ReportReaderNativeTests(data);
     }
 
     private static void ReportReaderTableTests()
@@ -66,4 +68,47 @@ internal static partial class Program
             tables.All(t => t.Elements(w + "tr").All(r => r.Element(w + "trPr")?.Element(w + "cantSplit") != null)
                 && t.Elements(w + "tr").First().Element(w + "trPr")?.Element(w + "tblHeader") != null));
     }
+
+    private static void ReportReaderNativeTests(AnalyticsData data)
+    {
+        data.Grouped!.Tic = 1000;
+        data.Grouped.IdentifiedEnvelope = 280;
+        data.Grouped.DeNovoEnvelopeReferenceCalibrated = 151;
+        var overlap = new DeNovoOverlapSummary
+        {
+            RawDeNovoRows = 100, FilteredDeNovoRows = 100, NoSearchPsmInFileAndScan = 90, SharedFileAndScan = 10,
+            DifferentChargeInSharedScan = 4, SameFileScanAndCharge = 6, SameChargeButNoMzMatch = 3,
+            DifferentPrecursorInSharedScan = 7, SamePrecursorWithinTolerance = 3,
+            ScanLevelStrictSequenceMatchesIgnoringPtm = 2, ScanLevelSequenceDivergencesIgnoringPtmStrict = 4,
+            ScanLevelSequenceDivergencesAfterIleLeuFold = 4, StrictSequenceMatchesIgnoringPtm = 1,
+            SequenceDivergencesIgnoringPtmStrict = 2, AdditionalIleLeuEquivalentMatches = 1,
+            SequenceDivergencesAfterIleLeuFold = 1,
+        };
+        var plan = ReportFigureRenderer.Plan(data, new QuantManifest { DeNovoOverlap = overlap,
+            IdentificationConcordance = new IdentificationConcordanceSummary() }, new FamilyClusterFile(), null);
+        foreach (string file in new[] { PresentationFigures.DeNovoSearchCrosscheckFile, PresentationFigures.SignalUpliftFile })
+        {
+            var chart = plan.Charts.Single(c => c.FileName == file);
+            foreach (var theme in new[] { ChartPaletteVariant.Light, ChartPaletteVariant.Dark })
+            {
+                var native = chart.CreateChart();
+                string target = Path.Combine(Path.GetTempPath(), "reader-figures", theme.ToString(), file);
+                ChartImageExporter.Save(native, target, chart.Width, chart.Height, variant: theme);
+                var glyphs = ReaderGlyphs(VisualTreeHelper.GetDrawing(native)).ToArray();
+                double pointsPerDip = Math.Min(468 / chart.Width, 360 / chart.Height);
+                Check(file + " " + theme + " has print-readable text",
+                    glyphs.Length > 0 && glyphs.All(g => g.GlyphRun.FontRenderingEmSize * pointsPerDip >= 10));
+                Check(file + " " + theme + " labels remain in the figure",
+                    glyphs.All(g => g.Bounds.Left >= 0 && g.Bounds.Top >= 0
+                        && g.Bounds.Right <= chart.Width && g.Bounds.Bottom <= chart.Height));
+            }
+        }
+    }
+
+    private static IEnumerable<GlyphRunDrawing> ReaderGlyphs(Drawing drawing) => drawing switch
+    {
+        GlyphRunDrawing glyph => new[] { glyph },
+        DrawingGroup group => group.Children.SelectMany(ReaderGlyphs),
+        _ => Array.Empty<GlyphRunDrawing>(),
+    };
 }
