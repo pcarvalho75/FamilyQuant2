@@ -486,6 +486,7 @@ Paulo agreed these at the restart, 2026-11-01.
 | J35b | Progress on the full-run project: the longest gap between two steps named | L | 0.3 | 🟢 | J35c | `READY` names the longest gap and its phase | SH | | 0 | 0 | |
 | J35c | J35 reviewed and merged | L | 0.2 | 🟢 | J40 | Approved; gate green | SH | | 0 | 0 | |
 | J38c | First fix: Compute reuses the attribution FullXicCompletionStage already computed instead of the family-world step searching again (calls 3 and 4 repeat 1 and 2: 366 s of 923 s on WORKHORSE) | H | 1 | 🟢 | J38d | Byte-identical stored results on a fixture | AS | | 0 | 0 | |
+| J48 | Saving the full-run project fits in memory: J35b's measurement hit an OutOfMemoryException in SavedFileCheck.Curation -> ToJsonText under an 8 GB heap cap; find whether the product's Save builds the whole curation JSON as one string and what heap Save needs, and if a 16 GB office PC could run out, stream it with the same bytes written | M | 0.5 | 🟢 | | FINDING first; if fixed, byte-identical saved file on the full-run copy and the peak measured before and after | SH | | 0 | 0 | |
 
 ### W2 The interpretation
 
