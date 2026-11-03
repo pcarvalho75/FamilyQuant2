@@ -27,8 +27,7 @@ public static partial class FamilyCompositionStudy
         ArgumentNullException.ThrowIfNull(attribution);
         ArgumentNullException.ThrowIfNull(database);
         List<FastaItemExtended> targets = database.Where(p => p != null
-            && !SequenceLabels.IsDecoy(p.SequenceIdentifier ?? string.Empty)
-            && !SequenceLabels.IsContaminant(p.SequenceIdentifier))
+            && !SequenceLabels.IsDecoy(p.SequenceIdentifier ?? string.Empty))
             .OrderBy(p => p.SequenceIdentifier, StringComparer.Ordinal).ToList();
         if (targets.Any(p => string.IsNullOrWhiteSpace(p.SequenceIdentifier))
             || targets.GroupBy(p => p.SequenceIdentifier, StringComparer.Ordinal).Any(g => g.Count() > 1))
@@ -56,7 +55,8 @@ public static partial class FamilyCompositionStudy
                 "covering the most unexplained distinct peptide sequences; ties use ordinal protein identifiers. " +
                 "Exact containment with I/L folded and modifications removed, across all assigned quantified peptides " +
                 "(shared peptides included). This is an approximation, not an exact minimum or a gene/proteoform count. " +
-                "Proteins with a peptide of their own require uniqueness across all noncontaminant database targets. " +
+                "Greedy explanation candidates exclude contaminants. Proteins with a peptide of their own require " +
+                "uniqueness across all database targets, including contaminants; decoys are excluded. " +
                 "Homology-only support does not establish exact containment and remains unexplained.",
         };
         foreach (var entry in byFamily)
@@ -66,7 +66,8 @@ public static partial class FamilyCompositionStudy
             var own = new HashSet<string>(StringComparer.Ordinal);
             foreach (string peptide in entry.Value.OrderBy(s => s, StringComparer.Ordinal))
             {
-                var familyTargets = support[peptide].Where(p => p.UserID == entry.Key).ToList();
+                var familyTargets = support[peptide].Where(p => p.UserID == entry.Key
+                    && !SequenceLabels.IsContaminant(p.SequenceIdentifier)).ToList();
                 if (familyTargets.Count == 0) row.UnexplainedPeptides.Add(peptide);
                 foreach (var protein in familyTargets)
                 {

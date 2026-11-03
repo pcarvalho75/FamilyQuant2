@@ -37,7 +37,8 @@ public static partial class FamilyCompositionStudy
             Method = "Per-file primary family signal / sum of credited family signal; measured-peptide and recorded " +
                 "RAW TIC shares are separate. Family-world-only signal excluded. Arithmetic mean of available run " +
                 "shares, sample SD (n-1), CV = SD / mean. Zero denominators and undefined statistics are unavailable. " +
-                "Pooled share uses all runs pooled; pooled-minus-mean is its signed difference from the per-run mean.",
+                "Pooled share uses all runs pooled; pooled-minus-mean is its signed difference from the per-run mean. " +
+                "Measured-signal and TIC means/SDs each require every run's corresponding share to be available.",
             Families = attribution.Peptides.SelectMany(a => a.FamilyUserIds).Distinct().OrderBy(id => id)
                 .Select(id => new FamilyRunShareSummary { FamilyUserId = id }).ToList(),
         };
@@ -83,8 +84,28 @@ public static partial class FamilyCompositionStudy
             family.PooledSignal = pooled.GetValueOrDefault(family.FamilyUserId);
             family.PooledShare = pooledTotal > 0 ? family.PooledSignal / pooledTotal : null;
             family.PooledMinusMeanShare = family.PooledShare - family.MeanShare;
+            (family.MeanShareOfMeasuredSignal, family.StandardDeviationOfMeasuredSignal) =
+                CompleteShareStatistics(family.Runs.Select(r => r.ShareOfMeasuredSignal));
+            (family.MeanShareOfTic, family.StandardDeviationOfTic) =
+                CompleteShareStatistics(family.Runs.Select(r => r.ShareOfTic));
         }
         return result;
+    }
+
+    private static (double? Mean, double? StandardDeviation) CompleteShareStatistics(IEnumerable<double?> shares)
+    {
+        double?[] values = shares.ToArray();
+        if (values.Length == 0 || values.Any(v => !v.HasValue)) return (null, null);
+        int count = 0;
+        double mean = 0, m2 = 0;
+        foreach (double? value in values)
+        {
+            count++;
+            double delta = value!.Value - mean;
+            mean += delta / count;
+            m2 += delta * (value.Value - mean);
+        }
+        return (mean, count > 1 ? Math.Sqrt(Math.Max(0, m2 / (count - 1))) : null);
     }
 
     /// <summary>Store only after the complete run study succeeds.</summary>
