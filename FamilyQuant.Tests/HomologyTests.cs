@@ -171,7 +171,7 @@ namespace FamilyQuant.Tests
             // best honest alignment is poor, and PepExplorer's PROGRAMMATIC default was 0.5
             // (ProgramArgs.cs:136) while its interface offers 0.80 (MainControl.xaml:203).
             HomologyOptions options = new HomologyOptions { MinIdentity = 0.25 };
-            HomologyResult result = HomologyMapper.SearchOne(peptide, db, options);
+            HomologyResult result = HomologySearch.SearchOne(peptide, db, options);
 
             c.Is("the protein is still found", result.Hits.Count == 1, result.Hits.Count.ToString(CultureInfo.InvariantCulture));
 
@@ -194,7 +194,7 @@ namespace FamilyQuant.Tests
             // The fix must not move a normal alignment. A tag that is present verbatim still lands on
             // it, and the protein here also ends in W so the tail window exists and must lose.
             HomologyDatabase good = HomologyDatabase.Build(new[] { ("sp|G1|GOOD", "MKAWLLPEPTIDEKGGSW") });
-            HomologyResult exact = HomologyMapper.SearchOne("PEPTIDEK", good);
+            HomologyResult exact = HomologySearch.SearchOne("PEPTIDEK", good);
 
             c.Is("an unambiguous tag still lands where it belongs",
                 exact.Hits.Count == 1 && exact.Hits[0].Offset == 6 && exact.Hits[0].MatchedSubsequence == "PEPTIDEK",
@@ -208,7 +208,7 @@ namespace FamilyQuant.Tests
             // (Aligner.cs:218-221), here simply no hit and no exception.
             HomologyDatabase tiny = HomologyDatabase.Build(new[] { ("sp|S1|SHORT", "PEPT") });
             c.Is("a protein shorter than the peptide yields no hit rather than a partial one",
-                HomologyMapper.SearchOne("PEPTIDEK", tiny, new HomologyOptions { MinIdentity = 0 }).Hits.Count == 0);
+                HomologySearch.SearchOne("PEPTIDEK", tiny, new HomologyOptions { MinIdentity = 0 }).Hits.Count == 0);
         }
 
         // ============================================ W2: undefined characters
@@ -232,7 +232,7 @@ namespace FamilyQuant.Tests
                 // "peptidek" and "AWLLPEPT" are distinct queries on purpose: a lowercase copy of
                 // AWLLPEPT would normalise to the same sequence and be deduplicated away, which is
                 // correct but would leave nothing to compare against.
-                results = HomologyMapper.Search(
+                results = HomologySearch.Search(
                     new[] { "C(+57.02)VLLHEK", "PEPTOK", "peptidek", "AWLLPEPT", "PEPTÏDEK", "" },
                     db);
             }
@@ -294,7 +294,7 @@ namespace FamilyQuant.Tests
 
             try
             {
-                HomologyMapper.SearchOne("PEPTIDEK", odd, new HomologyOptions { MinIdentity = 0.5 });
+                HomologySearch.SearchOne("PEPTIDEK", odd, new HomologyOptions { MinIdentity = 0.5 });
             }
             catch (Exception ex)
             {
@@ -320,9 +320,9 @@ namespace FamilyQuant.Tests
         {
             HomologyDatabase il = HomologyDatabase.Build(new[] { ("sp|I1|ILE", "AAAPEPTIDEKAAA") });
 
-            HomologyResult folded = HomologyMapper.SearchOne("PEPTLDEK", il,
+            HomologyResult folded = HomologySearch.SearchOne("PEPTLDEK", il,
                 new HomologyOptions { ConsiderILSame = true });
-            HomologyResult strict = HomologyMapper.SearchOne("PEPTLDEK", il,
+            HomologyResult strict = HomologySearch.SearchOne("PEPTLDEK", il,
                 new HomologyOptions { ConsiderILSame = false });
 
             c.Is("with I/L equivalence an L-for-I mismatch is full identity",
@@ -338,14 +338,14 @@ namespace FamilyQuant.Tests
 
             // At a gate of 1.0 the flag decides whether the protein is seen at all.
             c.Is("at 100% identity the flag decides whether the protein is admitted",
-                HomologyMapper.SearchOne("PEPTLDEK", il, new HomologyOptions { MinIdentity = 1.0, ConsiderILSame = true }).Hits.Count == 1 &&
-                HomologyMapper.SearchOne("PEPTLDEK", il, new HomologyOptions { MinIdentity = 1.0, ConsiderILSame = false }).Hits.Count == 0);
+                HomologySearch.SearchOne("PEPTLDEK", il, new HomologyOptions { MinIdentity = 1.0, ConsiderILSame = true }).Hits.Count == 1 &&
+                HomologySearch.SearchOne("PEPTLDEK", il, new HomologyOptions { MinIdentity = 1.0, ConsiderILSame = false }).Hits.Count == 0);
 
             HomologyDatabase kq = HomologyDatabase.Build(new[] { ("sp|K1|GLN", "AAAPEPTIDEQAAA") });
 
-            HomologyResult kqOn = HomologyMapper.SearchOne("PEPTIDEK", kq,
+            HomologyResult kqOn = HomologySearch.SearchOne("PEPTIDEK", kq,
                 new HomologyOptions { KQEquivalent = true });
-            HomologyResult kqOff = HomologyMapper.SearchOne("PEPTIDEK", kq,
+            HomologyResult kqOff = HomologySearch.SearchOne("PEPTIDEK", kq,
                 new HomologyOptions { KQEquivalent = false });
 
             c.Is("with K/Q equivalence a K-for-Q mismatch is full identity",
@@ -389,9 +389,9 @@ namespace FamilyQuant.Tests
             c.Is("the database was indexed", db.HasSeedIndex && db.SeedCount > 0,
                 db.SeedCount.ToString(CultureInfo.InvariantCulture));
 
-            List<HomologyResult> brute = HomologyMapper.Search(queries, db,
+            List<HomologyResult> brute = HomologySearch.Search(queries, db,
                 new HomologyOptions { Strategy = HomologySearchStrategy.BruteForce });
-            List<HomologyResult> seeded = HomologyMapper.Search(queries, db,
+            List<HomologyResult> seeded = HomologySearch.Search(queries, db,
                 new HomologyOptions { Strategy = HomologySearchStrategy.SeedIndex });
 
             int bruteHits = brute.Sum(r => r.Hits.Count);
@@ -410,7 +410,7 @@ namespace FamilyQuant.Tests
 
             // Auto on a 20-protein database is brute force: the index costs more to consult than the
             // scan it replaces.
-            List<HomologyResult> auto = HomologyMapper.Search(queries, db, new HomologyOptions());
+            List<HomologyResult> auto = HomologySearch.Search(queries, db, new HomologyOptions());
             c.Is("Auto scans a small database rather than indexing it", auto.All(r => !r.UsedSeedIndex));
             c.Is("and gives the same answer", Render(auto) == Render(brute));
 
@@ -437,29 +437,29 @@ namespace FamilyQuant.Tests
             // BruteForceProteinLimit = 0 removes the size rule, so what Auto does here is decided by
             // the guarantee alone.
             HomologyOptions autoNoSizeRule = new HomologyOptions { BruteForceProteinLimit = 0 };
-            HomologyResult autoSpread = HomologyMapper.SearchOne(spread, lossy, autoNoSizeRule);
-            HomologyResult forcedSpread = HomologyMapper.SearchOne(spread, lossy,
+            HomologyResult autoSpread = HomologySearch.SearchOne(spread, lossy, autoNoSizeRule);
+            HomologyResult forcedSpread = HomologySearch.SearchOne(spread, lossy,
                 new HomologyOptions { Strategy = HomologySearchStrategy.SeedIndex });
 
             c.Is("the forced index loses a real 80%-identity homolog - the loss is not hypothetical",
                 forcedSpread.UsedSeedIndex && forcedSpread.Hits.Count == 0,
                 forcedSpread.Hits.Count.ToString(CultureInfo.InvariantCulture));
-            c.Is("Auto declines the index for that query and finds the homolog",
-                !autoSpread.UsedSeedIndex && autoSpread.Hits.Count == 1 && autoSpread.Hits[0].Offset == 4,
+            c.Is("Auto's positional q3 index finds the homolog that has no shared 4-mer",
+                autoSpread.UsedSeedIndex && autoSpread.Hits.Count == 1 && autoSpread.Hits[0].Offset == 4,
                 autoSpread.Hits.Count.ToString(CultureInfo.InvariantCulture));
             c.Is("while for a length where the bound holds, Auto does use the index",
-                HomologyMapper.ShouldUseSeedIndex("AAAGAAAGAAAG", db, autoNoSizeRule));
+                HomologySearch.ShouldUseSeedIndex("AAAGAAAGAAAG", db, autoNoSizeRule));
             c.Is("Auto also declines the index when K/Q equivalence is on: the seeds fold I into L, "
                  + "which the gate does too, but they do not fold K into Q",
-                !HomologyMapper.ShouldUseSeedIndex("AAAGAAAGAAAG", db,
+                !HomologySearch.ShouldUseSeedIndex("AAAGAAAGAAAG", db,
                     new HomologyOptions { BruteForceProteinLimit = 0, KQEquivalent = true }));
 
             // A database built without an index still searches; forcing the index on it is refused.
             HomologyDatabase unindexed = HomologyDatabase.Build(entries, HomologyOptions.DefaultSeedLength, false);
             c.Is("a database with no index still gives the brute force answer",
-                Render(HomologyMapper.Search(queries, unindexed, new HomologyOptions())) == Render(brute));
+                Render(HomologySearch.Search(queries, unindexed, new HomologyOptions())) == Render(brute));
             c.Is("but forcing the index on it is refused rather than silently ignored",
-                Throws<InvalidOperationException>(() => HomologyMapper.Search(queries, unindexed,
+                Throws<InvalidOperationException>(() => HomologySearch.Search(queries, unindexed,
                     new HomologyOptions { Strategy = HomologySearchStrategy.SeedIndex })));
         }
 
@@ -478,14 +478,14 @@ namespace FamilyQuant.Tests
                 ("Reverse_sp|T2|TARGET", "GGGWQSMYHFCGGG"),
             });
 
-            HomologyResult mixed = HomologyMapper.SearchOne("PEPTIDEK", db);
+            HomologyResult mixed = HomologySearch.SearchOne("PEPTIDEK", db);
 
             c.Is("an exact target-decoy tie goes to the decoy conservatively",
                 mixed.Hits.Count == 1 && mixed.Hits[0].IsDecoy
                 && mixed.TargetsSuppressedByDecoyCompetition && !mixed.DecoysSuppressed,
                 string.Join(", ", mixed.Hits.Select(h => h.ProteinId)));
 
-            HomologyResult decoyOnly = HomologyMapper.SearchOne("WQSMYHFC", db);
+            HomologyResult decoyOnly = HomologySearch.SearchOne("WQSMYHFC", db);
 
             c.Is("a peptide matching only decoys keeps them - that is what decoys are for",
                 decoyOnly.Hits.Count == 1 && decoyOnly.Hits[0].IsDecoy && !decoyOnly.DecoysSuppressed,
@@ -499,13 +499,13 @@ namespace FamilyQuant.Tests
                 ("reverse_sp|T1|TARGET", "GGGPEPTIDEKGGG"),
             });
 
-            HomologyResult ordinal = HomologyMapper.SearchOne("PEPTIDEK", cased);
+            HomologyResult ordinal = HomologySearch.SearchOne("PEPTIDEK", cased);
 
             c.Is("the decoy label is matched Ordinal, so a lowercase prefix is not a decoy",
                 ordinal.Hits.Count == 2 && !ordinal.DecoysSuppressed,
                 string.Join(", ", ordinal.Hits.Select(h => h.ProteinId)));
 
-            HomologyResult customLabel = HomologyMapper.SearchOne("PEPTIDEK", cased,
+            HomologyResult customLabel = HomologySearch.SearchOne("PEPTIDEK", cased,
                 new HomologyOptions { DecoyLabel = "reverse_" });
 
             c.Is("and the label really is a parameter (the newly marked decoy wins the tie)",
@@ -541,8 +541,8 @@ namespace FamilyQuant.Tests
                 }
             }
 
-            string first = Render(HomologyMapper.Search(queries, db, new HomologyOptions()));
-            string second = Render(HomologyMapper.Search(queries, db, new HomologyOptions()));
+            string first = Render(HomologySearch.Search(queries, db, new HomologyOptions()));
+            string second = Render(HomologySearch.Search(queries, db, new HomologyOptions()));
 
             c.Is("two runs of the same search are identical", first == second, FirstDifference(first, second));
 
@@ -555,20 +555,20 @@ namespace FamilyQuant.Tests
                 ("sp|MM|SAME", "AAAPEPTIDEKAAA"),
             });
 
-            HomologyResult tied = HomologyMapper.SearchOne("PEPTIDEK", ties);
+            HomologyResult tied = HomologySearch.SearchOne("PEPTIDEK", ties);
 
             c.Is("equal scores are broken by identifier, ordinal ascending, not by database order",
                 string.Join(",", tied.Hits.Select(h => h.ProteinId)) == "sp|AA|SAME,sp|MM|SAME,sp|ZZ|SAME",
                 string.Join(",", tied.Hits.Select(h => h.ProteinId)));
 
             // Duplicate queries collapse the way ProgramEngine.cs:201-203 collapses registries.
-            List<HomologyResult> deduplicated = HomologyMapper.Search(
+            List<HomologyResult> deduplicated = HomologySearch.Search(
                 new[] { "PEPTIDEK", "peptidek", "PEPTIDEK ", "OTHERPEP" }, ties);
 
             c.Is("queries that normalise to the same sequence are searched once",
                 deduplicated.Count == 2, deduplicated.Count.ToString(CultureInfo.InvariantCulture));
 
-            HomologyResult top = HomologyMapper.SearchOne("PEPTIDEK", ties,
+            HomologyResult top = HomologySearch.SearchOne("PEPTIDEK", ties,
                 new HomologyOptions { TopHitsPerPeptide = 2 });
 
             c.Is("TopHitsPerPeptide truncates after the ordering, keeping the best",
@@ -600,8 +600,8 @@ namespace FamilyQuant.Tests
             };
 
             HomologyDatabase db = HomologyDatabase.Build(family);
-            List<HomologyResult> results = HomologyMapper.Search(new[] { "PEPTIDEK" }, db);
-            List<FamilyAssignment> assignments = HomologyMapper.MapToFamilies(results, family);
+            List<HomologyResult> results = HomologySearch.Search(new[] { "PEPTIDEK" }, db);
+            List<FamilyAssignment> assignments = HomologySearch.MapToFamilies(results, family);
 
             c.Is("every protein is hit", results[0].Hits.Count == 3,
                 results[0].Hits.Count.ToString(CultureInfo.InvariantCulture));
@@ -619,7 +619,7 @@ namespace FamilyQuant.Tests
 
             // Searched against one database, mapped against another: reported, not silently dropped.
             List<FastaItemExtended> partial = family.Take(1).ToList();
-            List<FamilyAssignment> mismatched = HomologyMapper.MapToFamilies(results, partial);
+            List<FamilyAssignment> mismatched = HomologySearch.MapToFamilies(results, partial);
 
             c.Is("a hit protein the family file does not know is reported as unknown",
                 string.Join(",", mismatched[0].UnknownProteinIds) == "sp|B1|INHIB,sp|C1|INHIB",
@@ -628,9 +628,9 @@ namespace FamilyQuant.Tests
                 string.Join(",", mismatched[0].FamilyIds));
 
             // A single-family peptide is the unambiguous case, and a rejected query still gets a row.
-            List<HomologyResult> mixedQueries = HomologyMapper.Search(new[] { "AAAPEPT", "C(+57)K" }, db,
+            List<HomologyResult> mixedQueries = HomologySearch.Search(new[] { "AAAPEPT", "C(+57)K" }, db,
                 new HomologyOptions { MinIdentity = 1.0 });
-            List<FamilyAssignment> mixedAssignments = HomologyMapper.MapToFamilies(mixedQueries, family);
+            List<FamilyAssignment> mixedAssignments = HomologySearch.MapToFamilies(mixedQueries, family);
 
             c.Is("a tag unique to one protein maps to one family",
                 mixedAssignments[0].FamilyIds.Count == 1 && mixedAssignments[0].FamilyIds[0] == 2 &&

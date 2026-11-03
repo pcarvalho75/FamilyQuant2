@@ -429,7 +429,7 @@ namespace FamilyQuant
             List<string> searched = residual.Select(r => r.Sequence).Where(s => s.Length > 0 && s.Length >= lowest)
                 .Distinct(StringComparer.Ordinal).ToList();
             var credits = new Dictionary<string, FamilyWorldCredit>(StringComparer.Ordinal);
-            foreach (HomologyResult r in HomologyMapper.Search(searched, world.Database, options.SearchOptions(), operation,
+            foreach (HomologyResult r in HomologySearch.Search(searched, world.Database, options.SearchOptions(), operation,
                 progressStage: "world-residual-queries", progressLabel: "Family-world peptides searched", progressBatchSize: 128))
                 credits[r.IsRejected ? r.Peptide : r.NormalizedPeptide] = world.Credit(r, creditableSorted, lowest);
             operation?.ThrowIfCancellationRequested();

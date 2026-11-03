@@ -13,7 +13,7 @@ namespace FamilyQuant
     /// two ways, and the caller supplies the mapping so this engine stays testable without a homology
     /// database: the identified (DDA) peptides through <paramref name="identifiedFamilies"/>, the de
     /// novo peptides through <paramref name="deNovoFamilies"/> (in the real pipeline, by
-    /// <see cref="Homology.HomologyMapper"/>). A peptide is reduced to ONE deterministic largest-M+0
+    /// <see cref="Homology.HomologySearch"/>). A peptide is reduced to ONE deterministic largest-M+0
     /// representative per run, evidence side, canonical PTM-aware peptidoform and charge first - the same
     /// max-M+0 collapse the fraction-of-TIC method uses - so no elution peak is counted twice without
     /// collapsing distinct peptidoforms. A peptide that maps to several families is counted in EACH of them (the
@@ -277,8 +277,8 @@ namespace FamilyQuant
         ///
         /// It composes the pieces that already exist and adds no attribution rule of its own:
         /// <see cref="Homology.HomologyDatabase.Build(System.Collections.Generic.IEnumerable{PatternTools.FastaTools.FastaItem}, int, bool)"/>
-        /// to index the curated proteins, <see cref="Homology.HomologyMapper.Search"/> to align every
-        /// distinct sequence of a side, <see cref="Homology.HomologyMapper.MapToFamilies"/> to join the
+        /// to index the curated proteins, <see cref="Homology.HomologySearch.Search"/> to align every
+        /// distinct sequence of a side, <see cref="Homology.HomologySearch.MapToFamilies"/> to join the
         /// hits onto <see cref="FastaItemExtended.UserID"/> - the WORKING grouping, so a manual split is
         /// honoured - and then <see cref="Build"/> for the arithmetic. This is the very sequence the suite
         /// runs against the real venom file, in one place so a screen and a test cannot drift apart.

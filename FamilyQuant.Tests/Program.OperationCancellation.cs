@@ -57,7 +57,7 @@ namespace FamilyQuant.Tests
             using var homologyCancel = new CancellationTokenSource();
             var homologyReport = new InlineOperationProgress(value => { if (value.Completed == 1) homologyCancel.Cancel(); });
             Check("cancelling homology does not return a partial hit table",
-                Throws<OperationCanceledException>(() => HomologyMapper.Search(new[] { "MKAWLL", "QQQQQQ" }, database,
+                Throws<OperationCanceledException>(() => HomologySearch.Search(new[] { "MKAWLL", "QQQQQQ" }, database,
                     operation: new OperationContext(homologyCancel.Token, homologyReport))));
             string projectPath = Path.Combine(workDir, "cancelled_project.fqproj");
             File.WriteAllText(projectPath, "original");

@@ -69,8 +69,15 @@ namespace FamilyQuant.Tests
                 Console.WriteLine, detectedCachePathFor: run => Path.Combine(cache, "detected_" + run + ".json"));
             watch.Stop();
             double cpuSeconds = (process.TotalProcessorTime - cpuStart).TotalSeconds;
+            File.WriteAllLines(Path.Combine(output, "notes.txt"), result.Notes, new UTF8Encoding(false));
+            if (curation.MyExtendedFastaItems.Count > 0 && result.Rows.Count > 0 && result.Manifest.FamilyMapping == null)
+                throw new InvalidDataException("Snapshot family mapping is unavailable: " + string.Join(" | ", result.Notes));
+            if (curation.EvidenceSource?.FamilyWorld != null && result.Manifest.FamilyWorldResult == null)
+                throw new InvalidDataException("Snapshot family world is unavailable: " + string.Join(" | ", result.Notes));
             Console.WriteLine("Compute completed: " + watch.Elapsed.TotalSeconds.ToString("F3", CultureInfo.InvariantCulture)
                 + " seconds wall; " + cpuSeconds.ToString("F3", CultureInfo.InvariantCulture) + " seconds CPU.");
+            process.Refresh();
+            long peakBeforeSave = process.PeakWorkingSet64;
             string project = Path.Combine(output, "computed.fqproj");
             ProjectStore.WriteFqproj(project, curation, result.Rows, result.Manifest);
             using (ZipArchive zip = ZipFile.OpenRead(project))
@@ -89,6 +96,11 @@ namespace FamilyQuant.Tests
                 watch.Elapsed.TotalSeconds.ToString("F6", CultureInfo.InvariantCulture), new UTF8Encoding(false));
             File.WriteAllText(Path.Combine(output, "cpu-seconds.txt"),
                 cpuSeconds.ToString("F6", CultureInfo.InvariantCulture), new UTF8Encoding(false));
+            File.WriteAllText(Path.Combine(output, "peak-before-save-bytes.txt"),
+                peakBeforeSave.ToString(CultureInfo.InvariantCulture), new UTF8Encoding(false));
+            process.Refresh();
+            File.WriteAllText(Path.Combine(output, "peak-process-bytes.txt"),
+                process.PeakWorkingSet64.ToString(CultureInfo.InvariantCulture), new UTF8Encoding(false));
             Console.WriteLine("Snapshot: " + result.Rows.Count.ToString(CultureInfo.InvariantCulture) +
                 " rows; " + watch.Elapsed.TotalSeconds.ToString("F3", CultureInfo.InvariantCulture) + " seconds; " + output);
             if (result.SpectrumComparisonCsvError.Length > 0 || result.Rows.Count == 0)
