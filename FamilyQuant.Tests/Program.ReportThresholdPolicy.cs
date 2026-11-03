@@ -93,5 +93,19 @@ internal static partial class Program
         bool changedRefused = false;
         try { FamilyReportThreshold.Build(source, project); } catch (InvalidOperationException) { changedRefused = true; }
         Check("J5c refuses assignment IDs that no longer match project proteins", changedRefused);
+        var peptideMap = new PeptideFamilyAttribution();
+        peptideMap.IdentifiedBySequence["AAAAAAAK"] = new[] { 1 };
+        peptideMap.IdentifiedBySequence["CCCCCCCK"] = new[] { 2 };
+        var nativeRows = new[]
+        {
+            Qr("identified", "A", 1, 2, "AAAAAAAK", 1, 1), Qr("identified", "A", 2, 2, "CCCCCCCK", 99, 99),
+            Qr("identified", "B", 3, 2, "AAAAAAAK", 1, 1), Qr("identified", "B", 4, 2, "CCCCCCCK", 1, 1),
+        };
+        var nativeShares = FamilyCompositionStudy.BuildRunShares(FamilyEnvelopeQuant.AttributePeptides(
+            FamilyEnvelopeQuant.PreparePeptides(nativeRows), peptideMap));
+        var nativeReport = FamilyReportThreshold.Build(nativeShares, .3);
+        Check("J5c consumes native run shares and groups on mean rather than pooled signal",
+            nativeReport.OtherFamilies.Single().FamilyUserId == 1 && Near(nativeReport.OthersAssignedStatistics.Mean, .255)
+            && nativeShares.Families.Single(x => x.FamilyUserId == 1).PooledShare < .03);
     }
 }
