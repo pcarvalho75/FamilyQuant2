@@ -233,7 +233,7 @@ namespace FamilyQuant.Tests
             suite.Add(() => FamilySensitivityTests(Path.Combine(workDir, "family-sensitivity")));
             suite.Section("Panel, threshold, template and report Help");
             suite.Add(() => PanelAuditTests());
-            suite.Add(() => PanelAuditCurrentTests());
+            suite.Add(() => PanelAuditCurrentTests(Path.Combine(workDir, "panel-current-audit-" + Guid.NewGuid().ToString("N"))));
             suite.Add(() => ReportThresholdTests());
             suite.Add(() => ReportThresholdPolicyTests());
             suite.Add(() => PanelTemplateTests());
@@ -406,6 +406,12 @@ namespace FamilyQuant.Tests
                 Path.Combine(workDir, "wording-roundtrip-" + Guid.NewGuid().ToString("N")) }));
             suite.Add(() => ShellSeproFixtureCheck(new[] { "--test-shell-sepro-fixture",
                 Path.Combine(workDir, "shell-sepro-" + Guid.NewGuid().ToString("N"), "fixture.sepr2") }, workDir));
+            suite.Section("Panel contracts and native panel review fixtures");
+            suite.AddWithApplication(() => FamilyPanelReportTests());
+            suite.AddWithApplication(() => PanelEvidenceUiTests());
+            suite.Add(() => PanelEvidenceValidationTests());
+            suite.Add(() => PanelFamilyMapContractTests());
+            suite.Add(() => PanelFamilyDependencyContractTests());
             return suite;
         }
 
