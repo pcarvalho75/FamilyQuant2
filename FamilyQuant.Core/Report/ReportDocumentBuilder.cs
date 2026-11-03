@@ -21,6 +21,7 @@ public static class ReportDocumentBuilder
             ("Title", () => new(ReportSectionIds.Title, "Title", Array.Empty<ReportBlock>())),
             ("Contents", () => new(ReportSectionIds.Contents, "Contents", Array.Empty<ReportBlock>())),
             ("Summary", () => new(ReportSectionIds.Summary, "Summary", Array.Empty<ReportBlock>())),
+            (ReportFindings.Title, () => new(ReportSectionIds.Findings, ReportFindings.Title, Array.Empty<ReportBlock>())),
             ("Methods", () => ReportMethods.Build(curation, manifest, details, methodFacts)),
             ("Results", () => new(ReportSectionIds.Results, "Results", Array.Empty<ReportBlock>())),
             ("Quality", () => new(ReportSectionIds.Quality, "Quality", Array.Empty<ReportBlock>())),

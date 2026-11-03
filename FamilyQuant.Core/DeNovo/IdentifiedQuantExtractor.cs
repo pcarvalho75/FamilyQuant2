@@ -137,7 +137,8 @@ namespace FamilyQuant.DeNovo
         /// compare row for row.
         /// </summary>
         public static (List<DeNovoXicResult> results, IdentifiedQuantStats stats) ExtractForRun(
-            string rawPath, IReadOnlyList<PatternLabPsm> psms, DeNovoXicOptions options)
+            string rawPath, IReadOnlyList<PatternLabPsm> psms, DeNovoXicOptions options,
+            FamilyQuant.Operations.OperationContext? operation = null)
         {
             if (rawPath == null) throw new ArgumentNullException(nameof(rawPath));
             if (psms == null) throw new ArgumentNullException(nameof(psms));
@@ -157,7 +158,7 @@ namespace FamilyQuant.DeNovo
             List<DeNovoXicRequest> requests = BuildRequests(psms);
 
             DateTime started = DateTime.UtcNow;
-            List<DeNovoXicResult> results = DeNovoXicExtractor.ExtractRun(rawPath, requests, options);
+            List<DeNovoXicResult> results = DeNovoXicExtractor.ExtractRun(rawPath, requests, options, operation, "identified");
             double elapsed = (DateTime.UtcNow - started).TotalSeconds;
 
             var stats = new IdentifiedQuantStats

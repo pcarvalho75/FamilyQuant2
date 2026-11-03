@@ -23,7 +23,8 @@ namespace FamilyQuant.Homology
         /// first seen.
         /// </summary>
         public static List<HomologyResult> Search(IEnumerable<string> peptides, HomologyDatabase database,
-            HomologyOptions? options = null, OperationContext? operation = null)
+            HomologyOptions? options = null, OperationContext? operation = null,
+            string progressStage = "homology", string? progressLabel = null, int progressBatchSize = 1)
         {
             operation?.ThrowIfCancellationRequested();
             if (peptides == null)
@@ -74,7 +75,7 @@ namespace FamilyQuant.Homology
                 }
             }
 
-            PositionalIndex? positionalIndex = opts.Strategy == HomologySearchStrategy.Auto
+            PositionalIndex? positionalIndex = opts.Strategy != HomologySearchStrategy.SeedIndex
                 && queries.Any(q => q.Rejection == null && ShouldUseSeedIndex(q.Normalized, database, opts))
                 ? GetIndex(database, operation) : null;
             HomologyResult[] results = new HomologyResult[queries.Count];
@@ -84,6 +85,8 @@ namespace FamilyQuant.Homology
             // parallel would also have to merge partial argmaxes, and the merge is where a tie-break
             // silently becomes non-deterministic.
             int completed = 0;
+            if (progressBatchSize < 1) throw new ArgumentOutOfRangeException(nameof(progressBatchSize));
+            if (progressLabel != null) operation?.Report(progressStage, progressLabel, 0, queries.Count);
             object progressGate = new object();
             var parallelOptions = new ParallelOptions { CancellationToken = operation?.CancellationToken ?? CancellationToken.None };
             Parallel.For(0, queries.Count, parallelOptions, i =>
@@ -95,7 +98,12 @@ namespace FamilyQuant.Homology
                         Array.Empty<HomologyHit>(), false, false, 0, false)
                     : SearchNormalized(query.Raw, query.Normalized, database, opts, operation, positionalIndex);
                 if (operation != null)
-                    lock (progressGate) operation.Report("homology", "Searched peptide queries", ++completed, queries.Count);
+                    lock (progressGate)
+                    {
+                        if (++completed % progressBatchSize == 0 || completed == queries.Count)
+                            operation.Report(progressStage, progressLabel == null ? "Searched peptide queries" : progressLabel + " "
+                                + completed.ToString(CultureInfo.InvariantCulture) + " of " + queries.Count.ToString(CultureInfo.InvariantCulture), completed, queries.Count);
+                    }
             });
 
             return new List<HomologyResult>(results);
@@ -122,7 +130,7 @@ namespace FamilyQuant.Homology
             var passed = new List<GateHit>();
             int candidatesExamined;
 
-            if (useIndex && options.Strategy == HomologySearchStrategy.Auto)
+            if (useIndex && options.Strategy != HomologySearchStrategy.SeedIndex)
             {
                 // A passing window has at most e mismatches. Each mismatch spoils at most three
                 // q-grams, leaving at least L-2-3e matching query positions on this exact diagonal.
@@ -182,7 +190,10 @@ namespace FamilyQuant.Homology
             bool decoysSuppressed = false, targetsSuppressed = false;
             var hits = new List<HomologyHit>();
             bool containment = options.BestScoreOnly && passed.Any(g => g.ExactOffset >= 0)
-                && TryContainmentScore(peptide, foldMap, out _);
+                && TryContainmentScore(peptide, foldMap, out _)
+                // List.Sort is not stable for duplicate identifiers with equal score/offset.
+                // Keep the original complete hit list in that case, including its tie behavior.
+                && passed.Select(g => database.Proteins[g.ProteinIndex].Id).Distinct(StringComparer.Ordinal).Count() == passed.Count;
             if (containment)
             {
                 TryContainmentScore(peptide, foldMap, out int maximumScore);

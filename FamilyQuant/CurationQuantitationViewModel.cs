@@ -100,10 +100,8 @@ public sealed partial class CurationQuantitationViewModel : ScreenViewModel
         var prepared = new FullXicPrepared
         {
             Peptides = FamilyEnvelopeQuant.PreparePeptides(rows),
-            Hits = CurationHomologyCache.GetOrSearch(rows, proteins, cacheDirectory, progress: operation == null ? null : hit =>
-                operation.Report("attribution", hit ? "Peptide-to-protein hits read from the cache"
-                    : "Searching the stored peptide sequences against the proteins"),
-                cancellationToken: operation?.CancellationToken ?? default),
+            Hits = CurationHomologyCache.GetOrSearch(rows, proteins, cacheDirectory,
+                cancellationToken: operation?.CancellationToken ?? default, operation: operation),
             // Once per quantitation, here off the interface thread: protein content never changes
             // during curation, so a regrouping does not invalidate it.
             ProteinFingerprint = FamilyEnvelopeQuant.ProteinSetFingerprint(proteins),

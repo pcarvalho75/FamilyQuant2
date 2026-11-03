@@ -299,7 +299,8 @@ namespace FamilyQuant.DeNovo
             FamilyQuant.PeptideFamilyAttribution? familyAttribution = null,
             IEnumerable<RawScanPrecursorMetadata>? rawPrecursors = null,
             IReadOnlyDictionary<string, double>? perRunTic = null,
-            IEnumerable<PeaksDeNovoRow>? acceptedDeNovoRows = null)
+            IEnumerable<PeaksDeNovoRow>? acceptedDeNovoRows = null,
+            FamilyQuant.Operations.OperationContext? operation = null)
         {
             if (peaksDeNovoRows == null) throw new ArgumentNullException(nameof(peaksDeNovoRows));
             if (deepNovoRows == null) throw new ArgumentNullException(nameof(deepNovoRows));
@@ -402,7 +403,7 @@ namespace FamilyQuant.DeNovo
             List<NativePeptideQuant> peptideRepresentatives =
                 NativeQuantFractions.DedupToPeptides(quants);
             ReferenceEnvelopeDiagnostics reference = ReferenceEnvelopeEstimator.Evaluate(
-                peptideRepresentatives);
+                peptideRepresentatives, operation, "spectrum-reference-validation");
             ReferenceEnvelopeEstimator.Apply(peptideRepresentatives);
             Dictionary<string, List<NativePeptideQuant>> identifiedByIdentity = peptideRepresentatives
                 .Where(p => string.Equals(p.Side, NativeQuantFractions.SideIdentified,
@@ -425,6 +426,7 @@ namespace FamilyQuant.DeNovo
             double? pooledTic = ticByRun.Count > 0 ? ticByRun.Values.Sum() : null;
 
             var output = new List<SpectrumComparisonRow>(clusters.Count);
+            operation?.Report("spectrum-rows", "Preparing spectrum comparison rows", 0, clusters.Count);
             foreach (IGrouping<string, Cluster> scanGroup in clusters
                 .GroupBy(c => ScanKey(c.Run, c.Scan), StringComparer.OrdinalIgnoreCase)
                 .OrderBy(g => g.Key, StringComparer.OrdinalIgnoreCase))
@@ -432,6 +434,8 @@ namespace FamilyQuant.DeNovo
                 List<Cluster> ordered = scanGroup.OrderBy(c => c.Charge)
                     .ThenBy(c => SortableMz(c.OpeningMz)).ToList();
                 for (int i = 0; i < ordered.Count; i++)
+                {
+                    operation?.ThrowIfCancellationRequested();
                     output.Add(ToRow(ordered[i], i + 1, hypothesesPerScan[scanGroup.Key],
                         reference, familyLabels, familyAttribution,
                         rawByScan.TryGetValue(scanGroup.Key, out RawScanPrecursorMetadata? raw)
@@ -439,6 +443,10 @@ namespace FamilyQuant.DeNovo
                         creditedByIdentity,
                         ticByRun.TryGetValue(ordered[i].Run, out double runTic) ? runTic : null,
                         pooledTic));
+                    if (output.Count % 128 == 0 || output.Count == clusters.Count)
+                        operation?.Report("spectrum-rows", "Spectrum comparison rows " + output.Count.ToString(CultureInfo.InvariantCulture)
+                            + " of " + clusters.Count.ToString(CultureInfo.InvariantCulture), output.Count, clusters.Count);
+                }
             }
             return output;
         }

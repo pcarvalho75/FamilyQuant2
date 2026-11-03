@@ -21,7 +21,7 @@ internal static partial class Program
         })];
 
     private delegate List<HomologyResult> SearchMethod(IEnumerable<string> queries, HomologyDatabase database,
-        HomologyOptions? options, OperationContext? operation);
+        HomologyOptions? options, OperationContext? operation, string progressStage, string? progressLabel, int progressBatchSize);
 
     private static void HomologySearchEquivalenceTests()
     {
@@ -29,7 +29,9 @@ internal static partial class Program
         MethodInfo? method = type?.GetMethod("Search", BindingFlags.Public | BindingFlags.Static);
         Check("J38d separate HomologySearch engine is present", method != null);
         if (method == null) return;
-        var search = method.CreateDelegate<SearchMethod>();
+        var engine = method.CreateDelegate<SearchMethod>();
+        List<HomologyResult> search(IEnumerable<string> queries, HomologyDatabase database,
+            HomologyOptions? options, OperationContext? operation) => engine(queries, database, options, operation, "homology", null, 1);
         var random = new Random(3801);
         const string residues = "ARNDCQEGHILKMFPSTWYVBZJXU*";
         string RandomSequence(int n) => new(Enumerable.Range(0, n).Select(_ => residues[random.Next(residues.Length)]).ToArray());
@@ -117,6 +119,20 @@ internal static partial class Program
             canonical.All(c => PamMatrix.Alphabet.All(other => fold[c] == fold[other]
                 ? PamMatrix.Score(c, other) == PamMatrix.Score(c, c)
                 : PamMatrix.Score(c, other) < PamMatrix.Score(c, c))));
+
+        var duplicateEntries = Enumerable.Range(0, 25).Select(i => ("lower-" + i, "LLLLLA")).ToList();
+        duplicateEntries.Insert(7, ("duplicate", "LLLILL"));
+        duplicateEntries.Insert(19, ("duplicate", "ILLLLL"));
+        var duplicateDb = HomologyDatabase.Build(duplicateEntries);
+        foreach (int top in new[] { 1, 2, 100 })
+        {
+            var options = new HomologyOptions { BestScoreOnly = true, BruteForceProteinLimit = 0, TopHitsPerPeptide = top };
+#pragma warning disable CS0618
+            var expected = HomologyMapper.Search(["LLLLLL"], duplicateDb, options);
+#pragma warning restore CS0618
+            string difference = HomologySearchEquivalence.Difference(expected, search(["LLLLLL"], duplicateDb, options, null));
+            Check($"J38d duplicate-identifier equal ranking keys retain original tie order top={top}", difference.Length == 0, difference);
+        }
 
         var randomProteins = Enumerable.Range(0, 100).Select(i =>
             ((i % 3 == 0 ? "Reverse_" : "target-") + i,
