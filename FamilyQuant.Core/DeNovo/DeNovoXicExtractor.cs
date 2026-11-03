@@ -727,7 +727,8 @@ namespace FamilyQuant.DeNovo
         public static List<DeNovoXicResult> ExtractRun(
             string rawPath,
             IEnumerable<DeNovoXicRequest> requests,
-            DeNovoXicOptions? options = null)
+            DeNovoXicOptions? options = null, FamilyQuant.Operations.OperationContext? operation = null,
+            string progressSide = "precursor")
         {
             if (requests == null) throw new ArgumentNullException(nameof(requests));
 
@@ -752,6 +753,18 @@ namespace FamilyQuant.DeNovo
 
             var pending = new List<DeNovoXicRequest>(requests);
             var results = new List<DeNovoXicResult>(pending.Count);
+            int cacheHits = 0;
+            string cacheStage = "precursor-cache:" + progressSide + ":" + runName;
+            operation?.Report(cacheStage, "Checking precursor cache: " + progressSide + ", " + runName, 0, pending.Count);
+            void CacheBatch(int completed)
+            {
+                operation?.ThrowIfCancellationRequested();
+                if (completed % 128 == 0 || completed == pending.Count)
+                    operation?.Report(cacheStage, "Precursor cache batch " + ((completed + 127) / 128).ToString(CultureInfo.InvariantCulture)
+                        + " of " + ((pending.Count + 127) / 128).ToString(CultureInfo.InvariantCulture) + ": " + progressSide + ", " + runName
+                        + "; " + completed.ToString(CultureInfo.InvariantCulture) + " of " + pending.Count.ToString(CultureInfo.InvariantCulture)
+                        + " checked, " + cacheHits.ToString(CultureInfo.InvariantCulture) + " cache hits", completed, pending.Count);
+            }
 
             // IsotopeCount is stamped into the cache alongside ppm and MS1 tolerance: areas extracted
             // for three isotopes are a different measurement from areas extracted for five, and a
@@ -777,6 +790,7 @@ namespace FamilyQuant.DeNovo
                     results.Add(Rejected(runName, r, mz, isotopeCount,
                         "charge " + r.Charge.ToString(CultureInfo.InvariantCulture) +
                         " is not a usable charge; the isotope step would be infinite"));
+                    CacheBatch(i + 1);
                     continue;
                 }
 
@@ -784,6 +798,7 @@ namespace FamilyQuant.DeNovo
                 {
                     hit.Tag = r.Tag;   // the tag belongs to this request, not to the cached extraction
                     results.Add(hit);
+                    cacheHits++; CacheBatch(i + 1);
                     continue;
                 }
 
@@ -796,6 +811,7 @@ namespace FamilyQuant.DeNovo
                     Tag = r.Tag,
                 });
                 toExtract.Add(i);
+                CacheBatch(i + 1);
             }
 
             if (toExtract.Count == 0)
@@ -804,6 +820,8 @@ namespace FamilyQuant.DeNovo
                 return results;
             }
 
+            string extractionStage = "precursor-extract:" + progressSide + ":" + runName;
+            operation?.Report(extractionStage, "Extracting missing precursors: " + progressSide + ", " + runName, 0, toExtract.Count);
             opt.Progress?.Invoke(runName + ": loading MS1 spectra (" +
                 toExtract.Count.ToString("N0", CultureInfo.InvariantCulture) + " of " +
                 pending.Count.ToString("N0", CultureInfo.InvariantCulture) + " precursors to extract)...");
@@ -823,8 +841,10 @@ namespace FamilyQuant.DeNovo
                 scanSpacing.ToString("F6", CultureInfo.InvariantCulture) + " min; minimum points per peak " +
                 minPoints.ToString(CultureInfo.InvariantCulture) + ".");
 
+            int extracted = 0;
             foreach (int i in toExtract)
             {
+                operation?.ThrowIfCancellationRequested();
                 DeNovoXicResult row = results[i];
                 string? failure = null;
                 Action<string> note = m => failure ??= m;
@@ -851,6 +871,10 @@ namespace FamilyQuant.DeNovo
                 row.Failure = failure;
 
                 cache?.Put(row);
+                if (++extracted % 128 == 0 || extracted == toExtract.Count)
+                    operation?.Report(extractionStage, "Precursor batch " + ((extracted + 127) / 128).ToString(CultureInfo.InvariantCulture)
+                        + " of " + ((toExtract.Count + 127) / 128).ToString(CultureInfo.InvariantCulture) + ": " + progressSide + ", " + runName
+                        + "; " + extracted.ToString(CultureInfo.InvariantCulture) + " of " + toExtract.Count.ToString(CultureInfo.InvariantCulture), extracted, toExtract.Count);
             }
 
             if (cache != null)

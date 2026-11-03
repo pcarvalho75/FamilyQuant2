@@ -82,6 +82,12 @@ public sealed class AppOperationHost : ScreenViewModel
     public string LogText { get { lock (lifetime) return logText.ToString() + (logWriteError == null ? "" : "\nFile log unavailable: " + logWriteError); } }
     public string? LogPath => logPath;
     public IReadOnlyList<OperationLogEntry> LogEntries { get { lock (lifetime) return logEntries.ToArray(); } }
+    public static string CreateLogPath(string category) => Path.Combine(ApplicationPaths.LocalDataDirectory,
+        "operation-logs", category + "-" + Guid.NewGuid().ToString("N") + ".log");
+    public void LogMessage(string stage, string message)
+    {
+        lock (lifetime) Record(new(stage, message), DateTimeOffset.UtcNow);
+    }
     public void LogFailure(Exception error)
     {
         ArgumentNullException.ThrowIfNull(error);

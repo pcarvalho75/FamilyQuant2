@@ -71,9 +71,7 @@ The rerun of the full analysis with the scope "Toxin", "venom gland" (D39), so t
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| K7 | Second reader: every number in the program-written Summary of findings (J44) on Ana's project matched to its cell in the program's exports | M | 0.4 | J44b | K17 | A table of number, source cell and match, with no mismatch | GR2 | | 0 | 0 | |
-| J44b | J44 reviewed and merged | L | 0.2 | 🟢 | K7, K14 | Approved; gate green | OP | | 0 | 0 | |
-| J45 | File > Export > Interpretation input: one plain file a user can give to an AI assistant of their choice (report details, the panel table as entered, the result tables, the analysis choices, a neutral instruction to quote numbers only from the tables); the program never calls an LLM (Paulo, 11-03) | L | 0.5 | 🟢 | | Deterministic export; its test; D21 wording | OP | | 0 | 0 | |
+| K7 | Second reader: every number in the program-written Summary of findings (J44) on Ana's project matched to its cell in the program's exports | M | 0.4 | 🟢 | K17 | A table of number, source cell and match, with no mismatch | GR2 | | 0 | 0 | |
 
 ### W3 The report export works and is fast
 
@@ -99,7 +97,7 @@ Ana installs it from the public releases page (D31); the desk publishes on Paulo
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| K14 | Final export of the interpreted project through the real command, on master with J30, J24, J16, J32 and J34 | L | 0.5 | J34c, J44b | K15, K16 | Word report and supplement written | OP | | 0 | 0 | |
+| K14 | Final export of the interpreted project through the real command, on master with J30, J24, J16, J32 and J34 | L | 0.5 | J34c | K15, K16 | Word report and supplement written | OP | | 0 | 0 | |
 | K15 | Number trace on the final report: every number found, or each one not found ruled | L | 0.2 | K14 | K17 | `trace.csv` with nothing left open | T1 | | 0 | 0 | |
 | K16 | The final report's pages read for look and sense | L | 0.3 | K14 | K17 | No blocking item | LK | | 0 | 0 | |
 | K17 | Delivered: the Word report, supplement, project, family panel, a read-me with the release link, and the AI key file (D42) written to `AnaG/Bjararaca/Relatorio`; nothing else in Ana's folders touched | L | 0.2 | K7, K15, K16, K11 | | The five items with hashes; the rest of AnaG unchanged | OP | | 0 | 0 | |
@@ -110,8 +108,7 @@ Compute took 37 to 54 minutes on Ana's project with the RAW cache warm, silent f
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| J35c | J35 reviewed and merged | L | 0.2 | 🟢 | J40 | Approved; gate green | SH | | 0 | 0 | |
-| J48 | Saving the full-run project fits in memory: J35b's measurement hit an OutOfMemoryException in SavedFileCheck.Curation -> ToJsonText under an 8 GB heap cap; find whether the product's Save builds the whole curation JSON as one string and what heap Save needs, and if a 16 GB office PC could run out, stream it with the same bytes written | M | 0.5 | J35c | | FINDING first; if fixed, byte-identical saved file on the full-run copy and the peak measured before and after | SH | | 0 | 0 | |
+| J48 | Saving the full-run project fits in memory: J35b's measurement hit an OutOfMemoryException in SavedFileCheck.Curation -> ToJsonText under an 8 GB heap cap; find whether the product's Save builds the whole curation JSON as one string and what heap Save needs, and if a 16 GB office PC could run out, stream it with the same bytes written | M | 0.5 | 🟢 | | FINDING first; if fixed, byte-identical saved file on the full-run copy and the peak measured before and after | SH | | 0 | 0 | |
 | J38c | First fix: Compute reuses the attribution FullXicCompletionStage already computed instead of the family-world step searching again (calls 3 and 4 repeat 1 and 2: 366 s of 923 s on WORKHORSE) | H | 1 | 🟢 | J38d | Byte-identical stored results on a fixture | AS | | 0 | 0 | |
 | J38d | New HomologySearch method (Paulo, 11-03 09:20) from Fable's plan (docs/ideas/HOMOLOGY-PERFORMANCE.md): the mismatch-budget early exit, the exact-containment shortcut for best-score identified queries with the matrix guard, and the diagonal q-gram prefilter; every caller switches to it; the old HomologyMapper stays unchanged, marked [Obsolete] ("use HomologySearch"), as the reference the equivalence tests compare against | M | 1 | J38c | J38e | Every stored result byte-identical to the old method on fixtures and on the full-run copy; old and new compared hit for hit on every search call | AS | | 0 | 0 | |
 | J38e | Compute before and after on the full-run copy | L | 0.3 | J38d | J38f | Both times; stored results byte-identical | AS | | 0 | 0 | |
@@ -124,9 +121,8 @@ Compute took 37 to 54 minutes on Ana's project with the RAW cache warm, silent f
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
 | J43 | With a panel in use, the headline and composition figures use the per-panel-family totals (D40, B): before and after shown on a real project with several families in one panel family, science review, the old unit kept in the supplement | M | 1 | 🟢 | | Red then green on a multi-family fixture; before/after table on a real project; reviewed | FL | | 0 | 0 | |
-| J40 | Help explains what 2.1 adds: the progress lines, the cached reopen, "no peptide observed", the scope phrases, link notes | L | 0.5 | J35c | | A test reads each menu name in the text from the live menu | T2 | | 0 | 0 | |
-| J46c | J46 reviewed and merged | L | 0.2 | 🟢 | | Approved; gate green | T2 | | 0 | 0 | |
-| J46d | The AI draft uses J45's interpretation input instead of J46's stand-in seam, and its number check reads J45's table cells and column headings directly (J45 exposes them beside the Markdown) instead of parsing Markdown (FQTerra2's observation, 11-03 09:49) | L | 0.3 | J45, J46c | | The sent text equals J45's export byte for byte; number-check fixtures green against J45's cells | T2 | | 0 | 0 | |
+| J40 | Help explains what 2.1 adds: the progress lines, the cached reopen, "no peptide observed", the scope phrases, link notes | L | 0.5 | 🟢 | | A test reads each menu name in the text from the live menu | T2 | | 0 | 0 | |
+| J46d | The AI draft uses J45's interpretation input instead of J46's stand-in seam, and its number check reads J45's table cells and column headings directly (J45 exposes them beside the Markdown) instead of parsing Markdown (FQTerra2's observation, 11-03 09:49) | L | 0.3 | 🟢 | | The sent text equals J45's export byte for byte; number-check fixtures green against J45's cells | T2 | | 0 | 0 | |
 
 ## Critical path
 

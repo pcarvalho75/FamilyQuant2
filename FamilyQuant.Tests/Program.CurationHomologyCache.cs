@@ -55,7 +55,7 @@ internal static partial class Program
         {
             outcome = null;
             return (CurationHomologyHits)get.Invoke(null, new object?[] { input, proteins, cache, options, best,
-                (Action<bool>)(hit => outcome = hit), CancellationToken.None })!;
+                (Action<bool>)(hit => outcome = hit), CancellationToken.None, null })!;
         }
         byte[] Shares(IReadOnlyList<QuantRow> input, FamilyClusterFile proteins, CurationHomologyHits hits) =>
             JsonSerializer.SerializeToUtf8Bytes(FamilyEnvelopeQuant.BuildFromAttribution(input, FamilyEnvelopeQuant.AttributeHits(hits, proteins)));
@@ -144,11 +144,11 @@ internal static partial class Program
         string originalSequence = duringSearch.fcf.MyExtendedFastaItems[0].Sequence;
         string raceCache = Path.Combine(root, "changed-during-search");
         get.Invoke(null, new object?[] { duringSearch.quant, duringSearch.fcf, raceCache, null, true,
-            (Action<bool>)(hit => { if (!hit) duringSearch.fcf.MyExtendedFastaItems[0].Sequence = new string('W', originalSequence.Length); }), CancellationToken.None });
+            (Action<bool>)(hit => { if (!hit) duringSearch.fcf.MyExtendedFastaItems[0].Sequence = new string('W', originalSequence.Length); }), CancellationToken.None, null });
         duringSearch.fcf.MyExtendedFastaItems[0].Sequence = originalSequence;
         bool? raceHit = null;
         var afterRace = (CurationHomologyHits)get.Invoke(null, new object?[] { duringSearch.quant, duringSearch.fcf, raceCache, null, true,
-            (Action<bool>)(hit => raceHit = hit), CancellationToken.None })!;
+            (Action<bool>)(hit => raceHit = hit), CancellationToken.None, null })!;
         Check("J28 never publishes a cache under a fingerprint from before an input changed", raceHit == false
             && Shares(duringSearch.quant, duringSearch.fcf, afterRace).SequenceEqual(expected));
         var cancelInput = ProjectStore.ReadFqproj(project);
@@ -157,7 +157,7 @@ internal static partial class Program
         try
         {
             get.Invoke(null, new object?[] { cancelInput.quant, cancelInput.fcf, Path.Combine(root, "cancelled"), null, true,
-                (Action<bool>)(hit => { if (!hit) { cancelInput.fcf.MyExtendedFastaItems[0].SequenceIdentifier = ""; cancellation.Cancel(); } }), cancellation.Token });
+                (Action<bool>)(hit => { if (!hit) { cancelInput.fcf.MyExtendedFastaItems[0].SequenceIdentifier = ""; cancellation.Cancel(); } }), cancellation.Token, null });
         }
         catch (TargetInvocationException ex) when (ex.InnerException is OperationCanceledException) { cancelled = true; }
         Check("J28 cancellation at the search progress boundary prevents search and cache publication", cancelled
@@ -166,7 +166,7 @@ internal static partial class Program
         File.WriteAllText(blockedCache, "kept");
         bool? blockedHit = null;
         var withoutCache = (CurationHomologyHits)get.Invoke(null, new object?[] { first.quant, first.fcf, blockedCache, null, true,
-            (Action<bool>)(hit => blockedHit = hit), CancellationToken.None })!;
+            (Action<bool>)(hit => blockedHit = hit), CancellationToken.None, null })!;
         Check("J28 an unwritable cache keeps the fresh attribution and existing file", blockedHit == false
             && Shares(first.quant, first.fcf, withoutCache).SequenceEqual(expected) && File.ReadAllText(blockedCache) == "kept");
 
