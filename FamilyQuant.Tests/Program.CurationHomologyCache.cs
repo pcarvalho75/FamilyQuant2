@@ -162,6 +162,13 @@ internal static partial class Program
         catch (TargetInvocationException ex) when (ex.InnerException is OperationCanceledException) { cancelled = true; }
         Check("J28 cancellation at the search progress boundary prevents search and cache publication", cancelled
             && !Directory.Exists(Path.Combine(root, "cancelled")));
+        string blockedCache = Path.Combine(root, "cache-path-is-a-file");
+        File.WriteAllText(blockedCache, "kept");
+        bool? blockedHit = null;
+        var withoutCache = (CurationHomologyHits)get.Invoke(null, new object?[] { first.quant, first.fcf, blockedCache, null, true,
+            (Action<bool>)(hit => blockedHit = hit), CancellationToken.None })!;
+        Check("J28 an unwritable cache keeps the fresh attribution and existing file", blockedHit == false
+            && Shares(first.quant, first.fcf, withoutCache).SequenceEqual(expected) && File.ReadAllText(blockedCache) == "kept");
 
         var cachePath = typeof(CurationQuantitationViewModel).GetField("fullXicCacheDirectory", BindingFlags.Instance | BindingFlags.NonPublic);
         Check("J28 native progress can be checked with an isolated cache", cachePath != null);
