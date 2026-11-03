@@ -82,7 +82,6 @@ The export failed on Ana's project (a figure read the on-screen palette from the
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| J36c | J36 reviewed and merged | L | 0.2 | 🟢 | K17 | Approved; gate green | RS | | 0 | 0 | |
 | J34b | Look fixes for the listed items | M | 1 | 🟢 | J34c | Each item fixed or ruled | LK | | 0 | 0 | |
 | J34c | J34 reviewed and merged | L | 0.2 | J34b | K14 | Approved; gate green | LK | | 0 | 0 | |
 
@@ -104,7 +103,7 @@ Ana installs it from the public releases page (D31); the desk publishes on Paulo
 | K14 | Final export of the interpreted project through the real command, on master with J30, J24, J16, J32 and J34 | L | 0.5 | J34c, J44b | K15, K16 | Word report and supplement written | OP | | 0 | 0 | |
 | K15 | Number trace on the final report: every number found, or each one not found ruled | L | 0.2 | K14 | K17 | `trace.csv` with nothing left open | T1 | | 0 | 0 | |
 | K16 | The final report's pages read for look and sense | L | 0.3 | K14 | K17 | No blocking item | LK | | 0 | 0 | |
-| K17 | Delivered: the Word report, supplement, project, family panel, a read-me with the release link, and the AI key file (D42) written to `AnaG/Bjararaca/Relatorio`; nothing else in Ana's folders touched | L | 0.2 | K7, K15, K16, J36c, K11 | | The five items with hashes; the rest of AnaG unchanged | OP | | 0 | 0 | |
+| K17 | Delivered: the Word report, supplement, project, family panel, a read-me with the release link, and the AI key file (D42) written to `AnaG/Bjararaca/Relatorio`; nothing else in Ana's folders touched | L | 0.2 | K7, K15, K16, K11 | | The five items with hashes; the rest of AnaG unchanged | OP | | 0 | 0 | |
 
 ### W6 Compute fast and visible
 
@@ -114,8 +113,7 @@ Compute took 37 to 54 minutes on Ana's project with the RAW cache warm, silent f
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
 | J35b | Progress on the full-run project: the longest gap between two steps named | L | 0.3 | 🟢 | J35c | `READY` names the longest gap and its phase | SH | | 0 | 0 | |
 | J35c | J35 reviewed and merged | L | 0.2 | J35b | J40 | Approved; gate green | SH | | 0 | 0 | |
-| J38b | CPU profile of the slowest call: its top functions with file:line | M | 0.4 | 🟢 | J38c | The profile posted | AS | | 0 | 0 | |
-| J38c | First fix: Compute reuses the attribution FullXicCompletionStage already computed instead of the family-world step searching again (calls 3 and 4 repeat 1 and 2: 366 s of 923 s on WORKHORSE) | H | 1 | J38b | J38d | Byte-identical stored results on a fixture | AS | | 0 | 0 | |
+| J38c | First fix: Compute reuses the attribution FullXicCompletionStage already computed instead of the family-world step searching again (calls 3 and 4 repeat 1 and 2: 366 s of 923 s on WORKHORSE) | H | 1 | 🟢 | J38d | Byte-identical stored results on a fixture | AS | | 0 | 0 | |
 | J38d | New HomologySearch method (Paulo, 11-03 09:20) from Fable's plan (docs/ideas/HOMOLOGY-PERFORMANCE.md): the mismatch-budget early exit, the exact-containment shortcut for best-score identified queries with the matrix guard, and the diagonal q-gram prefilter; every caller switches to it; the old HomologyMapper stays unchanged, marked [Obsolete] ("use HomologySearch"), as the reference the equivalence tests compare against | M | 1 | J38c | J38e | Every stored result byte-identical to the old method on fixtures and on the full-run copy; old and new compared hit for hit on every search call | AS | | 0 | 0 | |
 | J38e | Compute before and after on the full-run copy | L | 0.3 | J38d | J38f | Both times; stored results byte-identical | AS | | 0 | 0 | |
 | J38f | J38 reviewed and merged | L | 0.2 | J38e | | Approved; gate green | AS | | 0 | 0 | |
