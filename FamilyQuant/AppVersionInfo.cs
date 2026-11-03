@@ -16,6 +16,9 @@ namespace FamilyQuant
     {
         public const string ClickOnceCurrentVersionVariable = "ClickOnce_CurrentVersion";
 
+        /// <summary>The public GitHub repository whose latest release Help > Check for updates reads (D31).</summary>
+        public const string ReleaseRepository = "pcarvalho75/FamilyQuant2-releases";
+
         public static string Current()
         {
             return Resolve(Environment.GetEnvironmentVariable(ClickOnceCurrentVersionVariable),
