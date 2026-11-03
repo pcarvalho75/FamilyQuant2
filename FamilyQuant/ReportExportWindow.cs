@@ -17,11 +17,12 @@ public sealed class ReportExportWindow : Window
         + "Clearing a section omits that section and everything inside it. Clearing a figure omits only that figure. "
         + "Figure choices are retained when their section is cleared, and choices for currently unavailable parts remain stored. "
         + "Apply your choices and save the project to keep them for the next export. Cancel discards the checkbox draft. "
-        + "The report threshold is a percentage of assigned signal, stored as a fraction from zero to one. Families with a mean share below it "
-        + "are grouped under Others, and their full list remains in the supplement. The default is 0.1 percent. "
+        + "The report threshold is a percentage of assigned signal, stored as a fraction from zero to one. When the composition study is available, families with a mean share below it "
+        + "are grouped under Others, as are families marked Report under others. The default is 0.1 percent. "
         + "Report details hold the study description and your written interpretation. File > Export report writes a Word document from stored Results; "
         + "compute Results first when they are missing. Figures use the Light export palette. The shared wait screen provides Cancel before publication, "
-        + "keeping the previous report file. Exporting does not save the project; use File > Save to keep changed details, choices and threshold.";
+        + "keeping the previous report file. Exporting does not save the project; use File > Save to keep changed details, choices and threshold."
+        + "\n\n" + PanelReportHelp.Report;
 
     public ReportExportWindow(ReportExportViewModel model, Action<ReportSelection, double> apply, string actionText = "Save choices")
     {
