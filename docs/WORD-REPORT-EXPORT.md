@@ -19,6 +19,14 @@ the open project. Export does not save the project.
 
 The report menu is distinct from File > Export > Panel audit (CSV).
 
+The saved mean-share threshold decides Others membership once for the report. Quantitative Word
+rows, family observations and report figures reuse that membership. Complete member observations
+and names remain in the companion workbook; the person's original panel-reference text stays in
+Word. Legacy diagnostic plots retain their original signal values and denominators while showing
+only individually reportable groups. Generic member/part labels in the pooled Others figures keep
+their stored amounts; the named detail is supplementary. Conflicting assignments keep their own
+flagged amounts and reasons, outside both reported families and Others.
+
 Focused checks after a Release build:
 
 ```powershell

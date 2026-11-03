@@ -87,7 +87,7 @@ public static class ReportSupplementLayout
                 if (table.Id.EndsWith(":text", StringComparison.Ordinal))
                     foreach (var row in table.Rows.Where(r => r.Count >= 2 && r[1].Length > 0))
                         panelText.Append(row[0]).Append(": ").Append(row[1]).Append("; ");
-                if (table.Id.Contains(":observed:", StringComparison.Ordinal) && table.Rows.Count == 1
+                if (!table.SupplementOnly && table.Id.Contains(":observed:", StringComparison.Ordinal) && table.Rows.Count == 1
                     && !table.Id.EndsWith(":run-shares", StringComparison.Ordinal))
                     observations.Add(table.Title + ": " + string.Join("; ", table.Columns.Zip(table.Rows[0], (label, raw) =>
                     {
@@ -118,6 +118,7 @@ public static class ReportSupplementLayout
 
     private static bool MoveToWorkbook(ReportTable table)
     {
+        if (table.SupplementOnly) return true;
         if (table.Id is "composition-assigned" or "composition-measured" or "family-run-shares" or "signal-summary" or "protein-count-support" or "others-members") return true;
         if (table.Id.StartsWith("panel-block:", StringComparison.Ordinal)
             && (table.Id.EndsWith(":run-shares", StringComparison.Ordinal) || table.Id.EndsWith(":domains", StringComparison.Ordinal)
