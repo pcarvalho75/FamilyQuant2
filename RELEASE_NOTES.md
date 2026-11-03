@@ -21,10 +21,18 @@ This candidate awaits the release gate and packaged report export.
   option named beside a number to find its source cell. If several unrelated cells
   have the same value and the subject cannot resolve them, it reports an ambiguous
   match rather than citing the first equal cell.
-- **Homology science options.** [Pending J47d: score-tier defaults and the two
-  migration sentences from FQAssay. Replace this placeholder before publication.]
+- **Homology science options.** Score tier is on by default: it credits a de novo
+  peptide only to proteins tied at its best score. Some family shares can therefore
+  move slightly after Compute. The per-length and tag gates are available but off
+  by default.
 - **More release checks.** Additional automated checks now run before release,
   including family-panel behavior, analysis options and report exports.
+
+**Projects computed with 2.1.0.** Opening a saved project keeps its stored results
+and report values until you run Compute; opening alone does not apply the new
+best-score rule. When you compute in 2.1.1, de novo family credit uses the best
+protein-score tier and a separate cache entry, while identified-peptide rules stay
+the same.
 
 ## 2.1.0 (release candidate, not published)
 
