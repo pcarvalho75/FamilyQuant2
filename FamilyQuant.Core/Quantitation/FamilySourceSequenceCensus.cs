@@ -1,4 +1,5 @@
 using FamilyQuant.DeNovo;
+using FamilyQuant.Operations;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +14,7 @@ namespace FamilyQuant
             List<FastaItemExtended> targets,
             Homology.HomologyOptions options,
             Homology.HomologyOptions identifiedOptions,
-            IReadOnlyDictionary<int, string> descriptions)
+            IReadOnlyDictionary<int, string> descriptions, OperationContext? operation)
         {
             static string Clean(string value) =>
                 DeNovoReconciler.NormalizeSequenceIgnoringPtm(value ?? string.Empty,
@@ -98,8 +99,12 @@ namespace FamilyQuant
                 Homology.HomologyMapper.MapToFamilies(
                         Homology.HomologyMapper.Search(sequences, database, sideOptions), targets)
                     .ToDictionary(a => a.Peptide, a => a.FamilyIds, StringComparer.Ordinal);
+            operation?.Report("report-census-identified-start", "Data step 2: source census 1 of 2, identified search", 2, 8);
             Dictionary<string, IReadOnlyList<int>> searchFamilies = FamiliesOf(search, identifiedOptions);
+            operation?.Report("report-census-identified-end", "Data step 2: source census 1 of 2 complete", 2, 8);
+            operation?.Report("report-census-denovo-start", "Data step 2: source census 2 of 2, de novo search", 2, 8);
             Dictionary<string, IReadOnlyList<int>> deNovoFamilies = FamiliesOf(deNovoUnion, options);
+            operation?.Report("report-census-denovo-end", "Data step 2: source census 2 of 2 complete", 2, 8);
 
             var familyIds = new SortedSet<int>(searchFamilies.Values.Concat(deNovoFamilies.Values).SelectMany(ids => ids));
             var summary = new FamilySourceSequenceSummary
