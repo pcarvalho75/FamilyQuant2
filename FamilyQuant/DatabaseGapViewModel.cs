@@ -113,7 +113,8 @@ public sealed class DatabaseGapViewModel : ScreenViewModel
                 verifiedWorldFingerprint = FamilyWorld.FromSnapshot(storedWorld).Fingerprint;
                 worldHash = storedWorld.ContentSha256;
             }
-            catch (Exception ex) when (ex is InvalidDataException or ArgumentException) { storedWorld = null; worldProblem = ex.Message; }
+            catch (Exception ex) when (ex is InvalidDataException or ArgumentException or InvalidOperationException)
+            { storedWorld = null; worldProblem = ex.Message; }
         }
         Rebuild();
     }
