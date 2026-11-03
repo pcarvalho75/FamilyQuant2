@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Globalization;
 using System.Linq;
 using System.Windows.Media.Imaging;
 
@@ -19,9 +20,18 @@ public static partial class FamilyCompositionFigures
 
     public static byte[] RenderPng(AnalyticsFigure figure)
     {
-        var bitmap = ChartImageExporter.Render(figure.Chart, 960, figure.ScreenHeight, variant: ChartPaletteVariant.Light);
-        var encoder = new PngBitmapEncoder(); encoder.Frames.Add(BitmapFrame.Create(bitmap));
-        using var memory = new MemoryStream(); encoder.Save(memory); return memory.ToArray();
+        var culture = CultureInfo.CurrentCulture;
+        var uiCulture = CultureInfo.CurrentUICulture;
+        try
+        {
+            // Pin both text cultures for files, then restore the person's display settings in finally.
+            CultureInfo.CurrentCulture = CultureInfo.InvariantCulture;
+            CultureInfo.CurrentUICulture = CultureInfo.InvariantCulture;
+            var bitmap = ChartImageExporter.Render(figure.Chart, 960, figure.ScreenHeight, variant: ChartPaletteVariant.Light);
+            var encoder = new PngBitmapEncoder(); encoder.Frames.Add(BitmapFrame.Create(bitmap));
+            using var memory = new MemoryStream(); encoder.Save(memory); return memory.ToArray();
+        }
+        finally { CultureInfo.CurrentCulture = culture; CultureInfo.CurrentUICulture = uiCulture; }
     }
 
     public static IReadOnlyList<string> Save(FamilyCompositionData data, string folder, FamilyCompositionData? pooledSubclasses = null)
