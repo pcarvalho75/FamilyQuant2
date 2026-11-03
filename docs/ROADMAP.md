@@ -68,8 +68,7 @@ The rerun of the full analysis with the scope "Toxin", "venom gland" (D39), so t
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
 | K1 | Rerun: Compute on the three runs finishes, from the RAW cache | L | 0.5 | 🟢 | K2 | The run log shows Compute finished and the project saved | OP | | 0 | 0 | |
 | K2 | Rerun: Results, sensitivity and save; the change table posted (proteins and families that moved, the ten lectins, the new headline, subclass parts, others) | L | 0.3 | K1 | K4, K6 | `RESULT J7a2` with the change table | OP | | 0 | 0 | |
-| K3 | Science check, part 1: the two runs' family assignments compared; nothing non-venom pulled in; the 3 new Kunitz and Waprin link choices follow D38 | M | 0.5 | 🟢 | K4 | `RESULT D39-review` part 1 | GR | | 0 | 0 | |
-| K4 | Science check, part 2: the rerun's headline numbers against the program's stored studies and exports; verdict on D39 | M | 0.4 | K2, K3 | K6 | `APPROVED` on the rerun, or the changes it needs | GR | | 0 | 0 | |
+| K4 | Science check, part 2: the rerun's headline numbers against the program's stored studies and exports; verdict on D39 | M | 0.4 | K2 | K6 | `APPROVED` on the rerun, or the changes it needs | GR | | 0 | 0 | |
 
 ### W2 The interpretation
 
@@ -91,8 +90,7 @@ The export failed on Ana's project (a figure read the on-screen palette from the
 | J30c | J30 reviewed and merged | L | 0.2 | J30b | J24c, J32c, J34b, J36b, K8, K14 | Approved; gate green | RS | | 0 | 0 | |
 | J24b | J24 (export progress) and J31 (Export report available after opening) merged | L | 0.1 | 🟢 | J24c, K8, K14 | Gate green | SH | | 0 | 0 | |
 | J24c | Export progress on the full-run project: the longest gap between two steps named | L | 0.3 | J30c, J24b | K14 | `READY` names the longest gap and its step | SH | | 0 | 0 | |
-| J16a | Figure export's gate failures fixed: the figure details file is written only when a figure is capped, so small projects export exactly as before; the screen test passes | L | 0.3 | 🟢 | J16b | `FIXED J16` with the three checks green | LK | | 0 | 0 | |
-| J16b | J16 re-reviewed and merged | L | 0.2 | J16a | J34b, K8, K14 | Approved; gate green | LK | | 0 | 0 | |
+| J16b | J16 re-reviewed and merged | L | 0.2 | 🟢 | J34b, K8, K14 | Approved; gate green | LK | | 0 | 0 | |
 | J32c | Export timing on the full-run copy: the attribution step with the cache warm, its sub-steps timed | L | 0.3 | J30c, J41b | J32d, J39 | `READY` with the sub-step times before and after | T1 | | 0 | 0 | |
 | J32d | J32 reviewed and merged | L | 0.2 | J32c | K14 | Approved; gate green | T1 | | 0 | 0 | |
 | J39 | Cache the two source census searches as well, if J32c shows they cost more than a minute | M | 1 | J32c | | Byte-identical report data; the export time before and after | T1 | | 0 | 0 | |
@@ -113,8 +111,7 @@ Ana installs it from the public releases page (D31); the desk publishes on Paulo
 | K9 | Full gate on the candidate: every ledger receipt current (quick gates defer them) | M | 0.5 | K8 | K10 | Full gate green, ledger 5,460 of 5,460 | Orchestrator | | 0 | 0 | |
 | K10 | The unpacked candidate exports the final project's report through the real menu | L | 0.3 | K9, K6 | K11 | Files and times recorded | EV | | 0 | 0 | |
 | K11 | Published: v2.1.0 on pcarvalho75/FamilyQuant2-releases with the zip, its .sha256 and user release notes | L | 0.1 | K10 | K13, K17 | The release page is live | Orchestrator | | 0 | 0 | |
-| K12 | Install check rehearsed now on the published 2.0.0: download from GitHub, SHA-256, unpack, open a project, Check for updates | L | 0.3 | 🟢 | K13 | A written install log | EV | | 0 | 0 | |
-| K13 | Install check on 2.1.0 from GitHub; 2.0.0's Check for updates finds 2.1.0 | L | 0.2 | K11, K12 | | Both pass | EV | | 0 | 0 | |
+| K13 | Install check on 2.1.0 from GitHub; 2.0.0's Check for updates finds 2.1.0 | L | 0.2 | K11 | | Both pass | EV | | 0 | 0 | |
 
 ### W5 Ana's report delivered
 
@@ -146,14 +143,10 @@ Compute took 37 to 54 minutes on Ana's project with the RAW cache warm, silent f
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| J33a | The panel assignment audit names the scope when it keeps a protein with a linked family out (it said "no reviewed neighbour" for the ten lectins) | L | 0.4 | 🟢 | J33c | A fixture protein gets the scope reason | T2 | | 0 | 0 | |
-| J33b | The scope proposal also offers the commonest tissue phrase among the task's reviewed proteins, read from the database | L | 0.4 | 🟢 | J33c | A fixture's proposal offers its phrase | T2 | | 0 | 0 | |
-| J33c | J33 reviewed and merged | L | 0.2 | J33a, J33b | J37a, J40 | Approved; gate green | T2 | | 0 | 0 | |
+| J33c | J33 reviewed and merged | L | 0.2 | 🟢 | J37a, J40 | Approved; gate green | T2 | | 0 | 0 | |
 | J37a | A confirmed family link keeps a short note on why, saved with the project and printed in the report's method | L | 0.5 | J33c | J37b | Survives save and reopen; appears in the method table | T2 | | 0 | 0 | |
 | J37b | J37 reviewed and merged | L | 0.2 | J37a | | Approved; gate green | T2 | | 0 | 0 | |
-| J27b | One total per panel family: the program computes and stores the per-panel-family totals when several families share a panel family (contract posted) | M | 1 | 🟢 | J27c | A fixture's stored totals credit a shared peptide once | FL | | 0 | 0 | |
-| J27c | The per-family briefs and new exports read those totals; the headline keeps its unit (D40) | M | 0.5 | J27b | J27d | Old exports unchanged; new exports added | FL | | 0 | 0 | |
-| J27d | J27 reviewed and merged | L | 0.2 | J27c | | Approved; gate green | FL | | 0 | 0 | |
+| J27d | J27 reviewed and merged | L | 0.2 | 🟢 | | Approved; gate green | FL | | 0 | 0 | |
 | J40 | Help explains what 2.1 adds: the progress lines, the cached reopen, "no peptide observed", the scope phrases, link notes | L | 0.5 | J33c, J35c | | A test reads each menu name in the text from the live menu | T2 | | 0 | 0 | |
 
 ## Critical path
