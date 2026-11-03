@@ -239,6 +239,16 @@ namespace FamilyQuant.Tests
             suite.AddWithApplication(() => PanelEditorTemplateRoundtripTests());
             suite.Add(() => AnalysisHelpTests());
             suite.AddWithApplication(() => WorkflowReportHelpTests());
+            suite.Add(() => AiKeyStoreTests());
+            suite.Add(() => AiTransportTests());
+            suite.AddWithApplication(() => AiKeySettingsTests());
+            suite.Add(() => InterpretationNumberTraceTests());
+            suite.Add(() => AiInterpretationDraftTests());
+            suite.Add(() => AiInterpretationWorkflowTests());
+            suite.AddWithApplication(() => AiInterpretationWindowsTests());
+            suite.Add(() => AiInterpretationInputTests());
+            suite.Add(() => AiKeyOfferTests());
+            suite.AddWithApplication(() => AiShellTests());
             suite.Add(() => SuiteMergeGuardTests());
             suite.Add(() => EvidenceFetchTests());
             suite.Add(() => EvidenceFetchAtomicTests());
@@ -326,6 +336,7 @@ namespace FamilyQuant.Tests
             suite.Section("Word report and companion - source values, selection and exact native images");
             suite.Add(() => WordReportTests(null));
             suite.Add(() => ReportFindingsTests());
+            suite.AddWithApplication(() => InterpretationInputTests());
             suite.Add(() => ReportNumberTraceTests());
             suite.AddWithApplication(() => ReportStoredChecks());
             suite.AddWithApplication(() => ReportAttributionCacheTests());

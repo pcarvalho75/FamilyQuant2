@@ -226,11 +226,19 @@ public partial class MainWindow
                 "   Operation log to read the timestamped steps while the operation is running. The\n" +
                 "   report log is also saved in %LOCALAPPDATA%\\FamilyQuant2\\operation-logs. Export can\n" +
                 "   reuse current family attribution and cached matches when the inputs still match.\n" +
+                "   Summary of findings states the stored values in fixed sentences; its numbers are\n" +
+                "   also listed in the supplement.\n" +
                 "   Produces: a Word report and a companion supplement workbook beside it.\n" +
                 "   Long lists have their own supplement sheets, one row per item; the report points\n" +
                 "   to those sheets and CSV exports retain their values. Report narrative is written by the program from\n" +
                 "   project data, without AI. Your panel and report details also appear in the report.\n" +
                 "   File > Save keeps the project, report details, choices and threshold.\n\n" +
+                "EXPORT THE INTERPRETATION INPUT\n" +
+                "   Menu: File > Export > Interpretation input (Markdown)\n" +
+                "   Needs: stored Results from step 3.\n" +
+                "   Writes one Markdown file with the report details, the panel as entered, the summary\n" +
+                "   of findings, the stored tables it reads, the methods and a short instruction block.\n" +
+                "   Give it to an assistant of your choice; FamilyQuant itself does not interpret it.\n\n" +
 
                 // The de novo screen is a separate workflow and is written as one: it is numbered
                 // OPTIONAL rather than as a fifth step, because nothing above it needs it and it needs

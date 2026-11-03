@@ -30,7 +30,8 @@ public sealed class ReportDetailsViewModel
         var details = new ReportDetails
         {
             Title = Title ?? "", Authors = Authors ?? "", SampleDescription = SampleDescription ?? "",
-            Workflow = Workflow ?? "", DatabaseKind = DatabaseKind ?? "", WrittenInterpretation = WrittenInterpretation ?? ""
+            Workflow = Workflow ?? "", DatabaseKind = DatabaseKind ?? "", WrittenInterpretation = WrittenInterpretation ?? "",
+            AiInterpretation = WrittenInterpretation == original.WrittenInterpretation ? original.AiInterpretation : null,
         };
         if (details == original) return false;
         apply(details);
