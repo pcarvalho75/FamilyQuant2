@@ -66,15 +66,14 @@ The rerun of the full analysis with the scope "Toxin", "venom gland" (D39), so t
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| K2 | Rerun: Results, sensitivity and save; the change table posted (proteins and families that moved, the ten lectins, the new headline, subclass parts, others) | L | 0.3 | 🟢 | K4, K6 | `RESULT J7a2` with the change table | OP | | 0 | 0 | |
-| K4 | Science check, part 2: the rerun's headline numbers against the program's stored studies and exports; verdict on D39 | M | 0.4 | K2 | K6 | `APPROVED` on the rerun, or the changes it needs | GR | | 0 | 0 | |
+| K4 | Science check, part 2: the rerun's headline numbers against the program's stored studies and exports; verdict on D39 | M | 0.4 | 🟢 | K6 | `APPROVED` on the rerun, or the changes it needs | GR | | 0 | 0 | |
 
 ### W2 The interpretation
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
 | K5 | Interpretation drafted from the desk's outline, numbers left as marked places | M | 0.5 | 🟢 | K6 | The draft posted | OP | | 0 | 0 | |
-| K6 | Numbers filled from the rerun and written into the project's Report details through the program; project saved | L | 0.3 | K2, K4, K5 | K7, K10, K14 | `interpreted.fqproj` saved, with the source of every number | OP | | 0 | 0 | |
+| K6 | Numbers filled from the rerun and written into the project's Report details through the program; project saved | L | 0.3 | K4, K5 | K7, K10, K14 | `interpreted.fqproj` saved, with the source of every number | OP | | 0 | 0 | |
 | K7 | Second reader: every number in the interpretation matched to its cell in the program's exports | M | 0.4 | K6 | K17 | A table of number, source cell and match, with no mismatch | GR2 | | 0 | 0 | |
 
 ### W3 The report export works and is fast
@@ -86,15 +85,14 @@ The export failed on Ana's project (a figure read the on-screen palette from the
 | J41a | No list in one cell: on Ana's project the supplement refused to write because one cell, a family's 1,970 unexplained peptide sequences, is 38,388 characters (Excel's limit is 32,767); a list goes to its own one-row-per-item sheet, the Word file and CSVs keep their counts | M | 0.5 | 🟢 | J41b, J30b | A fixture with a list longer than Excel's limit writes the workbook; every item is in the list sheet; nothing is truncated | FL | | 0 | 0 | |
 | J41b | J41 reviewed and merged | L | 0.2 | J41a | J30c, J32c | Approved; gate green | FL | | 0 | 0 | |
 | J30b | The fixed export runs to the end on a copy of the full-run project through the real command | M | 0.5 | J41a | J30c | Word report and supplement written; times reported | RS | | 0 | 0 | |
-| J30c | J30 reviewed and merged | L | 0.2 | J30b | J24c, J32c, J34b, J36b, K8, K14 | Approved; gate green | RS | | 0 | 0 | |
-| J24c | Export progress on the full-run project: the longest gap between two steps named | L | 0.3 | J30c | K14 | `READY` names the longest gap and its step | SH | | 0 | 0 | |
-| J32c | Export timing on the full-run copy: the attribution step with the cache warm, its sub-steps timed | L | 0.3 | J30c, J41b | J32d, J39 | `READY` with the sub-step times before and after | T1 | | 0 | 0 | |
+| J24c | Export progress on the full-run project: the longest gap between two steps named | L | 0.3 | 🟢 | K14 | `READY` names the longest gap and its step | SH | | 0 | 0 | |
+| J32c | Export timing on the full-run copy: the attribution step with the cache warm, its sub-steps timed | L | 0.3 | J41b | J32d, J39 | `READY` with the sub-step times before and after | T1 | | 0 | 0 | |
 | J32d | J32 reviewed and merged | L | 0.2 | J32c | K14 | Approved; gate green | T1 | | 0 | 0 | |
 | J39 | Cache the two source census searches as well, if J32c shows they cost more than a minute | M | 1 | J32c | | Byte-identical report data; the export time before and after | T1 | | 0 | 0 | |
 | J36a | Delivery command built and tested on a small computed project: export, trace, project, panel, read-me, checks, nothing written outside its folder | M | 0.5 | 🟢 | J36b | Fixture run passes | RS | | 0 | 0 | |
-| J36b | Delivery rehearsal on the first full-run project into a staging folder | L | 0.3 | J30c, J36a | J36c | Summary with hashes and the trace's count | RS | | 0 | 0 | |
+| J36b | Delivery rehearsal on the first full-run project into a staging folder | L | 0.3 | J36a | J36c | Summary with hashes and the trace's count | RS | | 0 | 0 | |
 | J36c | J36 reviewed and merged | L | 0.2 | J36b | K17 | Approved; gate green | RS | | 0 | 0 | |
-| J34b | Look fixes for the listed items | M | 1 | J30c | J34c | Each item fixed or ruled | LK | | 0 | 0 | |
+| J34b | Look fixes for the listed items | M | 1 | 🟢 | J34c | Each item fixed or ruled | LK | | 0 | 0 | |
 | J34c | J34 reviewed and merged | L | 0.2 | J34b | K14 | Approved; gate green | LK | | 0 | 0 | |
 
 ### W4 Release 2.1.0 on GitHub
@@ -103,7 +101,7 @@ Ana installs it from the public releases page (D31); the desk publishes on Paulo
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| K8 | Release candidate: release notes and version 2.1.0 merged with master after J30, J24, J31 and J16; the zip built | L | 0.3 | J30c | K9 | Zip with its SHA-256; the report cover prints 2.1.0 | EV | | 0 | 0 | |
+| K8 | Release candidate: release notes and version 2.1.0 merged with master after J30, J24, J31 and J16; the zip built | L | 0.3 | 🟢 | K9 | Zip with its SHA-256; the report cover prints 2.1.0 | EV | | 0 | 0 | |
 | K9 | Full gate on the candidate: every ledger receipt current (quick gates defer them) | M | 0.5 | K8 | K10 | Full gate green, ledger 5,460 of 5,460 | Orchestrator | | 0 | 0 | |
 | K10 | The unpacked candidate exports the final project's report through the real menu | L | 0.3 | K9, K6 | K11 | Files and times recorded | EV | | 0 | 0 | |
 | K11 | Published: v2.1.0 on pcarvalho75/FamilyQuant2-releases with the zip, its .sha256 and user release notes | L | 0.1 | K10 | K13, K17 | The release page is live | Orchestrator | | 0 | 0 | |
@@ -113,7 +111,7 @@ Ana installs it from the public releases page (D31); the desk publishes on Paulo
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| K14 | Final export of the interpreted project through the real command, on master with J30, J24, J16, J32 and J34 | L | 0.5 | K6, J30c, J24c, J32d, J34c | K15, K16 | Word report and supplement written | OP | | 0 | 0 | |
+| K14 | Final export of the interpreted project through the real command, on master with J30, J24, J16, J32 and J34 | L | 0.5 | K6, J24c, J32d, J34c | K15, K16 | Word report and supplement written | OP | | 0 | 0 | |
 | K15 | Number trace on the final report: every number found, or each one not found ruled | L | 0.2 | K14 | K17 | `trace.csv` with nothing left open | T1 | | 0 | 0 | |
 | K16 | The final report's pages read for look and sense | L | 0.3 | K14 | K17 | No blocking item | LK | | 0 | 0 | |
 | K17 | Delivered: the Word report, supplement, project, family panel and a read-me with the release link written to `AnaG/Bjararaca/Relatorio`; nothing else in Ana's folders touched | L | 0.2 | K7, K15, K16, J36c, K11 | | The five items with hashes; the rest of AnaG unchanged | OP | | 0 | 0 | |
@@ -142,6 +140,7 @@ Compute took 37 to 54 minutes on Ana's project with the RAW cache warm, silent f
 | J37b | J37 reviewed and merged | L | 0.2 | J37a | | Approved; gate green | T2 | | 0 | 0 | |
 | J27d | J27 reviewed and merged | L | 0.2 | 🟢 | | Approved; gate green | FL | | 0 | 0 | |
 | J40 | Help explains what 2.1 adds: the progress lines, the cached reopen, "no peptide observed", the scope phrases, link notes | L | 0.5 | J35c | | A test reads each menu name in the text from the live menu | T2 | | 0 | 0 | |
+| J42 | The family-assignment accuracy check (leave-one-out on reviewed proteins) accepts a project whose scope has several phrases: on the D39 project it refuses with "The session search no longer matches the current queries and reviewed references" (EvidenceSession.cs:42-68 does not accept the panel review's stored search over the in-scope references) | L | 0.5 | 🟢 | K14 | Red then green: a fixture with a two-phrase scope runs the audit; on a copy of the D39 project it prints the right, wrong and abstained counts | T2 | | 0 | 0 | |
 
 ## Critical path
 
@@ -168,6 +167,7 @@ The full history, D1 to D39, is in `docs/ROADMAP-archive.md`.
 | D37 | What "% of the venom" means | The share of the signal credited to families, summing to 100%; beside it the share of the whole measured signal. Paulo, 11-02 |
 | D38 | The ambiguous family links | Decided from Ana's written rules (disintegrin and M12B Disintegrin-only to DIS, DC stays SVMP, endonuclease to NUCL, snaclec and true venom lectin to CTL, M12B to SVMP). Desk, 11-02 |
 | D39 | The scope of families by evidence | "Toxin", "venom gland", so the panel's galactose-binding lectins (Gal-CTL, merge into CTL) join CTL; the report's method states the scope. Desk, 11-03 06:35 |
+| D41 | The three new link choices the D39 scope raised | Decided by D38's rule (the source family decides; a source-less domain combination stays outside): venom Kunitz-type family, any combination, to KUN; the same family with Kunitz_BPTI plus WAP to KUN; no source family with Kunitz_BPTI plus WAP stays outside. Checked against the panel's KUN and Waprin rows by FQReview (K3). Desk, 11-03 08:20 |
 
 ## Risks and triggers
 

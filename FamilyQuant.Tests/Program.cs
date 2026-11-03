@@ -333,6 +333,7 @@ namespace FamilyQuant.Tests
             suite.AddWithApplication(() => WordReportDraftTests());
             suite.AddWithApplication(() => ReportAssemblyChecks(Path.Combine(workDir, "report-assembly")));
             suite.AddWithApplication(() => ReportWordOthersChecks(Path.Combine(workDir, "report-word-others")));
+            suite.AddWithApplication(() => ReportStaChecks(Path.Combine(workDir, "report-sta")));
             suite.Add(() => QuantitationPanelTests(Path.Combine(workDir, "quantitation-panel")));
             suite.Add(() => ArchitectureGroupSplitTests());
             suite.Add(() => ArchitectureMemberViewTests());
