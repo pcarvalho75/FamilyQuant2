@@ -10,6 +10,7 @@ namespace FamilyQuant
         private FamilyClusterFile? evidenceFile;
         private Evidence.EvidenceProvenance? evidenceSource;
         private System.Collections.Generic.List<Evidence.MotifPattern>? evidenceMotifs;
+        private Panels.FamilyPanel? evidencePanel;
 
         public static GroupingSnapshot CaptureEvidence(FamilyClusterFile file)
         {
@@ -20,6 +21,7 @@ namespace FamilyQuant
             snapshot.evidenceRecipe = file.EvidenceRecipe == null ? null : Evidence.EvidenceApply.Clone(file.EvidenceRecipe);
             snapshot.evidenceSource = file.EvidenceSource == null ? null : Evidence.EvidenceApply.Clone(file.EvidenceSource);
             snapshot.evidenceMotifs = file.Motifs == null ? null : Evidence.EvidenceApply.Clone(file.Motifs);
+            snapshot.evidencePanel = file.FamilyPanel == null ? null : Panels.FamilyPanelValidation.Clone(file.FamilyPanel);
             return snapshot;
         }
 
@@ -32,6 +34,7 @@ namespace FamilyQuant
             Evidence.EvidenceRecipe? restored = evidenceRecipe == null ? null : Evidence.EvidenceApply.Clone(evidenceRecipe);
             Evidence.EvidenceProvenance? restoredSource = evidenceSource == null ? null : Evidence.EvidenceApply.Clone(evidenceSource);
             var restoredMotifs = evidenceMotifs == null ? null : Evidence.EvidenceApply.Clone(evidenceMotifs);
+            var restoredPanel = evidencePanel == null ? null : Panels.FamilyPanelValidation.Clone(evidencePanel);
             // Position and object identity preserve repeated identifiers, including decoys, exactly.
             foreach (var row in evidenceRows)
             {
@@ -46,6 +49,7 @@ namespace FamilyQuant
             file.EvidenceRecipe = restored;
             file.EvidenceSource = restoredSource;
             file.Motifs = restoredMotifs;
+            file.FamilyPanel = restoredPanel;
             return true;
         }
     }
