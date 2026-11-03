@@ -29,6 +29,7 @@ public sealed class ComputeXicViewModel : ScreenViewModel
     private string searchParametersPath = "";
     public string SearchParametersPath { get => searchParametersPath; set => Set(ref searchParametersPath, value); }
     public Report.ReportInputProvenance? CompletedInputProvenance { get; private set; }
+    public string? SourceDatabaseFileName { get; internal set; }
     public int? IsotopeCeiling { get => isotopes; set { Set(ref isotopes, value); Changed(nameof(Basis)); } }
     public int? MinimumPoints { get => points; set { Set(ref points, value); Changed(nameof(Basis)); } }
     public int IsotopeCount => IsotopeCeiling is >= 1 ? IsotopeCeiling.Value : DeNovoXicExtractor.DefaultEnvelopeIsotopeCount;
@@ -89,7 +90,7 @@ public sealed class ComputeXicViewModel : ScreenViewModel
         });
         try
         {
-            var inputProvenance = Report.ReportInputCapture.Read(curation?.ReportInputProvenance?.DatabaseFileName,
+            var inputProvenance = Report.ReportInputCapture.Read(SourceDatabaseFileName ?? curation?.ReportInputProvenance?.DatabaseFileName,
                 seproPath, string.IsNullOrWhiteSpace(SearchParametersPath) ? null : SearchParametersPath.Trim());
             FullXicComputeResult outcome = await compute(request, progress, tokenSource.Token);
             tokenSource.Token.ThrowIfCancellationRequested();

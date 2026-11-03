@@ -5,8 +5,8 @@
 the original database/family-file basename, the identification-package basename, the search
 parameter-file basename and original-byte SHA-256, and ordered key/value strings.
 
-Opening a plain family file records its basename if none was recorded. Opening a project
-preserves the stored facts. Successful Quantify stages input facts from the actual request
+Opening a plain family file retains its basename in shell session state without changing
+the loaded curation. Opening a project preserves its stored facts. Successful Quantify stages input facts from the actual request
 and attaches them only after the current-project guard passes. Failed, cancelled or stale
 work cannot replace the previous facts.
 

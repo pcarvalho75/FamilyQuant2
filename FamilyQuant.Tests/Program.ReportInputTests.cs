@@ -107,8 +107,8 @@ internal static partial class Program
         try
         {
             MainWindow.UnsavedProjectChoiceOverride = () => UnsavedProjectChoice.Discard;
-            Check("opening a family file records its actual basename", shell.OpenProjectPath(input)
-                && shell.NavigationModel.Document?.ReportInputProvenance?.DatabaseFileName == "native-source.fcf");
+            Check("opening a family file preserves its exact curation", shell.OpenProjectPath(input)
+                && shell.NavigationModel.Document?.ToJsonText() == FamilyClusterFile.Load(input).ToJsonText());
             MainWindow.QuantifyViewModelFactoryOverride = (manifest, curation) => new ComputeXicViewModel("fixture", manifest, curation,
                 compute: (_, _, _) => Task.FromResult(new FullXicComputeResult { Rows = new(), Manifest = new() }))
                 { RawDirectory = folder, SeproPackage = package, SearchParametersPath = parameters };
@@ -117,6 +117,7 @@ internal static partial class Program
             screen.ViewModel.ComputeAsync().GetAwaiter().GetResult();
             var facts = shell.NavigationModel.Document!.ReportInputProvenance;
             Check("successful native Quantify attaches the exact staged source facts", shell.DocumentState.IsModified && facts?.SeproFileName == "native.sepr2"
+                && facts.DatabaseFileName == "native-source.fcf"
                 && facts.SearchParameters.SequenceEqual(new[] { new ReportSearchParameter("mass_tolerance", "12.5") }));
             string before = JsonSerializer.Serialize(facts);
             MainWindow.NavigateShellCommand.Execute(ShellDestination.Families, shell);

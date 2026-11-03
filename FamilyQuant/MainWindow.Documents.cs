@@ -59,9 +59,6 @@ public partial class MainWindow
 
         private bool AttachProject(string path, ShellProjectContent content)
         {
-                if (!ProjectStore.IsProjectPath(path) && string.IsNullOrEmpty(content.Curation.ReportInputProvenance?.DatabaseFileName))
-                    content.Curation.ReportInputProvenance = (content.Curation.ReportInputProvenance ?? new Report.ReportInputProvenance())
-                        with { DatabaseFileName = Path.GetFileName(path) };
                 var loaded = new ClusterGenerationControl(content.Curation) { Name = "MyClusterGenerationControl" };
                 List<QuantRow> quant = content.Rows;
                 QuantManifest? manifest = content.Manifest;
@@ -76,6 +73,9 @@ public partial class MainWindow
                 owner.loadedQuant = quant;
                 owner.loadedManifest = manifest;
                 owner.loadedCuration = loaded.fcf;
+                owner.openedDatabaseFileName = loaded.fcf.ReportInputProvenance?.DatabaseFileName;
+                if (!ProjectStore.IsProjectPath(path) && string.IsNullOrEmpty(owner.openedDatabaseFileName))
+                    owner.openedDatabaseFileName = Path.GetFileName(path);
                 owner.GridApp.Children.Add(owner.cgc);
 
                 // A .fqproj carries its own quantitation: the curation table shows it at once.
