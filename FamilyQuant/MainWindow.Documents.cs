@@ -73,6 +73,13 @@ public partial class MainWindow
                 owner.loadedQuant = quant;
                 owner.loadedManifest = manifest;
                 owner.loadedCuration = loaded.fcf;
+                owner.openedDatabaseFileName = loaded.fcf.ReportInputProvenance?.DatabaseFileName;
+                owner.openedDatabaseFileSha256 = loaded.fcf.ReportInputProvenance?.DatabaseFileSha256;
+                if (!ProjectStore.IsProjectPath(path))
+                {
+                    owner.openedDatabaseFileName = Path.GetFileName(path);
+                    owner.openedDatabaseFileSha256 = content.DatabaseFileSha256;
+                }
                 owner.GridApp.Children.Add(owner.cgc);
 
                 // A .fqproj carries its own quantitation: the curation table shows it at once.
@@ -209,13 +216,17 @@ public partial class MainWindow
 
                 operation.Context.ThrowIfCancellationRequested();
                 DateTime previousUpdated = manifest.UpdatedUtc;
+                var previousInputs = curation.ReportInputProvenance;
                 string checkText;
                 try
                 {
+                    if (!string.IsNullOrEmpty(owner.openedDatabaseFileName) && !string.IsNullOrEmpty(owner.openedDatabaseFileSha256))
+                        curation.ReportInputProvenance = (previousInputs ?? new Report.ReportInputProvenance()) with
+                        { DatabaseFileName = owner.openedDatabaseFileName, DatabaseFileSha256 = owner.openedDatabaseFileSha256 };
                     manifest.UpdatedUtc = DateTime.UtcNow;
                     checkText = await Task.Run(() => ShellProjectOperations.WriteVerifiedProject(savePath, curation, quant, manifest, operation: operation.Context));
                 }
-                catch { manifest.UpdatedUtc = previousUpdated; throw; }
+                catch { manifest.UpdatedUtc = previousUpdated; curation.ReportInputProvenance = previousInputs; throw; }
                 owner.loadedManifest = manifest;
                 owner.lastFcfPath = Path.GetFullPath(savePath);
                 owner.DocumentState.Saved(curation, owner.lastFcfPath, checkText);

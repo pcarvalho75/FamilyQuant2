@@ -34,12 +34,14 @@ namespace FamilyQuant
             // metadata are still available, then persisted in the project. Rebuilding from QuantRow
             // alone would lose rejected audit calls and accepted calls that produced no stored XIC.
             PeptideFamilyAttribution? familyAttribution = null;
+            CurationHomologyHits? familyHits = null;
             if (options.FamilyCuration != null)
             {
                 try
                 {
-                    familyAttribution = FamilyEnvelopeQuant.BuildAttributionFromCuration(
+                    familyHits = FamilyEnvelopeQuant.SearchCuration(
                         result.Rows, options.FamilyCuration);
+                    familyAttribution = FamilyEnvelopeQuant.AttributeHits(familyHits, options.FamilyCuration);
                     manifest.FamilyMapping = FamilyEnvelopeQuant.ProvenanceFor(options.FamilyCuration,
                         familyAttribution.IdentityThreshold);
                     result.Notes.Add("Spectrum-table family attribution: every matching User family at " +
@@ -51,6 +53,30 @@ namespace FamilyQuant
                     result.Notes.Add("WARNING: family attribution for the spectrum table did not run (" +
                         ex.GetType().Name + ": " + ex.Message + "). Quantitation completed; the table " +
                         "marks family mapping as unavailable and the project curation remains intact.");
+                }
+            }
+            if (familyAttribution != null)
+            {
+                FamilyPeptideAttribution assigned = FamilyEnvelopeQuant.AttributePeptides(
+                    FamilyEnvelopeQuant.PreparePeptides(result.Rows), familyAttribution);
+                FamilyCompositionStudy.StoreRunShares(manifest, assigned);
+                if (familyHits != null && options.FamilyCuration != null)
+                {
+                    if (!FamilyCompositionStudy.StoreSubclassesFromCuration(manifest, assigned, familyHits, options.FamilyCuration))
+                        result.Notes.Add("Subclass breakdown unavailable: subclass labels have not been computed or are out of date.");
+                    FamilyCompositionStudy.StorePositionsFromCuration(manifest, assigned, familyHits, options.FamilyCuration);
+                }
+                if (options.FamilyCuration != null)
+                {
+                    try
+                    {
+                        FamilyCompositionStudy.StoreProteinCounts(manifest, assigned, options.FamilyCuration.MyExtendedFastaItems);
+                    }
+                    catch (ArgumentException ex)
+                    {
+                        manifest.FamilyProteinCounts = null;
+                        result.Notes.Add("Protein explanation counts unavailable: " + ex.Message);
+                    }
                 }
             }
             result.SpectrumComparisonRows = SpectrumComparisonTable.Build(

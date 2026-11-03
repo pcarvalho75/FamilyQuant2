@@ -19,6 +19,7 @@ namespace FamilyQuant.Tests
         private static void DependencyCacheTests(string workDir)
         {
             Directory.CreateDirectory(workDir);
+            OpenXmlDependencyTests(workDir);
             Check("X11: Core no longer references Newtonsoft", !typeof(DeNovoXicCache).Assembly
                 .GetReferencedAssemblies().Any(a => a.Name == "Newtonsoft.Json"));
             Check("X11: App no longer references Toolkit", !typeof(MainWindow).Assembly

@@ -88,6 +88,11 @@ namespace FamilyQuant
         /// </summary>
         public static string BuildFamilyComposition(FamilyEnvelopeQuantResult result, SharedPeptidePolicy policy,
                                                     double denominator, string basis)
+            => BuildFamilyComposition(result, policy, denominator, basis, null);
+
+        /// <summary>New output callers may format only the name field; the historical overload keeps its bytes.</summary>
+        public static string BuildFamilyComposition(FamilyEnvelopeQuantResult result, SharedPeptidePolicy policy,
+                                                    double denominator, string basis, System.Func<string?, string>? formatName)
         {
             var csv = new StringBuilder();
             csv.AppendLine(string.Join(",", new[]
@@ -104,7 +109,7 @@ namespace FamilyQuant
                 .OrderByDescending(f => f.Signal(policy)).ThenBy(f => f.FamilyUserId))
             {
                 csv.AppendLine(string.Join(",", f.FamilyUserId.ToString(CultureInfo.InvariantCulture),
-                    Field(f.Description), Num(f.Signal(policy)), Fraction(f.Signal(policy)), basisField));
+                    Field(formatName == null ? f.Description : formatName(f.Description)), Num(f.Signal(policy)), Fraction(f.Signal(policy)), basisField));
             }
 
             if (policy == SharedPeptidePolicy.FamilyUnique)
@@ -124,5 +129,6 @@ namespace FamilyQuant
         /// routinely contain commas and quotes, which previously broke the column layout.
         /// </summary>
         private static string Field(string value) => CsvFormatting.AlwaysQuoted(value);
+
     }
 }

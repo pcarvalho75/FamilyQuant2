@@ -1,9 +1,9 @@
 # FamilyQuant 2.0 roadmap (remaining work only)
 
-Version 4, 2026-11-02. Owner: Paulo. Orchestrator: the Claude session "Family Quant codebase review".
+Version 5, 2026-11-02 evening, mission J. Owner: Paulo. Orchestrator: the Claude session "Family Quant codebase review".
 Finished rows leave this file at the next refresh and go to `docs/ROADMAP-archive.md`.
 
-Version 3 closed 35 steps; they are in `docs/ROADMAP-archive.md`. At Paulo's order the needle went back to zero and every remaining step was cut small, so that no step hides other work: each box is one thing a person can see finished.
+Version 4 closed with FamilyQuant 2.0.0 published (49 of 49 steps, in `docs/ROADMAP-archive.md`). Version 5 is mission J: Ana's complete analysis of her new data, made and written up by the program. The needle starts at zero; each box is one thing a person can see finished.
 
 ## The goal, in Paulo's words
 
@@ -14,6 +14,7 @@ Version 3 closed 35 steps; they are in `docs/ROADMAP-archive.md`. At Paulo's ord
 - "things need to look slick and clean", "the colors look terrible, we have white with yellow in some parts"
 - "the file menu usually comes first"
 - "i want something revolutionary to come out of this, where this family idea realy shines and somethign very witty and automatic is done"
+- Mission J, 11-02: "the ultimate test for this progrm ... make a very cool and complete analysis ... generate a complet word document. if you need a feature that this program does not do you implement it in the program", "she wants a qauntitative description of the families", "and do some nice plots and these plots should be able to be done by the software", "and if you want to test the program, make tests in parallel", "how about 2 gpt terra workers for more simpe things", "by the end of this project i would like a report in the directory where anas files are. there should be a simple way to input the families", "maybe the program could make this very complete as a docx exit and generate this so many plots with explanations automaticlay ... maybe with checkboxes for sections of the report so one may check or uncheck the parts to be generated"
 
 ## Rules every worker follows
 
@@ -27,6 +28,7 @@ Version 3 closed 35 steps; they are in `docs/ROADMAP-archive.md`. At Paulo's ord
 8. **A step counts as done only after the reviewer approves it** and it is merged and green.
 9. **The deck stays untouched:** `BrProt_FamilyQuant_FourPart_Source_Decomposition.pptx` and its sources, until Paulo says otherwise.
 10. **No em dashes or en dashes** in anything written, UI text included.
+11. **A family panel is user data.** Ana's families, domains, subclasses and decisions are read from her file and stored in the project. Code holds the general rule, never her list (mission J).
 - Steps stay small. A step that hides several pieces of work is split, so that the needle shows real progress. Paulo, 2026-11-02.
 
 ## The team
@@ -41,10 +43,11 @@ This team is exclusive to FamilyQuant: six Sol workers, one Opus worker, Grok an
 | FQShell (SH) | Sol 6.1 xhigh | Busy overlay, shell messages, closing the feature ledger | `D:/FamilyQuant-wt/shell` | `fq/shell` |
 | FQAssay (AS) | Sol 6.1 xhigh | Dependencies, clustering, de novo tidy, improvements, documents | `D:/FamilyQuant-wt/assay` | `fq/assay` |
 | FQResults (RS) | Sol 6.1 xhigh | Charts, quantitation panel, figures, family-world results | `C:/FamilyQuant-wt2/results` | `fq/results` |
-| FQOpus (OP) | Opus 5.5 xhigh | The gate experiment and the second attribution pass | `D:/FamilyQuant-wt/opus` | `fq/opus` |
+| FQOpus (OP) | Opus 5.5 xhigh | Runs the analysis through the program: the baseline, the full run, the interpretation and the final number trace | `D:/FamilyQuant-wt/opus` | `fq/opus` |
+| FQTerra1 (T1), FQTerra2 (T2) | GPT-6.1 Terra xhigh | Simpler steps, added by Paulo 11-02 | `C:/FamilyQuant-wt2/terra1`, `terra2` | `fq/terra1`, `fq/terra2` |
 | FQFloater (FL) | Sol 6.1 xhigh | Floater: quantitation pipeline, project formats, then whatever waits longest | `C:/FamilyQuant-wt2/floater` | `fq/floater` |
 | FQReview (GR) | Grok 4.7 xhigh | Main reviewer, keeps every B, A and N step, and owns B2, A2, B8 and R4. Never edits product code. | `D:/FamilyQuant-wt/review` | detached |
-| FQKimi (KM) | Kimi | Second reviewer of everything else, in batches of at most 8, one instance, no subagents, at most 15 calls in 5 hours. Never edits product code. | `D:/FamilyQuant-wt/kimi` | detached |
+| FQKimi (KM) | Kimi | Second reviewer of everything else, in batches, one instance, no subagents, at most 15 calls in 5 hours and at most 5 reviews an hour (Paulo, 11-02). Never edits product code. | `D:/FamilyQuant-wt/kimi` | detached |
 | FQArgon (AR) | Gemini 4 Argon high | Reviews steps in turn with FQReview. Out of quota until about 2026-11-07. | `D:/FamilyQuant-wt/argon` | detached |
 | FQFable | Fable 5.1 xhigh | Architect, only on Paulo's request, in short sessions. Not in the queues. | `C:/FamilyQuant-wt2/fable` | `fable/vision` |
 
@@ -74,45 +77,74 @@ Flow of one step: owner posts `READY <step> <commit>`; the orchestrator assigns 
 
 ## Workstreams
 
-Columns: Diff = L, M, H, VH. Hrs = worker hours at measured speed: estimates are short because these steps are small. Blocked by: 🟢 = open now. ETA = hours after the restart in that worker's queue, never a promise. Prog = my estimate of work done. Cred = counted only after approval and merge. EV, LK, AS, SH, RS, OP, FL, GR, KM and AR are the workers above.
+Mission J (Paulo, 2026-11-02 19:40): "use it to make a very cool and complete analysis ... generate a complete word document. if you need a feature that this program does not do you implement it in the program". Ana wants a quantitative description of the families. The shared brief is `D:/FamilyQuant-wt/desk/briefs/J-mission.md`.
 
-### W1 Family world
+Columns: Diff = L, M, H, VH. Hrs = worker hours at measured speed. Blocked by: 🟢 = open now. ETA = hours after the start in that worker's queue, never a promise. Prog = my estimate of work done. Cred = counted only after approval and merge. EV, LK, AS, SH, RS, OP, FL, GR and KM are the workers above.
 
-| ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
-|---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
+### W1 Ana's family panel, as user data
 
-### W2 Port gaps found by the proofs
-
-| ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
-|---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-
-### W3 Ledger, screen by screen
+Her consensus spreadsheet becomes the project's family panel. Family names, domains and decisions live in her file and the project, never in code.
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
 
-### W4 Look
+### W2 Families by evidence
+
+The program, not a script, puts every database protein in a panel family.
+
+| ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
+|---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
+| J2a | Assign every target protein to a panel family by evidence: the UniProt family of a toxin-annotated protein, else the nearest reviewed toxin, and where two panel families share a domain the panel's own Pfam lists decide by the accompanying domains; shown as proposals, applied as one undoable locked change | H | 3 | 🟢 | J2b, J2c, J3a | The rule in Help in general words; fixtures; the guard test finds no family, name or Pfam literal | EV | | 0 | 0 | |
+| J2b | Measure that rule: leave-one-out on the reviewed entries, and every difference from the 11-01 draft listed with its reason, both written by the program | M | 1 | J2a | J7a | Program CSV with the right rate; each draft difference has a reason | EV | | 0 | 0 | |
+| J2c | Per-protein audit export: accession, family, subclass, evidence used and why, for Ana to check in Excel | L | 0.5 | J2a | J6b | CSV opens in Excel under pt-BR and en-US with the same columns | T1 | | 0 | 0 | |
+
+### W3 Subclasses
+
+SVMP P-I, P-II, P-III and "class not resolved"; PLA2 D49 and K49; the parts of a precursor.
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
 
-### W5 Release (Paulo publishes)
+### W4 Where the peptides fall
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
+| J4c | Coverage map figure: a protein drawn as a bar with its domains and the identified and de novo peptides on it, for the top proteins of each family | M | 2 | 🟢 | J6b | Native PNG in both themes and the Light export | LK | | 0 | 0 | |
 
-### W6 Paper numbers (no release depends on these)
+### W5 The numbers Ana asked for
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
+| J5g | Family and subclass ring chart: families on the inner ring, their subclasses and "class not resolved" on the outer ring, small families grouped as others | M | 1.5 | 🟢 | J6b | Native PNG in both themes; rings sum to 100% | LK | | 0 | 0 | |
 
-## Cooldown
+### W6 The Word report, written by the program
 
-H1 ran at the middle of the project and is finished: 56 steps landed, housekeeping merged, and `docs/housekeeping/H1-NOTES.md` carries what it left. No further cooldown is planned.
+| ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
+|---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
+| J6j | Supplement workbook: the program writes `<report>_supplement.xlsx` beside the Word document, one sheet per long table (per protein, per peptide, per run, others list, audit), each sheet named where the document cites it, following the section checkboxes | M | 1.5 | 🟢 | J6b | Workbook opens in Excel; sheets equal the program's CSV exports cell for cell; same bytes under pt-BR and en-US | SH | | 0 | 0 | |
+| J6k | The new figures in the report: composition with run error bars, the family and subclass ring, abundance against diversity, the signal sources, and coverage maps of the top proteins of each family, each with its automatic caption, as a figures builder FQResults' J6b calls | M | 1.5 | 🟢 | J6b | Each figure in the document is byte-equal to the program's own PNG export and its caption's numbers equal the figure's data | LK | | 0 | 0 | |
+| J6b | Results in the report: composition with toxin counts, per-run table, subclass and domain tables, figures, Database gap, quality rates, sensitivity and the others list | H | 3 | J2c, J4c, J5g, J6g | J6e | Every number in the document equals the program's own export; the document reads in about 30 to 40 pages and every long table goes to a companion `_supplement.xlsx` the program writes beside it | RS | | 0 | 0 | |
+| J6f | Report sections with checkboxes: the Export report screen lists every section and figure, each with a checkbox, all ticked by default; the choice is stored in the project and the document holds exactly the ticked parts | M | 1 | 🟢 | J6e | Native test: unticking a section removes it and only it; the choice survives reopen | SH | | 0 | 0 | |
+| J6g | Automatic explanations: every figure and table gets a caption saying what is drawn and how to read it, plus sentences written from that project's own numbers, in general words | M | 2 | 🟢 | J6b | Each caption's numbers equal the figure's data; no fixed organism text | LK | | 0 | 0 | |
+
+### W7 The analysis
+
+| ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
+|---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
+| J0 | Baseline run of today's program on the new data, with timings and a gap list against Ana's rules | M | 1.5 | 🟢 | J7a | RESULT J0 posted with every output path | OP | | 0 | 0 | |
+| J7a | The full run through the program: panel import, evidence, families, subclasses, Compute on three runs with de novo, family world, Database gap; project saved | H | 2 | J0, J2b | J7b | The project reopens; a second Compute repeats every number | OP | | 0 | 0 | |
+| J7b | Interpretation, written into the project notes, quoting only the report's numbers, read against Ana's panel | M | 1.5 | J7a | J7c | A second reader checks every number against the report | OP | | 0 | 0 | |
+| J7c | Final export and delivery: every number in the document traced to a program export, then the Word report, the project and the family panel written to `C:/Users/paulo/Desktop/AnaG/Bjararaca/Relatorio`, nothing else in Ana's folders touched | M | 1 | J7b | J7d | Reviewer's trace table with 0 mismatches | OP | | 0 | 0 | |
+| J7d | Release 2.1.0, so Ana can make the same report, on Paulo's word | L | 0.5 | J7c | | The release names the version the report prints | EV | | 0 | 0 | |
+| J9 | Compute writes its cache and spectrum CSV to a per-user cache folder (or one the user chooses), never beside the RAW files, so a read-only or shared data folder works; old caches still found | M | 1 | 🟢 | J7a | Native Compute on a read-only RAW folder succeeds; the same numbers as before; the RAW folder unchanged | FL | | 0 | 0 | |
+| J10 | The de novo source picker reads which exports the chosen folder holds and proposes the matching source, so a folder of .denovo.csv files proposes "de novo all" | L | 0.5 | 🟢 | J7a | Fixture folders for each source; the person can still change it | FL | | 0 | 0 | |
+| J11 | Family-world decoy rates never print above 100%: when a family's credited envelope is too small to give a rate, the row says so, with the counts beside it | L | 0.5 | 🟢 | J6b | The snaclec-like case (decoy envelope over a near-zero credit) prints "too little credited signal" with its counts | FL | | 0 | 0 | |
+| J14 | Stored family studies follow the current grouping: per-run shares, toxin counts, subclass and domain parts carry the fingerprint of the family membership they were computed on; after a regrouping the program rebuilds them from the stored peptide table (no RAW reading), or the report refuses them with a plain message | M | 1.5 | 🟢 | J7a | Regroup a computed project: the stored studies are rebuilt to the new families, or refused, never joined by UserID alone; a fixture where UserIDs are reused for different families | FL | | 0 | 0 | |
+| J15 | Re-prove the feature-ledger rows that mission J's changes left without a current receipt, by re-running their own producers, so the full gate before release passes with every retained row VERIFIED | M | 1 | 🟢 | J7d | `--feature-ledger-check` passes on the merged tip with no stale receipt; no row's state or wording changed by hand | T1 | | 0 | 0 | |
 
 ## Critical path
 
-Everything meets at R3a, the code freeze. The family world runs B10a, B10b, then the screen B10c, B10d, B10e. The ledger runs side by side, screen by screen, N6a to N6o, then Paulo's one ruling N6q, the sample N6r and the release check N6s. The look runs C14a to C14e. After the freeze the chain is R3b, R3c, R4a and R4b, R4c, R5a.
+J1a, J1b, J1d and J2a, J2b open the full run J7a. Beside them run the quantitation steps J3b, J5a, J5b and J4a, J4b, and the report J6a. The charts start at once on the quantitation lane's published result types, with stand-in data until those land. Everything meets at J6b and J7a, then J7b, J6e, J7c.
 
 ## Paulo's decisions
 
@@ -125,6 +157,12 @@ Paulo agreed these at the restart, 2026-11-01.
 
 | ID | Question | Taken |
 |---|---|---|
+| D38 | The 13 ambiguous family links in J2a | Confirmed by the desk from Ana's written rules (tab 1 merges, tab 4 rules 2, 3 and 5): disintegrin family and M12B Disintegrin-only to DIS, the DC architecture stays SVMP, the non-specific endonuclease family to NUCL, snaclec and true venom lectin to CTL, M12B to SVMP; source-less single-domain contexts stay outside the link table. Stored as user choices in the project, attributed to her consensus. Desk, 11-02 23:02 |
+| D33 | Which de novo data | Ana's three-run export (`AnaG/DeNovo_ALC-50percent`, PEAKS de novo all), cut by the program at ALC 80. Paulo, 11-02 |
+| D35 | Which families | All 41 of Ana's consensus families with her decisions: Excluir is not a family, Fundir em CTL joins CTL, the rest are measured, and those under 0.1% are listed as others with the names in a supplement. Paulo, 11-02 |
+| D36 | Report language | English, with Ana's own family names from her file. Paulo, 11-02 |
+| D37 | What "% of the venom" means | The share of the signal credited to families (identified plus de novo matched to the database), summing to 100%; beside it the share of the whole measured signal, and the de novo found only through Database gap shown apart, never added. Paulo, 11-02 |
+| D34 | Who writes the Word document | The program writes the complete report (File > Export report) from the project, with the input it needs: the family panel from Ana's file and a Report details form in the project (title, authors, sample, workflow, kind of database, written interpretation). Paulo, 11-02: "maybe the software could export a complete report too, its just that it would need some input" |
 | D14 | Should identity clustering change its coverage rule, merge on shared peptides, or use a reviewed-family veto? | No. Clustering stays as it is, and the measurements ship as a diagnostic the user can see |
 | D32 | Publishing | FamilyQuant 2.0.0 published 2026-11-02 19:16 at https://github.com/pcarvalho75/FamilyQuant2-releases/releases/tag/v2.0.0 from commit bc7209f, zip SHA256 02df797c...056c8f, by the desk at Paulo's request. The desk may publish when Paulo asks. Paulo, 11-02 |
 | D31 | How 2.0 reaches users | From a new public repo, pcarvalho75/FamilyQuant2-releases, as a release zip, with Help > Check for updates (Y10). This repo stays private, since its history holds unpublished work. No install on this machine; R3c runs the program from the unpacked zip, so a clean machine stays untested until the first real install. ClickOnce at the old address is not the route. Paulo, 11-02 |
@@ -172,3 +210,6 @@ Paulo agreed these at the restart, 2026-11-01.
 | Ana needs 1.5 while 2.0 is unfinished | She asks | 1.5 stays installed and untouched, and `.fcf` export (X7) carries her work back |
 | UniProt changes or is down | A fetch fails live | Stored evidence keeps working; fetch stays all or nothing |
 | Non-UniProt headers | B3 or the evidence fetch cannot read them | Report it plainly in the review window; proteins stay unassigned, never guessed |
+| Ana's rule needs a family literal | A step can only meet a rule by naming a family, a domain or a keyword in code | The rule becomes a user choice stored in the project, entered once from her file |
+| A subclass cannot be told apart | Peptides shared by every subclass, as in the SVMP catalytic domain | They are reported as "class not resolved", never forced into a class |
+| The full run is too slow for tonight | J0 measures Compute on three RAW files with de novo above two hours | Cache reuse first; report the time to Paulo the same hour |
