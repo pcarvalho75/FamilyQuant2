@@ -13,7 +13,7 @@ public sealed partial class FamilyRingChart
 
     private static IReadOnlyList<FamilyRingReference> BuildReference(IReadOnlyList<FamilyRingGroup> families)
     {
-        if (families.Sum(f => 33 + 19 * f.Parts.Count) <= 520)
+        if (160 + families.Sum(f => 33 + 19 * f.Parts.Count) <= FigureLayout.MaximumUncappedHeight)
             return Array.AsReadOnly(families.Select((f, i) => new FamilyRingReference(i, f.Parts.Count)).ToArray());
         // Retain explicit Others and unassigned category labels, then the largest ordinary groups.
         var indices = Enumerable.Range(0, families.Count).OrderByDescending(i => families[i].IsOthers || families[i].IsUnassigned)

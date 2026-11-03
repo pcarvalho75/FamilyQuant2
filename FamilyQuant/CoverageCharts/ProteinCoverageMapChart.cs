@@ -17,17 +17,20 @@ public sealed class ProteinCoverageMapChart : CompositionDrawingBase, IFigureDet
         ? (VisibleAnnotations.Count < Data.Annotations.Count ? "Showing " + VisibleAnnotations.Count + " of " + Data.Annotations.Count + " annotation tracks. " : "")
             + (VisibleLanes.Count < Data.Lanes.Count ? "Showing " + VisibleLanes.Count + " of " + Data.Lanes.Count + " peptide lanes, first within each source. " : "")
             + FigureLayout.FullReference : "";
-    public static double RecommendedHeight(ProteinCoverageMapData data) => Math.Max(540,
+    private static double FullHeight(ProteinCoverageMapData data) => 284 + Math.Max(1, data.Annotations.Count) * 28
+        + Math.Max(1, data.Lanes.Count) * 24 + (data.UnplacedPeptides.Count > 0 ? 20 : 0);
+    public static double RecommendedHeight(ProteinCoverageMapData data) => Math.Max(540, FullHeight(data) <= FigureLayout.MaximumUncappedHeight ? FullHeight(data) :
         284 + Math.Max(1, Math.Min(6, data.Annotations.Count)) * 28 + Math.Max(1, Math.Min(8, data.Lanes.Count)) * 24
             + (data.UnplacedPeptides.Count > 0 ? 20 : 0) + (data.Annotations.Count > 6 || data.Lanes.Count > 8 ? 22 : 0));
 
     public ProteinCoverageMapChart(ProteinCoverageMapData data)
     {
         Data = data ?? throw new ArgumentNullException(nameof(data));
-        VisibleAnnotations = Array.AsReadOnly(data.Annotations.Take(6).ToArray());
+        bool limit = FullHeight(data) > FigureLayout.MaximumUncappedHeight;
+        VisibleAnnotations = limit ? Array.AsReadOnly(data.Annotations.Take(6).ToArray()) : data.Annotations;
         var lanes = data.Lanes.GroupBy(l => l.Source).SelectMany(g => g.Take(4)).ToList();
         lanes.AddRange(data.Lanes.Where(l => !lanes.Contains(l)).Take(8 - lanes.Count));
-        VisibleLanes = Array.AsReadOnly(lanes.OrderBy(l => l.Source).ToArray());
+        VisibleLanes = limit ? Array.AsReadOnly(lanes.OrderBy(l => l.Source).ToArray()) : data.Lanes;
         VisiblePeptides = Array.AsReadOnly(VisibleLanes.SelectMany(l => l.Peptides).ToArray());
         ToolTip = "Blue blocks are identified and green blocks are de novo; filled blocks are exact placements, outlined blocks are aligned, and gaps are not painted. " + data.PositionState;
     }

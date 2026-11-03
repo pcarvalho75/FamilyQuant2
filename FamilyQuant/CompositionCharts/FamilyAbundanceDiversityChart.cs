@@ -16,23 +16,25 @@ public sealed class FamilyAbundanceDiversityChart : CompositionDrawingBase, IFig
     public IReadOnlyList<FamilyDiversityPoint> Points { get; }
     public IReadOnlyList<FamilyCompositionValue> UnavailableFamilies { get; }
     public IReadOnlyList<(FamilyCompositionValue Row, int Index)> ReferenceRows { get; }
-    public int UnavailableReferenceCount => Math.Min(data.UnavailableFamilies.Count, FigureLayout.DiversityReferences - ReferenceRows.Count);
-    public string DetailNotice => data.Families.Count + data.UnavailableFamilies.Count > FigureLayout.DiversityReferences
+    private readonly int referenceLimit;
+    public int UnavailableReferenceCount => Math.Min(data.UnavailableFamilies.Count, referenceLimit - ReferenceRows.Count);
+    public string DetailNotice => referenceLimit != int.MaxValue
         ? "First " + FigureLayout.DiversityReferences + " reference rows by share; all available points retained. " + FigureLayout.FullReference : "";
     public static double RecommendedHeight(FamilyCompositionData data) =>
-        Math.Max(540, (data.Families.Count + data.UnavailableFamilies.Count > FigureLayout.DiversityReferences ? 190 : 160)
-            + Math.Min(FigureLayout.DiversityReferences, data.Families.Count + data.UnavailableFamilies.Count) * 31);
+        Math.Max(540, FullHeight(data) <= FigureLayout.MaximumUncappedHeight ? FullHeight(data) : 190 + FigureLayout.DiversityReferences * 31);
+    private static double FullHeight(FamilyCompositionData data) => 160 + (data.Families.Count + data.UnavailableFamilies.Count) * 31;
 
     public FamilyAbundanceDiversityChart(FamilyCompositionData data)
     {
         this.data = data ?? throw new ArgumentNullException(nameof(data));
+        referenceLimit = FullHeight(data) <= FigureLayout.MaximumUncappedHeight ? int.MaxValue : FigureLayout.DiversityReferences;
         Points = Array.AsReadOnly(data.Families.Select((r, i) => (r, i)).Where(p => p.r.GreedyProteinCount.HasValue)
             .Select(p => new FamilyDiversityPoint(p.r.Key, p.r.Label, p.r.MeanPercent, p.r.GreedyProteinCount!.Value, p.i + 1)).ToArray());
         UnavailableFamilies = Array.AsReadOnly(data.Families.Where(r => !r.GreedyProteinCount.HasValue).ToArray());
         var reference = data.Families.Select((r, i) => (Row: r, Index: i + 1));
-        if (data.Families.Count > FigureLayout.DiversityReferences)
+        if (referenceLimit != int.MaxValue)
             reference = reference.OrderByDescending(r => r.Row.MeanPercent).ThenBy(r => r.Row.Key, StringComparer.Ordinal);
-        ReferenceRows = Array.AsReadOnly(reference.Take(FigureLayout.DiversityReferences).ToArray());
+        ReferenceRows = Array.AsReadOnly(reference.Take(referenceLimit).ToArray());
     }
 
     protected override void OnRender(DrawingContext dc)
