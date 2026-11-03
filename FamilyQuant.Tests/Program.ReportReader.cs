@@ -44,6 +44,23 @@ internal static partial class Program
         ReportReaderQualificationTests(data);
         var families = ReportReaderFamilyTests(data);
         ReportReaderDocumentTests(data, families, output);
+        ReportReaderCensusTraceTests();
+    }
+
+    private static void ReportReaderCensusTraceTests()
+    {
+        var table = ReportFamilySourceSequences.Build(new FamilySourceSequenceSummary());
+        string caption = FamilyQuant.Report.Captions.ReportCaptionBuilder.Table(table,
+            new FamilyQuant.Report.Captions.TableCaptionInput(table.Title, table.Caption, SummaryColumns: Array.Empty<int>()));
+        Check("census caption does not substitute an unstored fixed precursor tolerance",
+            !caption.Contains("20-ppm", StringComparison.Ordinal));
+        Check("supplement-only caption does not invent trace tokens for its shape",
+            !caption.Contains("The table shows", StringComparison.Ordinal));
+        var methods = ReportMethods.Build(new FamilyClusterFile(), new QuantManifest
+            { DeNovoOverlap = new DeNovoOverlapSummary { PrecursorTolerancePpm = 17.125 } });
+        Check("Methods retain the recorded precursor tolerance rather than a default",
+            methods.Blocks.OfType<ReportTable>().SelectMany(t => t.Rows)
+                .Any(row => row[0] == "Overlap precursor tolerance (ppm)" && row[1] == "17.125"));
     }
 
     private static void ReportReaderTableTests()

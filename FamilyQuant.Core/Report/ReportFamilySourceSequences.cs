@@ -18,6 +18,8 @@ public static class ReportFamilySourceSequences
             row.DeepNovoExclusiveDistinctSequences.ToString(CultureInfo.InvariantCulture),
             row.DeNovoUnionDistinctSequences.ToString(CultureInfo.InvariantCulture),
         }).ToArray(), "All stored families, including those omitted from the bounded drawing. Counting grain: "
-            + FamilySourceSequenceSummary.CountingGrain + ". Accepted tier: " + FamilySourceSequenceSummary.AcceptedTier)
+            + FamilySourceSequenceSummary.CountingGrain + ". Accepted tier: source-filtered claims attached to quantified de novo precursors; "
+            + "exact PTM-cleaned search-equivalent claims are suppressed per source in the same run and charge using precursor-mass matching. "
+            + "Counts are not signal, and alternate source claims do not create another XIC. Recorded precursor-matching options, when available, are listed in Methods")
         { SupplementOnly = true };
 }
