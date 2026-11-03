@@ -30,6 +30,14 @@ public static partial class ReportStudyFigures
     /// With no supplied map, the saved evidence/currentness accessor is always used for a panel project.</summary>
     public static ReportStudyFigurePlan Plan(QuantManifest manifest, FamilyClusterFile project,
         int topProteinsPerPanelFamily = 1, PanelFamilyMap? panelMap = null, FamilyReportThresholdResult? reportGrouping = null)
+        => PlanCore(manifest, project, topProteinsPerPanelFamily, panelMap, reportGrouping, null);
+
+    public static ReportStudyFigurePlan PlanForBasis(QuantManifest manifest, FamilyClusterFile project, ReportCompositionBasis basis,
+        int topProteinsPerPanelFamily = 1, PanelFamilyMap? panelMap = null, FamilyReportThresholdResult? reportGrouping = null)
+        => PlanCore(manifest, project, topProteinsPerPanelFamily, panelMap, reportGrouping, basis);
+
+    private static ReportStudyFigurePlan PlanCore(QuantManifest manifest, FamilyClusterFile project,
+        int topProteinsPerPanelFamily, PanelFamilyMap? panelMap, FamilyReportThresholdResult? reportGrouping, ReportCompositionBasis? basis)
     {
         ArgumentNullException.ThrowIfNull(manifest); ArgumentNullException.ThrowIfNull(project);
         if (topProteinsPerPanelFamily < 1) throw new ArgumentOutOfRangeException(nameof(topProteinsPerPanelFamily));
@@ -41,10 +49,12 @@ public static partial class ReportStudyFigures
         var figures = new List<ReportStudyFigure>();
         var unavailable = new List<ReportFigureAvailability>();
         void Missing(string title, string reason, string section = ReportSectionIds.Results) => unavailable.Add(new(section, title, reason));
-        var labels = FamilyLabels(project, panelMap);
-        FamilyReportThresholdResult? threshold = reportGrouping ?? (manifest.FamilyRunShares == null ? null : panelMap == null
+        var composition = basis?.Studies ?? manifest;
+        var labels = basis?.Labels ?? FamilyLabels(project, panelMap);
+        FamilyReportThresholdResult? sourceThreshold = reportGrouping ?? (manifest.FamilyRunShares == null ? null : panelMap == null
             ? FamilyReportThreshold.Build(manifest.FamilyRunShares, project)
             : FamilyReportThreshold.Build(manifest.FamilyRunShares, project, panelMap));
+        FamilyReportThresholdResult? threshold = basis?.Grouping ?? sourceThreshold;
         void Add(AnalyticsFigure plot, string title, string section = ReportSectionIds.Results)
         {
             var caption = CompositionChartCaptions.Describe(plot);
@@ -63,10 +73,10 @@ public static partial class ReportStudyFigures
         }
 
         FamilyCompositionData? means = null;
-        if (manifest.FamilyRunShares != null)
+        if (composition.FamilyRunShares != null)
         {
-            var stored = StoredCompositionChartData.FromRunShares(manifest.FamilyRunShares, manifest.FamilyProteinCounts, labels);
-            means = CanonicalRows(stored, threshold!, manifest.FamilyProteinCounts);
+            var stored = StoredCompositionChartData.FromRunShares(composition.FamilyRunShares, composition.FamilyProteinCounts, labels);
+            means = CanonicalRows(stored, threshold!, composition.FamilyProteinCounts);
             if (means.Families.Count > 0)
             {
                 var pages = Pages(means.Families, _ => 52);
@@ -83,15 +93,15 @@ public static partial class ReportStudyFigures
 
         FamilyCompositionData? pooled = null;
         FamilyCompositionData? ringData = null;
-        if (manifest.FamilySubclassParts != null && threshold != null)
+        if (composition.FamilySubclassParts != null && threshold != null)
         {
-            if (manifest.FamilyRunShares != null && manifest.FamilyRunShares.Policy != manifest.FamilySubclassParts.Policy)
+            if (composition.FamilyRunShares != null && composition.FamilyRunShares.Policy != composition.FamilySubclassParts.Policy)
                 throw new InvalidOperationException("Run shares and subclass parts use different shared-peptide policies.");
-            if (!manifest.FamilySubclassParts.Families.Select(f => f.FamilyUserId).ToHashSet()
-                .SetEquals(manifest.FamilyRunShares!.Families.Select(f => f.FamilyUserId)))
+            if (!composition.FamilySubclassParts.Families.Select(f => f.FamilyUserId).ToHashSet()
+                .SetEquals(composition.FamilyRunShares!.Families.Select(f => f.FamilyUserId)))
                 throw new InvalidOperationException("Pooled subclass parts and the canonical report partition have different family memberships.");
             // Adapt the complete stored partition first: filtering must never change the pooled denominator.
-            ringData = WordOthersNames(StoredCompositionChartData.FromSubclassParts(manifest.FamilySubclassParts, labels), threshold);
+            ringData = WordOthersNames(StoredCompositionChartData.FromSubclassParts(composition.FamilySubclassParts, labels), threshold);
             pooled = CanonicalRows(ringData, threshold, null);
             if (pooled.Families.Count > 0)
             {
@@ -110,14 +120,14 @@ public static partial class ReportStudyFigures
         if (ringData is { Families.Count: > 0 } && threshold != null)
             Add(FamilyCompositionFigures.BuildRing(ringData, FamilyRingGrouping.FromReportThreshold(threshold)), "Family and subclass ring, all runs pooled");
         else Missing("Family and subclass ring", "Stored pooled subclass parts and mean per-run shares are required for the ring and Others membership.");
-        if (means is { Families.Count: > 0 } && manifest.FamilyProteinCounts != null)
+        if (means is { Families.Count: > 0 } && composition.FamilyProteinCounts != null)
             Add(FamilyCompositionFigures.BuildAbundanceDiversity(means), "Abundance against database-protein diversity");
         else Missing("Abundance against diversity", "Stored per-run family shares and database-protein counts are required.");
 
         var world = manifest.FamilyWorldResult?.ForLength(manifest.DatabaseGapMinimumTagLength ?? FamilyWorldOptions.DefaultMinimumTagLength);
         if (world is { CompositionRules.Length: > 0 })
         {
-            var rows = CanonicalSources(world.Composition, threshold, unavailable).OrderByDescending(r => r.WorldDeNovoEnvelope).ThenBy(r => r.Kind, StringComparer.Ordinal)
+            var rows = CanonicalSources(world.Composition, sourceThreshold, unavailable).OrderByDescending(r => r.WorldDeNovoEnvelope).ThenBy(r => r.Kind, StringComparer.Ordinal)
                 .ThenBy(r => r.Family, StringComparer.OrdinalIgnoreCase).ThenBy(r => r.Family, StringComparer.Ordinal)
                 .ThenBy(r => r.CuratedUserIds.FirstOrDefault()).ToArray();
             var pages = rows.Chunk(12).ToArray();
@@ -125,11 +135,15 @@ public static partial class ReportStudyFigures
             for (int i = 0; i < pages.Length; i++)
             {
                 var chart = new FamilySignalOriginChart(pages[i]);
-                Add(new(PageFile("family_signal_sources", i, pages.Length), chart, chart.Height), PageTitle("Family signal by source, all runs pooled", i, pages.Length));
+                Add(new(PageFile("family_signal_sources", i, pages.Length), chart, chart.Height), PageTitle("Family signal by source, all runs pooled", i, pages.Length),
+                    basis is { UsesPanel: true, IsIdentity: false } ? ReportSectionIds.Supplements : ReportSectionIds.Results);
             }
         }
         else Missing("Family signal sources", "The selected family-world source composition has not been stored; its missing parts are not zero.");
-        AddCoverage(manifest, project, panelMap, threshold, topProteinsPerPanelFamily, figures, unavailable);
+        int coverageStart = figures.Count;
+        AddCoverage(manifest, project, panelMap, sourceThreshold, topProteinsPerPanelFamily, figures, unavailable);
+        if (basis is { UsesPanel: true, IsIdentity: false })
+            for (int i = coverageStart; i < figures.Count; i++) figures[i] = figures[i] with { SectionId = ReportSectionIds.Supplements };
         if (figures.Select(f => f.Plot.FileName).Distinct(StringComparer.Ordinal).Count() != figures.Count)
             throw new InvalidOperationException("Report study figure filenames collide.");
         return new(figures.AsReadOnly(), unavailable.AsReadOnly());
@@ -139,12 +153,22 @@ public static partial class ReportStudyFigures
         int topProteinsPerPanelFamily = 1, PanelFamilyMap? panelMap = null, FamilyReportThresholdResult? reportGrouping = null,
         OperationContext? operation = null,
         int otherFigureCount = 0)
+        => BuildCore(manifest, project, pngFolder, topProteinsPerPanelFamily, panelMap, reportGrouping, operation, otherFigureCount, null);
+
+    public static ReportStudyFigurePacket BuildForBasis(QuantManifest manifest, FamilyClusterFile project, string pngFolder, ReportCompositionBasis basis,
+        int topProteinsPerPanelFamily = 1, PanelFamilyMap? panelMap = null, FamilyReportThresholdResult? reportGrouping = null,
+        OperationContext? operation = null, int otherFigureCount = 0)
+        => BuildCore(manifest, project, pngFolder, topProteinsPerPanelFamily, panelMap, reportGrouping, operation, otherFigureCount, basis);
+
+    private static ReportStudyFigurePacket BuildCore(QuantManifest manifest, FamilyClusterFile project, string pngFolder,
+        int topProteinsPerPanelFamily, PanelFamilyMap? panelMap, FamilyReportThresholdResult? reportGrouping,
+        OperationContext? operation, int otherFigureCount, ReportCompositionBasis? basis)
     {
         var culture = CultureInfo.CurrentCulture; var ui = CultureInfo.CurrentUICulture;
         try
         {
             CultureInfo.CurrentCulture = CultureInfo.InvariantCulture; CultureInfo.CurrentUICulture = CultureInfo.InvariantCulture;
-            var plan = Plan(manifest, project, topProteinsPerPanelFamily, panelMap, reportGrouping);
+            var plan = PlanCore(manifest, project, topProteinsPerPanelFamily, panelMap, reportGrouping, basis);
             int total = plan.Figures.Count + otherFigureCount;
             if (plan.Figures.Count > 0 || total == 0) operation?.Report("report-prepare-figure", "Preparing report figures", 0, total);
             var placed = plan.Figures.Select((item, index) =>

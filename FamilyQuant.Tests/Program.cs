@@ -360,6 +360,7 @@ namespace FamilyQuant.Tests
             suite.AddWithApplication(() => ReportCommandTests(new[] { "--test-report-command" }));
             suite.Add(FamilyUnobservedTests);
             suite.Add(() => EffectivePanelFamiliesTests(null));
+            suite.Add(() => PanelHeadlineTests(null));
             suite.AddWithApplication(() => ReportFigureTests(Path.Combine(workDir, "report-figures")));
             suite.AddWithApplication(() => WordReportDraftTests());
             suite.AddWithApplication(() => ReportAssemblyChecks(Path.Combine(workDir, "report-assembly")));
