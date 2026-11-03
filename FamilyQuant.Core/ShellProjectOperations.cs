@@ -27,7 +27,7 @@ public static class ShellProjectOperations
             throw new ArgumentException("Save projects with a .fqproj filename. Use Export for a legacy Family Cluster File.", nameof(path));
         string full = Path.GetFullPath(path);
         string staged = full + ".saving-" + Guid.NewGuid().ToString("N") + ".fqproj";
-        string expected = Convert.ToHexString(SHA256.HashData(Encoding.UTF8.GetBytes(curation.ToJsonText())));
+        string expected = curation.JsonContentSha256();
         var snapshot = Evidence.SavedFileCheck.Capture(curation);
         var previousCheck = curation.LastSaveCheck;
         int previousVersion = manifest.FormatVersion;
@@ -43,7 +43,7 @@ public static class ShellProjectOperations
             curation.LastSaveCheck = Evidence.SavedFileCheck.Verify(snapshot, staged, project: true, operation);
             Evidence.SavedFileCheck.RequirePassed(curation.LastSaveCheck);
             var reopened = ProjectStore.ReadFqproj(staged, operation);
-            string actual = Convert.ToHexString(SHA256.HashData(Encoding.UTF8.GetBytes(reopened.fcf.ToJsonText())));
+            string actual = reopened.fcf.JsonContentSha256();
             if (!string.Equals(expected, actual, StringComparison.Ordinal) || reopened.quant.Count != rows.Count)
                 throw new InvalidDataException("The saved project did not reproduce its curation and stored row count.");
             operation?.Report("verified-save", "Publishing the checked project", 1, 1);
