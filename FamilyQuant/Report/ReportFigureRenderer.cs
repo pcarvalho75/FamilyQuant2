@@ -66,9 +66,19 @@ public static class ReportFigureRenderer
             pooledFacts);
         if (visibleFamilies != null)
         {
-            Add(ReportSectionIds.Results, AnalyticsFigures.FamilyContributionFile, "Family signal contributions",
-                "Current curated family contributions on the chart's stated shared-peptide basis. Shared and unattributed signal remain explicit.", () => new FamilyContributionChart(visibleFamilies, topN: reportGrouping == null ? FamilyContributionPlot.DefaultTopN : 0));
-            if (reportGrouping != null) charts[^1] = charts[^1] with { Height = Math.Max(540, 240 + visibleFamilies.Families.Count * 50) };
+            var bars = FamilyContributionPlot.Fold(visibleFamilies, reportGrouping == null ? FamilyContributionPlot.DefaultTopN : 0);
+            var pages = reportGrouping == null ? new[] { bars.ToArray() } : bars.Chunk(12).DefaultIfEmpty(Array.Empty<FamilyContributionBar>()).ToArray();
+            for (int page = 0; page < pages.Length; page++)
+            {
+                var pageBars = pages[page];
+                string file = page == 0 ? AnalyticsFigures.FamilyContributionFile : Path.GetFileNameWithoutExtension(AnalyticsFigures.FamilyContributionFile)
+                    + "_" + (page + 1).ToString(CultureInfo.InvariantCulture) + ".png";
+                Add(ReportSectionIds.Results, file, "Family signal contributions" + (pages.Length > 1 ? " - page " + (page + 1).ToString(CultureInfo.InvariantCulture) : ""),
+                    "Current curated family contributions on the chart's stated shared-peptide basis. Shared and unattributed signal remain explicit.",
+                    () => reportGrouping == null ? new FamilyContributionChart(visibleFamilies)
+                        : new FamilyContributionChart(pageBars, measuredEnvelope: visibleFamilies.MeasuredTotalEnvelopeReferenceCalibrated, identityThresholdFraction: visibleFamilies.IdentityThreshold));
+                if (reportGrouping != null) charts[^1] = charts[^1] with { Height = Math.Max(540, 240 + pageBars.Length * 50) };
+            }
             Add(ReportSectionIds.Results, PresentationFigures.FamilySignalShareFile, "Family signal and de novo share",
                 "Family signal against its de novo contribution; these axes describe abundance and evidence source, not diversity.", () => new FamilySignalShareChart(visibleFamilies, 10),
                 new CaptionNumber("Family rows shown from the stored attribution", visibleFamilies.Families.Count, "families", "0"));

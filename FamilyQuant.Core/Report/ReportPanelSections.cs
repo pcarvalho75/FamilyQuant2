@@ -16,7 +16,8 @@ public static class ReportPanelSections
     {
         ArgumentNullException.ThrowIfNull(curation);
         ArgumentNullException.ThrowIfNull(manifest);
-        return BuildFromResults(curation, manifest, manifest.FamilyRunShares == null ? null : FamilyReportThreshold.Build(manifest.FamilyRunShares, curation));
+        bool currentMap = curation.FamilyPanel == null || PanelAssignmentEvidenceStore.Current(curation) != null;
+        return BuildFromResults(curation, manifest, manifest.FamilyRunShares == null || !currentMap ? null : FamilyReportThreshold.Build(manifest.FamilyRunShares, curation));
     }
 
     public static IReadOnlyList<ReportSection> BuildFromResults(FamilyClusterFile curation, QuantManifest manifest,

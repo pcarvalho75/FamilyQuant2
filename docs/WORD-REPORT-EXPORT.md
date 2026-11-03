@@ -26,6 +26,7 @@ Word. Legacy diagnostic plots retain their original signal values and denominato
 only individually reportable groups. Generic member/part labels in the pooled Others figures keep
 their stored amounts; the named detail is supplementary. Conflicting assignments keep their own
 flagged amounts and reasons, outside both reported families and Others.
+Long legacy contribution plots use pages of native bars, without a second display-based Others rule.
 
 Focused checks after a Release build:
 

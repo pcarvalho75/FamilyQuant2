@@ -136,5 +136,15 @@ internal static partial class Program
         string countsCsv = ReportStudyExports.ProteinCounts(manifest.FamilyProteinCounts!, labels);
         var explicitCounts = ReportWordMembership.Filter(ReportCsvTable.Build("protein-counts", "Fixture", countsCsv, "", "family"), countsCsv, explicitPartition);
         Check("explicit Others decision hides an above-threshold member too", explicitCounts.Rows.Count == 1 && explicitCounts.Rows[0][0] == labels[1]);
+        var many = FamilyFixture(42);
+        for (int i = 0; i < many.Families.Count; i++) many.Families[i].FamilyUserId = i + 1;
+        var manyShares = new FamilyRunSharesResult { Families = many.Families.Select(f => new FamilyRunShareSummary
+        { FamilyUserId = f.FamilyUserId, MeanShare = 1d / many.Families.Count }).ToList() };
+        var manyPlan = ReportFigureRenderer.Plan(data, new QuantManifest { FamilyRunShares = manyShares }, new FamilyClusterFile(), many);
+        var legacyPages = manyPlan.Charts.Where(c => c.CreateChart() is FamilyContributionChart).ToArray();
+        var pageRows = legacyPages.SelectMany(c => ((FamilyContributionChart)c.CreateChart()).Bars).ToArray();
+        Check("legacy canonical rows are paged without an oversized PNG or a second Others rule", legacyPages.Length > 1 && legacyPages.All(c => c.Height <= 840)
+            && pageRows.Where(b => b.FamilyUserId.HasValue).Select(b => b.FamilyUserId).Distinct().Count() == 42
+            && pageRows.All(b => b.Kind != FamilyContributionBarKind.OtherFamilies));
     }
 }
