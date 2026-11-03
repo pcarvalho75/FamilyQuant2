@@ -93,6 +93,16 @@ internal static partial class Program
         byte[]? reportPng = pngMethod?.Invoke(null, new object[] { model.ChartRows }) as byte[];
         Check("gap chart supplies a self-contained pinned Light report PNG", reportPng != null && reportPng.Length > 100
             && reportPng.Take(8).SequenceEqual(new byte[] { 137, 80, 78, 71, 13, 10, 26, 10 }));
+        var beforeReportCulture = CultureInfo.CurrentCulture;
+        try
+        {
+            CultureInfo.CurrentCulture = CultureInfo.GetCultureInfo("en-US");
+            byte[] englishPng = FamilySignalOriginChart.RenderReportPng(model.ChartRows);
+            CultureInfo.CurrentCulture = CultureInfo.GetCultureInfo("pt-BR");
+            byte[] portuguesePng = FamilySignalOriginChart.RenderReportPng(model.ChartRows);
+            Check("gap report PNG uses invariant number formatting across cultures", englishPng.SequenceEqual(portuguesePng));
+        }
+        finally { CultureInfo.CurrentCulture = beforeReportCulture; }
         foreach (var variant in new[] { ChartPaletteVariant.Dark, ChartPaletteVariant.Light })
         {
             var single = new FamilySignalOriginChart(new[] { first });
@@ -121,12 +131,18 @@ internal static partial class Program
         }
         if (reportPng != null)
         {
-            var expected = new FamilySignalOriginChart(model.ChartRows);
-            var light = ChartImageExporter.Render(expected, 960, expected.Height, variant: ChartPaletteVariant.Light);
-            var encoder = new System.Windows.Media.Imaging.PngBitmapEncoder();
-            encoder.Frames.Add(System.Windows.Media.Imaging.BitmapFrame.Create(light));
-            using var stream = new MemoryStream(); encoder.Save(stream);
-            Check("report PNG is byte-identical to the explicit Light chart export", reportPng.SequenceEqual(stream.ToArray()));
+            var beforeExplicit = CultureInfo.CurrentCulture;
+            try
+            {
+                CultureInfo.CurrentCulture = CultureInfo.InvariantCulture;
+                var expected = new FamilySignalOriginChart(model.ChartRows);
+                var light = ChartImageExporter.Render(expected, 960, expected.Height, variant: ChartPaletteVariant.Light);
+                var encoder = new System.Windows.Media.Imaging.PngBitmapEncoder();
+                encoder.Frames.Add(System.Windows.Media.Imaging.BitmapFrame.Create(light));
+                using var stream = new MemoryStream(); encoder.Save(stream);
+                Check("report PNG is byte-identical to the explicit invariant Light chart export", reportPng.SequenceEqual(stream.ToArray()));
+            }
+            finally { CultureInfo.CurrentCulture = beforeExplicit; }
         }
         Check("ranking sorts the same Core row objects by database gap without allocating new amounts", model.ChartRows[0] == first
             && model.Rows[0].Data == first && model.ChartRows[1] == low);

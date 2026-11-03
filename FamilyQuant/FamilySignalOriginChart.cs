@@ -14,18 +14,21 @@ public sealed class FamilySignalOriginChart : ChartDrawingBase, IPalettedChart
 {
     private static readonly IReadOnlyList<string> sourceLabels = Array.AsReadOnly(new[]
         { "Identified", "De novo in database", "De novo only in family world" });
+    private readonly bool invariantNumbers;
     public IReadOnlyList<string> SourceLabels => sourceLabels;
     public IReadOnlyList<FamilyWorldCompositionRow> Rows { get; }
-    public FamilySignalOriginChart(IReadOnlyList<FamilyWorldCompositionRow> rows)
+    public FamilySignalOriginChart(IReadOnlyList<FamilyWorldCompositionRow> rows) : this(rows, false) { }
+    private FamilySignalOriginChart(IReadOnlyList<FamilyWorldCompositionRow> rows, bool invariantNumbers)
     {
         Rows = rows ?? throw new ArgumentNullException(nameof(rows));
+        this.invariantNumbers = invariantNumbers;
         Height = Math.Max(160, 130 + 30 * rows.Count);
     }
 
     /// <summary>Render all supplied stored rows in the pinned Light palette for the report.</summary>
     public static byte[] RenderReportPng(IReadOnlyList<FamilyWorldCompositionRow> rows)
     {
-        var chart = new FamilySignalOriginChart(rows);
+        var chart = new FamilySignalOriginChart(rows, true);
         var image = ChartImageExporter.Render(chart, 960, chart.Height, variant: ChartPaletteVariant.Light);
         var encoder = new PngBitmapEncoder();
         encoder.Frames.Add(BitmapFrame.Create(image));
@@ -65,7 +68,7 @@ public sealed class FamilySignalOriginChart : ChartDrawingBase, IPalettedChart
                 if (width > 0) dc.DrawRectangle(brush, null, new Rect(x, y, width, 19));
                 x += width;
             }
-            dc.DrawText(Text(row.TotalEnvelope.ToString("G5", CultureInfo.CurrentCulture), Palette.Muted, 10), new(left + plotWidth + 8, y + 3));
+            dc.DrawText(Text(row.TotalEnvelope.ToString("G5", invariantNumbers ? CultureInfo.InvariantCulture : CultureInfo.CurrentCulture), Palette.Muted, 10), new(left + plotWidth + 8, y + 3));
         }
     }
 }
