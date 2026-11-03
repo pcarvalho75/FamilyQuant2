@@ -1,44 +1,61 @@
 # Report number trace
 
-After a Release build, run the test-side audit against a report and the CSV folder
-written for that report:
+`--trace-report-numbers <report.docx> <sidecar-folder> <output.csv>` reads the report and its
+native CSVs/companion workbook without writing those inputs. This is an audit aid; it does
+not calculate or validate scientific results.
+
+After a Release build:
 
 ```powershell
 FamilyQuant.Tests.exe --trace-report-numbers <report.docx> <report_data_folder> <output.csv>
 ```
 
-The command reads the Word body, table cells, captions, headers and footers. It emits
-one row for each numeric token or classified identifier, with its document location,
-full paragraph context, status and, for a match, the CSV filename or workbook sheet
-and one-based spreadsheet cell. The CSV folder is searched recursively; the sibling
-`<report>_supplement.xlsx` is also read when present. A workbook alone is sufficient
-if the CSV folder is absent. Quoted and multiline CSV fields are supported. The
-output cannot overwrite the report, workbook or a source CSV. The command exits with
-status 1 if any number is `NOT FOUND`; a missing report, missing source exports or
-malformed CSV is an error.
+The command reads the Word body, table cells, captions, headers and footers. Each row
+records a numeric token or classified identifier, its document location, full paragraph
+context, status and selected filename/sheet and one-based cell. CSVs are searched
+recursively; the sibling `<report>_supplement.xlsx` alone suffices if the CSV folder
+is absent. Quoted and multiline CSV fields are supported. Output cannot overwrite
+the report, workbook or a source CSV. Missing inputs/exports or malformed CSV are errors.
 
-`MATCH` means numeric equality with a complete numeric data cell in a source export. The
-comparison is invariant, exact and independent of digit grouping, trailing zeros or
-scientific notation. A percentage can match a directly equal number outside a column
-named `fraction`. If it matches a value divided by 100 in a fraction column, the row
-records that conversion in `match_kind`. Values are never matched by a tolerance or
-by a substring of a larger cell. If several cells contain the same number, the first
-in sorted filename and row order is reported.
+Every equal numeric cell remains a candidate. A citation prefers the named subject in the
+sentence/clause or the whole printed table row. Labels come from source rows, including
+family labels, run names and option names. Function words are ignored when comparing labels;
+complete single-word labels and multiword label prefixes are usable. The closest preceding
+label wins, followed by the longest label at that position. Sentence boundaries and semicolons
+outside parentheses separate subjects, preserving a family name for its parenthesized counts.
+Colons preserve option names. Equivalent cells for the same named subject keep stable source
+order. The `subject` and `candidate_count` columns expose the selected label and alternatives.
+The printed column heading breaks ties between equal fields for one subject. A number inside
+a recorded subject name is ambiguous rather than being cited as another subject's count.
 
-The generated caption sentence stating a table's row and column counts is checked
-against the immediately preceding Word table. Its numbers are labeled `TABLE ROWS`
-and `TABLE COLUMNS` when correct, or `NOT FOUND` when the table is missing or the
-count differs. They are never cleared by an unrelated source cell.
+Without a named subject, a single equal source row/column (including identical repeated views)
+can be cited. Several unrelated rows give `AMBIGUOUS`, with empty `csv` and `cell` fields.
+This also prevents a cover version from being cited to an unrelated protein estimate.
+Percentages consider both equal percentage cells and explicitly labelled fraction columns,
+with the same subject preference across both representations.
+Equality remains invariant and exact across digit grouping, trailing zeros and scientific
+notation, never tolerance or substring matching. Percentage conversion is recorded in
+`match_kind`; directly equal percentages exclude fraction columns. A list-sheet `Source
+data row` pointer is usable only when the report explicitly names that structural field.
+If the named subject has no equal candidate, another subject's equal value is ambiguous.
 
-Years in explicit year contexts, ISO dates, page numbers, run indices, SHA-256
-fingerprints and alphanumeric identifiers receive a classification instead of a
-numeric match. Other values, including method parameters, table dimensions and
-rounded figure captions, are checked and can appear as `NOT FOUND` if the exports do
-not contain those exact values. Check the context before deciding whether an unmatched
-value needs an additional program export or a correction to the report.
+The generated caption sentence stating table dimensions is checked against the immediately
+preceding Word table. Correct counts receive `TABLE ROWS`/`TABLE COLUMNS`; wrong counts or
+a missing table give `NOT FOUND`, even when the same count occurs elsewhere in an export.
 
-A numerical match anywhere in the source exports is a candidate, not proof that the
-particular table or figure used that cell. Common numbers can match coincidentally.
-Review the named source and the report context, especially for scientific claims.
-The command audits text in the Word package; it does not read labels drawn into PNG
-figures, calculate chart data, update the report or reproduce the analysis.
+`NOT FOUND`, date/hash/identifier/year/run/page classifications, own-table dimension checks
+and the exit code retain their prior meaning. Exit code 1 means a missing numeric token;
+ambiguities are separate open audit items even if exit code is 0. J36 prints and records both
+counts. Matching a subject is contextual evidence, not a guarantee that a sentence makes a
+scientifically valid claim or uses the right denominator.
+Explicit-context years, ISO dates, page numbers, run indices, SHA-256 fingerprints and
+alphanumeric identifiers retain their classifications. Other values, including method
+parameters and rounded captions, may remain `NOT FOUND`: inspect the context before
+adding a missing program export or correcting the report. The trace reads no labels
+drawn into PNGs and does not modify the report, calculate chart data or reproduce the analysis.
+
+Append `--compare <before.csv>` to produce `<output>.changes.csv`, `<output>.ambiguous.csv`
+and `<output>.comparison.json` beside the revised trace. The native C# harness lists every
+changed status/source/cell and every ambiguous row, including original CSV row numbers and
+full context. It refuses misaligned token identities and input/output collisions. The JSON
+records both input trace hashes. Comparison does not change the missing-number exit status.

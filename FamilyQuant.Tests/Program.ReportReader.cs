@@ -45,6 +45,8 @@ internal static partial class Program
         var families = ReportReaderFamilyTests(data);
         ReportReaderDocumentTests(data, families, output);
         ReportReaderCensusTraceTests();
+        ReportReaderWorkbookReferenceTests();
+        ReportReaderPanelExcerptTests();
     }
 
     private static void ReportReaderCensusTraceTests()

@@ -144,6 +144,33 @@ internal static partial class Program
         trace = ReportCsvTable.Build("bad-size", "bad-size", File.ReadAllText(workbookOutput), "");
         Check("J18 refuses a wrong table size even when that number appears in a workbook cell", badSize != 0 && Has("3", "NOT FOUND"));
 
+        WordReportWriter.Write(workbookDoc, bookReport);
+        using (var word = WordprocessingDocument.Open(workbookDoc, true))
+        {
+            var body = word.MainDocumentPart!.Document!.Body!;
+            var owner = body.Elements<W.Table>().Single();
+            var caption = body.Elements<W.Paragraph>().Single(paragraph => paragraph.InnerText == table.Caption);
+            caption.Remove(); owner.InsertAfterSelf(caption);
+        }
+        int legacyCaption = ReportNumberTrace.Run(workbookDoc, missingFolder, workbookOutput);
+        trace = ReportCsvTable.Build("legacy-caption", "legacy-caption", File.ReadAllText(workbookOutput), "");
+        Check("J18 retains ownership of a legacy caption after its table", legacyCaption == 0 && Has("2", "TABLE ROWS") && Has("2", "TABLE COLUMNS"));
+        using (var word = WordprocessingDocument.Open(workbookDoc, true))
+        {
+            var body = word.MainDocumentPart!.Document!.Body!;
+            var owner = body.Elements<W.Table>().Single();
+            var caption = body.Elements<W.Paragraph>().Single(paragraph => paragraph.InnerText == table.Caption);
+            caption.InsertAfterSelf(owner.CloneNode(true));
+        }
+        int ambiguous = ReportNumberTrace.Run(workbookDoc, missingFolder, workbookOutput);
+        trace = ReportCsvTable.Build("ambiguous-caption", "ambiguous-caption", File.ReadAllText(workbookOutput), "");
+        Check("J18 refuses ambiguous caption ownership even when both tables have matching dimensions", ambiguous != 0 && Has("2", "NOT FOUND"));
+        using (var word = WordprocessingDocument.Open(workbookDoc, true))
+            foreach (var owner in word.MainDocumentPart!.Document!.Body!.Elements<W.Table>().ToArray()) owner.Remove();
+        int orphan = ReportNumberTrace.Run(workbookDoc, missingFolder, workbookOutput);
+        trace = ReportCsvTable.Build("orphan-caption", "orphan-caption", File.ReadAllText(workbookOutput), "");
+        Check("J18 refuses an orphan caption instead of borrowing its dimensions from the workbook", orphan != 0 && Has("2", "NOT FOUND"));
+
         string? savedVersion = Environment.GetEnvironmentVariable(AppVersionInfo.ClickOnceCurrentVersionVariable);
         try
         {
@@ -175,6 +202,116 @@ internal static partial class Program
                 noncurrentExit != 0 && trace.Rows.All(r => r[status] != "VERSION"));
         }
         finally { Environment.SetEnvironmentVariable(AppVersionInfo.ClickOnceCurrentVersionVariable, savedVersion); }
+        ReportNumberTraceSubjectTests(root);
+    }
+
+    private static void ReportNumberTraceSubjectTests(string root)
+    {
+        Section("J49 subject-aware number citations");
+        string document = Path.Combine(root, "subjects.docx"), output = Path.Combine(root, "subjects-trace.csv");
+        var rows = Enumerable.Range(0, 50).Select(_ => (IReadOnlyList<string>)new[] { "", "", "" }).ToArray();
+        rows[1] = new[] { "listed", "families above the threshold", "14" }; // C3
+        rows[16] = new[] { "listed", "Cedar ensemble greedy protein estimate", "14" }; // C18
+        rows[31] = new[] { "listed", "Maple ensemble greedy protein estimate", "2" }; // C33
+        rows[34] = new[] { "listed", "Orchid ensemble greedy protein estimate", "2" }; // C36
+        rows[37] = new[] { "listed", "Empty ensemble greedy protein estimate", "0" };
+        rows[38] = new[] { "listed", "Vacant ensemble greedy protein estimate", "0" };
+        rows[43] = new[] { "listed", "Hydrolase 2 greedy protein estimate", "1" };
+        rows[44] = new[] { "listed", "Hydrolase greedy protein estimate", "9" }; // C46
+        rows[48] = new[] { "listed", "below the threshold", "5" };
+        rows[49] = new[] { "listed", "below the threshold and by panel decision", "5" }; // C51
+        var numbers = new ReportTable("subject-numbers", "Numbers", new[] { "statement", "quantity", "value" }, rows, "");
+        var runs = new ReportTable("subject-runs", "Run values", new[] { "run", "value" },
+            new IReadOnlyList<string>[] { new[] { "run-a", "2" }, new[] { "run-b", "2" } }, "");
+        var options = new ReportTable("subject-options", "Options", new[] { "option", "value" },
+            new IReadOnlyList<string>[] { new[] { "Extraction tolerance", "2" }, new[] { "Minimum points", "2" },
+                new[] { "Other setting", "37" }, new[] { "Only setting", "38" } }, "");
+        var pointer = new ReportTable("subject-pointer", "Pointers", new[] { "Subject", "Source data row" },
+            new IReadOnlyList<string>[] { new[] { "Other setting", "37" }, new[] { "Orphan measure", "17" } }, "");
+        var single = new ReportTable("subject-single", "Single-word family", new[] { "Family", "Estimate" },
+            new IReadOnlyList<string>[] { new[] { "Hydrolase", "9" } }, "");
+        var roles = new ReportTable("subject-roles", "Equal fields", new[] { "Family", "family_id", "Protein estimate" },
+            new IReadOnlyList<string>[] { new[] { "Elm ensemble", "2", "2" } }, "");
+        var report = new ReportDocument { Sections = new[] { new ReportSection(ReportSectionIds.Results, "Results", new ReportBlock[]
+        {
+            new ReportParagraph("families", "14 families are above the threshold. In headline order: Cedar ensemble (14 proteins); Maple ensemble (2 proteins); Orchid ensemble (2 proteins)."),
+            new ReportParagraph("others", "5 families are below the threshold and by panel decision."),
+            new ReportParagraph("run", "run-b has 2 units."),
+            new ReportParagraph("option", "Minimum points: 2."),
+            new ReportParagraph("cover-version", "FamilyQuant 2.0.0.0"),
+            new ReportParagraph("unlabelled", "Unlabelled 14."),
+            new ReportParagraph("paired", "Maple ensemble has 2 proteins and Orchid ensemble has 2 proteins."),
+            new ReportParagraph("wrong-subject", "Only setting: 37."),
+            new ReportParagraph("wrong-after", "Other setting is 37 and Only setting is 37."),
+            new ReportParagraph("pointer", "Orphan measure: 17."),
+            new ReportParagraph("single-word", "Hydrolase: 9 proteins."),
+            new ReportParagraph("name-number", "Hydrolase 2: 1 protein."),
+            new ReportParagraph("unknown", "Planted 98765.4321."),
+            new ReportTable("printed-subjects", "Estimates", new[] { "Family", "Estimate" },
+                new IReadOnlyList<string>[] { new[] { "Orchid ensemble", "2" } }, ""),
+            new ReportTable("printed-roles", "Protein counts", new[] { "Family", "Protein estimate" },
+                new IReadOnlyList<string>[] { new[] { "Elm ensemble", "2" } }, ""),
+        }) } };
+        WordReportWriter.Write(document, report);
+        ReportSupplementWorkbook.Write(ReportSupplementWorkbook.PathForReport(document), report, new[]
+        {
+            new ReportSupplementSheet("subject-numbers", ReportSectionIds.Results, "Numbers", numbers),
+            new ReportSupplementSheet("subject-runs", ReportSectionIds.Results, "Run values", runs),
+            new ReportSupplementSheet("subject-options", ReportSectionIds.Results, "Options", options),
+            new ReportSupplementSheet("subject-pointer", ReportSectionIds.Results, "Pointers", pointer),
+            new ReportSupplementSheet("subject-single", ReportSectionIds.Results, "Single-word family", single),
+            new ReportSupplementSheet("subject-roles", ReportSectionIds.Results, "Equal fields", roles),
+        });
+        int exit = ReportNumberTrace.Run(document, Path.Combine(root, "absent-subject-sidecars"), output);
+        var trace = ReportCsvTable.Build("subjects", "subjects", File.ReadAllText(output), "");
+        int Col(string name) => trace.Columns.ToList().IndexOf(name);
+        var familyRows = trace.Rows.Where(r => r[Col("context")].StartsWith("14 families", StringComparison.Ordinal)).ToArray();
+        Check("J49 count of families keeps its own C3 citation", familyRows[0][Col("cell")] == "C3");
+        Check("J49 fourteen proteins cites its own family C18 rather than count of families C3", familyRows[1][Col("cell")] == "C18");
+        Check("J49 two proteins cites the second family's C36 rather than the first family's C33", familyRows[3][Col("cell")] == "C36");
+        Check("J49 panel-decision count cites its specific C51 rather than the threshold-only count", trace.Rows.Any(r => r[Col("context")].StartsWith("5 families", StringComparison.Ordinal) && r[Col("cell")] == "C51"));
+        Check("J49 repeated run value cites the named run", trace.Rows.Any(r => r[Col("context")] == "run-b has 2 units." && r[Col("csv")].EndsWith("!Run values", StringComparison.Ordinal) && r[Col("cell")] == "B3"));
+        Check("J49 option name before a colon selects that option", trace.Rows.Any(r => r[Col("context")] == "Minimum points: 2." && r[Col("csv")].EndsWith("!Options", StringComparison.Ordinal) && r[Col("cell")] == "B3"));
+        Check("J49 cover version does not cite a protein estimate", trace.Rows.Where(r => r[Col("context")] == "FamilyQuant 2.0.0.0").All(r => (r[Col("status")] is "AMBIGUOUS" or "VERSION") && r[Col("csv")] == "" && r[Col("cell")] == ""));
+        Check("J49 unrelated equal cells without a subject are explicitly ambiguous", trace.Rows.Any(r => r[Col("context")] == "Unlabelled 14." && r[Col("status")] == "AMBIGUOUS" && r[Col("cell")] == ""));
+        Check("J49 table citations use the named Word row and its matching estimate column", trace.Rows.Any(r => r[Col("location")].Contains("table", StringComparison.Ordinal)
+            && r[Col("number")] == "2" && r[Col("csv")].Contains("!Estimates_", StringComparison.Ordinal) && r[Col("cell")] == "B2"));
+        var paired = trace.Rows.Where(r => r[Col("context")].StartsWith("Maple ensemble has", StringComparison.Ordinal)).ToArray();
+        Check("J49 two subjects in one clause use the closest preceding name", paired.Length == 2 && paired[0][Col("cell")] == "C33" && paired[1][Col("cell")] == "C36");
+        Check("J49 does not fall back when a named subject exists with a different value", trace.Rows.Any(r => r[Col("context")] == "Only setting: 37." && r[Col("status")] == "AMBIGUOUS" && r[Col("cell")] == ""));
+        var wrongAfter = trace.Rows.Where(r => r[Col("context")].StartsWith("Other setting is", StringComparison.Ordinal)).ToArray();
+        Check("J49 a preceding different subject cannot hide a mismatching later subject", wrongAfter.Length == 2 && wrongAfter[0][Col("cell")] == "B4" && wrongAfter[1][Col("status")] == "AMBIGUOUS");
+        Check("J49 a structural source-row ordinal is not a measured-value citation", trace.Rows.Any(r => r[Col("context")] == "Orphan measure: 17." && r[Col("status")] == "AMBIGUOUS"));
+        Check("J49 a known single-word family also binds its longer quantity label", trace.Rows.Any(r => r[Col("context")] == "Hydrolase: 9 proteins." && r[Col("cell")] == "C46"));
+        Check("J49 a number inside the subject name does not borrow another numeric cell", trace.Rows.Any(r => r[Col("context")] == "Hydrolase 2: 1 protein." && r[Col("number")] == "2" && r[Col("status")] == "AMBIGUOUS")
+            && trace.Rows.Any(r => r[Col("context")] == "Hydrolase 2: 1 protein." && r[Col("number")] == "1" && r[Col("cell")] == "C45"));
+        Check("J49 the printed column selects the estimate instead of an equal ID for the same subject", trace.Rows.Any(r => r[Col("context")] == "2"
+            && r[Col("csv")].EndsWith("!Equal fields", StringComparison.Ordinal) && r[Col("cell")] == "C2"));
+        Check("J49 a missing numeric value retains NOT FOUND and failure exit", exit == 1 && trace.Rows.Any(r => r[Col("number")] == "98765.4321" && r[Col("status")] == "NOT FOUND"));
+        byte[] invariant = File.ReadAllBytes(output);
+        var culture = CultureInfo.CurrentCulture;
+        try
+        {
+            CultureInfo.CurrentCulture = CultureInfo.GetCultureInfo("pt-BR");
+            ReportNumberTrace.Run(document, Path.Combine(root, "absent-subject-sidecars"), output);
+            Check("J49 subject and ambiguity decisions are byte-identical under pt-BR", invariant.SequenceEqual(File.ReadAllBytes(output)));
+        }
+        finally { CultureInfo.CurrentCulture = culture; }
+        WordReportWriter.Write(document, report with { Sections = new[] { report.Sections[0] with
+            { Blocks = report.Sections[0].Blocks.Where(b => b.Id != "unknown").ToArray() } } });
+        Check("J49 ambiguity alone retains the prior zero NOT FOUND exit convention", ReportNumberTrace.Run(document,
+            Path.Combine(root, "absent-subject-sidecars"), output) == 0 && File.ReadAllText(output).Contains("AMBIGUOUS", StringComparison.Ordinal));
+        string prior = Path.Combine(root, "prior-trace.csv"), changed = Path.Combine(root, "changed-trace.csv");
+        File.WriteAllText(prior, "location,number,status,csv,cell,context\nparagraph,14,MATCH,Numbers,C3,Cedar ensemble\n");
+        File.WriteAllText(changed, "location,number,status,csv,cell,context,subject\nparagraph,14,MATCH,Numbers,C18,Cedar ensemble,cedar ensemble\n");
+        var comparison = ReportNumberTraceComparison.Write(prior, changed);
+        Check("J49 comparison lists every changed citation with its prior and replacement cell", comparison.Tokens == 1 && comparison.ChangedCitations == 1
+            && File.ReadAllText(comparison.Changes).Contains("C3,MATCH,Numbers,C18", StringComparison.Ordinal));
+        Check("J49 comparison refuses to overwrite its input trace", Throws<InvalidOperationException>(() => ReportNumberTraceComparison.ValidatePaths(prior, prior)));
+        Check("J49 comparison refuses a derived-output collision with another native source", Throws<InvalidOperationException>(() =>
+            ReportNumberTraceComparison.ValidatePaths(prior, changed, new[] { Path.ChangeExtension(changed, ".changes.csv") })));
+        File.WriteAllText(changed, File.ReadAllText(changed).Replace("paragraph,14", "paragraph,15", StringComparison.Ordinal));
+        Check("J49 comparison rejects misaligned token identities", Throws<InvalidDataException>(() => ReportNumberTraceComparison.Write(prior, changed)));
     }
 
     private sealed class RowComparer : IEqualityComparer<IReadOnlyList<string>>

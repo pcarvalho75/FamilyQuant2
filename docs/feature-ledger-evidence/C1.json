@@ -5,328 +5,352 @@
   "runs": [
     {
       "id": "shell-declarations",
-      "command": "D:\\FamilyQuant-wt\\shell-j15-check\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --ledger-shell-compare D:/FamilyQuant-data/out-shell/N3/source D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare \u00222026-11-03 02:37:27 -0800\u0022 D:/FamilyQuant-data/reference-1.5.0.6/app",
-      "executedAt": "2026-11-03 02:37:27 -0800",
-      "commit": "9fe583514b1e3726e523edb37ca5c10c303cc6dd",
+      "command": "C:\\FamilyQuant-gate\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --ledger-shell-compare D:/FamilyQuant-data/out-shell/N3/source D:/FamilyQuant-data/out-refresh\\20261103-140604-FamilyQuant-gate\\shell-compare \u00222026-11-03 14:06:38 -0800\u0022 D:/FamilyQuant-data/reference-1.5.0.6/app",
+      "executedAt": "2026-11-03 14:06:38 -0800",
+      "commit": "3ab0bd7d5da0dc6900afda91c85ea5985fffa0ae",
       "artifacts": [
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\comparisons.log",
-          "sha256": "06C53B7CEA33941F602005A509E6ECC1D0399856CB1178E95298E423A989A68F"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\shell-compare\\comparisons.log",
+          "sha256": "83F10D77434F92C6E3090EFF04A779AA55A439F7665D39DEEF6E8967DB042622"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\comparisons.json",
-          "sha256": "A4686DA9C5EBE81431A3E058AE5FB5A30D8C3CE133E4674CFE1796F196726F02"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\shell-compare\\comparisons.json",
+          "sha256": "E991837C0388485718E94B9B9686E9D8806A5BDE8B59B0BCFAE428A82666903C"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\curation-runtime.json",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\shell-compare\\curation-runtime.json",
           "sha256": "4EF1BCE9EAFF5985013CD15A6B1CBFA29C34D7D42702007E522840A20879D128"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\composition-native\\en-US\\frozen-populated-FamilyUnique.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\shell-compare\\composition-native\\en-US\\frozen-populated-FamilyUnique.csv",
           "sha256": "12500FE7194134C33F8FE4E2C03A9E4263D64F93F5A718E4D17B0065446ADE2D"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\composition-native\\en-US\\current-populated-FamilyUnique.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\shell-compare\\composition-native\\en-US\\current-populated-FamilyUnique.csv",
           "sha256": "12500FE7194134C33F8FE4E2C03A9E4263D64F93F5A718E4D17B0065446ADE2D"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\composition-native\\en-US\\frozen-populated-SplitEqually.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\shell-compare\\composition-native\\en-US\\frozen-populated-SplitEqually.csv",
           "sha256": "8A0D01F97236F51ADA2B56897C172C165A5B9C9E9242B746EB4B814E54D700BE"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\composition-native\\en-US\\current-populated-SplitEqually.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\shell-compare\\composition-native\\en-US\\current-populated-SplitEqually.csv",
           "sha256": "8A0D01F97236F51ADA2B56897C172C165A5B9C9E9242B746EB4B814E54D700BE"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\composition-native\\en-US\\frozen-populated-CountInEveryFamily.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\shell-compare\\composition-native\\en-US\\frozen-populated-CountInEveryFamily.csv",
           "sha256": "AC5A0DD489533CDF687C6808D93E59DDCE4FB72AA57AB1A6FDA7B060AE4E5224"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\composition-native\\en-US\\current-populated-CountInEveryFamily.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\shell-compare\\composition-native\\en-US\\current-populated-CountInEveryFamily.csv",
           "sha256": "AC5A0DD489533CDF687C6808D93E59DDCE4FB72AA57AB1A6FDA7B060AE4E5224"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\composition-native\\en-US\\frozen-zero-denominator-FamilyUnique.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\shell-compare\\composition-native\\en-US\\frozen-zero-denominator-FamilyUnique.csv",
           "sha256": "6EFDE400710983694FC23DE446DFCCEBD26033B6ACE7F174356E93909161F34B"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\composition-native\\en-US\\current-zero-denominator-FamilyUnique.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\shell-compare\\composition-native\\en-US\\current-zero-denominator-FamilyUnique.csv",
           "sha256": "6EFDE400710983694FC23DE446DFCCEBD26033B6ACE7F174356E93909161F34B"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\composition-native\\en-US\\frozen-zero-denominator-SplitEqually.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\shell-compare\\composition-native\\en-US\\frozen-zero-denominator-SplitEqually.csv",
           "sha256": "064D06FFB41A86C79C70A13857CFDABA9AB12F7F2C48E5D3E3A2BC3079A337D1"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\composition-native\\en-US\\current-zero-denominator-SplitEqually.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\shell-compare\\composition-native\\en-US\\current-zero-denominator-SplitEqually.csv",
           "sha256": "064D06FFB41A86C79C70A13857CFDABA9AB12F7F2C48E5D3E3A2BC3079A337D1"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\composition-native\\en-US\\frozen-zero-denominator-CountInEveryFamily.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\shell-compare\\composition-native\\en-US\\frozen-zero-denominator-CountInEveryFamily.csv",
           "sha256": "212C11E79B586FEC795FA9FD8DE396F882B19FEB97E0DDD8E54925BF872F0F01"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\composition-native\\en-US\\current-zero-denominator-CountInEveryFamily.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\shell-compare\\composition-native\\en-US\\current-zero-denominator-CountInEveryFamily.csv",
           "sha256": "212C11E79B586FEC795FA9FD8DE396F882B19FEB97E0DDD8E54925BF872F0F01"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\composition-native\\en-US\\frozen-negative-denominator-FamilyUnique.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\shell-compare\\composition-native\\en-US\\frozen-negative-denominator-FamilyUnique.csv",
           "sha256": "6EFDE400710983694FC23DE446DFCCEBD26033B6ACE7F174356E93909161F34B"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\composition-native\\en-US\\current-negative-denominator-FamilyUnique.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\shell-compare\\composition-native\\en-US\\current-negative-denominator-FamilyUnique.csv",
           "sha256": "6EFDE400710983694FC23DE446DFCCEBD26033B6ACE7F174356E93909161F34B"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\composition-native\\en-US\\frozen-negative-denominator-SplitEqually.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\shell-compare\\composition-native\\en-US\\frozen-negative-denominator-SplitEqually.csv",
           "sha256": "064D06FFB41A86C79C70A13857CFDABA9AB12F7F2C48E5D3E3A2BC3079A337D1"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\composition-native\\en-US\\current-negative-denominator-SplitEqually.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\shell-compare\\composition-native\\en-US\\current-negative-denominator-SplitEqually.csv",
           "sha256": "064D06FFB41A86C79C70A13857CFDABA9AB12F7F2C48E5D3E3A2BC3079A337D1"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\composition-native\\en-US\\frozen-negative-denominator-CountInEveryFamily.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\shell-compare\\composition-native\\en-US\\frozen-negative-denominator-CountInEveryFamily.csv",
           "sha256": "212C11E79B586FEC795FA9FD8DE396F882B19FEB97E0DDD8E54925BF872F0F01"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\composition-native\\en-US\\current-negative-denominator-CountInEveryFamily.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\shell-compare\\composition-native\\en-US\\current-negative-denominator-CountInEveryFamily.csv",
           "sha256": "212C11E79B586FEC795FA9FD8DE396F882B19FEB97E0DDD8E54925BF872F0F01"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\composition-native\\en-US\\frozen-nonfinite-denominator-FamilyUnique.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\shell-compare\\composition-native\\en-US\\frozen-nonfinite-denominator-FamilyUnique.csv",
           "sha256": "6EFDE400710983694FC23DE446DFCCEBD26033B6ACE7F174356E93909161F34B"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\composition-native\\en-US\\current-nonfinite-denominator-FamilyUnique.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\shell-compare\\composition-native\\en-US\\current-nonfinite-denominator-FamilyUnique.csv",
           "sha256": "6EFDE400710983694FC23DE446DFCCEBD26033B6ACE7F174356E93909161F34B"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\composition-native\\en-US\\frozen-nonfinite-denominator-SplitEqually.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\shell-compare\\composition-native\\en-US\\frozen-nonfinite-denominator-SplitEqually.csv",
           "sha256": "064D06FFB41A86C79C70A13857CFDABA9AB12F7F2C48E5D3E3A2BC3079A337D1"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\composition-native\\en-US\\current-nonfinite-denominator-SplitEqually.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\shell-compare\\composition-native\\en-US\\current-nonfinite-denominator-SplitEqually.csv",
           "sha256": "064D06FFB41A86C79C70A13857CFDABA9AB12F7F2C48E5D3E3A2BC3079A337D1"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\composition-native\\en-US\\frozen-nonfinite-denominator-CountInEveryFamily.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\shell-compare\\composition-native\\en-US\\frozen-nonfinite-denominator-CountInEveryFamily.csv",
           "sha256": "212C11E79B586FEC795FA9FD8DE396F882B19FEB97E0DDD8E54925BF872F0F01"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\composition-native\\en-US\\current-nonfinite-denominator-CountInEveryFamily.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\shell-compare\\composition-native\\en-US\\current-nonfinite-denominator-CountInEveryFamily.csv",
           "sha256": "212C11E79B586FEC795FA9FD8DE396F882B19FEB97E0DDD8E54925BF872F0F01"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\composition-native\\en-US\\frozen-empty-FamilyUnique.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\shell-compare\\composition-native\\en-US\\frozen-empty-FamilyUnique.csv",
           "sha256": "C04670EEB4A24EDB8BA795E844EE4237DC06095F983D7B74C943E862400EE803"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\composition-native\\en-US\\current-empty-FamilyUnique.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\shell-compare\\composition-native\\en-US\\current-empty-FamilyUnique.csv",
           "sha256": "C04670EEB4A24EDB8BA795E844EE4237DC06095F983D7B74C943E862400EE803"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\composition-native\\en-US\\frozen-empty-SplitEqually.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\shell-compare\\composition-native\\en-US\\frozen-empty-SplitEqually.csv",
           "sha256": "008C6F16A12DA1AD623AEE87D3EC80A99C6C700ADE6F7273DFC868F646360CC0"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\composition-native\\en-US\\current-empty-SplitEqually.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\shell-compare\\composition-native\\en-US\\current-empty-SplitEqually.csv",
           "sha256": "008C6F16A12DA1AD623AEE87D3EC80A99C6C700ADE6F7273DFC868F646360CC0"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\composition-native\\en-US\\frozen-empty-CountInEveryFamily.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\shell-compare\\composition-native\\en-US\\frozen-empty-CountInEveryFamily.csv",
           "sha256": "529FAFC1DB3CB47D7560F8736316B0778873B81E7D907E400866334ABA5C2A4D"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\composition-native\\en-US\\current-empty-CountInEveryFamily.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\shell-compare\\composition-native\\en-US\\current-empty-CountInEveryFamily.csv",
           "sha256": "529FAFC1DB3CB47D7560F8736316B0778873B81E7D907E400866334ABA5C2A4D"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\composition-native\\pt-BR\\frozen-populated-FamilyUnique.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\shell-compare\\composition-native\\pt-BR\\frozen-populated-FamilyUnique.csv",
           "sha256": "12500FE7194134C33F8FE4E2C03A9E4263D64F93F5A718E4D17B0065446ADE2D"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\composition-native\\pt-BR\\current-populated-FamilyUnique.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\shell-compare\\composition-native\\pt-BR\\current-populated-FamilyUnique.csv",
           "sha256": "12500FE7194134C33F8FE4E2C03A9E4263D64F93F5A718E4D17B0065446ADE2D"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\composition-native\\pt-BR\\frozen-populated-SplitEqually.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\shell-compare\\composition-native\\pt-BR\\frozen-populated-SplitEqually.csv",
           "sha256": "8A0D01F97236F51ADA2B56897C172C165A5B9C9E9242B746EB4B814E54D700BE"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\composition-native\\pt-BR\\current-populated-SplitEqually.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\shell-compare\\composition-native\\pt-BR\\current-populated-SplitEqually.csv",
           "sha256": "8A0D01F97236F51ADA2B56897C172C165A5B9C9E9242B746EB4B814E54D700BE"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\composition-native\\pt-BR\\frozen-populated-CountInEveryFamily.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\shell-compare\\composition-native\\pt-BR\\frozen-populated-CountInEveryFamily.csv",
           "sha256": "AC5A0DD489533CDF687C6808D93E59DDCE4FB72AA57AB1A6FDA7B060AE4E5224"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\composition-native\\pt-BR\\current-populated-CountInEveryFamily.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\shell-compare\\composition-native\\pt-BR\\current-populated-CountInEveryFamily.csv",
           "sha256": "AC5A0DD489533CDF687C6808D93E59DDCE4FB72AA57AB1A6FDA7B060AE4E5224"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\composition-native\\pt-BR\\frozen-zero-denominator-FamilyUnique.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\shell-compare\\composition-native\\pt-BR\\frozen-zero-denominator-FamilyUnique.csv",
           "sha256": "6EFDE400710983694FC23DE446DFCCEBD26033B6ACE7F174356E93909161F34B"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\composition-native\\pt-BR\\current-zero-denominator-FamilyUnique.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\shell-compare\\composition-native\\pt-BR\\current-zero-denominator-FamilyUnique.csv",
           "sha256": "6EFDE400710983694FC23DE446DFCCEBD26033B6ACE7F174356E93909161F34B"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\composition-native\\pt-BR\\frozen-zero-denominator-SplitEqually.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\shell-compare\\composition-native\\pt-BR\\frozen-zero-denominator-SplitEqually.csv",
           "sha256": "064D06FFB41A86C79C70A13857CFDABA9AB12F7F2C48E5D3E3A2BC3079A337D1"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\composition-native\\pt-BR\\current-zero-denominator-SplitEqually.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\shell-compare\\composition-native\\pt-BR\\current-zero-denominator-SplitEqually.csv",
           "sha256": "064D06FFB41A86C79C70A13857CFDABA9AB12F7F2C48E5D3E3A2BC3079A337D1"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\composition-native\\pt-BR\\frozen-zero-denominator-CountInEveryFamily.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\shell-compare\\composition-native\\pt-BR\\frozen-zero-denominator-CountInEveryFamily.csv",
           "sha256": "212C11E79B586FEC795FA9FD8DE396F882B19FEB97E0DDD8E54925BF872F0F01"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\composition-native\\pt-BR\\current-zero-denominator-CountInEveryFamily.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\shell-compare\\composition-native\\pt-BR\\current-zero-denominator-CountInEveryFamily.csv",
           "sha256": "212C11E79B586FEC795FA9FD8DE396F882B19FEB97E0DDD8E54925BF872F0F01"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\composition-native\\pt-BR\\frozen-negative-denominator-FamilyUnique.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\shell-compare\\composition-native\\pt-BR\\frozen-negative-denominator-FamilyUnique.csv",
           "sha256": "6EFDE400710983694FC23DE446DFCCEBD26033B6ACE7F174356E93909161F34B"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\composition-native\\pt-BR\\current-negative-denominator-FamilyUnique.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\shell-compare\\composition-native\\pt-BR\\current-negative-denominator-FamilyUnique.csv",
           "sha256": "6EFDE400710983694FC23DE446DFCCEBD26033B6ACE7F174356E93909161F34B"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\composition-native\\pt-BR\\frozen-negative-denominator-SplitEqually.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\shell-compare\\composition-native\\pt-BR\\frozen-negative-denominator-SplitEqually.csv",
           "sha256": "064D06FFB41A86C79C70A13857CFDABA9AB12F7F2C48E5D3E3A2BC3079A337D1"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\composition-native\\pt-BR\\current-negative-denominator-SplitEqually.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\shell-compare\\composition-native\\pt-BR\\current-negative-denominator-SplitEqually.csv",
           "sha256": "064D06FFB41A86C79C70A13857CFDABA9AB12F7F2C48E5D3E3A2BC3079A337D1"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\composition-native\\pt-BR\\frozen-negative-denominator-CountInEveryFamily.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\shell-compare\\composition-native\\pt-BR\\frozen-negative-denominator-CountInEveryFamily.csv",
           "sha256": "212C11E79B586FEC795FA9FD8DE396F882B19FEB97E0DDD8E54925BF872F0F01"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\composition-native\\pt-BR\\current-negative-denominator-CountInEveryFamily.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\shell-compare\\composition-native\\pt-BR\\current-negative-denominator-CountInEveryFamily.csv",
           "sha256": "212C11E79B586FEC795FA9FD8DE396F882B19FEB97E0DDD8E54925BF872F0F01"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\composition-native\\pt-BR\\frozen-nonfinite-denominator-FamilyUnique.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\shell-compare\\composition-native\\pt-BR\\frozen-nonfinite-denominator-FamilyUnique.csv",
           "sha256": "6EFDE400710983694FC23DE446DFCCEBD26033B6ACE7F174356E93909161F34B"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\composition-native\\pt-BR\\current-nonfinite-denominator-FamilyUnique.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\shell-compare\\composition-native\\pt-BR\\current-nonfinite-denominator-FamilyUnique.csv",
           "sha256": "6EFDE400710983694FC23DE446DFCCEBD26033B6ACE7F174356E93909161F34B"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\composition-native\\pt-BR\\frozen-nonfinite-denominator-SplitEqually.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\shell-compare\\composition-native\\pt-BR\\frozen-nonfinite-denominator-SplitEqually.csv",
           "sha256": "064D06FFB41A86C79C70A13857CFDABA9AB12F7F2C48E5D3E3A2BC3079A337D1"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\composition-native\\pt-BR\\current-nonfinite-denominator-SplitEqually.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\shell-compare\\composition-native\\pt-BR\\current-nonfinite-denominator-SplitEqually.csv",
           "sha256": "064D06FFB41A86C79C70A13857CFDABA9AB12F7F2C48E5D3E3A2BC3079A337D1"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\composition-native\\pt-BR\\frozen-nonfinite-denominator-CountInEveryFamily.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\shell-compare\\composition-native\\pt-BR\\frozen-nonfinite-denominator-CountInEveryFamily.csv",
           "sha256": "212C11E79B586FEC795FA9FD8DE396F882B19FEB97E0DDD8E54925BF872F0F01"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\composition-native\\pt-BR\\current-nonfinite-denominator-CountInEveryFamily.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\shell-compare\\composition-native\\pt-BR\\current-nonfinite-denominator-CountInEveryFamily.csv",
           "sha256": "212C11E79B586FEC795FA9FD8DE396F882B19FEB97E0DDD8E54925BF872F0F01"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\composition-native\\pt-BR\\frozen-empty-FamilyUnique.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\shell-compare\\composition-native\\pt-BR\\frozen-empty-FamilyUnique.csv",
           "sha256": "C04670EEB4A24EDB8BA795E844EE4237DC06095F983D7B74C943E862400EE803"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\composition-native\\pt-BR\\current-empty-FamilyUnique.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\shell-compare\\composition-native\\pt-BR\\current-empty-FamilyUnique.csv",
           "sha256": "C04670EEB4A24EDB8BA795E844EE4237DC06095F983D7B74C943E862400EE803"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\composition-native\\pt-BR\\frozen-empty-SplitEqually.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\shell-compare\\composition-native\\pt-BR\\frozen-empty-SplitEqually.csv",
           "sha256": "008C6F16A12DA1AD623AEE87D3EC80A99C6C700ADE6F7273DFC868F646360CC0"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\composition-native\\pt-BR\\current-empty-SplitEqually.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\shell-compare\\composition-native\\pt-BR\\current-empty-SplitEqually.csv",
           "sha256": "008C6F16A12DA1AD623AEE87D3EC80A99C6C700ADE6F7273DFC868F646360CC0"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\composition-native\\pt-BR\\frozen-empty-CountInEveryFamily.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\shell-compare\\composition-native\\pt-BR\\frozen-empty-CountInEveryFamily.csv",
           "sha256": "529FAFC1DB3CB47D7560F8736316B0778873B81E7D907E400866334ABA5C2A4D"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\composition-native\\pt-BR\\current-empty-CountInEveryFamily.csv",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\shell-compare\\composition-native\\pt-BR\\current-empty-CountInEveryFamily.csv",
           "sha256": "529FAFC1DB3CB47D7560F8736316B0778873B81E7D907E400866334ABA5C2A4D"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\composition-native\\files.json",
-          "sha256": "82FBB975CB146528A13D290133B0884E2023A15EEA78AA3E9D59D15D7A2BB4E9"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\shell-compare\\composition-native\\files.json",
+          "sha256": "EA69254681F99052414FB2F919F94F180A73431604C00AB9A17ED1141F934181"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\composition-native\\inputs.json",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\shell-compare\\composition-native\\inputs.json",
           "sha256": "834E2BB59297BD99ECA91C23762B9FE56F44DCA2E49527BDBA7C12A742A27BFE"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\composition-native\\frozen-FamilyQuant.dll",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\shell-compare\\composition-native\\frozen-FamilyQuant.dll",
           "sha256": "D764488C923945285E03B338E5A91BF28106A35B11AB465D8E2B23D125F03FD8"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\composition-native\\current-CsvReport.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\shell-compare\\composition-native\\current-CsvReport.cs",
           "sha256": "15B7F2A6E9E75ACC99002C67DC265627136C3437BB6A6555DAAA813D87ADFB48"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\composition-native\\frozen-CsvReport.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\shell-compare\\composition-native\\frozen-CsvReport.cs",
           "sha256": "B4574252A1AEAE766366D13932117A31C2C7FFB3910F05B1CD6E852B08087617"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\executed\\Program.ShellLedgerReceipts.cs",
-          "sha256": "8826CE4F58630068138F923812C41067C40D6E3478C606AF35793FEDD8479A56"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\shell-compare\\tic-native\\outcomes.json",
+          "sha256": "15EB155E672E7BDA66FBA6B44FAF75549450744DB29CA7ABF4D19334D13296D4"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\executed\\Program.ShellLedgerComparison.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\shell-compare\\tic-native\\inputs.json",
+          "sha256": "BE93B28EC27EEE93F5DBBEA974BD49316ED1FBDE627E2D77C35E321EA98F5326"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\shell-compare\\tic-native\\frozen-FamilyQuant.dll",
+          "sha256": "D764488C923945285E03B338E5A91BF28106A35B11AB465D8E2B23D125F03FD8"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\shell-compare\\tic-native\\frozen-curation.cs",
+          "sha256": "76807FCBF54364407381AF7A3309E30B8E8121BD82EE14631AB17BD527FEBD9E"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\shell-compare\\tic-native\\current-curation.cs",
+          "sha256": "C610CFF6132D6A5215D998AB4ADDD888F253DF5707481866F9150C155B92849A"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\shell-compare\\executed\\Program.ShellLedgerReceipts.cs",
+          "sha256": "6024556FD1158950E9AF93EF134E68207F3D531B5AEC467A8C98CF23B663D863"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\shell-compare\\executed\\Program.ShellLedgerComparison.cs",
           "sha256": "869FC668090431A23D08E8ED109B95BC937D9A6B94DE63E11E86672852649FEB"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\executed\\Program.ShellCompositionProof.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\shell-compare\\executed\\Program.ShellCompositionProof.cs",
           "sha256": "834C1A46D7B63DFAD8EE0B7578570DF274759CDAAF4732E97106A027488A71C9"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\executed\\Program.Commands.LedgerDeclarations.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\shell-compare\\executed\\Program.ShellTicProof.cs",
+          "sha256": "F256F051DFFED360C3229D9B251F8433CD3A196E00AC11B8B532AAFFA7620923"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\shell-compare\\executed\\Program.Commands.LedgerDeclarations.cs",
           "sha256": "5F18F4DD7E56E601368051AAD44866736DE2FA60C17A5550F4A330C98DABB3D4"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\executed\\Program.CurationScreen.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\shell-compare\\executed\\Program.CurationScreen.cs",
           "sha256": "42C2CC3D48F2E59DC8E48D06915FE933C6A025F48972FDC3FB0458A0284FA2FF"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\executed\\LedgerDeclarationComparison.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\shell-compare\\executed\\LedgerDeclarationComparison.cs",
           "sha256": "78EC993565740269D572410A84584AF1D96488C1AE81F2455B1D9AA2D94BB4C3"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\executed\\LedgerMemberFactComparison.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\shell-compare\\executed\\LedgerMemberFactComparison.cs",
           "sha256": "1F3254D635B40D22576E9F40347DBEB503A5FF661EFC18E743EAC35B097FC14C"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\executed\\FeatureLedgerEvidence.Reporting.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\shell-compare\\executed\\FeatureLedgerEvidence.Reporting.cs",
           "sha256": "E9A4F3A2A671452283E1C28E155B81DEF97F9BAE907945607C1F16DD0078CC12"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\executed\\FamilyQuant.Tests.dll",
-          "sha256": "6407606040C45143C12C0432C670F6345DD42144E1608CE7BFE61C0AD1530979"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\shell-compare\\executed\\FamilyQuant.Tests.dll",
+          "sha256": "49C720B5ECD30B7BD86E4443AF12603A99D50EDB0B2DDB51AEA09C11775DCE64"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\executed\\FamilyQuant2.dll",
-          "sha256": "7F98785D9A2F40FEE7D03BE859F12613A13FD0CDF5BB0034B5444C4545BCEDBD"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\shell-compare\\executed\\FamilyQuant2.dll",
+          "sha256": "2451E1F61FE7AD28EA2398FDA096EC1E99D532BA9C159F63DB791F9B6B908B9D"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\executed\\FamilyQuant.Core.dll",
-          "sha256": "738A1059162D1AC024C965E3FFB31B9920AA635687AB66379DC2000A990C666F"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\shell-compare\\executed\\FamilyQuant.Core.dll",
+          "sha256": "597BF4DBBF66E40BB6FB46AE769CACCBFDC51BEE0874A5E043377A282237B68B"
         }
       ],
-      "workingDirectory": "D:\\FamilyQuant-wt\\shell-j15-check"
+      "workingDirectory": "C:\\FamilyQuant-gate"
     }
   ],
   "rows": [
@@ -397,12 +421,12 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "FamilyQuant.ClusterGenerationControl",
-          "sha256": "7E9CC19ACF173986F7E956AC938C20FF27468D216BD505C08EBDD3102468933D"
+          "sha256": "D63CCCEFCD9B83DB90B48560648CAED3F6EFD68B0D5FE6D8FA92BF9EE10D65BD"
         },
         {
           "path": "FamilyQuant/ClusterGenerationControl.Presentation.cs",
           "symbol": "FamilyQuant.ClusterGenerationControl",
-          "sha256": "163C3F79EC1A4885705484E029FB1814589A70F3A709C47680245E111BA4BB37"
+          "sha256": "14FA9C29DA6498D19837782810E8185CC6FB2996BCE3399180FBC3D75B04B591"
         },
         {
           "path": "FamilyQuant/CurationViewModel.cs",
@@ -421,7 +445,7 @@
           "kind": "test",
           "target": "CurationScreenTests",
           "assertion": "a native protein annotation edit marks the document and records one Undo step",
-          "artifact": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\shell-compare\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -780,14 +804,68 @@
       "implementation": [
         {
           "path": "FamilyQuant/CurationQuantitationViewModel.cs",
-          "symbol": "FamilyQuant.CurationQuantitationViewModel::private static FullXicPrepared PrepareFullXic ( IReadOnlyList \u003C QuantRow \u003E rows , IReadOnlyDictionary \u003C string , double \u003E ? perRunTic , FamilyClusterFile proteins )",
-          "sha256": "0ECF3950DE35D910A11F4BEBF8FF357C273AB0D1AFC90032C277EABF1A2C85B1"
+          "symbol": "PrepareFullXic; native five-argument production overload",
+          "sha256": "C610CFF6132D6A5215D998AB4ADDD888F253DF5707481866F9150C155B92849A"
+        },
+        {
+          "path": "FamilyQuant.Core/DeNovo/DeNovoReconciler.cs",
+          "symbol": "Native TIC refusal proof dependency",
+          "sha256": "E773452CA224E76B70017F184E502BD1ED9B6D1E9E40CE28DE31FF512226E105"
+        },
+        {
+          "path": "FamilyQuant.Core/FamilyEnvelopeQuant.cs",
+          "symbol": "Native TIC refusal proof dependency",
+          "sha256": "D422D55BAAED6A70CEF71C9F61DFDCDFAE2D276C47726E4BED6DC8F3D3C41CB5"
+        },
+        {
+          "path": "FamilyQuant.Core/Quantitation/CurationHomologyCache.cs",
+          "symbol": "Native TIC refusal proof dependency",
+          "sha256": "3B88D9592B364A8BB45EDE1C5F872BD11295609151A02CD256BF428A3B276A49"
+        },
+        {
+          "path": "FamilyQuant.Core/FamilyQuantFile.cs",
+          "symbol": "Native TIC refusal proof dependency",
+          "sha256": "C9BB89706722E647147AA5055D016485C2049BE81CB2B8AC8CB90928A02B9F45"
+        },
+        {
+          "path": "FamilyQuant.Core/Storage/QuantRow.cs",
+          "symbol": "Native TIC refusal proof dependency",
+          "sha256": "7C8F6076F895F8935C09E72A8B12C79AB42886CA35F9132E026F77CE3DF307F1"
+        },
+        {
+          "path": "FamilyQuant.Tests/Program.DeNovoLedgerWorkflow.cs",
+          "symbol": "Native TIC refusal proof dependency",
+          "sha256": "10CE2ADF8BCDDA54E5E42D43D9E0F29623CFE6583229B8E6EE2585F3D966D6E5"
+        },
+        {
+          "path": "FamilyQuant.Tests/Program.NativeFractions.cs",
+          "symbol": "Native TIC refusal proof dependency",
+          "sha256": "7655CB9CD300E0CD418DFE3A8A53FDC04D1D6A0853365964071C4A0E4014449C"
+        },
+        {
+          "path": "FamilyQuant.Tests/Program.ShellLedgerReceipts.cs",
+          "symbol": "Native TIC refusal proof dependency",
+          "sha256": "6024556FD1158950E9AF93EF134E68207F3D531B5AEC467A8C98CF23B663D863"
+        },
+        {
+          "path": "FamilyQuant.Tests/Program.ShellTicProof.cs",
+          "symbol": "Native TIC refusal proof dependency",
+          "sha256": "F256F051DFFED360C3229D9B251F8433CD3A196E00AC11B8B532AAFFA7620923"
         }
       ],
-      "proofs": [],
-      "note": "Declaration only; no reachability or handler-execution claim.",
-      "kindReceiptId": "shell-decl-code-fact",
-      "compared": "FamilyQuant/ClusterGenerationControl.xaml.cs:773 \u0022 is recorded twice with different values\u0022 -\u003E FamilyQuant/CurationQuantitationViewModel.cs: FamilyQuant.CurationQuantitationViewModel::private static FullXicPrepared PrepareFullXic ( IReadOnlyList \u003C QuantRow \u003E rows , IReadOnlyDictionary \u003C string , double \u003E ? perRunTic , FamilyClusterFile proteins ) = \u0022 is recorded twice with different values\u0022; complete member tokens SHA256=D7836C2679BDB50BB72B7403C4F624C3505BA8585526AEE730BF548D7F530B1D"
+      "proofs": [
+        {
+          "runId": "shell-declarations",
+          "kind": "test",
+          "target": "ProveShellTic",
+          "assertion": "native shell TIC fact FQ15-17EC0A3B6C6C: anchored frozen message fragment occurs in equal frozen/current refusals",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\shell-compare\\comparisons.log",
+          "inspectedBy": ""
+        }
+      ],
+      "note": "Executed frozen/current TIC refusal output, run count and denominator in both cultures on synthetic inputs and repeated private-cache calls; declaration equality is not claimed.",
+      "kindReceiptId": null,
+      "compared": "FamilyQuant/ClusterGenerationControl.xaml.cs:773 \u0022 is recorded twice with different values\u0022; frozen member FamilyQuant.ClusterGenerationControl::private static FullXicPrepared PrepareFullXic ( IReadOnlyList \u003C QuantRow \u003E rows , IReadOnlyDictionary \u003C string , double \u003E ? perRunTic , FamilyClusterFile proteins ); exact emitted message fragment in equal native results"
     },
     {
       "observationId": "FQ15-182A53B9B308",
@@ -888,14 +966,68 @@
       "implementation": [
         {
           "path": "FamilyQuant/CurationQuantitationViewModel.cs",
-          "symbol": "FamilyQuant.CurationQuantitationViewModel::private static FullXicPrepared PrepareFullXic ( IReadOnlyList \u003C QuantRow \u003E rows , IReadOnlyDictionary \u003C string , double \u003E ? perRunTic , FamilyClusterFile proteins )",
-          "sha256": "0ECF3950DE35D910A11F4BEBF8FF357C273AB0D1AFC90032C277EABF1A2C85B1"
+          "symbol": "PrepareFullXic; native five-argument production overload",
+          "sha256": "C610CFF6132D6A5215D998AB4ADDD888F253DF5707481866F9150C155B92849A"
+        },
+        {
+          "path": "FamilyQuant.Core/DeNovo/DeNovoReconciler.cs",
+          "symbol": "Native TIC refusal proof dependency",
+          "sha256": "E773452CA224E76B70017F184E502BD1ED9B6D1E9E40CE28DE31FF512226E105"
+        },
+        {
+          "path": "FamilyQuant.Core/FamilyEnvelopeQuant.cs",
+          "symbol": "Native TIC refusal proof dependency",
+          "sha256": "D422D55BAAED6A70CEF71C9F61DFDCDFAE2D276C47726E4BED6DC8F3D3C41CB5"
+        },
+        {
+          "path": "FamilyQuant.Core/Quantitation/CurationHomologyCache.cs",
+          "symbol": "Native TIC refusal proof dependency",
+          "sha256": "3B88D9592B364A8BB45EDE1C5F872BD11295609151A02CD256BF428A3B276A49"
+        },
+        {
+          "path": "FamilyQuant.Core/FamilyQuantFile.cs",
+          "symbol": "Native TIC refusal proof dependency",
+          "sha256": "C9BB89706722E647147AA5055D016485C2049BE81CB2B8AC8CB90928A02B9F45"
+        },
+        {
+          "path": "FamilyQuant.Core/Storage/QuantRow.cs",
+          "symbol": "Native TIC refusal proof dependency",
+          "sha256": "7C8F6076F895F8935C09E72A8B12C79AB42886CA35F9132E026F77CE3DF307F1"
+        },
+        {
+          "path": "FamilyQuant.Tests/Program.DeNovoLedgerWorkflow.cs",
+          "symbol": "Native TIC refusal proof dependency",
+          "sha256": "10CE2ADF8BCDDA54E5E42D43D9E0F29623CFE6583229B8E6EE2585F3D966D6E5"
+        },
+        {
+          "path": "FamilyQuant.Tests/Program.NativeFractions.cs",
+          "symbol": "Native TIC refusal proof dependency",
+          "sha256": "7655CB9CD300E0CD418DFE3A8A53FDC04D1D6A0853365964071C4A0E4014449C"
+        },
+        {
+          "path": "FamilyQuant.Tests/Program.ShellLedgerReceipts.cs",
+          "symbol": "Native TIC refusal proof dependency",
+          "sha256": "6024556FD1158950E9AF93EF134E68207F3D531B5AEC467A8C98CF23B663D863"
+        },
+        {
+          "path": "FamilyQuant.Tests/Program.ShellTicProof.cs",
+          "symbol": "Native TIC refusal proof dependency",
+          "sha256": "F256F051DFFED360C3229D9B251F8433CD3A196E00AC11B8B532AAFFA7620923"
         }
       ],
-      "proofs": [],
-      "note": "Declaration only; no reachability or handler-execution claim.",
-      "kindReceiptId": "shell-decl-code-fact",
-      "compared": "FamilyQuant/ClusterGenerationControl.xaml.cs:789 \u0022a recorded TIC is not a positive number\u0022 -\u003E FamilyQuant/CurationQuantitationViewModel.cs: FamilyQuant.CurationQuantitationViewModel::private static FullXicPrepared PrepareFullXic ( IReadOnlyList \u003C QuantRow \u003E rows , IReadOnlyDictionary \u003C string , double \u003E ? perRunTic , FamilyClusterFile proteins ) = \u0022a recorded TIC is not a positive number\u0022; complete member tokens SHA256=D7836C2679BDB50BB72B7403C4F624C3505BA8585526AEE730BF548D7F530B1D"
+      "proofs": [
+        {
+          "runId": "shell-declarations",
+          "kind": "test",
+          "target": "ProveShellTic",
+          "assertion": "native shell TIC fact FQ15-1C817C5A8896: anchored frozen message fragment occurs in equal frozen/current refusals",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\shell-compare\\comparisons.log",
+          "inspectedBy": ""
+        }
+      ],
+      "note": "Executed frozen/current TIC refusal output, run count and denominator in both cultures on synthetic inputs and repeated private-cache calls; declaration equality is not claimed.",
+      "kindReceiptId": null,
+      "compared": "FamilyQuant/ClusterGenerationControl.xaml.cs:789 \u0022a recorded TIC is not a positive number\u0022; frozen member FamilyQuant.ClusterGenerationControl::private static FullXicPrepared PrepareFullXic ( IReadOnlyList \u003C QuantRow \u003E rows , IReadOnlyDictionary \u003C string , double \u003E ? perRunTic , FamilyClusterFile proteins ); exact emitted message fragment in equal native results"
     },
     {
       "observationId": "FQ15-1CD0C5F7DAA3",
@@ -1093,7 +1225,7 @@
         {
           "path": "FamilyQuant/CurationQuantitationViewModel.cs",
           "symbol": "FamilyQuant.CurationQuantitationViewModel::private const string FullXicQuantity",
-          "sha256": "0ECF3950DE35D910A11F4BEBF8FF357C273AB0D1AFC90032C277EABF1A2C85B1"
+          "sha256": "C610CFF6132D6A5215D998AB4ADDD888F253DF5707481866F9150C155B92849A"
         }
       ],
       "proofs": [],
@@ -1436,14 +1568,68 @@
       "implementation": [
         {
           "path": "FamilyQuant/CurationQuantitationViewModel.cs",
-          "symbol": "FamilyQuant.CurationQuantitationViewModel::private static FullXicPrepared PrepareFullXic ( IReadOnlyList \u003C QuantRow \u003E rows , IReadOnlyDictionary \u003C string , double \u003E ? perRunTic , FamilyClusterFile proteins )",
-          "sha256": "0ECF3950DE35D910A11F4BEBF8FF357C273AB0D1AFC90032C277EABF1A2C85B1"
+          "symbol": "PrepareFullXic; native five-argument production overload",
+          "sha256": "C610CFF6132D6A5215D998AB4ADDD888F253DF5707481866F9150C155B92849A"
+        },
+        {
+          "path": "FamilyQuant.Core/DeNovo/DeNovoReconciler.cs",
+          "symbol": "Native TIC refusal proof dependency",
+          "sha256": "E773452CA224E76B70017F184E502BD1ED9B6D1E9E40CE28DE31FF512226E105"
+        },
+        {
+          "path": "FamilyQuant.Core/FamilyEnvelopeQuant.cs",
+          "symbol": "Native TIC refusal proof dependency",
+          "sha256": "D422D55BAAED6A70CEF71C9F61DFDCDFAE2D276C47726E4BED6DC8F3D3C41CB5"
+        },
+        {
+          "path": "FamilyQuant.Core/Quantitation/CurationHomologyCache.cs",
+          "symbol": "Native TIC refusal proof dependency",
+          "sha256": "3B88D9592B364A8BB45EDE1C5F872BD11295609151A02CD256BF428A3B276A49"
+        },
+        {
+          "path": "FamilyQuant.Core/FamilyQuantFile.cs",
+          "symbol": "Native TIC refusal proof dependency",
+          "sha256": "C9BB89706722E647147AA5055D016485C2049BE81CB2B8AC8CB90928A02B9F45"
+        },
+        {
+          "path": "FamilyQuant.Core/Storage/QuantRow.cs",
+          "symbol": "Native TIC refusal proof dependency",
+          "sha256": "7C8F6076F895F8935C09E72A8B12C79AB42886CA35F9132E026F77CE3DF307F1"
+        },
+        {
+          "path": "FamilyQuant.Tests/Program.DeNovoLedgerWorkflow.cs",
+          "symbol": "Native TIC refusal proof dependency",
+          "sha256": "10CE2ADF8BCDDA54E5E42D43D9E0F29623CFE6583229B8E6EE2585F3D966D6E5"
+        },
+        {
+          "path": "FamilyQuant.Tests/Program.NativeFractions.cs",
+          "symbol": "Native TIC refusal proof dependency",
+          "sha256": "7655CB9CD300E0CD418DFE3A8A53FDC04D1D6A0853365964071C4A0E4014449C"
+        },
+        {
+          "path": "FamilyQuant.Tests/Program.ShellLedgerReceipts.cs",
+          "symbol": "Native TIC refusal proof dependency",
+          "sha256": "6024556FD1158950E9AF93EF134E68207F3D531B5AEC467A8C98CF23B663D863"
+        },
+        {
+          "path": "FamilyQuant.Tests/Program.ShellTicProof.cs",
+          "symbol": "Native TIC refusal proof dependency",
+          "sha256": "F256F051DFFED360C3229D9B251F8433CD3A196E00AC11B8B532AAFFA7620923"
         }
       ],
-      "proofs": [],
-      "note": "Declaration only; no reachability or handler-execution claim.",
-      "kindReceiptId": "shell-decl-code-fact",
-      "compared": "FamilyQuant/ClusterGenerationControl.xaml.cs:787 \u0022 and \u0022 -\u003E FamilyQuant/CurationQuantitationViewModel.cs: FamilyQuant.CurationQuantitationViewModel::private static FullXicPrepared PrepareFullXic ( IReadOnlyList \u003C QuantRow \u003E rows , IReadOnlyDictionary \u003C string , double \u003E ? perRunTic , FamilyClusterFile proteins ) = \u0022 and \u0022; complete member tokens SHA256=D7836C2679BDB50BB72B7403C4F624C3505BA8585526AEE730BF548D7F530B1D"
+      "proofs": [
+        {
+          "runId": "shell-declarations",
+          "kind": "test",
+          "target": "ProveShellTic",
+          "assertion": "native shell TIC fact FQ15-3B44414FB4F4: anchored frozen message fragment occurs in equal frozen/current refusals",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\shell-compare\\comparisons.log",
+          "inspectedBy": ""
+        }
+      ],
+      "note": "Executed frozen/current TIC refusal output, run count and denominator in both cultures on synthetic inputs and repeated private-cache calls; declaration equality is not claimed.",
+      "kindReceiptId": null,
+      "compared": "FamilyQuant/ClusterGenerationControl.xaml.cs:787 \u0022 and \u0022; frozen member FamilyQuant.ClusterGenerationControl::private static FullXicPrepared PrepareFullXic ( IReadOnlyList \u003C QuantRow \u003E rows , IReadOnlyDictionary \u003C string , double \u003E ? perRunTic , FamilyClusterFile proteins ); exact emitted message fragment in equal native results"
     },
     {
       "observationId": "FQ15-3B5AD0429E7C",
@@ -1560,14 +1746,68 @@
       "implementation": [
         {
           "path": "FamilyQuant/CurationQuantitationViewModel.cs",
-          "symbol": "FamilyQuant.CurationQuantitationViewModel::private static FullXicPrepared PrepareFullXic ( IReadOnlyList \u003C QuantRow \u003E rows , IReadOnlyDictionary \u003C string , double \u003E ? perRunTic , FamilyClusterFile proteins )",
-          "sha256": "0ECF3950DE35D910A11F4BEBF8FF357C273AB0D1AFC90032C277EABF1A2C85B1"
+          "symbol": "PrepareFullXic; native five-argument production overload",
+          "sha256": "C610CFF6132D6A5215D998AB4ADDD888F253DF5707481866F9150C155B92849A"
+        },
+        {
+          "path": "FamilyQuant.Core/DeNovo/DeNovoReconciler.cs",
+          "symbol": "Native TIC refusal proof dependency",
+          "sha256": "E773452CA224E76B70017F184E502BD1ED9B6D1E9E40CE28DE31FF512226E105"
+        },
+        {
+          "path": "FamilyQuant.Core/FamilyEnvelopeQuant.cs",
+          "symbol": "Native TIC refusal proof dependency",
+          "sha256": "D422D55BAAED6A70CEF71C9F61DFDCDFAE2D276C47726E4BED6DC8F3D3C41CB5"
+        },
+        {
+          "path": "FamilyQuant.Core/Quantitation/CurationHomologyCache.cs",
+          "symbol": "Native TIC refusal proof dependency",
+          "sha256": "3B88D9592B364A8BB45EDE1C5F872BD11295609151A02CD256BF428A3B276A49"
+        },
+        {
+          "path": "FamilyQuant.Core/FamilyQuantFile.cs",
+          "symbol": "Native TIC refusal proof dependency",
+          "sha256": "C9BB89706722E647147AA5055D016485C2049BE81CB2B8AC8CB90928A02B9F45"
+        },
+        {
+          "path": "FamilyQuant.Core/Storage/QuantRow.cs",
+          "symbol": "Native TIC refusal proof dependency",
+          "sha256": "7C8F6076F895F8935C09E72A8B12C79AB42886CA35F9132E026F77CE3DF307F1"
+        },
+        {
+          "path": "FamilyQuant.Tests/Program.DeNovoLedgerWorkflow.cs",
+          "symbol": "Native TIC refusal proof dependency",
+          "sha256": "10CE2ADF8BCDDA54E5E42D43D9E0F29623CFE6583229B8E6EE2585F3D966D6E5"
+        },
+        {
+          "path": "FamilyQuant.Tests/Program.NativeFractions.cs",
+          "symbol": "Native TIC refusal proof dependency",
+          "sha256": "7655CB9CD300E0CD418DFE3A8A53FDC04D1D6A0853365964071C4A0E4014449C"
+        },
+        {
+          "path": "FamilyQuant.Tests/Program.ShellLedgerReceipts.cs",
+          "symbol": "Native TIC refusal proof dependency",
+          "sha256": "6024556FD1158950E9AF93EF134E68207F3D531B5AEC467A8C98CF23B663D863"
+        },
+        {
+          "path": "FamilyQuant.Tests/Program.ShellTicProof.cs",
+          "symbol": "Native TIC refusal proof dependency",
+          "sha256": "F256F051DFFED360C3229D9B251F8433CD3A196E00AC11B8B532AAFFA7620923"
         }
       ],
-      "proofs": [],
-      "note": "Declaration only; no reachability or handler-execution claim.",
-      "kindReceiptId": "shell-decl-code-fact",
-      "compared": "FamilyQuant/ClusterGenerationControl.xaml.cs:784 \u0022the project records no total ion current\u0022 -\u003E FamilyQuant/CurationQuantitationViewModel.cs: FamilyQuant.CurationQuantitationViewModel::private static FullXicPrepared PrepareFullXic ( IReadOnlyList \u003C QuantRow \u003E rows , IReadOnlyDictionary \u003C string , double \u003E ? perRunTic , FamilyClusterFile proteins ) = \u0022the project records no total ion current\u0022; complete member tokens SHA256=D7836C2679BDB50BB72B7403C4F624C3505BA8585526AEE730BF548D7F530B1D"
+      "proofs": [
+        {
+          "runId": "shell-declarations",
+          "kind": "test",
+          "target": "ProveShellTic",
+          "assertion": "native shell TIC fact FQ15-3F227ACEA320: anchored frozen message fragment occurs in equal frozen/current refusals",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\shell-compare\\comparisons.log",
+          "inspectedBy": ""
+        }
+      ],
+      "note": "Executed frozen/current TIC refusal output, run count and denominator in both cultures on synthetic inputs and repeated private-cache calls; declaration equality is not claimed.",
+      "kindReceiptId": null,
+      "compared": "FamilyQuant/ClusterGenerationControl.xaml.cs:784 \u0022the project records no total ion current\u0022; frozen member FamilyQuant.ClusterGenerationControl::private static FullXicPrepared PrepareFullXic ( IReadOnlyList \u003C QuantRow \u003E rows , IReadOnlyDictionary \u003C string , double \u003E ? perRunTic , FamilyClusterFile proteins ); exact emitted message fragment in equal native results"
     },
     {
       "observationId": "FQ15-3F6F786470BC",
@@ -1793,7 +2033,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.Presentation.cs",
           "symbol": "FamilyQuant.ClusterGenerationControl::private void UpdateLockSummary ( )",
-          "sha256": "163C3F79EC1A4885705484E029FB1814589A70F3A709C47680245E111BA4BB37"
+          "sha256": "14FA9C29DA6498D19837782810E8185CC6FB2996BCE3399180FBC3D75B04B591"
         }
       ],
       "proofs": [],
@@ -2141,7 +2381,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.Presentation.cs",
           "symbol": "FamilyQuant.ClusterGenerationControl::private void UpdateLockSummary ( )",
-          "sha256": "163C3F79EC1A4885705484E029FB1814589A70F3A709C47680245E111BA4BB37"
+          "sha256": "14FA9C29DA6498D19837782810E8185CC6FB2996BCE3399180FBC3D75B04B591"
         }
       ],
       "proofs": [],
@@ -2171,7 +2411,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.Presentation.cs",
           "symbol": "FamilyQuant.ClusterGenerationControl::private void ApplyModeAvailability ( ComboBoxItem item , NormalizationMode mode , bool available , string ? unavailableReason = null )",
-          "sha256": "163C3F79EC1A4885705484E029FB1814589A70F3A709C47680245E111BA4BB37"
+          "sha256": "14FA9C29DA6498D19837782810E8185CC6FB2996BCE3399180FBC3D75B04B591"
         }
       ],
       "proofs": [],
@@ -2390,12 +2630,12 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "FamilyQuant.ClusterGenerationControl",
-          "sha256": "7E9CC19ACF173986F7E956AC938C20FF27468D216BD505C08EBDD3102468933D"
+          "sha256": "D63CCCEFCD9B83DB90B48560648CAED3F6EFD68B0D5FE6D8FA92BF9EE10D65BD"
         },
         {
           "path": "FamilyQuant/ClusterGenerationControl.Presentation.cs",
           "symbol": "FamilyQuant.ClusterGenerationControl",
-          "sha256": "163C3F79EC1A4885705484E029FB1814589A70F3A709C47680245E111BA4BB37"
+          "sha256": "14FA9C29DA6498D19837782810E8185CC6FB2996BCE3399180FBC3D75B04B591"
         },
         {
           "path": "FamilyQuant/CurationViewModel.cs",
@@ -2414,7 +2654,7 @@
           "kind": "test",
           "target": "CurationScreenTests",
           "assertion": "curation shows accession in Locus while retaining the complete protein identifier",
-          "artifact": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\shell-compare\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -2727,14 +2967,68 @@
       "implementation": [
         {
           "path": "FamilyQuant/CurationQuantitationViewModel.cs",
-          "symbol": "FamilyQuant.CurationQuantitationViewModel::private static FullXicPrepared PrepareFullXic ( IReadOnlyList \u003C QuantRow \u003E rows , IReadOnlyDictionary \u003C string , double \u003E ? perRunTic , FamilyClusterFile proteins )",
-          "sha256": "0ECF3950DE35D910A11F4BEBF8FF357C273AB0D1AFC90032C277EABF1A2C85B1"
+          "symbol": "PrepareFullXic; native five-argument production overload",
+          "sha256": "C610CFF6132D6A5215D998AB4ADDD888F253DF5707481866F9150C155B92849A"
+        },
+        {
+          "path": "FamilyQuant.Core/DeNovo/DeNovoReconciler.cs",
+          "symbol": "Native TIC refusal proof dependency",
+          "sha256": "E773452CA224E76B70017F184E502BD1ED9B6D1E9E40CE28DE31FF512226E105"
+        },
+        {
+          "path": "FamilyQuant.Core/FamilyEnvelopeQuant.cs",
+          "symbol": "Native TIC refusal proof dependency",
+          "sha256": "D422D55BAAED6A70CEF71C9F61DFDCDFAE2D276C47726E4BED6DC8F3D3C41CB5"
+        },
+        {
+          "path": "FamilyQuant.Core/Quantitation/CurationHomologyCache.cs",
+          "symbol": "Native TIC refusal proof dependency",
+          "sha256": "3B88D9592B364A8BB45EDE1C5F872BD11295609151A02CD256BF428A3B276A49"
+        },
+        {
+          "path": "FamilyQuant.Core/FamilyQuantFile.cs",
+          "symbol": "Native TIC refusal proof dependency",
+          "sha256": "C9BB89706722E647147AA5055D016485C2049BE81CB2B8AC8CB90928A02B9F45"
+        },
+        {
+          "path": "FamilyQuant.Core/Storage/QuantRow.cs",
+          "symbol": "Native TIC refusal proof dependency",
+          "sha256": "7C8F6076F895F8935C09E72A8B12C79AB42886CA35F9132E026F77CE3DF307F1"
+        },
+        {
+          "path": "FamilyQuant.Tests/Program.DeNovoLedgerWorkflow.cs",
+          "symbol": "Native TIC refusal proof dependency",
+          "sha256": "10CE2ADF8BCDDA54E5E42D43D9E0F29623CFE6583229B8E6EE2585F3D966D6E5"
+        },
+        {
+          "path": "FamilyQuant.Tests/Program.NativeFractions.cs",
+          "symbol": "Native TIC refusal proof dependency",
+          "sha256": "7655CB9CD300E0CD418DFE3A8A53FDC04D1D6A0853365964071C4A0E4014449C"
+        },
+        {
+          "path": "FamilyQuant.Tests/Program.ShellLedgerReceipts.cs",
+          "symbol": "Native TIC refusal proof dependency",
+          "sha256": "6024556FD1158950E9AF93EF134E68207F3D531B5AEC467A8C98CF23B663D863"
+        },
+        {
+          "path": "FamilyQuant.Tests/Program.ShellTicProof.cs",
+          "symbol": "Native TIC refusal proof dependency",
+          "sha256": "F256F051DFFED360C3229D9B251F8433CD3A196E00AC11B8B532AAFFA7620923"
         }
       ],
-      "proofs": [],
-      "note": "Declaration only; no reachability or handler-execution claim.",
-      "kindReceiptId": "shell-decl-code-fact",
-      "compared": "FamilyQuant/ClusterGenerationControl.xaml.cs:773 \u0022the TIC of run \u0022 -\u003E FamilyQuant/CurationQuantitationViewModel.cs: FamilyQuant.CurationQuantitationViewModel::private static FullXicPrepared PrepareFullXic ( IReadOnlyList \u003C QuantRow \u003E rows , IReadOnlyDictionary \u003C string , double \u003E ? perRunTic , FamilyClusterFile proteins ) = \u0022the TIC of run \u0022; complete member tokens SHA256=D7836C2679BDB50BB72B7403C4F624C3505BA8585526AEE730BF548D7F530B1D"
+      "proofs": [
+        {
+          "runId": "shell-declarations",
+          "kind": "test",
+          "target": "ProveShellTic",
+          "assertion": "native shell TIC fact FQ15-83E85F7C2532: anchored frozen message fragment occurs in equal frozen/current refusals",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\shell-compare\\comparisons.log",
+          "inspectedBy": ""
+        }
+      ],
+      "note": "Executed frozen/current TIC refusal output, run count and denominator in both cultures on synthetic inputs and repeated private-cache calls; declaration equality is not claimed.",
+      "kindReceiptId": null,
+      "compared": "FamilyQuant/ClusterGenerationControl.xaml.cs:773 \u0022the TIC of run \u0022; frozen member FamilyQuant.ClusterGenerationControl::private static FullXicPrepared PrepareFullXic ( IReadOnlyList \u003C QuantRow \u003E rows , IReadOnlyDictionary \u003C string , double \u003E ? perRunTic , FamilyClusterFile proteins ); exact emitted message fragment in equal native results"
     },
     {
       "observationId": "FQ15-84885D84CD9D",
@@ -2814,7 +3108,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.Presentation.cs",
           "symbol": "FamilyQuant.ClusterGenerationControl::private void UpdateLockSummary ( )",
-          "sha256": "163C3F79EC1A4885705484E029FB1814589A70F3A709C47680245E111BA4BB37"
+          "sha256": "14FA9C29DA6498D19837782810E8185CC6FB2996BCE3399180FBC3D75B04B591"
         }
       ],
       "proofs": [],
@@ -3038,7 +3332,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "FamilyQuant.ClusterGenerationControl::public void ShowHelp ( )",
-          "sha256": "7E9CC19ACF173986F7E956AC938C20FF27468D216BD505C08EBDD3102468933D"
+          "sha256": "D63CCCEFCD9B83DB90B48560648CAED3F6EFD68B0D5FE6D8FA92BF9EE10D65BD"
         }
       ],
       "proofs": [],
@@ -3177,12 +3471,12 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "FamilyQuant.ClusterGenerationControl",
-          "sha256": "7E9CC19ACF173986F7E956AC938C20FF27468D216BD505C08EBDD3102468933D"
+          "sha256": "D63CCCEFCD9B83DB90B48560648CAED3F6EFD68B0D5FE6D8FA92BF9EE10D65BD"
         },
         {
           "path": "FamilyQuant/ClusterGenerationControl.Presentation.cs",
           "symbol": "FamilyQuant.ClusterGenerationControl",
-          "sha256": "163C3F79EC1A4885705484E029FB1814589A70F3A709C47680245E111BA4BB37"
+          "sha256": "14FA9C29DA6498D19837782810E8185CC6FB2996BCE3399180FBC3D75B04B591"
         },
         {
           "path": "FamilyQuant/CurationViewModel.cs",
@@ -3201,7 +3495,7 @@
           "kind": "test",
           "target": "CurationScreenTests",
           "assertion": "a native protein annotation edit marks the document and records one Undo step",
-          "artifact": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\shell-compare\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -3317,7 +3611,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.Presentation.cs",
           "symbol": "FamilyQuant.ClusterGenerationControl::private void UpdateLockSummary ( )",
-          "sha256": "163C3F79EC1A4885705484E029FB1814589A70F3A709C47680245E111BA4BB37"
+          "sha256": "14FA9C29DA6498D19837782810E8185CC6FB2996BCE3399180FBC3D75B04B591"
         }
       ],
       "proofs": [],
@@ -3338,14 +3632,68 @@
       "implementation": [
         {
           "path": "FamilyQuant/CurationQuantitationViewModel.cs",
-          "symbol": "FamilyQuant.CurationQuantitationViewModel::private static FullXicPrepared PrepareFullXic ( IReadOnlyList \u003C QuantRow \u003E rows , IReadOnlyDictionary \u003C string , double \u003E ? perRunTic , FamilyClusterFile proteins )",
-          "sha256": "0ECF3950DE35D910A11F4BEBF8FF357C273AB0D1AFC90032C277EABF1A2C85B1"
+          "symbol": "PrepareFullXic; native five-argument production overload",
+          "sha256": "C610CFF6132D6A5215D998AB4ADDD888F253DF5707481866F9150C155B92849A"
+        },
+        {
+          "path": "FamilyQuant.Core/DeNovo/DeNovoReconciler.cs",
+          "symbol": "Native TIC refusal proof dependency",
+          "sha256": "E773452CA224E76B70017F184E502BD1ED9B6D1E9E40CE28DE31FF512226E105"
+        },
+        {
+          "path": "FamilyQuant.Core/FamilyEnvelopeQuant.cs",
+          "symbol": "Native TIC refusal proof dependency",
+          "sha256": "D422D55BAAED6A70CEF71C9F61DFDCDFAE2D276C47726E4BED6DC8F3D3C41CB5"
+        },
+        {
+          "path": "FamilyQuant.Core/Quantitation/CurationHomologyCache.cs",
+          "symbol": "Native TIC refusal proof dependency",
+          "sha256": "3B88D9592B364A8BB45EDE1C5F872BD11295609151A02CD256BF428A3B276A49"
+        },
+        {
+          "path": "FamilyQuant.Core/FamilyQuantFile.cs",
+          "symbol": "Native TIC refusal proof dependency",
+          "sha256": "C9BB89706722E647147AA5055D016485C2049BE81CB2B8AC8CB90928A02B9F45"
+        },
+        {
+          "path": "FamilyQuant.Core/Storage/QuantRow.cs",
+          "symbol": "Native TIC refusal proof dependency",
+          "sha256": "7C8F6076F895F8935C09E72A8B12C79AB42886CA35F9132E026F77CE3DF307F1"
+        },
+        {
+          "path": "FamilyQuant.Tests/Program.DeNovoLedgerWorkflow.cs",
+          "symbol": "Native TIC refusal proof dependency",
+          "sha256": "10CE2ADF8BCDDA54E5E42D43D9E0F29623CFE6583229B8E6EE2585F3D966D6E5"
+        },
+        {
+          "path": "FamilyQuant.Tests/Program.NativeFractions.cs",
+          "symbol": "Native TIC refusal proof dependency",
+          "sha256": "7655CB9CD300E0CD418DFE3A8A53FDC04D1D6A0853365964071C4A0E4014449C"
+        },
+        {
+          "path": "FamilyQuant.Tests/Program.ShellLedgerReceipts.cs",
+          "symbol": "Native TIC refusal proof dependency",
+          "sha256": "6024556FD1158950E9AF93EF134E68207F3D531B5AEC467A8C98CF23B663D863"
+        },
+        {
+          "path": "FamilyQuant.Tests/Program.ShellTicProof.cs",
+          "symbol": "Native TIC refusal proof dependency",
+          "sha256": "F256F051DFFED360C3229D9B251F8433CD3A196E00AC11B8B532AAFFA7620923"
         }
       ],
-      "proofs": [],
-      "note": "Declaration only; no reachability or handler-execution claim.",
-      "kindReceiptId": "shell-decl-code-fact",
-      "compared": "FamilyQuant/ClusterGenerationControl.xaml.cs:786 \u0022no positive TIC is recorded for run(s) \u0022 -\u003E FamilyQuant/CurationQuantitationViewModel.cs: FamilyQuant.CurationQuantitationViewModel::private static FullXicPrepared PrepareFullXic ( IReadOnlyList \u003C QuantRow \u003E rows , IReadOnlyDictionary \u003C string , double \u003E ? perRunTic , FamilyClusterFile proteins ) = \u0022no positive TIC is recorded for run(s) \u0022; complete member tokens SHA256=D7836C2679BDB50BB72B7403C4F624C3505BA8585526AEE730BF548D7F530B1D"
+      "proofs": [
+        {
+          "runId": "shell-declarations",
+          "kind": "test",
+          "target": "ProveShellTic",
+          "assertion": "native shell TIC fact FQ15-A04A4E4C4066: anchored frozen message fragment occurs in equal frozen/current refusals",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\shell-compare\\comparisons.log",
+          "inspectedBy": ""
+        }
+      ],
+      "note": "Executed frozen/current TIC refusal output, run count and denominator in both cultures on synthetic inputs and repeated private-cache calls; declaration equality is not claimed.",
+      "kindReceiptId": null,
+      "compared": "FamilyQuant/ClusterGenerationControl.xaml.cs:786 \u0022no positive TIC is recorded for run(s) \u0022; frozen member FamilyQuant.ClusterGenerationControl::private static FullXicPrepared PrepareFullXic ( IReadOnlyList \u003C QuantRow \u003E rows , IReadOnlyDictionary \u003C string , double \u003E ? perRunTic , FamilyClusterFile proteins ); exact emitted message fragment in equal native results"
     },
     {
       "observationId": "FQ15-A0B0088B10BF",
@@ -3870,12 +4218,12 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "FamilyQuant.ClusterGenerationControl",
-          "sha256": "7E9CC19ACF173986F7E956AC938C20FF27468D216BD505C08EBDD3102468933D"
+          "sha256": "D63CCCEFCD9B83DB90B48560648CAED3F6EFD68B0D5FE6D8FA92BF9EE10D65BD"
         },
         {
           "path": "FamilyQuant/ClusterGenerationControl.Presentation.cs",
           "symbol": "FamilyQuant.ClusterGenerationControl",
-          "sha256": "163C3F79EC1A4885705484E029FB1814589A70F3A709C47680245E111BA4BB37"
+          "sha256": "14FA9C29DA6498D19837782810E8185CC6FB2996BCE3399180FBC3D75B04B591"
         },
         {
           "path": "FamilyQuant/CurationViewModel.cs",
@@ -3894,7 +4242,7 @@
           "kind": "test",
           "target": "CurationScreenTests",
           "assertion": "Undo restores the edited protein annotation and emits one more document change",
-          "artifact": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\shell-compare\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -3981,12 +4329,12 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "FamilyQuant.ClusterGenerationControl",
-          "sha256": "7E9CC19ACF173986F7E956AC938C20FF27468D216BD505C08EBDD3102468933D"
+          "sha256": "D63CCCEFCD9B83DB90B48560648CAED3F6EFD68B0D5FE6D8FA92BF9EE10D65BD"
         },
         {
           "path": "FamilyQuant/ClusterGenerationControl.Presentation.cs",
           "symbol": "FamilyQuant.ClusterGenerationControl",
-          "sha256": "163C3F79EC1A4885705484E029FB1814589A70F3A709C47680245E111BA4BB37"
+          "sha256": "14FA9C29DA6498D19837782810E8185CC6FB2996BCE3399180FBC3D75B04B591"
         },
         {
           "path": "FamilyQuant/CurationViewModel.cs",
@@ -4005,7 +4353,7 @@
           "kind": "test",
           "target": "CurationScreenTests",
           "assertion": "curation hides search IDs and decoys by default while keeping all document rows",
-          "artifact": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\shell-compare\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -4142,12 +4490,12 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "FamilyQuant.ClusterGenerationControl",
-          "sha256": "7E9CC19ACF173986F7E956AC938C20FF27468D216BD505C08EBDD3102468933D"
+          "sha256": "D63CCCEFCD9B83DB90B48560648CAED3F6EFD68B0D5FE6D8FA92BF9EE10D65BD"
         },
         {
           "path": "FamilyQuant/ClusterGenerationControl.Presentation.cs",
           "symbol": "FamilyQuant.ClusterGenerationControl",
-          "sha256": "163C3F79EC1A4885705484E029FB1814589A70F3A709C47680245E111BA4BB37"
+          "sha256": "14FA9C29DA6498D19837782810E8185CC6FB2996BCE3399180FBC3D75B04B591"
         },
         {
           "path": "FamilyQuant/CurationViewModel.cs",
@@ -4166,7 +4514,7 @@
           "kind": "test",
           "target": "CurationScreenTests",
           "assertion": "curation hides search IDs and decoys by default while keeping all document rows",
-          "artifact": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\shell-compare\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -4289,14 +4637,68 @@
       "implementation": [
         {
           "path": "FamilyQuant/CurationQuantitationViewModel.cs",
-          "symbol": "FamilyQuant.CurationQuantitationViewModel::private static FullXicPrepared PrepareFullXic ( IReadOnlyList \u003C QuantRow \u003E rows , IReadOnlyDictionary \u003C string , double \u003E ? perRunTic , FamilyClusterFile proteins )",
-          "sha256": "0ECF3950DE35D910A11F4BEBF8FF357C273AB0D1AFC90032C277EABF1A2C85B1"
+          "symbol": "PrepareFullXic; native five-argument production overload",
+          "sha256": "C610CFF6132D6A5215D998AB4ADDD888F253DF5707481866F9150C155B92849A"
+        },
+        {
+          "path": "FamilyQuant.Core/DeNovo/DeNovoReconciler.cs",
+          "symbol": "Native TIC refusal proof dependency",
+          "sha256": "E773452CA224E76B70017F184E502BD1ED9B6D1E9E40CE28DE31FF512226E105"
+        },
+        {
+          "path": "FamilyQuant.Core/FamilyEnvelopeQuant.cs",
+          "symbol": "Native TIC refusal proof dependency",
+          "sha256": "D422D55BAAED6A70CEF71C9F61DFDCDFAE2D276C47726E4BED6DC8F3D3C41CB5"
+        },
+        {
+          "path": "FamilyQuant.Core/Quantitation/CurationHomologyCache.cs",
+          "symbol": "Native TIC refusal proof dependency",
+          "sha256": "3B88D9592B364A8BB45EDE1C5F872BD11295609151A02CD256BF428A3B276A49"
+        },
+        {
+          "path": "FamilyQuant.Core/FamilyQuantFile.cs",
+          "symbol": "Native TIC refusal proof dependency",
+          "sha256": "C9BB89706722E647147AA5055D016485C2049BE81CB2B8AC8CB90928A02B9F45"
+        },
+        {
+          "path": "FamilyQuant.Core/Storage/QuantRow.cs",
+          "symbol": "Native TIC refusal proof dependency",
+          "sha256": "7C8F6076F895F8935C09E72A8B12C79AB42886CA35F9132E026F77CE3DF307F1"
+        },
+        {
+          "path": "FamilyQuant.Tests/Program.DeNovoLedgerWorkflow.cs",
+          "symbol": "Native TIC refusal proof dependency",
+          "sha256": "10CE2ADF8BCDDA54E5E42D43D9E0F29623CFE6583229B8E6EE2585F3D966D6E5"
+        },
+        {
+          "path": "FamilyQuant.Tests/Program.NativeFractions.cs",
+          "symbol": "Native TIC refusal proof dependency",
+          "sha256": "7655CB9CD300E0CD418DFE3A8A53FDC04D1D6A0853365964071C4A0E4014449C"
+        },
+        {
+          "path": "FamilyQuant.Tests/Program.ShellLedgerReceipts.cs",
+          "symbol": "Native TIC refusal proof dependency",
+          "sha256": "6024556FD1158950E9AF93EF134E68207F3D531B5AEC467A8C98CF23B663D863"
+        },
+        {
+          "path": "FamilyQuant.Tests/Program.ShellTicProof.cs",
+          "symbol": "Native TIC refusal proof dependency",
+          "sha256": "F256F051DFFED360C3229D9B251F8433CD3A196E00AC11B8B532AAFFA7620923"
         }
       ],
-      "proofs": [],
-      "note": "Declaration only; no reachability or handler-execution claim.",
-      "kindReceiptId": "shell-decl-code-fact",
-      "compared": "FamilyQuant/ClusterGenerationControl.xaml.cs:786 \u0022, \u0022 -\u003E FamilyQuant/CurationQuantitationViewModel.cs: FamilyQuant.CurationQuantitationViewModel::private static FullXicPrepared PrepareFullXic ( IReadOnlyList \u003C QuantRow \u003E rows , IReadOnlyDictionary \u003C string , double \u003E ? perRunTic , FamilyClusterFile proteins ) = \u0022, \u0022; complete member tokens SHA256=D7836C2679BDB50BB72B7403C4F624C3505BA8585526AEE730BF548D7F530B1D"
+      "proofs": [
+        {
+          "runId": "shell-declarations",
+          "kind": "test",
+          "target": "ProveShellTic",
+          "assertion": "native shell TIC fact FQ15-CC4116F91EF3: anchored frozen message fragment occurs in equal frozen/current refusals",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\shell-compare\\comparisons.log",
+          "inspectedBy": ""
+        }
+      ],
+      "note": "Executed frozen/current TIC refusal output, run count and denominator in both cultures on synthetic inputs and repeated private-cache calls; declaration equality is not claimed.",
+      "kindReceiptId": null,
+      "compared": "FamilyQuant/ClusterGenerationControl.xaml.cs:786 \u0022, \u0022; frozen member FamilyQuant.ClusterGenerationControl::private static FullXicPrepared PrepareFullXic ( IReadOnlyList \u003C QuantRow \u003E rows , IReadOnlyDictionary \u003C string , double \u003E ? perRunTic , FamilyClusterFile proteins ); exact emitted message fragment in equal native results"
     },
     {
       "observationId": "FQ15-CC946B0EA350",
@@ -4609,12 +5011,12 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "FamilyQuant.ClusterGenerationControl",
-          "sha256": "7E9CC19ACF173986F7E956AC938C20FF27468D216BD505C08EBDD3102468933D"
+          "sha256": "D63CCCEFCD9B83DB90B48560648CAED3F6EFD68B0D5FE6D8FA92BF9EE10D65BD"
         },
         {
           "path": "FamilyQuant/ClusterGenerationControl.Presentation.cs",
           "symbol": "FamilyQuant.ClusterGenerationControl",
-          "sha256": "163C3F79EC1A4885705484E029FB1814589A70F3A709C47680245E111BA4BB37"
+          "sha256": "14FA9C29DA6498D19837782810E8185CC6FB2996BCE3399180FBC3D75B04B591"
         },
         {
           "path": "FamilyQuant/CurationViewModel.cs",
@@ -4633,7 +5035,7 @@
           "kind": "test",
           "target": "CurationScreenTests",
           "assertion": "curation always shows its table without Controls or Data Browser tabs",
-          "artifact": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\shell-compare\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -4700,12 +5102,12 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "FamilyQuant.ClusterGenerationControl",
-          "sha256": "7E9CC19ACF173986F7E956AC938C20FF27468D216BD505C08EBDD3102468933D"
+          "sha256": "D63CCCEFCD9B83DB90B48560648CAED3F6EFD68B0D5FE6D8FA92BF9EE10D65BD"
         },
         {
           "path": "FamilyQuant/ClusterGenerationControl.Presentation.cs",
           "symbol": "FamilyQuant.ClusterGenerationControl",
-          "sha256": "163C3F79EC1A4885705484E029FB1814589A70F3A709C47680245E111BA4BB37"
+          "sha256": "14FA9C29DA6498D19837782810E8185CC6FB2996BCE3399180FBC3D75B04B591"
         },
         {
           "path": "FamilyQuant/CurationViewModel.cs",
@@ -4724,7 +5126,7 @@
           "kind": "test",
           "target": "CurationScreenTests",
           "assertion": "curation shows accession in Locus while retaining the complete protein identifier",
-          "artifact": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\shell-compare\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -4783,14 +5185,68 @@
       "implementation": [
         {
           "path": "FamilyQuant/CurationQuantitationViewModel.cs",
-          "symbol": "FamilyQuant.CurationQuantitationViewModel::private static FullXicPrepared PrepareFullXic ( IReadOnlyList \u003C QuantRow \u003E rows , IReadOnlyDictionary \u003C string , double \u003E ? perRunTic , FamilyClusterFile proteins )",
-          "sha256": "0ECF3950DE35D910A11F4BEBF8FF357C273AB0D1AFC90032C277EABF1A2C85B1"
+          "symbol": "PrepareFullXic; native five-argument production overload",
+          "sha256": "C610CFF6132D6A5215D998AB4ADDD888F253DF5707481866F9150C155B92849A"
+        },
+        {
+          "path": "FamilyQuant.Core/DeNovo/DeNovoReconciler.cs",
+          "symbol": "Native TIC refusal proof dependency",
+          "sha256": "E773452CA224E76B70017F184E502BD1ED9B6D1E9E40CE28DE31FF512226E105"
+        },
+        {
+          "path": "FamilyQuant.Core/FamilyEnvelopeQuant.cs",
+          "symbol": "Native TIC refusal proof dependency",
+          "sha256": "D422D55BAAED6A70CEF71C9F61DFDCDFAE2D276C47726E4BED6DC8F3D3C41CB5"
+        },
+        {
+          "path": "FamilyQuant.Core/Quantitation/CurationHomologyCache.cs",
+          "symbol": "Native TIC refusal proof dependency",
+          "sha256": "3B88D9592B364A8BB45EDE1C5F872BD11295609151A02CD256BF428A3B276A49"
+        },
+        {
+          "path": "FamilyQuant.Core/FamilyQuantFile.cs",
+          "symbol": "Native TIC refusal proof dependency",
+          "sha256": "C9BB89706722E647147AA5055D016485C2049BE81CB2B8AC8CB90928A02B9F45"
+        },
+        {
+          "path": "FamilyQuant.Core/Storage/QuantRow.cs",
+          "symbol": "Native TIC refusal proof dependency",
+          "sha256": "7C8F6076F895F8935C09E72A8B12C79AB42886CA35F9132E026F77CE3DF307F1"
+        },
+        {
+          "path": "FamilyQuant.Tests/Program.DeNovoLedgerWorkflow.cs",
+          "symbol": "Native TIC refusal proof dependency",
+          "sha256": "10CE2ADF8BCDDA54E5E42D43D9E0F29623CFE6583229B8E6EE2585F3D966D6E5"
+        },
+        {
+          "path": "FamilyQuant.Tests/Program.NativeFractions.cs",
+          "symbol": "Native TIC refusal proof dependency",
+          "sha256": "7655CB9CD300E0CD418DFE3A8A53FDC04D1D6A0853365964071C4A0E4014449C"
+        },
+        {
+          "path": "FamilyQuant.Tests/Program.ShellLedgerReceipts.cs",
+          "symbol": "Native TIC refusal proof dependency",
+          "sha256": "6024556FD1158950E9AF93EF134E68207F3D531B5AEC467A8C98CF23B663D863"
+        },
+        {
+          "path": "FamilyQuant.Tests/Program.ShellTicProof.cs",
+          "symbol": "Native TIC refusal proof dependency",
+          "sha256": "F256F051DFFED360C3229D9B251F8433CD3A196E00AC11B8B532AAFFA7620923"
         }
       ],
-      "proofs": [],
-      "note": "Declaration only; no reachability or handler-execution claim.",
-      "kindReceiptId": "shell-decl-code-fact",
-      "compared": "FamilyQuant/ClusterGenerationControl.xaml.cs:787 \u0022 more\u0022 -\u003E FamilyQuant/CurationQuantitationViewModel.cs: FamilyQuant.CurationQuantitationViewModel::private static FullXicPrepared PrepareFullXic ( IReadOnlyList \u003C QuantRow \u003E rows , IReadOnlyDictionary \u003C string , double \u003E ? perRunTic , FamilyClusterFile proteins ) = \u0022 more\u0022; complete member tokens SHA256=D7836C2679BDB50BB72B7403C4F624C3505BA8585526AEE730BF548D7F530B1D"
+      "proofs": [
+        {
+          "runId": "shell-declarations",
+          "kind": "test",
+          "target": "ProveShellTic",
+          "assertion": "native shell TIC fact FQ15-E013A7902055: anchored frozen message fragment occurs in equal frozen/current refusals",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\shell-compare\\comparisons.log",
+          "inspectedBy": ""
+        }
+      ],
+      "note": "Executed frozen/current TIC refusal output, run count and denominator in both cultures on synthetic inputs and repeated private-cache calls; declaration equality is not claimed.",
+      "kindReceiptId": null,
+      "compared": "FamilyQuant/ClusterGenerationControl.xaml.cs:787 \u0022 more\u0022; frozen member FamilyQuant.ClusterGenerationControl::private static FullXicPrepared PrepareFullXic ( IReadOnlyList \u003C QuantRow \u003E rows , IReadOnlyDictionary \u003C string , double \u003E ? perRunTic , FamilyClusterFile proteins ); exact emitted message fragment in equal native results"
     },
     {
       "observationId": "FQ15-E020BBE69C92",
@@ -4803,12 +5259,12 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "FamilyQuant.ClusterGenerationControl",
-          "sha256": "7E9CC19ACF173986F7E956AC938C20FF27468D216BD505C08EBDD3102468933D"
+          "sha256": "D63CCCEFCD9B83DB90B48560648CAED3F6EFD68B0D5FE6D8FA92BF9EE10D65BD"
         },
         {
           "path": "FamilyQuant/ClusterGenerationControl.Presentation.cs",
           "symbol": "FamilyQuant.ClusterGenerationControl",
-          "sha256": "163C3F79EC1A4885705484E029FB1814589A70F3A709C47680245E111BA4BB37"
+          "sha256": "14FA9C29DA6498D19837782810E8185CC6FB2996BCE3399180FBC3D75B04B591"
         },
         {
           "path": "FamilyQuant/CurationViewModel.cs",
@@ -4827,7 +5283,7 @@
           "kind": "test",
           "target": "CurationScreenTests",
           "assertion": "Undo restores the edited protein annotation and emits one more document change",
-          "artifact": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\shell-compare\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -4841,7 +5297,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.Presentation.cs",
           "symbol": "FamilyQuant.ClusterGenerationControl::private void ApplyModeAvailability ( ComboBoxItem item , NormalizationMode mode , bool available , string ? unavailableReason = null )",
-          "sha256": "163C3F79EC1A4885705484E029FB1814589A70F3A709C47680245E111BA4BB37"
+          "sha256": "14FA9C29DA6498D19837782810E8185CC6FB2996BCE3399180FBC3D75B04B591"
         }
       ],
       "proofs": [],
@@ -4868,12 +5324,12 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.xaml.cs",
           "symbol": "FamilyQuant.ClusterGenerationControl",
-          "sha256": "7E9CC19ACF173986F7E956AC938C20FF27468D216BD505C08EBDD3102468933D"
+          "sha256": "D63CCCEFCD9B83DB90B48560648CAED3F6EFD68B0D5FE6D8FA92BF9EE10D65BD"
         },
         {
           "path": "FamilyQuant/ClusterGenerationControl.Presentation.cs",
           "symbol": "FamilyQuant.ClusterGenerationControl",
-          "sha256": "163C3F79EC1A4885705484E029FB1814589A70F3A709C47680245E111BA4BB37"
+          "sha256": "14FA9C29DA6498D19837782810E8185CC6FB2996BCE3399180FBC3D75B04B591"
         },
         {
           "path": "FamilyQuant/CurationViewModel.cs",
@@ -4892,7 +5348,7 @@
           "kind": "test",
           "target": "CurationScreenTests",
           "assertion": "Undo restores the edited protein annotation and emits one more document change",
-          "artifact": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\shell-compare\\comparisons.log",
           "inspectedBy": ""
         }
       ],
@@ -5232,7 +5688,7 @@
         {
           "path": "FamilyQuant/ClusterGenerationControl.Presentation.cs",
           "symbol": "FamilyQuant.ClusterGenerationControl::private void ApplyModeAvailability ( ComboBoxItem item , NormalizationMode mode , bool available , string ? unavailableReason = null )",
-          "sha256": "163C3F79EC1A4885705484E029FB1814589A70F3A709C47680245E111BA4BB37"
+          "sha256": "14FA9C29DA6498D19837782810E8185CC6FB2996BCE3399180FBC3D75B04B591"
         }
       ],
       "proofs": [],
@@ -5435,7 +5891,7 @@
           "kind": "test",
           "target": "ShellLedgerComparisonCommand",
           "assertion": "shell declaration kind code fact: every listed matched observation retains its exact declaration",
-          "artifact": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\shell-compare\\comparisons.log",
           "inspectedBy": ""
         }
       ]
@@ -5449,7 +5905,7 @@
           "kind": "test",
           "target": "ShellLedgerComparisonCommand",
           "assertion": "shell declaration kind column: every listed matched observation retains its exact declaration",
-          "artifact": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\shell-compare\\comparisons.log",
           "inspectedBy": ""
         }
       ]
@@ -5463,7 +5919,7 @@
           "kind": "test",
           "target": "ShellLedgerComparisonCommand",
           "assertion": "shell declaration kind option/copy: every listed matched observation retains its exact declaration",
-          "artifact": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\shell-compare\\comparisons.log",
           "inspectedBy": ""
         }
       ]
@@ -5477,7 +5933,7 @@
           "kind": "test",
           "target": "ShellLedgerComparisonCommand",
           "assertion": "shell declaration kind tooltip: every listed matched observation retains its exact declaration",
-          "artifact": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\shell-compare\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\shell-compare\\comparisons.log",
           "inspectedBy": ""
         }
       ]

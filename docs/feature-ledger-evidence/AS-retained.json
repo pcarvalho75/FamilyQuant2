@@ -5,48 +5,216 @@
   "runs": [
     {
       "id": "AS-member-comparison",
-      "command": "D:\\FamilyQuant-wt\\shell-j15-check\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --ledger-assay-compare D:/FamilyQuant-data/out-shell/N3/source D:/FamilyQuant-data/out-shell/N5-final-20261101-224706/audit-a/mapping.json D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\assay-retained AS-retained \u00222026-11-03 02:48:38 -0800\u0022",
-      "executedAt": "2026-11-03 02:48:38 -0800",
-      "commit": "9fe583514b1e3726e523edb37ca5c10c303cc6dd",
+      "command": "C:\\FamilyQuant-gate\\FamilyQuant.Tests\\bin\\Release\\net10.0-windows7.0\\FamilyQuant.Tests.dll --ledger-assay-compare D:/FamilyQuant-data/out-shell/N3/source D:/FamilyQuant-data/out-shell/N5-final-20261101-224706/audit-a/mapping.json D:/FamilyQuant-data/out-refresh\\20261103-140604-FamilyQuant-gate\\assay-retained AS-retained \u00222026-11-03 14:06:35 -0800\u0022 D:/FamilyQuant-data/reference-1.5.0.6/app",
+      "executedAt": "2026-11-03 14:06:35 -0800",
+      "commit": "3ab0bd7d5da0dc6900afda91c85ea5985fffa0ae",
       "artifacts": [
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\assay-retained\\comparisons.log",
-          "sha256": "773729F3015D99DE1EA5C2DBA5E60F63420A1891299A86D58700D402289694C8"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\assay-retained\\comparisons.log",
+          "sha256": "320530EDF3F859ACDB5BC04DD3B4954875BF00E199DA68925813F12DDF6113C6"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\assay-retained\\comparisons.json",
-          "sha256": "3B8BFE13F9DBB9F4C5A7DC314D5B24F8B93A027E71448CE63B25DF80A4F395EB"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\assay-retained\\comparisons.json",
+          "sha256": "CC4485F8E8C50176668EB25EBAB5D98966B1999AFCD40662720A09509595E5D5"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\assay-retained\\unproven.tsv",
-          "sha256": "09825EC1EFA8860AFDE8BEABC07E1D9852A8AE0C47DD3A60D5D55B709394E2BE"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\assay-retained\\unproven.tsv",
+          "sha256": "D4DA04308053F0D19CC450F2095B3836F0556C395AE8A4174EC37CEDD246CFC7"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\assay-retained\\counts-by-source.tsv",
-          "sha256": "FBFFC0EBBD32F95D64501921630C8CE4C7ECB24F0A53E5806162950126ACE455"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\assay-retained\\counts-by-source.tsv",
+          "sha256": "31628BF02B143073C1E875FA459F70A12EC1DFCEB14AD1F884FAF1AABAB74D61"
         },
         {
           "path": "D:\\FamilyQuant-data\\out-shell\\N5-final-20261101-224706\\audit-a\\mapping.json",
           "sha256": "DE1EDBDA53D9EE54B672F5820ED85D94087F2C0671270E08CBFF3FCD02F2A352"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\assay-retained\\executed\\Program.LedgerAssayComparison.cs",
-          "sha256": "A68676F37892744747170ECFBFE8F332FABCFEA05E5997BE5E39E55390E9654F"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\assay-retained\\spectrum-native\\en-US-single-0-frozen.csv",
+          "sha256": "1664C8015E296D04286BA1742EE3B5CDDFF578640BE5FA5C1DEEC2882C2D9C28"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\assay-retained\\executed\\Program.Commands.AssayLedger.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\assay-retained\\spectrum-native\\en-US-single-0-current.csv",
+          "sha256": "1664C8015E296D04286BA1742EE3B5CDDFF578640BE5FA5C1DEEC2882C2D9C28"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\assay-retained\\spectrum-native\\en-US-single-1-frozen.csv",
+          "sha256": "1664C8015E296D04286BA1742EE3B5CDDFF578640BE5FA5C1DEEC2882C2D9C28"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\assay-retained\\spectrum-native\\en-US-single-1-current.csv",
+          "sha256": "1664C8015E296D04286BA1742EE3B5CDDFF578640BE5FA5C1DEEC2882C2D9C28"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\assay-retained\\spectrum-native\\en-US-multiple-0-frozen.csv",
+          "sha256": "B9C0C3E239DD831D92C6B6883801878E29506B719EC333976E0FA88E6D223144"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\assay-retained\\spectrum-native\\en-US-multiple-0-current.csv",
+          "sha256": "B9C0C3E239DD831D92C6B6883801878E29506B719EC333976E0FA88E6D223144"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\assay-retained\\spectrum-native\\en-US-multiple-1-frozen.csv",
+          "sha256": "B9C0C3E239DD831D92C6B6883801878E29506B719EC333976E0FA88E6D223144"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\assay-retained\\spectrum-native\\en-US-multiple-1-current.csv",
+          "sha256": "B9C0C3E239DD831D92C6B6883801878E29506B719EC333976E0FA88E6D223144"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\assay-retained\\spectrum-native\\en-US-empty-0-frozen.csv",
+          "sha256": "A82B5D434994954DC9861FC2D9D72804AA3694723469CE801A7660F1B28C635A"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\assay-retained\\spectrum-native\\en-US-empty-0-current.csv",
+          "sha256": "A82B5D434994954DC9861FC2D9D72804AA3694723469CE801A7660F1B28C635A"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\assay-retained\\spectrum-native\\en-US-empty-1-frozen.csv",
+          "sha256": "A82B5D434994954DC9861FC2D9D72804AA3694723469CE801A7660F1B28C635A"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\assay-retained\\spectrum-native\\en-US-empty-1-current.csv",
+          "sha256": "A82B5D434994954DC9861FC2D9D72804AA3694723469CE801A7660F1B28C635A"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\assay-retained\\spectrum-native\\pt-BR-single-0-frozen.csv",
+          "sha256": "1664C8015E296D04286BA1742EE3B5CDDFF578640BE5FA5C1DEEC2882C2D9C28"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\assay-retained\\spectrum-native\\pt-BR-single-0-current.csv",
+          "sha256": "1664C8015E296D04286BA1742EE3B5CDDFF578640BE5FA5C1DEEC2882C2D9C28"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\assay-retained\\spectrum-native\\pt-BR-single-1-frozen.csv",
+          "sha256": "1664C8015E296D04286BA1742EE3B5CDDFF578640BE5FA5C1DEEC2882C2D9C28"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\assay-retained\\spectrum-native\\pt-BR-single-1-current.csv",
+          "sha256": "1664C8015E296D04286BA1742EE3B5CDDFF578640BE5FA5C1DEEC2882C2D9C28"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\assay-retained\\spectrum-native\\pt-BR-multiple-0-frozen.csv",
+          "sha256": "B9C0C3E239DD831D92C6B6883801878E29506B719EC333976E0FA88E6D223144"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\assay-retained\\spectrum-native\\pt-BR-multiple-0-current.csv",
+          "sha256": "B9C0C3E239DD831D92C6B6883801878E29506B719EC333976E0FA88E6D223144"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\assay-retained\\spectrum-native\\pt-BR-multiple-1-frozen.csv",
+          "sha256": "B9C0C3E239DD831D92C6B6883801878E29506B719EC333976E0FA88E6D223144"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\assay-retained\\spectrum-native\\pt-BR-multiple-1-current.csv",
+          "sha256": "B9C0C3E239DD831D92C6B6883801878E29506B719EC333976E0FA88E6D223144"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\assay-retained\\spectrum-native\\pt-BR-empty-0-frozen.csv",
+          "sha256": "A82B5D434994954DC9861FC2D9D72804AA3694723469CE801A7660F1B28C635A"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\assay-retained\\spectrum-native\\pt-BR-empty-0-current.csv",
+          "sha256": "A82B5D434994954DC9861FC2D9D72804AA3694723469CE801A7660F1B28C635A"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\assay-retained\\spectrum-native\\pt-BR-empty-1-frozen.csv",
+          "sha256": "A82B5D434994954DC9861FC2D9D72804AA3694723469CE801A7660F1B28C635A"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\assay-retained\\spectrum-native\\pt-BR-empty-1-current.csv",
+          "sha256": "A82B5D434994954DC9861FC2D9D72804AA3694723469CE801A7660F1B28C635A"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\assay-retained\\spectrum-native\\outcomes.json",
+          "sha256": "D2F92CFD6C055A0737AB1C6B51CBD718928389E65612DFDFA7071338B10A0B91"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\assay-retained\\spectrum-native\\injections.json",
+          "sha256": "9C80B433D722651BC7FED67F7D3610CA6FE021660B8C1E151A8C5C26F38A0DD3"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\assay-retained\\spectrum-native\\inputs.json",
+          "sha256": "36C3B46147435C0D29E1D4C16915D46F4A6A2C077A9AFFBE3BA0EE118B36DDDA"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\assay-retained\\spectrum-native\\frozen-SpectrumComparisonTable.cs",
+          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\assay-retained\\spectrum-native\\frozen-FamilyQuant.dll",
+          "sha256": "D764488C923945285E03B338E5A91BF28106A35B11AB465D8E2B23D125F03FD8"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\assay-retained\\executed\\Program.LedgerAssayComparison.cs",
+          "sha256": "02F38BB3F048A73C1B1C373E814A31B4428CC9DF2E38318370E070B8B9F279E9"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\assay-retained\\executed\\Program.Commands.AssayLedger.cs",
           "sha256": "46DA029D0DBAA113B736A5E3B2BE7D29C486565EAE0063281F58F292ECC8112E"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\assay-retained\\executed\\LedgerMemberFactComparison.cs",
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\assay-retained\\executed\\LedgerMemberFactComparison.cs",
           "sha256": "1F3254D635B40D22576E9F40347DBEB503A5FF661EFC18E743EAC35B097FC14C"
         },
         {
-          "path": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\assay-retained\\executed\\FamilyQuant.Tests.dll",
-          "sha256": "6407606040C45143C12C0432C670F6345DD42144E1608CE7BFE61C0AD1530979"
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\assay-retained\\executed\\SpectrumComparisonTable.cs",
+          "sha256": "543977625B258DA255997F76B721ECD25BB6B5852F783679C469D1B9F7068ABE"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\assay-retained\\executed\\QuantRow.cs",
+          "sha256": "7C8F6076F895F8935C09E72A8B12C79AB42886CA35F9132E026F77CE3DF307F1"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\assay-retained\\executed\\DeNovoReconciler.cs",
+          "sha256": "E773452CA224E76B70017F184E502BD1ED9B6D1E9E40CE28DE31FF512226E105"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\assay-retained\\executed\\NativeQuantFractions.cs",
+          "sha256": "1B584F17E5D5796993F127A35D75354F178185E9C84536C96198D50908FCCB4E"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\assay-retained\\executed\\PeptidoformIdentity.cs",
+          "sha256": "1AE27580D2FD1A5325D0FD126414E855EFF0A14E3EC4CB8FBA875840EB48D9B9"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\assay-retained\\executed\\DeNovoSource.cs",
+          "sha256": "F5D28EB3D7DC60C34D4288ED4C55EBB7C8878D8ECC015842B907469BC4267D3C"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\assay-retained\\executed\\SeproPsmAdapter.cs",
+          "sha256": "00B9CFF5C8A4A5CFD7714F3CC076FF44DB00BAAB13EB02153A11B890F9696C40"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\assay-retained\\executed\\DeNovoSourceRows.cs",
+          "sha256": "14F011D7B49E7F486F87D6FECB385DF819EE8CF8D929E3C22F577DE884AE49B2"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\assay-retained\\executed\\CoreOperation.cs",
+          "sha256": "FBE4D0DE84DA1C37A62AA6BD314ADE9E76EBAB801B101733565ADB3C51757BB4"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\assay-retained\\executed\\Program.LedgerAssaySpectrumProof.cs",
+          "sha256": "02E5523530C4E88911AFDE3D5C1A946ADFB1051CD57FFC6B7E433E5D95BB8E18"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\assay-retained\\executed\\Program.SecondaryInjectedMethod.cs",
+          "sha256": "23A7781DDBD6E2B6299FB12C9F31A083CC4FF42C290513848F61EA4CEF31E2D1"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\assay-retained\\executed\\Program.DeNovoLedgerWorkflow.cs",
+          "sha256": "10CE2ADF8BCDDA54E5E42D43D9E0F29623CFE6583229B8E6EE2585F3D966D6E5"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\assay-retained\\executed\\FamilyQuant.Tests.dll",
+          "sha256": "49C720B5ECD30B7BD86E4443AF12603A99D50EDB0B2DDB51AEA09C11775DCE64"
+        },
+        {
+          "path": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\assay-retained\\executed\\FamilyQuant.Core.dll",
+          "sha256": "597BF4DBBF66E40BB6FB46AE769CACCBFDC51BEE0874A5E043377A282237B68B"
         }
       ],
-      "workingDirectory": "D:\\FamilyQuant-wt\\shell-j15-check"
+      "workingDirectory": "C:\\FamilyQuant-gate"
     }
   ],
   "rows": [
@@ -70,7 +238,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
           "symbol": "FamilyQuant.DeNovo.SpectrumComparisonTable::private static string Alternates ( IReadOnlyList \u003C Claim \u003E ranked )",
-          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
+          "sha256": "543977625B258DA255997F76B721ECD25BB6B5852F783679C469D1B9F7068ABE"
         }
       ],
       "proofs": [],
@@ -190,7 +358,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
           "symbol": "FamilyQuant.DeNovo.SpectrumComparisonTable::public static void MarkFamilyAssignmentsUnavailable ( IEnumerable \u003C SpectrumComparisonRow \u003E rows , string reason )",
-          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
+          "sha256": "543977625B258DA255997F76B721ECD25BB6B5852F783679C469D1B9F7068ABE"
         }
       ],
       "proofs": [],
@@ -408,7 +576,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
           "symbol": "FamilyQuant.DeNovo.SpectrumComparisonTable::private static SpectrumComparisonRow ToRow ( Cluster cluster , int hypothesisIndex , int hypothesesInScan , ReferenceEnvelopeDiagnostics reference , IReadOnlyDictionary \u003C int , string \u003E ? familyLabels , FamilyQuant . PeptideFamilyAttribution ? familyAttribution , RawScanPrecursorMetadata ? raw , IReadOnlyDictionary \u003C string , List \u003C NativePeptideQuant \u003E\u003E creditedByIdentity , double ? runTic , double ? pooledTic )",
-          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
+          "sha256": "543977625B258DA255997F76B721ECD25BB6B5852F783679C469D1B9F7068ABE"
         }
       ],
       "proofs": [],
@@ -508,7 +676,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
           "symbol": "FamilyQuant.DeNovo.SpectrumComparisonTable::private static string Num ( double ? value )",
-          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
+          "sha256": "543977625B258DA255997F76B721ECD25BB6B5852F783679C469D1B9F7068ABE"
         }
       ],
       "proofs": [],
@@ -620,7 +788,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
           "symbol": "FamilyQuant.DeNovo.SpectrumComparisonTable::private static Claim PatternLabClaim ( PatternLabPsm psm , bool external )",
-          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
+          "sha256": "543977625B258DA255997F76B721ECD25BB6B5852F783679C469D1B9F7068ABE"
         }
       ],
       "proofs": [],
@@ -820,7 +988,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
           "symbol": "FamilyQuant.DeNovo.SpectrumComparisonTable::private static List \u003C Claim \u003E Ranked ( IEnumerable \u003C Claim \u003E claims )",
-          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
+          "sha256": "543977625B258DA255997F76B721ECD25BB6B5852F783679C469D1B9F7068ABE"
         }
       ],
       "proofs": [],
@@ -960,7 +1128,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
           "symbol": "FamilyQuant.DeNovo.SpectrumComparisonTable::private static Claim PatternLabClaim ( PatternLabPsm psm , bool external )",
-          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
+          "sha256": "543977625B258DA255997F76B721ECD25BB6B5852F783679C469D1B9F7068ABE"
         }
       ],
       "proofs": [],
@@ -1150,7 +1318,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
           "symbol": "FamilyQuant.DeNovo.SpectrumComparisonTable::private static string SourceObservationKey ( PeaksDeNovoRow row )",
-          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
+          "sha256": "543977625B258DA255997F76B721ECD25BB6B5852F783679C469D1B9F7068ABE"
         }
       ],
       "proofs": [],
@@ -1404,7 +1572,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/ReferenceEnvelopeEstimator.cs",
           "symbol": "FamilyQuant.DeNovo.ReferenceEnvelopeEstimator::public static string ToCsv ( ReferenceEnvelopeDiagnostics diagnostics )",
-          "sha256": "FDC3528CF45CE9023D8576FD87680DFED3F20E2F530DCEC11EA8C78D38458080"
+          "sha256": "D7ED2E083865F99EDD033DD04C57ED0890BAA11347DF579EEBAFC68BA5A6BA52"
         }
       ],
       "proofs": [],
@@ -1468,7 +1636,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
           "symbol": "FamilyQuant.DeNovo.SpectrumComparisonTable::private static List \u003C Claim \u003E Ranked ( IEnumerable \u003C Claim \u003E claims )",
-          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
+          "sha256": "543977625B258DA255997F76B721ECD25BB6B5852F783679C469D1B9F7068ABE"
         }
       ],
       "proofs": [],
@@ -1580,7 +1748,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
           "symbol": "FamilyQuant.DeNovo.SpectrumComparisonTable::private static SpectrumComparisonRow ToRow ( Cluster cluster , int hypothesisIndex , int hypothesesInScan , ReferenceEnvelopeDiagnostics reference , IReadOnlyDictionary \u003C int , string \u003E ? familyLabels , FamilyQuant . PeptideFamilyAttribution ? familyAttribution , RawScanPrecursorMetadata ? raw , IReadOnlyDictionary \u003C string , List \u003C NativePeptideQuant \u003E\u003E creditedByIdentity , double ? runTic , double ? pooledTic )",
-          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
+          "sha256": "543977625B258DA255997F76B721ECD25BB6B5852F783679C469D1B9F7068ABE"
         }
       ],
       "proofs": [],
@@ -1594,7 +1762,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
           "symbol": "FamilyQuant.DeNovo.SpectrumComparisonTable::private static SpectrumComparisonRow ToRow ( Cluster cluster , int hypothesisIndex , int hypothesesInScan , ReferenceEnvelopeDiagnostics reference , IReadOnlyDictionary \u003C int , string \u003E ? familyLabels , FamilyQuant . PeptideFamilyAttribution ? familyAttribution , RawScanPrecursorMetadata ? raw , IReadOnlyDictionary \u003C string , List \u003C NativePeptideQuant \u003E\u003E creditedByIdentity , double ? runTic , double ? pooledTic )",
-          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
+          "sha256": "543977625B258DA255997F76B721ECD25BB6B5852F783679C469D1B9F7068ABE"
         }
       ],
       "proofs": [],
@@ -1920,7 +2088,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
           "symbol": "FamilyQuant.DeNovo.SpectrumComparisonTable::private static string ScanKey ( string run , int scan )",
-          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
+          "sha256": "543977625B258DA255997F76B721ECD25BB6B5852F783679C469D1B9F7068ABE"
         }
       ],
       "proofs": [],
@@ -1976,7 +2144,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/ReferenceEnvelopeEstimator.cs",
           "symbol": "FamilyQuant.DeNovo.ReferenceEnvelopeEstimator::public static string ToCsv ( ReferenceEnvelopeDiagnostics diagnostics )",
-          "sha256": "FDC3528CF45CE9023D8576FD87680DFED3F20E2F530DCEC11EA8C78D38458080"
+          "sha256": "D7ED2E083865F99EDD033DD04C57ED0890BAA11347DF579EEBAFC68BA5A6BA52"
         }
       ],
       "proofs": [],
@@ -1990,7 +2158,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/ReferenceEnvelopeEstimator.cs",
           "symbol": "FamilyQuant.DeNovo.ReferenceEnvelopeEstimator::public const string Method",
-          "sha256": "FDC3528CF45CE9023D8576FD87680DFED3F20E2F530DCEC11EA8C78D38458080"
+          "sha256": "D7ED2E083865F99EDD033DD04C57ED0890BAA11347DF579EEBAFC68BA5A6BA52"
         }
       ],
       "proofs": [],
@@ -2162,7 +2330,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/ReferenceEnvelopeEstimator.cs",
           "symbol": "FamilyQuant.DeNovo.ReferenceEnvelopeEstimator::public static string ToCsv ( ReferenceEnvelopeDiagnostics diagnostics )",
-          "sha256": "FDC3528CF45CE9023D8576FD87680DFED3F20E2F530DCEC11EA8C78D38458080"
+          "sha256": "D7ED2E083865F99EDD033DD04C57ED0890BAA11347DF579EEBAFC68BA5A6BA52"
         }
       ],
       "proofs": [],
@@ -2288,7 +2456,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
           "symbol": "FamilyQuant.DeNovo.SpectrumComparisonTable::public const string DefaultFileName",
-          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
+          "sha256": "543977625B258DA255997F76B721ECD25BB6B5852F783679C469D1B9F7068ABE"
         }
       ],
       "proofs": [],
@@ -2330,7 +2498,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs",
           "symbol": "FamilyQuant.DeNovo.Ms1EnvelopeDetector::public const string SinglyChargedCaveat",
-          "sha256": "4869CFA848996AF803B9DFC7C10A621C1E08514F88D1EAF09F31E3DD13FB9903"
+          "sha256": "C98DD10DCD1D8A2BD943AD937CA7CD0324E526E04326A679FB9738E3AD252181"
         }
       ],
       "proofs": [],
@@ -2474,7 +2642,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
           "symbol": "FamilyQuant.DeNovo.SpectrumComparisonTable::public static List \u003C SpectrumComparisonRow \u003E BuildFromInputs ( string rawDirectory , string sepr2Path , string deNovoDirectory , IEnumerable \u003C QuantRow \u003E quantRows , IReadOnlyList \u003C DeNovoSourceSelection \u003E selections , DeNovoFilterCriteria criteria , Action \u003C string \u003E ? progress = null )",
-          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
+          "sha256": "543977625B258DA255997F76B721ECD25BB6B5852F783679C469D1B9F7068ABE"
         }
       ],
       "proofs": [],
@@ -2572,7 +2740,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
           "symbol": "FamilyQuant.DeNovo.SpectrumComparisonTable::private static string CreditedKey ( QuantRow quant )",
-          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
+          "sha256": "543977625B258DA255997F76B721ECD25BB6B5852F783679C469D1B9F7068ABE"
         }
       ],
       "proofs": [],
@@ -2642,7 +2810,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
           "symbol": "FamilyQuant.DeNovo.SpectrumComparisonTable::private static List \u003C Claim \u003E Ranked ( IEnumerable \u003C Claim \u003E claims )",
-          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
+          "sha256": "543977625B258DA255997F76B721ECD25BB6B5852F783679C469D1B9F7068ABE"
         }
       ],
       "proofs": [],
@@ -2670,7 +2838,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
           "symbol": "FamilyQuant.DeNovo.SpectrumComparisonTable::public static List \u003C SpectrumComparisonRow \u003E BuildFromInputs ( string rawDirectory , string sepr2Path , string deNovoDirectory , IEnumerable \u003C QuantRow \u003E quantRows , IReadOnlyList \u003C DeNovoSourceSelection \u003E selections , DeNovoFilterCriteria criteria , Action \u003C string \u003E ? progress = null )",
-          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
+          "sha256": "543977625B258DA255997F76B721ECD25BB6B5852F783679C469D1B9F7068ABE"
         }
       ],
       "proofs": [],
@@ -2918,7 +3086,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/ReferenceEnvelopeEstimator.cs",
           "symbol": "FamilyQuant.DeNovo.ReferenceEnvelopeEstimator::public static string ToCsv ( ReferenceEnvelopeDiagnostics diagnostics )",
-          "sha256": "FDC3528CF45CE9023D8576FD87680DFED3F20E2F530DCEC11EA8C78D38458080"
+          "sha256": "D7ED2E083865F99EDD033DD04C57ED0890BAA11347DF579EEBAFC68BA5A6BA52"
         }
       ],
       "proofs": [],
@@ -3124,7 +3292,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
           "symbol": "FamilyQuant.DeNovo.SpectrumComparisonTable::private static SpectrumComparisonRow ToRow ( Cluster cluster , int hypothesisIndex , int hypothesesInScan , ReferenceEnvelopeDiagnostics reference , IReadOnlyDictionary \u003C int , string \u003E ? familyLabels , FamilyQuant . PeptideFamilyAttribution ? familyAttribution , RawScanPrecursorMetadata ? raw , IReadOnlyDictionary \u003C string , List \u003C NativePeptideQuant \u003E\u003E creditedByIdentity , double ? runTic , double ? pooledTic )",
-          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
+          "sha256": "543977625B258DA255997F76B721ECD25BB6B5852F783679C469D1B9F7068ABE"
         }
       ],
       "proofs": [],
@@ -3152,7 +3320,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
           "symbol": "FamilyQuant.DeNovo.SpectrumComparisonTable::public const string PatternLabScoreDefinition",
-          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
+          "sha256": "543977625B258DA255997F76B721ECD25BB6B5852F783679C469D1B9F7068ABE"
         }
       ],
       "proofs": [],
@@ -3372,7 +3540,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/ReferenceEnvelopeEstimator.cs",
           "symbol": "FamilyQuant.DeNovo.ReferenceEnvelopeEstimator::public static string ToCsv ( ReferenceEnvelopeDiagnostics diagnostics )",
-          "sha256": "FDC3528CF45CE9023D8576FD87680DFED3F20E2F530DCEC11EA8C78D38458080"
+          "sha256": "D7ED2E083865F99EDD033DD04C57ED0890BAA11347DF579EEBAFC68BA5A6BA52"
         }
       ],
       "proofs": [],
@@ -3612,7 +3780,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
           "symbol": "FamilyQuant.DeNovo.SpectrumComparisonTable::private static string Alternates ( IReadOnlyList \u003C Claim \u003E ranked )",
-          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
+          "sha256": "543977625B258DA255997F76B721ECD25BB6B5852F783679C469D1B9F7068ABE"
         }
       ],
       "proofs": [],
@@ -3944,7 +4112,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
           "symbol": "FamilyQuant.DeNovo.SpectrumComparisonTable::private static SpectrumComparisonRow ToRow ( Cluster cluster , int hypothesisIndex , int hypothesesInScan , ReferenceEnvelopeDiagnostics reference , IReadOnlyDictionary \u003C int , string \u003E ? familyLabels , FamilyQuant . PeptideFamilyAttribution ? familyAttribution , RawScanPrecursorMetadata ? raw , IReadOnlyDictionary \u003C string , List \u003C NativePeptideQuant \u003E\u003E creditedByIdentity , double ? runTic , double ? pooledTic )",
-          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
+          "sha256": "543977625B258DA255997F76B721ECD25BB6B5852F783679C469D1B9F7068ABE"
         }
       ],
       "proofs": [],
@@ -3958,7 +4126,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
           "symbol": "FamilyQuant.DeNovo.SpectrumComparisonTable::private static SpectrumComparisonRow ToRow ( Cluster cluster , int hypothesisIndex , int hypothesesInScan , ReferenceEnvelopeDiagnostics reference , IReadOnlyDictionary \u003C int , string \u003E ? familyLabels , FamilyQuant . PeptideFamilyAttribution ? familyAttribution , RawScanPrecursorMetadata ? raw , IReadOnlyDictionary \u003C string , List \u003C NativePeptideQuant \u003E\u003E creditedByIdentity , double ? runTic , double ? pooledTic )",
-          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
+          "sha256": "543977625B258DA255997F76B721ECD25BB6B5852F783679C469D1B9F7068ABE"
         }
       ],
       "proofs": [],
@@ -4036,7 +4204,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
           "symbol": "FamilyQuant.DeNovo.SpectrumComparisonTable::private static string Alternates ( IReadOnlyList \u003C Claim \u003E ranked )",
-          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
+          "sha256": "543977625B258DA255997F76B721ECD25BB6B5852F783679C469D1B9F7068ABE"
         }
       ],
       "proofs": [],
@@ -4092,7 +4260,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
           "symbol": "FamilyQuant.DeNovo.SpectrumComparisonTable::private static List \u003C Claim \u003E Ranked ( IEnumerable \u003C Claim \u003E claims )",
-          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
+          "sha256": "543977625B258DA255997F76B721ECD25BB6B5852F783679C469D1B9F7068ABE"
         }
       ],
       "proofs": [],
@@ -4106,7 +4274,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
           "symbol": "FamilyQuant.DeNovo.SpectrumComparisonTable::private static SpectrumComparisonRow ToRow ( Cluster cluster , int hypothesisIndex , int hypothesesInScan , ReferenceEnvelopeDiagnostics reference , IReadOnlyDictionary \u003C int , string \u003E ? familyLabels , FamilyQuant . PeptideFamilyAttribution ? familyAttribution , RawScanPrecursorMetadata ? raw , IReadOnlyDictionary \u003C string , List \u003C NativePeptideQuant \u003E\u003E creditedByIdentity , double ? runTic , double ? pooledTic )",
-          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
+          "sha256": "543977625B258DA255997F76B721ECD25BB6B5852F783679C469D1B9F7068ABE"
         }
       ],
       "proofs": [],
@@ -4148,7 +4316,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
           "symbol": "FamilyQuant.DeNovo.SpectrumComparisonTable::private static string CreditedKey ( QuantRow quant )",
-          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
+          "sha256": "543977625B258DA255997F76B721ECD25BB6B5852F783679C469D1B9F7068ABE"
         }
       ],
       "proofs": [],
@@ -4282,7 +4450,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
           "symbol": "FamilyQuant.DeNovo.SpectrumComparisonTable::private static string ChargeKey ( string run , int scan , int charge )",
-          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
+          "sha256": "543977625B258DA255997F76B721ECD25BB6B5852F783679C469D1B9F7068ABE"
         }
       ],
       "proofs": [],
@@ -4296,7 +4464,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
           "symbol": "FamilyQuant.DeNovo.SpectrumComparisonTable::private static string Alternates ( IReadOnlyList \u003C Claim \u003E ranked )",
-          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
+          "sha256": "543977625B258DA255997F76B721ECD25BB6B5852F783679C469D1B9F7068ABE"
         }
       ],
       "proofs": [],
@@ -4508,7 +4676,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
           "symbol": "FamilyQuant.DeNovo.SpectrumComparisonTable::private static ( string ids , string assignments , double ? identity , string status ) DescribeFamilies ( IReadOnlyList \u003C int \u003E familyIds , IReadOnlyDictionary \u003C int , string \u003E ? labels , FamilyQuant . PeptideFamilyAttribution ? attribution )",
-          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
+          "sha256": "543977625B258DA255997F76B721ECD25BB6B5852F783679C469D1B9F7068ABE"
         }
       ],
       "proofs": [],
@@ -4606,7 +4774,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/ReferenceEnvelopeEstimator.cs",
           "symbol": "FamilyQuant.DeNovo.ReferenceEnvelopeEstimator::public static string ToCsv ( ReferenceEnvelopeDiagnostics diagnostics )",
-          "sha256": "FDC3528CF45CE9023D8576FD87680DFED3F20E2F530DCEC11EA8C78D38458080"
+          "sha256": "D7ED2E083865F99EDD033DD04C57ED0890BAA11347DF579EEBAFC68BA5A6BA52"
         }
       ],
       "proofs": [],
@@ -4656,7 +4824,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
           "symbol": "FamilyQuant.DeNovo.SpectrumComparisonTable::private static ( string ids , string assignments , double ? identity , string status ) DescribeFamilies ( IReadOnlyList \u003C int \u003E familyIds , IReadOnlyDictionary \u003C int , string \u003E ? labels , FamilyQuant . PeptideFamilyAttribution ? attribution )",
-          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
+          "sha256": "543977625B258DA255997F76B721ECD25BB6B5852F783679C469D1B9F7068ABE"
         }
       ],
       "proofs": [],
@@ -4936,7 +5104,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/ReferenceEnvelopeEstimator.cs",
           "symbol": "FamilyQuant.DeNovo.ReferenceEnvelopeEstimator::private static void Metric ( StringBuilder b , string name , double value , string definition )",
-          "sha256": "FDC3528CF45CE9023D8576FD87680DFED3F20E2F530DCEC11EA8C78D38458080"
+          "sha256": "D7ED2E083865F99EDD033DD04C57ED0890BAA11347DF579EEBAFC68BA5A6BA52"
         }
       ],
       "proofs": [],
@@ -5020,7 +5188,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
           "symbol": "FamilyQuant.DeNovo.SpectrumComparisonTable::private static string SourceObservationKey ( PeaksDeNovoRow row )",
-          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
+          "sha256": "543977625B258DA255997F76B721ECD25BB6B5852F783679C469D1B9F7068ABE"
         }
       ],
       "proofs": [],
@@ -5118,7 +5286,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/ReferenceEnvelopeEstimator.cs",
           "symbol": "FamilyQuant.DeNovo.ReferenceEnvelopeEstimator::public static string ToCsv ( ReferenceEnvelopeDiagnostics diagnostics )",
-          "sha256": "FDC3528CF45CE9023D8576FD87680DFED3F20E2F530DCEC11EA8C78D38458080"
+          "sha256": "D7ED2E083865F99EDD033DD04C57ED0890BAA11347DF579EEBAFC68BA5A6BA52"
         }
       ],
       "proofs": [],
@@ -5146,7 +5314,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
           "symbol": "FamilyQuant.DeNovo.SpectrumComparisonTable::private static string SourceObservationKey ( PeaksDeNovoRow row )",
-          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
+          "sha256": "543977625B258DA255997F76B721ECD25BB6B5852F783679C469D1B9F7068ABE"
         }
       ],
       "proofs": [],
@@ -5252,7 +5420,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
           "symbol": "FamilyQuant.DeNovo.SpectrumComparisonTable::private static string SourceObservationKey ( PeaksDeNovoRow row )",
-          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
+          "sha256": "543977625B258DA255997F76B721ECD25BB6B5852F783679C469D1B9F7068ABE"
         }
       ],
       "proofs": [],
@@ -5280,7 +5448,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
           "symbol": "FamilyQuant.DeNovo.SpectrumComparisonTable::private static string Alternates ( IReadOnlyList \u003C Claim \u003E ranked )",
-          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
+          "sha256": "543977625B258DA255997F76B721ECD25BB6B5852F783679C469D1B9F7068ABE"
         }
       ],
       "proofs": [],
@@ -5372,7 +5540,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
           "symbol": "FamilyQuant.DeNovo.SpectrumComparisonTable::private static ( string ids , string assignments , double ? identity , string status ) DescribeFamilies ( IReadOnlyList \u003C int \u003E familyIds , IReadOnlyDictionary \u003C int , string \u003E ? labels , FamilyQuant . PeptideFamilyAttribution ? attribution )",
-          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
+          "sha256": "543977625B258DA255997F76B721ECD25BB6B5852F783679C469D1B9F7068ABE"
         }
       ],
       "proofs": [],
@@ -5514,7 +5682,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
           "symbol": "FamilyQuant.DeNovo.SpectrumComparisonTable::private static string SourceObservationKey ( PeaksDeNovoRow row )",
-          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
+          "sha256": "543977625B258DA255997F76B721ECD25BB6B5852F783679C469D1B9F7068ABE"
         }
       ],
       "proofs": [],
@@ -5614,7 +5782,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
           "symbol": "FamilyQuant.DeNovo.SpectrumComparisonTable::private static SpectrumComparisonRow ToRow ( Cluster cluster , int hypothesisIndex , int hypothesesInScan , ReferenceEnvelopeDiagnostics reference , IReadOnlyDictionary \u003C int , string \u003E ? familyLabels , FamilyQuant . PeptideFamilyAttribution ? familyAttribution , RawScanPrecursorMetadata ? raw , IReadOnlyDictionary \u003C string , List \u003C NativePeptideQuant \u003E\u003E creditedByIdentity , double ? runTic , double ? pooledTic )",
-          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
+          "sha256": "543977625B258DA255997F76B721ECD25BB6B5852F783679C469D1B9F7068ABE"
         }
       ],
       "proofs": [],
@@ -5642,7 +5810,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
           "symbol": "FamilyQuant.DeNovo.SpectrumComparisonTable::private static ( string ids , string assignments , double ? identity , string status ) DescribeFamilies ( IReadOnlyList \u003C int \u003E familyIds , IReadOnlyDictionary \u003C int , string \u003E ? labels , FamilyQuant . PeptideFamilyAttribution ? attribution )",
-          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
+          "sha256": "543977625B258DA255997F76B721ECD25BB6B5852F783679C469D1B9F7068ABE"
         }
       ],
       "proofs": [],
@@ -5782,7 +5950,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
           "symbol": "FamilyQuant.DeNovo.SpectrumComparisonTable::public static List \u003C SpectrumComparisonRow \u003E BuildFromInputs ( string rawDirectory , string sepr2Path , string deNovoDirectory , IEnumerable \u003C QuantRow \u003E quantRows , IReadOnlyList \u003C DeNovoSourceSelection \u003E selections , DeNovoFilterCriteria criteria , Action \u003C string \u003E ? progress = null )",
-          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
+          "sha256": "543977625B258DA255997F76B721ECD25BB6B5852F783679C469D1B9F7068ABE"
         }
       ],
       "proofs": [],
@@ -5894,7 +6062,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
           "symbol": "FamilyQuant.DeNovo.SpectrumComparisonTable::private static SpectrumComparisonRow ToRow ( Cluster cluster , int hypothesisIndex , int hypothesesInScan , ReferenceEnvelopeDiagnostics reference , IReadOnlyDictionary \u003C int , string \u003E ? familyLabels , FamilyQuant . PeptideFamilyAttribution ? familyAttribution , RawScanPrecursorMetadata ? raw , IReadOnlyDictionary \u003C string , List \u003C NativePeptideQuant \u003E\u003E creditedByIdentity , double ? runTic , double ? pooledTic )",
-          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
+          "sha256": "543977625B258DA255997F76B721ECD25BB6B5852F783679C469D1B9F7068ABE"
         }
       ],
       "proofs": [],
@@ -5992,7 +6160,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
           "symbol": "FamilyQuant.DeNovo.SpectrumComparisonTable::public static List \u003C SpectrumComparisonRow \u003E BuildFromInputs ( string rawDirectory , string sepr2Path , string deNovoDirectory , IEnumerable \u003C QuantRow \u003E quantRows , IReadOnlyList \u003C DeNovoSourceSelection \u003E selections , DeNovoFilterCriteria criteria , Action \u003C string \u003E ? progress = null )",
-          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
+          "sha256": "543977625B258DA255997F76B721ECD25BB6B5852F783679C469D1B9F7068ABE"
         }
       ],
       "proofs": [],
@@ -6070,7 +6238,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
           "symbol": "FamilyQuant.DeNovo.SpectrumComparisonTable::private static SpectrumComparisonRow ToRow ( Cluster cluster , int hypothesisIndex , int hypothesesInScan , ReferenceEnvelopeDiagnostics reference , IReadOnlyDictionary \u003C int , string \u003E ? familyLabels , FamilyQuant . PeptideFamilyAttribution ? familyAttribution , RawScanPrecursorMetadata ? raw , IReadOnlyDictionary \u003C string , List \u003C NativePeptideQuant \u003E\u003E creditedByIdentity , double ? runTic , double ? pooledTic )",
-          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
+          "sha256": "543977625B258DA255997F76B721ECD25BB6B5852F783679C469D1B9F7068ABE"
         }
       ],
       "proofs": [],
@@ -6148,7 +6316,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
           "symbol": "FamilyQuant.DeNovo.SpectrumComparisonTable::private static List \u003C Claim \u003E Ranked ( IEnumerable \u003C Claim \u003E claims )",
-          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
+          "sha256": "543977625B258DA255997F76B721ECD25BB6B5852F783679C469D1B9F7068ABE"
         }
       ],
       "proofs": [],
@@ -6162,7 +6330,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
           "symbol": "FamilyQuant.DeNovo.SpectrumComparisonTable::private static ( string ids , string assignments , double ? identity , string status ) DescribeFamilies ( IReadOnlyList \u003C int \u003E familyIds , IReadOnlyDictionary \u003C int , string \u003E ? labels , FamilyQuant . PeptideFamilyAttribution ? attribution )",
-          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
+          "sha256": "543977625B258DA255997F76B721ECD25BB6B5852F783679C469D1B9F7068ABE"
         }
       ],
       "proofs": [],
@@ -6282,7 +6450,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/ReferenceEnvelopeEstimator.cs",
           "symbol": "FamilyQuant.DeNovo.ReferenceEnvelopeDiagnostics::public void Validate ( )",
-          "sha256": "FDC3528CF45CE9023D8576FD87680DFED3F20E2F530DCEC11EA8C78D38458080"
+          "sha256": "D7ED2E083865F99EDD033DD04C57ED0890BAA11347DF579EEBAFC68BA5A6BA52"
         }
       ],
       "proofs": [],
@@ -6310,7 +6478,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/ReferenceEnvelopeEstimator.cs",
           "symbol": "FamilyQuant.DeNovo.ReferenceEnvelopeEstimator::public static string ToCsv ( ReferenceEnvelopeDiagnostics diagnostics )",
-          "sha256": "FDC3528CF45CE9023D8576FD87680DFED3F20E2F530DCEC11EA8C78D38458080"
+          "sha256": "D7ED2E083865F99EDD033DD04C57ED0890BAA11347DF579EEBAFC68BA5A6BA52"
         }
       ],
       "proofs": [],
@@ -6416,7 +6584,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/ReferenceEnvelopeEstimator.cs",
           "symbol": "FamilyQuant.DeNovo.ReferenceEnvelopeEstimator::public static string ToCsv ( ReferenceEnvelopeDiagnostics diagnostics )",
-          "sha256": "FDC3528CF45CE9023D8576FD87680DFED3F20E2F530DCEC11EA8C78D38458080"
+          "sha256": "D7ED2E083865F99EDD033DD04C57ED0890BAA11347DF579EEBAFC68BA5A6BA52"
         }
       ],
       "proofs": [],
@@ -6636,7 +6804,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/ReferenceEnvelopeEstimator.cs",
           "symbol": "FamilyQuant.DeNovo.ReferenceEnvelopeEstimator::public static string ToCsv ( ReferenceEnvelopeDiagnostics diagnostics )",
-          "sha256": "FDC3528CF45CE9023D8576FD87680DFED3F20E2F530DCEC11EA8C78D38458080"
+          "sha256": "D7ED2E083865F99EDD033DD04C57ED0890BAA11347DF579EEBAFC68BA5A6BA52"
         }
       ],
       "proofs": [],
@@ -6862,7 +7030,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
           "symbol": "FamilyQuant.DeNovo.SpectrumComparisonTable::private static SpectrumComparisonRow ToRow ( Cluster cluster , int hypothesisIndex , int hypothesesInScan , ReferenceEnvelopeDiagnostics reference , IReadOnlyDictionary \u003C int , string \u003E ? familyLabels , FamilyQuant . PeptideFamilyAttribution ? familyAttribution , RawScanPrecursorMetadata ? raw , IReadOnlyDictionary \u003C string , List \u003C NativePeptideQuant \u003E\u003E creditedByIdentity , double ? runTic , double ? pooledTic )",
-          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
+          "sha256": "543977625B258DA255997F76B721ECD25BB6B5852F783679C469D1B9F7068ABE"
         }
       ],
       "proofs": [],
@@ -6904,7 +7072,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
           "symbol": "FamilyQuant.DeNovo.SpectrumComparisonTable::public static List \u003C SpectrumComparisonRow \u003E BuildFromInputs ( string rawDirectory , string sepr2Path , string deNovoDirectory , IEnumerable \u003C QuantRow \u003E quantRows , IReadOnlyList \u003C DeNovoSourceSelection \u003E selections , DeNovoFilterCriteria criteria , Action \u003C string \u003E ? progress = null )",
-          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
+          "sha256": "543977625B258DA255997F76B721ECD25BB6B5852F783679C469D1B9F7068ABE"
         }
       ],
       "proofs": [],
@@ -6960,7 +7128,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
           "symbol": "FamilyQuant.DeNovo.SpectrumComparisonTable::private static ( string ids , string assignments , double ? identity , string status ) DescribeFamilies ( IReadOnlyList \u003C int \u003E familyIds , IReadOnlyDictionary \u003C int , string \u003E ? labels , FamilyQuant . PeptideFamilyAttribution ? attribution )",
-          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
+          "sha256": "543977625B258DA255997F76B721ECD25BB6B5852F783679C469D1B9F7068ABE"
         }
       ],
       "proofs": [],
@@ -6988,7 +7156,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
           "symbol": "FamilyQuant.DeNovo.SpectrumComparisonTable::private static SpectrumComparisonRow ToRow ( Cluster cluster , int hypothesisIndex , int hypothesesInScan , ReferenceEnvelopeDiagnostics reference , IReadOnlyDictionary \u003C int , string \u003E ? familyLabels , FamilyQuant . PeptideFamilyAttribution ? familyAttribution , RawScanPrecursorMetadata ? raw , IReadOnlyDictionary \u003C string , List \u003C NativePeptideQuant \u003E\u003E creditedByIdentity , double ? runTic , double ? pooledTic )",
-          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
+          "sha256": "543977625B258DA255997F76B721ECD25BB6B5852F783679C469D1B9F7068ABE"
         }
       ],
       "proofs": [],
@@ -7044,7 +7212,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
           "symbol": "FamilyQuant.DeNovo.SpectrumComparisonTable::private static SpectrumComparisonRow ToRow ( Cluster cluster , int hypothesisIndex , int hypothesesInScan , ReferenceEnvelopeDiagnostics reference , IReadOnlyDictionary \u003C int , string \u003E ? familyLabels , FamilyQuant . PeptideFamilyAttribution ? familyAttribution , RawScanPrecursorMetadata ? raw , IReadOnlyDictionary \u003C string , List \u003C NativePeptideQuant \u003E\u003E creditedByIdentity , double ? runTic , double ? pooledTic )",
-          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
+          "sha256": "543977625B258DA255997F76B721ECD25BB6B5852F783679C469D1B9F7068ABE"
         }
       ],
       "proofs": [],
@@ -7184,7 +7352,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
           "symbol": "FamilyQuant.DeNovo.SpectrumComparisonTable::private static List \u003C Claim \u003E Ranked ( IEnumerable \u003C Claim \u003E claims )",
-          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
+          "sha256": "543977625B258DA255997F76B721ECD25BB6B5852F783679C469D1B9F7068ABE"
         }
       ],
       "proofs": [],
@@ -7198,7 +7366,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
           "symbol": "FamilyQuant.DeNovo.SpectrumComparisonTable::private static string SourceObservationKey ( PeaksDeNovoRow row )",
-          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
+          "sha256": "543977625B258DA255997F76B721ECD25BB6B5852F783679C469D1B9F7068ABE"
         }
       ],
       "proofs": [],
@@ -7328,7 +7496,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
           "symbol": "FamilyQuant.DeNovo.SpectrumComparisonTable::private static string EquivalentClaimKey ( Claim claim )",
-          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
+          "sha256": "543977625B258DA255997F76B721ECD25BB6B5852F783679C469D1B9F7068ABE"
         }
       ],
       "proofs": [],
@@ -7384,7 +7552,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
           "symbol": "FamilyQuant.DeNovo.SpectrumComparisonTable::public static string SaveCsv ( string path , IEnumerable \u003C SpectrumComparisonRow \u003E rows )",
-          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
+          "sha256": "543977625B258DA255997F76B721ECD25BB6B5852F783679C469D1B9F7068ABE"
         }
       ],
       "proofs": [],
@@ -7468,7 +7636,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
           "symbol": "FamilyQuant.DeNovo.SpectrumComparisonTable::private const string KeptMarker",
-          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
+          "sha256": "543977625B258DA255997F76B721ECD25BB6B5852F783679C469D1B9F7068ABE"
         }
       ],
       "proofs": [],
@@ -7496,7 +7664,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs",
           "symbol": "FamilyQuant.DeNovo.Ms1EnvelopeDetector::public const string StrongEvidenceLabel",
-          "sha256": "4869CFA848996AF803B9DFC7C10A621C1E08514F88D1EAF09F31E3DD13FB9903"
+          "sha256": "C98DD10DCD1D8A2BD943AD937CA7CD0324E526E04326A679FB9738E3AD252181"
         }
       ],
       "proofs": [],
@@ -7538,7 +7706,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs",
           "symbol": "FamilyQuant.DeNovo.Ms1EnvelopeDetector::private static void SaveCache ( string path , Ms1EnvelopeDetectionResult result , string sourceFingerprint )",
-          "sha256": "4869CFA848996AF803B9DFC7C10A621C1E08514F88D1EAF09F31E3DD13FB9903"
+          "sha256": "C98DD10DCD1D8A2BD943AD937CA7CD0324E526E04326A679FB9738E3AD252181"
         }
       ],
       "proofs": [],
@@ -7658,7 +7826,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/ReferenceEnvelopeEstimator.cs",
           "symbol": "FamilyQuant.DeNovo.ReferenceEnvelopeDiagnostics::public void Validate ( )",
-          "sha256": "FDC3528CF45CE9023D8576FD87680DFED3F20E2F530DCEC11EA8C78D38458080"
+          "sha256": "D7ED2E083865F99EDD033DD04C57ED0890BAA11347DF579EEBAFC68BA5A6BA52"
         }
       ],
       "proofs": [],
@@ -7708,7 +7876,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/ReferenceEnvelopeEstimator.cs",
           "symbol": "FamilyQuant.DeNovo.ReferenceEnvelopeEstimator::public static string ToCsv ( ReferenceEnvelopeDiagnostics diagnostics )",
-          "sha256": "FDC3528CF45CE9023D8576FD87680DFED3F20E2F530DCEC11EA8C78D38458080"
+          "sha256": "D7ED2E083865F99EDD033DD04C57ED0890BAA11347DF579EEBAFC68BA5A6BA52"
         }
       ],
       "proofs": [],
@@ -7722,7 +7890,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/ReferenceEnvelopeEstimator.cs",
           "symbol": "FamilyQuant.DeNovo.ReferenceEnvelopeEstimator::public static string ToCsv ( ReferenceEnvelopeDiagnostics diagnostics )",
-          "sha256": "FDC3528CF45CE9023D8576FD87680DFED3F20E2F530DCEC11EA8C78D38458080"
+          "sha256": "D7ED2E083865F99EDD033DD04C57ED0890BAA11347DF579EEBAFC68BA5A6BA52"
         }
       ],
       "proofs": [],
@@ -7764,7 +7932,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
           "symbol": "FamilyQuant.DeNovo.SpectrumComparisonTable::private static List \u003C Claim \u003E Ranked ( IEnumerable \u003C Claim \u003E claims )",
-          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
+          "sha256": "543977625B258DA255997F76B721ECD25BB6B5852F783679C469D1B9F7068ABE"
         }
       ],
       "proofs": [],
@@ -7820,7 +7988,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/ReferenceEnvelopeEstimator.cs",
           "symbol": "FamilyQuant.DeNovo.ReferenceEnvelopeEstimator::public static string ToCsv ( ReferenceEnvelopeDiagnostics diagnostics )",
-          "sha256": "FDC3528CF45CE9023D8576FD87680DFED3F20E2F530DCEC11EA8C78D38458080"
+          "sha256": "D7ED2E083865F99EDD033DD04C57ED0890BAA11347DF579EEBAFC68BA5A6BA52"
         }
       ],
       "proofs": [],
@@ -7884,7 +8052,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/ReferenceEnvelopeEstimator.cs",
           "symbol": "FamilyQuant.DeNovo.ReferenceEnvelopeEstimator::public static string ToCsv ( ReferenceEnvelopeDiagnostics diagnostics )",
-          "sha256": "FDC3528CF45CE9023D8576FD87680DFED3F20E2F530DCEC11EA8C78D38458080"
+          "sha256": "D7ED2E083865F99EDD033DD04C57ED0890BAA11347DF579EEBAFC68BA5A6BA52"
         }
       ],
       "proofs": [],
@@ -7912,7 +8080,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
           "symbol": "FamilyQuant.DeNovo.SpectrumComparisonTable::private static SpectrumComparisonRow ToRow ( Cluster cluster , int hypothesisIndex , int hypothesesInScan , ReferenceEnvelopeDiagnostics reference , IReadOnlyDictionary \u003C int , string \u003E ? familyLabels , FamilyQuant . PeptideFamilyAttribution ? familyAttribution , RawScanPrecursorMetadata ? raw , IReadOnlyDictionary \u003C string , List \u003C NativePeptideQuant \u003E\u003E creditedByIdentity , double ? runTic , double ? pooledTic )",
-          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
+          "sha256": "543977625B258DA255997F76B721ECD25BB6B5852F783679C469D1B9F7068ABE"
         }
       ],
       "proofs": [],
@@ -8010,7 +8178,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
           "symbol": "FamilyQuant.DeNovo.SpectrumComparisonTable::private static string SourceObservationKey ( PeaksDeNovoRow row )",
-          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
+          "sha256": "543977625B258DA255997F76B721ECD25BB6B5852F783679C469D1B9F7068ABE"
         }
       ],
       "proofs": [],
@@ -8024,7 +8192,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
           "symbol": "FamilyQuant.DeNovo.SpectrumComparisonTable::private static SpectrumComparisonRow ToRow ( Cluster cluster , int hypothesisIndex , int hypothesesInScan , ReferenceEnvelopeDiagnostics reference , IReadOnlyDictionary \u003C int , string \u003E ? familyLabels , FamilyQuant . PeptideFamilyAttribution ? familyAttribution , RawScanPrecursorMetadata ? raw , IReadOnlyDictionary \u003C string , List \u003C NativePeptideQuant \u003E\u003E creditedByIdentity , double ? runTic , double ? pooledTic )",
-          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
+          "sha256": "543977625B258DA255997F76B721ECD25BB6B5852F783679C469D1B9F7068ABE"
         }
       ],
       "proofs": [],
@@ -8102,7 +8270,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/ReferenceEnvelopeEstimator.cs",
           "symbol": "FamilyQuant.DeNovo.ReferenceEnvelopeEstimator::public static string ToCsv ( ReferenceEnvelopeDiagnostics diagnostics )",
-          "sha256": "FDC3528CF45CE9023D8576FD87680DFED3F20E2F530DCEC11EA8C78D38458080"
+          "sha256": "D7ED2E083865F99EDD033DD04C57ED0890BAA11347DF579EEBAFC68BA5A6BA52"
         }
       ],
       "proofs": [],
@@ -8144,7 +8312,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/ReferenceEnvelopeEstimator.cs",
           "symbol": "FamilyQuant.DeNovo.ReferenceEnvelopeEstimator::public static string ToCsv ( ReferenceEnvelopeDiagnostics diagnostics )",
-          "sha256": "FDC3528CF45CE9023D8576FD87680DFED3F20E2F530DCEC11EA8C78D38458080"
+          "sha256": "D7ED2E083865F99EDD033DD04C57ED0890BAA11347DF579EEBAFC68BA5A6BA52"
         }
       ],
       "proofs": [],
@@ -8306,7 +8474,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
           "symbol": "FamilyQuant.DeNovo.SpectrumComparisonTable::private static string Alternates ( IReadOnlyList \u003C Claim \u003E ranked )",
-          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
+          "sha256": "543977625B258DA255997F76B721ECD25BB6B5852F783679C469D1B9F7068ABE"
         }
       ],
       "proofs": [],
@@ -8370,7 +8538,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs",
           "symbol": "FamilyQuant.DeNovo.Ms1EnvelopeDetector::public const string SinglyChargedCaveat",
-          "sha256": "4869CFA848996AF803B9DFC7C10A621C1E08514F88D1EAF09F31E3DD13FB9903"
+          "sha256": "C98DD10DCD1D8A2BD943AD937CA7CD0324E526E04326A679FB9738E3AD252181"
         }
       ],
       "proofs": [],
@@ -8384,7 +8552,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
           "symbol": "FamilyQuant.DeNovo.SpectrumComparisonTable::private static string CreditedKey ( QuantRow quant )",
-          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
+          "sha256": "543977625B258DA255997F76B721ECD25BB6B5852F783679C469D1B9F7068ABE"
         }
       ],
       "proofs": [],
@@ -8406,7 +8574,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/ReferenceEnvelopeEstimator.cs",
           "symbol": "FamilyQuant.DeNovo.ReferenceEnvelopeEstimator::public static string ToCsv ( ReferenceEnvelopeDiagnostics diagnostics )",
-          "sha256": "FDC3528CF45CE9023D8576FD87680DFED3F20E2F530DCEC11EA8C78D38458080"
+          "sha256": "D7ED2E083865F99EDD033DD04C57ED0890BAA11347DF579EEBAFC68BA5A6BA52"
         }
       ],
       "proofs": [],
@@ -8518,7 +8686,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
           "symbol": "FamilyQuant.DeNovo.SpectrumComparisonTable::public static List \u003C SpectrumComparisonRow \u003E BuildFromInputs ( string rawDirectory , string sepr2Path , string deNovoDirectory , IEnumerable \u003C QuantRow \u003E quantRows , IReadOnlyList \u003C DeNovoSourceSelection \u003E selections , DeNovoFilterCriteria criteria , Action \u003C string \u003E ? progress = null )",
-          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
+          "sha256": "543977625B258DA255997F76B721ECD25BB6B5852F783679C469D1B9F7068ABE"
         }
       ],
       "proofs": [],
@@ -8626,7 +8794,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
           "symbol": "FamilyQuant.DeNovo.SpectrumComparisonTable::private static SpectrumComparisonRow ToRow ( Cluster cluster , int hypothesisIndex , int hypothesesInScan , ReferenceEnvelopeDiagnostics reference , IReadOnlyDictionary \u003C int , string \u003E ? familyLabels , FamilyQuant . PeptideFamilyAttribution ? familyAttribution , RawScanPrecursorMetadata ? raw , IReadOnlyDictionary \u003C string , List \u003C NativePeptideQuant \u003E\u003E creditedByIdentity , double ? runTic , double ? pooledTic )",
-          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
+          "sha256": "543977625B258DA255997F76B721ECD25BB6B5852F783679C469D1B9F7068ABE"
         }
       ],
       "proofs": [],
@@ -8970,7 +9138,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
           "symbol": "FamilyQuant.DeNovo.SpectrumComparisonTable::private static string CreditedKey ( NativePeptideQuant quant )",
-          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
+          "sha256": "543977625B258DA255997F76B721ECD25BB6B5852F783679C469D1B9F7068ABE"
         }
       ],
       "proofs": [],
@@ -8984,7 +9152,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
           "symbol": "FamilyQuant.DeNovo.SpectrumComparisonTable::public const string Grain",
-          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
+          "sha256": "543977625B258DA255997F76B721ECD25BB6B5852F783679C469D1B9F7068ABE"
         }
       ],
       "proofs": [],
@@ -9112,7 +9280,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/ReferenceEnvelopeEstimator.cs",
           "symbol": "FamilyQuant.DeNovo.ReferenceEnvelopeDiagnostics::public void Validate ( )",
-          "sha256": "FDC3528CF45CE9023D8576FD87680DFED3F20E2F530DCEC11EA8C78D38458080"
+          "sha256": "D7ED2E083865F99EDD033DD04C57ED0890BAA11347DF579EEBAFC68BA5A6BA52"
         }
       ],
       "proofs": [],
@@ -9368,7 +9536,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/ReferenceEnvelopeEstimator.cs",
           "symbol": "FamilyQuant.DeNovo.ReferenceEnvelopeEstimator::public static string ToCsv ( ReferenceEnvelopeDiagnostics diagnostics )",
-          "sha256": "FDC3528CF45CE9023D8576FD87680DFED3F20E2F530DCEC11EA8C78D38458080"
+          "sha256": "D7ED2E083865F99EDD033DD04C57ED0890BAA11347DF579EEBAFC68BA5A6BA52"
         }
       ],
       "proofs": [],
@@ -9424,7 +9592,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/ReferenceEnvelopeEstimator.cs",
           "symbol": "FamilyQuant.DeNovo.ReferenceEnvelopeEstimator::private static string Num ( double value )",
-          "sha256": "FDC3528CF45CE9023D8576FD87680DFED3F20E2F530DCEC11EA8C78D38458080"
+          "sha256": "D7ED2E083865F99EDD033DD04C57ED0890BAA11347DF579EEBAFC68BA5A6BA52"
         }
       ],
       "proofs": [],
@@ -9496,7 +9664,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
           "symbol": "FamilyQuant.DeNovo.SpectrumComparisonTable::private static SpectrumComparisonRow ToRow ( Cluster cluster , int hypothesisIndex , int hypothesesInScan , ReferenceEnvelopeDiagnostics reference , IReadOnlyDictionary \u003C int , string \u003E ? familyLabels , FamilyQuant . PeptideFamilyAttribution ? familyAttribution , RawScanPrecursorMetadata ? raw , IReadOnlyDictionary \u003C string , List \u003C NativePeptideQuant \u003E\u003E creditedByIdentity , double ? runTic , double ? pooledTic )",
-          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
+          "sha256": "543977625B258DA255997F76B721ECD25BB6B5852F783679C469D1B9F7068ABE"
         }
       ],
       "proofs": [],
@@ -9552,7 +9720,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
           "symbol": "FamilyQuant.DeNovo.SpectrumComparisonTable::private static SpectrumComparisonRow ToRow ( Cluster cluster , int hypothesisIndex , int hypothesesInScan , ReferenceEnvelopeDiagnostics reference , IReadOnlyDictionary \u003C int , string \u003E ? familyLabels , FamilyQuant . PeptideFamilyAttribution ? familyAttribution , RawScanPrecursorMetadata ? raw , IReadOnlyDictionary \u003C string , List \u003C NativePeptideQuant \u003E\u003E creditedByIdentity , double ? runTic , double ? pooledTic )",
-          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
+          "sha256": "543977625B258DA255997F76B721ECD25BB6B5852F783679C469D1B9F7068ABE"
         }
       ],
       "proofs": [],
@@ -9728,7 +9896,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
           "symbol": "FamilyQuant.DeNovo.SpectrumComparisonTable::public static void MarkFamilyAssignmentsUnavailable ( IEnumerable \u003C SpectrumComparisonRow \u003E rows , string reason )",
-          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
+          "sha256": "543977625B258DA255997F76B721ECD25BB6B5852F783679C469D1B9F7068ABE"
         }
       ],
       "proofs": [],
@@ -9742,7 +9910,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
           "symbol": "FamilyQuant.DeNovo.SpectrumComparisonTable::private static SpectrumComparisonRow ToRow ( Cluster cluster , int hypothesisIndex , int hypothesesInScan , ReferenceEnvelopeDiagnostics reference , IReadOnlyDictionary \u003C int , string \u003E ? familyLabels , FamilyQuant . PeptideFamilyAttribution ? familyAttribution , RawScanPrecursorMetadata ? raw , IReadOnlyDictionary \u003C string , List \u003C NativePeptideQuant \u003E\u003E creditedByIdentity , double ? runTic , double ? pooledTic )",
-          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
+          "sha256": "543977625B258DA255997F76B721ECD25BB6B5852F783679C469D1B9F7068ABE"
         }
       ],
       "proofs": [],
@@ -9770,7 +9938,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
           "symbol": "FamilyQuant.DeNovo.SpectrumComparisonTable::private static string SourceObservationKey ( PeaksDeNovoRow row )",
-          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
+          "sha256": "543977625B258DA255997F76B721ECD25BB6B5852F783679C469D1B9F7068ABE"
         }
       ],
       "proofs": [],
@@ -9840,7 +10008,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
           "symbol": "FamilyQuant.DeNovo.SpectrumComparisonTable::public static List \u003C SpectrumComparisonRow \u003E BuildFromInputs ( string rawDirectory , string sepr2Path , string deNovoDirectory , IEnumerable \u003C QuantRow \u003E quantRows , IReadOnlyList \u003C DeNovoSourceSelection \u003E selections , DeNovoFilterCriteria criteria , Action \u003C string \u003E ? progress = null )",
-          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
+          "sha256": "543977625B258DA255997F76B721ECD25BB6B5852F783679C469D1B9F7068ABE"
         }
       ],
       "proofs": [],
@@ -9868,7 +10036,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/ReferenceEnvelopeEstimator.cs",
           "symbol": "FamilyQuant.DeNovo.ReferenceEnvelopeEstimator::public const string ProvenanceLabel",
-          "sha256": "FDC3528CF45CE9023D8576FD87680DFED3F20E2F530DCEC11EA8C78D38458080"
+          "sha256": "D7ED2E083865F99EDD033DD04C57ED0890BAA11347DF579EEBAFC68BA5A6BA52"
         }
       ],
       "proofs": [],
@@ -9882,7 +10050,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
           "symbol": "FamilyQuant.DeNovo.SpectrumComparisonTable::public static List \u003C SpectrumComparisonRow \u003E BuildFromInputs ( string rawDirectory , string sepr2Path , string deNovoDirectory , IEnumerable \u003C QuantRow \u003E quantRows , IReadOnlyList \u003C DeNovoSourceSelection \u003E selections , DeNovoFilterCriteria criteria , Action \u003C string \u003E ? progress = null )",
-          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
+          "sha256": "543977625B258DA255997F76B721ECD25BB6B5852F783679C469D1B9F7068ABE"
         }
       ],
       "proofs": [],
@@ -9994,7 +10162,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
           "symbol": "FamilyQuant.DeNovo.SpectrumComparisonTable::public const string Grain",
-          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
+          "sha256": "543977625B258DA255997F76B721ECD25BB6B5852F783679C469D1B9F7068ABE"
         }
       ],
       "proofs": [],
@@ -10064,7 +10232,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs",
           "symbol": "FamilyQuant.DeNovo.Ms1EnvelopeDetector::public const string WeakEvidenceLabel",
-          "sha256": "4869CFA848996AF803B9DFC7C10A621C1E08514F88D1EAF09F31E3DD13FB9903"
+          "sha256": "C98DD10DCD1D8A2BD943AD937CA7CD0324E526E04326A679FB9738E3AD252181"
         }
       ],
       "proofs": [],
@@ -10148,7 +10316,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
           "symbol": "FamilyQuant.DeNovo.SpectrumComparisonTable::private static string Alternates ( IReadOnlyList \u003C Claim \u003E ranked )",
-          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
+          "sha256": "543977625B258DA255997F76B721ECD25BB6B5852F783679C469D1B9F7068ABE"
         }
       ],
       "proofs": [],
@@ -10189,14 +10357,88 @@
       "implementation": [
         {
           "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
-          "symbol": "FamilyQuant.DeNovo.SpectrumComparisonTable::public static List \u003C SpectrumComparisonRow \u003E Build ( IEnumerable \u003C PeaksDeNovoRow \u003E peaksDeNovoRows , IEnumerable \u003C PeaksDeNovoRow \u003E deepNovoRows , IEnumerable \u003C PatternLabPsm \u003E patternLabPsms , IEnumerable \u003C QuantRow \u003E quantRows , IReadOnlyDictionary \u003C int , string \u003E ? familyLabels = null , FamilyQuant . PeptideFamilyAttribution ? familyAttribution = null , IEnumerable \u003C RawScanPrecursorMetadata \u003E ? rawPrecursors = null , IReadOnlyDictionary \u003C string , double \u003E ? perRunTic = null , IEnumerable \u003C PeaksDeNovoRow \u003E ? acceptedDeNovoRows = null )",
-          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
+          "symbol": "SpectrumComparisonTable.Build; executed embedded PatternLab claims",
+          "sha256": "543977625B258DA255997F76B721ECD25BB6B5852F783679C469D1B9F7068ABE"
+        },
+        {
+          "path": "FamilyQuant.Core/Storage/QuantRow.cs",
+          "symbol": "Scoped native spectrum proof dependency",
+          "sha256": "7C8F6076F895F8935C09E72A8B12C79AB42886CA35F9132E026F77CE3DF307F1"
+        },
+        {
+          "path": "FamilyQuant.Core/DeNovo/DeNovoReconciler.cs",
+          "symbol": "Scoped native spectrum proof dependency",
+          "sha256": "E773452CA224E76B70017F184E502BD1ED9B6D1E9E40CE28DE31FF512226E105"
+        },
+        {
+          "path": "FamilyQuant.Core/DeNovo/NativeQuantFractions.cs",
+          "symbol": "Scoped native spectrum proof dependency",
+          "sha256": "1B584F17E5D5796993F127A35D75354F178185E9C84536C96198D50908FCCB4E"
+        },
+        {
+          "path": "FamilyQuant.Core/DeNovo/PeptidoformIdentity.cs",
+          "symbol": "Scoped native spectrum proof dependency",
+          "sha256": "1AE27580D2FD1A5325D0FD126414E855EFF0A14E3EC4CB8FBA875840EB48D9B9"
+        },
+        {
+          "path": "FamilyQuant.Core/DeNovo/DeNovoSource.cs",
+          "symbol": "Scoped native spectrum proof dependency",
+          "sha256": "F5D28EB3D7DC60C34D4288ED4C55EBB7C8878D8ECC015842B907469BC4267D3C"
+        },
+        {
+          "path": "FamilyQuant.Core/DeNovo/SeproPsmAdapter.cs",
+          "symbol": "Scoped native spectrum proof dependency",
+          "sha256": "00B9CFF5C8A4A5CFD7714F3CC076FF44DB00BAAB13EB02153A11B890F9696C40"
+        },
+        {
+          "path": "FamilyQuant.Core/DeNovo/Readers/DeNovoSourceRows.cs",
+          "symbol": "Scoped native spectrum proof dependency",
+          "sha256": "14F011D7B49E7F486F87D6FECB385DF819EE8CF8D929E3C22F577DE884AE49B2"
+        },
+        {
+          "path": "FamilyQuant.Core/Operations/CoreOperation.cs",
+          "symbol": "Scoped native spectrum proof dependency",
+          "sha256": "FBE4D0DE84DA1C37A62AA6BD314ADE9E76EBAB801B101733565ADB3C51757BB4"
+        },
+        {
+          "path": "FamilyQuant.Tests/Program.LedgerAssayComparison.cs",
+          "symbol": "Scoped native spectrum proof dependency",
+          "sha256": "02F38BB3F048A73C1B1C373E814A31B4428CC9DF2E38318370E070B8B9F279E9"
+        },
+        {
+          "path": "FamilyQuant.Tests/Program.LedgerAssaySpectrumProof.cs",
+          "symbol": "Scoped native spectrum proof dependency",
+          "sha256": "02E5523530C4E88911AFDE3D5C1A946ADFB1051CD57FFC6B7E433E5D95BB8E18"
+        },
+        {
+          "path": "FamilyQuant.Tests/Program.SecondaryInjectedMethod.cs",
+          "symbol": "Scoped native spectrum proof dependency",
+          "sha256": "23A7781DDBD6E2B6299FB12C9F31A083CC4FF42C290513848F61EA4CEF31E2D1"
+        },
+        {
+          "path": "FamilyQuant.Tests/Program.DeNovoLedgerWorkflow.cs",
+          "symbol": "Scoped native spectrum proof dependency",
+          "sha256": "10CE2ADF8BCDDA54E5E42D43D9E0F29623CFE6583229B8E6EE2585F3D966D6E5"
+        },
+        {
+          "path": "FamilyQuant.Tests/LedgerMemberFactComparison.cs",
+          "symbol": "Scoped native spectrum proof dependency",
+          "sha256": "1F3254D635B40D22576E9F40347DBEB503A5FF661EFC18E743EAC35B097FC14C"
         }
       ],
-      "proofs": [],
-      "note": "Exact literal syntax, multiplicity and complete member tokens agree. Declaration only; no runtime or behavior claim.",
-      "kindReceiptId": "member-export-storage-fact",
-      "compared": "\u0022XCorr\u0022 -\u003E FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs: FamilyQuant.DeNovo.SpectrumComparisonTable::public static List \u003C SpectrumComparisonRow \u003E Build ( IEnumerable \u003C PeaksDeNovoRow \u003E peaksDeNovoRows , IEnumerable \u003C PeaksDeNovoRow \u003E deepNovoRows , IEnumerable \u003C PatternLabPsm \u003E patternLabPsms , IEnumerable \u003C QuantRow \u003E quantRows , IReadOnlyDictionary \u003C int , string \u003E ? familyLabels = null , FamilyQuant . PeptideFamilyAttribution ? familyAttribution = null , IEnumerable \u003C RawScanPrecursorMetadata \u003E ? rawPrecursors = null , IReadOnlyDictionary \u003C string , double \u003E ? perRunTic = null , IEnumerable \u003C PeaksDeNovoRow \u003E ? acceptedDeNovoRows = null ) = \u0022XCorr\u0022"
+      "proofs": [
+        {
+          "runId": "AS-member-comparison",
+          "kind": "test",
+          "target": "ProveAssaySpectrumFacts",
+          "assertion": "K9b native fallback fact FQ15-AB0D120CA773: exact frozen/current claim field observed and full CSV bytes equal in both cultures with progress absent/present",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\assay-retained\\comparisons.log",
+          "inspectedBy": ""
+        }
+      ],
+      "note": "Executed pinned frozen/current Build, observed real embedded claim fields at the unchanged clustering boundary, and equal full CSV bytes with and without progress in two cultures. Declaration equality is not claimed.",
+      "kindReceiptId": null,
+      "compared": "FamilyQuant.DeNovo.SpectrumComparisonTable::public static List \u003C SpectrumComparisonRow \u003E Build ( IEnumerable \u003C PeaksDeNovoRow \u003E peaksDeNovoRows , IEnumerable \u003C PeaksDeNovoRow \u003E deepNovoRows , IEnumerable \u003C PatternLabPsm \u003E patternLabPsms , IEnumerable \u003C QuantRow \u003E quantRows , IReadOnlyDictionary \u003C int , string \u003E ? familyLabels = null , FamilyQuant . PeptideFamilyAttribution ? familyAttribution = null , IEnumerable \u003C RawScanPrecursorMetadata \u003E ? rawPrecursors = null , IReadOnlyDictionary \u003C string , double \u003E ? perRunTic = null , IEnumerable \u003C PeaksDeNovoRow \u003E ? acceptedDeNovoRows = null ): \u0022XCorr\u0022; scoped native field/output proof"
     },
     {
       "observationId": "FQ15-AB2753855FA1",
@@ -10204,7 +10446,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
           "symbol": "FamilyQuant.DeNovo.SpectrumComparisonTable::private static string SourceObservationKey ( PeaksDeNovoRow row )",
-          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
+          "sha256": "543977625B258DA255997F76B721ECD25BB6B5852F783679C469D1B9F7068ABE"
         }
       ],
       "proofs": [],
@@ -10218,7 +10460,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
           "symbol": "FamilyQuant.DeNovo.SpectrumComparisonTable::private static string CsvLine ( SpectrumComparisonRow r )",
-          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
+          "sha256": "543977625B258DA255997F76B721ECD25BB6B5852F783679C469D1B9F7068ABE"
         }
       ],
       "proofs": [],
@@ -10267,14 +10509,88 @@
       "implementation": [
         {
           "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
-          "symbol": "FamilyQuant.DeNovo.SpectrumComparisonTable::public static List \u003C SpectrumComparisonRow \u003E Build ( IEnumerable \u003C PeaksDeNovoRow \u003E peaksDeNovoRows , IEnumerable \u003C PeaksDeNovoRow \u003E deepNovoRows , IEnumerable \u003C PatternLabPsm \u003E patternLabPsms , IEnumerable \u003C QuantRow \u003E quantRows , IReadOnlyDictionary \u003C int , string \u003E ? familyLabels = null , FamilyQuant . PeptideFamilyAttribution ? familyAttribution = null , IEnumerable \u003C RawScanPrecursorMetadata \u003E ? rawPrecursors = null , IReadOnlyDictionary \u003C string , double \u003E ? perRunTic = null , IEnumerable \u003C PeaksDeNovoRow \u003E ? acceptedDeNovoRows = null )",
-          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
+          "symbol": "SpectrumComparisonTable.Build; executed embedded PatternLab claims",
+          "sha256": "543977625B258DA255997F76B721ECD25BB6B5852F783679C469D1B9F7068ABE"
+        },
+        {
+          "path": "FamilyQuant.Core/Storage/QuantRow.cs",
+          "symbol": "Scoped native spectrum proof dependency",
+          "sha256": "7C8F6076F895F8935C09E72A8B12C79AB42886CA35F9132E026F77CE3DF307F1"
+        },
+        {
+          "path": "FamilyQuant.Core/DeNovo/DeNovoReconciler.cs",
+          "symbol": "Scoped native spectrum proof dependency",
+          "sha256": "E773452CA224E76B70017F184E502BD1ED9B6D1E9E40CE28DE31FF512226E105"
+        },
+        {
+          "path": "FamilyQuant.Core/DeNovo/NativeQuantFractions.cs",
+          "symbol": "Scoped native spectrum proof dependency",
+          "sha256": "1B584F17E5D5796993F127A35D75354F178185E9C84536C96198D50908FCCB4E"
+        },
+        {
+          "path": "FamilyQuant.Core/DeNovo/PeptidoformIdentity.cs",
+          "symbol": "Scoped native spectrum proof dependency",
+          "sha256": "1AE27580D2FD1A5325D0FD126414E855EFF0A14E3EC4CB8FBA875840EB48D9B9"
+        },
+        {
+          "path": "FamilyQuant.Core/DeNovo/DeNovoSource.cs",
+          "symbol": "Scoped native spectrum proof dependency",
+          "sha256": "F5D28EB3D7DC60C34D4288ED4C55EBB7C8878D8ECC015842B907469BC4267D3C"
+        },
+        {
+          "path": "FamilyQuant.Core/DeNovo/SeproPsmAdapter.cs",
+          "symbol": "Scoped native spectrum proof dependency",
+          "sha256": "00B9CFF5C8A4A5CFD7714F3CC076FF44DB00BAAB13EB02153A11B890F9696C40"
+        },
+        {
+          "path": "FamilyQuant.Core/DeNovo/Readers/DeNovoSourceRows.cs",
+          "symbol": "Scoped native spectrum proof dependency",
+          "sha256": "14F011D7B49E7F486F87D6FECB385DF819EE8CF8D929E3C22F577DE884AE49B2"
+        },
+        {
+          "path": "FamilyQuant.Core/Operations/CoreOperation.cs",
+          "symbol": "Scoped native spectrum proof dependency",
+          "sha256": "FBE4D0DE84DA1C37A62AA6BD314ADE9E76EBAB801B101733565ADB3C51757BB4"
+        },
+        {
+          "path": "FamilyQuant.Tests/Program.LedgerAssayComparison.cs",
+          "symbol": "Scoped native spectrum proof dependency",
+          "sha256": "02F38BB3F048A73C1B1C373E814A31B4428CC9DF2E38318370E070B8B9F279E9"
+        },
+        {
+          "path": "FamilyQuant.Tests/Program.LedgerAssaySpectrumProof.cs",
+          "symbol": "Scoped native spectrum proof dependency",
+          "sha256": "02E5523530C4E88911AFDE3D5C1A946ADFB1051CD57FFC6B7E433E5D95BB8E18"
+        },
+        {
+          "path": "FamilyQuant.Tests/Program.SecondaryInjectedMethod.cs",
+          "symbol": "Scoped native spectrum proof dependency",
+          "sha256": "23A7781DDBD6E2B6299FB12C9F31A083CC4FF42C290513848F61EA4CEF31E2D1"
+        },
+        {
+          "path": "FamilyQuant.Tests/Program.DeNovoLedgerWorkflow.cs",
+          "symbol": "Scoped native spectrum proof dependency",
+          "sha256": "10CE2ADF8BCDDA54E5E42D43D9E0F29623CFE6583229B8E6EE2585F3D966D6E5"
+        },
+        {
+          "path": "FamilyQuant.Tests/LedgerMemberFactComparison.cs",
+          "symbol": "Scoped native spectrum proof dependency",
+          "sha256": "1F3254D635B40D22576E9F40347DBEB503A5FF661EFC18E743EAC35B097FC14C"
         }
       ],
-      "proofs": [],
-      "note": "Exact literal syntax, multiplicity and complete member tokens agree. Declaration only; no runtime or behavior claim.",
-      "kindReceiptId": "member-export-storage-fact",
-      "compared": "\u0022patternlab\u0022 -\u003E FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs: FamilyQuant.DeNovo.SpectrumComparisonTable::public static List \u003C SpectrumComparisonRow \u003E Build ( IEnumerable \u003C PeaksDeNovoRow \u003E peaksDeNovoRows , IEnumerable \u003C PeaksDeNovoRow \u003E deepNovoRows , IEnumerable \u003C PatternLabPsm \u003E patternLabPsms , IEnumerable \u003C QuantRow \u003E quantRows , IReadOnlyDictionary \u003C int , string \u003E ? familyLabels = null , FamilyQuant . PeptideFamilyAttribution ? familyAttribution = null , IEnumerable \u003C RawScanPrecursorMetadata \u003E ? rawPrecursors = null , IReadOnlyDictionary \u003C string , double \u003E ? perRunTic = null , IEnumerable \u003C PeaksDeNovoRow \u003E ? acceptedDeNovoRows = null ) = \u0022patternlab\u0022"
+      "proofs": [
+        {
+          "runId": "AS-member-comparison",
+          "kind": "test",
+          "target": "ProveAssaySpectrumFacts",
+          "assertion": "K9b native fallback fact FQ15-ABD9B82A59A3: exact frozen/current claim field observed and full CSV bytes equal in both cultures with progress absent/present",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\assay-retained\\comparisons.log",
+          "inspectedBy": ""
+        }
+      ],
+      "note": "Executed pinned frozen/current Build, observed real embedded claim fields at the unchanged clustering boundary, and equal full CSV bytes with and without progress in two cultures. Declaration equality is not claimed.",
+      "kindReceiptId": null,
+      "compared": "FamilyQuant.DeNovo.SpectrumComparisonTable::public static List \u003C SpectrumComparisonRow \u003E Build ( IEnumerable \u003C PeaksDeNovoRow \u003E peaksDeNovoRows , IEnumerable \u003C PeaksDeNovoRow \u003E deepNovoRows , IEnumerable \u003C PatternLabPsm \u003E patternLabPsms , IEnumerable \u003C QuantRow \u003E quantRows , IReadOnlyDictionary \u003C int , string \u003E ? familyLabels = null , FamilyQuant . PeptideFamilyAttribution ? familyAttribution = null , IEnumerable \u003C RawScanPrecursorMetadata \u003E ? rawPrecursors = null , IReadOnlyDictionary \u003C string , double \u003E ? perRunTic = null , IEnumerable \u003C PeaksDeNovoRow \u003E ? acceptedDeNovoRows = null ): \u0022patternlab\u0022; scoped native field/output proof"
     },
     {
       "observationId": "FQ15-AC36467B01E0",
@@ -10324,7 +10640,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
           "symbol": "FamilyQuant.DeNovo.SpectrumComparisonTable::public static List \u003C SpectrumComparisonRow \u003E BuildFromInputs ( string rawDirectory , string sepr2Path , string deNovoDirectory , IEnumerable \u003C QuantRow \u003E quantRows , IReadOnlyList \u003C DeNovoSourceSelection \u003E selections , DeNovoFilterCriteria criteria , Action \u003C string \u003E ? progress = null )",
-          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
+          "sha256": "543977625B258DA255997F76B721ECD25BB6B5852F783679C469D1B9F7068ABE"
         }
       ],
       "proofs": [],
@@ -10620,7 +10936,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
           "symbol": "FamilyQuant.DeNovo.SpectrumComparisonTable::private static SpectrumComparisonRow ToRow ( Cluster cluster , int hypothesisIndex , int hypothesesInScan , ReferenceEnvelopeDiagnostics reference , IReadOnlyDictionary \u003C int , string \u003E ? familyLabels , FamilyQuant . PeptideFamilyAttribution ? familyAttribution , RawScanPrecursorMetadata ? raw , IReadOnlyDictionary \u003C string , List \u003C NativePeptideQuant \u003E\u003E creditedByIdentity , double ? runTic , double ? pooledTic )",
-          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
+          "sha256": "543977625B258DA255997F76B721ECD25BB6B5852F783679C469D1B9F7068ABE"
         }
       ],
       "proofs": [],
@@ -10784,7 +11100,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
           "symbol": "FamilyQuant.DeNovo.SpectrumComparisonTable::private static List \u003C Claim \u003E Ranked ( IEnumerable \u003C Claim \u003E claims )",
-          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
+          "sha256": "543977625B258DA255997F76B721ECD25BB6B5852F783679C469D1B9F7068ABE"
         }
       ],
       "proofs": [],
@@ -11012,7 +11328,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
           "symbol": "FamilyQuant.DeNovo.SpectrumComparisonTable::private static string CreditedKey ( NativePeptideQuant quant )",
-          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
+          "sha256": "543977625B258DA255997F76B721ECD25BB6B5852F783679C469D1B9F7068ABE"
         }
       ],
       "proofs": [],
@@ -11118,7 +11434,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/ReferenceEnvelopeEstimator.cs",
           "symbol": "FamilyQuant.DeNovo.ReferenceEnvelopeEstimator::public const string ProvenanceLabel",
-          "sha256": "FDC3528CF45CE9023D8576FD87680DFED3F20E2F530DCEC11EA8C78D38458080"
+          "sha256": "D7ED2E083865F99EDD033DD04C57ED0890BAA11347DF579EEBAFC68BA5A6BA52"
         }
       ],
       "proofs": [],
@@ -11154,7 +11470,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
           "symbol": "FamilyQuant.DeNovo.SpectrumComparisonTable::private const string CsvHeader",
-          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
+          "sha256": "543977625B258DA255997F76B721ECD25BB6B5852F783679C469D1B9F7068ABE"
         }
       ],
       "proofs": [],
@@ -11182,7 +11498,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/ReferenceEnvelopeEstimator.cs",
           "symbol": "FamilyQuant.DeNovo.ReferenceEnvelopeEstimator::public static string ToCsv ( ReferenceEnvelopeDiagnostics diagnostics )",
-          "sha256": "FDC3528CF45CE9023D8576FD87680DFED3F20E2F530DCEC11EA8C78D38458080"
+          "sha256": "D7ED2E083865F99EDD033DD04C57ED0890BAA11347DF579EEBAFC68BA5A6BA52"
         }
       ],
       "proofs": [],
@@ -11294,7 +11610,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
           "symbol": "FamilyQuant.DeNovo.SpectrumComparisonTable::private static string EquivalentClaimKey ( Claim claim )",
-          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
+          "sha256": "543977625B258DA255997F76B721ECD25BB6B5852F783679C469D1B9F7068ABE"
         }
       ],
       "proofs": [],
@@ -11428,7 +11744,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
           "symbol": "FamilyQuant.DeNovo.SpectrumComparisonTable::private static string Alternates ( IReadOnlyList \u003C Claim \u003E ranked )",
-          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
+          "sha256": "543977625B258DA255997F76B721ECD25BB6B5852F783679C469D1B9F7068ABE"
         }
       ],
       "proofs": [],
@@ -11626,7 +11942,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
           "symbol": "FamilyQuant.DeNovo.SpectrumComparisonTable::private static string EquivalentClaimKey ( Claim claim )",
-          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
+          "sha256": "543977625B258DA255997F76B721ECD25BB6B5852F783679C469D1B9F7068ABE"
         }
       ],
       "proofs": [],
@@ -11690,7 +12006,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
           "symbol": "FamilyQuant.DeNovo.SpectrumComparisonTable::private static string SourceObservationKey ( PeaksDeNovoRow row )",
-          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
+          "sha256": "543977625B258DA255997F76B721ECD25BB6B5852F783679C469D1B9F7068ABE"
         }
       ],
       "proofs": [],
@@ -11782,7 +12098,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/ReferenceEnvelopeEstimator.cs",
           "symbol": "FamilyQuant.DeNovo.ReferenceEnvelopeEstimator::public static string ToCsv ( ReferenceEnvelopeDiagnostics diagnostics )",
-          "sha256": "FDC3528CF45CE9023D8576FD87680DFED3F20E2F530DCEC11EA8C78D38458080"
+          "sha256": "D7ED2E083865F99EDD033DD04C57ED0890BAA11347DF579EEBAFC68BA5A6BA52"
         }
       ],
       "proofs": [],
@@ -11874,7 +12190,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
           "symbol": "FamilyQuant.DeNovo.SpectrumComparisonTable::private static SpectrumComparisonRow ToRow ( Cluster cluster , int hypothesisIndex , int hypothesesInScan , ReferenceEnvelopeDiagnostics reference , IReadOnlyDictionary \u003C int , string \u003E ? familyLabels , FamilyQuant . PeptideFamilyAttribution ? familyAttribution , RawScanPrecursorMetadata ? raw , IReadOnlyDictionary \u003C string , List \u003C NativePeptideQuant \u003E\u003E creditedByIdentity , double ? runTic , double ? pooledTic )",
-          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
+          "sha256": "543977625B258DA255997F76B721ECD25BB6B5852F783679C469D1B9F7068ABE"
         }
       ],
       "proofs": [],
@@ -11958,7 +12274,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
           "symbol": "FamilyQuant.DeNovo.SpectrumComparisonTable::private static string EquivalentClaimKey ( Claim claim )",
-          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
+          "sha256": "543977625B258DA255997F76B721ECD25BB6B5852F783679C469D1B9F7068ABE"
         }
       ],
       "proofs": [],
@@ -12148,7 +12464,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
           "symbol": "FamilyQuant.DeNovo.SpectrumComparisonTable::private static string Alternates ( IReadOnlyList \u003C Claim \u003E ranked )",
-          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
+          "sha256": "543977625B258DA255997F76B721ECD25BB6B5852F783679C469D1B9F7068ABE"
         }
       ],
       "proofs": [],
@@ -12218,7 +12534,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
           "symbol": "FamilyQuant.DeNovo.SpectrumComparisonTable::private static Claim PatternLabClaim ( PatternLabPsm psm , bool external )",
-          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
+          "sha256": "543977625B258DA255997F76B721ECD25BB6B5852F783679C469D1B9F7068ABE"
         }
       ],
       "proofs": [],
@@ -12288,7 +12604,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
           "symbol": "FamilyQuant.DeNovo.SpectrumComparisonTable::public static void MarkFamilyAssignmentsUnavailable ( IEnumerable \u003C SpectrumComparisonRow \u003E rows , string reason )",
-          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
+          "sha256": "543977625B258DA255997F76B721ECD25BB6B5852F783679C469D1B9F7068ABE"
         }
       ],
       "proofs": [],
@@ -12316,7 +12632,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs",
           "symbol": "FamilyQuant.DeNovo.Ms1EnvelopeDetector::public const string SinglyChargedCaveat",
-          "sha256": "4869CFA848996AF803B9DFC7C10A621C1E08514F88D1EAF09F31E3DD13FB9903"
+          "sha256": "C98DD10DCD1D8A2BD943AD937CA7CD0324E526E04326A679FB9738E3AD252181"
         }
       ],
       "proofs": [],
@@ -12422,7 +12738,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
           "symbol": "FamilyQuant.DeNovo.SpectrumComparisonTable::private static string SourceObservationKey ( PeaksDeNovoRow row )",
-          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
+          "sha256": "543977625B258DA255997F76B721ECD25BB6B5852F783679C469D1B9F7068ABE"
         }
       ],
       "proofs": [],
@@ -12464,7 +12780,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
           "symbol": "FamilyQuant.DeNovo.SpectrumComparisonTable::private static SpectrumComparisonRow ToRow ( Cluster cluster , int hypothesisIndex , int hypothesesInScan , ReferenceEnvelopeDiagnostics reference , IReadOnlyDictionary \u003C int , string \u003E ? familyLabels , FamilyQuant . PeptideFamilyAttribution ? familyAttribution , RawScanPrecursorMetadata ? raw , IReadOnlyDictionary \u003C string , List \u003C NativePeptideQuant \u003E\u003E creditedByIdentity , double ? runTic , double ? pooledTic )",
-          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
+          "sha256": "543977625B258DA255997F76B721ECD25BB6B5852F783679C469D1B9F7068ABE"
         }
       ],
       "proofs": [],
@@ -12505,14 +12821,88 @@
       "implementation": [
         {
           "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
-          "symbol": "FamilyQuant.DeNovo.SpectrumComparisonTable::public static List \u003C SpectrumComparisonRow \u003E Build ( IEnumerable \u003C PeaksDeNovoRow \u003E peaksDeNovoRows , IEnumerable \u003C PeaksDeNovoRow \u003E deepNovoRows , IEnumerable \u003C PatternLabPsm \u003E patternLabPsms , IEnumerable \u003C QuantRow \u003E quantRows , IReadOnlyDictionary \u003C int , string \u003E ? familyLabels = null , FamilyQuant . PeptideFamilyAttribution ? familyAttribution = null , IEnumerable \u003C RawScanPrecursorMetadata \u003E ? rawPrecursors = null , IReadOnlyDictionary \u003C string , double \u003E ? perRunTic = null , IEnumerable \u003C PeaksDeNovoRow \u003E ? acceptedDeNovoRows = null )",
-          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
+          "symbol": "SpectrumComparisonTable.Build; executed embedded PatternLab claims",
+          "sha256": "543977625B258DA255997F76B721ECD25BB6B5852F783679C469D1B9F7068ABE"
+        },
+        {
+          "path": "FamilyQuant.Core/Storage/QuantRow.cs",
+          "symbol": "Scoped native spectrum proof dependency",
+          "sha256": "7C8F6076F895F8935C09E72A8B12C79AB42886CA35F9132E026F77CE3DF307F1"
+        },
+        {
+          "path": "FamilyQuant.Core/DeNovo/DeNovoReconciler.cs",
+          "symbol": "Scoped native spectrum proof dependency",
+          "sha256": "E773452CA224E76B70017F184E502BD1ED9B6D1E9E40CE28DE31FF512226E105"
+        },
+        {
+          "path": "FamilyQuant.Core/DeNovo/NativeQuantFractions.cs",
+          "symbol": "Scoped native spectrum proof dependency",
+          "sha256": "1B584F17E5D5796993F127A35D75354F178185E9C84536C96198D50908FCCB4E"
+        },
+        {
+          "path": "FamilyQuant.Core/DeNovo/PeptidoformIdentity.cs",
+          "symbol": "Scoped native spectrum proof dependency",
+          "sha256": "1AE27580D2FD1A5325D0FD126414E855EFF0A14E3EC4CB8FBA875840EB48D9B9"
+        },
+        {
+          "path": "FamilyQuant.Core/DeNovo/DeNovoSource.cs",
+          "symbol": "Scoped native spectrum proof dependency",
+          "sha256": "F5D28EB3D7DC60C34D4288ED4C55EBB7C8878D8ECC015842B907469BC4267D3C"
+        },
+        {
+          "path": "FamilyQuant.Core/DeNovo/SeproPsmAdapter.cs",
+          "symbol": "Scoped native spectrum proof dependency",
+          "sha256": "00B9CFF5C8A4A5CFD7714F3CC076FF44DB00BAAB13EB02153A11B890F9696C40"
+        },
+        {
+          "path": "FamilyQuant.Core/DeNovo/Readers/DeNovoSourceRows.cs",
+          "symbol": "Scoped native spectrum proof dependency",
+          "sha256": "14F011D7B49E7F486F87D6FECB385DF819EE8CF8D929E3C22F577DE884AE49B2"
+        },
+        {
+          "path": "FamilyQuant.Core/Operations/CoreOperation.cs",
+          "symbol": "Scoped native spectrum proof dependency",
+          "sha256": "FBE4D0DE84DA1C37A62AA6BD314ADE9E76EBAB801B101733565ADB3C51757BB4"
+        },
+        {
+          "path": "FamilyQuant.Tests/Program.LedgerAssayComparison.cs",
+          "symbol": "Scoped native spectrum proof dependency",
+          "sha256": "02F38BB3F048A73C1B1C373E814A31B4428CC9DF2E38318370E070B8B9F279E9"
+        },
+        {
+          "path": "FamilyQuant.Tests/Program.LedgerAssaySpectrumProof.cs",
+          "symbol": "Scoped native spectrum proof dependency",
+          "sha256": "02E5523530C4E88911AFDE3D5C1A946ADFB1051CD57FFC6B7E433E5D95BB8E18"
+        },
+        {
+          "path": "FamilyQuant.Tests/Program.SecondaryInjectedMethod.cs",
+          "symbol": "Scoped native spectrum proof dependency",
+          "sha256": "23A7781DDBD6E2B6299FB12C9F31A083CC4FF42C290513848F61EA4CEF31E2D1"
+        },
+        {
+          "path": "FamilyQuant.Tests/Program.DeNovoLedgerWorkflow.cs",
+          "symbol": "Scoped native spectrum proof dependency",
+          "sha256": "10CE2ADF8BCDDA54E5E42D43D9E0F29623CFE6583229B8E6EE2585F3D966D6E5"
+        },
+        {
+          "path": "FamilyQuant.Tests/LedgerMemberFactComparison.cs",
+          "symbol": "Scoped native spectrum proof dependency",
+          "sha256": "1F3254D635B40D22576E9F40347DBEB503A5FF661EFC18E743EAC35B097FC14C"
         }
       ],
-      "proofs": [],
-      "note": "Exact literal syntax, multiplicity and complete member tokens agree. Declaration only; no runtime or behavior claim.",
-      "kindReceiptId": "member-export-storage-fact",
-      "compared": "\u0022PatternLab\u0022 -\u003E FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs: FamilyQuant.DeNovo.SpectrumComparisonTable::public static List \u003C SpectrumComparisonRow \u003E Build ( IEnumerable \u003C PeaksDeNovoRow \u003E peaksDeNovoRows , IEnumerable \u003C PeaksDeNovoRow \u003E deepNovoRows , IEnumerable \u003C PatternLabPsm \u003E patternLabPsms , IEnumerable \u003C QuantRow \u003E quantRows , IReadOnlyDictionary \u003C int , string \u003E ? familyLabels = null , FamilyQuant . PeptideFamilyAttribution ? familyAttribution = null , IEnumerable \u003C RawScanPrecursorMetadata \u003E ? rawPrecursors = null , IReadOnlyDictionary \u003C string , double \u003E ? perRunTic = null , IEnumerable \u003C PeaksDeNovoRow \u003E ? acceptedDeNovoRows = null ) = \u0022PatternLab\u0022"
+      "proofs": [
+        {
+          "runId": "AS-member-comparison",
+          "kind": "test",
+          "target": "ProveAssaySpectrumFacts",
+          "assertion": "K9b native fallback fact FQ15-CE9FF8A983EE: exact frozen/current claim field observed and full CSV bytes equal in both cultures with progress absent/present",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\assay-retained\\comparisons.log",
+          "inspectedBy": ""
+        }
+      ],
+      "note": "Executed pinned frozen/current Build, observed real embedded claim fields at the unchanged clustering boundary, and equal full CSV bytes with and without progress in two cultures. Declaration equality is not claimed.",
+      "kindReceiptId": null,
+      "compared": "FamilyQuant.DeNovo.SpectrumComparisonTable::public static List \u003C SpectrumComparisonRow \u003E Build ( IEnumerable \u003C PeaksDeNovoRow \u003E peaksDeNovoRows , IEnumerable \u003C PeaksDeNovoRow \u003E deepNovoRows , IEnumerable \u003C PatternLabPsm \u003E patternLabPsms , IEnumerable \u003C QuantRow \u003E quantRows , IReadOnlyDictionary \u003C int , string \u003E ? familyLabels = null , FamilyQuant . PeptideFamilyAttribution ? familyAttribution = null , IEnumerable \u003C RawScanPrecursorMetadata \u003E ? rawPrecursors = null , IReadOnlyDictionary \u003C string , double \u003E ? perRunTic = null , IEnumerable \u003C PeaksDeNovoRow \u003E ? acceptedDeNovoRows = null ): \u0022PatternLab\u0022; scoped native field/output proof"
     },
     {
       "observationId": "FQ15-CEC069A8C2F9",
@@ -12520,7 +12910,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
           "symbol": "FamilyQuant.DeNovo.SpectrumComparisonTable::private static ( string ids , string assignments , double ? identity , string status ) DescribeFamilies ( IReadOnlyList \u003C int \u003E familyIds , IReadOnlyDictionary \u003C int , string \u003E ? labels , FamilyQuant . PeptideFamilyAttribution ? attribution )",
-          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
+          "sha256": "543977625B258DA255997F76B721ECD25BB6B5852F783679C469D1B9F7068ABE"
         }
       ],
       "proofs": [],
@@ -12598,7 +12988,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
           "symbol": "FamilyQuant.DeNovo.SpectrumComparisonTable::public const string Grain",
-          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
+          "sha256": "543977625B258DA255997F76B721ECD25BB6B5852F783679C469D1B9F7068ABE"
         }
       ],
       "proofs": [],
@@ -12640,7 +13030,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
           "symbol": "FamilyQuant.DeNovo.SpectrumComparisonTable::private static string SourceObservationKey ( PeaksDeNovoRow row )",
-          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
+          "sha256": "543977625B258DA255997F76B721ECD25BB6B5852F783679C469D1B9F7068ABE"
         }
       ],
       "proofs": [],
@@ -12654,7 +13044,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
           "symbol": "FamilyQuant.DeNovo.SpectrumComparisonTable::private static SpectrumComparisonRow ToRow ( Cluster cluster , int hypothesisIndex , int hypothesesInScan , ReferenceEnvelopeDiagnostics reference , IReadOnlyDictionary \u003C int , string \u003E ? familyLabels , FamilyQuant . PeptideFamilyAttribution ? familyAttribution , RawScanPrecursorMetadata ? raw , IReadOnlyDictionary \u003C string , List \u003C NativePeptideQuant \u003E\u003E creditedByIdentity , double ? runTic , double ? pooledTic )",
-          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
+          "sha256": "543977625B258DA255997F76B721ECD25BB6B5852F783679C469D1B9F7068ABE"
         }
       ],
       "proofs": [],
@@ -12682,7 +13072,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
           "symbol": "FamilyQuant.DeNovo.SpectrumComparisonTable::private static string Alternates ( IReadOnlyList \u003C Claim \u003E ranked )",
-          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
+          "sha256": "543977625B258DA255997F76B721ECD25BB6B5852F783679C469D1B9F7068ABE"
         }
       ],
       "proofs": [],
@@ -12712,7 +13102,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/ReferenceEnvelopeEstimator.cs",
           "symbol": "FamilyQuant.DeNovo.ReferenceEnvelopeEstimator::private static void Metric ( StringBuilder b , string name , double value , string definition )",
-          "sha256": "FDC3528CF45CE9023D8576FD87680DFED3F20E2F530DCEC11EA8C78D38458080"
+          "sha256": "D7ED2E083865F99EDD033DD04C57ED0890BAA11347DF579EEBAFC68BA5A6BA52"
         }
       ],
       "proofs": [],
@@ -13036,7 +13426,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
           "symbol": "FamilyQuant.DeNovo.SpectrumComparisonTable::private static string Alternates ( IReadOnlyList \u003C Claim \u003E ranked )",
-          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
+          "sha256": "543977625B258DA255997F76B721ECD25BB6B5852F783679C469D1B9F7068ABE"
         }
       ],
       "proofs": [],
@@ -13134,7 +13524,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/ReferenceEnvelopeEstimator.cs",
           "symbol": "FamilyQuant.DeNovo.ReferenceEnvelopeEstimator::public static string ToCsv ( ReferenceEnvelopeDiagnostics diagnostics )",
-          "sha256": "FDC3528CF45CE9023D8576FD87680DFED3F20E2F530DCEC11EA8C78D38458080"
+          "sha256": "D7ED2E083865F99EDD033DD04C57ED0890BAA11347DF579EEBAFC68BA5A6BA52"
         }
       ],
       "proofs": [],
@@ -13162,7 +13552,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
           "symbol": "FamilyQuant.DeNovo.SpectrumComparisonTable::private static SpectrumComparisonRow ToRow ( Cluster cluster , int hypothesisIndex , int hypothesesInScan , ReferenceEnvelopeDiagnostics reference , IReadOnlyDictionary \u003C int , string \u003E ? familyLabels , FamilyQuant . PeptideFamilyAttribution ? familyAttribution , RawScanPrecursorMetadata ? raw , IReadOnlyDictionary \u003C string , List \u003C NativePeptideQuant \u003E\u003E creditedByIdentity , double ? runTic , double ? pooledTic )",
-          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
+          "sha256": "543977625B258DA255997F76B721ECD25BB6B5852F783679C469D1B9F7068ABE"
         }
       ],
       "proofs": [],
@@ -13282,7 +13672,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
           "symbol": "FamilyQuant.DeNovo.SpectrumComparisonTable::private static ( string ids , string assignments , double ? identity , string status ) DescribeFamilies ( IReadOnlyList \u003C int \u003E familyIds , IReadOnlyDictionary \u003C int , string \u003E ? labels , FamilyQuant . PeptideFamilyAttribution ? attribution )",
-          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
+          "sha256": "543977625B258DA255997F76B721ECD25BB6B5852F783679C469D1B9F7068ABE"
         }
       ],
       "proofs": [],
@@ -13664,7 +14054,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/ReferenceEnvelopeEstimator.cs",
           "symbol": "FamilyQuant.DeNovo.ReferenceEnvelopeEstimator::public static string ToCsv ( ReferenceEnvelopeDiagnostics diagnostics )",
-          "sha256": "FDC3528CF45CE9023D8576FD87680DFED3F20E2F530DCEC11EA8C78D38458080"
+          "sha256": "D7ED2E083865F99EDD033DD04C57ED0890BAA11347DF579EEBAFC68BA5A6BA52"
         }
       ],
       "proofs": [],
@@ -13854,7 +14244,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
           "symbol": "FamilyQuant.DeNovo.SpectrumComparisonTable::private static SpectrumComparisonRow ToRow ( Cluster cluster , int hypothesisIndex , int hypothesesInScan , ReferenceEnvelopeDiagnostics reference , IReadOnlyDictionary \u003C int , string \u003E ? familyLabels , FamilyQuant . PeptideFamilyAttribution ? familyAttribution , RawScanPrecursorMetadata ? raw , IReadOnlyDictionary \u003C string , List \u003C NativePeptideQuant \u003E\u003E creditedByIdentity , double ? runTic , double ? pooledTic )",
-          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
+          "sha256": "543977625B258DA255997F76B721ECD25BB6B5852F783679C469D1B9F7068ABE"
         }
       ],
       "proofs": [],
@@ -13938,7 +14328,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/Ms1EnvelopeDetector.cs",
           "symbol": "FamilyQuant.DeNovo.Ms1EnvelopeDetector::public const string MethodSentence",
-          "sha256": "4869CFA848996AF803B9DFC7C10A621C1E08514F88D1EAF09F31E3DD13FB9903"
+          "sha256": "C98DD10DCD1D8A2BD943AD937CA7CD0324E526E04326A679FB9738E3AD252181"
         }
       ],
       "proofs": [],
@@ -13994,7 +14384,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
           "symbol": "FamilyQuant.DeNovo.SpectrumComparisonTable::private static string CreditedKey ( NativePeptideQuant quant )",
-          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
+          "sha256": "543977625B258DA255997F76B721ECD25BB6B5852F783679C469D1B9F7068ABE"
         }
       ],
       "proofs": [],
@@ -14176,7 +14566,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
           "symbol": "FamilyQuant.DeNovo.SpectrumComparisonTable::private static string SourceObservationKey ( PeaksDeNovoRow row )",
-          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
+          "sha256": "543977625B258DA255997F76B721ECD25BB6B5852F783679C469D1B9F7068ABE"
         }
       ],
       "proofs": [],
@@ -14204,7 +14594,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
           "symbol": "FamilyQuant.DeNovo.SpectrumComparisonTable::public static void MarkFamilyAssignmentsKept ( IEnumerable \u003C SpectrumComparisonRow \u003E rows , string reason )",
-          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
+          "sha256": "543977625B258DA255997F76B721ECD25BB6B5852F783679C469D1B9F7068ABE"
         }
       ],
       "proofs": [],
@@ -14260,7 +14650,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
           "symbol": "FamilyQuant.DeNovo.SpectrumComparisonTable::private static string Alternates ( IReadOnlyList \u003C Claim \u003E ranked )",
-          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
+          "sha256": "543977625B258DA255997F76B721ECD25BB6B5852F783679C469D1B9F7068ABE"
         }
       ],
       "proofs": [],
@@ -14296,7 +14686,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
           "symbol": "FamilyQuant.DeNovo.SpectrumComparisonTable::public static List \u003C SpectrumComparisonRow \u003E BuildFromInputs ( string rawDirectory , string sepr2Path , string deNovoDirectory , IEnumerable \u003C QuantRow \u003E quantRows , IReadOnlyList \u003C DeNovoSourceSelection \u003E selections , DeNovoFilterCriteria criteria , Action \u003C string \u003E ? progress = null )",
-          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
+          "sha256": "543977625B258DA255997F76B721ECD25BB6B5852F783679C469D1B9F7068ABE"
         }
       ],
       "proofs": [],
@@ -14480,7 +14870,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
           "symbol": "FamilyQuant.DeNovo.SpectrumComparisonTable::private static string EquivalentClaimKey ( Claim claim )",
-          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
+          "sha256": "543977625B258DA255997F76B721ECD25BB6B5852F783679C469D1B9F7068ABE"
         }
       ],
       "proofs": [],
@@ -14994,7 +15384,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/SpectrumComparisonTable.cs",
           "symbol": "FamilyQuant.DeNovo.SpectrumComparisonTable::private static string SourceObservationKey ( PeaksDeNovoRow row )",
-          "sha256": "2D1AE129CFA6E6C0D1A84E9BE84C52DD82CACF7687A0373E8AF4A52722007444"
+          "sha256": "543977625B258DA255997F76B721ECD25BB6B5852F783679C469D1B9F7068ABE"
         }
       ],
       "proofs": [],
@@ -15022,7 +15412,7 @@
         {
           "path": "FamilyQuant.Core/DeNovo/ReferenceEnvelopeEstimator.cs",
           "symbol": "FamilyQuant.DeNovo.ReferenceEnvelopeEstimator::public static string ToCsv ( ReferenceEnvelopeDiagnostics diagnostics )",
-          "sha256": "FDC3528CF45CE9023D8576FD87680DFED3F20E2F530DCEC11EA8C78D38458080"
+          "sha256": "D7ED2E083865F99EDD033DD04C57ED0890BAA11347DF579EEBAFC68BA5A6BA52"
         }
       ],
       "proofs": [],
@@ -15373,7 +15763,7 @@
           "kind": "test",
           "target": "LedgerAssayCompareCommand",
           "assertion": "AS member kind code fact: every listed frozen/current member declaration agrees",
-          "artifact": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\assay-retained\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\assay-retained\\comparisons.log",
           "inspectedBy": ""
         }
       ]
@@ -15387,7 +15777,7 @@
           "kind": "test",
           "target": "LedgerAssayCompareCommand",
           "assertion": "AS member kind export/storage fact: every listed frozen/current member declaration agrees",
-          "artifact": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\assay-retained\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\assay-retained\\comparisons.log",
           "inspectedBy": ""
         }
       ]
@@ -15401,7 +15791,7 @@
           "kind": "test",
           "target": "LedgerAssayCompareCommand",
           "assertion": "AS member kind format/export: every listed frozen/current member declaration agrees",
-          "artifact": "D:\\FamilyQuant-data\\out-shell\\J15-fresh-native-20261103-1\\assay-retained\\comparisons.log",
+          "artifact": "D:\\FamilyQuant-data\\out-refresh\\20261103-140604-FamilyQuant-gate\\assay-retained\\comparisons.log",
           "inspectedBy": ""
         }
       ]
