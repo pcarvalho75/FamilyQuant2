@@ -223,7 +223,7 @@ internal static class SuiteCommandInventory
         SuiteCommandRule.Covered("--test-assay-row-isolation", "FamilyQuant.Tests.Program.AssaySpectrumRowIsolationTests(System.String[],System.String)"),
         SuiteCommandRule.Covered("--test-assay-spectrum-properties", "FamilyQuant.Tests.Program.AssayBuildPropertyTests()", "FamilyQuant.Tests.Program.AssaySpectrumActionTests()", "FamilyQuant.Tests.Program.AssaySpectrumExportGuardTests()", "FamilyQuant.Tests.Program.AssaySpectrumPropertyTests()"),
         SuiteCommandRule.Covered("--test-busy", "FamilyQuant.Tests.Program.BusyOperationTests(System.String)"),
-        SuiteCommandRule.Covered("--test-busy-logo", "FamilyQuant.Tests.Program.BusyLogoProof(System.String)"),
+        SuiteCommandRule.Covered("--test-busy-logo", "FamilyQuant.Tests.Program.BusyLogoFixtureTests(System.String)"),
         SuiteCommandRule.Covered("--test-caption-surfaces", "FamilyQuant.Tests.Program.CaptionSurfaceTests(System.String)"),
         SuiteCommandRule.Covered("--test-chart-themes", "FamilyQuant.Tests.Program.ChartThemeTests(System.String)", "FamilyQuant.Tests.Program.UiChartPaletteTests(System.String)"),
         SuiteCommandRule.Covered("--test-clustering-diagnostic-shell", "FamilyQuant.Tests.Program.RunClusteringDiagnosticShellChecks(System.String[],System.String)"),

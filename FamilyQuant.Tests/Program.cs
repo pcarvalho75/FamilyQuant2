@@ -423,7 +423,8 @@ namespace FamilyQuant.Tests
             suite.AddWithApplication(() => J34dTests());
             suite.AddWithApplication(() => K16LayoutTests());
             suite.Section("Native fixture processes and UI lifetime");
-            suite.AddWithApplication(() => BusyLogoProof(Path.Combine(workDir, "busy-logo-" + Guid.NewGuid().ToString("N"))));
+            suite.Add(() => Check("native busy-logo fixture propagates its worker exit status",
+                BusyLogoFixtureTests(Path.Combine(workDir, "busy-logo-" + Guid.NewGuid().ToString("N"))) == 0));
             suite.AddWithApplication(() => RunClusteringDiagnosticShellChecks(new[] { "--test-clustering-diagnostic-shell",
                 Path.Combine(workDir, "dc-" + Path.GetRandomFileName()) }, workDir));
             suite.Add(() => Check("native feedback fixture propagates its worker exit status",

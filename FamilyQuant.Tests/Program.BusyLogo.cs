@@ -15,6 +15,10 @@ namespace FamilyQuant.Tests;
 internal static partial class Program
 {
     private const int BusyLogoFrameCount = 48;
+    private static int BusyLogoFixtureTests(string output) => NativeProofDesktop.IsPrivate
+        ? BusyLogoProof(output)
+        : NativeProofDesktop.Run(new[] { "--test-busy-logo", output }, output + ".native.log", 60_000);
+
     private static int BusyLogoProof(string output)
     {
         EnsureApplication();
