@@ -62,7 +62,15 @@ public partial class AnalyticsControl : UserControl
             .Concat(ViewModel.BuildCompositionFigures()))
         {
             if (figure.Chart is IPalettedChart chart) chart.Palette = ChartPalette.UiPalette;
-            PanelCharts.Children.Add(new Border { Height = figure.ScreenHeight, Margin = new Thickness(0, 0, 0, 12), Child = figure.Chart });
+            string text = CompositionChartCaptions.Build(figure, Data);
+            var caption = new TextBlock { Text = text, ToolTip = text, Tag = "figure-caption:" + figure.FileName,
+                TextWrapping = TextWrapping.NoWrap, TextTrimming = TextTrimming.CharacterEllipsis,
+                FontSize = 12, Margin = new Thickness(0, 6, 0, 0) };
+            caption.SetResourceReference(TextBlock.ForegroundProperty, "MutedBrush");
+            var group = new StackPanel { Margin = new Thickness(0, 0, 0, 16) };
+            group.Children.Add(new Border { Height = figure.ScreenHeight, Child = figure.Chart });
+            group.Children.Add(caption);
+            PanelCharts.Children.Add(group);
         }
     }
     private void ExportChoiceChanged(object sender, SelectionChangedEventArgs e)
