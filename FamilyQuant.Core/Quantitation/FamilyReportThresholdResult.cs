@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 
 namespace FamilyQuant
@@ -16,6 +16,8 @@ namespace FamilyQuant
     {
         public FamilyRunShareSummary Family { get; set; } = new();
         public List<string> PanelFamilyKeys { get; set; } = new();
+        public bool HasOutsideMembers { get; set; }
+        public string Reason { get; set; } = string.Empty;
     }
 
     /// <summary>Statistics over available per-run shares. SD is sample SD; CV is SD divided by mean.</summary>

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json.Serialization;
 using FamilyQuant.Panels;
+using FamilyQuant.Evidence;
 
 namespace FamilyQuant
 {
@@ -20,44 +21,50 @@ namespace FamilyQuant
         public const double DefaultThreshold = 0.001;
 
         public static FamilyReportThresholdResult Build(FamilyRunSharesResult source, double threshold) =>
-            BuildCore(source, threshold, null, new Dictionary<int, IReadOnlyList<string>>());
+            BuildCore(source, threshold, null, new Dictionary<int, IReadOnlyList<string>>(), new Dictionary<int, bool>());
 
         public static FamilyReportThresholdResult Build(FamilyRunSharesResult source, FamilyClusterFile project)
         {
             ArgumentNullException.ThrowIfNull(project);
-            var mapping = new Dictionary<int, IReadOnlyList<string>>();
-            if (project.PanelProteinAssignments != null)
+            if (project.FamilyPanel == null)
             {
-                if (project.FamilyPanel == null)
+                if (project.PanelProteinAssignments != null)
                     throw new InvalidOperationException("The panel for stored family assignments is missing. Rebuild them before reporting.");
-                if (PanelDerivedDataCurrentness.Check(project).FamilyAssignments == PanelDerivedDataStatus.OutOfDate)
-                    throw new InvalidOperationException("Panel family assignments are out of date. Rebuild them before reporting.");
-                foreach (var item in project.PanelProteinAssignments.Where(x => x.IsApplied && x.FamilyUserId.HasValue && x.PanelFamilyKey != null))
-                {
-                    if (item.ProteinIndex < 0 || item.ProteinIndex >= project.MyExtendedFastaItems.Count
-                        || project.MyExtendedFastaItems[item.ProteinIndex].SequenceIdentifier != item.Identifier
-                        || project.MyExtendedFastaItems[item.ProteinIndex].UserID != item.FamilyUserId)
-                        throw new InvalidOperationException("Panel family assignments do not match the current proteins. Rebuild them before reporting.");
-                }
-                mapping = project.PanelProteinAssignments.Where(x => x.IsApplied && x.FamilyUserId.HasValue && x.PanelFamilyKey != null)
-                    .GroupBy(x => x.FamilyUserId!.Value).ToDictionary(g => g.Key,
-                        g => (IReadOnlyList<string>)g.Select(x => x.PanelFamilyKey!).Distinct(StringComparer.Ordinal).ToArray());
+                return Build(source, project.ReportThreshold ?? DefaultThreshold);
             }
-            return BuildCore(source, project.ReportThreshold ?? DefaultThreshold, project.FamilyPanel, mapping);
+            return Build(source, project, PanelAssignmentEvidenceStore.GetCurrentFamilyMap(project));
         }
 
-        /// <summary>For an authoritative mapping supplied by the assignment producer. Multiple distinct
-        /// keys for one quant family are surfaced as a conflict, never guessed or grouped.</summary>
+        /// <summary>For the verified map supplied by the assignment producer. Currentness and
+        /// conflicting family membership are distinct; every conflict remains its own report row.</summary>
+        public static FamilyReportThresholdResult Build(FamilyRunSharesResult source, FamilyClusterFile project,
+            PanelFamilyMap familyMap)
+        {
+            ArgumentNullException.ThrowIfNull(project);
+            ArgumentNullException.ThrowIfNull(familyMap);
+            if (!familyMap.IsCurrent)
+                throw new InvalidOperationException(string.IsNullOrWhiteSpace(familyMap.Message)
+                    ? "Panel family assignments are missing or out of date. Rebuild them before reporting." : familyMap.Message);
+            var keys = familyMap.UserFamilies.ToDictionary(pair => pair.Key, pair =>
+                (IReadOnlyList<string>)(pair.Value.PanelKeys.Count > 0 ? pair.Value.PanelKeys.ToArray()
+                    : pair.Value.PanelFamilyKey == null ? Array.Empty<string>() : new[] { pair.Value.PanelFamilyKey }));
+            var conflicts = familyMap.UserFamilies.Where(pair => pair.Value.HasConflict
+                    || (pair.Value.HasOutsideMembers && keys[pair.Key].Count > 0))
+                .ToDictionary(pair => pair.Key, pair => pair.Value.HasOutsideMembers);
+            return BuildCore(source, project.ReportThreshold ?? DefaultThreshold, project.FamilyPanel, keys, conflicts);
+        }
+
+        /// <summary>For an authoritative key mapping supplied by the assignment producer. Multiple
+        /// distinct keys for one quant family are surfaced as a conflict, never guessed or grouped.</summary>
         public static FamilyReportThresholdResult Build(FamilyRunSharesResult source, FamilyClusterFile project,
             IReadOnlyDictionary<int, IReadOnlyList<string>> familyPanelKeys)
         {
             ArgumentNullException.ThrowIfNull(project);
             ArgumentNullException.ThrowIfNull(familyPanelKeys);
-            return BuildCore(source, project.ReportThreshold ?? DefaultThreshold, project.FamilyPanel, familyPanelKeys);
+            return BuildCore(source, project.ReportThreshold ?? DefaultThreshold, project.FamilyPanel, familyPanelKeys, new Dictionary<int, bool>());
         }
-
         private static FamilyReportThresholdResult BuildCore(FamilyRunSharesResult source, double threshold, FamilyPanel? panel,
-            IReadOnlyDictionary<int, IReadOnlyList<string>> familyPanelKeys)
+            IReadOnlyDictionary<int, IReadOnlyList<string>> familyPanelKeys, IReadOnlyDictionary<int, bool> mappingConflicts)
         {
             ArgumentNullException.ThrowIfNull(source);
             if (!double.IsFinite(threshold) || threshold < 0 || threshold > 1)
@@ -73,9 +80,11 @@ namespace FamilyQuant
                 if (keys.Length > 0 && panel == null) throw new ArgumentException("Panel keys require a panel.", nameof(familyPanelKeys));
                 foreach (string key in keys)
                     if (panel!.Families.All(x => x.Key != key)) throw new ArgumentException("A family mapping refers to a missing panel key.", nameof(familyPanelKeys));
-                if (keys.Length > 1)
+                bool mappedConflict = mappingConflicts.TryGetValue(family.FamilyUserId, out bool outside);
+                if (mappedConflict || keys.Length > 1)
                 {
-                    result.ConflictFamilies.Add(new FamilyReportMappingConflict { Family = family, PanelFamilyKeys = keys.ToList() });
+                    result.ConflictFamilies.Add(new FamilyReportMappingConflict { Family = family, PanelFamilyKeys = keys.ToList(),
+                        HasOutsideMembers = outside, Reason = outside ? "Mapped to panel and outside members." : "Mapped to more than one panel family." });
                     continue;
                 }
                 FamilyPanelFamily? definition = keys.Length == 0 ? null : panel!.Families.Single(x => x.Key == keys[0]);

@@ -80,10 +80,32 @@ internal static partial class Program
             new PanelProteinAssignment { ProteinIndex = 3, Identifier = "p4b", FamilyUserId = 4, PanelFamilyKey = "two", IsApplied = true },
         };
         project.PanelProteinAssignmentsPanelFingerprint = PanelDerivedDataCurrentness.Fingerprint(project.FamilyPanel!);
-        var fromProject = FamilyReportThreshold.Build(source, project);
-        Check("J5c project accessor uses current applied assignments and flags conflicts",
-            fromProject.OtherFamilies.Select(x => x.FamilyUserId).SequenceEqual(new[] { 1, 2, 3 })
-            && fromProject.ConflictFamilies.Single().Family.FamilyUserId == 4);
+        bool incompleteProofRefused = false;
+        try { FamilyReportThreshold.Build(source, project); } catch (InvalidOperationException) { incompleteProofRefused = true; }
+        Check("J5c refuses assignment rows without complete current evidence and recipe", incompleteProofRefused);
+        var mapMethod = typeof(FamilyReportThreshold).GetMethod("Build", new[] { typeof(FamilyRunSharesResult), typeof(FamilyClusterFile), typeof(PanelFamilyMap) });
+        Check("J5c accepts the authoritative panel family map", mapMethod != null);
+        if (mapMethod != null)
+        {
+            source.Families.Add(Row(6, .2, .2, .2, .1, .1));
+            var familyMap = new PanelFamilyMap { IsCurrent = true, UserFamilies = new Dictionary<int, PanelFamilyUserMap>
+            {
+                [1] = new() { FamilyUserId = 1, PanelFamilyKey = "under", PanelKeys = new[] { "under" }, Decision = FamilyPanelDecision.Quantify },
+                [2] = new() { FamilyUserId = 2, PanelFamilyKey = "forced", PanelKeys = new[] { "forced" }, Decision = FamilyPanelDecision.ReportUnderOthers },
+                [4] = new() { FamilyUserId = 4, PanelKeys = new[] { "one", "two" }, HasConflict = true },
+                [6] = new() { FamilyUserId = 6, PanelKeys = new[] { "forced" }, HasOutsideMembers = true, HasConflict = true },
+            } };
+            dynamic mapped = mapMethod.Invoke(null, new object[] { source, project, familyMap })!;
+            var conflicts = ((System.Collections.IEnumerable)mapped.ConflictFamilies).Cast<dynamic>().ToDictionary(x => (int)x.Family.FamilyUserId);
+            Check("J5c retains current multiple-key and panel-outside conflicts as separate rows",
+                conflicts.Count == 2 && conflicts.ContainsKey(4) && conflicts.ContainsKey(6) && (bool)conflicts[6].HasOutsideMembers
+                && ((IEnumerable<FamilyRunShareSummary>)mapped.OtherFamilies).Select(x => x.FamilyUserId).SequenceEqual(new[] { 1, 2, 3 }));
+            var staleMap = new PanelFamilyMap { IsCurrent = false, Message = "Stale fixture", UserFamilies = familyMap.UserFamilies };
+            bool staleMapRefused = false;
+            try { mapMethod.Invoke(null, new object[] { source, project, staleMap }); }
+            catch (System.Reflection.TargetInvocationException ex) when (ex.InnerException is InvalidOperationException) { staleMapRefused = true; }
+            Check("J5c refuses a non-current authoritative map even when it contains rows", staleMapRefused);
+        }
         project.PanelProteinAssignmentsPanelFingerprint = "stale";
         bool staleRefused = false;
         try { FamilyReportThreshold.Build(source, project); } catch (InvalidOperationException) { staleRefused = true; }
