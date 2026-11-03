@@ -14,7 +14,7 @@ Version 4 closed with FamilyQuant 2.0.0 published (49 of 49 steps, in `docs/ROAD
 - "things need to look slick and clean", "the colors look terrible, we have white with yellow in some parts"
 - "the file menu usually comes first"
 - "i want something revolutionary to come out of this, where this family idea realy shines and somethign very witty and automatic is done"
-- Mission J, 11-02: "the ultimate test for this progrm ... make a very cool and complete analysis ... generate a complet word document. if you need a feature that this program does not do you implement it in the program", "she wants a qauntitative description of the families", "and do some nice plots and these plots should be able to be done by the software", "maybe the program could make this very complete as a docx exit and generate this so many plots with explanations automaticlay ... maybe with checkboxes for sections of the report so one may check or uncheck the parts to be generated"
+- Mission J, 11-02: "the ultimate test for this progrm ... make a very cool and complete analysis ... generate a complet word document. if you need a feature that this program does not do you implement it in the program", "she wants a qauntitative description of the families", "and do some nice plots and these plots should be able to be done by the software", "and if you want to test the program, make tests in parallel", "maybe the program could make this very complete as a docx exit and generate this so many plots with explanations automaticlay ... maybe with checkboxes for sections of the report so one may check or uncheck the parts to be generated"
 
 ## Rules every worker follows
 
@@ -155,6 +155,7 @@ SVMP P-I, P-II, P-III and "class not resolved"; PLA2 D49 and K49; the parts of a
 | J7b | Interpretation, written into the project notes, quoting only the report's numbers, read against Ana's panel | M | 1.5 | J7a, J6d | J7c | A second reader checks every number against the report | OP | | 0 | 0 | |
 | J7c | Final export and delivery: every number in the document traced to a program export, then the document and project copied to `AnaG/Bjararaca/Relatorio` | M | 1 | J6e, J7b | J7d | Reviewer's trace table with 0 mismatches | OP | | 0 | 0 | |
 | J7d | Release 2.1.0, so Ana can make the same report, on Paulo's word | L | 0.5 | J7c | | The release names the version the report prints | EV | | 0 | 0 | |
+| J8 | Parallel suite: the console suite split into independent shards run as separate processes at once, each with its own temp folder, with one summary that adds them up; gates and quick suites use it | M | 1.5 | 🟢 | J7a | The sharded run reports exactly the serial run's passed, failed and skipped counts on the same commit, in a fraction of the time | OP | | 0 | 0 | |
 
 ## Critical path
 
