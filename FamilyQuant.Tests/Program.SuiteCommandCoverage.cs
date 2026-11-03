@@ -43,6 +43,9 @@ internal static partial class Program
             string path = Path.GetFullPath(output); Directory.CreateDirectory(Path.GetDirectoryName(path)!);
             File.WriteAllText(path, listing, new UTF8Encoding(false));
             File.WriteAllLines(path + ".suite-fixtures.txt", fixtures.OrderBy(value => value, StringComparer.Ordinal), new UTF8Encoding(false));
+            File.WriteAllLines(path + ".suite-entries.tsv", new[] { "index\tsection\tfixtures" }.Concat(suite.Entries.Select((entry, index) =>
+                index.ToString(CultureInfo.InvariantCulture) + "\t" + entry.Section.Replace('\t', ' ') + "\t"
+                + string.Join(";", checker.SuiteFixtures(new[] { (Delegate)entry.Body }).OrderBy(value => value, StringComparer.Ordinal)))), new UTF8Encoding(false));
         }
         var problems = rows.Where(row => row.Problem.Length != 0).ToArray();
         Check("K8b every registered command is covered or explicitly excluded with a reason", problems.Length == 0,
@@ -66,6 +69,15 @@ internal static partial class Program
         var helper = planted with { Run = (_, _) => { Check("Never executed", true); return 0; } };
         Check("K8b the common assertion helper cannot prove fixture coverage", checker.Audit(new[] { helper },
             new[] { SuiteCommandRule.Covered(planted.Flag, Fixture(nameof(Check))) }, fixtures).Single().Problem.Length > 0);
+        Action aggregate = K8cAggregateFixtureTests;
+        var nestedFixtures = checker.SuiteFixtures(new[] { aggregate });
+        string nestedKey = Fixture(nameof(K8cNestedFixtureTests));
+        var nestedCommand = planted with { Run = (_, _) => { K8cNestedFixtureTests(); return 0; } };
+        Check("K8c an actually called nested fixture is already gated through its aggregate", checker.Audit(new[] { nestedCommand },
+            new[] { SuiteCommandRule.Covered(planted.Flag, nestedKey) }, nestedFixtures).Single().Problem.Length == 0);
+        Action unusedReference = K8cUnusedReferenceFixtureTests;
+        Check("K8c an unused delegate reference does not enroll a fixture", !checker.SuiteFixtures(new[] { unusedReference }).Contains(nestedKey));
+        Check("K8c metadata-only planted fixtures do not contaminate the real suite", !fixtures.Contains(nestedKey));
         Check("K8b auditing never invokes a registered command", !invoked);
         var previous = CultureInfo.CurrentCulture;
         try
@@ -80,5 +92,19 @@ internal static partial class Program
     {
         Check("Never executed missing fixture", false);
         throw new InvalidOperationException("The metadata-only negative control must never execute.");
+    }
+
+    private static void K8cAggregateFixtureTests() => K8cNestedFixtureTests();
+
+    private static void K8cUnusedReferenceFixtureTests()
+    {
+        Action unused = K8cNestedFixtureTests;
+        GC.KeepAlive(unused);
+    }
+
+    private static void K8cNestedFixtureTests()
+    {
+        Check("Never executed nested fixture", false);
+        throw new InvalidOperationException("The metadata-only nested control must never execute.");
     }
 }

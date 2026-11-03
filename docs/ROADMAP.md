@@ -85,7 +85,6 @@ Ana installs it from the public releases page (D31); the desk publishes on Paulo
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| K8c | The cheap ungated tests come into the gates (2.1.1): from K8b's exclusion list, every fixture that needs no RAW and runs in under a minute moves into DefaultSuite, one commit per group; any that fails gets its own fix or an owner | M | 1 | 🟢 | | Exclusion list shorter by every cheap fixture; quick suite still under its time budget; each moved fixture green | FL | | 0 | 0 | |
 
 ### W5 Ana's report delivered
 
@@ -98,8 +97,8 @@ Compute took 37 to 54 minutes on Ana's project with the RAW cache warm, silent f
 
 | ID | Step | Diff | Hrs | Blocked by | Opens | Done-check | Worker | Status | Prog | Cred | ETA |
 |---|---|---:|---:|---|---|---|---|---|---:|---:|---:|
-| J47a | Fable's science options in HomologySearch, each off by default: a decoy-calibrated identity gate per tag length; isobaric-swap folding for de novo tags (N/GG, Q/AG, equal-mass pair order, K/Q) weighted by PEAKS per-residue confidence; crediting families by score tier with the multiplicity reported | M | 1.5 | 🟢 | J47b | Options off: byte-identical; options on: their own tests | AS | | 0 | 0 | |
-| J47b | Validation of each science option on the full-run project: target-decoy rates at the gate, the Database gap error rates, the leave-one-out family check (J42: 966 right, 12 wrong, 95 abstained), and what changes in the headline; Paulo decides which become default (Paulo, 11-03 13:15: no recomputing everything: validate by replaying FQAssay's captured five search inputs and the cached attribution, one full Compute only for the options chosen as defaults) | M | 1 | J47a | | A before/after table per option; science review | AS | | 0 | 0 | |
+| J47b | Validation of each science option on the full-run project: target-decoy rates at the gate, the Database gap error rates, the leave-one-out family check (J42: 966 right, 12 wrong, 95 abstained), and what changes in the headline; Paulo decides which become default (Paulo, 11-03 13:15: no recomputing everything: validate by replaying FQAssay's captured five search inputs and the cached attribution, one full Compute only for the options chosen as defaults) | M | 1 | 🟢 | | A before/after table per option; science review | AS | | 0 | 0 | |
+| J47c | The tag-gate option made fast enough to validate: a conservative weighted seed prefilter (the replay of one search ran over 30 minutes because weighted profiles fell back to full window scans), proven equal to the brute path, then its J47b row (known answers, decoy rates, headline); it stays OFF until Paulo chooses | M | 1 | J47a | | Prefilter equals brute on fixtures; OFF replay still equal; the tag row added to the J47b table | AS | | 0 | 0 | |
 
 ### W7 Clear reasons and totals
 

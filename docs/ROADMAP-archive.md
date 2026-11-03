@@ -483,6 +483,7 @@ Paulo agreed these at the restart, 2026-11-01.
 | K9 | Full gate on the release candidate re-cut after J41 (and J32, J34 if merged): every ledger receipt current (quick gates defer them) | M | 0.5 | K8, K9b | K10 | Full gate green, ledger 5,460 of 5,460 | Orchestrator | | 0 | 0 | |
 | K11 | Published: v2.1.0 on pcarvalho75/FamilyQuant2-releases with the zip, its .sha256 and user release notes | L | 0.1 | 🟢 | K13, K17 | The release page is live | Orchestrator | | 0 | 0 | |
 | K13 | Install check on 2.1.0 from GitHub; 2.0.0's Check for updates finds 2.1.0 | L | 0.2 | 🟢 | | Both pass | EV | | 0 | 0 | |
+| K8c | The cheap ungated tests come into the gates (2.1.1): from K8b's exclusion list, every fixture that needs no RAW and runs in under a minute moves into DefaultSuite, one commit per group; any that fails gets its own fix or an owner | M | 1 | 🟢 | | Exclusion list shorter by every cheap fixture; quick suite still under its time budget; each moved fixture green | FL | | 0 | 0 | |
 
 ### W6 Compute fast and visible
 
@@ -499,6 +500,7 @@ Paulo agreed these at the restart, 2026-11-01.
 | J38d | New HomologySearch method (Paulo, 11-03 09:20) from Fable's plan (docs/ideas/HOMOLOGY-PERFORMANCE.md): the mismatch-budget early exit, the exact-containment shortcut for best-score identified queries with the matrix guard, and the diagonal q-gram prefilter; every caller switches to it; the old HomologyMapper stays unchanged, marked [Obsolete] ("use HomologySearch"), as the reference the equivalence tests compare against | M | 1 | 🟢 | J38e | Every stored result byte-identical to the old method on fixtures and on the full-run copy; old and new compared hit for hit on every search call | AS | | 0 | 0 | |
 | J38e | Compute before and after on the full-run copy | L | 0.3 | J38d | J38f | Both times; stored results byte-identical | AS | | 0 | 0 | |
 | J38f | J38 reviewed and merged | L | 0.2 | J38e | | Approved; gate green | AS | | 0 | 0 | |
+| J47a | Fable's science options in HomologySearch, each off by default: a decoy-calibrated identity gate per tag length; isobaric-swap folding for de novo tags (N/GG, Q/AG, equal-mass pair order, K/Q) weighted by PEAKS per-residue confidence; crediting families by score tier with the multiplicity reported | M | 1.5 | 🟢 | J47b | Options off: byte-identical; options on: their own tests | AS | | 0 | 0 | |
 
 ### W2 The interpretation
 

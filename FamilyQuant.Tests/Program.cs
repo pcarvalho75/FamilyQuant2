@@ -239,7 +239,7 @@ namespace FamilyQuant.Tests
             suite.Add(() => FamilySensitivityTests(Path.Combine(workDir, "family-sensitivity")));
             suite.Section("Panel, threshold, template and report Help");
             suite.Add(() => PanelAuditTests());
-            suite.Add(() => PanelAuditCurrentTests());
+            suite.Add(() => PanelAuditCurrentTests(Path.Combine(workDir, "panel-current-audit-" + Guid.NewGuid().ToString("N"))));
             suite.Add(() => ReportThresholdTests());
             suite.Add(() => ReportThresholdPolicyTests());
             suite.Add(() => PanelTemplateTests());
@@ -398,6 +398,53 @@ namespace FamilyQuant.Tests
             suite.Add(() => BuildFamiliesScreenTests(workDir));
             suite.Add(() => QuantifyShellTests(workDir));
             suite.Add(() => SecondaryWindowTests(workDir));
+            suite.Section("Additional core and preservation fixture guards");
+            suite.Add(() => AssayBuildWorkflowGuardTests());
+            suite.Add(() => AssayFigureGapGuardTests());
+            suite.Add(() => AssaySpectrumPropertyTests());
+            suite.Add(() => AssaySpectrumActionTests());
+            suite.Add(() => AssayBuildPropertyTests());
+            suite.Add(() => AssaySpectrumExportGuardTests());
+            suite.AddWithApplication(() => AssaySpectrumRowIsolationTests(Array.Empty<string>(), workDir));
+            suite.Add(() => LedgerDeclarationComparisonTests());
+            suite.Add(() => LedgerMemberFactComparisonTests());
+            suite.Add(() => ShellLedgerComparisonTests());
+            suite.Add(() => LookRefreshCohortTests());
+            suite.Add(() => WordingTsvRoundTripCommand(new[] { "--test-wording-tsv",
+                Path.Combine(workDir, "wording-roundtrip-" + Guid.NewGuid().ToString("N")) }));
+            suite.Add(() => ShellSeproFixtureCheck(new[] { "--test-shell-sepro-fixture",
+                Path.Combine(workDir, "shell-sepro-" + Guid.NewGuid().ToString("N"), "fixture.sepr2") }, workDir));
+            suite.Section("Panel contracts and native panel review fixtures");
+            suite.AddWithApplication(() => FamilyPanelReportTests());
+            suite.AddWithApplication(() => PanelEvidenceUiTests());
+            suite.Add(() => PanelEvidenceValidationTests());
+            suite.Add(() => PanelFamilyMapContractTests());
+            suite.Add(() => PanelFamilyDependencyContractTests());
+            suite.Section("Complete report command and document fixture packs");
+            suite.AddWithApplication(() => RunReportDetailsTests());
+            suite.AddWithApplication(() => RunReportInputTests());
+            suite.Add(() => ReportPublicationTests());
+            suite.AddWithApplication(() => ReportReaderTests(Path.Combine(workDir, "report-reader-" + Guid.NewGuid().ToString("N"))));
+            suite.AddWithApplication(() => RunReportSelectionTests());
+            suite.Add(() => ReportSupplementTests(new[] { "--test-report-supplement",
+                Path.Combine(workDir, "report-workbook-" + Guid.NewGuid().ToString("N")) }));
+            suite.AddWithApplication(() => J34dTests());
+            suite.AddWithApplication(() => K16LayoutTests());
+            suite.Section("Native fixture processes and UI lifetime");
+            suite.Add(() => Check("native busy-logo fixture propagates its worker exit status",
+                BusyLogoFixtureTests(Path.Combine(workDir, "busy-logo-" + Guid.NewGuid().ToString("N"))) == 0));
+            suite.AddWithApplication(() => RunClusteringDiagnosticShellChecks(new[] { "--test-clustering-diagnostic-shell",
+                Path.Combine(workDir, "dc-" + Path.GetRandomFileName()) }, workDir));
+            suite.Add(() => Check("native feedback fixture propagates its worker exit status",
+                FeedbackFactTests(new[] { "--test-feedback-facts",
+                    Path.Combine(workDir, "feedback-facts-" + Guid.NewGuid().ToString("N")) }) == 0));
+            suite.AddWithApplication(() => ShellEvidenceFetchCancellationTests());
+            suite.AddWithApplication(() => ShellProofWindowChecks(Array.Empty<string>(), workDir));
+            suite.AddWithApplication(() => TaskOrderRegression(new[] { "--test-task-order",
+                Path.Combine(workDir, "task-order-" + Guid.NewGuid().ToString("N")) }));
+            suite.Add(() => Check("native update fixture propagates its worker exit status",
+                UpdateCheckCommand(new[] { "--test-update-check",
+                    Path.Combine(workDir, "update-check-" + Guid.NewGuid().ToString("N")) }, workDir) == 0));
             return suite;
         }
 

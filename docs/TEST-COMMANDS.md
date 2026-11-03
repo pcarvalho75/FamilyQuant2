@@ -88,7 +88,8 @@ The fixture now compares every completed native sheet/cell and pins those two sh
 `DefaultSuite` without executing command handlers or suite bodies. It also runs once in `DefaultSuite`.
 Its deterministic listing includes every registered flag, its declared fixture methods or individual
 exclusion reason, compiled fixture entry-point references and any routing problem. With an output path,
-the exact suite-method inventory is also written to `<output.tsv>.suite-fixtures.txt`.
+the exact suite-method inventory is also written to `<output.tsv>.suite-fixtures.txt`; the indexed entry
+inventory in `<output.tsv>.suite-entries.tsv` supports focused execution through the ordinary shard path.
 
 Every flag requires a literal entry in `SuiteCommandInventory.cs`; there is no flag-prefix or wildcard
 exemption. A covered entry names exact method signatures present in the compiled suite and reached from
@@ -96,11 +97,18 @@ the command handler. Missing/changed fixture routes, new undeclared flags, dupli
 reasons and stale exclusions fail. Shared assertion/bootstrap helpers cannot prove coverage, and a
 covered subfixture cannot conceal another missing assertion fixture. This checks static enrollment,
 not whether every assertion or data-dependent branch ran with a particular invocation.
+K8c follows actual compiled calls below aggregate fixtures as well as direct suite entries, so nested
+checks already executed by the suite do not need duplicate enrollment. Unused delegate references do
+not count as calls; metadata-only planted controls must not contaminate the suite inventory.
 
-Exclusions distinguish selected-data/live checks, artifact/proof producers, and existing focused-only
-enrollment gaps. Each gap is named explicitly; it is not reported as gated coverage. K8b does not silently
-add those unrelated packs to this release's execution set. To enroll one, add its fixture to `DefaultSuite`
-and replace its exclusion with the exact fixture signatures from the audit. For a new no-RAW test, add
+Exclusions identify selected-data/live checks, artifact/proof producers and any remaining prerequisites.
+K8c promotes the measured self-contained fixtures: existing aggregate calls are reused, missing fixture
+entries are added, inline contracts get named methods, and native workers receive fresh owned output
+paths. The parent suite explicitly checks private-desktop worker exit codes; a nonzero child result must
+fail its parent entry. The matched quick budget is 150 seconds wall time with six shards and two processors
+per shard. Project-wide figure checks remain selected-data operations without a data-independent time bound.
+To enroll a fixture, add its call to `DefaultSuite` and replace its exclusion with the exact fixture
+signatures from the audit. For a new no-RAW test, add
 the suite call and covered declaration, or supply an explicit per-command reason for keeping it opt-in.
 The negative-control switch adds one registered synthetic test without a suite call or declaration and
 must exit nonzero; its handler is never invoked. Ordinary checks also plant missing/partial routes and
